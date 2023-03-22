@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand
 from subscription.models import UserSubscription, Subscription
 
 from astrobin.models import UserProfile
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class Command(BaseCommand):
@@ -13,7 +14,7 @@ class Command(BaseCommand):
 
     def upgrade(self, user):
         # type: (User) -> None
-        premium = Subscription.objects.get(name="AstroBin Premium")
+        premium = Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC)
         user_subscription, created = UserSubscription.objects.get_or_create(
             user=user,
             subscription=premium)

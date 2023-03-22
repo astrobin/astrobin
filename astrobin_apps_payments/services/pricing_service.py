@@ -1,5 +1,6 @@
 import logging
 from math import ceil
+from typing import List
 
 import stripe
 from django.conf import settings
@@ -8,28 +9,77 @@ from stripe.error import StripeError
 from subscription.models import Subscription
 
 from astrobin_apps_payments.models import ExchangeRate
+from astrobin_apps_payments.types import StripeSubscription
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 logger = logging.getLogger("apps")
 
 
 class PricingService:
-    @staticmethod
-    def get_price(product, currency, user=None):
-        # type: (unicode, unicode) -> float
+    lite_2020: StripeSubscription = StripeSubscription(
+        SubscriptionName.LITE_2020,
+        settings.STRIPE['products']['non-recurring']['lite'],
+        settings.STRIPE['prices']['non-recurring']['lite']['yearly'],
+        None,
+    )
 
+    premium_2020: StripeSubscription = StripeSubscription(
+        SubscriptionName.PREMIUM_2020,
+        settings.STRIPE['products']['non-recurring']['premium'],
+        settings.STRIPE['prices']['non-recurring']['premium']['yearly'],
+        None,
+    )
+
+    ultimate_2020: StripeSubscription = StripeSubscription(
+        SubscriptionName.ULTIMATE_2020,
+        settings.STRIPE['products']['non-recurring']['ultimate'],
+        settings.STRIPE['prices']['non-recurring']['ultimate']['yearly'],
+        None,
+    )
+
+    lite_2020_recurring: StripeSubscription = StripeSubscription(
+        SubscriptionName.LITE_2020,
+        settings.STRIPE['products']['recurring']['lite'],
+        settings.STRIPE['prices']['recurring']['lite']['yearly'],
+        settings.STRIPE['prices']['recurring']['lite']['monthly'],
+    )
+
+    premium_2020_recurring: StripeSubscription = StripeSubscription(
+        SubscriptionName.PREMIUM_2020,
+        settings.STRIPE['products']['recurring']['premium'],
+        settings.STRIPE['prices']['recurring']['premium']['yearly'],
+        settings.STRIPE['prices']['recurring']['premium']['monthly'],
+    )
+
+    ultimate_2020_recurring: StripeSubscription = StripeSubscription(
+        SubscriptionName.ULTIMATE_2020,
+        settings.STRIPE['products']['recurring']['ultimate'],
+        settings.STRIPE['prices']['recurring']['ultimate']['yearly'],
+        settings.STRIPE['prices']['recurring']['ultimate']['monthly'],
+    )
+
+    @staticmethod
+    def get_available_subscriptions(user: User) -> List[StripeSubscription]:
+        if user is None or not user.is_authenticated:
+            return [
+                PricingService.lite_2020_recurring,
+                PricingService.premium_2020_recurring,
+                PricingService.ultimate_2020_recurring
+            ]
+
+    @staticmethod
+    def get_price(product: str, currency: str, user: User = None) -> float:
         price = PricingService.get_full_price(product, currency)
         discount_amount = PricingService.get_discount_amount(product, currency, user)
 
         return price - discount_amount
 
     @staticmethod
-    def get_full_price(product, currency):
-        # type: (unicode, unicode) -> float
-
+    def get_full_price(product: str, currency: str) -> float:
         subscriptions = {
-            'lite': Subscription.objects.get(name='AstroBin Lite 2020+'),
-            'premium': Subscription.objects.get(name='AstroBin Premium 2020+'),
-            'ultimate': Subscription.objects.get(name='AstroBin Ultimate 2020+'),
+            'lite': Subscription.objects.get(name=SubscriptionName.LITE_2020),
+            'premium': Subscription.objects.get(name=SubscriptionName.PREMIUM_2020),
+            'ultimate': Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020),
         }
 
         base_price = subscriptions[product].price
@@ -41,9 +91,7 @@ class PricingService:
         return rounded_price
 
     @staticmethod
-    def get_discount_amount(product, currency, user=None):
-        # type: (unicode, unicode, User) -> float
-
+    def get_discount_amount(product: str, currency: str, user: User = None) -> float:
         price = PricingService.get_full_price(product, currency)
 
         if user and user.is_authenticated:
@@ -64,9 +112,7 @@ class PricingService:
         return 0
 
     @staticmethod
-    def get_stripe_discounts(user):
-        # type: (User) -> object
-
+    def get_stripe_discounts(user: User):
         coupon = PricingService.get_stripe_coupon(user)
         customer = PricingService.get_stripe_customer(user)
 
@@ -79,10 +125,8 @@ class PricingService:
         return [{"coupon": coupon['id']}]
 
     @staticmethod
-    def get_stripe_customer(user):
-        # type: (User) -> object
-
-        stripe.api_key = settings.STRIPE_SECRET_KEY
+    def get_stripe_customer(user: User):
+        stripe.api_key = settings.STRIPE['keys']['secret']
         customer = stripe.Customer.list(email=user.email, limit=1)
         if len(customer['data']) == 1:
             return customer['data'][0]
@@ -90,10 +134,8 @@ class PricingService:
         return None
 
     @staticmethod
-    def is_new_customer(customer_id):
-        # type: (unicode) -> bool
-
-        stripe.api_key = settings.STRIPE_SECRET_KEY
+    def is_new_customer(customer_id: str) -> bool:
+        stripe.api_key = settings.STRIPE['keys']['secret']
         charges = stripe.Charge.list(customer=customer_id, limit=1)
 
         if len(charges['data']) > 0:
@@ -102,16 +144,14 @@ class PricingService:
         return True
 
     @staticmethod
-    def get_stripe_coupon(user):
-        # type: (User) -> object
-
+    def get_stripe_coupon(user: User):
         referral_code = user.userprofile.referral_code
 
         if referral_code is None:
             return None
 
         try:
-            stripe.api_key = settings.STRIPE_SECRET_KEY
+            stripe.api_key = settings.STRIPE['keys']['secret']
             coupon = stripe.Coupon.retrieve(referral_code)
             return coupon
         except StripeError as e:

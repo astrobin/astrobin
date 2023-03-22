@@ -15,6 +15,7 @@ from astrobin.models import (
     Accessory, Camera, Collection, Filter, FocalReducer, GearMigrationStrategy, Image, ImageRevision, Mount, Software,
     Telescope,
 )
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 from toggleproperties.models import ToggleProperty
 
 
@@ -150,20 +151,20 @@ class Generators:
         )
 
     @staticmethod
-    def premium_subscription(user, name):
-        if name == "AstroBin Lite" or name == "AstroBin Lite (autorenew)":
+    def premium_subscription(user: User, name: SubscriptionName):
+        if name == SubscriptionName.LITE_CLASSIC or name == SubscriptionName.LITE_CLASSIC_AUTORENEW:
             group_name = "astrobin_lite"
 
-        elif name == "AstroBin Premium" or name == "AstroBin Premium (autorenew)":
+        elif name == SubscriptionName.PREMIUM_CLASSIC or name == SubscriptionName.PREMIUM_CLASSIC_AUTORENEW:
             group_name = "astrobin_premium"
 
-        elif name == "AstroBin Lite 2020+":
+        elif name == SubscriptionName.LITE_2020:
             group_name = "astrobin_lite_2020"
 
-        elif name == "AstroBin Premium 2020+":
+        elif name == SubscriptionName.PREMIUM_2020:
             group_name = "astrobin_premium_2020"
 
-        elif name == "AstroBin Ultimate 2020+":
+        elif name == SubscriptionName.ULTIMATE_2020:
             group_name = "astrobin_ultimate_2020"
 
         g, created = Group.objects.get_or_create(name=group_name)
@@ -175,7 +176,7 @@ class Generators:
                 name=name,
                 price=1,
                 group=g,
-                category="premium_autorenew" if "autorenew" in name else "premium")
+                category="premium_autorenew" if "autorenew" in str(name) else "premium")
 
         us, created = UserSubscription.objects.get_or_create(
             user=user,

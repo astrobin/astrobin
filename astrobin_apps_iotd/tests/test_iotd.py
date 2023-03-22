@@ -11,6 +11,7 @@ from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_iotd.models import *
 from astrobin_apps_iotd.services import IotdService
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 @override_settings(
@@ -57,7 +58,7 @@ class IotdTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_submission_model(self):
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         submission = IotdSubmission.objects.create(
             submitter=self.submitter_1,
             image=self.image)
@@ -116,14 +117,14 @@ class IotdTest(TestCase):
                     image=image2)
 
     def test_submission_model_user_must_be_submitter(self):
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         with self.assertRaisesRegex(ValidationError, "not a member"):
             IotdSubmission.objects.create(
                 submitter=self.user,
                 image=self.image)
 
     def test_submission_model_image_must_be_recent(self):
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         self.image.submitted_for_iotd_tp_consideration = \
             datetime.now() - \
             timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
@@ -134,7 +135,7 @@ class IotdTest(TestCase):
                 image=self.image)
 
     def test_submission_model_image_must_be_public(self):
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         self.image.submitted_for_iotd_tp_consideration = datetime.now()
         self.image.is_wip = True
         self.image.save(keep_deleted=True)
@@ -146,7 +147,7 @@ class IotdTest(TestCase):
         self.image.save(keep_deleted=True)
 
     def test_submission_model_image_owner_must_not_be_excluded_from_cometitions(self):
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         self.image.user.userprofile.exclude_from_competitions = True
         self.image.user.userprofile.save(keep_deleted=True)
         with self.assertRaisesRegex(ValidationError, "excluded from competitions"):
@@ -157,7 +158,7 @@ class IotdTest(TestCase):
         self.image.user.userprofile.save(keep_deleted=True)
 
     def test_submission_model_image_owner_must_not_be_banned_from_cometitions(self):
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         self.image.user.userprofile.banned_from_competitions = datetime.now()
         self.image.user.userprofile.save(keep_deleted=True)
         with self.assertRaisesRegex(ValidationError, "banned from competitions"):
@@ -168,7 +169,7 @@ class IotdTest(TestCase):
         self.image.user.userprofile.save(keep_deleted=True)
 
     def test_submission_model_cannot_submit_own_image(self):
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         self.image.user = self.submitter_1
         self.image.save(keep_deleted=True)
         with self.assertRaisesRegex(ValidationError, "your own image"):
@@ -180,7 +181,7 @@ class IotdTest(TestCase):
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_submission_model_image_cannot_be_past_iotd(self):
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
 
         submission = IotdSubmission.objects.create(
             submitter=self.submitter_1,
@@ -204,7 +205,7 @@ class IotdTest(TestCase):
         self.image.user = self.judge_1
         self.image.save(keep_deleted=True)
 
-        Generators.premium_subscription(self.judge_1, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.judge_1, SubscriptionName.ULTIMATE_2020)
 
         try:
             submission = IotdSubmission.objects.create(
@@ -217,14 +218,14 @@ class IotdTest(TestCase):
         self.assertEqual(submission.image, self.image)
 
     def test_submission_model_cannot_submit_image_that_was_dismissed(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
         IotdDismissedImage.objects.create(image=self.image, user=self.submitter_1)
         with self.assertRaisesRegex(ValidationError, "you already dismissed"):
             IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
 
     @override_settings(IOTD_MAX_DISMISSALS=3)
     def test_submission_model_cannot_submit_image_that_was_dismissed_3_times(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
         IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
         IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
         IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
@@ -232,14 +233,14 @@ class IotdTest(TestCase):
             IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
 
     def test_vote_model_user_must_be_reviewer(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
         with self.assertRaisesRegex(ValidationError, "not a member"):
             IotdVote.objects.create(
                 reviewer=self.user,
                 image=self.image)
 
     def test_vote_model_image_must_have_been_submitted(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
         with self.assertRaisesRegex(ValidationError, "not been submitted"):
             IotdVote.objects.create(
                 reviewer=self.reviewer_1,
@@ -247,7 +248,7 @@ class IotdTest(TestCase):
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     def test_vote_model_submission_must_be_within_window(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
         submission_1 = IotdSubmission.objects.create(
             submitter=self.submitter_1,
             image=self.image)
@@ -263,7 +264,7 @@ class IotdTest(TestCase):
                 image=submission_1.image)
 
     def test_vote_model_image_must_be_public(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
 
         submission_1 = IotdSubmission.objects.create(
             submitter=self.submitter_1,
@@ -299,7 +300,7 @@ class IotdTest(TestCase):
         self.image.user.userprofile.save(keep_deleted=True)
 
     def test_vote_model_cannot_vote_own_image(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
 
         submission_1 = IotdSubmission.objects.create(
             submitter=self.submitter_1,
@@ -316,7 +317,7 @@ class IotdTest(TestCase):
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     def test_vote_model_can_vote_image_by_judge(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
 
         IotdSubmission.objects.create(
             submitter=self.submitter_1,
@@ -324,7 +325,7 @@ class IotdTest(TestCase):
 
         self.image.user = self.judge_1
         self.image.save(keep_deleted=True)
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
 
         try:
             IotdVote.objects.create(
@@ -336,7 +337,7 @@ class IotdTest(TestCase):
         self.image.save(keep_deleted=True)
 
     def test_vote_model_cannot_vote_image_that_was_dismissed(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
         IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
         IotdDismissedImage.objects.create(image=self.image, user=self.reviewer_1)
         with self.assertRaisesRegex(ValidationError, "you already dismissed"):
@@ -344,7 +345,7 @@ class IotdTest(TestCase):
 
     @override_settings(IOTD_MAX_DISMISSALS=3)
     def test_vote_model_cannot_vote_image_that_was_dismissed_3_times(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
         IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
         IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
         IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
@@ -353,7 +354,7 @@ class IotdTest(TestCase):
             IotdVote.objects.create(reviewer=self.reviewer_1, image=self.image)
 
     def test_vote_model_cannot_vote_own_submission(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
 
         submission_1 = IotdSubmission.objects.create(
             submitter=self.submitter_1,
@@ -376,7 +377,7 @@ class IotdTest(TestCase):
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(365),
     )
     def test_vote_model(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
 
         submission_1 = IotdSubmission.objects.create(
             submitter=self.submitter_1,
@@ -513,7 +514,7 @@ class IotdTest(TestCase):
                 image=self.image,
                 date=datetime.now().date())
 
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
 
         # Image must have been voted
         with self.assertRaisesRegex(ValidationError, "has not been voted"):
@@ -583,7 +584,7 @@ class IotdTest(TestCase):
         # Can elect an image authored by a judge
         self.image.user = self.judge_2
         self.image.save(keep_deleted=True)
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
         try:
             iotd = Iotd.objects.create(
                 judge=self.judge_1,

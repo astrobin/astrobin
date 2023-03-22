@@ -25,13 +25,13 @@ log = logging.getLogger("apps")
 
 @require_GET
 def stripe_config(request):
-    return JsonResponse({'publicKey': settings.STRIPE_PUBLISHABLE_KEY}, safe=False)
+    return JsonResponse({'publicKey': settings.STRIPE['keys']['publishable']}, safe=False)
 
 
 @csrf_exempt
 @require_POST
 def create_checkout_session(request, user_pk, product, currency):
-    stripe.api_key = settings.STRIPE_SECRET_KEY
+    stripe.api_key = settings.STRIPE['keys']['secret']
 
     try:
         user = User.objects.get(pk=user_pk)
@@ -61,12 +61,12 @@ def create_checkout_session(request, user_pk, product, currency):
         )
 
     stripe_products = {
-        'lite': settings.STRIPE_PRODUCT_LITE,
-        'lite-recurring': settings.STRIPE_PRODUCT_LITE_RECURRING,
-        'premium': settings.STRIPE_PRODUCT_PREMIUM,
-        'premium-recurring': settings.STRIPE_PRODUCT_PREMIUM_RECURRING,
-        'ultimate': settings.STRIPE_PRODUCT_ULTIMATE,
-        'ultimate-recurring': settings.STRIPE_PRODUCT_ULTIMATE_RECURRING
+        'lite': settings.STRIPE['keys']['products']['non-recurring']['lite'],
+        'lite-recurring': settings.STRIPE['keys']['products']['recurring']['lite'],
+        'premium': settings.STRIPE['keys']['products']['non-recurring']['premium'],
+        'premium-recurring': settings.STRIPE['keys']['products']['recurring']['premium'],
+        'ultimate': settings.STRIPE['keys']['products']['non-recurring']['ultimate'],
+        'ultimate-recurring': settings.STRIPE['keys']['products']['recurring']['ultimate'],
     }
 
     price = PricingService.get_full_price(product, currency.upper())
@@ -128,8 +128,8 @@ def create_checkout_session(request, user_pk, product, currency):
 
 @csrf_exempt
 def stripe_webhook(request):
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+    stripe.api_key = settings.STRIPE['keys']['secret']
+    endpoint_secret = settings.STRIPE['keys']['endpoint-secret']
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
 
@@ -146,11 +146,11 @@ def stripe_webhook(request):
             return HttpResponseBadRequest()
 
         if product == 'lite':
-            subscription = Subscription.objects.get(name="AstroBin Lite 2020+")
+            subscription = Subscription.objects.get(name=SubscriptionName.LITE_2020)
         elif product == 'premium':
-            subscription = Subscription.objects.get(name="AstroBin Premium 2020+")
+            subscription = Subscription.objects.get(name=SubscriptionName.PREMIUM_2020)
         elif product == 'ultimate':
-            subscription = Subscription.objects.get(name="AstroBin Ultimate 2020+")
+            subscription = Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020)
         else:
             log.exception("stripe_webhook: user %d invalid product" % user_pk)
             return HttpResponseBadRequest()

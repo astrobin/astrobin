@@ -5,10 +5,12 @@ from datetime import date, timedelta
 from paypal.standard.ipn import models
 from subscription.models import Subscription, UserSubscription, Transaction
 
+from astrobin_apps_premium.services.premium_service import SubscriptionName
+
 
 class Command(BaseCommand):
     def __init__(self):
-        self.premium_subscription = Subscription.objects.get(name='AstroBin Premium')
+        self.premium_subscription = Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC)
 
     def process_user(self, user, amount, first_payment):
         price = 36.0

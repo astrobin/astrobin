@@ -8,7 +8,7 @@ from django.test import TestCase, override_settings
 from subscription.models import Subscription
 
 from astrobin.models import Image, UserProfile
-from astrobin_apps_premium.services.premium_service import PremiumService
+from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
 from common.services import DateTimeService
@@ -37,43 +37,43 @@ class PremiumTest(TestCase):
         self.ultimate_2020_group, created = Group.objects.get_or_create(name="astrobin_ultimate_2020")
 
         self.ultimate_2020_sub, created = Subscription.objects.get_or_create(
-            name="AstroBin Ultimate 2020+",
+            name=SubscriptionName.ULTIMATE_2020,
             price=1,
             group=self.ultimate_2020_group,
             category="premium")
 
         self.premium_2020_sub, created = Subscription.objects.get_or_create(
-            name="AstroBin Premium 2020+",
+            name=SubscriptionName.PREMIUM_2020,
             price=1,
             group=self.premium_2020_group,
             category="premium")
 
         self.lite_2020_sub, created = Subscription.objects.get_or_create(
-            name="AstroBin Lite 2020+",
+            name=SubscriptionName.LITE_2020,
             price=1,
             group=self.lite_2020_group,
             category="premium")
 
         self.premium_sub, created = Subscription.objects.get_or_create(
-            name="AstroBin Premium",
+            name=SubscriptionName.PREMIUM_CLASSIC,
             price=1,
             group=self.premium_group,
             category="premium")
 
         self.premium_autorenew_sub, created = Subscription.objects.get_or_create(
-            name="AstroBin Premium (autorenew)",
+            name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW,
             price=1,
             group=self.premium_group,
             category="premium_autorenew")
 
         self.lite_sub, created = Subscription.objects.get_or_create(
-            name="AstroBin Lite",
+            name=SubscriptionName.LITE_CLASSIC,
             price=1,
             group=self.lite_group,
             category="premium")
 
         self.lite_autorenew_sub, created = Subscription.objects.get_or_create(
-            name="AstroBin Lite (autorenew)",
+            name=SubscriptionName.LITE_CLASSIC_AUTORENEW,
             price=1,
             group=self.lite_group,
             category="premium_autorenew")

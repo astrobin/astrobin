@@ -13,7 +13,7 @@ from astrobin.templatetags.tags import (
     has_subscription_by_name,
     get_usersubscription_by_name)
 from astrobin.tests.generators import Generators
-from astrobin_apps_premium.services.premium_service import PremiumService
+from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 
 
 class SubscriptionsTest(TestCase):
@@ -23,7 +23,7 @@ class SubscriptionsTest(TestCase):
                 username='test', email='test@test.com', password='password')
             g, created = Group.objects.get_or_create(name="astrobin_premium")
             s, created = Subscription.objects.get_or_create(
-                name="AstroBin Premium",
+                name=SubscriptionName.PREMIUM_CLASSIC,
                 price=1,
                 group=g,
                 category="premium")
@@ -39,8 +39,8 @@ class SubscriptionsTest(TestCase):
             self.assertEqual(has_valid_subscription(u, s.pk), True)
             self.assertEqual(has_valid_subscription_in_category(u, "premium"), True)
             self.assertEqual(get_paid_subscription_expiration(valid_subscription), us.expires)
-            self.assertEqual(has_subscription_by_name(u, "AstroBin Premium"), True)
-            self.assertEqual(get_usersubscription_by_name(u, "AstroBin Premium"), us)
+            self.assertEqual(has_subscription_by_name(u, SubscriptionName.PREMIUM_CLASSIC), True)
+            self.assertEqual(get_usersubscription_by_name(u, SubscriptionName.PREMIUM_CLASSIC), us)
 
             us.delete()
             s.delete()
@@ -49,7 +49,7 @@ class SubscriptionsTest(TestCase):
 
     def test_usersubscription_api(self):
         user = Generators.user()
-        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         self.client.login(username=user.username, password=user.password)
         response = self.client.get('%s?user=%d' % (reverse('usersubscription-list'), user.pk))
         response_json = json.loads(response.content)
@@ -62,7 +62,7 @@ class SubscriptionsTest(TestCase):
                 username='test', email='test@test.com', password='password')
             g, created = Group.objects.get_or_create(name="astrobin_premium")
             s, created = Subscription.objects.get_or_create(
-                name="AstroBin Premium 20% discount",
+                name=SubscriptionName.PREMIUM_CLASSIC_20_PERCENT_DISCOUNT,
                 price=1,
                 group=g,
                 category="premium_offer_discount_20")
@@ -78,8 +78,8 @@ class SubscriptionsTest(TestCase):
             self.assertEqual(
                 get_paid_subscription_expiration(PremiumService(u).get_valid_usersubscription()), us.expires
             )
-            self.assertEqual(has_subscription_by_name(u, "AstroBin Premium 20% discount"), True)
-            self.assertEqual(get_usersubscription_by_name(u, "AstroBin Premium 20% discount"), us)
+            self.assertEqual(has_subscription_by_name(u, SubscriptionName.PREMIUM_CLASSIC_20_PERCENT_DISCOUNT), True)
+            self.assertEqual(get_usersubscription_by_name(u, SubscriptionName.PREMIUM_CLASSIC_20_PERCENT_DISCOUNT), us)
 
             us.delete()
             s.delete()

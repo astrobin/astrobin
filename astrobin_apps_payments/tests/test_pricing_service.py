@@ -6,24 +6,25 @@ from subscription.models import Subscription
 
 from astrobin_apps_payments.models import ExchangeRate
 from astrobin_apps_payments.services.pricing_service import PricingService
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class PricingServiceTest(TestCase):
     def setUp(self):
         Subscription.objects.create(
-            name="AstroBin Lite 2020+",
+            name=SubscriptionName.LITE_2020,
             price=20,
             group=Group.objects.create(name='astrobin_lite')
         )
 
         Subscription.objects.create(
-            name="AstroBin Premium 2020+",
+            name=SubscriptionName.PREMIUM_2020,
             price=40,
             group=Group.objects.create(name='astrobin_premium')
         )
 
         Subscription.objects.create(
-            name="AstroBin Ultimate 2020+",
+            name=SubscriptionName.ULTIMATE_2020,
             price=60,
             group=Group.objects.create(name='astrobin_ultimate')
         )

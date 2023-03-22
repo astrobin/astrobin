@@ -1,6 +1,7 @@
 import functools
 import sys
 from datetime import datetime, timedelta
+from enum import Enum
 from typing import Optional
 
 from django.conf import settings
@@ -13,22 +14,28 @@ from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitatio
 from astrobin.models import Image, UserProfile
 from common.services import DateTimeService
 
-SUBSCRIPTION_NAMES = (
-    'AstroBin Lite',
-    'AstroBin Premium',
 
-    'AstroBin Lite 2020+',
-    'AstroBin Premium 2020+',
-    'AstroBin Ultimate 2020+',
+class SubscriptionName(Enum):
+    LITE_CLASSIC = 'AstroBin Lite'
+    LITE_CLASSIC_AUTORENEW = 'AstroBin Lite (autorenew)'
+    PREMIUM_CLASSIC = 'AstroBin Premium'
+    PREMIUM_CLASSIC_AUTORENEW = 'AstroBin Premium (autorenew)'
 
-    'AstroBin Lite (autorenew)',
-    'AstroBin Premium (autorenew)',
+    LITE_2020 = 'AstroBin Lite 2020+'
+    LITE_2020_AUTORENEW_YEARLY = 'AstroBin Lite 2020+ (autorenew/yearly)'
+    LITE_2020_AUTORENEW_MONTHLY = 'AstroBin Lite 2020+ (autorenew/monthly)'
+    PREMIUM_2020 = 'AstroBin Premium 2020+'
+    PREMIUM_2020_AUTORENEW_YEARLY = 'AstroBin Premium 2020+ (autorenew/yearly)'
+    PREMIUM_2020_AUTORENEW_MONTHLY = 'AstroBin Premium 2020+ (autorenew/monthly)'
+    ULTIMATE_2020 = 'AstroBin Ultimate 2020+'
+    ULTIMATE_2020_AUTORENEW_YEARLY = 'AstroBin Ultimate 2020+ (autorenew/yearly)'
+    ULTIMATE_2020_AUTORENEW_MONTHLY = 'AstroBin Ultimate 2020+ (autorenew/monthly)'
 
-    'AstroBin Premium 20% discount',
-    'AstroBin Premium 30% discount',
-    'AstroBin Premium 40% discount',
-    'AstroBin Premium 50% discount',
-)
+    # Deprecated since discounts happen via Stripe coupons
+    PREMIUM_CLASSIC_20_PERCENT_DISCOUNT = 'AstroBin Premium 20% discount'
+    PREMIUM_CLASSIC_30_PERCENT_DISCOUNT = 'AstroBin Premium 30% discount'
+    PREMIUM_CLASSIC_40_PERCENT_DISCOUNT = 'AstroBin Premium 40% discount'
+    PREMIUM_CLASSIC_50_PERCENT_DISCOUNT = 'AstroBin Premium 50% discount'
 
 
 def _compareValidity(a, b):
@@ -44,17 +51,17 @@ def _compareNames(a, b):
     :return: a negative number if the left operand is heavier than thee left, 0 if equal, a positive number otherwise.
     """
     key = {
-        "AstroBin Lite (autorenew)": 0,
-        "AstroBin Lite": 1,
-        "AstroBin Lite 2020+": 2,
-        "AstroBin Premium (autorenew)": 3,
-        "AstroBin Premium": 4,
-        'AstroBin Premium 20% discount': 5,
-        'AstroBin Premium 30% discount': 6,
-        'AstroBin Premium 40% discount': 7,
-        'AstroBin Premium 50% discount': 8,
-        "AstroBin Premium 2020+": 9,
-        "AstroBin Ultimate 2020+": 10
+        SubscriptionName.LITE_CLASSIC_AUTORENEW: 0,
+        SubscriptionName.LITE_CLASSIC: 1,
+        SubscriptionName.LITE_2020: 2,
+        SubscriptionName.PREMIUM_CLASSIC_AUTORENEW: 3,
+        SubscriptionName.PREMIUM_CLASSIC: 4,
+        SubscriptionName.PREMIUM_CLASSIC_20_PERCENT_DISCOUNT: 5,
+        SubscriptionName.PREMIUM_CLASSIC_30_PERCENT_DISCOUNT: 6,
+        SubscriptionName.PREMIUM_CLASSIC_40_PERCENT_DISCOUNT: 7,
+        SubscriptionName.PREMIUM_CLASSIC_50_PERCENT_DISCOUNT: 8,
+        SubscriptionName.PREMIUM_2020: 9,
+        SubscriptionName.ULTIMATE_2020: 10
     }
 
     return key[b.subscription.name] - key[a.subscription.name]
@@ -89,7 +96,7 @@ class PremiumService:
 
         us = [obj for obj in UserSubscription.objects.filter(
             user__username=self.user.username,
-            subscription__name__in=SUBSCRIPTION_NAMES,
+            subscription__name__in=[x.value for x in SubscriptionName],
             expires__gte=datetime.today()
         )]
 

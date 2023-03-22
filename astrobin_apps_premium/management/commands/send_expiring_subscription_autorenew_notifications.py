@@ -11,6 +11,7 @@ from subscription.models import UserSubscription
 
 # AstroBin
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class Command(BaseCommand):
@@ -21,8 +22,11 @@ class Command(BaseCommand):
         user_subscriptions = UserSubscription.objects\
             .filter(
                 subscription__name__in = [
-                    "AstroBin Lite (autorenew)",
-                    "AstroBin Premium (autorenew)",
+                    SubscriptionName.LITE_CLASSIC_AUTORENEW,
+                    SubscriptionName.LITE_2020_AUTORENEW_MONTHLY,
+                    SubscriptionName.PREMIUM_CLASSIC_AUTORENEW,
+                    SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY,
+                    SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY,
                 ],
                 cancelled=False,
                 expires = datetime.now() + timedelta(days = 7))\
@@ -36,8 +40,11 @@ class Command(BaseCommand):
         user_subscriptions = UserSubscription.objects \
             .filter(
             subscription__name__in=[
-                "AstroBin Lite (autorenew)",
-                "AstroBin Premium (autorenew)",
+                SubscriptionName.LITE_CLASSIC_AUTORENEW,
+                SubscriptionName.LITE_2020_AUTORENEW_YEARLY,
+                SubscriptionName.PREMIUM_CLASSIC_AUTORENEW,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY,
             ],
             cancelled=False,
             expires=datetime.now() + timedelta(days=30)) \

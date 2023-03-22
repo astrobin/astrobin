@@ -22,7 +22,7 @@ class MigrateDonationsView(FormView):
 
     def get_premium_sub(self):
         try:
-            return Subscription.objects.get(name="AstroBin Premium")
+            return Subscription.objects.get(name=astrobin_apps_premium.SubscriptionName.PREMIUM_CLASSIC)
         except Subscription.DoesNotExist:
             return None
 
@@ -45,7 +45,9 @@ class MigrateDonationsView(FormView):
             try:
                 us = UserSubscription.objects.get(
                     user=self.request.user,
-                    subscription__name__in=astrobin_apps_premium.services.premium_service.SUBSCRIPTION_NAMES
+                    subscription__name__in=[
+                        x.value for x in astrobin_apps_premium.services.premium_service.SubscriptionName
+                    ]
                 )
             except UserSubscription.DoesNotExist:
                 us = None
