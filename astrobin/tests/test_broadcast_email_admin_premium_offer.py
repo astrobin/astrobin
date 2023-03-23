@@ -9,6 +9,7 @@ from subscription.models import Subscription, UserSubscription
 
 from astrobin.admin import BroadcastEmailAdmin
 from astrobin.models import BroadcastEmail
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class BroadcastEmailAdminPremiumOfferTest(TestCase):
