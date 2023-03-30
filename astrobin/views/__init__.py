@@ -615,10 +615,7 @@ def image_edit_acquisition(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    if (
-            image.user.groups.filter(name=GroupName.ACQUISITION_EDIT_TESTERS).exists() and
-            not image.acquisition_set.filter(deepsky_acquisition__filter__isnull=False).exists()
-    ):
+    if not image.acquisition_set.filter(deepsky_acquisition__filter__isnull=False).exists():
         return redirect(
             AppRedirectionService.redirect(
                 f'/i/{image.get_id()}/edit#'
