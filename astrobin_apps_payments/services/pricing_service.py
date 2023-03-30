@@ -1,12 +1,13 @@
+import datetime
 import logging
 from math import ceil
-from typing import List
+from typing import List, Optional
 
 import stripe
 from django.conf import settings
 from django.contrib.auth.models import User
 from stripe.error import StripeError
-from subscription.models import Subscription
+from subscription.models import Subscription, UserSubscription
 
 from astrobin_apps_payments.models import ExchangeRate
 from astrobin_apps_payments.types import StripeSubscription
@@ -59,13 +60,35 @@ class PricingService:
     )
 
     @staticmethod
-    def get_available_subscriptions(user: User) -> List[StripeSubscription]:
+    def are_non_autorenewing_subscriptions_supported(user: Optional[User]) -> bool:
         if user is None or not user.is_authenticated:
+            return False
+
+        # Users who have had a non-autorenewing subscription less than 2 years ago can still opt to choose
+        # non-autorenewal.
+        return UserSubscription.objects.filter(
+            user=user,
+            subscription__recurrence_unit__isnull=True,
+            expires__gt=datetime.date.today() - datetime.timedelta(days=365*2),
+        ).exists()
+
+    @staticmethod
+    def get_available_subscriptions(user: User) -> List[StripeSubscription]:
+        if PricingService.are_non_autorenewing_subscriptions_supported(user):
             return [
                 PricingService.lite_2020_recurring,
                 PricingService.premium_2020_recurring,
-                PricingService.ultimate_2020_recurring
+                PricingService.ultimate_2020_recurring,
+                PricingService.lite_2020,
+                PricingService.premium_2020,
+                PricingService.ultimate_2020
             ]
+
+        return [
+            PricingService.lite_2020_recurring,
+            PricingService.premium_2020_recurring,
+            PricingService.ultimate_2020_recurring
+        ]
 
     @staticmethod
     def get_price(product: str, currency: str, user: User = None) -> float:

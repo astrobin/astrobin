@@ -5,6 +5,7 @@ from django.conf import settings
 from django.http import HttpResponseBadRequest
 from django.views import View
 from rest_framework.authtoken.models import Token
+from rest_framework.decorators import action
 
 from astrobin_apps_payments.services.pricing_service import PricingService
 
@@ -35,3 +36,6 @@ class PricingView(JSONResponseMixin, View):
             'price': PricingService.get_price(product.lower(), currency.upper(), user=user)
         })
 
+    @action(detail=False, methods=['get'])
+    def are_non_autorenewing_subscriptions_supported(self):
+        return PricingService.are_non_autorenewing_subscriptions_supported(self.request.user)

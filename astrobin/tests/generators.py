@@ -173,10 +173,13 @@ class Generators:
             s = Subscription.objects.get(name=name)
         except Subscription.DoesNotExist:
             s, created = Subscription.objects.get_or_create(
-                name=name,
+                name=name.value,
                 price=1,
                 group=g,
-                category="premium_autorenew" if "autorenew" in str(name) else "premium")
+                category='premium_autorenew' if 'autorenew' in name.value else "premium",
+                recurrence_unit='Y' if 'autorenew' in name.value else None,
+                recurrence_period=1 if 'autorenew' in name.value else 0,
+            )
 
         us, created = UserSubscription.objects.get_or_create(
             user=user,

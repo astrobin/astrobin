@@ -208,8 +208,7 @@ class PremiumService:
     
         return 0
     
-    
-    def get_max_allowed_revisions(user_subscription: UserSubscription):
+    def get_max_allowed_revisions(user_subscription: UserSubscription) -> int:
         if user_subscription is None:
             return settings.PREMIUM_MAX_REVISIONS_FREE_2020
 
