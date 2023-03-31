@@ -1122,6 +1122,16 @@ def image_edit_save_license(request):
 @never_cache
 @login_required
 @require_GET
+def suspended_account(request):
+    if not request.user.userprofile.suspended:
+        return HttpResponseForbidden()
+
+    return render(request, 'user/suspended_account.html', {})
+
+
+@never_cache
+@login_required
+@require_GET
 def me(request):
     return HttpResponseRedirect('/users/%s/?%s' % (request.user.username, request.META['QUERY_STRING']))
 

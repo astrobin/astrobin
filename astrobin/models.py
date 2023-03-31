@@ -2433,6 +2433,19 @@ class UserProfile(SafeDeleteModel):
         blank=True,
     )
 
+    suspended = models.DateTimeField(
+        verbose_name=_('Suspended'),
+        null=True,
+        blank=True,
+    )
+
+    suspension_reason = models.CharField(
+        verbose_name=_('Suspension reason'),
+        null=True,
+        blank=True,
+        max_length=1024,
+    )
+
     last_seen = models.DateTimeField(
         editable=False,
         null=True,
