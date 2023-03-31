@@ -10,6 +10,7 @@ MIDDLEWARE = [
     'astrobin.middleware.EnforceOtpVerificationMiddleware',  # Keep before LastSeenMiddleware
     'astrobin.middleware.LastSeenMiddleware',
     'astrobin.middleware.BlockNonPayingUsersFromRussiaMiddleware',
+    'astrobin.middleware.BlockSuspendedUserMiddleware',
     'astrobin.middleware.LogoutDeletedUserMiddleware',
     'astrobin.middleware.MarkNotificationAsReadMiddleware',
     'astrobin.middleware.PreviousTopicReadMarkerMiddleware',
