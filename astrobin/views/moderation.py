@@ -77,7 +77,7 @@ class ImageModerationMarkAsHamView(LoginRequiredMixin, GroupRequiredMixin, JSONR
         for image in Image.objects_including_wip.filter(pk__in=ids):
             if not image.is_wip and image.published:
                 if not image.skip_notifications:
-                    push_notification_for_new_image.apply_asybc(args=(image.pk,), countdown=10)
+                    push_notification_for_new_image.apply_async(args=(image.pk,), countdown=10)
                 add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
 
         return self.render_json_response({
