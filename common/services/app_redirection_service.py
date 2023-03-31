@@ -60,25 +60,15 @@ class AppRedirectionService:
     def image_editor_step_number(user: User, step: ImageEditorStep) -> int:
         from astrobin_apps_users.services import UserService
 
-        if UserService(user).is_in_group([GroupName.ACQUISITION_EDIT_TESTERS]):
-            step_map = {
-                ImageEditorStep.BASIC_INFORMATION: 1,
-                ImageEditorStep.CONTENT: 2,
-                ImageEditorStep.THUMBNAIL: 3,
-                ImageEditorStep.WATERMARK: 4,
-                ImageEditorStep.EQUIPMENT: 5,
-                ImageEditorStep.ACQUISITION: 6,
-                ImageEditorStep.SETTINGS: 7,
-            }
-        else:
-            step_map = {
-                ImageEditorStep.BASIC_INFORMATION: 1,
-                ImageEditorStep.CONTENT: 2,
-                ImageEditorStep.THUMBNAIL: 3,
-                ImageEditorStep.WATERMARK: 4,
-                ImageEditorStep.EQUIPMENT: 5,
-                ImageEditorStep.SETTINGS: 6,
-            }
+        step_map = {
+            ImageEditorStep.BASIC_INFORMATION: 1,
+            ImageEditorStep.CONTENT: 2,
+            ImageEditorStep.THUMBNAIL: 3,
+            ImageEditorStep.WATERMARK: 4,
+            ImageEditorStep.EQUIPMENT: 5,
+            ImageEditorStep.ACQUISITION: 6,
+            ImageEditorStep.SETTINGS: 7,
+        }
 
         try:
             return step_map[step]
