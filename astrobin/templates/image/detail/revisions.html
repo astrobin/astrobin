@@ -38,7 +38,7 @@
 
                                 {% if not image.is_final %}
                                     <li>
-                                        <a href="{% url 'image_edit_make_final' image.get_id %}">
+                                        <a data-no-instant href="{% url 'image_edit_make_final' image.get_id %}">
                                             <i class="icon-ok"></i>
                                             <span class="hidden-phone">
                                                 {% trans "Mark this revision as final" %}
