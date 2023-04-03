@@ -63,10 +63,10 @@ class PricingServiceTest(TestCase):
         self.assertEqual(66.5, PricingService.get_price('ultimate', 'EUR'))
 
     def test_are_non_autorenewing_subscription_supported_when_user_is_None(self):
-        self.assertFalse(PricingService.are_non_autorenewing_subscriptions_supported(None))
+        self.assertFalse(PricingService.non_autorenewing_supported(None))
 
     def test_are_non_autorenewing_subscription_supported_when_user_is_not_authenticated(self):
-        self.assertFalse(PricingService.are_non_autorenewing_subscriptions_supported(Generators.user()))
+        self.assertFalse(PricingService.non_autorenewing_supported(Generators.user()))
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_are_non_autorenewing_subscription_supported_when_user_does_not_have_any_subscriptions(
@@ -74,7 +74,7 @@ class PricingServiceTest(TestCase):
     ):
         is_authenticated.return_value = True
 
-        self.assertFalse(PricingService.are_non_autorenewing_subscriptions_supported(Generators.user()))
+        self.assertFalse(PricingService.non_autorenewing_supported(Generators.user()))
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_are_non_autorenewing_subscription_supported_when_user_has_subscription_but_its_recurring(
@@ -85,7 +85,7 @@ class PricingServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.LITE_CLASSIC_AUTORENEW)
 
-        self.assertFalse(PricingService.are_non_autorenewing_subscriptions_supported(user))
+        self.assertFalse(PricingService.non_autorenewing_supported(user))
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_are_non_autorenewing_subscription_supported_when_user_has_non_recurring_subscription_but_its_expired_too_long_ago(
@@ -98,7 +98,7 @@ class PricingServiceTest(TestCase):
         us.expires = date.today() - timedelta(365*2+1)
         us.save()
 
-        self.assertFalse(PricingService.are_non_autorenewing_subscriptions_supported(user))
+        self.assertFalse(PricingService.non_autorenewing_supported(user))
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_are_non_autorenewing_subscription_supported_when_user_has_non_recurring_subscription_not_expired_too_long_ago(
@@ -111,4 +111,4 @@ class PricingServiceTest(TestCase):
         us.expires = date.today() - timedelta(365*2-1)
         us.save()
 
-        self.assertTrue(PricingService.are_non_autorenewing_subscriptions_supported(user))
+        self.assertTrue(PricingService.non_autorenewing_supported(user))

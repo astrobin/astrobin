@@ -60,7 +60,7 @@ class PricingService:
     )
 
     @staticmethod
-    def are_non_autorenewing_subscriptions_supported(user: Optional[User]) -> bool:
+    def non_autorenewing_supported(user: Optional[User]) -> bool:
         if user is None or not user.is_authenticated:
             return False
 
@@ -74,7 +74,7 @@ class PricingService:
 
     @staticmethod
     def get_available_subscriptions(user: User) -> List[StripeSubscription]:
-        if PricingService.are_non_autorenewing_subscriptions_supported(user):
+        if PricingService.non_autorenewing_supported(user):
             return [
                 PricingService.lite_2020_recurring,
                 PricingService.premium_2020_recurring,

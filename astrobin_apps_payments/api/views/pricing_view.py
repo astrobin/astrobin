@@ -2,17 +2,17 @@ import logging
 
 from braces.views import JSONResponseMixin
 from django.conf import settings
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.views import View
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import action
 
 from astrobin_apps_payments.services.pricing_service import PricingService
 
 log = logging.getLogger('apps')
 
+
 class PricingView(JSONResponseMixin, View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs) -> HttpResponse:
         product = kwargs.pop('product', None)  # type: str
         currency = kwargs.pop('currency', None)  # type: str
 
@@ -30,12 +30,10 @@ class PricingView(JSONResponseMixin, View):
             token = Token.objects.get(key=token_in_header)
             user = token.user
 
-        return self.render_json_response({
-            'fullPrice': PricingService.get_full_price(product.lower(), currency.upper()),
-            'discount': PricingService.get_discount_amount(product.lower(), currency.upper(), user=user),
-            'price': PricingService.get_price(product.lower(), currency.upper(), user=user)
-        })
-
-    @action(detail=False, methods=['get'])
-    def are_non_autorenewing_subscriptions_supported(self):
-        return PricingService.are_non_autorenewing_subscriptions_supported(self.request.user)
+        return self.render_json_response(
+            {
+                'fullPrice': PricingService.get_full_price(product.lower(), currency.upper()),
+                'discount': PricingService.get_discount_amount(product.lower(), currency.upper(), user=user),
+                'price': PricingService.get_price(product.lower(), currency.upper(), user=user)
+            }
+        )
