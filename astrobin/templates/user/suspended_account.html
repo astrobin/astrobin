@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Account suspended" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Account suspended" %}</h1>
+
+    <p>
+        {% blocktrans %}
+            Your account is temporarily or permanently suspended. If you believe this is in error, please get in touch
+            using the Help menu.
+        {% endblocktrans %}
+    </p>
+
+    {% if request.user.userprofile.suspension_reason %}
+        <hr/>
+
+        <h4>{% trans "Suspension reason" %}</h4>
+        <p>
+            {{ request.user.userprofile.suspension_reason|safe|linebreaksbr }}
+        </p>
+    {% endif %}
+{% endblock %}

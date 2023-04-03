@@ -1525,15 +1525,17 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
-        # GET
+        # GET when there are no legacy filters redirects to new form
         self.client.login(username='test', password='password')
         response = self.client.get(get_url((image.get_id(),)))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         # GET with existing DSA
         dsa, created = DeepSky_Acquisition.objects.get_or_create(
             image=image,
-            date=today)
+            date=today,
+            filter=Generators.filter(),
+        )
         response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 200)
 
@@ -1548,15 +1550,12 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         dsa.delete()
 
-        # GET with existing SSA
-        ssa, created = SolarSystem_Acquisition.objects.get_or_create(
-            image=image,
-            date=today)
-        response = self.client.get(get_url((image.get_id(),)))
-        self.assertEqual(response.status_code, 200)
-        ssa.delete()
-
         # GET with edit_type in request.GET
+        dsa, created = DeepSky_Acquisition.objects.get_or_create(
+            image=image,
+            date=today,
+            filter=Generators.filter(),
+        )
         response = self.client.get(get_url((image.get_id(),)) + "?edit_type=deep_sky")
         self.assertEqual(response.status_code, 200)
 

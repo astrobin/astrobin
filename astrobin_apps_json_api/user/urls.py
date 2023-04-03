@@ -7,7 +7,6 @@ from astrobin_apps_json_api.user.views import (
 )
 from astrobin_apps_json_api.user.views.delete_revisions import DeleteRevisions
 from astrobin_apps_json_api.user.views.empty_trash import EmptyTrash
-from astrobin_apps_json_api.user.views.has_legacy_equipment_items import HasLegacyGear
 
 urlpatterns = (
     url(r'^user/restore-deleted-images/$', never_cache(RestoreDeletedImages.as_view())),
@@ -18,5 +17,4 @@ urlpatterns = (
     url(r'^user/mark-click-and-drag-toast-as-seen/$', never_cache(MarkClickAndDragToastAsSeen.as_view())),
     url(r'^user/mark-forum-usage-modal-as-seen/$', never_cache(MarkForumUsageModalAsSeen.as_view())),
     url(r'^user/toggle-use-high-contrast-theme-cookie/$', never_cache(ToggleUseHighContrastThemeCookie.as_view())),
-    url(r'^user/has-legacy-gear/$', never_cache(HasLegacyGear.as_view())),
 )

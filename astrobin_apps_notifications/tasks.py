@@ -36,11 +36,11 @@ def push_notification_for_new_image(image_pk):
 
     user_pks = [image.user.pk] + list(image.collaborators.all().values_list('pk', flat=True))
 
-    followers = [x.user for x in ToggleProperty.objects.filter(
+    followers = list(set([x.user for x in ToggleProperty.objects.filter(
         property_type="follow",
         content_type=ContentType.objects.get_for_model(User),
         object_id__in=user_pks
-    ).order_by('object_id')]
+    ).order_by('object_id')]))
 
     if len(followers) > 0:
         thumb = image.thumbnail_raw('gallery', None, sync=True)

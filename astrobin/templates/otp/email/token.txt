@@ -8,7 +8,7 @@
 
 {{ token }}
 
-{% blocktrans trimmed with n=10 %}
+{% blocktrans trimmed with n=20 %}
     This token is valid for {{n}} minutes.
 {% endblocktrans %}
 

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-28 16:47+0000\n"
-"PO-Revision-Date: 2022-12-20 21:46+0100\n"
+"POT-Creation-Date: 2023-03-22 21:34+0000\n"
+"PO-Revision-Date: 2023-03-22 22:30+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.27 20221112-1\n"
+"X-Loco-Api-Version: 1.0.27 20230321-1\n"
 
 msgid "United Kingdom"
 msgstr "イギリス"
@@ -910,11 +910,11 @@ msgstr "経度（分）"
 msgid "Longitude (seconds)"
 msgstr "経度（秒）"
 
-msgid "Recipients"
-msgstr "受賞者"
-
 msgid "Are you a robot?"
 msgstr "あなたはロボットじゃないですか？"
+
+msgid "Recipients"
+msgstr "受賞者"
 
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
@@ -1613,10 +1613,8 @@ msgstr "サムネイルをシャープにする"
 
 msgid ""
 "If selected, AstroBin will use a resizing algorithm that slightly sharpens "
-"the image's thumbnails. This setting applies to all revisions."
+"all sizes of the image except the full size version."
 msgstr ""
-"選択した場合、AstroBin は、画像のサムネイルをわずかにシャープにするリサイズア"
-"ルゴリズムを使用します。この設定は、すべての修正版に適用されます。"
 
 msgid "Allow full-size display"
 msgstr "フルスクリーンを許可する"
@@ -1772,8 +1770,8 @@ msgstr "フラットファイルの数"
 msgid "Flat darks"
 msgstr "フラットダーク"
 
-msgid "The number of dark flat frames."
-msgstr "フラットダークファイルの数"
+msgid "The number of flat dark frames."
+msgstr ""
 
 msgid "Bias"
 msgstr "バイアス"
@@ -2178,6 +2176,30 @@ msgstr "エラー"
 
 msgid "Expired"
 msgstr "期限切れ"
+
+msgid ""
+"This password doesn't contain any numeric digits. It must contain at least "
+"one number."
+msgstr ""
+
+msgid "Your password must contain at least one number."
+msgstr ""
+
+msgid ""
+"This password doesn't contain any special characters. It must contain at "
+"least one of the following {}"
+msgstr ""
+
+msgid "Your password must contain any of the following special characters: {}"
+msgstr ""
+
+msgid ""
+"This password has previously appeared in a data breach elsewhere and should "
+"not be used."
+msgstr ""
+
+msgid "Your AstroBin authentication token"
+msgstr ""
 
 msgid "Abkhazian"
 msgstr "アブハジア語"
@@ -3577,9 +3599,6 @@ msgstr "自分を削除する"
 msgid "Acquired at"
 msgstr "撮影方法"
 
-msgid "Remove"
-msgstr "削除する"
-
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
 "international community: using <strong>English</strong> is preferred."
@@ -3778,6 +3797,9 @@ msgstr "出禁ユーザー"
 msgid "AstroBin is preparing your download. Please wait..."
 msgstr "AstroBinはダウンロードの準備をしています。しばらくお待ちください..."
 
+msgid "Original size"
+msgstr "オリジナルサイズ"
+
 msgid "Medium size"
 msgstr "中サイズ"
 
@@ -3786,9 +3808,6 @@ msgstr "大サイズ"
 
 msgid "Extra-large size"
 msgstr "特大サイズ"
-
-msgid "Original size"
-msgstr "オリジナルサイズ"
 
 msgid "Basic annotations"
 msgstr "基本的な注釈"
@@ -3810,9 +3829,6 @@ msgstr "サムネイル"
 
 msgid "Watermark"
 msgstr "透かし"
-
-msgid "Thumbnails"
-msgstr "サムネイル"
 
 msgid "Plate-solving settings"
 msgstr "プレートソルビング設定"
@@ -4391,6 +4407,9 @@ msgstr ""
 "デフォルトのライセンスは、<a href=\"%(change_default_url)s\"> こちら</a>で変"
 "更できます。"
 
+msgid "Thumbnails"
+msgstr "サムネイル"
+
 msgid "Basic Information"
 msgstr "基本情報"
 
@@ -4510,6 +4529,9 @@ msgstr "コメント"
 msgctxt "Pertaining to cameras, e.g. a modified Canon"
 msgid "modified"
 msgstr "改造した"
+
+msgid "Remove"
+msgstr "削除する"
 
 msgid "No gear yet."
 msgstr "まだ機材がない"
@@ -4689,6 +4711,62 @@ msgstr "選択されたものを承認し、残りを禁止する"
 
 msgid "There are no images in the spam list."
 msgstr "スパムリストに画像がありません。"
+
+msgid ""
+"You, or somebody on your behalf, attempted to log in to AstroBin from a "
+"different country than the one you were seen in last time, or from a country "
+"that could not be detected."
+msgstr ""
+
+msgid ""
+"For your security, an additional confirmation token was sent in a separate "
+"email."
+msgstr ""
+
+msgid ""
+"If this was a legitimate login attempt, please use the token to complete the "
+"process."
+msgstr ""
+
+msgid ""
+"If you did not make this login attempt, please change your password and/or "
+"contact AstroBin immediately."
+msgstr ""
+
+msgid ""
+"For your security, following this event, AstroBin has automatically enabled "
+"email-based two-factor authentication on your account. You can disable in "
+"your settings or using the link below."
+msgstr ""
+
+msgid "Two-factor Authentication"
+msgstr ""
+
+msgid "Wishing you clear skies and excellent seeing!"
+msgstr ""
+
+msgid "AstroBin detected a login attempt from a different country"
+msgstr ""
+
+msgid ""
+"You, or somebody on your behalf, attempted to log in to AstroBin and we "
+"detected that your password does not meet security requirements."
+msgstr ""
+
+msgid ""
+"We recommend that you change your password as soon as possible, for your "
+"security and the safety of the other members of the AstroBin community."
+msgstr ""
+
+msgid "Learn more about security standards on AstroBin:"
+msgstr ""
+
+msgid "Change your password:"
+msgstr ""
+
+msgid ""
+"AstroBin detected that your password does not meet security requirements"
+msgstr ""
 
 #, python-format
 msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
@@ -5053,8 +5131,8 @@ msgid ""
 msgstr ""
 "残念ながら、%(title)sの画像の高度なプレートソルビングを実行できませんでした。"
 
-msgid "Your image was submitted for IOTD/TP consideration!"
-msgstr "あなたの画像がIOTD/TPに応募されました。"
+msgid "You submitted your image for IOTD/TP consideration!"
+msgstr ""
 
 msgid ""
 "If you haven't already, please take a few minutes to learn how the process "
@@ -6009,6 +6087,17 @@ msgstr "あなたの画像がTop Pickに選ばれました"
 msgid "Object not found"
 msgstr "対象は見つかりません"
 
+msgid "Here is your two-factor authentication token to log in to AstroBin:"
+msgstr ""
+
+#, python-format
+msgid "This token is valid for %(n)s minutes."
+msgstr ""
+
+msgid ""
+"To change your two-factor authentication settings, please visit this page:"
+msgstr ""
+
 msgid "Previous page"
 msgstr "前のページへ"
 
@@ -6372,14 +6461,23 @@ msgstr "アカウントの有効化"
 msgid "Account successfully activated"
 msgstr "アカウントの有効化に成功しました"
 
-msgid "Log in"
-msgstr "ログイン"
-
 msgid "Account activation failed"
 msgstr "アカウントのアクティベーションに失敗しました。"
 
+msgid ""
+"This could mean that your activation link expired, is invalid, or you "
+"clicked it more than once (in which case, please try to log in: your account "
+"could be already active)."
+msgstr ""
+
+msgid "Log in"
+msgstr "ログイン"
+
 msgid "Your profile is now active."
 msgstr "あなたのプロフィールがアクティブになりました。"
+
+msgid "Account activated"
+msgstr ""
 
 msgid ""
 "Hi,\n"
@@ -6404,9 +6502,6 @@ msgstr ""
 
 msgid "Account activation on"
 msgstr "でアカウントを有効にする"
-
-msgid "Reset password"
-msgstr "パスワードをリセットする"
 
 msgid "Good bye!"
 msgstr "Good bye!"
@@ -6441,6 +6536,9 @@ msgstr ""
 
 msgid "Reset your AstroBin password"
 msgstr "AstroBinのパスワードをリセットする"
+
+msgid "Reset password"
+msgstr "パスワードをリセットする"
 
 msgid "Did you forget your password or just want to reset it?"
 msgstr "パスワードを忘れた、またはリセットしたい場合"
@@ -6490,6 +6588,137 @@ msgstr "並べ替えオプションは、フィルター用のサイドバーに
 
 msgid "This list is currently empty."
 msgstr "このリストは現在空です。"
+
+msgid "Account"
+msgstr ""
+
+msgid "Back"
+msgstr "戻る"
+
+msgid "Backup tokens"
+msgstr ""
+
+msgid ""
+"Backup tokens can be used if you lost access to your two-factor "
+"authentication method. The backup tokens below can be used for login "
+"verification. If you've used up all your backup tokens, you can generate a "
+"new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+msgid "You don't have any backup codes yet."
+msgstr ""
+
+msgid "Generate tokens"
+msgstr ""
+
+msgid "Back to account security"
+msgstr ""
+
+msgid "Enter your credentials."
+msgstr ""
+
+msgid ""
+"AstroBin needs an additional step to verify your login. Please enter the "
+"token generated by your token generator or received via email."
+msgstr ""
+
+msgid ""
+"Use this form for entering backup tokens for logging in. These tokens have "
+"been generated for you to print and keep safe. Please enter one of these "
+"backup tokens to login to your account."
+msgstr ""
+
+msgid ""
+"To make sure that this is a legitimate login attempt, we just sent you a one-"
+"time password token via e-mail."
+msgstr ""
+
+msgid "As a last resort, you can use a backup token:"
+msgstr ""
+
+msgid "Use backup token"
+msgstr ""
+
+msgid "Enable Two-Factor Authentication"
+msgstr ""
+
+msgid ""
+"You are about to take your account security to the next level. Follow the "
+"steps in this wizard to enable two-factor authentication."
+msgstr ""
+
+msgid "Please select which authentication method you would like to use."
+msgstr ""
+
+msgid ""
+"To start using a token generator, please use your smartphone to scan the QR "
+"code below. For example, use Google Authenticator. Then, enter the token "
+"generated by the app."
+msgstr ""
+
+msgid "Please validate the code that have received via your selected method."
+msgstr ""
+
+msgid ""
+"If you are unable to scan the QR code above, please use the following key "
+"instead:"
+msgstr ""
+
+msgid ""
+"We've encountered an issue with the selected authentication method. Please "
+"go back and verify that you entered your information correctly, try again, "
+"or use a different authentication method instead. If the issue persists, "
+"please contact us."
+msgstr ""
+
+msgid "Congratulations, you've successfully enabled two-factor authentication."
+msgstr ""
+
+msgid "Back to Account Security"
+msgstr ""
+
+msgid "Disable Two-factor Authentication"
+msgstr ""
+
+msgid ""
+"You are about to disable two-factor authentication. This weakens your "
+"account's  security, are you sure?"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Backup Tokens"
+msgstr ""
+
+msgid ""
+"If you don't have any device with you, you can access your account using "
+"backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+
+msgid "Show codes"
+msgstr ""
+
+msgid "Disable Two-Factor Authentication"
+msgstr ""
+
+msgid ""
+"We strongly discourage you to do so, but you can disable two-factor "
+"authentication for your account."
+msgstr ""
+
+msgid ""
+"Two-factor Authentication is not enabled for your account. Enable it for "
+"enhanced account security."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -7263,6 +7492,18 @@ msgstr "ガイド用望遠鏡"
 msgid "What kind of search results do you want?"
 msgstr "どのような検索結果が欲しいのか？"
 
+msgid "All images"
+msgstr ""
+
+msgid "Images bookmarked by you"
+msgstr ""
+
+msgid "Images liked by you"
+msgstr ""
+
+msgid "Images by users you follow"
+msgstr ""
+
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr ""
 "何をお探しですか？このテキストフィールドを使用して、フリーテキスト検索を実行"
@@ -7512,15 +7753,44 @@ msgstr ""
 "AstroBinは、お客様のデータをダウンロードするための準備をしています。画像が多"
 "いほど時間がかかりますので、しばらくしてから再度このページをご覧ください。"
 
-msgid "Referral code (optional)"
-msgstr "紹介コード（オプション）"
+msgid "Referral code"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid "AstroBin doesn't share your email address with anyone."
+msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 "申し訳ありませんが、このユーザーネームは既に別の大文字で登録されています。"
 
+msgid "First name"
+msgstr ""
+
+msgid "Last name"
+msgstr ""
+
+msgid ""
+"This is your handle on AstroBin and will be part of the URL to your gallery. "
+"If you do not specify afirst and last name below, it will also be how others "
+"see your name. Please use letters, digits, and the special characters @/./"
+"+/-/_ only."
+msgstr ""
+
 #~ msgid "Original image"
 #~ msgstr "オリジナル画像"
+
+#~ msgid ""
+#~ "If selected, AstroBin will use a resizing algorithm that slightly "
+#~ "sharpens the image's thumbnails. This setting applies to all revisions."
+#~ msgstr ""
+#~ "選択した場合、AstroBin は、画像のサムネイルをわずかにシャープにするリサイ"
+#~ "ズアルゴリズムを使用します。この設定は、すべての修正版に適用されます。"
+
+#~ msgid "The number of dark flat frames."
+#~ msgstr "フラットダークファイルの数"
 
 #~ msgid "Timezone"
 #~ msgstr "タイムゾーン"
@@ -7875,9 +8145,6 @@ msgstr ""
 
 #~ msgid "Messages"
 #~ msgstr "メッセージ"
-
-#~ msgid "Back"
-#~ msgstr "戻る"
 
 #~ msgid ""
 #~ "As a new user on AstroBin, your first 3 comments will go through a "
@@ -8311,6 +8578,9 @@ msgstr ""
 #~ msgid "Accessory"
 #~ msgstr "アクセサリー"
 
+#~ msgid "Referral code (optional)"
+#~ msgstr "紹介コード（オプション）"
+
 #~ msgid "Publication time"
 #~ msgstr "公開時期"
 
@@ -8388,6 +8658,9 @@ msgstr ""
 
 #~ msgid "Old brand"
 #~ msgstr "過去のブランド"
+
+#~ msgid "Your image was submitted for IOTD/TP consideration!"
+#~ msgstr "あなたの画像がIOTD/TPに応募されました。"
 
 #~ msgid "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment."
 #~ msgstr ""

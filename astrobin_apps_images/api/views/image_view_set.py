@@ -67,8 +67,6 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
                     getattr(instance, klass[0]).add(obj)
 
     def _update_acquisition(self, request, instance: Image):
-        if not UserService(request.user).is_in_group([GroupName.ACQUISITION_EDIT_TESTERS]):
-            return
 
         DeepSky_Acquisition.objects.filter(image=instance).delete()
         for item in request.data.get('deep_sky_acquisitions'):

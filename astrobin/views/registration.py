@@ -11,7 +11,9 @@ from registration.forms import (RegistrationForm, RegistrationFormTermsOfService
 from registration.signals import user_registered
 
 from astrobin.models import UserProfile
+from astrobin.utils import get_client_country_code
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 
 
@@ -182,6 +184,10 @@ class AstroBinRegistrationView(RegistrationView):
 def user_created(sender, user, request, **kwargs):
     form = AstroBinRegistrationForm(request.POST)
     profile, created = UserProfile.objects.get_or_create(user=user)
+
+    UserService(profile.user).set_last_seen(get_client_country_code(request))
+    profile.refresh_from_db()
+
     group, created = Group.objects.get_or_create(name=GroupName.OWN_EQUIPMENT_MIGRATORS)
     user.groups.add(group)
     changed = False

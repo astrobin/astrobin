@@ -21,8 +21,7 @@ from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, UserProfile
 from astrobin.stories import add_story
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.utils import push_notification
-from toggleproperties.models import ToggleProperty
+from astrobin_apps_notifications.tasks import push_notification_for_new_image
 
 log = logging.getLogger('apps')
 
@@ -76,18 +75,9 @@ class ImageModerationMarkAsHamView(LoginRequiredMixin, GroupRequiredMixin, JSONR
             moderated_by=request.user)
 
         for image in Image.objects_including_wip.filter(pk__in=ids):
-            if not image.is_wip:
-                followers = [x.user for x in ToggleProperty.objects.filter(
-                    property_type="follow",
-                    content_type=ContentType.objects.get_for_model(User),
-                    object_id=image.user.pk)]
-
-                thumb = image.thumbnail_raw('gallery', None, sync=True)
-                push_notification(followers, image.user, 'new_image', {
-                    'image': image,
-                    'image_thumbnail': thumb.url if thumb else None
-                })
-
+            if not image.is_wip and image.published:
+                if not image.skip_notifications:
+                    push_notification_for_new_image.apply_async(args=(image.pk,), countdown=10)
                 add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
 
         return self.render_json_response({

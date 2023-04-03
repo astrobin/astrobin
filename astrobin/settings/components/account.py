@@ -80,4 +80,6 @@ TWO_FACTOR_REMEMBER_COOKIE_PREFIX = 'astrobin-two-factor-remember-cookie_'
 TWO_FACTOR_REMEMBER_COOKIE_DOMAIN = '.astrobin.com' if 'astrobin' in BASE_URL else 'localhost'
 TWO_FACTOR_REMEMBER_COOKIE_SECURE = True
 OTP_EMAIL_SUBJECT = gettext_lazy("Your AstroBin authentication token")
-OTP_EMAIL_TOKEN_VALIDITY = 600
+TWO_FACTOR_LOGIN_TIMEOUT = 1200
+OTP_EMAIL_TOKEN_VALIDITY = 1200
+OTP_TOTP_THROTTLE_FACTOR = 0

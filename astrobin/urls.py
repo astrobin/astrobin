@@ -34,10 +34,10 @@ from astrobin.views import (
     image_edit_revision_make_final, image_edit_save_acquisition, image_edit_save_license, image_edit_save_watermark,
     image_edit_watermark, image_restart_advanced_platesolving, image_restart_platesolving,
     image_revision_upload_process, image_upload, image_upload_process, index, me, moderation as moderation_views,
-    registration as registration_views, save_gear_details, save_gear_user_info, set_language, user_ban, user_page,
-    user_page_api_keys, user_page_bookmarks, user_page_followers, user_page_following, user_page_friends,
-    user_page_liked, user_page_plots, user_popover_ajax, user_profile_delete, user_profile_edit_basic,
-    user_profile_edit_gear, user_profile_edit_license, user_profile_edit_locations,
+    registration as registration_views, save_gear_details, save_gear_user_info, set_language, suspended_account,
+    user_ban, user_page, user_page_api_keys, user_page_bookmarks, user_page_followers, user_page_following,
+    user_page_friends, user_page_liked, user_page_plots, user_popover_ajax, user_profile_delete,
+    user_profile_edit_basic, user_profile_edit_gear, user_profile_edit_license, user_profile_edit_locations,
     user_profile_edit_preferences, user_profile_edit_privacy, user_profile_flickr_import,
     user_profile_remove_shadow_ban, user_profile_save_basic, user_profile_save_gear, user_profile_save_license,
     user_profile_save_locations, user_profile_save_preferences, user_profile_save_privacy,
@@ -229,24 +229,36 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
-    url(r'^explore/top-pick-nominations/$', explore_views.TopPickNominationsView.as_view(),
-        name='top_pick_nominations'),
+    url(
+        r'^explore/top-pick-nominations/$', explore_views.TopPickNominationsView.as_view(),
+        name='top_pick_nominations'
+    ),
 
     ###########################################################################
     ### USER VIEWS                                                          ###
     ###########################################################################
 
     url(r'^me/$', me, name='me'),
+    url(r'^suspended-account/$', suspended_account, name='suspended_account'),
     url(r'^users/(?P<username>[\w.@+-]*)/$', user_page, name='user_page'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/$', collections_views.UserCollectionsList.as_view(),
-        name='user_collections_list'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/create/$', collections_views.UserCollectionsCreate.as_view(),
-        name='user_collections_create'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/$',
-        never_cache(collections_views.UserCollectionsDetail.as_view()), name='user_collections_detail'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/update/$',
-        never_cache(collections_views.UserCollectionsUpdate.as_view()), name='user_collections_update'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/add-remove-images/$',
+    url(
+        r'^users/(?P<username>[\w.@+-]*)/collections/$', collections_views.UserCollectionsList.as_view(),
+        name='user_collections_list'
+    ),
+    url(
+        r'^users/(?P<username>[\w.@+-]*)/collections/create/$', collections_views.UserCollectionsCreate.as_view(),
+        name='user_collections_create'
+    ),
+    url(
+        r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/$',
+        never_cache(collections_views.UserCollectionsDetail.as_view()), name='user_collections_detail'
+    ),
+    url(
+        r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/update/$',
+        never_cache(collections_views.UserCollectionsUpdate.as_view()), name='user_collections_update'
+    ),
+    url(
+        r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/add-remove-images/$',
         never_cache(collections_views.UserCollectionsAddRemoveImages.as_view()),
         name='user_collections_add_remove_images'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/quick-edit/key-value-pairs$',
