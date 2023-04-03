@@ -376,10 +376,13 @@ class TestImageService(TestCase):
 
         ImageService(image).delete_original()
 
+        image.refresh_from_db()
+
         self.assertEqual('revision_b.jpg', image.image_file)
         self.assertFalse(image.is_final)
         self.assertEqual(1, ImageService(image).get_revisions().count())
         self.assertEqual('C', ImageService(image).get_revisions().first().label)
+        self.assertTrue(ImageService(image).get_revisions().first().is_final)
 
     def test_delete_original_preserves_mouse_hover_settings(self):
         image = Generators.image(image_file='original.jpg', is_final=False)
