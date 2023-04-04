@@ -1,6 +1,9 @@
+from typing import List
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 from django.http import Http404
 from hitcount.models import HitCount
 from persistent_messages.models import Message
@@ -529,28 +532,7 @@ class ImageResource(ModelResource):
         return self.create_response(request, bundle)
 
     def build_filters(self, filters=None, ignore_bad_filters=False):
-        subjects = None
-        ids = None
-        user = None
-
-        if filters is None:
-            filters = {}
-
-        if 'subjects' in filters:
-            subjects = filters['subjects']
-            del filters['subjects']
-
-        if 'ids' in filters:
-            ids = filters['ids']
-            del filters['ids']
-
-        if 'user' in filters:
-            user = filters['user']
-            del filters['user']
-
-        orm_filters = super(ImageResource, self).build_filters(filters, ignore_bad_filters)
-
-        if subjects:
+        def lookup_subjects(val: List[str]):
             from astrobin_apps_platesolving.models import Solution
 
             def fix_catalog(name):
@@ -570,20 +552,88 @@ class ImageResource(ModelResource):
                     return '%s%s' % (fix_catalog(m.group('catalog')), m.group('name'))
                 return name
 
-            qs = Solution.objects.filter(objects_in_field__icontains=fix_name(subjects))[:100]
-            orm_filters['pk__in'] = [i.object_id for i in qs]
+            qs = Solution.objects.filter(objects_in_field__icontains=fix_name(val[0]))[:100]
+            return {'pk__in': [i.object_id for i in qs]}
 
-        if ids:
-            max = 100
-            if len(ids) > max:
-                raise InvalidFilterError(f'Please do not request over {max} image IDs')
-            orm_filters['pk__in'] = ids.split(',')
+        def lookup_ids(val: List[str]):
+            max_ids = 100
 
-        if user:
-            orm_filters['user__username'] = user
+            if len(val) > max_ids:
+                raise InvalidFilterError(f'Please do not request over {max_ids} image IDs')
+
+            return {'pk__in': val[0].split(',')}
+
+        def lookup_user(val: List[str], expr=None):
+            lookup_value = val[0]
+            return {'user': Q(user__username=lookup_value)}
+
+        def lookup_description(val: List[str], expr=None):
+            lookup_value = val[0]
+
+            if expr:
+                return {
+                    'description': Q(**{f"description__{expr}": lookup_value}) | Q(**{f"description_bbcode__{expr}": lookup_value})
+                }
+            return {'description': Q(description=lookup_value) | Q(description_bbcode=lookup_value)}
+
+        if filters is None:
+            filters = {}
+
+        # Filter expressions that need to be handled separately
+        special_filters = [
+            'subjects',
+            'ids',
+            'user',
+            'description',
+            'description__contains',
+            'description__icontains',
+        ]
+
+        # Remove special filters from the filters dictionary, otherwise the call to super.build_filters() will throw
+        # InvalidFieldError.
+        special_filter_dict = {k: filters.pop(k) for k in list(filters.keys()) if k in special_filters}
+
+        orm_filters = super().build_filters(filters, ignore_bad_filters)
+
+        for key, value in special_filter_dict.items():
+            if '__' in key:
+                # Parse the filter key for the special expression
+                field, expr = key.split('__')
+
+                if field == 'subjects':
+                    orm_filters.update(lookup_subjects(value))
+                elif field == 'ids':
+                    orm_filters.update(lookup_ids(value))
+                elif field == 'user':
+                    orm_filters.update(lookup_user(value, expr))
+                elif field == 'description':
+                    orm_filters.update(lookup_description(value, expr))
+            elif key == 'subjects':
+                orm_filters.update(lookup_subjects(value))
+            elif key == 'ids':
+                orm_filters.update(lookup_ids(value))
+            elif key == 'user':
+                orm_filters.update(lookup_user(value))
+            elif key == 'description':
+                orm_filters.update(lookup_description(value))
+            else:
+                orm_filters.update({key: value})
 
         return orm_filters
 
+    def apply_filters(self, request, applicable_filters):
+        user_filter = applicable_filters.pop('user', None)
+        description_filter = applicable_filters.pop('description', None)
+
+        qs = super().apply_filters(request, applicable_filters)
+
+        if user_filter is not None:
+            qs = qs.filter(user_filter)
+
+        if description_filter is not None:
+            qs = qs.filter(description_filter)
+
+        return qs
 
 class ImageOfTheDayResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
