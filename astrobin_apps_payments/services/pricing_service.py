@@ -11,7 +11,7 @@ from subscription.models import Subscription, UserSubscription
 
 from astrobin_apps_payments.models import ExchangeRate
 from astrobin_apps_payments.types import StripeSubscription
-from astrobin_apps_premium.services.premium_service import SubscriptionName
+from astrobin_apps_premium.services.premium_service import SubscriptionDisplayName, SubscriptionName
 
 logger = logging.getLogger("apps")
 
@@ -19,6 +19,7 @@ logger = logging.getLogger("apps")
 class PricingService:
     lite_2020: StripeSubscription = StripeSubscription(
         SubscriptionName.LITE_2020,
+        SubscriptionDisplayName.LITE,
         settings.STRIPE['products']['non-recurring']['lite'],
         settings.STRIPE['prices']['non-recurring']['lite']['yearly'],
         None,
@@ -26,6 +27,7 @@ class PricingService:
 
     premium_2020: StripeSubscription = StripeSubscription(
         SubscriptionName.PREMIUM_2020,
+        SubscriptionDisplayName.PREMIUM,
         settings.STRIPE['products']['non-recurring']['premium'],
         settings.STRIPE['prices']['non-recurring']['premium']['yearly'],
         None,
@@ -33,6 +35,7 @@ class PricingService:
 
     ultimate_2020: StripeSubscription = StripeSubscription(
         SubscriptionName.ULTIMATE_2020,
+        SubscriptionDisplayName.ULTIMATE,
         settings.STRIPE['products']['non-recurring']['ultimate'],
         settings.STRIPE['prices']['non-recurring']['ultimate']['yearly'],
         None,
@@ -40,6 +43,7 @@ class PricingService:
 
     lite_2020_recurring: StripeSubscription = StripeSubscription(
         SubscriptionName.LITE_2020,
+        SubscriptionDisplayName.LITE,
         settings.STRIPE['products']['recurring']['lite'],
         settings.STRIPE['prices']['recurring']['lite']['yearly'],
         settings.STRIPE['prices']['recurring']['lite']['monthly'],
@@ -47,6 +51,7 @@ class PricingService:
 
     premium_2020_recurring: StripeSubscription = StripeSubscription(
         SubscriptionName.PREMIUM_2020,
+        SubscriptionDisplayName.PREMIUM,
         settings.STRIPE['products']['recurring']['premium'],
         settings.STRIPE['prices']['recurring']['premium']['yearly'],
         settings.STRIPE['prices']['recurring']['premium']['monthly'],
@@ -54,6 +59,7 @@ class PricingService:
 
     ultimate_2020_recurring: StripeSubscription = StripeSubscription(
         SubscriptionName.ULTIMATE_2020,
+        SubscriptionDisplayName.ULTIMATE,
         settings.STRIPE['products']['recurring']['ultimate'],
         settings.STRIPE['prices']['recurring']['ultimate']['yearly'],
         settings.STRIPE['prices']['recurring']['ultimate']['monthly'],
@@ -100,18 +106,20 @@ class PricingService:
     @staticmethod
     def get_full_price(product: str, currency: str) -> float:
         subscriptions = {
-            'lite': Subscription.objects.get(name=SubscriptionName.LITE_2020),
-            'premium': Subscription.objects.get(name=SubscriptionName.PREMIUM_2020),
-            'ultimate': Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020),
+            'lite': Subscription.objects.get(name=SubscriptionName.LITE_2020.value),
+            'premium': Subscription.objects.get(name=SubscriptionName.PREMIUM_2020.value),
+            'ultimate': Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020.value),
         }
 
         base_price = subscriptions[product].price
-        exchange_rate = ExchangeRate.objects.filter(
-            target=currency.upper()).first().rate if currency.upper() != "CHF" else 1
-        exact_price = base_price * exchange_rate
-        rounded_price = ceil(exact_price * 2) / 2
-
-        return rounded_price
+        # TODO
+        return base_price
+        # exchange_rate = ExchangeRate.objects.filter(
+        #     target=currency.upper()).first().rate if currency.upper() != "CHF" else 1
+        # exact_price = base_price * exchange_rate
+        # rounded_price = ceil(exact_price * 2) / 2
+        #
+        # return rounded_price
 
     @staticmethod
     def get_discount_amount(product: str, currency: str, user: User = None) -> float:

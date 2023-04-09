@@ -38,6 +38,12 @@ class SubscriptionName(Enum):
     PREMIUM_CLASSIC_50_PERCENT_DISCOUNT = 'AstroBin Premium 50% discount'
 
 
+class SubscriptionDisplayName(Enum):
+    LITE = 'Lite'
+    PREMIUM = 'Premium'
+    ULTIMATE = 'Ultimate'
+
+
 def _compareValidity(a, b):
     return b.valid() - a.valid()
 
