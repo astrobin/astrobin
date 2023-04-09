@@ -375,3 +375,10 @@ def is_in_group(user: User, group_name: Union[str, List[str]]) -> bool:
 @register.filter
 def is_in_astrobin_group(user: User, group_name: Union[str, List[str]]) -> bool:
     return UserService(user).is_in_astrobin_group(group_name)
+
+
+@register.simple_tag(takes_context=True)
+def pop_session_value(context, session_key):
+    request = context['request']
+    value = request.session.pop(session_key, None)
+    return value

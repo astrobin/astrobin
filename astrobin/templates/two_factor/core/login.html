@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block title %}{% trans "Login" %}{% endblock %}
 
@@ -47,7 +48,10 @@
         {% if wizard.steps.current == 'token' %}
             <div class="control-group">
                 <div class="controls">
-                    {% if request.session.enforce_otp_middleware_invalid_password %}
+                    {% pop_session_value 'enforce_otp_middleware_invalid_password' as is_invalid_password %}
+                    {% pop_session_value 'enforce_otp_middleware_new_country' as is_new_country %}
+
+                    {% if is_invalid_password %}
                         <div class="alert alert-warning">
                             <p>
                                 {% blocktrans trimmed %}
@@ -66,7 +70,7 @@
                         </div>
                     {% endif %}
 
-                    {% if request.session.enforce_otp_middleware_new_country %}
+                    {% if is_new_country %}
                         <div class="alert alert-warning">
                             <p>
                                 {% blocktrans trimmed %}
