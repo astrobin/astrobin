@@ -13,7 +13,7 @@
 
 export DISPLAY=:0
 export USER=ubuntu
-export ASTROBIN_TEMPORARY_FILES=/astrobin-temporary-files
+export ASTROBIN_HOST_TEMPORARY_FILES=/astrobin-temporary-files
 export USER=ubuntu
 export GROUP=ubuntu
 export ARCH=$(uname -m)
@@ -52,16 +52,16 @@ git clone https://github.com/aws/efs-utils && (cd efs-utils && ./build-deb.sh &&
 
 # Mount EFS:
 
-mkdir ${ASTROBIN_TEMPORARY_FILES}
+mkdir -p ${ASTROBIN_HOST_TEMPORARY_FILES}
 
 tries=0
 until [ "$tries" -ge 6 ]
 do
-   mount -t efs -o tls ${EFS_FILE_SYSTEM}:/ ${ASTROBIN_TEMPORARY_FILES} && break
+   mount -t efs -o tls ${EFS_FILE_SYSTEM}:/ ${ASTROBIN_HOST_TEMPORARY_FILES} && break
    tries=$((tries+1))
    sleep 10
 done
 
-mkdir -p ${ASTROBIN_TEMPORARY_FILES}/files
-chown ${USER}:${GROUP} ${ASTROBIN_TEMPORARY_FILES}/files
-chmod 777 ${ASTROBIN_TEMPORARY_FILES}/files
+mkdir -p ${ASTROBIN_HOST_TEMPORARY_FILES}/files
+chown ${USER}:${GROUP} ${ASTROBIN_HOST_TEMPORARY_FILES}/files
+chmod 777 ${ASTROBIN_HOST_TEMPORARY_FILES}/files

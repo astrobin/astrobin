@@ -21,7 +21,7 @@ services:
     volumes:
       - media:/media
       - tmp:/tmp
-      - /astrobin-temporary-files:/astrobin-temporary-files
+      - ${ASTROBIN_HOST_TEMPORARY_FILES:-/astrobin-temporary-files}:/astrobin-temporary-files
     deploy:
       resources:
         limits:
