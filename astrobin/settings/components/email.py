@@ -4,7 +4,7 @@ SEND_EMAILS = os.environ.get('SEND_EMAILS', 'false').strip()
 
 if SEND_EMAILS == 'true':
     EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
-    CELERY_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    CELERY_EMAIL_BACKEND = 'astrobin.logging_email_backend.LoggingEmailBackend'
 
     CELERY_EMAIL_TASK_CONFIG = {
         'queue': 'email',
