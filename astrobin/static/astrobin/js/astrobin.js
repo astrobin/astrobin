@@ -715,11 +715,13 @@ astrobin_common = {
         });
 
         $('a:not(.no-page-loader):not([data-fancybox])').live('click', function (event) {
-            var url = $(this).attr('href');
+            let url = $(this).attr('href');
 
             if (!url) {
                 return;
             }
+
+            url = url.trim();
 
             // Skip CKEditor attachments.
             if (url.indexOf('ckeditor-files') > -1) {
