@@ -1,6 +1,7 @@
 #!/bin/bash -ex
 
 export ASTROBIN_BUILD=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+export ASTROBIN_HOST_TEMPORARY_FILES=/astrobin-temporary-files
 export ASTROBIN_GUNICORN_WORKERS=1
 export ARCH=$(uname -m)
 export USER=$(whoami)

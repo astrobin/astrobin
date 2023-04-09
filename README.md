@@ -96,7 +96,9 @@ And then bring up the stack:
 export ARCH=aarch64 # (or x86_64)
 export DOCKER_REGISTRY=astrobin
 export ASTROBIN_BUILD=dev
+export ASTROBIN_HOST_TEMPORARY_FILES=/tmp/astrobin-temporary-files
 export ASTROBIN_GUNICORN_WORKERS=1
+mkdir -p ${ASTROBIN_HOST_TEMPORARY_FILES}
 compose up -d
 ```
 

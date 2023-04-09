@@ -4,7 +4,7 @@ SEND_EMAILS = os.environ.get('SEND_EMAILS', 'false').strip()
 
 if SEND_EMAILS == 'true':
     EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
-    CELERY_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    CELERY_EMAIL_BACKEND = 'astrobin.logging_email_backend.LoggingEmailBackend'
 
     CELERY_EMAIL_TASK_CONFIG = {
         'queue': 'email',
@@ -18,7 +18,7 @@ if SEND_EMAILS == 'true':
     EMAIL_PORT = int(os.environ.get('EMAIL_HOST_PORT', '25').strip())
     EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'false').strip() == 'true'
 elif SEND_EMAILS == 'dev':
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_BACKEND = 'astrobin.logging_email_backend.LoggingEmailBackend'
 
     EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost').strip()
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '').strip()
@@ -28,7 +28,7 @@ elif SEND_EMAILS == 'dev':
 
     EMAIL_DEV_RECIPIENT = os.environ.get('EMAIL_DEV_RECIPIENT', 'astrobin@astrobin.com')
 elif SEND_EMAILS == 'dummy':
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_BACKEND = 'astrobin.logging_email_backend.LoggingEmailBackend'
 
     EMAIL_HOST = 'debug_email'
     EMAIL_HOST_USER = ''
