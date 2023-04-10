@@ -6,9 +6,11 @@ from django.core.mail.backends.smtp import EmailBackend
 log = logging.getLogger('apps')
 
 
-class LoggingEmailBackend(EmailBackend):
+class CustomEmailBackend(EmailBackend):
     """
-    A wrapper around the SMTP backend that logs all emails.
+    A wrapper around the SMTP backend that:
+      - logs all emails
+      - honors the SEND_EMAILS setting
     """
 
     def send_messages(self, email_messages):
