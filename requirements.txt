@@ -9,6 +9,7 @@
 -e git+https://github.com/siovene/django.js.git@bee62fca8fb814fdccd8cbd837008e2e761a277f#egg=django.js
 -e git+https://github.com/siovene/pybbm.git@7767aaba1c5059cf1c82494b0d95d4e5b6e810a8#egg=pybbm
 -e git+https://github.com/astrobin/django-otp.git@892fedb74a9106387d47021b5f9c6ba0b1ffac54#egg=django_otp
+-e git+https://github.com/caktus/django-celery-monitor.git@3ad31848901fd8c095cf541b76c1c645d83130f4#egg=django-celery-monitor
 amqp==2.6.1
 amqplib==1.0.2
 anyjson==0.3.3
@@ -53,7 +54,6 @@ django-bouncy==0.2.8
 django-braces==1.15.0
 django-celery-beat==2.2.1
 django-celery-email==3.0.0
-django-celery-monitor==1.1.2
 django-classy-tags==2.0.0
 django-contrib-comments==2.1.0
 django-cookie-law==2.1.1
