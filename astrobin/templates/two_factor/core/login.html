@@ -68,9 +68,7 @@
                                 </a>
                             </p>
                         </div>
-                    {% endif %}
-
-                    {% if is_new_country %}
+                    {% elif is_new_country %}
                         <div class="alert alert-warning">
                             <p>
                                 {% blocktrans trimmed %}
@@ -85,6 +83,21 @@
                                 <a href="https://welcome.astrobin.com/features/security/#faq" target="_blank">
                                     {% trans "Learn more." %}
                                 </a>
+                            </p>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <p>
+                                <strong>
+                                    {% blocktrans trimmed %}
+                                        Don't want this next time?
+                                    {% endblocktrans %}
+                                </strong>
+
+                                {% blocktrans trimmed %}
+                                    Remember that you can disable two-factor authentication in your settings after
+                                    logging in.
+                                {% endblocktrans %}
                             </p>
                         </div>
                     {% endif %}
