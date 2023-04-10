@@ -13,7 +13,7 @@ from . import utils as premium_utils
 from astrobin_apps_donations import utils as donation_utils
 from .forms import MigrateDonationsForm
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class MigrateDonationsView(FormView):

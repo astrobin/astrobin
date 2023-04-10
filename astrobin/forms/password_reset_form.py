@@ -4,7 +4,7 @@ from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
 from djangojs.conf import settings
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class PasswordResetForm(BasePasswordResetForm):

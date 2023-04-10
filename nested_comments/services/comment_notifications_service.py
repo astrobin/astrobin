@@ -17,7 +17,7 @@ from common.services import AppRedirectionService
 from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class CommentNotificationsService:

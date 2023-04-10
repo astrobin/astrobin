@@ -10,7 +10,7 @@ from astrobin.templatetags.tags import thumbnail_scale
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class Solver(AbstractPlateSolvingBackend):

@@ -13,7 +13,7 @@ from astrobin.utils import get_client_country_code
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class EnforceOtpVerificationMiddleware(MiddlewareParentClass):

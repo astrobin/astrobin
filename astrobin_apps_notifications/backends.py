@@ -13,7 +13,7 @@ from notification.backends import BaseBackend
 from notification.backends.email import EmailBackend as BaseEmailBackend
 from persistent_messages.models import Message
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 def shadow_ban_applies(notice_type, recipient, context):

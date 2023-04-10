@@ -23,7 +23,7 @@ from astrobin.stories import add_story
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class ImageModerationListView(LoginRequiredMixin, GroupRequiredMixin, ListView):

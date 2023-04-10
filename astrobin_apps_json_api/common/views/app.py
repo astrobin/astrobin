@@ -17,7 +17,7 @@ from astrobin import utils
 from astrobin.models import Image
 from common.utils import get_project_root, read_in_chunks
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 @method_decorator([cache_page(3600), vary_on_headers('Cookie', 'Authorization')], name='dispatch')

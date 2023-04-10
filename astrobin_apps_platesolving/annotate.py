@@ -11,7 +11,7 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.utils import get_from_storage, ThumbnailNotReadyException
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class Annotator:

@@ -11,7 +11,7 @@ CLOUDWATCH_LOGGING_ENABLED = os.environ.get('CLOUDWATCH_LOGGING_ENABLED', 'false
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'standard': {
             'format': "[%(asctime)s] %(levelname)s [%(name)s] %(message)s",
@@ -50,37 +50,24 @@ LOGGING = {
         'django': {
             'handlers': ['console'],
             'propagate': True,
-            'level': 'INFO',
-        },
-        'django.db.backends': {
-            'handlers': ['console'],
             'level': 'ERROR',
-            'propagate': False,
-        },
-        'apps': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-        'astrobin.tasks': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
         },
         'werkzeug': {
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'propagate': True,
         },
+        '': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
     }
 }
 
 if DEBUG:
-    LOGGING['loggers']['apps']['handlers'].append('logfile')
-    LOGGING['loggers']['astrobin.tasks']['handlers'].append('logfile')
+    for logger_name, logger_config in LOGGING['loggers'].items():
+        LOGGING['loggers'][logger_name]['handlers'].append('logfile')
 
 if AWS_ACCESS_KEY_ID != 'invalid' and \
         AWS_SECRET_ACCESS_KEY != 'invalid' and \
@@ -99,6 +86,5 @@ if AWS_ACCESS_KEY_ID != 'invalid' and \
         'formatter': 'aws',
     }
 
-    LOGGING['loggers']['django']['handlers'].append('watchtower')
-    LOGGING['loggers']['apps']['handlers'].append('watchtower')
-    LOGGING['loggers']['astrobin.tasks']['handlers'].append('watchtower')
+    for logger_name, logger_config in LOGGING['loggers'].items():
+        LOGGING['loggers'][logger_name]['handlers'].append('watchtower')

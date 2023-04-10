@@ -5,7 +5,7 @@ from astrobin.forms.utils import parseKeyValueTags
 from astrobin_apps_images.models import KeyValueTag
 
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class KeyValueTagsSerializerField(serializers.Field):

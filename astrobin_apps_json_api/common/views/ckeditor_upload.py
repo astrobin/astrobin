@@ -10,7 +10,7 @@ from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_any_lite, is_any_premium, \
     is_any_ultimate
 
-log = logging.getLogger("apps")
+log = logging.getLogger(__name__)
 
 
 class CkEditorUpload(CsrfExemptMixin, LoginRequiredMixin, JSONResponseMixin, View):

@@ -5,7 +5,7 @@ from persistent_messages.models import Message
 
 from astrobin.middleware.mixins import MiddlewareParentClass
 
-log = logging.getLogger("apps")
+log = logging.getLogger(__name__)
 
 
 class MarkNotificationAsReadMiddleware(MiddlewareParentClass):

@@ -45,7 +45,7 @@ from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.services import AppRedirectionService
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class EquipmentItemViewSet(viewsets.ModelViewSet):

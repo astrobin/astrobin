@@ -9,7 +9,7 @@ from subscription.models import Subscription
 
 from astrobin_apps_payments.models import ExchangeRate
 
-logger = logging.getLogger("apps")
+logger = logging.getLogger(__name__)
 
 
 class PricingService:

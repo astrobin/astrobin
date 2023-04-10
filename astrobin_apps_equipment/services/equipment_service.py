@@ -15,7 +15,7 @@ from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKla
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class EquipmentService:

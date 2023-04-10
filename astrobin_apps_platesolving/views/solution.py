@@ -42,7 +42,7 @@ from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_tar
 from common.permissions import ReadOnly
 from common.utils import lock_table
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class SolveView(base.View):

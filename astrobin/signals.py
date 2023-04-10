@@ -69,7 +69,7 @@ from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 from .utils import get_client_country_code
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 def image_pre_save(sender, instance, **kwargs):

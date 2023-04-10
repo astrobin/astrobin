@@ -3,7 +3,7 @@ import logging
 from django.conf import settings
 from django.core.mail.backends.smtp import EmailBackend
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class CustomEmailBackend(EmailBackend):

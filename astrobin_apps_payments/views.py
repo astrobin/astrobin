@@ -20,7 +20,7 @@ from astrobin.models import Image
 from astrobin_apps_payments.services.pricing_service import PricingService
 from common.services import AppRedirectionService
 
-log = logging.getLogger("apps")
+log = logging.getLogger(__name__)
 
 
 @require_GET

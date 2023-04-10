@@ -74,7 +74,7 @@ from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 def get_image_or_404(queryset, id):

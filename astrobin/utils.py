@@ -8,7 +8,7 @@ from django.core.files.images import get_image_dimensions
 from django.db.models import Count
 from django.utils import timezone
 
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 
 def unique_items(list_with_possible_duplicates):

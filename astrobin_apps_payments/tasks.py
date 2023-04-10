@@ -8,7 +8,7 @@ from django.conf import settings
 
 from astrobin_apps_payments.models import ExchangeRate
 
-log = logging.getLogger("apps")
+log = logging.getLogger(__name__)
 
 
 @shared_task(time_limit=60, acks_late=True)

@@ -8,7 +8,7 @@ from django.urls import reverse
 from astrobin_apps_groups.models import Group
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
 
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 @shared_task(time_limit=120)
 def push_notification_for_group_join_request_approval(group_pk, user_pk, moderator_pk):

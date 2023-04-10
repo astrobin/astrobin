@@ -6,7 +6,7 @@ from django.utils.translation import gettext
 from djcelery_email.backends import CeleryEmailBackend
 from djcelery_email.tasks import send_emails
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class CustomCeleryEmailBackend(CeleryEmailBackend):

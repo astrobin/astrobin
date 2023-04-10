@@ -14,7 +14,7 @@ from astrobin_apps_notifications.utils import push_notification, build_notificat
 from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
 
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 
 @shared_task(time_limit=300)

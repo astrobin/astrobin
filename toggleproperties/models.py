@@ -7,7 +7,7 @@ from django.dispatch import receiver
 
 from common.utils import get_sentinel_user
 
-log = logging.getLogger("apps")
+log = logging.getLogger(__name__)
 
 try:
     from django.contrib.contenttypes.generic import GenericForeignKey

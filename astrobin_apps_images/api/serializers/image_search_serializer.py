@@ -5,7 +5,7 @@ from drf_haystack.serializers import HaystackSerializer
 
 from astrobin.search_indexes import ImageIndex
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class ImageSearchSerializer(HaystackSerializer):

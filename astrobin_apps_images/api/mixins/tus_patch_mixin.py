@@ -19,7 +19,7 @@ from astrobin_apps_images.api.utils import has_required_tus_header, checksum_mat
     get_or_create_temporary_file, apply_headers_to_response
 from common.exceptions import Conflict
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):

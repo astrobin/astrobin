@@ -19,7 +19,7 @@ from .utils import json2python, python2json
 base_url = 'https://nova.astrometry.net'
 default_url = base_url + '/api/'
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class Solver(AbstractPlateSolvingBackend):

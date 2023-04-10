@@ -2,7 +2,7 @@ import logging
 
 from astrobin_apps_images.api import utils
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class TusCacheMixin():
