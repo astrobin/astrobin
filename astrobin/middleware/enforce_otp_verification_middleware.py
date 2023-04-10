@@ -58,7 +58,6 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
         if not self._process(request):
             return
 
-        response = self.get_response(request)
         handle = request.POST.get('auth-username')
         password = request.POST.get('auth-password')
         user = None
