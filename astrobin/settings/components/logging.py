@@ -49,18 +49,28 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'propagate': True,
+            'propagate': False,
             'level': 'ERROR',
         },
         'werkzeug': {
             'handlers': ['console'],
             'level': 'ERROR',
-            'propagate': True,
+            'propagate': False,
+        },
+        'elasticsearch': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'urllib3': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
         },
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',
-            'propagate': True,
+            'propagate': False,
         }
     }
 }
