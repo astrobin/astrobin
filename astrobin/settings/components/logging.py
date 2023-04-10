@@ -67,6 +67,21 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'boto3': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        's3transfer': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'PIL': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',
