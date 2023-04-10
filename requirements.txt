@@ -8,6 +8,7 @@
 -e git+https://github.com/nickhargreaves/django-bootstrap-toolkit.git@edbfafbd01705aed0580205a81323d1545e4d733#egg=django_bootstrap_toolkit
 -e git+https://github.com/siovene/django.js.git@bee62fca8fb814fdccd8cbd837008e2e761a277f#egg=django.js
 -e git+https://github.com/siovene/pybbm.git@7767aaba1c5059cf1c82494b0d95d4e5b6e810a8#egg=pybbm
+-e git+https://github.com/astrobin/django-otp.git@892fedb74a9106387d47021b5f9c6ba0b1ffac54#egg=django_otp
 amqp==2.6.1
 amqplib==1.0.2
 anyjson==0.3.3
@@ -73,7 +74,6 @@ django-maintenancemode==0.11.7
 django-markup-deprecated==0.0.4
 django-model-utils==4.2.0
 django-multidb-router==0.10
-django_otp==1.1.4
 django-paypal==2.0
 django-phonenumber-field==6.4.0
 django-pipeline==2.0.8
