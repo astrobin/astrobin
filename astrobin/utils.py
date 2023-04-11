@@ -283,7 +283,7 @@ def decimal_to_degrees_minutes_seconds(value):
 def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_symbol="&prime;", second_symbol="&Prime;", precision=0):
     is_positive = value >= 0
     degrees, minutes, seconds = decimal_to_degrees_minutes_seconds(value)
-    seconds = number_unit_decimals(seconds, second_symbol, precision)
+    seconds = number_unit_decimals(seconds, second_symbol, precision, must_be_less_than=60)
 
     return f'{"+" if is_positive else "-"}{int(degrees)}{degree_symbol} {int(minutes)}{minute_symbol} {seconds}'
 
@@ -291,7 +291,7 @@ def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_
 def decimal_to_degrees_minutes_seconds_html(value, degree_symbol="°", minute_symbol="′", second_symbol="″", precision=0):
     is_positive = value >= 0
     degrees, minutes, seconds = decimal_to_degrees_minutes_seconds(value)
-    seconds = number_unit_decimals_html(seconds, second_symbol, precision)
+    seconds = number_unit_decimals_html(seconds, second_symbol, precision, must_be_less_than=60)
 
     degrees = '%s%s<span class="symbol">%s</span>' % ("+" if is_positive else "-", ("%d" % degrees).rjust(2, '0'), degree_symbol)
     minutes = '%s<span class="symbol">%s</span>' % (("%d" % minutes).rjust(2, '0'), minute_symbol)
