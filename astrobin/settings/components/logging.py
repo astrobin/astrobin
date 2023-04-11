@@ -87,6 +87,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'django_bouncy': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',
