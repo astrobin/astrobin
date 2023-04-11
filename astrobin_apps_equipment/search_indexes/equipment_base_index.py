@@ -9,7 +9,7 @@ from haystack import fields
 
 from astrobin.models import Image
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 PREPARED_USER_COUNT_CACHE_KEY = 'equipment_indexes_user_count_%s_%d'
 PREPARED_IMAGE_COUNT_CACHE_KEY = 'equipment_indexes_image_count_%s_%d'

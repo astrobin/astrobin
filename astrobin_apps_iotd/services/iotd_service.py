@@ -24,7 +24,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_fre
 from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class IotdService:

@@ -6,7 +6,7 @@ from astrobin.models import UserProfile
 from .models import NestedComment
 from .services.comment_notifications_service import CommentNotificationsService
 
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 
 class NestedCommentAdmin(admin.ModelAdmin):

@@ -3,7 +3,7 @@ import logging
 from celery import shared_task
 from django.core.management import call_command
 
-log = logging.getLogger("apps")
+log = logging.getLogger(__name__)
 
 
 @shared_task(time_limit=60, acks_late=True)

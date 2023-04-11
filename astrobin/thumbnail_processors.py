@@ -7,7 +7,7 @@ from PIL import Image, ImageOps, ImageDraw, ImageEnhance, ImageFont, ImageFilter
 from PIL.ImageCms import PyCMSError
 from easy_thumbnails.utils import is_transparent
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 with open(os.path.join(os.getcwd(), 'astrobin/static/astrobin/srgb.icc'), 'rb') as srgb_profile:
     SRGB_BYTES = srgb_profile.read()

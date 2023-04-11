@@ -6,7 +6,11 @@ from mock import patch
 
 from astrobin import utils
 from astrobin.tests.generators import Generators
-from astrobin.utils import ra_decimal_precision_from_pixel_scale, dec_decimal_precision_from_pixel_scale
+from astrobin.utils import (
+    dec_decimal_precision_from_pixel_scale, decimal_to_degrees_minutes_seconds_string,
+    decimal_to_hours_minutes_seconds_string,
+    ra_decimal_precision_from_pixel_scale,
+)
 
 
 class UtilsTest(TestCase):
@@ -210,3 +214,25 @@ class UtilsTest(TestCase):
         self.assertEqual(2, ra_decimal_precision_from_pixel_scale(1.1))
         self.assertEqual(3, ra_decimal_precision_from_pixel_scale(1))
         self.assertEqual(3, ra_decimal_precision_from_pixel_scale(.1))
+
+    def test_decimal_to_hours_minutes_seconds_string_avoid_60_seconds(self):
+        self.assertEqual(
+            '20 51 59',
+            decimal_to_hours_minutes_seconds_string(
+                312.998,
+                hour_symbol='',
+                minute_symbol='',
+                second_symbol='',
+            )
+        )
+
+    def test_decimal_to_degrees_minutes_seconds_string_avoid_60_seconds(self):
+        self.assertEqual(
+            '+3 25 59',
+            decimal_to_degrees_minutes_seconds_string(
+                3.433272140,
+                degree_symbol='',
+                minute_symbol='',
+                second_symbol='',
+            )
+        )

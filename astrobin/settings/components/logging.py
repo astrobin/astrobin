@@ -11,7 +11,7 @@ CLOUDWATCH_LOGGING_ENABLED = os.environ.get('CLOUDWATCH_LOGGING_ENABLED', 'false
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'standard': {
             'format': "[%(asctime)s] %(levelname)s [%(name)s] %(message)s",
@@ -19,7 +19,7 @@ LOGGING = {
         },
 
         'aws': {
-            'format': "%(asctime)s [%(levelname)-8s] %(message)s",
+            'format': "[%(levelname)s] [%(name)s] %(message)s",
             'datefmt': "%Y-%m-%d %H:%M:%S"
         },
     },
@@ -49,38 +49,60 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'propagate': True,
-            'level': 'INFO',
+            'propagate': False,
+            'level': 'ERROR',
         },
-        'django.db.backends': {
+        'werkzeug': {
             'handlers': ['console'],
             'level': 'ERROR',
             'propagate': False,
         },
-        'apps': {
+        'elasticsearch': {
             'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-        'astrobin.tasks': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-        'django.request': {
-            'handlers': ['mail_admins'],
             'level': 'ERROR',
-            'propagate': True,
+            'propagate': False,
         },
-        'werkzeug': {
+        'urllib3': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'boto3': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        's3transfer': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'PIL': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'celery.evcam': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django_bouncy': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        '': {
             'handlers': ['console'],
             'level': 'DEBUG',
-            'propagate': True,
-        },
+            'propagate': False,
+        }
     }
 }
 
 if DEBUG:
-    LOGGING['loggers']['apps']['handlers'].append('logfile')
-    LOGGING['loggers']['astrobin.tasks']['handlers'].append('logfile')
+    for logger_name, logger_config in LOGGING['loggers'].items():
+        LOGGING['loggers'][logger_name]['handlers'].append('logfile')
 
 if AWS_ACCESS_KEY_ID != 'invalid' and \
         AWS_SECRET_ACCESS_KEY != 'invalid' and \
@@ -99,6 +121,5 @@ if AWS_ACCESS_KEY_ID != 'invalid' and \
         'formatter': 'aws',
     }
 
-    LOGGING['loggers']['django']['handlers'].append('watchtower')
-    LOGGING['loggers']['apps']['handlers'].append('watchtower')
-    LOGGING['loggers']['astrobin.tasks']['handlers'].append('watchtower')
+    for logger_name, logger_config in LOGGING['loggers'].items():
+        LOGGING['loggers'][logger_name]['handlers'].append('watchtower')

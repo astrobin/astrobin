@@ -6,7 +6,7 @@ from django.views.generic.base import View
 
 from common.tls_adapter import TLSAdapter
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class UrlIsAvailable(JSONResponseMixin, View):

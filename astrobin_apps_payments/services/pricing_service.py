@@ -13,7 +13,7 @@ from astrobin_apps_payments.models import ExchangeRate
 from astrobin_apps_payments.types import StripeSubscription
 from astrobin_apps_premium.services.premium_service import SubscriptionDisplayName, SubscriptionName
 
-logger = logging.getLogger("apps")
+logger = logging.getLogger(__name__)
 
 
 class PricingService:

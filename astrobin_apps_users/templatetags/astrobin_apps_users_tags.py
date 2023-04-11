@@ -11,7 +11,7 @@ from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.services.premium_service import PremiumService
 from toggleproperties.models import ToggleProperty
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 register = Library()
 

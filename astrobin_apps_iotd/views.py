@@ -10,7 +10,7 @@ from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_iotd.services import IotdService
 from common.services.caching_service import CachingService
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 @method_decorator([

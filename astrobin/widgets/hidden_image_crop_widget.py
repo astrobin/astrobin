@@ -8,7 +8,7 @@ from image_cropping.widgets import HiddenImageCropWidget as BaseHiddenImageCropW
 
 from astrobin.models import Image, ImageRevision
 
-logger = logging.getLogger("apps")
+logger = logging.getLogger(__name__)
 _original_get_attrs = image_cropping.widgets.get_attrs
 
 def _s3_get_attrs(image, name):

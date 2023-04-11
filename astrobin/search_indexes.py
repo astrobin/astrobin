@@ -25,7 +25,7 @@ from astrobin_apps_users.services import UserService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 PREPARED_FIELD_CACHE_EXPIRATION = 3600
 PREPARED_MOON_PHASE_CACHE_KEY = 'search_index_prepared_moon_phase.%d'

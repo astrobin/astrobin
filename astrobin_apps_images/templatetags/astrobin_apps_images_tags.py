@@ -16,7 +16,7 @@ from astrobin_apps_iotd.services import IotdService
 from common.services import AppRedirectionService
 
 register = Library()
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 
 # Returns the URL of an image, taking into account the fact that it might be

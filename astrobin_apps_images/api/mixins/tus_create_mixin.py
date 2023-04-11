@@ -12,7 +12,7 @@ from astrobin_apps_images.api.utils import has_required_tus_header, add_expiry_h
     apply_headers_to_response
 from astrobin_apps_premium.services.premium_service import PremiumService
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):

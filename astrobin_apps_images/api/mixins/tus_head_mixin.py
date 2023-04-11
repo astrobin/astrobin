@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from astrobin_apps_images.api.mixins import TusCacheMixin
 from astrobin_apps_images.api.utils import has_required_tus_header, add_expiry_header, encode_upload_metadata
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class TusHeadMixin(TusCacheMixin, object):

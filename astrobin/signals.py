@@ -69,7 +69,7 @@ from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 from .utils import get_client_country_code
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 def image_pre_save(sender, instance, **kwargs):
@@ -412,7 +412,7 @@ post_save.connect(nested_comment_post_save, sender=NestedComment)
 
 
 def toggleproperty_post_delete(sender, instance, **kwargs):
-    if isinstance(instance.content_object, Image):
+    if isinstance(instance.content_object, Image) and not instance.content_object.is_wip:
         SearchIndexUpdateService.update_index(instance.content_object)
         SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
         for collaborator in instance.content_object.collaborators.all().iterator():
@@ -423,7 +423,7 @@ post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 
 
 def toggleproperty_post_save(sender, instance, created, **kwargs):
-    if isinstance(instance.content_object, Image):
+    if isinstance(instance.content_object, Image) and not instance.content_object.is_wip:
         SearchIndexUpdateService.update_index(instance.content_object)
         SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
         for collaborator in instance.content_object.collaborators.all().iterator():
@@ -858,8 +858,9 @@ def new_equipment_changed(sender, instance: Image, **kwargs):
                 EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
 
     Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
-    SearchIndexUpdateService.update_index(instance)
-    SearchIndexUpdateService.update_index(instance.user)
+    if not instance.is_wip:
+        SearchIndexUpdateService.update_index(instance)
+        SearchIndexUpdateService.update_index(instance.user)
 
     if action == 'pre_clear':
         item_ids = sender.objects.filter(image=instance).values_list(model_class.__name__.lower(), flat=True)

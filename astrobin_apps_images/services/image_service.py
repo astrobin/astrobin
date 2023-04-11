@@ -37,7 +37,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_fre
 from common.services import AppRedirectionService, DateTimeService
 from common.services.constellations_service import ConstellationException, ConstellationsService
 
-logger = logging.getLogger("apps")
+logger = logging.getLogger(__name__)
 
 
 class ImageService:

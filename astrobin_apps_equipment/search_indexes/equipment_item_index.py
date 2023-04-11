@@ -12,7 +12,7 @@ from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.search_indexes.equipment_base_index import EquipmentBaseIndex
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 PREPARED_MOST_OFTEN_USED_WITH_CACHE_KEY = 'equipment_indexes_most_often_used_with_%s_%d'
 

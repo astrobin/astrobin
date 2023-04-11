@@ -8,7 +8,7 @@ from django.core.files.images import get_image_dimensions
 from django.db.models import Count
 from django.utils import timezone
 
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 
 def unique_items(list_with_possible_duplicates):
@@ -221,7 +221,10 @@ def ra_decimal_precision_from_pixel_scale(pixel_scale: float = 0) -> int:
     return dec_decimal_precision_from_pixel_scale(pixel_scale) + 1
 
 
-def number_unit_decimals(value, unit, precision):
+def number_unit_decimals(value, unit, precision, must_be_less_than=None):
+    if must_be_less_than is not None and int(round(value)) >= must_be_less_than:
+        value = must_be_less_than - pow(10, -precision)
+
     if precision == 0:
         value = f'{int(round(value))}{unit}'
     else:
@@ -231,7 +234,10 @@ def number_unit_decimals(value, unit, precision):
     return value
 
 
-def number_unit_decimals_html(value, unit, precision):
+def number_unit_decimals_html(value, unit, precision, must_be_less_than=None):
+    if must_be_less_than is not None and int(round(value)) >= must_be_less_than:
+        value = must_be_less_than - pow(10, -precision)
+
     if precision == 0:
         value = '%s<span class="symbol">%s</span>' % (("%d" % value).rjust(2, '0'), unit)
     else:
@@ -251,7 +257,7 @@ def decimal_to_hours_minutes_seconds(value):
 def decimal_to_hours_minutes_seconds_string(value, hour_symbol="h", minute_symbol="m", second_symbol="s", precision=0):
     hours, minutes, seconds = decimal_to_hours_minutes_seconds(value)
     is_positive = value >= 0
-    seconds = number_unit_decimals(seconds, second_symbol, precision)
+    seconds = number_unit_decimals(seconds, second_symbol, precision, must_be_less_than=60)
 
     return f'{"" if is_positive else "-"}{hours}{hour_symbol} {minutes}{minute_symbol} {seconds}'
 
@@ -259,7 +265,7 @@ def decimal_to_hours_minutes_seconds_string(value, hour_symbol="h", minute_symbo
 def decimal_to_hours_minutes_seconds_html(value, hour_symbol="h", minute_symbol="m", second_symbol="s", precision=0):
     hours, minutes, seconds = decimal_to_hours_minutes_seconds(value)
     is_positive = value >= 0
-    seconds = number_unit_decimals_html(seconds, second_symbol, precision)
+    seconds = number_unit_decimals_html(seconds, second_symbol, precision, must_be_less_than=60)
 
     hours = '%s%s<span class="symbol">%s</span>' % ("" if is_positive else "-", ("%d"% hours).rjust(2, '0'), hour_symbol)
     minutes = '%s<span class="symbol">%s</span>' % (("%d" % minutes).rjust(2, '0'), minute_symbol)
@@ -277,7 +283,7 @@ def decimal_to_degrees_minutes_seconds(value):
 def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_symbol="&prime;", second_symbol="&Prime;", precision=0):
     is_positive = value >= 0
     degrees, minutes, seconds = decimal_to_degrees_minutes_seconds(value)
-    seconds = number_unit_decimals(seconds, second_symbol, precision)
+    seconds = number_unit_decimals(seconds, second_symbol, precision, must_be_less_than=60)
 
     return f'{"+" if is_positive else "-"}{int(degrees)}{degree_symbol} {int(minutes)}{minute_symbol} {seconds}'
 
@@ -285,7 +291,7 @@ def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_
 def decimal_to_degrees_minutes_seconds_html(value, degree_symbol="°", minute_symbol="′", second_symbol="″", precision=0):
     is_positive = value >= 0
     degrees, minutes, seconds = decimal_to_degrees_minutes_seconds(value)
-    seconds = number_unit_decimals_html(seconds, second_symbol, precision)
+    seconds = number_unit_decimals_html(seconds, second_symbol, precision, must_be_less_than=60)
 
     degrees = '%s%s<span class="symbol">%s</span>' % ("+" if is_positive else "-", ("%d" % degrees).rjust(2, '0'), degree_symbol)
     minutes = '%s<span class="symbol">%s</span>' % (("%d" % minutes).rjust(2, '0'), minute_symbol)

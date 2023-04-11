@@ -69,7 +69,7 @@ from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
 
-logger = logging.getLogger("apps")
+logger = logging.getLogger(__name__)
 
 
 class ImageSingleObjectMixin(SingleObjectMixin):

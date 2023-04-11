@@ -3,12 +3,14 @@ import logging
 from django.conf import settings
 from django.core.mail.backends.smtp import EmailBackend
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
-class LoggingEmailBackend(EmailBackend):
+class CustomEmailBackend(EmailBackend):
     """
-    A wrapper around the SMTP backend that logs all emails.
+    A wrapper around the SMTP backend that:
+      - logs all emails
+      - honors the SEND_EMAILS setting
     """
 
     def send_messages(self, email_messages):

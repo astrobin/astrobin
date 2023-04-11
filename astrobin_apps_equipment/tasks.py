@@ -17,7 +17,7 @@ from astrobin_apps_equipment.models import (
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.services import EquipmentService
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 @shared_task(time_limit=300)

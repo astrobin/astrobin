@@ -23,7 +23,7 @@ from common.services.constellations_service import ConstellationsService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class UserService:

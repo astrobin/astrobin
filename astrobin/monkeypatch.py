@@ -5,7 +5,7 @@ from numbers import Number
 from django.core.files.images import ImageFile
 from django.core.files.images import get_image_dimensions
 
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 def _get_image_dimensions(self):
     if not hasattr(self, '_dimensions_cache'):

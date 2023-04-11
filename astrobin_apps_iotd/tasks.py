@@ -9,7 +9,7 @@ from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.utils import push_notification
 from common.services import DateTimeService
 
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 
 @shared_task(time_limit=600)

@@ -3,8 +3,8 @@ import os
 SEND_EMAILS = os.environ.get('SEND_EMAILS', 'false').strip()
 
 if SEND_EMAILS == 'true':
-    EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
-    CELERY_EMAIL_BACKEND = 'astrobin.logging_email_backend.LoggingEmailBackend'
+    EMAIL_BACKEND = 'astrobin.custom_celery_email_backend.CustomCeleryEmailBackend'
+    CELERY_EMAIL_BACKEND = 'astrobin.custom_email_backend.CustomEmailBackend'
 
     CELERY_EMAIL_TASK_CONFIG = {
         'queue': 'email',
@@ -18,7 +18,7 @@ if SEND_EMAILS == 'true':
     EMAIL_PORT = int(os.environ.get('EMAIL_HOST_PORT', '25').strip())
     EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'false').strip() == 'true'
 elif SEND_EMAILS == 'dev':
-    EMAIL_BACKEND = 'astrobin.logging_email_backend.LoggingEmailBackend'
+    EMAIL_BACKEND = 'astrobin.custom_email_backend.CustomEmailBackend'
 
     EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost').strip()
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '').strip()
@@ -28,7 +28,7 @@ elif SEND_EMAILS == 'dev':
 
     EMAIL_DEV_RECIPIENT = os.environ.get('EMAIL_DEV_RECIPIENT', 'astrobin@astrobin.com')
 elif SEND_EMAILS == 'dummy':
-    EMAIL_BACKEND = 'astrobin.logging_email_backend.LoggingEmailBackend'
+    EMAIL_BACKEND = 'astrobin.custom_email_backend.CustomEmailBackend'
 
     EMAIL_HOST = 'debug_email'
     EMAIL_HOST_USER = ''

@@ -9,7 +9,7 @@ from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.tasks import push_notification_for_group_join_request_rejection
 from astrobin_apps_groups.views.mixins import RestrictToModeratedGroupsMixin, RestrictToGroupModeratorsMixin
 
-logger = logging.getLogger('apps')
+logger = logging.getLogger(__name__)
 
 
 class GroupRejectJoinRequestView(JSONResponseMixin, LoginRequiredMixin,

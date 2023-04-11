@@ -4,7 +4,7 @@ import requests
 import simplejson
 from django.conf import settings
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class CloudflareService:

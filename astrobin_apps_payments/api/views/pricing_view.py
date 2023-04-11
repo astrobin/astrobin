@@ -8,7 +8,7 @@ from rest_framework.authtoken.models import Token
 
 from astrobin_apps_payments.services.pricing_service import PricingService
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class PricingView(JSONResponseMixin, View):

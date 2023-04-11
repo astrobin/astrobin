@@ -66,7 +66,7 @@ from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution, PlateSolvingSettings, PlateSolvingAdvancedSettings
 from nested_comments.models import NestedComment
 
-log = logging.getLogger('apps')
+log = logging.getLogger(__name__)
 
 
 class HasSolutionMixin(object):
