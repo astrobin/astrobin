@@ -82,6 +82,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'celery.evcam': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',
