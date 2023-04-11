@@ -2,6 +2,7 @@ import logging
 
 from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
+from django.utils.translation import gettext
 from djangojs.conf import settings
 
 log = logging.getLogger(__name__)
@@ -12,6 +13,29 @@ class PasswordResetForm(BasePasswordResetForm):
     email_template_name = 'registration/password_reset_email.txt'
     html_email_template_name = 'registration/password_reset_email.html'
     from_email = settings.DEFAULT_FROM_EMAIL
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        users = self.get_users(email)
+        length = len(list(users))
+
+        if length == 0:
+            self.add_error(
+                'email',
+                gettext(
+                    'This email address was not found in our database. Email address might be case sensitive.'
+                )
+            )
+        elif length > 1:
+            self.add_error(
+                'email',
+                gettext(
+                    'We found more than one account associated with this email address and we cannot proceed with this '
+                    'operation. Please get in touch with support to resolve the issue.'
+                )
+            )
+
+        return email
 
     def send_mail(
             self,
