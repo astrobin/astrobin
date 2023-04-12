@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.core.signing import BadSignature, SignatureExpired
 from django_otp import devices_for_user
 from django_otp.plugins.otp_email.models import EmailDevice
 from two_factor.views.utils import validate_remember_device_cookie
@@ -46,11 +47,14 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
 
         for key, value in request.COOKIES.items():
             if key.startswith(settings.TWO_FACTOR_REMEMBER_COOKIE_PREFIX) and value:
-                remember = validate_remember_device_cookie(
-                    value,
-                    user,
-                    otp_device_id
-                )
+                try:
+                    remember = validate_remember_device_cookie(
+                        value,
+                        user,
+                        otp_device_id
+                    )
+                except (BadSignature, SignatureExpired):
+                    return False
 
         return remember
 
