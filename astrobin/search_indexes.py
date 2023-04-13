@@ -13,6 +13,7 @@ from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, 
 from celery_haystack.indexes import CelerySearchIndex
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
+from safedelete.models import SafeDeleteModel
 
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
@@ -1056,18 +1057,24 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
         return NestedComment
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(deleted=False, image__deleted=None)
+        return self.get_model().objects.filter(deleted=False)
 
     def should_update(self, instance, **kwargs):
-        return (
-            not instance.deleted and (
-                not hasattr(instance, 'image') or (
-                    not instance.image.deleted and
-                    not instance.image.is_wip and
-                    instance.image.moderator_decision == ModeratorDecision.APPROVED
-                )
-            )
-        )
+        if instance.deleted:
+            return False
+
+        if issubclass(type(instance.content_object), SafeDeleteModel):
+            if instance.content_object.deleted:
+                return False
+
+        if isinstance(instance.content_object, Image):
+            if (
+                    instance.content_object.is_wip or
+                    instance.content_object.moderator_decision != ModeratorDecision.APPROVED
+            ):
+                return False
+
+        return True
 
     def get_updated_field(self):
         return "updated"
