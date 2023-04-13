@@ -1091,7 +1091,7 @@ class ForumTopicIndex(CelerySearchIndex, Indexable):
 
     def should_update(self, instance, **kwargs):
         return (
-            instance.forum.group is None and
+            not hasattr(instance.forum, 'group') and
             not instance.on_moderation and
             not instance.forum.hidden and
             not instance.forum.category.hidden
@@ -1120,7 +1120,7 @@ class ForumPostIndex(CelerySearchIndex, Indexable):
 
     def should_update(self, instance, **kwargs):
         return (
-            instance.topic.forum.group is None and
+            not hasattr(instance.topic.forum, 'group') and
             not instance.on_moderation and
             not instance.topic.forum.hidden and
             not instance.topic.forum.category.hidden
