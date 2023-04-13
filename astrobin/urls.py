@@ -14,7 +14,6 @@ from threaded_messages.views import (
     undelete as messages_undelete, view as messages_view,
 )
 from two_factor.urls import urlpatterns as tf_urls
-from two_factor.views import LoginView
 
 from astrobin import lookups
 from astrobin.api import (
@@ -43,6 +42,7 @@ from astrobin.views import (
     user_profile_save_locations, user_profile_save_preferences, user_profile_save_privacy,
     user_profile_seen_iotd_tp_is_explicit_submission, user_profile_seen_realname, user_profile_shadow_ban,
 )
+from astrobin.views.auth.login import LoginView
 from astrobin.views.auth.logout import LogoutView
 from astrobin.views.contact import ContactRedirectView
 from astrobin.views.forums import LatestTopicsView
@@ -135,10 +135,9 @@ urlpatterns += [
     ### TWO_FACTOR                                                          ###
     ###########################################################################
 
-    # Override login in order to provide `redirect_authenticated_user`
     url(
         r'^account/login/$',
-        LoginView.as_view(redirect_authenticated_user=True),
+        LoginView.as_view(),
         name='two_factor:login'
     ),
     url('', include(tf_urls)),
