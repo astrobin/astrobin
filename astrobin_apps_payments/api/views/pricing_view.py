@@ -32,8 +32,8 @@ class PricingView(JSONResponseMixin, View):
 
         return self.render_json_response(
             {
-                'fullPrice': PricingService.get_full_price(product.lower(), currency.upper()),
+                'fullPrice': PricingService.get_full_price(product.lower(), currency.upper(), user=user),
                 'discount': PricingService.get_discount_amount(product.lower(), currency.upper(), user=user),
                 'price': PricingService.get_price(product.lower(), currency.upper(), user=user)
             }
-        )
+)

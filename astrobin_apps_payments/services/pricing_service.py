@@ -165,6 +165,10 @@ class PricingService:
         return None
 
     @staticmethod
+    def get_stripe_price(product: str, country_code: str, currency: str, recurring: bool):
+        pass
+
+    @staticmethod
     def is_new_customer(customer_id: str) -> bool:
         stripe.api_key = settings.STRIPE['keys']['secret']
         charges = stripe.Charge.list(customer=customer_id, limit=1)
