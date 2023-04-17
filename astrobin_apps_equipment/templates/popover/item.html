@@ -70,6 +70,43 @@
                                         {% blocktrans trimmed with name=listing.name retailer=listing.retailer %}
                                             Shop <strong>{{ name }}</strong> at {{ retailer }}
                                         {% endblocktrans %}
+
+                                        {% if listing.stock_status %}
+                                            {% spaceless %}
+                                                <span
+                                                    class="no-wrap"
+                                                    rel="tooltip"
+                                                    title="{% trans 'Last update' %}: {{ listing.updated | date:' jS, Y' }}">
+                                                    (
+                                                        <i
+                                                            class="icon-circle"
+                                                            {% if listing.stock_status == "UNKNOWN" %}style="color: grey;"{% endif %}
+                                                            {% if listing.stock_status == "BACK_ORDER" %}style="color: orange;"{% endif %}
+                                                            {% if listing.stock_status == "IN_STOCK" %}style="color: green;"{% endif %}
+                                                            {% if listing.stock_status == "OUT_OF_STOCK" %}style="color: red;"{% endif %}
+                                                        ></i>
+
+                                                        {% if listing.stock_status == "UNKNOWN" %}
+                                                            {% trans "Stock status unknown" %}
+                                                        {% endif %}
+
+                                                        {% if listing.stock_status == "BACK_ORDER" %}
+                                                            {% trans "Back ordered" %}
+                                                        {% endif %}
+
+                                                        {% if listing.stock_status == "IN_STOCK" %}
+                                                            {% blocktrans trimmed with x=listing.stock_amount %}
+                                                                {{x}} in stock
+                                                            {% endblocktrans %}
+                                                        {% endif %}
+
+                                                        {% if listing.stock_status == "OUT_OF_STOCK" %}
+                                                            {% trans "Currently out of stock" %}
+                                                        {% endif %}
+                                                    )
+                                                </span>
+                                            {% endspaceless %}
+                                        {% endif %}
                                     </a>
                                 </div>
                             </div>
