@@ -58,19 +58,19 @@ class AgenaStockImporterPlugin(StockImporterPluginInterface):
 
     def __parse(self, xml_str: str) -> List[StockInterface]:
         root = ElementTree.fromstring(xml_str)
-        products = root.find('channel').find('Products').findall("Product")
+        products = root.find('channel').find('products').findall("product")
         stock_list = []
 
         for product in products:
             try:
                 astrobin_id = product.find('ca_astrobin_product_id').text
                 pk, klass = self.parse_astrobin_id(astrobin_id)
-                name = product.find('Name').text
+                name = product.find('name').text
                 sku = product.find('sku').text
                 url = product.find('product_url').text
                 stock_status_str = product.find('stock_status').text
                 stock_status = self.parse_stock_status(stock_status_str)
-                stock_amount = int(product.find('stock-qty').text)
+                stock_amount = int(product.find('stock_qty').text)
                 stock_obj = StockInterface(pk, klass, name, sku, url, stock_status, stock_amount)
                 stock_list.append(stock_obj)
             except Exception as e:
