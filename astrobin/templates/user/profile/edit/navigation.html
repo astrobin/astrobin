@@ -29,7 +29,7 @@
             </a>
         </li>
         <li class="last {% current request '^/profile/edit/flickr/$' %}">
-            <a href="{% url 'profile_flickr_import' %}">
+            <a data-no-instant href="{% url 'profile_flickr_import' %}">
                 <i class="icon-flickr"></i> {% trans "Import from Flickr" %}
                 <i class="icon-chevron-right"></i>
             </a>

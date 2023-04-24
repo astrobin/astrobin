@@ -3615,8 +3615,12 @@ hr {
   text-align: center;
 }
 
+img.flickr-photo-to-import {
+  border: 2px solid grey;
+}
+
 img.flickr-photo-to-import-selected {
-  border: 1px solid white;
+  border: 2px solid green;
 }
 
 .tooltip-inner {
