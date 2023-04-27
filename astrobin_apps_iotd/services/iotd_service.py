@@ -1,6 +1,6 @@
 import logging
 from datetime import date, datetime, timedelta
-from typing import List
+from typing import List, Union
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -39,7 +39,8 @@ class IotdService:
     def get_iotds(self):
         return Iotd.objects.filter(
             Q(date__lte=datetime.now().date()) &
-            Q(image__deleted__isnull=True))
+            Q(image__deleted__isnull=True)
+        )
 
     def is_top_pick(self, image):
         # type: (Image) -> bool
@@ -57,7 +58,7 @@ class IotdService:
     def get_top_pick_nominations(self):
         return TopPickNominationsArchive.objects.all()
 
-    def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> List[Image]:
+    def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> List[IotdSubmissionQueueEntry]:
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=submitter)
         queue_sort_order_before = member_settings.queue_sort_order
@@ -77,12 +78,12 @@ class IotdService:
         ]
 
         return [
-            x.image for x in IotdSubmissionQueueEntry.objects \
-                .select_related('image') \
+            x.image for x in IotdSubmissionQueueEntry.objects
+                .select_related('image')
                 .filter(submitter=submitter).order_by(*order_by)
         ]
 
-    def get_review_queue(self, reviewer: User, queue_sort_order: str = None) -> List[Image]:
+    def get_review_queue(self, reviewer: User, queue_sort_order: str = None) -> List[IotdReviewQueueEntry]:
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=reviewer)
         queue_sort_order_before = member_settings.queue_sort_order
@@ -101,7 +102,7 @@ class IotdService:
                 else 'last_submission_timestamp'
         ]
 
-        images = []
+        images: List[IotdReviewQueueEntry] = []
 
         for entry in IotdReviewQueueEntry.objects \
                 .select_related('image') \
@@ -112,7 +113,7 @@ class IotdService:
 
         return images
 
-    def get_judgement_queue(self, judge: User, queue_sort_order: str = None):
+    def get_judgement_queue(self, judge: User, queue_sort_order: str = None) -> List[IotdJudgementQueueEntry]:
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=judge)
         queue_sort_order_before = member_settings.queue_sort_order
@@ -131,7 +132,7 @@ class IotdService:
                 else 'last_vote_timestamp'
         ]
 
-        images = []
+        images: List[IotdJudgementQueueEntry] = []
 
         for entry in IotdJudgementQueueEntry.objects \
                 .select_related('image') \
@@ -147,12 +148,14 @@ class IotdService:
 
         if Iotd.objects.filter(
                 judge=judge,
-                created__date=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY:
+                created__date=DateTimeService.today()
+        ).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY:
             return gettext("you already selected %s IOTD(s) today (UTC)" % settings.IOTD_JUDGEMENT_MAX_PER_DAY)
 
         if Iotd.objects.filter(
                 judge=judge,
-                date__gt=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE:
+                date__gt=DateTimeService.today()
+        ).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE:
             return gettext("you already selected %s scheduled IOTD(s)" % settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE)
 
         if Iotd.objects.filter(date__gt=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS:
@@ -170,7 +173,8 @@ class IotdService:
             DateTimeService.next_midnight() if \
                 Iotd.objects.filter(
                     judge=judge,
-                    created__date=today).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY \
+                    created__date=today
+                ).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY \
                 else now  # datetime
 
         latest_scheduled = Iotd.objects.filter(judge=judge).order_by('-date').first()  # Iotd
@@ -178,7 +182,8 @@ class IotdService:
             DateTimeService.next_midnight(latest_scheduled.date) if \
                 Iotd.objects.filter(
                     judge=judge,
-                    date__gt=today).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE \
+                    date__gt=today
+                ).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE \
                 else now
 
         next_time_due_to_max_scheduled = \
@@ -270,6 +275,7 @@ class IotdService:
                 ~Q(
                     Q(user__userprofile__exclude_from_competitions=True) |
                     Q(user=submitter) |
+                    Q(collaborators=submitter) |
                     Q(subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)) |
                     Q(
                         Q(iotdsubmission__submitter=submitter) &
@@ -287,7 +293,9 @@ class IotdService:
                     image=image,
                     published=image.submitted_for_iotd_tp_consideration
                 )
-                log.debug(f'Image {image.get_id()} "{image.title}" assigned to submitter {submitter.pk} "{submitter.username}".')
+                log.debug(
+                    f'Image {image.get_id()} "{image.title}" assigned to submitter {submitter.pk} "{submitter.username}".'
+                )
 
     def update_review_queues(self):
         def _compute_queue(reviewer: User):
@@ -311,6 +319,7 @@ class IotdService:
             ).exclude(
                 Q(iotdsubmission__submitter=reviewer) |
                 Q(user=reviewer) |
+                Q(collaborators=reviewer) |
                 Q(iotddismissedimage__user=reviewer) |
                 Q(
                     Q(iotdvote__reviewer=reviewer) &
@@ -352,7 +361,8 @@ class IotdService:
             ).exclude(
                 Q(iotdvote__reviewer=judge) |
                 Q(iotddismissedimage__user=judge) |
-                Q(user=judge)
+                Q(user=judge) |
+                Q(collaborators=judge)
             )
 
         for judge in User.objects.filter(groups__name='iotd_judges'):
@@ -416,10 +426,12 @@ class IotdService:
                 image.user.userprofile.save(keep_deleted=True)
 
             thumb = image.thumbnail_raw('gallery', None, sync=True)
-            push_notification([image.user], None, 'image_submitted_to_iotd_tp', {
-                'image': image,
-                'image_thumbnail': thumb.url if thumb else None
-            })
+            push_notification(
+                [image.user], None, 'image_submitted_to_iotd_tp', {
+                    'image': image,
+                    'image_thumbnail': thumb.url if thumb else None
+                }
+            )
 
         return may, reason
 
