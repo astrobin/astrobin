@@ -145,7 +145,7 @@ class IotdTest(TestCase):
         self.image.is_wip = False
         self.image.save(keep_deleted=True)
 
-    def test_submission_model_image_owner_must_not_be_excluded_from_cometitions(self):
+    def test_submission_model_image_owner_must_not_be_excluded_from_competitions(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         self.image.user.userprofile.exclude_from_competitions = True
         self.image.user.userprofile.save(keep_deleted=True)
@@ -156,7 +156,7 @@ class IotdTest(TestCase):
         self.image.user.userprofile.exclude_from_competitions = False
         self.image.user.userprofile.save(keep_deleted=True)
 
-    def test_submission_model_image_owner_must_not_be_banned_from_cometitions(self):
+    def test_submission_model_image_owner_must_not_be_banned_from_competitions(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         self.image.user.userprofile.banned_from_competitions = datetime.now()
         self.image.user.userprofile.save(keep_deleted=True)
@@ -177,6 +177,18 @@ class IotdTest(TestCase):
                 image=self.image)
         self.image.user = self.user
         self.image.save(keep_deleted=True)
+
+    def test_submission_model_cannot_submit_own_image_as_collaborator(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.image.user = self.user
+        self.image.collaborators.add(self.submitter_1)
+        self.image.save(keep_deleted=True)
+        with self.assertRaisesRegex(ValidationError, "image you collaborated to"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image
+            )
+        self.image.collaborators.clear()
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_submission_model_image_cannot_be_past_iotd(self):
@@ -313,6 +325,24 @@ class IotdTest(TestCase):
                 image=submission_1.image)
         self.image.user = self.user
         self.image.save(keep_deleted=True)
+
+    def test_vote_model_cannot_vote_own_image_as_collaborator(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+
+        submission_1 = IotdSubmission.objects.create(
+            submitter=self.submitter_1,
+            image=self.image
+        )
+
+        self.image.user = self.user
+        self.image.collaborators.add(self.reviewer_1)
+        self.image.save(keep_deleted=True)
+        with self.assertRaisesRegex(ValidationError, "image you collaborated to"):
+            IotdVote.objects.create(
+                reviewer=self.reviewer_1,
+                image=submission_1.image
+            )
+        self.image.collaborators.clear()
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     def test_vote_model_can_vote_image_by_judge(self):
@@ -579,6 +609,15 @@ class IotdTest(TestCase):
                 image=self.image)
         self.image.user = self.user
         self.image.save(keep_deleted=True)
+
+        # Cannot elect image collaborated to
+        self.image.collaborators.add(self.judge_1)
+        with self.assertRaisesRegex(ValidationError, "image you collaborated to"):
+            Iotd.objects.create(
+                judge=self.judge_1,
+                image=self.image
+            )
+        self.image.collaborators.clear()
 
         # Can elect an image authored by a judge
         self.image.user = self.judge_2
