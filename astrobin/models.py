@@ -914,6 +914,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("AC", "AstroCamp"),
         ("AHK", "Astro Hostel Krasnodar"),
         ("AOWA", "Astro Observatories Western Australia"),
+        ("ATLA", "Atlaskies Observatory"),
         ("CS", "ChileScope"),
         ("DMA", "Dark Matters Astrophotography"),
         ("DSNM", "Dark Sky New Mexico"),
