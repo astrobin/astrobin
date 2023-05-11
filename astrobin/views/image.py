@@ -1030,10 +1030,10 @@ class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()
-        if not image.is_wip:
-            image.is_wip = True
-            image.save(keep_deleted=True)
-            messages.success(request, _("Image moved to the staging area."))
+
+        ImageService(image).demote_to_staging_area()
+
+        messages.success(request, _("Image moved to the staging area."))
 
         return super(ImageDemoteView, self).post(request, args, kwargs)
 

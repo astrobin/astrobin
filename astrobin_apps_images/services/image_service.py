@@ -34,6 +34,7 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
+from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService, DateTimeService
 from common.services.constellations_service import ConstellationException, ConstellationsService
 
@@ -478,11 +479,20 @@ class ImageService:
             self.image.is_wip = False
             self.image.save(keep_deleted=True)
 
+            UserService(self.image.user).clear_gallery_image_list_cache()
+
             if not previously_published:
                 if not skip_notifications:
                     push_notification_for_new_image.apply_async(args=(self.image.pk,), countdown=10)
                 if self.image.moderator_decision == ModeratorDecision.APPROVED:
                     add_story(self.image.user, verb='VERB_UPLOADED_IMAGE', action_object=self.image)
+
+    def demote_to_staging_area(self):
+        if not self.image.is_wip:
+            self.image.is_wip = True
+            self.image.save(keep_deleted=True)
+
+            UserService(self.image.user).clear_gallery_image_list_cache()
 
     def delete_stories(self):
         Action.objects.target(self.image).delete()
