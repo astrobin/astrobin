@@ -765,6 +765,7 @@ class ImageDetailView(ImageDetailViewBase):
                 user=self.request.user
             ) if self.request.user.is_authenticated else None,
             'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
+            'in_collections': Collection.objects.filter(user=image.user, images=image),
             'auto_submit_to_iotd_tp_process_form': AutoSubmitToIotdTpProcessForm() \
                 if self.request.user.is_authenticated \
                 else None,
