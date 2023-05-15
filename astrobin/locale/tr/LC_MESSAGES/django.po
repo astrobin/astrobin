@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 21:34+0000\n"
+"POT-Creation-Date: 2023-05-15 08:00+0000\n"
 "PO-Revision-Date: 2021-03-23 01:39+0000\n"
 "Last-Translator: mustastum <scriptyper@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -902,6 +902,17 @@ msgstr "Boylam (saniye)"
 msgid "Are you a robot?"
 msgstr ""
 
+msgid ""
+"This email address was not found in our database. Email address might be "
+"case sensitive."
+msgstr ""
+
+msgid ""
+"We found more than one account associated with this email address and we "
+"cannot proceed with this operation. Please get in touch with support to "
+"resolve the issue."
+msgstr ""
+
 msgid "Recipients"
 msgstr ""
 
@@ -1000,6 +1011,11 @@ msgstr "Takip etmekten vazgeç"
 
 msgid "Follow"
 msgstr "Takip et"
+
+msgid ""
+"Your account is temporarily or permanently suspended. If you believe this is "
+"in error, please get in touch using the Help menu."
+msgstr ""
 
 msgid "None (All rights reserved)"
 msgstr "Hiçbiri (Tüm hakları saklıdır)"
@@ -1867,6 +1883,12 @@ msgid "The paid subscriptions are too expensive"
 msgstr ""
 
 msgid "I prefer not to say"
+msgstr ""
+
+msgid "Suspended"
+msgstr ""
+
+msgid "Suspension reason"
 msgstr ""
 
 msgid "Allow others to see when you created your AstroBin account"
@@ -3272,8 +3294,8 @@ msgstr ""
 msgid "Help"
 msgstr "Yardım"
 
-msgid "Contact"
-msgstr "Bağlantı"
+msgid "Support"
+msgstr ""
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr ""
@@ -3462,6 +3484,9 @@ msgid "Remove me"
 msgstr ""
 
 msgid "Acquired at"
+msgstr ""
+
+msgid "In these collections"
 msgstr ""
 
 msgid ""
@@ -4413,6 +4438,9 @@ msgstr "Eğer bu konum eksik ya da hatalı veri barındırıyorsa lütfen düzel
 
 msgid "What is this site?"
 msgstr "Bu site nedir?"
+
+msgid "Contact"
+msgstr "Bağlantı"
 
 msgid "Gallery"
 msgstr "Galeri"
@@ -6159,6 +6187,14 @@ msgid ""
 "time password token via e-mail."
 msgstr ""
 
+msgid "Don't want this next time?"
+msgstr ""
+
+msgid ""
+"Remember that you can disable two-factor authentication in your settings "
+"after logging in."
+msgstr ""
+
 msgid "As a last resort, you can use a backup token:"
 msgstr ""
 
@@ -6314,8 +6350,8 @@ msgid ""
 "will be displayed in\n"
 "                                        <a href=\"%(profile_url)s\">your "
 "profile</a> and here on the home page. You can\n"
-"                                        <a href=\"%(flickr_url)s\">import "
-"from Flickr</a> too."
+"                                        <a data-no-instant href="
+"\"%(flickr_url)s\">import from Flickr</a> too."
 msgstr ""
 
 msgid "Your API Keys"
@@ -6594,6 +6630,11 @@ msgstr "Hangi set"
 msgid "Import photos"
 msgstr "Fotoğrafları al"
 
+msgid ""
+"We couldn't find any albums or sets in your Flickr account. Please create a "
+"Flickr album and place the images you want to import there."
+msgstr ""
+
 msgid "Authenticate with Flickr"
 msgstr "Flickr'a giriş yapın"
 
@@ -6708,6 +6749,17 @@ msgid "Restore selected"
 msgstr ""
 
 msgid "Empty trash"
+msgstr ""
+
+msgid "Account suspended"
+msgstr ""
+
+msgid ""
+"\n"
+"            Your account is temporarily or permanently suspended. If you "
+"believe this is in error, please get in touch\n"
+"            using the Help menu.\n"
+"        "
 msgstr ""
 
 msgid ""
