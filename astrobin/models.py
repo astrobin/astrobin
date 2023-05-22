@@ -608,6 +608,7 @@ class Telescope(Gear):
         ("CATA LURIE-HOUGHTON", _("Catadioptric: Lurie-Houghton")),
         ("CATA MAKSUTOV", _("Catadioptric: Maksutov")),
         ("CATA MAKSUTOV-CASSEGRAIN", _("Catadioptric: Maksutov-Cassegrain")),
+        ("CATA MAKSUTOV-NEWTONIAN", _("Catadioptric: Maksutov-Newtonian")),
         ("CATA MOD DALL-KIRKHAM", _("Catadioptric: modified Dall-Kirkham")),
         ("CATA SCHMIDT CAMERA", _("Catadioptric: Schmidt camera")),
         ("CATA SCHMIDT-CASSEGRAIN", _("Catadioptric: Schmidt-Cassegrain")),
