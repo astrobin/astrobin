@@ -65,6 +65,18 @@
                                             {{ ssa.focal_length }}
                                         </p>
                                     {% endif %}
+                                    {% if ssa.iso %}
+                                        <p>
+                                            <strong class="card-label">ISO:</strong>
+                                            {{ ssa.iso }}
+                                        </p>
+                                    {% endif %}
+                                    {% if ssa.gain %}
+                                        <p>
+                                            <strong class="card-label">Gain:</strong>
+                                            {{ ssa.gain }}
+                                        </p>
+                                    {% endif %}
                                     {% if ssa.cmi %}
                                         <p><strong class="card-label">{% trans "CMI" %}:</strong> {{ ssa.cmi }}</p>
                                     {% endif %}
