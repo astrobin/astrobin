@@ -46,7 +46,7 @@
 
 {% block content %}
     {% with cache_timeout=request.user.is_authenticated|yesno:"0,600" %}
-        {% cache cache_timeout image_page_cache user.is_authenticated REQUEST_COUNTRY LANGUAGE_CODE image.pk image.updated revision_label nav_ctx nav_ctx_extra %}
+        {% cache cache_timeout image_page_cache request.user_agent request.user_agentuser.is_authenticated REQUEST_COUNTRY LANGUAGE_CODE image.pk image.updated revision_label nav_ctx nav_ctx_extra %}
             {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or constellation or show_contains %}
                 <div class="subtitle">
                 {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" %}
@@ -135,14 +135,13 @@
                         {% include 'image/detail/image_title.html' %}
                     </div>
 
-                    {% if request.user_agent.is_mobile %}
-                        <div class="visible-phone">
-                            <div class="image-like-and-bookmark-buttons">
-                                {% include 'image/detail/like.html' %}
-                                {% include 'image/detail/bookmark.html' %}
-                            </div>
-                            {% include 'image/detail/info.html' %}
+                    {% if request.user_agent.is_mobile and not request.user_agent.is_tablet %}
+                        <div class="image-like-and-bookmark-buttons">
+                            {% include 'image/detail/like.html' %}
+                            {% include 'image/detail/bookmark.html' %}
                         </div>
+
+                        {% include 'image/detail/info.html' %}
                     {% endif %}
 
                     {% include 'image/detail/image_card_equipment.html' %}
@@ -153,17 +152,13 @@
 
                 <div class="span4 image-page-right-pane"> <!-- right pane -->
                     {% if request.user_agent.is_pc or request.user_agent.is_tablet or TESTING %}
-                        <div class="hidden-phone">
-                            <div class="image-like-and-bookmark-buttons">
-                                {% include 'image/detail/like.html' %}
-                                {% include 'image/detail/bookmark.html' %}
-                            </div>
-                            {% include 'image/detail/info.html' %}
+                        <div class="image-like-and-bookmark-buttons">
+                            {% include 'image/detail/like.html' %}
+                            {% include 'image/detail/bookmark.html' %}
                         </div>
 
-                        {% with ad_container_classes='hidden-phone' %}
-                            {% include 'image/detail/ad.html' %}
-                        {% endwith %}
+                        {% include 'image/detail/info.html' %}
+                        {% include 'image/detail/ad.html' %}
                     {% endif %}
 
                     {% include 'image/detail/revisions.html' %}
@@ -172,7 +167,7 @@
                     {% include 'image/detail/histogram.html' %}
                     {% include 'image/detail/groups.html' %}
                     {% include 'image/detail/collections.html' %}
-                </div> <!-- /left pane -->
+                </div> <!-- /right pane -->
             </div> <!-- /main row-->
         {% endcache %}
     {% endwith %}
