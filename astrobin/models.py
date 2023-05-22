@@ -2302,6 +2302,20 @@ class SolarSystem_Acquisition(Acquisition):
         blank=True,
     )
 
+    iso = models.PositiveIntegerField(
+        "ISO",
+        null=True,
+        blank=True,
+    )
+
+    gain = models.DecimalField(
+        "Gain",
+        null=True,
+        blank=True,
+        max_digits=7,
+        decimal_places=2,
+    )
+
     cmi = models.DecimalField(
         verbose_name=_("CMI"),
         help_text=_("Latitude of the first Central Meridian."),
