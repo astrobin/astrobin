@@ -3,6 +3,7 @@ AVAILABLE_IMAGE_MODS = ('inverted',)
 THUMBNAIL_DEBUG = DEBUG
 THUMBNAIL_NAMER = 'easy_thumbnails.namers.source_hashed'
 THUMBNAIL_ALWAYS_GENERATE = THUMBNAIL_DEBUG
+THUMBNAIL_PRESERVE_EXTENSIONS = ('png',)
 THUMBNAIL_PROCESSORS = (
     # Keep before colorspace
     'astrobin.thumbnail_processors.tiff_force_8bit',

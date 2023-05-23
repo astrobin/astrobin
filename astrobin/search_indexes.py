@@ -13,6 +13,7 @@ from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, 
 from celery_haystack.indexes import CelerySearchIndex
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
+from safedelete.models import SafeDeleteModel
 
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
@@ -699,6 +700,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(moderator_decision=ModeratorDecision.APPROVED)
 
+    def should_update(self, instance, **kwargs):
+        return not instance.is_wip and instance.moderator_decision == ModeratorDecision.APPROVED
+
     def get_model(self):
         return Image
 
@@ -1053,7 +1057,24 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
         return NestedComment
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(deleted=False, image__deleted=None)
+        return self.get_model().objects.filter(deleted=False)
+
+    def should_update(self, instance, **kwargs):
+        if instance.deleted:
+            return False
+
+        if issubclass(type(instance.content_object), SafeDeleteModel):
+            if instance.content_object.deleted:
+                return False
+
+        if isinstance(instance.content_object, Image):
+            if (
+                    instance.content_object.is_wip or
+                    instance.content_object.moderator_decision != ModeratorDecision.APPROVED
+            ):
+                return False
+
+        return True
 
     def get_updated_field(self):
         return "updated"
@@ -1072,7 +1093,16 @@ class ForumTopicIndex(CelerySearchIndex, Indexable):
             forum__group__isnull=True,
             on_moderation=False,
             forum__hidden=False,
-            forum__category__hidden=False)
+            forum__category__hidden=False
+        )
+
+    def should_update(self, instance, **kwargs):
+        return (
+            not hasattr(instance.forum, 'group') and
+            not instance.on_moderation and
+            not instance.forum.hidden and
+            not instance.forum.category.hidden
+        )
 
     def get_updated_field(self):
         return "updated"
@@ -1092,7 +1122,16 @@ class ForumPostIndex(CelerySearchIndex, Indexable):
             topic__forum__group__isnull=True,
             on_moderation=False,
             topic__forum__hidden=False,
-            topic__forum__category__hidden=False)
+            topic__forum__category__hidden=False
+        )
+
+    def should_update(self, instance, **kwargs):
+        return (
+            not hasattr(instance.topic.forum, 'group') and
+            not instance.on_moderation and
+            not instance.topic.forum.hidden and
+            not instance.topic.forum.category.hidden
+        )
 
     def get_updated_field(self):
         return "updated"

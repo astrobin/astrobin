@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = "Syncs IOTD AstroBin Groups to equivalemnt contrib.auth groups"
+    help = "Syncs IOTD AstroBin Groups to equivalent contrib.auth groups"
 
     def handle(self, *args, **options):
         from itertools import chain

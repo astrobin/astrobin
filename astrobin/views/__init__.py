@@ -35,6 +35,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import last_modified, require_GET, require_POST
 from django.views.decorators.vary import vary_on_cookie
 from el_pagination.decorators import page_template
+from flickrapi import FlickrError
 from flickrapi.auth import FlickrAccessToken
 from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
@@ -1731,14 +1732,17 @@ def user_profile_flickr_import(request):
             log.debug("Flickr import (user %d): set in POST request" % request.user.pk)
             set_id = request.POST['id_flickr_set']
             urls_sq = {}
-            for photo in flickr.walk_set(set_id, extras='url_sq'):
-                urls_sq[photo.attrib['id']] = photo.attrib['url_sq']
-                response_dict['flickr_photos'] = urls_sq
+            try:
+                for photo in flickr.walk_set(set_id, extras='url_sq'):
+                    urls_sq[photo.attrib['id']] = photo.attrib['url_sq']
+                    response_dict['flickr_photos'] = urls_sq
+            except FlickrError:
+                response_dict['flickr_photos'] = []
         elif 'flickr_selected_photos[]' in request.POST:
             log.debug("Flickr import (user %s): photos in POST request" % request.user.username)
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
-            for index, photo_id in enumerate(selected_photos):
+            for idx, photo_id in enumerate(selected_photos):
                 log.debug("Flickr import (user %d): iterating photo %s" % (request.user.pk, photo_id))
                 sizes = flickr.photos_getSizes(photo_id=photo_id)
                 info = flickr.photos_getInfo(photo_id=photo_id).find('photo')

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 21:34+0000\n"
+"POT-Creation-Date: 2023-05-15 08:00+0000\n"
 "PO-Revision-Date: 2020-10-26 10:36+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -908,6 +908,17 @@ msgstr "Długość geograficzna (w sekundach)"
 msgid "Are you a robot?"
 msgstr ""
 
+msgid ""
+"This email address was not found in our database. Email address might be "
+"case sensitive."
+msgstr ""
+
+msgid ""
+"We found more than one account associated with this email address and we "
+"cannot proceed with this operation. Please get in touch with support to "
+"resolve the issue."
+msgstr ""
+
 msgid "Recipients"
 msgstr ""
 
@@ -1006,6 +1017,11 @@ msgstr "Przestań śledzić"
 
 msgid "Follow"
 msgstr "Śledź"
+
+msgid ""
+"Your account is temporarily or permanently suspended. If you believe this is "
+"in error, please get in touch using the Help menu."
+msgstr ""
 
 msgid "None (All rights reserved)"
 msgstr "Brak licencji (Wszystkie prawa zastrzeżone)"
@@ -1876,6 +1892,12 @@ msgid "The paid subscriptions are too expensive"
 msgstr ""
 
 msgid "I prefer not to say"
+msgstr ""
+
+msgid "Suspended"
+msgstr ""
+
+msgid "Suspension reason"
 msgstr ""
 
 msgid "Allow others to see when you created your AstroBin account"
@@ -3297,8 +3319,8 @@ msgstr ""
 msgid "Help"
 msgstr "Pomoc"
 
-msgid "Contact"
-msgstr "Kontakt"
+msgid "Support"
+msgstr ""
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr ""
@@ -3506,6 +3528,9 @@ msgid "Remove me"
 msgstr ""
 
 msgid "Acquired at"
+msgstr ""
+
+msgid "In these collections"
 msgstr ""
 
 msgid ""
@@ -4467,6 +4492,9 @@ msgstr ""
 
 msgid "What is this site?"
 msgstr "Czym jest AstroBin?"
+
+msgid "Contact"
+msgstr "Kontakt"
 
 msgid "Gallery"
 msgstr "Galeria"
@@ -6246,6 +6274,14 @@ msgid ""
 "time password token via e-mail."
 msgstr ""
 
+msgid "Don't want this next time?"
+msgstr ""
+
+msgid ""
+"Remember that you can disable two-factor authentication in your settings "
+"after logging in."
+msgstr ""
+
 msgid "As a last resort, you can use a backup token:"
 msgstr ""
 
@@ -6414,14 +6450,9 @@ msgid ""
 "will be displayed in\n"
 "                                        <a href=\"%(profile_url)s\">your "
 "profile</a> and here on the home page. You can\n"
-"                                        <a href=\"%(flickr_url)s\">import "
-"from Flickr</a> too."
+"                                        <a data-no-instant href="
+"\"%(flickr_url)s\">import from Flickr</a> too."
 msgstr ""
-"Użyj tego przycisku aby załadować zdjęcie do\n"
-"<strong>Galerii Publicznej</strong>. Będzie wyświetlony w\n"
-"<a href=\"%(profile_url)s\">Twoim profilu</a> i na stronie głównej.\n"
-"Możesz również importować zdjęcia z <a href=\"%(flickr_url)s\">serwisu "
-"Flickr</a>. "
 
 msgid "Your API Keys"
 msgstr "Twoje klucze API"
@@ -6705,6 +6736,11 @@ msgstr "Który zestaw"
 msgid "Import photos"
 msgstr "Importuj zdjęcia"
 
+msgid ""
+"We couldn't find any albums or sets in your Flickr account. Please create a "
+"Flickr album and place the images you want to import there."
+msgstr ""
+
 msgid "Authenticate with Flickr"
 msgstr "Zaloguj do Flickr"
 
@@ -6820,6 +6856,17 @@ msgid "Restore selected"
 msgstr ""
 
 msgid "Empty trash"
+msgstr ""
+
+msgid "Account suspended"
+msgstr ""
+
+msgid ""
+"\n"
+"            Your account is temporarily or permanently suspended. If you "
+"believe this is in error, please get in touch\n"
+"            using the Help menu.\n"
+"        "
 msgstr ""
 
 msgid ""
@@ -7338,6 +7385,21 @@ msgid ""
 "see your name. Please use letters, digits, and the special characters @/./"
 "+/-/_ only."
 msgstr ""
+
+#~ msgid ""
+#~ "Use this button to upload an image to the\n"
+#~ "                                        <strong>Public Area</strong>. It "
+#~ "will be displayed in\n"
+#~ "                                        <a href=\"%(profile_url)s\">your "
+#~ "profile</a> and here on the home page. You can\n"
+#~ "                                        <a href=\"%(flickr_url)s\">import "
+#~ "from Flickr</a> too."
+#~ msgstr ""
+#~ "Użyj tego przycisku aby załadować zdjęcie do\n"
+#~ "<strong>Galerii Publicznej</strong>. Będzie wyświetlony w\n"
+#~ "<a href=\"%(profile_url)s\">Twoim profilu</a> i na stronie głównej.\n"
+#~ "Możesz również importować zdjęcia z <a href=\"%(flickr_url)s\">serwisu "
+#~ "Flickr</a>. "
 
 #~ msgid ""
 #~ "If selected, AstroBin will use a resizing algorithm that slightly "

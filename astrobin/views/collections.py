@@ -1,3 +1,5 @@
+from typing import List
+
 import simplejson
 from annoying.functions import get_object_or_None
 from braces.views import JSONResponseMixin, LoginRequiredMixin
@@ -20,6 +22,7 @@ from astrobin.forms import (
 from astrobin.forms.utils import parseKeyValueTags
 from astrobin.models import Collection, Image, UserProfile
 from astrobin_apps_images.models import KeyValueTag
+from astrobin_apps_images.services import CollectionService
 from astrobin_apps_users.services import UserService
 
 
@@ -153,10 +156,10 @@ class UserCollectionsAddRemoveImages(
 
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
-            self.get_object().images.clear()
-            for pk in request.POST.getlist('images[]'):
-                image = Image.objects.get(pk=pk)
-                self.get_object().images.add(image)
+            collection: Collection = self.get_object()
+            image_pks: List[int] = request.POST.getlist('images[]')
+
+            CollectionService(collection).add_remove_images(Image.objects.filter(pk__in=image_pks))
 
             messages.success(request, _("Collection updated!"))
 

@@ -608,6 +608,7 @@ class Telescope(Gear):
         ("CATA LURIE-HOUGHTON", _("Catadioptric: Lurie-Houghton")),
         ("CATA MAKSUTOV", _("Catadioptric: Maksutov")),
         ("CATA MAKSUTOV-CASSEGRAIN", _("Catadioptric: Maksutov-Cassegrain")),
+        ("CATA MAKSUTOV-NEWTONIAN", _("Catadioptric: Maksutov-Newtonian")),
         ("CATA MOD DALL-KIRKHAM", _("Catadioptric: modified Dall-Kirkham")),
         ("CATA SCHMIDT CAMERA", _("Catadioptric: Schmidt camera")),
         ("CATA SCHMIDT-CASSEGRAIN", _("Catadioptric: Schmidt-Cassegrain")),
@@ -914,6 +915,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("AC", "AstroCamp"),
         ("AHK", "Astro Hostel Krasnodar"),
         ("AOWA", "Astro Observatories Western Australia"),
+        ("ATLA", "Atlaskies Observatory"),
         ("CS", "ChileScope"),
         ("DMA", "Dark Matters Astrophotography"),
         ("DSNM", "Dark Sky New Mexico"),
@@ -2298,6 +2300,20 @@ class SolarSystem_Acquisition(Acquisition):
         help_text=_("The focal length of the whole optical train, including barlow lenses or other components."),
         null=True,
         blank=True,
+    )
+
+    iso = models.PositiveIntegerField(
+        "ISO",
+        null=True,
+        blank=True,
+    )
+
+    gain = models.DecimalField(
+        "Gain",
+        null=True,
+        blank=True,
+        max_digits=7,
+        decimal_places=2,
     )
 
     cmi = models.DecimalField(

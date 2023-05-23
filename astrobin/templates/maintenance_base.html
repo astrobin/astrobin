@@ -260,7 +260,7 @@
 
                             {% else %} <!-- request.user.is_authenticated -->
                             <li>
-                                <a href="{% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
+                                <a data-no-instant href="{% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
                                     {% trans "Login" %}
                                 </a>
                             </li>

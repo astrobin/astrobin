@@ -1,5 +1,5 @@
 import re
-from typing import List
+from typing import List, Union
 
 from django.db.models import QuerySet
 from django.urls import reverse
@@ -12,9 +12,7 @@ class SolutionService:
     solution = None  # type: Solution
 
     @staticmethod
-    def get_or_create_advanced_settings(target):
-        # type: (Union[Image, ImageRevision]) -> (PlateSolvingAdvancedSettings, bool)
-
+    def get_or_create_advanced_settings(target: Union[Image, ImageRevision]) -> (PlateSolvingAdvancedSettings, bool):
         if target._meta.model_name == 'image':
             images = Image.objects_including_wip.filter(user=target.user).order_by('-pk')  # type: QuerySet[Image]
             for image in images:

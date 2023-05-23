@@ -14,6 +14,9 @@ def may_toggle_submission_image(user, image):
     if user == image.user:
         return False, _("You cannot submit your own image.")
 
+    if user in list(image.collaborators.all()):
+        return False, _("You cannot submit an image you collaborated to.")
+
     if image.is_wip:
         return False, _("Images in the staging area cannot be submitted.")
 
@@ -65,6 +68,9 @@ def may_toggle_vote_image(user, image):
 
     if user == image.user:
         return False, _("You cannot vote for your own image.")
+
+    if user in list(image.collaborators.all()):
+        return False, _("You cannot vote for an image you collaborated to.")
 
     if image.is_wip:
         return False, _("Images in the staging area cannot be voted for.")
@@ -130,6 +136,9 @@ def may_elect_iotd(user, image):
 
     if user == image.user:
         return False, _("You cannot elect your own image.")
+
+    if user in list(image.collaborators.all()):
+        return False, _("You cannot elect an image you collaborated to.")
 
     if image.is_wip:
         return False, _("Images in the staging area cannot be elected.")
