@@ -136,6 +136,10 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             raise forms.ValidationError(
                 _('Sorry, this username already exists with a different capitalization.')
             )
+        elif "@" in value:
+            raise forms.ValidationError(
+                _('Sorry, your username cannot contain the "@" character.')
+            )
 
         return value
 
@@ -173,7 +177,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             'username': _(
                 'This is your handle on AstroBin and will be part of the URL to your gallery. If you do not specify a'
                 'first and last name below, it will also be how others see your name. Please use letters, digits, and '
-                'the special characters @/./+/-/_ only.'
+                'the special characters ./+/-/_ only.'
             ),
         }
 
