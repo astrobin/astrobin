@@ -58,6 +58,7 @@ class AppConfig(JSONResponseMixin, View):
             'IMAGE_UPLOAD_ENDPOINT': '/api/v2/images/image-upload/',
             'IMAGE_REVISION_UPLOAD_ENDPOINT': '/api/v2/images/image-revision-upload/',
             'DATA_UPLOAD_MAX_MEMORY_SIZE': settings.DATA_UPLOAD_MAX_MEMORY_SIZE,
+            'STRIPE_CUSTOMER_PORTAL_KEY': settings.STRIPE['keys']['customer-portal-key'],
         })
 
     def __get_i18n_hash__(self):
