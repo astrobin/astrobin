@@ -64,17 +64,23 @@ def _compareNames(a, b):
     :return: a negative number if the left operand is heavier than thee left, 0 if equal, a positive number otherwise.
     """
     key = {
-        SubscriptionName.LITE_CLASSIC_AUTORENEW: 0,
-        SubscriptionName.LITE_CLASSIC: 1,
-        SubscriptionName.LITE_2020: 2,
-        SubscriptionName.PREMIUM_CLASSIC_AUTORENEW: 3,
-        SubscriptionName.PREMIUM_CLASSIC: 4,
-        SubscriptionName.PREMIUM_CLASSIC_20_PERCENT_DISCOUNT: 5,
-        SubscriptionName.PREMIUM_CLASSIC_30_PERCENT_DISCOUNT: 6,
-        SubscriptionName.PREMIUM_CLASSIC_40_PERCENT_DISCOUNT: 7,
-        SubscriptionName.PREMIUM_CLASSIC_50_PERCENT_DISCOUNT: 8,
-        SubscriptionName.PREMIUM_2020: 9,
-        SubscriptionName.ULTIMATE_2020: 10
+        SubscriptionName.LITE_CLASSIC_AUTORENEW.value: 1,
+        SubscriptionName.LITE_CLASSIC.value: 1.1,
+        SubscriptionName.LITE_2020.value: 1.2,
+        SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value: 1.3,
+        SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value: 1.4,
+        SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value: 2,
+        SubscriptionName.PREMIUM_CLASSIC.value: 2.1,
+        SubscriptionName.PREMIUM_CLASSIC_20_PERCENT_DISCOUNT.value: 2.2,
+        SubscriptionName.PREMIUM_CLASSIC_30_PERCENT_DISCOUNT.value: 2.3,
+        SubscriptionName.PREMIUM_CLASSIC_40_PERCENT_DISCOUNT.value: 2.4,
+        SubscriptionName.PREMIUM_CLASSIC_50_PERCENT_DISCOUNT.value: 2.5,
+        SubscriptionName.PREMIUM_2020.value: 2.6,
+        SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value: 2.7,
+        SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value: 2.8,
+        SubscriptionName.ULTIMATE_2020.value: 3,
+        SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value: 3,
+        SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value: 3.1,
     }
 
     return key[b.subscription.name] - key[a.subscription.name]

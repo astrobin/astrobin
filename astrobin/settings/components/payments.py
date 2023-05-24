@@ -11,6 +11,7 @@ STRIPE = {
         'publishable': test_or_live('STRIPE_PUBLISHABLE_KEY_XXXX'),
         'secret': test_or_live('STRIPE_SECRET_KEY_XXXX'),
         'endpoint-secret': test_or_live('STRIPE_ENDPOINT_SECRET_XXXX'),
+        'customer-portal': test_or_live('STRIPE_CUSTOMER_PORTAL_KEY_XXXX'),
     },
     'products': {
         'lite': test_or_live('STRIPE_PRODUCT_LITE_XXXX'),
