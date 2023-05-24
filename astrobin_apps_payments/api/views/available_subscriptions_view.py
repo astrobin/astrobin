@@ -3,6 +3,7 @@ import logging
 from braces.views import JSONResponseMixin
 from django.http import HttpResponse
 from django.views import View
+from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import APIException
 
 from astrobin_apps_payments.api.serializers import StripeSubscriptionSerializer
@@ -13,9 +14,15 @@ log = logging.getLogger('apps')
 
 class AvailableSubscriptionsView(JSONResponseMixin, View):
     def get(self, request, *args, **kwargs) -> HttpResponse:
-        autorenew_supported = PricingService.non_autorenewing_supported(request.user)
+        user = request.user
+        if not user.is_authenticated and 'HTTP_AUTHORIZATION' in request.META:
+            token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
+            token = Token.objects.get(key=token_in_header)
+            user = token.user
+
+        autorenew_supported = PricingService.non_autorenewing_supported(user)
         subscriptions = StripeSubscriptionSerializer(
-            data=PricingService.get_available_subscriptions(request.user),
+            data=PricingService.get_available_subscriptions(user),
             many=True,
         )
 

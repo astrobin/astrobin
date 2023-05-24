@@ -72,7 +72,7 @@ class ForumTest(TestCase):
         # Premium members have a free pass
         g, created = Group.objects.get_or_create(name="astrobin_premium")
         s, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.PREMIUM_CLASSIC,
+            name=SubscriptionName.PREMIUM_CLASSIC.value,
             price=1,
             group=g,
             category="premium")

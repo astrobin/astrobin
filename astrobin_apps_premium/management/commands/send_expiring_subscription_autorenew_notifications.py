@@ -22,11 +22,11 @@ class Command(BaseCommand):
         user_subscriptions = UserSubscription.objects\
             .filter(
                 subscription__name__in = [
-                    SubscriptionName.LITE_CLASSIC_AUTORENEW,
-                    SubscriptionName.LITE_2020_AUTORENEW_MONTHLY,
-                    SubscriptionName.PREMIUM_CLASSIC_AUTORENEW,
-                    SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY,
-                    SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY,
+                    SubscriptionName.LITE_CLASSIC_AUTORENEW.value,
+                    SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value,
+                    SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value,
+                    SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value,
+                    SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value,
                 ],
                 cancelled=False,
                 expires = datetime.now() + timedelta(days = 7))\
@@ -40,11 +40,11 @@ class Command(BaseCommand):
         user_subscriptions = UserSubscription.objects \
             .filter(
             subscription__name__in=[
-                SubscriptionName.LITE_CLASSIC_AUTORENEW,
-                SubscriptionName.LITE_2020_AUTORENEW_YEARLY,
-                SubscriptionName.PREMIUM_CLASSIC_AUTORENEW,
-                SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY,
-                SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY,
+                SubscriptionName.LITE_CLASSIC_AUTORENEW.value,
+                SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value,
+                SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value,
             ],
             cancelled=False,
             expires=datetime.now() + timedelta(days=30)) \

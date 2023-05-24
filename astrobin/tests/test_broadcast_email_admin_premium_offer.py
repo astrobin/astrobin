@@ -79,7 +79,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         group, created = Group.objects.get_or_create(name="astrobin_premium")
         subscription, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.PREMIUM_CLASSIC,
+            name=SubscriptionName.PREMIUM_CLASSIC.value,
             price=1,
             group=group,
             category="premium")
@@ -109,7 +109,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         group, created = Group.objects.get_or_create(name="astrobin_premium")
         subscription, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.PREMIUM_CLASSIC,
+            name=SubscriptionName.PREMIUM_CLASSIC.value,
             price=1,
             group=group,
             category="premium")
@@ -142,7 +142,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         group, created = Group.objects.get_or_create(name="astrobin_premium")
         subscription, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.LITE_CLASSIC,
+            name=SubscriptionName.LITE_CLASSIC.value,
             price=1,
             group=group,
             category="premium")
@@ -172,7 +172,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         group, created = Group.objects.get_or_create(name="astrobin_premium")
         subscription, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.PREMIUM_CLASSIC_30_PERCENT_DISCOUNT,
+            name=SubscriptionName.PREMIUM_CLASSIC_30_PERCENT_DISCOUNT.value,
             price=1,
             group=group,
             category="premium_offer_discount_30")

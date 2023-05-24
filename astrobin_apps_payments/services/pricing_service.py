@@ -1,6 +1,5 @@
 import datetime
 import logging
-from math import ceil
 from typing import List, Optional
 
 import stripe
@@ -9,8 +8,8 @@ from django.contrib.auth.models import User
 from stripe.error import StripeError
 from subscription.models import Subscription, UserSubscription
 
-from astrobin_apps_payments.models import ExchangeRate
 from astrobin_apps_payments.types import StripeSubscription
+from astrobin_apps_payments.types.subscription_recurring_unit import SubscriptionRecurringUnit
 from astrobin_apps_premium.services.premium_service import SubscriptionDisplayName, SubscriptionName
 
 logger = logging.getLogger(__name__)
@@ -20,49 +19,16 @@ class PricingService:
     lite_2020: StripeSubscription = StripeSubscription(
         SubscriptionName.LITE_2020,
         SubscriptionDisplayName.LITE,
-        settings.STRIPE['products']['non-recurring']['lite'],
-        settings.STRIPE['prices']['non-recurring']['lite']['yearly'],
-        None,
     )
 
     premium_2020: StripeSubscription = StripeSubscription(
         SubscriptionName.PREMIUM_2020,
         SubscriptionDisplayName.PREMIUM,
-        settings.STRIPE['products']['non-recurring']['premium'],
-        settings.STRIPE['prices']['non-recurring']['premium']['yearly'],
-        None,
     )
 
     ultimate_2020: StripeSubscription = StripeSubscription(
         SubscriptionName.ULTIMATE_2020,
         SubscriptionDisplayName.ULTIMATE,
-        settings.STRIPE['products']['non-recurring']['ultimate'],
-        settings.STRIPE['prices']['non-recurring']['ultimate']['yearly'],
-        None,
-    )
-
-    lite_2020_recurring: StripeSubscription = StripeSubscription(
-        SubscriptionName.LITE_2020,
-        SubscriptionDisplayName.LITE,
-        settings.STRIPE['products']['recurring']['lite'],
-        settings.STRIPE['prices']['recurring']['lite']['yearly'],
-        settings.STRIPE['prices']['recurring']['lite']['monthly'],
-    )
-
-    premium_2020_recurring: StripeSubscription = StripeSubscription(
-        SubscriptionName.PREMIUM_2020,
-        SubscriptionDisplayName.PREMIUM,
-        settings.STRIPE['products']['recurring']['premium'],
-        settings.STRIPE['prices']['recurring']['premium']['yearly'],
-        settings.STRIPE['prices']['recurring']['premium']['monthly'],
-    )
-
-    ultimate_2020_recurring: StripeSubscription = StripeSubscription(
-        SubscriptionName.ULTIMATE_2020,
-        SubscriptionDisplayName.ULTIMATE,
-        settings.STRIPE['products']['recurring']['ultimate'],
-        settings.STRIPE['prices']['recurring']['ultimate']['yearly'],
-        settings.STRIPE['prices']['recurring']['ultimate']['monthly'],
     )
 
     @staticmethod
@@ -80,50 +46,48 @@ class PricingService:
 
     @staticmethod
     def get_available_subscriptions(user: User) -> List[StripeSubscription]:
-        if PricingService.non_autorenewing_supported(user):
-            return [
-                PricingService.lite_2020_recurring,
-                PricingService.premium_2020_recurring,
-                PricingService.ultimate_2020_recurring,
-                PricingService.lite_2020,
-                PricingService.premium_2020,
-                PricingService.ultimate_2020
-            ]
-
         return [
-            PricingService.lite_2020_recurring,
-            PricingService.premium_2020_recurring,
-            PricingService.ultimate_2020_recurring
+            PricingService.lite_2020,
+            PricingService.premium_2020,
+            PricingService.ultimate_2020
         ]
 
     @staticmethod
-    def get_price(product: str, currency: str, user: User = None) -> float:
-        price = PricingService.get_full_price(product, currency)
-        discount_amount = PricingService.get_discount_amount(product, currency, user)
+    def get_price(
+            product_name: SubscriptionDisplayName,
+            country_code: str,
+            currency: str,
+            recurring_unit: SubscriptionRecurringUnit,
+            user: User = None
+    ) -> float:
+        price = PricingService.get_full_price(product_name, country_code, currency, recurring_unit)
+        discount_amount = PricingService.get_discount_amount(product_name, country_code, currency, recurring_unit, user)
 
         return price - discount_amount
 
     @staticmethod
-    def get_full_price(product: str, currency: str) -> float:
-        subscriptions = {
-            'lite': Subscription.objects.get(name=SubscriptionName.LITE_2020.value),
-            'premium': Subscription.objects.get(name=SubscriptionName.PREMIUM_2020.value),
-            'ultimate': Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020.value),
-        }
-
-        base_price = subscriptions[product].price
-        # TODO
-        return base_price
-        # exchange_rate = ExchangeRate.objects.filter(
-        #     target=currency.upper()).first().rate if currency.upper() != "CHF" else 1
-        # exact_price = base_price * exchange_rate
-        # rounded_price = ceil(exact_price * 2) / 2
-        #
-        # return rounded_price
+    def get_full_price(
+            product_name: SubscriptionDisplayName,
+            country_code: str,
+            currency: str,
+            recurring_unit: SubscriptionRecurringUnit
+    ) -> float:
+        return PricingService.get_stripe_price(
+            product_name,
+            country_code,
+            currency,
+            recurring_unit,
+        )
 
     @staticmethod
-    def get_discount_amount(product: str, currency: str, user: User = None) -> float:
-        price = PricingService.get_full_price(product, currency)
+    def get_discount_amount(
+            product_name: SubscriptionDisplayName,
+            country_code: str,
+            currency: str,
+            recurring_unit: SubscriptionRecurringUnit,
+            user: User = None,
+    ) -> float:
+        price = PricingService.get_full_price(product_name, country_code, currency, recurring_unit)
 
         if user and user.is_authenticated:
             coupon = PricingService.get_stripe_coupon(user)
@@ -158,15 +122,150 @@ class PricingService:
     @staticmethod
     def get_stripe_customer(user: User):
         stripe.api_key = settings.STRIPE['keys']['secret']
-        customer = stripe.Customer.list(email=user.email, limit=1)
-        if len(customer['data']) == 1:
-            return customer['data'][0]
+        try:
+            customer = stripe.Customer.list(email=user.email, limit=1)
+            if len(customer['data']) == 1:
+                return customer['data'][0]
+        except StripeError as e:
+            logger.error('Error retrieving Stripe customer %s: %s' % (user.email, e))
 
         return None
 
     @staticmethod
-    def get_stripe_price(product: str, country_code: str, currency: str, recurring: bool):
-        pass
+    def get_stripe_price_object(
+            product_name: SubscriptionDisplayName,
+            country_code: str,
+            currency: str,
+            recurring_unit: SubscriptionRecurringUnit
+    ):
+        # Tier 1: High-Income Countries
+        tier_1 = [
+            'AT',  # Austria
+            'AU',  # Australia
+            'BE',  # Belgium
+            'CA',  # Canada
+            'CH',  # Switzerland
+            'DE',  # Germany
+            'DK',  # Denmark
+            'ES',  # Spain
+            'FI',  # Finland
+            'FR',  # France
+            'GB',  # United Kingdom
+            'IE',  # Ireland
+            'IS',  # Iceland
+            'JP',  # Japan
+            'LU',  # Luxembourg
+            'NL',  # Netherlands
+            'NO',  # Norway
+            'NZ',  # New Zealand
+            'SE',  # Sweden
+            'SG',  # Singapore
+            'US'  # United States
+        ]
+
+        # Tier 2: Upper-Middle-Income Countries
+        tier_2 = [
+            'AR',  # Argentina
+            'BR',  # Brazil
+            'CL',  # Chile
+            'CN',  # China
+            'CR',  # Costa Rica
+            'CZ',  # Czech Republic
+            'EE',  # Estonia
+            'GR',  # Greece
+            'HU',  # Hungary
+            'ID',  # Indonesia
+            'IL',  # Israel
+            'IN',  # India
+            'IR',  # Iran
+            'IT',  # Italy
+            'KR',  # South Korea
+            'LT',  # Lithuania
+            'LV',  # Latvia
+            'MT',  # Malta
+            'MX',  # Mexico
+            'MY',  # Malaysia
+            'PA',  # Panama
+            'PL',  # Poland
+            'PT',  # Portugal
+            'RU',  # Russia
+            'SA',  # Saudi Arabia
+            'SI',  # Slovenia
+            'SK',  # Slovakia
+            'TH',  # Thailand
+            'TR',  # Turkey
+            'UA',  # Ukraine
+            'UY',  # Uruguay
+            'ZA'  # South Africa
+        ]
+
+        # Tier 3: Lower-Middle-Income Countries
+        tier_3 = [
+            'AF',  # Afghanistan
+            'BD',  # Bangladesh
+            'CI',  # Ivory Coast
+            'EG',  # Egypt
+            'ET',  # Ethiopia
+            'GH',  # Ghana
+            'HT',  # Haiti
+            'KE',  # Kenya
+            'LB',  # Lebanon
+            'LK',  # Sri Lanka
+            'MA',  # Morocco
+            'MM',  # Myanmar
+            'MN',  # Mongolia
+            'MZ',  # Mozambique
+            'NG',  # Nigeria
+            'PH',  # Philippines
+            'PK',  # Pakistan
+            'SD',  # Sudan
+            'SN',  # Senegal
+            'TZ',  # Tanzania
+            'UG',  # Uganda
+            'VN',  # Vietnam
+            'YE',  # Yemen
+            'ZM',  # Zambia
+            'ZW'  # Zimbabwe
+        ]
+
+        recurring_unit_key = recurring_unit.value.lower() if recurring_unit is not None else 'one-year'
+
+        if country_code.upper() in tier_1:
+            recurring_unit_key += '-tier-1'
+        elif country_code.upper() in tier_2:
+            recurring_unit_key += '-tier-2'
+        elif country_code.upper() in tier_3:
+            recurring_unit_key += '-tier-3'
+        else:
+            recurring_unit_key += '-tier-1'
+            logger.warning('Invalid country code %s, defaulting to tier 1' % country_code.upper())
+
+        stripe.api_key = settings.STRIPE['keys']['secret']
+        stripe_price_id = settings.STRIPE['prices'][product_name.value.lower()][recurring_unit_key]
+
+        try:
+            stripe_price = stripe.Price.retrieve(stripe_price_id, expand=['currency_options'])
+            return stripe_price
+        except StripeError as e:
+            logger.error('Error retrieving Stripe price %s: %s' % (stripe_price_id, e))
+            return None
+
+
+    @staticmethod
+    def get_stripe_price(
+            product_name: SubscriptionDisplayName,
+            country_code: str,
+            currency: str,
+            recurring_unit: SubscriptionRecurringUnit
+    ) -> float:
+        stripe_price = PricingService.get_stripe_price_object(product_name, country_code, currency, recurring_unit)
+        if stripe_price:
+            if currency.lower() not in stripe_price['currency_options']:
+                currency = 'usd'
+            return stripe_price['currency_options'][currency.lower()]['unit_amount'] / 100
+
+        return 0
+
 
     @staticmethod
     def is_new_customer(customer_id: str) -> bool:

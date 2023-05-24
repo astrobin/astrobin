@@ -594,7 +594,15 @@ def subscription_paid(sender, **kwargs):
             user=user,
             event='new usersubscription',
             timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
-        push_notification([user], None, 'new_subscription', {'BASE_URL': settings.BASE_URL})
+        push_notification(
+            [user],
+            None,
+            'new_subscription',
+            {
+                'BASE_URL': settings.BASE_URL,
+                'subscription': subscription
+            }
+        )
     else:
         push_notification([user], None, 'new_payment', {'BASE_URL': settings.BASE_URL})
 
@@ -626,12 +634,28 @@ def subscription_signed_up(sender, **kwargs):
             .update(active=False)
 
         if Transaction.objects.filter(
-                user=user,
-                event='new usersubscription',
-                timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
-            push_notification([user], None, 'new_subscription', {'BASE_URL': settings.BASE_URL})
+            user=user,
+            event='new usersubscription',
+            timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
+        ):
+            push_notification(
+                [user],
+                None,
+                'new_subscription',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                }
+            )
         else:
-            push_notification([user], None, 'new_payment', {'BASE_URL': settings.BASE_URL})
+            push_notification(
+                [user],
+                None,
+                'new_payment',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                })
 
 
 signed_up.connect(subscription_signed_up)

@@ -123,14 +123,8 @@ class UserSubscriptionSerializer(serializers.ModelSerializer):
 
 
 class PaymentSerializer(serializers.ModelSerializer):
-    currency = CharField(read_only=True, source='subscription.currency')
+    subscription_name = CharField(read_only=True, source='subscription.name')
 
     class Meta:
         model = Transaction
-        fields = (
-            'id',
-            'timestamp',
-            'event',
-            'amount',
-            'currency',
-        )
+        fields = '__all__'

@@ -8,50 +8,48 @@ def test_or_live(key: str) -> str:
 
 STRIPE = {
     'keys': {
-        'publishable': test_or_live('STRIPE_PUBLISHABLE_XXXX_KEY'),
-        'secret': test_or_live('STRIPE_SECRET_XXXX_KEY'),
+        'publishable': test_or_live('STRIPE_PUBLISHABLE_KEY_XXXX'),
+        'secret': test_or_live('STRIPE_SECRET_KEY_XXXX'),
         'endpoint-secret': test_or_live('STRIPE_ENDPOINT_SECRET_XXXX'),
     },
     'products': {
-        'non-recurring': {
-            'lite': test_or_live('STRIPE_PRODUCT_LITE_XXXX'),
-            'premium': test_or_live('STRIPE_PRODUCT_PREMIUM_XXXX'),
-            'ultimate': test_or_live('STRIPE_PRODUCT_ULTIMATE_XXXX'),
-        },
-        'recurring': {
-            'lite': test_or_live('STRIPE_PRODUCT_LITE_RECURRING_XXXX'),
-            'premium': test_or_live('STRIPE_PRODUCT_PREMIUM_RECURRING_XXXX'),
-            'ultimate': test_or_live('STRIPE_PRODUCT_ULTIMATE_RECURRING_XXXX'),
-        },
+        'lite': test_or_live('STRIPE_PRODUCT_LITE_XXXX'),
+        'premium': test_or_live('STRIPE_PRODUCT_PREMIUM_XXXX'),
+        'ultimate': test_or_live('STRIPE_PRODUCT_ULTIMATE_XXXX'),
     },
     'prices': {
-        'non-recurring': {
-            'lite': {
-                'monthly': test_or_live('STRIPE_PRICE_LITE_MONTHLY_XXXX'),
-                'yearly': test_or_live('STRIPE_PRICE_LITE_YEARLY_XXXX'),
-            },
-            'premium': {
-                'monthly': test_or_live('STRIPE_PRICE_PREMIUM_MONTHLY_XXXX'),
-                'yearly': test_or_live('STRIPE_PRICE_PREMIUM_YEARLY_XXXX'),
-            },
-            'ultimate': {
-                'monthly': test_or_live('STRIPE_PRICE_ULTIMATE_MONTHLY_XXXX'),
-                'yearly': test_or_live('STRIPE_PRICE_ULTIMATE_YEARLY_XXXX'),
-            },
+        'lite': {
+            'monthly-tier-1': test_or_live('STRIPE_PRICE_LITE_MONTHLY_TIER_1_XXXX'),
+            'yearly-tier-1': test_or_live('STRIPE_PRICE_LITE_YEARLY_TIER_1_XXXX'),
+            'one-year-tier-1': test_or_live('STRIPE_PRICE_LITE_ONE_YEAR_TIER_1_XXXX'),
+            'monthly-tier-2': test_or_live('STRIPE_PRICE_LITE_MONTHLY_TIER_2_XXXX'),
+            'yearly-tier-2': test_or_live('STRIPE_PRICE_LITE_YEARLY_TIER_2_XXXX'),
+            'one-year-tier-2': test_or_live('STRIPE_PRICE_LITE_ONE_YEAR_TIER_2_XXXX'),
+            'monthly-tier-3': test_or_live('STRIPE_PRICE_LITE_MONTHLY_TIER_3_XXXX'),
+            'yearly-tier-3': test_or_live('STRIPE_PRICE_LITE_YEARLY_TIER_3_XXXX'),
+            'one-year-tier-3': test_or_live('STRIPE_PRICE_LITE_ONE_YEAR_TIER_3_XXXX'),
         },
-        'recurring': {
-            'lite': {
-                'monthly': test_or_live('STRIPE_PRICE_LITE_MONTHLY_RECURRING_XXXX'),
-                'yearly': test_or_live('STRIPE_PRICE_LITE_YEARLY_RECURRING_XXXX'),
-            },
-            'premium': {
-                'monthly': test_or_live('STRIPE_PRICE_PREMIUM_MONTHLY_RECURRING_XXXX'),
-                'yearly': test_or_live('STRIPE_PRICE_PREMIUM_YEARLY_RECURRING_XXXX'),
-            },
-            'ultimate': {
-                'monthly': test_or_live('STRIPE_PRICE_ULTIMATE_MONTHLY_RECURRING_XXXX'),
-                'yearly': test_or_live('STRIPE_PRICE_ULTIMATE_YEARLY_RECURRING_XXXX'),
-            },
+        'premium': {
+            'monthly-tier-1': test_or_live('STRIPE_PRICE_PREMIUM_MONTHLY_TIER_1_XXXX'),
+            'yearly-tier-1': test_or_live('STRIPE_PRICE_PREMIUM_YEARLY_TIER_1_XXXX'),
+            'one-year-tier-1': test_or_live('STRIPE_PRICE_PREMIUM_ONE_YEAR_TIER_1_XXXX'),
+            'monthly-tier-2': test_or_live('STRIPE_PRICE_PREMIUM_MONTHLY_TIER_2_XXXX'),
+            'yearly-tier-2': test_or_live('STRIPE_PRICE_PREMIUM_YEARLY_TIER_2_XXXX'),
+            'one-year-tier-2': test_or_live('STRIPE_PRICE_PREMIUM_ONE_YEAR_TIER_2_XXXX'),
+            'monthly-tier-3': test_or_live('STRIPE_PRICE_PREMIUM_MONTHLY_TIER_3_XXXX'),
+            'yearly-tier-3': test_or_live('STRIPE_PRICE_PREMIUM_YEARLY_TIER_3_XXXX'),
+            'one-year-tier-3': test_or_live('STRIPE_PRICE_PREMIUM_ONE_YEAR_TIER_3_XXXX'),
+        },
+        'ultimate': {
+            'monthly-tier-1': test_or_live('STRIPE_PRICE_ULTIMATE_MONTHLY_TIER_1_XXXX'),
+            'yearly-tier-1': test_or_live('STRIPE_PRICE_ULTIMATE_YEARLY_TIER_1_XXXX'),
+            'one-year-tier-1': test_or_live('STRIPE_PRICE_ULTIMATE_ONE_YEAR_TIER_1_XXXX'),
+            'monthly-tier-2': test_or_live('STRIPE_PRICE_ULTIMATE_MONTHLY_TIER_2_XXXX'),
+            'yearly-tier-2': test_or_live('STRIPE_PRICE_ULTIMATE_YEARLY_TIER_2_XXXX'),
+            'one-year-tier-2': test_or_live('STRIPE_PRICE_ULTIMATE_ONE_YEAR_TIER_2_XXXX'),
+            'monthly-tier-3': test_or_live('STRIPE_PRICE_ULTIMATE_MONTHLY_TIER_3_XXXX'),
+            'yearly-tier-3': test_or_live('STRIPE_PRICE_ULTIMATE_YEARLY_TIER_3_XXXX'),
+            'one-year-tier-3': test_or_live('STRIPE_PRICE_ULTIMATE_ONE_YEAR_TIER_3_XXXX'),
         },
     },
 }

@@ -35,10 +35,10 @@ Group.objects.get_or_create(name='astrobin-donor-gold-yearly')
 Group.objects.get_or_create(name='astrobin-donor-platinum-yearly')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC)
+    Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.LITE_CLASSIC,
+        name=SubscriptionName.LITE_CLASSIC.value,
         currency="USD",
         price=18,
         trial_period=0,
@@ -49,10 +49,10 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC)
+    Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.LITE_CLASSIC,
+        name=SubscriptionName.LITE_CLASSIC.value,
         currency="USD",
         price=18,
         trial_period=0,
@@ -63,10 +63,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.LITE_2020)
+    Subscription.objects.get(name=SubscriptionName.LITE_2020.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.LITE_2020,
+        name=SubscriptionName.LITE_2020.value,
         currency="CHF",
         price=20,
         trial_period=0,
@@ -77,12 +77,12 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.LITE_2020_AUTORENEW_MONTHLY)
+    Subscription.objects.get(name=SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.LITE_2020_AUTORENEW_MONTHLY,
+        name=SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value,
         currency="CHF",
-        price=2,
+        price=2.5,
         trial_period=0,
         trial_unit=None,
         recurrence_period=1,
@@ -91,10 +91,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.LITE_2020_AUTORENEW_YEARLY)
+    Subscription.objects.get(name=SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.LITE_2020_AUTORENEW_YEARLY,
+        name=SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value,
         currency="CHF",
         price=20,
         trial_period=0,
@@ -105,10 +105,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC)
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.PREMIUM_CLASSIC,
+        name=SubscriptionName.PREMIUM_CLASSIC.value,
         currency="USD",
         price=36,
         trial_period=0,
@@ -119,10 +119,10 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW)
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW,
+        name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value,
         currency="USD",
         price=36,
         trial_period=0,
@@ -133,10 +133,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020)
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.PREMIUM_2020,
+        name=SubscriptionName.PREMIUM_2020.value,
         currency="CHF",
         price=40,
         trial_period=0,
@@ -147,12 +147,12 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY)
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY,
+        name=SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value,
         currency="CHF",
-        price=4,
+        price=4.5,
         trial_period=0,
         trial_unit=None,
         recurrence_period=1,
@@ -161,10 +161,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY)
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY,
+        name=SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value,
         currency="CHF",
         price=40,
         trial_period=0,
@@ -175,10 +175,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020)
+    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.ULTIMATE_2020,
+        name=SubscriptionName.ULTIMATE_2020.value,
         currency="CHF",
         price=60,
         trial_period=0,
@@ -189,12 +189,12 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY)
+    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY,
+        name=SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value,
         currency="CHF",
-        price=6,
+        price=6.5,
         trial_period=0,
         trial_unit=None,
         recurrence_period=1,
@@ -203,10 +203,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY)
+    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name=SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY,
+        name=SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value,
         currency="CHF",
         price=60,
         trial_period=0,

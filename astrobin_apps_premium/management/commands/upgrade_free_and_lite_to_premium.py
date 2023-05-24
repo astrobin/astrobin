@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
     def upgrade(self, user):
         # type: (User) -> None
-        premium = Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC)
+        premium = Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC.value)
         user_subscription, created = UserSubscription.objects.get_or_create(
             user=user,
             subscription=premium)

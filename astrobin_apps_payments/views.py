@@ -8,16 +8,22 @@ import stripe
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
-from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse, Http404
+from django.http import Http404, HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.utils.translation import gettext
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 from paypal.standard.ipn.models import PayPalIPN
-from paypal.standard.models import ST_PP_COMPLETED
-from subscription.models import Subscription, handle_payment_was_successful
+from paypal.standard.models import ST_PP_CANCELLED, ST_PP_COMPLETED, ST_PP_CREATED
+from subscription.models import (
+    Subscription, handle_payment_was_successful, handle_subscription_cancel,
+    handle_subscription_signup,
+)
 
-from astrobin.models import Image
+from astrobin.models import Image, UserProfile
+from astrobin.utils import get_client_country_code
 from astrobin_apps_payments.services.pricing_service import PricingService
+from astrobin_apps_payments.types import SubscriptionRecurringUnit
+from astrobin_apps_premium.services.premium_service import SubscriptionDisplayName, SubscriptionName
 from common.services import AppRedirectionService
 
 log = logging.getLogger(__name__)
@@ -30,7 +36,7 @@ def stripe_config(request):
 
 @csrf_exempt
 @require_POST
-def create_checkout_session(request, user_pk, product, currency):
+def create_checkout_session(request, user_pk: int, product: str, currency: str, recurring_unit: str, autorenew: str):
     stripe.api_key = settings.STRIPE['keys']['secret']
 
     try:
@@ -43,7 +49,7 @@ def create_checkout_session(request, user_pk, product, currency):
         log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid currency"))
         return HttpResponseBadRequest()
 
-    if product not in ('lite', 'lite-recurring', 'premium', 'premium-recurring', 'ultimate', 'ultimate-recurring'):
+    if product not in ('lite', 'premium', 'ultimate'):
         log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid product"))
         return HttpResponseBadRequest()
 
@@ -60,18 +66,33 @@ def create_checkout_session(request, user_pk, product, currency):
             )
         )
 
-    stripe_products = {
-        'lite': settings.STRIPE['keys']['products']['non-recurring']['lite'],
-        'lite-recurring': settings.STRIPE['keys']['products']['recurring']['lite'],
-        'premium': settings.STRIPE['keys']['products']['non-recurring']['premium'],
-        'premium-recurring': settings.STRIPE['keys']['products']['recurring']['premium'],
-        'ultimate': settings.STRIPE['keys']['products']['non-recurring']['ultimate'],
-        'ultimate-recurring': settings.STRIPE['keys']['products']['recurring']['ultimate'],
-    }
+    if autorenew != 'true' and not PricingService.non_autorenewing_supported(user):
+        log.error(
+            "create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Non-autorenew not supported")
+            )
+        return HttpResponseBadRequest(
+            gettext(
+                'Non-autorenewing subscriptions are not supported for your account.'
+                ' Please contact us for more information.'
+            )
+        )
 
-    price = PricingService.get_full_price(product, currency.upper())
+    if autorenew == 'false':
+        recurring_unit = None
 
-    log.info("create_checkout_session: %d, %s, %s %.2f" % (user.pk, product, currency, price))
+    country_code = get_client_country_code(request)
+
+    price = PricingService.get_full_price(
+        SubscriptionDisplayName.from_string(product),
+        country_code,
+        currency.upper(),
+        SubscriptionRecurringUnit.from_string(recurring_unit),
+    )
+
+    log.info(
+        "create_checkout_session: %d, %s, %s, %s, %s, %s, %.2f" % (
+            user.pk, product, country_code, currency, recurring_unit, autorenew, price)
+    )
 
     try:
         customer = PricingService.get_stripe_customer(user)
@@ -90,26 +111,30 @@ def create_checkout_session(request, user_pk, product, currency):
 
         kwargs = {
             'success_url': AppRedirectionService.redirect(
-                '/subscriptions/success?product=' + product + '&session_id={CHECKOUT_SESSION_ID}'),
+                '/subscriptions/success?product=' + product + '&session_id={CHECKOUT_SESSION_ID}'
+            ),
             'cancel_url': AppRedirectionService.redirect('/subscriptions/cancelled/'),
-            'mode': 'payment',
+            'mode': 'subscription' if autorenew != 'false' else 'payment',
             'payment_method_types': payment_method_types,
             'client_reference_id': user.pk,
             'customer': customer_id if customer_id else None,
             'customer_email': user.email if not customer_id else None,
-            'submit_type': 'pay',
+            'currency': currency.lower(),
             'line_items': [
                 {
                     'quantity': 1,
-                    'price_data': {
-                        'currency': currency.lower(),
-                        'product': stripe_products[product],
-                        'unit_amount_decimal': price * 100,  # Stripe uses cents
-                    }
+                    'price': PricingService.get_stripe_price_object(
+                        SubscriptionDisplayName.from_string(product),
+                        country_code,
+                        currency.upper(),
+                        SubscriptionRecurringUnit.from_string(recurring_unit)
+                    )
                 }
             ],
             'metadata': {
-                'product': product
+                'product': product,
+                'recurring-unit': recurring_unit,
+                'autorenew': autorenew,
             },
         }
 
@@ -133,11 +158,51 @@ def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
 
+    def fulfill_cancellation(session):
+        product_id = session['items']['data'][0]['price']['product']
+        recurring_unit = session['items']['data'][0]['price']['recurring']['interval']
+        customer_id = session['customer']
+
+        try:
+            user = User.objects.get(userprofile__stripe_customer_id=customer_id)
+        except User.DoesNotExist:
+            log.exception("stripe_webhook: user %d invalid user by customer id" % customer_id)
+            return HttpResponseBadRequest()
+
+        subscription_map = {
+            settings.STRIPE['products']['lite']:
+                SubscriptionName.LITE_2020_AUTORENEW_MONTHLY if recurring_unit == 'month'
+                else SubscriptionName.LITE_2020_AUTORENEW_YEARLY,
+            settings.STRIPE['products']['premium']:
+                SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY if recurring_unit == 'month'
+                else SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY,
+            settings.STRIPE['products']['ultimate']:
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY if recurring_unit == 'month'
+                else SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY,
+        }
+
+        subscription = Subscription.objects.get(name=subscription_map[product_id].value)
+
+        ipn = PayPalIPN.objects.create(
+            custom=user.pk,
+            item_number=subscription.pk,
+            payment_status=ST_PP_CANCELLED,
+        )
+
+        handle_subscription_cancel(ipn)
+
     def fulfill_payment(session):
         product = session['metadata']['product']
+
+        try:
+            recurring_unit = session['metadata']['recurring-unit']
+        except KeyError:
+            recurring_unit = 'once'
+
+        autorenew = session['metadata']['autorenew']
         user_pk = int(session['client_reference_id'])
 
-        log.info("stripe_webhook: user %d product %s" % (user_pk, product))
+        log.info("stripe_webhook: user %d product %s / %s / %s" % (user_pk, product, recurring_unit, autorenew))
 
         try:
             user = User.objects.get(pk=user_pk)
@@ -145,17 +210,22 @@ def stripe_webhook(request):
             log.exception("stripe_webhook: user %d invalid user" % user_pk)
             return HttpResponseBadRequest()
 
-        if product == 'lite':
-            subscription = Subscription.objects.get(name=SubscriptionName.LITE_2020)
-        elif product == 'premium':
-            subscription = Subscription.objects.get(name=SubscriptionName.PREMIUM_2020)
-        elif product == 'ultimate':
-            subscription = Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020)
-        else:
-            log.exception("stripe_webhook: user %d invalid product" % user_pk)
-            return HttpResponseBadRequest()
+        subscription_map = {
+            'lite-monthly': SubscriptionName.LITE_2020_AUTORENEW_MONTHLY,
+            'lite-yearly': SubscriptionName.LITE_2020_AUTORENEW_YEARLY,
+            'lite-once': SubscriptionName.LITE_2020,
+            'premium-monthly': SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY,
+            'premium-yearly': SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY,
+            'premium-once': SubscriptionName.PREMIUM_2020,
+            'ultimate-monthly': SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY,
+            'ultimate-yearly': SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY,
+            'ultimate-once': SubscriptionName.ULTIMATE_2020,
+        }
 
-        payment = PayPalIPN.objects.create(
+        subscription_key = product + '-' + recurring_unit
+        subscription = Subscription.objects.get(name=subscription_map[subscription_key].value)
+
+        ipn = PayPalIPN.objects.create(
             custom=user_pk,
             item_number=subscription.pk,
             mc_gross=subscription.price,
@@ -163,7 +233,18 @@ def stripe_webhook(request):
             payment_status=ST_PP_COMPLETED,
         )
 
-        handle_payment_was_successful(payment)
+        handle_payment_was_successful(ipn)
+
+        if autorenew == 'true':
+            ipn = PayPalIPN.objects.create(
+                custom=user_pk,
+                item_number=subscription.pk,
+                mc_gross=subscription.price,
+                mc_currency=subscription.currency,
+                payment_status=ST_PP_CREATED,
+            )
+
+            handle_subscription_signup(ipn)
 
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -177,7 +258,24 @@ def stripe_webhook(request):
         type = event['type']
         session = event['data']['object']
 
-        if type == 'checkout.session.completed':
+        if type == 'customer.created':
+            UserProfile.objects \
+                .filter(user__email=event['data']['object']['email']) \
+                .update(stripe_customer_id=event['data']['object']['id'])
+        elif type == 'customer.deleted':
+            UserProfile.objects \
+                .filter(stripe_customer_id=event['data']['object']['id']) \
+                .update(stripe_customer_id=None)
+        elif type == 'customer.subscription.created':
+            UserProfile.objects \
+                .filter(stripe_customer_id=event['data']['object']['customer']) \
+                .update(stripe_subscription_id=event['data']['object']['id'])
+        elif type == 'customer.subscription.deleted':
+            UserProfile.objects \
+                .filter(stripe_subscription_id=event['data']['object']['id']) \
+                .update(stripe_subscription_id=None)
+            fulfill_cancellation(session)
+        elif type == 'checkout.session.completed':
             fulfill_payment(session)
         elif event['type'] == 'checkout.session.async_payment_succeeded':
             log.info("stripe_webhook: payment succeeded for event %s" % event['id'])
@@ -185,7 +283,7 @@ def stripe_webhook(request):
             log.info("stripe_webhook: payment failed for event %s" % event['id'])
             msg = EmailMultiAlternatives(
                 '[AstroBin] User payment failed',
-                'Payment from user failed: <br/>%s' % json.dumps(session, indent = 4, sort_keys = True),
+                'Payment from user failed: <br/>%s' % json.dumps(session, indent=4, sort_keys=True),
                 settings.DEFAULT_FROM_EMAIL,
                 ['astrobin@astrobin.com']
             )

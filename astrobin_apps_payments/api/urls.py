@@ -8,6 +8,6 @@ router.register(r'exchange-rate', ExchangeRateViewSet, basename='exchange-rate')
 
 urlpatterns = [
     url('', include(router.urls)),
-    url(r'pricing/(?P<product>\w+)/(?P<currency>\w+)/$', PricingView.as_view()),
+    url(r'pricing/(?P<product>\w+)/(?P<currency>\w+)/(?P<recurring_unit>\w+)/$', PricingView.as_view()),
     url(r'available-subscriptions', AvailableSubscriptionsView.as_view()),
 ]

@@ -10,7 +10,7 @@ from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 class Command(BaseCommand):
     def __init__(self):
-        self.premium_subscription = Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC)
+        self.premium_subscription = Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC.value)
 
     def process_user(self, user, amount, first_payment):
         price = 36.0

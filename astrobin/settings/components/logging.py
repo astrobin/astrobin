@@ -97,6 +97,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'stripe': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',

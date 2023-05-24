@@ -43,6 +43,13 @@ class SubscriptionDisplayName(Enum):
     PREMIUM = 'Premium'
     ULTIMATE = 'Ultimate'
 
+    @classmethod
+    def from_string(cls, value_str):
+        for member in cls:
+            if member.name.lower() == value_str.lower():
+                return member
+        raise ValueError(f"Invalid enum value: {value_str}")
+
 
 def _compareValidity(a, b):
     return b.valid() - a.valid()
