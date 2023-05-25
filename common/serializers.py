@@ -91,6 +91,7 @@ class UserProfileSerializerPrivate(UserProfileSerializer):
     contribution_index = FloatField(read_only=True, source='get_scores.user_scores_contribution_index')
     followers = IntegerField(read_only=True, source='get_scores.user_scores_followers')
     locations = LocationSerializer(many=True, source='location_set')
+    email = CharField(read_only=True, source='user.email')
 
     def update(self, instance, validated_data):
         locations = validated_data.pop('location_set', [])

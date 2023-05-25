@@ -13,6 +13,14 @@ urlpatterns = [
         r'(?P<autorenew>[\w]*)/$',
         views.create_checkout_session
     ),
+    url(
+        r'upgrade-subscription/'
+        r'(?P<user_pk>\d+)/'
+        r'(?P<product>[\w]*)/'
+        r'(?P<currency>[\w]*)/'
+        r'(?P<recurring_unit>[\w]*)/$',
+        views.upgrade_subscription
+    ),
     url(r'stripe-webhook/', views.stripe_webhook),
 ]
 

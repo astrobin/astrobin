@@ -19,7 +19,8 @@ class PricingView(JSONResponseMixin, View):
     def get(self, request, *args, **kwargs) -> HttpResponse:
         product: SubscriptionDisplayName = SubscriptionDisplayName.from_string(kwargs.pop('product', None))
         currency: str = kwargs.pop('currency', None)
-        recurring_unit: Optional[SubscriptionRecurringUnit] = SubscriptionRecurringUnit.from_string(kwargs.pop('recurring_unit', None))
+        recurring_unit: Optional[SubscriptionRecurringUnit] = \
+            SubscriptionRecurringUnit.from_string(kwargs.pop('recurring_unit', None))
         country_code = get_client_country_code(request)
 
         if product is None or product not in (
@@ -43,7 +44,12 @@ class PricingView(JSONResponseMixin, View):
         return self.render_json_response(
             {
                 'fullPrice': PricingService.get_full_price(product, country_code, currency.upper(), recurring_unit),
-                'discount': PricingService.get_discount_amount(product, country_code, currency.upper(), recurring_unit, user=user),
-                'price': PricingService.get_price(product, country_code, currency.upper(), recurring_unit, user=user)
+                'prorateAmount': PricingService.get_prorate_amount(
+                    product, country_code, recurring_unit, user
+                ),
+                'discount': PricingService.get_discount_amount(
+                    product, country_code, currency.upper(), recurring_unit, user
+                ),
+                'price': PricingService.get_price(product, country_code, currency.upper(), recurring_unit, user)
             }
 )

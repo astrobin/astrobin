@@ -6,7 +6,7 @@ import stripe
 from django.conf import settings
 from django.contrib.auth.models import User
 from stripe.error import StripeError
-from subscription.models import Subscription, UserSubscription
+from subscription.models import UserSubscription
 
 from astrobin_apps_payments.types import StripeSubscription
 from astrobin_apps_payments.types.subscription_recurring_unit import SubscriptionRecurringUnit
@@ -60,10 +60,16 @@ class PricingService:
             recurring_unit: SubscriptionRecurringUnit,
             user: User = None
     ) -> float:
-        price = PricingService.get_full_price(product_name, country_code, currency, recurring_unit)
+        full_price = PricingService.get_full_price(product_name, country_code, currency, recurring_unit)
         discount_amount = PricingService.get_discount_amount(product_name, country_code, currency, recurring_unit, user)
+        prorate_amount = PricingService.get_prorate_amount(product_name, country_code, recurring_unit, user)
 
-        return price - discount_amount
+        price = full_price - discount_amount
+
+        if prorate_amount > 0:
+            price -= prorate_amount
+
+        return price
 
     @staticmethod
     def get_full_price(
@@ -78,6 +84,47 @@ class PricingService:
             currency,
             recurring_unit,
         )
+
+    @staticmethod
+    def get_prorate_amount(
+            product_name: SubscriptionDisplayName,
+            country_code: str,
+            recurring_unit: SubscriptionRecurringUnit,
+            user: User = None
+    ) -> float:
+        # Set proration date to this moment:
+        import time
+        proration_date = int(time.time())
+
+        if not user:
+            return 0
+
+        if not user.userprofile.stripe_subscription_id:
+            return 0
+
+        if not user.userprofile.stripe_customer_id:
+            return 0
+
+        # See what the next invoice would look like with a price switch
+        # and proration set:
+        stripe.api_key = settings.STRIPE['keys']['secret']
+        subscription = stripe.Subscription.retrieve(user.userprofile.stripe_subscription_id)
+        items = [{
+            'id': subscription['items']['data'][0].id,
+            'price': PricingService.get_stripe_price_object(product_name, country_code, recurring_unit)["id"]
+        }]
+
+        try:
+            invoice = stripe.Invoice.upcoming(
+                customer=user.userprofile.stripe_customer_id,
+                subscription=user.userprofile.stripe_subscription_id,
+                subscription_items=items,
+                subscription_proration_date=proration_date,
+            )
+        except StripeError as e:
+            return 0
+
+        return -invoice['lines']['data'][0]['amount'] / 100
 
     @staticmethod
     def get_discount_amount(
@@ -135,7 +182,6 @@ class PricingService:
     def get_stripe_price_object(
             product_name: SubscriptionDisplayName,
             country_code: str,
-            currency: str,
             recurring_unit: SubscriptionRecurringUnit
     ):
         # Tier 1: High-Income Countries
@@ -258,7 +304,7 @@ class PricingService:
             currency: str,
             recurring_unit: SubscriptionRecurringUnit
     ) -> float:
-        stripe_price = PricingService.get_stripe_price_object(product_name, country_code, currency, recurring_unit)
+        stripe_price = PricingService.get_stripe_price_object(product_name, country_code, recurring_unit)
         if stripe_price:
             if currency.lower() not in stripe_price['currency_options']:
                 currency = 'usd'
