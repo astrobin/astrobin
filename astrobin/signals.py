@@ -26,8 +26,9 @@ from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
-from subscription.models import Transaction, UserSubscription
+from subscription.models import Subscription, Transaction, UserSubscription
 from subscription.signals import paid, signed_up
+from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
 from astrobin.tasks import process_camera_rename_proposal
@@ -611,19 +612,22 @@ paid.connect(subscription_paid)
 
 
 def subscription_signed_up(sender, **kwargs):
-    subscription = kwargs.get('subscription')
-    user_subscription = kwargs.get('usersubscription')
-    user = kwargs.get('user')
+    subscription: Subscription = kwargs.get('subscription')
+    user_subscription: UserSubscription = kwargs.get('usersubscription')
+    user: User = kwargs.get('user')
 
     UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
     PremiumService(user).clear_subscription_status_cache_keys()
     UserService(user).update_premium_counter_on_subscription(subscription)
 
-    if 'premium' in subscription.category:
+    if 'premium' in subscription.category and subscription.recurrence_unit is None:
+        # When there's a payment for an expired subscription, make sure we start the subscription from today.
         today = DateTimeService.today()
         if user_subscription.expires is None or user_subscription.expires < today:
             user_subscription.expires = today
-        user_subscription.extend(datetime.timedelta(days=365.2425))
+
+        # Non recurring premium subscription are for a year, no exceptions.
+        user_subscription.expires = extend_date_by(user_subscription.expires, 1, 'Y')
         user_subscription.save()
 
         # Invalidate other premium subscriptions

@@ -1,0 +1,184 @@
+{
+  "id": "evt_3NBuLDC0tT6bv7Hd0PzRqmzU",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1685083296,
+  "data": {
+    "object": {
+      "id": "pi_3NBuLDC0tT6bv7Hd0N3Dosyv",
+      "object": "payment_intent",
+      "amount": 2250,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {
+        }
+      },
+      "amount_received": 2250,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+      "cancellation_reason": null,
+      "capture_method": "automatic",
+      "charges": {
+        "object": "list",
+        "data": [
+          {
+            "id": "ch_3NBuLDC0tT6bv7Hd0ZK2Vg6M",
+            "object": "charge",
+            "amount": 2250,
+            "amount_captured": 2250,
+            "amount_refunded": 0,
+            "application": null,
+            "application_fee": null,
+            "application_fee_amount": null,
+            "balance_transaction": "txn_3NBuLDC0tT6bv7Hd0ErmqDhu",
+            "billing_details": {
+              "address": {
+                "city": null,
+                "country": "US",
+                "line1": null,
+                "line2": null,
+                "postal_code": "12345",
+                "state": null
+              },
+              "email": "astrobin@astrobin.com",
+              "name": "Test User",
+              "phone": null
+            },
+            "calculated_statement_descriptor": "ASTROBIN PREMIUM",
+            "captured": true,
+            "created": 1685083295,
+            "currency": "usd",
+            "customer": "STRIPE_CUSTOMER_ID",
+            "description": "Subscription creation",
+            "destination": null,
+            "dispute": null,
+            "disputed": false,
+            "failure_balance_transaction": null,
+            "failure_code": null,
+            "failure_message": null,
+            "fraud_details": {
+            },
+            "invoice": "in_1NBuLCC0tT6bv7Hd2Hnagnce",
+            "livemode": false,
+            "metadata": {
+            },
+            "on_behalf_of": null,
+            "order": null,
+            "outcome": {
+              "network_status": "approved_by_network",
+              "reason": null,
+              "risk_level": "normal",
+              "risk_score": 11,
+              "seller_message": "Payment complete.",
+              "type": "authorized"
+            },
+            "paid": true,
+            "payment_intent": "pi_3NBuLDC0tT6bv7Hd0N3Dosyv",
+            "payment_method": "pm_1NBuLCC0tT6bv7HdnDgBsBFz",
+            "payment_method_details": {
+              "card": {
+                "brand": "visa",
+                "checks": {
+                  "address_line1_check": null,
+                  "address_postal_code_check": "pass",
+                  "cvc_check": "pass"
+                },
+                "country": "US",
+                "exp_month": 12,
+                "exp_month": 2073,
+                "fingerprint": "Xi05hB6PSTV4ACeF",
+                "funding": "credit",
+                "installments": null,
+                "last4": "4242",
+                "mandate": null,
+                "network": "visa",
+                "network_token": {
+                  "used": false
+                },
+                "three_d_secure": null,
+                "wallet": null
+              },
+              "type": "card"
+            },
+            "receipt_email": "astrobin@astrobin.com",
+            "receipt_number": null,
+            "receipt_url": "https://pay.stripe.com/receipts/invoices/CAcaFwoVYWNjdF8xQlc4ajNDMHRUNmJ2N0hkKKKpwaMGMgaBmmILTCs6LBbWAbF_OZAtWSmlwgz3qLgYqEUvuApU9nwYEzdebW3r2GMCG-IsfnJ_qxoN?s=ap",
+            "refunded": false,
+            "refunds": {
+              "object": "list",
+              "data": [
+              ],
+              "has_more": false,
+              "total_count": 0,
+              "url": "/v1/charges/ch_3NBuLDC0tT6bv7Hd0ZK2Vg6M/refunds"
+            },
+            "review": null,
+            "shipping": null,
+            "source": null,
+            "source_transfer": null,
+            "statement_descriptor": "AstroBin Premium",
+            "statement_descriptor_suffix": null,
+            "status": "succeeded",
+            "transfer_data": null,
+            "transfer_group": null
+          }
+        ],
+        "has_more": false,
+        "total_count": 1,
+        "url": "/v1/charges?payment_intent=pi_3NBuLDC0tT6bv7Hd0N3Dosyv"
+      },
+      "client_secret": "pi_3NBuLDC0tT6bv7Hd0N3Dosyv_secret_zUU9HopPCqsrgypp7farXCnYG",
+      "confirmation_method": "automatic",
+      "created": 1685083295,
+      "currency": "usd",
+      "customer": "STRIPE_CUSTOMER_ID",
+      "description": "Subscription creation",
+      "invoice": "in_1NBuLCC0tT6bv7Hd2Hnagnce",
+      "last_payment_error": null,
+      "latest_charge": "ch_3NBuLDC0tT6bv7Hd0ZK2Vg6M",
+      "livemode": false,
+      "metadata": {
+      },
+      "next_action": null,
+      "on_behalf_of": null,
+      "payment_method": "pm_1NBuLCC0tT6bv7HdnDgBsBFz",
+      "payment_method_options": {
+        "card": {
+          "installments": null,
+          "mandate_options": null,
+          "network": null,
+          "request_three_d_secure": "automatic",
+          "setup_future_usage": "off_session"
+        },
+        "paypal": {
+          "preferred_locale": null,
+          "reference": null
+        }
+      },
+      "payment_method_types": [
+        "card",
+        "paypal"
+      ],
+      "processing": null,
+      "receipt_email": "astrobin@astrobin.com",
+      "review": null,
+      "setup_future_usage": "off_session",
+      "shipping": null,
+      "source": null,
+      "statement_descriptor": "AstroBin Premium",
+      "statement_descriptor_suffix": null,
+      "status": "succeeded",
+      "transfer_data": null,
+      "transfer_group": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": "req_ZpcYMVo3n1NdDl",
+    "idempotency_key": "23060f11-1a46-4544-aa39-09982ea04d8b"
+  },
+  "type": "payment_intent.succeeded"
+}

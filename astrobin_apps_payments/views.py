@@ -1,29 +1,21 @@
 # -*- coding: utf-8 -*-
 
-
-import json
 import logging
 
 import stripe
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.mail import EmailMultiAlternatives
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.utils.translation import gettext
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
-from paypal.standard.ipn.models import PayPalIPN
-from paypal.standard.models import ST_PP_CANCELLED, ST_PP_COMPLETED, ST_PP_CREATED
-from subscription.models import (
-    Subscription, handle_payment_was_successful, handle_subscription_cancel,
-    handle_subscription_signup,
-)
 
-from astrobin.models import Image, UserProfile
+from astrobin.models import Image
 from astrobin.utils import get_client_country_code
 from astrobin_apps_payments.services.pricing_service import PricingService
+from astrobin_apps_payments.services.stripe_webhook_service import StripeWebhookService
 from astrobin_apps_payments.types import SubscriptionRecurringUnit
-from astrobin_apps_premium.services.premium_service import SubscriptionDisplayName, SubscriptionName
+from astrobin_apps_premium.services.premium_service import SubscriptionDisplayName
 from common.services import AppRedirectionService
 
 log = logging.getLogger(__name__)
@@ -206,94 +198,6 @@ def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
 
-    def fulfill_cancellation(session):
-        product_id = session['items']['data'][0]['price']['product']
-        recurring_unit = session['items']['data'][0]['price']['recurring']['interval']
-        customer_id = session['customer']
-
-        try:
-            user = User.objects.get(userprofile__stripe_customer_id=customer_id)
-        except User.DoesNotExist:
-            log.exception("stripe_webhook: user %d invalid user by customer id" % customer_id)
-            return HttpResponseBadRequest()
-
-        subscription_map = {
-            settings.STRIPE['products']['lite']:
-                SubscriptionName.LITE_2020_AUTORENEW_MONTHLY if recurring_unit == 'month'
-                else SubscriptionName.LITE_2020_AUTORENEW_YEARLY,
-            settings.STRIPE['products']['premium']:
-                SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY if recurring_unit == 'month'
-                else SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY,
-            settings.STRIPE['products']['ultimate']:
-                SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY if recurring_unit == 'month'
-                else SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY,
-        }
-
-        subscription = Subscription.objects.get(name=subscription_map[product_id].value)
-
-        ipn = PayPalIPN.objects.create(
-            custom=user.pk,
-            item_number=subscription.pk,
-            payment_status=ST_PP_CANCELLED,
-        )
-
-        handle_subscription_cancel(ipn)
-
-    def fulfill_payment(session):
-        product = session['metadata']['product']
-
-        try:
-            recurring_unit = session['metadata']['recurring-unit']
-        except KeyError:
-            recurring_unit = 'once'
-
-        autorenew = session['metadata']['autorenew']
-        user_pk = int(session['client_reference_id'])
-
-        log.info("stripe_webhook: user %d product %s / %s / %s" % (user_pk, product, recurring_unit, autorenew))
-
-        try:
-            user = User.objects.get(pk=user_pk)
-        except User.DoesNotExist:
-            log.exception("stripe_webhook: user %d invalid user" % user_pk)
-            return HttpResponseBadRequest()
-
-        subscription_map = {
-            'lite-monthly': SubscriptionName.LITE_2020_AUTORENEW_MONTHLY,
-            'lite-yearly': SubscriptionName.LITE_2020_AUTORENEW_YEARLY,
-            'lite-once': SubscriptionName.LITE_2020,
-            'premium-monthly': SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY,
-            'premium-yearly': SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY,
-            'premium-once': SubscriptionName.PREMIUM_2020,
-            'ultimate-monthly': SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY,
-            'ultimate-yearly': SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY,
-            'ultimate-once': SubscriptionName.ULTIMATE_2020,
-        }
-
-        subscription_key = product + '-' + recurring_unit
-        subscription = Subscription.objects.get(name=subscription_map[subscription_key].value)
-
-        ipn = PayPalIPN.objects.create(
-            custom=user_pk,
-            item_number=subscription.pk,
-            mc_gross=subscription.price,
-            mc_currency=subscription.currency,
-            payment_status=ST_PP_COMPLETED,
-        )
-
-        handle_payment_was_successful(ipn)
-
-        if autorenew == 'true':
-            ipn = PayPalIPN.objects.create(
-                custom=user_pk,
-                item_number=subscription.pk,
-                mc_gross=subscription.price,
-                mc_currency=subscription.currency,
-                payment_status=ST_PP_CREATED,
-            )
-
-            handle_subscription_signup(ipn)
-
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
     except Exception as e:
@@ -302,45 +206,6 @@ def stripe_webhook(request):
 
     log.info("stripe_webhook: %s" % event['type'])
 
-    try:
-        type = event['type']
-        session = event['data']['object']
-
-        if type == 'customer.created':
-            UserProfile.objects \
-                .filter(user__email=event['data']['object']['email']) \
-                .update(stripe_customer_id=event['data']['object']['id'])
-        elif type == 'customer.deleted':
-            UserProfile.objects \
-                .filter(stripe_customer_id=event['data']['object']['id']) \
-                .update(stripe_customer_id=None)
-        elif type == 'customer.subscription.created':
-            UserProfile.objects \
-                .filter(stripe_customer_id=event['data']['object']['customer']) \
-                .update(stripe_subscription_id=event['data']['object']['id'])
-        elif type == 'customer.subscription.deleted':
-            UserProfile.objects \
-                .filter(stripe_subscription_id=event['data']['object']['id']) \
-                .update(stripe_subscription_id=None)
-            fulfill_cancellation(session)
-        elif type == 'customer.subscription.updated':
-            if session['cancel_at']:
-                fulfill_cancellation(session)
-        elif type == 'checkout.session.completed':
-            fulfill_payment(session)
-        elif event['type'] == 'checkout.session.async_payment_succeeded':
-            log.info("stripe_webhook: payment succeeded for event %s" % event['id'])
-        elif event['type'] == 'checkout.session.async_payment_failed':
-            log.info("stripe_webhook: payment failed for event %s" % event['id'])
-            msg = EmailMultiAlternatives(
-                '[AstroBin] User payment failed',
-                'Payment from user failed: <br/>%s' % json.dumps(session, indent=4, sort_keys=True),
-                settings.DEFAULT_FROM_EMAIL,
-                ['astrobin@astrobin.com']
-            )
-            msg.send()
-    except KeyError as e:
-        log.exception("stripe_webhook: %s" % str(e))
-        return HttpResponseBadRequest()
+    StripeWebhookService.process_event(event)
 
     return HttpResponse(status=200)

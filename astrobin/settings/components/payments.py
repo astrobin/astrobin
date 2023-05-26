@@ -4,7 +4,8 @@ SUPPORTED_CURRENCIES = ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'CHF', 'CNY']
 TRANSFERWISE_API_TOKEN = os.environ.get('TRANSFERWISE_API_TOKEN')
 
 def test_or_live(key: str) -> str:
-    return os.environ.get(key.replace('XXXX', 'TEST' if DEBUG or TESTING else 'LIVE'))
+    interpolated_key = key.replace('XXXX', 'TEST' if DEBUG or TESTING else 'LIVE')
+    return os.environ.get(interpolated_key, interpolated_key)
 
 STRIPE = {
     'keys': {

@@ -1,0 +1,82 @@
+{
+  "id": "evt_3NBuLDC0tT6bv7Hd0ISK1O1D",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1685083295,
+  "data": {
+    "object": {
+      "id": "pi_3NBuLDC0tT6bv7Hd0N3Dosyv",
+      "object": "payment_intent",
+      "amount": 2250,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {
+        }
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+      "cancellation_reason": null,
+      "capture_method": "automatic",
+      "charges": {
+        "object": "list",
+        "data": [
+        ],
+        "has_more": false,
+        "total_count": 0,
+        "url": "/v1/charges?payment_intent=pi_3NBuLDC0tT6bv7Hd0N3Dosyv"
+      },
+      "client_secret": "pi_3NBuLDC0tT6bv7Hd0N3Dosyv_secret_zUU9HopPCqsrgypp7farXCnYG",
+      "confirmation_method": "automatic",
+      "created": 1685083295,
+      "currency": "usd",
+      "customer": "STRIPE_CUSTOMER_ID",
+      "description": "Subscription creation",
+      "invoice": "in_1NBuLCC0tT6bv7Hd2Hnagnce",
+      "last_payment_error": null,
+      "latest_charge": null,
+      "livemode": false,
+      "metadata": {
+      },
+      "next_action": null,
+      "on_behalf_of": null,
+      "payment_method": null,
+      "payment_method_options": {
+        "card": {
+          "installments": null,
+          "mandate_options": null,
+          "network": null,
+          "request_three_d_secure": "automatic"
+        },
+        "paypal": {
+          "preferred_locale": null,
+          "reference": null
+        }
+      },
+      "payment_method_types": [
+        "card",
+        "paypal"
+      ],
+      "processing": null,
+      "receipt_email": "astrobin@astrobin.com",
+      "review": null,
+      "setup_future_usage": "off_session",
+      "shipping": null,
+      "source": null,
+      "statement_descriptor": "AstroBin Ultimate",
+      "statement_descriptor_suffix": null,
+      "status": "requires_payment_method",
+      "transfer_data": null,
+      "transfer_group": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": "req_ZpcYMVo3n1NdDl",
+    "idempotency_key": "23060f11-1a46-4544-aa39-09982ea04d8b"
+  },
+  "type": "payment_intent.created"
+}

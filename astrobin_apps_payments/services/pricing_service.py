@@ -57,8 +57,8 @@ class PricingService:
             product_name: SubscriptionDisplayName,
             country_code: str,
             currency: str,
-            recurring_unit: SubscriptionRecurringUnit,
-            user: User = None
+            recurring_unit: Optional[SubscriptionRecurringUnit] = None,
+            user: Optional[User] = None
     ) -> float:
         full_price = PricingService.get_full_price(product_name, country_code, currency, recurring_unit)
         discount_amount = PricingService.get_discount_amount(product_name, country_code, currency, recurring_unit, user)
@@ -76,7 +76,7 @@ class PricingService:
             product_name: SubscriptionDisplayName,
             country_code: str,
             currency: str,
-            recurring_unit: SubscriptionRecurringUnit
+            recurring_unit: Optional[SubscriptionRecurringUnit] = None
     ) -> float:
         return PricingService.get_stripe_price(
             product_name,
@@ -90,7 +90,7 @@ class PricingService:
             product_name: SubscriptionDisplayName,
             country_code: str,
             recurring_unit: SubscriptionRecurringUnit,
-            user: User = None
+            user: Optional[User] = None
     ) -> float:
         # Set proration date to this moment:
         import time
@@ -131,7 +131,7 @@ class PricingService:
             product_name: SubscriptionDisplayName,
             country_code: str,
             currency: str,
-            recurring_unit: SubscriptionRecurringUnit,
+            recurring_unit: Optional[SubscriptionRecurringUnit] = None,
             user: User = None,
     ) -> float:
         price = PricingService.get_full_price(product_name, country_code, currency, recurring_unit)
@@ -182,7 +182,7 @@ class PricingService:
     def get_stripe_price_object(
             product_name: SubscriptionDisplayName,
             country_code: str,
-            recurring_unit: SubscriptionRecurringUnit
+            recurring_unit: Optional[SubscriptionRecurringUnit] = None
     ):
         # Tier 1: High-Income Countries
         tier_1 = [
@@ -302,7 +302,7 @@ class PricingService:
             product_name: SubscriptionDisplayName,
             country_code: str,
             currency: str,
-            recurring_unit: SubscriptionRecurringUnit
+            recurring_unit: Optional[SubscriptionRecurringUnit] = None
     ) -> float:
         stripe_price = PricingService.get_stripe_price_object(product_name, country_code, recurring_unit)
         if stripe_price:

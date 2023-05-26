@@ -151,43 +151,75 @@ class Generators:
         )
 
     @staticmethod
-    def premium_subscription(user: User, name: SubscriptionName):
-        if name == SubscriptionName.LITE_CLASSIC or name == SubscriptionName.LITE_CLASSIC_AUTORENEW:
+    def premium_subscription(user: User, name: SubscriptionName) -> UserSubscription:
+        if name in (SubscriptionName.LITE_CLASSIC, SubscriptionName.LITE_CLASSIC_AUTORENEW):
             group_name = "astrobin_lite"
-
-        elif name == SubscriptionName.PREMIUM_CLASSIC or name == SubscriptionName.PREMIUM_CLASSIC_AUTORENEW:
+        elif name in (SubscriptionName.PREMIUM_CLASSIC, SubscriptionName.PREMIUM_CLASSIC_AUTORENEW):
             group_name = "astrobin_premium"
-
-        elif name == SubscriptionName.LITE_2020:
+        elif name in (
+                SubscriptionName.LITE_2020,
+                SubscriptionName.LITE_2020_AUTORENEW_YEARLY,
+                SubscriptionName.LITE_2020_AUTORENEW_MONTHLY
+        ):
             group_name = "astrobin_lite_2020"
-
-        elif name == SubscriptionName.PREMIUM_2020:
+        elif name in (
+                SubscriptionName.PREMIUM_2020,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY
+        ):
             group_name = "astrobin_premium_2020"
-
-        elif name == SubscriptionName.ULTIMATE_2020:
+        elif name in (
+                SubscriptionName.ULTIMATE_2020,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY
+        ):
             group_name = "astrobin_ultimate_2020"
+        else:
+            raise ValueError(f"Unknown subscription name: {name}")
 
-        g, created = Group.objects.get_or_create(name=group_name)
+        group, created = Group.objects.get_or_create(name=group_name)
 
         try:
-            s = Subscription.objects.get(name=name)
+            s = Subscription.objects.get(name=name.value)
         except Subscription.DoesNotExist:
+            recurrence_unit = None
+            recurrence_period = None
+
+            if name in (
+                SubscriptionName.LITE_2020_AUTORENEW_MONTHLY,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY,
+            ):
+                recurrence_unit = 'M'
+                recurrence_period = 1
+            elif name in (
+                SubscriptionName.LITE_2020_AUTORENEW_YEARLY,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY,
+                SubscriptionName.LITE_CLASSIC_AUTORENEW,
+                SubscriptionName.PREMIUM_CLASSIC_AUTORENEW,
+            ):
+                recurrence_unit = 'Y'
+                recurrence_period = 1
+
             s, created = Subscription.objects.get_or_create(
                 name=name.value,
                 price=1,
-                group=g,
+                group=group,
                 category='premium_autorenew' if 'autorenew' in name.value else "premium",
-                recurrence_unit='Y' if 'autorenew' in name.value else None,
-                recurrence_period=1 if 'autorenew' in name.value else 0,
+                recurrence_unit=recurrence_unit,
+                recurrence_period=recurrence_period,
             )
 
-        us, created = UserSubscription.objects.get_or_create(
+        user_subscription, created = UserSubscription.objects.get_or_create(
             user=user,
             subscription=s,
-            expires=date.today() + timedelta(days=1))
-        us.subscribe()
+            expires=date.today() + timedelta(days=1),
+            cancelled=False,
+        )
+        user_subscription.subscribe()
 
-        return us
+        return user_subscription
 
     @staticmethod
     def forum_category(**kwargs):

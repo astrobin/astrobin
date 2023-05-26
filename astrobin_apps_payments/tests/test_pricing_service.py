@@ -9,7 +9,7 @@ from subscription.models import Subscription
 from astrobin.tests.generators import Generators
 from astrobin_apps_payments.models import ExchangeRate
 from astrobin_apps_payments.services.pricing_service import PricingService
-from astrobin_apps_premium.services.premium_service import SubscriptionName
+from astrobin_apps_premium.services.premium_service import SubscriptionDisplayName, SubscriptionName
 
 
 class PricingServiceTest(TestCase):
@@ -46,21 +46,38 @@ class PricingServiceTest(TestCase):
             time=datetime.now()
         )
 
-    def test_chf(self):
-        self.assertEqual(20, PricingService.get_price('lite', 'CHF'))
-        self.assertEqual(40, PricingService.get_price('premium', 'CHF'))
-        self.assertEqual(60, PricingService.get_price('ultimate', 'CHF'))
+    @patch('astrobin_apps_payments.services.pricing_service.PricingService.get_stripe_price')
+    def test_chf(self, get_stripe_price):
+        get_stripe_price.return_value = 20
+        self.assertEqual(20, PricingService.get_price(SubscriptionDisplayName.LITE, 'CH', 'CHF'))
 
+        get_stripe_price.return_value = 40
+        self.assertEqual(40, PricingService.get_price(SubscriptionDisplayName.PREMIUM, 'CH', 'CHF'))
 
-    def test_usd(self):
-        self.assertEqual(22.0, PricingService.get_price('lite', 'USD'))
-        self.assertEqual(44.0, PricingService.get_price('premium', 'USD'))
-        self.assertEqual(66.0, PricingService.get_price('ultimate', 'USD'))
+        get_stripe_price.return_value = 60
+        self.assertEqual(60, PricingService.get_price(SubscriptionDisplayName.ULTIMATE, 'CH', 'CHF'))
 
-    def test_eur_with_50c_rounding_up(self):
-        self.assertEqual(22.5, PricingService.get_price('lite', 'EUR'))
-        self.assertEqual(44.5, PricingService.get_price('premium', 'EUR'))
-        self.assertEqual(66.5, PricingService.get_price('ultimate', 'EUR'))
+    @patch('astrobin_apps_payments.services.pricing_service.PricingService.get_stripe_price')
+    def test_usd(self, get_stripe_price):
+        get_stripe_price.return_value = 22
+        self.assertEqual(22.0, PricingService.get_price(SubscriptionDisplayName.LITE, 'US', 'USD'))
+
+        get_stripe_price.return_value = 44
+        self.assertEqual(44.0, PricingService.get_price(SubscriptionDisplayName.PREMIUM, 'US', 'USD'))
+
+        get_stripe_price.return_value = 66
+        self.assertEqual(66.0, PricingService.get_price(SubscriptionDisplayName.ULTIMATE, 'US', 'USD'))
+
+    @patch('astrobin_apps_payments.services.pricing_service.PricingService.get_stripe_price')
+    def test_eur_with_50c_rounding_up(self, get_stripe_price):
+        get_stripe_price.return_value = 22.5
+        self.assertEqual(22.5, PricingService.get_price(SubscriptionDisplayName.LITE, 'DE', 'EUR'))
+
+        get_stripe_price.return_value = 44.5
+        self.assertEqual(44.5, PricingService.get_price(SubscriptionDisplayName.PREMIUM, 'DE', 'EUR'))
+
+        get_stripe_price.return_value = 66.5
+        self.assertEqual(66.5, PricingService.get_price(SubscriptionDisplayName.ULTIMATE, 'DE', 'EUR'))
 
     def test_are_non_autorenewing_subscription_supported_when_user_is_None(self):
         self.assertFalse(PricingService.non_autorenewing_supported(None))
