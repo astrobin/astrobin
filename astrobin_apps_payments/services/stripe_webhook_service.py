@@ -119,6 +119,9 @@ class StripeWebhookService(object):
             if 'cancel_at_period_end' in event['data']['previous_attributes']:
                 user_subscription.cancelled = session['cancel_at_period_end']
                 user_subscription.save()
+            elif 'current_period_end' in event['data']['previous_attributes']:
+                user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
+                user_subscription.save()
             elif 'items' in event['data']['previous_attributes']:
                 new_attributes = session['items']['data'][0]
                 previous_attributes = event['data']['previous_attributes']['items']['data'][0]

@@ -1,0 +1,173 @@
+{
+  "id": "evt_1NC61dC0tT6bv7HdMxTwIHHv",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1685128208,
+  "data": {
+    "object": {
+      "id": "sub_1NC5wgC0tT6bv7HdAAlrRAw0",
+      "object": "subscription",
+      "application": null,
+      "application_fee_percent": null,
+      "automatic_tax": {
+        "enabled": false
+      },
+      "billing_cycle_anchor": 1685127731,
+      "billing_thresholds": null,
+      "cancel_at": null,
+      "cancel_at_period_end": false,
+      "canceled_at": null,
+      "cancellation_details": {
+        "comment": null,
+        "feedback": null,
+        "reason": null
+      },
+      "collection_method": "charge_automatically",
+      "created": 1685127731,
+      "currency": "chf",
+      "current_period_end": 1779822131,
+      "current_period_start": 1748286131,
+      "customer": "STRIPE_CUSTOMER_ID",
+      "days_until_due": null,
+      "default_payment_method": null,
+      "default_source": "card_1NC5wcC0tT6bv7HdWOSqGgH4",
+      "default_tax_rates": [
+      ],
+      "description": null,
+      "discount": null,
+      "ended_at": null,
+      "items": {
+        "object": "list",
+        "data": [
+          {
+            "id": "si_Ny20DpKXIWi0v0",
+            "object": "subscription_item",
+            "billing_thresholds": null,
+            "created": 1685127731,
+            "metadata": {
+            },
+            "plan": {
+              "id": "price_1NAtotC0tT6bv7Hd2LUGNacO",
+              "object": "plan",
+              "active": true,
+              "aggregate_usage": null,
+              "amount": 6000,
+              "amount_decimal": "6000",
+              "billing_scheme": "per_unit",
+              "created": 1684842963,
+              "currency": "chf",
+              "interval": "year",
+              "interval_count": 1,
+              "livemode": false,
+              "metadata": {
+              },
+              "nickname": "AstroBin Ultimate 1 year recurring (tier 1)",
+              "product": "STRIPE_PRODUCT_ULTIMATE_TEST",
+              "tiers_mode": null,
+              "transform_usage": null,
+              "trial_period_days": null,
+              "usage_type": "licensed"
+            },
+            "price": {
+              "id": "price_1NAtotC0tT6bv7Hd2LUGNacO",
+              "object": "price",
+              "active": true,
+              "billing_scheme": "per_unit",
+              "created": 1684842963,
+              "currency": "chf",
+              "custom_unit_amount": null,
+              "livemode": false,
+              "lookup_key": null,
+              "metadata": {
+              },
+              "nickname": "AstroBin Ultimate 1 year recurring (tier 1)",
+              "product": "STRIPE_PRODUCT_ULTIMATE_TEST",
+              "recurring": {
+                "aggregate_usage": null,
+                "interval": "year",
+                "interval_count": 1,
+                "trial_period_days": null,
+                "usage_type": "licensed"
+              },
+              "tax_behavior": "exclusive",
+              "tiers_mode": null,
+              "transform_quantity": null,
+              "type": "recurring",
+              "unit_amount": 6000,
+              "unit_amount_decimal": "6000"
+            },
+            "quantity": 1,
+            "subscription": "sub_1NC5wgC0tT6bv7HdAAlrRAw0",
+            "tax_rates": [
+            ]
+          }
+        ],
+        "has_more": false,
+        "total_count": 1,
+        "url": "/v1/subscription_items?subscription=sub_1NC5wgC0tT6bv7HdAAlrRAw0"
+      },
+      "latest_invoice": "in_1NC61cC0tT6bv7HdHxAp46Uh",
+      "livemode": false,
+      "metadata": {
+      },
+      "next_pending_invoice_item_invoice": null,
+      "on_behalf_of": null,
+      "pause_collection": null,
+      "payment_settings": {
+        "payment_method_options": null,
+        "payment_method_types": null,
+        "save_default_payment_method": "off"
+      },
+      "pending_invoice_item_interval": null,
+      "pending_setup_intent": null,
+      "pending_update": null,
+      "plan": {
+        "id": "price_1NAtotC0tT6bv7Hd2LUGNacO",
+        "object": "plan",
+        "active": true,
+        "aggregate_usage": null,
+        "amount": 6000,
+        "amount_decimal": "6000",
+        "billing_scheme": "per_unit",
+        "created": 1684842963,
+        "currency": "chf",
+        "interval": "year",
+        "interval_count": 1,
+        "livemode": false,
+        "metadata": {
+        },
+        "nickname": "AstroBin Ultimate 1 year recurring (tier 1)",
+        "product": "STRIPE_PRODUCT_ULTIMATE_TEST",
+        "tiers_mode": null,
+        "transform_usage": null,
+        "trial_period_days": null,
+        "usage_type": "licensed"
+      },
+      "quantity": 1,
+      "schedule": null,
+      "start_date": 1685127731,
+      "status": "active",
+      "test_clock": "clock_1NC5tzC0tT6bv7HdckRzJXSm",
+      "transfer_data": null,
+      "trial_end": null,
+      "trial_settings": {
+        "end_behavior": {
+          "missing_payment_method": "create_invoice"
+        }
+      },
+      "trial_start": null
+    },
+    "previous_attributes": {
+      "current_period_end": 1748286131,
+      "current_period_start": 1716750131,
+      "latest_invoice": "in_1NC5yVC0tT6bv7HdxPNLxFMO"
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": null,
+    "idempotency_key": null
+  },
+  "type": "customer.subscription.updated"
+}

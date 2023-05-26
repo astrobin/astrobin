@@ -17,7 +17,7 @@ STRIPE = {
     'products': {
         'lite': test_or_live('STRIPE_PRODUCT_LITE_XXXX'),
         'premium': test_or_live('STRIPE_PRODUCT_PREMIUM_XXXX'),
-        'ultimate': test_or_live('STRIPE_PRODUCT_ULTIMATE_XXXX'),
+        'ultimate': test_or_live('STRIPE_PRODUCT_ULTIMATE_TEST'),
     },
     'prices': {
         'lite': {
