@@ -37,43 +37,43 @@ class PremiumTest(TestCase):
         self.ultimate_2020_group, created = Group.objects.get_or_create(name="astrobin_ultimate_2020")
 
         self.ultimate_2020_sub, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.ULTIMATE_2020,
+            name=SubscriptionName.ULTIMATE_2020.value,
             price=1,
             group=self.ultimate_2020_group,
             category="premium")
 
         self.premium_2020_sub, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.PREMIUM_2020,
+            name=SubscriptionName.PREMIUM_2020.value,
             price=1,
             group=self.premium_2020_group,
             category="premium")
 
         self.lite_2020_sub, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.LITE_2020,
+            name=SubscriptionName.LITE_2020.value,
             price=1,
             group=self.lite_2020_group,
             category="premium")
 
         self.premium_sub, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.PREMIUM_CLASSIC,
+            name=SubscriptionName.PREMIUM_CLASSIC.value,
             price=1,
             group=self.premium_group,
             category="premium")
 
         self.premium_autorenew_sub, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW,
+            name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value,
             price=1,
             group=self.premium_group,
             category="premium_autorenew")
 
         self.lite_sub, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.LITE_CLASSIC,
+            name=SubscriptionName.LITE_CLASSIC.value,
             price=1,
             group=self.lite_group,
             category="premium")
 
         self.lite_autorenew_sub, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.LITE_CLASSIC_AUTORENEW,
+            name=SubscriptionName.LITE_CLASSIC_AUTORENEW.value,
             price=1,
             group=self.lite_group,
             category="premium_autorenew")

@@ -129,7 +129,7 @@ class APITest(TestCase):
         group, created = Group.objects.get_or_create(name="astrobin_premium")
 
         premium_sub, created = Subscription.objects.get_or_create(
-            name=SubscriptionName.PREMIUM_CLASSIC,
+            name=SubscriptionName.PREMIUM_CLASSIC.value,
             price=1,
             group=group,
             category="premium")
