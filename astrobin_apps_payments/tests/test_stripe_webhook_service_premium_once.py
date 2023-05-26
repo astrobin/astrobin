@@ -11,7 +11,7 @@ from astrobin_apps_payments.tests.stripe_generators import StripeGenerators
 from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 
 
-class StripeWebhookServicePremiumOnceFirstOrderTest(TestCase):
+class StripeWebhookServicePremiumOnceTest(TestCase):
     def setUp(self):
         self.subscription, created = Subscription.objects.get_or_create(
             name=SubscriptionName.PREMIUM_2020.value,

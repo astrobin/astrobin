@@ -534,7 +534,7 @@ class IotdServiceTest(TestCase):
 
     def test_get_submission_queue_own_image_as_collaborator(self):
         user = Generators.user()
-        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
         submitter = Generators.user(groups=['iotd_submitters'])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
@@ -763,7 +763,7 @@ class IotdServiceTest(TestCase):
         submitter2 = Generators.user(groups=['iotd_submitters'])
         reviewer = Generators.user(groups=['iotd_reviewers'])
 
-        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
         image = Generators.image(user=uploader, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter, submitter2)
@@ -1336,7 +1336,7 @@ class IotdServiceTest(TestCase):
         reviewer2 = Generators.user(groups=['iotd_reviewers'])
         judge = Generators.user(groups=['iotd_judges'])
 
-        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
         image = Generators.image(user=uploader, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter, submitter2)

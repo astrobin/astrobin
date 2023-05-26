@@ -180,7 +180,7 @@ class IotdTest(TestCase):
         self.image.save(keep_deleted=True)
 
     def test_submission_model_cannot_submit_own_image_as_collaborator(self):
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         self.image.user = self.user
         self.image.collaborators.add(self.submitter_1)
         self.image.save(keep_deleted=True)
@@ -328,7 +328,7 @@ class IotdTest(TestCase):
         self.image.save(keep_deleted=True)
 
     def test_vote_model_cannot_vote_own_image_as_collaborator(self):
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
 
         submission_1 = IotdSubmission.objects.create(
             submitter=self.submitter_1,
