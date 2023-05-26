@@ -2,6 +2,7 @@ import json
 import logging
 from datetime import datetime
 
+import stripe
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -10,6 +11,7 @@ from django.http import HttpResponseBadRequest
 from django.utils import timezone
 from paypal.standard.ipn.models import PayPalIPN
 from paypal.standard.models import ST_PP_CANCELLED, ST_PP_COMPLETED, ST_PP_CREATED
+from stripe.error import StripeError
 from subscription.models import (
     Subscription, Transaction, UserSubscription, handle_payment_was_successful,
     handle_subscription_cancel, handle_subscription_signup,
@@ -31,12 +33,28 @@ class StripeWebhookService(object):
     def get_user_from_session(session) -> User:
         customer_id = session['customer']
 
-        try:
-            user = User.objects.get(userprofile__stripe_customer_id=customer_id)
-        except User.DoesNotExist:
+        user = get_object_or_None(User, userprofile__stripe_customer_id=customer_id)
+
+        if user is None:
             try:
-                user = User.objects.get(email=session['email'])
-            except (KeyError, User.DoesNotExist):
+                user = User.objects.get(email=session['customer_email'])
+            except KeyError:
+                stripe.api_key = settings.STRIPE['keys']['secret']
+                try:
+                    customer = stripe.Customer.retrieve(customer_id)
+                except StripeError:
+                    log.exception("stripe_webhook: unable to fetch customer id %s" % customer_id)
+                    raise
+                user = get_object_or_None(User, email=customer.email)
+                if user is None:
+                    log.exception(
+                        "stripe_webhook: user invalid user by customer id %s and email %s" % (
+                            customer_id,
+                            customer.email
+                        )
+                    )
+                    raise AttributeError("User not found")
+            except User.DoesNotExist:
                 log.exception("stripe_webhook: user invalid user by customer id %s" % customer_id)
                 raise
 
@@ -84,7 +102,10 @@ class StripeWebhookService(object):
         session = StripeWebhookService.get_session_from_event(event)
 
         # We take the chance here to make sure the user has a stripe customer id.
-        UserProfile.objects.filter(user__email=session['recipient_email']).update(stripe_customer_id=session['customer'])
+        if 'recipient_email' in session:
+            UserProfile.objects\
+                .filter(user__email=session['recipient_email'])\
+                .update(stripe_customer_id=session['customer'])
 
     @staticmethod
     def on_customer_subscription_deleted(event):
@@ -93,7 +114,7 @@ class StripeWebhookService(object):
         subscription = StripeWebhookService.get_subscription_from_session(session)
 
         UserProfile.objects \
-            .filter(stripe_subscription_id=session['id']) \
+            .filter(user=user) \
             .update(stripe_subscription_id=None, updated=timezone.now())
 
         ipn = PayPalIPN.objects.create(

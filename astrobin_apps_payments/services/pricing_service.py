@@ -114,9 +114,11 @@ class PricingService:
             'price': PricingService.get_stripe_price_object(product_name, country_code, recurring_unit)["id"]
         }]
 
+        customer = PricingService.get_stripe_customer(user)
+
         try:
             invoice = stripe.Invoice.upcoming(
-                customer=user.userprofile.stripe_customer_id,
+                customer=customer.id,
                 subscription=user.userprofile.stripe_subscription_id,
                 subscription_items=items,
                 subscription_proration_date=proration_date,
@@ -169,12 +171,21 @@ class PricingService:
     @staticmethod
     def get_stripe_customer(user: User):
         stripe.api_key = settings.STRIPE['keys']['secret']
-        try:
-            customer = stripe.Customer.list(email=user.email, limit=1)
-            if len(customer['data']) == 1:
-                return customer['data'][0]
-        except StripeError as e:
-            logger.error('Error retrieving Stripe customer %s: %s' % (user.email, e))
+
+        if user.userprofile.stripe_customer_id:
+            try:
+                customer = stripe.Customer.retrieve(user.userprofile.stripe_customer_id)
+                if hasattr(customer, 'deleted') and customer.deleted:
+                    raise StripeError
+                return customer
+            except StripeError:
+                logger.error('Error retrieving Stripe customer %s' % user.userprofile.stripe_customer_id)
+                try:
+                    customer = stripe.Customer.list(email=user.email, limit=1)
+                    if len(customer['data']) == 1:
+                        return customer['data'][0]
+                except StripeError as e:
+                    logger.error('Error retrieving Stripe customer %s: %s' % (user.email, e))
 
         return None
 
