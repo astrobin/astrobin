@@ -21,14 +21,22 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         user_subscriptions = UserSubscription.objects.filter(
             subscription__name__in = [
-                SubscriptionName.LITE_CLASSIC,
-                SubscriptionName.PREMIUM_CLASSIC,
-                SubscriptionName.LITE_2020,
-                SubscriptionName.PREMIUM_2020,
-                SubscriptionName.ULTIMATE_2020,
+                SubscriptionName.LITE_CLASSIC.value,
+                SubscriptionName.PREMIUM_CLASSIC.value,
+                SubscriptionName.LITE_CLASSIC_AUTORENEW.value,
+                SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value,
+                SubscriptionName.LITE_2020.value,
+                SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value,
+                SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value,
+                SubscriptionName.PREMIUM_2020.value,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value,
+                SubscriptionName.ULTIMATE_2020.value,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value,
             ],
             active=True,
-            expires = datetime.now() - timedelta(days = 1))
+            expires = datetime.now() - timedelta(days=2))
 
         for user_subscription in user_subscriptions:
             push_notification([user_subscription.user], None, 'expired_subscription', {

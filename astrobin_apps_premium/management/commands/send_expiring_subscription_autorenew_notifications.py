@@ -29,8 +29,8 @@ class Command(BaseCommand):
                     SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value,
                 ],
                 cancelled=False,
-                expires = datetime.now() + timedelta(days = 7))\
-            .exclude(subscription__recurrence_unit = None)
+                expires=datetime.now() + timedelta(days=7)
+            )
 
         for user_subscription in user_subscriptions:
             push_notification([user_subscription.user], None, 'expiring_subscription_autorenew', {
@@ -47,8 +47,8 @@ class Command(BaseCommand):
                 SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value,
             ],
             cancelled=False,
-            expires=datetime.now() + timedelta(days=30)) \
-            .exclude(subscription__recurrence_unit=None)
+            expires=datetime.now() + timedelta(days=30)
+        )
 
         for user_subscription in user_subscriptions:
             push_notification([user_subscription.user], None, 'expiring_subscription_autorenew_30d', {
