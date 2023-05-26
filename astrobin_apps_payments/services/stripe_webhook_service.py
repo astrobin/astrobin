@@ -108,32 +108,30 @@ class StripeWebhookService(object):
     def on_customer_subscription_updated(event):
         session = StripeWebhookService.get_session_from_event(event)
         user = StripeWebhookService.get_user_from_session(session)
+        subscription = StripeWebhookService.get_subscription_from_session(session)
+        user_subscription: UserSubscription = get_object_or_None(
+            UserSubscription, user=user, subscription=subscription
+        )
 
         UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
 
-        if session['cancel_at_period_end']:
-            subscription = StripeWebhookService.get_subscription_from_session(session)
-            user_subscription: UserSubscription = get_object_or_None(
-                UserSubscription, user=user, subscription=subscription
-            )
-            user_subscription.cancelled = True
-            user_subscription.save()
-
-        if 'previous_attributes' in event['data'] and 'items' in event['data']['previous_attributes']:
-            new_attributes = session['items']['data'][0]
-            previous_attributes = event['data']['previous_attributes']['items']['data'][0]
-            if previous_attributes['price']['product'] != new_attributes['price']['product']:
-                previous_subscription = StripeWebhookService.get_subscription_from_session(
-                    event['data']['previous_attributes']
-                )
-                new_subscription = StripeWebhookService.get_subscription_from_session(session)
-
-                user_subscription: UserSubscription = get_object_or_None(
-                    UserSubscription, user=user, subscription=previous_subscription
-                )
-
-                user_subscription.subscription = new_subscription
+        if 'previous_attributes' in event['data']:
+            if 'cancel_at_period_end' in event['data']['previous_attributes']:
+                user_subscription.cancelled = session['cancel_at_period_end']
                 user_subscription.save()
+            elif 'items' in event['data']['previous_attributes']:
+                new_attributes = session['items']['data'][0]
+                previous_attributes = event['data']['previous_attributes']['items']['data'][0]
+                if previous_attributes['price']['product'] != new_attributes['price']['product']:
+                    previous_subscription = StripeWebhookService.get_subscription_from_session(
+                        event['data']['previous_attributes']
+                    )
+                    previous_user_subscription: UserSubscription = get_object_or_None(
+                        UserSubscription, user=user, subscription=previous_subscription
+                    )
+
+                    previous_user_subscription.subscription = subscription
+                    previous_user_subscription.save()
 
     @staticmethod
     def on_customer_subscription_created(event):
