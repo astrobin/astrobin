@@ -6,12 +6,12 @@ from astrobin_apps_equipment.models import Camera, Sensor
 
 
 class SensorSerializer(EquipmentItemSerializer):
-    
+
     cameras = serializers.SerializerMethodField(read_only=True)
-    
+
     def get_cameras(self, item):
         return Camera.objects.filter(sensor=item.id).values_list('pk', flat=True)
-    
+
     class Meta:
         model = Sensor
         fields = '__all__'
