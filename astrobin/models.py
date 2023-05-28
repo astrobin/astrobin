@@ -2475,6 +2475,13 @@ class UserProfile(SafeDeleteModel):
         max_length=2
     )
 
+    signup_country = models.CharField(
+        editable=False,
+        null=True,
+        blank=True,
+        max_length=2
+    )
+
     display_member_since = models.BooleanField(
         default=True,
         verbose_name=_("Allow others to see when you created your AstroBin account"),
