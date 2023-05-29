@@ -79,7 +79,8 @@ def create_checkout_session(request, user_pk: int, product: str, currency: str, 
         user_pk, product, currency, recurring_unit, autorenew
     )
 
-    country_code = get_client_country_code(request)
+    country_code = user.userprofile.signup_country or get_client_country_code(request) or 'us'
+    country_code = country_code.lower() if country_code != 'UNKNOWN' else 'us'
 
     price = PricingService.get_full_price(
         SubscriptionDisplayName.from_string(product),
