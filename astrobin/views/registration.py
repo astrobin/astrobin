@@ -185,7 +185,10 @@ def user_created(sender, user, request, **kwargs):
     form = AstroBinRegistrationForm(request.POST)
     profile, created = UserProfile.objects.get_or_create(user=user)
 
-    UserService(profile.user).set_last_seen(get_client_country_code(request))
+    country_code = get_client_country_code(request)
+
+    UserService(profile.user).set_last_seen(country_code)
+    UserService(profile.user).set_signup_country(country_code)
     profile.refresh_from_db()
 
     group, created = Group.objects.get_or_create(name=GroupName.OWN_EQUIPMENT_MIGRATORS)
