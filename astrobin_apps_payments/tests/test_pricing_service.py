@@ -129,3 +129,21 @@ class PricingServiceTest(TestCase):
         us.save()
 
         self.assertTrue(PricingService.non_autorenewing_supported(user))
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_are_non_autorenewing_subscription_supported_when_user_has_non_recurring_subscription_not_expired_too_long_ago_but_recurring_subscription_too(
+            self, is_authenticated
+    ):
+        is_authenticated.return_value = True
+
+        user = Generators.user()
+
+        us = Generators.premium_subscription(user, SubscriptionName.PREMIUM_2020)
+        us.expires = date.today() - timedelta(365 * 2 - 1)
+        us.save()
+
+        us = Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY)
+        us.expires = date.today() + timedelta(365)
+        us.save()
+
+        self.assertFalse(PricingService.non_autorenewing_supported(user))

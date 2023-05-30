@@ -36,6 +36,20 @@ class PricingService:
         if user is None or not user.is_authenticated:
             return False
 
+        # User who have had an autorecurring Stripe subscription in the past cannot switch back.
+        if (UserSubscription.objects.filter(
+            user=user,
+            subscription__name__in=[
+                SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value,
+                SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value,
+                SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value,
+                SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value,
+            ]
+        )).exists():
+            return False
+
         # Users who have had a non-autorenewing subscription less than 2 years ago can still opt to choose
         # non-autorenewal.
         return UserSubscription.objects.filter(
