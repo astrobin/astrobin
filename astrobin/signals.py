@@ -675,6 +675,16 @@ def user_subscription_post_delete(sender, instance, **kwargs):
 post_delete.connect(user_subscription_post_delete, sender=UserSubscription)
 
 
+def user_subscription_post_save(sender, instance, created, **kwargs):
+    try:
+        PremiumService(instance.user).clear_subscription_status_cache_keys()
+    except (User.DoesNotExist, UserProfile.DoesNotExist):
+        pass
+
+
+post_save.connect(user_subscription_post_save, sender=UserSubscription)
+
+
 def group_pre_save(sender, instance, **kwargs):
     try:
         group = sender.objects.get(pk=instance.pk)

@@ -44,7 +44,14 @@ class StripeWebhookService(object):
                     customer = stripe.Customer.retrieve(customer_id)
                 except StripeError:
                     log.exception("stripe_webhook: unable to fetch customer id %s" % customer_id)
-                    raise
+                    raise AttributeError("Unable to fetch customer")
+
+                if hasattr(customer, 'deleted') and customer.deleted:
+                    log.error("stripe_webhook: customer id %s has been deleted" % customer_id)
+                    raise AttributeError("Customer has been deleted")
+                if not hasattr(customer, 'email'):
+                    log.error("stripe_webhook: customer id %s has no email" % customer_id)
+                    raise AttributeError("Customer has no email")
                 user = get_object_or_None(User, email=customer.email)
                 if user is None:
                     log.exception(
@@ -56,7 +63,7 @@ class StripeWebhookService(object):
                     raise AttributeError("User not found")
             except User.DoesNotExist:
                 log.exception("stripe_webhook: user invalid user by customer id %s" % customer_id)
-                raise
+                raise AttributeError("User not found")
 
         return user
 
@@ -137,10 +144,10 @@ class StripeWebhookService(object):
         UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
 
         if 'previous_attributes' in event['data']:
-            if 'cancel_at_period_end' in event['data']['previous_attributes']:
+            if user_subscription and 'cancel_at_period_end' in event['data']['previous_attributes']:
                 user_subscription.cancelled = session['cancel_at_period_end']
                 user_subscription.save()
-            elif 'current_period_end' in event['data']['previous_attributes']:
+            elif user_subscription and 'current_period_end' in event['data']['previous_attributes']:
                 user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
                 user_subscription.save()
             elif 'items' in event['data']['previous_attributes']:
@@ -155,6 +162,10 @@ class StripeWebhookService(object):
                     )
 
                     previous_user_subscription.subscription = subscription
+                    try:
+                        previous_user_subscription.cancelled = session['cancel_at_period_end']
+                    except KeyError:
+                        previous_user_subscription.cancelled = False
                     previous_user_subscription.save()
 
     @staticmethod

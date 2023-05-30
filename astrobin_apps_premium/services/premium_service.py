@@ -8,6 +8,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db.models import Q, QuerySet
+from django.utils import timezone
 from subscription.models import UserSubscription
 
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
@@ -94,14 +95,16 @@ class PremiumService:
         
     def clear_subscription_status_cache_keys(self):
         pk: int = self.user.pk
-        
+
         for key in (
-            'has_expired_paid_subscription',
-            'has_paid_subscription_near_expiration',
-            'astrobin_is_donor',
-            'astrobin_valid_usersubscription'
+                'has_expired_paid_subscription',
+                'has_paid_subscription_near_expiration',
+                'astrobin_is_donor',
+                'astrobin_valid_usersubscription'
         ):
             cache.delete(f'{key}_{pk}')
+
+        UserProfile.objects.filter(user=self.user).update(updated=timezone.now())
 
     def get_valid_usersubscription(self):
         if self.user is None or self.user.pk is None or not self.user.is_authenticated:

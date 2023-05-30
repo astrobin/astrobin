@@ -116,6 +116,10 @@ class PricingService:
 
         customer = PricingService.get_stripe_customer(user)
 
+        if not customer:
+            logger.error('Error retrieving Stripe customer %s' % user.userprofile.stripe_customer_id)
+            return 0
+
         try:
             invoice = stripe.Invoice.upcoming(
                 customer=customer.id,
@@ -124,6 +128,7 @@ class PricingService:
                 subscription_proration_date=proration_date,
             )
         except StripeError as e:
+            logger.error(e)
             return 0
 
         return -invoice['lines']['data'][0]['amount'] / 100
