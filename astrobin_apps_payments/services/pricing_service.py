@@ -214,95 +214,243 @@ class PricingService:
             country_code: str,
             recurring_unit: Optional[SubscriptionRecurringUnit] = None
     ):
-        # Tier 1: High-Income Countries
-        tier_1 = [
-            'AT',  # Austria
-            'AU',  # Australia
-            'BE',  # Belgium
-            'CA',  # Canada
-            'CH',  # Switzerland
-            'DE',  # Germany
-            'DK',  # Denmark
-            'ES',  # Spain
-            'FI',  # Finland
-            'FR',  # France
-            'GB',  # United Kingdom
-            'IE',  # Ireland
-            'IS',  # Iceland
-            'JP',  # Japan
-            'LU',  # Luxembourg
-            'NL',  # Netherlands
-            'NO',  # Norway
-            'NZ',  # New Zealand
-            'SE',  # Sweden
-            'SG',  # Singapore
-            'US'  # United States
+        # Data from https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(PPP)_per_capita
+        countries_sorted_by_gdp_per_capita = [
+            "LI",  # Liechtenstein
+            "LU",  # Luxembourg
+            "MC",  # Monaco
+            "SG",  # Singapore
+            "IE",  # Ireland
+            "QA",  # Qatar
+            "IM",  # Isle of Man
+            "BM",  # Bermuda
+            "CH",  # Switzerland
+            "FK",  # Falkland Islands
+            "AE",  # United Arab Emirates
+            "KY",  # Cayman Islands
+            "NO",  # Norway
+            "MO",  # Macau
+            "US",  # United States
+            "GI",  # Gibraltar
+            "BN",  # Brunei
+            "HK",  # Hong Kong
+            "DK",  # Denmark
+            "NL",  # Netherlands
+            "JE",  # Jersey
+            "SM",  # San Marino
+            "AT",  # Austria
+            "IS",  # Iceland
+            "SE",  # Sweden
+            "DE",  # Germany
+            "GG",  # Guernsey
+            "BE",  # Belgium
+            "TW",  # Taiwan
+            "AD",  # Andorra
+            "AU",  # Australia
+            "BH",  # Bahrain
+            "FI",  # Finland
+            "CA",  # Canada
+            "PM",  # Saint Pierre and Miquelon
+            "FR",  # France
+            "GB",  # United Kingdom
+            "MT",  # Malta
+            "SA",  # Saudi Arabia
+            "KR",  # South Korea
+            "KW",  # Kuwait
+            "NZ",  # New Zealand
+            "IL",  # Israel
+            "IT",  # Italy
+            "GL",  # Greenland
+            "CY",  # Cyprus
+            "JP",  # Japan
+            "CZ",  # Czech Republic
+            "SI",  # Slovenia
+            "FO",  # Faroe Islands
+            "LT",  # Lithuania
+            "AW",  # Aruba
+            "EE",  # Estonia
+            "ES",  # Spain
+            "VI",  # U.S. Virgin Islands
+            "GU",  # Guam
+            "SX",  # Sint Maarten (Dutch part)
+            "PL",  # Poland
+            "OM",  # Oman
+            "VG",  # British Virgin Islands
+            "MS",  # Montserrat
+            "PT",  # Portugal
+            "HU",  # Hungary
+            "PR",  # Puerto Rico
+            "LV",  # Latvia
+            "SK",  # Slovakia
+            "HR",  # Croatia
+            "TR",  # Turkey
+            "NC",  # New Caledonia
+            "RO",  # Romania
+            "BS",  # Bahamas
+            "GR",  # Greece
+            "PA",  # Panama
+            "SC",  # Seychelles
+            "RU",  # Russia
+            "KN",  # Saint Kitts and Nevis
+            "MY",  # Malaysia
+            "KZ",  # Kazakhstan
+            "CL",  # Chile
+            "MP",  # Northern Mariana Islands
+            "BG",  # Bulgaria
+            "TT",  # Trinidad and Tobago
+            "UY",  # Uruguay
+            "LY",  # Libya
+            "GY",  # Guyana
+            "AR",  # Argentina
+            "CR",  # Costa Rica
+            "MU",  # Mauritius
+            "CW",  # Curaçao
+            "ME",  # Montenegro
+            "RS",  # Serbia
+            "BY",  # Belarus
+            "MF",  # Saint Martin (French part)
+            "AG",  # Antigua and Barbuda
+            "MX",  # Mexico
+            "MV",  # Maldives
+            "DO",  # Dominican Republic
+            "TC",  # Turks and Caicos Islands
+            "CN",  # China
+            "TH",  # Thailand
+            "PF",  # French Polynesia
+            "CK",  # Cook Islands
+            "MK",  # North Macedonia
+            "BA",  # Bosnia and Herzegovina
+            "GE",  # Georgia
+            "TM",  # Turkmenistan
+            "BW",  # Botswana
+            "SR",  # Suriname
+            "CO",  # Colombia
+            "GQ",  # Equatorial Guinea
+            "AL",  # Albania
+            "AZ",  # Azerbaijan
+            "AM",  # Armenia
+            "BR",  # Brazil
+            "MD",  # Moldova
+            "GA",  # Gabon
+            "BB",  # Barbados
+            "PW",  # Palau
+            "GD",  # Grenada
+            "VC",  # Saint Vincent and the Grenadines
+            "PY",  # Paraguay
+            "LK",  # Sri Lanka
+            "ZA",  # South Africa
+            "LC",  # Saint Lucia
+            "LB",  # Lebanon
+            "UA",  # Ukraine
+            "PE",  # Peru
+            "IR",  # Iran
+            "CU",  # Cuba
+            "AI",  # Anguilla
+            "ID",  # Indonesia
+            "XK",  # Kosovo
+            "NR",  # Nauru
+            "MN",  # Mongolia
+            "EG",  # Egypt
+            "AS",  # American Samoa
+            "DZ",  # Algeria
+            "BT",  # Bhutan
+            "DM",  # Dominica
+            "EC",  # Ecuador
+            "VN",  # Vietnam
+            "FJ",  # Fiji
+            "TN",  # Tunisia
+            "JM",  # Jamaica
+            "JO",  # Jordan
+            "SV",  # El Salvador
+            "NA",  # Namibia
+            "IQ",  # Iraq
+            "SZ",  # Eswatini
+            "GT",  # Guatemala
+            "BZ",  # Belize
+            "PH",  # Philippines
+            "MA",  # Morocco
+            "BO",  # Bolivia
+            "LA",  # Laos
+            "SH",  # Saint Helena
+            "VE",  # Venezuela
+            "UZ",  # Uzbekistan
+            "IN",  # India
+            "CV",  # Cape Verde
+            "TO",  # Tonga
+            "TK",  # Tokelau
+            "MH",  # Marshall Islands
+            "BD",  # Bangladesh
+            "AO",  # Angola
+            "NU",  # Niue
+            "NI",  # Nicaragua
+            "HN",  # Honduras
+            "PS",  # Palestine
+            "WS",  # Samoa
+            "GH",  # Ghana
+            "MR",  # Mauritania
+            "CI",  # Ivory Coast
+            "PK",  # Pakistan
+            "TL",  # East Timor
+            "DJ",  # Djibouti
+            "NG",  # Nigeria
+            "TV",  # Tuvalu
+            "KG",  # Kyrgyzstan
+            "KE",  # Kenya
+            "KH",  # Cambodia
+            "MM",  # Myanmar
+            "ST",  # São Tomé and Príncipe
+            "TJ",  # Tajikistan
+            "NP",  # Nepal
+            "WF",  # Wallis and Futuna
+            "CM",  # Cameroon
+            "PG",  # Papua New Guinea
+            "SD",  # Sudan
+            "SN",  # Senegal
+            "BJ",  # Benin
+            "FM",  # Micronesia
+            "CG",  # Congo
+            "ZM",  # Zambia
+            "KM",  # Comoros
+            "HT",  # Haiti
+            "SY",  # Syria
+            "VU",  # Vanuatu
+            "TZ",  # Tanzania
+            "GN",  # Guinea
+            "YE",  # Yemen
+            "SB",  # Solomon Islands
+            "ET",  # Ethiopia
+            "LS",  # Lesotho
+            "UG",  # Uganda
+            "RW",  # Rwanda
+            "BF",  # Burkina Faso
+            "GM",  # Gambia
+            "TG",  # Togo
+            "ML",  # Mali
+            "ZW",  # Zimbabwe
+            "KI",  # Kiribati
+            "GW",  # Guinea-Bissau
+            "KP",  # North Korea
+            "ER",  # Eritrea
+            "SL",  # Sierra Leone
+            "SS",  # South Sudan
+            "AF",  # Afghanistan
+            "MG",  # Madagascar
+            "MW",  # Malawi
+            "LR",  # Liberia
+            "TD",  # Chad
+            "NE",  # Niger
+            "MZ",  # Mozambique
+            "CD",  # DR Congo
+            "SO",  # Somalia
+            "CF",  # Central African Republic
+            "BI"  # Burundi
         ]
 
-        # Tier 2: Upper-Middle-Income Countries
-        tier_2 = [
-            'AR',  # Argentina
-            'BR',  # Brazil
-            'CL',  # Chile
-            'CN',  # China
-            'CR',  # Costa Rica
-            'CZ',  # Czech Republic
-            'EE',  # Estonia
-            'GR',  # Greece
-            'HU',  # Hungary
-            'ID',  # Indonesia
-            'IL',  # Israel
-            'IN',  # India
-            'IR',  # Iran
-            'IT',  # Italy
-            'KR',  # South Korea
-            'LT',  # Lithuania
-            'LV',  # Latvia
-            'MT',  # Malta
-            'MX',  # Mexico
-            'MY',  # Malaysia
-            'PA',  # Panama
-            'PL',  # Poland
-            'PT',  # Portugal
-            'RU',  # Russia
-            'SA',  # Saudi Arabia
-            'SI',  # Slovenia
-            'SK',  # Slovakia
-            'TH',  # Thailand
-            'TR',  # Turkey
-            'UA',  # Ukraine
-            'UY',  # Uruguay
-            'ZA'  # South Africa
-        ]
+        total_countries = len(countries_sorted_by_gdp_per_capita)
 
-        # Tier 3: Lower-Middle-Income Countries
-        tier_3 = [
-            'AF',  # Afghanistan
-            'BD',  # Bangladesh
-            'CI',  # Ivory Coast
-            'EG',  # Egypt
-            'ET',  # Ethiopia
-            'GH',  # Ghana
-            'HT',  # Haiti
-            'KE',  # Kenya
-            'LB',  # Lebanon
-            'LK',  # Sri Lanka
-            'MA',  # Morocco
-            'MM',  # Myanmar
-            'MN',  # Mongolia
-            'MZ',  # Mozambique
-            'NG',  # Nigeria
-            'PH',  # Philippines
-            'PK',  # Pakistan
-            'SD',  # Sudan
-            'SN',  # Senegal
-            'TZ',  # Tanzania
-            'UG',  # Uganda
-            'VN',  # Vietnam
-            'YE',  # Yemen
-            'ZM',  # Zambia
-            'ZW'  # Zimbabwe
-        ]
+        tier_1 = countries_sorted_by_gdp_per_capita[:total_countries // 4] # Top 25% of countries
+        tier_2 = countries_sorted_by_gdp_per_capita[total_countries // 4:total_countries // 2] # Then 25% of countries
+        tier_3 = countries_sorted_by_gdp_per_capita[total_countries // 2:] # Bottom 50% of countries
 
         recurring_unit_key = recurring_unit.value.lower() if recurring_unit is not None else 'one-year'
 
