@@ -27,7 +27,7 @@ from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
 from subscription.models import Subscription, Transaction, UserSubscription
-from subscription.signals import paid, signed_up
+from subscription.signals import paid, signed_up, unsubscribed
 from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
@@ -591,6 +591,9 @@ def subscription_paid(sender, **kwargs):
     PremiumService(user).clear_subscription_status_cache_keys()
     UserService(user).update_premium_counter_on_subscription(subscription)
 
+    if subscription.recurrence_unit is not None:
+        return
+
     if 'premium' in subscription.category and Transaction.objects.filter(
             user=user,
             event='new usersubscription',
@@ -605,7 +608,15 @@ def subscription_paid(sender, **kwargs):
             }
         )
     else:
-        push_notification([user], None, 'new_payment', {'BASE_URL': settings.BASE_URL})
+        push_notification(
+            [user],
+            None,
+            'new_payment',
+            {
+                'BASE_URL': settings.BASE_URL,
+                'subscription': subscription
+            }
+        )
 
 
 paid.connect(subscription_paid)
@@ -659,10 +670,32 @@ def subscription_signed_up(sender, **kwargs):
                 {
                     'BASE_URL': settings.BASE_URL,
                     'subscription': subscription
-                })
+                }
+            )
 
 
 signed_up.connect(subscription_signed_up)
+
+
+def subscription_unsubscribed(sender, **kwargs):
+    subscription: Subscription = kwargs.get('subscription')
+    user: User = kwargs.get('user')
+
+    UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
+    PremiumService(user).clear_subscription_status_cache_keys()
+
+    push_notification(
+        [user],
+        None,
+        'subscription_canceled',
+        {
+            'BASE_URL': settings.BASE_URL,
+            'subscription': subscription
+        }
+    )
+
+
+unsubscribed.connect(subscription_unsubscribed)
 
 
 def user_subscription_post_delete(sender, instance, **kwargs):

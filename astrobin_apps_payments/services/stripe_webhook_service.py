@@ -10,7 +10,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponseBadRequest
 from django.utils import timezone
 from paypal.standard.ipn.models import PayPalIPN
-from paypal.standard.models import ST_PP_CANCELLED, ST_PP_COMPLETED, ST_PP_CREATED
+from paypal.standard.models import ST_PP_CANCELLED, ST_PP_COMPLETED, ST_PP_CREATED, ST_PP_PAID
 from stripe.error import StripeError
 from subscription.models import (
     Subscription, Transaction, UserSubscription, handle_payment_was_successful,
@@ -19,6 +19,7 @@ from subscription.models import (
 from subscription.signals import paid
 
 from astrobin.models import UserProfile
+from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 log = logging.getLogger(__name__)
@@ -68,9 +69,9 @@ class StripeWebhookService(object):
         return user
 
     @staticmethod
-    def get_subscription_from_session(session) -> Subscription:
-        product_id = session['items']['data'][0]['price']['product']
-        recurring_unit = session['items']['data'][0]['price']['recurring']['interval']
+    def get_subscription_from_session(session, root='items') -> Subscription:
+        product_id = session[root]['data'][0]['price']['product']
+        recurring_unit = session[root]['data'][0]['price']['recurring']['interval']
 
         subscription_map = {
             settings.STRIPE['products']['lite']:
@@ -115,22 +116,54 @@ class StripeWebhookService(object):
                 .update(stripe_customer_id=session['customer'])
 
     @staticmethod
-    def on_customer_subscription_deleted(event):
+    def on_invoice_paid(event):
         session = StripeWebhookService.get_session_from_event(event)
         user = StripeWebhookService.get_user_from_session(session)
-        subscription = StripeWebhookService.get_subscription_from_session(session)
-
-        UserProfile.objects \
-            .filter(user=user) \
-            .update(stripe_subscription_id=None, updated=timezone.now())
+        subscription = StripeWebhookService.get_subscription_from_session(session, 'lines')
+        user_subscription: UserSubscription = get_object_or_None(
+            UserSubscription, user=user, subscription=subscription
+        )
 
         ipn = PayPalIPN.objects.create(
             custom=user.pk,
             item_number=subscription.pk,
-            payment_status=ST_PP_CANCELLED,
+            payment_status=ST_PP_PAID,
+            mc_gross=subscription.price
         )
 
-        handle_subscription_cancel(ipn)
+        Transaction(
+            user=user,
+            subscription=subscription,
+            ipn=ipn,
+            event='subscription payment',
+            amount=ipn.mc_gross,
+        ).save()
+
+        paid.send(
+            subscription,
+            ipn=ipn,
+            subscription=subscription,
+            user=user,
+            usersubscription=user_subscription,
+        )
+
+        push_notification(
+            [user],
+            None,
+            'new_payment',
+            {
+                'BASE_URL': settings.BASE_URL,
+                'subscription': subscription
+            }
+        )
+
+    @staticmethod
+    def on_customer_subscription_deleted(event):
+        session = StripeWebhookService.get_session_from_event(event)
+
+        UserProfile.objects \
+            .filter(stripe_subscription_id=session['id']) \
+            .update(stripe_subscription_id=None, updated=timezone.now())
 
     @staticmethod
     def on_customer_subscription_updated(event):
@@ -147,6 +180,15 @@ class StripeWebhookService(object):
             if user_subscription and 'cancel_at_period_end' in event['data']['previous_attributes']:
                 user_subscription.cancelled = session['cancel_at_period_end']
                 user_subscription.save()
+
+                if user_subscription.cancelled:
+                    ipn = PayPalIPN.objects.create(
+                        custom=user.pk,
+                        item_number=subscription.pk,
+                        payment_status=ST_PP_CANCELLED,
+                    )
+
+                    handle_subscription_cancel(ipn)
             elif user_subscription and 'current_period_end' in event['data']['previous_attributes']:
                 user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
                 user_subscription.save()
@@ -192,20 +234,14 @@ class StripeWebhookService(object):
         user_subscription.extend()
         user_subscription.save()
 
-        Transaction(
-            user=user,
-            subscription=subscription,
-            ipn=ipn,
-            event='subscription payment',
-            amount=ipn.mc_gross,
-        ).save()
-
-        paid.send(
-            subscription,
-            ipn=ipn,
-            subscription=subscription,
-            user=user,
-            usersubscription=user_subscription,
+        push_notification(
+            [user],
+            None,
+            'new_subscription',
+            {
+                'BASE_URL': settings.BASE_URL,
+                'subscription': subscription
+            }
         )
 
     @staticmethod
@@ -281,6 +317,8 @@ class StripeWebhookService(object):
                 StripeWebhookService.on_customer_deleted(event)
             elif event_type == 'payment_intent.created':
                 StripeWebhookService.on_payment_intent_created(event)
+            elif event_type == 'invoice.paid':
+                StripeWebhookService.on_invoice_paid(event)
             elif event_type == 'customer.subscription.created':
                 StripeWebhookService.on_customer_subscription_created(event)
             elif event_type == 'customer.subscription.deleted':

@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('astrobin', '0171_add_iso_gain_to_ssa_and_fix_flat_darks_help_text'),
+        ('astrobin', '0172_userprofile_signup_country'),
     ]
 
     operations = [
