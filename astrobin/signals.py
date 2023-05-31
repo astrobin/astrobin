@@ -4,6 +4,7 @@ import re
 from itertools import chain
 from typing import List, Set
 
+import stripe
 from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
@@ -26,6 +27,7 @@ from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
+from stripe.error import StripeError
 from subscription.models import Subscription, Transaction, UserSubscription
 from subscription.signals import paid, signed_up, unsubscribed
 from subscription.utils import extend_date_by
@@ -1185,12 +1187,25 @@ def topic_read_tracker_post_save(sender, instance, created, **kwargs):
 post_save.connect(topic_read_tracker_post_save, sender=TopicReadTracker)
 
 
+def user_pre_save(sender, instance, **kwargs):
+    if instance.pk:
+        original_instance = sender.objects.get(pk=instance.pk)
+        if original_instance.email != instance.email and instance.userprofile.stripe_customer_id:
+            stripe.api_key = settings.STRIPE['keys']['secret']
+            try:
+                customer = stripe.Customer.retrieve(instance.userprofile.stripe_customer_id)
+                if customer.email != instance.email:
+                    customer.email = instance.email
+                    customer.save()
+            except StripeError as e:
+                log.error('Error updating Stripe customer: %s' % e)
+
+
+pre_save.connect(user_pre_save, sender=User)
+
+
 def user_post_save(sender, instance, created, **kwargs):
-    if not created:
-        try:
-            instance.userprofile.save(keep_deleted=True)
-        except UserProfile.DoesNotExist:
-            pass
+    UserProfile.objects.filter(user=instance).update(updated=timezone.now())
 
 
 post_save.connect(user_post_save, sender=User)
