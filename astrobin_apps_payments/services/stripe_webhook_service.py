@@ -131,7 +131,7 @@ class StripeWebhookService(object):
             custom=user.pk,
             item_number=subscription.pk,
             payment_status=ST_PP_PAID,
-            mc_gross=subscription.price
+            mc_gross=session['amount_paid'] / 100
         )
 
         Transaction(
@@ -139,7 +139,8 @@ class StripeWebhookService(object):
             subscription=subscription,
             ipn=ipn,
             event='subscription payment',
-            amount=ipn.mc_gross,
+            amount=session['amount_paid'] / 100,
+            comment=session['hosted_invoice_url']
         ).save()
 
         paid.send(
@@ -150,19 +151,30 @@ class StripeWebhookService(object):
             usersubscription=user_subscription,
         )
 
-        push_notification(
-            [user],
-            None,
-            'new_payment',
-            {
-                'BASE_URL': settings.BASE_URL,
-                'subscription': subscription
-            }
-        )
+        if session['amount_paid'] > 0:
+            push_notification(
+                [user],
+                None,
+                'new_payment',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                }
+            )
+        else:
+            log.debug("stripe_webhook: invoice paid with amount 0 by user %s" % user.pk)
 
     @staticmethod
     def on_customer_subscription_deleted(event):
         session = StripeWebhookService.get_session_from_event(event)
+        user = StripeWebhookService.get_user_from_session(session)
+        subscription = StripeWebhookService.get_subscription_from_session(session)
+        user_subscription: UserSubscription = get_object_or_None(
+            UserSubscription, user=user, subscription=subscription
+        )
+
+        if user_subscription:
+            user_subscription.delete()
 
         UserProfile.objects \
             .filter(stripe_subscription_id=session['id']) \
@@ -192,10 +204,12 @@ class StripeWebhookService(object):
                     )
 
                     handle_subscription_cancel(ipn)
-            elif user_subscription and 'current_period_end' in event['data']['previous_attributes']:
+
+            if user_subscription and 'current_period_end' in event['data']['previous_attributes']:
                 user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
                 user_subscription.save()
-            elif 'items' in event['data']['previous_attributes']:
+
+            if 'items' in event['data']['previous_attributes']:
                 new_attributes = session['items']['data'][0]
                 previous_attributes = event['data']['previous_attributes']['items']['data'][0]
                 if previous_attributes['price']['product'] != new_attributes['price']['product']:
@@ -206,12 +220,15 @@ class StripeWebhookService(object):
                         UserSubscription, user=user, subscription=previous_subscription
                     )
 
-                    previous_user_subscription.subscription = subscription
-                    try:
-                        previous_user_subscription.cancelled = session['cancel_at_period_end']
-                    except KeyError:
-                        previous_user_subscription.cancelled = False
-                    previous_user_subscription.save()
+                    if previous_user_subscription:
+                        previous_user_subscription.subscription = subscription
+                        try:
+                            previous_user_subscription.cancelled = session['cancel_at_period_end']
+                        except KeyError:
+                            previous_user_subscription.cancelled = False
+                        previous_user_subscription.save()
+                    else:
+                        log.error(f"Unexpected user subscription change for {user.pk}")
 
     @staticmethod
     def on_customer_subscription_created(event):
