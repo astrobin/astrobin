@@ -134,11 +134,17 @@ class StripeWebhookService(object):
                 UserSubscription, user=user, subscription=subscription
             )
 
+            amount = line['amount'] / 100
+
+            if 'discount_amounts' in line:
+                for discount_amount in line['discount_amounts']:
+                    amount -= discount_amount['amount'] / 100
+
             ipn = PayPalIPN.objects.create(
                 custom=user.pk,
                 item_number=subscription.pk,
                 payment_status=ST_PP_PAID,
-                mc_gross=line['amount'] / 100
+                mc_gross=amount
             )
 
             Transaction(
@@ -146,7 +152,7 @@ class StripeWebhookService(object):
                 subscription=subscription,
                 ipn=ipn,
                 event='subscription payment',
-                amount=line['amount'] / 100,
+                amount=amount,
                 comment=session['hosted_invoice_url']
             ).save()
 
