@@ -2862,6 +2862,21 @@ class UserProfile(SafeDeleteModel):
         editable=False,
     )
 
+    # Stripe data
+    stripe_customer_id = models.CharField(
+        editable=False,
+        max_length=32,
+        blank=True,
+        null=True,
+    )
+
+    stripe_subscription_id = models.CharField(
+        editable=False,
+        max_length=32,
+        blank=True,
+        null=True,
+    )
+
     def get_display_name(self):
         return self.real_name if self.real_name else str(self.user)
 
