@@ -113,6 +113,9 @@ class PricingService:
         if not user:
             return 0
 
+        if not user.is_authenticated:
+            return 0
+
         if not user.userprofile.stripe_subscription_id:
             return 0
 
