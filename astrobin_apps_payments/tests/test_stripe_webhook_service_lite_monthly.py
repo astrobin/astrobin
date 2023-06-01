@@ -1,11 +1,10 @@
-from datetime import date, timedelta
+from datetime import date
 
 from django.contrib.auth.models import Group
 from django.test import TestCase
 from subscription.models import Subscription, Transaction
 from subscription.utils import extend_date_by
 
-from astrobin.models import UserProfile
 from astrobin.tests.generators import Generators
 from astrobin_apps_payments.services.stripe_webhook_service import StripeWebhookService
 from astrobin_apps_payments.tests.stripe_generators import StripeGenerators

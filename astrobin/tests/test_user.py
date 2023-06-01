@@ -796,7 +796,7 @@ class UserTest(TestCase):
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_lite(self):
         self.client.login(username='user', password='password')
-        us = Generators.premium_subscription(self.user, SubscriptionName.LITE_CLASSIC)
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_CLASSIC)
         self.assertNotContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
@@ -822,7 +822,7 @@ class UserTest(TestCase):
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_premium_2020(self):
         self.client.login(username='user', password='password')
-        us = Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_2020)
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_2020)
         self.assertNotContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
@@ -830,7 +830,7 @@ class UserTest(TestCase):
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_ultimate_2020(self):
         self.client.login(username='user', password='password')
-        us = Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         self.assertNotContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')

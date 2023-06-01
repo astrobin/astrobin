@@ -297,7 +297,7 @@ class StripeWebhookService(object):
         log.info("stripe_webhook: user %d product %s / %s / %s" % (user_pk, product, recurring_unit, autorenew))
 
         try:
-            user = User.objects.get(pk=user_pk)
+            User.objects.get(pk=user_pk)
         except User.DoesNotExist:
             log.exception("stripe_webhook: user %d invalid user" % user_pk)
             return HttpResponseBadRequest()
