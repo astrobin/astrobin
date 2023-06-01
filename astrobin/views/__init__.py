@@ -58,19 +58,20 @@ from astrobin.models import (
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
 from astrobin.shortcuts import ajax_response, ajax_success
-from astrobin.templatetags.tags import in_upload_wizard
+from astrobin.templatetags.tags import (
+    has_active_uncanceled_subscription_by_name, in_upload_wizard,
+)
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
 from astrobin_apps_platesolving.services import SolutionService
-from astrobin_apps_premium.services.premium_service import PremiumService
+from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_perform_advanced_platesolving,
     can_restore_from_trash,
 )
 from astrobin_apps_users.services import UserService
-from common.constants import GroupName
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
@@ -1958,6 +1959,35 @@ def user_profile_save_privacy(request):
 @never_cache
 @login_required
 def user_profile_delete(request):
+    has_recurring_subscription = (
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.LITE_CLASSIC_AUTORENEW.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value
+            )
+    )
+
+    form = None
+
     if request.method == 'POST':
         form = DeleteAccountForm(instance=request.user.userprofile, data=request.POST)
         form.full_clean()
@@ -1978,7 +2008,10 @@ def user_profile_delete(request):
     elif request.method == 'GET':
         form = DeleteAccountForm(instance=request.user.userprofile)
 
-    return render(request, 'user/profile/delete.html', {'form': form})
+    return render(request, 'user/profile/delete.html', {
+        'form': form,
+        'has_recurring_subscription': has_recurring_subscription
+    })
 
 
 @never_cache

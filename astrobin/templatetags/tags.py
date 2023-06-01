@@ -506,6 +506,16 @@ def has_subscription_by_name(user, name):
 
 
 @register.filter
+def has_active_uncanceled_subscription_by_name(user, name):
+    if user.is_anonymous:
+        return False
+
+    return UserSubscription.objects.filter(
+        user=user, subscription__name=name, active=True, cancelled=False, expires__gte=date.today()
+    ).count() > 0
+
+
+@register.filter
 def get_usersubscription_by_name(user, name):
     if user.is_anonymous:
         return None
