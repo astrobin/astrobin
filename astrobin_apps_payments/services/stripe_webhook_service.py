@@ -103,7 +103,10 @@ class StripeWebhookService(object):
     @staticmethod
     def on_customer_deleted(event):
         session = StripeWebhookService.get_session_from_event(event)
-        UserProfile.objects.filter(stripe_customer_id=session['id']).update(stripe_customer_id=None)
+        UserProfile.objects.filter(stripe_customer_id=session['id']).update(
+            stripe_customer_id=None,
+            stripe_subscription_id=None
+        )
 
     @staticmethod
     def on_payment_intent_created(event):
