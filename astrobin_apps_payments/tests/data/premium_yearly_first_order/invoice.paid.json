@@ -10,8 +10,8 @@
       "account_country": "CH",
       "account_name": "AstroBin",
       "account_tax_ids": null,
-      "amount_due": 2250,
-      "amount_paid": 2250,
+      "amount_due": 4500,
+      "amount_paid": 4500,
       "amount_remaining": 0,
       "amount_shipping": 0,
       "application": null,
@@ -67,8 +67,8 @@
           {
             "id": "il_1NBuLCC0tT6bv7Hda9lVJIWF",
             "object": "line_item",
-            "amount": 2250,
-            "amount_excluding_tax": 2250,
+            "amount": 4500,
+            "amount_excluding_tax": 4500,
             "currency": "usd",
             "description": "1 × AstroBin Premium (at $45.00 / year)",
             "discount_amounts": [
@@ -145,7 +145,7 @@
             "tax_rates": [
             ],
             "type": "subscription",
-            "unit_amount_excluding_tax": "2250"
+            "unit_amount_excluding_tax": "4500"
           }
         ],
         "has_more": false,
@@ -185,14 +185,14 @@
         "voided_at": null
       },
       "subscription": "sub_1NBuLCC0tT6bv7HdsEJE5BMx",
-      "subtotal": 2250,
-      "subtotal_excluding_tax": 2250,
+      "subtotal": 4500,
+      "subtotal_excluding_tax": 4500,
       "tax": null,
       "test_clock": null,
-      "total": 2250,
+      "total": 4500,
       "total_discount_amounts": [
       ],
-      "total_excluding_tax": 2250,
+      "total_excluding_tax": 4500,
       "total_tax_amounts": [
       ],
       "transfer_data": null,

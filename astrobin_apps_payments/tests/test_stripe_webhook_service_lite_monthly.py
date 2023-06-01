@@ -59,6 +59,6 @@ class StripeWebhookServiceLiteMonthlyTest(TestCase):
                 user=user,
                 subscription=self.subscription,
                 event='subscription payment',
-                amount=self.subscription.price,
+                amount=2.50,
             ).count()
         )

@@ -58,7 +58,7 @@ class StripeWebhookServiceLiteYearlyTest(TestCase):
                 user=user,
                 subscription=self.subscription,
                 event='subscription payment',
-                amount=self.subscription.price,
+                amount=45,
             ).count()
         )
 
@@ -108,7 +108,7 @@ class StripeWebhookServiceLiteYearlyTest(TestCase):
                 user=user,
                 subscription=self.subscription,
                 event='subscription payment',
-                amount=self.subscription.price,
+                amount=45,
             ).count()
         )
 
@@ -128,6 +128,6 @@ class StripeWebhookServiceLiteYearlyTest(TestCase):
                 user=user,
                 subscription=self.subscription,
                 event='subscription payment',
-                amount=self.subscription.price,
+                amount=45,
             ).count()
         )
