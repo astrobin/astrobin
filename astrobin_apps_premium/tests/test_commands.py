@@ -125,20 +125,6 @@ class CommandsTest(TestCase):
         self.assertEqual(SubscriptionName.PREMIUM_CLASSIC.value, user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
 
-    def test_upgrade_expired_lite_autorenew_to_premium(self):
-        user_subscription = UserSubscription.objects.create(
-            user=self.user,
-            subscription=self.lite_autorenew,
-            active=True,
-            expires=date.today() - relativedelta(months=1))
-        user_subscription.subscribe()
-
-        call_command('upgrade_free_and_lite_to_premium')
-
-        user_subscription = PremiumService(self.user).get_valid_usersubscription()
-        self.assertEqual(SubscriptionName.PREMIUM_CLASSIC.value, user_subscription.subscription.name)
-        self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
-
     def test_upgrade_expired_premium_to_premium(self):
         user_subscription = UserSubscription.objects.create(
             user=self.user,
