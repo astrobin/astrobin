@@ -15,7 +15,7 @@ from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import IntegrityError, transaction
 from django.db.models import Q
-from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_save)
+from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_delete, pre_save)
 from django.dispatch import receiver
 from django.urls import reverse as reverse_url
 from django.utils import timezone
@@ -1209,6 +1209,18 @@ def user_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(user_post_save, sender=User)
+
+
+def user_pre_delete(sender, instance, **kwargs):
+    if instance.userprofile.stripe_customer_id:
+        stripe.api_key = settings.STRIPE['keys']['secret']
+        try:
+            stripe.Customer.delete(instance.userprofile.stripe_customer_id)
+        except StripeError as e:
+            log.error('Error deleting Stripe customer: %s' % e)
+
+
+pre_delete.connect(user_pre_delete, sender=User)
 
 
 def userprofile_post_delete(sender, instance, **kwargs):

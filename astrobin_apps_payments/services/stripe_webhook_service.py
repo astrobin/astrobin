@@ -69,10 +69,7 @@ class StripeWebhookService(object):
         return user
 
     @staticmethod
-    def get_subscription_from_session(session, root='items') -> Subscription:
-        product_id = session[root]['data'][0]['price']['product']
-        recurring_unit = session[root]['data'][0]['price']['recurring']['interval']
-
+    def get_subscription_from_product_id(product_id: str, recurring_unit: str) -> Subscription:
         subscription_map = {
             settings.STRIPE['products']['lite']:
                 SubscriptionName.LITE_2020_AUTORENEW_MONTHLY if recurring_unit == 'month'
@@ -89,6 +86,12 @@ class StripeWebhookService(object):
         subscription = Subscription.objects.get(name=subscription_name.value)
 
         return subscription
+
+    @staticmethod
+    def get_subscription_from_session(session) -> Subscription:
+        product_id = session['items']['data'][0]['price']['product']
+        recurring_unit = session['items']['data'][0]['price']['recurring']['interval']
+        return StripeWebhookService.get_subscription_from_product_id(product_id, recurring_unit)
 
     @staticmethod
     def on_customer_created(event):
@@ -122,34 +125,38 @@ class StripeWebhookService(object):
     def on_invoice_paid(event):
         session = StripeWebhookService.get_session_from_event(event)
         user = StripeWebhookService.get_user_from_session(session)
-        subscription = StripeWebhookService.get_subscription_from_session(session, 'lines')
-        user_subscription: UserSubscription = get_object_or_None(
-            UserSubscription, user=user, subscription=subscription
-        )
 
-        ipn = PayPalIPN.objects.create(
-            custom=user.pk,
-            item_number=subscription.pk,
-            payment_status=ST_PP_PAID,
-            mc_gross=session['amount_paid'] / 100
-        )
+        for line in session['lines']['data']:
+            product_id = line['price']['product']
+            recurring_unit = line['price']['recurring']['interval']
+            subscription = StripeWebhookService.get_subscription_from_product_id(product_id, recurring_unit)
+            user_subscription: UserSubscription = get_object_or_None(
+                UserSubscription, user=user, subscription=subscription
+            )
 
-        Transaction(
-            user=user,
-            subscription=subscription,
-            ipn=ipn,
-            event='subscription payment',
-            amount=session['amount_paid'] / 100,
-            comment=session['hosted_invoice_url']
-        ).save()
+            ipn = PayPalIPN.objects.create(
+                custom=user.pk,
+                item_number=subscription.pk,
+                payment_status=ST_PP_PAID,
+                mc_gross=line['amount'] / 100
+            )
 
-        paid.send(
-            subscription,
-            ipn=ipn,
-            subscription=subscription,
-            user=user,
-            usersubscription=user_subscription,
-        )
+            Transaction(
+                user=user,
+                subscription=subscription,
+                ipn=ipn,
+                event='subscription payment',
+                amount=line['amount'] / 100,
+                comment=session['hosted_invoice_url']
+            ).save()
+
+            paid.send(
+                subscription,
+                ipn=ipn,
+                subscription=subscription,
+                user=user,
+                usersubscription=user_subscription,
+            )
 
         if session['amount_paid'] > 0:
             push_notification(
@@ -158,11 +165,10 @@ class StripeWebhookService(object):
                 'new_payment',
                 {
                     'BASE_URL': settings.BASE_URL,
-                    'subscription': subscription
                 }
             )
         else:
-            log.debug("stripe_webhook: invoice paid with amount 0 by user %s" % user.pk)
+            log.debug("stripe_webhook: invoice paid with amount less than 0 by user %s" % user.pk)
 
     @staticmethod
     def on_customer_subscription_deleted(event):
