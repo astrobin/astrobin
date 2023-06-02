@@ -132,7 +132,13 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
 
     def clean_username(self):
         value: str = self.cleaned_data.get(User.USERNAME_FIELD)
-        if value is not None and User.objects.filter(username__iexact=value).exists():
+        if value is None:
+            return None
+        elif "@" in value:
+            raise forms.ValidationError(
+                _('Sorry, your username cannot contain the "@" character.')
+            )
+        elif User.objects.filter(username__iexact=value).exists():
             raise forms.ValidationError(
                 _('Sorry, this username already exists with a different capitalization.')
             )
@@ -173,7 +179,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             'username': _(
                 'This is your handle on AstroBin and will be part of the URL to your gallery. If you do not specify a'
                 'first and last name below, it will also be how others see your name. Please use letters, digits, and '
-                'the special characters @/./+/-/_ only.'
+                'the special characters ./+/-/_ only.'
             ),
         }
 
