@@ -30,16 +30,16 @@ def __validate_session_data(user_pk: int, product: str, currency: str, recurring
 
     if currency.upper() not in settings.SUPPORTED_CURRENCIES:
         log.error("__validate_session_data: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid currency"))
-        return HttpResponseBadRequest()
+        raise ValueError("Invalid currency")
 
     if product not in ('lite', 'premium', 'ultimate'):
         log.error("__validate_session_data: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid product"))
-        return HttpResponseBadRequest()
+        raise ValueError("Invalid product")
 
     image_count = Image.objects_including_wip.filter(user=user).count()
     if product == 'lite' and image_count >= settings.PREMIUM_MAX_IMAGES_LITE_2020:
         log.error("__validate_session_data: %d, %s, %s: %s" % (user.pk, product, currency, "Too many images for Lite"))
-        return HttpResponseBadRequest(
+        raise ValueError(
             gettext(
                 'The Lite plan is capped at %(lite_max)s total images, and you currently have %(count)s images on '
                 'AstroBin.' % {
@@ -53,7 +53,7 @@ def __validate_session_data(user_pk: int, product: str, currency: str, recurring
         log.error(
             "__validate_session_data: %d, %s, %s: %s" % (user.pk, product, currency, "Non-autorenew not supported")
         )
-        return HttpResponseBadRequest(
+        raise ValueError(
             gettext(
                 'Non-autorenewing subscriptions are not supported for your account.'
                 ' Please contact us for more information.'
@@ -75,9 +75,12 @@ def stripe_config(request):
 def create_checkout_session(request, user_pk: int, product: str, currency: str, recurring_unit: str, autorenew: str):
     stripe.api_key = settings.STRIPE['keys']['secret']
 
-    user, product, currency, recurring_unit, autorenew = __validate_session_data(
-        user_pk, product, currency, recurring_unit, autorenew
-    )
+    try:
+        user, product, currency, recurring_unit, autorenew = __validate_session_data(
+            user_pk, product, currency, recurring_unit, autorenew
+        )
+    except ValueError as e:
+        return HttpResponseBadRequest(e)
 
     country_code = user.userprofile.signup_country or get_client_country_code(request) or 'us'
     country_code = country_code.lower() if country_code != 'UNKNOWN' else 'us'
@@ -155,9 +158,12 @@ def create_checkout_session(request, user_pk: int, product: str, currency: str, 
 def upgrade_subscription(request, user_pk: int, product: str, currency: str, recurring_unit: str):
     stripe.api_key = settings.STRIPE['keys']['secret']
 
-    user, product, currency, recurring_unit, autorenew = __validate_session_data(
-        user_pk, product, currency, recurring_unit, 'true'
-    )
+    try:
+        user, product, currency, recurring_unit, autorenew = __validate_session_data(
+            user_pk, product, currency, recurring_unit, 'true'
+        )
+    except ValueError as e:
+        return HttpResponseBadRequest(e)
 
     country_code = get_client_country_code(request)
 
