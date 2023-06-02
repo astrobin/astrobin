@@ -142,7 +142,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             raise forms.ValidationError(
                 _('Sorry, this username already exists with a different capitalization.')
             )
-        
+
         return value
 
     field_order = [
