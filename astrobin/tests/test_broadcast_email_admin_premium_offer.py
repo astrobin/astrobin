@@ -9,6 +9,7 @@ from subscription.models import Subscription, UserSubscription
 
 from astrobin.admin import BroadcastEmailAdmin
 from astrobin.models import BroadcastEmail
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class BroadcastEmailAdminPremiumOfferTest(TestCase):
@@ -78,7 +79,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         group, created = Group.objects.get_or_create(name="astrobin_premium")
         subscription, created = Subscription.objects.get_or_create(
-            name="AstroBin Premium",
+            name=SubscriptionName.PREMIUM_CLASSIC.value,
             price=1,
             group=group,
             category="premium")
@@ -108,7 +109,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         group, created = Group.objects.get_or_create(name="astrobin_premium")
         subscription, created = Subscription.objects.get_or_create(
-            name="AstroBin Premium",
+            name=SubscriptionName.PREMIUM_CLASSIC.value,
             price=1,
             group=group,
             category="premium")
@@ -141,7 +142,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         group, created = Group.objects.get_or_create(name="astrobin_premium")
         subscription, created = Subscription.objects.get_or_create(
-            name="AstroBin Lite",
+            name=SubscriptionName.LITE_CLASSIC.value,
             price=1,
             group=group,
             category="premium")
@@ -171,7 +172,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         group, created = Group.objects.get_or_create(name="astrobin_premium")
         subscription, created = Subscription.objects.get_or_create(
-            name="AstroBin Premium 30% discount",
+            name=SubscriptionName.PREMIUM_CLASSIC_30_PERCENT_DISCOUNT.value,
             price=1,
             group=group,
             category="premium_offer_discount_30")

@@ -1,0 +1,28 @@
+{
+  "id": "evt_1NBzPFC0tT6bv7HdrPwBjjdx",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1685102764,
+  "data": {
+    "object": {
+      "id": "bps_1NBzPEC0tT6bv7HdAekukj9x",
+      "object": "billing_portal.session",
+      "configuration": "bpc_1Hz6T9C0tT6bv7Hdc30SFVuI",
+      "created": 1685102764,
+      "customer": "STRIPE_CUSTOMER_ID",
+      "flow": null,
+      "livemode": false,
+      "locale": null,
+      "on_behalf_of": null,
+      "return_url": null,
+      "url": "https://billing.stripe.com/p/session/test_YWNjdF8xQlc4ajNDMHRUNmJ2N0hkLF9OeHZGaVFMeW5aUDdzanJTOUdEZ2ZSNXBPWkh0Mm9B0100103pKr1G"
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": null,
+    "idempotency_key": "a9da9992-9a3d-442c-a626-a19ba72988f4"
+  },
+  "type": "billing_portal.session.created"
+}

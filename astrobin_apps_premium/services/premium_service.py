@@ -1,34 +1,55 @@
 import functools
 import sys
 from datetime import datetime, timedelta
+from enum import Enum
 from typing import Optional
 
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db.models import Q, QuerySet
+from django.utils import timezone
 from subscription.models import UserSubscription
 
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
 from astrobin.models import Image, UserProfile
 from common.services import DateTimeService
 
-SUBSCRIPTION_NAMES = (
-    'AstroBin Lite',
-    'AstroBin Premium',
 
-    'AstroBin Lite 2020+',
-    'AstroBin Premium 2020+',
-    'AstroBin Ultimate 2020+',
+class SubscriptionName(Enum):
+    LITE_CLASSIC = 'AstroBin Lite'
+    LITE_CLASSIC_AUTORENEW = 'AstroBin Lite (autorenew)'
+    PREMIUM_CLASSIC = 'AstroBin Premium'
+    PREMIUM_CLASSIC_AUTORENEW = 'AstroBin Premium (autorenew)'
 
-    'AstroBin Lite (autorenew)',
-    'AstroBin Premium (autorenew)',
+    LITE_2020 = 'AstroBin Lite 2020+'
+    LITE_2020_AUTORENEW_YEARLY = 'AstroBin Lite 2020+ (autorenew/yearly)'
+    LITE_2020_AUTORENEW_MONTHLY = 'AstroBin Lite 2020+ (autorenew/monthly)'
+    PREMIUM_2020 = 'AstroBin Premium 2020+'
+    PREMIUM_2020_AUTORENEW_YEARLY = 'AstroBin Premium 2020+ (autorenew/yearly)'
+    PREMIUM_2020_AUTORENEW_MONTHLY = 'AstroBin Premium 2020+ (autorenew/monthly)'
+    ULTIMATE_2020 = 'AstroBin Ultimate 2020+'
+    ULTIMATE_2020_AUTORENEW_YEARLY = 'AstroBin Ultimate 2020+ (autorenew/yearly)'
+    ULTIMATE_2020_AUTORENEW_MONTHLY = 'AstroBin Ultimate 2020+ (autorenew/monthly)'
 
-    'AstroBin Premium 20% discount',
-    'AstroBin Premium 30% discount',
-    'AstroBin Premium 40% discount',
-    'AstroBin Premium 50% discount',
-)
+    # Deprecated since discounts happen via Stripe coupons
+    PREMIUM_CLASSIC_20_PERCENT_DISCOUNT = 'AstroBin Premium 20% discount'
+    PREMIUM_CLASSIC_30_PERCENT_DISCOUNT = 'AstroBin Premium 30% discount'
+    PREMIUM_CLASSIC_40_PERCENT_DISCOUNT = 'AstroBin Premium 40% discount'
+    PREMIUM_CLASSIC_50_PERCENT_DISCOUNT = 'AstroBin Premium 50% discount'
+
+
+class SubscriptionDisplayName(Enum):
+    LITE = 'Lite'
+    PREMIUM = 'Premium'
+    ULTIMATE = 'Ultimate'
+
+    @classmethod
+    def from_string(cls, value_str):
+        for member in cls:
+            if member.name.lower() == value_str.lower():
+                return member
+        raise ValueError(f"Invalid enum value: {value_str}")
 
 
 def _compareValidity(a, b):
@@ -44,17 +65,23 @@ def _compareNames(a, b):
     :return: a negative number if the left operand is heavier than thee left, 0 if equal, a positive number otherwise.
     """
     key = {
-        "AstroBin Lite (autorenew)": 0,
-        "AstroBin Lite": 1,
-        "AstroBin Lite 2020+": 2,
-        "AstroBin Premium (autorenew)": 3,
-        "AstroBin Premium": 4,
-        'AstroBin Premium 20% discount': 5,
-        'AstroBin Premium 30% discount': 6,
-        'AstroBin Premium 40% discount': 7,
-        'AstroBin Premium 50% discount': 8,
-        "AstroBin Premium 2020+": 9,
-        "AstroBin Ultimate 2020+": 10
+        SubscriptionName.LITE_CLASSIC_AUTORENEW.value: 1,
+        SubscriptionName.LITE_CLASSIC.value: 1.1,
+        SubscriptionName.LITE_2020.value: 1.2,
+        SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value: 1.3,
+        SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value: 1.4,
+        SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value: 2,
+        SubscriptionName.PREMIUM_CLASSIC.value: 2.1,
+        SubscriptionName.PREMIUM_CLASSIC_20_PERCENT_DISCOUNT.value: 2.2,
+        SubscriptionName.PREMIUM_CLASSIC_30_PERCENT_DISCOUNT.value: 2.3,
+        SubscriptionName.PREMIUM_CLASSIC_40_PERCENT_DISCOUNT.value: 2.4,
+        SubscriptionName.PREMIUM_CLASSIC_50_PERCENT_DISCOUNT.value: 2.5,
+        SubscriptionName.PREMIUM_2020.value: 2.6,
+        SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value: 2.7,
+        SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value: 2.8,
+        SubscriptionName.ULTIMATE_2020.value: 3,
+        SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value: 3,
+        SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value: 3.1,
     }
 
     return key[b.subscription.name] - key[a.subscription.name]
@@ -68,14 +95,16 @@ class PremiumService:
         
     def clear_subscription_status_cache_keys(self):
         pk: int = self.user.pk
-        
+
         for key in (
-            'has_expired_paid_subscription',
-            'has_paid_subscription_near_expiration',
-            'astrobin_is_donor',
-            'astrobin_valid_usersubscription'
+                'has_expired_paid_subscription',
+                'has_paid_subscription_near_expiration',
+                'astrobin_is_donor',
+                'astrobin_valid_usersubscription'
         ):
             cache.delete(f'{key}_{pk}')
+
+        UserProfile.objects.filter(user=self.user).update(updated=timezone.now())
 
     def get_valid_usersubscription(self):
         if self.user is None or self.user.pk is None or not self.user.is_authenticated:
@@ -89,7 +118,7 @@ class PremiumService:
 
         us = [obj for obj in UserSubscription.objects.filter(
             user__username=self.user.username,
-            subscription__name__in=SUBSCRIPTION_NAMES,
+            subscription__name__in=[x.value for x in SubscriptionName],
             expires__gte=datetime.today()
         )]
 
@@ -201,8 +230,7 @@ class PremiumService:
     
         return 0
     
-    
-    def get_max_allowed_revisions(user_subscription: UserSubscription):
+    def get_max_allowed_revisions(user_subscription: UserSubscription) -> int:
         if user_subscription is None:
             return settings.PREMIUM_MAX_REVISIONS_FREE_2020
 

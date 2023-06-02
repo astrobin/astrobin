@@ -4,6 +4,7 @@ import re
 from itertools import chain
 from typing import List, Set
 
+import stripe
 from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
@@ -14,7 +15,7 @@ from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import IntegrityError, transaction
 from django.db.models import Q
-from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_save)
+from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_delete, pre_save)
 from django.dispatch import receiver
 from django.urls import reverse as reverse_url
 from django.utils import timezone
@@ -26,8 +27,10 @@ from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
-from subscription.models import Transaction, UserSubscription
-from subscription.signals import paid, signed_up
+from stripe.error import StripeError
+from subscription.models import Subscription, Transaction, UserSubscription
+from subscription.signals import paid, signed_up, unsubscribed
+from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
 from astrobin.tasks import process_camera_rename_proposal
@@ -590,32 +593,54 @@ def subscription_paid(sender, **kwargs):
     PremiumService(user).clear_subscription_status_cache_keys()
     UserService(user).update_premium_counter_on_subscription(subscription)
 
+    if subscription.recurrence_unit is not None:
+        return
+
     if 'premium' in subscription.category and Transaction.objects.filter(
             user=user,
             event='new usersubscription',
             timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
-        push_notification([user], None, 'new_subscription', {'BASE_URL': settings.BASE_URL})
+        push_notification(
+            [user],
+            None,
+            'new_subscription',
+            {
+                'BASE_URL': settings.BASE_URL,
+                'subscription': subscription
+            }
+        )
     else:
-        push_notification([user], None, 'new_payment', {'BASE_URL': settings.BASE_URL})
+        push_notification(
+            [user],
+            None,
+            'new_payment',
+            {
+                'BASE_URL': settings.BASE_URL,
+                'subscription': subscription
+            }
+        )
 
 
 paid.connect(subscription_paid)
 
 
 def subscription_signed_up(sender, **kwargs):
-    subscription = kwargs.get('subscription')
-    user_subscription = kwargs.get('usersubscription')
-    user = kwargs.get('user')
+    subscription: Subscription = kwargs.get('subscription')
+    user_subscription: UserSubscription = kwargs.get('usersubscription')
+    user: User = kwargs.get('user')
 
     UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
     PremiumService(user).clear_subscription_status_cache_keys()
     UserService(user).update_premium_counter_on_subscription(subscription)
 
-    if 'premium' in subscription.category:
+    if 'premium' in subscription.category and subscription.recurrence_unit is None:
+        # When there's a payment for an expired subscription, make sure we start the subscription from today.
         today = DateTimeService.today()
         if user_subscription.expires is None or user_subscription.expires < today:
             user_subscription.expires = today
-        user_subscription.extend(datetime.timedelta(days=365.2425))
+
+        # Non recurring premium subscription are for a year, no exceptions.
+        user_subscription.expires = extend_date_by(user_subscription.expires, 1, 'Y')
         user_subscription.save()
 
         # Invalidate other premium subscriptions
@@ -626,15 +651,53 @@ def subscription_signed_up(sender, **kwargs):
             .update(active=False)
 
         if Transaction.objects.filter(
-                user=user,
-                event='new usersubscription',
-                timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
-            push_notification([user], None, 'new_subscription', {'BASE_URL': settings.BASE_URL})
+            user=user,
+            event='new usersubscription',
+            timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
+        ):
+            push_notification(
+                [user],
+                None,
+                'new_subscription',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                }
+            )
         else:
-            push_notification([user], None, 'new_payment', {'BASE_URL': settings.BASE_URL})
+            push_notification(
+                [user],
+                None,
+                'new_payment',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                }
+            )
 
 
 signed_up.connect(subscription_signed_up)
+
+
+def subscription_unsubscribed(sender, **kwargs):
+    subscription: Subscription = kwargs.get('subscription')
+    user: User = kwargs.get('user')
+
+    UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
+    PremiumService(user).clear_subscription_status_cache_keys()
+
+    push_notification(
+        [user],
+        None,
+        'subscription_canceled',
+        {
+            'BASE_URL': settings.BASE_URL,
+            'subscription': subscription
+        }
+    )
+
+
+unsubscribed.connect(subscription_unsubscribed)
 
 
 def user_subscription_post_delete(sender, instance, **kwargs):
@@ -645,6 +708,16 @@ def user_subscription_post_delete(sender, instance, **kwargs):
 
 
 post_delete.connect(user_subscription_post_delete, sender=UserSubscription)
+
+
+def user_subscription_post_save(sender, instance, created, **kwargs):
+    try:
+        PremiumService(instance.user).clear_subscription_status_cache_keys()
+    except (User.DoesNotExist, UserProfile.DoesNotExist):
+        pass
+
+
+post_save.connect(user_subscription_post_save, sender=UserSubscription)
 
 
 def group_pre_save(sender, instance, **kwargs):
@@ -1114,15 +1187,40 @@ def topic_read_tracker_post_save(sender, instance, created, **kwargs):
 post_save.connect(topic_read_tracker_post_save, sender=TopicReadTracker)
 
 
+def user_pre_save(sender, instance, **kwargs):
+    if instance.pk:
+        original_instance = sender.objects.get(pk=instance.pk)
+        if original_instance.email != instance.email and instance.userprofile.stripe_customer_id:
+            stripe.api_key = settings.STRIPE['keys']['secret']
+            try:
+                customer = stripe.Customer.retrieve(instance.userprofile.stripe_customer_id)
+                if customer.email != instance.email:
+                    customer.email = instance.email
+                    customer.save()
+            except StripeError as e:
+                log.error('Error updating Stripe customer: %s' % e)
+
+
+pre_save.connect(user_pre_save, sender=User)
+
+
 def user_post_save(sender, instance, created, **kwargs):
-    if not created:
-        try:
-            instance.userprofile.save(keep_deleted=True)
-        except UserProfile.DoesNotExist:
-            pass
+    UserProfile.objects.filter(user=instance).update(updated=timezone.now())
 
 
 post_save.connect(user_post_save, sender=User)
+
+
+def user_pre_delete(sender, instance, **kwargs):
+    if instance.userprofile.stripe_customer_id:
+        stripe.api_key = settings.STRIPE['keys']['secret']
+        try:
+            stripe.Customer.delete(instance.userprofile.stripe_customer_id)
+        except StripeError as e:
+            log.error('Error deleting Stripe customer: %s' % e)
+
+
+pre_delete.connect(user_pre_delete, sender=User)
 
 
 def userprofile_post_delete(sender, instance, **kwargs):

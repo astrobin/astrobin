@@ -1,0 +1,82 @@
+{
+  "id": "evt_3NC61XC0tT6bv7Hd0ptdjQbr",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1685128206,
+  "data": {
+    "object": {
+      "id": "pi_3NC61XC0tT6bv7Hd0wUDl2Lv",
+      "object": "payment_intent",
+      "amount": 6000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {
+        }
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+      "cancellation_reason": null,
+      "capture_method": "automatic",
+      "charges": {
+        "object": "list",
+        "data": [
+        ],
+        "has_more": false,
+        "total_count": 0,
+        "url": "/v1/charges?payment_intent=pi_3NC61XC0tT6bv7Hd0wUDl2Lv"
+      },
+      "client_secret": "pi_3NC61XC0tT6bv7Hd0wUDl2Lv_secret_XsjCVuyISbvtNUqP4B7qVLA14",
+      "confirmation_method": "automatic",
+      "created": 1685128203,
+      "currency": "chf",
+      "customer": "STRIPE_CUSTOMER_ID",
+      "description": "Subscription update",
+      "invoice": "in_1NC5yVC0tT6bv7HdxPNLxFMO",
+      "last_payment_error": null,
+      "latest_charge": null,
+      "livemode": false,
+      "metadata": {
+      },
+      "next_action": null,
+      "on_behalf_of": null,
+      "payment_method": null,
+      "payment_method_options": {
+        "card": {
+          "installments": null,
+          "mandate_options": null,
+          "network": null,
+          "request_three_d_secure": "automatic"
+        },
+        "paypal": {
+          "preferred_locale": null,
+          "reference": null
+        }
+      },
+      "payment_method_types": [
+        "card",
+        "paypal"
+      ],
+      "processing": null,
+      "receipt_email": "astrobin@astrobin.com",
+      "review": null,
+      "setup_future_usage": null,
+      "shipping": null,
+      "source": null,
+      "statement_descriptor": "AstroBin Ultimate",
+      "statement_descriptor_suffix": null,
+      "status": "requires_payment_method",
+      "transfer_data": null,
+      "transfer_group": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": null,
+    "idempotency_key": null
+  },
+  "type": "payment_intent.created"
+}

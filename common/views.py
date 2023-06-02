@@ -205,7 +205,7 @@ class UserSubscriptionDetail(generics.RetrieveAPIView):
 
 
 class PaymentList(generics.ListAPIView):
-    model = UserSubscription
+    model = Transaction
     serializer_class = PaymentSerializer
     permission_classes = (ReadOnly,)
     pagination_class = None

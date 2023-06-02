@@ -16,6 +16,8 @@ from django.contrib.sites.models import Site
 from pybb.models import Category, Forum
 from subscription.models import Subscription
 
+from astrobin_apps_premium.services.premium_service import SubscriptionName
+
 Group.objects.get_or_create(name='astrobin_lite')
 Group.objects.get_or_create(name='astrobin_lite_2020')
 Group.objects.get_or_create(name='astrobin_premium')
@@ -33,10 +35,10 @@ Group.objects.get_or_create(name='astrobin-donor-gold-yearly')
 Group.objects.get_or_create(name='astrobin-donor-platinum-yearly')
 
 try:
-    Subscription.objects.get(name='AstroBin Lite')
+    Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Lite',
+        name=SubscriptionName.LITE_CLASSIC.value,
         currency="USD",
         price=18,
         trial_period=0,
@@ -47,10 +49,10 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name='AstroBin Lite (autorenew)')
+    Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Lite (autorenew)',
+        name=SubscriptionName.LITE_CLASSIC.value,
         currency="USD",
         price=18,
         trial_period=0,
@@ -61,10 +63,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name='AstroBin Lite 2020+')
+    Subscription.objects.get(name=SubscriptionName.LITE_2020.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Lite 2020+',
+        name=SubscriptionName.LITE_2020.value,
         currency="CHF",
         price=20,
         trial_period=0,
@@ -75,10 +77,38 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name='AstroBin Premium')
+    Subscription.objects.get(name=SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Premium',
+        name=SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value,
+        currency="CHF",
+        price=2.5,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='M',
+        group=Group.objects.get(name='astrobin_lite_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value,
+        currency="CHF",
+        price=20,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='Y',
+        group=Group.objects.get(name='astrobin_lite_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.PREMIUM_CLASSIC.value,
         currency="USD",
         price=36,
         trial_period=0,
@@ -89,10 +119,10 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name='AstroBin Premium (autorenew)')
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Premium (autorenew)',
+        name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value,
         currency="USD",
         price=36,
         trial_period=0,
@@ -103,10 +133,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name='AstroBin Premium 2020+')
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Premium 2020+',
+        name=SubscriptionName.PREMIUM_2020.value,
         currency="CHF",
         price=40,
         trial_period=0,
@@ -117,10 +147,38 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name='AstroBin Ultimate 2020+')
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Ultimate 2020+',
+        name=SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value,
+        currency="CHF",
+        price=4.5,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='M',
+        group=Group.objects.get(name='astrobin_premium_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value,
+        currency="CHF",
+        price=40,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='Y',
+        group=Group.objects.get(name='astrobin_premium_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.ULTIMATE_2020.value,
         currency="CHF",
         price=60,
         trial_period=0,
@@ -129,6 +187,34 @@ except Subscription.DoesNotExist:
         recurrence_unit=None,
         group=Group.objects.get(name='astrobin_ultimate_2020'),
         category='premium')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value,
+        currency="CHF",
+        price=6.5,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='M',
+        group=Group.objects.get(name='astrobin_ultimate_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value,
+        currency="CHF",
+        price=60,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='Y',
+        group=Group.objects.get(name='astrobin_ultimate_2020'),
+        category='premium_autorenew')
 
 try:
     Subscription.objects.get(name='AstroBin Donor Bronze Monthly')

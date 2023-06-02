@@ -6,6 +6,7 @@ from rest_framework.test import APIClient
 
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 from nested_comments.models import NestedComment
 from nested_comments.tests.nested_comments_generators import NestedCommentsGenerators
 
@@ -76,7 +77,7 @@ class CommentApprovalTest(TestCase):
 
         image = Generators.image()
         author = Generators.user()
-        Generators.premium_subscription(author, "AstroBin Premium 2020+")
+        Generators.premium_subscription(author, SubscriptionName.PREMIUM_2020)
 
         comment = NestedCommentsGenerators.comment(
             author=author,
@@ -101,7 +102,7 @@ class CommentApprovalTest(TestCase):
 
         image = Generators.image(user=user)
         author = image.user
-        Generators.premium_subscription(author, "AstroBin Premium 2020+")
+        Generators.premium_subscription(author, SubscriptionName.PREMIUM_2020)
 
         for i in range(0, 3):
             comment = NestedCommentsGenerators.comment(

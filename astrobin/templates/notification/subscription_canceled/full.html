@@ -1,0 +1,47 @@
+{% load i18n %}
+{% load static %}
+
+<h1>
+    {% blocktrans trimmed %}
+        Subscription canceled
+    {% endblocktrans %}
+</h1>
+
+<br />
+
+<p>
+    {% blocktrans trimmed %}
+        Your subscription was cancelled, and you will not be charged for it anymore unless you have an outstanding
+        balance due to a prorated upgrade.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        You may continue to use your subscription until its expiration date.
+    {% endblocktrans %}
+</p>
+
+<ul>
+    <li>
+        {% blocktrans trimmed %}
+            AstroBin subscriptions are valid for 1 year or 1 month. If your subscription expires, nothing happens to
+            your content. Nothing is deleted, hidden, held hostage or anything. In fact, you can leave it up forever
+            even if you stop being active as an astrophotographer.
+        {% endblocktrans %}
+    </li>
+
+    <li>
+        {% blocktrans trimmed with url="https://welcome.astrobin.com/faq" %}
+            If you have any questions, have a look at the <a href="{{ url }}">frequently asked questions</a>.
+        {% endblocktrans %}
+    </li>
+
+    <li>
+        {% url 'contact' as contact_url %}
+        {% blocktrans trimmed with url=BASE_URL|add:contact_url %}
+            Finally, should you need any support, simply use the <a href="{{ url }}">contact form</a> or send
+            an email to <a href="mailto:support@astrobin.com">support@astrobin.com</a>.
+        {% endblocktrans %}
+    </li>
+</ul>

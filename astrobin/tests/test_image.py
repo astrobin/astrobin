@@ -25,6 +25,7 @@ from astrobin.tests.generators import Generators
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -497,7 +498,7 @@ class ImageTest(TestCase):
         image.save(keep_deleted=True)
         today = time.strftime('%Y-%m-%d')
 
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
 
         # DSA data
         dsa, created = DeepSky_Acquisition.objects.get_or_create(
@@ -519,7 +520,7 @@ class ImageTest(TestCase):
         image.save(keep_deleted=True)
         today = time.strftime('%Y-%m-%d')
 
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
 
         # DSA data
         dsa, created = DeepSky_Acquisition.objects.get_or_create(
@@ -541,7 +542,7 @@ class ImageTest(TestCase):
         image.save(keep_deleted=True)
         today = time.strftime('%Y-%m-%d')
 
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
 
         # DSA data
         DeepSky_Acquisition.objects.get_or_create(
@@ -973,7 +974,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, SubscriptionName.LITE_CLASSIC)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -993,7 +994,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.EVERYBODY
         image.save()
 
-        Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, SubscriptionName.LITE_CLASSIC)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1013,7 +1014,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.PAYING_MEMBERS_ONLY
         image.save()
 
-        Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, SubscriptionName.LITE_CLASSIC)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1032,7 +1033,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.MEMBERS_ONLY
         image.save()
 
-        Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, SubscriptionName.LITE_CLASSIC)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1052,7 +1053,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.ME_ONLY
         image.save()
 
-        Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, SubscriptionName.LITE_CLASSIC)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1072,7 +1073,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.NOBODY
         image.save()
 
-        Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, SubscriptionName.LITE_CLASSIC)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1089,7 +1090,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user2, "AstroBin Lite (autorenew)")
+        Generators.premium_subscription(self.user2, SubscriptionName.LITE_CLASSIC_AUTORENEW)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1105,7 +1106,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.client.logout()
 
-        Generators.premium_subscription(self.user2, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user2, SubscriptionName.LITE_2020)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1122,7 +1123,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user2, "AstroBin Premium")
+        Generators.premium_subscription(self.user2, SubscriptionName.PREMIUM_CLASSIC)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1139,7 +1140,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user2, "AstroBin Premium (autorenew)")
+        Generators.premium_subscription(self.user2, SubscriptionName.PREMIUM_CLASSIC_AUTORENEW)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1156,7 +1157,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user2, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user2, SubscriptionName.PREMIUM_2020)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1173,7 +1174,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user2, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user2, SubscriptionName.ULTIMATE_2020)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1190,7 +1191,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1207,7 +1208,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user, "AstroBin Premium")
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_CLASSIC)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1224,7 +1225,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_CLASSIC_AUTORENEW)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1241,7 +1242,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user, "AstroBin Lite")
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_CLASSIC)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1258,7 +1259,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_CLASSIC_AUTORENEW)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1275,7 +1276,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_2020)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1292,7 +1293,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_2020)
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1811,7 +1812,7 @@ class ImageTest(TestCase):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
-        Generators.premium_subscription(image.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(image.user, SubscriptionName.PREMIUM_2020)
 
         response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
 
@@ -1821,7 +1822,7 @@ class ImageTest(TestCase):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
-        Generators.premium_subscription(image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
 
         response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
 
@@ -2235,7 +2236,7 @@ class ImageTest(TestCase):
     def test_image_moderation_for_russian_users(self, get_scores):
         get_scores.return_value = {'user_scores_index': 10}
         user = Generators.user()
-        Generators.premium_subscription(user, 'AstroBin Premium 2020+')
+        Generators.premium_subscription(user, SubscriptionName.PREMIUM_2020)
         image = Generators.image(user=user)
 
         self.assertEqual(ModeratorDecision.APPROVED, image.moderator_decision)
@@ -2383,7 +2384,7 @@ class ImageTest(TestCase):
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        Generators.premium_subscription(self.user, "AstroBin Lite")
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_CLASSIC)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
 
@@ -2392,7 +2393,7 @@ class ImageTest(TestCase):
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        Generators.premium_subscription(self.user, "AstroBin Premium")
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_CLASSIC)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
 
@@ -2401,7 +2402,7 @@ class ImageTest(TestCase):
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_2020)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
 
@@ -2410,7 +2411,7 @@ class ImageTest(TestCase):
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_2020)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
 
@@ -2419,7 +2420,7 @@ class ImageTest(TestCase):
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
 
@@ -2451,7 +2452,7 @@ class ImageTest(TestCase):
         user = Generators.user()
         user.userprofile.auto_submit_to_iotd_tp_process = True
         user.userprofile.save(keep_deleted=True)
-        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user)
 
         self.assertEqual(5, image.designated_iotd_submitters.count())
@@ -2468,7 +2469,7 @@ class ImageTest(TestCase):
         user = Generators.user()
         user.userprofile.auto_submit_to_iotd_tp_process = True
         user.userprofile.save(keep_deleted=True)
-        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user)
 
         self.assertEqual(5, image.designated_iotd_reviewers.count())
