@@ -163,7 +163,7 @@ class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin)
         return self.partial_update(request, *args, **kwargs)
 
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')
+@method_decorator(cache_page(60), name='dispatch')
 class SubscriptionList(generics.ListAPIView):
     model = Subscription
     serializer_class = SubscriptionSerializer
@@ -174,7 +174,7 @@ class SubscriptionList(generics.ListAPIView):
     filter_fields = ('category',)
 
 
-@method_decorator(cache_page(60 * 60 * 24), name='dispatch')
+@method_decorator(cache_page(60), name='dispatch')
 class SubscriptionDetail(generics.RetrieveAPIView):
     model = Subscription
     serializer_class = SubscriptionSerializer
