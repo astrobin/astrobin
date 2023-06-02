@@ -132,15 +132,17 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
 
     def clean_username(self):
         value: str = self.cleaned_data.get(User.USERNAME_FIELD)
-        if value is not None and User.objects.filter(username__iexact=value).exists():
-            raise forms.ValidationError(
-                _('Sorry, this username already exists with a different capitalization.')
-            )
+        if value is None:
+            return None
         elif "@" in value:
             raise forms.ValidationError(
                 _('Sorry, your username cannot contain the "@" character.')
             )
-
+        elif User.objects.filter(username__iexact=value).exists():
+            raise forms.ValidationError(
+                _('Sorry, this username already exists with a different capitalization.')
+            )
+        
         return value
 
     field_order = [
