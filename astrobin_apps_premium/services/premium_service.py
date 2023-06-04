@@ -80,8 +80,8 @@ def _compareNames(a, b):
         SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value: 2.7,
         SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value: 2.8,
         SubscriptionName.ULTIMATE_2020.value: 3,
-        SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value: 3,
-        SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value: 3.1,
+        SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value: 3.1,
+        SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value: 3.2,
     }
 
     return key[b.subscription.name] - key[a.subscription.name]
