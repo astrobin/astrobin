@@ -81,6 +81,18 @@ classic_auth_token_cookie = Cookie.objects.get_or_create(
     description='This cookie is used to authenticate you on the website app.astrobin.com.',
 )[0]
 
+__stripe_mid_cookie = Cookie.objects.get_or_create(
+    cookiegroup=essential_cookies_group,
+    name='__stripe_mid',
+    description='This cookie is set by Stripe and used for fraud prevention. It is only set is you purchase a subscription',
+)[0]
+
+__stripe_sid_cookie = Cookie.objects.get_or_create(
+    cookiegroup=essential_cookies_group,
+    name='__stripe_sid',
+    description='This cookie is set by Stripe and used for fraud prevention. It is only set is you purchase a subscription',
+)[0]
+
 functional_cookies_group = CookieGroup.objects.get_or_create(
     varname='functional',
     name='Functional cookies (recommended)',
