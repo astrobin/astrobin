@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
-from typing import List, Tuple
+from typing import List
 
 from django.contrib.auth.models import User
 from django.contrib.gis.geoip2 import GeoIP2
