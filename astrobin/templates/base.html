@@ -3,10 +3,10 @@
 {% load astrobin_apps_premium_tags %}
 {% load pipeline %}
 {% load django_bootstrap_breadcrumbs %}
-{% load cookielaw_tags %}
 {% load i18n %}
 {% load static %}
 {% load tags %}
+{% load cookie_consent_tags %}
 
 {% block breadcrumbs %}
     {% clear_breadcrumbs %}
@@ -73,6 +73,10 @@
 
         <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
 
+        {% if request|is_gdpr_country %}
+            <script type="text/javascript" src={% static "cookie_consent/cookiebar.js" %}></script>
+        {% endif %}
+
         {% block extra_head %}{% endblock %}
 
         {% comment %}Alternative spelling.{% endcomment %}
@@ -92,10 +96,6 @@
                     style="display:none;visibility:hidden"></iframe>
         </noscript>
         <!-- End Google Tag Manager (noscript) -->
-
-        {% if request|show_cookie_banner %}
-            {% cookielaw_banner %}
-        {% endif %}
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -151,24 +151,58 @@
 
         {% block extra_js %}{% endblock %}
 
-        <!-- used to figure out how many users use ad blocking software -->
-        <script type="text/javascript">
-            document.write('<div id="adsense" style="visibility: hidden;">Test ad.</div>');
-            $(document).ready(checkAds());
+        {% if request|cookie_consent_enabled and request|is_gdpr_country and '/cookies/' not in request.path %}
+            {% not_accepted_or_declined_cookie_groups request as cookie_groups %}
 
-            /* Adblock Check */
-            function checkAds() {
-                if (gtag !== undefined) {
-                    var ad = document.getElementById('adsense');
-                    if (!ad || ad.innerHTML.length == 0 || ad.clientHeight === 0) {
-                        document.write("<script>gtag('set', {'Adblock': 'Blocked'});<\/sc" + "ript>");
-                    } else {
-                        document.write("<script>gtag('set', {'Adblock': 'Unblocked'});<\/sc" + "ript>");
+            {% if cookie_groups %}
+                {% url "cookie_consent_cookie_group_list" as url_cookies %}
+                {% cookie_consent_accept_url cookie_groups as url_accept %}
+                {% cookie_consent_decline_url cookie_groups as url_decline %}
+                <script type="text/javascript">
+                    const cookie_groups = [];
+
+                    {% for cookie_group in cookie_groups %}
+                        cookie_groups.push("{{ cookie_group.varname }}");
+                    {% endfor %}
+
+                    function ready(fn) {
+                        if (document.readyState !== "loading") {
+                            fn();
+                        } else if (document.addEventListener) {
+                            document.addEventListener("DOMContentLoaded", fn);
+                        } else {
+                            document.attachEvent("onreadystatechange", function () {
+                                if (document.readyState !== "loading")
+                                    fn();
+                            });
+                        }
                     }
-                }
-            }
-            /* End Adblock Check */
-        </script>
+
+                    ready(function () {
+                        showCookieBar({
+                            content: "{% filter escapejs %}{% spaceless %}{% include 'cookie_consent/cookiebar.html' %}{% endspaceless %}{% endfilter %}",
+                            cookie_groups: cookie_groups,
+                            cookie_decline: "{% get_decline_cookie_groups_cookie_string request cookie_groups %}",
+                            beforeDeclined: function () {
+                                document.cookie = "{% get_decline_cookie_groups_cookie_string request cookie_groups %}";
+                            }
+                        });
+
+                        document
+                            .querySelector(".cc-cookie-dismiss")
+                            .addEventListener('click', (e) => {
+                                e.preventDefault();
+
+                                const body = document.querySelector('body');
+                                const cookieBar = document.querySelector('.cookie-bar');
+
+                                cookieBar.style.display = "none";
+                                body.classList.remove('with-cookie-bar');
+                            });
+                    });
+                </script>
+            {% endif %}
+        {% endif %}
     </body>
 </html>
 

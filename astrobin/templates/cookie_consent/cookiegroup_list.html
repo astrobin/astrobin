@@ -1,0 +1,19 @@
+{% extends "cookie_consent/base.html" %}
+
+{% load i18n %}
+
+{% block body %}
+    <h1>
+        Cookies
+
+        <small>
+            {% blocktrans trimmed %}
+                This is a list of the categories of cookies used in our website and why we use them.
+            {% endblocktrans %}
+        </small>
+    </h1>
+
+    {% for cookie_group in object_list %}
+        {% include "cookie_consent/_cookie_group.html" %}
+    {% endfor %}
+{% endblock %}

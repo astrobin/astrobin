@@ -12,6 +12,7 @@ include(
     'components/ads.py',
     'components/apps.py',
     'components/caches.py',
+    'components/cookies.py',
     'components/cors.py',
     'components/db.py',
     'components/email.py',

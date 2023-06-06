@@ -13,6 +13,7 @@ from common.constants import GroupName
 from django.contrib.auth.models import Group, User
 from django.contrib.sites.models import Site
 
+from cookie_consent.models import CookieGroup, Cookie
 from pybb.models import Category, Forum
 from subscription.models import Subscription
 
@@ -33,6 +34,113 @@ Group.objects.get_or_create(name='astrobin-donor-bronze-yearly')
 Group.objects.get_or_create(name='astrobin-donor-silver-yearly')
 Group.objects.get_or_create(name='astrobin-donor-gold-yearly')
 Group.objects.get_or_create(name='astrobin-donor-platinum-yearly')
+
+essential_cookies_group = CookieGroup.objects.get_or_create(
+    varname='essential',
+    name='Essential cookies',
+    description='These cookies are essential for the website to function properly.',
+    is_required=True,
+    ordering=0,
+)[0]
+
+astrobin_cookie_consent_cookie = Cookie.objects.get_or_create(
+    cookiegroup=essential_cookies_group,
+    name='astrobin_cookie_consent',
+    description='This cookie is used to store your cookie preferences.',
+)[0]
+
+sessionid_cookie = Cookie.objects.get_or_create(
+    cookiegroup=essential_cookies_group,
+    name='sessionid',
+    description='This cookie is used to identify your session on the website.',
+)[0]
+
+csrftoken_cookie = Cookie.objects.get_or_create(
+    cookiegroup=essential_cookies_group,
+    name='csrftoken',
+    description='This cookie is used to protect against Cross-Site Request Forgery (CSRF) attacks.',
+)[0]
+
+astrobin_lang_cookie = Cookie.objects.get_or_create(
+    cookiegroup=essential_cookies_group,
+    name='astrobin_lang',
+    description='This cookie is used to remember your language preference.',
+)[0]
+
+multidb_pin_writes_cookie = Cookie.objects.get_or_create(
+    cookiegroup=essential_cookies_group,
+    name='multidb_pin_writes',
+    description='This cookie is used to pin your session to the master database: AstroBin uses multiple databases ' +
+        'to improve performance, and this cookie is used to make sure that all your requests are sent to ' +
+        'the same database.',
+)[0]
+
+classic_auth_token_cookie = Cookie.objects.get_or_create(
+    cookiegroup=essential_cookies_group,
+    name='classic-auth-token',
+    description='This cookie is used to authenticate you on the website app.astrobin.com.',
+)[0]
+
+functional_cookies_group = CookieGroup.objects.get_or_create(
+    varname='functional',
+    name='Functional cookies (recommended)',
+    description='These cookies are used to provide additional functionality to the website, ' +
+        'such as remembering local preferences.',
+    is_required=False,
+    ordering=1,
+)[0]
+
+astrobin_forum_usage_modal_seen_cookie = Cookie.objects.get_or_create(
+    cookiegroup=functional_cookies_group,
+    name='astrobin_forum_usage_modal_seen',
+    description='This cookie is used to remember if you have seen the information about proper usage of the forums.',
+)[0]
+
+astrobin_click_and_drag_toast_seen = Cookie.objects.get_or_create(
+    cookiegroup=functional_cookies_group,
+    name='astrobin_click_and_drag_toast_seen',
+    description='This cookie is used to remember if you have seen information about the click & drag zoom ' +
+        'functionality.',
+)[0]
+
+astrobin_use_high_contrast_theme_cookie = Cookie.objects.get_or_create(
+    cookiegroup=functional_cookies_group,
+    name='astrobin_use_high_contrast_theme',
+    description='This cookie is used to remember if you have enabled the high contrast theme.',
+)[0]
+
+performance_cookies_group = CookieGroup.objects.get_or_create(
+    varname='performance',
+    name='Performance cookies (recommended)',
+    description='These cookies are used to improve the website performance by saving some ' +
+        'pieces of information on your computer and avoiding reading from the ' +
+        'AstroBin database when possible.',
+    is_required=False,
+    ordering=2
+)[0]
+
+astrobin_last_seen_set_cookie = Cookie.objects.get_or_create(
+    cookiegroup=performance_cookies_group,
+    name='astrobin_last_seen_set',
+    description='This cookie is used avoid saving the date and time we last saw you too often.',
+)[0]
+
+analytics_cookies_group = CookieGroup.objects.get_or_create(
+    varname='analytics',
+    name='Analytics cookies',
+    description='These cookies are used to anonymously track your usage of the website, so that we can ' +
+        'improve it over time.',
+    is_required=False,
+    ordering=3
+)[0]
+
+advertising_cookies_group = CookieGroup.objects.get_or_create(
+    varname='advertising',
+    name='Advertising cookies',
+    description='These cookies are used to honor ad display frequency caps. AstroBin does NOT serve targeted ads.',
+    is_required=False,
+    ordering=4
+)[0]
 
 try:
     Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC.value)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
+from typing import List, Tuple
 
 from django.contrib.auth.models import User
 from django.contrib.gis.geoip2 import GeoIP2
@@ -76,11 +77,13 @@ def get_client_ip(request):
     return ip
 
 
-def get_client_country_code(request):
+def get_client_country_code(request) -> str:
+    default_country = 'DE'
+
     try:
-        DEBUG_COUNTRY = request.GET.get('DEBUG_COUNTRY', None)
-        if DEBUG_COUNTRY:
-            return DEBUG_COUNTRY
+        debug_country = request.GET.get('DEBUG_COUNTRY', None)
+        if debug_country:
+            return debug_country
     except AttributeError:
         pass
 
@@ -89,14 +92,15 @@ def get_client_country_code(request):
     try:
         country = geoip2.country_code(get_client_ip(request))
         if country is None:
-            country = "UNKNOWN"
+            country = default_country
         return country
-    except:
-        return "UNKNOWN"
+    except Exception as e:
+        logger.error("Error getting country code: %s" % e)
+        return default_country
 
 
-def get_european_union_country_codes():
-    return (
+def get_european_union_country_codes() -> List[str]:
+    return [
         'at',
         'be',
         'bg',
@@ -124,7 +128,7 @@ def get_european_union_country_codes():
         'se',
         'si',
         'sk',
-    )
+    ]
 
 
 def inactive_accounts():

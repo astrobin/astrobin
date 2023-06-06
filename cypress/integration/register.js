@@ -4,7 +4,7 @@ describe("Register", () => {
     });
 
     beforeEach(() => {
-        Cypress.Cookies.preserveOnce("sessionid", "csrftoken", "astrobin_lang", "cookielaw_accepted");
+        Cypress.Cookies.preserveOnce("sessionid", "csrftoken", "astrobin_lang", "astrobin_cookie_consent");
     });
 
     it("should register", () => {

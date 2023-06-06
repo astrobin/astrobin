@@ -422,8 +422,7 @@ def show_skyscraper_ads_on_page(context):
                 requested_user_valid_usersubscription = PremiumService(data['requested_user']).get_valid_usersubscription()
                 image_owner_is_ultimate = is_any_ultimate(requested_user_valid_usersubscription)
 
-    return (is_anon or is_free(valid_subscription)) and not image_owner_is_ultimate and \
-           (context["COOKIELAW_ACCEPTED"] is not False or not show_cookie_banner(context.request))
+    return (is_anon or is_free(valid_subscription)) and not image_owner_is_ultimate
 
 
 @register.filter()
@@ -833,9 +832,9 @@ def show_uploads_used(user_subscription: UserSubscription):
 
 
 @register.filter
-def show_cookie_banner(request):
+def is_gdpr_country(request):
     country = utils.get_client_country_code(request)
-    return country is None or country.lower() in utils.get_european_union_country_codes()
+    return country is not None and country.lower() in utils.get_european_union_country_codes()
 
 
 @register.filter
