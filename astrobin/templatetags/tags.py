@@ -834,7 +834,7 @@ def show_uploads_used(user_subscription: UserSubscription):
 @register.filter
 def is_gdpr_country(request):
     country = utils.get_client_country_code(request)
-    return country is not None and country.lower() in utils.get_european_union_country_codes()
+    return country is not None and country.lower() in utils.get_gdpr_country_codes()
 
 
 @register.filter
