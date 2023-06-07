@@ -109,7 +109,7 @@
             </ul>
             <ul class="nav buttons">
                 {% with request.GET.mod as mod %}
-                    {% if show_advanced_solution and not real %}
+                    {% if show_advanced_solution_on_full and not real %}
                         <li>
                             <form class="form-inline enable-solution-overlay-form">
                                 <label for="enable-solution-overlay" class="hidden-phone hidden-tablet">{% trans "Plate-solution overlay" %}:</label>
@@ -186,7 +186,7 @@
 
     {% astrobin_image image alias revision=revision_label link=False %}
 
-    {% if show_advanced_solution and not real %}
+    {% if show_advanced_solution_on_full and not real %}
         <div
                 class="astrobin-image-container hover-overlay hover-overlay-solution advanced-plate-solution show-ra-dec-coordinates"
                 style="
@@ -211,7 +211,7 @@
     {% endif %}
 </div>
 
-{% if show_advanced_solution and not real %}
+{% if show_advanced_solution_on_full and not real %}
     <div id="ra-dec-coordinates" class="full hover-overlay">
         <div class="coordinates image-coordinates">
             <abbr title="{% trans 'Abscissa ' %}" class="x"></abbr>
@@ -303,7 +303,7 @@
     }
 
     function setupAdvancedSolution() {
-        {% if show_advanced_solution and not real %}
+        {% if show_advanced_solution_on_full and not real %}
             if ($('#enable-solution-overlay').is(':checked')) {
                 $('.hover-overlay').removeClass('hover-overlay-disabled');
                 $('.hover-overlay').show();
