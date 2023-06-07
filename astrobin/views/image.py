@@ -707,15 +707,19 @@ class ImageDetailView(ImageDetailViewBase):
                                      and instance_to_platesolve.solution.status >= Solver.SUCCESS
                              ),
             'show_advanced_solution': (
-                                              instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
-                                              and instance_to_platesolve.solution
-                                              and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
-                                      )
-                                      or (
-                                              mod == 'solved'
-                                              and instance_to_platesolve.solution
-                                              and instance_to_platesolve.solution.status >= Solver.ADVANCED_SUCCESS
-                                      ),
+                instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
+                and instance_to_platesolve.solution
+                and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
+            ) or (
+                mod == 'solved'
+                and instance_to_platesolve.solution
+                and instance_to_platesolve.solution.status >= Solver.ADVANCED_SUCCESS
+            ),
+            'show_advanced_solution_on_full': (
+                instance_to_platesolve.mouse_hover_image != MouseHoverImage.NOTHING
+                and instance_to_platesolve.solution
+                and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
+            ),
             'advanced_solution_last_live_log_entry':
                 PlateSolvingAdvancedLiveLogEntry.objects.filter(
                     serial_number=instance_to_platesolve.solution.pixinsight_serial_number) \
