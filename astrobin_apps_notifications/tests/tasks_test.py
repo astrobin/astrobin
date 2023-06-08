@@ -93,7 +93,7 @@ class TasksTest(TestCase):
         )
 
         image = Generators.image(user=user)
-        Generators.imageRevision(image=image)
+        Generators.image_revision(image=image)
 
         push_notification.assert_called_with([follower], user, 'new_image_revision', mock.ANY)
 
@@ -119,6 +119,6 @@ class TasksTest(TestCase):
 
         image = Generators.image(user=user)
         image.collaborators.add(collaborator)
-        Generators.imageRevision(image=image)
+        Generators.image_revision(image=image)
 
         push_notification.assert_called_with([user_follower, collaborator_follower], user, 'new_image_revision', mock.ANY)

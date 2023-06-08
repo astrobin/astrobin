@@ -25,6 +25,7 @@ from pybb.models import Forum, Post, Topic, TopicReadTracker
 from pybb.permissions import perms
 from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
+from safedelete import HARD_DELETE
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
 from stripe.error import StripeError
@@ -227,6 +228,8 @@ def image_post_softdelete(sender, instance, **kwargs):
     UserService(instance.user).clear_gallery_image_list_cache()
     ImageService(instance).delete_stories()
 
+    ImageRevision.objects.filter(image=instance).delete()
+
     if instance.solution:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
         instance.solution.delete()
@@ -253,6 +256,16 @@ def image_post_softdelete(sender, instance, **kwargs):
 
 
 post_softdelete.connect(image_post_softdelete, sender=Image)
+
+
+@receiver(pre_delete, sender=Image)
+def delete_related_file(sender, instance, **kwargs):
+    if not instance.deleted:
+        image_post_softdelete(sender, instance, **kwargs);
+        
+    if instance.image_file:
+        instance.image_file.delete(save=False)
+
 
 def imagerevision_pre_save(sender, instance, **kwargs):
     if instance.pk:
@@ -286,14 +299,24 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
 
 
-def imagerevision_post_delete(sender, instance, **kwargs):
+def imagerevision_post_softdelete(sender, instance, **kwargs):
     UserService(instance.image.user).clear_gallery_image_list_cache()
     if instance.solution:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
         instance.solution.delete()
 
 
-post_softdelete.connect(imagerevision_post_delete, sender=ImageRevision)
+post_softdelete.connect(imagerevision_post_softdelete, sender=ImageRevision)
+
+
+def imagerevision_post_delete(sender, instance, **kwargs):
+    if not instance.deleted:
+        imagerevision_post_softdelete(sender, instance, **kwargs)
+
+    if instance.image_file:
+        instance.image_file.delete(save=False)
+
+
 post_delete.connect(imagerevision_post_delete, sender=ImageRevision)
 
 
@@ -1239,6 +1262,11 @@ def userprofile_post_delete(sender, instance, **kwargs):
 
 post_softdelete.connect(userprofile_post_delete, sender=UserProfile)
 
+
+@receiver(pre_delete, sender=UserProfile)
+def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
+    for image in Image.objects_including_wip.filter(user=instance.user):
+        image.delete(force_policy=HARD_DELETE)
 
 def persistent_message_post_save(sender, instance, **kwargs):
     clear_notifications_template_cache(instance.user.username)

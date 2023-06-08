@@ -33,10 +33,11 @@ from hitcount.models import HitCount
 from pybb.models import Post
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
+from safedelete import HARD_DELETE
 
 from astrobin.models import (
     BroadcastEmail, CameraRenameProposal, DataDownloadRequest, Gear, GearMigrationStrategy,
-    Image, ImageRevision,
+    Image, ImageRevision, UserProfile,
 )
 from astrobin.services.gear_service import GearService
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
@@ -719,3 +720,11 @@ def update_index(content_type_pk, object_pk):
     instance = model_class.objects.get(pk=object_pk)
 
     signal_processor.enqueue_save(model_class, instance)
+
+
+@shared_task(time_limit=600, acks_late=True)
+def hard_delete_deleted_users():
+    profiles = UserProfile.deleted_objects.filter(deleted__lt=DateTimeService.now() - timedelta(days=90))
+    for profile in profiles.iterator():
+        logger.info("hard_delete_deleted_users: deleting %d" % profile.user.id)
+        profile.delete(force_policy=HARD_DELETE)
