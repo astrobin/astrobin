@@ -72,6 +72,8 @@ from .models import (
     UserProfile,
 )
 from .search_indexes import ImageIndex, UserIndex
+from .services import CloudflareService
+from .services.cloudfront_service import CloudFrontService
 from .stories import add_story
 from .utils import get_client_country_code
 
@@ -263,15 +265,16 @@ post_softdelete.connect(image_post_softdelete, sender=Image)
 @receiver(pre_delete, sender=Image)
 def image_pre_delete(sender, instance, **kwargs):
     if not instance.deleted:
-        image_post_softdelete(sender, instance, **kwargs);
+        image_post_softdelete(sender, instance, **kwargs)
+
+    cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
+    cloudflare_service = CloudflareService()
         
     if instance.image_file:
+        if instance.image_file.url:
+            cloudfront_service.create_invalidation([instance.image_file.url])
+            cloudflare_service.purge_resource(instance.image_file.url)
         instance.image_file.delete(save=False)
-
-    for group in ThumbnailGroup.objects.filter(image=instance, revision='0'):
-        for url in group.get_all_urls():
-            default_storage = get_storage_class()()
-            default_storage.delete(url)
 
 
 def imagerevision_pre_save(sender, instance, **kwargs):
