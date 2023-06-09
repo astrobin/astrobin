@@ -724,7 +724,11 @@ def update_index(content_type_pk, object_pk):
 
 @shared_task(time_limit=600, acks_late=True)
 def hard_delete_deleted_users():
-    profiles = UserProfile.deleted_objects.filter(deleted__lt=DateTimeService.now() - timedelta(days=90))
+    profiles = UserProfile.deleted_objects.filter(deleted__lt=DateTimeService.now() - timedelta(days=365))
     for profile in profiles.iterator():
         logger.info("hard_delete_deleted_users: deleting %d" % profile.user.id)
-        profile.delete(force_policy=HARD_DELETE)
+        try:
+            profile.delete(force_policy=HARD_DELETE)
+        except Exception as e:
+            logger.error("hard_delete_deleted_users: error %s" % str(e))
+            continue
