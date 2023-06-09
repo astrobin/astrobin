@@ -41,7 +41,6 @@ from django.views.generic import (
 )
 from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
-from safedelete import HARD_DELETE
 from silk.profiling.profiler import silk_profile
 
 from astrobin.enums import ImageEditorStep, SubjectType
@@ -96,15 +95,7 @@ class ImageUpdateViewBase(ImageSingleObjectMixin, UpdateView):
 
 
 class ImageDeleteViewBase(ImageSingleObjectMixin, DeleteView):
-    def delete(self, request, *args, **kwargs):
-        """
-        Call the delete() method on the fetched object and then redirect to the
-        success URL.
-        """
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        self.object.delete(force_policy=HARD_DELETE)
-        return HttpResponseRedirect(success_url)
+    pass
 
 
 class ImageFlagThumbsView(
