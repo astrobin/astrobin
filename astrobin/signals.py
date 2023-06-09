@@ -13,6 +13,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
+from django.core.files.storage import get_storage_class
 from django.db import IntegrityError, transaction
 from django.db.models import Q
 from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_delete, pre_save)
@@ -39,6 +40,7 @@ from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
+from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_iotd.services import IotdService
@@ -259,12 +261,17 @@ post_softdelete.connect(image_post_softdelete, sender=Image)
 
 
 @receiver(pre_delete, sender=Image)
-def delete_related_file(sender, instance, **kwargs):
+def image_pre_delete(sender, instance, **kwargs):
     if not instance.deleted:
         image_post_softdelete(sender, instance, **kwargs);
         
     if instance.image_file:
         instance.image_file.delete(save=False)
+
+    for group in ThumbnailGroup.objects.filter(image=instance, revision='0'):
+        for url in group.get_all_urls():
+            default_storage = get_storage_class()()
+            default_storage.delete(url)
 
 
 def imagerevision_pre_save(sender, instance, **kwargs):
@@ -309,15 +316,18 @@ def imagerevision_post_softdelete(sender, instance, **kwargs):
 post_softdelete.connect(imagerevision_post_softdelete, sender=ImageRevision)
 
 
-def imagerevision_post_delete(sender, instance, **kwargs):
+@receiver(pre_delete, sender=ImageRevision)
+def imagerevision_pre_delete(sender, instance, **kwargs):
     if not instance.deleted:
         imagerevision_post_softdelete(sender, instance, **kwargs)
 
     if instance.image_file:
         instance.image_file.delete(save=False)
 
-
-post_delete.connect(imagerevision_post_delete, sender=ImageRevision)
+    for group in ThumbnailGroup.objects.filter(image=instance.image, revision=instance.label):
+        for url in group.get_all_urls():
+            default_storage = get_storage_class()()
+            default_storage.delete(url)
 
 
 def nested_comment_pre_save(sender, instance, **kwargs):
