@@ -232,8 +232,6 @@ def image_post_softdelete(sender, instance, **kwargs):
     UserService(instance.user).clear_gallery_image_list_cache()
     ImageService(instance).delete_stories()
 
-    ImageRevision.objects.filter(image=instance).delete()
-
     if instance.solution:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
         instance.solution.delete()
