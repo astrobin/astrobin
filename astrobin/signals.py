@@ -13,6 +13,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
+from django.core.files.storage import get_storage_class
 from django.db import IntegrityError, transaction
 from django.db.models import Q
 from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_delete, pre_save)
@@ -25,6 +26,7 @@ from pybb.models import Forum, Post, Topic, TopicReadTracker
 from pybb.permissions import perms
 from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
+from safedelete import HARD_DELETE
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
 from stripe.error import StripeError
@@ -38,6 +40,7 @@ from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
+from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_iotd.services import IotdService
@@ -69,8 +72,11 @@ from .models import (
     UserProfile,
 )
 from .search_indexes import ImageIndex, UserIndex
+from .services import CloudflareService
+from .services.cloudfront_service import CloudFrontService
 from .stories import add_story
 from .utils import get_client_country_code
+from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
 log = logging.getLogger(__name__)
 
@@ -144,10 +150,9 @@ def image_pre_save_invalidate_thumbnails(sender, instance: Image, **kwargs):
 pre_save.connect(image_pre_save_invalidate_thumbnails, sender=Image)
 
 
-def image_post_save(sender, instance, created, **kwargs):
-    # type: (object, Image, bool, object) -> None
+def image_post_save(sender, instance: Image, created: bool, **kwargs):
 
-    if instance.deleted:
+    if getattr(instance, DELETED_FIELD_NAME, None):
         return
 
     if created:
@@ -254,6 +259,22 @@ def image_post_softdelete(sender, instance, **kwargs):
 
 post_softdelete.connect(image_post_softdelete, sender=Image)
 
+
+@receiver(pre_delete, sender=Image)
+def image_pre_delete(sender, instance: Image, **kwargs):
+    if not getattr(instance, DELETED_FIELD_NAME, None):
+        image_post_softdelete(sender, instance, **kwargs)
+
+    cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
+    cloudflare_service = CloudflareService()
+        
+    if instance.image_file:
+        if instance.image_file.url:
+            cloudfront_service.create_invalidation([instance.image_file.url])
+            cloudflare_service.purge_resource(instance.image_file.url)
+        instance.image_file.delete(save=False)
+
+
 def imagerevision_pre_save(sender, instance, **kwargs):
     if instance.pk:
         pre_save_instance = get_object_or_None(ImageRevision.uploads_in_progress, pk=instance.pk)
@@ -286,15 +307,29 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
 
 
-def imagerevision_post_delete(sender, instance, **kwargs):
+def imagerevision_post_softdelete(sender, instance, **kwargs):
     UserService(instance.image.user).clear_gallery_image_list_cache()
     if instance.solution:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
         instance.solution.delete()
 
 
-post_softdelete.connect(imagerevision_post_delete, sender=ImageRevision)
-post_delete.connect(imagerevision_post_delete, sender=ImageRevision)
+post_softdelete.connect(imagerevision_post_softdelete, sender=ImageRevision)
+
+
+@receiver(pre_delete, sender=ImageRevision)
+def imagerevision_pre_delete(sender, instance: ImageRevision, **kwargs):
+    if not getattr(instance, DELETED_FIELD_NAME, None):
+        imagerevision_post_softdelete(sender, instance, **kwargs)
+
+    cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
+    cloudflare_service = CloudflareService()
+
+    if instance.image_file:
+        if instance.image_file.url:
+            cloudfront_service.create_invalidation([instance.image_file.url])
+            cloudflare_service.purge_resource(instance.image_file.url)
+        instance.image_file.delete(save=False)
 
 
 def nested_comment_pre_save(sender, instance, **kwargs):
@@ -1232,12 +1267,27 @@ def userprofile_post_delete(sender, instance, **kwargs):
         instance.user.email = instance.user.email.replace('@', '+ASTROBIN_IGNORE@')
 
     instance.user.save()
+
     Image.objects_including_wip.filter(user=instance.user).delete()
+    ImageRevision.objects.filter(image__user=instance.user).delete()
     NestedComment.objects.filter(author=instance.user, deleted=False).update(deleted=True)
+
     UserIndex().remove_object(instance.user)
 
 
 post_softdelete.connect(userprofile_post_delete, sender=UserProfile)
+
+
+@receiver(pre_delete, sender=UserProfile)
+def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
+    if not getattr(instance, DELETED_FIELD_NAME, None):
+        userprofile_post_delete(sender, instance, **kwargs)
+
+    for revision in ImageRevision.all_objects.filter(image__user=instance.user):
+        revision.delete(force_policy=HARD_DELETE)
+
+    for image in Image.all_objects.filter(user=instance.user):
+        image.delete(force_policy=HARD_DELETE)
 
 
 def persistent_message_post_save(sender, instance, **kwargs):

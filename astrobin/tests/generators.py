@@ -1,8 +1,10 @@
 import random
 import string
 from datetime import date, timedelta
+from io import BytesIO
 
 from django.contrib.auth.models import Group, User
+from django.core.files.base import ContentFile
 from django.utils import timezone
 from pybb.models import Category, Forum, Post, Topic
 from subscription.models import Subscription, UserSubscription
@@ -44,11 +46,24 @@ class Generators:
         return user
 
     @staticmethod
+    def pil_image(*args, **kwargs):
+        from PIL import Image
+        pil_image = Image.new('RGB', (100, 100), 'red')
+        image_io = BytesIO()
+        pil_image.save(image_io, format='JPEG')
+        return ContentFile(image_io.getvalue(), kwargs.pop('filename', 'foo.jpg'))
+
+    @staticmethod
     def image(*args, **kwargs):
+        pil_image = kwargs.pop('image_file', Generators.pil_image())
+        user = kwargs.pop('user', None)
+        if not user:
+            user = Generators.user()
+
         return Image.objects.create(
-            user=kwargs.pop('user', Generators.user()),
+            user=user,
             title=kwargs.pop('title', Generators.randomString()),
-            image_file=kwargs.pop('image_file', 'images/foo.jpg'),
+            image_file=pil_image,
             is_wip=kwargs.pop('is_wip', False),
             is_final=kwargs.pop('is_final', True),
             description=kwargs.pop('description', None),
@@ -61,7 +76,7 @@ class Generators:
         )
 
     @staticmethod
-    def imageRevision(*args, **kwargs):
+    def image_revision(*args, **kwargs):
         image = kwargs.pop('image', None)
         if image is None:
             image = Generators.image()

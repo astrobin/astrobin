@@ -470,15 +470,15 @@ class ImageTest(TestCase):
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_detail_view_revision_redirect_to_final_revision_if_missing(self):
         image = Generators.image(is_final=False)
-        b = Generators.imageRevision(image=image, is_final=True)
+        b = Generators.image_revision(image=image, is_final=True)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'C'}))
         self.assertRedirects(response, "/%s/%s/" % (image.hash, b.label))
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_detail_view_revision_redirect_to_final_revision_if_deleted(self):
         image = Generators.image(is_final=False)
-        b = Generators.imageRevision(image=image, is_final=False)
-        c = Generators.imageRevision(image=image, is_final=True, label='C')
+        b = Generators.image_revision(image=image, is_final=False)
+        c = Generators.image_revision(image=image, is_final=True, label='C')
         b.delete()
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': b.label}))
         self.assertRedirects(response, "/%s/%s/" % (image.hash, c.label))
@@ -1791,7 +1791,7 @@ class ImageTest(TestCase):
         solution.save()
         image.save(keep_deleted=True)
 
-        revision = Generators.imageRevision(image=image)
+        revision = Generators.image_revision(image=image)
 
         self.assertIsNotNone(revision.solution)
         self.assertIsNotNone(revision.solution.settings)
@@ -2644,7 +2644,7 @@ class ImageTest(TestCase):
 
     def test_navigation_context_after_revision_redirect(self):
         image = Generators.image()
-        revision = Generators.imageRevision(image=image, is_final=True)
+        revision = Generators.image_revision(image=image, is_final=True)
         collection = Generators.collection(user=image.user)
         url_params = '?nc=collection&nce=%d' % collection.pk
 
@@ -2675,7 +2675,7 @@ class ImageTest(TestCase):
 
     def test_solution_deleted_if_image_revision_deleted(self):
         image = Generators.image()
-        revision = Generators.imageRevision(image=image)
+        revision = Generators.image_revision(image=image)
         PlateSolvingGenerators.solution(revision)
 
         self.assertIsNotNone(revision.solution)

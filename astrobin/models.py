@@ -5,6 +5,7 @@ import random
 import string
 import unicodedata
 import uuid
+from typing import List
 from urllib.parse import urlparse
 
 import boto3
@@ -20,6 +21,7 @@ from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
+from astrobin.services.cloudfront_service import CloudFrontService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
@@ -1760,9 +1762,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         try:
             thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
-            all_urls = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
+            all_urls: List[str] = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
 
             cloudflare_service = CloudflareService()
+            cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
+
+            cloudfront_service.create_invalidation(all_urls)
 
             for url in all_urls:
                 cloudflare_service.purge_resource(url)
