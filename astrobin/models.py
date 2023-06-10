@@ -1768,9 +1768,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
 
             cloudfront_service.create_invalidation(all_urls)
+            cloudflare_service.purge_cache([all_urls])
 
             for url in all_urls:
-                cloudflare_service.purge_resource(url)
                 s3 = boto3.client('s3')
                 s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
 

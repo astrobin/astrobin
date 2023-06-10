@@ -269,9 +269,9 @@ def image_pre_delete(sender, instance: Image, **kwargs):
     cloudflare_service = CloudflareService()
         
     if instance.image_file:
-        if instance.image_file.url:
+        if instance.image_file.url and getattr(instance, "purge_caches", False):
             cloudfront_service.create_invalidation([instance.image_file.url])
-            cloudflare_service.purge_resource(instance.image_file.url)
+            cloudflare_service.purge_cache([instance.image_file.url])
         instance.image_file.delete(save=False)
 
 
@@ -326,9 +326,9 @@ def imagerevision_pre_delete(sender, instance: ImageRevision, **kwargs):
     cloudflare_service = CloudflareService()
 
     if instance.image_file:
-        if instance.image_file.url:
+        if instance.image_file.url and getattr(instance, "purge_caches", False):
             cloudfront_service.create_invalidation([instance.image_file.url])
-            cloudflare_service.purge_resource(instance.image_file.url)
+            cloudflare_service.purge_cache([instance.image_file.url])
         instance.image_file.delete(save=False)
 
 
@@ -1283,10 +1283,28 @@ def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
     if not getattr(instance, DELETED_FIELD_NAME, None):
         userprofile_post_delete(sender, instance, **kwargs)
 
+    cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
+    cloudflare_service = CloudflareService()
+
+    image_urls = [
+        x.image_file.url for x in ImageRevision.all_objects.filter(image__user=instance.user)
+        if x.image_file and x.image_file.url
+    ]
+
+    revision_urls = [
+        x.image_file.url for x in Image.all_objects.filter(user=instance.user)
+        if x.image_file and x.image_file.url
+    ]
+
+    cloudfront_service.create_invalidation(image_urls + revision_urls)
+    cloudflare_service.purge_cache(image_urls + revision_urls)
+
     for revision in ImageRevision.all_objects.filter(image__user=instance.user):
+        revision.purge_caches = False
         revision.delete(force_policy=HARD_DELETE)
 
     for image in Image.all_objects.filter(user=instance.user):
+        image.purge_caches = False
         image.delete(force_policy=HARD_DELETE)
 
 

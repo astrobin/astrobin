@@ -288,19 +288,19 @@ class Solution(models.Model):
         self.status = Solver.MISSING
         self.submission_id = None
 
-        cloudflare_service = CloudflareService()
         cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
+        cloudflare_service = CloudflareService()
 
         if self.image_file and self.image_file.url:
-            cloudflare_service.purge_resource(self.image_file.url)
             cloudfront_service.create_invalidation([self.image_file.url])
+            cloudflare_service.purge_cache([self.image_file.url])
 
         self.image_file.delete(save=False)
         self.image_file = None
 
         if self.skyplot_zoom1 and self.skyplot_zoom1.url:
-            cloudflare_service.purge_resource(self.skyplot_zoom1.url)
             cloudfront_service.create_invalidation([self.skyplot_zoom1.url])
+            cloudflare_service.purge_cache([self.skyplot_zoom1.url])
 
         self.skyplot_zoom1.delete()
         self.skyplot_zoom1 = None
