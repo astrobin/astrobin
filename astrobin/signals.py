@@ -76,6 +76,7 @@ from .services import CloudflareService
 from .services.cloudfront_service import CloudFrontService
 from .stories import add_story
 from .utils import get_client_country_code
+from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
 log = logging.getLogger(__name__)
 
@@ -149,10 +150,9 @@ def image_pre_save_invalidate_thumbnails(sender, instance: Image, **kwargs):
 pre_save.connect(image_pre_save_invalidate_thumbnails, sender=Image)
 
 
-def image_post_save(sender, instance, created, **kwargs):
-    # type: (object, Image, bool, object) -> None
+def image_post_save(sender, instance: Image, created: bool, **kwargs):
 
-    if instance.deleted:
+    if getattr(instance, DELETED_FIELD_NAME, None):
         return
 
     if created:
@@ -261,8 +261,8 @@ post_softdelete.connect(image_post_softdelete, sender=Image)
 
 
 @receiver(pre_delete, sender=Image)
-def image_pre_delete(sender, instance, **kwargs):
-    if not instance.deleted:
+def image_pre_delete(sender, instance: Image, **kwargs):
+    if not getattr(instance, DELETED_FIELD_NAME, None):
         image_post_softdelete(sender, instance, **kwargs)
 
     cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
@@ -318,17 +318,18 @@ post_softdelete.connect(imagerevision_post_softdelete, sender=ImageRevision)
 
 
 @receiver(pre_delete, sender=ImageRevision)
-def imagerevision_pre_delete(sender, instance, **kwargs):
-    if not instance.deleted:
+def imagerevision_pre_delete(sender, instance: ImageRevision, **kwargs):
+    if not getattr(instance, DELETED_FIELD_NAME, None):
         imagerevision_post_softdelete(sender, instance, **kwargs)
 
-    if instance.image_file:
-        instance.image_file.delete(save=False)
+    cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
+    cloudflare_service = CloudflareService()
 
-    for group in ThumbnailGroup.objects.filter(image=instance.image, revision=instance.label):
-        for url in group.get_all_urls():
-            default_storage = get_storage_class()()
-            default_storage.delete(url)
+    if instance.image_file:
+        if instance.image_file.url:
+            cloudfront_service.create_invalidation([instance.image_file.url])
+            cloudflare_service.purge_resource(instance.image_file.url)
+        instance.image_file.delete(save=False)
 
 
 def nested_comment_pre_save(sender, instance, **kwargs):
@@ -1266,8 +1267,11 @@ def userprofile_post_delete(sender, instance, **kwargs):
         instance.user.email = instance.user.email.replace('@', '+ASTROBIN_IGNORE@')
 
     instance.user.save()
+
     Image.objects_including_wip.filter(user=instance.user).delete()
+    ImageRevision.objects.filter(image__user=instance.user).delete()
     NestedComment.objects.filter(author=instance.user, deleted=False).update(deleted=True)
+
     UserIndex().remove_object(instance.user)
 
 
@@ -1276,8 +1280,15 @@ post_softdelete.connect(userprofile_post_delete, sender=UserProfile)
 
 @receiver(pre_delete, sender=UserProfile)
 def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
-    for image in Image.objects_including_wip.filter(user=instance.user):
+    if not getattr(instance, DELETED_FIELD_NAME, None):
+        userprofile_post_delete(sender, instance, **kwargs)
+
+    for revision in ImageRevision.all_objects.filter(image__user=instance.user):
+        revision.delete(force_policy=HARD_DELETE)
+
+    for image in Image.all_objects.filter(user=instance.user):
         image.delete(force_policy=HARD_DELETE)
+
 
 def persistent_message_post_save(sender, instance, **kwargs):
     clear_notifications_template_cache(instance.user.username)

@@ -583,8 +583,10 @@ class SignalsTest(TestCase):
 
         image.delete()
 
-        self.assertEquals(0, ImageRevision.objects.count())
-        self.assertEquals(1, ImageRevision.deleted_objects.count())
+        # Image revision is not deleted: easier in case the image is restored later.
+        self.assertEquals(1, ImageRevision.objects.count())
+        self.assertEquals(0, ImageRevision.deleted_objects.count())
+
         self.assertEquals(1, Image.deleted_objects.count())
 
     def test_hard_deleting_image_hard_deletes_revisions(self):
@@ -610,11 +612,18 @@ class SignalsTest(TestCase):
         self.assertEquals(1, UserProfile.deleted_objects.count())
         self.assertEquals(0, UserProfile.objects.count())
 
-    def test_hard_deleting_userprofile_hard_deletes_images(self):
+    def test_hard_deleting_userprofile_hard_deletes_images_and_revisions(self):
         user = Generators.user()
-        Generators.image(user=user)
+        image = Generators.image(user=user)
+        Generators.image_revision(image=image)
 
         profile = UserProfile.objects.get(user=user)
+        profile.delete()
+
+        self.assertEquals(1, Image.deleted_objects.count())
+        self.assertEquals(1, ImageRevision.deleted_objects.count())
+
         profile.delete(force_policy=HARD_DELETE)
 
-        self.assertEquals(0, Image.deleted_objects.count())
+        self.assertEquals(0, Image.all_objects.count())
+        self.assertEquals(0, ImageRevision.all_objects.count())
