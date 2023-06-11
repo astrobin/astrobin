@@ -20,6 +20,10 @@ class CloudflareService:
             log.warning("CloudflareService cannot work without token and zone_id")
             return
 
+        if not paths or len(paths) == 0:
+            log.warning("CloudflareService cannot purge cache without paths")
+            return
+
         headers = {
             "Authorization": "Bearer " + self.token,
             "Content-Type": "application/json"

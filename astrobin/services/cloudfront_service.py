@@ -28,6 +28,10 @@ class CloudFrontService:
         if not self.distribution_id:
             return
 
+        if not urls or len(urls) == 0:
+            log.warning("CloudFrontService cannot purge cache without urls")
+            return
+
         return self.client.create_invalidation(
             DistributionId=self.distribution_id,
             InvalidationBatch={
