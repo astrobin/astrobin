@@ -13,8 +13,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
-from django.core.files.storage import get_storage_class
-from django.db import IntegrityError, transaction
+from django.db import IntegrityError, InternalError, transaction
 from django.db.models import Q
 from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_delete, pre_save)
 from django.dispatch import receiver
@@ -40,7 +39,6 @@ from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
-from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_iotd.services import IotdService
@@ -263,7 +261,10 @@ post_softdelete.connect(image_post_softdelete, sender=Image)
 @receiver(pre_delete, sender=Image)
 def image_pre_delete(sender, instance: Image, **kwargs):
     if not getattr(instance, DELETED_FIELD_NAME, None):
-        image_post_softdelete(sender, instance, **kwargs)
+        try:
+            image_post_softdelete(sender, instance, **kwargs)
+        except InternalError as e:
+            log.error("Error soft deleting image %d: %s" % (instance.pk, str(e)))
 
     cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
     cloudflare_service = CloudflareService()
@@ -320,7 +321,10 @@ post_softdelete.connect(imagerevision_post_softdelete, sender=ImageRevision)
 @receiver(pre_delete, sender=ImageRevision)
 def imagerevision_pre_delete(sender, instance: ImageRevision, **kwargs):
     if not getattr(instance, DELETED_FIELD_NAME, None):
-        imagerevision_post_softdelete(sender, instance, **kwargs)
+        try:
+            imagerevision_post_softdelete(sender, instance, **kwargs)
+        except InternalError as e:
+            log.error("Error soft deleting image revision %d: %s" % (instance.pk, str(e)))
 
     cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
     cloudflare_service = CloudflareService()
@@ -1281,7 +1285,10 @@ post_softdelete.connect(userprofile_post_delete, sender=UserProfile)
 @receiver(pre_delete, sender=UserProfile)
 def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
     if not getattr(instance, DELETED_FIELD_NAME, None):
-        userprofile_post_delete(sender, instance, **kwargs)
+        try:
+            userprofile_post_delete(sender, instance, **kwargs)
+        except InternalError as e:
+            log.error("Error soft deleting user profile %d: %s" % (instance.pk, str(e)))
 
     cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
     cloudflare_service = CloudflareService()
