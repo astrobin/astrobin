@@ -1241,6 +1241,8 @@ post_save.connect(user_post_save, sender=User)
 
 
 def user_pre_delete(sender, instance, **kwargs):
+    ToggleProperty.objects.filter(user=instance, property_type__in=['follow', 'bookmark']).delete()
+
     try:
         if getattr(instance, 'userprofile') and instance.userprofile.stripe_customer_id:
             stripe.api_key = settings.STRIPE['keys']['secret']
@@ -1253,7 +1255,7 @@ def user_pre_delete(sender, instance, **kwargs):
 pre_delete.connect(user_pre_delete, sender=User)
 
 
-def userprofile_post_delete(sender, instance, **kwargs):
+def userprofile_post_softdelete(sender, instance, **kwargs):
     # Images are attached to the auth.User object, and that's not really
     # deleted, so nothing is cascaded, hence the following line.
     instance.user.is_active = False
@@ -1270,14 +1272,14 @@ def userprofile_post_delete(sender, instance, **kwargs):
     UserIndex().remove_object(instance.user)
 
 
-post_softdelete.connect(userprofile_post_delete, sender=UserProfile)
+post_softdelete.connect(userprofile_post_softdelete, sender=UserProfile)
 
 
 @receiver(pre_delete, sender=UserProfile)
 def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
     if not getattr(instance, DELETED_FIELD_NAME, None):
         try:
-            userprofile_post_delete(sender, instance, **kwargs)
+            userprofile_post_softdelete(sender, instance, **kwargs)
         except InternalError as e:
             log.error("Error soft deleting user profile %d: %s" % (instance.pk, str(e)))
 
@@ -1300,6 +1302,11 @@ def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
     for image in Image.all_objects.filter(user=instance.user):
         image.purge_caches = False
         image.delete(force_policy=HARD_DELETE)
+
+
+@receiver(post_delete, sender=UserProfile)
+def userprofile_post_delete(sender, instance: UserProfile, **kwargs):
+    instance.user.delete()
 
 
 def persistent_message_post_save(sender, instance, **kwargs):

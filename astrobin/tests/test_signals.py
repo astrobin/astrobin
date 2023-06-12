@@ -2,6 +2,7 @@ import time
 from datetime import timedelta
 
 import mock
+from django.contrib.auth.models import User
 from django.test import TestCase, override_settings
 from django.utils import timezone
 from mock import patch
@@ -627,3 +628,57 @@ class SignalsTest(TestCase):
 
         self.assertEquals(0, Image.all_objects.count())
         self.assertEquals(0, ImageRevision.all_objects.count())
+
+    def test_hard_deleting_userprofile_hard_deletes_user(self):
+        user = Generators.user()
+        profile = UserProfile.objects.get(user=user)
+        profile.delete(force_policy=HARD_DELETE)
+
+        self.assertEquals(0, User.objects.count())
+
+    def test_hard_deleting_userprofile_hard_deletes_follow_toggle_properties(self):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        ToggleProperty.objects.create(
+            property_type='follow',
+            user=user1,
+            content_object=user2
+        )
+
+        user1.userprofile.delete(force_policy=HARD_DELETE)
+
+        self.assertEquals(0, ToggleProperty.objects.count())
+
+    def test_hard_deleting_userprofile_hard_deletes_bookmark_toggle_properties(self):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        image = Generators.image(user=user2)
+
+        ToggleProperty.objects.create(
+            property_type='bookmark',
+            user=user1,
+            content_object=image
+        )
+
+        user1.userprofile.delete(force_policy=HARD_DELETE)
+
+        self.assertEquals(0, ToggleProperty.objects.count())
+
+    def test_hard_deleting_userprofile_hard_does_not_delete_like_toggle_properties(self):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        image = Generators.image(user=user2)
+
+        ToggleProperty.objects.create(
+            property_type='like',
+            user=user1,
+            content_object=image
+        )
+
+        user1.userprofile.delete(force_policy=HARD_DELETE)
+
+        self.assertEquals(1, ToggleProperty.objects.count())
+        self.assertIsNone(ToggleProperty.objects.first().user)
