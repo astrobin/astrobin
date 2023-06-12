@@ -14,6 +14,9 @@ cookie_definitions = {
     'astrobin_lang': _(
         'This cookie is used to remember your language preference.'
     ),
+    'astrobin-two-factor-remember-cookie': _(
+        'This cookie lets you skip the two-factor authentication step for a certain time on the current device.'
+    ),
     'multidb_pin_writes': _(
         'This cookie is used to pin your session to the master database: AstroBin uses multiple databases to improve '
         'performance, and this cookie is used to make sure that all your requests are sent to the same database.'

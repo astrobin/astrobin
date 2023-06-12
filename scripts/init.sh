@@ -47,6 +47,7 @@ cookies = [
             'sessionid',
             'csrftoken',
             'astrobin_lang',
+            'astrobin-two-factor-remember-cookie',
             'multidb_pin_writes',
             'classic-auth-token',
             '__stripe_mid',
