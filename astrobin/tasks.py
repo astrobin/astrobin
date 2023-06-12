@@ -725,7 +725,7 @@ def update_index(content_type_pk, object_pk):
     signal_processor.enqueue_save(model_class, instance)
 
 
-@shared_task(time_limit=600, acks_late=True)
+@shared_task(time_limit=3600, acks_late=False)
 def hard_delete_deleted_users():
     profiles = UserProfile.deleted_objects.filter(deleted__lt=DateTimeService.now() - timedelta(days=365))
     for profile in profiles.iterator():
