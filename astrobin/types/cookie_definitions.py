@@ -17,6 +17,27 @@ cookie_definitions = {
     'astrobin-two-factor-remember-cookie': _(
         'This cookie lets you skip the two-factor authentication step for a certain time on the current device.'
     ),
+    'astrobin-equipment-explorer-filter-data-camera': _(
+        'This cookie is used to remember your last camera filter in the equipment explorer.'
+    ),
+    'astrobin-equipment-explorer-filter-data-sensor': _(
+        'This cookie is used to remember your last sensor filter in the equipment explorer.'
+    ),
+    'astrobin-equipment-explorer-filter-data-telescope': _(
+        'This cookie is used to remember your last telescope filter in the equipment explorer.'
+    ),
+    'astrobin-equipment-explorer-filter-data-mount': _(
+        'This cookie is used to remember your last mount filter in the equipment explorer.'
+    ),
+    'astrobin-equipment-explorer-filter-data-filter': _(
+        'This cookie is used to remember your last filter filter in the equipment explorer.'
+    ),
+    'astrobin-equipment-explorer-filter-data-software': _(
+        'This cookie is used to remember your last software filter in the equipment explorer.'
+    ),
+    'astrobin-equipment-explorer-filter-data-accessory': _(
+        'This cookie is used to remember your last accessory filter in the equipment explorer.'
+    ),
     'multidb_pin_writes': _(
         'This cookie is used to pin your session to the master database: AstroBin uses multiple databases to improve '
         'performance, and this cookie is used to make sure that all your requests are sent to the same database.'
