@@ -285,10 +285,20 @@ class Solution(models.Model):
         self.status = Solver.MISSING
         self.submission_id = None
 
-        self.image_file.delete()
+        invalidate_urls = []
+
+        if self.image_file and self.image_file.url:
+            invalidate_urls.append(self.image_file.url)
+
+        self.image_file.delete(save=False)
         self.image_file = None
+
+        if self.skyplot_zoom1 and self.skyplot_zoom1.url:
+            invalidate_urls.append(self.skyplot_zoom1.url)
+
         self.skyplot_zoom1.delete()
         self.skyplot_zoom1 = None
+
         self.objects_in_field = None
         self.ra = None
         self.dec = None
@@ -296,6 +306,10 @@ class Solution(models.Model):
         self.orientation = None
         self.radius = None
         self.annotations = None
+
+        if len(invalidate_urls) > 0:
+            from astrobin.tasks import invalidate_cdn_caches
+            invalidate_cdn_caches.delay(invalidate_urls)
 
     def _do_clear_advanced(self):
         if self.status > Solver.SUCCESS:

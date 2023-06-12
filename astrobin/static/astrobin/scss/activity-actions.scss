@@ -58,6 +58,7 @@
         background-color: rgba(0, 0, 0, .5);
         backdrop-filter: blur(4px);
         width: 100%;
+        hyphens: auto;
 
         > .inner {
           padding: 12px;
@@ -72,6 +73,7 @@
         backdrop-filter: blur(4px);
         width: 100%;
         color: $text-color;
+        hyphens: auto;
 
         > .inner {
           padding: 12px;

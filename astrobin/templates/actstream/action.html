@@ -35,6 +35,8 @@
         {% with image=action.action_object user=action.actor %}
             {% include 'actstream/_action_avatar.html' %}
             <div class="action-object has-like-button has-avatar">
+                {% include 'actstream/_action_image_title.html' %}
+                {% astrobin_image image 'story' nav_ctx='user' request=request %}
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
@@ -43,8 +45,6 @@
                         {% endblocktrans %}
                     </div>
                 </div>
-                {% astrobin_image image 'story' nav_ctx='user' request=request %}
-                {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -71,6 +71,8 @@
         {% with image=action.action_object user=action.actor %}
             {% include 'actstream/_action_avatar.html' %}
             <div class="action-object has-like-button has-avatar">
+                {% include 'actstream/_action_image_title.html' %}
+                {% astrobin_image image 'story' nav_ctx='user' request=request %}
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
@@ -85,8 +87,6 @@
                         {% endif %}
                     </div>
                 </div>
-                {% astrobin_image image 'story' nav_ctx='user' request=request %}
-                {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -95,6 +95,8 @@
         {% with image=action.action_object user=action.actor %}
             {% include 'actstream/_action_avatar.html' %}
             <div class="action-object has-like-button has-avatar">
+                {% include 'actstream/_action_image_title.html' %}
+                {% astrobin_image image 'story' nav_ctx='user' request=request %}
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
@@ -109,8 +111,6 @@
                         {% endif %}
                     </div>
                 </div>
-                {% astrobin_image image 'story' nav_ctx='user' request=request %}
-                {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -119,6 +119,8 @@
         {% with comment=action.action_object distinct_commenters=action.target.comments_by_distinct_users image=action.target user=action.actor %}
             {% include 'actstream/_action_avatar.html' %}
             <div class="action-object has-like-button has-avatar">
+                {% include 'actstream/_action_image_title.html' %}
+                {% astrobin_image image 'story' nav_ctx='user' request=request %}
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
@@ -133,8 +135,6 @@
                         {% endif %}
                     </div>
                 </div>
-                {% astrobin_image image 'story' nav_ctx='user' request=request %}
-                {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -143,12 +143,9 @@
         {% with group=action.action_object user=action.actor %}
             {% include 'actstream/_action_avatar.html' %}
             <div class="action-object">
-                <div class="verb">
+                <div class="title">
                     <div class="inner">
-                        {% url 'user_page' user.username as user_page %}
-                        {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
-                            <a href="{{user_page}}">{{user}}</a> created a new public group.
-                        {% endblocktrans %}
+                        {{ group.name }}
                     </div>
                 </div>
                 <div class="astrobin-image-container">
@@ -156,9 +153,12 @@
                         <img src="{% static 'astrobin/images/actstream-group-action.png' %}" alt="Group action" />
                     </a>
                 </div>
-                <div class="title hidden-phone hidden-tablet">
+                <div class="verb">
                     <div class="inner">
-                        {{group.name}}
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> created a new public group.
+                        {% endblocktrans %}
                     </div>
                 </div>
             </div>
@@ -169,12 +169,9 @@
         {% with group=action.action_object user=action.actor %}
             {% include 'actstream/_action_avatar.html' %}
             <div class="action-object">
-                <div class="verb">
+                <div class="title">
                     <div class="inner">
-                        {% url 'user_page' user.username as user_page %}
-                        {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
-                            <a href="{{user_page}}">{{user}}</a> joined a group.
-                        {% endblocktrans %}
+                        {{ group.name }}
                     </div>
                 </div>
                 <div class="astrobin-image-container">
@@ -182,9 +179,12 @@
                         <img src="{% static 'astrobin/images/actstream-group-action.png' %}" alt="Group action" />
                     </a>
                 </div>
-                <div class="title hidden-phone hidden-tablet">
+                <div class="verb">
                     <div class="inner">
-                        {{group.name}}
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> joined a group.
+                        {% endblocktrans %}
                     </div>
                 </div>
             </div>

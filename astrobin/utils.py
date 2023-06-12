@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
+from urllib.parse import urlparse
 from typing import List
 
 from django.contrib.auth.models import User
@@ -320,3 +321,7 @@ def degrees_minutes_seconds_to_decimal_degrees(degrees, minutes, seconds, direct
         dd *= -1
 
     return dd
+
+
+def extract_path_from_url(url) -> str:
+    return urlparse(url).path

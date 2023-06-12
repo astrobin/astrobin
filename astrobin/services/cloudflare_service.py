@@ -1,4 +1,5 @@
 import logging
+from typing import List
 
 import requests
 import simplejson
@@ -14,14 +15,13 @@ class CloudflareService:
         self.token = settings.CLOUDFLARE_TOKEN
         self.zone_id = settings.CLOUDFLARE_ZONE_ID
 
-    def purge_resource(self, path):
-        """
-        :rtype: None
-        :type path: basestring
-        """
-
+    def purge_cache(self, paths: List[str]):
         if not self.token or not self.zone_id:
             log.warning("CloudflareService cannot work without token and zone_id")
+            return
+
+        if not paths or len(paths) == 0:
+            log.warning("CloudflareService cannot purge cache without paths")
             return
 
         headers = {
@@ -32,12 +32,10 @@ class CloudflareService:
         url = "%s/zones/%s/purge_cache" % (self.base_url, self.zone_id)
 
         data = simplejson.dumps({
-            "files": [
-                path
-            ]
+            "files": paths
         })
 
         try:
-            requests.get(url, data, headers=headers, timeout=1)
+            requests.post(url, data, headers=headers, timeout=1)
         except Exception as e:
-            log.warning("Unable to purge Cloudflare cache for file %s: %s" % (path, str(e)))
+            log.warning("Unable to purge Cloudflare cache for files %s: %s" % (', '.join(paths), str(e)))

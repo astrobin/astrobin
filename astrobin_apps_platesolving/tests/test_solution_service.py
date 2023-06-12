@@ -27,7 +27,7 @@ class SolutionServiceTest(TestCase):
         advanced_settings.save()
 
         advanced_settings, created = SolutionService.get_or_create_advanced_settings(
-            Generators.imageRevision(image=image))
+            Generators.image_revision(image=image))
 
         self.assertNotEqual(advanced_settings.sample_raw_frame_file.name, "")
         self.assertEqual(advanced_settings.scaled_font_size, "L")

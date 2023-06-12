@@ -23,6 +23,7 @@ include(
     'components/storage.py',
     'components/templates.py',
     'components/cloudflare.py',
+    'components/cloudfront.py',
 
     # Apps settings
     'components/account.py',
