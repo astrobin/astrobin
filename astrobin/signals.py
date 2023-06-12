@@ -1243,7 +1243,7 @@ post_save.connect(user_post_save, sender=User)
 
 
 def user_pre_delete(sender, instance, **kwargs):
-    if instance.userprofile.stripe_customer_id:
+    if getattr(instance, 'userprofile') and instance.userprofile.stripe_customer_id:
         stripe.api_key = settings.STRIPE['keys']['secret']
         try:
             stripe.Customer.delete(instance.userprofile.stripe_customer_id)
