@@ -747,5 +747,5 @@ def hard_delete_deleted_users():
     max_retries=5
 )
 def invalidate_cdn_caches(paths: List[str]):
-    CloudFrontService(settings.CLOUDFRONT_DISTRIBUTION_ID).create_invalidation(paths)
+    CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation(paths)
     CloudflareService().purge_cache(paths)
