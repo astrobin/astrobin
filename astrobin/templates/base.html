@@ -74,7 +74,7 @@
         <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
 
         {% if request|is_gdpr_country %}
-            <script type="text/javascript" src={% static "cookie_consent/cookiebar.js" %}></script>
+            <script type="text/javascript" src="{% static "cookie_consent/cookiebar.js" %}"></script>
         {% endif %}
 
         {% block extra_head %}{% endblock %}
