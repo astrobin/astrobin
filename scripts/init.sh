@@ -10,12 +10,15 @@ python manage.py migrate --run-syncdb --noinput
 # Create initial data
 python manage.py shell << EOF
 from common.constants import GroupName
+from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.sites.models import Site
 
+from cookie_consent.models import CookieGroup, Cookie
 from pybb.models import Category, Forum
 from subscription.models import Subscription
 
+from astrobin.types import CookieGroupDefinition, CookieGroupName, CookieGroupDescription, cookie_definitions
 from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 Group.objects.get_or_create(name='astrobin_lite')
@@ -33,6 +36,97 @@ Group.objects.get_or_create(name='astrobin-donor-bronze-yearly')
 Group.objects.get_or_create(name='astrobin-donor-silver-yearly')
 Group.objects.get_or_create(name='astrobin-donor-gold-yearly')
 Group.objects.get_or_create(name='astrobin-donor-platinum-yearly')
+
+cookies = [
+    [
+        CookieGroupDefinition.ESSENTIAL.value,
+        CookieGroupName.ESSENTIAL.value,
+        CookieGroupDescription.ESSENTIAL.value,
+        [
+            'astrobin_cookie_consent',
+            'sessionid',
+            'csrftoken',
+            'astrobin_lang',
+            'multidb_pin_writes',
+            'classic-auth-token',
+            '__stripe_mid',
+            '__stripe_sid',
+        ]
+    ],
+    [
+        CookieGroupDefinition.FUNCTIONAL.value,
+        CookieGroupName.FUNCTIONAL.value,
+        CookieGroupDescription.FUNCTIONAL.value,
+        [
+            'astrobin_forum_usage_modal_seen',
+            'astrobin_click_and_drag_toast_seen',
+            'astrobin_use_high_contrast_theme',
+        ]
+    ],
+    [
+        CookieGroupDefinition.PERFORMANCE.value,
+        CookieGroupName.PERFORMANCE.value,
+        CookieGroupDescription.PERFORMANCE.value,
+        [
+            'astrobin_last_seen_set',
+        ]
+    ],
+    [
+        CookieGroupDefinition.ANALYTICS.value,
+        CookieGroupName.ANALYTICS.value,
+        CookieGroupDescription.ANALYTICS.value,
+        [
+            '_ga',
+            '_gid',
+            '_gat',
+            f'_gac_{settings.GOOGLE_ANALYTICS_ID}',
+            '_hjClosedSurveyInvites',
+            '_hjDonePolls',
+            '_hjMinimizedPolls',
+            '_hjDoneTestersWidgets',
+            '_hjMinimizedTestersWidgets',
+            '_hjIncludedInSample',
+            '_hjShownFeedbackMessage',
+            '_hjid',
+            '_hjRecordingLastActivity',
+            '_hjTLDTest',
+            '_hjUserAttributesHash',
+            '_hjCachedUserAttributes',
+            '_hjLocalStorageTest',
+            '_hjIncludedInPageviewSample',
+            '_hjAbsoluteSessionInProgress',
+            '_hjFirstSeen',
+            '_hjViewportId',
+            '_hjRecordingEnabled',
+            '_hjRecordingLastActivity',
+        ]
+    ],
+    [
+        CookieGroupDefinition.ADVERTISING.value,
+        CookieGroupName.ADVERTISING.value,
+        CookieGroupDescription.ADVERTISING.value,
+        [
+            'IDE',
+            'test_cookie',
+        ]
+    ],
+]
+
+for index, group in enumerate(cookies):
+    cookie_group = CookieGroup.objects.get_or_create(
+        varname=group[0],
+        name=group[1],
+        description=group[2],
+        is_required=group[0] == CookieGroupDefinition.ESSENTIAL.value,
+        ordering=index,
+    )[0]
+
+    for cookie in group[3]:
+        Cookie.objects.get_or_create(
+            cookiegroup=cookie_group,
+            name=cookie,
+            description=cookie_definitions[cookie],
+        )
 
 try:
     Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC.value)

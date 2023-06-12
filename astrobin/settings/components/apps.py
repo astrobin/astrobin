@@ -65,7 +65,6 @@ INSTALLED_APPS += [
     'safedelete',
     'change_email',
     'template_timings_panel',
-    'cookielaw',
     'corsheaders',
     'image_cropping',
     'django_extensions',
@@ -80,6 +79,7 @@ INSTALLED_APPS += [
     'two_factor',
     'two_factor.plugins.email',
     'two_factor.plugins.phonenumber',
+    'cookie_consent',
 
     'astrobin.apps.AstroBinAppConfig',
 ]

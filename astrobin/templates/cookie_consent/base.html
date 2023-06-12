@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load django_bootstrap_breadcrumbs %}
+
+{% block title %}Cookies{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Cookies' None %}
+{% endblock %}
+
+{% block content %}
+   {% block body %}
+   {% endblock %}
+{% endblock %}
