@@ -12,7 +12,7 @@ from django.contrib.auth.models import Group as DjangoGroup, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
-from django.core.exceptions import MultipleObjectsReturned
+from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from django.db import IntegrityError, InternalError, transaction
 from django.db.models import Q
 from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_delete, pre_save)
@@ -70,8 +70,6 @@ from .models import (
     UserProfile,
 )
 from .search_indexes import ImageIndex, UserIndex
-from .services import CloudflareService
-from .services.cloudfront_service import CloudFrontService
 from .stories import add_story
 from .utils import get_client_country_code
 from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
@@ -1243,13 +1241,14 @@ post_save.connect(user_post_save, sender=User)
 
 
 def user_pre_delete(sender, instance, **kwargs):
-    if getattr(instance, 'userprofile') and instance.userprofile.stripe_customer_id:
-        stripe.api_key = settings.STRIPE['keys']['secret']
-        try:
+    try:
+        if getattr(instance, 'userprofile') and instance.userprofile.stripe_customer_id:
+            stripe.api_key = settings.STRIPE['keys']['secret']
             stripe.Customer.delete(instance.userprofile.stripe_customer_id)
-        except StripeError as e:
-            log.error('Error deleting Stripe customer: %s' % e)
-
+    except StripeError as e:
+        log.error('Error deleting Stripe customer: %s' % e)
+    except ObjectDoesNotExist as e:
+        log.error('User %s has no userprofile: %s' % (instance.username, str(e)))
 
 pre_delete.connect(user_pre_delete, sender=User)
 
