@@ -77,6 +77,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'botocore': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         's3transfer': {
             'handlers': ['console'],
             'level': 'ERROR',
