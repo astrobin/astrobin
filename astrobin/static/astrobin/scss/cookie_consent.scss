@@ -49,6 +49,11 @@
     .cookie-consent-decline {
       display: inline-block;
     }
+
+    .cookie-consent-accept,
+    .cookie-consent-accepted {
+      margin-right: .75rem;
+    }
   }
 
   .table-cookies {
