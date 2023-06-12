@@ -13,7 +13,18 @@
         </small>
     </h1>
 
-    {% for cookie_group in object_list %}
-        {% include "cookie_consent/_cookie_group.html" %}
-    {% endfor %}
+    <div class="alert alert-warning">
+        {% blocktrans trimmed %}
+            Please note: third-party cookies might change from time to time. We will try to keep this list up to date,
+            but we cannot guarantee that it will always be complete and accurate.
+        {% endblocktrans %}
+    </div>
+
+    <hr/>
+
+    <div style="padding: 2rem;">
+        {% for cookie_group in object_list %}
+            {% include "cookie_consent/_cookie_group.html" %}
+        {% endfor %}
+    </div>
 {% endblock %}

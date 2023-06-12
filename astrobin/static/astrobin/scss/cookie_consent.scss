@@ -56,7 +56,7 @@
 
     th, td {
       &:last-child {
-        text-align: left;
+        text-align: left !important;
       }
     }
   }
