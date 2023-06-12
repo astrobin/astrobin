@@ -10,6 +10,7 @@ python manage.py migrate --run-syncdb --noinput
 # Create initial data
 python manage.py shell << EOF
 from common.constants import GroupName
+from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.sites.models import Site
 
@@ -35,124 +36,96 @@ Group.objects.get_or_create(name='astrobin-donor-silver-yearly')
 Group.objects.get_or_create(name='astrobin-donor-gold-yearly')
 Group.objects.get_or_create(name='astrobin-donor-platinum-yearly')
 
-essential_cookies_group = CookieGroup.objects.get_or_create(
-    varname='essential',
-    name='Essential cookies',
-    description='These cookies are essential for the website to function properly.',
-    is_required=True,
-    ordering=0,
-)[0]
+cookies = [
+    [
+        'essential',
+        'Essential cookies',
+        'These cookies are essential for the website to function properly.',
+        [
+            ['astrobin_cookie_consent', 'This cookie is used to store your cookie preferences.'],
+            ['sessionid', 'This cookie is used to identify your session on the website.'],
+            ['csrftoken', 'This cookie is used to protect against Cross-Site Request Forgery (CSRF) attacks.'],
+            ['astrobin_lang', 'This cookie is used to remember your language preference.'],
+            ['multidb_pin_writes', 'This cookie is used to pin your session to the master database: AstroBin uses multiple databases to improve performance, and this cookie is used to make sure that all your requests are sent to the same database.'],
+            ['classic-auth-token', 'This cookie is used to authenticate you on the website app.astrobin.com.'],
+            ['__stripe_mid', 'This cookie is set by Stripe and used for fraud prevention. It is only set is you purchase a subscription'],
+            ['__stripe_sid', 'This cookie is set by Stripe and used for fraud prevention. It is only set is you purchase a subscription'],
+        ]
+    ],
+    [
+        'functional',
+        'Functional cookies (recommended)',
+        'These cookies are used to provide additional functionality to the website, such as remembering local preferences.',
+        [
+            ['astrobin_forum_usage_modal_seen', 'This cookie is used to remember if you have seen the information about proper usage of the forums.'],
+            ['astrobin_click_and_drag_toast_seen', 'This cookie is used to remember if you have seen information about the click & drag zoom functionality.'],
+            ['astrobin_use_high_contrast_theme', 'This cookie is used to remember if you have enabled the high contrast theme.'],
+        ]
+    ],
+    [
+        'performance',
+        'Performance cookies (recommended)',
+        'These cookies are used to improve the website performance by saving some pieces of information on your computer and avoiding reading from the AstroBin database when possible.',
+        [
+            ['astrobin_last_seen_set', 'This cookie is used avoid saving the date and time we last saw you too often.'],
+        ]
+    ],
+    [
+        'analytics',
+        'Analytics cookies',
+        'These cookies are used to anonymously track your usage of the website, so that we can improve it over time.',
+        [
+            ['_ga', 'This cookie is used by Google Analytics to anonymously track your usage of the website.'],
+            ['_gid', 'This cookie is used by Google Analytics to anonymously track your usage of the website.'],
+            ['_gat', 'This cookie is used by Google Analytics to anonymously track your usage of the website.'],
+            [f'_gac_{settings.GOOGLE_ANALYTICS_ID}', 'This cookie is used by Google Analytics to anonymously track your usage of the website.'],
+            ['_hjClosedSurveyInvites', 'This cookie is set once a visitor interacts with a Survey invitation modal popup. It is used to ensure that the same invite does not reappear if it has already been shown.'],
+            ['_hjDonePolls', 'This cookie is set once a visitor completes a poll using the Feedback Poll widget. It is used to ensure that the same poll does not reappear if it has already been filled in.'],
+            ['_hjMinimizedPolls', 'This cookie is set once a visitor minimizes a Feedback Poll widget. It is used to ensure that the widget stays minimized when the visitor navigates through your site.'],
+            ['_hjDoneTestersWidgets', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjMinimizedTestersWidgets', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjIncludedInSample', 'This session cookie is set to let Hotjar know whether that visitor is included in the sample which is used to generate funnels.'],
+            ['_hjShownFeedbackMessage', 'This cookie is set when a visitor minimizes or completes Incoming Feedback. This is done so that the Incoming Feedback will load as minimized immediately if the visitor navigates to another page where it is set to show.'],
+            ['_hjid', 'This cookie is set when the customer first lands on a page with the Hotjar script. It is used to persist the Hotjar User ID, unique to that site on the browser. This ensures that behavior in subsequent visits to the same site will be attributed to the same user ID.'],
+            ['_hjRecordingLastActivity', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjTLDTest', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjUserAttributesHash', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjCachedUserAttributes', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjLocalStorageTest', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjIncludedInPageviewSample', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjAbsoluteSessionInProgress', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjFirstSeen', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjViewportId', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjRecordingEnabled', 'This cookie is used by Hotjar to anonymously track your usage of the website.'],
+            ['_hjRecordingLastActivity', 'This cookie is used by Hotjar to anonymously track your usage of the website'],
+        ]
+    ],
+    [
+        'advertising',
+        'Advertising cookies',
+        'These cookies are used to honor ad display frequency caps. AstroBin does NOT serve targeted ads.',
+        [
+            ['IDE', 'This cookie is used by Google Ad Manager to register and report the website user\'s actions after viewing or clicking one of the advertiser\'s ads with the purpose of measuring the efficacy of an ad.'],
+            ['test_cookie', 'This cookie is used by Google Ad Manager to check if the user\'s browser supports cookies.'],
+        ]
+    ],
+]
 
-astrobin_cookie_consent_cookie = Cookie.objects.get_or_create(
-    cookiegroup=essential_cookies_group,
-    name='astrobin_cookie_consent',
-    description='This cookie is used to store your cookie preferences.',
-)[0]
+for index, group in enumerate(cookies):
+    cookie_group = CookieGroup.objects.get_or_create(
+        varname=group[0],
+        name=group[1],
+        description=group[2],
+        is_required=group[0] == 'essential',
+        ordering=index,
+    )[0]
 
-sessionid_cookie = Cookie.objects.get_or_create(
-    cookiegroup=essential_cookies_group,
-    name='sessionid',
-    description='This cookie is used to identify your session on the website.',
-)[0]
-
-csrftoken_cookie = Cookie.objects.get_or_create(
-    cookiegroup=essential_cookies_group,
-    name='csrftoken',
-    description='This cookie is used to protect against Cross-Site Request Forgery (CSRF) attacks.',
-)[0]
-
-astrobin_lang_cookie = Cookie.objects.get_or_create(
-    cookiegroup=essential_cookies_group,
-    name='astrobin_lang',
-    description='This cookie is used to remember your language preference.',
-)[0]
-
-multidb_pin_writes_cookie = Cookie.objects.get_or_create(
-    cookiegroup=essential_cookies_group,
-    name='multidb_pin_writes',
-    description='This cookie is used to pin your session to the master database: AstroBin uses multiple databases ' +
-        'to improve performance, and this cookie is used to make sure that all your requests are sent to ' +
-        'the same database.',
-)[0]
-
-classic_auth_token_cookie = Cookie.objects.get_or_create(
-    cookiegroup=essential_cookies_group,
-    name='classic-auth-token',
-    description='This cookie is used to authenticate you on the website app.astrobin.com.',
-)[0]
-
-__stripe_mid_cookie = Cookie.objects.get_or_create(
-    cookiegroup=essential_cookies_group,
-    name='__stripe_mid',
-    description='This cookie is set by Stripe and used for fraud prevention. It is only set is you purchase a subscription',
-)[0]
-
-__stripe_sid_cookie = Cookie.objects.get_or_create(
-    cookiegroup=essential_cookies_group,
-    name='__stripe_sid',
-    description='This cookie is set by Stripe and used for fraud prevention. It is only set is you purchase a subscription',
-)[0]
-
-functional_cookies_group = CookieGroup.objects.get_or_create(
-    varname='functional',
-    name='Functional cookies (recommended)',
-    description='These cookies are used to provide additional functionality to the website, ' +
-        'such as remembering local preferences.',
-    is_required=False,
-    ordering=1,
-)[0]
-
-astrobin_forum_usage_modal_seen_cookie = Cookie.objects.get_or_create(
-    cookiegroup=functional_cookies_group,
-    name='astrobin_forum_usage_modal_seen',
-    description='This cookie is used to remember if you have seen the information about proper usage of the forums.',
-)[0]
-
-astrobin_click_and_drag_toast_seen = Cookie.objects.get_or_create(
-    cookiegroup=functional_cookies_group,
-    name='astrobin_click_and_drag_toast_seen',
-    description='This cookie is used to remember if you have seen information about the click & drag zoom ' +
-        'functionality.',
-)[0]
-
-astrobin_use_high_contrast_theme_cookie = Cookie.objects.get_or_create(
-    cookiegroup=functional_cookies_group,
-    name='astrobin_use_high_contrast_theme',
-    description='This cookie is used to remember if you have enabled the high contrast theme.',
-)[0]
-
-performance_cookies_group = CookieGroup.objects.get_or_create(
-    varname='performance',
-    name='Performance cookies (recommended)',
-    description='These cookies are used to improve the website performance by saving some ' +
-        'pieces of information on your computer and avoiding reading from the ' +
-        'AstroBin database when possible.',
-    is_required=False,
-    ordering=2
-)[0]
-
-astrobin_last_seen_set_cookie = Cookie.objects.get_or_create(
-    cookiegroup=performance_cookies_group,
-    name='astrobin_last_seen_set',
-    description='This cookie is used avoid saving the date and time we last saw you too often.',
-)[0]
-
-analytics_cookies_group = CookieGroup.objects.get_or_create(
-    varname='analytics',
-    name='Analytics cookies',
-    description='These cookies are used to anonymously track your usage of the website, so that we can ' +
-        'improve it over time.',
-    is_required=False,
-    ordering=3
-)[0]
-
-advertising_cookies_group = CookieGroup.objects.get_or_create(
-    varname='advertising',
-    name='Advertising cookies',
-    description='These cookies are used to honor ad display frequency caps. AstroBin does NOT serve targeted ads.',
-    is_required=False,
-    ordering=4
-)[0]
+    for cookie in group[3]:
+        Cookie.objects.get_or_create(
+            cookiegroup=cookie_group,
+            name=cookie[0],
+            description=cookie[1],
+        )
 
 try:
     Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC.value)
