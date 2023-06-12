@@ -1,11 +1,9 @@
-from django.conf import settings
 from django.contrib.contenttypes import fields
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from astrobin.services import CloudflareService
-from astrobin.services.cloudfront_service import CloudFrontService
+from astrobin.tasks import invalidate_cdn_caches
 from astrobin_apps_platesolving.models.plate_solving_advanced_settings import PlateSolvingAdvancedSettings
 from astrobin_apps_platesolving.models.plate_solving_settings import PlateSolvingSettings
 from astrobin_apps_platesolving.solver import Solver
@@ -288,19 +286,16 @@ class Solution(models.Model):
         self.status = Solver.MISSING
         self.submission_id = None
 
-        cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
-        cloudflare_service = CloudflareService()
+        invalidate_urls = []
 
         if self.image_file and self.image_file.url:
-            cloudfront_service.create_invalidation([self.image_file.url])
-            cloudflare_service.purge_cache([self.image_file.url])
+            invalidate_urls.append(self.image_file.url)
 
         self.image_file.delete(save=False)
         self.image_file = None
 
         if self.skyplot_zoom1 and self.skyplot_zoom1.url:
-            cloudfront_service.create_invalidation([self.skyplot_zoom1.url])
-            cloudflare_service.purge_cache([self.skyplot_zoom1.url])
+            invalidate_urls.append(self.skyplot_zoom1.url)
 
         self.skyplot_zoom1.delete()
         self.skyplot_zoom1 = None
@@ -312,6 +307,9 @@ class Solution(models.Model):
         self.orientation = None
         self.radius = None
         self.annotations = None
+
+        if len(invalidate_urls) > 0:
+            invalidate_cdn_caches.delay(invalidate_urls)
 
     def _do_clear_advanced(self):
         if self.status > Solver.SUCCESS:

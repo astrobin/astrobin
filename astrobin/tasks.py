@@ -8,6 +8,7 @@ import zipfile
 from datetime import datetime, timedelta
 from io import StringIO
 from time import sleep
+from typing import List
 from zipfile import ZipFile
 
 import requests
@@ -39,6 +40,8 @@ from astrobin.models import (
     BroadcastEmail, CameraRenameProposal, DataDownloadRequest, Gear, GearMigrationStrategy,
     Image, ImageRevision, UserProfile,
 )
+from astrobin.services import CloudflareService
+from astrobin.services.cloudfront_service import CloudFrontService
 from astrobin.services.gear_service import GearService
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.services import ImageService
@@ -732,3 +735,17 @@ def hard_delete_deleted_users():
         except Exception as e:
             logger.error("hard_delete_deleted_users: error %s" % str(e))
             continue
+
+
+@shared_task(
+    time_limit=30,
+    acks_late=True,
+    rate_limit="6/m",
+    autoretry_for=(Exception,),
+    retry_backoff=True,
+    retry_jitter=True,
+    max_retries=5
+)
+def invalidate_cdn_caches(paths: List[str]):
+    CloudFrontService(settings.CLOUDFRONT_DISTRIBUTION_ID).create_invalidation(paths)
+    CloudflareService().purge_cache(paths)

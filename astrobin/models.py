@@ -20,8 +20,7 @@ from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
-from astrobin.services import CloudflareService
-from astrobin.services.cloudfront_service import CloudFrontService
+from astrobin.tasks import invalidate_cdn_caches
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
@@ -1764,11 +1763,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
             all_urls: List[str] = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
 
-            cloudflare_service = CloudflareService()
-            cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
-
-            cloudfront_service.create_invalidation(all_urls)
-            cloudflare_service.purge_cache([all_urls])
+            invalidate_cdn_caches.delay(all_urls)
 
             for url in all_urls:
                 s3 = boto3.client('s3')
@@ -2387,7 +2382,7 @@ class Request(models.Model):
         return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)
 
     def get_absolute_url(self):
-        return '/requests/detail/' + self.id + '/'
+        return '/requests/detail/' + str(self.id) + '/'
 
     class Meta:
         app_label = 'astrobin'

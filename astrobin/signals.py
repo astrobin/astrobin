@@ -34,7 +34,7 @@ from subscription.signals import paid, signed_up, unsubscribed
 from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
-from astrobin.tasks import process_camera_rename_proposal
+from astrobin.tasks import invalidate_cdn_caches, process_camera_rename_proposal
 from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
@@ -266,13 +266,9 @@ def image_pre_delete(sender, instance: Image, **kwargs):
         except InternalError as e:
             log.error("Error soft deleting image %d: %s" % (instance.pk, str(e)))
 
-    cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
-    cloudflare_service = CloudflareService()
-        
     if instance.image_file:
         if instance.image_file.url and getattr(instance, "purge_caches", False):
-            cloudfront_service.create_invalidation([instance.image_file.url])
-            cloudflare_service.purge_cache([instance.image_file.url])
+            invalidate_cdn_caches.delay([instance.image_file.url])
         instance.image_file.delete(save=False)
 
 
@@ -326,13 +322,9 @@ def imagerevision_pre_delete(sender, instance: ImageRevision, **kwargs):
         except InternalError as e:
             log.error("Error soft deleting image revision %d: %s" % (instance.pk, str(e)))
 
-    cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
-    cloudflare_service = CloudflareService()
-
     if instance.image_file:
         if instance.image_file.url and getattr(instance, "purge_caches", False):
-            cloudfront_service.create_invalidation([instance.image_file.url])
-            cloudflare_service.purge_cache([instance.image_file.url])
+            invalidate_cdn_caches.delay([instance.image_file.url])
         instance.image_file.delete(save=False)
 
 
@@ -1290,9 +1282,6 @@ def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
         except InternalError as e:
             log.error("Error soft deleting user profile %d: %s" % (instance.pk, str(e)))
 
-    cloudfront_service = CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID)
-    cloudflare_service = CloudflareService()
-
     image_urls = [
         x.image_file.url for x in ImageRevision.all_objects.filter(image__user=instance.user)
         if x.image_file and x.image_file.url
@@ -1303,8 +1292,7 @@ def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
         if x.image_file and x.image_file.url
     ]
 
-    cloudfront_service.create_invalidation(image_urls + revision_urls)
-    cloudflare_service.purge_cache(image_urls + revision_urls)
+    invalidate_cdn_caches.delay(image_urls + revision_urls)
 
     for revision in ImageRevision.all_objects.filter(image__user=instance.user):
         revision.purge_caches = False
