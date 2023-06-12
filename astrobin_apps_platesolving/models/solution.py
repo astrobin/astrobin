@@ -3,7 +3,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from astrobin.tasks import invalidate_cdn_caches
 from astrobin_apps_platesolving.models.plate_solving_advanced_settings import PlateSolvingAdvancedSettings
 from astrobin_apps_platesolving.models.plate_solving_settings import PlateSolvingSettings
 from astrobin_apps_platesolving.solver import Solver
@@ -309,6 +308,7 @@ class Solution(models.Model):
         self.annotations = None
 
         if len(invalidate_urls) > 0:
+            from astrobin.tasks import invalidate_cdn_caches
             invalidate_cdn_caches.delay(invalidate_urls)
 
     def _do_clear_advanced(self):

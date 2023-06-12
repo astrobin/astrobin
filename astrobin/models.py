@@ -20,7 +20,6 @@ from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
-from astrobin.tasks import invalidate_cdn_caches
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
@@ -1751,6 +1750,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         return static('astrobin/images/placeholder-gallery.jpg')
 
     def thumbnail_invalidate_real(self, field, revision_label, delete=True):
+        from astrobin.tasks import invalidate_cdn_caches
         from astrobin_apps_images.models import ThumbnailGroup
 
         for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].items():
