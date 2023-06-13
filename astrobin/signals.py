@@ -1296,10 +1296,12 @@ def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
     invalidate_cdn_caches.delay(image_urls + revision_urls)
 
     for revision in ImageRevision.all_objects.filter(image__user=instance.user):
+        log.debug("Deleting revision %d" % revision.pk)
         revision.purge_caches = False
         revision.delete(force_policy=HARD_DELETE)
 
     for image in Image.all_objects.filter(user=instance.user):
+        log.debug("Deleting image %d" % image.pk)
         image.purge_caches = False
         image.delete(force_policy=HARD_DELETE)
 
