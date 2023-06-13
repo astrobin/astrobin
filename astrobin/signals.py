@@ -1306,11 +1306,6 @@ def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
         image.delete(force_policy=HARD_DELETE)
 
 
-@receiver(post_delete, sender=UserProfile)
-def userprofile_post_delete(sender, instance: UserProfile, **kwargs):
-    instance.user.delete()
-
-
 def persistent_message_post_save(sender, instance, **kwargs):
     clear_notifications_template_cache(instance.user.username)
 

@@ -731,7 +731,7 @@ def hard_delete_deleted_users():
     for profile in profiles.iterator():
         logger.info("hard_delete_deleted_users: deleting %d" % profile.user.id)
         try:
-            profile.delete(force_policy=HARD_DELETE)
+            profile.user.delete()
         except Exception as e:
             logger.error("hard_delete_deleted_users: error %s" % str(e))
             continue
