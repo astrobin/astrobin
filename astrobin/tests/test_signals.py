@@ -629,14 +629,7 @@ class SignalsTest(TestCase):
         self.assertEquals(0, Image.all_objects.count())
         self.assertEquals(0, ImageRevision.all_objects.count())
 
-    def test_hard_deleting_userprofile_hard_deletes_user(self):
-        user = Generators.user()
-        profile = UserProfile.objects.get(user=user)
-        profile.delete(force_policy=HARD_DELETE)
-
-        self.assertEquals(0, User.objects.count())
-
-    def test_hard_deleting_userprofile_hard_deletes_follow_toggle_properties(self):
+    def test_deleting_user_deletes_follow_toggle_properties(self):
         user1 = Generators.user()
         user2 = Generators.user()
 
@@ -646,11 +639,11 @@ class SignalsTest(TestCase):
             content_object=user2
         )
 
-        user1.userprofile.delete(force_policy=HARD_DELETE)
+        user1.delete()
 
         self.assertEquals(0, ToggleProperty.objects.count())
 
-    def test_hard_deleting_userprofile_hard_deletes_bookmark_toggle_properties(self):
+    def test_deleting_user_deletes_bookmark_toggle_properties(self):
         user1 = Generators.user()
         user2 = Generators.user()
 
@@ -662,11 +655,11 @@ class SignalsTest(TestCase):
             content_object=image
         )
 
-        user1.userprofile.delete(force_policy=HARD_DELETE)
+        user1.delete()
 
         self.assertEquals(0, ToggleProperty.objects.count())
 
-    def test_hard_deleting_userprofile_hard_does_not_delete_like_toggle_properties(self):
+    def test_deleting_user_does_not_delete_like_toggle_properties(self):
         user1 = Generators.user()
         user2 = Generators.user()
 
@@ -678,7 +671,7 @@ class SignalsTest(TestCase):
             content_object=image
         )
 
-        user1.userprofile.delete(force_policy=HARD_DELETE)
+        user1.delete()
 
         self.assertEquals(1, ToggleProperty.objects.count())
         self.assertIsNone(ToggleProperty.objects.first().user)
