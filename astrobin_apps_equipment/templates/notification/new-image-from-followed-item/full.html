@@ -1,0 +1,43 @@
+{% load i18n %}
+{% load astrobin_apps_notifications_tags %}
+
+<p>
+    <a href="{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email image.user %}">
+        {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
+            <strong>{{ user }}</strong> has published a new image
+        {% endblocktrans %}
+    </a>{% if image.title %}: {{ image.title }}{% endif %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        You received this notification because you follow the equipment item
+        <a href="{{ item_url }}">{{ item_name }}</a>.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email image.user %}">
+        <img src="{{ image_thumbnail }}" />
+    </a>
+</p>
+
+{% if image.collaborators.all|length > 0 %}
+    <p>
+        {% trans "This image is a group effort among the following collaborators:" %}
+        <ul>
+            <li>
+                <a href="{{ base_url }}{% url 'user_page' image.user.username %}?{% notification_url_params_for_email image.user %}">
+                    {{ image.user.userprofile.get_display_name }}
+                </a>
+            </li>
+            {% for collaborator in image.collaborators.all %}
+                <li>
+                    <a href="{{ base_url }}{% url 'user_page' collaborator.username %}?{% notification_url_params_for_email image.user %}">
+                        {{ collaborator.userprofile.get_display_name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </p>
+{% endif %}

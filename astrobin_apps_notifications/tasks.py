@@ -11,7 +11,7 @@ from django_bouncy.models import Delivery, Bounce, Complaint
 
 from astrobin.models import Image, UserProfile, ImageRevision
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
-from common.services import DateTimeService
+from common.services import AppRedirectionService, DateTimeService
 from toggleproperties.models import ToggleProperty
 
 logger = logging.getLogger(__name__)
@@ -36,22 +36,84 @@ def push_notification_for_new_image(image_pk):
 
     user_pks = [image.user.pk] + list(image.collaborators.all().values_list('pk', flat=True))
 
-    followers = list(set([x.user for x in ToggleProperty.objects.filter(
+    user_followers = list(set([x.user for x in ToggleProperty.objects.filter(
         property_type="follow",
         content_type=ContentType.objects.get_for_model(User),
         object_id__in=user_pks
     ).order_by('object_id')]))
 
-    if len(followers) > 0:
-        thumb = image.thumbnail_raw('gallery', None, sync=True)
-        push_notification(followers, image.user, 'new_image', {
-            'image': image,
-            'image_thumbnail': thumb.url if thumb else None
-        })
+    equipment_dictionary = {}
+
+    for equipment_item_class in [
+        'imaging_telescopes_2',
+        'imaging_cameras_2',
+        'mounts_2',
+        'filters_2',
+        'accessories_2',
+        'software_2',
+        'guiding_telescopes_2',
+        'guiding_cameras_2',
+    ]:
+        for equipment_item in getattr(image, equipment_item_class).all().iterator():
+            key = f'{equipment_item.klass}-{equipment_item.pk}'  # unique key
+
+            # Initialize the nested dictionary if it doesn't exist
+            if key not in equipment_dictionary:
+                equipment_dictionary[key] = {"item": equipment_item, "followers": []}
+
+            # Create the list of ToggleProperty objects
+            equipment_item_followers = list(
+                set(
+                    x.user for x in ToggleProperty.objects.filter(
+                        property_type="follow",
+                        content_type=ContentType.objects.get_for_model(equipment_item),
+                        object_id=equipment_item.pk
+                    ).order_by('object_id')
+                )
+            )
+
+            # Remove the users who are in user_followers from the followers list
+            equipment_item_followers = [x for x in equipment_item_followers if x not in user_followers]
+            equipment_dictionary[key]["followers"].extend(equipment_item_followers)
+
+    thumb = image.thumbnail_raw('gallery', None, sync=True)
+
+    if len(user_followers) > 0:
+        push_notification(
+            user_followers,
+            image.user,
+            'new_image',
+            {
+                'image': image,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
     else:
         logger.info('push_notification_for_new_image called for image %d whose author %d has no followers' % (
             image.pk, image.user.pk)
         )
+
+    for key in equipment_dictionary.keys():
+        equipment_item = equipment_dictionary[key]['item']
+        followers = equipment_dictionary[key]['followers']
+        if len(followers) > 0:
+            push_notification(
+                followers,
+                image.user,
+                'new-image-from-equipment-item',
+                {
+                    'image': image,
+                    'image_thumbnail': thumb.url if thumb else None,
+                    'item_name': str(equipment_item),
+                    'item_url': AppRedirectionService.redirect(
+                        f'/equipment/explorer/{equipment_item.klass.lower()}/{equipment_item.id}/{equipment_item.slug}'
+                    ),
+                }
+            )
+
+    else:
+        logger.info(
+            'push_notification_for_new_image called for image %d whose equipment items have no followers' % image.pk)
 
 
 @shared_task(time_limit=1800)

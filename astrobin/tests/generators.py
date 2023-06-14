@@ -272,8 +272,23 @@ class Generators:
 
     @staticmethod
     def like(target, **kwargs):
+        user = kwargs.pop('user', None)
+        if user is None:
+            user = Generators.user()
+
         return ToggleProperty.objects.create_toggleproperty(
-            'like', target, kwargs.pop('user', Generators.user()))
+            'like', target, user
+        )
+
+    @staticmethod
+    def follow(target, **kwargs):
+        user = kwargs.pop('user', None)
+        if user is None:
+            user = Generators.user()
+
+        return ToggleProperty.objects.create_toggleproperty(
+            'follow', target, user
+        )
 
     @staticmethod
     def collection(**kwargs):
