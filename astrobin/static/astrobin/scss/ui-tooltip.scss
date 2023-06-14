@@ -35,6 +35,15 @@
     }
   }
 
+  .footer {
+    background: linear-gradient($grey-8, $grey-9);
+    border-top: 1px solid $grey-7;
+    padding: 1rem;
+    margin: 1rem -1rem -1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .data {
     padding: .5rem 0;
 
