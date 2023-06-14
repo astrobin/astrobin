@@ -140,8 +140,9 @@ def astrobin_image(context, image, alias, **kwargs):
             'qhd', 'qhd_anonymized', 'qhd_inverted', 'qhd_sharpened',
             'real', 'real_inverted'
     ):
-        size = (size[0], int(size[0] / (w / float(h))))
-        response_dict['provide_size'] = False
+        if w is not None and h is not None:
+            size = (size[0], int(size[0] / (w / float(h))))
+            response_dict['provide_size'] = False
 
     placehold_size = [size[0], size[1]]
     for i in range(0, 2):
