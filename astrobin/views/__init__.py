@@ -2518,7 +2518,7 @@ def user_popover_ajax(request, username):
     html = render_to_string(template,
                             {
                                 'user': profile.user,
-                                'images': Image.objects.filter(user=profile.user).count(),
+                                'images': UserService(profile.user).get_public_images().count(),
                                 'member_since': member_since,
                                 'is_authenticated': request.user.is_authenticated,
                                 'request': request,

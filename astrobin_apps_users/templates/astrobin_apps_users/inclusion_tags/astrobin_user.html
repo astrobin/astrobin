@@ -54,7 +54,7 @@
         </div>
 
         <div class="profile-details">
-            {% cache 300 astrobin_user user.username view LANGUAGE_CODE user_is_owner %}
+            {% cache 300 astrobin_user user.username view LANGUAGE_CODE user_is_owner user.userprofile.updated %}
                 <ul>
                     <li>
                         <a href="{% url 'user_page' user.username %}?sub=uploaded">

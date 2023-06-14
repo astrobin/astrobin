@@ -7,8 +7,9 @@ from django.template import Library
 from django.utils.translation import ugettext_lazy as _
 from haystack.query import SearchQuerySet
 
-from astrobin.models import Image, UserProfile
+from astrobin.models import UserProfile
 from astrobin_apps_premium.services.premium_service import PremiumService
+from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger(__name__)
@@ -94,7 +95,7 @@ def astrobin_user(context, user, **kwargs):
     request = context['request']
 
     user_ct = ContentType.objects.get_for_model(User)
-    images = Image.objects.filter(user=user)
+    images = UserService(user).get_public_images()
 
     followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
     following = ToggleProperty.objects.filter(
