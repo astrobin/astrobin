@@ -37,6 +37,26 @@ class HasSpecialCharactersValidator:
         )
 
 
+class MaximumLengthValidator:
+    def __init__(self, max_length=72):
+        self.max_length = max_length
+
+    def validate(self, password, user=None):
+        if len(password) > self.max_length:
+            raise ValidationError(
+                gettext_lazy(
+                    "This password is too long. It must contain no more than {} characters.".format(
+                        self.max_length
+                    )
+                ),
+                code='password_too_long',
+                params={'max_length': self.max_length},
+            )
+
+    def get_help_text(self):
+        return gettext_lazy("Your password must contain no more than {} characters.".format(self.max_length))
+
+
 LOGIN_URL = 'two_factor:login'
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -50,6 +70,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'OPTIONS': {
             'min_length': 8,
         }
+    },
+    {
+        'NAME': 'astrobin.settings.components.account.MaximumLengthValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',

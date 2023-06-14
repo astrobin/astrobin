@@ -15,7 +15,7 @@
 
 {% block extra_gtag %}
     {% if GOOGLE_ADS_ID != "invalid" %}
-        {% if not request|is_gpdr_country or request|cookie_group_accepted:'analytics' %}
+        {% if not request|is_gdpr_country or request|cookie_group_accepted:'analytics' %}
             <!-- Event snippet for Sign-up conversion page -->
             <script type="text/javascript">
                 gtag('event', 'conversion', {'send_to': '{{ GOOGLE_ADS_ID }}/qFlnCMarhtEBEJrDxfoD'});

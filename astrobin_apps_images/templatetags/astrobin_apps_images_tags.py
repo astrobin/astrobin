@@ -117,8 +117,7 @@ def astrobin_image(context, image, alias, **kwargs):
                 image_revision.h = h
                 image_revision.save(keep_deleted=True)
             else:
-                logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
-                    image_revision.pk))
+                logger.warning("astrobin_image tag: unable to get image dimensions for revision %d" % image_revision.pk)
                 response_dict['status'] = 'error'
                 response_dict['error_message'] = _("Data corruption. Please upload this image again. Sorry!")
         except (IOError, ValueError, DecompressionBombError) as e:
@@ -141,8 +140,9 @@ def astrobin_image(context, image, alias, **kwargs):
             'qhd', 'qhd_anonymized', 'qhd_inverted', 'qhd_sharpened',
             'real', 'real_inverted'
     ):
-        size = (size[0], int(size[0] / (w / float(h))))
-        response_dict['provide_size'] = False
+        if w is not None and h is not None:
+            size = (size[0], int(size[0] / (w / float(h))))
+            response_dict['provide_size'] = False
 
     placehold_size = [size[0], size[1]]
     for i in range(0, 2):
