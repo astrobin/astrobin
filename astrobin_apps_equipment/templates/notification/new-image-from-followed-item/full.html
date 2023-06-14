@@ -4,23 +4,32 @@
 <p>
     <a href="{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email image.user %}">
         {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-            <strong>{{ user }}</strong> has published a new image
-        {% endblocktrans %}
-    </a>{% if image.title %}: {{ image.title }}{% endif %}
-</p>
-
-<p>
-    {% blocktrans trimmed %}
-        You received this notification because you follow the equipment item
-        <a href="{{ item_url }}">{{ item_name }}</a>.
-    {% endblocktrans %}
+            <strong>{{ user }}</strong> has published a new image acquired with equipment items you follow
+        {% endblocktrans %}{% if image.title %}: {{ image.title }}{% endif %}
+    </a>
 </p>
 
 <p>
     <a href="{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email image.user %}">
-        <img src="{{ image_thumbnail }}" />
+        <img src="{{ image_thumbnail }}" alt="{{ image.title }}"/>
     </a>
 </p>
+
+<p>
+    {% blocktrans trimmed %}
+        You received this notification because you follow these equipment items:
+    {% endblocktrans %}
+</p>
+
+<ul>
+    {% for equipment_item in items %}
+        <li>
+            <a href="{{ app_url }}/equipment/explorer/{{ equipment_item.klass|lower }}/{{ equipment_item.pk }}">
+                {{ equipment_item }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
 
 {% if image.collaborators.all|length > 0 %}
     <p>

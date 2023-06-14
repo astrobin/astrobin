@@ -1,5 +1,6 @@
 {% load i18n %}
 
 {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-    New image by {{ user }} acquired with equipment item "{{ item_name }}"
-{% endblocktrans %}{% if image.title %}: {{image.title}}{% endif %}
+    New image by {{ user }} acquired with equipment items you follow
+{% endblocktrans %}: {{ items|join:", " }}
+```

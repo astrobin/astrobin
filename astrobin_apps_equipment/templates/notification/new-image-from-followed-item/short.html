@@ -2,7 +2,7 @@
 
 <a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
     {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-        <strong>{{ user }}</strong> has published a new image acquired with equipment item <strong>{{ image_name }}</strong>.
+        <strong>{{ user }}</strong> has published a new image acquired with equipment items you follow
     {% endblocktrans %}
-</a>{% if image.title %}: {{ image.title }}{% endif %}
+</a>: {{ items|join:", " }}
 

@@ -1,5 +1,5 @@
 import logging
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
 from celery import shared_task
 from django.conf import settings
@@ -7,11 +7,11 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from django.utils import formats
-from django_bouncy.models import Delivery, Bounce, Complaint
+from django_bouncy.models import Bounce, Complaint, Delivery
 
-from astrobin.models import Image, UserProfile, ImageRevision
-from astrobin_apps_notifications.utils import push_notification, build_notification_url
-from common.services import AppRedirectionService, DateTimeService
+from astrobin.models import Image, ImageRevision
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
 
 logger = logging.getLogger(__name__)
@@ -23,7 +23,7 @@ def purge_old_notifications():
 
 
 @shared_task(time_limit=1800)
-def push_notification_for_new_image(image_pk):
+def push_notification_for_new_image(image_pk: int):
     try:
         image = Image.objects_including_wip.get(pk=image_pk)
     except Image.DoesNotExist:
@@ -34,86 +34,139 @@ def push_notification_for_new_image(image_pk):
         logger.error('push_notification_for_new_image called for image that is wip: %d' % image_pk)
         return
 
-    user_pks = [image.user.pk] + list(image.collaborators.all().values_list('pk', flat=True))
+    def get_image_followers():
+        user_pks = [image.user.pk] + list(image.collaborators.all().values_list('pk', flat=True))
 
-    user_followers = list(set([x.user for x in ToggleProperty.objects.filter(
-        property_type="follow",
-        content_type=ContentType.objects.get_for_model(User),
-        object_id__in=user_pks
-    ).order_by('object_id')]))
+        return list(set([x.user for x in ToggleProperty.objects.filter(
+            property_type="follow",
+            content_type=ContentType.objects.get_for_model(User),
+            object_id__in=user_pks
+        ).order_by('object_id')]))
 
-    equipment_dictionary = {}
+    def get_equipment_dictionary():
+        """
+        Returns a dictionary of equipment items and their followers, like this:
+        {
+            'telescope-1': {
+                'item': <Telescope: 1>,
+                'followers': [<User: 1>, <User: 2>]
+            },
+            'camera-1': {
+                'item': <Camera: 1>,
+                'followers': [<User: 1>, <User: 3>]
+            },
+        }
+        """
+        val = {}
 
-    for equipment_item_class in [
-        'imaging_telescopes_2',
-        'imaging_cameras_2',
-        'mounts_2',
-        'filters_2',
-        'accessories_2',
-        'software_2',
-        'guiding_telescopes_2',
-        'guiding_cameras_2',
-    ]:
-        for equipment_item in getattr(image, equipment_item_class).all().iterator():
-            key = f'{equipment_item.klass}-{equipment_item.pk}'  # unique key
+        for equipment_item_class in [
+            'imaging_telescopes_2',
+            'imaging_cameras_2',
+            'mounts_2',
+            'filters_2',
+            'accessories_2',
+            'software_2',
+            'guiding_telescopes_2',
+            'guiding_cameras_2',
+        ]:
+            for equipment_item in getattr(image, equipment_item_class).all().iterator():
+                key = f'{equipment_item.klass}-{equipment_item.pk}'  # unique key
 
-            # Initialize the nested dictionary if it doesn't exist
-            if key not in equipment_dictionary:
-                equipment_dictionary[key] = {"item": equipment_item, "followers": []}
+                # Initialize the nested dictionary if it doesn't exist
+                if key not in val:
+                    val[key] = {"item": equipment_item, "followers": []}
 
-            # Create the list of ToggleProperty objects
-            equipment_item_followers = list(
-                set(
-                    x.user for x in ToggleProperty.objects.filter(
-                        property_type="follow",
-                        content_type=ContentType.objects.get_for_model(equipment_item),
-                        object_id=equipment_item.pk
-                    ).order_by('object_id')
+                # Create the list of ToggleProperty objects
+                equipment_item_followers = list(
+                    set(
+                        x.user for x in ToggleProperty.objects.filter(
+                            property_type="follow",
+                            content_type=ContentType.objects.get_for_model(equipment_item),
+                            object_id=equipment_item.pk
+                        ).order_by('object_id')
+                    )
                 )
-            )
 
-            # Remove the users who are in user_followers from the followers list
-            equipment_item_followers = [x for x in equipment_item_followers if x not in user_followers]
-            equipment_dictionary[key]["followers"].extend(equipment_item_followers)
+                val[key]["followers"].extend(equipment_item_followers)
+                val[key]["followers"] = list(set(val[key]["followers"]))
 
+        return val
+
+    def get_user_equipment_dictionary():
+        """
+        Returns a dictionary of users and their equipment items, like this:
+        {
+            1: {
+                'user': <User: 1>,
+                'items': [<Telescope: 1>, <Camera: 1>]
+            },
+            2: {
+                'user': <User: 2>,
+                'items': [<Telescope: 1>]
+            },
+            3: {
+                'user': <User: 3>,
+                'items': [<Camera: 1>]
+            },
+        }
+        """
+        val = {}
+
+        for key in equipment_dictionary.keys():
+            equipment_item = equipment_dictionary[key]['item']
+            followers = equipment_dictionary[key]['followers']
+            if len(followers) > 0:
+                for x in followers:
+                    if x.pk not in val:
+                        val[x.pk] = {'user': x, 'items': []}
+                    val[x.pk]['items'].append(equipment_item)
+
+        return val
+
+    user_followers = get_image_followers()
+    equipment_dictionary = get_equipment_dictionary()
+    user_equipment_dictionary = get_user_equipment_dictionary()
     thumb = image.thumbnail_raw('gallery', None, sync=True)
+    new_image_sent_to = []
 
     if len(user_followers) > 0:
-        push_notification(
-            user_followers,
-            image.user,
-            'new_image',
-            {
-                'image': image,
-                'image_thumbnail': thumb.url if thumb else None
-            }
-        )
+        for follower in user_followers:
+            new_image_sent_to.append(follower)
+            push_notification(
+                [follower],
+                image.user,
+                'new_image',
+                {
+                    'image': image,
+                    'image_thumbnail': thumb.url if thumb else None,
+                    'followed_equipment_items': user_equipment_dictionary[follower.pk]['items']
+                    if follower.pk in user_equipment_dictionary else [],
+                }
+            )
     else:
-        logger.info('push_notification_for_new_image called for image %d whose author %d has no followers' % (
-            image.pk, image.user.pk)
+        logger.info(
+            'push_notification_for_new_image called for image %d whose author %d has no followers' % (
+                image.pk, image.user.pk)
         )
 
-    for key in equipment_dictionary.keys():
-        equipment_item = equipment_dictionary[key]['item']
-        followers = equipment_dictionary[key]['followers']
-        if len(followers) > 0:
+    for key in user_equipment_dictionary.keys():
+        follower = user_equipment_dictionary[key]['user']
+        equipment_items = user_equipment_dictionary[key]['items']
+        if follower not in new_image_sent_to:
             push_notification(
-                followers,
+                [follower],
                 image.user,
                 'new-image-from-equipment-item',
                 {
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None,
-                    'item_name': str(equipment_item),
-                    'item_url': AppRedirectionService.redirect(
-                        f'/equipment/explorer/{equipment_item.klass.lower()}/{equipment_item.id}/{equipment_item.slug}'
-                    ),
+                    'items': equipment_items
                 }
             )
-
     else:
         logger.info(
-            'push_notification_for_new_image called for image %d whose equipment items have no followers' % image.pk)
+            'push_notification_for_new_image called for image %d whose equipment items have no followers' % image.pk
+        )
 
 
 @shared_task(time_limit=1800)
