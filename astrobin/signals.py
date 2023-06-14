@@ -1241,7 +1241,9 @@ post_save.connect(user_post_save, sender=User)
 
 
 def user_pre_delete(sender, instance, **kwargs):
+    user_ct = ContentType.objects.get_for_model(User)
     ToggleProperty.objects.filter(user=instance, property_type__in=['follow', 'bookmark']).delete()
+    ToggleProperty.objects.filter(content_type=user_ct, object_id=instance.pk, property_type='follow').delete()
 
     try:
         if getattr(instance, 'userprofile') and instance.userprofile.stripe_customer_id:

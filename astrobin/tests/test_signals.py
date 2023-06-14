@@ -2,7 +2,6 @@ import time
 from datetime import timedelta
 
 import mock
-from django.contrib.auth.models import User
 from django.test import TestCase, override_settings
 from django.utils import timezone
 from mock import patch
@@ -637,6 +636,20 @@ class SignalsTest(TestCase):
             property_type='follow',
             user=user1,
             content_object=user2
+        )
+
+        user1.delete()
+
+        self.assertEquals(0, ToggleProperty.objects.count())
+
+    def test_deleting_user_deletes_follow_toggle_properties_in_reverse(self):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        ToggleProperty.objects.create(
+            property_type='follow',
+            user=user2,
+            content_object=user1
         )
 
         user1.delete()
