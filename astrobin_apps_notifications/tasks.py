@@ -156,7 +156,7 @@ def push_notification_for_new_image(image_pk: int):
             push_notification(
                 [follower],
                 image.user,
-                'new-image-from-equipment-item',
+                'new-image-from-followed-equipment',
                 {
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None,

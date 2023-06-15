@@ -45,7 +45,7 @@ class TasksTest(TestCase):
                 'image_thumbnail': mock.ANY,
                 'followed_equipment_items': [],
             }),
-            mock.call([telescope_follower], user, 'new-image-from-equipment-item', {
+            mock.call([telescope_follower], user, 'new-image-from-followed-equipment', {
                 'image': image,
                 'image_thumbnail': mock.ANY,
                 'items': [telescope],
@@ -131,7 +131,7 @@ class TasksTest(TestCase):
                     'image_thumbnail': mock.ANY,
                     'followed_equipment_items': [],
                 }),
-                mock.call([telescope_follower], user, 'new-image-from-equipment-item', {
+                mock.call([telescope_follower], user, 'new-image-from-followed-equipment', {
                     'image': image,
                     'image_thumbnail': mock.ANY,
                     'items': [telescope],
@@ -168,7 +168,7 @@ class TasksTest(TestCase):
                     'image_thumbnail': mock.ANY,
                     'followed_equipment_items': [],
                 }),
-                mock.call([equipment_follower], user, 'new-image-from-equipment-item', {
+                mock.call([equipment_follower], user, 'new-image-from-followed-equipment', {
                     'image': image,
                     'image_thumbnail': mock.ANY,
                     'items': [telescope, camera],
