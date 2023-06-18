@@ -24,3 +24,14 @@ class UtilsService:
     @staticmethod
     def split_text_alphanumerically(s: str) -> List[str]:
         return re.findall(r"[^\W\d_]+|\d+", s)
+
+    @staticmethod
+    def anonymize_email(email):
+        username, domain = email.split('@')
+
+        if len(username) <= 2:
+            username = '*' * len(username)
+        else:
+            username = f"{username[0]}****{username[-1]}"
+
+        return f"{username}@{domain}"

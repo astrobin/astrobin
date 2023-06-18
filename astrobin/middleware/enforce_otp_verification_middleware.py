@@ -11,6 +11,7 @@ from django_otp.plugins.otp_totp.models import TOTPDevice
 from two_factor.views.utils import validate_remember_device_cookie
 
 from astrobin.middleware.mixins import MiddlewareParentClass
+from astrobin.services.utils_service import UtilsService
 from astrobin.utils import get_client_country_code
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
@@ -92,6 +93,8 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
             request.session['enforce_otp_middleware_email_device'] = 1
         elif TOTPDevice.objects.filter(user=user).exists():
             request.session['enforce_otp_middleware_totp_device'] = 1
+
+        request.session['enforce_otp_middleware_user_email'] = UtilsService.anonymize_email(user.email)
 
         if not self._process(request):
             return
