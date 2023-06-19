@@ -1,11 +1,12 @@
 import logging
 from collections import Counter
-from typing import Optional
+from typing import List, Optional
 
 import simplejson
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
 from django.core.cache import cache
 from django.db.models import IntegerField, Q, QuerySet, Value
@@ -44,6 +45,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_ac
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.services import AppRedirectionService
+from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger(__name__)
 
@@ -257,6 +259,30 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             objects = manager.filter(pk__in=recent_items)
 
         serializer = self.serializer_class(objects, many=True)
+        return Response(serializer.data)
+
+    @action(
+        detail=False,
+        methods=['GET'],
+        url_path='followed'
+    )
+    def find_followed(self, request):
+        manager = self.get_serializer().Meta.model.objects
+
+        if not request.user.is_authenticated:
+            return Response(self.serializer_class(manager.none(), many=True).data)
+
+        object_ids: List[str] = ToggleProperty.objects.filter(
+            user=request.user,
+            content_type=ContentType.objects.get_for_model(manager.model),
+            property_type='follow',
+        ).values_list('object_id', flat=True)
+
+        serializer = self.serializer_class(
+            manager.filter(pk__in=[int(x) for x in object_ids]),
+            many=True,
+            context={'request': request}
+        )
         return Response(serializer.data)
 
     @action(
