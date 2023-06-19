@@ -264,30 +264,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
     @action(
         detail=False,
         methods=['GET'],
-        url_path='followed'
-    )
-    def find_followed(self, request):
-        manager = self.get_serializer().Meta.model.objects
-
-        if not request.user.is_authenticated:
-            return Response(self.serializer_class(manager.none(), many=True).data)
-
-        object_ids: List[str] = ToggleProperty.objects.filter(
-            user=request.user,
-            content_type=ContentType.objects.get_for_model(manager.model),
-            property_type='follow',
-        ).values_list('object_id', flat=True)
-
-        serializer = self.serializer_class(
-            manager.filter(pk__in=[int(x) for x in object_ids]),
-            many=True,
-            context={'request': request}
-        )
-        return Response(serializer.data)
-
-    @action(
-        detail=False,
-        methods=['GET'],
         url_path='find-similar-in-brand',
     )
     def find_similar_in_brand(self, request):
