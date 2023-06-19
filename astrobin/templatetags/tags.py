@@ -167,10 +167,18 @@ def search_image_list(context, paginate=True, **kwargs):
     if telescope or camera or q:
         equipment_brand_listings = EquipmentBrandListing.objects \
             .annotate(distance=TrigramDistance('brand__name', telescope or camera or q)) \
-            .filter(distance__lte=.85, retailer__countries__icontains=country)
+            .filter(
+            Q(distance__lte=.85) & Q(
+                Q(retailer__countries__icontains=country) | Q(retailer__countries__isnull=True)
+            )
+        )
         equipment_item_listings = EquipmentItemListing.objects \
             .annotate(distance=TrigramDistance('name', telescope or camera or q)) \
-            .filter(distance__lte=.5, retailer__countries__icontains=country)
+            .filter(
+            Q(distance__lte=.5) & Q(
+                Q(retailer__countries__icontains=country) | Q(retailer__countries__isnull=True)
+            )
+        )
 
     context.update({
         'paginate': paginate,
