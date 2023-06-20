@@ -5,6 +5,10 @@
     {{ user }} has published a new image
 {% endblocktrans %}{% if image.title %}: {{ image.title }}{% endif %}
 
+{% blocktrans trimmed %}
+    You received this notification because you follow these equipment items that were used to acquire this image:
+{% endblocktrans %}: {{ items|join:", " }}
+
 {{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email image.user %}
 
 {% if image.collaborators.all|length > 0 %}

@@ -117,4 +117,8 @@
             {% endif %}
         {% endif %}
     {% endwith %}
+
+    <div class="footer">
+        {% add_remove_toggleproperty 'follow' item request.user %}
+    </div>
 </div>
