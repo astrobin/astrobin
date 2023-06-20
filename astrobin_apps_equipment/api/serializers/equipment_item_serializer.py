@@ -67,7 +67,7 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
     def get_followed(self, item):
         request = self.context.get("request")
 
-        if request is None:
+        if request is None or not request.user.is_authenticated:
             return False
 
         return EquipmentItemService(item).is_followed_by_user(request.user)
