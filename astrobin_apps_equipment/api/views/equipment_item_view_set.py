@@ -1,12 +1,11 @@
 import logging
 from collections import Counter
-from typing import List, Optional
+from typing import Optional
 
 import simplejson
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
 from django.core.cache import cache
 from django.db.models import IntegerField, Q, QuerySet, Value
@@ -45,7 +44,6 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_ac
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.services import AppRedirectionService
-from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger(__name__)
 
