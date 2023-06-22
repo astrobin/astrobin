@@ -12,7 +12,8 @@ if CACHE_TYPE == 'redis':
                 'PICKLE_VERSION': 2,
                 'SERIALIZER':'astrobin.cache.CustomPickleSerializer',
             },
-            'KEY_PREFIX': 'astrobin'
+            'KEY_PREFIX': 'astrobin',
+            'TIMEOUT': 3600,
         }
     }
 elif CACHE_TYPE == 'locmem':

@@ -1732,7 +1732,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if task_id is None:
             from .tasks import retrieve_thumbnail
             result = retrieve_thumbnail.apply_async(args=(self.pk, alias, revision_label, options))
-            cache.set(task_id_cache_key, result.task_id)
+            cache.set(task_id_cache_key, result.task_id, 600)
 
             try:
                 # Try again in case of eagerness.
