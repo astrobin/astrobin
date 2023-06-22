@@ -720,7 +720,12 @@ def update_index(content_type_pk, object_pk):
 
     content_type = ContentType.objects.get(pk=content_type_pk)
     model_class = content_type.model_class()
-    instance = model_class.objects.get(pk=object_pk)
+
+    try:
+        instance = model_class.objects.get(pk=object_pk)
+    except model_class.DoesNotExist:
+        # The object was deleted before the task was executed.
+        return
 
     signal_processor.enqueue_save(model_class, instance)
 
