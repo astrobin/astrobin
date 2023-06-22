@@ -9,7 +9,14 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_fre
 
 class BlockNonPayingUsersFromRussiaMiddleware(MiddlewareParentClass):
     def _process(self, request):
-        country_code = get_client_country_code(request)
+        is_localhost = 'localhost' in request.get_host() or '127.0.0.1' in request.get_host()
+
+        if is_localhost:
+            return False
+
+        if not hasattr(request, 'user'):
+            return False
+
         excluded_paths = [
             '/account',
             '/accounts',
@@ -18,12 +25,12 @@ class BlockNonPayingUsersFromRussiaMiddleware(MiddlewareParentClass):
             '/rawthumb/',
         ]
 
-        if not hasattr(request, 'user'):
-            return False
 
         for excluded_path in excluded_paths:
             if excluded_path in request.path:
                 return False
+
+        country_code = get_client_country_code(request)
 
         if country_code != 'ru':
             return False
