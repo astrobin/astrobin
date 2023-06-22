@@ -1765,9 +1765,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
             invalidate_cdn_caches.delay(all_urls)
 
-            for url in all_urls:
-                s3 = boto3.client('s3')
-                s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
+            if settings.AWS_S3_ENABLED:
+                for url in all_urls:
+                    s3 = boto3.client('s3')
+                    s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
 
             self.thumbnails.get(revision=revision_label).delete()
             Image.objects_including_wip.filter(pk=self.pk).update(updated=DateTimeService.now())
