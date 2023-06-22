@@ -21,7 +21,11 @@ class UserFancyboxListViewSet(viewsets.ModelViewSet):
         else:
             return Image.objects.none()
 
-        user: User = User.objects.get(pk=user_pk)
+        try:
+            user: User = User.objects.get(pk=user_pk)
+        except User.DoesNotExist:
+            return Image.objects.none()
+
         user_service = UserService(user)
         include_wip = user_service.display_wip_images_on_public_gallery() and self.request.user == user
 
