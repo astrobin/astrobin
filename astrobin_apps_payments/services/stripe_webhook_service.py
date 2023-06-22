@@ -201,6 +201,15 @@ class StripeWebhookService(object):
             UserSubscription, user=user, subscription=subscription
         )
 
+        if user_subscription is None:
+            user_subscription = UserSubscription.objects.create(
+                user=user,
+                subscription=subscription,
+                active=session['status'] == 'active',
+                expires=datetime.fromtimestamp(session['current_period_end']).date(),
+                cancelled=session['cancel_at_period_end'],
+            )
+
         UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
 
         if 'previous_attributes' in event['data']:
@@ -221,6 +230,21 @@ class StripeWebhookService(object):
                 user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
                 user_subscription.save()
 
+            if user_subscription and 'status' in event['data']['previous_attributes']:
+                user_subscription.active = session['status'] == 'active'
+                user_subscription.save()
+
+                if user_subscription.active:
+                    push_notification(
+                        [user],
+                        None,
+                        'new_subscription',
+                        {
+                            'BASE_URL': settings.BASE_URL,
+                            'subscription': subscription
+                        }
+                    )
+
             if 'items' in event['data']['previous_attributes']:
                 new_attributes = session['items']['data'][0]
                 previous_attributes = event['data']['previous_attributes']['items']['data'][0]
@@ -233,12 +257,7 @@ class StripeWebhookService(object):
                     )
 
                     if previous_user_subscription:
-                        previous_user_subscription.subscription = subscription
-                        try:
-                            previous_user_subscription.cancelled = session['cancel_at_period_end']
-                        except KeyError:
-                            previous_user_subscription.cancelled = False
-                        previous_user_subscription.save()
+                        previous_user_subscription.delete()
                     else:
                         log.error(f"Unexpected user subscription change for {user.pk}")
 
@@ -247,34 +266,41 @@ class StripeWebhookService(object):
         session = StripeWebhookService.get_session_from_event(event)
         user = StripeWebhookService.get_user_from_session(session)
         subscription = StripeWebhookService.get_subscription_from_session(session)
+        incomplete = session['status'] == 'incomplete'
 
         UserProfile.objects \
             .filter(user=user) \
             .update(stripe_subscription_id=session['id'])
 
-        ipn = PayPalIPN.objects.create(
-            custom=user.pk,
-            item_number=subscription.pk,
-            mc_gross=subscription.price,
-            mc_currency=subscription.currency,
-            payment_status=ST_PP_CREATED,
-        )
+        try:
+            # If the user already has a subscription, we don't need to do anything.
+            UserSubscription.objects.get(user=user, subscription=subscription)
+        except UserSubscription.DoesNotExist:
+            ipn = PayPalIPN.objects.create(
+                custom=user.pk,
+                item_number=subscription.pk,
+                mc_gross=subscription.price,
+                mc_currency=subscription.currency,
+                payment_status=ST_PP_CREATED,
+            )
 
-        handle_subscription_signup(ipn)
+            handle_subscription_signup(ipn)
 
-        user_subscription = UserSubscription.objects.get(user=user, subscription=subscription)
-        user_subscription.extend()
-        user_subscription.save()
+            user_subscription = UserSubscription.objects.get(user=user, subscription=subscription)
+            user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
+            user_subscription.active = not incomplete
+            user_subscription.save()
 
-        push_notification(
-            [user],
-            None,
-            'new_subscription',
-            {
-                'BASE_URL': settings.BASE_URL,
-                'subscription': subscription
-            }
-        )
+            if user_subscription.active:
+                push_notification(
+                    [user],
+                    None,
+                    'new_subscription',
+                    {
+                        'BASE_URL': settings.BASE_URL,
+                        'subscription': subscription
+                    }
+                )
 
     @staticmethod
     def on_checkout_session_completed(event):

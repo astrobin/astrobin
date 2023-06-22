@@ -1,0 +1,59 @@
+{
+  "id": "evt_1NLu5iC0tT6bv7HdJ99QbGjO",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1687465613,
+  "data": {
+    "object": {
+      "id": "STRIPE_CUSTOMER_ID",
+      "object": "customer",
+      "address": {
+        "city": null,
+        "country": "CH",
+        "line1": null,
+        "line2": null,
+        "postal_code": null,
+        "state": null
+      },
+      "balance": 0,
+      "created": 1687465612,
+      "currency": "usd",
+      "default_currency": "usd",
+      "default_source": null,
+      "delinquent": false,
+      "description": null,
+      "discount": null,
+      "email": "astrobin@astrobin.com",
+      "invoice_prefix": "49E98C95",
+      "invoice_settings": {
+        "custom_fields": null,
+        "default_payment_method": null,
+        "footer": null,
+        "rendering_options": null
+      },
+      "livemode": false,
+      "metadata": {
+      },
+      "name": "Test",
+      "next_invoice_sequence": 2,
+      "phone": null,
+      "preferred_locales": [
+        "en-US"
+      ],
+      "shipping": null,
+      "tax_exempt": "none",
+      "test_clock": null
+    },
+    "previous_attributes": {
+      "currency": null,
+      "default_currency": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 3,
+  "request": {
+    "id": "req_nPPxIv4IDWpPyN",
+    "idempotency_key": "43595b7c-f016-4d5c-9f94-b1f5157f1d55"
+  },
+  "type": "customer.updated"
+}
