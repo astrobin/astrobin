@@ -119,7 +119,8 @@ class PremiumService:
         us = [obj for obj in UserSubscription.objects.filter(
             user__username=self.user.username,
             subscription__name__in=[x.value for x in SubscriptionName],
-            expires__gte=datetime.today()
+            expires__gte=datetime.today(),
+            active=True,
         )]
 
         if len(us) == 0:

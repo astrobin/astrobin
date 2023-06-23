@@ -126,6 +126,10 @@ class PricingService:
         # and proration set:
         stripe.api_key = settings.STRIPE['keys']['secret']
         subscription = stripe.Subscription.retrieve(user.userprofile.stripe_subscription_id)
+
+        if not subscription or subscription['status'] != 'active':
+            return 0
+
         items = [{
             'id': subscription['items']['data'][0].id,
             'price': PricingService.get_stripe_price_object(product_name, country_code, recurring_unit)["id"]

@@ -670,6 +670,8 @@ def subscription_signed_up(sender, **kwargs):
 
         # Non recurring premium subscription are for a year, no exceptions.
         user_subscription.expires = extend_date_by(user_subscription.expires, 1, 'Y')
+        # Non-recurring subscription are of course cancelled because they are not recurring.
+        user_subscription.cancelled = True
         user_subscription.save()
 
         # Invalidate other premium subscriptions

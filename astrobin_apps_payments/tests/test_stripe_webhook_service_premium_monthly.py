@@ -3,7 +3,6 @@ from datetime import date
 from django.contrib.auth.models import Group
 from django.test import TestCase
 from subscription.models import Subscription, Transaction
-from subscription.utils import extend_date_by
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_payments.services.stripe_webhook_service import StripeWebhookService
@@ -11,7 +10,7 @@ from astrobin_apps_payments.tests.stripe_generators import StripeGenerators
 from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 
 
-class StripeWebhookServiceLiteMonthlyTest(TestCase):
+class StripeWebhookServicePremiumMonthlyTest(TestCase):
     def setUp(self):
         self.subscription, created = Subscription.objects.get_or_create(
             name=SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value,
@@ -48,7 +47,8 @@ class StripeWebhookServiceLiteMonthlyTest(TestCase):
 
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_premium_2020(valid_subscription))
-        self.assertEqual(valid_subscription.expires, extend_date_by(date.today(), 1, 'M'))
+        self.assertEqual(valid_subscription.expires, date(2024, 5, 26))
+        self.assertFalse(valid_subscription.cancelled)
         self.assertEqual(valid_subscription.subscription, self.subscription)
         self.assertIsNotNone(user.userprofile.stripe_customer_id)
         self.assertIsNotNone(user.userprofile.stripe_subscription_id)

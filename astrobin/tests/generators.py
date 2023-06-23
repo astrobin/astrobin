@@ -230,7 +230,7 @@ class Generators:
             user=user,
             subscription=s,
             expires=date.today() + timedelta(days=1),
-            cancelled=False,
+            cancelled=s.recurrence_unit is None,
         )
         user_subscription.subscribe()
 

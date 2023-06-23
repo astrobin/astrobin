@@ -96,7 +96,6 @@ def get_client_country_code(request) -> str:
             country = default_country
         return country
     except Exception as e:
-        logger.error("Error getting country code: %s" % e)
         return default_country
 
 

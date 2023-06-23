@@ -3,7 +3,6 @@ from datetime import date
 from django.contrib.auth.models import Group
 from django.test import TestCase
 from subscription.models import Subscription, Transaction
-from subscription.utils import extend_date_by
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_payments.services.stripe_webhook_service import StripeWebhookService
@@ -48,7 +47,8 @@ class StripeWebhookServiceLiteYearlyTest(TestCase):
 
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_lite_2020(valid_subscription))
-        self.assertEqual(valid_subscription.expires, extend_date_by(date.today(), 1, 'Y'))
+        self.assertEqual(valid_subscription.expires, date(2024, 5, 26))
+        self.assertFalse(valid_subscription.cancelled)
         self.assertEqual(valid_subscription.subscription, self.subscription)
         self.assertIsNotNone(user.userprofile.stripe_customer_id)
         self.assertIsNotNone(user.userprofile.stripe_subscription_id)
@@ -74,6 +74,7 @@ class StripeWebhookServiceLiteYearlyTest(TestCase):
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_lite_2020(valid_subscription))
         self.assertEqual(valid_subscription.subscription, self.subscription)
+        self.assertFalse(valid_subscription.cancelled)
 
         StripeWebhookService.process_event(e('lite_yearly_cancellation/billing_portal.session.created'))
         StripeWebhookService.process_event(e('lite_yearly_cancellation/customer.subscription.updated'))

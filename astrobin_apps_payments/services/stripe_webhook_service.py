@@ -1,5 +1,6 @@
 import json
 import logging
+import time
 from datetime import datetime
 
 import stripe
@@ -7,6 +8,7 @@ from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
+from django.db import IntegrityError
 from django.http import HttpResponseBadRequest
 from django.utils import timezone
 from paypal.standard.ipn.models import PayPalIPN
@@ -20,6 +22,7 @@ from subscription.signals import paid
 
 from astrobin.models import UserProfile
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_payments.tasks import process_stripe_webhook_event
 from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 log = logging.getLogger(__name__)
@@ -201,13 +204,34 @@ class StripeWebhookService(object):
             UserSubscription, user=user, subscription=subscription
         )
 
+        if user_subscription is None:
+            user_subscription = UserSubscription.objects.create(
+                user=user,
+                subscription=subscription,
+                active=session['status'] == 'active',
+                expires=datetime.fromtimestamp(session['current_period_end']).date(),
+                cancelled=session['cancel_at_period_end'],
+            )
+
+            log.debug(
+                f"on_customer_subscription_updated: Subscription for user {user.pk}, {subscription.name}, created: "
+                f"active={user_subscription.active}, cancelled={user_subscription.cancelled}"
+            )
+
+        user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
+        user_subscription.active = session['status'] == 'active'
+        user_subscription.cancelled = session['cancel_at_period_end'] if user_subscription.active else True
+        user_subscription.save()
+
+        log.debug(
+            f"on_customer_subscription_updated: Subscription for user {user.pk}, {subscription.name}, saved: "
+            f"active={user_subscription.active}, cancelled={user_subscription.cancelled}"
+        )
+
         UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
 
         if 'previous_attributes' in event['data']:
             if user_subscription and 'cancel_at_period_end' in event['data']['previous_attributes']:
-                user_subscription.cancelled = session['cancel_at_period_end']
-                user_subscription.save()
-
                 if user_subscription.cancelled:
                     ipn = PayPalIPN.objects.create(
                         custom=user.pk,
@@ -217,9 +241,18 @@ class StripeWebhookService(object):
 
                     handle_subscription_cancel(ipn)
 
-            if user_subscription and 'current_period_end' in event['data']['previous_attributes']:
-                user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
-                user_subscription.save()
+
+            if user_subscription and 'status' in event['data']['previous_attributes']:
+                if user_subscription.active:
+                    push_notification(
+                        [user],
+                        None,
+                        'new_subscription',
+                        {
+                            'BASE_URL': settings.BASE_URL,
+                            'subscription': subscription
+                        }
+                    )
 
             if 'items' in event['data']['previous_attributes']:
                 new_attributes = session['items']['data'][0]
@@ -233,12 +266,7 @@ class StripeWebhookService(object):
                     )
 
                     if previous_user_subscription:
-                        previous_user_subscription.subscription = subscription
-                        try:
-                            previous_user_subscription.cancelled = session['cancel_at_period_end']
-                        except KeyError:
-                            previous_user_subscription.cancelled = False
-                        previous_user_subscription.save()
+                        previous_user_subscription.delete()
                     else:
                         log.error(f"Unexpected user subscription change for {user.pk}")
 
@@ -247,34 +275,55 @@ class StripeWebhookService(object):
         session = StripeWebhookService.get_session_from_event(event)
         user = StripeWebhookService.get_user_from_session(session)
         subscription = StripeWebhookService.get_subscription_from_session(session)
+        incomplete = session['status'] == 'incomplete'
 
         UserProfile.objects \
             .filter(user=user) \
             .update(stripe_subscription_id=session['id'])
 
-        ipn = PayPalIPN.objects.create(
-            custom=user.pk,
-            item_number=subscription.pk,
-            mc_gross=subscription.price,
-            mc_currency=subscription.currency,
-            payment_status=ST_PP_CREATED,
-        )
+        try:
+            # If the user already has a subscription, we don't need to do anything.
+            user_subscription = UserSubscription.objects.get(user=user, subscription=subscription)
+            log.debug(
+                f"on_customer_subscription_created: User {user.pk} already has a subscription for {subscription.name}: "
+                f"active={user_subscription.active}, cancelled={user_subscription.cancelled}"
+            )
+        except UserSubscription.DoesNotExist:
+            ipn = PayPalIPN.objects.create(
+                custom=user.pk,
+                item_number=subscription.pk,
+                mc_gross=subscription.price,
+                mc_currency=subscription.currency,
+                payment_status=ST_PP_CREATED,
+            )
 
-        handle_subscription_signup(ipn)
+            try:
+                handle_subscription_signup(ipn)
+            except IntegrityError as e:
+                pass
 
-        user_subscription = UserSubscription.objects.get(user=user, subscription=subscription)
-        user_subscription.extend()
+            user_subscription = UserSubscription.objects.get(user=user, subscription=subscription)
+            user_subscription.active = not incomplete
+            user_subscription.cancelled = session['cancel_at_period_end'] if user_subscription.active else True
+
+        user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
         user_subscription.save()
 
-        push_notification(
-            [user],
-            None,
-            'new_subscription',
-            {
-                'BASE_URL': settings.BASE_URL,
-                'subscription': subscription
-            }
+        log.debug(
+            f"on_customer_subscription_created: Subscription for user {user.pk}, {subscription.name}, saved: "
+            f"active={user_subscription.active}, cancelled={user_subscription.cancelled}"
         )
+
+        if user_subscription.active:
+            push_notification(
+                [user],
+                None,
+                'new_subscription',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                }
+            )
 
     @staticmethod
     def on_checkout_session_completed(event):
@@ -338,33 +387,23 @@ class StripeWebhookService(object):
 
     @staticmethod
     def process_event(event):
-        try:
-            event_type = event['type']
+        # As Stripe events can come in random order, we force some delays here to attempt to keep some sanity.
+        # This is not a perfect solution, but it's better than nothing.
 
-            if event_type == 'customer.created':
-                StripeWebhookService.on_customer_created(event)
-            elif event_type == 'customer.updated':
-                StripeWebhookService.on_customer_updated(event)
-            elif event_type == 'customer.deleted':
-                StripeWebhookService.on_customer_deleted(event)
-            elif event_type == 'payment_intent.created':
-                StripeWebhookService.on_payment_intent_created(event)
-            elif event_type == 'invoice.paid':
-                StripeWebhookService.on_invoice_paid(event)
-            elif event_type == 'customer.subscription.created':
-                StripeWebhookService.on_customer_subscription_created(event)
-            elif event_type == 'customer.subscription.deleted':
-                StripeWebhookService.on_customer_subscription_deleted(event)
-            elif event_type == 'customer.subscription.updated':
-                StripeWebhookService.on_customer_subscription_updated(event)
-            elif event_type == 'checkout.session.completed':
-                StripeWebhookService.on_checkout_session_completed(event)
-            elif event_type == 'checkout.session.async_payment_succeeded':
-                StripeWebhookService.on_checkout_session_async_payment_succeeded(event)
-            elif event_type == 'checkout.session.async_payment_failed':
-                StripeWebhookService.on_checkout_session_async_payment_failed(event)
-            else:
-                log.info("stripe_webhook: unhandled event %s" % event_type)
-        except Exception as e:
-            log.exception("stripe_webhook: %s" % str(e))
-            return HttpResponseBadRequest()
+        delay_map = {
+            "customer.subscription.updated": 5,
+        }
+
+        event_type = event['type']
+
+        try:
+            delay = delay_map[event_type]
+        except KeyError:
+            delay = 0
+
+        if hasattr(settings, 'CELERY_TASK_ALWAYS_EAGER') and settings.CELERY_TASK_ALWAYS_EAGER and delay > 0:
+            # We need this delay also during testing and development.
+            log.debug(f"process_event: delaying task {event_type} {delay} seconds")
+            time.sleep(delay)
+
+        process_stripe_webhook_event.apply_async(args=(event,), countdown=delay)
