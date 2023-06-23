@@ -62,6 +62,7 @@ class StripeWebhookServiceUltimateYearlyTest(TestCase):
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_ultimate_2020(valid_subscription))
         self.assertEqual(valid_subscription.expires, date(2024, 5, 26))
+        self.assertFalse(valid_subscription.cancelled)
         self.assertEqual(valid_subscription.subscription, self.subscription)
         self.assertIsNotNone(user.userprofile.stripe_customer_id)
         self.assertIsNotNone(user.userprofile.stripe_subscription_id)
@@ -87,6 +88,7 @@ class StripeWebhookServiceUltimateYearlyTest(TestCase):
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_ultimate_2020(valid_subscription))
         self.assertEqual(valid_subscription.subscription, self.subscription)
+        self.assertFalse(valid_subscription.cancelled)
 
         StripeWebhookService.process_event(e('ultimate_yearly_cancellation/billing_portal.session.created'))
         StripeWebhookService.process_event(e('ultimate_yearly_cancellation/customer.subscription.updated'))
@@ -111,6 +113,7 @@ class StripeWebhookServiceUltimateYearlyTest(TestCase):
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_ultimate_2020(valid_subscription))
         self.assertEqual(valid_subscription.subscription, self.subscription)
+        self.assertFalse(valid_subscription.cancelled)
 
         StripeWebhookService.process_event(e('ultimate_yearly_renewal/payment_intent.succeeded'))
         StripeWebhookService.process_event(e('ultimate_yearly_renewal/charge.succeeded'))
@@ -136,6 +139,7 @@ class StripeWebhookServiceUltimateYearlyTest(TestCase):
         self.assertTrue(PremiumService.is_ultimate_2020(valid_subscription))
         self.assertEqual(valid_subscription.subscription, self.subscription)
         self.assertEqual(valid_subscription.expires, current_period_end)
+        self.assertFalse(valid_subscription.cancelled)
 
     def test_failed_payment_then_succeeded(self):
         user = Generators.user(email="astrobin@astrobin.com")
@@ -174,6 +178,7 @@ class StripeWebhookServiceUltimateYearlyTest(TestCase):
 
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_ultimate_2020(valid_subscription))
+        self.assertFalse(valid_subscription.cancelled)
 
     def test_failed_payment_then_succeeded_bad_order(self):
         # In this test, customer.subscription.updated comes before customer.subscription.created.
@@ -252,3 +257,4 @@ class StripeWebhookServiceUltimateYearlyTest(TestCase):
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertFalse(PremiumService.is_ultimate_2020(valid_subscription))
         self.assertTrue(PremiumService.is_premium_2020(valid_subscription))
+        self.assertFalse(valid_subscription.cancelled)

@@ -48,6 +48,7 @@ class StripeWebhookServicePremiumYearlyTest(TestCase):
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_premium_2020(valid_subscription))
         self.assertEqual(valid_subscription.expires, date(2024, 5, 26))
+        self.assertFalse(valid_subscription.cancelled)
         self.assertEqual(valid_subscription.subscription, self.subscription)
         self.assertIsNotNone(user.userprofile.stripe_customer_id)
         self.assertIsNotNone(user.userprofile.stripe_subscription_id)
@@ -73,6 +74,7 @@ class StripeWebhookServicePremiumYearlyTest(TestCase):
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_premium_2020(valid_subscription))
         self.assertEqual(valid_subscription.subscription, self.subscription)
+        self.assertFalse(valid_subscription.cancelled)
 
         StripeWebhookService.process_event(e('premium_yearly_cancellation/billing_portal.session.created'))
         StripeWebhookService.process_event(e('premium_yearly_cancellation/customer.subscription.updated'))
@@ -118,6 +120,7 @@ class StripeWebhookServicePremiumYearlyTest(TestCase):
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_ultimate_2020(valid_subscription))
         self.assertEqual(valid_subscription.expires, date(2024, 5, 26))
+        self.assertFalse(valid_subscription.cancelled)
         self.assertEqual(valid_subscription.subscription, ultimate)
         self.assertIsNotNone(user.userprofile.stripe_customer_id)
         self.assertIsNotNone(user.userprofile.stripe_subscription_id)
