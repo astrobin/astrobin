@@ -4,7 +4,7 @@ from boto3.session import Session
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'invalid').strip()
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'invalid').strip()
-AWS_REGION_NAME = os.environ.get('AWS_REGION_NAME', 'us-east-1').strip()
+AWS_REGION = os.environ.get('AWS_REGION', 'us-east-1').strip()
 CLOUDWATCH_LOGGING_ENABLED = os.environ.get('CLOUDWATCH_LOGGING_ENABLED', 'false').strip() == 'true'
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
@@ -130,7 +130,7 @@ if AWS_ACCESS_KEY_ID != 'invalid' and \
         'localhost' not in BASE_URL:
     boto3_session = Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
                             aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                            region_name=AWS_REGION_NAME)
+                            region_name=AWS_REGION)
 
     LOGGING['handlers']['watchtower'] = {
         'level': 'DEBUG',
