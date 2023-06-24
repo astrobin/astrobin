@@ -32,6 +32,8 @@ class CloudFrontService:
             log.warning("CloudFrontService cannot purge cache without urls")
             return
 
+        log.debug("CloudFrontService purging cache for urls: %s", ', '.join(urls))
+
         return self.client.create_invalidation(
             DistributionId=self.distribution_id,
             InvalidationBatch={
