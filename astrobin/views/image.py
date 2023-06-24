@@ -166,8 +166,8 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
 
         revision_label = kwargs.pop('r', None)
 
-        force = request.GET.get('force') and request.user.is_superuser
-        if force is not None:
+        force = request.GET.get('force')
+        if force is not None and request.user.is_superuser:
             if revision_label in (None, 'None', 0, '0'):
                 image.thumbnail_invalidate()
             else:
@@ -212,8 +212,8 @@ class ImageRawThumbView(ImageDetailViewBase):
 
         revision_label = kwargs.pop('r', None)
 
-        force = request.GET.get('force') and request.user.is_superuser
-        if force is not None:
+        force = request.GET.get('force')
+        if force is not None and request.user.is_superuser:
             if revision_label in (None, 'None', 0, '0'):
                 image.thumbnail_invalidate()
             else:
