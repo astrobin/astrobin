@@ -49,6 +49,7 @@ class PlateSolvingSettingsForm(forms.ModelForm):
                 HTML(
                     f'<button '
                     f'  type="submit" '
+                    f'  name="submit" '
                     f'  class="btn btn-primary btn-block-mobile {button_loading_class()}"'
                     f'>'
                     f'  {gettext("Save and plate-solve again")} {button_loading_indicator()}'

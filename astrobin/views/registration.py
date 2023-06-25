@@ -92,6 +92,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
                 HTML(
                     f'<button '
                     f'  type="submit" '
+                    f'  name="submit" '
                     f'  class="btn btn-primary btn-block-mobile {button_loading_class()}"'
                     f'>'
                     f'  {_("Submit")} {button_loading_indicator()}'
