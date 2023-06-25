@@ -785,16 +785,25 @@ def image_edit_platesolving_settings(request, id, revision_label):
         solution.save()
 
     if request.method == 'GET':
-        form = PlateSolvingSettingsForm(instance=settings)
+        form = PlateSolvingSettingsForm(
+            image=image,
+            instance=settings,
+            revision_label=revision_label,
+            return_url=return_url
+        )
         return render(request, 'image/edit/platesolving_settings.html', {
             'form': form,
             'image': image,
-            'revision_label': revision_label,
-            'return_url': return_url,
         })
 
     if request.method == 'POST':
-        form = PlateSolvingSettingsForm(instance=settings, data=request.POST)
+        form = PlateSolvingSettingsForm(
+            image=image,
+            instance=settings,
+            revision_label=revision_label,
+            return_url=return_url,
+            data=request.POST,
+        )
         if not form.is_valid():
             messages.error(
                 request,
@@ -802,8 +811,6 @@ def image_edit_platesolving_settings(request, id, revision_label):
             return render(request, 'image/edit/platesolving_settings.html', {
                 'form': form,
                 'image': image,
-                'revision_label': revision_label,
-                'return_url': return_url,
             })
 
         form.save()

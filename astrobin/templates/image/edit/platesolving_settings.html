@@ -4,6 +4,8 @@
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
+{% load crispy_forms_tags %}
+
 
 {% block title %}{% trans "Edit your image: plate-solving settings" %}{% endblock %}
 
@@ -17,55 +19,33 @@
 {% block content %}
     <h1>{% trans "Plate-solving settings" %}</h1>
 
-    <form
-            id="platesolving-settings"
-            class="form-horizontal"
-            action="{% url 'image_edit_platesolving_settings' image.get_id revision_label %}"
-            method="post"
-            novalidate>
-        {% csrf_token %}
+    {% crispy form %}
 
-        {{ form|as_bootstrap }}
-
-        <div class="form-actions">
-            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit"
-                    name="submit_save">
-                {% trans "Save and plate-solve again" %}
-                {% button_loading_indicator %}
-            </button>
-
-            <a class="btn btn-block-mobile" href="{{ return_url }}">
-                {% trans "Cancel" %}
-            </a>
-        </div>
-    </form>
 {% endblock %}
 
 {% block extra_js %}
-    <script language="javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
-            var $form = $('form#platesolving-settings'),
-                $blind = $form.find('input#id_blind');
+            const $form = $('form#platesolving-settings'),
+                $blind = $form.find('input#id_blind'),
+                $nonBlindFields = [
+                    $form.find("#id_scale_units"),
+                    $form.find("#id_scale_min"),
+                    $form.find("#id_scale_max"),
+                    $form.find("#id_center_ra"),
+                    $form.find("#id_center_dec"),
+                    $form.find("#id_radius"),
+                ]
 
             function disable_all($form) {
-                $form.find('.control-group').each(function (index, group) {
-                    if ($(group).find('input#id_blind').length > 0) {
-                        // Skip
-                        return;
-                    }
-
-                    $(group).find('input, select').attr('disabled', 'disabled');
+                $nonBlindFields.forEach(function ($field) {
+                    $field.attr("disabled", "disabled").addClass("disabled");
                 });
             }
 
             function enable_all($form) {
-                $form.find('.control-group').each(function (index, group) {
-                    if ($(group).find('input#id_blind').length > 0) {
-                        // Skip
-                        return;
-                    }
-
-                    $(group).find('input, select').removeAttr('disabled');
+                $nonBlindFields.forEach(function ($field) {
+                    $field.removeAttr("disabled").removeClass("disabled");
                 });
             }
 

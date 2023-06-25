@@ -71,7 +71,11 @@ class SolveView(base.View):
                     sync=True)
 
                 if solution.settings.blind:
-                    submission = solver.solve(url)
+                    submission = solver.solve(
+                        url,
+                        downsample_factor=solution.settings.downsample_factor,
+                        use_sextractor=solution.settings.use_sextractor,
+                    )
                 else:
                     submission = solver.solve(
                         url,
@@ -81,6 +85,8 @@ class SolveView(base.View):
                         center_ra=solution.settings.center_ra,
                         center_dec=solution.settings.center_dec,
                         radius=solution.settings.radius,
+                        downsample_factor=solution.settings.downsample_factor,
+                        use_sextractor=solution.settings.use_sextractor,
                     )
                 solution.status = Solver.PENDING
                 solution.submission_id = submission
