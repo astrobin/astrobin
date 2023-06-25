@@ -1,10 +1,12 @@
 import datetime
+from unittest.mock import patch
 
 from django.contrib.auth.models import User
 from django.test import TransactionTestCase
 from django_bouncy.models import Bounce, Complaint
 from notification.models import NoticeType
 
+from astrobin.tests.generators import Generators
 from astrobin_apps_notifications.backends import EmailBackend
 
 
@@ -92,3 +94,23 @@ class EmailBackendTest(TransactionTestCase):
 
     def test_can_send(self):
         self.assertTrue(EmailBackend(1).can_send(self.user, self.notice_type))
+
+    @patch('astrobin_apps_notifications.backends.send_mail')
+    def test_deliver_with_shadow_ban(self, send_mail):
+        sender: User = Generators.user()
+        user: User = Generators.user()
+
+        user.userprofile.shadow_bans.add(sender.userprofile)
+
+        EmailBackend(1).deliver(user, sender, self.notice_type, {})
+
+        send_mail.assert_not_called()
+
+    @patch('astrobin_apps_notifications.backends.send_mail')
+    def test_deliver(self, send_mail):
+        sender: User = Generators.user()
+        user: User = Generators.user()
+
+        EmailBackend(1).deliver(user, sender, self.notice_type, {})
+
+        send_mail.assert_called()
