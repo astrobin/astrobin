@@ -7,6 +7,14 @@
   @include rounded-corners;
   z-index: 1051;
 
+  .checker {
+    margin-left: 0;
+  }
+
+  .form-horizontal .checker {
+    margin-left: -20px;
+  }
+
   .modal-header {
     background: $grey-6-dark url('../images/darker-panel-tile.png');
     @include rounded-corners-top;
