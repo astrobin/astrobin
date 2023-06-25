@@ -4,6 +4,7 @@ import re
 from itertools import chain
 from typing import List, Set
 
+import stripe
 from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
@@ -11,10 +12,10 @@ from django.contrib.auth.models import Group as DjangoGroup, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
-from django.core.exceptions import MultipleObjectsReturned
-from django.db import IntegrityError, transaction
+from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
+from django.db import IntegrityError, InternalError, transaction
 from django.db.models import Q
-from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_save)
+from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_delete, pre_save)
 from django.dispatch import receiver
 from django.urls import reverse as reverse_url
 from django.utils import timezone
@@ -24,13 +25,16 @@ from pybb.models import Forum, Post, Topic, TopicReadTracker
 from pybb.permissions import perms
 from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
+from safedelete import HARD_DELETE
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
-from subscription.models import Transaction, UserSubscription
-from subscription.signals import paid, signed_up
+from stripe.error import StripeError
+from subscription.models import Subscription, Transaction, UserSubscription
+from subscription.signals import paid, signed_up, unsubscribed
+from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
-from astrobin.tasks import process_camera_rename_proposal
+from astrobin.tasks import invalidate_cdn_caches, process_camera_rename_proposal
 from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
@@ -68,6 +72,7 @@ from .models import (
 from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 from .utils import get_client_country_code
+from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
 log = logging.getLogger(__name__)
 
@@ -141,10 +146,9 @@ def image_pre_save_invalidate_thumbnails(sender, instance: Image, **kwargs):
 pre_save.connect(image_pre_save_invalidate_thumbnails, sender=Image)
 
 
-def image_post_save(sender, instance, created, **kwargs):
-    # type: (object, Image, bool, object) -> None
+def image_post_save(sender, instance: Image, created: bool, **kwargs):
 
-    if instance.deleted:
+    if getattr(instance, DELETED_FIELD_NAME, None):
         return
 
     if created:
@@ -251,6 +255,21 @@ def image_post_softdelete(sender, instance, **kwargs):
 
 post_softdelete.connect(image_post_softdelete, sender=Image)
 
+
+@receiver(pre_delete, sender=Image)
+def image_pre_delete(sender, instance: Image, **kwargs):
+    if not getattr(instance, DELETED_FIELD_NAME, None):
+        try:
+            image_post_softdelete(sender, instance, **kwargs)
+        except InternalError as e:
+            log.error("Error soft deleting image %d: %s" % (instance.pk, str(e)))
+
+    if instance.image_file:
+        if instance.image_file.url and getattr(instance, "purge_caches", False):
+            invalidate_cdn_caches.delay([instance.image_file.url])
+        instance.image_file.delete(save=False)
+
+
 def imagerevision_pre_save(sender, instance, **kwargs):
     if instance.pk:
         pre_save_instance = get_object_or_None(ImageRevision.uploads_in_progress, pk=instance.pk)
@@ -283,15 +302,28 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
 
 
-def imagerevision_post_delete(sender, instance, **kwargs):
+def imagerevision_post_softdelete(sender, instance, **kwargs):
     UserService(instance.image.user).clear_gallery_image_list_cache()
     if instance.solution:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
         instance.solution.delete()
 
 
-post_softdelete.connect(imagerevision_post_delete, sender=ImageRevision)
-post_delete.connect(imagerevision_post_delete, sender=ImageRevision)
+post_softdelete.connect(imagerevision_post_softdelete, sender=ImageRevision)
+
+
+@receiver(pre_delete, sender=ImageRevision)
+def imagerevision_pre_delete(sender, instance: ImageRevision, **kwargs):
+    if not getattr(instance, DELETED_FIELD_NAME, None):
+        try:
+            imagerevision_post_softdelete(sender, instance, **kwargs)
+        except InternalError as e:
+            log.error("Error soft deleting image revision %d: %s" % (instance.pk, str(e)))
+
+    if instance.image_file:
+        if instance.image_file.url and getattr(instance, "purge_caches", False):
+            invalidate_cdn_caches.delay([instance.image_file.url])
+        instance.image_file.delete(save=False)
 
 
 def nested_comment_pre_save(sender, instance, **kwargs):
@@ -590,32 +622,56 @@ def subscription_paid(sender, **kwargs):
     PremiumService(user).clear_subscription_status_cache_keys()
     UserService(user).update_premium_counter_on_subscription(subscription)
 
+    if subscription.recurrence_unit is not None:
+        return
+
     if 'premium' in subscription.category and Transaction.objects.filter(
             user=user,
             event='new usersubscription',
             timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
-        push_notification([user], None, 'new_subscription', {'BASE_URL': settings.BASE_URL})
+        push_notification(
+            [user],
+            None,
+            'new_subscription',
+            {
+                'BASE_URL': settings.BASE_URL,
+                'subscription': subscription
+            }
+        )
     else:
-        push_notification([user], None, 'new_payment', {'BASE_URL': settings.BASE_URL})
+        push_notification(
+            [user],
+            None,
+            'new_payment',
+            {
+                'BASE_URL': settings.BASE_URL,
+                'subscription': subscription
+            }
+        )
 
 
 paid.connect(subscription_paid)
 
 
 def subscription_signed_up(sender, **kwargs):
-    subscription = kwargs.get('subscription')
-    user_subscription = kwargs.get('usersubscription')
-    user = kwargs.get('user')
+    subscription: Subscription = kwargs.get('subscription')
+    user_subscription: UserSubscription = kwargs.get('usersubscription')
+    user: User = kwargs.get('user')
 
     UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
     PremiumService(user).clear_subscription_status_cache_keys()
     UserService(user).update_premium_counter_on_subscription(subscription)
 
-    if 'premium' in subscription.category:
+    if 'premium' in subscription.category and subscription.recurrence_unit is None:
+        # When there's a payment for an expired subscription, make sure we start the subscription from today.
         today = DateTimeService.today()
         if user_subscription.expires is None or user_subscription.expires < today:
             user_subscription.expires = today
-        user_subscription.extend(datetime.timedelta(days=365.2425))
+
+        # Non recurring premium subscription are for a year, no exceptions.
+        user_subscription.expires = extend_date_by(user_subscription.expires, 1, 'Y')
+        # Non-recurring subscription are of course cancelled because they are not recurring.
+        user_subscription.cancelled = True
         user_subscription.save()
 
         # Invalidate other premium subscriptions
@@ -626,15 +682,53 @@ def subscription_signed_up(sender, **kwargs):
             .update(active=False)
 
         if Transaction.objects.filter(
-                user=user,
-                event='new usersubscription',
-                timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
-            push_notification([user], None, 'new_subscription', {'BASE_URL': settings.BASE_URL})
+            user=user,
+            event='new usersubscription',
+            timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
+        ):
+            push_notification(
+                [user],
+                None,
+                'new_subscription',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                }
+            )
         else:
-            push_notification([user], None, 'new_payment', {'BASE_URL': settings.BASE_URL})
+            push_notification(
+                [user],
+                None,
+                'new_payment',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                }
+            )
 
 
 signed_up.connect(subscription_signed_up)
+
+
+def subscription_unsubscribed(sender, **kwargs):
+    subscription: Subscription = kwargs.get('subscription')
+    user: User = kwargs.get('user')
+
+    UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
+    PremiumService(user).clear_subscription_status_cache_keys()
+
+    push_notification(
+        [user],
+        None,
+        'subscription_canceled',
+        {
+            'BASE_URL': settings.BASE_URL,
+            'subscription': subscription
+        }
+    )
+
+
+unsubscribed.connect(subscription_unsubscribed)
 
 
 def user_subscription_post_delete(sender, instance, **kwargs):
@@ -645,6 +739,16 @@ def user_subscription_post_delete(sender, instance, **kwargs):
 
 
 post_delete.connect(user_subscription_post_delete, sender=UserSubscription)
+
+
+def user_subscription_post_save(sender, instance, created, **kwargs):
+    try:
+        PremiumService(instance.user).clear_subscription_status_cache_keys()
+    except (User.DoesNotExist, UserProfile.DoesNotExist):
+        pass
+
+
+post_save.connect(user_subscription_post_save, sender=UserSubscription)
 
 
 def group_pre_save(sender, instance, **kwargs):
@@ -1114,18 +1218,48 @@ def topic_read_tracker_post_save(sender, instance, created, **kwargs):
 post_save.connect(topic_read_tracker_post_save, sender=TopicReadTracker)
 
 
+def user_pre_save(sender, instance, **kwargs):
+    if instance.pk:
+        original_instance = sender.objects.get(pk=instance.pk)
+        if original_instance.email != instance.email and instance.userprofile.stripe_customer_id:
+            stripe.api_key = settings.STRIPE['keys']['secret']
+            try:
+                customer = stripe.Customer.retrieve(instance.userprofile.stripe_customer_id)
+                if customer.email != instance.email:
+                    customer.email = instance.email
+                    customer.save()
+            except StripeError as e:
+                log.error('Error updating Stripe customer: %s' % e)
+
+
+pre_save.connect(user_pre_save, sender=User)
+
+
 def user_post_save(sender, instance, created, **kwargs):
-    if not created:
-        try:
-            instance.userprofile.save(keep_deleted=True)
-        except UserProfile.DoesNotExist:
-            pass
+    UserProfile.objects.filter(user=instance).update(updated=timezone.now())
 
 
 post_save.connect(user_post_save, sender=User)
 
 
-def userprofile_post_delete(sender, instance, **kwargs):
+def user_pre_delete(sender, instance, **kwargs):
+    user_ct = ContentType.objects.get_for_model(User)
+    ToggleProperty.objects.filter(user=instance, property_type__in=['follow', 'bookmark']).delete()
+    ToggleProperty.objects.filter(content_type=user_ct, object_id=instance.pk, property_type='follow').delete()
+
+    try:
+        if getattr(instance, 'userprofile') and instance.userprofile.stripe_customer_id:
+            stripe.api_key = settings.STRIPE['keys']['secret']
+            stripe.Customer.delete(instance.userprofile.stripe_customer_id)
+    except StripeError as e:
+        log.error('Error deleting Stripe customer: %s' % e)
+    except ObjectDoesNotExist as e:
+        log.error('User %s has no userprofile: %s' % (instance.username, str(e)))
+
+pre_delete.connect(user_pre_delete, sender=User)
+
+
+def userprofile_post_softdelete(sender, instance, **kwargs):
     # Images are attached to the auth.User object, and that's not really
     # deleted, so nothing is cascaded, hence the following line.
     instance.user.is_active = False
@@ -1134,12 +1268,46 @@ def userprofile_post_delete(sender, instance, **kwargs):
         instance.user.email = instance.user.email.replace('@', '+ASTROBIN_IGNORE@')
 
     instance.user.save()
+
     Image.objects_including_wip.filter(user=instance.user).delete()
+    ImageRevision.objects.filter(image__user=instance.user).delete()
     NestedComment.objects.filter(author=instance.user, deleted=False).update(deleted=True)
+
     UserIndex().remove_object(instance.user)
 
 
-post_softdelete.connect(userprofile_post_delete, sender=UserProfile)
+post_softdelete.connect(userprofile_post_softdelete, sender=UserProfile)
+
+
+@receiver(pre_delete, sender=UserProfile)
+def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
+    if not getattr(instance, DELETED_FIELD_NAME, None):
+        try:
+            userprofile_post_softdelete(sender, instance, **kwargs)
+        except InternalError as e:
+            log.error("Error soft deleting user profile %d: %s" % (instance.pk, str(e)))
+
+    image_urls = [
+        x.image_file.url for x in ImageRevision.all_objects.filter(image__user=instance.user)
+        if x.image_file and x.image_file.url
+    ]
+
+    revision_urls = [
+        x.image_file.url for x in Image.all_objects.filter(user=instance.user)
+        if x.image_file and x.image_file.url
+    ]
+
+    invalidate_cdn_caches.delay(image_urls + revision_urls)
+
+    for revision in ImageRevision.all_objects.filter(image__user=instance.user):
+        log.debug("Deleting revision %d" % revision.pk)
+        revision.purge_caches = False
+        revision.delete(force_policy=HARD_DELETE)
+
+    for image in Image.all_objects.filter(user=instance.user):
+        log.debug("Deleting image %d" % image.pk)
+        image.purge_caches = False
+        image.delete(force_policy=HARD_DELETE)
 
 
 def persistent_message_post_save(sender, instance, **kwargs):

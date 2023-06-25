@@ -167,7 +167,7 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
-        if force is not None:
+        if force is not None and request.user.is_superuser:
             if revision_label in (None, 'None', 0, '0'):
                 image.thumbnail_invalidate()
             else:
@@ -213,7 +213,7 @@ class ImageRawThumbView(ImageDetailViewBase):
         revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
-        if force is not None:
+        if force is not None and request.user.is_superuser:
             if revision_label in (None, 'None', 0, '0'):
                 image.thumbnail_invalidate()
             else:
@@ -707,15 +707,19 @@ class ImageDetailView(ImageDetailViewBase):
                                      and instance_to_platesolve.solution.status >= Solver.SUCCESS
                              ),
             'show_advanced_solution': (
-                                              instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
-                                              and instance_to_platesolve.solution
-                                              and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
-                                      )
-                                      or (
-                                              mod == 'solved'
-                                              and instance_to_platesolve.solution
-                                              and instance_to_platesolve.solution.status >= Solver.ADVANCED_SUCCESS
-                                      ),
+                instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
+                and instance_to_platesolve.solution
+                and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
+            ) or (
+                mod == 'solved'
+                and instance_to_platesolve.solution
+                and instance_to_platesolve.solution.status >= Solver.ADVANCED_SUCCESS
+            ),
+            'show_advanced_solution_on_full': (
+                instance_to_platesolve.mouse_hover_image != MouseHoverImage.NOTHING
+                and instance_to_platesolve.solution
+                and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
+            ),
             'advanced_solution_last_live_log_entry':
                 PlateSolvingAdvancedLiveLogEntry.objects.filter(
                     serial_number=instance_to_platesolve.solution.pixinsight_serial_number) \
@@ -765,6 +769,7 @@ class ImageDetailView(ImageDetailViewBase):
                 user=self.request.user
             ) if self.request.user.is_authenticated else None,
             'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
+            'in_collections': Collection.objects.filter(user=image.user, images=image),
             'auto_submit_to_iotd_tp_process_form': AutoSubmitToIotdTpProcessForm() \
                 if self.request.user.is_authenticated \
                 else None,
@@ -1030,10 +1035,10 @@ class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()
-        if not image.is_wip:
-            image.is_wip = True
-            image.save(keep_deleted=True)
-            messages.success(request, _("Image moved to the staging area."))
+
+        ImageService(image).demote_to_staging_area()
+
+        messages.success(request, _("Image moved to the staging area."))
 
         return super(ImageDemoteView, self).post(request, args, kwargs)
 

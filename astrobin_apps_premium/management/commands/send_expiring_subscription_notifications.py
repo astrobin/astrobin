@@ -2,15 +2,13 @@
 from datetime import datetime, timedelta
 
 # Django
-from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.urls import reverse
-
 # Third party
 from subscription.models import UserSubscription
 
 # AstroBin
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class Command(BaseCommand):
@@ -20,16 +18,16 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         user_subscriptions = UserSubscription.objects\
             .filter(
-                subscription__name__in = [
-                    "AstroBin Lite",
-                    "AstroBin Premium",
-                    "AstroBin Lite 2020+",
-                    "AstroBin Premium 2020+",
-                    "AstroBin Ultimate 2020+",
+                subscription__name__in=[
+                    SubscriptionName.LITE_CLASSIC,
+                    SubscriptionName.PREMIUM_CLASSIC,
+                    SubscriptionName.LITE_2020,
+                    SubscriptionName.PREMIUM_2020,
+                    SubscriptionName.ULTIMATE_2020,
                 ],
             active=True,
-            expires = datetime.now() + timedelta(days = 7))\
-            .exclude(subscription__recurrence_unit = None)
+            expires=datetime.now() + timedelta(days=7)
+        )
 
         for user_subscription in user_subscriptions:
             push_notification([user_subscription.user], None, 'expiring_subscription', {

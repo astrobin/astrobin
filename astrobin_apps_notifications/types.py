@@ -277,6 +277,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'subscription_canceled',
+        _("Subscription canceled"),
+        '',
+        2
+    ),
+    (
         'iotd_staff_inactive_removal_notice',
         _("You were removed from the IOTD staff"),
         '',

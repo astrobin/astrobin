@@ -1,15 +1,17 @@
 import django_filters
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q, QuerySet
 from django_filters.rest_framework import FilterSet
 
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
+from toggleproperties.models import ToggleProperty
 
 
 class EquipmentItemFilter(FilterSet):
     pending_review = django_filters.BooleanFilter(method='has_pending_review')
     pending_edit = django_filters.BooleanFilter(method='has_pending_edit_proposals')
+    followed = django_filters.BooleanFilter(method='is_followed')
 
     def has_pending_review(self, queryset: QuerySet, value, *args, **kwargs):
         condition = args[0]
@@ -42,6 +44,19 @@ class EquipmentItemFilter(FilterSet):
 
         if self.request.user.is_authenticated:
             queryset = queryset.exclude(edit_proposals__edit_proposal_by=self.request.user)
+
+        return queryset.distinct().order_by('-created')
+
+    def is_followed(self, queryset: QuerySet, value, *args, **kwargs):
+        condition = args[0]
+
+        if condition:
+            toggle_properties = ToggleProperty.objects.filter(
+                user=self.request.user,
+                property_type='follow',
+                content_type=ContentType.objects.get_for_model(self.Meta.model),
+            )
+            queryset = queryset.filter(pk__in=[int(x) for x in toggle_properties.values_list('object_id', flat=True)])
 
         return queryset.distinct().order_by('-created')
 

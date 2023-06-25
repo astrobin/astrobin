@@ -17,65 +17,65 @@ from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvin
 class TestImageService(TestCase):
     def test_get_revisions_with_title_or_description_only_description(self):
         image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image)
-        Generators.imageRevision(image=image, label='C', description='Foo')
+        Generators.image_revision(image=image)
+        Generators.image_revision(image=image, label='C', description='Foo')
 
         self.assertEqual(ImageService(image).get_revisions_with_title_or_description().count(), 1)
 
     def test_get_revisions_with_title_or_description_only_title(self):
         image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image)
-        Generators.imageRevision(image=image, label='C', title='Foo')
+        Generators.image_revision(image=image)
+        Generators.image_revision(image=image, label='C', title='Foo')
 
         self.assertEqual(ImageService(image).get_revisions_with_title_or_description().count(), 1)
 
     def test_get_revisions_with_title_or_description_only_title_but_empty(self):
         image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image)
-        Generators.imageRevision(image=image, label='C', title='')
+        Generators.image_revision(image=image)
+        Generators.image_revision(image=image, label='C', title='')
 
         self.assertEqual(ImageService(image).get_revisions_with_title_or_description().count(), 0)
 
     def test_get_revisions_with_title_or_description(self):
         image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image)
-        Generators.imageRevision(image=image, label='C', title='Foo', description='Bar')
+        Generators.image_revision(image=image)
+        Generators.image_revision(image=image, label='C', title='Foo', description='Bar')
 
         self.assertEqual(ImageService(image).get_revisions_with_title_or_description().count(), 1)
 
     def test_get_next_available_revision_label(self):
         image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image)
+        Generators.image_revision(image=image)
         self.assertEqual(ImageService(image).get_next_available_revision_label(), 'C')
 
     def test_get_next_available_revision_label_after_z(self):
         image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image, label='Z')
+        Generators.image_revision(image=image, label='Z')
         self.assertEqual(ImageService(image).get_next_available_revision_label(), 'BA')
 
     def test_get_next_available_revision_label_with_deleted_revision(self):
         image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image)
-        to_delete = Generators.imageRevision(image=image, label='C')
+        Generators.image_revision(image=image)
+        to_delete = Generators.image_revision(image=image, label='C')
         to_delete.delete()
         self.assertEqual(ImageService(image).get_next_available_revision_label(), 'D')
 
     def test_get_revision(self):
         image = Generators.image(is_wip=True)
-        revision = Generators.imageRevision(image=image)
+        revision = Generators.image_revision(image=image)
         self.assertEqual(ImageService(image).get_revision(revision.label), revision)
 
     def test_get_final_revision_label(self):
         image = Generators.image(is_wip=True)
-        revision = Generators.imageRevision(image=image, is_final=True)
+        revision = Generators.image_revision(image=image, is_final=True)
         self.assertEqual(ImageService(image).get_final_revision_label(), revision.label)
-        another = Generators.imageRevision(image=image, is_final=True, label='C')
+        another = Generators.image_revision(image=image, is_final=True, label='C')
         self.assertEqual(ImageService(image).get_final_revision_label(), another.label)
 
     def test_get_final_revision(self):
         image = Generators.image(is_wip=True)
-        final = Generators.imageRevision(image=image, is_final=True)
-        Generators.imageRevision(image=image, is_final=False, label='C')
+        final = Generators.image_revision(image=image, is_final=True)
+        Generators.image_revision(image=image, is_final=False, label='C')
         self.assertEqual(ImageService(image).get_final_revision(), final)
 
     def test_get_default_cropping(self):
@@ -86,7 +86,7 @@ class TestImageService(TestCase):
     @patch.object(ImageService, 'get_revision')
     def test_get_default_cropping_revision(self, get_revision):
         image = Generators.image(is_wip=True)
-        revision = Generators.imageRevision(image=image)
+        revision = Generators.image_revision(image=image)
         revision.w = revision.h = 1000
         get_revision.return_value = revision
         self.assertEqual(ImageService(image).get_default_cropping(revision_label=revision.label), '0,0,1000,1000')
@@ -247,7 +247,7 @@ class TestImageService(TestCase):
         image = Generators.image()
         image_solution = PlateSolvingGenerators.solution(image)
 
-        revision = Generators.imageRevision(image=image)
+        revision = Generators.image_revision(image=image)
         revision_solution = PlateSolvingGenerators.solution(revision)
 
         image_solution.dec = 1
@@ -273,7 +273,7 @@ class TestImageService(TestCase):
 
     def test_delete_original_preserves_title_and_description(self):
         image = Generators.image(image_file='original.jpg', title='Foo', description='Foo')
-        revision = Generators.imageRevision(image=image, image_file='revision.jpg', title='Bar', description='Bar')
+        revision = Generators.image_revision(image=image, image_file='revision.jpg', title='Bar', description='Bar')
 
         ImageService(image).delete_original()
 
@@ -287,7 +287,7 @@ class TestImageService(TestCase):
         original_title = Generators.randomString(128)
         revision_title = Generators.randomString(10)
         image = Generators.image(image_file='original.jpg', title=original_title)
-        Generators.imageRevision(image=image, image_file='revision.jpg', title=revision_title)
+        Generators.image_revision(image=image, image_file='revision.jpg', title=revision_title)
 
         ImageService(image).delete_original()
 
@@ -297,7 +297,7 @@ class TestImageService(TestCase):
 
     def test_delete_original_preserves_title_and_description_when_original_has_none(self):
         image = Generators.image(image_file='original.jpg', title='Foo')
-        revision = Generators.imageRevision(image=image, image_file='revision.jpg', title='Bar', description='Bar')
+        revision = Generators.image_revision(image=image, image_file='revision.jpg', title='Bar', description='Bar')
 
         ImageService(image).delete_original()
 
@@ -309,7 +309,7 @@ class TestImageService(TestCase):
 
     def test_delete_original_preserves_title_and_description_when_deleted_revision_has_none(self):
         image = Generators.image(image_file='original.jpg', title='Foo')
-        revision = Generators.imageRevision(image=image, image_file='revision.jpg')
+        revision = Generators.image_revision(image=image, image_file='revision.jpg')
 
         ImageService(image).delete_original()
 
@@ -323,7 +323,7 @@ class TestImageService(TestCase):
         image = Generators.image(image_file='original.jpg')
         PlateSolvingGenerators.solution(image, image_file='original_solution.jpg')
 
-        revision = Generators.imageRevision(image=image, image_file='revision.jpg')
+        revision = Generators.image_revision(image=image, image_file='revision.jpg')
         revision_solution = PlateSolvingGenerators.solution(revision, image_file='revision_solution.jpg')
 
         ImageService(image).delete_original()
@@ -337,7 +337,7 @@ class TestImageService(TestCase):
 
     def test_delete_original_when_one_revision_and_revision_is_final(self):
         image = Generators.image(image_file='original.jpg', is_final=False)
-        Generators.imageRevision(image=image, image_file='revision.jpg', is_final=True)
+        Generators.image_revision(image=image, image_file='revision.jpg', is_final=True)
 
         ImageService(image).delete_original()
 
@@ -346,8 +346,8 @@ class TestImageService(TestCase):
 
     def test_delete_original_when_two_revisions_and_original_is_final(self):
         image = Generators.image(image_file='original.jpg', is_final=True)
-        Generators.imageRevision(image=image, image_file='revision_b.jpg', is_final=False, label='B')
-        Generators.imageRevision(image=image, image_file='revision_c.jpg', is_final=False, label='C')
+        Generators.image_revision(image=image, image_file='revision_b.jpg', is_final=False, label='B')
+        Generators.image_revision(image=image, image_file='revision_c.jpg', is_final=False, label='C')
 
         ImageService(image).delete_original()
 
@@ -359,8 +359,8 @@ class TestImageService(TestCase):
 
     def test_delete_original_when_two_revisions_and_B_is_final(self):
         image = Generators.image(image_file='original.jpg', is_final=False)
-        Generators.imageRevision(image=image, image_file='revision_b.jpg', is_final=True, label='B')
-        Generators.imageRevision(image=image, image_file='revision_c.jpg', is_final=False, label='C')
+        Generators.image_revision(image=image, image_file='revision_b.jpg', is_final=True, label='B')
+        Generators.image_revision(image=image, image_file='revision_c.jpg', is_final=False, label='C')
 
         ImageService(image).delete_original()
 
@@ -371,8 +371,8 @@ class TestImageService(TestCase):
 
     def test_delete_original_when_two_revisions_and_C_is_final(self):
         image = Generators.image(image_file='original.jpg', is_final=False)
-        Generators.imageRevision(image=image, image_file='revision_b.jpg', is_final=False, label='B')
-        Generators.imageRevision(image=image, image_file='revision_c.jpg', is_final=True, label='C')
+        Generators.image_revision(image=image, image_file='revision_b.jpg', is_final=False, label='B')
+        Generators.image_revision(image=image, image_file='revision_c.jpg', is_final=True, label='C')
 
         ImageService(image).delete_original()
 
@@ -386,8 +386,8 @@ class TestImageService(TestCase):
 
     def test_delete_original_preserves_mouse_hover_settings(self):
         image = Generators.image(image_file='original.jpg', is_final=False)
-        b = Generators.imageRevision(image=image, image_file='revision_b.jpg', is_final=False, label='B')
-        c = Generators.imageRevision(image=image, image_file='revision_c.jpg', is_final=True, label='C')
+        b = Generators.image_revision(image=image, image_file='revision_b.jpg', is_final=False, label='B')
+        c = Generators.image_revision(image=image, image_file='revision_c.jpg', is_final=True, label='C')
 
         ImageRevision.objects.filter(id=b.id).update(mouse_hover_image=f'REVISION__{c.label}')
 

@@ -1,0 +1,99 @@
+{
+  "id": "evt_1NLunFC0tT6bv7HdhCXXpKsg",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1687468313,
+  "data": {
+    "object": {
+      "id": "cs_test_b11kYMyzs6ZzuzKWdyObThe43tb11quvr8cpNkwnCTM51SDTtBDnsjqoD4",
+      "object": "checkout.session",
+      "after_expiration": null,
+      "allow_promotion_codes": true,
+      "amount_subtotal": 6700,
+      "amount_total": 6700,
+      "automatic_tax": {
+        "enabled": false,
+        "status": null
+      },
+      "billing_address_collection": null,
+      "cancel_url": "http://localhost:4400/subscriptions/cancelled/",
+      "client_reference_id": "2",
+      "consent": null,
+      "consent_collection": null,
+      "created": 1687465597,
+      "currency": "usd",
+      "currency_conversion": null,
+      "custom_fields": [
+      ],
+      "custom_text": {
+        "shipping_address": null,
+        "submit": null
+      },
+      "customer": "STRIPE_CUSTOMER_ID",
+      "customer_creation": "always",
+      "customer_details": {
+        "address": {
+          "city": null,
+          "country": "CH",
+          "line1": null,
+          "line2": null,
+          "postal_code": null,
+          "state": null
+        },
+        "email": "astrobin@astrobin.com",
+        "name": "Test",
+        "phone": null,
+        "tax_exempt": "none",
+        "tax_ids": [
+        ]
+      },
+      "customer_email": "astrobin@astrobin.com",
+      "expires_at": 1687551997,
+      "invoice": "in_1NLu5gC0tT6bv7Hdc6scsqIX",
+      "invoice_creation": null,
+      "livemode": false,
+      "locale": null,
+      "metadata": {
+        "autorenew": "true",
+        "product": "premium",
+        "recurring-unit": "yearly"
+      },
+      "mode": "subscription",
+      "payment_intent": null,
+      "payment_link": null,
+      "payment_method_collection": "always",
+      "payment_method_options": null,
+      "payment_method_types": [
+        "card"
+      ],
+      "payment_status": "paid",
+      "phone_number_collection": {
+        "enabled": false
+      },
+      "recovered_from": null,
+      "setup_intent": null,
+      "shipping": null,
+      "shipping_address_collection": null,
+      "shipping_options": [
+      ],
+      "shipping_rate": null,
+      "status": "complete",
+      "submit_type": null,
+      "subscription": "sub_1NLu5gC0tT6bv7HdjyJClU3F",
+      "success_url": "http://localhost:4400/subscriptions/success?product=premium&session_id={CHECKOUT_SESSION_ID}",
+      "total_details": {
+        "amount_discount": 0,
+        "amount_shipping": 0,
+        "amount_tax": 0
+      },
+      "url": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": null,
+    "idempotency_key": null
+  },
+  "type": "checkout.session.completed"
+}

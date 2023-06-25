@@ -8,6 +8,7 @@ import zipfile
 from datetime import datetime, timedelta
 from io import StringIO
 from time import sleep
+from typing import List
 from zipfile import ZipFile
 
 import requests
@@ -33,11 +34,14 @@ from hitcount.models import HitCount
 from pybb.models import Post
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
+from safedelete import HARD_DELETE
 
 from astrobin.models import (
     BroadcastEmail, CameraRenameProposal, DataDownloadRequest, Gear, GearMigrationStrategy,
-    Image, ImageRevision,
+    Image, ImageRevision, UserProfile,
 )
+from astrobin.services import CloudflareService
+from astrobin.services.cloudfront_service import CloudFrontService
 from astrobin.services.gear_service import GearService
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.services import ImageService
@@ -716,6 +720,37 @@ def update_index(content_type_pk, object_pk):
 
     content_type = ContentType.objects.get(pk=content_type_pk)
     model_class = content_type.model_class()
-    instance = model_class.objects.get(pk=object_pk)
+
+    try:
+        instance = model_class.objects.get(pk=object_pk)
+    except model_class.DoesNotExist:
+        # The object was deleted before the task was executed.
+        return
 
     signal_processor.enqueue_save(model_class, instance)
+
+
+@shared_task(time_limit=3600, acks_late=False)
+def hard_delete_deleted_users():
+    profiles = UserProfile.deleted_objects.filter(deleted__lt=DateTimeService.now() - timedelta(days=365))
+    for profile in profiles.iterator():
+        logger.info("hard_delete_deleted_users: deleting %d" % profile.user.id)
+        try:
+            profile.user.delete()
+        except Exception as e:
+            logger.error("hard_delete_deleted_users: error %s" % str(e))
+            continue
+
+
+@shared_task(
+    time_limit=30,
+    acks_late=True,
+    rate_limit="6/m",
+    autoretry_for=(Exception,),
+    retry_backoff=True,
+    retry_jitter=True,
+    max_retries=5
+)
+def invalidate_cdn_caches(paths: List[str]):
+    CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation(paths)
+    CloudflareService().purge_cache(paths)

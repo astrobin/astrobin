@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 21:34+0000\n"
-"PO-Revision-Date: 2023-03-22 22:30+0100\n"
+"POT-Creation-Date: 2023-05-15 08:00+0000\n"
+"PO-Revision-Date: 2023-05-15 09:53+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.27 20230321-1\n"
+"X-Loco-Api-Version: 1.0.28 20230504-1\n"
 
 msgid "United Kingdom"
 msgstr "Royaume-Uni"
@@ -920,6 +920,17 @@ msgstr "Longitude (secondes)"
 msgid "Are you a robot?"
 msgstr "Etes-vous un robot ?"
 
+msgid ""
+"This email address was not found in our database. Email address might be "
+"case sensitive."
+msgstr ""
+
+msgid ""
+"We found more than one account associated with this email address and we "
+"cannot proceed with this operation. Please get in touch with support to "
+"resolve the issue."
+msgstr ""
+
 msgid "Recipients"
 msgstr "Destinataires"
 
@@ -1019,6 +1030,11 @@ msgstr "Ne plus suivre"
 
 msgid "Follow"
 msgstr "S'abonner"
+
+msgid ""
+"Your account is temporarily or permanently suspended. If you believe this is "
+"in error, please get in touch using the Help menu."
+msgstr ""
 
 msgid "None (All rights reserved)"
 msgstr "Aucun (Tous droits réservés)"
@@ -1918,6 +1934,12 @@ msgstr "Prix des abonnements trop élevés"
 
 msgid "I prefer not to say"
 msgstr "Je préfère ne pas le dire"
+
+msgid "Suspended"
+msgstr ""
+
+msgid "Suspension reason"
+msgstr ""
 
 msgid "Allow others to see when you created your AstroBin account"
 msgstr ""
@@ -3448,8 +3470,8 @@ msgstr "(beta)"
 msgid "Help"
 msgstr "Aide"
 
-msgid "Contact"
-msgstr "Contact"
+msgid "Support"
+msgstr ""
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "Désirez-vous utiliser votre vrai nom sur AstroBin ?"
@@ -3674,6 +3696,9 @@ msgstr "Me retirer"
 
 msgid "Acquired at"
 msgstr "Acquisitions réalisées à"
+
+msgid "In these collections"
+msgstr ""
 
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -4745,6 +4770,9 @@ msgstr "Si ces données sont incomplètes ou incorrectes, veuillez les corrigez.
 
 msgid "What is this site?"
 msgstr "AstroBin, c'est quoi ?"
+
+msgid "Contact"
+msgstr "Contact"
 
 msgid "Gallery"
 msgstr "Galerie"
@@ -6814,6 +6842,14 @@ msgid ""
 "time password token via e-mail."
 msgstr ""
 
+msgid "Don't want this next time?"
+msgstr ""
+
+msgid ""
+"Remember that you can disable two-factor authentication in your settings "
+"after logging in."
+msgstr ""
+
 msgid "As a last resort, you can use a backup token:"
 msgstr ""
 
@@ -6989,16 +7025,9 @@ msgid ""
 "will be displayed in\n"
 "                                        <a href=\"%(profile_url)s\">your "
 "profile</a> and here on the home page. You can\n"
-"                                        <a href=\"%(flickr_url)s\">import "
-"from Flickr</a> too."
+"                                        <a data-no-instant href="
+"\"%(flickr_url)s\">import from Flickr</a> too."
 msgstr ""
-"Utilisez ce bouton pour publier une image dans votre\n"
-"                                        <strong>Galerie publique</strong>. "
-"Celle-ci sera visible sur\n"
-"                                     <a href=\"%(profile_url)s\">votre "
-"profil</a> et ici sur la page d'accueil. Vous pouvez également\n"
-"                                     <a href=\"%(flickr_url)s\">importer une "
-"image depuis Flickr</a>."
 
 msgid "Your API Keys"
 msgstr "Vos clés API"
@@ -7323,6 +7352,11 @@ msgstr "Quelle série"
 msgid "Import photos"
 msgstr "Importer des images"
 
+msgid ""
+"We couldn't find any albums or sets in your Flickr account. Please create a "
+"Flickr album and place the images you want to import there."
+msgstr ""
+
 msgid "Authenticate with Flickr"
 msgstr "Identification avec Flickr"
 
@@ -7447,6 +7481,17 @@ msgstr "Restaurer les images sélectionnées"
 
 msgid "Empty trash"
 msgstr "Corbeille vide"
+
+msgid "Account suspended"
+msgstr ""
+
+msgid ""
+"\n"
+"            Your account is temporarily or permanently suspended. If you "
+"believe this is in error, please get in touch\n"
+"            using the Help menu.\n"
+"        "
+msgstr ""
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -8611,6 +8656,23 @@ msgstr ""
 
 #~ msgid "Global trend of telescope types"
 #~ msgstr "Tendance globale des types d'instruments"
+
+#~ msgid ""
+#~ "Use this button to upload an image to the\n"
+#~ "                                        <strong>Public Area</strong>. It "
+#~ "will be displayed in\n"
+#~ "                                        <a href=\"%(profile_url)s\">your "
+#~ "profile</a> and here on the home page. You can\n"
+#~ "                                        <a href=\"%(flickr_url)s\">import "
+#~ "from Flickr</a> too."
+#~ msgstr ""
+#~ "Utilisez ce bouton pour publier une image dans votre\n"
+#~ "                                        <strong>Galerie publique</"
+#~ "strong>. Celle-ci sera visible sur\n"
+#~ "                                     <a href=\"%(profile_url)s\">votre "
+#~ "profil</a> et ici sur la page d'accueil. Vous pouvez également\n"
+#~ "                                     <a href=\"%(flickr_url)s\">importer "
+#~ "une image depuis Flickr</a>."
 
 #~ msgid ""
 #~ "Hey <strong>%(user)s</strong>! I just wanted to let you know that you "

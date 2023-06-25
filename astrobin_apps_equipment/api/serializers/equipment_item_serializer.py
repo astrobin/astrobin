@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 
 from astrobin.utils import get_client_country_code
@@ -14,6 +15,8 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
     brand_name = serializers.SerializerMethodField(read_only=True)
     variants = serializers.SerializerMethodField(read_only=True)
     listings = serializers.SerializerMethodField(read_only=True)
+    followed = serializers.SerializerMethodField(read_only=True)
+    content_type = serializers.SerializerMethodField(read_only=True)
 
     def get_brand_name(self, item):
         if item.brand:
@@ -61,6 +64,17 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             allow_full_retailer_integration=allow_full_retailer_integration,
         )
 
+    def get_followed(self, item):
+        request = self.context.get("request")
+
+        if request is None or not request.user.is_authenticated:
+            return False
+
+        return EquipmentItemService(item).is_followed_by_user(request.user)
+
+    def get_content_type(self, item):
+        return ContentType.objects.get_for_model(item).id
+
     def to_representation(self, item: EquipmentItem):
         ret = super().to_representation(item)
 
@@ -88,7 +102,9 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             'name',
             'website',
             'image',
-            'variant_of'
+            'variant_of',
+            'followed',
+            'content_type',
         ]
         read_only_fields = ['image']
         abstract = True

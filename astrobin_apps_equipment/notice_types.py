@@ -13,4 +13,5 @@ EQUIPMENT_NOTICE_TYPES = (
     ('equipment-item-migration-approved', _('Approved migration proposal of an equipment item'), '', 2),
     ('equipment-item-migration-rejected', _('Rejected migration proposal of an equipment item'), '', 2),
     ('ambiguous-item-removed-from-presets', _('Ambiguous equipment item removed from presets'), '', 2),
+    ('new-image-from-followed-equipment', _('New image from followed equipment item'), '', 2),
 )

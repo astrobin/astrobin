@@ -25,6 +25,7 @@ from astrobin.gear import get_correct_gear, is_gear_complete
 from astrobin.models import GearUserInfo, Image, LICENSE_CHOICES, UserProfile
 from astrobin.services.gear_service import GearService
 from astrobin.services.utils_service import UtilsService
+from astrobin.types import cookie_definitions
 from astrobin.utils import (
     dec_decimal_precision_from_pixel_scale, decimal_to_degrees_minutes_seconds_html,
     decimal_to_hours_minutes_seconds_html, get_client_country_code, get_image_resolution,
@@ -166,10 +167,18 @@ def search_image_list(context, paginate=True, **kwargs):
     if telescope or camera or q:
         equipment_brand_listings = EquipmentBrandListing.objects \
             .annotate(distance=TrigramDistance('brand__name', telescope or camera or q)) \
-            .filter(distance__lte=.85, retailer__countries__icontains=country)
+            .filter(
+            Q(distance__lte=.85) & Q(
+                Q(retailer__countries__icontains=country) | Q(retailer__countries__isnull=True)
+            )
+        )
         equipment_item_listings = EquipmentItemListing.objects \
             .annotate(distance=TrigramDistance('name', telescope or camera or q)) \
-            .filter(distance__lte=.5, retailer__countries__icontains=country)
+            .filter(
+            Q(distance__lte=.5) & Q(
+                Q(retailer__countries__icontains=country) | Q(retailer__countries__isnull=True)
+            )
+        )
 
     context.update({
         'paginate': paginate,
@@ -422,8 +431,7 @@ def show_skyscraper_ads_on_page(context):
                 requested_user_valid_usersubscription = PremiumService(data['requested_user']).get_valid_usersubscription()
                 image_owner_is_ultimate = is_any_ultimate(requested_user_valid_usersubscription)
 
-    return (is_anon or is_free(valid_subscription)) and not image_owner_is_ultimate and \
-           (context["COOKIELAW_ACCEPTED"] is not False or not show_cookie_banner(context.request))
+    return (is_anon or is_free(valid_subscription)) and not image_owner_is_ultimate
 
 
 @register.filter()
@@ -503,6 +511,16 @@ def has_subscription_by_name(user, name):
 
     return UserSubscription.objects.filter(
         user=user, subscription__name=name).count() > 0
+
+
+@register.filter
+def has_active_uncanceled_subscription_by_name(user, name):
+    if user.is_anonymous:
+        return False
+
+    return UserSubscription.objects.filter(
+        user=user, subscription__name=name, active=True, cancelled=False, expires__gte=date.today()
+    ).count() > 0
 
 
 @register.filter
@@ -823,9 +841,9 @@ def show_uploads_used(user_subscription: UserSubscription):
 
 
 @register.filter
-def show_cookie_banner(request):
+def is_gdpr_country(request):
     country = utils.get_client_country_code(request)
-    return country is None or country.lower() in utils.get_european_union_country_codes()
+    return country is not None and country.upper() in utils.get_gdpr_country_codes()
 
 
 @register.filter
@@ -920,3 +938,8 @@ def participation_is_deleted(thread: Thread, user: User) -> bool:
 @register.filter
 def has_unmigrated_legacy_gear_items(user: User) -> bool:
     return GearService.has_unmigrated_legacy_gear_items(user)
+
+
+@register.filter
+def cookie_description(cookie_name: str) -> str:
+    return cookie_definitions.get(cookie_name, '')

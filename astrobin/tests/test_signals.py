@@ -5,8 +5,9 @@ import mock
 from django.test import TestCase, override_settings
 from django.utils import timezone
 from mock import patch
+from safedelete import HARD_DELETE
 
-from astrobin.models import Image
+from astrobin.models import Image, ImageRevision, UserProfile
 from astrobin.signals import imagerevision_post_save
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
@@ -19,7 +20,7 @@ class SignalsTest(TestCase):
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
     def test_imagerevision_post_save_wip_no_notifications(self, add_story, push_notification):
-        revision = Generators.imageRevision()
+        revision = Generators.image_revision()
         revision.image.is_wip = True
 
         push_notification.reset_mock()
@@ -33,7 +34,7 @@ class SignalsTest(TestCase):
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
     def test_imagerevision_post_save_not_created_no_notifications(self, add_story, push_notification):
-        revision = Generators.imageRevision()
+        revision = Generators.image_revision()
 
         push_notification.reset_mock()
         add_story.reset_mock()
@@ -46,7 +47,7 @@ class SignalsTest(TestCase):
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
     def test_imagerevision_post_save_skip_notifications(self, add_story, push_notification):
-        revision = Generators.imageRevision()
+        revision = Generators.image_revision()
         revision.skip_notifications = True
 
         push_notification.reset_mock()
@@ -60,7 +61,7 @@ class SignalsTest(TestCase):
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
     def test_imagerevision_post_save_uploading(self, add_story, push_notification):
-        revision = Generators.imageRevision()
+        revision = Generators.image_revision()
         revision.uploader_in_progress = True
 
         push_notification.reset_mock()
@@ -73,7 +74,7 @@ class SignalsTest(TestCase):
 
     @patch("astrobin.signals.add_story")
     def test_imagerevision_post_save(self, add_story):
-        revision = Generators.imageRevision()
+        revision = Generators.image_revision()
 
         add_story.reset_mock()
 
@@ -573,3 +574,117 @@ class SignalsTest(TestCase):
                 ),
             ]
         )
+
+    def test_soft_deleting_image_soft_deletes_revisions(self):
+        image = Generators.image()
+        Generators.image_revision(image=image)
+
+        self.assertEquals(1, ImageRevision.objects.count())
+
+        image.delete()
+
+        # Image revision is not deleted: easier in case the image is restored later.
+        self.assertEquals(1, ImageRevision.objects.count())
+        self.assertEquals(0, ImageRevision.deleted_objects.count())
+
+        self.assertEquals(1, Image.deleted_objects.count())
+
+    def test_hard_deleting_image_hard_deletes_revisions(self):
+        image = Generators.image()
+
+        Generators.image_revision(image=image)
+
+        image.delete(force_policy=HARD_DELETE)
+
+        self.assertEquals(0, ImageRevision.deleted_objects.count())
+
+    def test_soft_deleting_userprofile_soft_deletes_images(self):
+        user = Generators.user()
+        Generators.image(user=user)
+
+        self.assertEquals(1, Image.objects.count())
+
+        profile = UserProfile.objects.get(user=user)
+        profile.delete()
+
+        self.assertEquals(0, Image.objects.count())
+        self.assertEquals(1, Image.deleted_objects.count())
+        self.assertEquals(1, UserProfile.deleted_objects.count())
+        self.assertEquals(0, UserProfile.objects.count())
+
+    def test_hard_deleting_userprofile_hard_deletes_images_and_revisions(self):
+        user = Generators.user()
+        image = Generators.image(user=user)
+        Generators.image_revision(image=image)
+
+        profile = UserProfile.objects.get(user=user)
+        profile.delete()
+
+        self.assertEquals(1, Image.deleted_objects.count())
+        self.assertEquals(1, ImageRevision.deleted_objects.count())
+
+        profile.delete(force_policy=HARD_DELETE)
+
+        self.assertEquals(0, Image.all_objects.count())
+        self.assertEquals(0, ImageRevision.all_objects.count())
+
+    def test_deleting_user_deletes_follow_toggle_properties(self):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        ToggleProperty.objects.create(
+            property_type='follow',
+            user=user1,
+            content_object=user2
+        )
+
+        user1.delete()
+
+        self.assertEquals(0, ToggleProperty.objects.count())
+
+    def test_deleting_user_deletes_follow_toggle_properties_in_reverse(self):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        ToggleProperty.objects.create(
+            property_type='follow',
+            user=user2,
+            content_object=user1
+        )
+
+        user1.delete()
+
+        self.assertEquals(0, ToggleProperty.objects.count())
+
+    def test_deleting_user_deletes_bookmark_toggle_properties(self):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        image = Generators.image(user=user2)
+
+        ToggleProperty.objects.create(
+            property_type='bookmark',
+            user=user1,
+            content_object=image
+        )
+
+        user1.delete()
+
+        self.assertEquals(0, ToggleProperty.objects.count())
+
+    def test_deleting_user_does_not_delete_like_toggle_properties(self):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        image = Generators.image(user=user2)
+
+        ToggleProperty.objects.create(
+            property_type='like',
+            user=user1,
+            content_object=image
+        )
+
+        user1.delete()
+
+        self.assertEquals(1, ToggleProperty.objects.count())
+        self.assertIsNone(ToggleProperty.objects.first().user)

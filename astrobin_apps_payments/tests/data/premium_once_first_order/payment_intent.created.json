@@ -1,0 +1,77 @@
+{
+  "id": "evt_3NByAGC0tT6bv7Hd0hW4teaX",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1685097992,
+  "data": {
+    "object": {
+      "id": "pi_3NByAGC0tT6bv7Hd0rdC07q5",
+      "object": "payment_intent",
+      "amount": 2100,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {
+        }
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+      "cancellation_reason": null,
+      "capture_method": "automatic",
+      "charges": {
+        "object": "list",
+        "data": [
+        ],
+        "has_more": false,
+        "total_count": 0,
+        "url": "/v1/charges?payment_intent=pi_3NByAGC0tT6bv7Hd0rdC07q5"
+      },
+      "client_secret": "pi_3NByAGC0tT6bv7Hd0rdC07q5_secret_L6jDSKDv5zipwPgDUL40jz92n",
+      "confirmation_method": "automatic",
+      "created": 1685097992,
+      "currency": "usd",
+      "customer": null,
+      "description": null,
+      "invoice": null,
+      "last_payment_error": null,
+      "latest_charge": null,
+      "livemode": false,
+      "metadata": {
+      },
+      "next_action": null,
+      "on_behalf_of": null,
+      "payment_method": null,
+      "payment_method_options": {
+        "card": {
+          "installments": null,
+          "mandate_options": null,
+          "network": null,
+          "request_three_d_secure": "automatic"
+        }
+      },
+      "payment_method_types": [
+        "card"
+      ],
+      "processing": null,
+      "receipt_email": null,
+      "review": null,
+      "setup_future_usage": null,
+      "shipping": null,
+      "source": null,
+      "statement_descriptor": null,
+      "statement_descriptor_suffix": null,
+      "status": "requires_payment_method",
+      "transfer_data": null,
+      "transfer_group": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": "req_rtAKzjRniBDZGW",
+    "idempotency_key": "c1779410-eb1c-4915-98bd-d7c70dcb30b4"
+  },
+  "type": "payment_intent.created"
+}

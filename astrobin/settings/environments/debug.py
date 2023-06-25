@@ -36,5 +36,6 @@ if DEBUG:
     ]
 
     CELERY_ALWAYS_EAGER = True
+    CELERY_TASK_ALWAYS_EAGER = True
 
     STATICFILES_STORAGE = 'pipeline.storage.NonPackagingPipelineStorage'

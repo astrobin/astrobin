@@ -5,6 +5,7 @@ from django.test import TestCase, override_settings
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.permissions import may_unelect_iotd
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 from common.services import DateTimeService
 
 
@@ -15,7 +16,7 @@ from common.services import DateTimeService
 class IotdPermissionsTest(TestCase):
     def test_may_unelect_iotd_yesterday(self):
         user = Generators.user()
-        Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.datetime.now())
 
         IotdGenerators.submission(image=image)
@@ -28,7 +29,7 @@ class IotdPermissionsTest(TestCase):
 
     def test_may_unelect_iotd_today(self):
         user = Generators.user()
-        Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.datetime.now())
 
         IotdGenerators.submission(image=image)
@@ -39,7 +40,7 @@ class IotdPermissionsTest(TestCase):
 
     def test_may_unelect_iotd_tomorrow(self):
         user = Generators.user()
-        Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.datetime.now())
 
         IotdGenerators.submission(image=image)
@@ -52,7 +53,7 @@ class IotdPermissionsTest(TestCase):
 
     def test_may_unelect_iotd_day_after_tomorrow(self):
         user = Generators.user()
-        Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.datetime.now())
 
         IotdGenerators.submission(image=image)

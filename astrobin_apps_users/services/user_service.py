@@ -582,7 +582,7 @@ class UserService:
             self.user.owned_group_set.filter(name=group_name).exists()
         )
 
-    def set_last_seen(self, country_code):
+    def set_last_seen(self, country_code: str):
         from astrobin.models import UserProfile
 
         try:
@@ -596,6 +596,24 @@ class UserService:
                     profile.last_seen_in_country = None
             else:
                 profile.last_seen_in_country = None
+
+            profile.save(keep_deleted=True)
+        except UserProfile.DoesNotExist:
+            pass
+
+    def set_signup_country(self, country_code: str):
+        from astrobin.models import UserProfile
+
+        try:
+            profile: UserProfile = UserProfile.objects.get(user=self.user)
+
+            if country_code and country_code != 'UNKNOWN':
+                try:
+                    profile.signup_country = country_code.lower()[0:2]
+                except IndexError:
+                    profile.signup_country = None
+            else:
+                profile.signup_country = None
 
             profile.save(keep_deleted=True)
         except UserProfile.DoesNotExist:

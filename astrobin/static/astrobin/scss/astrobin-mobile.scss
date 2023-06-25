@@ -162,23 +162,48 @@
       width: 100%;
       height: auto;
       margin-bottom: 24px;
+      box-shadow: 0 0 .75rem rgba(0, 0, 0, .75);
+
+      &:nth-child(odd) {
+        margin-right: 0 !important;
+      }
+
+      .toggleproperty-add-remove.property-like {
+        top: 8px;
+        right: 0;
+      }
 
       .avatar {
         float: none;
         position: absolute;
         top: 4px;
         left: 4px;
-        z-index: 1;
+        z-index: 2;
       }
 
       .action-object {
         float: none;
         width: 100%;
+        height: auto;
+
+        &.has-like-button .title .inner {
+          padding-right: 35px;
+        }
+
+        .title {
+          top: initial;
+          bottom: initial;
+          position: initial;
+          backdrop-filter: none;
+        }
 
         .verb {
           top: initial;
-          bottom: 0;
+          bottom: initial;
+          position: initial;
           width: 100%;
+          backdrop-filter: none;
+
 
           .verb-inner {
             padding-left: 12px;
@@ -278,8 +303,7 @@
   }
 
   .subtle-container .header {
-    width: calc(100% - 1rem);
-    text-align: center;
+    width: calc(100% - 1.75rem);
 
     .actions {
       right: 20px;

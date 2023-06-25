@@ -7,6 +7,7 @@ from persistent_messages.models import Message
 from subscription.models import Subscription, UserSubscription
 
 from astrobin.models import App, Image
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 from toggleproperties.models import ToggleProperty
 
 
@@ -121,14 +122,14 @@ class APITest(TestCase):
         self.assertContains(self._get(), "\"total_notifications_count\": 1")
         self.assertContains(self._get(), "\"unread_notifications_count\": 0")
 
-    def test_api_userprofilee_premium_subscription(self):
+    def test_api_userprofile_premium_subscription(self):
         self.assertContains(self._get(), "\"premium_subscription\": null")
         self.assertContains(self._get(), "\"premium_subscription_expiration\": null")
 
         group, created = Group.objects.get_or_create(name="astrobin_premium")
 
         premium_sub, created = Subscription.objects.get_or_create(
-            name="AstroBin Premium",
+            name=SubscriptionName.PREMIUM_CLASSIC.value,
             price=1,
             group=group,
             category="premium")

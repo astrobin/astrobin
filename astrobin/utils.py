@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
+from urllib.parse import urlparse
+from typing import List
 
 from django.contrib.auth.models import User
 from django.contrib.gis.geoip2 import GeoIP2
@@ -76,11 +78,13 @@ def get_client_ip(request):
     return ip
 
 
-def get_client_country_code(request):
+def get_client_country_code(request) -> str:
+    default_country = 'UNKNOWN'
+
     try:
-        DEBUG_COUNTRY = request.GET.get('DEBUG_COUNTRY', None)
-        if DEBUG_COUNTRY:
-            return DEBUG_COUNTRY
+        debug_country = request.GET.get('DEBUG_COUNTRY', None)
+        if debug_country:
+            return debug_country
     except AttributeError:
         pass
 
@@ -89,42 +93,43 @@ def get_client_country_code(request):
     try:
         country = geoip2.country_code(get_client_ip(request))
         if country is None:
-            country = "UNKNOWN"
+            country = default_country
         return country
-    except:
-        return "UNKNOWN"
+    except Exception as e:
+        return default_country
 
 
-def get_european_union_country_codes():
-    return (
-        'at',
-        'be',
-        'bg',
-        'cy',
-        'cz',
-        'de',
-        'dk',
-        'ee',
-        'es',
-        'fi',
-        'fr',
-        'gr',
-        'hr',
-        'hu',
-        'ie',
-        'it',
-        'lt',
-        'lu',
-        'lv',
-        'mt',
-        'nl',
-        'po',
-        'pt',
-        'ro',
-        'se',
-        'si',
-        'sk',
-    )
+def get_gdpr_country_codes() -> List[str]:
+    return [
+        'AT',  # Austria
+        'BE',  # Belgium
+        'BG',  # Bulgaria
+        'CY',  # Cyprus
+        'CZ',  # Czech Republic
+        'DE',  # Germany
+        'DK',  # Denmark
+        'EE',  # Estonia
+        'ES',  # Spain
+        'FI',  # Finland
+        'FR',  # France
+        'GB',  # United Kingdom
+        'GR',  # Greece
+        'HR',  # Croatia
+        'HU',  # Hungary
+        'IE',  # Ireland
+        'IT',  # Italy
+        'LT',  # Lithuania
+        'LU',  # Luxembourg
+        'LV',  # Latvia
+        'MT',  # Malta
+        'NL',  # The Netherlands
+        'PL',  # Poland
+        'PT',  # Portugal
+        'RO',  # Romania
+        'SE',  # Sweden
+        'SI',  # Slovenia
+        'SK',  # Slovakia
+    ]
 
 
 def inactive_accounts():
@@ -315,3 +320,7 @@ def degrees_minutes_seconds_to_decimal_degrees(degrees, minutes, seconds, direct
         dd *= -1
 
     return dd
+
+
+def extract_path_from_url(url) -> str:
+    return urlparse(url).path

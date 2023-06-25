@@ -728,6 +728,11 @@ astrobin_common = {
                 return;
             }
 
+            // Skip cookie consent URLs.
+            if (url.indexOf('/cookies/') > -1) {
+                return;
+            }
+
             // Skip endless pagination.
             if ($(event.target).hasClass('endless_more')) {
                 return;

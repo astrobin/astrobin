@@ -1,0 +1,26 @@
+{% load i18n %}
+
+{% if in_collections %}
+    <div class="subtle-container image-collections">
+        <div class="header">
+            <h4>
+                <i class="icon-folder-open"></i> {% trans "In these collections" %}
+            </h4>
+        </div>
+
+        <table class="table table-condensed table-striped">
+            <tbody>
+                {% for collection in in_collections %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'user_collections_detail' image.user.username collection.pk %}">
+                                {{ collection.name }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+

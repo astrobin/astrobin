@@ -5,6 +5,7 @@ import random
 import string
 import unicodedata
 import uuid
+from typing import List
 from urllib.parse import urlparse
 
 import boto3
@@ -19,7 +20,6 @@ from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
-from astrobin.services import CloudflareService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
@@ -608,6 +608,7 @@ class Telescope(Gear):
         ("CATA LURIE-HOUGHTON", _("Catadioptric: Lurie-Houghton")),
         ("CATA MAKSUTOV", _("Catadioptric: Maksutov")),
         ("CATA MAKSUTOV-CASSEGRAIN", _("Catadioptric: Maksutov-Cassegrain")),
+        ("CATA MAKSUTOV-NEWTONIAN", _("Catadioptric: Maksutov-Newtonian")),
         ("CATA MOD DALL-KIRKHAM", _("Catadioptric: modified Dall-Kirkham")),
         ("CATA SCHMIDT CAMERA", _("Catadioptric: Schmidt camera")),
         ("CATA SCHMIDT-CASSEGRAIN", _("Catadioptric: Schmidt-Cassegrain")),
@@ -914,6 +915,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("AC", "AstroCamp"),
         ("AHK", "Astro Hostel Krasnodar"),
         ("AOWA", "Astro Observatories Western Australia"),
+        ("ATLA", "Atlaskies Observatory"),
         ("CS", "ChileScope"),
         ("DMA", "Dark Matters Astrophotography"),
         ("DSNM", "Dark Sky New Mexico"),
@@ -1730,7 +1732,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if task_id is None:
             from .tasks import retrieve_thumbnail
             result = retrieve_thumbnail.apply_async(args=(self.pk, alias, revision_label, options))
-            cache.set(task_id_cache_key, result.task_id)
+            cache.set(task_id_cache_key, result.task_id, 600)
 
             try:
                 # Try again in case of eagerness.
@@ -1748,6 +1750,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         return static('astrobin/images/placeholder-gallery.jpg')
 
     def thumbnail_invalidate_real(self, field, revision_label, delete=True):
+        from astrobin.tasks import invalidate_cdn_caches
         from astrobin_apps_images.models import ThumbnailGroup
 
         for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].items():
@@ -1758,14 +1761,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         try:
             thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
-            all_urls = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
+            all_urls: List[str] = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
 
-            cloudflare_service = CloudflareService()
+            invalidate_cdn_caches.delay(all_urls)
 
-            for url in all_urls:
-                cloudflare_service.purge_resource(url)
-                s3 = boto3.client('s3')
-                s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
+            if settings.AWS_S3_ENABLED:
+                for url in all_urls:
+                    s3 = boto3.client('s3')
+                    s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
 
             self.thumbnails.get(revision=revision_label).delete()
             Image.objects_including_wip.filter(pk=self.pk).update(updated=DateTimeService.now())
@@ -2300,6 +2303,20 @@ class SolarSystem_Acquisition(Acquisition):
         blank=True,
     )
 
+    iso = models.PositiveIntegerField(
+        "ISO",
+        null=True,
+        blank=True,
+    )
+
+    gain = models.DecimalField(
+        "Gain",
+        null=True,
+        blank=True,
+        max_digits=7,
+        decimal_places=2,
+    )
+
     cmi = models.DecimalField(
         verbose_name=_("CMI"),
         help_text=_("Latitude of the first Central Meridian."),
@@ -2366,7 +2383,7 @@ class Request(models.Model):
         return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)
 
     def get_absolute_url(self):
-        return '/requests/detail/' + self.id + '/'
+        return '/requests/detail/' + str(self.id) + '/'
 
     class Meta:
         app_label = 'astrobin'
@@ -2453,6 +2470,13 @@ class UserProfile(SafeDeleteModel):
     )
 
     last_seen_in_country = models.CharField(
+        editable=False,
+        null=True,
+        blank=True,
+        max_length=2
+    )
+
+    signup_country = models.CharField(
         editable=False,
         null=True,
         blank=True,
@@ -2837,6 +2861,21 @@ class UserProfile(SafeDeleteModel):
         null=True,
         blank=True,
         editable=False,
+    )
+
+    # Stripe data
+    stripe_customer_id = models.CharField(
+        editable=False,
+        max_length=32,
+        blank=True,
+        null=True,
+    )
+
+    stripe_subscription_id = models.CharField(
+        editable=False,
+        max_length=32,
+        blank=True,
+        null=True,
     )
 
     def get_display_name(self):

@@ -10,7 +10,7 @@ BROKER_TRANSPORT_OPTIONS = {
     'fanout_patterns': True,
     'health_check_interval': 5,
 }
-CELERY_RESULT_BACKEND = BROKER_URL
+CELERY_RESULT_BACKEND = BROKER_URL[:-1] + '2' if BROKER_URL.endswith('/0') else BROKER_URL
 CELERY_IMPORTS = (
     'astrobin.tasks',
     'astrobin_apps_equipment.tasks',

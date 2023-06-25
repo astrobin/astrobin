@@ -962,7 +962,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return _prepare_likes(obj)
 
     def prepare_liked_by(self, obj):
-        likes = ToggleProperty.objects.toggleproperties_for_object("like", obj)
+        likes = ToggleProperty.objects.toggleproperties_for_object("like", obj).filter(user__isnull=False)
         return [x.user.pk for x in likes.all()]
 
     def prepare_integration(self, obj):

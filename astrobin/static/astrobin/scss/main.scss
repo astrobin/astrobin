@@ -8,6 +8,7 @@
 @import "badges.scss";
 @import "buttons";
 @import "ckeditor";
+@import "cookie_consent";
 @import "definition-lists";
 @import "fancybox";
 @import "forms";
@@ -132,34 +133,6 @@ body.full {
         }
       }
     }
-  }
-}
-
-.cookielaw-banner {
-  position: fixed;
-  width: 300px;
-  padding: 30px;
-  bottom: 0;
-  right: 0;
-  transform: scale(.85);
-  z-index: 1021;
-  background: $grey-2;
-  border: 1px solid $grey-4;
-  color: $grey-9;
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, .667);
-
-  h6 {
-    color: $grey-9;
-    font-size: 16px;
-    margin: 0 0 20px 0;
-  }
-
-  p {
-    padding: 0;
-  }
-
-  .btn {
-    margin-top: 10px;
   }
 }
 
@@ -437,6 +410,10 @@ h1 small {
   margin-top: 9px;
   color: #696969;
   display: block;
+
+  p {
+    margin-top: 1rem;
+  }
 }
 
 h2 {
@@ -3615,8 +3592,12 @@ hr {
   text-align: center;
 }
 
+img.flickr-photo-to-import {
+  border: 2px solid grey;
+}
+
 img.flickr-photo-to-import-selected {
-  border: 1px solid white;
+  border: 2px solid green;
 }
 
 .tooltip-inner {

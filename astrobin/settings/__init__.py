@@ -12,6 +12,7 @@ include(
     'components/ads.py',
     'components/apps.py',
     'components/caches.py',
+    'components/cookies.py',
     'components/cors.py',
     'components/db.py',
     'components/email.py',
@@ -22,6 +23,7 @@ include(
     'components/storage.py',
     'components/templates.py',
     'components/cloudflare.py',
+    'components/cloudfront.py',
 
     # Apps settings
     'components/account.py',

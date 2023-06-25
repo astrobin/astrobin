@@ -129,7 +129,6 @@ def common_variables(request):
         'SOFT_BOUNCES': soft_bounces,
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
-        'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
         'HAS_CAMERA_RENAME_PROPOSALS': CameraRenameProposal.objects.filter(user=request.user, status="PENDING") \
             if request.user.is_authenticated \
             else CameraRenameProposal.objects.none(),

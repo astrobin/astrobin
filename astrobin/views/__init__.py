@@ -35,6 +35,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import last_modified, require_GET, require_POST
 from django.views.decorators.vary import vary_on_cookie
 from el_pagination.decorators import page_template
+from flickrapi import FlickrError
 from flickrapi.auth import FlickrAccessToken
 from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
@@ -57,19 +58,20 @@ from astrobin.models import (
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
 from astrobin.shortcuts import ajax_response, ajax_success
-from astrobin.templatetags.tags import in_upload_wizard
+from astrobin.templatetags.tags import (
+    has_active_uncanceled_subscription_by_name, in_upload_wizard,
+)
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
 from astrobin_apps_platesolving.services import SolutionService
-from astrobin_apps_premium.services.premium_service import PremiumService
+from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_perform_advanced_platesolving,
     can_restore_from_trash,
 )
 from astrobin_apps_users.services import UserService
-from common.constants import GroupName
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
@@ -1731,14 +1733,17 @@ def user_profile_flickr_import(request):
             log.debug("Flickr import (user %d): set in POST request" % request.user.pk)
             set_id = request.POST['id_flickr_set']
             urls_sq = {}
-            for photo in flickr.walk_set(set_id, extras='url_sq'):
-                urls_sq[photo.attrib['id']] = photo.attrib['url_sq']
-                response_dict['flickr_photos'] = urls_sq
+            try:
+                for photo in flickr.walk_set(set_id, extras='url_sq'):
+                    urls_sq[photo.attrib['id']] = photo.attrib['url_sq']
+                    response_dict['flickr_photos'] = urls_sq
+            except FlickrError:
+                response_dict['flickr_photos'] = []
         elif 'flickr_selected_photos[]' in request.POST:
             log.debug("Flickr import (user %s): photos in POST request" % request.user.username)
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
-            for index, photo_id in enumerate(selected_photos):
+            for idx, photo_id in enumerate(selected_photos):
                 log.debug("Flickr import (user %d): iterating photo %s" % (request.user.pk, photo_id))
                 sizes = flickr.photos_getSizes(photo_id=photo_id)
                 info = flickr.photos_getInfo(photo_id=photo_id).find('photo')
@@ -1954,6 +1959,35 @@ def user_profile_save_privacy(request):
 @never_cache
 @login_required
 def user_profile_delete(request):
+    has_recurring_subscription = (
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.LITE_CLASSIC_AUTORENEW.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value
+            ) or
+            has_active_uncanceled_subscription_by_name(
+                request.user, SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value
+            )
+    )
+
+    form = None
+
     if request.method == 'POST':
         form = DeleteAccountForm(instance=request.user.userprofile, data=request.POST)
         form.full_clean()
@@ -1974,7 +2008,10 @@ def user_profile_delete(request):
     elif request.method == 'GET':
         form = DeleteAccountForm(instance=request.user.userprofile)
 
-    return render(request, 'user/profile/delete.html', {'form': form})
+    return render(request, 'user/profile/delete.html', {
+        'form': form,
+        'has_recurring_subscription': has_recurring_subscription
+    })
 
 
 @never_cache
@@ -2481,7 +2518,7 @@ def user_popover_ajax(request, username):
     html = render_to_string(template,
                             {
                                 'user': profile.user,
-                                'images': Image.objects.filter(user=profile.user).count(),
+                                'images': UserService(profile.user).get_public_images().count(),
                                 'member_since': member_since,
                                 'is_authenticated': request.user.is_authenticated,
                                 'request': request,
