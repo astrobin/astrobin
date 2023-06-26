@@ -43,9 +43,12 @@ class ForumViewSet(viewsets.ModelViewSet):
 
         queryset = self.get_queryset()\
             .select_related('category')\
-            .annotate(distance=TrigramDistance('name', q))\
-            .filter(distance__lte=.85)\
             .exclude(category__slug='group-forums')
+
+        if q:
+            queryset = queryset\
+                .annotate(distance=TrigramDistance('name', q))\
+                .filter(distance__lte=.85)
 
         if is_equipment:
             queryset = queryset\
