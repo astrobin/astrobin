@@ -1,9 +1,8 @@
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Count, Q
 from django.db.models.functions import Lower
-from django.utils.translation import gettext
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from rest_framework import serializers, status, viewsets
+from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -19,12 +18,9 @@ from astrobin_apps_equipment.api.serializers.brand_listing_serializer import Bra
 from astrobin_apps_equipment.api.serializers.brand_serializer import BrandSerializer
 from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 from astrobin_apps_equipment.models import EquipmentBrand
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_premium.services.premium_service import PremiumService
-from astrobin_apps_users.services import UserService
-from common.constants import GroupName
 
 
 class BrandViewSet(viewsets.ModelViewSet):
@@ -41,47 +37,17 @@ class BrandViewSet(viewsets.ModelViewSet):
         type_ = self.request.GET.get('type')
 
         manager = self.get_serializer().Meta.model.objects
-        queryset = manager
+        queryset = manager.all()
 
-        equipment_types = [k.lower() for k in vars(EquipmentItemKlass) if not k.startswith("__")]
-
-        # We only want the brands that have at least one approved item, if the user is not a moderator
-        # ==============================================================================================================
-
-        if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
-            # Loop over the equipment types and add an annotation for each
-            for equipment_type in equipment_types:
-                queryset = queryset.annotate(
-                    **{
-                        f'approved_{equipment_type}_count': Count(
-                            f'astrobin_apps_equipment_brand_{equipment_type}s',
-                            filter=Q(
-                                **{
-                                    f'astrobin_apps_equipment_brand_{equipment_type}s__reviewer_decision': EquipmentItemReviewerDecision.APPROVED
-                                }
-                            )
-                        )
-                    }
-                )
-
-            # Build Q objects for the filter
-            q_objects = Q(created_by=self.request.user) if self.request.user.is_authenticated else Q()
-            for equipment_type in equipment_types:
-                q_objects |= Q(**{f'approved_{equipment_type}_count__gt': 0})
-
-            # Apply the filter
-            queryset = queryset.filter(q_objects)
-        # ==============================================================================================================
-
-        if type_ and type_.lower() not in equipment_types:
+        if type_ and type_.upper() not in [i for i in EquipmentItemKlass.__dict__.keys() if i[:1] != '_']:
             return manager.none()
 
         if q:
-            queryset = queryset.annotate(
+            queryset =  manager.annotate(
                 distance=TrigramDistance('name', q)
             ).filter(Q(distance__lte=.7) | Q(name__icontains=q)).order_by('distance')
         elif type_:
-            queryset = queryset.annotate(
+            queryset = manager.annotate(
                 count=Count(f'astrobin_apps_equipment_brand_{type_}s')
             ).filter(
                 count__gt=0
@@ -102,24 +68,6 @@ class BrandViewSet(viewsets.ModelViewSet):
         elif sort == '-images':
             queryset = queryset.order_by('-image_count', Lower('name'))
         return queryset
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-
-        try:
-            serializer.is_valid(raise_exception=True)
-        except serializers.ValidationError:
-            if 'name' in serializer.errors and serializer.errors['name'][0].code == 'unique':
-                return Response({
-                    "name": gettext(
-                        "This brand already exists, but it might not be approved by a moderator yet. Please try again "
-                        "later or contact support if the problem persists."
-                    )
-                }, status=status.HTTP_400_BAD_REQUEST)
-
-            raise
-
-        return super().create(request, *args, **kwargs)
 
     @action(detail=True, methods=['GET'])
     def listings(self, request, pk: int) -> Response:

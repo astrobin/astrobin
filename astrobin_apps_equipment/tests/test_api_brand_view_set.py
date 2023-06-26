@@ -3,40 +3,21 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
 
 
 class TestApiBrandViewSet(TestCase):
-    def test_list_with_no_brands(self):
+    def test_list_with_no_items(self):
         client = APIClient()
 
         response = client.get(reverse('astrobin_apps_equipment:brand-list'), format='json')
         self.assertEquals(0, response.data['count'])
 
-    def test_list_with_no_equipment_items(self):
-        client = APIClient()
-
-        EquipmentGenerators.brand()
-
-        response = client.get(reverse('astrobin_apps_equipment:brand-list'), format='json')
-        self.assertEquals(0, response.data['count'])
-
-    def test_list_with_unapproved_equipment_items(self):
+    def test_list_with_items(self):
         client = APIClient()
 
         brand = EquipmentGenerators.brand()
-        EquipmentGenerators.telescope(brand=brand)
-
-        response = client.get(reverse('astrobin_apps_equipment:brand-list'), format='json')
-        self.assertEquals(0, response.data['count'])
-
-    def test_list_with_approved_equipment_items(self):
-        client = APIClient()
-
-        brand = EquipmentGenerators.brand()
-        EquipmentGenerators.telescope(brand=brand, reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:brand-list'), format='json')
         self.assertEquals(1, response.data['count'])
