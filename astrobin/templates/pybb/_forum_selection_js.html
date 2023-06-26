@@ -80,7 +80,7 @@
                         return {
                             results: data.items,
                             pagination: {
-                                more: (params.page * {{ REST_FRAMEWORK_PAGE_SIZE }}) < data.total_count
+                                more: (params.page * {{ REST_FRAMEWORK_PAGE_SIZE }}) < data.totalCount
                             }
                         };
                     },
