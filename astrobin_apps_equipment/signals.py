@@ -453,12 +453,14 @@ def create__or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kw
         slug='equipment-forums',
     )
 
-    if instance.reviewer_decision == EquipmentItemReviewerDecision.APPROVED:
+    if instance.reviewer_decision == EquipmentItemReviewerDecision.APPROVED and not instance.forum:
         instance.forum, created = Forum.objects.get_or_create(
             category=category,
             name=f'{instance}',
         )
-    elif instance.forum is not None:
+        return
+
+    if instance.forum is not None:
         if instance.reviewer_rejection_duplicate_of:
             DuplicateModelClass = {
                 EquipmentItemKlass.SENSOR: Sensor,
