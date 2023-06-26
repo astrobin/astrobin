@@ -40,7 +40,7 @@ class ForumViewSet(viewsets.ModelViewSet):
         q = request.GET.get('q', '')
         is_equipment = request.GET.get('is-equipment', "false").lower() == "true"
 
-        queryset = self.get_queryset().filter(name__icontains=q).order_by("name")
+        queryset = self.get_queryset().filter(name__icontains=q, group__isnull=True).order_by("name")
 
         equipment_related_queries = [
             Q(**{f"is_astrobin_apps_equipment_{model}__isnull": not is_equipment})
