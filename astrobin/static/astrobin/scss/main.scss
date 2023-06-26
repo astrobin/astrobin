@@ -2671,6 +2671,18 @@ form.avatar-delete {
 .gear-popover-label {
   padding: 0 .334rem;
 
+  &:not(.qtip-open):hover::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: .334rem;
+    width: 0;
+    height: 1px;
+    background-color: $link-color;
+    opacity: .5;
+    animation: gear-popover-label-animation 750ms ease-in-out;
+  }
+
   &.shopping-cart {
     padding: 0 0.334rem 0 0;
     margin-left: -0.667rem;
