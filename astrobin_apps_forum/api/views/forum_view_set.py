@@ -59,7 +59,7 @@ class ForumViewSet(viewsets.ModelViewSet):
         if is_equipment:
             queryset = queryset.order_by(Lower('name'))
         else:
-            queryset = queryset.order_by('position')
+            queryset = queryset.order_by('category__position', 'position')
 
         paginator = Paginator(queryset, page_size)
         page = paginator.get_page(page_number)
