@@ -1,0 +1,54 @@
+{% extends 'pybb/base.html' %}
+
+{% load i18n pybb_tags common_tags %}
+
+{% block content %}
+
+    {% if post.is_topic_head %}
+        <h1>{% blocktrans with topic=post.topic %}Move topic "{{ topic }}"{% endblocktrans %}</h1>
+    {% else %}
+        <h1>{% blocktrans with topic=post.topic %}Split posts from topic "{{ topic }}"{% endblocktrans %}</h1>
+    {% endif %}
+
+    <form method="post" action="." class="move-post-form form-horizontal">
+        {% csrf_token %}
+        <fieldset>
+            {% if not post.is_topic_head %}
+                {% pybb_get_profile post.user as author %}
+                <div class="control-group">
+                    <label>
+                        {% blocktrans with author.get_display_name as author_name %}
+                            Starting post by {{ author_name }}
+                        {% endblocktrans %}
+                    </label>
+
+                    <div class="post-preview well form-control">
+                        {{ post.body_html|safe|truncatewords_html:20 }}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% include "pybb/form_errors.html" %}
+
+            {% if form.move_to %} {% include "pybb/form_field.html" with field=form.move_to %} {% endif %}
+            {% if form.number %} {% include "pybb/form_field.html" with field=form.number %} {% endif %}
+            {% if form.name %} {% include "pybb/form_field.html" with field=form.name %} {% endif %}
+            {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
+        </fieldset>
+
+        <div class="form-actions">
+            <a class="btn" href="{{ post.get_absolute_url }}">{% trans 'Cancel' %}</a>
+
+            <button type="submit" class="btn btn-danger {%  button_loading_class %}">
+                {% if post.is_topic_head %}
+                    {% trans 'Move this topic' %}
+                {% else %}
+                    {% trans "Split posts" %}
+                {% endif %}
+
+                {% button_loading_indicator %}
+            </button>
+        </div>
+    </form>
+
+{% endblock content %}

@@ -33,6 +33,12 @@ $flat-theme-dark-color: $grey-6;
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.33)
 }
 
+.select2-results__group {
+  margin-bottom: .5rem;
+  display: block;
+  font-size: 1.1rem;
+}
+
 .select2-container--flat {
   .select2-container--focus .select2-selection--multiple {
     border: 1px solid $flat-theme-dark-color;

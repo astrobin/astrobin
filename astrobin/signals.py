@@ -26,6 +26,7 @@ from pybb.permissions import perms
 from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
 from safedelete import HARD_DELETE
+from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
 from stripe.error import StripeError
@@ -37,6 +38,7 @@ from two_factor.signals import user_verified
 from astrobin.tasks import invalidate_cdn_caches, process_camera_rename_proposal
 from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
+from astrobin_apps_forum.services import ForumService
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
@@ -72,7 +74,6 @@ from .models import (
 from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 from .utils import get_client_country_code
-from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
 log = logging.getLogger(__name__)
 
@@ -1008,6 +1009,25 @@ def forum_topic_pre_save(sender, instance, **kwargs):
     except sender.DoesNotExist:
         return
 
+    if topic.forum != instance.forum:
+        # This topic is being moved to another forum
+        log.debug(
+            "Topic '%s' moved from '%s' to '%s'" % (
+                instance.name,
+                topic.forum.name,
+                instance.forum.name)
+        )
+
+        ForumService.create_topic_redirect(
+            instance.forum.category.slug,
+            instance.forum.slug,
+            instance.slug,
+            topic
+        )
+
+        if instance.forum.category.slug == 'equipment-forums' and not instance.on_moderation:
+            notify_equipment_users.apply_async(args=(instance.pk,), countdown=10)
+
     if topic.on_moderation and not instance.on_moderation:
         # This topic is being approved
 
@@ -1201,7 +1221,8 @@ def forum_post_post_save(sender, instance, created, **kwargs):
 
     cache_key = make_template_fragment_key(
         'home_page_latest_from_forums',
-        (instance.user.pk, instance.user.userprofile.language))
+        (instance.user.pk, instance.user.userprofile.language)
+    )
     cache.delete(cache_key)
 
 
@@ -1211,7 +1232,8 @@ post_save.connect(forum_post_post_save, sender=Post)
 def topic_read_tracker_post_save(sender, instance, created, **kwargs):
     cache_key = make_template_fragment_key(
         'home_page_latest_from_forums',
-        (instance.user.pk, instance.user.userprofile.language))
+        (instance.user.pk, instance.user.userprofile.language)
+    )
     cache.delete(cache_key)
 
 
