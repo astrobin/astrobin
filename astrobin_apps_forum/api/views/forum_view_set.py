@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Q, QuerySet
+from django.db.models.functions import Lower
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from pybb.models import Forum
@@ -40,7 +41,7 @@ class ForumViewSet(viewsets.ModelViewSet):
         q = request.GET.get('q', '')
         is_equipment = request.GET.get('is-equipment', "false").lower() == "true"
 
-        queryset = self.get_queryset().filter(name__icontains=q, group__isnull=True).order_by("name")
+        queryset = self.get_queryset().filter(name__icontains=q, group__isnull=True)
 
         equipment_related_queries = [
             Q(**{f"is_astrobin_apps_equipment_{model}__isnull": not is_equipment})
@@ -54,6 +55,11 @@ class ForumViewSet(viewsets.ModelViewSet):
                 query_filter &= q
 
         queryset = queryset.filter(query_filter)
+
+        if is_equipment:
+            queryset = queryset.order_by(Lower('name'))
+        else:
+            queryset = queryset.order_by('position')
 
         paginator = Paginator(queryset, page_size)
         page = paginator.get_page(page_number)
