@@ -10,7 +10,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from notification import models as notification
-from pybb.models import Category, Forum
+from pybb.models import Category, Forum, Topic
 from safedelete.signals import post_softdelete
 
 from astrobin.services.utils_service import UtilsService
@@ -444,14 +444,8 @@ def set_search_friendly_name_for_software(sender, instance, **kwargs):
 @receiver(pre_save, sender=Filter)
 @receiver(pre_save, sender=Accessory)
 @receiver(pre_save, sender=Software)
-def create_equipment_item_forum(sender, instance: EquipmentItem, **kwargs):
+def create__or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kwargs):
     if not instance.brand:
-        return
-
-    if instance.reviewer_decision != EquipmentItemReviewerDecision.APPROVED:
-        return
-
-    if instance.forum:
         return
 
     category, created = Category.objects.get_or_create(
@@ -459,7 +453,34 @@ def create_equipment_item_forum(sender, instance: EquipmentItem, **kwargs):
         slug='equipment-forums',
     )
 
-    instance.forum, created = Forum.objects.get_or_create(
-        category=category,
-        name=f'{instance}',
-    )
+    if instance.reviewer_decision == EquipmentItemReviewerDecision.APPROVED and not instance.forum:
+        instance.forum, created = Forum.objects.get_or_create(
+            category=category,
+            name=f'{instance}',
+        )
+        return
+
+    if instance.forum is not None:
+        if instance.reviewer_rejection_duplicate_of:
+            DuplicateModelClass = {
+                EquipmentItemKlass.SENSOR: Sensor,
+                EquipmentItemKlass.TELESCOPE: Telescope,
+                EquipmentItemKlass.CAMERA: Camera,
+                EquipmentItemKlass.MOUNT: Mount,
+                EquipmentItemKlass.FILTER: Filter,
+                EquipmentItemKlass.ACCESSORY: Accessory,
+                EquipmentItemKlass.SOFTWARE: Software
+            }.get(instance.reviewer_rejection_duplicate_of_klass)
+
+            ModelClass = type(instance)
+
+            try:
+                duplicate_of = DuplicateModelClass.objects.get(pk=instance.reviewer_rejection_duplicate_of)
+                Topic.objects.filter(forum=instance.forum).update(forum=duplicate_of.forum)
+            except ModelClass.DoesNotExist:
+                instance.forum.delete()
+                instance.forum = None
+        else:
+            instance.forum.delete()
+            instance.forum = None
+

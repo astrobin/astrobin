@@ -1,4 +1,5 @@
 from django.test import TestCase
+from pybb.models import Topic
 
 from astrobin.models import DeepSky_Acquisition
 from astrobin.tests.generators import Generators
@@ -31,3 +32,22 @@ class EquipmentServiceRejectItemTest(TestCase):
         self.assertTrue(image.filters_2.filter(pk=filter_.pk).exists())
         self.assertFalse(DeepSky_Acquisition.objects.filter(image=image, filter_2=duplicate).exists())
         self.assertTrue(DeepSky_Acquisition.objects.filter(image=image, filter_2=filter_).exists())
+
+    def test_move_forum_posts_after_rejection(self):
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        duplicate = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+
+        Generators.forum_topic(forum=duplicate.forum)
+
+        self.assertTrue(Topic.objects.filter(forum=duplicate.forum).exists())
+
+        duplicate.reviewed_by = Generators.user()
+        duplicate.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
+        duplicate.reviewer_rejection_reason = EquipmentItemRejectionReason.DUPLICATE
+        duplicate.reviewer_rejection_duplicate_of_klass = EquipmentItemKlass.TELESCOPE
+        duplicate.reviewer_rejection_duplicate_of = telescope.id
+        duplicate.save()
+
+        EquipmentService.reject_item(duplicate)
+
+        self.assertTrue(Topic.objects.filter(forum=telescope.forum).exists())

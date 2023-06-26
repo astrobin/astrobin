@@ -1,6 +1,7 @@
 from django.test import TestCase
 
 from astrobin_apps_equipment.models import Camera
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
 
@@ -52,3 +53,23 @@ class SignalsTest(TestCase):
         camera = Camera.objects.get(pk=camera.pk)
 
         self.assertIsNone(camera.sensor)
+
+    def test_forum_creation(self):
+        telescope = EquipmentGenerators.telescope()
+        self.assertIsNone(telescope.forum)
+
+        telescope.reviewer_decision = EquipmentItemReviewerDecision.APPROVED
+        telescope.save()
+        telescope.refresh_from_db()
+
+        self.assertIsNotNone(telescope.forum)
+
+    def test_forum_deletion(self):
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        self.assertIsNotNone(telescope.forum)
+
+        telescope.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
+        telescope.save()
+        telescope.refresh_from_db()
+
+        self.assertIsNone(telescope.forum)
