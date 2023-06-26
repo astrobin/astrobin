@@ -148,7 +148,17 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{% if forum %}{% trans 'New topic' %}{% else %}{% trans 'New reply' %}{% endif %}</h1>
+    <h1>
+        {% if forum %}
+            {% blocktrans with forum_name=forum.name %}
+                New topic in forum: "{{ forum_name }}"
+            {% endblocktrans %}
+        {% else %}
+            {% blocktrans with topic_name=topic.name %}
+                New reply in topic: "{{ topic_name }}"
+            {% endblocktrans %}
+        {% endif %}
+    </h1>
 
     {% include "pybb/post_form.html" %}
 {% endblock content %}

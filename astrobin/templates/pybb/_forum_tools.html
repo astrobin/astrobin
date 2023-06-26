@@ -44,29 +44,47 @@
 {% block modals %}
     <div class="modal hide fade" id="select-forum-modal">
         <div class="modal-header">
-            <h3>{% trans "Please select a forum" %}</h3>
+            <h3>{% trans "To post a new topic, please first select the most relevant forum." %}</h3>
         </div>
 
         <div class="modal-body">
-            <div class="row-fluid">
-                <div class="span2 visible-desktop">
-                    <img src="{% static 'astrobin/images/attention.png' %}" alt="{% trans 'Please note' %}" />
-                </div>
-                <div class="span9 offset1">
-                    <p>
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label for="forum-selection-is-equipment">
+                        {% trans "Do you want to post about a specific equipment item?" %}
+                    </label>
+                    <select id="forum-selection-is-equipment">
+                        <option value="" selected disabled hidden></option>
+                        <option value="Y">{% trans "Yes" %}</option>
+                        <option value="N">{% trans "No" %}</option>
+                    </select>
+                    <div class="help-block">
+                        {% trans "Every equipment item on AstroBin has a forum associated with it." %}
+
                         {% blocktrans trimmed %}
-                            To post a new topic, please first go to the forum that is most relevant to your topic.
+                            Anybody who used an equipment item is notified of new topics in its forum, unless they
+                            opt out.
                         {% endblocktrans %}
-                    </p>
+
+                        <a href="https://welcome.astrobin.com/features/equipment-database" target="_blank">
+                            {% blocktrans trimmed %}
+                                Learn more about the AstroBin equipment database!
+                            {% endblocktrans %}
+                        </a>
+                    </div>
                 </div>
-            </div>
+
+                <div class="control-group hidden">
+                    <label for="forum-selection">
+                        {% trans "Please select a forum:" %}
+                    </label>
+                    <select id="forum-selection"></select>
+                </div>
+            </form>
         </div>
 
         <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-secondary">{% trans "Cancel" %}</button>
-            <a class="btn btn-primary" href="{% url 'pybb:index' %}">
-                {% trans "View forums" %}
-            </a>
         </div>
     </div>
 {% endblock %}

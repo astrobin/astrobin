@@ -1,0 +1,95 @@
+{% load i18n %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function initForumSelectionModal() {
+            $("#select-forum-modal").on("show", function () {
+                initForumSelectionIsEquipment();
+            })
+        }
+
+        function initForumSelectionIsEquipment() {
+            $("#forum-selection").closest(".control-group").addClass("hidden");
+
+            const $el = $("#forum-selection-is-equipment");
+
+            if ($el.hasClass('select2-hidden-accessible')) {
+                $el.select2("destroy");
+            }
+
+            $el.select2({
+                theme: "flat",
+                placeholder: '{% trans "Select..." %}',
+                minimumResultsForSearch: Infinity
+            });
+
+            $el.val(null).trigger("change");
+
+            $el.on("change", function () {
+                const value = $(this).val();
+
+                if (value !== null) {
+                    initForumSelection($(this).val() === "Y");
+                }
+            });
+        }
+
+        function initForumSelection(isEquipment) {
+            const $el = $("#forum-selection");
+
+            if ($el.hasClass('select2-hidden-accessible')) {
+                $el.select2("destroy");
+            }
+
+            $el.closest('.control-group').removeClass("hidden");
+
+            $el.select2({
+                theme: "flat",
+                ajax: {
+                    url: '/api/v2/forum/forum/select2/?is-equipment=' + isEquipment,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        var query = {
+                            page: params.page || 1,
+                        }
+
+                        if (params.term) {
+                            query.q = params.term;
+                        }
+
+                        return query;
+                    },
+                    processResults: function (data, params) {
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // adjust the data, except to indicate that infinite
+                        // scrolling can be used
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: (params.page * {{ REST_FRAMEWORK_PAGE_SIZE }}) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                placeholder: '{% trans "Select..." %}',
+                minimumInputLength: 0,
+                scroll: true,
+                scrollThreshold: 0.5
+            });
+
+            $el.on("change", function () {
+                const url = '/forum/forum/' + $(this).val() + '/topic/add/';
+
+                astrobin_common.show_page_loading_indicator();
+                window.location.assign(url);
+            })
+        }
+
+        initForumSelectionModal();
+    });
+</script>
