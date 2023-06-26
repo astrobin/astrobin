@@ -49,10 +49,20 @@
                     url: '/api/v2/forum/forum/select2/?is-equipment=' + isEquipment,
                     dataType: 'json',
                     delay: 250,
+                    transport: function (params, success, failure) {
+                        params.timeout = 5000;
+
+                        const $request = $.ajax(params);
+
+                        $request.then(success);
+                        $request.fail(failure);
+
+                        return $request;
+                    },
                     data: function (params) {
-                        var query = {
+                        const query = {
                             page: params.page || 1,
-                        }
+                        };
 
                         if (params.term) {
                             query.q = params.term;
