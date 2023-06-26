@@ -1,8 +1,20 @@
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q
+from django.utils.translation import gettext
 
+
+class CustomAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["username"].label =gettext("Username or email")
+        self.fields["username"].help_text = gettext(
+            "Please note: this is your username or email address, not your real name or display name that you might "
+            "have set in your AstroBin settings."
+        )
 
 # Class to permit the authentication using email or username, with case sensitive and insensitive matches.
 class CustomBackend(ModelBackend):
