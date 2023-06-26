@@ -1,6 +1,7 @@
 .ui-tooltip {
   width: auto !important;
   z-index: 1049 !important;
+  font-size: .9rem;
 
   @media screen and (max-width: 525px) {
     max-width: 400px !important;

@@ -10,19 +10,20 @@
         <p>{{ item.item_type_label }}</p>
     </div>
 
-    {% if item.properties %}
-        <div class="data">
+    <div class="data">
+        {% if item.properties %}
             {% for property in item.properties %}
                 <p>
                     <strong>{{ property.label }}</strong>: {{ property.value }}
                 </p>
-            {% empty %}
-                <p>
-                    {% trans "No additional information available for this item." %}
-                </p>
             {% endfor %}
-        </div>
-    {% endif %}
+        {% else %}
+            <p>
+                {% trans "No additional information available for this item." %}
+            </p>
+        {% endif %}
+    </div>
+
 
     {% with item_listings=item|equipment_item_listings:REQUEST_COUNTRY brand_listings=item|equipment_brand_listings_by_item:REQUEST_COUNTRY %}
         {% setvar image.user|get_valid_usersubscription as image_user_valid_usersubscription %}
