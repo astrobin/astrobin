@@ -10,7 +10,7 @@
         <h1>{% blocktrans with topic=post.topic %}Split posts from topic "{{ topic }}"{% endblocktrans %}</h1>
     {% endif %}
 
-    <form method="post" action="." class="move-post-form form-vertical">
+    <form method="post" action="." class="move-post-form form-horizontal">
         {% csrf_token %}
         <fieldset>
             {% if not post.is_topic_head %}
