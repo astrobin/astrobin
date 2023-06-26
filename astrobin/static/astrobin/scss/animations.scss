@@ -21,3 +21,20 @@
     opacity: .75;
   }
 }
+
+@keyframes gear-popover-label-animation {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    width: calc(100% - 2 * .334rem);
+    opacity: 0;
+  }
+}

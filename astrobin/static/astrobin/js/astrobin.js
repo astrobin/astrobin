@@ -530,15 +530,22 @@ astrobin_common = {
 
     setup_gear_popovers: function () {
         $('.gear-popover-label').each(function () {
-            $(this).qtip({
+            const $label = $(this);
+
+            $label.qtip({
                 position: {
                     viewport: $(window)
                 },
                 show: {
                     event: "mouseenter",
                     solo: true,
+                    delay: 750
                 },
-                hide: "unfocus",
+                hide: {
+                    event: 'mouseleave unfocus',
+                    delay: 750,
+                    fixed: true
+                },
                 style: {
                     tip: {
                         width: 16,
@@ -558,7 +565,16 @@ astrobin_common = {
                             this.set('content.text', data.html);
                         }
                     }
-                }
+                },
+                events: {
+                    show: function (event, api) {
+                        $label.addClass('qtip-open');
+                    },
+
+                    hide: function (event, api) {
+                        $label.removeClass('qtip-open');
+                    },
+                },
             });
         });
     },
