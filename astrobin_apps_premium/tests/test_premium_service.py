@@ -14,12 +14,13 @@ class PremiumServiceTest(TestCase):
         lite = Generators.premium_subscription(user, SubscriptionName.LITE_2020)
 
         ultimate.expires = DateTimeService.today() + timedelta(60)
+        ultimate.active = True
         ultimate.save()
 
         lite.expires = DateTimeService.today() + timedelta(30)
-        lite.active = False
+        lite.active = True
         lite.save()
 
         self.assertTrue(ultimate.valid())
-        self.assertFalse(lite.valid())
+        self.assertTrue(lite.valid())
         self.assertEqual(ultimate, PremiumService(user).get_valid_usersubscription())
