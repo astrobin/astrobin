@@ -444,7 +444,7 @@ def set_search_friendly_name_for_software(sender, instance, **kwargs):
 @receiver(pre_save, sender=Filter)
 @receiver(pre_save, sender=Accessory)
 @receiver(pre_save, sender=Software)
-def create__or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kwargs):
+def create_or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kwargs):
     if not instance.brand:
         return
 
