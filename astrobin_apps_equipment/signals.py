@@ -453,34 +453,34 @@ def create__or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kw
         slug='equipment-forums',
     )
 
-    if instance.reviewer_decision == EquipmentItemReviewerDecision.APPROVED and not instance.forum:
-        instance.forum, created = Forum.objects.get_or_create(
-            category=category,
-            name=f'{instance}',
-        )
-        return
+    if instance.reviewer_decision == EquipmentItemReviewerDecision.APPROVED:
+        if not instance.forum:
+            instance.forum, created = Forum.objects.get_or_create(
+                category=category,
+                name=f'{instance}',
+            )
+    else:
+        if instance.forum is not None:
+            if instance.reviewer_rejection_duplicate_of:
+                DuplicateModelClass = {
+                    EquipmentItemKlass.SENSOR: Sensor,
+                    EquipmentItemKlass.TELESCOPE: Telescope,
+                    EquipmentItemKlass.CAMERA: Camera,
+                    EquipmentItemKlass.MOUNT: Mount,
+                    EquipmentItemKlass.FILTER: Filter,
+                    EquipmentItemKlass.ACCESSORY: Accessory,
+                    EquipmentItemKlass.SOFTWARE: Software
+                }.get(instance.reviewer_rejection_duplicate_of_klass)
 
-    if instance.forum is not None:
-        if instance.reviewer_rejection_duplicate_of:
-            DuplicateModelClass = {
-                EquipmentItemKlass.SENSOR: Sensor,
-                EquipmentItemKlass.TELESCOPE: Telescope,
-                EquipmentItemKlass.CAMERA: Camera,
-                EquipmentItemKlass.MOUNT: Mount,
-                EquipmentItemKlass.FILTER: Filter,
-                EquipmentItemKlass.ACCESSORY: Accessory,
-                EquipmentItemKlass.SOFTWARE: Software
-            }.get(instance.reviewer_rejection_duplicate_of_klass)
+                ModelClass = type(instance)
 
-            ModelClass = type(instance)
-
-            try:
-                duplicate_of = DuplicateModelClass.objects.get(pk=instance.reviewer_rejection_duplicate_of)
-                Topic.objects.filter(forum=instance.forum).update(forum=duplicate_of.forum)
-            except ModelClass.DoesNotExist:
+                try:
+                    duplicate_of = DuplicateModelClass.objects.get(pk=instance.reviewer_rejection_duplicate_of)
+                    Topic.objects.filter(forum=instance.forum).update(forum=duplicate_of.forum)
+                except ModelClass.DoesNotExist:
+                    instance.forum.delete()
+                    instance.forum = None
+            else:
                 instance.forum.delete()
                 instance.forum = None
-        else:
-            instance.forum.delete()
-            instance.forum = None
 
