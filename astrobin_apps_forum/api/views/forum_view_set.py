@@ -48,7 +48,7 @@ class ForumViewSet(viewsets.ModelViewSet):
         if q:
             queryset = queryset\
                 .annotate(distance=TrigramDistance('name', q))\
-                .filter(distance__lte=.85)
+                .filter(distance__lte=.75)
 
         if is_equipment:
             queryset = queryset\
