@@ -13,7 +13,7 @@ class LoginView(BaseLoginView):
         ('backup', BackupTokenForm),
     )
 
-    def get_redirect_url(self):
+    def get_redirect_url(self) -> str:
         url = super().get_redirect_url()
 
         if '/account/login' in url:
