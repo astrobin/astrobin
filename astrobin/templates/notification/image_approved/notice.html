@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
-    {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-        Moderator <strong>{{ moderator }}</strong> approved your image
+    {% blocktrans trimmed with moderator.userprofile.get_display_name as user %}
+        Moderator <strong>{{ user }}</strong> approved your image
     {% endblocktrans %}
 </a>{% if image.title %}: {{ image.title }}{% endif %}

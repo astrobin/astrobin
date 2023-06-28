@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-    Moderator "{{ moderator }}" approved your image
+{% blocktrans trimmed with moderator.userprofile.get_display_name as user %}
+    Moderator "{{ user }}" approved your image
 {% endblocktrans %}{% if image.title %}: {{image.title}}{% endif %}
