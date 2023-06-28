@@ -22,6 +22,34 @@ def purge_old_notifications():
     call_command("purge_old_notifications")
 
 
+@shared_task(time_limit=300)
+def push_notification_for_approved_image(image_pk: int, moderator_pk: int):
+    try:
+        image = Image.objects_including_wip.get(pk=image_pk)
+    except Image.DoesNotExist:
+        logger.error('push_notification_for_approved_image called for image not found: %d' % image_pk)
+        return
+
+    try:
+        moderator = User.objects.get(pk=moderator_pk)
+    except User.DoesNotExist:
+        logger.error('push_notification_for_approved_image called for moderator not found: %d' % moderator_pk)
+        return
+
+    thumb = image.thumbnail_raw('gallery', None, sync=True)
+
+    push_notification(
+        [image.user],
+        moderator,
+        'image_approved',
+        {
+            'image': image,
+            'image_thumbnail': thumb.url if thumb else None,
+            'moderator': moderator
+        }
+    )
+
+
 @shared_task(time_limit=1800)
 def push_notification_for_new_image(image_pk: int):
     try:

@@ -37,6 +37,12 @@ NOTICE_TYPES = (
         1,
     ),
     (
+        'image_approved',
+        _('Your image was approved by a moderator'),
+        '',
+        2,
+    ),
+    (
         'image_not_solved',
         _('Your image could not be plate-solved'),
         '',
