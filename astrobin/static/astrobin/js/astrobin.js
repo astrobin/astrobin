@@ -1353,15 +1353,31 @@ astrobin_common = {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const autoplay = urlParams.get('autoplay');
+        let transitions = urlParams.get('transitions');
         const speed = urlParams.get('speed') || 5000;
 
-        const fancybox = new window.Fancybox(items, Object.assign(options, {slideshow: {delay: speed}}));
+        transitions = transitions === null ? 'true' : transitions;
+
+        const transitionDuration = transitions === 'true' ? 0.92 : 0;
+
+        const fancybox = new window.Fancybox(
+            items,
+            Object.assign(options, {
+                slideshow: {
+                    delay: speed
+                },
+                Carousel: {
+                    friction: transitionDuration
+                }
+            })
+        );
 
         if (autoplay === 'true') {
             fancybox.plugins.Toolbar.Slideshow.activate();
         }
 
-        const url = astrobin_common.add_or_update_url_param(window.location.href, 'slideshow', true);
+        let url = astrobin_common.add_or_update_url_param(window.location.href, 'slideshow', true);
+        url = astrobin_common.add_or_update_url_param(url, 'transitions', transitions);
 
         window.history.pushState({path: url}, '', url);
 
