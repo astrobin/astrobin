@@ -7,6 +7,11 @@
   @include rounded-corners;
   z-index: 1051;
 
+  &.large {
+    width: 50%;
+    margin-left: -25%;
+  }
+
   .checker {
     margin-left: 0;
   }
@@ -37,6 +42,10 @@
 
   .modal-body {
     max-height: 66.67vh;
+
+    h3 {
+      margin-bottom: .75rem;
+    }
 
     small {
       font-size: 87.5%;
@@ -71,6 +80,10 @@
       textarea {
         width: calc(100% - 12px) !important;
       }
+    }
+
+    .table:not(:last-child) {
+      margin-bottom: 3rem;
     }
   }
 }

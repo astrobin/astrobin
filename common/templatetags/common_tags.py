@@ -382,3 +382,11 @@ def pop_session_value(context, session_key):
     request = context['request']
     value = request.session.pop(session_key, None)
     return value
+
+
+@register.filter
+def percentage(x: float, y: float) -> float:
+    if y == 0:
+        return 0
+
+    return (x / y) * 100
