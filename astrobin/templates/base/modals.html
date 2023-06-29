@@ -402,196 +402,205 @@
     <div class="modal-body">
         {% iotd_stats as iotd_stats_dict %}
 
-        <p class="alert alert-info">
-            <strong>{% trans "Please note" %}:</strong>
-            {% blocktrans trimmed with days=iotd_stats_dict.days %}
-                The following tables pertain the last {{ days }} days and update every 24 hours.
-            {% endblocktrans %}
-        </p>
-
-        <h3>{% trans "Distribution of astrophotographers" %}</h3>
-
-        <table class="table table-condensed iotd-stats-table">
-            <caption>
-                {% blocktrans trimmed %}
-                    This table shows the number of distinct astrophotographers who have been assigned and IOTD/TP award
-                    compared to the total number of images awarded.
+        {% if iotd_stats_dict %}
+            <p class="alert alert-info">
+                <strong>{% trans "Please note" %}:</strong>
+                {% blocktrans trimmed with days=iotd_stats_dict.days %}
+                    The following tables pertain the last {{ days }} days and update every 24 hours.
                 {% endblocktrans %}
-            </caption>
-            <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th>{% trans "Distinct awarded users" %}</th>
-                <th>{% trans "Total awarded images" %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th>{% trans "Image of the day" %}</th>
-                <td>{{ iotd_stats_dict.distinct_iotd_winners }}</td>
-                <td>{{ iotd_stats_dict.total_iotds }}</td>
-            </tr>
-            <tr>
-                <th>{% trans "Top picks" %}</th>
-                <td>{{ iotd_stats_dict.distinct_tp_winners }}</td>
-                <td>{{ iotd_stats_dict.total_tps }}</td>
-            </tr>
-            <tr>
-                <th>{% trans "Top pick nominations" %}</th>
-                <td>{{ iotd_stats_dict.distinct_tpn_winners }}</td>
-                <td>{{ iotd_stats_dict.total_tpns }}</td>
-            </tr>
-            </tbody>
-        </table>
+            </p>
 
-        <h3>{% trans "Distribution of subject types" %}</h3>
+            <h3>{% trans "Distribution of astrophotographers" %}</h3>
 
-        <table class="table table-condensed iotd-stats-table">
-            <caption>
+            <table class="table table-condensed iotd-stats-table">
+                <caption>
+                    {% blocktrans trimmed %}
+                        This table shows the number of distinct astrophotographers who have been assigned and IOTD/TP award
+                        compared to the total number of images awarded.
+                    {% endblocktrans %}
+                </caption>
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>{% trans "Distinct awarded users" %}</th>
+                    <th>{% trans "Total awarded images" %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>{% trans "Image of the day" %}</th>
+                    <td>{{ iotd_stats_dict.distinct_iotd_winners }}</td>
+                    <td>{{ iotd_stats_dict.total_iotds }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Top picks" %}</th>
+                    <td>{{ iotd_stats_dict.distinct_tp_winners }}</td>
+                    <td>{{ iotd_stats_dict.total_tps }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Top pick nominations" %}</th>
+                    <td>{{ iotd_stats_dict.distinct_tpn_winners }}</td>
+                    <td>{{ iotd_stats_dict.total_tpns }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3>{% trans "Distribution of subject types" %}</h3>
+
+            <table class="table table-condensed iotd-stats-table">
+                <caption>
+                    {% blocktrans trimmed %}
+                        This table shows the distribution of awards per subject type, compared to the popularity of images
+                        of that subject type.
+                    {% endblocktrans %}
+                </caption>
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>{% trans "Image of the day" %}</th>
+                    <th>{% trans "Top pick" %}</th>
+                    <th>{% trans "Top pick nominations" %}</th>
+                    <th>{% trans "Total submitted" %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>{% trans "Deep sky" %}</th>
+                    <td>{{ iotd_stats_dict.deep_sky_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.deep_sky_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.deep_sky_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_deep_sky_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Solar system" %}</th>
+                    <td>{{ iotd_stats_dict.solar_system_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.solar_system_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.solar_system_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_solar_system_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Extremely wide field" %}</th>
+                    <td>{{ iotd_stats_dict.wide_field_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.wide_field_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.wide_field_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_wide_field_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Star trails" %}</th>
+                    <td>{{ iotd_stats_dict.star_trails_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.star_trails_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.star_trails_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_star_trails_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Northern lights" %}</th>
+                    <td>{{ iotd_stats_dict.northern_lights_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.northern_lights_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.northern_lights_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_northern_lights_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Noctilucent clouds" %}</th>
+                    <td>{{ iotd_stats_dict.noctilucent_clouds_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.noctilucent_clouds_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.noctilucent_clouds_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_noctilucent_clouds_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3>{% trans "Distribution of data sources" %}</h3>
+
+            <table class="table table-condensed iotd-stats-table">
+                <caption>
+                    {% blocktrans trimmed %}
+                        This table shows the distribution of awards per data source, compared to the popularity of images
+                        acquired from that data source.
+                    {% endblocktrans %}
+                </caption>
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>{% trans "Image of the day" %}</th>
+                    <th>{% trans "Top pick" %}</th>
+                    <th>{% trans "Top pick nominations" %}</th>
+                    <th>{% trans "Total submitted" %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>{% trans "Backyard" %}</th>
+                    <td>{{ iotd_stats_dict.backyard_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.backyard_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.backyard_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_backyard_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Traveller" %}</th>
+                    <td>{{ iotd_stats_dict.traveller_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.traveller_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.traveller_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_traveller_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Own remote observatory" %}</th>
+                    <td>{{ iotd_stats_dict.own_remote_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.own_remote_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.own_remote_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_own_remote_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Amateur hosting facility" %}</th>
+                    <td>{{ iotd_stats_dict.amateur_hosting_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.amateur_hosting_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.amateur_hosting_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_amateur_hosting_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Public amaeteur data" %}</th>
+                    <td>{{ iotd_stats_dict.public_amateur_data_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.public_amateur_data_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.public_amateur_data_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_public_amateur_data_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Professional, scientific grade data" %}</th>
+                    <td>{{ iotd_stats_dict.pro_data_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.pro_data_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.pro_data_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_pro_data_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Mix of multiple sources" %}</th>
+                    <td>{{ iotd_stats_dict.mix_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.mix_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.mix_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_mix_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Other" %}</th>
+                    <td>{{ iotd_stats_dict.other_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.other_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.other_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_other_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Unknown" %}</th>
+                    <td>{{ iotd_stats_dict.unknown_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.unknown_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.unknown_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
+                    <td>{{ iotd_stats_dict.total_unknown_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
+                </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <p class="alert alert-info">
+                <strong>{% trans "Please note" %}:</strong>
                 {% blocktrans trimmed %}
-                    This table shows the distribution of awards per subject type, compared to the popularity of images
-                    of that subject type.
+                    This data is not available right now. Please try again in a few minutes, thanks!
                 {% endblocktrans %}
-            </caption>
-            <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th>{% trans "Image of the day" %}</th>
-                <th>{% trans "Top pick" %}</th>
-                <th>{% trans "Top pick nominations" %}</th>
-                <th>{% trans "Total submitted" %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th>{% trans "Deep sky" %}</th>
-                <td>{{ iotd_stats_dict.deep_sky_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.deep_sky_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.deep_sky_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_deep_sky_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Solar system" %}</th>
-                <td>{{ iotd_stats_dict.solar_system_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.solar_system_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.solar_system_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_solar_system_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Extremely wide field" %}</th>
-                <td>{{ iotd_stats_dict.wide_field_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.wide_field_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.wide_field_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_wide_field_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Star trails" %}</th>
-                <td>{{ iotd_stats_dict.star_trails_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.star_trails_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.star_trails_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_star_trails_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Northern lights" %}</th>
-                <td>{{ iotd_stats_dict.northern_lights_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.northern_lights_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.northern_lights_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_northern_lights_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Noctilucent clouds" %}</th>
-                <td>{{ iotd_stats_dict.noctilucent_clouds_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.noctilucent_clouds_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.noctilucent_clouds_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_noctilucent_clouds_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            </tbody>
-        </table>
-
-        <h3>{% trans "Distribution of data sources" %}</h3>
-
-        <table class="table table-condensed iotd-stats-table">
-            <caption>
-                {% blocktrans trimmed %}
-                    This table shows the distribution of awards per data source, compared to the popularity of images
-                    acquired from that data source.
-                {% endblocktrans %}
-            </caption>
-            <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th>{% trans "Image of the day" %}</th>
-                <th>{% trans "Top pick" %}</th>
-                <th>{% trans "Top pick nominations" %}</th>
-                <th>{% trans "Total submitted" %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th>{% trans "Backyard" %}</th>
-                <td>{{ iotd_stats_dict.backyard_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.backyard_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.backyard_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_backyard_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Traveller" %}</th>
-                <td>{{ iotd_stats_dict.traveller_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.traveller_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.traveller_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_traveller_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Own remote observatory" %}</th>
-                <td>{{ iotd_stats_dict.own_remote_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.own_remote_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.own_remote_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_own_remote_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Amateur hosting facility" %}</th>
-                <td>{{ iotd_stats_dict.amateur_hosting_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.amateur_hosting_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.amateur_hosting_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_amateur_hosting_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Public amaeteur data" %}</th>
-                <td>{{ iotd_stats_dict.public_amateur_data_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.public_amateur_data_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.public_amateur_data_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_public_amateur_data_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Professional, scientific grade data" %}</th>
-                <td>{{ iotd_stats_dict.pro_data_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.pro_data_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.pro_data_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_pro_data_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Mix of multiple sources" %}</th>
-                <td>{{ iotd_stats_dict.mix_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.mix_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.mix_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_mix_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Other" %}</th>
-                <td>{{ iotd_stats_dict.other_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.other_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.other_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_other_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            <tr>
-                <th>{% trans "Unknown" %}</th>
-                <td>{{ iotd_stats_dict.unknown_iotds|percentage:iotd_stats_dict.total_iotds|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.unknown_tps|percentage:iotd_stats_dict.total_tps|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.unknown_tpns|percentage:iotd_stats_dict.total_tpns|floatformat:2 }}%</td>
-                <td>{{ iotd_stats_dict.total_unknown_images|percentage:iotd_stats_dict.total_submitted_images|floatformat:2 }}%</td>
-            </tr>
-            </tbody>
-        </table>
+            </p>
+        {% endif %}
     </div>
     <div class="modal-footer">
         <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Close" %}</button>
