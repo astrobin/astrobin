@@ -262,6 +262,8 @@ class IotdStats(models.Model):
 
     # Total submitted images.
     total_submitted_images = models.PositiveIntegerField()
+
+    # Breakdown by subject type.
     total_deep_sky_images = models.PositiveIntegerField()
     total_solar_system_images = models.PositiveIntegerField()
     total_wide_field_images = models.PositiveIntegerField()
@@ -269,7 +271,6 @@ class IotdStats(models.Model):
     total_northern_lights_images = models.PositiveIntegerField()
     total_noctilucent_clouds_images = models.PositiveIntegerField()
 
-    # Breakdown by subject type.
     deep_sky_iotds = models.PositiveIntegerField()
     solar_system_iotds = models.PositiveIntegerField()
     wide_field_iotds = models.PositiveIntegerField()
@@ -292,6 +293,16 @@ class IotdStats(models.Model):
     noctilucent_clouds_tpns = models.PositiveIntegerField()
 
     # Breakdown by data source.
+    total_backyard_images = models.PositiveIntegerField()
+    total_traveler_images = models.PositiveIntegerField()
+    total_own_remote_images = models.PositiveIntegerField()
+    total_amateur_hosting_images = models.PositiveIntegerField()
+    total_public_amateur_data_images = models.PositiveIntegerField()
+    total_pro_data_images = models.PositiveIntegerField()
+    total_mix_images = models.PositiveIntegerField()
+    total_other_images = models.PositiveIntegerField()
+    total_unknown_images = models.PositiveIntegerField()
+
     backyard_iotds = models.PositiveIntegerField()
     traveller_iotds = models.PositiveIntegerField()
     own_remote_iotds = models.PositiveIntegerField()

@@ -521,6 +521,8 @@ class IotdService:
             # Total submitted images.
             total_submitted_images=total_submitted_images_queryset
                 .count(),
+
+            # Breakdown by subject type.
             total_deep_sky_images=total_submitted_images_queryset \
                 .filter(subject_type=SubjectType.DEEP_SKY) \
                 .count(),
@@ -540,7 +542,6 @@ class IotdService:
                 .filter(subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
                 .count(),
 
-            # Breakdown by subject type.
             deep_sky_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.DEEP_SKY) \
@@ -565,6 +566,7 @@ class IotdService:
                 .filter(date__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
                 .count(),
+
             deep_sky_tps=TopPickArchive.objects \
                 .filter(image__published__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.DEEP_SKY) \
@@ -589,6 +591,7 @@ class IotdService:
                 .filter(image__published__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
                 .count(),
+
             deep_sky_tpns=TopPickNominationsArchive.objects \
                 .filter(image__published__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.DEEP_SKY) \
@@ -615,6 +618,34 @@ class IotdService:
                 .count(),
 
             # Breakdown by data source.
+            total_backyard_images=total_submitted_images_queryset \
+                .filter(data_source=DataSource.BACKYARD) \
+                .count(),
+            total_traveller_images=total_submitted_images_queryset \
+                .filter(data_source=DataSource.TRAVELLER) \
+                .count(),
+            total_own_remote_images=total_submitted_images_queryset \
+                .filter(data_source=DataSource.OWN_REMOTE) \
+                .count(),
+            total_amateur_hosting_images=total_submitted_images_queryset \
+                .filter(data_source=DataSource.AMATEUR_HOSTING) \
+                .count(),
+            total_public_amateur_data_images=total_submitted_images_queryset \
+                .filter(data_source=DataSource.PUBLIC_AMATEUR_DATA) \
+                .count(),
+            total_pro_data_images=total_submitted_images_queryset \
+                .filter(data_source=DataSource.PRO_DATA) \
+                .count(),
+            total_mix_images=total_submitted_images_queryset \
+                .filter(data_source=DataSource.MIX) \
+                .count(),
+            total_other_images=total_submitted_images_queryset \
+                .filter(data_source=DataSource.OTHER) \
+                .count(),
+            total_unknown_images=total_submitted_images_queryset \
+                .filter(data_source=DataSource.UNKNOWN) \
+                .count(),
+
             backyard_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
                 .filter(image__data_source=DataSource.BACKYARD) \
@@ -652,6 +683,7 @@ class IotdService:
                 .filter(date__gt=cutoff) \
                 .filter(image__data_source=DataSource.UNKNOWN) \
                 .count(),
+
             backyard_tps=TopPickArchive.objects \
                 .filter(image__published__gt=cutoff) \
                 .filter(image__data_source=DataSource.BACKYARD) \
@@ -688,6 +720,7 @@ class IotdService:
                 .filter(image__published__gt=cutoff) \
                 .filter(image__data_source=DataSource.UNKNOWN) \
                 .count(),
+
             backyard_tpns=TopPickNominationsArchive.objects \
                 .filter(image__published__gt=cutoff) \
                 .filter(image__data_source=DataSource.BACKYARD) \
