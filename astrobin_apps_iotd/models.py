@@ -294,7 +294,7 @@ class IotdStats(models.Model):
 
     # Breakdown by data source.
     total_backyard_images = models.PositiveIntegerField()
-    total_traveler_images = models.PositiveIntegerField()
+    total_traveller_images = models.PositiveIntegerField()
     total_own_remote_images = models.PositiveIntegerField()
     total_amateur_hosting_images = models.PositiveIntegerField()
     total_public_amateur_data_images = models.PositiveIntegerField()
