@@ -10,10 +10,12 @@ from django.utils import timezone
 from django.utils.translation import gettext
 
 from astrobin.enums import SubjectType
+from astrobin.enums.data_source import DataSource
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image
 from astrobin_apps_iotd.models import (
-    Iotd, IotdJudgementQueueEntry, IotdQueueSortOrder, IotdReviewQueueEntry, IotdStaffMemberSettings, IotdSubmission,
+    Iotd, IotdJudgementQueueEntry, IotdQueueSortOrder, IotdReviewQueueEntry, IotdStaffMemberSettings, IotdStats,
+    IotdSubmission,
     IotdSubmissionQueueEntry, IotdVote,
     TopPickArchive,
     TopPickNominationsArchive,
@@ -467,3 +469,259 @@ class IotdService:
             return False, 'TOO_LATE'
 
         return True, None
+
+    @staticmethod
+    def update_stats(days=365):
+        cutoff = date.today() - timedelta(days=days)
+
+        IotdStats.objects.all().delete()
+
+        total_submitted_images_queryset = Image.objects \
+            .filter(
+            published__gt=cutoff, submitted_for_iotd_tp_consideration__isnull=False, subject_type__in=[
+                SubjectType.DEEP_SKY,
+                SubjectType.SOLAR_SYSTEM,
+                SubjectType.WIDE_FIELD,
+                SubjectType.STAR_TRAILS,
+                SubjectType.NORTHERN_LIGHTS,
+                SubjectType.NOCTILUCENT_CLOUDS,
+            ]
+        )
+
+        IotdStats.objects.create(
+            # Period of time covered by the stats.
+            days=days,
+
+            # Distinct winners.
+            distinct_iotd_winners=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .values_list('image__user', flat=True) \
+                .distinct() \
+                .count(),
+            distinct_tp_winners=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .values_list('image__user', flat=True) \
+                .distinct() \
+                .count(),
+            distinct_tpn_winners=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .values_list('image__user', flat=True) \
+                .distinct() \
+                .count(),
+
+            # Total awarded images.
+            total_iotds=days,
+            total_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .count(),
+            total_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .count(),
+
+            # Total submitted images.
+            total_submitted_images=total_submitted_images_queryset
+                .count(),
+            total_deep_sky_images=total_submitted_images_queryset \
+                .filter(subject_type=SubjectType.DEEP_SKY) \
+                .count(),
+            total_solar_system_images=total_submitted_images_queryset \
+                .filter(subject_type=SubjectType.SOLAR_SYSTEM) \
+                .count(),
+            total_wide_field_images=total_submitted_images_queryset \
+                .filter(subject_type=SubjectType.WIDE_FIELD) \
+                .count(),
+            total_star_trails_images=total_submitted_images_queryset \
+                .filter(subject_type=SubjectType.STAR_TRAILS) \
+                .count(),
+            total_northern_lights_images=total_submitted_images_queryset \
+                .filter(subject_type=SubjectType.NORTHERN_LIGHTS) \
+                .count(),
+            total_noctilucent_clouds_images=total_submitted_images_queryset \
+                .filter(subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
+                .count(),
+
+            # Breakdown by subject type.
+            deep_sky_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.DEEP_SKY) \
+                .count(),
+            solar_system_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.SOLAR_SYSTEM) \
+                .count(),
+            wide_field_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.WIDE_FIELD) \
+                .count(),
+            star_trails_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.STAR_TRAILS) \
+                .count(),
+            northern_lights_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.NORTHERN_LIGHTS) \
+                .count(),
+            noctilucent_clouds_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
+                .count(),
+            deep_sky_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.DEEP_SKY) \
+                .count(),
+            solar_system_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.SOLAR_SYSTEM) \
+                .count(),
+            wide_field_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.WIDE_FIELD) \
+                .count(),
+            star_trails_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.STAR_TRAILS) \
+                .count(),
+            northern_lights_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.NORTHERN_LIGHTS) \
+                .count(),
+            noctilucent_clouds_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
+                .count(),
+            deep_sky_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.DEEP_SKY) \
+                .count(),
+            solar_system_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.SOLAR_SYSTEM) \
+                .count(),
+            wide_field_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.WIDE_FIELD) \
+                .count(),
+            star_trails_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.STAR_TRAILS) \
+                .count(),
+            northern_lights_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.NORTHERN_LIGHTS) \
+                .count(),
+            noctilucent_clouds_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
+                .count(),
+
+            # Breakdown by data source.
+            backyard_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__data_source=DataSource.BACKYARD) \
+                .count(),
+            traveller_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__data_source=DataSource.TRAVELLER) \
+                .count(),
+            own_remote_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__data_source=DataSource.OWN_REMOTE) \
+                .count(),
+            amateur_hosting_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__data_source=DataSource.AMATEUR_HOSTING) \
+                .count(),
+            public_amateur_data_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__data_source=DataSource.PUBLIC_AMATEUR_DATA) \
+                .count(),
+            pro_data_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__data_source=DataSource.PRO_DATA) \
+                .count(),
+            mix_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__data_source=DataSource.MIX) \
+                .count(),
+            other_iotds=
+                Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__data_source=DataSource.OTHER) \
+                .count(),
+            unknown_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__data_source=DataSource.UNKNOWN) \
+                .count(),
+            backyard_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.BACKYARD) \
+                .count(),
+            traveller_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.TRAVELLER) \
+                .count(),
+            own_remote_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.OWN_REMOTE) \
+                .count(),
+            amateur_hosting_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.AMATEUR_HOSTING) \
+                .count(),
+            public_amateur_data_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.PUBLIC_AMATEUR_DATA) \
+                .count(),
+            pro_data_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.PRO_DATA) \
+                .count(),
+            mix_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.MIX) \
+                .count(),
+            other_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.OTHER) \
+                .count(),
+            unknown_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.UNKNOWN) \
+                .count(),
+            backyard_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.BACKYARD) \
+                .count(),
+            traveller_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.TRAVELLER) \
+                .count(),
+            own_remote_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.OWN_REMOTE) \
+                .count(),
+            amateur_hosting_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.AMATEUR_HOSTING) \
+                .count(),
+            public_amateur_data_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.PUBLIC_AMATEUR_DATA) \
+                .count(),
+            pro_data_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.PRO_DATA) \
+                .count(),
+            mix_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.MIX) \
+                .count(),
+            other_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.OTHER) \
+                .count(),
+            unknown_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__data_source=DataSource.UNKNOWN) \
+                .count(),
+        )
