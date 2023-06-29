@@ -25,14 +25,17 @@
     border-bottom: 1px solid $grey-7;
     margin: -1rem -1rem 0;
     padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     h3 {
       color: $strong-text-color;
-      margin: 0;
-    }
+      margin: 0 1rem 0 0;
 
-    p {
-      margin: 0;
+      small {
+        margin: 0;
+      }
     }
   }
 
@@ -43,6 +46,13 @@
     margin: 1rem -1rem -1rem;
     display: flex;
     justify-content: flex-end;
+
+    .btn,
+    .toggleproperty-add-remove {
+      &:not(:last-child) {
+        margin-right: $spacer-small;
+      }
+    }
   }
 
   .data {

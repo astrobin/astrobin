@@ -2709,6 +2709,16 @@ form.avatar-delete {
     margin-bottom: 0;
   }
 
+  .table.item-data {
+    table-layout: auto;
+    margin-top: 1rem;
+
+    th, td {
+      padding: 0.25rem 0.75rem;
+      border: 1px solid $grey-6;
+    }
+  }
+
   .equipment-listings {
     margin: 0 -1rem;
     padding: 1rem;

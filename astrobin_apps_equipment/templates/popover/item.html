@@ -1,29 +1,39 @@
 {% load i18n %}
 {% load astrobin_apps_premium_tags %}
-{% load astrobin_apps_equipment_tags %}
-{% load common_tags %}
-{% load toggleproperty_tags %}
+{% load astrobin_apps_equipment_tags %}{% load common_tags %}{% load toggleproperty_tags %}
 
 <div class="equipment-item-popover">
     <div class="header">
-        <h3>{{ item }}</h3>
-        <p>{{ item.item_type_label }}</p>
+        <h3>
+            {{ item }}
+            <small>{{ item.item_type_label }}</small>
+        </h3>
+
+        <a href="{% app_redirection_service '/equipment/explorer' %}/{{ item.klass|lower }}/{{ item.pk }}"
+           class="btn btn-link">
+            <i class="icon-file-text"></i>
+            {% trans "Details" %}
+        </a>
     </div>
 
-    <div class="data">
-        {% if item.properties %}
-            {% for property in item.properties %}
-                <p>
-                    <strong>{{ property.label }}</strong>: {{ property.value }}
-                </p>
-            {% endfor %}
-        {% else %}
-            <p>
-                {% trans "No additional information available for this item." %}
-            </p>
-        {% endif %}
-    </div>
-
+    <table class="table item-data">
+        <tbody>
+        {% for property in item.properties %}
+            <tr>
+                <th>{{ property.label }}</th>
+                <td>{{ property.value }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <th>{% trans "Users" %}</th>
+            <td>{{ item.user_count }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "Images" %}</th>
+            <td>{{ item.image_count }}</td>
+        </tr>
+        </tbody>
+    </table>
 
     {% with item_listings=item|equipment_item_listings:REQUEST_COUNTRY brand_listings=item|equipment_brand_listings_by_item:REQUEST_COUNTRY %}
         {% setvar image.user|get_valid_usersubscription as image_user_valid_usersubscription %}
@@ -120,6 +130,20 @@
     {% endwith %}
 
     <div class="footer">
+        <a href="{% app_redirection_service '/equipment/explorer' %}/{{ item.klass|lower }}/{{ item.pk }}?edit=true"
+           class="btn btn-secondary">
+            <i class="icon-pencil"></i>
+            {% trans "Propose edit" %}
+        </a>
+
+        {% if item.forum %}
+            <a href="{% url 'pybb:forum' item.forum.id %}"
+               class="btn btn-secondary">
+                <i class="icon-comments"></i>
+                {% trans "Forum" %}
+            </a>
+        {% endif %}
+
         {% add_remove_toggleproperty 'follow' item request.user %}
     </div>
 </div>
