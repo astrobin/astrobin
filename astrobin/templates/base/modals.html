@@ -395,13 +395,21 @@
 </div>
 
 <div class="modal hide fade large" id="iotd-stats-modal">
+    {% iotd_stats as iotd_stats_dict %}
+
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
-        <h3><i class="icon-bar-chart"></i> {% trans "IOTD/TP stats" %}</h3>
+        <h3>
+            <i class="icon-bar-chart"></i>
+            {% trans "IOTD/TP stats" %}
+            {% if iotd_stats_dict %}
+                {% blocktrans trimmed with days=iotd_stats_dict.days %}
+                    (last {{ days }} days)
+                {% endblocktrans %}
+            {% endif %}
+        </h3>
     </div>
     <div class="modal-body">
-        {% iotd_stats as iotd_stats_dict %}
-
         {% if iotd_stats_dict %}
             <p class="alert alert-info">
                 <strong>{% trans "Please note" %}:</strong>

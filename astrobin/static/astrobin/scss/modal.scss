@@ -26,11 +26,12 @@
     background: $grey-6-dark url('../images/darker-panel-tile.png');
     @include rounded-corners-top;
     border-bottom: #404040;
+    padding: 1rem 1.5rem;
 
     h3 {
       margin: 0;
       padding: 0;
-      font-size: $base-font-size;
+      font-size: 1.5rem;
 
       [class^="icon-"], [class*=" icon-"] {
         padding-right: 8px;
