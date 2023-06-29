@@ -11,11 +11,16 @@ class NestedCommentsGenerators:
     @staticmethod
     def comment(**kwargs):
         target = kwargs.pop('target', None)
+        author = kwargs.pop('author', None)
+
         if target is None:
             target = Generators.image()
 
+        if author is None:
+            author = Generators.user()
+
         return NestedComment.objects.create(
-            author=kwargs.pop('author', Generators.user()),
+            author=kwargs.pop('author', author),
             content_type=ContentType.objects.get_for_model(target),
             object_id=target.id,
             text=kwargs.pop('text', Generators.randomString()),
