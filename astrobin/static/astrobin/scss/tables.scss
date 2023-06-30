@@ -41,12 +41,15 @@
   }
 }
 
-.table caption {
-  font-size: 16px;
-  line-height: 32px;
-  font-weight: bold;
-  background: $grey-6-dark url('../images/darker-panel-tile.png');
-  padding: 4px 8px;
+.table {
+  caption-side: bottom;
+
+  caption {
+    font-size: .9rem;
+    font-style: italic;
+    margin-top: .5rem;
+    opacity: .8;
+  }
 }
 
 .table caption + thead tr:first-child th,

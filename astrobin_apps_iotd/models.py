@@ -247,6 +247,8 @@ class IotdStats(models.Model):
     TPN = Top pick nomination
     """
 
+    created = models.DateTimeField(auto_now_add=True)
+
     # Period of time covered by the stats.
     days = models.PositiveSmallIntegerField()
 
@@ -332,3 +334,6 @@ class IotdStats(models.Model):
     mix_tpns = models.PositiveIntegerField()
     other_tpns = models.PositiveIntegerField()
     unknown_tpns = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ('-created',)

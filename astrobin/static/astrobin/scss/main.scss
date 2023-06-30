@@ -2244,9 +2244,15 @@ form.avatar-delete {
         font-size: 70%;
       }
 
-      .info {
+      .info,
+      .iotd-stats-link {
         float: right;
         color: $strong-text-on-gold;
+        display: inline-block;
+      }
+
+      .info {
+        margin-right: .75rem;
       }
     }
 
@@ -2315,7 +2321,8 @@ form.avatar-delete {
       margin: 0;
       padding: 15px;
 
-      .info {
+      .info,
+      .iotd-stats-link {
         margin-left: 1rem;
         color: $strong-text-color;
       }
@@ -2420,6 +2427,20 @@ form.avatar-delete {
       margin-right: $spacer-medium;
       @include box-shadow;
       @include rounded-corners(20px);
+    }
+  }
+}
+
+.iotd-stats-table {
+  table-layout: auto;
+
+  th, td {
+    border: 1px solid #444 !important;
+    padding: 0.5rem 0.75rem !important;
+    vertical-align: middle !important;
+
+    &:last-child {
+      text-align: left;
     }
   }
 }
