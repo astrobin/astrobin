@@ -474,8 +474,6 @@ class IotdService:
     def update_stats(days=365):
         cutoff = date.today() - timedelta(days=days)
 
-        IotdStats.objects.all().delete()
-
         total_submitted_images_queryset = Image.objects \
             .filter(
             published__gt=cutoff, submitted_for_iotd_tp_consideration__isnull=False, subject_type__in=[

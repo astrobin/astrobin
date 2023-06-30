@@ -50,17 +50,3 @@ def get_iotd():
     if iotds:
         return iotds[0]
     return None
-
-
-@register.simple_tag
-def iotd_stats():
-    cache_key = 'iotd_stats'
-
-    stats_dict = cache.get(cache_key)
-
-    if not stats_dict:
-        stats = IotdStats.objects.first()
-        stats_dict = {f: getattr(stats, f) for f in [field.name for field in stats._meta.fields]} if stats else None
-        cache.set(cache_key, stats_dict, 60 * 60 * 24)
-
-    return stats_dict

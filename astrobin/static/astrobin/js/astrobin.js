@@ -1506,83 +1506,45 @@ astrobin_common = {
 astrobin_stats = {
     config: {},
 
-    globals: {
-        previousPoint: null
-    },
+    fetch_iotd_stats: function () {
+        const url = "/api/v2/iotd/stats/";
 
-    /* Private */
-    _showTooltip: function (x, y, contents) {
-        $('<div id="stats-tooltip">' + contents + '</div>').css({
-            position: 'absolute',
-            display: 'none',
-            top: y - 25,
-            left: x,
-            border: '1px solid #fdd',
-            padding: '2px',
-            'background-color': '#fee',
-            color: '#000',
-            opacity: 0.80
-        }).appendTo("body").fadeIn(200);
-    },
+        $("#iotd-stats-modal td").text("...");
 
-    /* Public */
-    enableTooltips: function (plot) {
-        $(plot).bind("plothover", function (event, pos, item) {
-            if (item) {
-                if (astrobin_stats.globals.previousPoint != item.dataIndex) {
-                    astrobin_stats.globals.previousPoint = item.dataIndex;
-
-                    $("#stats-tooltip").remove();
-                    var x = item.datapoint[0].toFixed(2),
-                        y = item.datapoint[1].toFixed(2);
-
-                    astrobin_stats._showTooltip(item.pageX, item.pageY, y);
-                }
-            } else {
-                $("#stats-tooltip").remove();
-                astrobin_stats.globals.previousPoint = null;
-            }
-        });
-    },
-
-    plot: function (id, url, timeout, data, options) {
         $.ajax({
             url: url,
             method: 'GET',
             dataType: 'json',
-            timeout: timeout,
+            timeout: 5000,
             cache: false,
-            success: function (series) {
-                $.plot(
-                    $(id),
-                    [{
-                        label: series['flot_label'],
-                        color: "#CC4B2E",
-                        data: series['flot_data']
-                    }],
-                    series['flot_options']);
-            }
-        });
-    },
+            success: function (data) {
+                const stats = data['results'][0];
+                const $header = $("#iotd-stats-modal .modal-header h3");
 
-    plot_pie: function (id, url, timeout, data, options) {
-        $.ajax({
-            url: url,
-            method: 'GET',
-            dataType: 'json',
-            timeout: timeout,
-            cache: false,
-            success: function (series) {
-                $.plot(
-                    $(id),
-                    series['flot_data'],
-                    series['flot_options']);
+                $header.text(
+                    $header.text().replace('[x]', stats['days'])
+                )
+
+                Object.keys(stats).forEach(key => {
+                    const $el = $(`#iotd-stats-modal td.${key.replaceAll('_', '-')}`);
+                    let text = stats[key];
+
+                    if ($el.closest('.table').hasClass('percentages')) {
+                        text = text + '%';
+                    }
+
+                    $el.text(text);
+                });
             }
-        });
+        })
     },
 
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_stats.config, config);
+
+        $("#iotd-stats-modal").on("show", function () {
+            astrobin_stats.fetch_iotd_stats();
+        })
     }
 };
