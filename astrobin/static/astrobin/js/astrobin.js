@@ -1530,7 +1530,7 @@ astrobin_stats = {
                     let text = stats[key];
 
                     if ($el.closest('.table').hasClass('percentages')) {
-                        text = text + '%';
+                        text = text.toFixed(2) + '%';
                     }
 
                     $el.text(text);
