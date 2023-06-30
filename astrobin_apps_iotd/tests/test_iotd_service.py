@@ -7,6 +7,7 @@ from mock import PropertyMock, patch
 from astrobin.enums import SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_iotd.models import (
     Iotd, IotdDismissedImage, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote,
 )
@@ -2035,6 +2036,9 @@ class IotdServiceTest(TestCase):
         is_authenticated.return_value = True
 
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
         image.user.userprofile.exclude_from_competitions = True
         image.user.userprofile.save(keep_deleted=True)
@@ -2048,6 +2052,9 @@ class IotdServiceTest(TestCase):
         is_authenticated.return_value = True
 
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
         image.user.userprofile.banned_from_competitions = datetime.now()
         image.user.userprofile.save(keep_deleted=True)
@@ -2061,6 +2068,9 @@ class IotdServiceTest(TestCase):
         is_authenticated.return_value = True
 
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
         image.published = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS + 1)
         image.save(keep_deleted=True)
@@ -2070,10 +2080,51 @@ class IotdServiceTest(TestCase):
         )
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_no_telescope_no_camera(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        self.assertEqual(
+            (False, 'NO_TELESCOPE_OR_CAMERA'), IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_no_camera(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        self.assertEqual(
+            (False, 'NO_TELESCOPE_OR_CAMERA'), IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_no_telescope(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        self.assertEqual(
+            (False, 'NO_TELESCOPE_OR_CAMERA'), IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_may_submit_to_iotd_tp_process_all_ok(self, is_authenticated):
         is_authenticated.return_value = True
 
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
 
         self.assertEqual(

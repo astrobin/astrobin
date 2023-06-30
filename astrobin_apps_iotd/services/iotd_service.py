@@ -457,6 +457,12 @@ class IotdService:
         if image.subject_type in (SubjectType.GEAR, SubjectType.OTHER, '', None):
             return False, 'BAD_SUBJECT_TYPE'
 
+        if image.imaging_telescopes_2.count() == 0 or image.imaging_cameras_2.count() == 0:
+            return False, 'NO_TELESCOPE_OR_CAMERA'
+
+        if image.acquisition_set.count() == 0:
+            return False, 'NO_ACQUISITIONS'
+
         if image.user.userprofile.exclude_from_competitions:
             return False, 'EXCLUDED_FROM_COMPETITIONS'
 
