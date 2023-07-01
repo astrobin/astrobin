@@ -45,6 +45,7 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
+from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
 from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
 from astrobin_apps_notifications.utils import (
@@ -216,7 +217,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
         if instance.user.userprofile.auto_submit_to_iotd_tp_process and not instance.is_wip:
             may, reason = IotdService.submit_to_iotd_tp_process(instance.user, instance)
 
-            if not may:
+            if not may and reason != MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED:
                 thumb = instance.thumbnail_raw('gallery', None, sync=True)
                 push_notification(
                     [instance.user], None, 'image_not_submitted_to_iotd_tp', {
