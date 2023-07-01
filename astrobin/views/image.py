@@ -60,6 +60,8 @@ from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelec
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
+from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
+from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
@@ -1480,30 +1482,10 @@ class ImageSubmitToIotdTpProcessView(View):
         may, reason = IotdService.submit_to_iotd_tp_process(request.user, image, auto_submit)
 
         if not may:
-            if reason == 'UNAUTHENTICATED' or reason == 'NOT_OWNER':
+            if reason == MayNotSubmitToIotdTpReason.NOT_AUTHENTICATED or reason == MayNotSubmitToIotdTpReason.NOT_OWNER:
                 return render(request, "403.html", {})
-            elif reason == 'NOT_PUBLISHED':
-                return HttpResponseBadRequest("This image has not been published yet.")
-            elif reason == 'ALREADY_SUBMITTED':
-                return HttpResponseBadRequest("This image has already been submitted to the IOTD/TP process.")
-            elif reason == 'EXCLUDED_FROM_COMPETITION':
-                return HttpResponseBadRequest(
-                    "This image cannot be submitted to the IOTD/TP process because the user has selected to be excluded "
-                    "from competitions."
-                )
-            elif reason == 'BANNED_FROM_COMPETITIONS':
-                return HttpResponseBadRequest(
-                    "This image cannot be submitted to the IOTD/TP process because the user has been banned from "
-                    "competitions."
-                )
-            elif reason == 'TOO_LATE':
-                return HttpResponseBadRequest(
-                    "Too late: images can be submitted to the IOTD/TP process only %s days after publication." % (
-                        settings.IOTD_SUBMISSION_WINDOW_DAYS
-                    )
-                )
             else:
-                return HttpResponseBadRequest("Unknown error")
+                return HttpResponseBadRequest(humanize_may_not_submit_to_iotd_tp_process_reason(reason))
 
         messages.success(request, _("Image submitted to the IOTD/TP process!"))
         return HttpResponseRedirect(request.POST.get('next'))
