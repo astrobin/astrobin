@@ -16,6 +16,8 @@ from astrobin_apps_equipment.models import (
 )
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_equipment.services.stock import StockImporterService
+from astrobin_apps_equipment.services.stock.plugins.agena import AgenaStockImporterPlugin
 
 log = logging.getLogger(__name__)
 
@@ -95,3 +97,9 @@ def reject_stuck_items():
         for item in stuck_items.iterator():
             log.debug(f'reject_stuck_items task beginning rejection of {model_class}/{item.id}')
             EquipmentService.reject_item(item)
+
+
+@shared_task(time_limit=300)
+def import_stock_feed_agena():
+    importer = StockImporterService(AgenaStockImporterPlugin())
+    importer.import_stock()
