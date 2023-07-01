@@ -60,7 +60,7 @@ def humanize_may_not_submit_to_iotd_tp_process_reason(reason: str) -> str:
         MayNotSubmitToIotdTpReason.NOT_PUBLISHED: _(
             "Unfortunately it's too late: images can be submitted only within %(num_days)s days "
             "after publication." % {
-                'num_days': settings.DAYS_AFTER_PUBLICATION_TO_SUBMIT_TO_IOTD_TP
+                'num_days': settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS
             }
         ),
         MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED: _(
