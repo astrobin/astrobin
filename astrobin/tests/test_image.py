@@ -2461,6 +2461,7 @@ class ImageTest(TestCase):
         Generators.deep_sky_acquisition(image=image)
 
         ImageService(image).promote_to_public_area(skip_notifications=True)
+        image.save()
 
         self.assertEqual(5, image.designated_iotd_submitters.count())
 
@@ -2483,6 +2484,7 @@ class ImageTest(TestCase):
         Generators.deep_sky_acquisition(image)
 
         ImageService(image).promote_to_public_area(skip_notifications=True)
+        image.save()
 
         self.assertEqual(5, image.designated_iotd_reviewers.count())
 
