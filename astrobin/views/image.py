@@ -1021,10 +1021,10 @@ class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
     pk_url_kwarg = 'id'
     http_method_names = ('post',)
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         return self.model.objects_including_wip.all()
 
-    def get_success_url(self):
+    def get_success_url(self) -> str:
         return self.object.get_absolute_url()
 
     def dispatch(self, request, *args, **kwargs):
@@ -1035,14 +1035,14 @@ class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
 
         return super(ImageDemoteView, self).dispatch(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        image = self.get_object()
+    def form_valid(self, form):
+        image = form.instance
 
         ImageService(image).demote_to_staging_area()
 
-        messages.success(request, _("Image moved to the staging area."))
+        messages.success(self.request, _("Image moved to the staging area."))
 
-        return super(ImageDemoteView, self).post(request, args, kwargs)
+        return super().form_valid(form)
 
 
 class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
@@ -1051,10 +1051,10 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
     pk_url_kwarg = 'id'
     http_method_names = ('post',)
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         return self.model.objects_including_wip.all()
 
-    def get_success_url(self):
+    def get_success_url(self) -> str:
         return self.object.get_absolute_url()
 
     def dispatch(self, request, *args, **kwargs):
@@ -1065,15 +1065,15 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
 
         return super(ImagePromoteView, self).dispatch(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        image = self.get_object()
+    def form_valid(self, form):
+        image = form.instance
 
-        skip_notifications = request.POST.get('skip_notifications', 'off').lower() == 'on'
+        skip_notifications = self.request.POST.get('skip_notifications', 'off').lower() == 'on'
         ImageService(image).promote_to_public_area(skip_notifications)
 
-        messages.success(request, _("Image moved to the public area."))
+        messages.success(self.request, _("Image moved to the public area."))
 
-        return super(ImagePromoteView, self).post(request, args, kwargs)
+        return super().form_valid(form)
 
 
 class ImageEditBaseView(LoginRequiredMixin, ImageUpdateViewBase):

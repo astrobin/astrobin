@@ -213,7 +213,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
 
         UserService(instance.user).clear_gallery_image_list_cache()
 
-        if instance.user.userprofile.auto_submit_to_iotd_tp_process:
+        if instance.user.userprofile.auto_submit_to_iotd_tp_process and not instance.is_wip:
             may, reason = IotdService.submit_to_iotd_tp_process(instance.user, instance)
 
             if not may:

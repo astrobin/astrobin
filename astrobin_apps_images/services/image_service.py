@@ -477,7 +477,6 @@ class ImageService:
         if self.image.is_wip:
             previously_published = self.image.published
             self.image.is_wip = False
-            self.image.save(keep_deleted=True)
 
             UserService(self.image.user).clear_gallery_image_list_cache()
 
@@ -490,7 +489,6 @@ class ImageService:
     def demote_to_staging_area(self):
         if not self.image.is_wip:
             self.image.is_wip = True
-            self.image.save(keep_deleted=True)
 
             UserService(self.image.user).clear_gallery_image_list_cache()
 
