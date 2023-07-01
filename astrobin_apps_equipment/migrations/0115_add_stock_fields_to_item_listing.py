@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('astrobin_apps_equipment', '0113_add_maksutov_newtonian_telescope_type'),
+        ('astrobin_apps_equipment', '0114_add_related_query_name_to_equipment_item'),
     ]
 
     operations = [
