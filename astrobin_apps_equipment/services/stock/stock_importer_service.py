@@ -65,8 +65,8 @@ class StockImporterService:
                     name=stock_item.name,
                     sku=stock_item.sku,
                     url=stock_item.url,
-                    stock_status=stock_item.stock_status,
-                    stock_amount=stock_item.stock_amount,
+                    stock_status=stock_item.stock_status.value,
+                    stock_amount=max(0, stock_item.stock_amount),
                     updated=datetime.now(),
                 )
             except EquipmentItemListing.DoesNotExist:
@@ -79,6 +79,6 @@ class StockImporterService:
                     name=stock_item.name,
                     sku=stock_item.sku,
                     url=stock_item.url,
-                    stock_status=stock_item.stock_status,
-                    stock_amount=stock_item.stock_amount,
+                    stock_status=stock_item.stock_status.value,
+                    stock_amount=max(0, stock_item.stock_amount),
                 )
