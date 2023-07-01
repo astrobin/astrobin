@@ -569,6 +569,10 @@ astrobin_common = {
                 events: {
                     show: function (event, api) {
                         $label.addClass('qtip-open');
+                        $(".ui-tooltip .btn-close").one("click", function (e) {
+                            api.hide();
+                            e.preventDefault();
+                        });
                     },
 
                     hide: function (event, api) {

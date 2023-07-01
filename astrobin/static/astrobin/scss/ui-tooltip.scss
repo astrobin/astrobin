@@ -3,12 +3,27 @@
   z-index: 1049 !important;
   font-size: .9rem;
 
-  @media screen and (max-width: 525px) {
-    max-width: 400px !important;
+  @media screen and (max-width: 767.9px) {
+    position: fixed;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    width: 100vw !important;
+    max-width: unset;
+
+    .ui-tooltip-content {
+      width: calc(100% - 2rem);
+      height: calc(100% - 2rem);
+
+      .body {
+        max-height: calc(100vh - 370px);
+        overflow-y: auto;
+      }
+    }
   }
 
-  @media screen and (min-width: 526px) {
-    max-width: 500px !important;
+  @media screen and (min-width: 768px) {
+    max-width: 480px !important;
   }
 }
 
@@ -46,6 +61,14 @@
     margin: 1rem -1rem -1rem;
     display: flex;
     justify-content: flex-end;
+
+    @media screen and (max-width: 767.9px) {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      width: calc(100% - 2rem);
+      flex-direction: column;
+    }
 
     .btn,
     .toggleproperty-add-remove {

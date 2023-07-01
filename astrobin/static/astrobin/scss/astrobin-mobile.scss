@@ -169,8 +169,8 @@
       }
 
       .toggleproperty-add-remove.property-like {
-        top: 8px;
-        right: 0;
+        top: .5rem;
+        right: .5rem;
       }
 
       .avatar {
@@ -303,7 +303,8 @@
   }
 
   .subtle-container .header {
-    width: calc(100% - 1.75rem);
+    width: calc(100% - 2rem);
+    margin-left: 0;
 
     .actions {
       right: 20px;
