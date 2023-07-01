@@ -539,11 +539,11 @@ astrobin_common = {
                 show: {
                     event: "mouseenter",
                     solo: true,
-                    delay: 750
+                    delay: 500
                 },
                 hide: {
                     event: 'mouseleave unfocus',
-                    delay: 750,
+                    delay: 500,
                     fixed: true
                 },
                 style: {
