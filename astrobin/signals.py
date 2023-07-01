@@ -217,7 +217,11 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
         if instance.user.userprofile.auto_submit_to_iotd_tp_process and not instance.is_wip:
             may, reason = IotdService.submit_to_iotd_tp_process(instance.user, instance)
 
-            if not may and reason != MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED:
+            if not may and reason in (
+                    MayNotSubmitToIotdTpReason.IS_FREE,
+                    MayNotSubmitToIotdTpReason.NO_TELESCOPE_OR_CAMERA,
+                    MayNotSubmitToIotdTpReason.NO_ACQUISITIONS,
+            ):
                 thumb = instance.thumbnail_raw('gallery', None, sync=True)
                 push_notification(
                     [instance.user], None, 'image_not_submitted_to_iotd_tp', {
