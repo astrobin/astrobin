@@ -347,6 +347,16 @@
                 </div>
             </div>
 
+
+            <div class="control-group">
+                <div class="controls">
+                    <label for="id_slideshow_transitions" class="checkbox">
+                        <input type="checkbox" id="id_slideshow_transitions" />
+                        {% trans "Transitions" %}
+                    </label>
+                </div>
+            </div>
+
             <div class="control-group">
                 <label for="id_slideshow_play_speed" class="control-label">
                     {% trans "Play speed" %} (ms)
@@ -380,5 +390,214 @@
         <button class="btn btn-primary btn-block-mobile">
             {% trans 'Apply' %}
         </button>
+    </div>
+</div>
+
+<div class="modal hide fade large" id="iotd-stats-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>
+            <i class="icon-bar-chart"></i>
+            {% trans "IOTD/TP stats" %}
+            {% blocktrans trimmed %}
+                (last [x] days)
+            {% endblocktrans %}
+        </h3>
+    </div>
+    <div class="modal-body">
+        <p class="alert alert-info">
+            <strong>{% trans "Please note" %}:</strong>
+            {% blocktrans trimmed %}
+                The following tables are updated every 24 hours.
+            {% endblocktrans %}
+        </p>
+
+        <h3>{% trans "Distribution of astrophotographers" %}</h3>
+
+        <table class="table table-condensed iotd-stats-table">
+            <caption>
+                {% blocktrans trimmed %}
+                    This table shows the number of distinct astrophotographers who have been assigned and IOTD/TP award
+                    compared to the total number of images awarded.
+                {% endblocktrans %}
+            </caption>
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>{% trans "Distinct awarded users" %}</th>
+                <th>{% trans "Total awarded images" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>{% trans "Image of the day" %}</th>
+                <td class="distinct-iotd-winners"></td>
+                <td class="total-iotds"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Top picks" %}</th>
+                <td class="distinct-tp-winners"></td>
+                <td class="total-tps"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Top pick nominations" %}</th>
+                <td class="distinct-tpn-winners"></td>
+                <td class="total-tpns"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>{% trans "Distribution of subject types" %}</h3>
+
+        <table class="table table-condensed iotd-stats-table percentages">
+            <caption>
+                {% blocktrans trimmed %}
+                    This table shows the distribution of awards per subject type, compared to the popularity of images
+                    of that subject type.
+                {% endblocktrans %}
+            </caption>
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>{% trans "Image of the day" %}</th>
+                <th>{% trans "Top pick" %}</th>
+                <th>{% trans "Top pick nominations" %}</th>
+                <th>{% trans "Total submitted" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>{% trans "Deep sky" %}</th>
+                <td class="deep-sky-iotds"></td>
+                <td class="deep-sky-tps"></td>
+                <td class="deep-sky-tpns"></td>
+                <td class="total-deep-sky-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Solar system" %}</th>
+                <td class="solar-system-iotds"></td>
+                <td class="solar-system-tps"></td>
+                <td class="solar-system-tpns"></td>
+                <td class="total-solar-system-images"></td>
+            </tr>
+            <tr>
+            <tr>
+                <th>{% trans "Extremely wide field" %}</th>
+                <td class="wide-field-iotds"></td>
+                <td class="wide-field-tps"></td>
+                <td class="wide-field-tpns"></td>
+                <td class="total-wide-field-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Star trails" %}</th>
+                <td class="star-trails-iotds"></td>
+                <td class="star-trails-tps"></td>
+                <td class="star-trails-tpns"></td>
+                <td class="total-star-trails-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Northern lights" %}</th>
+                <td class="northern-lights-iotds"></td>
+                <td class="northern-lights-tps"></td>
+                <td class="northern-lights-tpns"></td>
+                <td class="total-northern-lights-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Noctilucent clouds" %}</th>
+                <td class="noctilucent-clouds-iotds"></td>
+                <td class="noctilucent-clouds-tps"></td>
+                <td class="noctilucent-clouds-tpns"></td>
+                <td class="total-noctilucent-clouds-images"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>{% trans "Distribution of data sources" %}</h3>
+
+        <table class="table table-condensed iotd-stats-table percentages">
+            <caption>
+                {% blocktrans trimmed %}
+                    This table shows the distribution of awards per data source, compared to the popularity of images
+                    acquired from that data source.
+                {% endblocktrans %}
+            </caption>
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>{% trans "Image of the day" %}</th>
+                <th>{% trans "Top pick" %}</th>
+                <th>{% trans "Top pick nominations" %}</th>
+                <th>{% trans "Total submitted" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>{% trans "Backyard" %}</th>
+                <td class="backyard-iotds"></td>
+                <td class="backyard-tps"></td>
+                <td class="backyard-tpns"></td>
+                <td class="total-backyard-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Traveller" %}</th>
+                <td class="traveller-iotds"></td>
+                <td class="traveller-tps"></td>
+                <td class="traveller-tpns"></td>
+                <td class="total-traveller-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Own remote observatory" %}</th>
+                <td class="own-remote-iotds"></td>
+                <td class="own-remote-tps"></td>
+                <td class="own-remote-tpns"></td>
+                <td class="total-own-remote-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Amateur hosting facility" %}</th>
+                <td class="amateur-hosting-iotds"></td>
+                <td class="amateur-hosting-tps"></td>
+                <td class="amateur-hosting-tpns"></td>
+                <td class="total-amateur-hosting-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Public amaeteur data" %}</th>
+                <td class="public-amateur-data-iotds"></td>
+                <td class="public-amateur-data-tps"></td>
+                <td class="public-amateur-data-tpns"></td>
+                <td class="total-public-amateur-data-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Professional, scientific grade data" %}</th>
+                <td class="pro-data-iotds"></td>
+                <td class="pro-data-tps"></td>
+                <td class="pro-data-tpns"></td>
+                <td class="total-pro-data-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Mix of multiple sources" %}</th>
+                <td class="mix-iotds"></td>
+                <td class="mix-tps"></td>
+                <td class="mix-tpns"></td>
+                <td class="total-mix-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Other" %}</th>
+                <td class="other-iotds"></td>
+                <td class="other-tps"></td>
+                <td class="other-tpns"></td>
+                <td class="total-other-images"></td>
+            </tr>
+            <tr>
+                <th>{% trans "Unknown" %}</th>
+                <td class="unknown-iotds"></td>
+                <td class="unknown-tps"></td>
+                <td class="unknown-tpns"></td>
+                <td class="total-unknown-images"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Close" %}</button>
     </div>
 </div>

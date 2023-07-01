@@ -530,15 +530,22 @@ astrobin_common = {
 
     setup_gear_popovers: function () {
         $('.gear-popover-label').each(function () {
-            $(this).qtip({
+            const $label = $(this);
+
+            $label.qtip({
                 position: {
                     viewport: $(window)
                 },
                 show: {
                     event: "mouseenter",
                     solo: true,
+                    delay: 500
                 },
-                hide: "unfocus",
+                hide: {
+                    event: 'mouseleave unfocus',
+                    delay: 500,
+                    fixed: true
+                },
                 style: {
                     tip: {
                         width: 16,
@@ -558,7 +565,20 @@ astrobin_common = {
                             this.set('content.text', data.html);
                         }
                     }
-                }
+                },
+                events: {
+                    show: function (event, api) {
+                        $label.addClass('qtip-open');
+                        $(".ui-tooltip .btn-close").one("click", function (e) {
+                            api.hide();
+                            e.preventDefault();
+                        });
+                    },
+
+                    hide: function (event, api) {
+                        $label.removeClass('qtip-open');
+                    },
+                },
             });
         });
     },
@@ -1337,15 +1357,31 @@ astrobin_common = {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const autoplay = urlParams.get('autoplay');
+        let transitions = urlParams.get('transitions');
         const speed = urlParams.get('speed') || 5000;
 
-        const fancybox = new window.Fancybox(items, Object.assign(options, {slideshow: {delay: speed}}));
+        transitions = transitions === null ? 'true' : transitions;
+
+        const transitionDuration = transitions === 'true' ? 0.92 : 0;
+
+        const fancybox = new window.Fancybox(
+            items,
+            Object.assign(options, {
+                slideshow: {
+                    delay: speed
+                },
+                Carousel: {
+                    friction: transitionDuration
+                }
+            })
+        );
 
         if (autoplay === 'true') {
             fancybox.plugins.Toolbar.Slideshow.activate();
         }
 
-        const url = astrobin_common.add_or_update_url_param(window.location.href, 'slideshow', true);
+        let url = astrobin_common.add_or_update_url_param(window.location.href, 'slideshow', true);
+        url = astrobin_common.add_or_update_url_param(url, 'transitions', transitions);
 
         window.history.pushState({path: url}, '', url);
 
@@ -1474,83 +1510,45 @@ astrobin_common = {
 astrobin_stats = {
     config: {},
 
-    globals: {
-        previousPoint: null
-    },
+    fetch_iotd_stats: function () {
+        const url = "/api/v2/iotd/stats/";
 
-    /* Private */
-    _showTooltip: function (x, y, contents) {
-        $('<div id="stats-tooltip">' + contents + '</div>').css({
-            position: 'absolute',
-            display: 'none',
-            top: y - 25,
-            left: x,
-            border: '1px solid #fdd',
-            padding: '2px',
-            'background-color': '#fee',
-            color: '#000',
-            opacity: 0.80
-        }).appendTo("body").fadeIn(200);
-    },
+        $("#iotd-stats-modal td").text("...");
 
-    /* Public */
-    enableTooltips: function (plot) {
-        $(plot).bind("plothover", function (event, pos, item) {
-            if (item) {
-                if (astrobin_stats.globals.previousPoint != item.dataIndex) {
-                    astrobin_stats.globals.previousPoint = item.dataIndex;
-
-                    $("#stats-tooltip").remove();
-                    var x = item.datapoint[0].toFixed(2),
-                        y = item.datapoint[1].toFixed(2);
-
-                    astrobin_stats._showTooltip(item.pageX, item.pageY, y);
-                }
-            } else {
-                $("#stats-tooltip").remove();
-                astrobin_stats.globals.previousPoint = null;
-            }
-        });
-    },
-
-    plot: function (id, url, timeout, data, options) {
         $.ajax({
             url: url,
             method: 'GET',
             dataType: 'json',
-            timeout: timeout,
+            timeout: 5000,
             cache: false,
-            success: function (series) {
-                $.plot(
-                    $(id),
-                    [{
-                        label: series['flot_label'],
-                        color: "#CC4B2E",
-                        data: series['flot_data']
-                    }],
-                    series['flot_options']);
-            }
-        });
-    },
+            success: function (data) {
+                const stats = data['results'][0];
+                const $header = $("#iotd-stats-modal .modal-header h3");
 
-    plot_pie: function (id, url, timeout, data, options) {
-        $.ajax({
-            url: url,
-            method: 'GET',
-            dataType: 'json',
-            timeout: timeout,
-            cache: false,
-            success: function (series) {
-                $.plot(
-                    $(id),
-                    series['flot_data'],
-                    series['flot_options']);
+                $header.text(
+                    $header.text().replace('[x]', stats['days'])
+                )
+
+                Object.keys(stats).forEach(key => {
+                    const $el = $(`#iotd-stats-modal td.${key.replaceAll('_', '-')}`);
+                    let text = stats[key];
+
+                    if ($el.closest('.table').hasClass('percentages')) {
+                        text = text.toFixed(2) + '%';
+                    }
+
+                    $el.text(text);
+                });
             }
-        });
+        })
     },
 
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_stats.config, config);
+
+        $("#iotd-stats-modal").on("show", function () {
+            astrobin_stats.fetch_iotd_stats();
+        })
     }
 };

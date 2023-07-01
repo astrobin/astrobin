@@ -14,7 +14,8 @@ from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import (
-    Accessory, Camera, Collection, Filter, FocalReducer, GearMigrationStrategy, Image, ImageRevision, Mount, Software,
+    Accessory, Camera, Collection, DeepSky_Acquisition, Filter, FocalReducer, GearMigrationStrategy, Image,
+    ImageRevision, Mount, Software,
     Telescope,
 )
 from astrobin_apps_premium.services.premium_service import SubscriptionName
@@ -295,4 +296,12 @@ class Generators:
         return Collection.objects.create(
             user=kwargs.pop('user', Generators.user()),
             name=kwargs.pop('name', Generators.randomString()),
+        )
+
+    @staticmethod
+    def deep_sky_acquisition(image: Image, **kwargs) -> DeepSky_Acquisition:
+        return DeepSky_Acquisition.objects.create(
+            image=image,
+            number=kwargs.pop('number', 1),
+            duration=kwargs.pop('duration', 300),
         )

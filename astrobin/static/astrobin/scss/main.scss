@@ -2244,9 +2244,15 @@ form.avatar-delete {
         font-size: 70%;
       }
 
-      .info {
+      .info,
+      .iotd-stats-link {
         float: right;
         color: $strong-text-on-gold;
+        display: inline-block;
+      }
+
+      .info {
+        margin-right: .75rem;
       }
     }
 
@@ -2315,7 +2321,8 @@ form.avatar-delete {
       margin: 0;
       padding: 15px;
 
-      .info {
+      .info,
+      .iotd-stats-link {
         margin-left: 1rem;
         color: $strong-text-color;
       }
@@ -2420,6 +2427,20 @@ form.avatar-delete {
       margin-right: $spacer-medium;
       @include box-shadow;
       @include rounded-corners(20px);
+    }
+  }
+}
+
+.iotd-stats-table {
+  table-layout: auto;
+
+  th, td {
+    border: 1px solid #444 !important;
+    padding: 0.5rem 0.75rem !important;
+    vertical-align: middle !important;
+
+    &:last-child {
+      text-align: left;
     }
   }
 }
@@ -2671,6 +2692,18 @@ form.avatar-delete {
 .gear-popover-label {
   padding: 0 .334rem;
 
+  &:not(.qtip-open):hover::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: .334rem;
+    width: 0;
+    height: 1px;
+    background-color: $link-color;
+    opacity: .5;
+    animation: gear-popover-label-animation 750ms ease-in-out;
+  }
+
   &.shopping-cart {
     padding: 0 0.334rem 0 0;
     margin-left: -0.667rem;
@@ -2695,6 +2728,16 @@ form.avatar-delete {
     line-height: 1.1rem;
     margin-top: 1rem;
     margin-bottom: 0;
+  }
+
+  .table.item-data {
+    table-layout: auto;
+    margin-top: 1rem;
+
+    th, td {
+      padding: 0.25rem 0.75rem;
+      border: 1px solid $grey-6;
+    }
   }
 
   .equipment-listings {

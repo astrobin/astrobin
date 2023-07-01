@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 class PlateSolvingSettings(models.Model):
     blind = models.BooleanField(
         default=True,
-        null=False,
         verbose_name=_("Perform a blind solve"),
         help_text=_("Attempt to solve with no hints. In most cases this will work, but it will take longer."),
     )
@@ -71,4 +70,25 @@ class PlateSolvingSettings(models.Model):
         verbose_name=_("Radius"),
         help_text=_(
             "Tells the plate-solving engine to look within these many degrees of the given center RA and dec position."),
+    )
+
+    downsample_factor = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[MinValueValidator(1.01), MaxValueValidator(99.99)],
+        verbose_name=_("Downsample factor"),
+        help_text=_(
+            "Downsample (bin) your image by this factor before performing source detection. This often helps with "
+            "saturated images, noisy images, and large images. 2 and 4 are commonly-useful values."
+        )
+    )
+
+    use_sextractor = models.BooleanField(
+        default=False,
+        verbose_name=_("Use SExtractor"),
+        help_text=_(
+            "Use the SourceExtractor program to detect stars, not Nova's built-in program."
+        )
     )

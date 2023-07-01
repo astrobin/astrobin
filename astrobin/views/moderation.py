@@ -21,7 +21,7 @@ from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, UserProfile
 from astrobin.stories import add_story
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.tasks import push_notification_for_new_image
+from astrobin_apps_notifications.tasks import push_notification_for_approved_image, push_notification_for_new_image
 
 log = logging.getLogger(__name__)
 
@@ -75,6 +75,7 @@ class ImageModerationMarkAsHamView(LoginRequiredMixin, GroupRequiredMixin, JSONR
             moderated_by=request.user)
 
         for image in Image.objects_including_wip.filter(pk__in=ids):
+            push_notification_for_approved_image.apply_async(args=(image.pk, request.user.pk,), countdown=10)
             if not image.is_wip and image.published:
                 if not image.skip_notifications:
                     push_notification_for_new_image.apply_async(args=(image.pk,), countdown=10)

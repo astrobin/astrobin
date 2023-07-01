@@ -48,6 +48,7 @@ from astrobin.views.contact import ContactRedirectView
 from astrobin.views.forums import LatestTopicsView
 from astrobin.views.profile.download_data_view import DownloadDataView
 from astrobin.views.threaded_messages import messages_compose
+from astrobin_apps_forum.views import RedirectTopicView
 
 admin.autodiscover()
 
@@ -153,6 +154,11 @@ urlpatterns += [
     url(r'^contact/', ContactRedirectView.as_view(), name='contact'),
     # Override pybb's LatestTopicsView to omit topics from groups the user has not joined.
     url(r'^forum/topic/latest/$', LatestTopicsView.as_view(), name='topic_latest'),
+    # Override pybb's topic views to redirect if the topic was moved
+    url(
+        r'^forum/c/(?P<category_slug>[\w-]+)/(?P<forum_slug>[\w-]+)/(?P<slug>[\w-]+)/$',
+        RedirectTopicView.as_view(), name='redirect_topic'
+    ),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
     url(r'^persistent_messages/', include('persistent_messages.urls')),

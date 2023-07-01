@@ -37,6 +37,8 @@
         </div>
     {% endif %}
 
+    {% include 'pybb/_forum_tools.html' %}
+
     {% if categories %}
         <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
         {% for category in categories %}
@@ -107,3 +109,7 @@
     {% endif %}
 
 {% endblock content %}
+
+{% block extra_js %}
+    {% include 'pybb/_forum_selection_js.html' %}
+{% endblock %}

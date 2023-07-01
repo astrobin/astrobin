@@ -37,6 +37,12 @@ NOTICE_TYPES = (
         1,
     ),
     (
+        'image_approved',
+        _('Your image was approved by a moderator'),
+        '',
+        2,
+    ),
+    (
         'image_not_solved',
         _('Your image could not be plate-solved'),
         '',
@@ -261,6 +267,12 @@ NOTICE_TYPES = (
     (
         'image_submitted_to_iotd_tp',
         _("You submitted your image for IOTD/TP consideration"),
+        '',
+        2
+    ),
+    (
+        'image_not_submitted_to_iotd_tp',
+        _("Image not submitted for IOTD/TP consideration"),
         '',
         2
     ),

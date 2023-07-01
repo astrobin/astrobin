@@ -52,11 +52,7 @@ class SubscriptionDisplayName(Enum):
         raise ValueError(f"Invalid enum value: {value_str}")
 
 
-def _compareValidity(a, b):
-    return b.valid() - a.valid()
-
-
-def _compareNames(a, b):
+def _compareSubscriptionWeights(a, b):
     """
     This function is used to determine the "weight" of each Premium subscription. When a user has multiple, only the
     heaviest one gets considered throughout the website.
@@ -128,9 +124,8 @@ class PremiumService:
         elif len(us) == 1:
             result = us[0]
         else:
-            sortedByName = sorted(us, key=functools.cmp_to_key(_compareNames))
-            sortedByValidity = sorted(sortedByName, key=functools.cmp_to_key(_compareValidity))
-            result = sortedByValidity[0]
+            sortedByWeight = sorted(us, key=functools.cmp_to_key(_compareSubscriptionWeights))
+            result = sortedByWeight[0]
 
         cache.set(cache_key, result, 300)
 

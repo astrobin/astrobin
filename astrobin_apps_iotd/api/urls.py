@@ -7,6 +7,7 @@ from astrobin_apps_iotd.api.views.hidden_image_view_set import HiddenImageViewSe
 from astrobin_apps_iotd.api.views.judgement_queue_view_set import JudgementQueueViewSet
 from astrobin_apps_iotd.api.views.review_queue_view_set import ReviewQueueViewSet
 from astrobin_apps_iotd.api.views.staff_member_settings_view_set import StaffMemberSettingsViewSet
+from astrobin_apps_iotd.api.views.stats_view_set import StatsViewSet
 from astrobin_apps_iotd.api.views.submission_queue_view_set import SubmissionQueueViewSet
 from astrobin_apps_iotd.api.views.submission_view_set import SubmissionViewSet
 from astrobin_apps_iotd.api.views.vote_view_set import VoteViewSet
@@ -25,6 +26,8 @@ router.register(r'vote', VoteViewSet, basename='vote-detail')
 
 router.register(r'judgement-queue', JudgementQueueViewSet, basename='judgement-queue')
 router.register(r'future-iotds', FutureIotdsViewSet, basename='future-iotds')
+
+router.register(r'stats', StatsViewSet, basename='stats')
 
 urlpatterns = [
     url('', include(router.urls)),

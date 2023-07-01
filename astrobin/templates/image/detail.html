@@ -46,7 +46,7 @@
 
 {% block content %}
     {% with cache_timeout=request.user.is_authenticated|yesno:"0,600" %}
-        {% cache cache_timeout image_page_cache request.user_agent request.user_agentuser.is_authenticated REQUEST_COUNTRY LANGUAGE_CODE image.pk image.updated revision_label nav_ctx nav_ctx_extra %}
+        {% cache cache_timeout image_page_cache request.user_agent user.is_authenticated REQUEST_COUNTRY LANGUAGE_CODE image.pk image.updated revision_label nav_ctx nav_ctx_extra %}
             {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or constellation or show_contains %}
                 <div class="subtitle">
                 {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" %}

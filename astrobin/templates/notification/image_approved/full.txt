@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load astrobin_apps_notifications_tags %}
+
+{% blocktrans trimmed with moderator.userprofile.get_display_name as user %}
+   Moderator "{{ user }}" approved your image
+{% endblocktrans %}{% if image.title %}: {{ image.title }}{% endif %}
+
+{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email image.user %}
+
+{% blocktrans trimmed %}
+    If you already promoted your image to the public area of your gallery, it will shortly be indexed by AstroBin's
+    search engine and appear in search results.
+{% endblocktrans %}

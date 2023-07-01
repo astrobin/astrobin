@@ -104,3 +104,9 @@ def update_review_queues():
 def update_judgement_queues():
     IotdService().update_judgement_queues()
     logger.info("update_judgement_queues completed")
+
+
+@shared_task(time_limit=600)
+def update_stats():
+    IotdService().update_stats(365)
+    logger.info("update_stats completed")

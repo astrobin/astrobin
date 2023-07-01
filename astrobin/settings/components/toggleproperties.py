@@ -18,7 +18,6 @@ TOGGLEPROPERTIES = {
         "property_tooltip_off": _("Follow"),
         "property_label_on": _("Stop following"),
         "property_label_off": _("Follow"),
-        "property_icon": "icon-plus",
+        "property_icon": "icon-bell-alt",
     }
 }
-
