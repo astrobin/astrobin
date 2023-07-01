@@ -22,6 +22,8 @@ from astrobin.models import (
     SolarSystem_Acquisition, Telescope,
 )
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
@@ -2453,7 +2455,13 @@ class ImageTest(TestCase):
         user.userprofile.auto_submit_to_iotd_tp_process = True
         user.userprofile.save(keep_deleted=True)
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
-        image = Generators.image(user=user)
+        image = Generators.image(user=user, is_wip=True)
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image=image)
+
+        ImageService(image).promote_to_public_area(skip_notifications=True)
+        image.save()
 
         self.assertEqual(5, image.designated_iotd_submitters.count())
 
@@ -2470,7 +2478,13 @@ class ImageTest(TestCase):
         user.userprofile.auto_submit_to_iotd_tp_process = True
         user.userprofile.save(keep_deleted=True)
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
-        image = Generators.image(user=user)
+        image = Generators.image(user=user, is_wip=True)
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+
+        ImageService(image).promote_to_public_area(skip_notifications=True)
+        image.save()
 
         self.assertEqual(5, image.designated_iotd_reviewers.count())
 

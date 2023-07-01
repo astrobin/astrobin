@@ -20,6 +20,7 @@ from astrobin_apps_iotd.models import (
     TopPickArchive,
     TopPickNominationsArchive,
 )
+from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
@@ -440,33 +441,39 @@ class IotdService:
     @staticmethod
     def may_submit_to_iotd_tp_process(user: User, image: Image):
         if not user.is_authenticated:
-            return False, 'UNAUTHENTICATED'
+            return False, MayNotSubmitToIotdTpReason.NOT_AUTHENTICATED
 
         if user != image.user:
-            return False, 'NOT_OWNER'
+            return False, MayNotSubmitToIotdTpReason.NOT_OWNER
 
         if is_free(PremiumService(user).get_valid_usersubscription()):
-            return False, 'IS_FREE'
+            return False, MayNotSubmitToIotdTpReason.IS_FREE
 
         if image.is_wip:
-            return False, 'NOT_PUBLISHED'
+            return False, MayNotSubmitToIotdTpReason.NOT_PUBLISHED
 
         if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
-            return False, 'ALREADY_SUBMITTED'
+            return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
 
         if image.subject_type in (SubjectType.GEAR, SubjectType.OTHER, '', None):
-            return False, 'BAD_SUBJECT_TYPE'
+            return False, MayNotSubmitToIotdTpReason.BAD_SUBJECT_TYPE
+
+        if image.imaging_telescopes_2.count() == 0 or image.imaging_cameras_2.count() == 0:
+            return False, MayNotSubmitToIotdTpReason.NO_TELESCOPE_OR_CAMERA
+
+        if image.acquisition_set.count() == 0:
+            return False, MayNotSubmitToIotdTpReason.NO_ACQUISITIONS
 
         if image.user.userprofile.exclude_from_competitions:
-            return False, 'EXCLUDED_FROM_COMPETITIONS'
+            return False, MayNotSubmitToIotdTpReason.EXCLUDED_FROM_COMPETITIONS
 
         if image.user.userprofile.banned_from_competitions:
-            return False, 'BANNED_FROM_COMPETITIONS'
+            return False, MayNotSubmitToIotdTpReason.BANNED_FROM_COMPETITIONS
 
         if image.published < (
                 DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
         ):
-            return False, 'TOO_LATE'
+            return False, MayNotSubmitToIotdTpReason.TOO_LATE
 
         return True, None
 

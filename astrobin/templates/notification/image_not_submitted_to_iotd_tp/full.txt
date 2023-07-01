@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load static %}
+
+{% blocktrans trimmed %}
+    Your image could not be automatically submitted for IOTD/TP consideration
+{% endblocktrans %}.
+
+"{{ image.title }}"
+
+{% trans "Reason" %}: "{{ reason }}"
+
+{% blocktrans trimmed %}
+    The “AstroBin Image of the Day and Top Picks” is a long-running system to promote beautiful,
+    interesting, peculiar, or otherwise amazing astrophotographs, with a focus on technical
+    excellence.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If you haven't already, please take a few minutes to learn how the process works:
+{% endblocktrans %}
+https://welcome.astrobin.com/iotd
+
+{% blocktrans trimmed %}
+    If you have any questions, have a look at the frequently asked questions:
+{% endblocktrans %}
+https://welcome.astrobin.com/iotd/#faq
+
+{% blocktrans trimmed %}
+    Finally, should you need any support, simply use the contact form:
+{% endblocktrans %}
+{{ base_url }}{% url 'contact' %}
+
+{% blocktrans trimmed %}
+    Or send an email to support@astrobin.com.
+{% endblocktrans %}

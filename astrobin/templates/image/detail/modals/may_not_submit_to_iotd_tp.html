@@ -21,35 +21,7 @@
 
             <p>
                 {% with reason=request.user|may_submit_to_iotd_tp_process_reason:image %}
-                    {% if reason == 'UNAUTHENTICATED' %}
-                        {% trans "You are not authenticated. Please log in." %}
-                    {% elif reason == 'NOT_OWNER' %}
-                        {% trans "You are not the owner of this image." %}
-                    {% elif reason == 'IS_FREE' %}
-                        {% blocktrans trimmed with url="https://welcome.astrobin.com/pricing" %}
-                            Sorry, this feature requires a <a href="{{ url }}">paid account</a>.
-                        {% endblocktrans %}
-                    {% elif reason == 'NOT_PUBLISHED' %}
-                        {% trans "This image is in your staging area and hasn't been published yet." %}
-                    {% elif reason == 'TOO_LATE' %}
-                        {% blocktrans trimmed with num_days=IOTD_SUBMISSION_WINDOW_DAYS %}
-                            Unfortunately it's too late: images can be submitted only within {{ num_days }} days
-                            after publication.
-                        {% endblocktrans %}
-                    {% elif reason == 'ALREADY_SUBMITTED' %}
-                        {% trans "This image was already submitted." %}
-                    {% elif reason == 'BAD_SUBJECT_TYPE' %}
-                        {% blocktrans trimmed %}
-                            Images with subject type set to 'Gear' or 'Other' are not eligible for IOTD/TP
-                            consideration.
-                        {% endblocktrans %}
-                    {% elif reason == 'EXCLUDED_FROM_COMPETITIONS' %}
-                        {% trans "Your settings indicate that you opted to be excluded from competitions." %}
-                    {% elif reason == 'BANNED_FROM_COMPETITION' %}
-                        {% trans "You are currently serving a ban from competitions on AstroBin." %}
-                    {% else %}
-                        {% trans "Unknown reason. This should never happen, please contact us!" %}
-                    {% endif %}
+                    {{ reason | humanize_may_not_submit_to_iotd_tp_process_reason }}
                 {% endwith %}
             </p>
         </div>

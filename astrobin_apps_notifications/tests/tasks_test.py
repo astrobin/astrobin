@@ -38,6 +38,7 @@ class TasksTest(TestCase):
         image.imaging_telescopes_2.add(telescope)
 
         ImageService(image).promote_to_public_area(skip_notifications=False)
+        image.save()
 
         push_notification.assert_has_calls([
             mock.call([user_follower], user, 'new_image', {
@@ -66,6 +67,7 @@ class TasksTest(TestCase):
         image.imaging_telescopes_2.add(telescope)
 
         ImageService(image).promote_to_public_area(skip_notifications=False)
+        image.save()
 
         self.assertEquals(push_notification.call_count, 1)
         push_notification.assert_has_calls(
@@ -94,6 +96,7 @@ class TasksTest(TestCase):
         image.collaborators.add(collaborator)
 
         ImageService(image).promote_to_public_area(skip_notifications=False)
+        image.save()
 
         self.assertEquals(push_notification.call_count, 1)
         push_notification.assert_has_calls(
@@ -122,6 +125,7 @@ class TasksTest(TestCase):
         image.guiding_telescopes_2.add(telescope)
 
         ImageService(image).promote_to_public_area(skip_notifications=False)
+        image.save()
 
         self.assertEquals(push_notification.call_count, 2)
         push_notification.assert_has_calls(
@@ -159,6 +163,7 @@ class TasksTest(TestCase):
         image.imaging_cameras_2.add(camera)
 
         ImageService(image).promote_to_public_area(skip_notifications=False)
+        image.save()
 
         self.assertEquals(push_notification.call_count, 2)
         push_notification.assert_has_calls(
@@ -192,6 +197,7 @@ class TasksTest(TestCase):
         image = Generators.image(user=user, is_wip=True)
         image.collaborators.add(collaborator)
         ImageService(image).promote_to_public_area(skip_notifications=False)
+        image.save()
 
         push_notification.assert_has_calls(
             [
@@ -228,6 +234,7 @@ class TasksTest(TestCase):
         image = Generators.image(user=user, is_wip=True)
         image.collaborators.add(collaborator1)
         ImageService(image).promote_to_public_area(skip_notifications=False)
+        image.save()
 
         push_notification.assert_called_with([follower], user, 'new_image', mock.ANY)
 
