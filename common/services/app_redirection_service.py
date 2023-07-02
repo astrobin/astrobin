@@ -27,6 +27,7 @@ class AppRedirectionService:
 
         if (
                 user and
+                user.is_authenticated and
                 user.joined_group_set.filter(name=GroupName.BETA_TESTERS).exists() and
                 user_id_is_even(user.pk) and
                 'app.astrobin.com' in settings.APP_URL
