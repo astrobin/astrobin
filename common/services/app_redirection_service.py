@@ -17,7 +17,21 @@ class AppRedirectionService:
     @staticmethod
     def redirect(path: str) -> str:
         if settings.BASE_URL in path:
-            path = path.replace(settings.BASE_URL,  '')
+            path = path.replace(settings.BASE_URL, '')
+
+        from astrobin.middleware.thread_locals_middleware import get_current_user
+        user = get_current_user()
+
+        def user_id_is_even(user_id: int) -> bool:
+            return user_id % 2 == 0
+
+        if (
+                user and
+                user.joined_group_set.filter(name=GroupName.BETA_TESTERS).exists() and
+                user_id_is_even(user.pk) and
+                'app.astrobin.com' in settings.APP_URL
+        ):
+            return f'https://app2.astrobin.com/{path}'
 
         return f'{settings.APP_URL}{path}'
 
@@ -58,7 +72,6 @@ class AppRedirectionService:
 
     @staticmethod
     def image_editor_step_number(user: User, step: ImageEditorStep) -> int:
-        from astrobin_apps_users.services import UserService
 
         step_map = {
             ImageEditorStep.BASIC_INFORMATION: 1,
