@@ -2691,6 +2691,13 @@ form.avatar-delete {
 
 .gear-popover-label {
   padding: 0 .334rem;
+  transition: background-color 250ms ease-in-out, color 250ms ease-in-out, border-radius 250ms ease-in-out;
+
+  &.qtip-open {
+    background: $link-color;
+    color: $grey-1;
+    border-radius: 1rem;
+  }
 
   &:not(.qtip-open):hover::before {
     content: '';

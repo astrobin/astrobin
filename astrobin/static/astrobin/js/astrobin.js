@@ -543,7 +543,7 @@ astrobin_common = {
                 },
                 hide: {
                     event: 'mouseleave unfocus',
-                    delay: 500,
+                    delay: 1000,
                     fixed: true
                 },
                 style: {

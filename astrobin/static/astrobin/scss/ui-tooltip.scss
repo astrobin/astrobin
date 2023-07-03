@@ -30,13 +30,13 @@
 .ui-tooltip-default .ui-tooltip-titlebar,
 .ui-tooltip-default .ui-tooltip-content {
   background: $grey-6 url(../images/background-tile.png);
-  border-color: $grey-7;
-  @include box-shadow-subtle;
+  border-color: $grey-6;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, .8);
   color: $text-color;
   padding: 1rem;
 
   .header {
-    background: linear-gradient($grey-8, $grey-9);
+    background: $grey-8;
     border-bottom: 1px solid $grey-7;
     margin: -1rem -1rem 0;
     padding: 1rem;
@@ -52,10 +52,15 @@
         margin: 0;
       }
     }
+
+    .btn {
+      border-radius: 1rem;
+      background-color: $grey-7;
+    }
   }
 
   .footer {
-    background: linear-gradient($grey-8, $grey-9);
+    background: $grey-8;
     border-top: 1px solid $grey-7;
     padding: 1rem;
     margin: 1rem -1rem -1rem;
@@ -97,5 +102,5 @@
 .ui-tooltip .ui-tooltip-tip,
 .ui-tooltip .ui-tooltip-tip * {
   background: $grey-8;
-  border-color: $grey-7;
+  border-color: transparent;
 }
