@@ -109,9 +109,15 @@
                                                         {% endif %}
 
                                                         {% if listing.stock_status == "IN_STOCK" %}
-                                                            {% blocktrans trimmed with x=listing.stock_amount %}
-                                                                {{x}} in stock
-                                                            {% endblocktrans %}
+                                                            {% if listing.stock_amount > 10 %}
+                                                                {% blocktrans trimmed with x='10+' %}
+                                                                    {{ x }} in stock
+                                                                {% endblocktrans %}
+                                                            {% else %}
+                                                                {% blocktrans trimmed with x=listing.stock_amount %}
+                                                                    {{x}} in stock
+                                                                {% endblocktrans %}
+                                                            {% endif %}
                                                         {% endif %}
 
                                                         {% if listing.stock_status == "OUT_OF_STOCK" %}
