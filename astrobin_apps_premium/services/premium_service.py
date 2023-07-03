@@ -93,7 +93,7 @@ class PremiumService:
         pk: int = self.user.pk
 
         for key in (
-                'has_expired_paid_subscription',
+                'has_an_expired_premium_subscription',
                 'has_paid_subscription_near_expiration',
                 'astrobin_is_donor',
                 'astrobin_valid_usersubscription'
