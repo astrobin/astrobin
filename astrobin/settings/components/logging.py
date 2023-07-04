@@ -80,7 +80,7 @@ LOGGING = {
         },
         'boto3': {
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'propagate': False,
         },
         'botocore': {
