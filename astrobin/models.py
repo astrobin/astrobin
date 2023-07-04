@@ -3138,10 +3138,12 @@ class AppApiKeyRequest(models.Model):
         return 'API request: %s' % self.name
 
     def save(self, *args, **kwargs):
-        NotificationsService.email_superusers(
-            'App API Key request from %s' % self.registrar.username,
-            '%s/admin/astrobin/appapikeyrequest/' % settings.BASE_URL
-        )
+        if self.pk is None:
+            NotificationsService.email_superusers(
+                'App API Key request from %s' % self.registrar.username,
+                '%s/admin/astrobin/appapikeyrequest/' % settings.BASE_URL
+            )
+
         return super(AppApiKeyRequest, self).save(*args, **kwargs)
 
     def approve(self):
