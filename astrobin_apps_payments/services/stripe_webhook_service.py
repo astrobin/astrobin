@@ -188,6 +188,14 @@ class StripeWebhookService(object):
             UserSubscription, user=user, subscription=subscription
         )
 
+        if user.userprofile.stripe_subscription_id != session['id']:
+            log.info(
+                "stripe_webhook: user %s subscription id %s does not match session id %s" % (
+                    user.pk, user.userprofile.stripe_subscription_id, session['id']
+                )
+            )
+            return
+
         if user_subscription:
             user_subscription.delete()
 
@@ -203,6 +211,14 @@ class StripeWebhookService(object):
         user_subscription: UserSubscription = get_object_or_None(
             UserSubscription, user=user, subscription=subscription
         )
+
+        if user.userprofile.stripe_subscription_id != session['id']:
+            log.info(
+                "stripe_webhook: user %s subscription id %s does not match session id %s" % (
+                    user.pk, user.userprofile.stripe_subscription_id, session['id']
+                )
+            )
+            return
 
         if user_subscription is None:
             user_subscription = UserSubscription.objects.create(
