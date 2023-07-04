@@ -58,6 +58,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'django_celery_beat': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
         'werkzeug': {
             'handlers': ['console'],
             'level': 'ERROR',
@@ -75,7 +80,7 @@ LOGGING = {
         },
         'boto3': {
             'handlers': ['console'],
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'propagate': False,
         },
         'botocore': {
@@ -95,10 +100,25 @@ LOGGING = {
         },
         'celery': {
             'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'celery.task': {
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False,
         },
         'celery.evcam': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'celery.beat': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'kombu': {
             'handlers': ['console'],
             'level': 'ERROR',
             'propagate': False,
@@ -111,6 +131,16 @@ LOGGING = {
         'stripe': {
             'handlers': ['console'],
             'level': 'WARNING',
+            'propagate': False,
+        },
+        'watchtower': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'flower': {
+            'handlers': ['console'],
+            'level': 'ERROR',
             'propagate': False,
         },
         '': {

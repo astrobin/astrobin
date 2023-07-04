@@ -34,7 +34,6 @@ from hitcount.models import HitCount
 from pybb.models import Post
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
-from safedelete import HARD_DELETE
 
 from astrobin.models import (
     BroadcastEmail, CameraRenameProposal, DataDownloadRequest, Gear, GearMigrationStrategy,
