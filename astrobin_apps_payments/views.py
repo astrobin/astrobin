@@ -150,7 +150,15 @@ def create_checkout_session(request, user_pk: int, product: str, currency: str, 
         return JsonResponse({'sessionId': checkout_session['id']})
     except Exception as e:
         log.exception("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, str(e)))
-        return JsonResponse({'error': 'Internal error: %s' % str(e)})
+
+        if 'doesn\'t include the expected currency' in str(e):
+            try:
+                kwargs['currency'] = 'usd'
+                checkout_session = stripe.checkout.Session.create(**kwargs)
+                return JsonResponse({'sessionId': checkout_session['id']})
+            except Exception as e:
+                log.exception("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, str(e)))
+                return JsonResponse({'error': 'Internal error: %s' % str(e)})
 
 
 @csrf_exempt
