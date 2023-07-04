@@ -188,7 +188,7 @@ class StripeWebhookService(object):
             UserSubscription, user=user, subscription=subscription
         )
 
-        if user.userprofile.stripe_subscription_id != session['id']:
+        if user.userprofile.stripe_subscription_id and user.userprofile.stripe_subscription_id != session['id']:
             log.info(
                 "stripe_webhook: user %s subscription id %s does not match session id %s" % (
                     user.pk, user.userprofile.stripe_subscription_id, session['id']
@@ -212,7 +212,7 @@ class StripeWebhookService(object):
             UserSubscription, user=user, subscription=subscription
         )
 
-        if user.userprofile.stripe_subscription_id != session['id']:
+        if user.userprofile.stripe_subscription_id and user.userprofile.stripe_subscription_id != session['id']:
             log.info(
                 "stripe_webhook: user %s subscription id %s does not match session id %s" % (
                     user.pk, user.userprofile.stripe_subscription_id, session['id']
