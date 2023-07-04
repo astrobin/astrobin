@@ -212,14 +212,6 @@ class StripeWebhookService(object):
             UserSubscription, user=user, subscription=subscription
         )
 
-        if user.userprofile.stripe_subscription_id and user.userprofile.stripe_subscription_id != session['id']:
-            log.info(
-                "stripe_webhook: user %s subscription id %s does not match session id %s" % (
-                    user.pk, user.userprofile.stripe_subscription_id, session['id']
-                )
-            )
-            return
-
         if user_subscription is None:
             user_subscription = UserSubscription.objects.create(
                 user=user,
@@ -233,6 +225,14 @@ class StripeWebhookService(object):
                 f"on_customer_subscription_updated: Subscription for user {user.pk}, {subscription.name}, created: "
                 f"active={user_subscription.active}, cancelled={user_subscription.cancelled}"
             )
+        else:
+            if user.userprofile.stripe_subscription_id and user.userprofile.stripe_subscription_id != session['id']:
+                log.info(
+                    "stripe_webhook: user %s subscription id %s does not match session id %s" % (
+                        user.pk, user.userprofile.stripe_subscription_id, session['id']
+                    )
+                )
+                return
 
         user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
         user_subscription.active = session['status'] == 'active'
@@ -256,7 +256,6 @@ class StripeWebhookService(object):
                     )
 
                     handle_subscription_cancel(ipn)
-
 
             if user_subscription and 'status' in event['data']['previous_attributes']:
                 if user_subscription.active:
