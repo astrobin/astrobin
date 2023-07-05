@@ -58,10 +58,7 @@ def humanize_may_not_submit_to_iotd_tp_process_reason(reason: str) -> str:
             }
         ),
         MayNotSubmitToIotdTpReason.NOT_PUBLISHED: _(
-            "Unfortunately it's too late: images can be submitted only within %(num_days)s days "
-            "after publication." % {
-                'num_days': settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS
-            }
+            "This image is in your staging area and hasn't been published yet"
         ),
         MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED: _(
             "This image was already submitted."
@@ -80,6 +77,12 @@ def humanize_may_not_submit_to_iotd_tp_process_reason(reason: str) -> str:
         ),
         MayNotSubmitToIotdTpReason.BANNED_FROM_COMPETITIONS: _(
             "You are currently serving a ban from competitions on AstroBin."
+        ),
+        MayNotSubmitToIotdTpReason.TOO_LATE: _(
+            "Unfortunately it's too late: images can be submitted only within %(num_days)s days "
+            "after publication." % {
+                'num_days': settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS
+            }
         )
     }
 
