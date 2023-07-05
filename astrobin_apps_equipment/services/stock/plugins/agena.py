@@ -1,4 +1,5 @@
 import logging
+import os
 from typing import List, Tuple
 from xml.etree import ElementTree
 
@@ -14,7 +15,7 @@ log = logging.getLogger(__name__)
 
 class AgenaStockImporterPlugin(StockImporterPluginInterface):
     retailer_name = 'Agena Astro'
-    url = 'https://agenaastro.com/feeds/product_for_ads_export.xml'
+    url = os.environ.get('STOCK_URL_AGENA')
 
     def parse_astrobin_id(self, astrobin_id: str) -> Tuple[int, EquipmentItemKlass]:
         klass_map = {
@@ -80,6 +81,10 @@ class AgenaStockImporterPlugin(StockImporterPluginInterface):
         return stock_list
 
     def fetch_data(self) -> List[StockInterface]:
+        if not self.url:
+            log.error('No URL set for Agena Astro')
+            return []
+
         try:
             response = requests.get(self.url)
             return self.__parse(response.content)
