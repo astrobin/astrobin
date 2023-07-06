@@ -1,3 +1,4 @@
+import time
 from datetime import date, datetime, timedelta
 
 from django.conf import settings
@@ -109,6 +110,8 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_is_top_pick_true(self):
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        previously_updated = image.updated
+        time.sleep(.1)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
         IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
@@ -119,8 +122,10 @@ class IotdServiceTest(TestCase):
         image.save()
 
         IotdService().update_top_pick_archive()
+        image.refresh_from_db()
 
         self.assertTrue(IotdService().is_top_pick(image))
+        self.assertGreater(image.updated, previously_updated)
 
     @override_settings(
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1)
@@ -203,6 +208,8 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_is_top_pick_nomination_true(self):
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        previously_updated = image.updated
+        time.sleep(.1)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
         IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
@@ -211,8 +218,10 @@ class IotdServiceTest(TestCase):
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
+        image.refresh_from_db()
 
         self.assertTrue(IotdService().is_top_pick_nomination(image))
+        self.assertGreater(image.updated, previously_updated)
 
     @override_settings(
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS - 1)

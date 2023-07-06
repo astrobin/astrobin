@@ -26,6 +26,7 @@ if TESTING:
 
     MIGRATION_MODULES['astrobin'] = None
     MIGRATION_MODULES['astrobin_apps_equipment'] = None
+    MIGRATION_MODULES['astrobin_apps_iotd'] = None
 
     CACHES = {
         'default': {

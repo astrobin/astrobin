@@ -8,7 +8,7 @@ ASTROBIN_APPS = [
     'astrobin_apps_premium',
     'astrobin_apps_notifications',
     'astrobin_apps_groups',
-    'astrobin_apps_iotd',
+    'astrobin_apps_iotd.apps.AstrobinAppsIotdConfig',
     'astrobin_apps_remote_source_affiliation',
     'astrobin_apps_equipment.apps.AstrobinAppsEquipmentConfig',
     'astrobin_apps_json_api',

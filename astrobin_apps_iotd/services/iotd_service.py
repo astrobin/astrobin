@@ -221,6 +221,8 @@ class IotdService:
                 submitted_for_iotd_tp_consideration__gt=latest.image.submitted_for_iotd_tp_consideration
             )
 
+        items.update(updated=DateTimeService.now())
+
         for item in items.iterator():
             try:
                 TopPickNominationsArchive.objects.create(image=item)
@@ -248,6 +250,8 @@ class IotdService:
             items = items.filter(
                 submitted_for_iotd_tp_consideration__gt=latest.image.submitted_for_iotd_tp_consideration
             )
+
+        items.update(updated=DateTimeService.now())
 
         for item in items.iterator():
             try:
