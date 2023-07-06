@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
+{% load common_tags %}
 
 {% block title %}
     {% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}
@@ -20,6 +21,23 @@
 
 {% block content %}
     {% include 'user/profile/navigation.html' %}
+
+    <p class="alert alert-info">
+        <strong>
+            <i class="icon-lightbulb"></i>
+            {% trans "Tip!" context "Piece of advice" %}
+        </strong>
+        {% blocktrans trimmed %}
+            You can filter and sort your bookmarks by going the <strong>Advanced search</strong> page, selecting
+            <em>Images bookmarked by you</em> as <strong>Search domain</strong>, and applying filtering and sorting
+            options to your liking.
+        {% endblocktrans %}
+
+        <a href="{% url 'haystack_search' %}{% query_string 'd="ib"' '' %}">
+            {% trans "Get started!" %}
+        </a>
+    </p>
+
     {% image_list image_list paginate_by=paginate_by %}
 {% endblock %}
 
