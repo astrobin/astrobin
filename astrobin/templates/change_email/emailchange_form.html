@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -14,10 +15,13 @@
 
 {% block content %}
 <h1>{% trans "Change your e-mail" %}</h1>
-<form class="form-horizontal" method="post" action="">{% csrf_token %}
+<form class="form-horizontal" method="post" action="" novalidate>{% csrf_token %}
     {{ form|as_bootstrap }}
     <div class="form-actions">
-        <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Submit' %}" />
+        <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+            {% trans 'Submit' %}
+            {% button_loading_indicator %}
+        </button>
     </div>
 </form>
 {% endblock %}
