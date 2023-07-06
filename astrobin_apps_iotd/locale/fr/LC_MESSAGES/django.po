@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 11:32+0000\n"
-"PO-Revision-Date: 2023-05-24 22:14+0200\n"
+"POT-Creation-Date: 2023-07-06 15:27+0000\n"
+"PO-Revision-Date: 2023-07-06 14:10+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -36,7 +36,7 @@ msgid "You cannot submit your own image."
 msgstr "Vous ne pouvez pas sélectionner votre propre image."
 
 msgid "You cannot submit an image you collaborated to."
-msgstr ""
+msgstr "Vous ne pouvez pas soumettre une image à laquelle vous avez collaboré."
 
 msgid "Images in the staging area cannot be submitted."
 msgstr "Les images en Zone privée ne peuvent pas être sélectionnées."
@@ -82,6 +82,7 @@ msgstr "Vous ne pouvez pas promouvoir votre propre image."
 
 msgid "You cannot vote for an image you collaborated to."
 msgstr ""
+"Vous ne pouvez pas voter pour une image à laquelle vous avez collaboré."
 
 msgid "Images in the staging area cannot be voted for."
 msgstr "Les images en Zone privée ne peuvent pas être promues."
@@ -135,7 +136,7 @@ msgid "You cannot elect your own image."
 msgstr "Vous ne pouvez pas élire votre propre image."
 
 msgid "You cannot elect an image you collaborated to."
-msgstr ""
+msgstr "Vous ne pouvez pas élire une image à laquelle vous avez collaboré."
 
 msgid "Images in the staging area cannot be elected."
 msgstr "Les images en Zone privée ne peuvent pas être élues."
@@ -215,50 +216,63 @@ msgid "Image of the day"
 msgstr "Image du Jour"
 
 msgid "You are not authenticated. Please log in."
-msgstr ""
+msgstr "Vous n'êtes pas authentifié. Veuillez vous connecter."
 
 msgid "You are not the owner of this image."
-msgstr ""
+msgstr "Vous n'êtes pas titulaire de cette image."
 
 #, python-format
 msgid "Sorry, this feature requires a <a href=\"%(url)s\">paid account</a>."
 msgstr ""
+"Désolé, cette fonctionnalité implique un <a href=\"%(url)s\">abonnement "
+"payant</a>."
 
 msgid "This image is in your staging area and hasn't been published yet"
 msgstr ""
+"Cette image est dans votre galerie privée et n'a pas encore été publiée."
 
 msgid "This image was already submitted."
-msgstr ""
+msgstr "Cette image a déjà été soumise."
 
 msgid ""
 "Images with subject type set to 'Gear' or 'Other' are not eligible for IOTD/"
 "TP consideration."
 msgstr ""
+"Les images dont le type de sujet est défini sur \"Équipement\" ou \"Autre\" "
+"ne sont pas éligibles pour l'IOTD/TP."
 
 msgid ""
 "Images without an imaging telescope and an imaging camera are not eligible "
 "for IOTD/TP consideration."
 msgstr ""
+"Les images sans mention d'instrument d'imagerie ou de caméra d'imagerie ne "
+"sont pas éligibles pour l'IOTD/TP."
 
 msgid ""
 "Images without any acquisition sessions are not eligible for IOTD/TP "
 "consideration."
 msgstr ""
+"Les images sans précision des sessions d'acquisition ne sont pas éligibles "
+"pour l'IOTD/TP."
 
 msgid "Your settings indicate that you opted to be excluded from competitions."
 msgstr ""
+"Vos paramètres indiquent que vous avez choisi de ne pas participer aux "
+"concours."
 
 msgid "You are currently serving a ban from competitions on AstroBin."
-msgstr ""
+msgstr "Vous êtes actuellement banni des compétitions sur AstroBin."
 
 #, python-format
 msgid ""
 "Unfortunately it's too late: images can be submitted only within "
 "%(num_days)s days after publication."
 msgstr ""
+"Malheureusement, il est trop tard : les images ne peuvent être soumises que "
+"dans les %(num_days)s jours suivant leur publication."
 
 msgid "Unknown reason. This should never happen, please contact us!"
-msgstr ""
+msgstr "Raison inconnue. Cela ne devrait jamais arriver, contactez-nous !"
 
 #~ msgid ""
 #~ "You cannot submit an image that was published more than %(max_days)s days "
