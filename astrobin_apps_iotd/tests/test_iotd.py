@@ -1,3 +1,4 @@
+import time
 from datetime import date, datetime, timedelta
 
 from django.contrib.auth.models import Group
@@ -660,12 +661,16 @@ class IotdTest(TestCase):
         vote_1.save()
 
         # All OK
+        previously_updated = self.image.updated
+        time.sleep(.1)
         iotd = Iotd.objects.create(
             judge=self.judge_1,
             image=self.image,
             date=datetime.now().date())
         self.assertEqual(iotd.judge, self.judge_1)
         self.assertEqual(iotd.image, self.image)
+        self.image.refresh_from_db()
+        self.assertGreater(self.image.updated, previously_updated)
 
         # Badge is present
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
