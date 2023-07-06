@@ -280,8 +280,27 @@
         </div>
 
         <div class="group-images">
-            <h2>{% trans "Images" %}</h2>
-            {% image_list image_list paginate_by=paginate_by nav_ctx='group' nav_ctx_extra=object.pk %}
+            <h2>
+                {% trans "Images" %}
+                {% if image_list and user_is_member %}
+                    <a href="{% url 'group_add_remove_images' object.pk %}" class="btn btn-primary btn-mini">
+                        {% trans "Add/remove images" %}
+                    </a>
+                {% endif %}
+            </h2>
+
+            {% if image_list %}
+                {% image_list image_list paginate_by=paginate_by nav_ctx='group' nav_ctx_extra=object.pk %}
+            {% else %}
+                <p>
+                    {% trans "This groups has no images." %}
+                    {% if user_is_member %}
+                        <a href="{% url 'group_add_remove_images' object.pk %}" class="btn btn-primary btn-mini">
+                            {% trans "Add images" %}
+                        </a>
+                    {% endif %}
+                </p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
