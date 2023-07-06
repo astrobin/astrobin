@@ -19,20 +19,20 @@ class AppRedirectionService:
         if settings.BASE_URL in path:
             path = path.replace(settings.BASE_URL, '')
 
-        # from astrobin.middleware.thread_locals_middleware import get_current_user
-        # user = get_current_user()
-        #
-        # def user_id_is_even(user_id: int) -> bool:
-        #     return user_id % 2 == 0
-        #
-        # if (
-        #         user and
-        #         user.is_authenticated and
-        #         user.joined_group_set.filter(name=GroupName.BETA_TESTERS).exists() and
-        #         user_id_is_even(user.pk) and
-        #         'app.astrobin.com' in settings.APP_URL
-        # ):
-        #     return f'https://app2.astrobin.com/{path}'
+        from astrobin.middleware.thread_locals_middleware import get_current_user
+        user = get_current_user()
+
+        def user_id_is_even(user_id: int) -> bool:
+            return user_id % 2 == 0
+
+        if (
+                user and
+                user.is_authenticated and
+                user.joined_group_set.filter(name=GroupName.BETA_TESTERS).exists() and
+                user_id_is_even(user.pk) and
+                'localhost' not in settings.APP_URL
+        ):
+            return f'https://beta-app.astrobin.com/{path}'
 
         return f'{settings.APP_URL}{path}'
 
