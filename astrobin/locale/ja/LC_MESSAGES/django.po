@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-15 08:00+0000\n"
-"PO-Revision-Date: 2023-05-15 09:53+0200\n"
+"POT-Creation-Date: 2023-07-06 11:31+0000\n"
+"PO-Revision-Date: 2023-05-29 16:45+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -14,7 +14,28 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.28 20230504-1\n"
+"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+
+msgid ""
+"Please enter a correct username and password. Note that both fields are case-"
+"sensitive."
+msgstr ""
+
+msgid "This account is inactive."
+msgstr ""
+
+msgid ""
+"Multiple users found with alternative capitalizations of this username. "
+"Please use the correct capitalization."
+msgstr ""
+
+msgid ""
+"Multiple users found with this name. Please try logging in with your "
+"username or email."
+msgstr ""
+
+msgid "Username or email"
+msgstr ""
 
 msgid "United Kingdom"
 msgstr "イギリス"
@@ -1320,6 +1341,9 @@ msgstr "カタディオプトリック望遠鏡: マクストフ"
 msgid "Catadioptric: Maksutov-Cassegrain"
 msgstr "カタディオプトリック望遠鏡: マクストフ-カセグレン"
 
+msgid "Catadioptric: Maksutov-Newtonian"
+msgstr ""
+
 msgid "Catadioptric: modified Dall-Kirkham"
 msgstr "カタディオプトリック望遠鏡: ドール・カーカム"
 
@@ -2215,6 +2239,12 @@ msgstr ""
 msgid "Your password must contain any of the following special characters: {}"
 msgstr ""
 
+msgid "This password is too long. It must contain no more than {} characters."
+msgstr ""
+
+msgid "Your password must contain no more than {} characters."
+msgstr ""
+
 msgid ""
 "This password has previously appeared in a data breach elsewhere and should "
 "not be used."
@@ -3007,8 +3037,17 @@ msgstr "FAQ"
 msgid "Terms of Service"
 msgstr "利用規約"
 
-msgid "Guidelines"
-msgstr "ガイドライン"
+msgid "Privacy policy"
+msgstr ""
+
+msgid "Cookie policy"
+msgstr ""
+
+msgid "Acceptable use policy"
+msgstr ""
+
+msgid "Community guidelines"
+msgstr ""
 
 msgid "Sponsors"
 msgstr "スポンサー"
@@ -3329,6 +3368,9 @@ msgstr "スライドショーの設定"
 msgid "Autoplay"
 msgstr "自動再生"
 
+msgid "Transitions"
+msgstr ""
+
 msgid "Play speed"
 msgstr "再生スピード"
 
@@ -3341,6 +3383,72 @@ msgstr "共有（最初の画像）"
 msgid "Apply"
 msgstr "適用する"
 
+msgid "IOTD/TP stats"
+msgstr ""
+
+msgid "(last [x] days)"
+msgstr ""
+
+msgid "Please note"
+msgstr "ご注意ください"
+
+msgid "The following tables are updated every 24 hours."
+msgstr ""
+
+msgid "Distribution of astrophotographers"
+msgstr ""
+
+msgid ""
+"This table shows the number of distinct astrophotographers who have been "
+"assigned and IOTD/TP award compared to the total number of images awarded."
+msgstr ""
+
+msgid "Distinct awarded users"
+msgstr ""
+
+msgid "Total awarded images"
+msgstr ""
+
+msgid "Image of the day"
+msgstr "Image of the day"
+
+msgid "Top picks"
+msgstr "Top picks"
+
+msgid "Top pick nominations"
+msgstr "Top pick ノミネート"
+
+msgid "Distribution of subject types"
+msgstr ""
+
+msgid ""
+"This table shows the distribution of awards per subject type, compared to "
+"the popularity of images of that subject type."
+msgstr ""
+
+msgid "Top pick"
+msgstr "Top pick"
+
+msgid "Total submitted"
+msgstr ""
+
+msgid "Deep sky"
+msgstr "ディープスカイ天体"
+
+msgid "Solar system"
+msgstr "太陽系"
+
+msgid "Distribution of data sources"
+msgstr ""
+
+msgid ""
+"This table shows the distribution of awards per data source, compared to the "
+"popularity of images acquired from that data source."
+msgstr ""
+
+msgid "Public amaeteur data"
+msgstr ""
+
 msgid "Quick search"
 msgstr "クイック検索"
 
@@ -3349,9 +3457,6 @@ msgstr "イメージの処理待ち"
 
 msgid "Spam list"
 msgstr "スパムリスト"
-
-msgid "Image of the day"
-msgstr "Image of the day"
 
 msgid "Submission queue"
 msgstr "承認処理待ち"
@@ -3382,12 +3487,6 @@ msgstr "高度な検索"
 
 msgid "Constellations"
 msgstr "星座"
-
-msgid "Top pick nominations"
-msgstr "Top pick ノミネート"
-
-msgid "Top picks"
-msgstr "Top picks"
 
 msgid "Remote astrophotography"
 msgstr "リモート天体撮影"
@@ -3561,24 +3660,115 @@ msgstr "フォーラムへの投稿"
 msgid "Written"
 msgstr "書き込み"
 
+msgid "Accepted"
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Declined"
+msgstr ""
+
+msgid "Decline"
+msgstr ""
+
+msgid "Cookies in this group"
+msgstr ""
+
 msgid "Cookie consent"
 msgstr "Cookieの使用許諾"
 
-msgid ""
-"AstroBin saves small pieces of text information (cookies) on your device in "
-"order to deliver better content and for statistical purposes. You can "
-"disable the usage of cookies by changing the settings of your browser. By "
-"browsing AstroBin without changing the browser settings, you grant us "
-"permission to store that information on your device."
+msgid "Info"
 msgstr ""
-"アストロビンは、より良いコンテンツをお届けするため、また統計的な処理を行うた"
-"めに、お客様の端末に小さなテキスト情報（クッキー）を保存しています。お客様"
-"は、ブラウザの設定を変更することにより、クッキーの使用を拒否することができま"
-"す。ブラウザの設定を変更せずにアストロビンを閲覧した場合、お客様の端末に情報"
-"を保存することを許可したことになります。"
 
-msgid "I agree"
-msgstr "同意する"
+msgid "Details"
+msgstr ""
+
+msgid "Policies"
+msgstr ""
+
+msgid ""
+"We use cookies on our website to provide you with the best user experience "
+"and to improve our services."
+msgstr ""
+
+msgid ""
+"Cookies are small text files that are stored on your device (computer, "
+"smartphone, tablet) when you visit our website. They help us remember your "
+"preferences, analyze how our website is used, and customize the content you "
+"see."
+msgstr ""
+
+msgid "We use the following types of cookies:"
+msgstr ""
+
+msgid "Essential cookies (required)"
+msgstr ""
+
+msgid "These cookies are essential for the website to function properly."
+msgstr ""
+
+msgid "Functional cookies (recommended)"
+msgstr ""
+
+msgid ""
+"These cookies are used to provide additional functionality to the website, "
+"such as remembering local preferences."
+msgstr ""
+
+msgid "Performance cookies (recommended)"
+msgstr ""
+
+msgid ""
+"These cookies are used to improve the website performance by saving some "
+"pieces of information on your computer and avoiding reading from the "
+"AstroBin database when possible."
+msgstr ""
+
+msgid "Analytics cookies"
+msgstr ""
+
+msgid ""
+"These cookies are used to anonymously track your usage of the website, so "
+"that we can improve it over time."
+msgstr ""
+
+msgid "Advertising cookies"
+msgstr ""
+
+msgid ""
+"These cookies are used to honor ad display frequency caps. AstroBin does NOT "
+"serve targeted ads."
+msgstr ""
+
+msgid ""
+"AstroBin is committed to transparency and choice regarding the cookies that "
+"we use on our website. Our policies explain how we use cookies and how you "
+"can control your privacy."
+msgstr ""
+
+msgid "Ad policy"
+msgstr ""
+
+msgid "Accept all"
+msgstr ""
+
+msgid "Essential only"
+msgstr ""
+
+msgid "Customize selection"
+msgstr ""
+
+msgid ""
+"This is a list of the categories of cookies used in our website and why we "
+"use them."
+msgstr ""
+
+msgid ""
+"Please note: third-party cookies might change from time to time. We will try "
+"to keep this list up to date, but we cannot guarantee that it will always be "
+"complete and accurate."
+msgstr ""
 
 msgid "More"
 msgstr "もっと"
@@ -3915,9 +4105,6 @@ msgstr "普通"
 msgid "Full size"
 msgstr "フルサイズ"
 
-msgid "Please note"
-msgstr "ご注意ください"
-
 #, python-format
 msgid ""
 "You are on a Free account, and when you delete an image, your upload counter "
@@ -4057,47 +4244,6 @@ msgstr "この画像はIOTD/TPの選考に応募ことはできません。"
 
 msgid "Reason"
 msgstr "理由"
-
-msgid "You are not authenticated. Please log in."
-msgstr "認証されていません。ログインしてください。"
-
-msgid "You are not the owner of this image."
-msgstr "この画像の所有者はあなたではありません。"
-
-#, python-format
-msgid "Sorry, this feature requires a <a href=\"%(url)s\">paid account</a>."
-msgstr ""
-"申し訳ございませんが、この機能を使用するには<a href=\"%(url)s\">有料アカウン"
-"ト</a>が必要です。"
-
-msgid "This image is in your staging area and hasn't been published yet."
-msgstr "この画像はステージングエリア内にあり、まだ公開されていません。"
-
-#, python-format
-msgid ""
-"Unfortunately it's too late: images can be submitted only within "
-"%(num_days)s days after publication."
-msgstr ""
-"残念ながら、もう手遅れです。画像の応募は、公開後 %(num_days)s 日以内のみ可能"
-"です。"
-
-msgid "This image was already submitted."
-msgstr "この画像は既に応募されたものです。"
-
-msgid ""
-"Images with subject type set to 'Gear' or 'Other' are not eligible for IOTD/"
-"TP consideration."
-msgstr ""
-"被写体が「機材」または「その他」に設定されている画像は、IOTDの対象外です。"
-
-msgid "Your settings indicate that you opted to be excluded from competitions."
-msgstr "あなたの設定により、コンペからの除外を選択されています。"
-
-msgid "You are currently serving a ban from competitions on AstroBin."
-msgstr "あなたは現在、AstroBinでのコンペへの参加の禁止を言い渡されています。"
-
-msgid "Unknown reason. This should never happen, please contact us!"
-msgstr "原因不明です。このようなことは決してあってはならないことです。"
 
 msgid ""
 "This will move this image to your public area, making it listed. As this "
@@ -4330,12 +4476,6 @@ msgstr ""
 
 msgid "What kind of image is this?"
 msgstr "どのような画像ですか？"
-
-msgid "Solar system"
-msgstr "太陽系"
-
-msgid "Deep sky"
-msgstr "ディープスカイ天体"
 
 msgid "Edit your image: basic information"
 msgstr "画像の編集：基本情報"
@@ -5083,6 +5223,20 @@ msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
 msgstr "\"%(group_name)s\"グループへの参加リクエストが拒否されました。"
 
 #, python-format
+msgid "Moderator <strong>%(user)s</strong> approved your image"
+msgstr ""
+
+msgid ""
+"If you already promoted your image to the public area of your gallery, it "
+"will shortly be indexed by AstroBin's search engine and appear in search "
+"results."
+msgstr ""
+
+#, python-format
+msgid "Moderator \"%(user)s\" approved your image"
+msgstr ""
+
+#, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
 msgstr ""
 "<a href=\"%(object_url)s\">あなたの画像</a> はプレートソルビングできませんで"
@@ -5126,6 +5280,18 @@ msgstr ""
 "残念ながら、AstroBinはあなたのイメージ %(title)s の高度なプレートソルビングを"
 "実行することができませんでした。"
 
+msgid ""
+"Your image could not be automatically submitted for IOTD/TP consideration"
+msgstr ""
+
+msgid ""
+"If you haven't already, please take a few minutes to learn how the process "
+"works:"
+msgstr "既にお持ちの方は、お手数ですが、その作業をご確認ください。"
+
+msgid "Image of the Day"
+msgstr "Image of the Day"
+
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> was plate-solved."
 msgstr ""
@@ -5161,14 +5327,6 @@ msgstr ""
 
 msgid "You submitted your image for IOTD/TP consideration!"
 msgstr ""
-
-msgid ""
-"If you haven't already, please take a few minutes to learn how the process "
-"works:"
-msgstr "既にお持ちの方は、お手数ですが、その作業をご確認ください。"
-
-msgid "Image of the Day"
-msgstr "Image of the Day"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "あなたの画像がIOTDに掲載されました。"
@@ -5735,6 +5893,13 @@ msgstr "<strong>%(user)s</strong> は新しい画像を公開しました。"
 msgid "This image is a group effort among the following collaborators:"
 msgstr "この画像は、以下のコラボレーターとの共同作品です。"
 
+msgid "This image features some equipment items that you follow:"
+msgstr ""
+
+#, python-format
+msgid "%(user)s has published a new image"
+msgstr ""
+
 msgid "This image is a group effort with the following collaborators:"
 msgstr "この画像は、以下のコラボレーターとの共同作品です。"
 
@@ -5835,12 +6000,11 @@ msgstr "%(user)s があなたの画像に「いいね」しました: %(url)s"
 msgid "%(user)s likes your image: %(title)s"
 msgstr "%(user)s があなたの画像に「いいね」しました: %(title)s"
 
-msgid ""
-"I really appreciate your support for AstroBin, thank you so much for "
-"renewing!"
+msgid "Thank you for your payment!"
 msgstr ""
-"AstroBinを応援してくださっている皆様、リニューアルしてくださって本当にありが"
-"とうございます。"
+
+msgid "I really appreciate your support for AstroBin, thank you so much!"
+msgstr ""
 
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
@@ -5855,31 +6019,20 @@ msgstr "%(creator)s が新しい公開グループ \"%(group_name)s\" を作成
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr "%(creator)s が新しい公開グループ \"%(group_name)s\" を作成しました。"
 
+msgid "Thank you for your subscription!"
+msgstr ""
+
 msgid ""
 "I really appreciate your support for AstroBin, I hope you will enjoy your "
 "new subscription!"
 msgstr "AstroBinを応援していただき、本当にありがとうございます。"
 
 msgid ""
-"AstroBin subscriptions are valid for 1 year. When a subscription expires, "
-"nothing happens to your content. Nothing is deleted, hidden, held hostage or "
-"anything. In fact, you can leave it up forever even if you stop being active "
-"as an astrophotographer."
+"AstroBin subscriptions are valid for 1 year or 1 month. If your subscription "
+"expires, nothing happens to your content. Nothing is deleted, hidden, held "
+"hostage or anything. In fact, you can leave it up forever even if you stop "
+"being active as an astrophotographer."
 msgstr ""
-"AstroBinのサブスクリプションは1年間有効です。購読期間が終了しても、お客様のコ"
-"ンテンツには何も起こりません。削除されたり、隠されたり、人質にされたり、何も"
-"起こりません。実際、あなたが天体写真家としての活動を止めても、永久にアップ"
-"ロードし続けることができます。"
-
-msgid ""
-"If at some point you want to upgrade your subscription, simply purchase the "
-"new one and then get in touch so I can send you a partial refund for the "
-"unused time on your previous subscription, or extend the expiration date of "
-"your new subscription with pro-rated time from your old one."
-msgstr ""
-"もし、アップグレードを希望される場合は、新しいものを購入し、ご連絡ください。"
-"以前のサブスクリプションの未使用時間の一部を返金するか、古いサブスクリプショ"
-"ンの時間を日割り計算して、新しいサブスクリプションの有効期限を延長します。"
 
 #, python-format
 msgid ""
@@ -5988,6 +6141,17 @@ msgstr ""
 #, python-format
 msgid "%(user)s removed themselves as a collaborator to your image"
 msgstr "%(user)s があなたの画像のコラボレーターとして、自分自身を削除しました"
+
+msgid "Subscription canceled"
+msgstr ""
+
+msgid ""
+"Your subscription was cancelled, and you will not be charged for it anymore "
+"unless you have an outstanding balance due to a prorated upgrade."
+msgstr ""
+
+msgid "You may continue to use your subscription until its expiration date."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6178,24 +6342,36 @@ msgstr ""
 msgid "Learn more about the AstroBin equipment database!"
 msgstr "AstroBinの機材データベースについてもっと知ろう！"
 
+msgid "Select..."
+msgstr ""
+
 msgid "Search all forums"
 msgstr "すべてのフォーラムを検索"
 
 msgid "New topic"
 msgstr "新規トピックス"
 
-msgid "Please select a forum"
-msgstr "フォーラムを選択してください"
+msgid "To post a new topic, please first select the most relevant forum"
+msgstr ""
+
+msgid "Do you want to post about a specific equipment item?"
+msgstr ""
+
+msgid "Yes"
+msgstr "はい"
+
+msgid "No"
+msgstr "いいえ"
 
 msgid ""
-"To post a new topic, please first go to the forum that is most relevant to "
-"your topic."
+"Anybody who used an equipment item is notified of new topics in its forum, "
+"unless they opt out."
 msgstr ""
-"新しいトピックを投稿するには、まずあなたのトピックに最も関連性の高いフォーラ"
-"ムに移動してください。"
+"ある機材を使用した人は、オプトアウトしない限り、その機材のフォーラムに新しい"
+"トピックが通知されます。"
 
-msgid "View forums"
-msgstr "フォーラムを見る"
+msgid "Please select a forum:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6250,18 +6426,25 @@ msgstr "無視する"
 msgid "Browse equipment"
 msgstr "機材をみる"
 
+#, python-format
+msgid ""
+"\n"
+"                New topic in forum: \"%(forum_name)s\"\n"
+"            "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                New reply in topic: \"%(topic_name)s\"\n"
+"            "
+msgstr ""
+
 msgid "Back to group"
 msgstr "グループに戻る"
 
 msgid "Back to equipment item"
 msgstr "機材へ戻る"
-
-msgid ""
-"Anybody who used an equipment item is notified of new topics in its forum, "
-"unless they opt out."
-msgstr ""
-"ある機材を使用した人は、オプトアウトしない限り、その機材のフォーラムに新しい"
-"トピックが通知されます。"
 
 msgid ""
 "Below, you can see a list of equipment item forums that have at least one "
@@ -6326,6 +6509,27 @@ msgstr ""
 
 msgid "New reply to a forum topic you subscribe to"
 msgstr "購読しているフォーラムのトピックに新規返信する"
+
+#, python-format
+msgid "Move topic \"%(topic)s\""
+msgstr ""
+
+#, python-format
+msgid "Split posts from topic \"%(topic)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                            Starting post by %(author_name)s\n"
+"                        "
+msgstr ""
+
+msgid "Move this topic"
+msgstr ""
+
+msgid "Split posts"
+msgstr ""
 
 msgid "This topic contains a poll."
 msgstr "このトピックには投票が含まれています。"
@@ -6402,6 +6606,12 @@ msgstr "投稿を削除する"
 
 msgid "Approve post"
 msgstr "投稿を許可する"
+
+msgid "Move"
+msgstr ""
+
+msgid "Split"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6648,9 +6858,18 @@ msgstr ""
 msgid "Enter your credentials."
 msgstr ""
 
+msgid "AstroBin needs an additional step to verify your login."
+msgstr ""
+
+#, python-format
 msgid ""
-"AstroBin needs an additional step to verify your login. Please enter the "
-"token generated by your token generator or received via email."
+"We just sent you an email with a one-time password token to the address "
+"<strong>%(user_email)s</strong>. Please enter it below."
+msgstr ""
+
+msgid ""
+"Please enter the token generated by your token generator app or device "
+"(usually this is Google Authenticator or similar)."
 msgstr ""
 
 msgid ""
@@ -6662,6 +6881,13 @@ msgstr ""
 msgid ""
 "To make sure that this is a legitimate login attempt, we just sent you a one-"
 "time password token via e-mail."
+msgstr ""
+
+#, python-format
+msgid ""
+"To make sure that this is a legitimate login attempt, we just sent you a one-"
+"time password token via e-mail to the address <strong>%(user_email)s</"
+"strong>."
 msgstr ""
 
 msgid "Don't want this next time?"
@@ -6885,6 +7111,19 @@ msgstr "そのユーザーは出禁になりました。"
 #, python-format
 msgid "%(user)s's bookmarks"
 msgstr "%(user)s のブックマーク"
+
+msgctxt "Piece of advice"
+msgid "Tip!"
+msgstr ""
+
+msgid ""
+"You can filter and sort your bookmarks by going the <strong>Advanced search</"
+"strong> page, selecting <em>Images bookmarked by you</em> as <strong>Search "
+"domain</strong>, and applying filtering and sorting options to your liking."
+msgstr ""
+
+msgid "Get started!"
+msgstr ""
 
 #, python-format
 msgid "%(user)s's followers"
@@ -7465,12 +7704,6 @@ msgstr "選択"
 msgid "Add filter:"
 msgstr "フィルターを追加："
 
-msgid "Yes"
-msgstr "はい"
-
-msgid "Top pick"
-msgstr "Top pick"
-
 msgid "Top pick nomination"
 msgstr "Top pick nomination"
 
@@ -7512,9 +7745,6 @@ msgstr "撮影用望遠鏡"
 
 msgid "Astrometry"
 msgstr "天体"
-
-msgid "No"
-msgstr "いいえ"
 
 msgid "In which data field should we look for your search terms?"
 msgstr "どのデータ項目で検索語を探せばよいのか？"
@@ -7680,6 +7910,152 @@ msgstr "%s 前"
 msgid "no alias"
 msgstr "別名なし"
 
+msgid "This cookie is used to store your cookie preferences."
+msgstr ""
+
+msgid "This cookie is used to identify your session on the website."
+msgstr ""
+
+msgid ""
+"This cookie is used to protect against Cross-Site Request Forgery (CSRF) "
+"attacks."
+msgstr ""
+
+msgid "This cookie is used to remember your language preference."
+msgstr ""
+
+msgid ""
+"This cookie lets you skip the two-factor authentication step for a certain "
+"time on the current device."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember your last camera filter in the equipment "
+"explorer."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember your last sensor filter in the equipment "
+"explorer."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember your last telescope filter in the equipment "
+"explorer."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember your last mount filter in the equipment "
+"explorer."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember your last filter filter in the equipment "
+"explorer."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember your last software filter in the equipment "
+"explorer."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember your last accessory filter in the equipment "
+"explorer."
+msgstr ""
+
+msgid ""
+"This cookie is used to pin your session to the master database: AstroBin "
+"uses multiple databases to improve performance, and this cookie is used to "
+"make sure that all your requests are sent to the same database."
+msgstr ""
+
+msgid ""
+"This cookie is used to authenticate you on the website app.astrobin.com."
+msgstr ""
+
+msgid ""
+"This cookie is set by Stripe and used for fraud prevention. It is only set "
+"if you purchase a subscription."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember if you have seen the information about "
+"proper usage of the forums."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember if you have seen information about the click "
+"& drag zoom functionality."
+msgstr ""
+
+msgid ""
+"This cookie is used to remember if you have enabled the high contrast theme."
+msgstr ""
+
+msgid ""
+"This cookie is used avoid saving the date and time we last saw you too often."
+msgstr ""
+
+msgid ""
+"This cookie is used by Google Analytics to anonymously track your usage of "
+"the website."
+msgstr ""
+
+msgid ""
+"This cookie is set once a visitor interacts with a Survey invitation modal "
+"popup. It is used to ensure that the same invite does not reappear if it has "
+"already been shown."
+msgstr ""
+
+msgid ""
+"This cookie is set once a visitor completes a poll using the Feedback Poll "
+"widget. It is used to ensure that the same poll does not reappear if it has "
+"already been filled in."
+msgstr ""
+
+msgid ""
+"This cookie is set once a visitor minimizes a Feedback Poll widget. It is "
+"used to ensure that the widget stays minimized when the visitor navigates "
+"through your site."
+msgstr ""
+
+msgid ""
+"This cookie is used by Hotjar to anonymously track your usage of the website."
+msgstr ""
+
+msgid ""
+"This session cookie is set to let Hotjar know whether that visitor is "
+"included in the sample which is used to generate funnels."
+msgstr ""
+
+msgid ""
+"This cookie is set when a visitor minimizes or completes Incoming Feedback. "
+"This is done so that the Incoming Feedback will load as minimized "
+"immediately if the visitor navigates to another page where it is set to show."
+msgstr ""
+
+msgid ""
+"This cookie is set when the customer first lands on a page with the Hotjar "
+"script. It is used to persist the Hotjar User ID, unique to that site on the "
+"browser. This ensures that behavior in subsequent visits to the same site "
+"will be attributed to the same user ID."
+msgstr ""
+
+msgid ""
+"This cookie is used by Google Ad Manager to register and report the website "
+"user's actions after viewing or clicking one of the advertiser's ads with "
+"the purpose of measuring the efficacy of an ad."
+msgstr ""
+
+msgid ""
+"This cookie is used by Google Ad Manager to check if the user's browser "
+"supports cookies."
+msgstr ""
+
+msgid "Essential cookies"
+msgstr ""
+
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
@@ -7810,6 +8186,9 @@ msgstr ""
 msgid "AstroBin doesn't share your email address with anyone."
 msgstr ""
 
+msgid "Sorry, your username cannot contain the \"@\" character."
+msgstr ""
+
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 "申し訳ありませんが、このユーザーネームは既に別の大文字で登録されています。"
@@ -7823,8 +8202,8 @@ msgstr ""
 msgid ""
 "This is your handle on AstroBin and will be part of the URL to your gallery. "
 "If you do not specify afirst and last name below, it will also be how others "
-"see your name. Please use letters, digits, and the special characters @/./"
-"+/-/_ only."
+"see your name. Please use letters, digits, and the special characters ./+/-/"
+"_ only."
 msgstr ""
 
 #~ msgid "Original image"
@@ -7916,6 +8295,9 @@ msgstr ""
 #~ msgid "Please select the avatars that you would like to delete."
 #~ msgstr "削除したいアバターを選択してください。"
 
+#~ msgid "Guidelines"
+#~ msgstr "ガイドライン"
+
 #~ msgid ""
 #~ "You will remove your shadow-ban on this user, and their comments, "
 #~ "messages, etc, will appear again on your content."
@@ -7925,6 +8307,22 @@ msgstr ""
 
 #~ msgid "The Big Wall"
 #~ msgstr "The Big Wall"
+
+#~ msgid ""
+#~ "AstroBin saves small pieces of text information (cookies) on your device "
+#~ "in order to deliver better content and for statistical purposes. You can "
+#~ "disable the usage of cookies by changing the settings of your browser. By "
+#~ "browsing AstroBin without changing the browser settings, you grant us "
+#~ "permission to store that information on your device."
+#~ msgstr ""
+#~ "アストロビンは、より良いコンテンツをお届けするため、また統計的な処理を行う"
+#~ "ために、お客様の端末に小さなテキスト情報（クッキー）を保存しています。お客"
+#~ "様は、ブラウザの設定を変更することにより、クッキーの使用を拒否することがで"
+#~ "きます。ブラウザの設定を変更せずにアストロビンを閲覧した場合、お客様の端末"
+#~ "に情報を保存することを許可したことになります。"
+
+#~ msgid "I agree"
+#~ msgstr "同意する"
 
 #~ msgid "Instructions and examples"
 #~ msgstr "使用方法と使用例"
@@ -8315,6 +8713,35 @@ msgstr ""
 #~ "ました</a>"
 
 #~ msgid ""
+#~ "I really appreciate your support for AstroBin, thank you so much for "
+#~ "renewing!"
+#~ msgstr ""
+#~ "AstroBinを応援してくださっている皆様、リニューアルしてくださって本当にあり"
+#~ "がとうございます。"
+
+#~ msgid ""
+#~ "AstroBin subscriptions are valid for 1 year. When a subscription expires, "
+#~ "nothing happens to your content. Nothing is deleted, hidden, held hostage "
+#~ "or anything. In fact, you can leave it up forever even if you stop being "
+#~ "active as an astrophotographer."
+#~ msgstr ""
+#~ "AstroBinのサブスクリプションは1年間有効です。購読期間が終了しても、お客様"
+#~ "のコンテンツには何も起こりません。削除されたり、隠されたり、人質にされた"
+#~ "り、何も起こりません。実際、あなたが天体写真家としての活動を止めても、永久"
+#~ "にアップロードし続けることができます。"
+
+#~ msgid ""
+#~ "If at some point you want to upgrade your subscription, simply purchase "
+#~ "the new one and then get in touch so I can send you a partial refund for "
+#~ "the unused time on your previous subscription, or extend the expiration "
+#~ "date of your new subscription with pro-rated time from your old one."
+#~ msgstr ""
+#~ "もし、アップグレードを希望される場合は、新しいものを購入し、ご連絡くださ"
+#~ "い。以前のサブスクリプションの未使用時間の一部を返金するか、古いサブスクリ"
+#~ "プションの時間を日割り計算して、新しいサブスクリプションの有効期限を延長し"
+#~ "ます。"
+
+#~ msgid ""
 #~ "%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
 #~ "\n"
 #~ "\"%(topic_title)s\"\n"
@@ -8368,6 +8795,19 @@ msgstr ""
 
 #~ msgid "Search all forums and comments"
 #~ msgstr "すべてのフォーラムとコメントを検索する"
+
+#~ msgid "Please select a forum"
+#~ msgstr "フォーラムを選択してください"
+
+#~ msgid ""
+#~ "To post a new topic, please first go to the forum that is most relevant "
+#~ "to your topic."
+#~ msgstr ""
+#~ "新しいトピックを投稿するには、まずあなたのトピックに最も関連性の高いフォー"
+#~ "ラムに移動してください。"
+
+#~ msgid "View forums"
+#~ msgstr "フォーラムを見る"
 
 #~ msgid "These are the forums in the groups you have access to."
 #~ msgstr "これらは、あなたがアクセスできるグループ内のフォーラムです。"
@@ -8717,6 +9157,47 @@ msgstr ""
 #~ msgstr ""
 #~ "%(_0)sIOTD/TP%(_1)s のための投稿は、自動的にはできなくなりました。今後は"
 #~ "<strong>アクション</strong>を利用して投稿してください。"
+
+#~ msgid "You are not authenticated. Please log in."
+#~ msgstr "認証されていません。ログインしてください。"
+
+#~ msgid "You are not the owner of this image."
+#~ msgstr "この画像の所有者はあなたではありません。"
+
+#~ msgid "Sorry, this feature requires a <a href=\"%(url)s\">paid account</a>."
+#~ msgstr ""
+#~ "申し訳ございませんが、この機能を使用するには<a href=\"%(url)s\">有料アカウ"
+#~ "ント</a>が必要です。"
+
+#~ msgid "This image is in your staging area and hasn't been published yet."
+#~ msgstr "この画像はステージングエリア内にあり、まだ公開されていません。"
+
+#~ msgid ""
+#~ "Unfortunately it's too late: images can be submitted only within "
+#~ "%(num_days)s days after publication."
+#~ msgstr ""
+#~ "残念ながら、もう手遅れです。画像の応募は、公開後 %(num_days)s 日以内のみ可"
+#~ "能です。"
+
+#~ msgid "This image was already submitted."
+#~ msgstr "この画像は既に応募されたものです。"
+
+#~ msgid ""
+#~ "Images with subject type set to 'Gear' or 'Other' are not eligible for "
+#~ "IOTD/TP consideration."
+#~ msgstr ""
+#~ "被写体が「機材」または「その他」に設定されている画像は、IOTDの対象外です。"
+
+#~ msgid ""
+#~ "Your settings indicate that you opted to be excluded from competitions."
+#~ msgstr "あなたの設定により、コンペからの除外を選択されています。"
+
+#~ msgid "You are currently serving a ban from competitions on AstroBin."
+#~ msgstr ""
+#~ "あなたは現在、AstroBinでのコンペへの参加の禁止を言い渡されています。"
+
+#~ msgid "Unknown reason. This should never happen, please contact us!"
+#~ msgstr "原因不明です。このようなことは決してあってはならないことです。"
 
 #~ msgid "Old brand"
 #~ msgstr "過去のブランド"

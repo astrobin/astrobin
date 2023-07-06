@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-15 08:01+0000\n"
+"POT-Creation-Date: 2023-07-06 11:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,4 +181,50 @@ msgid "there are already %s scheduled IOTD(s)"
 msgstr ""
 
 msgid "Image of the day"
+msgstr ""
+
+msgid "You are not authenticated. Please log in."
+msgstr ""
+
+msgid "You are not the owner of this image."
+msgstr ""
+
+#, python-format
+msgid "Sorry, this feature requires a <a href=\"%(url)s\">paid account</a>."
+msgstr ""
+
+msgid "This image is in your staging area and hasn't been published yet"
+msgstr ""
+
+msgid "This image was already submitted."
+msgstr ""
+
+msgid ""
+"Images with subject type set to 'Gear' or 'Other' are not eligible for IOTD/"
+"TP consideration."
+msgstr ""
+
+msgid ""
+"Images without an imaging telescope and an imaging camera are not eligible "
+"for IOTD/TP consideration."
+msgstr ""
+
+msgid ""
+"Images without any acquisition sessions are not eligible for IOTD/TP "
+"consideration."
+msgstr ""
+
+msgid "Your settings indicate that you opted to be excluded from competitions."
+msgstr ""
+
+msgid "You are currently serving a ban from competitions on AstroBin."
+msgstr ""
+
+#, python-format
+msgid ""
+"Unfortunately it's too late: images can be submitted only within "
+"%(num_days)s days after publication."
+msgstr ""
+
+msgid "Unknown reason. This should never happen, please contact us!"
 msgstr ""
