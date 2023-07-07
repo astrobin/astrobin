@@ -4,7 +4,6 @@ import urllib.request
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.http import HttpRequest
 
 from astrobin.enums import ImageEditorStep
 from common.constants import GroupName
@@ -22,14 +21,10 @@ class AppRedirectionService:
         from astrobin.middleware.thread_locals_middleware import get_current_user
         user = get_current_user()
 
-        def user_id_is_even(user_id: int) -> bool:
-            return user_id % 2 == 0
-
         if (
                 user and
                 user.is_authenticated and
                 user.joined_group_set.filter(name=GroupName.BETA_TESTERS).exists() and
-                user_id_is_even(user.pk) and
                 'localhost' not in settings.APP_URL
         ):
             return f'https://beta-app.astrobin.com/{path}'
@@ -37,9 +32,7 @@ class AppRedirectionService:
         return f'{settings.APP_URL}{path}'
 
     @staticmethod
-    def contact_redirect(request):
-        # type: (HttpRequest) -> unicode
-
+    def contact_redirect(request) -> str:
         url = 'https://welcome.astrobin.com/contact'
         user = request.user
         params = {}
