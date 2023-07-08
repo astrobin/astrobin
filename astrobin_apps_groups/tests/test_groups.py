@@ -84,7 +84,7 @@ class GroupsTest(TestCase):
         # Everything okay when it's empty
         response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'This groups has no images')
+        self.assertContains(response, '<li>No images.</li>', html=True)
 
         # Test that images are rendered and members can access
         self.client.login(username='user1', password='password')
@@ -105,7 +105,7 @@ class GroupsTest(TestCase):
         image.save(keep_deleted=True)
         response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'This groups has no images')
+        self.assertContains(response, '<li>No images.</li>', html=True)
 
         # Test that the group is not accessible if it's private
         self.group.public = False
