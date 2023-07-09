@@ -456,6 +456,11 @@ class IotdService:
         if image.is_wip:
             return False, MayNotSubmitToIotdTpReason.NOT_PUBLISHED
 
+        if image.published < (
+                DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
+        ):
+            return False, MayNotSubmitToIotdTpReason.TOO_LATE
+
         if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
             return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
 
@@ -473,11 +478,6 @@ class IotdService:
 
         if image.user.userprofile.banned_from_competitions:
             return False, MayNotSubmitToIotdTpReason.BANNED_FROM_COMPETITIONS
-
-        if image.published < (
-                DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
-        ):
-            return False, MayNotSubmitToIotdTpReason.TOO_LATE
 
         return True, None
 
