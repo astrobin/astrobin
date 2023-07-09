@@ -21,13 +21,15 @@
                 "{{ forum.name }}" === "Anything goes" ||
                 "{{ forum.name }}" === "Other"
             ) {
-                $('#forum-usage-modal').modal({
+                const $modal = $('#forum-usage-modal');
+
+                $modal.modal({
                     backdrop: 'static',
                     show: true,
                     keyboard: false
                 });
 
-                $('#forum-usage-modal').on('hidden', function () {
+                $modal.on('hidden', function () {
                     $.ajax({
                         url: '/json-api/user/mark-forum-usage-modal-as-seen/',
                         type: 'POST',
@@ -42,12 +44,6 @@
                     else {
                         $('#forum-usage-modal .btn-primary').attr('disabled', 'disabled');
                     }
-                });
-            } else if ("{{ forum.name }}" === "Equipment") {
-                $('#equipment-forum-usage-modal').modal({
-                    backdrop: 'static',
-                    show: true,
-                    keyboard: false
                 });
             }
         });
@@ -86,20 +82,22 @@
                             with AstroBin please use the <a href="{{ contact_url }}">contact form</a>.
                         {% endblocktrans %}
                     </p>
-                    <p>
+
+                    <p class="alert alert-warning">
                         {% blocktrans trimmed %}
                             User support posts, feature requests, issue reports, etc, will be deleted.
                         {% endblocktrans %}
                     </p>
-                    <p class="alert alert-warning">
-                        {% url 'contact' as contact_url %}
+
+                    <p>
+                        {% setvar 'https://www.astrobin.com/groups/5785/' as open_discussions_url %}
                         {% blocktrans trimmed %}
-                            Posts about AstroBin itself, such as questions or comments about the IOTD/TP process, or
-                            the AstroBin Index, AstroBin "likes", or the forums themselves, are also considered
-                            off-topic and will be deleted. If you want to provide feedback or ask a question about
-                            AstroBin, please <a href="{{ contact_url }}">contact us</a>: we really value your input!
+                            If you want to engage in open discussion about AstroBin and its feature with other members
+                            of the community, please join the <a href="{{ open_discussions_url }}">AstroBin Platform
+                            open discussions community forum</a> group!
                         {% endblocktrans %}
                     </p>
+
                     <p>
                         {% blocktrans trimmed %}
                             Thanks for your cooperation!
@@ -115,34 +113,6 @@
                 <label for="i-have-read">{% trans "I have read the text above" %}</label>
             </div>
             <button data-dismiss="modal" class="btn btn-primary" disabled="disabled">{% trans "I understand" %}</button>
-        </div>
-    </div>
-
-    <div class="modal hide fade" id="equipment-forum-usage-modal">
-        <div class="modal-header">
-            <h3>{% trans "Please note" %}</h3>
-        </div>
-
-        <div class="modal-body">
-            <p>
-                {% blocktrans trimmed with _0='<a href="https://app.astrobin.com/equipment/explorer">' _1='</a>' %}
-                    If you want to post a new topic about a specific equipment item, we recommend finding it in the
-                    {{ _0 }}equipment database{{ _1 }} and posting in its dedicated forum.
-                {% endblocktrans %}
-            </p>
-
-            <p>
-                {% blocktrans trimmed %}
-                    This will maximize your chances of getting relevant replies because all active AstroBin users who
-                    have used that specific equipment item will be notified of your post, unless they opted out of that
-                    particular notification.
-                {% endblocktrans %}
-            </p>
-        </div>
-
-        <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-secondary">{% trans "Ignore" %}</button>
-            <a class="btn btn-primary" href="{% app_redirection_service '/equipment/explorer' %}">{% trans "Browse equipment" %}</a>
         </div>
     </div>
 {% endblock %}
