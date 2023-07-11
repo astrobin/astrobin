@@ -100,7 +100,7 @@ astrobin_common = {
                 language = 'en';
             }
 
-            var options = {
+            const options = {
                 skin: 'minimalist',
                 language: language,
                 editorplaceholder: placeholder || '',
@@ -383,7 +383,7 @@ astrobin_common = {
                         }
                     }
                 }
-            }
+            };
 
             switch (context) {
                 case "forum":
@@ -397,8 +397,7 @@ astrobin_common = {
                     options['height'] = 250;
                     break;
                 case "private-message":
-                    options['height'] = 300;
-                    break;
+                case "forum-notice":
                 case "image-description":
                     options['height'] = 300;
                     break;

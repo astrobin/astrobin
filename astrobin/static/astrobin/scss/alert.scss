@@ -9,6 +9,15 @@
 }
 
 .alert {
+  &.alert-sticky {
+    margin: -18px -30px 3rem;
+    border-radius: 0;
+  }
+
+  .alert-body {
+    margin: 1rem 0;
+  }
+
   form {
     margin-bottom: $spacer-small;
 
@@ -19,6 +28,15 @@
 
   h4 {
     margin-bottom: 12px;
+  }
+
+  h3 + h4 {
+    margin-top: -1rem;
+    font-weight: normal;
+    font-size: 1rem;
+    border-bottom: 1px solid $grey-5;
+    margin-bottom: 1.5rem;
+    padding-bottom: .5rem;
   }
 
   p:only-child {
@@ -52,7 +70,11 @@
   }
 }
 
-.alert-heading {
+h3.alert-heading {
+    margin: 0 0 1.25rem 0;
+}
+
+h4.alert-heading {
   margin: 0 0 12px 0;
 }
 
@@ -73,6 +95,19 @@
   .close {
     color: $white;
     text-shadow: none;
+  }
+}
+
+.alert-warning {
+  &,
+  strong,
+  h3,
+  h4 {
+    color: $bronze;
+  }
+
+  h3 + h4 {
+    border-color: #ded290;
   }
 }
 

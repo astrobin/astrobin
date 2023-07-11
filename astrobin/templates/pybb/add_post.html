@@ -4,6 +4,7 @@
 {% load pybb_tags %}
 {% load static %}
 {% load common_tags %}
+{% load bbcode_tags %}
 
 {% block title %}
     {% if forum %}
@@ -118,6 +119,23 @@
 {% endblock %}
 
 {% block content %}
+    {% if forum and forum.group and forum.group.forum_notice %}
+        <div class="alert alert-sticky alert-warning">
+            <h3 class="alert-heading">{% trans "Forum notice" %}</h3>
+
+            <h4>
+                {% blocktrans trimmed %}
+                    This forum belongs to a group, and the group's owner set the following notice to communicate forum
+                    rules, disclaimers, or important information to users before they create a new post
+                {% endblocktrans %}
+            </h4>
+
+            <div class="alert-body">
+                {{ forum.group.forum_notice|bbcode|safe }}
+            </div>
+        </div>
+    {% endif %}
+
     <h1>
         {% if forum %}
             {% blocktrans with forum_name=forum.name %}

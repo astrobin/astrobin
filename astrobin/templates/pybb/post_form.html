@@ -1,5 +1,6 @@
-{% load i18n pybb_tags %}
+{% load i18n %}
 {% load static %}
+{% load pybb_tags %}
 
 {% if READONLY_MODE %}
     {% include 'readonly_mode.html' %}
@@ -36,7 +37,9 @@
                     {% include "pybb/poll_edit_form.html" %}
                 </div>
             {% endif %}
+
             {% include "pybb/attachments_formset.html" %}
+
             <p class="submit">{% include "pybb/_button_submit.html" %}</p>
         </fieldset>
     </form>

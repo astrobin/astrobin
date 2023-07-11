@@ -179,6 +179,18 @@ class Group(models.Model):
         on_delete=models.SET_NULL
     )
 
+    forum_notice = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_("Forum notice"),
+        help_text=_(
+            "Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this to communicate forum rules, "
+            "disclaimers, or important information to users before they create a new post. Ensure your message is "
+            "clear and concise."
+        )
+    )
+
+
     @property
     def slug(self):
         return slugify(self.name)

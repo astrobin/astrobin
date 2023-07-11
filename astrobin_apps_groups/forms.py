@@ -50,7 +50,7 @@ class GroupUpdateForm(GroupUpdateBaseForm):
         model = Group
         fields = [
             'name', 'description', 'category', 'default_image_sorting', 'image_tag_sorting', 'public', 'moderated',
-            'autosubmission', 'autosubmission_deactivation_strategy', ]
+            'autosubmission', 'autosubmission_deactivation_strategy', 'forum_notice']
 
 
 class GroupInviteForm(forms.ModelForm):
