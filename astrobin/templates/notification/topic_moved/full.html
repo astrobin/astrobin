@@ -1,0 +1,38 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        A moderator moved your topic <strong>{{ topic_name }}</strong> from the forum
+        <strong>{{ old_forum_name }}</strong> to the forum <strong>{{ new_forum_name }}</strong>.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        The moderator decided to move your topic to a more relevant forum.
+    {% endblocktrans %}
+</p>
+
+{% if group_url and group_name %}
+    <p>
+        {% blocktrans trimmed %}
+            Your topic was moved to a forum in the group <a href="{{ group_url }}">{{ group_name }}</a>. You will
+            be notified of topic replies also if you're not a member of the group, but joining it might be a good idea.
+        {% endblocktrans %}
+    </p>
+{% endif %}
+
+{% if equipment_item_url and equipment_item_name %}
+    <p>
+        {% blocktrans trimmed %}
+            As your topic pertains, at least partially, to a specific piece of equipment
+            (<a href="{{ equipment_item_url }}">{{ equipment_item_name }}</a>), it was moved to its dedicated forum.
+            When new topics are posted to the forum of an equipment item, all AstroBin users who have used it get
+            notified (unless they have opted out of this kind of notifications).
+        {% endblocktrans %}
+    </p>
+{% endif %}
+
+<p>
+    <a href="{{ topic_url }}" class="btn btn-primary">{% trans "View topic" %}</a>
+</p>
