@@ -36,7 +36,8 @@ from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
 from astrobin.tasks import invalidate_cdn_caches, process_camera_rename_proposal
-from astrobin_apps_equipment.models import EquipmentBrand
+from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
+from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.services import ForumService
 from astrobin_apps_forum.tasks import notify_equipment_users
@@ -1032,6 +1033,32 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                 instance.name,
                 topic.forum.name,
                 instance.forum.name)
+        )
+
+        equipment_item: EquipmentItem = ForumService(instance.forum).get_equipment_item()
+        group: Group = instance.forum.group if hasattr(instance.forum, 'group') else None
+
+        push_notification(
+            [instance.user],
+            None,
+            'topic_moved',
+            {
+                'topic_url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
+                'topic_name': topic.name,
+                'old_forum_name': topic.forum.name,
+                'new_forum_name': instance.forum.name,
+                'group_url': build_notification_url(
+                    settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user
+                ) if group else None,
+                'group_name': group.name if group else None,
+                'equipment_item_name': f'{equipment_item.brand.name if equipment_item.brand else gettext("(DIY)")} {equipment_item.name}' if equipment_item else None,
+                'equipment_item_url': build_notification_url(
+                    AppRedirectionService.redirect(
+                        f'/equipment/explorer/{EquipmentItemService(equipment_item).get_type()}/{equipment_item.pk}'
+                    )
+                ) if equipment_item else None,
+                'topic_title': instance.name,
+            },
         )
 
         ForumService.create_topic_redirect(

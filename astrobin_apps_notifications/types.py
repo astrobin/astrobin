@@ -187,6 +187,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'topic_moved',
+        _('Your forum topic was moved'),
+        '',
+        2
+    ),
+    (
         'received_email',
         _('You have received a new private message'),
         '',
