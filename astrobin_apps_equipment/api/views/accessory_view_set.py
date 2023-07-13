@@ -16,7 +16,7 @@ class AccessoryViewSet(EquipmentItemViewSet):
         queryset = super().get_queryset()
 
         accessory_type_filter = self.request.GET.get('accessory-type')
-        if accessory_type_filter and accessory_type_filter != 'null':
+        if accessory_type_filter and accessory_type_filter not in ['null', 'undefined']:
             queryset = queryset.filter(type=accessory_type_filter)
 
         return queryset
