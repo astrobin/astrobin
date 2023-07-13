@@ -1,4 +1,7 @@
 {% load i18n %}
-{% blocktrans %}{{inviter}} invited you to join the group: "{{group_name}}"
 
-Visit the group here: <a href="{{group_page}}">{{group_page}}</a>{% endblocktrans %}
+<p>
+    {% blocktrans %}{{inviter}} invited you to join the group: "{{group_name}}"{% endblocktrans %}.
+</p>
+
+<a href="{{group_page}}" class="btn btn-primary">{% trans "Visit group" %}</a>

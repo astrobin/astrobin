@@ -1,2 +1,3 @@
 {% load i18n %}
+
 {% blocktrans %}Your request to join the group "{{group_name}}" has been REJECTED{% endblocktrans %}
