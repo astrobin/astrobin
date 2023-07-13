@@ -36,20 +36,30 @@ table.forums, table.topic-list {
 
   td.topic-name {
     text-align: left !important;
-    line-height: 24px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 20px;
     width: 99%;
+    padding: 1rem .5rem;
 
     .poll,
     .unanswered {
       font-style: italic;
-      color: $grey-4;
+      color: #6e6e6e;
       margin-right: .5rem;
     }
 
     > a:first-child {
-      font-size: 1.15rem;
+      font-size: 1.35rem;
+      font-weight: bold;
       border: 0;
       display: inline;
+      margin-right: .5rem;
+      color: $white;
+
+      &:hover {
+        color: $link-color !important;
+      }
 
       + br {
         content: "";
@@ -121,11 +131,19 @@ th.forum-name {
   color: $link-color !important;
   text-decoration: none;
   border: 0 !important;
-  padding-left: 8px;
+  padding: 1rem;
+  font-size: 1.25rem;
+
+  &:hover {
+    background-color: $link-color;
+    color: $white !important;
+    border-radius: .25rem;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
 }
 
 .post {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   box-shadow: 1rem 1rem 2rem 0 rgba(0, 0, 0, .3), -.5rem -.5rem 2rem 0 rgba(255, 255, 255, .05);
   border-radius: 1.5rem;
 
@@ -163,6 +181,7 @@ th.forum-name {
     padding: 0 18px !important;
     height: 60px;
     vertical-align: middle !important;
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
     border-bottom-color: $grey-5 !important;
     border-radius: 1.5rem 1.5rem 0 0;
   }
@@ -523,8 +542,8 @@ table.post th.post-avatar {
 }
 
 .topic h1, .forum h1, .category h1 {
-  margin: 2rem 0 2.5rem;
-  font-size: 2rem;
+  margin: 3rem 0 3.5rem;
+  font-size: 2.5rem;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
 
   @media screen and (max-width: 767px) {
@@ -548,7 +567,6 @@ table.post th.post-avatar {
 .forums .forum-name,
 .forum .topic-forum,
 .forum .topic-name {
-
   > a:first-child {
     color: $white;
     padding-top: 6px;

@@ -2520,18 +2520,11 @@ form.avatar-delete {
 
 .index-recent-topics.topic-list {
   margin-bottom: $spacer-large;
-  color: #999;
-
-  a {
-    color: #999;
-  }
 
   .topic-name > a:first-child {
-    font-size: inherit;
+    font-size: 1.25rem;
     border: 0;
     padding: 0;
-    margin: 0;
-    color: $text-color;
   }
 }
 
