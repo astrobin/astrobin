@@ -1,7 +1,7 @@
 @import 'mixins';
 
 .jq-toast-single {
-  background: $grey-2;
+  background-color: $grey-2;
   color: $grey-5;
   border-color: $grey-5;
   font-size: 14px;
@@ -35,6 +35,23 @@
 
     &:hover {
       color: darken($link-color, 5%);
+    }
+  }
+
+  &.jq-has-icon {
+    padding-left: 3rem;
+    right: calc(1.5rem + 25px);
+  }
+
+  &.jq-icon-error {
+    background-color: $red;
+    color: $white;
+    border-color: $red;
+
+    h2,
+    .close-jq-toast-single{
+      color: white;
+      text-shadow: none;
     }
   }
 }

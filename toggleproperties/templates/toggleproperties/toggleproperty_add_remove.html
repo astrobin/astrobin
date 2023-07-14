@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <span class="toggleproperty-add-remove property-{{ property_type }}">
     <button class="{{ btn_class }}{% if is_toggled %} active{% endif %}"
             data-toggle="button"
@@ -97,7 +99,18 @@
                             if (data['count'] !== undefined)
                                 $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);
                         },
-                        error: function() {
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $.toast({
+                                heading: "{{ _("Error!") | escapejs }}",
+                                text: jqXHR.responseText,
+                                showHideTransition: 'slide',
+                                allowToastClose: true,
+                                position: 'top-right',
+                                loader: false,
+                                hideAfter: false,
+                                icon: 'error'
+                            });
+
                             {% if property_tooltip_on and property_tooltip_off %}
                                 $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
                                     .tooltip('hide')

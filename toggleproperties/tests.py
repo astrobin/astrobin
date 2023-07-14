@@ -1,5 +1,8 @@
+import copy
+
+from django.conf import settings
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from toggleproperties.models import ToggleProperty
 
@@ -21,6 +24,15 @@ class TogglePropertyTest(TestCase):
 
         self.assertEquals(meta_like.user, self.alice)
         self.assertEquals(meta_like.content_object, like)
+
+    def testAddTogglePropertyThrottling(self):
+        settings_value = copy.deepcopy(settings.TOGGLEPROPERTIES)
+        settings_value['like']['throttle'] = '1/d'
+
+        with override_settings(TOGGLEPROPERTIES=settings_value):
+            ToggleProperty.objects.create_toggleproperty("like", self.bob, self.alice)
+            with self.assertRaises(ValueError):
+                ToggleProperty.objects.create_toggleproperty("like", self.bob, self.alice)
 
     def testGetTogglePropertiesForUser(self):
         # alice likes bob

@@ -1,9 +1,15 @@
 import logging
+import re
+from datetime import timedelta
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db import models, IntegrityError
 from django.dispatch import receiver
+from django.utils.translation import gettext
+
+from common.services import DateTimeService
 
 log = logging.getLogger(__name__)
 
@@ -64,7 +70,41 @@ class TogglePropertyManager(models.Manager):
                                        user=user, object_id=obj.pk)
 
     def create_toggleproperty(self, property_type, content_object, user):
+        def is_throttled(user, property_type, throttle_setting):
+            if throttle_setting is None:
+                return False
+
+            throttle_num, throttle_unit = re.match(r'(\d+)/(\w)', throttle_setting).groups()
+            throttle_num = int(throttle_num)
+            if throttle_unit == 's':
+                throttle_period = timedelta(seconds=1)
+            elif throttle_unit == 'm':
+                throttle_period = timedelta(minutes=1)
+            elif throttle_unit == 'h':
+                throttle_period = timedelta(hours=1)
+            elif throttle_unit == 'd':
+                throttle_period = timedelta(days=1)
+            else:
+                raise ValueError(f"Invalid throttle unit: {throttle_unit}")
+
+            # Calculate the start of the throttle period
+            throttle_start = DateTimeService.now() - throttle_period
+
+            # Count the ToggleProperties created in the throttle period
+            throttle_count = ToggleProperty.objects.filter(
+                user=user,
+                property_type=property_type,
+                created_on__gte=throttle_start,
+            ).count()
+
+            # Return true if the throttle limit is exceeded
+            return throttle_count >= throttle_num
+
+        if is_throttled(user, property_type, settings.TOGGLEPROPERTIES.get(property_type).get('throttle')):
+            raise ValueError(gettext("Sorry, but you're doing this too often. Please try again later."))
+
         content_type = ContentType.objects.get_for_model(type(content_object))
+
         try:
             tp = self.toggleproperty_for_user(property_type, content_object, user)
         except ToggleProperty.DoesNotExist:
