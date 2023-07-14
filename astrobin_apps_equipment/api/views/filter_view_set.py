@@ -20,7 +20,7 @@ class FilterViewSet(EquipmentItemViewSet):
         queryset = super().get_queryset()
 
         filter_type_filter = self.request.GET.get('filter-type')
-        if filter_type_filter and filter_type_filter != 'null':
+        if filter_type_filter and filter_type_filter not in ['null', 'undefined']:
             queryset = queryset.filter(
                 type=filter_type_filter,
             )
@@ -36,7 +36,7 @@ class FilterViewSet(EquipmentItemViewSet):
                 )
 
         filter_size_filter = self.request.GET.get('filter-size')
-        if filter_size_filter and filter_size_filter != 'null':
+        if filter_size_filter and filter_size_filter not in ['null', 'undefined']:
             queryset = queryset.filter(
                 size=filter_size_filter,
             )

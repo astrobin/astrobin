@@ -19,7 +19,7 @@ class MountViewSet(EquipmentItemViewSet):
         queryset = super().get_queryset()
         
         mount_type_filter = self.request.GET.get('mount-type')
-        if mount_type_filter and mount_type_filter != 'null':
+        if mount_type_filter and mount_type_filter not in ['null', 'undefined']:
             queryset = queryset.filter(
                 type=mount_type_filter,
             )

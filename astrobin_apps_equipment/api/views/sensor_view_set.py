@@ -155,7 +155,7 @@ class SensorViewSet(EquipmentItemViewSet):
                 )
 
         sensor_color_or_mono_filter = self.request.GET.get('sensor-color-or-mono')
-        if sensor_color_or_mono_filter and sensor_color_or_mono_filter != 'null':
+        if sensor_color_or_mono_filter and sensor_color_or_mono_filter not in ['null', 'undefined']:
             queryset = queryset.filter(
                 color_or_mono=sensor_color_or_mono_filter,
             )
