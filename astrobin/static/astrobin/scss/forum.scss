@@ -8,15 +8,20 @@
 }
 
 table.topic-list {
-  color: #606060;
+  color: #808080;
 
   a {
-    color: #606060;
-    border-bottom: 1px dotted #404040;
+    color: #aaa;
+    border-bottom: 1px dotted #707070;
 
     &:hover {
       color: $link-color;
     }
+  }
+
+  abbr[title],
+  abbr[data-original-title] {
+    border-bottom: 1px dotted #707070;
   }
 }
 
@@ -36,16 +41,16 @@ table.forums, table.topic-list {
 
   td.topic-name {
     text-align: left !important;
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: normal;
-    line-height: 20px;
+    line-height: 21px;
     width: 99%;
     padding: 1rem .5rem;
 
     .poll,
     .unanswered {
       font-style: italic;
-      color: #6e6e6e;
+      color: #808080;
       margin-right: .5rem;
     }
 
