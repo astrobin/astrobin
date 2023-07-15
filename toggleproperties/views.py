@@ -48,7 +48,10 @@ def ajax_add_toggleproperty(request):
                 status=400
             )
 
-        ToggleProperty.objects.create_toggleproperty(property_type, obj, request.user)
+        try:
+            ToggleProperty.objects.create_toggleproperty(property_type, obj, request.user)
+        except ValueError as e:
+            return HttpResponse(str(e), status=400)
 
         if content_type.model == 'image':
             ImageService(obj).record_hit(request)

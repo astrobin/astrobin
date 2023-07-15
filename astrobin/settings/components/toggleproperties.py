@@ -19,5 +19,6 @@ TOGGLEPROPERTIES = {
         "property_label_on": _("Stop following"),
         "property_label_off": _("Follow"),
         "property_icon": "icon-bell-alt",
+        "throttle": "20/d"
     }
 }
