@@ -33,7 +33,7 @@ log = logging.getLogger(__name__)
 class IotdService:
     def is_in_iotd_queue(self, image: Image) -> bool:
         return (
-                IotdSubmission.objects.filter(image=image).exists() or
+                IotdSubmissionQueueEntry.objects.filter(image=image).exists() or
                 IotdReviewQueueEntry.objects.filter(image=image).exists() or
                 IotdJudgementQueueEntry.objects.filter(image=image).exists()
         )

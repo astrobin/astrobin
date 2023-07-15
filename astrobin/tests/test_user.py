@@ -564,7 +564,7 @@ class UserTest(TestCase):
         response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
         self.assertContains(response, "iotd-ribbon")
 
-        # Check that the IOTD badge is still not visible because the ban is not retroactive.
+        # Check that the IOTD badge is still visible because the ban is not retroactive.
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertContains(response, 'iotd-badge')
 
