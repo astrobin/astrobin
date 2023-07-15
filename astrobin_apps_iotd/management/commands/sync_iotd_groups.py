@@ -1,5 +1,7 @@
 from django.core.management.base import BaseCommand
 
+from common.constants import GroupName
+
 
 class Command(BaseCommand):
     help = "Syncs IOTD AstroBin Groups to equivalent contrib.auth groups"
@@ -11,9 +13,9 @@ class Command(BaseCommand):
 
         map_ = {
             # key: [[clear groups], [non clear groups], [clear agroups], [non clear agroups]]
-            'IOTD Submitters': [['iotd_submitters'], ['iotd_staff', 'content_moderators'], [], ['IOTD Staff']],
-            'IOTD Reviewers': [['iotd_reviewers'], ['iotd_staff', 'content_moderators'], [], ['IOTD Staff']],
-            'IOTD Judges': [['iotd_judges'], ['iotd_staff', 'content_moderators'], [], ['IOTD Staff']],
+            'IOTD Submitters': [[GroupName.IOTD_SUBMITTERS], [GroupName.IOTD_STAFF, 'content_moderators'], [], ['IOTD Staff']],
+            'IOTD Reviewers': [[GroupName.IOTD_REVIEWERS], [GroupName.IOTD_STAFF, 'content_moderators'], [], ['IOTD Staff']],
+            'IOTD Judges': [[GroupName.IOTD_JUDGES], [GroupName.IOTD_STAFF, 'content_moderators'], [], ['IOTD Staff']],
         }
         agroups = AGroup.objects.filter(name__in = list(map_.keys()))
         all_members = []

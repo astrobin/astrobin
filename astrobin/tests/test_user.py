@@ -20,6 +20,7 @@ from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import *
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_premium.services.premium_service import SubscriptionName
+from common.constants import GroupName
 from toggleproperties.models import ToggleProperty
 
 
@@ -474,13 +475,13 @@ class UserTest(TestCase):
         image = Image.objects_including_wip.all()[0]
 
         submitter = User.objects.create_user('submitter', 'submitter_1@test.com', 'password')
-        submitters = Group.objects.create(name='iotd_submitters')
+        submitters = Group.objects.create(name=GroupName.IOTD_SUBMITTERS)
         submitters.user_set.add(submitter)
         reviewer = User.objects.create_user('reviewer', 'reviewer_1@test.com', 'password')
-        reviewers = Group.objects.create(name='iotd_reviewers')
+        reviewers = Group.objects.create(name=GroupName.IOTD_REVIEWERS)
         reviewers.user_set.add(reviewer)
         judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
-        judges = Group.objects.create(name='iotd_judges')
+        judges = Group.objects.create(name=GroupName.IOTD_JUDGES)
         judges.user_set.add(judge)
         Image.objects.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=datetime.now())
         image.refresh_from_db()
@@ -534,10 +535,10 @@ class UserTest(TestCase):
         submitters.user_set.add(submitter, submitter2)
         reviewer = User.objects.create_user('reviewer', 'reviewer_1@test.com', 'password')
         reviewer2 = User.objects.create_user('reviewer2', 'reviewer_2@test.com', 'password')
-        reviewers = Group.objects.create(name='iotd_reviewers')
+        reviewers = Group.objects.create(name=GroupName.IOTD_REVIEWERS)
         reviewers.user_set.add(reviewer, reviewer2)
         judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
-        judges = Group.objects.create(name='iotd_judges')
+        judges = Group.objects.create(name=GroupName.IOTD_JUDGES)
         judges.user_set.add(judge)
         Image.objects.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=datetime.now())
         image.refresh_from_db()

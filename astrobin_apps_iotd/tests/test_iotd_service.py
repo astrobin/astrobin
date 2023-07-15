@@ -17,12 +17,13 @@ from astrobin_apps_iotd.tasks import update_judgement_queues, update_review_queu
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
 from astrobin_apps_premium.services.premium_service import SubscriptionName
+from common.constants import GroupName
 from common.services import DateTimeService
 
 
 class IotdServiceTest(TestCase):
     def _create_iotd(self, **kwargs):
-        judge = kwargs.pop('judge', Generators.user(groups=['iotd_judges']))
+        judge = kwargs.pop('judge', Generators.user(groups=[GroupName.IOTD_JUDGES]))
         when = kwargs.pop('date', date.today())
 
         user = Generators.user()
@@ -526,7 +527,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
 
@@ -535,7 +536,7 @@ class IotdServiceTest(TestCase):
         self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_own_image(self):
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=submitter, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
 
@@ -547,7 +548,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.collaborators.add(submitter)
         image.designated_iotd_submitters.add(submitter)
@@ -560,7 +561,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
         image.moderator_decision = ModeratorDecision.REJECTED
@@ -572,7 +573,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
         image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
@@ -584,7 +585,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
         image.subject_type = SubjectType.OTHER
@@ -596,7 +597,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
         image.subject_type = SubjectType.GEAR
@@ -608,7 +609,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
 
@@ -625,7 +626,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
 
@@ -643,7 +644,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
 
@@ -660,10 +661,10 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
 
-        submitter1 = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        submitter3 = Generators.user(groups=['iotd_submitters'])
-        submitter4 = Generators.user(groups=['iotd_submitters'])
+        submitter1 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter3 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter4 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
 
         image.designated_iotd_submitters.add(submitter4)
 
@@ -685,7 +686,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
 
@@ -700,7 +701,7 @@ class IotdServiceTest(TestCase):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
 
@@ -718,7 +719,7 @@ class IotdServiceTest(TestCase):
         image1 = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now() - timedelta(hours=1))
         image2 = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now())
 
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
 
         image1.designated_iotd_submitters.add(submitter)
         image2.designated_iotd_submitters.add(submitter)
@@ -745,9 +746,9 @@ class IotdServiceTest(TestCase):
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_review_queue_own_image(self):
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         image = Generators.image(user=reviewer, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter, submitter2)
@@ -770,9 +771,9 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_review_queue_own_image_as_collaborator(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -798,9 +799,9 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_review_queue(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -825,9 +826,9 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_review_queue_deleted(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -854,8 +855,8 @@ class IotdServiceTest(TestCase):
     )
     def test_get_review_queue_not_enough_submissions_after_cutoff(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -875,8 +876,8 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     def test_get_review_queue_not_enough_submissions_before_cutoff(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -914,8 +915,8 @@ class IotdServiceTest(TestCase):
 
     def test_get_review_queue_not_designated(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -932,8 +933,8 @@ class IotdServiceTest(TestCase):
 
     def test_get_review_queue_too_long_ago(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -959,9 +960,9 @@ class IotdServiceTest(TestCase):
     )
     def test_get_review_queue_submitted_outside_of_window(self):
         uploader = Generators.user()
-        submitter1 = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter1 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -988,10 +989,10 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_get_review_queue_current_iotd(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer1 = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer1 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1020,10 +1021,10 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_get_review_queue_past_iotd(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer1 = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer1 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1053,12 +1054,12 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_review_queue_future_iotd(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer1 = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        reviewer3 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer1 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer3 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1099,9 +1100,9 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     def test_get_review_queue_already_reviewed_today(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1131,8 +1132,8 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_get_review_queue_already_reviewed_yesterday(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1157,10 +1158,10 @@ class IotdServiceTest(TestCase):
 
     def test_get_review_queue_dismissed(self):
         uploader = Generators.user()
-        submitter1 = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        submitter3 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter1 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter3 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1188,10 +1189,10 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
 
-        submitter1 = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        submitter3 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter1 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter3 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         image.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
         image.designated_iotd_reviewers.add(reviewer)
@@ -1223,10 +1224,10 @@ class IotdServiceTest(TestCase):
         image1 = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now() - timedelta(hours=1))
         image2 = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now())
 
-        submitter1 = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        submitter3 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter1 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter3 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         image1.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
         image1.designated_iotd_reviewers.add(reviewer)
@@ -1267,11 +1268,11 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now() - timedelta(days=1))
 
-        submitter1 = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        submitter3 = Generators.user(groups=['iotd_submitters'])
-        submitter4 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        submitter1 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter3 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter4 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         image.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
         image.designated_iotd_reviewers.add(reviewer)
@@ -1303,11 +1304,11 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_judgement_queue_own_image(self):
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         image = Generators.image(user=judge, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter, submitter2)
@@ -1341,11 +1342,11 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_judgement_queue_own_image_as_collaborator(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1382,11 +1383,11 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_judgement_queue(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1422,11 +1423,11 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_judgement_queue_deleted(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1463,11 +1464,11 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_MAX_DISMISSALS=3)
     def test_get_judgement_queue_dismissed_3_times(self):
         uploader = Generators.user()
-        submitter1 = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer1 = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter1 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer1 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1514,11 +1515,11 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_judgement_queue_too_long_ago(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1558,11 +1559,11 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_judgement_queue_future_iotd(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1604,11 +1605,11 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_judgement_queue_current_iotd(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1648,11 +1649,11 @@ class IotdServiceTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_judgement_queue_past_iotd(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1696,10 +1697,10 @@ class IotdServiceTest(TestCase):
     )
     def test_get_judgement_not_enough_votes_after_cutoff(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1731,10 +1732,10 @@ class IotdServiceTest(TestCase):
     )
     def test_get_judgement_not_enough_votes_before_cutoff(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-        judge = Generators.user(groups=['iotd_judges'])
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
@@ -1767,16 +1768,16 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
         image = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now() - timedelta(days=1))
 
-        submitter1 = Generators.user(groups=['iotd_submitters'])
+        submitter1 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         submitter2 = Generators.user(groups=['iotd_submitters'])
         submitter3 = Generators.user(groups=['iotd_submitters'])
         
-        reviewer1 = Generators.user(groups=['iotd_reviewers'])
-        reviewer2 = Generators.user(groups=['iotd_reviewers'])
-        reviewer3 = Generators.user(groups=['iotd_reviewers'])
-        reviewer4 = Generators.user(groups=['iotd_reviewers'])
+        reviewer1 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer2 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer3 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        reviewer4 = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
-        judge = Generators.user(groups=['iotd_judges'])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
 
         image.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
         image.designated_iotd_reviewers.add(reviewer1, reviewer2, reviewer3)
@@ -1822,7 +1823,7 @@ class IotdServiceTest(TestCase):
     @patch('common.services.DateTimeService.now')
     def test_judge_cannot_select_now_reason_none_no_iotds(self, now):
         now.return_value = datetime.now()
-        judge = Generators.user(groups=['iotd_judges'])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
         self.assertIsNone(IotdService().judge_cannot_select_now_reason(judge))
         self.assertEqual(IotdService().get_next_available_selection_time_for_judge(judge), DateTimeService.now())
 
@@ -1938,7 +1939,7 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
         submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         image = Generators.image(user=uploader, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
@@ -1954,7 +1955,7 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
         submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         image = Generators.image(user=uploader, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
@@ -1975,7 +1976,7 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(uploader, SubscriptionName.ULTIMATE_2020)
 
         submitter = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
 
         image = Generators.image(user=uploader, submitted_for_iotd_tp_consideration=datetime.now())
         image.designated_iotd_submitters.add(submitter)
@@ -2037,8 +2038,8 @@ class IotdServiceTest(TestCase):
 
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
-        image.designated_iotd_submitters.add(Generators.user(groups=['iotd_staff', 'iotd_submitters']))
-        image.designated_iotd_reviewers.add(Generators.user(groups=['iotd_staff', 'iotd_reviewers']))
+        image.designated_iotd_submitters.add(Generators.user(groups=[GroupName.IOTD_STAFF, 'iotd_submitters']))
+        image.designated_iotd_reviewers.add(Generators.user(groups=[GroupName.IOTD_STAFF, GroupName.IOTD_REVIEWERS]))
 
         self.assertEqual(
             (False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED),
@@ -2166,8 +2167,8 @@ class IotdServiceTest(TestCase):
     def test_submit_to_iotd_tp_process_no_autosubmit(self, may_submit_to_iotd_tp_process):
         may_submit_to_iotd_tp_process.return_value = True, None
 
-        submitter = Generators.user(groups=['iotd_staff', 'iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_staff', 'iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_STAFF, 'iotd_submitters'])
+        reviewer = Generators.user(groups=[GroupName.IOTD_STAFF, GroupName.IOTD_REVIEWERS])
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
 
         IotdService.submit_to_iotd_tp_process(image.user, image)
@@ -2184,8 +2185,8 @@ class IotdServiceTest(TestCase):
     def test_submit_to_iotd_tp_process_autosubmit(self, may_submit_to_iotd_tp_process):
         may_submit_to_iotd_tp_process.return_value = True, None
 
-        submitter = Generators.user(groups=['iotd_staff', 'iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_staff', 'iotd_reviewers'])
+        submitter = Generators.user(groups=[GroupName.IOTD_STAFF, 'iotd_submitters'])
+        reviewer = Generators.user(groups=[GroupName.IOTD_STAFF, GroupName.IOTD_REVIEWERS])
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
 
         IotdService.submit_to_iotd_tp_process(image.user, image, True)
@@ -2202,8 +2203,8 @@ class IotdServiceTest(TestCase):
     def test_submit_to_iotd_tp_process_may_not(self, may_submit_to_iotd_tp_process):
         may_submit_to_iotd_tp_process.return_value = False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
 
-        Generators.user(groups=['iotd_staff', 'iotd_submitters'])
-        Generators.user(groups=['iotd_staff', 'iotd_reviewers'])
+        Generators.user(groups=[GroupName.IOTD_STAFF, 'iotd_submitters'])
+        Generators.user(groups=[GroupName.IOTD_STAFF, GroupName.IOTD_REVIEWERS])
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
 
         IotdService.submit_to_iotd_tp_process(image.user, image)

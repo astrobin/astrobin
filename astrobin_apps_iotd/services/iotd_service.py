@@ -25,6 +25,7 @@ from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.services import DateTimeService
 
 log = logging.getLogger(__name__)
@@ -299,7 +300,7 @@ class IotdService:
                 )
             )
 
-        for submitter in User.objects.filter(groups__name='iotd_submitters'):
+        for submitter in User.objects.filter(groups__name=GroupName.IOTD_SUBMITTERS):
             IotdSubmissionQueueEntry.objects.filter(submitter=submitter).delete()
             for image in _compute_queue(submitter).iterator():
                 IotdSubmissionQueueEntry.objects.create(
@@ -341,7 +342,7 @@ class IotdService:
                 )
             )
 
-        for reviewer in User.objects.filter(groups__name='iotd_reviewers'):
+        for reviewer in User.objects.filter(groups__name=GroupName.IOTD_REVIEWERS):
             IotdReviewQueueEntry.objects.filter(reviewer=reviewer).delete()
             for image in _compute_queue(reviewer).iterator():
                 last_submission = IotdSubmission.last_for_image(image.pk).first()
@@ -379,7 +380,7 @@ class IotdService:
                 Q(collaborators=judge)
             )
 
-        for judge in User.objects.filter(groups__name='iotd_judges'):
+        for judge in User.objects.filter(groups__name=GroupName.IOTD_JUDGES):
             IotdJudgementQueueEntry.objects.filter(judge=judge).delete()
             for image in _compute_queue(judge).iterator():
                 last_vote = IotdVote.last_for_image(image.pk).first()
@@ -392,19 +393,24 @@ class IotdService:
                     f'Image {image.get_id()} "{image.title}" assigned to judge {judge.pk} "{judge.username}".'
                 )
 
+    def clear_stale_queue_entries(self):
+        IotdSubmissionQueueEntry.objects.exclude(submitter__groups__name=GroupName.IOTD_SUBMITTERS).delete()
+        IotdReviewQueueEntry.objects.exclude(reviewer__groups__name=GroupName.IOTD_REVIEWERS).delete()
+        IotdJudgementQueueEntry.objects.exclude(judge__groups__name=GroupName.IOTD_JUDGES).delete()
+    
     def get_inactive_submitter_and_reviewers(self, days):
         inactive_members = []
-        members = User.objects.filter(groups__name__in=['iotd_submitters', 'iotd_reviewers'])
+        members = User.objects.filter(groups__name__in=[GroupName.IOTD_SUBMITTERS, GroupName.IOTD_REVIEWERS])
 
         for member in members.iterator():
             if member.is_superuser:
                 continue
 
-            if 'iotd_reviewers' in member.groups.all().values_list('name', flat=True):
+            if GroupName.IOTD_REVIEWERS in member.groups.all().values_list('name', flat=True):
                 actions = IotdVote.objects.filter(reviewer=member).order_by('-date')
                 action_count = actions.count()
                 last_action = actions.first().date if action_count > 0 else None
-            elif 'iotd_submitters' in member.groups.all().values_list('name', flat=True):
+            elif GroupName.IOTD_SUBMITTERS in member.groups.all().values_list('name', flat=True):
                 actions = IotdSubmission.objects.filter(submitter=member).order_by('-date')
                 action_count = actions.count()
                 last_action = actions.first().date if action_count > 0 else None
@@ -423,13 +429,13 @@ class IotdService:
         if may:
             image.designated_iotd_submitters.add(
                 *UserService.get_users_in_group_sample(
-                    'iotd_submitters', settings.IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE, image.user
+                    GroupName.IOTD_SUBMITTERS, settings.IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE, image.user
                 )
             )
 
             image.designated_iotd_reviewers.add(
                 *UserService.get_users_in_group_sample(
-                    'iotd_reviewers', settings.IOTD_DESIGNATED_REVIEWERS_PERCENTAGE, image.user
+                    GroupName.IOTD_REVIEWERS, settings.IOTD_DESIGNATED_REVIEWERS_PERCENTAGE, image.user
                 )
             )
 

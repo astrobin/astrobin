@@ -28,6 +28,7 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
 from astrobin_apps_premium.services.premium_service import SubscriptionName
+from common.constants import GroupName
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -2467,7 +2468,7 @@ class ImageTest(TestCase):
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=mock.PropertyMock)
     def test_image_designated_iotd_reviewers(self, is_authenticated):
-        group = Group.objects.create(name='iotd_reviewers')
+        group = Group.objects.create(name=GroupName.IOTD_REVIEWERS)
         is_authenticated.return_value = True
 
         for i in range(10):

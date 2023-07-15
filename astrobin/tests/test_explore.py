@@ -13,6 +13,7 @@ from astrobin_apps_iotd.models import IotdSubmission, IotdVote
 
 from astrobin.models import Image
 from astrobin_apps_iotd.services import IotdService
+from common.constants import GroupName
 
 
 class ExploreTest(TestCase):
@@ -20,15 +21,15 @@ class ExploreTest(TestCase):
     def setUp(self):
         self.submitter = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         self.submitter2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
-        self.submitters = Group.objects.create(name='iotd_submitters')
+        self.submitters = Group.objects.create(name=GroupName.IOTD_SUBMITTERS)
         self.submitters.user_set.add(self.submitter, self.submitter2)
 
         self.reviewer = User.objects.create_user('reviewer_1', 'reviewer_1@test.com', 'password')
         self.reviewer2 = User.objects.create_user('reviewer_2', 'reviewer_2@test.com', 'password')
-        self.reviewers = Group.objects.create(name='iotd_reviewers')
+        self.reviewers = Group.objects.create(name=GroupName.IOTD_REVIEWERS)
         self.reviewers.user_set.add(self.reviewer, self.reviewer2)
 
-        self.judges = Group.objects.create(name = 'iotd_judges')
+        self.judges = Group.objects.create(name = GroupName.IOTD_JUDGES)
 
         self.user = User.objects.create_user('user', 'user@test.com', 'password')
         self.client.login(username='user', password='password')
