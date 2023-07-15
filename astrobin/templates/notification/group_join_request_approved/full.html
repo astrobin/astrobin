@@ -1,4 +1,9 @@
 {% load i18n %}
-{% blocktrans %}Your request to join the group "{{group_name}}" has been APPROVED.
 
-Visit the group here: <a href="{{url}}">{{url}}</a>{% endblocktrans %}
+<p>
+    {% blocktrans trimmed %}
+        Your request to join the group "{{group_name}}" has been APPROVED
+    {% endblocktrans %}.
+</p>
+
+<a href="{{ url }}" class="btn btn-primary">Visit group</a>

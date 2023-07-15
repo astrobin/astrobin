@@ -4,6 +4,7 @@ from django.test import TestCase
 from threaded_messages.models import Thread
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class MessagesTest(TestCase):
@@ -72,7 +73,7 @@ class MessagesTest(TestCase):
         subject = 'I am a subject'
         body = 'I am a body'
 
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
 
         self.client.login(username='user', password='password')
 

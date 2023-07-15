@@ -1,56 +1,45 @@
 # -*- coding: utf-8 -*-
 
-
-import json
 import logging
 
 import stripe
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.mail import EmailMultiAlternatives
-from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse, Http404
+from django.http import Http404, HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.utils.translation import gettext
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
-from paypal.standard.ipn.models import PayPalIPN
-from paypal.standard.models import ST_PP_COMPLETED
-from subscription.models import Subscription, handle_payment_was_successful
 
 from astrobin.models import Image
+from astrobin.utils import get_client_country_code
 from astrobin_apps_payments.services.pricing_service import PricingService
+from astrobin_apps_payments.services.stripe_webhook_service import StripeWebhookService
+from astrobin_apps_payments.types import SubscriptionRecurringUnit
+from astrobin_apps_premium.services.premium_service import SubscriptionDisplayName
 from common.services import AppRedirectionService
 
 log = logging.getLogger(__name__)
 
 
-@require_GET
-def stripe_config(request):
-    return JsonResponse({'publicKey': settings.STRIPE_PUBLISHABLE_KEY}, safe=False)
-
-
-@csrf_exempt
-@require_POST
-def create_checkout_session(request, user_pk, product, currency):
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-
+def __validate_session_data(user_pk: int, product: str, currency: str, recurring_unit: str, autorenew: str):
     try:
         user = User.objects.get(pk=user_pk)
     except User.DoesNotExist:
-        log.error("create_checkout_session: %d, %s, %s: %s" % (user_pk, product, currency, "Invalid user"))
+        log.error("__validate_session_data: %d, %s, %s: %s" % (user_pk, product, currency, "Invalid user"))
         raise Http404
 
     if currency.upper() not in settings.SUPPORTED_CURRENCIES:
-        log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid currency"))
-        return HttpResponseBadRequest()
+        log.error("__validate_session_data: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid currency"))
+        raise ValueError("Invalid currency")
 
     if product not in ('lite', 'premium', 'ultimate'):
-        log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid product"))
-        return HttpResponseBadRequest()
+        log.error("__validate_session_data: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid product"))
+        raise ValueError("Invalid product")
 
     image_count = Image.objects_including_wip.filter(user=user).count()
     if product == 'lite' and image_count >= settings.PREMIUM_MAX_IMAGES_LITE_2020:
-        log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Too many images for Lite"))
-        return HttpResponseBadRequest(
+        log.error("__validate_session_data: %d, %s, %s: %s" % (user.pk, product, currency, "Too many images for Lite"))
+        raise ValueError(
             gettext(
                 'The Lite plan is capped at %(lite_max)s total images, and you currently have %(count)s images on '
                 'AstroBin.' % {
@@ -60,15 +49,53 @@ def create_checkout_session(request, user_pk, product, currency):
             )
         )
 
-    stripe_products = {
-        'lite': settings.STRIPE_PRODUCT_LITE,
-        'premium': settings.STRIPE_PRODUCT_PREMIUM,
-        'ultimate': settings.STRIPE_PRODUCT_ULTIMATE
-    }
+    if autorenew != 'true' and not PricingService.non_autorenewing_supported(user):
+        log.error(
+            "__validate_session_data: %d, %s, %s: %s" % (user.pk, product, currency, "Non-autorenew not supported")
+        )
+        raise ValueError(
+            gettext(
+                'Non-autorenewing subscriptions are not supported for your account.'
+                ' Please contact us for more information.'
+            )
+        )
 
-    price = PricingService.get_full_price(product, currency.upper())
+    if autorenew == 'false':
+        recurring_unit = None
 
-    log.info("create_checkout_session: %d, %s, %s %.2f" % (user.pk, product, currency, price))
+    return user, product, currency, recurring_unit, autorenew
+
+@require_GET
+def stripe_config(request):
+    return JsonResponse({'publicKey': settings.STRIPE['keys']['publishable']}, safe=False)
+
+
+@csrf_exempt
+@require_POST
+def create_checkout_session(request, user_pk: int, product: str, currency: str, recurring_unit: str, autorenew: str):
+    stripe.api_key = settings.STRIPE['keys']['secret']
+
+    try:
+        user, product, currency, recurring_unit, autorenew = __validate_session_data(
+            user_pk, product, currency, recurring_unit, autorenew
+        )
+    except ValueError as e:
+        return HttpResponseBadRequest(e)
+
+    country_code = user.userprofile.signup_country or get_client_country_code(request) or 'us'
+    country_code = country_code.lower() if country_code != 'UNKNOWN' else 'us'
+
+    price = PricingService.get_full_price(
+        SubscriptionDisplayName.from_string(product),
+        country_code,
+        currency.upper(),
+        SubscriptionRecurringUnit.from_string(recurring_unit),
+    )
+
+    log.info(
+        "create_checkout_session: %d, %s, %s, %s, %s, %s, %.2f" % (
+            user.pk, product, country_code, currency, recurring_unit, autorenew, price)
+    )
 
     try:
         customer = PricingService.get_stripe_customer(user)
@@ -87,30 +114,33 @@ def create_checkout_session(request, user_pk, product, currency):
 
         kwargs = {
             'success_url': AppRedirectionService.redirect(
-                '/subscriptions/success?product=' + product + '&session_id={CHECKOUT_SESSION_ID}'),
+                '/subscriptions/success?product=' + product + '&session_id={CHECKOUT_SESSION_ID}'
+            ),
             'cancel_url': AppRedirectionService.redirect('/subscriptions/cancelled/'),
-            'mode': 'payment',
+            'mode': 'subscription' if autorenew != 'false' else 'payment',
             'payment_method_types': payment_method_types,
             'client_reference_id': user.pk,
             'customer': customer_id if customer_id else None,
             'customer_email': user.email if not customer_id else None,
-            'submit_type': 'pay',
+            'currency': currency.lower(),
             'line_items': [
                 {
                     'quantity': 1,
-                    'price_data': {
-                        'currency': currency.lower(),
-                        'product': stripe_products[product],
-                        'unit_amount_decimal': price * 100,  # Stripe uses cents
-                    }
+                    'price': PricingService.get_stripe_price_object(
+                        SubscriptionDisplayName.from_string(product),
+                        country_code,
+                        SubscriptionRecurringUnit.from_string(recurring_unit)
+                    )['id']
                 }
             ],
             'metadata': {
-                'product': product
+                'product': product,
+                'recurring-unit': recurring_unit,
+                'autorenew': autorenew,
             },
         }
 
-        if discounts != []:
+        if discounts:
             kwargs['discounts'] = discounts
         else:
             kwargs['allow_promotion_codes'] = True
@@ -120,47 +150,68 @@ def create_checkout_session(request, user_pk, product, currency):
         return JsonResponse({'sessionId': checkout_session['id']})
     except Exception as e:
         log.exception("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, str(e)))
+
+        if 'doesn\'t include the expected currency' in str(e):
+            try:
+                kwargs['currency'] = 'usd'
+                checkout_session = stripe.checkout.Session.create(**kwargs)
+                return JsonResponse({'sessionId': checkout_session['id']})
+            except Exception as e:
+                log.exception("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, str(e)))
+                return JsonResponse({'error': 'Internal error: %s' % str(e)})
+
+
+@csrf_exempt
+@require_POST
+def upgrade_subscription(request, user_pk: int, product: str, currency: str, recurring_unit: str):
+    stripe.api_key = settings.STRIPE['keys']['secret']
+
+    try:
+        user, product, currency, recurring_unit, autorenew = __validate_session_data(
+            user_pk, product, currency, recurring_unit, 'true'
+        )
+    except ValueError as e:
+        return HttpResponseBadRequest(e)
+
+    country_code = get_client_country_code(request)
+
+    price = PricingService.get_stripe_price_object(
+        SubscriptionDisplayName.from_string(product),
+        country_code,
+        SubscriptionRecurringUnit.from_string(recurring_unit),
+    )
+
+    log.info(
+        "upgrade: %d, %s, %s, %s, %s, %s, %.2f" % (
+            user.pk, product, country_code, currency, recurring_unit, autorenew, price['unit_amount'])
+    )
+
+    stripe_subscription_id = user.userprofile.stripe_subscription_id
+    stripe_subscription = stripe.Subscription.retrieve(stripe_subscription_id)
+
+    try:
+        stripe.Subscription.modify(
+            stripe_subscription.id,
+            cancel_at_period_end=False,
+            proration_behavior='create_prorations',
+            items=[{
+                'id': stripe_subscription['items']['data'][0].id,
+                'price': price['id'],
+            }]
+        )
+    except Exception as e:
+        log.exception("upgrade: %d, %s, %s: %s" % (user.pk, product, currency, str(e)))
         return JsonResponse({'error': 'Internal error: %s' % str(e)})
+
+    return JsonResponse({'subscriptionId': stripe_subscription_id})
 
 
 @csrf_exempt
 def stripe_webhook(request):
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+    stripe.api_key = settings.STRIPE['keys']['secret']
+    endpoint_secret = settings.STRIPE['keys']['endpoint-secret']
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-
-    def fulfill_payment(session):
-        product = session['metadata']['product']
-        user_pk = int(session['client_reference_id'])
-
-        log.info("stripe_webhook: user %d product %s" % (user_pk, product))
-
-        try:
-            user = User.objects.get(pk=user_pk)
-        except User.DoesNotExist:
-            log.exception("stripe_webhook: user %d invalid user" % user_pk)
-            return HttpResponseBadRequest()
-
-        if product == 'lite':
-            subscription = Subscription.objects.get(name="AstroBin Lite 2020+")
-        elif product == 'premium':
-            subscription = Subscription.objects.get(name="AstroBin Premium 2020+")
-        elif product == 'ultimate':
-            subscription = Subscription.objects.get(name="AstroBin Ultimate 2020+")
-        else:
-            log.exception("stripe_webhook: user %d invalid product" % user_pk)
-            return HttpResponseBadRequest()
-
-        payment = PayPalIPN.objects.create(
-            custom=user_pk,
-            item_number=subscription.pk,
-            mc_gross=subscription.price,
-            mc_currency=subscription.currency,
-            payment_status=ST_PP_COMPLETED,
-        )
-
-        handle_payment_was_successful(payment)
 
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -170,25 +221,6 @@ def stripe_webhook(request):
 
     log.info("stripe_webhook: %s" % event['type'])
 
-    try:
-        type = event['type']
-        session = event['data']['object']
-
-        if type == 'checkout.session.completed':
-            fulfill_payment(session)
-        elif event['type'] == 'checkout.session.async_payment_succeeded':
-            log.info("stripe_webhook: payment succeeded for event %s" % event['id'])
-        elif event['type'] == 'checkout.session.async_payment_failed':
-            log.info("stripe_webhook: payment failed for event %s" % event['id'])
-            msg = EmailMultiAlternatives(
-                '[AstroBin] User payment failed',
-                'Payment from user failed: <br/>%s' % json.dumps(session, indent = 4, sort_keys = True),
-                settings.DEFAULT_FROM_EMAIL,
-                ['astrobin@astrobin.com']
-            )
-            msg.send()
-    except KeyError as e:
-        log.exception("stripe_webhook: %s" % str(e))
-        return HttpResponseBadRequest()
+    StripeWebhookService.process_event(event)
 
     return HttpResponse(status=200)

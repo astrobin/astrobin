@@ -10,6 +10,7 @@ from pybb.models import Forum, Topic
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group, GroupCategory, GroupImageSorting
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 from toggleproperties.models import ToggleProperty
 
 
@@ -133,7 +134,7 @@ class GroupsTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 403)
 
-        us = Generators.premium_subscription(self.user1, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user1, SubscriptionName.ULTIMATE_2020)
 
         self.client.login(username='user1', password='password')
         response = self.client.get(url)
@@ -280,7 +281,7 @@ class GroupsTest(TestCase):
         response = self.client.get(url)
         self.assertNotEqual(response.status_code, 403)
 
-        us1 = Generators.premium_subscription(self.user1, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user1, SubscriptionName.ULTIMATE_2020)
 
         # GET not allowed
         response = self.client.get(url)
@@ -293,7 +294,7 @@ class GroupsTest(TestCase):
         self.client.logout()
         self.client.login(username='user2', password='password')
 
-        us2 = Generators.premium_subscription(self.user2, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user2, SubscriptionName.ULTIMATE_2020)
 
         # Private group, uninvited user
         self.group.public = False

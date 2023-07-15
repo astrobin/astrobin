@@ -6,10 +6,20 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import CASCADE, SET_NULL
+from django.utils.translation import gettext
 from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
+from astrobin_apps_equipment.types import StockStatus
 
+EQUIPMENT_ITEM_LISTING_STOCK_CHOICES = (
+    # Please note: "UNKNOWN" means that this vendor supports stock polling, but the stock for a particular item is
+    # not known. Vendors that do not support stock polling will have a `null` stock status instead.
+    (StockStatus.UNKNOWN.value, gettext("Unknown")),
+    (StockStatus.BACK_ORDER.value, gettext("Back order")),
+    (StockStatus.IN_STOCK.value, gettext("In stock")),
+    (StockStatus.OUT_OF_STOCK.value, gettext("Out of stock")),
+)
 
 class EquipmentItemListing(SafeDeleteModel):
     created_by = models.ForeignKey(
@@ -62,6 +72,18 @@ class EquipmentItemListing(SafeDeleteModel):
 
     sku = models.CharField(
         max_length=32,
+        null=True,
+        blank=True,
+    )
+
+    stock_status = models.CharField(
+        max_length=16,
+        null=True,
+        blank=True,
+        choices=EQUIPMENT_ITEM_LISTING_STOCK_CHOICES,
+    )
+
+    stock_amount = models.PositiveIntegerField(
         null=True,
         blank=True,
     )

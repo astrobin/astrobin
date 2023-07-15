@@ -1,9 +1,9 @@
 {% load i18n %}
 {% load static %}
 
-{% load cookielaw_tags %}
 {% load hitcount_tags %}
 {% load pipeline %}
+{% load cookie_consent_tags %}
 
 {% load tags %}
 {% load common_tags %}
@@ -16,8 +16,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>{% block title %}{{ image.title }} ({{ image.user }}) - {% trans "Full resolution" %} |
-        AstroBin{% endblock %}</title>
+    <title>
+        {% block title %}{{ image.title }} ({{ image.user }}) - {% trans "Full resolution" %} | AstroBin{% endblock %}
+    </title>
 
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
     <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
@@ -52,10 +53,6 @@
 </head>
 
 <body class="full" data-instant-allow-query-string>
-
-{% if request|show_cookie_banner %}
-    {% cookielaw_banner %}
-{% endif %}
 
 <div class="navbar" id="top">
     <div class="navbar-inner">
@@ -109,7 +106,7 @@
             </ul>
             <ul class="nav buttons">
                 {% with request.GET.mod as mod %}
-                    {% if show_advanced_solution and not real %}
+                    {% if show_advanced_solution_on_full and not real %}
                         <li>
                             <form class="form-inline enable-solution-overlay-form">
                                 <label for="enable-solution-overlay" class="hidden-phone hidden-tablet">{% trans "Plate-solution overlay" %}:</label>
@@ -186,7 +183,7 @@
 
     {% astrobin_image image alias revision=revision_label link=False %}
 
-    {% if show_advanced_solution and not real %}
+    {% if show_advanced_solution_on_full and not real %}
         <div
                 class="astrobin-image-container hover-overlay hover-overlay-solution advanced-plate-solution show-ra-dec-coordinates"
                 style="
@@ -211,7 +208,7 @@
     {% endif %}
 </div>
 
-{% if show_advanced_solution and not real %}
+{% if show_advanced_solution_on_full and not real %}
     <div id="ra-dec-coordinates" class="full hover-overlay">
         <div class="coordinates image-coordinates">
             <abbr title="{% trans 'Abscissa ' %}" class="x"></abbr>
@@ -269,7 +266,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
         integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}?t=20210416"></script>
 <script type="text/javascript" src="{% static 'astrobin_apps_images/js/astrobin_apps_images.js' %}?t=20210416"></script>
 <script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}?t=20210416"></script>
 <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving_mousemove.js' %}?t=20210416"></script>
@@ -303,7 +299,7 @@
     }
 
     function setupAdvancedSolution() {
-        {% if show_advanced_solution and not real %}
+        {% if show_advanced_solution_on_full and not real %}
             if ($('#enable-solution-overlay').is(':checked')) {
                 $('.hover-overlay').removeClass('hover-overlay-disabled');
                 $('.hover-overlay').show();

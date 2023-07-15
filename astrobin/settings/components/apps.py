@@ -8,7 +8,7 @@ ASTROBIN_APPS = [
     'astrobin_apps_premium',
     'astrobin_apps_notifications',
     'astrobin_apps_groups',
-    'astrobin_apps_iotd',
+    'astrobin_apps_iotd.apps.AstrobinAppsIotdConfig',
     'astrobin_apps_remote_source_affiliation',
     'astrobin_apps_equipment.apps.AstrobinAppsEquipmentConfig',
     'astrobin_apps_json_api',
@@ -65,7 +65,6 @@ INSTALLED_APPS += [
     'safedelete',
     'change_email',
     'template_timings_panel',
-    'cookielaw',
     'corsheaders',
     'image_cropping',
     'django_extensions',
@@ -80,6 +79,7 @@ INSTALLED_APPS += [
     'two_factor',
     'two_factor.plugins.email',
     'two_factor.plugins.phonenumber',
+    'cookie_consent',
 
     'astrobin.apps.AstroBinAppConfig',
 ]

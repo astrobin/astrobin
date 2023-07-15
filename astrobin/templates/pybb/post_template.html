@@ -193,6 +193,16 @@
                             <i class="icon-ok"></i> {% trans "Approve post" %}
                         </a>
                     {% endif %}
+
+                    <a href="{% url 'pybb:move_post' pk=post.id %}" class="btn btn-mini btn-danger">
+                        {% if post.is_topic_head %}
+                            <i class="icon-mail-forward"></i>
+                            {% trans 'Move' %}
+                        {% else %}
+                            <i class="icon-cut"></i>
+                            {% trans "Split" %}
+                        {% endif %}
+                    </a>
                 {% endif %}
 
                 {% if perms.pybb.change_post and user.is_superuser %}

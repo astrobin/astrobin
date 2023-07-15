@@ -1,4 +1,6 @@
 {% load i18n %}
-{% blocktrans %}{{requester}} requested to join the group: "{{group_name}}".
 
-Visit the group here: {{url}}{% endblocktrans %}
+{% blocktrans %}{{requester}} requested to join the group: "{{group_name}}"{% endblocktrans %}.
+
+{% trans "Visit group" %}:
+{{url}}

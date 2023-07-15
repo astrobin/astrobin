@@ -30,20 +30,31 @@
 {% endblock %}
 
 {% block extra_js %}
-    {{block.super}}
+    {{ block.super }}
 
-    {% if object.images.count > 0 and object.autosubmission %}
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('input#id_autosubmission').change(function() {
-                    var $control_group = $('form#group-update-form select#id_autosubmission_deactivation_strategy').closest('.control-group');
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% if object.images.count > 0 and object.autosubmission %}
+                $("input#id_autosubmission").change(function () {
+                    const $control_group = $('form#group-update-form select#id_autosubmission_deactivation_strategy')
+                        .closest('.control-group');
+
                     if (!$(this).is(':checked')) {
                         $control_group.show();
                     } else {
                         $control_group.hide();
                     }
                 });
-            });
-        </script>
-    {% endif %}
+            {% endif %}
+
+            CKEDITOR.replace(
+                "id_forum_notice",
+                astrobin_common.utils.ckeditorOptions(
+                    "forum-notice",
+                    "{{ LANGUAGE_CODE }}",
+                    "{% trans 'Type your message here...' %}"
+                )
+            );
+        });
+    </script>
 {% endblock %}

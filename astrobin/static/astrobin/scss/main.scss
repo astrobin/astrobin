@@ -8,6 +8,7 @@
 @import "badges.scss";
 @import "buttons";
 @import "ckeditor";
+@import "cookie_consent";
 @import "definition-lists";
 @import "fancybox";
 @import "forms";
@@ -132,34 +133,6 @@ body.full {
         }
       }
     }
-  }
-}
-
-.cookielaw-banner {
-  position: fixed;
-  width: 300px;
-  padding: 30px;
-  bottom: 0;
-  right: 0;
-  transform: scale(.85);
-  z-index: 1021;
-  background: $grey-2;
-  border: 1px solid $grey-4;
-  color: $grey-9;
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, .667);
-
-  h6 {
-    color: $grey-9;
-    font-size: 16px;
-    margin: 0 0 20px 0;
-  }
-
-  p {
-    padding: 0;
-  }
-
-  .btn {
-    margin-top: 10px;
   }
 }
 
@@ -437,6 +410,10 @@ h1 small {
   margin-top: 9px;
   color: #696969;
   display: block;
+
+  p {
+    margin-top: 1rem;
+  }
 }
 
 h2 {
@@ -2267,9 +2244,15 @@ form.avatar-delete {
         font-size: 70%;
       }
 
-      .info {
+      .info,
+      .iotd-stats-link {
         float: right;
         color: $strong-text-on-gold;
+        display: inline-block;
+      }
+
+      .info {
+        margin-right: .75rem;
       }
     }
 
@@ -2338,7 +2321,8 @@ form.avatar-delete {
       margin: 0;
       padding: 15px;
 
-      .info {
+      .info,
+      .iotd-stats-link {
         margin-left: 1rem;
         color: $strong-text-color;
       }
@@ -2447,6 +2431,20 @@ form.avatar-delete {
   }
 }
 
+.iotd-stats-table {
+  table-layout: auto;
+
+  th, td {
+    border: 1px solid #444 !important;
+    padding: 0.5rem 0.75rem !important;
+    vertical-align: middle !important;
+
+    &:last-child {
+      text-align: left;
+    }
+  }
+}
+
 .iotd-choose {
   margin-bottom: 50px !important;
 
@@ -2522,18 +2520,11 @@ form.avatar-delete {
 
 .index-recent-topics.topic-list {
   margin-bottom: $spacer-large;
-  color: #999;
-
-  a {
-    color: #999;
-  }
 
   .topic-name > a:first-child {
-    font-size: inherit;
+    font-size: 1.25rem;
     border: 0;
     padding: 0;
-    margin: 0;
-    color: $text-color;
   }
 }
 
@@ -2693,6 +2684,25 @@ form.avatar-delete {
 
 .gear-popover-label {
   padding: 0 .334rem;
+  transition: background-color 250ms ease-in-out, color 250ms ease-in-out, border-radius 250ms ease-in-out;
+
+  &.qtip-open {
+    background: $link-color;
+    color: $grey-1;
+    border-radius: 1rem;
+  }
+
+  &:not(.qtip-open):hover::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: .334rem;
+    width: 0;
+    height: 1px;
+    background-color: $link-color;
+    opacity: .5;
+    animation: gear-popover-label-animation 750ms ease-in-out;
+  }
 
   &.shopping-cart {
     padding: 0 0.334rem 0 0;
@@ -2718,6 +2728,16 @@ form.avatar-delete {
     line-height: 1.1rem;
     margin-top: 1rem;
     margin-bottom: 0;
+  }
+
+  .table.item-data {
+    table-layout: auto;
+    margin-top: 1rem;
+
+    th, td {
+      padding: 0.25rem 0.75rem;
+      border: 1px solid $grey-6;
+    }
   }
 
   .equipment-listings {
@@ -4573,4 +4593,8 @@ form.edit-thumbnails {
       background-color: $grey-8;
     }
   }
+}
+
+.no-wrap {
+  white-space: nowrap;
 }

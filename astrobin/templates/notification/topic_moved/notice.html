@@ -1,0 +1,8 @@
+{% load i18n %}
+
+<a href="{{ topic_url }}">
+    {% blocktrans trimmed %}
+        A moderator moved your topic <strong>{{ topic_name }}</strong> from the forum
+        <strong>{{ old_forum_name }}</strong> to the forum <strong>{{ new_forum_name }}</strong>.
+    {% endblocktrans %}
+</a>

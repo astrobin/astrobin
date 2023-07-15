@@ -26,6 +26,7 @@ if TESTING:
 
     MIGRATION_MODULES['astrobin'] = None
     MIGRATION_MODULES['astrobin_apps_equipment'] = None
+    MIGRATION_MODULES['astrobin_apps_iotd'] = None
 
     CACHES = {
         'default': {
@@ -51,6 +52,7 @@ if TESTING:
     PREMIUM_MAX_IMAGES_FREE = 20
     PREMIUM_MAX_IMAGES_LITE = 20
 
+    CELERY_ALWAYS_EAGER = True
     CELERY_TASK_ALWAYS_EAGER = True
     CELERY_RESULT_BACKEND = 'cache'
     CELERY_CACHE_BACKEND = 'memory'

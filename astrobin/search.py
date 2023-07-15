@@ -736,6 +736,10 @@ class AstroBinSearchForm(SearchForm):
                 results = results.exclude(_missing_='field_radius')
             elif order_by.endswith('pixel_scale'):
                 results = results.exclude(_missing_='pixel_scale')
+            elif order_by.endswith('coord_ra_min'):
+                results = results.exclude(_missing_='coord_ra_min')
+            elif order_by.endswith('coord_dec_min'):
+                results = results.exclude(_missing_='coord_dec_min')
 
         if order_by not in ('', None):
             if type(order_by) is list or type(order_by) is tuple:

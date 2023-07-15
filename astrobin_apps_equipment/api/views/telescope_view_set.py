@@ -19,7 +19,7 @@ class TelescopeViewSet(EquipmentItemViewSet):
         queryset = super().get_queryset()
 
         telescope_type_filter = self.request.GET.get('telescope-type')
-        if telescope_type_filter and telescope_type_filter != 'null':
+        if telescope_type_filter and telescope_type_filter not in ['null', 'undefined']:
             queryset = queryset.filter(
                 type=telescope_type_filter,
             )

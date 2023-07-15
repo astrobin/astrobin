@@ -5,6 +5,7 @@ import random
 import string
 import unicodedata
 import uuid
+from typing import List
 from urllib.parse import urlparse
 
 import boto3
@@ -13,13 +14,13 @@ from django.core.validators import MaxLengthValidator, MinLengthValidator, Regex
 from image_cropping import ImageRatioField
 
 from astrobin.enums import SolarSystemSubject, SubjectType
+from astrobin.enums.data_source import DataSource
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
-from astrobin.services import CloudflareService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
@@ -878,33 +879,33 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     )
 
     DATA_SOURCE_TYPES = (
-        'BACKYARD',
-        'TRAVELLER',
-        'OWN_REMOTE',
-        'AMATEUR_HOSTING',
-        'PUBLIC_AMATEUR_DATA',
-        'PRO_DATA',
-        'MIX',
-        'OTHER',
-        'UNKNOWN'
+        DataSource.BACKYARD,
+        DataSource.TRAVELLER,
+        DataSource.OWN_REMOTE,
+        DataSource.AMATEUR_HOSTING,
+        DataSource.PUBLIC_AMATEUR_DATA,
+        DataSource.PRO_DATA,
+        DataSource.MIX,
+        DataSource.OTHER,
+        DataSource.UNKNOWN,
     )
 
     DATA_SOURCE_CHOICES = (
         (None, "---------"),
         (_("Self acquired"), (
-            ("BACKYARD", _("Backyard")),
-            ("TRAVELLER", _("Traveller")),
-            ("OWN_REMOTE", _("Own remote observatory")),
+            (DataSource.BACKYARD, _("Backyard")),
+            (DataSource.TRAVELLER, _("Traveller")),
+            (DataSource.OWN_REMOTE, _("Own remote observatory")),
         )),
         (_("Downloaded"), (
-            ("AMATEUR_HOSTING", _("Amateur hosting facility")),
-            ("PUBLIC_AMATEUR_DATA", _("Public amateur data")),
-            ("PRO_DATA", _("Professional, scientific grade data")),
+            (DataSource.AMATEUR_HOSTING, _("Amateur hosting facility")),
+            (DataSource.PUBLIC_AMATEUR_DATA, _("Public amateur data")),
+            (DataSource.PRO_DATA, _("Professional, scientific grade data")),
         )),
         (_("Other"), (
-            ("MIX", _("Mix of multiple sources")),
-            ("OTHER", _("None of the above")),
-            ("UNKNOWN", _("Unknown")),
+            (DataSource.MIX, _("Mix of multiple sources")),
+            (DataSource.OTHER, _("None of the above")),
+            (DataSource.UNKNOWN, _("Unknown")),
         )),
     )
 
@@ -912,6 +913,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (None, "---------"),
         ("OWN", _("Non-commercial independent facility")),
         (None, "---------"),
+        ("ALNI", "Alnitak Remote Observatories"),
         ("AC", "AstroCamp"),
         ("AHK", "Astro Hostel Krasnodar"),
         ("AOWA", "Astro Observatories Western Australia"),
@@ -1732,7 +1734,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if task_id is None:
             from .tasks import retrieve_thumbnail
             result = retrieve_thumbnail.apply_async(args=(self.pk, alias, revision_label, options))
-            cache.set(task_id_cache_key, result.task_id)
+            cache.set(task_id_cache_key, result.task_id, 600)
 
             try:
                 # Try again in case of eagerness.
@@ -1750,6 +1752,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         return static('astrobin/images/placeholder-gallery.jpg')
 
     def thumbnail_invalidate_real(self, field, revision_label, delete=True):
+        from astrobin.tasks import invalidate_cdn_caches
         from astrobin_apps_images.models import ThumbnailGroup
 
         for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].items():
@@ -1760,14 +1763,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         try:
             thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
-            all_urls = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
+            all_urls: List[str] = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
 
-            cloudflare_service = CloudflareService()
+            invalidate_cdn_caches.delay(all_urls)
 
-            for url in all_urls:
-                cloudflare_service.purge_resource(url)
-                s3 = boto3.client('s3')
-                s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
+            if settings.AWS_S3_ENABLED:
+                for url in all_urls:
+                    s3 = boto3.client('s3')
+                    s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
 
             self.thumbnails.get(revision=revision_label).delete()
             Image.objects_including_wip.filter(pk=self.pk).update(updated=DateTimeService.now())
@@ -2382,7 +2385,7 @@ class Request(models.Model):
         return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)
 
     def get_absolute_url(self):
-        return '/requests/detail/' + self.id + '/'
+        return '/requests/detail/' + str(self.id) + '/'
 
     class Meta:
         app_label = 'astrobin'
@@ -2469,6 +2472,13 @@ class UserProfile(SafeDeleteModel):
     )
 
     last_seen_in_country = models.CharField(
+        editable=False,
+        null=True,
+        blank=True,
+        max_length=2
+    )
+
+    signup_country = models.CharField(
         editable=False,
         null=True,
         blank=True,
@@ -2855,6 +2865,21 @@ class UserProfile(SafeDeleteModel):
         editable=False,
     )
 
+    # Stripe data
+    stripe_customer_id = models.CharField(
+        editable=False,
+        max_length=32,
+        blank=True,
+        null=True,
+    )
+
+    stripe_subscription_id = models.CharField(
+        editable=False,
+        max_length=32,
+        blank=True,
+        null=True,
+    )
+
     def get_display_name(self):
         return self.real_name if self.real_name else str(self.user)
 
@@ -3114,10 +3139,12 @@ class AppApiKeyRequest(models.Model):
         return 'API request: %s' % self.name
 
     def save(self, *args, **kwargs):
-        NotificationsService.email_superusers(
-            'App API Key request from %s' % self.registrar.username,
-            '%s/admin/astrobin/appapikeyrequest/' % settings.BASE_URL
-        )
+        if self.pk is None:
+            NotificationsService.email_superusers(
+                'App API Key request from %s' % self.registrar.username,
+                '%s/admin/astrobin/appapikeyrequest/' % settings.BASE_URL
+            )
+
         return super(AppApiKeyRequest, self).save(*args, **kwargs)
 
     def approve(self):

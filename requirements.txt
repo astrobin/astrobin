@@ -2,7 +2,7 @@
 -e git+https://github.com/astrobin/django-hitcount.git@3acf5bdb9728ca8c38cd792dd746114c9076ae88#egg=django_hitcount
 -e git+https://github.com/astrobin/django-notification.git@9293ab2880b1b0a13bcd0aec267d74c92aff1421#egg=django_notification
 -e git+https://github.com/astrobin/django-persistent-messages.git@bf1911aeb61941156457fbf2082b4cfe9d379493#egg=django_persistent_messages
--e git+https://github.com/astrobin/django-subscription.git@730b26090860316836bc1b2f1db175ab262db9bf#egg=django_subscription
+-e git+https://github.com/astrobin/django-subscription.git@37491e1de5bd450cd0c850923b5ae16cf6d8ca29#egg=django_subscription
 -e git+https://github.com/astrobin/django-threaded-messages.git@9966694e8c92f4814ca4635dffadef5fdf70d37b#egg=django_threaded_messages
 -e git+https://github.com/astrobin/easy-thumbnails.git@c82fe8d270c36ae53114f0421630cef1945fa866#egg=easy-thumbnails
 -e git+https://github.com/nickhargreaves/django-bootstrap-toolkit.git@edbfafbd01705aed0580205a81323d1545e4d733#egg=django_bootstrap_toolkit
@@ -56,7 +56,7 @@ django-celery-beat==2.2.1
 django-celery-email==3.0.0
 django-classy-tags==2.0.0
 django-contrib-comments==2.1.0
-django-cookie-law==2.1.1
+django-cookie-consent==0.3.1
 django-cors-middleware==1.5.0
 django-crispy-forms==1.14.0
 django-debug-toolbar-template-timings==0.9
@@ -195,7 +195,7 @@ spark-parser==1.8.9
 sphinx-me==0.3
 SQLAlchemy==1.4.45
 sqlparse==0.4.1
-stripe==2.64.0
+stripe==3.2.0
 tblib==1.7.0
 termcolor==1.1.0
 tornado==6.1

@@ -1,4 +1,6 @@
 {% load i18n %}
-{% blocktrans %}Your request to join the group "{{group_name}}" has been APPROVED.
 
-Visit the group here: {{url}}{% endblocktrans %}
+{% blocktrans %}Your request to join the group "{{group_name}}" has been APPROVED{% endblocktrans %}.
+
+{% trans "Visit group" %}:
+{{ url }}

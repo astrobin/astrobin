@@ -37,6 +37,12 @@ NOTICE_TYPES = (
         1,
     ),
     (
+        'image_approved',
+        _('Your image was approved by a moderator'),
+        '',
+        2,
+    ),
+    (
         'image_not_solved',
         _('Your image could not be plate-solved'),
         '',
@@ -181,6 +187,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'topic_moved',
+        _('Your forum topic was moved'),
+        '',
+        2
+    ),
+    (
         'received_email',
         _('You have received a new private message'),
         '',
@@ -265,6 +277,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'image_not_submitted_to_iotd_tp',
+        _("Image not submitted for IOTD/TP consideration"),
+        '',
+        2
+    ),
+    (
         'new_subscription',
         _("Thank you for getting a subscription!"),
         '',
@@ -273,6 +291,12 @@ NOTICE_TYPES = (
     (
         'new_payment',
         _("Thank you for your payment!"),
+        '',
+        2
+    ),
+    (
+        'subscription_canceled',
+        _("Subscription canceled"),
         '',
         2
     ),

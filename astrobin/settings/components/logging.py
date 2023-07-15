@@ -4,8 +4,9 @@ from boto3.session import Session
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'invalid').strip()
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'invalid').strip()
-AWS_REGION_NAME = os.environ.get('AWS_REGION_NAME', 'us-east-1').strip()
+AWS_REGION = os.environ.get('AWS_REGION', 'us-east-1').strip()
 CLOUDWATCH_LOGGING_ENABLED = os.environ.get('CLOUDWATCH_LOGGING_ENABLED', 'false').strip() == 'true'
+CELERYD_HIJACK_ROOT_LOGGER = False
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
@@ -57,6 +58,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'django_celery_beat': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
         'werkzeug': {
             'handlers': ['console'],
             'level': 'ERROR',
@@ -77,6 +83,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'botocore': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         's3transfer': {
             'handlers': ['console'],
             'level': 'ERROR',
@@ -87,12 +98,47 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'celery': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'celery.task': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
         'celery.evcam': {
             'handlers': ['console'],
             'level': 'ERROR',
             'propagate': False,
         },
+        'celery.beat': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'kombu': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         'django_bouncy': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'stripe': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+        'watchtower': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'flower': {
             'handlers': ['console'],
             'level': 'ERROR',
             'propagate': False,
@@ -115,7 +161,7 @@ if AWS_ACCESS_KEY_ID != 'invalid' and \
         'localhost' not in BASE_URL:
     boto3_session = Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
                             aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                            region_name=AWS_REGION_NAME)
+                            region_name=AWS_REGION)
 
     LOGGING['handlers']['watchtower'] = {
         'level': 'DEBUG',

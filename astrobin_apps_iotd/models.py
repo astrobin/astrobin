@@ -237,3 +237,103 @@ class IotdJudgementQueueEntry(models.Model):
     class Meta:
         unique_together = ('judge', 'image',)
         ordering = ('last_vote_timestamp',)
+
+
+class IotdStats(models.Model):
+    """
+    Statistics about the IOTD and TPN systems.
+    IOTD = Image of the day
+    TP = Top pick
+    TPN = Top pick nomination
+    """
+
+    created = models.DateTimeField(auto_now_add=True)
+
+    # Period of time covered by the stats.
+    days = models.PositiveSmallIntegerField()
+
+    # Distinct winners.
+    distinct_iotd_winners = models.PositiveIntegerField()
+    distinct_tp_winners = models.PositiveIntegerField()
+    distinct_tpn_winners = models.PositiveIntegerField()
+
+    # Total awarded images.
+    total_iotds = models.PositiveIntegerField()
+    total_tps = models.PositiveIntegerField()
+    total_tpns = models.PositiveIntegerField()
+
+    # Total submitted images.
+    total_submitted_images = models.PositiveIntegerField()
+
+    # Breakdown by subject type.
+    total_deep_sky_images = models.PositiveIntegerField()
+    total_solar_system_images = models.PositiveIntegerField()
+    total_wide_field_images = models.PositiveIntegerField()
+    total_star_trails_images = models.PositiveIntegerField()
+    total_northern_lights_images = models.PositiveIntegerField()
+    total_noctilucent_clouds_images = models.PositiveIntegerField()
+
+    deep_sky_iotds = models.PositiveIntegerField()
+    solar_system_iotds = models.PositiveIntegerField()
+    wide_field_iotds = models.PositiveIntegerField()
+    star_trails_iotds = models.PositiveIntegerField()
+    northern_lights_iotds = models.PositiveIntegerField()
+    noctilucent_clouds_iotds = models.PositiveIntegerField()
+
+    deep_sky_tps = models.PositiveIntegerField()
+    solar_system_tps = models.PositiveIntegerField()
+    wide_field_tps = models.PositiveIntegerField()
+    star_trails_tps = models.PositiveIntegerField()
+    northern_lights_tps = models.PositiveIntegerField()
+    noctilucent_clouds_tps = models.PositiveIntegerField()
+
+    deep_sky_tpns = models.PositiveIntegerField()
+    solar_system_tpns = models.PositiveIntegerField()
+    wide_field_tpns = models.PositiveIntegerField()
+    star_trails_tpns = models.PositiveIntegerField()
+    northern_lights_tpns = models.PositiveIntegerField()
+    noctilucent_clouds_tpns = models.PositiveIntegerField()
+
+    # Breakdown by data source.
+    total_backyard_images = models.PositiveIntegerField()
+    total_traveller_images = models.PositiveIntegerField()
+    total_own_remote_images = models.PositiveIntegerField()
+    total_amateur_hosting_images = models.PositiveIntegerField()
+    total_public_amateur_data_images = models.PositiveIntegerField()
+    total_pro_data_images = models.PositiveIntegerField()
+    total_mix_images = models.PositiveIntegerField()
+    total_other_images = models.PositiveIntegerField()
+    total_unknown_images = models.PositiveIntegerField()
+
+    backyard_iotds = models.PositiveIntegerField()
+    traveller_iotds = models.PositiveIntegerField()
+    own_remote_iotds = models.PositiveIntegerField()
+    amateur_hosting_iotds = models.PositiveIntegerField()
+    public_amateur_data_iotds = models.PositiveIntegerField()
+    pro_data_iotds = models.PositiveIntegerField()
+    mix_iotds = models.PositiveIntegerField()
+    other_iotds = models.PositiveIntegerField()
+    unknown_iotds = models.PositiveIntegerField()
+
+    backyard_tps = models.PositiveIntegerField()
+    traveller_tps = models.PositiveIntegerField()
+    own_remote_tps = models.PositiveIntegerField()
+    amateur_hosting_tps = models.PositiveIntegerField()
+    public_amateur_data_tps = models.PositiveIntegerField()
+    pro_data_tps = models.PositiveIntegerField()
+    mix_tps = models.PositiveIntegerField()
+    other_tps = models.PositiveIntegerField()
+    unknown_tps = models.PositiveIntegerField()
+
+    backyard_tpns = models.PositiveIntegerField()
+    traveller_tpns = models.PositiveIntegerField()
+    own_remote_tpns = models.PositiveIntegerField()
+    amateur_hosting_tpns = models.PositiveIntegerField()
+    public_amateur_data_tpns = models.PositiveIntegerField()
+    pro_data_tpns = models.PositiveIntegerField()
+    mix_tpns = models.PositiveIntegerField()
+    other_tpns = models.PositiveIntegerField()
+    unknown_tpns = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ('-created',)

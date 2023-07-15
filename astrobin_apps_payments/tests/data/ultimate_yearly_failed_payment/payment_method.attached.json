@@ -1,0 +1,63 @@
+{
+  "id": "evt_1NLunFC0tT6bv7HdCGuzyH09",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1687468312,
+  "data": {
+    "object": {
+      "id": "pm_1NLunDC0tT6bv7HdE4afa1oS",
+      "object": "payment_method",
+      "billing_details": {
+        "address": {
+          "city": null,
+          "country": "CH",
+          "line1": null,
+          "line2": null,
+          "postal_code": null,
+          "state": null
+        },
+        "email": "astrobin@astrobin.com",
+        "name": "Test",
+        "phone": null
+      },
+      "card": {
+        "brand": "visa",
+        "checks": {
+          "address_line1_check": null,
+          "address_postal_code_check": null,
+          "cvc_check": "pass"
+        },
+        "country": "US",
+        "exp_month": 12,
+        "exp_year": 2044,
+        "fingerprint": "Xi05hB6PSTV4ACeF",
+        "funding": "credit",
+        "generated_from": null,
+        "last4": "4242",
+        "networks": {
+          "available": [
+            "visa"
+          ],
+          "preferred": null
+        },
+        "three_d_secure_usage": {
+          "supported": true
+        },
+        "wallet": null
+      },
+      "created": 1687468311,
+      "customer": "STRIPE_CUSTOMER_ID",
+      "livemode": false,
+      "metadata": {
+      },
+      "type": "card"
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": "req_HW11Qj5Tv7UHzZ",
+    "idempotency_key": "25d58a2f-c938-49dc-979f-17d9b19b2d4a"
+  },
+  "type": "payment_method.attached"
+}

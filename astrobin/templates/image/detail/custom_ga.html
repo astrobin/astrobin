@@ -1,8 +1,13 @@
+{% load cookie_consent_tags %}
+{% load tags %}
+
 {% block extra_gtag %}
     {% if image.is_wip %}
-        <script type="text/javascript">
-            gtag("set", {"Staging Image": "Yes"});
-        </script>
+        {% if not request|is_gdpr_country or request|cookie_group_accepted:'analytics' %}
+            <script type="text/javascript">
+                gtag("set", {"Staging Image": "Yes"});
+            </script>
+        {% endif %}
     {% endif %}
 {% endblock %}
 

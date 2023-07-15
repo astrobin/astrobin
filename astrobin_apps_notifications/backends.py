@@ -13,18 +13,9 @@ from notification.backends import BaseBackend
 from notification.backends.email import EmailBackend as BaseEmailBackend
 from persistent_messages.models import Message
 
+from astrobin_apps_users.services import UserService
+
 log = logging.getLogger(__name__)
-
-
-def shadow_ban_applies(notice_type, recipient, context):
-    from astrobin_apps_users.services import UserService
-
-    if notice_type.label == 'received_email':
-        message_sender = context.get('message').sender
-        if UserService(recipient).shadow_bans(message_sender):
-            return True
-
-    return False
 
 
 class PersistentMessagesBackend(BaseBackend):
@@ -34,7 +25,8 @@ class PersistentMessagesBackend(BaseBackend):
         context = self.default_context()
         context.update(extra_context)
 
-        if shadow_ban_applies(notice_type, recipient, context):
+        if UserService(recipient).shadow_bans(sender):
+            log.debug("On-site notice %s not sent because of shadow ban: %s -> %s" % (notice_type, recipient, sender))
             return
 
         template = 'notice.html'
@@ -76,7 +68,8 @@ class EmailBackend(BaseEmailBackend):
         })
         context.update(extra_context)
 
-        if shadow_ban_applies(notice_type, recipient, context):
+        if UserService(recipient).shadow_bans(sender):
+            log.debug("Email notice %s not sent because of shadow ban: %s -> %s" % (notice_type, recipient, sender))
             return
 
         messages = self.get_formatted_messages((

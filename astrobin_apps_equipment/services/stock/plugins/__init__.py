@@ -1,0 +1,1 @@
+from .stock_importer_plugin_interface import StockImporterPluginInterface

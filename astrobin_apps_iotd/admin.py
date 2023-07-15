@@ -1,6 +1,9 @@
 from django.contrib import admin
 
-from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd, TopPickNominationsArchive, TopPickArchive
+from astrobin_apps_iotd.models import (
+    IotdStats, IotdSubmission, IotdVote, Iotd, TopPickNominationsArchive,
+    TopPickArchive,
+)
 
 
 class IotdSubmissionAdmin(admin.ModelAdmin):
@@ -30,6 +33,13 @@ class IotdAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Iotd, IotdAdmin)
+
+
+class IotdStatsAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(IotdStats, IotdStatsAdmin)
 
 
 class TopPickNominationsArchiveAdmin(admin.ModelAdmin):

@@ -1,0 +1,127 @@
+{% load i18n %}
+{% load cookie_consent_tags %}
+
+
+<div class="cookie-bar">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>
+                <i class="icon-check"></i> {% trans "Cookie consent" %}
+                <a data-dismiss="modal" class="close cc-cookie-dismiss" href="#">&times;</a>
+            </h3>
+        </div>
+
+        <div class="modal-body">
+            <ul class="nav nav-tabs" id="cookie-bar-tab">
+                <li class="active"><a href="#cookie-bar-info" data-toggle="tab">{% trans "Info" %}</a></li>
+                <li><a href="#cookie-bar-details" data-toggle="tab">{% trans "Details" %}</a></li>
+                <li><a href="#cookie-bar-policies" data-toggle="tab">{% trans "Policies" %}</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="cookie-bar-info">
+                    <p>
+                        {% blocktrans trimmed %}
+                            We use cookies on our website to provide you with the best user experience and to improve
+                            our services.
+                        {% endblocktrans %}
+
+                        {% blocktrans trimmed %}
+                            Cookies are small text files that are stored on your device (computer, smartphone, tablet)
+                            when you visit our website. They help us remember your preferences, analyze how our website
+                            is used, and customize the content you see.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+                <div class="tab-pane" id="cookie-bar-details">
+                    <p>
+                        {% blocktrans trimmed %}
+                            We use the following types of cookies:
+                        {% endblocktrans %}
+                    </p>
+
+                    {% not_accepted_or_declined_cookie_groups request as cookie_groups %}
+                    <ul>
+                        <li>
+                            <strong>{% trans "Essential cookies (required)" %}</strong>
+                            <p>
+                                {% blocktrans trimmed %}
+                                    These cookies are essential for the website to function properly.
+                                {% endblocktrans %}
+                            </p>
+                        </li>
+                        {% for cookie_group in cookie_groups %}
+                            <li>
+                                {% if cookie_group.varname == 'functional' %}
+                                    <strong>{% trans "Functional cookies (recommended)" %}</strong>
+                                    <p>
+                                        {% blocktrans trimmed %}
+                                            These cookies are used to provide additional functionality to the website,
+                                            such as remembering local preferences.
+                                        {% endblocktrans %}
+                                    </p>
+                                {% elif cookie_group.varname == 'performance' %}
+                                    <strong>{% trans "Performance cookies (recommended)" %}</strong>
+                                    <p>
+                                        {% blocktrans trimmed %}
+                                            These cookies are used to improve the website performance by saving some
+                                            pieces of information on your computer and avoiding reading from the
+                                            AstroBin database when possible.
+                                        {% endblocktrans %}
+                                    </p>
+                                {% elif cookie_group.varname == 'analytics' %}
+                                    <strong>{% trans "Analytics cookies" %}</strong>
+                                    <p>
+                                        {% blocktrans trimmed %}
+                                            These cookies are used to anonymously track your usage of the website, so
+                                            that we can improve it over time.
+                                        {% endblocktrans %}
+                                    </p>
+                                {% elif cookie_group.varname == 'advertising' %}
+                                    <strong>{% trans "Advertising cookies" %}</strong>
+                                    <p>
+                                        {% blocktrans trimmed %}
+                                            These cookies are used to honor ad display frequency caps. AstroBin does NOT
+                                            serve targeted ads.
+                                        {% endblocktrans %}
+                                    </p>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="tab-pane" id="cookie-bar-policies">
+                    <p>
+                        {% blocktrans trimmed %}
+                            AstroBin is committed to transparency and choice regarding the cookies that we use on our
+                            website. Our policies explain how we use cookies and how you can control your privacy.
+                        {% endblocktrans %}
+                    </p>
+                    <ul>
+                        <li>
+                            <a target="_blank" href="https://welcome.astrobin.com/cookie-policy">
+                                {% trans "Cookie policy" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://welcome.astrobin.com/privacy-policy">
+                                {% trans "Privacy policy" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://welcome.astrobin.com/ad-policy">
+                                {% trans "Ad policy" %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="{{ url_accept }}" class="cc-cookie-accept btn btn-primary">{% trans "Accept all" %}</a>
+            <a href="{{ url_decline }}" class="cc-cookie-decline btn btn-primary">{% trans "Essential only" %}</a>
+            <a href="{{ url_cookies }}" class="btn btn-secondary">{% trans "Customize selection" %}</a>
+        </div>
+    </div>
+</div>

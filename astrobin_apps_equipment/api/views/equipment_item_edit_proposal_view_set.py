@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from pybb.models import Category, Forum
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
@@ -198,6 +199,17 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         target.variant_of = edit_proposal.variant_of
         target.website = edit_proposal.website
         target.image = edit_proposal.image
+
+        if not target.forum:
+            category, created = Category.objects.get_or_create(
+                name='Equipment forums',
+                slug='equipment-forums',
+            )
+
+            target.forum, created = Forum.objects.get_or_create(
+                category=category,
+                name=f'{target}',
+            )
 
         target.save()
         edit_proposal.save()

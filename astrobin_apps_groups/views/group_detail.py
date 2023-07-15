@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.views.generic import DetailView
 from pybb.permissions import perms
 
+from astrobin.models import Image
 from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.views.mixins import RestrictPrivateGroupToMembersMixin
 
@@ -26,8 +27,9 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
         group = self.get_object()
+        page_size = settings.PAGINATE_GROUP_DETAIL_PAGE_BY
 
-        images = group.images.all()
+        images = Image.objects.filter(part_of_group_set=group)
         sort = self.request.GET.get('sort', group.default_image_sorting.lower())
         if sort == 'title':
             images = images.order_by('title')
@@ -37,9 +39,9 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
             images = images.filter(keyvaluetags__key=group.image_tag_sorting).order_by('keyvaluetags__value')
 
         # Images
-        context['image_list'] = images
+        context['image_list'] = images[:(page_size * 10)]
         context['alias'] = 'gallery'
-        context['paginate_by'] = settings.PAGINATE_GROUP_DETAIL_PAGE_BY
+        context['paginate_by'] = page_size
 
         # Misc
         context['user_is_member'] = self.request.user in group.members.all()

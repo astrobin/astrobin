@@ -17,6 +17,7 @@ def push_notification(recipients, from_user, notice_type, data):
     data.update({
         'notices_url': settings.BASE_URL + '/',
         'base_url': settings.BASE_URL,
+        'app_url': settings.APP_URL,
     })
     notification.send(recipients, notice_type, data, sender=from_user)
     for recipient in recipients:

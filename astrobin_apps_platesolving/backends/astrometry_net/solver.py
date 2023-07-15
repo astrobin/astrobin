@@ -208,7 +208,8 @@ class Solver(AbstractPlateSolvingBackend):
             ('center_ra', None, float),
             ('center_dec', None, float),
             ('radius', None, float),
-            ('downsample_factor', None, int),
+            ('downsample_factor', None, float),
+            ('use_sextractor', False, bool),
             ('tweak_order', None, int),
             ('crpix_center', None, bool),
         ]:
@@ -220,4 +221,5 @@ class Solver(AbstractPlateSolvingBackend):
             elif default is not None:
                 args.update({key: default})
 
+        log.debug("Astrometry.net upload args: %s" % args)
         return args

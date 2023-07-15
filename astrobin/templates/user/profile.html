@@ -11,9 +11,24 @@
 {% load cache %}
 {% load common_tags %}
 
+{% block extra_meta %}
+    {{ block.super }}
+
+    <meta property="og:title" content="{% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}{{ user }}'s gallery{% endblocktrans %}">
+    <meta property="og:description" content="{% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}Astrophotography by {{ user }} on AstroBin{% endblocktrans %}">
+    <meta property="og:image" content="{% avatar_url requested_user 194 %}">
+    {% if mobile_header_background %}
+        <meta property="og:image" content="{{ mobile_header_background }}">
+    {% endif %}
+    <meta property="og:site_name" content="AstroBin" />
+    <meta property="og:url" content="{{ BASE_URL }}{% url 'user_page' requested_user.username %}" />
+    <meta property="og:type" content="profile" />
+{% endblock %}
+
 {% block title %}
     {% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}
-        {{user}}'s gallery{% endblocktrans %}
+        {{user}}'s gallery
+    {% endblocktrans %}
 {% endblock %}
 
 {% block container_extra_classes %}has-subnav{% endblock %}

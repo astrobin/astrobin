@@ -14,6 +14,7 @@ from astrobin.templatetags.tags import (
 )
 from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group as AstroBinGroup
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class ForumTest(TestCase):
@@ -71,7 +72,7 @@ class ForumTest(TestCase):
         # Premium members have a free pass
         g, created = Group.objects.get_or_create(name="astrobin_premium")
         s, created = Subscription.objects.get_or_create(
-            name="AstroBin Premium",
+            name=SubscriptionName.PREMIUM_CLASSIC.value,
             price=1,
             group=g,
             category="premium")
@@ -92,7 +93,7 @@ class ForumTest(TestCase):
         user.userprofile.last_seen_in_country = 'ru'
         user.userprofile.save()
 
-        Generators.premium_subscription(user, 'AstroBin Premium 2020+')
+        Generators.premium_subscription(user, SubscriptionName.PREMIUM_2020)
 
         form = self._get_post_form()
         post, topic = form.save(commit=False)

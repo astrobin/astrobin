@@ -1,7 +1,7 @@
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Fieldset, Layout, Submit
+from crispy_forms.layout import Div, Fieldset, HTML, Layout, Submit
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import Group, User
@@ -15,6 +15,7 @@ from astrobin.utils import get_client_country_code
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
+from common.templatetags.common_tags import button_loading_class, button_loading_indicator
 
 
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):
@@ -88,7 +89,14 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
                 'recaptcha',
             ) if not settings.TESTING else Fieldset(''),
             Div(
-                Submit('submit', _('Submit'), css_class=f'btn btn-primary btn-block-mobile'),
+                HTML(
+                    f'<button '
+                    f'  type="submit" '
+                    f'  class="btn btn-primary btn-block-mobile {button_loading_class()}"'
+                    f'>'
+                    f'  {_("Submit")} {button_loading_indicator()}'
+                    f'</button>'
+                ),
                 css_class='form-actions',
             )
         )
@@ -132,7 +140,13 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
 
     def clean_username(self):
         value: str = self.cleaned_data.get(User.USERNAME_FIELD)
-        if value is not None and User.objects.filter(username__iexact=value).exists():
+        if value is None:
+            return None
+        elif "@" in value:
+            raise forms.ValidationError(
+                _('Sorry, your username cannot contain the "@" character.')
+            )
+        elif User.objects.filter(username__iexact=value).exists():
             raise forms.ValidationError(
                 _('Sorry, this username already exists with a different capitalization.')
             )
@@ -173,7 +187,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             'username': _(
                 'This is your handle on AstroBin and will be part of the URL to your gallery. If you do not specify a'
                 'first and last name below, it will also be how others see your name. Please use letters, digits, and '
-                'the special characters @/./+/-/_ only.'
+                'the special characters ./+/-/_ only.'
             ),
         }
 
@@ -185,7 +199,10 @@ def user_created(sender, user, request, **kwargs):
     form = AstroBinRegistrationForm(request.POST)
     profile, created = UserProfile.objects.get_or_create(user=user)
 
-    UserService(profile.user).set_last_seen(get_client_country_code(request))
+    country_code = get_client_country_code(request)
+
+    UserService(profile.user).set_last_seen(country_code)
+    UserService(profile.user).set_signup_country(country_code)
     profile.refresh_from_db()
 
     group, created = Group.objects.get_or_create(name=GroupName.OWN_EQUIPMENT_MIGRATORS)

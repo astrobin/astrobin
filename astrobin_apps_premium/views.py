@@ -1,15 +1,12 @@
 import logging
 from datetime import date, timedelta
 
-from annoying.functions import get_object_or_None
-from django.urls import reverse
 from django.http import HttpResponseForbidden
-from django.shortcuts import redirect
-from django.views.generic.edit import FormView, CreateView
-from subscription.models import Transaction, Subscription, UserSubscription
+from django.urls import reverse
+from django.views.generic.edit import FormView
+from subscription.models import Subscription, Transaction, UserSubscription
 
 import astrobin_apps_premium.services.premium_service
-from . import utils as premium_utils
 from astrobin_apps_donations import utils as donation_utils
 from .forms import MigrateDonationsForm
 
@@ -22,7 +19,7 @@ class MigrateDonationsView(FormView):
 
     def get_premium_sub(self):
         try:
-            return Subscription.objects.get(name="AstroBin Premium")
+            return Subscription.objects.get(name=astrobin_apps_premium.SubscriptionName.PREMIUM_CLASSIC)
         except Subscription.DoesNotExist:
             return None
 
@@ -36,6 +33,7 @@ class MigrateDonationsView(FormView):
         expiration = None
         migration_impossible = False
         migration_impossible_reason = None
+        transactions = []
 
         premium_sub = self.get_premium_sub()
         if premium_sub is None:
@@ -45,7 +43,9 @@ class MigrateDonationsView(FormView):
             try:
                 us = UserSubscription.objects.get(
                     user=self.request.user,
-                    subscription__name__in=astrobin_apps_premium.services.premium_service.SUBSCRIPTION_NAMES
+                    subscription__name__in=[
+                        x.value for x in astrobin_apps_premium.services.premium_service.SubscriptionName
+                    ]
                 )
             except UserSubscription.DoesNotExist:
                 us = None

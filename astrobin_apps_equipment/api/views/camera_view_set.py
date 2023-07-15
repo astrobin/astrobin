@@ -22,7 +22,7 @@ class CameraViewSet(EquipmentItemViewSet):
         queryset = super().get_queryset()
 
         camera_type_filter = self.request.GET.get('camera-type')
-        if camera_type_filter and camera_type_filter != 'null':
+        if camera_type_filter and camera_type_filter not in ['null', 'undefined']:
             queryset = queryset.filter(type=camera_type_filter)
 
         camera_cooled_filter = self.request.GET.get('camera-cooled')
@@ -195,7 +195,7 @@ class CameraViewSet(EquipmentItemViewSet):
                 )
 
         camera_sensor_color_or_mono_filter = self.request.GET.get('camera-sensor-color-or-mono')
-        if camera_sensor_color_or_mono_filter and camera_sensor_color_or_mono_filter != 'null':
+        if camera_sensor_color_or_mono_filter and camera_sensor_color_or_mono_filter not in ['null', 'undefined']:
             queryset = queryset.filter(
                 sensor__color_or_mono=camera_sensor_color_or_mono_filter,
             )

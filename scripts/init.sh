@@ -10,11 +10,16 @@ python manage.py migrate --run-syncdb --noinput
 # Create initial data
 python manage.py shell << EOF
 from common.constants import GroupName
+from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.sites.models import Site
 
+from cookie_consent.models import CookieGroup, Cookie
 from pybb.models import Category, Forum
 from subscription.models import Subscription
+
+from astrobin.types import CookieGroupDefinition, CookieGroupName, CookieGroupDescription, cookie_definitions
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 Group.objects.get_or_create(name='astrobin_lite')
 Group.objects.get_or_create(name='astrobin_lite_2020')
@@ -32,11 +37,110 @@ Group.objects.get_or_create(name='astrobin-donor-silver-yearly')
 Group.objects.get_or_create(name='astrobin-donor-gold-yearly')
 Group.objects.get_or_create(name='astrobin-donor-platinum-yearly')
 
+cookies = [
+    [
+        CookieGroupDefinition.ESSENTIAL.value,
+        CookieGroupName.ESSENTIAL.value,
+        CookieGroupDescription.ESSENTIAL.value,
+        [
+            'astrobin_cookie_consent',
+            'sessionid',
+            'csrftoken',
+            'astrobin_lang',
+            'astrobin-two-factor-remember-cookie',
+            'astrobin-equipment-explorer-filter-data-camera',
+            'astrobin-equipment-explorer-filter-data-sensor',
+            'astrobin-equipment-explorer-filter-data-telescope',
+            'astrobin-equipment-explorer-filter-data-mount',
+            'astrobin-equipment-explorer-filter-data-filter',
+            'astrobin-equipment-explorer-filter-data-software',
+            'astrobin-equipment-explorer-filter-data-accessory',
+            'multidb_pin_writes',
+            'classic-auth-token',
+            '__stripe_mid',
+            '__stripe_sid',
+        ]
+    ],
+    [
+        CookieGroupDefinition.FUNCTIONAL.value,
+        CookieGroupName.FUNCTIONAL.value,
+        CookieGroupDescription.FUNCTIONAL.value,
+        [
+            'astrobin_forum_usage_modal_seen',
+            'astrobin_click_and_drag_toast_seen',
+            'astrobin_use_high_contrast_theme',
+        ]
+    ],
+    [
+        CookieGroupDefinition.PERFORMANCE.value,
+        CookieGroupName.PERFORMANCE.value,
+        CookieGroupDescription.PERFORMANCE.value,
+        [
+            'astrobin_last_seen_set',
+        ]
+    ],
+    [
+        CookieGroupDefinition.ANALYTICS.value,
+        CookieGroupName.ANALYTICS.value,
+        CookieGroupDescription.ANALYTICS.value,
+        [
+            '_ga',
+            '_gid',
+            '_gat',
+            f'_gac_{settings.GOOGLE_ANALYTICS_ID}',
+            '_hjClosedSurveyInvites',
+            '_hjDonePolls',
+            '_hjMinimizedPolls',
+            '_hjDoneTestersWidgets',
+            '_hjMinimizedTestersWidgets',
+            '_hjIncludedInSample',
+            '_hjShownFeedbackMessage',
+            '_hjid',
+            '_hjRecordingLastActivity',
+            '_hjTLDTest',
+            '_hjUserAttributesHash',
+            '_hjCachedUserAttributes',
+            '_hjLocalStorageTest',
+            '_hjIncludedInPageviewSample',
+            '_hjAbsoluteSessionInProgress',
+            '_hjFirstSeen',
+            '_hjViewportId',
+            '_hjRecordingEnabled',
+            '_hjRecordingLastActivity',
+        ]
+    ],
+    [
+        CookieGroupDefinition.ADVERTISING.value,
+        CookieGroupName.ADVERTISING.value,
+        CookieGroupDescription.ADVERTISING.value,
+        [
+            'IDE',
+            'test_cookie',
+        ]
+    ],
+]
+
+for index, group in enumerate(cookies):
+    cookie_group = CookieGroup.objects.get_or_create(
+        varname=group[0],
+        name=group[1],
+        description=group[2],
+        is_required=group[0] == CookieGroupDefinition.ESSENTIAL.value,
+        ordering=index,
+    )[0]
+
+    for cookie in group[3]:
+        Cookie.objects.get_or_create(
+            cookiegroup=cookie_group,
+            name=cookie,
+            description=cookie_definitions[cookie],
+        )
+
 try:
-    Subscription.objects.get(name='AstroBin Lite')
+    Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Lite',
+        name=SubscriptionName.LITE_CLASSIC.value,
         currency="USD",
         price=18,
         trial_period=0,
@@ -47,10 +151,10 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name='AstroBin Lite (autorenew)')
+    Subscription.objects.get(name=SubscriptionName.LITE_CLASSIC.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Lite (autorenew)',
+        name=SubscriptionName.LITE_CLASSIC.value,
         currency="USD",
         price=18,
         trial_period=0,
@@ -61,10 +165,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name='AstroBin Lite 2020+')
+    Subscription.objects.get(name=SubscriptionName.LITE_2020.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Lite 2020+',
+        name=SubscriptionName.LITE_2020.value,
         currency="CHF",
         price=20,
         trial_period=0,
@@ -75,10 +179,38 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name='AstroBin Premium')
+    Subscription.objects.get(name=SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Premium',
+        name=SubscriptionName.LITE_2020_AUTORENEW_MONTHLY.value,
+        currency="CHF",
+        price=2.5,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='M',
+        group=Group.objects.get(name='astrobin_lite_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.LITE_2020_AUTORENEW_YEARLY.value,
+        currency="CHF",
+        price=20,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='Y',
+        group=Group.objects.get(name='astrobin_lite_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.PREMIUM_CLASSIC.value,
         currency="USD",
         price=36,
         trial_period=0,
@@ -89,10 +221,10 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name='AstroBin Premium (autorenew)')
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Premium (autorenew)',
+        name=SubscriptionName.PREMIUM_CLASSIC_AUTORENEW.value,
         currency="USD",
         price=36,
         trial_period=0,
@@ -103,10 +235,10 @@ except Subscription.DoesNotExist:
         category='premium_autorenew')
 
 try:
-    Subscription.objects.get(name='AstroBin Premium 2020+')
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Premium 2020+',
+        name=SubscriptionName.PREMIUM_2020.value,
         currency="CHF",
         price=40,
         trial_period=0,
@@ -117,10 +249,38 @@ except Subscription.DoesNotExist:
         category='premium')
 
 try:
-    Subscription.objects.get(name='AstroBin Ultimate 2020+')
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value)
 except Subscription.DoesNotExist:
     Subscription.objects.get_or_create(
-        name='AstroBin Ultimate 2020+',
+        name=SubscriptionName.PREMIUM_2020_AUTORENEW_MONTHLY.value,
+        currency="CHF",
+        price=4.5,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='M',
+        group=Group.objects.get(name='astrobin_premium_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.PREMIUM_2020_AUTORENEW_YEARLY.value,
+        currency="CHF",
+        price=40,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='Y',
+        group=Group.objects.get(name='astrobin_premium_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.ULTIMATE_2020.value,
         currency="CHF",
         price=60,
         trial_period=0,
@@ -129,6 +289,34 @@ except Subscription.DoesNotExist:
         recurrence_unit=None,
         group=Group.objects.get(name='astrobin_ultimate_2020'),
         category='premium')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.ULTIMATE_2020_AUTORENEW_MONTHLY.value,
+        currency="CHF",
+        price=6.5,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='M',
+        group=Group.objects.get(name='astrobin_ultimate_2020'),
+        category='premium_autorenew')
+
+try:
+    Subscription.objects.get(name=SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value)
+except Subscription.DoesNotExist:
+    Subscription.objects.get_or_create(
+        name=SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value,
+        currency="CHF",
+        price=60,
+        trial_period=0,
+        trial_unit=None,
+        recurrence_period=1,
+        recurrence_unit='Y',
+        group=Group.objects.get(name='astrobin_ultimate_2020'),
+        category='premium_autorenew')
 
 try:
     Subscription.objects.get(name='AstroBin Donor Bronze Monthly')

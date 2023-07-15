@@ -25,7 +25,9 @@ class TogglePropertyUsersAjaxView(JsonRequestResponseMixin, base.View):
         toggle_properties = ToggleProperty.objects.filter(
             property_type=property_type,
             object_id=object_id,
-            content_type=content_type)
+            content_type=content_type,
+            user__isnull=False,
+        )
 
         data = []
         for toggle_property in toggle_properties.iterator():

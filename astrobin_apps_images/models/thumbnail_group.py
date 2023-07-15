@@ -1,3 +1,5 @@
+from typing import List
+
 from django.db import models
 
 from astrobin.models import Image
@@ -64,42 +66,44 @@ class ThumbnailGroup(models.Model):
     
     instagram_story = models.CharField(max_length=512, null=True, blank=True)
 
-    def get_all_urls(self):
-        # type: () -> list[basestring]
-
+    @staticmethod
+    def get_all_sizes() -> List[str]:
         return [
-            self.real,
-            self.real_anonymized,
-            self.real_inverted,
-            self.hd,
-            self.hd_anonymized,
-            self.hd_inverted,
-            self.hd_sharpened,
-            self.hd_sharpened_inverted,
-            self.regular,
-            self.regular_anonymized,
-            self.regular_inverted,
-            self.regular_sharpened,
-            self.regular_sharpened_inverted,
-            self.regular_large,
-            self.regular_large_anonymized,
-            self.regular_large_inverted,
-            self.regular_large_sharpened,
-            self.regular_large_sharpened_inverted,
-            self.gallery,
-            self.gallery_inverted,
-            self.collection,
-            self.thumb,
-            self.histogram,
-            self.iotd,
-            self.iotd_mobile,
-            self.iotd_candidate,
-            self.story,
-            self.story_crop,
-            self.duckduckgo,
-            self.duckduckgo_small,
-            self.instagram_story,
+            'real',
+            'real_anonymized',
+            'real_inverted',
+            'hd',
+            'hd_anonymized',
+            'hd_inverted',
+            'hd_sharpened',
+            'hd_sharpened_inverted',
+            'regular',
+            'regular_anonymized',
+            'regular_inverted',
+            'regular_sharpened',
+            'regular_sharpened_inverted',
+            'regular_large',
+            'regular_large_anonymized',
+            'regular_large_inverted',
+            'regular_large_sharpened',
+            'regular_large_sharpened_inverted',
+            'gallery',
+            'gallery_inverted',
+            'collection',
+            'thumb',
+            'histogram',
+            'iotd',
+            'iotd_mobile',
+            'iotd_candidate',
+            'story',
+            'story_crop',
+            'duckduckgo',
+            'duckduckgo_small',
+            'instagram_story',
         ]
+
+    def get_all_urls(self) -> List[str]:
+        return [getattr(self, x) for x in ThumbnailGroup.get_all_sizes()]
 
     def __str__(self):
         return "Thumbnails for image %s" % self.image.title

@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load static %}
+
+{% blocktrans trimmed %}
+    Your subscription was cancelled, and you will not be charged for it anymore unless you have an outstanding balance
+    due to a prorated upgrade.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    You may continue to use your subscription until its expiration date.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    AstroBin subscriptions are valid for 1 year or 1 month. If your subscription expires, nothing happens to your
+    content. Nothing is deleted, hidden, held hostage or anything. In fact, you can leave it up forever even if you
+    stop being active as an astrophotographer.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If you have any questions, have a look at the frequently asked questions:
+{% endblocktrans %}
+https://welcome.astrobin.com/faq
+
+{% blocktrans trimmed %}
+    Finally, should you need any support, simply use the contact form:
+{% endblocktrans %}
+{{ BASE_URL }}{% url 'contact' %}
+
+{% blocktrans trimmed %}
+    Or send an email to support@astrobin.com.
+{% endblocktrans %}

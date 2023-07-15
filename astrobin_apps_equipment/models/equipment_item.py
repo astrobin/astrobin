@@ -229,6 +229,7 @@ class EquipmentItem(SafeDeleteModel):
         blank=True,
         editable=False,
         related_name='%(app_label)s_%(class)s_equipment_item',
+        related_query_name='is_%(app_label)s_%(class)s',
         on_delete=models.SET_NULL
     )
 

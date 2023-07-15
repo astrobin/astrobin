@@ -9,6 +9,7 @@ from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.exceptions import Conflict
 from common.services import AppRedirectionService
+from toggleproperties.models import ToggleProperty
 
 
 class EquipmentItemService:
@@ -126,6 +127,9 @@ class EquipmentItemService:
                         ),
                     }
                 )
+
+    def is_followed_by_user(self, user: User) -> bool:
+        return ToggleProperty.objects.toggleproperties_for_object('follow', self.item, user).exists()
 
     @staticmethod
     def non_moderator_queryset(user) -> Q:

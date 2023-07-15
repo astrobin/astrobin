@@ -1,0 +1,219 @@
+{
+  "id": "evt_1NLunGC0tT6bv7HdiNP8KzXc",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1687468313,
+  "data": {
+    "object": {
+      "id": "in_1NLu5gC0tT6bv7Hdc6scsqIX",
+      "object": "invoice",
+      "account_country": "CH",
+      "account_name": "AstroBin",
+      "account_tax_ids": null,
+      "amount_due": 6700,
+      "amount_paid": 6700,
+      "amount_remaining": 0,
+      "amount_shipping": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "attempt_count": 1,
+      "attempted": true,
+      "auto_advance": false,
+      "automatic_tax": {
+        "enabled": false,
+        "status": null
+      },
+      "billing_reason": "subscription_create",
+      "charge": "ch_3NLu5hC0tT6bv7Hd11pOzAhm",
+      "collection_method": "charge_automatically",
+      "created": 1687465612,
+      "currency": "usd",
+      "custom_fields": null,
+      "customer": "STRIPE_CUSTOMER_ID",
+      "customer_address": {
+        "city": null,
+        "country": "CH",
+        "line1": null,
+        "line2": null,
+        "postal_code": null,
+        "state": null
+      },
+      "customer_email": "astrobin@astrobin.com",
+      "customer_name": "Test",
+      "customer_phone": null,
+      "customer_shipping": null,
+      "customer_tax_exempt": "none",
+      "customer_tax_ids": [
+      ],
+      "default_payment_method": null,
+      "default_source": null,
+      "default_tax_rates": [
+      ],
+      "description": null,
+      "discount": null,
+      "discounts": [
+      ],
+      "due_date": null,
+      "ending_balance": 0,
+      "footer": null,
+      "from_invoice": null,
+      "hosted_invoice_url": "https://invoice.stripe.com/i/acct_1BW8j3C0tT6bv7Hd/test_YWNjdF8xQlc4ajNDMHRUNmJ2N0hkLF9POEFRdWd4Zm5FVjdyQ24wTVFid3ZkTzNmdFJISklBLDc4MDA5MTEz02009Ftj8RVf?s=ap",
+      "invoice_pdf": "https://pay.stripe.com/invoice/acct_1BW8j3C0tT6bv7Hd/test_YWNjdF8xQlc4ajNDMHRUNmJ2N0hkLF9POEFRdWd4Zm5FVjdyQ24wTVFid3ZkTzNmdFJISklBLDc4MDA5MTEz02009Ftj8RVf/pdf?s=ap",
+      "last_finalization_error": null,
+      "latest_revision": null,
+      "lines": {
+        "object": "list",
+        "data": [
+          {
+            "id": "il_1NLu5gC0tT6bv7HdggyFOa0k",
+            "object": "line_item",
+            "amount": 6700,
+            "amount_excluding_tax": 6700,
+            "currency": "usd",
+            "description": "1 × AstroBin Ultimate (at $67.00 / year)",
+            "discount_amounts": [
+            ],
+            "discountable": true,
+            "discounts": [
+            ],
+            "livemode": false,
+            "metadata": {
+            },
+            "period": {
+              "end": 1719088012,
+              "start": 1687465612
+            },
+            "plan": {
+              "id": "price_1NAtotC0tT6bv7Hd2LUGNacO",
+              "object": "plan",
+              "active": true,
+              "aggregate_usage": null,
+              "amount": 6000,
+              "amount_decimal": "6000",
+              "billing_scheme": "per_unit",
+              "created": 1684842963,
+              "currency": "chf",
+              "interval": "year",
+              "interval_count": 1,
+              "livemode": false,
+              "metadata": {
+              },
+              "nickname": "AstroBin Ultimate 1 year recurring (tier 1)",
+              "product": "STRIPE_PRODUCT_ULTIMATE_TEST",
+              "tiers_mode": null,
+              "transform_usage": null,
+              "trial_period_days": null,
+              "usage_type": "licensed"
+            },
+            "price": {
+              "id": "price_1NAtotC0tT6bv7Hd2LUGNacO",
+              "object": "price",
+              "active": true,
+              "billing_scheme": "per_unit",
+              "created": 1684842963,
+              "currency": "chf",
+              "custom_unit_amount": null,
+              "livemode": false,
+              "lookup_key": null,
+              "metadata": {
+              },
+              "nickname": "AstroBin Ultimate 1 year recurring (tier 1)",
+              "product": "STRIPE_PRODUCT_ULTIMATE_TEST",
+              "recurring": {
+                "aggregate_usage": null,
+                "interval": "year",
+                "interval_count": 1,
+                "trial_period_days": null,
+                "usage_type": "licensed"
+              },
+              "tax_behavior": "exclusive",
+              "tiers_mode": null,
+              "transform_quantity": null,
+              "type": "recurring",
+              "unit_amount": 6000,
+              "unit_amount_decimal": "6000"
+            },
+            "proration": false,
+            "proration_details": {
+              "credited_items": null
+            },
+            "quantity": 1,
+            "subscription": "sub_1NLu5gC0tT6bv7HdjyJClU3F",
+            "subscription_item": "si_O8AQiO6UwWdelM",
+            "tax_amounts": [
+            ],
+            "tax_rates": [
+            ],
+            "type": "subscription",
+            "unit_amount_excluding_tax": "6700"
+          }
+        ],
+        "has_more": false,
+        "total_count": 1,
+        "url": "/v1/invoices/in_1NLu5gC0tT6bv7Hdc6scsqIX/lines"
+      },
+      "livemode": false,
+      "metadata": {
+      },
+      "next_payment_attempt": null,
+      "number": "49E98C95-0001",
+      "on_behalf_of": null,
+      "paid": true,
+      "paid_out_of_band": false,
+      "payment_intent": "pi_3NLu5hC0tT6bv7Hd1QwnPhmo",
+      "payment_settings": {
+        "default_mandate": null,
+        "payment_method_options": null,
+        "payment_method_types": null
+      },
+      "period_end": 1687465612,
+      "period_start": 1687465612,
+      "post_payment_credit_notes_amount": 0,
+      "pre_payment_credit_notes_amount": 0,
+      "quote": null,
+      "receipt_number": null,
+      "rendering_options": null,
+      "shipping_cost": null,
+      "shipping_details": null,
+      "starting_balance": 0,
+      "statement_descriptor": null,
+      "status": "paid",
+      "status_transitions": {
+        "finalized_at": 1687465612,
+        "marked_uncollectible_at": null,
+        "paid_at": 1687468312,
+        "voided_at": null
+      },
+      "subscription": "sub_1NLu5gC0tT6bv7HdjyJClU3F",
+      "subtotal": 6700,
+      "subtotal_excluding_tax": 6700,
+      "tax": null,
+      "test_clock": null,
+      "total": 6700,
+      "total_discount_amounts": [
+      ],
+      "total_excluding_tax": 6700,
+      "total_tax_amounts": [
+      ],
+      "transfer_data": null,
+      "webhooks_delivered_at": 1687465615
+    },
+    "previous_attributes": {
+      "amount_paid": 0,
+      "amount_remaining": 6700,
+      "charge": "ch_3NLu5hC0tT6bv7Hd1M3pNJ3b",
+      "paid": false,
+      "status": "open",
+      "status_transitions": {
+        "paid_at": null
+      }
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": "req_HW11Qj5Tv7UHzZ",
+    "idempotency_key": "25d58a2f-c938-49dc-979f-17d9b19b2d4a"
+  },
+  "type": "invoice.updated"
+}

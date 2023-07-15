@@ -1,7 +1,20 @@
+{% load cookie_consent_tags %}
+{% load tags %}
+
 {% if ADS_ENABLED %}
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script>
         window.googletag = window.googletag || {cmd: []};
+
+        {% if request|is_gdpr_country and not request|cookie_group_accepted:'advertising' %}
+            googletag.cmd.push(function () {
+                googletag.pubads().setPrivacySettings({
+                    limitedAds: true, // Enables Limited Ads
+                    nonPersonalizedAds: true, // Disables personalized ads
+                    restrictDataProcessing: true // Disables cookies and restricts data processing
+                });
+            });
+        {% endif %}
 
         googletag.cmd.push(function () {
             googletag.defineSlot(

@@ -7,9 +7,11 @@ from django.core.exceptions import ValidationError
 from django.core.signing import BadSignature, SignatureExpired
 from django_otp import devices_for_user
 from django_otp.plugins.otp_email.models import EmailDevice
+from django_otp.plugins.otp_totp.models import TOTPDevice
 from two_factor.views.utils import validate_remember_device_cookie
 
 from astrobin.middleware.mixins import MiddlewareParentClass
+from astrobin.services.utils_service import UtilsService
 from astrobin.utils import get_client_country_code
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
@@ -18,23 +20,25 @@ log = logging.getLogger(__name__)
 
 
 class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
+    def _is_login_request(self, request):
+        return request.path.startswith('/account/login')
+
+    def _is_post(self, request):
+        return request.method == 'POST'
+
     def _process(self, request):
         has_user = hasattr(request, 'user')
         is_authenticated = has_user and request.user.is_authenticated
         is_ajax = request.is_ajax()
         is_api = 'HTTP_AUTHORIZATION' in request.META
-        is_login_request = request.path.startswith('/account/login')
-        is_post = request.method == 'POST'
         is_localhost = 'localhost' in request.get_host() or '127.0.0.1' in request.get_host()
-
         return (
                 has_user and
                 not is_authenticated and
                 not is_ajax and
                 not is_api and
-                is_login_request and
-                is_post and
-                not is_localhost
+                not is_localhost and
+                self._is_post(request)
         )
 
     def _create_email_device(self, user):
@@ -59,7 +63,7 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
         return remember
 
     def process_request(self, request):
-        if not self._process(request):
+        if not (self._is_login_request(request) and self._is_post(request)):
             return
 
         handle = request.POST.get('auth-username')
@@ -84,6 +88,16 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
             except User.MultipleObjectsReturned:
                 log.debug(f'enforce_otp_verification_middleware: user with email {handle}: multiple found')
                 return
+
+        if EmailDevice.objects.filter(user=user).exists():
+            request.session['enforce_otp_middleware_email_device'] = 1
+        elif TOTPDevice.objects.filter(user=user).exists():
+            request.session['enforce_otp_middleware_totp_device'] = 1
+
+        request.session['enforce_otp_middleware_user_email'] = UtilsService.anonymize_email(user.email)
+
+        if not self._process(request):
+            return
 
         # Bail if the password is not matching.
 
@@ -140,4 +154,3 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
             )
 
             push_notification([user], None, 'access_attempted_with_weak_password', {})
-

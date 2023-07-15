@@ -79,6 +79,7 @@ def common_variables(request):
         'False': False,
 
         'STATIC_URL': settings.STATIC_URL,
+        'BASE_URL': settings.BASE_URL,
         'LANGUAGE_CODE': request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
         'DEBUG_MODE': settings.DEBUG,
         'TESTING': settings.TESTING,
@@ -117,6 +118,8 @@ def common_variables(request):
         'PREMIUM_PRICE_PREMIUM_2020': settings.PREMIUM_PRICE_PREMIUM_2020,
         'PREMIUM_PRICE_ULTIMATE_2020': settings.PREMIUM_PRICE_ULTIMATE_2020,
 
+        'REST_FRAMEWORK_PAGE_SIZE': settings.REST_FRAMEWORK['PAGE_SIZE'],
+
         'PAYPAL_TEST': settings.PAYPAL_TEST,
         'IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS': settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS,
         'IOTD_SHOW_CHOOSING_JUDGE': settings.IOTD_SHOW_CHOOSING_JUDGE,
@@ -129,7 +132,6 @@ def common_variables(request):
         'SOFT_BOUNCES': soft_bounces,
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
-        'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
         'HAS_CAMERA_RENAME_PROPOSALS': CameraRenameProposal.objects.filter(user=request.user, status="PENDING") \
             if request.user.is_authenticated \
             else CameraRenameProposal.objects.none(),

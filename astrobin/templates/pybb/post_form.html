@@ -1,12 +1,13 @@
-{% load i18n pybb_tags %}
+{% load i18n %}
 {% load static %}
+{% load pybb_tags %}
 
 {% if READONLY_MODE %}
     {% include 'readonly_mode.html' %}
 {% else %}
     <img class="post-form-loading" src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />
 
-    <form novalidate class="post-form" action="
+    <form novalidate class="post-form form-vertical" action="
         {% if forum %}
             {% url 'pybb:add_topic' forum.pk %}
         {% else %}
@@ -18,29 +19,29 @@
         {% endif %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% with True as hide_labels %}
-            <fieldset>
-                {% include "pybb/form_errors.html" %}
-                {% if form.name %} {% include "pybb/form_field.html" with field=form.name %} {% endif %}
-                {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
-                {% if form.login %} {% include "pybb/form_field.html" with field=form.login %} {% endif %}
+        <fieldset>
+            {% include "pybb/form_errors.html" %}
+            {% if form.name %} {% include "pybb/form_field.html" with field=form.name %} {% endif %}
+            {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
+            {% if form.login %} {% include "pybb/form_field.html" with field=form.login %} {% endif %}
 
-                {% if form.body %}
-                    {% include "pybb/form_field.html" with field=form.body %}
-                    {% include '_rich_content_editor_help.html' %}
-                    {% include '_contribution_index_alert.html' %}
-                {% endif %}
+            {% if form.body %}
+                {% include "pybb/form_field.html" with field=form.body %}
+                {% include '_rich_content_editor_help.html' %}
+                {% include '_contribution_index_alert.html' %}
+            {% endif %}
 
-                {% if request.user|pybb_may_create_poll and form.poll_type %}
-                    <div class="poll-edit-container">
-                        <h2>{% trans "Include a poll" %}</h2>
-                        {% include "pybb/poll_edit_form.html" %}
-                    </div>
-                {% endif %}
-                {% include "pybb/attachments_formset.html" %}
-                <p class="submit">{% include "pybb/_button_submit.html" %}</p>
-            </fieldset>
-        {% endwith %}
+            {% if request.user|pybb_may_create_poll and form.poll_type %}
+                <div class="poll-edit-container">
+                    <h2>{% trans "Include a poll" %}</h2>
+                    {% include "pybb/poll_edit_form.html" %}
+                </div>
+            {% endif %}
+
+            {% include "pybb/attachments_formset.html" %}
+
+            <p class="submit">{% include "pybb/_button_submit.html" %}</p>
+        </fieldset>
     </form>
 {% endif %} {# READONLY #}
 

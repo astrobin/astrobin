@@ -1,0 +1,6 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    A moderator moved your topic "{{ topic_name }}" from the forum "{{ old_forum_name }}" to the forum
+    "{{ new_forum_name }}".
+{% endblocktrans %}

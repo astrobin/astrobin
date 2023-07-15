@@ -1,0 +1,77 @@
+{
+  "id": "evt_3NBz3LC0tT6bv7Hd0xhv7FIq",
+  "object": "event",
+  "api_version": "2020-08-27",
+  "created": 1685101407,
+  "data": {
+    "object": {
+      "id": "pi_3NBz3LC0tT6bv7Hd0i65jNq8",
+      "object": "payment_intent",
+      "amount": 2100,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {
+        }
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+      "cancellation_reason": null,
+      "capture_method": "automatic",
+      "charges": {
+        "object": "list",
+        "data": [
+        ],
+        "has_more": false,
+        "total_count": 0,
+        "url": "/v1/charges?payment_intent=pi_3NBz3LC0tT6bv7Hd0i65jNq8"
+      },
+      "client_secret": "pi_3NBz3LC0tT6bv7Hd0i65jNq8_secret_tcfNWSVgfqYOMROYMgYMPwNl5",
+      "confirmation_method": "automatic",
+      "created": 1685101407,
+      "currency": "usd",
+      "customer": "STRIPE_CUSTOMER_ID",
+      "description": null,
+      "invoice": null,
+      "last_payment_error": null,
+      "latest_charge": null,
+      "livemode": false,
+      "metadata": {
+      },
+      "next_action": null,
+      "on_behalf_of": null,
+      "payment_method": null,
+      "payment_method_options": {
+        "card": {
+          "installments": null,
+          "mandate_options": null,
+          "network": null,
+          "request_three_d_secure": "automatic"
+        }
+      },
+      "payment_method_types": [
+        "card"
+      ],
+      "processing": null,
+      "receipt_email": "astrobin@astrobin.com",
+      "review": null,
+      "setup_future_usage": null,
+      "shipping": null,
+      "source": null,
+      "statement_descriptor": null,
+      "statement_descriptor_suffix": null,
+      "status": "requires_payment_method",
+      "transfer_data": null,
+      "transfer_group": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": "req_dFoD7PKOmO0dQe",
+    "idempotency_key": "63e405ec-a2e1-4bb3-ab38-d4f64b876e28"
+  },
+  "type": "payment_intent.created"
+}

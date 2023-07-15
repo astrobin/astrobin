@@ -4,6 +4,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load i18n %}
 {% load astrobin_apps_users_tags %}
+{% load common_tags %}
 
 {% block title %}{{object.name}}: {% trans "Moderate join requests" %}{% endblock %}
 
@@ -30,20 +31,24 @@
                     <td class="actions">
                         <a
                             href="#"
-                            class="handle-request btn"
+                            class="handle-request btn btn-success {% button_loading_class %}"
+                            data-no-instant
                             data-user="{{user.pk}}"
                             data-url="{% url 'group_approve_join_request' object.pk %}">
                             <i class="icon icon-thumbs-up"></i>
                             {% trans "Approve" %}
+                            {% button_loading_indicator %}
                         </a>
 
                         <a
                             href="#"
-                            class="handle-request btn"
+                            class="handle-request btn btn-danger {% button_loading_class %}"
+                            data-no-instant
                             data-user="{{user.pk}}"
                             data-url="{% url 'group_reject_join_request' object.pk %}">
                             <i class="icon icon-thumbs-down"></i>
                             {% trans "Reject" %}
+                            {% button_loading_indicator %}
                         </a>
 
                     </td>
@@ -63,10 +68,12 @@
             $("a.handle-request").live('click', function(e) {
                 e.preventDefault();
 
-                var $button = $(this),
+                const $button = $(this),
                     user = $button.data('user'),
                     $row = $button.parents('tr'),
                     $table = $row.parents('table');
+
+                $button.addClass('running')
 
                 $.ajax({
                     url: $button.data('url'),
@@ -75,17 +82,21 @@
                     timeout: 10000,
                     data: {'user': user},
                     dataType: 'json'
-                }).done(function(data) {
+                }).done(function() {
                     $row.remove();
                     if ($table.find('tbody tr').length === 0) {
                         $table.find('tbody').append(
-                                $('<tr>' +
-                                       '<td class="empty-table" colspan="2">' +
-                                            '{{ _("This group has no join requests.") | escapejs }}' +
-                                       '</td>' +
-                                  '</tr>')
+                            $('<tr>' +
+                                '<td class="empty-table" colspan="2">' +
+                                '{{ _("This group has no join requests.") | escapejs }}' +
+                                '</td>' +
+                                '</tr>')
                         );
                     }
+                }).fail(function () {
+                    alert("{{ _('Something went wrong, Please try again later.') | escapejs }}");
+                }).always(function() {
+                    $button.removeClass('running');
                 });
             });
         });

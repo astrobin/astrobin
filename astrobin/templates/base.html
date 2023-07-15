@@ -3,10 +3,10 @@
 {% load astrobin_apps_premium_tags %}
 {% load pipeline %}
 {% load django_bootstrap_breadcrumbs %}
-{% load cookielaw_tags %}
 {% load i18n %}
 {% load static %}
 {% load tags %}
+{% load cookie_consent_tags %}
 
 {% block breadcrumbs %}
     {% clear_breadcrumbs %}
@@ -25,8 +25,8 @@
         {% include "base/ie8html5.html" %}
 
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css">
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.tokeninput/1.6.0/styles/token-input.css">
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.multiselect/1.13/jquery.multiselect.css">
+        <link rel="stylesheet" href="https://cdn.astrobin.com/delivery/token-input-1.6.0.css">
+        <link rel="stylesheet" href="https://cdn.astrobin.com/delivery/jquery.multiselect-1.13.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.min.css">
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/vue-multiselect/2.1.4/vue-multiselect.min.css"
@@ -45,14 +45,14 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap2-toggle.min.css"
               integrity="sha512-ZSzRvNQMQa7fj7j5kNJDi/vbH7ZjQnAUwVHpNc5SOr3y3HdburytNTNN4taNJotSwwF1DAcnhtv8rkHvGGpGZg=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+        <link rel="stylesheet" href="https://cdn.astrobin.com/delivery/fancybox-4.0.css" />
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/css/sortable-theme-dark.min.css"
               integrity="sha512-yPf2RMYcTbUiIoIVRRM5fgH3+2bTFzqTjvEARS6nNPIYEHpqeWe8QkLlRpzuvqHhShCSYiN2ZsuuNth19etDYA=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700|Noto+Sans:400|Roboto+Mono&subset=latin-ext" rel="stylesheet">
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github-dark.min.css">
+        <link rel="stylesheet" href="https://cdn.astrobin.com/delivery/highlightjs-11.6.0-github-dark.min.css">
 
         {% use_high_contrast_theme as use_high_contrast_theme %}
         {% if use_high_contrast_theme %}
@@ -73,6 +73,10 @@
 
         <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
 
+        {% if request|is_gdpr_country %}
+            <script type="text/javascript" src="{% static "cookie_consent/cookiebar.js" %}"></script>
+        {% endif %}
+
         {% block extra_head %}{% endblock %}
 
         {% comment %}Alternative spelling.{% endcomment %}
@@ -84,7 +88,8 @@
     <body id="{% block page_body_id %}none{% endblock %}"
           {% if show_skyscraper_ads_on_page %}class="with-ads-sidebar"{% endif %}
           data-offset="60"
-          data-instant-allow-query-string>
+          data-instant-allow-query-string
+          data-instant-intensity="150">
 
         <!-- Google Tag Manager (noscript) -->
         <noscript>
@@ -92,10 +97,6 @@
                     style="display:none;visibility:hidden"></iframe>
         </noscript>
         <!-- End Google Tag Manager (noscript) -->
-
-        {% if request|show_cookie_banner %}
-            {% cookielaw_banner %}
-        {% endif %}
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -151,24 +152,58 @@
 
         {% block extra_js %}{% endblock %}
 
-        <!-- used to figure out how many users use ad blocking software -->
-        <script type="text/javascript">
-            document.write('<div id="adsense" style="visibility: hidden;">Test ad.</div>');
-            $(document).ready(checkAds());
+        {% if request|cookie_consent_enabled and request|is_gdpr_country and '/cookies/' not in request.path %}
+            {% not_accepted_or_declined_cookie_groups request as cookie_groups %}
 
-            /* Adblock Check */
-            function checkAds() {
-                if (gtag !== undefined) {
-                    var ad = document.getElementById('adsense');
-                    if (!ad || ad.innerHTML.length == 0 || ad.clientHeight === 0) {
-                        document.write("<script>gtag('set', {'Adblock': 'Blocked'});<\/sc" + "ript>");
-                    } else {
-                        document.write("<script>gtag('set', {'Adblock': 'Unblocked'});<\/sc" + "ript>");
+            {% if cookie_groups %}
+                {% url "cookie_consent_cookie_group_list" as url_cookies %}
+                {% cookie_consent_accept_url cookie_groups as url_accept %}
+                {% cookie_consent_decline_url cookie_groups as url_decline %}
+                <script type="text/javascript">
+                    const cookie_groups = [];
+
+                    {% for cookie_group in cookie_groups %}
+                        cookie_groups.push("{{ cookie_group.varname }}");
+                    {% endfor %}
+
+                    function ready(fn) {
+                        if (document.readyState !== "loading") {
+                            fn();
+                        } else if (document.addEventListener) {
+                            document.addEventListener("DOMContentLoaded", fn);
+                        } else {
+                            document.attachEvent("onreadystatechange", function () {
+                                if (document.readyState !== "loading")
+                                    fn();
+                            });
+                        }
                     }
-                }
-            }
-            /* End Adblock Check */
-        </script>
+
+                    ready(function () {
+                        showCookieBar({
+                            content: "{% filter escapejs %}{% spaceless %}{% include 'cookie_consent/cookiebar.html' %}{% endspaceless %}{% endfilter %}",
+                            cookie_groups: cookie_groups,
+                            cookie_decline: "{% get_decline_cookie_groups_cookie_string request cookie_groups %}",
+                            beforeDeclined: function () {
+                                document.cookie = "{% get_decline_cookie_groups_cookie_string request cookie_groups %}";
+                            }
+                        });
+
+                        document
+                            .querySelector(".cc-cookie-dismiss")
+                            .addEventListener('click', (e) => {
+                                e.preventDefault();
+
+                                const body = document.querySelector('body');
+                                const cookieBar = document.querySelector('.cookie-bar');
+
+                                cookieBar.style.display = "none";
+                                body.classList.remove('with-cookie-bar');
+                            });
+                    });
+                </script>
+            {% endif %}
+        {% endif %}
     </body>
 </html>
 

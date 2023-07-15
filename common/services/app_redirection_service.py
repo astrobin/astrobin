@@ -4,7 +4,6 @@ import urllib.request
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.http import HttpRequest
 
 from astrobin.enums import ImageEditorStep
 from common.constants import GroupName
@@ -17,14 +16,23 @@ class AppRedirectionService:
     @staticmethod
     def redirect(path: str) -> str:
         if settings.BASE_URL in path:
-            path = path.replace(settings.BASE_URL,  '')
+            path = path.replace(settings.BASE_URL, '')
+
+        from astrobin.middleware.thread_locals_middleware import get_current_user
+        user = get_current_user()
+
+        if (
+                user and
+                user.is_authenticated and
+                user.joined_group_set.filter(name=GroupName.BETA_TESTERS).exists() and
+                'localhost' not in settings.APP_URL
+        ):
+            return f'https://beta-app.astrobin.com/{path}'
 
         return f'{settings.APP_URL}{path}'
 
     @staticmethod
-    def contact_redirect(request):
-        # type: (HttpRequest) -> unicode
-
+    def contact_redirect(request) -> str:
         url = 'https://welcome.astrobin.com/contact'
         user = request.user
         params = {}
@@ -58,7 +66,6 @@ class AppRedirectionService:
 
     @staticmethod
     def image_editor_step_number(user: User, step: ImageEditorStep) -> int:
-        from astrobin_apps_users.services import UserService
 
         step_map = {
             ImageEditorStep.BASIC_INFORMATION: 1,

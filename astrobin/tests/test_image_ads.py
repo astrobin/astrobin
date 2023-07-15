@@ -6,6 +6,7 @@ from django.test import TestCase, override_settings
 from mock import patch
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class ImageAdsTest(TestCase):
@@ -41,7 +42,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_lite_see_ads(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Lite")
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_CLASSIC)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "subtle-container advertisement")
 
@@ -49,7 +50,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_lite_dont_see_ads_with_allow_ads_as_false(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Lite")
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_CLASSIC)
         self.user.userprofile.allow_astronomy_ads = False
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
@@ -60,7 +61,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_lite_2020_see_ads(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_2020)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "subtle-container advertisement")
 
@@ -68,7 +69,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_lite_2020_see_ads_with_allow_ads_as_false(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.LITE_2020)
         self.user.userprofile.allow_astronomy_ads = False
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
@@ -79,7 +80,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_premium_see_ads(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Premium")
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_CLASSIC)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "subtle-container advertisement")
 
@@ -87,7 +88,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_premium_dont_see_ads_with_allow_ads_as_false(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Premium")
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_CLASSIC)
         self.user.userprofile.allow_astronomy_ads = False
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
@@ -98,7 +99,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_premium_2020_see_ads(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_2020)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "subtle-container advertisement")
 
@@ -106,7 +107,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_premium_2020_dont_see_ads_with_allow_ads_as_false(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.PREMIUM_2020)
         self.user.userprofile.allow_astronomy_ads = False
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
@@ -117,7 +118,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_ultimate_2020_see_ads(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "subtle-container advertisement")
 
@@ -125,7 +126,7 @@ class ImageAdsTest(TestCase):
 
     def test_image_ultimate_2020_dont_see_ads_with_allow_ads_as_false(self):
         image = Generators.image()
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         self.user.userprofile.allow_astronomy_ads = False
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
@@ -138,6 +139,6 @@ class ImageAdsTest(TestCase):
         image = Generators.image()
         image.user = self.user
         image.save()
-        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertNotContains(response, "subtle-container advertisement")

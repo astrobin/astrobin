@@ -1,4 +1,7 @@
 {% load i18n %}
-{% blocktrans %}{{inviter}} invited you to join the group: "{{group_name}}"
 
-Visit the group here: {{group_page}}{% endblocktrans %}
+{% blocktrans %}{{inviter}} invited you to join the group: "{{group_name}}"{% endblocktrans %}.
+
+{% trans "Visit group" %}:
+{{group_page}}
+

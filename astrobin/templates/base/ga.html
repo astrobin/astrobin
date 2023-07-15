@@ -1,71 +1,75 @@
+{% load cookie_consent_tags %}
+{% load tags %}
+
 {% if GOOGLE_ANALYTICS_ID != "invalid" %}
-    <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-            'gtm.start':
-                new Date().getTime(), event: 'gtm.js'
-        });
-        var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-P24R3RF');</script>
-    <!-- End Google Tag Manager -->
+    {% if not request|is_gdpr_country or request|cookie_group_accepted:"analytics" %}
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag("js", new Date());
-
-        {% if user.is_authenticated %}
-            gtag("set", {"User Type": "Member"});
-            gtag("set", {"Username": "{{ user.username }}"});
-        {% else %}
-            gtag("set", {"User Type": "Anonymous"});
-        {% endif %}
-
-        gtag("config", "{{GOOGLE_ANALYTICS_ID}}", {
-            "linker": {
-                "domains": [
-                    "www.astrobin.com",
-                    "app.astrobin.com",
-                    "welcome.astrobin.com",
-                    "de.welcome.astrobin.com",
-                    "es.welcome.astrobin.com",
-                    "fr.welcome.astrobin.com",
-                    "it.welcome.astrobin.com",
-                    "pt.welcome.astrobin.com"
-                ],
-                "accept_incoming": true
-            }
-        });
-
-        {% if GOOGLE_ADS_ID != "invalid" %}
-            gtag("config", "{{ GOOGLE_ADS_ID }}");
-        {% endif %}
-
-        /**
-         * Function that registers a click on an outbound link in Analytics.
-         * This function takes a valid URL string as an argument, and uses that URL string
-         * as the event label. Setting the transport method to 'beacon' lets the hit be sent
-         * using 'navigator.sendBeacon' in browser that support it.
-         */
-        var getOutboundLink = function (target_url, request_url) {
-            gtag('event', 'click', {
-                'event_category': 'Outbound link',
-                'event_action': target_url,
-                'event_label': request_url,
-                'transport_type': 'beacon'
+        <!-- Google Tag Manager -->
+        <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
             });
-        }
-    </script>
-{% endif %}
+            const f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l !== 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P24R3RF');</script>
+        <!-- End Google Tag Manager -->
 
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag("js", new Date());
+
+            {% if user.is_authenticated %}
+                gtag("set", {"User Type": "Member"});
+            {% else %}
+                gtag("set", {"User Type": "Anonymous"});
+            {% endif %}
+
+            gtag("config", "{{GOOGLE_ANALYTICS_ID}}", {
+                "linker": {
+                    "domains": [
+                        "www.astrobin.com",
+                        "app.astrobin.com",
+                        "welcome.astrobin.com",
+                        "de.welcome.astrobin.com",
+                        "es.welcome.astrobin.com",
+                        "fr.welcome.astrobin.com",
+                        "it.welcome.astrobin.com",
+                        "pt.welcome.astrobin.com"
+                    ],
+                    "accept_incoming": true
+                }
+            });
+
+            {% if GOOGLE_ADS_ID != "invalid" %}
+                gtag("config", "{{ GOOGLE_ADS_ID }}");
+            {% endif %}
+
+            /**
+             * Function that registers a click on an outbound link in Analytics.
+             * This function takes a valid URL string as an argument, and uses that URL string
+             * as the event label. Setting the transport method to 'beacon' lets the hit be sent
+             * using 'navigator.sendBeacon' in browser that support it.
+             */
+            const getOutboundLink = function (target_url, request_url) {
+                gtag('event', 'click', {
+                    'event_category': 'Outbound link',
+                    'event_action': target_url,
+                    'event_label': request_url,
+                    'transport_type': 'beacon'
+                });
+            };
+        </script>
+    {% endif %}
+{% endif %}

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-15 08:01+0000\n"
-"PO-Revision-Date: 2023-05-15 09:48+0200\n"
+"POT-Creation-Date: 2023-07-06 15:27+0000\n"
+"PO-Revision-Date: 2023-07-06 14:10+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.28 20230504-1\n"
+"X-Loco-Api-Version: 1.0.28 20230626-1\n"
 
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Leider ist es jetzt zu spät, diesen Vorschlag zurückzuziehen."
@@ -35,7 +35,7 @@ msgid "You cannot submit your own image."
 msgstr "Du kannst nicht Dein eigenes Bild einreichen."
 
 msgid "You cannot submit an image you collaborated to."
-msgstr ""
+msgstr "Sie können kein Bild einreichen, an dem Sie mitgearbeitet haben."
 
 msgid "Images in the staging area cannot be submitted."
 msgstr "Bilder im Staging-Bereich können nicht eingereicht werden."
@@ -81,7 +81,7 @@ msgid "You cannot vote for your own image."
 msgstr "Du kannst nicht für Dein eigenes Bild stimmen."
 
 msgid "You cannot vote for an image you collaborated to."
-msgstr ""
+msgstr "Sie können nicht für ein Bild stimmen, an dem Sie mitgearbeitet haben."
 
 msgid "Images in the staging area cannot be voted for."
 msgstr "Für Bilder im Staging-Bereich kann nicht gestimmt werden."
@@ -131,7 +131,7 @@ msgid "You cannot elect your own image."
 msgstr "Du kannst nicht Dein eigenes Bild wählen."
 
 msgid "You cannot elect an image you collaborated to."
-msgstr ""
+msgstr "Sie können ein Bild, an dem Sie mitgearbeitet haben, nicht auswählen."
 
 msgid "Images in the staging area cannot be elected."
 msgstr "Bilder im Staging-Bereich können nicht ausgewählt werden."
@@ -206,6 +206,52 @@ msgstr "es gibt bereits %s geplante IOTD(s)."
 
 msgid "Image of the day"
 msgstr "Bild des Tages"
+
+msgid "You are not authenticated. Please log in."
+msgstr ""
+
+msgid "You are not the owner of this image."
+msgstr ""
+
+#, python-format
+msgid "Sorry, this feature requires a <a href=\"%(url)s\">paid account</a>."
+msgstr ""
+
+msgid "This image is in your staging area and hasn't been published yet"
+msgstr ""
+
+msgid "This image was already submitted."
+msgstr ""
+
+msgid ""
+"Images with subject type set to 'Gear' or 'Other' are not eligible for IOTD/"
+"TP consideration."
+msgstr ""
+
+msgid ""
+"Images without an imaging telescope and an imaging camera are not eligible "
+"for IOTD/TP consideration."
+msgstr ""
+
+msgid ""
+"Images without any acquisition sessions are not eligible for IOTD/TP "
+"consideration."
+msgstr ""
+
+msgid "Your settings indicate that you opted to be excluded from competitions."
+msgstr ""
+
+msgid "You are currently serving a ban from competitions on AstroBin."
+msgstr ""
+
+#, python-format
+msgid ""
+"Unfortunately it's too late: images can be submitted only within "
+"%(num_days)s days after publication."
+msgstr ""
+
+msgid "Unknown reason. This should never happen, please contact us!"
+msgstr ""
 
 #~ msgid ""
 #~ "You cannot submit an image that was published more than %(max_days)s days "

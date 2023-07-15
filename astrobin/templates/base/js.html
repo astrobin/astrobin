@@ -3,6 +3,8 @@
 {% load cache %}
 {% load astrobin_apps_premium_tags %}
 {% load common_tags %}
+{% load cookie_consent_tags %}
+{% load tags %}
 
 <!-- javascript -->
 <script type="text/javascript">
@@ -34,31 +36,33 @@
     }
 
     {% if request.user.is_authenticated %}
-        {% cache 600 hotjar_identify user.id request.LANGUAGE_CODE %}
-            function initHotjarIdentify() {
-                if (window.hj !== undefined) {
-                    var userId = "{{ request.user.id }}";
+        {% if not request|is_gdpr_country or request|cookie_group_accepted:'analytics' %}
+            {% cache 600 hotjar_identify user.id request.LANGUAGE_CODE %}
+                function initHotjarIdentify() {
+                    if (window.hj !== undefined) {
+                        const userId = "{{ request.user.id }}";
 
-                    window.hj("identify", userId, {
-                        "Registration date": new Date("{{ request.user.date_joined|date:"Y-m-d" }}").toISOString(),
-                        "Language": "{{ request.LANGUAGE_CODE }}",
-                        "Country": "{{ REQUEST_COUNTRY }}",
-                        "Images": {{ request.user.image_set.count }},
-                        "Is Free": "{{ valid_usersubscription|is_free }}" === "True",
-                        "Is Lite": "{{ valid_usersubscription|is_any_lite }}" === "True",
-                        "Is Premium": "{{ valid_usersubscription|is_any_premium }}" === "True",
-                        "Is Ultimate": "{{ valid_usersubscription|is_any_ultimate }}" === "True",
-                        "Is IOTD Staff": "{{ request.user|is_in_group:"iotd_staff" }}" === "True"
-                    });
-                } else {
-                    setTimeout(function() {
-                        initHotjarIdentify();
-                    }, 500);
+                        window.hj("identify", userId, {
+                            "Registration date": new Date("{{ request.user.date_joined|date:"Y-m-d" }}").toISOString(),
+                            "Language": "{{ request.LANGUAGE_CODE }}",
+                            "Country": "{{ REQUEST_COUNTRY }}",
+                            "Images": {{ request.user.image_set.count }},
+                            "Is Free": "{{ valid_usersubscription|is_free }}" === "True",
+                            "Is Lite": "{{ valid_usersubscription|is_any_lite }}" === "True",
+                            "Is Premium": "{{ valid_usersubscription|is_any_premium }}" === "True",
+                            "Is Ultimate": "{{ valid_usersubscription|is_any_ultimate }}" === "True",
+                            "Is IOTD Staff": "{{ request.user|is_in_group:"iotd_staff" }}" === "True"
+                        });
+                    } else {
+                        setTimeout(function() {
+                            initHotjarIdentify();
+                        }, 500);
+                    }
                 }
-            }
-        {% endcache %}
+            {% endcache %}
 
-        initHotjarIdentify();
+            initHotjarIdentify();
+        {% endif %}
     {% endif %}
 
     var dictionary = {
@@ -79,6 +83,8 @@
             is_authenticated: {{ request.user.is_authenticated|yesno:"true,false" }},
             open_notifications_in_new_tab: {{ request.user.userprofile.open_notifications_in_new_tab|yesno:"true,false" }}
         });
+
+        astrobin_stats.init();
 
         astrobin_common.setup_user_popovers();
 
@@ -160,8 +166,10 @@
                     const urlParams = new URLSearchParams(queryString);
                     const autoplay = urlParams.get('autoplay');
                     const speed = parseInt(urlParams.get('speed'), 10) || 5000;
+                    const transitions = urlParams.get('transitions')
 
                     $modal.find('#id_slideshow_autoplay').prop('checked', autoplay === 'true');
+                    $modal.find('#id_slideshow_transitions').prop('checked', transitions === 'true');
                     $modal.find('#id_slideshow_play_speed').val(speed);
 
                     $.uniform.update();
@@ -237,6 +245,7 @@
                 destroy: (fancybox) => {
                     let url = astrobin_common.remove_url_param(window.location.href, 'slideshow');
                     url = astrobin_common.remove_url_param(url, 'autoplay');
+                    url = astrobin_common.remove_url_param(url, 'transitions');
                     url = astrobin_common.remove_url_param(url, 'loop');
                     url = astrobin_common.remove_url_param(url, 'speed');
 
@@ -275,6 +284,13 @@
             astrobin_common.update_fancybox_share_links();
         });
 
+        $('#fancybox-settings-modal #id_slideshow_transitions').change(function () {
+            let url = astrobin_common.add_or_update_url_param(window.location.href, 'transitions', this.checked);
+            window.history.pushState({path: url}, '', url);
+
+            astrobin_common.update_fancybox_share_links();
+        });
+
         $('#fancybox-settings-modal #id_slideshow_play_speed').change(function () {
             let url = astrobin_common.add_or_update_url_param(window.location.href, 'speed', $(this).val());
             window.history.pushState({path: url}, '', url);
@@ -287,6 +303,7 @@
             const slideshow = instance.plugins.Toolbar.Slideshow;
 
             const autoplay = $('#fancybox-settings-modal #id_slideshow_autoplay')[0].checked;
+            const transitions = $('#fancybox-settings-modal #id_slideshow_transitions')[0].checked;
             const speed = parseInt($('#fancybox-settings-modal #id_slideshow_play_speed').val(), 10);
 
             let url = astrobin_common.add_or_update_url_param(window.location.href, 'autoplay', autoplay);
@@ -295,6 +312,9 @@
 
             instance.options.slideshow = instance.options.slideshow || {};
             instance.options.slideshow.delay = speed;
+            instance.options.Carousel = instance.options.Carousel || {};
+            instance.options.Carousel.friction = transitions ? 0.92 : 0;
+            instance.plugins.Toolbar.fancybox.Carousel.options.friction = instance.options.Carousel.friction;
 
             if (autoplay) {
                 slideshow.activate();

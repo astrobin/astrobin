@@ -40,7 +40,8 @@ class CommentPostSaveTest(TestCase):
     def test_non_pending_moderation_sends_correct_notifications(
             self, push_notification, send_notifications,
             send_moderation_required_email):
-        comment = NestedCommentsGenerators.comment()
+        author = Generators.user(email="foo@astrobin.com")
+        comment = NestedCommentsGenerators.comment(author=author)
 
         send_moderation_required_email.assert_not_called()
         send_notifications.assert_called()
