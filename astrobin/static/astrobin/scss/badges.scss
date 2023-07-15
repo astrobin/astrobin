@@ -8,7 +8,8 @@
 .wip-badge,
 .iotd-badge,
 .top-pick-badge,
-.top-pick-nomination-badge {
+.top-pick-nomination-badge,
+.iotd-queue-badge {
   text-align: center;
   margin: 0;
   padding: 0;
@@ -85,4 +86,20 @@
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $bronze 0 0 10px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
+}
+
+.iotd-queue-badge {
+  background: $green;
+  background: -webkit-gradient(linear, left top, left bottom, from($green), to(darken($green, 10%)));
+  background: -webkit-linear-gradient(top, $green, darken($green, 10%));
+  background: -moz-linear-gradient(top, $green, darken($green, 10%));
+  background: -ms-linear-gradient(top, $green, darken($green, 10%));
+  background: -o-linear-gradient(top, $green, darken($green, 10%));
+  background-image: -ms-linear-gradient(top, $green 0%, darken($green, 10%) 100%);
+  color: $white;
+
+
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $green 0 0 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $green 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $green 0 0 10px;
 }

@@ -28,33 +28,47 @@
                 {% for badge in badges %}
                     {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' and alias != 'regular_large' and alias != 'regular_large_sharpened' %}
                         <li>
-                            <i class="icon-trophy iotd-badge badge"></i>
+                            <i class="icon-trophy iotd-badge badge" rel="tooltip"
+                               title="{% trans "Image of the day" %}">
+                            </i>
                         </li>
                     {% endif %}
 
                     {% if badge == 'top-pick' %}
                         <li>
-                            <i class="icon-star top-pick-badge badge"></i>
+                            <i class="icon-star top-pick-badge badge" rel="tooltip" data-placement="right"
+                               data-container="body" title="{% trans "Top pick" %}">
+                            </i>
                         </li>
                     {% endif %}
 
                     {% if badge == 'top-pick-nomination' %}
                         <li>
-                            <i class="icon-arrow-up top-pick-nomination-badge badge"></i>
+                            <i class="icon-arrow-up top-pick-nomination-badge badge" rel="tooltip" data-container="body"
+                               data-placement="right" title="{% trans "Top pick nomination" %}">
+                            </i>
+                        </li>
+                    {% endif %}
+
+                    {% if badge == 'iotd-queue' %}
+                        <li>
+                            <i class="icon-legal iotd-queue-badge badge" rel="tooltip" data-placement="right"
+                               data-container="body" title="{% trans "Currently in the IOTD/TP queue" %}">
+                            </i>
                         </li>
                     {% endif %}
 
                     {% if badge == 'wip' %}
                         <li>
-                            <i class="icon-lock wip-badge badge"
-                               rel="tooltip" data-placement="right" title="{% trans "Staging area" %}"></i>
+                            <i class="icon-lock wip-badge badge" rel="tooltip" data-placement="right"
+                               data-container="body" title="{% trans "Staging area" %}"></i>
                         </li>
                     {% endif %}
 
                     {% if badge == 'collaboration' %}
                         <li>
                             <i class="icon-group collaboration-badge badge" rel="tooltip" data-placement="right"
-                               title="{% trans "Collaboration" %}"></i>
+                               data-container="body" title="{% trans "Collaboration" %}"></i>
                         </li>
                     {% endif %}
                 {% endfor %}
