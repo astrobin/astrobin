@@ -82,8 +82,7 @@ def create_checkout_session(request, user_pk: int, product: str, currency: str, 
     except ValueError as e:
         return HttpResponseBadRequest(e)
 
-    country_code = user.userprofile.signup_country or get_client_country_code(request) or 'us'
-    country_code = country_code.lower() if country_code != 'UNKNOWN' else 'us'
+    country_code = PricingService.get_user_country_code(user, request)
 
     price = PricingService.get_full_price(
         SubscriptionDisplayName.from_string(product),
@@ -159,6 +158,8 @@ def create_checkout_session(request, user_pk: int, product: str, currency: str, 
             except Exception as e:
                 log.exception("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, str(e)))
                 return JsonResponse({'error': 'Internal error: %s' % str(e)})
+        else:
+            return JsonResponse({'error': 'Internal error: %s' % str(e)})
 
 
 @csrf_exempt
@@ -173,7 +174,7 @@ def upgrade_subscription(request, user_pk: int, product: str, currency: str, rec
     except ValueError as e:
         return HttpResponseBadRequest(e)
 
-    country_code = get_client_country_code(request)
+    country_code = PricingService.get_user_country_code(user, request)
 
     price = PricingService.get_stripe_price_object(
         SubscriptionDisplayName.from_string(product),
