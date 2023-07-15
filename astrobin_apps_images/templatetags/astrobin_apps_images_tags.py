@@ -185,15 +185,19 @@ def astrobin_image(context, image, alias, **kwargs):
             'regular', 'regular_inverted', 'regular_sharpened',
             'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
     ):
+        iotd_service = IotdService()
 
-        if IotdService().is_iotd(image):
-            badges.append('iotd')
-        elif IotdService().is_top_pick(image):
-            badges.append('top-pick')
-        elif IotdService().is_top_pick_nomination(image):
-            badges.append('top-pick-nomination')
-        elif image.is_wip:
+        if image.is_wip:
             badges.append('wip')
+        elif iotd_service.is_in_iotd_queue(image):
+            if request.user == image.user or request.user.is_superuser:
+                badges.append('iotd-queue')
+        elif iotd_service.is_iotd(image):
+            badges.append('iotd')
+        elif iotd_service.is_top_pick(image):
+            badges.append('top-pick')
+        elif iotd_service.is_top_pick_nomination(image):
+            badges.append('top-pick-nomination')
 
         if image.collaborators.exists():
             badges.append('collaboration')

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from astrobin_apps_iotd.models import (
-    IotdStats, IotdSubmission, IotdVote, Iotd, TopPickNominationsArchive,
+    IotdStats, IotdSubmission, IotdSubmissionQueueEntry, IotdVote, Iotd, TopPickNominationsArchive,
     TopPickArchive,
 )
 
@@ -56,3 +56,11 @@ class TopPickArchiveAdmin(admin.ModelAdmin):
 
 
 admin.site.register(TopPickArchive, TopPickArchiveAdmin)
+
+
+class IotdSubmissionQueueEntryAdmin(admin.ModelAdmin):
+    fields = ('image',)
+    list_display = ('image',)
+
+
+admin.site.register(IotdSubmissionQueueEntry, IotdSubmissionQueueEntryAdmin)
