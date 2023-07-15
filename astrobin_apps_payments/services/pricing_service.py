@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from stripe.error import StripeError
 from subscription.models import UserSubscription
 
+from astrobin.utils import get_client_country_code
 from astrobin_apps_payments.types import StripeSubscription
 from astrobin_apps_payments.types.subscription_recurring_unit import SubscriptionRecurringUnit
 from astrobin_apps_premium.services.premium_service import SubscriptionDisplayName, SubscriptionName
@@ -522,3 +523,10 @@ class PricingService:
         except StripeError as e:
             logger.warning("User %d tried to use non-existing coupon %s" % (user.pk, referral_code))
             return None
+
+    @staticmethod
+    def get_user_country_code(user, request) -> str:
+        # When it comes to pricing, we use the user's signup country when available.
+        country_code = user.userprofile.signup_country or get_client_country_code(request) or 'us'
+        country_code = country_code.lower() if country_code != 'UNKNOWN' else 'us'
+        return country_code

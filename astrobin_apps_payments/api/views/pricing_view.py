@@ -21,7 +21,14 @@ class PricingView(JSONResponseMixin, View):
         currency: str = kwargs.pop('currency', None)
         recurring_unit: Optional[SubscriptionRecurringUnit] = \
             SubscriptionRecurringUnit.from_string(kwargs.pop('recurring_unit', None))
-        country_code = get_client_country_code(request)
+
+        user = request.user
+        if not user.is_authenticated and 'HTTP_AUTHORIZATION' in request.META:
+            token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
+            token = Token.objects.get(key=token_in_header)
+            user = token.user
+
+        country_code = PricingService.get_user_country_code(user, request)
 
         if product is None or product not in (
                 SubscriptionDisplayName.LITE,
@@ -34,12 +41,6 @@ class PricingView(JSONResponseMixin, View):
         if currency is None or currency.upper() not in settings.SUPPORTED_CURRENCIES:
             log.error('pricing_view: invalid currency: %s' % currency)
             return HttpResponseBadRequest("Unsupported currency")
-
-        user = request.user
-        if not user.is_authenticated and 'HTTP_AUTHORIZATION' in request.META:
-            token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
-            token = Token.objects.get(key=token_in_header)
-            user = token.user
 
         return self.render_json_response(
             {
