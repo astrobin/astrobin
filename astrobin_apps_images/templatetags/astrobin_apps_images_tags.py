@@ -320,6 +320,9 @@ def cache_image_list(context):
     if context['requested_user'] and context['request'].user == context['requested_user']:
         return False
 
+    if context['request'].user.is_superuser:
+        return False
+
     # Don't cache pages.
     if context['request'].GET.get('image_list_page'):
         return False
