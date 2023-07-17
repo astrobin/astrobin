@@ -397,7 +397,7 @@ class IotdService:
         IotdSubmissionQueueEntry.objects.exclude(submitter__groups__name=GroupName.IOTD_SUBMITTERS).delete()
         IotdReviewQueueEntry.objects.exclude(reviewer__groups__name=GroupName.IOTD_REVIEWERS).delete()
         IotdJudgementQueueEntry.objects.exclude(judge__groups__name=GroupName.IOTD_JUDGES).delete()
-    
+
     def get_inactive_submitter_and_reviewers(self, days):
         inactive_members = []
         members = User.objects.filter(groups__name__in=[GroupName.IOTD_SUBMITTERS, GroupName.IOTD_REVIEWERS])

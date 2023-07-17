@@ -1,6 +1,7 @@
 from rest_framework import permissions
 
 from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 
 class IsIotdSubmitter(permissions.BasePermission):
