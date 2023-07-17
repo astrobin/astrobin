@@ -527,6 +527,6 @@ class PricingService:
     @staticmethod
     def get_user_country_code(user, request) -> str:
         # When it comes to pricing, we use the user's signup country when available.
-        country_code = user.userprofile.signup_country or get_client_country_code(request) or 'us'
-        country_code = country_code.lower() if country_code != 'UNKNOWN' else 'us'
-        return country_code
+        profile_country = getattr(user, 'userprofile', None) and user.userprofile.signup_country
+        country_code = (profile_country or get_client_country_code(request) or 'us').lower()
+        return 'us' if country_code == 'UNKNOWN' else country_code
