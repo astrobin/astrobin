@@ -12,23 +12,24 @@ from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
 from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 register = Library()
 
 
 @register.filter
 def is_iotd_submitter(user) -> bool:
-    return UserService(user).is_in_group('iotd_submitters')
+    return UserService(user).is_in_group(GroupName.IOTD_SUBMITTERS)
 
 
 @register.filter
 def is_iotd_reviewer(user) -> bool:
-    return UserService(user).is_in_group('iotd_reviewers')
+    return UserService(user).is_in_group(GroupName.IOTD_REVIEWERS)
 
 
 @register.filter
 def is_iotd_judge(user) -> bool:
-    return UserService(user).is_in_group('iotd_judges')
+    return UserService(user).is_in_group(GroupName.IOTD_JUDGES)
 
 
 @register.filter

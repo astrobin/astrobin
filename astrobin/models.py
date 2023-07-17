@@ -25,6 +25,7 @@ from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBran
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.services import DateTimeService
 from common.upload_paths import data_download_upload_path, image_upload_path, uncompressed_source_upload_path
 from common.utils import get_sentinel_user
@@ -2935,16 +2936,16 @@ class UserProfile(SafeDeleteModel):
         return UserService(self.user).is_in_group('image_moderators')
 
     def is_iotd_staff(self):
-        return UserService(self.user).is_in_group('iotd_staff')
+        return UserService(self.user).is_in_group(GroupName.IOTD_STAFF)
 
     def is_iotd_submitter(self):
-        return UserService(self.user).is_in_group('iotd_submitters')
+        return UserService(self.user).is_in_group(GroupName.IOTD_SUBMITTERS)
 
     def is_iotd_reviewer(self):
-        return UserService(self.user).is_in_group('iotd_reviewers')
+        return UserService(self.user).is_in_group(GroupName.IOTD_REVIEWERS)
 
     def is_iotd_judge(self):
-        return UserService(self.user).is_in_group('iotd_judges')
+        return UserService(self.user).is_in_group(GroupName.IOTD_JUDGES)
 
     class Meta:
         app_label = 'astrobin'

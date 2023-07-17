@@ -7,6 +7,7 @@ from django.contrib.auth.models import Group
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.utils import push_notification
+from common.constants import GroupName
 from common.services import DateTimeService
 
 logger = logging.getLogger(__name__)
@@ -28,9 +29,9 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
     final_notice_members = IotdService().get_inactive_submitter_and_reviewers(final_notice_days)
     if final_notice_members:
         for member in final_notice_members:
-            member.groups.remove(Group.objects.get(name='iotd_staff'))
-            member.groups.remove(Group.objects.get(name='iotd_reviewers'))
-            member.groups.remove(Group.objects.get(name='iotd_submitters'))
+            member.groups.remove(Group.objects.get(name=GroupName.IOTD_STAFF))
+            member.groups.remove(Group.objects.get(name=GroupName.IOTD_REVIEWERS))
+            member.groups.remove(Group.objects.get(name=GroupName.IOTD_SUBMITTERS))
 
         push_notification(final_notice_members, None, 'iotd_staff_inactive_removal_notice', {
             'BASE_URL': settings.BASE_URL,
@@ -52,11 +53,18 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
     reminder_1_days = settings.IOTD_INACTIVE_MEMBER_REMINDER_1_DAYS
     reminder_1_members = IotdService().get_inactive_submitter_and_reviewers(reminder_1_days)
     if reminder_1_members:
-        push_notification(reminder_1_members, None, 'iotd_staff_inactive_warning', {
-            'BASE_URL': settings.BASE_URL,
-            'days': reminder_1_days,
-            'max_inactivity_days': final_notice_days
-        })
+        push_notification(
+            reminder_1_members, None, 'iotd_staff_inactive_warning', {
+                'BASE_URL': settings.BASE_URL,
+                'days': reminder_1_days,
+                'max_inactivity_days': final_notice_days
+            }
+        )
+
+
+@shared_task(time_limit=60)
+def clear_stale_queue_entries():
+    IotdService().clear_stale_queue_entries()
 
 
 @shared_task(time_limit=180)

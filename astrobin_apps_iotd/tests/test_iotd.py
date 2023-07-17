@@ -13,6 +13,7 @@ from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_iotd.models import *
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_premium.services.premium_service import SubscriptionName
+from common.constants import GroupName
 
 
 @override_settings(
@@ -24,18 +25,18 @@ class IotdTest(TestCase):
         self.submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         self.submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
         self.submitter_3 = User.objects.create_user('submitter_3', 'submitter_3@test.com', 'password')
-        self.submitters = Group.objects.create(name='iotd_submitters')
+        self.submitters = Group.objects.create(name=GroupName.IOTD_SUBMITTERS)
         self.submitters.user_set.add(self.submitter_1, self.submitter_2, self.submitter_3)
 
         self.reviewer_1 = User.objects.create_user('reviewer_1', 'reviewer_1@test.com', 'password')
         self.reviewer_2 = User.objects.create_user('reviewer_2', 'reviewer_2@test.com', 'password')
         self.reviewer_3 = User.objects.create_user('reviewer_3', 'reviewer_3@test.com', 'password')
-        self.reviewers = Group.objects.create(name='iotd_reviewers')
+        self.reviewers = Group.objects.create(name=GroupName.IOTD_REVIEWERS)
         self.reviewers.user_set.add(self.reviewer_1, self.reviewer_2, self.reviewer_3)
 
         self.judge_1 = User.objects.create_user('judge_1', 'judge_1@test.com', 'password')
         self.judge_2 = User.objects.create_user('judge_2', 'judge_2@test.com', 'password')
-        self.judges = Group.objects.create(name='iotd_judges')
+        self.judges = Group.objects.create(name=GroupName.IOTD_JUDGES)
         self.judges.user_set.add(self.judge_1, self.judge_2)
 
         self.user = User.objects.create_user('user', 'user@test.com', 'password')
@@ -239,9 +240,9 @@ class IotdTest(TestCase):
     @override_settings(IOTD_MAX_DISMISSALS=3)
     def test_submission_model_cannot_submit_image_that_was_dismissed_3_times(self):
         Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
-        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
-        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
-        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=[GroupName.IOTD_SUBMITTERS]))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=[GroupName.IOTD_SUBMITTERS]))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=[GroupName.IOTD_SUBMITTERS]))
         with self.assertRaisesRegex(ValidationError, " has been dismissed by 3 members"):
             IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
 
@@ -378,9 +379,9 @@ class IotdTest(TestCase):
     def test_vote_model_cannot_vote_image_that_was_dismissed_3_times(self):
         Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
         IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
-        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
-        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
-        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=[GroupName.IOTD_SUBMITTERS]))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=[GroupName.IOTD_SUBMITTERS]))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=[GroupName.IOTD_SUBMITTERS]))
         with self.assertRaisesRegex(ValidationError, " has been dismissed by 3 members"):
             IotdVote.objects.create(reviewer=self.reviewer_1, image=self.image)
 
@@ -728,19 +729,19 @@ class IotdTest(TestCase):
         judges_group = AstroBinGroup.objects.create(name='IOTD Judges', creator=group_creator, owner=group_creator,
                                                     category=101)
 
-        staff_group_dj, created = Group.objects.get_or_create(name='iotd_staff')
+        staff_group_dj, created = Group.objects.get_or_create(name=GroupName.IOTD_STAFF)
         self.assertFalse(created)
 
         content_moderators_group_dj, created = Group.objects.get_or_create(name='content_moderators')
         self.assertFalse(created)
 
-        submitters_group_dj, created = Group.objects.get_or_create(name='iotd_submitters')
+        submitters_group_dj, created = Group.objects.get_or_create(name=GroupName.IOTD_SUBMITTERS)
         self.assertFalse(created)
 
-        reviewers_group_dj, created = Group.objects.get_or_create(name='iotd_reviewers')
+        reviewers_group_dj, created = Group.objects.get_or_create(name=GroupName.IOTD_REVIEWERS)
         self.assertFalse(created)
 
-        judges_group_dj, created = Group.objects.get_or_create(name='iotd_judges')
+        judges_group_dj, created = Group.objects.get_or_create(name=GroupName.IOTD_JUDGES)
         self.assertFalse(created)
 
         submitters_group.members.add(self.user)

@@ -60,6 +60,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_any_paid_subscription, is_any_ultimate, is_free, is_lite, is_lite_2020, is_premium, is_premium_2020,
 )
 from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import AppRedirectionService, DateTimeService, SearchIndexUpdateService
 from common.services.mentions_service import MentionsService
@@ -824,9 +825,9 @@ def group_members_changed(sender, instance, **kwargs):
     pk_set = kwargs['pk_set']
 
     group_sync_map = {
-        'IOTD Submitters': ['iotd_submitters', 'content_moderators', 'iotd_staff'],
-        'IOTD Reviewers': ['iotd_reviewers', 'content_moderators', 'iotd_staff'],
-        'IOTD Judges': ['iotd_judges', 'content_moderators', 'iotd_staff'],
+        'IOTD Submitters': [GroupName.IOTD_SUBMITTERS, 'content_moderators', GroupName.IOTD_STAFF],
+        'IOTD Reviewers': [GroupName.IOTD_REVIEWERS, 'content_moderators', GroupName.IOTD_STAFF],
+        'IOTD Judges': [GroupName.IOTD_JUDGES, 'content_moderators', GroupName.IOTD_STAFF],
     }
     if instance.name in list(group_sync_map.keys()):
         for django_group in group_sync_map[instance.name]:
