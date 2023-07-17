@@ -24,6 +24,23 @@ class TestApiSensorViewSet(TestCase):
         self.assertEquals(1, response.data['count'])
         self.assertEquals(sensor.name, response.data['results'][0]['name'])
 
+    def test_detail_contains_related_cameras(self):
+        client = APIClient()
+
+        sensor1 = EquipmentGenerators.sensor(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        sensor2 = EquipmentGenerators.sensor(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        camera1a = EquipmentGenerators.camera(reviewer_decision=EquipmentItemReviewerDecision.APPROVED, sensor=sensor1)
+        camera1b = EquipmentGenerators.camera(reviewer_decision=EquipmentItemReviewerDecision.APPROVED, sensor=sensor1)
+        camera2 = EquipmentGenerators.camera(reviewer_decision=EquipmentItemReviewerDecision.APPROVED, sensor=sensor2)
+
+        camera1b.user_count = 1
+        camera1b.save()
+
+        response = client.get(reverse('astrobin_apps_equipment:sensor-detail', args=(sensor1.pk,)), format='json')
+        self.assertEquals([camera1b.id, camera1a.id], list(response.data['cameras']))
+        response = client.get(reverse('astrobin_apps_equipment:sensor-detail', args=(sensor2.pk,)), format='json')
+        self.assertEquals([camera2.id], list(response.data['cameras']))
+
     def test_deleting_not_allowed(self):
         client = APIClient()
 
