@@ -51,9 +51,11 @@ class ForumViewSet(viewsets.ModelViewSet):
                 .filter(distance__lte=.75)
 
         if is_equipment:
-            queryset = queryset\
-                .filter(category__slug='equipment-forums')\
-                .order_by(Lower('name'))
+            queryset = queryset.filter(category__slug='equipment-forums')
+            if q:
+                queryset = queryset.order_by('distance', Lower('name'))
+            else:
+                queryset = queryset.order_by(Lower('name'))
         else:
             queryset = queryset\
                 .exclude(category__slug='equipment-forums')\
