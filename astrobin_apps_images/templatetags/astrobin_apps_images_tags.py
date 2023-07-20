@@ -6,8 +6,8 @@ import zlib
 from PIL.Image import DecompressionBombError
 from django.conf import settings
 from django.core.cache import cache
-from django.urls import reverse
 from django.template import Library
+from django.urls import reverse
 from django.utils.translation import ugettext as _
 
 from astrobin.models import Image, ImageRevision
@@ -94,6 +94,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'fancybox_url': None,
             'rel': rel,
             'slug': slug,
+            'show_video': False,
         }
 
     # Old images might not have a size in the database, let's fix it.
@@ -292,13 +293,24 @@ def astrobin_image(context, image, alias, **kwargs):
         'instant': instant,
         'fancybox': fancybox,
         'fancybox_tooltip': fancybox_tooltip,
-        'fancybox_url': settings.BASE_URL + reverse('image_rawthumb', kwargs={
-            'id': image.get_id(),
-            'alias': 'qhd',
-            'r': revision_label,
-        }) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
+        'fancybox_url': settings.BASE_URL + reverse(
+            'image_rawthumb', kwargs={
+                'id': image.get_id(),
+                'alias': 'qhd',
+                'r': revision_label,
+            }
+        ) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
         'rel': rel,
         'slug': slug,
+        'show_video': alias in (
+            'regular', 'regular_sharpened',
+            'regular_large', 'regular_large_sharpened',
+            'hd', 'hd_sharpened',
+            'qhd', 'qhd_sharpened',
+            'real'
+        ) and (
+            bool(image_revision.video_file.name) if hasattr(image_revision, 'label') else bool(image.video_file.name)
+        ),
     }.items()))
 
 

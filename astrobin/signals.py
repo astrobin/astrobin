@@ -35,7 +35,10 @@ from subscription.signals import paid, signed_up, unsubscribed
 from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
-from astrobin.tasks import invalidate_cdn_caches, process_camera_rename_proposal
+from astrobin.tasks import (
+    encode_video_file, generate_video_preview, invalidate_cdn_caches,
+    process_camera_rename_proposal,
+)
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tasks import approve_migration_strategy
@@ -152,6 +155,8 @@ pre_save.connect(image_pre_save_invalidate_thumbnails, sender=Image)
 
 
 def image_post_save(sender, instance: Image, created: bool, **kwargs):
+    if kwargs.get('update_fields', None):
+        return
 
     if getattr(instance, DELETED_FIELD_NAME, None):
         return
@@ -200,6 +205,18 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             )
 
     if not instance.uploader_in_progress:
+        if instance.video_file.name and not instance.image_file.name:
+            generate_video_preview.apply_async(
+                args=(instance.pk, ContentType.objects.get_for_model(Image).pk),
+                countdown=5
+            )
+
+        if instance.video_file.name and not instance.encoded_video_file.name:
+            encode_video_file.apply_async(
+                args=(instance.pk, ContentType.objects.get_for_model(Image).pk),
+                countdown=5
+            )
+
         groups = instance.user.joined_group_set.filter(autosubmission=True)
         for group in groups:
             if instance.is_wip:

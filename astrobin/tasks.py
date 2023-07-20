@@ -3,6 +3,8 @@ import json
 import ntpath
 import os
 import subprocess
+import tempfile
+import time
 import uuid
 import zipfile
 from datetime import datetime, timedelta
@@ -31,6 +33,7 @@ from django.utils.text import slugify
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 from hitcount.models import HitCount
+from moviepy.video.io.VideoFileClip import VideoFileClip
 from pybb.models import Post
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
@@ -119,7 +122,7 @@ def delete_inactive_bounced_accounts():
 def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     from astrobin.models import Image
 
-    LOCK_EXPIRE = 1
+    LOCK_EXPIRE = 300
     lock_id = 'retrieve_thumbnail_%d_%s_%s' % (pk, revision_label, alias)
 
     acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
@@ -152,6 +155,83 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
         return
 
     logger.debug('retrieve_thumbnail task is already running')
+
+
+@shared_task(time_limit=300, acks_late=True)
+def generate_video_preview(object_id: int, content_type_id: int):
+    ct = ContentType.objects.get_for_id(content_type_id)
+    obj = ct.get_object_for_this_type(pk=object_id)
+
+    logger.debug('Generating video preview for %s' % obj)
+
+    _, file_extension = os.path.splitext(obj.uploader_name)
+
+    with obj.video_file.open() as f:
+        with tempfile.NamedTemporaryFile(suffix=file_extension, delete=False) as temp_file:
+            # Write the content of the file object to the temporary file
+            temp_file.write(f.read())
+            temp_path = temp_file.name
+
+    video = VideoFileClip(temp_path)
+    thumbnail_path = f'video-thumb-{content_type_id}-{object_id}-{datetime.now().timestamp()}.jpg'
+    video.save_frame(thumbnail_path, t=video.duration / 2)
+    thumbnail_file = File(open(thumbnail_path, "rb"))
+    obj.image_file.save("video-thumbnail.jpg", thumbnail_file, save=False)
+    obj.save(update_fields=['image_file'])
+
+    os.unlink(temp_path)
+    os.unlink(thumbnail_path)
+
+
+@shared_task(time_limit=1800, acks_late=True)
+def encode_video_file(object_id: int, content_type_id: int):
+    LOCK_EXPIRE = 1800
+    lock_id = 'encode_video_file_%d_%d' % (content_type_id, object_id)
+
+    acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
+    release_lock = lambda: cache.delete(lock_id)
+
+    if acquire_lock():
+        ct = ContentType.objects.get_for_id(content_type_id)
+        obj = ct.get_object_for_this_type(pk=object_id)
+
+        logger.debug('Encoding video file for %s' % obj)
+
+        _, file_extension = os.path.splitext(obj.uploader_name)
+
+        with obj.video_file.open() as f:
+            with tempfile.NamedTemporaryFile(suffix=file_extension, delete=False) as temp_file:
+                # Write the content of the file object to the temporary file
+                temp_file.write(f.read())
+                temp_path = temp_file.name
+
+        video = VideoFileClip(temp_path)
+
+        with tempfile.NamedTemporaryFile(suffix='.mp4', delete=False) as output_file:
+            video.write_videofile(
+                output_file.name,
+                codec='libx264',
+                audio_codec='aac',
+                ffmpeg_params=[
+                    '-c:v', 'libx264',
+                    '-crf', '18',
+                    '-pix_fmt', 'yuv420p',
+                    '-map_metadata', '0',
+                    '-color_primaries', 'bt709',
+                    '-color_trc', 'bt709',
+                    '-colorspace', 'bt709',
+                    '-color_range', 'tv'
+                ]
+            )
+
+            output_file.seek(0)  # reset file pointer to beginning
+            django_file = File(output_file)
+            obj.encoded_video_file.save(f"encoded_{obj.uploader_name}.mp4", django_file, save=False)
+            obj.save(update_fields=['encoded_video_file'])
+
+        video.close()
+        os.unlink(temp_path)
+        release_lock()
 
 
 @shared_task(time_limit=60)

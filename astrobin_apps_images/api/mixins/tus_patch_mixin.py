@@ -29,10 +29,13 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             delete_kwargs['force_policy'] = HARD_DELETE
         obj.delete(**delete_kwargs)
 
-    def get_file_field_name(self):
+    def get_file_field_name(self, mime_type: str):
         raise NotImplementedError
 
-    def get_upload_path_function(self):
+    def get_upload_path_function(self, mime_type: str):
+        raise NotImplementedError
+
+    def verify_file(self, file_path: str, mime_type: str):
         raise NotImplementedError
 
     def get_chunk(self, request):
@@ -145,7 +148,10 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             # Save file
             temporary_file = get_or_create_temporary_file(object)
 
-            if not self.verify_file(temporary_file):
+            metadata = self.get_cached_property("metadata", object)
+            mime_type = metadata.get('mimeType', None)
+
+            if not self.verify_file(temporary_file, mime_type):
                 msg = "file verification failed"
                 log.warning("Chunked uploader (%d) (%d): %s" % (request.user.pk, object.pk, msg))
                 os.remove(temporary_file)
@@ -156,12 +162,12 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
                 request.user.pk, object.pk, temporary_file))
 
             try:
-                getattr(object, self.get_file_field_name()).save(
-                    self.get_upload_path_function()(object, self.get_cached_property("name", object)),
+                getattr(object, self.get_file_field_name(mime_type)).save(
+                    self.get_upload_path_function(mime_type)(object, self.get_cached_property("name", object)),
                     File(open(temporary_file, 'rb'))
                 )
 
-                if hasattr(object, 'animated'):
+                if hasattr(object, 'animated') and mime_type.startswith('image'):
                     with PILImage.open(temporary_file) as image_file:
                         object.animated = getattr(image_file, 'is_animated', False)
 

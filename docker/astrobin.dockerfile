@@ -9,8 +9,16 @@ COPY docker/patch-uname.sh /usr/bin/astrobin-patch-uname.sh
 RUN sh /usr/bin/astrobin-patch-uname.sh
 RUN echo `uname -r`
 
+RUN apt-get update && apt-get install -y software-properties-common
+
+RUN add-apt-repository -y ppa:savoury1/ffmpeg4
+
+RUN apt-get update
+
+RUN apt-get install -y libopenal-data=1:1.19.1-1 libopenal1 libavdevice58 ffmpeg
+
 # Install build prerequisites
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
     locales \
     rsyslog \
     logrotate \

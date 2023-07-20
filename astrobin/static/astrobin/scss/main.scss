@@ -1123,6 +1123,18 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         width: 100%;
       }
     }
+
+    .video-js {
+      .vjs-big-play-button {
+        z-index: 1;
+      }
+
+      .vjs-poster {
+        img {
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
 

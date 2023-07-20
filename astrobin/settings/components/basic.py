@@ -45,6 +45,7 @@ GOOGLE_ADS_ID = os.environ.get('GOOGLE_ADS_ID', 'invalid').strip()
 ROOT_URLCONF = 'astrobin.urls'
 
 ALLOWED_IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif', '.tif', '.tiff')
+ALLOWED_VIDEO_EXTENSIONS = ('.mov', '.mpeg', '.mp4', '.avi')
 ALLOWED_FITS_IMAGE_EXTENSIONS = ('xisf', 'fits', 'fit', 'fts')
 ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS = ALLOWED_FITS_IMAGE_EXTENSIONS + ('psd', 'tif', 'tiff')
 

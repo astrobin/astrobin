@@ -3,15 +3,22 @@ import logging
 import os
 import random
 import string
+import tempfile
 import unicodedata
 import uuid
-from typing import List
+from typing import List, Optional
 from urllib.parse import urlparse
 
 import boto3
+from django.core.files import File
 from django.core.files.images import get_image_dimensions
+from django.core.files.storage import default_storage
 from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
+from django.db.models import FileField
+from easy_thumbnails.files import ThumbnailFile
 from image_cropping import ImageRatioField
+from moviepy.editor import VideoFileClip
+from moviepy.video.compositing.concatenate import concatenate_videoclips
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.data_source import DataSource
@@ -27,7 +34,10 @@ from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.services import DateTimeService
-from common.upload_paths import data_download_upload_path, image_upload_path, uncompressed_source_upload_path
+from common.upload_paths import (
+    data_download_upload_path, image_upload_path, uncompressed_source_upload_path,
+    video_upload_path,
+)
 from common.utils import get_sentinel_user
 from common.validators import FileValidator
 
@@ -1152,6 +1162,18 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         null=True,
     )
 
+    video_file = models.FileField(
+        upload_to=video_upload_path,
+        max_length=256,
+        null=True,
+    )
+
+    encoded_video_file = models.FileField(
+        upload_to=video_upload_path,
+        null=True,
+        max_length=256,
+    )
+
     uncompressed_source_file = models.FileField(
         upload_to=uncompressed_source_upload_path,
         validators=(FileValidator(allowed_extensions=(settings.ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS)),),
@@ -1606,11 +1628,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return options
 
-    def thumbnail_raw(self, alias, revision_label, **kwargs):
+    def thumbnail_raw(self, alias: str, revision_label: str, **kwargs) -> Optional[ThumbnailFile]:
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
-        thumbnail_settings = kwargs.pop('thumbnail_settings', {})
+        thumbnail_settings = kwargs.get('thumbnail_settings', {})
 
         if revision_label is None:
             revision_label = 'final'
@@ -1621,11 +1643,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name:
-            # This can only happen in tests.
             return None
 
-        if not field.name.startswith('images/'):
-            field.name = 'images/' + field.name
+        Image._normalize_field_name(field)
 
         try:
             if settings.AWS_S3_ENABLED:
@@ -1641,7 +1661,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return thumb
 
-    def thumbnail_cache_key(self, field, alias, revision_label):
+    def thumbnail_cache_key(self, field: FileField, alias: str, revision_label: str) -> str:
         app_model = "{0}.{1}".format(
             self._meta.app_label,
             self._meta.object_name).lower()
@@ -1655,8 +1675,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from hashlib import sha256
         return sha256(cache_key.encode('utf-8')).hexdigest()
 
-    def thumbnail(self, alias, revision_label, **kwargs):
-        def normalize_url_security(url, thumbnail_settings):
+    def thumbnail(self, alias: str, revision_label: str, **kwargs) -> str:
+        def normalize_url_security(url: str, thumbnail_settings: dict) -> str:
             insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure'] == True
             if insecure and url.startswith('https'):
                 return url.replace('https', 'http', 1)
@@ -1665,6 +1685,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         from astrobin_apps_images.models import ThumbnailGroup
         from astrobin_apps_images.services import ImageService
+
+        placeholder = static('astrobin/images/placeholder-gallery.jpg')
 
         thumbnail_settings = kwargs.pop('thumbnail_settings', {})
         sync = kwargs.pop('sync', False)
@@ -1677,8 +1699,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             revision_label = ImageService(self).get_final_revision_label()
 
         field = self.get_thumbnail_field(revision_label)
-        if not field.name.startswith('images/'):
-            field.name = 'images/' + field.name
+        if not field.name:
+            return placeholder
+
+        Image._normalize_field_name(field)
 
         options = self.get_thumbnail_options(alias, revision_label, thumbnail_settings)
 
@@ -1705,14 +1729,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             return normalize_url_security(url, thumbnail_settings)
 
         url = cache.get(cache_key)
-        if url and not 'ERROR' in url:
+        if url and 'ERROR' not in url:
             return normalize_url_security(url, thumbnail_settings)
 
         # Not found in cache, attempt to fetch from database
         try:
             thumbnails = self.thumbnails.get(revision=revision_label)
             url = getattr(thumbnails, alias)
-            if url and not 'ERROR' in url:
+            if url and 'ERROR' not in url:
                 cache.set(cache_key, url, 60 * 60 * 24)
                 return normalize_url_security(url, thumbnail_settings)
         except ThumbnailGroup.DoesNotExist:
@@ -1727,7 +1751,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             if thumb:
                 ImageService(self).set_thumb(alias, revision_label, thumb.url)
                 return thumb.url
-            return None
+            return placeholder
 
         # If we got down here, we don't have an url yet, so we start an asynchronous task and return a placeholder.
         task_id_cache_key = '%s.retrieve' % cache_key
@@ -1750,7 +1774,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         else:
             AsyncResult(task_id)
 
-        return static('astrobin/images/placeholder-gallery.jpg')
+        return placeholder
 
     def thumbnail_invalidate_real(self, field, revision_label, delete=True):
         from astrobin.tasks import invalidate_cdn_caches
@@ -1811,6 +1835,15 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return '\r\n'.join([str(x) for x in self.keyvaluetags.all()])
 
+    @staticmethod
+    def _normalize_field_name(field):
+        _, file_extension = os.path.splitext(field.name)
+
+        if file_extension in settings.ALLOWED_IMAGE_EXTENSIONS and not field.name.startswith('images/'):
+            field.name = 'images/' + field.name
+        elif file_extension in settings.ALLOWED_VIDEO_EXTENSIONS and not field.name.startswith('videos/'):
+            field.name = 'videos/' + field.name
+
 
 class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
@@ -1839,6 +1872,18 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         upload_to=image_upload_path,
         height_field='h',
         width_field='w',
+        null=True,
+        max_length=256,
+    )
+
+    video_file = models.FileField(
+        upload_to=video_upload_path,
+        null=True,
+        max_length=256,
+    )
+
+    encoded_video_file = models.FileField(
+        upload_to=video_upload_path,
         null=True,
         max_length=256,
     )

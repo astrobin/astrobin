@@ -14,6 +14,7 @@ from django.db.models import Q, QuerySet
 from django.urls import reverse
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
+from moviepy.editor import VideoFileClip
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
@@ -99,6 +100,9 @@ class ImageService:
         )
 
     def get_default_cropping(self, revision_label=None):
+        if not self.image.image_file:
+            return None
+
         if revision_label is None or revision_label == '0':
             w, h = self.image.w, self.image.h
 
@@ -136,6 +140,9 @@ class ImageService:
         return '%d,%d,%d,%d' % (x1, y1, x2, y2)
 
     def get_crop_box(self, alias, revision_label=None):
+        if not self.image.image_file:
+            return None
+
         if revision_label in (None, '0', 0):
             target = self.image
         elif revision_label == 'final':
@@ -518,7 +525,7 @@ class ImageService:
             return None
 
     @staticmethod
-    def verify_file(path):
+    def is_image(path: str) -> bool:
         try:
             with open(path, 'rb') as f:
                 from PIL import Image as PILImage
@@ -530,6 +537,15 @@ class ImageService:
             return False
 
         return True
+
+    @staticmethod
+    def is_video(path: str) -> bool:
+        try:
+            clip = VideoFileClip(path)
+            clip.close()
+            return True
+        except OSError:
+            return False
 
     @staticmethod
     def get_object(id, queryset):
