@@ -46,6 +46,6 @@ class DateTimeService:
             parts.append('{}{}'.format(int(seconds), '&Prime;'))
 
         if reminder > 0:
-            parts.append('{:.2f}'.format(reminder).replace('0.', '.'))
+            parts.append('{:.4f}'.format(reminder).replace('0.', '.').rstrip('0').rstrip('.'))
 
         return ' '.join(parts)
