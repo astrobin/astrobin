@@ -560,3 +560,29 @@ class ImageService:
                 return image
 
         return get_object_or_None(queryset, hash=id)
+
+    @staticmethod
+    def is_viewable_alias(alias: str) -> bool:
+        # Small sizes are considered just thumbs, while regular and up are considered viewable.
+        return alias in (
+            'regular', 'regular_inverted', 'regular_sharpened',
+            'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
+            'hd', 'hd_anonymized', 'hd_inverted', 'hd_sharpened',
+            'qhd', 'qhd_anonymized', 'qhd_inverted', 'qhd_sharpened',
+            'real', 'real_inverted'
+        )
+
+    @staticmethod
+    def is_badge_compatible_alias(alias: str) -> bool:
+        return alias in (
+            'thumb', 'gallery', 'gallery_inverted',
+            'regular', 'regular_inverted', 'regular_sharpened',
+            'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
+        )
+
+    @staticmethod
+    def is_tooltip_compatible_alias(alias: str) -> bool:
+        return alias in (
+            'gallery', 'gallery_inverted',
+            'thumb',
+        )
