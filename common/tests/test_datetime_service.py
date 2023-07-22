@@ -14,3 +14,4 @@ class DateTimeServiceTest(TestCase):
         self.assertEqual('1h 1&prime; 1&Prime;', DateTimeService.human_time_duration(60 * 60 + 60 + 1))
         self.assertEqual('1h 1&prime; 1&Prime; .1', DateTimeService.human_time_duration(60 * 60 + 60 + 1.1))
         self.assertEqual('25h', DateTimeService.human_time_duration(25 * 60 * 60))
+        self.assertEqual('0.25&Prime;', DateTimeService.human_time_duration(.25))
