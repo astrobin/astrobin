@@ -389,7 +389,7 @@ class ImageDetailView(ImageDetailViewBase):
                         key += '-temp(%d)' % a.sensor_cooling
                     if a.binning is not None:
                         key += '-bin(%d)' % a.binning
-                    key += '-duration(%s)' % floatformat(a.duration, -4)
+                    key += '-duration(%s)' % floatformat(a.duration, 4)
 
                     try:
                         current_frames = dsa_data['frames'][key]['integration_raw']
@@ -422,11 +422,11 @@ class ImageDetailView(ImageDetailViewBase):
                     dsa_data['frames'][key]['integration'] = \
                         f'<span class="number">{current_number + a.number}</span>' + \
                         '<span class="times-separator">&times;</span>' + \
-                        f'<span class="duration">{floatformat(a.duration, -4).rstrip("0").rstrip(".")}</span>' + \
+                        f'<span class="duration">{floatformat(a.duration, 4).rstrip("0").rstrip(".")}</span>' + \
                         '<span class="seconds-symbol">&Prime;</span>' + \
                         f'<span class="total-frame-integration">({DateTimeService.human_time_duration((current_number + a.number) * a.duration)})</span>'
                     dsa_data['frames'][key]['integration_raw'] = \
-                        f'{current_number + a.number}x{floatformat(a.duration, -4).rstrip("0").rstrip(".")}'
+                        f'{current_number + a.number}x{floatformat(a.duration, 4).rstrip("0").rstrip(".")}'
 
                     dsa_data['integration'] += a.duration * a.number
 
