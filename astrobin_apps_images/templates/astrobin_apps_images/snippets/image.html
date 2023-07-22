@@ -24,73 +24,83 @@
         {% random_id %}
 
         {% if alias != 'histogram' and badges %}
-            <ul class="badges">
-                {% for badge in badges %}
-                    {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' and alias != 'regular_large' and alias != 'regular_large_sharpened' %}
-                        <li>
-                            <i class="icon-trophy iotd-badge badge" rel="tooltip"
-                               title="{% trans "Image of the day" %}">
-                            </i>
-                        </li>
-                    {% endif %}
+            {% if not show_video or image.encoded_video_file.name %}
+                <ul class="badges">
+                    {% for badge in badges %}
+                        {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' and alias != 'regular_large' and alias != 'regular_large_sharpened' %}
+                            <li>
+                                <i class="icon-trophy iotd-badge badge" rel="tooltip"
+                                   title="{% trans "Image of the day" %}">
+                                </i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'top-pick' %}
-                        <li>
-                            <i class="icon-star top-pick-badge badge" rel="tooltip" data-placement="right"
-                               data-container="body" title="{% trans "Top pick" %}">
-                            </i>
-                        </li>
-                    {% endif %}
+                        {% if badge == 'top-pick' %}
+                            <li>
+                                <i class="icon-star top-pick-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Top pick" %}">
+                                </i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'top-pick-nomination' %}
-                        <li>
-                            <i class="icon-arrow-up top-pick-nomination-badge badge" rel="tooltip" data-container="body"
-                               data-placement="right" title="{% trans "Top pick nomination" %}">
-                            </i>
-                        </li>
-                    {% endif %}
+                        {% if badge == 'top-pick-nomination' %}
+                            <li>
+                                <i class="icon-arrow-up top-pick-nomination-badge badge" rel="tooltip" data-container="body"
+                                   data-placement="right" title="{% trans "Top pick nomination" %}">
+                                </i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'iotd-queue' %}
-                        <li>
-                            <i class="icon-legal iotd-queue-badge badge" rel="tooltip" data-placement="right"
-                               data-container="body" title="{% trans "Currently in the IOTD/TP queue" %}">
-                            </i>
-                        </li>
-                    {% endif %}
+                        {% if badge == 'iotd-queue' %}
+                            <li>
+                                <i class="icon-legal iotd-queue-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Currently in the IOTD/TP queue" %}">
+                                </i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'wip' %}
-                        <li>
-                            <i class="icon-lock wip-badge badge" rel="tooltip" data-placement="right"
-                               data-container="body" title="{% trans "Staging area" %}"></i>
-                        </li>
-                    {% endif %}
+                        {% if badge == 'wip' %}
+                            <li>
+                                <i class="icon-lock wip-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Staging area" %}"></i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'collaboration' %}
-                        <li>
-                            <i class="icon-group collaboration-badge badge" rel="tooltip" data-placement="right"
-                               data-container="body" title="{% trans "Collaboration" %}"></i>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+                        {% if badge == 'collaboration' %}
+                            <li>
+                                <i class="icon-group collaboration-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Collaboration" %}"></i>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endif %} {# not histogram and badges #}
 
         <figure>
             {% if show_video %}
-                {% with image.video_file.url|get_mime_type as video_mime_type %}
-                    <video class="video-js vjs-default-skin" data-setup='{"fluid": true, "liveui": true}' controls
-                           preload="auto" poster="{{ thumb_url }}">
-                        {% if video_mime_type %}
-                            <source src="{{ image.video_file.url }}" type="{{ video_mime_type }}" />
-                        {% endif %}
-                        <source src="{{ image.encoded_video_file.url }}" type="video/mp4" />
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to a
-                            web browser that
-                            <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                        </p>
-                    </video>
-                {% endwith %}
+                {% if not image.encoded_video_file.name %}
+                    <p class="alert alert-warning">
+                        {% blocktrans trimmed %}
+                            This video is still processing, please try again later.
+                        {% endblocktrans %}
+                    </p>
+                {% else %}
+                    {% with image.video_file.url|get_mime_type as video_mime_type %}
+                        <video class="video-js vjs-default-skin" data-setup='{"fluid": true, "liveui": true}' controls
+                               preload="auto" poster="{{ thumb_url }}">
+                            {% if video_mime_type %}
+                                <source src="{{ image.video_file.url }}" type="{{ video_mime_type }}" />
+                            {% endif %}
+                            <source src="{{ image.encoded_video_file.url }}" type="video/mp4" />
+                            <p class="vjs-no-js">
+                                To view this video please enable JavaScript, and consider upgrading to a
+                                web browser that
+                                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                            </p>
+                        </video>
+                    {% endwith %}
+                {% endif %}
             {% else %}
                 {% if link or fancybox %}
                     <a
