@@ -2157,7 +2157,7 @@ class DeepSky_Acquisition(Acquisition):
         _("Duration"),
         null=True,
         blank=True,
-        max_digits=10,
+        max_digits=12,
         decimal_places=4,
         help_text=_("Duration of each sub-frame, in seconds."),
     )

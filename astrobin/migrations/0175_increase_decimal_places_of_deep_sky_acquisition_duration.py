@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
             model_name='deepsky_acquisition',
             name='duration',
             field=models.DecimalField(
-                blank=True, decimal_places=4, help_text='Duration of each sub-frame, in seconds.', max_digits=10,
+                blank=True, decimal_places=4, help_text='Duration of each sub-frame, in seconds.', max_digits=12,
                 null=True, verbose_name='Duration'
             ),
         ),
