@@ -924,6 +924,20 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       }
     }
 
+    .video-js {
+      max-width: 100%;
+
+      .vjs-big-play-button {
+        z-index: 1;
+      }
+
+      .vjs-poster {
+        img {
+          cursor: pointer;
+        }
+      }
+    }
+
     &:hover {
       img[data-alias='gallery'] {
         -webkit-transform: scale(1.25); /* Safari and Chrome */
@@ -1121,18 +1135,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
       &:not([data-smaller-than-regular='true']) {
         width: 100%;
-      }
-    }
-
-    .video-js {
-      .vjs-big-play-button {
-        z-index: 1;
-      }
-
-      .vjs-poster {
-        img {
-          cursor: pointer;
-        }
       }
     }
   }
@@ -1981,6 +1983,10 @@ body.full {
   .astrobin-image-container {
     figure {
       overflow: visible;
+    }
+
+    .video-js {
+      max-height: calc(100vh - 100px);
     }
 
     img {

@@ -225,7 +225,7 @@ def astrobin_image(context, image, alias, **kwargs):
 
     # If we're testing, we want to bypass the placeholder thing and force-get
     # the thumb url.
-    if thumb_url is None and settings.TESTING:
+    if thumb_url is None and (image.video_file.name or settings.TESTING):
         thumb = image.thumbnail_raw(alias, revision_label)
         if thumb:
             thumb_url = thumb.url

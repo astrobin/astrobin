@@ -1,6 +1,6 @@
 import datetime
 import unicodedata
-from typing import List, Union
+from typing import List, Optional, Union
 
 import bleach
 from dateutil import parser
@@ -390,3 +390,31 @@ def percentage(x: float, y: float) -> float:
         return 0
 
     return (x / y) * 100
+
+
+@register.filter
+def get_mime_type(filename: str) -> Optional[str]:
+    extension = filename.split('.')[-1]
+
+    if extension == 'mp4':
+        return 'video/mp4'
+    elif extension == 'webm':
+        return 'video/webm'
+    elif extension in ['ogg', 'ogv']:
+        return 'video/ogg'
+    elif extension == 'mov':
+        return 'video/quicktime'
+    elif extension == 'avi':
+        return 'video/x-msvideo'
+    elif extension == 'wmv':
+        return 'video/x-ms-wmv'
+    elif extension == 'flv':
+        return 'video/x-flv'
+    elif extension == 'mkv':
+        return 'video/x-matroska'
+    elif extension == '3gp':
+        return 'video/3gpp'
+    elif extension == 'm4v':
+        return 'video/x-m4v'
+
+    return None
