@@ -30,6 +30,9 @@ class DateTimeService:
         if seconds is None or seconds == 0:
             return '0&Prime;'
 
+        if seconds < 1:
+            return '{:.4f}'.format(seconds).rstrip('0').rstrip('.') + '&Prime;'
+
         hours, reminder = divmod(seconds, 60 * 60)
         minutes, reminder = divmod(reminder, 60)
         seconds, reminder = divmod(reminder, 1)
@@ -46,6 +49,6 @@ class DateTimeService:
             parts.append('{}{}'.format(int(seconds), '&Prime;'))
 
         if reminder > 0:
-            parts.append('{:.2f}'.format(reminder).replace('0.', '.'))
+            parts.append('{:.4f}'.format(reminder).replace('0.', '.').rstrip('0').rstrip('.'))
 
         return ' '.join(parts)
