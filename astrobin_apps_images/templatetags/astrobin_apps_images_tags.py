@@ -268,13 +268,14 @@ def astrobin_image(context, image, alias, **kwargs):
         'instant': instant,
         'fancybox': fancybox,
         'fancybox_tooltip': fancybox_tooltip,
-        'fancybox_url': settings.BASE_URL + reverse(
-            'image_rawthumb', kwargs={
-                'id': image.get_id(),
-                'alias': 'qhd',
-                'r': revision_label,
-            }
-        ) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
+        'fancybox_url':
+            image_revision.encoded_video_file.url if image_revision.encoded_video_file.name else settings.BASE_URL + reverse(
+                'image_rawthumb', kwargs={
+                    'id': image.get_id(),
+                    'alias': 'qhd',
+                    'r': revision_label,
+                }
+            ) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
         'rel': rel,
         'slug': slug,
         'show_video': ImageService.is_viewable_alias(alias) and (
