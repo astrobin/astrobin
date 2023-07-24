@@ -1,7 +1,7 @@
 import re
 from datetime import datetime, timedelta
 from functools import reduce
-from operator import or_
+from operator import and_, or_
 
 from django import forms
 from django.contrib.auth.models import User
@@ -79,6 +79,7 @@ FIELDS = (
     'size_max',
     'modified_camera',
     'topic',
+    'filter_types',
 
     # Sorting
     'sort'
@@ -165,6 +166,7 @@ class AstroBinSearchForm(SearchForm):
     size_max = forms.IntegerField(required=False)
     modified_camera = forms.CharField(required=False)
     topic = forms.IntegerField(required=False)
+    filter_types = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -715,6 +717,20 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_filter_types(self, results):
+        filter_types = self.cleaned_data.get("filter_types")
+        queries = []
+
+        if filter_types is not None and filter_types != "":
+            types = filter_types.split(',')
+            for x in types:
+                queries.append(Q(filter_types=x))
+
+        if len(queries) > 0:
+            results = results.filter(reduce(and_, queries))
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -802,6 +818,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_size(sqs)
         sqs = self.filter_by_modified_camera(sqs)
         sqs = self.filter_by_forum_topic(sqs)
+        sqs = self.filter_by_filter_types(sqs)
 
         sqs = self.sort(sqs)
 

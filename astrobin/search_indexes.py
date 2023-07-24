@@ -603,6 +603,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     filters_2 = CharField()
     filters_2_id = CharField()
+    filter_types = MultiValueField()
 
     accessories_2 = CharField()
     accessories_2_id = CharField()
@@ -817,6 +818,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_filters_2_id(self, obj):
         return [f"{x.id}" for x in obj.filters_2.all()]
+
+    def prepare_filter_types(self, obj):
+        return [f"{x.type}" for x in obj.filters_2.all()]
 
     ###################################################################################################################
 
