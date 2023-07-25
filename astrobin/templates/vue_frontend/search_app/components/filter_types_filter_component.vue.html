@@ -1,0 +1,94 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="filter-types-filter-template">
+    {% if valid_usersubscription|can_access_full_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <v-multiselect v-model="value" :options="options" track-by="id" label="label" selectLabel=""
+                           deselectLabel="" selectedLabel="" :searchable="true" :multiple="true"
+                           placeholder="{% trans "Select" %}"></v-multiselect>
+            <input type="hidden" name="filter_types" :value="getFormValue()">
+            <span class="help-block">
+                <p>
+                    {% blocktrans trimmed %}
+                        Results will include images that feature all selected filter types.
+                    {% endblocktrans %}
+                </p>
+            </span>
+        </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("filter-types-filter", {
+        template: "#filter-types-filter-template",
+        props: [
+            "filterTypes"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                options: [
+                    {id: "H_ALPHA", label: '{% trans "Hydrogen-alpha (Hα)" %}'},
+                    {id: "H_BETA", label: '{% trans "Hydrogen-beta (Hβ)" %}'},
+                    {id: "SII", label: '{% trans "Sulfur-II (SII)" %}'},
+                    {id: "OIII", label: '{% trans "Oxygen-III (OIII)" %}'},
+                    {id: "NII", label: '{% trans "Nitrogen-II (NII)" %}'},
+                    {id: "UV", label: '{% trans "Ultraviolet (UV)" %}'},
+                    {id: "IR", label: '{% trans "Infrared (IR)" %}'},
+                    {id: "UV_IR_CUT", label: 'UV/IR Cut'},
+                    {id: "MULTIBAND", label: '{% trans "Multiband" %}'},
+                    {id: "LP", label: '{% trans "Light pollution suppression" %}'},
+                    {id: "L", label: '{% trans "Luminance/clear (L)" %}'},
+                    {id: "R", label: '{% trans "Red channel (R)" %}'},
+                    {id: "G", label: '{% trans "Green channel (G)" %}'},
+                    {id: "B", label: '{% trans "Blue channel (B)" %}'},
+                    {id: "ND", label: '{% trans "Neutral density (ND)" %}'},
+                    {id: "UHC", label: '{% trans "Ultra High Contrast (UHC)" %}'},
+                    {id: "SKY_GLOW", label: '{% trans "Sky glow" %}'},
+                    {id: "SOLAR", label: '{% trans "Solar" %}'},
+                    {id: "LUNAR", label: '{% trans "Lunar" %}'},
+                    {id: "PLANETARY", label: '{% trans "Planetary" %}'},
+                    {id: "COMETARY", label: '{% trans "Cometary" %}'},
+                    {id: "PHOTOMETRIC_U", label: '{% trans "Photometric Ultraviolet" %}'},
+                    {id: "PHOTOMETRIC_B", label: '{% trans "Photometric Blue" %}'},
+                    {id: "PHOTOMETRIC_V", label: '{% trans "Photometric Visual" %}'},
+                    {id: "PHOTOMETRIC_R", label: '{% trans "Photometric Red" %}'},
+                    {id: "PHOTOMETRIC_I", label: '{% trans "Photometric Infrared" %}'},
+                    {id: "OTHER", label: '{% trans "Other" %}'},
+                ]
+            }
+        },
+        created: function () {
+            if (this.filterTypes) {
+                const types = this.filterTypes.split(',');
+
+                for (let i = 0; i < this.options.length; i++) {
+                    if (types.indexOf(this.options[i].id) > -1) {
+                        this.value.push(this.options[i]);
+                    }
+                }
+            }
+        },
+        methods: {
+            getFormValue: function () {
+                if (Array.isArray(this.value)) {
+                    return this.value.map(function (v) {
+                        return v.id;
+                    }).join(',');
+                }
+
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

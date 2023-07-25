@@ -71,6 +71,9 @@
                                 <acquisition-type-filter v-if="filter.name === 'acquisition_type'"
                                                          :acquisition-type="acquisitionType"></acquisition-type-filter>
 
+                                <filter-types-filter v-if="filter.name === 'filter_types'"
+                                                         :filter-types="filterTypes"></filter-types-filter>
+
                                 <data-source-filter v-if="filter.name === 'data_source'"
                                                     :data-source="dataSource"></data-source-filter>
 
@@ -292,6 +295,12 @@
             acquisitionType:
                 {% if "acquisition_type" in request.GET and request.GET.acquisition_type %}
                     "{{ request.GET.acquisition_type }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            filterTypes:
+                {% if "filter_types" in request.GET and request.GET.filter_types %}
+                    "{{ request.GET.filter_types }}"
                 {% else %}
                     undefined
                 {% endif %},
@@ -620,6 +629,12 @@
                     restricted: "ADVANCED"
                 },
                 {
+                    name: "filter_types",
+                    label: "{% trans "Filter types" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
+                {
                     name: "data_source",
                     label: "{% trans "Data source" %}",
                     removable: true,
@@ -815,6 +830,10 @@
 
             if (this.acquisitionType) {
                 this.enabledFilters.push(this.getFilterByName("acquisition_type"));
+            }
+
+            if (this.filterTypes) {
+                this.enabledFilters.push(this.getFilterByName("filter_types"));
             }
 
             if (this.dataSource) {
