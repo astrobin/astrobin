@@ -206,6 +206,37 @@
                 IFRAME_ERROR: "{{ _("Error loading page") | escapejs }}",
             },
             on: {
+                'reveal': (instance, slide) => {
+                    if (!!slide.videoUrl) {
+                        const id = `video-js-slide-${slide.idOrHash}`;
+
+                        slide.$content.innerHTML = `
+                            <video id="${id}"
+                                class="video-js vjs-default-skin fancybox__video"
+                                data-setup='{"fluid": true, "liveui": true}'
+                                controls
+                                preload="auto"
+                                poster="${slide.src}"
+                            ></video>`
+
+                        window.videojs(id, {}, function () {
+                            this.src([
+                                {type: slide.videoFormat, src: slide.videoUrl},
+                                {type: "video/mp4", src: slide.encodedVideoUrl}
+                            ]);
+                        });
+
+                        instance.options.clickContent = false;
+                    } else {
+                        instance.options.clickContent = true;
+                    }
+                },
+                'closing': function (instance) {
+                    const player = videojs(instance.$container.querySelector('.video-js').id);
+                    if (player) {
+                        player.dispose();
+                    }
+                },
                 initCarousel: (fancybox) => {
                     const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
 
