@@ -1753,7 +1753,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         return static('astrobin/images/placeholder-gallery.jpg')
 
     def thumbnail_invalidate_real(self, field, revision_label, delete=True):
-        from astrobin.tasks import invalidate_cdn_caches
         from astrobin_apps_images.models import ThumbnailGroup
 
         for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].items():
@@ -1765,8 +1764,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         try:
             thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
             all_urls: List[str] = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
-
-            invalidate_cdn_caches.delay(all_urls)
 
             if settings.AWS_S3_ENABLED:
                 for url in all_urls:
