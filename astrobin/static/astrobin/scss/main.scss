@@ -810,7 +810,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       -o-transition: all .2s ease-in-out;
       transition: all .2s ease-in-out;
 
-      +.icon-play {
+      &[data-is-video=true] + .icon-play {
         position: absolute;
         top: calc(50% - 1rem);
         left: calc(50% - 1rem);

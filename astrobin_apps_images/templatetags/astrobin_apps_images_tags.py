@@ -95,7 +95,9 @@ def astrobin_image(context, image, alias, **kwargs):
 
     # Old images might not have a size in the database, let's fix it.
     image_revision = image
-    if revision_label not in [0, '0', 'final']:
+    if revision_label == 'final':
+        revision_label = ImageService(image).get_final_revision_label()
+    if revision_label not in [0, '0']:
         try:
             image_revision = image.revisions.get(label=revision_label)
         except ImageRevision.DoesNotExist:
@@ -278,6 +280,7 @@ def astrobin_image(context, image, alias, **kwargs):
             ) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
         'rel': rel,
         'slug': slug,
+        'is_video': bool(image_revision.video_file.name),
         'show_video': ImageService.is_viewable_alias(alias) and (
             bool(image_revision.video_file.name) if hasattr(image_revision, 'label') else bool(image.video_file.name)
         ),

@@ -1248,27 +1248,34 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
         return super(ImageEditRevisionView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        revision = self.get_object()  # type: ImageRevision
-        previous_url = revision.image_file.url
+        revision: ImageRevision = self.get_object()
+
+        if revision.image_file:
+            previous_url = revision.image_file.url
+        else:
+            previous_url = None
+
         previous_square_cropping = revision.square_cropping
 
         ret = super(ImageEditRevisionView, self).post(request, *args, **kwargs)
 
         revision = self.get_object()
-        new_url = revision.image_file.url
 
-        if new_url != previous_url:
-            try:
-                revision.w, revision.h = get_image_dimensions(revision.image_file)
-            except TypeError as e:
-                logger.warning(
-                    "ImageEditRevisionView: unable to get image dimensions for %d: %s" % (revision.pk, str(e)))
-                pass
+        if revision.image_file and previous_url:
+            new_url = revision.image_file.url
 
-            revision.square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
-            revision.save(keep_deleted=True)
+            if new_url != previous_url:
+                try:
+                    revision.w, revision.h = get_image_dimensions(revision.image_file)
+                except TypeError as e:
+                    logger.warning(
+                        "ImageEditRevisionView: unable to get image dimensions for %d: %s" % (revision.pk, str(e)))
+                    pass
 
-            revision.thumbnail_invalidate()
+                revision.square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
+                revision.save(keep_deleted=True)
+
+                revision.thumbnail_invalidate()
 
         if previous_square_cropping != revision.square_cropping:
             revision.thumbnail_invalidate()

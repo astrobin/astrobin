@@ -205,17 +205,19 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             )
 
     if not instance.uploader_in_progress:
-        if instance.video_file.name and not instance.image_file.name:
-            generate_video_preview.apply_async(
-                args=(instance.pk, ContentType.objects.get_for_model(Image).pk),
-                countdown=5
-            )
+        if instance.video_file.name:
+            if not instance.image_file.name:
+                ImageService(instance).generate_loading_placeholder()
+                generate_video_preview.apply_async(
+                    args=(instance.pk, ContentType.objects.get_for_model(Image).pk),
+                    countdown=5
+                )
 
-        if instance.video_file.name and not instance.encoded_video_file.name:
-            encode_video_file.apply_async(
-                args=(instance.pk, ContentType.objects.get_for_model(Image).pk),
-                countdown=5
-            )
+            if not instance.encoded_video_file.name:
+                encode_video_file.apply_async(
+                    args=(instance.pk, ContentType.objects.get_for_model(Image).pk),
+                    countdown=5
+                )
 
         groups = instance.user.joined_group_set.filter(autosubmission=True)
         for group in groups:
@@ -323,6 +325,20 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
     just_completed_upload = cache.get("image_revision.%s.just_completed_upload" % instance.pk)
 
     UserService(instance.image.user).clear_gallery_image_list_cache()
+
+    if not uploading and instance.video_file.name:
+        if not instance.image_file.name:
+            ImageService(instance).generate_loading_placeholder()
+            generate_video_preview.apply_async(
+                args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk),
+                countdown=5
+            )
+
+        if not instance.encoded_video_file.name:
+            encode_video_file.apply_async(
+                args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk),
+                countdown=5
+            )
 
     if wip or skip:
         return

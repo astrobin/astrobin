@@ -176,9 +176,13 @@
                         data-get-enhanced-thumb-url="{{ get_enhanced_thumb_url }}"
                     {% endif %}
 
+                    {% if is_video %}
+                        data-is-video="true"
+                    {% endif %}
+
                         alt="{{ image.title|escape }}, {% astrobin_username image.user link=False %}"
             />
-                {% if  image.encoded_video_file.name %}
+                {% if is_video %}
                     <i class="icon-play"></i>
                 {% endif %}
             {% if link or fancybox %}

@@ -3,13 +3,16 @@ import math
 from collections import namedtuple
 from datetime import timedelta
 
+import requests
 from actstream.models import Action
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.core.files import File
 from django.core.files.images import get_image_dimensions
+from django.core.files.temp import NamedTemporaryFile
 from django.db.models import Q, QuerySet
 from django.urls import reverse
 from hitcount.models import HitCount
@@ -502,6 +505,39 @@ class ImageService:
     def delete_stories(self):
         Action.objects.target(self.image).delete()
         Action.objects.action_object(self.image).delete()
+
+    def generate_loading_placeholder(self, save=True):
+        logger.debug('Generating loading placeholder for %s' % self.image)
+
+        if self.image.w and self.image.h:
+            w, h = self.image.w, self.image.h
+        elif self.image.video_file.name:
+            with self.image.video_file.open() as video_file:
+                with NamedTemporaryFile() as video_temp_file:
+                    video_temp_file.write(video_file.read())
+                    video_temp_path = video_temp_file.name
+                    clip = VideoFileClip(video_temp_path)
+                    w, h = clip.w, clip.h
+        else:
+            w, h = 1024, 1024
+
+        placeholder_url = f'https://via.placeholder.com/{w}x{h}/222/333&text=LOADING'
+        response = requests.get(placeholder_url, stream=True)
+        if response.status_code == 200:
+            img_temp = NamedTemporaryFile()
+            for block in response.iter_content(1024 * 8):
+                if not block:
+                    break
+                img_temp.write(block)
+
+            img_temp.flush()
+            img_temp.seek(0)
+
+            # Assuming `image` is the ImageField
+            self.image.image_file.save("placeholder.jpg", File(img_temp))
+
+            if save:
+                self.image.save(update_fields=['image_file'])
 
     @staticmethod
     def get_constellation(solution):

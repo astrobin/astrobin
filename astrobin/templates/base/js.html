@@ -232,9 +232,13 @@
                     }
                 },
                 'closing': function (instance) {
-                    const player = videojs(instance.$container.querySelector('.video-js').id);
-                    if (player) {
-                        player.dispose();
+                    const videoJs = instance.$container.querySelector('.video-js');
+
+                    if (videoJs) {
+                        const player = videojs(videoJs.id);
+                        if (player) {
+                            player.dispose();
+                        }
                     }
                 },
                 initCarousel: (fancybox) => {
