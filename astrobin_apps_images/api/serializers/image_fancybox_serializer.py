@@ -26,7 +26,12 @@ class ImageFancyboxSerializer(serializers.ModelSerializer):
             'finalRevisionId': None if final_revision == instance else final_revision.id,
         })
 
-        if instance.video_file.name:
+        if (
+                instance.video_file.name and
+                instance.video_file.url and
+                instance.encoded_video_file.name and
+                instance.encoded_video_file.url
+        ):
             representation.update({
                 'videoUrl': instance.video_file.url,
                 'encodedVideoUrl': instance.encoded_video_file.url,
