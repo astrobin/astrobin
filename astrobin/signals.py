@@ -92,6 +92,9 @@ def image_pre_save(sender, instance, **kwargs):
     if not instance.pk and not instance.is_wip:
         instance.published = datetime.datetime.now()
 
+    if instance.square_cropping in (None, ''):
+        instance.square_cropping = ImageService(instance).get_default_cropping() or ""
+
     try:
         image = sender.objects_including_wip.get(pk=instance.pk)
     except sender.DoesNotExist:
@@ -308,7 +311,10 @@ def image_pre_delete(sender, instance: Image, **kwargs):
         instance.image_file.delete(save=False)
 
 
-def imagerevision_pre_save(sender, instance, **kwargs):
+def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):
+    if not instance.uploader_in_progress and instance.square_cropping in (None, ''):
+        instance.square_cropping = ImageService(instance.image).get_default_cropping(instance.label) or ""
+
     if instance.pk:
         pre_save_instance = get_object_or_None(ImageRevision.uploads_in_progress, pk=instance.pk)
         if pre_save_instance and not instance.uploader_in_progress:
