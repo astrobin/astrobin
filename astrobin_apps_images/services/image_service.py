@@ -1,5 +1,6 @@
 import logging
 import math
+import os
 from collections import namedtuple
 from datetime import timedelta
 
@@ -534,10 +535,28 @@ class ImageService:
             img_temp.seek(0)
 
             # Assuming `image` is the ImageField
-            self.image.image_file.save("placeholder.jpg", File(img_temp))
+            self.image.image_file.save("placeholder.jpg", File(img_temp), save=False)
 
             if save:
-                self.image.save(update_fields=['image_file'])
+                self.image.save(update_fields=['image_file'], keep_deleted=True)
+
+    def get_local_video_file(self) -> File:
+        chunk_size = 4096
+        _, file_extension = os.path.splitext(self.image.uploader_name)
+
+        filename = f'temp_video_file_{self.image.__class__.__name__}_{self.image.id}{file_extension}'
+        temp_file_path = os.path.join('/astrobin-temporary-files/files', filename)
+
+        if os.path.exists(temp_file_path):
+            logger.debug(f'get_local_video_file: using existing temporary file {temp_file_path}')
+            return File(open(temp_file_path, 'rb'))
+
+        with self.image.video_file.open() as f:
+            with open(temp_file_path, 'wb') as temp_file:
+                while chunk := f.read(chunk_size):
+                    temp_file.write(chunk)
+
+        return File(open(temp_file_path, 'rb'))
 
     @staticmethod
     def get_constellation(solution):

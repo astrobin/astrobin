@@ -3,8 +3,6 @@ import json
 import ntpath
 import os
 import subprocess
-import tempfile
-import time
 import uuid
 import zipfile
 from datetime import datetime, timedelta
@@ -22,6 +20,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
 from django.db import IntegrityError
@@ -159,28 +158,41 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
 
 @shared_task(time_limit=300, acks_late=True)
 def generate_video_preview(object_id: int, content_type_id: int):
-    ct = ContentType.objects.get_for_id(content_type_id)
-    obj = ct.get_object_for_this_type(pk=object_id)
+    LOCK_EXPIRE = 300
+    lock_id = 'generate_video_preview_%d_%d' % (content_type_id, object_id)
 
-    logger.debug('Generating video preview for %s' % obj)
+    acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
+    release_lock = lambda: cache.delete(lock_id)
 
-    _, file_extension = os.path.splitext(obj.uploader_name)
+    if acquire_lock():
+        try:
+            ct = ContentType.objects.get_for_id(content_type_id)
+            obj = ct.get_object_for_this_type(pk=object_id)
 
-    with obj.video_file.open() as f:
-        with tempfile.NamedTemporaryFile(suffix=file_extension, delete=False) as temp_file:
-            # Write the content of the file object to the temporary file
-            temp_file.write(f.read())
+            if obj.deleted:
+                logger.debug('Skip generating video preview for deleted %s' % obj)
+                release_lock()
+                return
+
+            logger.debug('Generating video preview for %s' % obj)
+
+            temp_file = ImageService(obj).get_local_video_file()
             temp_path = temp_file.name
+            video = VideoFileClip(temp_path)
 
-    video = VideoFileClip(temp_path)
-    thumbnail_path = f'video-thumb-{content_type_id}-{object_id}-{datetime.now().timestamp()}.jpg'
-    video.save_frame(thumbnail_path, t=video.duration / 2)
-    thumbnail_file = File(open(thumbnail_path, "rb"))
-    obj.image_file.save("video-thumbnail.jpg", thumbnail_file, save=False)
-    obj.save(update_fields=['image_file'])
+            thumbnail_path = f'video-thumb-{content_type_id}-{object_id}-{datetime.now().timestamp()}.jpg'
+            video.save_frame(thumbnail_path, t=video.duration / 2)
+            thumbnail_file = File(open(thumbnail_path, "rb"))
+            obj.image_file.save("video-thumbnail.jpg", thumbnail_file, save=False)
+            obj.save(update_fields=['image_file'], keep_deleted=True)
 
-    os.unlink(temp_path)
-    os.unlink(thumbnail_path)
+            # Note: temp_path is not removed because it might be reused by another task. It will be removed by a
+            # periodic task.
+            os.unlink(thumbnail_path)
+        except Exception as e:
+            logger.debug("Error generating video preview: %s" % str(e))
+        finally:
+            release_lock()
 
 
 @shared_task(time_limit=1800, acks_late=True)
@@ -192,46 +204,51 @@ def encode_video_file(object_id: int, content_type_id: int):
     release_lock = lambda: cache.delete(lock_id)
 
     if acquire_lock():
-        ct = ContentType.objects.get_for_id(content_type_id)
-        obj = ct.get_object_for_this_type(pk=object_id)
+        try:
+            ct = ContentType.objects.get_for_id(content_type_id)
+            obj = ct.get_object_for_this_type(pk=object_id)
+            if obj.deleted:
+                logger.debug('Skip encoding video file for deleted %s' % obj)
+                release_lock()
+                return
 
-        logger.debug('Encoding video file for %s' % obj)
+            logger.debug('Encoding video file for %s' % obj)
 
-        _, file_extension = os.path.splitext(obj.uploader_name)
+            temp_file = ImageService(obj).get_local_video_file()
+            temp_path = temp_file.name
+            video = VideoFileClip(temp_path)
 
-        with obj.video_file.open() as f:
-            with tempfile.NamedTemporaryFile(suffix=file_extension, delete=False) as temp_file:
-                # Write the content of the file object to the temporary file
-                temp_file.write(f.read())
-                temp_path = temp_file.name
+            with NamedTemporaryFile(suffix='.mp4', delete=False) as output_file:
+                video.write_videofile(
+                    output_file.name,
+                    codec='libx264',
+                    audio_codec='aac',
+                    ffmpeg_params=[
+                        '-c:v', 'libx264',
+                        '-crf', '18',
+                        '-pix_fmt', 'yuv420p',
+                        '-map_metadata', '0',
+                        '-color_primaries', 'bt709',
+                        '-color_trc', 'bt709',
+                        '-colorspace', 'bt709',
+                        '-color_range', 'tv'
+                    ]
+                )
 
-        video = VideoFileClip(temp_path)
+                output_file.seek(0)  # reset file pointer to beginning
+                django_file = File(output_file)
+                obj.encoded_video_file.save(f"encoded_{obj.uploader_name}.mp4", django_file, save=False)
+                obj.save(update_fields=['encoded_video_file'], keep_deleted=True)
 
-        with tempfile.NamedTemporaryFile(suffix='.mp4', delete=False) as output_file:
-            video.write_videofile(
-                output_file.name,
-                codec='libx264',
-                audio_codec='aac',
-                ffmpeg_params=[
-                    '-c:v', 'libx264',
-                    '-crf', '18',
-                    '-pix_fmt', 'yuv420p',
-                    '-map_metadata', '0',
-                    '-color_primaries', 'bt709',
-                    '-color_trc', 'bt709',
-                    '-colorspace', 'bt709',
-                    '-color_range', 'tv'
-                ]
-            )
+            video.close()
 
-            output_file.seek(0)  # reset file pointer to beginning
-            django_file = File(output_file)
-            obj.encoded_video_file.save(f"encoded_{obj.uploader_name}.mp4", django_file, save=False)
-            obj.save(update_fields=['encoded_video_file'])
-
-        video.close()
-        os.unlink(temp_path)
-        release_lock()
+            # Note: temp_path is not removed because it might be reused by another task. It will be removed by a
+            # periodic task.
+            os.remove(output_file.name)
+        except Exception as e:
+            logger.debug("Error encoding video file: %s" % str(e))
+        finally:
+            release_lock()
 
 
 @shared_task(time_limit=60)

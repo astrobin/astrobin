@@ -319,6 +319,9 @@ pre_save.connect(imagerevision_pre_save, sender=ImageRevision)
 
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
+    if kwargs.get('update_fields', None):
+        return
+
     wip = instance.image.is_wip
     skip = instance.skip_notifications
     uploading = instance.uploader_in_progress
