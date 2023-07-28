@@ -182,7 +182,7 @@
 
                         alt="{{ image.title|escape }}, {% astrobin_username image.user link=False %}"
             />
-                {% if is_video %}
+                {% if is_video and show_play_icon %}
                     <i class="icon-play"></i>
                 {% endif %}
             {% if link or fancybox %}

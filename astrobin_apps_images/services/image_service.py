@@ -641,3 +641,12 @@ class ImageService:
             'gallery', 'gallery_inverted',
             'thumb',
         )
+
+    @staticmethod
+    def is_play_button_alias(alias: str) -> bool:
+        return alias in (
+            'gallery', 'gallery_inverted',
+            'thumb',
+            'iotd', 'iotd_mobile', 'iotd_candidate',
+            'story', 'story_crop',
+        )

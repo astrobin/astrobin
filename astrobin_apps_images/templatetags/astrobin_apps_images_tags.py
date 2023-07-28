@@ -91,6 +91,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'rel': rel,
             'slug': slug,
             'show_video': False,
+            'show_play_icon': False,
         }
 
     # Old images might not have a size in the database, let's fix it.
@@ -284,6 +285,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'show_video': ImageService.is_viewable_alias(alias) and (
             bool(image_revision.video_file.name) if hasattr(image_revision, 'label') else bool(image.video_file.name)
         ),
+        'show_play_icon': ImageService.is_play_button_alias(alias),
     }.items()))
 
 
