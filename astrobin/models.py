@@ -1699,7 +1699,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             revision_label = ImageService(self).get_final_revision_label()
 
         field = self.get_thumbnail_field(revision_label)
-        if not field.name:
+        if not field.name or 'placeholder' in field.url:
             return placeholder
 
         Image._normalize_field_name(field)

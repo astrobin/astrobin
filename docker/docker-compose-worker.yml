@@ -23,7 +23,10 @@ services:
     volumes:
       - media:/media
       - ${ASTROBIN_HOST_TEMPORARY_FILES:-/astrobin-temporary-files}:/astrobin-temporary-files
-
+    deploy:
+      resources:
+        limits:
+          memory: 8g
 
   celery_email:
     image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
@@ -45,7 +48,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
   celery_thumbnails:
     image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
@@ -67,7 +73,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
   celery_haystack:
     image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
@@ -89,7 +98,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
 volumes:
   media: {}

@@ -150,7 +150,7 @@ def image_pre_save_invalidate_thumbnails(sender, instance: Image, **kwargs):
     except sender.DoesNotExist:
         return
 
-    if image_before_saving.square_cropping != instance.square_cropping:
+    if image_before_saving.square_cropping != '' and image_before_saving.square_cropping != instance.square_cropping:
         instance.thumbnail_invalidate()
 
 

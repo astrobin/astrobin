@@ -3,12 +3,13 @@ import json
 import ntpath
 import os
 import subprocess
+import tempfile
 import uuid
 import zipfile
 from datetime import datetime, timedelta
 from io import StringIO
 from time import sleep
-from typing import List
+from typing import List, Union
 from zipfile import ZipFile
 
 import requests
@@ -139,6 +140,11 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     if acquire_lock():
         try:
             image = Image.all_objects.get(pk=pk)
+
+            if not image.image_file.name:
+                release_lock()
+                return
+
             thumb = image.thumbnail_raw(alias, revision_label, thumbnail_settings=thumbnail_settings)
 
             if thumb:
@@ -167,7 +173,7 @@ def generate_video_preview(object_id: int, content_type_id: int):
     if acquire_lock():
         try:
             ct = ContentType.objects.get_for_id(content_type_id)
-            obj = ct.get_object_for_this_type(pk=object_id)
+            obj: Union[Image, ImageRevision] = ct.get_object_for_this_type(pk=object_id)
 
             if obj.deleted:
                 logger.debug('Skip generating video preview for deleted %s' % obj)
@@ -180,7 +186,7 @@ def generate_video_preview(object_id: int, content_type_id: int):
             temp_path = temp_file.name
             video = VideoFileClip(temp_path)
 
-            thumbnail_path = f'video-thumb-{content_type_id}-{object_id}-{datetime.now().timestamp()}.jpg'
+            thumbnail_path = f'/astrobin-temporary-files/files/video-thumb-{content_type_id}-{object_id}-{datetime.now().timestamp()}.jpg'
             video.save_frame(thumbnail_path, t=video.duration / 2)
             thumbnail_file = File(open(thumbnail_path, "rb"))
             obj.image_file.save("video-thumbnail.jpg", thumbnail_file, save=False)
@@ -223,6 +229,7 @@ def encode_video_file(object_id: int, content_type_id: int):
                     output_file.name,
                     codec='libx264',
                     audio_codec='aac',
+                    temp_audiofile=tempfile.mktemp(suffix='.m4a'),
                     ffmpeg_params=[
                         '-c:v', 'libx264',
                         '-crf', '18',
@@ -232,7 +239,7 @@ def encode_video_file(object_id: int, content_type_id: int):
                         '-color_trc', 'bt709',
                         '-colorspace', 'bt709',
                         '-color_range', 'tv'
-                    ]
+                    ],
                 )
 
                 output_file.seek(0)  # reset file pointer to beginning

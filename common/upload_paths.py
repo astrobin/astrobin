@@ -4,7 +4,14 @@ from datetime import date
 
 def upload_path(prefix: str, user_pk: int, filename: str) -> str:
     ext = filename.split('.')[-1]
-    return "%s/%d/%d/%s.%s" % (prefix, user_pk, date.today().year, uuid.uuid4(), ext)
+    return "%s/%d/%d/%s%s.%s" % (
+        prefix,
+        user_pk,
+        date.today().year,
+        uuid.uuid4(),
+        '-placeholder' if filename == 'astrobin-video-placeholder.jpg' else '',
+        ext
+    )
 
 
 def image_upload_path(instance, filename: str) -> str:

@@ -1,9 +1,8 @@
 import logging
 import os
 
-from PIL import Image as PILImage
-
 import simplejson
+from PIL import Image as PILImage
 from django.core.files import File
 from django.http import HttpResponse
 from rest_framework import mixins, status
@@ -15,8 +14,10 @@ from astrobin_apps_images.api import constants, signals
 from astrobin_apps_images.api.constants import TUS_API_CHECKSUM_ALGORITHMS
 from astrobin_apps_images.api.mixins import TusCacheMixin
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
-from astrobin_apps_images.api.utils import has_required_tus_header, checksum_matches, add_expiry_header, write_data, \
-    get_or_create_temporary_file, apply_headers_to_response
+from astrobin_apps_images.api.utils import (
+    add_expiry_header, apply_headers_to_response, checksum_matches,
+    get_or_create_temporary_file, has_required_tus_header, write_data,
+)
 from common.exceptions import Conflict
 
 log = logging.getLogger(__name__)
@@ -162,10 +163,10 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
                 request.user.pk, object.pk, temporary_file))
 
             try:
-                getattr(object, self.get_file_field_name(mime_type)).save(
-                    self.get_upload_path_function(mime_type)(object, self.get_cached_property("name", object)),
-                    File(open(temporary_file, 'rb'))
-                )
+                attr = getattr(object, self.get_file_field_name(mime_type))
+                filename = self.get_upload_path_function(mime_type)(object, self.get_cached_property("name", object))
+                with open(temporary_file, 'rb') as opened_temporary_file:
+                    attr.save(filename, File(opened_temporary_file))
 
                 if hasattr(object, 'animated') and mime_type.startswith('image'):
                     with PILImage.open(temporary_file) as image_file:

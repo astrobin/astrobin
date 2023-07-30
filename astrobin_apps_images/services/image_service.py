@@ -522,7 +522,7 @@ class ImageService:
         else:
             w, h = 1024, 1024
 
-        placeholder_url = f'https://via.placeholder.com/{w}x{h}/222/333&text=LOADING'
+        placeholder_url = f'https://via.placeholder.com/{w}x{h}/222/333&text=PREVIEW NOT READY'
         response = requests.get(placeholder_url, stream=True)
         if response.status_code == 200:
             img_temp = NamedTemporaryFile()
@@ -535,7 +535,7 @@ class ImageService:
             img_temp.seek(0)
 
             # Assuming `image` is the ImageField
-            self.image.image_file.save("placeholder.jpg", File(img_temp), save=False)
+            self.image.image_file.save("astrobin-video-placeholder.jpg", File(img_temp), save=False)
 
             if save:
                 self.image.save(update_fields=['image_file'], keep_deleted=True)
