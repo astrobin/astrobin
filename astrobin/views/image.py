@@ -671,6 +671,19 @@ class ImageDetailView(ImageDetailViewBase):
         if image_prev and isinstance(image_prev, QuerySet):
             image_prev = image_prev[0]
 
+        ############################
+        # DOWNLOAD ORIGINAL URL    #
+        ############################
+
+        if is_revision and revision_image.video_file.name:
+            download_original_url = revision_image.video_file.url
+        elif is_revision and not revision_image.video_file.name:
+            download_original_url = revision_image.image_file_url
+        elif image.video_file.name:
+            download_original_url = image.video_file.url
+        else:
+            download_original_url = image.image_file.url
+
         #################
         # RESPONSE DICT #
         #################
@@ -783,6 +796,7 @@ class ImageDetailView(ImageDetailViewBase):
             'h': h,
             'image_uses_full_width': w is not None and w >= 940,
             'search_query': search_query,
+            'download_original_url': download_original_url,
         })
 
         return response_dict
