@@ -3,6 +3,7 @@ import math
 import os
 from collections import namedtuple
 from datetime import timedelta
+from typing import Union
 
 import requests
 from actstream.models import Action
@@ -75,8 +76,7 @@ class ImageService:
 
         return '0'
 
-    def get_final_revision(self):
-        # type: () -> union[Image, ImageRevision]
+    def get_final_revision(self) -> Union[Image, ImageRevision]:
         label = self.get_final_revision_label()
 
         if label == '0':
