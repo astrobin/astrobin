@@ -512,13 +512,6 @@ class ImageService:
 
         if self.image.w and self.image.h:
             w, h = self.image.w, self.image.h
-        elif self.image.video_file.name:
-            with self.image.video_file.open() as video_file:
-                with NamedTemporaryFile() as video_temp_file:
-                    video_temp_file.write(video_file.read())
-                    video_temp_path = video_temp_file.name
-                    clip = VideoFileClip(video_temp_path)
-                    w, h = clip.w, clip.h
         else:
             w, h = 1024, 1024
 
