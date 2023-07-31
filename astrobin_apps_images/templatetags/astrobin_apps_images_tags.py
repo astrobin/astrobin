@@ -263,6 +263,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'get_enhanced_thumb_url': get_enhanced_thumb_url,
         'regular_large_thumb_url': regular_large_thumb_url,
         'get_regular_large_thumb_url': get_regular_large_thumb_url,
+        'image_revision': image_revision,
         'is_revision': hasattr(image_revision, 'label'),
         'revision_id': image_revision.pk,
         'revision_title': image_revision.title if hasattr(image_revision, 'label') else None,

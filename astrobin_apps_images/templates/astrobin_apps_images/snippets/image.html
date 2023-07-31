@@ -86,13 +86,13 @@
                         {% endblocktrans %}
                     </p>
                 {% else %}
-                    {% with image.video_file.url|get_mime_type as video_mime_type %}
+                    {% with image_revision.video_file.url|get_mime_type as video_mime_type %}
                         <video class="video-js vjs-default-skin" data-setup='{"fluid": true, "liveui": true}' controls
                                preload="auto" poster="{{ thumb_url }}">
                             {% if video_mime_type %}
-                                <source src="{{ image.video_file.url }}" type="{{ video_mime_type }}" />
+                                <source src="{{ image_revision.video_file.url }}" type="{{ video_mime_type }}" />
                             {% endif %}
-                            <source src="{{ image.encoded_video_file.url }}" type="video/mp4" />
+                            <source src="{{ image_revision.encoded_video_file.url }}" type="video/mp4" />
                             <p class="vjs-no-js">
                                 To view this video please enable JavaScript, and consider upgrading to a
                                 web browser that
