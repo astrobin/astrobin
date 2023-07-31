@@ -1396,7 +1396,10 @@ class ImageDownloadView(View):
         if version == 'original':
             if request.user != image.user and not request.user.is_superuser:
                 return render(request, "403.html", {})
-            return self.download(revision.image_file.url if revision else image.image_file.url)
+            if revision:
+                return self.download(revision.video_file.url if revision.video_file.name else revision.image_file.url)
+            else:
+                return self.download(image.video_file.url if image.video_file.name else image.image_file.url)
 
         if version == 'basic_annotations':
             return self.download(revision.solution.image_file.url if revision else image.solution.image_file.url)
