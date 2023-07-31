@@ -1291,7 +1291,8 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
 
                 revision.thumbnail_invalidate()
 
-        if previous_square_cropping != revision.square_cropping:
+        if previous_square_cropping not in (None, '', '0,0,0,0') and \
+                previous_square_cropping != revision.square_cropping:
             revision.thumbnail_invalidate()
 
         return ret

@@ -180,6 +180,11 @@ def generate_video_preview(object_id: int, content_type_id: int):
                 release_lock()
                 return
 
+            if obj.image_file.name and 'placeholder' not in obj.image_file.name:
+                logger.debug('Skip generating video preview for %s because it is already generated' % obj)
+                release_lock()
+                return
+
             logger.debug('Generating video preview for %s' % obj)
 
             temp_file = ImageService(obj).get_local_video_file()
@@ -199,6 +204,8 @@ def generate_video_preview(object_id: int, content_type_id: int):
             logger.debug("Error generating video preview: %s" % str(e))
         finally:
             release_lock()
+    else:
+        logger.debug('generate_video_preview task is already running')
 
 
 @shared_task(time_limit=1800, acks_late=True)
@@ -213,8 +220,14 @@ def encode_video_file(object_id: int, content_type_id: int):
         try:
             ct = ContentType.objects.get_for_id(content_type_id)
             obj = ct.get_object_for_this_type(pk=object_id)
+
             if obj.deleted:
                 logger.debug('Skip encoding video file for deleted %s' % obj)
+                release_lock()
+                return
+
+            if obj.encoded_video_file.name:
+                logger.debug('Skip encoding video file for %s because it is already encoded' % obj)
                 release_lock()
                 return
 
@@ -256,6 +269,8 @@ def encode_video_file(object_id: int, content_type_id: int):
             logger.debug("Error encoding video file: %s" % str(e))
         finally:
             release_lock()
+    else:
+        logger.debug('encode_video_file task is already running')
 
 
 @shared_task(time_limit=60)

@@ -335,6 +335,15 @@ li.astrobin-thumbnail {
     @media screen and (max-width: 425px) {
       width: calc(100vw / 3 - 15px);
     }
+
+    .video-still-processing {
+      padding: 20rem 1rem;
+      text-align: center;
+
+      @media screen and (max-width: 767px) {
+        padding: 10rem 1rem;
+      }
+    }
   }
 
   &:hover .astrobin-image-container .badges {

@@ -79,8 +79,8 @@
 
         <figure>
             {% if show_video %}
-                {% if not image.encoded_video_file.name %}
-                    <p class="alert alert-warning">
+                {% if not image_revision.encoded_video_file.name %}
+                    <p class="alert alert-info video-still-processing">
                         {% blocktrans trimmed %}
                             This video is still processing, please return to this page later.
                         {% endblocktrans %}

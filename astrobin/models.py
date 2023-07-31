@@ -1779,7 +1779,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     def thumbnail_invalidate_real(self, field, revision_label, delete=True):
         from astrobin_apps_images.models import ThumbnailGroup
         from astrobin_apps_images.services import ImageService
-        from astrobin.tasks import generate_video_preview, encode_video_file
 
         for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].items():
             cache_key = self.thumbnail_cache_key(field, alias, revision_label)
@@ -1799,22 +1798,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             self.thumbnails.get(revision=revision_label).delete()
         except ThumbnailGroup.DoesNotExist:
             pass
-
-        if revision_label in (0, '0'):
-            obj = self
-        elif revision_label == 'final':
-            obj = ImageService(self).get_final_revision()
-        else:
-            obj = ImageService(self).get_revision(revision_label)
-
-        if obj.video_file.name:
-            obj.image_file.delete(save=False)
-            obj.encoded_video_file.delete(save=False)
-            obj.save(update_fields=['image_file', 'encoded_video_file'], keep_deleted=True)
-
-            ImageService(obj).generate_loading_placeholder()
-            generate_video_preview.apply_async(args=(obj.pk, ContentType.objects.get_for_model(obj).pk))
-            encode_video_file.apply_async(args=(obj.pk, ContentType.objects.get_for_model(obj).pk))
 
         Image.objects_including_wip.filter(pk=self.pk).update(updated=DateTimeService.now())
 

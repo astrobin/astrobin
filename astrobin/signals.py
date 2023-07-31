@@ -150,7 +150,8 @@ def image_pre_save_invalidate_thumbnails(sender, instance: Image, **kwargs):
     except sender.DoesNotExist:
         return
 
-    if image_before_saving.square_cropping != '' and image_before_saving.square_cropping != instance.square_cropping:
+    if image_before_saving.square_cropping not in (None, '', '0,0,0,0') and \
+            image_before_saving.square_cropping != instance.square_cropping:
         instance.thumbnail_invalidate()
 
 
@@ -211,16 +212,11 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
         if instance.video_file.name:
             if not instance.image_file.name:
                 ImageService(instance).generate_loading_placeholder()
-                generate_video_preview.apply_async(
-                    args=(instance.pk, ContentType.objects.get_for_model(Image).pk),
-                    countdown=5
-                )
+                generate_video_preview.apply_async(args=(instance.pk, ContentType.objects.get_for_model(Image).pk))
 
             if not instance.encoded_video_file.name:
-                encode_video_file.apply_async(
-                    args=(instance.pk, ContentType.objects.get_for_model(Image).pk),
-                    countdown=5
-                )
+                log.debug(f'Encoding video file for {instance} in image_post_save signal handler')
+                encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(Image).pk))
 
         groups = instance.user.joined_group_set.filter(autosubmission=True)
         for group in groups:
@@ -338,16 +334,11 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
     if not uploading and instance.video_file.name:
         if not instance.image_file.name:
             ImageService(instance).generate_loading_placeholder()
-            generate_video_preview.apply_async(
-                args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk),
-                countdown=5
-            )
+            generate_video_preview.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
 
         if not instance.encoded_video_file.name:
-            encode_video_file.apply_async(
-                args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk),
-                countdown=5
-            )
+            log.debug(f'Encoding video file for {instance} in imagerevision_post_save signal handler')
+            encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
 
     if wip or skip:
         return
