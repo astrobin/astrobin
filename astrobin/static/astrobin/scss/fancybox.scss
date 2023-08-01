@@ -42,6 +42,10 @@ a[data-fancybox] img {
       }
     }
 
+    video {
+      cursor: pointer;
+    }
+
     &:hover .fancybox__overlaySolution {
       opacity: 1;
     }
