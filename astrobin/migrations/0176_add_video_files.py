@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('astrobin', '0174_add_alnitak_remote_observatories_remote_data_source'),
+        ('astrobin', '0175_increase_decimal_places_of_deep_sky_acquisition_duration'),
     ]
 
     operations = [

@@ -88,7 +88,8 @@
                 {% else %}
                     {% with image_revision.video_file.url|get_mime_type as video_mime_type %}
                         <video class="video-js vjs-default-skin" data-setup='{"fluid": true, "liveui": true}' controls
-                               preload="auto" poster="{{ thumb_url }}">
+                               preload="auto" poster="{{ thumb_url }}" {% if image_revision.loop_video %}loop{% endif %}
+                        >
                             {% if video_mime_type %}
                                 <source src="{{ image_revision.video_file.url }}" type="{{ video_mime_type }}" />
                             {% endif %}

@@ -137,4 +137,10 @@ class ImageSerializer(serializers.ModelSerializer):
             'locations',
             'full_size_display_limitation',
             'download_limitation',
+            'loop_video',
+        )
+
+        read_only_fields = (
+            'video_file',
+            'encoded_video_file',
         )

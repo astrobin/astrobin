@@ -1174,6 +1174,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         max_length=256,
     )
 
+    loop_video = models.NullBooleanField(
+        default=None,
+    )
+
     uncompressed_source_file = models.FileField(
         upload_to=uncompressed_source_upload_path,
         validators=(FileValidator(allowed_extensions=(settings.ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS)),),
@@ -1885,6 +1889,10 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         upload_to=video_upload_path,
         null=True,
         max_length=256,
+    )
+
+    loop_video = models.NullBooleanField(
+        default=None,
     )
 
     uploader_in_progress = models.NullBooleanField(
