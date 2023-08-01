@@ -36,6 +36,7 @@ class ImageFancyboxSerializer(serializers.ModelSerializer):
                 'videoUrl': final_revision.video_file.url,
                 'encodedVideoUrl': final_revision.encoded_video_file.url,
                 'videoFormat': get_mime_type(final_revision.video_file.url),
+                'loopVideo': final_revision.loop_video,
             })
 
         return representation

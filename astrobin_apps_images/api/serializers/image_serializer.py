@@ -50,6 +50,9 @@ class ImageSerializer(serializers.ModelSerializer):
     deep_sky_acquisitions = DeepSkyAcquisitionSerializer(many=True, required=False, read_only=True)
     solar_system_acquisitions = SolarSystemAcquisitionSerializer(many=True, required=False, read_only=True)
 
+    video_file = serializers.FileField(required=False, allow_null=True, read_only=True)
+    encoded_video_file = serializers.FileField(required=False, allow_null=True, read_only=True)
+
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
@@ -138,9 +141,6 @@ class ImageSerializer(serializers.ModelSerializer):
             'full_size_display_limitation',
             'download_limitation',
             'loop_video',
-        )
-
-        read_only_fields = (
             'video_file',
             'encoded_video_file',
         )

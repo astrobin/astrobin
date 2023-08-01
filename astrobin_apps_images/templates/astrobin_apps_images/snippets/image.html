@@ -113,6 +113,7 @@
                                 {% if is_video %}
                                     data-video-url="{{ fancybox_url }}"
                                     data-src="{{ image_revision.image_file.url }}"
+                                    data-loop-video="{{ image_revision.loop_video | yesno:'true,false' }}"
                                 {% else %}
                                     data-src="{{ fancybox_url }}"
                                 {% endif %}
@@ -121,13 +122,13 @@
                                 data-url="{{ url }}"
                                 data-slug="{{ slug }}"
                                 {% if is_revision %}
-                                data-caption="{% blocktrans trimmed %}Revision {{ revision }}{% endblocktrans %}{% if revision_title %}: {{ revision_title }}{% endif %}"
+                                    data-caption="{% blocktrans trimmed %}Revision {{ revision }}{% endblocktrans %}{% if revision_title %}: {{ revision_title }}{% endif %}"
                                 {% else %}
-                                data-caption="{% trans 'Original revision' %}: {{ image.title }}"
+                                    data-caption="{% trans 'Original revision' %}: {{ image.title }}"
                                 {% endif %}
                             {% else %}
                                 {% if instant %}
-                                data-instant
+                                    data-instant
                                 {% endif %}
                                 href="{{ url }}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active" %}"
                             {% endif %}
@@ -266,13 +267,24 @@
 
                         {% if fancybox_tooltip %}
                             <div class="image-slideshow-button">
-                                <a data-fancybox="{{ rel }}" data-rel="{{ rel }}" href="{{ fancybox_url }}"
-                                   data-url="{{ url }}"
-                                   data-caption='{% astrobin_username image.user link=False %} - "{{ image.title | escape | default:_("(no title)") }}"'
-                                   data-slug="{{ slug }}" data-thumb="
-                                        {% if thumb_url %}{{ thumb_url }}{% else %}{{ get_raw_thumb_url }}{% endif %}"
-                                   data-user-id="{{ image.user.id }}" data-id="{{ image.id }}"
-                                   data-id-or-hash="{{ image.get_id }}">
+                                <a
+                                    data-fancybox="{{ rel }}"
+                                    data-rel="{{ rel }}"
+                                    href="{{ fancybox_url }}"
+                                    {% if is_video %}
+                                        data-video-url="{{ fancybox_url }}"
+                                        data-src="{{ image_revision.image_file.url }}"
+                                        data-loop-video="{{ image_revision.loop_video | yesno:"true,false" }}"
+                                    {% else %}
+                                        data-src="{{ fancybox_url }}"
+                                    {% endif %}
+                                    data-url="{{ url }}"
+                                    data-caption='{% astrobin_username image.user link=False %} - "{{ image.title | escape | default:_("(no title)") }}"'
+                                    data-slug="{{ slug }}"
+                                    data-thumb="{% if thumb_url %}{{ thumb_url }}{% else %}{{ get_raw_thumb_url }}{% endif %}"
+                                    data-user-id="{{ image.user.id }}" data-id="{{ image.id }}"
+                                    data-id-or-hash="{{ image.get_id }}"
+                                >
                                     <i class="icon-play"></i>
                                 </a>
                             </div>

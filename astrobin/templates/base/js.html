@@ -214,7 +214,7 @@
                         slide.$content.innerHTML = `
                             <video id="${id}"
                                 class="video-js vjs-default-skin fancybox__video"
-                                data-setup='{"liveui": true}'
+                                data-setup='{"liveui": true, "loop": ${slide.loopVideo}}'
                                 controls
                                 preload="auto"
                                 ${sizeHtml}
