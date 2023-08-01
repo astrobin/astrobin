@@ -34,6 +34,10 @@
                     },
                     {% if request.user.is_authenticated %}
                     {
+                        id: "iu",
+                        label: "{% trans "Your images" %}"
+                    },
+                    {
                         id: "ib",
                         label: "{% trans "Images bookmarked by you" %}"
                     },

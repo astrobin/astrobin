@@ -188,6 +188,10 @@ class AstroBinSearchForm(SearchForm):
 
         if d == "i":
             results = results.models(Image)
+        elif d == "iu":
+            if not self.request.user.is_authenticated:
+                raise PermissionDenied
+            results = results.models(Image).filter(Q(username=self.request.user.username))
         elif d == "ib":
             if not self.request.user.is_authenticated:
                 raise PermissionDenied
