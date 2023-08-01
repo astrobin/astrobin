@@ -154,7 +154,6 @@ def astrobin_image(context, image, alias, **kwargs):
     animated = field.name.lower().endswith('.gif') and ImageService.is_viewable_alias(alias)
 
     url = get_image_url(image, url_revision, url_size)
-    url_hd = get_image_url(image, url_revision, 'full')
 
     show_tooltip = tooltip and ImageService.is_tooltip_compatible_alias(alias)
 
@@ -245,7 +244,6 @@ def astrobin_image(context, image, alias, **kwargs):
         'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
         'real': alias in ('real', 'real_inverted'),
         'url': url,
-        'url_hd': url_hd,
         'show_tooltip': show_tooltip,
         'request': request,
         'caption_cache_key': "%d_%s_%s_%s" % (

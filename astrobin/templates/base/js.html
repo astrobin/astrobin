@@ -209,6 +209,7 @@
                 'reveal': (instance, slide) => {
                     if (!!slide.videoUrl) {
                         const id = `video-js-slide-${slide.idOrHash}`;
+                        const sizeHtml = slide.width && slide.height ? `width="${slide.width}" height="${slide.height}"` : '';
 
                         slide.$content.innerHTML = `
                             <video id="${id}"
@@ -216,6 +217,7 @@
                                 data-setup='{"fluid": true, "liveui": true}'
                                 controls
                                 preload="auto"
+                                ${sizeHtml}
                                 poster="${slide.src}"
                             ></video>`
 
