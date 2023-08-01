@@ -27,15 +27,15 @@ class ImageFancyboxSerializer(serializers.ModelSerializer):
         })
 
         if (
-                instance.video_file.name and
-                instance.video_file.url and
-                instance.encoded_video_file.name and
-                instance.encoded_video_file.url
+                final_revision.video_file.name and
+                final_revision.video_file.url and
+                final_revision.encoded_video_file.name and
+                final_revision.encoded_video_file.url
         ):
             representation.update({
-                'videoUrl': instance.video_file.url,
-                'encodedVideoUrl': instance.encoded_video_file.url,
-                'videoFormat': get_mime_type(instance.video_file.url),
+                'videoUrl': final_revision.video_file.url,
+                'encodedVideoUrl': final_revision.encoded_video_file.url,
+                'videoFormat': get_mime_type(final_revision.video_file.url),
             })
 
         return representation

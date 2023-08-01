@@ -214,7 +214,7 @@
                         slide.$content.innerHTML = `
                             <video id="${id}"
                                 class="video-js vjs-default-skin fancybox__video"
-                                data-setup='{"fluid": true, "liveui": true}'
+                                data-setup='{"liveui": true}'
                                 controls
                                 preload="auto"
                                 ${sizeHtml}
@@ -234,9 +234,9 @@
                     }
                 },
                 'closing': function (instance) {
-                    const videoJs = instance.$container.querySelector('.video-js');
+                    const videoJsInstances = instance.$container.querySelectorAll('.video-js');
 
-                    if (videoJs) {
+                    for (const videoJs of videoJsInstances) {
                         const player = videojs(videoJs.id);
                         if (player) {
                             player.dispose();

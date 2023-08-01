@@ -52,7 +52,10 @@ def _get_video_dimensions(file_or_path):
 
 
 def _get_image_dimensions(self):
-    ext = splitext(self.file.name)[1].lower()
+    try:
+        ext = splitext(self.file.name)[1].lower()
+    except FileNotFoundError:
+        return 0, 0
 
     if ext in settings.ALLOWED_VIDEO_EXTENSIONS:
         return _get_video_dimensions(self)

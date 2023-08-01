@@ -109,8 +109,12 @@
                                 data-fancybox="{{ rel }}"
                                 data-rel="{{ rel }}"
                                 href="{{ fancybox_url }}"
-                                data-video-url="{{ fancybox_url }}"
-                                data-src="{{ thumb_url }}"
+                                {% if is_video %}
+                                    data-video-url="{{ fancybox_url }}"
+                                    data-src="{{ image_revision.image_file.url }}"
+                                {% else %}
+                                    data-src="{{ fancybox_url }}"
+                                {% endif %}
                                 data-width="{{ w }}"
                                 data-height="{{ h }}"
                                 data-url="{{ url }}"
