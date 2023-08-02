@@ -678,7 +678,7 @@ class ImageDetailView(ImageDetailViewBase):
         if is_revision and revision_image.video_file.name:
             download_original_url = revision_image.video_file.url
         elif is_revision and not revision_image.video_file.name:
-            download_original_url = revision_image.image_file_url
+            download_original_url = revision_image.image_file.url
         elif image.video_file.name:
             download_original_url = image.video_file.url
         else:
