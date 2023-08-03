@@ -71,6 +71,17 @@ def push_notification_for_new_image(image_pk: int):
             object_id__in=user_pks
         ).order_by('object_id')]))
 
+
+    def get_image_group_followers():
+        all_groups = image.part_of_group_set.all()
+        all_users = []
+        for group in all_groups:
+            all_users.extend([group.owner])
+            all_users.extend(group.members.all())
+        return list(set(all_users))
+        
+        
+        
     def get_equipment_dictionary():
         """
         Returns a dictionary of equipment items and their followers, like this:
@@ -152,6 +163,7 @@ def push_notification_for_new_image(image_pk: int):
         return val
 
     user_followers = get_image_followers()
+    user_group_followers = [user for user in get_image_group_followers() if user not in user_followers]
     equipment_dictionary = get_equipment_dictionary()
     user_equipment_dictionary = get_user_equipment_dictionary()
     thumb = image.thumbnail_raw('gallery', None, sync=True)
@@ -176,6 +188,21 @@ def push_notification_for_new_image(image_pk: int):
             'push_notification_for_new_image called for image %d whose author %d has no followers' % (
                 image.pk, image.user.pk)
         )
+
+        for follower in user_group_followers:
+            if follower not in new_image_sent_to:           
+                new_image_sent_to.append(follower)
+                push_notification(
+                    [follower],
+                    image.user,
+                    'new_image_in_group',
+                    {
+                        'image': image,
+                        'image_thumbnail': thumb.url if thumb else None,
+                        'followed_equipment_items': user_equipment_dictionary[follower.pk]['items']
+                        if follower.pk in user_equipment_dictionary else [],
+                    }
+                )
 
     for key in user_equipment_dictionary.keys():
         follower = user_equipment_dictionary[key]['user']
