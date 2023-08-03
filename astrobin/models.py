@@ -3,22 +3,17 @@ import logging
 import os
 import random
 import string
-import tempfile
 import unicodedata
 import uuid
 from typing import List, Optional
 from urllib.parse import urlparse
 
 import boto3
-from django.core.files import File
 from django.core.files.images import get_image_dimensions
-from django.core.files.storage import default_storage
 from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
 from django.db.models import FileField
 from easy_thumbnails.files import ThumbnailFile
 from image_cropping import ImageRatioField
-from moviepy.editor import VideoFileClip
-from moviepy.video.compositing.concatenate import concatenate_videoclips
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.data_source import DataSource
@@ -1782,7 +1777,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     def thumbnail_invalidate_real(self, field, revision_label, delete=True):
         from astrobin_apps_images.models import ThumbnailGroup
-        from astrobin_apps_images.services import ImageService
 
         for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].items():
             cache_key = self.thumbnail_cache_key(field, alias, revision_label)
