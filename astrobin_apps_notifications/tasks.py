@@ -71,7 +71,7 @@ def push_notification_for_new_image(image_pk: int):
             object_id__in=user_pks
         ).order_by('object_id')]))
 
-    def get_image_group_followers():
+    def get_image_group_members():
         all_groups = image.part_of_group_set.all()
         all_users = []
         for group in all_groups:
@@ -160,7 +160,7 @@ def push_notification_for_new_image(image_pk: int):
         return val
 
     user_followers = get_image_followers()
-    user_group_followers = get_image_group_followers()
+    user_group_members = get_image_group_members()
     equipment_dictionary = get_equipment_dictionary()
     user_equipment_dictionary = get_user_equipment_dictionary()
     thumb = image.thumbnail_raw('gallery', None, sync=True)
@@ -186,18 +186,18 @@ def push_notification_for_new_image(image_pk: int):
                 image.pk, image.user.pk)
         )
 
-        for follower in user_group_followers:
-            if follower not in new_image_sent_to:           
-                new_image_sent_to.append(follower)
+        for group_member in user_group_members:
+            if group_member not in new_image_sent_to:           
+                new_image_sent_to.append(group_member)
                 push_notification(
-                    [follower],
+                    [group_member],
                     image.user,
                     'new_image_in_group',
                     {
                         'image': image,
                         'image_thumbnail': thumb.url if thumb else None,
-                        'followed_equipment_items': user_equipment_dictionary[follower.pk]['items']
-                        if follower.pk in user_equipment_dictionary else [],
+                        'followed_equipment_items': user_equipment_dictionary[group_member.pk]['items']
+                        if group_member.pk in user_equipment_dictionary else [],
                     }
                 )
 
