@@ -268,3 +268,19 @@ class TasksTest(TestCase):
         Generators.image_revision(image=image)
 
         push_notification.assert_called_with([user_follower, collaborator_follower], user, 'new_image_revision', mock.ANY)
+
+    @override_settings(CELERY_TASK_ALWAYS_EAGER=True)
+    @mock.patch('astrobin_apps_notifications.tasks.push_notification')
+    def test_new_group_image_notification(self, push_notification):
+        user = Generators.user(group_names=['group'])
+        group_member = Generators.user(group_names=['group'])
+        
+        image = Generators.image(user=user)
+        
+        # add image to 'group' somehow
+        
+        push_notification.assert_called_with([group_member], user, 'new_image_in_group', {
+            'image': image,
+            'image_thumbnail': mock.ANY,
+            'followed_equipment_items': [],
+        })

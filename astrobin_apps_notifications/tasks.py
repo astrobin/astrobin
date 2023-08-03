@@ -71,7 +71,6 @@ def push_notification_for_new_image(image_pk: int):
             object_id__in=user_pks
         ).order_by('object_id')]))
 
-
     def get_image_group_followers():
         all_groups = image.part_of_group_set.all()
         all_users = []
@@ -79,9 +78,7 @@ def push_notification_for_new_image(image_pk: int):
             all_users.extend([group.owner])
             all_users.extend(group.members.all())
         return list(set(all_users))
-        
-        
-        
+
     def get_equipment_dictionary():
         """
         Returns a dictionary of equipment items and their followers, like this:
@@ -163,7 +160,7 @@ def push_notification_for_new_image(image_pk: int):
         return val
 
     user_followers = get_image_followers()
-    user_group_followers = [user for user in get_image_group_followers() if user not in user_followers]
+    user_group_followers = get_image_group_followers()
     equipment_dictionary = get_equipment_dictionary()
     user_equipment_dictionary = get_user_equipment_dictionary()
     thumb = image.thumbnail_raw('gallery', None, sync=True)
