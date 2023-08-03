@@ -31,6 +31,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_image_in_group',
+        _('New image from a group you belong to'),
+        '',
+        2,
+    ),
+    (
         'image_solved',
         _('Your image was plate-solved'),
         '',
