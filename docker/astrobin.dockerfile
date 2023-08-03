@@ -9,17 +9,8 @@ COPY docker/patch-uname.sh /usr/bin/astrobin-patch-uname.sh
 RUN sh /usr/bin/astrobin-patch-uname.sh
 RUN echo `uname -r`
 
-RUN apt-get update && apt-get install -y software-properties-common
-
-RUN add-apt-repository -y ppa:savoury1/ffmpeg4
-
-RUN apt-get update
-
-RUN apt-get install -y --no-install-recommends \
-    libopenal-data=1:1.19.1-1 libopenal1 libavdevice58 ffmpeg
-
 # Install build prerequisites
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     locales \
     rsyslog \
     logrotate \
@@ -44,6 +35,7 @@ RUN apt-get install -y --no-install-recommends \
     libpq-dev \
     ruby ruby-dev \
     redis-tools \
+    ffmpeg \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1
