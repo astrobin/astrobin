@@ -42,6 +42,7 @@ class AppConfig(JSONResponseMixin, View):
             'PREMIUM_PRICE_PREMIUM_2020': settings.PREMIUM_PRICE_PREMIUM_2020,
             'PREMIUM_PRICE_ULTIMATE_2020': settings.PREMIUM_PRICE_ULTIMATE_2020,
             'MAX_IMAGE_PIXELS': PILImage.MAX_IMAGE_PIXELS,
+            'MAX_FILE_SIZE': settings.MAX_FILE_SIZE,
             'GOOGLE_ADS_ID': settings.GOOGLE_ADS_ID,
             'REQUEST_COUNTRY': utils.get_client_country_code(request),
             'IMAGE_CONTENT_TYPE_ID': ContentType.objects.get_for_model(Image).id,
