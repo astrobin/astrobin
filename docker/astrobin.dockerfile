@@ -15,7 +15,8 @@ RUN add-apt-repository -y ppa:savoury1/ffmpeg4
 
 RUN apt-get update
 
-RUN apt-get install -y libopenal-data=1:1.19.1-1 libopenal1 libavdevice58 ffmpeg
+RUN apt-get install -y --no-install-recommends \
+    libopenal-data=1:1.23.1-0ubuntu1~20.04.sav0 libopenal1 libavdevice58 ffmpeg
 
 # Install build prerequisites
 RUN apt-get install -y --no-install-recommends \
