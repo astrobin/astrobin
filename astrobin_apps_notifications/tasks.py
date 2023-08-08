@@ -187,7 +187,7 @@ def push_notification_for_new_image(image_pk: int):
         )
 
         for group_member in user_group_members:
-            if group_member not in new_image_sent_to:           
+            if group_member not in new_image_sent_to:
                 new_image_sent_to.append(group_member)
                 push_notification(
                     [group_member],

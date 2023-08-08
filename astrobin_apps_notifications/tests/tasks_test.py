@@ -3,6 +3,7 @@ from django.test import TestCase, override_settings
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 
 
@@ -272,13 +273,20 @@ class TasksTest(TestCase):
     @override_settings(CELERY_TASK_ALWAYS_EAGER=True)
     @mock.patch('astrobin_apps_notifications.tasks.push_notification')
     def test_new_group_image_notification(self, push_notification):
-        user = Generators.user(group_names=['group'])
-        group_member = Generators.user(group_names=['group'])
-        
+        Group.objects.create(
+            creator=self.user1,
+            owner=self.user1,
+            name='Test group',
+            category=101,
+            public=True,
+            moderated=False,
+            autosubmission=True
+        )
+        user = Generators.user(group_names=['Test group'])
+        group_member = Generators.user(group_names=['Test group'])
+
         image = Generators.image(user=user)
-        
-        # add image to 'group' somehow
-        
+
         push_notification.assert_called_with([group_member], user, 'new_image_in_group', {
             'image': image,
             'image_thumbnail': mock.ANY,
