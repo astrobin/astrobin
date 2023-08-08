@@ -1,5 +1,5 @@
 {% load i18n %}
 
 {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-    New image by {{user}} TODO SHORT TXT
+    New image by {{user}} in the group {{ group.name }} TODO SHORT TXT
 {% endblocktrans %}{% if image.title %}: {{image.title}}{% endif %}

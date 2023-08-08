@@ -1,4 +1,6 @@
 import logging
+import time
+
 from datetime import datetime, timedelta
 
 from celery import shared_task
@@ -52,15 +54,18 @@ def push_notification_for_approved_image(image_pk: int, moderator_pk: int):
 
 @shared_task(time_limit=1800)
 def push_notification_for_new_image(image_pk: int):
+    time.sleep(5)
+
+
     try:
         image = Image.objects_including_wip.get(pk=image_pk)
     except Image.DoesNotExist:
         logger.error('push_notification_for_new_image called for image not found: %d' % image_pk)
         return
 
-    if image.is_wip:
-        logger.error('push_notification_for_new_image called for image that is wip: %d' % image_pk)
-        return
+    # if image.is_wip:
+    #     logger.error('push_notification_for_new_image called for image that is wip: %d' % image_pk)
+    #     return
 
     def get_image_followers():
         user_pks = [image.user.pk] + list(image.collaborators.all().values_list('pk', flat=True))
@@ -75,9 +80,9 @@ def push_notification_for_new_image(image_pk: int):
         all_groups = image.part_of_group_set.all()
         all_users = []
         for group in all_groups:
-            all_users.extend([group.owner])
-            all_users.extend(group.members.all())
-        return list(set(all_users))
+            all_users.extend([{'user': group.owner, 'group': group}])
+            all_users.extend([{'user': u, 'group': group} for u in group.members.all()])
+        return all_users
 
     def get_equipment_dictionary():
         """
@@ -186,18 +191,21 @@ def push_notification_for_new_image(image_pk: int):
                 image.pk, image.user.pk)
         )
 
-        for group_member in user_group_members:
-            if group_member not in new_image_sent_to:
-                new_image_sent_to.append(group_member)
+        for user_group in user_group_members:
+            user = user_group['user']
+            group = user_group['group']
+            if user not in new_image_sent_to:
+                new_image_sent_to.append(user)
                 push_notification(
-                    [group_member],
+                    [user],
                     image.user,
                     'new_image_in_group',
                     {
+                        'group': group,
                         'image': image,
                         'image_thumbnail': thumb.url if thumb else None,
-                        'followed_equipment_items': user_equipment_dictionary[group_member.pk]['items']
-                        if group_member.pk in user_equipment_dictionary else [],
+                        'followed_equipment_items': user_equipment_dictionary[user.pk]['items']
+                        if user.pk in user_equipment_dictionary else [],
                     }
                 )
 

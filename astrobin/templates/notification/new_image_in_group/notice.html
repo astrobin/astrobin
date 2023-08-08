@@ -2,6 +2,6 @@
 
 <a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
     {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-        <strong>{{ user }}</strong> has published a new image in a TODO NOTICE HTML
+        <strong>{{ user }}</strong> has published a new image in the group {{ group.name }} TODO NOTICE HTML
     {% endblocktrans %}
 </a>{% if image.title %}: {{ image.title }}{% endif %}
