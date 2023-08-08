@@ -463,19 +463,19 @@ class IotdService:
         if user != image.user:
             return False, MayNotSubmitToIotdTpReason.NOT_OWNER
 
+        if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
+            return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
+
+        if image.published and image.published < (
+                DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
+        ):
+            return False, MayNotSubmitToIotdTpReason.TOO_LATE
+
         if is_free(PremiumService(user).get_valid_usersubscription()):
             return False, MayNotSubmitToIotdTpReason.IS_FREE
 
         if image.is_wip:
             return False, MayNotSubmitToIotdTpReason.NOT_PUBLISHED
-
-        if image.published < (
-                DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
-        ):
-            return False, MayNotSubmitToIotdTpReason.TOO_LATE
-
-        if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
-            return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
 
         if image.subject_type in (SubjectType.GEAR, SubjectType.OTHER, '', None):
             return False, MayNotSubmitToIotdTpReason.BAD_SUBJECT_TYPE
