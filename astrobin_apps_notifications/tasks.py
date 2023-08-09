@@ -54,8 +54,7 @@ def push_notification_for_approved_image(image_pk: int, moderator_pk: int):
 
 @shared_task(time_limit=1800)
 def push_notification_for_new_image(image_pk: int):
-    time.sleep(5)
-
+    time.sleep(5) # TODO: remove this
 
     try:
         image = Image.objects_including_wip.get(pk=image_pk)
@@ -63,6 +62,7 @@ def push_notification_for_new_image(image_pk: int):
         logger.error('push_notification_for_new_image called for image not found: %d' % image_pk)
         return
 
+    # TODO: uncomment this
     # if image.is_wip:
     #     logger.error('push_notification_for_new_image called for image that is wip: %d' % image_pk)
     #     return
@@ -201,9 +201,9 @@ def push_notification_for_new_image(image_pk: int):
                     image.user,
                     'new_image_in_group',
                     {
-                        'group': group,
                         'image': image,
                         'image_thumbnail': thumb.url if thumb else None,
+                        'group_name': group.name,
                         'followed_equipment_items': user_equipment_dictionary[user.pk]['items']
                         if user.pk in user_equipment_dictionary else [],
                     }
