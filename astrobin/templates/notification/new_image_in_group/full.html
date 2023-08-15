@@ -3,7 +3,7 @@
 
 <p>
     {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-        <strong>{{ user }}</strong> has published a new image in the group {{ group.name }} TODO FULL HTML.
+        <strong>{{ user }}</strong> has published a new image in the group {{ group_name }}
     {% endblocktrans %}{% if image.title %}: <a href="{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email image.user %}">{{ image.title }}</a>{% endif %}
 </p>
 

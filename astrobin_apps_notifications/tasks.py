@@ -169,7 +169,7 @@ def push_notification_for_new_image(image_pk: int):
     equipment_dictionary = get_equipment_dictionary()
     user_equipment_dictionary = get_user_equipment_dictionary()
     thumb = image.thumbnail_raw('gallery', None, sync=True)
-    new_image_sent_to = []
+    new_image_sent_to = [image.user] # they already know
 
     if len(user_followers) > 0:
         for follower in user_followers:
