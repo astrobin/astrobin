@@ -1,0 +1,9 @@
+{% load i18n %}
+{% load astrobin_apps_notifications_tags %}
+
+<a href="{{ url }}">
+    {% blocktrans trimmed with prefix='<strong>' suffix='</strong>' title=image.title %}
+        The deadline to submit your image {{ prefix }}{{ title }}{{ suffix }} for IOTD/TP consideration is in {{ days }}
+        days
+    {% endblocktrans %}
+</a>
