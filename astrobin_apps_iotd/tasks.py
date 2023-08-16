@@ -118,3 +118,8 @@ def update_judgement_queues():
 def update_stats():
     IotdService().update_stats(365)
     logger.info("update_stats completed")
+
+
+@shared_task(time_limit=600)
+def notify_about_upcoming_deadline_for_iotd_tp_submission():
+    IotdService.notify_about_upcoming_deadline_for_iotd_tp_submission()

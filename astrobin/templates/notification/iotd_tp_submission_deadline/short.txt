@@ -1,0 +1,6 @@
+{% load i18n %}
+
+{% blocktrans trimmed with prefix='"' suffix='"' title=image.title %}
+    The deadline to submit your image {{ prefix }}{{ title }}{{ suffix }} for IOTD/TP consideration is in {{ days }}
+    days
+{% endblocktrans %}
