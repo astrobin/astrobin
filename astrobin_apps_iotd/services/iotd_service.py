@@ -21,7 +21,7 @@ from astrobin_apps_iotd.models import (
     TopPickNominationsArchive,
 )
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from astrobin_apps_users.services import UserService
@@ -463,19 +463,19 @@ class IotdService:
         if user != image.user:
             return False, MayNotSubmitToIotdTpReason.NOT_OWNER
 
+        if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
+            return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
+
+        if image.published and image.published < (
+                DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
+        ):
+            return False, MayNotSubmitToIotdTpReason.TOO_LATE
+
         if is_free(PremiumService(user).get_valid_usersubscription()):
             return False, MayNotSubmitToIotdTpReason.IS_FREE
 
         if image.is_wip:
             return False, MayNotSubmitToIotdTpReason.NOT_PUBLISHED
-
-        if image.published < (
-                DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
-        ):
-            return False, MayNotSubmitToIotdTpReason.TOO_LATE
-
-        if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
-            return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
 
         if image.subject_type in (SubjectType.GEAR, SubjectType.OTHER, '', None):
             return False, MayNotSubmitToIotdTpReason.BAD_SUBJECT_TYPE
@@ -780,3 +780,31 @@ class IotdService:
                 .filter(image__data_source=DataSource.UNKNOWN) \
                 .count(),
         )
+
+    @staticmethod
+    def user_has_submissions(user):
+        return Image.objects.filter(user=user, submitted_for_iotd_tp_consideration__isnull=False).exists()
+
+    @staticmethod
+    def notify_about_upcoming_deadline_for_iotd_tp_submission():
+        images = Image.objects.filter(
+            published__date=DateTimeService.today() - timedelta(
+                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS +
+                settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
+            ),
+            submitted_for_iotd_tp_consideration__isnull=True,
+        )
+
+        for image in images:
+            if IotdService.user_has_submissions(image.user):
+                thumb = image.thumbnail_raw('gallery', None, sync=True)
+
+                push_notification(
+                    [image.user], None, 'iotd_tp_submission_deadline', {
+                        'image': image,
+                        'image_thumbnail': thumb.url if thumb else None,
+                        'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),
+                        'days': settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS,
+                        'BASE_URL': settings.BASE_URL,
+                    }
+                )
