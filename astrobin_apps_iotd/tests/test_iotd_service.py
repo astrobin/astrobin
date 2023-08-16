@@ -2277,10 +2277,12 @@ class IotdServiceTest(TestCase):
 
         Image.objects.filter(pk=image_2.pk).update(
             published=DateTimeService.now() - timedelta(
-                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS -
+                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS +
                 settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
             )
         )
+
+        push_notification.reset_mock()
 
         IotdService.notify_about_upcoming_deadline_for_iotd_tp_submission()
 
