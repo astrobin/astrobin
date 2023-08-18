@@ -35,6 +35,7 @@ from haystack.query import SearchQuerySet
 from hitcount.models import HitCount
 from moviepy.video.fx import resize
 from moviepy.video.io.VideoFileClip import VideoFileClip
+from proglog import ProgressBarLogger
 from pybb.models import Post
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
@@ -252,6 +253,36 @@ def encode_video_file(object_id: int, content_type_id: int):
                 video = video.fx(resize.resize, newsize=(width, height))
 
             with NamedTemporaryFile(suffix='.mp4', delete=False) as output_file:
+                class ProgressLogger(ProgressBarLogger):
+                    def __init__(self, content_type_id, object_id):
+                        super().__init__()
+                        self.last_message = ''
+                        self.previous_percentage = 0
+                        self.content_type_id = content_type_id
+                        self.object_id = object_id
+
+                    def callback(self, **changes):
+                        # Every time the logger message is updated, this function is called with
+                        # the `changes` dictionary of the form `parameter: new value`.
+                        for (parameter, value) in changes.items():
+                            # print ('Parameter %s is now %s' % (parameter, value))
+                            self.last_message = value
+
+                    def bars_callback(self, bar, attr, value, old_value=None):
+                        # Every time the logger progress is updated, this function is called
+                        if 'Writing video' in self.last_message:
+                            percentage = (value / self.bars[bar]['total']) * 100
+                            if 0 < percentage < 100:
+                                if int(percentage) != self.previous_percentage:
+                                    self.previous_percentage = int(percentage)
+                                    logger.debug(self.previous_percentage)
+                                    cache.set(
+                                        f'video-encoding-progress-{self.content_type_id}-{self.object_id}',
+                                        self.previous_percentage
+                                    )
+
+                cache.set(f'video-encoding-progress-{content_type_id}-{object_id}', 0)
+
                 video.write_videofile(
                     output_file.name,
                     codec='libx264',
@@ -268,6 +299,7 @@ def encode_video_file(object_id: int, content_type_id: int):
                         '-colorspace', 'bt709',
                         '-color_range', 'tv'
                     ],
+                    logger=ProgressLogger(content_type_id, object_id)
                 )
 
                 output_file.seek(0)  # reset file pointer to beginning
@@ -280,7 +312,10 @@ def encode_video_file(object_id: int, content_type_id: int):
             # Note: temp_path is not removed because it might be reused by another task. It will be removed by a
             # periodic task.
             os.remove(output_file.name)
+
+            cache.set(f'video-encoding-progress-{content_type_id}-{object_id}', 100)
         except Exception as e:
+            cache.delete(f'video-encoding-progress-{content_type_id}-{object_id}')
             logger.debug("Error encoding video file: %s" % str(e))
             obj.encoding_error = str(e)
             obj.save(update_fields=['encoding_error'], keep_deleted=True)

@@ -129,11 +129,17 @@
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="{{ r.image_file.url }}" target="_blank">
-                                            <i class="icon-download-alt"></i> {% trans "Download original file" %}
-                                        </a>
-                                    </li>
+                                    {% if r.image_file.name or r.video_file.name %}
+                                        <li>
+                                            {% if r.video_file.name %}
+                                                <a href="{{ r.video_file.url }}" target="_blank">
+                                            {% elif r.image_file.name %}
+                                                <a href="{{ r.image_file.url }}" target="_blank">
+                                            {% endif %}
+                                                    <i class="icon-download-alt"></i> {% trans "Download original file" %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         {% endif %}
