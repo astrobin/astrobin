@@ -789,7 +789,7 @@ class IotdService:
     def notify_about_upcoming_deadline_for_iotd_tp_submission():
         images = Image.objects.filter(
             published__date=DateTimeService.today() - timedelta(
-                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS +
+                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS -
                 settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
             ),
             submitted_for_iotd_tp_consideration__isnull=True,

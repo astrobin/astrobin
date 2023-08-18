@@ -2277,7 +2277,7 @@ class IotdServiceTest(TestCase):
 
         Image.objects.filter(pk=image_2.pk).update(
             published=DateTimeService.now() - timedelta(
-                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS +
+                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS -
                 settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
             )
         )
