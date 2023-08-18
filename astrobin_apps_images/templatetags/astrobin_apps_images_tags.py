@@ -168,7 +168,11 @@ def astrobin_image(context, image, alias, **kwargs):
 
         if image.is_wip:
             badges.append('wip')
-        elif iotd_service.is_iotd(image):
+
+        if image.video_file.name and not ImageService.is_viewable_alias(alias):
+            badges.append('video')
+
+        if iotd_service.is_iotd(image):
             badges.append('iotd')
         elif iotd_service.is_top_pick(image):
             badges.append('top-pick')

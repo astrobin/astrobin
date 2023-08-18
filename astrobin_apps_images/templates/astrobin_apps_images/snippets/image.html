@@ -72,6 +72,13 @@
                                    data-container="body" title="{% trans "Collaboration" %}"></i>
                             </li>
                         {% endif %}
+
+                        {% if badge == 'video' %}
+                            <li>
+                                <i class="icon-play video-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Video" %}"></i>
+                            </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             {% endif %}
