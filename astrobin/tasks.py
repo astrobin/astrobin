@@ -33,6 +33,7 @@ from django.utils.text import slugify
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 from hitcount.models import HitCount
+from moviepy.video.fx import resize
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from pybb.models import Post
 from registration.backends.hmac.views import RegistrationView
@@ -237,6 +238,19 @@ def encode_video_file(object_id: int, content_type_id: int):
             temp_path = temp_file.name
             video = VideoFileClip(temp_path)
 
+            width, height = video.size
+
+            resize_video = False
+            if width % 2 == 1:
+                width -= 1
+                resize_video = True
+            if height % 2 == 1:
+                height -= 1
+                resize_video = True
+
+            if resize_video:
+                video = video.fx(resize.resize, newsize=(width, height))
+
             with NamedTemporaryFile(suffix='.mp4', delete=False) as output_file:
                 video.write_videofile(
                     output_file.name,
@@ -244,6 +258,7 @@ def encode_video_file(object_id: int, content_type_id: int):
                     audio_codec='aac',
                     temp_audiofile=tempfile.mktemp(suffix='.m4a'),
                     ffmpeg_params=[
+                        '-s', f'{width}x{height}',
                         '-c:v', 'libx264',
                         '-crf', '18',
                         '-pix_fmt', 'yuv420p',
