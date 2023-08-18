@@ -1169,6 +1169,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         max_length=256,
     )
 
+    encoding_error = models.TextField(
+        blank=True,
+        null=True,
+        editable=False,
+    )
+
     loop_video = models.NullBooleanField(
         default=None,
     )
@@ -1883,6 +1889,12 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         upload_to=video_upload_path,
         null=True,
         max_length=256,
+    )
+
+    encoding_error = models.TextField(
+        blank=True,
+        null=True,
+        editable=False,
     )
 
     loop_video = models.NullBooleanField(

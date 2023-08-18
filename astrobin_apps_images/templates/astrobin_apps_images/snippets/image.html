@@ -80,11 +80,28 @@
         <figure>
             {% if show_video %}
                 {% if not image_revision.encoded_video_file.name %}
-                    <p class="alert alert-info video-still-processing">
-                        {% blocktrans trimmed %}
-                            This video is still processing, please return to this page later.
-                        {% endblocktrans %}
-                    </p>
+                    {% if image_revision.encoding_error %}
+                        <p class="alert alert-info video-still-processing">
+                            {% blocktrans trimmed %}
+                                There was a problem encoding this video, please upload it again.
+                            {% endblocktrans %}
+
+                            {% blocktrans trimmed %}
+                                If the problem persists, please contact us.
+                            {% endblocktrans %}
+
+                            <br />
+                            <br />
+
+                            {{ image_revision.encoding_error }}
+                        </p>
+                    {% else %}
+                        <p class="alert alert-info video-still-processing">
+                            {% blocktrans trimmed %}
+                                This video is still processing, please return to this page later.
+                            {% endblocktrans %}
+                        </p>
+                    {% endif %}
                 {% else %}
                     {% with image_revision.video_file.url|get_mime_type as video_mime_type %}
                         <video class="video-js vjs-default-skin" data-setup='{"fluid": true, "liveui": true}' controls

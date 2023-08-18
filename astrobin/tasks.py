@@ -218,10 +218,10 @@ def encode_video_file(object_id: int, content_type_id: int):
     release_lock = lambda: cache.delete(lock_id)
 
     if acquire_lock():
-        try:
-            ct = ContentType.objects.get_for_id(content_type_id)
-            obj = ct.get_object_for_this_type(pk=object_id)
+        ct = ContentType.objects.get_for_id(content_type_id)
+        obj = ct.get_object_for_this_type(pk=object_id)
 
+        try:
             if obj.deleted:
                 logger.debug('Skip encoding video file for deleted %s' % obj)
                 release_lock()
@@ -282,6 +282,8 @@ def encode_video_file(object_id: int, content_type_id: int):
             os.remove(output_file.name)
         except Exception as e:
             logger.debug("Error encoding video file: %s" % str(e))
+            obj.encoding_error = str(e)
+            obj.save(update_fields=['encoding_error'], keep_deleted=True)
         finally:
             release_lock()
     else:
