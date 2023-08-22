@@ -25,7 +25,7 @@
         function attemptPlatesolving()  {
             function shouldProcess() {
                 const $img = $('.main-image img').first();
-                return $img.attr('data-loaded') === 'true' && $img.attr('data-is-video') !== undefined;
+                return $img.attr('data-loaded') === 'true' && $img.attr('data-is-video') === undefined;
             }
 
             {% with user|get_valid_usersubscription as image_user_valid_usersubscription %}
