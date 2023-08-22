@@ -4,6 +4,7 @@
   display: inline-block;
 }
 
+.video-badge,
 .collaboration-badge,
 .wip-badge,
 .iotd-badge,
@@ -22,6 +23,23 @@
   font-size: 12px;
   line-height: 20px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+}
+
+.video-badge {
+  $lighter-link-color: lighten($link-color, 10%);
+
+  font-size: 10px;
+  background: $lighter-link-color;
+  background: -webkit-gradient(linear, left top, left bottom, from($lighter-link-color), to(darken($lighter-link-color, 10%)));
+  background: -webkit-linear-gradient(top, $lighter-link-color, darken($lighter-link-color, 10%));
+  background: -moz-linear-gradient(top, $lighter-link-color, darken($lighter-link-color, 10%));
+  background: -ms-linear-gradient(top, $lighter-link-color, darken($lighter-link-color, 10%));
+  background: -o-linear-gradient(top, $lighter-link-color, darken($lighter-link-color, 10%));
+  background-image: -ms-linear-gradient(top, $lighter-link-color 0%, darken($lighter-link-color, 10%) 100%);
+
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $lighter-link-color 0 0 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $lighter-link-color 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $lighter-link-color 0 0 10px;
 }
 
 .collaboration-badge {

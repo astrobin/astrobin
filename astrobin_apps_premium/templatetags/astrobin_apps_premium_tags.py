@@ -113,6 +113,9 @@ def can_perform_advanced_platesolving(user_subscription: UserSubscription) -> bo
 
 @register.filter
 def can_see_real_resolution(user: User, image: Image) -> bool:
+    if image.video_file.name:
+        return False
+
     return PremiumService.can_see_real_resolution(user, image)
 
 

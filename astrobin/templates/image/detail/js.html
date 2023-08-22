@@ -137,6 +137,57 @@ $(document).ready(function() {
         }
     }
 
+    function updateVideoEncodingProgress() {
+        let url = null;
+
+        {% if is_revision %}
+            url = `/api/v2/images/image-revision/{{ revision_image.pk }}/video-encoding-progress/`;
+        {% else %}
+            url = `/api/v2/images/image/{{ image.pk }}/video-encoding-progress/`;
+        {% endif %}
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            success: function (progress) {
+                const $el = $(".video-encoding-progress");
+                const $bar = $el.find(".bar")
+
+                if (progress === null || progress === undefined || progress === "") {
+                    $el.hide();
+                    $bar.css('width', 0);
+
+                    if (window.updateVideoEncodingProgressTimeout !== undefined) {
+                        clearTimeout(window.updateVideoEncodingProgressTimeout);
+                    }
+
+                    window.updateVideoEncodingProgressTimeout = setTimeout(updateVideoEncodingProgress, 1000);
+
+                    return;
+                }
+
+                if (progress === 100) {
+                    if (window.updateVideoEncodingProgressTimeout !== undefined) {
+                        clearTimeout(window.updateVideoEncodingProgressTimeout);
+                    }
+
+                    const queryParams = new URLSearchParams(window.location.search);
+                    queryParams.set("lr", `${new Date().getTime()}`);
+
+                    window.location.search = queryParams.toString();
+
+                    return;
+                }
+
+                $bar.css('width', progress + "%");
+                $bar.html("&nbsp;" + progress + "%");
+                $el.show();
+                setTimeout(updateVideoEncodingProgress, 1000);
+            }
+        });
+    }
+
     $('form.copy select').change(function () {
         const SHARING_MODE_SIMPLE = 0;
         const SHARING_MODE_FORUMS = 1;
@@ -283,6 +334,14 @@ $(document).ready(function() {
     });
 
     detectForceClassicRevisionUploader();
+
+    {% if is_revision and revision_image.video_file.name and not revision_image.encoded_video_file.name %}
+        updateVideoEncodingProgress();
+    {% endif %}
+
+    {% if not is_revision and image.video_file.name and not image.encoded_video_file.name %}
+        updateVideoEncodingProgress();
+    {% endif %}
 });
 </script>
 

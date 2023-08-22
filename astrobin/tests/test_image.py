@@ -344,7 +344,7 @@ class ImageTest(TestCase):
         self.assertIsNotNone(
             re.search(
                 r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"\s+data-revision="%s"' % (
-                    image.pk, image.get_id(), "gallery", "final"),
+                    image.pk, image.get_id(), "gallery", revision.label),
                 response.content.decode('utf-8')
             )
         )

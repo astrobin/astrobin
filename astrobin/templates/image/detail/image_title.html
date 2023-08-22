@@ -55,15 +55,9 @@
             <div class="span12">
                 <strong>{% trans "Download original file" %}</strong>:
 
-                {% if revision_image %}
-                    <a href="{{ revision_image.image_file.url }}" target="_blank">
-                        {% private_abbr %} {% trans "Download" %}
-                    </a>
-                {% else %}
-                    <a href="{{ image.image_file.url }}" target="_blank">
-                        {% private_abbr %} {% trans "Download" %}
-                    </a>
-                {% endif %}
+                <a href="{{ download_original_url }}" target="_blank">
+                    {% private_abbr %} {% trans "Download" %}
+                </a>
             </div>
         </div>
     {% endif %}

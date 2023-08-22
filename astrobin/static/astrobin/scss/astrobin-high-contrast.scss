@@ -282,3 +282,15 @@ body.full {
     }
   }
 }
+
+.video-badge,
+.collaboration-badge,
+.wip-badge,
+.iotd-badge,
+.top-pick-badge,
+.top-pick-nomination-badge,
+.iotd-queue-badge {
+  color: $grey-8;
+  background-color: $grey-3;
+  text-shadow: none;
+}

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.db.models import Count
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -130,3 +132,11 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
         count = Image.objects_including_wip.filter(user=user).count()
 
         return Response(count, HTTP_200_OK)
+
+    @action(detail=True, methods=['get'], url_path='video-encoding-progress')
+    def video_encoding_progress(self, request, pk=None):
+        content_type = ContentType.objects.get_for_model(Image)
+
+        value = cache.get(f"video-encoding-progress-{content_type.pk}-{pk}")
+
+        return Response(value, HTTP_200_OK)

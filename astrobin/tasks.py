@@ -3,12 +3,13 @@ import json
 import ntpath
 import os
 import subprocess
+import tempfile
 import uuid
 import zipfile
 from datetime import datetime, timedelta
 from io import StringIO
 from time import sleep
-from typing import List
+from typing import List, Union
 from zipfile import ZipFile
 
 import requests
@@ -20,6 +21,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
 from django.db import IntegrityError
@@ -31,6 +33,9 @@ from django.utils.text import slugify
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 from hitcount.models import HitCount
+from moviepy.video.fx import resize
+from moviepy.video.io.VideoFileClip import VideoFileClip
+from proglog import ProgressBarLogger
 from pybb.models import Post
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
@@ -119,7 +124,7 @@ def delete_inactive_bounced_accounts():
 def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     from astrobin.models import Image
 
-    LOCK_EXPIRE = 1
+    LOCK_EXPIRE = 300
     lock_id = 'retrieve_thumbnail_%d_%s_%s' % (pk, revision_label, alias)
 
     acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
@@ -137,6 +142,11 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     if acquire_lock():
         try:
             image = Image.all_objects.get(pk=pk)
+
+            if not image.image_file.name:
+                release_lock()
+                return
+
             thumb = image.thumbnail_raw(alias, revision_label, thumbnail_settings=thumbnail_settings)
 
             if thumb:
@@ -152,6 +162,167 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
         return
 
     logger.debug('retrieve_thumbnail task is already running')
+
+
+@shared_task(time_limit=300, acks_late=True)
+def generate_video_preview(object_id: int, content_type_id: int):
+    LOCK_EXPIRE = 300
+    lock_id = 'generate_video_preview_%d_%d' % (content_type_id, object_id)
+
+    acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
+    release_lock = lambda: cache.delete(lock_id)
+
+    if acquire_lock():
+        try:
+            ct = ContentType.objects.get_for_id(content_type_id)
+            obj: Union[Image, ImageRevision] = ct.get_object_for_this_type(pk=object_id)
+
+            if obj.deleted:
+                logger.debug('Skip generating video preview for deleted %s' % obj)
+                release_lock()
+                return
+
+            if obj.image_file.name and 'placeholder' not in obj.image_file.name:
+                logger.debug('Skip generating video preview for %s because it is already generated' % obj)
+                release_lock()
+                return
+
+            logger.debug('Generating video preview for %s' % obj)
+
+            temp_file = ImageService(obj).get_local_video_file()
+            temp_path = temp_file.name
+            video = VideoFileClip(temp_path)
+
+            thumbnail_path = f'/astrobin-temporary-files/files/video-thumb-{content_type_id}-{object_id}-{datetime.now().timestamp()}.jpg'
+            video.save_frame(thumbnail_path, t=video.duration / 2)
+            thumbnail_file = File(open(thumbnail_path, "rb"))
+            obj.image_file.save("video-thumbnail.jpg", thumbnail_file, save=False)
+            obj.save(update_fields=['image_file'], keep_deleted=True)
+
+            # Note: temp_path is not removed because it might be reused by another task. It will be removed by a
+            # periodic task.
+            os.unlink(thumbnail_path)
+        except Exception as e:
+            logger.debug("Error generating video preview: %s" % str(e))
+        finally:
+            release_lock()
+    else:
+        logger.debug('generate_video_preview task is already running')
+
+
+@shared_task(time_limit=1800, acks_late=True)
+def encode_video_file(object_id: int, content_type_id: int):
+    LOCK_EXPIRE = 1800
+    lock_id = 'encode_video_file_%d_%d' % (content_type_id, object_id)
+
+    acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
+    release_lock = lambda: cache.delete(lock_id)
+
+    if acquire_lock():
+        ct = ContentType.objects.get_for_id(content_type_id)
+        obj = ct.get_object_for_this_type(pk=object_id)
+
+        try:
+            if obj.deleted:
+                logger.debug('Skip encoding video file for deleted %s' % obj)
+                release_lock()
+                return
+
+            if obj.encoded_video_file.name:
+                logger.debug('Skip encoding video file for %s because it is already encoded' % obj)
+                release_lock()
+                return
+
+            logger.debug('Encoding video file for %s' % obj)
+
+            temp_file = ImageService(obj).get_local_video_file()
+            temp_path = temp_file.name
+            video = VideoFileClip(temp_path)
+
+            width, height = video.size
+
+            resize_video = False
+            if width % 2 == 1:
+                width -= 1
+                resize_video = True
+            if height % 2 == 1:
+                height -= 1
+                resize_video = True
+
+            if resize_video:
+                video = video.fx(resize.resize, newsize=(width, height))
+
+            with NamedTemporaryFile(suffix='.mp4', delete=False) as output_file:
+                class ProgressLogger(ProgressBarLogger):
+                    def __init__(self, content_type_id, object_id):
+                        super().__init__()
+                        self.last_message = ''
+                        self.previous_percentage = 0
+                        self.content_type_id = content_type_id
+                        self.object_id = object_id
+
+                    def callback(self, **changes):
+                        # Every time the logger message is updated, this function is called with
+                        # the `changes` dictionary of the form `parameter: new value`.
+                        for (parameter, value) in changes.items():
+                            # print ('Parameter %s is now %s' % (parameter, value))
+                            self.last_message = value
+
+                    def bars_callback(self, bar, attr, value, old_value=None):
+                        # Every time the logger progress is updated, this function is called
+                        if 'Writing video' in self.last_message:
+                            percentage = (value / self.bars[bar]['total']) * 100
+                            if 0 < percentage < 100:
+                                if int(percentage) != self.previous_percentage:
+                                    self.previous_percentage = int(percentage)
+                                    logger.debug(self.previous_percentage)
+                                    cache.set(
+                                        f'video-encoding-progress-{self.content_type_id}-{self.object_id}',
+                                        self.previous_percentage
+                                    )
+
+                cache.set(f'video-encoding-progress-{content_type_id}-{object_id}', 0)
+
+                video.write_videofile(
+                    output_file.name,
+                    codec='libx264',
+                    audio_codec='aac',
+                    temp_audiofile=tempfile.mktemp(suffix='.m4a'),
+                    ffmpeg_params=[
+                        '-s', f'{width}x{height}',
+                        '-c:v', 'libx264',
+                        '-crf', '18',
+                        '-pix_fmt', 'yuv420p',
+                        '-map_metadata', '0',
+                        '-color_primaries', 'bt709',
+                        '-color_trc', 'bt709',
+                        '-colorspace', 'bt709',
+                        '-color_range', 'tv'
+                    ],
+                    logger=ProgressLogger(content_type_id, object_id)
+                )
+
+                output_file.seek(0)  # reset file pointer to beginning
+                django_file = File(output_file)
+                obj.encoded_video_file.save(f"encoded_{obj.uploader_name}.mp4", django_file, save=False)
+                obj.save(update_fields=['encoded_video_file'], keep_deleted=True)
+
+            video.close()
+
+            # Note: temp_path is not removed because it might be reused by another task. It will be removed by a
+            # periodic task.
+            os.remove(output_file.name)
+
+            cache.set(f'video-encoding-progress-{content_type_id}-{object_id}', 100)
+        except Exception as e:
+            cache.delete(f'video-encoding-progress-{content_type_id}-{object_id}')
+            logger.debug("Error encoding video file: %s" % str(e))
+            obj.encoding_error = str(e)
+            obj.save(update_fields=['encoding_error'], keep_deleted=True)
+        finally:
+            release_lock()
+    else:
+        logger.debug('encode_video_file task is already running')
 
 
 @shared_task(time_limit=60)

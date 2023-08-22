@@ -2,6 +2,7 @@ import json
 import logging
 
 import simplejson
+from django.conf import settings
 from django.http import HttpResponse
 from django.utils import timezone
 from rest_framework import mixins, status
@@ -43,6 +44,10 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
             msg = 'Invalid "Upload-Length". Maximum value: {}.'.format(max_file_size)
             log.warning("Chunked uploader (%d): %s" % (request.user.pk, msg))
             return HttpResponse(msg, status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
+
+        if upload_length > settings.MAX_FILE_SIZE:
+            log.warning("Chunked uploader (%d): file size too big" % request.user.pk)
+            return HttpResponse('File size too big.', status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
 
         # If upload_length is not given, we expect the defer header!
         if not upload_length or upload_length < 0:

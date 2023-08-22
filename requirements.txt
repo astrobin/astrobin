@@ -33,6 +33,7 @@ celery-haystack==0.10
 certifi==2021.10.8
 cffi==1.15.1
 chardet==4.0.0
+charset-normalizer==3.2.0
 click==7.1.2
 Coffin==2.0.1
 colorama==0.4.6
@@ -44,6 +45,7 @@ cryptography==3.4.7
 cssmin==0.2.0
 cssselect==1.1.0
 cssselect2==0.4.1
+decorator==4.4.2
 defusedxml==0.7.1
 django-activity-stream==0.10.0
 django-annoying==0.10.6
@@ -118,6 +120,8 @@ html5lib==1.1
 httplib2==0.20.4
 humanize==4.2.3
 idna==3.2
+imageio==2.31.1
+imageio-ffmpeg==0.4.8
 importlib-metadata==2.1.3
 importmagic3==0.2.0
 ipaddress==1.0.23
@@ -137,6 +141,7 @@ MarkupSafe==1.1.1
 maxminddb==2.0.3
 mimeparse==0.1.3
 mock==3.0.5
+moviepy==1.0.3
 mwclient==0.10.1
 nose==1.3.7
 numpy==1.21.0
@@ -151,9 +156,10 @@ pathlib2==2.3.7.post1
 pbr==5.8.0
 pem==21.2.0
 phonenumbers==8.13.4
-Pillow==8.3.0
+Pillow==8.4.0
 ply==3.11
 prometheus-client==0.8.0
+proglog==0.1.10
 psycopg2==2.9.1
 pyasn1==0.4.8
 pycodestyle==2.8.0
@@ -198,6 +204,7 @@ sqlparse==0.4.1
 stripe==3.2.0
 tblib==1.7.0
 termcolor==1.1.0
+tqdm==4.65.0
 tornado==6.1
 tinycss2==1.1.0
 ua-parser==0.10.0

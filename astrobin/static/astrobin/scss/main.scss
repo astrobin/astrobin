@@ -335,6 +335,15 @@ li.astrobin-thumbnail {
     @media screen and (max-width: 425px) {
       width: calc(100vw / 3 - 15px);
     }
+
+    .video-still-processing {
+      padding: 20rem 1rem;
+      text-align: center;
+
+      @media screen and (max-width: 767px) {
+        padding: 10rem 1rem;
+      }
+    }
   }
 
   &:hover .astrobin-image-container .badges {
@@ -809,6 +818,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       -moz-transition: all .2s ease-in-out;
       -o-transition: all .2s ease-in-out;
       transition: all .2s ease-in-out;
+
+      &[data-is-video=true] + .icon-play {
+        position: absolute;
+        top: calc(50% - 1rem);
+        left: calc(50% - 1rem);
+        font-size: 2rem;
+        color: $white;
+        text-shadow: 0.125rem 0.125rem 0 black;
+        opacity: .8;
+      }
     }
 
     figcaption {
@@ -920,6 +939,20 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           line-height: 2.25rem;
           border-radius: 50%;
           background: $link-color;
+        }
+      }
+    }
+
+    .video-js {
+      max-width: 100%;
+
+      .vjs-big-play-button {
+        z-index: 1;
+      }
+
+      .vjs-poster {
+        img {
+          cursor: pointer;
         }
       }
     }
@@ -1969,6 +2002,10 @@ body.full {
   .astrobin-image-container {
     figure {
       overflow: visible;
+    }
+
+    .video-js {
+      max-height: calc(100vh - 100px);
     }
 
     img {
