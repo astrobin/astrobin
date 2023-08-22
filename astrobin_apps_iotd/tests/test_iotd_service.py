@@ -2243,7 +2243,7 @@ class IotdServiceTest(TestCase):
         self.assertFalse(push_notification.called)
 
     @patch('astrobin_apps_iotd.services.iotd_service.push_notification')
-    def test_notify_about_upcoming_deadline_for_iotd_tp_submission_does_not_notify_is_user_has_not_previous_submissions(
+    def test_notify_about_upcoming_deadline_for_iotd_tp_submission_does_not_notify_if_user_has_not_previous_submissions(
             self, push_notification
     ):
         Generators.image()
@@ -2254,6 +2254,37 @@ class IotdServiceTest(TestCase):
                 settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
             )
         )
+
+        IotdService.notify_about_upcoming_deadline_for_iotd_tp_submission()
+
+        self.assertFalse(push_notification.called)
+
+    @patch('astrobin_apps_iotd.services.iotd_service.push_notification')
+    def test_notify_about_upcoming_deadline_for_iotd_tp_submission_does_not_notify_if_user_has_too_old_previous_submissions(
+            self, push_notification
+    ):
+        image_1 = Generators.image()
+        image_2 = Generators.image(user=image_1.user)
+
+        Generators.premium_subscription(image_1.user, SubscriptionName.ULTIMATE_2020)
+        image_1.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image_1.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image=image_1)
+
+        may, _ = IotdService().submit_to_iotd_tp_process(image_1.user, image_1)
+
+        image_1.published = DateTimeService.now() - timedelta(366)
+        image_1.submitted_for_iotd_tp_consideration = DateTimeService.now() - timedelta(366)
+        image_1.save()
+
+        Image.objects.filter(pk=image_2.pk).update(
+            published=DateTimeService.now() - timedelta(
+                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS -
+                     settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
+            )
+        )
+
+        push_notification.reset_mock()
 
         IotdService.notify_about_upcoming_deadline_for_iotd_tp_submission()
 
@@ -2277,7 +2308,7 @@ class IotdServiceTest(TestCase):
 
         Image.objects.filter(pk=image_2.pk).update(
             published=DateTimeService.now() - timedelta(
-                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS +
+                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS -
                 settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
             )
         )
