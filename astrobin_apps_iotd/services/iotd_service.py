@@ -782,8 +782,12 @@ class IotdService:
         )
 
     @staticmethod
-    def user_has_submissions(user):
-        return Image.objects.filter(user=user, submitted_for_iotd_tp_consideration__isnull=False).exists()
+    def user_has_submissions(user, days):
+        return Image.objects.filter(
+            Q(user=user) &
+            Q(submitted_for_iotd_tp_consideration__isnull=False) &
+            Q(submitted_for_iotd_tp_consideration__date__gt=DateTimeService.today() - timedelta(days=days))
+        ).exists()
 
     @staticmethod
     def notify_about_upcoming_deadline_for_iotd_tp_submission():
@@ -796,7 +800,7 @@ class IotdService:
         )
 
         for image in images:
-            if IotdService.user_has_submissions(image.user):
+            if IotdService.user_has_submissions(image.user, 365):
                 thumb = image.thumbnail_raw('gallery', None, sync=True)
 
                 push_notification(
