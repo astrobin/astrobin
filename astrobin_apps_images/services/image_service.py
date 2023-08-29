@@ -1,6 +1,9 @@
 import logging
 import math
+import mimetypes
 import os
+import shutil
+import subprocess
 from collections import namedtuple
 from datetime import timedelta
 from typing import Union
@@ -594,6 +597,29 @@ class ImageService:
             return True
         except OSError:
             return False
+
+    @staticmethod
+    def strip_video_metadata(path: str, mime_type: str) -> None:
+        extension = mimetypes.guess_extension(mime_type)
+        temp_path = f'{path}-stripped{extension}'
+
+        cmd = [
+            'ffmpeg',
+            '-i', path,
+            '-map_metadata', '-1',
+            '-c:v', 'copy',
+            '-c:a', 'copy',
+            '-y',
+            temp_path
+        ]
+
+        completed_process = subprocess.run(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+
+        if completed_process.returncode != 0:
+            logger.error(f"ffmpeg failed with error: {completed_process.stderr.decode('utf-8')}")
+            return
+
+        shutil.move(temp_path, path)
 
     @staticmethod
     def get_object(id, queryset):

@@ -110,6 +110,7 @@ class ImageRevisionUploadViewSet(TusCreateMixin,
         if mime_start == 'image':
             return ImageService.is_image(path)
         elif mime_start == 'video':
+            ImageService.strip_video_metadata(path, mime_type)
             return ImageService.is_video(path)
         else:
             raise ValueError(f"Unknown mime type: {mime_type}")
