@@ -150,6 +150,7 @@ $(document).ready(function() {
             url: url,
             type: "GET",
             dataType: "json",
+            timeout: 5000,
             success: function (progress) {
                 const $el = $(".video-encoding-progress");
                 const $bar = $el.find(".bar")
