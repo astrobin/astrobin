@@ -164,7 +164,7 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     logger.debug('retrieve_thumbnail task is already running')
 
 
-@shared_task(time_limit=300, acks_late=True)
+@shared_task(time_limit=3600, acks_late=True)
 def generate_video_preview(object_id: int, content_type_id: int):
     LOCK_EXPIRE = 300
     lock_id = 'generate_video_preview_%d_%d' % (content_type_id, object_id)
@@ -210,7 +210,7 @@ def generate_video_preview(object_id: int, content_type_id: int):
         logger.debug('generate_video_preview task is already running')
 
 
-@shared_task(time_limit=1800, acks_late=True)
+@shared_task(time_limit=7200, acks_late=True)
 def encode_video_file(object_id: int, content_type_id: int):
     LOCK_EXPIRE = 1800
     lock_id = 'encode_video_file_%d_%d' % (content_type_id, object_id)
