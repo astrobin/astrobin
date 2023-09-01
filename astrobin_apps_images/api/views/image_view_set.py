@@ -19,8 +19,6 @@ from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Sof
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer
-from astrobin_apps_users.services import UserService
-from common.constants import GroupName
 
 
 class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin,

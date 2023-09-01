@@ -24,6 +24,14 @@ log = logging.getLogger(__name__)
 
 
 class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
+    def clear_cache(self, obj):
+        self.clear_cached_property("name", obj)
+        self.clear_cached_property("filename", obj)
+        self.clear_cached_property("upload-length", obj)
+        self.clear_cached_property("offset", obj)
+        self.clear_cached_property("expires", obj)
+        self.clear_cached_property("metadata", obj)
+
     def delete_object(self, obj):
         delete_kwargs = {}
         if issubclass(type(obj), SafeDeleteModel):
@@ -203,7 +211,9 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             response = HttpResponse(
                 content_type='application/javascript',
                 status=status.HTTP_201_CREATED)
+
             response = apply_headers_to_response(response, headers)
+
             return response
 
         # Create serializer
@@ -213,7 +223,12 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             simplejson.dumps(serializer.data),
             content_type='application/javascript',
             status=status.HTTP_201_CREATED)
+
         response = apply_headers_to_response(response, headers)
+
+        if self.get_cached_property("upload-length", object) == self.get_cached_property("offset", object):
+            self.clear_cache(object)
+
         return response
 
     def _is_valid_content_type(self, request):
