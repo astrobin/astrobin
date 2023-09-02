@@ -3484,8 +3484,7 @@ ul.astrobin-users {
     > h4 {
       max-width: 186px;
       display: inline-block;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: initial;
     }
   }
 
