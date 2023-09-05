@@ -67,11 +67,10 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
                     getattr(instance, klass[0]).add(obj)
 
     def _update_acquisition(self, request, instance: Image):
-
         DeepSky_Acquisition.objects.filter(image=instance).delete()
         for item in request.data.get('deep_sky_acquisitions'):
             if item.get('filter_2'):
-                item['filter_2'] = Filter.objects.get(id=item.get('filter_2'))
+                item['filter_2'] = get_object_or_None(Filter, id=item.get('filter_2'))
 
             data = dict(image=instance, **item)
             if 'id' in data:
