@@ -463,7 +463,7 @@ class IotdService:
         if user != image.user:
             return False, MayNotSubmitToIotdTpReason.NOT_OWNER
 
-        if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
+        if image.submitted_for_iotd_tp_consideration is not None:
             return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
 
         if image.published and image.published < (
