@@ -2016,7 +2016,7 @@ class IotdServiceTest(TestCase):
     def test_may_submit_to_iotd_tp_process_is_free(self, is_authenticated):
         is_authenticated.return_value = True
 
-        image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image = Generators.image()
 
         self.assertEqual(
             (False, MayNotSubmitToIotdTpReason.IS_FREE), IotdService.may_submit_to_iotd_tp_process(image.user, image)
@@ -2064,7 +2064,7 @@ class IotdServiceTest(TestCase):
     def test_may_submit_to_iotd_tp_process_excluded_from_competitions(self, is_authenticated):
         is_authenticated.return_value = True
 
-        image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image = Generators.image()
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
@@ -2081,7 +2081,7 @@ class IotdServiceTest(TestCase):
     def test_may_submit_to_iotd_tp_process_banned_from_competitions(self, is_authenticated):
         is_authenticated.return_value = True
 
-        image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image = Generators.image()
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
@@ -2098,7 +2098,7 @@ class IotdServiceTest(TestCase):
     def test_may_submit_to_iotd_tp_process_too_late(self, is_authenticated):
         is_authenticated.return_value = True
 
-        image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image = Generators.image()
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
@@ -2114,7 +2114,7 @@ class IotdServiceTest(TestCase):
     def test_may_submit_to_iotd_tp_process_no_telescope_no_camera(self, is_authenticated):
         is_authenticated.return_value = True
 
-        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        image = Generators.image()
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
 
         self.assertEqual(
@@ -2126,7 +2126,7 @@ class IotdServiceTest(TestCase):
     def test_may_submit_to_iotd_tp_process_no_camera(self, is_authenticated):
         is_authenticated.return_value = True
 
-        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        image = Generators.image()
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
@@ -2140,7 +2140,7 @@ class IotdServiceTest(TestCase):
     def test_may_submit_to_iotd_tp_process_no_telescope(self, is_authenticated):
         is_authenticated.return_value = True
 
-        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        image = Generators.image()
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
@@ -2154,7 +2154,7 @@ class IotdServiceTest(TestCase):
     def test_may_submit_to_iotd_tp_process_all_ok(self, is_authenticated):
         is_authenticated.return_value = True
 
-        image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image = Generators.image()
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
