@@ -824,12 +824,6 @@ def show_click_and_drag_zoom(request) -> bool:
                  request.user_agent.is_tablet))
 
 
-@register.simple_tag
-def show_10_year_anniversary_logo():
-    # type: () -> bool
-    return UtilsService.show_10_year_anniversary_logo()
-
-
 @register.filter
 def show_images_used(user_subscription: UserSubscription) -> bool:
     return is_lite_2020(user_subscription)
