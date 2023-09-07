@@ -274,8 +274,8 @@ class ImageService:
         thumbnails.save()
 
     def delete_original(self):
-        image = self.image
-        revisions = self.get_revisions()
+        image: Image = self.image
+        revisions: QuerySet = self.get_revisions()
 
         image.thumbnail_invalidate()
 
@@ -286,9 +286,11 @@ class ImageService:
             image.delete()
             return
 
-        new_original = revisions.first()
+        new_original: ImageRevision = revisions.first()
 
         image.image_file = new_original.image_file
+        image.video_file = new_original.video_file
+        image.square_cropping = new_original.square_cropping
         image.updated = new_original.uploaded
         image.w = new_original.w
         image.h = new_original.h
@@ -300,11 +302,11 @@ class ImageService:
         if new_original.title:
             old_title = image.title
             appended_title = f' ({new_original.title})'
-            ellipsis = '...'
+            ellipsis_ = '...'
             if len(old_title) > Image._meta.get_field('title').max_length - len(appended_title):
                 old_title = old_title[:(Image._meta.get_field('title').max_length - len(appended_title)) - len(
-                    ellipsis
-                )] + ellipsis
+                    ellipsis_
+                )] + ellipsis_
             image.title = old_title + appended_title
 
         if image.description:
