@@ -63,7 +63,7 @@
                                                 <a href="{{ url_with_tags }}"
                                                    onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
                                                    target="_blank">
-                                                    {{ listing.retailer }}
+                                                    <strong>{{ listing.retailer }}</strong>: {{ listing.name }}
                                                 </a>
                                             </li>
                                         {% endfor %}
