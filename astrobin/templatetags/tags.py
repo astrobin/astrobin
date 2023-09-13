@@ -163,22 +163,33 @@ def search_image_list(context, paginate=True, **kwargs):
     country = get_client_country_code(request)
     equipment_brand_listings = None
     equipment_item_listings = None
+    name = telescope or camera or q
 
     if telescope or camera or q:
         equipment_brand_listings = EquipmentBrandListing.objects \
-            .annotate(distance=TrigramDistance('brand__name', telescope or camera or q)) \
+            .annotate(distance=TrigramDistance('brand__name', name)) \
             .filter(
-            Q(distance__lte=.85) & Q(
-                Q(retailer__countries__icontains=country) | Q(retailer__countries__isnull=True)
+                Q(
+                    Q(distance__lte=.85) |
+                    Q(brand__name__icontains=name)
+                ) &
+                Q(
+                    Q(retailer__countries__icontains=country) |
+                    Q(retailer__countries__isnull=True)
+                )
             )
-        )
         equipment_item_listings = EquipmentItemListing.objects \
-            .annotate(distance=TrigramDistance('name', telescope or camera or q)) \
+            .annotate(distance=TrigramDistance('name', name)) \
             .filter(
-            Q(distance__lte=.5) & Q(
-                Q(retailer__countries__icontains=country) | Q(retailer__countries__isnull=True)
+                Q(
+                    Q(distance__lte=.5) |
+                    Q(name__icontains=name)
+                ) &
+                Q(
+                    Q(retailer__countries__icontains=country) |
+                    Q(retailer__countries__isnull=True)
+                )
             )
-        )
 
     context.update({
         'paginate': paginate,
