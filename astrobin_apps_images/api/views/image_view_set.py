@@ -84,7 +84,10 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
             SolarSystem_Acquisition.objects.create(**data)
 
     def get_serializer_class(self):
-        if 'skip-thumbnails' in self.request.query_params:
+        if (
+                'skip-thumbnails' in self.request.query_params and
+                self.request.query_params.get('skip-thumbnails').lower() in ('true', '1')
+        ):
             return ImageSerializerSkipThumbnails
 
         return ImageSerializer
