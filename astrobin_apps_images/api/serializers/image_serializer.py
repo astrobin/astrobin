@@ -67,15 +67,21 @@ class ImageSerializer(serializers.ModelSerializer):
                     'revision': 'final',
                     'url': instance.thumbnail(alias, None, sync=True)
                 } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
-            ],
+            ]
+        })
+        representation.update(self.acquisitions_representation(instance))
+        return representation
+
+    @staticmethod
+    def acquisitions_representation(instance: Image):
+        return {
             'deep_sky_acquisitions': DeepSkyAcquisitionSerializer(
                 DeepSky_Acquisition.objects.filter(image=instance), many=True
             ).data,
             'solar_system_acquisitions': SolarSystemAcquisitionSerializer(
                 SolarSystem_Acquisition.objects.filter(image=instance), many=True
-            ).data,
-        })
-        return representation
+            ).data
+        }
 
     def validate_collaborators(self, collaborators):
         if collaborators and self.initial_data.get('user') in [x.id for x in collaborators]:
