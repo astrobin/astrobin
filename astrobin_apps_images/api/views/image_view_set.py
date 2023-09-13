@@ -18,12 +18,11 @@ from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
 from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
-from astrobin_apps_images.api.serializers import ImageSerializer
+from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
 
 
 class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin,
                    GenericViewSet):
-    serializer_class = ImageSerializer
     queryset = Image.objects_including_wip.all()
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
@@ -83,6 +82,15 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
             if 'id' in data:
                 del data['id']
             SolarSystem_Acquisition.objects.create(**data)
+
+    def get_serializer_class(self):
+        if (
+                'skip-thumbnails' in self.request.query_params and
+                self.request.query_params.get('skip-thumbnails').lower() in ('true', '1')
+        ):
+            return ImageSerializerSkipThumbnails
+
+        return ImageSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
