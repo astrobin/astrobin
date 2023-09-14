@@ -1,5 +1,10 @@
 @import 'mixins';
 
+div.table-responsive {
+  overflow-x: scroll;
+  padding: 1rem 0;
+}
+
 .table {
   table-layout: fixed;
   margin-bottom: 0;

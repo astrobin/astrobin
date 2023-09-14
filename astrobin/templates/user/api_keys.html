@@ -18,28 +18,30 @@
     {% include 'user/profile/navigation.html' %}
 
     {% if api_keys %}
-        <table class="table table-striped api-keys">
-                <tr>
-                    <th class="name">{% trans "Name" %}</th>
-                    <th class="key hidden-phone">Key</th>
-                    <th class="secret hidden-phone">Secret</th>
-                    <th class="created-on hidden-phone">{% trans "Created on" %}</th>
-                    <th class="active">{% trans "Active" %}</th>
-                </tr>
-            {% for key in api_keys %}
-                <tr>
-                    <td class="name">{{key.name}}</td>
-                    <td class="key hidden-phone">{{key.key}}</td>
-                    <td class="secret hidden-phone">{{key.secret}}</td>
-                    <td class="created-on hidden-phone">{{key.created}}</td>
-                    <td class="active">
-                        {% if key.active %}
-                            <i class="icon icon-check-sign"></i>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped api-keys">
+                    <tr>
+                        <th class="name">{% trans "Name" %}</th>
+                        <th class="key">Key</th>
+                        <th class="secret">Secret</th>
+                        <th class="created-on hidden-phone">{% trans "Created on" %}</th>
+                        <th class="active">{% trans "Active" %}</th>
+                    </tr>
+                {% for key in api_keys %}
+                    <tr>
+                        <td class="name">{{key.name}}</td>
+                        <td class="key">{{key.key}}</td>
+                        <td class="secret">{{key.secret}}</td>
+                        <td class="created-on hidden-phone">{{key.created}}</td>
+                        <td class="active">
+                            {% if key.active %}
+                                <i class="icon icon-check-sign"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     {% else %}
         <p>
             {% url 'api' as api_docs_url %}
