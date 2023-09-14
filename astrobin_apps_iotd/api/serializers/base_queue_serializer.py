@@ -30,7 +30,7 @@ class BaseQueueSerializer(serializers.ModelSerializer):
                         'id': instance.pk,
                         'revision': 'final',
                         'url': instance.thumbnail(alias, 'final', sync=True)
-                    } for alias in ('story', 'regular', 'hd', 'hd_anonymized')
+                    } for alias in ('story', 'hd_anonymized', 'real_anonymized')
                 ],
                 'w': final_revision.w,
                 'h': final_revision.h,
