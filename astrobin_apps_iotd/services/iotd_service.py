@@ -13,6 +13,7 @@ from astrobin.enums import SubjectType
 from astrobin.enums.data_source import DataSource
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import (
     Iotd, IotdJudgementQueueEntry, IotdQueueSortOrder, IotdReviewQueueEntry, IotdStaffMemberSettings, IotdStats,
     IotdSubmission,
@@ -83,16 +84,26 @@ class IotdService:
             member_settings.save()
 
         order_by = [
-            '-published' \
-                if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST \
-                else 'published'
+            '-published'
+            if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST
+            else 'published'
         ]
 
-        return [
-            x.image for x in IotdSubmissionQueueEntry.objects
-                .select_related('image')
-                .filter(submitter=submitter).order_by(*order_by)
-        ]
+        images: List[IotdSubmissionQueueEntry] = []
+
+        for entry in IotdSubmissionQueueEntry.objects \
+                .select_related('image') \
+                .prefetch_related('image__imaging_telescopes_2', 'image__imaging_cameras_2') \
+                .filter(submitter=submitter) \
+                .order_by(*order_by) \
+                .iterator():
+            image = entry.image
+            final_revision = ImageService(image).get_final_revision()
+            image.w = final_revision.w
+            image.h = final_revision.h
+            images.append(image)
+
+        return images
 
     def get_review_queue(self, reviewer: User, queue_sort_order: str = None) -> List[IotdReviewQueueEntry]:
         member_settings: IotdStaffMemberSettings
@@ -108,16 +119,19 @@ class IotdService:
             member_settings.save()
 
         order_by = [
-            '-last_submission_timestamp' \
-                if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST \
-                else 'last_submission_timestamp'
+            '-last_submission_timestamp'
+            if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST
+            else 'last_submission_timestamp'
         ]
 
         images: List[IotdReviewQueueEntry] = []
 
         for entry in IotdReviewQueueEntry.objects \
                 .select_related('image') \
-                .filter(reviewer=reviewer).order_by(*order_by).iterator():
+                .prefetch_related('image__imaging_telescopes_2', 'image__imaging_cameras_2') \
+                .filter(reviewer=reviewer) \
+                .order_by(*order_by) \
+                .iterator():
             image = entry.image
             image.last_submission_timestamp = entry.last_submission_timestamp
             images.append(image)
@@ -138,16 +152,19 @@ class IotdService:
             member_settings.save()
 
         order_by = [
-            '-last_vote_timestamp' \
-                if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST \
-                else 'last_vote_timestamp'
+            '-last_vote_timestamp'
+            if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST
+            else 'last_vote_timestamp'
         ]
 
         images: List[IotdJudgementQueueEntry] = []
 
         for entry in IotdJudgementQueueEntry.objects \
                 .select_related('image') \
-                .filter(judge=judge).order_by(*order_by).iterator():
+                .prefetch_related('image__imaging_telescopes_2', 'image__imaging_cameras_2') \
+                .filter(judge=judge) \
+                .order_by(*order_by) \
+                .iterator():
             image = entry.image
             image.last_vote_timestamp = entry.last_vote_timestamp
             images.append(image)
@@ -699,8 +716,7 @@ class IotdService:
                 .filter(date__gt=cutoff) \
                 .filter(image__data_source=DataSource.MIX) \
                 .count(),
-            other_iotds=
-                Iotd.objects \
+            other_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
                 .filter(image__data_source=DataSource.OTHER) \
                 .count(),
@@ -797,7 +813,7 @@ class IotdService:
         images = Image.objects.filter(
             published__date=DateTimeService.today() - timedelta(
                 days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS -
-                settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
+                     settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
             ),
             submitted_for_iotd_tp_consideration__isnull=True,
         )
