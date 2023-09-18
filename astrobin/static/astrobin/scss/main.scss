@@ -3460,6 +3460,10 @@ form.index-section-form {
 ul.astrobin-users {
   list-style: none;
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
   li {
     float: left;
