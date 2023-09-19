@@ -11,9 +11,8 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
-from astrobin_apps_iotd.api.serializers.hidden_image_serializer import HiddenImageSerializer
 from astrobin_apps_iotd.api.serializers.submitter_seen_image_serializer import SubmitterSeenImageSerializer
-from astrobin_apps_iotd.models import IotdHiddenImage, IotdSubmitterSeenImage
+from astrobin_apps_iotd.models import IotdSubmitterSeenImage
 
 
 class SubmitterSeenImageViewSet(viewsets.ModelViewSet):
