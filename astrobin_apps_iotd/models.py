@@ -126,6 +126,19 @@ class IotdDismissedImage(models.Model):
         return "IOTD dismissed image: %d / %s" % (self.user.pk, self.image.get_id())
 
 
+class IotdSubmitterSeenImage(models.Model):
+    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, null=False, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+        unique_together = ('user', 'image')
+
+    def __str__(self):
+        return "IOTD Submitter seen image: %d / %s" % (self.user.pk, self.image.get_id())
+
+
 class TopPickNominationsArchive(models.Model):
     image = models.OneToOneField(Image, on_delete=models.CASCADE)
 
