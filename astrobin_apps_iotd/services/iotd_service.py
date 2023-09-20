@@ -503,7 +503,12 @@ class IotdService:
         if image.imaging_telescopes_2.count() == 0 or image.imaging_cameras_2.count() == 0:
             return False, MayNotSubmitToIotdTpReason.NO_TELESCOPE_OR_CAMERA
 
-        if image.acquisition_set.count() == 0:
+        if image.acquisition_set.count() == 0 and image.subject_type in (
+            SubjectType.DEEP_SKY,
+            SubjectType.SOLAR_SYSTEM,
+            SubjectType.WIDE_FIELD,
+            SubjectType.STAR_TRAILS,
+        ):
             return False, MayNotSubmitToIotdTpReason.NO_ACQUISITIONS
 
         if image.user.userprofile.exclude_from_competitions:

@@ -2151,6 +2151,46 @@ class IotdServiceTest(TestCase):
         )
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_no_acquisitions(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        self.assertEqual(
+            (False, MayNotSubmitToIotdTpReason.NO_ACQUISITIONS),
+            IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_no_acquisitions_but_northern_lights(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image(subject_type=SubjectType.NORTHERN_LIGHTS)
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        self.assertEqual(
+            (True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_no_acquisitions_but_noctilucent_clouds(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image(subject_type=SubjectType.NOCTILUCENT_CLOUDS)
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        self.assertEqual(
+            (True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_may_submit_to_iotd_tp_process_all_ok(self, is_authenticated):
         is_authenticated.return_value = True
 
