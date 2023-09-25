@@ -42,85 +42,100 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}").click(function (e) {
-            const $btn = $(this);
+        const id = `toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}`;
+        const $tp = $("#" + id);
+        const $label = $tp.find(".toggleproperties-label");
+        const $count = $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}');
 
+        function onTogglePropertyAddSuccess(data) {
+            {% if property_tooltip_on and property_tooltip_off %}
+                $tp
+                    .tooltip('hide')
+                    .attr('data-original-title', "{{ property_tooltip_on | safe }}")
+                    .tooltip('fixTitle')
+                    .tooltip('show');
+            {% endif %}
+
+            $label.text("{{ property_label_on | safe }}");
+
+            $tp.addClass("active");
+
+            if (!!data && data['count'] !== undefined) {
+                $count.text(data.count);
+            }
+        }
+
+        function onTogglePropertyAddFailure(jqXHR, textStatus, errorThrown) {
+            $.toast({
+                heading: "{{ _("Error!") | escapejs }}",
+                text: jqXHR.responseText,
+                showHideTransition: 'slide',
+                allowToastClose: true,
+                position: 'top-right',
+                loader: false,
+                hideAfter: false,
+                icon: 'error'
+            });
+
+            {% if property_tooltip_on and property_tooltip_off %}
+                $tp
+                    .tooltip('hide')
+                    .attr('data-original-title', "{{ property_tooltip_off | safe }}")
+                    .tooltip('fixTitle')
+                    .tooltip('show');
+            {% endif %}
+
+            $label.text("{{ property_label_off | safe }}");
+        }
+
+        function onTogglePropertyRemoveSuccess(data) {
+            {% if property_tooltip_on and property_tooltip_off %}
+                $tp
+                    .tooltip('hide')
+                    .attr('data-original-title', "{{ property_tooltip_off | safe }}")
+                    .tooltip('fixTitle')
+                    .tooltip('show');
+            {% endif %}
+
+            $label.text("{{ property_label_off | safe }}");
+
+            $tp.removeClass("active");
+
+            if (!!data && data['count'] !== undefined) {
+                $count.text(data.count);
+            }
+        }
+
+        function onTogglePropertyRemoveFailure(jqXHR, textStatus, errorThrown) {
+            $.toast({
+                heading: "{{ _("Error!") | escapejs }}",
+                text: jqXHR.responseText,
+                showHideTransition: 'slide',
+                allowToastClose: true,
+                position: 'top-right',
+                loader: false,
+                hideAfter: false,
+                icon: 'error'
+            });
+
+            {% if property_tooltip_on and property_tooltip_off %}
+                $tp
+                    .tooltip('hide')
+                    .attr('data-original-title', "{{ property_tooltip_on | safe }}")
+                    .tooltip('fixTitle')
+                    .tooltip('show');
+            {% endif %}
+
+            $label.text("{{ property_label_on | safe }}");
+        }
+
+        $tp.click(function (e) {
             e.stopPropagation();
             e.preventDefault();
 
-            function onTogglePropertyAddSuccess(data) {
-                const $tp = $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}");
-                const $label = $tp.find(".toggleproperties-label");
-                const $count = $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}');
-
-                {% if property_tooltip_on and property_tooltip_off %}
-                    $tp
-                        .tooltip('hide')
-                        .attr('data-original-title', "{{ property_tooltip_on | safe }}")
-                        .tooltip('fixTitle')
-                        .tooltip('show');
-                {% endif %}
-
-                $label.text("{{ property_label_on | safe }}");
-
-                $btn.addClass("active");
-
-                if (!!data && data['count'] !== undefined) {
-                    $count.text(data.count);
-                }
-            }
-
-            function onTogglePropertyAddFailure(jqXHR, textStatus, errorThrown) {
-                const $tp = $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}");
-                const $label = $tp.find(".toggleproperties-label");
-
-                $.toast({
-                    heading: "{{ _("Error!") | escapejs }}",
-                    text: jqXHR.responseText,
-                    showHideTransition: 'slide',
-                    allowToastClose: true,
-                    position: 'top-right',
-                    loader: false,
-                    hideAfter: false,
-                    icon: 'error'
-                });
-
-                {% if property_tooltip_on and property_tooltip_off %}
-                    $tp
-                        .tooltip('hide')
-                        .attr('data-original-title', "{{ property_tooltip_off | safe }}")
-                        .tooltip('fixTitle')
-                        .tooltip('show');
-                {% endif %}
-
-                $label.text("{{ property_label_off | safe }}");
-            }
-
-            function onTogglePropertyRemoveSuccess(data) {
-                const $tp = $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}");
-                const $label = $tp.find(".toggleproperties-label");
-                const $count = $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}');
-
-                {% if property_tooltip_on and property_tooltip_off %}
-                    $tp
-                        .tooltip('hide')
-                        .attr('data-original-title', "{{ property_tooltip_off | safe }}")
-                        .tooltip('fixTitle')
-                        .tooltip('show');
-                {% endif %}
-
-                $label.text("{{ property_label_off | safe }}");
-
-                $btn.removeClass("active");
-
-                if (!!data && data['count'] !== undefined) {
-                    $count.text(data.count);
-                }
-            }
-
             {% if request.user and request.user.is_authenticated %}
                 $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("...");
-                if ($btn.hasClass("active")) {
+                if ($tp.hasClass("active")) {
                     $.ajax({
                         url: "{% url 'toggleproperty_ajax_remove' %}",
                         type: "POST",
@@ -133,6 +148,16 @@
                         dataType: 'json',
                         success: function (data) {
                             onTogglePropertyRemoveSuccess(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            if (jqXHR.status === 404) {
+                                // If the property is already removed we spare the user the error message and simply
+                                // make it look as if it just worked.
+                                onTogglePropertyRemoveSuccess();
+                            }
+                            else {
+                                onTogglePropertyRemoveFailure(jqXHR, textStatus, errorThrown);
+                            }
                         }
                     });
                 } else {

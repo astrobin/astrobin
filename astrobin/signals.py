@@ -507,11 +507,14 @@ post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 
 
 def toggleproperty_post_save(sender, instance, created, **kwargs):
-    if isinstance(instance.content_object, Image) and not instance.content_object.is_wip:
-        SearchIndexUpdateService.update_index(instance.content_object)
-        SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
-        for collaborator in instance.content_object.collaborators.all().iterator():
-            SearchIndexUpdateService.update_index(collaborator, 3600)
+    if isinstance(instance.content_object, Image):
+        Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
+
+        if not instance.content_object.is_wip:
+            SearchIndexUpdateService.update_index(instance.content_object)
+            SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
+            for collaborator in instance.content_object.collaborators.all().iterator():
+                SearchIndexUpdateService.update_index(collaborator, 3600)
 
     if created:
         verb = None
@@ -520,7 +523,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
 
             if instance.content_type == ContentType.objects.get_for_model(Image):
                 image = instance.content_type.get_object_for_this_type(id=instance.object_id)
-                Image.all_objects.filter(pk=instance.content_object.pk).update(updated=timezone.now())
+                Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
 
                 if image.is_wip:
                     return
