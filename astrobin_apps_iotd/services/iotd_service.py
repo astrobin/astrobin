@@ -3,9 +3,9 @@ from datetime import date, datetime, timedelta
 from typing import List, Union
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.db import IntegrityError
-from django.db.models import Count, OuterRef, Q, Subquery
+from django.db.models import Count, OuterRef, Q, QuerySet, Subquery
 from django.utils import timezone
 from django.utils.translation import gettext
 
@@ -476,6 +476,19 @@ class IotdService:
         return may, reason
 
     @staticmethod
+    def resubmit_to_iotd_tp_process(user: User, image: Image):
+        log.debug(f'Resubmitting image {image.get_id()} "{image.title}" to IOTD/TP process.')
+
+        group: Group = Group.objects.get(name=GroupName.IOTD_SUBMITTERS)
+        previous_submitters: QuerySet = image.designated_iotd_submitters.all()
+        new_submitters = [x for x in group.user_set.all() if x not in previous_submitters and x != user]
+
+        image.designated_iotd_submitters.clear()
+        image.designated_iotd_submitters.add(*new_submitters)
+
+        Image.objects_including_wip.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=timezone.now())
+
+    @staticmethod
     def may_submit_to_iotd_tp_process(user: User, image: Image):
         if not user.is_authenticated:
             return False, MayNotSubmitToIotdTpReason.NOT_AUTHENTICATED
@@ -836,3 +849,31 @@ class IotdService:
                         'BASE_URL': settings.BASE_URL,
                     }
                 )
+
+    @staticmethod
+    def get_recently_expired_unsubmitted_images(d: timedelta) -> QuerySet:
+        """
+            Gets images that:
+              - didn't get dismissed
+              - didn't get enough submissions to advance to the reviewers' queue
+              - are about to the exit the submitters' queues
+        :param d: how long ago the image still has until expiration
+        :return: the queryset of images
+        """
+
+        deadline_lower: datetime = DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        deadline_upper: datetime = DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) + d
+        submitted_time_query: Q = \
+            Q(submitted_for_iotd_tp_consideration__gte=deadline_lower) & \
+            Q(submitted_for_iotd_tp_consideration__lt=deadline_upper)
+        dismissals_query: Q = Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS)
+        submissions_query: Q = Q(num_submissions__lt=settings.IOTD_SUBMISSION_MIN_PROMOTIONS)
+
+        images: QuerySet = Image.objects \
+            .annotate(
+                num_dismissals=Count('iotddismissedimage', distinct=True),
+                num_submissions=Count('iotdsubmission', distinct=True),
+            ) \
+            .filter(submitted_time_query & dismissals_query & submissions_query)
+
+        return images

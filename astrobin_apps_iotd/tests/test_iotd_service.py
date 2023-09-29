@@ -3,6 +3,7 @@ from datetime import date, datetime, timedelta
 
 import mock
 from django.conf import settings
+from django.contrib.auth.models import Group, User
 from django.test import TestCase, override_settings
 from mock import PropertyMock, patch
 
@@ -2254,6 +2255,41 @@ class IotdServiceTest(TestCase):
         self.assertFalse(image.designated_iotd_submitters.exists())
         self.assertFalse(image.designated_iotd_reviewers.exists())
 
+    def test_resubmit_for_iotd_tp_consideration(self):
+        service = IotdService()
+
+        image = Generators.image()
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
+        submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
+        submitters_group, created = Group.objects.get_or_create(name=GroupName.IOTD_SUBMITTERS)
+        submitters_group.user_set.add(submitter_1, submitter_2)
+
+        self.assertEqual((True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+        service.submit_to_iotd_tp_process(image.user, image)
+        time.sleep(.1)
+        image.refresh_from_db()
+
+        self.assertIsNotNone(image.submitted_for_iotd_tp_consideration)
+        self.assertEqual(1, image.designated_iotd_submitters.count())
+
+        designated_submitter = image.designated_iotd_submitters.first()
+        previously_submitted = image.submitted_for_iotd_tp_consideration
+
+        service.resubmit_to_iotd_tp_process(image.user, image)
+        time.sleep(.1)
+        image.refresh_from_db()
+
+        self.assertIsNotNone(image.submitted_for_iotd_tp_consideration)
+        self.assertGreater(image.submitted_for_iotd_tp_consideration, previously_submitted)
+        self.assertEqual(1, image.designated_iotd_submitters.count())
+        self.assertNotEqual(designated_submitter, image.designated_iotd_submitters.first())
+
     @patch('astrobin_apps_iotd.services.iotd_service.push_notification')
     def test_notify_about_upcoming_deadline_for_iotd_tp_submission_does_not_notify_recent_image(
             self, push_notification
@@ -2362,3 +2398,167 @@ class IotdServiceTest(TestCase):
                 mock.call([image_1.user], None, 'iotd_tp_submission_deadline', mock.ANY),
             ]
         )
+
+    def test_get_recently_expired_unsubmitted_images_too_late(self):
+        service = IotdService()
+
+        image = Generators.image()
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
+        submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
+        submitters_group, created = Group.objects.get_or_create(name=GroupName.IOTD_SUBMITTERS)
+        submitters_group.user_set.add(submitter_1, submitter_2)
+
+        self.assertEqual((True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+        service.submit_to_iotd_tp_process(image.user, image)
+
+        image.refresh_from_db()
+
+        self.assertIsNotNone(image.submitted_for_iotd_tp_consideration)
+        self.assertEqual(1, image.designated_iotd_submitters.count())
+
+        image.submitted_for_iotd_tp_consideration = \
+            DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(minutes=30)
+        image.save()
+
+        test_images = service.get_recently_expired_unsubmitted_images(timedelta(hours=1))
+
+        self.assertEqual(0, test_images.count())
+
+    def test_get_recently_expired_unsubmitted_images_too_early(self):
+        service = IotdService()
+
+        image = Generators.image()
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
+        submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
+        submitters_group, created = Group.objects.get_or_create(name=GroupName.IOTD_SUBMITTERS)
+        submitters_group.user_set.add(submitter_1, submitter_2)
+
+        self.assertEqual((True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+        service.submit_to_iotd_tp_process(image.user, image)
+
+        image.refresh_from_db()
+
+        self.assertIsNotNone(image.submitted_for_iotd_tp_consideration)
+        self.assertEqual(1, image.designated_iotd_submitters.count())
+
+        image.submitted_for_iotd_tp_consideration = \
+            DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) + timedelta(minutes=120)
+        image.save()
+
+        test_images = service.get_recently_expired_unsubmitted_images(timedelta(hours=1))
+
+        self.assertEqual(0, test_images.count())
+
+    def test_get_recently_expired_unsubmitted_images_right_time(self):
+        service = IotdService()
+
+        image = Generators.image()
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
+        submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
+        submitters_group, created = Group.objects.get_or_create(name=GroupName.IOTD_SUBMITTERS)
+        submitters_group.user_set.add(submitter_1, submitter_2)
+
+        self.assertEqual((True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+        service.submit_to_iotd_tp_process(image.user, image)
+
+        image.refresh_from_db()
+
+        self.assertIsNotNone(image.submitted_for_iotd_tp_consideration)
+        self.assertEqual(1, image.designated_iotd_submitters.count())
+
+        image.submitted_for_iotd_tp_consideration = \
+            DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) + timedelta(minutes=30)
+        image.save()
+
+        test_images = service.get_recently_expired_unsubmitted_images(timedelta(hours=1))
+
+        self.assertEqual(1, test_images.count())
+
+    def test_get_recently_expired_unsubmitted_images_too_many_dismissals(self):
+        service = IotdService()
+
+        image = Generators.image()
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
+        submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
+        submitters_group, created = Group.objects.get_or_create(name=GroupName.IOTD_SUBMITTERS)
+        submitters_group.user_set.add(submitter_1, submitter_2)
+
+        self.assertEqual((True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+        service.submit_to_iotd_tp_process(image.user, image)
+
+        image.refresh_from_db()
+
+        self.assertIsNotNone(image.submitted_for_iotd_tp_consideration)
+        self.assertEqual(1, image.designated_iotd_submitters.count())
+
+        image.submitted_for_iotd_tp_consideration = \
+            DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) + timedelta(minutes=30)
+        image.save()
+
+        for x in range(0, settings.IOTD_MAX_DISMISSALS):
+            IotdDismissedImage.objects.create(
+                image=image,
+                user=Generators.user()
+            )
+
+        test_images = service.get_recently_expired_unsubmitted_images(timedelta(hours=1))
+
+        self.assertEqual(0, test_images.count())
+
+    def test_get_recently_expired_unsubmitted_images_too_many_submissions(self):
+        service = IotdService()
+
+        image = Generators.image()
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
+        submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
+        submitters_group, created = Group.objects.get_or_create(name=GroupName.IOTD_SUBMITTERS)
+        submitters_group.user_set.add(submitter_1, submitter_2)
+
+        self.assertEqual((True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+        service.submit_to_iotd_tp_process(image.user, image)
+
+        image.refresh_from_db()
+
+        self.assertIsNotNone(image.submitted_for_iotd_tp_consideration)
+        self.assertEqual(1, image.designated_iotd_submitters.count())
+
+        image.submitted_for_iotd_tp_consideration = \
+            DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) + timedelta(minutes=30)
+        image.save()
+
+        for x in range(0, settings.IOTD_MAX_DISMISSALS):
+            IotdGenerators.submission(image=image)
+
+        test_images = service.get_recently_expired_unsubmitted_images(timedelta(hours=1))
+
+        self.assertEqual(0, test_images.count())
