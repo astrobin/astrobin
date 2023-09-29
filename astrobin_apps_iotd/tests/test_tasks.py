@@ -80,7 +80,7 @@ class IotdTasksTest(TestCase):
         for x in range(0, 10):
             submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
             submitters.append(submitter)
-            if x < 7:
+            if x < 4:
                 IotdSubmitterSeenImage.objects.create(user=submitter, image=image)
 
         get_recently_expired_unsubmitted_images.return_value = Image.objects.filter(pk=image.pk)
