@@ -1,8 +1,14 @@
+import pycountry
+
 from django.db import models
 from django.forms import ModelMultipleChoiceField
 from django.utils.translation import ugettext_lazy as _
 
 # ISO 3166-1 country names and codes adapted from http://opencountrycodes.appspot.com/python/
+
+CURRENCY_CHOICES = [
+    (currency.alpha_3, currency.name) for currency in pycountry.currencies
+]
 
 COUNTRIES = (
     ('', '---------'),

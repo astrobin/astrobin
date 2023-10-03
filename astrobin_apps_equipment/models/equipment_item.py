@@ -12,6 +12,7 @@ from astrobin_apps_equipment.models.equipment_item_group import (
     EQUIPMENT_ITEM_USAGE_TYPE_CHOICES, EquipmentItemGroup,
     EQUIPMENT_ITEM_KLASS_CHOICES,
 )
+from astrobin_apps_equipment.models.equipment_item_marketplace_listing import EquipmentItemMarketplaceListing
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from common.services import AppRedirectionService
 from common.upload_paths import upload_path
@@ -235,6 +236,12 @@ class EquipmentItem(SafeDeleteModel):
 
     listings = GenericRelation(
         EquipmentItemListing,
+        object_id_field='item_object_id',
+        content_type_field='item_content_type',
+    )
+
+    marketplace_listings = GenericRelation(
+        'astrobin_apps_equipment.EquipmentItemMarketplaceListing',
         object_id_field='item_object_id',
         content_type_field='item_content_type',
     )
