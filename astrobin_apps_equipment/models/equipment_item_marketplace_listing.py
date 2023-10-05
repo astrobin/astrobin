@@ -92,7 +92,7 @@ class EquipmentItemMarketplaceListing(SafeDeleteModel):
         choices=EQUIPMENT_ITEM_MARKETPLACE_LISTING_CONDITION_CHOICES,
     )
 
-    year_or_purchase = models.PositiveSmallIntegerField(
+    year_of_purchase = models.PositiveSmallIntegerField(
         null=True,
         blank=True,
     )
