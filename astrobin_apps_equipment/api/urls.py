@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from rest_framework import routers
 
 from astrobin_apps_equipment.api.views.accessory_edit_proposal_view_set import AccessoryEditProposalViewSet
@@ -10,6 +10,8 @@ from astrobin_apps_equipment.api.views.equipment_contributors_view_set import Eq
 from astrobin_apps_equipment.api.views.equipment_item_group_view_set import EquipmentItemGroupViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_feedback_view_set import \
     EquipmentItemMarketplaceFeedbackViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_image_upload_view_set import \
+    EquipmentItemMarketplaceListingImageUploadViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_view_set import \
     EquipmentItemMarketplaceListingViewSet
 from astrobin_apps_equipment.api.views.equipment_preset_view_set import EquipmentPresetViewSet
@@ -53,7 +55,13 @@ router.register(r'equipment-item-group', EquipmentItemGroupViewSet, basename='eq
 
 router.register(r'equipment-preset', EquipmentPresetViewSet, basename='equipment-preset')
 
+router.register(
+    r'marketplace/listing/image-upload', EquipmentItemMarketplaceListingImageUploadViewSet,
+    basename='marketplace-listing-image-upload'
+)
+
 router.register(r'marketplace/listing', EquipmentItemMarketplaceListingViewSet, basename='marketplace-listing')
+
 router.register(r'marketplace/feedback', EquipmentItemMarketplaceFeedbackViewSet, basename='marketplace-feedback')
 
 urlpatterns = [

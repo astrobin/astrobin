@@ -38,13 +38,13 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             delete_kwargs['force_policy'] = HARD_DELETE
         obj.delete(**delete_kwargs)
 
-    def get_file_field_name(self, mime_type: str):
+    def get_file_field_name(self, mime_type: str) -> str:
         raise NotImplementedError
 
     def get_upload_path_function(self, mime_type: str):
         raise NotImplementedError
 
-    def verify_file(self, file_path: str, mime_type: str):
+    def verify_file(self, file_path: str, mime_type: str) -> bool:
         raise NotImplementedError
 
     def get_chunk(self, request):

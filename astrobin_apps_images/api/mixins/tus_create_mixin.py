@@ -22,7 +22,8 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
             'upload_length': upload_length,
             'upload_metadata': json.dumps(upload_metadata),
             'filename': filename,
-            'image': upload_metadata['image_id'],
+            'image': upload_metadata.get('image_id'),
+            'user': request.user.pk
         })
 
     def create(self, request, *args, **kwargs):
