@@ -1395,6 +1395,38 @@ astrobin_common = {
         $('#fancybox-settings-modal #id_slideshow_share_beginning').text(window.location.href.split('#')[0]);
     },
 
+    setVideoJsPlayerOnFullScreenChange: function (player) {
+        player.on('fullscreenchange', function () {
+            const isFullscreen = player.isFullscreen();
+            const el = player.el().firstChild;
+
+            if (isFullscreen) {
+                el.style.maxWidth = `${player.videoWidth()}px`;
+                el.style.maxHeight = `${player.videoHeight()}px`;
+                el.style.top = `50%`;
+                el.style.left = `50%`;
+                el.style.transform = `translate(-50%, -50%)`;
+                el.style.margin = 'auto';
+            } else {
+                el.style.maxWidth = '';
+                el.style.maxHeight = '';
+                el.style.top = '';
+                el.style.left = '';
+                el.style.transform = '';
+                el.style.margin = '';
+
+                // For some reasons, Fancybox registering the click ends up with the fancybox__content being 0px
+                setTimeout(() => {
+                    const fancyBoxContent = el.closest('.fancybox__content');
+                    if (fancyBoxContent) {
+                        fancyBoxContent.style.width = `${player.videoWidth()}px`;
+                        fancyBoxContent.style.height = `${player.videoHeight()}px`;
+                    }
+                }, 100);
+            }
+        });
+    },
+
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_common.config, config);

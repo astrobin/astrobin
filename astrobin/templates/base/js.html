@@ -221,12 +221,14 @@
                                 poster="${slide.src}"
                             ></video>`
 
-                        window.videojs(id, {}, function () {
+                        const player = window.videojs(id, {}, function () {
                             this.src([
                                 {type: slide.videoFormat, src: slide.videoUrl},
                                 {type: "video/mp4", src: slide.encodedVideoUrl}
                             ]);
                         });
+
+                        astrobin_common.setVideoJsPlayerOnFullScreenChange(player);
 
                         instance.options.clickContent = false;
                     } else {
