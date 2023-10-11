@@ -357,6 +357,7 @@ def show_ads_on_page(context):
     elif context.template_name in (
             'search/search.html',
             'top_picks.html',
+            'top_pick_nominations.html',
             'astrobin_apps_iotd/iotd_archive.html'
     ):
         return not request.user.is_authenticated or is_free(valid_subscription)
