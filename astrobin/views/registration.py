@@ -19,6 +19,13 @@ from common.templatetags.common_tags import button_loading_class, button_loading
 
 
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):
+    skill_level = forms.fields.ChoiceField(
+        required=True,
+        label=_("Self-assessed skill level"),
+        help_text=_("How would you categorize your current skills as an astrophotographer?"),
+        choices=((None, "---------"),) + UserProfile.SKILL_LEVEL_CHOICES,
+    )
+
     referral_code = forms.fields.CharField(
         required=False,
         label=_('Referral code') + f' ({_("optional")})',
@@ -70,6 +77,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
                 'first_name',
                 'last_name',
                 'email',
+                'skill_level',
             ),
             Fieldset(
                 '',
@@ -158,6 +166,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
         'first_name',
         'last_name',
         'email',
+        'skill_level',
         'password1',
         'password2',
         'referral_code',
@@ -208,6 +217,10 @@ def user_created(sender, user, request, **kwargs):
     group, created = Group.objects.get_or_create(name=GroupName.OWN_EQUIPMENT_MIGRATORS)
     user.groups.add(group)
     changed = False
+
+    if 'skill_level' in form.data:
+        profile.skill_level = form.data['skill_level']
+        changed = True
 
     if 'referral_code' in form.data and form.data['referral_code'] != '':
         profile.referral_code = form.data['referral_code']
