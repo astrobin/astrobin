@@ -1,8 +1,40 @@
 {% load common_tags %}
 {% load i18n %}
 {% load astrobin_apps_premium_tags %}
+{% load bootstrap_toolkit %}
 
 <div id="global-alerts">
+
+{% if skill_level_form %}
+    <div class="accordion container" id="skill-level-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
+                   data-parent="#expired-subscription-accordion" href="#expired-subscription-accordion-content">
+                    <i class="icon-question-sign"></i>
+                    {% blocktrans trimmed %}
+                        How would you categorize your current skills as an astrophotographer?
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="expired-subscription-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-info global-alert">
+                    <form class="form-horizontal" method="post" action="{% url 'profile_save_basic' %}"
+                          novalidate>{% csrf_token %}
+                        {{ skill_level_form|as_bootstrap }}
+
+                        <div class="form-actions">
+                            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                                {% trans "Save" %}
+                                {% button_loading_indicator %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
 
 {% if request.user.is_authenticated and request.user|has_expired_paid_subscription %}
 
