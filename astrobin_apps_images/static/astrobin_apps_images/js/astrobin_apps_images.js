@@ -220,7 +220,19 @@ $(document).ready(function () {
         });
     }
 
+    function prepareVideojs() {
+        const videoEls = document.querySelectorAll('.video-js');
+        videoEls.forEach(el => {
+            const player = window.videojs(el.id);
+            astrobin_common.setVideoJsPlayerOnFullScreenChange(player);
+        });
+    }
+
     window.loadAstroBinImages($('body'));
+
+    setTimeout(() => {
+        prepareVideojs();
+    }, 500);
 });
 
 

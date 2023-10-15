@@ -94,14 +94,15 @@ $(document).ready(function() {
 
     function setupSmallerThanRegularAttribute() {
         const $img = $(".main-image img");
+        const $videoPreview = $(".main-image .vjs-poster img");
         const $advancedPlatesolvingObject = $("#advanced-plate-solution-svg");
 
-        function _do() {
+        function _doImage($el) {
             const containerWidth = $(".astrobin-image-container").width();
             const imageWidth = {{ w }};
 
             if (imageWidth < containerWidth) {
-                $img.attr("data-smaller-than-regular", "true");
+                $el.attr("data-smaller-than-regular", "true");
 
                 if ($advancedPlatesolvingObject) {
                     $advancedPlatesolvingObject.attr('width', imageWidth);
@@ -109,22 +110,35 @@ $(document).ready(function() {
             }
         }
 
-        if (
-            $img.attr('data-loaded') === 'true' &&
-            (
-                $img.attr('data-regular-large-load-bypassed') === 'true' ||
-                $img.attr('data-regular-large-loaded') === 'true'
-            ) &&
-            (
-                $img.attr('data-hires-load-bypassed') === 'true' ||
-                $img.attr('data-hires-loaded') === 'true'
-            )
-        ) {
-            _do();
+        function _doVideo($el) {
+            const containerWidth = $(".astrobin-image-container").width();
+            const videoWidth = {{ w }};
+
+            if (videoWidth < containerWidth) {
+                $el.closest('.video-js').removeClass('vjs-fluid');
+            }
+        }
+
+        if ($videoPreview.length === 0) {
+            if (
+                $img.attr('data-loaded') === 'true' &&
+                (
+                    $img.attr('data-regular-large-load-bypassed') === 'true' ||
+                    $img.attr('data-regular-large-loaded') === 'true'
+                ) &&
+                (
+                    $img.attr('data-hires-load-bypassed') === 'true' ||
+                    $img.attr('data-hires-loaded') === 'true'
+                )
+            ) {
+                _doImage($img);
+            } else {
+                setTimeout(() => {
+                    setupSmallerThanRegularAttribute();
+                }, 100);
+            }
         } else {
-            setTimeout(() => {
-                setupSmallerThanRegularAttribute();
-            }, 100);
+            _doVideo($videoPreview);
         }
     }
 
