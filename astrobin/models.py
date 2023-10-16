@@ -2906,6 +2906,12 @@ class UserProfile(SafeDeleteModel):
         choices=SKILL_LEVEL_CHOICES,
     )
 
+    skill_level_updated = models.DateTimeField(
+        editable=False,
+        null=True,
+        blank=True,
+    )
+
     # One time notifications that won't disappear until marked as seen.
 
     seen_realname = models.BooleanField(
