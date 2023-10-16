@@ -2,11 +2,10 @@ from django.contrib.auth.models import User
 from django.db import models
 from safedelete.models import SafeDeleteModel
 
-from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing
 from common.upload_paths import marketplace_listing_upload_path
 
 
-class EquipmentItemMarketplaceListingImage(SafeDeleteModel):
+class EquipmentItemMarketplaceListingLineItemImage(SafeDeleteModel):
     user = models.ForeignKey(
         User,
         related_name='equipment_marketplace_listing_images',
@@ -15,8 +14,8 @@ class EquipmentItemMarketplaceListingImage(SafeDeleteModel):
         blank=False,
     )
 
-    listing = models.ForeignKey(
-        EquipmentItemMarketplaceListing,
+    line_item = models.ForeignKey(
+        'astrobin_apps_equipment.EquipmentItemMarketplaceListingLineItem',
         related_name='images',
         on_delete=models.CASCADE,
         null=True,
@@ -42,4 +41,4 @@ class EquipmentItemMarketplaceListingImage(SafeDeleteModel):
     )
 
     def __str__(self):
-        return f'Image by {self.user} for {self.listing if self.listing else "unknown listing"}'
+        return f'Image by {self.user} for {self.line_item if self.line_item else "unknown listing"}'

@@ -4,6 +4,8 @@ from .equipment_retailer import EquipmentRetailer
 from .equipment_item_listing import EquipmentItemListing
 from .equipment_item_marketplace_feedback import EquipmentItemMarketplaceFeedback
 from .equipment_item_marketplace_listing import EquipmentItemMarketplaceListing
+from .equipment_item_marketplace_listing_line_item import EquipmentItemMarketplaceListingLineItem
+from .equipment_item_marketplace_listing_line_item_image import EquipmentItemMarketplaceListingLineItemImage
 from .equipment_item import EquipmentItem
 from .equipment_item_group import EquipmentItemGroup
 from .sensor import Sensor
