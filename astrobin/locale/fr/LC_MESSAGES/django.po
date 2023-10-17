@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 15:27+0000\n"
-"PO-Revision-Date: 2023-07-06 17:17+0200\n"
+"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"PO-Revision-Date: 2023-10-17 10:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+"X-Loco-Api-Version: 1.0.28 20230927-1\n"
 
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
@@ -909,6 +909,12 @@ msgstr ""
 "nouvelle version. A noter que seules les autres versions ayant les mêmes "
 "largeur et hauteur que celle-ci peuvent être prises en compte."
 
+msgid "Loop video"
+msgstr ""
+
+msgid "If checked, the video will loop."
+msgstr ""
+
 msgid "Opacity"
 msgstr "Opacité"
 
@@ -951,12 +957,17 @@ msgid ""
 "This email address was not found in our database. Email address might be "
 "case sensitive."
 msgstr ""
+"Cette adresse email n'a pas été trouvée dans notre base de données. "
+"L'adresse e-mail peut être sensible à la casse."
 
 msgid ""
 "We found more than one account associated with this email address and we "
 "cannot proceed with this operation. Please get in touch with support to "
 "resolve the issue."
 msgstr ""
+"Nous avons trouvé plusieurs comptes associés à cette adresse e-mail et nous "
+"ne pouvons pas procéder à cette opération. Veuillez contacter l'assistance "
+"pour résoudre le problème."
 
 msgid "Recipients"
 msgstr "Destinataires"
@@ -997,6 +1008,11 @@ msgstr "Entrez ici l'adresse de votre site personnel."
 
 msgid "Website"
 msgstr "Site internet"
+
+msgid ""
+"You have images on AstroBin, therefore you are an astrophotographer! :-) "
+"Please select a different skill level."
+msgstr ""
 
 msgid "Mark as final"
 msgstr "Marquer comme finale"
@@ -1062,6 +1078,8 @@ msgid ""
 "Your account is temporarily or permanently suspended. If you believe this is "
 "in error, please get in touch using the Help menu."
 msgstr ""
+"Votre compte est suspendu temporairement ou définitivement. Si vous pensez "
+"qu'il s'agit d'une erreur, veuillez nous contacter en utilisant le menu Aide."
 
 msgid "None (All rights reserved)"
 msgstr "Aucun (Tous droits réservés)"
@@ -1681,6 +1699,9 @@ msgid ""
 "If selected, AstroBin will use a resizing algorithm that slightly sharpens "
 "all sizes of the image except the full size version."
 msgstr ""
+"Si cette option est sélectionnée, AstroBin utilisera un algorithme de "
+"redimensionnement qui accentue légèrement toutes les tailles de l'image, à "
+"l'exception de la version en taille réelle."
 
 msgid "Allow full-size display"
 msgstr "Autoriser l'affichage en résolution maximale"
@@ -1843,7 +1864,7 @@ msgid "Flat darks"
 msgstr "Dark-flats"
 
 msgid "The number of flat dark frames."
-msgstr ""
+msgstr "Nombre de Dark-Flats"
 
 msgid "Bias"
 msgstr "Bias/offset"
@@ -1965,11 +1986,45 @@ msgstr "Prix des abonnements trop élevés"
 msgid "I prefer not to say"
 msgstr "Je préfère ne pas le dire"
 
-msgid "Suspended"
+msgid "n/a"
+msgstr "n/a"
+
+msgid "Beginner"
 msgstr ""
 
-msgid "Suspension reason"
+msgid "Intermediate"
 msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Professional"
+msgstr ""
+
+msgid "I don't define myself as an astrophotographer at this time."
+msgstr ""
+
+msgid "I started out recently and I'm still getting familiar with the hobby."
+msgstr ""
+
+msgid ""
+"I have been doing astrophotography for a while and wouldn't classify myself "
+"as a beginner anymore."
+msgstr ""
+
+msgid ""
+"I developed a comprehensive set of skills and master most aspects of "
+"astrophotography."
+msgstr ""
+
+msgid "Astrophotography is my profession or part of my profession."
+msgstr ""
+
+msgid "Suspended"
+msgstr "Suspendu"
+
+msgid "Suspension reason"
+msgstr "Motifs de la suspension"
 
 msgid "Allow others to see when you created your AstroBin account"
 msgstr ""
@@ -2192,6 +2247,12 @@ msgstr ""
 "Autres langages que vous pouvez lire et écrire. Cela peut aider les autres "
 "membres à vous contacter. "
 
+msgid "Self-assessed skill level"
+msgstr ""
+
+msgid "How would you categorize your current skills as an astrophotographer?"
+msgstr ""
+
 msgid "Signature"
 msgstr "Signature"
 
@@ -2284,17 +2345,22 @@ msgid ""
 "This password doesn't contain any numeric digits. It must contain at least "
 "one number."
 msgstr ""
+"Ce mot de passe ne contient aucun chiffre numérique. Il doit contenir au "
+"moins un chiffre."
 
 msgid "Your password must contain at least one number."
-msgstr ""
+msgstr "Votre mot de passe doit contenir au moins un chiffre."
 
 msgid ""
 "This password doesn't contain any special characters. It must contain at "
 "least one of the following {}"
 msgstr ""
+"Ce mot de passe ne contient aucun caractère spécial. Il doit contenir au "
+"moins l'un des éléments suivants : {}"
 
 msgid "Your password must contain any of the following special characters: {}"
 msgstr ""
+"Votre mot de passe doit contenir l'un des caractères spéciaux suivants : {}"
 
 msgid "This password is too long. It must contain no more than {} characters."
 msgstr ""
@@ -2307,9 +2373,11 @@ msgid ""
 "This password has previously appeared in a data breach elsewhere and should "
 "not be used."
 msgstr ""
+"Ce mot de passe est déjà apparu dans une violation de données ailleurs et ne "
+"doit pas être utilisé."
 
 msgid "Your AstroBin authentication token"
-msgstr ""
+msgstr "Votre jeton d'authentification AstroBin"
 
 msgid "Abkhazian"
 msgstr "Abkhaze"
@@ -3140,6 +3208,9 @@ msgstr ""
 msgid "Back to top"
 msgstr "Haut de page"
 
+msgid "Save"
+msgstr "Enregistrer"
+
 msgid "Your AstroBin subscription is expired."
 msgstr "Votre abonnement AstroBin a expiré."
 
@@ -3584,7 +3655,7 @@ msgid "Help"
 msgstr "Aide"
 
 msgid "Support"
-msgstr ""
+msgstr "Assistance"
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "Désirez-vous utiliser votre vrai nom sur AstroBin ?"
@@ -3924,7 +3995,7 @@ msgid "Acquired at"
 msgstr "Acquisitions réalisées à"
 
 msgid "In these collections"
-msgstr ""
+msgstr "Dans ces collections"
 
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -4130,8 +4201,8 @@ msgstr "Bannir l'utilisateur"
 msgid "AstroBin is preparing your download. Please wait..."
 msgstr "AstroBin prépare votre téléchargement. Merci de patienter..."
 
-msgid "Original size"
-msgstr "Taille originale"
+msgid "Original file"
+msgstr "Fichier original"
 
 msgid "Medium size"
 msgstr "Taille moyenne"
@@ -4142,14 +4213,14 @@ msgstr "Grande taille"
 msgid "Extra-large size"
 msgstr "Taille XL"
 
+msgid "Original size"
+msgstr "Taille originale"
+
 msgid "Basic annotations"
 msgstr "Annotations basiques"
 
 msgid "Advanced annotations"
 msgstr "Annotations avancées"
-
-msgid "Original file"
-msgstr "Fichier original"
 
 msgid "Basic information"
 msgstr "Informations générales"
@@ -4557,9 +4628,6 @@ msgstr "Chargement en cours..."
 msgid "Edit your image: acquisition details"
 msgstr "Modifier votre image : détails d'acquisition"
 
-msgid "Save"
-msgstr "Enregistrer"
-
 msgid "Remove data"
 msgstr "Effacer les données"
 
@@ -4916,11 +4984,23 @@ msgstr "Le temple de l'astrophotographie"
 msgid "Latest from the forums"
 msgstr "Récemment dans le forum"
 
-msgid "Poll"
-msgstr "Sondage"
+msgid "Closed"
+msgstr "Fermé"
 
-msgid "Unanswered"
-msgstr "Aucune réponse"
+#, python-format
+msgid "Posted in <a href=\"%(forum_url)s\">%(forum_name)s</a>"
+msgstr ""
+
+#, python-format
+msgid "Started by <a href=\"%(topic_user_url)s\">%(username)s</a>"
+msgstr ""
+
+msgid "Started by user that was since deleted"
+msgstr ""
+
+#, python-format
+msgid "Last post by <a href=\"%(last_post_user_url)s\">%(username)s</a>"
+msgstr ""
 
 msgid "This topic has no replies."
 msgstr "Cette discussion n'a aucune réponse."
@@ -4969,9 +5049,6 @@ msgstr "Participants"
 
 msgid "Last message"
 msgstr "Dernier message"
-
-msgid "n/a"
-msgstr "n/a"
 
 msgid "No messages"
 msgstr "Aucun message"
@@ -5035,56 +5112,76 @@ msgid ""
 "different country than the one you were seen in last time, or from a country "
 "that could not be detected."
 msgstr ""
+"Vous, ou quelqu'un en votre nom, avez tenté de vous connecter à AstroBin "
+"depuis un pays différent de celui dans lequel vous avez été vu la dernière "
+"fois, ou depuis un pays qui n'a pas pu être détecté."
 
 msgid ""
 "For your security, an additional confirmation token was sent in a separate "
 "email."
 msgstr ""
+"Pour votre sécurité, un jeton de confirmation supplémentaire a été envoyé "
+"dans un e-mail séparé."
 
 msgid ""
 "If this was a legitimate login attempt, please use the token to complete the "
 "process."
 msgstr ""
+"S'il s'agit d'une tentative de connexion légitime, veuillez utiliser le "
+"jeton pour terminer le processus."
 
 msgid ""
 "If you did not make this login attempt, please change your password and/or "
 "contact AstroBin immediately."
 msgstr ""
+"Si vous n'avez pas effectué cette tentative de connexion, veuillez modifier "
+"votre mot de passe et/ou contacter AstroBin immédiatement."
 
 msgid ""
 "For your security, following this event, AstroBin has automatically enabled "
 "email-based two-factor authentication on your account. You can disable in "
 "your settings or using the link below."
 msgstr ""
+"Pour votre sécurité, suite à cet événement, AstroBin a automatiquement "
+"activé l'authentification à deux facteurs par courrier électronique sur "
+"votre compte. Vous pouvez désactiver dans vos paramètres ou en utilisant le "
+"lien ci-dessous."
 
 msgid "Two-factor Authentication"
-msgstr ""
+msgstr "Authentification à deux facteurs"
 
 msgid "Wishing you clear skies and excellent seeing!"
-msgstr ""
+msgstr "Bon ciel et excellent seeing !"
 
 msgid "AstroBin detected a login attempt from a different country"
-msgstr ""
+msgstr "AstroBin a détecté une tentative de connexion depuis un autre pays"
 
 msgid ""
 "You, or somebody on your behalf, attempted to log in to AstroBin and we "
 "detected that your password does not meet security requirements."
 msgstr ""
+"Vous, ou quelqu'un en votre nom, avez tenté de vous connecter à AstroBin et "
+"nous avons détecté que votre mot de passe ne répond pas aux exigences de "
+"sécurité."
 
 msgid ""
 "We recommend that you change your password as soon as possible, for your "
 "security and the safety of the other members of the AstroBin community."
 msgstr ""
+"Nous vous recommandons de changer votre mot de passe dès que possible, pour "
+"votre sécurité et celle des autres membres de la communauté AstroBin."
 
 msgid "Learn more about security standards on AstroBin:"
-msgstr ""
+msgstr "En savoir plus sur les normes de sécurité sur AstroBin :"
 
 msgid "Change your password:"
-msgstr ""
+msgstr "Changez votre mot de passe :"
 
 msgid ""
 "AstroBin detected that your password does not meet security requirements"
 msgstr ""
+"AstroBin a détecté que votre mot de passe ne répond pas aux exigences de "
+"sécurité"
 
 #, python-format
 msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
@@ -5356,29 +5453,12 @@ msgstr ""
 "de nous en expliquer les motifs !"
 
 #, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"Votre demande pour rejoindre le groupe \"%(group_name)s\" a été APPROUVÉE. \n"
-"\n"
-"Visitez le groupe ici : <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"Votre demande pour rejoindre le groupe \"%(group_name)s\" a été APPROUVÉE. \n"
-"\n"
-"Visitez le groupe ici : %(url)s"
-
-#, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been APPROVED"
 msgstr ""
 "Votre demande pour adhérer au groupe \"%(group_name)s\" a été APPROUVÉE"
+
+msgid "Visit group"
+msgstr ""
 
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
@@ -5495,7 +5575,7 @@ msgstr ""
 "<strong>%(title)s</strong>."
 
 msgid "You submitted your image for IOTD/TP consideration!"
-msgstr ""
+msgstr "Vous avez soumis votre image pour le concours IOTD/TP !"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "Une image que vous avez promue a été élue Image du Jour"
@@ -5546,6 +5626,35 @@ msgstr ""
 "Après %(max_inactivity_days)s jours d'inactivité (à compter de la dernière "
 "sélection réalisée), vous ne pourrez plus faire partie de l'équipe de "
 "sélection de l'Image du Jour. "
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days"
+msgstr ""
+
+msgid ""
+"You received this notification because you have submitted images for IOTD/TP "
+"consideration in the past, but not this one yet."
+msgstr ""
+
+msgid ""
+"To submit this image for IOTD/TP consideration, please click on the link "
+"below, go to the Actions menu (lightening bolt icon on mobile), and select "
+"“Submit for IOTD/TP consideration”."
+msgstr ""
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days."
+msgstr ""
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration isin %(days)s days"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5998,24 +6107,8 @@ msgid "%(user)s replied in topic to which you are subscribed"
 msgstr "%(user)s a répondu dans une discussion que vous suivez"
 
 #, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
-msgstr ""
-"%(inviter)s vous invite à rejoindre le groupe : \"%(group_name)s\"\n"
-"\n"
-"Visitez le groupe ici : <a href=\"%(group_page)s\">%(group_page)s</a>"
-
-#, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: %(group_page)s"
-msgstr ""
-"%(inviter)s vous invite à joindre le groupe : \"%(group_name)s\"\n"
-"\n"
-"Visitez le groupe ici : %(group_page)s"
+msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
+msgstr "%(inviter)s vous invite à rejoindre le groupe : \"%(group_name)s\""
 
 #, python-format
 msgid ""
@@ -6026,28 +6119,8 @@ msgstr ""
 "\"%(group_name)s\""
 
 #, python-format
-msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
-msgstr "%(inviter)s vous invite à rejoindre le groupe : \"%(group_name)s\""
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(requester)s a demandé à rejoindre le groupe : \"%(group_name)s\".\n"
-"\n"
-"Visitez le groupe ici : <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"%(requester)s a demandé à rejoindre le groupe: \"%(group_name)s\" .\n"
-"\n"
-"Visitez le groupe ici: %(url)s"
+msgid "%(requester)s requested to join the group: \"%(group_name)s\""
+msgstr "%(requester)s a demandé à rejoindre le groupe : \"%(group_name)s"
 
 #, python-format
 msgid ""
@@ -6056,10 +6129,6 @@ msgid ""
 msgstr ""
 "<strong>%(requester)s</strong> a demandé à rejoindre le groupe : "
 "\"%(group_name)s\""
-
-#, python-format
-msgid "%(requester)s requested to join the group: \"%(group_name)s\""
-msgstr "%(requester)s a demandé à rejoindre le groupe : \"%(group_name)s"
 
 #, python-format
 msgid "<strong>%(user)s</strong> has published a new image"
@@ -6349,6 +6418,54 @@ msgstr ""
 
 #, python-format
 msgid ""
+"A moderator moved your topic <strong>%(topic_name)s</strong> from the forum "
+"<strong>%(old_forum_name)s</strong> to the forum <strong>%(new_forum_name)s</"
+"strong>."
+msgstr ""
+
+msgid "The moderator decided to move your topic to a more relevant forum."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group <a href=\"%(group_url)s\">"
+"%(group_name)s</a>. You will be notified of topic replies also if you're not "
+"a member of the group, but joining it might be a good idea."
+msgstr ""
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</a>), it was "
+"moved to its dedicated forum. When new topics are posted to the forum of an "
+"equipment item, all AstroBin users who have used it get notified (unless "
+"they have opted out of this kind of notifications)."
+msgstr ""
+
+#, python-format
+msgid ""
+"A moderator moved your topic \"%(topic_name)s\" from the forum "
+"\"%(old_forum_name)s\" to the forum \"%(new_forum_name)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group \"%(group_name)s\". You will be "
+"notified of topic replies also if you're not a member of the group, but "
+"joining it might be a good idea."
+msgstr ""
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(%(equipment_item_name)s), it was moved to its dedicated forum. When new "
+"topics are posted to the forum of an equipment item, all AstroBin users who "
+"have used it get notified (unless they have opted out of this kind of "
+"notifications)."
+msgstr ""
+
+#, python-format
+msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> joined the public group: <strong>"
 "\"%(group_name)s\"</strong>."
 msgstr ""
@@ -6482,14 +6599,18 @@ msgstr "Objet non trouvé"
 
 msgid "Here is your two-factor authentication token to log in to AstroBin:"
 msgstr ""
+"Voici votre jeton d'authentification à deux facteurs pour vous connecter à "
+"AstroBin :"
 
 #, python-format
 msgid "This token is valid for %(n)s minutes."
-msgstr ""
+msgstr "Ce jeton est valide pendant %(n)s minutes."
 
 msgid ""
 "To change your two-factor authentication settings, please visit this page:"
 msgstr ""
+"Pour modifier vos paramètres d'authentification à deux facteurs, veuillez "
+"visiter cette page :"
 
 msgid "Previous page"
 msgstr "Page précédente"
@@ -6610,18 +6731,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Posts about AstroBin itself, such as questions or comments about the IOTD/TP "
-"process, or the AstroBin Index, AstroBin \"likes\", or the forums "
-"themselves, are also considered off-topic and will be deleted. If you want "
-"to provide feedback or ask a question about AstroBin, please <a href="
-"\"%(contact_url)s\">contact us</a>: we really value your input!"
+"If you want to engage in open discussion about AstroBin and its feature with "
+"other members of the community, please join the <a href="
+"\"%(open_discussions_url)s\">AstroBin Platform open discussions community "
+"forum</a> group!"
 msgstr ""
-"Les posts relatifs au service AastroBin lui-même, tels que toutes question à "
-"propos du processus de sélection des Tops Picks ou Images du Jour, l'index "
-"AstroBin, les \"likes\" ou les forums, seront également considérés comme "
-"\"hors-sujet\" et seront supprimés. Pour toute demande de ce type, merci de "
-"<a href=\"%(contact_url)s\">nous contacter</a>: nous sommes à l'écoute de "
-"vos retours !"
 
 msgid "I have read the text above"
 msgstr "J'ai lu ce qui précède"
@@ -6629,11 +6743,14 @@ msgstr "J'ai lu ce qui précède"
 msgid "I understand"
 msgstr "Je comprends"
 
-msgid "Ignore"
-msgstr "Ignorer"
+msgid "Forum notice"
+msgstr ""
 
-msgid "Browse equipment"
-msgstr "Parcourir les équipements"
+msgid ""
+"This forum belongs to a group, and the group's owner set the following "
+"notice to communicate forum rules, disclaimers, or important information to "
+"users before they create a new post"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6894,11 +7011,14 @@ msgstr "Réponses"
 msgid "Last post"
 msgstr "Dernier message"
 
+msgid "Poll"
+msgstr "Sondage"
+
+msgid "Unanswered"
+msgstr "Aucune réponse"
+
 msgid "Sticky"
 msgstr "Épinglé"
-
-msgid "Closed"
-msgstr "Fermé"
 
 msgid "This forum does not have any topics."
 msgstr "Ce forum ne contient aucun sujet."
@@ -6930,6 +7050,9 @@ msgid ""
 "clicked it more than once (in which case, please try to log in: your account "
 "could be already active)."
 msgstr ""
+"Cela peut signifier que votre lien d'activation a expiré, qu'il n'est pas "
+"valide ou que vous avez cliqué dessus plus d'une fois (auquel cas, veuillez "
+"essayer de vous connecter : votre compte est peut-être déjà actif)."
 
 msgid "Log in"
 msgstr "Se connecter"
@@ -6938,7 +7061,7 @@ msgid "Your profile is now active."
 msgstr "Votre profil est maintenant en ligne."
 
 msgid "Account activated"
-msgstr ""
+msgstr "Compte activé"
 
 msgid ""
 "Hi,\n"
@@ -7056,13 +7179,13 @@ msgid "This list is currently empty."
 msgstr "Cette liste est vide pour le moment."
 
 msgid "Account"
-msgstr ""
+msgstr "Compte"
 
 msgid "Back"
 msgstr "Retour"
 
 msgid "Backup tokens"
-msgstr ""
+msgstr "Jetons de sauvegarde"
 
 msgid ""
 "Backup tokens can be used if you lost access to your two-factor "
@@ -7070,21 +7193,27 @@ msgid ""
 "verification. If you've used up all your backup tokens, you can generate a "
 "new set of backup tokens. Only the backup tokens shown below will be valid."
 msgstr ""
+"Les jetons de sauvegarde peuvent être utilisés si vous avez perdu l'accès à "
+"votre méthode d'authentification à deux facteurs. Les jetons de sauvegarde "
+"ci-dessous peuvent être utilisés pour la vérification de la connexion. Si "
+"vous avez utilisé tous vos jetons de sauvegarde, vous pouvez générer un "
+"nouvel ensemble de jetons de sauvegarde. Seuls les jetons de sauvegarde "
+"indiqués ci-dessous seront valides."
 
 msgid "Print these tokens and keep them somewhere safe."
-msgstr ""
+msgstr "Imprimez ces jetons et conservez-les dans un endroit sûr."
 
 msgid "You don't have any backup codes yet."
-msgstr ""
+msgstr "Vous n'avez pas encore de codes de secours."
 
 msgid "Generate tokens"
-msgstr ""
+msgstr "Générer des jetons"
 
 msgid "Back to account security"
-msgstr ""
+msgstr "Retour à la sécurité du compte"
 
 msgid "Enter your credentials."
-msgstr ""
+msgstr "Entrez vos informations d'identification."
 
 msgid "AstroBin needs an additional step to verify your login."
 msgstr ""
@@ -7111,11 +7240,17 @@ msgid ""
 "been generated for you to print and keep safe. Please enter one of these "
 "backup tokens to login to your account."
 msgstr ""
+"Utilisez ce formulaire pour saisir des jetons de sauvegarde pour vous "
+"connecter. Ces jetons ont été générés pour que vous puissiez les imprimer et "
+"les conserver en sécurité. Veuillez saisir l'un de ces jetons de sauvegarde "
+"pour vous connecter à votre compte."
 
 msgid ""
 "To make sure that this is a legitimate login attempt, we just sent you a one-"
 "time password token via e-mail."
 msgstr ""
+"Pour nous assurer qu'il s'agit d'une tentative de connexion légitime, nous "
+"venons de vous envoyer un mot de passe à usage unique par e-mail."
 
 #, python-format
 msgid ""
@@ -7138,35 +7273,46 @@ msgstr ""
 "dans vos paramètres après vous être connecté."
 
 msgid "As a last resort, you can use a backup token:"
-msgstr ""
+msgstr "En dernier recours, vous pouvez utiliser un jeton de sauvegarde :"
 
 msgid "Use backup token"
-msgstr ""
+msgstr "Utiliser un jeton de sauvegarde"
 
 msgid "Enable Two-Factor Authentication"
-msgstr ""
+msgstr "Activer l'authentification à deux facteurs"
 
 msgid ""
 "You are about to take your account security to the next level. Follow the "
 "steps in this wizard to enable two-factor authentication."
 msgstr ""
+"Vous êtes sur le point de faire passer la sécurité de votre compte au niveau "
+"supérieur. Suivez les étapes de cet assistant pour activer "
+"l'authentification à deux facteurs."
 
 msgid "Please select which authentication method you would like to use."
 msgstr ""
+"Veuillez sélectionner la méthode d'authentification que vous souhaitez "
+"utiliser."
 
 msgid ""
 "To start using a token generator, please use your smartphone to scan the QR "
 "code below. For example, use Google Authenticator. Then, enter the token "
 "generated by the app."
 msgstr ""
+"Pour commencer à utiliser un générateur de jetons, veuillez utiliser votre "
+"smartphone pour scanner le code QR ci-dessous. Par exemple, utilisez Google "
+"Authenticator. Ensuite, saisissez le jeton généré par l'application."
 
 msgid "Please validate the code that have received via your selected method."
 msgstr ""
+"Veuillez valider le code que vous avez reçu via la méthode sélectionnée."
 
 msgid ""
 "If you are unable to scan the QR code above, please use the following key "
 "instead:"
 msgstr ""
+"Si vous ne parvenez pas à scanner le code QR ci-dessus, veuillez plutôt "
+"utiliser la clé suivante :"
 
 msgid ""
 "We've encountered an issue with the selected authentication method. Please "
@@ -7174,53 +7320,67 @@ msgid ""
 "or use a different authentication method instead. If the issue persists, "
 "please contact us."
 msgstr ""
+"Nous avons rencontré un problème avec la méthode d'authentification "
+"sélectionnée. Veuillez revenir en arrière et vérifier que vous avez saisi "
+"correctement vos informations, réessayer ou utiliser une autre méthode "
+"d'authentification. Si le problème persiste, veuillez nous contacter."
 
 msgid "Congratulations, you've successfully enabled two-factor authentication."
 msgstr ""
+"Félicitations, vous avez activé avec succès l'authentification à deux "
+"facteurs."
 
 msgid "Back to Account Security"
-msgstr ""
+msgstr "Retour à la sécurité du compte"
 
 msgid "Disable Two-factor Authentication"
-msgstr ""
+msgstr "Désactiver l'authentification à deux facteurs"
 
 msgid ""
 "You are about to disable two-factor authentication. This weakens your "
 "account's  security, are you sure?"
 msgstr ""
+"Vous êtes sur le point de désactiver l'authentification à deux facteurs. "
+"Cela affaiblit la sécurité de votre compte, en êtes-vous sûr ?"
 
 msgid "Disable"
-msgstr ""
+msgstr "Désactiver"
 
 msgid "Backup Tokens"
-msgstr ""
+msgstr "Jetons de sauvegarde"
 
 msgid ""
 "If you don't have any device with you, you can access your account using "
 "backup tokens."
 msgstr ""
+"Si vous n'avez aucun appareil avec vous, vous pouvez accéder à votre compte "
+"à l'aide de jetons de sauvegarde."
 
 #, python-format
 msgid "You have only one backup token remaining."
 msgid_plural "You have %(counter)s backup tokens remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Il ne vous reste qu'un seul jeton de sauvegarde."
+msgstr[1] "Il vous reste %(counter)s jetons de sauvegarde."
 
 msgid "Show codes"
-msgstr ""
+msgstr "Voir les codes"
 
 msgid "Disable Two-Factor Authentication"
-msgstr ""
+msgstr "Désactiver l'authentification à deux facteurs"
 
 msgid ""
 "We strongly discourage you to do so, but you can disable two-factor "
 "authentication for your account."
 msgstr ""
+"Nous vous déconseillons fortement de le faire, mais vous pouvez désactiver "
+"l'authentification à deux facteurs pour votre compte."
 
 msgid ""
 "Two-factor Authentication is not enabled for your account. Enable it for "
 "enhanced account security."
 msgstr ""
+"L'authentification à deux facteurs n'est pas activée pour votre compte. "
+"Activez-le pour une sécurité renforcée du compte."
 
 #, python-format
 msgid ""
@@ -7425,6 +7585,10 @@ msgstr "Merci de votre compréhension."
 #, python-format
 msgid "%(user)s's gallery"
 msgstr "Galerie de %(user)s"
+
+#, python-format
+msgid "Astrophotography by %(user)s on AstroBin"
+msgstr ""
 
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
@@ -7914,6 +8078,9 @@ msgstr "CCD/APN"
 msgid "Camera pixel size (μm)"
 msgstr "Taille des pixels de la caméra (µm)"
 
+msgid "Filter types"
+msgstr ""
+
 msgid "Field radius (deg)"
 msgstr "Rayon du champ (deg)"
 
@@ -8025,6 +8192,78 @@ msgstr "Mois en cours"
 msgid "Current year"
 msgstr "Année en cours"
 
+msgid "Results will include images that feature all selected filter types."
+msgstr ""
+
+msgid "Hydrogen-alpha (Hα)"
+msgstr ""
+
+msgid "Hydrogen-beta (Hβ)"
+msgstr ""
+
+msgid "Sulfur-II (SII)"
+msgstr ""
+
+msgid "Oxygen-III (OIII)"
+msgstr ""
+
+msgid "Nitrogen-II (NII)"
+msgstr ""
+
+msgid "Ultraviolet (UV)"
+msgstr ""
+
+msgid "Infrared (IR)"
+msgstr ""
+
+msgid "Multiband"
+msgstr ""
+
+msgid "Luminance/clear (L)"
+msgstr ""
+
+msgid "Red channel (R)"
+msgstr ""
+
+msgid "Green channel (G)"
+msgstr ""
+
+msgid "Blue channel (B)"
+msgstr ""
+
+msgid "Neutral density (ND)"
+msgstr ""
+
+msgid "Ultra High Contrast (UHC)"
+msgstr ""
+
+msgid "Sky glow"
+msgstr ""
+
+msgid "Solar"
+msgstr ""
+
+msgid "Lunar"
+msgstr ""
+
+msgid "Cometary"
+msgstr ""
+
+msgid "Photometric Ultraviolet"
+msgstr ""
+
+msgid "Photometric Blue"
+msgstr ""
+
+msgid "Photometric Visual"
+msgstr ""
+
+msgid "Photometric Red"
+msgstr ""
+
+msgid "Photometric Infrared"
+msgstr ""
+
 msgid "Imaging telescopes"
 msgstr "Instrument d'imagerie"
 
@@ -8057,16 +8296,19 @@ msgid "What kind of search results do you want?"
 msgstr "Quels types de résultats de recherche souhaitez-vous ?"
 
 msgid "All images"
+msgstr "Toutes les images"
+
+msgid "Your images"
 msgstr ""
 
 msgid "Images bookmarked by you"
-msgstr ""
+msgstr "Images favorites"
 
 msgid "Images liked by you"
-msgstr ""
+msgstr "Images aimées"
 
 msgid "Images by users you follow"
-msgstr ""
+msgstr "Images d'utilisateurs que vous suivez"
 
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr ""
@@ -8532,13 +8774,13 @@ msgstr ""
 "de temps."
 
 msgid "Referral code"
-msgstr ""
+msgstr "Code de Parrainage"
 
 msgid "Email address"
-msgstr ""
+msgstr "Adresse e-mail"
 
 msgid "AstroBin doesn't share your email address with anyone."
-msgstr ""
+msgstr "AstroBin ne partage votre adresse e-mail avec personne."
 
 msgid "Sorry, your username cannot contain the \"@\" character."
 msgstr "Désolé, votre identifiant ne peut pas contenir le caractère \"@\"."
@@ -8548,10 +8790,10 @@ msgstr ""
 "Désolé, ce nom d'utilisateur existes déjà avec un mise en forme différente."
 
 msgid "First name"
-msgstr ""
+msgstr "Prénom"
 
 msgid "Last name"
-msgstr ""
+msgstr "Nom"
 
 msgid ""
 "This is your handle on AstroBin and will be part of the URL to your gallery. "
@@ -8992,6 +9234,26 @@ msgstr ""
 #~ msgstr "Votre commentaire a été approuvé par un modérateur."
 
 #~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "Votre demande pour rejoindre le groupe \"%(group_name)s\" a été "
+#~ "APPROUVÉE. \n"
+#~ "\n"
+#~ "Visitez le groupe ici : <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "Votre demande pour rejoindre le groupe \"%(group_name)s\" a été "
+#~ "APPROUVÉE. \n"
+#~ "\n"
+#~ "Visitez le groupe ici : %(url)s"
+
+#~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: <a "
 #~ "href=\"%(url)s\">%(url)s</a>"
 #~ msgstr ""
@@ -9068,6 +9330,42 @@ msgstr ""
 
 #~ msgid "%(user)s replied to your comment."
 #~ msgstr "%(user)s a répondu à votre commentaire."
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
+#~ msgstr ""
+#~ "%(inviter)s vous invite à rejoindre le groupe : \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visitez le groupe ici : <a href=\"%(group_page)s\">%(group_page)s</a>"
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: %(group_page)s"
+#~ msgstr ""
+#~ "%(inviter)s vous invite à joindre le groupe : \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visitez le groupe ici : %(group_page)s"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(requester)s a demandé à rejoindre le groupe : \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visitez le groupe ici : <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "%(requester)s a demandé à rejoindre le groupe: \"%(group_name)s\" .\n"
+#~ "\n"
+#~ "Visitez le groupe ici: %(url)s"
 
 #~ msgid ""
 #~ "%(originator)s has published a new image revision! Check it out at the "
@@ -9192,6 +9490,20 @@ msgstr ""
 
 #~ msgid "View forums"
 #~ msgstr "Voir les forums"
+
+#~ msgid ""
+#~ "Posts about AstroBin itself, such as questions or comments about the IOTD/"
+#~ "TP process, or the AstroBin Index, AstroBin \"likes\", or the forums "
+#~ "themselves, are also considered off-topic and will be deleted. If you "
+#~ "want to provide feedback or ask a question about AstroBin, please <a href="
+#~ "\"%(contact_url)s\">contact us</a>: we really value your input!"
+#~ msgstr ""
+#~ "Les posts relatifs au service AastroBin lui-même, tels que toutes "
+#~ "question à propos du processus de sélection des Tops Picks ou Images du "
+#~ "Jour, l'index AstroBin, les \"likes\" ou les forums, seront également "
+#~ "considérés comme \"hors-sujet\" et seront supprimés. Pour toute demande "
+#~ "de ce type, merci de <a href=\"%(contact_url)s\">nous contacter</a>: nous "
+#~ "sommes à l'écoute de vos retours !"
 
 #~ msgid "These are the forums in the groups you have access to."
 #~ msgstr "Voici les forums des groupes auxquels vous avez accès."
@@ -9683,3 +9995,29 @@ msgstr ""
 #~ msgstr ""
 #~ "Merci de migrer vos équipements dans la nouvelle base de données "
 #~ "AstroBin, afin de consolider les données et d'améliorer les recherches."
+
+#~ msgid "Ignore"
+#~ msgstr "Ignorer"
+
+#~ msgid "Browse equipment"
+#~ msgstr "Parcourir les équipements"
+
+#~ msgid ""
+#~ "AstroBin needs an additional step to verify your login. Please enter the "
+#~ "token generated by your token generator or received via email."
+#~ msgstr ""
+#~ "AstroBin a besoin d'une étape supplémentaire pour vérifier votre "
+#~ "connexion. Veuillez saisir le jeton généré par votre générateur de jetons "
+#~ "ou reçu par e-mail."
+
+#~ msgid ""
+#~ "This is your handle on AstroBin and will be part of the URL to your "
+#~ "gallery. If you do not specify afirst and last name below, it will also "
+#~ "be how others see your name. Please use letters, digits, and the special "
+#~ "characters @/./+/-/_ only."
+#~ msgstr ""
+#~ "Ceci est votre identifiant sur AstroBin et fera partie de l’URL de votre "
+#~ "galerie. Si vous ne précisez pas de nom et de prénom ci-dessous, cela "
+#~ "sera également la façon dont les autres verront votre nom. Veuillez "
+#~ "utiliser uniquement des lettres, des chiffres et les caractères spéciaux "
+#~ "@/./+/-/_."

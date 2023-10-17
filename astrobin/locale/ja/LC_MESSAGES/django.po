@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 15:27+0000\n"
-"PO-Revision-Date: 2023-07-06 17:17+0200\n"
+"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"PO-Revision-Date: 2023-10-17 10:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+"X-Loco-Api-Version: 1.0.28 20230927-1\n"
 
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
@@ -897,6 +897,12 @@ msgstr ""
 "この画像にマウスを乗せたときに表示されるものを選択します。注意：このリビジョ"
 "ンと同じ幅と高さの修正版だけが考慮されます。"
 
+msgid "Loop video"
+msgstr ""
+
+msgid "If checked, the video will loop."
+msgstr ""
+
 msgid "Opacity"
 msgstr "不透明度"
 
@@ -983,6 +989,11 @@ msgstr "個人のホームページをお持ちの方は、ここにアドレス
 
 msgid "Website"
 msgstr "ウェブサイト"
+
+msgid ""
+"You have images on AstroBin, therefore you are an astrophotographer! :-) "
+"Please select a different skill level."
+msgstr ""
 
 msgid "Mark as final"
 msgstr "最終としてマークする"
@@ -1930,6 +1941,40 @@ msgstr "有料会員が高すぎる"
 msgid "I prefer not to say"
 msgstr "何もいうことはない"
 
+msgid "n/a"
+msgstr "n/a"
+
+msgid "Beginner"
+msgstr ""
+
+msgid "Intermediate"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Professional"
+msgstr ""
+
+msgid "I don't define myself as an astrophotographer at this time."
+msgstr ""
+
+msgid "I started out recently and I'm still getting familiar with the hobby."
+msgstr ""
+
+msgid ""
+"I have been doing astrophotography for a while and wouldn't classify myself "
+"as a beginner anymore."
+msgstr ""
+
+msgid ""
+"I developed a comprehensive set of skills and master most aspects of "
+"astrophotography."
+msgstr ""
+
+msgid "Astrophotography is my profession or part of my profession."
+msgstr ""
+
 msgid "Suspended"
 msgstr ""
 
@@ -2141,6 +2186,12 @@ msgid ""
 msgstr ""
 "あなたが読み書きができる他の言語。これは、あなたとコミュニケーションを取りた"
 "い他のAstroBinメンバーの役に立つことがあります。"
+
+msgid "Self-assessed skill level"
+msgstr ""
+
+msgid "How would you categorize your current skills as an astrophotographer?"
+msgstr ""
 
 msgid "Signature"
 msgstr "署名"
@@ -3075,6 +3126,9 @@ msgstr "本サイトに掲載されている画像の著作権は、それぞれ
 
 msgid "Back to top"
 msgstr "トップに戻る"
+
+msgid "Save"
+msgstr "保存する"
 
 msgid "Your AstroBin subscription is expired."
 msgstr "AstroBinの有料契約期間が終了しています。"
@@ -4012,8 +4066,8 @@ msgstr "出禁ユーザー"
 msgid "AstroBin is preparing your download. Please wait..."
 msgstr "AstroBinはダウンロードの準備をしています。しばらくお待ちください..."
 
-msgid "Original size"
-msgstr "オリジナルサイズ"
+msgid "Original file"
+msgstr "オリジナルファイル"
 
 msgid "Medium size"
 msgstr "中サイズ"
@@ -4024,14 +4078,14 @@ msgstr "大サイズ"
 msgid "Extra-large size"
 msgstr "特大サイズ"
 
+msgid "Original size"
+msgstr "オリジナルサイズ"
+
 msgid "Basic annotations"
 msgstr "基本的な注釈"
 
 msgid "Advanced annotations"
 msgstr "高度な注釈"
-
-msgid "Original file"
-msgstr "オリジナルファイル"
 
 msgid "Basic information"
 msgstr "基本情報"
@@ -4418,9 +4472,6 @@ msgstr "読み込み中"
 msgid "Edit your image: acquisition details"
 msgstr "画像の編集：撮影情報"
 
-msgid "Save"
-msgstr "保存する"
-
 msgid "Remove data"
 msgstr "データを削除する"
 
@@ -4764,11 +4815,23 @@ msgstr "Home of Astrophotography"
 msgid "Latest from the forums"
 msgstr "フォーラムからの最新情報"
 
-msgid "Poll"
-msgstr "投票"
+msgid "Closed"
+msgstr "閉鎖しました"
 
-msgid "Unanswered"
-msgstr "未回答"
+#, python-format
+msgid "Posted in <a href=\"%(forum_url)s\">%(forum_name)s</a>"
+msgstr ""
+
+#, python-format
+msgid "Started by <a href=\"%(topic_user_url)s\">%(username)s</a>"
+msgstr ""
+
+msgid "Started by user that was since deleted"
+msgstr ""
+
+#, python-format
+msgid "Last post by <a href=\"%(last_post_user_url)s\">%(username)s</a>"
+msgstr ""
 
 msgid "This topic has no replies."
 msgstr "このトピックには返信がありません。"
@@ -4819,9 +4882,6 @@ msgstr "送信先"
 
 msgid "Last message"
 msgstr "最終送信日"
-
-msgid "n/a"
-msgstr "n/a"
 
 msgid "No messages"
 msgstr "メッセージなし"
@@ -5195,28 +5255,11 @@ msgid ""
 msgstr "この作業が間違っていたと思われる方は、その理由をご連絡ください。"
 
 #, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"\"%(group_name)s\"グループへの参加リクエストが承認されました。\n"
-"\n"
-"グループへはこちらから: <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"\"%(group_name)s\"グループへの参加リクエストが承認されました。\n"
-"\n"
-"グループへはこちらから: %(url)s"
-
-#, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been APPROVED"
 msgstr "\"%(group_name)s\"グループへの参加リクエストが承認されました。"
+
+msgid "Visit group"
+msgstr ""
 
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
@@ -5374,6 +5417,35 @@ msgid ""
 msgstr ""
 "%(max_inactivity_days)s日経過すると、IOTDスタッフから削除されます（あなたの審"
 "査待ちの画像から最後に審査をした日からカウントします）。"
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days"
+msgstr ""
+
+msgid ""
+"You received this notification because you have submitted images for IOTD/TP "
+"consideration in the past, but not this one yet."
+msgstr ""
+
+msgid ""
+"To submit this image for IOTD/TP consideration, please click on the link "
+"below, go to the Actions menu (lightening bolt icon on mobile), and select "
+"“Submit for IOTD/TP consideration”."
+msgstr ""
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days."
+msgstr ""
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration isin %(days)s days"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5824,24 +5896,8 @@ msgid "%(user)s replied in topic to which you are subscribed"
 msgstr "%(user)s は、あなたが購読しているトピックに返信しました。"
 
 #, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
-msgstr ""
-"%(inviter)s はグループに招待されました: \"%(group_name)s\"\n"
-"\n"
-"グループへの訪問はこちら: <a href=\"%(group_page)s\">%(group_page)s</a>"
-
-#, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: %(group_page)s"
-msgstr ""
-"%(inviter)s はグループに招待されました: \"%(group_name)s\"\n"
-"\n"
-"グループへの訪問はこちら: %(group_page)s"
+msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
+msgstr "%(inviter)s はグループに招待されました: \"%(group_name)s\""
 
 #, python-format
 msgid ""
@@ -5851,28 +5907,8 @@ msgstr ""
 "<strong>%(inviter)s</strong> はグループに招待されました: \"%(group_name)s\""
 
 #, python-format
-msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
-msgstr "%(inviter)s はグループに招待されました: \"%(group_name)s\""
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(requester)s はグループに参加希望をだしました: \"%(group_name)s\".\n"
-"\n"
-"グループへの訪問はこちら: <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"%(requester)s はグループに参加希望をだしました: \"%(group_name)s\".\n"
-"\n"
-"グループへの訪問はこちら: %(url)s"
+msgid "%(requester)s requested to join the group: \"%(group_name)s\""
+msgstr "%(requester)s はグループに参加希望をだしました: \"%(group_name)s\""
 
 #, python-format
 msgid ""
@@ -5881,10 +5917,6 @@ msgid ""
 msgstr ""
 "<strong>%(requester)s</strong> はグループに参加希望をだしました: "
 "\"%(group_name)s\""
-
-#, python-format
-msgid "%(requester)s requested to join the group: \"%(group_name)s\""
-msgstr "%(requester)s はグループに参加希望をだしました: \"%(group_name)s\""
 
 #, python-format
 msgid "<strong>%(user)s</strong> has published a new image"
@@ -6155,6 +6187,54 @@ msgstr ""
 
 #, python-format
 msgid ""
+"A moderator moved your topic <strong>%(topic_name)s</strong> from the forum "
+"<strong>%(old_forum_name)s</strong> to the forum <strong>%(new_forum_name)s</"
+"strong>."
+msgstr ""
+
+msgid "The moderator decided to move your topic to a more relevant forum."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group <a href=\"%(group_url)s\">"
+"%(group_name)s</a>. You will be notified of topic replies also if you're not "
+"a member of the group, but joining it might be a good idea."
+msgstr ""
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</a>), it was "
+"moved to its dedicated forum. When new topics are posted to the forum of an "
+"equipment item, all AstroBin users who have used it get notified (unless "
+"they have opted out of this kind of notifications)."
+msgstr ""
+
+#, python-format
+msgid ""
+"A moderator moved your topic \"%(topic_name)s\" from the forum "
+"\"%(old_forum_name)s\" to the forum \"%(new_forum_name)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group \"%(group_name)s\". You will be "
+"notified of topic replies also if you're not a member of the group, but "
+"joining it might be a good idea."
+msgstr ""
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(%(equipment_item_name)s), it was moved to its dedicated forum. When new "
+"topics are posted to the forum of an equipment item, all AstroBin users who "
+"have used it get notified (unless they have opted out of this kind of "
+"notifications)."
+msgstr ""
+
+#, python-format
+msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> joined the public group: <strong>"
 "\"%(group_name)s\"</strong>."
 msgstr ""
@@ -6403,16 +6483,11 @@ msgstr "ユーザーサポートの投稿、機能要求、問題報告などは
 
 #, python-format
 msgid ""
-"Posts about AstroBin itself, such as questions or comments about the IOTD/TP "
-"process, or the AstroBin Index, AstroBin \"likes\", or the forums "
-"themselves, are also considered off-topic and will be deleted. If you want "
-"to provide feedback or ask a question about AstroBin, please <a href="
-"\"%(contact_url)s\">contact us</a>: we really value your input!"
+"If you want to engage in open discussion about AstroBin and its feature with "
+"other members of the community, please join the <a href="
+"\"%(open_discussions_url)s\">AstroBin Platform open discussions community "
+"forum</a> group!"
 msgstr ""
-"IOTD/TPのプロセスやAstroBin Index、AstroBinでの「いいね！」、フォーラム自体に"
-"関する質問やコメントなど、AstroBin自体に関する投稿もオフトピックとみなされ、"
-"削除されます。AstroBinに関するご意見・ご質問は、<a href=\"%(contact_url)s\">"
-"お問い合わせ</a>までお願いします：皆様のご意見はとても貴重です。"
 
 msgid "I have read the text above"
 msgstr "上記の文章を読みました"
@@ -6420,11 +6495,14 @@ msgstr "上記の文章を読みました"
 msgid "I understand"
 msgstr "理解した"
 
-msgid "Ignore"
-msgstr "無視する"
+msgid "Forum notice"
+msgstr ""
 
-msgid "Browse equipment"
-msgstr "機材をみる"
+msgid ""
+"This forum belongs to a group, and the group's owner set the following "
+"notice to communicate forum rules, disclaimers, or important information to "
+"users before they create a new post"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6673,11 +6751,14 @@ msgstr "返信"
 msgid "Last post"
 msgstr "最終投稿"
 
+msgid "Poll"
+msgstr "投票"
+
+msgid "Unanswered"
+msgstr "未回答"
+
 msgid "Sticky"
 msgstr "付箋"
-
-msgid "Closed"
-msgstr "閉鎖しました"
 
 msgid "This forum does not have any topics."
 msgstr "このフォーラムにはトピックがありません。"
@@ -7168,6 +7249,10 @@ msgstr "ご理解をいただきありがとうございます。"
 msgid "%(user)s's gallery"
 msgstr "%(user)s のギャラリー"
 
+#, python-format
+msgid "Astrophotography by %(user)s on AstroBin"
+msgstr ""
+
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
 "can show people individual images by sharing them using the <em>Share</em> "
@@ -7629,6 +7714,9 @@ msgstr "カメラの種類"
 msgid "Camera pixel size (μm)"
 msgstr "カメラのピクセルサイズ (μm)"
 
+msgid "Filter types"
+msgstr ""
+
 msgid "Field radius (deg)"
 msgstr "視野半径（度）"
 
@@ -7740,6 +7828,78 @@ msgstr "今月"
 msgid "Current year"
 msgstr "今年"
 
+msgid "Results will include images that feature all selected filter types."
+msgstr ""
+
+msgid "Hydrogen-alpha (Hα)"
+msgstr ""
+
+msgid "Hydrogen-beta (Hβ)"
+msgstr ""
+
+msgid "Sulfur-II (SII)"
+msgstr ""
+
+msgid "Oxygen-III (OIII)"
+msgstr ""
+
+msgid "Nitrogen-II (NII)"
+msgstr ""
+
+msgid "Ultraviolet (UV)"
+msgstr ""
+
+msgid "Infrared (IR)"
+msgstr ""
+
+msgid "Multiband"
+msgstr ""
+
+msgid "Luminance/clear (L)"
+msgstr ""
+
+msgid "Red channel (R)"
+msgstr ""
+
+msgid "Green channel (G)"
+msgstr ""
+
+msgid "Blue channel (B)"
+msgstr ""
+
+msgid "Neutral density (ND)"
+msgstr ""
+
+msgid "Ultra High Contrast (UHC)"
+msgstr ""
+
+msgid "Sky glow"
+msgstr ""
+
+msgid "Solar"
+msgstr ""
+
+msgid "Lunar"
+msgstr ""
+
+msgid "Cometary"
+msgstr ""
+
+msgid "Photometric Ultraviolet"
+msgstr ""
+
+msgid "Photometric Blue"
+msgstr ""
+
+msgid "Photometric Visual"
+msgstr ""
+
+msgid "Photometric Red"
+msgstr ""
+
+msgid "Photometric Infrared"
+msgstr ""
+
 msgid "Imaging telescopes"
 msgstr "撮影用望遠鏡"
 
@@ -7771,6 +7931,9 @@ msgid "What kind of search results do you want?"
 msgstr "どのような検索結果が欲しいのか？"
 
 msgid "All images"
+msgstr ""
+
+msgid "Your images"
 msgstr ""
 
 msgid "Images bookmarked by you"
@@ -8604,6 +8767,24 @@ msgstr ""
 #~ "あなたの以下のコメントは、モデレーターによって承認されたところです。"
 
 #~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "\"%(group_name)s\"グループへの参加リクエストが承認されました。\n"
+#~ "\n"
+#~ "グループへはこちらから: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "\"%(group_name)s\"グループへの参加リクエストが承認されました。\n"
+#~ "\n"
+#~ "グループへはこちらから: %(url)s"
+
+#~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: <a "
 #~ "href=\"%(url)s\">%(url)s</a>"
 #~ msgstr ""
@@ -8682,6 +8863,42 @@ msgstr ""
 
 #~ msgid "%(user)s replied to your comment."
 #~ msgstr "%(user)s があなたのコメントに返信しました。"
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
+#~ msgstr ""
+#~ "%(inviter)s はグループに招待されました: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "グループへの訪問はこちら: <a href=\"%(group_page)s\">%(group_page)s</a>"
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: %(group_page)s"
+#~ msgstr ""
+#~ "%(inviter)s はグループに招待されました: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "グループへの訪問はこちら: %(group_page)s"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(requester)s はグループに参加希望をだしました: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "グループへの訪問はこちら: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "%(requester)s はグループに参加希望をだしました: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "グループへの訪問はこちら: %(url)s"
 
 #~ msgid ""
 #~ "%(originator)s has published a new image revision! Check it out at the "
@@ -8808,6 +9025,19 @@ msgstr ""
 
 #~ msgid "View forums"
 #~ msgstr "フォーラムを見る"
+
+#~ msgid ""
+#~ "Posts about AstroBin itself, such as questions or comments about the IOTD/"
+#~ "TP process, or the AstroBin Index, AstroBin \"likes\", or the forums "
+#~ "themselves, are also considered off-topic and will be deleted. If you "
+#~ "want to provide feedback or ask a question about AstroBin, please <a href="
+#~ "\"%(contact_url)s\">contact us</a>: we really value your input!"
+#~ msgstr ""
+#~ "IOTD/TPのプロセスやAstroBin Index、AstroBinでの「いいね！」、フォーラム自"
+#~ "体に関する質問やコメントなど、AstroBin自体に関する投稿もオフトピックとみな"
+#~ "され、削除されます。AstroBinに関するご意見・ご質問は、<a href="
+#~ "\"%(contact_url)s\">お問い合わせ</a>までお願いします：皆様のご意見はとても"
+#~ "貴重です。"
 
 #~ msgid "These are the forums in the groups you have access to."
 #~ msgstr "これらは、あなたがアクセスできるグループ内のフォーラムです。"
@@ -9271,3 +9501,9 @@ msgstr ""
 #~ msgstr ""
 #~ "データの一元化や検索エンジンの検索結果の向上につながりますので、AstroBinに"
 #~ "登録されている機材を新しいデータベースに移行してください。"
+
+#~ msgid "Ignore"
+#~ msgstr "無視する"
+
+#~ msgid "Browse equipment"
+#~ msgstr "機材をみる"

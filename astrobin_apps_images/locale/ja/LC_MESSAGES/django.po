@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 15:27+0000\n"
-"PO-Revision-Date: 2023-07-06 13:32+0200\n"
+"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"PO-Revision-Date: 2023-10-17 10:19+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+"X-Loco-Api-Version: 1.0.28 20230927-1\n"
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "非圧縮ファイル（最大100MB）"
@@ -32,11 +32,35 @@ msgstr ""
 msgid "Error!"
 msgstr "エラー！"
 
+msgid "Image of the day"
+msgstr "Image of the day"
+
+msgid "Top pick"
+msgstr "Top pick"
+
+msgid "Top pick nomination"
+msgstr "Top pickノミネート"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr ""
+
 msgid "Staging area"
 msgstr "ステージング領域"
 
 msgid "Collaboration"
 msgstr "コラボレーション"
+
+msgid "Video"
+msgstr ""
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+
+msgid "If the problem persists, please contact us."
+msgstr ""
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
 
 #, python-format
 msgid "Revision %(revision)s"
@@ -50,15 +74,6 @@ msgstr "読み込み中"
 
 msgid "(no title)"
 msgstr "(no title)"
-
-msgid "Image of the day"
-msgstr "Image of the day"
-
-msgid "Top pick"
-msgstr "Top pick"
-
-msgid "Top pick nomination"
-msgstr "Top pickノミネート"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr ""
