@@ -2502,6 +2502,37 @@ class UserProfile(SafeDeleteModel):
         (DELETE_REASON_OTHER, _('Other')),
     )
 
+    SKILL_LEVEL_NA = 'NA'
+    SKILL_LEVEL_BEGINNER = 'BEGINNER'
+    SKILL_LEVEL_INTERMEDIATE = 'INTERMEDIATE'
+    SKILL_LEVEL_ADVANCED = 'ADVANCED'
+    SKILL_LEVEL_PROFESSIONAL = 'PROFESSIONAL'
+
+    SKILL_LEVEL_NA_TITLE = _('n/a')
+    SKILL_LEVEL_BEGINNER_TITLE = _("Beginner")
+    SKILL_LEVEL_INTERMEDIATE_TITLE = _('Intermediate')
+    SKILL_LEVEL_ADVANCED_TITLE = _('Advanced')
+    SKILL_LEVEL_PROFESSIONAL_TITLE = _('Professional')
+
+    SKILL_LEVEL_NA_DESCRIPTION = \
+        _('I don\'t define myself as an astrophotographer at this time.')
+    SKILL_LEVEL_BEGINNER_DESCRIPTION = \
+        _('I started out recently and I\'m still getting familiar with the hobby.')
+    SKILL_LEVEL_INTERMEDIATE_DESCRIPTION =\
+        _('I have been doing astrophotography for a while and wouldn\'t classify myself as a beginner anymore.')
+    SKILL_LEVEL_ADVANCED_DESCRIPTION = \
+        _('I developed a comprehensive set of skills and master most aspects of astrophotography.')
+    SKILL_LEVEL_PROFESSIONAL_DESCRIPTION = \
+        _('Astrophotography is my profession or part of my profession.')
+
+    SKILL_LEVEL_CHOICES = (
+        (SKILL_LEVEL_NA, f'{SKILL_LEVEL_NA_TITLE}///{SKILL_LEVEL_NA_DESCRIPTION}'),
+        (SKILL_LEVEL_BEGINNER, f'{SKILL_LEVEL_BEGINNER_TITLE}///{SKILL_LEVEL_BEGINNER_DESCRIPTION}'),
+        (SKILL_LEVEL_INTERMEDIATE, f'{SKILL_LEVEL_INTERMEDIATE_TITLE}///{SKILL_LEVEL_INTERMEDIATE_DESCRIPTION}'),
+        (SKILL_LEVEL_ADVANCED, f'{SKILL_LEVEL_ADVANCED_TITLE}///{SKILL_LEVEL_ADVANCED_DESCRIPTION}'),
+        (SKILL_LEVEL_PROFESSIONAL, f'{SKILL_LEVEL_PROFESSIONAL_TITLE}///{SKILL_LEVEL_PROFESSIONAL_DESCRIPTION}'),
+    )
+
     user = models.OneToOneField(User, editable=False, on_delete=models.CASCADE)
 
     updated = models.DateTimeField(
@@ -2864,6 +2895,21 @@ class UserProfile(SafeDeleteModel):
         verbose_name=_("Other languages"),
         help_text=_("Other languages that you can read and write. This can be useful to other AstroBin members who "
                     "would like to communicate with you.")
+    )
+
+    skill_level = models.CharField(
+        max_length=16,
+        null=True,
+        blank=True,
+        verbose_name=_("Self-assessed skill level"),
+        help_text=_("How would you categorize your current skills as an astrophotographer?"),
+        choices=SKILL_LEVEL_CHOICES,
+    )
+
+    skill_level_updated = models.DateTimeField(
+        editable=False,
+        null=True,
+        blank=True,
     )
 
     # One time notifications that won't disappear until marked as seen.

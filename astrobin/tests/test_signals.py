@@ -688,3 +688,30 @@ class SignalsTest(TestCase):
 
         self.assertEquals(1, ToggleProperty.objects.count())
         self.assertIsNone(ToggleProperty.objects.first().user)
+
+    def test_userprofile_pre_save_updates_skill_level_updated(self):
+        user = Generators.user()
+        profile = user.userprofile
+
+        self.assertIsNone(profile.skill_level)
+        self.assertIsNone(profile.skill_level_updated)
+
+        profile.skill_level = UserProfile.SKILL_LEVEL_BEGINNER
+        profile.save()
+        profile.refresh_from_db()
+
+        self.assertEquals(profile.skill_level, UserProfile.SKILL_LEVEL_BEGINNER)
+        self.assertIsNotNone(profile.skill_level_updated)
+
+        time.sleep(.1)
+
+        updated = profile.skill_level_updated
+
+        profile.skill_level = UserProfile.SKILL_LEVEL_INTERMEDIATE
+        profile.save()
+        profile.refresh_from_db()
+
+        self.assertEquals(profile.skill_level, UserProfile.SKILL_LEVEL_INTERMEDIATE)
+        self.assertIsNotNone(profile.skill_level_updated)
+        self.assertGreater(profile.skill_level_updated, updated)
+
