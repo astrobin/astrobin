@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 15:27+0000\n"
-"PO-Revision-Date: 2023-07-06 17:17+0200\n"
+"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"PO-Revision-Date: 2023-10-17 10:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+"X-Loco-Api-Version: 1.0.28 20230927-1\n"
 
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
@@ -891,6 +891,12 @@ msgstr ""
 "选择当鼠标悬停在此作品上时，将显示的内容。请注意：只有修订作品与原始作品具有"
 "相同宽度和高度时可用。"
 
+msgid "Loop video"
+msgstr ""
+
+msgid "If checked, the video will loop."
+msgstr ""
+
 msgid "Opacity"
 msgstr "透明度"
 
@@ -969,6 +975,11 @@ msgstr "如果您有个人网站，请输入网址。"
 
 msgid "Website"
 msgstr "网站"
+
+msgid ""
+"You have images on AstroBin, therefore you are an astrophotographer! :-) "
+"Please select a different skill level."
+msgstr ""
 
 msgid "Mark as final"
 msgstr "记为最后一次"
@@ -1904,6 +1915,40 @@ msgstr "付费订阅太贵了"
 msgid "I prefer not to say"
 msgstr "我不想说"
 
+msgid "n/a"
+msgstr "无"
+
+msgid "Beginner"
+msgstr ""
+
+msgid "Intermediate"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Professional"
+msgstr ""
+
+msgid "I don't define myself as an astrophotographer at this time."
+msgstr ""
+
+msgid "I started out recently and I'm still getting familiar with the hobby."
+msgstr ""
+
+msgid ""
+"I have been doing astrophotography for a while and wouldn't classify myself "
+"as a beginner anymore."
+msgstr ""
+
+msgid ""
+"I developed a comprehensive set of skills and master most aspects of "
+"astrophotography."
+msgstr ""
+
+msgid "Astrophotography is my profession or part of my profession."
+msgstr ""
+
 msgid "Suspended"
 msgstr ""
 
@@ -2097,6 +2142,12 @@ msgid ""
 "AstroBin members who would like to communicate with you."
 msgstr ""
 "你可以读/写的其他语言。这对于希望与您交流的其他 AstroBin 用户可能很有用。"
+
+msgid "Self-assessed skill level"
+msgstr ""
+
+msgid "How would you categorize your current skills as an astrophotographer?"
+msgstr ""
 
 msgid "Signature"
 msgstr "签名"
@@ -3012,6 +3063,9 @@ msgstr "本站所载作品的版权，归其原作者所有。"
 msgid "Back to top"
 msgstr "回到顶部"
 
+msgid "Save"
+msgstr "保存"
+
 msgid "Your AstroBin subscription is expired."
 msgstr "您的 AstroBin 订阅已到期。"
 
@@ -3917,7 +3971,7 @@ msgstr "禁用用户"
 msgid "AstroBin is preparing your download. Please wait..."
 msgstr ""
 
-msgid "Original size"
+msgid "Original file"
 msgstr ""
 
 msgid "Medium size"
@@ -3929,13 +3983,13 @@ msgstr "大尺寸"
 msgid "Extra-large size"
 msgstr ""
 
+msgid "Original size"
+msgstr ""
+
 msgid "Basic annotations"
 msgstr ""
 
 msgid "Advanced annotations"
-msgstr ""
-
-msgid "Original file"
 msgstr ""
 
 msgid "Basic information"
@@ -4294,9 +4348,6 @@ msgstr "正在载入"
 msgid "Edit your image: acquisition details"
 msgstr "编辑您的作品：获取图像的细节信息"
 
-msgid "Save"
-msgstr "保存"
-
 msgid "Remove data"
 msgstr "移除数据"
 
@@ -4614,10 +4665,22 @@ msgstr "天文摄影圣地"
 msgid "Latest from the forums"
 msgstr "论坛新帖"
 
-msgid "Poll"
+msgid "Closed"
+msgstr "已关闭"
+
+#, python-format
+msgid "Posted in <a href=\"%(forum_url)s\">%(forum_name)s</a>"
 msgstr ""
 
-msgid "Unanswered"
+#, python-format
+msgid "Started by <a href=\"%(topic_user_url)s\">%(username)s</a>"
+msgstr ""
+
+msgid "Started by user that was since deleted"
+msgstr ""
+
+#, python-format
+msgid "Last post by <a href=\"%(last_post_user_url)s\">%(username)s</a>"
 msgstr ""
 
 msgid "This topic has no replies."
@@ -4667,9 +4730,6 @@ msgstr "参与者"
 
 msgid "Last message"
 msgstr "最后一条消息"
-
-msgid "n/a"
-msgstr "无"
 
 msgid "No messages"
 msgstr "无消息"
@@ -5016,28 +5076,11 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"您加入\"%(group_name)s\" 的申请被通过了。\n"
-"\n"
-"点击这里查看小组：<a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"您加入\"%(group_name)s\" 的申请被通过了。\n"
-"\n"
-"点击这里查看小组：%(url)s"
-
-#, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been APPROVED"
 msgstr "您加入 \"%(group_name)s\" 的申请已被批准"
+
+msgid "Visit group"
+msgstr ""
 
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
@@ -5171,6 +5214,35 @@ msgid ""
 msgstr ""
 "在您不活跃 %(max_inactivity_days)s 天后（自最后一次选拔提名开始计算），您将被"
 "从“今日最佳”工作人员中移除。"
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days"
+msgstr ""
+
+msgid ""
+"You received this notification because you have submitted images for IOTD/TP "
+"consideration in the past, but not this one yet."
+msgstr ""
+
+msgid ""
+"To submit this image for IOTD/TP consideration, please click on the link "
+"below, go to the Actions menu (lightening bolt icon on mobile), and select "
+"“Submit for IOTD/TP consideration”."
+msgstr ""
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days."
+msgstr ""
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration isin %(days)s days"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5552,24 +5624,8 @@ msgid "%(user)s replied in topic to which you are subscribed"
 msgstr ""
 
 #, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
-msgstr ""
-"%(inviter)s 邀请您加入小组： \"%(group_name)s\"\n"
-"\n"
-"点击这里查看： <a href=\"%(group_page)s\">%(group_page)s</a>"
-
-#, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: %(group_page)s"
-msgstr ""
-"%(inviter)s 邀请您加入小组： \"%(group_name)s\"\n"
-"\n"
-"点击这里查看： %(group_page)s"
+msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
+msgstr "%(inviter)s 邀请您加入小组： \"%(group_name)s\""
 
 #, python-format
 msgid ""
@@ -5578,38 +5634,14 @@ msgid ""
 msgstr "<strong>%(inviter)s</strong> 邀请您加入小组： \"%(group_name)s\""
 
 #, python-format
-msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
-msgstr "%(inviter)s 邀请您加入小组： \"%(group_name)s\""
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(requester)s 申请加入小组： \"%(group_name)s\".\n"
-"\n"
-"点击这里查看： <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"%(requester)s 申请加入小组： \"%(group_name)s\".\n"
-"\n"
-"点击这里查看： %(url)s"
+msgid "%(requester)s requested to join the group: \"%(group_name)s\""
+msgstr "%(requester)s 申请加入小组： \"%(group_name)s\""
 
 #, python-format
 msgid ""
 "<strong>%(requester)s</strong> requested to join the group: \"%(group_name)s"
 "\""
 msgstr "<strong>%(requester)s</strong> 申请加入小组： \"%(group_name)s\""
-
-#, python-format
-msgid "%(requester)s requested to join the group: \"%(group_name)s\""
-msgstr "%(requester)s 申请加入小组： \"%(group_name)s\""
 
 #, python-format
 msgid "<strong>%(user)s</strong> has published a new image"
@@ -5852,6 +5884,54 @@ msgstr ""
 
 #, python-format
 msgid ""
+"A moderator moved your topic <strong>%(topic_name)s</strong> from the forum "
+"<strong>%(old_forum_name)s</strong> to the forum <strong>%(new_forum_name)s</"
+"strong>."
+msgstr ""
+
+msgid "The moderator decided to move your topic to a more relevant forum."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group <a href=\"%(group_url)s\">"
+"%(group_name)s</a>. You will be notified of topic replies also if you're not "
+"a member of the group, but joining it might be a good idea."
+msgstr ""
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</a>), it was "
+"moved to its dedicated forum. When new topics are posted to the forum of an "
+"equipment item, all AstroBin users who have used it get notified (unless "
+"they have opted out of this kind of notifications)."
+msgstr ""
+
+#, python-format
+msgid ""
+"A moderator moved your topic \"%(topic_name)s\" from the forum "
+"\"%(old_forum_name)s\" to the forum \"%(new_forum_name)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group \"%(group_name)s\". You will be "
+"notified of topic replies also if you're not a member of the group, but "
+"joining it might be a good idea."
+msgstr ""
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(%(equipment_item_name)s), it was moved to its dedicated forum. When new "
+"topics are posted to the forum of an equipment item, all AstroBin users who "
+"have used it get notified (unless they have opted out of this kind of "
+"notifications)."
+msgstr ""
+
+#, python-format
+msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> joined the public group: <strong>"
 "\"%(group_name)s\"</strong>."
 msgstr ""
@@ -6081,16 +6161,11 @@ msgstr "用户支持帖、功能申请、问题报告等等将被删除。"
 
 #, python-format
 msgid ""
-"Posts about AstroBin itself, such as questions or comments about the IOTD/TP "
-"process, or the AstroBin Index, AstroBin \"likes\", or the forums "
-"themselves, are also considered off-topic and will be deleted. If you want "
-"to provide feedback or ask a question about AstroBin, please <a href="
-"\"%(contact_url)s\">contact us</a>: we really value your input!"
+"If you want to engage in open discussion about AstroBin and its feature with "
+"other members of the community, please join the <a href="
+"\"%(open_discussions_url)s\">AstroBin Platform open discussions community "
+"forum</a> group!"
 msgstr ""
-"有关 AstroBin 本身的帖子，例如有关“今日最佳”/“热门精选” 流程的问题或评论、"
-"AstroBin 指数、AstroBin 的“赞”或论坛本身的帖子，也将被视为无关主题，它们将被"
-"删除。如果您想提供反馈或询问有关 AstroBin 的问题，<a href=\"%(contact_url)s"
-"\">联系我们</a>：我们非常重视您的意见！"
 
 msgid "I have read the text above"
 msgstr "我已阅读以上内容"
@@ -6098,10 +6173,13 @@ msgstr "我已阅读以上内容"
 msgid "I understand"
 msgstr "朕知道了"
 
-msgid "Ignore"
+msgid "Forum notice"
 msgstr ""
 
-msgid "Browse equipment"
+msgid ""
+"This forum belongs to a group, and the group's owner set the following "
+"notice to communicate forum rules, disclaimers, or important information to "
+"users before they create a new post"
 msgstr ""
 
 #, python-format
@@ -6344,11 +6422,14 @@ msgstr ""
 msgid "Last post"
 msgstr "最新帖子"
 
+msgid "Poll"
+msgstr ""
+
+msgid "Unanswered"
+msgstr ""
+
 msgid "Sticky"
 msgstr "置顶"
-
-msgid "Closed"
-msgstr "已关闭"
 
 msgid "This forum does not have any topics."
 msgstr "该板块没有任何主题。"
@@ -6831,6 +6912,10 @@ msgstr ""
 msgid "%(user)s's gallery"
 msgstr "%(user)s的图库"
 
+#, python-format
+msgid "Astrophotography by %(user)s on AstroBin"
+msgstr ""
+
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
 "can show people individual images by sharing them using the <em>Share</em> "
@@ -7264,6 +7349,9 @@ msgstr "相机类型"
 msgid "Camera pixel size (μm)"
 msgstr ""
 
+msgid "Filter types"
+msgstr ""
+
 msgid "Field radius (deg)"
 msgstr "视场半径（度）"
 
@@ -7369,6 +7457,78 @@ msgstr ""
 msgid "Current year"
 msgstr ""
 
+msgid "Results will include images that feature all selected filter types."
+msgstr ""
+
+msgid "Hydrogen-alpha (Hα)"
+msgstr ""
+
+msgid "Hydrogen-beta (Hβ)"
+msgstr ""
+
+msgid "Sulfur-II (SII)"
+msgstr ""
+
+msgid "Oxygen-III (OIII)"
+msgstr ""
+
+msgid "Nitrogen-II (NII)"
+msgstr ""
+
+msgid "Ultraviolet (UV)"
+msgstr ""
+
+msgid "Infrared (IR)"
+msgstr ""
+
+msgid "Multiband"
+msgstr ""
+
+msgid "Luminance/clear (L)"
+msgstr ""
+
+msgid "Red channel (R)"
+msgstr ""
+
+msgid "Green channel (G)"
+msgstr ""
+
+msgid "Blue channel (B)"
+msgstr ""
+
+msgid "Neutral density (ND)"
+msgstr ""
+
+msgid "Ultra High Contrast (UHC)"
+msgstr ""
+
+msgid "Sky glow"
+msgstr ""
+
+msgid "Solar"
+msgstr ""
+
+msgid "Lunar"
+msgstr ""
+
+msgid "Cometary"
+msgstr ""
+
+msgid "Photometric Ultraviolet"
+msgstr ""
+
+msgid "Photometric Blue"
+msgstr ""
+
+msgid "Photometric Visual"
+msgstr ""
+
+msgid "Photometric Red"
+msgstr ""
+
+msgid "Photometric Infrared"
+msgstr ""
+
 msgid "Imaging telescopes"
 msgstr "主镜"
 
@@ -7400,6 +7560,9 @@ msgid "What kind of search results do you want?"
 msgstr ""
 
 msgid "All images"
+msgstr ""
+
+msgid "Your images"
 msgstr ""
 
 msgid "Images bookmarked by you"
@@ -8174,6 +8337,24 @@ msgstr ""
 #~ msgstr "您的以下评论刚刚被版主审核通过。"
 
 #~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "您加入\"%(group_name)s\" 的申请被通过了。\n"
+#~ "\n"
+#~ "点击这里查看小组：<a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "您加入\"%(group_name)s\" 的申请被通过了。\n"
+#~ "\n"
+#~ "点击这里查看小组：%(url)s"
+
+#~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: <a "
 #~ "href=\"%(url)s\">%(url)s</a>"
 #~ msgstr ""
@@ -8241,6 +8422,42 @@ msgstr ""
 
 #~ msgid "%(user)s replied to your comment."
 #~ msgstr "%(user)s 回复了您的评论。"
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
+#~ msgstr ""
+#~ "%(inviter)s 邀请您加入小组： \"%(group_name)s\"\n"
+#~ "\n"
+#~ "点击这里查看： <a href=\"%(group_page)s\">%(group_page)s</a>"
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: %(group_page)s"
+#~ msgstr ""
+#~ "%(inviter)s 邀请您加入小组： \"%(group_name)s\"\n"
+#~ "\n"
+#~ "点击这里查看： %(group_page)s"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(requester)s 申请加入小组： \"%(group_name)s\".\n"
+#~ "\n"
+#~ "点击这里查看： <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "%(requester)s 申请加入小组： \"%(group_name)s\".\n"
+#~ "\n"
+#~ "点击这里查看： %(url)s"
 
 #~ msgid ""
 #~ "%(originator)s has published a new image revision! Check it out at the "
@@ -8355,6 +8572,18 @@ msgstr ""
 
 #~ msgid "View forums"
 #~ msgstr "查看论坛"
+
+#~ msgid ""
+#~ "Posts about AstroBin itself, such as questions or comments about the IOTD/"
+#~ "TP process, or the AstroBin Index, AstroBin \"likes\", or the forums "
+#~ "themselves, are also considered off-topic and will be deleted. If you "
+#~ "want to provide feedback or ask a question about AstroBin, please <a href="
+#~ "\"%(contact_url)s\">contact us</a>: we really value your input!"
+#~ msgstr ""
+#~ "有关 AstroBin 本身的帖子，例如有关“今日最佳”/“热门精选” 流程的问题或评论、"
+#~ "AstroBin 指数、AstroBin 的“赞”或论坛本身的帖子，也将被视为无关主题，它们将"
+#~ "被删除。如果您想提供反馈或询问有关 AstroBin 的问题，<a href="
+#~ "\"%(contact_url)s\">联系我们</a>：我们非常重视您的意见！"
 
 #~ msgid "These are the forums in the groups you have access to."
 #~ msgstr "这些是您所在的小组有权访问板块。"
