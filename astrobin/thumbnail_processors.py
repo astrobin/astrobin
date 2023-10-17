@@ -17,7 +17,7 @@ SRGB_PROFILE = ImageCms.createProfile("sRGB")
 def rounded_corners(image, rounded=False, **kwargs):
     if rounded:
         mask = Image.open('astrobin/thumbnail-mask.png').convert('L')
-        mask = mask.resize(image.size, Image.ANTIALIAS)
+        mask = mask.resize(image.size, Image.LANCZOS)
         image = ImageOps.fit(image, mask.size, centering=(0.5, 0.5))
         image.putalpha(mask)
 

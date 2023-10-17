@@ -6,6 +6,7 @@ from django.core.cache import cache
 from astrobin.enums import ImageEditorStep, SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.fields import COUNTRIES
+from astrobin.forms.skill_level_form import SkillLevelForm
 from astrobin.models import CameraRenameProposal
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
@@ -150,5 +151,13 @@ def common_variables(request):
 
     if request.user.is_authenticated and request.user.userprofile.is_image_moderator():
         d['images_pending_moderation_no'] = ImageService().get_images_pending_moderation().count()
+
+    if (
+        not settings.READONLY_MODE and
+        request.user.is_authenticated and
+        request.user.userprofile.skill_level is None and
+        '/profile/' not in request.path
+    ):
+        d['skill_level_form'] = SkillLevelForm(instance=request.user.userprofile)
 
     return d

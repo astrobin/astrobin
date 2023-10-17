@@ -35,7 +35,10 @@ from subscription.signals import paid, signed_up, unsubscribed
 from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
-from astrobin.tasks import invalidate_cdn_caches, process_camera_rename_proposal
+from astrobin.tasks import (
+    encode_video_file, generate_video_preview, invalidate_cdn_caches,
+    process_camera_rename_proposal,
+)
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tasks import approve_migration_strategy
@@ -88,6 +91,9 @@ def image_pre_save(sender, instance, **kwargs):
 
     if not instance.pk and not instance.is_wip:
         instance.published = datetime.datetime.now()
+
+    if instance.square_cropping in (None, ''):
+        instance.square_cropping = ImageService(instance).get_default_cropping() or ""
 
     try:
         image = sender.objects_including_wip.get(pk=instance.pk)
@@ -144,7 +150,8 @@ def image_pre_save_invalidate_thumbnails(sender, instance: Image, **kwargs):
     except sender.DoesNotExist:
         return
 
-    if image_before_saving.square_cropping != instance.square_cropping:
+    if image_before_saving.square_cropping not in (None, '', '0,0,0,0') and \
+            image_before_saving.square_cropping != instance.square_cropping:
         instance.thumbnail_invalidate()
 
 
@@ -152,6 +159,8 @@ pre_save.connect(image_pre_save_invalidate_thumbnails, sender=Image)
 
 
 def image_post_save(sender, instance: Image, created: bool, **kwargs):
+    if kwargs.get('update_fields', None):
+        return
 
     if getattr(instance, DELETED_FIELD_NAME, None):
         return
@@ -200,6 +209,15 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             )
 
     if not instance.uploader_in_progress:
+        if instance.video_file.name:
+            if not instance.image_file.name:
+                ImageService(instance).generate_loading_placeholder()
+                generate_video_preview.apply_async(args=(instance.pk, ContentType.objects.get_for_model(Image).pk))
+
+            if not instance.encoded_video_file.name:
+                log.debug(f'Encoding video file for {instance} in image_post_save signal handler')
+                encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(Image).pk))
+
         groups = instance.user.joined_group_set.filter(autosubmission=True)
         for group in groups:
             if instance.is_wip:
@@ -289,7 +307,10 @@ def image_pre_delete(sender, instance: Image, **kwargs):
         instance.image_file.delete(save=False)
 
 
-def imagerevision_pre_save(sender, instance, **kwargs):
+def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):
+    if not instance.uploader_in_progress and instance.square_cropping in (None, ''):
+        instance.square_cropping = ImageService(instance.image).get_default_cropping(instance.label) or ""
+
     if instance.pk:
         pre_save_instance = get_object_or_None(ImageRevision.uploads_in_progress, pk=instance.pk)
         if pre_save_instance and not instance.uploader_in_progress:
@@ -300,12 +321,24 @@ pre_save.connect(imagerevision_pre_save, sender=ImageRevision)
 
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
+    if kwargs.get('update_fields', None):
+        return
+
     wip = instance.image.is_wip
     skip = instance.skip_notifications
     uploading = instance.uploader_in_progress
     just_completed_upload = cache.get("image_revision.%s.just_completed_upload" % instance.pk)
 
     UserService(instance.image.user).clear_gallery_image_list_cache()
+
+    if not uploading and instance.video_file.name:
+        if not instance.image_file.name:
+            ImageService(instance).generate_loading_placeholder()
+            generate_video_preview.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
+
+        if not instance.encoded_video_file.name:
+            log.debug(f'Encoding video file for {instance} in imagerevision_post_save signal handler')
+            encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
 
     if wip or skip:
         return
@@ -474,11 +507,14 @@ post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 
 
 def toggleproperty_post_save(sender, instance, created, **kwargs):
-    if isinstance(instance.content_object, Image) and not instance.content_object.is_wip:
-        SearchIndexUpdateService.update_index(instance.content_object)
-        SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
-        for collaborator in instance.content_object.collaborators.all().iterator():
-            SearchIndexUpdateService.update_index(collaborator, 3600)
+    if isinstance(instance.content_object, Image):
+        Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
+
+        if not instance.content_object.is_wip:
+            SearchIndexUpdateService.update_index(instance.content_object)
+            SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
+            for collaborator in instance.content_object.collaborators.all().iterator():
+                SearchIndexUpdateService.update_index(collaborator, 3600)
 
     if created:
         verb = None
@@ -487,7 +523,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
 
             if instance.content_type == ContentType.objects.get_for_model(Image):
                 image = instance.content_type.get_object_for_this_type(id=instance.object_id)
-                Image.all_objects.filter(pk=instance.content_object.pk).update(updated=timezone.now())
+                Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
 
                 if image.is_wip:
                     return
@@ -1323,6 +1359,18 @@ def user_pre_delete(sender, instance, **kwargs):
         log.error('User %s has no userprofile: %s' % (instance.username, str(e)))
 
 pre_delete.connect(user_pre_delete, sender=User)
+
+
+@receiver(pre_save, sender=UserProfile)
+def userprofile_pre_save(sender, instance: UserProfile, **kwargs):
+    try:
+        before_save: UserProfile = sender.objects.get(pk=instance.pk)
+    except sender.DoesNotExist:
+        # Object is new, so all fields are "changed"
+        return
+
+    if before_save.skill_level != instance.skill_level:
+        instance.skill_level_updated = DateTimeService.now()
 
 
 def userprofile_post_softdelete(sender, instance, **kwargs):

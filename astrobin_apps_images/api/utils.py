@@ -203,7 +203,7 @@ def apply_headers_to_response(response, headers):
 
 
 def get_cached_property(property, object):
-    result =  cache.get("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
+    result = cache.get("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
 
     if result is None:
         model_field = _get_model_field(property)
@@ -225,6 +225,9 @@ def set_cached_property(property, object, value):
             kwargs['keep_deleted'] = True
 
         object.save(kwargs)
+
+def clear_cached_property(property, object):
+    cache.delete("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
 
 def _get_model_field(property):
     return 'uploader_%s' % property.replace('-', '_')

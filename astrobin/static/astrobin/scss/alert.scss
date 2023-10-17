@@ -6,6 +6,16 @@
       margin-bottom: 12px;
     }
   }
+
+  .accordion.container > .accordion-group {
+    margin-left: 0;
+    margin-right: 0;
+
+    .form-actions {
+      background: unset;
+      margin-bottom: -1em;
+    }
+  }
 }
 
 .alert {

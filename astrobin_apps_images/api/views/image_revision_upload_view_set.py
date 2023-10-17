@@ -20,7 +20,7 @@ from astrobin_apps_images.api.permissions.has_revision_uploader_access_or_read_o
 from astrobin_apps_images.api.serializers import ImageRevisionUploadSerializer
 from astrobin_apps_images.api.views.image_upload_view_set import UploadMetadata
 from astrobin_apps_images.services import ImageService
-from common.upload_paths import image_upload_path
+from common.upload_paths import image_upload_path, video_upload_path
 
 
 class ImageRevisionUploadViewSet(TusCreateMixin,
@@ -41,11 +41,26 @@ class ImageRevisionUploadViewSet(TusCreateMixin,
     ]
     http_method_names = ['get', 'head', 'post', 'patch']
 
-    def get_file_field_name(self):
-        return "image_file"
+    def get_file_field_name(self, mime_type: str):
+        mime_start = mime_type.split('/')[0]
 
-    def get_upload_path_function(self):
-        return image_upload_path
+        if mime_start == 'image':
+            return "image_file"
+        elif mime_start == 'video':
+            return "video_file"
+        else:
+            raise ValueError(f"Unknown mime type: {mime_type}")
+
+    def get_upload_path_function(self, mime_type: str):
+
+        mime_start = mime_type.split('/')[0]
+
+        if mime_start == 'image':
+            return image_upload_path
+        elif mime_start == 'video':
+            return video_upload_path
+        else:
+            raise ValueError(f"Unknown mime type: {mime_type}")
 
     def get_upload_in_progress_object(self):
         _queryset = self.queryset
@@ -90,5 +105,12 @@ class ImageRevisionUploadViewSet(TusCreateMixin,
         except (TypeError, KeyError):
             return {}
 
-    def verify_file(self, path):
-        return ImageService.verify_file(path)
+    def verify_file(self, path: str, mime_type: str) -> bool:
+        mime_start = mime_type.split('/')[0]
+        if mime_start == 'image':
+            return ImageService.is_image(path)
+        elif mime_start == 'video':
+            ImageService.strip_video_metadata(path, mime_type)
+            return ImageService.is_video(path)
+        else:
+            raise ValueError(f"Unknown mime type: {mime_type}")

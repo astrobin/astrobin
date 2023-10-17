@@ -1,9 +1,8 @@
 import logging
 import os
 
-from PIL import Image as PILImage
-
 import simplejson
+from PIL import Image as PILImage
 from django.core.files import File
 from django.http import HttpResponse
 from rest_framework import mixins, status
@@ -15,24 +14,37 @@ from astrobin_apps_images.api import constants, signals
 from astrobin_apps_images.api.constants import TUS_API_CHECKSUM_ALGORITHMS
 from astrobin_apps_images.api.mixins import TusCacheMixin
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
-from astrobin_apps_images.api.utils import has_required_tus_header, checksum_matches, add_expiry_header, write_data, \
-    get_or_create_temporary_file, apply_headers_to_response
+from astrobin_apps_images.api.utils import (
+    add_expiry_header, apply_headers_to_response, checksum_matches,
+    get_or_create_temporary_file, has_required_tus_header, write_data,
+)
 from common.exceptions import Conflict
 
 log = logging.getLogger(__name__)
 
 
 class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
+    def clear_cache(self, obj):
+        self.clear_cached_property("name", obj)
+        self.clear_cached_property("filename", obj)
+        self.clear_cached_property("upload-length", obj)
+        self.clear_cached_property("offset", obj)
+        self.clear_cached_property("expires", obj)
+        self.clear_cached_property("metadata", obj)
+
     def delete_object(self, obj):
         delete_kwargs = {}
         if issubclass(type(obj), SafeDeleteModel):
             delete_kwargs['force_policy'] = HARD_DELETE
         obj.delete(**delete_kwargs)
 
-    def get_file_field_name(self):
+    def get_file_field_name(self, mime_type: str):
         raise NotImplementedError
 
-    def get_upload_path_function(self):
+    def get_upload_path_function(self, mime_type: str):
+        raise NotImplementedError
+
+    def verify_file(self, file_path: str, mime_type: str):
         raise NotImplementedError
 
     def get_chunk(self, request):
@@ -145,7 +157,10 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             # Save file
             temporary_file = get_or_create_temporary_file(object)
 
-            if not self.verify_file(temporary_file):
+            metadata = self.get_cached_property("metadata", object)
+            mime_type = metadata.get('mimeType', None)
+
+            if not self.verify_file(temporary_file, mime_type):
                 msg = "file verification failed"
                 log.warning("Chunked uploader (%d) (%d): %s" % (request.user.pk, object.pk, msg))
                 os.remove(temporary_file)
@@ -156,12 +171,12 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
                 request.user.pk, object.pk, temporary_file))
 
             try:
-                getattr(object, self.get_file_field_name()).save(
-                    self.get_upload_path_function()(object, self.get_cached_property("name", object)),
-                    File(open(temporary_file, 'rb'))
-                )
+                attr = getattr(object, self.get_file_field_name(mime_type))
+                filename = self.get_upload_path_function(mime_type)(object, self.get_cached_property("name", object))
+                with open(temporary_file, 'rb') as opened_temporary_file:
+                    attr.save(filename, File(opened_temporary_file))
 
-                if hasattr(object, 'animated'):
+                if hasattr(object, 'animated') and mime_type.startswith('image'):
                     with PILImage.open(temporary_file) as image_file:
                         object.animated = getattr(image_file, 'is_animated', False)
 
@@ -196,7 +211,9 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             response = HttpResponse(
                 content_type='application/javascript',
                 status=status.HTTP_201_CREATED)
+
             response = apply_headers_to_response(response, headers)
+
             return response
 
         # Create serializer
@@ -206,7 +223,12 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             simplejson.dumps(serializer.data),
             content_type='application/javascript',
             status=status.HTTP_201_CREATED)
+
         response = apply_headers_to_response(response, headers)
+
+        if self.get_cached_property("upload-length", object) == self.get_cached_property("offset", object):
+            self.clear_cache(object)
+
         return response
 
     def _is_valid_content_type(self, request):

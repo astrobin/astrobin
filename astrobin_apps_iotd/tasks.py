@@ -1,10 +1,13 @@
 import logging
+from datetime import timedelta
 
 from celery import shared_task
 from django.conf import settings
 from django.contrib.auth.models import Group
+from django.db.models import QuerySet
 
-from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
+from astrobin.models import Image
+from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdSubmitterSeenImage, IotdVote
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.utils import push_notification
 from common.constants import GroupName
@@ -118,3 +121,27 @@ def update_judgement_queues():
 def update_stats():
     IotdService().update_stats(365)
     logger.info("update_stats completed")
+
+
+@shared_task(time_limit=600)
+def notify_about_upcoming_deadline_for_iotd_tp_submission():
+    IotdService.notify_about_upcoming_deadline_for_iotd_tp_submission()
+
+
+@shared_task(time_limit=600)
+def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views():
+    # Run this task every hour.
+
+    recently_expired_images: QuerySet = IotdService.get_recently_expired_unsubmitted_images(timedelta(hours=1))
+    total_submitters: int = Group.objects.get(name=GroupName.IOTD_SUBMITTERS).user_set.count()
+    min_percentage: float = settings.IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE / 100 * .8
+
+    image: Image
+    for image in recently_expired_images.iterator():
+        users_who_saw_this = IotdSubmitterSeenImage.objects \
+            .filter(image=image, created__gt=image.submitted_for_iotd_tp_consideration) \
+            .values_list('user', flat=True) \
+            .distinct() \
+            .count()
+        if users_who_saw_this < float(total_submitters) * min_percentage:
+            IotdService.resubmit_to_iotd_tp_process(image.user, image)

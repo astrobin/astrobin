@@ -1395,7 +1395,72 @@ astrobin_common = {
         $('#fancybox-settings-modal #id_slideshow_share_beginning').text(window.location.href.split('#')[0]);
     },
 
+    setVideoJsPlayerOnFullScreenChange: function (player) {
+        player.on('fullscreenchange', function () {
+            const isFullscreen = player.isFullscreen();
+            const el = player.el().firstChild;
+
+            if (isFullscreen) {
+                el.style.maxWidth = `${player.videoWidth()}px`;
+                el.style.maxHeight = `${player.videoHeight()}px`;
+                el.style.top = `50%`;
+                el.style.left = `50%`;
+                el.style.transform = `translate(-50%, -50%)`;
+                el.style.margin = 'auto';
+            } else {
+                el.style.maxWidth = '';
+                el.style.maxHeight = '';
+                el.style.top = '';
+                el.style.left = '';
+                el.style.transform = '';
+                el.style.margin = '';
+
+                // For some reasons, Fancybox registering the click ends up with the fancybox__content being 0px
+                setTimeout(() => {
+                    const fancyBoxContent = el.closest('.fancybox__content');
+                    if (fancyBoxContent) {
+                        fancyBoxContent.style.width = `${player.videoWidth()}px`;
+                        fancyBoxContent.style.height = `${player.videoHeight()}px`;
+                    }
+                }, 100);
+            }
+        });
+    },
+
     init: function (config) {
+        function formatSelect2Results(state) {
+            if (!state.id) {
+                return state.text;
+            }
+
+            const parts = state.text.split("///");
+
+            if (parts.length === 2) {
+                return $(
+                    '<span>' +
+                    '<div class="header">' + parts[0] + '</div>' +
+                    '<div class="description">' + parts[1] + '</div>' +
+                    '</span>'
+                );
+            } else {
+                return state.text;
+            }
+        }
+
+        function formatSelect2Selection(state) {
+            if (!state.id) {
+                return state.text;
+            }
+
+            const parts = state.text.split("///");
+
+            if (parts.length === 2) {
+                return parts[0];
+            } else {
+                return state.text;
+            }
+        }
+
         /* Init */
         $.extend(true, astrobin_common.config, config);
 
@@ -1438,17 +1503,23 @@ astrobin_common = {
         astrobin_common.init_timestamps();
         astrobin_common.init_page_loading_indicator();
 
-        if (window.innerWidth >= 980) {
-            $("select:not([multiple])").select2({theme: "flat"});
-        }
-
         $("select[multiple]:not(.select2)").not('*[name="license"]').multiselect({
             searchable: false,
             dividerLocation: 0.5
         });
 
+        if (window.innerWidth >= 980) {
+            $("select:not([multiple])").select2({
+                theme: "flat",
+                templateResult: formatSelect2Results,
+                templateSelection: formatSelect2Selection
+            });
+        }
+
         $("select.select2").select2({
-            theme: "flat"
+            theme: "flat",
+            templateResult: formatSelect2Results,
+            templateSelection: formatSelect2Selection
         });
 
         astrobin_common.init_ajax_csrf_token();

@@ -273,7 +273,7 @@ class TestImageService(TestCase):
 
     def test_delete_original_preserves_title_and_description(self):
         image = Generators.image(image_file='original.jpg', title='Foo', description='Foo')
-        revision = Generators.image_revision(image=image, image_file='revision.jpg', title='Bar', description='Bar')
+        Generators.image_revision(image=image, image_file='revision.jpg', title='Bar', description='Bar')
 
         ImageService(image).delete_original()
 
@@ -281,6 +281,29 @@ class TestImageService(TestCase):
         self.assertEqual('revision.jpg', image.image_file)
         self.assertEqual('Foo (Bar)', image.title)
         self.assertEqual('Foo\nBar', image.description)
+        self.assertEqual(1, Image.objects.all().count())
+
+    def test_delete_original_preserves_square_cropping(self):
+        image = Generators.image(image_file='original.jpg')
+        Image.objects.filter(pk=image.pk).update(square_cropping='0,0,100,100')
+        revision = Generators.image_revision(image=image, image_file='revision.jpg')
+        ImageRevision.objects.filter(pk=revision.pk).update(square_cropping='50,50,150,150')
+
+        ImageService(image).delete_original()
+
+        image = Image.objects.get(pk=image.pk)
+        self.assertEqual('revision.jpg', image.image_file)
+        self.assertEqual(image.square_cropping, '50,50,150,150')
+        self.assertEqual(1, Image.objects.all().count())
+
+    def test_delete_original_for_videos(self):
+        image = Generators.image(video_file='original.mov')
+        revision = Generators.image_revision(image=image, video_file='revision.mov')
+
+        ImageService(image).delete_original()
+
+        image = Image.objects.get(pk=image.pk)
+        self.assertEqual(revision.video_file, image.video_file)
         self.assertEqual(1, Image.objects.all().count())
 
     def test_delete_original_when_new_title_is_too_long(self):

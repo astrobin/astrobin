@@ -6,8 +6,8 @@ import zlib
 from PIL.Image import DecompressionBombError
 from django.conf import settings
 from django.core.cache import cache
-from django.urls import reverse
 from django.template import Library
+from django.urls import reverse
 from django.utils.translation import ugettext as _
 
 from astrobin.models import Image, ImageRevision
@@ -64,14 +64,10 @@ def astrobin_image(context, image, alias, **kwargs):
         'provide_size': True,
     }
 
-    if alias == '':
+    if alias in (None, ''):
         alias = 'gallery'
 
-    if link_alias in ('gallery_inverted', 'regular_inverted', 'hd_inverted', 'real_inverted'):
-        mod = 'inverted'
-    else:
-        mod = None
-
+    mod = 'inverted' if 'inverted' in link_alias else None
     size = settings.THUMBNAIL_ALIASES[''][alias]['size']
 
     if image is None or not isinstance(image, Image):
@@ -94,11 +90,15 @@ def astrobin_image(context, image, alias, **kwargs):
             'fancybox_url': None,
             'rel': rel,
             'slug': slug,
+            'show_video': False,
+            'show_play_icon': False,
         }
 
     # Old images might not have a size in the database, let's fix it.
     image_revision = image
-    if revision_label not in [0, '0', 'final']:
+    if revision_label == 'final':
+        revision_label = ImageService(image).get_final_revision_label()
+    if revision_label not in [0, '0']:
         try:
             image_revision = image.revisions.get(label=revision_label)
         except ImageRevision.DoesNotExist:
@@ -133,16 +133,9 @@ def astrobin_image(context, image, alias, **kwargs):
             logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
                 image_revision.pk, str(e)))
 
-    if alias in (
-            'regular', 'regular_inverted', 'regular_sharpened',
-            'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
-            'hd', 'hd_anonymized', 'hd_inverted', 'hd_sharpened',
-            'qhd', 'qhd_anonymized', 'qhd_inverted', 'qhd_sharpened',
-            'real', 'real_inverted'
-    ):
-        if w is not None and h is not None:
-            size = (size[0], int(size[0] / (w / float(h))))
-            response_dict['provide_size'] = False
+    if ImageService.is_viewable_alias(alias) and w is not None and h is not None:
+        size = (size[0], int(size[0] / (w / float(h))))
+        response_dict['provide_size'] = False
 
     placehold_size = [size[0], size[1]]
     for i in range(0, 2):
@@ -158,21 +151,11 @@ def astrobin_image(context, image, alias, **kwargs):
     if not field.name.startswith('images/'):
         field.name = 'images/' + field.name
 
-    animated = field.name.lower().endswith('.gif') and \
-               alias in (
-                   'regular', 'regular_sharpened',
-                   'regular_large', 'regular_large_sharpened',
-                   'hd', 'hd_sharpened',
-                   'qhd', 'qhd_sharpened',
-                   'real')
+    animated = field.name.lower().endswith('.gif') and ImageService.is_viewable_alias(alias)
 
     url = get_image_url(image, url_revision, url_size)
-    url_hd = get_image_url(image, url_revision, 'full')
 
-    show_tooltip = tooltip and (alias in (
-        'gallery', 'gallery_inverted',
-        'thumb',
-    ))
+    show_tooltip = tooltip and ImageService.is_tooltip_compatible_alias(alias)
 
     ##########
     # BADGES #
@@ -180,16 +163,16 @@ def astrobin_image(context, image, alias, **kwargs):
 
     badges = []
 
-    if alias in (
-            'thumb', 'gallery', 'gallery_inverted',
-            'regular', 'regular_inverted', 'regular_sharpened',
-            'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
-    ):
+    if ImageService.is_badge_compatible_alias(alias):
         iotd_service = IotdService()
 
         if image.is_wip:
             badges.append('wip')
-        elif iotd_service.is_iotd(image):
+
+        if image.video_file.name and not ImageService.is_viewable_alias(alias):
+            badges.append('video')
+
+        if iotd_service.is_iotd(image):
             badges.append('iotd')
         elif iotd_service.is_top_pick(image):
             badges.append('top-pick')
@@ -222,9 +205,8 @@ def astrobin_image(context, image, alias, **kwargs):
     if thumb_url and request.is_secure():
         thumb_url = thumb_url.replace('http://', 'https://', 1)
 
-    # If we're testing, we want to bypass the placeholder thing and force-get
-    # the thumb url.
-    if thumb_url is None and settings.TESTING:
+    # If we're testing or this is a video, we want to bypass the placeholder thing and force-get the thumb url.
+    if thumb_url is None and (image_revision.video_file.name or settings.TESTING):
         thumb = image.thumbnail_raw(alias, revision_label)
         if thumb:
             thumb_url = thumb.url
@@ -266,7 +248,6 @@ def astrobin_image(context, image, alias, **kwargs):
         'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
         'real': alias in ('real', 'real_inverted'),
         'url': url,
-        'url_hd': url_hd,
         'show_tooltip': show_tooltip,
         'request': request,
         'caption_cache_key': "%d_%s_%s_%s" % (
@@ -284,6 +265,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'get_enhanced_thumb_url': get_enhanced_thumb_url,
         'regular_large_thumb_url': regular_large_thumb_url,
         'get_regular_large_thumb_url': get_regular_large_thumb_url,
+        'image_revision': image_revision,
         'is_revision': hasattr(image_revision, 'label'),
         'revision_id': image_revision.pk,
         'revision_title': image_revision.title if hasattr(image_revision, 'label') else None,
@@ -292,13 +274,21 @@ def astrobin_image(context, image, alias, **kwargs):
         'instant': instant,
         'fancybox': fancybox,
         'fancybox_tooltip': fancybox_tooltip,
-        'fancybox_url': settings.BASE_URL + reverse('image_rawthumb', kwargs={
-            'id': image.get_id(),
-            'alias': 'qhd',
-            'r': revision_label,
-        }) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
+        'fancybox_url':
+            image_revision.encoded_video_file.url if image_revision.encoded_video_file.name else settings.BASE_URL + reverse(
+                'image_rawthumb', kwargs={
+                    'id': image.get_id(),
+                    'alias': 'qhd',
+                    'r': revision_label,
+                }
+            ) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
         'rel': rel,
         'slug': slug,
+        'is_video': bool(image_revision.video_file.name),
+        'show_video': ImageService.is_viewable_alias(alias) and (
+            bool(image_revision.video_file.name) if hasattr(image_revision, 'label') else bool(image.video_file.name)
+        ),
+        'show_play_icon': ImageService.is_play_button_alias(alias),
     }.items()))
 
 

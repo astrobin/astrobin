@@ -11,11 +11,13 @@
             <small>{{ item.item_type_label }}</small>
         </h3>
 
-        <a href="{% app_redirection_service '/equipment/explorer' %}/{{ item.klass|lower }}/{{ item.pk }}"
-           class="btn btn-link">
-            <i class="icon-file-text"></i>
-            {% trans "Details" %}
-        </a>
+        {% if item.brand or item.created_by == request.user %}
+            <a href="{% app_redirection_service '/equipment/explorer' %}/{{ item.klass|lower }}/{{ item.pk }}"
+               class="btn btn-link">
+                <i class="icon-file-text"></i>
+                {% trans "Details" %}
+            </a>
+        {% endif %}
     </div>
 
     <div class="body">
@@ -177,21 +179,23 @@
     </div>
 
     <div class="footer">
-        <a href="{% app_redirection_service '/equipment/explorer' %}/{{ item.klass|lower }}/{{ item.pk }}?edit=true"
-           class="btn btn-secondary btn-block-mobile">
-            <i class="icon-pencil"></i>
-            {% trans "Propose edit" %}
-        </a>
-
-        {% if item.forum %}
-            <a href="{% url 'pybb:forum' item.forum.id %}"
+        {% if item.brand %}
+            <a href="{% app_redirection_service '/equipment/explorer' %}/{{ item.klass|lower }}/{{ item.pk }}?edit=true"
                class="btn btn-secondary btn-block-mobile">
-                <i class="icon-comments"></i>
-                {% trans "Forum" %}
+                <i class="icon-pencil"></i>
+                {% trans "Propose edit" %}
             </a>
-        {% endif %}
 
-        {% add_remove_toggleproperty 'follow' item request.user btn_class="btn btn-primary btn-block-mobile" %}
+            {% if item.forum %}
+                <a href="{% url 'pybb:forum' item.forum.id %}"
+                   class="btn btn-secondary btn-block-mobile">
+                    <i class="icon-comments"></i>
+                    {% trans "Forum" %}
+                </a>
+            {% endif %}
+
+            {% add_remove_toggleproperty 'follow' item request.user btn_class="btn btn-primary btn-block-mobile" %}
+        {% endif %}
 
         <a href="#" class="btn btn-secondary btn-block-mobile btn-close visible-phone">
             {% trans "Close" %}

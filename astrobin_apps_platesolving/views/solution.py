@@ -281,7 +281,7 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
             filename, ext = os.path.splitext(target.image_file.name)
             annotated_filename = "%s-%d%s" % (filename, int(time.time()), '.jpg')
             if annotated_image:
-                solution.image_file.save(annotated_filename, annotated_image)
+                solution.image_file.save(annotated_filename, annotated_image, save=False)
 
             # Get sky plot image
             url = solver.sky_plot_zoom1_image_url(solution.submission_id)

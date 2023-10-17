@@ -206,6 +206,45 @@
                 IFRAME_ERROR: "{{ _("Error loading page") | escapejs }}",
             },
             on: {
+                'reveal': (instance, slide) => {
+                    if (!!slide.videoUrl) {
+                        const id = `video-js-slide-${slide.idOrHash}`;
+                        const sizeHtml = slide.width && slide.height ? `width="${slide.width}" height="${slide.height}"` : '';
+
+                        slide.$content.innerHTML = `
+                            <video id="${id}"
+                                class="video-js vjs-default-skin fancybox__video"
+                                data-setup='{"liveui": true, "loop": ${slide.loopVideo}}'
+                                controls
+                                preload="auto"
+                                ${sizeHtml}
+                                poster="${slide.src}"
+                            ></video>`
+
+                        const player = window.videojs(id, {}, function () {
+                            this.src([
+                                {type: slide.videoFormat, src: slide.videoUrl},
+                                {type: "video/mp4", src: slide.encodedVideoUrl}
+                            ]);
+                        });
+
+                        astrobin_common.setVideoJsPlayerOnFullScreenChange(player);
+
+                        instance.options.clickContent = false;
+                    } else {
+                        instance.options.clickContent = true;
+                    }
+                },
+                'closing': function (instance) {
+                    const videoJsInstances = instance.$container.querySelectorAll('.video-js');
+
+                    for (const videoJs of videoJsInstances) {
+                        const player = videojs(videoJs.id);
+                        if (player) {
+                            player.dispose();
+                        }
+                    }
+                },
                 initCarousel: (fancybox) => {
                     const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
 

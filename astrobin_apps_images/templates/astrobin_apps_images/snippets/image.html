@@ -24,151 +24,219 @@
         {% random_id %}
 
         {% if alias != 'histogram' and badges %}
-            <ul class="badges">
-                {% for badge in badges %}
-                    {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' and alias != 'regular_large' and alias != 'regular_large_sharpened' %}
-                        <li>
-                            <i class="icon-trophy iotd-badge badge" rel="tooltip"
-                               title="{% trans "Image of the day" %}">
-                            </i>
-                        </li>
-                    {% endif %}
+            {% if not show_video or image.encoded_video_file.name %}
+                <ul class="badges">
+                    {% for badge in badges %}
+                        {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' and alias != 'regular_large' and alias != 'regular_large_sharpened' %}
+                            <li>
+                                <i class="icon-trophy iotd-badge badge" rel="tooltip"
+                                   title="{% trans "Image of the day" %}">
+                                </i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'top-pick' %}
-                        <li>
-                            <i class="icon-star top-pick-badge badge" rel="tooltip" data-placement="right"
-                               data-container="body" title="{% trans "Top pick" %}">
-                            </i>
-                        </li>
-                    {% endif %}
+                        {% if badge == 'top-pick' %}
+                            <li>
+                                <i class="icon-star top-pick-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Top pick" %}">
+                                </i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'top-pick-nomination' %}
-                        <li>
-                            <i class="icon-arrow-up top-pick-nomination-badge badge" rel="tooltip" data-container="body"
-                               data-placement="right" title="{% trans "Top pick nomination" %}">
-                            </i>
-                        </li>
-                    {% endif %}
+                        {% if badge == 'top-pick-nomination' %}
+                            <li>
+                                <i class="icon-arrow-up top-pick-nomination-badge badge" rel="tooltip" data-container="body"
+                                   data-placement="right" title="{% trans "Top pick nomination" %}">
+                                </i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'iotd-queue' %}
-                        <li>
-                            <i class="icon-legal iotd-queue-badge badge" rel="tooltip" data-placement="right"
-                               data-container="body" title="{% trans "Currently in the IOTD/TP queue" %}">
-                            </i>
-                        </li>
-                    {% endif %}
+                        {% if badge == 'iotd-queue' %}
+                            <li>
+                                <i class="icon-legal iotd-queue-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Currently in the IOTD/TP queue" %}">
+                                </i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'wip' %}
-                        <li>
-                            <i class="icon-lock wip-badge badge" rel="tooltip" data-placement="right"
-                               data-container="body" title="{% trans "Staging area" %}"></i>
-                        </li>
-                    {% endif %}
+                        {% if badge == 'wip' %}
+                            <li>
+                                <i class="icon-lock wip-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Staging area" %}"></i>
+                            </li>
+                        {% endif %}
 
-                    {% if badge == 'collaboration' %}
-                        <li>
-                            <i class="icon-group collaboration-badge badge" rel="tooltip" data-placement="right"
-                               data-container="body" title="{% trans "Collaboration" %}"></i>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+                        {% if badge == 'collaboration' %}
+                            <li>
+                                <i class="icon-group collaboration-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Collaboration" %}"></i>
+                            </li>
+                        {% endif %}
+
+                        {% if badge == 'video' %}
+                            <li>
+                                <i class="icon-play video-badge badge" rel="tooltip" data-placement="right"
+                                   data-container="body" title="{% trans "Video" %}"></i>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endif %} {# not histogram and badges #}
 
         <figure>
-            {% if link or fancybox %}
-                <a
-                        {% if fancybox %}
-                            data-fancybox="{{ rel }}"
-                            data-rel="{{ rel }}"
-                            href="{{ fancybox_url }}"
-                            data-url="{{ url }}"
-                            data-url-hd="{{ url_hd }}"
-                            data-slug="{{ slug }}"
-                            {% if is_revision %}
-                                data-caption="{% blocktrans trimmed %}Revision {{ revision }}{% endblocktrans %}{% if revision_title %}: {{ revision_title }}{% endif %}"
-                            {% else %}
-                                data-caption="{% trans 'Original revision' %}: {{ image.title }}"
-                            {% endif %}
-                        {% else %}
-                            {% if instant %}
-                                data-instant
-                            {% endif %}
-                            href="{{ url }}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active" %}"
-                        {% endif %}
-                >
-            {% endif %}
-                <img
-                    {% if thumb_url %}
-                         src="{{thumb_url}}"
-                         data-preloaded="true"
-                         data-loaded="true"
+            {% if show_video %}
+                {% if not image_revision.encoded_video_file.name %}
+                    {% if image_revision.encoding_error %}
+                        <p class="alert alert-info video-still-processing">
+                            {% blocktrans trimmed %}
+                                There was a problem encoding this video, please upload it again.
+                            {% endblocktrans %}
+
+                            {% blocktrans trimmed %}
+                                If the problem persists, please contact us.
+                            {% endblocktrans %}
+
+                            <br />
+                            <br />
+
+                            {{ image_revision.encoding_error }}
+                        </p>
                     {% else %}
-                         {% if alias == 'gallery' %}
-                            src="{% static 'astrobin/images/placeholder-gallery.png' %}"
-                         {% else %}
-                            {% if alias == 'story' %}
-                                src="{% static 'astrobin/images/placeholder-stories.jpg' %}"
-                            {% else %}
-                                src="https://via.placeholder.com/{{placehold_size}}/222/333&text={% trans "Loading" %}"
+                        <div class="progress progress-striped active video-encoding-progress" style="display: none;">
+                            <div class="bar" style="width: 0; text-shadow: 1px 1px 0 black; text-align: left;"></div>
+                        </div>
+                        <p class="alert alert-info video-still-processing">
+                            {% blocktrans trimmed %}
+                                This video is still processing, please return to this page later.
+                            {% endblocktrans %}
+                        </p>
+                    {% endif %}
+                {% else %}
+                    {% with image_revision.video_file.url|get_mime_type as video_mime_type %}
+                        <video class="video-js vjs-default-skin" data-setup='{"fluid": true, "liveui": true}' controls
+                               preload="auto" poster="{{ thumb_url }}" {% if image_revision.loop_video %}loop{% endif %}
+                        >
+                            {% if video_mime_type %}
+                                <source src="{{ image_revision.video_file.url }}" type="{{ video_mime_type }}" />
                             {% endif %}
-                         {% endif %}
-                         data-preloaded="false"
-                         data-loaded="false"
+                            <source src="{{ image_revision.encoded_video_file.url }}" type="video/mp4" />
+                            <p class="vjs-no-js">
+                                To view this video please enable JavaScript, and consider upgrading to a
+                                web browser that
+                                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                            </p>
+                        </video>
+                    {% endwith %}
+                {% endif %}
+            {% else %}
+                {% if link or fancybox %}
+                    <a
+                            {% if fancybox %}
+                                data-id-or-hash="{{ image_revision.pk }}"
+                                data-fancybox="{{ rel }}"
+                                data-rel="{{ rel }}"
+                                href="{{ fancybox_url }}"
+                                {% if is_video %}
+                                    data-video-url="{{ fancybox_url }}"
+                                    data-src="{{ image_revision.image_file.url }}"
+                                    data-loop-video="{{ image_revision.loop_video | yesno:'true,false' }}"
+                                {% else %}
+                                    data-src="{{ fancybox_url }}"
+                                {% endif %}
+                                data-width="{{ w }}"
+                                data-height="{{ h }}"
+                                data-url="{{ url }}"
+                                data-slug="{{ slug }}"
+                                {% if is_revision %}
+                                    data-caption="{% blocktrans trimmed %}Revision {{ revision }}{% endblocktrans %}{% if revision_title %}: {{ revision_title }}{% endif %}"
+                                {% else %}
+                                    data-caption="{% trans 'Original revision' %}: {{ image.title }}"
+                                {% endif %}
+                            {% else %}
+                                {% if instant %}
+                                    data-instant
+                                {% endif %}
+                                href="{{ url }}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active" %}"
+                            {% endif %}
+                    >
+                {% endif %}
+            <img
+                    {% if thumb_url %}
+                        src="{{ thumb_url }}"
+                        data-preloaded="true"
+                        data-loaded="true"
+                    {% else %}
+                        {% if alias == 'gallery' %}
+                        src="{% static 'astrobin/images/placeholder-gallery.png' %}"
+                        {% else %}
+                            {% if alias == 'story' %}
+                        src="{% static 'astrobin/images/placeholder-stories.jpg' %}"
+                            {% else %}
+                        src="https://via.placeholder.com/{{ placehold_size }}/222/333&text={% trans "Loading" %}"
+                            {% endif %}
+                        {% endif %}
+                        data-preloaded="false"
+                        data-loaded="false"
                     {% endif %}
 
-                     class="astrobin-image{% if real %} real{% endif %}"
+                        class="astrobin-image{% if real %} real{% endif %}"
 
-                     {% if provide_size %}
-                         width="{{size_x}}"
-                         height="{{size_y}}"
-                     {% endif %}
+                    {% if provide_size %}
+                        width="{{ size_x }}"
+                        height="{{ size_y }}"
+                    {% endif %}
 
-                     data-user-id="{{image.user.id}}"
-                     data-id="{{image.id}}"
-                     data-id-or-hash="{{image.get_id}}"
-                     data-alias="{{alias}}"
-                     data-revision="{{revision}}"
-                     {% if is_revision %}
+                        data-user-id="{{ image.user.id }}" data-id="{{ image.id }}" data-id-or-hash="{{ image.get_id }}"
+                        data-alias="{{ alias }}" data-revision="{{ revision }}"
+                    {% if is_revision %}
                         data-revision-id="{{ revision_id }}"
-                     {% endif %}
-                     data-get-thumb-url="{{get_thumb_url}}"
+                    {% endif %}
+                        data-get-thumb-url="{{ get_thumb_url }}"
 
-                     {% if 'regular' in alias and 'regular_large' not in alias %}
-                         data-regular-large-loaded="false"
-                         {% if regular_large_thumb_url %}
-                            data-regular-large-thumb-url="{{ regular_large_thumb_url }}"
-                         {% endif %}
+                    {% if 'regular' in alias and 'regular_large' not in alias %}
+                        data-regular-large-loaded="false"
+                        {% if regular_large_thumb_url %}
+                        data-regular-large-thumb-url="{{ regular_large_thumb_url }}"
+                        {% endif %}
 
-                         {% if get_regular_large_thumb_url %}
-                            data-get-regular-large-thumb-url="{{ get_regular_large_thumb_url }}"
-                         {% endif %}
-                     {% endif %}
+                        {% if get_regular_large_thumb_url %}
+                        data-get-regular-large-thumb-url="{{ get_regular_large_thumb_url }}"
+                        {% endif %}
+                    {% endif %}
 
-                     data-hires-loaded="false"
-                     {% if enhanced_thumb_url %}
-                         data-enhanced-thumb-url="{{enhanced_thumb_url}}"
-                     {% endif %}
-                     {% if get_enhanced_thumb_url %}
-                         data-get-enhanced-thumb-url="{{get_enhanced_thumb_url}}"
-                     {% endif %}
+                        data-hires-loaded="false"
+                    {% if enhanced_thumb_url %}
+                        data-enhanced-thumb-url="{{ enhanced_thumb_url }}"
+                    {% endif %}
+                    {% if get_enhanced_thumb_url %}
+                        data-get-enhanced-thumb-url="{{ get_enhanced_thumb_url }}"
+                    {% endif %}
 
-                     alt="{{image.title|escape}}, {% astrobin_username image.user link=False %}"
-                />
+                    {% if is_video %}
+                        data-is-video="true"
+                    {% endif %}
+
+                        alt="{{ image.title|escape }}, {% astrobin_username image.user link=False %}"
+            />
+                {% if is_video and show_play_icon %}
+                    <i class="icon-play"></i>
+                {% endif %}
             {% if link or fancybox %}
                 </a>
             {% endif %}
 
-            {% if show_tooltip %}
-                <figcaption>
-                    {% if link %}
-                        <a
-                            {% if instant %}
-                                data-instant
-                            {% endif %}
-                            href="{{ url }}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active" %}"
-                        >
-                    {% endif %}
+                {% if show_tooltip %}
+                    <figcaption>
+                        {% if link %}
+                            <a
+                                    {% if instant %}
+                                        data-instant
+                                    {% endif %}
+                                        href="
+
+                                                {{ url }}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active" %}">
+                        {% endif %}
                         <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
                         <h4>
                             {% astrobin_username image.user link=False %}
@@ -178,72 +246,78 @@
                         </h4>
 
                         {% cache 300 astrobin_image_caption caption_cache_key %}
-                        <table class="table table-condensed">
-                            <tr>
-                                <th><i class="icon-calendar"></i></th>
-                                {% if image.published %}
-                                    <td colspan="3">{% timestamp image.published %}</td>
-                                {% else %}
-                                    <td colspan="3">{% timestamp image.uploaded %}</td>
-                                {% endif %}
-                            </tr>
-
-                            <tr>
-                                <th><i class="icon-thumbs-up"></i></th>
-                                <td>{{image.likes}}</td>
-                                <th><i class="icon-bookmark"></i></th>
-                                <td>{{ image.bookmarks }}</td>
-                            </tr>
-
-                            <tr>
-                                <th><i class="icon-comments-alt"></i></th>
-                                <td>{{ image.comments }}</td>
-                                <th><i class="icon-th"></i></th>
-                                <td>{{ image.revisions.count }}</td>
-                            </tr>
-
-                            {% if badges %}
+                            <table class="table table-condensed">
                                 <tr>
-                                    <th class="caption-badge">
-                                        {% if 'iotd' in badges %}<i class="icon-trophy"></i>
-                                        {% elif 'top-pick' in badges %}<i class="icon-star"></i>
-                                        {% elif 'top-pick-nomination' in badges %}<i class="icon-arrow-up"></i>
-                                        {% elif 'wip' in badges %}<i class="icon-lock"></i>{% endif %}
-                                    </th>
-                                    <td colspan="3" class="caption-badge">
-                                        {% if 'iotd' in badges %}{% trans "Image of the day" %}
-                                        {% elif 'top-pick' in badges %}{% trans "Top pick" %}
-                                        {% elif 'top-pick-nomination' in badges %}{% trans "Top pick nomination" %}
-                                        {% elif 'wip' in badges %}{% trans "Staging area" %}{% endif %}
-                                    </td>
+                                    <th><i class="icon-calendar"></i></th>
+                                    {% if image.published %}
+                                        <td colspan="3">{% timestamp image.published %}</td>
+                                    {% else %}
+                                        <td colspan="3">{% timestamp image.uploaded %}</td>
+                                    {% endif %}
                                 </tr>
-                            {% endif %}
-                        </table>
-                        {% endcache %}
-                    {% if link %}
-                        </a>
-                    {% endif %}
 
-                    {% if fancybox_tooltip %}
-                        <div class="image-slideshow-button">
-                            <a
-                                data-fancybox="{{ rel }}"
-                                data-rel="{{ rel }}"
-                                href="{{ fancybox_url }}"
-                                data-url="{{ url }}"
-                                data-url-hd="{{ url_hd }}"
-                                data-caption='{% astrobin_username image.user link=False %} - "{{ image.title | escape | default:_("(no title)") }}"'
-                                data-slug="{{ slug }}"
-                                data-thumb="{% if thumb_url %}{{ thumb_url }}{% else %}{{ get_raw_thumb_url }}{% endif %}"
-                                data-user-id="{{ image.user.id }}"
-                                data-id="{{ image.id }}"
-                                data-id-or-hash="{{ image.get_id }}"
-                            >
-                                <i class="icon-play"></i>
+                                <tr>
+                                    <th><i class="icon-thumbs-up"></i></th>
+                                    <td>{{ image.likes }}</td>
+                                    <th><i class="icon-bookmark"></i></th>
+                                    <td>{{ image.bookmarks }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th><i class="icon-comments-alt"></i></th>
+                                    <td>{{ image.comments }}</td>
+                                    <th><i class="icon-th"></i></th>
+                                    <td>{{ image.revisions.count }}</td>
+                                </tr>
+
+                                {% if badges %}
+                                    <tr>
+                                        <th class="caption-badge">
+                                            {% if 'iotd' in badges %}<i class="icon-trophy"></i>
+                                            {% elif 'top-pick' in badges %}<i class="icon-star"></i>
+                                            {% elif 'top-pick-nomination' in badges %}<i class="icon-arrow-up"></i>
+                                            {% elif 'wip' in badges %}<i class="icon-lock"></i>{% endif %}
+                                        </th>
+                                        <td colspan="3" class="caption-badge">
+                                            {% if 'iotd' in badges %}{% trans "Image of the day" %}
+                                                {% elif 'top-pick' in badges %}{% trans "Top pick" %}
+                                                {% elif 'top-pick-nomination' in badges %}{% trans "Top pick nomination" %}
+                                            {% elif 'wip' in badges %}{% trans "Staging area" %}{% endif %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </table>
+                        {% endcache %}
+                        {% if link %}
                             </a>
-                        </div>
-                    {% endif %}
-                </figcaption>
+                        {% endif %}
+
+                        {% if fancybox_tooltip %}
+                            <div class="image-slideshow-button">
+                                <a
+                                    data-fancybox="{{ rel }}"
+                                    data-rel="{{ rel }}"
+                                    href="{{ fancybox_url }}"
+                                    {% if is_video %}
+                                        data-video-url="{{ fancybox_url }}"
+                                        data-src="{{ image_revision.image_file.url }}"
+                                        data-loop-video="{{ image_revision.loop_video | yesno:"true,false" }}"
+                                    {% else %}
+                                        data-src="{{ fancybox_url }}"
+                                    {% endif %}
+                                    data-url="{{ url }}"
+                                    data-caption='{% astrobin_username image.user link=False %} - "{{ image.title | escape | default:_("(no title)") }}"'
+                                    data-slug="{{ slug }}"
+                                    data-thumb="{% if thumb_url %}{{ thumb_url }}{% else %}{{ get_raw_thumb_url }}{% endif %}"
+                                    data-user-id="{{ image.user.id }}" data-id="{{ image.id }}"
+                                    data-id-or-hash="{{ image.get_id }}"
+                                >
+                                    <i class="icon-play"></i>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </figcaption>
+                {% endif %}
             {% endif %}
         </figure>
     </div>

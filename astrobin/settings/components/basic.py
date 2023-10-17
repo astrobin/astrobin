@@ -45,8 +45,10 @@ GOOGLE_ADS_ID = os.environ.get('GOOGLE_ADS_ID', 'invalid').strip()
 ROOT_URLCONF = 'astrobin.urls'
 
 ALLOWED_IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif', '.tif', '.tiff')
+ALLOWED_VIDEO_EXTENSIONS = ('.mov', '.mpg', '.mpeg', '.mp4', '.avi', '.wmv', '.webm')
 ALLOWED_FITS_IMAGE_EXTENSIONS = ('xisf', 'fits', 'fit', 'fts')
 ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS = ALLOWED_FITS_IMAGE_EXTENSIONS + ('psd', 'tif', 'tiff')
+MAX_FILE_SIZE = 2147483647  # This is because of the size of PositiveIntegerField in Django.
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

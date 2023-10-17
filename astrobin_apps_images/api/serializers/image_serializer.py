@@ -50,6 +50,9 @@ class ImageSerializer(serializers.ModelSerializer):
     deep_sky_acquisitions = DeepSkyAcquisitionSerializer(many=True, required=False, read_only=True)
     solar_system_acquisitions = SolarSystemAcquisitionSerializer(many=True, required=False, read_only=True)
 
+    video_file = serializers.FileField(required=False, allow_null=True, read_only=True)
+    encoded_video_file = serializers.FileField(required=False, allow_null=True, read_only=True)
+
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
@@ -64,15 +67,21 @@ class ImageSerializer(serializers.ModelSerializer):
                     'revision': 'final',
                     'url': instance.thumbnail(alias, None, sync=True)
                 } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
-            ],
+            ]
+        })
+        representation.update(self.acquisitions_representation(instance))
+        return representation
+
+    @staticmethod
+    def acquisitions_representation(instance: Image):
+        return {
             'deep_sky_acquisitions': DeepSkyAcquisitionSerializer(
                 DeepSky_Acquisition.objects.filter(image=instance), many=True
             ).data,
             'solar_system_acquisitions': SolarSystemAcquisitionSerializer(
                 SolarSystem_Acquisition.objects.filter(image=instance), many=True
-            ).data,
-        })
-        return representation
+            ).data
+        }
 
     def validate_collaborators(self, collaborators):
         if collaborators and self.initial_data.get('user') in [x.id for x in collaborators]:
@@ -137,4 +146,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'locations',
             'full_size_display_limitation',
             'download_limitation',
+            'loop_video',
+            'video_file',
+            'encoded_video_file',
         )

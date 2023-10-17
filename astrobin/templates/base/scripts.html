@@ -34,7 +34,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"
         integrity="sha512-rCjfoab9CVKOH/w/T6GbBxnAH5Azhy4+q1EXW5XEURefHbIkRbQ++ZR+GBClo3/d3q583X/gO4FKmOFuhkKrdA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.astrobin.com/delivery/fancybox-4.0.31.umd.js"></script>
+<script src="{% static 'astrobin/js/fancybox-4.0.31-patched.umd.min.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bowser/2.11.0/bundled.min.js"
         integrity="sha512-hsF/cpBvi/vjCP4Ps/MrPUFk6l4BqcGbzVUhqjJdX2SmAri1Oj8FBUGCvBiKHYd6gg3vLsV16CtIRNOvK5X4lQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -98,6 +98,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"
         integrity="sha512-axd5V66bnXpNVQzm1c7u1M614TVRXXtouyWCE+eMYl8ALK8ePJEs96Xtx7VVrPBc0UraCn63U1+ARFI3ofW+aA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
 
 <script>
     var CKEDITOR_BASEPATH = '{{ STATIC_URL }}astrobin/ckeditor/';

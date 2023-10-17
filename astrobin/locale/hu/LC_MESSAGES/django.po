@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 15:27+0000\n"
-"PO-Revision-Date: 2023-07-06 17:17+0200\n"
+"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"PO-Revision-Date: 2023-10-17 10:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+"X-Loco-Api-Version: 1.0.28 20230927-1\n"
 
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
@@ -897,6 +897,12 @@ msgstr ""
 "egérmutatóját. Fontos: Csak az azonos szélességű és hosszúságú képrevíziók "
 "számítanak bele."
 
+msgid "Loop video"
+msgstr ""
+
+msgid "If checked, the video will loop."
+msgstr ""
+
 msgid "Opacity"
 msgstr "Átlátszóság"
 
@@ -979,6 +985,11 @@ msgstr "Ha van egy saját weboldalad, írd a címét ide."
 
 msgid "Website"
 msgstr "Weboldal"
+
+msgid ""
+"You have images on AstroBin, therefore you are an astrophotographer! :-) "
+"Please select a different skill level."
+msgstr ""
 
 msgid "Mark as final"
 msgstr "Megjelölés végsőként"
@@ -1934,6 +1945,40 @@ msgstr "Az előfizetéses csomagok túl drágák"
 msgid "I prefer not to say"
 msgstr "Nem szeretném megosztani"
 
+msgid "n/a"
+msgstr "n/a"
+
+msgid "Beginner"
+msgstr ""
+
+msgid "Intermediate"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Professional"
+msgstr ""
+
+msgid "I don't define myself as an astrophotographer at this time."
+msgstr ""
+
+msgid "I started out recently and I'm still getting familiar with the hobby."
+msgstr ""
+
+msgid ""
+"I have been doing astrophotography for a while and wouldn't classify myself "
+"as a beginner anymore."
+msgstr ""
+
+msgid ""
+"I developed a comprehensive set of skills and master most aspects of "
+"astrophotography."
+msgstr ""
+
+msgid "Astrophotography is my profession or part of my profession."
+msgstr ""
+
 msgid "Suspended"
 msgstr ""
 
@@ -2149,6 +2194,12 @@ msgid ""
 msgstr ""
 "Más nyelvek, amelyeket tudsz írni és olvasni. Ez hasznos lehet más AstroBin-"
 "tagok számára, akik kapcsolatba szeretnének lépni veled."
+
+msgid "Self-assessed skill level"
+msgstr ""
+
+msgid "How would you categorize your current skills as an astrophotographer?"
+msgstr ""
 
 msgid "Signature"
 msgstr "Aláírás"
@@ -3090,6 +3141,9 @@ msgstr ""
 
 msgid "Back to top"
 msgstr "Vissza az oldal tetejére"
+
+msgid "Save"
+msgstr "Mentés"
 
 msgid "Your AstroBin subscription is expired."
 msgstr "Az AstroBin feliratkozásod lejárt."
@@ -4041,8 +4095,8 @@ msgstr "Felhasználó tiltása"
 msgid "AstroBin is preparing your download. Please wait..."
 msgstr "Az AstroBin előkészíti a letöltést. Kérjük várj..."
 
-msgid "Original size"
-msgstr "Eredeti méret"
+msgid "Original file"
+msgstr "Eredeti fájl"
 
 msgid "Medium size"
 msgstr "Közepes méret"
@@ -4053,14 +4107,14 @@ msgstr "Nagy méret"
 msgid "Extra-large size"
 msgstr "Extra-nagy méret"
 
+msgid "Original size"
+msgstr "Eredeti méret"
+
 msgid "Basic annotations"
 msgstr "Egyszerű megjelölések"
 
 msgid "Advanced annotations"
 msgstr "Speciális megjelölések"
-
-msgid "Original file"
-msgstr "Eredeti fájl"
 
 msgid "Basic information"
 msgstr "Alapvető információ"
@@ -4461,9 +4515,6 @@ msgstr "Betöltés"
 msgid "Edit your image: acquisition details"
 msgstr "Kép szerkesztése: felvételi részletek"
 
-msgid "Save"
-msgstr "Mentés"
-
 msgid "Remove data"
 msgstr "Adat törlése"
 
@@ -4813,11 +4864,23 @@ msgstr "Az Asztrofotózás Otthona"
 msgid "Latest from the forums"
 msgstr "A legutóbbi a fórumokból"
 
-msgid "Poll"
-msgstr "Szavazás"
+msgid "Closed"
+msgstr "Bezárva"
 
-msgid "Unanswered"
-msgstr "Megválaszolatlan"
+#, python-format
+msgid "Posted in <a href=\"%(forum_url)s\">%(forum_name)s</a>"
+msgstr ""
+
+#, python-format
+msgid "Started by <a href=\"%(topic_user_url)s\">%(username)s</a>"
+msgstr ""
+
+msgid "Started by user that was since deleted"
+msgstr ""
+
+#, python-format
+msgid "Last post by <a href=\"%(last_post_user_url)s\">%(username)s</a>"
+msgstr ""
 
 msgid "This topic has no replies."
 msgstr "Ebben a témában nincsenek válaszok."
@@ -4868,9 +4931,6 @@ msgstr "Résztvevők"
 
 msgid "Last message"
 msgstr "Utolsó üzenet"
-
-msgid "n/a"
-msgstr "n/a"
 
 msgid "No messages"
 msgstr "Nincsenek üzenetek"
@@ -5252,29 +5312,12 @@ msgstr ""
 "kapcsolatot, és mondd el, miért!"
 
 #, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"A(z) \"%(group_name)s\" csoporthoz való csatlakozási kérelmed ELFOGADVA.\n"
-"\n"
-"Tekintsd meg a csoportot itt: <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"A(z) \"%(group_name)s\" csoporthoz való csatlakozási kérelmed ELFOGADVA.\n"
-"\n"
-"Tekintsd meg a csoportot itt: %(url)s"
-
-#, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been APPROVED"
 msgstr ""
 "A(z) \"%(group_name)s\" csoporthoz való csatlakozási kérelmed ELFOGADVA"
+
+msgid "Visit group"
+msgstr ""
 
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
@@ -5433,6 +5476,35 @@ msgid ""
 msgstr ""
 "%(max_inactivity_days)s nap inaktivitás után (a legutóbbi, a sorodban "
 "történt kiválasztástól számítva) eltávolítunk az IOTD személyzetéből."
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days"
+msgstr ""
+
+msgid ""
+"You received this notification because you have submitted images for IOTD/TP "
+"consideration in the past, but not this one yet."
+msgstr ""
+
+msgid ""
+"To submit this image for IOTD/TP consideration, please click on the link "
+"below, go to the Actions menu (lightening bolt icon on mobile), and select "
+"“Submit for IOTD/TP consideration”."
+msgstr ""
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days."
+msgstr ""
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration isin %(days)s days"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5871,24 +5943,8 @@ msgid "%(user)s replied in topic to which you are subscribed"
 msgstr "%(user)s válaszolt egy témában, amire fel vagy iratkozva"
 
 #, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
-msgstr ""
-"%(inviter)s meghívott ebbe a csoportba: \"%(group_name)s\"\n"
-"\n"
-"Tekintsd meg a csoportot itt: <a href=\"%(group_page)s\">%(group_page)s</a>"
-
-#, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: %(group_page)s"
-msgstr ""
-"%(inviter)s meghívott ebbe a csoportba: \"%(group_name)s\"\n"
-"\n"
-"Tekintsd meg a csoportot itt: %(group_page)s"
+msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
+msgstr "%(inviter)s meghívott ebbe a csoportba: \"%(group_name)s\""
 
 #, python-format
 msgid ""
@@ -5898,28 +5954,9 @@ msgstr ""
 "<strong>%(inviter)s</strong> meghívott ebbe a csoportba: \"%(group_name)s\""
 
 #, python-format
-msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
-msgstr "%(inviter)s meghívott ebbe a csoportba: \"%(group_name)s\""
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+msgid "%(requester)s requested to join the group: \"%(group_name)s\""
 msgstr ""
-"%(requester)s kérte, hogy csatlakozhasson a csoporthoz: \"%(group_name)s\".\n"
-"\n"
-"Nézd meg a csoportot itt: <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"%(requester)s kérte, hogy csatlakozhasson a csoporthoz: \"%(group_name)s\".\n"
-"\n"
-"Nézd meg a csoportot itt: %(url)s"
+"%(requester)s kérte, hogy csatlakozhasson a csoporthoz: \"%(group_name)s\""
 
 #, python-format
 msgid ""
@@ -5928,11 +5965,6 @@ msgid ""
 msgstr ""
 "<strong>%(requester)s</strong> kérte, hogy csatlakozhasson a csoporthoz: "
 "\"%(group_name)s\""
-
-#, python-format
-msgid "%(requester)s requested to join the group: \"%(group_name)s\""
-msgstr ""
-"%(requester)s kérte, hogy csatlakozhasson a csoporthoz: \"%(group_name)s\""
 
 #, python-format
 msgid "<strong>%(user)s</strong> has published a new image"
@@ -6210,6 +6242,54 @@ msgstr ""
 
 #, python-format
 msgid ""
+"A moderator moved your topic <strong>%(topic_name)s</strong> from the forum "
+"<strong>%(old_forum_name)s</strong> to the forum <strong>%(new_forum_name)s</"
+"strong>."
+msgstr ""
+
+msgid "The moderator decided to move your topic to a more relevant forum."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group <a href=\"%(group_url)s\">"
+"%(group_name)s</a>. You will be notified of topic replies also if you're not "
+"a member of the group, but joining it might be a good idea."
+msgstr ""
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</a>), it was "
+"moved to its dedicated forum. When new topics are posted to the forum of an "
+"equipment item, all AstroBin users who have used it get notified (unless "
+"they have opted out of this kind of notifications)."
+msgstr ""
+
+#, python-format
+msgid ""
+"A moderator moved your topic \"%(topic_name)s\" from the forum "
+"\"%(old_forum_name)s\" to the forum \"%(new_forum_name)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group \"%(group_name)s\". You will be "
+"notified of topic replies also if you're not a member of the group, but "
+"joining it might be a good idea."
+msgstr ""
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(%(equipment_item_name)s), it was moved to its dedicated forum. When new "
+"topics are posted to the forum of an equipment item, all AstroBin users who "
+"have used it get notified (unless they have opted out of this kind of "
+"notifications)."
+msgstr ""
+
+#, python-format
+msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> joined the public group: <strong>"
 "\"%(group_name)s\"</strong>."
 msgstr ""
@@ -6464,19 +6544,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Posts about AstroBin itself, such as questions or comments about the IOTD/TP "
-"process, or the AstroBin Index, AstroBin \"likes\", or the forums "
-"themselves, are also considered off-topic and will be deleted. If you want "
-"to provide feedback or ask a question about AstroBin, please <a href="
-"\"%(contact_url)s\">contact us</a>: we really value your input!"
+"If you want to engage in open discussion about AstroBin and its feature with "
+"other members of the community, please join the <a href="
+"\"%(open_discussions_url)s\">AstroBin Platform open discussions community "
+"forum</a> group!"
 msgstr ""
-"Az AstroBinnel kapcsolatos hozzászólások, mint például az IOTD/TP "
-"folyamatra, vagy az AstroBin indexre, az AstroBin \" kedvelésekre\", vagy "
-"magukra a fórumokra vonatkozó kérdések vagy megjegyzések, szintén témán "
-"kívülinek minősülnek és törlésre kerülnek. Ha visszajelzést szeretnél adni "
-"vagy kérdést szeretnél feltenni az AstroBinnel kapcsolatban, kérjük, <a href="
-"\"%(contact_url)s\">vedd fel velünk a kapcsolatot</a>: nagyra értékeljük a "
-"véleményedet!"
 
 msgid "I have read the text above"
 msgstr "Elolvastam a fenti szöveget"
@@ -6484,11 +6556,14 @@ msgstr "Elolvastam a fenti szöveget"
 msgid "I understand"
 msgstr "Értem"
 
-msgid "Ignore"
-msgstr "Elutasítás"
+msgid "Forum notice"
+msgstr ""
 
-msgid "Browse equipment"
-msgstr "Felszerelések böngészése"
+msgid ""
+"This forum belongs to a group, and the group's owner set the following "
+"notice to communicate forum rules, disclaimers, or important information to "
+"users before they create a new post"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6745,11 +6820,14 @@ msgstr "Válaszok"
 msgid "Last post"
 msgstr "Utolsó bejegyzés"
 
+msgid "Poll"
+msgstr "Szavazás"
+
+msgid "Unanswered"
+msgstr "Megválaszolatlan"
+
 msgid "Sticky"
 msgstr "Sticky"
-
-msgid "Closed"
-msgstr "Bezárva"
 
 msgid "This forum does not have any topics."
 msgstr "Ennek a fórumnak nincsenek témái."
@@ -7249,6 +7327,10 @@ msgstr "Köszönjük megértésedet."
 msgid "%(user)s's gallery"
 msgstr "%(user)s galériája"
 
+#, python-format
+msgid "Astrophotography by %(user)s on AstroBin"
+msgstr ""
+
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
 "can show people individual images by sharing them using the <em>Share</em> "
@@ -7712,6 +7794,9 @@ msgstr "Kamera típusa"
 msgid "Camera pixel size (μm)"
 msgstr "Kamera pixelmérete (μm)"
 
+msgid "Filter types"
+msgstr ""
+
 msgid "Field radius (deg)"
 msgstr "Terület sugara (fok)"
 
@@ -7823,6 +7908,78 @@ msgstr "Jelenlegi hónap"
 msgid "Current year"
 msgstr "Jelenlegi év"
 
+msgid "Results will include images that feature all selected filter types."
+msgstr ""
+
+msgid "Hydrogen-alpha (Hα)"
+msgstr ""
+
+msgid "Hydrogen-beta (Hβ)"
+msgstr ""
+
+msgid "Sulfur-II (SII)"
+msgstr ""
+
+msgid "Oxygen-III (OIII)"
+msgstr ""
+
+msgid "Nitrogen-II (NII)"
+msgstr ""
+
+msgid "Ultraviolet (UV)"
+msgstr ""
+
+msgid "Infrared (IR)"
+msgstr ""
+
+msgid "Multiband"
+msgstr ""
+
+msgid "Luminance/clear (L)"
+msgstr ""
+
+msgid "Red channel (R)"
+msgstr ""
+
+msgid "Green channel (G)"
+msgstr ""
+
+msgid "Blue channel (B)"
+msgstr ""
+
+msgid "Neutral density (ND)"
+msgstr ""
+
+msgid "Ultra High Contrast (UHC)"
+msgstr ""
+
+msgid "Sky glow"
+msgstr ""
+
+msgid "Solar"
+msgstr ""
+
+msgid "Lunar"
+msgstr ""
+
+msgid "Cometary"
+msgstr ""
+
+msgid "Photometric Ultraviolet"
+msgstr ""
+
+msgid "Photometric Blue"
+msgstr ""
+
+msgid "Photometric Visual"
+msgstr ""
+
+msgid "Photometric Red"
+msgstr ""
+
+msgid "Photometric Infrared"
+msgstr ""
+
 msgid "Imaging telescopes"
 msgstr "Képkészítő távcsövek"
 
@@ -7854,6 +8011,9 @@ msgid "What kind of search results do you want?"
 msgstr "Milyen típusú keresési eredményeket szeretnél?"
 
 msgid "All images"
+msgstr ""
+
+msgid "Your images"
 msgstr ""
 
 msgid "Images bookmarked by you"
@@ -8421,6 +8581,63 @@ msgstr ""
 #~ msgid "Messages"
 #~ msgstr "Üzenetek"
 
+#~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "A(z) \"%(group_name)s\" csoporthoz való csatlakozási kérelmed ELFOGADVA.\n"
+#~ "\n"
+#~ "Tekintsd meg a csoportot itt: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "A(z) \"%(group_name)s\" csoporthoz való csatlakozási kérelmed ELFOGADVA.\n"
+#~ "\n"
+#~ "Tekintsd meg a csoportot itt: %(url)s"
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
+#~ msgstr ""
+#~ "%(inviter)s meghívott ebbe a csoportba: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Tekintsd meg a csoportot itt: <a href=\"%(group_page)s\">%(group_page)s</"
+#~ "a>"
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: %(group_page)s"
+#~ msgstr ""
+#~ "%(inviter)s meghívott ebbe a csoportba: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Tekintsd meg a csoportot itt: %(group_page)s"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(requester)s kérte, hogy csatlakozhasson a csoporthoz: \"%(group_name)s"
+#~ "\".\n"
+#~ "\n"
+#~ "Nézd meg a csoportot itt: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "%(requester)s kérte, hogy csatlakozhasson a csoporthoz: \"%(group_name)s"
+#~ "\".\n"
+#~ "\n"
+#~ "Nézd meg a csoportot itt: %(url)s"
+
 #~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 #~ msgstr ""
 #~ "<a href=\"%(url)s\"><strong>%(user)s</strong> kedveli a képedet!</a>"
@@ -8466,6 +8683,21 @@ msgstr ""
 
 #~ msgid "View forums"
 #~ msgstr "Fórumok megtekintése"
+
+#~ msgid ""
+#~ "Posts about AstroBin itself, such as questions or comments about the IOTD/"
+#~ "TP process, or the AstroBin Index, AstroBin \"likes\", or the forums "
+#~ "themselves, are also considered off-topic and will be deleted. If you "
+#~ "want to provide feedback or ask a question about AstroBin, please <a href="
+#~ "\"%(contact_url)s\">contact us</a>: we really value your input!"
+#~ msgstr ""
+#~ "Az AstroBinnel kapcsolatos hozzászólások, mint például az IOTD/TP "
+#~ "folyamatra, vagy az AstroBin indexre, az AstroBin \" kedvelésekre\", vagy "
+#~ "magukra a fórumokra vonatkozó kérdések vagy megjegyzések, szintén témán "
+#~ "kívülinek minősülnek és törlésre kerülnek. Ha visszajelzést szeretnél "
+#~ "adni vagy kérdést szeretnél feltenni az AstroBinnel kapcsolatban, kérjük, "
+#~ "<a href=\"%(contact_url)s\">vedd fel velünk a kapcsolatot</a>: nagyra "
+#~ "értékeljük a véleményedet!"
 
 #~ msgid ""
 #~ "Use this button to upload an image to the\n"
@@ -8660,3 +8892,9 @@ msgstr ""
 #~ msgid "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment."
 #~ msgstr ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> válaszolt egy hozzászólásodra."
+
+#~ msgid "Ignore"
+#~ msgstr "Elutasítás"
+
+#~ msgid "Browse equipment"
+#~ msgstr "Felszerelések böngészése"

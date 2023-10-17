@@ -31,7 +31,7 @@ class DismissedImageViewSet(viewsets.ModelViewSet):
 
         return self.model.objects.filter(
             user=self.request.user,
-            image__published__gte=datetime.now() - timedelta(days=max_days)
+            image__submitted_for_iotd_tp_consideration__gte=datetime.now() - timedelta(days=max_days)
         )
 
     def create(self, request, *args, **kwargs):

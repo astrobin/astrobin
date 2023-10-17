@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.db.models import Count
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -16,14 +18,11 @@ from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
 from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
-from astrobin_apps_images.api.serializers import ImageSerializer
-from astrobin_apps_users.services import UserService
-from common.constants import GroupName
+from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
 
 
 class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin,
                    GenericViewSet):
-    serializer_class = ImageSerializer
     queryset = Image.objects_including_wip.all()
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
@@ -67,11 +66,10 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
                     getattr(instance, klass[0]).add(obj)
 
     def _update_acquisition(self, request, instance: Image):
-
         DeepSky_Acquisition.objects.filter(image=instance).delete()
         for item in request.data.get('deep_sky_acquisitions'):
             if item.get('filter_2'):
-                item['filter_2'] = Filter.objects.get(id=item.get('filter_2'))
+                item['filter_2'] = get_object_or_None(Filter, id=item.get('filter_2'))
 
             data = dict(image=instance, **item)
             if 'id' in data:
@@ -84,6 +82,15 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
             if 'id' in data:
                 del data['id']
             SolarSystem_Acquisition.objects.create(**data)
+
+    def get_serializer_class(self):
+        if (
+                'skip-thumbnails' in self.request.query_params and
+                self.request.query_params.get('skip-thumbnails').lower() in ('true', '1')
+        ):
+            return ImageSerializerSkipThumbnails
+
+        return ImageSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -130,3 +137,11 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
         count = Image.objects_including_wip.filter(user=user).count()
 
         return Response(count, HTTP_200_OK)
+
+    @action(detail=True, methods=['get'], url_path='video-encoding-progress')
+    def video_encoding_progress(self, request, pk=None):
+        content_type = ContentType.objects.get_for_model(Image)
+
+        value = cache.get(f"video-encoding-progress-{content_type.pk}-{pk}")
+
+        return Response(value, HTTP_200_OK)

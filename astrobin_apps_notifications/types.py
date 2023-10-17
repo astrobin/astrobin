@@ -283,6 +283,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'iotd_tp_submission_deadline',
+        _("Image approaching deadline for IOTD/TP submission"),
+        '',
+        2
+    ),
+    (
         'new_subscription',
         _("Thank you for getting a subscription!"),
         '',

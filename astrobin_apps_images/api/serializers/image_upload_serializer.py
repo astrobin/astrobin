@@ -23,6 +23,7 @@ class ImageUploadSerializer(RequestUserRestSerializerMixin, serializers.ModelSer
             'hash',
             'title',
             'image_file',
+            'video_file',
             'is_wip',
             'skip_notifications',
             'w',

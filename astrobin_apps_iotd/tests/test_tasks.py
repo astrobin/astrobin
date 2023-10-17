@@ -1,10 +1,17 @@
+from datetime import datetime, timedelta
+
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.test import TestCase
 from mock import patch
 
+from astrobin.models import Image
 from astrobin.tests.generators import Generators
-from astrobin_apps_iotd.tasks import send_iotd_staff_inactive_reminders_and_remove_after_max_days
+from astrobin_apps_iotd.models import IotdSubmitterSeenImage
+from astrobin_apps_iotd.tasks import (
+    resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views,
+    send_iotd_staff_inactive_reminders_and_remove_after_max_days,
+)
 from common.constants import GroupName
 
 
@@ -32,3 +39,52 @@ class IotdTasksTest(TestCase):
             'days': settings.IOTD_MAX_INACTIVE_DAYS,
             'max_inactivity_days': settings.IOTD_MAX_INACTIVE_DAYS
         })
+
+    @patch('astrobin_apps_iotd.tasks.IotdService.get_recently_expired_unsubmitted_images')
+    @patch('astrobin_apps_iotd.tasks.IotdService.resubmit_to_iotd_tp_process')
+    def test_resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views_not_called(
+            self,
+            resubmit_to_iotd_tp_process,
+            get_recently_expired_unsubmitted_images
+    ):
+        image = Generators.image()
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(1)
+        image.save()
+
+        submitters = []
+
+        for x in range(0, 10):
+            submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+            submitters.append(submitter)
+            IotdSubmitterSeenImage.objects.create(user=submitter, image=image)
+
+        get_recently_expired_unsubmitted_images.return_value = Image.objects.filter(pk=image.pk)
+
+        resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
+
+        resubmit_to_iotd_tp_process.assert_not_called()
+
+    @patch('astrobin_apps_iotd.tasks.IotdService.get_recently_expired_unsubmitted_images')
+    @patch('astrobin_apps_iotd.tasks.IotdService.resubmit_to_iotd_tp_process')
+    def test_resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views_called(
+            self,
+            resubmit_to_iotd_tp_process,
+            get_recently_expired_unsubmitted_images
+    ):
+        image = Generators.image()
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(1)
+        image.save()
+
+        submitters = []
+
+        for x in range(0, 10):
+            submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+            submitters.append(submitter)
+            if x < 3:
+                IotdSubmitterSeenImage.objects.create(user=submitter, image=image)
+
+        get_recently_expired_unsubmitted_images.return_value = Image.objects.filter(pk=image.pk)
+
+        resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
+
+        resubmit_to_iotd_tp_process.assert_called()
