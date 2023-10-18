@@ -1,5 +1,7 @@
+import os
 import random
 import string
+import tempfile
 from datetime import date, timedelta
 from io import BytesIO
 
@@ -55,8 +57,32 @@ class Generators:
         return ContentFile(image_io.getvalue(), kwargs.pop('filename', 'foo.jpg'))
 
     @staticmethod
+    def video(*args, **kwargs):
+        from moviepy.video.VideoClip import ColorClip
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as temp_file:
+            temp_filename = temp_file.name
+
+        clip = ColorClip(size=(640, 480), color=(255, 0, 0), duration=5)
+        clip.write_videofile(temp_filename, codec="libx264", fps=24)
+
+        with open(temp_filename, 'rb') as f:
+            content = ContentFile(f.read(), kwargs.pop('filename', 'foo.mp4'))
+
+        os.unlink(temp_filename)
+
+        return content
+
+    @staticmethod
     def image(*args, **kwargs):
         pil_image = kwargs.pop('image_file', Generators.pil_image())
+
+        video_file_name = kwargs.pop('video_file', None)
+        if video_file_name:
+            video_file = Generators.video(filename=video_file_name)
+        else:
+            video_file = None
+
         user = kwargs.pop('user', None)
         if not user:
             user = Generators.user()
@@ -65,6 +91,7 @@ class Generators:
             user=user,
             title=kwargs.pop('title', Generators.randomString()),
             image_file=pil_image,
+            video_file=video_file,
             is_wip=kwargs.pop('is_wip', False),
             is_final=kwargs.pop('is_final', True),
             description=kwargs.pop('description', None),
@@ -82,9 +109,16 @@ class Generators:
         if image is None:
             image = Generators.image()
 
+        video_file_name = kwargs.pop('video_file', None)
+        if video_file_name:
+            video_file = Generators.video(filename=video_file_name)
+        else:
+            video_file = None
+
         return ImageRevision.objects.create(
             image=image,
             image_file=kwargs.pop('image_file', 'images/foo.jpg'),
+            video_file=video_file,
             is_final=kwargs.pop('is_final', False),
             label=kwargs.pop('label', 'B'),
             title=kwargs.pop('title', None),

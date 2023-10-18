@@ -51,7 +51,10 @@ $(document).ready(function() {
                             id: item.pk,
                             idOrHash: item.slug,
                             finalRevisionLabel: item.finalRevisionLabel,
-                            finalRevisionId: item.finalRevisionId
+                            finalRevisionId: item.finalRevisionId,
+                            videoUrl: item.videoUrl,
+                            encodedVideoUrl: item.encodedVideoUrl,
+                            loopVideo: item.loopVideo
                         }));
 
                         window.astrobinFancyboxOptions.Toolbar.display.splice(

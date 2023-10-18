@@ -68,14 +68,12 @@
                 </li>
             {% endif %}
 
-            {% if image|can_add_technical_details %}
-                <li>
-                    <a href="{% image_editor_redirection_service image request.user enums.ImageEditorStep.SETTINGS %}">
-                    <i class="icon-cog"></i>
-                        {% trans "Settings" %}
-                    </a>
-                </li>
-            {% endif %}
+            <li>
+                <a href="{% image_editor_redirection_service image request.user enums.ImageEditorStep.SETTINGS %}">
+                <i class="icon-cog"></i>
+                    {% trans "Settings" %}
+                </a>
+            </li>
 
             <li>
                 <a href="{% url 'image_edit_license' image.get_id %}">

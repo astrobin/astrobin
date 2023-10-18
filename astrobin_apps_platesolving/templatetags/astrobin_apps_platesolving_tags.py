@@ -27,6 +27,7 @@ def platesolving_machinery(context, target):
 
     return {
         'user': user,
+        'is_image_owner': context['request'].user == user,
         'object_id': target.pk,
         'content_type_id': content_type.pk,
         'solution_id': target.solution.pk if target.solution else 0,

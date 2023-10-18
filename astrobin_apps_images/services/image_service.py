@@ -1,19 +1,28 @@
 import logging
 import math
+import mimetypes
+import os
+import shutil
+import subprocess
 from collections import namedtuple
 from datetime import timedelta
+from typing import Union
 
+import requests
 from actstream.models import Action
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.core.files import File
 from django.core.files.images import get_image_dimensions
+from django.core.files.temp import NamedTemporaryFile
 from django.db.models import Q, QuerySet
 from django.urls import reverse
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
+from moviepy.editor import VideoFileClip
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
@@ -70,8 +79,7 @@ class ImageService:
 
         return '0'
 
-    def get_final_revision(self):
-        # type: () -> union[Image, ImageRevision]
+    def get_final_revision(self) -> Union[Image, ImageRevision]:
         label = self.get_final_revision_label()
 
         if label == '0':
@@ -99,6 +107,9 @@ class ImageService:
         )
 
     def get_default_cropping(self, revision_label=None):
+        if not self.image.image_file:
+            return None
+
         if revision_label is None or revision_label == '0':
             w, h = self.image.w, self.image.h
 
@@ -136,6 +147,9 @@ class ImageService:
         return '%d,%d,%d,%d' % (x1, y1, x2, y2)
 
     def get_crop_box(self, alias, revision_label=None):
+        if not self.image.image_file:
+            return None
+
         if revision_label in (None, '0', 0):
             target = self.image
         elif revision_label == 'final':
@@ -260,8 +274,8 @@ class ImageService:
         thumbnails.save()
 
     def delete_original(self):
-        image = self.image
-        revisions = self.get_revisions()
+        image: Image = self.image
+        revisions: QuerySet = self.get_revisions()
 
         image.thumbnail_invalidate()
 
@@ -272,9 +286,11 @@ class ImageService:
             image.delete()
             return
 
-        new_original = revisions.first()
+        new_original: ImageRevision = revisions.first()
 
         image.image_file = new_original.image_file
+        image.video_file = new_original.video_file
+        image.square_cropping = new_original.square_cropping
         image.updated = new_original.uploaded
         image.w = new_original.w
         image.h = new_original.h
@@ -286,11 +302,11 @@ class ImageService:
         if new_original.title:
             old_title = image.title
             appended_title = f' ({new_original.title})'
-            ellipsis = '...'
+            ellipsis_ = '...'
             if len(old_title) > Image._meta.get_field('title').max_length - len(appended_title):
                 old_title = old_title[:(Image._meta.get_field('title').max_length - len(appended_title)) - len(
-                    ellipsis
-                )] + ellipsis
+                    ellipsis_
+                )] + ellipsis_
             image.title = old_title + appended_title
 
         if image.description:
@@ -496,6 +512,50 @@ class ImageService:
         Action.objects.target(self.image).delete()
         Action.objects.action_object(self.image).delete()
 
+    def generate_loading_placeholder(self, save=True):
+        logger.debug('Generating loading placeholder for %s' % self.image)
+
+        if self.image.w and self.image.h:
+            w, h = self.image.w, self.image.h
+        else:
+            w, h = 1024, 1024
+
+        placeholder_url = f'https://via.placeholder.com/{w}x{h}/222/333&text=PREVIEW NOT READY'
+        response = requests.get(placeholder_url, stream=True)
+        if response.status_code == 200:
+            img_temp = NamedTemporaryFile()
+            for block in response.iter_content(1024 * 8):
+                if not block:
+                    break
+                img_temp.write(block)
+
+            img_temp.flush()
+            img_temp.seek(0)
+
+            # Assuming `image` is the ImageField
+            self.image.image_file.save("astrobin-video-placeholder.jpg", File(img_temp), save=False)
+
+            if save:
+                self.image.save(update_fields=['image_file'], keep_deleted=True)
+
+    def get_local_video_file(self) -> File:
+        chunk_size = 4096
+        _, file_extension = os.path.splitext(self.image.uploader_name)
+
+        filename = f'temp_video_file_{self.image.__class__.__name__}_{self.image.id}{file_extension}'
+        temp_file_path = os.path.join('/astrobin-temporary-files/files', filename)
+
+        if os.path.exists(temp_file_path):
+            logger.debug(f'get_local_video_file: using existing temporary file {temp_file_path}')
+            return File(open(temp_file_path, 'rb'))
+
+        with self.image.video_file.open() as f:
+            with open(temp_file_path, 'wb') as temp_file:
+                while chunk := f.read(chunk_size):
+                    temp_file.write(chunk)
+
+        return File(open(temp_file_path, 'rb'))
+
     @staticmethod
     def get_constellation(solution):
         if solution is None or solution.ra is None or solution.dec is None:
@@ -518,7 +578,7 @@ class ImageService:
             return None
 
     @staticmethod
-    def verify_file(path):
+    def is_image(path: str) -> bool:
         try:
             with open(path, 'rb') as f:
                 from PIL import Image as PILImage
@@ -530,6 +590,38 @@ class ImageService:
             return False
 
         return True
+
+    @staticmethod
+    def is_video(path: str) -> bool:
+        try:
+            clip = VideoFileClip(path)
+            clip.close()
+            return True
+        except OSError:
+            return False
+
+    @staticmethod
+    def strip_video_metadata(path: str, mime_type: str) -> None:
+        extension = mimetypes.guess_extension(mime_type)
+        temp_path = f'{path}-stripped{extension}'
+
+        cmd = [
+            'ffmpeg',
+            '-i', path,
+            '-map_metadata', '-1',
+            '-c:v', 'copy',
+            '-c:a', 'copy',
+            '-y',
+            temp_path
+        ]
+
+        completed_process = subprocess.run(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+
+        if completed_process.returncode != 0:
+            logger.error(f"ffmpeg failed with error: {completed_process.stderr.decode('utf-8')}")
+            return
+
+        shutil.move(temp_path, path)
 
     @staticmethod
     def get_object(id, queryset):
@@ -544,3 +636,36 @@ class ImageService:
                 return image
 
         return get_object_or_None(queryset, hash=id)
+
+    @staticmethod
+    def is_viewable_alias(alias: str) -> bool:
+        # Small sizes are considered just thumbs, while regular and up are considered viewable.
+        return alias in (
+            'regular', 'regular_inverted', 'regular_sharpened',
+            'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
+            'hd', 'hd_anonymized', 'hd_inverted', 'hd_sharpened',
+            'qhd', 'qhd_anonymized', 'qhd_inverted', 'qhd_sharpened',
+            'real', 'real_inverted'
+        )
+
+    @staticmethod
+    def is_badge_compatible_alias(alias: str) -> bool:
+        return alias in (
+            'thumb', 'gallery', 'gallery_inverted',
+            'regular', 'regular_inverted', 'regular_sharpened',
+            'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
+        )
+
+    @staticmethod
+    def is_tooltip_compatible_alias(alias: str) -> bool:
+        return alias in (
+            'gallery', 'gallery_inverted',
+            'thumb',
+        )
+
+    @staticmethod
+    def is_play_button_alias(alias: str) -> bool:
+        return alias in (
+            'iotd', 'iotd_mobile', 'iotd_candidate',
+            'story', 'story_crop',
+        )

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 15:27+0000\n"
-"PO-Revision-Date: 2023-07-06 17:17+0200\n"
+"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"PO-Revision-Date: 2023-10-17 10:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+"X-Loco-Api-Version: 1.0.28 20230927-1\n"
 
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
@@ -908,6 +908,12 @@ msgstr ""
 "versione di immagine. Nota bene: solo versioni con le stesse dimensioni di "
 "questa possono essere considerate."
 
+msgid "Loop video"
+msgstr "Video in ciclo continuo"
+
+msgid "If checked, the video will loop."
+msgstr "Se selezionato, il video sarà riprodotto in un ciclo continuo"
+
 msgid "Opacity"
 msgstr "Opacità"
 
@@ -1000,6 +1006,13 @@ msgstr "Se hai un sito web personale, scrivi qui l'indirizzo."
 
 msgid "Website"
 msgstr "Sito web"
+
+msgid ""
+"You have images on AstroBin, therefore you are an astrophotographer! :-) "
+"Please select a different skill level."
+msgstr ""
+"Hai delle immagini su AstroBin, quindi sei un astrofotografo! :-) Seleziona "
+"un altro livello di capacità."
 
 msgid "Mark as final"
 msgstr "Segna come finale"
@@ -1975,6 +1988,43 @@ msgstr "Le opzioni di abbonamento sono troppo care"
 msgid "I prefer not to say"
 msgstr "Preferisco non dirlo"
 
+msgid "n/a"
+msgstr "n/d"
+
+msgid "Beginner"
+msgstr "Principiante"
+
+msgid "Intermediate"
+msgstr "Intermedio"
+
+msgid "Advanced"
+msgstr "Avanzato"
+
+msgid "Professional"
+msgstr "Professionista"
+
+msgid "I don't define myself as an astrophotographer at this time."
+msgstr "Non mi definisco un astrofotografo al momento."
+
+msgid "I started out recently and I'm still getting familiar with the hobby."
+msgstr "Ho iniziato di recente e sono ancora alle prime armi con questo hobby."
+
+msgid ""
+"I have been doing astrophotography for a while and wouldn't classify myself "
+"as a beginner anymore."
+msgstr ""
+"Ho fatto astrofotografia per un po' e non mi definisco più un principiante."
+
+msgid ""
+"I developed a comprehensive set of skills and master most aspects of "
+"astrophotography."
+msgstr ""
+"Ho sviluppato un insieme completo di competenze e ho padroneggiato la "
+"maggior parte degli aspetti dell'astrofotografia."
+
+msgid "Astrophotography is my profession or part of my profession."
+msgstr "L'astrofotografia è il mio lavoro o parte del mio lavoro."
+
 msgid "Suspended"
 msgstr "Sospeso"
 
@@ -2195,6 +2245,12 @@ msgid ""
 msgstr ""
 "Altre lingue in cui sai leggere e scrivere. Può essere utile ad altri utenti "
 "di AstroBin che desiderano comunicare con te."
+
+msgid "Self-assessed skill level"
+msgstr "Livello di capacità autovalutato"
+
+msgid "How would you categorize your current skills as an astrophotographer?"
+msgstr "Come classificheresti le tue attuali capacità di astrofotografo?"
 
 msgid "Signature"
 msgstr "Firma"
@@ -3145,6 +3201,9 @@ msgstr ""
 
 msgid "Back to top"
 msgstr "Torna su"
+
+msgid "Save"
+msgstr "Salva"
 
 msgid "Your AstroBin subscription is expired."
 msgstr "Il tuo abbonamento ad AstroBin è scaduto."
@@ -4127,8 +4186,8 @@ msgstr "Banna utente"
 msgid "AstroBin is preparing your download. Please wait..."
 msgstr "AstroBin sta preparando il tuo download. Attendi..."
 
-msgid "Original size"
-msgstr "Dimensione originale"
+msgid "Original file"
+msgstr "File originale"
 
 msgid "Medium size"
 msgstr "Dimensione media"
@@ -4139,14 +4198,14 @@ msgstr "Dimensione grande"
 msgid "Extra-large size"
 msgstr "Dimensione XL"
 
+msgid "Original size"
+msgstr "Dimensione originale"
+
 msgid "Basic annotations"
 msgstr "Annotazioni semplici"
 
 msgid "Advanced annotations"
 msgstr "Annotazioni avanzate"
-
-msgid "Original file"
-msgstr "File originale"
 
 msgid "Basic information"
 msgstr "Informazioni di base"
@@ -4546,9 +4605,6 @@ msgstr "Caricamento in corso..."
 msgid "Edit your image: acquisition details"
 msgstr "Modifica l'immagine: dettagli d'acquisizione"
 
-msgid "Save"
-msgstr "Salva"
-
 msgid "Remove data"
 msgstr "Rimuovi dati"
 
@@ -4898,11 +4954,23 @@ msgstr "Casa dell'Astrofotografia"
 msgid "Latest from the forums"
 msgstr "Ultime dal forum"
 
-msgid "Poll"
-msgstr "Sondaggio"
+msgid "Closed"
+msgstr "Chiuso"
 
-msgid "Unanswered"
-msgstr "Senza risposta"
+#, python-format
+msgid "Posted in <a href=\"%(forum_url)s\">%(forum_name)s</a>"
+msgstr "Postato in <a href=\"%(forum_url)s\">%(forum_name)s</a>"
+
+#, python-format
+msgid "Started by <a href=\"%(topic_user_url)s\">%(username)s</a>"
+msgstr "Iniziato da <a href=\"%(topic_user_url)s\">%(username)s</a>"
+
+msgid "Started by user that was since deleted"
+msgstr "Iniziato da un utente che non esiste più"
+
+#, python-format
+msgid "Last post by <a href=\"%(last_post_user_url)s\">%(username)s</a>"
+msgstr "Ultimo post da <a href=\"%(last_post_user_url)s\">%(username)s</a>"
 
 msgid "This topic has no replies."
 msgstr "Questo argomento non ha risposte."
@@ -4953,9 +5021,6 @@ msgstr "Partecipanti"
 
 msgid "Last message"
 msgstr "Ultimo messaggio"
-
-msgid "n/a"
-msgstr "n/d"
 
 msgid "No messages"
 msgstr "Nessun messaggio"
@@ -5359,32 +5424,13 @@ msgstr ""
 "sapere il perché!"
 
 #, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"La tua richiesta di essere aggiunto al gruppo \"%(group_name)s\" è stata "
-"APPROVATA.\n"
-"\n"
-"Visita il gruppo qui: <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"La tua richiesta di essere aggiunto al gruppo \"%(group_name)s\" è stata "
-"APPROVATA.\n"
-"\n"
-"Visita il gruppo qui: %(url)s"
-
-#, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been APPROVED"
 msgstr ""
 "La tua richiesta di essere aggiunto al gruppo \"%(group_name)s è stata "
 "APPROVATA"
+
+msgid "Visit group"
+msgstr "Visita il gruppo"
 
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
@@ -5556,6 +5602,46 @@ msgid ""
 msgstr ""
 "Dopo %(max_inactivity_days)s giorni di inattività (contatti dall'ultima "
 "selezione che hai fatto nella tua coda) sarai rimosso dallo staff IOTD."
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days"
+msgstr ""
+"La scadenza per sottoporre la tua immagine %(prefix)s%(title)s%(suffix)s "
+"alla considerazione della IOTD/TP è tra %(days)s giorni."
+
+msgid ""
+"You received this notification because you have submitted images for IOTD/TP "
+"consideration in the past, but not this one yet."
+msgstr ""
+"Hai ricevuto questa notifica perché in passato hai sottoposto delle immagini "
+"alla considerazione della IOTD/TP, ma non questa."
+
+msgid ""
+"To submit this image for IOTD/TP consideration, please click on the link "
+"below, go to the Actions menu (lightening bolt icon on mobile), and select "
+"“Submit for IOTD/TP consideration”."
+msgstr ""
+"Per sottoporre questa immagine alla considerazione della IOTD/TP, clicca sul "
+"link qui sotto, vai al menù Azioni (icona del fulmine su dispositivi "
+"mobili), e seleziona \"Invia alla IOTD/TP\"."
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration is in %(days)s days."
+msgstr ""
+"LLa scadenza per sottoporre la tua immagine %(prefix)s%(title)s%(suffix)s "
+"alla considerazione della IOTD/TP è tra %(days)s giorni."
+
+#, python-format
+msgid ""
+"The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
+"consideration isin %(days)s days"
+msgstr ""
+"La scadenza per sottoporre la tua immagine %(prefix)s%(title)s%(suffix)s "
+"alla considerazione della IOTD/TP è tra %(days)s giorni"
 
 #, python-format
 msgid ""
@@ -6004,24 +6090,8 @@ msgid "%(user)s replied in topic to which you are subscribed"
 msgstr "%(user)s replied in topic to which you are subscribed"
 
 #, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
-msgstr ""
-"%(inviter)s ti ha invitato al gruppo: \"%(group_name)s\"\n"
-"\n"
-"Visita il gruppo qui: <a href=\"%(group_page)s\">%(group_page)s</a>"
-
-#, python-format
-msgid ""
-"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
-"\n"
-"Visit the group here: %(group_page)s"
-msgstr ""
-"%(inviter)s ti ha invitato al gruppo: \"%(group_name)s\"\n"
-"\n"
-"Visita il gruppo qui: %(group_page)s"
+msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
+msgstr "%(inviter)s ti ha invitato al gruppo: \"%(group_name)s\""
 
 #, python-format
 msgid ""
@@ -6031,30 +6101,9 @@ msgstr ""
 "<strong>%(inviter)s</strong> ti ha invitato al gruppo: \"%(group_name)s\""
 
 #, python-format
-msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
-msgstr "%(inviter)s ti ha invitato al gruppo: \"%(group_name)s\""
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+msgid "%(requester)s requested to join the group: \"%(group_name)s\""
 msgstr ""
-"%(requester)s ha richiesto di essere aggiunto al gruppo: \"%(group_name)s"
-"\".\n"
-"\n"
-"Visita il gruppo qui: <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr ""
-"%(requester)s ha richiesto di essere aggiunto al gruppo: \"%(group_name)s"
-"\".\n"
-"\n"
-"Visita il gruppo qui: %(url)s"
+"%(requester)s ha richiesto di essere aggiunto al gruppo: \"%(group_name)s\""
 
 #, python-format
 msgid ""
@@ -6063,11 +6112,6 @@ msgid ""
 msgstr ""
 "<strong>%(requester)s</strong> ha richiesto di essere aggiunto al gruppo: "
 "\"%(group_name)s\""
-
-#, python-format
-msgid "%(requester)s requested to join the group: \"%(group_name)s\""
-msgstr ""
-"%(requester)s ha richiesto di essere aggiunto al gruppo: \"%(group_name)s\""
 
 #, python-format
 msgid "<strong>%(user)s</strong> has published a new image"
@@ -6357,6 +6401,79 @@ msgstr ""
 
 #, python-format
 msgid ""
+"A moderator moved your topic <strong>%(topic_name)s</strong> from the forum "
+"<strong>%(old_forum_name)s</strong> to the forum <strong>%(new_forum_name)s</"
+"strong>."
+msgstr ""
+"Un moderatore ha spostato il tuo argomento <strong>%(topic_name)s</strong> "
+"dal forum <strong>%(old_forum_name)s</strong> al forum <strong>"
+"%(new_forum_name)s</strong>."
+
+msgid "The moderator decided to move your topic to a more relevant forum."
+msgstr ""
+"Il moderatore ha deciso di spostare il tuo argomento ad un forum più "
+"pertinente."
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group <a href=\"%(group_url)s\">"
+"%(group_name)s</a>. You will be notified of topic replies also if you're not "
+"a member of the group, but joining it might be a good idea."
+msgstr ""
+"Il tuo argomento è stato spostato in un forum nel gruppo <a href="
+"\"%(group_url)s\">%(group_name)s</a>. Sarai notificato delle risposte "
+"all'argomento anche se non sei parte del gruppo, ma unirti ad esso potrebbe "
+"essere una buona idea."
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</a>), it was "
+"moved to its dedicated forum. When new topics are posted to the forum of an "
+"equipment item, all AstroBin users who have used it get notified (unless "
+"they have opted out of this kind of notifications)."
+msgstr ""
+"Dato che il tuo argomento si riferisce, almeno parzialmente, ad uno "
+"strumento in particolare (<a href=\"%(equipment_item_url)s\">"
+"%(equipment_item_name)s</a>), è stato spostato al suo forum dedicato. Quando "
+"dei nuovi argomenti sono postati nei forum di uno strumento, tutti gli "
+"utenti AstroBin che l'hanno usato vengono notificati (a meno che non abbiano "
+"disattivato questo tipo di notifica)."
+
+#, python-format
+msgid ""
+"A moderator moved your topic \"%(topic_name)s\" from the forum "
+"\"%(old_forum_name)s\" to the forum \"%(new_forum_name)s\"."
+msgstr ""
+"Un moderatore ha spostato il tuo argomento \"%(topic_name)s\" dal forum "
+"\"%(old_forum_name)s\" al forum \"%(new_forum_name)s\"."
+
+#, python-format
+msgid ""
+"Your topic was moved to a forum in the group \"%(group_name)s\". You will be "
+"notified of topic replies also if you're not a member of the group, but "
+"joining it might be a good idea."
+msgstr ""
+"Il tuo argomento è stato spostato in un forum nel gruppo \"%(group_name)s\". "
+"Sarai notificato delle risposte all'argomento anche se non sei parte del "
+"gruppo, ma unirti ad esso potrebbe essere una buona idea."
+
+#, python-format
+msgid ""
+"As your topic pertains, at least partially, to a specific piece of equipment "
+"(%(equipment_item_name)s), it was moved to its dedicated forum. When new "
+"topics are posted to the forum of an equipment item, all AstroBin users who "
+"have used it get notified (unless they have opted out of this kind of "
+"notifications)."
+msgstr ""
+"Dato che il tuo argomento si riferisce, almeno parzialmente, ad uno "
+"strumento in particolare (%(equipment_item_name)s), è stato spostato al suo "
+"forum dedicato. Quando dei nuovi argomenti sono postati nei forum di uno "
+"strumento, tutti gli utenti AstroBin che l'hanno usato vengono notificati (a "
+"meno che non abbiano disattivato questo tipo di notifica)."
+
+#, python-format
+msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> joined the public group: <strong>"
 "\"%(group_name)s\"</strong>."
 msgstr ""
@@ -6618,17 +6735,15 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Posts about AstroBin itself, such as questions or comments about the IOTD/TP "
-"process, or the AstroBin Index, AstroBin \"likes\", or the forums "
-"themselves, are also considered off-topic and will be deleted. If you want "
-"to provide feedback or ask a question about AstroBin, please <a href="
-"\"%(contact_url)s\">contact us</a>: we really value your input!"
+"If you want to engage in open discussion about AstroBin and its feature with "
+"other members of the community, please join the <a href="
+"\"%(open_discussions_url)s\">AstroBin Platform open discussions community "
+"forum</a> group!"
 msgstr ""
-"Anche i post riguardo AstroBin stesso, come domande o commenti sul processo "
-"IOTD/TP, o l'indice AstroBin, i \"mi piace\", o i forum stessi, sono "
-"considerati off-topic e saranno cancellati. Se vuoi dare feedback o fare "
-"domende riguardo AstroBin, per favora <a href=\"%(contact_url)s"
-"\">contattaci</a>: apprezziamo il tuo input!"
+"Se vuoi discutere apertamente riguardo AstroBin e le sue funzionalità con "
+"altri membri della community, unisciti al gruppo <a href="
+"\"%(open_discussions_url)s\">AstroBin Platform open discussions community "
+"forum</a>!"
 
 msgid "I have read the text above"
 msgstr "Ho letto il testo qui sopra"
@@ -6636,11 +6751,18 @@ msgstr "Ho letto il testo qui sopra"
 msgid "I understand"
 msgstr "Capisco"
 
-msgid "Ignore"
-msgstr "Ignora"
+msgid "Forum notice"
+msgstr "Annuncio del forum"
 
-msgid "Browse equipment"
-msgstr "Esplora stumentazione"
+msgid ""
+"This forum belongs to a group, and the group's owner set the following "
+"notice to communicate forum rules, disclaimers, or important information to "
+"users before they create a new post"
+msgstr ""
+"Questo forum appartiene a un gruppo, e il proprietario del gruppo ha "
+"impostato il seguente annuncio per comunicare regole del forum, esoneri da "
+"responsabilità, o altre informazioni importanti agli utenti prima che creino "
+"un nuovo argomento"
 
 #, python-format
 msgid ""
@@ -6903,11 +7025,14 @@ msgstr "Risposte"
 msgid "Last post"
 msgstr "Ultimo post"
 
+msgid "Poll"
+msgstr "Sondaggio"
+
+msgid "Unanswered"
+msgstr "Senza risposta"
+
 msgid "Sticky"
 msgstr "In evidenza"
-
-msgid "Closed"
-msgstr "Chiuso"
 
 msgid "This forum does not have any topics."
 msgstr "Questo forum non ha alcun argomento."
@@ -7459,6 +7584,10 @@ msgstr "Grazie per la comprensione."
 msgid "%(user)s's gallery"
 msgstr "Galleria di %(user)s"
 
+#, python-format
+msgid "Astrophotography by %(user)s on AstroBin"
+msgstr "Astrofotografia di %(user)s su AstroBin"
+
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
 "can show people individual images by sharing them using the <em>Share</em> "
@@ -7937,6 +8066,9 @@ msgstr "Tipo di camera"
 msgid "Camera pixel size (μm)"
 msgstr "Dimensione pixel della camera (μm)"
 
+msgid "Filter types"
+msgstr "Tipi di filtro"
+
 msgid "Field radius (deg)"
 msgstr "Raggio del campo (gradi)"
 
@@ -8047,6 +8179,79 @@ msgstr "Questo mese"
 msgid "Current year"
 msgstr "Questo anno"
 
+msgid "Results will include images that feature all selected filter types."
+msgstr ""
+"I risultati includeranno immagini acquisite con i tipi di filtro selezionati."
+
+msgid "Hydrogen-alpha (Hα)"
+msgstr "Idrogeno-alpha (Hα)"
+
+msgid "Hydrogen-beta (Hβ)"
+msgstr "Idrogeno-beta (Hβ)"
+
+msgid "Sulfur-II (SII)"
+msgstr "Zolfo-II (SII)"
+
+msgid "Oxygen-III (OIII)"
+msgstr "Ossigeno-III (OIII)"
+
+msgid "Nitrogen-II (NII)"
+msgstr "Nitrogeno-II (NII)"
+
+msgid "Ultraviolet (UV)"
+msgstr "Ultravioletto (UV)"
+
+msgid "Infrared (IR)"
+msgstr "Infrarosso (IR)"
+
+msgid "Multiband"
+msgstr "Multibanda"
+
+msgid "Luminance/clear (L)"
+msgstr "Luminanza/chiaro (L)"
+
+msgid "Red channel (R)"
+msgstr "Canale rosso (R)"
+
+msgid "Green channel (G)"
+msgstr "Canale verde (G)"
+
+msgid "Blue channel (B)"
+msgstr "Canale blue (B)"
+
+msgid "Neutral density (ND)"
+msgstr "Densità neutra (ND)"
+
+msgid "Ultra High Contrast (UHC)"
+msgstr ""
+
+msgid "Sky glow"
+msgstr ""
+
+msgid "Solar"
+msgstr "Solare"
+
+msgid "Lunar"
+msgstr "Lunare"
+
+msgid "Cometary"
+msgstr "Cometario"
+
+msgid "Photometric Ultraviolet"
+msgstr "Ultravioletto fotometrico"
+
+msgid "Photometric Blue"
+msgstr "Blu fotometrico"
+
+msgid "Photometric Visual"
+msgstr "Fotometrico visuale"
+
+msgid "Photometric Red"
+msgstr "Rosso fotometrico"
+
+msgid "Photometric Infrared"
+msgstr "Infrarosso fotometrico"
+
 msgid "Imaging telescopes"
 msgstr "Telescopio o obiettivo di acquisizione"
 
@@ -8079,6 +8284,9 @@ msgstr "Che tipo di risultati vuoi?"
 
 msgid "All images"
 msgstr "Tutte le immagini"
+
+msgid "Your images"
+msgstr "Le tue immagini"
 
 msgid "Images bookmarked by you"
 msgstr "Imagini nei tuoi segnalibri"
@@ -8992,6 +9200,26 @@ msgstr ""
 #~ msgstr "Il seguente commento è stato approvato da un moderatore."
 
 #~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "La tua richiesta di essere aggiunto al gruppo \"%(group_name)s\" è stata "
+#~ "APPROVATA.\n"
+#~ "\n"
+#~ "Visita il gruppo qui: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "La tua richiesta di essere aggiunto al gruppo \"%(group_name)s\" è stata "
+#~ "APPROVATA.\n"
+#~ "\n"
+#~ "Visita il gruppo qui: %(url)s"
+
+#~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: <a "
 #~ "href=\"%(url)s\">%(url)s</a>"
 #~ msgstr ""
@@ -9068,6 +9296,44 @@ msgstr ""
 
 #~ msgid "%(user)s replied to your comment."
 #~ msgstr "%(user)s ha risposto al tuo commento."
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
+#~ msgstr ""
+#~ "%(inviter)s ti ha invitato al gruppo: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visita il gruppo qui: <a href=\"%(group_page)s\">%(group_page)s</a>"
+
+#~ msgid ""
+#~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visit the group here: %(group_page)s"
+#~ msgstr ""
+#~ "%(inviter)s ti ha invitato al gruppo: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "Visita il gruppo qui: %(group_page)s"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(requester)s ha richiesto di essere aggiunto al gruppo: \"%(group_name)s"
+#~ "\".\n"
+#~ "\n"
+#~ "Visita il gruppo qui: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(requester)s requested to join the group: \"%(group_name)s\".\n"
+#~ "\n"
+#~ "Visit the group here: %(url)s"
+#~ msgstr ""
+#~ "%(requester)s ha richiesto di essere aggiunto al gruppo: \"%(group_name)s"
+#~ "\".\n"
+#~ "\n"
+#~ "Visita il gruppo qui: %(url)s"
 
 #~ msgid ""
 #~ "%(originator)s has published a new image revision! Check it out at the "
@@ -9192,6 +9458,19 @@ msgstr ""
 
 #~ msgid "View forums"
 #~ msgstr "Vedi i forum"
+
+#~ msgid ""
+#~ "Posts about AstroBin itself, such as questions or comments about the IOTD/"
+#~ "TP process, or the AstroBin Index, AstroBin \"likes\", or the forums "
+#~ "themselves, are also considered off-topic and will be deleted. If you "
+#~ "want to provide feedback or ask a question about AstroBin, please <a href="
+#~ "\"%(contact_url)s\">contact us</a>: we really value your input!"
+#~ msgstr ""
+#~ "Anche i post riguardo AstroBin stesso, come domande o commenti sul "
+#~ "processo IOTD/TP, o l'indice AstroBin, i \"mi piace\", o i forum stessi, "
+#~ "sono considerati off-topic e saranno cancellati. Se vuoi dare feedback o "
+#~ "fare domende riguardo AstroBin, per favora <a href=\"%(contact_url)s"
+#~ "\">contattaci</a>: apprezziamo il tuo input!"
 
 #~ msgid "These are the forums in the groups you have access to."
 #~ msgstr "Questi sono i forum dei gruppi a cui hai accesso."
@@ -9675,6 +9954,12 @@ msgstr ""
 #~ msgstr ""
 #~ "Per favore migra la tua strumentazione al nuovo database, cosa che aiuta "
 #~ "a consolidare i dati e migliorare i risultati del motore di ricerca."
+
+#~ msgid "Ignore"
+#~ msgstr "Ignora"
+
+#~ msgid "Browse equipment"
+#~ msgstr "Esplora stumentazione"
 
 #~ msgid ""
 #~ "AstroBin needs an additional step to verify your login. Please enter the "

@@ -163,22 +163,33 @@ def search_image_list(context, paginate=True, **kwargs):
     country = get_client_country_code(request)
     equipment_brand_listings = None
     equipment_item_listings = None
+    name = telescope or camera or q
 
     if telescope or camera or q:
         equipment_brand_listings = EquipmentBrandListing.objects \
-            .annotate(distance=TrigramDistance('brand__name', telescope or camera or q)) \
+            .annotate(distance=TrigramDistance('brand__name', name)) \
             .filter(
-            Q(distance__lte=.85) & Q(
-                Q(retailer__countries__icontains=country) | Q(retailer__countries__isnull=True)
+                Q(
+                    Q(distance__lte=.85) |
+                    Q(brand__name__icontains=name)
+                ) &
+                Q(
+                    Q(retailer__countries__icontains=country) |
+                    Q(retailer__countries__isnull=True)
+                )
             )
-        )
         equipment_item_listings = EquipmentItemListing.objects \
-            .annotate(distance=TrigramDistance('name', telescope or camera or q)) \
+            .annotate(distance=TrigramDistance('name', name)) \
             .filter(
-            Q(distance__lte=.5) & Q(
-                Q(retailer__countries__icontains=country) | Q(retailer__countries__isnull=True)
+                Q(
+                    Q(distance__lte=.5) |
+                    Q(name__icontains=name)
+                ) &
+                Q(
+                    Q(retailer__countries__icontains=country) |
+                    Q(retailer__countries__isnull=True)
+                )
             )
-        )
 
     context.update({
         'paginate': paginate,
@@ -346,6 +357,7 @@ def show_ads_on_page(context):
     elif context.template_name in (
             'search/search.html',
             'top_picks.html',
+            'top_pick_nominations.html',
             'astrobin_apps_iotd/iotd_archive.html'
     ):
         return not request.user.is_authenticated or is_free(valid_subscription)
@@ -822,12 +834,6 @@ def show_click_and_drag_zoom(request) -> bool:
             not (request.user_agent.is_touch_capable or
                  request.user_agent.is_mobile or
                  request.user_agent.is_tablet))
-
-
-@register.simple_tag
-def show_10_year_anniversary_logo():
-    # type: () -> bool
-    return UtilsService.show_10_year_anniversary_logo()
 
 
 @register.filter

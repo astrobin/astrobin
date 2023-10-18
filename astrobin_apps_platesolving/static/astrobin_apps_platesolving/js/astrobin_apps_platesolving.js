@@ -1,5 +1,5 @@
 (function (win) {
-    var Status = {
+    const Status = {
         MISSING: 0,
         PENDING: 1,
         FAILED: 2,
@@ -21,6 +21,7 @@
 
         this.missingCounter = 0;
         this.errorAlreadyShown = false;
+        this.showErrors = config.showErrors || false;
 
         $.extend(this, config);
 
@@ -29,7 +30,7 @@
 
     Platesolving.prototype = {
         process: function () {
-            var self = this;
+            const self = this;
 
             if (self.solution_id === 0 || self.solution_status === Status.MISSING) {
                 /* The plate-solving has never been attempted on this resource. */
@@ -42,7 +43,7 @@
         },
 
         solve: function () {
-            var self = this;
+            const self = this;
 
             self.onStarting();
 
@@ -66,7 +67,7 @@
         },
 
         solveAdvanced: function () {
-            var self = this;
+            const self = this;
 
             self.onStartingAdvanced();
 
@@ -85,7 +86,7 @@
         },
 
         getStatus: function () {
-            var self = this;
+            const self = this;
 
             $.ajax({
                 url: self.apiURL + self.solution_id + '/',
@@ -124,7 +125,7 @@
         },
 
         update: function () {
-            var self = this;
+            const self = this;
 
             self._setInfoModalLoading(true);
 
@@ -245,7 +246,7 @@
         },
 
         onStarting: function () {
-            var self = this;
+            const self = this;
 
             self.missingCounter = 0;
             self._showStatus();
@@ -254,7 +255,7 @@
         },
 
         onStartingAdvanced: function () {
-            var self = this;
+            const self = this;
 
             self.missingCounter = 0;
             self._showStatus();
@@ -264,19 +265,19 @@
         },
 
         onStarted: function () {
-            var self = this;
+            const self = this;
 
             self.onStatusPending();
         },
 
         onStartedAdvanced: function () {
-            var self = this;
+            const self = this;
 
             self.onStatusAdvancedPending();
         },
 
         onStatusMissing: function () {
-            var self = this;
+            const self = this;
 
             if (self.missingCounter < 5)
                 self.solve();
@@ -289,7 +290,7 @@
         },
 
         onStatusPending: function () {
-            var self = this;
+            const self = this;
 
             self._setIcon('icon-ok');
             self._setProgressBar(self.perform_advanced === "True" ? 25 : 50);
@@ -302,7 +303,7 @@
         },
 
         onStatusAdvancedPending: function (queueSize) {
-            var self = this;
+            const self = this;
 
             self._setIcon('icon-ok');
             self._setProgressBar(75);
@@ -320,7 +321,7 @@
         },
 
         onStatusFailed: function () {
-            var self = this;
+            const self = this;
 
             self._setIcon('icon-fire');
             self._switchProgressClasses('info', 'danger');
@@ -329,7 +330,7 @@
         },
 
         onStatusAdvancedFailed: function () {
-            var self = this;
+            const self = this;
 
             self._setIcon('icon-fire');
             self._switchProgressClasses('info', 'danger');
@@ -338,7 +339,7 @@
         },
 
         onStatusSuccess: function () {
-            var self = this;
+            const self = this;
 
             if (self.perform_advanced === "True") {
                 self.solveAdvanced();
@@ -351,7 +352,7 @@
         },
 
         onStatusAdvancedSuccess: function () {
-            var self = this;
+            const self = this;
 
             self._setIcon('icon-ok');
             self._switchProgressClasses('info', 'success');
@@ -361,7 +362,7 @@
         },
 
         onError: function (error) {
-            var self = this;
+            const self = this;
             var message;
 
             if (error.indexOf("Connection refused") > -1 || error.indexOf("timed out") > -1) {
@@ -374,7 +375,7 @@
                 message = self.i18n.unexpectedError;
             }
 
-            if (!self.errorAlreadyShown && !!message) {
+            if (!!self.showErrors && !self.errorAlreadyShown && !!message) {
                 $.toast({
                     heading: self.i18n.error,
                     text: message,

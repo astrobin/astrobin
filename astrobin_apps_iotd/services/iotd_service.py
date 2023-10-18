@@ -3,9 +3,9 @@ from datetime import date, datetime, timedelta
 from typing import List, Union
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.db import IntegrityError
-from django.db.models import Count, OuterRef, Q, Subquery
+from django.db.models import Count, OuterRef, Q, QuerySet, Subquery
 from django.utils import timezone
 from django.utils.translation import gettext
 
@@ -13,6 +13,7 @@ from astrobin.enums import SubjectType
 from astrobin.enums.data_source import DataSource
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import (
     Iotd, IotdJudgementQueueEntry, IotdQueueSortOrder, IotdReviewQueueEntry, IotdStaffMemberSettings, IotdStats,
     IotdSubmission,
@@ -21,7 +22,7 @@ from astrobin_apps_iotd.models import (
     TopPickNominationsArchive,
 )
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from astrobin_apps_users.services import UserService
@@ -83,16 +84,26 @@ class IotdService:
             member_settings.save()
 
         order_by = [
-            '-published' \
-                if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST \
-                else 'published'
+            '-published'
+            if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST
+            else 'published'
         ]
 
-        return [
-            x.image for x in IotdSubmissionQueueEntry.objects
-                .select_related('image')
-                .filter(submitter=submitter).order_by(*order_by)
-        ]
+        images: List[IotdSubmissionQueueEntry] = []
+
+        for entry in IotdSubmissionQueueEntry.objects \
+                .select_related('image') \
+                .prefetch_related('image__imaging_telescopes_2', 'image__imaging_cameras_2') \
+                .filter(submitter=submitter) \
+                .order_by(*order_by) \
+                .iterator():
+            image = entry.image
+            final_revision = ImageService(image).get_final_revision()
+            image.w = final_revision.w
+            image.h = final_revision.h
+            images.append(image)
+
+        return images
 
     def get_review_queue(self, reviewer: User, queue_sort_order: str = None) -> List[IotdReviewQueueEntry]:
         member_settings: IotdStaffMemberSettings
@@ -108,16 +119,19 @@ class IotdService:
             member_settings.save()
 
         order_by = [
-            '-last_submission_timestamp' \
-                if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST \
-                else 'last_submission_timestamp'
+            '-last_submission_timestamp'
+            if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST
+            else 'last_submission_timestamp'
         ]
 
         images: List[IotdReviewQueueEntry] = []
 
         for entry in IotdReviewQueueEntry.objects \
                 .select_related('image') \
-                .filter(reviewer=reviewer).order_by(*order_by).iterator():
+                .prefetch_related('image__imaging_telescopes_2', 'image__imaging_cameras_2') \
+                .filter(reviewer=reviewer) \
+                .order_by(*order_by) \
+                .iterator():
             image = entry.image
             image.last_submission_timestamp = entry.last_submission_timestamp
             images.append(image)
@@ -138,16 +152,19 @@ class IotdService:
             member_settings.save()
 
         order_by = [
-            '-last_vote_timestamp' \
-                if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST \
-                else 'last_vote_timestamp'
+            '-last_vote_timestamp'
+            if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST
+            else 'last_vote_timestamp'
         ]
 
         images: List[IotdJudgementQueueEntry] = []
 
         for entry in IotdJudgementQueueEntry.objects \
                 .select_related('image') \
-                .filter(judge=judge).order_by(*order_by).iterator():
+                .prefetch_related('image__imaging_telescopes_2', 'image__imaging_cameras_2') \
+                .filter(judge=judge) \
+                .order_by(*order_by) \
+                .iterator():
             image = entry.image
             image.last_vote_timestamp = entry.last_vote_timestamp
             images.append(image)
@@ -439,6 +456,9 @@ class IotdService:
                 )
             )
 
+            for alias in ('story', 'hd_anonymized', 'real_anonymized'):
+                image.thumbnail(alias, 'final')
+
             Image.objects_including_wip.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=timezone.now())
 
             if auto_submit:
@@ -456,6 +476,19 @@ class IotdService:
         return may, reason
 
     @staticmethod
+    def resubmit_to_iotd_tp_process(user: User, image: Image):
+        log.debug(f'Resubmitting image {image.get_id()} "{image.title}" to IOTD/TP process.')
+
+        group: Group = Group.objects.get(name=GroupName.IOTD_SUBMITTERS)
+        previous_submitters: QuerySet = image.designated_iotd_submitters.all()
+        new_submitters = [x for x in group.user_set.all() if x not in previous_submitters and x != user]
+
+        image.designated_iotd_submitters.clear()
+        image.designated_iotd_submitters.add(*new_submitters)
+
+        Image.objects_including_wip.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=timezone.now())
+
+    @staticmethod
     def may_submit_to_iotd_tp_process(user: User, image: Image):
         if not user.is_authenticated:
             return False, MayNotSubmitToIotdTpReason.NOT_AUTHENTICATED
@@ -463,19 +496,19 @@ class IotdService:
         if user != image.user:
             return False, MayNotSubmitToIotdTpReason.NOT_OWNER
 
+        if image.submitted_for_iotd_tp_consideration is not None:
+            return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
+
+        if image.published and image.published < (
+                DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
+        ):
+            return False, MayNotSubmitToIotdTpReason.TOO_LATE
+
         if is_free(PremiumService(user).get_valid_usersubscription()):
             return False, MayNotSubmitToIotdTpReason.IS_FREE
 
         if image.is_wip:
             return False, MayNotSubmitToIotdTpReason.NOT_PUBLISHED
-
-        if image.published < (
-                DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
-        ):
-            return False, MayNotSubmitToIotdTpReason.TOO_LATE
-
-        if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
-            return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
 
         if image.subject_type in (SubjectType.GEAR, SubjectType.OTHER, '', None):
             return False, MayNotSubmitToIotdTpReason.BAD_SUBJECT_TYPE
@@ -483,7 +516,12 @@ class IotdService:
         if image.imaging_telescopes_2.count() == 0 or image.imaging_cameras_2.count() == 0:
             return False, MayNotSubmitToIotdTpReason.NO_TELESCOPE_OR_CAMERA
 
-        if image.acquisition_set.count() == 0:
+        if image.acquisition_set.count() == 0 and image.subject_type in (
+            SubjectType.DEEP_SKY,
+            SubjectType.SOLAR_SYSTEM,
+            SubjectType.WIDE_FIELD,
+            SubjectType.STAR_TRAILS,
+        ):
             return False, MayNotSubmitToIotdTpReason.NO_ACQUISITIONS
 
         if image.user.userprofile.exclude_from_competitions:
@@ -696,8 +734,7 @@ class IotdService:
                 .filter(date__gt=cutoff) \
                 .filter(image__data_source=DataSource.MIX) \
                 .count(),
-            other_iotds=
-                Iotd.objects \
+            other_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
                 .filter(image__data_source=DataSource.OTHER) \
                 .count(),
@@ -780,3 +817,63 @@ class IotdService:
                 .filter(image__data_source=DataSource.UNKNOWN) \
                 .count(),
         )
+
+    @staticmethod
+    def user_has_submissions(user, days):
+        return Image.objects.filter(
+            Q(user=user) &
+            Q(submitted_for_iotd_tp_consideration__isnull=False) &
+            Q(submitted_for_iotd_tp_consideration__date__gt=DateTimeService.today() - timedelta(days=days))
+        ).exists()
+
+    @staticmethod
+    def notify_about_upcoming_deadline_for_iotd_tp_submission():
+        images = Image.objects.filter(
+            published__date=DateTimeService.today() - timedelta(
+                days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS -
+                     settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS
+            ),
+            submitted_for_iotd_tp_consideration__isnull=True,
+        )
+
+        for image in images:
+            if IotdService.user_has_submissions(image.user, 365):
+                thumb = image.thumbnail_raw('gallery', None, sync=True)
+
+                push_notification(
+                    [image.user], None, 'iotd_tp_submission_deadline', {
+                        'image': image,
+                        'image_thumbnail': thumb.url if thumb else None,
+                        'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),
+                        'days': settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS,
+                        'BASE_URL': settings.BASE_URL,
+                    }
+                )
+
+    @staticmethod
+    def get_recently_expired_unsubmitted_images(d: timedelta) -> QuerySet:
+        """
+            Gets images that:
+              - didn't get dismissed
+              - didn't get enough submissions to advance to the reviewers' queue
+              - are about to the exit the submitters' queues
+        :param d: how long ago the image still has until expiration
+        :return: the queryset of images
+        """
+
+        deadline_lower: datetime = DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        deadline_upper: datetime = DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) + d
+        submitted_time_query: Q = \
+            Q(submitted_for_iotd_tp_consideration__gte=deadline_lower) & \
+            Q(submitted_for_iotd_tp_consideration__lt=deadline_upper)
+        dismissals_query: Q = Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS)
+        submissions_query: Q = Q(num_submissions__lt=settings.IOTD_SUBMISSION_MIN_PROMOTIONS)
+
+        images: QuerySet = Image.objects \
+            .annotate(
+                num_dismissals=Count('iotddismissedimage', distinct=True),
+                num_submissions=Count('iotdsubmission', distinct=True),
+            ) \
+            .filter(submitted_time_query & dismissals_query & submissions_query)
+
+        return images

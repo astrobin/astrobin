@@ -23,7 +23,7 @@
             {% if READONLY_MODE %}
                 {% include 'readonly_mode.html' %}
             {% else %}
-                <form class="form-horizontal" method="post" action="{% url 'profile_save_basic' %}">{% csrf_token %}
+                <form class="form-horizontal" method="post" action="{% url 'profile_save_basic' %}" novalidate>{% csrf_token %}
 
                     {{form|as_bootstrap}}
 

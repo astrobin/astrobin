@@ -10,12 +10,12 @@
         <span class="caret hidden-phone"></span>
     </a>
     <ul class="dropdown-menu">
-        {% if image.animated %}
+        {% if image.animated or image.video_file.name %}
             <li>
-                <a href="{% url 'image_download' image.get_id revision_label 'real' %}"
+                <a href="{% url 'image_download' image.get_id revision_label 'original' %}"
                    data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}">
                     <i class="icon-check-empty"></i>
-                    {% trans "Original size" %}
+                    {% trans "Original file" %}
                 </a>
             </li>
         {% else %}
@@ -87,7 +87,7 @@
                     </a>
                 </li>
             {% endif %}
-        {% endif %} {# animated #}
+        {% endif %} {# animated or video #}
     </ul>
 </li>
 {% endif %}

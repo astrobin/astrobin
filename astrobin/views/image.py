@@ -671,6 +671,19 @@ class ImageDetailView(ImageDetailViewBase):
         if image_prev and isinstance(image_prev, QuerySet):
             image_prev = image_prev[0]
 
+        ############################
+        # DOWNLOAD ORIGINAL URL    #
+        ############################
+
+        if is_revision and revision_image.video_file.name:
+            download_original_url = revision_image.video_file.url
+        elif is_revision and not revision_image.video_file.name:
+            download_original_url = revision_image.image_file.url
+        elif image.video_file.name:
+            download_original_url = image.video_file.url
+        else:
+            download_original_url = image.image_file.url
+
         #################
         # RESPONSE DICT #
         #################
@@ -783,6 +796,7 @@ class ImageDetailView(ImageDetailViewBase):
             'h': h,
             'image_uses_full_width': w is not None and w >= 940,
             'search_query': search_query,
+            'download_original_url': download_original_url,
         })
 
         return response_dict
@@ -1248,29 +1262,37 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
         return super(ImageEditRevisionView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        revision = self.get_object()  # type: ImageRevision
-        previous_url = revision.image_file.url
+        revision: ImageRevision = self.get_object()
+
+        if revision.image_file:
+            previous_url = revision.image_file.url
+        else:
+            previous_url = None
+
         previous_square_cropping = revision.square_cropping
 
         ret = super(ImageEditRevisionView, self).post(request, *args, **kwargs)
 
         revision = self.get_object()
-        new_url = revision.image_file.url
 
-        if new_url != previous_url:
-            try:
-                revision.w, revision.h = get_image_dimensions(revision.image_file)
-            except TypeError as e:
-                logger.warning(
-                    "ImageEditRevisionView: unable to get image dimensions for %d: %s" % (revision.pk, str(e)))
-                pass
+        if revision.image_file and previous_url:
+            new_url = revision.image_file.url
 
-            revision.square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
-            revision.save(keep_deleted=True)
+            if new_url != previous_url:
+                try:
+                    revision.w, revision.h = get_image_dimensions(revision.image_file)
+                except TypeError as e:
+                    logger.warning(
+                        "ImageEditRevisionView: unable to get image dimensions for %d: %s" % (revision.pk, str(e)))
+                    pass
 
-            revision.thumbnail_invalidate()
+                revision.square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
+                revision.save(keep_deleted=True)
 
-        if previous_square_cropping != revision.square_cropping:
+                revision.thumbnail_invalidate()
+
+        if previous_square_cropping not in (None, '', '0,0,0,0') and \
+                previous_square_cropping != revision.square_cropping:
             revision.thumbnail_invalidate()
 
         return ret
@@ -1375,7 +1397,10 @@ class ImageDownloadView(View):
         if version == 'original':
             if request.user != image.user and not request.user.is_superuser:
                 return render(request, "403.html", {})
-            return self.download(revision.image_file.url if revision else image.image_file.url)
+            if revision:
+                return self.download(revision.video_file.url if revision.video_file.name else revision.image_file.url)
+            else:
+                return self.download(image.video_file.url if image.video_file.name else image.image_file.url)
 
         if version == 'basic_annotations':
             return self.download(revision.solution.image_file.url if revision else image.solution.image_file.url)

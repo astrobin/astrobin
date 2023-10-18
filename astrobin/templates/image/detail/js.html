@@ -94,14 +94,15 @@ $(document).ready(function() {
 
     function setupSmallerThanRegularAttribute() {
         const $img = $(".main-image img");
+        const $videoPreview = $(".main-image .vjs-poster img");
         const $advancedPlatesolvingObject = $("#advanced-plate-solution-svg");
 
-        function _do() {
+        function _doImage($el) {
             const containerWidth = $(".astrobin-image-container").width();
             const imageWidth = {{ w }};
 
             if (imageWidth < containerWidth) {
-                $img.attr("data-smaller-than-regular", "true");
+                $el.attr("data-smaller-than-regular", "true");
 
                 if ($advancedPlatesolvingObject) {
                     $advancedPlatesolvingObject.attr('width', imageWidth);
@@ -109,22 +110,35 @@ $(document).ready(function() {
             }
         }
 
-        if (
-            $img.attr('data-loaded') === 'true' &&
-            (
-                $img.attr('data-regular-large-load-bypassed') === 'true' ||
-                $img.attr('data-regular-large-loaded') === 'true'
-            ) &&
-            (
-                $img.attr('data-hires-load-bypassed') === 'true' ||
-                $img.attr('data-hires-loaded') === 'true'
-            )
-        ) {
-            _do();
+        function _doVideo($el) {
+            const containerWidth = $(".astrobin-image-container").width();
+            const videoWidth = {{ w }};
+
+            if (videoWidth < containerWidth) {
+                $el.closest('.video-js').removeClass('vjs-fluid');
+            }
+        }
+
+        if ($videoPreview.length === 0) {
+            if (
+                $img.attr('data-loaded') === 'true' &&
+                (
+                    $img.attr('data-regular-large-load-bypassed') === 'true' ||
+                    $img.attr('data-regular-large-loaded') === 'true'
+                ) &&
+                (
+                    $img.attr('data-hires-load-bypassed') === 'true' ||
+                    $img.attr('data-hires-loaded') === 'true'
+                )
+            ) {
+                _doImage($img);
+            } else {
+                setTimeout(() => {
+                    setupSmallerThanRegularAttribute();
+                }, 100);
+            }
         } else {
-            setTimeout(() => {
-                setupSmallerThanRegularAttribute();
-            }, 100);
+            _doVideo($videoPreview);
         }
     }
 
@@ -135,6 +149,58 @@ $(document).ready(function() {
         if (params["forceClassicRevisionUploader"] !== undefined) {
             $("#upload-revision-modal").modal("show");
         }
+    }
+
+    function updateVideoEncodingProgress() {
+        let url = null;
+
+        {% if is_revision %}
+            url = `/api/v2/images/image-revision/{{ revision_image.pk }}/video-encoding-progress/`;
+        {% else %}
+            url = `/api/v2/images/image/{{ image.pk }}/video-encoding-progress/`;
+        {% endif %}
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            timeout: 5000,
+            success: function (progress) {
+                const $el = $(".video-encoding-progress");
+                const $bar = $el.find(".bar")
+
+                if (progress === null || progress === undefined || progress === "") {
+                    $el.hide();
+                    $bar.css('width', 0);
+
+                    if (window.updateVideoEncodingProgressTimeout !== undefined) {
+                        clearTimeout(window.updateVideoEncodingProgressTimeout);
+                    }
+
+                    window.updateVideoEncodingProgressTimeout = setTimeout(updateVideoEncodingProgress, 1000);
+
+                    return;
+                }
+
+                if (progress === 100) {
+                    if (window.updateVideoEncodingProgressTimeout !== undefined) {
+                        clearTimeout(window.updateVideoEncodingProgressTimeout);
+                    }
+
+                    const queryParams = new URLSearchParams(window.location.search);
+                    queryParams.set("lr", `${new Date().getTime()}`);
+
+                    window.location.search = queryParams.toString();
+
+                    return;
+                }
+
+                $bar.css('width', progress + "%");
+                $bar.html("&nbsp;" + progress + "%");
+                $el.show();
+                setTimeout(updateVideoEncodingProgress, 1000);
+            }
+        });
     }
 
     $('form.copy select').change(function () {
@@ -283,6 +349,14 @@ $(document).ready(function() {
     });
 
     detectForceClassicRevisionUploader();
+
+    {% if is_revision and revision_image.video_file.name and not revision_image.encoded_video_file.name %}
+        updateVideoEncodingProgress();
+    {% endif %}
+
+    {% if not is_revision and image.video_file.name and not image.encoded_video_file.name %}
+        updateVideoEncodingProgress();
+    {% endif %}
 });
 </script>
 

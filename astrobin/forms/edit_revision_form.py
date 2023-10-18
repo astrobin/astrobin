@@ -42,9 +42,30 @@ class ImageEditRevisionForm(forms.ModelForm):
                         f'{__("Revision")} {other_revision.label}{does_not_match_label(matches_resolution)}',
                     )]
 
+    def __init_loop_video(self):
+        if self.instance.video_file.name:
+            self.fields['loop_video'] = forms.BooleanField(
+                required=False,
+                label=_("Loop video"),
+                help_text=_("If checked, the video will loop."),
+                initial=self.instance.loop_video,
+            )
+
     def __init__(self, **kwargs):
         super(ImageEditRevisionForm, self).__init__(**kwargs)
         self.__init_mouse_hover_image()
+        self.__init_loop_video()
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        if 'loop_video' in self.fields:
+            instance.loop_video = self.cleaned_data['loop_video']
+
+        if commit:
+            instance.save()
+
+        return instance
 
     class Meta:
         model = ImageRevision
