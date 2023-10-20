@@ -53,9 +53,7 @@ class StockImporterService:
                 log.error(f"Unable to find equipment item of class {stock_item.klass} and pk {stock_item.pk}")
                 continue
 
-            url = stock_item.url
-
-            add_url_params(url, {
+            url = add_url_params(stock_item.url, {
                 'utm_source': 'astrobin',
                 'utm_medium': 'link',
                 'utm_campaign': 'webshop-integration'
@@ -73,7 +71,7 @@ class StockImporterService:
                 EquipmentItemListing.objects.filter(pk=listing.pk).update(
                     name=stock_item.name,
                     sku=stock_item.sku,
-                    url=stock_item.url,
+                    url=url,
                     stock_status=stock_item.stock_status.value,
                     stock_amount=max(0, stock_item.stock_amount),
                     updated=datetime.now(),
@@ -87,7 +85,7 @@ class StockImporterService:
                     item_object_id=stock_item.pk,
                     name=stock_item.name,
                     sku=stock_item.sku,
-                    url=stock_item.url,
+                    url=url,
                     stock_status=stock_item.stock_status.value,
                     stock_amount=max(0, stock_item.stock_amount),
                 )
