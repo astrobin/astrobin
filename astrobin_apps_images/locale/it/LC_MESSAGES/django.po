@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 15:27+0000\n"
-"PO-Revision-Date: 2023-07-06 13:32+0200\n"
+"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"PO-Revision-Date: 2023-10-17 10:19+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+"X-Loco-Api-Version: 1.0.28 20230927-1\n"
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Origine dati non compressa (max 100 MB)"
@@ -33,11 +33,39 @@ msgstr ""
 msgid "Error!"
 msgstr "Errore!"
 
+msgid "Image of the day"
+msgstr "Foto del giorno"
+
+msgid "Top pick"
+msgstr "Top pick"
+
+msgid "Top pick nomination"
+msgstr "Nomina Top pick"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr "Al momento nella coda IOTD/TP"
+
 msgid "Staging area"
 msgstr "Area di lavoro"
 
 msgid "Collaboration"
 msgstr "Collaborazione"
+
+msgid "Video"
+msgstr "Video"
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+"C'è stato un problema nel fare l'encoding di questo video, per favore "
+"caricalo di nuovo."
+
+msgid "If the problem persists, please contact us."
+msgstr "Se il problema persiste, contattaci."
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
+"Questo video è ancora in fase di elaborazione, torna su questa pagina più "
+"tardi."
 
 #, python-format
 msgid "Revision %(revision)s"
@@ -51,15 +79,6 @@ msgstr "Caricamento"
 
 msgid "(no title)"
 msgstr "(senza titolo)"
-
-msgid "Image of the day"
-msgstr "Foto del giorno"
-
-msgid "Top pick"
-msgstr "Top pick"
-
-msgid "Top pick nomination"
-msgstr "Nomina Top pick"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "Corruzione dei dati. Carica questa immagine di nuovo. Spiacenti!"

@@ -1361,6 +1361,18 @@ def user_pre_delete(sender, instance, **kwargs):
 pre_delete.connect(user_pre_delete, sender=User)
 
 
+@receiver(pre_save, sender=UserProfile)
+def userprofile_pre_save(sender, instance: UserProfile, **kwargs):
+    try:
+        before_save: UserProfile = sender.objects.get(pk=instance.pk)
+    except sender.DoesNotExist:
+        # Object is new, so all fields are "changed"
+        return
+
+    if before_save.skill_level != instance.skill_level:
+        instance.skill_level_updated = DateTimeService.now()
+
+
 def userprofile_post_softdelete(sender, instance, **kwargs):
     # Images are attached to the auth.User object, and that's not really
     # deleted, so nothing is cascaded, hence the following line.

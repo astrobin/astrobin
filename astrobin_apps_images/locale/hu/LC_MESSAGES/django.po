@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 15:27+0000\n"
-"PO-Revision-Date: 2023-07-06 13:32+0200\n"
+"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"PO-Revision-Date: 2023-10-17 10:19+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+"X-Loco-Api-Version: 1.0.28 20230927-1\n"
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Tömörítetlen forrás (max 100 MB)"
@@ -32,11 +32,35 @@ msgstr ""
 msgid "Error!"
 msgstr "Hiba!"
 
+msgid "Image of the day"
+msgstr "A Nap Képe"
+
+msgid "Top pick"
+msgstr "Top Pick"
+
+msgid "Top pick nomination"
+msgstr "Top Pick jelölt"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr ""
+
 msgid "Staging area"
 msgstr "Előkészítési Terület"
 
 msgid "Collaboration"
 msgstr "Kollaboráció"
+
+msgid "Video"
+msgstr ""
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+
+msgid "If the problem persists, please contact us."
+msgstr ""
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
 
 #, python-format
 msgid "Revision %(revision)s"
@@ -50,15 +74,6 @@ msgstr "Töltés"
 
 msgid "(no title)"
 msgstr "(nincs cím)"
-
-msgid "Image of the day"
-msgstr "A Nap Képe"
-
-msgid "Top pick"
-msgstr "Top Pick"
-
-msgid "Top pick nomination"
-msgstr "Top Pick jelölt"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "Adatkorrupció. Kérjük, töltsd fel újra a képet. Elnézést kérünk!"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 15:27+0000\n"
-"PO-Revision-Date: 2023-07-06 13:38+0200\n"
+"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"PO-Revision-Date: 2023-10-17 10:18+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.28 20230626-1\n"
+"X-Loco-Api-Version: 1.0.28 20230927-1\n"
 
 msgid "You have a new follower"
 msgstr "Vous avez un nouvel abonné"
@@ -29,7 +29,7 @@ msgid "Your image was plate-solved"
 msgstr "La réduction astrométrique de votre image a été réalisée"
 
 msgid "Your image was approved by a moderator"
-msgstr ""
+msgstr "Votre image a été approuvée par un modérateur"
 
 msgid "Your image could not be plate-solved"
 msgstr "La réduction astrométrique de votre image a échoué"
@@ -103,6 +103,9 @@ msgstr "Nouveau sujet dans un groupe dont vous êtes membre"
 msgid "New forum topic for an equipment item you use"
 msgstr "Nouveau sujet sur un équipement que vous utilisez"
 
+msgid "Your forum topic was moved"
+msgstr ""
+
 msgid "You have received a new private message"
 msgstr "Vous avez reçu un nouveau message privé"
 
@@ -144,9 +147,12 @@ msgid "Congratulations for your first image on AstroBin!"
 msgstr "Félicitations pour votre première image sur AstroBin !"
 
 msgid "You submitted your image for IOTD/TP consideration"
-msgstr ""
+msgstr "Vous avez soumis votre image au concours IOTD"
 
 msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Image non soumise au concours IOTD"
+
+msgid "Image approaching deadline for IOTD/TP submission"
 msgstr ""
 
 msgid "Thank you for getting a subscription!"
@@ -156,7 +162,7 @@ msgid "Thank you for your payment!"
 msgstr "Merci pour votre paiement !"
 
 msgid "Subscription canceled"
-msgstr ""
+msgstr "Abonnement annulé"
 
 msgid "You were removed from the IOTD staff"
 msgstr "Vous ne faites plus partie de l'équipe de sélection de l'Image du Jour"
@@ -198,10 +204,10 @@ msgstr ""
 "images"
 
 msgid "Login attempt detected from a different country"
-msgstr ""
+msgstr "Tentative de connexion détectée depuis un autre pays"
 
 msgid "Login attempt with weak password"
-msgstr ""
+msgstr "Tentative de connexion avec un mot de passe faible"
 
 #~ msgid "Notifications"
 #~ msgstr "Notifications"
