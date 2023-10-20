@@ -7,7 +7,7 @@ from mock import patch
 from astrobin import utils
 from astrobin.tests.generators import Generators
 from astrobin.utils import (
-    dec_decimal_precision_from_pixel_scale, decimal_to_degrees_minutes_seconds_string,
+    add_url_params, dec_decimal_precision_from_pixel_scale, decimal_to_degrees_minutes_seconds_string,
     decimal_to_hours_minutes_seconds_string,
     ra_decimal_precision_from_pixel_scale,
 )
@@ -236,3 +236,46 @@ class UtilsTest(TestCase):
                 second_symbol='',
             )
         )
+
+    def test_add_new_params(self):
+        url = "https://example.com/"
+        params = {'key1': 'value1'}
+        new_url = add_url_params(url, params)
+        self.assertEqual(new_url, "https://example.com/?key1=value1")
+
+    def test_add_new_params_update_existing_param(self):
+        url = "https://example.com/?key1=oldvalue1"
+        params = {'key1': 'newvalue1'}
+        new_url = add_url_params(url, params)
+        self.assertEqual(new_url, "https://example.com/?key1=newvalue1")
+
+    def test_add_new_params_add_multiple_params(self):
+        url = "https://example.com/"
+        params = {'key1': 'value1', 'key2': 'value2'}
+        new_url = add_url_params(url, params)
+        # Order of query parameters may vary
+        self.assertIn(
+            new_url, ["https://example.com/?key1=value1&key2=value2", "https://example.com/?key2=value2&key1=value1"]
+        )
+
+    def test_add_new_params_update_and_add_params(self):
+        url = "https://example.com/?key1=oldvalue1"
+        params = {'key1': 'newvalue1', 'key2': 'value2'}
+        new_url = add_url_params(url, params)
+        # Order of query parameters may vary
+        self.assertIn(
+            new_url,
+            ["https://example.com/?key1=newvalue1&key2=value2", "https://example.com/?key2=value2&key1=newvalue1"]
+        )
+
+    def test_add_new_params_no_params_given(self):
+        url = "https://example.com/"
+        params = {}
+        new_url = add_url_params(url, params)
+        self.assertEqual(new_url, "https://example.com/")
+
+    def test_add_new_params_preserve_other_url_parts(self):
+        url = "https://example.com:8080/path/?key1=oldvalue1#fragment"
+        params = {'key1': 'newvalue1', 'key2': 'value2'}
+        new_url = add_url_params(url, params)
+        self.assertEqual(new_url, "https://example.com:8080/path/?key1=newvalue1&key2=value2#fragment")
