@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 from typing import List
 
 from django.contrib.auth.models import User
@@ -324,3 +324,27 @@ def degrees_minutes_seconds_to_decimal_degrees(degrees, minutes, seconds, direct
 
 def extract_path_from_url(url) -> str:
     return urlparse(url).path
+
+
+def add_url_params(url, params):
+    url_parts = urlparse(url)
+    query_params = parse_qs(url_parts.query)
+
+    # Update existing params with new ones
+    query_params.update(params)
+
+    # Rebuild URL
+    new_query = urlencode(query_params, doseq=True)
+
+    new_url = urlunparse(
+        (
+            url_parts.scheme,
+            url_parts.netloc,
+            url_parts.path,
+            url_parts.params,
+            new_query,
+            url_parts.fragment
+        )
+    )
+
+    return new_url

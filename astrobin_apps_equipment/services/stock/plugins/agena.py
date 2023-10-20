@@ -5,6 +5,7 @@ from xml.etree import ElementTree
 
 import requests
 
+from astrobin.utils import add_url_params
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services.stock.plugins import StockImporterPluginInterface
 from astrobin_apps_equipment.types import StockStatus
@@ -16,6 +17,7 @@ log = logging.getLogger(__name__)
 class AgenaStockImporterPlugin(StockImporterPluginInterface):
     retailer_name = 'Agena Astro'
     url = os.environ.get('STOCK_URL_AGENA')
+    rfsn = os.environ.get('RFSN_AGENA')
 
     def parse_astrobin_id(self, astrobin_id: str) -> Tuple[int, EquipmentItemKlass]:
         klass_map = {
@@ -72,6 +74,9 @@ class AgenaStockImporterPlugin(StockImporterPluginInterface):
                 stock_status_str = product.find('stock_status').text
                 stock_status = self.parse_stock_status(stock_status_str)
                 stock_amount = int(product.find('stock_qty').text)
+
+                add_url_params(url, {'rfsn': self.rfsn})
+
                 stock_obj = StockInterface(pk, klass, name, sku, url, stock_status, stock_amount)
                 stock_list.append(stock_obj)
             except Exception as e:

@@ -5,6 +5,7 @@ from typing import Dict
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Model
 
+from astrobin.utils import add_url_params
 from astrobin_apps_equipment.models import (
     Accessory, Camera, EquipmentItemListing, EquipmentRetailer, Filter, Mount,
     Software, Telescope,
@@ -51,6 +52,14 @@ class StockImporterService:
             except equipment_item_model_class.DoesNotExist:
                 log.error(f"Unable to find equipment item of class {stock_item.klass} and pk {stock_item.pk}")
                 continue
+
+            url = stock_item.url
+
+            add_url_params(url, {
+                'utm_source': 'astrobin',
+                'utm_medium': 'link',
+                'utm_campaign': 'webshop-integration'
+            })
 
             try:
                 listing = EquipmentItemListing.objects.get(
