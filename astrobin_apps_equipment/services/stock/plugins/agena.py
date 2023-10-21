@@ -75,7 +75,7 @@ class AgenaStockImporterPlugin(StockImporterPluginInterface):
                 stock_status = self.parse_stock_status(stock_status_str)
                 stock_amount = int(product.find('stock_qty').text)
 
-                add_url_params(url, {'rfsn': self.rfsn})
+                url = add_url_params(url, {'rfsn': self.rfsn})
 
                 stock_obj = StockInterface(pk, klass, name, sku, url, stock_status, stock_amount)
                 stock_list.append(stock_obj)
