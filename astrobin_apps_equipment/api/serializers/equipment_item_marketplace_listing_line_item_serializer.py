@@ -12,4 +12,3 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
     class Meta:
         model = EquipmentItemMarketplaceListingLineItem
         fields = '__all__'
-        depth = 1

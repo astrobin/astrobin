@@ -12,6 +12,7 @@ from astrobin_apps_equipment.types.marketplace_listing_condition import Marketpl
 EQUIPMENT_ITEM_MARKETPLACE_LISTING_CONDITION_CHOICES = (
     (MarketplaceListingCondition.UNOPENED.value, gettext("Unopened")),
     (MarketplaceListingCondition.NEW.value, gettext("New")),
+    (MarketplaceListingCondition.USED.value, gettext("Used")),
     (MarketplaceListingCondition.DAMAGED_OR_DEFECTIVE.value, gettext("Damaged or defective")),
     (MarketplaceListingCondition.OTHER.value, gettext("Other")),
 )
