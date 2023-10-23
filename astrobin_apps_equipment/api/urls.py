@@ -58,13 +58,13 @@ router.register(r'equipment-item-group', EquipmentItemGroupViewSet, basename='eq
 router.register(r'equipment-preset', EquipmentPresetViewSet, basename='equipment-preset')
 
 router.register(
-    r'marketplace/listing-line-item-image', EquipmentItemMarketplaceListingLineItemImageViewSet,
-    basename='marketplace-listing-line-item-image'
+    r'marketplace/image', EquipmentItemMarketplaceListingLineItemImageViewSet,
+    basename='marketplace-image'
 )
 
 router.register(
-    r'marketplace/listing-line-item', EquipmentItemMarketplaceListingLineItemViewSet,
-    basename='marketplace-listing-line-item'
+    r'marketplace/line-item', EquipmentItemMarketplaceListingLineItemViewSet,
+    basename='marketplace-line-item'
 )
 
 router.register(r'marketplace/listing', EquipmentItemMarketplaceListingViewSet, basename='marketplace-listing')
