@@ -10,8 +10,8 @@ from astrobin_apps_equipment.api.views.equipment_contributors_view_set import Eq
 from astrobin_apps_equipment.api.views.equipment_item_group_view_set import EquipmentItemGroupViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_feedback_view_set import \
     EquipmentItemMarketplaceFeedbackViewSet
-from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_item_image_upload_view_set import \
-    EquipmentItemMarketplaceListingLineItemImageUploadViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_item_image_view_set import \
+    EquipmentItemMarketplaceListingLineItemImageViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_item_view_set import \
     EquipmentItemMarketplaceListingLineItemViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_view_set import \
@@ -58,8 +58,8 @@ router.register(r'equipment-item-group', EquipmentItemGroupViewSet, basename='eq
 router.register(r'equipment-preset', EquipmentPresetViewSet, basename='equipment-preset')
 
 router.register(
-    r'marketplace/listing/image-upload', EquipmentItemMarketplaceListingLineItemImageUploadViewSet,
-    basename='marketplace-listing-image-upload'
+    r'marketplace/listing-line-item-image', EquipmentItemMarketplaceListingLineItemImageViewSet,
+    basename='marketplace-listing-line-item-image'
 )
 
 router.register(

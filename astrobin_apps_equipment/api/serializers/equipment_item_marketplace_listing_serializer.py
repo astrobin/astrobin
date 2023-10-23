@@ -12,3 +12,4 @@ class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = EquipmentItemMarketplaceListing
         fields = '__all__'
+        read_only_fields = ['id', 'user', 'created', 'updated']

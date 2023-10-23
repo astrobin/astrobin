@@ -5,14 +5,13 @@ from astrobin_apps_equipment.models.equipment_item_marketplace_listing_line_item
 from common.mixins import RequestUserRestSerializerMixin
 
 
-class EquipmentItemMarketplaceListingLineItemImageUploadSerializer(
+class EquipmentItemMarketplaceListingLineItemImageSerializer(
     RequestUserRestSerializerMixin, serializers.ModelSerializer
 ):
-    def create(self, validated_data):
-        user = self.context['request'].user
-        validated_data['user'] = user
-        return super().create(validated_data)
+    def validate_user(self, value):
+        return self.context['request'].user
 
     class Meta:
         model = EquipmentItemMarketplaceListingLineItemImage
         fields = '__all__'
+        read_only_fields = ['id', 'user', 'created', 'updated']

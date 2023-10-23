@@ -11,7 +11,6 @@ class EquipmentItemMarketplaceListingLineItemImage(SafeDeleteModel):
         related_name='equipment_marketplace_listing_images',
         on_delete=models.CASCADE,
         null=False,
-        blank=False,
     )
 
     line_item = models.ForeignKey(
