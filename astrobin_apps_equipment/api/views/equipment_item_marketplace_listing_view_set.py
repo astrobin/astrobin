@@ -19,7 +19,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     permission_classes = [IsObjectUserOrReadOnly]
 
     def get_queryset(self) -> QuerySet:
-        return self.serializer_class.Meta.model.objects.filter(user=self.request.user)
+        return self.get_serializer_class().Meta.model.objects.filter(user=self.request.user)
 
     def get_serializer_class(self) -> Type[serializers.ModelSerializer]:
         if self.request.method in ['PUT', 'POST']:

@@ -5,7 +5,8 @@ from django.contrib import admin
 from safedelete import HARD_DELETE
 
 from astrobin_apps_equipment.models import (
-    AccessoryMigrationRecord, CameraMigrationRecord, EquipmentPreset, FilterMigrationRecord, MountMigrationRecord,
+    AccessoryMigrationRecord, CameraMigrationRecord, EquipmentItemMarketplaceListing, EquipmentPreset,
+    FilterMigrationRecord, MountMigrationRecord,
     Sensor, Camera, SoftwareMigrationRecord, Telescope,
     CameraEditProposal, Mount,
     Filter, Accessory,
@@ -191,6 +192,9 @@ class EquipmentItemMigrationRecordAdmin(admin.ModelAdmin):
     )
 
 
+class EquipmentItemMarketplaceListingAdmin(admin.ModelAdmin):
+    list_display = ('id',)
+
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)
@@ -217,3 +221,4 @@ admin.site.register(MountMigrationRecord, EquipmentItemMigrationRecordAdmin)
 admin.site.register(FilterMigrationRecord, EquipmentItemMigrationRecordAdmin)
 admin.site.register(AccessoryMigrationRecord, EquipmentItemMigrationRecordAdmin)
 admin.site.register(SoftwareMigrationRecord, EquipmentItemMigrationRecordAdmin)
+admin.site.register(EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingAdmin)

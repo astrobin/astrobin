@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from django.db.models import QuerySet
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.parsers import FormParser, MultiPartParser
@@ -21,5 +21,5 @@ class EquipmentItemMarketplaceListingLineItemImageViewSet(viewsets.ModelViewSet)
     serializer_class = EquipmentItemMarketplaceListingLineItemImageSerializer
     http_method_names = ['get', 'head', 'post']
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         return self.serializer_class.Meta.model.objects.all()
