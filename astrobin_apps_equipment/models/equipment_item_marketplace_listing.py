@@ -83,5 +83,11 @@ class EquipmentItemMarketplaceListing(SafeDeleteModel):
         choices=COUNTRIES
     )
 
+    city = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         return f'Marketplace listing by {self.user}'
