@@ -23,6 +23,6 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self) -> Type[serializers.ModelSerializer]:
         if self.request.method in ['PUT', 'POST']:
-            return EquipmentItemMarketplaceListingLineItemReadSerializer
+            return EquipmentItemMarketplaceListingLineItemSerializer
 
-        return EquipmentItemMarketplaceListingLineItemSerializer
+        return EquipmentItemMarketplaceListingLineItemReadSerializer
