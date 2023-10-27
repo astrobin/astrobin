@@ -643,7 +643,7 @@ class ImageService:
         return alias in (
             'regular', 'regular_inverted', 'regular_sharpened',
             'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
-            'hd', 'hd_anonymized', 'hd_inverted', 'hd_sharpened',
+            'hd', 'hd_anonymized', 'hd_anonymized_crop', 'hd_inverted', 'hd_sharpened',
             'qhd', 'qhd_anonymized', 'qhd_inverted', 'qhd_sharpened',
             'real', 'real_inverted'
         )
