@@ -232,3 +232,36 @@ def tiff_force_8bit(image, **kwargs):
         image = Image.fromarray(normalized.astype(np.uint8))
 
     return image
+
+
+def real_crop(image, real_crop_zoom=1, real_crop_size=None, **kwargs):
+    if not real_crop_size:
+        return image
+
+    # Determine the target dimensions based on real_crop_size
+    if real_crop_size[0] == 0:
+        width = int(image.width * real_crop_size[1] / image.height)
+        height = real_crop_size[1]
+    elif real_crop_size[1] == 0:
+        width = real_crop_size[0]
+        height = int(image.height * real_crop_size[0] / image.width)
+    else:
+        width, height = real_crop_size
+
+    target_width = width * real_crop_zoom
+    target_height = height * real_crop_zoom
+
+    # Resize the image if its dimensions are smaller than the target dimensions
+    if image.width < target_width or image.height < target_height:
+        return image
+
+    # Calculate the box to crop from the potentially resized image
+    left = (image.width - target_width) / 2
+    top = (image.height - target_height) / 2
+    right = left + target_width
+    bottom = top + target_height
+
+    cropped_image = image.crop((left, top, right, bottom))
+
+    # Resize the cropped image to the desired size
+    return cropped_image.resize((width, height))
