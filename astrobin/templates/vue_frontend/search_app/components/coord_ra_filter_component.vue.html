@@ -61,7 +61,7 @@
         return 0;
     }
 
-    function updateInputs(min, max) {
+    function raUpdateInputs(min, max) {
         $("#coord-ra-min-value").val(min);
         $("#coord-ra-max-value").val(max);
 
@@ -88,23 +88,23 @@
                 behaviour: 'tap-drag'
             });
 
-            updateInputs(slider.get()[0], slider.get()[1]);
+            raUpdateInputs(slider.get()[0], slider.get()[1]);
 
             slider.on("slide", function () {
-                updateInputs(slider.get()[0], slider.get()[1]);
+                raUpdateInputs(slider.get()[0], slider.get()[1]);
             });
 
             $("#coord-ra-min-fmt-value").on("change", function () {
                 const min = raUnfmt($("#coord-ra-min-fmt-value").val());
                 const max = raUnfmt($("#coord-ra-max-fmt-value").val());
-                updateInputs(min, max);
+                raUpdateInputs(min, max);
                 slider.set([min, max], false);
             });
 
             $("#coord-ra-max-fmt-value").on("change", function () {
                 const min = raUnfmt($("#coord-ra-min-fmt-value").val());
                 const max = raUnfmt($("#coord-ra-max-fmt-value").val());
-                updateInputs(min, max);
+                raUpdateInputs(min, max);
                 slider.set([min, max], false);
             });
         }

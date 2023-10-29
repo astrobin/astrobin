@@ -56,7 +56,7 @@
         return sign * (degrees + (sign * (minutes / 60)));
     }
 
-    function updateInputs(min, max) {
+    function decUpdateInputs(min, max) {
         $("#coord-dec-min-value").val(min);
         $("#coord-dec-max-value").val(max);
 
@@ -83,23 +83,23 @@
                 behaviour: 'tap-drag'
             });
             
-            updateInputs(slider.get()[0], slider.get()[1]);
+            decUpdateInputs(slider.get()[0], slider.get()[1]);
 
             slider.on("slide", function () {
-                updateInputs(slider.get()[0], slider.get()[1]);
+                decUpdateInputs(slider.get()[0], slider.get()[1]);
             });
 
             $("#coord-dec-min-fmt-value").on("change", function () {
                 const min = decUnfmt($("#coord-dec-min-fmt-value").val());
                 const max = decUnfmt($("#coord-dec-max-fmt-value").val());
-                updateInputs(min, max);
+                decUpdateInputs(min, max);
                 slider.set([min, max], false);
             });
 
             $("#coord-dec-max-fmt-value").on("change", function () {
                 const min = decUnfmt($("#coord-dec-min-fmt-value").val());
                 const max = decUnfmt($("#coord-dec-max-fmt-value").val());
-                updateInputs(min, max);
+                decUpdateInputs(min, max);
                 slider.set([min, max], false);
             });
         }
