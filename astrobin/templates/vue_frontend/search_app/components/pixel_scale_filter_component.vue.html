@@ -33,7 +33,7 @@
                 behaviour: 'tap-drag'
             });
 
-            slider.on("change", function () {
+            slider.on("slide", function () {
                 $("#pixel-scale-min-value").val(slider.get()[0]);
                 $("#pixel-scale-max-value").val(slider.get()[1]);
             });

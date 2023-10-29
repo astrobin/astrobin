@@ -45,7 +45,7 @@
                 behaviour: 'tap-drag'
             });
 
-            slider.on("change", function () {
+            slider.on("slide", function () {
                 $("#integration-time-min-value").val(slider.get()[0]);
                 $("#integration-time-max-value").val(slider.get()[1]);
             });

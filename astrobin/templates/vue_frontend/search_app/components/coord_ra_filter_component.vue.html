@@ -1,9 +1,22 @@
+{% load i18n %}
 {% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="coord-ra-filter-template">
     {% if valid_usersubscription|can_access_full_search %}
-        <div class="form-group" :class="{highlighted: highlighted}">
+        <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
             <div id="coord-ra-slider" class="slider-filter tooltip-fixed"></div>
+
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="coord-ra-min-fmt-value" name="coord_ra_min_fmt" type="text" />
+                    <label for="coord-ra-min-fmt-value">{% trans 'Min' %}</label>
+                </div>
+
+                <div class="max">
+                    <label for="coord-ra-max-fmt-value">{% trans 'Max' %}</label>
+                    <input class="slider-input" id="coord-ra-max-fmt-value" name="coord_ra_max_fmt" type="text" />
+                </div>
+            </div>
 
             <input id="coord-ra-min-value" name="coord_ra_min" type="hidden" :value="coordRaMin" />
             <input id="coord-ra-max-value" name="coord_ra_max" type="hidden" :value="coordRaMax" />
@@ -14,6 +27,48 @@
 </script>
 
 <script>
+    function raFmt(value) {
+        value = value / 15;
+
+        let hours = Math.floor(value);
+
+        value = (value - hours) * 60;
+
+        let minutes = Math.round(value);
+
+        if (minutes >= 60) {
+            hours = hours + 1;
+            minutes = minutes - 60;
+        }
+
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+
+        return hours + "h" + minutes + "m";
+    }
+
+    function raUnfmt(value) {
+        const match = value.match(/(\d+)h(\d+)m/);
+
+        if (match) {
+            const hours = parseInt(match[1], 10);
+            const minutes = parseInt(match[2], 10);
+            const decimal = hours + minutes / 60;
+            return decimal * 15;
+        }
+
+        return 0;
+    }
+
+    function updateInputs(min, max) {
+        $("#coord-ra-min-value").val(min);
+        $("#coord-ra-max-value").val(max);
+
+        $("#coord-ra-min-fmt-value").val(raFmt(min));
+        $("#coord-ra-max-fmt-value").val(raFmt(max));
+    }
+
     Vue.component("coord-ra-filter", {
         template: "#coord-ra-filter-template",
         props: [
@@ -24,35 +79,33 @@
             FilterComponentMixin
         ],
         mounted() {
-            function raFmt(value) {
-                value = value / 15;
-                var hours = Math.floor(value);
-                value = (value - hours) * 60;
-                var minutes = Math.round(value);
-                if (minutes >= 60) {hours = hours + 1; minutes = minutes - 60;}
-                if (minutes < 10) minutes = "0" + minutes;
-                return hours + "h" + minutes + "m";
-            }
-            var slider = noUiSlider.create($('#coord-ra-slider')[0], {
+            const slider = noUiSlider.create($('#coord-ra-slider')[0], {
                 start: [this.coordRaMin, this.coordRaMax],
                 range: {min: 0, max: 360},
-                step: 15.0 / 12.0, // Step in degrees. Equal to 1h/12 = 5m.
+                step: 15.0 / 60.0, // Step in degrees. Equal to 1h/60 = 1m.
                 tooltips: [{to: raFmt}, {to: raFmt}],
                 connect: true,
                 behaviour: 'tap-drag'
             });
 
-            slider.on("change", function () {
-                $("#coord-ra-min-value").val(slider.get()[0]);
-                $("#coord-ra-max-value").val(slider.get()[1]);
+            updateInputs(slider.get()[0], slider.get()[1]);
+
+            slider.on("slide", function () {
+                updateInputs(slider.get()[0], slider.get()[1]);
             });
 
-            $("#coord-ra-min-value").on("change", function () {
-                slider.set([$("#icoord-ra-min-value").val(), $("#coord-ra-max-value").val()]);
+            $("#coord-ra-min-fmt-value").on("change", function () {
+                const min = raUnfmt($("#coord-ra-min-fmt-value").val());
+                const max = raUnfmt($("#coord-ra-max-fmt-value").val());
+                updateInputs(min, max);
+                slider.set([min, max], false);
             });
 
-            $("#integration-time-max-value").on("change", function () {
-                slider.set([$("#coord-ra-min-value").val(), $("#coord-ra-max-value").val()]);
+            $("#coord-ra-max-fmt-value").on("change", function () {
+                const min = raUnfmt($("#coord-ra-min-fmt-value").val());
+                const max = raUnfmt($("#coord-ra-max-fmt-value").val());
+                updateInputs(min, max);
+                slider.set([min, max], false);
             });
         }
     });

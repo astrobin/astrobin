@@ -64,7 +64,7 @@
                 }
             });
 
-            slider.on("change", function () {
+            slider.on("slide", function () {
                 $("#camera-pixel-size-min-value").val(slider.get()[0]);
                 $("#camera-pixel-size-max-value").val(slider.get()[1]);
             });
@@ -73,7 +73,7 @@
                 setValues(slider);
             });
 
-            $("#mount-pixel-size-max-value").on("change", function () {
+            $("#camera-pixel-size-max-value").on("change", function () {
                 setValues(slider);
             });
         }
