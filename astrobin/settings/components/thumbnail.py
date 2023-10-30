@@ -22,6 +22,7 @@ THUMBNAIL_PROCESSORS = (
     'astrobin.thumbnail_processors.invert',
     'astrobin.thumbnail_processors.watermark',
     'astrobin.thumbnail_processors.histogram',
+    'astrobin.thumbnail_processors.real_crop',
 )
 
 THUMBNAIL_ALIASES = {
@@ -56,6 +57,13 @@ THUMBNAIL_ALIASES = {
             'crop': 'smart',
             'watermark': False,
             'keep_icc_profile': True,
+        },
+        'hd_anonymized_crop': {
+            'size': (16536, 0),
+            'watermark': False,
+            'keep_icc_profile': True,
+            'real_crop_zoom': 1,
+            'real_crop_size': (1824, 0),
         },
         'hd_inverted': {
             'size': (1824, 0),

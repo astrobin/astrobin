@@ -1,10 +1,23 @@
+{% load i18n %}
 {% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="coord-dec-filter-template">
     {% if valid_usersubscription|can_access_full_search %}
-        <div class="form-group" :class="{highlighted: highlighted}">
+        <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
             <div id="coord-dec-slider" class="slider-filter tooltip-fixed"></div>
 
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="coord-dec-min-fmt-value" name="coord_dec_min_fmt" type="text" />
+                    <label for="coord-dec-min-fmt-value">{% trans 'Min' %}</label>
+                </div>
+
+                <div class="max">
+                    <label for="coord-dec-max-fmt-value">{% trans 'Max' %}</label>
+                    <input class="slider-input" id="coord-dec-max-fmt-value" name="coord_dec_max_fmt" type="text" />
+                </div>
+            </div>
+            
             <input id="coord-dec-min-value" name="coord_dec_min" type="hidden" :value="coordDecMin" />
             <input id="coord-dec-max-value" name="coord_dec_max" type="hidden" :value="coordDecMax" />
         </div>
@@ -14,6 +27,43 @@
 </script>
 
 <script>
+    function decFmt(value) {
+        let degrees = Math.floor(value);
+
+        value = (value - degrees) * 60;
+
+        let minutes = Math.round(value);
+
+        if (minutes >= 60) {
+            degrees += 1;
+            minutes = minutes - 60;
+        }
+
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+
+        return degrees + "°" + minutes + "'";
+    }
+
+    function decUnfmt(str) {
+        const match = str.match(/(-?)(\d+)°(\d+)'/);
+        if (!match) return 0;
+        const sign = match[1] === '-' ? -1 : 1;
+        const degrees = parseInt(match[2], 10);
+        const minutes = parseInt(match[3], 10);
+
+        return sign * (degrees + (sign * (minutes / 60)));
+    }
+
+    function decUpdateInputs(min, max) {
+        $("#coord-dec-min-value").val(min);
+        $("#coord-dec-max-value").val(max);
+
+        $("#coord-dec-min-fmt-value").val(decFmt(min));
+        $("#coord-dec-max-fmt-value").val(decFmt(max));
+    }
+
     Vue.component("coord-dec-filter", {
         template: "#coord-dec-filter-template",
         props: [
@@ -24,34 +74,33 @@
             FilterComponentMixin
         ],
         mounted() {
-            function decFmt(value) {
-                var degrees = Math.floor(value);
-                value = (value - degrees) * 60;
-                var minutes = Math.round(value);
-                if (minutes >= 60) {hours = hours + 1; minutes = minutes - 60;}
-                if (minutes < 10) minutes = "0" + minutes;
-                return degrees + "°" + minutes + "'";
-            }
-            var slider = noUiSlider.create($('#coord-dec-slider')[0], {
+            const slider = noUiSlider.create($('#coord-dec-slider')[0], {
                 start: [this.coordDecMin, this.coordDecMax],
                 range: {min: -90, max: 90},
-                step: .5,
+                step: .01,
                 tooltips: [{to: decFmt}, {to: decFmt}],
                 connect: true,
                 behaviour: 'tap-drag'
             });
+            
+            decUpdateInputs(slider.get()[0], slider.get()[1]);
 
-            slider.on("change", function () {
-                $("#coord-dec-min-value").val(slider.get()[0]);
-                $("#coord-dec-max-value").val(slider.get()[1]);
+            slider.on("slide", function () {
+                decUpdateInputs(slider.get()[0], slider.get()[1]);
             });
 
-            $("#coord-dec-min-value").on("change", function () {
-                slider.set([$("#icoord-dec-min-value").val(), $("#coord-dec-max-value").val()]);
+            $("#coord-dec-min-fmt-value").on("change", function () {
+                const min = decUnfmt($("#coord-dec-min-fmt-value").val());
+                const max = decUnfmt($("#coord-dec-max-fmt-value").val());
+                decUpdateInputs(min, max);
+                slider.set([min, max], false);
             });
 
-            $("#integration-time-max-value").on("change", function () {
-                slider.set([$("#coord-dec-min-value").val(), $("#coord-dec-max-value").val()]);
+            $("#coord-dec-max-fmt-value").on("change", function () {
+                const min = decUnfmt($("#coord-dec-min-fmt-value").val());
+                const max = decUnfmt($("#coord-dec-max-fmt-value").val());
+                decUpdateInputs(min, max);
+                slider.set([min, max], false);
             });
         }
     });

@@ -1723,6 +1723,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 'hd',
                 'hd_sharpened',
                 'hd_anonymized',
+                'hd_anonymized_crop',
                 'qhd',
                 'qhd_sharpened',
                 'qhd_anonymized',
