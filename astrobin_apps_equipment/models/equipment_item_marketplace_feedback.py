@@ -4,7 +4,6 @@ from django.db import models
 from django.utils.translation import gettext
 from safedelete.models import SafeDeleteModel
 
-from astrobin_apps_equipment.models.equipment_item_marketplace_listing import EquipmentItemMarketplaceListing
 from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
 
 EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_CHOICES = (

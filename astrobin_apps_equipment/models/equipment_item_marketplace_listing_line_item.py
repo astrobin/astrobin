@@ -4,10 +4,10 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import gettext
-from safedelete.models import SafeDeleteModel
 
 from astrobin.fields import CURRENCY_CHOICES
 from astrobin_apps_equipment.types.marketplace_listing_condition import MarketplaceListingCondition
+from common.models.hashed_model import HashedSafeDeleteModel
 
 EQUIPMENT_ITEM_MARKETPLACE_LISTING_CONDITION_CHOICES = (
     (MarketplaceListingCondition.UNOPENED.value, gettext("Unopened")),
@@ -18,7 +18,7 @@ EQUIPMENT_ITEM_MARKETPLACE_LISTING_CONDITION_CHOICES = (
 )
 
 
-class EquipmentItemMarketplaceListingLineItem(SafeDeleteModel):
+class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
     user = models.ForeignKey(
         User,
         related_name='created_equipment_item_marketplace_listing_line_items',
@@ -106,6 +106,13 @@ class EquipmentItemMarketplaceListingLineItem(SafeDeleteModel):
     item_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     item_object_id = models.PositiveIntegerField()
     item_content_object = GenericForeignKey('item_content_type', 'item_object_id')
+
+    def delete(self, *args, **kwargs):
+        from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItemImage
+        related_children = EquipmentItemMarketplaceListingLineItemImage.objects.filter(line_item=self)
+        for child in related_children:
+            child.delete()
+        super(EquipmentItemMarketplaceListingLineItem, self).delete(*args, **kwargs)
 
     def __str__(self):
         return f'Marketplace line item for {self.listing} by {self.user}'

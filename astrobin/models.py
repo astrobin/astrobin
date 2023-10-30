@@ -23,6 +23,7 @@ from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
+from astrobin.utils import generate_unique_hash
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
@@ -87,17 +88,6 @@ class HasSolutionMixin(object):
         result = self.solutions.first()
         cache.set(cache_key, result, 1)
         return result
-
-
-def image_hash():
-    def generate_hash():
-        return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
-
-    hash = generate_hash()
-    while hash.isdigit() or Image.all_objects.filter(hash=hash).exists():
-        hash = generate_hash()
-
-    return hash
 
 
 LICENSE_CHOICES = (
@@ -1021,7 +1011,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     hash = models.CharField(
         max_length=6,
-        default=image_hash,
+        default=lambda: generate_unique_hash(6, Image.all_objects),
         null=True,
         unique=True
     )

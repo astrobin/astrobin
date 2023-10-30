@@ -8,6 +8,7 @@ from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_image_serializer import \
     EquipmentItemMarketplaceListingLineItemImageSerializer
+from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItemImage
 from common.permissions import IsObjectUserOrReadOnly
 
 
@@ -20,6 +21,8 @@ class EquipmentItemMarketplaceListingLineItemImageViewSet(viewsets.ModelViewSet)
     ]
     serializer_class = EquipmentItemMarketplaceListingLineItemImageSerializer
     http_method_names = ['get', 'head', 'post']
+    filterset_fields = ['hash']
+    queryset = EquipmentItemMarketplaceListingLineItemImage.objects.all()
 
     def get_queryset(self) -> QuerySet:
         return self.serializer_class.Meta.model.objects.all()

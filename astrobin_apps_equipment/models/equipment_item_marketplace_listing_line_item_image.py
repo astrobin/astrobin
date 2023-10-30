@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
-from safedelete.models import SafeDeleteModel
 
+from common.models.hashed_model import HashedSafeDeleteModel
 from common.upload_paths import marketplace_listing_upload_path
 
 
-class EquipmentItemMarketplaceListingLineItemImage(SafeDeleteModel):
+class EquipmentItemMarketplaceListingLineItemImage(HashedSafeDeleteModel):
     user = models.ForeignKey(
         User,
         related_name='equipment_marketplace_listing_images',

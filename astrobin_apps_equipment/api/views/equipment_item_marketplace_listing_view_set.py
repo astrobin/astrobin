@@ -1,6 +1,6 @@
 from typing import Type
 
-from django.db.models import QuerySet
+from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
@@ -10,6 +10,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
     EquipmentItemMarketplaceListingReadSerializer
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_serializer import \
     EquipmentItemMarketplaceListingSerializer
+from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing
 from common.permissions import IsObjectUserOrReadOnly
 
 
@@ -17,9 +18,9 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
     permission_classes = [IsObjectUserOrReadOnly]
-
-    def get_queryset(self) -> QuerySet:
-        return self.get_serializer_class().Meta.model.objects.filter(user=self.request.user)
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('hash', 'user')
+    queryset = EquipmentItemMarketplaceListing.objects.all()
 
     def get_serializer_class(self) -> Type[serializers.ModelSerializer]:
         if self.request.method in ['PUT', 'POST']:

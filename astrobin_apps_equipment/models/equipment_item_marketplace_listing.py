@@ -2,11 +2,10 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext
-from safedelete.models import SafeDeleteModel
 
 from astrobin.fields import COUNTRIES
 from astrobin_apps_equipment.types.marketplace_shipping_method import MarketplaceShippingMethod
-
+from common.models.hashed_model import HashedSafeDeleteModel
 
 EQUIPMENT_ITEM_MARKETPLACE_SHIPPING_METHOD_CHOICES = (
     (MarketplaceShippingMethod.STANDARD_MAIL.value, gettext("Standard mail")),
@@ -16,7 +15,7 @@ EQUIPMENT_ITEM_MARKETPLACE_SHIPPING_METHOD_CHOICES = (
 )
 
 
-class EquipmentItemMarketplaceListing(SafeDeleteModel):
+class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
     user = models.ForeignKey(
         User,
         related_name='created_equipment_item_marketplace_listings',
@@ -88,6 +87,13 @@ class EquipmentItemMarketplaceListing(SafeDeleteModel):
         null=True,
         blank=True,
     )
+
+    def delete(self, *args, **kwargs):
+        from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
+        related_children = EquipmentItemMarketplaceListingLineItem.objects.filter(listing=self)
+        for child in related_children:
+            child.delete()
+        super(EquipmentItemMarketplaceListing, self).delete(*args, **kwargs)
 
     def __str__(self):
         return f'Marketplace listing by {self.user}'

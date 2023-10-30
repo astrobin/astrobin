@@ -12,4 +12,4 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
     class Meta:
         model = EquipmentItemMarketplaceListingLineItem
         fields = '__all__'
-        read_only_fields = ['id', 'user', 'created', 'updated']
+        read_only_fields = ['id', 'hash', 'user', 'created', 'updated']

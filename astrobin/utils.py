@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
 import logging
+import random
+import string
 from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 from typing import List
 
@@ -348,3 +350,14 @@ def add_url_params(url, params):
     )
 
     return new_url
+
+
+def generate_unique_hash(chars: int, manager) -> str:
+    def generate_hash():
+        return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(chars))
+
+    value = generate_hash()
+    while value.isdigit() or manager.filter(hash=value).exists():
+        value = generate_hash()
+
+    return value
