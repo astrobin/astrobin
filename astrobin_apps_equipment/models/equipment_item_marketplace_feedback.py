@@ -20,6 +20,7 @@ EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_CATEGORY_CHOICES = (
     (MarketplaceFeedbackCategory.PACKAGING.value, gettext("Packaging quality")),
 )
 
+
 class EquipmentItemMarketplaceFeedback(SafeDeleteModel):
     user = models.ForeignKey(
         User,
