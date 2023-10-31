@@ -8,33 +8,27 @@ from django.urls import reverse
 
 from astrobin.templatetags.tags import thumbnail_scale
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
-from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedSettings, PlateSolvingAdvancedTask
 
 log = logging.getLogger(__name__)
 
 
 class Solver(AbstractPlateSolvingBackend):
     def start(self, image_url, **kwargs):
-        advanced_settings = kwargs.pop('advanced_settings', None)  # type: PlateSolvingAdvancedSettings
-        image_width = kwargs.pop('image_width')  # type: int
-        image_height = kwargs.pop('image_height')  # type: int
-        small_size_ratio: float = thumbnail_scale(image_width, 'hd', 'regular')
-        pixscale = kwargs.pop('pixscale')  # type: float
-        hd_width = min(image_width, settings.THUMBNAIL_ALIASES['']['hd']['size'][0])  # type: int
-        hd_ratio = max(1, image_width / float(hd_width))  # type: float
-        hd_height = int(image_height / hd_ratio)  # type: int
-        settings_hd_width = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
-
-        if image_width > settings_hd_width and advanced_settings and not advanced_settings.sample_raw_frame_file:
-            ratio = image_width / float(settings_hd_width)
-            pixscale = float(pixscale) * ratio
+        advanced_settings: PlateSolvingAdvancedSettings = kwargs.pop('advanced_settings', None)
+        image_width: int = kwargs.pop('image_width')
+        image_height: int = kwargs.pop('image_height')
+        small_size_ratio: float = thumbnail_scale(image_width, 'regular')
+        large_size_ratio: float = thumbnail_scale(image_width, 'hd')
+        pixscale: float = kwargs.pop('pixscale')
 
         task_params = [
             'imageURL=%s' % image_url,
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
-            'largeSize=%d' % max(hd_width, hd_height),
+            'largeSize=%d' % max(image_width, image_height),
             'smallSizeRatio=%f' % small_size_ratio,
+            'largeSizeRatio=%f' % large_size_ratio,
             'imageResolution=%f' % pixscale,
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
             'liveLogURL=%s' % settings.BASE_URL + reverse('astrobin_apps_platesolving.pixinsight_live_log_webhook')

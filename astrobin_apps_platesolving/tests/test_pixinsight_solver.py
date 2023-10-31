@@ -67,9 +67,10 @@ class PixInsightSolverTest(TestCase):
 
         task = PlateSolvingAdvancedTask.objects.get(pk=1)
 
-        self.assertTrue("largeSize%3D1824" in task.task_params)
-        self.assertTrue("smallSizeRatio%3D0.339" in task.task_params)
-        self.assertTrue("imageResolution%3D2.192" in task.task_params)
+        self.assertTrue("largeSize%3D4000" in task.task_params)
+        self.assertTrue("smallSizeRatio%3D0.155" in task.task_params)
+        self.assertTrue("largeSizeRatio%3D0.456" in task.task_params)
+        self.assertTrue("imageResolution%3D1" in task.task_params)
 
     def test_task_params_when_image_larger_than_hd_in_both_dimensions(self):
         solver = Solver()
@@ -89,6 +90,7 @@ class PixInsightSolverTest(TestCase):
 
         task = PlateSolvingAdvancedTask.objects.get(pk=1)
 
-        self.assertTrue("largeSize%3D1824" in task.task_params)
-        self.assertTrue("smallSizeRatio%3D0.339" in task.task_params)
-        self.assertTrue("imageResolution%3D2.192" in task.task_params)
+        self.assertTrue("largeSize%3D4000" in task.task_params)
+        self.assertTrue("smallSizeRatio%3D0.155" in task.task_params)
+        self.assertTrue("largeSizeRatio%3D0.456" in task.task_params)
+        self.assertTrue("imageResolution%3D1" in task.task_params)
