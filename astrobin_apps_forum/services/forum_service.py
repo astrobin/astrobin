@@ -1,4 +1,5 @@
 import logging
+from datetime import timedelta
 from typing import Union
 
 from annoying.functions import get_object_or_None
@@ -6,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import QuerySet
 from django.urls import reverse
+from django.utils import timezone
 from pybb.models import Forum, ForumReadTracker, Post, Topic, TopicReadTracker
 
 from astrobin_apps_equipment.models import Accessory, Camera, EquipmentItem, Filter, Mount, Sensor, Software, Telescope
@@ -44,6 +46,10 @@ class ForumService:
 
     @staticmethod
     def notify_equipment_users(topic: Topic) -> None:
+        if topic.created < timezone.now() - timedelta(days=7):
+            log.debug(f"Topic {topic.id} is too old to send the 'new_topic_for_equipment_you_use' notification")
+            return
+
         item: EquipmentItem = ForumService(topic.forum).get_equipment_item()
 
         if not item:
