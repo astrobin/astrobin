@@ -16,6 +16,7 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
     parser_classes = [CamelCaseJSONParser]
     permission_classes = [IsObjectUserOrReadOnly]
     serializer_class = EquipmentItemMarketplaceFeedbackSerializer
+    filter_fields = ('user',)
 
     def get_queryset(self):
         return self.serializer_class.Meta.model.objects.filter(user=self.request.user)

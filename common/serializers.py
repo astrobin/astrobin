@@ -1,3 +1,5 @@
+from typing import Optional
+
 from avatar.templatetags.avatar_tags import avatar_url
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -37,9 +39,29 @@ class UserSerializer(serializers.ModelSerializer):
     large_avatar = LargeAvatarField(source='*')
     userprofile = PrimaryKeyRelatedField(read_only=True)
     display_name = serializers.SerializerMethodField(read_only=True)
+    marketplace_communication_feedback = serializers.SerializerMethodField(read_only=True)
+    marketplace_speed_feedback = serializers.SerializerMethodField(read_only=True)
+    marketplace_accuracy_feedback = serializers.SerializerMethodField(read_only=True)
+    marketplace_packaging_feedback = serializers.SerializerMethodField(read_only=True)
+    marketplace_feedback_count = serializers.SerializerMethodField(read_only=True)
 
     def get_display_name(self, user: User) -> str:
         return user.userprofile.get_display_name()
+
+    def get_marketplace_communication_feedback(self, user: User) -> Optional[int]:
+        return None
+
+    def get_marketplace_speed_feedback(self, user: User) -> Optional[int]:
+        return None
+
+    def get_marketplace_accuracy_feedback(self, user: User) -> Optional[int]:
+        return None
+
+    def get_marketplace_packaging_feedback(self, user: User) -> Optional[int]:
+        return None
+
+    def get_marketplace_feedback_count(self, user: User) -> Optional[int]:
+        return 0
 
     class Meta:
         model = User
