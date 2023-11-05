@@ -41,7 +41,7 @@ class ImageStats(JsonRequestResponseMixin, base.View):
         image_id = kwargs.pop('image_id')
         image = ImageService.get_object(image_id, Image.objects_including_wip)
 
-        if request.user != image.user:
+        if request.user != image.user and not request.user.is_superuser:
             return HttpResponseForbidden()
 
         data = {
