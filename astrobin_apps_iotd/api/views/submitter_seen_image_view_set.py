@@ -4,13 +4,13 @@
 from datetime import datetime, timedelta
 
 from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.http import HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
+from astrobin.models import Image
 from astrobin_apps_iotd.api.serializers.submitter_seen_image_serializer import SubmitterSeenImageSerializer
 from astrobin_apps_iotd.models import IotdSubmitterSeenImage
 
@@ -36,7 +36,13 @@ class SubmitterSeenImageViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         try:
+            image = Image.objects.get(id=request.data.get('image'))
+            user = request.user
+
+            if IotdSubmitterSeenImage.objects.filter(image=image, user=user).exists():
+                return HttpResponse('Already seen', status=200)
+
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
-        except ValidationError as e:
-            return HttpResponseForbidden(e.messages)
+        except Exception as e:
+            return HttpResponseForbidden(str(e))
 
