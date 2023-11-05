@@ -182,6 +182,13 @@ def astrobin_image(context, image, alias, **kwargs):
             if request.user == image.user or request.user.is_superuser:
                 badges.append('iotd-queue')
 
+        if (
+            image.user == request.user and
+            image.get_id() in request.path and
+            bool(set(badges) & {'iotd', 'top-pick', 'top-pick-nomination', 'iotd-queue'})
+        ):
+            badges.append('iotd-stats')
+
         if image.collaborators.exists():
             badges.append('collaboration')
 

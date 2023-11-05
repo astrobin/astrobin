@@ -1,14 +1,22 @@
 import logging
 
+from braces.views import JsonRequestResponseMixin
+from django.http import HttpResponseForbidden
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_control, cache_page
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import ListView
 
-from astrobin_apps_iotd.models import Iotd
+from astrobin.models import Image
+from astrobin_apps_images.services import ImageService
+from astrobin_apps_iotd.models import (
+    Iotd, IotdDismissedImage, IotdSubmission, IotdSubmitterSeenImage,
+    IotdVote,
+)
 from astrobin_apps_iotd.services import IotdService
 from common.services.caching_service import CachingService
+from django.views.generic import base
 
 log = logging.getLogger(__name__)
 
@@ -26,3 +34,21 @@ class IotdArchiveView(ListView):
 
     def get_queryset(self):
         return IotdService().get_iotds()
+
+
+class ImageStats(JsonRequestResponseMixin, base.View):
+    def get(self, request, *args, **kwargs):
+        image_id = kwargs.pop('image_id')
+        image = ImageService.get_object(image_id, Image.objects_including_wip)
+
+        if request.user != image.user:
+            return HttpResponseForbidden()
+
+        data = {
+            'submitter_views': IotdSubmitterSeenImage.objects.filter(image=image).count(),
+            'submissions': IotdSubmission.objects.filter(image=image).count(),
+            'votes': IotdVote.objects.filter(image=image).count(),
+            'dismissals': IotdDismissedImage.objects.filter(image=image).count(),
+        }
+
+        return self.render_json_response(data)
