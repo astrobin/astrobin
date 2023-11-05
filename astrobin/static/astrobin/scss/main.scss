@@ -4631,3 +4631,19 @@ form.edit-thumbnails {
 .no-wrap {
   white-space: nowrap;
 }
+
+#image-iotd-stats-modal {
+  table {
+    table-layout: auto;
+
+    td {
+      font-weight: bold;
+    }
+
+    th, td {
+      padding: 1rem 2rem;
+      vertical-align: middle;
+      border: 1px solid $grey-5;
+    }
+  }
+}

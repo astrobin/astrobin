@@ -10,7 +10,8 @@
 .iotd-badge,
 .top-pick-badge,
 .top-pick-nomination-badge,
-.iotd-queue-badge {
+.iotd-queue-badge,
+.iotd-stats-badge {
   text-align: center;
   margin: 0;
   padding: 0;
@@ -120,4 +121,24 @@
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $green 0 0 10px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $green 0 0 10px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $green 0 0 10px;
+}
+
+.iotd-stats-badge {
+  background: $white;
+  background: -webkit-gradient(linear, left top, left bottom, from($white), to(darken($white, 10%)));
+  background: -webkit-linear-gradient(top, $white, darken($white, 10%));
+  background: -moz-linear-gradient(top, $white, darken($white, 10%));
+  background: -ms-linear-gradient(top, $white, darken($white, 10%));
+  background: -o-linear-gradient(top, $white, darken($white, 10%));
+  background-image: -ms-linear-gradient(top, $white 0%, darken($white, 10%) 100%);
+  color: $black;
+
+
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $black 0 0 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $black 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $black 0 0 10px;
+}
+
+.astrobin-image-container .badges a {
+  display: block;
 }

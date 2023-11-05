@@ -59,6 +59,14 @@
                             </li>
                         {% endif %}
 
+                        {% if badge == 'iotd-stats' %}
+                            <li>
+                                <a href="#image-iotd-stats-modal" data-toggle="modal">
+                                    <i class="icon-info iotd-stats-badge badge"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+
                         {% if badge == 'wip' %}
                             <li>
                                 <i class="icon-lock wip-badge badge" rel="tooltip" data-placement="right"

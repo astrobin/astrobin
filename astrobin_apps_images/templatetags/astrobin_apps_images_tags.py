@@ -179,8 +179,16 @@ def astrobin_image(context, image, alias, **kwargs):
         elif iotd_service.is_top_pick_nomination(image):
             badges.append('top-pick-nomination')
         elif iotd_service.is_in_iotd_queue(image):
-            if request.user == image.user or request.user.is_superuser:
+            if 'user' in request and (request.user == image.user or request.user.is_superuser):
                 badges.append('iotd-queue')
+
+        if (
+            'user' in request and
+            (image.user == request.user or request.user.is_superuser) and
+            image.get_id() in request.path and
+            bool(set(badges) & {'iotd', 'top-pick', 'top-pick-nomination', 'iotd-queue'})
+        ):
+            badges.append('iotd-stats')
 
         if image.collaborators.exists():
             badges.append('collaboration')

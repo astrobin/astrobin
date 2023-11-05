@@ -153,7 +153,6 @@ class TopPickArchive(models.Model):
         ordering = ['-image__published']
 
 
-
 class IotdStaffMemberSettings(models.Model):
     user = models.OneToOneField(
         User,

@@ -1,0 +1,116 @@
+{% load i18n %}
+{% load tags %}
+
+<div class="modal hide fade" id="image-iotd-stats-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-info-sign"></i> {% trans "IOTD/TP stats" %} {% private_abbr %}</h3>
+    </div>
+    <div class="modal-body">
+        <p class="alert alert-info">
+            {% blocktrans trimmed %}
+                The “AstroBin Image of the Day and Top Picks”, or IOTD/TP, is a long-running system to promote
+                beautiful, interesting, peculiar, or otherwise amazing astrophotographs, with a focus on
+                technical excellence.
+            {% endblocktrans %}
+            <a href="https://welcome.astrobin.com/iotd" target="_blank">
+                {% trans "Learn more." %}
+            </a>
+        </p>
+
+        <div class="loading">
+            <div class="ld ld-ring ld-spin"></div>
+        </div>
+
+        <table class="table hide table-condensed table-borderless">
+            <tr>
+                <th>
+                    <p>{% trans "Views by Submitters" %}</p>
+                    <small class="help-block">
+                        {% blocktrans trimmed with IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE as _0 %}
+                            Every image is assigned to {{_0}}% of available Submitters. If 80% of them don't view the
+                            image by the time its time in the IOTD/TP process expires, it's assigned to the other
+                            {{_0}}% of Submitters and the process begins anew.
+                        {% endblocktrans %}
+                    </small>
+                </th>
+                <td class="submitter_views"></td>
+            </tr>
+
+            <tr>
+                <th>
+                    <p>{% trans "Promotions by Submitters" %}</p>
+                    <small class="help-block">
+                        {% blocktrans trimmed with IOTD_SUBMISSION_MIN_PROMOTIONS as _0 %}
+                            When {{_0}} distinct Submitters promote the image, it moves on to the next stage of the
+                            process: evaluation for Top Pick status. This requirement, in addition to anonymization of
+                            images and distribution to only a subset of them, prevents biases and ensures that the best
+                            images are selected.
+                        {% endblocktrans %}
+                    </small>
+                </th>
+                <td class="submissions"></td>
+            </tr>
+
+            <tr>
+                <th>
+                    <p>{% trans "Promotions by Reviewers" %}</p>
+                    <small class="help-block">
+                        {% blocktrans trimmed with IOTD_REVIEW_MIN_PROMOTIONS as _0 %}
+                            When {{_0}} distinct Reviewers promote the image, it moves on to the next stage of the
+                            process: evaluation for IOTD status.
+                        {% endblocktrans %}
+                    </small>
+                </th>
+                <td class="votes"></td>
+            </tr>
+
+            <tr>
+                <th>
+                    <p>{% trans "Dismissals" %}</p>
+                    <small class="help-block">
+                        {% blocktrans trimmed with IOTD_MAX_DISMISSALS as _0 %}
+                            Staff members have a lot of images to inspect on a daily basis, and they can dismiss images
+                            if they believe they don't meet the requirements for IOTD/TP selection. If an image is
+                            dismissed {{_0}} times, it's removed from the process. This streamlines the process and
+                            ensures that any bias present in promotions could be overruled by other staff members.
+                        {% endblocktrans %}
+                    </small>
+                </th>
+                <td class="dismissals"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#image-iotd-stats-modal').on('show', function() {
+        const $modal = $(this);
+        const $loading = $modal.find('.loading');
+        const $table = $modal.find('.table');
+
+        $loading.show();
+        $table.addClass('hide');
+
+        $.ajax({
+            url: "{% url 'astrobin_apps_iotd.image_stats' image.get_id %}",
+            timeout: 0,
+            success: function(data, textStatus, jqXHR) {
+                Object.keys(data).forEach(function(key) {
+                    $table.find('.' + key).html(data[key]);
+                });
+                $loading.hide();
+                $table.removeClass('hide');
+            }
+        });
+    });
+
+    $('#image-iotd-stats-modal').on('hidden', function() {
+        const $modal = $(this);
+        const $loading = $modal.find('.loading');
+        const $table = $modal.find('.table');
+
+        $loading.show();
+        $table.addClass('hide');
+    });
+</script>
