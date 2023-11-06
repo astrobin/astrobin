@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django.db.models import QuerySet
 
 from astrobin.models import Image
-from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdSubmitterSeenImage, IotdVote
+from astrobin_apps_iotd.models import Iotd, IotdDismissedImage, IotdSubmission, IotdSubmitterSeenImage, IotdVote
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.utils import push_notification
 from common.constants import GroupName
@@ -92,6 +92,14 @@ def send_notifications_when_promoted_image_becomes_iotd():
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
+
+    dismissers = [x.user for x in IotdDismissedImage.objects.filter(image=image)]
+    push_notification(
+        dismissers, None, 'image_you_dismissed_is_iotd', {
+            'image': image,
+            'image_thumbnail': thumb.url if thumb else None
+        }
+    )
 
     push_notification([image.user], None, 'your_image_is_iotd', {
         'image': image,
