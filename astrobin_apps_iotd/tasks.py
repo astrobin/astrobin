@@ -145,3 +145,9 @@ def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
             .count()
         if users_who_saw_this < float(total_submitters) * min_percentage:
             IotdService.resubmit_to_iotd_tp_process(image.user, image)
+
+
+@shared_task(time_limit=600)
+def calculate_iotd_staff_members_stats():
+    service = IotdService()
+    service.calculate_iotd_staff_members_stats(DateTimeService.now() - timedelta(days=60))
