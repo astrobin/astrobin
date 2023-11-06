@@ -880,278 +880,278 @@ class IotdService:
 
         return images
 
+    @staticmethod
+    def calculate_iotd_staff_members_stats(lookback_period: datetime):
+        guessed_iotd_reward = Decimal('4')  # Promoted an image that made it to IOTD
+        guessed_tp_reward = Decimal('2')  # Promoted an image that made it to TP
+        guessed_tpn_reward = Decimal('1')  # Promoted an image that made it to TPN
+        canned_iotd_penalty = Decimal('50')  # Dismissed an image that made it to IOTD
+        canned_tp_penalty = Decimal('25')  # Dismissed an image that made it to TP
+        canned_tpn_penalty = Decimal('12.5')  # Dismissed an image that made it to TPN
+        correct_dismissal_reward = Decimal('1')  # Dismissed an image that was dismissed by 4 other users
+        wasted_promotion_penalty = Decimal('0.5')  # Promoted an image that didn't get any awards
+        missed_submission_penalty = Decimal('0.25')  # Neglected to promote an image that made it to IOTD, TP, or TPN
 
-def calculate_iotd_staff_members_stats(lookback_period: datetime):
-    guessed_iotd_reward = Decimal('4')  # Promoted an image that made it to IOTD
-    guessed_tp_reward = Decimal('2')  # Promoted an image that made it to TP
-    guessed_tpn_reward = Decimal('1')  # Promoted an image that made it to TPN
-    canned_iotd_penalty = Decimal('50')  # Dismissed an image that made it to IOTD
-    canned_tp_penalty = Decimal('25')  # Dismissed an image that made it to TP
-    canned_tpn_penalty = Decimal('12.5')  # Dismissed an image that made it to TPN
-    correct_dismissal_reward = Decimal('1')  # Dismissed an image that was dismissed by 4 other users
-    wasted_promotion_penalty = Decimal('0.5')  # Promoted an image that didn't get any awards
-    missed_submission_penalty = Decimal('0.25')  # Neglected to promote an image that made it to IOTD, TP, or TPN
+        submitters_scores = {}
+        reviewers_scores = {}
+        dismissal_scores = {}
 
-    submitters_scores = {}
-    reviewers_scores = {}
-    dismissal_scores = {}
+        def get_submissions():
+            return IotdSubmission.objects.filter(date__gte=lookback_period).select_related('image', 'submitter')
 
-    def get_submissions():
-        return IotdSubmission.objects.filter(date__gte=lookback_period).select_related('image', 'submitter')
-
-    def get_submissions_by_user(submissions):
-        return {
-            submission.submitter.username: set(
-                IotdSubmission.objects.filter(
-                    submitter=submission.submitter, date__gte=lookback_period
-                ).values_list('image_id', flat=True)
-            )
-            for submission in submissions
-        }
-
-    def get_votes():
-        return IotdVote.objects.filter(date__gte=lookback_period).select_related('image', 'reviewer')
-
-    def get_dismissals():
-        return IotdDismissedImage.objects.filter(created__gte=lookback_period).select_related('image', 'user')
-
-    def prepare_dismissals_counts(dismissals):
-        counts = {}
-        for dismissal in dismissals:
-            image_id = dismissal.image_id
-            counts[image_id] = counts.get(image_id, 0) + 1
-        return counts
-
-    def get_seen_images_by_user():
-        return {
-            seen_image.user.username: set(
-                IotdSubmitterSeenImage.objects.filter(
-                    user=seen_image.user, created__gte=lookback_period
-                ).values_list('image_id', flat=True)
-            )
-            for seen_image in IotdSubmitterSeenImage.objects.filter(
-                created__gte=lookback_period
-            ).distinct('user').order_by('user').select_related('user')
-        }
-
-    def get_nominated_ids():
-        return set(TopPickNominationsArchive.objects.filter(
-            image__submitted_for_iotd_tp_consideration__gte=lookback_period
-        ).values_list('image_id', flat=True))
-
-    def get_top_pick_ids():
-        return set(TopPickArchive.objects.filter(
-            image__submitted_for_iotd_tp_consideration__gte=lookback_period
-        ).values_list('image_id', flat=True))
-
-    def get_iotd_ids():
-        return set(Iotd.objects.filter(
-            image__submitted_for_iotd_tp_consideration__gte=lookback_period
-        ).values_list('image_id', flat=True))
-
-    def prepare_submitter_scores(submissions):
-        for submission in submissions:
-            if not submission.submitter:
-                continue
-
-            submitter_username = submission.submitter.username
-            image_id = submission.image_id
-            score = submitters_scores.get(submitter_username, 0)
-
-            if image_id in iotd_ids:
-                score += guessed_iotd_reward
-                submitter_promotion_counts[submitter_username]['iotds'] += 1
-            elif image_id in top_pick_ids:
-                score += guessed_tp_reward
-                submitter_promotion_counts[submitter_username]['top_picks'] += 1
-            elif image_id in nominated_ids:
-                score += guessed_tpn_reward
-                submitter_promotion_counts[submitter_username]['top_pick_nominations'] += 1
-            else:
-                score -= wasted_promotion_penalty
-
-            submitters_scores[submitter_username] = score
-
-            # Increment promotion counts
-            submitter_promotion_counts[submitter_username]['promotions'] += 1
-
-        # Update scoring for missed submissions
-        for submitter_username, seen_image_ids in seen_images_by_user.items():
-            submitted_image_ids = submissions_by_user.get(submitter_username, set())
-            for image_id in seen_image_ids:
-                if image_id in iotd_ids or image_id in top_pick_ids or image_id in nominated_ids:
-                    if image_id not in submitted_image_ids:
-                        # Submitter saw an image that was promoted but did not submit it
-                        score = submitters_scores.get(submitter_username, 0) - missed_submission_penalty
-                        submitters_scores[submitter_username] = score
-
-    def prepare_reviewer_scores(votes):
-        for vote in votes:
-            if not vote.reviewer:
-                continue
-
-            reviewer_username = vote.reviewer.username
-            image_id = vote.image_id
-            score = reviewers_scores.get(reviewer_username, 0)
-
-            if image_id in iotd_ids:
-                score += guessed_iotd_reward
-            elif image_id in top_pick_ids:
-                score += guessed_tp_reward
-
-            reviewers_scores[reviewer_username] = score
-
-            # Increment promotion counts
-            reviewer_promotion_counts[reviewer_username]['promotions'] += 1
-            if image_id in iotd_ids:
-                reviewer_promotion_counts[reviewer_username]['iotds'] += 1
-            elif image_id in top_pick_ids:
-                reviewer_promotion_counts[reviewer_username]['top_picks'] += 1
-            elif image_id in nominated_ids:
-                reviewer_promotion_counts[reviewer_username]['top_pick_nominations'] += 1
-
-    def remove_inactive_reviewers():
-        reviewers_scores = {
-            username: score
-            for username, score in reviewers_scores.items()
-            if reviewer_promotion_counts[username]['promotions'] > 0
-        }
-
-    def prepare_dismissal_scores(dismissals):
-        for dismissal in dismissals:
-            if not dismissal.user:
-                continue
-
-            user_username = dismissal.user.username
-            image_id = dismissal.image_id
-
-            # Fetch current scores
-            dismissal_score = dismissal_scores.get(user_username, 0)
-
-            # Check if the dismissal was correct (at least settings.IOTD_MAX_DISMISSALS other dismissals)
-            correct_dismissal = image_dismissal_counts[image_id] >= settings.IOTD_MAX_DISMISSALS
-
-            if correct_dismissal:
-                dismissal_scores[user_username] = dismissal_score + correct_dismissal_reward
-                # Update correct dismissal counts
-                dismissal_counts[user_username]['correct_dismissals'] += 1
-            else:
-                if image_id in iotd_ids:
-                    dismissal_scores[user_username] = dismissal_score - canned_iotd_penalty
-                    dismissal_counts[user_username]['iotds'] += 1
-                elif image_id in top_pick_ids:
-                    dismissal_scores[user_username] = dismissal_score - canned_tp_penalty
-                    dismissal_counts[user_username]['top_picks'] += 1
-                elif image_id in nominated_ids:
-                    dismissal_scores[user_username] = dismissal_score - canned_tpn_penalty
-                    dismissal_counts[user_username]['top_pick_nominations'] += 1
-
-            dismissal_counts[user_username]['dismissals'] += 1
-
-    def combined_score(submitter_score, reviewer_score, dismissal_score):
-        return submitter_score + reviewer_score + dismissal_score
-
-    def combine_counts(submitter_counts, reviewer_counts):
-        combined = {}
-
-        for key in set(submitter_counts) | set(reviewer_counts):
-            combined[key] = submitter_counts.get(key, 0) + reviewer_counts.get(key, 0)
-        return combined
-
-    def prepare_combined_data():
-        combined_data = {}
-
-        for user in set(submitters_scores) | set(reviewers_scores) | set(dismissal_scores):
-            combined_data[user] = {
-                'score': combined_score(
-                    submitters_scores.get(user, Decimal('0')),
-                    reviewers_scores.get(user, Decimal('0')),
-                    dismissal_scores.get(user, Decimal('0'))
-                ),
-                'promotions': combine_counts(
-                    submitter_promotion_counts.get(user, {}),
-                    reviewer_promotion_counts.get(user, {})
-                ),
-                'dismissals': dismissal_counts.get(user, {}),
+        def get_submissions_by_user(submissions):
+            return {
+                submission.submitter.username: set(
+                    IotdSubmission.objects.filter(
+                        submitter=submission.submitter, date__gte=lookback_period
+                    ).values_list('image_id', flat=True)
+                )
+                for submission in submissions
             }
 
-        return combined_data
+        def get_votes():
+            return IotdVote.objects.filter(date__gte=lookback_period).select_related('image', 'reviewer')
 
-    submissions = get_submissions()
-    submissions_by_user = get_submissions_by_user(submissions)
-    votes = get_votes()
-    dismissals = get_dismissals()
-    image_dismissal_counts = prepare_dismissals_counts(dismissals)
-    seen_images_by_user = get_seen_images_by_user()
-    nominated_ids = get_nominated_ids()
-    top_pick_ids = get_top_pick_ids()
-    iotd_ids = get_iotd_ids()
+        def get_dismissals():
+            return IotdDismissedImage.objects.filter(created__gte=lookback_period).select_related('image', 'user')
 
-    all_usernames = set()
-    all_usernames.update(submission.submitter.username for submission in submissions if submission.submitter)
-    all_usernames.update(vote.reviewer.username for vote in votes if vote.reviewer)
-    all_usernames.update(dismissal.user.username for dismissal in dismissals if dismissal.user)
+        def prepare_dismissals_counts(dismissals):
+            counts = {}
+            for dismissal in dismissals:
+                image_id = dismissal.image_id
+                counts[image_id] = counts.get(image_id, 0) + 1
+            return counts
 
-    submitter_promotion_counts = {
-        username: {
-            'promotions': 0,
-            'top_pick_nominations': 0,
-            'top_picks': 0,
-            'iotds': 0
-        } for username in all_usernames
-    }
-    reviewer_promotion_counts = {
-        username: {
-            'promotions': 0,
-            'top_pick_nominations': 0,
-            'top_picks': 0,
-            'iotds': 0
-        } for username in all_usernames
-    }
-    dismissal_counts = {
-        username: {
-            'dismissals': 0,
-            'remote_dismissals': 0,
-            'correct_dismissals': 0,
-            'top_pick_nominations': 0,
-            'top_picks': 0,
-            'iotds': 0
-        } for username in all_usernames
-    }
+        def get_seen_images_by_user():
+            return {
+                seen_image.user.username: set(
+                    IotdSubmitterSeenImage.objects.filter(
+                        user=seen_image.user, created__gte=lookback_period
+                    ).values_list('image_id', flat=True)
+                )
+                for seen_image in IotdSubmitterSeenImage.objects.filter(
+                    created__gte=lookback_period
+                ).distinct('user').order_by('user').select_related('user')
+            }
 
-    prepare_submitter_scores(submissions)
-    prepare_reviewer_scores(votes)
-    prepare_dismissal_scores(dismissals)
-    remove_inactive_reviewers()
+        def get_nominated_ids():
+            return set(TopPickNominationsArchive.objects.filter(
+                image__submitted_for_iotd_tp_consideration__gte=lookback_period
+            ).values_list('image_id', flat=True))
 
-    combined_data = prepare_combined_data()
+        def get_top_pick_ids():
+            return set(TopPickArchive.objects.filter(
+                image__submitted_for_iotd_tp_consideration__gte=lookback_period
+            ).values_list('image_id', flat=True))
 
-    # Print the merged data
-    log.debug("User,Score,Promotions,TPNs,TPs,IOTDs,Dismissals,Correct Dismissals,TPNs,TPs,IOTDs")
-    for username, data in sorted(combined_data.items(), key=lambda item: item[1]['score'], reverse=True):
-        log.debug(
-            f"{username},"
-            f"{data['score']},"
-            f"{data['promotions'].get('promotions', 0)},"
-            f"{data['promotions'].get('top_pick_nominations', 0)},"
-            f"{data['promotions'].get('top_picks', 0)},"
-            f"{data['promotions'].get('iotds', 0)},"
-            f"{data['dismissals'].get('dismissals', 0)},"
-            f"{data['dismissals'].get('correct_dismissals', 0)},"
-            f"{data['dismissals'].get('top_pick_nominations', 0)},"
-            f"{data['dismissals'].get('top_picks', 0)},"
-            f"{data['dismissals'].get('iotds', 0)}"
-        )
-        IotdStaffMemberScore.objects.create(
-            user=User.objects.get(username=username),
-            score=data['score'],
-            promoted_images=data['promotions'].get('promotions', 0),
-            promoted_images_to_tpn=data['promotions'].get('top_pick_nominations', 0),
-            promoted_images_to_tp=data['promotions'].get('top_picks', 0),
-            promoted_images_to_iotd=data['promotions'].get('iotds', 0),
-            dismissed_images=data['dismissals'].get('correct_dismissals', 0),
-            correct_dismissals=data['dismissals'].get('correct_dismissals', 0),
-            dismissed_images_to_tpn=data['dismissals'].get('top_pick_nominations', 0),
-            dismissed_images_to_tp=data['dismissals'].get('top_picks', 0),
-            dismissed_images_to_iotd=data['dismissals'].get('iotds', 0),
-        )
+        def get_iotd_ids():
+            return set(Iotd.objects.filter(
+                image__submitted_for_iotd_tp_consideration__gte=lookback_period
+            ).values_list('image_id', flat=True))
+
+        def prepare_submitter_scores(submissions):
+            for submission in submissions:
+                if not submission.submitter:
+                    continue
+
+                submitter_username = submission.submitter.username
+                image_id = submission.image_id
+                score = submitters_scores.get(submitter_username, 0)
+
+                if image_id in iotd_ids:
+                    score += guessed_iotd_reward
+                    submitter_promotion_counts[submitter_username]['iotds'] += 1
+                elif image_id in top_pick_ids:
+                    score += guessed_tp_reward
+                    submitter_promotion_counts[submitter_username]['top_picks'] += 1
+                elif image_id in nominated_ids:
+                    score += guessed_tpn_reward
+                    submitter_promotion_counts[submitter_username]['top_pick_nominations'] += 1
+                else:
+                    score -= wasted_promotion_penalty
+
+                submitters_scores[submitter_username] = score
+
+                # Increment promotion counts
+                submitter_promotion_counts[submitter_username]['promotions'] += 1
+
+            # Update scoring for missed submissions
+            for submitter_username, seen_image_ids in seen_images_by_user.items():
+                submitted_image_ids = submissions_by_user.get(submitter_username, set())
+                for image_id in seen_image_ids:
+                    if image_id in iotd_ids or image_id in top_pick_ids or image_id in nominated_ids:
+                        if image_id not in submitted_image_ids:
+                            # Submitter saw an image that was promoted but did not submit it
+                            score = submitters_scores.get(submitter_username, 0) - missed_submission_penalty
+                            submitters_scores[submitter_username] = score
+
+        def prepare_reviewer_scores(votes):
+            for vote in votes:
+                if not vote.reviewer:
+                    continue
+
+                reviewer_username = vote.reviewer.username
+                image_id = vote.image_id
+                score = reviewers_scores.get(reviewer_username, 0)
+
+                if image_id in iotd_ids:
+                    score += guessed_iotd_reward
+                elif image_id in top_pick_ids:
+                    score += guessed_tp_reward
+
+                reviewers_scores[reviewer_username] = score
+
+                # Increment promotion counts
+                reviewer_promotion_counts[reviewer_username]['promotions'] += 1
+                if image_id in iotd_ids:
+                    reviewer_promotion_counts[reviewer_username]['iotds'] += 1
+                elif image_id in top_pick_ids:
+                    reviewer_promotion_counts[reviewer_username]['top_picks'] += 1
+                elif image_id in nominated_ids:
+                    reviewer_promotion_counts[reviewer_username]['top_pick_nominations'] += 1
+
+        def remove_inactive_reviewers(reviewers_scores, reviewer_promotion_counts):
+            return {
+                username: score
+                for username, score in reviewers_scores.items()
+                if reviewer_promotion_counts[username]['promotions'] > 0
+            }
+
+        def prepare_dismissal_scores(dismissals):
+            for dismissal in dismissals:
+                if not dismissal.user:
+                    continue
+
+                user_username = dismissal.user.username
+                image_id = dismissal.image_id
+
+                # Fetch current scores
+                dismissal_score = dismissal_scores.get(user_username, 0)
+
+                # Check if the dismissal was correct (at least settings.IOTD_MAX_DISMISSALS other dismissals)
+                correct_dismissal = image_dismissal_counts[image_id] >= settings.IOTD_MAX_DISMISSALS
+
+                if correct_dismissal:
+                    dismissal_scores[user_username] = dismissal_score + correct_dismissal_reward
+                    # Update correct dismissal counts
+                    dismissal_counts[user_username]['correct_dismissals'] += 1
+                else:
+                    if image_id in iotd_ids:
+                        dismissal_scores[user_username] = dismissal_score - canned_iotd_penalty
+                        dismissal_counts[user_username]['iotds'] += 1
+                    elif image_id in top_pick_ids:
+                        dismissal_scores[user_username] = dismissal_score - canned_tp_penalty
+                        dismissal_counts[user_username]['top_picks'] += 1
+                    elif image_id in nominated_ids:
+                        dismissal_scores[user_username] = dismissal_score - canned_tpn_penalty
+                        dismissal_counts[user_username]['top_pick_nominations'] += 1
+
+                dismissal_counts[user_username]['dismissals'] += 1
+
+        def combined_score(submitter_score, reviewer_score, dismissal_score):
+            return submitter_score + reviewer_score + dismissal_score
+
+        def combine_counts(submitter_counts, reviewer_counts):
+            combined = {}
+
+            for key in set(submitter_counts) | set(reviewer_counts):
+                combined[key] = submitter_counts.get(key, 0) + reviewer_counts.get(key, 0)
+            return combined
+
+        def prepare_combined_data():
+            combined_data = {}
+
+            for user in set(submitters_scores) | set(reviewers_scores) | set(dismissal_scores):
+                combined_data[user] = {
+                    'score': combined_score(
+                        submitters_scores.get(user, Decimal('0')),
+                        reviewers_scores.get(user, Decimal('0')),
+                        dismissal_scores.get(user, Decimal('0'))
+                    ),
+                    'promotions': combine_counts(
+                        submitter_promotion_counts.get(user, {}),
+                        reviewer_promotion_counts.get(user, {})
+                    ),
+                    'dismissals': dismissal_counts.get(user, {}),
+                }
+
+            return combined_data
+
+        submissions = get_submissions()
+        submissions_by_user = get_submissions_by_user(submissions)
+        votes = get_votes()
+        dismissals = get_dismissals()
+        image_dismissal_counts = prepare_dismissals_counts(dismissals)
+        seen_images_by_user = get_seen_images_by_user()
+        nominated_ids = get_nominated_ids()
+        top_pick_ids = get_top_pick_ids()
+        iotd_ids = get_iotd_ids()
+
+        all_usernames = set()
+        all_usernames.update(submission.submitter.username for submission in submissions if submission.submitter)
+        all_usernames.update(vote.reviewer.username for vote in votes if vote.reviewer)
+        all_usernames.update(dismissal.user.username for dismissal in dismissals if dismissal.user)
+
+        submitter_promotion_counts = {
+            username: {
+                'promotions': 0,
+                'top_pick_nominations': 0,
+                'top_picks': 0,
+                'iotds': 0
+            } for username in all_usernames
+        }
+        reviewer_promotion_counts = {
+            username: {
+                'promotions': 0,
+                'top_pick_nominations': 0,
+                'top_picks': 0,
+                'iotds': 0
+            } for username in all_usernames
+        }
+        dismissal_counts = {
+            username: {
+                'dismissals': 0,
+                'remote_dismissals': 0,
+                'correct_dismissals': 0,
+                'top_pick_nominations': 0,
+                'top_picks': 0,
+                'iotds': 0
+            } for username in all_usernames
+        }
+
+        prepare_submitter_scores(submissions)
+        prepare_reviewer_scores(votes)
+        prepare_dismissal_scores(dismissals)
+        reviewers_scores = remove_inactive_reviewers(reviewers_scores, reviewer_promotion_counts)
+
+        combined_data = prepare_combined_data()
+
+        # Print the merged data
+        log.debug("User,Score,Promotions,TPNs,TPs,IOTDs,Dismissals,Correct Dismissals,TPNs,TPs,IOTDs")
+        for username, data in sorted(combined_data.items(), key=lambda item: item[1]['score'], reverse=True):
+            log.debug(
+                f"{username},"
+                f"{data['score']},"
+                f"{data['promotions'].get('promotions', 0)},"
+                f"{data['promotions'].get('top_pick_nominations', 0)},"
+                f"{data['promotions'].get('top_picks', 0)},"
+                f"{data['promotions'].get('iotds', 0)},"
+                f"{data['dismissals'].get('dismissals', 0)},"
+                f"{data['dismissals'].get('correct_dismissals', 0)},"
+                f"{data['dismissals'].get('top_pick_nominations', 0)},"
+                f"{data['dismissals'].get('top_picks', 0)},"
+                f"{data['dismissals'].get('iotds', 0)}"
+            )
+            IotdStaffMemberScore.objects.create(
+                user=User.objects.get(username=username),
+                score=data['score'],
+                promoted_images=data['promotions'].get('promotions', 0),
+                promoted_images_to_tpn=data['promotions'].get('top_pick_nominations', 0),
+                promoted_images_to_tp=data['promotions'].get('top_picks', 0),
+                promoted_images_to_iotd=data['promotions'].get('iotds', 0),
+                dismissed_images=data['dismissals'].get('correct_dismissals', 0),
+                correct_dismissals=data['dismissals'].get('correct_dismissals', 0),
+                dismissed_images_to_tpn=data['dismissals'].get('top_pick_nominations', 0),
+                dismissed_images_to_tp=data['dismissals'].get('top_picks', 0),
+                dismissed_images_to_iotd=data['dismissals'].get('iotds', 0),
+            )
