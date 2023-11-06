@@ -349,3 +349,35 @@ class IotdStats(models.Model):
 
     class Meta:
         ordering = ('-created',)
+
+
+class IotdStaffMemberScore(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='iotd_staff_member_score',
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    score = models.DecimalField(
+        default=0,
+        max_digits=8,
+        decimal_places=2,
+    )
+
+    promoted_images = models.PositiveIntegerField(default=0)
+    promoted_images_to_tpn = models.PositiveIntegerField(default=0)
+    promoted_images_to_tp = models.PositiveIntegerField(default=0)
+    promoted_images_to_iotd = models.PositiveIntegerField(default=0)
+
+    dismissed_images = models.PositiveIntegerField(default=0)
+    correct_dismissals = models.PositiveIntegerField(default=0)
+    dismissed_images_to_tpn = models.PositiveIntegerField(default=0)
+    dismissed_images_to_tp = models.PositiveIntegerField(default=0)
+    dismissed_images_to_iotd = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ('-score',)
