@@ -46,7 +46,10 @@ from astrobin_apps_forum.services import ForumService
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
+from astrobin_apps_iotd.models import (
+    Iotd, IotdDismissedImage, IotdSubmission, IotdVote, TopPickArchive,
+    TopPickNominationsArchive,
+)
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
@@ -1461,6 +1464,14 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })
+
+        dismissers = [x.user for x in IotdDismissedImage.objects.filter(image=image)]
+        push_notification(
+            dismissers, None, 'image_you_dismissed_is_tp', {
+                'image': image,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
 
         push_notification([image.user], None, 'your_image_is_tp', {
             'image': image,
