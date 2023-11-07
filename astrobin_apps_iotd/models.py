@@ -352,7 +352,7 @@ class IotdStats(models.Model):
 
 
 class IotdStaffMemberScore(models.Model):
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='iotd_staff_member_score',
