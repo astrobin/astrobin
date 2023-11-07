@@ -19,11 +19,11 @@ class Command(BaseCommand):
         user_subscriptions = UserSubscription.objects\
             .filter(
                 subscription__name__in=[
-                    SubscriptionName.LITE_CLASSIC,
-                    SubscriptionName.PREMIUM_CLASSIC,
-                    SubscriptionName.LITE_2020,
-                    SubscriptionName.PREMIUM_2020,
-                    SubscriptionName.ULTIMATE_2020,
+                    SubscriptionName.LITE_CLASSIC.value,
+                    SubscriptionName.PREMIUM_CLASSIC.value,
+                    SubscriptionName.LITE_2020.value,
+                    SubscriptionName.PREMIUM_2020.value,
+                    SubscriptionName.ULTIMATE_2020.value,
                 ],
             active=True,
             expires=datetime.now() + timedelta(days=7)
