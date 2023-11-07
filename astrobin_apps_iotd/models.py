@@ -368,16 +368,21 @@ class IotdStaffMemberScore(models.Model):
         decimal_places=2,
     )
 
-    promoted_images = models.PositiveIntegerField(default=0)
-    promoted_images_to_tpn = models.PositiveIntegerField(default=0)
-    promoted_images_to_tp = models.PositiveIntegerField(default=0)
-    promoted_images_to_iotd = models.PositiveIntegerField(default=0)
+    promotions = models.PositiveIntegerField(default=0)
+    wasted_promotion = models.PositiveIntegerField(default=0)
+    missed_iotd_promotions = models.PositiveIntegerField(default=0)
+    missed_tp_promotions = models.PositiveIntegerField(default=0)
+    missed_tpn_promotions = models.PositiveIntegerField(default=0)
+    promotions_to_tpn = models.PositiveIntegerField(default=0)
+    promotions_to_tp = models.PositiveIntegerField(default=0)
+    promotions_to_iotd = models.PositiveIntegerField(default=0)
 
-    dismissed_images = models.PositiveIntegerField(default=0)
+    dismissals = models.PositiveIntegerField(default=0)
     correct_dismissals = models.PositiveIntegerField(default=0)
-    dismissed_images_to_tpn = models.PositiveIntegerField(default=0)
-    dismissed_images_to_tp = models.PositiveIntegerField(default=0)
-    dismissed_images_to_iotd = models.PositiveIntegerField(default=0)
+    missed_dismissals = models.PositiveIntegerField(default=0)
+    dismissals_to_tpn = models.PositiveIntegerField(default=0)
+    dismissals_to_tp = models.PositiveIntegerField(default=0)
+    dismissals_to_iotd = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ('-score',)
