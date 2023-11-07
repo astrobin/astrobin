@@ -369,7 +369,7 @@ class IotdStaffMemberScore(models.Model):
     )
 
     promotions = models.PositiveIntegerField(default=0)
-    wasted_promotion = models.PositiveIntegerField(default=0)
+    wasted_promotions = models.PositiveIntegerField(default=0)
     missed_iotd_promotions = models.PositiveIntegerField(default=0)
     missed_tp_promotions = models.PositiveIntegerField(default=0)
     missed_tpn_promotions = models.PositiveIntegerField(default=0)
