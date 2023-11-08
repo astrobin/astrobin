@@ -1231,3 +1231,11 @@ class IotdService:
                 dismissals_to_tp=data['dismissals'].get('top_picks', 0),
                 dismissals_to_iotd=data['dismissals'].get('iotds', 0),
             )
+
+    @staticmethod
+    def may_auto_submit_to_iotd_tp_process(user: User) -> bool:
+        q = Q(image__user=user) | Q(image__collaborators=user)
+        has_top_picks = TopPickArchive.objects.filter(q).exists()
+        has_iotd = Iotd.objects.filter(q).exists()
+
+        return has_top_picks or has_iotd

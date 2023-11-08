@@ -4,6 +4,7 @@ from django.forms import SelectMultiple
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin.models import UserProfile
+from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_remove_ads,
@@ -56,6 +57,21 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             return cleaned_data
 
         return data
+
+    def clean_auto_submit_to_iotd_tp_process(self):
+        auto_submit = self.cleaned_data['auto_submit_to_iotd_tp_process']
+        user = self.instance.user
+
+        if auto_submit and not IotdService.may_auto_submit_to_iotd_tp_process(user):
+            raise forms.ValidationError(
+                _(
+                    'Sorry, you cannot automatically submit images for IOTD/TP consideration if you have not '
+                    'had any images selected as Top Pick or Image of the Day before. Please submit images individually '
+                    'using the Actions menu.'
+                )
+            )
+
+        return auto_submit
 
     def clean(self):
         cleaned_data = super().clean()

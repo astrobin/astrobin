@@ -104,3 +104,8 @@ def get_iotd() -> Optional[Iotd]:
     if iotds:
         return iotds[0]
     return None
+
+
+@register.filter
+def may_auto_submit_to_iotd_tp_process(user: User) -> bool:
+    return IotdService.may_auto_submit_to_iotd_tp_process(user)

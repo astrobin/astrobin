@@ -162,3 +162,9 @@ fieldset:not(:last-of-type) {
   padding-bottom: 2rem;
   border-bottom: 1px solid $grey-5;
 }
+
+.control-group.error > .controls > .help-block:last-child {
+  padding: .25rem;
+  color: $text-on-error;
+  background-color: $error;
+}
