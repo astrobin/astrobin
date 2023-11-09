@@ -708,13 +708,29 @@ class CollectionResource(ModelResource):
         filtering = {
             'name': ALL,
             'description': ALL,
-            'user': ALL_WITH_RELATIONS,
         }
         ordering = ['-date_created']
 
     def dehydrate_images(self, bundle):
         images = bundle.obj.images.all()
         return ["/api/v1/image/%s" % image.get_id() for image in images]
+
+    def build_filters(self, filters=None, ignore_bad_filters=False):
+        if filters is None:
+            filters = {}
+
+        user = None
+
+        if 'user' in filters:
+            user = filters['user']
+            del filters['user']
+
+        orm_filters = super(CollectionResource, self).build_filters(filters)
+
+        if user:
+            orm_filters['user__username'] = user
+
+        return orm_filters
 
 
 class UserProfileResource(ModelResource):
