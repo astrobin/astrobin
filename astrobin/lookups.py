@@ -5,12 +5,14 @@ import simplejson
 from avatar.utils import get_primary_avatar, get_default_avatar_url
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.http import HttpResponse
 from django.views.decorators.http import require_GET
 from rest_framework.authtoken.models import Token
 
 from astrobin_apps_images.services import ImageService
+from nested_comments.models import NestedComment
 from .models import Image
 from .models import UserProfile
 from .services.utils_service import UtilsService
@@ -78,17 +80,19 @@ def autocomplete_usernames(request):
     elif from_comments:
         image_id = from_comments.group(1)
         image = ImageService.get_object(image_id, Image.objects_including_wip.all())
-        users = list(UserProfile.objects.filter(
-            Q(
-                Q(user__image=image) |
-                Q(
-                    Q(user__comments__object_id=image.id) & Q(user__comments__deleted=False)
-                )
-            ) &
-            Q(
+        owner_id = [image.user.id]
+        commenter_ids = NestedComment.objects.filter(
+            object_id=image.id,
+            content_type=ContentType.objects.get_for_model(image),
+            deleted=False
+        ).values_list('author', flat=True)
+        user_ids = UserProfile.objects.filter(
                 Q(user__username__icontains=q) | Q(real_name__icontains=q)
-            )
-        ).distinct()[:limit])
+            ).values_list(
+                'user', flat=True
+            ).distinct()[:limit]
+        combined_user_ids = set(owner_id + list(commenter_ids) + list(user_ids))
+        users = list(UserProfile.objects.filter(user_id__in=combined_user_ids))
 
     users = UtilsService.unique(users + list(UserProfile.objects.filter(
         Q(user__username__icontains=q) | Q(real_name__icontains=q)
