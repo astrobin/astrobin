@@ -447,13 +447,18 @@ def show_skyscraper_ads_on_page(context):
 
 
 @register.filter()
-def image_ad_key_value_pairs(image):
-    if RemoteSourceAffiliationService.is_remote_source_affiliate(image.remote_source):
-        return {
-            "exclude-category": "remote-hosting"
-        }
+def ad_key_value_pairs(image, user):
+    data = {}
 
-    return None
+    if image:
+        if RemoteSourceAffiliationService.is_remote_source_affiliate(image.remote_source):
+            data["exclude-category"] = "remote-hosting"
+
+    if user and user.is_authenticated:
+        if UserService(user).has_used_commercial_remote_hosting_facilities():
+            data["used-remote-hosting"] = "true"
+
+    return data
 
 
 @register.filter

@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
-{% load i18n %}{% load django_bootstrap_breadcrumbs %}{% load astrobin_apps_images_tags %}{% load astrobin_apps_users_tags %}{% load tags %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_images_tags %}
+{% load astrobin_apps_users_tags %}
+{% load tags %}
 
 {% block title %}{% trans "Image of the day" %}{% endblock %}
 
@@ -21,7 +25,9 @@
 {% block content %}
     <a class="anchor" name="page_anchor"></a>
 
-    {% include "ads/full_width_wide_ad.html" %}
+    {% with None|ad_key_value_pairs:request.user as key_value_pairs %}
+        {% include "ads/full_width_wide_ad.html" %}
+    {% endwith %}
 
     {% for iotd in object_list %}
         <div class="iotd-archive-image">
