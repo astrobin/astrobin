@@ -3,6 +3,7 @@
 import re
 import sys
 import time
+from datetime import datetime, timedelta
 
 import mock
 from bs4 import BeautifulSoup
@@ -29,6 +30,7 @@ from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
 from astrobin_apps_premium.services.premium_service import SubscriptionName
 from common.constants import GroupName
+from common.services import DateTimeService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -2444,6 +2446,7 @@ class ImageTest(TestCase):
         self.assertContains(response, "<div class=\"subtle-container technical-card-equipment\">")
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=mock.PropertyMock)
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_image_designated_iotd_submitters(self, is_authenticated):
         group = Group.objects.create(name='iotd_submitters')
         is_authenticated.return_value = True
@@ -2460,6 +2463,8 @@ class ImageTest(TestCase):
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image=image)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines = DateTimeService.now()
+        image.user.userprofile.save()
 
         ImageService(image).promote_to_public_area(skip_notifications=True)
         image.save()
@@ -2467,6 +2472,7 @@ class ImageTest(TestCase):
         self.assertEqual(5, image.designated_iotd_submitters.count())
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=mock.PropertyMock)
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_image_designated_iotd_reviewers(self, is_authenticated):
         group = Group.objects.create(name=GroupName.IOTD_REVIEWERS)
         is_authenticated.return_value = True
@@ -2483,6 +2489,8 @@ class ImageTest(TestCase):
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines = DateTimeService.now()
+        image.user.userprofile.save()
 
         ImageService(image).promote_to_public_area(skip_notifications=True)
         image.save()
