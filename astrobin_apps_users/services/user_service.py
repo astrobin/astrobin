@@ -619,7 +619,7 @@ class UserService:
         except UserProfile.DoesNotExist:
             pass
 
-      def has_used_commercial_remote_hosting_facilities(self):
+    def has_used_commercial_remote_hosting_facilities(self):
         from astrobin.models import Image
 
         cache_key = f'UserService.has_used_commercial_remote_hosting_facilities.{self.user.pk}'
