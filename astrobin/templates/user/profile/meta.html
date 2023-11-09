@@ -56,7 +56,9 @@
     {% endif %}
 
     {% with ad_container_classes='hidden-phone' %}
-        {% include 'ads/rectangular_ad.html' %}
+        {% with None|ad_key_value_pairs:request.user as key_value_pairs %}
+            {% include 'ads/rectangular_ad.html' %}
+        {% endwith %}
     {% endwith %}
 
     {% if PREMIUM_ENABLED and requested_user == request.user or request.user.is_superuser%}
