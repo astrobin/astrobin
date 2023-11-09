@@ -128,7 +128,9 @@
 
         <div id="top" class="container astrobin-container {% block container_extra_classes %}{% endblock %}">
             {% if show_skyscraper_ads_on_page %}
-                {% include 'ads/skyscraper_ad.html' %}
+                {% with None|ad_key_value_pairs:request.user as key_value_pairs %}
+                    {% include 'ads/skyscraper_ad.html' %}
+                {% endwith %}
             {% endif %}
 
             {% block breadcrumb %} {# Use a block to allow forum template to override this #}

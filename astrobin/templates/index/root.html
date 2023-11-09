@@ -172,7 +172,9 @@
     </div>
 
     {% with ad_container_classes='advertisement-frontpage' %}
-        {% include 'ads/wide_ad.html' %}
+        {% with None|ad_key_value_pairs:request.user as key_value_pairs %}
+            {% include 'ads/wide_ad.html' %}
+        {% endwith %}
     {% endwith %}
 
     <a class="anchor" name="stream"></a>

@@ -618,3 +618,20 @@ class UserService:
             profile.save(keep_deleted=True)
         except UserProfile.DoesNotExist:
             pass
+
+    def has_used_commercial_remote_hosting_facilities(self):
+        from astrobin.models import Image
+
+        cache_key = f'UserService.has_used_commercial_remote_hosting_facilities.{self.user.pk}'
+
+        cached = cache.get(cache_key)
+
+        if cached is not None:
+            return cached
+
+        value = Image.objects_including_wip.filter(
+            Q(user=self.user) & Q(remote_source__isnull=False) & ~Q(remote_source='OWN')
+        ).exists()
+        cache.set(cache_key, value, 60*60*24)
+
+        return value
