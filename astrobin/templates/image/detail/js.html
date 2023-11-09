@@ -357,6 +357,17 @@ $(document).ready(function() {
     {% if not is_revision and image.video_file.name and not image.encoded_video_file.name %}
         updateVideoEncodingProgress();
     {% endif %}
+
+
+    $('#i-agree-with-iotd-tp-rules, #i-agree-with-iotd-tp-guidelines').on('change', function () {
+        const $btn = $('#submit-to-iotd-tp-modal .btn-primary');
+
+        if ($('#i-agree-with-iotd-tp-rules').is(':checked') && $('#i-agree-with-iotd-tp-guidelines').is(':checked')) {
+            $btn.removeAttr('disabled');
+        } else {
+            $btn.attr('disabled', 'disabled');
+        }
+    });
 });
 </script>
 
