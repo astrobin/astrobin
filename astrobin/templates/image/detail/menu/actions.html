@@ -125,14 +125,14 @@
                 <li>
                     {% with reason=request.user|may_submit_to_iotd_tp_process_reason:image %}
                         <a data-toggle="modal"
-                                {% if request.user|may_submit_to_iotd_tp_process:image %}
+                        {% if request.user|may_submit_to_iotd_tp_process:image or reason == 'DID_NOT_AGREE_TO_RULES_AND_GUIDELINES' %}
                            href="#submit-to-iotd-tp-modal"
-                                {% else %}
+                        {% else %}
                            href="#may-not-submit-to-iotd-tp-modal"
-                                {% endif %}
-                                {% if reason == 'ALREADY_SUBMITTED' %}
+                        {% endif %}
+                        {% if reason == 'ALREADY_SUBMITTED' %}
                            class="disabled"
-                                {% endif %}
+                        {% endif %}
                         >
                             <i class="icon-rocket"></i>
                             {% trans "Submit for IOTD/TP consideration" %}

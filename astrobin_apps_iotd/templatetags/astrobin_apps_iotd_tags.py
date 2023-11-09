@@ -43,6 +43,9 @@ def may_submit_to_iotd_tp_process_reason(user: User, image: Image) -> str:
     may, reason = IotdService.may_submit_to_iotd_tp_process(user, image)
     return reason
 
+@register.filter
+def agreed_to_iotd_tp_rules_and_guidelines(user: User) -> bool:
+    return UserService(user).agreed_to_iotd_tp_rules_and_guidelines()
 
 @register.filter
 def humanize_may_not_submit_to_iotd_tp_process_reason(reason: str) -> str:
@@ -84,7 +87,11 @@ def humanize_may_not_submit_to_iotd_tp_process_reason(reason: str) -> str:
             "after publication." % {
                 'num_days': settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS
             }
-        )
+        ),
+        MayNotSubmitToIotdTpReason.DID_NOT_AGREE_TO_RULES_AND_GUIDELINES: _(
+            "You have not agreed to the IOTD/TP rules and guidelines since their last update. Please amend this in "
+            "your profile preferences and then submit the image again using the Actions menu."
+        ),
     }
 
     try:

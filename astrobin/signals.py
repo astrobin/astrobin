@@ -244,6 +244,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                     MayNotSubmitToIotdTpReason.IS_FREE,
                     MayNotSubmitToIotdTpReason.NO_TELESCOPE_OR_CAMERA,
                     MayNotSubmitToIotdTpReason.NO_ACQUISITIONS,
+                    MayNotSubmitToIotdTpReason.DID_NOT_AGREE_TO_RULES_AND_GUIDELINES,
             ):
                 thumb = instance.thumbnail_raw('gallery', None, sync=True)
                 push_notification(

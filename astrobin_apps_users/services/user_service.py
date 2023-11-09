@@ -619,7 +619,7 @@ class UserService:
         except UserProfile.DoesNotExist:
             pass
 
-    def has_used_commercial_remote_hosting_facilities(self):
+      def has_used_commercial_remote_hosting_facilities(self):
         from astrobin.models import Image
 
         cache_key = f'UserService.has_used_commercial_remote_hosting_facilities.{self.user.pk}'
@@ -635,3 +635,8 @@ class UserService:
         cache.set(cache_key, value, 60*60*24)
 
         return value
+
+    def agreed_to_iotd_tp_rules_and_guidelines(self) -> bool:
+        agreed = self.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines
+        return agreed and agreed > settings.IOTD_LAST_RULES_UPDATE
+
