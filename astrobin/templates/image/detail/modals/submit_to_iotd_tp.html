@@ -27,31 +27,21 @@
                     {% endblocktrans %}
                 </p>
 
-                <div class="control-group">
-                    <div class="controls">
-                        <input type="checkbox" id="i-agree-with-iotd-tp-rules" name="i-agree-with-iotd-tp-rules" />
-                        <label for="i-agree-with-iotd-tp-rules">
-                            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/iotd#rules" target="_blank">' as _0 and '</a>' as _1 %}
-                                I have read and I agree with the {{ _0 }}IOTD/TP rules{{ _1 }}
-                            {% endblocktrans %}
-                        </label>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <div class="controls">
-                        <input type="checkbox" id="i-agree-with-iotd-tp-guidelines" name="i-agree-with-iotd-tp-guidelines" />
-                        <label for="i-agree-with-iotd-tp-guidelines">
-                            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/iotd#photographer-guidelines" target="_blank">' as _0 and '</a>' as _1 %}
-                                I have read and I agree with the {{ _0 }}IOTD/TP guidelines{{ _1 }}
-                            {% endblocktrans %}
-                        </label>
-                    </div>
-                </div>
 
                 {% if not request.user.userprofile.auto_submit_to_iotd_tp_process and request.user|may_auto_submit_to_iotd_tp_process %}
                     {{ auto_submit_to_iotd_tp_process_form | as_bootstrap }}
                 {% endif %}
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="checkbox" id="i-agree-with-iotd-tp-rules-and-guidelines" name="agreed_to_iotd_tp_rules_and_guidelines" />
+                        <label for="i-agree-with-iotd-tp-rules-and-guidelines">
+                            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/iotd#rules" target="_blank">' as _0 and '</a>' as _1 and '<a href="https://welcome.astrobin.com/iotd#guidelines" target="_blank">' as _2 and '</a>' as _3 %}
+                                I have read and I agree with the IOTD/TP {{ _0 }}rules{{ _1 }} and {{ _2 }}guidelines{{ _3 }}
+                            {% endblocktrans %}
+                        </label>
+                    </div>
+                </div>
 
                 <input type="hidden" name="next" value="{{ request.path }}" />
             </div>

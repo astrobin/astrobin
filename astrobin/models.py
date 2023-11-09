@@ -2708,6 +2708,21 @@ class UserProfile(SafeDeleteModel):
         ),
     )
 
+    agreed_to_iotd_tp_rules_and_guidelines = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_("I agree to the IOTD/TP rules and guidelines"),
+        help_text=_(
+            "Check this box to confirm that you have read and agree to the IOTD/TP %(_0)srules%(_1)s and "
+            "%(_2)sguidelines%(_3)s. Your images won't be submitted for IOTD/TP consideration if you don't agree." % {
+                '_0': '<a href="https://welcome.astrobin.com/iotd#rules" target="_blank">',
+                '_1': '</a>',
+                '_2': '<a href="https://welcome.astrobin.com/iotd#photographer-guidelines" target="_blank">',
+                '_3': '</a>'
+            }
+        )
+    )
+
     banned_from_competitions = models.DateTimeField(
         null=True,
         blank=True,

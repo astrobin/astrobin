@@ -359,10 +359,10 @@ $(document).ready(function() {
     {% endif %}
 
 
-    $('#i-agree-with-iotd-tp-rules, #i-agree-with-iotd-tp-guidelines').on('change', function () {
+    $('#i-agree-with-iotd-tp-rules-and-guidelines').on('change', function () {
         const $btn = $('#submit-to-iotd-tp-modal .btn-primary');
 
-        if ($('#i-agree-with-iotd-tp-rules').is(':checked') && $('#i-agree-with-iotd-tp-guidelines').is(':checked')) {
+        if ($(this).is(':checked')) {
             $btn.removeAttr('disabled');
         } else {
             $btn.attr('disabled', 'disabled');

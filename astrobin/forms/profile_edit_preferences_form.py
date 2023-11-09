@@ -24,6 +24,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'open_notifications_in_new_tab',
             'exclude_from_competitions',
             'auto_submit_to_iotd_tp_process',
+            'agreed_to_iotd_tp_rules_and_guidelines',
             'receive_important_communications',
             'receive_newsletter',
             'receive_marketing_and_commercial_material',
@@ -78,12 +79,21 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
 
         exclude_from_competitions = cleaned_data.get('exclude_from_competitions')
         auto_submit_to_iotd_tp_process = cleaned_data.get('auto_submit_to_iotd_tp_process')
+        agreed_to_iotd_tp_rules_and_guidelines = cleaned_data.get('agreed_to_iotd_tp_rules_and_guidelines')
 
         if exclude_from_competitions and auto_submit_to_iotd_tp_process:
             raise forms.ValidationError(
                 _(
                     'You cannot be excluded from competitions and automatically submit images for IOTD/TP '
                     'consideration at the same time.'
+                )
+            )
+
+        if auto_submit_to_iotd_tp_process and not agreed_to_iotd_tp_rules_and_guidelines:
+            raise forms.ValidationError(
+                _(
+                    'You must agree to the IOTD/TP rules and guidelines before you can automatically submit images '
+                    'for IOTD/TP consideration.'
                 )
             )
 

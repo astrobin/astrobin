@@ -1502,9 +1502,10 @@ class ImageSubmitToIotdTpProcessView(View):
     def post(self, request, *args, **kwargs):
         id: Union[str, int] = self.kwargs.get('id')
         auto_submit = request.POST.get('auto_submit_to_iotd_tp_process', 'off').lower() == 'on'
+        agreed = request.POST.get('agreed_to_iotd_tp_rules_and_guidelines', 'off').lower() == 'on'
         image: Image = ImageService.get_object(id, Image)
 
-        may, reason = IotdService.submit_to_iotd_tp_process(request.user, image, auto_submit)
+        may, reason = IotdService.submit_to_iotd_tp_process(request.user, image, auto_submit, agreed)
 
         if not may:
             if reason == MayNotSubmitToIotdTpReason.NOT_AUTHENTICATED or reason == MayNotSubmitToIotdTpReason.NOT_OWNER:

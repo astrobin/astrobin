@@ -443,7 +443,7 @@ class IotdService:
         return inactive_members
 
     @staticmethod
-    def submit_to_iotd_tp_process(user: User, image: Image, auto_submit=False):
+    def submit_to_iotd_tp_process(user: User, image: Image, auto_submit=False, agreed=False):
         may, reason = IotdService.may_submit_to_iotd_tp_process(user, image)
 
         if may:
@@ -464,8 +464,16 @@ class IotdService:
 
             Image.objects_including_wip.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=timezone.now())
 
+            save = False
             if auto_submit:
                 image.user.userprofile.auto_submit_to_iotd_tp_process = True
+                save = True
+
+            if agreed:
+                image.user.userprofile.agreed_to_iotd_tp_terms = DateTimeService.now()
+                save = True
+
+            if save:
                 image.user.userprofile.save(keep_deleted=True)
 
             thumb = image.thumbnail_raw('gallery', None, sync=True)
@@ -532,6 +540,10 @@ class IotdService:
 
         if image.user.userprofile.banned_from_competitions:
             return False, MayNotSubmitToIotdTpReason.BANNED_FROM_COMPETITIONS
+
+        if image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines is None or \
+                image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines < settings.IOTD_LAST_RULES_UPDATE:
+            return False, MayNotSubmitToIotdTpReason.DID_NOT_AGREE_TO_RULES_AND_GUIDELINES
 
         return True, None
 

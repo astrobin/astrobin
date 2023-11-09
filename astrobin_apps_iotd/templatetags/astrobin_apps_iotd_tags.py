@@ -84,7 +84,11 @@ def humanize_may_not_submit_to_iotd_tp_process_reason(reason: str) -> str:
             "after publication." % {
                 'num_days': settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS
             }
-        )
+        ),
+        MayNotSubmitToIotdTpReason.DID_NOT_AGREE_TO_RULES_AND_GUIDELINES: _(
+            "You have not agreed to the IOTD/TP rules and guidelines since their last update. Please amend this in "
+            "your profile preferences."
+        ),
     }
 
     try:
