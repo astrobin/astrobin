@@ -1,21 +1,16 @@
-import os
-import re
-
 import simplejson
 from avatar.utils import get_primary_avatar, get_default_avatar_url
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q
+from django.contrib.postgres.search import TrigramDistance
+from django.db.models import Q, Value
+from django.db.models.functions import Concat, Lower
 from django.http import HttpResponse
 from django.views.decorators.http import require_GET
 from rest_framework.authtoken.models import Token
 
-from astrobin_apps_images.services import ImageService
-from nested_comments.models import NestedComment
-from .models import Image
-from .models import UserProfile
-from .services.utils_service import UtilsService
+from astrobin.models import Image
+from astrobin.models import UserProfile
 
 
 @login_required
@@ -56,49 +51,30 @@ def autocomplete_usernames(request):
             return HttpResponse(simplejson.dumps([]))
 
     q = request.GET['q']
-    referer_header = request.META.get('HTTP_REFERER', '')
-    from_forums = '/forum' in referer_header
-    from_comments = re.match(r'%s\/?([a-zA-Z0-9]{6})\/.*' % settings.BASE_URL, referer_header)
-    users = []
-    results = []
     limit = 10
+    results = []
 
     # Replace non-breaking space with regular space
     q = q.replace(chr(160), ' ')
 
-    if from_forums:
-        referer = request.META.get('HTTP_REFERER')
+    if 'postgresql' in settings.DATABASES['default']['ENGINE']:
+        users = UserProfile.objects.annotate(
+            name=Lower(Concat('real_name', Value(' '), 'user__username'))
+        ).annotate(
+            distance=TrigramDistance('name', q.lower())
+        ).filter(
+            Q(distance__lte=0.7) | Q(user__username__icontains=q) | Q(real_name__icontains=q)
+        ).order_by('distance')
+    else:
+        users = UserProfile.objects.annotate(
+            name=Lower(Concat('real_name', Value(' '), 'user__username'))
+        ).filter(
+            name__icontains=q
+        )
 
-        if '?' in referer:
-            slug = os.path.basename(os.path.normpath(referer.rsplit('/', 1)[0]))
-        else:
-            slug = os.path.basename(os.path.normpath(referer))
+    users = users.values_list('user__id', 'user__username', 'real_name')[:limit]
 
-        users = list(UserProfile.objects.filter(
-            Q(user__posts__topic__slug=slug) & (Q(user__username__icontains=q) | Q(real_name__icontains=q))
-        ).distinct()[:limit])
-    elif from_comments:
-        image_id = from_comments.group(1)
-        image = ImageService.get_object(image_id, Image.objects_including_wip.all())
-        owner_id = [image.user.id]
-        commenter_ids = NestedComment.objects.filter(
-            object_id=image.id,
-            content_type=ContentType.objects.get_for_model(image),
-            deleted=False
-        ).values_list('author', flat=True)
-        user_ids = UserProfile.objects.filter(
-                Q(user__username__icontains=q) | Q(real_name__icontains=q)
-            ).values_list(
-                'user', flat=True
-            ).distinct()[:limit]
-        combined_user_ids = set(owner_id + list(commenter_ids) + list(user_ids))
-        users = list(UserProfile.objects.filter(user_id__in=combined_user_ids))
-
-    users = UtilsService.unique(users + list(UserProfile.objects.filter(
-        Q(user__username__icontains=q) | Q(real_name__icontains=q)
-    ).distinct()[:limit]))[:limit]
-
-    for user in users:
+    for user in users.iterator():
         avatar = get_primary_avatar(user, 40)
         if avatar is None:
             avatar_url = get_default_avatar_url()
@@ -106,10 +82,10 @@ def autocomplete_usernames(request):
             avatar_url = avatar.get_absolute_url()
 
         results.append({
-            'id': str(user.id),
-            'username': user.user.username,
-            'realName': user.user.userprofile.real_name,
-            'displayName': user.user.userprofile.real_name if user.user.userprofile.real_name else user.user.username,
+            'id': str(user[0]),
+            'username': user[1],
+            'realName': user[2],
+            'displayName': user[2] if user[2] else user[1],
             'avatar': avatar_url,
         })
 
