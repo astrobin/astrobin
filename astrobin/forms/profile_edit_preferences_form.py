@@ -1,6 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.forms import SelectMultiple
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin.models import UserProfile
@@ -11,8 +12,13 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_remove_retailer_integration,
 )
 
-
 class UserProfileEditPreferencesForm(forms.ModelForm):
+    agreed_to_iotd_tp_rules_and_guidelines_checkbox = forms.BooleanField(
+        label=UserProfile._meta.get_field('agreed_to_iotd_tp_rules_and_guidelines').verbose_name,
+        help_text=UserProfile._meta.get_field('agreed_to_iotd_tp_rules_and_guidelines').help_text,
+        required=False
+    )
+
     class Meta:
         model = UserProfile
         fields = [
@@ -24,7 +30,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'open_notifications_in_new_tab',
             'exclude_from_competitions',
             'auto_submit_to_iotd_tp_process',
-            'agreed_to_iotd_tp_rules_and_guidelines',
+            'agreed_to_iotd_tp_rules_and_guidelines_checkbox',
             'receive_important_communications',
             'receive_newsletter',
             'receive_marketing_and_commercial_material',
@@ -50,6 +56,24 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
 
         if not can_remove_retailer_integration(valid_usersubscription):
             self.fields['allow_retailer_integration'].widget.attrs['disabled'] = True
+
+        if (self.instance and
+                self.instance.agreed_to_iotd_tp_rules_and_guidelines and
+                self.instance.agreed_to_iotd_tp_rules_and_guidelines > settings.IOTD_LAST_RULES_UPDATE):
+            self.fields['agreed_to_iotd_tp_rules_and_guidelines_checkbox'].initial = True
+
+    def save(self, commit=True):
+        instance: UserProfile = super(UserProfileEditPreferencesForm, self).save(commit=False)
+
+        if self.cleaned_data['agreed_to_iotd_tp_rules_and_guidelines_checkbox']:
+            instance.agreed_to_iotd_tp_rules_and_guidelines = timezone.now()
+        else:
+            instance.agreed_to_iotd_tp_rules_and_guidelines = None
+
+        if commit:
+            instance.save()
+
+        return instance
 
     def clean_other_languages(self):
         data = self.cleaned_data['other_languages']

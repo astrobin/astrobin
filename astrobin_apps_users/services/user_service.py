@@ -618,3 +618,7 @@ class UserService:
             profile.save(keep_deleted=True)
         except UserProfile.DoesNotExist:
             pass
+
+    def agreed_to_iotd_tp_rules_and_guidelines(self) -> bool:
+        agreed = self.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines
+        return agreed and agreed > settings.IOTD_LAST_RULES_UPDATE

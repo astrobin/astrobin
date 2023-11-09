@@ -444,7 +444,7 @@ class IotdService:
 
     @staticmethod
     def submit_to_iotd_tp_process(user: User, image: Image, auto_submit=False, agreed=False):
-        may, reason = IotdService.may_submit_to_iotd_tp_process(user, image)
+        may, reason = IotdService.may_submit_to_iotd_tp_process(user, image, agreed)
 
         if may:
             image.designated_iotd_submitters.add(
@@ -470,7 +470,7 @@ class IotdService:
                 save = True
 
             if agreed:
-                image.user.userprofile.agreed_to_iotd_tp_terms = DateTimeService.now()
+                image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines = DateTimeService.now()
                 save = True
 
             if save:
@@ -500,7 +500,7 @@ class IotdService:
         Image.objects_including_wip.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=timezone.now())
 
     @staticmethod
-    def may_submit_to_iotd_tp_process(user: User, image: Image):
+    def may_submit_to_iotd_tp_process(user: User, image: Image, agreed=False):
         if not user.is_authenticated:
             return False, MayNotSubmitToIotdTpReason.NOT_AUTHENTICATED
 
@@ -541,8 +541,9 @@ class IotdService:
         if image.user.userprofile.banned_from_competitions:
             return False, MayNotSubmitToIotdTpReason.BANNED_FROM_COMPETITIONS
 
-        if image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines is None or \
-                image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines < settings.IOTD_LAST_RULES_UPDATE:
+        if (image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines is None or \
+                image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines < settings.IOTD_LAST_RULES_UPDATE) and \
+                not agreed:
             return False, MayNotSubmitToIotdTpReason.DID_NOT_AGREE_TO_RULES_AND_GUIDELINES
 
         return True, None
