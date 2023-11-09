@@ -104,6 +104,22 @@
                                 {% trans "Leave group" %}
                             </a>
                         </li>
+
+                        {% if user_following_images %}
+                            <li>
+                                <a href="#unfollow-images-modal" data-toggle="modal" class="danger">
+                                    <i class="icon icon-signout"></i>
+                                {% trans "Stop following new images" %}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="#follow-images-modal" data-toggle="modal" class="danger">
+                                    <i class="icon icon-signout"></i>
+                                    {% trans "Follow new images" %}
+                                </a>
+                            </li>
+                        {% endif %}
                     {% endif %}
 
                     {% if group.moderated and user_is_moderator %}
@@ -380,4 +396,47 @@
             </form>
         </div>
     </div>
+
+    <div class="modal hide fade" id="follow-images-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Follow new images?" %}</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                {% trans "Start getting notified of new images to this group. Are you sure?" %}
+            </p>
+        </div>
+
+        <div class="modal-footer">
+            <form action="{% url 'group_leave' group.pk %}" method="post">{% csrf_token %}
+                <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                    {% trans "Follow new images" %}
+                    {% button_loading_indicator %}
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="unfollow-images-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Unfollow new images?" %}</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                {% trans "Stop getting notified of new images to this group. Are you sure?" %}
+            </p>
+        </div>
+
+        <div class="modal-footer">
+            <form action="{% url 'group_leave' group.pk %}" method="post">{% csrf_token %}
+                <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                    {% trans "Unfollow new images" %}
+                    {% button_loading_indicator %}
+                </button>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
