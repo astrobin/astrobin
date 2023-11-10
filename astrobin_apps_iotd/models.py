@@ -362,9 +362,29 @@ class IotdStaffMemberScore(models.Model):
         auto_now_add=True,
     )
 
+    period_start = models.DateTimeField(
+        null=False,
+        blank=False,
+    )
+
+    period_end = models.DateTimeField(
+        null=False,
+        blank=False,
+    )
+
     score = models.DecimalField(
         default=0,
         max_digits=8,
+        decimal_places=2,
+    )
+
+    active_days = models.PositiveSmallIntegerField(
+        default=0,
+    )
+
+    promotions_dismissals_accuracy_ratio = models.DecimalField(
+        default=0,
+        max_digits=5,
         decimal_places=2,
     )
 
