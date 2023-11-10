@@ -88,7 +88,10 @@ class IotdTest(TestCase):
             submitter=self.submitter_2,
             image=self.image)
 
-        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS) - \
+            timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -425,7 +428,14 @@ class IotdTest(TestCase):
         self.assertEqual(vote.reviewer, self.reviewer_1)
         self.assertEqual(vote.image, submission_1.image)
 
-        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()
@@ -446,7 +456,14 @@ class IotdTest(TestCase):
             reviewer=self.reviewer_2,
             image=submission_1.image)
 
-        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()
