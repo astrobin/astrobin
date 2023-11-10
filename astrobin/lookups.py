@@ -1,9 +1,13 @@
+import re
+
 import simplejson
 from avatar.utils import get_primary_avatar, get_default_avatar_url
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
-from django.db.models import Q, Value
+from django.db.models import Q, QuerySet, Value
 from django.db.models.functions import Concat, Lower
 from django.http import HttpResponse
 from django.views.decorators.http import require_GET
@@ -11,6 +15,8 @@ from rest_framework.authtoken.models import Token
 
 from astrobin.models import Image
 from astrobin.models import UserProfile
+from astrobin_apps_images.services import ImageService
+from nested_comments.models import NestedComment
 
 
 @login_required
@@ -52,44 +58,78 @@ def autocomplete_usernames(request):
 
     q = request.GET['q']
     limit = 10
+    referer_header = request.META.get('HTTP_REFERER', '')
+    from_image_page = re.match(r'%s\/?([a-zA-Z0-9]{6})\/.*' % settings.BASE_URL, referer_header)
+    context_aware_users = UserProfile.objects.none()
+    all_users = UserProfile.objects.none()
+    ids = []
     results = []
 
     # Replace non-breaking space with regular space
     q = q.replace(chr(160), ' ')
 
-    if 'postgresql' in settings.DATABASES['default']['ENGINE']:
-        users = UserProfile.objects.annotate(
-            name=Lower(Concat('real_name', Value(' '), 'user__username'))
-        ).annotate(
-            distance=TrigramDistance('name', q.lower())
-        ).filter(
-            Q(distance__lte=0.7) | Q(user__username__icontains=q) | Q(real_name__icontains=q)
-        ).order_by('distance')
-    else:
-        users = UserProfile.objects.annotate(
-            name=Lower(Concat('real_name', Value(' '), 'user__username'))
-        ).filter(
-            name__icontains=q
+    def filter_by_distance(queryset: QuerySet, q: str) -> QuerySet:
+        if 'postgresql' in settings.DATABASES['default']['ENGINE']:
+            return queryset.annotate(
+                name=Lower(Concat('real_name', Value(' '), 'user__username'))
+            ).annotate(
+                distance=TrigramDistance('name', q.lower())
+            ).filter(
+                Q(distance__lte=0.7) | Q(user__username__icontains=q) | Q(real_name__icontains=q)
+            ).order_by('distance')
+        else:
+            return queryset.annotate(
+                name=Lower(Concat('real_name', Value(' '), 'user__username'))
+            ).filter(
+                name__icontains=q
+            )
+
+    if from_image_page:
+        image_id = from_image_page.group(1)
+        image = ImageService.get_object(image_id, Image.objects_including_wip.all())
+        image_ct = ContentType.objects.get_for_model(image)
+        image_owner = [image.user.id]
+        collaborators = [x.id for x in image.collaborators.all()]
+        commenters = list(
+            NestedComment.objects.filter(
+                object_id=image.id, content_type_id=image_ct.id
+            ).only(
+                'author'
+            ).values_list(
+                'author__id', flat=True
+            ).distinct()
         )
+        ids = image_owner + collaborators + commenters
+        context_aware_users = filter_by_distance(UserProfile.objects.filter(user__id__in=ids), q)[:limit]
+        results += list(context_aware_users)
 
-    users = users.values_list('user__id', 'user__username', 'real_name')[:limit]
+    if len(results) < limit:
+        all_users = filter_by_distance(UserProfile.objects.exclude(user__id__in=ids), q)[:limit - len(results)]
 
-    for user in users.iterator():
-        avatar = get_primary_avatar(user, 40)
+    context_aware_users = context_aware_users.values_list('user__id', 'user__username', 'real_name')
+    all_users = all_users.values_list('user__id', 'user__username', 'real_name')
+
+    ret = []
+    for user in list(context_aware_users) + list(all_users):
+        user_id = user[0]
+        username = user[1]
+        real_name = user[2]
+
+        avatar = get_primary_avatar(User.objects.get(id=user_id), 40)
         if avatar is None:
             avatar_url = get_default_avatar_url()
         else:
             avatar_url = avatar.get_absolute_url()
 
-        results.append({
-            'id': str(user[0]),
-            'username': user[1],
-            'realName': user[2],
-            'displayName': user[2] if user[2] else user[1],
+        ret.append({
+            'id': str(user_id),
+            'username': username,
+            'realName': real_name,
+            'displayName': real_name if real_name else username,
             'avatar': avatar_url,
         })
 
-    return HttpResponse(simplejson.dumps(results))
+    return HttpResponse(simplejson.dumps(ret))
 
 
 @require_GET
