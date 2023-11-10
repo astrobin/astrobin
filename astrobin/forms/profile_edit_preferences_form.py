@@ -103,7 +103,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
 
         exclude_from_competitions = cleaned_data.get('exclude_from_competitions')
         auto_submit_to_iotd_tp_process = cleaned_data.get('auto_submit_to_iotd_tp_process')
-        agreed_to_iotd_tp_rules_and_guidelines = cleaned_data.get('agreed_to_iotd_tp_rules_and_guidelines')
+        agreed_to_iotd_tp_rules_and_guidelines = cleaned_data.get('agreed_to_iotd_tp_rules_and_guidelines_checkbox')
 
         if exclude_from_competitions and auto_submit_to_iotd_tp_process:
             raise forms.ValidationError(
