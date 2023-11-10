@@ -1,3 +1,4 @@
+import os
 import re
 
 import simplejson
@@ -11,6 +12,7 @@ from django.db.models import Q, QuerySet, Value
 from django.db.models.functions import Concat, Lower
 from django.http import HttpResponse
 from django.views.decorators.http import require_GET
+from pybb.models import Post
 from rest_framework.authtoken.models import Token
 
 from astrobin.models import Image
@@ -59,6 +61,7 @@ def autocomplete_usernames(request):
     q = request.GET['q']
     limit = 10
     referer_header = request.META.get('HTTP_REFERER', '')
+    from_forums = '/forum' in referer_header
     from_image_page = re.match(r'%s\/?([a-zA-Z0-9]{6})\/.*' % settings.BASE_URL, referer_header)
     context_aware_users = UserProfile.objects.none()
     all_users = UserProfile.objects.none()
@@ -84,7 +87,16 @@ def autocomplete_usernames(request):
                 name__icontains=q
             )
 
-    if from_image_page:
+    if from_forums:
+        if '?' in referer_header:
+            slug = os.path.basename(os.path.normpath(referer_header.rsplit('/', 1)[0]))
+        else:
+            slug = os.path.basename(os.path.normpath(referer_header))
+        posters = Post.objects.filter(topic__slug=slug).only('poster').values_list('user', flat=True).distinct()
+        ids = list(posters)
+        context_aware_users = filter_by_distance(UserProfile.objects.filter(user__id__in=ids), q)[:limit]
+        results += list(context_aware_users)
+    elif from_image_page:
         image_id = from_image_page.group(1)
         image = ImageService.get_object(image_id, Image.objects_including_wip.all())
         image_ct = ContentType.objects.get_for_model(image)
