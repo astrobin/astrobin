@@ -223,6 +223,7 @@ urlpatterns += [
     url(r'^favicon.ico$',
         RedirectView.as_view(url=staticfiles_storage.url('astrobin/favicon.ico'), permanent=False),
         name='favicon'),
+    url(r'^robots\.txt', include('robots.urls')),
 
     ###########################################################################
     ### SEARCH VIEWS                                                        ###
