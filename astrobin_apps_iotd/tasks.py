@@ -161,17 +161,17 @@ def calculate_iotd_staff_members_stats():
 
     current_date = datetime.now()
 
-    # Get the first day of the current month
+    # Get the first day of the current month with time 00:00:00
     first_day_current_month = current_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
 
     # Get the first day of two months ago with time 00:00:00
-    first_day_two_months_ago = (first_day_current_month - timedelta(days=1)).replace(
-        day=1, hour=0, minute=0, second=0, microsecond=0
-    )
+    # We first subtract 1 day to go to the previous month, then replace the day with 1
+    first_day_previous_month = (first_day_current_month - timedelta(days=1)).replace(day=1)
+    first_day_two_months_ago = (first_day_previous_month - timedelta(days=1)).replace(day=1)
 
     # Get the last day of two months ago with time 23:59:59.999
-    last_day_two_months_ago = (first_day_current_month - timedelta(days=1)).replace(
-        hour=23, minute=59, second=59, microsecond=999000
-    )
+    # This is the day before the first day of the previous month
+    last_day_two_months_ago = first_day_previous_month - timedelta(days=1)
+    last_day_two_months_ago = last_day_two_months_ago.replace(hour=23, minute=59, second=59, microsecond=999999)
 
     service.calculate_iotd_staff_members_stats(first_day_two_months_ago, last_day_two_months_ago)
