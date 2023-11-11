@@ -455,8 +455,9 @@ def ad_key_value_pairs(image, user):
             data["exclude-category"] = "remote-hosting"
 
     if user and user.is_authenticated:
-        if UserService(user).has_used_commercial_remote_hosting_facilities():
-            data["used-remote-hosting"] = "true"
+        data["used-remote-hosting"] = "true" \
+            if UserService(user).has_used_commercial_remote_hosting_facilities() \
+            else "false"
 
     return data
 
