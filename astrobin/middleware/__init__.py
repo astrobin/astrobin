@@ -1,5 +1,6 @@
 from .block_non_paying_users_from_russia_middleware import BlockNonPayingUsersFromRussiaMiddleware
 from .enforce_otp_verification_middleware import EnforceOtpVerificationMiddleware
+from .gone_middleware import GoneMiddleware
 from .last_seen_middleware import LastSeenMiddleware
 from .locale_middleware import LocaleMiddleware
 from .logout_deleted_user_middleware import LogoutDeletedUserMiddleware

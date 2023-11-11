@@ -67,6 +67,7 @@ from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
+from common.exceptions import Http410
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
@@ -83,6 +84,9 @@ class ImageSingleObjectMixin(SingleObjectMixin):
         image = ImageService.get_object(id, queryset)
 
         if image is None:
+            deleted_image = ImageService.get_object(id, Image.deleted_objects)
+            if deleted_image is not None:
+                raise Http410
             raise Http404
 
         return image
