@@ -11,6 +11,10 @@
 {% load cache %}
 {% load common_tags %}
 
+{% block canonical %}
+    <link rel="canonical" href="{{ BASE_URL }}{% url 'user_page' requested_user.username %}" />
+{% endblock %}
+
 {% block extra_meta %}
     {{ block.super }}
 
@@ -32,6 +36,13 @@
 {% endblock %}
 
 {% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block meta_description %}
+    <meta
+            name="description"
+            content="{% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}Astrophotography by {{ user }} on AstroBin{% endblocktrans %}"
+    />
+{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}

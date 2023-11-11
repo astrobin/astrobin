@@ -18,11 +18,20 @@
     <head>
         <title>{% block title %}{% endblock %} - AstroBin</title>
 
+        {% block meta_description %}
+            <meta
+                    name="description"
+                    content="AstroBin is an image hosting platform and social network for amateur astronomers and astrophotographers."
+            />
+        {% endblock %}
+
         {% include "base/meta.html" %}
         {% block extra_meta %}{% endblock %}
 
         {% include "base/favicon.html" %}
         {% include "base/ie8html5.html" %}
+
+        {% block canonical %}{% endblock %}
 
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css">
         <link rel="stylesheet" href="https://cdn.astrobin.com/delivery/token-input-1.6.0.css">
