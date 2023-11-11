@@ -11,6 +11,7 @@ MIDDLEWARE = [
     'astrobin.middleware.LastSeenMiddleware',
     'astrobin.middleware.BlockNonPayingUsersFromRussiaMiddleware',
     'astrobin.middleware.BlockSuspendedUserMiddleware',
+    'astrobin.middleware.GoneMiddleware',
     'astrobin.middleware.LogoutDeletedUserMiddleware',
     'astrobin.middleware.MarkNotificationAsReadMiddleware',
     'astrobin.middleware.PreviousTopicReadMarkerMiddleware',
