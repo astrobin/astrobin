@@ -552,7 +552,7 @@ class IotdService:
             return False, MayNotSubmitToIotdTpReason.BANNED_FROM_COMPETITIONS
 
         if (image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines is None or \
-                image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines < settings.IOTD_LAST_RULES_UPDATE) and \
+            image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines < settings.IOTD_LAST_RULES_UPDATE) and \
                 not agreed:
             return False, MayNotSubmitToIotdTpReason.DID_NOT_AGREE_TO_RULES_AND_GUIDELINES
 
@@ -905,7 +905,7 @@ class IotdService:
         return images
 
     @staticmethod
-    def calculate_iotd_staff_members_stats(lookback_period: datetime):
+    def calculate_iotd_staff_members_stats(period_start: datetime, period_end: datetime):
         # Promoted an image that made it to IOTD
         guessed_iotd_reward = Decimal('4')
         # Promoted an image that made it to TP
@@ -936,13 +936,15 @@ class IotdService:
         dismissal_scores = {}
 
         def get_submissions():
-            return IotdSubmission.objects.filter(date__gte=lookback_period).select_related('image', 'submitter')
+            return IotdSubmission.objects.filter(
+                date__gte=period_start, date__lte=period_end
+            ).select_related('image', 'submitter')
 
         def get_submissions_by_user(submissions):
             return {
                 submission.submitter.username: set(
                     IotdSubmission.objects.filter(
-                        submitter=submission.submitter, date__gte=lookback_period
+                        submitter=submission.submitter, date__gte=period_start, date__lte=period_end
                     ).values_list('image_id', flat=True)
                 )
                 for submission in submissions
@@ -956,10 +958,14 @@ class IotdService:
             return dict(dismissed_images_dict)
 
         def get_votes():
-            return IotdVote.objects.filter(date__gte=lookback_period).select_related('image', 'reviewer')
+            return IotdVote.objects.filter(
+                date__gte=period_start, date__lte=period_end
+            ).select_related('image', 'reviewer')
 
         def get_dismissals():
-            return IotdDismissedImage.objects.filter(created__gte=lookback_period).select_related('image', 'user')
+            return IotdDismissedImage.objects.filter(
+                created__gte=period_start, created__lte=period_end
+            ).select_related('image', 'user')
 
         def prepare_dismissals_counts(dismissals):
             counts = {}
@@ -971,7 +977,7 @@ class IotdService:
         def get_seen_images_by_user():
             prefetch = Prefetch(
                 'iotdsubmitterseenimage_set',
-                queryset=IotdSubmitterSeenImage.objects.filter(created__gte=lookback_period),
+                queryset=IotdSubmitterSeenImage.objects.filter(created__gte=period_start, created__lte=period_end),
                 to_attr='seen_images'
             )
 
@@ -985,21 +991,59 @@ class IotdService:
             }
 
         def get_nominated_ids():
-            return set(TopPickNominationsArchive.objects.filter(
-                image__submitted_for_iotd_tp_consideration__gte=lookback_period
-            ).values_list('image_id', flat=True))
+            return set(
+                TopPickNominationsArchive.objects.filter(
+                    image__submitted_for_iotd_tp_consideration__gte=period_start + timedelta(
+                        days=settings.IOTD_SUBMISSION_WINDOW_DAYS
+                    ),
+                    image__submitted_for_iotd_tp_consideration__lte=period_end + timedelta(
+                        days=settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+                    ),
+                ).values_list('image_id', flat=True)
+            )
 
         def get_top_pick_ids():
-            return set(TopPickArchive.objects.filter(
-                image__submitted_for_iotd_tp_consideration__gte=lookback_period
-            ).values_list('image_id', flat=True))
+            return set(
+                TopPickArchive.objects.filter(
+                    image__submitted_for_iotd_tp_consideration__gte=period_start + timedelta(
+                        days=(
+                                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                                settings.IOTD_REVIEW_WINDOW_DAYS +
+                                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+                        )
+                    ),
+                    image__submitted_for_iotd_tp_consideration__lte=period_end + timedelta(
+                        days=(
+                                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                                settings.IOTD_REVIEW_WINDOW_DAYS +
+                                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+                        )
+                    ),
+                ).values_list('image_id', flat=True)
+            )
 
         def get_iotd_ids():
-            return set(Iotd.objects.filter(
-                image__submitted_for_iotd_tp_consideration__gte=lookback_period
-            ).values_list('image_id', flat=True))
+            return set(
+                Iotd.objects.filter(
+                    image__submitted_for_iotd_tp_consideration__gte=period_start + timedelta(
+                        days=(
+                                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                                settings.IOTD_REVIEW_WINDOW_DAYS +
+                                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+                        )
+                    ),
+                    image__submitted_for_iotd_tp_consideration__lte=period_end + timedelta(
+                        days=(
+                                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                                settings.IOTD_REVIEW_WINDOW_DAYS +
+                                settings.IOTD_JUDGEMENT_WINDOW_DAYS +
+                                settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS
+                        )
+                    ),
+                ).values_list('image_id', flat=True)
+            )
 
-        def prepare_submitter_scores(submissions):
+        def prepare_submitter_scores(submissions, dismissals):
             for submission in submissions:
                 if not submission.submitter:
                     continue
@@ -1122,6 +1166,21 @@ class IotdService:
 
                 dismissal_counts[user_username]['dismissals'] += 1
 
+        def prepare_active_days(submissions, votes, dismissals):
+            for username in all_usernames:
+                days_with_submissions = list(
+                    submissions.filter(submitter__username=username).values_list('date__date', flat=True).distinct()
+                )
+                days_with_votes = list(
+                    votes.filter(reviewer__username=username).values_list('date__date', flat=True).distinct()
+                )
+                days_with_dismissals = list(
+                    dismissals.filter(user__username=username).values_list('created__date', flat=True).distinct()
+                )
+                submitter_promotion_counts[username]['active_days'] = len(
+                    set(days_with_submissions + days_with_votes + days_with_dismissals)
+                )
+
         def combined_score(submitter_score, reviewer_score, dismissal_score):
             return submitter_score + reviewer_score + dismissal_score
 
@@ -1176,9 +1235,11 @@ class IotdService:
                 'missed_tpn_promotions': 0,
                 'top_pick_nominations': 0,
                 'top_picks': 0,
-                'iotds': 0
+                'iotds': 0,
+                'active_days': 0
             } for username in all_usernames
         }
+
         reviewer_promotion_counts = {
             username: {
                 'promotions': 0,
@@ -1188,9 +1249,11 @@ class IotdService:
                 'missed_tpn_promotions': 0,
                 'top_pick_nominations': 0,
                 'top_picks': 0,
-                'iotds': 0
+                'iotds': 0,
+                'active_days': 0
             } for username in all_usernames
         }
+
         dismissal_counts = {
             username: {
                 'dismissals': 0,
@@ -1202,25 +1265,41 @@ class IotdService:
             } for username in all_usernames
         }
 
-        prepare_submitter_scores(submissions)
+        prepare_submitter_scores(submissions, dismissals)
         prepare_reviewer_scores(votes)
         prepare_dismissal_scores(dismissals)
+        prepare_active_days(submissions, votes, dismissals)
         reviewers_scores = remove_inactive_reviewers(reviewers_scores, reviewer_promotion_counts)
 
         combined_data = prepare_combined_data()
 
         # Print the merged data
         log.debug(
-            "User,Score,"
+            "User,Score,Active days,Promotions/Dismissals accuracy ratio,"
             "Promotions,Wasted Promotions,Missed IOTD Promotions,Missed TP Promotion,Missed TPN Promotions,"
             "TPNs,TPs,IOTDs,"
-            "Dismissals,Correct Dismissals,"
+            "Dismissals,Correct Dismissals,Missed Dismissals,"
             "TPNs,TPs,IOTDs"
         )
         for username, data in sorted(combined_data.items(), key=lambda item: item[1]['score'], reverse=True):
+            try:
+                promotions_dismissals_accuracy_ratio = (
+                                data['promotions'].get('top_pick_nominations', 0) +
+                                data['promotions'].get('top_picks', 0) +
+                                data['promotions'].get('iotds', 0)
+                        ) / (
+                                data['dismissals'].get('top_pick_nominations', 0) +
+                                data['dismissals'].get('top_picks', 0) +
+                                data['dismissals'].get('iotds', 0)
+                        )
+            except ZeroDivisionError:
+                promotions_dismissals_accuracy_ratio = 0
+
             log.debug(
                 f"{username},"
                 f"{data['score']},"
+                f"{data['promotions'].get('active_days', 0)},"
+                f"{promotions_dismissals_accuracy_ratio:.2f},"
                 f"{data['promotions'].get('promotions', 0)},"
                 f"{data['promotions'].get('wasted_promotions', 0)},"
                 f"{data['promotions'].get('missed_iotd_promotions', 0)},"
@@ -1238,7 +1317,11 @@ class IotdService:
             )
             IotdStaffMemberScore.objects.create(
                 user=User.objects.get(username=username),
+                period_start=period_start,
+                period_end=period_end,
                 score=data['score'],
+                active_days=data['promotions'].get('active_days', 0),
+                promotions_dismissals_accuracy_ratio=promotions_dismissals_accuracy_ratio,
                 promotions=data['promotions'].get('promotions', 0),
                 wasted_promotions=data['promotions'].get('wasted_promotions', 0),
                 missed_iotd_promotions=data['promotions'].get('missed_iotd_promotions', 0),

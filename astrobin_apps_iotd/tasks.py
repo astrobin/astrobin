@@ -1,5 +1,5 @@
 import logging
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from celery import shared_task
 from django.conf import settings
@@ -158,4 +158,20 @@ def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
 @shared_task(time_limit=600)
 def calculate_iotd_staff_members_stats():
     service = IotdService()
-    service.calculate_iotd_staff_members_stats(DateTimeService.now() - timedelta(days=60))
+
+    current_date = datetime.now()
+
+    # Get the first day of the current month
+    first_day_current_month = current_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+
+    # Get the first day of two months ago with time 00:00:00
+    first_day_two_months_ago = (first_day_current_month - timedelta(days=1)).replace(
+        day=1, hour=0, minute=0, second=0, microsecond=0
+    )
+
+    # Get the last day of two months ago with time 23:59:59.999
+    last_day_two_months_ago = (first_day_current_month - timedelta(days=1)).replace(
+        hour=23, minute=59, second=59, microsecond=999000
+    )
+
+    service.calculate_iotd_staff_members_stats(first_day_two_months_ago, last_day_two_months_ago)
