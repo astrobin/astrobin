@@ -15,6 +15,10 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load static %}
 
+{% block canonical %}
+    <link rel="canonical" href="{{ BASE_URL }}{% url 'index' %}" />
+{% endblock %}
+
 {% block title %}{% trans "Home of Astrophotography" %}{% endblock %}
 
 {% block breadcrumbs %}

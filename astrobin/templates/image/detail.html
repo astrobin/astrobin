@@ -29,8 +29,20 @@
     <meta property="og:type" content="object" />
 {% endblock %}
 
+{% block canonical %}
+    <link rel="canonical" href="{{ BASE_URL }}{% url 'image_detail' image.get_id %}" />
+{% endblock %}
+
 {% block title %}{{image.title|escape}} ({% astrobin_username image.user link=False %}){% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block meta_description %}
+    <meta
+            name="description"
+            content="An astrophotograph by {{ image.user.userprofile }} on AstroBin"
+    />
+{% endblock %}
+
 
 {% block breadcrumbs %}
     {{ block.super }}
