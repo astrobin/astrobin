@@ -246,15 +246,19 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                     MayNotSubmitToIotdTpReason.NO_ACQUISITIONS,
                     MayNotSubmitToIotdTpReason.DID_NOT_AGREE_TO_RULES_AND_GUIDELINES,
             ):
-                thumb = instance.thumbnail_raw('gallery', None, sync=True)
-                push_notification(
-                    [instance.user], None, 'image_not_submitted_to_iotd_tp', {
-                        'image': instance,
-                        'image_thumbnail': thumb.url if thumb else None,
-                        'reason': humanize_may_not_submit_to_iotd_tp_process_reason(reason),
-                        'raw_reason': reason,
-                    }
-                )
+                cache_key = 'image.%d.image_not_submitted_to_iotd_tp' % instance.pk
+                if not cache.get(cache_key):
+                    cache.set(cache_key, True, 4)
+                    thumb = instance.thumbnail_raw('gallery', None, sync=True)
+                    push_notification(
+                        [instance.user], None, 'image_not_submitted_to_iotd_tp', {
+                            'image': instance,
+                            'image_thumbnail': thumb.url if thumb else None,
+                            'reason': humanize_may_not_submit_to_iotd_tp_process_reason(reason),
+                            'raw_reason': reason,
+                        }
+                    )
+
 
 
 post_save.connect(image_post_save, sender=Image)
