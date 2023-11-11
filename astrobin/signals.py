@@ -252,6 +252,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                         'image': instance,
                         'image_thumbnail': thumb.url if thumb else None,
                         'reason': humanize_may_not_submit_to_iotd_tp_process_reason(reason),
+                        'raw_reason': reason,
                     }
                 )
 
