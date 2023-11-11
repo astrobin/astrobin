@@ -103,7 +103,14 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
 
-        image.submitted_for_iotd_tp_consideration = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(1)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(1)
         image.save()
 
         IotdService().update_top_pick_archive()
@@ -122,7 +129,13 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=image)
         IotdGenerators.vote(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            )
         image.save()
 
         IotdService().update_top_pick_archive()
@@ -172,7 +185,13 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=image)
         IotdGenerators.iotd(image=image, date=date.today() + timedelta(days=1))
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            )
         image.save()
 
         IotdService().update_top_pick_archive()
@@ -183,11 +202,30 @@ class IotdServiceTest(TestCase):
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS - 1)
     )
     def test_is_top_pick_nomination_false_only_one_submission_after_cutoff(self):
-        image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        image.save()
+
+        IotdService().update_top_pick_nomination_archive()
+
+        self.assertFalse(IotdService().is_top_pick_nomination(image))
+
+    @override_settings(
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS - 1)
+    )
+    def test_is_top_pick_nomination_false_enough_submissions_but_could_still_become_top_pick(self):
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
+
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -196,13 +234,17 @@ class IotdServiceTest(TestCase):
 
     @override_settings(
         IOTD_SUBMISSION_MIN_PROMOTIONS=2,
-        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1))
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS + 1
+        )
+    )
     def test_is_top_pick_nomination_true_only_one_submission_before_cutoff(self):
-        image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(minutes=1)
+        image.submitted_for_iotd_tp_consideration = \
+            settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(minutes=1)
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -218,7 +260,9 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            days=settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+        )
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -248,7 +292,9 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            days=settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+        )
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -303,7 +349,14 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=top_pick_image)
         IotdGenerators.vote(image=top_pick_image)
 
-        top_pick_image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        top_pick_image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         top_pick_image.save()
 
         IotdService().update_top_pick_archive()
@@ -375,7 +428,14 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=image)
         IotdGenerators.iotd(image=image, date=date.today() + timedelta(days=1))
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         image.save()
 
         IotdService().update_top_pick_archive()
@@ -420,7 +480,14 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=top_pick_image)
         IotdGenerators.vote(image=top_pick_image)
 
-        top_pick_image.submitted_for_iotd_tp_consideration = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(hours=1)
+        top_pick_image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         top_pick_image.save()
 
         IotdService().update_top_pick_archive()
@@ -448,7 +515,9 @@ class IotdServiceTest(TestCase):
         self.assertEqual(0, nominations.count())
 
     @override_settings(
-        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS + 1
+        )
     )
     def test_get_top_pick_nominations_only_one_submission_before_cutoff(self):
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
@@ -477,7 +546,9 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+        ) - timedelta(hours=1)
         image.save()
 
         IotdService().update_top_pick_nomination_archive()

@@ -55,7 +55,11 @@ class ExploreTest(TestCase):
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer2, image=self.image)
 
-        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS +
+            settings.IOTD_REVIEW_WINDOW_DAYS +
+            settings.IOTD_JUDGEMENT_WINDOW_DAYS
+        ) - timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()
@@ -112,7 +116,11 @@ class ExploreTest(TestCase):
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer2, image=self.image)
 
-        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS +
+            settings.IOTD_REVIEW_WINDOW_DAYS +
+            settings.IOTD_JUDGEMENT_WINDOW_DAYS
+        ) - timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()

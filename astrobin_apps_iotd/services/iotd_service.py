@@ -241,7 +241,11 @@ class IotdService:
                     Q(submitted_for_iotd_tp_consideration__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
                 )
             ) &
-            Q(submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS))
+            Q(
+                submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(
+                    settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+                )
+            )
         ).order_by('-submitted_for_iotd_tp_consideration')
 
         if latest:
@@ -263,7 +267,13 @@ class IotdService:
         items = Image.objects.annotate(
             num_votes=Count('iotdvote', distinct=True)
         ).filter(
-            Q(submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
+            Q(
+                submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(
+                    settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                    settings.IOTD_REVIEW_WINDOW_DAYS +
+                    settings.IOTD_JUDGEMENT_WINDOW_DAYS
+                )
+            ) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
             Q(
                 Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |

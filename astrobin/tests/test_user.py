@@ -548,7 +548,11 @@ class UserTest(TestCase):
         vote = IotdVote.objects.create(reviewer=reviewer2, image=image)
         iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS +
+            settings.IOTD_REVIEW_WINDOW_DAYS +
+            settings.IOTD_JUDGEMENT_WINDOW_DAYS
+        ) - timedelta(hours=1)
         image.save()
 
         profile = self.user.userprofile
