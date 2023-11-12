@@ -3,7 +3,10 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.contrib.sitemaps import GenericSitemap
+from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.urls import path
 from django.views.decorators.cache import never_cache
 from django.views.generic import RedirectView
 from django.views.static import serve
@@ -23,6 +26,7 @@ from astrobin.api import (
 from astrobin.api2.views.custom_auth_token_view import CustomAuthTokenView
 from astrobin.forms.password_change_form import PasswordChangeForm
 from astrobin.forms.password_reset_form import PasswordResetForm
+from astrobin.models import Image
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
     api as api_views, api_help, astrophotographers_list, collections as collections_views, contributors_list,
@@ -224,6 +228,18 @@ urlpatterns += [
         RedirectView.as_view(url=staticfiles_storage.url('astrobin/favicon.ico'), permanent=False),
         name='favicon'),
     url(r'^robots\.txt', include('robots.urls')),
+    path(
+        'sitemap.xml',
+        sitemap,
+        {
+            "sitemaps": {
+                "recipes": GenericSitemap({
+                    'queryset': Image.objects.all(),
+                    'date_field': 'updated',
+                })
+            }
+        },
+    ),
 
     ###########################################################################
     ### SEARCH VIEWS                                                        ###
