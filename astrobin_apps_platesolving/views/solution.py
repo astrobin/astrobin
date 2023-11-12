@@ -210,7 +210,12 @@ class SolutionUpdateView(base.View):
 
                 if solution.pixinsight_serial_number:
                     live_log_entry = PlateSolvingAdvancedLiveLogEntry.objects.filter(
-                        serial_number=solution.pixinsight_serial_number).order_by('-timestamp').first()
+                        serial_number=solution.pixinsight_serial_number
+                    ).only(
+                        'stage', 'log'
+                    ).order_by(
+                        '-timestamp'
+                    ).first()
                     if live_log_entry:
                         pixinsight_stage = live_log_entry.stage
                         pixinsight_log = live_log_entry.log
