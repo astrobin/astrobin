@@ -208,11 +208,12 @@ class SolutionUpdateView(base.View):
                 except PlateSolvingAdvancedTask.DoesNotExist:
                     log.error("PixInsight task %s does not exist!" % solution.pixinsight_serial_number)
 
-                live_log_entry = PlateSolvingAdvancedLiveLogEntry.objects.filter(
-                    serial_number=solution.pixinsight_serial_number).order_by('-timestamp').first()
-                if live_log_entry:
-                    pixinsight_stage = live_log_entry.stage
-                    pixinsight_log = live_log_entry.log
+                if solution.pixinsight_serial_number:
+                    live_log_entry = PlateSolvingAdvancedLiveLogEntry.objects.filter(
+                        serial_number=solution.pixinsight_serial_number).order_by('-timestamp').first()
+                    if live_log_entry:
+                        pixinsight_stage = live_log_entry.stage
+                        pixinsight_log = live_log_entry.log
 
             if status == Solver.MISSING:
                 solution.status = status
