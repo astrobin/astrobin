@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load tags %}
+{% load common_tags %}
 
 <div class="modal hide fade" id="image-iotd-stats-modal">
     <div class="modal-header">
@@ -23,6 +24,19 @@
         </div>
 
         <table class="table hide table-condensed table-borderless">
+            <tr>
+                <th>
+                    <p>{% trans "Submitted" %}</p>
+                    <small class="help-block">
+                        {% blocktrans trimmed %}
+                            The date and time when you submitted this image for IOTD/TP consideration.
+                        {% endblocktrans %}
+                    </small>
+                </th>
+                <td>
+                    {% timestamp image.submitted_for_iotd_tp_consideration %}
+                </td>
+            </tr>
             <tr>
                 <th>
                     <p>{% trans "Views by Submitters (available since September 19th, 2023)" %}</p>
