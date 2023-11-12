@@ -3,8 +3,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.contrib.sitemaps import GenericSitemap
-from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps.views import sitemap, index as sitemap_index
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import path
 from django.views.decorators.cache import never_cache
@@ -26,8 +25,9 @@ from astrobin.api import (
 from astrobin.api2.views.custom_auth_token_view import CustomAuthTokenView
 from astrobin.forms.password_change_form import PasswordChangeForm
 from astrobin.forms.password_reset_form import PasswordResetForm
-from astrobin.models import Image
+from astrobin.models import Image, UserProfile
 from astrobin.search import AstroBinSearchView
+from astrobin.sitemaps.monthly_sitemap import generate_sitemaps
 from astrobin.views import (
     api as api_views, api_help, astrophotographers_list, collections as collections_views, contributors_list,
     explore as explore_views, flickr_auth_callback, gear_by_ids, gear_by_image, gear_by_make, gear_popover_ajax,
@@ -66,6 +66,11 @@ v1_api.register(TopPickResource())
 v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
 v1_api.register(UserProfileResource())
+
+sitemaps = {
+    **generate_sitemaps(Image.objects.all(), 'updated'),
+    **generate_sitemaps(UserProfile.objects.all(), 'updated'),
+}
 
 urlpatterns = []
 
@@ -179,8 +184,10 @@ urlpatterns += [
 
     url(r'^api/', include(v1_api.urls)),
     url(r'^api/request-key/$', never_cache(api_views.AppApiKeyRequestView.as_view()), name='app_api_key_request'),
-    url(r'^api/request-key/complete/$', never_cache(api_views.AppApiKeyRequestCompleteView.as_view()),
-        name='app_api_key_request_complete'),
+    url(
+        r'^api/request-key/complete/$', never_cache(api_views.AppApiKeyRequestCompleteView.as_view()),
+        name='app_api_key_request_complete'
+    ),
 
     url(r'^api/v2/api-auth-token/', CustomAuthTokenView.as_view()),
     url(r'^api/v2/api-auth/', include(('rest_framework.urls', 'rest_framework'))),
@@ -192,8 +199,11 @@ urlpatterns += [
     url(r'^api/v2/images/', include(('astrobin_apps_images.api.urls', 'astrobin_apps_images'))),
     url(r'^api/v2/payments/', include(('astrobin_apps_payments.api.urls', 'astrobin_apps_payments'))),
     url(r'^api/v2/iotd/', include(('astrobin_apps_iotd.api.urls', 'astrobin_apps_iotd'))),
-    url(r'^api/v2/remote-source-affiliation/', include(
-        ('astrobin_apps_remote_source_affiliation.api.urls', 'astrobin_apps_remote_source_affiliation'))),
+    url(
+        r'^api/v2/remote-source-affiliation/', include(
+            ('astrobin_apps_remote_source_affiliation.api.urls', 'astrobin_apps_remote_source_affiliation')
+        )
+    ),
     url(r'^api/v2/groups/', include(('astrobin_apps_groups.api.urls', 'astrobin_apps_groups'))),
     url(r'^api/v2/users/', include(('astrobin_apps_users.api.urls', 'astrobin_apps_users'))),
     url(r'^api/v2/equipment/', include(('astrobin_apps_equipment.api.urls', 'astrobin_apps_equipment'))),
@@ -224,22 +234,15 @@ urlpatterns += [
     ### SPECIAL VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^favicon.ico$',
+    url(
+        r'^favicon.ico$',
         RedirectView.as_view(url=staticfiles_storage.url('astrobin/favicon.ico'), permanent=False),
-        name='favicon'),
-    url(r'^robots\.txt', include('robots.urls')),
-    path(
-        'sitemap.xml',
-        sitemap,
-        {
-            "sitemaps": {
-                "recipes": GenericSitemap({
-                    'queryset': Image.objects.all(),
-                    'date_field': 'updated',
-                })
-            }
-        },
+        name='favicon'
     ),
+    url(r'^robots\.txt', include('robots.urls')),
+
+    path('sitemap.xml', sitemap_index, {'sitemaps': sitemaps}, name='sitemap-index'),
+    path('sitemap-<section>.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     ###########################################################################
     ### SEARCH VIEWS                                                        ###
@@ -283,12 +286,17 @@ urlpatterns += [
     url(
         r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/add-remove-images/$',
         never_cache(collections_views.UserCollectionsAddRemoveImages.as_view()),
-        name='user_collections_add_remove_images'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/quick-edit/key-value-pairs$',
+        name='user_collections_add_remove_images'
+    ),
+    url(
+        r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/quick-edit/key-value-pairs$',
         never_cache(collections_views.UserCollectionsQuickEditKeyValueTags.as_view()),
-        name='user_collections_quick_edit_key_value_tags'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/delete/$',
-        never_cache(collections_views.UserCollectionsDelete.as_view()), name='user_collections_delete'),
+        name='user_collections_quick_edit_key_value_tags'
+    ),
+    url(
+        r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/delete/$',
+        never_cache(collections_views.UserCollectionsDelete.as_view()), name='user_collections_delete'
+    ),
     url(r'^users/(?P<username>[\w.@+-]*)/apikeys/$', user_page_api_keys, name='user_page_api_keys'),
     url(r'^users/(?P<username>[\w.@+-]*)/ban/$', user_ban, name='user_ban'),
     url(r'^users/(?P<username>[\w.@+-]*)/bookmarks/$', user_page_bookmarks, name='user_page_bookmarks'),
@@ -331,8 +339,10 @@ urlpatterns += [
     ### AUTOCOMPLETE VIEWS                                                 ###
     ###########################################################################
 
-    url(r'^autocomplete-private-message-recipients/$', lookups.autocomplete_private_message_recipients,
-        name='autocomplete_private_message_recipients'),
+    url(
+        r'^autocomplete-private-message-recipients/$', lookups.autocomplete_private_message_recipients,
+        name='autocomplete_private_message_recipients'
+    ),
     url(r'^autocomplete_usernames/$', lookups.autocomplete_usernames, name='autocomplete_usernames'),
     url(r'^autocomplete_images/$', lookups.autocomplete_images, name='autocomplete_images'),
 
@@ -359,51 +369,73 @@ urlpatterns += [
 
     url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
     url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
-    url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'},
-        name='messages_compose_to'),
+    url(
+        r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'},
+        name='messages_compose_to'
+    ),
     url(r'^messages/delete/(?P<thread_id>[\d]+)/$', messages_delete, name='messages_delete'),
     url(r'^messages/undelete/(?P<thread_id>[\d]+)/$', messages_undelete, name='messages_undelete'),
     url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
     url(r'^messages/outbox/$', messages_outbox, {'template_name': 'messages/outbox.html'}, name='messages_outbox'),
     url(r'^messages/trash/$', messages_trash, {'template_name': 'messages/trash.html'}, name='messages_trash'),
-    url(r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply,
-        {'template_name': 'messages/message_list_view.html'}, name="message_reply"),
-    url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'},
-        name='messages_detail'),
+    url(
+        r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply,
+        {'template_name': 'messages/message_list_view.html'}, name="message_reply"
+    ),
+    url(
+        r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'},
+        name='messages_detail'
+    ),
 
     ###########################################################################
     ### MODERATION VIEWS                                                    ###
     ###########################################################################
 
-    url(r'^moderate/images/$', never_cache(moderation_views.ImageModerationListView.as_view()),
-        name='image_moderation'),
-    url(r'^moderate/images/spam/$',
+    url(
+        r'^moderate/images/$', never_cache(moderation_views.ImageModerationListView.as_view()),
+        name='image_moderation'
+    ),
+    url(
+        r'^moderate/images/spam/$',
         never_cache(moderation_views.ImageModerationSpamListView.as_view()),
-        name='image_moderation_view_spam'),
-    url(r'^moderate/images/mark-as-spam/$',
+        name='image_moderation_view_spam'
+    ),
+    url(
+        r'^moderate/images/mark-as-spam/$',
         never_cache(moderation_views.ImageModerationMarkAsSpamView.as_view()),
-        name='image_moderation_mark_as_spam'),
-    url(r'^moderate/images/mark-as-ham/$',
+        name='image_moderation_mark_as_spam'
+    ),
+    url(
+        r'^moderate/images/mark-as-ham/$',
         never_cache(moderation_views.ImageModerationMarkAsHamView.as_view()),
-        name='image_moderation_mark_as_ham'),
-    url(r'^moderate/images/ban-all/$',
+        name='image_moderation_mark_as_ham'
+    ),
+    url(
+        r'^moderate/images/ban-all/$',
         never_cache(moderation_views.ImageModerationBanAllView.as_view()),
-        name='image_moderation_ban_all'),
-    url(r'^moderate/forums/mark-as-spam/$',
+        name='image_moderation_ban_all'
+    ),
+    url(
+        r'^moderate/forums/mark-as-spam/$',
         never_cache(moderation_views.ForumModerationMarkAsSpamView.as_view()),
-        name='forum_moderation_mark_as_spam'),
+        name='forum_moderation_mark_as_spam'
+    ),
 
     ###########################################################################
     ### PAGES VIEWS                                                         ###
     ###########################################################################
 
     url(r'^help/api/$', api_help, name='api'),
-    url(r'^astrophotographers-list/',
+    url(
+        r'^astrophotographers-list/',
         astrophotographers_list,
-        name='astrophotographers_list'),
-    url(r'^contributors-list/',
+        name='astrophotographers_list'
+    ),
+    url(
+        r'^contributors-list/',
         contributors_list,
-        name='contributors_list'),
+        name='contributors_list'
+    ),
 
     ###########################################################################
     ### I18N VIEWS                                                          ###
@@ -416,45 +448,69 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^delete/(?P<id>\w+)/$', never_cache(image_views.ImageDeleteView.as_view()), name='image_delete'),
-    url(r'^delete/original/(?P<id>\w+)/$',
-        never_cache(image_views.ImageDeleteOriginalView.as_view()), name='image_delete_original'),
-    url(r'^delete/revision/(?P<id>\w+)/$',
-        never_cache(image_views.ImageRevisionDeleteView.as_view()), name='image_delete_revision'),
-    url(r'^delete/other-versions/(?P<id>\w+)/$', never_cache(image_views.ImageDeleteOtherVersionsView.as_view()),
-        name='image_delete_other_versions'),
+    url(
+        r'^delete/original/(?P<id>\w+)/$',
+        never_cache(image_views.ImageDeleteOriginalView.as_view()), name='image_delete_original'
+    ),
+    url(
+        r'^delete/revision/(?P<id>\w+)/$',
+        never_cache(image_views.ImageRevisionDeleteView.as_view()), name='image_delete_revision'
+    ),
+    url(
+        r'^delete/other-versions/(?P<id>\w+)/$', never_cache(image_views.ImageDeleteOtherVersionsView.as_view()),
+        name='image_delete_other_versions'
+    ),
     url(r'^demote/(?P<id>\w+)/$', never_cache(image_views.ImageDemoteView.as_view()), name='image_demote'),
     url(r'^edit/acquisition/(?P<id>\w+)/$', image_edit_acquisition, name='image_edit_acquisition'),
     url(r'^edit/acquisition/reset/(?P<id>\w+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
     url(r'^edit/basic/(?P<id>\w+)/$', never_cache(image_views.ImageEditBasicView.as_view()), name='image_edit_basic'),
     url(r'^edit/gear/(?P<id>\w+)/$', never_cache(image_views.ImageEditGearView.as_view()), name='image_edit_gear'),
     url(r'^edit/license/(?P<id>\w+)/$', image_edit_license, name='image_edit_license'),
-    url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
-        name='image_edit_platesolving_settings'),
-    url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?restart$', image_restart_platesolving,
-        name='image_restart_platesolving'),
-    url(r'^edit/platesolving-advanced/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$',
-        image_edit_platesolving_advanced_settings, name='image_edit_platesolving_advanced_settings'),
-    url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?restart-advanced$',
-        image_restart_advanced_platesolving, name='image_restart_advanced_platesolving'),
+    url(
+        r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
+        name='image_edit_platesolving_settings'
+    ),
+    url(
+        r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?restart$', image_restart_platesolving,
+        name='image_restart_platesolving'
+    ),
+    url(
+        r'^edit/platesolving-advanced/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$',
+        image_edit_platesolving_advanced_settings, name='image_edit_platesolving_advanced_settings'
+    ),
+    url(
+        r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?restart-advanced$',
+        image_restart_advanced_platesolving, name='image_restart_advanced_platesolving'
+    ),
     url(r'^edit/makefinal/(?P<id>\w+)/$', image_edit_make_final, name='image_edit_make_final'),
-    url(r'^edit/revision/makefinal/(?P<id>\w+)/$', image_edit_revision_make_final,
-        name='image_edit_revision_make_final'),
+    url(
+        r'^edit/revision/makefinal/(?P<id>\w+)/$', image_edit_revision_make_final,
+        name='image_edit_revision_make_final'
+    ),
     url(r'^edit/save/acquisition/$', image_edit_save_acquisition, name='image_edit_save_acquisition'),
     url(r'^edit/save/license/$', image_edit_save_license, name='image_edit_save_license'),
     url(r'^edit/save/watermark/$', image_edit_save_watermark, name='image_edit_save_watermark'),
     url(r'^edit/watermark/(?P<id>\w+)/$', image_edit_watermark, name='image_edit_watermark'),
-    url(r'^edit/thumbnails/(?P<id>\w+)/$',
-        never_cache(image_views.ImageEditThumbnailsView.as_view()), name='image_edit_thumbnails'),
-    url(r'^edit/revision/(?P<id>\w+)/$',
-        never_cache(image_views.ImageEditRevisionView.as_view()), name='image_edit_revision'),
+    url(
+        r'^edit/thumbnails/(?P<id>\w+)/$',
+        never_cache(image_views.ImageEditThumbnailsView.as_view()), name='image_edit_thumbnails'
+    ),
+    url(
+        r'^edit/revision/(?P<id>\w+)/$',
+        never_cache(image_views.ImageEditRevisionView.as_view()), name='image_edit_revision'
+    ),
     url(r'^promote/(?P<id>\w+)/$', never_cache(image_views.ImagePromoteView.as_view()), name='image_promote'),
-    url(r'^download/(?P<id>\w+)/(?P<revision_label>\w+)/(?P<version>\w+)/$',
-        never_cache(image_views.ImageDownloadView.as_view()), name='image_download'),
+    url(
+        r'^download/(?P<id>\w+)/(?P<revision_label>\w+)/(?P<version>\w+)/$',
+        never_cache(image_views.ImageDownloadView.as_view()), name='image_download'
+    ),
     url(r'^upload/$', image_upload, name='image_upload'),
     url(r'^upload/process/$', image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
-    url(r'^upload-uncompressed-source/(?P<id>\w+)/$', never_cache(image_views.ImageUploadUncompressedSource.as_view()),
-        name='upload_uncompressed_source'),
+    url(
+        r'^upload-uncompressed-source/(?P<id>\w+)/$', never_cache(image_views.ImageUploadUncompressedSource.as_view()),
+        name='upload_uncompressed_source'
+    ),
 
     ###########################################################################
     ### IMAGE VIEWS                                                         ###
@@ -472,10 +528,14 @@ urlpatterns += [
         name='image_submit_to_iotd_tp'
     ),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
-    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
-        name='image_rawthumb'),
-    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
-        name='image_thumb'),
+    url(
+        r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
+        name='image_rawthumb'
+    ),
+    url(
+        r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
+        name='image_thumb'
+    ),
 
     ###########################################################################
     ### JSON API VIEWS                                                      ###
@@ -487,21 +547,27 @@ urlpatterns += [
 if not settings.AWS_S3_ENABLED:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [
-        url(r'^media/(?P<path>.*)$', serve, {
-            'document_root': settings.MEDIA_ROOT,
-            'show_indexes': True
-        })
+        url(
+            r'^media/(?P<path>.*)$', serve, {
+                'document_root': settings.MEDIA_ROOT,
+                'show_indexes': True
+            }
+        )
     ]
 
 if settings.LOCAL_STATIC_STORAGE:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += [
-        url(r'^static/(?P<path>.*)$', serve, {
-            'document_root': settings.STATIC_ROOT,
-            'show_indexes': True
-        }),
-        url(r'^media/static/(?P<path>.*)$', serve, {
-            'document_root': settings.STATIC_ROOT,
-            'show_indexes': True
-        })
+        url(
+            r'^static/(?P<path>.*)$', serve, {
+                'document_root': settings.STATIC_ROOT,
+                'show_indexes': True
+            }
+        ),
+        url(
+            r'^media/static/(?P<path>.*)$', serve, {
+                'document_root': settings.STATIC_ROOT,
+                'show_indexes': True
+            }
+        )
     ]

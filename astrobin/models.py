@@ -12,6 +12,7 @@ import boto3
 from django.core.files.images import get_image_dimensions
 from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
 from django.db.models import FileField
+from django.urls import resolve
 from easy_thumbnails.files import ThumbnailFile
 from image_cropping import ImageRatioField
 
@@ -3066,6 +3067,9 @@ class UserProfile(SafeDeleteModel):
 
     def is_iotd_judge(self):
         return UserService(self.user).is_in_group(GroupName.IOTD_JUDGES)
+
+    def get_absolute_url(self) -> str:
+        return resolve('user_page', args=(self.user.username,))
 
     class Meta:
         app_label = 'astrobin'
