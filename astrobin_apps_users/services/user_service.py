@@ -154,7 +154,7 @@ class UserService:
     def get_profile_stats(self, request_language: str):
         if not self.user:
             return {}
-        
+
         user = self.user
         key = f'User.{self.user.pk}.Stats.{request_language}'
         data = cache.get(key)
@@ -164,7 +164,7 @@ class UserService:
 
             if user_sqs.count() > 0:
                 result = user_sqs[0]
-                
+
                 try:
                     data['stats'] = (
                         (_('Member since'), user.date_joined \
@@ -659,7 +659,7 @@ class UserService:
         value = Image.objects_including_wip.filter(
             Q(user=self.user) & Q(remote_source__isnull=False) & ~Q(remote_source='OWN')
         ).exists()
-        cache.set(cache_key, value, 60*60*24)
+        cache.set(cache_key, value, 60 * 60 * 24)
 
         return value
 
