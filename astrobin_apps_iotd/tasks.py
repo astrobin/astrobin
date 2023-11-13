@@ -16,12 +16,12 @@ from common.services import DateTimeService
 logger = logging.getLogger(__name__)
 
 
-@shared_task(time_limit=600)
+@shared_task(time_limit=900)
 def update_top_pick_nomination_archive():
     IotdService().update_top_pick_nomination_archive()
 
 
-@shared_task(time_limit=600)
+@shared_task(time_limit=900)
 def update_top_pick_archive():
     IotdService().update_top_pick_archive()
 
