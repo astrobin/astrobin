@@ -232,12 +232,20 @@ class IotdService:
         latest = TopPickNominationsArchive.objects.first()
 
         items = Image.objects.annotate(
-            num_submissions=Count('iotdsubmission', distinct=True)
+            num_submissions=Count('iotdsubmission', distinct=True),
+            num_votes=Count('iotdvote', distinct=True)
         ).filter(
             Q(
                 Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
                 Q(
                     Q(num_submissions__gt=0) &
+                    Q(submitted_for_iotd_tp_consideration__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                )
+            ) &
+            ~Q(
+                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
+                Q(
+                    Q(num_votes__gt=0) &
                     Q(submitted_for_iotd_tp_consideration__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
                 )
             ) &
