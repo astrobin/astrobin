@@ -30,5 +30,8 @@ else:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }
+        },
+        'local_request_cache': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        },
     }
