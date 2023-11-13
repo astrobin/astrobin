@@ -7,7 +7,7 @@ import numpy as np
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
-from django.core.cache import cache
+from django.core.cache import cache, caches
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q, QuerySet
 from django.utils import timezone
@@ -67,7 +67,16 @@ class UserService:
     def get_all_images(self) -> QuerySet:
         from astrobin.models import Image
 
-        if Image.collaborators.through.objects.filter(user=self.user).exists():
+        local_cache = caches['local_request_cache']
+        cache_key = f"collaborators_check_{self.user.id}"
+
+        has_collaborators = local_cache.get(cache_key)
+
+        if has_collaborators is None:
+            has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
+            local_cache.set(cache_key, has_collaborators, timeout=30)
+
+        if has_collaborators is None:
             return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects_including_wip.filter(user=self.user)
@@ -75,15 +84,33 @@ class UserService:
     def get_public_images(self) -> QuerySet:
         from astrobin.models import Image
 
-        if Image.collaborators.through.objects.filter(user=self.user).exists():
-            return Image.objects.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
+        local_cache = caches['local_request_cache']
+        cache_key = f"collaborators_check_{self.user.id}"
 
-        return Image.objects.filter(user=self.user)
+        has_collaborators = local_cache.get(cache_key)
+
+        if has_collaborators is None:
+            has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
+            local_cache.set(cache_key, has_collaborators, timeout=30)
+
+        if has_collaborators:
+            return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
+
+        return Image.objects_including_wip.filter(user=self.user)
 
     def get_wip_images(self) -> QuerySet:
         from astrobin.models import Image
 
-        if Image.collaborators.through.objects.filter(user=self.user).exists():
+        local_cache = caches['local_request_cache']
+        cache_key = f"collaborators_check_{self.user.id}"
+
+        has_collaborators = local_cache.get(cache_key)
+
+        if has_collaborators is None:
+            has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
+            local_cache.set(cache_key, has_collaborators, timeout=30)
+
+        if has_collaborators:
             return Image.wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.wip.filter(user=self.user)

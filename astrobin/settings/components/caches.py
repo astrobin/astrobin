@@ -10,11 +10,15 @@ if CACHE_TYPE == 'redis':
             'OPTIONS': {
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient',
                 'PICKLE_VERSION': 2,
-                'SERIALIZER':'astrobin.cache.CustomPickleSerializer',
+                'SERIALIZER': 'astrobin.cache.CustomPickleSerializer',
             },
             'KEY_PREFIX': 'astrobin',
             'TIMEOUT': 3600,
-        }
+        },
+        'local_request_cache': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-snowflake',
+        },
     }
 elif CACHE_TYPE == 'locmem':
     CACHES = {

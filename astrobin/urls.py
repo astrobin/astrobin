@@ -70,6 +70,7 @@ if settings.DEBUG or settings.TESTING:
 
     urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
     INTERNAL_IPS = ["*"]
+
 urlpatterns += [
     ###########################################################################
     ### DJANGO VIEWS                                                        ###
