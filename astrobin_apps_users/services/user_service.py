@@ -94,9 +94,9 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
+            return Image.objects.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
-        return Image.objects_including_wip.filter(user=self.user)
+        return Image.objects.filter(user=self.user)
 
     def get_wip_images(self) -> QuerySet:
         from astrobin.models import Image
