@@ -12,6 +12,7 @@ import boto3
 from django.core.files.images import get_image_dimensions
 from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
 from django.db.models import FileField
+from django.urls import reverse
 from easy_thumbnails.files import ThumbnailFile
 from image_cropping import ImageRatioField
 
@@ -3001,14 +3002,16 @@ class UserProfile(SafeDeleteModel):
         null=True,
     )
 
-    def get_display_name(self):
+    def get_display_name(self) -> str:
         return self.real_name if self.real_name else str(self.user)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.get_display_name()
 
-    def get_absolute_url(self):
-        return '/users/%s' % self.user.username
+    def get_absolute_url(self) -> str:
+        return reverse(
+            'user_page', kwargs={'username': self.user.username}
+        )
 
     def remove_gear(self, gear, gear_type):
         resolve = {
@@ -3049,22 +3052,22 @@ class UserProfile(SafeDeleteModel):
 
         return scores
 
-    def is_moderator(self):
+    def is_moderator(self) -> bool:
         return UserService(self.user).is_in_group('content_moderators')
 
-    def is_image_moderator(self):
+    def is_image_moderator(self) -> bool:
         return UserService(self.user).is_in_group('image_moderators')
 
-    def is_iotd_staff(self):
+    def is_iotd_staff(self) -> bool:
         return UserService(self.user).is_in_group(GroupName.IOTD_STAFF)
 
-    def is_iotd_submitter(self):
+    def is_iotd_submitter(self) -> bool:
         return UserService(self.user).is_in_group(GroupName.IOTD_SUBMITTERS)
 
-    def is_iotd_reviewer(self):
+    def is_iotd_reviewer(self) -> bool:
         return UserService(self.user).is_in_group(GroupName.IOTD_REVIEWERS)
 
-    def is_iotd_judge(self):
+    def is_iotd_judge(self) -> bool:
         return UserService(self.user).is_in_group(GroupName.IOTD_JUDGES)
 
     class Meta:
