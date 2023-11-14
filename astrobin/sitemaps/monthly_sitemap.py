@@ -1,5 +1,5 @@
 from django.contrib.sitemaps import Sitemap
-from django.db.models import Model, QuerySet
+from django.db.models import QuerySet
 from django.db.models.functions import ExtractYear, ExtractMonth
 import datetime
 
