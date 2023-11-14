@@ -3,9 +3,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.contrib.sitemaps.views import sitemap, index as sitemap_index
 from django.contrib.staticfiles.storage import staticfiles_storage
-from django.urls import path
 from django.views.decorators.cache import never_cache
 from django.views.generic import RedirectView
 from django.views.static import serve
@@ -25,9 +23,7 @@ from astrobin.api import (
 from astrobin.api2.views.custom_auth_token_view import CustomAuthTokenView
 from astrobin.forms.password_change_form import PasswordChangeForm
 from astrobin.forms.password_reset_form import PasswordResetForm
-from astrobin.models import Image, UserProfile
 from astrobin.search import AstroBinSearchView
-from astrobin.sitemaps.monthly_sitemap import generate_sitemaps
 from astrobin.views import (
     api as api_views, api_help, astrophotographers_list, collections as collections_views, contributors_list,
     explore as explore_views, flickr_auth_callback, gear_by_ids, gear_by_image, gear_by_make, gear_popover_ajax,
@@ -67,10 +63,6 @@ v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
 v1_api.register(UserProfileResource())
 
-sitemaps = {
-    **generate_sitemaps(Image.objects.all(), 'updated'),
-    **generate_sitemaps(UserProfile.objects.all(), 'updated'),
-}
 
 urlpatterns = []
 
@@ -240,9 +232,6 @@ urlpatterns += [
         name='favicon'
     ),
     url(r'^robots\.txt', include('robots.urls')),
-
-    path('sitemap.xml', sitemap_index, {'sitemaps': sitemaps}, name='sitemap-index'),
-    path('sitemap-<section>.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     ###########################################################################
     ### SEARCH VIEWS                                                        ###

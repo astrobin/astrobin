@@ -10,15 +10,18 @@ from datetime import datetime, timedelta
 from io import StringIO
 from time import sleep
 from typing import List, Union
+from xml.etree.ElementTree import Element, SubElement, tostring
 from zipfile import ZipFile
 
+import boto3
 import requests
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.apps import apps
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sitemaps.views import sitemap
 from django.core.cache import cache
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
@@ -26,6 +29,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
 from django.db import IntegrityError
 from django.db.models import Exists, OuterRef
+from django.http import HttpRequest
 from django.template.defaultfilters import filesizeformat
 from django.urls import reverse
 from django.utils import timezone
@@ -40,6 +44,7 @@ from pybb.models import Post
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
 
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import (
     BroadcastEmail, CameraRenameProposal, DataDownloadRequest, Gear, GearMigrationStrategy,
     Image, ImageRevision, UserProfile,
@@ -47,6 +52,7 @@ from astrobin.models import (
 from astrobin.services import CloudflareService
 from astrobin.services.cloudfront_service import CloudFrontService
 from astrobin.services.gear_service import GearService
+from astrobin.sitemaps.monthly_sitemap import generate_sitemaps
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
@@ -924,3 +930,70 @@ def hard_delete_deleted_users():
 def invalidate_cdn_caches(paths: List[str]):
     CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation(paths)
     CloudflareService().purge_cache(paths)
+
+
+@shared_task(time_limit=600, acks_late=True)
+def generate_sitemaps_and_upload_to_s3():
+    def upload_to_sitemap_folder(filename, folder='sitemaps'):
+        # Use boto3 to upload the file to S3
+        s3_client = boto3.client('s3')
+        bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+        s3_path = f'{folder}/{filename}'
+
+        with open(filename, 'rb') as file:
+            s3_client.upload_fileobj(file, bucket_name, s3_path)
+            logger.debug(f'Uploaded to s3: {s3_path}')
+
+        # Optionally, delete the file after upload
+        os.remove(filename)
+
+    def generate_sitemap_index(sitemaps, base_url=settings.AWS_STORAGE_BUCKET_NAME):
+        root = Element('sitemapindex', xmlns='https://www.sitemaps.org/schemas/sitemap/0.9')
+        for sitemap in sitemaps:
+            sitemap_elem = SubElement(root, 'sitemap')
+            loc = SubElement(sitemap_elem, 'loc')
+            loc.text = f'https://{base_url}/sitemaps/{sitemap}'
+
+        return tostring(root, encoding='utf-8', method='xml')
+
+    www_sitemaps = {
+        **generate_sitemaps(
+            Image.objects.filter(moderator_decision=ModeratorDecision.APPROVED).order_by('-updated'),
+            'updated'
+        ),
+        **generate_sitemaps(
+            UserProfile.objects.all().order_by('-updated'),
+            'updated'
+        ),
+    }
+
+    # Create a fake request object
+    request = HttpRequest()
+    request.user = AnonymousUser()
+    request.META['SERVER_NAME'] = settings.BASE_URL
+    request.META['SERVER_PORT'] = '443'
+    request.schema = 'https'
+
+    all_filenames = []
+
+    # Generate and save sitemap files
+    for section, site in www_sitemaps.items():
+        response = sitemap(request, www_sitemaps, section)
+        response.render()
+        filename = f'{section}.xml'
+
+        logger.debug(f'Generating sitemap {filename}')
+
+        with open(filename, 'wb') as file:
+            file.write(response.content)
+        upload_to_sitemap_folder(filename, folder='sitemaps/www')
+
+        all_filenames.append(filename)
+
+    # Generate and save sitemap index file
+    sitemap_index = generate_sitemap_index(all_filenames)
+
+    # Save and upload the sitemap index
+    with open('sitemap_index.xml', 'wb') as file:
+        file.write(sitemap_index)
+    upload_to_sitemap_folder('sitemap_index.xml', folder='sitemaps/www')

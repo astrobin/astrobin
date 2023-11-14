@@ -3,6 +3,7 @@ from django.db.models import Model, QuerySet
 from django.db.models.functions import ExtractYear, ExtractMonth
 import datetime
 
+
 class MonthlySitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.5
@@ -29,12 +30,12 @@ class MonthlySitemap(Sitemap):
 
 def generate_sitemaps(queryset: QuerySet, date_field: str) -> dict:
     sitemaps = {}
-    queryset = queryset.annotate(
+    date_queryset = queryset.annotate(
         year=ExtractYear(date_field),
         month=ExtractMonth(date_field)
     ).values('year', 'month').distinct()
 
-    for date in queryset:
+    for date in date_queryset:
         year = date['year']
         month = date['month']
         sitemap_key = f'{queryset.model.__name__.lower()}_{year}_{month}'
