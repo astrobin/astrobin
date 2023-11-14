@@ -28,7 +28,7 @@ from django.core.files.temp import NamedTemporaryFile
 from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
 from django.db import IntegrityError
-from django.db.models import Exists, OuterRef
+from django.db.models import Exists, OuterRef, Q
 from django.http import HttpRequest
 from django.template.defaultfilters import filesizeformat
 from django.urls import reverse
@@ -40,7 +40,7 @@ from hitcount.models import HitCount
 from moviepy.video.fx import resize
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from proglog import ProgressBarLogger
-from pybb.models import Post
+from pybb.models import Post, Topic
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
 
@@ -52,8 +52,16 @@ from astrobin.models import (
 from astrobin.services import CloudflareService
 from astrobin.services.cloudfront_service import CloudFrontService
 from astrobin.services.gear_service import GearService
+from astrobin.sitemaps.accessory_sitemap import AccessorySitemap
+from astrobin.sitemaps.camera_sitemap import CameraSitemap
+from astrobin.sitemaps.filter_sitemap import FilterSitemap
 from astrobin.sitemaps.monthly_sitemap import generate_sitemaps
+from astrobin.sitemaps.mount_sitemap import MountSitemap
+from astrobin.sitemaps.software_sitemap import SoftwareSitemap
+from astrobin.sitemaps.static_view_sitemap import StaticViewSitemap
+from astrobin.sitemaps.telescope_sitemap import TelescopeSitemap
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
+from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
 from common.services import DateTimeService
@@ -941,30 +949,67 @@ def generate_sitemaps_and_upload_to_s3():
         s3_path = f'{folder}/{filename}'
 
         with open(filename, 'rb') as file:
-            s3_client.upload_fileobj(file, bucket_name, s3_path)
+            s3_client.upload_fileobj(
+                file,
+                bucket_name,
+                s3_path,
+                ExtraArgs={
+                    'CacheControl': 'max-age=2592000',  # 30 days
+                    'ContentType': 'application/xml',
+                },
+            )
             logger.debug(f'Uploaded to s3: {s3_path}')
 
-        # Optionally, delete the file after upload
         os.remove(filename)
+        CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation([f'/{s3_path}'])
 
-    def generate_sitemap_index(sitemaps, base_url=settings.AWS_STORAGE_BUCKET_NAME):
+    def generate_sitemap_index(sitemaps, base_url=settings.AWS_STORAGE_BUCKET_NAME, folder='sitemaps'):
         root = Element('sitemapindex', xmlns='https://www.sitemaps.org/schemas/sitemap/0.9')
-        for sitemap in sitemaps:
+        for s in sitemaps:
             sitemap_elem = SubElement(root, 'sitemap')
             loc = SubElement(sitemap_elem, 'loc')
-            loc.text = f'https://{base_url}/sitemaps/{sitemap}'
+            loc.text = f'https://{base_url}/{folder}/{s}'
 
         return tostring(root, encoding='utf-8', method='xml')
 
     www_sitemaps = {
-        **generate_sitemaps(
-            Image.objects.filter(moderator_decision=ModeratorDecision.APPROVED).order_by('-updated'),
-            'updated'
-        ),
-        **generate_sitemaps(
-            UserProfile.objects.all().order_by('-updated'),
-            'updated'
-        ),
+        'folder': 'sitemaps/www',
+        'sitemaps': {
+            'static': StaticViewSitemap,
+            **generate_sitemaps(
+                Image.objects.filter(moderator_decision=ModeratorDecision.APPROVED).order_by('-updated'),
+                'updated'
+            ),
+            **generate_sitemaps(
+                UserProfile.objects.all().order_by('-updated'),
+                'updated'
+            ),
+            **generate_sitemaps(
+                Topic.objects.filter(
+                    Q(on_moderation=False) &
+                    Q(
+                        Q(forum__group=None) | Q(forum__group__public=True)
+                    )
+                ).order_by('-updated'),
+                'updated'
+            ),
+            **generate_sitemaps(
+                AstroBinGroup.objects.filter(public=True).order_by('-date_updated'),
+                'date_updated'
+            ),
+        }
+    }
+
+    app_sitemaps = {
+        'folder': 'sitemaps/app',
+        'sitemaps': {
+            'cameras': CameraSitemap,
+            'telescopes': TelescopeSitemap,
+            'mounts': MountSitemap,
+            'filters': FilterSitemap,
+            'accessories': AccessorySitemap,
+            'software': SoftwareSitemap,
+        }
     }
 
     # Create a fake request object
@@ -974,26 +1019,27 @@ def generate_sitemaps_and_upload_to_s3():
     request.META['SERVER_PORT'] = '443'
     request.schema = 'https'
 
-    all_filenames = []
+    for custom_sitemap in (www_sitemaps, app_sitemaps):
+        all_filenames = []
 
-    # Generate and save sitemap files
-    for section, site in www_sitemaps.items():
-        response = sitemap(request, www_sitemaps, section)
-        response.render()
-        filename = f'{section}.xml'
+        # Generate and save sitemap files
+        for section, site in custom_sitemap['sitemaps'].items():
+            response = sitemap(request, custom_sitemap['sitemaps'], section)
+            response.render()
+            filename = f'{section}.xml'
 
-        logger.debug(f'Generating sitemap {filename}')
+            logger.debug(f'Generating sitemap {filename}')
 
-        with open(filename, 'wb') as file:
-            file.write(response.content)
-        upload_to_sitemap_folder(filename, folder='sitemaps/www')
+            with open(filename, 'wb') as file:
+                file.write(response.content)
+            upload_to_sitemap_folder(filename, folder=custom_sitemap['folder'])
 
-        all_filenames.append(filename)
+            all_filenames.append(filename)
 
-    # Generate and save sitemap index file
-    sitemap_index = generate_sitemap_index(all_filenames)
+        # Generate and save sitemap index file
+        sitemap_index = generate_sitemap_index(all_filenames, folder=custom_sitemap['folder'])
 
-    # Save and upload the sitemap index
-    with open('sitemap_index.xml', 'wb') as file:
-        file.write(sitemap_index)
-    upload_to_sitemap_folder('sitemap_index.xml', folder='sitemaps/www')
+        # Save and upload the sitemap index
+        with open('sitemap_index.xml', 'wb') as file:
+            file.write(sitemap_index)
+        upload_to_sitemap_folder('sitemap_index.xml', folder=custom_sitemap['folder'])
