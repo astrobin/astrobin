@@ -42,9 +42,9 @@
                     <p>{% trans "Views by Submitters (available since September 19th, 2023)" %}</p>
                     <small class="help-block">
                         {% blocktrans trimmed with IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE as _0 %}
-                            Every image is assigned to {{_0}}% of available Submitters. If 80% of them don't view the
-                            image by the time its time in the IOTD/TP process expires, it's assigned to the other
-                            {{_0}}% of Submitters and the process begins anew.
+                            Every image is assigned to {{_0}}% of available Submitters. In the event that at least 80%
+                            of them don't view the image before its time in the IOTD/TP process expires, it's assigned
+                            to the other {{_0}}% of Submitters and the process begins anew.
                         {% endblocktrans %}
                     </small>
                 </th>
