@@ -76,7 +76,7 @@ class UserService:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
-        if has_collaborators is None:
+        if has_collaborators:
             return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects_including_wip.filter(user=self.user)
