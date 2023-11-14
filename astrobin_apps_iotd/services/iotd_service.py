@@ -229,8 +229,6 @@ class IotdService:
         )
 
     def update_top_pick_nomination_archive(self):
-        latest = TopPickNominationsArchive.objects.first()
-
         items = Image.objects.annotate(
             num_submissions=Count('iotdsubmission', distinct=True),
             num_votes=Count('iotdvote', distinct=True)
@@ -253,25 +251,16 @@ class IotdService:
                 submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(
                     settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
                 )
-            )
+            ) &
+            Q(toppicknominationsarchive__isnull=True)
         ).order_by('-submitted_for_iotd_tp_consideration')
-
-        if latest:
-            items = items.filter(
-                submitted_for_iotd_tp_consideration__gt=latest.image.submitted_for_iotd_tp_consideration
-            )
 
         items.update(updated=DateTimeService.now())
 
         for item in items.iterator():
-            try:
-                TopPickNominationsArchive.objects.create(image=item)
-            except IntegrityError:
-                continue
+            TopPickNominationsArchive.objects.get_or_create(image=item)
 
     def update_top_pick_archive(self):
-        latest = TopPickArchive.objects.first()
-
         items = Image.objects.annotate(
             num_votes=Count('iotdvote', distinct=True)
         ).filter(
@@ -289,21 +278,14 @@ class IotdService:
                     Q(num_votes__gt=0) &
                     Q(submitted_for_iotd_tp_consideration__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
                 )
-            )
+            ) &
+            Q(toppickarchive__isnull=True)
         ).order_by('-submitted_for_iotd_tp_consideration')
-
-        if latest:
-            items = items.filter(
-                submitted_for_iotd_tp_consideration__gt=latest.image.submitted_for_iotd_tp_consideration
-            )
 
         items.update(updated=DateTimeService.now())
 
         for item in items.iterator():
-            try:
-                TopPickArchive.objects.create(image=item)
-            except IntegrityError:
-                continue
+            TopPickArchive.objects.get_or_create(image=item)
 
     def update_submission_queues(self):
         def _compute_queue(submitter: User):
