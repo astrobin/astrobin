@@ -5,7 +5,10 @@ if DEBUG:
         CACHES = {
             'default': {
                 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-            }
+            },
+            'local_request_cache': {
+                'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+            },
         }
 
     PYBB_ANONYMOUS_VIEWS_CACHE_BUFFER = 0
