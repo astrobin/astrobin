@@ -2,6 +2,7 @@ import logging
 import random
 import string
 import zlib
+from datetime import datetime, timedelta
 
 from PIL.Image import DecompressionBombError
 from django.conf import settings
@@ -12,6 +13,7 @@ from django.utils.translation import ugettext as _
 
 from astrobin.models import Image, ImageRevision
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_iotd.models import IotdSubmission, IotdVote
 from astrobin_apps_iotd.services import IotdService
 from common.services import AppRedirectionService
 
@@ -123,15 +125,19 @@ def astrobin_image(context, image, alias, **kwargs):
         except (IOError, ValueError, DecompressionBombError) as e:
             w = size[0]
             h = size[1] if size[1] > 0 else w
-            logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
-                image_revision.pk, str(e)))
+            logger.warning(
+                "astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
+                    image_revision.pk, str(e))
+                )
             response_dict['status'] = 'error'
             response_dict['error_message'] = _("Data corruption. Please upload this image again. Sorry!")
         except (TypeError, zlib.error) as e:
             w = size[0]
             h = size[1] if size[1] > 0 else w
-            logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
-                image_revision.pk, str(e)))
+            logger.warning(
+                "astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
+                    image_revision.pk, str(e))
+                )
 
     if ImageService.is_viewable_alias(alias) and w is not None and h is not None:
         size = (size[0], int(size[0] / (w / float(h))))
@@ -172,23 +178,43 @@ def astrobin_image(context, image, alias, **kwargs):
         if image.video_file.name and not ImageService.is_viewable_alias(alias):
             badges.append('video')
 
-        if iotd_service.is_iotd(image):
-            badges.append('iotd')
-        elif iotd_service.is_top_pick(image):
-            badges.append('top-pick')
-        elif iotd_service.is_top_pick_nomination(image):
-            badges.append('top-pick-nomination')
-        elif iotd_service.is_in_iotd_queue(image) or iotd_service.is_future_iotd(image):
-            if hasattr(request, 'user') and (request.user == image.user or request.user.is_superuser):
-                badges.append('iotd-queue')
+        if image.submitted_for_iotd_tp_consideration:
+            num_submissions = IotdSubmission.objects.filter(image=image).count()
+            num_votes = IotdVote.objects.filter(image=image).count()
 
-        if (
-            hasattr(request, 'user') and
-            (image.user == request.user or request.user.is_superuser) and
-            str(image.get_id()) in request.path and
-            bool(set(badges) & {'iotd', 'top-pick', 'top-pick-nomination', 'iotd-queue'})
-        ):
-            badges.append('iotd-stats')
+            if num_submissions < settings.IOTD_SUBMISSION_MIN_PROMOTIONS:
+                cutoff = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+            elif num_votes < settings.IOTD_REVIEW_MIN_PROMOTIONS:
+                cutoff = datetime.now() - timedelta(
+                    settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+                )
+            else:
+                cutoff = datetime.now() - timedelta(
+                    settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                    settings.IOTD_REVIEW_WINDOW_DAYS +
+                    settings.IOTD_JUDGEMENT_WINDOW_DAYS
+                )
+
+            if iotd_service.is_iotd(image):
+                badges.append('iotd')
+            elif iotd_service.is_top_pick(image):
+                badges.append('top-pick')
+            elif iotd_service.is_top_pick_nomination(image):
+                badges.append('top-pick-nomination')
+            elif (
+                    iotd_service.is_future_iotd(image) or
+                    image.submitted_for_iotd_tp_consideration > cutoff
+            ):
+                if hasattr(request, 'user') and (request.user == image.user or request.user.is_superuser):
+                    badges.append('iotd-queue')
+
+            if (
+                    hasattr(request, 'user') and
+                    (image.user == request.user or request.user.is_superuser) and
+                    str(image.get_id()) in request.path and
+                    bool(set(badges) & {'iotd', 'top-pick', 'top-pick-nomination', 'iotd-queue'})
+            ):
+                badges.append('iotd-stats')
 
         if image.collaborators.exists():
             badges.append('collaboration')
@@ -239,70 +265,80 @@ def astrobin_image(context, image, alias, **kwargs):
             get_raw_thumb_url += '?animated'
 
     get_regular_large_thumb_url, regular_large_thumb_url = ImageService(image).get_enhanced_thumb_url(
-        field, alias, revision_label, animated, request.is_secure(), 'regular_large')
+        field, alias, revision_label, animated, request.is_secure(), 'regular_large'
+    )
 
     get_enhanced_thumb_url, enhanced_thumb_url = ImageService(image).get_enhanced_thumb_url(
-        field, alias, revision_label, animated, request.is_secure(), 'hd')
+        field, alias, revision_label, animated, request.is_secure(), 'hd'
+    )
 
     # noinspection PyTypeChecker
-    return dict(list(response_dict.items()) + list({
-        'status': 'success',
-        'image': image,
-        'alias': alias,
-        'mod': mod,
-        'revision': revision_label,
-        'size_x': size[0],
-        'size_y': size[1],
-        'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
-        'real': alias in ('real', 'real_inverted'),
-        'url': url,
-        'show_tooltip': show_tooltip,
-        'request': request,
-        'caption_cache_key': "%d_%s_%s_%s" % (
-            image.id, revision_label, alias, request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en"),
-        'badges': badges,
-        'animated': animated,
-        'get_thumb_url': get_thumb_url,
-        'get_raw_thumb_url': get_raw_thumb_url,
-        'thumb_url': thumb_url,
-        'link': link,
-        'nav_ctx': nav_ctx,
-        'nav_ctx_extra': nav_ctx_extra,
-        'classes': classes,
-        'enhanced_thumb_url': enhanced_thumb_url,
-        'get_enhanced_thumb_url': get_enhanced_thumb_url,
-        'regular_large_thumb_url': regular_large_thumb_url,
-        'get_regular_large_thumb_url': get_regular_large_thumb_url,
-        'image_revision': image_revision,
-        'is_revision': hasattr(image_revision, 'label'),
-        'revision_id': image_revision.pk,
-        'revision_title': image_revision.title if hasattr(image_revision, 'label') else None,
-        'w': w,
-        'h': h,
-        'instant': instant,
-        'fancybox': fancybox,
-        'fancybox_tooltip': fancybox_tooltip,
-        'fancybox_url':
-            image_revision.encoded_video_file.url if image_revision.encoded_video_file.name else settings.BASE_URL + reverse(
-                'image_rawthumb', kwargs={
-                    'id': image.get_id(),
-                    'alias': 'qhd',
-                    'r': revision_label,
-                }
-            ) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
-        'rel': rel,
-        'slug': slug,
-        'is_video': bool(image_revision.video_file.name),
-        'show_video': ImageService.is_viewable_alias(alias) and (
-            bool(image_revision.video_file.name) if hasattr(image_revision, 'label') else bool(image.video_file.name)
-        ),
-        'show_play_icon': ImageService.is_play_button_alias(alias),
-    }.items()))
+    return dict(
+        list(response_dict.items()) + list(
+            {
+                'status': 'success',
+                'image': image,
+                'alias': alias,
+                'mod': mod,
+                'revision': revision_label,
+                'size_x': size[0],
+                'size_y': size[1],
+                'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
+                'real': alias in ('real', 'real_inverted'),
+                'url': url,
+                'show_tooltip': show_tooltip,
+                'request': request,
+                'caption_cache_key': "%d_%s_%s_%s" % (
+                    image.id, revision_label, alias,
+                    request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en"),
+                'badges': badges,
+                'animated': animated,
+                'get_thumb_url': get_thumb_url,
+                'get_raw_thumb_url': get_raw_thumb_url,
+                'thumb_url': thumb_url,
+                'link': link,
+                'nav_ctx': nav_ctx,
+                'nav_ctx_extra': nav_ctx_extra,
+                'classes': classes,
+                'enhanced_thumb_url': enhanced_thumb_url,
+                'get_enhanced_thumb_url': get_enhanced_thumb_url,
+                'regular_large_thumb_url': regular_large_thumb_url,
+                'get_regular_large_thumb_url': get_regular_large_thumb_url,
+                'image_revision': image_revision,
+                'is_revision': hasattr(image_revision, 'label'),
+                'revision_id': image_revision.pk,
+                'revision_title': image_revision.title if hasattr(image_revision, 'label') else None,
+                'w': w,
+                'h': h,
+                'instant': instant,
+                'fancybox': fancybox,
+                'fancybox_tooltip': fancybox_tooltip,
+                'fancybox_url':
+                    image_revision.encoded_video_file.url if image_revision.encoded_video_file.name else settings.BASE_URL + reverse(
+                        'image_rawthumb', kwargs={
+                            'id': image.get_id(),
+                            'alias': 'qhd',
+                            'r': revision_label,
+                        }
+                    ) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
+                'rel': rel,
+                'slug': slug,
+                'is_video': bool(image_revision.video_file.name),
+                'show_video': ImageService.is_viewable_alias(alias) and (
+                    bool(image_revision.video_file.name) if hasattr(image_revision, 'label') else bool(
+                        image.video_file.name
+                    )
+                ),
+                'show_play_icon': ImageService.is_play_button_alias(alias),
+            }.items()
+        )
+        )
 
 
 register.inclusion_tag(
     'astrobin_apps_images/snippets/image.html',
-    takes_context=True)(astrobin_image)
+    takes_context=True
+)(astrobin_image)
 
 
 @register.simple_tag(takes_context=True)
