@@ -42,34 +42,38 @@ class IotdService:
                 IotdJudgementQueueEntry.objects.filter(image=image).exists()
         )
 
-    def is_iotd(self, image):
-        # type: (Image) -> bool
+    def is_iotd(self, image: Image) -> bool:
         return \
                 hasattr(image, 'iotd') and \
                 image.iotd is not None and \
                 image.iotd.date <= datetime.now().date() and \
                 not image.user.userprofile.exclude_from_competitions
 
-    def get_iotds(self):
+    def is_future_iotd(self, image: Image) -> bool:
+        return \
+                hasattr(image, 'iotd') and \
+                image.iotd is not None and \
+                image.iotd.date > datetime.now().date() and \
+                not image.user.userprofile.exclude_from_competitions
+
+    def get_iotds(self) -> QuerySet:
         return Iotd.objects.filter(
             Q(date__lte=datetime.now().date()) &
             Q(image__deleted__isnull=True)
         )
 
-    def is_top_pick(self, image):
-        # type: (Image) -> bool
+    def is_top_pick(self, image: Image) -> bool:
         return TopPickArchive.objects.filter(image=image).exists() and \
             image.user.userprofile.exclude_from_competitions is not True
 
-    def get_top_picks(self):
+    def get_top_picks(self) -> QuerySet:
         return TopPickArchive.objects.all()
 
-    def is_top_pick_nomination(self, image):
-        # type: (Image) -> bool
+    def is_top_pick_nomination(self, image: Image) -> bool:
         return TopPickNominationsArchive.objects.filter(image=image).exists() and \
             image.user.userprofile.exclude_from_competitions is not True
 
-    def get_top_pick_nominations(self):
+    def get_top_pick_nominations(self) -> QuerySet:
         return TopPickNominationsArchive.objects.all()
 
     def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> List[IotdSubmissionQueueEntry]:
