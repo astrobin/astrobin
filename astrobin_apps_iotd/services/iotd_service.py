@@ -50,11 +50,14 @@ class IotdService:
                 not image.user.userprofile.exclude_from_competitions
 
     def is_future_iotd(self, image: Image) -> bool:
+        profile = image.user.userprofile
         return \
                 hasattr(image, 'iotd') and \
                 image.iotd is not None and \
                 image.iotd.date > datetime.now().date() and \
-                not image.user.userprofile.exclude_from_competitions
+                not profile.exclude_from_competitions and \
+                (profile.banned_from_competitions is None or
+                 profile.banned_from_competitions > image.submitted_for_iotd_tp_consideration)
 
     def get_iotds(self) -> QuerySet:
         return Iotd.objects.filter(
@@ -63,15 +66,21 @@ class IotdService:
         )
 
     def is_top_pick(self, image: Image) -> bool:
+        profile = image.user.userprofile
         return TopPickArchive.objects.filter(image=image).exists() and \
-            image.user.userprofile.exclude_from_competitions is not True
+            profile.exclude_from_competitions is not True and \
+            (profile.banned_from_competitions is None or
+             profile.banned_from_competitions > image.submitted_for_iotd_tp_consideration)
 
     def get_top_picks(self) -> QuerySet:
         return TopPickArchive.objects.all()
 
     def is_top_pick_nomination(self, image: Image) -> bool:
+        profile = image.user.userprofile
         return TopPickNominationsArchive.objects.filter(image=image).exists() and \
-            image.user.userprofile.exclude_from_competitions is not True
+            profile.exclude_from_competitions is not True and \
+            (profile.banned_from_competitions is None or
+             profile.banned_from_competitions > image.submitted_for_iotd_tp_consideration)
 
     def get_top_pick_nominations(self) -> QuerySet:
         return TopPickNominationsArchive.objects.all()
@@ -252,7 +261,7 @@ class IotdService:
             ) &
             Q(
                 submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(
-                    settings.IOTD_SUBMISSION_WINDOW_DAYS
+                    settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
                 )
             ) &
             Q(
@@ -1289,14 +1298,14 @@ class IotdService:
         for username, data in sorted(combined_data.items(), key=lambda item: item[1]['score'], reverse=True):
             try:
                 promotions_dismissals_accuracy_ratio = (
-                                data['promotions'].get('top_pick_nominations', 0) +
-                                data['promotions'].get('top_picks', 0) +
-                                data['promotions'].get('iotds', 0)
-                        ) / (
-                                data['dismissals'].get('top_pick_nominations', 0) +
-                                data['dismissals'].get('top_picks', 0) +
-                                data['dismissals'].get('iotds', 0)
-                        )
+                                                               data['promotions'].get('top_pick_nominations', 0) +
+                                                               data['promotions'].get('top_picks', 0) +
+                                                               data['promotions'].get('iotds', 0)
+                                                       ) / (
+                                                               data['dismissals'].get('top_pick_nominations', 0) +
+                                                               data['dismissals'].get('top_picks', 0) +
+                                                               data['dismissals'].get('iotds', 0)
+                                                       )
             except ZeroDivisionError:
                 promotions_dismissals_accuracy_ratio = 0
 
