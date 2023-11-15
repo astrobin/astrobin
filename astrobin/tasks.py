@@ -977,11 +977,11 @@ def generate_sitemaps_and_upload_to_s3():
         'sitemaps': {
             'static': StaticViewSitemap,
             **generate_sitemaps(
-                Image.objects.filter(moderator_decision=ModeratorDecision.APPROVED).order_by('-updated'),
-                'updated'
+                Image.objects.filter(moderator_decision=ModeratorDecision.APPROVED).order_by('-published'),
+                'published'
             ),
             **generate_sitemaps(
-                UserProfile.objects.all().order_by('-updated'),
+                UserProfile.objects.filter(updated__isnull=False).order_by('-updated'),
                 'updated'
             ),
             **generate_sitemaps(
@@ -1024,11 +1024,11 @@ def generate_sitemaps_and_upload_to_s3():
 
         # Generate and save sitemap files
         for section, site in custom_sitemap['sitemaps'].items():
-            response = sitemap(request, custom_sitemap['sitemaps'], section)
-            response.render()
             filename = f'{section}.xml'
 
             logger.debug(f'Generating sitemap {filename}')
+            response = sitemap(request, custom_sitemap['sitemaps'], section)
+            response.render()
 
             with open(filename, 'wb') as file:
                 file.write(response.content)

@@ -33,7 +33,7 @@ def generate_sitemaps(queryset: QuerySet, date_field: str) -> dict:
     date_queryset = queryset.annotate(
         year=ExtractYear(date_field),
         month=ExtractMonth(date_field)
-    ).values('year', 'month').distinct()
+    ).order_by('year', 'month').values('year', 'month').distinct()
 
     for date in date_queryset:
         year = date['year']
