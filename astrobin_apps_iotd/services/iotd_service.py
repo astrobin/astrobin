@@ -35,13 +35,6 @@ log = logging.getLogger(__name__)
 
 
 class IotdService:
-    def is_in_iotd_queue(self, image: Image) -> bool:
-        return (
-                IotdSubmissionQueueEntry.objects.filter(image=image).exists() or
-                IotdReviewQueueEntry.objects.filter(image=image).exists() or
-                IotdJudgementQueueEntry.objects.filter(image=image).exists()
-        )
-
     def is_iotd(self, image: Image) -> bool:
         return \
                 hasattr(image, 'iotd') and \
