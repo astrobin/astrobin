@@ -6,7 +6,6 @@ from typing import List, Union
 
 from django.conf import settings
 from django.contrib.auth.models import Group, User
-from django.db import IntegrityError
 from django.db.models import Count, OuterRef, Prefetch, Q, QuerySet, Subquery
 from django.utils import timezone
 from django.utils.translation import gettext
@@ -249,8 +248,13 @@ class IotdService:
             ) &
             Q(
                 submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(
-                    settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+                    settings.IOTD_SUBMISSION_WINDOW_DAYS
                 )
+            ) &
+            Q(
+                submitted_for_iotd_tp_consideration__gt=datetime.now() - timedelta(
+                    settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+                ) * 2
             ) &
             Q(toppicknominationsarchive__isnull=True)
         ).order_by('-submitted_for_iotd_tp_consideration')
@@ -270,6 +274,13 @@ class IotdService:
                     settings.IOTD_REVIEW_WINDOW_DAYS +
                     settings.IOTD_JUDGEMENT_WINDOW_DAYS
                 )
+            ) &
+            Q(
+                submitted_for_iotd_tp_consideration__gt=datetime.now() - timedelta(
+                    settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                    settings.IOTD_REVIEW_WINDOW_DAYS +
+                    settings.IOTD_JUDGEMENT_WINDOW_DAYS
+                ) * 2
             ) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
             Q(
