@@ -743,7 +743,7 @@ class ImageDetailView(ImageDetailViewBase):
                 PlateSolvingAdvancedLiveLogEntry.objects.filter(
                     serial_number=instance_to_platesolve.solution.pixinsight_serial_number) \
                     .order_by('-timestamp').first() \
-                    if instance_to_platesolve.solution \
+                    if instance_to_platesolve.solution and instance_to_platesolve.solution.pixinsight_serial_number \
                     else None,
             'skyplot_zoom1': skyplot_zoom1,
             'pixinsight_finding_chart': pixinsight_finding_chart,
