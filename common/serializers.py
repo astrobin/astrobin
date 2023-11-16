@@ -83,6 +83,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         exclude = (
             'premium_counter',
             'exclude_from_competitions',
+            'shadow_bans',
         )
 
 
