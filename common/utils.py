@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 from os.path import dirname, abspath
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.db.transaction import get_connection
@@ -33,3 +34,9 @@ def lock_table(model):
             yield
         finally:
             cursor.close()
+
+
+def get_segregated_reader_database():
+    if settings.TESTING:
+        return 'default'
+    return 'segregated_reader'
