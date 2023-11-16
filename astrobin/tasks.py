@@ -940,7 +940,7 @@ def invalidate_cdn_caches(paths: List[str]):
     CloudflareService().purge_cache(paths)
 
 
-@shared_task(time_limit=600, acks_late=True)
+@shared_task(time_limit=1800, acks_late=True)
 def generate_sitemaps_and_upload_to_s3():
     invalidate_urls = []
 
