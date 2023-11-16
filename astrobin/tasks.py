@@ -942,6 +942,8 @@ def invalidate_cdn_caches(paths: List[str]):
 
 @shared_task(time_limit=600, acks_late=True)
 def generate_sitemaps_and_upload_to_s3():
+    invalidate_urls = []
+
     def upload_to_sitemap_folder(filename, folder='sitemaps'):
         # Use boto3 to upload the file to S3
         s3_client = boto3.client('s3')
@@ -961,7 +963,7 @@ def generate_sitemaps_and_upload_to_s3():
             logger.debug(f'Uploaded to s3: {s3_path}')
 
         os.remove(filename)
-        CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation([f'/{s3_path}'])
+        invalidate_urls.append(f'/{s3_path}')
 
     def generate_sitemap_index(sitemaps, base_url=settings.AWS_STORAGE_BUCKET_NAME, folder='sitemaps'):
         root = Element('sitemapindex', xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
@@ -1042,3 +1044,5 @@ def generate_sitemaps_and_upload_to_s3():
         with open('sitemap_index.xml', 'wb') as file:
             file.write(sitemap_index)
         upload_to_sitemap_folder('sitemap_index.xml', folder=custom_sitemap['folder'])
+
+        CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation(invalidate_urls)
