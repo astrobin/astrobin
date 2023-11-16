@@ -964,7 +964,7 @@ def generate_sitemaps_and_upload_to_s3():
         CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation([f'/{s3_path}'])
 
     def generate_sitemap_index(sitemaps, base_url=settings.AWS_STORAGE_BUCKET_NAME, folder='sitemaps'):
-        root = Element('sitemapindex', xmlns='https://www.sitemaps.org/schemas/sitemap/0.9')
+        root = Element('sitemapindex', xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
         for s in sitemaps:
             sitemap_elem = SubElement(root, 'sitemap')
             loc = SubElement(sitemap_elem, 'loc')
