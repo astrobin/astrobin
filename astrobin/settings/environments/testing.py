@@ -14,6 +14,14 @@ if TESTING:
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': 'astrobin_test_db',
+        },
+        'reader': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'astrobin_test_db',
+        },
+        'segregated_reader': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'astrobin_test_db',
         }
     }
 
