@@ -53,7 +53,7 @@ class LocationResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = Location.objects.all()
+        queryset = Location.objects.using('segregated_reader').all()
         fields = [
             'name',
             'city',
@@ -93,7 +93,7 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.filter(image__is_wip=False)
+        queryset = ImageRevision.objects.using('segregated_reader').filter(image__is_wip=False)
         fields = [
             'id',
             'uploaded',
@@ -642,7 +642,7 @@ class ImageOfTheDayResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageOfTheDay.objects.filter()
+        queryset = ImageOfTheDay.objects.using('segregated_reader').filter()
         fields = [
             'image',
             'runnerup_1',
@@ -661,7 +661,7 @@ class TopPickResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = TopPickArchive.objects.all()
+        queryset = TopPickArchive.objects.using('segregated_reader').all()
         fields = [
             'image',
         ]
@@ -680,7 +680,7 @@ class TopPickNominationResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = TopPickNominationsArchive.objects.all()
+        queryset = TopPickNominationsArchive.objects.using('segregated_reader').all()
         fields = [
             'image',
         ]
@@ -704,7 +704,7 @@ class CollectionResource(ModelResource):
     class Meta:
         authentication = AppAuthentication()
         allowed_methods = ['get']
-        queryset = Collection.objects.all()
+        queryset = Collection.objects.using('segregated_reader').all()
         filtering = {
             'name': ALL,
             'description': ALL,
@@ -751,7 +751,7 @@ class UserProfileResource(ModelResource):
     class Meta:
         authentication = AppAuthentication()
         allowed_methods = ["get"]
-        queryset = UserProfile.objects.all()
+        queryset = UserProfile.objects.using('segregated_reader').all()
         fields = [
             'about',
             'allow_astronomy_ads',
