@@ -931,6 +931,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("DSP", "Dark Sky Portal"),
         ("DSV", "Deepsky Villa"),
         ("DSC", "DeepSkyChile"),
+        ("DSPR", "Deep Space Products Remote"),
         ("DSW", "DeepSkyWest"),
         ("eEyE", "e-EyE Extremadura"),
         ("EITS", "Eye In The Sky"),
