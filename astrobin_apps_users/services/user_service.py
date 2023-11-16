@@ -77,7 +77,10 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
+            base_query = Image.objects_including_wip.all()
+            query1 = base_query.filter(user=self.user)
+            query2 = base_query.filter(collaborators=self.user)
+            return query1.union(query2)
 
         return Image.objects_including_wip.filter(user=self.user)
 
@@ -94,7 +97,10 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            return Image.objects.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
+            base_query = Image.objects.all()
+            query1 = base_query.filter(user=self.user)
+            query2 = base_query.filter(collaborators=self.user)
+            return query1.union(query2)
 
         return Image.objects.filter(user=self.user)
 
@@ -111,8 +117,10 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            return Image.wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
-
+            base_query = Image.wip.all()
+            query1 = base_query.filter(user=self.user)
+            query2 = base_query.filter(collaborators=self.user)
+            return query1.union(query2)
         return Image.wip.filter(user=self.user)
 
     def get_deleted_images(self) -> QuerySet:
