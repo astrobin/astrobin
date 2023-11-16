@@ -8,6 +8,7 @@ class MonthlySitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.5
     date_field = 'updated'  # Default date field
+    protocol = 'https'
 
     def __init__(self, queryset: QuerySet, year: int, month: int, date_field: str = None):
         self.queryset = queryset

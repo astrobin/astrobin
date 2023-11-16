@@ -1,17 +1,7 @@
-from datetime import datetime
-
-from django.contrib.sitemaps import Sitemap
-
+from astrobin.sitemaps.equipment_item_sitemap import EquipmentItemSitemap
 from astrobin_apps_equipment.models import Software
 
 
-class SoftwareSitemap(Sitemap):
-    priority = 0.5
-    changefreq = 'monthly'
-
-    def items(self):
-        return Software.objects.all()
-
-    def lastmod(self, obj) -> datetime:
-        return getattr(obj, 'updated')
-
+class SoftwareSitemap(EquipmentItemSitemap):
+    def __init__(self):
+        super().__init__(Software)

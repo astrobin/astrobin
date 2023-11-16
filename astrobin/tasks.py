@@ -1017,7 +1017,6 @@ def generate_sitemaps_and_upload_to_s3():
     request.user = AnonymousUser()
     request.META['SERVER_NAME'] = settings.BASE_URL
     request.META['SERVER_PORT'] = '443'
-    request.schema = 'https'
 
     for custom_sitemap in (www_sitemaps, app_sitemaps):
         all_filenames = []

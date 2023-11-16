@@ -5,6 +5,7 @@ from django.urls import reverse
 class StaticViewSitemap(Sitemap):
     priority = 0.5
     changefreq = 'monthly'
+    protocol = 'https'
 
     def items(self):
         # List of static view names for which you want to generate sitemap entries
