@@ -20,6 +20,7 @@ from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
+from common.utils import get_segregated_reader_database
 from toggleproperties.models import ToggleProperty
 
 
@@ -53,7 +54,7 @@ class LocationResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = Location.objects.using('segregated_reader').all()
+        queryset = Location.objects.using(get_segregated_reader_database()).all()
         fields = [
             'name',
             'city',
@@ -93,7 +94,7 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.using('segregated_reader').filter(image__is_wip=False)
+        queryset = ImageRevision.objects.using(get_segregated_reader_database()).filter(image__is_wip=False)
         fields = [
             'id',
             'uploaded',
@@ -642,7 +643,7 @@ class ImageOfTheDayResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageOfTheDay.objects.using('segregated_reader').filter()
+        queryset = ImageOfTheDay.objects.using(get_segregated_reader_database()).filter()
         fields = [
             'image',
             'runnerup_1',
@@ -661,7 +662,7 @@ class TopPickResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = TopPickArchive.objects.using('segregated_reader').all()
+        queryset = TopPickArchive.objects.using(get_segregated_reader_database()).all()
         fields = [
             'image',
         ]
@@ -680,7 +681,7 @@ class TopPickNominationResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = TopPickNominationsArchive.objects.using('segregated_reader').all()
+        queryset = TopPickNominationsArchive.objects.using(get_segregated_reader_database()).all()
         fields = [
             'image',
         ]
@@ -704,7 +705,7 @@ class CollectionResource(ModelResource):
     class Meta:
         authentication = AppAuthentication()
         allowed_methods = ['get']
-        queryset = Collection.objects.using('segregated_reader').all()
+        queryset = Collection.objects.using(get_segregated_reader_database()).all()
         filtering = {
             'name': ALL,
             'description': ALL,
@@ -751,7 +752,7 @@ class UserProfileResource(ModelResource):
     class Meta:
         authentication = AppAuthentication()
         allowed_methods = ["get"]
-        queryset = UserProfile.objects.using('segregated_reader').all()
+        queryset = UserProfile.objects.using(get_segregated_reader_database()).all()
         fields = [
             'about',
             'allow_astronomy_ads',
