@@ -1189,6 +1189,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   li {
     list-style: initial;
   }
+
+  .fancybox {
+    display: block;
+    margin: 0 auto;
+
+    img {
+      border-radius: .5rem;
+      box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+    }
+  }
 }
 
 .image-basic-data {
