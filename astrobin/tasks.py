@@ -65,6 +65,7 @@ from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
 from common.services import DateTimeService
+from common.utils import get_segregated_reader_database
 from nested_comments.models import NestedComment
 
 logger = get_task_logger(__name__)
@@ -101,7 +102,8 @@ def update_top100_ids():
         return
 
     logger.debug(
-        'Top100 ids task is already being run by another worker')
+        'Top100 ids task is already being run by another worker'
+    )
 
 
 @shared_task(time_limit=60, acks_late=True)
@@ -123,11 +125,14 @@ def contain_temporary_files_size():
 This task will delete all inactive accounts with bounced email
 addresses.
 """
+
+
 @shared_task(time_limit=60, acks_late=True)
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
         hard=True,
-        bounce_type="Permanent")
+        bounce_type="Permanent"
+    )
     emails = bounces.values_list('address', flat=True)
 
     User.objects.filter(email__in=emails, is_active=False).delete()
@@ -362,7 +367,8 @@ def send_broadcast_email(broadcast_email_id, recipients):
             broadcast_email.subject,
             broadcast_email.message,
             settings.DEFAULT_FROM_EMAIL,
-            [recipient])
+            [recipient]
+        )
         msg.attach_alternative(broadcast_email.message_html, "text/html")
         msg.send()
         logger.info("Email sent to %s: %s" % (recipient.email, broadcast_email.subject))
@@ -388,14 +394,16 @@ def send_never_activated_account_reminder():
             user.delete()
             continue
 
-        push_notification([user], None, 'never_activated_account', {
-            'date': user.date_joined,
-            'username': user.username,
-            'activation_link': '%s/%s' % (
-                settings.BASE_URL,
-                reverse('registration_activate', args=(RegistrationView().get_activation_key(user),)),
-            )
-        })
+        push_notification(
+            [user], None, 'never_activated_account', {
+                'date': user.date_joined,
+                'username': user.username,
+                'activation_link': '%s/%s' % (
+                    settings.BASE_URL,
+                    reverse('registration_activate', args=(RegistrationView().get_activation_key(user),)),
+                )
+            }
+        )
 
         user.userprofile.never_activated_account_reminder_sent = timezone.now()
         user.userprofile.save(keep_deleted=True)
@@ -411,9 +419,9 @@ def delete_never_activated_accounts():
     logger.debug("Processing %d inactive accounts..." % count)
 
     for user in users.iterator():
-        images = Image.all_objects.filter(user=user).count()
-        posts = Post.objects.filter(user=user).count()
-        comments = NestedComment.objects.filter(author=user).count()
+        images = Image.all_objects.using(get_segregated_reader_database()).filter(user=user).count()
+        posts = Post.objects.using(get_segregated_reader_database()).filter(user=user).count()
+        comments = NestedComment.objects.using(get_segregated_reader_database()).filter(author=user).count()
         if images + posts + comments == 0:
             user.delete()
 
@@ -424,7 +432,11 @@ def prepare_download_data_archive(request_id):
 
     logger.info("prepare_download_data_archive: called for request %d" % request_id)
 
-    data_download_request = DataDownloadRequest.objects.get(id=request_id)
+    data_download_request = DataDownloadRequest.objects.using(
+        get_segregated_reader_database()
+    ).get(
+        id=request_id
+    )
 
     try:
         temp_filename = os.path.join('/astrobin-temporary-files/files', os.urandom(12).hex())
@@ -436,51 +448,58 @@ def prepare_download_data_archive(request_id):
         archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED, allowZip64=True)  # type: ZipFile
 
         csv_writer = csv.writer(temp_csv)
-        csv_writer.writerow([
-            'id',
-            'title',
-            'acquisition_type',
-            'subject_type',
-            'data_source',
-            'remote_source',
-            'solar_system_main_subject',
-            'locations',
-            'description',
-            'link',
-            'link_to_fits',
-            'image_file',
-            'uncompressed_source_file',
-            'uploaded',
-            'published',
-            'updated',
-            'watermark',
-            'watermark_text',
-            'watermark_opacity',
-            'imaging_telescopes',
-            'guiding_telescopes',
-            'mounts',
-            'imaging_cameras',
-            'guiding_cameras',
-            'focal_reducers',
-            'software',
-            'filters',
-            'accessories',
-            'is_wip',
-            'w',
-            'h',
-            'animated',
-            'license',
-            'is_final',
-            'allow_comments',
-            'mouse_hover_image',
-            'ra',
-            'dec',
-            'pixel_scale',
-            'orientation',
-            'field_radius',
-        ])
+        csv_writer.writerow(
+            [
+                'id',
+                'title',
+                'acquisition_type',
+                'subject_type',
+                'data_source',
+                'remote_source',
+                'solar_system_main_subject',
+                'locations',
+                'description',
+                'link',
+                'link_to_fits',
+                'image_file',
+                'uncompressed_source_file',
+                'uploaded',
+                'published',
+                'updated',
+                'watermark',
+                'watermark_text',
+                'watermark_opacity',
+                'imaging_telescopes',
+                'guiding_telescopes',
+                'mounts',
+                'imaging_cameras',
+                'guiding_cameras',
+                'focal_reducers',
+                'software',
+                'filters',
+                'accessories',
+                'is_wip',
+                'w',
+                'h',
+                'animated',
+                'license',
+                'is_final',
+                'allow_comments',
+                'mouse_hover_image',
+                'ra',
+                'dec',
+                'pixel_scale',
+                'orientation',
+                'field_radius',
+            ]
+        )
 
-        images = Image.objects_including_wip.filter(user=data_download_request.user)
+        images = Image.objects_including_wip.using(
+            get_segregated_reader_database()
+        ).filter(
+            user=data_download_request.user
+        )
+
         for image in images:
             id = image.get_id()  # type: str
 
@@ -502,7 +521,11 @@ def prepare_download_data_archive(request_id):
                         archive.writestr("%s-%s/solution/%s" % (id, title, path), response.content)
                         logger.debug("prepare_download_data_archive: solution of image %s = written" % id)
 
-                for revision in ImageRevision.objects.filter(image=image):  # type: ImageRevision
+                for revision in ImageRevision.objects.using(
+                    get_segregated_reader_database()
+                ).filter(
+                    image=image
+                ):  # type: ImageRevision
                     try:
                         label = revision.label  # type: str
                         path = ntpath.basename(revision.image_file.name)  # type: str
@@ -518,8 +541,10 @@ def prepare_download_data_archive(request_id):
                             response = requests.get(revision.solution.image_file.url, verify=False)  # type: Response
                             if response.status_code == 200:
                                 path = ntpath.basename(revision.solution.image_file.name)  # type: str
-                                archive.writestr("%s-%s/revisions/%s/solution/%s" % (id, title, label, path),
-                                                 response.content)
+                                archive.writestr(
+                                    "%s-%s/revisions/%s/solution/%s" % (id, title, label, path),
+                                    response.content
+                                )
                                 logger.debug(
                                     "prepare_download_data_archive: solution image of image %s revision %s = written" % (
                                         id, label
@@ -543,7 +568,9 @@ def prepare_download_data_archive(request_id):
                 image.remote_source,
                 image.solar_system_main_subject,
                 ';'.join([str(x) for x in image.locations.all()]),
-                str(image.description_bbcode if image.description_bbcode else image.description).encode('utf-8').decode() if image.description_bbcode or image.description else '',
+                str(image.description_bbcode if image.description_bbcode else image.description).encode(
+                    'utf-8'
+                ).decode() if image.description_bbcode or image.description else '',
                 str(image.link).encode('utf-8').decode() if image.link else '',
                 str(image.link_to_fits).encode('utf-8').decode() if image.link_to_fits else '',
                 image.image_file.url,
@@ -632,7 +659,7 @@ def prepare_download_data_archive(request_id):
             ]
 
             if image.solution:
-                row_data +=\
+                row_data += \
                     [
                         image.solution.advanced_ra if image.solution.advanced_ra is not None else image.solution.ra,
                         image.solution.advanced_dec if image.solution.advanced_dec is not None else image.solution.dec,
@@ -683,7 +710,8 @@ def purge_expired_incomplete_uploads():
 
 @shared_task(time_limit=60)
 def perform_wise_payouts(
-        wise_token, account_id, min_payout_amount, max_payout_amount, expenses_balance, expenses_buffer):
+        wise_token, account_id, min_payout_amount, max_payout_amount, expenses_balance, expenses_buffer
+):
     BASE_URL = 'https://api.transferwise.com'
     HEADERS = {'Authorization': 'Bearer %s' % wise_token}
 
@@ -728,12 +756,14 @@ def perform_wise_payouts(
             logger.info('Wise Payout: amount is %d < %d, bailing.' % (source_amount, min_payout_amount))
             return None
 
-        result = requests.post('%s/v2/quotes' % BASE_URL, json={
-            'profile': profile_id,
-            'sourceCurrency': currency,
-            'sourceAmount': min(max_payout_amount, source_amount),
-            'targetCurrency': 'CHF',
-        }, headers=HEADERS)
+        result = requests.post(
+            '%s/v2/quotes' % BASE_URL, json={
+                'profile': profile_id,
+                'sourceCurrency': currency,
+                'sourceAmount': min(max_payout_amount, source_amount),
+                'targetCurrency': 'CHF',
+            }, headers=HEADERS
+        )
         result_json = result.json()
 
         logger.debug(result.headers)
@@ -749,11 +779,13 @@ def perform_wise_payouts(
         return None
 
     def create_transfer(account_id, quote_id, transactionId=None):
-        result = requests.post('%s/v1/transfers' % BASE_URL, json={
-            'targetAccount': account_id,
-            'quoteUuid': quote_id,
-            'customerTransactionId': transactionId if transactionId else str(uuid.uuid4())
-        }, headers=HEADERS)
+        result = requests.post(
+            '%s/v1/transfers' % BASE_URL, json={
+                'targetAccount': account_id,
+                'quoteUuid': quote_id,
+                'customerTransactionId': transactionId if transactionId else str(uuid.uuid4())
+            }, headers=HEADERS
+        )
         result_json = result.json()
 
         logger.debug(result.headers)
@@ -773,7 +805,8 @@ def perform_wise_payouts(
             '%s/v3/profiles/%d/transfers/%d/payments' % (BASE_URL, profile_id, transfer_id),
             json={
                 'type': 'BALANCE'
-            }, headers=HEADERS)
+            }, headers=HEADERS
+        )
         result_json = result.json()
 
         logger.debug(result.headers)
@@ -847,9 +880,11 @@ def assign_upload_length():
                 except IntegrityError:
                     continue
 
-                logger.info("assign_upload_length: proccessed %d (%s) = %s" % (
-                    item.pk, item.image_file.url, filesizeformat(size)
-                ))
+                logger.info(
+                    "assign_upload_length: proccessed %d (%s) = %s" % (
+                        item.pk, item.image_file.url, filesizeformat(size)
+                    )
+                )
 
     time_cut = DateTimeService.now() - timedelta(hours=2)
     images = Image.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut)
@@ -861,29 +896,36 @@ def assign_upload_length():
 
 @shared_task(time_limit=30)
 def clear_duplicate_hit_counts():
-    duplicates = HitCount.objects \
-        .exclude(pk=OuterRef('pk')) \
-        .filter(
+    duplicates = HitCount.objects.exclude(
+        pk=OuterRef('pk')
+    ).filter(
         content_type_id=OuterRef('content_type_id'),
         object_pk=OuterRef('object_pk')
     )
 
-    HitCount.objects.annotate(has_other=Exists(duplicates)).filter(has_other=True).delete()
+    HitCount.objects.annotate(
+        has_other=Exists(duplicates)
+    ).filter(
+        has_other=True
+    ).delete()
 
 
 @shared_task(time_limit=30)
 def expire_gear_migration_locks():
-    Gear.objects \
-        .filter(migration_flag_moderator_lock__isnull=False,
-                migration_flag_moderator_lock_timestamp__lt=timezone.now() - timedelta(hours=1)) \
-        .update(migration_flag_moderator_lock=None,
-                migration_flag_moderator_lock_timestamp=None)
+    cutoff = timezone.now() - timedelta(hours=1)
 
-    GearMigrationStrategy.objects \
-        .filter(migration_flag_reviewer_lock__isnull=False,
-        migration_flag_reviewer_lock_timestamp__lt=timezone.now() - timedelta(hours=1)
-    ) \
-        .update(
+    Gear.objects.filter(
+        migration_flag_moderator_lock__isnull=False,
+        migration_flag_moderator_lock_timestamp__lt=cutoff
+    ).update(
+        migration_flag_moderator_lock=None,
+        migration_flag_moderator_lock_timestamp=None
+    )
+
+    GearMigrationStrategy.objects.filter(
+        migration_flag_reviewer_lock__isnull=False,
+        migration_flag_reviewer_lock_timestamp__lt=cutoff
+    ).update(
         migration_flag_reviewer_lock=None,
         migration_flag_reviewer_lock_timestamp=None
     )
@@ -916,7 +958,10 @@ def update_index(content_type_pk, object_pk):
 
 @shared_task(time_limit=3600, acks_late=False)
 def hard_delete_deleted_users():
-    profiles = UserProfile.deleted_objects.filter(deleted__lt=DateTimeService.now() - timedelta(days=365))
+    profiles = UserProfile.deleted_objects.filter(
+        deleted__lt=DateTimeService.now() - timedelta(days=365)
+    )
+
     for profile in profiles.iterator():
         logger.info("hard_delete_deleted_users: deleting %d" % profile.user.id)
         try:
@@ -979,24 +1024,46 @@ def generate_sitemaps_and_upload_to_s3():
         'sitemaps': {
             'static': StaticViewSitemap,
             **generate_sitemaps(
-                Image.objects.filter(moderator_decision=ModeratorDecision.APPROVED).order_by('-published'),
+                Image.objects.using(
+                    get_segregated_reader_database()
+                ).filter(
+                    moderator_decision=ModeratorDecision.APPROVED
+                ).order_by(
+                    '-published'
+                ),
                 'published'
             ),
             **generate_sitemaps(
-                UserProfile.objects.filter(updated__isnull=False).order_by('-updated'),
+                UserProfile.objects.using(
+                    get_segregated_reader_database()
+                ).filter(
+                    updated__isnull=False
+                ).order_by(
+                    '-updated'
+                ),
                 'updated'
             ),
             **generate_sitemaps(
-                Topic.objects.filter(
+                Topic.objects.using(
+                    get_segregated_reader_database()
+                ).filter(
                     Q(on_moderation=False) &
                     Q(
                         Q(forum__group=None) | Q(forum__group__public=True)
                     )
-                ).order_by('-updated'),
+                ).order_by(
+                    '-updated'
+                ),
                 'updated'
             ),
             **generate_sitemaps(
-                AstroBinGroup.objects.filter(public=True).order_by('-date_updated'),
+                AstroBinGroup.objects.using(
+                    get_segregated_reader_database()
+                ).filter(
+                    public=True
+                ).order_by(
+                    '-date_updated'
+                ),
                 'date_updated'
             ),
         }

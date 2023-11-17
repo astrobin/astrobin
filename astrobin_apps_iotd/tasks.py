@@ -12,6 +12,7 @@ from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.utils import push_notification
 from common.constants import GroupName
 from common.services import DateTimeService
+from common.utils import get_segregated_reader_database
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +74,7 @@ def clear_stale_queue_entries():
 @shared_task(time_limit=180)
 def send_notifications_when_promoted_image_becomes_iotd():
     try:
-        iotd = Iotd.objects.get(date=DateTimeService.today())
+        iotd = Iotd.objects.using(get_segregated_reader_database()).get(date=DateTimeService.today())
     except Iotd.DoesNotExist:
         logger.error("send_notifications_when_promoted_image_becomes_iotd: Iotd not found")
         return
@@ -81,19 +82,23 @@ def send_notifications_when_promoted_image_becomes_iotd():
     image = iotd.image
     thumb = image.thumbnail_raw('gallery', None, sync=True)
 
-    submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
+    submitters = [
+        x.submitter for x in IotdSubmission.objects.using(get_segregated_reader_database()).filter(image=image)
+    ]
     push_notification(submitters, None, 'image_you_promoted_is_iotd', {
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
 
-    reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
+    reviewers = [x.reviewer for x in IotdVote.objects.using(get_segregated_reader_database()).filter(image=image)]
     push_notification(reviewers, None, 'image_you_promoted_is_iotd', {
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
 
-    dismissers = [x.user for x in IotdDismissedImage.objects.filter(image=image)]
+    dismissers = [
+        x.user for x in IotdDismissedImage.objects.using(get_segregated_reader_database()).filter(image=image)
+    ]
     push_notification(
         dismissers, None, 'image_you_dismissed_is_iotd', {
             'image': image,
@@ -147,6 +152,7 @@ def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
     image: Image
     for image in recently_expired_images.iterator():
         users_who_saw_this = IotdSubmitterSeenImage.objects \
+            .using(get_segregated_reader_database()) \
             .filter(image=image, created__gt=image.submitted_for_iotd_tp_consideration) \
             .values_list('user', flat=True) \
             .distinct() \

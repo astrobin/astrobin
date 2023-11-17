@@ -33,6 +33,7 @@ def fetch_exchange_rates():
         except Exception as e:
             log.exception("fetch_exchange_rates exception: %s", str(e))
 
+
 @shared_task(time_limit=60, acks_late=True)
 def process_stripe_webhook_event(event):
     from astrobin_apps_payments.services.stripe_webhook_service import StripeWebhookService
