@@ -814,13 +814,13 @@ class UserProfileResource(ModelResource):
     def dehydrate_received_likes_count(self, bundle):
         likes = 0
         for i in Image.objects.filter(user=bundle.obj.user):
-            likes += ToggleProperty.objects.using(get_segregated_reader_database()).toggleproperties_for_object("like", i).count()
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
     def dehydrate_followers_count(self, bundle):
         return ToggleProperty.objects.filter(
             property_type="follow",
-            content_type=ContentType.objects.using(get_segregated_reader_database()).get_for_model(User),
+            content_type=ContentType.objects.get_for_model(User),
             object_id=bundle.obj.user.pk,
         ).count()
 
