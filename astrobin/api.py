@@ -495,16 +495,12 @@ class ImageResource(ModelResource):
         return License.to_deprecated_integer(bundle.obj.license)
 
     def dehydrate_likes(self, bundle):
-        return ToggleProperty.objects.using(
-            get_segregated_reader_database()
-        ).toggleproperties_for_object(
+        return ToggleProperty.objects.toggleproperties_for_object(
             'like', bundle.obj
         ).count()
 
     def dehydrate_bookmarks(self, bundle):
-        return ToggleProperty.objects.using(
-            get_segregated_reader_database()
-        ).toggleproperties_for_object(
+        return ToggleProperty.objects.toggleproperties_for_object(
             'bookmark', bundle.obj
         ).count()
 
@@ -818,14 +814,14 @@ class UserProfileResource(ModelResource):
         return likes
 
     def dehydrate_followers_count(self, bundle):
-        return ToggleProperty.objects.filter(
+        return ToggleProperty.objects.using(get_segregated_reader_database()).filter(
             property_type="follow",
             content_type=ContentType.objects.get_for_model(User),
             object_id=bundle.obj.user.pk,
         ).count()
 
     def dehydrate_following_count(self, bundle):
-        return ToggleProperty.objects.filter(
+        return ToggleProperty.objects.using(get_segregated_reader_database()).filter(
             property_type="follow",
             user=bundle.obj.user,
         ).count()
