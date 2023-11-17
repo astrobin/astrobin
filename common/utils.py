@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from itertools import islice
 from os.path import dirname, abspath
 
 from django.conf import settings
@@ -40,3 +41,9 @@ def get_segregated_reader_database():
     if settings.TESTING:
         return 'default'
     return 'segregated_reader'
+
+
+def batch(iterable, size=100):
+    iterator = iter(iterable)
+    for first in iterator:
+        yield [first] + list(islice(iterator, size - 1))
