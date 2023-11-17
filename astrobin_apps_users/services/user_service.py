@@ -64,7 +64,7 @@ class UserService:
         except Group.DoesNotExist:
             return []
 
-    def get_all_images(self) -> QuerySet:
+    def get_all_images(self, use_union=False) -> QuerySet:
         from astrobin.models import Image
 
         local_cache = caches['local_request_cache']
@@ -77,14 +77,16 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            base_query = Image.objects_including_wip.all()
-            query1 = base_query.filter(user=self.user).order_by()
-            query2 = base_query.filter(collaborators=self.user).order_by()
-            return query1.union(query2).order_by('-published')
+            if use_union:
+                base_query = Image.objects_including_wip.all()
+                query1 = base_query.filter(user=self.user).order_by()
+                query2 = base_query.filter(collaborators=self.user).order_by()
+                return query1.union(query2).order_by('-published')
+            return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects_including_wip.filter(user=self.user)
 
-    def get_public_images(self) -> QuerySet:
+    def get_public_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
 
         local_cache = caches['local_request_cache']
@@ -97,14 +99,16 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            base_query = Image.objects.all()
-            query1 = base_query.filter(user=self.user).order_by()
-            query2 = base_query.filter(collaborators=self.user).order_by()
-            return query1.union(query2).order_by('-published')
+            if use_union:
+                base_query = Image.objects.all()
+                query1 = base_query.filter(user=self.user).order_by()
+                query2 = base_query.filter(collaborators=self.user).order_by()
+                return query1.union(query2).order_by('-published')
+            return Image.objects.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects.filter(user=self.user)
 
-    def get_wip_images(self) -> QuerySet:
+    def get_wip_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
 
         local_cache = caches['local_request_cache']
@@ -117,10 +121,12 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            base_query = Image.wip.all()
-            query1 = base_query.filter(user=self.user).order_by()
-            query2 = base_query.filter(collaborators=self.user).order_by()
-            return query1.union(query2).order_by('-published')
+            if use_union:
+                base_query = Image.wip.all()
+                query1 = base_query.filter(user=self.user).order_by()
+                query2 = base_query.filter(collaborators=self.user).order_by()
+                return query1.union(query2).order_by('-published')
+            return Image.wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.wip.filter(user=self.user)
 
