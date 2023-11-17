@@ -9,7 +9,7 @@ from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache, caches
 from django.core.cache.utils import make_template_fragment_key
-from django.db.models import Q, QuerySet
+from django.db.models import OuterRef, Q, QuerySet, Subquery
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from haystack.query import SearchQuerySet
@@ -64,7 +64,7 @@ class UserService:
         except Group.DoesNotExist:
             return []
 
-    def get_all_images(self) -> QuerySet:
+    def get_all_images(self, use_union=False) -> QuerySet:
         from astrobin.models import Image
 
         local_cache = caches['local_request_cache']
@@ -77,11 +77,16 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
+            if use_union:
+                base_query = Image.objects_including_wip.all()
+                query1 = base_query.filter(user=self.user).order_by()
+                query2 = base_query.filter(collaborators=self.user).order_by()
+                return query1.union(query2).order_by('-published')
             return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects_including_wip.filter(user=self.user)
 
-    def get_public_images(self) -> QuerySet:
+    def get_public_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
 
         local_cache = caches['local_request_cache']
@@ -94,11 +99,16 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
+            if use_union:
+                base_query = Image.objects.all()
+                query1 = base_query.filter(user=self.user).order_by()
+                query2 = base_query.filter(collaborators=self.user).order_by()
+                return query1.union(query2).order_by('-published')
             return Image.objects.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects.filter(user=self.user)
 
-    def get_wip_images(self) -> QuerySet:
+    def get_wip_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
 
         local_cache = caches['local_request_cache']
@@ -111,6 +121,11 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
+            if use_union:
+                base_query = Image.wip.all()
+                query1 = base_query.filter(user=self.user).order_by()
+                query2 = base_query.filter(collaborators=self.user).order_by()
+                return query1.union(query2).order_by('-published')
             return Image.wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.wip.filter(user=self.user)
@@ -338,17 +353,19 @@ class UserService:
         # ACQUIRED #
         ############
         elif subsection == 'acquired':
-            last_acquisition_date_sql = 'SELECT date FROM astrobin_acquisition ' \
-                                        'WHERE date IS NOT NULL AND image_id = astrobin_image.id ' \
-                                        'ORDER BY date DESC ' \
-                                        'LIMIT 1'
-            queryset = queryset \
-                .filter(acquisition__isnull=False) \
-                .extra(
-                select={'last_acquisition_date': last_acquisition_date_sql},
-                order_by=['-last_acquisition_date', '-published']
-            ) \
-                .distinct()
+            latest_acquisition_date_subquery = Acquisition.objects.filter(
+                image_id=OuterRef('pk'),
+                date__isnull=False
+            ).order_by('-date').values('date')[:1]
+
+            # Apply the subquery to the queryset
+            queryset = queryset.filter(
+                acquisition__isnull=False
+            ).annotate(
+                last_acquisition_date=Subquery(latest_acquisition_date_subquery)
+            ).order_by(
+                '-last_acquisition_date', '-published'
+            ).distinct()
 
         ########
         # YEAR #

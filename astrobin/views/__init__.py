@@ -1201,11 +1201,11 @@ def user_page(request, username):
     menu = []
 
     if UserService(user).display_wip_images_on_public_gallery() and request.user == user:
-        qs = UserService(user).get_all_images()
+        qs = UserService(user).get_all_images(use_union=subsection != 'acquired')
     else:
-        qs = UserService(user).get_public_images()
+        qs = UserService(user).get_public_images(use_union=subsection != 'acquired')
 
-    wip_qs = UserService(user).get_wip_images()
+    wip_qs = UserService(user).get_wip_images(use_union=subsection != 'acquired')
 
     paginator = Paginator(qs, settings.PAGINATE_USER_PAGE_BY)
     page_number = request.GET.get('page', 1)
