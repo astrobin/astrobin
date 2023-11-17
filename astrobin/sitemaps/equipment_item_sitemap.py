@@ -2,6 +2,9 @@ from datetime import datetime
 
 from django.contrib.sitemaps import Sitemap
 
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from common.utils import get_segregated_reader_database
+
 
 class EquipmentItemSitemap(Sitemap):
     priority = 0.5
@@ -12,7 +15,13 @@ class EquipmentItemSitemap(Sitemap):
         self.model = model
 
     def items(self):
-        return self.model.objects.all()
+        return self.model.objects.using(
+            get_segregated_reader_database()
+        ).filter(
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED
+        ).order_by(
+            '-updated'
+        )
 
     def lastmod(self, obj) -> datetime:
         return getattr(obj, 'updated')
