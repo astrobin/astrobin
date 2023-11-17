@@ -16,9 +16,9 @@ class Migration(migrations.Migration):
             field=models.CharField(
                 blank=True,
                 choices=[(None, '---------'), ('OWN', 'Non-commercial independent facility'), (None, '---------'),
-                         ('ACRES', 'Astronomy Acres'), ('ALNI', 'Alnitak Remote Observatories'), ('AC', 'AstroCamp'),
+                         ('ALNI', 'Alnitak Remote Observatories'), ('AC', 'AstroCamp'),
                          ('AHK', 'Astro Hostel Krasnodar'), ('AOWA', 'Astro Observatories Western Australia'),
-                         ('ATLA', 'Atlaskies Observatory'), ('CS', 'ChileScope'),
+                         ('ATLA', 'Atlaskies Observatory'), ('ACRES', 'Astronomy Acres'), ('CS', 'ChileScope'),
                          ('DMA', 'Dark Matters Astrophotography'), ('DSNM', 'Dark Sky New Mexico'),
                          ('DSP', 'Dark Sky Portal'), ('DSV', 'Deepsky Villa'), ('DSC', 'DeepSkyChile'),
                          ('DSPR', 'Deep Space Products Remote'), ('DSW', 'DeepSkyWest'), ('eEyE', 'e-EyE Extremadura'),
