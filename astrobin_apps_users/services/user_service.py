@@ -77,10 +77,7 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            base_query = Image.objects_including_wip.all()
-            query1 = base_query.filter(user=self.user).order_by()
-            query2 = base_query.filter(collaborators=self.user).order_by()
-            return query1.union(query2).order_by('-published')
+            return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects_including_wip.filter(user=self.user)
 
@@ -97,10 +94,7 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            base_query = Image.objects.all()
-            query1 = base_query.filter(user=self.user).order_by()
-            query2 = base_query.filter(collaborators=self.user).order_by()
-            return query1.union(query2).order_by('-published')
+            return Image.objects.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects.filter(user=self.user)
 
@@ -117,10 +111,7 @@ class UserService:
             local_cache.set(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
-            base_query = Image.wip.all()
-            query1 = base_query.filter(user=self.user).order_by()
-            query2 = base_query.filter(collaborators=self.user).order_by()
-            return query1.union(query2).order_by('-published')
+            return Image.wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.wip.filter(user=self.user)
 
