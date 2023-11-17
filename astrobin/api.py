@@ -511,7 +511,7 @@ class ImageResource(ModelResource):
         try:
             return HitCount.objects.using(get_segregated_reader_database()).get(
                 object_pk=bundle.obj.pk,
-                content_type=ContentType.objects.using(get_segregated_reader_database()).get_for_model(Image),
+                content_type=ContentType.objects.get_for_model(Image),
             ).hits
         except (HitCount.DoesNotExist, HitCount.MultipleObjectsReturned):
             return 0
