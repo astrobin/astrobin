@@ -495,19 +495,27 @@ class ImageResource(ModelResource):
         return License.to_deprecated_integer(bundle.obj.license)
 
     def dehydrate_likes(self, bundle):
-        return ToggleProperty.objects.toggleproperties_for_object('like', bundle.obj).count()
+        return ToggleProperty.objects.using(
+            get_segregated_reader_database()
+        ).toggleproperties_for_object(
+            'like', bundle.obj
+        ).count()
 
     def dehydrate_bookmarks(self, bundle):
-        return ToggleProperty.objects.toggleproperties_for_object('bookmark', bundle.obj).count()
+        return ToggleProperty.objects.using(
+            get_segregated_reader_database()
+        ).toggleproperties_for_object(
+            'bookmark', bundle.obj
+        ).count()
 
     def dehydrate_comments(self, bundle):
         return bundle.obj.nested_comments.count()
 
     def dehydrate_views(self, bundle):
         try:
-            return HitCount.objects.get(
+            return HitCount.objects.using(get_segregated_reader_database()).get(
                 object_pk=bundle.obj.pk,
-                content_type=ContentType.objects.get_for_model(Image),
+                content_type=ContentType.objects.using(get_segregated_reader_database()).get_for_model(Image),
             ).hits
         except (HitCount.DoesNotExist, HitCount.MultipleObjectsReturned):
             return 0
@@ -553,7 +561,12 @@ class ImageResource(ModelResource):
                     return '%s%s' % (fix_catalog(m.group('catalog')), m.group('name'))
                 return name
 
-            qs = Solution.objects.filter(objects_in_field__icontains=fix_name(val[0]))[:100]
+            qs = Solution.objects.using(
+                get_segregated_reader_database()
+            ).filter(
+                objects_in_field__icontains=fix_name(val[0])
+            )[:100]
+
             return {'pk__in': [i.object_id for i in qs]}
 
         def lookup_ids(val: List[str]):
@@ -796,18 +809,18 @@ class UserProfileResource(ModelResource):
         return 'Etc/GMT'
 
     def dehydrate_image_count(self, bundle):
-        return Image.objects.filter(user=bundle.obj.user, is_wip=False).count()
+        return Image.objects.using(get_segregated_reader_database()).filter(user=bundle.obj.user, is_wip=False).count()
 
     def dehydrate_received_likes_count(self, bundle):
         likes = 0
         for i in Image.objects.filter(user=bundle.obj.user):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
+            likes += ToggleProperty.objects.using(get_segregated_reader_database()).toggleproperties_for_object("like", i).count()
         return likes
 
     def dehydrate_followers_count(self, bundle):
         return ToggleProperty.objects.filter(
             property_type="follow",
-            content_type=ContentType.objects.get_for_model(User),
+            content_type=ContentType.objects.using(get_segregated_reader_database()).get_for_model(User),
             object_id=bundle.obj.user.pk,
         ).count()
 
@@ -818,10 +831,10 @@ class UserProfileResource(ModelResource):
         ).count()
 
     def dehydrate_total_notifications_count(self, bundle):
-        return Message.objects.filter(user=bundle.obj.user).count()
+        return Message.objects.using(get_segregated_reader_database()).filter(user=bundle.obj.user).count()
 
     def dehydrate_unread_notifications_count(self, bundle):
-        return Message.objects.filter(user=bundle.obj.user, read=False).count()
+        return Message.objects.using(get_segregated_reader_database()).filter(user=bundle.obj.user, read=False).count()
 
     def dehydrate_premium_subscription(self, bundle):
         user_subscription = PremiumService(bundle.obj.user).get_valid_usersubscription()
