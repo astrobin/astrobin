@@ -131,22 +131,32 @@ class UserService:
     def get_bookmarked_images(self) -> QuerySet:
         from astrobin.models import Image
 
-        image_ct = ContentType.objects.get_for_model(Image)  # type: ContentType
-        bookmarked_pks: List[int] = [x.object_id for x in \
-                          ToggleProperty.objects.toggleproperties_for_user("bookmark", self.user).filter(
-                              content_type=image_ct)
-                          ]
+        image_ct: ContentType = ContentType.objects.get_for_model(Image)
+
+        bookmarked_pks: List[int] = [
+            x.object_id
+            for x in ToggleProperty.objects.toggleproperties_for_user(
+                "bookmark", self.user
+            ).filter(
+                content_type=image_ct
+            )
+        ]
 
         return Image.objects.filter(pk__in=bookmarked_pks)
 
     def get_liked_images(self) -> QuerySet:
         from astrobin.models import Image
 
-        image_ct = ContentType.objects.get_for_model(Image)  # type: ContentType
-        liked_pks = [
-            x.object_id for x in \
-            ToggleProperty.objects.toggleproperties_for_user("like", self.user).filter(content_type=image_ct)
-        ]  # type: List[int]
+        image_ct: ContentType = ContentType.objects.get_for_model(Image)
+
+        liked_pks: List[int] = [
+            x.object_id
+            for x in ToggleProperty.objects.toggleproperties_for_user(
+                "like", self.user
+            ).filter(
+                content_type=image_ct
+            )
+        ]
 
         return Image.objects.filter(pk__in=liked_pks)
 

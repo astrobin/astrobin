@@ -71,6 +71,7 @@ from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import AppRedirectionService, DateTimeService, SearchIndexUpdateService
 from common.services.mentions_service import MentionsService
 from common.services.moderation_service import ModerationService
+from common.utils import batch
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
@@ -918,9 +919,10 @@ def group_members_changed(sender, instance, **kwargs):
                         action_object=instance)
 
         if instance.autosubmission:
-            images = Image.objects_including_wip.filter(user__pk__in=pk_set)
-            for image in images:
-                instance.images.add(image)
+            for batch_pk_set in batch(pk_set, size=50):
+                images = Image.objects_including_wip.filter(user__pk__in=batch_pk_set)
+                for image in images:
+                    instance.images.add(image)
 
         # Sync IOTD AstroBin groups with django groups
         if instance.name in list(group_sync_map.keys()):
@@ -932,9 +934,10 @@ def group_members_changed(sender, instance, **kwargs):
 
     elif action == 'post_remove':
         users = [profile.user for profile in UserProfile.objects.filter(user__pk__in=pk_set)]
-        images = Image.objects_including_wip.filter(user__pk__in=pk_set)
-        for image in images:
-            instance.images.remove(image)
+        for batch_pk_set in batch(pk_set, size=50):
+            images = Image.objects_including_wip.filter(user__pk__in=batch_pk_set)
+            for image in images:
+                instance.images.remove(image)
 
         if instance.forum and not instance.public:
             topics = Topic.objects.filter(forum=instance.forum)
