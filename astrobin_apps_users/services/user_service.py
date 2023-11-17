@@ -9,7 +9,7 @@ from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache, caches
 from django.core.cache.utils import make_template_fragment_key
-from django.db.models import Q, QuerySet
+from django.db.models import OuterRef, Q, QuerySet, Subquery
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from haystack.query import SearchQuerySet
