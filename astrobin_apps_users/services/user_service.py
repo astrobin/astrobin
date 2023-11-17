@@ -78,9 +78,9 @@ class UserService:
 
         if has_collaborators:
             base_query = Image.objects_including_wip.all()
-            query1 = base_query.filter(user=self.user)
-            query2 = base_query.filter(collaborators=self.user)
-            return query1.union(query2)
+            query1 = base_query.filter(user=self.user).order_by()
+            query2 = base_query.filter(collaborators=self.user).order_by()
+            return query1.union(query2).order_by('-published')
 
         return Image.objects_including_wip.filter(user=self.user)
 
@@ -98,9 +98,9 @@ class UserService:
 
         if has_collaborators:
             base_query = Image.objects.all()
-            query1 = base_query.filter(user=self.user)
-            query2 = base_query.filter(collaborators=self.user)
-            return query1.union(query2)
+            query1 = base_query.filter(user=self.user).order_by()
+            query2 = base_query.filter(collaborators=self.user).order_by()
+            return query1.union(query2).order_by('-published')
 
         return Image.objects.filter(user=self.user)
 
@@ -118,9 +118,10 @@ class UserService:
 
         if has_collaborators:
             base_query = Image.wip.all()
-            query1 = base_query.filter(user=self.user)
-            query2 = base_query.filter(collaborators=self.user)
-            return query1.union(query2)
+            query1 = base_query.filter(user=self.user).order_by()
+            query2 = base_query.filter(collaborators=self.user).order_by()
+            return query1.union(query2).order_by('-published')
+
         return Image.wip.filter(user=self.user)
 
     def get_deleted_images(self) -> QuerySet:
