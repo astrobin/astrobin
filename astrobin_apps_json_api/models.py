@@ -34,3 +34,8 @@ class CkEditorFile(SafeDeleteModel):
         null=True,
         blank=True,
     )
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['upload'], name='upload_idx')
+        ]
