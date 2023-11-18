@@ -16,7 +16,8 @@
     </div>
 
     <div class="body">
-        {% bbcode message.body %}
+        {% bbcode message.body as message_body %}
+        {{ message_body | html_image_thumbnails:message.id | safe }}
     </div>
 </div>
 
