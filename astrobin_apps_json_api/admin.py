@@ -6,7 +6,7 @@ from .models import CkEditorFile
 
 class CkEditorFileAdmin(admin.ModelAdmin):
     list_display = ('filename', 'user', 'uploaded', 'filesize', 'thumbnail_preview')
-    list_filter = ('uploaded', 'user')
+    list_filter = ('uploaded',)
     search_fields = ('filename', 'user__username')
 
     def thumbnail_preview(self, obj):

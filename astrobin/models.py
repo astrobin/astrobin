@@ -923,6 +923,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("ALNI", "Alnitak Remote Observatories"),
         ("AC", "AstroCamp"),
         ("AHK", "Astro Hostel Krasnodar"),
+        ("ACRES", "Astronomy Acres"),
         ("AOWA", "Astro Observatories Western Australia"),
         ("ATLA", "Atlaskies Observatory"),
         ("CS", "ChileScope"),

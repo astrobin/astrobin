@@ -32,14 +32,15 @@ class UserFancyboxListViewSet(viewsets.ModelViewSet):
         subsection = self.request.GET.get('subsection') or 'uploaded'
         active = self.request.GET.get('active')
         klass = self.request.GET.get('klass')
+        use_union = subsection in ['uploaded', 'title']  # Only for subsections that don't require additional filtering.
 
         if include_wip:
-            images = user_service.get_all_images(use_union=subsection != 'acquired')
+            images = user_service.get_all_images(use_union)
         else:
-            images = user_service.get_public_images(use_union=subsection != 'acquired')
+            images = user_service.get_public_images(use_union)
 
         if 'staging' in self.request.GET and self.request.GET.get('staging') == '1':
-            images = user_service.get_wip_images(use_union=subsection != 'acquired')
+            images = user_service.get_wip_images(use_union)
 
         if 'collection' in self.request.GET and self.request.GET.get('collection') != '':
             collection: Collection = Collection.objects.get(pk=self.request.GET.get('collection'))
