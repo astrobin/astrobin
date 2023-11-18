@@ -2694,6 +2694,33 @@ class ImageTest(TestCase):
             html=True
         )
 
+    def test_image_description_bbcode_with_image_does_not_get_fancybox_if_in_a_link(self):
+        image = SimpleUploadedFile('test_image.jpg', b'\x00\x01\x02\x03\x04', content_type='image/jpeg')
+        thumbnail = SimpleUploadedFile('test_thumb.jpg', b'\x00\x01\x02\x03\x04', content_type='image/jpeg')
+        url = 'https://www.test.com'
+        file: CkEditorFile = CkEditorFile.objects.create(
+            user=Generators.user(),
+            upload=image,
+            filename='test_image.jpg',
+            filesize=1024,
+            thumbnail=thumbnail
+        )
+
+        image = Generators.image(
+            description_bbcode=f'[url={url}][img]{settings.MEDIA_URL}{file.upload}[/img][/url]'
+        )
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+
+        self.assertNotContains(response, 'data-fancybox="image-description-gallery"')
+        self.assertContains(
+            response,
+            f"""
+            <a href="{url}"><img alt="" src="{settings.MEDIA_URL}{file.upload}"/></a>
+            """,
+            html=True
+        )
+
     def test_navigation_context_after_revision_redirect(self):
         image = Generators.image()
         revision = Generators.image_revision(image=image, is_final=True)

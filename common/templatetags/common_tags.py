@@ -442,14 +442,15 @@ def html_image_thumbnails(html_text: str, gallery_rel: str) -> str:
     soup = BeautifulSoup(html_text, 'html.parser')
 
     for img in soup.find_all('img'):
-        src = img.get('src')
-        if src:
-            try:
-                ckeditor_file = CkEditorFile.objects.get(upload=src.replace(settings.MEDIA_URL, ''))
-                if ckeditor_file.thumbnail:
-                    fancybox_html = create_fancybox_html(ckeditor_file)
-                    img.replace_with(BeautifulSoup(fancybox_html, 'html.parser'))
-            except CkEditorFile.DoesNotExist:
-                continue
+        if img.parent.name != 'a':
+            src = img.get('src')
+            if src:
+                try:
+                    ckeditor_file = CkEditorFile.objects.get(upload=src.replace(settings.MEDIA_URL, ''))
+                    if ckeditor_file.thumbnail:
+                        fancybox_html = create_fancybox_html(ckeditor_file)
+                        img.replace_with(BeautifulSoup(fancybox_html, 'html.parser'))
+                except CkEditorFile.DoesNotExist:
+                    continue
 
     return str(soup)
