@@ -2899,6 +2899,10 @@ class UserProfile(SafeDeleteModel):
         null=True
     )
 
+    detected_insecure_password = models.DateTimeField(
+        null=True
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(

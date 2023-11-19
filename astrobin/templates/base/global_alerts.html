@@ -5,6 +5,36 @@
 
 <div id="global-alerts">
 
+{% if request.user.is_authenticated and request.user.userprofile.detected_insecure_password is not None %}
+    <div class="accordion container" id="skill-level-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
+                   data-parent="#expired-subscription-accordion" href="#expired-subscription-accordion-content">
+                    <i class="icon-warning-sign"></i>
+                    {% blocktrans trimmed %}
+                        AstroBin detected that your password does not meet security requirements.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="expired-subscription-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-info global-alert">
+                    {% blocktrans trimmed %}
+                        To prevent spam, phishing, and other malicious activities, all your new content posted on
+                        AstroBin will be moderated until you have changed your password to meet security requirements.
+                    {% endblocktrans %}
+
+                    <div>
+                        <a class="btn btn-primary" href="{{ base_url }}{% url 'password_change' %}">
+                            {% blocktrans trimmed %}Change your password{% endblocktrans %}<br/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
 {% if skill_level_form %}
     <div class="accordion container" id="skill-level-accordion">
         <div class="accordion-group">
