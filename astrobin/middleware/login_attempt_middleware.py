@@ -71,7 +71,6 @@ class LoginAttemptMiddleware(MiddlewareParentClass):
         elif TOTPDevice.objects.filter(user=user).exists():
             request.session['login_attempt_middleware_totp_device'] = 1
 
-        
         if not self._process(request):
             return
 
