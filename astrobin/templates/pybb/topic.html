@@ -83,7 +83,16 @@
     </div>
 
     <div class="topic">
-        <h1>{{ topic.name }}</h1>
+        <h1>
+            {{ topic.name }}
+            <small>
+                <i class="icon-user"></i> {{ topic.user.userprofile }} &middot;
+                <i class="icon-calendar-empty"></i> {% timestamp topic.created %} &middot;
+                <i class="icon-comment"></i>  {{ topic.post_count|add:"-1" }} &middot;
+                <i class="icon-eye-open"></i> {{ topic|pybbm_calc_topic_views }} &middot;
+                <i class="icon-camera"></i> {{ topic.images }}
+            </small>
+        </h1>
 
         {% if topic.poll_type %}
             {% include 'pybb/poll.html' %}

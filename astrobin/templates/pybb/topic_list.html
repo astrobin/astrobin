@@ -28,7 +28,7 @@
             </th>
 
             <th class="topic-post-count hidden-tablet hidden-phone">
-                {% trans "Replies" %} / {% trans "Views" %}
+                {% trans "Replies" %} / {% trans "Views" %} / {% trans "Images" %}
             </th>
 
             <th class="topic-last-post hidden-phone ">
@@ -126,16 +126,18 @@
                 </td>
 
                 <td class="topic-post-count hidden-tablet hidden-phone">
-                    {% if topic.post_count == 1 %}
-                        <img
-                            class="no-replies"
-                            src="{% static 'astrobin/emoticons/sad.png' %}"
-                            alt=""
-                            rel="tooltip"
-                            title="{% trans 'This topic has no replies.' %}"
-                        />
-                    {% endif %}
-                    {{ topic.post_count|add:"-1" }} / {{ topic|pybbm_calc_topic_views }}
+                    <span class="post-count">
+                        <i class="icon-comment"></i>
+                        {{ topic.post_count|add:"-1" }}
+                    </span>
+                    <span class="view-count">
+                        <i class="icon-eye-open"></i>
+                        {{ topic|pybbm_calc_topic_views }}
+                    </span>
+                    <span class="image-count">
+                        <i class="icon-camera"></i>
+                        {{ topic.images }}
+                    </span>
                 </td>
 
                 <td class="topic-last-post hidden-phone">
