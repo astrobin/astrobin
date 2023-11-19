@@ -413,9 +413,9 @@ astrobin_common = {
         },
 
         BBCodeToHtml: function (code, context, language) {
-            var fragment = CKEDITOR.htmlParser.fragment.fromBBCode(code);
-            var writer = new CKEDITOR.htmlParser.basicWriter();
-            var bbcodeFilter = new CKEDITOR.htmlParser.filter();
+            const fragment = CKEDITOR.htmlParser.fragment.fromBBCode(code);
+            const writer = new CKEDITOR.htmlParser.basicWriter();
+            const bbcodeFilter = new CKEDITOR.htmlParser.filter();
 
             bbcodeFilter.addRules({
                 elements: {
@@ -477,6 +477,42 @@ astrobin_common = {
                             title: description,
                             alt: description
                         };
+                    },
+                    img: function (element) {
+                        const src = element.attributes.src;
+
+                        if (src && src.indexOf('/ckeditor-files/') > 0) {
+                            const urlPath = new URL(src, window.location.origin).pathname.slice(1);
+
+                            // Synchronous AJAX call to get the thumbnail URL
+                            let thumbnailSrc;
+                            $.ajax({
+                                url: `/json-api/common/ckeditor-upload/?path=${encodeURIComponent(urlPath)}`,
+                                async: false,  // Make the request synchronous
+                                success: function(data) {
+                                    thumbnailSrc = data.thumbnail;
+                                },
+                                error: function() {
+                                    console.error('Error fetching thumbnail.');
+                                }
+                            });
+
+                            if (thumbnailSrc) {
+                                const anchor = new CKEDITOR.htmlParser.element('a');
+                                anchor.attributes.href = src;
+                                anchor.attributes['data-fancybox'] = '';
+                                anchor.attributes.class = 'fancybox'
+
+                                const thumbnailImg = new CKEDITOR.htmlParser.element('img');
+                                thumbnailImg.attributes.src = thumbnailSrc;
+
+                                // Add the img element to the anchor
+                                anchor.add(thumbnailImg);
+
+                                // Replace the original img element with the new anchor element
+                                element.replaceWith(anchor);
+                            }
+                        }
                     }
                 }
             });

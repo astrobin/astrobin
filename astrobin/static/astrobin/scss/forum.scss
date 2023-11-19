@@ -321,6 +321,16 @@ th.forum-name {
     }
   }
 
+  .fancybox {
+    display: block;
+    margin: 0 auto;
+
+    img {
+      box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+      border-radius: .5rem;
+    }
+  }
+
   ul,
   ol {
     + br + img:not([alt='smile']) {

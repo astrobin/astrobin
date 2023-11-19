@@ -186,8 +186,8 @@ $(function () {
         }.property('deleted'),
 
         getHTML: function () {
-            var created = new Date(this.created);
-            var release = new Date(
+            const created = new Date(this.created);
+            const release = new Date(
                 astrobin_common.globals.BREAKAGE_DATES.COMMENTS_MARKDOWN);
 
             if (created > release) {

@@ -14,7 +14,8 @@
 
                 <div class="body">
                     {% if image.description_bbcode %}
-                        {% highlight_text image.description_bbcode with search_query dialect 'bbcode' %}
+                        {% highlight_text image.description_bbcode with search_query dialect 'bbcode' as highlighted_text %}
+                        {{ highlighted_text | html_image_thumbnails:'image-description-gallery' | safe }}
                     {% else %}
                         {% highlight_text image.description with search_query %}
                     {% endif %}

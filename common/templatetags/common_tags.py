@@ -3,6 +3,7 @@ import unicodedata
 from typing import List, Optional, Union
 
 import bleach
+from bs4 import BeautifulSoup
 from dateutil import parser
 from django import template
 from django.conf import settings
@@ -15,6 +16,7 @@ from django.utils.safestring import mark_safe
 
 from astrobin.enums import ImageEditorStep
 from astrobin.models import Image
+from astrobin_apps_json_api.models import CkEditorFile
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService, DateTimeService
 from common.services.highlighting_service import HighlightingService
@@ -267,9 +269,10 @@ def ensure_url_protocol(url: str) -> str:
 
 
 class HighlightTextNode(template.Node):
-    def __init__(self, text, terms, html_tag=None, css_class=None, max_length=None, dialect=None):
+    def __init__(self, text, terms, as_var=None, html_tag=None, css_class=None, max_length=None, dialect=None):
         self.text = template.Variable(text)
         self.terms = template.Variable(terms)
+        self.as_var = as_var
         self.html_tag = html_tag
         self.css_class = css_class
         self.max_length = max_length
@@ -287,7 +290,7 @@ class HighlightTextNode(template.Node):
         if dialect is not None:
             self.dialect = template.Variable(dialect)
 
-    def render(self, context):
+    def render(self, context) -> str:
         text = self.text.resolve(context)
         terms = str(self.terms.resolve(context))
         kwargs = {}
@@ -304,8 +307,13 @@ class HighlightTextNode(template.Node):
         if self.dialect is not None:
             kwargs['dialect'] = self.dialect.resolve(context)
 
-        return HighlightingService(text, terms, **kwargs).render_html()
+        rendered_html = HighlightingService(text, terms, **kwargs).render_html()
 
+        if self.as_var:
+            context[self.as_var] = rendered_html
+            return ''
+        else:
+            return rendered_html
 
 @register.tag
 def highlight_text(parser, token):
@@ -317,8 +325,6 @@ def highlight_text(parser, token):
             "'%s' tag requires valid pairings arguments." % tag_name
         )
 
-    text = bits[1]
-
     if len(bits) < 4:
         raise template.TemplateSyntaxError(
             "'%s' tag requires an object and a query provided by 'with'." % tag_name
@@ -329,6 +335,12 @@ def highlight_text(parser, token):
             "'%s' tag's second argument should be 'with'." % tag_name
         )
 
+    as_var = None
+    if len(bits) > 2 and bits[-2] == 'as':
+        as_var = bits[-1]
+        bits = bits[:-2]
+
+    text = bits[1]
     query = bits[3]
 
     arg_bits = iter(bits[4:])
@@ -347,7 +359,7 @@ def highlight_text(parser, token):
         if bit == 'dialect':
             kwargs['dialect'] = next(arg_bits)
 
-    return HighlightTextNode(text, query, **kwargs)
+    return HighlightTextNode(text, query, as_var, **kwargs)
 
 @register.simple_tag
 def get_verbose_field_name(instance, field_name):
@@ -418,3 +430,27 @@ def get_mime_type(filename: str) -> Optional[str]:
         return 'video/x-m4v'
 
     return None
+
+
+@register.filter
+def html_image_thumbnails(html_text: str, gallery_rel: str) -> str:
+    def create_fancybox_html(ckeditor_file) -> str:
+        return f'<a href="{ckeditor_file.upload.url}" data-fancybox="{gallery_rel}" class="fancybox">' \
+               f'<img src="{ckeditor_file.thumbnail.url}" alt="{ckeditor_file.filename}" />' \
+               f'</a>'
+
+    soup = BeautifulSoup(html_text, 'html.parser')
+
+    for img in soup.find_all('img'):
+        if img.parent.name != 'a':
+            src = img.get('src')
+            if src:
+                try:
+                    ckeditor_file = CkEditorFile.objects.get(upload=src.replace(settings.MEDIA_URL, ''))
+                    if ckeditor_file.thumbnail:
+                        fancybox_html = create_fancybox_html(ckeditor_file)
+                        img.replace_with(BeautifulSoup(fancybox_html, 'html.parser'))
+                except CkEditorFile.DoesNotExist:
+                    continue
+
+    return str(soup)

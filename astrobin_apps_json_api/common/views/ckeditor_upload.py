@@ -91,7 +91,10 @@ class CkEditorUpload(CsrfExemptMixin, LoginRequiredMixin, JSONResponseMixin, Vie
         upload.save(keep_deleted=True)
 
         if self.is_image(uploaded_file):
-            self.create_and_save_thumbnail(upload)
+            try:
+                self.create_and_save_thumbnail(upload)
+            except Exception as e:
+                log.error("CkEditorUpload: user %d - error while creating thumbnail: %s" % (request.user.pk, e))
 
         return self.render_json_response({
             "uploaded": 1,
