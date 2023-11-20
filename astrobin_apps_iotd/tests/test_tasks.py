@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
 
+import mock
 from django.conf import settings
 from django.contrib.auth.models import Group
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from mock import patch
 
 from astrobin.models import Image
@@ -10,8 +11,9 @@ from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import IotdSubmitterSeenImage
 from astrobin_apps_iotd.tasks import (
     resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views,
-    send_iotd_staff_inactive_reminders_and_remove_after_max_days,
+    send_iotd_staff_inactive_reminders_and_remove_after_max_days, send_notifications_when_promoted_image_becomes_iotd,
 )
+from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
 from common.constants import GroupName
 
 
@@ -88,3 +90,43 @@ class IotdTasksTest(TestCase):
         resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
 
         resubmit_to_iotd_tp_process.assert_called()
+
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=1)
+    @patch('astrobin_apps_iotd.tasks.push_notification')
+    def test_send_notifications_when_promoted_image_becomes_iotd_with_collaborators(self, push_notification):
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now() - timedelta(1))
+        collaborator = Generators.user()
+        image.collaborators.add(collaborator)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.vote(image=image)
+        IotdGenerators.iotd(image=image)
+
+        send_notifications_when_promoted_image_becomes_iotd()
+
+        push_notification.assert_called_with(
+            [image.user, collaborator],
+            None,
+            'your_image_is_iotd',
+            mock.ANY
+        )
+
+
+
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=1)
+    @patch('astrobin_apps_iotd.tasks.push_notification')
+    def test_send_notifications_when_promoted_image_becomes_iotd_without_collaborators(self, push_notification):
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now() - timedelta(1))
+        IotdGenerators.submission(image=image)
+        IotdGenerators.vote(image=image)
+        IotdGenerators.iotd(image=image)
+
+        send_notifications_when_promoted_image_becomes_iotd()
+
+        push_notification.assert_called_with(
+            [image.user],
+            None,
+            'your_image_is_iotd',
+            mock.ANY
+        )
