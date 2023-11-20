@@ -1448,7 +1448,8 @@ def top_pick_nominations_archive_post_save(sender, instance, created, **kwargs):
         image = instance.image
         thumb = image.thumbnail_raw('gallery', None, sync=True)
 
-        push_notification([image.user], None, 'your_image_is_tpn', {
+        collaborators = [image.user] + list(image.collaborators.all())
+        push_notification(collaborators, None, 'your_image_is_tpn', {
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })
@@ -1482,7 +1483,8 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
             }
         )
 
-        push_notification([image.user], None, 'your_image_is_tp', {
+        collaborators = [image.user] + list(image.collaborators.all())
+        push_notification(collaborators, None, 'your_image_is_tp', {
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })
