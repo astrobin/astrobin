@@ -7,9 +7,11 @@ from django.utils import timezone
 from django_otp.plugins.otp_email.models import EmailDevice
 from django_otp.plugins.otp_totp.models import TOTPDevice
 
+from astrobin.fields import get_country_name
 from astrobin.middleware.mixins import MiddlewareParentClass
 from astrobin.models import UserProfile
 from astrobin.services.utils_service import UtilsService
+from astrobin.utils import get_client_country_code
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
 
@@ -78,6 +80,28 @@ class LoginAttemptMiddleware(MiddlewareParentClass):
         if not user.check_password(password):
             log.debug(f'login_attempt_middleware: user {handle} used an incorrect password')
             return
+
+        # Check for the country.
+        country_code = get_client_country_code(request)
+        is_new_country = country_code.lower() != user.userprofile.last_seen_in_country
+
+        if is_new_country or country_code in (None, 'UNKNOWN'):
+            log.debug(
+                f'enforce_otp_verification_code: user {handle} attempted to log in from new country '
+                f'{country_code}'
+            )
+            push_notification(
+                [user],
+                None,
+                'access_attempted_from_different_country',
+                {
+                    'last_seen_in_country': get_country_name(user.userprofile.last_seen_in_country.upper())
+                    if user.userprofile.last_seen_in_country
+                    else 'UNKNOWN',
+                    'new_country': get_country_name(country_code.upper()) if country_code else 'UNKNOWN',
+                    'ip': request.META.get('REMOTE_ADDR')
+                }
+            )
 
         # Check for the password validity.
         try:

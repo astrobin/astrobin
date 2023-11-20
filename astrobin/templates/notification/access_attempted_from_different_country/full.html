@@ -1,0 +1,30 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        You, or somebody on your behalf, attempted to log in to AstroBin from a different country than the one you
+        were seen in last time, or from a country that could not be detected.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% trans "Last known country" %}: <strong>{{ last_seen_in_country }}</strong><br/>
+    {% trans "This login attempted in country" %}: <strong>{{ new_country }}</strong><br/>
+    IP: <strong>{{ ip }}</strong>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        If you did not make this login attempt, please change your password and/or contact AstroBin immediately.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Wishing you clear skies and excellent seeing!
+    {% endblocktrans %}
+</p>
+
+<p>
+    AstroBin
+</p>
