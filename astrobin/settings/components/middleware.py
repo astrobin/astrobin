@@ -7,6 +7,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'astrobin.middleware.HttpMethodOverrideMiddleware',
     'astrobin.middleware.LoginAttemptMiddleware',  # Keep before LastSeenMiddleware
     'astrobin.middleware.LastSeenMiddleware',
     'astrobin.middleware.BlockNonPayingUsersFromRussiaMiddleware',

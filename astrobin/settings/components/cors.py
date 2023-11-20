@@ -9,6 +9,7 @@ CORS_ALLOW_METHODS = [
     'HEAD'
 ]
 CORS_ALLOW_HEADERS = [
+    'x-http-method-override',
     'x-requested-with',
     'x-forwarded-for',
     'content-type',
