@@ -577,6 +577,11 @@ table.post th.post-avatar {
     margin-top: .75em;
     font-size: 1rem;
 
+    [class^="icon-"],
+    [class*=" icon-"] {
+      margin-right: .25rem;
+    }
+
     abbr {
       border-bottom: 0;
     }
