@@ -10,7 +10,8 @@
 <p>
     {% blocktrans trimmed %}
         To prevent spam, phishing, and other malicious activities, all your new content posted on AstroBin will be
-        moderated until you have changed your password to meet security requirements.
+        moderated until you have changed your password to meet security requirements, or you have enabled
+        two-factor authentication.
     {% endblocktrans %}
 </p>
 
@@ -36,6 +37,10 @@
     <a class="btn btn-primary" href="{{ base_url }}{% url 'password_change' %}">
         {% blocktrans trimmed %}Change your password{% endblocktrans %}<br/>
     </a>
+
+    <a class="btn btn-secondary" href="{{ base_url }}{% url 'two_factor:profile' %}">
+        {% trans "Two-factor Authentication" %}
+    </a>
 </p>
 
 <p>
@@ -47,3 +52,4 @@
 <p>
     AstroBin
 </p>
+4

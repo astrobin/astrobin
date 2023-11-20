@@ -1,7 +1,10 @@
 from django.conf import settings
 from django.contrib.auth.models import User
+from django_otp.plugins.otp_email.models import EmailDevice
+from django_otp.plugins.otp_totp.models import TOTPDevice
 
 from astrobin_apps_users.services import UserService
+
 
 
 class ModerationService(object):
@@ -15,7 +18,11 @@ class ModerationService(object):
                 user.userprofile.last_seen_in_country.lower() in ['ru']
         )
 
-        moderate_because_of_weak_password = user.userprofile.detected_insecure_password
+        moderate_because_of_weak_password = (
+            user.userprofile.detected_insecure_password and
+            not EmailDevice.objects.filter(user=user).exists() and
+            not TOTPDevice.objects.filter(user=user).exists()
+        )
 
         return (
             moderate_because_of_country or

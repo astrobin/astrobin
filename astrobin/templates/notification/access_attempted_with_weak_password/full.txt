@@ -26,6 +26,9 @@ https://welcome.astrobin.com/faq#is-my-security-protected
 {% blocktrans trimmed %}Change your password{% endblocktrans %}:
 {{ base_url }}{% url 'password_change' %}
 
+{% trans "Two-factor Authentication" %}
+{% url 'two_factor:profile' %}
+
 {% blocktrans trimmed %}
     Wishing you clear skies and excellent seeing!
 {% endblocktrans %}
