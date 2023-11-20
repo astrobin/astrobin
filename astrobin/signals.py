@@ -1601,3 +1601,18 @@ m2m_changed.connect(image_collaborators_changed, sender=Image.collaborators.thro
 def on_user_verified(request, user, device, **kwargs):
     country_code = get_client_country_code(request)
     UserService(user).set_last_seen(country_code)
+
+
+@receiver(pre_save, sender=User)
+def on_password_change(sender, **kwargs):
+    user = kwargs.get('instance', None)
+
+    if user:
+        new_password = user.password
+        try:
+            old_password = User.objects.get(pk=user.pk).password
+        except User.DoesNotExist:
+            old_password = None
+
+        if new_password != old_password:
+            UserProfile.objects.filter(user=user).update(detected_insecure_password=None)
