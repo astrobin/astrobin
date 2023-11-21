@@ -1,4 +1,5 @@
 from .block_non_paying_users_from_russia_middleware import BlockNonPayingUsersFromRussiaMiddleware
+from .http_method_override_middleware import HttpMethodOverrideMiddleware
 from .login_attempt_middleware import LoginAttemptMiddleware
 from .gone_middleware import GoneMiddleware
 from .last_seen_middleware import LastSeenMiddleware
