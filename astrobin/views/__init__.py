@@ -1216,7 +1216,7 @@ def user_page(request, username):
 
     for image in page_obj:
         like_count = likes_data.get(str(image.pk), {}).get('count', 0)
-        bookmark_count = bookmarks_data.get(image.pk, {}).get('count', 0)
+        bookmark_count = bookmarks_data.get(str(image.pk), {}).get('count', 0)
         cache.set("Image.%d.likes" % image.pk, like_count, 60)
         cache.set("Image.%d.bookmarks" % image.pk, bookmark_count, 60)
 
