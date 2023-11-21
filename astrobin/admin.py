@@ -5,10 +5,12 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.utils import timezone
 
-from astrobin.models import Gear, GearUserInfo, Telescope, \
-    Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image, \
-    ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay, \
-    ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord, GearMigrationStrategy
+from astrobin.models import (
+    Gear, GearUserInfo, ImageEquipmentLog, Telescope,
+    Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image,
+    ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay,
+    ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord, GearMigrationStrategy,
+)
 from astrobin.services.gear_service import GearService
 from astrobin.tasks import send_broadcast_email
 from astrobin.utils import inactive_accounts
@@ -36,6 +38,28 @@ class ImageAdmin(admin.ModelAdmin):
         'title',
         'user__username',
     )
+
+
+class ImageEquipmentLogAdmin(admin.ModelAdmin):
+    list_display = ('image', 'equipment_item', 'verb', 'date')
+    list_filter = ('verb', 'date')
+    search_fields = ('image__title', 'equipment_item_content_type__model')
+    readonly_fields = (
+        'image',
+        'equipment_item_content_type',
+        'equipment_item_object_id',
+        'equipment_item',
+        'date',
+        'verb'
+    )
+
+    def has_add_permission(self, request, obj=None):
+        # Disable adding new logs via admin as they should be generated programmatically
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        # Disable deletion if logs should be immutable
+        return False
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -167,12 +191,14 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
             self.message_user(
                 request,
                 "Please select exactly one email",
-                messages.ERROR)
+                messages.ERROR
+            )
         elif recipients.count() > 0:
             send_broadcast_email.delay(obj[0].id, list(recipients))
             self.message_user(
                 request,
-                "Email enqueued to be sent to %d users" % len(recipients))
+                "Email enqueued to be sent to %d users" % len(recipients)
+            )
 
     def submit_mass_email(self, request, obj):
         recipients = User.objects.all().values_list('email', flat=True)
@@ -284,3 +310,4 @@ admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)
 admin.site.register(ImageOfTheDayCandidate, ImageOfTheDayCandidateAdmin)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(BroadcastEmail, BroadcastEmailAdmin)
+admin.site.register(ImageEquipmentLog, ImageEquipmentLogAdmin)

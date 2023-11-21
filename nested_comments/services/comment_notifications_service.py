@@ -7,7 +7,7 @@ from django.db.models import QuerySet
 from django.urls import reverse
 
 from astrobin.models import Image
-from astrobin.stories import add_story
+from astrobin.stories import ACTSTREAM_VERB_COMMENTED_IMAGE, add_story
 from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Sensor, Software, Telescope
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.services import NotificationsService
@@ -94,7 +94,7 @@ class CommentNotificationsService:
         if model_class == Image:
             if (force or not instance.pending_moderation) and not obj.is_wip:
                 add_story(instance.author,
-                          verb='VERB_COMMENTED_IMAGE',
+                          verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
                           action_object=instance,
                           target=obj)
 

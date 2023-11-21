@@ -1852,6 +1852,30 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             field.name = 'videos/' + field.name
 
 
+class ImageEquipmentLog(models.Model):
+    ADDED = 'ADDED'
+    REMOVED = 'REMOVED'
+
+    VERB_CHOICES = (
+        (ADDED, 'Added'),
+        (REMOVED, 'Removed'),
+    )
+
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    equipment_item_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    equipment_item_object_id = models.PositiveIntegerField()
+    equipment_item = GenericForeignKey('equipment_item_content_type', 'equipment_item_object_id')
+    date = models.DateTimeField(auto_now_add=True)
+    verb = models.CharField(max_length=32, choices=VERB_CHOICES)
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ('-date',)
+        indexes = [
+            models.Index(fields=['equipment_item_content_type', 'equipment_item_object_id', 'image', 'date']),
+            models.Index(fields=['image']),
+        ]
+
 class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
         Image,
