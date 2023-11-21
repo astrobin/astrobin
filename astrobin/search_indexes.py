@@ -23,6 +23,7 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_users.services import UserService
+from common.utils import get_segregated_reader_database
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -50,7 +51,7 @@ def _astrobin_index(values):
 
 
 def _prepare_integration(obj):
-    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.using(get_segregated_reader_database()).filter(image=obj)
     solar_system_acquisition = None
     integration = 0
 
@@ -153,7 +154,7 @@ def _prepare_bookmarks(obj):
 def _prepare_moon_phase(obj):
     from .moon import MoonPhase
 
-    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.using(get_segregated_reader_database()).filter(image=obj)
     moon_illuminated_list = []
     if deep_sky_acquisitions:
         for a in deep_sky_acquisitions:
@@ -172,7 +173,7 @@ def _prepare_moon_phase(obj):
 
 
 def _prepare_first_acquisition_date(obj):
-    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.using(get_segregated_reader_database()).filter(image=obj)
     solar_system_acquisition = None
 
     try:
@@ -194,7 +195,7 @@ def _prepare_first_acquisition_date(obj):
 
 
 def _prepare_last_acquisition_date(obj):
-    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.using(get_segregated_reader_database()).filter(image=obj)
     solar_system_acquisition = None
 
     try:
@@ -322,10 +323,11 @@ def _prepare_camera_types(obj):
 
 def _prepare_comments(obj):
     ct = ContentType.objects.get(app_label='astrobin', model='image')
-    result = NestedComment.objects.filter(
+    result = NestedComment.objects.using(get_segregated_reader_database()).filter(
         content_type=ct,
         object_id=obj.id,
-        deleted=False).count()
+        deleted=False
+    ).count()
     cache.set(PREPARED_COMMENTS_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
     return result
 
@@ -464,7 +466,7 @@ class UserIndex(CelerySearchIndex, Indexable):
         return result
 
     def prepare_comment_likes_received(self, obj):
-        comments = NestedComment.objects.filter(author=obj)
+        comments = NestedComment.objects.using(get_segregated_reader_database()).filter(author=obj)
         likes = 0
         for comment in comments.iterator():
             likes += ToggleProperty.objects.toggleproperties_for_object('like', comment).count()
@@ -472,7 +474,7 @@ class UserIndex(CelerySearchIndex, Indexable):
         return likes
 
     def prepare_forum_post_likes_received(self, obj):
-        posts = Post.objects.filter(user=obj)
+        posts = Post.objects.using(get_segregated_reader_database()).filter(user=obj)
         likes = 0
         for post in posts.iterator():
             likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
@@ -495,8 +497,12 @@ class UserIndex(CelerySearchIndex, Indexable):
         return likes + comment_likes_received + forum_post_likes_received
 
     def prepare_contribution_index(self, obj):
-        comments_contribution_index = _prepare_comment_contribution_index(NestedComment.objects.filter(author=obj))
-        forum_post_contribution_index = _prepare_forum_post_contribution_index(Post.objects.filter(user=obj))
+        comments_contribution_index = _prepare_comment_contribution_index(
+            NestedComment.objects.using(get_segregated_reader_database()).filter(author=obj)
+        )
+        forum_post_contribution_index = _prepare_forum_post_contribution_index(
+            Post.objects.using(get_segregated_reader_database()).filter(user=obj)
+        )
         return comments_contribution_index + forum_post_contribution_index
 
     def prepare_followers(self, obj):
@@ -545,10 +551,10 @@ class UserIndex(CelerySearchIndex, Indexable):
         return comments
 
     def prepare_comments_written(self, obj):
-        return NestedComment.objects.filter(author=obj, deleted=False).count()
+        return NestedComment.objects.using(get_segregated_reader_database()).filter(author=obj, deleted=False).count()
 
     def prepare_forum_posts(self, obj):
-        return Post.objects.filter(user=obj).count()
+        return Post.objects.using(get_segregated_reader_database()).filter(user=obj).count()
 
     def prepare_top_pick_nominations(self, obj):
         return IotdService().get_top_pick_nominations().filter(Q(image__user=obj) | Q(image__collaborators=obj)).count()
@@ -591,7 +597,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     imaging_cameras_2_id = CharField()
     guiding_cameras_2_id = CharField()
 
-    all_telescopes_2 = CharField() # Includes guiding and imaging
+    all_telescopes_2 = CharField()  # Includes guiding and imaging
     imaging_telescopes_2 = CharField()
     guiding_telescopes_2 = CharField()
     all_telescopes_2_id = CharField()
@@ -699,7 +705,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
     user_followed_by = MultiValueField()
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(moderator_decision=ModeratorDecision.APPROVED)
+        return self.get_model().objects.using(get_segregated_reader_database())(
+            moderator_decision=ModeratorDecision.APPROVED
+        )
 
     def should_update(self, instance, **kwargs):
         return not instance.is_wip and instance.moderator_decision == ModeratorDecision.APPROVED
@@ -867,7 +875,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_max_aperture(self, obj):
         return _prepare_max_aperture(obj)
-    
+
     def prepare_min_telescope_weight(self, obj):
         value = 0
 
@@ -1024,8 +1032,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_is_top_pick_nomination(self, obj):
         return IotdService().is_top_pick_nomination(obj) and \
-               not IotdService().is_top_pick(obj) and \
-               not IotdService().is_iotd(obj)
+            not IotdService().is_top_pick(obj) and \
+            not IotdService().is_iotd(obj)
 
     def prepare_objects_in_field(self, obj):
         return SolutionService(obj.solution).duplicate_objects_in_field_by_catalog_space() if obj.solution else None
@@ -1038,7 +1046,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return ' '.join([f'__{x.pk}__' for x in obj.part_of_group_set.all()]).strip() or None
 
     def prepare_bortle_scale(self, obj):
-        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj, bortle__isnull=False)
+        deep_sky_acquisitions = DeepSky_Acquisition.objects.using(get_segregated_reader_database()).filter(
+            image=obj, bortle__isnull=False
+        )
 
         if deep_sky_acquisitions.exists():
             return sum([x.bortle for x in deep_sky_acquisitions]) / float(deep_sky_acquisitions.count())
@@ -1052,6 +1062,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         follows = ToggleProperty.objects.toggleproperties_for_object("follow", obj.user)
         return [x.user.pk for x in follows.all()]
 
+
 class NestedCommentIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
@@ -1061,7 +1072,7 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
         return NestedComment
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(deleted=False)
+        return self.get_model().objects.using(get_segregated_reader_database()).filter(deleted=False)
 
     def should_update(self, instance, **kwargs):
         if instance.deleted:
@@ -1093,7 +1104,7 @@ class ForumTopicIndex(CelerySearchIndex, Indexable):
         return Topic
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(
+        return self.get_model().objects.using(get_segregated_reader_database()).filter(
             forum__group__isnull=True,
             on_moderation=False,
             forum__hidden=False,
@@ -1102,10 +1113,10 @@ class ForumTopicIndex(CelerySearchIndex, Indexable):
 
     def should_update(self, instance, **kwargs):
         return (
-            not hasattr(instance.forum, 'group') and
-            not instance.on_moderation and
-            not instance.forum.hidden and
-            not instance.forum.category.hidden
+                not hasattr(instance.forum, 'group') and
+                not instance.on_moderation and
+                not instance.forum.hidden and
+                not instance.forum.category.hidden
         )
 
     def get_updated_field(self):
@@ -1122,7 +1133,7 @@ class ForumPostIndex(CelerySearchIndex, Indexable):
         return Post
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(
+        return self.get_model().objects.using(get_segregated_reader_database()).filter(
             topic__forum__group__isnull=True,
             on_moderation=False,
             topic__forum__hidden=False,
@@ -1131,10 +1142,10 @@ class ForumPostIndex(CelerySearchIndex, Indexable):
 
     def should_update(self, instance, **kwargs):
         return (
-            not hasattr(instance.topic.forum, 'group') and
-            not instance.on_moderation and
-            not instance.topic.forum.hidden and
-            not instance.topic.forum.category.hidden
+                not hasattr(instance.topic.forum, 'group') and
+                not instance.on_moderation and
+                not instance.topic.forum.hidden and
+                not instance.topic.forum.category.hidden
         )
 
     def get_updated_field(self):
