@@ -1,0 +1,198 @@
+{% load i18n %}
+
+<h1>
+    {% blocktrans %}Your IOTD/TP staff member stats{% endblocktrans %}
+</h1>
+
+<br />
+
+<p>
+    {% trans "Hey!" %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Every first day of the month, AstroBin sends you a summary of your activities as an IOTD/TP staff member. The
+        entire community is undoubtedly grateful for your contribution to the IOTD/TP process, and we hope you will keep
+        doing it with the same passion and dedication. Without further ado, here is your most recent activity data.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <strong>{% trans "Period" %}</strong>: {{ stats.period_start }} - {{ stats.period_end }}
+    <br />
+    <br />
+
+    <strong>{% trans "Active days" %}</strong>: {{ stats.active_days }}
+    <br />
+    <br />
+
+    <strong>{% trans "Promotions" %}</strong>: {{ stats.promotions }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The total number of images you promoted.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Wasted promotions" %}</strong>: {{ stats.wasted_promotions }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you promoted, but they did not end up getting an award. Broadly speaking, lower is
+            better. However, since your queue features only a subset of the images in the IOTD/TP process, by design,
+            it's normal to have wasted promotions.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Missed TPN promotions" %}</strong>: {{ stats.missed_tpn_promotions }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you saw in your queue, decided not to promote, but they ended up being awarded Top Pick
+            Nomination.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Missed TP promotions" %}</strong>: {{ stats.missed_tp_promotions }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you saw in your queue, decided not to promote, but they ended up being awarded Top
+            Pick.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Missed IOTD promotions" %}</strong>: {{ stats.missed_iotd_promotions }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you saw in your queue, decided not to promote, but they ended up being awarded IOTD.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Promotions to TPN" %}</strong>: {{ stats.promotions_to_tpn }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you you promoted and ended up being awarded Top Pick Nomination.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Promotions to TP" %}</strong>: {{ stats.promotions_to_tp }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you you promoted and ended up being awarded Top Pick.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Promotions to IOTD" %}</strong>: {{ stats.promotions_to_iotd }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you you promoted and ended up being awarded IOTD.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Dismissals" %}</strong>: {{ stats.dismissals }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The total number of images you dismissed. Remember to dismiss only images with serious and undeniable
+            technical
+            issues.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Correct dismissals" %}</strong>: {{ stats.correct_dismissals }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you dismissed, and ended up being dismissed enough times by other staff members, thus
+            making them exit the IOTD/TP process early.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Missed dismissals" %}</strong>: {{ stats.missed_dismissals }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you saw in your queue, decided not to dismiss, but they ended up being dismissed by
+            other staff members. If this number is high, you might want to use the Dismiss button more often.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Dismissals to TPN" %}</strong>: {{ stats.dismissals_to_tpn }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you dismissed, but they ended up being awarded Top Pick Nomination. This number should
+            be low, as you should only dismiss images with serious and undeniable technical issues.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Dismissals to TP" %}</strong>: {{ stats.dismissals_to_tp }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you dismissed, but they ended up being awarded Top Pick.
+        {% endblocktrans %}
+        {% blocktrans trimmed %}
+            This number should be very low, ideally a zero, as you should only dismiss images with serious and
+            undeniable technical issues. If this number is large, you probably misunderstood the Dismiss button and when
+            to use it, or you are in severe disagreement with the other staff members, which suggests a misalignment of
+            values that should be addressed to avoid detrimental effects on the IOTD/TP process.
+        {% endblocktrans %}
+    </em>
+    <br />
+    <br />
+
+    <strong>{% trans "Dismissals to IOTD" %}</strong>: {{ stats.dismissals_to_iotd }}
+    <br />
+    <em>
+        {% blocktrans trimmed %}
+            The number of images you dismissed, but they ended up being awarded IOTD.
+        {% endblocktrans %}
+        {% blocktrans trimmed %}
+            This number should be very low, ideally a zero, as you should only dismiss images with serious and
+            undeniable technical issues. If this number is large, you probably misunderstood the Dismiss button and when
+            to use it, or you are in severe disagreement with the other staff members, which suggests a misalignment of
+            values that should be addressed to avoid detrimental effects on the IOTD/TP process.
+        {% endblocktrans %}
+    </em>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Wishing you clear skies and excellent seeing!
+    {% endblocktrans %}
+</p>
+
+<p>
+    AstroBin
+</p>

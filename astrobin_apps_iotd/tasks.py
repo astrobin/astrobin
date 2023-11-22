@@ -3,11 +3,14 @@ from datetime import datetime, timedelta
 
 from celery import shared_task
 from django.conf import settings
-from django.contrib.auth.models import Group
-from django.db.models import QuerySet
+from django.contrib.auth.models import Group, User
+from django.db.models import Q, QuerySet
 
 from astrobin.models import Image
-from astrobin_apps_iotd.models import Iotd, IotdDismissedImage, IotdSubmission, IotdSubmitterSeenImage, IotdVote
+from astrobin_apps_iotd.models import (
+    Iotd, IotdDismissedImage, IotdStaffMemberScore, IotdSubmission,
+    IotdSubmitterSeenImage, IotdVote,
+)
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.utils import push_notification
 from common.constants import GroupName
@@ -162,7 +165,7 @@ def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
             IotdService.resubmit_to_iotd_tp_process(image.user, image)
 
 
-@shared_task(time_limit=600)
+@shared_task(time_limit=1200)
 def calculate_iotd_staff_members_stats():
     service = IotdService()
 
@@ -182,3 +185,24 @@ def calculate_iotd_staff_members_stats():
     last_day_two_months_ago = last_day_two_months_ago.replace(hour=23, minute=59, second=59, microsecond=999999)
 
     service.calculate_iotd_staff_members_stats(first_day_two_months_ago, last_day_two_months_ago)
+
+    staff_members = User.objects.filter(
+        Q(groups__name=GroupName.IOTD_SUBMITTERS) | Q(groups__name=GroupName.IOTD_REVIEWERS)
+    ).distinct()
+
+    admin = User.objects.get(username='siovene')
+
+    for user in staff_members.iterator():
+        stats = IotdStaffMemberScore.objects.filter(
+            user=user
+        ).order_by(
+            '-pk'
+        ).first()
+
+        if stats:
+            push_notification(
+                [admin], None, 'your_iotd_staff_member_stats', {
+                    'BASE_URL': settings.BASE_URL,
+                    'stats': stats,
+                }
+            )
