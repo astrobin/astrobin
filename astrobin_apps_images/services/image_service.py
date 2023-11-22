@@ -277,8 +277,6 @@ class ImageService:
         image: Image = self.image
         revisions: QuerySet = self.get_revisions()
 
-        image.thumbnail_invalidate()
-
         if image.solution:
             image.solution.delete()
 
@@ -325,8 +323,10 @@ class ImageService:
             solution.content_object = image
             solution.save()
 
-        image.thumbnails.filter(revision=new_original.label).update(revision='0')
         new_original.delete()
+        image.thumbnails.filter(revision=new_original.label).delete()
+        image.thumbnail_invalidate()
+
 
     def get_enhanced_thumb_url(self, field, alias, revision_label, animated, secure, target_alias):
         get_enhanced_thumb_url = None
