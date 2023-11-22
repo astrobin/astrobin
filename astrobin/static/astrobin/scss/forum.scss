@@ -585,6 +585,20 @@ table.post th.post-avatar {
     abbr {
       border-bottom: 0;
     }
+
+    a {
+      color: $grey-3;
+      border-bottom: 1px solid $grey-5;
+
+      &:hover {
+        color: $link-color;
+        border-bottom-color: $link-color;
+      }
+    }
+
+    .topic-info {
+      color: $grey-3;
+    }
   }
 }
 
