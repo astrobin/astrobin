@@ -19,7 +19,7 @@ from pybb.models import Topic
 
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, UserProfile
-from astrobin.stories import add_story
+from astrobin.stories import ACTSTREAM_VERB_UPLOADED_IMAGE, add_story
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.tasks import push_notification_for_approved_image, push_notification_for_new_image
 
@@ -79,7 +79,7 @@ class ImageModerationMarkAsHamView(LoginRequiredMixin, GroupRequiredMixin, JSONR
             if not image.is_wip and image.published:
                 if not image.skip_notifications:
                     push_notification_for_new_image.apply_async(args=(image.pk,), countdown=10)
-                add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
+                add_story(image.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=image)
 
         return self.render_json_response({
             'status': 'OK',

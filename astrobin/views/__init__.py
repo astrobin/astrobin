@@ -339,7 +339,7 @@ def upload_max_revisions_error(request, max_revisions, image):
 @page_template('index/stream_page.html', key='stream_page')
 @page_template('index/recent_images_page.html', key='recent_images_page')
 @silk_profile('Index')
-def index(request, template='index/root.html', extra_context=None):
+def index(request, template='index/root.html', extra_context=None) -> HttpResponse:
     """Main page"""
 
     if not request.user.is_authenticated:
@@ -375,7 +375,8 @@ def index(request, template='index/root.html', extra_context=None):
         actions = Action.objects.all().prefetch_related(
             'actor__userprofile',
             'target_content_type',
-            'target')
+            'target'
+        )
         response_dict['actions'] = actions
         response_dict['cache_prefix'] = 'astrobin_global_actions'
 
@@ -426,8 +427,7 @@ def index(request, template='index/root.html', extra_context=None):
             ]
             cache.set(cache_key, followees_image_ids, 900)
 
-        actions = Action.objects \
-            .prefetch_related(
+        actions = Action.objects.prefetch_related(
             'actor__userprofile',
             'target_content_type',
             'target'

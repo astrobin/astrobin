@@ -77,13 +77,22 @@ from nested_comments.services.comment_notifications_service import CommentNotifi
 from toggleproperties.models import ToggleProperty
 from .enums.moderator_decision import ModeratorDecision
 from .models import (
-    Accessory, Camera, CameraRenameProposal, Filter, FocalReducer, Gear, GearMigrationStrategy, Image, ImageRevision,
+    Accessory, Camera, CameraRenameProposal, Filter, FocalReducer, Gear, GearMigrationStrategy, Image,
+    ImageEquipmentLog, ImageRevision,
     Mount,
     Software, Telescope,
     UserProfile,
 )
 from .search_indexes import ImageIndex, UserIndex
-from .stories import add_story
+from .stories import (
+    ACTSTREAM_VERB_BOOKMARKED_IMAGE,
+    ACTSTREAM_VERB_CREATED_PUBLIC_GROUP,
+    ACTSTREAM_VERB_JOINED_GROUP,
+    ACTSTREAM_VERB_LIKED_IMAGE,
+    ACTSTREAM_VERB_UPLOADED_IMAGE,
+    ACTSTREAM_VERB_UPLOADED_REVISION,
+    add_story,
+)
 from .utils import get_client_country_code
 
 log = logging.getLogger(__name__)
@@ -124,7 +133,7 @@ def image_pre_save(sender, instance, **kwargs):
         if image.moderator_decision != ModeratorDecision.APPROVED and instance.moderator_decision == ModeratorDecision.APPROVED:
             # This image is being approved
             if not instance.is_wip:
-                add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
+                add_story(instance.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=instance)
 
         if not instance.is_wip and not instance.published:
             # This image is being published
@@ -177,7 +186,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             if not instance.skip_notifications:
                 push_notification_for_new_image.apply_async(args=(instance.pk,))
             if instance.moderator_decision == ModeratorDecision.APPROVED:
-                add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
+                add_story(instance.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=instance)
 
         if Image.all_objects.filter(user=instance.user).count() == 1:
             push_notification([instance.user], None, 'congratulations_for_your_first_image', {
@@ -356,7 +365,7 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
     if (created and not uploading) or just_completed_upload:
         push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
         add_story(instance.image.user,
-                  verb='VERB_UPLOADED_REVISION',
+                  verb=ACTSTREAM_VERB_UPLOADED_REVISION,
                   action_object=instance,
                   target=instance.image)
 
@@ -539,9 +548,9 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                     return
 
                 if instance.property_type == "like":
-                    verb = 'VERB_LIKED_IMAGE'
+                    verb = ACTSTREAM_VERB_LIKED_IMAGE
                 elif instance.property_type == "bookmark":
-                    verb = 'VERB_BOOKMARKED_IMAGE'
+                    verb = ACTSTREAM_VERB_BOOKMARKED_IMAGE
                 else:
                     return
 
@@ -859,7 +868,7 @@ def group_post_save(sender, instance, created, **kwargs):
 
             add_story(
                 instance.creator,
-                verb='VERB_CREATED_PUBLIC_GROUP',
+                verb=ACTSTREAM_VERB_CREATED_PUBLIC_GROUP,
                 action_object=instance)
 
 
@@ -915,7 +924,7 @@ def group_members_changed(sender, instance, **kwargs):
 
                     add_story(
                         user,
-                        verb='VERB_JOINED_GROUP',
+                        verb=ACTSTREAM_VERB_JOINED_GROUP,
                         action_object=instance)
 
         if instance.autosubmission:
@@ -1036,13 +1045,30 @@ def new_equipment_changed(sender, instance: Image, **kwargs):
     if action == 'pre_clear':
         item_ids = sender.objects.filter(image=instance).values_list(model_class.__name__.lower(), flat=True)
         items = model_class.objects.filter(pk__in=list(item_ids))
-        # for item in items.iterator():
-        #     update_indexes(item)
+        for item in items.iterator():
+            update_indexes(item)
         items.update(last_added_or_removed_from_image=now)
+    elif action == 'post_remove':
+        for pk in pk_set:
+            item = get_object_or_None(model_class, pk=pk)
+            if item is not None:
+                ImageEquipmentLog.objects.create(
+                    image=instance,
+                    equipment_item=item,
+                    verb=ImageEquipmentLog.REMOVED
+                )
+                update_indexes(item)
+                if not item.last_added_or_removed_from_image or item.last_added_or_removed_from_image < update_deadline:
+                    model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
     elif action == 'post_add':
         for pk in pk_set:
             item = get_object_or_None(model_class, pk=pk)
             if item is not None:
+                ImageEquipmentLog.objects.create(
+                    image=instance,
+                    equipment_item=item,
+                    verb=ImageEquipmentLog.ADDED
+                )
                 update_indexes(item)
                 if not item.last_added_or_removed_from_image or item.last_added_or_removed_from_image < update_deadline:
                     model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
