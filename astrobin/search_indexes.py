@@ -705,7 +705,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     user_followed_by = MultiValueField()
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.using(get_segregated_reader_database())(
+        return self.get_model().objects.using(get_segregated_reader_database()).filter(
             moderator_decision=ModeratorDecision.APPROVED
         )
 
