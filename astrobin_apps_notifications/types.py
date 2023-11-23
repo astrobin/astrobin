@@ -361,6 +361,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'your_iotd_staff_member_stats',
+        _("Your IOTD staff member stats"),
+        '',
+        2
+    ),
+    (
         'new_image_description_mention',
         _("You were mentioned in an image description"),
         '',

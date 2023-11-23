@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 from astrobin_apps_iotd.models import (
-    IotdStats, IotdSubmission, IotdSubmissionQueueEntry, IotdVote, Iotd, TopPickNominationsArchive,
+    IotdStaffMemberScore, IotdStats, IotdSubmission, IotdSubmissionQueueEntry, IotdVote, Iotd,
+    TopPickNominationsArchive,
     TopPickArchive,
 )
 
@@ -64,3 +65,29 @@ class IotdSubmissionQueueEntryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(IotdSubmissionQueueEntry, IotdSubmissionQueueEntryAdmin)
+
+
+@admin.register(IotdStaffMemberScore)
+class IotdStaffMemberScoreAdmin(admin.ModelAdmin):
+    list_display = (
+        'user', 'created', 'period_start', 'period_end', 'score', 'active_days', 'promotions_dismissals_accuracy_ratio',
+    )
+    list_filter = ('created', 'period_start', 'period_end')
+    search_fields = ('user__username', 'user__email')
+    date_hierarchy = 'created'
+    ordering = ('-score',)
+    readonly_fields = (
+        'user', 'created', 'period_start', 'period_end', 'score', 'active_days', 'promotions_dismissals_accuracy_ratio',
+        'promotions', 'wasted_promotions', 'missed_iotd_promotions', 'missed_tp_promotions', 'missed_tpn_promotions',
+        'promotions_to_tpn', 'promotions_to_tp', 'promotions_to_iotd', 'dismissals', 'correct_dismissals',
+        'missed_dismissals', 'dismissals_to_tpn', 'dismissals_to_tp', 'dismissals_to_iotd',
+    )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
