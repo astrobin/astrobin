@@ -10,7 +10,7 @@
      with the same passion and dedication. Without further ado, here is your most recent activity data.
 {% endblocktrans %}
 
-{% trans "Period" %}: {{ stats.period_start }} - {{ stats.period_end }}
+{% trans "Period" %}: {{ stats.period_start }} - {{ stats.period_end }} UTC
 
 {% trans "Active days" %}: {{ stats.active_days }}
 

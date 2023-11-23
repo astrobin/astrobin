@@ -190,8 +190,6 @@ def calculate_iotd_staff_members_stats():
         Q(groups__name=GroupName.IOTD_SUBMITTERS) | Q(groups__name=GroupName.IOTD_REVIEWERS)
     ).distinct()
 
-    admin = User.objects.get(username='siovene')
-
     for user in staff_members.iterator():
         stats = IotdStaffMemberScore.objects.filter(
             user=user
@@ -201,7 +199,7 @@ def calculate_iotd_staff_members_stats():
 
         if stats:
             push_notification(
-                [admin], None, 'your_iotd_staff_member_stats', {
+                [user], None, 'your_iotd_staff_member_stats', {
                     'BASE_URL': settings.BASE_URL,
                     'stats': stats,
                 }
