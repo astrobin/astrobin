@@ -94,6 +94,6 @@ class HighlightingService:
         return mark_safe(
             strip_html(
                 '<br />'.join(result.splitlines()),
-                ['b', 'i', 'strong', 'em', 'br', 'pre', 'code']
+                ['b', 'i', 'strong', 'em', 'br', 'pre', 'code', 'span']
             )
         )

@@ -13,7 +13,7 @@ from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
-from lxml import html
+from lxml import etree, html
 
 from astrobin.enums import ImageEditorStep
 from astrobin.models import Image
@@ -255,9 +255,13 @@ def timestamp(dt):
 @register.filter
 def strip_html(value, allowed_tags=settings.SANITIZER_ALLOWED_TAGS):
     if isinstance(value, str):
-        # Parse HTML, repairing broken tags
-        document = html.fromstring(value)
-        document = html.tostring(document, encoding='unicode')
+        try:
+            # Attempt to parse as HTML fragment
+            document = html.fragment_fromstring(value, create_parent=False)
+            document = html.tostring(document, encoding='unicode', with_tail=True)
+        except etree.ParserError:
+            # If parsing fails, treat as plain text
+            document = value
 
         # Sanitize with bleach
         cleaned_html = bleach.clean(
