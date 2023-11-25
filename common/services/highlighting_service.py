@@ -91,4 +91,9 @@ class HighlightingService:
                         )
 
         from common.templatetags.common_tags import strip_html
-        return mark_safe(strip_html('<br />'.join(result.splitlines())))
+        return mark_safe(
+            strip_html(
+                '<br />'.join(result.splitlines()),
+                ['b', 'i', 'strong', 'em', 'br', 'pre', 'code']
+            )
+        )

@@ -13,6 +13,7 @@ from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
+from lxml import html
 
 from astrobin.enums import ImageEditorStep
 from astrobin.models import Image
@@ -252,12 +253,24 @@ def timestamp(dt):
 
 
 @register.filter
-def strip_html(value):
+def strip_html(value, allowed_tags=settings.SANITIZER_ALLOWED_TAGS):
     if isinstance(value, str):
-        value = bleach.clean(
-            value, tags=settings.SANITIZER_ALLOWED_TAGS,
+        # Parse HTML, repairing broken tags
+        document = html.fromstring(value)
+        document = html.tostring(document, encoding='unicode')
+
+        # Sanitize with bleach
+        cleaned_html = bleach.clean(
+            document,
+            tags=allowed_tags,
             attributes=settings.SANITIZER_ALLOWED_ATTRIBUTES,
-            styles=[], strip=True)
+            styles=[],
+            strip=True
+        )
+
+        # Mark the sanitized HTML as safe for rendering
+        return mark_safe(cleaned_html)
+
     return value
 
 @register.filter
