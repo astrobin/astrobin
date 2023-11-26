@@ -2194,6 +2194,7 @@ class DeepSky_Acquisition(Acquisition):
         (2, _("2 - Typical truly dark site (GRAY)")),
         (3, _("3 - Rural sky (BLUE)")),
         (4, _("4 - Rural/suburban transition (GREEN/YELLOW)")),
+        (4.5, _("4.5 - Semi-Suburban/Transition sky (YELLOW)")),
         (5, _("5 - Suburban sky (ORANGE)")),
         (6, _("6 - Bright suburban sky (RED)")),
         (7, _("7 - Suburban/urban transition or Full Moon (RED)")),
@@ -2309,10 +2310,12 @@ class DeepSky_Acquisition(Acquisition):
         help_text=_("The number of bias/offset frames."),
     )
 
-    bortle = models.PositiveIntegerField(
+    bortle = models.DecimalField(
         verbose_name=_("Bortle Dark-Sky Scale"),
         null=True,
         blank=True,
+        max_digits=2,
+        decimal_places=1,
         choices=BORTLE_CHOICES,
         help_text=_(
             "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
