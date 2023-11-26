@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.postgres.search import TrigramDistance
 from django.core.paginator import Paginator
-from django.db.models import QuerySet
+from django.db.models import Q, QuerySet
 from django.db.models.functions import Lower
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -48,7 +48,7 @@ class ForumViewSet(viewsets.ModelViewSet):
         if q:
             queryset = queryset\
                 .annotate(distance=TrigramDistance('name', q))\
-                .filter(distance__lte=.75)
+                .filter(Q(distance__lte=.75) | Q(name__icontains=q))
 
         if is_equipment:
             queryset = queryset.filter(category__slug='equipment-forums')
