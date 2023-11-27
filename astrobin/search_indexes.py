@@ -1051,7 +1051,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         )
 
         if deep_sky_acquisitions.exists():
-            return sum([x.bortle for x in deep_sky_acquisitions]) / float(deep_sky_acquisitions.count())
+            return sum([float(x.bortle) for x in deep_sky_acquisitions]) / float(deep_sky_acquisitions.count())
 
         return None
 
