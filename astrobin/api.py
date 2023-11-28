@@ -1,5 +1,6 @@
 from typing import List
 
+from avatar.templatetags.avatar_tags import avatar_url
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -798,6 +799,9 @@ class UserProfileResource(ModelResource):
             'website',
         ]
         ordering = ['-date_joined']
+
+    def dehydrate_avatar(self, bundle):
+        return avatar_url(bundle.obj.user, 200)
 
     def dehydrate_timezone(self, bundle):
         # Hardcode to GMT for compatibility reasons.
