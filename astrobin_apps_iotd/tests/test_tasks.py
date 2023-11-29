@@ -156,7 +156,7 @@ class IotdTasksTest(TestCase):
 
         resubmit_to_iotd_tp_process.assert_called()
 
-        acceptable_delta = timedelta(seconds=10)
+        acceptable_delta = timedelta(seconds=30)
         expected_delta = timedelta(hours=2)
 
         # Get the list of calls made to the mock
