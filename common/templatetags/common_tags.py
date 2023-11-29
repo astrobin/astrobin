@@ -253,7 +253,7 @@ def timestamp(dt):
 
 
 @register.filter
-def strip_html(value, allowed_tags=settings.SANITIZER_ALLOWED_TAGS):
+def strip_html(value: str, allowed_tags=settings.SANITIZER_ALLOWED_TAGS) -> str:
     if isinstance(value, str):
         try:
             # Attempt to parse as HTML fragment
@@ -286,7 +286,9 @@ def ensure_url_protocol(url: str) -> str:
 
 
 class HighlightTextNode(template.Node):
-    def __init__(self, text, terms, as_var=None, html_tag=None, css_class=None, max_length=None, dialect=None):
+    def __init__(
+        self, text, terms, as_var=None, html_tag=None, css_class=None, max_length=None, dialect=None, allow_lists='True'
+    ):
         self.text = template.Variable(text)
         self.terms = template.Variable(terms)
         self.as_var = as_var
@@ -294,6 +296,7 @@ class HighlightTextNode(template.Node):
         self.css_class = css_class
         self.max_length = max_length
         self.dialect = dialect
+        self.allow_lists = allow_lists
 
         if html_tag is not None:
             self.html_tag = template.Variable(html_tag)
@@ -306,6 +309,9 @@ class HighlightTextNode(template.Node):
 
         if dialect is not None:
             self.dialect = template.Variable(dialect)
+
+        if allow_lists is not None:
+            self.allow_lists = template.Variable(allow_lists)
 
     def render(self, context) -> str:
         text = self.text.resolve(context)
@@ -323,6 +329,9 @@ class HighlightTextNode(template.Node):
 
         if self.dialect is not None:
             kwargs['dialect'] = self.dialect.resolve(context)
+
+        if self.allow_lists is not None:
+            kwargs['allow_lists'] = self.allow_lists.resolve(context)
 
         rendered_html = HighlightingService(text, terms, **kwargs).render_html()
 
@@ -376,7 +385,11 @@ def highlight_text(parser, token):
         if bit == 'dialect':
             kwargs['dialect'] = next(arg_bits)
 
+        if bit == 'allow_lists':
+            kwargs['allow_lists'] = next(arg_bits)
+
     return HighlightTextNode(text, query, as_var, **kwargs)
+
 
 @register.simple_tag
 def get_verbose_field_name(instance, field_name):
