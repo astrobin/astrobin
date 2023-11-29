@@ -14,7 +14,7 @@ class HighlightingService:
     html_tag = 'span'
     max_length = -1
     dialect = 'html'
-    allow_lists = True
+    allow_lists = 'True'
 
     def __init__(self, text, terms, **kwargs):
         self.text = text
@@ -96,7 +96,7 @@ class HighlightingService:
 
         from common.templatetags.common_tags import strip_html
 
-        if self.allow_lists:
+        if self.allow_lists == 'True':
             allowed_tags = SANITIZER_ALLOWED_TAGS
         else:
             # If we don't allow lists, we need to remove the <li> tags. We do this because search results use lists and
