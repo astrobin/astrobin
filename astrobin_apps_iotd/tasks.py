@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from celery import shared_task
 from django.conf import settings
 from django.contrib.auth.models import Group, User
+from django.core.cache import cache
 from django.db.models import Q, QuerySet
 
 from astrobin.models import Image
@@ -148,8 +149,17 @@ def notify_about_upcoming_deadline_for_iotd_tp_submission():
 @shared_task(time_limit=600)
 def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views():
     # Run this task every hour.
+    last_check_cache_key = 'last_iotd_tp_resubmission_check'
+    last_check: datetime = cache.get(last_check_cache_key)
 
-    recently_expired_images: QuerySet = IotdService.get_recently_expired_unsubmitted_images(timedelta(hours=1))
+    if last_check:
+        delta: timedelta = datetime.now() - last_check
+    else:
+        delta = timedelta(hours=1)
+
+    cache.set(last_check_cache_key, datetime.now(), 60 * 60 * 2)
+
+    recently_expired_images: QuerySet = IotdService.get_recently_expired_unsubmitted_images(delta)
     total_submitters: int = Group.objects.get(name=GroupName.IOTD_SUBMITTERS).user_set.count()
     min_percentage: float = settings.IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE / 100 * .8
 

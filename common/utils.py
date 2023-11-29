@@ -4,9 +4,9 @@ from os.path import dirname, abspath
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.db import transaction
 from django.db.transaction import get_connection
-
 
 def get_project_root():
     # type: () -> str
@@ -47,3 +47,17 @@ def batch(iterable, size=100):
     iterator = iter(iterable)
     for first in iterator:
         yield [first] + list(islice(iterator, size - 1))
+
+
+def make_custom_cache_get_side_effect(mock_key, mock_value):
+    original_cache_get = cache.get
+
+    def custom_cache_get_side_effect(*args, **kwargs):
+        key = args[0] if args else None
+        if key == mock_key:
+            return mock_value
+        else:
+            # Call the original cache.get method with all provided arguments
+            return original_cache_get(*args, **kwargs)
+
+    return custom_cache_get_side_effect
