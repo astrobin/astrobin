@@ -149,9 +149,7 @@ def notify_about_upcoming_deadline_for_iotd_tp_submission():
 def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views():
     # Run this task every hour.
 
-    recently_expired_images: QuerySet = IotdService.get_recently_expired_unsubmitted_images(
-        timedelta(hours=1) + timedelta(minutes=5)
-    )
+    recently_expired_images: QuerySet = IotdService.get_recently_expired_unsubmitted_images(timedelta(hours=1))
     total_submitters: int = Group.objects.get(name=GroupName.IOTD_SUBMITTERS).user_set.count()
     min_percentage: float = settings.IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE / 100 * .8
 
