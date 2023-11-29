@@ -12,7 +12,7 @@ if os.environ.get('ELASTICSEARCH_URL'):
         'default': {
             'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
             'URL': os.environ.get('ELASTICSEARCH_URL').strip(),
-            'INDEX_NAME': 'astrobin',
+            'INDEX_NAME': os.environ.get('ELASTICSEARCH_INDEX_NAME', 'astrobin').strip(),
             'EXCLUDED_INDEXES': [
                 'threaded_messages.search_indexes.Thread',
                 'threaded_messages.search_indexes.ThreadIndex',
@@ -42,7 +42,7 @@ else:
     HAYSTACK_CONNECTIONS = {
         'default': {
             'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-            'INDEX_NAME': 'astrobin',
+            'INDEX_NAME': os.environ.get('ELASTICSEARCH_INDEX_NAME', 'astrobin').strip(),
             'EXCLUDED_INDEXES': [
                 'threaded_messages.search_indexes.Thread',
                 'threaded_messages.search_indexes.ThreadIndex',
