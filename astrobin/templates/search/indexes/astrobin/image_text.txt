@@ -1,99 +1,114 @@
 {% load astrobin_apps_platesolving_tags %}
 {% load common_tags %}
+{% load bbcode_tags %}
 
-{{ object.user.username | asciify }}
-{{ object.user.userprofile.real_name | asciify }}
+{% removelinebreaks %}
+    {% removemultiplespaces %}
+        {{ object.user.username | asciify }}
+        {% if object.user.userprofile.real_name %}
+            {{ object.user.userprofile.real_name | asciify }}
+        {% endif %}
 
-{% for collaborator in object.collaborators.all %}
-    {{ collaborator.username | asciify }}
-    {{ collaborator.userprofile.real_name | asciify }}
-{% endfor %}
+        {% for collaborator in object.collaborators.all %}
+            {{ collaborator.username | asciify }}
+            {{ collaborator.userprofile.real_name | asciify }}
+        {% endfor %}
 
-{{ object.title | asciify }}
+        {{ object.title | striptags | asciify | safe }}
 
-{% for r in object.revisions.all %}
-    {{ r.title | asciify }}
-    {{ r.description | asciify }}
-{% endfor %}
+        {% for r in object.revisions.all %}
+            {% if r.title %}
+                {{ r.title | asciify }}
+            {% endif %}
+            {% if r.description %}
+                {{ r.description | striptags | asciify | safe }}
+            {% endif %}
+        {% endfor %}
 
-{% if object.description_bbcode %}
-    {{ object.description_bbcode  | asciify }}
-{% else %}
-    {{ object.description | asciify }}
-{% endif %}
+        {% if object.description_bbcode %}
+            {{ object.description_bbcode | bbcode | striptags | asciify | safe }}
+        {% else %}
+            {{ object.description | striptags | asciify | safe }}
+        {% endif %}
 
-{{ object.get_remote_source | asciify }}
+        {% if object.remote_source %}
+            {{ object.get_remote_source | asciify }}
+        {% endif %}
 
-{% for i in object.locations.all %}
-    {{ i.city | asciify }}
-{% endfor %}
+        {% for i in object.locations.all %}
+            {{ i.city | asciify }}
+        {% endfor %}
 
-{{ object.solution | duplicate_objects_in_field_by_catalog_space }}
+        {% if object.solution %}
+            {{ object.solution | duplicate_objects_in_field_by_catalog_space | join:' ' }}
+        {% endif %}
 
-{% for i in object.imaging_telescopes.all %}
-    {{ i | asciify }} {{ i.type_label }}
-{% endfor %}
+        {% for i in object.imaging_telescopes.all %}
+            {{ i | asciify }} {{ i.type_label }}
+        {% endfor %}
 
-{% for i in object.imaging_cameras.all %}
-    {{ i | asciify }} {{ i.type_label }}
-{% endfor %}
+        {% for i in object.imaging_cameras.all %}
+            {{ i | asciify }} {{ i.type_label }}
+        {% endfor %}
 
-{% for i in object.guiding_telescopes.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.guiding_telescopes.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.guiding_cameras.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.guiding_cameras.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.mounts.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.mounts.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.filters.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.filters.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.focal_reducers.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.focal_reducers.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.software.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.software.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.accessories.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.accessories.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.imaging_telescopes_2.all %}
-    {{ i | asciify }} {{ i.type_label }}
-{% endfor %}
+        {% for i in object.imaging_telescopes_2.all %}
+            {{ i | asciify }} {{ i.type_label }}
+        {% endfor %}
 
-{% for i in object.imaging_cameras_2.all %}
-    {{ i | asciify }} {{ i.type_label }}
-{% endfor %}
+        {% for i in object.imaging_cameras_2.all %}
+            {{ i | asciify }} {{ i.type_label }}
+        {% endfor %}
 
-{% for i in object.guiding_telescopes_2.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.guiding_telescopes_2.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.guiding_cameras_2.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.guiding_cameras_2.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.mounts_2.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.mounts_2.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.filters_2.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.filters_2.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.software_2.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.software_2.all %}
+            {{ i | asciify }}
+        {% endfor %}
 
-{% for i in object.accessories_2.all %}
-    {{ i | asciify }}
-{% endfor %}
+        {% for i in object.accessories_2.all %}
+            {{ i | asciify }}
+        {% endfor %}
+    {% endremovemultiplespaces %}
+{% endremovelinebreaks %}

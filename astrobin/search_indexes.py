@@ -8,10 +8,12 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db.models import Q
 from django.db.models.functions import Length
+from django.template.defaultfilters import striptags
 from haystack.constants import Indexable
 from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, IntegerField, MultiValueField
 from celery_haystack.indexes import CelerySearchIndex
 from hitcount.models import HitCount
+from precise_bbcode.templatetags.bbcode_tags import bbcode
 from pybb.models import Post, Topic
 from safedelete.models import SafeDeleteModel
 
@@ -720,7 +722,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_description(self, obj):
         logger.info('Updating ImageIndex: %d' % obj.pk)
-        return obj.description_bbcode or obj.description
+        if obj.description_bbcode:
+            return striptags(bbcode(obj.description_bbcode))
+        return striptags(obj.description)
 
     ###################################################################################################################
     ###################################################################################################################
@@ -1036,7 +1040,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
             not IotdService().is_iotd(obj)
 
     def prepare_objects_in_field(self, obj):
-        return SolutionService(obj.solution).duplicate_objects_in_field_by_catalog_space() if obj.solution else None
+        return ' '.join(SolutionService(obj.solution).duplicate_objects_in_field_by_catalog_space()) \
+            if obj.solution else None
 
     def prepare_countries(self, obj):
         # Escape with __ because for whatever reason some country codes don't work, including IT.

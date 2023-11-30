@@ -1,8 +1,10 @@
 import datetime
+import re
 import unicodedata
 from typing import List, Optional, Union
 
 import bleach
+import six
 from bs4 import BeautifulSoup
 from dateutil import parser
 from django import template
@@ -12,6 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
+from django.utils.functional import keep_lazy
 from django.utils.safestring import mark_safe
 from lxml import etree, html
 
@@ -484,3 +487,34 @@ def html_image_thumbnails(html_text: str, gallery_rel: str) -> str:
                     continue
 
     return str(soup)
+
+
+@register.tag
+def removelinebreaks(parser, token):
+    nodelist = parser.parse(('endremovelinebreaks',))
+    parser.delete_first_token()
+    return RemoveLinebreakNode(nodelist)
+
+
+class RemoveLinebreakNode(Node):
+    def __init__(self, nodelist):
+        self.nodelist = nodelist
+
+    def render(self, context):
+        strip_line_breaks = keep_lazy(six.text_type)(lambda x: x.replace('\n', ' '))
+        return strip_line_breaks(self.nodelist.render(context).strip())
+
+@register.tag
+def removemultiplespaces(parser, token):
+    nodelist = parser.parse(('endremovemultiplespaces',))
+    parser.delete_first_token()
+    return RemoveMultipleSpacesNode(nodelist)
+
+
+class RemoveMultipleSpacesNode(Node):
+    def __init__(self, nodelist):
+        self.nodelist = nodelist
+
+    def render(self, context):
+        strip_multiple_spaces = keep_lazy(six.text_type)(lambda x: re.sub(r'\s+', ' ', x))
+        return strip_multiple_spaces(self.nodelist.render(context).strip())
