@@ -90,8 +90,10 @@ class CustomElasticsearch2SearchBackend(Elasticsearch2SearchBackend):
     def build_search_kwargs(self, *args, **kwargs):
         search_kwargs = super().build_search_kwargs(*args, **kwargs)
 
-        if 'query' in search_kwargs and 'filtered' in search_kwargs['query']:
+        try:
             search_kwargs['query']['filtered']['query']['query_string']['auto_generate_phrase_queries'] = False
+        except KeyError:
+            pass
 
         return search_kwargs
 
