@@ -10,7 +10,7 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 60
 if os.environ.get('ELASTICSEARCH_URL'):
     HAYSTACK_CONNECTIONS = {
         'default': {
-            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'ENGINE': 'astrobin.search.CustomElasticsearch2SearchEngine',
             'URL': os.environ.get('ELASTICSEARCH_URL').strip(),
             'INDEX_NAME': os.environ.get('ELASTICSEARCH_INDEX_NAME', 'astrobin').strip(),
             'EXCLUDED_INDEXES': [
