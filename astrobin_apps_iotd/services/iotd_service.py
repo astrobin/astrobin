@@ -1091,10 +1091,10 @@ class IotdService:
                             submitter_promotion_counts[submitter_username]['missed_iotd_promotions'] += 1
                         elif image_id in top_pick_ids:
                             score = submitters_scores.get(submitter_username, 0) - missed_tp_submission_penalty
-                            submitter_promotion_counts[submitter_username]['missed_tpn_promotions'] += 1
+                            submitter_promotion_counts[submitter_username]['missed_tp_promotions'] += 1
                         elif image_id in nominated_ids:
                             score = submitters_scores.get(submitter_username, 0) - missed_tpn_submission_penalty
-                            submitter_promotion_counts[submitter_username]['missed_tp_promotions'] += 1
+                            submitter_promotion_counts[submitter_username]['missed_tpn_promotions'] += 1
                         submitters_scores[submitter_username] = score
 
                     if image_id not in dismissed_image_ids:
