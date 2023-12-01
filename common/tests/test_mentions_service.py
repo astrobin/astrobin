@@ -77,6 +77,10 @@ class MentionsServiceTest(TestCase):
         text = "[quote]Test message[/url]"
         self.assertEqual([], MentionsService.get_mentions(text))
 
+    def test_get_mentions_quote_with_real_name_and_username(self):
+        text = "[quote=\"Mr Fooish (foo)\"]Test message[/quote]"
+        self.assertEqual(["foo"], MentionsService.get_mentions(text))
+
     def test_get_mentions_quote_and_mention_same_user(self):
         text = "[quote=\"foo\"]Test message[/quote] Hello [url=https://www.astrobin.com/users/foo/]@Foo Bar[/url]"
         self.assertEqual(["foo"], MentionsService.get_mentions(text))
