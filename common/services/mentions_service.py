@@ -15,13 +15,16 @@ class MentionsService(object):
         if not text:
             return []
 
-        regex = r'\[url=.*?\/users\/(.*?)\/\]@.*?\[\/url\]|\[quote="(.*?)"\].*?\[\/quote\]'
-        matches = re.finditer(regex, text, re.MULTILINE)
+        pattern = r'\[url=.*?\/users\/(.*?)\/\]@.*?\[\/url\]|\[quote="(.*?)"\][\s\S]*?\[\/quote\]'
+        matches = re.finditer(pattern, text, re.MULTILINE)
         mentions = []
 
         for matchNum, match in enumerate(matches, start=1):
             for group in match.groups():
                 if group is not None:
+                    match = re.match(r'(.*) \((.*)\)', group)
+                    if match:
+                        group = match.group(2)
                     mentions.append(group)
 
         return list(set(mentions))

@@ -1,3 +1,5 @@
+import re
+
 from annoying.functions import get_object_or_None
 from django.core.exceptions import MultipleObjectsReturned
 from precise_bbcode.bbcode.tag import BBCodeTag
@@ -17,8 +19,13 @@ class QuoteBBCodeTag(BBCodeTag):
 
         if option:
             username = str(option).replace('"', '')
-            profile = get_object_or_None(UserProfile, user__username=username)
-            if not profile:
+
+            # match in case the format is "display name (username)"
+            match = re.match(r'(.*) \((.*)\)', username)
+            if match:
+                username = match.group(2)
+                profile = get_object_or_None(UserProfile, user__username=username)
+            else:
                 try:
                     profile = get_object_or_None(UserProfile, real_name=username)
                 except MultipleObjectsReturned:
@@ -26,6 +33,7 @@ class QuoteBBCodeTag(BBCodeTag):
                         username,
                         content
                     )
+
             if profile:
                 return '<blockquote><a href="/users/{}/">{}</a>:<br/>{}</blockquote>'.format(
                     profile.user.username,

@@ -1,3 +1,7 @@
+PYBB_MARKUP_ENGINES_PATHS = {
+    'bbcode': 'astrobin.bbcode_parser.AstroBinBBCodeParser',
+    'markdown': 'pybb.markup.markdown.MarkdownParser'
+}
 PYBB_DISABLE_NOTIFICATIONS = True
 PYBB_BODY_CLEANERS = []
 PYBB_DEFAULT_TITLE = "AstroBin Forum"
