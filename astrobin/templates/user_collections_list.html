@@ -114,9 +114,21 @@
     {% if requested_user == request.user and collections_list.count == 0 %}
         <div class="alert alert-warning">
             {% trans "You do not have any collections." %}
-            <a href="{% url 'user_collections_create' requested_user.username %}">
-                {% trans "Do you want to create a collection now?" %}
-            </a>
+        </div>
+
+        <div class="collections">
+            <div class="collection">
+                <div class="collection-image">
+                    <a href="{% url 'user_collections_create' requested_user.username %}">
+                        +
+                    </a>
+                </div>
+                <div class="collection-name">
+                    <a href="{% url 'user_collections_create' requested_user.username %}">
+                        {% trans "Create new collection" %}
+                    </a>
+                </div>
+            </div>
         </div>
     {% endif %}
 
