@@ -167,7 +167,7 @@ def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
     for image in recently_expired_images.iterator():
         users_who_saw_this = IotdSubmitterSeenImage.objects \
             .using(get_segregated_reader_database()) \
-            .filter(image=image, created__gt=image.submitted_for_iotd_tp_consideration) \
+            .filter(image=image) \
             .values_list('user', flat=True) \
             .distinct() \
             .count()
