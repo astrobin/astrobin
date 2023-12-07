@@ -3,6 +3,7 @@ import logging
 from braces.views import JsonRequestResponseMixin
 from django.http import HttpResponseForbidden
 from django.utils.decorators import method_decorator
+from django.utils.translation import gettext
 from django.views.decorators.cache import cache_control, cache_page
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
@@ -21,12 +22,14 @@ from django.views.generic import base
 log = logging.getLogger(__name__)
 
 
-@method_decorator([
-    cache_page(3600),
-    last_modified(CachingService.get_latest_iotd_datetime),
-    cache_control(private=True),
-    vary_on_cookie
-], name='dispatch')
+@method_decorator(
+    [
+        cache_page(3600),
+        last_modified(CachingService.get_latest_iotd_datetime),
+        cache_control(private=True),
+        vary_on_cookie
+    ], name='dispatch'
+)
 class IotdArchiveView(ListView):
     model = Iotd
     template_name = 'astrobin_apps_iotd/iotd_archive.html'
@@ -48,7 +51,9 @@ class ImageStats(JsonRequestResponseMixin, base.View):
             'submitter_views': IotdSubmitterSeenImage.objects.filter(image=image).count(),
             'submissions': IotdSubmission.objects.filter(image=image).count(),
             'votes': IotdVote.objects.filter(image=image).count(),
-            'dismissals': IotdDismissedImage.objects.filter(image=image).count(),
+            'early_dismissal': gettext('Yes')
+            if IotdDismissedImage.objects.filter(image=image).count() >= 5
+            else gettext('No'),
         }
 
         return self.render_json_response(data)
