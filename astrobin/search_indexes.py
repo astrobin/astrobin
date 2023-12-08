@@ -20,6 +20,7 @@ from safedelete.models import SafeDeleteModel
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition, Camera as LegacyCamera
+from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import Camera
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
@@ -1040,8 +1041,18 @@ class ImageIndex(CelerySearchIndex, Indexable):
             not IotdService().is_iotd(obj)
 
     def prepare_objects_in_field(self, obj):
-        return ' '.join(SolutionService(obj.solution).duplicate_objects_in_field_by_catalog_space()) \
-            if obj.solution else None
+        if not obj.solution or not obj.solution.objects_in_field:
+            return None
+
+        objects = ' '.join(SolutionService(obj.solution).duplicate_objects_in_field_by_catalog_space()).strip()
+
+        for x in obj.solution.objects_in_field.split(','):
+            synonyms = UtilsService.get_search_synonyms_text(x.strip())
+            if synonyms:
+                objects = f'{objects} {" ".join(synonyms.split(","))}'.strip()
+
+        return objects
+
 
     def prepare_countries(self, obj):
         # Escape with __ because for whatever reason some country codes don't work, including IT.

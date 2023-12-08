@@ -1,6 +1,7 @@
 {% load astrobin_apps_platesolving_tags %}
 {% load common_tags %}
 {% load bbcode_tags %}
+{% load tags %}
 
 {% removelinebreaks %}
     {% removemultiplespaces %}
@@ -16,6 +17,12 @@
 
         {{ object.title | striptags | asciify | safe }}
 
+        {% with object.title|get_search_synonyms_text as title_synonyms %}
+            {% if title_synonyms %}
+                {{ title_synonyms|split:','|join:' ' | asciify }}
+            {% endif %}
+        {% endwith %}
+
         {% for r in object.revisions.all %}
             {% if r.title %}
                 {{ r.title | asciify }}
@@ -27,8 +34,20 @@
 
         {% if object.description_bbcode %}
             {{ object.description_bbcode | bbcode | striptags | asciify | safe }}
-        {% else %}
+
+            {% with object.description_bbcode|get_search_synonyms_text as description_bbcode_synonyms %}
+                {% if description_bbcode_synonyms %}
+                    {{ description_bbcode_synonyms|split:','|join:' ' | asciify }}
+                {% endif %}
+            {% endwith %}
+        {% elif object.description %}
             {{ object.description | striptags | asciify | safe }}
+
+            {% with object.description|get_search_synonyms_text as description_synonyms %}
+                {% if description_synonyms %}
+                    {{ description_synonyms|split:','|join:' ' | asciify }}
+                {% endif %}
+            {% endwith %}
         {% endif %}
 
         {% if object.remote_source %}
@@ -41,6 +60,16 @@
 
         {% if object.solution %}
             {{ object.solution | duplicate_objects_in_field_by_catalog_space | join:' ' }}
+
+            {% if object.solution.objects_in_field %}
+                {% for i in object.solution.objects_in_field|split:',' %}
+                    {% with i|trim|get_search_synonyms_text as objects_synonyms %}
+                        {% if objects_synonyms %}
+                            {{ objects_synonyms|split:','|join:' ' | asciify }}
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+            {% endif %}
         {% endif %}
 
         {% for i in object.imaging_telescopes.all %}

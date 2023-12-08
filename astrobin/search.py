@@ -173,6 +173,33 @@ class AstroBinSearchForm(SearchForm):
         self.data = {x: kwargs.pop(x, None) for x in FIELDS}
         self.request = kwargs.pop('request')
 
+    def find_catalog_subjects(self, text: str):
+        text = text \
+            .lower() \
+            .replace('sh2-', 'sh2_') \
+            .replace('sh2 ', 'sh2_') \
+            .replace('messier', 'm') \
+            .replace('"', '') \
+            .replace("'", '') \
+            .strip()
+
+        pattern = r"(?P<catalog>Messier|M|NGC|IC|PGC|LDN|LBN|SH2_)\s?(?P<id>\d+)"
+        return re.finditer(pattern, text, re.IGNORECASE)
+
+    def filter_by_subject_text(self, results, text):
+        if text is not None and text != "":
+            catalog_entries = []
+            matches = self.find_catalog_subjects(text)
+
+            for matchNum, match in enumerate(matches, start=1):
+                groups = match.groups()
+                catalog_entries.append("%s %s" % (groups[0], groups[1]))
+
+            for entry in catalog_entries:
+                results = results.narrow(f'objects_in_field:"{entry}"')
+
+        return results
+
     def filter_by_domain(self, results):
         d = self.cleaned_data.get("d")
 
@@ -319,7 +346,7 @@ class AstroBinSearchForm(SearchForm):
             pass
 
         return results
-    
+
     def filter_by_country(self, results):
         country = self.cleaned_data.get("country")
 
@@ -597,25 +624,17 @@ class AstroBinSearchForm(SearchForm):
 
     def filter_by_subject(self, results):
         subject = self.cleaned_data.get("subject")
+        q = self.cleaned_data.get("q")
 
         if subject is not None and subject != "":
-            catalog_entries = []
-            subject = subject.lower().replace('sh2-', 'sh2_').replace('sh2 ', 'sh2_').strip()
-
-            regex = r"(?P<catalog>M|NGC|IC|PGC|LDN|LBN)\s?(?P<id>\d+)"
-            matches = re.finditer(regex, subject, re.IGNORECASE)
-
-            for matchNum, match in enumerate(matches, start=1):
-                catalog_entries.append(match.string)
-
-                groups = match.groups()
-                catalog_entries.append("%s%s" % (groups[0], groups[1]))
-
-            if catalog_entries:
-                query = reduce(or_, (Q(objects_in_field=x) for x in set(catalog_entries)))
-                results = results.filter(query)
+            if list(self.find_catalog_subjects(subject)):
+                results = self.filter_by_subject_text(results, subject)
             else:
                 results = results.filter(objects_in_field=CustomContain(subject))
+
+        if q is not None and q != "":
+            if list(self.find_catalog_subjects(q)):
+                results = self.filter_by_subject_text(results, q)
 
         return results
 

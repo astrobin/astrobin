@@ -1,11 +1,10 @@
-from typing import List
+from typing import List, Optional
 
 from django.db.models import QuerySet, Q
 from django.template import Library
 
 from astrobin.models import Gear, Image
 from astrobin.services.gear_service import GearService
-from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_equipment.services import EquipmentService
@@ -64,7 +63,10 @@ def equipment_brand_listing_url_with_tags(listing: EquipmentBrandListing, source
 
 
 @register.simple_tag
-def equipment_item_listing_url_with_tags(listing: EquipmentItemListing, source: str) -> str:
+def equipment_item_listing_url_with_tags(listing: EquipmentItemListing, source: str) -> Optional[str]:
+    if not listing.item_content_object:
+        return None
+
     url = listing.url
 
     if 'brand' in url or 'name' in url or 'retailer' in url or 'source' in url:
