@@ -73,6 +73,9 @@ def autocomplete_usernames(request):
     # Replace non-breaking space with regular space
     q = q.replace(chr(160), ' ')
 
+    if len(q) > 15:
+        q = q[:15]
+
     def filter_by_distance(queryset: QuerySet, q: str) -> QuerySet:
         if 'postgresql' in settings.DATABASES['default']['ENGINE']:
             return queryset.annotate(
