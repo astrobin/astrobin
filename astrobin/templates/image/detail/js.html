@@ -357,6 +357,21 @@ $(document).ready(function() {
     {% if not is_revision and image.video_file.name and not image.encoded_video_file.name %}
         updateVideoEncodingProgress();
     {% endif %}
+
+
+    function toggleIotdTpSubmitButton() {
+        const $btn = $('#submit-to-iotd-tp-modal .btn-primary');
+        const isChecked = $('#i-agree-with-iotd-tp-rules-and-guidelines').is(':checked');
+        $btn.prop('disabled', !isChecked);
+    }
+
+    function initializeIotdTpModal() {
+        const $checkbox = $('#i-agree-with-iotd-tp-rules-and-guidelines');
+        toggleIotdTpSubmitButton();
+        $checkbox.on('change', toggleIotdTpSubmitButton);
+    }
+
+    initializeIotdTpModal();
 });
 </script>
 

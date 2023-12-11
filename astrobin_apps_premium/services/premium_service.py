@@ -117,7 +117,7 @@ class PremiumService:
             subscription__name__in=[x.value for x in SubscriptionName],
             expires__gte=datetime.today(),
             active=True,
-        )]
+        ).prefetch_related('subscription', 'user', 'user__groups')]
 
         if len(us) == 0:
             result = None

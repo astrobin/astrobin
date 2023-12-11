@@ -331,6 +331,18 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'image_you_dismissed_is_tp',
+        _("An image you dismissed made it to Top Pick"),
+        '',
+        2
+    ),
+    (
+        'image_you_dismissed_is_iotd',
+        _("An image you dismissed made it to IOTD"),
+        '',
+        2
+    ),
+    (
         'your_image_is_tpn',
         _("Your image was nominated to be a Top Pick"),
         '',
@@ -345,6 +357,12 @@ NOTICE_TYPES = (
     (
         'your_image_is_iotd',
         _("Your image was voted Image of the Day"),
+        '',
+        2
+    ),
+    (
+        'your_iotd_staff_member_stats',
+        _("Your IOTD staff member stats"),
         '',
         2
     ),

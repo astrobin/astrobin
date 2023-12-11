@@ -11,8 +11,12 @@ from astrobin_apps_groups.views.mixins import RestrictToGroupMembersMixin, Restr
 
 
 class GroupAddRemoveImages(
-    JSONResponseMixin, LoginRequiredMixin, RestrictToGroupMembersMixin,
-    RestrictToNonAutosubmissionGroupsMixin, UpdateView):
+    JSONResponseMixin,
+    LoginRequiredMixin,
+    RestrictToGroupMembersMixin,
+    RestrictToNonAutosubmissionGroupsMixin,
+    UpdateView
+):
     model = Group
     fields = ('images',)
     template_name = 'astrobin_apps_groups/group_add_remove_images.html'
@@ -30,9 +34,10 @@ class GroupAddRemoveImages(
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             pks = request.POST.getlist('images[]')
-            max = 100
-            if len(pks) > max:
-                return HttpResponseBadRequest(f'Please do not request more than {max} images.')
+            max_number = 100
+
+            if len(pks) > max_number:
+                return HttpResponseBadRequest(f'Please do not request more than {max_number} images.')
 
             group = self.get_object()
             group.images.remove(*Image.objects_including_wip.filter(user=request.user))

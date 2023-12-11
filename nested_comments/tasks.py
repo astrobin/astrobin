@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.db.models import QuerySet
 from django.utils import timezone
 
+from common.utils import get_segregated_reader_database
 from nested_comments.models import NestedComment
 from nested_comments.services import CommentNotificationsService
 
@@ -16,7 +17,7 @@ def notify_superuser_of_comments_pending_approval():
     now = timezone.now()
     delta = timedelta(hours=24)
 
-    queryset = NestedComment.objects.filter(
+    queryset = NestedComment.objects.using(get_segregated_reader_database()).filter(
         deleted=False,
         pending_moderation=True,
         created__range=(now - delta - timedelta(minutes=5), now - delta),

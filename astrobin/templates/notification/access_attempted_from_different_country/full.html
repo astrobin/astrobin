@@ -8,34 +8,15 @@
 </p>
 
 <p>
-    {% blocktrans trimmed %}
-        For your security, an additional confirmation token was sent in a separate email.
-    {% endblocktrans %}
-</p>
-
-<p>
-    {% blocktrans trimmed %}
-        If this was a legitimate login attempt, please use the token to complete the process.
-    {% endblocktrans %}
+    {% trans "Last known country" %}: <strong>{{ last_seen_in_country }}</strong><br/>
+    {% trans "This login attempted in country" %}: <strong>{{ new_country }}</strong><br/>
+    IP: <strong>{{ ip }}</strong>
 </p>
 
 <p>
     {% blocktrans trimmed %}
         If you did not make this login attempt, please change your password and/or contact AstroBin immediately.
     {% endblocktrans %}
-</p>
-
-<p>
-    {% blocktrans trimmed %}
-        For your security, following this event, AstroBin has automatically enabled email-based two-factor
-        authentication on your account. You can disable in your settings or using the link below.
-    {% endblocktrans %}
-</p>
-
-<p>
-    <a class="btn btn-primary" href="{{ base_url }}{% url 'two_factor:profile' %}">
-        {% trans "Two-factor Authentication" %}
-    </a>
 </p>
 
 <p>

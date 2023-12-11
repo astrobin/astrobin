@@ -5,6 +5,8 @@ from django.contrib.auth.models import Group
 from django.core.cache import cache
 from django.core.management import call_command
 from django.test import TestCase, override_settings
+from mock import mock
+from mock.mock import patch
 
 from astrobin.enums import SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
@@ -20,7 +22,6 @@ from common.constants import GroupName
     IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(days=365)
 )
 class IotdTest(TestCase):
-
     def setUp(self):
         self.submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         self.submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
@@ -88,7 +89,10 @@ class IotdTest(TestCase):
             submitter=self.submitter_2,
             image=self.image)
 
-        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS) - \
+            timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -425,7 +429,14 @@ class IotdTest(TestCase):
         self.assertEqual(vote.reviewer, self.reviewer_1)
         self.assertEqual(vote.image, submission_1.image)
 
-        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()
@@ -446,7 +457,14 @@ class IotdTest(TestCase):
             reviewer=self.reviewer_2,
             image=submission_1.image)
 
-        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()
@@ -881,3 +899,59 @@ class IotdTest(TestCase):
 
         response = self.client.get(reverse_lazy('iotd_archive'))
         self.assertNotContains(response, self.image.title)
+
+    @patch('astrobin.signals.push_notification')
+    def test_top_pick_nominations_archive_post_save_without_collaborators(self, push_notification):
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now() - timedelta(1))
+
+        TopPickNominationsArchive.objects.create(image=image)
+
+        push_notification.assert_called_with(
+            [image.user],
+            None,
+            'your_image_is_tpn',
+            mock.ANY
+        )
+
+    @patch('astrobin.signals.push_notification')
+    def test_top_pick_nominations_archive_post_save_with_collaborators(self, push_notification):
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now() - timedelta(1))
+        collaborator = Generators.user()
+        image.collaborators.add(collaborator)
+
+        TopPickNominationsArchive.objects.create(image=image)
+
+        push_notification.assert_called_with(
+            [image.user, collaborator],
+            None,
+            'your_image_is_tpn',
+            mock.ANY
+        )
+
+    @patch('astrobin.signals.push_notification')
+    def test_top_pick_archive_post_save_without_collaborators(self, push_notification):
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now() - timedelta(1))
+
+        TopPickArchive.objects.create(image=image)
+
+        push_notification.assert_called_with(
+            [image.user],
+            None,
+            'your_image_is_tp',
+            mock.ANY
+        )
+
+    @patch('astrobin.signals.push_notification')
+    def test_top_pick_archive_post_save_with_collaborators(self, push_notification):
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now() - timedelta(1))
+        collaborator = Generators.user()
+        image.collaborators.add(collaborator)
+
+        TopPickArchive.objects.create(image=image)
+
+        push_notification.assert_called_with(
+            [image.user, collaborator],
+            None,
+            'your_image_is_tp',
+            mock.ANY
+        )

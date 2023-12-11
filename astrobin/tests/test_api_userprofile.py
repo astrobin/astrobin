@@ -46,7 +46,7 @@ class APITest(TestCase):
 
         self.assertContains(self._get(), "\"last_login\": \"%s\"" % now.isoformat())
 
-    def test_api_userprofile_date_jooined(self):
+    def test_api_userprofile_date_joined(self):
         self.assertContains(self._get(), "\"date_joined\": \"%s\"" % self.user.date_joined.isoformat())
 
     def test_api_userprofile_image_count(self):

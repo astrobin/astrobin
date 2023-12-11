@@ -3,14 +3,17 @@
 
 from datetime import datetime, timedelta
 
+from annoying.functions import get_object_or_None
 from django.conf import settings
-from django.core.exceptions import ValidationError
+from django.db.models import QuerySet
 from django.http import HttpResponseForbidden
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
 
+from astrobin.models import Image
 from astrobin_apps_iotd.api.serializers.submitter_seen_image_serializer import SubmitterSeenImageSerializer
 from astrobin_apps_iotd.models import IotdSubmitterSeenImage
 
@@ -23,7 +26,7 @@ class SubmitterSeenImageViewSet(viewsets.ModelViewSet):
     model = IotdSubmitterSeenImage
     http_method_names = ['get', 'head', 'options', 'post']
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         max_days = \
             settings.IOTD_SUBMISSION_WINDOW_DAYS + \
             settings.IOTD_REVIEW_WINDOW_DAYS + \
@@ -36,7 +39,15 @@ class SubmitterSeenImageViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         try:
+            image = Image.objects.get(id=request.data.get('image'))
+            user = request.user
+
+            seen_object = get_object_or_None(IotdSubmitterSeenImage, image=image, user=user)
+
+            if seen_object:
+                return Response(self.serializer_class(seen_object).data, status=200)
+
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
-        except ValidationError as e:
-            return HttpResponseForbidden(e.messages)
+        except Exception as e:
+            return HttpResponseForbidden(str(e))
 

@@ -545,14 +545,18 @@ class UserTest(TestCase):
         IotdSubmission.objects.create(submitter=submitter, image=image)
         IotdSubmission.objects.create(submitter=submitter2, image=image)
         IotdVote.objects.create(reviewer=reviewer, image=image)
-        vote = IotdVote.objects.create(reviewer=reviewer2, image=image)
+        IotdVote.objects.create(reviewer=reviewer2, image=image)
         iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS +
+            settings.IOTD_REVIEW_WINDOW_DAYS +
+            settings.IOTD_JUDGEMENT_WINDOW_DAYS
+        ) - timedelta(hours=1)
         image.save()
 
         profile = self.user.userprofile
-        profile.banned_from_competitions = datetime.now()
+        profile.banned_from_competitions = image.submitted_for_iotd_tp_consideration + timedelta(days=1)
         profile.save(keep_deleted=True)
         image = Image.objects_including_wip.get(pk=image.pk)
 
@@ -580,6 +584,13 @@ class UserTest(TestCase):
 
         # Check that the Top pick nomination badge is still visible because the ban is not retroactive.
         IotdVote.objects.all().delete()
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS +
+            settings.IOTD_REVIEW_WINDOW_DAYS
+        ) - timedelta(hours=1)
+        image.save()
+        profile.banned_from_competitions = image.submitted_for_iotd_tp_consideration + timedelta(days=1)
+        profile.save()
         TopPickArchive.objects.all().delete()
         TopPickNominationsArchive.objects.all().delete()
         IotdService().update_top_pick_nomination_archive()

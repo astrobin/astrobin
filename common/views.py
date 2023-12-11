@@ -114,6 +114,10 @@ class UserProfileList(generics.ListAPIView):
         return UserProfile.objects.all()
 
 
+@method_decorator([
+    last_modified(CachingService.get_userprofile_detail_last_modified),
+    cache_control(private=True, no_cache=True),
+], name='dispatch')
 class UserProfileDetail(generics.RetrieveAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)

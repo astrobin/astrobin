@@ -30,6 +30,7 @@ INSTALLED_APPS += [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
 
     'registration',
     'haystack',
@@ -80,6 +81,7 @@ INSTALLED_APPS += [
     'two_factor.plugins.email',
     'two_factor.plugins.phonenumber',
     'cookie_consent',
+    'robots',
 
     'astrobin.apps.AstroBinAppConfig',
 ]

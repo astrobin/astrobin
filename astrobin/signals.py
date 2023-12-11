@@ -46,7 +46,10 @@ from astrobin_apps_forum.services import ForumService
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
+from astrobin_apps_iotd.models import (
+    Iotd, IotdDismissedImage, IotdSubmission, IotdVote, TopPickArchive,
+    TopPickNominationsArchive,
+)
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
@@ -68,18 +71,28 @@ from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import AppRedirectionService, DateTimeService, SearchIndexUpdateService
 from common.services.mentions_service import MentionsService
 from common.services.moderation_service import ModerationService
+from common.utils import batch
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
 from .enums.moderator_decision import ModeratorDecision
 from .models import (
-    Accessory, Camera, CameraRenameProposal, Filter, FocalReducer, Gear, GearMigrationStrategy, Image, ImageRevision,
+    Accessory, Camera, CameraRenameProposal, Filter, FocalReducer, Gear, GearMigrationStrategy, Image,
+    ImageEquipmentLog, ImageRevision,
     Mount,
     Software, Telescope,
     UserProfile,
 )
 from .search_indexes import ImageIndex, UserIndex
-from .stories import add_story
+from .stories import (
+    ACTSTREAM_VERB_BOOKMARKED_IMAGE,
+    ACTSTREAM_VERB_CREATED_PUBLIC_GROUP,
+    ACTSTREAM_VERB_JOINED_GROUP,
+    ACTSTREAM_VERB_LIKED_IMAGE,
+    ACTSTREAM_VERB_UPLOADED_IMAGE,
+    ACTSTREAM_VERB_UPLOADED_REVISION,
+    add_story,
+)
 from .utils import get_client_country_code
 
 log = logging.getLogger(__name__)
@@ -120,7 +133,7 @@ def image_pre_save(sender, instance, **kwargs):
         if image.moderator_decision != ModeratorDecision.APPROVED and instance.moderator_decision == ModeratorDecision.APPROVED:
             # This image is being approved
             if not instance.is_wip:
-                add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
+                add_story(instance.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=instance)
 
         if not instance.is_wip and not instance.published:
             # This image is being published
@@ -173,7 +186,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             if not instance.skip_notifications:
                 push_notification_for_new_image.apply_async(args=(instance.pk,))
             if instance.moderator_decision == ModeratorDecision.APPROVED:
-                add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
+                add_story(instance.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=instance)
 
         if Image.all_objects.filter(user=instance.user).count() == 1:
             push_notification([instance.user], None, 'congratulations_for_your_first_image', {
@@ -241,15 +254,21 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                     MayNotSubmitToIotdTpReason.IS_FREE,
                     MayNotSubmitToIotdTpReason.NO_TELESCOPE_OR_CAMERA,
                     MayNotSubmitToIotdTpReason.NO_ACQUISITIONS,
+                    MayNotSubmitToIotdTpReason.DID_NOT_AGREE_TO_RULES_AND_GUIDELINES,
             ):
-                thumb = instance.thumbnail_raw('gallery', None, sync=True)
-                push_notification(
-                    [instance.user], None, 'image_not_submitted_to_iotd_tp', {
-                        'image': instance,
-                        'image_thumbnail': thumb.url if thumb else None,
-                        'reason': humanize_may_not_submit_to_iotd_tp_process_reason(reason),
-                    }
-                )
+                cache_key = 'image.%d.image_not_submitted_to_iotd_tp' % instance.pk
+                if not cache.get(cache_key):
+                    cache.set(cache_key, True, 4)
+                    thumb = instance.thumbnail_raw('gallery', None, sync=True)
+                    push_notification(
+                        [instance.user], None, 'image_not_submitted_to_iotd_tp', {
+                            'image': instance,
+                            'image_thumbnail': thumb.url if thumb else None,
+                            'reason': humanize_may_not_submit_to_iotd_tp_process_reason(reason),
+                            'raw_reason': reason,
+                        }
+                    )
+
 
 
 post_save.connect(image_post_save, sender=Image)
@@ -346,7 +365,7 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
     if (created and not uploading) or just_completed_upload:
         push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
         add_story(instance.image.user,
-                  verb='VERB_UPLOADED_REVISION',
+                  verb=ACTSTREAM_VERB_UPLOADED_REVISION,
                   action_object=instance,
                   target=instance.image)
 
@@ -529,9 +548,9 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                     return
 
                 if instance.property_type == "like":
-                    verb = 'VERB_LIKED_IMAGE'
+                    verb = ACTSTREAM_VERB_LIKED_IMAGE
                 elif instance.property_type == "bookmark":
-                    verb = 'VERB_BOOKMARKED_IMAGE'
+                    verb = ACTSTREAM_VERB_BOOKMARKED_IMAGE
                 else:
                     return
 
@@ -849,7 +868,7 @@ def group_post_save(sender, instance, created, **kwargs):
 
             add_story(
                 instance.creator,
-                verb='VERB_CREATED_PUBLIC_GROUP',
+                verb=ACTSTREAM_VERB_CREATED_PUBLIC_GROUP,
                 action_object=instance)
 
 
@@ -905,13 +924,14 @@ def group_members_changed(sender, instance, **kwargs):
 
                     add_story(
                         user,
-                        verb='VERB_JOINED_GROUP',
+                        verb=ACTSTREAM_VERB_JOINED_GROUP,
                         action_object=instance)
 
         if instance.autosubmission:
-            images = Image.objects_including_wip.filter(user__pk__in=pk_set)
-            for image in images:
-                instance.images.add(image)
+            for batch_pk_set in batch(pk_set, size=50):
+                images = Image.objects_including_wip.filter(user__pk__in=batch_pk_set)
+                for image in images:
+                    instance.images.add(image)
 
         # Sync IOTD AstroBin groups with django groups
         if instance.name in list(group_sync_map.keys()):
@@ -923,9 +943,10 @@ def group_members_changed(sender, instance, **kwargs):
 
     elif action == 'post_remove':
         users = [profile.user for profile in UserProfile.objects.filter(user__pk__in=pk_set)]
-        images = Image.objects_including_wip.filter(user__pk__in=pk_set)
-        for image in images:
-            instance.images.remove(image)
+        for batch_pk_set in batch(pk_set, size=50):
+            images = Image.objects_including_wip.filter(user__pk__in=batch_pk_set)
+            for image in images:
+                instance.images.remove(image)
 
         if instance.forum and not instance.public:
             topics = Topic.objects.filter(forum=instance.forum)
@@ -1024,13 +1045,30 @@ def new_equipment_changed(sender, instance: Image, **kwargs):
     if action == 'pre_clear':
         item_ids = sender.objects.filter(image=instance).values_list(model_class.__name__.lower(), flat=True)
         items = model_class.objects.filter(pk__in=list(item_ids))
-        # for item in items.iterator():
-        #     update_indexes(item)
+        for item in items.iterator():
+            update_indexes(item)
         items.update(last_added_or_removed_from_image=now)
+    elif action == 'post_remove':
+        for pk in pk_set:
+            item = get_object_or_None(model_class, pk=pk)
+            if item is not None:
+                ImageEquipmentLog.objects.create(
+                    image=instance,
+                    equipment_item=item,
+                    verb=ImageEquipmentLog.REMOVED
+                )
+                update_indexes(item)
+                if not item.last_added_or_removed_from_image or item.last_added_or_removed_from_image < update_deadline:
+                    model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
     elif action == 'post_add':
         for pk in pk_set:
             item = get_object_or_None(model_class, pk=pk)
             if item is not None:
+                ImageEquipmentLog.objects.create(
+                    image=instance,
+                    equipment_item=item,
+                    verb=ImageEquipmentLog.ADDED
+                )
                 update_indexes(item)
                 if not item.last_added_or_removed_from_image or item.last_added_or_removed_from_image < update_deadline:
                     model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
@@ -1436,7 +1474,8 @@ def top_pick_nominations_archive_post_save(sender, instance, created, **kwargs):
         image = instance.image
         thumb = image.thumbnail_raw('gallery', None, sync=True)
 
-        push_notification([image.user], None, 'your_image_is_tpn', {
+        collaborators = [image.user] + list(image.collaborators.all())
+        push_notification(collaborators, None, 'your_image_is_tpn', {
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })
@@ -1462,7 +1501,16 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
             'image_thumbnail': thumb.url if thumb else None
         })
 
-        push_notification([image.user], None, 'your_image_is_tp', {
+        dismissers = [x.user for x in IotdDismissedImage.objects.filter(image=image)]
+        push_notification(
+            dismissers, None, 'image_you_dismissed_is_tp', {
+                'image': image,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
+
+        collaborators = [image.user] + list(image.collaborators.all())
+        push_notification(collaborators, None, 'your_image_is_tp', {
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })
@@ -1579,3 +1627,18 @@ m2m_changed.connect(image_collaborators_changed, sender=Image.collaborators.thro
 def on_user_verified(request, user, device, **kwargs):
     country_code = get_client_country_code(request)
     UserService(user).set_last_seen(country_code)
+
+
+@receiver(pre_save, sender=User)
+def on_password_change(sender, **kwargs):
+    user = kwargs.get('instance', None)
+
+    if user:
+        new_password = user.password
+        try:
+            old_password = User.objects.get(pk=user.pk).password
+        except User.DoesNotExist:
+            old_password = None
+
+        if new_password != old_password:
+            UserProfile.objects.filter(user=user).update(detected_insecure_password=None)

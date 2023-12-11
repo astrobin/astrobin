@@ -12,6 +12,7 @@ import boto3
 from django.core.files.images import get_image_dimensions
 from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
 from django.db.models import FileField
+from django.urls import reverse
 from easy_thumbnails.files import ThumbnailFile
 from image_cropping import ImageRatioField
 
@@ -912,6 +913,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("ALNI", "Alnitak Remote Observatories"),
         ("AC", "AstroCamp"),
         ("AHK", "Astro Hostel Krasnodar"),
+        ("ACRES", "Astronomy Acres"),
         ("AOWA", "Astro Observatories Western Australia"),
         ("ATLA", "Atlaskies Observatory"),
         ("CS", "ChileScope"),
@@ -920,6 +922,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("DSP", "Dark Sky Portal"),
         ("DSV", "Deepsky Villa"),
         ("DSC", "DeepSkyChile"),
+        ("DSPR", "Deep Space Products Remote"),
         ("DSW", "DeepSkyWest"),
         ("eEyE", "e-EyE Extremadura"),
         ("EITS", "Eye In The Sky"),
@@ -1839,6 +1842,30 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             field.name = 'videos/' + field.name
 
 
+class ImageEquipmentLog(models.Model):
+    ADDED = 'ADDED'
+    REMOVED = 'REMOVED'
+
+    VERB_CHOICES = (
+        (ADDED, 'Added'),
+        (REMOVED, 'Removed'),
+    )
+
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    equipment_item_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    equipment_item_object_id = models.PositiveIntegerField()
+    equipment_item = GenericForeignKey('equipment_item_content_type', 'equipment_item_object_id')
+    date = models.DateTimeField(auto_now_add=True)
+    verb = models.CharField(max_length=32, choices=VERB_CHOICES)
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ('-date',)
+        indexes = [
+            models.Index(fields=['equipment_item_content_type', 'equipment_item_object_id', 'image', 'date']),
+            models.Index(fields=['image']),
+        ]
+
 class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
         Image,
@@ -2157,6 +2184,7 @@ class DeepSky_Acquisition(Acquisition):
         (2, _("2 - Typical truly dark site (GRAY)")),
         (3, _("3 - Rural sky (BLUE)")),
         (4, _("4 - Rural/suburban transition (GREEN/YELLOW)")),
+        (4.5, _("4.5 - Semi-Suburban/Transition sky (YELLOW)")),
         (5, _("5 - Suburban sky (ORANGE)")),
         (6, _("6 - Bright suburban sky (RED)")),
         (7, _("7 - Suburban/urban transition or Full Moon (RED)")),
@@ -2272,10 +2300,12 @@ class DeepSky_Acquisition(Acquisition):
         help_text=_("The number of bias/offset frames."),
     )
 
-    bortle = models.PositiveIntegerField(
+    bortle = models.DecimalField(
         verbose_name=_("Bortle Dark-Sky Scale"),
         null=True,
         blank=True,
+        max_digits=2,
+        decimal_places=1,
         choices=BORTLE_CHOICES,
         help_text=_(
             "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
@@ -2698,6 +2728,21 @@ class UserProfile(SafeDeleteModel):
         ),
     )
 
+    agreed_to_iotd_tp_rules_and_guidelines = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_("I agree to the IOTD/TP rules and guidelines"),
+        help_text=_(
+            "Check this box to confirm that you have read and agree to the IOTD/TP %(_0)srules%(_1)s and "
+            "%(_2)sguidelines%(_3)s. Your images won't be submitted for IOTD/TP consideration if you don't agree." % {
+                '_0': '<a href="https://welcome.astrobin.com/iotd#rules" target="_blank">',
+                '_1': '</a>',
+                '_2': '<a href="https://welcome.astrobin.com/iotd#photographer-guidelines" target="_blank">',
+                '_3': '</a>'
+            }
+        )
+    )
+
     banned_from_competitions = models.DateTimeField(
         null=True,
         blank=True,
@@ -2871,6 +2916,10 @@ class UserProfile(SafeDeleteModel):
         null=True
     )
 
+    detected_insecure_password = models.DateTimeField(
+        null=True
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
@@ -2976,14 +3025,16 @@ class UserProfile(SafeDeleteModel):
         null=True,
     )
 
-    def get_display_name(self):
+    def get_display_name(self) -> str:
         return self.real_name if self.real_name else str(self.user)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.get_display_name()
 
-    def get_absolute_url(self):
-        return '/users/%s' % self.user.username
+    def get_absolute_url(self) -> str:
+        return reverse(
+            'user_page', kwargs={'username': self.user.username}
+        )
 
     def remove_gear(self, gear, gear_type):
         resolve = {
@@ -3024,22 +3075,22 @@ class UserProfile(SafeDeleteModel):
 
         return scores
 
-    def is_moderator(self):
+    def is_moderator(self) -> bool:
         return UserService(self.user).is_in_group('content_moderators')
 
-    def is_image_moderator(self):
+    def is_image_moderator(self) -> bool:
         return UserService(self.user).is_in_group('image_moderators')
 
-    def is_iotd_staff(self):
+    def is_iotd_staff(self) -> bool:
         return UserService(self.user).is_in_group(GroupName.IOTD_STAFF)
 
-    def is_iotd_submitter(self):
+    def is_iotd_submitter(self) -> bool:
         return UserService(self.user).is_in_group(GroupName.IOTD_SUBMITTERS)
 
-    def is_iotd_reviewer(self):
+    def is_iotd_reviewer(self) -> bool:
         return UserService(self.user).is_in_group(GroupName.IOTD_REVIEWERS)
 
-    def is_iotd_judge(self):
+    def is_iotd_judge(self) -> bool:
         return UserService(self.user).is_in_group(GroupName.IOTD_JUDGES)
 
     class Meta:

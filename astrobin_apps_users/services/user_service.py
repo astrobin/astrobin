@@ -7,9 +7,9 @@ import numpy as np
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
-from django.core.cache import cache
+from django.core.cache import cache, caches
 from django.core.cache.utils import make_template_fragment_key
-from django.db.models import Q, QuerySet
+from django.db.models import OuterRef, Q, QuerySet, Subquery
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from haystack.query import SearchQuerySet
@@ -64,26 +64,68 @@ class UserService:
         except Group.DoesNotExist:
             return []
 
-    def get_all_images(self) -> QuerySet:
+    def get_all_images(self, use_union=False) -> QuerySet:
         from astrobin.models import Image
 
-        if Image.collaborators.through.objects.filter(user=self.user).exists():
+        local_cache = caches['local_request_cache']
+        cache_key = f"collaborators_check_{self.user.id}"
+
+        has_collaborators = local_cache.get(cache_key)
+
+        if has_collaborators is None:
+            has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
+            local_cache.set(cache_key, has_collaborators, timeout=30)
+
+        if has_collaborators:
+            if use_union:
+                base_query = Image.objects_including_wip.all()
+                query1 = base_query.filter(user=self.user).order_by()
+                query2 = base_query.filter(collaborators=self.user).order_by()
+                return query1.union(query2).order_by('-published')
             return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects_including_wip.filter(user=self.user)
 
-    def get_public_images(self) -> QuerySet:
+    def get_public_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
 
-        if Image.collaborators.through.objects.filter(user=self.user).exists():
+        local_cache = caches['local_request_cache']
+        cache_key = f"collaborators_check_{self.user.id}"
+
+        has_collaborators = local_cache.get(cache_key)
+
+        if has_collaborators is None:
+            has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
+            local_cache.set(cache_key, has_collaborators, timeout=30)
+
+        if has_collaborators:
+            if use_union:
+                base_query = Image.objects.all()
+                query1 = base_query.filter(user=self.user).order_by()
+                query2 = base_query.filter(collaborators=self.user).order_by()
+                return query1.union(query2).order_by('-published')
             return Image.objects.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.objects.filter(user=self.user)
 
-    def get_wip_images(self) -> QuerySet:
+    def get_wip_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
 
-        if Image.collaborators.through.objects.filter(user=self.user).exists():
+        local_cache = caches['local_request_cache']
+        cache_key = f"collaborators_check_{self.user.id}"
+
+        has_collaborators = local_cache.get(cache_key)
+
+        if has_collaborators is None:
+            has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
+            local_cache.set(cache_key, has_collaborators, timeout=30)
+
+        if has_collaborators:
+            if use_union:
+                base_query = Image.wip.all()
+                query1 = base_query.filter(user=self.user).order_by()
+                query2 = base_query.filter(collaborators=self.user).order_by()
+                return query1.union(query2).order_by('-published')
             return Image.wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
         return Image.wip.filter(user=self.user)
@@ -95,22 +137,32 @@ class UserService:
     def get_bookmarked_images(self) -> QuerySet:
         from astrobin.models import Image
 
-        image_ct = ContentType.objects.get_for_model(Image)  # type: ContentType
-        bookmarked_pks: List[int] = [x.object_id for x in \
-                          ToggleProperty.objects.toggleproperties_for_user("bookmark", self.user).filter(
-                              content_type=image_ct)
-                          ]
+        image_ct: ContentType = ContentType.objects.get_for_model(Image)
+
+        bookmarked_pks: List[int] = [
+            x.object_id
+            for x in ToggleProperty.objects.toggleproperties_for_user(
+                "bookmark", self.user
+            ).filter(
+                content_type=image_ct
+            )
+        ]
 
         return Image.objects.filter(pk__in=bookmarked_pks)
 
     def get_liked_images(self) -> QuerySet:
         from astrobin.models import Image
 
-        image_ct = ContentType.objects.get_for_model(Image)  # type: ContentType
-        liked_pks = [
-            x.object_id for x in \
-            ToggleProperty.objects.toggleproperties_for_user("like", self.user).filter(content_type=image_ct)
-        ]  # type: List[int]
+        image_ct: ContentType = ContentType.objects.get_for_model(Image)
+
+        liked_pks: List[int] = [
+            x.object_id
+            for x in ToggleProperty.objects.toggleproperties_for_user(
+                "like", self.user
+            ).filter(
+                content_type=image_ct
+            )
+        ]
 
         return Image.objects.filter(pk__in=liked_pks)
 
@@ -127,7 +179,7 @@ class UserService:
     def get_profile_stats(self, request_language: str):
         if not self.user:
             return {}
-        
+
         user = self.user
         key = f'User.{self.user.pk}.Stats.{request_language}'
         data = cache.get(key)
@@ -137,7 +189,7 @@ class UserService:
 
             if user_sqs.count() > 0:
                 result = user_sqs[0]
-                
+
                 try:
                     data['stats'] = (
                         (_('Member since'), user.date_joined \
@@ -301,17 +353,19 @@ class UserService:
         # ACQUIRED #
         ############
         elif subsection == 'acquired':
-            last_acquisition_date_sql = 'SELECT date FROM astrobin_acquisition ' \
-                                        'WHERE date IS NOT NULL AND image_id = astrobin_image.id ' \
-                                        'ORDER BY date DESC ' \
-                                        'LIMIT 1'
-            queryset = queryset \
-                .filter(acquisition__isnull=False) \
-                .extra(
-                select={'last_acquisition_date': last_acquisition_date_sql},
-                order_by=['-last_acquisition_date', '-published']
-            ) \
-                .distinct()
+            latest_acquisition_date_subquery = Acquisition.objects.filter(
+                image_id=OuterRef('pk'),
+                date__isnull=False
+            ).order_by('-date').values('date')[:1]
+
+            # Apply the subquery to the queryset
+            queryset = queryset.filter(
+                acquisition__isnull=False
+            ).annotate(
+                last_acquisition_date=Subquery(latest_acquisition_date_subquery)
+            ).order_by(
+                '-last_acquisition_date', '-published'
+            ).distinct()
 
         ########
         # YEAR #
@@ -618,3 +672,25 @@ class UserService:
             profile.save(keep_deleted=True)
         except UserProfile.DoesNotExist:
             pass
+
+    def has_used_commercial_remote_hosting_facilities(self):
+        from astrobin.models import Image
+
+        cache_key = f'UserService.has_used_commercial_remote_hosting_facilities.{self.user.pk}'
+
+        cached = cache.get(cache_key)
+
+        if cached is not None:
+            return cached
+
+        value = Image.objects_including_wip.filter(
+            Q(user=self.user) & Q(remote_source__isnull=False) & ~Q(remote_source='OWN')
+        ).exists()
+        cache.set(cache_key, value, 60 * 60 * 24)
+
+        return value
+
+    def agreed_to_iotd_tp_rules_and_guidelines(self) -> bool:
+        agreed = self.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines
+        return agreed and agreed > settings.IOTD_LAST_RULES_UPDATE
+

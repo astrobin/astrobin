@@ -27,6 +27,15 @@
     <strong>{% trans "Reason" %}</strong>: {{ reason }}
 </p>
 
+{% if raw_reason == 'DID_NOT_AGREE_TO_RULES_AND_GUIDELINES' %}
+    {% blocktrans trimmed with '<a href=""https://www.astrobin.com/profile/edit/preferences/">' as _0 and '</a>' as _1 %}
+        You can find your preferences on the following page: {{ _0 }}Your preferences{{ _1 }}. Please look for the
+        checkbox labelled "I agree to the IOTD/TP rules and guidelines". To submit your image for IOTD/TP consideration
+        again, navigate to your image's page, find the "Actions" menu in the orange bar at the top, and click on
+        "Submit for IOTD/TP consideration".
+    {% endblocktrans %}
+{% endif %}
+
 <br/><br/>
 
 <p>

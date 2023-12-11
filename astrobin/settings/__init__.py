@@ -43,6 +43,7 @@ include(
     'components/tinymce.py',
     'components/thumbnail.py',
     'components/toggleproperties.py',
+    'components/robots.py',
 
     # AstroBin settings
     'components/flickr.py',

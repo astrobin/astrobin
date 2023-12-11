@@ -1,8 +1,11 @@
 import datetime
+import re
 import unicodedata
 from typing import List, Optional, Union
 
 import bleach
+import six
+from bs4 import BeautifulSoup
 from dateutil import parser
 from django import template
 from django.conf import settings
@@ -11,10 +14,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
+from django.utils.functional import keep_lazy
 from django.utils.safestring import mark_safe
+from lxml import etree, html
 
 from astrobin.enums import ImageEditorStep
 from astrobin.models import Image
+from astrobin_apps_json_api.models import CkEditorFile
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService, DateTimeService
 from common.services.highlighting_service import HighlightingService
@@ -250,12 +256,28 @@ def timestamp(dt):
 
 
 @register.filter
-def strip_html(value):
+def strip_html(value: str, allowed_tags=settings.SANITIZER_ALLOWED_TAGS) -> str:
     if isinstance(value, str):
-        value = bleach.clean(
-            value, tags=settings.SANITIZER_ALLOWED_TAGS,
+        try:
+            # Attempt to parse as HTML fragment
+            document = html.fragment_fromstring(value, create_parent=False)
+            document = html.tostring(document, encoding='unicode', with_tail=True)
+        except etree.ParserError:
+            # If parsing fails, treat as plain text
+            document = value
+
+        # Sanitize with bleach
+        cleaned_html = bleach.clean(
+            document,
+            tags=allowed_tags,
             attributes=settings.SANITIZER_ALLOWED_ATTRIBUTES,
-            styles=[], strip=True)
+            styles=[],
+            strip=True
+        )
+
+        # Mark the sanitized HTML as safe for rendering
+        return mark_safe(cleaned_html)
+
     return value
 
 @register.filter
@@ -267,13 +289,17 @@ def ensure_url_protocol(url: str) -> str:
 
 
 class HighlightTextNode(template.Node):
-    def __init__(self, text, terms, html_tag=None, css_class=None, max_length=None, dialect=None):
+    def __init__(
+        self, text, terms, as_var=None, html_tag=None, css_class=None, max_length=None, dialect=None, allow_lists='True'
+    ):
         self.text = template.Variable(text)
         self.terms = template.Variable(terms)
+        self.as_var = as_var
         self.html_tag = html_tag
         self.css_class = css_class
         self.max_length = max_length
         self.dialect = dialect
+        self.allow_lists = allow_lists
 
         if html_tag is not None:
             self.html_tag = template.Variable(html_tag)
@@ -287,7 +313,10 @@ class HighlightTextNode(template.Node):
         if dialect is not None:
             self.dialect = template.Variable(dialect)
 
-    def render(self, context):
+        if allow_lists is not None:
+            self.allow_lists = template.Variable(allow_lists)
+
+    def render(self, context) -> str:
         text = self.text.resolve(context)
         terms = str(self.terms.resolve(context))
         kwargs = {}
@@ -304,8 +333,16 @@ class HighlightTextNode(template.Node):
         if self.dialect is not None:
             kwargs['dialect'] = self.dialect.resolve(context)
 
-        return HighlightingService(text, terms, **kwargs).render_html()
+        if self.allow_lists is not None:
+            kwargs['allow_lists'] = self.allow_lists.resolve(context)
 
+        rendered_html = HighlightingService(text, terms, **kwargs).render_html()
+
+        if self.as_var:
+            context[self.as_var] = rendered_html
+            return ''
+        else:
+            return rendered_html
 
 @register.tag
 def highlight_text(parser, token):
@@ -317,8 +354,6 @@ def highlight_text(parser, token):
             "'%s' tag requires valid pairings arguments." % tag_name
         )
 
-    text = bits[1]
-
     if len(bits) < 4:
         raise template.TemplateSyntaxError(
             "'%s' tag requires an object and a query provided by 'with'." % tag_name
@@ -329,6 +364,12 @@ def highlight_text(parser, token):
             "'%s' tag's second argument should be 'with'." % tag_name
         )
 
+    as_var = None
+    if len(bits) > 2 and bits[-2] == 'as':
+        as_var = bits[-1]
+        bits = bits[:-2]
+
+    text = bits[1]
     query = bits[3]
 
     arg_bits = iter(bits[4:])
@@ -347,7 +388,11 @@ def highlight_text(parser, token):
         if bit == 'dialect':
             kwargs['dialect'] = next(arg_bits)
 
-    return HighlightTextNode(text, query, **kwargs)
+        if bit == 'allow_lists':
+            kwargs['allow_lists'] = next(arg_bits)
+
+    return HighlightTextNode(text, query, as_var, **kwargs)
+
 
 @register.simple_tag
 def get_verbose_field_name(instance, field_name):
@@ -418,3 +463,58 @@ def get_mime_type(filename: str) -> Optional[str]:
         return 'video/x-m4v'
 
     return None
+
+
+@register.filter
+def html_image_thumbnails(html_text: str, gallery_rel: str) -> str:
+    def create_fancybox_html(ckeditor_file) -> str:
+        return f'<a href="{ckeditor_file.upload.url}" data-fancybox="{gallery_rel}" class="fancybox">' \
+               f'<img src="{ckeditor_file.thumbnail.url}" alt="{ckeditor_file.filename}" />' \
+               f'</a>'
+
+    soup = BeautifulSoup(html_text, 'html.parser')
+
+    for img in soup.find_all('img'):
+        if img.parent.name != 'a':
+            src = img.get('src')
+            if src:
+                try:
+                    ckeditor_file = CkEditorFile.objects.get(upload=src.replace(settings.MEDIA_URL, ''))
+                    if ckeditor_file.thumbnail:
+                        fancybox_html = create_fancybox_html(ckeditor_file)
+                        img.replace_with(BeautifulSoup(fancybox_html, 'html.parser'))
+                except CkEditorFile.DoesNotExist:
+                    continue
+
+    return str(soup)
+
+
+@register.tag
+def removelinebreaks(parser, token):
+    nodelist = parser.parse(('endremovelinebreaks',))
+    parser.delete_first_token()
+    return RemoveLinebreakNode(nodelist)
+
+
+class RemoveLinebreakNode(Node):
+    def __init__(self, nodelist):
+        self.nodelist = nodelist
+
+    def render(self, context):
+        strip_line_breaks = keep_lazy(six.text_type)(lambda x: x.replace('\n', ' '))
+        return strip_line_breaks(self.nodelist.render(context).strip())
+
+@register.tag
+def removemultiplespaces(parser, token):
+    nodelist = parser.parse(('endremovemultiplespaces',))
+    parser.delete_first_token()
+    return RemoveMultipleSpacesNode(nodelist)
+
+
+class RemoveMultipleSpacesNode(Node):
+    def __init__(self, nodelist):
+        self.nodelist = nodelist
+
+    def render(self, context):
+        strip_multiple_spaces = keep_lazy(six.text_type)(lambda x: re.sub(r'\s+', ' ', x))
+        return strip_multiple_spaces(self.nodelist.render(context).strip())

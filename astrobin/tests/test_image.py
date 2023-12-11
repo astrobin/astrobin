@@ -3,11 +3,14 @@
 import re
 import sys
 import time
+from datetime import datetime, timedelta
 
 import mock
 from bs4 import BeautifulSoup
+from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from mock import patch
@@ -24,11 +27,13 @@ from astrobin.models import (
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_json_api.models import CkEditorFile
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
 from astrobin_apps_premium.services.premium_service import SubscriptionName
 from common.constants import GroupName
+from common.services import DateTimeService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -2444,6 +2449,7 @@ class ImageTest(TestCase):
         self.assertContains(response, "<div class=\"subtle-container technical-card-equipment\">")
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=mock.PropertyMock)
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_image_designated_iotd_submitters(self, is_authenticated):
         group = Group.objects.create(name='iotd_submitters')
         is_authenticated.return_value = True
@@ -2460,6 +2466,8 @@ class ImageTest(TestCase):
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image=image)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines = DateTimeService.now()
+        image.user.userprofile.save()
 
         ImageService(image).promote_to_public_area(skip_notifications=True)
         image.save()
@@ -2467,6 +2475,7 @@ class ImageTest(TestCase):
         self.assertEqual(5, image.designated_iotd_submitters.count())
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=mock.PropertyMock)
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_image_designated_iotd_reviewers(self, is_authenticated):
         group = Group.objects.create(name=GroupName.IOTD_REVIEWERS)
         is_authenticated.return_value = True
@@ -2483,6 +2492,8 @@ class ImageTest(TestCase):
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines = DateTimeService.now()
+        image.user.userprofile.save()
 
         ImageService(image).promote_to_public_area(skip_notifications=True)
         image.save()
@@ -2655,7 +2666,60 @@ class ImageTest(TestCase):
             description_bbcode="Test BBCode description\nOK"
         )
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "Test BBCode description<br>OK")
+        self.assertContains(response, "Test BBCode description<br/>OK")
+
+    def test_image_description_bbcode_with_image_gets_fancybox(self):
+        image = SimpleUploadedFile('test_image.jpg', b'\x00\x01\x02\x03\x04', content_type='image/jpeg')
+        thumbnail = SimpleUploadedFile('test_thumb.jpg', b'\x00\x01\x02\x03\x04', content_type='image/jpeg')
+
+        file: CkEditorFile = CkEditorFile.objects.create(
+            user=Generators.user(),
+            upload=image,
+            filename='test_image.jpg',
+            filesize=1024,
+            thumbnail=thumbnail
+        )
+
+        image = Generators.image(
+            description_bbcode=f'[img]{settings.MEDIA_URL}{file.upload}[/img]'
+        )
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+
+        self.assertContains(
+            response,
+            f"""
+            <a href="{settings.MEDIA_URL}{file.upload}" data-fancybox="image-description-gallery" class="fancybox"><img src="{settings.MEDIA_URL}{file.thumbnail}" alt="{file.filename}" /></a>
+            """,
+            html=True
+        )
+
+    def test_image_description_bbcode_with_image_does_not_get_fancybox_if_in_a_link(self):
+        image = SimpleUploadedFile('test_image.jpg', b'\x00\x01\x02\x03\x04', content_type='image/jpeg')
+        thumbnail = SimpleUploadedFile('test_thumb.jpg', b'\x00\x01\x02\x03\x04', content_type='image/jpeg')
+        url = 'https://www.test.com'
+        file: CkEditorFile = CkEditorFile.objects.create(
+            user=Generators.user(),
+            upload=image,
+            filename='test_image.jpg',
+            filesize=1024,
+            thumbnail=thumbnail
+        )
+
+        image = Generators.image(
+            description_bbcode=f'[url={url}][img]{settings.MEDIA_URL}{file.upload}[/img][/url]'
+        )
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+
+        self.assertNotContains(response, 'data-fancybox="image-description-gallery"')
+        self.assertContains(
+            response,
+            f"""
+            <a href="{url}"><img alt="" src="{settings.MEDIA_URL}{file.upload}"/></a>
+            """,
+            html=True
+        )
 
     def test_navigation_context_after_revision_redirect(self):
         image = Generators.image()

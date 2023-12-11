@@ -29,13 +29,18 @@ class UserFancyboxListViewSet(viewsets.ModelViewSet):
         user_service = UserService(user)
         include_wip = user_service.display_wip_images_on_public_gallery() and self.request.user == user
 
+        subsection = self.request.GET.get('subsection') or 'uploaded'
+        active = self.request.GET.get('active')
+        klass = self.request.GET.get('klass')
+        use_union = subsection in ['uploaded', 'title']  # Only for subsections that don't require additional filtering.
+
         if include_wip:
-            images = user_service.get_all_images()
+            images = user_service.get_all_images(use_union)
         else:
-            images = user_service.get_public_images()
+            images = user_service.get_public_images(use_union)
 
         if 'staging' in self.request.GET and self.request.GET.get('staging') == '1':
-            images = user_service.get_wip_images()
+            images = user_service.get_wip_images(use_union)
 
         if 'collection' in self.request.GET and self.request.GET.get('collection') != '':
             collection: Collection = Collection.objects.get(pk=self.request.GET.get('collection'))
@@ -50,8 +55,8 @@ class UserFancyboxListViewSet(viewsets.ModelViewSet):
 
         return user_service.sort_gallery_by(
             images,
-            self.request.GET.get('subsection') or 'uploaded',
-            self.request.GET.get('active'),
-            self.request.GET.get('klass')
+            subsection,
+            active,
+            klass
         )[0]
 

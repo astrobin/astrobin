@@ -11,6 +11,7 @@
 @import "cookie_consent";
 @import "definition-lists";
 @import "fancybox";
+@import "flexboxgrid";
 @import "forms";
 @import "highlightjs";
 @import "meter";
@@ -1187,6 +1188,16 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
   li {
     list-style: initial;
+  }
+
+  .fancybox {
+    display: block;
+    margin: 0 auto;
+
+    img {
+      border-radius: .5rem;
+      box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+    }
   }
 }
 
@@ -4630,4 +4641,20 @@ form.edit-thumbnails {
 
 .no-wrap {
   white-space: nowrap;
+}
+
+#image-iotd-stats-modal {
+  table {
+    table-layout: auto;
+
+    td {
+      font-weight: bold;
+    }
+
+    th, td {
+      padding: 1rem 2rem;
+      vertical-align: middle;
+      border: 1px solid $grey-5;
+    }
+  }
 }

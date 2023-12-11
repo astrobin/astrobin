@@ -9,6 +9,7 @@ from astrobin_apps_platesolving.solver import Solver
 
 logger = logging.getLogger(__name__)
 
+
 @shared_task(time_limit=120)
 def reset_solution_status_after_timeout():
     affected_rows = Solution.objects\

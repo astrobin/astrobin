@@ -83,7 +83,17 @@
     </div>
 
     <div class="topic">
-        <h1>{{ topic.name }}</h1>
+        <h1>
+            {{ topic.name }}
+            <small>
+                <i class="icon-comments-alt"></i> {% pybb_link topic.forum %} &middot;
+                <i class="icon-user"></i> <a href="{% url 'user_page' topic.user.username %}">{{ topic.user.userprofile }}</a> &middot;
+                <i class="icon-calendar-empty"></i> <span class="topic-info">{% timestamp topic.created %}</span> &middot;
+                <i class="icon-comment"></i> <span class="topic-info">{{ topic.post_count|add:"-1" }}</span> &middot;
+                <i class="icon-eye-open"></i> <span class="topic-info">{{ topic|pybbm_calc_topic_views }}</span> &middot;
+                <i class="icon-camera"></i> <span class="topic-info">{{ topic.images }}</span>
+            </small>
+        </h1>
 
         {% if topic.poll_type %}
             {% include 'pybb/poll.html' %}

@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db import models, IntegrityError
+from django.db.models import Count
 from django.dispatch import receiver
 from django.utils.translation import gettext
 
@@ -41,27 +42,40 @@ class TogglePropertyManager(models.Manager):
         return qs
 
     def toggleproperties_for_objects(self, property_type, object_list, user=None):
-        object_ids = [o.pk for o in object_list]
+        object_ids = [str(o.pk) for o in object_list]
         if not object_ids:
             return {}
 
         content_type = ContentType.objects.get_for_model(object_list[0])
 
-        qs = self.get_queryset().filter(content_type=content_type,
-                                        property_type=property_type,
-                                        object_id__in=object_ids)
-        counters = qs.values('object_id').annotate(count=models.Count('object_id'))
-        results = {}
-        for c in counters:
-            results.setdefault(c['object_id'], {})['count'] = c['count']
-            results.setdefault(c['object_id'], {})['is_toggled'] = False
-            results.setdefault(c['object_id'], {})['content_type_id'] = content_type.id
-        if user and user.is_authenticated:
-            qs = qs.filter(user=user)
-            for f in qs:
-                results.setdefault(f.object_id, {})['is_toggled'] = True
+        # Aggregate counts directly for each object ID
+        counters = self.get_queryset().filter(
+            content_type=content_type,
+            property_type=property_type,
+            object_id__in=object_ids
+        ).values('object_id').annotate(
+            count=Count('id')
+        ).order_by()
 
-        return results
+        # Check user toggles separately
+        user_toggled = set()
+        if user and user.is_authenticated:
+            user_toggled = set(
+                self.get_queryset().filter(
+                    user=user,
+                    content_type=content_type,
+                    property_type=property_type,
+                    object_id__in=object_ids
+                ).values_list('object_id', flat=True)
+            )
+
+        # Combine counts and user toggle status
+        return {
+            item['object_id']: {
+                'count': item['count'],
+                'is_toggled': item['object_id'] in user_toggled
+            } for item in counters
+        }
 
     def toggleproperty_for_user(self, property_type, obj, user):
         content_type = ContentType.objects.get_for_model(type(obj))

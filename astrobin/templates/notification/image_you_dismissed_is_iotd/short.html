@@ -1,0 +1,5 @@
+{% load i18n %}
+
+<a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
+    {% blocktrans %}An image you dismissed made it to IOTD{% endblocktrans %}: {{ image.title }}
+</a>

@@ -1,3 +1,4 @@
+import hashlib
 import os
 import re
 
@@ -5,15 +6,21 @@ import simplejson
 from avatar.utils import get_primary_avatar, get_default_avatar_url
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.postgres.search import TrigramDistance
+from django.core.cache import cache
+from django.db.models import Q, QuerySet, Value
+from django.db.models.functions import Concat, Lower
 from django.http import HttpResponse
 from django.views.decorators.http import require_GET
+from pybb.models import Post
 from rest_framework.authtoken.models import Token
 
+from astrobin.models import Image
+from astrobin.models import UserProfile
 from astrobin_apps_images.services import ImageService
-from .models import Image
-from .models import UserProfile
-from .services.utils_service import UtilsService
+from nested_comments.models import NestedComment
 
 
 @login_required
@@ -54,62 +61,102 @@ def autocomplete_usernames(request):
             return HttpResponse(simplejson.dumps([]))
 
     q = request.GET['q']
+    limit = 10
     referer_header = request.META.get('HTTP_REFERER', '')
     from_forums = '/forum' in referer_header
-    from_comments = re.match(r'%s\/?([a-zA-Z0-9]{6})\/.*' % settings.BASE_URL, referer_header)
-    users = []
+    from_image_page = re.match(r'%s\/?([a-zA-Z0-9]{6})\/.*' % settings.BASE_URL, referer_header)
+    context_aware_users = UserProfile.objects.none()
+    all_users = UserProfile.objects.none()
+    ids = []
     results = []
-    limit = 10
 
     # Replace non-breaking space with regular space
     q = q.replace(chr(160), ' ')
 
-    if from_forums:
-        referer = request.META.get('HTTP_REFERER')
+    if len(q) > 15:
+        q = q[:15]
 
-        if '?' in referer:
-            slug = os.path.basename(os.path.normpath(referer.rsplit('/', 1)[0]))
+    def filter_by_distance(queryset: QuerySet, q: str) -> QuerySet:
+        if 'postgresql' in settings.DATABASES['default']['ENGINE']:
+            return queryset.annotate(
+                name=Lower(Concat('real_name', Value(' '), 'user__username'))
+            ).annotate(
+                distance=TrigramDistance('name', q.lower())
+            ).filter(
+                Q(distance__lte=0.7) | Q(user__username__icontains=q) | Q(real_name__icontains=q)
+            ).order_by('distance')
         else:
-            slug = os.path.basename(os.path.normpath(referer))
-
-        users = list(UserProfile.objects.filter(
-            Q(user__posts__topic__slug=slug) & (Q(user__username__icontains=q) | Q(real_name__icontains=q))
-        ).distinct()[:limit])
-    elif from_comments:
-        image_id = from_comments.group(1)
-        image = ImageService.get_object(image_id, Image.objects_including_wip.all())
-        users = list(UserProfile.objects.filter(
-            Q(
-                Q(user__image=image) |
-                Q(
-                    Q(user__comments__object_id=image.id) & Q(user__comments__deleted=False)
-                )
-            ) &
-            Q(
-                Q(user__username__icontains=q) | Q(real_name__icontains=q)
+            return queryset.annotate(
+                name=Lower(Concat('real_name', Value(' '), 'user__username'))
+            ).filter(
+                name__icontains=q
             )
-        ).distinct()[:limit])
 
-    users = UtilsService.unique(users + list(UserProfile.objects.filter(
-        Q(user__username__icontains=q) | Q(real_name__icontains=q)
-    ).distinct()[:limit]))[:limit]
+    query_hash = hashlib.md5(q.encode('utf-8')).hexdigest()
+    cache_key = f'astrobin_autocomplete_usernames_{query_hash}_{from_forums}_{from_image_page}'
+    cache_value = cache.get(cache_key)
 
-    for user in users:
-        avatar = get_primary_avatar(user, 40)
+    if cache_value is not None:
+        return HttpResponse(cache_value)
+
+    if from_forums:
+        if '?' in referer_header:
+            slug = os.path.basename(os.path.normpath(referer_header.rsplit('/', 1)[0]))
+        else:
+            slug = os.path.basename(os.path.normpath(referer_header))
+        posters = Post.objects.filter(topic__slug=slug).only('poster').values_list('user', flat=True).distinct()
+        ids = list(posters)
+        context_aware_users = filter_by_distance(UserProfile.objects.filter(user__id__in=ids), q)[:limit]
+        results += list(context_aware_users)
+    elif from_image_page:
+        image_id = from_image_page.group(1)
+        image = ImageService.get_object(image_id, Image.objects_including_wip.all())
+        image_ct = ContentType.objects.get_for_model(image)
+        image_owner = [image.user.id]
+        collaborators = [x.id for x in image.collaborators.all()]
+        commenters = list(
+            NestedComment.objects.filter(
+                object_id=image.id, content_type_id=image_ct.id
+            ).only(
+                'author'
+            ).values_list(
+                'author__id', flat=True
+            ).distinct()
+        )
+        ids = image_owner + collaborators + commenters
+        context_aware_users = filter_by_distance(UserProfile.objects.filter(user__id__in=ids), q)[:limit]
+        results += list(context_aware_users)
+
+    if len(results) < limit:
+        all_users = filter_by_distance(UserProfile.objects.exclude(user__id__in=ids), q)[:limit - len(results)]
+
+    context_aware_users = context_aware_users.values_list('user__id', 'user__username', 'real_name')
+    all_users = all_users.values_list('user__id', 'user__username', 'real_name')
+
+    ret = []
+    for user in list(context_aware_users) + list(all_users):
+        user_id = user[0]
+        username = user[1]
+        real_name = user[2]
+
+        avatar = get_primary_avatar(User.objects.get(id=user_id), 40)
         if avatar is None:
             avatar_url = get_default_avatar_url()
         else:
             avatar_url = avatar.get_absolute_url()
 
-        results.append({
-            'id': str(user.id),
-            'username': user.user.username,
-            'realName': user.user.userprofile.real_name,
-            'displayName': user.user.userprofile.real_name if user.user.userprofile.real_name else user.user.username,
+        ret.append({
+            'id': str(user_id),
+            'username': username,
+            'realName': real_name,
+            'displayName': real_name if real_name else username,
             'avatar': avatar_url,
         })
 
-    return HttpResponse(simplejson.dumps(results))
+    cache_value = simplejson.dumps(ret)
+    cache.set(cache_key, cache_value, 600)
+
+    return HttpResponse(cache_value)
 
 
 @require_GET

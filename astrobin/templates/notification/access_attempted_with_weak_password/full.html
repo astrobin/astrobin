@@ -9,13 +9,9 @@
 
 <p>
     {% blocktrans trimmed %}
-        For your security, an additional confirmation token was sent in a separate email.
-    {% endblocktrans %}
-</p>
-
-<p>
-    {% blocktrans trimmed %}
-        If this was a legitimate login attempt, please use the token to complete the process.
+        To prevent spam, phishing, and other malicious activities, all your new content posted on AstroBin will be
+        moderated until you have changed your password to meet security requirements, or you have enabled
+        two-factor authentication.
     {% endblocktrans %}
 </p>
 
@@ -23,19 +19,6 @@
     {% blocktrans trimmed %}
         If you did not make this login attempt, please change your password and/or contact AstroBin immediately.
     {% endblocktrans %}
-</p>
-
-<p>
-    {% blocktrans trimmed %}
-        For your security, following this event, AstroBin has automatically enabled email-based two-factor
-        authentication on your account. You can disable in your settings or using the link below.
-    {% endblocktrans %}
-</p>
-
-<p>
-    <a class="btn btn-primary" href="{{ base_url }}{% url 'two_factor:profile' %}">
-        {% trans "Two-factor Authentication" %}
-    </a>
 </p>
 
 <p>
@@ -51,8 +34,13 @@
 </p>
 
 <p>
-    {% blocktrans trimmed %}Change your password:{% endblocktrans %}<br/>
-    {{ base_url }}{% url 'password_change' %}
+    <a class="btn btn-primary" href="{{ base_url }}{% url 'password_change' %}">
+        {% blocktrans trimmed %}Change your password{% endblocktrans %}<br/>
+    </a>
+
+    <a class="btn btn-secondary" href="{{ base_url }}{% url 'two_factor:profile' %}">
+        {% trans "Two-factor Authentication" %}
+    </a>
 </p>
 
 <p>
@@ -64,3 +52,4 @@
 <p>
     AstroBin
 </p>
+

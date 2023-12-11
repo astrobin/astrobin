@@ -3,6 +3,7 @@ from django.test import TestCase
 from mock import patch
 from notification.models import NoticeType, NoticeSetting
 
+from astrobin.stories import ACTSTREAM_VERB_COMMENTED_IMAGE
 from astrobin.tests.generators import Generators
 from nested_comments.services import CommentNotificationsService
 from nested_comments.tests.nested_comments_generators import NestedCommentsGenerators
@@ -21,7 +22,7 @@ class CommentNotificationServiceTest(TestCase):
 
         with self.assertRaises(AssertionError):
             add_story.assert_called_with(
-                comment.author, verb='VERB_COMMENTED_IMAGE',
+                comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
                 action_object=comment,
                 target=comment.content_object)
 
@@ -43,7 +44,7 @@ class CommentNotificationServiceTest(TestCase):
 
         with self.assertRaises(AssertionError):
             add_story.assert_called_with(
-                comment.author, verb='VERB_COMMENTED_IMAGE',
+                comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
                 action_object=comment,
                 target=comment.content_object)
 
@@ -65,7 +66,7 @@ class CommentNotificationServiceTest(TestCase):
 
         with self.assertRaises(AssertionError):
             add_story.assert_called_with(
-                comment.author, verb='VERB_COMMENTED_IMAGE',
+                comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
                 action_object=comment,
                 target=comment.content_object)
 
@@ -89,7 +90,7 @@ class CommentNotificationServiceTest(TestCase):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -117,7 +118,7 @@ class CommentNotificationServiceTest(TestCase):
         push_notification_from_signals.assert_called_with(mock.ANY, commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -145,7 +146,7 @@ class CommentNotificationServiceTest(TestCase):
         push_notification_from_signals.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -163,7 +164,7 @@ class CommentNotificationServiceTest(TestCase):
 
         push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -178,7 +179,7 @@ class CommentNotificationServiceTest(TestCase):
         ], any_order=True)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -198,7 +199,7 @@ class CommentNotificationServiceTest(TestCase):
 
         push_notification.assert_called_with([image.user], commenter, 'new_comment', mock.ANY)
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -219,7 +220,7 @@ class CommentNotificationServiceTest(TestCase):
         push_notification_from_signals.assert_called_with([commenter], replier, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -240,7 +241,7 @@ class CommentNotificationServiceTest(TestCase):
 
         push_notification.assert_called_with([image.user], commenter, 'new_comment', mock.ANY)
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -258,7 +259,7 @@ class CommentNotificationServiceTest(TestCase):
         push_notification_from_signals.assert_called_with([commenter], replier, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -277,7 +278,7 @@ class CommentNotificationServiceTest(TestCase):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -295,7 +296,7 @@ class CommentNotificationServiceTest(TestCase):
         push_notification.assert_has_calls(calls, any_order=True)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -316,7 +317,7 @@ class CommentNotificationServiceTest(TestCase):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -340,7 +341,7 @@ class CommentNotificationServiceTest(TestCase):
         push_notification_from_signals.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -362,7 +363,7 @@ class CommentNotificationServiceTest(TestCase):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 
@@ -382,7 +383,7 @@ class CommentNotificationServiceTest(TestCase):
         push_notification_from_signals.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb='VERB_COMMENTED_IMAGE',
+            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
             target=comment.content_object)
 

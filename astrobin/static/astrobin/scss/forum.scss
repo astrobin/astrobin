@@ -115,15 +115,19 @@ th.forum-name {
   width: 100%;
 }
 
-.forum-topic-count, .forum-post-count, .topic-post-count, .topic-view-count {
+.forum-topic-count, .forum-post-count, .topic-post-count {
   text-align: center !important;
   white-space: nowrap;
   padding: .5rem 2rem !important;
 
-  .no-replies {
-    display: block;
-    width: 1.5rem;
-    margin: 0 auto .5rem;
+  span {
+    display: inline-block;
+    padding: 0 .334rem;
+
+    i {
+      display: block;
+      margin-bottom: .25rem;
+    }
   }
 }
 
@@ -318,6 +322,16 @@ th.forum-name {
       width: 18px;
       height: 18px;
       margin: 0 1px;
+    }
+  }
+
+  .fancybox {
+    display: block;
+    margin: 0 auto;
+
+    img {
+      box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+      border-radius: .5rem;
     }
   }
 
@@ -548,13 +562,43 @@ table.post th.post-avatar {
 
 .topic h1, .forum h1, .category h1 {
   margin: 3rem 0 3.5rem;
+  padding-bottom: 1rem;
   font-size: 2.5rem;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+  border-bottom: 1px solid $grey-5;
 
   @media screen and (max-width: 767px) {
     text-align: left;
     padding: 0 18px;
     border: 0;
+  }
+
+  > small {
+    margin-top: .75em;
+    font-size: 1rem;
+
+    [class^="icon-"],
+    [class*=" icon-"] {
+      margin-right: .25rem;
+    }
+
+    abbr {
+      border-bottom: 0;
+    }
+
+    a {
+      color: $grey-3;
+      border-bottom: 1px solid $grey-5;
+
+      &:hover {
+        color: $link-color;
+        border-bottom-color: $link-color;
+      }
+    }
+
+    .topic-info {
+      color: $grey-3;
+    }
   }
 }
 

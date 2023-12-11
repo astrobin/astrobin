@@ -14,6 +14,7 @@ class HighlightingService:
     html_tag = 'span'
     max_length = -1
     dialect = 'html'
+    allow_lists = 'True'
 
     def __init__(self, text, terms, **kwargs):
         self.text = text
@@ -30,6 +31,9 @@ class HighlightingService:
 
         if 'dialect' in kwargs:
             self.dialect = kwargs['dialect']
+
+        if 'allow_lists' in kwargs:
+            self.allow_lists = kwargs['allow_lists']
 
     def render_html(self) -> str:
         if self.dialect == 'bbcode':
@@ -91,4 +95,25 @@ class HighlightingService:
                         )
 
         from common.templatetags.common_tags import strip_html
-        return mark_safe(strip_html('<br />'.join(result.splitlines())))
+
+        if self.allow_lists == 'True':
+            allowed_tags = SANITIZER_ALLOWED_TAGS
+        else:
+            # If we don't allow lists, we need to remove the <li> tags. We do this because search results use lists and
+            # the layout breaks if we don't remove them.
+            allowed_tags = SANITIZER_ALLOWED_TAGS.copy()
+            allowed_tags.remove('ul')
+            allowed_tags.remove('ol')
+            allowed_tags.remove('li')
+
+            result = result \
+                .replace('<li>', '<p>') \
+                .replace('</li>', '</p>') \
+                .replace('<ul>', '') \
+                .replace('</ul>', '') \
+                .replace('<ol>', '') \
+                .replace('</ol>', '')
+
+        return mark_safe(
+            strip_html('<br />'.join(result.splitlines()), allowed_tags=allowed_tags)
+        )

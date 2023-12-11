@@ -339,7 +339,7 @@ def upload_max_revisions_error(request, max_revisions, image):
 @page_template('index/stream_page.html', key='stream_page')
 @page_template('index/recent_images_page.html', key='recent_images_page')
 @silk_profile('Index')
-def index(request, template='index/root.html', extra_context=None):
+def index(request, template='index/root.html', extra_context=None) -> HttpResponse:
     """Main page"""
 
     if not request.user.is_authenticated:
@@ -375,7 +375,8 @@ def index(request, template='index/root.html', extra_context=None):
         actions = Action.objects.all().prefetch_related(
             'actor__userprofile',
             'target_content_type',
-            'target')
+            'target'
+        )
         response_dict['actions'] = actions
         response_dict['cache_prefix'] = 'astrobin_global_actions'
 
@@ -426,8 +427,7 @@ def index(request, template='index/root.html', extra_context=None):
             ]
             cache.set(cache_key, followees_image_ids, 900)
 
-        actions = Action.objects \
-            .prefetch_related(
+        actions = Action.objects.prefetch_related(
             'actor__userprofile',
             'target_content_type',
             'target'
@@ -1199,13 +1199,26 @@ def user_page(request, username):
     active = request.GET.get('active')
     klass = request.GET.get('klass')
     menu = []
+    use_union = subsection in ['uploaded', 'title']
 
     if UserService(user).display_wip_images_on_public_gallery() and request.user == user:
-        qs = UserService(user).get_all_images()
+        qs = UserService(user).get_all_images(use_union)
     else:
-        qs = UserService(user).get_public_images()
+        qs = UserService(user).get_public_images(use_union)
 
-    wip_qs = UserService(user).get_wip_images()
+    wip_qs = UserService(user).get_wip_images(use_union)
+
+    paginator = Paginator(qs, settings.PAGINATE_USER_PAGE_BY)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    likes_data = ToggleProperty.objects.toggleproperties_for_objects("like", page_obj)
+    bookmarks_data = ToggleProperty.objects.toggleproperties_for_objects("bookmark", page_obj)
+
+    for image in page_obj:
+        like_count = likes_data.get(str(image.pk), {}).get('count', 0)
+        bookmark_count = bookmarks_data.get(str(image.pk), {}).get('count', 0)
+        cache.set("Image.%d.likes" % image.pk, like_count, 60)
+        cache.set("Image.%d.bookmarks" % image.pk, bookmark_count, 60)
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:

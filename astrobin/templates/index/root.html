@@ -15,6 +15,10 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load static %}
 
+{% block canonical %}
+    <link rel="canonical" href="{{ BASE_URL }}{% url 'index' %}" />
+{% endblock %}
+
 {% block title %}{% trans "Home of Astrophotography" %}{% endblock %}
 
 {% block breadcrumbs %}
@@ -148,11 +152,18 @@
                         </td>
 
                         <td class="topic-post-count hidden-phone">
-                            {% if topic.post_count == 1 %}
-                                <img class="no-replies" src="{% static 'astrobin/emoticons/sad.png' %}" alt=""
-                                     rel="tooltip" title="{% trans 'This topic has no replies.' %}" />
-                            {% endif %}
-                            {{ topic.post_count|add:"-1" }} / {{ topic|pybbm_calc_topic_views }}
+                            <span class="post-count">
+                                <i class="icon-comment"></i>
+                                {{ topic.post_count|add:"-1" }}
+                            </span>
+                            <span class="view-count">
+                                <i class="icon-eye-open"></i>
+                                {{ topic|pybbm_calc_topic_views }}
+                            </span>
+                            <span class="image-count">
+                                <i class="icon-camera"></i>
+                                {{ topic.images }}
+                            </span>
                         </td>
 
                         <td class="topic-last-post hidden-phone hidden-tablet">
@@ -172,7 +183,9 @@
     </div>
 
     {% with ad_container_classes='advertisement-frontpage' %}
-        {% include 'ads/wide_ad.html' %}
+        {% with None|ad_key_value_pairs:request.user as key_value_pairs %}
+            {% include 'ads/wide_ad.html' %}
+        {% endwith %}
     {% endwith %}
 
     <a class="anchor" name="stream"></a>

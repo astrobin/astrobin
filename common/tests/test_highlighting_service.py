@@ -23,8 +23,10 @@ class HighlightingServiceTest(TestCase):
         self.assertEquals('<span class="highlighted-text">Test</span>', HighlightingService('Test', 'Test').render_html())
 
     def test_render_html_single_term_ignore_punctuation(self):
-        self.assertEquals('<span class="highlighted-text">Test</span>.', HighlightingService('Test.', 'Test',
-            escape=False).render_html())
+        self.assertEquals(
+            '<span class="highlighted-text">Test</span>.',
+            HighlightingService('Test.', 'Test', escape=False).render_html()
+        )
 
     def test_render_html_single_term_URL_is_not_stripped(self):
         self.assertEquals(

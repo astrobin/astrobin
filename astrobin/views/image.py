@@ -67,6 +67,7 @@ from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
+from common.exceptions import Http410
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
@@ -83,6 +84,9 @@ class ImageSingleObjectMixin(SingleObjectMixin):
         image = ImageService.get_object(id, queryset)
 
         if image is None:
+            deleted_image = ImageService.get_object(id, Image.deleted_objects)
+            if deleted_image is not None:
+                raise Http410
             raise Http404
 
         return image
@@ -739,7 +743,7 @@ class ImageDetailView(ImageDetailViewBase):
                 PlateSolvingAdvancedLiveLogEntry.objects.filter(
                     serial_number=instance_to_platesolve.solution.pixinsight_serial_number) \
                     .order_by('-timestamp').first() \
-                    if instance_to_platesolve.solution \
+                    if instance_to_platesolve.solution and instance_to_platesolve.solution.pixinsight_serial_number \
                     else None,
             'skyplot_zoom1': skyplot_zoom1,
             'pixinsight_finding_chart': pixinsight_finding_chart,
@@ -1502,9 +1506,10 @@ class ImageSubmitToIotdTpProcessView(View):
     def post(self, request, *args, **kwargs):
         id: Union[str, int] = self.kwargs.get('id')
         auto_submit = request.POST.get('auto_submit_to_iotd_tp_process', 'off').lower() == 'on'
+        agreed = request.POST.get('agreed_to_iotd_tp_rules_and_guidelines', 'off').lower() == 'on'
         image: Image = ImageService.get_object(id, Image)
 
-        may, reason = IotdService.submit_to_iotd_tp_process(request.user, image, auto_submit)
+        may, reason = IotdService.submit_to_iotd_tp_process(request.user, image, auto_submit, agreed)
 
         if not may:
             if reason == MayNotSubmitToIotdTpReason.NOT_AUTHENTICATED or reason == MayNotSubmitToIotdTpReason.NOT_OWNER:

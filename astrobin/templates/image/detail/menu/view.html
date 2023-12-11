@@ -91,6 +91,18 @@
         </li>
         {% endif %}
 
+        {% if request.user == image.user or request.user.is_superuser %}
+            {% if image.submitted_for_iotd_tp_consideration %}
+                <li class="divider"></li>
+
+                <li>
+                    <a href="#image-iotd-stats-modal" data-toggle="modal">
+                        <i class="icon-info-sign"></i> {% trans "IOTD/TP stats" %}
+                    </a>
+                </li>
+            {% endif %}
+        {% endif %}
+
     </ul>
 </li> <!-- view -->
 

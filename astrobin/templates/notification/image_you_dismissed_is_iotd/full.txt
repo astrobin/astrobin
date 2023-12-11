@@ -1,0 +1,22 @@
+{% load i18n %}
+{% load astrobin_apps_notifications_tags %}
+
+{% blocktrans %}An image you dismissed made it to IOTD{% endblocktrans %}: {{image.title}}
+
+{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email %}
+
+{% blocktrans trimmed %}
+    This means that you were in disagreement with the rest of the IOTD/TP staff. A variety of opinions and tastes is
+    fine, but images should only be dismissed if they present glaring technical issues as documented in the IOTD
+    manifesto:
+{% endblocktrans %}
+
+https://welcome.astrobin.com/iotd
+
+{% blocktrans trimmed %}
+    Please only dismiss images if you are sure they are not up to the standards of the IOTD/TP.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Thank you for your understanding.
+{% endblocktrans %}

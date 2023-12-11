@@ -4,14 +4,13 @@ from datetime import datetime, timedelta
 # Django
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.urls import reverse
 
 # Third party
 from subscription.models import UserSubscription
 
 # AstroBin
 from astrobin_apps_notifications.utils import push_notification
-from astrobin_apps_premium.services.premium_service import SubscriptionName
+from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 
 
 class Command(BaseCommand):
@@ -36,10 +35,12 @@ class Command(BaseCommand):
                 SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value,
             ],
             active=True,
-            expires = datetime.now() - timedelta(days=2))
+            expires=datetime.now() - timedelta(days=2))
 
         for user_subscription in user_subscriptions:
-            push_notification([user_subscription.user], None, 'expired_subscription', {
-                'user_subscription': user_subscription,
-                'url': 'https://app.astrobin.com/subscriptions/options'
-            })
+            valid_subscription = PremiumService(user_subscription.user).get_valid_usersubscription()
+            if not PremiumService.is_any_paid_subscription(valid_subscription):
+                push_notification([user_subscription.user], None, 'expired_subscription', {
+                    'user_subscription': user_subscription,
+                    'url': 'https://app.astrobin.com/subscriptions/options'
+                })

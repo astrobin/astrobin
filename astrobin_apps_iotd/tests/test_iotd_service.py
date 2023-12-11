@@ -103,7 +103,14 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
 
-        image.submitted_for_iotd_tp_consideration = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(1)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(1)
         image.save()
 
         IotdService().update_top_pick_archive()
@@ -122,7 +129,13 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=image)
         IotdGenerators.vote(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            )
         image.save()
 
         IotdService().update_top_pick_archive()
@@ -172,7 +185,13 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=image)
         IotdGenerators.iotd(image=image, date=date.today() + timedelta(days=1))
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            )
         image.save()
 
         IotdService().update_top_pick_archive()
@@ -183,11 +202,30 @@ class IotdServiceTest(TestCase):
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS - 1)
     )
     def test_is_top_pick_nomination_false_only_one_submission_after_cutoff(self):
-        image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        image.save()
+
+        IotdService().update_top_pick_nomination_archive()
+
+        self.assertFalse(IotdService().is_top_pick_nomination(image))
+
+    @override_settings(
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS - 1)
+    )
+    def test_is_top_pick_nomination_false_enough_submissions_but_could_still_become_top_pick(self):
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
+
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -196,13 +234,17 @@ class IotdServiceTest(TestCase):
 
     @override_settings(
         IOTD_SUBMISSION_MIN_PROMOTIONS=2,
-        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1))
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS + 1
+        )
+    )
     def test_is_top_pick_nomination_true_only_one_submission_before_cutoff(self):
-        image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(minutes=1)
+        image.submitted_for_iotd_tp_consideration = \
+            settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(minutes=1)
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -218,7 +260,9 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            days=settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+        )
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -248,7 +292,9 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            days=settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+        )
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -303,7 +349,14 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=top_pick_image)
         IotdGenerators.vote(image=top_pick_image)
 
-        top_pick_image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        top_pick_image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         top_pick_image.save()
 
         IotdService().update_top_pick_archive()
@@ -375,7 +428,14 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=image)
         IotdGenerators.iotd(image=image, date=date.today() + timedelta(days=1))
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         image.save()
 
         IotdService().update_top_pick_archive()
@@ -420,7 +480,14 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=top_pick_image)
         IotdGenerators.vote(image=top_pick_image)
 
-        top_pick_image.submitted_for_iotd_tp_consideration = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(hours=1)
+        top_pick_image.submitted_for_iotd_tp_consideration = \
+            datetime.now() - \
+            timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            ) - \
+            timedelta(hours=1)
         top_pick_image.save()
 
         IotdService().update_top_pick_archive()
@@ -448,7 +515,9 @@ class IotdServiceTest(TestCase):
         self.assertEqual(0, nominations.count())
 
     @override_settings(
-        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS + 1
+        )
     )
     def test_get_top_pick_nominations_only_one_submission_before_cutoff(self):
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
@@ -477,7 +546,9 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
 
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(
+            settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+        ) - timedelta(hours=1)
         image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -2166,6 +2237,7 @@ class IotdServiceTest(TestCase):
         )
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_may_submit_to_iotd_tp_process_no_acquisitions_but_northern_lights(self, is_authenticated):
         is_authenticated.return_value = True
 
@@ -2173,12 +2245,15 @@ class IotdServiceTest(TestCase):
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image.user.userprofile.save()
 
         self.assertEqual(
             (True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image)
         )
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_may_submit_to_iotd_tp_process_no_acquisitions_but_noctilucent_clouds(self, is_authenticated):
         is_authenticated.return_value = True
 
@@ -2186,12 +2261,32 @@ class IotdServiceTest(TestCase):
         image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image.user.userprofile.save()
 
         self.assertEqual(
             (True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image)
         )
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
+    def test_may_submit_to_iotd_tp_process_not_agreed_to_rules_and_guidelines(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+
+        self.assertEqual(
+            (False, MayNotSubmitToIotdTpReason.DID_NOT_AGREE_TO_RULES_AND_GUIDELINES),
+            IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_may_submit_to_iotd_tp_process_all_ok(self, is_authenticated):
         is_authenticated.return_value = True
 
@@ -2201,6 +2296,8 @@ class IotdServiceTest(TestCase):
         Generators.deep_sky_acquisition(image)
         Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image.user.userprofile.save()
 
         self.assertEqual(
             (True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image)
@@ -2255,6 +2352,7 @@ class IotdServiceTest(TestCase):
         self.assertFalse(image.designated_iotd_submitters.exists())
         self.assertFalse(image.designated_iotd_reviewers.exists())
 
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_resubmit_for_iotd_tp_consideration(self):
         service = IotdService()
 
@@ -2263,6 +2361,8 @@ class IotdServiceTest(TestCase):
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image.user.userprofile.save()
 
         submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
@@ -2367,6 +2467,7 @@ class IotdServiceTest(TestCase):
         self.assertFalse(push_notification.called)
 
     @patch('astrobin_apps_iotd.services.iotd_service.push_notification')
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_notify_about_upcoming_deadline_for_iotd_tp_submission_does_notify(
             self, push_notification
     ):
@@ -2377,6 +2478,8 @@ class IotdServiceTest(TestCase):
         image_1.imaging_telescopes_2.add(EquipmentGenerators.telescope())
         image_1.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image=image_1)
+        image_1.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image_1.user.userprofile.save()
 
         may, _ = IotdService().submit_to_iotd_tp_process(image_1.user, image_1)
 
@@ -2399,6 +2502,7 @@ class IotdServiceTest(TestCase):
             ]
         )
 
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_get_recently_expired_unsubmitted_images_too_late(self):
         service = IotdService()
 
@@ -2407,6 +2511,8 @@ class IotdServiceTest(TestCase):
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image.user.userprofile.save()
 
         submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
@@ -2430,6 +2536,7 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, test_images.count())
 
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_get_recently_expired_unsubmitted_images_too_early(self):
         service = IotdService()
 
@@ -2438,6 +2545,8 @@ class IotdServiceTest(TestCase):
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image.user.userprofile.save()
 
         submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
@@ -2461,6 +2570,7 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, test_images.count())
 
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_get_recently_expired_unsubmitted_images_right_time(self):
         service = IotdService()
 
@@ -2469,6 +2579,8 @@ class IotdServiceTest(TestCase):
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image.user.userprofile.save()
 
         submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
@@ -2492,6 +2604,8 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(1, test_images.count())
 
+
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_get_recently_expired_unsubmitted_images_too_many_dismissals(self):
         service = IotdService()
 
@@ -2500,6 +2614,8 @@ class IotdServiceTest(TestCase):
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image.user.userprofile.save()
 
         submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
@@ -2529,6 +2645,7 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, test_images.count())
 
+    @override_settings(IOTD_LAST_RULES_UPDATE=datetime.now() - timedelta(days=1))
     def test_get_recently_expired_unsubmitted_images_too_many_submissions(self):
         service = IotdService()
 
@@ -2537,6 +2654,8 @@ class IotdServiceTest(TestCase):
         image.imaging_cameras_2.add(EquipmentGenerators.camera())
         Generators.deep_sky_acquisition(image)
         Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines=DateTimeService.now()
+        image.user.userprofile.save()
 
         submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')

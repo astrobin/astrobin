@@ -59,11 +59,28 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
 
     def _update_equipment(self, data, instance: Image):
         for klass in ImageViewSet._get_equipment_classes():
-            getattr(instance, klass[0]).clear()
+            # Get the current set of related objects
+            current_objs = set(getattr(instance, klass[0]).all())
+
+            # New objects to be linked
+            new_objs = set()
             for item in data[klass[0]]:
                 obj = get_object_or_None(klass[1], id=item if type(item) == int else item.get('id'))
                 if obj:
-                    getattr(instance, klass[0]).add(obj)
+                    new_objs.add(obj)
+
+            # Determine objects to add (in new_objs but not in current_objs)
+            objs_to_add = new_objs - current_objs
+
+            # Determine objects to remove (in current_objs but not in new_objs)
+            objs_to_remove = current_objs - new_objs
+
+            # Update the m2m relationship
+            m2m_relation = getattr(instance, klass[0])
+            for obj in objs_to_add:
+                m2m_relation.add(obj)
+            for obj in objs_to_remove:
+                m2m_relation.remove(obj)
 
     def _update_acquisition(self, request, instance: Image):
         DeepSky_Acquisition.objects.filter(image=instance).delete()

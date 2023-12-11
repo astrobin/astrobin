@@ -1,9 +1,10 @@
 from django.conf.urls import url
+from django.views.decorators.cache import never_cache
 
 from astrobin_apps_iotd.feeds.iotd import IotdAtomFeed, IotdFeed
 from astrobin_apps_iotd.feeds.top_picks import TopPickAtomFeed, TopPickFeed
 from astrobin_apps_iotd.feeds.top_picks_instagram_story import TopPickInstagramStoryAtomFeed, TopPickInstagramStoryFeed
-from astrobin_apps_iotd.views import IotdArchiveView
+from astrobin_apps_iotd.views import ImageStats, IotdArchiveView
 
 urlpatterns = (
     # Archive
@@ -11,6 +12,12 @@ urlpatterns = (
         r'^archive/$',
         IotdArchiveView.as_view(),
         name='iotd_archive'
+    ),
+
+    url(
+        r'^iotd-stats/(?P<image_id>\w+)/$',
+        never_cache(ImageStats.as_view()),
+        name='astrobin_apps_iotd.image_stats'
     ),
 
     # Feeds

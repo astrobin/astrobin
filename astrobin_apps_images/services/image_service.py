@@ -30,7 +30,7 @@ from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.services.gear_service import GearService
-from astrobin.stories import add_story
+from astrobin.stories import ACTSTREAM_VERB_UPLOADED_IMAGE, add_story
 from astrobin.utils import (
     base26_decode, base26_encode, decimal_to_degrees_minutes_seconds_string,
     decimal_to_hours_minutes_seconds_string,
@@ -277,8 +277,6 @@ class ImageService:
         image: Image = self.image
         revisions: QuerySet = self.get_revisions()
 
-        image.thumbnail_invalidate()
-
         if image.solution:
             image.solution.delete()
 
@@ -325,8 +323,10 @@ class ImageService:
             solution.content_object = image
             solution.save()
 
-        image.thumbnails.filter(revision=new_original.label).update(revision='0')
         new_original.delete()
+        image.thumbnails.filter(revision=new_original.label).delete()
+        image.thumbnail_invalidate()
+
 
     def get_enhanced_thumb_url(self, field, alias, revision_label, animated, secure, target_alias):
         get_enhanced_thumb_url = None
@@ -500,7 +500,7 @@ class ImageService:
                 if not skip_notifications:
                     push_notification_for_new_image.apply_async(args=(self.image.pk,), countdown=10)
                 if self.image.moderator_decision == ModeratorDecision.APPROVED:
-                    add_story(self.image.user, verb='VERB_UPLOADED_IMAGE', action_object=self.image)
+                    add_story(self.image.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=self.image)
 
     def demote_to_staging_area(self):
         if not self.image.is_wip:

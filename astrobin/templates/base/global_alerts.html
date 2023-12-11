@@ -5,19 +5,54 @@
 
 <div id="global-alerts">
 
+{% if request.user.is_authenticated and request.user.userprofile.detected_insecure_password is not None %}
+    <div class="accordion container" id="insecure-password-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
+                   data-parent="#insecure-password-accordion" href="#insecure-password-accordion-content">
+                    <i class="icon-warning-sign"></i>
+                    {% blocktrans trimmed %}
+                        AstroBin detected that your password does not meet security requirements.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="insecure-password-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-info global-alert">
+                    {% blocktrans trimmed %}
+                        To prevent spam, phishing, and other malicious activities, all your new content posted on
+                        AstroBin will be moderated until you have changed your password to meet security requirements,
+                        or you have enabled two-factor authentication.
+                    {% endblocktrans %}
+
+                    <div>
+                        <a class="btn btn-primary" href="{{ base_url }}{% url 'password_change' %}">
+                            {% blocktrans trimmed %}Change your password{% endblocktrans %}<br/>
+                        </a>
+
+                        <a class="btn btn-secondary" href="{{ base_url }}{% url 'two_factor:profile' %}">
+                            {% trans "Two-factor Authentication" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
 {% if skill_level_form %}
     <div class="accordion container" id="skill-level-accordion">
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
-                   data-parent="#expired-subscription-accordion" href="#expired-subscription-accordion-content">
+                   data-parent="#skill-level-accordion" href="#skill-level-accordion-content">
                     <i class="icon-question-sign"></i>
                     {% blocktrans trimmed %}
                         How would you categorize your current skills as an astrophotographer?
                     {% endblocktrans %}
                 </a>
             </div>
-            <div id="expired-subscription-accordion-content" class="accordion-body collapse">
+            <div id="skill-level-accordion-content" class="accordion-body collapse">
                 <div class="accordion-inner alert alert-info global-alert">
                     <form class="form-horizontal" method="post" action="{% url 'profile_save_basic' %}"
                           novalidate>{% csrf_token %}
@@ -80,18 +115,18 @@
 
 {% if request.user.is_authenticated and request.user|has_paid_subscription_near_expiration:7 %}
 
-    <div class="accordion container" id="expired-subscription-accordion">
+    <div class="accordion container" id="expiring-subscription-accordion">
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
-                   data-parent="#expired-subscription-accordion" href="#expired-subscription-accordion-content">
+                   data-parent="#expired-subscription-accordion" href="#expiring-subscription-accordion-content">
                     <i class="icon-info-sign"></i>
                     {% blocktrans trimmed %}
                         Your AstroBin subscription about to expire.
                     {% endblocktrans %}
                 </a>
             </div>
-            <div id="expired-subscription-accordion-content" class="accordion-body collapse">
+            <div id="expiring-subscription-accordion-content" class="accordion-body collapse">
                 <div class="accordion-inner alert alert-info global-alert">
                     <p>
                         {% blocktrans trimmed %}

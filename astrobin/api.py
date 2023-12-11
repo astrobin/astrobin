@@ -1,5 +1,6 @@
 from typing import List
 
+from avatar.templatetags.avatar_tags import avatar_url
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -20,6 +21,7 @@ from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
+from common.utils import get_segregated_reader_database
 from toggleproperties.models import ToggleProperty
 
 
@@ -53,7 +55,7 @@ class LocationResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = Location.objects.all()
+        queryset = Location.objects.using(get_segregated_reader_database()).all()
         fields = [
             'name',
             'city',
@@ -93,7 +95,7 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.filter(image__is_wip=False)
+        queryset = ImageRevision.objects.using(get_segregated_reader_database()).filter(image__is_wip=False)
         fields = [
             'id',
             'uploaded',
@@ -494,17 +496,21 @@ class ImageResource(ModelResource):
         return License.to_deprecated_integer(bundle.obj.license)
 
     def dehydrate_likes(self, bundle):
-        return ToggleProperty.objects.toggleproperties_for_object('like', bundle.obj).count()
+        return ToggleProperty.objects.toggleproperties_for_object(
+            'like', bundle.obj
+        ).count()
 
     def dehydrate_bookmarks(self, bundle):
-        return ToggleProperty.objects.toggleproperties_for_object('bookmark', bundle.obj).count()
+        return ToggleProperty.objects.toggleproperties_for_object(
+            'bookmark', bundle.obj
+        ).count()
 
     def dehydrate_comments(self, bundle):
         return bundle.obj.nested_comments.count()
 
     def dehydrate_views(self, bundle):
         try:
-            return HitCount.objects.get(
+            return HitCount.objects.using(get_segregated_reader_database()).get(
                 object_pk=bundle.obj.pk,
                 content_type=ContentType.objects.get_for_model(Image),
             ).hits
@@ -552,7 +558,12 @@ class ImageResource(ModelResource):
                     return '%s%s' % (fix_catalog(m.group('catalog')), m.group('name'))
                 return name
 
-            qs = Solution.objects.filter(objects_in_field__icontains=fix_name(val[0]))[:100]
+            qs = Solution.objects.using(
+                get_segregated_reader_database()
+            ).filter(
+                objects_in_field__icontains=fix_name(val[0])
+            )[:100]
+
             return {'pk__in': [i.object_id for i in qs]}
 
         def lookup_ids(val: List[str]):
@@ -642,7 +653,7 @@ class ImageOfTheDayResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageOfTheDay.objects.filter()
+        queryset = ImageOfTheDay.objects.using(get_segregated_reader_database()).filter()
         fields = [
             'image',
             'runnerup_1',
@@ -661,7 +672,7 @@ class TopPickResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = TopPickArchive.objects.all()
+        queryset = TopPickArchive.objects.using(get_segregated_reader_database()).all()
         fields = [
             'image',
         ]
@@ -680,7 +691,7 @@ class TopPickNominationResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = TopPickNominationsArchive.objects.all()
+        queryset = TopPickNominationsArchive.objects.using(get_segregated_reader_database()).all()
         fields = [
             'image',
         ]
@@ -704,17 +715,33 @@ class CollectionResource(ModelResource):
     class Meta:
         authentication = AppAuthentication()
         allowed_methods = ['get']
-        queryset = Collection.objects.all()
+        queryset = Collection.objects.using(get_segregated_reader_database()).all()
         filtering = {
             'name': ALL,
             'description': ALL,
-            'user': ALL_WITH_RELATIONS,
         }
         ordering = ['-date_created']
 
     def dehydrate_images(self, bundle):
         images = bundle.obj.images.all()
         return ["/api/v1/image/%s" % image.get_id() for image in images]
+
+    def build_filters(self, filters=None, ignore_bad_filters=False):
+        if filters is None:
+            filters = {}
+
+        user = None
+
+        if 'user' in filters:
+            user = filters['user']
+            del filters['user']
+
+        orm_filters = super(CollectionResource, self).build_filters(filters)
+
+        if user:
+            orm_filters['user__username'] = user
+
+        return orm_filters
 
 
 class UserProfileResource(ModelResource):
@@ -735,7 +762,7 @@ class UserProfileResource(ModelResource):
     class Meta:
         authentication = AppAuthentication()
         allowed_methods = ["get"]
-        queryset = UserProfile.objects.all()
+        queryset = UserProfile.objects.using(get_segregated_reader_database()).all()
         fields = [
             'about',
             'allow_astronomy_ads',
@@ -773,13 +800,16 @@ class UserProfileResource(ModelResource):
         ]
         ordering = ['-date_joined']
 
+    def dehydrate_avatar(self, bundle):
+        return avatar_url(bundle.obj.user, 200)
+
     def dehydrate_timezone(self, bundle):
         # Hardcode to GMT for compatibility reasons.
         # See https://github.com/astrobin/astrobin/pull/2429
         return 'Etc/GMT'
 
     def dehydrate_image_count(self, bundle):
-        return Image.objects.filter(user=bundle.obj.user, is_wip=False).count()
+        return Image.objects.using(get_segregated_reader_database()).filter(user=bundle.obj.user, is_wip=False).count()
 
     def dehydrate_received_likes_count(self, bundle):
         likes = 0
@@ -788,23 +818,23 @@ class UserProfileResource(ModelResource):
         return likes
 
     def dehydrate_followers_count(self, bundle):
-        return ToggleProperty.objects.filter(
+        return ToggleProperty.objects.using(get_segregated_reader_database()).filter(
             property_type="follow",
             content_type=ContentType.objects.get_for_model(User),
             object_id=bundle.obj.user.pk,
         ).count()
 
     def dehydrate_following_count(self, bundle):
-        return ToggleProperty.objects.filter(
+        return ToggleProperty.objects.using(get_segregated_reader_database()).filter(
             property_type="follow",
             user=bundle.obj.user,
         ).count()
 
     def dehydrate_total_notifications_count(self, bundle):
-        return Message.objects.filter(user=bundle.obj.user).count()
+        return Message.objects.using(get_segregated_reader_database()).filter(user=bundle.obj.user).count()
 
     def dehydrate_unread_notifications_count(self, bundle):
-        return Message.objects.filter(user=bundle.obj.user, read=False).count()
+        return Message.objects.using(get_segregated_reader_database()).filter(user=bundle.obj.user, read=False).count()
 
     def dehydrate_premium_subscription(self, bundle):
         user_subscription = PremiumService(bundle.obj.user).get_valid_usersubscription()

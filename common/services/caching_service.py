@@ -55,6 +55,14 @@ class CachingService:
             return DateTimeService.now()
 
     @staticmethod
+    def get_userprofile_detail_last_modified(request, pk):
+        try:
+            userprofile = UserProfile.objects.get(pk=pk)
+            return userprofile.updated
+        except UserProfile.DoesNotExist:
+            return DateTimeService.now()
+
+    @staticmethod
     def get_user_page_last_modified(request, username):
         try:
             userprofile = UserProfile.objects.get(user__username=username)

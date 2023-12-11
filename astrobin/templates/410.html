@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load static %}
+
+{% block title %}{% trans "Deleted" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Deleted' None %}
+{% endblock %}
+
+{% block content %}
+    <div class="flexbox-grid-container">
+        <div class="row middle-xs">
+            <div class="col-xs-4 col-xs-offset-2">
+                <h1>{% trans "Deleted" %}</h1>
+                <p>
+                    {% blocktrans trimmed %}
+                        Sorry, but the item you are looking for has been deleted.
+                    {% endblocktrans %}
+                </p>
+            </div>
+            <div class="col-xs-3 col-xs-offset-1">
+                <img src="{% static 'astrobin/images/410.png' %}?v=20231111" alt="{% trans 'Deleted' %}" />
+            </div>
+        </div>
+    </div>
+{% endblock %}

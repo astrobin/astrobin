@@ -153,7 +153,6 @@ class TopPickArchive(models.Model):
         ordering = ['-image__published']
 
 
-
 class IotdStaffMemberSettings(models.Model):
     user = models.OneToOneField(
         User,
@@ -350,3 +349,60 @@ class IotdStats(models.Model):
 
     class Meta:
         ordering = ('-created',)
+
+
+class IotdStaffMemberScore(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='iotd_staff_member_score',
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    period_start = models.DateTimeField(
+        null=False,
+        blank=False,
+    )
+
+    period_end = models.DateTimeField(
+        null=False,
+        blank=False,
+    )
+
+    score = models.DecimalField(
+        default=0,
+        max_digits=8,
+        decimal_places=2,
+    )
+
+    active_days = models.PositiveSmallIntegerField(
+        default=0,
+    )
+
+    promotions_dismissals_accuracy_ratio = models.DecimalField(
+        default=0,
+        max_digits=5,
+        decimal_places=2,
+    )
+
+    promotions = models.PositiveIntegerField(default=0)
+    wasted_promotions = models.PositiveIntegerField(default=0)
+    missed_iotd_promotions = models.PositiveIntegerField(default=0)
+    missed_tp_promotions = models.PositiveIntegerField(default=0)
+    missed_tpn_promotions = models.PositiveIntegerField(default=0)
+    promotions_to_tpn = models.PositiveIntegerField(default=0)
+    promotions_to_tp = models.PositiveIntegerField(default=0)
+    promotions_to_iotd = models.PositiveIntegerField(default=0)
+
+    dismissals = models.PositiveIntegerField(default=0)
+    correct_dismissals = models.PositiveIntegerField(default=0)
+    missed_dismissals = models.PositiveIntegerField(default=0)
+    dismissals_to_tpn = models.PositiveIntegerField(default=0)
+    dismissals_to_tp = models.PositiveIntegerField(default=0)
+    dismissals_to_iotd = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ('-score',)
