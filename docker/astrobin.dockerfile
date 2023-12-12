@@ -55,6 +55,7 @@ COPY requirements.txt /code
 WORKDIR /code
 RUN pip3 install --upgrade pip && \
     pip3 install setuptools && \
+    pip3 install pylint && \
     pip3 install --no-deps -r requirements.txt --src /src
 
 # Install global node dependencies

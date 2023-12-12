@@ -16,6 +16,8 @@ from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_i
     EquipmentItemMarketplaceListingLineItemViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_view_set import \
     EquipmentItemMarketplaceListingViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_private_conversation_view_set import \
+    EquipmentItemMarketplacePrivateConversationViewSet
 from astrobin_apps_equipment.api.views.equipment_preset_view_set import EquipmentPresetViewSet
 from astrobin_apps_equipment.api.views.filter_edit_proposal_view_set import FilterEditProposalViewSet
 from astrobin_apps_equipment.api.views.filter_view_set import FilterViewSet
@@ -58,18 +60,35 @@ router.register(r'equipment-item-group', EquipmentItemGroupViewSet, basename='eq
 router.register(r'equipment-preset', EquipmentPresetViewSet, basename='equipment-preset')
 
 router.register(
-    r'marketplace/image', EquipmentItemMarketplaceListingLineItemImageViewSet,
-    basename='marketplace-image'
+    r'marketplace/listing',
+    EquipmentItemMarketplaceListingViewSet,
+    basename='marketplace-listing'
 )
 
 router.register(
-    r'marketplace/line-item', EquipmentItemMarketplaceListingLineItemViewSet,
+    r'marketplace/listing/(?P<listing_id>[^/.]+)/line-item',
+    EquipmentItemMarketplaceListingLineItemViewSet,
     basename='marketplace-line-item'
 )
 
-router.register(r'marketplace/listing', EquipmentItemMarketplaceListingViewSet, basename='marketplace-listing')
+router.register(
+    r'marketplace/listing/(?P<listing_id>[^/.]+)/line-item/(?P<line_item_id>[^/.]+)/image',
+    EquipmentItemMarketplaceListingLineItemImageViewSet,
+    basename='marketplace-image'
+)
 
-router.register(r'marketplace/feedback', EquipmentItemMarketplaceFeedbackViewSet, basename='marketplace-feedback')
+
+router.register(
+    r'marketplace/listing/(?P<listing_id>[^/.]+)/private-conversations',
+    EquipmentItemMarketplacePrivateConversationViewSet,
+    basename='marketplace-private-conversation'
+)
+
+router.register(
+    r'marketplace/feedback',
+    EquipmentItemMarketplaceFeedbackViewSet,
+    basename='marketplace-feedback'
+)
 
 urlpatterns = [
     url('', include(router.urls)),

@@ -5,9 +5,6 @@ from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_feedback_serializer import \
     EquipmentItemMarketplaceFeedbackSerializer
-from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_serializer import \
-    EquipmentItemMarketplaceListingSerializer
-from astrobin_apps_equipment.api.serializers.equipment_preset_serializer import EquipmentPresetSerializer
 from common.permissions import IsObjectUserOrReadOnly
 
 
