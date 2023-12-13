@@ -2,10 +2,13 @@
 
 
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
 from safedelete import HARD_DELETE
 
 from astrobin_apps_equipment.models import (
-    AccessoryMigrationRecord, CameraMigrationRecord, EquipmentItemMarketplaceListing, EquipmentPreset,
+    AccessoryMigrationRecord, CameraMigrationRecord, EquipmentItemMarketplaceListing,
+    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemImage, EquipmentPreset,
     FilterMigrationRecord, MountMigrationRecord,
     Sensor, Camera, SoftwareMigrationRecord, Telescope,
     CameraEditProposal, Mount,
@@ -193,7 +196,136 @@ class EquipmentItemMigrationRecordAdmin(admin.ModelAdmin):
 
 
 class EquipmentItemMarketplaceListingAdmin(admin.ModelAdmin):
-    list_display = ('id',)
+    list_display = (
+        'hash',
+        'user',
+        'expiration',
+    )
+
+    search_fields = (
+        'hash',
+        'user__username',
+    )
+
+    readonly_fields = (
+        'id',
+        'hash',
+        'user',
+        'created',
+        'view_line_items',
+    )
+
+    def view_line_items(self, obj) -> str:
+        line_items = obj.line_items.all()
+        line_item_links = [
+            format_html(
+                '<a href="{}">{}</a>',
+                reverse(
+                    "admin:astrobin_apps_equipment_equipmentitemmarketplacelistinglineitem_change",
+                    args=(line_item.id,)
+                ),
+                line_item.item_content_object
+            )
+            for line_item in line_items
+        ]
+        return format_html("<br>".join(line_item_links))
+
+    view_line_items.short_description = 'Line Items'
+
+class EquipmentItemMarketplaceListingLineItemAdmin(admin.ModelAdmin):
+    list_display = (
+        'hash',
+        'listing',
+        'user',
+        'price',
+        'currency',
+    )
+
+    search_fields = (
+        'hash',
+        'user__username',
+    )
+
+    readonly_fields = (
+        'id',
+        'hash',
+        'user',
+        'created',
+        'view_listing',
+        'view_images',
+    )
+
+    exclude = (
+        'listing',
+        'sold_to',
+        'reserved_to',
+    )
+
+    def view_listing(self, obj) -> str:
+        return format_html(
+            '<a href="{}">{}</a>',
+            reverse(
+                "admin:astrobin_apps_equipment_equipmentitemmarketplacelisting_change",
+                args=(obj.listing.id,)
+            ),
+            obj.listing
+        )
+
+    def view_images(self, obj) -> str:
+        images = obj.images.all()
+        image_links = [
+            format_html(
+                '<a href="{}">{}</a>',
+                reverse(
+                    "admin:astrobin_apps_equipment_equipmentitemmarketplacelistinglineitemimage_change",
+                    args=(image.id,)
+                ),
+                image.image_file.url
+            )
+            for image in images
+        ]
+        return format_html("<br>".join(image_links))
+
+    view_images.short_description = 'Images'
+
+class EquipmentItemMarketplaceListingLineItemImageAdmin(admin.ModelAdmin):
+    list_display = (
+        'hash',
+        'line_item',
+        'user',
+        'w',
+        'h',
+    )
+
+    search_fields = (
+        'hash',
+        'user__username',
+    )
+
+    readonly_fields = (
+        'id',
+        'hash',
+        'w',
+        'h',
+        'user',
+        'created',
+        'view_line_item',
+    )
+
+    exclude = (
+        'line_item',
+    )
+
+    def view_line_item(self, obj) -> str:
+        return format_html(
+            '<a href="{}">{}</a>',
+            reverse(
+                "admin:astrobin_apps_equipment_equipmentitemmarketplacelistinglineitem_change",
+                args=(obj.line_item.id,)
+            ),
+            obj.line_item
+        )
+
 
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
@@ -222,3 +354,5 @@ admin.site.register(FilterMigrationRecord, EquipmentItemMigrationRecordAdmin)
 admin.site.register(AccessoryMigrationRecord, EquipmentItemMigrationRecordAdmin)
 admin.site.register(SoftwareMigrationRecord, EquipmentItemMigrationRecordAdmin)
 admin.site.register(EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingAdmin)
+admin.site.register(EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemAdmin)
+admin.site.register(EquipmentItemMarketplaceListingLineItemImage, EquipmentItemMarketplaceListingLineItemImageAdmin)
