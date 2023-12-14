@@ -36,6 +36,10 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         editable=False,
     )
 
+    approved = models.DateTimeField(
+        null=True,
+    )
+
     expiration = models.DateTimeField(
         null=False,
         blank=False,
@@ -97,3 +101,10 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
 
     def __str__(self):
         return f'Marketplace listing by {self.user}'
+
+    class Meta:
+        ordering = ['-approved', '-updated']
+        indexes = [
+            models.Index(fields=['approved', 'updated']),
+            models.Index(fields=['country']),
+        ]

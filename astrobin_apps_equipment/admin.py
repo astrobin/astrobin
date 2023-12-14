@@ -198,6 +198,7 @@ class EquipmentItemMigrationRecordAdmin(admin.ModelAdmin):
 class EquipmentItemMarketplaceListingAdmin(admin.ModelAdmin):
     list_display = (
         'hash',
+        'created',
         'user',
         'expiration',
     )
@@ -235,6 +236,7 @@ class EquipmentItemMarketplaceListingAdmin(admin.ModelAdmin):
 class EquipmentItemMarketplaceListingLineItemAdmin(admin.ModelAdmin):
     list_display = (
         'hash',
+        'created',
         'listing',
         'user',
         'price',

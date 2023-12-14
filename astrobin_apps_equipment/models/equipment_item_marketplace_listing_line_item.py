@@ -118,3 +118,6 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
 
     def __str__(self):
         return f'Marketplace line item for {self.listing} by {self.user}'
+
+    class Meta:
+        ordering = ('created',)
