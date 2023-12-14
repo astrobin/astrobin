@@ -24,7 +24,6 @@ class EquipmentItemMarketplaceListingLineItemImageViewSet(viewsets.ModelViewSet)
         IsObjectUserOrReadOnly
     ]
     serializer_class = EquipmentItemMarketplaceListingLineItemImageSerializer
-    http_method_names = ['get', 'head', 'post']
     filterset_fields = ['hash']
 
     def get_queryset(self) -> QuerySet:
