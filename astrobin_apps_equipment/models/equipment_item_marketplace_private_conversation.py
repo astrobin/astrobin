@@ -35,3 +35,7 @@ class EquipmentItemMarketplacePrivateConversation(SafeDeleteModel):
 
     def __str__(self):
         return f'Marketplace listing private conversation for {self.listing} by {self.user}: {self.amount}'
+
+    class Meta:
+        ordering = ('created',)
+        unique_together = ('user', 'listing')
