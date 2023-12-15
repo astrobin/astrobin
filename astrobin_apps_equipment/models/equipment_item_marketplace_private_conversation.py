@@ -2,7 +2,6 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
-from safedelete.models import SafeDeleteModel
 
 
 class EquipmentItemMarketplacePrivateConversation(models.Model):
@@ -31,6 +30,14 @@ class EquipmentItemMarketplacePrivateConversation(models.Model):
     comments = GenericRelation(
         'nested_comments.NestedComment',
         related_query_name='equipment_item_marketplace_private_conversations',
+    )
+
+    user_last_accessed = models.DateTimeField(
+        null=True,
+    )
+
+    listing_user_last_accessed = models.DateTimeField(
+        null=True,
     )
 
     def __str__(self):

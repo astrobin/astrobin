@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -40,7 +41,7 @@ class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         listing_id = self.kwargs.get('listing_id')
         listing = get_object_or_404(EquipmentItemMarketplaceListing, pk=listing_id)
-        serializer.save(user=self.request.user, listing=listing)
+        serializer.save(user=self.request.user, listing=listing, user_last_accessed=timezone.now())
 
     def destroy(self, request, *args, **kwargs):
         conversation: EquipmentItemMarketplacePrivateConversation = self.get_object()
