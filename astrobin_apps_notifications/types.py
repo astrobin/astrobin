@@ -85,6 +85,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_comment_to_marketplace_private_conv',
+        _('Your listing has a new private conversation'),
+        '',
+        2,
+    ),
+    (
         'new_comment_reply',
         _('There was a reply to your comment'),
         '',

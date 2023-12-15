@@ -6,6 +6,7 @@ from django.utils.translation import gettext
 from astrobin.fields import COUNTRIES
 from astrobin_apps_equipment.types.marketplace_shipping_method import MarketplaceShippingMethod
 from common.models.hashed_model import HashedSafeDeleteModel
+from common.services import AppRedirectionService
 
 EQUIPMENT_ITEM_MARKETPLACE_SHIPPING_METHOD_CHOICES = (
     (MarketplaceShippingMethod.STANDARD_MAIL.value, gettext("Standard mail")),
@@ -100,7 +101,13 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         super(EquipmentItemMarketplaceListing, self).delete(*args, **kwargs)
 
     def __str__(self):
-        return f'Marketplace listing by {self.user}'
+        if self.line_items.count() == 0:
+            return f'Marketplace listing by {self.user}'
+
+        return ' / '.join([str(item) for item in self.line_items.all()])
+
+    def get_absolute_url(self):
+        return AppRedirectionService.redirect(f'/equipment/marketplace/listing/{self.hash}')
 
     class Meta:
         ordering = ['-approved', '-updated']

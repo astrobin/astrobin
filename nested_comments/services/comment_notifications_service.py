@@ -8,7 +8,10 @@ from django.urls import reverse
 
 from astrobin.models import Image
 from astrobin.stories import ACTSTREAM_VERB_COMMENTED_IMAGE, add_story
-from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Sensor, Software, Telescope
+from astrobin_apps_equipment.models import (
+    Accessory, Camera, EquipmentItemMarketplacePrivateConversation, Filter,
+    Mount, Sensor, Software, Telescope,
+)
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
@@ -37,6 +40,10 @@ class CommentNotificationsService:
         notification = None
         mentions = MentionsService.get_mentions(instance.text)
         url = None
+        target = str(instance.content_object)
+        target_url = build_notification_url(
+            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.author
+        ) if hasattr(instance.content_object, 'get_absolute_url') else None
 
         if model_class == Image:
             object_owner = obj.user
@@ -61,8 +68,15 @@ class CommentNotificationsService:
         ):
             object_owner = obj.created_by
             notification = 'new_comment_to_unapproved_equipment_item'
-            url = AppRedirectionService.redirect(f'/equipment/explorer/{model_class.__name__.lower()}/{obj.pk}#c{self.comment.id}')
-            pass
+            url = AppRedirectionService.redirect(f'/equipment/explorer/{model_class.__name__.lower()}/{obj.pk}#c{instance.id}')
+        elif model_class == EquipmentItemMarketplacePrivateConversation:
+            object_owner = obj.listing.user
+            notification = 'new_comment_to_marketplace_private_conv'
+            url = build_notification_url(settings.BASE_URL + obj.listing.get_absolute_url() + f'#c{instance.id}', instance.author)
+            target = str(obj.listing)
+            target_url = build_notification_url(
+                settings.BASE_URL + obj.listing.get_absolute_url(), instance.author
+            )
 
         if UserService(object_owner).shadow_bans(instance.author):
             log.info("Skipping notification for comment because %d shadow-bans %d" % (
@@ -84,10 +98,8 @@ class CommentNotificationsService:
                         'user_url': settings.BASE_URL + reverse(
                             'user_page', kwargs={'username': instance.author.username}
                         ),
-                        'target': str(instance.content_object),
-                        'target_url': build_notification_url(
-                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.author
-                        ) if hasattr(instance.content_object, 'get_absolute_url') else None,
+                        'target': target,
+                        'target_url': target_url,
                     }
                 )
 
@@ -114,10 +126,8 @@ class CommentNotificationsService:
                             'user_url': settings.BASE_URL + reverse(
                                 'user_page', kwargs={'username': instance.author.username}
                             ),
-                            'target': str(self.comment.content_object),
-                            'target_url': build_notification_url(
-                                settings.BASE_URL + self.comment.content_object.get_absolute_url(), self.comment.author
-                            ) if hasattr(self.comment.content_object, 'get_absolute_url') else None
+                            'target': target,
+                            'target_url': target_url,
                         }
                     )
 

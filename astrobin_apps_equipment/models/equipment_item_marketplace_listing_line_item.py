@@ -117,7 +117,7 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
         super(EquipmentItemMarketplaceListingLineItem, self).delete(*args, **kwargs)
 
     def __str__(self):
-        return f'Marketplace line item for {self.listing} by {self.user}'
+        return str(self.item_content_object)
 
     class Meta:
         ordering = ('created',)
