@@ -5,7 +5,7 @@ from django.db import models
 from safedelete.models import SafeDeleteModel
 
 
-class EquipmentItemMarketplacePrivateConversation(SafeDeleteModel):
+class EquipmentItemMarketplacePrivateConversation(models.Model):
     user = models.ForeignKey(
         User,
         related_name='equipment_item_marketplace_listings_private_conversations',
@@ -34,7 +34,7 @@ class EquipmentItemMarketplacePrivateConversation(SafeDeleteModel):
     )
 
     def __str__(self):
-        return f'Marketplace listing private conversation for {self.listing} by {self.user}: {self.amount}'
+        return f'Marketplace listing private conversation for {self.listing} by {self.user}'
 
     class Meta:
         ordering = ('created',)

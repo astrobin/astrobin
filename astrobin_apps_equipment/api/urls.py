@@ -79,7 +79,7 @@ router.register(
 
 
 router.register(
-    r'marketplace/listing/(?P<listing_id>[^/.]+)/private-conversations',
+    r'marketplace/listing/(?P<listing_id>[^/.]+)/private-conversation',
     EquipmentItemMarketplacePrivateConversationViewSet,
     basename='marketplace-private-conversation'
 )

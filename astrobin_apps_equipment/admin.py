@@ -8,7 +8,8 @@ from safedelete import HARD_DELETE
 
 from astrobin_apps_equipment.models import (
     AccessoryMigrationRecord, CameraMigrationRecord, EquipmentItemMarketplaceListing,
-    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemImage, EquipmentPreset,
+    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemImage,
+    EquipmentItemMarketplacePrivateConversation, EquipmentPreset,
     FilterMigrationRecord, MountMigrationRecord,
     Sensor, Camera, SoftwareMigrationRecord, Telescope,
     CameraEditProposal, Mount,
@@ -329,6 +330,29 @@ class EquipmentItemMarketplaceListingLineItemImageAdmin(admin.ModelAdmin):
         )
 
 
+class EquipmentItemMarketplacePrivateConversationAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'listing',
+        'created',
+    )
+
+    search_fields = (
+        'user__username',
+        'listing__hash',
+    )
+
+    readonly_fields = (
+        'id',
+        'user',
+        'listing',
+        'created',
+    )
+
+    exclude = (
+        'comments',
+    )
+
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)
@@ -358,3 +382,4 @@ admin.site.register(SoftwareMigrationRecord, EquipmentItemMigrationRecordAdmin)
 admin.site.register(EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingAdmin)
 admin.site.register(EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemAdmin)
 admin.site.register(EquipmentItemMarketplaceListingLineItemImage, EquipmentItemMarketplaceListingLineItemImageAdmin)
+admin.site.register(EquipmentItemMarketplacePrivateConversation, EquipmentItemMarketplacePrivateConversationAdmin)
