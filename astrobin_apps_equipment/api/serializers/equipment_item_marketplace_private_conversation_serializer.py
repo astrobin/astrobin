@@ -17,7 +17,7 @@ class EquipmentItemMarketplacePrivateConversationSerializer(serializers.ModelSer
             if obj.listing_user_last_accessed is None:
                 count = obj.comments.count()
             else:
-                count = obj.comments.filter(created__gt=obj.user_last_accessed).count()
+                count = obj.comments.filter(created__gt=obj.listing_user_last_accessed).count()
         else:
             count = obj.comments.filter(created__gt=obj.user_last_accessed).count()
 
