@@ -80,6 +80,12 @@ FIELDS = (
     'modified_camera',
     'topic',
     'filter_types',
+    'telescope_ids',
+    'camera_ids',
+    'mount_ids',
+    'filter_ids',
+    'accessory_ids',
+    'software_ids',
 
     # Sorting
     'sort'
@@ -167,6 +173,14 @@ class AstroBinSearchForm(SearchForm):
     modified_camera = forms.CharField(required=False)
     topic = forms.IntegerField(required=False)
     filter_types = forms.CharField(required=False)
+
+    # For precise ID based equipment search
+    telescope_ids = forms.CharField(required=False)
+    camera_ids = forms.CharField(required=False)
+    mount_ids = forms.CharField(required=False)
+    filter_ids = forms.CharField(required=False)
+    accessory_ids = forms.CharField(required=False)
+    software_ids = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -319,7 +333,7 @@ class AstroBinSearchForm(SearchForm):
             pass
 
         return results
-    
+
     def filter_by_country(self, results):
         country = self.cleaned_data.get("country")
 
@@ -735,6 +749,75 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_equipment_ids(self, results):
+        telescope_ids = self.cleaned_data.get("telescope_ids")
+        camera_ids = self.cleaned_data.get("camera_ids")
+        mount_ids = self.cleaned_data.get("mount_ids")
+        filter_ids = self.cleaned_data.get("filter_ids")
+        accessory_ids = self.cleaned_data.get("accessory_ids")
+        software_ids = self.cleaned_data.get("software_ids")
+
+        if telescope_ids is not None and telescope_ids != "":
+            results = results.filter(
+                reduce(
+                    or_, [
+                        Q(imaging_telescopes_2_id=x) | Q(guiding_telescopes_2_id=x)
+                        for x in telescope_ids.split(',')
+                    ]
+                )
+            )
+
+        if camera_ids is not None and camera_ids != "":
+            results = results.filter(
+                reduce(
+                    or_, [
+                        Q(imaging_cameras_2_id=x) | Q(guiding_cameras_2_id=x)
+                        for x in camera_ids.split(',')
+                    ]
+                )
+            )
+        if mount_ids is not None and mount_ids != "":
+            results = results.filter(
+                reduce(
+                    or_, [
+                        Q(mounts_2_id=x)
+                        for x in mount_ids.split(',')
+                    ]
+                )
+            )
+
+        if filter_ids is not None and filter_ids != "":
+            results = results.filter(
+                reduce(
+                    or_, [
+                        Q(filters_2_id=x)
+                        for x in filter_ids.split(',')
+                    ]
+                )
+            )
+
+        if accessory_ids is not None and accessory_ids != "":
+            results = results.filter(
+                reduce(
+                    or_, [
+                        Q(accessories_2_id=x)
+                        for x in accessory_ids.split(',')
+                    ]
+                )
+            )
+
+        if software_ids is not None and software_ids != "":
+            results = results.filter(
+                reduce(
+                    or_, [
+                        Q(software_2_id=x)
+                        for x in software_ids.split(',')
+                    ]
+                )
+            )
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -823,6 +906,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_modified_camera(sqs)
         sqs = self.filter_by_forum_topic(sqs)
         sqs = self.filter_by_filter_types(sqs)
+        sqs = self.filter_by_equipment_ids(sqs)
 
         sqs = self.sort(sqs)
 
