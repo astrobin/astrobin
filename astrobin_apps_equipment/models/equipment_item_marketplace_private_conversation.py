@@ -43,6 +43,9 @@ class EquipmentItemMarketplacePrivateConversation(models.Model):
     def __str__(self):
         return f'Marketplace listing private conversation for {self.listing} by {self.user}'
 
+    def get_absolute_url(self):
+        return self.listing.get_absolute_url()
+
     class Meta:
         ordering = ('created',)
         unique_together = ('user', 'listing')

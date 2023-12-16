@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    <a href="{{user_url}}">{{user}}</a>
+    asked a question on your marketplace listing <strong>{{ target }}</strong>.
+{% endblocktrans %}
+
+<br/>
+<br/>
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View question" %}</a>

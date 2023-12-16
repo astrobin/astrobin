@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    <a href="{{user_url}}">{{user}}</a>
+    posted on your private conversation on marketplace listing <strong>{{ target }}</strong>.
+{% endblocktrans %}
+
+<br/>
+<br/>
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View comment" %}</a>

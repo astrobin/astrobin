@@ -39,7 +39,7 @@ from astrobin.tasks import (
     encode_video_file, generate_video_preview, invalidate_cdn_caches,
     process_camera_rename_proposal,
 )
-from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
+from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem, EquipmentItemMarketplacePrivateConversation
 from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.services import ForumService
@@ -189,11 +189,13 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                 add_story(instance.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=instance)
 
         if Image.all_objects.filter(user=instance.user).count() == 1:
-            push_notification([instance.user], None, 'congratulations_for_your_first_image', {
-                'BASE_URL': settings.BASE_URL,
-                'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
-                'url': reverse_url('image_detail', args=(instance.get_id(),))
-            })
+            push_notification(
+                [instance.user], None, 'congratulations_for_your_first_image', {
+                    'BASE_URL': settings.BASE_URL,
+                    'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
+                    'url': reverse_url('image_detail', args=(instance.get_id(),))
+                }
+            )
 
         mentions = MentionsService.get_mentions(instance.description_bbcode)
     else:
@@ -268,7 +270,6 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                             'raw_reason': reason,
                         }
                     )
-
 
 
 post_save.connect(image_post_save, sender=Image)
@@ -364,10 +365,12 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
 
     if (created and not uploading) or just_completed_upload:
         push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
-        add_story(instance.image.user,
-                  verb=ACTSTREAM_VERB_UPLOADED_REVISION,
-                  action_object=instance,
-                  target=instance.image)
+        add_story(
+            instance.image.user,
+            verb=ACTSTREAM_VERB_UPLOADED_REVISION,
+            action_object=instance,
+            target=instance.image
+        )
 
 
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
@@ -434,15 +437,7 @@ pre_save.connect(nested_comment_pre_save, sender=NestedComment)
 
 
 def nested_comment_post_save(sender, instance, created, **kwargs):
-    from astrobin_apps_equipment.models import (
-        Accessory as Accessory2,
-        Camera as Camera2,
-        Filter as Filter2,
-        Mount as Mount2,
-        Sensor as Sensor2,
-        Software as Software2,
-        Telescope as Telescope2
-    )
+    service = CommentNotificationsService(instance)
 
     if created:
         mentions = MentionsService.get_mentions(instance.text)
@@ -457,58 +452,13 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             instance.content_object.save(**save_kwargs)
 
         if instance.pending_moderation:
-            CommentNotificationsService(instance).send_moderation_required_notification()
+            service.send_moderation_required_notification()
         else:
-            CommentNotificationsService(instance).send_notifications()
+            service.send_notifications()
     else:
         mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
-    if not instance.pending_moderation:
-        model_class = instance.content_type.model_class()
-        if model_class == Image:
-            target_url = settings.BASE_URL + instance.content_object.get_absolute_url()
-            url = settings.BASE_URL + instance.get_absolute_url()
-        elif hasattr(model_class, 'edit_proposal_by'):
-            target_url = instance.content_object.get_absolute_url()
-            url = instance.get_absolute_url()
-        elif model_class == Iotd:
-            target_url = AppRedirectionService.redirect(f'/iotd/judgement-queue#comments-{instance.content_type.get_object_for_this_type(id=instance.object_id).pk}-{instance.pk}')
-            url = target_url
-        elif model_class in (
-                Sensor2,
-                Camera2,
-                Telescope2,
-                Filter2,
-                Mount2,
-                Accessory2,
-                Software2
-        ):
-            target_url = AppRedirectionService.redirect(
-                f'/equipment/explorer/{model_class.__name__.lower()}/{instance.content_object.pk}'
-            )
-            url = target_url + f'#c{instance.id}'
-        for username in mentions:
-            user = get_object_or_None(User, username=username)
-            if not user:
-                try:
-                    profile = get_object_or_None(UserProfile, real_name=username)
-                    if profile:
-                        user = profile.user
-                except MultipleObjectsReturned:
-                    user = None
-            if user:
-                push_notification(
-                    [user], instance.author, 'new_comment_mention',
-                    {
-                        'url': build_notification_url(url, instance.author),
-                        'user': instance.author.userprofile.get_display_name(),
-                        'user_url': settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.author}
-                        ),
-                        'target': str(instance.content_object),
-                        'target_url': build_notification_url(target_url, instance.author),
-                    }
-                )
+    service.send_mention_notifications(mentions)
 
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
@@ -563,12 +513,15 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                     collaborators, instance.user, 'new_' + instance.property_type,
                     {
                         'url': build_notification_url(
-                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user),
+                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user
+                        ),
                         'title': instance.content_object.title,
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.user.username}),
-                    })
+                            'user_page', kwargs={'username': instance.user.username}
+                        ),
+                    }
+                )
 
             elif instance.content_type == ContentType.objects.get_for_model(NestedComment):
                 push_notification(
@@ -587,7 +540,8 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                             settings.BASE_URL + instance.content_object.content_object.get_absolute_url(),
                             instance.user
                         ),
-                    })
+                    }
+                )
 
                 UserProfile.all_objects.filter(user=instance.content_object.author).update(updated=timezone.now())
 
@@ -596,20 +550,25 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                     [instance.content_object.user], instance.user, 'new_forum_post_like',
                     {
                         'url': build_notification_url(
-                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user),
+                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user
+                        ),
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.user.username}),
+                            'user_page', kwargs={'username': instance.user.username}
+                        ),
 
                         'post': instance.content_object.topic.name
-                    })
+                    }
+                )
 
                 UserProfile.all_objects.filter(user=instance.content_object.user).update(updated=timezone.now())
 
             if verb is not None:
-                add_story(instance.user,
-                          verb=verb,
-                          action_object=instance.content_object)
+                add_story(
+                    instance.user,
+                    verb=verb,
+                    action_object=instance.content_object
+                )
 
         elif instance.property_type == "follow":
             user_ct = ContentType.objects.get_for_model(User)
@@ -618,8 +577,11 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 push_notification(
                     [followed_user], instance.user, 'new_follower', {
                         'object': instance.user.userprofile.get_display_name(),
-                        'object_url': build_notification_url(settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.user.username}), instance.user),
+                        'object_url': build_notification_url(
+                            settings.BASE_URL + reverse_url(
+                                'user_page', kwargs={'username': instance.user.username}
+                            ), instance.user
+                        ),
                     }
                 )
 
@@ -702,7 +664,8 @@ def subscription_paid(sender, **kwargs):
     if 'premium' in subscription.category and Transaction.objects.filter(
             user=user,
             event='new usersubscription',
-            timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
+            timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
+    ):
         push_notification(
             [user],
             None,
@@ -750,15 +713,17 @@ def subscription_signed_up(sender, **kwargs):
 
         # Invalidate other premium subscriptions
         UserSubscription.active_objects \
-            .filter(user=user_subscription.user,
-                    subscription__category__startswith='premium') \
+            .filter(
+            user=user_subscription.user,
+            subscription__category__startswith='premium'
+        ) \
             .exclude(pk=user_subscription.pk) \
             .update(active=False)
 
         if Transaction.objects.filter(
-            user=user,
-            event='new usersubscription',
-            timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
+                user=user,
+                event='new usersubscription',
+                timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
         ):
             push_notification(
                 [user],
@@ -857,19 +822,23 @@ def group_post_save(sender, instance, created, **kwargs):
             followers = [
                 x.user for x in
                 ToggleProperty.objects.toggleproperties_for_object(
-                    "follow", UserProfile.objects.get(user__pk=instance.creator.pk).user)
+                    "follow", UserProfile.objects.get(user__pk=instance.creator.pk).user
+                )
             ]
-            push_notification(followers, instance.creator, 'new_public_group_created',
-                              {
-                                  'creator': instance.creator.userprofile.get_display_name(),
-                                  'group_name': instance.name,
-                                  'url': settings.BASE_URL + reverse_url('group_detail', args=(instance.pk,)),
-                              })
+            push_notification(
+                followers, instance.creator, 'new_public_group_created',
+                {
+                    'creator': instance.creator.userprofile.get_display_name(),
+                    'group_name': instance.name,
+                    'url': settings.BASE_URL + reverse_url('group_detail', args=(instance.pk,)),
+                }
+            )
 
             add_story(
                 instance.creator,
                 verb=ACTSTREAM_VERB_CREATED_PUBLIC_GROUP,
-                action_object=instance)
+                action_object=instance
+            )
 
 
 post_save.connect(group_post_save, sender=Group)
@@ -920,12 +889,14 @@ def group_members_changed(sender, instance, **kwargs):
                                 settings.BASE_URL + reverse_url('group_detail', args=(instance.pk,)),
                                 user
                             ),
-                        })
+                        }
+                    )
 
                     add_story(
                         user,
                         verb=ACTSTREAM_VERB_JOINED_GROUP,
-                        action_object=instance)
+                        action_object=instance
+                    )
 
         if instance.autosubmission:
             for batch_pk_set in batch(pk_set, size=50):
@@ -956,12 +927,14 @@ def group_members_changed(sender, instance, **kwargs):
         # Sync IOTD AstroBin groups with django groups
         if instance.name in list(group_sync_map.keys()):
             all_members = []
-            all_members_chain = chain([
-                x.members.all()
-                for x in Group.objects \
+            all_members_chain = chain(
+                [
+                    x.members.all()
+                    for x in Group.objects \
                     .filter(name__in=list(group_sync_map.keys())) \
                     .exclude(name=instance.name)
-            ])
+                ]
+            )
             for chain_item in all_members_chain:
                 all_members += chain_item
             for user in [x for x in users if x not in all_members]:
@@ -975,12 +948,14 @@ def group_members_changed(sender, instance, **kwargs):
         users = instance.members.all()
         if instance.name in list(group_sync_map.keys()):
             all_members = []
-            all_members_chain = chain([
-                x.members.all()
-                for x in Group.objects \
+            all_members_chain = chain(
+                [
+                    x.members.all()
+                    for x in Group.objects \
                     .filter(name__in=list(group_sync_map.keys())) \
                     .exclude(name=instance.name)
-            ])
+                ]
+            )
             for chain_item in all_members_chain:
                 all_members += chain_item
             for user in [x for x in users if x not in all_members]:
@@ -1157,17 +1132,20 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                 'new_topic_in_group',
                 {
                     'user_url': build_notification_url(
-                        settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})),
+                        settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})
+                    ),
                     'user': instance.user.userprofile.get_display_name(),
                     'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                     'group_url': build_notification_url(
-                        reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user),
+                        reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user
+                    ),
                     'group_name': group.name,
                     'topic_title': instance.name,
                 },
             )
         elif instance.forum.category.slug == 'equipment-forums':
             notify_equipment_users.delay(instance.pk)
+
 
 pre_save.connect(forum_topic_pre_save, sender=Topic)
 
@@ -1189,11 +1167,13 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
                 'new_topic_in_group',
                 {
                     'user_url': build_notification_url(
-                        settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})),
+                        settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})
+                    ),
                     'user': instance.user.userprofile.get_display_name(),
                     'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                     'group_url': build_notification_url(
-                        settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user),
+                        settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user
+                    ),
                     'group_name': group.name,
                     'topic_title': instance.name,
                 },
@@ -1204,7 +1184,8 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
 
     cache_key = make_template_fragment_key(
         'home_page_latest_from_forums',
-        (instance.user.pk, instance.user.userprofile.language))
+        (instance.user.pk, instance.user.userprofile.language)
+    )
     cache.delete(cache_key)
 
 
@@ -1257,13 +1238,18 @@ pre_save.connect(forum_post_pre_save, sender=Post)
 
 def forum_post_post_save(sender, instance, created, **kwargs):
     def notify_subscribers(mentions: List[str]) -> None:
-        recipients = list(instance.topic.subscribers.exclude(
-            pk__in=list(set(
-                [instance.user.pk] +
-                [x.pk for x in MentionsService.get_mentioned_users_with_notification_enabled(
-                    mentions, 'new_forum_post_mention')
-                 ])
-            ))
+        recipients = list(
+            instance.topic.subscribers.exclude(
+                pk__in=list(
+                    set(
+                        [instance.user.pk] +
+                        [x.pk for x in MentionsService.get_mentioned_users_with_notification_enabled(
+                            mentions, 'new_forum_post_mention'
+                        )
+                         ]
+                    )
+                )
+            )
         )
 
         if recipients:
@@ -1276,7 +1262,8 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                     'user_url': settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user}),
                     'post_url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                     'topic_url': build_notification_url(
-                        settings.BASE_URL + instance.topic.get_absolute_url(), instance.user),
+                        settings.BASE_URL + instance.topic.get_absolute_url(), instance.user
+                    ),
                     'topic_name': instance.topic.name,
                     'unsubscribe_url': build_notification_url(
                         settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]),
@@ -1304,7 +1291,8 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                         'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.user}),
+                            'user_page', kwargs={'username': instance.user}
+                        ),
                         'post': instance.topic.name,
                     }
                 )
@@ -1330,9 +1318,11 @@ def forum_post_post_save(sender, instance, created, **kwargs):
         mentions = cache.get("post.%d.forum_post_pre_save_mentions" % instance.pk, [])
         cache.delete("post.%d.forum_post_pre_save_mentions" % instance.pk)
         if cache.get("post.%d.forum_post_pre_save_approved" % instance.pk):
-            push_notification([instance.user], None, 'forum_post_approved', {
-                'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url())
-            })
+            push_notification(
+                [instance.user], None, 'forum_post_approved', {
+                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url())
+                }
+            )
             notify_subscribers(mentions)
             notify_mentioned(mentions)
             cache.delete("post.%d.forum_post_pre_save_approved" % instance.pk)
@@ -1395,6 +1385,7 @@ def user_pre_delete(sender, instance, **kwargs):
         log.error('Error deleting Stripe customer: %s' % e)
     except ObjectDoesNotExist as e:
         log.error('User %s has no userprofile: %s' % (instance.username, str(e)))
+
 
 pre_delete.connect(user_pre_delete, sender=User)
 
@@ -1475,10 +1466,12 @@ def top_pick_nominations_archive_post_save(sender, instance, created, **kwargs):
         thumb = image.thumbnail_raw('gallery', None, sync=True)
 
         collaborators = [image.user] + list(image.collaborators.all())
-        push_notification(collaborators, None, 'your_image_is_tpn', {
-            'image': image,
-            'image_thumbnail': thumb.url if thumb else None
-        })
+        push_notification(
+            collaborators, None, 'your_image_is_tpn', {
+                'image': image,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
 
 
 post_save.connect(top_pick_nominations_archive_post_save, sender=TopPickNominationsArchive)
@@ -1490,16 +1483,20 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
         thumb = image.thumbnail_raw('gallery', None, sync=True)
 
         submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
-        push_notification(submitters, None, 'image_you_promoted_is_tp', {
-            'image': image,
-            'image_thumbnail': thumb.url if thumb else None
-        })
+        push_notification(
+            submitters, None, 'image_you_promoted_is_tp', {
+                'image': image,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
 
         reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
-        push_notification(reviewers, None, 'image_you_promoted_is_tp', {
-            'image': image,
-            'image_thumbnail': thumb.url if thumb else None
-        })
+        push_notification(
+            reviewers, None, 'image_you_promoted_is_tp', {
+                'image': image,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
 
         dismissers = [x.user for x in IotdDismissedImage.objects.filter(image=image)]
         push_notification(
@@ -1510,10 +1507,12 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
         )
 
         collaborators = [image.user] + list(image.collaborators.all())
-        push_notification(collaborators, None, 'your_image_is_tp', {
-            'image': image,
-            'image_thumbnail': thumb.url if thumb else None
-        })
+        push_notification(
+            collaborators, None, 'your_image_is_tp', {
+                'image': image,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
 
 
 post_save.connect(top_pick_archive_item_post_save, sender=TopPickArchive)

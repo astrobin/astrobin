@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{user}} posted on your private conversation on marketplace listing "{{ target }}".
+{% endblocktrans %}
