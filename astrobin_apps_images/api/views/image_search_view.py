@@ -5,6 +5,7 @@ from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin.models import Image
 from astrobin_apps_images.api.serializers import ImageSearchSerializer
+from common.api_page_size_pagination import PageSizePagination
 from common.permissions import ReadOnly
 
 
@@ -16,3 +17,4 @@ class ImageSearchView(HaystackViewSet):
     filter_backends = (HaystackFilter, HaystackOrderingFilter)
     ordering_fields = ('published', 'title', 'w', 'h', 'likes')
     ordering = ('-published',)
+    pagination_class = PageSizePagination

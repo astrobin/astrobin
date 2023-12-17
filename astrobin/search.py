@@ -818,6 +818,14 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_username(self, results):
+        username = self.cleaned_data.get("username")
+
+        if username is not None and username != "":
+            results = results.filter(username=username)
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -907,6 +915,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_forum_topic(sqs)
         sqs = self.filter_by_filter_types(sqs)
         sqs = self.filter_by_equipment_ids(sqs)
+        sqs = self.filter_by_username(sqs)
 
         sqs = self.sort(sqs)
 

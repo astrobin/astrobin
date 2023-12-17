@@ -14,6 +14,7 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
     total_image_count = serializers.SerializerMethodField(read_only=True)
     seller_image_count = serializers.SerializerMethodField(read_only=True)
     item_klass = serializers.SerializerMethodField(read_only=True)
+    username = serializers.CharField(source='user.username', read_only=True)
 
     def create(self, validated_data):
         user = self.context['request'].user
