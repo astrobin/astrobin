@@ -13,6 +13,7 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
     images = EquipmentItemMarketplaceListingLineItemImageSerializer(many=True, read_only=True)
     total_image_count = serializers.SerializerMethodField(read_only=True)
     seller_image_count = serializers.SerializerMethodField(read_only=True)
+    item_klass = serializers.SerializerMethodField(read_only=True)
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -44,6 +45,8 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
             Q(user=obj.user) & Q(moderator_decision=ModeratorDecision.APPROVED) & q
         ).count()
 
+    def get_item_klass(self, obj):
+        return obj.item_content_object.klass
 
     class Meta:
         model = EquipmentItemMarketplaceListingLineItem
