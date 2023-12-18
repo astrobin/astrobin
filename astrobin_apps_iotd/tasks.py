@@ -146,7 +146,7 @@ def notify_about_upcoming_deadline_for_iotd_tp_submission():
     IotdService.notify_about_upcoming_deadline_for_iotd_tp_submission()
 
 
-@shared_task(time_limit=600)
+@shared_task(time_limit=600, acks_late=True)
 def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views():
     # Run this task every hour.
     last_check_cache_key = 'last_iotd_tp_resubmission_check'
