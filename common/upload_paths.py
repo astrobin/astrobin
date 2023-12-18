@@ -43,3 +43,8 @@ def marketplace_listing_upload_path(instance, filename: str) -> str:
     user = instance.user
     return upload_path('marketplace', user.pk, filename)
 
+
+def marketplace_listing_thumbnail_upload_path(instance, filename: str) -> str:
+    user = instance.user
+    return upload_path('marketplace-thumbs', user.pk, filename)
+
