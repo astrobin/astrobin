@@ -44,6 +44,7 @@ class UserSerializer(serializers.ModelSerializer):
     marketplace_accuracy_feedback = serializers.SerializerMethodField(read_only=True)
     marketplace_packaging_feedback = serializers.SerializerMethodField(read_only=True)
     marketplace_feedback_count = serializers.SerializerMethodField(read_only=True)
+    marketplace_listing_count = serializers.SerializerMethodField(read_only=True)
 
     def get_display_name(self, user: User) -> str:
         return user.userprofile.get_display_name()
@@ -62,6 +63,9 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_marketplace_feedback_count(self, user: User) -> Optional[int]:
         return 0
+
+    def get_marketplace_listing_count(self, user: User) -> Optional[int]:
+        return user.created_equipment_item_marketplace_listings.count()
 
     class Meta:
         model = User
