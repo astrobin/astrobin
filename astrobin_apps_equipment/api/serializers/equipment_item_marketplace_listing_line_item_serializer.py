@@ -63,6 +63,8 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
             return Q(imaging_telescopes_2=item) | Q(guiding_telescopes_2=item)
         elif item.klass == EquipmentItemKlass.CAMERA:
             return Q(imaging_cameras_2=item) | Q(guiding_cameras_2=item)
+        elif item.klass == EquipmentItemKlass.SENSOR:
+            return Q(imaging_cameras_2__sensor=item) | Q(guiding_cameras_2__sensor=item)
         elif item.klass == EquipmentItemKlass.MOUNT:
             return Q(mounts_2=item)
         elif item.klass == EquipmentItemKlass.FILTER:
