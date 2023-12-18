@@ -93,6 +93,10 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         blank=True,
     )
 
+    bundle_sale_only = models.BooleanField(
+        default=False,
+    )
+
     def delete(self, *args, **kwargs):
         from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
         related_children = EquipmentItemMarketplaceListingLineItem.objects.filter(listing=self)
