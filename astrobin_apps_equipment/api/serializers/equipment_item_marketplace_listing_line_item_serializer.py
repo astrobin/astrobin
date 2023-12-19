@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db.models import Q
 from rest_framework import serializers
 
@@ -74,7 +76,13 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         elif item.klass == EquipmentItemKlass.SOFTWARE:
             return Q(software_2=item)
 
-        return q
+        return Q()
+
+    def validate_year_of_purchase(self, value):
+        if value > datetime.now().year:
+            raise serializers.ValidationError("Year of purchase must not be in the future.")
+
+        return value
     
     class Meta:
         model = EquipmentItemMarketplaceListingLineItem
