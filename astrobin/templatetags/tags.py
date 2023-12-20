@@ -25,6 +25,7 @@ from astrobin.enums.license import License
 from astrobin.gear import get_correct_gear, is_gear_complete
 from astrobin.models import GearUserInfo, Image, LICENSE_CHOICES, UserProfile
 from astrobin.services.gear_service import GearService
+from astrobin.services.utils_service import UtilsService
 from astrobin.types import cookie_definitions
 from astrobin.utils import (
     dec_decimal_precision_from_pixel_scale, decimal_to_degrees_minutes_seconds_html,
