@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.safestring import SafeString, mark_safe
@@ -25,7 +25,6 @@ from astrobin.enums.license import License
 from astrobin.gear import get_correct_gear, is_gear_complete
 from astrobin.models import GearUserInfo, Image, LICENSE_CHOICES, UserProfile
 from astrobin.services.gear_service import GearService
-from astrobin.services.utils_service import UtilsService
 from astrobin.types import cookie_definitions
 from astrobin.utils import (
     dec_decimal_precision_from_pixel_scale, decimal_to_degrees_minutes_seconds_html,
@@ -42,6 +41,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 from astrobin_apps_remote_source_affiliation.services.remote_source_affiliation_service import \
     RemoteSourceAffiliationService
 from astrobin_apps_users.services import UserService
+from common.services.popup_message_service import PopupMessageService
 
 register = Library()
 
@@ -967,3 +967,7 @@ def cookie_description(cookie_name: str) -> str:
 @register.filter
 def get_search_synonyms_text(text: str) -> Optional[str]:
     return UtilsService.get_search_synonyms_text(text)
+
+  
+def get_unseen_active_popups(user: User) -> QuerySet:
+    return PopupMessageService.get_unseen_active_popups(user)

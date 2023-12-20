@@ -1,3 +1,4 @@
+import hashlib
 import os
 import re
 
@@ -8,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
+from django.core.cache import cache
 from django.db.models import Q, QuerySet, Value
 from django.db.models.functions import Concat, Lower
 from django.http import HttpResponse
@@ -71,6 +73,9 @@ def autocomplete_usernames(request):
     # Replace non-breaking space with regular space
     q = q.replace(chr(160), ' ')
 
+    if len(q) > 15:
+        q = q[:15]
+
     def filter_by_distance(queryset: QuerySet, q: str) -> QuerySet:
         if 'postgresql' in settings.DATABASES['default']['ENGINE']:
             return queryset.annotate(
@@ -86,6 +91,13 @@ def autocomplete_usernames(request):
             ).filter(
                 name__icontains=q
             )
+
+    query_hash = hashlib.md5(q.encode('utf-8')).hexdigest()
+    cache_key = f'astrobin_autocomplete_usernames_{query_hash}_{from_forums}_{from_image_page}'
+    cache_value = cache.get(cache_key)
+
+    if cache_value is not None:
+        return HttpResponse(cache_value)
 
     if from_forums:
         if '?' in referer_header:
@@ -141,7 +153,10 @@ def autocomplete_usernames(request):
             'avatar': avatar_url,
         })
 
-    return HttpResponse(simplejson.dumps(ret))
+    cache_value = simplejson.dumps(ret)
+    cache.set(cache_key, cache_value, 600)
+
+    return HttpResponse(cache_value)
 
 
 @require_GET
