@@ -3443,3 +3443,61 @@ class DataDownloadRequest(models.Model):
     class Meta:
         app_label = 'astrobin'
         ordering = ('-created',)
+
+
+class PopupMessage(models.Model):
+    title = models.CharField(
+        max_length=256,
+        null=False,
+    )
+
+    body = models.TextField(
+        null=False,
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    active = models.BooleanField(
+        default=True,
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-created',)
+        indexes = [
+            models.Index(fields=['active', '-created']),
+        ]
+
+
+class PopupMessageUserStatus(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+    popup_message = models.ForeignKey(
+        PopupMessage,
+        on_delete=models.CASCADE,
+    )
+
+    seen = models.DateTimeField(
+        null=True,
+    )
+
+    def __str__(self):
+        return f'{self.user} - {self.popup_message}'
+
+    class Meta:
+        unique_together = ('user', 'popup_message',)
+        ordering = ('-popup_message__created',)
+        indexes = [
+            models.Index(fields=['user', 'popup_message', 'seen']),
+        ]

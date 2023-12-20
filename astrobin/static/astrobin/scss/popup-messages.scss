@@ -1,0 +1,50 @@
+@import "variables";
+
+.popup-messages {
+  position: fixed;
+  bottom: 0;
+  right: .5rem;
+  z-index: 8999;
+  width: 220px;
+
+  @media screen and (max-width: 480px) {
+    width: calc(100% + 0rem);
+    bottom: calc(-0.5rem - 1px);
+    right: 0;
+  }
+
+  .popup-message {
+    list-style: none;
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
+    padding: 1rem;
+    border: 1px solid $grey-5;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .75);
+
+    &:not(:last-child) {
+      margin-bottom: .5rem;
+    }
+
+    .popup-message-title {
+      color: $white;
+      font-weight: bold;
+      font-size: 1.25rem;
+      line-height: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .popup-message-body {
+      color: $grey-2;
+    }
+
+    .popup-message-footer {
+      margin-top: 1rem;
+      border-top: 1px solid $grey-5;
+      padding-top: 1rem;
+
+      .btn {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

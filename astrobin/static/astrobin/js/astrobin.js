@@ -1107,6 +1107,42 @@ astrobin_common = {
         });
     },
 
+    init_popup_messages: function () {
+      $(document).ready(function () {
+         $('.popup-message-dont-show-again').click(function () {
+            const popupMessage = $(this).closest('.popup-message');
+            const id = popupMessage.data('id');
+
+            $(this).html()
+
+            $.ajax({
+                url: `/json-api/user/dont-show-popup-message-again/`,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    'popup_id': id
+                },
+                timeout: 5000,
+                success: function () {
+                     popupMessage.remove();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'An error occurred. Please try again later.',
+                        showHideTransition: 'slide',
+                        allowToastClose: true,
+                        position: 'top-right',
+                        loader: false,
+                        hideAfter: false,
+                        icon: 'error'
+                    });
+                }
+            });
+         });
+      });
+    },
+
     abuse_report_modal_show: function () {
         return new Promise(function (resolve, reject) {
             const $modal = $('#report-abuse-modal');
@@ -1569,6 +1605,8 @@ astrobin_common = {
         }
 
         astrobin_common.init_toggle_high_contrast_theme();
+
+        astrobin_common.init_popup_messages();
     },
 
     highlightCodePrepare: function () {
