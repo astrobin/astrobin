@@ -6,6 +6,7 @@ from astrobin_apps_json_api.user.views import (
     PlateSolutionOverlayOnFullDisabled, RestoreDeletedImages, ToggleUseHighContrastThemeCookie,
 )
 from astrobin_apps_json_api.user.views.delete_revisions import DeleteRevisions
+from astrobin_apps_json_api.user.views.dont_show_popup_message_again import DontShowPopupMessageAgain
 from astrobin_apps_json_api.user.views.empty_trash import EmptyTrash
 
 urlpatterns = (
@@ -17,4 +18,5 @@ urlpatterns = (
     url(r'^user/mark-click-and-drag-toast-as-seen/$', never_cache(MarkClickAndDragToastAsSeen.as_view())),
     url(r'^user/mark-forum-usage-modal-as-seen/$', never_cache(MarkForumUsageModalAsSeen.as_view())),
     url(r'^user/toggle-use-high-contrast-theme-cookie/$', never_cache(ToggleUseHighContrastThemeCookie.as_view())),
+    url(r'^user/dont-show-popup-message-again/$', never_cache(DontShowPopupMessageAgain.as_view())),
 )

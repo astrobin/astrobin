@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.safestring import SafeString, mark_safe
@@ -40,6 +40,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 from astrobin_apps_remote_source_affiliation.services.remote_source_affiliation_service import \
     RemoteSourceAffiliationService
 from astrobin_apps_users.services import UserService
+from common.services.popup_message_service import PopupMessageService
 
 register = Library()
 
@@ -954,3 +955,8 @@ def has_unmigrated_legacy_gear_items(user: User) -> bool:
 @register.filter
 def cookie_description(cookie_name: str) -> str:
     return cookie_definitions.get(cookie_name, '')
+
+
+@register.filter
+def get_unseen_active_popups(user: User) -> QuerySet:
+    return PopupMessageService.get_unseen_active_popups(user)
