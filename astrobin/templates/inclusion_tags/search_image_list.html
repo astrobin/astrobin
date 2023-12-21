@@ -198,7 +198,7 @@
 
                             <div class="search-results__text__content">
                                 {% if request.GET.q %}
-                                    {% highlight_text item.object.body with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' allow_lists 'False' %}
+                                    {% highlight_text item.object.body with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' allow_lists False %}
                                 {% else %}
                                     {{ item.object.body_html | truncatechars:500 | strip_html | safe  }}
                                 {% endif %}
@@ -222,7 +222,7 @@
 
                             <div class="search-results__text__content">
                                 {% if request.GET.q %}
-                                    {% highlight_text item.object.name with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' allow_lists 'False' %}
+                                    {% highlight_text item.object.name with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' allow_lists False %}
                                 {% else %}
                                     {{ item.object.name }}
                                 {% endif %}
@@ -258,7 +258,7 @@
 
                         <div class="search-results__text__content">
                             {% if request.GET.q %}
-                                {% highlight_text item.object.text with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' allow_lists 'False' %}
+                                {% highlight_text item.object.text with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' allow_lists False %}
                             {% else %}
                                 {{ item.object.text | bbcode | strip_html | safe}}
                             {% endif %}
