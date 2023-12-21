@@ -1187,8 +1187,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin-bottom: .5rem;
   }
 
-  li {
-    list-style: initial;
+  ul li {
+    list-style: disc;
+  }
+
+  ol li {
+    list-style: decimal;
   }
 
   .fancybox {
