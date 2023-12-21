@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 from datetime import date, datetime
+from typing import Optional
 
 import dateutil
 from annoying.functions import get_object_or_None
@@ -24,6 +25,7 @@ from astrobin.enums.license import License
 from astrobin.gear import get_correct_gear, is_gear_complete
 from astrobin.models import GearUserInfo, Image, LICENSE_CHOICES, UserProfile
 from astrobin.services.gear_service import GearService
+from astrobin.services.utils_service import UtilsService
 from astrobin.types import cookie_definitions
 from astrobin.utils import (
     dec_decimal_precision_from_pixel_scale, decimal_to_degrees_minutes_seconds_html,
@@ -48,6 +50,12 @@ register = Library()
 @register.filter
 def split(value, arg):
     return value.split(arg)
+
+
+@register.filter
+def trim(value):
+    """Trims leading and trailing whitespace from a string."""
+    return value.strip() if value else value
 
 
 @register.filter
@@ -955,6 +963,11 @@ def has_unmigrated_legacy_gear_items(user: User) -> bool:
 @register.filter
 def cookie_description(cookie_name: str) -> str:
     return cookie_definitions.get(cookie_name, '')
+
+
+@register.filter
+def get_search_synonyms_text(text: str) -> Optional[str]:
+    return UtilsService.get_search_synonyms_text(text)
 
 
 @register.filter

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.db.models import Exists, OuterRef, QuerySet
+from django.db.models import QuerySet
 
 from astrobin.models import PopupMessage, PopupMessageUserStatus
 
