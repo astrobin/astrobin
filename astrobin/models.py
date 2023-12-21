@@ -963,6 +963,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SKIESAWAY", "SkiesAway Remote Observatories"),
         ("TAIYUGE", "TaiYuge Observatory"),
         ("TELI", "Telescope Live"),
+        ("TREV", "Trevinca Skies"),
         ("UDRO", "Utah Desert Remote Observatories"),
         ("WTO", "West Texas Observatory (WTO)"),
         ("YINHE", "YinHe Observatory"),
