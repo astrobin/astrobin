@@ -74,7 +74,10 @@ def equipment_item_listing_url_with_tags(listing: EquipmentItemListing, source: 
     if tags_separator in url:
         tags_separator = '&'
 
-    return f'{url}{tags_separator}brand={listing.item_content_object.brand.name}&name={listing.item_content_object.name}&retailer={listing.retailer.name}&source={source}'
+    if listing.item_content_object:
+        return f'{url}{tags_separator}brand={listing.item_content_object.brand.name}&name={listing.item_content_object.name}&retailer={listing.retailer.name}&source={source}'
+
+    return url
 
 
 @register.filter
