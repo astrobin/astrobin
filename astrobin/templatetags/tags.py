@@ -969,6 +969,7 @@ def cookie_description(cookie_name: str) -> str:
 def get_search_synonyms_text(text: str) -> Optional[str]:
     return UtilsService.get_search_synonyms_text(text)
 
-  
+
+@register.filter
 def get_unseen_active_popups(user: User) -> QuerySet:
     return PopupMessageService.get_unseen_active_popups(user)
