@@ -26,12 +26,15 @@ class DateTimeService:
             return ''
 
     @staticmethod
-    def human_time_duration(seconds):
+    def human_time_duration(seconds, html=True):
+        prime_symbol = '&prime;' if html else '\''
+        double_prime_symbol = '&Prime;' if html else '"'
+
         if seconds is None or seconds == 0:
-            return '0&Prime;'
+            return f'0{double_prime_symbol}'
 
         if seconds < 1:
-            return '{:.4f}'.format(seconds).rstrip('0').rstrip('.') + '&Prime;'
+            return '{:.4f}'.format(seconds).rstrip('0').rstrip('.') + double_prime_symbol
 
         hours, reminder = divmod(seconds, 60 * 60)
         minutes, reminder = divmod(reminder, 60)
@@ -43,10 +46,10 @@ class DateTimeService:
             parts.append('{}{}'.format(int(hours), 'h'))
 
         if minutes > 0:
-            parts.append('{}{}'.format(int(minutes), '&prime;'))
+            parts.append('{}{}'.format(int(minutes), prime_symbol))
 
         if seconds > 0:
-            parts.append('{}{}'.format(int(seconds), '&Prime;'))
+            parts.append('{}{}'.format(int(seconds), double_prime_symbol))
 
         if reminder > 0:
             parts.append('{:.4f}'.format(reminder).replace('0.', '.').rstrip('0').rstrip('.'))
