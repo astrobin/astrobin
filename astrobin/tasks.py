@@ -46,8 +46,8 @@ from requests import Response
 
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import (
-    BroadcastEmail, CameraRenameProposal, DataDownloadRequest, Gear, GearMigrationStrategy,
-    Image, ImageRevision, UserProfile,
+    BroadcastEmail, CameraRenameProposal, DataDownloadRequest, DeepSky_Acquisition, Gear, GearMigrationStrategy,
+    Image, ImageRevision, SolarSystem_Acquisition, UserProfile,
 )
 from astrobin.services import CloudflareService
 from astrobin.services.cloudfront_service import CloudFrontService
@@ -486,6 +486,7 @@ def prepare_download_data_archive(request_id):
                 'is_final',
                 'allow_comments',
                 'mouse_hover_image',
+                'acquisition_details',
                 'ra',
                 'dec',
                 'pixel_scale',
@@ -657,6 +658,24 @@ def prepare_download_data_archive(request_id):
                 image.allow_comments,
                 image.mouse_hover_image
             ]
+
+            has_deep_sky_acquisition = DeepSky_Acquisition.objects.filter(image=image).exists()
+            has_solar_system_acquisitions = SolarSystem_Acquisition.objects.filter(image=image).exists()
+
+            if has_deep_sky_acquisition:
+                row_data += [
+                    '\n'.join(
+                        f'{x[0]}: {x[1]}' for x in ImageService(image).get_deep_sky_acquisition_text()
+                        if x[1] is not None
+                    )
+                ]
+            elif has_solar_system_acquisitions:
+                row_data += [
+                    '\n'.join(
+                        f'{x[0]}: {x[1]}' for x in ImageService(image).get_solar_system_acquisition_text()
+                        if x[1] is not None
+                    )
+                ]
 
             if image.solution:
                 row_data += \
