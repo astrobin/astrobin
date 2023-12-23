@@ -677,6 +677,16 @@ class ImageService:
                    f'<span class="seconds-symbol">&Prime;</span> ' \
                    f'<span class="total-frame-integration">({DateTimeService.human_time_duration(number * duration)})</span>'
 
+        def binning_html(binning):
+            binning_re = re.match(r'^bin (\d)x(\d)', binning)
+            
+            if not binning_re:
+                return binning
+            
+            x = int(binning_re.group(1))
+            y = int(binning_re.group(2))
+            return f'bin {x}<span class="times-separator">&times;</span>{y}'
+
         return [
             (_('Dates'), sorted(data['dates'])),
             (_('Frames'),
@@ -690,7 +700,7 @@ class ImageService:
                          f[1]['gain'],
                          f[1]['f_number'],
                          f[1]['sensor_cooling'],
-                         f[1]['binning']
+                         binning_html(f[1]['binning'])
                      ),
                  ) for f in sorted(data['frames'].items())
              ) +
