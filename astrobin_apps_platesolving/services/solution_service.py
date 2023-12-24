@@ -87,24 +87,43 @@ class SolutionService:
 
         return sorted(value)
 
-    def get_search_query_around(self, degrees):
-        # type: (int) -> str
+    def get_search_query_around(self, degrees: int) -> str:
+        def _wrap_angle(angle, min_angle, max_angle):
+            range_size = max_angle - min_angle
+            return (angle - min_angle) % range_size + min_angle
+
         ra = float(self.solution.advanced_ra or self.solution.ra)
         dec = float(self.solution.advanced_dec or self.solution.dec)
 
-        ra_min = ra - degrees * .5
-        ra_max = ra + degrees * .5
+        ra_min = ra - degrees * 0.5
+        ra_max = ra + degrees * 0.5
 
-        dec_min = dec - degrees * .5
-        dec_max = dec + degrees * .5
+        if ra_min < 0:
+            ra_min += 360
+        elif ra_min > 360:
+            ra_min -= 360
+
+        if ra_max > 360:
+            ra_max -= 360
+        elif ra_max < 0:
+            ra_max += 360
+
+        dec_min = max(dec - degrees * 0.5, -90)
+        dec_max = min(dec + degrees * 0.5, 90)
 
         field_min = 0
         field_max = degrees
 
         base_search_url = reverse('haystack_search')
 
-        return base_search_url + \
-               "?q=&d=i&t=all" + \
-               "&coord_ra_min=%.2f&coord_ra_max=%.2f" % (ra_min, ra_max) + \
-               "&coord_dec_min=%.2f&coord_dec_max=%.2f" % (dec_min, dec_max) + \
-               "&field_radius_min=%.2f&field_radius_max=%.2f" % (field_min, field_max)
+        url_params = [
+            "q=&d=i&t=all",
+            "coord_ra_min=%.2f" % ra_min,
+            "coord_ra_max=%.2f" % ra_max,
+            "coord_dec_min=%.2f" % dec_min,
+            "coord_dec_max=%.2f" % dec_max,
+            "field_radius_min=%.2f" % field_min,
+            "field_radius_max=%.2f" % field_max
+        ]
+
+        return base_search_url + "?" + "&".join(url_params)
