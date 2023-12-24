@@ -483,4 +483,3 @@ def create_or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kwa
             else:
                 instance.forum.delete()
                 instance.forum = None
-
