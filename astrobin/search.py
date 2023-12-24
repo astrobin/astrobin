@@ -634,7 +634,7 @@ class AstroBinSearchForm(SearchForm):
 
         if q is not None and q != "":
             if list(self.find_catalog_subjects(q)):
-                results = self.filter_by_subject_text(results, q)
+                results |= self.filter_by_subject_text(results, q)
 
         return results
 
