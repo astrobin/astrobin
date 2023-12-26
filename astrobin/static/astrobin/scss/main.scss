@@ -1291,6 +1291,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
   }
 
+  .multiline-dates {
+    @media (min-width: 980px) {
+        margin-top: 1.5rem;
+        margin-left: 1rem;
+    }
+  }
+
   .total-frame-integration {
     color: darken($grey-4, 15%);
     margin-left: .5rem;
