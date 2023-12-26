@@ -14,8 +14,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
+from django.utils.formats import date_format
 from django.utils.functional import keep_lazy
 from django.utils.safestring import mark_safe
+
 from lxml import etree, html
 
 from astrobin.enums import ImageEditorStep
@@ -525,3 +527,28 @@ class RemoveMultipleSpacesNode(Node):
     def render(self, context):
         strip_multiple_spaces = keep_lazy(six.text_type)(lambda x: re.sub(r'\s+', ' ', x))
         return strip_multiple_spaces(self.nodelist.render(context).strip())
+
+@register.filter(name='split_date_ranges')
+def split_date_ranges(date_ranges_str: str):
+    def format_date(date_str: str) -> str:
+        date_obj = datetime.datetime.strptime(date_str, "%Y-%m-%d")
+        return date_format(date_obj, format='DATE_FORMAT')
+
+    components = []
+
+    for date_range in date_ranges_str.split(', '):
+        if ' - ' in date_range:
+            start, end = date_range.split(' - ')
+            components.append({
+                'range': f"{format_date(start)} - {format_date(end)}",
+                'start': start,
+                'end': end
+            })
+        else:
+            components.append({
+                'date': format_date(date_range),
+                'start': date_range,
+                'end': date_range
+            })
+
+    return components

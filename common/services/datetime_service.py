@@ -55,3 +55,42 @@ class DateTimeService:
             parts.append('{:.4f}'.format(reminder).replace('0.', '.').rstrip('0').rstrip('.'))
 
         return ' '.join(parts)
+
+    @staticmethod
+    def format_date_ranges(dates, format_func=lambda d: d.strftime("%Y-%m-%d")):
+        """Formats a list of dates into a string representing contiguous date ranges and individual dates."""
+        if not dates:
+            return ""
+
+        # Convert dates to datetime objects for easier manipulation
+        # Handles both string and datetime.date inputs
+        sorted_dates = sorted(
+            set(
+                datetime.strptime(d, "%Y-%m-%d")
+                if isinstance(d, str)
+                else datetime.combine(d, datetime.min.time())
+                for d in dates
+            )
+        )
+
+        # Initialize variables
+        formatted_ranges = []
+        start_date = end_date = sorted_dates[0]
+
+        for d in sorted_dates[1:]:
+            if d == end_date + timedelta(days=1):
+                end_date = d
+            else:
+                if start_date == end_date:
+                    formatted_ranges.append(format_func(start_date))
+                else:
+                    formatted_ranges.append(f"{format_func(start_date)} - {format_func(end_date)}")
+                start_date = end_date = d
+
+        # Add the last range or single date
+        if start_date == end_date:
+            formatted_ranges.append(format_func(start_date))
+        else:
+            formatted_ranges.append(f"{format_func(start_date)} - {format_func(end_date)}")
+
+        return ", ".join(formatted_ranges)
