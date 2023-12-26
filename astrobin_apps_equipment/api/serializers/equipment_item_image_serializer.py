@@ -9,4 +9,5 @@ class EquipmentItemImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = ['image']
+        read_only_fields = ['thumbnail']
         abstract = True
