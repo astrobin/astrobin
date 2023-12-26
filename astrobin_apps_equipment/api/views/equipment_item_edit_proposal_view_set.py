@@ -199,6 +199,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         target.variant_of = edit_proposal.variant_of
         target.website = edit_proposal.website
         target.image = edit_proposal.image
+        target.thumbnail = edit_proposal.thumbnail
 
         if not target.forum:
             category, created = Category.objects.get_or_create(
