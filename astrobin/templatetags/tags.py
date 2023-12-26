@@ -1191,6 +1191,9 @@ def split_date_ranges(date_ranges_str: str, language_code: str) -> list:
         start_date = date_str_to_date(start_str)
         end_date = date_str_to_date(end_str)
 
+        if start_date == end_date:
+            return format_date(start_str)
+
         if start_date.year == end_date.year:
             if start_date.month == end_date.month:
                 return format_range_same_month(start_str, end_str)

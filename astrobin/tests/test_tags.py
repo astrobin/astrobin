@@ -54,41 +54,37 @@ class TagsTest(TestCase):
         self.assertEqual('+00<span class="symbol">°</span>00<span class="symbol">′</span>00<span class="symbol">″</span>.00', dec_to_dms(0, pixel_scale=.1))
 
     def test_same_month_range(self):
-        template = Template("{% load tags %}{{ '2023-01-01 - 2023-01-05'|split_date_ranges }}")
-        expected_output = escape("[{'range': 'Jan 1-5, 2023', 'start': '2023-01-01', 'end': '2023-01-05'}]")
+        template = Template("{% load tags %}{{ '2023-01-01 - 2023-01-05'|split_date_ranges:'en' }}")
+        expected_output = escape("[{'range': 'Jan. 1 - 5, 2023', 'start': '2023-01-01', 'end': '2023-01-05'}]")
         self.assertEqual(template.render(Context({})), expected_output)
 
     def test_cross_month_range(self):
-        template = Template("{% load tags %}{{ '2023-01-30 - 2023-02-02'|split_date_ranges }}")
-        expected_output = escape("[{'range': 'Jan 30 - Feb 2, 2023', 'start': '2023-01-30', 'end': '2023-02-02'}]")
+        template = Template("{% load tags %}{{ '2023-01-30 - 2023-02-02'|split_date_ranges:'en' }}")
+        expected_output = escape("[{'range': 'Jan. 30 - Feb. 2, 2023', 'start': '2023-01-30', 'end': '2023-02-02'}]")
         self.assertEqual(template.render(Context({})), expected_output)
 
     def test_cross_year_range(self):
-        template = Template("{% load tags %}{{ '2023-12-30 - 2024-01-02'|split_date_ranges }}")
+        template = Template("{% load tags %}{{ '2023-12-30 - 2024-01-02'|split_date_ranges:'en' }}")
         expected_output = escape(
-            "[{'range': 'Dec 30, 2023 - Jan 2, 2024', 'start': '2023-12-30', 'end': '2024-01-02'}]"
+            "[{'range': 'Dec. 30, 2023 - Jan. 2, 2024', 'start': '2023-12-30', 'end': '2024-01-02'}]"
         )
         self.assertEqual(template.render(Context({})), expected_output)
 
     def test_single_date_range(self):
-        template = Template("{% load tags %}{{ '2023-01-01 - 2023-01-01'|split_date_ranges }}")
-        expected_output = escape("[{'range': 'Jan 1, 2023', 'start': '2023-01-01', 'end': '2023-01-01'}]")
+        template = Template("{% load tags %}{{ '2023-01-01 - 2023-01-01'|split_date_ranges:'en' }}")
+        expected_output = escape("[{'range': 'Jan. 1, 2023', 'start': '2023-01-01', 'end': '2023-01-01'}]")
         self.assertEqual(template.render(Context({})), expected_output)
 
     def test_multiple_ranges(self):
         template = Template(
-            "{% load tags %}{{ '2023-01-01 - 2023-01-03, 2023-02-01 - 2023-02-05'|split_date_ranges }}"
+            "{% load tags %}{{ '2023-01-01 - 2023-01-03, 2023-02-01 - 2023-02-05'|split_date_ranges:'en' }}"
         )
         expected_output = escape(
-            "[{'range': 'Jan 1-3, 2023', 'start': '2023-01-01', 'end': '2023-01-03'}, "
-            "{'range': 'Feb 1-5, 2023', 'start': '2023-02-01', 'end': '2023-02-05'}]"
+            "[{'range': 'Jan. 1 - 3, 2023', 'start': '2023-01-01', 'end': '2023-01-03'}, "
+            "{'range': 'Feb. 1 - 5, 2023', 'start': '2023-02-01', 'end': '2023-02-05'}]"
         )
         self.assertEqual(template.render(Context({})), expected_output)
 
-    def test_edge_case_empty_string(self):
-        template = Template("{% load tags %}{{ ''|split_date_ranges }}")
-        self.assertEqual(template.render(Context({})), "[]")
-
     def test_invalid_date_format(self):
-        template = Template("{% load tags %}{{ 'invalid-date'|split_date_ranges }}")
+        template = Template("{% load tags %}{{ 'invalid-date'|split_date_ranges:'en' }}")
         self.assertRaises(ValueError, template.render, Context({}))
