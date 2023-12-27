@@ -448,42 +448,49 @@ class ImageDetailView(ImageDetailViewBase):
                             collection = image.collections.get(pk=nav_ctx_extra)
                         except ValueError:
                             # Maybe this image is in a single collection
-                            collection = image.collections.all()[0]
+                            try:
+                                collection = image.collections.all()[0]
+                            except IndexError:
+                                collection = None
 
-                        if collection.order_by_tag:
-                            collection_images = Image.objects.filter(
-                                user=image.user,
-                                collections=collection,
-                                keyvaluetags__key=collection.order_by_tag,
-                                moderator_decision=ModeratorDecision.APPROVED,
-                            ).order_by('keyvaluetags__value')
-
-                            current_index = 0
-                            for iter_image in collection_images.all():
-                                if iter_image.pk == image.pk:
-                                    break
-                                current_index += 1
-
-                            image_next = collection_images.all()[current_index + 1] \
-                                if current_index < collection_images.count() - 1 \
-                                else None
-                            image_prev = collection_images.all()[current_index - 1] \
-                                if current_index > 0 \
-                                else None
+                        if collection is None:
+                            image_next = None
+                            image_prev = None
                         else:
-                            image_next = Image.objects.filter(
-                                user=image.user,
-                                collections=collection,
-                                published__gt=image.published,
-                                moderator_decision=ModeratorDecision.APPROVED,
-                            ).order_by('published')[0:1]
+                            if collection.order_by_tag:
+                                collection_images = Image.objects.filter(
+                                    user=image.user,
+                                    collections=collection,
+                                    keyvaluetags__key=collection.order_by_tag,
+                                    moderator_decision=ModeratorDecision.APPROVED,
+                                ).order_by('keyvaluetags__value')
 
-                            image_prev = Image.objects.filter(
-                                user=image.user,
-                                collections=collection,
-                                published__lt=image.published,
-                                moderator_decision=ModeratorDecision.APPROVED,
-                            ).order_by('-published')[0:1]
+                                current_index = 0
+                                for iter_image in collection_images.all():
+                                    if iter_image.pk == image.pk:
+                                        break
+                                    current_index += 1
+
+                                image_next = collection_images.all()[current_index + 1] \
+                                    if current_index < collection_images.count() - 1 \
+                                    else None
+                                image_prev = collection_images.all()[current_index - 1] \
+                                    if current_index > 0 \
+                                    else None
+                            else:
+                                image_next = Image.objects.filter(
+                                    user=image.user,
+                                    collections=collection,
+                                    published__gt=image.published,
+                                    moderator_decision=ModeratorDecision.APPROVED,
+                                ).order_by('published')[0:1]
+
+                                image_prev = Image.objects.filter(
+                                    user=image.user,
+                                    collections=collection,
+                                    published__lt=image.published,
+                                    moderator_decision=ModeratorDecision.APPROVED,
+                                ).order_by('-published')[0:1]
                     except Collection.DoesNotExist:
                         # image_prev and image_next will remain None
                         pass
