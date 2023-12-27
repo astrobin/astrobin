@@ -49,7 +49,10 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
 
     def get_chunk(self, request):
         if TusUploadStreamParser in self.parser_classes:
-            return request.data['chunk']
+            try:
+                return request.data['chunk']
+            except KeyError:
+                return request.body
         return request.body
 
     def validate_chunk(self, offset, chunk_bytes):
