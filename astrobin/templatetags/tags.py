@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 import math
 from datetime import date, datetime
 from typing import Optional
@@ -13,7 +14,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q, QuerySet
 from django.template import Library
 from django.template.defaultfilters import timesince
-from django.utils.formats import date_format
 from django.utils.safestring import SafeString, mark_safe
 from django.utils.translation import ugettext as _
 from pybb.models import Post, Topic
@@ -43,9 +43,11 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 from astrobin_apps_remote_source_affiliation.services.remote_source_affiliation_service import \
     RemoteSourceAffiliationService
 from astrobin_apps_users.services import UserService
+from common.services import DateTimeService
 from common.services.popup_message_service import PopupMessageService
 
 register = Library()
+log = logging.getLogger(__name__)
 
 
 @register.filter
@@ -128,10 +130,11 @@ def date_before(date1, date2):
 
 
 @register.filter
-def string_to_date(date):
+def string_to_date(date_str: str) -> datetime:
     try:
-        return datetime.strptime(date, "%Y-%m-%d")
-    except:
+        return DateTimeService.string_to_date(date_str)
+    except ValueError as e:
+        log.debug('Could not convert string %s to date: %s' % (date_str, e))
         return datetime.now()
 
 
@@ -981,246 +984,4 @@ def get_unseen_active_popups(user: User) -> QuerySet:
 
 @register.filter(name='split_date_ranges')
 def split_date_ranges(date_ranges_str: str, language_code: str) -> list:
-    FORMATS = {
-        'en': {
-            'DATE_FORMAT': 'N j, Y',
-            'DAY': 'j',
-            'MONTH': 'N',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'N j1 - j2, Y',
-            'RANGE_SAME_YEAR': 'N1 j1 - N2 j2, Y',
-        },
-        'en-gb': {
-            'DATE_FORMAT': 'j M Y',
-            'DAY': 'j',
-            'MONTH': 'M',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1 - j2 M Y',
-            'RANGE_SAME_YEAR': 'j1 M1 - j2 M2 Y',
-        },
-        'de': {
-            'DATE_FORMAT': 'j. F Y',
-            'DAY': 'j',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1. - j2. F Y',
-            'RANGE_SAME_YEAR': 'j1. F1 - j2. F2 Y',
-        },
-        'es': {
-            'DATE_FORMAT': 'j \d\e F \d\e Y',
-            'DAY': 'j',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1 - j2 de F de Y',
-            'RANGE_SAME_YEAR': 'j1 de F1 - j2 de F2 de Y',
-        },
-        'fr': {
-            'DATE_FORMAT': 'j F Y',
-            'DAY': 'j',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1 - j2 F Y',
-            'RANGE_SAME_YEAR': 'j1 F1 - j2 F2 Y',
-        },
-        'it': {
-            'DATE_FORMAT': 'd F Y',
-            'DAY': 'd',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'd1 - d2 F Y',
-            'RANGE_SAME_YEAR': 'd1 F1 - d2 F2 Y',
-        },
-        'pt': {
-            'DATE_FORMAT': 'j \d\e F \d\e Y',
-            'DAY': 'j',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1 - j2 de F de Y',
-            'RANGE_SAME_YEAR': 'j1 de F1 - j2 de F2 de Y',
-        },
-        'zh-hans': {
-            'DATE_FORMAT': 'Y年n月j日',
-            'DAY': 'j',
-            'MONTH': 'n',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'Y年n1月j1日 - j2日',
-            'RANGE_SAME_YEAR': 'Y年n1月j1日 - n2月j2日',
-        },
-        'ar': {
-            'DATE_FORMAT': 'j F، Y',
-            'DAY': 'j',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1 - j2 F، Y',
-            'RANGE_SAME_YEAR': 'j1 F1. - j2 F2، Y',
-        },
-        'el': {
-            'DATE_FORMAT': 'd/M/Y',
-            'DAY': 'd',
-            'MONTH': 'M',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'd1 - d2/M/Y',
-            'RANGE_SAME_YEAR': 'd1/M1 - d2/M2/Y',
-        },
-        'fi': {
-            'DATE_FORMAT': 'j. E Y',
-            'DAY': 'j',
-            'MONTH': 'E',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1. - j2. E Y',
-            'RANGE_SAME_YEAR': 'j1. E1 - j2. E2 Y',
-        },
-        'ja': {
-            'DATE_FORMAT': 'Y年n月j日',
-            'DAY': 'j',
-            'MONTH': 'n',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'Y年n1月j1日 - j2日',
-            'RANGE_SAME_YEAR': 'Y年n1月j1日 - n2月j2日',
-        },
-        'hu': {
-            'DATE_FORMAT': 'Y. F j.',
-            'DAY': 'j',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'Y. F j1. - j2.',
-            'RANGE_SAME_YEAR': 'Y. F1 j1. - j2. F2',
-        },
-        'nl': {
-            'DATE_FORMAT': 'j F Y',
-            'DAY': 'j',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1 - j2 F Y',
-            'RANGE_SAME_YEAR': 'j1 F1 - j2 F2 Y',
-        },
-        'pl': {
-            'DATE_FORMAT': 'j E Y',
-            'DAY': 'j',
-            'MONTH': 'E',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1 - j2 E Y',
-            'RANGE_SAME_YEAR': 'j1 E1 - j2 E2 Y',
-        },
-        'ru': {
-            'DATE_FORMAT': 'j E Y г.',
-            'DAY': 'j',
-            'MONTH': 'E',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'j1 - j2 E Y г.',
-            'RANGE_SAME_YEAR': 'j1 E1 - j2 E2 Y г.',
-        },
-        'sq': {
-            'DATE_FORMAT': 'd F Y',
-            'DAY': 'd',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'd1 - d2 F Y',
-            'RANGE_SAME_YEAR': 'd1 F1 - d2 F2 Y',
-        },
-        'tr': {
-            'DATE_FORMAT': 'd F Y',
-            'DAY': 'd',
-            'MONTH': 'F',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'd1 - d2 F Y',
-            'RANGE_SAME_YEAR': 'd1 F1 - d2 F2 Y',
-        },
-        'uk': {
-            'DATE_FORMAT': 'd E Y р.',
-            'DAY': 'd',
-            'MONTH': 'E',
-            'YEAR': 'Y',
-            'RANGE_SAME_MONTH': 'd1 - d2 E Y р.',
-            'RANGE_SAME_YEAR': 'd1 E1 - d2 E2 Y р.',
-        },
-    }
-
-    def date_str_to_date(date_str: str) -> datetime:
-        return datetime.strptime(date_str, "%Y-%m-%d")
-
-    def format_range_same_month(start_str: str, end_str: str) -> str:
-        start_date = date_str_to_date(start_str)
-        end_date = date_str_to_date(end_str)
-        fmt = FORMATS[language_code]
-
-        day1 = date_format(start_date, fmt['DAY'])
-        day2 = date_format(end_date, fmt['DAY'])
-        month = date_format(start_date, fmt['MONTH'])
-        year = date_format(end_date, fmt['YEAR'])
-
-        return fmt['RANGE_SAME_MONTH'] \
-            .replace(f'{fmt["DAY"]}1', day1) \
-            .replace(f'{fmt["DAY"]}2', day2) \
-            .replace(f'{fmt["MONTH"]}', month) \
-            .replace(f'{fmt["YEAR"]}', year)
-
-    def format_range_same_year(start_str: str, end_str: str) -> str:
-        start_date = date_str_to_date(start_str)
-        end_date = date_str_to_date(end_str)
-        fmt = FORMATS[language_code]
-
-        day1 = date_format(start_date, fmt['DAY'])
-        day2 = date_format(end_date, fmt['DAY'])
-        month1 = date_format(start_date, fmt['MONTH'])
-        month2 = date_format(end_date, fmt['MONTH'])
-        year = date_format(end_date, fmt['YEAR'])
-
-        return fmt['RANGE_SAME_YEAR'] \
-            .replace(f'{fmt["DAY"]}1', day1) \
-            .replace(f'{fmt["DAY"]}2', day2) \
-            .replace(f'{fmt["MONTH"]}1', month1) \
-            .replace(f'{fmt["MONTH"]}2', month2) \
-            .replace(f'{fmt["YEAR"]}', year)
-
-    def format_range_different_year(start_str: str, end_str: str) -> str:
-        start_date = date_str_to_date(start_str)
-        end_date = date_str_to_date(end_str)
-        fmt = FORMATS[language_code]
-
-        return date_format(start_date, fmt['DATE_FORMAT']) + \
-            ' - ' + \
-            date_format(end_date, fmt['DATE_FORMAT'])
-
-    def format_date(date_str: str) -> str:
-        date_obj = date_str_to_date(date_str)
-        fmt = FORMATS[language_code]
-        return date_format(date_obj, fmt['DATE_FORMAT'])
-
-    def format_range(start_str: str, end_str: str) -> str:
-        start_date = date_str_to_date(start_str)
-        end_date = date_str_to_date(end_str)
-
-        if start_date == end_date:
-            return format_date(start_str)
-
-        if start_date.year == end_date.year:
-            if start_date.month == end_date.month:
-                return format_range_same_month(start_str, end_str)
-            else:
-                return format_range_same_year(start_str, end_str)
-        else:
-            return format_range_different_year(start_str, end_str)
-
-    components = []
-
-    for date_range in date_ranges_str.split(', '):
-        if ' - ' in date_range:
-            start, end = date_range.split(' - ')
-            components.append(
-                {
-                    'range': format_range(start, end),
-                    'start': start,
-                    'end': end
-                }
-            )
-        else:
-            components.append(
-                {
-                    'date': format_date(date_range),
-                    'start': date_range,
-                    'end': date_range
-                }
-            )
-
-    return components
+    return DateTimeService.split_date_ranges(date_ranges_str, language_code)
