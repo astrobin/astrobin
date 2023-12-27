@@ -118,7 +118,6 @@ class DateTimeServiceTest(TestCase):
         """ Test with invalid date range (not the same year). """
         start_str = "2023-01-10"
         end_str = "2024-03-15"
-        expected_output = "Jan. 10 - March 15, 2023"  # Only long month names are shortened
         with self.assertRaises(ValueError):
             DateTimeService.format_date_range_same_year(start_str, end_str, 'en')
 
