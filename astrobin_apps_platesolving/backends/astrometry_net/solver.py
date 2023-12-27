@@ -66,7 +66,7 @@ class Solver(AbstractPlateSolvingBackend):
 
         try:
             response = urlopen(request, timeout=30)
-        except HTTPError as e:
+        except (HTTPError, URLError) as e:
             error_message = str(e)
             log.error("Astrometry.net request error: %s" % error_message)
             raise RequestError('Server error message: ' + error_message)

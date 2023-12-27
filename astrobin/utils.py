@@ -205,7 +205,7 @@ def get_image_resolution(image):
         w, h = image.w, image.h
         if not (w and h):
             w, h = get_image_dimensions(image.image_file)
-    except (FileNotFoundError, TypeError) as e:
+    except (FileNotFoundError, TypeError, ValueError) as e:
         # This might happen in unit tests
         logger.warning("utils.get_image_resolution: unable to get image dimensions for %d: %s" % (image.pk, str(e)))
         w, h = 0, 0

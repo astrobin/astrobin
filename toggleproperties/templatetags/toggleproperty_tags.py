@@ -37,7 +37,10 @@ def add_remove_toggleproperty(
     if user and user.is_authenticated:
         toggle_property = ToggleProperty.objects.toggleproperties_for_object(property_type, target, user=user)
         if toggle_property.exists():
-            toggle_property = toggle_property[0]
+            try:
+                toggle_property = toggle_property[0]
+            except IndexError:
+                toggle_property = None
         else:
             toggle_property = None
 
