@@ -11,7 +11,6 @@ from functools import reduce
 from typing import Union
 from urllib.parse import urlencode
 
-import requests
 from actstream.models import Action
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -41,6 +40,7 @@ from astrobin.models import (
 )
 from astrobin.moon import MoonPhase
 from astrobin.services.gear_service import GearService
+from astrobin.services.utils_service import UtilsService
 from astrobin.stories import ACTSTREAM_VERB_UPLOADED_IMAGE, add_story
 from astrobin.utils import (
     base26_decode, base26_encode, decimal_to_degrees_minutes_seconds_string,
@@ -537,7 +537,7 @@ class ImageService:
             w, h = 1024, 1024
 
         placeholder_url = f'https://via.placeholder.com/{w}x{h}/222/333&text=PREVIEW NOT READY'
-        response = requests.get(placeholder_url, stream=True)
+        response = UtilsService.http_get_with_retries(placeholder_url, stream=True)
         if response.status_code == 200:
             img_temp = NamedTemporaryFile()
             for block in response.iter_content(1024 * 8):
