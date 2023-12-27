@@ -303,6 +303,14 @@ ALL_DATE_FORMATS = {
         'RANGE_SAME_MONTH': 'j1 - j2 de F de Y',
         'RANGE_SAME_YEAR': 'j1 de F1 - j2 de F2 de Y',
     },
+    'pt-br': {
+        'DATE_FORMAT': 'j \d\e F \d\e Y',
+        'DAY': 'j',
+        'MONTH': 'F',
+        'YEAR': 'Y',
+        'RANGE_SAME_MONTH': 'j1 - j2 de F de Y',
+        'RANGE_SAME_YEAR': 'j1 de F1 - j2 de F2 de Y',
+    },
     'zh-hans': {
         'DATE_FORMAT': 'Y年n月j日',
         'DAY': 'j',
