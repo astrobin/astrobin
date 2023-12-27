@@ -286,6 +286,9 @@ def decimal_to_degrees_minutes_seconds(value):
     return degrees, minutes, seconds
 
 def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_symbol="&prime;", second_symbol="&Prime;", precision=0):
+    if value is None:
+        return ""
+
     is_positive = value >= 0
     degrees, minutes, seconds = decimal_to_degrees_minutes_seconds(value)
     seconds = number_unit_decimals(seconds, second_symbol, precision, must_be_less_than=60)
@@ -294,6 +297,9 @@ def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_
 
 
 def decimal_to_degrees_minutes_seconds_html(value, degree_symbol="°", minute_symbol="′", second_symbol="″", precision=0):
+    if value is None:
+        return ""
+
     is_positive = value >= 0
     degrees, minutes, seconds = decimal_to_degrees_minutes_seconds(value)
     seconds = number_unit_decimals_html(seconds, second_symbol, precision, must_be_less_than=60)
