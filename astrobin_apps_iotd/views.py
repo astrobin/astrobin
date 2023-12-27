@@ -1,7 +1,7 @@
 import logging
 
 from braces.views import JsonRequestResponseMixin
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext
 from django.views.decorators.cache import cache_control, cache_page
@@ -43,6 +43,9 @@ class ImageStats(JsonRequestResponseMixin, base.View):
     def get(self, request, *args, **kwargs):
         image_id = kwargs.pop('image_id')
         image = ImageService.get_object(image_id, Image.objects_including_wip)
+
+        if image is None:
+            return HttpResponseNotFound()
 
         if request.user != image.user and not request.user.is_superuser:
             return HttpResponseForbidden()
