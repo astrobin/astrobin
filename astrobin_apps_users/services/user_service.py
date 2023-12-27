@@ -188,7 +188,11 @@ class UserService:
             data = {}
 
             if user_sqs.count() > 0:
-                result = user_sqs[0]
+                try:
+                    result = user_sqs[0]
+                except IndexError:
+                    log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
+                    data = {}
 
                 try:
                     data['stats'] = (
