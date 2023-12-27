@@ -3,6 +3,7 @@ import logging
 import requests
 from braces.views import JSONResponseMixin
 from django.views.generic.base import View
+from requests.exceptions import InvalidURL
 
 from common.tls_adapter import TLSAdapter
 
@@ -33,5 +34,9 @@ class UrlIsAvailable(JSONResponseMixin, View):
                 available = True
             except requests.ConnectionError as e:
                 log.debug(f'Unable to connect to {url}: {str(e)}')
+            except InvalidURL as e:
+                log.debug(f'Invalid URL {url}: {str(e)}')
+            except Exception as e:
+                log.debug(f'Error while checking URL {url}: {str(e)}')
 
         return self.render_json_response({'available': available})
