@@ -194,7 +194,7 @@ class UserCollectionsQuickEditKeyValueTags(
                     parsed = parseKeyValueTags(data['value'])
                     image.keyvaluetags.all().delete()
                     for tag in parsed:
-                        KeyValueTag.objects.create(
+                        KeyValueTag.objects.create_or_create(
                             image=image,
                             key=tag["key"],
                             value=tag["value"]
