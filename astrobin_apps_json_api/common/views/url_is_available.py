@@ -15,8 +15,17 @@ class UrlIsAvailable(JSONResponseMixin, View):
         available = False
 
         if url:
-            if not '://' in url:
+            if '://' not in url:
                 url = f'http://{url}'
+
+            if not (
+                    url.startswith('http://') or
+                    url.startswith('https://') or
+                    url.startswith('ftp://') or
+                    url.startswith('ftps://')
+            ):
+                url = f'http://{url}'
+
             try:
                 session = requests.session()
                 session.mount('https://', TLSAdapter())
