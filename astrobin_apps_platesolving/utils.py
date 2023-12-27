@@ -54,7 +54,12 @@ def get_target(object_id, content_type_id):
 
 def get_solution(object_id, content_type_id):
     content_type = ContentType.objects.get_for_id(content_type_id)
-    solution, created = Solution.objects.get_or_create(object_id=object_id, content_type=content_type)
+    try:
+        solution, created = Solution.objects.get_or_create(object_id=object_id, content_type=content_type)
+    except Solution.MultipleObjectsReturned:
+        solution = Solution.objects.filter(object_id=object_id, content_type=content_type).order_by('-status').first()
+        Solution.objects.filter(object_id=object_id, content_type=content_type).exclude(pk=solution.pk).delete()
+
     return solution
 
 
