@@ -1,13 +1,10 @@
 import logging
 import mimetypes
 import os
-import re
 import time
-from functools import reduce
 from typing import Optional, Union
 
 import boto3
-import requests
 from PIL import Image as PILImage
 from braces.views import (
     JSONResponseMixin,
@@ -25,11 +22,9 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.template.defaultfilters import floatformat
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
-from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
@@ -54,6 +49,7 @@ from astrobin.forms.remove_as_collaborator_form import ImageRemoveAsCollaborator
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevision, LANGUAGES, SolarSystem_Acquisition)
 from astrobin.services.gear_service import GearService
+from astrobin.services.utils_service import UtilsService
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_client_country_code, get_image_resolution
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
@@ -68,7 +64,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_se
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.exceptions import Http410
-from common.services import AppRedirectionService, DateTimeService
+from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
 
@@ -334,7 +330,6 @@ class ImageDetailView(ImageDetailViewBase):
         #############################
         # GENERATE ACQUISITION DATA #
         #############################
-        from astrobin.moon import MoonPhase
 
         deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
         ssa = None
@@ -1215,10 +1210,9 @@ class ImageUploadUncompressedSource(ImageEditBaseView):
 
 
 class ImageDownloadView(View):
-    def download(self, url):
-        response = requests.get(
+    def download(self, url: str) -> HttpResponse:
+        response = UtilsService.http_get_with_retries(
             url,
-            allow_redirects=True,
             headers={'User-Agent': 'Mozilla/5.0'}
         )
         content_type = mimetypes.guess_type(os.path.basename(url))
@@ -1271,9 +1265,8 @@ class ImageDownloadView(View):
             solution: Solution = revision.solution if revision and revision.solution else image.solution
 
             # Download SVG
-            response = requests.get(
+            response = UtilsService.http_get_with_retries(
                 f'{settings.MEDIA_URL}{solution.pixinsight_svg_annotation_hd}',
-                allow_redirects=True,
                 headers={'User-Agent': 'Mozilla/5.0'}
             )
             local_svg: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.svg', delete=False)
@@ -1286,9 +1279,8 @@ class ImageDownloadView(View):
 
             # Download HD thumbnail
             thumbnail_url = image.thumbnail('qhd', revision_label, sync=True)
-            response = requests.get(
+            response = UtilsService.http_get_with_retries(
                 thumbnail_url,
-                allow_redirects=True,
                 headers={'User-Agent': 'Mozilla/5.0'}
             )
             local_hd: NamedTemporaryFile = NamedTemporaryFile('w+b', delete=False)

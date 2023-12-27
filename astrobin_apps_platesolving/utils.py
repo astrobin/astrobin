@@ -1,10 +1,13 @@
-import requests
+from typing import Union
+
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.shortcuts import get_object_or_404
 
+from astrobin.models import Image, ImageRevision
+from astrobin.services.utils_service import UtilsService
 from astrobin_apps_platesolving.models import Solution
 
 
@@ -12,7 +15,7 @@ class ThumbnailNotReadyException(Exception):
     pass
 
 
-def get_from_storage(target, alias):
+def get_from_storage(target: Union[Image, ImageRevision], alias: str):
     if target._meta.model_name == 'imagerevision':
         url = target.thumbnail(alias, sync=True)
     else:
@@ -29,14 +32,14 @@ def get_from_storage(target, alias):
         last_part_of_media = media_url.rsplit('/', 1)[-1]
         first_part_of_url = url.strip('/').split('/')[0]
 
-        if (last_part_of_media == first_part_of_url):
+        if last_part_of_media == first_part_of_url:
             media_url = media_url.strip(last_part_of_media).strip('/')
 
         url = media_url + url
 
-    r = requests.get(url, verify=False, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
+    r = UtilsService.http_get_with_retries(url, headers={'User-Agent': 'Mozilla/5.0'})
 
-    img = NamedTemporaryFile(delete=True)
+    img = NamedTemporaryFile()
     img.write(r.content)
     img.flush()
     img.seek(0)

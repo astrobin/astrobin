@@ -1,8 +1,21 @@
 import re
 from typing import List, Optional
 
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3 import Retry
+
 
 class UtilsService:
+    @staticmethod
+    def http_get_with_retries(url: str, headers=None, verify=True, allow_redirects=True, stream=False):
+        retry_strategy = Retry(total=3, status_forcelist=[429, 500, 502, 503, 504], backoff_factor=1)
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        session = requests.Session()
+        session.mount('https://', adapter)
+        session.mount('http://', adapter)
+        return session.get(url, headers=headers, verify=verify, allow_redirects=allow_redirects, stream=stream)
+
     @staticmethod
     def unique(sequence):
         # Return unique items preserving order.

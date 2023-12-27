@@ -59,7 +59,7 @@ class AgenaStockImporterPlugin(StockImporterPluginInterface):
             log.error(f'Invalid stock status: {stock_status_str}')
             raise e
 
-    def __parse(self, xml_str: str) -> List[StockInterface]:
+    def __parse(self, xml_str: bytes) -> List[StockInterface]:
         root = ElementTree.fromstring(xml_str)
         products = root.find('channel').find('products').findall("product")
         stock_list = []
