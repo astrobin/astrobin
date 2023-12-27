@@ -525,3 +525,8 @@ class RemoveMultipleSpacesNode(Node):
     def render(self, context):
         strip_multiple_spaces = keep_lazy(six.text_type)(lambda x: re.sub(r'\s+', ' ', x))
         return strip_multiple_spaces(self.nodelist.render(context).strip())
+
+
+@register.filter
+def contains(value, arg):
+    return arg in value

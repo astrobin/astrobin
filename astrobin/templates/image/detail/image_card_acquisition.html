@@ -21,10 +21,24 @@
                                             <dt>{{ data.0 }}:</dt>
                                             <dd>
                                                 {% if data.0 == dates_label %}
-                                                    {% for date in data.1 %}
-                                                        <a href="/search/{% query_string "q=, date_acquired_min=date, date_acquired_max=date, d=i, t=all" "plate_solving_started, r, mod" %}">{{ date|date:"DATE_FORMAT" }}</a>
-                                                        {% if not forloop.last %} &middot;&nbsp;{% endif %}
-                                                    {% endfor %}
+                                                    <div class="{% if data.1|contains:',' %}multiline-dates{% else %}dates{% endif %}">
+                                                        {% with data.1|split_date_ranges:LANGUAGE_CODE as date_components %}
+                                                            {% for component in date_components %}
+                                                                {% if component.range %}
+                                                                    <!-- Handle date range -->
+                                                                    <a href="/search/{% query_string 'q=, date_acquired_min=component.start, date_acquired_max=component.end, d=i, t=all' 'plate_solving_started, r, mod' %}">
+                                                                        {{ component.range }}
+                                                                    </a>
+                                                                {% else %}
+                                                                    <!-- Handle single date -->
+                                                                    <a href="/search/{% query_string 'q=, date_acquired_min=component.start, date_acquired_max=component.end, d=i, t=all' 'plate_solving_started, r, mod' %}">
+                                                                        {{ component.date }}
+                                                                    </a>
+                                                                {% endif %}
+                                                                {% if not forloop.last %}<br/>{% endif %}
+                                                            {% endfor %}
+                                                        {% endwith %}
+                                                    </div>
                                                 {% else %}
                                                     {{ data.1|safe|linebreaksbr }}
                                                 {% endif %}

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 import math
 from datetime import date, datetime
 from typing import Optional
@@ -42,9 +43,11 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 from astrobin_apps_remote_source_affiliation.services.remote_source_affiliation_service import \
     RemoteSourceAffiliationService
 from astrobin_apps_users.services import UserService
+from common.services import DateTimeService
 from common.services.popup_message_service import PopupMessageService
 
 register = Library()
+log = logging.getLogger(__name__)
 
 
 @register.filter
@@ -127,10 +130,11 @@ def date_before(date1, date2):
 
 
 @register.filter
-def string_to_date(date):
+def string_to_date(date_str: str) -> datetime:
     try:
-        return datetime.strptime(date, "%Y-%m-%d")
-    except:
+        return DateTimeService.string_to_date(date_str)
+    except ValueError as e:
+        log.debug('Could not convert string %s to date: %s' % (date_str, e))
         return datetime.now()
 
 
@@ -577,13 +581,16 @@ def get_subscription_url_by_name(name):
 def is_content_moderator(user):
     return UserService(user).is_in_group('content_moderators')
 
+
 @register.filter
 def is_image_moderator(user):
     return UserService(user).is_in_group('image_moderators')
 
+
 @register.filter
 def is_forum_moderator(user):
     return UserService(user).is_in_group('forum_moderators')
+
 
 @register.filter
 def can_like(user, target):
@@ -973,3 +980,8 @@ def get_search_synonyms_text(text: str) -> Optional[str]:
 @register.filter
 def get_unseen_active_popups(user: User) -> QuerySet:
     return PopupMessageService.get_unseen_active_popups(user)
+
+
+@register.filter(name='split_date_ranges')
+def split_date_ranges(date_ranges_str: str, language_code: str) -> list:
+    return DateTimeService.split_date_ranges(date_ranges_str, language_code)

@@ -688,7 +688,7 @@ class ImageService:
             return f'bin {x}<span class="times-separator">&times;</span>{y}'
 
         return [
-            (_('Dates'), sorted(data['dates'])),
+            (_('Dates'), DateTimeService.format_date_ranges(data['dates'])),
             (_('Frames'),
              '<div class="frames">' +
              '\n'.join(
@@ -734,7 +734,7 @@ class ImageService:
         moon_age_list, moon_illuminated_list, data = self.get_deep_sky_acquisition_raw_data()
 
         return (
-            (_('Dates'), ', '.join([x.isoformat() for x in sorted(data['dates'])])),
+            (_('Dates'), DateTimeService.format_date_ranges(data['dates'])),
             (_('Frames'), '\n'.join(
                 "%s %s" % (
                     "%s:" % f[1]['filter'] if f[1]['filter'] else '',
