@@ -1259,12 +1259,32 @@ def forum_post_post_save(sender, instance, created, **kwargs):
     def notify_subscribers(mentions: List[str]) -> None:
         recipients = list(instance.topic.subscribers.exclude(
             pk__in=list(set(
-                [instance.user.pk] +
+                [instance.user.pk, instance.topic.user.pk] +
                 [x.pk for x in MentionsService.get_mentioned_users_with_notification_enabled(
                     mentions, 'new_forum_post_mention')
                  ])
             ))
         )
+
+        if instance.topic.user != instance.user and instance.topic.user.username not in mentions:
+            push_notification(
+                [instance.topic.user],
+                instance.user,
+                'new_forum_reply_started_topic',
+                {
+                    'user': instance.user.userprofile.get_display_name(),
+                    'user_url': settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user}),
+                    'post_url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
+                    'topic_url': build_notification_url(
+                        settings.BASE_URL + instance.topic.get_absolute_url(), instance.user
+                    ),
+                    'topic_name': instance.topic.name,
+                    'unsubscribe_url': build_notification_url(
+                        settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]),
+                        instance.user
+                    )
+                }
+            )
 
         if recipients:
             push_notification(
