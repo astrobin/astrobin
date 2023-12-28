@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.db import IntegrityError
 from django.http import HttpResponseForbidden
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
@@ -38,6 +39,8 @@ class HiddenImageViewSet(viewsets.ModelViewSet):
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
         except ValidationError as e:
             return HttpResponseForbidden(e.messages)
+        except IntegrityError:
+            pass
 
     def destroy(self, request, *args, **kwargs):
         object = self.get_object()  # type: IotdHiddenImage
