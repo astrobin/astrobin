@@ -255,6 +255,14 @@ ALL_DATE_FORMATS = {
         'RANGE_SAME_MONTH': 'N j1 - j2, Y',
         'RANGE_SAME_YEAR': 'N1 j1 - N2 j2, Y',
     },
+    'en-us': {
+        'DATE_FORMAT': 'N j, Y',
+        'DAY': 'j',
+        'MONTH': 'N',
+        'YEAR': 'Y',
+        'RANGE_SAME_MONTH': 'N j1 - j2, Y',
+        'RANGE_SAME_YEAR': 'N1 j1 - N2 j2, Y',
+    },
     'en-gb': {
         'DATE_FORMAT': 'j M Y',
         'DAY': 'j',
