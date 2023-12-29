@@ -12,6 +12,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
 
 from astrobin_apps_iotd.api.permissions.is_iotd_submitter import IsIotdSubmitter
 from astrobin_apps_iotd.api.serializers.submission_serializer import SubmissionSerializer
@@ -36,7 +37,7 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         except ValidationError as e:
             return HttpResponseForbidden(e.messages)
         except IntegrityError:
-            pass
+            return Response(status=204)
 
     def destroy(self, request, *args, **kwargs):
         submission = self.get_object()  # type: IotdSubmission

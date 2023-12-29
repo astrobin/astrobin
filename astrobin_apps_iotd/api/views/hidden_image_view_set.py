@@ -11,6 +11,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
 
 from astrobin_apps_iotd.api.serializers.hidden_image_serializer import HiddenImageSerializer
 from astrobin_apps_iotd.models import IotdHiddenImage
@@ -40,7 +41,7 @@ class HiddenImageViewSet(viewsets.ModelViewSet):
         except ValidationError as e:
             return HttpResponseForbidden(e.messages)
         except IntegrityError:
-            pass
+            return Response(status=204)
 
     def destroy(self, request, *args, **kwargs):
         object = self.get_object()  # type: IotdHiddenImage

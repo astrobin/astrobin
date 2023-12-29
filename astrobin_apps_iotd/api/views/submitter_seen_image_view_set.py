@@ -50,7 +50,7 @@ class SubmitterSeenImageViewSet(viewsets.ModelViewSet):
 
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
         except IntegrityError:
-            pass
+            return Response(status=204)
         except Exception as e:
             return HttpResponseForbidden(str(e))
 
