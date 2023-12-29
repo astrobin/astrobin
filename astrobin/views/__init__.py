@@ -768,9 +768,18 @@ def image_edit_platesolving_settings(request, id, revision_label):
             return_url = reverse('image_detail', args=(image.get_id(), '0',))
         else:
             return_url = reverse('image_detail', args=(image.get_id(),))
-        solution, created = Solution.objects.get_or_create(
-            content_type=ContentType.objects.get_for_model(Image),
-            object_id=image.pk)
+
+        try:
+            solution, created = Solution.objects.get_or_create(
+                content_type=ContentType.objects.get_for_model(Image),
+                object_id=image.pk)
+        except Solution.MultipleObjectsReturned:
+            solution = Solution.objects.filter(
+                content_type=ContentType.objects.get_for_model(Image),
+                object_id=image.pk).order_by('-pk')[0]
+            Solution.objects.filter(
+                content_type=ContentType.objects.get_for_model(Image),
+                object_id=image.pk).exclude(pk=solution.pk).delete()
     else:
         url = reverse('image_edit_platesolving_settings', args=(image.get_id(), revision_label,))
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
