@@ -252,6 +252,9 @@ def number_unit_decimals_html(value, unit, precision, must_be_less_than=None):
     return value
 
 def decimal_to_hours_minutes_seconds(value):
+    if value is None:
+        return 0, 0, 0
+
     value = abs(value)
     hours = int(value / 15)
     minutes = int(((value / 15) - hours) * 60)
