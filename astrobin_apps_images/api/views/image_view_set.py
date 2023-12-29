@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
+
+import simplejson
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -19,6 +22,8 @@ from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Sof
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
+
+logger = logging.getLogger(__name__)
 
 
 class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin,
@@ -89,16 +94,27 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
                 item['filter_2'] = get_object_or_None(Filter, id=item.get('filter_2'))
 
             data = dict(image=instance, **item)
+
             if 'id' in data:
                 del data['id']
-            DeepSky_Acquisition.objects.create(**data)
+            try:
+                DeepSky_Acquisition.objects.create(**data)
+            except Exception as e:
+                data_str = simplejson.dumps(data, default=str)
+                logger.error(f"Error creating DeepSky_Acquisition: {e}. Data: {data_str}")
+                raise e
 
         SolarSystem_Acquisition.objects.filter(image=instance).delete()
         for item in request.data.get('solar_system_acquisitions'):
             data = dict(image=instance, **item)
             if 'id' in data:
                 del data['id']
-            SolarSystem_Acquisition.objects.create(**data)
+            try:
+                SolarSystem_Acquisition.objects.create(**data)
+            except Exception as e:
+                data_str = simplejson.dumps(data, default=str)
+                logger.error(f"Error creating SolarSystem_Acquisition: {e}. Data: {data_str}")
+                raise e
 
     def get_serializer_class(self):
         if (
