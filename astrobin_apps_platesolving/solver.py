@@ -32,7 +32,11 @@ class Solver(SolverBase):
         if submission is None or submission == 0:
             return self.MISSING
 
-        sub_status = self.backend().submission_status(submission)
+        try:
+            sub_status = self.backend().submission_status(submission)
+        except RequestError:
+            return self.PENDING
+
         if sub_status is None:
             return self.PENDING
 
