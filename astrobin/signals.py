@@ -28,7 +28,7 @@ from rest_framework.authtoken.models import Token
 from safedelete import HARD_DELETE
 from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 from safedelete.models import SafeDeleteModel
-from safedelete.signals import post_softdelete
+from safedelete.signals import post_softdelete, post_undelete
 from stripe.error import StripeError
 from subscription.models import Subscription, Transaction, UserSubscription
 from subscription.signals import paid, signed_up, unsubscribed
@@ -65,7 +65,7 @@ from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_any_paid_subscription, is_any_ultimate, is_free, is_lite, is_lite_2020, is_premium, is_premium_2020,
 )
-from astrobin_apps_users.services import UserService
+from astrobin_apps_users.services import MailingListService, UserService
 from common.constants import GroupName
 from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import AppRedirectionService, DateTimeService, SearchIndexUpdateService
@@ -1436,8 +1436,19 @@ def userprofile_pre_save(sender, instance: UserProfile, **kwargs):
     if before_save.skill_level != instance.skill_level:
         instance.skill_level_updated = DateTimeService.now()
 
+    if before_save.receive_newsletter != instance.receive_newsletter:
+        service: MailingListService = MailingListService(instance.user)
+        list_id: int = settings.BREVO_NEWSLETTER_LIST_ID
+        if instance.receive_newsletter:
+            service.subscribe(list_id)
+        else:
+            service.unsubscribe(list_id)
 
+
+@receiver(post_softdelete, sender=UserProfile)
 def userprofile_post_softdelete(sender, instance, **kwargs):
+    MailingListService(instance.user).delete_contact()
+
     # Images are attached to the auth.User object, and that's not really
     # deleted, so nothing is cascaded, hence the following line.
     instance.user.is_active = False
@@ -1454,7 +1465,16 @@ def userprofile_post_softdelete(sender, instance, **kwargs):
     UserIndex().remove_object(instance.user)
 
 
-post_softdelete.connect(userprofile_post_softdelete, sender=UserProfile)
+@receiver(post_undelete, sender=UserProfile)
+def userprofile_post_undelete(sender, instance, **kwargs):
+    instance.user.is_active = True
+    instance.user.email = instance.user.email.replace('+ASTROBIN_IGNORE', '')
+    instance.user.save()
+
+    if instance.receive_newsletter:
+        MailingListService(instance.user).subscribe(settings.BREVO_NEWSLETTER_LIST_ID)
+
+    UserIndex().update_object(instance.user)
 
 
 @receiver(pre_delete, sender=UserProfile)

@@ -1,12 +1,14 @@
 import json
+import logging
 
 from braces.views import JSONResponseMixin, LoginRequiredMixin, JsonRequestResponseMixin
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.utils.translation import gettext
 from django.views import View
 from django.views.generic import base
@@ -15,6 +17,7 @@ from django_bouncy.models import Bounce, Complaint
 from astrobin.models import UserProfile
 from toggleproperties.models import ToggleProperty
 
+logger = logging.getLogger(__name__)
 
 class TogglePropertyUsersAjaxView(JsonRequestResponseMixin, base.View):
     def get(self, request, *args, **kwargs):
@@ -90,3 +93,27 @@ class ComplaintRemove(LoginRequiredMixin, View):
             "always mark AstroBin's emails as spam! If you don't want to receive emails from AstroBin, look for the "
             "settings link that's at the bottom of every email. Thanks!"))
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+class BrevoWebhook(View):
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs) -> HttpResponse:
+        data = json.loads(request.body.decode('utf-8'))
+
+        if data['api_key'] != settings.BREVO_API_KEY:
+            logger.error('Invalid Brevo API key')
+            return HttpResponseForbidden()
+
+        if data['event'] == 'unsubscribe':
+            email = data['email']
+            user_profile = UserProfile.objects.filter(user__email=email).first()
+            list_id = data['list_id']
+
+            logger.info('Unsubscribing %s from list %s', email, list_id)
+
+            if user_profile and list_id == settings.BREVO_NEWSLETTER_LIST_ID:
+                user_profile.receive_newsletter = False
+                user_profile.save(keep_deleted=False)
+
+        return HttpResponse(status=200)

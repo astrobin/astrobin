@@ -37,7 +37,7 @@ def get_from_storage(target: Union[Image, ImageRevision], alias: str):
 
         url = media_url + url
 
-    r = UtilsService.http_get_with_retries(url, headers={'User-Agent': 'Mozilla/5.0'})
+    r = UtilsService.http_with_retries(url, headers={'User-Agent': 'Mozilla/5.0'})
 
     img = NamedTemporaryFile()
     img.write(r.content)

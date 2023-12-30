@@ -295,7 +295,7 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
             if url:
                 try:
                     img = NamedTemporaryFile()
-                    data = UtilsService.http_get_with_retries(url)
+                    data = UtilsService.http_with_retries(url)
                     img.write(data.content)
                     img.flush()
                     img.seek(0)
