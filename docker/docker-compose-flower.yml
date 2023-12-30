@@ -8,7 +8,7 @@ services:
       - -c
       - |
         LOCAL_STATIC_STORAGE=true python manage.py collectstatic --noinput && \
-        flower -A astrobin --port=5555
+        flower -A astrobin --port=5555 --basic_auth=${FLOWER_BASIC_AUTH_USER}:${FLOWER_BASIC_AUTH_PASSWORD}
     ports:
       - "5555:5555"
     env_file:
