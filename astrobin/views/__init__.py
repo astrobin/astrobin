@@ -41,7 +41,7 @@ from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import common_variables, user_language
-from astrobin.enums import ImageEditorStep
+from astrobin.enums import ImageEditorStep, SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.forms import (
     AccessoryEditForm, AccessoryEditNewForm, CameraEditForm, CameraEditNewForm,
@@ -1803,7 +1803,7 @@ def user_profile_flickr_import(request):
                                   user=request.user,
                                   title=title if title is not None else '',
                                   description=description if description is not None else '',
-                                  subject_type=600,  # Default to Other only when doing a Flickr import
+                                  subject_type=SubjectType.OTHER,
                                   is_wip=True,
                                   license=profile.default_license)
                     image.save(keep_deleted=True)
