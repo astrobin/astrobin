@@ -26,15 +26,15 @@ CURRENT_MIN_SIZE=$(echo "$AUTOSCALING_GROUP_DESCRIPTION" | jq -r ".AutoScalingGr
 CURRENT_MAX_SIZE=$(echo "$AUTOSCALING_GROUP_DESCRIPTION" | jq -r ".AutoScalingGroups[0].MaxSize")
 CURRENT_DESIRED_CAPACITY=$(echo "$AUTOSCALING_GROUP_DESCRIPTION" | jq -r ".AutoScalingGroups[0].DesiredCapacity")
 
-# First add just one instance which will perform migrations.
-
-aws autoscaling update-auto-scaling-group \
-    --auto-scaling-group-name ${AUTOSCALING_GROUP_NAME} \
-    --min-size "$(($CURRENT_MIN_SIZE + 1))" \
-    --max-size "$(($CURRENT_MAX_SIZE + 1))" \
-    --desired-capacity "$(($CURRENT_DESIRED_CAPACITY + 1))"
-
-sleep ${SLEEP_SECONDS}
+if [ "$AUTOSCALING_GROUP_NAME" == "astrobin-app-autoscaling-group" ]; then
+    # First add just one instance which will perform migrations.
+    aws autoscaling update-auto-scaling-group \
+        --auto-scaling-group-name ${AUTOSCALING_GROUP_NAME} \
+        --min-size "$(($CURRENT_MIN_SIZE + 1))" \
+        --max-size "$(($CURRENT_MAX_SIZE + 1))" \
+        --desired-capacity "$(($CURRENT_DESIRED_CAPACITY + 1))"
+    sleep ${SLEEP_SECONDS}
+fi
 
 # Then double up from the original numbers.
 
