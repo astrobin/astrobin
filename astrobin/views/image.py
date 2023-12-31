@@ -1218,7 +1218,7 @@ class ImageUploadUncompressedSource(ImageEditBaseView):
 
 class ImageDownloadView(View):
     def download(self, url: str) -> HttpResponse:
-        response = UtilsService.http_get_with_retries(
+        response = UtilsService.http_with_retries(
             url,
             headers={'User-Agent': 'Mozilla/5.0'}
         )
@@ -1272,7 +1272,7 @@ class ImageDownloadView(View):
             solution: Solution = revision.solution if revision and revision.solution else image.solution
 
             # Download SVG
-            response = UtilsService.http_get_with_retries(
+            response = UtilsService.http_with_retries(
                 f'{settings.MEDIA_URL}{solution.pixinsight_svg_annotation_hd}',
                 headers={'User-Agent': 'Mozilla/5.0'}
             )
@@ -1286,7 +1286,7 @@ class ImageDownloadView(View):
 
             # Download HD thumbnail
             thumbnail_url = image.thumbnail('qhd', revision_label, sync=True)
-            response = UtilsService.http_get_with_retries(
+            response = UtilsService.http_with_retries(
                 thumbnail_url,
                 headers={'User-Agent': 'Mozilla/5.0'}
             )

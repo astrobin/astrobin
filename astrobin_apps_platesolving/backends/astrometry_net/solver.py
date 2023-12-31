@@ -114,9 +114,9 @@ class Solver(AbstractPlateSolvingBackend):
         headers = {'User-Agent': 'Mozilla/5.0'}
 
         if 'https://' in image_url:
-            r = UtilsService.http_get_with_retries(image_url, verify=False, headers=headers)
+            r = UtilsService.http_with_retries(image_url, verify=False, headers=headers)
         else:
-            r = UtilsService.http_get_with_retries(image_url, headers=headers)
+            r = UtilsService.http_with_retries(image_url, headers=headers)
 
         f = NamedTemporaryFile(delete=True)
         f.write(r.content)

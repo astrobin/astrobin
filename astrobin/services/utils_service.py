@@ -8,13 +8,25 @@ from urllib3 import Retry
 
 class UtilsService:
     @staticmethod
-    def http_get_with_retries(url: str, headers=None, verify=True, allow_redirects=True, stream=False):
-        retry_strategy = Retry(total=3, status_forcelist=[429, 500, 502, 503, 504], backoff_factor=1)
-        adapter = HTTPAdapter(max_retries=retry_strategy)
-        session = requests.Session()
+    def http_with_retries(
+            url: str, method='GET', headers=None, verify=True, allow_redirects=True, stream=False, **kwargs
+    ) -> requests.Response:
+        retry_strategy: Retry = Retry(total=3, status_forcelist=[429, 500, 502, 503, 504], backoff_factor=1)
+        adapter: HTTPAdapter = HTTPAdapter(max_retries=retry_strategy)
+        session: requests.Session = requests.Session()
+
         session.mount('https://', adapter)
         session.mount('http://', adapter)
-        return session.get(url, headers=headers, verify=verify, allow_redirects=allow_redirects, stream=stream)
+
+        return session.request(
+            method=method,
+            url=url,
+            headers=headers,
+            verify=verify,
+            allow_redirects=allow_redirects,
+            stream=stream,
+            **kwargs
+        )
 
     @staticmethod
     def unique(sequence):

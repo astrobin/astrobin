@@ -537,7 +537,7 @@ class ImageService:
             w, h = 1024, 1024
 
         placeholder_url = f'https://via.placeholder.com/{w}x{h}/222/333&text=PREVIEW NOT READY'
-        response = UtilsService.http_get_with_retries(placeholder_url, stream=True)
+        response = UtilsService.http_with_retries(placeholder_url, stream=True)
         if response.status_code == 200:
             img_temp = NamedTemporaryFile()
             for block in response.iter_content(1024 * 8):
