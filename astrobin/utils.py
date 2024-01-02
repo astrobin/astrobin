@@ -99,6 +99,53 @@ def get_client_country_code(request) -> str:
         return default_country
 
 
+def get_currency_code(country_code: str) -> str:
+    euro_countries = [
+        'AT',  # Austria
+        'BE',  # Belgium
+        'CY',  # Cyprus
+        'HR',  # Croatia
+        'EE',  # Estonia
+        'FI',  # Finland
+        'FR',  # France
+        'DE',  # Germany
+        'GR',  # Greece
+        'IE',  # Ireland
+        'IT',  # Italy
+        'LV',  # Latvia
+        'LT',  # Lithuania
+        'LU',  # Luxembourg
+        'MT',  # Malta
+        'NL',  # Netherlands
+        'PT',  # Portugal
+        'SK',  # Slovakia
+        'SI',  # Slovenia
+        'ES',  # Spain
+        # Non-EU countries that have adopted the Euro
+        'AD',  # Andorra
+        'MC',  # Monaco
+        'SM',  # San Marino
+        'VA',  # Vatican City
+        'ME',  # Montenegro
+        'XK'  # Kosovo
+    ]
+
+    currency_country_map = {
+        'EUR': euro_countries,
+        'CHF': ['CH',],
+        'GBP': ['GB',],
+        'AUD': ['AU',],
+        'CAD': ['CA',],
+        'CNY': ['CN',],
+    }
+
+    for currency, countries in currency_country_map.items():
+        if country_code.upper() in countries:
+            return currency
+
+    return 'USD'
+
+
 def get_gdpr_country_codes() -> List[str]:
     return [
         'AT',  # Austria
