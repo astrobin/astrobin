@@ -233,6 +233,13 @@ urlpatterns += [
         name='favicon'
     ),
     url(r'^robots\.txt', include('robots.urls')),
+    url(
+        r'^.well-known/apple-developer-merchantid-domain-association$',
+        RedirectView.as_view(
+            url='https://cdn.astrobin.com/downloads/apple-developer-merchantid-domain-association',
+            permanent=True
+        )
+    ),
 
     ###########################################################################
     ### SEARCH VIEWS                                                        ###
