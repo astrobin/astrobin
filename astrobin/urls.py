@@ -33,7 +33,8 @@ from astrobin.views import (
     image_edit_revision_make_final, image_edit_save_acquisition, image_edit_save_license, image_edit_save_watermark,
     image_edit_watermark, image_restart_advanced_platesolving, image_restart_platesolving,
     image_revision_upload_process, image_upload, image_upload_process, index, me, moderation as moderation_views,
-    registration as registration_views, save_gear_details, save_gear_user_info, set_language, suspended_account,
+    registration as registration_views, save_gear_details, save_gear_user_info, serve_file_from_cdn, set_language,
+    suspended_account,
     user_ban, user_page, user_page_api_keys, user_page_bookmarks, user_page_followers, user_page_following,
     user_page_friends, user_page_liked, user_page_plots, user_popover_ajax, user_profile_delete,
     user_profile_edit_basic, user_profile_edit_gear, user_profile_edit_license, user_profile_edit_locations,
@@ -62,7 +63,6 @@ v1_api.register(TopPickResource())
 v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
 v1_api.register(UserProfileResource())
-
 
 urlpatterns = []
 
@@ -235,10 +235,7 @@ urlpatterns += [
     url(r'^robots\.txt', include('robots.urls')),
     url(
         r'^.well-known/apple-developer-merchantid-domain-association$',
-        RedirectView.as_view(
-            url='https://cdn.astrobin.com/downloads/apple-developer-merchantid-domain-association',
-            permanent=True
-        )
+        serve_file_from_cdn('downloads/apple-developer-merchantid-domain-association')
     ),
 
     ###########################################################################

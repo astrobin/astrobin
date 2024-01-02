@@ -8,6 +8,7 @@ import urllib.request
 from functools import reduce
 
 import flickrapi
+import requests
 import simplejson
 from actstream.models import Action
 from annoying.functions import get_object_or_None
@@ -57,6 +58,7 @@ from astrobin.models import (
     Accessory, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
+from astrobin.services.utils_service import UtilsService
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import (
     has_active_uncanceled_subscription_by_name, in_upload_wizard,
@@ -2633,3 +2635,23 @@ def get_makes_by_type(request, klass):
     return HttpResponse(
         simplejson.dumps(ret),
         content_type='application/javascript')
+
+
+def serve_file_from_cdn(file_path):
+    def view(request):
+        cdn_url = f'{settings.MEDIA_URL}{file_path}'
+
+        try:
+            response = UtilsService.http_with_retries(cdn_url, stream=True)
+            response.raise_for_status()
+        except requests.RequestException as e:
+            # Handle any exceptions (e.g., file not found, server error)
+            return HttpResponse(str(e), status=500)
+
+        # Set up Django response with the same content type and content
+        django_response = HttpResponse(response.content, content_type=response.headers['Content-Type'])
+        django_response['Content-Disposition'] = f'attachment; filename="{file_path}"'
+
+        return django_response
+
+    return view
