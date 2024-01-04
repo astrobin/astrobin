@@ -1238,6 +1238,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     published = models.DateTimeField(editable=False, null=True, blank=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
     submitted_for_iotd_tp_consideration = models.DateTimeField(editable=False, null=True, blank=True)
+    disqualified_from_iotd_tp = models.DateTimeField(editable=False, null=True, blank=True)
 
     designated_iotd_submitters = models.ManyToManyField(
         User,

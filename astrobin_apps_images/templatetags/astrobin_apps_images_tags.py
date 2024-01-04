@@ -178,7 +178,7 @@ def astrobin_image(context, image, alias, **kwargs):
         if image.video_file.name and not ImageService.is_viewable_alias(alias):
             badges.append('video')
 
-        if image.submitted_for_iotd_tp_consideration:
+        if image.submitted_for_iotd_tp_consideration and not image.disqualified_from_iotd_tp:
             num_submissions = IotdSubmission.objects.filter(image=image).count()
             num_votes = IotdVote.objects.filter(image=image).count()
 
