@@ -618,6 +618,17 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
+    def test_get_submission_queue_disqualified(self):
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        image.designated_iotd_submitters.add(submitter)
+        image.disqualified_from_iotd_tp = datetime.now()
+        image.save()
+
+        update_submission_queues()
+
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
+
     def test_get_submission_queue_own_image_as_collaborator(self):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
@@ -837,6 +848,33 @@ class IotdServiceTest(TestCase):
             submitter=submitter2,
             image=image
         )
+
+        update_review_queues()
+
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
+
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    def test_get_review_queue_disqualified(self):
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+
+        image = Generators.image(submitted_for_iotd_tp_consideration=datetime.now())
+        image.designated_iotd_submitters.add(submitter, submitter2)
+        image.designated_iotd_reviewers.add(reviewer)
+
+        IotdSubmission.objects.create(
+            submitter=submitter,
+            image=image
+        )
+
+        IotdSubmission.objects.create(
+            submitter=submitter2,
+            image=image
+        )
+
+        image.disqualified_from_iotd_tp = datetime.now()
+        image.save()
 
         update_review_queues()
 
@@ -2163,6 +2201,23 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(
             (False, MayNotSubmitToIotdTpReason.BANNED_FROM_COMPETITIONS),
+            IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_disqualified(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope())
+        image.imaging_cameras_2.add(EquipmentGenerators.camera())
+        Generators.deep_sky_acquisition(image)
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        image.disqualified_from_iotd_tp = datetime.now()
+        image.save(keep_deleted=True)
+
+        self.assertEqual(
+            (False, MayNotSubmitToIotdTpReason.DISQUALIFIED),
             IotdService.may_submit_to_iotd_tp_process(image.user, image)
         )
 

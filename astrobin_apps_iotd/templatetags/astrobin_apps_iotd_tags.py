@@ -92,6 +92,9 @@ def humanize_may_not_submit_to_iotd_tp_process_reason(reason: str) -> str:
             "You have not agreed to the IOTD/TP rules and guidelines since their last update. Please amend this in "
             "your profile preferences and then submit the image again using the Actions menu."
         ),
+        MayNotSubmitToIotdTpReason.DISQUALIFIED: _(
+            "This image has been disqualified from the IOTD/TP process."
+        ),
     }
 
     try:

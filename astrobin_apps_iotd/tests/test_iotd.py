@@ -174,6 +174,17 @@ class IotdTest(TestCase):
         self.image.user.userprofile.banned_from_competitions = None
         self.image.user.userprofile.save(keep_deleted=True)
 
+    def test_submission_model_image_must_not_be_disqualified(self):
+        Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
+        self.image.disqualified_from_iotd_tp = datetime.now()
+        self.image.save(keep_deleted=True)
+        with self.assertRaisesRegex(ValidationError, "disqualified from the IOTD/TP process"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        self.image.disqualified_from_iotd_tp = None
+        self.image.save(keep_deleted=True)
+
     def test_submission_model_cannot_submit_own_image(self):
         Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
         self.image.user = self.submitter_1
@@ -316,6 +327,16 @@ class IotdTest(TestCase):
                 image=self.image)
         self.image.user.userprofile.banned_from_competitions = None
         self.image.user.userprofile.save(keep_deleted=True)
+
+    def test_vote_model_image_must_not_be_disqualified(self):
+        self.image.disqualified_from_iotd_tp = datetime.now()
+        self.image.save(keep_deleted=True)
+        with self.assertRaisesRegex(ValidationError, "disqualified from the IOTD/TP process"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        self.image.disqualified_from_iotd_tp = None
+        self.image.save(keep_deleted=True)
 
     def test_vote_model_cannot_vote_own_image(self):
         Generators.premium_subscription(self.image.user, SubscriptionName.ULTIMATE_2020)
@@ -620,6 +641,16 @@ class IotdTest(TestCase):
                 image=self.image)
         self.image.user.userprofile.banned_from_competitions = None
         self.image.user.userprofile.save(keep_deleted=True)
+
+        # Image must not be disqualified
+        self.image.disqualified_from_iotd_tp = datetime.now()
+        self.image.save(keep_deleted=True)
+        with self.assertRaisesRegex(ValidationError, "disqualified from the IOTD/TP process"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        self.image.disqualified_from_iotd_tp = None
+        self.image.save(keep_deleted=True)
 
         # Cannot elect own image
         self.image.user = self.judge_1
