@@ -39,8 +39,7 @@ def gallery_thumbnail_inverted(image, revision_label):
     return image.thumbnail('gallery_inverted', revision_label)
 
 
-# Renders an linked image tag with a placeholder and async loading of the
-# actual thumbnail.
+# Renders a linked image tag with a placeholder and async loading of the actual thumbnail.
 def astrobin_image(context, image, alias, **kwargs):
     request = kwargs.get('request', context['request'])
 
@@ -275,16 +274,9 @@ def astrobin_image(context, image, alias, **kwargs):
 
     collection_tag_key = None
     collection_tag_value = None
-    if (
-        hasattr(request, 'resolver_match') and
-        hasattr(request.resolver_match, 'kwargs') and
-        'collection_pk' in request.resolver_match.kwargs
-    ):
-        collection = get_object_or_None(Collection, pk=request.resolver_match.kwargs['collection_pk'])
-        if collection:
-            collection_tag_key = collection.order_by_tag
-            collection_tag_value = ImageService(image).get_collection_tag_value(collection)
-
+    if hasattr(request, 'collection'):
+        collection_tag_key = request.collection.order_by_tag
+        collection_tag_value = ImageService(image).get_collection_tag_value(request.collection)
 
     # noinspection PyTypeChecker
     return dict(

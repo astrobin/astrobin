@@ -238,6 +238,11 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
     pk_url_kwarg = 'collection_pk'
     context_object_name = 'collection'
 
+    def dispatch(self, request, *args, **kwargs):
+        response = super(UserCollectionsDetail, self).dispatch(request, *args, **kwargs)
+        request.collection = self.object
+        return response
+
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsDetail, self).get_context_data(**kwargs)
 
@@ -253,6 +258,8 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
 
         context['image_list'] = image_list.all() if image_list else None
         context['not_matching_tag'] = not_matching_tag.all() if not_matching_tag else None
+        context['image_list_count'] = image_list.count() if image_list else 0
+        context['not_matching_tag_count'] = not_matching_tag.count() if not_matching_tag else 0
         context['alias'] = 'gallery'
         context['paginate_by'] = settings.PAGINATE_USER_PAGE_BY
         return context
