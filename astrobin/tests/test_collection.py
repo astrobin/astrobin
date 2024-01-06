@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Collection, Image
-from astrobin_apps_images.models import KeyValueTag
+from astrobin.tests.generators import Generators
 
 
 class CollectionTest(TestCase):
@@ -170,13 +170,13 @@ class CollectionTest(TestCase):
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image1 = self._get_last_image()
-        KeyValueTag.objects.create(image=image1, key="a", value=1)
-        KeyValueTag.objects.create(image=image1, key="b", value=2)
+        Generators.key_value_tag(image=image1, key="a", value=1)
+        Generators.key_value_tag(image=image1, key="b", value=2)
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image2 = self._get_last_image()
-        KeyValueTag.objects.create(image=image2, key="a", value=2)
-        KeyValueTag.objects.create(image=image2, key="b", value=1)
+        Generators.key_value_tag(image=image2, key="a", value=2)
+        Generators.key_value_tag(image=image2, key="b", value=1)
 
         collection = Collection.objects.create(user=self.user, order_by_tag="a")
         collection.images.add(image1, image2)
@@ -213,11 +213,11 @@ class CollectionTest(TestCase):
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image1 = self._get_last_image()
-        KeyValueTag.objects.create(image=image1, key="a", value=1)
+        Generators.key_value_tag(image=image1, key="a", value=1)
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image2 = self._get_last_image()
-        KeyValueTag.objects.create(image=image2, key="a", value=2)
+        Generators.key_value_tag(image=image2, key="a", value=2)
 
         collection = Collection.objects.create(user=self.user, order_by_tag="a")
         collection.images.add(image1, image2)
@@ -262,13 +262,13 @@ class CollectionTest(TestCase):
         image1 = self._get_last_image()
         image1.moderator_decision = ModeratorDecision.APPROVED
         image1.save()
-        KeyValueTag.objects.create(image=image1, key="a", value=2)
+        Generators.key_value_tag(image=image1, key="a", value=2)
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image2 = self._get_last_image()
         image2.moderator_decision = ModeratorDecision.APPROVED
         image2.save()
-        KeyValueTag.objects.create(image=image2, key="a", value=1)
+        Generators.key_value_tag(image=image2, key="a", value=1)
 
         collection = self._get_last_collection()
         collection.images.add(image1, image2)

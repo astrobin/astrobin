@@ -21,7 +21,7 @@ class EquipmentGenerators:
 
     @staticmethod
     def brand(**kwargs):
-        random_name = Generators.randomString()
+        random_name = Generators.random_string()
 
         return EquipmentBrand.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
@@ -32,7 +32,7 @@ class EquipmentGenerators:
 
     @staticmethod
     def sensor(**kwargs):
-        random_name = Generators.randomString()
+        random_name = Generators.random_string()
 
         return Sensor.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
@@ -57,7 +57,7 @@ class EquipmentGenerators:
 
     @staticmethod
     def camera(**kwargs):
-        random_name = Generators.randomString()
+        random_name = Generators.random_string()
 
         return Camera.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
@@ -79,7 +79,7 @@ class EquipmentGenerators:
 
     @staticmethod
     def telescope(**kwargs):
-        random_name = Generators.randomString()
+        random_name = Generators.random_string()
 
         return Telescope.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
@@ -100,7 +100,7 @@ class EquipmentGenerators:
 
     @staticmethod
     def mount(**kwargs):
-        random_name = Generators.randomString()
+        random_name = Generators.random_string()
 
         return Mount.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
@@ -123,7 +123,7 @@ class EquipmentGenerators:
 
     @staticmethod
     def filter(**kwargs):
-        random_name = Generators.randomString()
+        random_name = Generators.random_string()
 
         return Filter.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
@@ -142,7 +142,7 @@ class EquipmentGenerators:
 
     @staticmethod
     def accessory(**kwargs):
-        random_name = Generators.randomString()
+        random_name = Generators.random_string()
 
         return Accessory.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
@@ -158,7 +158,7 @@ class EquipmentGenerators:
 
     @staticmethod
     def software(**kwargs):
-        random_name = Generators.randomString()
+        random_name = Generators.random_string()
 
         return Software.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
@@ -176,20 +176,20 @@ class EquipmentGenerators:
     def equipment_item_group(**kwargs):
         return EquipmentItemGroup.objects.create(
             klass=kwargs.get('klass', EquipmentItemKlass.TELESCOPE),
-            name=Generators.randomString()
+            name=Generators.random_string()
         )
 
     @staticmethod
     def equipment_brand():
         return EquipmentBrand.objects.create(
-            name=Generators.randomString()
+            name=Generators.random_string()
         )
 
     @staticmethod
     def equipment_retailer():
         return EquipmentRetailer.objects.create(
-            name=Generators.randomString(),
-            website="https://www.%s.com" % Generators.randomString(),
+            name=Generators.random_string(),
+            website="https://www.%s.com" % Generators.random_string(),
         )
 
     @staticmethod
@@ -210,7 +210,7 @@ class EquipmentGenerators:
         item_content_object = kwargs.get('item_content_object', EquipmentGenerators.telescope())
 
         return EquipmentItemListing.objects.create(
-            name=kwargs.get('name', Generators.randomString()),
+            name=kwargs.get('name', Generators.random_string()),
             retailer=retailer,
             item_content_object=item_content_object,
             url=kwargs.get('url', "%s/shop/%s" % (retailer.website, slugify(brand))),
