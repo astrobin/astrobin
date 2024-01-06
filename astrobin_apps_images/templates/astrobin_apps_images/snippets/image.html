@@ -294,6 +294,15 @@
                                         </td>
                                     </tr>
                                 {% endif %}
+                            
+                                {% if collection_tag_key and collection_tag_value %}
+                                    <tr>
+                                        <th class="collection-tag"><i class="icon-tag"></i></th>
+                                        <td colspan="3" class="collection-tag-value">
+                                            {{ collection_tag_key }}={{ collection_tag_value }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
                             </table>
                         {% endcache %}
                         {% if link %}

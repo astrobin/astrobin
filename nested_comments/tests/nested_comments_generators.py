@@ -23,7 +23,7 @@ class NestedCommentsGenerators:
             author=kwargs.pop('author', author),
             content_type=ContentType.objects.get_for_model(target),
             object_id=target.id,
-            text=kwargs.pop('text', Generators.randomString()),
+            text=kwargs.pop('text', Generators.random_string()),
             parent=kwargs.pop('parent', None),
             pending_moderation=kwargs.pop('pending_moderation', None)
         )

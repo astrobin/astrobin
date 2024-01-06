@@ -5,13 +5,14 @@ import zlib
 from datetime import datetime, timedelta
 
 from PIL.Image import DecompressionBombError
+from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Library
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 
-from astrobin.models import Image, ImageRevision
+from astrobin.models import Collection, Image, ImageRevision
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote
 from astrobin_apps_iotd.services import IotdService
@@ -38,8 +39,7 @@ def gallery_thumbnail_inverted(image, revision_label):
     return image.thumbnail('gallery_inverted', revision_label)
 
 
-# Renders an linked image tag with a placeholder and async loading of the
-# actual thumbnail.
+# Renders a linked image tag with a placeholder and async loading of the actual thumbnail.
 def astrobin_image(context, image, alias, **kwargs):
     request = kwargs.get('request', context['request'])
 
@@ -272,6 +272,12 @@ def astrobin_image(context, image, alias, **kwargs):
         field, alias, revision_label, animated, request.is_secure(), 'hd'
     )
 
+    collection_tag_key = None
+    collection_tag_value = None
+    if hasattr(request, 'collection'):
+        collection_tag_key = request.collection.order_by_tag
+        collection_tag_value = ImageService(image).get_collection_tag_value(request.collection)
+
     # noinspection PyTypeChecker
     return dict(
         list(response_dict.items()) + list(
@@ -289,8 +295,13 @@ def astrobin_image(context, image, alias, **kwargs):
                 'show_tooltip': show_tooltip,
                 'request': request,
                 'caption_cache_key': "%d_%s_%s_%s" % (
-                    image.id, revision_label, alias,
-                    request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en"),
+                    image.id,
+                    revision_label,
+                    alias,
+                    request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
+                ),
+                'collection_tag_key': collection_tag_key,
+                'collection_tag_value': collection_tag_value,
                 'badges': badges,
                 'animated': animated,
                 'get_thumb_url': get_thumb_url,

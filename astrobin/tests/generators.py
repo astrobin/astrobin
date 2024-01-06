@@ -20,6 +20,7 @@ from astrobin.models import (
     ImageRevision, Mount, Software,
     Telescope,
 )
+from astrobin_apps_images.models import KeyValueTag
 from astrobin_apps_premium.services.premium_service import SubscriptionName
 from toggleproperties.models import ToggleProperty
 
@@ -29,14 +30,25 @@ class Generators:
         pass
 
     @staticmethod
-    def randomString(stringLength=10):
-        return ''.join(random.choice(string.ascii_lowercase) for i in range(stringLength))
+    def random_string(length = 10):
+        return ''.join(random.choice(string.ascii_lowercase) for i in range(length))
+
+    @staticmethod
+    def key_value_tag(**kwargs):
+        if 'image' not in kwargs:
+            kwargs['image'] = Generators.image()
+
+        return KeyValueTag.objects.create(
+            key=kwargs.pop('key', Generators.random_string()),
+            value=kwargs.pop('value', Generators.random_string()),
+            image=kwargs.pop('image'),
+        )
 
     @staticmethod
     def user(**kwargs) -> User:
         user = User.objects.create_user(
-            email=kwargs.pop('email', "%s@%s.com" % (Generators.randomString(), Generators.randomString())),
-            username=kwargs.pop('username', Generators.randomString()),
+            email=kwargs.pop('email', "%s@%s.com" % (Generators.random_string(), Generators.random_string())),
+            username=kwargs.pop('username', Generators.random_string()),
             password=kwargs.pop('password', 'password')
         )
 
@@ -89,7 +101,7 @@ class Generators:
 
         return Image.objects.create(
             user=user,
-            title=kwargs.pop('title', Generators.randomString()),
+            title=kwargs.pop('title', Generators.random_string()),
             image_file=pil_image,
             video_file=video_file,
             is_wip=kwargs.pop('is_wip', False),
@@ -274,22 +286,22 @@ class Generators:
     @staticmethod
     def forum_category(**kwargs):
         return Category.objects.create(
-            name=kwargs.pop('name', Generators.randomString()),
-            slug=kwargs.pop('slug', Generators.randomString())
+            name=kwargs.pop('name', Generators.random_string()),
+            slug=kwargs.pop('slug', Generators.random_string())
         )
 
     @staticmethod
     def forum(**kwargs):
         return Forum.objects.create(
             category=kwargs.pop('category', Generators.forum_category()),
-            name=kwargs.pop('name', Generators.randomString()),
+            name=kwargs.pop('name', Generators.random_string()),
         )
 
     @staticmethod
     def forum_topic(**kwargs):
         return Topic.objects.create(
             forum=kwargs.pop('forum', Generators.forum()),
-            name=kwargs.pop('name', Generators.randomString()),
+            name=kwargs.pop('name', Generators.random_string()),
             user=kwargs.pop('user', Generators.user()),
             on_moderation=kwargs.pop('on_moderation', False),
         )
@@ -301,7 +313,7 @@ class Generators:
         return Post.objects.create(
             topic=kwargs.pop('topic', Generators.forum_topic(user=user)),
             user=kwargs.pop('user', user),
-            body=kwargs.pop('body', Generators.randomString(150)),
+            body=kwargs.pop('body', Generators.random_string(150)),
             on_moderation=kwargs.pop('on_moderation', False),
         )
 
@@ -329,7 +341,7 @@ class Generators:
     def collection(**kwargs):
         return Collection.objects.create(
             user=kwargs.pop('user', Generators.user()),
-            name=kwargs.pop('name', Generators.randomString()),
+            name=kwargs.pop('name', Generators.random_string()),
         )
 
     @staticmethod

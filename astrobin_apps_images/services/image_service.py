@@ -8,7 +8,7 @@ import subprocess
 from collections import namedtuple
 from datetime import timedelta
 from functools import reduce
-from typing import Union
+from typing import Optional, Union
 from urllib.parse import urlencode
 
 from actstream.models import Action
@@ -35,7 +35,7 @@ from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import (
-    DeepSky_Acquisition, Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES,
+    Collection, DeepSky_Acquisition, Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES,
     SolarSystem_Acquisition,
 )
 from astrobin.moon import MoonPhase
@@ -47,7 +47,7 @@ from astrobin.utils import (
     decimal_to_hours_minutes_seconds_string,
 )
 from astrobin_apps_equipment.models import EquipmentBrandListing
-from astrobin_apps_images.models import ThumbnailGroup
+from astrobin_apps_images.models import KeyValueTag, ThumbnailGroup
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
@@ -809,6 +809,21 @@ class ImageService:
             results.append((_('Transparency'), a.transparency))
 
         return results
+
+    def get_collection_tag_value(self, collection: Collection) -> Optional[str]:
+        collection_tag_value = None
+
+        if not collection or not collection.order_by_tag:
+            return collection_tag_value
+
+        collection_tag = KeyValueTag.objects.filter(
+            key=collection.order_by_tag,
+            image=self.image,
+        ).first()
+        if collection_tag:
+            collection_tag_value = collection_tag.value
+
+        return collection_tag_value
 
     @staticmethod
     def get_constellation(solution):

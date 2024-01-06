@@ -21,8 +21,8 @@
             <p>{{collection.description}}</p>
         {% endif %}
 
-        {% if image_list.count > 0 or not_matching_tag.count > 0 %}
-            {% if image_list.count > 0 %}
+        {% if image_list_count > 0 or not_matching_tag_count > 0 %}
+            {% if image_list_count > 0 %}
                 {% image_list image_list paginate_by=paginate_by nav_ctx='collection' nav_ctx_extra=collection.pk fancybox=False %}
             {% endif %}
 
