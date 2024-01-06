@@ -274,7 +274,9 @@ def astrobin_image(context, image, alias, **kwargs):
 
     collection_tag_key = None
     collection_tag_value = None
+    collection_pk = None
     if hasattr(request, 'collection'):
+        collection_pk = request.collection.pk
         collection_tag_key = request.collection.order_by_tag
         collection_tag_value = ImageService(image).get_collection_tag_value(request.collection)
 
@@ -294,11 +296,12 @@ def astrobin_image(context, image, alias, **kwargs):
                 'url': url,
                 'show_tooltip': show_tooltip,
                 'request': request,
-                'caption_cache_key': "%d_%s_%s_%s" % (
+                'caption_cache_key': "%d_%s_%s_%s_%s" % (
                     image.id,
                     revision_label,
                     alias,
                     request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
+                    collection_pk if collection_pk else "0",
                 ),
                 'collection_tag_key': collection_tag_key,
                 'collection_tag_value': collection_tag_value,
