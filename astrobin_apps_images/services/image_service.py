@@ -305,6 +305,9 @@ class ImageService:
 
         image.image_file = new_original.image_file
         image.video_file = new_original.video_file
+        image.encoded_video_file = new_original.encoded_video_file
+        image.encoding_error = new_original.encoding_error
+        image.loop_video = new_original.loop_video
         image.square_cropping = new_original.square_cropping
         image.updated = new_original.uploaded
         image.w = new_original.w
