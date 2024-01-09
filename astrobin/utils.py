@@ -302,6 +302,11 @@ def decimal_to_hours_minutes_seconds(value):
     if value is None:
         return 0, 0, 0
 
+    try:
+        value = float(value)
+    except ValueError:
+        return 0, 0, 0
+
     value = abs(value)
     hours = int(value / 15)
     minutes = int(((value / 15) - hours) * 60)
@@ -310,6 +315,14 @@ def decimal_to_hours_minutes_seconds(value):
     return hours, minutes, seconds
 
 def decimal_to_hours_minutes_seconds_string(value, hour_symbol="h", minute_symbol="m", second_symbol="s", precision=0):
+    if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
+        return ""
+
     hours, minutes, seconds = decimal_to_hours_minutes_seconds(value)
     is_positive = value >= 0
     seconds = number_unit_decimals(seconds, second_symbol, precision, must_be_less_than=60)
@@ -318,6 +331,14 @@ def decimal_to_hours_minutes_seconds_string(value, hour_symbol="h", minute_symbo
 
 
 def decimal_to_hours_minutes_seconds_html(value, hour_symbol="h", minute_symbol="m", second_symbol="s", precision=0):
+    if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
+        return ""
+
     hours, minutes, seconds = decimal_to_hours_minutes_seconds(value)
     is_positive = value >= 0
     seconds = number_unit_decimals_html(seconds, second_symbol, precision, must_be_less_than=60)
@@ -329,6 +350,14 @@ def decimal_to_hours_minutes_seconds_html(value, hour_symbol="h", minute_symbol=
 
 
 def decimal_to_degrees_minutes_seconds(value):
+    if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
+        return ""
+
     value = abs(value)
     minutes, seconds = divmod(value * 3600, 60)
     degrees, minutes = divmod(minutes, 60)
@@ -337,6 +366,11 @@ def decimal_to_degrees_minutes_seconds(value):
 
 def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_symbol="&prime;", second_symbol="&Prime;", precision=0):
     if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
         return ""
 
     is_positive = value >= 0
@@ -348,6 +382,11 @@ def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_
 
 def decimal_to_degrees_minutes_seconds_html(value, degree_symbol="°", minute_symbol="′", second_symbol="″", precision=0):
     if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
         return ""
 
     is_positive = value >= 0
