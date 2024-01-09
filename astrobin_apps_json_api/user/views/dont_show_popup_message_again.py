@@ -19,10 +19,12 @@ class DontShowPopupMessageAgain(JsonRequestResponseMixin, View):
 
         popup_message = get_object_or_404(PopupMessage, id=popup_id)
 
-        PopupMessageUserStatus.objects.get_or_create(
+        status, created = PopupMessageUserStatus.objects.get_or_create(
             user=request.user,
             popup_message=popup_message,
-            seen=timezone.now(),
         )
+
+        status.seen = timezone.now()
+        status.save()
 
         return self.render_json_response({"status": "OK"})
