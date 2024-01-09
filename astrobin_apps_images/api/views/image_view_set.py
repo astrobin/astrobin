@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+from typing import Optional
 
 import simplejson
 from annoying.functions import get_object_or_None
@@ -106,11 +107,13 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
             if isinstance(filter_2, int):
                 item['filter_2'] = get_object_or_None(Filter, id=filter_2)
             else:
-                item['filter_2'] = Filter.objects.annotate(
+                filter_: Optional[Filter] = Filter.objects.annotate(
                     full_name=Concat('brand__name', Value(' '), 'name')
                 ).filter(
                     full_name=filter_2
                 ).first()
+                if filter_:
+                    item['filter_2'] = filter_.pk
 
             data = dict(image=instance, **item)
 
