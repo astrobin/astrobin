@@ -253,13 +253,15 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
         if status == Solver.SUCCESS:
             info = solver.info(solution.submission_id)
 
-            solution.objects_in_field = ', '.join(info['objects_in_field'])
+            if 'objects_in_field' in info:
+                solution.objects_in_field = ', '.join(info['objects_in_field'])
 
-            solution.ra = "%.3f" % info['calibration']['ra']
-            solution.dec = "%.3f" % info['calibration']['dec']
-            solution.orientation = "%.3f" % info['calibration']['orientation']
-            solution.radius = "%.3f" % info['calibration']['radius']
-            solution.pixscale = "%.3f" % info['calibration']['pixscale']
+            if 'calibration' in info:
+                solution.ra = "%.3f" % info['calibration']['ra']
+                solution.dec = "%.3f" % info['calibration']['dec']
+                solution.orientation = "%.3f" % info['calibration']['orientation']
+                solution.radius = "%.3f" % info['calibration']['radius']
+                solution.pixscale = "%.3f" % info['calibration']['pixscale']
 
             try:
                 target = solution.content_type.get_object_for_this_type(pk=solution.object_id)
