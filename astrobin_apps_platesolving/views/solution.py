@@ -62,7 +62,7 @@ class SolveView(base.View):
             solution.settings = settings
             Solution.objects.filter(pk=solution.pk).update(settings=settings)
 
-        if solution.submission_id is None:
+        if solution.submission_id is None or solution.submission_id == 0:
             solver = Solver()
 
             try:
