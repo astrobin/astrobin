@@ -35,6 +35,7 @@ from astrobin.utils import (
 )
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_equipment.models import EquipmentBrandListing, EquipmentItemListing
+from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_any_ultimate, is_free, is_lite,
@@ -465,6 +466,20 @@ def ad_key_value_pairs(image, user):
     if image:
         if RemoteSourceAffiliationService.is_remote_source_affiliate(image.remote_source):
             data["exclude-category"] = "remote-hosting"
+
+        brands = []
+        for attr in  GearService.get_legacy_gear_usage_classes():
+            for item in getattr(image, attr).all():
+                if item.make:
+                    brands.append(item.make.lower())
+
+        for attr in EquipmentService.usage_classes():
+            for item in getattr(image, attr).all():
+                if item.brand:
+                    brands.append(item.brand.name.lower())
+
+        if len(brands) > 0:
+            data["brands"] = ",".join(list(set(brands)))
 
     if user and user.is_authenticated:
         data["used-remote-hosting"] = "true" \

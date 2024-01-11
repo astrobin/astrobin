@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from astrobin.fields import GearItemChoiceField
 from astrobin.models import Image
+from astrobin.services.gear_service import GearService
 
 
 class ImageEditGearForm(forms.ModelForm):
@@ -90,17 +91,7 @@ class ImageEditGearForm(forms.ModelForm):
     )
 
     def __init_fields__(self, user):
-        for field in (
-                'imaging_telescopes',
-                'imaging_cameras',
-                'mounts',
-                'focal_reducers',
-                'software',
-                'filters',
-                'accessories',
-                'guiding_telescopes',
-                'guiding_cameras',
-        ):
+        for field in GearService.get_legacy_gear_usage_classes():
             self.fields[field].user = user
 
     def __init__(self, user=None, **kwargs):
@@ -134,13 +125,4 @@ class ImageEditGearForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('imaging_telescopes',
-                  'guiding_telescopes',
-                  'mounts',
-                  'imaging_cameras',
-                  'guiding_cameras',
-                  'focal_reducers',
-                  'software',
-                  'filters',
-                  'accessories',
-                  )
+        fields = GearService.get_legacy_gear_usage_classes()
