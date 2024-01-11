@@ -192,11 +192,11 @@ def search_image_list(context, paginate=True, **kwargs):
                 )
             )
         equipment_item_listings = EquipmentItemListing.objects \
-            .annotate(distance=TrigramDistance('name', name)) \
+            .annotate(distance=TrigramDistance('item_full_name', name)) \
             .filter(
                 Q(
                     Q(distance__lte=.5) |
-                    Q(name__icontains=name)
+                    Q(item_full_name__icontains=name)
                 ) &
                 Q(
                     Q(retailer__countries__icontains=country) |
