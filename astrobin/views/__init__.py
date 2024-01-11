@@ -58,6 +58,7 @@ from astrobin.models import (
     Accessory, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
+from astrobin.services.gear_service import GearService
 from astrobin.services.utils_service import UtilsService
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import (
@@ -2573,12 +2574,9 @@ def gear_by_image(request, image_id):
     if image.user != request.user:
         return HttpResponseForbidden()
 
-    attrs = ('imaging_telescopes', 'guiding_telescopes', 'mounts',
-             'imaging_cameras', 'guiding_cameras', 'focal_reducers',
-             'software', 'filters', 'accessories',)
     response_dict = {}
 
-    for attr in attrs:
+    for attr in GearService.get_legacy_gear_usage_classes():
         ids = [int(x) for x in getattr(image, attr).all().values_list('id', flat=True)]
         response_dict[attr] = ids
 

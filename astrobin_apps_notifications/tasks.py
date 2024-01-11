@@ -10,6 +10,7 @@ from django.utils import formats
 from django_bouncy.models import Bounce, Complaint, Delivery
 
 from astrobin.models import Image, ImageRevision
+from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
@@ -87,16 +88,7 @@ def push_notification_for_new_image(image_pk: int):
         """
         val = {}
 
-        for equipment_item_class in [
-            'imaging_telescopes_2',
-            'imaging_cameras_2',
-            'mounts_2',
-            'filters_2',
-            'accessories_2',
-            'software_2',
-            'guiding_telescopes_2',
-            'guiding_cameras_2',
-        ]:
+        for equipment_item_class in EquipmentService.usage_classes():
             for equipment_item in getattr(image, equipment_item_class).all().iterator():
                 key = f'{equipment_item.klass}-{equipment_item.pk}'  # unique key
 
