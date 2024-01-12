@@ -165,7 +165,7 @@
                                 {% if instant %}
                                     data-instant
                                 {% endif %}
-                                href="{{ url }}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active" %}"
+                                href="{{ url }}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active,animated,video" %}"
                             {% endif %}
                     >
                 {% endif %}
@@ -243,7 +243,7 @@
                                     {% endif %}
                                         href="
 
-                                                {{ url }}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active" %}">
+                                                {{ url }}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active,animated,video" %}">
                         {% endif %}
                         <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
                         <h4>
