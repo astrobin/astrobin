@@ -977,7 +977,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return obj.solution.radius if obj.solution else None
 
     def prepare_video(self, obj):
-        return obj.video_file != ''
+        return obj.video_file.name is not None and obj.video_file.name != ''
 
     def prepare_likes(self, obj):
         return _prepare_likes(obj)
