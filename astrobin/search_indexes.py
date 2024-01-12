@@ -631,6 +631,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     countries = CharField()
 
     animated = BooleanField(model_attr='animated')
+    video = BooleanField()
 
     likes = IntegerField()
     liked_by = MultiValueField()
@@ -974,6 +975,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_field_radius(self, obj):
         return obj.solution.radius if obj.solution else None
+
+    def prepare_video(self, obj):
+        return obj.video_file != ''
 
     def prepare_likes(self, obj):
         return _prepare_likes(obj)

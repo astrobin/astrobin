@@ -26,6 +26,7 @@ FIELDS = (
     'd',
     't',
     'animated',
+    'video',
     'award',
     'groups',
     'camera_type',
@@ -113,6 +114,7 @@ class AstroBinSearchForm(SearchForm):
     t = forms.CharField(required=False)
 
     animated = forms.BooleanField(required=False)
+    video = forms.BooleanField(required=False)
     award = forms.CharField(required=False)
     groups = forms.CharField(required=False)
     camera_type = forms.CharField(required=False)
@@ -282,6 +284,14 @@ class AstroBinSearchForm(SearchForm):
 
         if t:
             results = results.filter(animated=1)
+
+        return results
+
+    def filter_by_video(self, results):
+        t = self.cleaned_data.get("video")
+
+        if t:
+            results = results.filter(video=1)
 
         return results
 
@@ -807,6 +817,7 @@ class AstroBinSearchForm(SearchForm):
         # Images
         sqs = self.filter_by_type(sqs)
         sqs = self.filter_by_animated(sqs)
+        sqs = self.filter_by_video(sqs)
         sqs = self.filter_by_award(sqs)
         sqs = self.filter_by_groups(sqs)
         sqs = self.filter_by_camera_type(sqs)
