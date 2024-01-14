@@ -197,7 +197,7 @@ class ImageService:
                 logger.warning(
                     "ImageService.get_crop_box: unable to get image dimensions for %d: %s" % (
                         target.pk, str(e))
-                    )
+                )
                 return None
 
         crop_width = settings.THUMBNAIL_ALIASES[''][alias]['size'][0]
@@ -682,98 +682,159 @@ class ImageService:
 
         def binning_html(binning):
             binning_re = re.match(r'^bin (\d)x(\d)', binning)
-            
+
             if not binning_re:
                 return binning
-            
+
             x = int(binning_re.group(1))
             y = int(binning_re.group(2))
             return f'bin {x}<span class="times-separator">&times;</span>{y}'
 
         return [
-            (_('Dates'), DateTimeService.format_date_ranges(data['dates'])),
-            (_('Frames'),
-             '<div class="frames">' +
-             '\n'.join(
-                 "%s %s" % (
-                     "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
-                     "%s %s %s %s %s %s" % (
-                         integration_html(f[1]['integration']),
-                         f[1]['iso'],
-                         f[1]['gain'],
-                         f[1]['f_number'],
-                         f[1]['sensor_cooling'],
-                         binning_html(f[1]['binning'])
-                     ),
-                 ) for f in sorted(data['frames'].items())
-             ) +
-             '</div>'),
-            (_('Integration'), DateTimeService.human_time_duration(data['integration'])),
-            (_('Darks'),
-             '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['darks'])) / len(data['darks'])) if
-             data['darks'] else 0),
-            (_('Flats'),
-             '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flats'])) / len(data['flats'])) if
-             data['flats'] else 0),
-            (_('Flat darks'), '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flat_darks'])) / len(
-                data['flat_darks']
-            )) if data['flat_darks'] else 0),
-            (_('Bias'),
-             '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['bias'])) / len(data['bias'])) if
-             data['bias'] else 0),
-            (_('Avg. Moon age'), ("%.2f " % (average(moon_age_list),) + _("days")) if moon_age_list else None),
-            (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list),) if moon_illuminated_list else None),
-            (_('Bortle Dark-Sky Scale'),
-             "%.2f" % (average([float(x) for x in data['bortle']])) if data['bortle'] else None),
-            (_('Mean SQM'),
-             "%.2f" % (average([float(x) for x in data['mean_sqm']])) if data['mean_sqm'] else None),
-            (_('Mean FWHM'),
-             "%.2f" % (average([float(x) for x in data['mean_fwhm']])) if data['mean_fwhm'] else None),
-            (_('Temperature'),
-             "%.2f" % (average([float(x) for x in data['temperature']])) if data['temperature'] else None),
+            (
+                _('Dates'),
+                DateTimeService.format_date_ranges(data['dates'])
+            ),
+            (
+                _('Frames'),
+                '<div class="frames">' + '\n'.join(
+                    "%s %s" % (
+                        "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
+                        "%s %s %s %s %s %s" % (
+                            integration_html(f[1]['integration']),
+                            f[1]['iso'],
+                            f[1]['gain'],
+                            f[1]['f_number'],
+                            f[1]['sensor_cooling'],
+                            binning_html(f[1]['binning'])
+                        ),
+                    ) for f in sorted(data['frames'].items())
+                ) +
+                '</div>'
+            ),
+            (
+                _('Integration'),
+                DateTimeService.human_time_duration(data['integration'])
+            ),
+            (
+                _('Darks'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['darks'])) / len(data['darks']))
+                if data['darks'] else 0
+            ),
+            (
+                _('Flats'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flats'])) / len(data['flats']))
+                if data['flats'] else 0
+            ),
+            (
+                _('Flat darks'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flat_darks'])) / len(data['flat_darks']))
+                if data['flat_darks'] else 0
+            ),
+            (
+                _('Bias'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['bias'])) / len(data['bias']))
+                if data['bias'] else 0
+            ),
+            (
+                _('Avg. Moon age'),
+                "%.2f " % (average(moon_age_list),) + _("days") if moon_age_list else None
+            ),
+            (
+                _('Avg. Moon phase'),
+                "%.2f%%" % (average(moon_illuminated_list),) if moon_illuminated_list else None
+            ),
+            (
+                _('Bortle Dark-Sky Scale'),
+                "%.2f" % (average([float(x) for x in data['bortle']])) if data['bortle'] else None
+            ),
+            (
+                _('Mean SQM'),
+                "%.2f" % (average([float(x) for x in data['mean_sqm']])) if data['mean_sqm'] else None
+            ),
+            (
+                _('Mean FWHM'),
+                "%.2f" % (average([float(x) for x in data['mean_fwhm']])) if data['mean_fwhm'] else None
+            ),
+            (
+                _('Temperature'),
+                ("%.2f" % (average([float(x) for x in data['temperature']]))).rstrip('0').rstrip('.') + '&deg;C'
+                if data['temperature'] else None
+            ),
         ]
 
     def get_deep_sky_acquisition_text(self):
         moon_age_list, moon_illuminated_list, data = self.get_deep_sky_acquisition_raw_data()
 
         return (
-            (_('Dates'), DateTimeService.format_date_ranges(data['dates'])),
-            (_('Frames'), '\n'.join(
-                "%s %s" % (
-                    "%s:" % f[1]['filter'] if f[1]['filter'] else '',
-                    "%s %s %s %s %s %s" % (
-                        f[1]['integration'],
-                        f[1]['iso'],
-                        f[1]['gain'],
-                        f[1]['f_number'],
-                        f[1]['sensor_cooling'],
-                        f[1]['binning']
-                    ),
-                ) for f in sorted(data['frames'].items())
-            )),
-            (_('Integration'), DateTimeService.human_time_duration(data['integration'], html=False)),
-            (_('Darks'),
-             '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['darks'])) / len(data['darks'])) if
-             data['darks'] else 0),
-            (_('Flats'),
-             '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flats'])) / len(data['flats'])) if
-             data['flats'] else 0),
-            (_('Flat darks'), '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flat_darks'])) / len(
-                data['flat_darks']
-            )) if data['flat_darks'] else 0),
-            (_('Bias'),
-             '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['bias'])) / len(data['bias'])) if
-             data['bias'] else 0),
-            (_('Avg. Moon age'), ("%.2f " % (average(moon_age_list),) + _("days")) if moon_age_list else None),
-            (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list),) if moon_illuminated_list else None),
-            (_('Bortle Dark-Sky Scale'),
-             "%.2f" % (average([float(x) for x in data['bortle']])) if data['bortle'] else None),
-            (_('Mean SQM'),
-             "%.2f" % (average([float(x) for x in data['mean_sqm']])) if data['mean_sqm'] else None),
-            (_('Mean FWHM'),
-             "%.2f" % (average([float(x) for x in data['mean_fwhm']])) if data['mean_fwhm'] else None),
-            (_('Temperature'),
-             "%.2f" % (average([float(x) for x in data['temperature']])) if data['temperature'] else None),
+            (
+                _('Dates'),
+                DateTimeService.format_date_ranges(data['dates'])
+            ),
+            (
+                _('Frames'),
+                '\n'.join(
+                    "%s %s" % (
+                        "%s:" % f[1]['filter'] if f[1]['filter'] else '',
+                        "%s %s %s %s %s %s" % (
+                            f[1]['integration'],
+                            f[1]['iso'],
+                            f[1]['gain'],
+                            f[1]['f_number'],
+                            f[1]['sensor_cooling'],
+                            f[1]['binning']
+                        ),
+                    ) for f in sorted(data['frames'].items())
+                )
+            ),
+            (
+                _('Integration'),
+                DateTimeService.human_time_duration(data['integration'], html=False)
+            ),
+            (
+                _('Darks'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['darks'])) / len(data['darks']))
+                if data['darks'] else 0
+            ),
+            (
+                _('Flats'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flats'])) / len(data['flats']))
+                if data['flats'] else 0
+            ),
+            (
+                _('Flat darks'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flat_darks'])) / len(data['flat_darks']))
+                if data['flat_darks'] else 0
+            ),
+            (
+                _('Bias'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['bias'])) / len(data['bias']))
+                if data['bias'] else 0
+            ),
+            (
+                _('Avg. Moon age'),
+                "%.2f " % (average(moon_age_list),) + _("days")) if moon_age_list else None,
+            (
+                _('Avg. Moon phase'),
+                "%.2f%%" % (average(moon_illuminated_list),) if moon_illuminated_list else None
+            ),
+            (
+                _('Bortle Dark-Sky Scale'),
+                "%.2f" % (average([float(x) for x in data['bortle']])) if data['bortle'] else None
+            ),
+            (
+                _('Mean SQM'),
+                "%.2f" % (average([float(x) for x in data['mean_sqm']])) if data['mean_sqm'] else None
+            ),
+            (
+                _('Mean FWHM'),
+                "%.2f" % (average([float(x) for x in data['mean_fwhm']])) if data['mean_fwhm'] else None
+            ),
+            (
+                _('Temperature'),
+                ("%.2f" % (average([float(x) for x in data['temperature']]))).rstrip('0').rstrip('.') + 'C'
+                if data['temperature'] else None
+            )
         )
 
     def get_solar_system_acquisition_text(self):
