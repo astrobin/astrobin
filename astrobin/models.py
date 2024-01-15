@@ -881,6 +881,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (SubjectType.STAR_TRAILS, _("Star trails")),
         (SubjectType.NORTHERN_LIGHTS, _("Northern lights")),
         (SubjectType.NOCTILUCENT_CLOUDS, _("Noctilucent clouds")),
+        (SubjectType.LANDSCAPE, _("Landscape")),
         (SubjectType.GEAR, _("Gear")),
         (SubjectType.OTHER, _("Other")),
     )
