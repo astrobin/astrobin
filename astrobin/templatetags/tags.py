@@ -698,6 +698,7 @@ def can_add_technical_details(image):
         SubjectType.STAR_TRAILS,
         SubjectType.NORTHERN_LIGHTS,
         SubjectType.NOCTILUCENT_CLOUDS,
+        SubjectType.LANDSCAPE,
     ) or image.solar_system_main_subject is not None
 
 

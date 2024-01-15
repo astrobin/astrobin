@@ -557,6 +557,7 @@ class IotdService:
                 SubjectType.SOLAR_SYSTEM,
                 SubjectType.WIDE_FIELD,
                 SubjectType.STAR_TRAILS,
+                SubjectType.LANDSCAPE,
         ):
             return False, MayNotSubmitToIotdTpReason.NO_ACQUISITIONS
 
@@ -586,6 +587,7 @@ class IotdService:
                 SubjectType.STAR_TRAILS,
                 SubjectType.NORTHERN_LIGHTS,
                 SubjectType.NOCTILUCENT_CLOUDS,
+                SubjectType.LANDSCAPE,
             ]
         )
 
@@ -642,6 +644,9 @@ class IotdService:
             total_noctilucent_clouds_images=total_submitted_images_queryset \
                 .filter(subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
                 .count(),
+            total_lanscape_images=total_submitted_images_queryset \
+                .filter(subject_type=SubjectType.LANDSCAPE) \
+                .count(),
 
             deep_sky_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
@@ -666,6 +671,10 @@ class IotdService:
             noctilucent_clouds_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
+                .count(),
+            landscape_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.LANDSCAPE) \
                 .count(),
 
             deep_sky_tps=TopPickArchive.objects \
@@ -692,6 +701,10 @@ class IotdService:
                 .filter(image__published__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
                 .count(),
+            landscape_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.LANDSCAPE) \
+                .count(),
 
             deep_sky_tpns=TopPickNominationsArchive.objects \
                 .filter(image__published__gt=cutoff) \
@@ -716,6 +729,10 @@ class IotdService:
             noctilucent_clouds_tpns=TopPickNominationsArchive.objects \
                 .filter(image__published__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
+                .count(),
+            landscape_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.LANDSCAPE) \
                 .count(),
 
             # Breakdown by data source.
