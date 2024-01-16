@@ -299,17 +299,17 @@ li.astrobin-thumbnail {
   &.top-title {
     .image-title {
       position: absolute;
-      top: 10px;
+      top: 11px;
       text-align: center;
       width: 108px;
-      left: 10px;
+      left: 11px;
       padding: 4px 11px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       color: white;
       background: rgba(0, 0, 0, 0.5);
-      border-radius: 18px 18px 0 0;
+      border-radius: 20px 20px 0 0;
       font-size: 11px;
     }
   }
@@ -3827,31 +3827,21 @@ pre {
 }
 
 .collection-add-remove-images, .group-add-remove-images {
-  .astrobin-thumbnail:hover .astrobin-image-container .badges {
-    display: block;
-  }
-
   .astrobin-image-container {
     padding: 9px;
-
-    figure {
-      &:hover {
-        z-index: 0;
-      }
-    }
   }
 
   .added-thumbnail-overlay {
     position: absolute;
-    left: 10px;
-    bottom: 10px;
+    left: 11px;
+    bottom: 11px;
     font-size: 20px;
     text-align: center;
     width: 130px;
     background: rgba(0, 255, 0, 0.4);
     height: 32px;
     line-height: 32px;
-    border-radius: 0 0 18px 18px;
+    border-radius: 0 0 20px 20px;
     color: white;
   }
 }
