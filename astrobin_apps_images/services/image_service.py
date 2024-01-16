@@ -508,7 +508,7 @@ class ImageService:
 
         return f'https://via.placeholder.com/{thumb_w}x{thumb_h}/222/333&text=ERROR'
 
-    def promote_to_public_area(self, skip_notifications):
+    def promote_to_public_area(self, skip_notifications: bool, skip_activity_stream: bool):
         if self.image.is_wip:
             previously_published = self.image.published
             self.image.is_wip = False
@@ -518,7 +518,7 @@ class ImageService:
             if not previously_published:
                 if not skip_notifications:
                     push_notification_for_new_image.apply_async(args=(self.image.pk,), countdown=10)
-                if self.image.moderator_decision == ModeratorDecision.APPROVED:
+                if not skip_activity_stream and self.image.moderator_decision == ModeratorDecision.APPROVED:
                     add_story(self.image.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=self.image)
 
     def demote_to_staging_area(self):

@@ -130,9 +130,12 @@ def image_pre_save(sender, instance, **kwargs):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = ModeratorDecision.APPROVED
     else:
-        if image.moderator_decision != ModeratorDecision.APPROVED and instance.moderator_decision == ModeratorDecision.APPROVED:
+        if (
+            image.moderator_decision != ModeratorDecision.APPROVED and
+            instance.moderator_decision == ModeratorDecision.APPROVED
+        ):
             # This image is being approved
-            if not instance.is_wip:
+            if not instance.is_wip and not image.skip_activity_stream:
                 add_story(instance.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=instance)
 
         if not instance.is_wip and not instance.published:
@@ -185,7 +188,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
         if not instance.is_wip:
             if not instance.skip_notifications:
                 push_notification_for_new_image.apply_async(args=(instance.pk,))
-            if instance.moderator_decision == ModeratorDecision.APPROVED:
+            if instance.moderator_decision == ModeratorDecision.APPROVED and not instance.skip_activity_stream:
                 add_story(instance.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=instance)
 
         if Image.all_objects.filter(user=instance.user).count() == 1:
@@ -347,7 +350,8 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
         return
 
     wip = instance.image.is_wip
-    skip = instance.skip_notifications
+    skip_notifications = instance.skip_notifications
+    skip_activity_stream = instance.skip_activity_stream
     uploading = instance.uploader_in_progress
     just_completed_upload = cache.get("image_revision.%s.just_completed_upload" % instance.pk)
 
@@ -362,15 +366,14 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
             log.debug(f'Encoding video file for {instance} in imagerevision_post_save signal handler')
             encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
 
-    if wip or skip:
-        return
-
     if (created and not uploading) or just_completed_upload:
-        push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
-        add_story(instance.image.user,
-                  verb=ACTSTREAM_VERB_UPLOADED_REVISION,
-                  action_object=instance,
-                  target=instance.image)
+        if not skip_notifications:
+            push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
+        if not skip_activity_stream:
+            add_story(instance.image.user,
+                      verb=ACTSTREAM_VERB_UPLOADED_REVISION,
+                      action_object=instance,
+                      target=instance.image)
 
 
 post_save.connect(imagerevision_post_save, sender=ImageRevision)

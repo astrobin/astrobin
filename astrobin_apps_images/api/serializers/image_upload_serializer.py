@@ -26,7 +26,7 @@ class ImageUploadSerializer(RequestUserRestSerializerMixin, serializers.ModelSer
             'video_file',
             'is_wip',
             'skip_notifications',
-            'w',
+            'skip_activity_stream',
             'h',
             'uploader_in_progress',
             'license'

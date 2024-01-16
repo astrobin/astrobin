@@ -100,7 +100,15 @@ class ImageTest(TestCase):
             data,
             follow=True)
 
-    def _do_upload_revision(self, image, filename, description='', skip_notifications=False, mark_as_final=True):
+    def _do_upload_revision(
+            self,
+            image,
+            filename,
+            description='',
+            skip_notifications=False,
+            skip_activity_stream=False,
+            mark_as_final=True
+    ):
         data = {
             'image_id': image.get_id(),
             'image_file': open(filename, 'rb'),
@@ -109,6 +117,9 @@ class ImageTest(TestCase):
 
         if skip_notifications:
             data['skip_notifications'] = True
+
+        if skip_activity_stream:
+            data['skip_activity_stream'] = True
 
         if mark_as_final:
             data['mark_as_final'] = 'on'
@@ -2166,6 +2177,17 @@ class ImageTest(TestCase):
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
+        # TODO
+
+        # Test that skip_activity_stream doesn't trigger a story
+        wip_image.is_wip = True
+        wip_image.save(keep_deleted=True)
+        response = self.client.post(post_url((wip_image.get_id(),)), data={'skip_activity_stream': 'on'}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        wip_image = Image.objects.get(pk=wip_image.pk)
+        self.assertFalse(wip_image.is_wip)
+        self.assertIsNotNone(wip_image.published)
+        # TODO
 
         image.delete()
 
@@ -2469,7 +2491,7 @@ class ImageTest(TestCase):
         image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines = DateTimeService.now()
         image.user.userprofile.save()
 
-        ImageService(image).promote_to_public_area(skip_notifications=True)
+        ImageService(image).promote_to_public_area(skip_notifications=True, skip_activity_stream=True)
         image.save()
 
         self.assertEqual(5, image.designated_iotd_submitters.count())
@@ -2495,7 +2517,7 @@ class ImageTest(TestCase):
         image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines = DateTimeService.now()
         image.user.userprofile.save()
 
-        ImageService(image).promote_to_public_area(skip_notifications=True)
+        ImageService(image).promote_to_public_area(skip_notifications=True, skip_activity_stream=True)
         image.save()
 
         self.assertEqual(5, image.designated_iotd_reviewers.count())

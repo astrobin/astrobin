@@ -56,6 +56,21 @@ class SignalsTest(TestCase):
         imagerevision_post_save(None, revision, True)
 
         self.assertFalse(push_notification.called)
+        self.assertTrue(add_story.called)
+
+    @patch("astrobin.signals.push_notification")
+    @patch("astrobin.signals.add_story")
+    def test_imagerevision_post_save_skip_activity_stream(self, add_story, push_notification):
+        revision = Generators.image_revision()
+        revision.skip_notifications = False
+        revision.skip_activity_stream = True
+
+        push_notification.reset_mock()
+        add_story.reset_mock()
+
+        imagerevision_post_save(None, revision, True)
+
+        self.assertTrue(push_notification.called)
         self.assertFalse(add_story.called)
 
     @patch("astrobin.signals.push_notification")
