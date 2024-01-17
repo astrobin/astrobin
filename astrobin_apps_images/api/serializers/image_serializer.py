@@ -100,6 +100,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'is_wip',
             'skip_notifications',
             'skip_activity_stream',
+            'w',
             'h',
             'imaging_telescopes',
             'imaging_cameras',

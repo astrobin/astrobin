@@ -10,6 +10,14 @@ class ImagePromoteForm(forms.ModelForm):
             'skip_notifications',
             'skip_activity_stream',
         )
+        widgets = {
+            'skip_notifications': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+            }),
+            'skip_activity_stream': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+            }),
+        }
 
     def __init__(self, **kwargs):
         super(ImagePromoteForm, self).__init__(**kwargs)
