@@ -22,6 +22,7 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'description',
             'skip_notifications',
             'skip_activity_stream',
+            'label',
             'is_final',
             'w',
             'h',
