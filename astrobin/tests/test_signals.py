@@ -9,6 +9,7 @@ from safedelete import HARD_DELETE
 
 from astrobin.models import Image, ImageRevision, UserProfile
 from astrobin.signals import imagerevision_post_save
+from astrobin.stories import ACTSTREAM_VERB_UPLOADED_REVISION
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_groups.models import Group
@@ -20,16 +21,21 @@ class SignalsTest(TestCase):
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
     def test_imagerevision_post_save_wip_no_notifications(self, add_story, push_notification):
-        revision = Generators.image_revision()
-        revision.image.is_wip = True
+        user = Generators.user()
+        image = Generators.image(user=user, is_wip=True)
+        follower = Generators.user()
+        Generators.follow(user, user=follower)
+        revision = Generators.image_revision(image=image)
 
-        push_notification.reset_mock()
-        add_story.reset_mock()
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([follower], user, 'new_image_revision', mock.ANY)
 
-        imagerevision_post_save(None, revision, True)
-
-        self.assertFalse(push_notification.called)
-        self.assertFalse(add_story.called)
+        with self.assertRaises(AssertionError):
+            add_story.assert_called_with(user, dict(
+                verb=ACTSTREAM_VERB_UPLOADED_REVISION,
+                action_object=revision,
+                target=image)
+            )
 
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
@@ -47,28 +53,21 @@ class SignalsTest(TestCase):
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
     def test_imagerevision_post_save_skip_notifications(self, add_story, push_notification):
-        revision = Generators.image_revision()
-        revision.skip_notifications = True
+        user = Generators.user()
+        follower = Generators.user()
+        Generators.follow(user, user=follower)
+        image = Generators.image(user=user)
+        Generators.image_revision(image=image, skip_notifications=True)
 
-        push_notification.reset_mock()
-        add_story.reset_mock()
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([follower], user, 'new_image_revision', mock.ANY)
 
-        imagerevision_post_save(None, revision, True)
-
-        self.assertFalse(push_notification.called)
         self.assertTrue(add_story.called)
 
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
     def test_imagerevision_post_save_skip_activity_stream(self, add_story, push_notification):
-        revision = Generators.image_revision()
-        revision.skip_notifications = False
-        revision.skip_activity_stream = True
-
-        push_notification.reset_mock()
-        add_story.reset_mock()
-
-        imagerevision_post_save(None, revision, True)
+        Generators.image_revision(skip_notifications=False, skip_activity_stream=True)
 
         self.assertTrue(push_notification.called)
         self.assertFalse(add_story.called)

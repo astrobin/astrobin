@@ -349,7 +349,9 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
     if kwargs.get('update_fields', None):
         return
 
-    wip = instance.image.is_wip
+    if instance.image.is_wip:
+        return
+
     skip_notifications = instance.skip_notifications
     skip_activity_stream = instance.skip_activity_stream
     uploading = instance.uploader_in_progress

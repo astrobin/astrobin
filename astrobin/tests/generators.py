@@ -136,6 +136,8 @@ class Generators:
             title=kwargs.pop('title', None),
             description=kwargs.pop('description', None),
             mouse_hover_image=kwargs.pop('mouse_hover_image', MouseHoverImage.SOLUTION),
+            skip_notifications=kwargs.pop('skip_notifications', False),
+            skip_activity_stream=kwargs.pop('skip_activity_stream', False),
         )
 
     @staticmethod
