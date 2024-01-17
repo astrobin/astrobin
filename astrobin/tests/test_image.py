@@ -2764,3 +2764,28 @@ class ImageTest(TestCase):
         revision = ImageRevision.deleted_objects.get(id=revision.id)
 
         self.assertIsNone(revision.solution)
+
+    def test_show_in_collections_when_public(self):
+        image = Generators.image()
+        collection = Generators.collection(user=image.user)
+        collection.images.add(image)
+
+        response = self.client.get(
+            reverse('image_detail', kwargs={'id': image.get_id()}),
+            follow=True
+        )
+
+        self.assertContains(response, 'In these collections')
+        self.assertContains(response, collection.name)
+
+    def test_show_in_collections_when_staging(self):
+        image = Generators.image(is_wip=True)
+        collection = Generators.collection(user=image.user)
+        collection.images.add(image)
+
+        response = self.client.get(
+            reverse('image_detail', kwargs={'id': image.get_id()}),
+            follow=True
+        )
+
+        self.assertNotContains(response, 'In these collections')

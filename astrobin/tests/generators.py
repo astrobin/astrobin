@@ -339,8 +339,12 @@ class Generators:
 
     @staticmethod
     def collection(**kwargs):
+        user = kwargs.pop('user', None)
+        if user is None:
+            user = Generators.user()
+
         return Collection.objects.create(
-            user=kwargs.pop('user', Generators.user()),
+            user=user,
             name=kwargs.pop('name', Generators.random_string()),
         )
 
