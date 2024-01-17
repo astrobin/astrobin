@@ -946,8 +946,10 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
     def form_valid(self, form):
         image = form.instance
 
-        skip_notifications = self.request.POST.get('skip_notifications', 'off').lower() == 'on'
-        ImageService(image).promote_to_public_area(skip_notifications)
+        image.skip_notifications = self.request.POST.get('skip_notifications', 'off').lower() == 'on'
+        image.skip_activity_stream = self.request.POST.get('skip_activity_stream', 'off').lower() == 'on'
+
+        ImageService(image).promote_to_public_area(image.skip_notifications, image.skip_activity_stream)
 
         messages.success(self.request, _("Image moved to the public area."))
 

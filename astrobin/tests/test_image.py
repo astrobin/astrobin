@@ -24,6 +24,7 @@ from astrobin.models import (
     Accessory, Camera, DeepSky_Acquisition, Filter, FocalReducer, Image, ImageRevision, Mount, Software,
     SolarSystem_Acquisition, Telescope,
 )
+from astrobin.stories import ACTSTREAM_VERB_UPLOADED_IMAGE
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_images.services import ImageService
@@ -100,7 +101,15 @@ class ImageTest(TestCase):
             data,
             follow=True)
 
-    def _do_upload_revision(self, image, filename, description='', skip_notifications=False, mark_as_final=True):
+    def _do_upload_revision(
+            self,
+            image,
+            filename,
+            description='',
+            skip_notifications=False,
+            skip_activity_stream=False,
+            mark_as_final=True
+    ):
         data = {
             'image_id': image.get_id(),
             'image_file': open(filename, 'rb'),
@@ -109,6 +118,9 @@ class ImageTest(TestCase):
 
         if skip_notifications:
             data['skip_notifications'] = True
+
+        if skip_activity_stream:
+            data['skip_activity_stream'] = True
 
         if mark_as_final:
             data['mark_as_final'] = 'on'
@@ -2104,7 +2116,9 @@ class ImageTest(TestCase):
         self.assertEqual("foo\nbar", image.description)
         self.assertTrue(image.is_final)
 
-    def test_image_promote_view(self):
+    @patch('astrobin_apps_images.services.image_service.add_story')
+    @patch('astrobin_apps_images.services.image_service.push_notification_for_new_image.apply_async')
+    def test_image_promote_view(self, push_notification_for_new_image, add_story):
         def post_url(args=None):
             return reverse('image_promote', args=args)
 
@@ -2115,6 +2129,11 @@ class ImageTest(TestCase):
 
         self._do_upload('astrobin/fixtures/test.jpg', True)
         wip_image = self._get_last_image()
+
+        public_image.moderator_decision = ModeratorDecision.APPROVED
+        public_image.save(keep_deleted=True)
+        wip_image.moderator_decision = ModeratorDecision.APPROVED
+        wip_image.save(keep_deleted=True)
 
         # user2 follows user
         self.client.logout()
@@ -2160,13 +2179,36 @@ class ImageTest(TestCase):
 
         # Test that skip_notifications doesn't trigger a notification
         wip_image.is_wip = True
+        wip_image.published = None
         wip_image.save(keep_deleted=True)
+        follower = Generators.user()
+        Generators.follow(wip_image.user, user=follower)
+        push_notification_for_new_image.reset_mock()
+        add_story.reset_mock()
         response = self.client.post(post_url((wip_image.get_id(),)), data={'skip_notifications': 'on'}, follow=True)
         self.assertEqual(response.status_code, 200)
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
+        push_notification_for_new_image.assert_not_called()
+        add_story.assert_called_with(wip_image.user, action_object=wip_image, verb=ACTSTREAM_VERB_UPLOADED_IMAGE)
 
+        # Test that skip_activity_stream doesn't trigger a story
+        wip_image.is_wip = True
+        wip_image.published = None
+        wip_image.save(keep_deleted=True)
+        push_notification_for_new_image.reset_mock()
+        add_story.reset_mock()
+        response = self.client.post(post_url((wip_image.get_id(),)), data={'skip_activity_stream': 'on'}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        wip_image = Image.objects.get(pk=wip_image.pk)
+        self.assertFalse(wip_image.is_wip)
+        self.assertIsNotNone(wip_image.published)
+        push_notification_for_new_image.assert_called()
+        with self.assertRaises(AssertionError):
+            add_story.assert_called_with(wip_image.user, mock.ANY)
+
+        follower.delete()
         image.delete()
 
         # Test the `published` property
@@ -2469,7 +2511,7 @@ class ImageTest(TestCase):
         image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines = DateTimeService.now()
         image.user.userprofile.save()
 
-        ImageService(image).promote_to_public_area(skip_notifications=True)
+        ImageService(image).promote_to_public_area(skip_notifications=True, skip_activity_stream=True)
         image.save()
 
         self.assertEqual(5, image.designated_iotd_submitters.count())
@@ -2495,7 +2537,7 @@ class ImageTest(TestCase):
         image.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines = DateTimeService.now()
         image.user.userprofile.save()
 
-        ImageService(image).promote_to_public_area(skip_notifications=True)
+        ImageService(image).promote_to_public_area(skip_notifications=True, skip_activity_stream=True)
         image.save()
 
         self.assertEqual(5, image.designated_iotd_reviewers.count())

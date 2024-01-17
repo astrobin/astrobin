@@ -1480,6 +1480,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         help_text=_("Do not notify your followers about this image upload.")
     )
 
+    skip_activity_stream = models.NullBooleanField(
+        null=True,
+        blank=True,
+        default=None,
+        verbose_name=_("Skip activity stream"),
+        help_text=_("Do not create an entry on the front page's activity stream for this event.")
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
@@ -2011,6 +2019,14 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         default=None,
         verbose_name=_("Skip notifications"),
         help_text=_("Do not notify your followers about this revision.")
+    )
+
+    skip_activity_stream = models.NullBooleanField(
+        null=True,
+        blank=True,
+        default=None,
+        verbose_name=_("Skip activity stream"),
+        help_text=_("Do not create an entry on the front page's activity stream for this event.")
     )
 
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
