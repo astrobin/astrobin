@@ -4,6 +4,7 @@ from rest_framework import routers
 from astrobin.api2.views.accessory_view_set import AccessoryViewSet
 from astrobin.api2.views.camera_rename_proposal_view_set import CameraRenameProposalViewSet
 from astrobin.api2.views.camera_view_set import CameraViewSet
+from astrobin.api2.views.collection_view_set import CollectionViewSet
 from astrobin.api2.views.filter_view_set import FilterViewSet
 from astrobin.api2.views.focal_reducer_view_set import FocalReducerViewSet
 from astrobin.api2.views.gear_migration_strategy_view_set import GearMigrationStrategyViewSet
@@ -27,6 +28,7 @@ router.register(r'focal-reducer', FocalReducerViewSet, basename='focal-reducer')
 router.register(r'software', SoftwareViewSet, basename='software')
 router.register(r'gear-user-info', GearUserInfoViewSet, basename='gear-user-info')
 router.register(r'location', LocationViewSet, basename='location')
+router.register(r'collection', CollectionViewSet, basename='collection')
 
 urlpatterns = [
     url('', include(router.urls)),
