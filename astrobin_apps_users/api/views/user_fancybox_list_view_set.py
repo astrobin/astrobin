@@ -43,7 +43,11 @@ class UserFancyboxListViewSet(viewsets.ModelViewSet):
             images = user_service.get_wip_images(use_union)
 
         if 'collection' in self.request.GET and self.request.GET.get('collection') != '':
-            collection: Collection = Collection.objects.get(pk=self.request.GET.get('collection'))
+            try:
+                collection: Collection = Collection.objects.get(pk=self.request.GET.get('collection'))
+            except Collection.DoesNotExist:
+                return Image.objects.none()
+
             images = collection.images.all()
 
             if collection.order_by_tag:
