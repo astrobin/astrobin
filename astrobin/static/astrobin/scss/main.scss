@@ -3855,10 +3855,12 @@ pre {
 .collection-detail {
   .collection-name {
     margin-top: 0;
-    border-bottom: 1px solid $grey-6;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid $grey-5;
 
     small {
       display: block;
+      margin-top: .5rem;
     }
   }
 
