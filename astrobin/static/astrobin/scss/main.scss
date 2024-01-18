@@ -3756,8 +3756,8 @@ pre {
   }
 
   > .collection {
-    width: 170px;
-    height: 170px;
+    width: 160px;
+    height: 160px;
     margin-bottom: 50px;
     padding: 2px;
     float: left;
@@ -3768,7 +3768,7 @@ pre {
       width: 100%;
       height: 100%;
       font-size: 100px;
-      line-height: 150px;
+      line-height: 138px;
       font-weight: bold;
       text-align: center;
       text-shadow: 1px 1px 1px black;
@@ -3786,9 +3786,9 @@ pre {
     > .collection-tools {
       visibility: hidden;
       position: absolute;
-      left: 25px;
-      bottom: 25px;
-      width: 123px;
+      left: 24px;
+      bottom: 24px;
+      width: 116px;
       background-color: rgba(255, 255, 255, 0.1);
       border-top: 1px solid #555;
       text-align: center;
@@ -3853,7 +3853,7 @@ pre {
 }
 
 .collection-detail {
-  .collection-name {
+  > .collection-name {
     margin-top: 0;
     padding-bottom: .75rem;
     border-bottom: 1px solid $grey-5;
@@ -3878,6 +3878,28 @@ pre {
       font-style: italic;
       float: right;
       opacity: .8;
+    }
+
+    .astrobin-thumbnail {
+      width: 122px;
+    }
+
+    @media screen and (max-width: 1240px) {
+      .astrobin-thumbnail {
+        width: 127px;
+      }
+    }
+
+    @media screen and (max-width: 979px) {
+      .astrobin-thumbnail {
+        width: 118px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .astrobin-thumbnail {
+        width: 120px;
+      }
     }
   }
 }

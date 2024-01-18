@@ -103,10 +103,17 @@
   }
 
   .collections > .collection {
-    width: 197px;
+    width: 185px;
+    height: 185px;
+
+    .collection-image {
+      line-height: 162px;
+    }
 
     > .collection-tools {
-      left: 39px;
+      left: 34px;
+      bottom: 34px;
+      width: 120px;
     }
   }
 
