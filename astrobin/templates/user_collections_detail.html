@@ -5,6 +5,7 @@
 {% load tags %}
 {% load astrobin_apps_donations_tags %}
 {% load astrobin_apps_images_tags %}
+{% load common_tags %}
 
 {% block title %}
     {{ collection.name }}
@@ -12,14 +13,25 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb object.name None %}
+    {% breadcrumb collection.name None %}
 {% endblock %}
 
 
 {% block collections_content %}
     <div class="collection-detail">
+        <h2 class="collection-name">
+            {{ collection.name|strip_html|safe }}
+            <small>
+                {% blocktrans with collection.user.userprofile.get_display_name as username %}
+                    A collection by {{ username }}
+                {% endblocktrans %}
+            </small>
+        </h2>
+
         {% if collection.description %}
-            <p class="well">{{ collection.description }}</p>
+            <div class="collection-description">
+                {{ collection.description|strip_html|safe|linebreaksbr }}
+            </div>
         {% endif %}
 
         {% if collection.children.all|length %}
