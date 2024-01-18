@@ -133,6 +133,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'data_source',
             'remote_source',
             'part_of_group_set',
+            'collections',
             'mouse_hover_image',
             'allow_comments',
             'uploader_in_progress',
