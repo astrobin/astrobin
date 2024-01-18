@@ -3773,10 +3773,6 @@ pre {
       text-align: center;
       text-shadow: 1px 1px 1px black;
 
-      &.empty {
-        background-image: url('../images/collection-frame-empty.png');
-      }
-
       > a {
         color: $grey-2;
         display: block;
@@ -3853,6 +3849,21 @@ pre {
     line-height: 32px;
     border-radius: 0 0 18px 18px;
     color: white;
+  }
+}
+
+.collection-detail {
+  .subtle-container.nested-collections {
+    padding-bottom: 0;
+  }
+
+  .subtle-container.nested-collections,
+  .subtle-container.images {
+    .header .parent-collection {
+      font-style: italic;
+      float: right;
+      opacity: .8;
+    }
   }
 }
 
