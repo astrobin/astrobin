@@ -2133,6 +2133,16 @@ class Collection(models.Model):
         editable=False,
     )
 
+    parent = models.ForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        related_name='children',
+        on_delete=models.CASCADE,
+        verbose_name=_("Parent collection"),
+        help_text=_("If you want to create a nested collection, select the parent collection here."),
+    )
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     name = models.CharField(
@@ -2175,8 +2185,8 @@ class Collection(models.Model):
         unique_together = ('user', 'name')
         ordering = ['name']
 
-    def __unincode__(self):
-        return "%s, a collection by %s" % (self.name, self.user.username)
+    def __str__(self):
+        return self.name
 
 
 class Acquisition(models.Model):

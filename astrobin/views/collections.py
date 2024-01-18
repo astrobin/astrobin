@@ -1,4 +1,5 @@
 from typing import List
+from urllib.parse import urlparse
 
 import simplejson
 from annoying.functions import get_object_or_None
@@ -82,6 +83,10 @@ class UserCollectionsList(UserCollectionsBase, ListView):
     template_name = 'user_collections_list.html'
     context_object_name = 'collections_list'
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(parent__isnull=True)
+
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsList, self).get_context_data(**kwargs)
 
@@ -94,6 +99,15 @@ class UserCollectionsBaseEdit(LoginRequiredMixin, UserCollectionsBase, View):
     def form_valid(self, form):
         collection = form.save(commit=False)
         collection.user = self.request.user
+
+        # Detect cycles
+        x = collection.parent
+        while x:
+            if x == collection:
+                form._errors["parent"] = ErrorList([_("Setting this collection as a parent would create a cycle")])
+                return self.form_invalid(form)
+            x = x.parent
+
         try:
             return super(UserCollectionsBaseEdit, self).form_valid(form)
         except IntegrityError:
@@ -106,10 +120,36 @@ class UserCollectionsCreate(
     form_class = CollectionCreateForm
     template_name = 'user_collections_create.html'
 
+    def _get_referrer_collection_id(self):
+        referrer = self.request.META.get('HTTP_REFERER')
+
+        if referrer:
+            path = urlparse(referrer).path
+            path_parts = [part for part in path.split('/') if part]
+            collection_id = path_parts[-1] if path_parts[-1].isdigit() else None
+            return collection_id
+
+        return None
+
     def get_form_kwargs(self):
         kwargs = super(UserCollectionsCreate, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})
+
+        referrer_collection_id = self._get_referrer_collection_id()
+        if referrer_collection_id:
+            kwargs.update({'initial': {'parent': referrer_collection_id}})
+
         return kwargs
+
+    def get_success_url(self) -> str:
+        collection = self.object
+        if collection.parent:
+            return reverse_lazy(
+                'user_collections_detail',
+                args=(collection.parent.user.username, collection.parent.pk,)
+            )
+
+        return super().get_success_url()
 
 
 class UserCollectionsUpdate(
