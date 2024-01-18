@@ -3853,6 +3853,21 @@ pre {
 }
 
 .collection-detail {
+  .collection-name {
+    margin-top: 0;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid $grey-5;
+
+    small {
+      display: block;
+      margin-top: .5rem;
+    }
+  }
+
+  .collection-description {
+    margin-bottom: 3rem;
+  }
+
   .subtle-container.nested-collections {
     padding-bottom: 0;
   }

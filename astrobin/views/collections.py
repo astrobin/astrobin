@@ -162,7 +162,14 @@ class UserCollectionsUpdate(
 
     def get_form(self, form_class=None):
         form = super(UserCollectionsUpdate, self).get_form(form_class)
-        form.fields['cover'].queryset = Collection.objects.get(pk=self.kwargs['collection_pk']).images.all()
+        descendants = CollectionService(self.object).get_descendant_collections()
+
+        image_queryset = Image.objects.none()
+        for collection in descendants:
+            image_queryset = image_queryset | collection.images.all()
+
+        form.fields['cover'].queryset = image_queryset.distinct()
+
         return form
 
     def get_success_url(self):
