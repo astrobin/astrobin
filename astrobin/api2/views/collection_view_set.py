@@ -12,6 +12,9 @@ class CollectionViewSet(viewsets.ModelViewSet):
     permission_classes = [ReadOnly]
 
     def get_queryset(self) -> QuerySet:
+        if 'user' in self.request.GET:
+            return Collection.objects.filter(user__pk=self.request.GET['user'])
+
         if not self.request.user.is_authenticated:
             return Collection.objects.none()
 
