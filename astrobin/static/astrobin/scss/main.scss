@@ -2616,7 +2616,7 @@ form.avatar-delete {
           border: 0;
           margin: 0;
           padding: $spacer-small 0;
-          @include rounded-corners-top(20px);
+          @include rounded-corners-top(16px);
           top: 0;
           left: 0;
           text-align: center;
@@ -2688,7 +2688,7 @@ form.avatar-delete {
         text-align: center;
         font-weight: bold;
 
-        @include rounded-corners-bottom(20px);
+        @include rounded-corners-bottom(16px);
 
         &.active {
           background: white;

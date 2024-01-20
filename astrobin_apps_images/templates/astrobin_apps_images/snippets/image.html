@@ -157,9 +157,9 @@
                                 data-url="{{ url }}"
                                 data-slug="{{ slug }}"
                                 {% if is_revision %}
-                                    data-caption="{% blocktrans trimmed %}Revision {{ revision }}{% endblocktrans %}{% if revision_title %}: {{ revision_title }}{% endif %}"
+                                    data-caption="{% blocktrans trimmed %}Revision {{ revision }}{% endblocktrans %}{% if revision_title %}: {{ revision_title }}{% endif %}{% if image_revision.uploader_name and image.user == request.user %} ({{ image_revision.uploader_name }}){% endif %}"
                                 {% else %}
-                                    data-caption="{% trans 'Original revision' %}: {{ image.title }}"
+                                    data-caption="{% trans 'Original revision' %}: {{ image.title }}{% if image.uploader_name and image.user == request.user %} ({{ image.uploader_name }}){% endif %}"
                                 {% endif %}
                             {% else %}
                                 {% if instant %}
