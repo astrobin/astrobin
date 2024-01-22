@@ -9,4 +9,5 @@ class ForumFilter(FilterSet):
             'category',
             'parent',
             'name',
+            'slug',
         ]

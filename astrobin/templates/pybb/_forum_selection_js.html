@@ -35,6 +35,26 @@
         }
 
         function initForumSelection(isEquipment) {
+            if (!isEquipment && window.document.URL.indexOf('/forum/c/astrobin/equipment') > -1) {
+                $.ajax({
+                    url: '/api/v2/forum/forum/?slug=equipment',
+                    dataType: 'json',
+                    success: response => {
+                        if (response.count === 0) {
+                            alert('Unexpected error');
+                            return;
+                        }
+                        
+                        const forumId = response.results[0].id;
+                        const url = `/forum/forum/${forumId}/topic/add/`;
+        
+                        astrobin_common.show_page_loading_indicator();
+                        window.location.assign(url);
+                    }
+                });
+                return;
+            }
+            
             const $el = $("#forum-selection");
 
             if ($el.hasClass('select2-hidden-accessible')) {
