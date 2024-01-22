@@ -35,7 +35,7 @@
         }
 
         function initForumSelection(isEquipment) {
-            if (!isEquipment && window.document.URL.indexOf('/forum/c/astrobin/equipment') > -1) {
+            if (!isEquipment && window.document.URL.indexOf('/forum/c/astrophotography/equipment') > -1) {
                 $.ajax({
                     url: '/api/v2/forum/forum/?slug=equipment',
                     dataType: 'json',
