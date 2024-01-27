@@ -373,12 +373,12 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
         if not skip_notifications:
             push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
         if not skip_activity_stream:
-        add_story(
-            instance.image.user,
-            verb=ACTSTREAM_VERB_UPLOADED_REVISION,
-            action_object=instance,
-            target=instance.image
-        )
+            add_story(
+                instance.image.user,
+                verb=ACTSTREAM_VERB_UPLOADED_REVISION,
+                action_object=instance,
+                target=instance.image
+            )
 
 
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
