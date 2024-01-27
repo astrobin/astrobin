@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import logging
 import math
 from datetime import date, datetime
+from typing import Optional
 
 import dateutil
 from annoying.functions import get_object_or_None
@@ -9,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.safestring import SafeString, mark_safe
@@ -33,6 +35,7 @@ from astrobin.utils import (
 )
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_equipment.models import EquipmentBrandListing, EquipmentItemListing
+from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_any_ultimate, is_free, is_lite,
@@ -41,13 +44,22 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 from astrobin_apps_remote_source_affiliation.services.remote_source_affiliation_service import \
     RemoteSourceAffiliationService
 from astrobin_apps_users.services import UserService
+from common.services import DateTimeService
+from common.services.popup_message_service import PopupMessageService
 
 register = Library()
+log = logging.getLogger(__name__)
 
 
 @register.filter
 def split(value, arg):
     return value.split(arg)
+
+
+@register.filter
+def trim(value):
+    """Trims leading and trailing whitespace from a string."""
+    return value.strip() if value else value
 
 
 @register.filter
@@ -119,10 +131,11 @@ def date_before(date1, date2):
 
 
 @register.filter
-def string_to_date(date):
+def string_to_date(date_str: str) -> datetime:
     try:
-        return datetime.strptime(date, "%Y-%m-%d")
-    except:
+        return DateTimeService.string_to_date(date_str)
+    except ValueError as e:
+        log.debug('Could not convert string %s to date: %s' % (date_str, e))
         return datetime.now()
 
 
@@ -179,11 +192,11 @@ def search_image_list(context, paginate=True, **kwargs):
                 )
             )
         equipment_item_listings = EquipmentItemListing.objects \
-            .annotate(distance=TrigramDistance('name', name)) \
+            .annotate(distance=TrigramDistance('item_full_name', name)) \
             .filter(
                 Q(
                     Q(distance__lte=.5) |
-                    Q(name__icontains=name)
+                    Q(item_full_name__icontains=name)
                 ) &
                 Q(
                     Q(retailer__countries__icontains=country) |
@@ -454,6 +467,20 @@ def ad_key_value_pairs(image, user):
         if RemoteSourceAffiliationService.is_remote_source_affiliate(image.remote_source):
             data["exclude-category"] = "remote-hosting"
 
+        brands = []
+        for attr in  GearService.get_legacy_gear_usage_classes():
+            for item in getattr(image, attr).all():
+                if item.make:
+                    brands.append(item.make.lower())
+
+        for attr in EquipmentService.usage_classes():
+            for item in getattr(image, attr).all():
+                if item.brand:
+                    brands.append(item.brand.name.lower())
+
+        if len(brands) > 0:
+            data["brands"] = ",".join(list(set(brands)))
+
     if user and user.is_authenticated:
         data["used-remote-hosting"] = "true" \
             if UserService(user).has_used_commercial_remote_hosting_facilities() \
@@ -569,13 +596,16 @@ def get_subscription_url_by_name(name):
 def is_content_moderator(user):
     return UserService(user).is_in_group('content_moderators')
 
+
 @register.filter
 def is_image_moderator(user):
     return UserService(user).is_in_group('image_moderators')
 
+
 @register.filter
 def is_forum_moderator(user):
     return UserService(user).is_in_group('forum_moderators')
+
 
 @register.filter
 def can_like(user, target):
@@ -668,6 +698,7 @@ def can_add_technical_details(image):
         SubjectType.STAR_TRAILS,
         SubjectType.NORTHERN_LIGHTS,
         SubjectType.NOCTILUCENT_CLOUDS,
+        SubjectType.LANDSCAPE,
     ) or image.solar_system_main_subject is not None
 
 
@@ -955,3 +986,18 @@ def has_unmigrated_legacy_gear_items(user: User) -> bool:
 @register.filter
 def cookie_description(cookie_name: str) -> str:
     return cookie_definitions.get(cookie_name, '')
+
+
+@register.filter
+def get_search_synonyms_text(text: str) -> Optional[str]:
+    return UtilsService.get_search_synonyms_text(text)
+
+
+@register.filter
+def get_unseen_active_popups(user: User) -> QuerySet:
+    return PopupMessageService.get_unseen_active_popups(user)
+
+
+@register.filter(name='split_date_ranges')
+def split_date_ranges(date_ranges_str: str, language_code: str) -> list:
+    return DateTimeService.split_date_ranges(date_ranges_str, language_code)

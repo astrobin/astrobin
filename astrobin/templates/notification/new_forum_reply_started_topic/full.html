@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        <a href="{{user_url}}">{{user}}</a> replied in a topic that you started.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Follow <a href="{{post_url}}">this link</a> to see the new post on the topic
+        <a href="{{topic_url}}">{{topic_name}}</a>.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        If you don't want to receive notifications on new posts in this topic visit
+        <a href="{{unsubscribe_url}}">this link.</a>
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ post_url }}" class="btn btn-primary">
+        {% blocktrans trimmed %}
+            View post
+        {% endblocktrans %}
+    </a>
+</p>

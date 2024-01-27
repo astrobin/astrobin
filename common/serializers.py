@@ -126,8 +126,11 @@ class UserProfileSerializerPrivate(UserProfileSerializer):
         instance.location_set.clear()
 
         for location_data in locations:
-            location = Location.objects.get(pk=location_data.get('id'))
-            instance.location_set.add(location)
+            try:
+                location = Location.objects.get(pk=location_data.get('id'))
+                instance.location_set.add(location)
+            except Location.DoesNotExist:
+                pass
 
         return instance
 

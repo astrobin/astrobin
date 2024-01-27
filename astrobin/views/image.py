@@ -1,13 +1,10 @@
 import logging
 import mimetypes
 import os
-import re
 import time
-from functools import reduce
 from typing import Optional, Union
 
 import boto3
-import requests
 from PIL import Image as PILImage
 from braces.views import (
     JSONResponseMixin,
@@ -25,11 +22,9 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.template.defaultfilters import floatformat
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
-from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
@@ -54,6 +49,7 @@ from astrobin.forms.remove_as_collaborator_form import ImageRemoveAsCollaborator
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevision, LANGUAGES, SolarSystem_Acquisition)
 from astrobin.services.gear_service import GearService
+from astrobin.services.utils_service import UtilsService
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_client_country_code, get_image_resolution
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
@@ -68,7 +64,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_se
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.exceptions import Http410
-from common.services import AppRedirectionService, DateTimeService
+from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
 
@@ -334,7 +330,6 @@ class ImageDetailView(ImageDetailViewBase):
         #############################
         # GENERATE ACQUISITION DATA #
         #############################
-        from astrobin.moon import MoonPhase
 
         deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
         ssa = None
@@ -355,149 +350,7 @@ class ImageDetailView(ImageDetailViewBase):
 
         if deep_sky_acquisitions:
             image_type = 'deep_sky'
-
-            moon_age_list = []
-            moon_illuminated_list = []
-
-            dsa_data = {
-                'dates': [],
-                'frames': {},
-                'integration': 0,
-                'darks': [],
-                'flats': [],
-                'flat_darks': [],
-                'bias': [],
-                'bortle': [],
-                'mean_sqm': [],
-                'mean_fwhm': [],
-                'temperature': [],
-            }
-            for a in deep_sky_acquisitions:
-                if a.date is not None and a.date not in dsa_data['dates']:
-                    dsa_data['dates'].append(a.date)
-                    m = MoonPhase(a.date)
-                    moon_age_list.append(m.age)
-                    moon_illuminated_list.append(m.illuminated * 100.0)
-
-                if a.number and a.duration:
-                    key = ""
-                    if a.filter is not None or a.filter_2 is not None:
-                        key = "filter(%s)" % (a.filter or a.filter_2)
-                    if a.iso is not None:
-                        key += '-ISO(%d)' % a.iso
-                    if a.gain is not None:
-                        key += '-gain(%.2f)' % a.gain
-                    if a.f_number is not None:
-                        key += '-f_number(%.2f)' % a.f_number
-                    if a.sensor_cooling is not None:
-                        key += '-temp(%d)' % a.sensor_cooling
-                    if a.binning is not None:
-                        key += '-bin(%d)' % a.binning
-                    key += '-duration(%s)' % floatformat(a.duration, 4)
-
-                    try:
-                        current_frames = dsa_data['frames'][key]['integration_raw']
-                    except KeyError:
-                        current_frames = '0x0"'
-
-                    integration_re = re.match(r'^(\d+)x(\d+)', current_frames)
-                    current_number = int(integration_re.group(1))
-
-                    dsa_data['frames'][key] = {}
-                    if a.filter_2:
-                        dsa_data['frames'][key]['filter_url'] = f'/search/?{urlencode({"q": str(a.filter_2)})}'
-                        dsa_data['frames'][key]['filter'] = str(a.filter_2)
-                    elif a.filter:
-                        dsa_data['frames'][key]['filter_url'] = a.filter.get_absolute_url()
-                        dsa_data['frames'][key]['filter'] = a.filter
-                    else:
-                        dsa_data['frames'][key]['filter_url'] = '#'
-                        dsa_data['frames'][key]['filter'] = ''
-                    dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso is not None else ''
-                    dsa_data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain is not None else ''
-                    dsa_data['frames'][key]['f_number'] = f'f/{a.f_number}'.rstrip('0').rstrip(
-                        '.'
-                    ) if a.f_number is not None else ''
-                    dsa_data['frames'][key][
-                        'sensor_cooling'] = '%d&deg;C' % a.sensor_cooling if a.sensor_cooling is not None else ''
-                    dsa_data['frames'][key]['binning'] = \
-                        'bin %s<span class="times-separator">&times;</span>%s' % (a.binning, a.binning) \
-                            if a.binning else ''
-                    dsa_data['frames'][key]['integration'] = \
-                        f'<span class="number">{current_number + a.number}</span>' + \
-                        '<span class="times-separator">&times;</span>' + \
-                        f'<span class="duration">{floatformat(a.duration, 4).rstrip("0").rstrip(".")}</span>' + \
-                        '<span class="seconds-symbol">&Prime;</span>' + \
-                        f'<span class="total-frame-integration">({DateTimeService.human_time_duration((current_number + a.number) * a.duration)})</span>'
-                    dsa_data['frames'][key]['integration_raw'] = \
-                        f'{current_number + a.number}x{floatformat(a.duration, 4).rstrip("0").rstrip(".")}'
-
-                    dsa_data['integration'] += a.duration * a.number
-
-                for i in ['darks', 'flats', 'flat_darks', 'bias']:
-                    if a.filter and getattr(a, i):
-                        dsa_data[i].append("%d" % getattr(a, i))
-                    elif getattr(a, i):
-                        dsa_data[i].append(getattr(a, i))
-
-                if a.bortle:
-                    dsa_data['bortle'].append(a.bortle)
-
-                if a.mean_sqm:
-                    dsa_data['mean_sqm'].append(a.mean_sqm)
-
-                if a.mean_fwhm:
-                    dsa_data['mean_fwhm'].append(a.mean_fwhm)
-
-                if a.temperature:
-                    dsa_data['temperature'].append(a.temperature)
-
-            def average(values):
-                if not len(values):
-                    return 0
-                return float(sum(values)) / len(values)
-
-            frames_list = sorted(dsa_data['frames'].items())
-
-            deep_sky_data = (
-                (_('Dates'), sorted(dsa_data['dates'])),
-                (_('Frames'),
-                 '<div class="frames">' +
-                 '\n'.join("%s %s" % (
-                     "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
-                     "%s %s %s %s %s %s" % (
-                         f[1]['integration'],
-                         f[1]['iso'],
-                         f[1]['gain'],
-                         f[1]['f_number'],
-                         f[1]['sensor_cooling'],
-                         f[1]['binning']
-                     ),
-                 ) for f in frames_list) +
-                 '</div>'),
-                (_('Integration'), DateTimeService.human_time_duration(dsa_data['integration'])),
-                (_('Darks'),
-                 '%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['darks'])) / len(dsa_data['darks'])) if
-                 dsa_data['darks'] else 0),
-                (_('Flats'),
-                 '%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flats'])) / len(dsa_data['flats'])) if
-                 dsa_data['flats'] else 0),
-                (_('Flat darks'), '%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flat_darks'])) / len(
-                    dsa_data['flat_darks'])) if dsa_data['flat_darks'] else 0),
-                (_('Bias'),
-                 '%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['bias'])) / len(dsa_data['bias'])) if
-                 dsa_data['bias'] else 0),
-                (_('Avg. Moon age'), ("%.2f " % (average(moon_age_list),) + _("days")) if moon_age_list else None),
-                (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list),) if moon_illuminated_list else None),
-                (_('Bortle Dark-Sky Scale'),
-                 "%.2f" % (average([float(x) for x in dsa_data['bortle']])) if dsa_data['bortle'] else None),
-                (_('Mean SQM'),
-                 "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None),
-                (_('Mean FWHM'),
-                 "%.2f" % (average([float(x) for x in dsa_data['mean_fwhm']])) if dsa_data['mean_fwhm'] else None),
-                (_('Temperature'),
-                 "%.2f" % (average([float(x) for x in dsa_data['temperature']])) if dsa_data['temperature'] else None),
-            )
+            deep_sky_data = ImageService(image).get_deep_sky_acquisition_html()
 
         elif ssa:
             image_type = 'solar_system'
@@ -595,42 +448,49 @@ class ImageDetailView(ImageDetailViewBase):
                             collection = image.collections.get(pk=nav_ctx_extra)
                         except ValueError:
                             # Maybe this image is in a single collection
-                            collection = image.collections.all()[0]
+                            try:
+                                collection = image.collections.all()[0]
+                            except IndexError:
+                                collection = None
 
-                        if collection.order_by_tag:
-                            collection_images = Image.objects.filter(
-                                user=image.user,
-                                collections=collection,
-                                keyvaluetags__key=collection.order_by_tag,
-                                moderator_decision=ModeratorDecision.APPROVED,
-                            ).order_by('keyvaluetags__value')
-
-                            current_index = 0
-                            for iter_image in collection_images.all():
-                                if iter_image.pk == image.pk:
-                                    break
-                                current_index += 1
-
-                            image_next = collection_images.all()[current_index + 1] \
-                                if current_index < collection_images.count() - 1 \
-                                else None
-                            image_prev = collection_images.all()[current_index - 1] \
-                                if current_index > 0 \
-                                else None
+                        if collection is None:
+                            image_next = None
+                            image_prev = None
                         else:
-                            image_next = Image.objects.filter(
-                                user=image.user,
-                                collections=collection,
-                                published__gt=image.published,
-                                moderator_decision=ModeratorDecision.APPROVED,
-                            ).order_by('published')[0:1]
+                            if collection.order_by_tag:
+                                collection_images = Image.objects.filter(
+                                    user=image.user,
+                                    collections=collection,
+                                    keyvaluetags__key=collection.order_by_tag,
+                                    moderator_decision=ModeratorDecision.APPROVED,
+                                ).order_by('keyvaluetags__value')
 
-                            image_prev = Image.objects.filter(
-                                user=image.user,
-                                collections=collection,
-                                published__lt=image.published,
-                                moderator_decision=ModeratorDecision.APPROVED,
-                            ).order_by('-published')[0:1]
+                                current_index = 0
+                                for iter_image in collection_images.all():
+                                    if iter_image.pk == image.pk:
+                                        break
+                                    current_index += 1
+
+                                image_next = collection_images.all()[current_index + 1] \
+                                    if current_index < collection_images.count() - 1 \
+                                    else None
+                                image_prev = collection_images.all()[current_index - 1] \
+                                    if current_index > 0 \
+                                    else None
+                            else:
+                                image_next = Image.objects.filter(
+                                    user=image.user,
+                                    collections=collection,
+                                    published__gt=image.published,
+                                    moderator_decision=ModeratorDecision.APPROVED,
+                                ).order_by('published')[0:1]
+
+                                image_prev = Image.objects.filter(
+                                    user=image.user,
+                                    collections=collection,
+                                    published__lt=image.published,
+                                    moderator_decision=ModeratorDecision.APPROVED,
+                                ).order_by('-published')[0:1]
                     except Collection.DoesNotExist:
                         # image_prev and image_next will remain None
                         pass
@@ -788,7 +648,7 @@ class ImageDetailView(ImageDetailViewBase):
                 user=self.request.user
             ) if self.request.user.is_authenticated else None,
             'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
-            'in_collections': Collection.objects.filter(user=image.user, images=image),
+            'in_collections': Collection.objects.filter(user=image.user, images=image) if not image.is_wip else None,
             'auto_submit_to_iotd_tp_process_form': AutoSubmitToIotdTpProcessForm() \
                 if self.request.user.is_authenticated \
                 else None,
@@ -1086,8 +946,10 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
     def form_valid(self, form):
         image = form.instance
 
-        skip_notifications = self.request.POST.get('skip_notifications', 'off').lower() == 'on'
-        ImageService(image).promote_to_public_area(skip_notifications)
+        image.skip_notifications = self.request.POST.get('skip_notifications', 'off').lower() == 'on'
+        image.skip_activity_stream = self.request.POST.get('skip_activity_stream', 'off').lower() == 'on'
+
+        ImageService(image).promote_to_public_area(image.skip_notifications, image.skip_activity_stream)
 
         messages.success(self.request, _("Image moved to the public area."))
 
@@ -1357,10 +1219,9 @@ class ImageUploadUncompressedSource(ImageEditBaseView):
 
 
 class ImageDownloadView(View):
-    def download(self, url):
-        response = requests.get(
+    def download(self, url: str) -> HttpResponse:
+        response = UtilsService.http_with_retries(
             url,
-            allow_redirects=True,
             headers={'User-Agent': 'Mozilla/5.0'}
         )
         content_type = mimetypes.guess_type(os.path.basename(url))
@@ -1413,9 +1274,8 @@ class ImageDownloadView(View):
             solution: Solution = revision.solution if revision and revision.solution else image.solution
 
             # Download SVG
-            response = requests.get(
+            response = UtilsService.http_with_retries(
                 f'{settings.MEDIA_URL}{solution.pixinsight_svg_annotation_hd}',
-                allow_redirects=True,
                 headers={'User-Agent': 'Mozilla/5.0'}
             )
             local_svg: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.svg', delete=False)
@@ -1428,9 +1288,8 @@ class ImageDownloadView(View):
 
             # Download HD thumbnail
             thumbnail_url = image.thumbnail('qhd', revision_label, sync=True)
-            response = requests.get(
+            response = UtilsService.http_with_retries(
                 thumbnail_url,
-                allow_redirects=True,
                 headers={'User-Agent': 'Mozilla/5.0'}
             )
             local_hd: NamedTemporaryFile = NamedTemporaryFile('w+b', delete=False)

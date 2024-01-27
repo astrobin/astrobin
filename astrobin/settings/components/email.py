@@ -41,4 +41,5 @@ else:
 SERVER_EMAIL = DEFAULT_FROM_EMAIL = OTP_EMAIL_SENDER = os.environ.get('SERVER_EMAIL', 'noreply@astrobin.com').strip()
 EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[AstroBin]').strip()
 
-
+BREVO_API_KEY = os.environ.get('BREVO_API_KEY', '').strip()
+BREVO_NEWSLETTER_LIST_ID = os.environ.get('BREVO_NEWSLETTER_LIST_ID', '').strip()

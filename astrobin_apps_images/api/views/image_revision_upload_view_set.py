@@ -87,8 +87,10 @@ class ImageRevisionUploadViewSet(TusCreateMixin,
             'filename': filename,
             'title': upload_metadata['title'] if upload_metadata['title'] != 'NO_VALUE' else None,
             'description': upload_metadata['description'] if upload_metadata['description'] != 'NO_VALUE' else '',
-            'skip_notifications': upload_metadata[
-                'skip_notifications'] if 'skip_notifications' in upload_metadata else False,
+            'skip_notifications': upload_metadata['skip_notifications']
+            if 'skip_notifications' in upload_metadata else False,
+            'skip_activity_stream': upload_metadata['skip_activity_stream']
+            if 'skip_activity_stream' in upload_metadata else False,
             'is_final': upload_metadata[
                 'mark_as_final'] if 'mark_as_final' in upload_metadata else False,
             'image': upload_metadata['image_id'],

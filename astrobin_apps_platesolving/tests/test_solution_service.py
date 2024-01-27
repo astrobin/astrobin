@@ -1,5 +1,6 @@
 from django.core.files import File
 from django.test import TestCase
+from django.urls import reverse
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_platesolving.services import SolutionService
@@ -7,46 +8,44 @@ from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvin
 
 
 class SolutionServiceTest(TestCase):
+    def setUp(self):
+        self.image = Generators.image()
+        self.solution = PlateSolvingGenerators.solution(self.image)
+        self.service = SolutionService(self.solution)
+
     def test_get_or_create_advanced_settings_only_image(self):
-        image = Generators.image()
-        advanced_settings, created = SolutionService.get_or_create_advanced_settings(image)
+        advanced_settings, created = SolutionService.get_or_create_advanced_settings(self.image)
         self.assertIsNone(advanced_settings.sample_raw_frame_file.name)
         self.assertTrue(created)
 
     def test_get_or_create_advanced_settings_revision_inherits_everything(self):
-        image = Generators.image()
-
-        solution = PlateSolvingGenerators.solution(image)
-        advanced_settings, created = SolutionService.get_or_create_advanced_settings(image)
+        advanced_settings, created = SolutionService.get_or_create_advanced_settings(self.image)
         advanced_settings.sample_raw_frame_file = File(open('astrobin/fixtures/test.fits', 'rb'), "test.fits")
         advanced_settings.scaled_font_size = "L"
 
-        solution.advanced_settings = advanced_settings
-        solution.content_object = image
-        solution.save()
+        self.solution.advanced_settings = advanced_settings
+        self.solution.content_object = self.image
+        self.solution.save()
         advanced_settings.save()
 
         advanced_settings, created = SolutionService.get_or_create_advanced_settings(
-            Generators.image_revision(image=image))
+            Generators.image_revision(image=self.image))
 
         self.assertNotEqual(advanced_settings.sample_raw_frame_file.name, "")
         self.assertEqual(advanced_settings.scaled_font_size, "L")
         self.assertFalse(created)
 
     def test_get_or_create_advanced_settings_image_does_not_inherit_file(self):
-        image = Generators.image()
-
-        solution = PlateSolvingGenerators.solution(image)
-        advanced_settings, created = SolutionService.get_or_create_advanced_settings(image)
+        advanced_settings, created = SolutionService.get_or_create_advanced_settings(self.image)
         advanced_settings.sample_raw_frame_file = File(open('astrobin/fixtures/test.fits', 'rb'), "test.fits")
         advanced_settings.scaled_font_size = "L"
 
-        solution.advanced_settings = advanced_settings
-        solution.content_object = image
-        solution.save()
+        self.solution.advanced_settings = advanced_settings
+        self.solution.content_object = self.image
+        self.solution.save()
         advanced_settings.save()
 
-        advanced_settings, created = SolutionService.get_or_create_advanced_settings(Generators.image(user=image.user))
+        advanced_settings, created = SolutionService.get_or_create_advanced_settings(Generators.image(user=self.image.user))
 
         self.assertIsNone(advanced_settings.sample_raw_frame_file.name)
         self.assertEqual(advanced_settings.scaled_font_size, "L")
@@ -99,10 +98,8 @@ class SolutionServiceTest(TestCase):
             'Label,1094.65,619.27,1188.65,633.27,Merope nebula\n' \
             'Label,1012.63,602.11,1048.63,614.11,IC349\n'
 
-        image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
-        solution.objects_in_field = basic
-        solution.advanced_annotations = advanced
+        self.solution.objects_in_field = basic
+        self.solution.advanced_annotations = advanced
 
         self.assertEqual(
             ["16 Tau", "17 Tau", "18 Tau", "19 q Tau", "20 Tau", "21 Tau", "22 Tau", "23 Tau", "24 Tau", "25 eta Tau",
@@ -112,7 +109,7 @@ class SolutionServiceTest(TestCase):
              "The star Atlas (27Tau)", "The star Celaeno (16Tau)", "The star Electra (17Tau)",
              "The star Merope (23Tau)", "The star Pleione (28Tau)", "The star Sterope I (21Tau)",
              "The star Taygeta (19Tau)", "The star ηTau"],
-            SolutionService(solution).get_objects_in_field()
+            SolutionService(self.solution).get_objects_in_field()
         )
 
     def test_get_objects_in_field_2(self):
@@ -152,10 +149,8 @@ class SolutionServiceTest(TestCase):
             'Label,946.28,588.09,979.28,596.09,Sh2-281\n' \
             'Label,550.18,457.48,583.18,465.48,Sh2-279\n'
 
-        image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
-        solution.objects_in_field = basic
-        solution.advanced_annotations = advanced
+        self.solution.objects_in_field = basic
+        self.solution.advanced_annotations = advanced
 
         self.assertEqual(
             ['41 the01 Ori', '42 c Ori', '43 the02 Ori', '44 iot Ori', '45 Ori', 'De Mairan\'s nebula',
@@ -164,32 +159,28 @@ class SolutionServiceTest(TestCase):
              'NGC 1999', 'Orion Nebula', 'Sh2-279', 'Sh2-281', 'The star 42Ori', 'The star 45Ori',
              'The star θ1Ori', 'The star θ2Ori', 'The star ιOri', 'Upper Sword', 'VdB42', 'VdB44',
              'the Running Man Nebula'],
-            SolutionService(solution).get_objects_in_field()
+            SolutionService(self.solution).get_objects_in_field()
         )
 
     def test_get_objects_in_field_clean(self):
         basic = 'M 45'
         advanced = 'Label,1,2,3,M45'
 
-        image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
-        solution.objects_in_field = basic
-        solution.advanced_annotations = advanced
+        self.solution.objects_in_field = basic
+        self.solution.advanced_annotations = advanced
 
-        self.assertEqual(['M 45', 'M45'], SolutionService(solution).get_objects_in_field(clean=False))
-        self.assertEqual(['M 45'], SolutionService(solution).get_objects_in_field())
+        self.assertEqual(['M 45', 'M45'], SolutionService(self.solution).get_objects_in_field(clean=False))
+        self.assertEqual(['M 45'], SolutionService(self.solution).get_objects_in_field())
 
     def test_get_objects_in_field_capitals(self):
         basic = 'Merope nebula'
         advanced = 'Label,1,2,3,Merope Nebula'
 
-        image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
-        solution.objects_in_field = basic
-        solution.advanced_annotations = advanced
+        self.solution.objects_in_field = basic
+        self.solution.advanced_annotations = advanced
 
-        self.assertEqual(['Merope nebula'], SolutionService(solution).get_objects_in_field(clean=False))
-        self.assertEqual(['Merope nebula'], SolutionService(solution).get_objects_in_field())
+        self.assertEqual(['Merope nebula'], SolutionService(self.solution).get_objects_in_field(clean=False))
+        self.assertEqual(['Merope nebula'], SolutionService(self.solution).get_objects_in_field())
 
     def test_duplicate_objects_in_field_by_catalog_space(self):
         basic = "Orion Nebula, M 42, M 43"
@@ -203,12 +194,10 @@ class SolutionServiceTest(TestCase):
             "Label,1,2,3,Sh2-129\n" \
             "Label,1,2,3,TYC5403-2132-1\n"
 
-        image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
-        solution.objects_in_field = basic
-        solution.advanced_annotations = advanced
+        self.solution.objects_in_field = basic
+        self.solution.advanced_annotations = advanced
 
-        objects = SolutionService(solution).duplicate_objects_in_field_by_catalog_space()
+        objects = SolutionService(self.solution).duplicate_objects_in_field_by_catalog_space()
 
         self.assertTrue("Orion Nebula" in objects)
 
@@ -235,3 +224,81 @@ class SolutionServiceTest(TestCase):
 
         self.assertTrue("TYC5403-2132-1" in objects)
         self.assertTrue("TYC5403_2132_1" in objects)
+
+    def test_get_search_query_around_with_no_advanced_coordinates(self):
+        self.service.solution = type('solution', (object,), {})()  # Mock solution object
+        self.service.solution.ra = 10.0
+        self.service.solution.dec = 20.0
+        self.service.solution.advanced_ra = None
+        self.service.solution.advanced_dec = None
+
+        # Test the method with default RA and DEC
+        expected_url = reverse('haystack_search') + \
+                       "?q=&d=i&t=all&coord_ra_min=7.50&coord_ra_max=12.50" + \
+                       "&coord_dec_min=17.50&coord_dec_max=22.50" + \
+                       "&field_radius_min=0.00&field_radius_max=5.00"
+        result = self.service.get_search_query_around(5)
+        self.assertEqual(result, expected_url)
+
+    def test_get_search_query_around_with_advanced_coordinates(self):
+        self.service.solution = type('solution', (object,), {})()  # Mock solution object
+        self.service.solution.ra = 10.0
+        self.service.solution.dec = 20.0
+        self.service.solution.advanced_ra = None
+        self.service.solution.advanced_dec = None
+
+        # Test the method with advanced RA and DEC
+        self.service.solution.advanced_ra = 30.0
+        self.service.solution.advanced_dec = 40.0
+
+        expected_url = reverse('haystack_search') + \
+                       "?q=&d=i&t=all&coord_ra_min=27.50&coord_ra_max=32.50" + \
+                       "&coord_dec_min=37.50&coord_dec_max=42.50" + \
+                       "&field_radius_min=0.00&field_radius_max=5.00"
+        result = self.service.get_search_query_around(5)
+        self.assertEqual(result, expected_url)
+
+    def test_get_search_query_around_near_zero_ra_dec(self):
+        # Test method with RA and DEC near zero
+        self.service.solution.ra = 1.0
+        self.service.solution.dec = 1.0
+        expected_url = reverse('haystack_search') + \
+                       "?q=&d=i&t=all&coord_ra_min=359.00&coord_ra_max=3.00" + \
+                       "&coord_dec_min=-1.00&coord_dec_max=3.00" + \
+                       "&field_radius_min=0.00&field_radius_max=4.00"
+        result = self.service.get_search_query_around(4)
+        self.assertEqual(result, expected_url)
+
+    def test_get_search_query_around_near_max_ra(self):
+        # Test method with RA near 360 degrees
+        self.service.solution.ra = 359.0
+        self.service.solution.dec = 20.0
+        expected_url = reverse('haystack_search') + \
+                       "?q=&d=i&t=all&coord_ra_min=357.00&coord_ra_max=1.00" + \
+                       "&coord_dec_min=18.00&coord_dec_max=22.00" + \
+                       "&field_radius_min=0.00&field_radius_max=4.00"
+        result = self.service.get_search_query_around(4)
+        self.assertEqual(result, expected_url)
+
+    def test_get_search_query_around_near_polar_dec_minus_90(self):
+        # Test method with DEC near -90
+        self.service.solution.ra = 10.0
+        self.service.solution.dec = -89.0
+        expected_url = reverse('haystack_search') + \
+                       f"?q=&d=i&t=all&coord_ra_min=8.00&coord_ra_max=12.00" + \
+                       f"&coord_dec_min=-90.00&coord_dec_max=-87.00" + \
+                       "&field_radius_min=0.00&field_radius_max=4.00"
+        result = self.service.get_search_query_around(4)
+        self.assertEqual(result, expected_url)
+
+    def test_get_search_query_around_near_polar_dec_plus_90(self):
+        # Test method with DEC near +90
+        self.service.solution.ra = 10.0
+        self.service.solution.dec = 89.0
+        expected_url = reverse('haystack_search') + \
+                       f"?q=&d=i&t=all&coord_ra_min=8.00&coord_ra_max=12.00" + \
+                       f"&coord_dec_min=87.00&coord_dec_max=90.00" + \
+                       "&field_radius_min=0.00&field_radius_max=4.00"
+        result = self.service.get_search_query_around(4)
+        self.assertEqual(result, expected_url)
+

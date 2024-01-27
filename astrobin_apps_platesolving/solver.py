@@ -3,6 +3,8 @@ from importlib import import_module
 from annoying.functions import get_object_or_None
 from django.conf import settings
 
+from astrobin_apps_platesolving.backends.astrometry_net.errors import RequestError
+
 
 class SolverBase(object):
     MISSING = 0
@@ -21,13 +23,20 @@ class Solver(SolverBase):
         return getattr(module, backend_name)()
 
     def solve(self, image_url, **kwargs):
-        return self.backend().start(image_url, **kwargs)
+        try:
+            return self.backend().start(image_url, **kwargs)
+        except RequestError:
+            return 0
 
     def status(self, submission):
         if submission is None or submission == 0:
             return self.MISSING
 
-        sub_status = self.backend().submission_status(submission)
+        try:
+            sub_status = self.backend().submission_status(submission)
+        except RequestError:
+            return self.PENDING
+
         if sub_status is None:
             return self.PENDING
 
@@ -42,8 +51,13 @@ class Solver(SolverBase):
         if job is None:
             return self.PENDING
 
-        job_result = self.backend().job_status(job)
+        try:
+            job_result = self.backend().job_status(job)
+        except RequestError:
+            return self.PENDING
+
         status = job_result.get('status')
+
         if status == 'solving' or status == 'processing':
             return self.PENDING
         elif status == 'success':
@@ -52,16 +66,28 @@ class Solver(SolverBase):
         return self.FAILED
 
     def info(self, submission):
-        return self.backend().info(submission)
+        try:
+            return self.backend().info(submission)
+        except RequestError:
+            return {}
 
     def annotated_image_url(self, submission):
-        return self.backend().annotated_image_url(submission)
+        try:
+            return self.backend().annotated_image_url(submission)
+        except RequestError:
+            return ''
 
     def annotations(self, submission):
-        return self.backend().annotations(submission)
+        try:
+            return self.backend().annotations(submission)
+        except RequestError:
+            return None
 
     def sky_plot_zoom1_image_url(self, submission):
-        return self.backend().sky_plot_zoom1_image_url(submission)
+        try:
+            return self.backend().sky_plot_zoom1_image_url(submission)
+        except RequestError:
+            return ''
 
 
 class AdvancedSolver(SolverBase):

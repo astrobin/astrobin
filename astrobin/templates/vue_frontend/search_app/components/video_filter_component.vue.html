@@ -1,0 +1,34 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="video-filter-template">
+    {% if valid_usersubscription|can_access_advanced_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <input type="checkbox" v-model="value" name="video" /> {% trans "Yes" %}
+        </div>
+    {% else %}
+        {% include "./_filter_requires_lite_or_premium_or_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("video-filter", {
+        template: "#video-filter-template",
+        props: [
+            "video"
+        ],
+        data: function() {
+            return {
+                value: this.video
+            }
+        },
+        mixins: [
+            FilterComponentMixin
+        ],
+        created: function() {
+            if (this.video === undefined) {
+                this.value = true;
+            }
+        }
+    });
+</script>

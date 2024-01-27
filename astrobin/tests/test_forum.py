@@ -398,6 +398,39 @@ class ForumTest(TestCase):
         with self.assertRaises(AssertionError):
             push_notification.assert_called_with([mentioned], post.user, 'new_forum_post_mention', mock.ANY)
 
+    @patch("astrobin.signals.push_notification")
+    def test_send_reply_notifications(self, push_notification):
+        post = Generators.forum_post()
+
+        reply1 = Generators.forum_post(topic=post.topic)
+
+        push_notification.assert_called_with([post.user], reply1.user, 'new_forum_reply_started_topic', mock.ANY)
+
+        reply2 = Generators.forum_post(topic=post.topic)
+
+        push_notification.assert_has_calls([
+            mock.call([post.user], reply2.user, 'new_forum_reply_started_topic', mock.ANY),
+            mock.call([reply1.user], reply2.user, 'new_forum_reply', mock.ANY),
+        ], any_order=True)
+
+    @patch("astrobin.signals.MentionsService.get_mentions")
+    @patch("astrobin.signals.push_notification")
+    def test_does_not_send_new_forum_reply_started_topic_if_starter_is_mentioned(self, push_notification, get_mentions):
+        post = Generators.forum_post()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([post.user], post.user, 'new_forum_reply_started_topic', mock.ANY)
+
+        get_mentions.reset_mock()
+        push_notification.reset_mock()
+        get_mentions.return_value = [post.user.username]
+
+        reply = Generators.forum_post(topic=post.topic)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([post.user], reply.user, 'new_forum_reply_started_topic', mock.ANY)
+
+        push_notification.assert_called_with([post.user], reply.user, 'new_forum_post_mention', mock.ANY)
 
     def test_forum_latest_topics(self):
         Generators.forum_topic(on_moderation=True)

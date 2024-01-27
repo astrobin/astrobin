@@ -75,48 +75,6 @@ cookie_definitions = {
     f'_gac_{settings.GOOGLE_ANALYTICS_ID}': _(
         'This cookie is used by Google Analytics to anonymously track your usage of the website.'
     ),
-    '_hjClosedSurveyInvites': _(
-        'This cookie is set once a visitor interacts with a Survey invitation modal popup. It is used to ensure that '
-        'the same invite does not reappear if it has already been shown.'
-    ),
-    '_hjDonePolls': _(
-        'This cookie is set once a visitor completes a poll using the Feedback Poll widget. It is used to ensure that '
-        'the same poll does not reappear if it has already been filled in.'
-    ),
-    '_hjMinimizedPolls': _(
-        'This cookie is set once a visitor minimizes a Feedback Poll widget. It is used to ensure that the widget '
-        'stays minimized when the visitor navigates through your site.'
-    ),
-    '_hjDoneTestersWidgets': _(
-        'This cookie is used by Hotjar to anonymously track your usage of the website.'
-    ),
-    '_hjMinimizedTestersWidgets': _(
-        'This cookie is used by Hotjar to anonymously track your usage of the website.'
-    ),
-    '_hjIncludedInSample': _(
-        'This session cookie is set to let Hotjar know whether that visitor is included in the sample which is used to '
-        'generate funnels.'
-    ),
-    '_hjShownFeedbackMessage': _(
-        'This cookie is set when a visitor minimizes or completes Incoming Feedback. This is done so that the '
-        'Incoming Feedback will load as minimized immediately if the visitor navigates to another page where it is set '
-        'to show.'
-    ),
-    '_hjid': _(
-        'This cookie is set when the customer first lands on a page with the Hotjar script. It is used to persist the '
-        'Hotjar User ID, unique to that site on the browser. This ensures that behavior in subsequent visits to the '
-        'same site will be attributed to the same user ID.'
-    ),
-    '_hjRecordingLastActivity': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
-    '_hjTLDTest': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
-    '_hjUserAttributesHash': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
-    '_hjCachedUserAttributes': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
-    '_hjLocalStorageTest': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
-    '_hjIncludedInPageviewSample': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
-    '_hjAbsoluteSessionInProgress': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
-    '_hjFirstSeen': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
-    '_hjViewportId': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
-    '_hjRecordingEnabled': _('This cookie is used by Hotjar to anonymously track your usage of the website.'),
     'IDE': _(
         'This cookie is used by Google Ad Manager to register and report the website user\'s actions after viewing or '
         'clicking one of the advertiser\'s ads with the purpose of measuring the efficacy of an ad.'

@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<a href="{{ post_url }}">
+    {% blocktrans trimmed %}
+        <strong>{{ user }}</strong> replied in a topic that you started: <em>{{ topic_name }}</em>
+    {% endblocktrans %}
+</a>

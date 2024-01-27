@@ -5,11 +5,13 @@ from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.db import IntegrityError
 from django.http import HttpResponseForbidden
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
 
 from astrobin_apps_iotd.api.serializers.dismissed_image_serializer import DismissedImageSerializer
 from astrobin_apps_iotd.models import IotdDismissedImage
@@ -39,3 +41,5 @@ class DismissedImageViewSet(viewsets.ModelViewSet):
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
         except ValidationError as e:
             return HttpResponseForbidden(e.messages)
+        except IntegrityError:
+            return Response(status=204)

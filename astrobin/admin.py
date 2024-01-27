@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.utils import timezone
 
 from astrobin.models import (
-    Gear, GearUserInfo, ImageEquipmentLog, Telescope,
+    Gear, GearUserInfo, ImageEquipmentLog, PopupMessage, PopupMessageUserStatus, Telescope,
     Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image,
     ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay,
     ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord, GearMigrationStrategy,
@@ -282,6 +282,27 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     ]
     list_display = ("subject", "created")
     search_fields = ['subject', ]
+
+
+@admin.register(PopupMessage)
+class PopupMessageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created', 'updated', 'active')
+    list_filter = ('active', 'created', 'updated')
+    search_fields = ('title', 'body')
+    readonly_fields = ('created', 'updated')
+
+
+@admin.register(PopupMessageUserStatus)
+class PopupMessageUserStatusAdmin(admin.ModelAdmin):
+    list_display = ('user', 'popup_message', 'popup_message_active', 'seen')
+    list_filter = ('popup_message',)
+    search_fields = ('user__username', 'popup_message__title')
+    autocomplete_fields = ('user', 'popup_message')
+
+    def popup_message_active(self, obj):
+        return obj.popup_message.active
+    popup_message_active.short_description = 'Popup Message Active'
+    popup_message_active.boolean = True
 
 
 admin.site.register(Gear, GearAdmin)

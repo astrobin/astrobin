@@ -307,8 +307,8 @@ class TestImageService(TestCase):
         self.assertEqual(1, Image.objects.all().count())
 
     def test_delete_original_when_new_title_is_too_long(self):
-        original_title = Generators.randomString(128)
-        revision_title = Generators.randomString(10)
+        original_title = Generators.random_string(128)
+        revision_title = Generators.random_string(10)
         image = Generators.image(image_file='original.jpg', title=original_title)
         Generators.image_revision(image=image, image_file='revision.jpg', title=revision_title)
 
@@ -725,3 +725,20 @@ class TestImageService(TestCase):
         image.delete()
 
         self.assertEquals(0, Action.objects.action_object(image).count())
+
+    def test_get_collection_tag_value_no_collection(self):
+        image = Generators.image()
+        self.assertEqual(None, ImageService(image).get_collection_tag_value(None))
+
+    def test_get_collection_tag_value_no_tag(self):
+        image = Generators.image()
+        collection = Generators.collection()
+        self.assertEqual(None, ImageService(image).get_collection_tag_value(collection))
+
+    def test_get_collection_tag_value(self):
+        image = Generators.image()
+        collection = Generators.collection()
+        tag = Generators.key_value_tag(image=image)
+        collection.order_by_tag = tag.key
+        collection.save()
+        self.assertEqual(tag.value, ImageService(image).get_collection_tag_value(collection))

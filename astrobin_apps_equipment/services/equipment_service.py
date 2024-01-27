@@ -1,4 +1,5 @@
 import logging
+from typing import List
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -19,6 +20,19 @@ log = logging.getLogger(__name__)
 
 
 class EquipmentService:
+    @staticmethod
+    def usage_classes() -> List[str]:
+        return [
+            'imaging_telescopes_2',
+            'guiding_telescopes_2',
+            'imaging_cameras_2',
+            'guiding_cameras_2',
+            'mounts_2',
+            'filters_2',
+            'accessories_2',
+            'software_2',
+            ]
+
     @staticmethod
     def equipment_item_listings(item, country: str) -> QuerySet:
         if country is None or item is None:
@@ -499,16 +513,7 @@ class EquipmentService:
                     replace_with = duplicate_of
 
             affected_images = []
-            for prop in (
-                    'imaging_telescopes_2',
-                    'imaging_cameras_2',
-                    'mounts_2',
-                    'guiding_telescopes_2',
-                    'guiding_cameras_2',
-                    'filters_2',
-                    'accessories_2',
-                    'software_2',
-            ):
+            for prop in EquipmentService.usage_classes():
                 try:
                     images = Image.objects_including_wip.filter(**{prop: affected_item})
                 except ValueError:

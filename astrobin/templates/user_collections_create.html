@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load common_tags %}
 
 {% block title %}
     {% trans "Create new collection" %}
@@ -12,9 +13,15 @@
 
     <form class="form-horizontal" action="" method="post">
         {% csrf_token %}
+        
         {{form|as_bootstrap}}
+        
         <div class="form-actions">
-            <input class="btn btn-primary" type="submit" value="{% trans "Create new collection" %}"/>
+            <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                {% trans "Create new collection" %}
+                {% button_loading_indicator %}
+            </button>
+            
             <a class="btn" href="{% url 'user_collections_list' requested_user.username %}">
                 {% trans "Cancel" %}
             </a>

@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
+import logging
+from typing import Optional
+
+import simplejson
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
-from django.db.models import Count
+from django.db.models import Count, Value
+from django.db.models.functions import Concat
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import mixins
@@ -19,6 +24,8 @@ from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Sof
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
+
+logger = logging.getLogger(__name__)
 
 
 class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin,
@@ -84,21 +91,56 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
 
     def _update_acquisition(self, request, instance: Image):
         DeepSky_Acquisition.objects.filter(image=instance).delete()
+        deep_sky_decimal_fields = ['duration', 'gain', 'f_number', 'bortle', 'mean_sqm', 'mean_fwhm', 'temperature']
+        solar_system_decimal_fields = ['fps', 'exposure_per_frame', 'gain', 'cmi', 'cmii', 'cmiii']
+
         for item in request.data.get('deep_sky_acquisitions'):
-            if item.get('filter_2'):
-                item['filter_2'] = get_object_or_None(Filter, id=item.get('filter_2'))
+            for field in deep_sky_decimal_fields:
+                if item.get(field) == '':
+                    item[field] = None
+
+            if item.get('bortle') == '':
+                item['bortle'] = None
+
+            filter_2 = item.get('filter_2')
+
+            if isinstance(filter_2, int):
+                item['filter_2'] = get_object_or_None(Filter, id=filter_2)
+            else:
+                filter_: Optional[Filter] = Filter.objects.annotate(
+                    full_name=Concat('brand__name', Value(' '), 'name')
+                ).filter(
+                    full_name=filter_2
+                ).first()
+                if filter_:
+                    item['filter_2'] = filter_.pk
 
             data = dict(image=instance, **item)
+
             if 'id' in data:
                 del data['id']
-            DeepSky_Acquisition.objects.create(**data)
+            try:
+                DeepSky_Acquisition.objects.create(**data)
+            except Exception as e:
+                data_str = simplejson.dumps(data, default=str)
+                logger.error(f"Error creating DeepSky_Acquisition: {e}. Data: {data_str}")
+                raise e
 
         SolarSystem_Acquisition.objects.filter(image=instance).delete()
         for item in request.data.get('solar_system_acquisitions'):
+            for field in solar_system_decimal_fields:
+                if item.get(field) == '':
+                    item[field] = None
+
             data = dict(image=instance, **item)
             if 'id' in data:
                 del data['id']
-            SolarSystem_Acquisition.objects.create(**data)
+            try:
+                SolarSystem_Acquisition.objects.create(**data)
+            except Exception as e:
+                data_str = simplejson.dumps(data, default=str)
+                logger.error(f"Error creating SolarSystem_Acquisition: {e}. Data: {data_str}")
+                raise e
 
     def get_serializer_class(self):
         if (

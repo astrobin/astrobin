@@ -28,7 +28,7 @@ from rest_framework.authtoken.models import Token
 from safedelete import HARD_DELETE
 from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 from safedelete.models import SafeDeleteModel
-from safedelete.signals import post_softdelete
+from safedelete.signals import post_softdelete, post_undelete
 from stripe.error import StripeError
 from subscription.models import Subscription, Transaction, UserSubscription
 from subscription.signals import paid, signed_up, unsubscribed
@@ -65,7 +65,7 @@ from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_any_paid_subscription, is_any_ultimate, is_free, is_lite, is_lite_2020, is_premium, is_premium_2020,
 )
-from astrobin_apps_users.services import UserService
+from astrobin_apps_users.services import MailingListService, UserService
 from common.constants import GroupName
 from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import AppRedirectionService, DateTimeService, SearchIndexUpdateService
@@ -130,9 +130,12 @@ def image_pre_save(sender, instance, **kwargs):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = ModeratorDecision.APPROVED
     else:
-        if image.moderator_decision != ModeratorDecision.APPROVED and instance.moderator_decision == ModeratorDecision.APPROVED:
+        if (
+            image.moderator_decision != ModeratorDecision.APPROVED and
+            instance.moderator_decision == ModeratorDecision.APPROVED
+        ):
             # This image is being approved
-            if not instance.is_wip:
+            if not instance.is_wip and not image.skip_activity_stream:
                 add_story(instance.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=instance)
 
         if not instance.is_wip and not instance.published:
@@ -185,7 +188,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
         if not instance.is_wip:
             if not instance.skip_notifications:
                 push_notification_for_new_image.apply_async(args=(instance.pk,))
-            if instance.moderator_decision == ModeratorDecision.APPROVED:
+            if instance.moderator_decision == ModeratorDecision.APPROVED and not instance.skip_activity_stream:
                 add_story(instance.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=instance)
 
         if Image.all_objects.filter(user=instance.user).count() == 1:
@@ -287,7 +290,10 @@ def image_post_softdelete(sender, instance, **kwargs):
 
     if instance.solution:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
-        instance.solution.delete()
+        try:
+            instance.solution.delete()
+        except AttributeError:
+            pass
 
     valid_subscription = PremiumService(instance.user).get_valid_usersubscription()
 
@@ -344,8 +350,11 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
     if kwargs.get('update_fields', None):
         return
 
-    wip = instance.image.is_wip
-    skip = instance.skip_notifications
+    if instance.image.is_wip:
+        return
+
+    skip_notifications = instance.skip_notifications
+    skip_activity_stream = instance.skip_activity_stream
     uploading = instance.uploader_in_progress
     just_completed_upload = cache.get("image_revision.%s.just_completed_upload" % instance.pk)
 
@@ -360,11 +369,10 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
             log.debug(f'Encoding video file for {instance} in imagerevision_post_save signal handler')
             encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
 
-    if wip or skip:
-        return
-
     if (created and not uploading) or just_completed_upload:
-        push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
+        if not skip_notifications:
+            push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
+        if not skip_activity_stream:
         add_story(
             instance.image.user,
             verb=ACTSTREAM_VERB_UPLOADED_REVISION,
@@ -380,7 +388,10 @@ def imagerevision_post_softdelete(sender, instance, **kwargs):
     UserService(instance.image.user).clear_gallery_image_list_cache()
     if instance.solution:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
-        instance.solution.delete()
+        try:
+            instance.solution.delete()
+        except AttributeError:
+            pass
 
 
 post_softdelete.connect(imagerevision_post_softdelete, sender=ImageRevision)
@@ -1242,7 +1253,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             instance.topic.subscribers.exclude(
                 pk__in=list(
                     set(
-                        [instance.user.pk] +
+                        [instance.user.pk, instance.topic.user.pk] +
                         [x.pk for x in MentionsService.get_mentioned_users_with_notification_enabled(
                             mentions, 'new_forum_post_mention'
                         )
@@ -1251,6 +1262,26 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                 )
             )
         )
+
+        if instance.topic.user != instance.user and instance.topic.user.username not in mentions:
+            push_notification(
+                [instance.topic.user],
+                instance.user,
+                'new_forum_reply_started_topic',
+                {
+                    'user': instance.user.userprofile.get_display_name(),
+                    'user_url': settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user}),
+                    'post_url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
+                    'topic_url': build_notification_url(
+                        settings.BASE_URL + instance.topic.get_absolute_url(), instance.user
+                    ),
+                    'topic_name': instance.topic.name,
+                    'unsubscribe_url': build_notification_url(
+                        settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]),
+                        instance.user
+                    )
+                }
+            )
 
         if recipients:
             push_notification(
@@ -1401,8 +1432,19 @@ def userprofile_pre_save(sender, instance: UserProfile, **kwargs):
     if before_save.skill_level != instance.skill_level:
         instance.skill_level_updated = DateTimeService.now()
 
+    if before_save.receive_newsletter != instance.receive_newsletter:
+        service: MailingListService = MailingListService(instance.user)
+        list_id: int = settings.BREVO_NEWSLETTER_LIST_ID
+        if instance.receive_newsletter:
+            service.subscribe(list_id)
+        else:
+            service.unsubscribe(list_id)
 
+
+@receiver(post_softdelete, sender=UserProfile)
 def userprofile_post_softdelete(sender, instance, **kwargs):
+    MailingListService(instance.user).delete_contact()
+
     # Images are attached to the auth.User object, and that's not really
     # deleted, so nothing is cascaded, hence the following line.
     instance.user.is_active = False
@@ -1419,7 +1461,16 @@ def userprofile_post_softdelete(sender, instance, **kwargs):
     UserIndex().remove_object(instance.user)
 
 
-post_softdelete.connect(userprofile_post_softdelete, sender=UserProfile)
+@receiver(post_undelete, sender=UserProfile)
+def userprofile_post_undelete(sender, instance, **kwargs):
+    instance.user.is_active = True
+    instance.user.email = instance.user.email.replace('+ASTROBIN_IGNORE', '')
+    instance.user.save()
+
+    if instance.receive_newsletter:
+        MailingListService(instance.user).subscribe(settings.BREVO_NEWSLETTER_LIST_ID)
+
+    UserIndex().update_object(instance.user)
 
 
 @receiver(pre_delete, sender=UserProfile)

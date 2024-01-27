@@ -1,4 +1,5 @@
 import math
+from typing import List
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -276,16 +277,7 @@ class GearService:
     @staticmethod
     def has_unmigrated_legacy_gear_items(user: User) -> bool:
         for image in Image.objects_including_wip.filter(user=user):
-            for usage_class in (
-                    'imaging_telescopes',
-                    'imaging_cameras',
-                    'mounts',
-                    'filters',
-                    'focal_reducers',
-                    'accessories',
-                    'software',
-                    'guiding_telescopes',
-                    'guiding_cameras'):
+            for usage_class in  GearService.get_legacy_gear_usage_classes():
                 if getattr(image, usage_class) \
                         .annotate(count=Count('migration_strategies')) \
                         .filter(count=0) \
@@ -293,6 +285,20 @@ class GearService:
                     return True
 
         return False
+
+    @staticmethod
+    def get_legacy_gear_usage_classes() -> List[str]:
+        return [
+            'imaging_telescopes',
+            'imaging_cameras',
+            'mounts',
+            'filters',
+            'focal_reducers',
+            'accessories',
+            'software',
+            'guiding_telescopes',
+            'guiding_cameras'
+        ]
 
     def display_name(self, for_user: User = None):
         if for_user is None:

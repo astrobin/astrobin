@@ -8,8 +8,6 @@ from braces.views import (
     SuperuserRequiredMixin,
 )
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
@@ -79,7 +77,8 @@ class ImageModerationMarkAsHamView(LoginRequiredMixin, GroupRequiredMixin, JSONR
             if not image.is_wip and image.published:
                 if not image.skip_notifications:
                     push_notification_for_new_image.apply_async(args=(image.pk,), countdown=10)
-                add_story(image.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=image)
+                if not image.skip_activity_stream:
+                    add_story(image.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=image)
 
         return self.render_json_response({
             'status': 'OK',

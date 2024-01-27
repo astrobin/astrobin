@@ -8,6 +8,7 @@ import urllib.request
 from functools import reduce
 
 import flickrapi
+import requests
 import simplejson
 from actstream.models import Action
 from annoying.functions import get_object_or_None
@@ -41,7 +42,7 @@ from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import common_variables, user_language
-from astrobin.enums import ImageEditorStep
+from astrobin.enums import ImageEditorStep, SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.forms import (
     AccessoryEditForm, AccessoryEditNewForm, CameraEditForm, CameraEditNewForm,
@@ -57,6 +58,8 @@ from astrobin.models import (
     Accessory, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
+from astrobin.services.gear_service import GearService
+from astrobin.services.utils_service import UtilsService
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import (
     has_active_uncanceled_subscription_by_name, in_upload_wizard,
@@ -768,9 +771,18 @@ def image_edit_platesolving_settings(request, id, revision_label):
             return_url = reverse('image_detail', args=(image.get_id(), '0',))
         else:
             return_url = reverse('image_detail', args=(image.get_id(),))
-        solution, created = Solution.objects.get_or_create(
-            content_type=ContentType.objects.get_for_model(Image),
-            object_id=image.pk)
+
+        try:
+            solution, created = Solution.objects.get_or_create(
+                content_type=ContentType.objects.get_for_model(Image),
+                object_id=image.pk)
+        except Solution.MultipleObjectsReturned:
+            solution = Solution.objects.filter(
+                content_type=ContentType.objects.get_for_model(Image),
+                object_id=image.pk).order_by('-pk')[0]
+            Solution.objects.filter(
+                content_type=ContentType.objects.get_for_model(Image),
+                object_id=image.pk).exclude(pk=solution.pk).delete()
     else:
         url = reverse('image_edit_platesolving_settings', args=(image.get_id(), revision_label,))
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
@@ -1794,7 +1806,7 @@ def user_profile_flickr_import(request):
                                   user=request.user,
                                   title=title if title is not None else '',
                                   description=description if description is not None else '',
-                                  subject_type=600,  # Default to Other only when doing a Flickr import
+                                  subject_type=SubjectType.OTHER,
                                   is_wip=True,
                                   license=profile.default_license)
                     image.save(keep_deleted=True)
@@ -2562,12 +2574,9 @@ def gear_by_image(request, image_id):
     if image.user != request.user:
         return HttpResponseForbidden()
 
-    attrs = ('imaging_telescopes', 'guiding_telescopes', 'mounts',
-             'imaging_cameras', 'guiding_cameras', 'focal_reducers',
-             'software', 'filters', 'accessories',)
     response_dict = {}
 
-    for attr in attrs:
+    for attr in GearService.get_legacy_gear_usage_classes():
         ids = [int(x) for x in getattr(image, attr).all().values_list('id', flat=True)]
         response_dict[attr] = ids
 
@@ -2624,3 +2633,23 @@ def get_makes_by_type(request, klass):
     return HttpResponse(
         simplejson.dumps(ret),
         content_type='application/javascript')
+
+
+def serve_file_from_cdn(file_path):
+    def view(request):
+        cdn_url = f'{settings.MEDIA_URL}{file_path}'
+
+        try:
+            response = UtilsService.http_with_retries(cdn_url, stream=True)
+            response.raise_for_status()
+        except requests.RequestException as e:
+            # Handle any exceptions (e.g., file not found, server error)
+            return HttpResponse(str(e), status=500)
+
+        # Set up Django response with the same content type and content
+        django_response = HttpResponse(response.content, content_type=response.headers['Content-Type'])
+        django_response['Content-Disposition'] = f'attachment; filename="{file_path}"'
+
+        return django_response
+
+    return view

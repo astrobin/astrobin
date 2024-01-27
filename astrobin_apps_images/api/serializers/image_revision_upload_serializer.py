@@ -21,6 +21,7 @@ class ImageRevisionUploadSerializer(serializers.HyperlinkedModelSerializer):
             'title',
             'description',
             'skip_notifications',
+            'skip_activity_stream',
             'label',
             'is_final',
             'w',

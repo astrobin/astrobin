@@ -101,6 +101,53 @@ def get_client_country_code(request) -> str:
         return default_country
 
 
+def get_currency_code(country_code: str) -> str:
+    euro_countries = [
+        'AT',  # Austria
+        'BE',  # Belgium
+        'CY',  # Cyprus
+        'HR',  # Croatia
+        'EE',  # Estonia
+        'FI',  # Finland
+        'FR',  # France
+        'DE',  # Germany
+        'GR',  # Greece
+        'IE',  # Ireland
+        'IT',  # Italy
+        'LV',  # Latvia
+        'LT',  # Lithuania
+        'LU',  # Luxembourg
+        'MT',  # Malta
+        'NL',  # Netherlands
+        'PT',  # Portugal
+        'SK',  # Slovakia
+        'SI',  # Slovenia
+        'ES',  # Spain
+        # Non-EU countries that have adopted the Euro
+        'AD',  # Andorra
+        'MC',  # Monaco
+        'SM',  # San Marino
+        'VA',  # Vatican City
+        'ME',  # Montenegro
+        'XK'  # Kosovo
+    ]
+
+    currency_country_map = {
+        'EUR': euro_countries,
+        'CHF': ['CH',],
+        'GBP': ['GB',],
+        'AUD': ['AU',],
+        'CAD': ['CA',],
+        'CNY': ['CN',],
+    }
+
+    for currency, countries in currency_country_map.items():
+        if country_code.upper() in countries:
+            return currency
+
+    return 'USD'
+
+
 def get_gdpr_country_codes() -> List[str]:
     return [
         'AT',  # Austria
@@ -207,7 +254,7 @@ def get_image_resolution(image):
         w, h = image.w, image.h
         if not (w and h):
             w, h = get_image_dimensions(image.image_file)
-    except (FileNotFoundError, TypeError) as e:
+    except (FileNotFoundError, TypeError, ValueError) as e:
         # This might happen in unit tests
         logger.warning("utils.get_image_resolution: unable to get image dimensions for %d: %s" % (image.pk, str(e)))
         w, h = 0, 0
@@ -254,6 +301,14 @@ def number_unit_decimals_html(value, unit, precision, must_be_less_than=None):
     return value
 
 def decimal_to_hours_minutes_seconds(value):
+    if value is None:
+        return 0, 0, 0
+
+    try:
+        value = float(value)
+    except ValueError:
+        return 0, 0, 0
+
     value = abs(value)
     hours = int(value / 15)
     minutes = int(((value / 15) - hours) * 60)
@@ -262,6 +317,14 @@ def decimal_to_hours_minutes_seconds(value):
     return hours, minutes, seconds
 
 def decimal_to_hours_minutes_seconds_string(value, hour_symbol="h", minute_symbol="m", second_symbol="s", precision=0):
+    if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
+        return ""
+
     hours, minutes, seconds = decimal_to_hours_minutes_seconds(value)
     is_positive = value >= 0
     seconds = number_unit_decimals(seconds, second_symbol, precision, must_be_less_than=60)
@@ -270,6 +333,14 @@ def decimal_to_hours_minutes_seconds_string(value, hour_symbol="h", minute_symbo
 
 
 def decimal_to_hours_minutes_seconds_html(value, hour_symbol="h", minute_symbol="m", second_symbol="s", precision=0):
+    if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
+        return ""
+
     hours, minutes, seconds = decimal_to_hours_minutes_seconds(value)
     is_positive = value >= 0
     seconds = number_unit_decimals_html(seconds, second_symbol, precision, must_be_less_than=60)
@@ -281,6 +352,14 @@ def decimal_to_hours_minutes_seconds_html(value, hour_symbol="h", minute_symbol=
 
 
 def decimal_to_degrees_minutes_seconds(value):
+    if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
+        return ""
+
     value = abs(value)
     minutes, seconds = divmod(value * 3600, 60)
     degrees, minutes = divmod(minutes, 60)
@@ -288,6 +367,14 @@ def decimal_to_degrees_minutes_seconds(value):
     return degrees, minutes, seconds
 
 def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_symbol="&prime;", second_symbol="&Prime;", precision=0):
+    if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
+        return ""
+
     is_positive = value >= 0
     degrees, minutes, seconds = decimal_to_degrees_minutes_seconds(value)
     seconds = number_unit_decimals(seconds, second_symbol, precision, must_be_less_than=60)
@@ -296,6 +383,14 @@ def decimal_to_degrees_minutes_seconds_string(value, degree_symbol="°", minute_
 
 
 def decimal_to_degrees_minutes_seconds_html(value, degree_symbol="°", minute_symbol="′", second_symbol="″", precision=0):
+    if value is None:
+        return ""
+
+    try:
+        value = float(value)
+    except ValueError:
+        return ""
+
     is_positive = value >= 0
     degrees, minutes, seconds = decimal_to_degrees_minutes_seconds(value)
     seconds = number_unit_decimals_html(seconds, second_symbol, precision, must_be_less_than=60)

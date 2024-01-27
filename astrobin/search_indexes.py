@@ -20,6 +20,7 @@ from safedelete.models import SafeDeleteModel
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition, Camera as LegacyCamera
+from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import Camera
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
@@ -630,6 +631,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     countries = CharField()
 
     animated = BooleanField(model_attr='animated')
+    video = BooleanField()
 
     likes = IntegerField()
     liked_by = MultiValueField()
@@ -974,6 +976,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_field_radius(self, obj):
         return obj.solution.radius if obj.solution else None
 
+    def prepare_video(self, obj):
+        return obj.video_file.name is not None and obj.video_file.name != ''
+
     def prepare_likes(self, obj):
         return _prepare_likes(obj)
 
@@ -1040,8 +1045,18 @@ class ImageIndex(CelerySearchIndex, Indexable):
             not IotdService().is_iotd(obj)
 
     def prepare_objects_in_field(self, obj):
-        return ' '.join(SolutionService(obj.solution).duplicate_objects_in_field_by_catalog_space()) \
-            if obj.solution else None
+        if not obj.solution or not obj.solution.objects_in_field:
+            return None
+
+        objects = ' '.join(SolutionService(obj.solution).duplicate_objects_in_field_by_catalog_space()).strip()
+
+        for x in obj.solution.objects_in_field.split(','):
+            synonyms = UtilsService.get_search_synonyms_text(x.strip())
+            if synonyms:
+                objects = f'{objects} {" ".join(synonyms.split(","))}'.strip()
+
+        return objects
+
 
     def prepare_countries(self, obj):
         # Escape with __ because for whatever reason some country codes don't work, including IT.

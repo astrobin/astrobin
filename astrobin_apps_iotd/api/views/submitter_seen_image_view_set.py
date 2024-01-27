@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.db import IntegrityError
 from django.db.models import QuerySet
 from django.http import HttpResponseForbidden
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -48,6 +49,8 @@ class SubmitterSeenImageViewSet(viewsets.ModelViewSet):
                 return Response(self.serializer_class(seen_object).data, status=200)
 
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
+        except IntegrityError:
+            return Response(status=204)
         except Exception as e:
             return HttpResponseForbidden(str(e))
 

@@ -188,7 +188,11 @@ class UserService:
             data = {}
 
             if user_sqs.count() > 0:
-                result = user_sqs[0]
+                try:
+                    result = user_sqs[0]
+                except IndexError:
+                    log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
+                    data = {}
 
                 try:
                     data['stats'] = (
@@ -391,6 +395,7 @@ class UserService:
                                 SubjectType.STAR_TRAILS,
                                 SubjectType.NORTHERN_LIGHTS,
                                 SubjectType.NOCTILUCENT_CLOUDS,
+                                SubjectType.LANDSCAPE,
                                 SubjectType.OTHER
                             )
                         ) &
@@ -442,7 +447,15 @@ class UserService:
 
             if active == '0':
                 queryset = queryset.filter(
-                    (Q(subject_type=SubjectType.DEEP_SKY) | Q(subject_type=SubjectType.SOLAR_SYSTEM)) &
+                    (
+                            Q(subject_type=SubjectType.DEEP_SKY) |
+                            Q(subject_type=SubjectType.SOLAR_SYSTEM) |
+                            Q(subject_type=SubjectType.WIDE_FIELD) |
+                            Q(subject_type=SubjectType.NORTHERN_LIGHTS) |
+                            Q(subject_type=SubjectType.NOCTILUCENT_CLOUDS) |
+                            Q(subject_type=SubjectType.LANDSCAPE) |
+                            Q(subject_type=SubjectType.STAR_TRAILS)
+                    ) &
                     (Q(imaging_telescopes=None) | Q(imaging_cameras=None))
                 ).distinct()
             elif active == '-1':
@@ -486,6 +499,7 @@ class UserService:
             menu += [('TRAILS', _("Star trails"))]
             menu += [('NORTHERN_LIGHTS', _("Northern lights"))]
             menu += [('NOCTILUCENT_CLOUDS', _("Noctilucent clouds"))]
+            menu += [('LANDSCAPE', _("Landscape"))]
             menu += [('GEAR', _("Gear"))]
             menu += [('OTHER', _("Other"))]
 
@@ -510,6 +524,9 @@ class UserService:
             elif active == 'NOCTILUCENT_CLOUDS':
                 queryset = queryset.filter(subject_type=SubjectType.NOCTILUCENT_CLOUDS)
 
+            elif active == 'LANDSCAPE':
+                queryset = queryset.filter(subject_type=SubjectType.LANDSCAPE)
+
             elif active == 'GEAR':
                 queryset = queryset.filter(subject_type=SubjectType.GEAR)
 
@@ -520,7 +537,10 @@ class UserService:
         # CONSTELLATION #
         #################
         elif subsection == 'constellation':
-            queryset = queryset.filter(subject_type=SubjectType.DEEP_SKY)
+            queryset = queryset.filter(
+                Q(subject_type=SubjectType.DEEP_SKY) |
+                Q(subject_type=SubjectType.WIDE_FIELD)
+            )
 
             images_by_constellation = {
                 'n/a': []
@@ -575,6 +595,7 @@ class UserService:
                             SubjectType.STAR_TRAILS,
                             SubjectType.NORTHERN_LIGHTS,
                             SubjectType.NOCTILUCENT_CLOUDS,
+                            SubjectType.LANDSCAPE,
                         )
                     ) &
                     (
@@ -593,6 +614,7 @@ class UserService:
                             SubjectType.STAR_TRAILS,
                             SubjectType.NORTHERN_LIGHTS,
                             SubjectType.NOCTILUCENT_CLOUDS,
+                            SubjectType.LANDSCAPE,
                         )
                     ) &
                     Q(acquisition=None)

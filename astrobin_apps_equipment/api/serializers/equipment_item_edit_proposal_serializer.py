@@ -1,13 +1,7 @@
-from annoying.functions import get_object_or_None
-from django.contrib.auth.models import User
 from rest_framework import fields
-from rest_framework.exceptions import ValidationError
 
 from astrobin_apps_equipment.api.serializers.equipment_item_serializer import EquipmentItemSerializer
-from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.services import EquipmentItemService
-from common.constants import GroupName
-from common.exceptions import Conflict
 
 
 class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
@@ -32,10 +26,12 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
             'name',
             'community_notes',
             'website',
-            'image',
             'variant_of',
         ]
-        read_only_fields = ['image']
+        read_only_fields = [
+            'image',
+            'thumbnail',
+        ]
         abstract = True
 
     def validate(self, attrs):

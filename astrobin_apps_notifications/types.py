@@ -268,6 +268,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_forum_reply_started_topic',
+        _('New reply in a forum topic that you started'),
+        '',
+        2,
+    ),
+    (
         'new_forum_post_mention',
         _('You were mentioned in a forum post'),
         '',

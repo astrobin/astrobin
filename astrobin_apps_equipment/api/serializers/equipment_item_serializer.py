@@ -101,12 +101,14 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             'brand_name',
             'name',
             'website',
-            'image',
             'variant_of',
             'followed',
             'content_type',
         ]
-        read_only_fields = ['image']
+        read_only_fields = [
+            'image',
+            'thumbnail',
+        ]
         abstract = True
 
     def validate(self, attrs):

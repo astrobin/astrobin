@@ -53,11 +53,18 @@
     {% if request.user == image.user or request.user.is_superuser %}
         <div class="row-fluid download-original-file">
             <div class="span12">
-                <strong>{% trans "Download original file" %}</strong>:
-
-                <a href="{{ download_original_url }}" target="_blank">
-                    {% private_abbr %} {% trans "Download" %}
-                </a>
+                <div>
+                    <strong>{% trans "Download original file" %}</strong>:
+                    <a href="{{ download_original_url }}" target="_blank">
+                        {% private_abbr %} {% trans "Download" %}
+                    </a>
+                </div>
+                {% if image.uploader_name %}
+                    <div>
+                        <strong>{% trans "Original filename" %}</strong>:
+                        {{ image.uploader_name }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     {% endif %}

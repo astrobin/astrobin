@@ -9,7 +9,7 @@
         <input type="hidden" name="d" value="f" />
     </form>
 
-    {% if forum %}
+    {% if forum and forum.slug != 'equipment' %}
         {% if request.user|pybb_may_create_topic:forum %}
             <a class="btn btn-primary" href="{% url 'pybb:add_topic' forum.id %}">
                 <i class="icon-plus icon-white"></i>

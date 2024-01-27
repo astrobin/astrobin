@@ -1,0 +1,6 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ user }} replied in a topic that you started
+{% endblocktrans %}
+

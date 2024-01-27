@@ -25,7 +25,14 @@ class CollectionUpdateForm(forms.ModelForm):
             .values_list("key", flat=True)
 
         self.fields['order_by_tag'].choices = NULL_CHOICE + [(x, x) for x in tag_keys]
+        self.fields['parent'].queryset = Collection.objects.filter(
+            user=self.instance.user
+        ).exclude(
+            pk=self.instance.pk
+        ).order_by(
+            'name'
+        )
 
     class Meta:
         model = Collection
-        fields = ('name', 'description', 'cover', 'order_by_tag')
+        fields = ('name', 'description', 'parent', 'cover', 'order_by_tag')

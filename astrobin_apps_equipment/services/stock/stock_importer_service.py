@@ -48,7 +48,7 @@ class StockImporterService:
             equipment_item_model_class: Model = content_type_map[stock_item.klass].model_class()
             try:
                 # Just to check if the item exists.
-                equipment_item_model_class.objects.get(pk=stock_item.pk)
+                item = equipment_item_model_class.objects.get(pk=stock_item.pk)
             except equipment_item_model_class.DoesNotExist:
                 log.error(f"Unable to find equipment item of class {stock_item.klass} and pk {stock_item.pk}")
                 continue
@@ -69,6 +69,7 @@ class StockImporterService:
                 log.debug(f'Updating item listing {listing.pk}')
 
                 EquipmentItemListing.objects.filter(pk=listing.pk).update(
+                    item_full_name=str(item),
                     name=stock_item.name,
                     sku=stock_item.sku,
                     url=url,
@@ -83,6 +84,7 @@ class StockImporterService:
                     retailer=retailer,
                     item_content_type=content_type_map[stock_item.klass],
                     item_object_id=stock_item.pk,
+                    item_full_name=str(item),
                     name=stock_item.name,
                     sku=stock_item.sku,
                     url=url,

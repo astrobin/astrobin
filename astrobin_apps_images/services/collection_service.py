@@ -1,3 +1,5 @@
+from typing import Set
+
 from django.db.models import QuerySet
 from django.utils import timezone
 
@@ -24,4 +26,13 @@ class CollectionService(object):
         self.collection.images.remove(*removed)
         self.collection.images.add(*added)
 
+    def get_descendant_collections(self, descendants=None) -> Set[Collection]:
+        if descendants is None:
+            descendants = set()
 
+        descendants.add(self.collection)
+
+        for child in self.collection.children.all():
+            CollectionService(child).get_descendant_collections(descendants)
+
+        return descendants

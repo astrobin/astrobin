@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.db import IntegrityError
 from django.db.models import Q, QuerySet
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page, cache_control
@@ -71,7 +72,10 @@ class TogglePropertyList(generics.ListCreateAPIView):
     filter_fields = ['property_type', 'object_id', 'content_type', 'user_id']
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        try:
+            serializer.save(user=self.request.user)
+        except IntegrityError:
+            raise ValidationError('This toggle property already exists')
 
 
 class TogglePropertyDetail(generics.RetrieveDestroyAPIView):

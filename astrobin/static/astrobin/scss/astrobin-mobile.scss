@@ -241,6 +241,16 @@
       }
     }
   }
+
+  .collections {
+    > .collection {
+      width: 158px;
+
+      > .collection-tools {
+        width: 113px;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {

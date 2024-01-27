@@ -37,7 +37,7 @@ class TasksTest(TestCase):
         image = Generators.image(user=user, is_wip=True)
         image.imaging_telescopes_2.add(telescope)
 
-        ImageService(image).promote_to_public_area(skip_notifications=False)
+        ImageService(image).promote_to_public_area(skip_notifications=False, skip_activity_stream=False)
         image.save()
 
         push_notification.assert_has_calls([
@@ -66,7 +66,7 @@ class TasksTest(TestCase):
         image = Generators.image(user=user, is_wip=True)
         image.imaging_telescopes_2.add(telescope)
 
-        ImageService(image).promote_to_public_area(skip_notifications=False)
+        ImageService(image).promote_to_public_area(skip_notifications=False, skip_activity_stream=False)
         image.save()
 
         self.assertEquals(push_notification.call_count, 1)
@@ -95,7 +95,7 @@ class TasksTest(TestCase):
         image.imaging_telescopes_2.add(telescope)
         image.collaborators.add(collaborator)
 
-        ImageService(image).promote_to_public_area(skip_notifications=False)
+        ImageService(image).promote_to_public_area(skip_notifications=False, skip_activity_stream=False)
         image.save()
 
         self.assertEquals(push_notification.call_count, 1)
@@ -124,7 +124,7 @@ class TasksTest(TestCase):
         image.imaging_telescopes_2.add(telescope)
         image.guiding_telescopes_2.add(telescope)
 
-        ImageService(image).promote_to_public_area(skip_notifications=False)
+        ImageService(image).promote_to_public_area(skip_notifications=False, skip_activity_stream=False)
         image.save()
 
         self.assertEquals(push_notification.call_count, 2)
@@ -162,7 +162,7 @@ class TasksTest(TestCase):
         image.imaging_telescopes_2.add(telescope)
         image.imaging_cameras_2.add(camera)
 
-        ImageService(image).promote_to_public_area(skip_notifications=False)
+        ImageService(image).promote_to_public_area(skip_notifications=False, skip_activity_stream=False)
         image.save()
 
         self.assertEquals(push_notification.call_count, 2)
@@ -196,7 +196,7 @@ class TasksTest(TestCase):
 
         image = Generators.image(user=user, is_wip=True)
         image.collaborators.add(collaborator)
-        ImageService(image).promote_to_public_area(skip_notifications=False)
+        ImageService(image).promote_to_public_area(skip_notifications=False, skip_activity_stream=False)
         image.save()
 
         push_notification.assert_has_calls(
@@ -233,7 +233,7 @@ class TasksTest(TestCase):
 
         image = Generators.image(user=user, is_wip=True)
         image.collaborators.add(collaborator1)
-        ImageService(image).promote_to_public_area(skip_notifications=False)
+        ImageService(image).promote_to_public_area(skip_notifications=False, skip_activity_stream=False)
         image.save()
 
         push_notification.assert_called_with([follower], user, 'new_image', mock.ANY)

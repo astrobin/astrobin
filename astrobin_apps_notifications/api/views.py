@@ -89,7 +89,13 @@ class NoticeSettingViewSet(viewsets.ModelViewSet):
         notice_types = NoticeType.objects.all()
         for notice_type in notice_types:
             for medium_id, medium_display in NOTICE_MEDIA:
-                # This will create it with default values if it doesn't exist.
-                NoticeSetting.for_user(self.request.user, notice_type, medium_id)
+                try:
+                    # This will create it with default values if it doesn't exist.
+                    NoticeSetting.for_user(self.request.user, notice_type, medium_id)
+                except NoticeSetting.MultipleObjectsReturned:
+                    NoticeSetting.objects.filter(
+                        user=self.request.user, notice_type=notice_type, medium=medium_id
+                    ).delete()
+                    NoticeSetting.for_user(self.request.user, notice_type, medium_id)
 
         return NoticeSetting.objects.filter(user=self.request.user)

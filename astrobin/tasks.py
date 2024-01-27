@@ -46,12 +46,13 @@ from requests import Response
 
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import (
-    BroadcastEmail, CameraRenameProposal, DataDownloadRequest, Gear, GearMigrationStrategy,
-    Image, ImageRevision, UserProfile,
+    BroadcastEmail, CameraRenameProposal, DataDownloadRequest, DeepSky_Acquisition, Gear, GearMigrationStrategy,
+    Image, ImageRevision, SolarSystem_Acquisition, UserProfile,
 )
 from astrobin.services import CloudflareService
 from astrobin.services.cloudfront_service import CloudFrontService
 from astrobin.services.gear_service import GearService
+from astrobin.services.utils_service import UtilsService
 from astrobin.sitemaps.accessory_sitemap import AccessorySitemap
 from astrobin.sitemaps.camera_sitemap import CameraSitemap
 from astrobin.sitemaps.filter_sitemap import FilterSitemap
@@ -486,6 +487,7 @@ def prepare_download_data_archive(request_id):
                 'is_final',
                 'allow_comments',
                 'mouse_hover_image',
+                'acquisition_details',
                 'ra',
                 'dec',
                 'pixel_scale',
@@ -509,13 +511,13 @@ def prepare_download_data_archive(request_id):
                 title = slugify(image.title)  # type: str
                 path = ntpath.basename(image.image_file.name)  # type: str
 
-                response = requests.get(image.image_file.url, verify=False)  # type: Response
+                response = UtilsService.http_with_retries(image.image_file.url)
                 if response.status_code == 200:
                     archive.writestr("%s-%s/%s" % (id, title, path), response.content)
                     logger.debug("prepare_download_data_archive: image %s = written" % id)
 
                 if image.solution and image.solution.image_file:
-                    response = requests.get(image.solution.image_file.url, verify=False)  # type: Response
+                    response = UtilsService.http_with_retries(image.solution.image_file.url)
                     if response.status_code == 200:
                         path = ntpath.basename(image.solution.image_file.name)  # type: str
                         archive.writestr("%s-%s/solution/%s" % (id, title, path), response.content)
@@ -532,13 +534,13 @@ def prepare_download_data_archive(request_id):
 
                         logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
 
-                        response = requests.get(revision.image_file.url, verify=False)  # type: Response
+                        response = UtilsService.http_with_retries(revision.image_file.url)
                         if response.status_code == 200:
                             archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
                             logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
 
                         if revision.solution and image.solution.image_file:
-                            response = requests.get(revision.solution.image_file.url, verify=False)  # type: Response
+                            response = UtilsService.http_with_retries(revision.solution.image_file.url)
                             if response.status_code == 200:
                                 path = ntpath.basename(revision.solution.image_file.name)  # type: str
                                 archive.writestr(
@@ -657,6 +659,24 @@ def prepare_download_data_archive(request_id):
                 image.allow_comments,
                 image.mouse_hover_image
             ]
+
+            has_deep_sky_acquisition = DeepSky_Acquisition.objects.filter(image=image).exists()
+            has_solar_system_acquisitions = SolarSystem_Acquisition.objects.filter(image=image).exists()
+
+            if has_deep_sky_acquisition:
+                row_data += [
+                    '\n'.join(
+                        f'{x[0]}: {x[1]}' for x in ImageService(image).get_deep_sky_acquisition_text()
+                        if x[1] is not None
+                    )
+                ]
+            elif has_solar_system_acquisitions:
+                row_data += [
+                    '\n'.join(
+                        f'{x[0]}: {x[1]}' for x in ImageService(image).get_solar_system_acquisition_text()
+                        if x[1] is not None
+                    )
+                ]
 
             if image.solution:
                 row_data += \

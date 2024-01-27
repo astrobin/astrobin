@@ -27,6 +27,7 @@ from rest_framework import permissions
 from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin.models import DeepSky_Acquisition
+from astrobin.services.utils_service import UtilsService
 from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.api_filters.advanced_task_filter import AdvancedTaskFilter
@@ -61,7 +62,7 @@ class SolveView(base.View):
             solution.settings = settings
             Solution.objects.filter(pk=solution.pk).update(settings=settings)
 
-        if solution.submission_id is None:
+        if solution.submission_id is None or solution.submission_id == 0:
             solver = Solver()
 
             try:
@@ -252,13 +253,15 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
         if status == Solver.SUCCESS:
             info = solver.info(solution.submission_id)
 
-            solution.objects_in_field = ', '.join(info['objects_in_field'])
+            if 'objects_in_field' in info:
+                solution.objects_in_field = ', '.join(info['objects_in_field'])
 
-            solution.ra = "%.3f" % info['calibration']['ra']
-            solution.dec = "%.3f" % info['calibration']['dec']
-            solution.orientation = "%.3f" % info['calibration']['orientation']
-            solution.radius = "%.3f" % info['calibration']['radius']
-            solution.pixscale = "%.3f" % info['calibration']['pixscale']
+            if 'calibration' in info:
+                solution.ra = "%.3f" % info['calibration']['ra']
+                solution.dec = "%.3f" % info['calibration']['dec']
+                solution.orientation = "%.3f" % info['calibration']['orientation']
+                solution.radius = "%.3f" % info['calibration']['radius']
+                solution.pixscale = "%.3f" % info['calibration']['pixscale']
 
             try:
                 target = solution.content_type.get_object_for_this_type(pk=solution.object_id)
@@ -292,15 +295,21 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
             # Get sky plot image
             url = solver.sky_plot_zoom1_image_url(solution.submission_id)
             if url:
-                img = NamedTemporaryFile(delete=True)
-                img.write(urllib.request.urlopen(url).read())
-                img.flush()
-                img.seek(0)
-                f = File(img)
                 try:
-                    solution.skyplot_zoom1.save(target.image_file.name, f)
-                except IntegrityError:
+                    img = NamedTemporaryFile()
+                    data = UtilsService.http_with_retries(url)
+                    img.write(data.content)
+                    img.flush()
+                    img.seek(0)
+                    f = File(img)
+                    try:
+                        solution.skyplot_zoom1.save(target.image_file.name, f)
+                    except IntegrityError:
+                        pass
+                except urllib.error.URLError:
+                    log.error("Error downloading sky plot image: %s" % url)
                     pass
+
 
         solution.status = status
         solution.save()

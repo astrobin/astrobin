@@ -35,36 +35,6 @@
       return rv;
     }
 
-    {% if request.user.is_authenticated %}
-        {% if not request|is_gdpr_country or request|cookie_group_accepted:'analytics' %}
-            {% cache 600 hotjar_identify user.id request.LANGUAGE_CODE %}
-                function initHotjarIdentify() {
-                    if (window.hj !== undefined) {
-                        const userId = "{{ request.user.id }}";
-
-                        window.hj("identify", userId, {
-                            "Registration date": new Date("{{ request.user.date_joined|date:"Y-m-d" }}").toISOString(),
-                            "Language": "{{ request.LANGUAGE_CODE }}",
-                            "Country": "{{ REQUEST_COUNTRY }}",
-                            "Images": {{ request.user.image_set.count }},
-                            "Is Free": "{{ valid_usersubscription|is_free }}" === "True",
-                            "Is Lite": "{{ valid_usersubscription|is_any_lite }}" === "True",
-                            "Is Premium": "{{ valid_usersubscription|is_any_premium }}" === "True",
-                            "Is Ultimate": "{{ valid_usersubscription|is_any_ultimate }}" === "True",
-                            "Is IOTD Staff": "{{ request.user|is_in_group:"iotd_staff" }}" === "True"
-                        });
-                    } else {
-                        setTimeout(function() {
-                            initHotjarIdentify();
-                        }, 500);
-                    }
-                }
-            {% endcache %}
-
-            initHotjarIdentify();
-        {% endif %}
-    {% endif %}
-
     var dictionary = {
         'Cancel': '{% trans "Cancel" %}'
     };

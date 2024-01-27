@@ -1,4 +1,5 @@
 from typing import List
+from urllib.parse import urlparse
 
 import simplejson
 from annoying.functions import get_object_or_None
@@ -7,6 +8,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.db.models import Q, QuerySet
 from django.forms.utils import ErrorList
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
@@ -81,6 +83,10 @@ class UserCollectionsList(UserCollectionsBase, ListView):
     template_name = 'user_collections_list.html'
     context_object_name = 'collections_list'
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(parent__isnull=True)
+
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsList, self).get_context_data(**kwargs)
 
@@ -93,6 +99,15 @@ class UserCollectionsBaseEdit(LoginRequiredMixin, UserCollectionsBase, View):
     def form_valid(self, form):
         collection = form.save(commit=False)
         collection.user = self.request.user
+
+        # Detect cycles
+        x = collection.parent
+        while x:
+            if x == collection:
+                form._errors["parent"] = ErrorList([_("Setting this collection as a parent would create a cycle")])
+                return self.form_invalid(form)
+            x = x.parent
+
         try:
             return super(UserCollectionsBaseEdit, self).form_valid(form)
         except IntegrityError:
@@ -105,10 +120,36 @@ class UserCollectionsCreate(
     form_class = CollectionCreateForm
     template_name = 'user_collections_create.html'
 
+    def _get_referrer_collection_id(self):
+        referrer = self.request.META.get('HTTP_REFERER')
+
+        if referrer:
+            path = urlparse(referrer).path
+            path_parts = [part for part in path.split('/') if part]
+            collection_id = path_parts[-1] if path_parts[-1].isdigit() else None
+            return collection_id
+
+        return None
+
     def get_form_kwargs(self):
         kwargs = super(UserCollectionsCreate, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})
+
+        referrer_collection_id = self._get_referrer_collection_id()
+        if referrer_collection_id:
+            kwargs.update({'initial': {'parent': referrer_collection_id}})
+
         return kwargs
+
+    def get_success_url(self) -> str:
+        collection = self.object
+        if collection.parent:
+            return reverse_lazy(
+                'user_collections_detail',
+                args=(collection.parent.user.username, collection.parent.pk,)
+            )
+
+        return super().get_success_url()
 
 
 class UserCollectionsUpdate(
@@ -121,7 +162,14 @@ class UserCollectionsUpdate(
 
     def get_form(self, form_class=None):
         form = super(UserCollectionsUpdate, self).get_form(form_class)
-        form.fields['cover'].queryset = Collection.objects.get(pk=self.kwargs['collection_pk']).images.all()
+        descendants = CollectionService(self.object).get_descendant_collections()
+
+        image_queryset = Image.objects.none()
+        for collection in descendants:
+            image_queryset = image_queryset | collection.images.all()
+
+        form.fields['cover'].queryset = image_queryset.distinct()
+
         return form
 
     def get_success_url(self):
@@ -147,8 +195,10 @@ class UserCollectionsAddRemoveImages(
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsAddRemoveImages, self).get_context_data(**kwargs)
         user = get_object_or_None(User, username=self.kwargs.get('username'))
-        context['images'] = UserService(user).get_public_images()
-        context['images_pk_in_collection'] = [x.pk for x in self.get_object().images.all()]
+        context['images'] = UserService(user).get_all_images()
+        context['images_pk_in_collection'] = [
+            x.pk for x in Image.objects_including_wip.filter(collections=self.get_object())
+        ]
         return context
 
     def get_success_url(self):
@@ -158,13 +208,26 @@ class UserCollectionsAddRemoveImages(
         if request.is_ajax():
             collection: Collection = self.get_object()
             image_pks: List[int] = request.POST.getlist('images[]')
+            images: QuerySet = Image.objects_including_wip.filter(
+                Q(Q(user=request.user) | Q(collaborators=request.user)) &
+                Q(pk__in=image_pks)
+            )
 
-            CollectionService(collection).add_remove_images(Image.objects.filter(pk__in=image_pks))
+            CollectionService(collection).add_remove_images(images)
 
             messages.success(request, _("Collection updated!"))
 
+            if images.filter(is_wip=True).exists():
+                messages.warning(
+                    request,
+                    _("Please note: some of the images you added are in your staging area and won't be visible to "
+                      "visitors of this collection.")
+                )
+
             return self.render_json_response({
-                'images': ','.join([str(x.pk) for x in self.get_object().images.all()]),
+                'images': ','.join(
+                    [str(x.pk) for x in Image.objects_including_wip.filter(collections=self.get_object())]
+                ),
             })
         else:
             return super(UserCollectionsAddRemoveImages, self).post(request, *args, **kwargs)
@@ -180,7 +243,7 @@ class UserCollectionsQuickEditKeyValueTags(
 
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsQuickEditKeyValueTags, self).get_context_data(**kwargs)
-        context['images'] = self.get_object().images.all()
+        context['images'] = Image.objects_including_wip.filter(collections=self.get_object())
         return context
 
     def get_success_url(self):
@@ -189,12 +252,12 @@ class UserCollectionsQuickEditKeyValueTags(
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             for data in simplejson.loads(request.POST.get('imageData')):
-                image = Image.objects.get(pk=data['image_pk'])
+                image = Image.objects_including_wip.get(pk=data['image_pk'])
                 try:
                     parsed = parseKeyValueTags(data['value'])
                     image.keyvaluetags.all().delete()
                     for tag in parsed:
-                        KeyValueTag.objects.create(
+                        KeyValueTag.objects.get_or_create(
                             image=image,
                             key=tag["key"],
                             value=tag["value"]
@@ -212,7 +275,9 @@ class UserCollectionsQuickEditKeyValueTags(
             messages.success(request, _("Images updated!"))
 
             return self.render_json_response({
-                'images': ','.join([str(x.pk) for x in self.get_object().images.all()]),
+                'images': ','.join(
+                    [str(x.pk) for x in Image.objects_including_wip.filter(collections=self.get_object())]
+                ),
             })
         else:
             return super(UserCollectionsQuickEditKeyValueTags, self).post(request, *args, **kwargs)
@@ -238,21 +303,35 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
     pk_url_kwarg = 'collection_pk'
     context_object_name = 'collection'
 
+    def dispatch(self, request, *args, **kwargs):
+        response = super(UserCollectionsDetail, self).dispatch(request, *args, **kwargs)
+        request.collection = self.object
+        return response
+
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsDetail, self).get_context_data(**kwargs)
 
-        image_list = self.object.images
+        image_list = Image.objects_including_wip.filter(
+            collections=self.object
+        )
         not_matching_tag = None
 
         if self.object.order_by_tag:
             image_list = image_list \
                 .filter(keyvaluetags__key=self.object.order_by_tag) \
                 .order_by("keyvaluetags__value")
-            not_matching_tag = self.object.images \
+            not_matching_tag = Image.objects_including_wip.filter(collections=self.object) \
                 .exclude(keyvaluetags__key=self.object.order_by_tag)
 
-        context['image_list'] = image_list.all() if image_list else None
-        context['not_matching_tag'] = not_matching_tag.all() if not_matching_tag else None
+        if self.request.user != self.object.user:
+            image_list = image_list.filter(is_wip=False)
+            if not_matching_tag:
+                not_matching_tag = not_matching_tag.filter(is_wip=False)
+
+        context['image_list'] = image_list
+        context['not_matching_tag'] = not_matching_tag
+        context['image_list_count'] = image_list.count()
+        context['not_matching_tag_count'] = not_matching_tag.count() if not_matching_tag else 0
         context['alias'] = 'gallery'
         context['paginate_by'] = settings.PAGINATE_USER_PAGE_BY
         return context

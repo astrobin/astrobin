@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load bootstrap_toolkit %}
+{% load common_tags %}
 
 {% block title %}
     {% trans "Edit collection" %}
@@ -17,10 +18,17 @@
 {% block collections_content %}
     <form class="form-horizontal" action="{{request.path}}?next={{request.GET.next}}" method="post">
         {% csrf_token %}
+    
         {{form|as_bootstrap}}
+    
         <div class="form-actions">
             <input type="hidden" name="collection_pk" value="{{collection.pk}}"/>
-            <input class="btn btn-primary" type="submit" value="{% trans "Save" %}"/>
+            
+            <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                {% trans "Save" %}
+                {% button_loading_indicator %}
+            </button>
+            
             <a
                 class="btn"
                 href="

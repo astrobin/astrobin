@@ -180,15 +180,19 @@ def is_mutual_follower(a, b):
 @register.filter
 def contribution_index(user):
     cache_key = "user_contribution_index.%d" % user.pk
-    contribution_index = cache.get(cache_key)
+    index = cache.get(cache_key)
 
-    if contribution_index is None:
+    if index is None:
         results = SearchQuerySet().models(User).filter(django_id=user.pk)
         if not results.count():
             log.warning("contribution_index filter: unable to get contribution_index for user %d" % user.pk)
             return None
 
-        contribution_index = results[0].contribution_index
-        cache.set(cache_key, contribution_index, 300)
+        try:
+            index = results[0].contribution_index
+            cache.set(cache_key, index, 300)
+        except IndexError:
+            log.warning("contribution_index filter: unable to get contribution_index for user %d" % user.pk)
+            return None
 
-    return contribution_index
+    return index

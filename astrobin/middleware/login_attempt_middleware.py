@@ -56,6 +56,9 @@ class LoginAttemptMiddleware(MiddlewareParentClass):
             user = UserService.get_case_insensitive(handle)
         except User.DoesNotExist:
             log.debug(f'login_attempt_middleware: user with username {handle} does not exist')
+        except ValueError:
+            log.debug(f'login_attempt_middleware: user with username {handle}: ValueError')
+            return
 
         if not user:
             try:

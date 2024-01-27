@@ -154,6 +154,13 @@
                                                 {% trans "Do not notify followers" %}
                                             </label>
                                         </div>
+                                        <div class="span12">
+                                            <label for="id_skip_activity_stream">
+                                                <input type="checkbox" name="skip_activity_stream"
+                                                       id="id_skip_activity_stream" />
+                                                {% trans "Skip activity stream" %}
+                                            </label>
+                                        </div>
                                     </div>
                                 </form>
                                 <div class="progressbar"><img src="{% static 'astrobin/images/loading-bar.gif' %}"

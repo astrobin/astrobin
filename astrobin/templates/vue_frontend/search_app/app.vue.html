@@ -46,6 +46,9 @@
 
                                 <animated-filter v-if="filter.name === 'animated'"
                                                  :animated="animated"></animated-filter>
+                                
+                                <video-filter v-if="filter.name === 'video'"
+                                                 :video="video"></video-filter>
 
                                 <award-filter v-if="filter.name === 'award'" :award="award"></award-filter>
 
@@ -228,6 +231,12 @@
 
             animated:
                 {% if "animated" in request.GET %}
+                    true
+                {% else %}
+                    undefined
+                {% endif %},
+            video:
+                {% if "video" in request.GET %}
                     true
                 {% else %}
                     undefined
@@ -576,7 +585,13 @@
                 },
                 {
                     name: "animated",
-                    label: "{% trans "Only animated" %}",
+                    label: "{% trans "Only animated" %} (GIF)",
+                    removable: true,
+                    restricted: "ADVANCED"
+                },
+                {
+                    name: "video",
+                    label: "{% trans "Only videos" %}",
                     removable: true,
                     restricted: "ADVANCED"
                 },
@@ -798,6 +813,10 @@
 
             if (this.animated) {
                 this.enabledFilters.push(this.getFilterByName("animated"));
+            }
+            
+            if (this.video) {
+                this.enabledFilters.push(this.getFilterByName("video"));
             }
 
             if (this.award) {

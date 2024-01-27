@@ -1,6 +1,6 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    {{ user }} replied in topic to which you are subscribed
+    {{ user }} replied in a topic to which you are subscribed
 {% endblocktrans %}
 

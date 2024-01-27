@@ -290,7 +290,7 @@ def ensure_url_protocol(url: str) -> str:
 
 class HighlightTextNode(template.Node):
     def __init__(
-        self, text, terms, as_var=None, html_tag=None, css_class=None, max_length=None, dialect=None, allow_lists='True'
+        self, text, terms, as_var=None, html_tag=None, css_class=None, max_length=None, dialect=None, allow_lists=True
     ):
         self.text = template.Variable(text)
         self.terms = template.Variable(terms)
@@ -313,8 +313,11 @@ class HighlightTextNode(template.Node):
         if dialect is not None:
             self.dialect = template.Variable(dialect)
 
-        if allow_lists is not None:
+        if isinstance(allow_lists, str):
             self.allow_lists = template.Variable(allow_lists)
+        else:
+            # Direct value (bool or otherwise)
+            self.allow_lists = allow_lists
 
     def render(self, context) -> str:
         text = self.text.resolve(context)
@@ -334,7 +337,11 @@ class HighlightTextNode(template.Node):
             kwargs['dialect'] = self.dialect.resolve(context)
 
         if self.allow_lists is not None:
-            kwargs['allow_lists'] = self.allow_lists.resolve(context)
+            if isinstance(self.allow_lists, template.Variable):
+                kwargs['allow_lists'] = self.allow_lists.resolve(context)
+            else:
+                # Directly use the value
+                kwargs['allow_lists'] = self.allow_lists
 
         rendered_html = HighlightingService(text, terms, **kwargs).render_html()
 
@@ -518,3 +525,8 @@ class RemoveMultipleSpacesNode(Node):
     def render(self, context):
         strip_multiple_spaces = keep_lazy(six.text_type)(lambda x: re.sub(r'\s+', ' ', x))
         return strip_multiple_spaces(self.nodelist.render(context).strip())
+
+
+@register.filter
+def contains(value, arg):
+    return arg in value

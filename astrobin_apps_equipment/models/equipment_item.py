@@ -1,24 +1,35 @@
+import logging
+from io import BytesIO
+
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
+from django.core.files.base import ContentFile
 from django.db import models
-from django.db.models import SET_NULL, PROTECT
+from django.db.models import PROTECT, SET_NULL
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+from easy_thumbnails.exceptions import InvalidImageFormatError
+from easy_thumbnails.files import get_thumbnailer
 from pybb.models import Forum
 from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItemListing
 from astrobin_apps_equipment.models.equipment_item_group import (
-    EQUIPMENT_ITEM_USAGE_TYPE_CHOICES, EquipmentItemGroup,
-    EQUIPMENT_ITEM_KLASS_CHOICES,
+    EQUIPMENT_ITEM_KLASS_CHOICES, EQUIPMENT_ITEM_USAGE_TYPE_CHOICES, EquipmentItemGroup,
 )
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from common.services import AppRedirectionService
 from common.upload_paths import upload_path
 
+logger = logging.getLogger(__name__)
+
 
 def image_upload_path(instance, filename):
     return upload_path('equipment_item_images', instance.created_by.pk if instance.created_by else 0, filename)
+
+
+def thumbnail_upload_path(instance, filename):
+    return upload_path('equipment_item_thumbs', instance.created_by.pk if instance.created_by else 0, filename)
 
 
 class EquipmentItemReviewerDecision:
@@ -36,6 +47,9 @@ class EquipmentItemRejectionReason:
 
 
 class EquipmentItem(SafeDeleteModel):
+    # Flag to prevent recursive thumbnail creation
+    _creating_thumbnail = False
+
     klass = models.CharField(
         max_length=16,
         null=True,
@@ -211,6 +225,12 @@ class EquipmentItem(SafeDeleteModel):
         blank=True,
     )
 
+    thumbnail = models.ImageField(
+        upload_to=thumbnail_upload_path,
+        null=True,
+        blank=True,
+    )
+
     group = models.ForeignKey(
         EquipmentItemGroup,
         on_delete=models.SET_NULL,
@@ -273,6 +293,55 @@ class EquipmentItem(SafeDeleteModel):
     @property
     def slug(self):
         return slugify(f'{self.brand.name if self.brand else "diy"} {self.name}').replace('_', '-')
+
+    def create_thumbnail(self):
+        if self._creating_thumbnail:
+            logger.debug('create_thumbnail: skipping thumbnail creation because it\'s already in progress')
+            return  # Prevent recursion
+
+        if not self.image:
+            logger.debug('create_thumbnail: skipping thumbnail creation because there is no image')
+            return
+
+        self._creating_thumbnail = True
+
+        def _get_thumbnail_bytes(options):
+            thumbnailer = get_thumbnailer(self.image)
+            thumbnail = thumbnailer.get_thumbnail(options)
+
+            thumb_io = BytesIO()
+            thumb_io.write(thumbnail.read())
+            thumb_io.seek(0)
+
+            return thumbnail, thumb_io
+
+
+        try:
+            options = {
+                'size': (512, 0),
+                'crop': True,
+                'keep_icc_profile': True,
+                'quality': 80,
+            }
+
+            thumbnail, thumb_io = _get_thumbnail_bytes(options)
+
+            if thumb_io.getbuffer().nbytes == 0:
+                # Try again
+                thumbnail, thumb_io = _get_thumbnail_bytes(options)
+
+                if thumb_io.getbuffer().nbytes == 0:
+                    logger.debug('create_thumbnail: skipping thumbnail creation because the image is invalid')
+                    return
+
+            self.thumbnail.save(thumbnail.name, ContentFile(thumb_io.getvalue()))
+            thumb_io.close()
+
+            logger.debug('create_thumbnail: thumbnail created successfully %s' % self.thumbnail.url)
+        except InvalidImageFormatError:
+            logger.debug('create_thumbnail: skipping thumbnail creation because the image is invalid')
+        finally:
+            self._creating_thumbnail = False
 
     def __str__(self):
         if not self.brand:

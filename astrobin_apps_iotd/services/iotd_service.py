@@ -238,6 +238,7 @@ class IotdService:
             num_submissions=Count('iotdsubmission', distinct=True),
             num_votes=Count('iotdvote', distinct=True)
         ).filter(
+            Q(disqualified_from_iotd_tp__isnull=True) &
             Q(
                 Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
                 Q(
@@ -274,6 +275,7 @@ class IotdService:
         items = Image.objects.annotate(
             num_votes=Count('iotdvote', distinct=True)
         ).filter(
+            Q(disqualified_from_iotd_tp__isnull=True) &
             Q(
                 submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(
                     settings.IOTD_SUBMISSION_WINDOW_DAYS +
@@ -315,6 +317,7 @@ class IotdService:
             ) \
                 .filter(
                 Q(
+                    Q(disqualified_from_iotd_tp__isnull=True) &
                     Q(moderator_decision=ModeratorDecision.APPROVED) &
                     Q(submitted_for_iotd_tp_consideration__gte=cutoff) &
                     Q(designated_iotd_submitters=submitter) &
@@ -360,6 +363,7 @@ class IotdService:
                 last_submission_timestamp=Subquery(IotdSubmission.last_for_image(OuterRef('pk')).values('date'))
             ).filter(
                 Q(deleted__isnull=True) &
+                Q(disqualified_from_iotd_tp__isnull=True) &
                 Q(last_submission_timestamp__gte=cutoff) &
                 Q(designated_iotd_reviewers=reviewer) &
                 Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) &
@@ -403,6 +407,7 @@ class IotdService:
                 last_vote_timestamp=Subquery(IotdVote.last_for_image(OuterRef('pk')).values('date'))
             ).filter(
                 Q(deleted__isnull=True) &
+                Q(disqualified_from_iotd_tp__isnull=True) &
                 Q(last_vote_timestamp__gte=cutoff) &
                 Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) &
                 Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
@@ -527,6 +532,9 @@ class IotdService:
         if image.submitted_for_iotd_tp_consideration is not None:
             return False, MayNotSubmitToIotdTpReason.ALREADY_SUBMITTED
 
+        if image.disqualified_from_iotd_tp is not None:
+            return False, MayNotSubmitToIotdTpReason.DISQUALIFIED
+
         if image.published and image.published < (
                 DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
         ):
@@ -549,6 +557,7 @@ class IotdService:
                 SubjectType.SOLAR_SYSTEM,
                 SubjectType.WIDE_FIELD,
                 SubjectType.STAR_TRAILS,
+                SubjectType.LANDSCAPE,
         ):
             return False, MayNotSubmitToIotdTpReason.NO_ACQUISITIONS
 
@@ -578,6 +587,7 @@ class IotdService:
                 SubjectType.STAR_TRAILS,
                 SubjectType.NORTHERN_LIGHTS,
                 SubjectType.NOCTILUCENT_CLOUDS,
+                SubjectType.LANDSCAPE,
             ]
         )
 
@@ -634,6 +644,9 @@ class IotdService:
             total_noctilucent_clouds_images=total_submitted_images_queryset \
                 .filter(subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
                 .count(),
+            total_lanscape_images=total_submitted_images_queryset \
+                .filter(subject_type=SubjectType.LANDSCAPE) \
+                .count(),
 
             deep_sky_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
@@ -658,6 +671,10 @@ class IotdService:
             noctilucent_clouds_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
+                .count(),
+            landscape_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.LANDSCAPE) \
                 .count(),
 
             deep_sky_tps=TopPickArchive.objects \
@@ -684,6 +701,10 @@ class IotdService:
                 .filter(image__published__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
                 .count(),
+            landscape_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.LANDSCAPE) \
+                .count(),
 
             deep_sky_tpns=TopPickNominationsArchive.objects \
                 .filter(image__published__gt=cutoff) \
@@ -708,6 +729,10 @@ class IotdService:
             noctilucent_clouds_tpns=TopPickNominationsArchive.objects \
                 .filter(image__published__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
+                .count(),
+            landscape_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.LANDSCAPE) \
                 .count(),
 
             # Breakdown by data source.

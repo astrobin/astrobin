@@ -2,13 +2,15 @@ import logging
 import math
 import mimetypes
 import os
+import re
 import shutil
 import subprocess
 from collections import namedtuple
 from datetime import timedelta
-from typing import Union
+from functools import reduce
+from typing import Optional, Union
+from urllib.parse import urlencode
 
-import requests
 from actstream.models import Action
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -19,24 +21,33 @@ from django.core.files import File
 from django.core.files.images import get_image_dimensions
 from django.core.files.temp import NamedTemporaryFile
 from django.db.models import Q, QuerySet
+from django.template.defaultfilters import floatformat
+from django.utils.translation import ugettext as _
+
 from django.urls import reverse
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
 from moviepy.editor import VideoFileClip
+from numpy import average
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
-from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
+from astrobin.models import (
+    Collection, DeepSky_Acquisition, Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES,
+    SolarSystem_Acquisition,
+)
+from astrobin.moon import MoonPhase
 from astrobin.services.gear_service import GearService
+from astrobin.services.utils_service import UtilsService
 from astrobin.stories import ACTSTREAM_VERB_UPLOADED_IMAGE, add_story
 from astrobin.utils import (
     base26_decode, base26_encode, decimal_to_degrees_minutes_seconds_string,
     decimal_to_hours_minutes_seconds_string,
 )
 from astrobin_apps_equipment.models import EquipmentBrandListing
-from astrobin_apps_images.models import ThumbnailGroup
+from astrobin_apps_images.models import KeyValueTag, ThumbnailGroup
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
@@ -119,7 +130,8 @@ class ImageService:
                 except (ValueError, IOError) as e:
                     logger.warning(
                         "ImageService.get_default_cropping: unable to get image dimensions for %d: %s" % (
-                            self.image.pk, str(e)))
+                            self.image.pk, str(e))
+                    )
                     return '0,0,0,0'
         else:
             try:
@@ -135,7 +147,8 @@ class ImageService:
                 except (ValueError, IOError) as e:
                     logger.warning(
                         "ImageService.get_default_cropping: unable to get image dimensions for %d: %s" % (
-                            self.image.pk, str(e)))
+                            self.image.pk, str(e))
+                    )
                     return '0,0,0,0'
 
         shorter_size = min(w, h)  # type: int
@@ -161,7 +174,8 @@ class ImageService:
                 target = self.get_final_revision()
 
         square_cropping = target.square_cropping if target.square_cropping else self.get_default_cropping(
-            revision_label)
+            revision_label
+        )
         try:
             square_cropping_x0 = int(square_cropping.split(',')[0])
             square_cropping_y0 = int(square_cropping.split(',')[1])
@@ -180,8 +194,10 @@ class ImageService:
             try:
                 (w, h) = get_image_dimensions(target.image_file.file)
             except (ValueError, IOError, TypeError) as e:
-                logger.warning("ImageService.get_crop_box: unable to get image dimensions for %d: %s" % (
-                    target.pk, str(e)))
+                logger.warning(
+                    "ImageService.get_crop_box: unable to get image dimensions for %d: %s" % (
+                        target.pk, str(e))
+                )
                 return None
 
         crop_width = settings.THUMBNAIL_ALIASES[''][alias]['size'][0]
@@ -239,7 +255,8 @@ class ImageService:
     def get_images_pending_moderation(self):
         return Image.objects_including_wip.filter(
             moderator_decision=ModeratorDecision.UNDECIDED,
-            uploaded__lt=DateTimeService.now() - timedelta(minutes=10))
+            uploaded__lt=DateTimeService.now() - timedelta(minutes=10)
+        )
 
     def get_hemisphere(self, revision_label=None):
         # type: (str) -> str
@@ -288,13 +305,16 @@ class ImageService:
 
         image.image_file = new_original.image_file
         image.video_file = new_original.video_file
+        image.encoded_video_file = new_original.encoded_video_file
+        image.encoding_error = new_original.encoding_error
+        image.loop_video = new_original.loop_video
         image.square_cropping = new_original.square_cropping
         image.updated = new_original.uploaded
         image.w = new_original.w
         image.h = new_original.h
         image.is_final = image.is_final or new_original.is_final
-        image.mouse_hover_image = new_original.mouse_hover_image\
-            if new_original.mouse_hover_image != 'ORIGINAL'\
+        image.mouse_hover_image = new_original.mouse_hover_image \
+            if new_original.mouse_hover_image != 'ORIGINAL' \
             else MouseHoverImage.SOLUTION
 
         if new_original.title:
@@ -326,7 +346,6 @@ class ImageService:
         new_original.delete()
         image.thumbnails.filter(revision=new_original.label).delete()
         image.thumbnail_invalidate()
-
 
     def get_enhanced_thumb_url(self, field, alias, revision_label, animated, secure, target_alias):
         get_enhanced_thumb_url = None
@@ -367,15 +386,15 @@ class ImageService:
     def needs_premium_subscription_to_platesolve(self):
         valid_subscription = PremiumService(self.image.user).get_valid_usersubscription()
         return self.is_platesolvable() and \
-               not self.is_platesolving_attempted() and \
-               is_free(valid_subscription)
+            not self.is_platesolving_attempted() and \
+            is_free(valid_subscription)
 
     def is_platesolvable(self):
         return \
-            (self.image.subject_type == SubjectType.DEEP_SKY) or \
-            (self.image.subject_type == SubjectType.WIDE_FIELD) or \
-            (self.image.subject_type == SubjectType.SOLAR_SYSTEM and
-             self.image.solar_system_main_subject == SolarSystemSubject.COMET)
+                (self.image.subject_type == SubjectType.DEEP_SKY) or \
+                (self.image.subject_type == SubjectType.WIDE_FIELD) or \
+                (self.image.subject_type == SubjectType.SOLAR_SYSTEM and
+                 self.image.solar_system_main_subject == SolarSystemSubject.COMET)
 
     def is_platesolving_attempted(self):
         return self.image.solution and self.image.solution.status != Solver.MISSING
@@ -489,7 +508,7 @@ class ImageService:
 
         return f'https://via.placeholder.com/{thumb_w}x{thumb_h}/222/333&text=ERROR'
 
-    def promote_to_public_area(self, skip_notifications):
+    def promote_to_public_area(self, skip_notifications: bool, skip_activity_stream: bool):
         if self.image.is_wip:
             previously_published = self.image.published
             self.image.is_wip = False
@@ -499,7 +518,7 @@ class ImageService:
             if not previously_published:
                 if not skip_notifications:
                     push_notification_for_new_image.apply_async(args=(self.image.pk,), countdown=10)
-                if self.image.moderator_decision == ModeratorDecision.APPROVED:
+                if not skip_activity_stream and self.image.moderator_decision == ModeratorDecision.APPROVED:
                     add_story(self.image.user, verb=ACTSTREAM_VERB_UPLOADED_IMAGE, action_object=self.image)
 
     def demote_to_staging_area(self):
@@ -521,7 +540,7 @@ class ImageService:
             w, h = 1024, 1024
 
         placeholder_url = f'https://via.placeholder.com/{w}x{h}/222/333&text=PREVIEW NOT READY'
-        response = requests.get(placeholder_url, stream=True)
+        response = UtilsService.http_with_retries(placeholder_url, stream=True)
         if response.status_code == 200:
             img_temp = NamedTemporaryFile()
             for block in response.iter_content(1024 * 8):
@@ -556,6 +575,320 @@ class ImageService:
 
         return File(open(temp_file_path, 'rb'))
 
+    def get_deep_sky_acquisition_raw_data(self):
+        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=self.image).order_by('date')
+
+        data = {
+            'dates': [],
+            'frames': {},
+            'integration': 0,
+            'darks': [],
+            'flats': [],
+            'flat_darks': [],
+            'bias': [],
+            'bortle': [],
+            'mean_sqm': [],
+            'mean_fwhm': [],
+            'temperature': [],
+        }
+        moon_age_list = []
+        moon_illuminated_list = []
+
+        for a in deep_sky_acquisitions.iterator():
+            if a.date is not None and a.date not in data['dates']:
+                data['dates'].append(a.date)
+                m = MoonPhase(a.date)
+                moon_age_list.append(m.age)
+                moon_illuminated_list.append(m.illuminated * 100.0)
+
+            if a.number and a.duration:
+                key = ""
+                if a.filter is not None or a.filter_2 is not None:
+                    key = "filter(%s)" % (a.filter or a.filter_2)
+                if a.iso is not None:
+                    key += '-ISO(%d)' % a.iso
+                if a.gain is not None:
+                    key += '-gain(%.2f)' % a.gain
+                if a.f_number is not None:
+                    key += '-f_number(%.2f)' % a.f_number
+                if a.sensor_cooling is not None:
+                    key += '-temp(%d)' % a.sensor_cooling
+                if a.binning is not None:
+                    key += '-bin(%d)' % a.binning
+                key += '-duration(%s)' % floatformat(a.duration, 4)
+
+                try:
+                    current_frames = data['frames'][key]['integration']
+                except KeyError:
+                    current_frames = '0x0"'
+
+                integration_re = re.match(r'^(\d+)x(\d+)', current_frames)
+                current_number = int(integration_re.group(1))
+
+                data['frames'][key] = {}
+                if a.filter_2:
+                    data['frames'][key]['filter_url'] = f'/search/?{urlencode({"q": str(a.filter_2)})}'
+                    data['frames'][key]['filter'] = str(a.filter_2)
+                elif a.filter:
+                    data['frames'][key]['filter_url'] = a.filter.get_absolute_url()
+                    data['frames'][key]['filter'] = a.filter
+                else:
+                    data['frames'][key]['filter_url'] = '#'
+                    data['frames'][key]['filter'] = ''
+                data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso is not None else ''
+                data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain is not None else ''
+                data['frames'][key]['f_number'] = f'f/{a.f_number}'.rstrip('0').rstrip('.') \
+                    if a.f_number is not None else ''
+                data['frames'][key]['sensor_cooling'] = '%d&deg;C' % a.sensor_cooling \
+                    if a.sensor_cooling is not None else ''
+                data['frames'][key]['binning'] = f'bin {a.binning}x{a.binning}' if a.binning else ''
+                data['frames'][key]['integration'] = \
+                    f'{current_number + a.number}x{floatformat(a.duration, 4).rstrip("0").rstrip(".")}'
+
+                data['integration'] += a.duration * a.number
+
+            for i in ['darks', 'flats', 'flat_darks', 'bias']:
+                if a.filter and getattr(a, i):
+                    data[i].append("%d" % getattr(a, i))
+                elif getattr(a, i):
+                    data[i].append(getattr(a, i))
+
+            if a.bortle:
+                data['bortle'].append(a.bortle)
+
+            if a.mean_sqm:
+                data['mean_sqm'].append(a.mean_sqm)
+
+            if a.mean_fwhm:
+                data['mean_fwhm'].append(a.mean_fwhm)
+
+            if a.temperature:
+                data['temperature'].append(a.temperature)
+
+        return moon_age_list, moon_illuminated_list, data
+
+    def get_deep_sky_acquisition_html(self):
+        moon_age_list, moon_illuminated_list, data = self.get_deep_sky_acquisition_raw_data()
+
+        def integration_html(integration):
+            integration_re = re.match(r'^(\d+)x(\d+\.?\d*)', integration)
+            number = int(integration_re.group(1))
+            duration = float(integration_re.group(2))
+            return f'<span class="number">{number}</span>' \
+                   f'<span class="times-separator">&times;</span>' \
+                   f'<span class="duration">{floatformat(duration, 4).rstrip("0").rstrip(".")}</span>' \
+                   f'<span class="seconds-symbol">&Prime;</span> ' \
+                   f'<span class="total-frame-integration">({DateTimeService.human_time_duration(number * duration)})</span>'
+
+        def binning_html(binning):
+            binning_re = re.match(r'^bin (\d)x(\d)', binning)
+
+            if not binning_re:
+                return binning
+
+            x = int(binning_re.group(1))
+            y = int(binning_re.group(2))
+            return f'bin {x}<span class="times-separator">&times;</span>{y}'
+
+        return [
+            (
+                _('Dates'),
+                DateTimeService.format_date_ranges(data['dates'])
+            ),
+            (
+                _('Frames'),
+                '<div class="frames">' + '\n'.join(
+                    "%s %s" % (
+                        "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
+                        "%s %s %s %s %s %s" % (
+                            integration_html(f[1]['integration']),
+                            f[1]['iso'],
+                            f[1]['gain'],
+                            f[1]['f_number'],
+                            f[1]['sensor_cooling'],
+                            binning_html(f[1]['binning'])
+                        ),
+                    ) for f in sorted(data['frames'].items())
+                ) +
+                '</div>'
+            ),
+            (
+                _('Integration'),
+                DateTimeService.human_time_duration(data['integration'])
+            ),
+            (
+                _('Darks'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['darks'])) / len(data['darks']))
+                if data['darks'] else 0
+            ),
+            (
+                _('Flats'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flats'])) / len(data['flats']))
+                if data['flats'] else 0
+            ),
+            (
+                _('Flat darks'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flat_darks'])) / len(data['flat_darks']))
+                if data['flat_darks'] else 0
+            ),
+            (
+                _('Bias'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['bias'])) / len(data['bias']))
+                if data['bias'] else 0
+            ),
+            (
+                _('Avg. Moon age'),
+                "%.2f " % (average(moon_age_list),) + _("days") if moon_age_list else None
+            ),
+            (
+                _('Avg. Moon phase'),
+                "%.2f%%" % (average(moon_illuminated_list),) if moon_illuminated_list else None
+            ),
+            (
+                _('Bortle Dark-Sky Scale'),
+                "%.2f" % (average([float(x) for x in data['bortle']])) if data['bortle'] else None
+            ),
+            (
+                _('Mean SQM'),
+                "%.2f" % (average([float(x) for x in data['mean_sqm']])) if data['mean_sqm'] else None
+            ),
+            (
+                _('Mean FWHM'),
+                "%.2f" % (average([float(x) for x in data['mean_fwhm']])) if data['mean_fwhm'] else None
+            ),
+            (
+                _('Temperature'),
+                ("%.2f" % (average([float(x) for x in data['temperature']]))).rstrip('0').rstrip('.') + '&deg;C'
+                if data['temperature'] else None
+            ),
+        ]
+
+    def get_deep_sky_acquisition_text(self):
+        moon_age_list, moon_illuminated_list, data = self.get_deep_sky_acquisition_raw_data()
+
+        return (
+            (
+                _('Dates'),
+                DateTimeService.format_date_ranges(data['dates'])
+            ),
+            (
+                _('Frames'),
+                '\n'.join(
+                    "%s %s" % (
+                        "%s:" % f[1]['filter'] if f[1]['filter'] else '',
+                        "%s %s %s %s %s %s" % (
+                            f[1]['integration'],
+                            f[1]['iso'],
+                            f[1]['gain'],
+                            f[1]['f_number'],
+                            f[1]['sensor_cooling'],
+                            f[1]['binning']
+                        ),
+                    ) for f in sorted(data['frames'].items())
+                )
+            ),
+            (
+                _('Integration'),
+                DateTimeService.human_time_duration(data['integration'], html=False)
+            ),
+            (
+                _('Darks'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['darks'])) / len(data['darks']))
+                if data['darks'] else 0
+            ),
+            (
+                _('Flats'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flats'])) / len(data['flats']))
+                if data['flats'] else 0
+            ),
+            (
+                _('Flat darks'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['flat_darks'])) / len(data['flat_darks']))
+                if data['flat_darks'] else 0
+            ),
+            (
+                _('Bias'),
+                '%d' % (int(reduce(lambda x, y: int(x) + int(y), data['bias'])) / len(data['bias']))
+                if data['bias'] else 0
+            ),
+            (
+                _('Avg. Moon age'),
+                "%.2f " % (average(moon_age_list),) + _("days")) if moon_age_list else None,
+            (
+                _('Avg. Moon phase'),
+                "%.2f%%" % (average(moon_illuminated_list),) if moon_illuminated_list else None
+            ),
+            (
+                _('Bortle Dark-Sky Scale'),
+                "%.2f" % (average([float(x) for x in data['bortle']])) if data['bortle'] else None
+            ),
+            (
+                _('Mean SQM'),
+                "%.2f" % (average([float(x) for x in data['mean_sqm']])) if data['mean_sqm'] else None
+            ),
+            (
+                _('Mean FWHM'),
+                "%.2f" % (average([float(x) for x in data['mean_fwhm']])) if data['mean_fwhm'] else None
+            ),
+            (
+                _('Temperature'),
+                ("%.2f" % (average([float(x) for x in data['temperature']]))).rstrip('0').rstrip('.') + 'C'
+                if data['temperature'] else None
+            )
+        )
+
+    def get_solar_system_acquisition_text(self):
+        a = get_object_or_None(SolarSystem_Acquisition, image=self.image)
+
+        if not a:
+            return []
+
+        results = []
+
+        if a.date is not None:
+            results.append((_('Date'), a.date.isoformat()))
+        if a.time is not None:
+            results.append((_('Time'), a.time))
+        if a.frames is not None:
+            results.append((_('Frames'), a.frames))
+        if a.fps is not None:
+            results.append((_('FPS'), floatformat(a.fps, 3).rstrip('0').rstrip('.')))
+        if a.exposure_per_frame is not None:
+            results.append((_('Exposure per frame'), floatformat(a.exposure_per_frame, 2).rstrip('0').rstrip('.')))
+        if a.focal_length is not None:
+            results.append((_('Focal length'), a.focal_length))
+        if a.iso is not None:
+            results.append(('ISO', a.iso))
+        if a.gain is not None:
+            results.append(('Gain', a.gain))
+        if a.cmi is not None:
+            results.append((_('CMI'), a.cmi))
+        if a.cmii is not None:
+            results.append((_('CMII'), a.cmii))
+        if a.cmiii is not None:
+            results.append((_('CMIII'), a.cmiii))
+        if a.seeing is not None:
+            results.append((_('Seeing'), a.seeing))
+        if a.transparency is not None:
+            results.append((_('Transparency'), a.transparency))
+
+        return results
+
+    def get_collection_tag_value(self, collection: Collection) -> Optional[str]:
+        collection_tag_value = None
+
+        if not collection or not collection.order_by_tag:
+            return collection_tag_value
+
+        collection_tag = KeyValueTag.objects.filter(
+            key=collection.order_by_tag,
+            image=self.image,
+        ).first()
+        if collection_tag:
+            collection_tag_value = collection_tag.value
+
+        return collection_tag_value
+
     @staticmethod
     def get_constellation(solution):
         if solution is None or solution.ra is None or solution.dec is None:
@@ -568,8 +901,10 @@ class ImageService:
         )
 
         dec = solution.advanced_dec if solution.advanced_dec else solution.dec
-        dec_dms = decimal_to_degrees_minutes_seconds_string(dec, degree_symbol='', minute_symbol='', second_symbol='',
-                                                            precision=0)
+        dec_dms = decimal_to_degrees_minutes_seconds_string(
+            dec, degree_symbol='', minute_symbol='', second_symbol='',
+            precision=0
+        )
 
         try:
             return ConstellationsService.get_constellation('%s %s' % (ra_hms, dec_dms))

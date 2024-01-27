@@ -871,6 +871,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (SubjectType.STAR_TRAILS, _("Star trails")),
         (SubjectType.NORTHERN_LIGHTS, _("Northern lights")),
         (SubjectType.NOCTILUCENT_CLOUDS, _("Noctilucent clouds")),
+        (SubjectType.LANDSCAPE, _("Landscape")),
         (SubjectType.GEAR, _("Gear")),
         (SubjectType.OTHER, _("Other")),
     )
@@ -949,10 +950,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SRO2", "Sky Ranch Observatory"),
         ("SPOO", "SkyPi Remote Observatory"),
         ("SLO", "Slooh"),
+        ("SPI", "Spica"),
         ("SSLLC", "Stellar Skies LLC"),
         ("SKIESAWAY", "SkiesAway Remote Observatories"),
         ("TAIYUGE", "TaiYuge Observatory"),
         ("TELI", "Telescope Live"),
+        ("TREV", "Trevinca Skies"),
         ("UDRO", "Utah Desert Remote Observatories"),
         ("WTO", "West Texas Observatory (WTO)"),
         ("YINHE", "YinHe Observatory"),
@@ -1227,6 +1230,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     published = models.DateTimeField(editable=False, null=True, blank=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
     submitted_for_iotd_tp_consideration = models.DateTimeField(editable=False, null=True, blank=True)
+    disqualified_from_iotd_tp = models.DateTimeField(editable=False, null=True, blank=True)
 
     designated_iotd_submitters = models.ManyToManyField(
         User,
@@ -1464,6 +1468,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         default=False,
         verbose_name=_("Skip notifications"),
         help_text=_("Do not notify your followers about this image upload.")
+    )
+
+    skip_activity_stream = models.NullBooleanField(
+        null=True,
+        blank=True,
+        default=None,
+        verbose_name=_("Skip activity stream"),
+        help_text=_("Do not create an entry on the front page's activity stream for this event.")
     )
 
     class Meta:
@@ -1999,6 +2011,14 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         help_text=_("Do not notify your followers about this revision.")
     )
 
+    skip_activity_stream = models.NullBooleanField(
+        null=True,
+        blank=True,
+        default=None,
+        verbose_name=_("Skip activity stream"),
+        help_text=_("Do not create an entry on the front page's activity stream for this event.")
+    )
+
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
 
     # Size of the image in bytes
@@ -2103,6 +2123,16 @@ class Collection(models.Model):
         editable=False,
     )
 
+    parent = models.ForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        related_name='children',
+        on_delete=models.CASCADE,
+        verbose_name=_("Parent collection"),
+        help_text=_("If you want to create a nested collection, select the parent collection here."),
+    )
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     name = models.CharField(
@@ -2145,8 +2175,8 @@ class Collection(models.Model):
         unique_together = ('user', 'name')
         ordering = ['name']
 
-    def __unincode__(self):
-        return "%s, a collection by %s" % (self.name, self.user.username)
+    def __str__(self):
+        return self.name
 
 
 class Acquisition(models.Model):
@@ -3433,3 +3463,61 @@ class DataDownloadRequest(models.Model):
     class Meta:
         app_label = 'astrobin'
         ordering = ('-created',)
+
+
+class PopupMessage(models.Model):
+    title = models.CharField(
+        max_length=256,
+        null=False,
+    )
+
+    body = models.TextField(
+        null=False,
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    active = models.BooleanField(
+        default=True,
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-created',)
+        indexes = [
+            models.Index(fields=['active', '-created']),
+        ]
+
+
+class PopupMessageUserStatus(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+    popup_message = models.ForeignKey(
+        PopupMessage,
+        on_delete=models.CASCADE,
+    )
+
+    seen = models.DateTimeField(
+        null=True,
+    )
+
+    def __str__(self):
+        return f'{self.user} - {self.popup_message}'
+
+    class Meta:
+        unique_together = ('user', 'popup_message',)
+        ordering = ('-popup_message__created',)
+        indexes = [
+            models.Index(fields=['user', 'popup_message', 'seen']),
+        ]

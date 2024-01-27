@@ -35,6 +35,27 @@
         }
 
         function initForumSelection(isEquipment) {
+            if (!isEquipment && window.document.URL.indexOf('/forum/c/astrophotography/equipment') > -1) {
+                astrobin_common.show_page_loading_indicator();
+                $.ajax({
+                    url: '/api/v2/forum/forum/?slug=equipment',
+                    dataType: 'json',
+                    timeout: 10000,
+                    success: response => {
+                        if (response.count === 0) {
+                            alert('Unexpected error');
+                            return;
+                        }
+                        
+                        const forumId = response.results[0].id;
+                        const url = `/forum/forum/${forumId}/topic/add/`;
+        
+                        window.location.assign(url);
+                    }
+                });
+                return;
+            }
+            
             const $el = $("#forum-selection");
 
             if ($el.hasClass('select2-hidden-accessible')) {

@@ -34,6 +34,11 @@
                                         {% timestamp image.uploaded %}
                                     {% endif %}
                                 </li>
+                                {% if image.uploader_name %}
+                                    <li class="nav-header">
+                                        {{ image.uploader_name }}
+                                    </li>
+                                {% endif %}
                                 <li class="divider"></li>
 
                                 {% if not image.is_final %}
@@ -98,6 +103,11 @@
                                     <li class="nav-header">
                                         {% trans "Uploaded" %} {% timestamp r.uploaded %}
                                     </li>
+                                    {% if r.uploader_name %}
+                                        <li class="nav-header">
+                                            {{ r.uploader_name }}
+                                        </li>
+                                    {% endif %}
                                     <li class="divider"></li>
 
                                     {% if not r.is_final %}

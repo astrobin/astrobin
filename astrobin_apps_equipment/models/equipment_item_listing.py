@@ -21,6 +21,7 @@ EQUIPMENT_ITEM_LISTING_STOCK_CHOICES = (
     (StockStatus.OUT_OF_STOCK.value, gettext("Out of stock")),
 )
 
+
 class EquipmentItemListing(SafeDeleteModel):
     created_by = models.ForeignKey(
         User,
@@ -42,6 +43,15 @@ class EquipmentItemListing(SafeDeleteModel):
         editable=False
     )
 
+    # This is the full name (brand + item name) of the item on AstroBin.
+    item_full_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+    )
+
+    # This name might be something different than the item's name on AstroBin, in case the retailer calls it something
+    # else.
     name = models.CharField(
         max_length=256,
         null=False,

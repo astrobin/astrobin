@@ -1,17 +1,13 @@
 import logging
-from email.encoders import encode_noop
-from email.mime.application import MIMEApplication
-from email.mime.base import MIMEBase
-from email.mime.multipart import MIMEMultipart
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError
+from urllib.request import Request, urlopen
 
-import requests
 from django.conf import settings
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 
+from astrobin.services.utils_service import UtilsService
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
 from .errors import RequestError
 from .utils import json2python, python2json
@@ -70,7 +66,7 @@ class Solver(AbstractPlateSolvingBackend):
 
         try:
             response = urlopen(request, timeout=30)
-        except HTTPError as e:
+        except (HTTPError, URLError) as e:
             error_message = str(e)
             log.error("Astrometry.net request error: %s" % error_message)
             raise RequestError('Server error message: ' + error_message)
@@ -118,9 +114,9 @@ class Solver(AbstractPlateSolvingBackend):
         headers = {'User-Agent': 'Mozilla/5.0'}
 
         if 'https://' in image_url:
-            r = requests.get(image_url, verify=False, allow_redirects=True, headers=headers)
+            r = UtilsService.http_with_retries(image_url, verify=False, headers=headers)
         else:
-            r = requests.get(image_url, allow_redirects=True, headers=headers)
+            r = UtilsService.http_with_retries(image_url, headers=headers)
 
         f = NamedTemporaryFile(delete=True)
         f.write(r.content)

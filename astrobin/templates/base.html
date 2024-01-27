@@ -164,6 +164,29 @@
 
         {% block extra_js %}{% endblock %}
 
+        {% with request.user|get_unseen_active_popups as popup_messages %}
+            {% if popup_messages %}
+                <ul class="popup-messages">
+                    {% for popup_message in popup_messages %}
+                        <li class="popup-message" data-id="{{ popup_message.id }}">
+                           <div class="popup-message-title">
+                               {{ popup_message|title }}
+                           </div>
+                           <div class="popup-message-body">
+                                {{ popup_message.body|safe }}
+                           </div>
+                           <div class="popup-message-footer">
+                               <button class="popup-message-dont-show-again btn btn-primary">
+                                   <i class="icon-check"></i>
+                                   {% trans "Don't show this again" %}
+                               </button>
+                           </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
         {% if request|cookie_consent_enabled and request|is_gdpr_country and '/cookies/' not in request.path %}
             {% not_accepted_or_declined_cookie_groups request as cookie_groups %}
 

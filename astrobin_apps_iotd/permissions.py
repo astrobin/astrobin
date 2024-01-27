@@ -60,6 +60,9 @@ def may_toggle_submission_image(user, image):
             'max_allowed': max_allowed
         }
 
+    if image.disqualified_from_iotd_tp:
+        return False, _("This image has been disqualified from the IOTD/TP process.")
+
     return True, None
 
 
@@ -127,6 +130,9 @@ def may_toggle_vote_image(user, image):
         return False, _("You have already voted for %(max_allowed)s image(s) today.") % {
             'max_allowed': max_allowed
         }
+
+    if image.disqualified_from_iotd_tp:
+        return False, _("This image has been disqualified from the IOTD/TP process.")
 
     return True, None
 
@@ -208,6 +214,9 @@ def may_elect_iotd(user, image):
                 'num': settings.IOTD_REVIEW_MIN_PROMOTIONS
             }
         )
+
+    if image.disqualified_from_iotd_tp:
+        return False, _("This image has been disqualified from the IOTD/TP process.")
 
     return True, None
 
