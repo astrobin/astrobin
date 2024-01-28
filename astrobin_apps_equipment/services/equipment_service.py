@@ -1,5 +1,5 @@
 import logging
-from typing import List
+from typing import List, Optional
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -607,3 +607,11 @@ class EquipmentService:
                 item.brand.delete()
 
         return item
+
+    @staticmethod
+    def item_type_to_content_type(klass: str) -> Optional[ContentType]:
+        return get_object_or_None(
+            ContentType,
+            app_label='astrobin_apps_equipment',
+            model=klass.lower()
+        )
