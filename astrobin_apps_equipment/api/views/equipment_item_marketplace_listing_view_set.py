@@ -64,6 +64,10 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
                 params=[latitude, longitude, max_distance, latitude, longitude, max_distance]
             )
 
+        if self.request.GET.get('region'):
+            region = self.request.GET.get('region')
+            queryset = queryset.filter(country=region.upper())
+
         return queryset
 
     def filter_line_items(self, queryset: QuerySet) -> QuerySet:
