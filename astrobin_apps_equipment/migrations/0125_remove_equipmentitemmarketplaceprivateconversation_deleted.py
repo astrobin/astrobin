@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('astrobin_apps_equipment', '0122_add_ordering_and_unique_together_to_marketplace_private_conversation'),
+        ('astrobin_apps_equipment', '0124_add_ordering_and_unique_together_to_marketplace_private_conversation'),
     ]
 
     operations = [

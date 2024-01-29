@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('astrobin_apps_equipment', '0118_update_marketplace_line_item_currencies'),
+        ('astrobin_apps_equipment', '0120_update_marketplace_line_item_currencies'),
     ]
 
     operations = [

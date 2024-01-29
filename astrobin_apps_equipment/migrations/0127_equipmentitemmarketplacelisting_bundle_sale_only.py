@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('astrobin_apps_equipment', '0124_add_last_access_dates_to_private_conversation'),
+        ('astrobin_apps_equipment', '0126_add_last_access_dates_to_private_conversation'),
     ]
 
     operations = [

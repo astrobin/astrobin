@@ -32,8 +32,29 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             if content_type:
                 qs = qs.filter(line_items__item_content_type=content_type)
 
-        return qs
+        if self.request.GET.get('max_distance') and \
+                self.request.GET.get('distance_unit') and \
+                self.request.GET.get('latitude') and \
+                self.request.GET.get('longitude'):
+            max_distance = float(self.request.GET.get('max_distance'))
+            distance_unit = self.request.GET.get('distance_unit')
+            latitude = float(self.request.GET.get('latitude'))
+            longitude = float(self.request.GET.get('longitude'))
 
+            if distance_unit == 'mi':
+                max_distance *= 1.60934  # Convert miles to kilometers
+
+            max_distance *= 1000  # Convert kilometers to meters
+
+            qs = qs.extra(
+                where=[
+                    "earth_box(ll_to_earth(%s, %s), %s) @> ll_to_earth(latitude, longitude)",
+                    "earth_distance(ll_to_earth(%s, %s), ll_to_earth(latitude, longitude)) <= %s"
+                ],
+                params=[latitude, longitude, max_distance, latitude, longitude, max_distance]
+            )
+
+        return qs
 
     def get_serializer_class(self) -> Type[serializers.ModelSerializer]:
         if self.request.method in ['PUT', 'POST']:

@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('astrobin_apps_equipment', '0121_add_marketplace_listing_approved_field_ordering_and_indexes'),
+        ('astrobin_apps_equipment', '0123_add_marketplace_listing_approved_field_ordering_and_indexes'),
     ]
 
     operations = [
