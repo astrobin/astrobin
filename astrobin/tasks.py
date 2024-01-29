@@ -667,14 +667,14 @@ def prepare_download_data_archive(request_id):
                 row_data += [
                     '\n'.join(
                         f'{x[0]}: {x[1]}' for x in ImageService(image).get_deep_sky_acquisition_text()
-                        if x[1] is not None
+                        if x is not None and x[1] is not None
                     )
                 ]
             elif has_solar_system_acquisitions:
                 row_data += [
                     '\n'.join(
                         f'{x[0]}: {x[1]}' for x in ImageService(image).get_solar_system_acquisition_text()
-                        if x[1] is not None
+                        if x is not None and x[1] is not None
                     )
                 ]
 
