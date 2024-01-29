@@ -7,6 +7,7 @@ from django.utils.translation import gettext
 
 from astrobin.fields import CURRENCY_CHOICES
 from astrobin_apps_equipment.types.marketplace_listing_condition import MarketplaceListingCondition
+from astrobin_apps_payments.models import ExchangeRate
 from common.models.hashed_model import HashedSafeDeleteModel
 
 EQUIPMENT_ITEM_MARKETPLACE_LISTING_CONDITION_CHOICES = (
@@ -83,6 +84,14 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
         choices=CURRENCY_CHOICES,
     )
 
+    # AstroBin will automatically convert prices to CHF to allow for easier filtering.
+    price_chf = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+
     condition = models.CharField(
         max_length=32,
         null=False,
@@ -109,12 +118,25 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
     item_object_id = models.PositiveIntegerField()
     item_content_object = GenericForeignKey('item_content_type', 'item_object_id')
 
+    def save(self, *args, **kwargs):
+        self.update_price_chf()
+        super(EquipmentItemMarketplaceListingLineItem, self).save(*args, **kwargs)
+
     def delete(self, *args, **kwargs):
         from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItemImage
         related_children = EquipmentItemMarketplaceListingLineItemImage.objects.filter(line_item=self)
         for child in related_children:
             child.delete()
         super(EquipmentItemMarketplaceListingLineItem, self).delete(*args, **kwargs)
+
+    def update_price_chf(self):
+        if self.price and self.currency:
+            if self.currency == 'CHF':
+                self.price_chf = self.price
+            else:
+                exchange_rate = ExchangeRate.objects.filter(source='CHF', target=self.currency).first()
+                if exchange_rate:
+                    self.price_chf = self.price / exchange_rate.rate
 
     def __str__(self):
         return str(self.item_content_object)

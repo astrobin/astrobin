@@ -1,5 +1,7 @@
 import os
 
+from astrobin.settings.components.basic import DEBUG, TESTING
+
 SUPPORTED_CURRENCIES = ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'CHF', 'CNY']
 TRANSFERWISE_API_TOKEN = os.environ.get('TRANSFERWISE_API_TOKEN')
 
