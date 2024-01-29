@@ -16,6 +16,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
     EquipmentItemMarketplaceListingSerializer
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_equipment.types.marketplace_listing_condition import MarketplaceListingCondition
 from astrobin_apps_payments.models import ExchangeRate
 from common.permissions import IsObjectUserOrReadOnly
 
@@ -104,6 +105,16 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
                 if exchange_rate and exchange_rate.rate:
                     max_price /= float(exchange_rate.rate)
             queryset = queryset.filter(price_chf__lte=max_price)
+
+        if self.request.GET.get('condition'):
+            condition = self.request.GET.get('condition')
+            if condition not in (item.value for item in MarketplaceListingCondition):
+                raise ValidationError(
+                    {
+                        'condition': gettext('Invalid condition.')
+                    }
+                )
+            queryset = queryset.filter(condition=condition)
 
         return queryset
 
