@@ -18,6 +18,7 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
     item_klass = serializers.SerializerMethodField(read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
     first_added_to_an_image = serializers.SerializerMethodField(read_only=True)
+    slug = serializers.ReadOnlyField()
 
     def create(self, validated_data):
         user = self.context['request'].user

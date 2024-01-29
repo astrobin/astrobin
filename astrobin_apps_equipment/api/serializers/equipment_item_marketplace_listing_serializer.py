@@ -12,6 +12,7 @@ class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
     follower_count = serializers.SerializerMethodField(read_only=True)
     view_count = serializers.SerializerMethodField(read_only=True)
     hitcount_pk = serializers.SerializerMethodField(read_only=True)
+    slug = serializers.ReadOnlyField()
 
     def create(self, validated_data):
         user = self.context['request'].user

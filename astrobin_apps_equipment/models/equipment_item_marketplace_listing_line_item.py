@@ -138,6 +138,10 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
                 if exchange_rate:
                     self.price_chf = self.price / exchange_rate.rate
 
+    @property
+    def slug(self):
+        return self.item_content_object.slug
+
     def __str__(self):
         return str(self.item_content_object)
 

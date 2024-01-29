@@ -113,6 +113,10 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
     def get_absolute_url(self):
         return AppRedirectionService.redirect(f'/equipment/marketplace/listing/{self.hash}')
 
+    @property
+    def slug(self):
+        return '-'.join(x.slug for x in self.line_items.all())
+
     class Meta:
         ordering = ['-approved', '-updated']
         indexes = [
