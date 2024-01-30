@@ -157,7 +157,7 @@ def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
     else:
         delta = timedelta(hours=1)
 
-    cache.set(last_check_cache_key, datetime.now(), 60 * 60 * 2)
+    cache.set(last_check_cache_key, datetime.now(), 60 * 60 * 24)
 
     recently_expired_images: QuerySet = IotdService.get_recently_expired_unsubmitted_images(delta)
     total_submitters: int = Group.objects.get(name=GroupName.IOTD_SUBMITTERS).user_set.count()
