@@ -1,6 +1,7 @@
 from typing import Type
 
-from django.db.models import Prefetch, QuerySet
+from django.contrib.postgres.search import TrigramDistance
+from django.db.models import Prefetch, Q, QuerySet
 from django.utils.translation import gettext
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -119,6 +120,17 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
                     }
                 )
             queryset = queryset.filter(condition=condition)
+
+        if self.request.GET.get('query'):
+            query = self.request.GET.get('query')
+            queryset = queryset.annotate(
+                distance=TrigramDistance('item_name', query),
+            ).filter(
+                Q(item_name__icontains=query) |
+                Q(distance__lte=.8)
+            ).order_by(
+                'distance'
+            )
 
         return queryset
 

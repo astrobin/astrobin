@@ -118,8 +118,17 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
     item_object_id = models.PositiveIntegerField()
     item_content_object = GenericForeignKey('item_content_type', 'item_object_id')
 
+    # This is a denormalized field that is updated automatically.
+    item_name = models.CharField(
+        editable=False,
+        max_length=256,
+        null=True,
+        blank=True,
+    )
+
     def save(self, *args, **kwargs):
         self.update_price_chf()
+        self.update_item_name()
         super(EquipmentItemMarketplaceListingLineItem, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
@@ -137,6 +146,9 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
                 exchange_rate = ExchangeRate.objects.filter(source='CHF', target=self.currency).first()
                 if exchange_rate:
                     self.price_chf = self.price / exchange_rate.rate
+
+    def update_item_name(self):
+        self.item_name = str(self.item_content_object)
 
     @property
     def slug(self):
