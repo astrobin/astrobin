@@ -1,6 +1,6 @@
 import logging
 from collections import Counter
-from typing import Optional
+from typing import List
 
 import simplejson
 from annoying.functions import get_object_or_None
@@ -167,7 +167,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-    @method_decorator(cache_page(60*60))
+    @method_decorator(cache_page(60 * 60))
     @action(detail=False, methods=['get'])
     def count(self, request):
         return Response(self.get_queryset().count())
@@ -203,6 +203,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         manager = self.get_serializer().Meta.model.objects
         objects = manager.none()
 
+        include_frozen = request.GET.get('include-frozen', 'false').lower() == 'true'
+        q = request.GET.get('q', '')
+
         from astrobin_apps_equipment.models import Sensor
         from astrobin_apps_equipment.models import Camera
         from astrobin_apps_equipment.models import Telescope
@@ -216,45 +219,71 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if request.user.is_authenticated:
             usage_type = request.query_params.get('usage-type')
-            recent_items = []
-            images: QuerySet[Image] = Image.objects_including_wip.filter(user=request.user).order_by('-uploaded')
+            recent_items = set()
 
-            image: Image
-            for image in images.iterator():
-                if len(recent_items) > 10:
-                    break
+            props: List[str] = []
+            klass: str = None
+            if manager.model == Camera:
+                klass = 'camera'
+                if usage_type == 'imaging':
+                    props = ['imaging_cameras_2']
+                elif usage_type == 'guiding':
+                    props = ['guiding_cameras_2']
+                else:
+                    props = ['imaging_cameras_2', 'guiding_cameras_2']
+            elif manager.model == Telescope:
+                klass = 'telescope'
+                if usage_type == 'imaging':
+                    props = ['imaging_telescopes_2']
+                elif usage_type == 'guiding':
+                    props = ['guiding_telescopes_2']
+                else:
+                    props = ['imaging_telescopes_2', 'guiding_telescopes_2']
+            elif manager.model == Mount:
+                klass = 'mount'
+                props = ['mounts_2']
+            elif manager.model == Filter:
+                klass = 'filter'
+                props = ['filters_2']
+            elif manager.model == Accessory:
+                klass = 'accessory'
+                props = ['accessories_2']
+            elif manager.model == Software:
+                klass = 'software'
+                props = ['software_2']
 
-                prop: str = Optional[None]
-                if manager.model == Camera:
-                    if usage_type == 'imaging':
-                        prop = 'imaging_cameras_2'
-                    elif usage_type == 'guiding':
-                        prop = 'guiding_cameras_2'
-                    else:
-                        return Response("You need to specify a 'usage_type' with cameras", HTTP_400_BAD_REQUEST)
-                elif manager.model == Telescope:
-                    if usage_type == 'imaging':
-                        prop = 'imaging_telescopes_2'
-                    elif usage_type == 'guiding':
-                        prop = 'guiding_telescopes_2'
-                    else:
-                        return Response("You need to specify a 'usage_type' with telescopes", HTTP_400_BAD_REQUEST)
-                elif manager.model == Mount:
-                    prop = 'mounts_2'
-                elif manager.model == Filter:
-                    prop = 'filters_2'
-                elif manager.model == Accessory:
-                    prop = 'accessories_2'
-                elif manager.model == Software:
-                    prop = 'software_2'
+            if klass and props:
+                for prop in props:
+                    user_q = Q(image__user=request.user)
+                    query_q = Q(
+                        Q(**{f'{klass}__name__icontains': q}) |
+                        Q(**{f'{klass}__brand__name__icontains': q}) |
+                        Q(distance__lt=.8)
+                    )
 
-                if prop:
-                    x: EquipmentItem
-                    for x in getattr(image, prop).all():
-                        if not x.frozen_as_ambiguous and x.pk not in recent_items:
-                            recent_items.append(x.pk)
+                    ids = list(
+                        getattr(Image, prop).through.objects.annotate(
+                            item_full_name=Concat(
+                                f'{klass}__brand__name',
+                                Value(' '),
+                                f'{klass}__name'
+                            )
+                        ).annotate(
+                            distance=TrigramDistance(f'item_full_name', q)
+                        ).filter(
+                            user_q & query_q
+                        ).values_list(
+                            klass, flat=True
+                        ).distinct()
+                    )
+
+                    for x in ids:
+                        recent_items.add(x)
 
             objects = manager.filter(pk__in=recent_items)
+
+            if not include_frozen:
+                objects = objects.exclude(frozen_as_ambiguous=True)
 
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)
@@ -381,10 +410,12 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         for moderator in User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS):
             if moderator != item.created_by and moderator.pk not in [x.get('key') for x in value]:
-                value.append(dict(
-                    key=moderator.pk,
-                    value=moderator.userprofile.get_display_name(),
-                ))
+                value.append(
+                    dict(
+                        key=moderator.pk,
+                        value=moderator.userprofile.get_display_name(),
+                    )
+                )
 
         return Response(status=200, data=value)
 
@@ -620,11 +651,13 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if not item.brand:
             # Nothing to do for DIY items
-            return Response(dict(
-                brand_listings=[],
-                item_listings=[],
-                allow_full_retailer_integration=allow_full_retailer_integration,
-            ))
+            return Response(
+                dict(
+                    brand_listings=[],
+                    item_listings=[],
+                    allow_full_retailer_integration=allow_full_retailer_integration,
+                )
+            )
 
         country_code = get_client_country_code(request)
         brand_listings = EquipmentService.equipment_brand_listings_by_item(item, country_code)
