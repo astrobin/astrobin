@@ -35,6 +35,12 @@ class EquipmentItemMarketplaceOffer(SafeDeleteModel):
         editable=False,
     )
 
+    updated = models.DateTimeField(
+        auto_now=True,
+        null=False,
+        editable=False,
+    )
+
     amount = models.DecimalField(
         max_digits=10,
         decimal_places=2,

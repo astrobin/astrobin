@@ -12,6 +12,8 @@ from astrobin_apps_equipment.api.views.equipment_item_marketplace_feedback_view_
     EquipmentItemMarketplaceFeedbackViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_item_image_view_set import \
     EquipmentItemMarketplaceListingLineItemImageViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_item_offer_view_set import \
+    EquipmentItemMarketplaceOfferViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_item_view_set import \
     EquipmentItemMarketplaceListingLineItemViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_view_set import \
@@ -79,7 +81,7 @@ router.register(
 
 router.register(
     r'marketplace/listing/(?P<listing_id>[^/.]+)/line-item/(?P<line_item_id>[^/.]+)/offer',
-    EquipmentItemMarketplaceListingLineItemOfferViewSet,
+    EquipmentItemMarketplaceOfferViewSet,
     basename='marketplace-image'
 )
 

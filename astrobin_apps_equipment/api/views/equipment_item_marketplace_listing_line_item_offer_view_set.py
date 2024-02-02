@@ -9,6 +9,8 @@ from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_image_serializer import \
     EquipmentItemMarketplaceListingLineItemImageSerializer
+from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_offer_serializer import \
+    EquipmentItemMarketplaceOfferSerializer
 from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
     EquipmentItemMarketplaceListingLineItemImage, EquipmentItemMarketplaceOffer,
@@ -16,14 +18,14 @@ from astrobin_apps_equipment.models import (
 from common.permissions import IsObjectUserOrReadOnly
 
 
-class EquipmentItemMarketplaceListingLineItemImageViewSet(viewsets.ModelViewSet):
+class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [
         IsAuthenticatedOrReadOnly,
         IsObjectUserOrReadOnly
     ]
-    serializer_class = EquipmentItemMarketplaceListingLineItemOfferSerializer
+    serializer_class = EquipmentItemMarketplaceOfferSerializer
 
     def get_queryset(self) -> QuerySet:
         listing_id = self.kwargs.get('listing_id')
@@ -34,8 +36,7 @@ class EquipmentItemMarketplaceListingLineItemImageViewSet(viewsets.ModelViewSet)
             get_object_or_404(EquipmentItemMarketplaceListing, pk=listing_id)
             get_object_or_404(EquipmentItemMarketplaceListingLineItem, pk=line_item_id)
             return EquipmentItemMarketplaceOffer.objects.filter(
-                line_item_id=line_item_id,
-                line_item__listing_id=listing_id,
+                listing_id=listing_id,
             )
         else:
             # Raise a 404 error if listing_id is not provided in the URL
