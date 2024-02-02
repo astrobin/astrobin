@@ -966,6 +966,30 @@ class IotdService:
         submitters_scores = {}
         reviewers_scores = {}
         dismissal_scores = {}
+        is_iotd_cache = {}
+        is_top_pick_cache = {}
+        is_top_pick_nomination_cache = {}
+
+        def is_iotd(image):
+            if image.id in is_iotd_cache:
+                return is_iotd_cache[image.id]
+            result = hasattr(image, 'iotd')
+            is_iotd_cache[image.id] = result
+            return result
+
+        def is_top_pick(image):
+            if image.id in is_top_pick_cache:
+                return is_top_pick_cache[image.id]
+            result = hasattr(image, 'toppickarchive')
+            is_top_pick_cache[image.id] = result
+            return result
+
+        def is_top_pick_nomination(image):
+            if image.id in is_top_pick_nomination_cache:
+                return is_top_pick_nomination_cache[image.id]
+            result = hasattr(image, 'toppicknominationsarchive')
+            is_top_pick_nomination_cache[image.id] = result
+            return result
 
         def get_submissions():
             return IotdSubmission.objects.filter(
@@ -977,7 +1001,7 @@ class IotdService:
                 submission.submitter.username: set(
                     IotdSubmission.objects.filter(
                         submitter=submission.submitter, date__gte=period_start, date__lte=period_end
-                    ).values_list('image_id', flat=True)
+                    ).select_related('image').values_list('image_id', flat=True)
                 )
                 for submission in submissions
             }
@@ -1022,75 +1046,21 @@ class IotdService:
                 for user in users
             }
 
-        def get_nominated_ids():
-            return set(
-                TopPickNominationsArchive.objects.filter(
-                    image__submitted_for_iotd_tp_consideration__gte=period_start + timedelta(
-                        days=settings.IOTD_SUBMISSION_WINDOW_DAYS
-                    ),
-                    image__submitted_for_iotd_tp_consideration__lte=period_end + timedelta(
-                        days=settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
-                    ),
-                ).values_list('image_id', flat=True)
-            )
-
-        def get_top_pick_ids():
-            return set(
-                TopPickArchive.objects.filter(
-                    image__submitted_for_iotd_tp_consideration__gte=period_start + timedelta(
-                        days=(
-                                settings.IOTD_SUBMISSION_WINDOW_DAYS +
-                                settings.IOTD_REVIEW_WINDOW_DAYS +
-                                settings.IOTD_JUDGEMENT_WINDOW_DAYS
-                        )
-                    ),
-                    image__submitted_for_iotd_tp_consideration__lte=period_end + timedelta(
-                        days=(
-                                settings.IOTD_SUBMISSION_WINDOW_DAYS +
-                                settings.IOTD_REVIEW_WINDOW_DAYS +
-                                settings.IOTD_JUDGEMENT_WINDOW_DAYS
-                        )
-                    ),
-                ).values_list('image_id', flat=True)
-            )
-
-        def get_iotd_ids():
-            return set(
-                Iotd.objects.filter(
-                    image__submitted_for_iotd_tp_consideration__gte=period_start + timedelta(
-                        days=(
-                                settings.IOTD_SUBMISSION_WINDOW_DAYS +
-                                settings.IOTD_REVIEW_WINDOW_DAYS +
-                                settings.IOTD_JUDGEMENT_WINDOW_DAYS
-                        )
-                    ),
-                    image__submitted_for_iotd_tp_consideration__lte=period_end + timedelta(
-                        days=(
-                                settings.IOTD_SUBMISSION_WINDOW_DAYS +
-                                settings.IOTD_REVIEW_WINDOW_DAYS +
-                                settings.IOTD_JUDGEMENT_WINDOW_DAYS +
-                                settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS
-                        )
-                    ),
-                ).values_list('image_id', flat=True)
-            )
-
         def prepare_submitter_scores(submissions, dismissals):
             for submission in submissions:
                 if not submission.submitter:
                     continue
 
                 submitter_username = submission.submitter.username
-                image_id = submission.image_id
                 score = submitters_scores.get(submitter_username, 0)
 
-                if image_id in iotd_ids:
+                if is_iotd(submission.image):
                     score += guessed_iotd_reward
                     submitter_promotion_counts[submitter_username]['iotds'] += 1
-                elif image_id in top_pick_ids:
+                elif is_top_pick(submission.image):
                     score += guessed_tp_reward
                     submitter_promotion_counts[submitter_username]['top_picks'] += 1
-                elif image_id in nominated_ids:
+                elif is_top_pick_nomination(submission.image):
                     score += guessed_tpn_reward
                     submitter_promotion_counts[submitter_username]['top_pick_nominations'] += 1
                 else:
@@ -1108,16 +1078,21 @@ class IotdService:
                 dismissed_image_ids = dismissals_by_user.get(submitter_username, set())
 
                 for image_id in seen_image_ids:
+                    try:
+                        image = Image.objects_including_wip.get(pk=image_id)
+                    except Image.DoesNotExist:
+                        # In case the image was deleted.
+                        continue
                     if image_id not in submitted_image_ids:
                         # Submitter saw an image that was promoted but did not submit it
                         score = 0
-                        if image_id in iotd_ids:
+                        if is_iotd(image):
                             score = submitters_scores.get(submitter_username, 0) - missed_iotd_submission_penalty
                             submitter_promotion_counts[submitter_username]['missed_iotd_promotions'] += 1
-                        elif image_id in top_pick_ids:
+                        elif is_top_pick(image):
                             score = submitters_scores.get(submitter_username, 0) - missed_tp_submission_penalty
                             submitter_promotion_counts[submitter_username]['missed_tp_promotions'] += 1
-                        elif image_id in nominated_ids:
+                        elif is_top_pick_nomination(image):
                             score = submitters_scores.get(submitter_username, 0) - missed_tpn_submission_penalty
                             submitter_promotion_counts[submitter_username]['missed_tpn_promotions'] += 1
                         submitters_scores[submitter_username] = score
@@ -1140,21 +1115,20 @@ class IotdService:
                     continue
 
                 reviewer_username = vote.reviewer.username
-                image_id = vote.image_id
                 score = reviewers_scores.get(reviewer_username, 0)
 
-                if image_id in iotd_ids:
+                if is_iotd(vote.image):
                     score += guessed_iotd_reward
-                elif image_id in top_pick_ids:
+                elif is_top_pick(vote.image):
                     score += guessed_tp_reward
 
                 reviewers_scores[reviewer_username] = score
 
                 # Increment promotion counts
                 reviewer_promotion_counts[reviewer_username]['promotions'] += 1
-                if image_id in iotd_ids:
+                if is_iotd(vote.image):
                     reviewer_promotion_counts[reviewer_username]['iotds'] += 1
-                elif image_id in top_pick_ids:
+                elif is_top_pick(vote.image):
                     reviewer_promotion_counts[reviewer_username]['top_picks'] += 1
                 else:
                     score -= wasted_promotion_penalty
@@ -1186,13 +1160,13 @@ class IotdService:
                     # Update correct dismissal counts
                     dismissal_counts[user_username]['correct_dismissals'] += 1
                 else:
-                    if image_id in iotd_ids:
+                    if is_iotd(dismissal.image):
                         dismissal_scores[user_username] = dismissal_score - canned_iotd_penalty
                         dismissal_counts[user_username]['iotds'] += 1
-                    elif image_id in top_pick_ids:
+                    elif is_top_pick(dismissal.image):
                         dismissal_scores[user_username] = dismissal_score - canned_tp_penalty
                         dismissal_counts[user_username]['top_picks'] += 1
-                    elif image_id in nominated_ids:
+                    elif is_top_pick_nomination(dismissal.image):
                         dismissal_scores[user_username] = dismissal_score - canned_tpn_penalty
                         dismissal_counts[user_username]['top_pick_nominations'] += 1
 
@@ -1249,9 +1223,6 @@ class IotdService:
         votes = get_votes()
         image_dismissal_counts = prepare_dismissals_counts(dismissals)
         seen_images_by_user = get_seen_images_by_user()
-        nominated_ids = get_nominated_ids()
-        top_pick_ids = get_top_pick_ids()
-        iotd_ids = get_iotd_ids()
 
         all_usernames = set()
         all_usernames.update(submission.submitter.username for submission in submissions if submission.submitter)
