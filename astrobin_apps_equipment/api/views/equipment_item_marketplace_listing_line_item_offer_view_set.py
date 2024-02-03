@@ -7,13 +7,11 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 
-from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_image_serializer import \
-    EquipmentItemMarketplaceListingLineItemImageSerializer
-from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_offer_serializer import \
+from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_offer_serializer import \
     EquipmentItemMarketplaceOfferSerializer
 from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
-    EquipmentItemMarketplaceListingLineItemImage, EquipmentItemMarketplaceOffer,
+    EquipmentItemMarketplaceOffer,
 )
 from common.permissions import IsObjectUserOrReadOnly
 
@@ -33,11 +31,18 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         if listing_id is not None or line_item_id is not None:
             # Check if the listing exists and raise 404 if not
-            get_object_or_404(EquipmentItemMarketplaceListing, pk=listing_id)
+            listing = get_object_or_404(EquipmentItemMarketplaceListing, pk=listing_id)
             get_object_or_404(EquipmentItemMarketplaceListingLineItem, pk=line_item_id)
-            return EquipmentItemMarketplaceOffer.objects.filter(
-                listing_id=listing_id,
-            )
+
+            if self.request.user == listing:
+                return EquipmentItemMarketplaceOffer.objects.filter(listing_id=listing_id)
+
+            if self.request.user.is_authenticated:
+                return EquipmentItemMarketplaceOffer.objects.filter(
+                    listing_id=listing_id, user=self.request.user
+                )
+
+            return EquipmentItemMarketplaceOffer.objects.none()
         else:
             # Raise a 404 error if listing_id is not provided in the URL
             from django.http import Http404

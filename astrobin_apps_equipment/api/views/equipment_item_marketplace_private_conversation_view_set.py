@@ -31,9 +31,12 @@ class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
             if listing.user == self.request.user:
                 return EquipmentItemMarketplacePrivateConversation.objects.filter(listing_id=listing_id)
 
-            return EquipmentItemMarketplacePrivateConversation.objects.filter(
-                listing_id=listing_id, user=self.request.user
-            )
+            if self.request.user.is_authenticated:
+                return EquipmentItemMarketplacePrivateConversation.objects.filter(
+                    listing_id=listing_id, user=self.request.user
+                )
+
+            return EquipmentItemMarketplacePrivateConversation.objects.none()
         else:
             # Raise a 404 error if listing_id is not provided in the URL
             from django.http import Http404
