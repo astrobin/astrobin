@@ -62,7 +62,11 @@
                 {% if image.uploader_name %}
                     <div>
                         <strong>{% trans "Original filename" %}</strong>:
-                        {{ image.uploader_name }}
+                        {% if revision_image %}
+                            {{ revision_image.uploader_name }}
+                        {% else %}
+                            {{ image.uploader_name }}
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>
