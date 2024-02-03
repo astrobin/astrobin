@@ -109,7 +109,10 @@ class StripeWebhookServicePremiumOnceTest(TestCase):
 
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_premium_2020(valid_subscription))
-        self.assertEqual(valid_subscription.expires, extend_date_by(date.today(), 1, 'Y') + timedelta(days=30))
+        self.assertEqual(
+            valid_subscription.expires,
+            extend_date_by(date.today() + timedelta(days=30), 1, 'Y')
+        )
         self.assertTrue(valid_subscription.cancelled)
         self.assertEqual(valid_subscription.subscription, self.subscription)
         self.assertEqual(
