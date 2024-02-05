@@ -134,10 +134,11 @@ class UserService:
         from astrobin.models import Image
         return Image.deleted_objects.filter(user=self.user)
 
-    def get_bookmarked_images(self) -> QuerySet:
+    def get_bookmarked_images(self, page=1) -> QuerySet:
         from astrobin.models import Image
 
         image_ct: ContentType = ContentType.objects.get_for_model(Image)
+        page_size = settings.PAGINATE_USER_PAGE_BY
 
         bookmarked_pks: List[int] = [
             x.object_id
@@ -145,15 +146,16 @@ class UserService:
                 "bookmark", self.user
             ).filter(
                 content_type=image_ct
-            )
+            )[page_size * (page - 1):page_size * page]
         ]
 
         return Image.objects.filter(pk__in=bookmarked_pks)
 
-    def get_liked_images(self) -> QuerySet:
+    def get_liked_images(self, page=1) -> QuerySet:
         from astrobin.models import Image
 
         image_ct: ContentType = ContentType.objects.get_for_model(Image)
+        page_size = settings.PAGINATE_USER_PAGE_BY
 
         liked_pks: List[int] = [
             x.object_id
@@ -162,7 +164,7 @@ class UserService:
             ).filter(
                 content_type=image_ct
             )
-        ]
+        ][page_size * (page - 1):page_size * page]
 
         return Image.objects.filter(pk__in=liked_pks)
 
