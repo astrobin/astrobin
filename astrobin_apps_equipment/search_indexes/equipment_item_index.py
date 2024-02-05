@@ -24,7 +24,7 @@ class EquipmentItemIndex(EquipmentBaseIndex):
     # Number of images that feature this item.
     equipment_item_image_count = fields.IntegerField()
 
-    # This fields is a dictionary of the items that this items is most often used with, and it's only valid for certain
+    # This fields is a dictionary of the items that this item is most often used with, and it's only valid for certain
     # combinations:
     #
     # Camera -> Telescope, Filter
@@ -40,7 +40,7 @@ class EquipmentItemIndex(EquipmentBaseIndex):
     # }
     #
     # where:
-    #  the key is a a string built with the item's klass and its id, e.g. "CAMERA-1234"
+    #  the key is a string built with the item's klass and its id, e.g. "CAMERA-1234"
     #  the value is the number of images that this item has in common with it
     equipment_item_most_often_used_with = fields.CharField()
 

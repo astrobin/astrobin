@@ -8,6 +8,7 @@ from django.db.models import QuerySet
 from haystack import fields
 
 from astrobin.models import Image
+from common.utils import get_segregated_reader_database
 
 log = logging.getLogger(__name__)
 
@@ -25,7 +26,7 @@ class EquipmentBaseIndex(CelerySearchIndex):
         raise NotImplemented
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.all()
+        return self.get_model().objects.using(get_segregated_reader_database()).all()
 
     def _prepare_user_count(self, obj) -> int:
         key = PREPARED_USER_COUNT_CACHE_KEY % (obj.__class__.__name__, obj.pk)
@@ -35,8 +36,14 @@ class EquipmentBaseIndex(CelerySearchIndex):
             log.debug(f'{key} found in cache')
             return count
 
-        users: QuerySet = User.objects.filter(self.user_queryset(obj)).distinct()
+        users: QuerySet = User.objects.using(
+            get_segregated_reader_database()
+        ).filter(
+            self.user_queryset(obj)
+        ).distinct()
+
         count: int = users.count()
+
         self.get_model().objects.filter(pk=obj.pk).update(user_count=count)
 
         cache.set(key, count, 60 * 60 * 24)
@@ -51,8 +58,14 @@ class EquipmentBaseIndex(CelerySearchIndex):
             log.debug(f'{key} found in cache')
             return count
 
-        images: QuerySet = Image.objects.filter(self.image_queryset(obj)).distinct()
+        images: QuerySet = Image.objects.using(
+            get_segregated_reader_database()
+        ).filter(
+            self.image_queryset(obj)
+        ).distinct()
+
         count: int = images.count()
+
         self.get_model().objects.filter(pk=obj.pk).update(image_count=count)
 
         cache.set(key, count, 60 * 60 * 24)
