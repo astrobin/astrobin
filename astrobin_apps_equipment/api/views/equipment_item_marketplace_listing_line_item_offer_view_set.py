@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.db.models import QuerySet
+from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
-from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 
@@ -18,7 +18,7 @@ from common.permissions import IsObjectUserOrReadOnly
 
 class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [CamelCaseJSONParser]
     permission_classes = [
         IsAuthenticatedOrReadOnly,
         IsObjectUserOrReadOnly

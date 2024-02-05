@@ -1,14 +1,15 @@
 from rest_framework import serializers
 
-from astrobin_apps_equipment.models import EquipmentItemMarketplaceOffer
+from astrobin_apps_equipment.models import (
+    EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
+    EquipmentItemMarketplaceOffer,
+)
 from common.mixins import RequestUserRestSerializerMixin
 
 
-class EquipmentItemMarketplaceOfferSerializer(
-    RequestUserRestSerializerMixin, serializers.ModelSerializer
-):
-    def validate_user(self, value):
-        return self.context['request'].user
+class EquipmentItemMarketplaceOfferSerializer(RequestUserRestSerializerMixin, serializers.ModelSerializer):
+    listing = serializers.PrimaryKeyRelatedField(queryset=EquipmentItemMarketplaceListing.objects.all())
+    line_item = serializers.PrimaryKeyRelatedField(queryset=EquipmentItemMarketplaceListingLineItem.objects.all())
 
     class Meta:
         model = EquipmentItemMarketplaceOffer
