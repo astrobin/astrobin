@@ -134,39 +134,27 @@ class UserService:
         from astrobin.models import Image
         return Image.deleted_objects.filter(user=self.user)
 
-    def get_bookmarked_images(self, page=1) -> QuerySet:
+    def get_bookmarked_images(self) -> QuerySet:
         from astrobin.models import Image
 
         image_ct: ContentType = ContentType.objects.get_for_model(Image)
-        page_size = settings.PAGINATE_USER_PAGE_BY
 
-        bookmarked_pks: List[int] = [
-            x.object_id
-            for x in ToggleProperty.objects.toggleproperties_for_user(
-                "bookmark", self.user
-            ).filter(
-                content_type=image_ct
-            )[page_size * (page - 1):page_size * page]
-        ]
+        return Image.objects.filter(
+            toggleproperties__property_type='bookmark',
+            toggleproperties__user=self.user,
+            toggleproperties__content_type=image_ct
+        )
 
-        return Image.objects.filter(pk__in=bookmarked_pks)
-
-    def get_liked_images(self, page=1) -> QuerySet:
+    def get_liked_images(self) -> QuerySet:
         from astrobin.models import Image
 
         image_ct: ContentType = ContentType.objects.get_for_model(Image)
-        page_size = settings.PAGINATE_USER_PAGE_BY
 
-        liked_pks: List[int] = [
-            x.object_id
-            for x in ToggleProperty.objects.toggleproperties_for_user(
-                "like", self.user
-            ).filter(
-                content_type=image_ct
-            )
-        ][page_size * (page - 1):page_size * page]
-
-        return Image.objects.filter(pk__in=liked_pks)
+        return Image.objects.filter(
+            toggleproperties__property_type='like',
+            toggleproperties__user=self.user,
+            toggleproperties__content_type=image_ct
+        )
 
     def get_image_numbers(self):
         public = self.get_public_images()
