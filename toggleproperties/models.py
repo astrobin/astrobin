@@ -143,7 +143,7 @@ class ToggleProperty(models.Model):
     property_type = models.CharField(max_length=64)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.TextField()
+    object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
     created_on = models.DateTimeField(auto_now_add=True)
