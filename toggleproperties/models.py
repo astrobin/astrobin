@@ -42,7 +42,7 @@ class TogglePropertyManager(models.Manager):
         return qs
 
     def toggleproperties_for_objects(self, property_type, object_list, user=None):
-        object_ids = [str(o.pk) for o in object_list]
+        object_ids = [o.pk for o in object_list]
         if not object_ids:
             return {}
 
