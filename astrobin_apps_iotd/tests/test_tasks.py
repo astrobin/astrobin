@@ -121,7 +121,7 @@ class IotdTasksTest(TestCase):
         resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
 
         resubmit_to_iotd_tp_process.assert_called()
-        get_recently_expired_unsubmitted_images.assert_called_with(timedelta(hours=1))
+        get_recently_expired_unsubmitted_images.assert_called_with(timedelta(hours=2))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=1)
