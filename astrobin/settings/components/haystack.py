@@ -20,7 +20,10 @@ if os.environ.get('ELASTICSEARCH_URL'):
         },
     }
 
-    if 'es.amazonaws.com' in HAYSTACK_CONNECTIONS['default']['URL']:
+    if (
+            'es.amazonaws.com' in HAYSTACK_CONNECTIONS['default']['URL'] or
+            'search.astrobin.com' in HAYSTACK_CONNECTIONS['default']['URL']
+    ):
         credentials = boto3.Session().get_credentials()
         awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, 'us-east-1', 'es',
                            session_token=credentials.token)
@@ -36,7 +39,7 @@ if os.environ.get('ELASTICSEARCH_URL'):
         HAYSTACK_CONNECTIONS['default']['KWARGS'] = {
             'port': 9200,
             'use_ssl': False,
-            'verify_certs': False,
+            'verify_certs': True,
         }
 else:
     HAYSTACK_CONNECTIONS = {
