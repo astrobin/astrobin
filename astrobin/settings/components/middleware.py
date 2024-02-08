@@ -18,6 +18,7 @@ MIDDLEWARE = [
     'astrobin.middleware.PreviousTopicReadMarkerMiddleware',
     'astrobin.middleware.RestFrameworkTokenCookieMiddleware',
     'astrobin.middleware.ThreadLocalsMiddleware',
+    'astrobin.middleware.RequestLoggingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
 ]

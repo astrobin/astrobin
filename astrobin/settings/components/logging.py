@@ -143,6 +143,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'http_requests': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',
