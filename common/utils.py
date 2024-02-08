@@ -45,7 +45,10 @@ def get_segregated_reader_database() -> str:
     if os.environ.get('POSTGRES_READ_REPLICA_SEGREGATED_HOST'):
         return 'segregated_reader'
 
-    return 'reader'
+    if os.environ.get('POSTGRES_READ_REPLICA_HOST'):
+        return 'reader'
+
+    return 'default'
 
 
 def batch(iterable, size=100):
