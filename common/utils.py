@@ -1,3 +1,4 @@
+import os
 from contextlib import contextmanager
 from itertools import islice
 from os.path import dirname, abspath
@@ -37,10 +38,14 @@ def lock_table(model):
             cursor.close()
 
 
-def get_segregated_reader_database():
+def get_segregated_reader_database() -> str:
     if settings.TESTING:
         return 'default'
-    return 'segregated_reader'
+
+    if os.environ.get('POSTGRES_READ_REPLICA_SEGREGATED_HOST'):
+        return 'segregated_reader'
+
+    return 'reader'
 
 
 def batch(iterable, size=100):
