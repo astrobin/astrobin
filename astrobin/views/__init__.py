@@ -1328,7 +1328,7 @@ def user_page_bookmarks(request, username):
 
     response_dict = {
         'requested_user': user,
-        'image_list': UserService(user).get_bookmarked_images(request.GET.get('page', 1)),
+        'image_list': UserService(user).get_bookmarked_images(),
         'paginate_by': settings.PAGINATE_USER_PAGE_BY,
         'alias': 'gallery',
     }
@@ -1349,7 +1349,7 @@ def user_page_liked(request, username):
 
     response_dict = {
         'requested_user': user,
-        'image_list': UserService(user).get_liked_images(request.GET.get('page', 1)),
+        'image_list': UserService(user).get_liked_images(),
         'paginate_by': settings.PAGINATE_USER_PAGE_BY,
         'alias': 'gallery',
     }
