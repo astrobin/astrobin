@@ -17,6 +17,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
+from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.viewsets import GenericViewSet
 
 from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
@@ -39,6 +40,8 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
         IsImageOwnerOrReadOnly
     ]
     http_method_names = ['get', 'head', 'put']
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'images'
 
     @staticmethod
     def _get_equipment_classes():
