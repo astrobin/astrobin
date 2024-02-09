@@ -1,3 +1,5 @@
+import os
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'multidb.middleware.PinningRouterMiddleware',
@@ -18,7 +20,6 @@ MIDDLEWARE = [
     'astrobin.middleware.PreviousTopicReadMarkerMiddleware',
     'astrobin.middleware.RestFrameworkTokenCookieMiddleware',
     'astrobin.middleware.ThreadLocalsMiddleware',
-    'astrobin.middleware.RequestLoggingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
 ]
@@ -33,6 +34,11 @@ if not DEBUG:
     MIDDLEWARE += [
         'django.middleware.gzip.GZipMiddleware',
         'pipeline.middleware.MinifyHTMLMiddleware',
+    ]
+
+if os.environ.get('LOG_HTTP_REQUESTS', 'false').strip() == 'true':
+    MIDDLEWARE += [
+        'astrobin.middleware.RequestLoggingMiddleware',
     ]
 
 MIDDLEWARE += [
