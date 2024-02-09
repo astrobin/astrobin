@@ -52,7 +52,9 @@
                 <tr>
                     {% if requested_user %}
                         <td class="user hidden-phone" data-value="image.user.userprofile.display_name">
-                            {% astrobin_username image.user %}
+                            <a href="{% url 'user_page' image.user.username %}">
+                                {{ image.user.userprofile.get_display_name }}
+                            </a>
                         </td>
                     {% endif %}
 

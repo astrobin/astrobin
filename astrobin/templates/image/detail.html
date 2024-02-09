@@ -33,7 +33,7 @@
     <link rel="canonical" href="{{ BASE_URL }}{% url 'image_detail' image.get_id %}" />
 {% endblock %}
 
-{% block title %}{{image.title|escape}} ({% astrobin_username image.user link=False %}){% endblock %}
+{% block title %}{{image.title|escape}} ({{ image.user.userprofile.get_display_name }}){% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block meta_description %}
