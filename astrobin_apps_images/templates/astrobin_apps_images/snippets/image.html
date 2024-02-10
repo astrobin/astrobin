@@ -225,7 +225,7 @@
                         data-is-video="true"
                     {% endif %}
 
-                        alt="{{ image.title|escape }}, {% astrobin_username image.user link=False %}"
+                        alt="{{ image.title|escape }}, {{ image.user.userprofile.get_display_name }}"
             />
                 {% if is_video and show_play_icon %}
                     <i class="icon-play"></i>
@@ -247,9 +247,9 @@
                         {% endif %}
                         <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
                         <h4>
-                            {% astrobin_username image.user link=False %}
+                            {{ image.user.userprofile.get_display_name }}
                             {% for collaborator in image.collaborators.all %}
-                                &middot; {% astrobin_username collaborator link=False %}
+                                &middot; {{ collaborator.userprofile.get_display_name }}
                             {% endfor %}
                         </h4>
 
@@ -323,7 +323,7 @@
                                         data-src="{{ fancybox_url }}"
                                     {% endif %}
                                     data-url="{{ url }}"
-                                    data-caption='{% astrobin_username image.user link=False %} - "{{ image.title | escape | default:_("(no title)") }}"'
+                                    data-caption='{{ image.user.userprofile.get_display_name }} - "{{ image.title | escape | default:_("(no title)") }}"'
                                     data-slug="{{ slug }}"
                                     data-thumb="{% if thumb_url %}{{ thumb_url }}{% else %}{{ get_raw_thumb_url }}{% endif %}"
                                     data-user-id="{{ image.user.id }}" data-id="{{ image.id }}"
