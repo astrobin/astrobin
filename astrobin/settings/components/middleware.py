@@ -20,7 +20,8 @@ MIDDLEWARE = [
     'astrobin.middleware.PreviousTopicReadMarkerMiddleware',
     'astrobin.middleware.RestFrameworkTokenCookieMiddleware',
     'astrobin.middleware.SlowRequestLoggingMiddleware',
-    'astrobin.middleware.ThreadLocalsMiddleware',
+    # Enable if you want to use the thread locals middleware in AppRedirectionService
+    # 'astrobin.middleware.ThreadLocalsMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
 ]
