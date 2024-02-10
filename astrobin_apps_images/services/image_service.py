@@ -889,6 +889,15 @@ class ImageService:
 
         return collection_tag_value
 
+    def get_badges_cache(self):
+        return cache.get(f'astrobin_image_badges_{self.image.pk}')
+
+    def set_badges_cache(self, badges):
+        cache.set(f'astrobin_image_badges_{self.image.pk}', badges, 60 * 60 * 24)
+
+    def clear_badges_cache(self):
+        cache.delete(f'astrobin_image_badges_{self.image.pk}')
+
     @staticmethod
     def get_constellation(solution):
         if solution is None or solution.ra is None or solution.dec is None:
