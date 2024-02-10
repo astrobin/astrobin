@@ -47,7 +47,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.cache import cache
+from django.core.cache import cache, caches
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, models
 from django.db.models.signals import post_save
@@ -80,12 +80,24 @@ log = logging.getLogger(__name__)
 class HasSolutionMixin(object):
     @property
     def solution(self):
+        # Try prefetch first
         if hasattr(self, '_prefetched_objects_cache') and 'solutions' in self._prefetched_objects_cache:
             return self._prefetched_objects_cache['solutions'][0] \
                 if self._prefetched_objects_cache['solutions'] \
                 else None
-        return self.solutions.first()
 
+        # Then try request locmem cache
+        local_cache = caches['local_request_cache']
+        cache_key = f'astrobin_solution_{self.__class__.__name__}_{self.pk}'
+        solution = local_cache.get(cache_key)
+        if solution:
+            return solution
+
+        # Finally try the database
+        solution = self.solutions.first()
+        local_cache.set(cache_key, solution, 60)
+
+        return solution
 
 def image_hash():
     def generate_hash():
