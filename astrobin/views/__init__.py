@@ -39,7 +39,6 @@ from el_pagination.decorators import page_template
 from flickrapi import FlickrError
 from flickrapi.auth import FlickrAccessToken
 from haystack.query import SearchQuerySet
-from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import common_variables, user_language
 from astrobin.enums import ImageEditorStep, SubjectType
@@ -341,7 +340,6 @@ def upload_max_revisions_error(request, max_revisions, image):
 @cache_control(private=True)
 @page_template('index/stream_page.html', key='stream_page')
 @page_template('index/recent_images_page.html', key='recent_images_page')
-@silk_profile('Index')
 def index(request, template='index/root.html', extra_context=None) -> HttpResponse:
     """Main page"""
 
@@ -1158,7 +1156,6 @@ def me(request):
 @last_modified(CachingService.get_user_page_last_modified)
 @cache_control(private=True, no_cache=True)
 @vary_on_cookie
-@silk_profile('User page')
 def user_page(request, username):
     try:
         user = UserService.get_case_insensitive(username)

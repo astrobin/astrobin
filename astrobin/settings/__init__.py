@@ -38,7 +38,6 @@ include(
     'components/privatebeta.py',
     'components/recaptcha.py',
     'components/rest.py',
-    'components/silky.py',
     'components/subscription.py',
     'components/tinymce.py',
     'components/thumbnail.py',
