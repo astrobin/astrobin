@@ -167,12 +167,13 @@ def astrobin_image(context, image, alias, **kwargs):
     # BADGES #
     ##########
 
-    badges = ImageService(image).get_badges_cache(request.user == image.user or request.user.is_superuser)
-    if badges is None:
-        badges = []
+    badges = []
+    if ImageService.is_badge_compatible_alias(alias):
+        badges = ImageService(image).get_badges_cache(request.user == image.user or request.user.is_superuser)
 
-        if ImageService.is_badge_compatible_alias(alias):
+        if badges is None:
             iotd_service = IotdService()
+            badges = []
 
             if image.is_wip:
                 badges.append('wip')
@@ -232,7 +233,7 @@ def astrobin_image(context, image, alias, **kwargs):
                 badges.append('top100')
             """
 
-        ImageService(image).set_badges_cache(badges, request.user == image.user or request.user.is_superuser)
+            ImageService(image).set_badges_cache(badges, request.user == image.user or request.user.is_superuser)
 
     cache_key = image.thumbnail_cache_key(field, alias, revision_label)
     if animated:
