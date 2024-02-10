@@ -149,7 +149,6 @@ urlpatterns += [
     ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
 
-    url(r'^silk/', include('silk.urls', namespace='silk')),
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),
     url(r'^comments/', include('django_comments.urls')),

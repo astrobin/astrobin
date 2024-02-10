@@ -36,7 +36,6 @@ from django.views.generic import (
 )
 from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
-from silk.profiling.profiler import silk_profile
 
 from astrobin.enums import ImageEditorStep, SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
@@ -258,10 +257,6 @@ class ImageDetailView(ImageDetailViewBase):
     pk_url_kwarg = 'id'
     template_name = 'image/detail.html'
     template_name_suffix = ''
-
-    @silk_profile(name='Image detail')
-    def get(self, request, *args, **kwargs):
-        return super(ImageDetailView, self).get(request, *args, **kwargs)
 
     def get_queryset(self):
         return Image.objects_including_wip.all()

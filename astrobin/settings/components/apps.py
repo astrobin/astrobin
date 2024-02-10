@@ -59,7 +59,6 @@ INSTALLED_APPS += [
     'pybb',
     'precise_bbcode',
     'django_bootstrap_breadcrumbs',
-    'silk',
     'djcelery_email',
     'django_celery_beat',
     'django_bouncy',
