@@ -257,25 +257,33 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     user_q = Q(image__user=request.user)
                     query_q = Q(
                         Q(**{f'{klass}__name__icontains': q}) |
-                        Q(**{f'{klass}__brand__name__icontains': q}) |
-                        Q(distance__lt=.8)
+                        Q(**{f'{klass}__brand__name__icontains': q})
                     )
 
-                    ids = list(
-                        getattr(Image, prop).through.objects.annotate(
-                            item_full_name=Concat(
-                                f'{klass}__brand__name',
-                                Value(' '),
-                                f'{klass}__name'
-                            )
-                        ).annotate(
-                            distance=TrigramDistance(f'item_full_name', q)
-                        ).filter(
-                            user_q & query_q
-                        ).values_list(
-                            klass, flat=True
-                        ).distinct()
-                    )
+                    if 'postgresql' in settings.DATABASES['default']['ENGINE']:
+                        ids = list(
+                            getattr(Image, prop).through.objects.annotate(
+                                item_full_name=Concat(
+                                    f'{klass}__brand__name',
+                                    Value(' '),
+                                    f'{klass}__name'
+                                )
+                            ).annotate(
+                                distance=TrigramDistance(f'item_full_name', q)
+                            ).filter(
+                                user_q & (query_q | Q(distance__lte=.8))
+                            ).values_list(
+                                klass, flat=True
+                            ).distinct()
+                        )
+                    else:
+                        ids = list(
+                            getattr(Image, prop).through.objects.filter(
+                                user_q & query_q
+                            ).values_list(
+                                klass, flat=True
+                            ).distinct()
+                        )
 
                     for x in ids:
                         recent_items.add(x)
