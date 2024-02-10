@@ -270,6 +270,8 @@ class IotdService:
 
         for item in items.iterator():
             TopPickNominationsArchive.objects.get_or_create(image=item)
+            ImageService(item).clear_badges_cache()
+
 
     def update_top_pick_archive(self):
         items = Image.objects.annotate(
@@ -305,6 +307,7 @@ class IotdService:
 
         for item in items.iterator():
             TopPickArchive.objects.get_or_create(image=item)
+            ImageService(item).clear_badges_cache()
 
     def update_submission_queues(self):
         def _compute_queue(submitter: User):
@@ -348,6 +351,7 @@ class IotdService:
                     image=image,
                     published=image.submitted_for_iotd_tp_consideration
                 )
+                ImageService(image).clear_badges_cache()
                 log.debug(
                     f'Image {image.get_id()} "{image.title}" assigned to submitter {submitter.pk} "{submitter.username}".'
                 )
@@ -392,6 +396,7 @@ class IotdService:
                     image=image,
                     last_submission_timestamp=last_submission.date
                 )
+                ImageService(image).clear_badges_cache()
                 log.debug(
                     f'Image {image.get_id()} "{image.title}" assigned to reviewer {reviewer.pk} "{reviewer.username}".'
                 )
@@ -431,6 +436,7 @@ class IotdService:
                     image=image,
                     last_vote_timestamp=last_vote.date
                 )
+                ImageService(image).clear_badges_cache()
                 log.debug(
                     f'Image {image.get_id()} "{image.title}" assigned to judge {judge.pk} "{judge.username}".'
                 )
