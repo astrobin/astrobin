@@ -80,14 +80,11 @@ log = logging.getLogger(__name__)
 class HasSolutionMixin(object):
     @property
     def solution(self):
-        cache_key = "astrobin_solution_%s_%d" % (self.__class__.__name__, self.pk)
-        cached = cache.get(cache_key)
-        if cached is not None:
-            return cached
-
-        result = self.solutions.first()
-        cache.set(cache_key, result, 1)
-        return result
+        if hasattr(self, '_prefetched_objects_cache') and 'solutions' in self._prefetched_objects_cache:
+            return self._prefetched_objects_cache['solutions'][0] \
+                if self._prefetched_objects_cache['solutions'] \
+                else None
+        return self.solutions.first()
 
 
 def image_hash():
