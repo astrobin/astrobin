@@ -278,7 +278,7 @@ class UserService:
         likes = 0
 
         for image in self.get_all_images().iterator():
-            likes += image.likes()
+            likes += image.like_count
 
         for comment in self.get_all_comments().iterator():
             likes += len(comment.likes)

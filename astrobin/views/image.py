@@ -405,12 +405,6 @@ class ImageDetailView(ImageDetailViewBase):
 
         preferred_languages = ', '.join(preferred_languages)
 
-        ##########################
-        # LIKE / BOOKMARKED THIS #
-        ##########################
-        like_this = image.toggleproperties.filter(property_type="like")
-        bookmarked_this = image.toggleproperties.filter(property_type="bookmark")
-
         ##############
         # NAVIGATION #
         ##############
@@ -606,9 +600,7 @@ class ImageDetailView(ImageDetailViewBase):
 
             'image_ct': ContentType.objects.get_for_model(Image),
             'user_ct': ContentType.objects.get_for_model(User),
-            'like_this': like_this,
             'user_can_like': can_like(self.request.user, image),
-            'bookmarked_this': bookmarked_this,
 
             'comments_number': NestedComment.objects.filter(
                 deleted=False,

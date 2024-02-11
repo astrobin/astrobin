@@ -1217,18 +1217,6 @@ def user_page(request, username):
 
     wip_qs = UserService(user).get_wip_images(use_union)
 
-    paginator = Paginator(qs, settings.PAGINATE_USER_PAGE_BY)
-    page_number = request.GET.get('page', 1)
-    page_obj = paginator.get_page(page_number)
-    likes_data = ToggleProperty.objects.toggleproperties_for_objects("like", page_obj)
-    bookmarks_data = ToggleProperty.objects.toggleproperties_for_objects("bookmark", page_obj)
-
-    for image in page_obj:
-        like_count = likes_data.get(image.pk, {}).get('count', 0)
-        bookmark_count = bookmarks_data.get(image.pk, {}).get('count', 0)
-        cache.set("Image.%d.likes" % image.pk, like_count, 60)
-        cache.set("Image.%d.bookmarks" % image.pk, bookmark_count, 60)
-
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
             return HttpResponseForbidden()
