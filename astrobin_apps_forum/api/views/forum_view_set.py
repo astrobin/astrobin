@@ -39,7 +39,10 @@ class ForumViewSet(viewsets.ModelViewSet):
             page_number = 1
 
         q = request.GET.get('q', '')
-        is_equipment = request.GET.get('is-equipment', "false").lower() == "true"
+        is_equipment = request.GET.get('is-equipment')
+
+        if is_equipment:
+            is_equipment = is_equipment.lower() == 'true'
 
         queryset = self.get_queryset()\
             .select_related('category')\
@@ -50,16 +53,19 @@ class ForumViewSet(viewsets.ModelViewSet):
                 .annotate(distance=TrigramDistance('name', q))\
                 .filter(Q(distance__lte=.75) | Q(name__icontains=q))
 
-        if is_equipment:
+        # Weird True/False check because is_equipment can be None
+        if is_equipment is True:
             queryset = queryset.filter(category__slug='equipment-forums')
             if q:
                 queryset = queryset.order_by('distance', Lower('name'))
             else:
                 queryset = queryset.order_by(Lower('name'))
-        else:
+        elif is_equipment is False:
             queryset = queryset\
                 .exclude(category__slug='equipment-forums')\
-                .order_by('category__position', 'position')
+                .order_by('category__position', 'position')[:20]
+        else:
+            queryset = queryset.order_by('category__position', 'position')[:20]
 
         paginator = Paginator(queryset, page_size)
         page = paginator.get_page(page_number)
