@@ -169,9 +169,12 @@ def astrobin_image(context, image, alias, **kwargs):
 
     badges = []
     if ImageService.is_badge_compatible_alias(alias):
-        badges = ImageService(image).get_badges_cache(
-            hasattr(request, 'user') and (request.user == image.user or request.user.is_superuser)
+        is_image_page = str(image.get_id()) in request.path
+        is_image_owner_or_superuser = (
+                hasattr(request, 'user') and (request.user == image.user or request.user.is_superuser)
         )
+
+        badges = ImageService(image).get_badges_cache(is_image_owner_or_superuser, is_image_page)
 
         if badges is None:
             iotd_service = IotdService()
@@ -210,13 +213,12 @@ def astrobin_image(context, image, alias, **kwargs):
                         iotd_service.is_future_iotd(image) or
                         image.submitted_for_iotd_tp_consideration > cutoff - timedelta(minutes=30)
                 ):
-                    if hasattr(request, 'user') and (request.user == image.user or request.user.is_superuser):
+                    if is_image_owner_or_superuser:
                         badges.append('iotd-queue')
 
                 if (
-                        hasattr(request, 'user') and
-                        (image.user == request.user or request.user.is_superuser) and
-                        str(image.get_id()) in request.path and
+                        is_image_owner_or_superuser and
+                        is_image_page and
                         bool(set(badges) & {'iotd', 'top-pick', 'top-pick-nomination', 'iotd-queue'})
                 ):
                     badges.append('iotd-stats')
@@ -237,7 +239,8 @@ def astrobin_image(context, image, alias, **kwargs):
 
             ImageService(image).set_badges_cache(
                 badges,
-                hasattr(request, 'user') and (request.user == image.user or request.user.is_superuser)
+                is_image_owner_or_superuser,
+                is_image_page
             )
 
     cache_key = image.thumbnail_cache_key(field, alias, revision_label)

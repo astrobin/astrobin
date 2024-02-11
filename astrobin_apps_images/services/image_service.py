@@ -889,15 +889,17 @@ class ImageService:
 
         return collection_tag_value
 
-    def get_badges_cache(self, owner_or_superuser: bool):
-        return cache.get(f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}')
+    def get_badges_cache(self, owner_or_superuser: bool, is_image_page: bool = False):
+        return cache.get(f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}_{is_image_page}')
 
-    def set_badges_cache(self, badges, owner_or_superuser: bool):
-        cache.set(f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}', badges, 60 * 60 * 24)
+    def set_badges_cache(self, badges, owner_or_superuser: bool, is_image_page: bool = False):
+        cache.set(f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}_{is_image_page}', badges, 60 * 60 * 24)
 
     def clear_badges_cache(self):
-        cache.delete(f'astrobin_image_badges__{self.image.pk}_True')
-        cache.delete(f'astrobin_image_badges__{self.image.pk}_False')
+        cache.delete(f'astrobin_image_badges__{self.image.pk}_True_True')
+        cache.delete(f'astrobin_image_badges__{self.image.pk}_True_False')
+        cache.delete(f'astrobin_image_badges__{self.image.pk}_False_True')
+        cache.delete(f'astrobin_image_badges__{self.image.pk}_False_False')
 
     @staticmethod
     def get_constellation(solution):
