@@ -88,7 +88,7 @@
                 </div>
                 <div class="subtle-container-body">
                     {% if image_list_count > 0 %}
-                        {% image_list image_list paginate_by=paginate_by nav_ctx='collection' nav_ctx_extra=collection.pk fancybox=False %}
+                        {% image_list image_list paginate_by=paginate_by nav_ctx='collection' nav_ctx_extra=collection.pk fancybox=True %}
                     {% endif %}
 
                     {% if not_matching_tag.count > 0 %}
@@ -96,7 +96,7 @@
                             {% trans "The following images do not have the key/value tag chosen to order this collection, so they are shown as unsorted here." %}
                         </div>
 
-                        {% image_list not_matching_tag paginate_by=paginate_by nav_ctx='collection' nav_ctx_extra=collection.pk fancybox=False %}
+                        {% image_list not_matching_tag paginate_by=paginate_by nav_ctx='collection' nav_ctx_extra=collection.pk fancybox=True %}
                     {% endif %}
                 </div>
             </div>
