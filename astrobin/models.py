@@ -1535,14 +1535,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return url
 
-    def likes(self):
-        key = "Image.%d.likes" % self.pk
-        val = cache.get(key)
-        if val is None:
-            val = ToggleProperty.objects.toggleproperties_for_object("like", self).count()
-            cache.set(key, val, 300)
-        return val
-
     def liked_by(self):
         key = "Image.%d.liked_by" % self.pk
         val = cache.get(key)
@@ -1555,14 +1547,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             cache.set(key, val, 300)
         return val
 
-    def bookmarks(self):
-        key = "Image.%d.bookmarks" % self.pk
-        val = cache.get(key)
-        if val is None:
-            val = ToggleProperty.objects.toggleproperties_for_object("bookmark", self).count()
-            cache.set(key, val, 300)
-        return val
-
     def bookmarked_by(self):
         key = "Image.%d.bookmarked_by" % self.pk
         val = cache.get(key)
@@ -1572,19 +1556,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 .select_related('user') \
                 .values_list('user', flat=True)
             val = [profile.user for profile in UserProfile.objects.filter(user__pk__in=user_pks)]
-            cache.set(key, val, 300)
-        return val
-
-    def comments(self):
-        from nested_comments.models import NestedComment
-        key = "Image.%d.comments" % self.pk
-        val = cache.get(key)
-        if val is None:
-            val = NestedComment.objects.filter(
-                deleted=False,
-                content_type__app_label='astrobin',
-                content_type__model='image',
-                object_id=self.id).count()
             cache.set(key, val, 300)
         return val
 

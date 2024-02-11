@@ -70,11 +70,11 @@
 
                     <td class="views hidden-phone">{% get_hit_count for image %}</td>
 
-                    <td class="likes hidden-phone">{{image.likes}}</td>
+                    <td class="likes hidden-phone">{{image.like_count}}</td>
 
-                    <td class="bookmarks hidden-phone">{{image.bookmarks}}</td>
+                    <td class="bookmarks hidden-phone">{{image.bookmark_count}}</td>
 
-                    <td class="comments hidden-phone">{{image.comments}}</td>
+                    <td class="comments hidden-phone">{{image.comment_count}}</td>
                 </tr>
             {% endfor %}
         </tbody>

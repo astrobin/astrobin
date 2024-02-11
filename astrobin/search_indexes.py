@@ -452,7 +452,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         for i in UserService(obj).get_public_images().iterator():
             cached = cache.get(PREPARED_LIKES_CACHE_KEY % i.pk)
-            likes = cached if cached is not None else i.likes()
+            likes = cached if cached is not None else i.like_count
             if likes >= average:
                 normalized.append(likes)
 
