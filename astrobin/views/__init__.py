@@ -1367,7 +1367,11 @@ def user_page_following(request, username, extra_context=None):
     properties = ToggleProperty.objects.filter(
         property_type="follow",
         user=user,
-        content_type=user_ct)
+        content_type=user_ct
+    ).select_related(
+        'user',
+        'user__userprofile',
+    )
 
     for p in properties:
         try:
@@ -1403,10 +1407,10 @@ def user_page_followers(request, username, extra_context=None):
     user_ct = ContentType.objects.get_for_model(User)
     followers = [
         x.user for x in
-        ToggleProperty.objects.filter(
-            property_type="follow",
-            object_id=user.pk,
-            content_type=user_ct)
+        ToggleProperty.objects.toggleproperties_for_object("follow", user).select_related(
+            'user',
+            'user__userprofile',
+        )
     ]
 
     followers.sort(key=lambda x: x.username)
