@@ -1217,9 +1217,6 @@ def user_page(request, username):
 
     wip_qs = UserService(user).get_wip_images(use_union)
 
-    paginator = Paginator(qs, settings.PAGINATE_USER_PAGE_BY)
-    page_number = request.GET.get('page', 1)
-
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
             return HttpResponseForbidden()
