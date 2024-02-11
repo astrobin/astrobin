@@ -24,7 +24,10 @@ elif CACHE_TYPE == 'locmem':
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        }
+        },
+        'local_request_cache': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        },
     }
 else:
     CACHES = {
