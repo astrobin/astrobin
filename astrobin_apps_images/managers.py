@@ -13,8 +13,6 @@ class ImagesManager(SafeDeleteManager):
             'collaborators',
             'revisions',
             'thumbnails',
-            'solutions',
-            'iotdvote_set',
         )
 
         return super(ImagesManager, self) \
