@@ -57,6 +57,8 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_fre
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService, DateTimeService
 from common.services.constellations_service import ConstellationException, ConstellationsService
+from nested_comments.models import NestedComment
+from toggleproperties.models import ToggleProperty
 
 logger = logging.getLogger(__name__)
 
@@ -900,6 +902,27 @@ class ImageService:
         cache.delete(f'astrobin_image_badges__{self.image.pk}_True_False')
         cache.delete(f'astrobin_image_badges__{self.image.pk}_False_True')
         cache.delete(f'astrobin_image_badges__{self.image.pk}_False_False')
+
+    def update_toggleproperty_count(self, property_type):
+        if hasattr(self.image, f'{property_type}_count'):
+            Image.all_objects.filter(pk=self.image.pk).update(
+                **{f'{property_type}_count': ToggleProperty.objects.filter(
+                    content_type=ContentType.objects.get_for_model(self.image),
+                    object_id=self.image.pk,
+                    property_type=property_type
+                ).count()}
+            )
+
+    def update_comment_count(self):
+        Image.all_objects.filter(pk=self.image.pk).update(
+            comment_count=NestedComment.objects.filter(
+                content_type=ContentType.objects.get_for_model(self.image),
+                object_id=self.image.pk,
+            ).exclude(
+                pending_moderation=True,
+                deleted=True,
+            ).count()
+        )
 
     @staticmethod
     def get_constellation(solution):
