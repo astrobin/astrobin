@@ -475,6 +475,9 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
     else:
         mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
+    if isinstance(instance.content_object, Image):
+        ImageService(instance.content_object).update_comment_count()
+
     if not instance.pending_moderation:
         model_class = instance.content_type.model_class()
         if model_class == Image:
@@ -525,13 +528,20 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
 
+@receiver(post_delete, sender=NestedComment)
+def nested_comment_post_delete(sender, instance, **kwargs):
+    if isinstance(instance.content_object, Image):
+        ImageService(instance.content_object).update_comment_count()
 
 def toggleproperty_post_delete(sender, instance, **kwargs):
-    if isinstance(instance.content_object, Image) and not instance.content_object.is_wip:
-        SearchIndexUpdateService.update_index(instance.content_object)
-        SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
-        for collaborator in instance.content_object.collaborators.all().iterator():
-            SearchIndexUpdateService.update_index(collaborator, 3600)
+    if isinstance(instance.content_object, Image):
+        ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
+
+        if not instance.content_object.is_wip:
+            SearchIndexUpdateService.update_index(instance.content_object)
+            SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
+            for collaborator in instance.content_object.collaborators.all().iterator():
+                SearchIndexUpdateService.update_index(collaborator, 3600)
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
@@ -555,6 +565,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             if instance.content_type == ContentType.objects.get_for_model(Image):
                 image = instance.content_type.get_object_for_this_type(id=instance.object_id)
                 Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
+                ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
 
                 if image.is_wip:
                     return

@@ -1266,6 +1266,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     # For likes, bookmarks, and perhaps more.
     toggleproperties = GenericRelation(ToggleProperty)
 
+    # Counts
+    like_count = models.PositiveIntegerField(editable=False, default=0)
+    bookmark_count = models.PositiveIntegerField(editable=False, default=0)
+    comment_count = models.PositiveIntegerField(editable=False, default=0)
+
     watermark_text = models.CharField(
         max_length=128,
         null=True,
