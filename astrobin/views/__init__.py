@@ -20,7 +20,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.paginator import InvalidPage, Paginator
-from django.db.models import Q
+from django.db.models import Exists, OuterRef, Q
 from django.forms.models import inlineformset_factory
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
@@ -1346,120 +1346,91 @@ def user_page_liked(request, username):
 
 @never_cache
 @require_GET
-@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
-def user_page_following(request, username, extra_context=None):
-    user = get_object_or_404(UserProfile, user__username=username).user
+def user_page_following(request, username):
+    user = get_object_or_404(User, username=username)
 
-    user_ct = ContentType.objects.get_for_model(User)
-    followed_users = []
-    properties = ToggleProperty.objects.filter(
-        property_type="follow",
-        user=user,
-        content_type=user_ct
-    ).select_related(
-        'user',
-        'user__userprofile',
+    following = User.objects.filter(
+        toggleproperty__content_type=ContentType.objects.get_for_model(user),
+        toggleproperty__user=user,
+        toggleproperty__property_type="follow"
+    ).distinct().select_related('userprofile')
+
+    return render(
+        request,
+        'user/following.html',
+        {
+            'request_user': UserProfile.objects.get(user=request.user).user if request.user.is_authenticated else None,
+            'requested_user': user,
+            'user_list': following,
+            **UserService(user).get_image_numbers(),
+        }
     )
-
-    for p in properties:
-        try:
-            followed_users.append(user_ct.get_object_for_this_type(pk=p.object_id))
-        except User.DoesNotExist:
-            pass
-
-    followed_users.sort(key=lambda x: x.username)
-
-    template_name = 'user/following.html'
-    if request.is_ajax():
-        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
-
-    response_dict = {
-        'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated else None,
-        'requested_user': user,
-        'user_list': followed_users,
-        'view': request.GET.get('view', 'default'),
-    }
-
-    response_dict.update(UserService(user).get_image_numbers())
-
-    return render(request, template_name, response_dict)
 
 
 @never_cache
 @require_GET
-@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
-def user_page_followers(request, username, extra_context=None):
-    user = get_object_or_404(UserProfile, user__username=username).user
+def user_page_followers(request, username):
+    user = get_object_or_404(User, username=username)
 
-    user_ct = ContentType.objects.get_for_model(User)
-    followers = [
-        x.user for x in
-        ToggleProperty.objects.toggleproperties_for_object("follow", user).select_related(
-            'user',
-            'user__userprofile',
-        )
-    ]
+    followers = User.objects.filter(
+        toggleproperty__content_type=ContentType.objects.get_for_model(user),
+        toggleproperty__object_id=user.id,
+        toggleproperty__property_type="follow"
+    ).distinct().select_related('userprofile')
 
-    followers.sort(key=lambda x: x.username)
-
-    template_name = 'user/followers.html'
-    if request.is_ajax():
-        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
-
-    response_dict = {
-        'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated else None,
-        'requested_user': user,
-        'user_list': followers,
-        'view': request.GET.get('view', 'default'),
-    }
-
-    response_dict.update(UserService(user).get_image_numbers())
-
-    return render(request, template_name, response_dict)
+    return render(
+        request,
+        'user/followers.html',
+        {
+            'request_user': UserProfile.objects.get(user=request.user).user if request.user.is_authenticated else None,
+            'requested_user': user,
+            'user_list': followers,
+            **UserService(user).get_image_numbers(),
+        }
+    )
 
 
 @require_GET
-@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
-def user_page_friends(request, username, extra_context=None):
-    user = get_object_or_404(UserProfile, user__username=username).user
+def user_page_friends(request, username):
+    user = get_object_or_404(User, username=username)
 
-    user_ct = ContentType.objects.get_for_model(User)
-    friends = []
-    followers = [
-        x.user for x in
-        ToggleProperty.objects.filter(
-            property_type="follow",
-            object_id=user.pk,
-            content_type=user_ct)
-    ]
+    content_type = ContentType.objects.get_for_model(User)
 
-    for follower in followers:
-        if ToggleProperty.objects.filter(
-                property_type="follow",
-                user=user,
-                object_id=follower.pk,
-                content_type=user_ct).exists():
-            friends.append(follower)
+    # Subquery to check if a reverse follow relationship exists
+    reverse_follow_exists = ToggleProperty.objects.filter(
+        property_type="follow",
+        content_type=content_type,
+        user_id=OuterRef('object_id'),
+        object_id=OuterRef('user_id')
+    )
 
-    friends.sort(key=lambda x: x.username)
+    # Query to find mutual follows (friends)
+    mutual_follows = ToggleProperty.objects.filter(
+        property_type="follow",
+        content_type=content_type,
+        user=user  # The user for whom we're finding friends
+    ).annotate(
+        reverse_follow=Exists(reverse_follow_exists)
+    ).filter(
+        reverse_follow=True
+    )
 
-    template_name = 'user/friends.html'
-    if request.is_ajax():
-        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
+    # Fetching related user profiles
+    friends = User.objects.filter(
+        toggleproperty__in=mutual_follows
+    ).distinct().select_related('userprofile')
 
-    response_dict = {
-        'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated else None,
-        'requested_user': user,
-        'user_list': friends,
-        'view': request.GET.get('view', 'default'),
-    }
-
-    response_dict.update(UserService(user).get_image_numbers())
-
-    return render(request, template_name, response_dict)
+    return render(
+        request,
+        'user/friends.html',
+        {
+            'request_user': UserProfile.objects.get(user=request.user).user if request.user.is_authenticated else None,
+            'requested_user': user,
+            'user_list': friends,
+            'view': request.GET.get('view', 'default'),
+            **UserService(user).get_image_numbers(),
+        }
+    )
 
 
 @never_cache
