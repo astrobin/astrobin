@@ -21,7 +21,7 @@ from subscription.models import Subscription
 
 from astrobin.enums import SubjectType
 from common.services.constellations_service import ConstellationsService
-from common.utils import get_segregated_reader_database
+from common.utils import astrobin_index, get_segregated_reader_database
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
