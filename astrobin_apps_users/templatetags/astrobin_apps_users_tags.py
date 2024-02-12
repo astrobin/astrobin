@@ -179,6 +179,10 @@ def is_mutual_follower(a, b):
 
 @register.filter
 def contribution_index(user):
+    if hasattr(user, 'userprofile'):
+        if user.userprofile.contribution_index is not None:
+            return user.userprofile.contribution_index
+
     cache_key = "user_contribution_index.%d" % user.pk
     index = cache.get(cache_key)
 

@@ -3050,6 +3050,16 @@ class UserProfile(SafeDeleteModel):
         null=True,
     )
 
+    # Computer fields
+
+    contribution_index = models.DecimalField(
+        editable=False,
+        null=True,
+        blank=True,
+        max_digits=5,
+        decimal_places=2,
+    )
+
     def get_display_name(self) -> str:
         return self.real_name if self.real_name else str(self.user)
 
@@ -3092,7 +3102,7 @@ class UserProfile(SafeDeleteModel):
 
             scores = {
                 'user_scores_index': user_search_result.normalized_likes,
-                'user_scores_contribution_index': user_search_result.contribution_index,
+                'user_scores_contribution_index': self.contribution_index,
                 'user_scores_followers': user_search_result.followers,
             }
 
