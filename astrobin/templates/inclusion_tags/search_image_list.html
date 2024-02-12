@@ -119,7 +119,136 @@
         <ul class="thumbnails astrobin-thumbnails">
             {% for result in page_obj.object_list %}
                 <li class="thumbnail astrobin-thumbnail">
-                    {% astrobin_image result.object 'gallery' fancybox_tooltip=True rel="image-list" slug=result.object.get_id %}
+                    <div class="astrobin-image-container">
+                        {% if result.is_iotd or result.is_top_pick or result.is_top_pick_nomination %}
+                            <ul class="badges">
+                                {% if result.is_iotd %}
+                                    <li>
+                                        <i 
+                                            class="icon-trophy iotd-badge badge"
+                                            rel="tooltip"
+                                            data-placement="right"
+                                            data-container="body"
+                                            title="{% trans "Image of the day" %}"
+                                        ></i>
+                                    </li>
+                                {% elif result.is_top_pick %}
+                                    <li>
+                                        <i 
+                                            class="icon-star top-pick-badge badge"
+                                            rel="tooltip"
+                                            data-placement="right"
+                                            data-container="body"
+                                            title="{% trans "Top pick" %}"></i>
+                                    </li>
+                                {% elif result.is_top_pick_nomination %}
+                                    <li>
+                                        <i
+                                            class="icon-arrow-up top-pick-nomination-badge badge"
+                                            rel="tooltip"
+                                            data-placement="right"
+                                            data-container="body"
+                                            title="{% trans "Top pick nomination" %}"></i>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                        <figure>
+                            <a href="{% search_image_url result %}{% query_string "" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active,animated,video" %}">
+                                <img
+                                        src="{{ result.gallery_thumbnail }}"
+                                        data-preloaded="true"
+                                        data-loaded="true"
+                                        alt="{{ result.title }}"
+                                        width="130"
+                                        height="130"
+                                        class="astrobin-image"
+                                        data-user-id="{{ result.user_id }}"
+                                        data-alias="gallery"
+                                        data-revision="final"
+                                        {% if result.video %}
+                                            data-is-video="true"
+                                        {% endif %}
+                                />
+                                {% if result.video %}
+                                    <i class="icon-play"></i>
+                                {% endif %}
+                            </a>
+                            <figcaption>
+                                <a href="{% search_image_url result %}{% query_string "" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader,active,animated,video" %}">
+                                    <h3>{{ result.title }}</h3>
+                                    <h4>{{ result.user_display_name|default:result.username }}</h4>
+
+                                    <table class="table table-condensed">
+                                        <tbody>
+                                            <tr>
+                                                <th><i class="icon-calendar"></i></th>
+                                                <td colspan="5">{% timestamp result.published %}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th><i class="icon-thumbs-up"></i></th>
+                                                <td colspan="2">{{ result.likes }}</td>
+                                                <th><i class="icon-bookmark"></i></th>
+                                                <td colspan="2">{{ result.bookmarks }}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th><i class="icon-comments-alt"></i></th>
+                                                <td colspan="5">{{ result.comments }}</td>
+                                            </tr>
+
+                                            {% if result.is_iotd or result.is_top_pick or result.is_top_pick_nomination %}
+                                                <tr>
+                                                    <th class="caption-badge">
+                                                        {% if result.is_iotd %}
+                                                            <i class="icon-trophy"></i>
+                                                        {% elif result.is_top_pick %}
+                                                            <i class="icon-star"></i>
+                                                        {% elif result.is_top_pick_nomination %}
+                                                            <i class="icon-arrow-up"></i>
+                                                        {% endif %}
+                                                    </th>
+
+                                                    <th colspan="5" class="caption-badge">
+                                                        {% if result.is_iotd %}
+                                                            {% trans "Image of the day" %}
+                                                        {% elif result.is_top_pick %}
+                                                            {% trans "Top pick" %}
+                                                        {% elif result.is_top_pick_nomination %}
+                                                            {% trans "Top pick nomination" %}
+                                                        {% endif %}
+                                                    </th>
+                                                </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </a>
+
+                                <div class="image-slideshow-button">
+                                    <a
+                                            data-fancybox="image-list"
+                                            data-rel="image-list"
+                                            href="{% search_image_url result %}rawthumb/qhd/?sync"
+                                            {% if result.video and result.video_url %}
+                                                data-video-url="{{ result.video_url }}"
+                                                data-loop-video="{{ result.loop_video | yesno:"true,false" }}"
+                                            {% endif %}
+                                            data-src="{% search_image_url result %}rawthumb/qhd/?sync"
+                                            data-url="{% search_image_url result %}"
+                                            data-caption="{{ result.user_display_name|default:result.username }} - {{ result.title }}"
+                                            data-slug="{% search_image_hash_or_id result %}"
+                                            data-thumb="{% search_image_url result %}rawthumb/gallery/"
+                                            data-user-id="{{ result.user_id }}"
+                                            data-id="{{ result.object_id }}"
+                                            data-id-or-hash="{% search_image_hash_or_id result %}"
+                                    >
+                                        <i class="icon-play"></i>
+                                    </a>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
