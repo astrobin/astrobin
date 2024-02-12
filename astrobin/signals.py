@@ -36,7 +36,7 @@ from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
 from astrobin.tasks import (
-    encode_video_file, generate_video_preview, invalidate_cdn_caches,
+    compute_contribution_index, encode_video_file, generate_video_preview, invalidate_cdn_caches,
     process_camera_rename_proposal,
 )
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
@@ -456,6 +456,8 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         Telescope as Telescope2
     )
 
+    compute_contribution_index.apply_async(args=(instance.author.pk,), countdown=10)
+
     if created:
         mentions = MentionsService.get_mentions(instance.text)
 
@@ -542,6 +544,10 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
             SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
             for collaborator in instance.content_object.collaborators.all().iterator():
                 SearchIndexUpdateService.update_index(collaborator, 3600)
+    elif isinstance(instance.content_object, Post):
+        compute_contribution_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
+    elif isinstance(instance.content_object, NestedComment):
+        compute_contribution_index.apply_async(args=(instance.content_object.author.pk,), countdown=10)
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
@@ -556,6 +562,10 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
             for collaborator in instance.content_object.collaborators.all().iterator():
                 SearchIndexUpdateService.update_index(collaborator, 3600)
+    elif isinstance(instance.content_object, Post):
+        compute_contribution_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
+    elif isinstance(instance.content_object, NestedComment):
+        compute_contribution_index.apply_async(args=(instance.content_object.author.pk,), countdown=10)
 
     if created:
         verb = None
@@ -1377,6 +1387,8 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                     }
                 )
 
+    compute_contribution_index.apply_async(args=(instance.user.pk,), countdown=10)
+
     if created:
         if hasattr(instance.topic.forum, 'group'):
             instance.topic.forum.group.save()  # trigger date_updated update
@@ -1413,6 +1425,10 @@ def forum_post_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(forum_post_post_save, sender=Post)
+
+@receiver(post_delete, sender=Post)
+def forum_post_post_delete(sender, instance, **kwargs):
+    compute_contribution_index.apply_async(args=(instance.user.pk,), countdown=10)
 
 
 def topic_read_tracker_post_save(sender, instance, created, **kwargs):

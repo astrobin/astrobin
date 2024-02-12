@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db.models import Q
-from django.db.models.functions import Length
 from django.template.defaultfilters import striptags
 from haystack.constants import Indexable
 from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, IntegerField, MultiValueField
@@ -26,7 +25,7 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_users.services import UserService
-from common.utils import get_segregated_reader_database
+from common.utils import astrobin_index, get_segregated_reader_database
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -39,18 +38,6 @@ PREPARED_BOOKMARKS_CACHE_KEY = 'search_index_prepared_bookmarks.%d'
 PREPARED_LIKES_CACHE_KEY = 'search_index_prepared_likes.%d'
 PREPARED_COMMENTS_CACHE_KEY = 'search_index_prepared_comments.%d'
 PREPARED_INTEGRATION_CACHE_KEY = 'search_index_prepared_integration.%d'
-
-
-def _average(values):
-    length = len(values)
-    if length > 0:
-        return sum(values) / float(length)
-    return 0
-
-
-def _astrobin_index(values):
-    import math
-    return _average(values) * math.log(len(values) + 1, 10)
 
 
 def _prepare_integration(obj):
@@ -72,74 +59,6 @@ def _prepare_integration(obj):
 
     cache.set(PREPARED_INTEGRATION_CACHE_KEY % obj.pk, float(integration), PREPARED_FIELD_CACHE_EXPIRATION)
     return float(integration)
-
-
-def _prepare_comment_contribution_index(comments):
-    min_comment_length = 150
-    min_likes = 3
-
-    all_comments = comments \
-        .annotate(length=Length('text')) \
-        .filter(deleted=False, length__gte=min_comment_length)
-
-    all_comments_with_enough_likes = [x for x in all_comments if len(x.likes) >= min_likes]
-    all_comments_count = len(all_comments_with_enough_likes)
-
-    if all_comments_count == 0:
-        return 0
-
-    all_likes = 0
-    for comment in all_comments_with_enough_likes:
-        all_likes += len(comment.likes)
-
-    average = all_likes / float(all_comments_count)
-    normalized = []
-
-    for comment in all_comments_with_enough_likes:
-        likes = len(comment.likes)
-        if likes >= average:
-            normalized.append(likes)
-
-    if len(normalized) == 0:
-        return 0
-
-    return _astrobin_index(normalized)
-
-
-def _prepare_forum_post_contribution_index(posts):
-    min_post_length = 150
-    min_likes = 3
-
-    all_posts = posts \
-        .annotate(length=Length('body')) \
-        .filter(length__gte=min_post_length)
-
-    all_posts_with_enough_likes = [
-        x \
-        for x in all_posts \
-        if ToggleProperty.objects.toggleproperties_for_object('like', x).count() >= min_likes
-    ]
-    all_posts_count = len(all_posts_with_enough_likes)
-
-    if all_posts_count == 0:
-        return 0
-
-    all_likes = 0
-    for post in all_posts_with_enough_likes:
-        all_likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
-
-    average = all_likes / float(all_posts_count)
-    normalized = []
-
-    for post in all_posts_with_enough_likes:
-        likes = ToggleProperty.objects.toggleproperties_for_object('like', post).count()
-        if likes >= average:
-            normalized.append(likes)
-
-    if len(normalized) == 0:
-        return 0
-
-    return _astrobin_index(normalized)
 
 
 def _prepare_likes(obj):
@@ -367,7 +286,7 @@ class UserIndex(CelerySearchIndex, Indexable):
     total_likes_received = IntegerField()
 
     # Index based on text content
-    contribution_index = FloatField()
+    contribution_index = FloatField(model_attr='userprofile__contribution_index', null=True)
 
     # Number of followers
     followers = IntegerField()
@@ -459,7 +378,7 @@ class UserIndex(CelerySearchIndex, Indexable):
         if len(normalized) == 0:
             result = 0
         else:
-            result = _astrobin_index(normalized)
+            result = astrobin_index(normalized)
 
         if obj.userprofile.astrobin_index_bonus is not None:
             result += obj.userprofile.astrobin_index_bonus
@@ -499,14 +418,6 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         return likes + comment_likes_received + forum_post_likes_received
 
-    def prepare_contribution_index(self, obj):
-        comments_contribution_index = _prepare_comment_contribution_index(
-            NestedComment.objects.using(get_segregated_reader_database()).filter(author=obj)
-        )
-        forum_post_contribution_index = _prepare_forum_post_contribution_index(
-            Post.objects.using(get_segregated_reader_database()).filter(user=obj)
-        )
-        return comments_contribution_index + forum_post_contribution_index
 
     def prepare_followers(self, obj):
         return ToggleProperty.objects.filter(
