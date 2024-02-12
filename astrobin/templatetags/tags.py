@@ -1015,3 +1015,10 @@ def search_image_hash_or_id(result):
 def search_image_url(result) -> str:
     image_id = search_image_hash_or_id(result)
     return reverse('image_detail', args=[image_id,])
+
+
+@register.filter
+def page_supports_table_view(request) -> bool:
+    return request.resolver_match.view_name in (
+        'user_page',
+    )
