@@ -14,6 +14,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q, QuerySet
 from django.template import Library
 from django.template.defaultfilters import timesince
+from django.urls import reverse
 from django.utils.safestring import SafeString, mark_safe
 from django.utils.translation import ugettext as _
 from pybb.models import Post, Topic
@@ -1001,3 +1002,16 @@ def get_unseen_active_popups(user: User) -> QuerySet:
 @register.filter(name='split_date_ranges')
 def split_date_ranges(date_ranges_str: str, language_code: str) -> list:
     return DateTimeService.split_date_ranges(date_ranges_str, language_code)
+
+
+@register.simple_tag
+def search_image_hash_or_id(result):
+    if hasattr(result, 'hash') and result.hash:
+        return result.hash
+    return result.object_id
+
+
+@register.simple_tag
+def search_image_url(result) -> str:
+    image_id = search_image_hash_or_id(result)
+    return reverse('image_detail', args=[image_id,])

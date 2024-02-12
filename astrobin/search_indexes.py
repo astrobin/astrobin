@@ -632,6 +632,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     animated = BooleanField(model_attr='animated')
     video = BooleanField()
+    video_url = CharField()
+    loop_video = BooleanField()
 
     likes = IntegerField()
     liked_by = MultiValueField()
@@ -699,6 +701,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
     groups = CharField()
 
     username = CharField(model_attr='user__username')
+    user_id = IntegerField(model_attr='user_id')
+    user_display_name = CharField()
 
     objects_in_field = CharField()
 
@@ -979,6 +983,15 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_video(self, obj):
         return obj.video_file.name is not None and obj.video_file.name != ''
 
+    def prepare_video_url(self, obj):
+        return obj.encoded_video_file.url\
+            if (obj.encoded_video_file.name is not None and
+                obj.encoded_video_file.name != '')\
+            else None
+
+    def prepare_loop_video(self, obj):
+        return obj.loop_video if obj.loop_video else False
+
     def prepare_likes(self, obj):
         return _prepare_likes(obj)
 
@@ -1081,6 +1094,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_user_followed_by(self, obj: Image):
         follows = ToggleProperty.objects.toggleproperties_for_object("follow", obj.user)
         return [x.user.pk for x in follows.all()]
+
+    def prapare_user_display_name(self, obj: Image):
+        return obj.user.userprofile.get_display_name()
 
 
 class NestedCommentIndex(CelerySearchIndex, Indexable):
