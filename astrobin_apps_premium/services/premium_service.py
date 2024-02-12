@@ -124,7 +124,6 @@ class PremiumService:
                 local_cache.set(cache_key, cached, 30)
             return cached
 
-
         # Get the valid UserSubscription for the current user.
         us = [obj for obj in UserSubscription.objects.filter(
             user__username=self.user.username,

@@ -4,7 +4,7 @@
 from datetime import date
 
 from django.conf import settings
-from django.core.cache import cache
+from django.core.cache import InvalidCacheBackendError, cache, caches
 from django.db.models import Q
 from django.template import Library
 
@@ -39,8 +39,20 @@ def donor_badge(user, size='large'):
 def is_donor(user):
     if settings.DONATIONS_ENABLED and user.is_authenticated:
         cache_key = "astrobin_is_donor_%d" % user.pk
+
+        # Try local cache first, because this function is called by many templates.
+        try:
+            local_cache = caches['local_request_cache']
+            cached = local_cache.get(cache_key)
+            if cached is not None:
+                return cached
+        except InvalidCacheBackendError:
+            local_cache = None
+
         cached = cache.get(cache_key)
         if cached is not None:
+            if local_cache:
+                local_cache.set(cache_key, cached, 30)
             return cached
 
         us = UserSubscription.objects.filter(
@@ -75,6 +87,8 @@ def is_donor(user):
             us = us[0]
             result = us.active and us.expires >= date.today()
 
+        if local_cache:
+            local_cache.set(cache_key, result, 30)
         cache.set(cache_key, result, 300)
         return result
 
