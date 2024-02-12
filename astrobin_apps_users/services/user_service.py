@@ -708,7 +708,7 @@ class UserService:
         agreed = self.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines
         return agreed and agreed > settings.IOTD_LAST_RULES_UPDATE
 
-    def compute_contribution_index(self):
+    def compute_contribution_index(self) -> float:
         def compute_comment_contribution_index(comments: QuerySet):
             min_comment_length = 150
             min_likes = 3

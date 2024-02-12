@@ -1141,4 +1141,5 @@ def generate_sitemaps_and_upload_to_s3():
 def compute_contribution_index(user_id: int):
     user = get_object_or_None(User, pk=user_id)
     if user:
-        UserService(user).compute_contribution_index()
+        index = UserService(user).compute_contribution_index()
+        UserProfile.objects.filter(user=user).update(contribution_index=index)
