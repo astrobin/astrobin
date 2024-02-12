@@ -258,17 +258,19 @@
             </li>
         {% endifequal %}
 
-        <li class="pull-right">
-            {% ifequal request.GET.view 'table' %}
-                <a href="{{ request.path }}{% query_string "" "view" %}">
-                    <i class="icon-th"></i>
-                </a>
-            {% else %}
-                <a href="{{ request.path }}{% query_string "view=table" "" %}">
-                    <i class="icon-list"></i>
-                </a>
-            {% endifequal %}
-        </li>
+        {% if request|page_supports_table_view %}
+            <li class="pull-right">
+                {% ifequal request.GET.view 'table' %}
+                    <a href="{{ request.path }}{% query_string "" "view" %}">
+                        <i class="icon-th"></i>
+                    </a>
+                {% else %}
+                    <a href="{{ request.path }}{% query_string "view=table" "" %}">
+                        <i class="icon-list"></i>
+                    </a>
+                {% endifequal %}
+            </li>
+        {% endif %}
 
         {% ifequal request.GET.view None %}
             <li class="pull-right">
