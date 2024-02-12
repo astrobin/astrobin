@@ -1350,9 +1350,11 @@ def user_page_following(request, username):
     user = get_object_or_404(User, username=username)
 
     following = User.objects.filter(
-        toggleproperty__content_type=ContentType.objects.get_for_model(user),
-        toggleproperty__user=user,
-        toggleproperty__property_type="follow"
+        id__in=ToggleProperty.objects.filter(
+            property_type="follow",
+            content_type=ContentType.objects.get_for_model(user),
+            user=user
+        ).values_list('object_id', flat=True)
     ).distinct().select_related('userprofile')
 
     return render(
@@ -1417,7 +1419,7 @@ def user_page_friends(request, username):
 
     # Fetching related user profiles
     friends = User.objects.filter(
-        toggleproperty__in=mutual_follows
+        id__in=mutual_follows.values_list('object_id', flat=True)
     ).distinct().select_related('userprofile')
 
     return render(
