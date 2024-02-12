@@ -183,20 +183,4 @@ def contribution_index(user):
         if user.userprofile.contribution_index is not None:
             return user.userprofile.contribution_index
 
-    cache_key = "user_contribution_index.%d" % user.pk
-    index = cache.get(cache_key)
-
-    if index is None:
-        results = SearchQuerySet().models(User).filter(django_id=user.pk)
-        if not results.count():
-            log.warning("contribution_index filter: unable to get contribution_index for user %d" % user.pk)
-            return None
-
-        try:
-            index = results[0].contribution_index
-            cache.set(cache_key, index, 300)
-        except IndexError:
-            log.warning("contribution_index filter: unable to get contribution_index for user %d" % user.pk)
-            return None
-
-    return index
+    return 0
