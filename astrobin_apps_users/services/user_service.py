@@ -534,35 +534,29 @@ class UserService:
                 Q(subject_type=SubjectType.WIDE_FIELD)
             )
 
-            images_by_constellation = {
-                'n/a': []
-            }
-
-            for image in queryset.iterator():
-                image_constellation = ImageService.get_constellation(image.solution)
-                if image_constellation:
-                    if not images_by_constellation.get(image_constellation.get('abbreviation')):
-                        images_by_constellation[image_constellation.get('abbreviation')] = []
-                    images_by_constellation.get(image_constellation.get('abbreviation')).append(image)
-                else:
-                    images_by_constellation.get('n/a').append(image)
+            unique_constellations = queryset.filter(
+                constellation__isnull=False
+            ).values_list(
+                'constellation', flat=True
+            ).distinct()
 
             menu += [('ALL', _('All'))]
             for constellation in ConstellationsService.constellation_table:
-                if images_by_constellation.get(constellation[0]):
+                if constellation[0] in unique_constellations:
                     menu += [(
                         constellation[0],
-                        constellation[1] + ' (%d)' % len(images_by_constellation.get(constellation[0]))
+                        constellation[1] + ' (%d)' % queryset.filter(constellation=constellation[0]).count()
                     )]
-            if images_by_constellation.get('n/a') and len(images_by_constellation.get('n/a')) > 0:
-                menu += [('n/a', _('n/a') + ' (%d)' % len(images_by_constellation.get('n/a')))]
+
+            if queryset.filter(constellation__isnull=True).exists():
+                menu += [('n/a', _('n/a') + ' (%d)' % queryset.filter(constellation__isnull=True).count())]
 
             if active in (None, ''):
                 active = 'ALL'
 
             if active != 'ALL':
                 try:
-                    queryset = queryset.filter(pk__in=[x.pk for x in images_by_constellation[active]])
+                    queryset = queryset.filter(constellation=active)
                 except KeyError:
                     log.warning("Requested missing constellation %s for user %d" % (active, self.user.pk))
                     queryset = Image.objects.none()

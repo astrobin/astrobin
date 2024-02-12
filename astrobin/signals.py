@@ -721,6 +721,31 @@ def solution_pre_save(sender, instance, **kwargs):
 pre_save.connect(solution_pre_save, sender=Solution)
 
 
+@receiver(post_save, sender=Solution)
+def solution_post_save(sender, instance, created, **kwargs):
+    is_solved = instance.status >= Solver.SUCCESS
+    is_image = instance.content_type.model == 'image'
+
+    if is_solved and is_image:
+        constellation = ImageService.get_constellation(instance)
+        if constellation:
+            log.debug(f"Setting constellation {constellation.get('name')} for image {instance.object_id}")
+            Image.objects_including_wip.filter(
+                pk=instance.object_id
+            ).update(
+                constellation=constellation.get('abbreviation')
+            )
+        else:
+            log.debug(f"Could not find constellation for image {instance.object_id}")
+
+
+@receiver(pre_delete, sender=Solution)
+def solution_pre_delete(sender, instance, **kwargs):
+    if instance.content_type.model == 'image':
+        log.debug(f"Removing constellation for image {instance.object_id}")
+        Image.objects_including_wip.filter(pk=instance.object_id).update(constellation=None)
+
+
 def subscription_paid(sender, **kwargs):
     subscription = kwargs.get('subscription')
     user = kwargs.get('user')
