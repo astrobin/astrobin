@@ -15,6 +15,7 @@ from zipfile import ZipFile
 
 import boto3
 import requests
+from annoying.functions import get_object_or_None
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.apps import apps
@@ -65,6 +66,7 @@ from astrobin.utils import inactive_accounts, never_activated_accounts, never_ac
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
 from common.utils import get_segregated_reader_database
 from nested_comments.models import NestedComment
@@ -1133,3 +1135,11 @@ def generate_sitemaps_and_upload_to_s3():
         upload_to_sitemap_folder('sitemap_index.xml', folder=custom_sitemap['folder'])
 
         CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation(invalidate_urls)
+
+
+@shared_task(time_limit=60)
+def compute_contribution_index(user_id: int):
+    user = get_object_or_None(User, pk=user_id)
+    if user:
+        index = UserService(user).compute_contribution_index()
+        UserProfile.objects.filter(user=user).update(contribution_index=index)

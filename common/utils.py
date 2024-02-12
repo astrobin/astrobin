@@ -1,3 +1,4 @@
+import math
 import os
 from contextlib import contextmanager
 from itertools import islice
@@ -69,3 +70,13 @@ def make_custom_cache_get_side_effect(mock_key, mock_value):
             return original_cache_get(*args, **kwargs)
 
     return custom_cache_get_side_effect
+
+
+def astrobin_index(values) -> float:
+    def _average(_values):
+        length = len(_values)
+        if length > 0:
+            return sum(_values) / float(length)
+        return 0
+
+    return _average(values) * math.log(len(values) + 1, 10)

@@ -10,6 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache, caches
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import OuterRef, Q, QuerySet, Subquery
+from django.db.models.functions import Length
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from haystack.query import SearchQuerySet
@@ -20,6 +21,7 @@ from subscription.models import Subscription
 
 from astrobin.enums import SubjectType
 from common.services.constellations_service import ConstellationsService
+from common.utils import astrobin_index, get_segregated_reader_database
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -706,3 +708,86 @@ class UserService:
         agreed = self.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines
         return agreed and agreed > settings.IOTD_LAST_RULES_UPDATE
 
+    def compute_contribution_index(self) -> float:
+        def compute_comment_contribution_index(comments: QuerySet):
+            min_comment_length = 150
+            min_likes = 3
+
+            all_comments = comments \
+                .annotate(length=Length('text')) \
+                .filter(deleted=False, length__gte=min_comment_length)
+
+            all_comments_with_enough_likes = [x for x in all_comments if len(x.likes) >= min_likes]
+            all_comments_count = len(all_comments_with_enough_likes)
+
+            if all_comments_count == 0:
+                return 0
+
+            all_likes = 0
+            for comment in all_comments_with_enough_likes:
+                all_likes += len(comment.likes)
+
+            average = all_likes / float(all_comments_count)
+            normalized = []
+
+            for comment in all_comments_with_enough_likes:
+                likes = len(comment.likes)
+                if likes >= average:
+                    normalized.append(likes)
+
+            if len(normalized) == 0:
+                return 0
+
+            return astrobin_index(normalized)
+
+        def compute_forum_post_contribution_index(posts: QuerySet):
+            min_post_length = 150
+            min_likes = 3
+
+            all_posts = posts \
+                .annotate(length=Length('body')) \
+                .filter(length__gte=min_post_length)
+
+            all_posts_with_enough_likes = [
+                x \
+                for x in all_posts \
+                if ToggleProperty.objects.toggleproperties_for_object('like', x).count() >= min_likes
+            ]
+            all_posts_count = len(all_posts_with_enough_likes)
+
+            if all_posts_count == 0:
+                return 0
+
+            all_likes = 0
+            for post in all_posts_with_enough_likes:
+                all_likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+
+            average = all_likes / float(all_posts_count)
+            normalized = []
+
+            for post in all_posts_with_enough_likes:
+                likes = ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+                if likes >= average:
+                    normalized.append(likes)
+
+            if len(normalized) == 0:
+                return 0
+
+            return astrobin_index(normalized)
+
+        comments_contribution_index = compute_comment_contribution_index(
+            NestedComment.objects.using(get_segregated_reader_database()).filter(author=self.user)
+        )
+
+        forum_post_contribution_index = compute_forum_post_contribution_index(
+            Post.objects.using(get_segregated_reader_database()).filter(user=self.user)
+        )
+
+        total = comments_contribution_index + forum_post_contribution_index
+
+        log.debug(
+            f"User {self.user.username} has a contribution index of {total} (comments: "
+            f"{comments_contribution_index}, forum posts: {forum_post_contribution_index})"
+        )
+
+        return total
