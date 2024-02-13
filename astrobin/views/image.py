@@ -183,7 +183,7 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
                 alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
                 sync=request.GET.get('sync') is not None)
         except FileNotFoundError:
-           url = ImageService(image).get_error_thumbnail(revision_label, alias)
+            url = ImageService(image).get_error_thumbnail(revision_label, alias)
 
         return self.render_json_response({
             'id': image.pk,
