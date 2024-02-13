@@ -4,7 +4,7 @@ from avatar.templatetags.avatar_tags import avatar_url
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.http import Http404
 from hitcount.models import HitCount
 from persistent_messages.models import Message
@@ -812,10 +812,13 @@ class UserProfileResource(ModelResource):
         return Image.objects.using(get_segregated_reader_database()).filter(user=bundle.obj.user, is_wip=False).count()
 
     def dehydrate_received_likes_count(self, bundle):
-        likes = 0
-        for i in Image.objects.filter(user=bundle.obj.user):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
-        return likes
+        return Image.objects.using(
+            get_segregated_reader_database()
+        ).filter(
+            user=bundle.obj.user
+        ).aggregate(
+            total_likes=Sum('like_count')
+        )['total_likes'] or 0
 
     def dehydrate_followers_count(self, bundle):
         return ToggleProperty.objects.using(get_segregated_reader_database()).filter(
