@@ -1,15 +1,12 @@
-# Python
-
-# Django
 from datetime import date
 
 from django.conf import settings
-from django.core.cache import InvalidCacheBackendError, cache, caches
 from django.db.models import Q
 from django.template import Library
 
-# Third party
 from subscription.models import UserSubscription
+
+from common.services.caching_service import CachingService
 
 register = Library()
 
@@ -41,19 +38,9 @@ def is_donor(user):
         cache_key = "astrobin_is_donor_%d" % user.pk
 
         # Try local cache first, because this function is called by many templates.
-        try:
-            local_cache = caches['local_request_cache']
-            cached = local_cache.get(cache_key)
-            if cached is not None:
-                return cached
-        except InvalidCacheBackendError:
-            local_cache = None
-
-        cached = cache.get(cache_key)
-        if cached is not None:
-            if local_cache:
-                local_cache.set(cache_key, cached, 30)
-            return cached
+        value = CachingService.get(cache_key)
+        if value is not None:
+            return value
 
         us = UserSubscription.objects.filter(
             Q(user=user) &
@@ -87,9 +74,7 @@ def is_donor(user):
             us = us[0]
             result = us.active and us.expires >= date.today()
 
-        if local_cache:
-            local_cache.set(cache_key, result, 30)
-        cache.set(cache_key, result, 300)
+        CachingService.set(cache_key, result, timeout=300)
         return result
 
     return False

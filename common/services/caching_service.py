@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.core.cache import caches
 from persistent_messages.models import Message
 from rest_framework.authtoken.models import Token
 
@@ -10,6 +11,35 @@ from common.services import DateTimeService
 
 
 class CachingService:
+    @staticmethod
+    def get_local(key):
+        local_cache = caches['local_request_cache']
+        return local_cache.get(key)
+
+    @staticmethod
+    def set_local(key, value, timeout=None):
+        local_cache = caches['local_request_cache']
+        local_cache.set(key, value, timeout)
+
+    @staticmethod
+    def get(key, prefer_local_cache=True):
+        if prefer_local_cache:
+            value = CachingService.get_local(key)
+            if value is not None:
+                return value
+
+        value = caches['default'].get(key)
+        if prefer_local_cache and value is not None:
+            CachingService.set_local(key, value)
+
+        return value
+
+    @staticmethod
+    def set(key, value, timeout=None, prefer_local_cache=True):
+        caches['default'].set(key, value, timeout)
+        if prefer_local_cache:
+            CachingService.set_local(key, value, timeout)
+
     @staticmethod
     def get_latest_top_pick_nomination_datetime(request):
         try:
