@@ -5,7 +5,6 @@ import zlib
 from datetime import datetime, timedelta
 
 from PIL.Image import DecompressionBombError
-from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Library
@@ -95,6 +94,11 @@ def astrobin_image(context, image, alias, **kwargs):
             'show_video': False,
             'show_play_icon': False,
         }
+
+    thumb_url = None
+
+    if revision_label in (None, 'None', 'final') and alias == 'gallery' and image.final_gallery_thumbnail:
+        thumb_url = image.final_gallery_thumbnail
 
     # Old images might not have a size in the database, let's fix it.
     image_revision = image
@@ -243,10 +247,11 @@ def astrobin_image(context, image, alias, **kwargs):
                 is_image_page
             )
 
-    cache_key = image.thumbnail_cache_key(field, alias, revision_label)
-    if animated:
-        cache_key += '_animated'
-    thumb_url = cache.get(cache_key)
+    if thumb_url is None:
+        cache_key = image.thumbnail_cache_key(field, alias, revision_label)
+        if animated:
+            cache_key += '_animated'
+        thumb_url = cache.get(cache_key)
 
     # Force HTTPS
     if thumb_url and request.is_secure():

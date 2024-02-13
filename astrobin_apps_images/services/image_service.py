@@ -284,13 +284,14 @@ class ImageService:
         if 'ERROR' in url:
             return
 
-        field = self.image.get_thumbnail_field(revision_label)
-        cache_key = self.image.thumbnail_cache_key(field, alias, revision_label)
-        cache.set(cache_key, url, 60 * 60 * 24)
-
         thumbnails, created = ThumbnailGroup.objects.get_or_create(image=self.image, revision=revision_label)
-        setattr(thumbnails, alias, url)
-        thumbnails.save()
+        if getattr(thumbnails, alias) != url:
+            setattr(thumbnails, alias, url)
+            thumbnails.save()
+
+            field = self.image.get_thumbnail_field(revision_label)
+            cache_key = self.image.thumbnail_cache_key(field, alias, revision_label)
+            cache.set(cache_key, url, 60 * 60 * 24)
 
     def delete_original(self):
         image: Image = self.image

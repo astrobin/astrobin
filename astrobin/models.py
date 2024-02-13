@@ -1510,6 +1510,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         blank=True,
     )
 
+    # To prevent a billion cache requests when looking at user galleries, we store the final gallery thumbnail here.
+    final_gallery_thumbnail = models.CharField(max_length=512, null=True, blank=True)
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
@@ -1690,7 +1693,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     def thumbnail(self, alias: str, revision_label: str, **kwargs) -> str:
         def normalize_url_security(url: str, thumbnail_settings: dict) -> str:
-            insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure'] == True
+            insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure']
             if insecure and url.startswith('https'):
                 return url.replace('https', 'http', 1)
 
@@ -1708,8 +1711,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if alias in ('revision', 'runnerup'):
             alias = 'gallery'
 
-        if revision_label in (None, 'None', 'final'):
-            revision_label = ImageService(self).get_final_revision_label()
+        final_revision_label = ImageService(self).get_final_revision_label()
+        if revision_label in (None, 'None', 'final', final_revision_label):
+            if alias == 'gallery' and self.final_gallery_thumbnail:
+                return normalize_url_security(self.final_gallery_thumbnail, thumbnail_settings)
+            revision_label = final_revision_label
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name or 'placeholder' in field.url:
