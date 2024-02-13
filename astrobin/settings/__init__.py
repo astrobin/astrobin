@@ -44,6 +44,7 @@ include(
     'components/toggleproperties.py',
     'components/robots.py',
     'components/scout.py',
+    'components/sentry.py',
 
     # AstroBin settings
     'components/flickr.py',
