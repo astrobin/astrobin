@@ -78,7 +78,7 @@ class ImageService:
         if label == 'final':
             label = self.get_final_revision_label()
 
-        return ImageRevision.objects.get(image=self.image, label=label)
+        return self.image.revisions.get(image=self.image, label=label)
 
     def get_final_revision_label(self):
         # type: () -> str
