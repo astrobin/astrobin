@@ -54,6 +54,7 @@ class LocationResource(ModelResource):
     """
 
     class Meta:
+        max_limit = 25
         authentication = AppAuthentication()
         queryset = Location.objects.using(get_segregated_reader_database()).all()
         fields = [
@@ -94,6 +95,7 @@ class ImageRevisionResource(ModelResource):
     radius = fields.DecimalField()
 
     class Meta:
+        max_limit = 25
         authentication = AppAuthentication()
         queryset = ImageRevision.objects.using(get_segregated_reader_database()).filter(image__is_wip=False)
         fields = [
@@ -291,8 +293,9 @@ class ImageResource(ModelResource):
     views = fields.IntegerField()
 
     class Meta:
+        max_limit = 25
         authentication = AppAuthentication()
-        queryset = Image.all_objects.filter(is_wip=False, deleted__isnull=True, uploader_in_progress__isnull=True)
+        queryset = Image.objects.filter(uploader_in_progress__isnull=True)
         fields = [
             'id',
             'hash',
@@ -652,6 +655,7 @@ class ImageOfTheDayResource(ModelResource):
     runnerup_2 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_2', null=True)
 
     class Meta:
+        max_limit = 25
         authentication = AppAuthentication()
         queryset = ImageOfTheDay.objects.using(get_segregated_reader_database()).filter()
         fields = [
@@ -671,6 +675,7 @@ class TopPickResource(ModelResource):
     date = fields.DateField('date', null=True)
 
     class Meta:
+        max_limit = 25
         authentication = AppAuthentication()
         queryset = TopPickArchive.objects.using(get_segregated_reader_database()).all()
         fields = [
@@ -690,6 +695,7 @@ class TopPickNominationResource(ModelResource):
     date = fields.DateField('date', null=True)
 
     class Meta:
+        max_limit = 25
         authentication = AppAuthentication()
         queryset = TopPickNominationsArchive.objects.using(get_segregated_reader_database()).all()
         fields = [
@@ -713,6 +719,7 @@ class CollectionResource(ModelResource):
     images = fields.ToManyField(ImageResource, 'images')
 
     class Meta:
+        max_limit = 25
         authentication = AppAuthentication()
         allowed_methods = ['get']
         queryset = Collection.objects.using(get_segregated_reader_database()).all()
@@ -760,6 +767,7 @@ class UserProfileResource(ModelResource):
     premium_subscription_expiration = fields.DateField()
 
     class Meta:
+        max_limit = 25
         authentication = AppAuthentication()
         allowed_methods = ["get"]
         queryset = UserProfile.objects.using(get_segregated_reader_database()).all()
