@@ -67,7 +67,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         brand_from_query = self.request.query_params.get('brand')
 
         manager = self.get_serializer().Meta.model.objects
-        queryset = manager.all()
+        queryset = manager.all().select_related('brand')
 
         if 'include-variants' in self.request.query_params and self.request.query_params.get(
                 'include-variants'
