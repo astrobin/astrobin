@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.core.cache import caches
+from django.core.cache import InvalidCacheBackendError, caches
 from persistent_messages.models import Message
 from rest_framework.authtoken.models import Token
 
@@ -13,13 +13,19 @@ from common.services import DateTimeService
 class CachingService:
     @staticmethod
     def get_local(key):
-        local_cache = caches['local_request_cache']
-        return local_cache.get(key)
+        try:
+            local_cache = caches['local_request_cache']
+            return local_cache.get(key)
+        except InvalidCacheBackendError:
+            return None
 
     @staticmethod
     def set_local(key, value, timeout=None):
-        local_cache = caches['local_request_cache']
-        local_cache.set(key, value, timeout)
+        try:
+            local_cache = caches['local_request_cache']
+            local_cache.set(key, value, timeout)
+        except InvalidCacheBackendError:
+            pass
 
     @staticmethod
     def get(key, prefer_local_cache=True):
