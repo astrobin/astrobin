@@ -68,15 +68,15 @@ class UserService:
 
     def get_all_images(self, use_union=False) -> QuerySet:
         from astrobin.models import Image
+        from common.services.caching_service import CachingService
 
-        local_cache = caches['local_request_cache']
         cache_key = f"collaborators_check_{self.user.id}"
 
-        has_collaborators = local_cache.get(cache_key)
+        has_collaborators = CachingService.get_local(cache_key)
 
         if has_collaborators is None:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
-            local_cache.set(cache_key, has_collaborators, timeout=30)
+            CachingService.set_local(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
             if use_union:
@@ -90,15 +90,15 @@ class UserService:
 
     def get_public_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
+        from common.services.caching_service import CachingService
 
-        local_cache = caches['local_request_cache']
         cache_key = f"collaborators_check_{self.user.id}"
 
-        has_collaborators = local_cache.get(cache_key)
+        has_collaborators = CachingService.get_local(cache_key)
 
         if has_collaborators is None:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
-            local_cache.set(cache_key, has_collaborators, timeout=30)
+            CachingService.set_local(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
             if use_union:
@@ -112,15 +112,15 @@ class UserService:
 
     def get_wip_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
+        from common.services.caching_service import CachingService
 
-        local_cache = caches['local_request_cache']
         cache_key = f"collaborators_check_{self.user.id}"
 
-        has_collaborators = local_cache.get(cache_key)
+        has_collaborators = CachingService.get_local(cache_key)
 
         if has_collaborators is None:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
-            local_cache.set(cache_key, has_collaborators, timeout=30)
+            CachingService.set_local(cache_key, has_collaborators, timeout=30)
 
         if has_collaborators:
             if use_union:

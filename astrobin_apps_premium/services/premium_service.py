@@ -6,7 +6,7 @@ from typing import Optional
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.cache import InvalidCacheBackendError, cache, caches
+from django.core.cache import cache
 from django.db.models import Q, QuerySet
 from django.utils import timezone
 from subscription.models import UserSubscription
@@ -109,20 +109,11 @@ class PremiumService:
         cache_key = "astrobin_valid_usersubscription_%d" % self.user.pk
 
         # Try local cache first, because this function is called by many templates.
-        try:
-            local_cache = caches['local_request_cache']
-            cached = local_cache.get(cache_key)
-            if cached is not None:
-                return cached
-        except InvalidCacheBackendError:
-            local_cache = None
+        from common.services.caching_service import CachingService
 
-        # Try regular cache.
-        cached = cache.get(cache_key)
-        if cached is not None:
-            if local_cache:
-                local_cache.set(cache_key, cached, 30)
-            return cached
+        value = CachingService.get(cache_key)
+        if value is not None:
+            return value
 
         # Get the valid UserSubscription for the current user.
         us = [obj for obj in UserSubscription.objects.filter(
@@ -140,9 +131,7 @@ class PremiumService:
             sortedByWeight = sorted(us, key=functools.cmp_to_key(_compareSubscriptionWeights))
             result = sortedByWeight[0]
 
-        if local_cache:
-            local_cache.set(cache_key, result, 30)
-        cache.set(cache_key, result, 300)
+        CachingService.set(cache_key, result, timeout=60)
 
         return result
 

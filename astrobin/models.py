@@ -87,20 +87,22 @@ class HasSolutionMixin(object):
                 else None
 
         # Then try request locmem cache
-        local_cache = caches['local_request_cache']
+        from common.services.caching_service import CachingService
+
         cache_key = f'astrobin_solution_{self.__class__.__name__}_{self.pk}'
-        solution = local_cache.get(cache_key)
+        solution = CachingService.get_local(cache_key)
         if solution:
             return solution
 
         # Finally try the database
         solution = self.solutions.first()
-        local_cache.set(cache_key, solution, 60)
+        CachingService.set_local(cache_key, solution, 60)
 
         return solution
 
-def image_hash():
-    def generate_hash():
+
+def image_hash() -> str:
+    def generate_hash() -> str:
         return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
 
     hash = generate_hash()
@@ -3092,11 +3094,12 @@ class UserProfile(SafeDeleteModel):
         getattr(self, resolve[gear_type]).remove(gear)
 
     def get_scores(self):
+        from common.services.caching_service import CachingService
         from haystack.exceptions import SearchFieldError
         from haystack.query import SearchQuerySet
 
         cache_key = "astrobin_user_score_%s" % self.user.username
-        scores = cache.get(cache_key)
+        scores = CachingService.get(cache_key)
 
         if not scores:
             try:
@@ -3114,7 +3117,7 @@ class UserProfile(SafeDeleteModel):
                 'user_scores_followers': user_search_result.followers,
             }
 
-            cache.set(cache_key, scores, 300)
+            CachingService.set(cache_key, scores, 300)
 
         return scores
 
