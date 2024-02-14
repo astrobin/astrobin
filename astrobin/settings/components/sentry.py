@@ -8,5 +8,5 @@ if SENTRY_DNS:
     sentry_sdk.init(
         dsn=SENTRY_DNS,
         enable_tracing=True,
-        traces_sample_rate=1.0,
+        traces_sample_rate=0.5,
     )
