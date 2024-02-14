@@ -28,6 +28,14 @@ class CachingService:
             pass
 
     @staticmethod
+    def delete_local(key):
+        try:
+            local_cache = caches['local_request_cache']
+            local_cache.delete(key)
+        except InvalidCacheBackendError:
+            pass
+
+    @staticmethod
     def get(key, prefer_local_cache=True):
         if prefer_local_cache:
             value = CachingService.get_local(key)
@@ -45,6 +53,12 @@ class CachingService:
         caches['default'].set(key, value, timeout)
         if prefer_local_cache:
             CachingService.set_local(key, value, timeout)
+
+    @staticmethod
+    def delete(key, prefer_local_cache=True):
+        caches['default'].delete(key)
+        if prefer_local_cache:
+            CachingService.delete_local(key)
 
     @staticmethod
     def get_latest_top_pick_nomination_datetime(request):
