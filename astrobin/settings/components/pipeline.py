@@ -5,7 +5,6 @@ THIRD_PARTY_STYLESHEETS = (
     'astrobin/css/validationEngine.jquery.css',
     'astrobin/css/token-input.css',
     'astrobin/css/jquery.multiselect.css',
-    'astrobin/css/jquery.qtip.css',
     'astrobin/css/highlightjs-copy.min.css',
 
     'astrobin_apps_donations/css/astrobin_apps_donations.css',
@@ -46,7 +45,6 @@ PIPELINE = {
                 'astrobin/js/jquery.flot.pie.min.js',
                 'astrobin/js/jquery.cycle.all.js',
                 'astrobin/js/jquery.multiselect.js',
-                'astrobin/js/jquery.qtip.js',
                 'astrobin/js/jquery.stickytableheaders.js',
                 'astrobin/js/jquery.timeago.js',
                 'astrobin/js/respond.src.js',
