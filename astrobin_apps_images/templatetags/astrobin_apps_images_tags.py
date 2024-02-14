@@ -380,22 +380,6 @@ def random_id(context, size=8, chars=string.ascii_uppercase + string.digits):
     return ''
 
 
-@register.simple_tag(takes_context=True)
-def cache_image_list(context):
-    # Don't cache for gallery owner.
-    if context['requested_user'] and context['request'].user == context['requested_user']:
-        return False
-
-    if context['request'].user.is_superuser:
-        return False
-
-    # Don't cache pages.
-    if context['request'].GET.get('image_list_page'):
-        return False
-
-    return context['section'] == 'public' and (context['subsection'] in ('title', 'uploaded',))
-
-
 @register.filter()
 def is_platesolvable(image):
     return ImageService(image).is_platesolvable()
