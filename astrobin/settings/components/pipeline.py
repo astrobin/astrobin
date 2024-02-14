@@ -39,6 +39,7 @@ PIPELINE = {
                 'astrobin/js/jquery.blockUI.js',
                 'astrobin/js/jquery.tmpl.1.1.1.js',
                 'astrobin/js/ui.multiselect.js',
+                'astrobin/js/jquery.qtip.js',
                 'astrobin/js/jquery.form.js',
                 'astrobin/js/jquery.tokeninput.js',
                 'astrobin/js/jquery.flot.js',
