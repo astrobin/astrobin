@@ -422,3 +422,5 @@ AUTO_APPROVE_DOMAINS = (
     '@astrobin.com',
     '@highpointscientific.com',
 )
+
+USER_AGENTS_CACHE = None
