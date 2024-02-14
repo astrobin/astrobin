@@ -148,11 +148,6 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
-        'scout_apm': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',
