@@ -90,13 +90,13 @@ class HasSolutionMixin(object):
         from common.services.caching_service import CachingService
 
         cache_key = f'astrobin_solution_{self.__class__.__name__}_{self.pk}'
-        solution = CachingService.get_local(cache_key)
+        solution = CachingService.get_from_request_cache(cache_key)
         if solution:
             return solution
 
         # Finally try the database
         solution = self.solutions.first()
-        CachingService.set_local(cache_key, solution, 60)
+        CachingService.set_in_request_cache(cache_key, solution)
 
         return solution
 

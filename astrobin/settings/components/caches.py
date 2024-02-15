@@ -19,17 +19,10 @@ if CACHE_TYPE == 'redis':
             'KEY_PREFIX': 'astrobin',
             'TIMEOUT': 3600,
         },
-        'local_request_cache': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-            'LOCATION': 'unique-snowflake',
-        },
     }
 elif CACHE_TYPE == 'locmem':
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        },
-        'local_request_cache': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         },
     }
@@ -37,8 +30,5 @@ else:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        },
-        'local_request_cache': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         },
     }

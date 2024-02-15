@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.core.cache import InvalidCacheBackendError, caches
+from django.core.cache import cache
 from persistent_messages.models import Message
 from rest_framework.authtoken.models import Token
 
@@ -12,53 +12,56 @@ from common.services import DateTimeService
 
 class CachingService:
     @staticmethod
-    def get_local(key):
-        try:
-            local_cache = caches['local_request_cache']
-            return local_cache.get(key)
-        except InvalidCacheBackendError:
-            return None
+    def is_in_request_cache(key: str) -> bool:
+        from astrobin.middleware.thread_locals_middleware import get_request_cache
+        request_cache = get_request_cache()
+        return key in request_cache
 
     @staticmethod
-    def set_local(key, value, timeout=None):
-        try:
-            local_cache = caches['local_request_cache']
-            local_cache.set(key, value, timeout)
-        except InvalidCacheBackendError:
-            pass
+    def get_from_request_cache(key: str) -> any:
+        from astrobin.middleware.thread_locals_middleware import get_request_cache
+        request_cache = get_request_cache()
+        return request_cache.get(key, None)
 
     @staticmethod
-    def delete_local(key):
-        try:
-            local_cache = caches['local_request_cache']
-            local_cache.delete(key)
-        except InvalidCacheBackendError:
-            pass
+    def set_in_request_cache(key: str, value: any):
+        from astrobin.middleware.thread_locals_middleware import get_request_cache
+        request_cache = get_request_cache()
+        request_cache[key] = value
 
     @staticmethod
-    def get(key, prefer_local_cache=True):
-        if prefer_local_cache:
-            value = CachingService.get_local(key)
-            if value is not None:
+    def delete_from_request_cache(key: str):
+        from astrobin.middleware.thread_locals_middleware import get_request_cache
+        request_cache = get_request_cache()
+        if key in request_cache:
+            del request_cache[key]
+
+    @staticmethod
+    def get(key, check_request_cache=True):
+        if check_request_cache:
+            is_present = CachingService.is_in_request_cache(key)
+            value = CachingService.get_from_request_cache(key)
+            if value is not None or is_present:
                 return value
 
-        value = caches['default'].get(key)
-        if prefer_local_cache and value is not None:
-            CachingService.set_local(key, value)
+        value = cache.get(key)
+
+        if check_request_cache and value is not None:
+            CachingService.set_in_request_cache(key, value)
 
         return value
 
     @staticmethod
-    def set(key, value, timeout=None, prefer_local_cache=True):
-        caches['default'].set(key, value, timeout)
-        if prefer_local_cache:
-            CachingService.set_local(key, value, timeout)
+    def set(key, value, timeout=None, use_request_cache=True):
+        if use_request_cache:
+            CachingService.set_in_request_cache(key, value)
+        cache.set(key, value, timeout)
 
     @staticmethod
-    def delete(key, prefer_local_cache=True):
-        caches['default'].delete(key)
-        if prefer_local_cache:
-            CachingService.delete_local(key)
+    def delete(key, use_request_cache=True):
+        if use_request_cache:
+            CachingService.delete_from_request_cache(key)
+        cache.delete(key)
 
     @staticmethod
     def get_latest_top_pick_nomination_datetime(request):

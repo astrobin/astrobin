@@ -72,11 +72,11 @@ class UserService:
 
         cache_key = f"collaborators_check_{self.user.id}"
 
-        has_collaborators = CachingService.get_local(cache_key)
+        has_collaborators = CachingService.get_from_request_cache(cache_key)
 
         if has_collaborators is None:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
-            CachingService.set_local(cache_key, has_collaborators, timeout=30)
+            CachingService.set_in_request_cache(cache_key, has_collaborators)
 
         if has_collaborators:
             if use_union:
@@ -94,11 +94,11 @@ class UserService:
 
         cache_key = f"collaborators_check_{self.user.id}"
 
-        has_collaborators = CachingService.get_local(cache_key)
+        has_collaborators = CachingService.get_from_request_cache(cache_key)
 
         if has_collaborators is None:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
-            CachingService.set_local(cache_key, has_collaborators, timeout=30)
+            CachingService.set_in_request_cache(cache_key, has_collaborators)
 
         if has_collaborators:
             if use_union:
@@ -116,11 +116,11 @@ class UserService:
 
         cache_key = f"collaborators_check_{self.user.id}"
 
-        has_collaborators = CachingService.get_local(cache_key)
+        has_collaborators = CachingService.get_from_request_cache(cache_key)
 
         if has_collaborators is None:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
-            CachingService.set_local(cache_key, has_collaborators, timeout=30)
+            CachingService.set_in_request_cache(cache_key, has_collaborators)
 
         if has_collaborators:
             if use_union:
