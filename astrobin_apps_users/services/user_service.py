@@ -232,18 +232,28 @@ class UserService:
         if not self.user.is_authenticated:
             return False, "ANONYMOUS"
 
+        from common.services.caching_service import CachingService
+        cache_key = f'UserService._real_can_like.{self.user.pk}.{obj.__class__.__name__}.{obj.pk}'
+        cached = CachingService.get_from_request_cache(cache_key)
+        if cached is not None:
+            return cached
+
         if obj.__class__.__name__ == 'Image':
-            return self.user != obj.user, "OWNER"
+            value = self.user != obj.user, "OWNER"
         elif obj.__class__.__name__ == 'NestedComment':
-            return self.user != obj.author, "OWNER"
+            value = self.user != obj.author, "OWNER"
         elif obj.__class__.__name__ == 'Post':
             if self.user == obj.user:
-                return False, "OWNER"
-            if obj.topic.closed:
-                return False, "TOPIC_CLOSED"
-            return True, None
+                value = False, "OWNER"
+            elif obj.topic.closed:
+                value = False, "TOPIC_CLOSED"
+            else:
+                value = True, None
+        else:
+            value = False, "UNKNOWN"
 
-        return False, "UNKNOWN"
+        CachingService.set_in_request_cache(cache_key, value)
+        return value
 
     def can_like(self, obj):
         return self._real_can_like(obj)[0]
@@ -255,14 +265,24 @@ class UserService:
         if not self.user.is_authenticated:
             return False, "ANONYMOUS"
 
+        from common.services.caching_service import CachingService
+        cache_key = f'UserService._real_can_unlike.{self.user.pk}.{obj.__class__.__name__}.{obj.pk}'
+        cached = CachingService.get_from_request_cache(cache_key)
+        if cached is not None:
+            return cached
+
         toggle_properties = ToggleProperty.objects.toggleproperties_for_object('like', obj, self.user)
         if toggle_properties.exists():
             one_hour_ago = timezone.now() - timedelta(hours=1)
             if toggle_properties.first().created_on > one_hour_ago:
-                return True, None
-            return False, "TOO_LATE"
+                value = True, None
+            else:
+                value = False, "TOO_LATE"
+        else:
+            value = False, "NEVER_LIKED"
 
-        return False, "NEVER_LIKED"
+        CachingService.set_in_request_cache(cache_key, value)
+        return value
 
     def can_unlike(self, obj):
         return self._real_can_unlike(obj)[0]
@@ -624,10 +644,18 @@ class UserService:
         if not self.user or not self.user.is_authenticated:
             return False
 
-        if type(group_name) is list:
-            return self.user.groups.filter(name__in=group_name).exists()
+        from common.services.caching_service import CachingService
 
-        return self.user.groups.filter(name=group_name).exists()
+        cache_key = f'all_groups_{self.user.pk}'
+        all_groups = CachingService.get(cache_key)
+        if all_groups is None:
+            all_groups = list(self.user.groups.values_list('name', flat=True))
+            CachingService.set(cache_key, all_groups, 300)
+
+        if type(group_name) is list:
+            return any([x in all_groups for x in group_name])
+
+        return group_name in all_groups
 
     def is_in_astrobin_group(self, group_name: Union[str, List[str]]) -> bool:
         if not self.user or not self.user.is_authenticated:
