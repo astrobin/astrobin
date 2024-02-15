@@ -33,36 +33,92 @@
 
         {% block canonical %}{% endblock %}
 
-        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css">
-        <link rel="stylesheet" href="https://cdn.astrobin.com/delivery/token-input-1.6.0.css">
-        <link rel="stylesheet" href="https://cdn.astrobin.com/delivery/jquery.multiselect-1.13.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.min.css">
-        <link rel="stylesheet"
+        <link rel="preload"
+              as="style"
+              href="https://cdn.astrobin.com/delivery/token-input-1.6.0.css"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
+              href="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/basic/jquery.qtip.min.css"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
               href="https://cdnjs.cloudflare.com/ajax/libs/vue-multiselect/2.1.4/vue-multiselect.min.css"
               integrity="sha512-9+yOFHbE9OTmoxEGSX1Rp0xm6yF/F6AvxVn7BTmbbJE/GRZvfKuz4toFyUoM7olAv7kxkvQVJSFQwu++pHzRZQ=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.css"
+              crossorigin="anonymous" referrerpolicy="no-referrer"
+              onload="this.onlaod=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
+              href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.css"
               integrity="sha512-5WWTTEAo+zuFXfBmnALx1ZOhxoSk/yxw2hAd+TyYWDQpAVRwg+pyNEG6SSgi0VkGFL7EmKUasrX14rbSsyd9Zw=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
-              integrity="sha256-FdatTf20PQr/rWg+cAKfl6j4/IY3oohFAJ7gVC3M34E=" crossorigin="anonymous" />
-        <link rel="stylesheet"
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
+              href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+              integrity="sha256-FdatTf20PQr/rWg+cAKfl6j4/IY3oohFAJ7gVC3M34E="
+              crossorigin="anonymous"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
               href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
               integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ=="
-              crossorigin="anonymous" />
-        <link rel="stylesheet"
+              crossorigin="anonymous"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
               href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap2-toggle.min.css"
               integrity="sha512-ZSzRvNQMQa7fj7j5kNJDi/vbH7ZjQnAUwVHpNc5SOr3y3HdburytNTNN4taNJotSwwF1DAcnhtv8rkHvGGpGZg=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdn.astrobin.com/delivery/fancybox-4.0.css" />
-        <link rel="stylesheet"
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
+              href="https://cdn.astrobin.com/delivery/fancybox-4.0.css"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
               href="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/css/sortable-theme-dark.min.css"
               integrity="sha512-yPf2RMYcTbUiIoIVRRM5fgH3+2bTFzqTjvEARS6nNPIYEHpqeWe8QkLlRpzuvqHhShCSYiN2ZsuuNth19etDYA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
 
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700|Noto+Sans:400|Roboto+Mono&subset=latin-ext" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.astrobin.com/delivery/highlightjs-11.6.0-github-dark.min.css">
-        <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+        <link rel="preload"
+              as="font"
+              href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700|Noto+Sans:400|Roboto+Mono&subset=latin-ext"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
+              href="https://cdn.astrobin.com/delivery/highlightjs-11.6.0-github-dark.min.css"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
+
+        <link rel="preload"
+              as="style"
+              href="https://vjs.zencdn.net/8.3.0/video-js.css"
+              onload="this.onload=null;this.rel='stylesheet'"
+        />
 
         {% use_high_contrast_theme as use_high_contrast_theme %}
         {% if use_high_contrast_theme %}
@@ -81,7 +137,7 @@
 
         {% block extra_gtag %}{% endblock %}
 
-        <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.min.js' %}"></script>
 
         {% if request|is_gdpr_country %}
             <script type="text/javascript" src="{% static "cookie_consent/cookiebar.js" %}"></script>

@@ -81,7 +81,6 @@ INSTALLED_APPS += [
     'two_factor.plugins.phonenumber',
     'cookie_consent',
     'robots',
-    'scout_apm.django',
 
     'astrobin.apps.AstroBinAppConfig',
 ]

@@ -43,7 +43,6 @@ include(
     'components/thumbnail.py',
     'components/toggleproperties.py',
     'components/robots.py',
-    'components/scout.py',
     'components/sentry.py',
 
     # AstroBin settings

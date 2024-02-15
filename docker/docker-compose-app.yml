@@ -15,10 +15,10 @@ services:
         gunicorn wsgi:application \
           -w ${ASTROBIN_GUNICORN_WORKERS} \
           -b :8083 \
-          --max-requests 500 \
-          --max-requests-jitter 50 \
-          --timeout 300 \
-          --graceful-timeout 300 \
+          --max-requests 1500 \
+          --max-requests-jitter 150 \
+          --timeout 60 \
+          --graceful-timeout 45 \
           -k gevent
     ports:
       - "8083:8083"
