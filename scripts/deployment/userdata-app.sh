@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
-export CORES=$(cat /proc/cpuinfo | grep processor | wc -l)
-export ASTROBIN_GUNICORN_WORKERS=$((++CORES))
+export CORES=$(grep -c processor /proc/cpuinfo)
+export ASTROBIN_GUNICORN_WORKERS=$((2 * CORES + 1))
 export ASTROBIN_BUILD=${RELEASE_TAG}
 
 # Create docker stack:
