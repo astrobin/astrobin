@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.conf import settings
 from django.core.cache import cache
 from persistent_messages.models import Message
 from rest_framework.authtoken.models import Token
@@ -13,24 +14,36 @@ from common.services import DateTimeService
 class CachingService:
     @staticmethod
     def is_in_request_cache(key: str) -> bool:
+        if settings.TESTING:
+            return False
+
         from astrobin.middleware.thread_locals_middleware import get_request_cache
         request_cache = get_request_cache()
         return key in request_cache
 
     @staticmethod
     def get_from_request_cache(key: str) -> any:
+        if settings.TESTING:
+            return None
+
         from astrobin.middleware.thread_locals_middleware import get_request_cache
         request_cache = get_request_cache()
         return request_cache.get(key, None)
 
     @staticmethod
     def set_in_request_cache(key: str, value: any):
+        if settings.TESTING:
+            return
+
         from astrobin.middleware.thread_locals_middleware import get_request_cache
         request_cache = get_request_cache()
         request_cache[key] = value
 
     @staticmethod
     def delete_from_request_cache(key: str):
+        if settings.TESTING:
+            return
+
         from astrobin.middleware.thread_locals_middleware import get_request_cache
         request_cache = get_request_cache()
         if key in request_cache:
