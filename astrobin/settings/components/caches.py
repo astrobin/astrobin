@@ -10,7 +10,6 @@ if CACHE_TYPE == 'redis':
             'OPTIONS': {
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient',
                 'PICKLE_VERSION': 5,
-                'SERIALIZER': 'astrobin.cache.CustomPickleSerializer',
                 'PARSER_CLASS': 'redis.connection._HiredisParser',
                 'CONNECTION_POOL_KWARGS': {
                     'max_connections': 100,
