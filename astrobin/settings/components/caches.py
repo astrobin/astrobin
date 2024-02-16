@@ -9,7 +9,7 @@ if CACHE_TYPE == 'redis':
             'LOCATION': os.environ.get('CACHE_URL', 'redis://redis:6379/1').strip(),
             'OPTIONS': {
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-                'PICKLE_VERSION': 2,
+                'PICKLE_VERSION': 5,
                 'SERIALIZER': 'astrobin.cache.CustomPickleSerializer',
                 'PARSER_CLASS': 'redis.connection._HiredisParser',
                 'CONNECTION_POOL_KWARGS': {
