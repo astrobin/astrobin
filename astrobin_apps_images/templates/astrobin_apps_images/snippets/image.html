@@ -253,58 +253,57 @@
                             {% endfor %}
                         </h4>
 
-                        {% cache 300 astrobin_image_caption caption_cache_key %}
-                            <table class="table table-condensed">
-                                <tr>
-                                    <th><i class="icon-calendar"></i></th>
-                                    {% if image.published %}
-                                        <td colspan="3">{% timestamp image.published %}</td>
-                                    {% else %}
-                                        <td colspan="3">{% timestamp image.uploaded %}</td>
-                                    {% endif %}
-                                </tr>
-
-                                <tr>
-                                    <th><i class="icon-thumbs-up"></i></th>
-                                    <td>{{ image.like_count }}</td>
-                                    <th><i class="icon-bookmark"></i></th>
-                                    <td>{{ image.bookmark_count }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th><i class="icon-comments-alt"></i></th>
-                                    <td>{{ image.comment_count }}</td>
-                                    <th><i class="icon-th"></i></th>
-                                    <td>{{ image.revisions.count }}</td>
-                                </tr>
-
-                                {% if badges %}
-                                    <tr>
-                                        <th class="caption-badge">
-                                            {% if 'iotd' in badges %}<i class="icon-trophy"></i>
-                                            {% elif 'top-pick' in badges %}<i class="icon-star"></i>
-                                            {% elif 'top-pick-nomination' in badges %}<i class="icon-arrow-up"></i>
-                                            {% elif 'wip' in badges %}<i class="icon-lock"></i>{% endif %}
-                                        </th>
-                                        <td colspan="3" class="caption-badge">
-                                            {% if 'iotd' in badges %}{% trans "Image of the day" %}
-                                                {% elif 'top-pick' in badges %}{% trans "Top pick" %}
-                                                {% elif 'top-pick-nomination' in badges %}{% trans "Top pick nomination" %}
-                                            {% elif 'wip' in badges %}{% trans "Staging area" %}{% endif %}
-                                        </td>
-                                    </tr>
+                        <table class="table table-condensed">
+                            <tr>
+                                <th><i class="icon-calendar"></i></th>
+                                {% if image.published %}
+                                    <td colspan="3">{% timestamp image.published %}</td>
+                                {% else %}
+                                    <td colspan="3">{% timestamp image.uploaded %}</td>
                                 {% endif %}
-                            
-                                {% if collection_tag_key and collection_tag_value %}
-                                    <tr>
-                                        <th class="collection-tag"><i class="icon-tag"></i></th>
-                                        <td colspan="3" class="collection-tag-value">
-                                            {{ collection_tag_key }}={{ collection_tag_value }}
-                                        </td>
-                                    </tr>
-                                {% endif %}
-                            </table>
-                        {% endcache %}
+                            </tr>
+
+                            <tr>
+                                <th><i class="icon-thumbs-up"></i></th>
+                                <td>{{ image.like_count }}</td>
+                                <th><i class="icon-bookmark"></i></th>
+                                <td>{{ image.bookmark_count }}</td>
+                            </tr>
+
+                            <tr>
+                                <th><i class="icon-comments-alt"></i></th>
+                                <td>{{ image.comment_count }}</td>
+                                <th><i class="icon-th"></i></th>
+                                <td>{{ image.revisions.count }}</td>
+                            </tr>
+
+                            {% if badges %}
+                                <tr>
+                                    <th class="caption-badge">
+                                        {% if 'iotd' in badges %}<i class="icon-trophy"></i>
+                                        {% elif 'top-pick' in badges %}<i class="icon-star"></i>
+                                        {% elif 'top-pick-nomination' in badges %}<i class="icon-arrow-up"></i>
+                                        {% elif 'wip' in badges %}<i class="icon-lock"></i>{% endif %}
+                                    </th>
+                                    <td colspan="3" class="caption-badge">
+                                        {% if 'iotd' in badges %}{% trans "Image of the day" %}
+                                            {% elif 'top-pick' in badges %}{% trans "Top pick" %}
+                                            {% elif 'top-pick-nomination' in badges %}{% trans "Top pick nomination" %}
+                                        {% elif 'wip' in badges %}{% trans "Staging area" %}{% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+
+                            {% if collection_tag_key and collection_tag_value %}
+                                <tr>
+                                    <th class="collection-tag"><i class="icon-tag"></i></th>
+                                    <td colspan="3" class="collection-tag-value">
+                                        {{ collection_tag_key }}={{ collection_tag_value }}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </table>
+
                         {% if link %}
                             </a>
                         {% endif %}
