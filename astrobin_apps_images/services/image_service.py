@@ -102,7 +102,7 @@ class ImageService:
 
     def get_revisions(self, include_deleted=False) -> QuerySet:
         if include_deleted:
-            return self.image.revisions.all()
+            return ImageRevision.all_objects.filter(image=self.image)
         return self.image.revisions.filter(deleted__isnull=True)
 
     def get_next_available_revision_label(self):
