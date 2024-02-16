@@ -28,7 +28,7 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
-from django.db import IntegrityError
+from django.db import IntegrityError, connections
 from django.db.models import Exists, OuterRef, Q
 from django.http import HttpRequest
 from django.template.defaultfilters import filesizeformat
@@ -326,6 +326,10 @@ def encode_video_file(object_id: int, content_type_id: int):
 
                 output_file.seek(0)  # reset file pointer to beginning
                 django_file = File(output_file)
+
+                for connection in connections.all():
+                    connection.close_if_unusable_or_obsolete()
+
                 obj.encoded_video_file.save(f"encoded_{obj.uploader_name}.mp4", django_file, save=False)
                 obj.save(update_fields=['encoded_video_file'], keep_deleted=True)
 
