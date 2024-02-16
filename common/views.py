@@ -50,20 +50,28 @@ class UserList(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
     pagination_class = None
-    queryset = User.objects.all()
+    queryset = User.objects.prefetch_related(
+        'groups',
+        'groups__permissions'
+    ).all()
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
 
 
-@method_decorator([
-    last_modified(CachingService.get_user_detail_last_modified),
-    cache_control(private=True, no_cache=True),
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_user_detail_last_modified),
+        cache_control(private=True, no_cache=True),
+    ], name='dispatch'
+)
 class UserDetail(generics.RetrieveAPIView):
     model = User
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
-    queryset = User.objects.all()
+    queryset = User.objects.prefetch_related(
+        'groups',
+        'groups__permissions'
+    ).all()
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
 
@@ -127,10 +135,12 @@ class UserProfileList(generics.ListAPIView):
         return UserProfile.objects.all()
 
 
-@method_decorator([
-    last_modified(CachingService.get_userprofile_detail_last_modified),
-    cache_control(private=True, no_cache=True),
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_userprofile_detail_last_modified),
+        cache_control(private=True, no_cache=True),
+    ], name='dispatch'
+)
 class UserProfileDetail(generics.RetrieveAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
@@ -145,11 +155,13 @@ class UserProfileDetail(generics.RetrieveAPIView):
         return UserProfileSerializer
 
 
-@method_decorator([
-    last_modified(CachingService.get_current_user_profile_last_modified),
-    cache_control(private=True, no_cache=True),
-    vary_on_headers('Cookie', 'Authorization')
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_current_user_profile_last_modified),
+        cache_control(private=True, no_cache=True),
+        vary_on_headers('Cookie', 'Authorization')
+    ], name='dispatch'
+)
 class CurrentUserProfileDetail(generics.ListAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
@@ -203,11 +215,13 @@ class SubscriptionDetail(generics.RetrieveAPIView):
     queryset = Subscription.objects.all().select_related('group').prefetch_related('group__permissions')
 
 
-@method_decorator([
-    last_modified(CachingService.get_current_user_profile_last_modified),
-    cache_control(private=True, no_cache=True),
-    vary_on_headers('Cookie', 'Authorization')
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_current_user_profile_last_modified),
+        cache_control(private=True, no_cache=True),
+        vary_on_headers('Cookie', 'Authorization')
+    ], name='dispatch'
+)
 class UserSubscriptionList(generics.ListAPIView):
     model = UserSubscription
     serializer_class = UserSubscriptionSerializer
