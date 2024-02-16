@@ -601,12 +601,6 @@ class ImageDetailView(ImageDetailViewBase):
             'image_ct': ContentType.objects.get_for_model(Image),
             'user_ct': ContentType.objects.get_for_model(User),
             'user_can_like': can_like(self.request.user, image),
-
-            'comments_number': NestedComment.objects.filter(
-                deleted=False,
-                content_type__app_label='astrobin',
-                content_type__model='image',
-                object_id=image.id).count(),
             'equipment_list': ImageService(image).get_equipment_list(
                 get_client_country_code(self.request)
             ),

@@ -86,12 +86,12 @@ class HasSolutionMixin(object):
                 if self._prefetched_objects_cache['solutions'] \
                 else None
 
-        # Then try request locmem cache
+        # Then try request cache.
         from common.services.caching_service import CachingService
 
         cache_key = f'astrobin_solution_{self.__class__.__name__}_{self.pk}'
         solution = CachingService.get_from_request_cache(cache_key)
-        if solution:
+        if solution is not None or CachingService.is_in_request_cache(cache_key):
             return solution
 
         # Finally try the database
