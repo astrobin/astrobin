@@ -191,7 +191,7 @@ class SubscriptionList(generics.ListAPIView):
     serializer_class = SubscriptionSerializer
     permission_classes = (ReadOnly,)
     pagination_class = None
-    queryset = Subscription.objects.all()
+    queryset = Subscription.objects.all().select_related('group').prefetch_related('group__permissions')
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('category',)
 
@@ -200,7 +200,7 @@ class SubscriptionDetail(generics.RetrieveAPIView):
     model = Subscription
     serializer_class = SubscriptionSerializer
     permission_classes = (ReadOnly,)
-    queryset = Subscription.objects.all()
+    queryset = Subscription.objects.all().select_related('group').prefetch_related('group__permissions')
 
 
 @method_decorator([
