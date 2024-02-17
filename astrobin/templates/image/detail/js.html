@@ -31,7 +31,7 @@
 $(document).ready(function() {
     function fetchEquipmentFragment() {
         $.ajax({
-            url: "{% url 'image_equipment_fragment' image.get_id None %}",
+            url: "{% url 'image_equipment_fragment' image.get_id revision_label %}",
             type: "GET",
             dataType: "html",
             timeout: 0,
@@ -41,10 +41,10 @@ $(document).ready(function() {
             }
         });
     }
-    
+
         function fetchAcquisitionFragment() {
         $.ajax({
-            url: "{% url 'image_acquisition_fragment' image.get_id None %}",
+            url: "{% url 'image_acquisition_fragment' image.get_id revision_label %}",
             type: "GET",
             dataType: "html",
             timeout: 0,

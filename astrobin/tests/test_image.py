@@ -341,6 +341,7 @@ class ImageTest(TestCase):
         )
 
         # Revision resolution differs from original
+        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id(), 'r': 'B'}))
         self.assertContains(response, "<strong class=\"card-label\">Resolution:</strong> 200x165")
 
         # Revision description displayed
@@ -424,9 +425,9 @@ class ImageTest(TestCase):
             mean_sqm=20.0,
             mean_fwhm=1,
             temperature=10)
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context[0]['image_type'], 'deep_sky')
+        self.assertEqual(response.context['image_type'], 'deep_sky')
 
         dsa.delete()
 
@@ -442,9 +443,9 @@ class ImageTest(TestCase):
             cmiii=3,
             seeing=1,
             transparency=1)
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context[0]['image_type'], 'solar_system')
+        self.assertEqual(response.context['image_type'], 'solar_system')
         ssa.delete()
 
         # Test whether the Like button is active: image owner can't like
@@ -521,15 +522,16 @@ class ImageTest(TestCase):
 
         Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
 
-        # DSA data
-        dsa, created = DeepSky_Acquisition.objects.get_or_create(
+        DeepSky_Acquisition.objects.get_or_create(
             image=image,
             date=today,
             number=10,
             duration=1200,
             gain=12345.67,
         )
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+
+        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
+
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "(gain: 12345.67)")
 
@@ -543,15 +545,16 @@ class ImageTest(TestCase):
 
         Generators.premium_subscription(self.user, SubscriptionName.ULTIMATE_2020)
 
-        # DSA data
-        dsa, created = DeepSky_Acquisition.objects.get_or_create(
+        DeepSky_Acquisition.objects.get_or_create(
             image=image,
             date=today,
             number=10,
             duration=1200,
             gain=0,
         )
-        response = self.client.get(reverse('image_equipment_fragment', kwargs={'id': image.get_id()}))
+
+        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
+
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "(gain: 0.00)")
 
@@ -2477,8 +2480,8 @@ class ImageTest(TestCase):
 
     def test_image_equipment_list_is_hidden(self):
         image = Generators.image()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "<div class=\"subtle-container technical-card-equipment\">")
+        response = self.client.get(reverse('image_equipment_fragment', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "No equipment specified")
 
     def test_image_equipment_list_is_shown(self):
         image = Generators.image()
