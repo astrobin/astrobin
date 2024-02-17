@@ -1415,6 +1415,12 @@ class ImageAcquisitionFragment(View):
         elif ssa:
             image_type = 'solar_system'
 
+        search_query = (
+            f'{self.request.GET.get("q", "")} '
+            f'{self.request.GET.get("telescope", "")} '
+            f'{self.request.GET.get("camera", "")}'
+        ).strip()
+
         return render(request, 'image/detail/image_card_acquisition.html', {
             'image': image,
             'deep_sky_data': deep_sky_data,
@@ -1427,4 +1433,5 @@ class ImageAcquisitionFragment(View):
             'file_size': revision_image.uploader_upload_length if revision_image else image.uploader_upload_length,
             'resolution': '%dx%d' % (w, h) if (w and h) else None,
             'locations': locations,
+            'search_query': search_query,
         })
