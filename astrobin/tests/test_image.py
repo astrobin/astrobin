@@ -551,7 +551,7 @@ class ImageTest(TestCase):
             duration=1200,
             gain=0,
         )
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        response = self.client.get(reverse('image_equipment_fragment', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "(gain: 0.00)")
 
