@@ -6,8 +6,6 @@
 {% load i18n %}
 {% load tags %}
 
-{% if image|can_add_technical_details and equipment_list|equipment_list_has_items %}
-
 
 <dl class="dl-horizontal">
     {% for klass, items in equipment_list.items %}
@@ -192,6 +190,4 @@
         {% endif %}
     {% endfor %}
 </dl>
-
-{% endif %} {# ./image|can_add_technical_details #}
 

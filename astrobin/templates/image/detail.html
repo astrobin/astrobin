@@ -154,23 +154,25 @@
                 {% include 'image/detail/info.html' %}
             {% endif %}
 
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="subtle-container technical-card-equipment">
-                        <div class="header">
-                            <h4>
-                                <i class="icon-camera"></i> {% trans "Equipment" %}
-                            </h4>
-                        </div> <!-- header -->
-
-                        <div class="body">
-                            <div class="text-center">
-                                <img class="loading" src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading..." %}" />
+            {% if image|can_add_technical_details and equipment_list|equipment_list_has_items %}
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="subtle-container technical-card-equipment">
+                            <div class="header">
+                                <h4>
+                                    <i class="icon-camera"></i> {% trans "Equipment" %}
+                                </h4>
+                            </div> <!-- header -->
+    
+                            <div class="body">
+                                <div class="text-center">
+                                    <img class="loading" src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading..." %}" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         
             {% if image|can_add_technical_details %}
                 <div class="row-fluid technical-card-acquisition">
