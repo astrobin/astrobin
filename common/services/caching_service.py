@@ -163,7 +163,7 @@ class CachingService:
     @staticmethod
     def get_image_last_modified(request, id, r):
         try:
-            image = ImageService.get_object(id, Image.objects_including_wip)
+            image = ImageService.get_object(id, Image.objects_including_wip_plain.only('updated'))
             return image.updated
         except (Image.DoesNotExist, AttributeError):
             return DateTimeService.now()

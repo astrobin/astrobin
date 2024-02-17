@@ -46,9 +46,10 @@ class EquipmentService:
     @staticmethod
     def equipment_brand_listings_by_item(item, country: str) -> QuerySet:
         item_retailers = EquipmentService.equipment_item_listings(item, country).values_list('retailer', flat=True)
-        return EquipmentService.equipment_brand_listings_by_brand(item.brand, country).exclude(
-            retailer__in=item_retailers
-        )
+        if item_retailers.exists():
+            return EquipmentService.equipment_brand_listings_by_brand(item.brand, country).exclude(
+                retailer__in=item_retailers
+            )
 
     @staticmethod
     def equipment_brand_listings_by_brand(brand: EquipmentBrand, country: str) -> QuerySet:

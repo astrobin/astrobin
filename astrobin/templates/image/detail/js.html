@@ -29,6 +29,31 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    function fetchEquipmentFragment() {
+        $.ajax({
+            url: "{% url 'image_equipment_fragment' image.get_id None %}",
+            type: "GET",
+            dataType: "html",
+            timeout: 0,
+            success: function (data) {
+                $(".technical-card-equipment .body").html(data);
+                astrobin_common.setup_gear_popovers();
+            }
+        });
+    }
+    
+        function fetchAcquisitionFragment() {
+        $.ajax({
+            url: "{% url 'image_acquisition_fragment' image.get_id None %}",
+            type: "GET",
+            dataType: "html",
+            timeout: 0,
+            success: function (data) {
+                $(".technical-card-acquisition .body").html(data);
+            }
+        });
+    }
+
     function showProperImageSize() {
         var containerWidth = $(".astrobin-container").width();
         var imageWidth = {{ w }};
@@ -372,6 +397,8 @@ $(document).ready(function() {
     }
 
     initializeIotdTpModal();
+    fetchEquipmentFragment();
+    fetchAcquisitionFragment();
 });
 </script>
 
