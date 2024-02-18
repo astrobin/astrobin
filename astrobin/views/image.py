@@ -1335,7 +1335,7 @@ class ImageEquipmentFragment(View):
     def get(self, request, *args, **kwargs):
         id: Union[str, int] = self.kwargs.get('id')
         try:
-            image: Image = ImageService.get_object(id, Image)
+            image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
         except Image.DoesNotExist:
             raise Http404
 
@@ -1364,7 +1364,7 @@ class ImageAcquisitionFragment(View):
     def get(self, request, *args, **kwargs):
         id: Union[str, int] = self.kwargs.get('id')
         try:
-            image: Image = ImageService.get_object(id, Image)
+            image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
         except Image.DoesNotExist:
             raise Http404
 
