@@ -65,7 +65,6 @@ from common.constants import GroupName
 from common.exceptions import Http410
 from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
-from nested_comments.models import NestedComment
 
 logger = logging.getLogger(__name__)
 
@@ -579,7 +578,6 @@ class ImageDetailView(ImageDetailViewBase):
             'promote_form': ImagePromoteForm(instance=image),
             'upload_revision_form': ImageRevisionUploadForm(),
             'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
-            'dates_label': _("Dates"),
             'show_contains': (image.subject_type == SubjectType.DEEP_SKY and subjects) or
                              (image.subject_type != SubjectType.DEEP_SKY),
             'subjects': subjects,
@@ -1376,7 +1374,7 @@ class ImageAcquisitionFragment(View):
 
         revision_image = None
         is_revision = False
-        instance_to_platesolve = None
+        instance_to_platesolve = image
         if r != '0':
             try:
                 revision_image = ImageRevision.objects.filter(image=image, label=r)[0]
@@ -1411,7 +1409,6 @@ class ImageAcquisitionFragment(View):
         if deep_sky_acquisitions:
             image_type = 'deep_sky'
             deep_sky_data = ImageService(image).get_deep_sky_acquisition_html()
-
         elif ssa:
             image_type = 'solar_system'
 
@@ -1434,4 +1431,5 @@ class ImageAcquisitionFragment(View):
             'resolution': '%dx%d' % (w, h) if (w and h) else None,
             'locations': locations,
             'search_query': search_query,
+            'dates_label': _("Dates"),
         })

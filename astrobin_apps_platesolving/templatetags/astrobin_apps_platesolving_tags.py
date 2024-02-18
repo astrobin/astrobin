@@ -14,7 +14,8 @@ register = Library()
 
 @register.inclusion_tag(
     'astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html',
-    takes_context=True)
+    takes_context=True
+)
 def platesolving_machinery(context, target):
     content_type = ContentType.objects.get_for_model(target)
 
@@ -64,7 +65,10 @@ def get_search_query_around(solution, degrees):
 @register.filter
 def supports_search_around(solution):
     # type: (Solution) -> bool
-    return (solution.advanced_ra or solution.ra) and (solution.advanced_dec or solution.dec)
+    return (
+        (solution.advanced_ra is not None or solution.ra is not None) and
+        (solution.advanced_dec is not None or solution.dec is not None)
+    )
 
 
 @register.filter
@@ -78,6 +82,7 @@ def humanize_solution_status(solution: Solution) -> str:
 @register.filter
 def duplicate_objects_in_field_by_catalog_space(solution: Solution) -> List[str]:
     return SolutionService(solution).duplicate_objects_in_field_by_catalog_space()
+
 
 @register.filter
 def show_pixinsight_log(user: User, solution: Solution) -> bool:
