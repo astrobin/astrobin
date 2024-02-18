@@ -11,5 +11,6 @@
     </p>
 {% endfor %}
 
-{% show_more %}
-
+{% with override_path=show_more_context.override_path %}
+    {% show_more %}
+{% endwith %}

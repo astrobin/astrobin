@@ -210,7 +210,7 @@
 
                 <div class="actions">
                     {% if section != 'global' %}
-                        <a href="?s=global#stream" title="{% trans "Global stream" %}">
+                        <a href="{% url 'index' %}?s=global#stream" title="{% trans "Global stream" %}">
                     {% endif %}
                             <i class="icon icon-globe"></i>
                     {% if section != 'global' %}
@@ -218,7 +218,7 @@
                     {% endif %}
 
                     {% if section != 'personal' %}
-                        <a href="?s=personal#stream" title="{% trans "Personal stream" %}">
+                        <a href="{% url 'index' %}?s=personal#stream" title="{% trans "Personal stream" %}">
                     {% endif %}
                             <i class="icon icon-user"></i>
                     {% if section != 'personal' %}
@@ -226,7 +226,7 @@
                     {% endif %}
 
                     {% if section != 'recent' %}
-                        <a href="?s=recent#stream" title="{% trans "Recent images" %}">
+                        <a href="{% url 'index' %}?s=recent#stream" title="{% trans "Recent images" %}">
                     {% endif %}
                             <i class="icon icon-time"></i>
                     {% if section != 'recent' %}
@@ -234,7 +234,7 @@
                     {% endif %}
 
                     {% if section != 'followed' %}
-                        <a href="?s=followed#stream" title="{% trans "Recent from your followed users" %}">
+                        <a href="{% url 'index' %}?s=followed#stream" title="{% trans "Recent from your followed users" %}">
                     {% endif %}
                             <i class="icon icon-plus-sign"></i>
                     {% if section != 'followed' %}
@@ -253,14 +253,16 @@
         {% if section == 'global' or section == 'personal' %}
             <div class="activity-actions">
                 <div class="endless">
-                    {% include 'index/stream_page.html' %}
+                    <img class="loading" src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading..." %}" />
                 </div> <!-- endless -->
             </div> <!-- activity stream container -->
         {% else %}
             <div class="recent-images">
                 <div class="endless">
                     <ul class="thumbnails astrobin-thumbnails">
-                        {% include 'index/recent_images_page.html' %}
+                        <li>
+                            <img class="loading" src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading..." %}" />
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -272,9 +274,39 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
-            astrobin_common.setup_gear_popovers();
+            function loadActivityStream() {
+                $.ajax({
+                    url: "{% url 'activity_stream_fragment' section %}",
+                    type: "GET",
+                    dataType: "html",
+                    timeout: 0,
+                    success: function (data) {
+                        $(".activity-actions .endless").html(data);
+                        window.loadAstroBinImages(data);
+                    }
+                });
+            }
+            
+            function loadRecentImages() {
+                $.ajax({
+                    url: "{% url 'recent_images_fragment' section %}",
+                    type: "GET",
+                    dataType: "html",
+                    timeout: 0,
+                    success: function (data) {
+                        $(".recent-images .endless .thumbnails").html(data);
+                        window.loadAstroBinImages(data);
+                    }
+                });
+            }
 
             $.ajaxSetup({timeout: 0});
+
+            {% if section == 'global' or section == 'personal' %}
+                loadActivityStream();
+            {% else %}
+                loadRecentImages();
+            {% endif %}
         });
     </script>
 

@@ -32,10 +32,9 @@ from django.utils import timezone
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ngettext as _n, ugettext as _
 from django.views.decorators.cache import cache_control, cache_page, never_cache
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.views.decorators.http import last_modified, require_GET, require_POST
 from django.views.decorators.vary import vary_on_cookie
-from el_pagination.decorators import page_template
 from flickrapi import FlickrError
 from flickrapi.auth import FlickrAccessToken
 from haystack.query import SearchQuerySet
@@ -338,60 +337,47 @@ def upload_max_revisions_error(request, max_revisions, image):
 @cache_page(120)
 @vary_on_cookie
 @cache_control(private=True)
-@page_template('index/stream_page.html', key='stream_page')
-@page_template('index/recent_images_page.html', key='recent_images_page')
-def index(request, template='index/root.html', extra_context=None) -> HttpResponse:
+def index(request, template='index/root.html') -> HttpResponse:
     """Main page"""
 
     if not request.user.is_authenticated:
         from django.shortcuts import redirect
         return redirect("https://welcome.astrobin.com/")
 
-    image_ct = ContentType.objects.get_for_model(Image)
-    image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
-    user_ct = ContentType.objects.get_for_model(User)
-
-    recent_images = Image.objects \
-        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=ModeratorDecision.APPROVED) & Q(published__isnull=False))) \
-        .order_by('-published')
-
-    response_dict = {
-        'recent_images': recent_images,
-        'recent_images_alias': 'gallery',
-        'recent_images_batch_size': 70,
-        'section': 'recent',
-    }
-
     profile = request.user.userprofile
 
     section = request.GET.get('s')
     if section is None:
         section = profile.default_frontpage_section
-    response_dict['section'] = section
+
+    return render(request, template, dict(section=section))
+
+
+@login_required
+@require_GET
+@cache_page(60)
+@vary_on_cookie
+@cache_control(private=True)
+def activity_stream_fragment(request, section: str):
+    image_ct = ContentType.objects.get_for_model(Image)
+    image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
+    user_ct = ContentType.objects.get_for_model(User)
+    actions = None
 
     if section == 'global':
-        ##################
-        # GLOBAL ACTIONS #
-        ##################
         actions = Action.objects.all().prefetch_related(
             'actor__userprofile',
             'target_content_type',
             'target'
         )
-        response_dict['actions'] = actions
-        response_dict['cache_prefix'] = 'astrobin_global_actions'
 
     elif section == 'personal':
-        ####################
-        # PERSONAL ACTIONS #
-        ####################
         cache_key = 'astrobin_users_image_ids_%s' % request.user
         users_image_ids = cache.get(cache_key)
         if users_image_ids is None:
             users_image_ids = [
                 str(x) for x in
-                Image.objects.filter(
-                    user=request.user).values_list('id', flat=True)
+                Image.objects.filter(user=request.user).values_list('id', flat=True)
             ]
             cache.set(cache_key, users_image_ids, 300)
 
@@ -400,8 +386,7 @@ def index(request, template='index/root.html', extra_context=None) -> HttpRespon
         if users_revision_ids is None:
             users_revision_ids = [
                 str(x) for x in
-                ImageRevision.objects.filter(
-                    image__user=request.user).values_list('id', flat=True)
+                ImageRevision.objects.filter(image__user=request.user).values_list('id', flat=True)
             ]
             cache.set(cache_key, users_revision_ids, 300)
 
@@ -413,11 +398,10 @@ def index(request, template='index/root.html', extra_context=None) -> HttpRespon
                 ToggleProperty.objects.filter(
                     property_type="follow",
                     user=request.user,
-                    content_type=ContentType.objects.get_for_model(User)
+                    content_type=user_ct
                 ).values_list('object_id', flat=True)
             ]
             cache.set(cache_key, followed_user_ids, 900)
-        response_dict['has_followed_users'] = len(followed_user_ids) > 0
 
         cache_key = 'astrobin_followees_image_ids_%s' % request.user
         followees_image_ids = cache.get(cache_key)
@@ -475,21 +459,51 @@ def index(request, template='index/root.html', extra_context=None) -> HttpRespon
                 Q(action_object_object_id__in=followees_image_ids)
             )
         )
-        response_dict['actions'] = actions
-        response_dict['cache_prefix'] = 'astrobin_personal_actions'
 
-    elif section == 'followed':
+    return render(
+        request,
+        'index/stream_page.html',
+        {
+            'actions': actions,
+            'show_more_context': {
+                'override_path': reverse('activity_stream_fragment', kwargs={'section': section}),
+            }
+        }
+    )
+
+
+@login_required
+@require_GET
+@cache_page(60)
+@vary_on_cookie
+@cache_control(private=True)
+def recent_images_fragment(request, section):
+    recent_images = Image.objects.filter(
+        Q(moderator_decision=ModeratorDecision.APPROVED) &
+        Q(published__isnull=False)
+    ).order_by('-published')
+
+    if section == 'followed':
         followed = [x.object_id for x in ToggleProperty.objects.filter(
             property_type="follow",
             content_type=ContentType.objects.get_for_model(User),
             user=request.user)]
 
-        response_dict['recent_images'] = recent_images.filter(user__in=followed)
+        recent_images = recent_images.filter(user__in=followed)
 
-    if extra_context is not None:
-        response_dict.update(extra_context)
-
-    return render(request, template, response_dict)
+    return render(
+        request,
+        'index/recent_images_page.html',
+        {
+            'recent_images': recent_images,
+            'recent_images_alias': 'gallery',
+            'recent_images_batch_size': 80,
+            'section': 'recent',
+            'show_more_context': {
+                'override_path': reverse('recent_images_fragment', kwargs={'section': section}),
+            }
+        }
+    )
 
 
 @never_cache
