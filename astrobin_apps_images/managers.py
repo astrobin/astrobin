@@ -22,6 +22,12 @@ class ImagesManager(SafeDeleteManager):
             .prefetch_related(*prefetch_related)
 
 
+# Use this manager when you don't want to do any prefetching.
+class ImagesPlainManager(SafeDeleteManager):
+    def get_queryset(self):
+        return super(ImagesPlainManager, self).get_queryset()
+
+
 class PublicImagesManager(ImagesManager):
     def get_queryset(self):
         return super(PublicImagesManager, self).get_queryset().filter(is_wip=False)

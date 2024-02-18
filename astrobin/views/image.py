@@ -26,6 +26,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
 from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
@@ -65,7 +66,6 @@ from common.constants import GroupName
 from common.exceptions import Http410
 from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
-from nested_comments.models import NestedComment
 
 logger = logging.getLogger(__name__)
 
@@ -259,7 +259,11 @@ class ImageDetailView(ImageDetailViewBase):
     template_name_suffix = ''
 
     def get_queryset(self):
-        return Image.objects_including_wip.all()
+        return Image.objects_including_wip.prefetch_related(
+            'collaborators',
+            'revisions',
+            'thumbnails',
+        ).all()
 
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
@@ -322,37 +326,10 @@ class ImageDetailView(ImageDetailViewBase):
             except:
                 pass
 
-        #############################
-        # GENERATE ACQUISITION DATA #
-        #############################
-
-        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
-        ssa = None
-        image_type = None
-        deep_sky_data = {}
-
         if is_revision:
             w, h = get_image_resolution(revision_image)
         else:
             w, h = get_image_resolution(image)
-
-        try:
-            ssa = SolarSystem_Acquisition.objects.get(image=image)
-        except SolarSystem_Acquisition.DoesNotExist:
-            pass
-        except MultipleObjectsReturned:
-            ssa = SolarSystem_Acquisition.objects.filter(image=image).first()
-
-        if deep_sky_acquisitions:
-            image_type = 'deep_sky'
-            deep_sky_data = ImageService(image).get_deep_sky_acquisition_html()
-
-        elif ssa:
-            image_type = 'solar_system'
-
-        profile = None
-        if self.request.user.is_authenticated:
-            profile = self.request.user.userprofile
 
         ##############
         # BASIC DATA #
@@ -380,8 +357,6 @@ class ImageDetailView(ImageDetailViewBase):
                 skyplot_zoom1 = revision_image.solution.skyplot_zoom1
                 pixinsight_finding_chart = revision_image.solution.pixinsight_finding_chart
                 pixinsight_finding_chart_small = revision_image.solution.pixinsight_finding_chart_small
-
-        locations = '; '.join(['%s' % (x) for x in image.locations.all()])
 
         #######################
         # PREFERRED LANGUAGES #
@@ -601,16 +576,9 @@ class ImageDetailView(ImageDetailViewBase):
             'image_ct': ContentType.objects.get_for_model(Image),
             'user_ct': ContentType.objects.get_for_model(User),
             'user_can_like': can_like(self.request.user, image),
-            'equipment_list': ImageService(image).get_equipment_list(
-                get_client_country_code(self.request)
-            ),
-            'image_type': image_type,
-            'ssa': ssa,
-            'deep_sky_data': deep_sky_data,
             'promote_form': ImagePromoteForm(instance=image),
             'upload_revision_form': ImageRevisionUploadForm(),
             'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
-            'dates_label': _("Dates"),
             'show_contains': (image.subject_type == SubjectType.DEEP_SKY and subjects) or
                              (image.subject_type != SubjectType.DEEP_SKY),
             'subjects': subjects,
@@ -619,9 +587,6 @@ class ImageDetailView(ImageDetailViewBase):
             'constellation': ImageService.get_constellation(revision_image.solution) \
                 if revision_image \
                 else ImageService.get_constellation(image.solution),
-            'resolution': '%dx%d' % (w, h) if (w and h) else None,
-            'file_size': revision_image.uploader_upload_length if revision_image else image.uploader_upload_length,
-            'locations': locations,
             'solar_system_main_subject': ImageService(image).get_solar_system_main_subject_label(),
             'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
             'preferred_languages': preferred_languages,
@@ -1359,3 +1324,121 @@ class ImageSubmitToIotdTpProcessView(View):
 
         messages.success(request, _("Image submitted to the IOTD/TP process!"))
         return HttpResponseRedirect(request.POST.get('next'))
+
+
+@method_decorator(
+    [
+        last_modified(CachingService.get_image_last_modified),
+        cache_control(public=True, no_cache=True, must_revalidate=True, maxAge=0),
+        csrf_protect,
+    ], name='dispatch'
+)
+class ImageEquipmentFragment(View):
+    def post(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            return HttpResponseBadRequest()
+
+        id: Union[str, int] = self.kwargs.get('id')
+        try:
+            image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
+        except Image.DoesNotExist:
+            raise Http404
+
+        search_query = (
+            f'{self.request.GET.get("q", "")} '
+            f'{self.request.GET.get("telescope", "")} '
+            f'{self.request.GET.get("camera", "")}'
+        ).strip()
+
+        return render(request, 'image/detail/image_card_equipment.html', {
+            'image': image,
+            'search_query': search_query,
+            'equipment_list': ImageService(image).get_equipment_list(
+                get_client_country_code(self.request)
+            ),
+        })
+
+
+@method_decorator(
+    [
+        last_modified(CachingService.get_image_last_modified),
+        cache_control(public=True, no_cache=True, must_revalidate=True, maxAge=0),
+        csrf_protect,
+    ], name='dispatch'
+)
+class ImageAcquisitionFragment(View):
+    def post(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            return HttpResponseBadRequest()
+
+        id: Union[str, int] = self.kwargs.get('id')
+        try:
+            image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
+        except Image.DoesNotExist:
+            raise Http404
+
+        r = self.kwargs.get('r')
+        if r is None:
+            r = '0'
+
+        revision_image = None
+        is_revision = False
+        instance_to_platesolve = image
+        if r != '0':
+            try:
+                revision_image = ImageRevision.objects.filter(image=image, label=r)[0]
+                is_revision = True
+                instance_to_platesolve = revision_image
+            except:
+                pass
+
+        locations = '; '.join(['%s' % str(x) for x in image.locations.all()])
+
+        #############################
+        # GENERATE ACQUISITION DATA #
+        #############################
+
+        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+        ssa = None
+        image_type = None
+        deep_sky_data = {}
+
+        if is_revision:
+            w, h = get_image_resolution(revision_image)
+        else:
+            w, h = get_image_resolution(image)
+
+        try:
+            ssa = SolarSystem_Acquisition.objects.get(image=image)
+        except SolarSystem_Acquisition.DoesNotExist:
+            pass
+        except MultipleObjectsReturned:
+            ssa = SolarSystem_Acquisition.objects.filter(image=image).first()
+
+        if deep_sky_acquisitions:
+            image_type = 'deep_sky'
+            deep_sky_data = ImageService(image).get_deep_sky_acquisition_html()
+        elif ssa:
+            image_type = 'solar_system'
+
+        search_query = (
+            f'{self.request.GET.get("q", "")} '
+            f'{self.request.GET.get("telescope", "")} '
+            f'{self.request.GET.get("camera", "")}'
+        ).strip()
+
+        return render(request, 'image/detail/image_card_acquisition.html', {
+            'image': image,
+            'deep_sky_data': deep_sky_data,
+            'ssa': ssa,
+            'image_type': image_type,
+            'w': w,
+            'h': h,
+            'is_revision': is_revision,
+            'instance_to_platesolve': instance_to_platesolve,
+            'file_size': revision_image.uploader_upload_length if revision_image else image.uploader_upload_length,
+            'resolution': '%dx%d' % (w, h) if (w and h) else None,
+            'locations': locations,
+            'search_query': search_query,
+            'dates_label': _("Dates"),
+        })

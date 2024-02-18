@@ -520,6 +520,16 @@ urlpatterns += [
         r'^(?P<id>\w+)/submit-to-iotd-tp/$', never_cache(image_views.ImageSubmitToIotdTpProcessView.as_view()),
         name='image_submit_to_iotd_tp'
     ),
+    url(
+        r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?equipment-fragment/$',
+        image_views.ImageEquipmentFragment.as_view(),
+        name='image_equipment_fragment',
+    ),
+    url(
+        r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?acquisition-fragment/$',
+        image_views.ImageAcquisitionFragment.as_view(),
+        name='image_acquisition_fragment',
+    ),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
     url(
         r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
