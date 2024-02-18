@@ -324,7 +324,10 @@ class ImageTest(TestCase):
         )
 
         # Image resolution
-        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
+        response = self.client.post(
+            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
         self.assertContains(response, "<strong class=\"card-label\">Resolution:</strong> 340x280")
 
         # Revision redirect
@@ -355,7 +358,10 @@ class ImageTest(TestCase):
         )
 
         # Revision resolution differs from original
-        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id(), 'r': 'B'}))
+        response = self.client.post(
+            reverse('image_acquisition_fragment', kwargs={'id': image.get_id(), 'r': 'B'}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
         self.assertContains(response, "<strong class=\"card-label\">Resolution:</strong> 200x165")
 
         # Revision description displayed
@@ -440,7 +446,10 @@ class ImageTest(TestCase):
             mean_fwhm=1,
             temperature=10
         )
-        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
+        response = self.client.post(
+            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['image_type'], 'deep_sky')
 
@@ -459,7 +468,10 @@ class ImageTest(TestCase):
             seeing=1,
             transparency=1
         )
-        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
+        response = self.client.post(
+            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['image_type'], 'solar_system')
         ssa.delete()
@@ -546,7 +558,10 @@ class ImageTest(TestCase):
             gain=12345.67,
         )
 
-        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
+        response = self.client.post(
+            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "(gain: 12345.67)")
@@ -569,7 +584,10 @@ class ImageTest(TestCase):
             gain=0,
         )
 
-        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
+        response = self.client.post(
+            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "(gain: 0.00)")
@@ -591,7 +609,10 @@ class ImageTest(TestCase):
             number=10,
             duration=1200,
         )
-        response = self.client.get(reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}))
+        response = self.client.post(
+            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
@@ -2801,7 +2822,10 @@ class ImageTest(TestCase):
 
     def test_image_equipment_list_is_hidden(self):
         image = Generators.image()
-        response = self.client.get(reverse('image_equipment_fragment', kwargs={'id': image.get_id()}))
+        response = self.client.post(
+            reverse('image_equipment_fragment', kwargs={'id': image.get_id()}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
         self.assertContains(response, "No equipment specified")
 
     def test_image_equipment_list_is_shown(self):
@@ -3179,8 +3203,9 @@ class ImageTest(TestCase):
         acquisition.date = date(2020, 1, 1)
         acquisition.save()
 
-        response = self.client.get(
-            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()})
+        response = self.client.post(
+            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
         )
 
         expected_search_url = \
@@ -3208,8 +3233,9 @@ class ImageTest(TestCase):
         solution.radius = 1
         solution.save()
 
-        response = self.client.get(
-            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()})
+        response = self.client.post(
+            reverse('image_acquisition_fragment', kwargs={'id': image.get_id()}),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
         )
 
         self.assertContains(response, 'RA center')
