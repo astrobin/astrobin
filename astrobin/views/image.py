@@ -26,6 +26,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
 from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
@@ -1329,10 +1330,14 @@ class ImageSubmitToIotdTpProcessView(View):
     [
         last_modified(CachingService.get_image_last_modified),
         cache_control(public=True, no_cache=True, must_revalidate=True, maxAge=0),
+        csrf_protect,
     ], name='dispatch'
 )
 class ImageEquipmentFragment(View):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            return HttpResponseBadRequest()
+
         id: Union[str, int] = self.kwargs.get('id')
         try:
             image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
@@ -1358,10 +1363,14 @@ class ImageEquipmentFragment(View):
     [
         last_modified(CachingService.get_image_last_modified),
         cache_control(public=True, no_cache=True, must_revalidate=True, maxAge=0),
+        csrf_protect,
     ], name='dispatch'
 )
 class ImageAcquisitionFragment(View):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            return HttpResponseBadRequest()
+
         id: Union[str, int] = self.kwargs.get('id')
         try:
             image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)

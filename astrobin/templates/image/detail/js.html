@@ -30,11 +30,16 @@
 <script type="text/javascript">
 $(document).ready(function() {
     function fetchEquipmentFragment() {
+        const csrftoken = astrobin_common.get_cookie('csrftoken')
+        
         $.ajax({
             url: "{% url 'image_equipment_fragment' image.get_id revision_label %}",
-            type: "GET",
+            type: "POST",
             dataType: "html",
             timeout: 0,
+            headers: {
+                "X-CSRFToken": csrftoken
+            },
             success: function (data) {
                 $(".technical-card-equipment .body").html(data);
                 astrobin_common.setup_gear_popovers();
@@ -42,12 +47,17 @@ $(document).ready(function() {
         });
     }
 
-        function fetchAcquisitionFragment() {
+    function fetchAcquisitionFragment() {
+        const csrftoken = astrobin_common.get_cookie('csrftoken')
+
         $.ajax({
             url: "{% url 'image_acquisition_fragment' image.get_id revision_label %}",
-            type: "GET",
+            type: "POST",
             dataType: "html",
             timeout: 0,
+            headers: {
+                "X-CSRFToken": csrftoken
+            },
             success: function (data) {
                 $(".technical-card-acquisition .body").html(data);
             }

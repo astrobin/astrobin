@@ -521,12 +521,12 @@ urlpatterns += [
         name='image_submit_to_iotd_tp'
     ),
     url(
-        r'^(?P<id>\w+)/equipment-fragment/(?:(?P<r>\w+)/)?$',
+        r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?equipment-fragment/$',
         image_views.ImageEquipmentFragment.as_view(),
         name='image_equipment_fragment',
     ),
     url(
-        r'^(?P<id>\w+)/acquisition-fragment/(?:(?P<r>\w+)/)?$',
+        r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?acquisition-fragment/$',
         image_views.ImageAcquisitionFragment.as_view(),
         name='image_acquisition_fragment',
     ),
