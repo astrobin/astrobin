@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.conf import settings
-from django.core.cache import cache
+from django.core.cache import caches
 from persistent_messages.models import Message
 from rest_framework.authtoken.models import Token
 
@@ -10,6 +10,8 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import TopPickNominationsArchive, Iotd, TopPickArchive
 from common.services import DateTimeService
 
+JSON_CACHE = 'json'
+DEFAULT_CACHE = 'default'
 
 class CachingService:
     @staticmethod
@@ -50,14 +52,14 @@ class CachingService:
             del request_cache[key]
 
     @staticmethod
-    def get(key, check_request_cache=True):
+    def get(key, check_request_cache=True, cache_name='default'):
         if check_request_cache:
             is_present = CachingService.is_in_request_cache(key)
             value = CachingService.get_from_request_cache(key)
             if value is not None or is_present:
                 return value
 
-        value = cache.get(key)
+        value = caches[cache_name].get(key)
 
         if check_request_cache and value is not None:
             CachingService.set_in_request_cache(key, value)
@@ -65,16 +67,16 @@ class CachingService:
         return value
 
     @staticmethod
-    def set(key, value, timeout=None, use_request_cache=True):
+    def set(key, value, timeout=None, use_request_cache=True, cache_name='default'):
         if use_request_cache:
             CachingService.set_in_request_cache(key, value)
-        cache.set(key, value, timeout)
+        caches[cache_name].set(key, value, timeout)
 
     @staticmethod
-    def delete(key, use_request_cache=True):
+    def delete(key, use_request_cache=True, cache_name='default'):
         if use_request_cache:
             CachingService.delete_from_request_cache(key)
-        cache.delete(key)
+        caches[cache_name].delete(key)
 
     @staticmethod
     def get_latest_top_pick_nomination_datetime(request):

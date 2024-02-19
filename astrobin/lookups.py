@@ -60,6 +60,8 @@ def autocomplete_usernames(request):
         except Token.DoesNotExist:
             return HttpResponse(simplejson.dumps([]))
 
+    from common.services.caching_service import CachingService, JSON_CACHE
+
     q = request.GET['q']
     limit = 10
     referer_header = request.META.get('HTTP_REFERER', '')
@@ -94,7 +96,7 @@ def autocomplete_usernames(request):
 
     query_hash = hashlib.md5(q.encode('utf-8')).hexdigest()
     cache_key = f'astrobin_autocomplete_usernames_{query_hash}_{from_forums}_{from_image_page}'
-    cache_value = cache.get(cache_key)
+    cache_value = CachingService.get(cache_key, cache_name=JSON_CACHE)
 
     if cache_value is not None:
         return HttpResponse(cache_value)
@@ -154,7 +156,7 @@ def autocomplete_usernames(request):
         })
 
     cache_value = simplejson.dumps(ret)
-    cache.set(cache_key, cache_value, 600)
+    CachingService.set(cache_key, cache_value, 600, cache_name=JSON_CACHE)
 
     return HttpResponse(cache_value)
 
