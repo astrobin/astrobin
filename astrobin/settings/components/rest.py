@@ -8,8 +8,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication', # Useful for unit tests
     ),
     'DEFAULT_THROTTLE_RATES': {
-        'users': '200/min',
-        'images': '100/min',
+        'users': '300/min',
+        'images': '200/min',
     }
 }
 
