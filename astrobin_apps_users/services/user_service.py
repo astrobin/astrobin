@@ -563,13 +563,10 @@ class UserService:
             menu += [('ALL', _('All'))]
             for constellation in ConstellationsService.constellation_table:
                 if constellation[0] in unique_constellations:
-                    menu += [(
-                        constellation[0],
-                        constellation[1] + ' (%d)' % queryset.filter(constellation=constellation[0]).count()
-                    )]
+                    menu += [(constellation[0], constellation[1])]
 
             if queryset.filter(constellation__isnull=True).exists():
-                menu += [('n/a', _('n/a') + ' (%d)' % queryset.filter(constellation__isnull=True).count())]
+                menu += [('n/a', _('n/a'))]
 
             if active in (None, ''):
                 active = 'ALL'
