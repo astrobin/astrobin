@@ -702,12 +702,16 @@ astrobin_common = {
         });
     },
 
-    init_timestamps: function () {
-        $('abbr.timestamp').each(function (index, element) {
-            var $el = $(element);
-            var datetime = new Date(0);
-            var locale = window.navigator.userLanguage || window.navigator.language;
-            var now = new Date()
+    init_timestamps: function (fragment) {
+        if (fragment === undefined) {
+            fragment = document;
+        }
+
+        $(fragment).find('abbr.timestamp').each(function (index, element) {
+            const $el = $(element);
+            const datetime = new Date(0);
+            const locale = window.navigator.userLanguage || window.navigator.language;
+            const now = new Date();
 
             datetime.setUTCSeconds($el.data('epoch') / 1000);
 

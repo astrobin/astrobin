@@ -1260,11 +1260,6 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             if not instance.on_moderation:
                 notify_equipment_users.delay(instance.pk)
 
-    cache_key = make_template_fragment_key(
-        'home_page_latest_from_forums',
-        (instance.user.pk, instance.user.userprofile.language))
-    cache.delete(cache_key)
-
 
 post_save.connect(forum_topic_post_save, sender=Topic)
 
@@ -1417,29 +1412,12 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             notify_mentioned(mentions)
             cache.delete("post.%d.forum_post_pre_save_approved" % instance.pk)
 
-    cache_key = make_template_fragment_key(
-        'home_page_latest_from_forums',
-        (instance.user.pk, instance.user.userprofile.language)
-    )
-    cache.delete(cache_key)
-
 
 post_save.connect(forum_post_post_save, sender=Post)
 
 @receiver(post_delete, sender=Post)
 def forum_post_post_delete(sender, instance, **kwargs):
     compute_contribution_index.apply_async(args=(instance.user.pk,), countdown=10)
-
-
-def topic_read_tracker_post_save(sender, instance, created, **kwargs):
-    cache_key = make_template_fragment_key(
-        'home_page_latest_from_forums',
-        (instance.user.pk, instance.user.userprofile.language)
-    )
-    cache.delete(cache_key)
-
-
-post_save.connect(topic_read_tracker_post_save, sender=TopicReadTracker)
 
 
 def user_pre_save(sender, instance, **kwargs):

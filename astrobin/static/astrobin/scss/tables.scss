@@ -30,20 +30,6 @@ div.table-responsive {
       background: none;
     }
   }
-
-  .pagination {
-    td {
-      padding-top: 60px;
-      background-color: transparent !important;
-    }
-
-    a, span {
-      padding: 10px 20px;
-      background-color: #242424;
-      border: 1px solid #404040;
-      @include rounded-corners(3px);
-    }
-  }
 }
 
 .table {

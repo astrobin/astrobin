@@ -938,7 +938,7 @@ def license_logo(image):
 
 
 @register.simple_tag(takes_context=True)
-def forum_latest_topics(context, cnt=5, user=None):
+def forum_latest_topics(context, user=None):
     if not user:
         user = context['user']
 
@@ -956,7 +956,7 @@ def forum_latest_topics(context, cnt=5, user=None):
 
     qs = qs.distinct().select_related()
 
-    return qs.order_by('-updated', '-id')[:cnt]
+    return qs.order_by('-updated', '-id')
 
 
 @register.simple_tag(takes_context=True)

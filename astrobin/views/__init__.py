@@ -355,6 +355,12 @@ def index(request, template='index/root.html') -> HttpResponse:
 
 @login_required
 @require_GET
+def latest_from_forums_fragment(request):
+    return render(request, 'index/latest_from_forums.html', {})
+
+
+@login_required
+@require_GET
 @cache_page(60)
 @vary_on_cookie
 @cache_control(private=True)

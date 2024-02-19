@@ -4,14 +4,10 @@
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_users_tags %}
-{% load avatar_tags %}
 {% load el_pagination_tags %}
 {% load i18n %}
 {% load bootstrap_toolkit %}
-{% load common_tags %}
-{% load cache %}
 {% load tags %}
-{% load pybb_tags %}
 {% load django_bootstrap_breadcrumbs %}
 {% load static %}
 
@@ -84,102 +80,22 @@
             </h4>
         </div>
 
-        {% cache 120 home_page_latest_from_forums request.user.pk LANGUAGE_CODE %}
-            {% forum_latest_topics cnt=10 user=request.user as topic_list %}
-            <table class="table table-striped topic-list index-recent-topics">
-            <tbody>
-                {% for topic in topic_list|pybb_topic_unread:request.user %}
-                    <tr class="topic-row{% if topic.on_moderation %} on-moderation{% endif %}">
-                        <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
-                            <div class="state-indicator"></div>
-                        </td>
-
-                        <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                            <a href="{{ topic.get_absolute_url }}">
-                                {{ topic.name|truncatechars:120 }}
-                            </a>
-                            {% if topic.closed %} &nbsp;[{% trans "Closed" %}] {% endif %}
-
-                            <span class="posted-in">
-                                {% blocktrans trimmed with forum_name=topic.forum.name forum_url=topic.forum.get_absolute_url %}
-                                    Posted in <a href="{{ forum_url }}">{{ forum_name }}</a>
-                                {% endblocktrans %}
-                            </span>
-
-                            <br />
-
-                            {% if not topic.user.userprofile.deleted %}
-                                {% url 'user_page' topic.user as topic_user_url %}
-                                {% blocktrans trimmed with username=topic.user.userprofile.get_display_name|truncatechars:30 %}
-                                    Started by <a href="{{ topic_user_url }}">{{ username }}</a>
-                                {% endblocktrans %}
-                            {% else %}
-                                {% trans "Started by user that was since deleted" %}
-                            {% endif %}
-                            &middot;
-                            {% timestamp topic.created %}
-
-                            {% with topic|pybb_topic_inline_pagination as pages %}
-                                {% if pages|length > 1 %}
-                                    <span class="mini-pagination">
-                                        {% for page in pages %}
-                                            <span class="page">
-                                                {% if page == "..." %}
-                                                    ...
-                                                {% else %}
-                                                    <a href="{{ topic.get_absolute_url }}?page={{ page }}">
-                                                        {{ page }}
-                                                    </a>
-                                                {% endif %}
-                                            </span>
-                                        {% endfor %}
-                                    </span>
-                                {% endif %}
-                            {% endwith %}
-
-                            {% if topic.updated and not topic.last_post.user.userprofile.deleted %}
-                                <br />
-
-                                {% with topic.last_post as last_post %}
-                                    {% url 'user_page' last_post.user as last_post_user_url %}
-                                    {% blocktrans trimmed with username=last_post.user.userprofile.get_display_name|truncatechars:30 %}
-                                        Last post by <a href="{{ last_post_user_url }}">{{ username }}</a>
-                                    {% endblocktrans %}
-                                    &middot;
-                                    {% timestamp topic.updated %}
-                                {% endwith %}
-                            {% endif %}
-                        </td>
-
-                        <td class="topic-post-count hidden-phone">
-                            <span class="post-count">
-                                <i class="icon-comment"></i>
-                                {{ topic.post_count|add:"-1" }}
-                            </span>
-                            <span class="view-count">
-                                <i class="icon-eye-open"></i>
-                                {{ topic|pybbm_calc_topic_views }}
-                            </span>
-                            <span class="image-count">
-                                <i class="icon-camera"></i>
-                                {{ topic.images }}
-                            </span>
-                        </td>
-
-                        <td class="topic-last-post hidden-phone hidden-tablet">
-                            {% include "pybb/topic_last_message_info.html" %}
-                        </td>
-
-                        <td class="first-unread">
-                            <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">
-                                <i class="icon-chevron-right"></i>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endcache %}
+        <div class="latest-from-forums">
+            <div class="endless">
+                <table class="table table-striped topic-list index-recent-topics">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img
+                                    class="loading"
+                                    src="{% static 'astrobin/images/ajax-loader.gif' %}"
+                                    alt="{% trans "Loading..." %}" />        
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     {% with ad_container_classes='advertisement-frontpage' %}
@@ -274,6 +190,47 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
+            function loadLatestFromForums(url) {
+                const $el = $(".latest-from-forums");
+                
+                if (typeof url === "undefined") {
+                    url = "{% url 'latest_from_forums_fragment' %}";
+                }
+                
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    dataType: "html",
+                    timeout: 0,
+                    success: function (data) {
+                        $(".latest-from-forums .endless tbody").html(data);
+                        $el.css({
+                            "opacity": 1,
+                            "pointer-events": "auto"
+                        });
+                        
+                        astrobin_common.init_timestamps();
+                        
+                        $(".latest-from-forums .page").addClass("no-page-loader").live("click", function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            
+                            $el.css({
+                                "opacity": .5,
+                                "pointer-events": "none"
+                            });
+                            
+                            window.scrollTo({
+                                top: $el.parent('.subtle-container').position().top,
+                                behavior: "smooth"
+                            });
+                        
+                            loadLatestFromForums($(this).attr("href"));
+                        });
+                    }
+                });
+            }
+
             function loadActivityStream() {
                 $.ajax({
                     url: "{% url 'activity_stream_fragment' section %}",
@@ -301,6 +258,8 @@
             }
 
             $.ajaxSetup({timeout: 0});
+
+            loadLatestFromForums();
 
             {% if section == 'global' or section == 'personal' %}
                 loadActivityStream();
