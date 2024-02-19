@@ -260,7 +260,7 @@
             <div class="recent-images">
                 <div class="endless">
                     <ul class="thumbnails astrobin-thumbnails">
-                        <li>
+                        <li class="loading">
                             <img class="loading" src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading..." %}" />
                         </li>
                     </ul>
@@ -286,7 +286,7 @@
                     }
                 });
             }
-            
+
             function loadRecentImages() {
                 $.ajax({
                     url: "{% url 'recent_images_fragment' section %}",

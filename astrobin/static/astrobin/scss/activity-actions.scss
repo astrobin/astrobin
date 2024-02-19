@@ -1,5 +1,12 @@
 @import "mixins";
 
+.recent-images,
+.activity-actions{
+  .loading {
+    margin: 0 auto;
+  }
+}
+
 .activity-actions {
   .action {
     position: relative;
