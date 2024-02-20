@@ -121,3 +121,7 @@ table tbody + tbody {
     height: 3rem;
   }
 }
+
+table tr.loading td {
+  text-align: center !important;
+}

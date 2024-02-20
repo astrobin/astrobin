@@ -74,7 +74,7 @@
                 {% trans "Latest from the forums" %}
                 <div class="actions">
                     <a href="{% url 'pybb:topic_latest' %}">
-                        {% trans "More" %}
+                        <i class="icon-link"></i>
                     </a>
                 </div>
             </h4>
@@ -84,12 +84,12 @@
             <div class="endless">
                 <table class="table table-striped topic-list index-recent-topics">
                     <tbody>
-                        <tr>
-                            <td>
+                        <tr class="loading">
+                            <td colspan="5">
                                 <img
                                     class="loading"
                                     src="{% static 'astrobin/images/ajax-loader.gif' %}"
-                                    alt="{% trans "Loading..." %}" />        
+                                    alt="{% trans "Loading..." %}" />
                             </td>
                         </tr>
                     </tbody>
@@ -190,42 +190,36 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
+            let latestFromForumsPage = 1;
+
             function loadLatestFromForums(url) {
                 const $el = $(".latest-from-forums");
-                
+
                 if (typeof url === "undefined") {
                     url = "{% url 'latest_from_forums_fragment' %}";
                 }
-                
+
                 $.ajax({
                     url: url,
                     type: "GET",
                     dataType: "html",
                     timeout: 0,
                     success: function (data) {
-                        $(".latest-from-forums .endless tbody").html(data);
-                        $el.css({
-                            "opacity": 1,
-                            "pointer-events": "auto"
-                        });
-                        
+                        $el.find(".loading").remove();
+                        $el.find(".pagination .btn").closest("tr").remove();
+                        $el.find("tbody").append(data);
+
                         astrobin_common.init_timestamps();
-                        
-                        $(".latest-from-forums .page").addClass("no-page-loader").live("click", function(e) {
+
+                        $el.find(".pagination .btn").on("click", function(e) {
                             e.preventDefault();
                             e.stopPropagation();
-                            
-                            $el.css({
-                                "opacity": .5,
-                                "pointer-events": "none"
-                            });
-                            
-                            window.scrollTo({
-                                top: $el.parent('.subtle-container').position().top,
-                                behavior: "smooth"
-                            });
-                        
-                            loadLatestFromForums($(this).attr("href"));
+
+                            $(this).text("...");
+
+                            latestFromForumsPage += 1;
+
+                            loadLatestFromForums("{% url 'latest_from_forums_fragment' %}?latest_from_forums_page=" + latestFromForumsPage);
                         });
                     }
                 });

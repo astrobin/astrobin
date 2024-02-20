@@ -942,8 +942,14 @@ def forum_latest_topics(context, user=None):
     if not user:
         user = context['user']
 
+    qs = Topic.objects.select_related(
+        'user', 'user__userprofile'
+    ).prefetch_related(
+        'posts'
+    )
+
     if user and user.is_authenticated:
-        qs = Topic.objects.filter(
+        qs = qs.filter(
             Q(forum__group=None) |
             Q(forum__group__owner=user) |
             Q(forum__group__members=user)
@@ -952,11 +958,9 @@ def forum_latest_topics(context, user=None):
         if not is_forum_moderator(user):
             qs = qs.filter(on_moderation=False)
     else:
-        qs = Topic.objects.filter(forum__group=None, on_moderation=False)
+        qs = qs.filter(forum__group=None, on_moderation=False)
 
-    qs = qs.distinct().select_related()
-
-    return qs.order_by('-updated', '-id')
+    return qs.distinct().order_by('-updated', '-id')
 
 
 @register.simple_tag(takes_context=True)
