@@ -100,7 +100,10 @@
 <tr>
     <td colspan="5">
         <div class="pagination pagination-centered">
-            <button class="btn btn-primary btn-block-mobile">{% trans "More" %}</button>
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}">
+                {% trans "More" %}
+                {% button_loading_indicator %}
+            </button>
         </div>
     </td>
 </tr>
