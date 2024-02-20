@@ -15,13 +15,18 @@ from rest_framework.response import Response
 
 from astrobin_apps_iotd.api.serializers.hidden_image_serializer import HiddenImageSerializer
 from astrobin_apps_iotd.models import IotdHiddenImage
+from common.constants import GroupName
+from common.permissions import is_group_member
 
 
 class HiddenImageViewSet(viewsets.ModelViewSet):
     serializer_class = HiddenImageSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = None
-    permission_classes = [IsAuthenticated]
+    permission_classes = [
+        IsAuthenticated,
+        is_group_member([GroupName.IOTD_SUBMITTERS, GroupName.IOTD_REVIEWERS, GroupName.IOTD_JUDGES])
+    ]
     model = IotdHiddenImage
 
     def get_queryset(self):
