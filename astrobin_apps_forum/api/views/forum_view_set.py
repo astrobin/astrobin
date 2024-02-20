@@ -40,18 +40,20 @@ class ForumViewSet(viewsets.ModelViewSet):
 
         q = request.GET.get('q', '')
         is_equipment = request.GET.get('is-equipment')
+        include_groups = request.GET.get('include-groups')
 
         if is_equipment:
             is_equipment = is_equipment.lower() == 'true'
 
-        queryset = self.get_queryset()\
-            .select_related('category')\
-            .exclude(category__slug='group-forums')
+        queryset = self.get_queryset().select_related('category')
 
         if q:
             queryset = queryset\
                 .annotate(distance=TrigramDistance('name', q))\
                 .filter(Q(distance__lte=.75) | Q(name__icontains=q))
+
+        if not include_groups or not q:
+            queryset = queryset.exclude(category__slug='group-forums')
 
         # Weird True/False check because is_equipment can be None
         if is_equipment is True:
