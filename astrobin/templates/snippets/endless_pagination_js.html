@@ -7,6 +7,7 @@
         paginateOnScrollMargin: 300,
         onCompleted: function(context, fragment) {
             window.loadAstroBinImages(fragment);
+            astrobin_common.init_timestamps(fragment);
             $.ajaxSetup({timeout: 0});
         }
     });

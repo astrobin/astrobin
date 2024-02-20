@@ -2573,6 +2573,7 @@ form.avatar-delete {
 
 .index-recent-topics.topic-list {
   margin-bottom: $spacer-large;
+  min-height: 400px;
 
   .topic-name > a:first-child {
     font-size: 1.25rem;

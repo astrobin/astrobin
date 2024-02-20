@@ -33,7 +33,8 @@ from astrobin.views import (
     image_edit_make_final, image_edit_platesolving_advanced_settings, image_edit_platesolving_settings,
     image_edit_revision_make_final, image_edit_save_acquisition, image_edit_save_license, image_edit_save_watermark,
     image_edit_watermark, image_restart_advanced_platesolving, image_restart_platesolving,
-    image_revision_upload_process, image_upload, image_upload_process, index, me, moderation as moderation_views,
+    image_revision_upload_process, image_upload, image_upload_process, index, latest_from_forums_fragment, me,
+    moderation as moderation_views,
     recent_images_fragment, registration as registration_views, save_gear_details, save_gear_user_info,
     serve_file_from_cdn, set_language,
     suspended_account,
@@ -223,6 +224,7 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^$', index, name='index'),
+    url(r'^latest-from-forums-fragment/$', latest_from_forums_fragment, name='latest_from_forums_fragment'),
     url(r'^activiy-steam-fragment/(?P<section>\w+)/$', activity_stream_fragment, name='activity_stream_fragment'),
     url(r'^recent-images-fragment/(?P<section>\w+)/$', recent_images_fragment, name='recent_images_fragment'),
 
