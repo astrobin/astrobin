@@ -942,11 +942,7 @@ def forum_latest_topics(context, user=None):
     if not user:
         user = context['user']
 
-    qs = Topic.objects.select_related(
-        'user', 'user__userprofile'
-    ).prefetch_related(
-        'posts'
-    )
+    qs = Topic.objects.select_related()
 
     if user and user.is_authenticated:
         qs = qs.filter(

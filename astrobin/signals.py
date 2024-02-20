@@ -11,7 +11,6 @@ from django.conf import settings
 from django.contrib.auth.models import Group as DjangoGroup, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
-from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from django.db import IntegrityError, InternalError, transaction
 from django.db.models import Q
@@ -1260,6 +1259,7 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             if not instance.on_moderation:
                 notify_equipment_users.delay(instance.pk)
 
+    cache.delete(ForumService.home_page_latest_from_forum_cache_key(instance.user))
 
 post_save.connect(forum_topic_post_save, sender=Topic)
 
@@ -1412,12 +1412,19 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             notify_mentioned(mentions)
             cache.delete("post.%d.forum_post_pre_save_approved" % instance.pk)
 
+    cache.delete(ForumService.home_page_latest_from_forum_cache_key(instance.user))
 
 post_save.connect(forum_post_post_save, sender=Post)
+
 
 @receiver(post_delete, sender=Post)
 def forum_post_post_delete(sender, instance, **kwargs):
     compute_contribution_index.apply_async(args=(instance.user.pk,), countdown=10)
+
+
+@receiver(post_save, sender=TopicReadTracker)
+def topic_read_tracker_post_save(sender, instance, created, **kwargs):
+    cache.delete(ForumService.home_page_latest_from_forum_cache_key(instance.user))
 
 
 def user_pre_save(sender, instance, **kwargs):

@@ -5,6 +5,7 @@ from typing import Union
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.cache.utils import make_template_fragment_key
 from django.db.models import QuerySet
 from django.urls import reverse
 from django.utils import timezone
@@ -122,4 +123,11 @@ class ForumService:
             forum_slug=topic.forum.slug,
             slug=topic.slug,
             topic=topic,
+        )
+
+    @staticmethod
+    def home_page_latest_from_forum_cache_key(user: User):
+        return make_template_fragment_key(
+            'home_page_latest_from_forums',
+            (user.pk, user.userprofile.language)
         )
