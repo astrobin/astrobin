@@ -25,7 +25,7 @@ class SubmitterSeenImageViewSet(viewsets.ModelViewSet):
     serializer_class = SubmitterSeenImageSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = None
-    permission_classes = [IsAuthenticated, is_group_member(GroupName.IOTD_SUBMITTERS)],
+    permission_classes = [IsAuthenticated, is_group_member(GroupName.IOTD_SUBMITTERS)]
     model = IotdSubmitterSeenImage
     http_method_names = ['get', 'head', 'options', 'post']
 
