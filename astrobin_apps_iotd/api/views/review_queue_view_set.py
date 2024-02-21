@@ -6,18 +6,18 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
-from astrobin_apps_iotd.api.permissions.is_iotd_reviewer import IsIotdReviewer
 from astrobin_apps_iotd.api.queue_pagination import QueuePagination
 from astrobin_apps_iotd.api.serializers.review_queue_serializer import ReviewQueueSerializer
 from astrobin_apps_iotd.services import IotdService
-from common.permissions import ReadOnly
+from common.constants import GroupName
+from common.permissions import ReadOnly, is_group_member
 
 
 class ReviewQueueViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewQueueSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = QueuePagination
-    permission_classes = [IsAuthenticated, ReadOnly, IsIotdReviewer]
+    permission_classes = [IsAuthenticated, ReadOnly, is_group_member(GroupName.IOTD_REVIEWERS)]
     http_method_names = ['get', 'head']
 
     def get_queryset(self):

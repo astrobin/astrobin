@@ -17,13 +17,15 @@ from rest_framework.response import Response
 from astrobin.models import Image
 from astrobin_apps_iotd.api.serializers.submitter_seen_image_serializer import SubmitterSeenImageSerializer
 from astrobin_apps_iotd.models import IotdSubmitterSeenImage
+from common.constants import GroupName
+from common.permissions import is_group_member
 
 
 class SubmitterSeenImageViewSet(viewsets.ModelViewSet):
     serializer_class = SubmitterSeenImageSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = None
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, is_group_member(GroupName.IOTD_SUBMITTERS)]
     model = IotdSubmitterSeenImage
     http_method_names = ['get', 'head', 'options', 'post']
 

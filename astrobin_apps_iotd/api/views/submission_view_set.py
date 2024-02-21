@@ -14,16 +14,17 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
-from astrobin_apps_iotd.api.permissions.is_iotd_submitter import IsIotdSubmitter
 from astrobin_apps_iotd.api.serializers.submission_serializer import SubmissionSerializer
 from astrobin_apps_iotd.models import IotdSubmission
+from common.constants import GroupName
+from common.permissions import is_group_member
 
 
 class SubmissionViewSet(viewsets.ModelViewSet):
     serializer_class = SubmissionSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = None
-    permission_classes = [IsAuthenticated, IsIotdSubmitter]
+    permission_classes = [IsAuthenticated, is_group_member(GroupName.IOTD_SUBMITTERS)]
     model = IotdSubmission
 
     def get_queryset(self):
