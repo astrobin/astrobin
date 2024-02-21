@@ -67,7 +67,7 @@
             $el.select2({
                 theme: "flat",
                 ajax: {
-                    url: '/api/v2/forum/forum/select2/?is-equipment=' + isEquipment,
+                    url: '/api/v2/forum/forum/select2/?include-groups=true&is-equipment=' + isEquipment,
                     dataType: 'json',
                     delay: 250,
                     transport: function (params, success, failure) {
