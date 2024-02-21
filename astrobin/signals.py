@@ -547,6 +547,10 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
         compute_contribution_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
     elif isinstance(instance.content_object, NestedComment):
         compute_contribution_index.apply_async(args=(instance.content_object.author.pk,), countdown=10)
+    elif isinstance(instance.content_object, User) and instance.property_type == "follow":
+        UserService(instance.content_object).update_followers_count()
+        UserService(instance.user).update_following_count()
+
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
@@ -565,6 +569,9 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
         compute_contribution_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
     elif isinstance(instance.content_object, NestedComment):
         compute_contribution_index.apply_async(args=(instance.content_object.author.pk,), countdown=10)
+    elif isinstance(instance.content_object, User) and instance.property_type == "follow":
+        UserService(instance.content_object).update_followers_count()
+        UserService(instance.user).update_following_count()
 
     if created:
         verb = None

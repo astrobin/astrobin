@@ -3070,7 +3070,7 @@ class UserProfile(SafeDeleteModel):
         null=True,
     )
 
-    # Computer fields
+    # Computed fields
 
     contribution_index = models.DecimalField(
         editable=False,
@@ -3078,6 +3078,16 @@ class UserProfile(SafeDeleteModel):
         blank=True,
         max_digits=5,
         decimal_places=2,
+    )
+
+    followers_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
+    )
+
+    following_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
     )
 
     def get_display_name(self) -> str:
