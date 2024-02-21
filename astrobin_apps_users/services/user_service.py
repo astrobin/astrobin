@@ -828,6 +828,7 @@ class UserService:
         profile: UserProfile = self.user.userprofile
         profile.following_count = ToggleProperty.objects.filter(
             user=self.user,
-            property_type='follow'
+            property_type='follow',
+            content_type=ContentType.objects.get_for_model(User)
         ).count()
         profile.save(keep_deleted=True)
