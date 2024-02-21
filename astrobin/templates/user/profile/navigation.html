@@ -107,13 +107,13 @@
                 <li>
                     <a href="{% url 'user_page_following' requested_user.username %}">
                         <i class="icon-rotate-right"></i>
-                        {% trans "Following" %}
+                        {% trans "Following" %} ({{ requested_user.userprofile.following_count }})
                     </a>
 
                 <li>
                     <a href="{% url 'user_page_followers' requested_user.username %}">
                         <i class="icon-rotate-left"></i>
-                        {% trans "Followers" %}
+                        {% trans "Followers" %} ({{ requested_user.userprofile.followers_count }})
                     </a>
                 </li>
 

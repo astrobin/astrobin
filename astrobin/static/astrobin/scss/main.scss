@@ -3601,8 +3601,15 @@ ul.astrobin-users {
 
 .astrobin-users.table {
   th, td {
+    vertical-align: middle;
+
     &.user-list-avatar {
-      width: 20px;
+      width: 64px;
+
+      img {
+        width: 64px;
+        height: 64px;
+      }
     }
 
     &.user-list-images, &.user-list-followers,
@@ -3614,7 +3621,6 @@ ul.astrobin-users {
     &.user-list-following {
       text-align: center;
     }
-
   }
 }
 

@@ -91,14 +91,9 @@ def astrobin_username(context, user, **kwargs):
 def astrobin_user(context, user, **kwargs):
     request = context['request']
 
-    user_ct = ContentType.objects.get_for_model(User)
     images = UserService(user).get_public_images()
-
-    followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
-    following = ToggleProperty.objects.filter(
-        property_type="follow",
-        user=user,
-        content_type=user_ct).count()
+    followers = user.userprofile.followers_count
+    following = user.userprofile.following_count
 
     request_user = None
     if request.user.is_authenticated:
