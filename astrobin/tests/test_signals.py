@@ -729,3 +729,37 @@ class SignalsTest(TestCase):
         self.assertIsNotNone(profile.skill_level_updated)
         self.assertGreater(profile.skill_level_updated, updated)
 
+    def test_updating_followers_count_after_follow(self):
+        user = Generators.user()
+        follower = Generators.user()
+
+        self.assertEquals(0, user.userprofile.followers_count)
+        self.assertEquals(0, follower.userprofile.following_count)
+
+        Generators.follow(user, user=follower)
+
+        user.userprofile.refresh_from_db()
+        follower.userprofile.refresh_from_db()
+
+        self.assertEquals(1, user.userprofile.followers_count)
+        self.assertEquals(1, follower.userprofile.following_count)
+
+    def test_updating_followers_count_after_unfollow(self):
+        user = Generators.user()
+        follower = Generators.user()
+
+        follow = Generators.follow(user, user=follower)
+
+        user.userprofile.refresh_from_db()
+        follower.userprofile.refresh_from_db()
+
+        self.assertEquals(1, user.userprofile.followers_count)
+        self.assertEquals(1, follower.userprofile.following_count)
+
+        follow.delete()
+
+        user.userprofile.refresh_from_db()
+        follower.userprofile.refresh_from_db()
+
+        self.assertEquals(0, user.userprofile.followers_count)
+        self.assertEquals(0, follower.userprofile.following_count)
