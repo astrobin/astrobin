@@ -173,6 +173,7 @@ def image_pre_save_invalidate_thumbnails(sender, instance: Image, **kwargs):
 pre_save.connect(image_pre_save_invalidate_thumbnails, sender=Image)
 
 
+@receiver(post_save, sender=Image)
 def image_post_save(sender, instance: Image, created: bool, **kwargs):
     if kwargs.get('update_fields', None):
         return
@@ -247,6 +248,9 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             except UserProfile.DoesNotExist:
                 pass
 
+        if not instance.is_wip and instance.moderator_decision == ModeratorDecision.APPROVED:
+            UserService(instance.user).update_image_count()
+
         UserService(instance.user).clear_gallery_image_list_cache()
         ImageService(instance).clear_badges_cache()
 
@@ -273,10 +277,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                     )
 
 
-
-post_save.connect(image_post_save, sender=Image)
-
-
+@receiver(post_softdelete, sender=Image)
 def image_post_softdelete(sender, instance, **kwargs):
     def decrease_counter(user):
         user.userprofile.premium_counter -= 1
@@ -286,6 +287,9 @@ def image_post_softdelete(sender, instance, **kwargs):
     ImageIndex().remove_object(instance)
     UserService(instance.user).clear_gallery_image_list_cache()
     ImageService(instance).delete_stories()
+
+    if not instance.is_wip and instance.moderator_decision == ModeratorDecision.APPROVED:
+        UserService(instance.user).update_image_count()
 
     if instance.solution:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
@@ -313,9 +317,6 @@ def image_post_softdelete(sender, instance, **kwargs):
     except IntegrityError:
         # Possibly the user is being deleted
         pass
-
-
-post_softdelete.connect(image_post_softdelete, sender=Image)
 
 
 @receiver(pre_delete, sender=Image)
@@ -1704,6 +1705,10 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
                 'image_thumbnail': thumb.url if thumb else None
             }
         )
+    elif action == 'post_add':
+        users = User.objects.filter(pk__in=pk_set)
+        for user in users.iterator():
+            UserService(user).update_image_count()
     elif action == 'pre_remove':
         users = User.objects.filter(pk__in=pk_set)
         for user in users.iterator():
@@ -1714,6 +1719,10 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
                 'image_thumbnail': thumb.url if thumb else None
             }
         )
+    elif action == 'post_remove':
+        users = User.objects.filter(pk__in=pk_set)
+        for user in users.iterator():
+            UserService(user).update_image_count()
 
 
 m2m_changed.connect(image_collaborators_changed, sender=Image.collaborators.through)

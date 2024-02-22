@@ -349,7 +349,6 @@ class UserService:
     def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: Optional[str], klass: Optional[str]):
         from astrobin.models import Acquisition, Camera, Image, Telescope
         from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
-        from astrobin_apps_images.services import ImageService
 
         menu = []
 
@@ -831,4 +830,11 @@ class UserService:
             property_type='follow',
             content_type=ContentType.objects.get_for_model(User)
         ).count()
+        profile.save(keep_deleted=True)
+
+    def update_image_count(self):
+        from astrobin.models import UserProfile
+
+        profile: UserProfile = self.user.userprofile
+        profile.image_count = UserService(self.user).get_public_images().count()
         profile.save(keep_deleted=True)
