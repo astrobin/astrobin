@@ -18,14 +18,7 @@ from toggleproperties.models import ToggleProperty
 
 
 class SignalsTest(TestCase):
-    def test_new_image_updates_userprofile_count(self):
-        image = Generators.image(moderator_decision=ModeratorDecision.APPROVED)
-
-        image.user.userprofile.refresh_from_db()
-
-        self.assertEquals(1, image.user.userprofile.image_count)
-
-    def test_new_collaborator_image_updates_userprofile_count(self):
+    def test_collaborator_image_updates_userprofile_count(self):
         user = Generators.user()
         collaborator = Generators.user()
         image = Generators.image(user=user, moderator_decision=ModeratorDecision.APPROVED)
@@ -46,7 +39,15 @@ class SignalsTest(TestCase):
 
         self.assertEquals(0, collaborator.userprofile.image_count)
 
-    def test_delete_image_updates_userprofile_count(self):
+        image.delete()
+
+        # It's not counted as a deleted image for the collaborator
+
+        collaborator.userprofile.refresh_from_db()
+
+        self.assertEquals(0, collaborator.userprofile.deleted_image_count)
+
+    def test_image_updates_userprofile_count(self):
         image = Generators.image(moderator_decision=ModeratorDecision.APPROVED)
 
         image.user.userprofile.refresh_from_db()
@@ -58,7 +59,35 @@ class SignalsTest(TestCase):
         image.user.userprofile.refresh_from_db()
 
         self.assertEquals(0, image.user.userprofile.image_count)
+        self.assertEquals(1, image.user.userprofile.deleted_image_count)
 
+        image.delete(force_policy=HARD_DELETE)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.deleted_image_count)
+
+    def test_wip_image_updates_userprofile_count(self):
+        image = Generators.image(moderator_decision=ModeratorDecision.APPROVED, is_wip=True)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.image_count)
+        self.assertEquals(1, image.user.userprofile.wip_image_count)
+
+        image.delete()
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.image_count)
+        self.assertEquals(0, image.user.userprofile.wip_image_count)
+        self.assertEquals(1, image.user.userprofile.deleted_image_count)
+
+        image.delete(force_policy=HARD_DELETE)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.deleted_image_count)
 
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")

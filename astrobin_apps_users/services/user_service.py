@@ -837,4 +837,6 @@ class UserService:
 
         profile: UserProfile = self.user.userprofile
         profile.image_count = UserService(self.user).get_public_images().count()
+        profile.wip_image_count = UserService(self.user).get_wip_images().count()
+        profile.deleted_image_count = UserService(self.user).get_deleted_images().count()
         profile.save(keep_deleted=True)
