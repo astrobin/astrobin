@@ -248,7 +248,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             except UserProfile.DoesNotExist:
                 pass
 
-        if not instance.is_wip and instance.moderator_decision == ModeratorDecision.APPROVED:
+        if instance.moderator_decision == ModeratorDecision.APPROVED:
             UserService(instance.user).update_image_count()
 
         UserService(instance.user).clear_gallery_image_list_cache()
@@ -288,7 +288,7 @@ def image_post_softdelete(sender, instance, **kwargs):
     UserService(instance.user).clear_gallery_image_list_cache()
     ImageService(instance).delete_stories()
 
-    if not instance.is_wip and instance.moderator_decision == ModeratorDecision.APPROVED:
+    if instance.moderator_decision == ModeratorDecision.APPROVED:
         UserService(instance.user).update_image_count()
 
     if instance.solution:
@@ -332,6 +332,10 @@ def image_pre_delete(sender, instance: Image, **kwargs):
             invalidate_cdn_caches.delay([instance.image_file.url])
         instance.image_file.delete(save=False)
 
+
+@receiver(post_delete, sender=Image)
+def image_post_delete(sender, instance, **kwargs):
+    UserService(instance.user).update_image_count()
 
 def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):
     if not instance.uploader_in_progress and instance.square_cropping in (None, ''):

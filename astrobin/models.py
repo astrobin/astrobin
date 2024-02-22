@@ -3090,7 +3090,18 @@ class UserProfile(SafeDeleteModel):
         default=0,
     )
 
+    # Public images
     image_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
+    )
+
+    wip_image_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
+    )
+
+    deleted_image_count = models.PositiveIntegerField(
         editable=False,
         default=0,
     )
