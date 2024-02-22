@@ -7,6 +7,7 @@ from django.utils import timezone
 from mock import patch
 from safedelete import HARD_DELETE
 
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, ImageRevision, UserProfile
 from astrobin.signals import imagerevision_post_save
 from astrobin.stories import ACTSTREAM_VERB_UPLOADED_REVISION
@@ -17,6 +18,47 @@ from toggleproperties.models import ToggleProperty
 
 
 class SignalsTest(TestCase):
+    def test_new_image_updates_userprofile_count(self):
+        image = Generators.image(moderator_decision=ModeratorDecision.APPROVED)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(1, image.user.userprofile.image_count)
+
+    def test_new_collaborator_image_updates_userprofile_count(self):
+        user = Generators.user()
+        collaborator = Generators.user()
+        image = Generators.image(user=user, moderator_decision=ModeratorDecision.APPROVED)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, collaborator.userprofile.image_count)
+
+        image.collaborators.add(collaborator)
+
+        collaborator.userprofile.refresh_from_db()
+
+        self.assertEquals(1, collaborator.userprofile.image_count)
+
+        image.collaborators.remove(collaborator)
+
+        collaborator.userprofile.refresh_from_db()
+
+        self.assertEquals(0, collaborator.userprofile.image_count)
+
+    def test_delete_image_updates_userprofile_count(self):
+        image = Generators.image(moderator_decision=ModeratorDecision.APPROVED)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(1, image.user.userprofile.image_count)
+
+        image.delete()
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.image_count)
+
 
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")

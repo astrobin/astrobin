@@ -3090,6 +3090,11 @@ class UserProfile(SafeDeleteModel):
         default=0,
     )
 
+    image_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
+    )
+
     def get_display_name(self) -> str:
         return self.real_name if self.real_name else str(self.user)
 
