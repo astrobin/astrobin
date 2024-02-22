@@ -3147,10 +3147,11 @@ class UserProfile(SafeDeleteModel):
                     'user_scores_followers': None
                 }
 
+            # TODO: add AstroBin index to the model so we don't need to fetch the SearchQuerySet
             scores = {
                 'user_scores_index': user_search_result.normalized_likes,
                 'user_scores_contribution_index': self.contribution_index,
-                'user_scores_followers': user_search_result.followers,
+                'user_scores_followers': self.followers_count,
             }
 
             CachingService.set(cache_key, scores, 300)

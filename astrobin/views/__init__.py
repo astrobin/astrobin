@@ -1259,20 +1259,12 @@ def user_page(request, username):
     if view == 'table':
         qs = qs.order_by('-published')
 
-    # Calculate some stats
-
-    followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
-    following = ToggleProperty.objects.filter(
-        property_type="follow",
-        user=user,
-        content_type=user_ct).count()
-
     stats_data = UserService(user).get_profile_stats(getattr(request, 'LANGUAGE_CODE', 'en'))
 
     response_dict = {
         'paginate_by': settings.PAGINATE_USER_PAGE_BY,
-        'followers': followers,
-        'following': following,
+        'followers': user.userprofile.followers_count,
+        'following': user.userprofile.following_count,
         'image_list': qs,
         'sort': request.GET.get('sort'),
         'view': view,

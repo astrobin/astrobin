@@ -91,10 +91,6 @@ def astrobin_username(context, user, **kwargs):
 def astrobin_user(context, user, **kwargs):
     request = context['request']
 
-    images = UserService(user).get_public_images()
-    followers = user.userprofile.followers_count
-    following = user.userprofile.following_count
-
     request_user = None
     if request.user.is_authenticated:
         request_user = UserProfile.objects.get(user=request.user).user
@@ -118,9 +114,9 @@ def astrobin_user(context, user, **kwargs):
         'view': view,
         'layout': layout,
         'user_is_owner': request.user == user,
-        'images': images.count(),
-        'followers': followers,
-        'following': following,
+        'images': user.userprofile.image_count,
+        'followers': user.userprofile.followers_count,
+        'following': user.userprofile.following_count,
 
         'DONATIONS_ENABLED': context['DONATIONS_ENABLED'],
         'PREMIUM_ENABLED': context['PREMIUM_ENABLED'],

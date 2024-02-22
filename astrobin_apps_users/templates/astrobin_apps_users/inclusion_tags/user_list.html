@@ -10,6 +10,7 @@
             <tr>
                 <th class="user-list-avatar"></th>
                 <th class="user-list-name">{% trans "User" %}</th>
+                <th class="user-list-followers">{% trans "Images" %}</th>
                 <th class="user-list-followers">{% trans "Followers" %}</th>
                 <th class="user-list-following">{% trans "Following" %}</th>
             </tr>
@@ -28,6 +29,7 @@
                         {{ u.userprofile }}
                     </a>
                 </td>
+                <td class="user-list-images">{{ u.userprofile.image_count }}</td>
                 <td class="user-list-followers">{{ u.userprofile.followers_count }}</td>
                 <td class="user-list-following">{{ u.userprofile.following_count }}</td>
             </tr>
