@@ -35,7 +35,7 @@ from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
 from astrobin.tasks import (
-    compute_contribution_index, encode_video_file, generate_video_preview, invalidate_cdn_caches,
+    compute_contribution_index, compute_image_index, encode_video_file, generate_video_preview, invalidate_cdn_caches,
     process_camera_rename_proposal,
 )
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
@@ -542,6 +542,7 @@ def nested_comment_post_delete(sender, instance, **kwargs):
 def toggleproperty_post_delete(sender, instance, **kwargs):
     if isinstance(instance.content_object, Image):
         ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
+        compute_image_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
 
         if not instance.content_object.is_wip:
             SearchIndexUpdateService.update_index(instance.content_object)
@@ -587,6 +588,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 image = instance.content_type.get_object_for_this_type(id=instance.object_id)
                 Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
                 ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
+                compute_image_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
 
                 if image.is_wip:
                     return
