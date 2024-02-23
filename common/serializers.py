@@ -89,9 +89,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializerPrivate(UserProfileSerializer):
     astrobin_index = FloatField(read_only=True, source='get_scores.user_scores_index')
+    contribution_index = serializers.SerializerMethodField()
     followers = IntegerField(read_only=True, source='followers_count')
     locations = LocationSerializer(many=True, source='location_set')
     email = CharField(read_only=True, source='user.email')
+
+    def get_contribution_index(self, obj: UserProfile) -> float:
+        return float(obj.contribution_index) if obj.contribution_index is not None else None
 
     def update(self, instance, validated_data):
         locations = validated_data.pop('location_set', [])
