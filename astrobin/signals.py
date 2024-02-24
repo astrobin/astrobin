@@ -548,6 +548,7 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
             SearchIndexUpdateService.update_index(instance.content_object)
             SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
             for collaborator in instance.content_object.collaborators.all().iterator():
+                compute_image_index.apply_async(args=(collaborator.pk,), countdown=10)
                 SearchIndexUpdateService.update_index(collaborator, 3600)
     elif isinstance(instance.content_object, Post):
         compute_contribution_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
@@ -589,6 +590,9 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
                 ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
                 compute_image_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
+
+                for x in instance.content_object.collaborators.all():
+                    compute_image_index.apply_async(args=(x.pk,), countdown=10)
 
                 if image.is_wip:
                     return

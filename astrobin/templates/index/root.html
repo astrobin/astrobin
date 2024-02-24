@@ -82,16 +82,13 @@
 
         <div class="latest-from-forums">
             <div class="endless">
+                <img
+                    class="loading"
+                    src="{% static 'astrobin/images/ajax-loader.gif' %}"
+                    alt="{% trans "Loading..." %}" />
+
                 <table class="table table-striped topic-list index-recent-topics">
                     <tbody>
-                        <tr class="loading">
-                            <td colspan="5">
-                                <img
-                                    class="loading"
-                                    src="{% static 'astrobin/images/ajax-loader.gif' %}"
-                                    alt="{% trans "Loading..." %}" />
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
