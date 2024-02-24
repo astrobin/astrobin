@@ -7,9 +7,9 @@ import numpy as np
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
-from django.core.cache import cache, caches
+from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
-from django.db.models import OuterRef, Q, QuerySet, Subquery
+from django.db.models import OuterRef, Q, QuerySet, Subquery, Sum
 from django.db.models.functions import Length
 from django.utils import timezone
 from django.utils.translation import ugettext as _
@@ -809,6 +809,30 @@ class UserService:
         )
 
         return total
+
+    def compute_image_index(self) -> float:
+        from astrobin.models import Image
+
+        likes = Image.objects.filter(user_id=self.user.id).aggregate(total_likes=Sum('like_count'))['total_likes']
+        images = self.user.userprofile.image_count
+        average = likes / images if images > 0 else 0
+
+        # Only consider images that have a number of likes greater than the average.
+        normalized = list(
+            Image.objects.filter(user_id=self.user.id, like_count__gte=average).values_list('like_count', flat=True)
+        )
+
+        if len(normalized) == 0:
+            result = 0
+        else:
+            result = astrobin_index(normalized)
+
+        if self.user.userprofile.astrobin_index_bonus is not None:
+            result += self.user.userprofile.astrobin_index_bonus
+
+        log.debug(f"User {self.user.username} has an image index of {result}")
+
+        return result
 
     def update_followers_count(self):
         from astrobin.models import UserProfile

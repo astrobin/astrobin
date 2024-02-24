@@ -3080,6 +3080,14 @@ class UserProfile(SafeDeleteModel):
         decimal_places=2,
     )
 
+    image_index = models.DecimalField(
+        editable=False,
+        null=True,
+        blank=True,
+        max_digits=7,
+        decimal_places=3,
+    )
+
     followers_count = models.PositiveIntegerField(
         editable=False,
         default=0,

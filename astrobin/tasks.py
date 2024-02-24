@@ -1147,3 +1147,11 @@ def compute_contribution_index(user_id: int):
     if user:
         index = UserService(user).compute_contribution_index()
         UserProfile.objects.filter(user=user).update(contribution_index=index)
+
+
+@shared_task(time_limit=60)
+def compute_image_index(user_id: int):
+    user = get_object_or_None(User, pk=user_id)
+    if user:
+        index = UserService(user).compute_image_index()
+        UserProfile.objects.filter(user=user).update(image_index=index)
