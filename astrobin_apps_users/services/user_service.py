@@ -813,13 +813,15 @@ class UserService:
     def compute_image_index(self) -> float:
         from astrobin.models import Image
 
-        likes = Image.objects.filter(user_id=self.user.id).aggregate(total_likes=Sum('like_count'))['total_likes']
+        public_images = UserService(self.user).get_public_images()
+
+        likes = public_images.aggregate(total_likes=Sum('like_count'))['total_likes']
         images = self.user.userprofile.image_count
         average = likes / images if images > 0 else 0
 
         # Only consider images that have a number of likes greater than the average.
         normalized = list(
-            Image.objects.filter(user_id=self.user.id, like_count__gte=average).values_list('like_count', flat=True)
+            public_images.filter(like_count__gte=average).values_list('like_count', flat=True)
         )
 
         if len(normalized) == 0:
