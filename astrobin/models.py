@@ -3138,31 +3138,11 @@ class UserProfile(SafeDeleteModel):
         getattr(self, resolve[gear_type]).remove(gear)
 
     def get_scores(self):
-        from common.services.caching_service import CachingService
-        from haystack.exceptions import SearchFieldError
-        from haystack.query import SearchQuerySet
-
-        cache_key = "astrobin_user_score_%s" % self.user.username
-        scores = CachingService.get(cache_key)
-
-        if not scores:
-            try:
-                user_search_result = SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
-            except (IndexError, SearchFieldError):
-                return {
-                    'user_scores_index': None,
-                    'user_scores_contribution_index': None,
-                    'user_scores_followers': None
-                }
-
-            # TODO: add AstroBin index to the model so we don't need to fetch the SearchQuerySet
-            scores = {
-                'user_scores_index': user_search_result.normalized_likes,
-                'user_scores_contribution_index': self.contribution_index,
-                'user_scores_followers': self.followers_count,
-            }
-
-            CachingService.set(cache_key, scores, 300)
+        scores = {
+            'user_scores_index': self.image_index,
+            'user_scores_contribution_index': self.contribution_index,
+            'user_scores_followers': self.followers_count,
+        }
 
         return scores
 
