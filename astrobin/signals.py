@@ -120,9 +120,9 @@ def image_pre_save(sender, instance, **kwargs):
             instance.watermark_size = last_image.watermark_size
             instance.watermark_opacity = last_image.watermark_opacity
 
-        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
+        image_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
         if not ModerationService.auto_enqueue_for_moderation(instance.user) and (
-                user_scores_index >= 1.00 or
+                image_index >= 1.00 or
                 is_any_paid_subscription(PremiumService(instance.user).get_valid_usersubscription()) or
                 ModerationService.auto_approve(instance.user)
         ):

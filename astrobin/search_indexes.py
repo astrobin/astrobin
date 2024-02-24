@@ -270,9 +270,6 @@ class UserIndex(CelerySearchIndex, Indexable):
     # Total likes given to images.
     likes_given = IntegerField()
 
-    # Average likes of all user's images.
-    average_likes = FloatField()
-
     # Normalized likes (Image Index)
     normalized_likes = FloatField()
 
@@ -350,42 +347,9 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_likes_given(self, obj):
         return ToggleProperty.objects.toggleproperties_for_model('like', Image, obj).count()
 
-    def prepare_average_likes(self, obj):
-        likes = self.prepared_data.get('likes')
-        if likes is None:
-            likes = self.prepare_likes(obj)
-
-        images = self.prepared_data.get('images')
-        if images is None:
-            images = self.prepare_images(obj)
-
-        return likes / float(images) if images > 0 else 0
 
     def prepare_normalized_likes(self, obj):
-        average = self.prepared_data.get('average_likes')
-
-        if average is None:
-            average = self.prepare_average_likes(obj)
-
-        normalized = []
-
-        for i in UserService(obj).get_public_images().iterator():
-            cached = cache.get(PREPARED_LIKES_CACHE_KEY % i.pk)
-            likes = cached if cached is not None else i.like_count
-            if likes >= average:
-                normalized.append(likes)
-
-        if len(normalized) == 0:
-            result = 0
-        else:
-            result = astrobin_index(normalized)
-
-        if obj.userprofile.astrobin_index_bonus is not None:
-            result += obj.userprofile.astrobin_index_bonus
-
-        logger.info(f'Updating UserIndex: {obj.pk} (AstroBin Index: {result})')
-
-        return result
+        return obj.userprofile.image_index
 
     def prepare_comment_likes_received(self, obj):
         comments = NestedComment.objects.using(get_segregated_reader_database()).filter(author=obj)
