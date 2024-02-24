@@ -120,7 +120,7 @@ def image_pre_save(sender, instance, **kwargs):
             instance.watermark_size = last_image.watermark_size
             instance.watermark_opacity = last_image.watermark_opacity
 
-        image_index = instance.user.userprofile.image_index or 0
+        image_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
         if not ModerationService.auto_enqueue_for_moderation(instance.user) and (
                 image_index >= 1.00 or
                 is_any_paid_subscription(PremiumService(instance.user).get_valid_usersubscription()) or
@@ -424,8 +424,8 @@ def nested_comment_pre_save(sender, instance, **kwargs):
 
         cache.set("user.%d.comment_pre_save_mentions" % instance.author.pk, mentions, 2)
     else:
-        insufficient_index = instance.author.userprofile.image_index is not None and \
-                             instance.author.userprofile.image_index < 1.00
+        insufficient_index = instance.author.userprofile.get_scores()['user_scores_index'] is not None and \
+                             instance.author.userprofile.get_scores()['user_scores_index'] < 1.00
         valid_subscription = PremiumService(instance.author).get_valid_usersubscription()
         free_account = is_free(valid_subscription)
         insufficient_previous_approvals = NestedComment.objects.filter(

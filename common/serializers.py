@@ -94,7 +94,7 @@ class UserProfileSerializerPrivate(UserProfileSerializer):
     locations = LocationSerializer(many=True, source='location_set')
     email = CharField(read_only=True, source='user.email')
 
-    def prepare_astrobin_index(self, obj: UserProfile) -> float:
+    def get_astrobin_index(self, obj: UserProfile) -> float:
         return float(obj.image_index) if obj.image_index is not None else None
 
     def get_contribution_index(self, obj: UserProfile) -> float:
