@@ -811,9 +811,7 @@ class UserService:
         return total
 
     def compute_image_index(self) -> float:
-        from astrobin.models import Image
-
-        public_images = UserService(self.user).get_public_images()
+        public_images = UserService(self.user).get_public_images(use_union=False)
 
         likes = public_images.aggregate(total_likes=Sum('like_count'))['total_likes']
         images = self.user.userprofile.image_count
