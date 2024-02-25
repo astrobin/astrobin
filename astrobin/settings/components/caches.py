@@ -14,8 +14,6 @@ if CACHE_TYPE == 'redis':
                 'CONNECTION_POOL_KWARGS': {
                     'max_connections': 100,
                 },
-                'SOCKET_TIMEOUT': 0.05,
-                'SOCKET_CONNECT_TIMEOUT': 0.05,
             },
             'KEY_PREFIX': 'astrobin',
             'TIMEOUT': 3600,
@@ -29,8 +27,6 @@ if CACHE_TYPE == 'redis':
                 'CONNECTION_POOL_KWARGS': {
                     'max_connections': 100,
                 },
-                'SOCKET_TIMEOUT': 0.05,
-                'SOCKET_CONNECT_TIMEOUT': 0.05,
             },
             'KEY_PREFIX': 'astrobin',
             'TIMEOUT': 3600,
