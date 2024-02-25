@@ -29,10 +29,4 @@
             </div>
         </div>
     {% endif %}
-
-    {% if requested_user != request.user and non_empty_collections_count == 0 %}
-        <div class="alert alert-warning">
-            {% trans "This user does not have any collections." %}
-        </div>
-    {% endif %}
 {% endblock %}

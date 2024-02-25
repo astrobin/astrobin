@@ -49,45 +49,43 @@
             </div>
         {% else %}
             {% for collection in collections_list %}
-                {% if collection.images.count > 0 or requested_user == request.user %}
-                    <div class="collection">
-                        <div class="collection-image {% if collection.images.count == 0 %}empty{% endif %}">
-                            {% if collection.images.count > 0 %}
-                                <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
-                                    {% if collection.cover %}
-                                        {% astrobin_image collection.cover 'collection' link=False tooltip=False %}
-                                    {% else %}
-                                        {% astrobin_image collection.images.all.0  'collection' link=False tooltip=False %}
-                                    {% endif %}
-                                </a>
-                            {% else %}
-                                <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
-                                    <img
-                                        src="{% static 'astrobin/images/collection-frame-empty.png' %}"
-                                        alt="{% trans 'Empty collection' %}" />
-                                </a>
-                            {% endif %}
-                        </div>
-                        <div class="collection-name">
+                <div class="collection">
+                    <div class="collection-image {% if collection.images.count == 0 %}empty{% endif %}">
+                        {% if collection.images.count > 0 %}
                             <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
-                                {{collection.name}}
+                                {% if collection.cover %}
+                                    {% astrobin_image collection.cover 'collection' link=False tooltip=False %}
+                                {% else %}
+                                    {% astrobin_image collection.images.all.0  'collection' link=False tooltip=False %}
+                                {% endif %}
+                            </a>
+                        {% else %}
+                            <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
+                                <img
+                                    src="{% static 'astrobin/images/collection-frame-empty.png' %}"
+                                    alt="{% trans 'Empty collection' %}" />
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="collection-name">
+                        <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
+                            {{collection.name}}
+                        </a>
+                    </div>
+                    {% ifequal requested_user request.user %}
+                        <div class="collection-tools">
+                            <a href="{% url 'user_collections_update' requested_user.username collection.pk %}">
+                                <i class="icon icon-edit"></i>
+                            </a>
+                            <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
+                                <i class="icon icon-plus"></i>
+                            </a>
+                            <a href="#" class="delete-modal-toggle" data-collection-pk="{{collection.pk}}">
+                                <i class="icon icon-trash"></i>
                             </a>
                         </div>
-                        {% ifequal requested_user request.user %}
-                            <div class="collection-tools">
-                                <a href="{% url 'user_collections_update' requested_user.username collection.pk %}">
-                                    <i class="icon icon-edit"></i>
-                                </a>
-                                <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
-                                    <i class="icon icon-plus"></i>
-                                </a>
-                                <a href="#" class="delete-modal-toggle" data-collection-pk="{{collection.pk}}">
-                                    <i class="icon icon-trash"></i>
-                                </a>
-                            </div>
-                        {% endifequal %}
-                    </div>
-                {% endif %}
+                    {% endifequal %}
+                </div>
             {% endfor %}
 
             {% ifequal requested_user request.user %}
@@ -106,6 +104,11 @@
             {% endifequal %}
         {% endif %}
     </div>
+{% else %}
+    <div class="alert alert-info">
+        {% blocktrans trimmed %}
+            This user does not have any collections.
+        {% endblocktrans %}
 {% endif %}
 
 {% block extra_js %}
