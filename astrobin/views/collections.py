@@ -89,8 +89,6 @@ class UserCollectionsList(UserCollectionsBase, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsList, self).get_context_data(**kwargs)
-
-        context['non_empty_collections_count'] = self.get_queryset().exclude(images=None).count()
         context['view'] = self.request.GET.get('view')
         return context
 
