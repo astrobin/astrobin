@@ -50,7 +50,7 @@ class CommentPostSaveTest(TestCase):
             push_notification.assert_called_with(mock.ANY, comment.author, 'new_comment_mention', mock.ANY)
 
     @patch('astrobin.signals.MentionsService.get_mentions')
-    @patch('astrobin.signals.push_notification')
+    @patch('nested_comments.services.comment_notifications_service.push_notification')
     def test_non_pending_moderation_does_send_mentions(self, push_notification, get_mentions):
         user = Generators.user()
         get_mentions.return_value = [user.get_username()]

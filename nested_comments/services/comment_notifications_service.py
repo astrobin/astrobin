@@ -168,7 +168,7 @@ class CommentNotificationsService:
                         }
                     )
 
-    def send_mention_notifications(self, mentions = None):
+    def send_mention_notifications(self, mentions=None):
         if not self.comment.pending_moderation:
             (
                 model_class,
