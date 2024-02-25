@@ -10,8 +10,6 @@ log = logging.getLogger(__name__)
 
 
 class CustomRedisCache(RedisCache):
-    operation_timeout = 0.05
-
     def get_with_timeout(self, key, default=None, version=None, client=None):
         try:
             return super().get(key, default, version, client)
@@ -19,13 +17,13 @@ class CustomRedisCache(RedisCache):
             log.debug(f"TimeoutError while getting key {key}")
             return None
 
-    def get(self, key, default=None, version=None, client=None):
+    def get(self, key, default=None, version=None, client=None, operation_timeout=0.05):
         result = [default]
         thread = threading.Thread(
             target=lambda: result.insert(0, self.get_with_timeout(key, default, version, client))
         )
         thread.start()
-        thread.join(self.operation_timeout)
+        thread.join(operation_timeout)
         if thread.is_alive():
             log.debug(f"Timeout while getting key {key}")
             return default
@@ -38,13 +36,13 @@ class CustomRedisCache(RedisCache):
             log.debug(f"TimeoutError while setting key {key}")
             return False
 
-    def set(self, key, value, timeout_val=DEFAULT_TIMEOUT, version=None, client=None):
+    def set(self, key, value, timeout_val=DEFAULT_TIMEOUT, version=None, client=None, operation_timeout=0.05):
         result = [False]
         thread = threading.Thread(
             target=lambda: result.insert(0, self.set_with_timeout(key, value, timeout_val, version, client))
         )
         thread.start()
-        thread.join(self.operation_timeout)
+        thread.join(operation_timeout)
         if thread.is_alive():
             log.debug(f"Timeout while setting key {key}")
             return False
