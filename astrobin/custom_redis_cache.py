@@ -60,3 +60,27 @@ class CustomRedisCache(RedisCache):
 
         return result[0]
 
+    def delete_with_timeout(self, key, version=None, client=None):
+        try:
+            return super().delete(key, version, client)
+        except (TimeoutError, ConnectionError):
+            log.debug(f"TimeoutError while deleting key {key}")
+            return False
+
+    def delete(self, key, version=None, client=None, operation_timeout=0.05):
+        result = [False]
+        thread = threading.Thread(
+            target=lambda: result.insert(0, self.delete_with_timeout(key, version, client))
+        )
+
+        thread.start()
+
+        if operation_timeout in (0, None):
+            thread.join()
+        else:
+            thread.join(operation_timeout)
+            if thread.is_alive():
+                log.debug(f"Timeout while deleting key {key}")
+                return False
+
+        return result[0]
