@@ -6,6 +6,9 @@ if DEBUG:
             'default': {
                 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
             },
+            'json': {
+                'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+            },
         }
 
     PYBB_ANONYMOUS_VIEWS_CACHE_BUFFER = 0

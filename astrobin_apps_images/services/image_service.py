@@ -893,19 +893,26 @@ class ImageService:
         return collection_tag_value
 
     def get_badges_cache(self, owner_or_superuser: bool, is_image_page: bool = False):
-        from common.services.caching_service import CachingService
-        return CachingService.get(f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}_{is_image_page}')
+        from common.services.caching_service import CachingService, JSON_CACHE
+        return CachingService.get(
+            f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}_{is_image_page}',
+            cache_name=JSON_CACHE
+        )
 
     def set_badges_cache(self, badges, owner_or_superuser: bool, is_image_page: bool = False):
-        from common.services.caching_service import CachingService
-        CachingService.set(f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}_{is_image_page}', badges, 60 * 60 * 24)
+        from common.services.caching_service import CachingService, JSON_CACHE
+        CachingService.set(
+            f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}_{is_image_page}',
+            badges, 60 * 60 * 24,
+            cache_name=JSON_CACHE
+        )
 
     def clear_badges_cache(self):
-        from common.services.caching_service import CachingService
-        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_True_True')
-        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_True_False')
-        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_False_True')
-        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_False_False')
+        from common.services.caching_service import CachingService, JSON_CACHE
+        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_True_True', cache_name=JSON_CACHE)
+        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_True_False', cache_name=JSON_CACHE)
+        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_False_True', cache_name=JSON_CACHE)
+        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_False_False', cache_name=JSON_CACHE)
 
     def update_toggleproperty_count(self, property_type):
         if hasattr(self.image, f'{property_type}_count'):

@@ -2934,6 +2934,9 @@ class ImageTest(TestCase):
         CACHES={
             'default': {
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            },
+            'json': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             }
         }
     )
@@ -2949,6 +2952,9 @@ class ImageTest(TestCase):
     @override_settings(
         CACHES={
             'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            },
+            'json': {
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             }
         }
@@ -2966,6 +2972,9 @@ class ImageTest(TestCase):
         CACHES={
             'default': {
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            },
+            'json': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             }
         }
     )
@@ -2982,6 +2991,9 @@ class ImageTest(TestCase):
     @override_settings(
         CACHES={
             'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            },
+            'json': {
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             }
         }
@@ -3009,6 +3021,9 @@ class ImageTest(TestCase):
     @override_settings(
         CACHES={
             'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            },
+            'json': {
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             }
         }
