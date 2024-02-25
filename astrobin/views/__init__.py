@@ -1302,10 +1302,10 @@ def user_page(request, username):
 @never_cache
 @user_passes_test(lambda u: u.is_superuser)
 def user_ban(request, username):
-    user = get_object_or_404(UserProfile, user__username=username).user
+    user = get_object_or_404(User.objects.select_related('userprofile'), username=username)
 
     if request.method == 'POST':
-        user.userprofile.deleted_reason = UserProfile.DELETE_REASON_BANNED
+        user.userprofile.delete_reason = UserProfile.DELETE_REASON_BANNED
         user.userprofile.save(keep_deleted=True)
         user.userprofile.delete()
         log.info("User (%d) was banned" % user.pk)
@@ -2000,16 +2000,16 @@ def user_profile_delete(request):
         form = DeleteAccountForm(instance=request.user.userprofile, data=request.POST)
         form.full_clean()
         if form.is_valid():
-            request.user.userprofile.deleted_reason = form.cleaned_data.get('deleted_reason')
-            request.user.userprofile.deleted_reason_other = form.cleaned_data.get('deleted_reason_other')
+            request.user.userprofile.delete_reason = form.cleaned_data.get('delete_reason')
+            request.user.userprofile.delete_reason_other = form.cleaned_data.get('delete_reason_other')
             request.user.userprofile.save(keep_deleted=True)
             request.user.userprofile.delete()
 
             log.info("User %s (%d) deleted their account with reason %s ('%s')" % (
                 request.user.username,
                 request.user.pk,
-                request.user.userprofile.deleted_reason,
-                request.user.userprofile.deleted_reason_other,
+                request.user.userprofile.delete_reason,
+                request.user.userprofile.delete_reason_other,
             ))
 
             return render(request, 'user/profile/deleted.html', {})

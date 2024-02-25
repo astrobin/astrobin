@@ -47,7 +47,7 @@ class NestedCommentAdmin(admin.ModelAdmin):
         for comment in queryset:
             user = comment.author
             if user.userprofile.deleted is None:
-                user.userprofile.deleted_reason = UserProfile.DELETE_REASON_BANNED
+                user.userprofile.delete_reason = UserProfile.DELETE_REASON_BANNED
                 user.userprofile.save(keep_deleted=True)
                 user.userprofile.delete()
                 logger.info("User (%d) was banned" % user.pk)
