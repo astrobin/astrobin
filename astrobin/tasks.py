@@ -234,7 +234,7 @@ def generate_video_preview(object_id: int, content_type_id: int):
 
 @shared_task(time_limit=7200, acks_late=True)
 def encode_video_file(object_id: int, content_type_id: int):
-    LOCK_EXPIRE = 1800
+    LOCK_EXPIRE = 7200
     lock_id = 'encode_video_file_%d_%d' % (content_type_id, object_id)
 
     acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
