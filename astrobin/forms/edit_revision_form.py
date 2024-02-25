@@ -63,7 +63,7 @@ class ImageEditRevisionForm(forms.ModelForm):
             instance.loop_video = self.cleaned_data['loop_video']
 
         if commit:
-            instance.save()
+            instance.save(keep_deleted=True)
 
         return instance
 

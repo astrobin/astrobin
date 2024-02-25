@@ -71,7 +71,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             instance.agreed_to_iotd_tp_rules_and_guidelines = None
 
         if commit:
-            instance.save()
+            instance.save(keep_deleted=True)
 
         return instance
 
