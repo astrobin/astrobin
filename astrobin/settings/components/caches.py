@@ -41,10 +41,16 @@ elif CACHE_TYPE == 'locmem':
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         },
+        'json': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        },
     }
 else:
     CACHES = {
         'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        },
+        'json': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         },
     }
