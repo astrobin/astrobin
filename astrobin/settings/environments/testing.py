@@ -41,6 +41,9 @@ if TESTING:
         'default': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         },
+        'json': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        },
     }
 
     MIDDLEWARE = [
