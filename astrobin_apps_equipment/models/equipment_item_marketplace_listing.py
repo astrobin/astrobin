@@ -46,6 +46,12 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         blank=False,
     )
 
+    title = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+    )
+
     description = models.TextField(
         null=True,
         blank=True,
