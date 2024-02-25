@@ -22,11 +22,17 @@ class CustomRedisCache(RedisCache):
         thread = threading.Thread(
             target=lambda: result.insert(0, self.get_with_timeout(key, default, version, client))
         )
+
         thread.start()
-        thread.join(operation_timeout)
-        if thread.is_alive():
-            log.debug(f"Timeout while getting key {key}")
-            return default
+
+        if operation_timeout in (0, None):
+            thread.join()  # Wait indefinitely
+        else:
+            thread.join(operation_timeout)  # Wait for specified timeout
+            if thread.is_alive():
+                log.debug(f"Timeout while setting key {key}")
+                return False
+
         return result[0]
 
     def set_with_timeout(self, key, value, timeout=DEFAULT_TIMEOUT, version=None, client=None):
@@ -41,10 +47,16 @@ class CustomRedisCache(RedisCache):
         thread = threading.Thread(
             target=lambda: result.insert(0, self.set_with_timeout(key, value, timeout_val, version, client))
         )
+
         thread.start()
-        thread.join(operation_timeout)
-        if thread.is_alive():
-            log.debug(f"Timeout while setting key {key}")
-            return False
+
+        if operation_timeout in (0, None):
+            thread.join()
+        else:
+            thread.join(operation_timeout)
+            if thread.is_alive():
+                log.debug(f"Timeout while setting key {key}")
+                return False
+
         return result[0]
 
