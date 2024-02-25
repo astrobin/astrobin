@@ -203,7 +203,10 @@ def apply_headers_to_response(response, headers):
 
 
 def get_cached_property(property, object):
-    result = cache.get("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
+    result = cache.get(
+        "tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property),
+        operation_timeout=None
+    )
 
     if result is None:
         model_field = _get_model_field(property)
@@ -213,8 +216,15 @@ def get_cached_property(property, object):
     return result
 
 def set_cached_property(property, object, value):
-    cache.set("tus-uploads/{}/{}/{}".format(
-        object.__class__.__name__, object.pk, property), value, constants.TUS_CACHE_TIMEOUT)
+    cache.set(
+        "tus-uploads/{}/{}/{}".format(
+            object.__class__.__name__,
+            object.pk, property
+        ),
+        value,
+        constants.TUS_CACHE_TIMEOUT,
+        operation_timeout=None
+    )
 
     model_field = _get_model_field(property)
     if hasattr(object, model_field):
@@ -227,7 +237,10 @@ def set_cached_property(property, object, value):
         object.save(kwargs)
 
 def clear_cached_property(property, object):
-    cache.delete("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
+    cache.delete(
+        "tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property),
+        operation_timeout=None
+    )
 
 def _get_model_field(property):
     return 'uploader_%s' % property.replace('-', '_')

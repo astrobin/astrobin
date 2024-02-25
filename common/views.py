@@ -3,23 +3,26 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import IntegrityError
 from django.db.models import Q, QuerySet
 from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page, cache_control
+from django.views.decorators.cache import cache_control, cache_page
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_headers
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import generics, mixins
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
-from subscription.models import Subscription, UserSubscription, Transaction
+from rest_framework.throttling import ScopedRateThrottle
+from subscription.models import Subscription, Transaction, UserSubscription
 
 from astrobin.models import UserProfile
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 from .permissions import ReadOnly
-from .serializers import ContentTypeSerializer, UserSerializer, UserProfileSerializer, UserProfileSerializerPrivate, \
-    SubscriptionSerializer, UserSubscriptionSerializer, TogglePropertySerializer, PaymentSerializer
+from .serializers import (
+    ContentTypeSerializer, PaymentSerializer, SubscriptionSerializer, TogglePropertySerializer,
+    UserProfileSerializer, UserProfileSerializerPrivate, UserSerializer, UserSubscriptionSerializer,
+)
 from .services.caching_service import CachingService
 
 
@@ -47,18 +50,30 @@ class UserList(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
     pagination_class = None
-    queryset = User.objects.all()
+    queryset = User.objects.prefetch_related(
+        'groups',
+        'groups__permissions'
+    ).all()
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
 
 
-@method_decorator([
-    last_modified(CachingService.get_user_detail_last_modified),
-    cache_control(private=True, no_cache=True),
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_user_detail_last_modified),
+        cache_control(private=True, no_cache=True),
+    ], name='dispatch'
+)
 class UserDetail(generics.RetrieveAPIView):
     model = User
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
-    queryset = User.objects.all()
+    queryset = User.objects.prefetch_related(
+        'groups',
+        'groups__permissions'
+    ).all()
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
 
 
 class TogglePropertyList(generics.ListCreateAPIView):
@@ -107,6 +122,8 @@ class UserProfileList(generics.ListAPIView):
     pagination_class = None
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('user',)
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
 
     def get_queryset(self) -> QuerySet:
         if 'q' in self.request.query_params:
@@ -118,14 +135,18 @@ class UserProfileList(generics.ListAPIView):
         return UserProfile.objects.all()
 
 
-@method_decorator([
-    last_modified(CachingService.get_userprofile_detail_last_modified),
-    cache_control(private=True, no_cache=True),
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_userprofile_detail_last_modified),
+        cache_control(private=True, no_cache=True),
+    ], name='dispatch'
+)
 class UserProfileDetail(generics.RetrieveAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
     queryset = UserProfile.objects.all()
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
 
     def get_serializer_class(self):
         profile = self.get_queryset().first()
@@ -134,16 +155,20 @@ class UserProfileDetail(generics.RetrieveAPIView):
         return UserProfileSerializer
 
 
-@method_decorator([
-    last_modified(CachingService.get_current_user_profile_last_modified),
-    cache_control(private=True, no_cache=True),
-    vary_on_headers('Cookie', 'Authorization')
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_current_user_profile_last_modified),
+        cache_control(private=True, no_cache=True),
+        vary_on_headers('Cookie', 'Authorization')
+    ], name='dispatch'
+)
 class CurrentUserProfileDetail(generics.ListAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
     queryset = UserProfile.objects.all()
     pagination_class = None
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
 
     def get_serializer_class(self):
         profile = self.get_queryset().first()
@@ -161,6 +186,8 @@ class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin)
     model = UserProfile
     serializer_class = UserProfileSerializerPrivate
     permission_classes = [IsAuthenticated]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -176,7 +203,7 @@ class SubscriptionList(generics.ListAPIView):
     serializer_class = SubscriptionSerializer
     permission_classes = (ReadOnly,)
     pagination_class = None
-    queryset = Subscription.objects.all()
+    queryset = Subscription.objects.all().select_related('group').prefetch_related('group__permissions')
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('category',)
 
@@ -185,14 +212,16 @@ class SubscriptionDetail(generics.RetrieveAPIView):
     model = Subscription
     serializer_class = SubscriptionSerializer
     permission_classes = (ReadOnly,)
-    queryset = Subscription.objects.all()
+    queryset = Subscription.objects.all().select_related('group').prefetch_related('group__permissions')
 
 
-@method_decorator([
-    last_modified(CachingService.get_current_user_profile_last_modified),
-    cache_control(private=True, no_cache=True),
-    vary_on_headers('Cookie', 'Authorization')
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_current_user_profile_last_modified),
+        cache_control(private=True, no_cache=True),
+        vary_on_headers('Cookie', 'Authorization')
+    ], name='dispatch'
+)
 class UserSubscriptionList(generics.ListAPIView):
     model = UserSubscription
     serializer_class = UserSubscriptionSerializer

@@ -29,13 +29,17 @@
                     <span class="hidden-phone username">
                         {{ request.user.userprofile }}
                     </span>
-                    <span id="navbar-user-scores">
-                        <span id="astrobin-index">
-                        </span> &middot;
-
-                        <span id="contribution-index">
+                    {% if request.user.is_authenticated and not request.user.userprofile.exclude_from_competitions %}
+                        <span id="navbar-user-scores">
+                            <span id="astrobin-index">
+                                {{ request.user.userprofile.image_index|default:"0"|floatformat:2 }}
+                            </span> &middot;
+    
+                            <span id="contribution-index">
+                                {{ request.user.userprofile.contribution_index|default:"0"|floatformat:2 }}
+                            </span>
                         </span>
-                    </span>
+                    {% endif %}
                 </a>
                 <a href="#" class="btn btn-primary dropdown-toggle user-dropdown" data-toggle="dropdown">
                     <i class="icon-caret-down"></i>

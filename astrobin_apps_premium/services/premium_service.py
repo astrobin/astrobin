@@ -108,10 +108,14 @@ class PremiumService:
 
         cache_key = "astrobin_valid_usersubscription_%d" % self.user.pk
 
-        cached = cache.get(cache_key)
-        if cached is not None:
-            return cached
+        # Try local cache first, because this function is called by many templates.
+        from common.services.caching_service import CachingService
 
+        value = CachingService.get(cache_key)
+        if value is not None:
+            return value
+
+        # Get the valid UserSubscription for the current user.
         us = [obj for obj in UserSubscription.objects.filter(
             user__username=self.user.username,
             subscription__name__in=[x.value for x in SubscriptionName],
@@ -127,7 +131,7 @@ class PremiumService:
             sortedByWeight = sorted(us, key=functools.cmp_to_key(_compareSubscriptionWeights))
             result = sortedByWeight[0]
 
-        cache.set(cache_key, result, 300)
+        CachingService.set(cache_key, result, timeout=60)
 
         return result
 

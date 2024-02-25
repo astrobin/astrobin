@@ -35,14 +35,15 @@ if TESTING:
     MIGRATION_MODULES['astrobin'] = None
     MIGRATION_MODULES['astrobin_apps_equipment'] = None
     MIGRATION_MODULES['astrobin_apps_iotd'] = None
+    MIGRATION_MODULES['astrobin_apps_images'] = None
 
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         },
-        'local_request_cache': {
+        'json': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }
+        },
     }
 
     MIDDLEWARE = [

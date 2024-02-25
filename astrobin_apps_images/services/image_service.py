@@ -57,6 +57,8 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_fre
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService, DateTimeService
 from common.services.constellations_service import ConstellationException, ConstellationsService
+from nested_comments.models import NestedComment
+from toggleproperties.models import ToggleProperty
 
 logger = logging.getLogger(__name__)
 
@@ -76,7 +78,7 @@ class ImageService:
         if label == 'final':
             label = self.get_final_revision_label()
 
-        return ImageRevision.objects.get(image=self.image, label=label)
+        return self.image.revisions.get(image=self.image, label=label)
 
     def get_final_revision_label(self):
         # type: () -> str
@@ -282,13 +284,14 @@ class ImageService:
         if 'ERROR' in url:
             return
 
-        field = self.image.get_thumbnail_field(revision_label)
-        cache_key = self.image.thumbnail_cache_key(field, alias, revision_label)
-        cache.set(cache_key, url, 60 * 60 * 24)
-
         thumbnails, created = ThumbnailGroup.objects.get_or_create(image=self.image, revision=revision_label)
-        setattr(thumbnails, alias, url)
-        thumbnails.save()
+        if getattr(thumbnails, alias) != url:
+            setattr(thumbnails, alias, url)
+            thumbnails.save()
+
+            field = self.image.get_thumbnail_field(revision_label)
+            cache_key = self.image.thumbnail_cache_key(field, alias, revision_label)
+            cache.set(cache_key, url, 60 * 60 * 24)
 
     def delete_original(self):
         image: Image = self.image
@@ -889,6 +892,49 @@ class ImageService:
 
         return collection_tag_value
 
+    def get_badges_cache(self, owner_or_superuser: bool, is_image_page: bool = False):
+        from common.services.caching_service import CachingService, JSON_CACHE
+        return CachingService.get(
+            f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}_{is_image_page}',
+            cache_name=JSON_CACHE
+        )
+
+    def set_badges_cache(self, badges, owner_or_superuser: bool, is_image_page: bool = False):
+        from common.services.caching_service import CachingService, JSON_CACHE
+        CachingService.set(
+            f'astrobin_image_badges__{self.image.pk}_{owner_or_superuser}_{is_image_page}',
+            badges, 60 * 60 * 24,
+            cache_name=JSON_CACHE
+        )
+
+    def clear_badges_cache(self):
+        from common.services.caching_service import CachingService, JSON_CACHE
+        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_True_True', cache_name=JSON_CACHE)
+        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_True_False', cache_name=JSON_CACHE)
+        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_False_True', cache_name=JSON_CACHE)
+        CachingService.delete(f'astrobin_image_badges__{self.image.pk}_False_False', cache_name=JSON_CACHE)
+
+    def update_toggleproperty_count(self, property_type):
+        if hasattr(self.image, f'{property_type}_count'):
+            Image.all_objects.filter(pk=self.image.pk).update(
+                **{f'{property_type}_count': ToggleProperty.objects.filter(
+                    content_type=ContentType.objects.get_for_model(self.image),
+                    object_id=self.image.pk,
+                    property_type=property_type
+                ).count()}
+            )
+
+    def update_comment_count(self):
+        Image.all_objects.filter(pk=self.image.pk).update(
+            comment_count=NestedComment.objects.filter(
+                content_type=ContentType.objects.get_for_model(self.image),
+                object_id=self.image.pk,
+            ).exclude(
+                pending_moderation=True,
+                deleted=True,
+            ).count()
+        )
+
     @staticmethod
     def get_constellation(solution):
         if solution is None or solution.ra is None or solution.dec is None:
@@ -919,6 +965,7 @@ class ImageService:
                 from PIL import Image as PILImage
                 trial_image = PILImage.open(f)
                 trial_image.verify()
+
                 f.seek(0)  # Because we opened it with PIL
         except Exception as e:
             logger.warning("Unable to read image file %s with PIL: %s" % (path, str(e)))

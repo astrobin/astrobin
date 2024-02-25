@@ -15,13 +15,15 @@ from rest_framework.response import Response
 
 from astrobin_apps_iotd.api.serializers.dismissed_image_serializer import DismissedImageSerializer
 from astrobin_apps_iotd.models import IotdDismissedImage
+from common.constants import GroupName
+from common.permissions import is_group_member
 
 
 class DismissedImageViewSet(viewsets.ModelViewSet):
     serializer_class = DismissedImageSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = None
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, is_group_member([GroupName.IOTD_SUBMITTERS, GroupName.IOTD_REVIEWERS])]
     model = IotdDismissedImage
     http_method_names = ['get', 'post', 'head']
 

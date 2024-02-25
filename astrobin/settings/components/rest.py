@@ -6,6 +6,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication', # Useful for unit tests
-    )
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'users': '300/min',
+        'images': '200/min',
+    }
 }
 

@@ -13,8 +13,6 @@ class ImagesManager(SafeDeleteManager):
             'collaborators',
             'revisions',
             'thumbnails',
-            'solutions',
-            'iotdvote_set',
         )
 
         return super(ImagesManager, self) \
@@ -22,6 +20,12 @@ class ImagesManager(SafeDeleteManager):
             .filter(uploader_in_progress__isnull=True) \
             .select_related(*select_related) \
             .prefetch_related(*prefetch_related)
+
+
+# Use this manager when you don't want to do any prefetching.
+class ImagesPlainManager(SafeDeleteManager):
+    def get_queryset(self):
+        return super(ImagesPlainManager, self).get_queryset()
 
 
 class PublicImagesManager(ImagesManager):

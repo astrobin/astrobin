@@ -7,9 +7,10 @@ import numpy as np
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
-from django.core.cache import cache, caches
+from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
-from django.db.models import OuterRef, Q, QuerySet, Subquery
+from django.db.models import OuterRef, Q, QuerySet, Subquery, Sum
+from django.db.models.functions import Length
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from haystack.query import SearchQuerySet
@@ -20,6 +21,7 @@ from subscription.models import Subscription
 
 from astrobin.enums import SubjectType
 from common.services.constellations_service import ConstellationsService
+from common.utils import astrobin_index, get_segregated_reader_database
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -66,15 +68,15 @@ class UserService:
 
     def get_all_images(self, use_union=False) -> QuerySet:
         from astrobin.models import Image
+        from common.services.caching_service import CachingService
 
-        local_cache = caches['local_request_cache']
         cache_key = f"collaborators_check_{self.user.id}"
 
-        has_collaborators = local_cache.get(cache_key)
+        has_collaborators = CachingService.get_from_request_cache(cache_key)
 
         if has_collaborators is None:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
-            local_cache.set(cache_key, has_collaborators, timeout=30)
+            CachingService.set_in_request_cache(cache_key, has_collaborators)
 
         if has_collaborators:
             if use_union:
@@ -88,15 +90,15 @@ class UserService:
 
     def get_public_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
+        from common.services.caching_service import CachingService
 
-        local_cache = caches['local_request_cache']
         cache_key = f"collaborators_check_{self.user.id}"
 
-        has_collaborators = local_cache.get(cache_key)
+        has_collaborators = CachingService.get_from_request_cache(cache_key)
 
         if has_collaborators is None:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
-            local_cache.set(cache_key, has_collaborators, timeout=30)
+            CachingService.set_in_request_cache(cache_key, has_collaborators)
 
         if has_collaborators:
             if use_union:
@@ -110,15 +112,15 @@ class UserService:
 
     def get_wip_images(self, use_union=True) -> QuerySet:
         from astrobin.models import Image
+        from common.services.caching_service import CachingService
 
-        local_cache = caches['local_request_cache']
         cache_key = f"collaborators_check_{self.user.id}"
 
-        has_collaborators = local_cache.get(cache_key)
+        has_collaborators = CachingService.get_from_request_cache(cache_key)
 
         if has_collaborators is None:
             has_collaborators = Image.collaborators.through.objects.filter(user=self.user).exists()
-            local_cache.set(cache_key, has_collaborators, timeout=30)
+            CachingService.set_in_request_cache(cache_key, has_collaborators)
 
         if has_collaborators:
             if use_union:
@@ -139,32 +141,22 @@ class UserService:
 
         image_ct: ContentType = ContentType.objects.get_for_model(Image)
 
-        bookmarked_pks: List[int] = [
-            x.object_id
-            for x in ToggleProperty.objects.toggleproperties_for_user(
-                "bookmark", self.user
-            ).filter(
-                content_type=image_ct
-            )
-        ]
-
-        return Image.objects.filter(pk__in=bookmarked_pks)
+        return Image.objects.filter(
+            toggleproperties__property_type='bookmark',
+            toggleproperties__user=self.user,
+            toggleproperties__content_type=image_ct
+        )
 
     def get_liked_images(self) -> QuerySet:
         from astrobin.models import Image
 
         image_ct: ContentType = ContentType.objects.get_for_model(Image)
 
-        liked_pks: List[int] = [
-            x.object_id
-            for x in ToggleProperty.objects.toggleproperties_for_user(
-                "like", self.user
-            ).filter(
-                content_type=image_ct
-            )
-        ]
-
-        return Image.objects.filter(pk__in=liked_pks)
+        return Image.objects.filter(
+            toggleproperties__property_type='like',
+            toggleproperties__user=self.user,
+            toggleproperties__content_type=image_ct
+        )
 
     def get_image_numbers(self):
         public = self.get_public_images()
@@ -240,18 +232,28 @@ class UserService:
         if not self.user.is_authenticated:
             return False, "ANONYMOUS"
 
+        from common.services.caching_service import CachingService
+        cache_key = f'UserService._real_can_like.{self.user.pk}.{obj.__class__.__name__}.{obj.pk}'
+        cached = CachingService.get_from_request_cache(cache_key)
+        if cached is not None:
+            return cached
+
         if obj.__class__.__name__ == 'Image':
-            return self.user != obj.user, "OWNER"
+            value = self.user != obj.user, "OWNER"
         elif obj.__class__.__name__ == 'NestedComment':
-            return self.user != obj.author, "OWNER"
+            value = self.user != obj.author, "OWNER"
         elif obj.__class__.__name__ == 'Post':
             if self.user == obj.user:
-                return False, "OWNER"
-            if obj.topic.closed:
-                return False, "TOPIC_CLOSED"
-            return True, None
+                value = False, "OWNER"
+            elif obj.topic.closed:
+                value = False, "TOPIC_CLOSED"
+            else:
+                value = True, None
+        else:
+            value = False, "UNKNOWN"
 
-        return False, "UNKNOWN"
+        CachingService.set_in_request_cache(cache_key, value)
+        return value
 
     def can_like(self, obj):
         return self._real_can_like(obj)[0]
@@ -263,14 +265,24 @@ class UserService:
         if not self.user.is_authenticated:
             return False, "ANONYMOUS"
 
+        from common.services.caching_service import CachingService
+        cache_key = f'UserService._real_can_unlike.{self.user.pk}.{obj.__class__.__name__}.{obj.pk}'
+        cached = CachingService.get_from_request_cache(cache_key)
+        if cached is not None:
+            return cached
+
         toggle_properties = ToggleProperty.objects.toggleproperties_for_object('like', obj, self.user)
         if toggle_properties.exists():
             one_hour_ago = timezone.now() - timedelta(hours=1)
             if toggle_properties.first().created_on > one_hour_ago:
-                return True, None
-            return False, "TOO_LATE"
+                value = True, None
+            else:
+                value = False, "TOO_LATE"
+        else:
+            value = False, "NEVER_LIKED"
 
-        return False, "NEVER_LIKED"
+        CachingService.set_in_request_cache(cache_key, value)
+        return value
 
     def can_unlike(self, obj):
         return self._real_can_unlike(obj)[0]
@@ -288,7 +300,7 @@ class UserService:
         likes = 0
 
         for image in self.get_all_images().iterator():
-            likes += image.likes()
+            likes += image.like_count
 
         for comment in self.get_all_comments().iterator():
             likes += len(comment.likes)
@@ -337,7 +349,6 @@ class UserService:
     def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: Optional[str], klass: Optional[str]):
         from astrobin.models import Acquisition, Camera, Image, Telescope
         from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
-        from astrobin_apps_images.services import ImageService
 
         menu = []
 
@@ -542,35 +553,26 @@ class UserService:
                 Q(subject_type=SubjectType.WIDE_FIELD)
             )
 
-            images_by_constellation = {
-                'n/a': []
-            }
-
-            for image in queryset.iterator():
-                image_constellation = ImageService.get_constellation(image.solution)
-                if image_constellation:
-                    if not images_by_constellation.get(image_constellation.get('abbreviation')):
-                        images_by_constellation[image_constellation.get('abbreviation')] = []
-                    images_by_constellation.get(image_constellation.get('abbreviation')).append(image)
-                else:
-                    images_by_constellation.get('n/a').append(image)
+            unique_constellations = queryset.filter(
+                constellation__isnull=False
+            ).values_list(
+                'constellation', flat=True
+            ).distinct()
 
             menu += [('ALL', _('All'))]
             for constellation in ConstellationsService.constellation_table:
-                if images_by_constellation.get(constellation[0]):
-                    menu += [(
-                        constellation[0],
-                        constellation[1] + ' (%d)' % len(images_by_constellation.get(constellation[0]))
-                    )]
-            if images_by_constellation.get('n/a') and len(images_by_constellation.get('n/a')) > 0:
-                menu += [('n/a', _('n/a') + ' (%d)' % len(images_by_constellation.get('n/a')))]
+                if constellation[0] in unique_constellations:
+                    menu += [(constellation[0], constellation[1])]
+
+            if queryset.filter(constellation__isnull=True).exists():
+                menu += [('n/a', _('n/a'))]
 
             if active in (None, ''):
                 active = 'ALL'
 
             if active != 'ALL':
                 try:
-                    queryset = queryset.filter(pk__in=[x.pk for x in images_by_constellation[active]])
+                    queryset = queryset.filter(constellation=active)
                 except KeyError:
                     log.warning("Requested missing constellation %s for user %d" % (active, self.user.pk))
                     queryset = Image.objects.none()
@@ -638,10 +640,18 @@ class UserService:
         if not self.user or not self.user.is_authenticated:
             return False
 
-        if type(group_name) is list:
-            return self.user.groups.filter(name__in=group_name).exists()
+        from common.services.caching_service import CachingService
 
-        return self.user.groups.filter(name=group_name).exists()
+        cache_key = f'all_groups_{self.user.pk}'
+        all_groups = CachingService.get(cache_key)
+        if all_groups is None:
+            all_groups = list(self.user.groups.values_list('name', flat=True))
+            CachingService.set(cache_key, all_groups, 300)
+
+        if type(group_name) is list:
+            return any([x in all_groups for x in group_name])
+
+        return group_name in all_groups
 
     def is_in_astrobin_group(self, group_name: Union[str, List[str]]) -> bool:
         if not self.user or not self.user.is_authenticated:
@@ -716,3 +726,141 @@ class UserService:
         agreed = self.user.userprofile.agreed_to_iotd_tp_rules_and_guidelines
         return agreed and agreed > settings.IOTD_LAST_RULES_UPDATE
 
+    def compute_contribution_index(self) -> float:
+        def compute_comment_contribution_index(comments: QuerySet):
+            min_comment_length = 150
+            min_likes = 3
+
+            all_comments = comments \
+                .annotate(length=Length('text')) \
+                .filter(deleted=False, length__gte=min_comment_length)
+
+            all_comments_with_enough_likes = [x for x in all_comments if len(x.likes) >= min_likes]
+            all_comments_count = len(all_comments_with_enough_likes)
+
+            if all_comments_count == 0:
+                return 0
+
+            all_likes = 0
+            for comment in all_comments_with_enough_likes:
+                all_likes += len(comment.likes)
+
+            average = all_likes / float(all_comments_count)
+            normalized = []
+
+            for comment in all_comments_with_enough_likes:
+                likes = len(comment.likes)
+                if likes >= average:
+                    normalized.append(likes)
+
+            if len(normalized) == 0:
+                return 0
+
+            return astrobin_index(normalized)
+
+        def compute_forum_post_contribution_index(posts: QuerySet):
+            min_post_length = 150
+            min_likes = 3
+
+            all_posts = posts \
+                .annotate(length=Length('body')) \
+                .filter(length__gte=min_post_length)
+
+            all_posts_with_enough_likes = [
+                x \
+                for x in all_posts \
+                if ToggleProperty.objects.toggleproperties_for_object('like', x).count() >= min_likes
+            ]
+            all_posts_count = len(all_posts_with_enough_likes)
+
+            if all_posts_count == 0:
+                return 0
+
+            all_likes = 0
+            for post in all_posts_with_enough_likes:
+                all_likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+
+            average = all_likes / float(all_posts_count)
+            normalized = []
+
+            for post in all_posts_with_enough_likes:
+                likes = ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+                if likes >= average:
+                    normalized.append(likes)
+
+            if len(normalized) == 0:
+                return 0
+
+            return astrobin_index(normalized)
+
+        comments_contribution_index = compute_comment_contribution_index(
+            NestedComment.objects.using(get_segregated_reader_database()).filter(author=self.user)
+        )
+
+        forum_post_contribution_index = compute_forum_post_contribution_index(
+            Post.objects.using(get_segregated_reader_database()).filter(user=self.user)
+        )
+
+        total = comments_contribution_index + forum_post_contribution_index
+
+        log.debug(
+            f"User {self.user.username} has a contribution index of {total} (comments: "
+            f"{comments_contribution_index}, forum posts: {forum_post_contribution_index})"
+        )
+
+        return total
+
+    def compute_image_index(self) -> float:
+        public_images = UserService(self.user).get_public_images(use_union=False)
+
+        likes = public_images.aggregate(total_likes=Sum('like_count'))['total_likes']
+        images = self.user.userprofile.image_count
+        average = likes / images if images > 0 else 0
+
+        # Only consider images that have a number of likes greater than the average.
+        normalized = list(
+            public_images.filter(like_count__gte=average).values_list('like_count', flat=True)
+        )
+
+        if len(normalized) == 0:
+            result = 0
+        else:
+            result = astrobin_index(normalized)
+
+        if self.user.userprofile.astrobin_index_bonus is not None:
+            result += self.user.userprofile.astrobin_index_bonus
+
+        log.debug(f"User {self.user.username} has an image index of {result}")
+
+        return result
+
+    def update_followers_count(self):
+        from astrobin.models import UserProfile
+
+        profile: UserProfile = self.user.userprofile
+        profile.followers_count = ToggleProperty.objects.filter(
+            property_type='follow',
+            object_id=self.user.pk,
+            content_type=ContentType.objects.get_for_model(User)
+        ).count()
+        profile.save(keep_deleted=True)
+
+    def update_following_count(self):
+        from astrobin.models import UserProfile
+
+        profile: UserProfile = self.user.userprofile
+        profile.following_count = ToggleProperty.objects.filter(
+            user=self.user,
+            property_type='follow',
+            content_type=ContentType.objects.get_for_model(User)
+        ).count()
+        profile.save(keep_deleted=True)
+
+    def update_image_count(self):
+        from astrobin.models import UserProfile
+
+        profile: UserProfile = self.user.userprofile
+        profile.image_count = UserService(self.user).get_public_images().count()
+        profile.wip_image_count = UserService(self.user).get_wip_images().count()
+        profile.deleted_image_count = UserService(self.user).get_deleted_images().count()
+        profile.save(keep_deleted=True)

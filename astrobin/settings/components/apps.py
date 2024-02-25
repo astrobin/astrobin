@@ -1,7 +1,7 @@
 ASTROBIN_APPS = [
     'common',
     'nested_comments',
-    'astrobin_apps_images',
+    'astrobin_apps_images.apps.AstrobinAppsImagesConfig',
     'astrobin_apps_platesolving',
     'astrobin_apps_users',
     'astrobin_apps_donations',
@@ -59,7 +59,6 @@ INSTALLED_APPS += [
     'pybb',
     'precise_bbcode',
     'django_bootstrap_breadcrumbs',
-    'silk',
     'djcelery_email',
     'django_celery_beat',
     'django_bouncy',
@@ -90,4 +89,5 @@ INSTALLED_APPS += [
 if DEBUG:
     INSTALLED_APPS += [
         'debug_toolbar',
+        "template_profiler_panel",
     ]

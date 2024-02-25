@@ -118,11 +118,7 @@
 
                     <td class="contributors-list-user">
                         <a href="{% url 'user_page' u.username %}">
-                            {% if u.object %}
-                                {{u.object.userprofile}}
-                            {% else %}
-                                {{u.username}}
-                            {% endif %}
+                            {{ u.user_display_name|default:u.username }}
                         </a>
                     </td>
 

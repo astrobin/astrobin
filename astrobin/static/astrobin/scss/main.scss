@@ -1293,8 +1293,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
   .multiline-dates {
     @media (min-width: 980px) {
-        margin-top: 1.5rem;
-        margin-left: 1rem;
+      margin-top: 1.5rem;
+      margin-left: 1rem;
     }
   }
 
@@ -2126,8 +2126,7 @@ p.small {
 }
 
 #realname-prompt,
-#iotd-tp-is-explicit-submission-prompt
-{
+#iotd-tp-is-explicit-submission-prompt {
   position: absolute;
   top: 40px;
   left: 0;
@@ -2571,13 +2570,24 @@ form.avatar-delete {
   }
 }
 
-.index-recent-topics.topic-list {
-  margin-bottom: $spacer-large;
+.latest-from-forums {
+  .endless {
+    text-align: center;
+  }
 
-  .topic-name > a:first-child {
-    font-size: 1.25rem;
-    border: 0;
-    padding: 0;
+  img.loading {
+    margin: 1rem auto;
+  }
+
+  .index-recent-topics.topic-list {
+    margin-bottom: $spacer-large;
+    min-height: 400px;
+
+    .topic-name > a:first-child {
+      font-size: 1.25rem;
+      border: 0;
+      padding: 0;
+    }
   }
 }
 
@@ -3600,8 +3610,15 @@ ul.astrobin-users {
 
 .astrobin-users.table {
   th, td {
+    vertical-align: middle;
+
     &.user-list-avatar {
-      width: 20px;
+      width: 64px;
+
+      img {
+        width: 64px;
+        height: 64px;
+      }
     }
 
     &.user-list-images, &.user-list-followers,
@@ -3613,7 +3630,6 @@ ul.astrobin-users {
     &.user-list-following {
       text-align: center;
     }
-
   }
 }
 
@@ -4011,6 +4027,7 @@ pre {
   hr {
     margin: 3rem 0;
   }
+
   .accordion-group {
     margin: 0;
   }

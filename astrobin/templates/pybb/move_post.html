@@ -52,3 +52,58 @@
     </form>
 
 {% endblock content %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#id_move_to').select2({
+                theme: "flat",
+                ajax: {
+                    url: '/api/v2/forum/forum/select2/?include-groups=true',
+                    dataType: 'json',
+                    delay: 250,
+                    transport: function (params, success, failure) {
+                        params.timeout = 5000;
+
+                        const $request = $.ajax(params);
+
+                        $request.then(success);
+                        $request.fail(failure);
+
+                        return $request;
+                    },
+                    data: function (params) {
+                        const query = {
+                            page: params.page || 1,
+                        };
+
+                        if (params.term) {
+                            query.q = params.term;
+                        }
+
+                        return query;
+                    },
+                    processResults: function (data, params) {
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // adjust the data, except to indicate that infinite
+                        // scrolling can be used
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: (params.page * {{ REST_FRAMEWORK_PAGE_SIZE }}) < data.totalCount
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                placeholder: '{% trans "Select..." %}',
+                minimumInputLength: 0,
+                scroll: true,
+                scrollThreshold: 0.5
+            });
+        });
+    </script>
+{% endblock %}

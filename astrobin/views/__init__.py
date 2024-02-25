@@ -20,7 +20,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.paginator import InvalidPage, Paginator
-from django.db.models import Q
+from django.db.models import Exists, OuterRef, Q
 from django.forms.models import inlineformset_factory
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
@@ -32,14 +32,12 @@ from django.utils import timezone
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ngettext as _n, ugettext as _
 from django.views.decorators.cache import cache_control, cache_page, never_cache
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.views.decorators.http import last_modified, require_GET, require_POST
 from django.views.decorators.vary import vary_on_cookie
-from el_pagination.decorators import page_template
 from flickrapi import FlickrError
 from flickrapi.auth import FlickrAccessToken
 from haystack.query import SearchQuerySet
-from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import common_variables, user_language
 from astrobin.enums import ImageEditorStep, SubjectType
@@ -339,61 +337,55 @@ def upload_max_revisions_error(request, max_revisions, image):
 @cache_page(120)
 @vary_on_cookie
 @cache_control(private=True)
-@page_template('index/stream_page.html', key='stream_page')
-@page_template('index/recent_images_page.html', key='recent_images_page')
-@silk_profile('Index')
-def index(request, template='index/root.html', extra_context=None) -> HttpResponse:
+def index(request, template='index/root.html') -> HttpResponse:
     """Main page"""
 
     if not request.user.is_authenticated:
         from django.shortcuts import redirect
         return redirect("https://welcome.astrobin.com/")
 
-    image_ct = ContentType.objects.get_for_model(Image)
-    image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
-    user_ct = ContentType.objects.get_for_model(User)
-
-    recent_images = Image.objects \
-        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=ModeratorDecision.APPROVED) & Q(published__isnull=False))) \
-        .order_by('-published')
-
-    response_dict = {
-        'recent_images': recent_images,
-        'recent_images_alias': 'gallery',
-        'recent_images_batch_size': 70,
-        'section': 'recent',
-    }
-
     profile = request.user.userprofile
 
     section = request.GET.get('s')
     if section is None:
         section = profile.default_frontpage_section
-    response_dict['section'] = section
+
+    return render(request, template, dict(section=section))
+
+
+@login_required
+@require_GET
+def latest_from_forums_fragment(request):
+    return render(request, 'index/latest_from_forums.html', {
+        'page': request.GET.get('latest_from_forums_page', 1),
+    })
+
+
+@login_required
+@require_GET
+@cache_page(60)
+@vary_on_cookie
+@cache_control(private=True)
+def activity_stream_fragment(request, section: str):
+    image_ct = ContentType.objects.get_for_model(Image)
+    image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
+    user_ct = ContentType.objects.get_for_model(User)
+    actions = None
 
     if section == 'global':
-        ##################
-        # GLOBAL ACTIONS #
-        ##################
         actions = Action.objects.all().prefetch_related(
             'actor__userprofile',
             'target_content_type',
             'target'
         )
-        response_dict['actions'] = actions
-        response_dict['cache_prefix'] = 'astrobin_global_actions'
 
     elif section == 'personal':
-        ####################
-        # PERSONAL ACTIONS #
-        ####################
         cache_key = 'astrobin_users_image_ids_%s' % request.user
         users_image_ids = cache.get(cache_key)
         if users_image_ids is None:
             users_image_ids = [
                 str(x) for x in
-                Image.objects.filter(
-                    user=request.user).values_list('id', flat=True)
+                Image.objects.filter(user=request.user).values_list('id', flat=True)
             ]
             cache.set(cache_key, users_image_ids, 300)
 
@@ -402,8 +394,7 @@ def index(request, template='index/root.html', extra_context=None) -> HttpRespon
         if users_revision_ids is None:
             users_revision_ids = [
                 str(x) for x in
-                ImageRevision.objects.filter(
-                    image__user=request.user).values_list('id', flat=True)
+                ImageRevision.objects.filter(image__user=request.user).values_list('id', flat=True)
             ]
             cache.set(cache_key, users_revision_ids, 300)
 
@@ -415,11 +406,10 @@ def index(request, template='index/root.html', extra_context=None) -> HttpRespon
                 ToggleProperty.objects.filter(
                     property_type="follow",
                     user=request.user,
-                    content_type=ContentType.objects.get_for_model(User)
+                    content_type=user_ct
                 ).values_list('object_id', flat=True)
             ]
             cache.set(cache_key, followed_user_ids, 900)
-        response_dict['has_followed_users'] = len(followed_user_ids) > 0
 
         cache_key = 'astrobin_followees_image_ids_%s' % request.user
         followees_image_ids = cache.get(cache_key)
@@ -477,21 +467,51 @@ def index(request, template='index/root.html', extra_context=None) -> HttpRespon
                 Q(action_object_object_id__in=followees_image_ids)
             )
         )
-        response_dict['actions'] = actions
-        response_dict['cache_prefix'] = 'astrobin_personal_actions'
 
-    elif section == 'followed':
+    return render(
+        request,
+        'index/stream_page.html',
+        {
+            'actions': actions,
+            'show_more_context': {
+                'override_path': reverse('activity_stream_fragment', kwargs={'section': section}),
+            }
+        }
+    )
+
+
+@login_required
+@require_GET
+@cache_page(60)
+@vary_on_cookie
+@cache_control(private=True)
+def recent_images_fragment(request, section):
+    recent_images = Image.objects.filter(
+        Q(moderator_decision=ModeratorDecision.APPROVED) &
+        Q(published__isnull=False)
+    ).order_by('-published')
+
+    if section == 'followed':
         followed = [x.object_id for x in ToggleProperty.objects.filter(
             property_type="follow",
             content_type=ContentType.objects.get_for_model(User),
             user=request.user)]
 
-        response_dict['recent_images'] = recent_images.filter(user__in=followed)
+        recent_images = recent_images.filter(user__in=followed)
 
-    if extra_context is not None:
-        response_dict.update(extra_context)
-
-    return render(request, template, response_dict)
+    return render(
+        request,
+        'index/recent_images_page.html',
+        {
+            'recent_images': recent_images,
+            'recent_images_alias': 'gallery',
+            'recent_images_batch_size': 80,
+            'section': 'recent',
+            'show_more_context': {
+                'override_path': reverse('recent_images_fragment', kwargs={'section': section}),
+            }
+        }
+    )
 
 
 @never_cache
@@ -1158,7 +1178,6 @@ def me(request):
 @last_modified(CachingService.get_user_page_last_modified)
 @cache_control(private=True, no_cache=True)
 @vary_on_cookie
-@silk_profile('User page')
 def user_page(request, username):
     try:
         user = UserService.get_case_insensitive(username)
@@ -1220,18 +1239,6 @@ def user_page(request, username):
 
     wip_qs = UserService(user).get_wip_images(use_union)
 
-    paginator = Paginator(qs, settings.PAGINATE_USER_PAGE_BY)
-    page_number = request.GET.get('page', 1)
-    page_obj = paginator.get_page(page_number)
-    likes_data = ToggleProperty.objects.toggleproperties_for_objects("like", page_obj)
-    bookmarks_data = ToggleProperty.objects.toggleproperties_for_objects("bookmark", page_obj)
-
-    for image in page_obj:
-        like_count = likes_data.get(str(image.pk), {}).get('count', 0)
-        bookmark_count = bookmarks_data.get(str(image.pk), {}).get('count', 0)
-        cache.set("Image.%d.likes" % image.pk, like_count, 60)
-        cache.set("Image.%d.bookmarks" % image.pk, bookmark_count, 60)
-
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
             return HttpResponseForbidden()
@@ -1252,20 +1259,12 @@ def user_page(request, username):
     if view == 'table':
         qs = qs.order_by('-published')
 
-    # Calculate some stats
-
-    followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
-    following = ToggleProperty.objects.filter(
-        property_type="follow",
-        user=user,
-        content_type=user_ct).count()
-
     stats_data = UserService(user).get_profile_stats(getattr(request, 'LANGUAGE_CODE', 'en'))
 
     response_dict = {
         'paginate_by': settings.PAGINATE_USER_PAGE_BY,
-        'followers': followers,
-        'following': following,
+        'followers': user.userprofile.followers_count,
+        'following': user.userprofile.following_count,
         'image_list': qs,
         'sort': request.GET.get('sort'),
         'view': view,
@@ -1361,116 +1360,93 @@ def user_page_liked(request, username):
 
 @never_cache
 @require_GET
-@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
-def user_page_following(request, username, extra_context=None):
-    user = get_object_or_404(UserProfile, user__username=username).user
+def user_page_following(request, username):
+    user = get_object_or_404(User, username=username)
 
-    user_ct = ContentType.objects.get_for_model(User)
-    followed_users = []
-    properties = ToggleProperty.objects.filter(
-        property_type="follow",
-        user=user,
-        content_type=user_ct)
+    following = User.objects.filter(
+        id__in=ToggleProperty.objects.filter(
+            property_type="follow",
+            content_type=ContentType.objects.get_for_model(user),
+            user=user
+        ).values_list('object_id', flat=True)
+    ).distinct().select_related('userprofile')
 
-    for p in properties:
-        try:
-            followed_users.append(user_ct.get_object_for_this_type(pk=p.object_id))
-        except User.DoesNotExist:
-            pass
-
-    followed_users.sort(key=lambda x: x.username)
-
-    template_name = 'user/following.html'
-    if request.is_ajax():
-        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
-
-    response_dict = {
-        'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated else None,
-        'requested_user': user,
-        'user_list': followed_users,
-        'view': request.GET.get('view', 'default'),
-    }
-
-    response_dict.update(UserService(user).get_image_numbers())
-
-    return render(request, template_name, response_dict)
+    return render(
+        request,
+        'user/following.html',
+        {
+            'request_user': UserProfile.objects.get(user=request.user).user if request.user.is_authenticated else None,
+            'requested_user': user,
+            'user_list': following,
+            **UserService(user).get_image_numbers(),
+        }
+    )
 
 
 @never_cache
 @require_GET
-@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
-def user_page_followers(request, username, extra_context=None):
-    user = get_object_or_404(UserProfile, user__username=username).user
+def user_page_followers(request, username):
+    user = get_object_or_404(User, username=username)
 
-    user_ct = ContentType.objects.get_for_model(User)
-    followers = [
-        x.user for x in
-        ToggleProperty.objects.filter(
-            property_type="follow",
-            object_id=user.pk,
-            content_type=user_ct)
-    ]
+    followers = User.objects.filter(
+        toggleproperty__content_type=ContentType.objects.get_for_model(user),
+        toggleproperty__object_id=user.id,
+        toggleproperty__property_type="follow"
+    ).distinct().select_related('userprofile')
 
-    followers.sort(key=lambda x: x.username)
-
-    template_name = 'user/followers.html'
-    if request.is_ajax():
-        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
-
-    response_dict = {
-        'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated else None,
-        'requested_user': user,
-        'user_list': followers,
-        'view': request.GET.get('view', 'default'),
-    }
-
-    response_dict.update(UserService(user).get_image_numbers())
-
-    return render(request, template_name, response_dict)
+    return render(
+        request,
+        'user/followers.html',
+        {
+            'request_user': UserProfile.objects.get(user=request.user).user if request.user.is_authenticated else None,
+            'requested_user': user,
+            'user_list': followers,
+            **UserService(user).get_image_numbers(),
+        }
+    )
 
 
 @require_GET
-@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
-def user_page_friends(request, username, extra_context=None):
-    user = get_object_or_404(UserProfile, user__username=username).user
+def user_page_friends(request, username):
+    user = get_object_or_404(User, username=username)
 
-    user_ct = ContentType.objects.get_for_model(User)
-    friends = []
-    followers = [
-        x.user for x in
-        ToggleProperty.objects.filter(
-            property_type="follow",
-            object_id=user.pk,
-            content_type=user_ct)
-    ]
+    content_type = ContentType.objects.get_for_model(User)
 
-    for follower in followers:
-        if ToggleProperty.objects.filter(
-                property_type="follow",
-                user=user,
-                object_id=follower.pk,
-                content_type=user_ct).exists():
-            friends.append(follower)
+    # Subquery to check if a reverse follow relationship exists
+    reverse_follow_exists = ToggleProperty.objects.filter(
+        property_type="follow",
+        content_type=content_type,
+        user_id=OuterRef('object_id'),
+        object_id=OuterRef('user_id')
+    )
 
-    friends.sort(key=lambda x: x.username)
+    # Query to find mutual follows (friends)
+    mutual_follows = ToggleProperty.objects.filter(
+        property_type="follow",
+        content_type=content_type,
+        user=user  # The user for whom we're finding friends
+    ).annotate(
+        reverse_follow=Exists(reverse_follow_exists)
+    ).filter(
+        reverse_follow=True
+    )
 
-    template_name = 'user/friends.html'
-    if request.is_ajax():
-        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
+    # Fetching related user profiles
+    friends = User.objects.filter(
+        id__in=mutual_follows.values_list('object_id', flat=True)
+    ).distinct().select_related('userprofile')
 
-    response_dict = {
-        'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated else None,
-        'requested_user': user,
-        'user_list': friends,
-        'view': request.GET.get('view', 'default'),
-    }
-
-    response_dict.update(UserService(user).get_image_numbers())
-
-    return render(request, template_name, response_dict)
+    return render(
+        request,
+        'user/friends.html',
+        {
+            'request_user': UserProfile.objects.get(user=request.user).user if request.user.is_authenticated else None,
+            'requested_user': user,
+            'user_list': friends,
+            'view': request.GET.get('view', 'default'),
+            **UserService(user).get_image_numbers(),
+        }
+    )
 
 
 @never_cache

@@ -18,8 +18,8 @@ class AppRedirectionService:
         if settings.BASE_URL in path:
             path = path.replace(settings.BASE_URL, '')
 
-        # from astrobin.middleware.thread_locals_middleware import get_current_user
-        # user = get_current_user()
+        # from astrobin.middleware.thread_locals_middleware import get_request_cache
+        # user = get_request_cache().get('user', None)
         #
         # if (
         #         user and

@@ -76,8 +76,8 @@
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
-                        {% if image.likes > 1 %}
-                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title and image.likes|add:"-1" as count %}
+                        {% if image.like_count > 1 %}
+                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title and image.like_count|add:"-1" as count %}
                                 <a href="{{user_page}}">{{user}}</a> and {{count}} others like this image.
                             {% endblocktrans %}
                         {% else %}
@@ -100,8 +100,8 @@
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
-                        {% if image.bookmarks > 1 %}
-                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title and image.bookmarks|add:"-1" as count %}
+                        {% if image.bookmark_count > 1 %}
+                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title and image.bookmark_count|add:"-1" as count %}
                                 <a href="{{user_page}}">{{user}}</a> and {{count}} others bookmarked this image.
                             {% endblocktrans %}
                         {% else %}

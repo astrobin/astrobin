@@ -38,12 +38,12 @@ include(
     'components/privatebeta.py',
     'components/recaptcha.py',
     'components/rest.py',
-    'components/silky.py',
     'components/subscription.py',
     'components/tinymce.py',
     'components/thumbnail.py',
     'components/toggleproperties.py',
     'components/robots.py',
+    'components/sentry.py',
 
     # AstroBin settings
     'components/flickr.py',

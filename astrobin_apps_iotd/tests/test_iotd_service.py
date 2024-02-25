@@ -13,7 +13,9 @@ from astrobin.models import Image
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_iotd.models import (
-    Iotd, IotdDismissedImage, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote,
+    Iotd, IotdDismissedImage, IotdJudgementQueueEntry, IotdQueueSortOrder, IotdReviewQueueEntry,
+    IotdStaffMemberSettings, IotdSubmission,
+    IotdVote,
 )
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.tasks import update_judgement_queues, update_review_queues, update_submission_queues
@@ -798,6 +800,26 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
+    def test_get_submission_queue_expired(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
+
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
+        image.designated_iotd_submitters.add(submitter)
+
+        IotdGenerators.submission(image=image)
+
+        update_submission_queues()
+
+        self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
+
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
+        image.save()
+
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
+
     def test_get_submission_queue_sort_order(self):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
@@ -1413,6 +1435,45 @@ class IotdServiceTest(TestCase):
         self.assertEqual(image, queue[0])
         self.assertEqual(submission3.date, queue[0].last_submission_timestamp)
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
+    def test_get_review_queue_expired(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
+        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now() - timedelta(days=1))
+
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+
+        image.designated_iotd_submitters.add(submitter)
+        image.designated_iotd_reviewers.add(reviewer)
+
+        submission = IotdSubmission.objects.create(submitter=submitter, image=image)
+
+        submission.date = DateTimeService.now() - timedelta(hours=3)
+        submission.save()
+
+        update_review_queues()
+
+        queue = IotdService().get_review_queue(reviewer)
+        self.assertEqual(1, len(queue))
+        self.assertEqual(image, queue[0])
+        self.assertEqual(submission.date, queue[0].last_submission_timestamp)
+
+        image.submitted_for_iotd_tp_consideration = DateTimeService.now() - timedelta(
+            days=settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                 settings.IOTD_REVIEW_WINDOW_DAYS +
+                 1
+        )
+        image.save()
+
+        queue_entry = IotdReviewQueueEntry.objects.first()
+        queue_entry.last_submission_timestamp = image.submitted_for_iotd_tp_consideration
+        queue_entry.save()
+
+        queue = IotdService().get_review_queue(reviewer)
+        self.assertEqual(0, len(queue))
+
+
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_judgement_queue_own_image(self):
@@ -1931,6 +1992,52 @@ class IotdServiceTest(TestCase):
         self.assertEqual(1, len(queue))
         self.assertEqual(image, queue[0])
         self.assertEqual(vote3.date, queue[0].last_vote_timestamp)
+
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
+    def test_get_judgement_queue_expired(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
+        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now() - timedelta(days=1))
+
+        submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
+        reviewer = Generators.user(groups=[GroupName.IOTD_REVIEWERS])
+        judge = Generators.user(groups=[GroupName.IOTD_JUDGES])
+
+        image.designated_iotd_submitters.add(submitter)
+        image.designated_iotd_reviewers.add(reviewer)
+
+        submission = IotdSubmission.objects.create(submitter=submitter, image=image)
+        submission.date = DateTimeService.now() - timedelta(hours=4)
+        submission.save()
+
+        vote = IotdVote.objects.create(reviewer=reviewer, image=image)
+        vote.date = DateTimeService.now() - timedelta(hours=3)
+        vote.save()
+
+        update_judgement_queues()
+
+        queue = IotdService().get_judgement_queue(judge)
+
+        self.assertEqual(1, len(queue))
+        self.assertEqual(image, queue[0])
+        self.assertEqual(vote.date, queue[0].last_vote_timestamp)
+
+        image.submitted_for_iotd_tp_consideration = DateTimeService.now() - timedelta(
+            days=(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS +
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS +
+                1
+            )
+        )
+        image.save()
+
+        queue_entry = IotdJudgementQueueEntry.objects.first()
+        queue_entry.last_vote_timestamp = image.submitted_for_iotd_tp_consideration
+        queue_entry.save()
+
+        queue = IotdService().get_judgement_queue(judge)
+        self.assertEqual(0, len(queue))
         
     @patch('common.services.DateTimeService.now')
     def test_judge_cannot_select_now_reason_none_no_iotds(self, now):

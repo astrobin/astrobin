@@ -2,10 +2,8 @@ import logging
 
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.core.cache import cache
 from django.template import Library
 from django.utils.translation import ugettext_lazy as _
-from haystack.query import SearchQuerySet
 
 from astrobin.models import UserProfile
 from astrobin_apps_premium.services.premium_service import PremiumService
@@ -19,89 +17,79 @@ register = Library()
 
 @register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_username.html', takes_context=True)
 def astrobin_username(context, user, **kwargs):
+    from common.services.caching_service import CachingService
+
     if not hasattr(user, 'userprofile'):
         try:
             user = UserProfile.objects.get(user__username=user).user
         except UserProfile.DoesNotExist:
             return {'user': None}
 
-    cache_key = 'user_metadata_' + user.username
-    user_metadata = cache.get(cache_key)
-    if user_metadata is None:
-        user_metadata = {}
-        user_metadata['display_name'] = user.userprofile.get_display_name()
-        user_metadata['is_superuser'] = user.is_superuser
-        user_metadata['is_image_moderator'] = user.userprofile.is_image_moderator()
-        user_metadata['is_iotd_staff'] = user.userprofile.is_iotd_staff()
-        user_metadata['is_iotd_submitter'] = user.userprofile.is_iotd_submitter()
-        user_metadata['is_iotd_reviewer'] = user.userprofile.is_iotd_reviewer()
-        user_metadata['is_iotd_judge'] = user.userprofile.is_iotd_judge()
-        user_metadata['is_premium'] = PremiumService(user).get_valid_usersubscription() is not None,
-        cache.set(cache_key, user_metadata, 300)
-    else:
-        display_name = user_metadata['display_name']
-        is_superuser = user_metadata['is_superuser']
-        is_image_moderator = user_metadata['is_image_moderator']
-        is_iotd_staff = user_metadata['is_iotd_staff']
-        is_iotd_submitter = user_metadata['is_iotd_submitter']
-        is_iotd_reviewer = user_metadata['is_iotd_reviewer']
-        is_iotd_judge = user_metadata['is_iotd_judge']
-        is_premium = user_metadata['is_premium']
-
     classes = ['astrobin-username']
     titles = []
+    link = kwargs.get('link', True)
 
-    if user_metadata['is_superuser']:
-        classes.append('astrobin-superuser')
-        titles.append(_('Administrator'))
+    if link:
+        cache_key = 'user_metadata_' + user.username
+        user_metadata = CachingService().get(cache_key)
+        if user_metadata is None:
+            user_metadata = {
+                'display_name': user.userprofile.get_display_name(),
+                'is_superuser': user.is_superuser,
+                'is_image_moderator': user.userprofile.is_image_moderator(),
+                'is_iotd_staff': user.userprofile.is_iotd_staff(),
+                'is_iotd_submitter': user.userprofile.is_iotd_submitter(),
+                'is_iotd_reviewer': user.userprofile.is_iotd_reviewer(),
+                'is_iotd_judge': user.userprofile.is_iotd_judge(),
+                'is_premium': PremiumService(user).get_valid_usersubscription() is not None
+            }
 
-    if user_metadata['is_image_moderator']:
-        classes.append('astrobin-image-moderator')
-        titles.append(_('Image moderator'))
+            if user_metadata['is_superuser']:
+                classes.append('astrobin-superuser')
+                titles.append(_('Administrator'))
 
-    if user_metadata['is_iotd_staff']:
-        classes.append(' astrobin-iotd-staff')
+            if user_metadata['is_image_moderator']:
+                classes.append('astrobin-image-moderator')
+                titles.append(_('Image moderator'))
 
-    if user_metadata['is_iotd_submitter']:
-        classes.append(' astrobin-iotd-submitter')
-        titles.append(_('IOTD Submitter'))
+            if user_metadata['is_iotd_staff']:
+                classes.append(' astrobin-iotd-staff')
 
-    if user_metadata['is_iotd_reviewer']:
-        classes.append(' astrobin-iotd-reviewer')
-        titles.append(_('IOTD Reviewer'))
+            if user_metadata['is_iotd_submitter']:
+                classes.append(' astrobin-iotd-submitter')
+                titles.append(_('IOTD Submitter'))
 
-    if user_metadata['is_iotd_judge']:
-        classes.append(' astrobin-iotd-judge')
-        titles.append(_('IOTD Judge'))
+            if user_metadata['is_iotd_reviewer']:
+                classes.append(' astrobin-iotd-reviewer')
+                titles.append(_('IOTD Reviewer'))
 
-    if user_metadata['is_premium']:
-        classes.append(' astrobin-premium-member')
-        titles.append(_('Premium member'))
+            if user_metadata['is_iotd_judge']:
+                classes.append(' astrobin-iotd-judge')
+                titles.append(_('IOTD Judge'))
 
-    response = user_metadata
-    response.update({
+            if user_metadata['is_premium']:
+                classes.append(' astrobin-premium-member')
+                titles.append(_('Premium member'))
+
+            CachingService.set(cache_key, user_metadata, 300)
+    else:
+        user_metadata = {
+            'display_name': user.userprofile.get_display_name(),
+        }
+
+    return {
+        **user_metadata,
         'request': context['request'],
         'user': user,
         'classes': classes,
         'titles': titles,
-        'link': kwargs.get('link', True),
-    })
-
-    return response
+        'link': link,
+    }
 
 
 @register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context=True)
 def astrobin_user(context, user, **kwargs):
     request = context['request']
-
-    user_ct = ContentType.objects.get_for_model(User)
-    images = UserService(user).get_public_images()
-
-    followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
-    following = ToggleProperty.objects.filter(
-        property_type="follow",
-        user=user,
-        content_type=user_ct).count()
 
     request_user = None
     if request.user.is_authenticated:
@@ -126,9 +114,9 @@ def astrobin_user(context, user, **kwargs):
         'view': view,
         'layout': layout,
         'user_is_owner': request.user == user,
-        'images': images.count(),
-        'followers': followers,
-        'following': following,
+        'images': user.userprofile.image_count,
+        'followers': user.userprofile.followers_count,
+        'following': user.userprofile.following_count,
 
         'DONATIONS_ENABLED': context['DONATIONS_ENABLED'],
         'PREMIUM_ENABLED': context['PREMIUM_ENABLED'],
@@ -179,20 +167,8 @@ def is_mutual_follower(a, b):
 
 @register.filter
 def contribution_index(user):
-    cache_key = "user_contribution_index.%d" % user.pk
-    index = cache.get(cache_key)
+    if hasattr(user, 'userprofile'):
+        if user.userprofile.contribution_index is not None:
+            return user.userprofile.contribution_index
 
-    if index is None:
-        results = SearchQuerySet().models(User).filter(django_id=user.pk)
-        if not results.count():
-            log.warning("contribution_index filter: unable to get contribution_index for user %d" % user.pk)
-            return None
-
-        try:
-            index = results[0].contribution_index
-            cache.set(cache_key, index, 300)
-        except IndexError:
-            log.warning("contribution_index filter: unable to get contribution_index for user %d" % user.pk)
-            return None
-
-    return index
+    return 0

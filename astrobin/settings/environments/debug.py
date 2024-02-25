@@ -6,7 +6,7 @@ if DEBUG:
             'default': {
                 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
             },
-            'local_request_cache': {
+            'json': {
                 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
             },
         }
@@ -32,6 +32,7 @@ if DEBUG:
         'debug_toolbar.panels.sql.SQLPanel',
         'debug_toolbar.panels.templates.TemplatesPanel',
         'template_timings_panel.panels.TemplateTimings.TemplateTimings',
+        "template_profiler_panel.panels.template.TemplateProfilerPanel",
         'debug_toolbar.panels.cache.CachePanel',
         'debug_toolbar.panels.signals.SignalsPanel',
         'debug_toolbar.panels.logging.LoggingPanel',

@@ -10,3 +10,6 @@ from .previous_topic_read_marker import PreviousTopicReadMarkerMiddleware
 from .rest_framework_token_cookie_middleware import RestFrameworkTokenCookieMiddleware
 from .block_suspended_user_middleware import BlockSuspendedUserMiddleware
 from .thread_locals_middleware import ThreadLocalsMiddleware
+from .request_logging_middleware import RequestLoggingMiddleware
+from .sentry_middleware import SentryMiddleware
+from .slow_request_logging_middleware import SlowRequestLoggingMiddleware

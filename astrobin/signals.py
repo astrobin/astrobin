@@ -11,7 +11,6 @@ from django.conf import settings
 from django.contrib.auth.models import Group as DjangoGroup, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
-from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from django.db import IntegrityError, InternalError, transaction
 from django.db.models import Q
@@ -36,7 +35,7 @@ from subscription.utils import extend_date_by
 from two_factor.signals import user_verified
 
 from astrobin.tasks import (
-    encode_video_file, generate_video_preview, invalidate_cdn_caches,
+    compute_contribution_index, compute_image_index, encode_video_file, generate_video_preview, invalidate_cdn_caches,
     process_camera_rename_proposal,
 )
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem, EquipmentItemMarketplacePrivateConversation
@@ -121,9 +120,9 @@ def image_pre_save(sender, instance, **kwargs):
             instance.watermark_size = last_image.watermark_size
             instance.watermark_opacity = last_image.watermark_opacity
 
-        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
+        image_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
         if not ModerationService.auto_enqueue_for_moderation(instance.user) and (
-                user_scores_index >= 1.00 or
+                image_index >= 1.00 or
                 is_any_paid_subscription(PremiumService(instance.user).get_valid_usersubscription()) or
                 ModerationService.auto_approve(instance.user)
         ):
@@ -174,6 +173,7 @@ def image_pre_save_invalidate_thumbnails(sender, instance: Image, **kwargs):
 pre_save.connect(image_pre_save_invalidate_thumbnails, sender=Image)
 
 
+@receiver(post_save, sender=Image)
 def image_post_save(sender, instance: Image, created: bool, **kwargs):
     if kwargs.get('update_fields', None):
         return
@@ -250,7 +250,11 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             except UserProfile.DoesNotExist:
                 pass
 
+        if instance.moderator_decision == ModeratorDecision.APPROVED:
+            UserService(instance.user).update_image_count()
+
         UserService(instance.user).clear_gallery_image_list_cache()
+        ImageService(instance).clear_badges_cache()
 
         if instance.user.userprofile.auto_submit_to_iotd_tp_process and not instance.is_wip:
             may, reason = IotdService.submit_to_iotd_tp_process(instance.user, instance)
@@ -275,9 +279,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                     )
 
 
-post_save.connect(image_post_save, sender=Image)
-
-
+@receiver(post_softdelete, sender=Image)
 def image_post_softdelete(sender, instance, **kwargs):
     def decrease_counter(user):
         user.userprofile.premium_counter -= 1
@@ -287,6 +289,9 @@ def image_post_softdelete(sender, instance, **kwargs):
     ImageIndex().remove_object(instance)
     UserService(instance.user).clear_gallery_image_list_cache()
     ImageService(instance).delete_stories()
+
+    if instance.moderator_decision == ModeratorDecision.APPROVED:
+        UserService(instance.user).update_image_count()
 
     if instance.solution:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
@@ -316,9 +321,6 @@ def image_post_softdelete(sender, instance, **kwargs):
         pass
 
 
-post_softdelete.connect(image_post_softdelete, sender=Image)
-
-
 @receiver(pre_delete, sender=Image)
 def image_pre_delete(sender, instance: Image, **kwargs):
     if not getattr(instance, DELETED_FIELD_NAME, None):
@@ -332,6 +334,10 @@ def image_pre_delete(sender, instance: Image, **kwargs):
             invalidate_cdn_caches.delay([instance.image_file.url])
         instance.image_file.delete(save=False)
 
+
+@receiver(post_delete, sender=Image)
+def image_post_delete(sender, instance, **kwargs):
+    UserService(instance.user).update_image_count()
 
 def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):
     if not instance.uploader_in_progress and instance.square_cropping in (None, ''):
@@ -450,6 +456,8 @@ pre_save.connect(nested_comment_pre_save, sender=NestedComment)
 def nested_comment_post_save(sender, instance, created, **kwargs):
     service = CommentNotificationsService(instance)
 
+    compute_contribution_index.apply_async(args=(instance.author.pk,), countdown=10)
+
     if created:
         mentions = MentionsService.get_mentions(instance.text)
 
@@ -469,18 +477,38 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
     else:
         mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
+    if isinstance(instance.content_object, Image):
+        ImageService(instance.content_object).update_comment_count()
+
     service.send_mention_notifications(mentions)
 
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
 
+@receiver(post_delete, sender=NestedComment)
+def nested_comment_post_delete(sender, instance, **kwargs):
+    if isinstance(instance.content_object, Image):
+        ImageService(instance.content_object).update_comment_count()
 
 def toggleproperty_post_delete(sender, instance, **kwargs):
-    if isinstance(instance.content_object, Image) and not instance.content_object.is_wip:
-        SearchIndexUpdateService.update_index(instance.content_object)
-        SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
-        for collaborator in instance.content_object.collaborators.all().iterator():
-            SearchIndexUpdateService.update_index(collaborator, 3600)
+    if isinstance(instance.content_object, Image):
+        ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
+        compute_image_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
+
+        if not instance.content_object.is_wip:
+            SearchIndexUpdateService.update_index(instance.content_object)
+            SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
+            for collaborator in instance.content_object.collaborators.all().iterator():
+                compute_image_index.apply_async(args=(collaborator.pk,), countdown=10)
+                SearchIndexUpdateService.update_index(collaborator, 3600)
+    elif isinstance(instance.content_object, Post):
+        compute_contribution_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
+    elif isinstance(instance.content_object, NestedComment):
+        compute_contribution_index.apply_async(args=(instance.content_object.author.pk,), countdown=10)
+    elif isinstance(instance.content_object, User) and instance.property_type == "follow":
+        UserService(instance.content_object).update_followers_count()
+        UserService(instance.user).update_following_count()
+
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
@@ -495,6 +523,13 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
             for collaborator in instance.content_object.collaborators.all().iterator():
                 SearchIndexUpdateService.update_index(collaborator, 3600)
+    elif isinstance(instance.content_object, Post):
+        compute_contribution_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
+    elif isinstance(instance.content_object, NestedComment):
+        compute_contribution_index.apply_async(args=(instance.content_object.author.pk,), countdown=10)
+    elif isinstance(instance.content_object, User) and instance.property_type == "follow":
+        UserService(instance.content_object).update_followers_count()
+        UserService(instance.user).update_following_count()
 
     if created:
         verb = None
@@ -504,6 +539,11 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             if instance.content_type == ContentType.objects.get_for_model(Image):
                 image = instance.content_type.get_object_for_this_type(id=instance.object_id)
                 Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
+                ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
+                compute_image_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
+
+                for x in instance.content_object.collaborators.all():
+                    compute_image_index.apply_async(args=(x.pk,), countdown=10)
 
                 if image.is_wip:
                     return
@@ -659,6 +699,31 @@ def solution_pre_save(sender, instance, **kwargs):
 
 
 pre_save.connect(solution_pre_save, sender=Solution)
+
+
+@receiver(post_save, sender=Solution)
+def solution_post_save(sender, instance, created, **kwargs):
+    is_solved = instance.status >= Solver.SUCCESS
+    is_image = instance.content_type.model == 'image'
+
+    if is_solved and is_image:
+        constellation = ImageService.get_constellation(instance)
+        if constellation:
+            log.debug(f"Setting constellation {constellation.get('name')} for image {instance.object_id}")
+            Image.objects_including_wip.filter(
+                pk=instance.object_id
+            ).update(
+                constellation=constellation.get('abbreviation')
+            )
+        else:
+            log.debug(f"Could not find constellation for image {instance.object_id}")
+
+
+@receiver(pre_delete, sender=Solution)
+def solution_pre_delete(sender, instance, **kwargs):
+    if instance.content_type.model == 'image':
+        log.debug(f"Removing constellation for image {instance.object_id}")
+        Image.objects_including_wip.filter(pk=instance.object_id).update(constellation=None)
 
 
 def subscription_paid(sender, **kwargs):
@@ -1193,12 +1258,7 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             if not instance.on_moderation:
                 notify_equipment_users.delay(instance.pk)
 
-    cache_key = make_template_fragment_key(
-        'home_page_latest_from_forums',
-        (instance.user.pk, instance.user.userprofile.language)
-    )
-    cache.delete(cache_key)
-
+    cache.delete(ForumService.home_page_latest_from_forum_cache_key(instance.user))
 
 post_save.connect(forum_topic_post_save, sender=Topic)
 
@@ -1328,6 +1388,8 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                     }
                 )
 
+    compute_contribution_index.apply_async(args=(instance.user.pk,), countdown=10)
+
     if created:
         if hasattr(instance.topic.forum, 'group'):
             instance.topic.forum.group.save()  # trigger date_updated update
@@ -1358,25 +1420,19 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             notify_mentioned(mentions)
             cache.delete("post.%d.forum_post_pre_save_approved" % instance.pk)
 
-    cache_key = make_template_fragment_key(
-        'home_page_latest_from_forums',
-        (instance.user.pk, instance.user.userprofile.language)
-    )
-    cache.delete(cache_key)
-
+    cache.delete(ForumService.home_page_latest_from_forum_cache_key(instance.user))
 
 post_save.connect(forum_post_post_save, sender=Post)
 
 
+@receiver(post_delete, sender=Post)
+def forum_post_post_delete(sender, instance, **kwargs):
+    compute_contribution_index.apply_async(args=(instance.user.pk,), countdown=10)
+
+
+@receiver(post_save, sender=TopicReadTracker)
 def topic_read_tracker_post_save(sender, instance, created, **kwargs):
-    cache_key = make_template_fragment_key(
-        'home_page_latest_from_forums',
-        (instance.user.pk, instance.user.userprofile.language)
-    )
-    cache.delete(cache_key)
-
-
-post_save.connect(topic_read_tracker_post_save, sender=TopicReadTracker)
+    cache.delete(ForumService.home_page_latest_from_forum_cache_key(instance.user))
 
 
 def user_pre_save(sender, instance, **kwargs):
@@ -1658,6 +1714,10 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
                 'image_thumbnail': thumb.url if thumb else None
             }
         )
+    elif action == 'post_add':
+        users = User.objects.filter(pk__in=pk_set)
+        for user in users.iterator():
+            UserService(user).update_image_count()
     elif action == 'pre_remove':
         users = User.objects.filter(pk__in=pk_set)
         for user in users.iterator():
@@ -1668,6 +1728,10 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
                 'image_thumbnail': thumb.url if thumb else None
             }
         )
+    elif action == 'post_remove':
+        users = User.objects.filter(pk__in=pk_set)
+        for user in users.iterator():
+            UserService(user).update_image_count()
 
 
 m2m_changed.connect(image_collaborators_changed, sender=Image.collaborators.through)

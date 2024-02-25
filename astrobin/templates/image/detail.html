@@ -4,6 +4,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_equipment_tags %}
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_users_tags %}
 {% load common_tags %}
@@ -33,7 +34,7 @@
     <link rel="canonical" href="{{ BASE_URL }}{% url 'image_detail' image.get_id %}" />
 {% endblock %}
 
-{% block title %}{{image.title|escape}} ({% astrobin_username image.user link=False %}){% endblock %}
+{% block title %}{{image.title|escape}} ({{ image.user.userprofile.get_display_name }}){% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block meta_description %}
@@ -57,132 +58,165 @@
 {% endblock %}
 
 {% block content %}
-    {% with cache_timeout=request.user.is_authenticated|yesno:"0,600" %}
-        {% cache cache_timeout image_page_cache request.user_agent user.is_authenticated REQUEST_COUNTRY LANGUAGE_CODE image.pk image.updated revision_label nav_ctx nav_ctx_extra %}
-            {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or constellation or show_contains %}
-                <div class="subtitle">
-                {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" %}
-                    <i class="icon icon-globe"></i>
-                    <strong>{% trans "Celestial hemisphere" %}:</strong>&nbsp;
-                    {% if hemisphere == "HEMISPHERE_TYPE_NORTHERN" %}
-                        {% trans "Northern" %}
-                    {% else %}
-                        {% trans "Southern" %}
-                    {% endif %}
+    {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or constellation or show_contains %}
+        <div class="subtitle">
+        {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" %}
+            <i class="icon icon-globe"></i>
+            <strong>{% trans "Celestial hemisphere" %}:</strong>&nbsp;
+            {% if hemisphere == "HEMISPHERE_TYPE_NORTHERN" %}
+                {% trans "Northern" %}
+            {% else %}
+                {% trans "Southern" %}
+            {% endif %}
 
-                    {% if constellation or show_contains %}
-                        &nbsp;&middot;&nbsp;
-                    {% endif %}
-                {% endif %}
+            {% if constellation or show_contains %}
+                &nbsp;&middot;&nbsp;
+            {% endif %}
+        {% endif %}
 
-                {% if constellation %}
-                    <i class="icon icon-star-empty"></i>
-                    <strong>{% trans "Constellation" %}:</strong>
-                    <a href="{% url 'haystack_search' %}?d=i&constellation={{ constellation.abbreviation }}">
-                        {{ constellation.name }} ({{ constellation.abbreviation }})
+        {% if constellation %}
+            <i class="icon icon-star-empty"></i>
+            <strong>{% trans "Constellation" %}:</strong>
+            <a href="{% url 'haystack_search' %}?d=i&constellation={{ constellation.abbreviation }}">
+                {{ constellation.name }} ({{ constellation.abbreviation }})
+            </a>
+
+            {% if show_contains %}
+                &nbsp;&middot;&nbsp;
+            {% endif %}
+        {% endif %}
+
+        {% if show_contains %}
+            <i class="icon icon-paperclip"></i>
+            <strong>{% trans "Contains" %}:</strong>&nbsp;
+            {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
+                {% for s in subjects|slice:":30" %}
+                    <a href="/search/?q=%22{{s|escape}}%22">{{s|escape}}</a>
+                    {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
+                {% endfor %}
+
+                {% if subjects|length > 30 %}
+                    &nbsp;&middot;&nbsp;
+                    <a href="#full-subject-list-modal" data-toggle="modal">
+                        {% blocktrans trimmed with count=subjects|length|add:"-30" %}
+                            And {{ count }} more.
+                        {% endblocktrans %}
                     </a>
-
-                    {% if show_contains %}
-                        &nbsp;&middot;&nbsp;
-                    {% endif %}
                 {% endif %}
-
-                {% if show_contains %}
-                    <i class="icon icon-paperclip"></i>
-                    <strong>{% trans "Contains" %}:</strong>&nbsp;
-                    {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
-                        {% for s in subjects|slice:":30" %}
-                            <a href="/search/?q=%22{{s|escape}}%22">{{s|escape}}</a>
-                            {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
-                        {% endfor %}
-
-                        {% if subjects|length > 30 %}
-                            &nbsp;&middot;&nbsp;
-                            <a href="#full-subject-list-modal" data-toggle="modal">
-                                {% blocktrans trimmed with count=subjects|length|add:"-30" %}
-                                    And {{ count }} more.
-                                {% endblocktrans %}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        {{subject_type}}
-                    {% endif %}
-                {% endif %}
-            </div> <!-- subtitle -->
+            {% else %}
+                {{subject_type}}
             {% endif %}
+        {% endif %}
+    </div> <!-- subtitle -->
+    {% endif %}
 
-            {% if request.user_agent.is_mobile %}
-                {% with ad_container_classes='visible-phone' %}
-                     {% with image|ad_key_value_pairs:request.user as key_value_pairs %}
-                        {% include 'ads/wide_ad.html' %}
-                    {% endwith %}
-                {% endwith %}
-            {% endif %}
+    {% if request.user_agent.is_mobile %}
+        {% with ad_container_classes='visible-phone' %}
+             {% with image|ad_key_value_pairs:request.user as key_value_pairs %}
+                {% include 'ads/wide_ad.html' %}
+            {% endwith %}
+        {% endwith %}
+    {% endif %}
 
-            {% include 'image/detail/menu/root.html' %}
+    {% include 'image/detail/menu/root.html' %}
 
-            <div class="loading-correct-image-size text-center">
-                <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
+    <div class="loading-correct-image-size text-center">
+        <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
+    </div>
+
+    {% if image_uses_full_width %}
+        <div class="full-width-image-container">
+            <div class="row-fluid">
+                <div class="span12">
+                    {% include 'image/detail/iotd_banner.html' %}
+                    {% include 'image/detail/solve_status.html' %}
+                    {% include 'image/detail/image.html' %}
+                    {% include 'image/detail/image_title.html' %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row-fluid"> <!-- main row -->
+        <div class="span8 image-page-left-pane"> <!-- left pane -->
+            <div class="partial-width-image-container">
+                {% include 'image/detail/iotd_banner.html' %}
+                {% include 'image/detail/solve_status.html' %}
+                {% include 'image/detail/image.html' %}
+                {% include 'image/detail/image_title.html' %}
             </div>
 
-            {% if image_uses_full_width %}
-                <div class="full-width-image-container">
-                    <div class="row-fluid">
-                        <div class="span12">
-                            {% include 'image/detail/iotd_banner.html' %}
-                            {% include 'image/detail/solve_status.html' %}
-                            {% include 'image/detail/image.html' %}
-                            {% include 'image/detail/image_title.html' %}
+            {% if request.user_agent.is_mobile and not request.user_agent.is_tablet %}
+                <div class="image-like-and-bookmark-buttons">
+                    {% include 'image/detail/like.html' %}
+                    {% include 'image/detail/bookmark.html' %}
+                </div>
+
+                {% include 'image/detail/info.html' %}
+            {% endif %}
+
+            {% if image|can_add_technical_details %}
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="subtle-container technical-card-equipment">
+                            <div class="header">
+                                <h4>
+                                    <i class="icon-camera"></i> {% trans "Equipment" %}
+                                </h4>
+                            </div> <!-- header -->
+
+                            <div class="body">
+                                <div class="text-center">
+                                    <img class="loading" src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading..." %}" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             {% endif %}
 
-            <div class="row-fluid"> <!-- main row -->
-                <div class="span8 image-page-left-pane"> <!-- left pane -->
-                    <div class="partial-width-image-container">
-                        {% include 'image/detail/iotd_banner.html' %}
-                        {% include 'image/detail/solve_status.html' %}
-                        {% include 'image/detail/image.html' %}
-                        {% include 'image/detail/image_title.html' %}
+            {% if image|can_add_technical_details %}
+                <div class="row-fluid technical-card-acquisition">
+                    <div class="span12">
+                        <div class="subtle-container">
+                            <div class="header">
+                                <h4>
+                                    <i class="icon-list-alt"></i> {% trans "Acquisition details" %}
+                                </h4>
+                            </div>
+                            <div class="body">
+                                <div class="text-center">
+                                    <img class="loading" src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading..." %}" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            {% endif %}
 
-                    {% if request.user_agent.is_mobile and not request.user_agent.is_tablet %}
-                        <div class="image-like-and-bookmark-buttons">
-                            {% include 'image/detail/like.html' %}
-                            {% include 'image/detail/bookmark.html' %}
-                        </div>
+            {% include 'image/detail/image_description.html' %}
+            {% include 'image/detail/comments.html' %}
+        </div> <!-- /left pane -->
 
-                        {% include 'image/detail/info.html' %}
-                    {% endif %}
+        <div class="span4 image-page-right-pane"> <!-- right pane -->
+            {% if request.user_agent.is_pc or request.user_agent.is_tablet or TESTING %}
+                <div class="image-like-and-bookmark-buttons">
+                    {% include 'image/detail/like.html' %}
+                    {% include 'image/detail/bookmark.html' %}
+                </div>
 
-                    {% include 'image/detail/image_card_equipment.html' %}
-                    {% include 'image/detail/image_card_acquisition.html' %}
-                    {% include 'image/detail/image_description.html' %}
-                    {% include 'image/detail/comments.html' %}
-                </div> <!-- /left pane -->
+                {% include 'image/detail/info.html' %}
+                {% include 'image/detail/ad.html' %}
+            {% endif %}
 
-                <div class="span4 image-page-right-pane"> <!-- right pane -->
-                    {% if request.user_agent.is_pc or request.user_agent.is_tablet or TESTING %}
-                        <div class="image-like-and-bookmark-buttons">
-                            {% include 'image/detail/like.html' %}
-                            {% include 'image/detail/bookmark.html' %}
-                        </div>
-
-                        {% include 'image/detail/info.html' %}
-                        {% include 'image/detail/ad.html' %}
-                    {% endif %}
-
-                    {% include 'image/detail/revisions.html' %}
-                    {% include 'image/detail/remote_source_affiliate.html' %}
-                    {% include 'image/detail/skyplot.html' %}
-                    {% include 'image/detail/histogram.html' %}
-                    {% include 'image/detail/groups.html' %}
-                    {% include 'image/detail/collections.html' %}
-                </div> <!-- /right pane -->
-            </div> <!-- /main row-->
-        {% endcache %}
-    {% endwith %}
+            {% include 'image/detail/revisions.html' %}
+            {% include 'image/detail/remote_source_affiliate.html' %}
+            {% include 'image/detail/skyplot.html' %}
+            {% include 'image/detail/histogram.html' %}
+            {% include 'image/detail/groups.html' %}
+            {% include 'image/detail/collections.html' %}
+        </div> <!-- /right pane -->
+    </div> <!-- /main row-->
 {% endblock %}
 
 {% block modals %}

@@ -14,6 +14,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q, QuerySet
 from django.template import Library
 from django.template.defaultfilters import timesince
+from django.urls import reverse
 from django.utils.safestring import SafeString, mark_safe
 from django.utils.translation import ugettext as _
 from pybb.models import Post, Topic
@@ -937,12 +938,14 @@ def license_logo(image):
 
 
 @register.simple_tag(takes_context=True)
-def forum_latest_topics(context, cnt=5, user=None):
+def forum_latest_topics(context, user=None):
     if not user:
         user = context['user']
 
+    qs = Topic.objects.select_related()
+
     if user and user.is_authenticated:
-        qs = Topic.objects.filter(
+        qs = qs.filter(
             Q(forum__group=None) |
             Q(forum__group__owner=user) |
             Q(forum__group__members=user)
@@ -951,11 +954,9 @@ def forum_latest_topics(context, cnt=5, user=None):
         if not is_forum_moderator(user):
             qs = qs.filter(on_moderation=False)
     else:
-        qs = Topic.objects.filter(forum__group=None, on_moderation=False)
+        qs = qs.filter(forum__group=None, on_moderation=False)
 
-    qs = qs.distinct().select_related()
-
-    return qs.order_by('-updated', '-id')[:cnt]
+    return qs.distinct().order_by('-updated', '-id')
 
 
 @register.simple_tag(takes_context=True)
@@ -1001,3 +1002,23 @@ def get_unseen_active_popups(user: User) -> QuerySet:
 @register.filter(name='split_date_ranges')
 def split_date_ranges(date_ranges_str: str, language_code: str) -> list:
     return DateTimeService.split_date_ranges(date_ranges_str, language_code)
+
+
+@register.simple_tag
+def search_image_hash_or_id(result):
+    if hasattr(result, 'hash') and result.hash:
+        return result.hash
+    return result.object_id
+
+
+@register.simple_tag
+def search_image_url(result) -> str:
+    image_id = search_image_hash_or_id(result)
+    return reverse('image_detail', args=[image_id,])
+
+
+@register.filter
+def page_supports_table_view(request) -> bool:
+    return request.resolver_match.view_name in (
+        'user_page',
+    )

@@ -11,4 +11,6 @@
     <li>{% include 'inclusion_tags/no_images.html' %}</li>
 {% endfor %}
 
-{% show_more %}
+{% with override_path=show_more_context.override_path %}
+    {% show_more %}
+{% endwith %}

@@ -1,0 +1,9 @@
+{% load cache %}
+
+{% if page == 1 or page == None %}
+    {% cache 180 home_page_latest_from_forums request.user.pk LANGUAGE_CODE %}
+        {% include 'index/_cached_latest_from_forums.html' %}
+    {% endcache %}
+{% else %}
+    {% include 'index/_cached_latest_from_forums.html' %}
+{% endif %}

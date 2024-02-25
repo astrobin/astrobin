@@ -48,7 +48,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.cache import cache
+from django.core.cache import cache, caches
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, models
 from django.db.models.signals import post_save
@@ -69,8 +69,11 @@ from astrobin_apps_equipment.models import Software as SoftwareV2
 from astrobin_apps_equipment.models import Filter as FilterV2
 from astrobin_apps_equipment.models import Accessory as AccessoryV2
 
-from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager, ImageRevisionsManager, \
-    UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager
+from astrobin_apps_images.managers import (
+    ImagesManager, ImagesPlainManager, PublicImagesManager, WipImagesManager,
+    ImageRevisionsManager,
+    UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager,
+)
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution, PlateSolvingSettings, PlateSolvingAdvancedSettings
 from nested_comments.models import NestedComment
@@ -81,14 +84,36 @@ log = logging.getLogger(__name__)
 class HasSolutionMixin(object):
     @property
     def solution(self):
-        cache_key = "astrobin_solution_%s_%d" % (self.__class__.__name__, self.pk)
-        cached = cache.get(cache_key)
-        if cached is not None:
-            return cached
+        # Try prefetch first
+        if hasattr(self, '_prefetched_objects_cache') and 'solutions' in self._prefetched_objects_cache:
+            return self._prefetched_objects_cache['solutions'][0] \
+                if self._prefetched_objects_cache['solutions'] \
+                else None
 
-        result = self.solutions.first()
-        cache.set(cache_key, result, 1)
-        return result
+        # Then try request cache.
+        from common.services.caching_service import CachingService
+
+        cache_key = f'astrobin_solution_{self.__class__.__name__}_{self.pk}'
+        solution = CachingService.get_from_request_cache(cache_key)
+        if solution is not None or CachingService.is_in_request_cache(cache_key):
+            return solution
+
+        # Finally try the database
+        solution = self.solutions.first()
+        CachingService.set_in_request_cache(cache_key, solution)
+
+        return solution
+
+
+def image_hash() -> str:
+    def generate_hash() -> str:
+        return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
+
+    hash = generate_hash()
+    while hash.isdigit() or Image.all_objects.filter(hash=hash).exists():
+        hash = generate_hash()
+
+    return hash
 
 
 LICENSE_CHOICES = (
@@ -1247,6 +1272,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     # For likes, bookmarks, and perhaps more.
     toggleproperties = GenericRelation(ToggleProperty)
 
+    # Counts
+    like_count = models.PositiveIntegerField(editable=False, default=0)
+    bookmark_count = models.PositiveIntegerField(editable=False, default=0)
+    comment_count = models.PositiveIntegerField(editable=False, default=0)
+
     watermark_text = models.CharField(
         max_length=128,
         null=True,
@@ -1478,12 +1508,24 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         help_text=_("Do not create an entry on the front page's activity stream for this event.")
     )
 
+    # To prevent expensive queries, we store the constellation here. It gets update with a signal every time the
+    # Solution is saved.
+    constellation = models.CharField(
+        max_length=3,
+        null=True,
+        blank=True,
+    )
+
+    # To prevent a billion cache requests when looking at user galleries, we store the final gallery thumbnail here.
+    final_gallery_thumbnail = models.CharField(max_length=512, null=True, blank=True)
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
 
     objects = PublicImagesManager()
     objects_including_wip = ImagesManager()
+    objects_including_wip_plain = ImagesPlainManager()
     wip = WipImagesManager()
     uploads_in_progress = UploadsInProgressImagesManager()
 
@@ -1511,14 +1553,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return url
 
-    def likes(self):
-        key = "Image.%d.likes" % self.pk
-        val = cache.get(key)
-        if val is None:
-            val = ToggleProperty.objects.toggleproperties_for_object("like", self).count()
-            cache.set(key, val, 300)
-        return val
-
     def liked_by(self):
         key = "Image.%d.liked_by" % self.pk
         val = cache.get(key)
@@ -1531,14 +1565,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             cache.set(key, val, 300)
         return val
 
-    def bookmarks(self):
-        key = "Image.%d.bookmarks" % self.pk
-        val = cache.get(key)
-        if val is None:
-            val = ToggleProperty.objects.toggleproperties_for_object("bookmark", self).count()
-            cache.set(key, val, 300)
-        return val
-
     def bookmarked_by(self):
         key = "Image.%d.bookmarked_by" % self.pk
         val = cache.get(key)
@@ -1548,19 +1574,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 .select_related('user') \
                 .values_list('user', flat=True)
             val = [profile.user for profile in UserProfile.objects.filter(user__pk__in=user_pks)]
-            cache.set(key, val, 300)
-        return val
-
-    def comments(self):
-        from nested_comments.models import NestedComment
-        key = "Image.%d.comments" % self.pk
-        val = cache.get(key)
-        if val is None:
-            val = NestedComment.objects.filter(
-                deleted=False,
-                content_type__app_label='astrobin',
-                content_type__model='image',
-                object_id=self.id).count()
             cache.set(key, val, 300)
         return val
 
@@ -1687,7 +1700,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     def thumbnail(self, alias: str, revision_label: str, **kwargs) -> str:
         def normalize_url_security(url: str, thumbnail_settings: dict) -> str:
-            insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure'] == True
+            insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure']
             if insecure and url.startswith('https'):
                 return url.replace('https', 'http', 1)
 
@@ -1705,8 +1718,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if alias in ('revision', 'runnerup'):
             alias = 'gallery'
 
-        if revision_label in (None, 'None', 'final'):
-            revision_label = ImageService(self).get_final_revision_label()
+        final_revision_label = ImageService(self).get_final_revision_label()
+        if revision_label in (None, 'None', 'final', final_revision_label):
+            if alias == 'gallery' and self.final_gallery_thumbnail:
+                return normalize_url_security(self.final_gallery_thumbnail, thumbnail_settings)
+            revision_label = final_revision_label
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name or 'placeholder' in field.url:
@@ -3055,6 +3071,50 @@ class UserProfile(SafeDeleteModel):
         null=True,
     )
 
+    # Computed fields
+
+    contribution_index = models.DecimalField(
+        editable=False,
+        null=True,
+        blank=True,
+        max_digits=5,
+        decimal_places=2,
+    )
+
+    image_index = models.DecimalField(
+        editable=False,
+        null=True,
+        blank=True,
+        max_digits=7,
+        decimal_places=3,
+    )
+
+    followers_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
+    )
+
+    following_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
+    )
+
+    # Public images
+    image_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
+    )
+
+    wip_image_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
+    )
+
+    deleted_image_count = models.PositiveIntegerField(
+        editable=False,
+        default=0,
+    )
+
     def get_display_name(self) -> str:
         return self.real_name if self.real_name else str(self.user)
 
@@ -3079,29 +3139,11 @@ class UserProfile(SafeDeleteModel):
         getattr(self, resolve[gear_type]).remove(gear)
 
     def get_scores(self):
-        from haystack.exceptions import SearchFieldError
-        from haystack.query import SearchQuerySet
-
-        cache_key = "astrobin_user_score_%s" % self.user.username
-        scores = cache.get(cache_key)
-
-        if not scores:
-            try:
-                user_search_result = SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
-            except (IndexError, SearchFieldError):
-                return {
-                    'user_scores_index': None,
-                    'user_scores_contribution_index': None,
-                    'user_scores_followers': None
-                }
-
-            scores = {
-                'user_scores_index': user_search_result.normalized_likes,
-                'user_scores_contribution_index': user_search_result.contribution_index,
-                'user_scores_followers': user_search_result.followers,
-            }
-
-            cache.set(cache_key, scores, 300)
+        scores = {
+            'user_scores_index': self.image_index,
+            'user_scores_contribution_index': self.contribution_index,
+            'user_scores_followers': self.followers_count,
+        }
 
         return scores
 

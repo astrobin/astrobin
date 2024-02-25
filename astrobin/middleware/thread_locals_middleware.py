@@ -1,13 +1,13 @@
 import threading
-from typing import Optional
 
-from django.contrib.auth.models import User
 
 _thread_locals = threading.local()
 
 
-def get_current_user() -> Optional[User]:
-    return getattr(_thread_locals, 'user', None)
+def get_request_cache():
+    if not hasattr(_thread_locals, 'request_cache'):
+        _thread_locals.request_cache = {}
+    return _thread_locals.request_cache
 
 
 class ThreadLocalsMiddleware:
@@ -15,5 +15,12 @@ class ThreadLocalsMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        _thread_locals.user = getattr(request, 'user', None)
-        return self.get_response(request)
+        _thread_locals.request_cache = {
+            'user': getattr(request, 'user', None),
+        }
+
+        response = self.get_response(request)
+
+        _thread_locals.request_cache = {}
+
+        return response

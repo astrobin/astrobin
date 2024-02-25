@@ -15,6 +15,7 @@ from zipfile import ZipFile
 
 import boto3
 import requests
+from annoying.functions import get_object_or_None
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.apps import apps
@@ -27,7 +28,7 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
-from django.db import IntegrityError
+from django.db import IntegrityError, connections
 from django.db.models import Exists, OuterRef, Q
 from django.http import HttpRequest
 from django.template.defaultfilters import filesizeformat
@@ -65,6 +66,7 @@ from astrobin.utils import inactive_accounts, never_activated_accounts, never_ac
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
 from common.utils import get_segregated_reader_database
 from nested_comments.models import NestedComment
@@ -232,7 +234,7 @@ def generate_video_preview(object_id: int, content_type_id: int):
 
 @shared_task(time_limit=7200, acks_late=True)
 def encode_video_file(object_id: int, content_type_id: int):
-    LOCK_EXPIRE = 1800
+    LOCK_EXPIRE = 7200
     lock_id = 'encode_video_file_%d_%d' % (content_type_id, object_id)
 
     acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
@@ -324,6 +326,10 @@ def encode_video_file(object_id: int, content_type_id: int):
 
                 output_file.seek(0)  # reset file pointer to beginning
                 django_file = File(output_file)
+
+                for connection in connections.all():
+                    connection.close_if_unusable_or_obsolete()
+
                 obj.encoded_video_file.save(f"encoded_{obj.uploader_name}.mp4", django_file, save=False)
                 obj.save(update_fields=['encoded_video_file'], keep_deleted=True)
 
@@ -1133,3 +1139,19 @@ def generate_sitemaps_and_upload_to_s3():
         upload_to_sitemap_folder('sitemap_index.xml', folder=custom_sitemap['folder'])
 
         CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation(invalidate_urls)
+
+
+@shared_task(time_limit=60)
+def compute_contribution_index(user_id: int):
+    user = get_object_or_None(User, pk=user_id)
+    if user:
+        index = UserService(user).compute_contribution_index()
+        UserProfile.objects.filter(user=user).update(contribution_index=index)
+
+
+@shared_task(time_limit=60)
+def compute_image_index(user_id: int):
+    user = get_object_or_None(User, pk=user_id)
+    if user:
+        index = UserService(user).compute_image_index()
+        UserProfile.objects.filter(user=user).update(image_index=index)

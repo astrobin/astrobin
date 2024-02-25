@@ -14,16 +14,17 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
-from astrobin_apps_iotd.api.permissions.is_iotd_reviewer import IsIotdReviewer
 from astrobin_apps_iotd.api.serializers.vote_serializer import VoteSerializer
 from astrobin_apps_iotd.models import IotdVote
+from common.constants import GroupName
+from common.permissions import is_group_member
 
 
 class VoteViewSet(viewsets.ModelViewSet):
     serializer_class = VoteSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = None
-    permission_classes = [IsAuthenticated, IsIotdReviewer]
+    permission_classes = [IsAuthenticated, is_group_member(GroupName.IOTD_REVIEWERS)]
     model = IotdVote
 
     def get_queryset(self):

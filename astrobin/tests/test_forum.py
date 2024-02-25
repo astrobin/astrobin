@@ -436,15 +436,15 @@ class ForumTest(TestCase):
         Generators.forum_topic(on_moderation=True)
         user = Generators.user()
 
-        self.assertEqual(0, forum_latest_topics({}, 1, user).count())
+        self.assertEqual(0, forum_latest_topics({}, user).count())
 
         g, _ = Group.objects.get_or_create(name="forum_moderators")
         g.user_set.add(user)
 
-        self.assertEqual(1, forum_latest_topics({}, 1, user).count())
+        self.assertEqual(1, forum_latest_topics({}, user).count())
 
     def test_forum_latest_topics_anon(self):
         Generators.forum_topic(on_moderation=True)
         user = AnonymousUser()
 
-        self.assertEqual(0, forum_latest_topics({}, 1, user).count())
+        self.assertEqual(0, forum_latest_topics({}, user).count())

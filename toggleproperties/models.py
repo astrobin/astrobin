@@ -42,7 +42,7 @@ class TogglePropertyManager(models.Manager):
         return qs
 
     def toggleproperties_for_objects(self, property_type, object_list, user=None):
-        object_ids = [str(o.pk) for o in object_list]
+        object_ids = [o.pk for o in object_list]
         if not object_ids:
             return {}
 
@@ -143,7 +143,7 @@ class ToggleProperty(models.Model):
     property_type = models.CharField(max_length=64)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.TextField()
+    object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
     created_on = models.DateTimeField(auto_now_add=True)

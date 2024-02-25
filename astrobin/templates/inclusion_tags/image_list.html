@@ -52,7 +52,9 @@
                 <tr>
                     {% if requested_user %}
                         <td class="user hidden-phone" data-value="image.user.userprofile.display_name">
-                            {% astrobin_username image.user %}
+                            <a href="{% url 'user_page' image.user.username %}">
+                                {{ image.user.userprofile.get_display_name }}
+                            </a>
                         </td>
                     {% endif %}
 
@@ -68,11 +70,11 @@
 
                     <td class="views hidden-phone">{% get_hit_count for image %}</td>
 
-                    <td class="likes hidden-phone">{{image.likes}}</td>
+                    <td class="likes hidden-phone">{{image.like_count}}</td>
 
-                    <td class="bookmarks hidden-phone">{{image.bookmarks}}</td>
+                    <td class="bookmarks hidden-phone">{{image.bookmark_count}}</td>
 
-                    <td class="comments hidden-phone">{{image.comments}}</td>
+                    <td class="comments hidden-phone">{{image.comment_count}}</td>
                 </tr>
             {% endfor %}
         </tbody>

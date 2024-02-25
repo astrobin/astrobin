@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.db.models import Q, QuerySet
-from django.http import HttpRequest
 from django.utils import timezone
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets

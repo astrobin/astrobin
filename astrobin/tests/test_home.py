@@ -11,7 +11,7 @@ class HomeTest(TestCase):
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=2)
     def test_global_stream(self):
-        url = reverse('index') + '?s=global'
+        url = reverse('activity_stream_fragment', kwargs={'section': 'global'})
         self.client.login(username='test', password='password')
 
         # Uploading an image shows up in the stream

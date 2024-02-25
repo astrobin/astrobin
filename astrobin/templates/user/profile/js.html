@@ -19,7 +19,12 @@ $(document).ready(function() {
             });
         }
 
+        const $slideShowBtn = $('.image-slideshow-button');
+
         function loadFancyboxList() {
+            $slideShowBtn.find('.ld').show();
+            $slideShowBtn.find('.icon-play').hide();
+
             $.ajax({
                 type: 'get',
                 url: '/api/v2/users/fancybox-list/',
@@ -34,11 +39,10 @@ $(document).ready(function() {
                             : null
                 },
                 success: function (data) {
-                    $('.image-slideshow-button .ld').remove();
+                    $slideShowBtn.find('.ld').hide();
+                    $slideShowBtn.find('.icon-play').show();
 
                     if (data && data.length > 0) {
-                        $('.image-slideshow-button .icon-play').css({'display': 'inline-block'});
-
                         const fancyboxData = data.map(item => ({
                             url: item.url,
                             src: item.src,
@@ -77,31 +81,26 @@ $(document).ready(function() {
                                 astrobin_common.start_fancybox(fancyboxData, window.astrobinFancyboxOptions, item.slug)
                             });
 
+
+                            $figcaption.find('.image-slideshow-button').remove();
                             $figcaption.append($html);
                         }
 
-                        $('[data-fancybox-trigger="image-list"]').click(e => {
-                            e.preventDefault();
-                            astrobin_common.start_fancybox(fancyboxData, window.astrobinFancyboxOptions);
-                        });
-
-                        const queryString = window.location.search;
-                        const urlParams = new URLSearchParams(queryString);
-                        const slideshow = urlParams.get('slideshow');
-
-                        if (slideshow === 'true') {
-                            astrobin_common.start_fancybox(
-                                fancyboxData,
-                                window.astrobinFancyboxOptions,
-                                window.location.hash.replace('#', '')
-                            );
-                        }
+                        astrobin_common.start_fancybox(fancyboxData, window.astrobinFancyboxOptions);
                     }
                 }
             });
         }
 
-        if ($('.image-slideshow-button').length > 0) {
+        $slideShowBtn.click(function() {
+            loadFancyboxList();
+        });
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const slideshow = urlParams.get('slideshow');
+
+        if (slideshow === 'true') {
             loadFancyboxList();
         }
     {% endifequal %}

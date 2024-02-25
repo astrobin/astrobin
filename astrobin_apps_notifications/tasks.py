@@ -18,7 +18,7 @@ from toggleproperties.models import ToggleProperty
 logger = logging.getLogger(__name__)
 
 
-@shared_task(time_limit=300)
+@shared_task(time_limit=900)
 def purge_old_notifications():
     call_command("purge_old_notifications")
 

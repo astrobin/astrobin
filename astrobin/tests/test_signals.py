@@ -7,6 +7,7 @@ from django.utils import timezone
 from mock import patch
 from safedelete import HARD_DELETE
 
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, ImageRevision, UserProfile
 from astrobin.signals import imagerevision_post_save
 from astrobin.stories import ACTSTREAM_VERB_UPLOADED_REVISION
@@ -17,6 +18,76 @@ from toggleproperties.models import ToggleProperty
 
 
 class SignalsTest(TestCase):
+    def test_collaborator_image_updates_userprofile_count(self):
+        user = Generators.user()
+        collaborator = Generators.user()
+        image = Generators.image(user=user, moderator_decision=ModeratorDecision.APPROVED)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, collaborator.userprofile.image_count)
+
+        image.collaborators.add(collaborator)
+
+        collaborator.userprofile.refresh_from_db()
+
+        self.assertEquals(1, collaborator.userprofile.image_count)
+
+        image.collaborators.remove(collaborator)
+
+        collaborator.userprofile.refresh_from_db()
+
+        self.assertEquals(0, collaborator.userprofile.image_count)
+
+        image.delete()
+
+        # It's not counted as a deleted image for the collaborator
+
+        collaborator.userprofile.refresh_from_db()
+
+        self.assertEquals(0, collaborator.userprofile.deleted_image_count)
+
+    def test_image_updates_userprofile_count(self):
+        image = Generators.image(moderator_decision=ModeratorDecision.APPROVED)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(1, image.user.userprofile.image_count)
+
+        image.delete()
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.image_count)
+        self.assertEquals(1, image.user.userprofile.deleted_image_count)
+
+        image.delete(force_policy=HARD_DELETE)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.deleted_image_count)
+
+    def test_wip_image_updates_userprofile_count(self):
+        image = Generators.image(moderator_decision=ModeratorDecision.APPROVED, is_wip=True)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.image_count)
+        self.assertEquals(1, image.user.userprofile.wip_image_count)
+
+        image.delete()
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.image_count)
+        self.assertEquals(0, image.user.userprofile.wip_image_count)
+        self.assertEquals(1, image.user.userprofile.deleted_image_count)
+
+        image.delete(force_policy=HARD_DELETE)
+
+        image.user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, image.user.userprofile.deleted_image_count)
 
     @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
@@ -729,3 +800,37 @@ class SignalsTest(TestCase):
         self.assertIsNotNone(profile.skill_level_updated)
         self.assertGreater(profile.skill_level_updated, updated)
 
+    def test_updating_followers_count_after_follow(self):
+        user = Generators.user()
+        follower = Generators.user()
+
+        self.assertEquals(0, user.userprofile.followers_count)
+        self.assertEquals(0, follower.userprofile.following_count)
+
+        Generators.follow(user, user=follower)
+
+        user.userprofile.refresh_from_db()
+        follower.userprofile.refresh_from_db()
+
+        self.assertEquals(1, user.userprofile.followers_count)
+        self.assertEquals(1, follower.userprofile.following_count)
+
+    def test_updating_followers_count_after_unfollow(self):
+        user = Generators.user()
+        follower = Generators.user()
+
+        follow = Generators.follow(user, user=follower)
+
+        user.userprofile.refresh_from_db()
+        follower.userprofile.refresh_from_db()
+
+        self.assertEquals(1, user.userprofile.followers_count)
+        self.assertEquals(1, follower.userprofile.following_count)
+
+        follow.delete()
+
+        user.userprofile.refresh_from_db()
+        follower.userprofile.refresh_from_db()
+
+        self.assertEquals(0, user.userprofile.followers_count)
+        self.assertEquals(0, follower.userprofile.following_count)

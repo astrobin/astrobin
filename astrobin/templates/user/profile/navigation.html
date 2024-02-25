@@ -107,13 +107,13 @@
                 <li>
                     <a href="{% url 'user_page_following' requested_user.username %}">
                         <i class="icon-rotate-right"></i>
-                        {% trans "Following" %}
+                        {% trans "Following" %} ({{ requested_user.userprofile.following_count }})
                     </a>
 
                 <li>
                     <a href="{% url 'user_page_followers' requested_user.username %}">
                         <i class="icon-rotate-left"></i>
-                        {% trans "Followers" %}
+                        {% trans "Followers" %} ({{ requested_user.userprofile.followers_count }})
                     </a>
                 </li>
 
@@ -251,24 +251,26 @@
 
         {% ifequal request.GET.view None %}
             <li class="pull-right">
-                <a href="javascript:;" class="image-slideshow-button" data-fancybox-trigger="image-list">
-                    <i class="icon-play" style="display: none"></i>
-                    <div class="ld ld-ring ld-spin"></div>
+                <a href="javascript:" class="image-slideshow-button">
+                    <i class="icon-play"></i>
+                    <div class="ld ld-ring ld-spin" style="display: none"></div>
                 </a>
             </li>
         {% endifequal %}
 
-        <li class="pull-right">
-            {% ifequal request.GET.view 'table' %}
-                <a href="{{ request.path }}{% query_string "" "view" %}">
-                    <i class="icon-th"></i>
-                </a>
-            {% else %}
-                <a href="{{ request.path }}{% query_string "view=table" "" %}">
-                    <i class="icon-list"></i>
-                </a>
-            {% endifequal %}
-        </li>
+        {% if request|page_supports_table_view %}
+            <li class="pull-right">
+                {% ifequal request.GET.view 'table' %}
+                    <a href="{{ request.path }}{% query_string "" "view" %}">
+                        <i class="icon-th"></i>
+                    </a>
+                {% else %}
+                    <a href="{{ request.path }}{% query_string "view=table" "" %}">
+                        <i class="icon-list"></i>
+                    </a>
+                {% endifequal %}
+            </li>
+        {% endif %}
 
         {% ifequal request.GET.view None %}
             <li class="pull-right">

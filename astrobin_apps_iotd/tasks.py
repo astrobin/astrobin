@@ -155,11 +155,12 @@ def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
     if last_check:
         delta: timedelta = datetime.now() - last_check
     else:
-        delta = timedelta(hours=1)
+        logger.warning("last_iotd_tp_resubmission_check not found. Defaulting to 2 hours.")
+        delta = timedelta(hours=2)
 
-    cache.set(last_check_cache_key, datetime.now(), 60 * 60 * 24)
-
-    recently_expired_images: QuerySet = IotdService.get_recently_expired_unsubmitted_images(delta)
+    recently_expired_images: QuerySet = IotdService.get_recently_expired_unsubmitted_images(delta).filter(
+        submitted_for_iotd_tp_consideration__lt=DateTimeService.now() - delta
+    )
     total_submitters: int = Group.objects.get(name=GroupName.IOTD_SUBMITTERS).user_set.count()
     min_percentage: float = settings.IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE / 100 * .8
 
@@ -173,6 +174,8 @@ def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
             .count()
         if users_who_saw_this < float(total_submitters) * min_percentage:
             IotdService.resubmit_to_iotd_tp_process(image.user, image)
+
+    cache.set(last_check_cache_key, datetime.now(), 60 * 60 * 24)
 
 
 @shared_task(time_limit=1200)

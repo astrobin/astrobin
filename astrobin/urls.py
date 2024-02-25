@@ -25,15 +25,18 @@ from astrobin.forms.password_change_form import PasswordChangeForm
 from astrobin.forms.password_reset_form import PasswordResetForm
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
-    api as api_views, api_help, astrophotographers_list, collections as collections_views, contributors_list,
+    activity_stream_fragment, api as api_views, api_help, astrophotographers_list, collections as collections_views,
+    contributors_list,
     explore as explore_views, flickr_auth_callback, gear_by_ids, gear_by_image, gear_by_make, gear_popover_ajax,
     get_edit_gear_form, get_empty_edit_gear_form, get_gear_user_info_form, get_is_gear_complete, get_makes_by_type,
     image as image_views, image_edit_acquisition, image_edit_acquisition_reset, image_edit_license,
     image_edit_make_final, image_edit_platesolving_advanced_settings, image_edit_platesolving_settings,
     image_edit_revision_make_final, image_edit_save_acquisition, image_edit_save_license, image_edit_save_watermark,
     image_edit_watermark, image_restart_advanced_platesolving, image_restart_platesolving,
-    image_revision_upload_process, image_upload, image_upload_process, index, me, moderation as moderation_views,
-    registration as registration_views, save_gear_details, save_gear_user_info, serve_file_from_cdn, set_language,
+    image_revision_upload_process, image_upload, image_upload_process, index, latest_from_forums_fragment, me,
+    moderation as moderation_views,
+    recent_images_fragment, registration as registration_views, save_gear_details, save_gear_user_info,
+    serve_file_from_cdn, set_language,
     suspended_account,
     user_ban, user_page, user_page_api_keys, user_page_bookmarks, user_page_followers, user_page_following,
     user_page_friends, user_page_liked, user_page_plots, user_popover_ajax, user_profile_delete,
@@ -149,7 +152,6 @@ urlpatterns += [
     ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
 
-    url(r'^silk/', include('silk.urls', namespace='silk')),
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),
     url(r'^comments/', include('django_comments.urls')),
@@ -222,6 +224,9 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^$', index, name='index'),
+    url(r'^latest-from-forums-fragment/$', latest_from_forums_fragment, name='latest_from_forums_fragment'),
+    url(r'^activiy-steam-fragment/(?P<section>\w+)/$', activity_stream_fragment, name='activity_stream_fragment'),
+    url(r'^recent-images-fragment/(?P<section>\w+)/$', recent_images_fragment, name='recent_images_fragment'),
 
     ###########################################################################
     ### SPECIAL VIEWS                                                       ###
@@ -520,6 +525,16 @@ urlpatterns += [
     url(
         r'^(?P<id>\w+)/submit-to-iotd-tp/$', never_cache(image_views.ImageSubmitToIotdTpProcessView.as_view()),
         name='image_submit_to_iotd_tp'
+    ),
+    url(
+        r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?equipment-fragment/$',
+        image_views.ImageEquipmentFragment.as_view(),
+        name='image_equipment_fragment',
+    ),
+    url(
+        r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?acquisition-fragment/$',
+        image_views.ImageAcquisitionFragment.as_view(),
+        name='image_acquisition_fragment',
     ),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
     url(

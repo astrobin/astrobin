@@ -1,30 +1,44 @@
 {% load i18n %}
+{% load el_pagination_tags %}
+{% load avatar_tags %}
 
-{% if view == 'default' %}
-<ul class="astrobin-users user-list endless">
-    {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
-    {% include 'snippets/endless_pagination_js.html' %}
-</ul>
-{% endif %}
+{% paginate 60 user_list using "user_page" %}
 
-{% if view == 'table' %}
-    <table class="astrobin-users table table-striped table-condensed">
-        {% if layout != 'compact' %}
-            <thead>
-                <tr>
-                    <th class="user-list-avatar"></th>
-                    <th class="user-list-name">{% trans "User" %}</th>
-                    {% if layout == 'default' %}
-                        <th class="user-list-images">{% trans "Images" %}</th>
-                        <th class="user-list-followers">{% trans "Followers" %}</th>
-                        <th class="user-list-following">{% trans "Following" %}</th>
-                    {% endif %}
-                    <th class="user-list-follow-action"></th>
-                </tr>
-            </thead>
-        {% endif %}
-        <tbody>
-            {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
-        </tbody>
-    </table>
-{% endif %}
+<table class="astrobin-users table table-striped table-condensed">
+    {% if layout != 'compact' %}
+        <thead>
+            <tr>
+                <th class="user-list-avatar"></th>
+                <th class="user-list-name">{% trans "User" %}</th>
+                <th class="user-list-followers">{% trans "Images" %}</th>
+                <th class="user-list-followers">{% trans "Followers" %}</th>
+                <th class="user-list-following">{% trans "Following" %}</th>
+            </tr>
+        </thead>
+    {% endif %}
+    <tbody>
+        {% for u in user_list %}
+            <tr>
+                <td class="user-list-avatar">
+                    <a href="{% url 'user_page' u.username %}">
+                        {% avatar u 64 %}
+                    </a>
+                </td>
+                <td class="user-list-name">
+                    <a href="{% url 'user_page' u.username %}">
+                        {{ u.userprofile }}
+                    </a>
+                </td>
+                <td class="user-list-images">{{ u.userprofile.image_count }}</td>
+                <td class="user-list-followers">{{ u.userprofile.followers_count }}</td>
+                <td class="user-list-following">{{ u.userprofile.following_count }}</td>
+            </tr>
+        {% empty %}
+            <tr><td >{% trans "No users." %}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination pagination-centered">
+    {% show_pages %}
+</div>

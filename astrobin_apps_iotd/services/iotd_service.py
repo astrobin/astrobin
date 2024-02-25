@@ -99,12 +99,18 @@ class IotdService:
 
         images: List[IotdSubmissionQueueEntry] = []
 
-        for entry in IotdSubmissionQueueEntry.objects \
-                .select_related('image') \
-                .prefetch_related('image__imaging_telescopes_2', 'image__imaging_cameras_2') \
-                .filter(submitter=submitter) \
-                .order_by(*order_by) \
-                .iterator():
+        for entry in IotdSubmissionQueueEntry.objects.select_related(
+            'image'
+        ).prefetch_related(
+            'image__imaging_telescopes_2', 'image__imaging_cameras_2'
+        ).filter(
+            submitter=submitter,
+            image__submitted_for_iotd_tp_consideration__gte=DateTimeService.now() - timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS
+            )
+        ).order_by(
+            *order_by
+        ).iterator():
             image = entry.image
             final_revision = ImageService(image).get_final_revision()
             image.w = final_revision.w
@@ -134,12 +140,18 @@ class IotdService:
 
         images: List[IotdReviewQueueEntry] = []
 
-        for entry in IotdReviewQueueEntry.objects \
-                .select_related('image') \
-                .prefetch_related('image__imaging_telescopes_2', 'image__imaging_cameras_2') \
-                .filter(reviewer=reviewer) \
-                .order_by(*order_by) \
-                .iterator():
+        for entry in IotdReviewQueueEntry.objects.select_related(
+            'image'
+        ).prefetch_related(
+            'image__imaging_telescopes_2', 'image__imaging_cameras_2'
+        ).filter(
+            reviewer=reviewer,
+            last_submission_timestamp__gte=DateTimeService.now() - timedelta(
+                settings.IOTD_REVIEW_WINDOW_DAYS
+            )
+        ).order_by(
+            *order_by
+        ).iterator():
             image = entry.image
             image.last_submission_timestamp = entry.last_submission_timestamp
             images.append(image)
@@ -167,12 +179,18 @@ class IotdService:
 
         images: List[IotdJudgementQueueEntry] = []
 
-        for entry in IotdJudgementQueueEntry.objects \
-                .select_related('image') \
-                .prefetch_related('image__imaging_telescopes_2', 'image__imaging_cameras_2') \
-                .filter(judge=judge) \
-                .order_by(*order_by) \
-                .iterator():
+        for entry in IotdJudgementQueueEntry.objects.select_related(
+            'image'
+        ).prefetch_related(
+            'image__imaging_telescopes_2', 'image__imaging_cameras_2'
+        ).filter(
+            judge=judge,
+            last_vote_timestamp__gte=DateTimeService.now() - timedelta(
+                settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            )
+        ).order_by(
+            *order_by
+        ).iterator():
             image = entry.image
             image.last_vote_timestamp = entry.last_vote_timestamp
             images.append(image)
@@ -270,6 +288,8 @@ class IotdService:
 
         for item in items.iterator():
             TopPickNominationsArchive.objects.get_or_create(image=item)
+            ImageService(item).clear_badges_cache()
+
 
     def update_top_pick_archive(self):
         items = Image.objects.annotate(
@@ -305,6 +325,7 @@ class IotdService:
 
         for item in items.iterator():
             TopPickArchive.objects.get_or_create(image=item)
+            ImageService(item).clear_badges_cache()
 
     def update_submission_queues(self):
         def _compute_queue(submitter: User):
@@ -348,6 +369,7 @@ class IotdService:
                     image=image,
                     published=image.submitted_for_iotd_tp_consideration
                 )
+                ImageService(image).clear_badges_cache()
                 log.debug(
                     f'Image {image.get_id()} "{image.title}" assigned to submitter {submitter.pk} "{submitter.username}".'
                 )
@@ -392,6 +414,7 @@ class IotdService:
                     image=image,
                     last_submission_timestamp=last_submission.date
                 )
+                ImageService(image).clear_badges_cache()
                 log.debug(
                     f'Image {image.get_id()} "{image.title}" assigned to reviewer {reviewer.pk} "{reviewer.username}".'
                 )
@@ -431,6 +454,7 @@ class IotdService:
                     image=image,
                     last_vote_timestamp=last_vote.date
                 )
+                ImageService(image).clear_badges_cache()
                 log.debug(
                     f'Image {image.get_id()} "{image.title}" assigned to judge {judge.pk} "{judge.username}".'
                 )

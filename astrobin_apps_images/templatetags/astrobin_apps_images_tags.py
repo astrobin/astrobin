@@ -5,7 +5,6 @@ import zlib
 from datetime import datetime, timedelta
 
 from PIL.Image import DecompressionBombError
-from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Library
@@ -96,6 +95,11 @@ def astrobin_image(context, image, alias, **kwargs):
             'show_play_icon': False,
         }
 
+    thumb_url = None
+
+    if revision_label in (None, 'None', 'final') and alias == 'gallery' and image.final_gallery_thumbnail:
+        thumb_url = image.final_gallery_thumbnail
+
     # Old images might not have a size in the database, let's fix it.
     image_revision = image
     if revision_label == 'final':
@@ -168,72 +172,86 @@ def astrobin_image(context, image, alias, **kwargs):
     ##########
 
     badges = []
-
     if ImageService.is_badge_compatible_alias(alias):
-        iotd_service = IotdService()
+        is_image_page = str(image.get_id()) in request.path
+        is_image_owner_or_superuser = (
+                hasattr(request, 'user') and (request.user == image.user or request.user.is_superuser)
+        )
 
-        if image.is_wip:
-            badges.append('wip')
+        badges = ImageService(image).get_badges_cache(is_image_owner_or_superuser, is_image_page)
 
-        if image.video_file.name and not ImageService.is_viewable_alias(alias):
-            badges.append('video')
+        if badges is None:
+            iotd_service = IotdService()
+            badges = []
 
-        if image.submitted_for_iotd_tp_consideration and not image.disqualified_from_iotd_tp:
-            num_submissions = IotdSubmission.objects.filter(image=image).count()
-            num_votes = IotdVote.objects.filter(image=image).count()
+            if image.is_wip:
+                badges.append('wip')
 
-            if num_submissions < settings.IOTD_SUBMISSION_MIN_PROMOTIONS:
-                cutoff = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
-            elif num_votes < settings.IOTD_REVIEW_MIN_PROMOTIONS:
-                cutoff = datetime.now() - timedelta(
-                    settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
-                )
-            else:
-                cutoff = datetime.now() - timedelta(
-                    settings.IOTD_SUBMISSION_WINDOW_DAYS +
-                    settings.IOTD_REVIEW_WINDOW_DAYS +
-                    settings.IOTD_JUDGEMENT_WINDOW_DAYS
-                )
+            if image.video_file.name and not ImageService.is_viewable_alias(alias):
+                badges.append('video')
 
-            if iotd_service.is_iotd(image):
-                badges.append('iotd')
-            elif iotd_service.is_top_pick(image):
-                badges.append('top-pick')
-            elif iotd_service.is_top_pick_nomination(image):
-                badges.append('top-pick-nomination')
-            elif (
-                    iotd_service.is_future_iotd(image) or
-                    image.submitted_for_iotd_tp_consideration > cutoff - timedelta(minutes=30)
-            ):
-                if hasattr(request, 'user') and (request.user == image.user or request.user.is_superuser):
-                    badges.append('iotd-queue')
+            if image.submitted_for_iotd_tp_consideration and not image.disqualified_from_iotd_tp:
+                num_submissions = IotdSubmission.objects.filter(image=image).count()
+                num_votes = IotdVote.objects.filter(image=image).count()
 
-            if (
-                    hasattr(request, 'user') and
-                    (image.user == request.user or request.user.is_superuser) and
-                    str(image.get_id()) in request.path and
-                    bool(set(badges) & {'iotd', 'top-pick', 'top-pick-nomination', 'iotd-queue'})
-            ):
-                badges.append('iotd-stats')
+                if num_submissions < settings.IOTD_SUBMISSION_MIN_PROMOTIONS:
+                    cutoff = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+                elif num_votes < settings.IOTD_REVIEW_MIN_PROMOTIONS:
+                    cutoff = datetime.now() - timedelta(
+                        settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
+                    )
+                else:
+                    cutoff = datetime.now() - timedelta(
+                        settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                        settings.IOTD_REVIEW_WINDOW_DAYS +
+                        settings.IOTD_JUDGEMENT_WINDOW_DAYS
+                    )
 
-        if image.collaborators.exists():
-            badges.append('collaboration')
+                if iotd_service.is_iotd(image):
+                    badges.append('iotd')
+                elif iotd_service.is_top_pick(image):
+                    badges.append('top-pick')
+                elif iotd_service.is_top_pick_nomination(image):
+                    badges.append('top-pick-nomination')
+                elif (
+                        iotd_service.is_future_iotd(image) or
+                        image.submitted_for_iotd_tp_consideration > cutoff - timedelta(minutes=30)
+                ):
+                    if is_image_owner_or_superuser:
+                        badges.append('iotd-queue')
 
-        # Temporarily disable this because it hogs the default celery queue.
-        """
-        cache_key = 'top100_ids'
-        top100_ids = cache.get(cache_key)
-        if top100_ids is None:
-            from astrobin.tasks import update_top100_ids
-            update_top100_ids.delay()
-        elif image.pk in top100_ids:
-            badges.append('top100')
-        """
+                if (
+                        is_image_owner_or_superuser and
+                        is_image_page and
+                        bool(set(badges) & {'iotd', 'top-pick', 'top-pick-nomination', 'iotd-queue'})
+                ):
+                    badges.append('iotd-stats')
 
-    cache_key = image.thumbnail_cache_key(field, alias, revision_label)
-    if animated:
-        cache_key += '_animated'
-    thumb_url = cache.get(cache_key)
+            if image.collaborators.exists():
+                badges.append('collaboration')
+
+            # Temporarily disable this because it hogs the default celery queue.
+            """
+            cache_key = 'top100_ids'
+            top100_ids = cache.get(cache_key)
+            if top100_ids is None:
+                from astrobin.tasks import update_top100_ids
+                update_top100_ids.delay()
+            elif image.pk in top100_ids:
+                badges.append('top100')
+            """
+
+            ImageService(image).set_badges_cache(
+                badges,
+                is_image_owner_or_superuser,
+                is_image_page
+            )
+
+    if thumb_url is None:
+        cache_key = image.thumbnail_cache_key(field, alias, revision_label)
+        if animated:
+            cache_key += '_animated'
+        thumb_url = cache.get(cache_key)
 
     # Force HTTPS
     if thumb_url and request.is_secure():
@@ -360,22 +378,6 @@ def random_id(context, size=8, chars=string.ascii_uppercase + string.digits):
     id = ''.join(random.choice(chars) for x in range(size))
     context['randomid'] = id
     return ''
-
-
-@register.simple_tag(takes_context=True)
-def cache_image_list(context):
-    # Don't cache for gallery owner.
-    if context['requested_user'] and context['request'].user == context['requested_user']:
-        return False
-
-    if context['request'].user.is_superuser:
-        return False
-
-    # Don't cache pages.
-    if context['request'].GET.get('image_list_page'):
-        return False
-
-    return context['section'] == 'public' and (context['subsection'] in ('title', 'uploaded',))
 
 
 @register.filter()
