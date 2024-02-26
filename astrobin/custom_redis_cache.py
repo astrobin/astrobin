@@ -31,7 +31,7 @@ class CustomRedisCache(RedisCache):
             thread.join(operation_timeout)  # Wait for specified timeout
             if thread.is_alive():
                 log.debug(f"Timeout while setting key {key}")
-                return False
+                return None
 
         return result[0]
 
