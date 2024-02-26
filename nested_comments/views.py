@@ -25,7 +25,7 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
     API endpoint that represents a list of nested comments.
     """
     model = NestedComment
-    queryset = NestedComment.objects.order_by('pk')
+    queryset = NestedComment.objects.select_related('author', 'author__userprofile').all().order_by('pk')
     serializer_class = NestedCommentSerializer
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('content_type', 'object_id',)
