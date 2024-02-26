@@ -225,7 +225,7 @@ urlpatterns += [
 
     url(r'^$', index, name='index'),
     url(r'^latest-from-forums-fragment/$', latest_from_forums_fragment, name='latest_from_forums_fragment'),
-    url(r'^activiy-steam-fragment/(?P<section>\w+)/$', activity_stream_fragment, name='activity_stream_fragment'),
+    url(r'^activity-steam-fragment/(?P<section>\w+)/$', activity_stream_fragment, name='activity_stream_fragment'),
     url(r'^recent-images-fragment/(?P<section>\w+)/$', recent_images_fragment, name='recent_images_fragment'),
 
     ###########################################################################
