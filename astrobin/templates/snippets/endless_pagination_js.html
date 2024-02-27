@@ -6,8 +6,8 @@
         paginateOnScroll: true,
         paginateOnScrollMargin: 300,
         onCompleted: function(context, fragment) {
-            window.loadAstroBinImages(fragment);
-            astrobin_common.init_timestamps(fragment);
+            window.loadAstroBinImages('.endless');
+            astrobin_common.init_timestamps('.endless');
             $.ajaxSetup({timeout: 0});
         }
     });

@@ -230,7 +230,9 @@
                     timeout: 0,
                     success: function (data) {
                         $(".activity-actions .endless").html(data);
-                        window.loadAstroBinImages(data);
+                        setTimeout(function() {
+                            window.loadAstroBinImages(data);
+                        }, 100);
                     }
                 });
             }
@@ -242,8 +244,12 @@
                     dataType: "html",
                     timeout: 0,
                     success: function (data) {
-                        $(".recent-images .endless .thumbnails").html(data);
-                        window.loadAstroBinImages(data);
+                        const $root = $(".recent-images .endless .thumbnails");
+                        $root.html(data);
+                        setTimeout(function() {
+                            window.loadAstroBinImages($root[0]);
+                            astrobin_common.init_timestamps($root[0]);
+                        }, 100);
                     }
                 });
             }
