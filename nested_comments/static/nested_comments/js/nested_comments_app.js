@@ -15,8 +15,6 @@ $(function () {
         ready: function () {
             this.commentsApiUrl = this.baseApiUrl + 'nestedcomments/nestedcomments/';
             this.togglepropertiesApiUrl = this.baseApiUrl + 'common/toggleproperties/';
-            this.authorsApiUrl = this.baseApiUrl + 'common/users/';
-            this.profilesApiUrl = this.baseApiUrl + 'common/userprofiles/';
             this.usersUrl = '/users/';
 
             this.path = $('#nested-comments-path').attr('data-value');
@@ -378,35 +376,6 @@ $(function () {
             });
         },
 
-        fetchAuthor: function (comment) {
-            var url = nc_app.authorsApiUrl + comment.author + '/';
-
-            $.ajax({
-                url: url,
-                timeout: nc_app.ajaxTimeout,
-                dataType: 'json',
-                success: function (response) {
-                    comment.set('author_username', response.username);
-                    comment.set('author_url', nc_app.usersUrl + response.username);
-                    comment.set('author_avatar', response.avatar);
-
-                    if (response.userprofile !== undefined) {
-                        var url = nc_app.profilesApiUrl + response.userprofile + '/';
-                        $.ajax({
-                            url: url,
-                            timeout: nc_app.ajaxTimeout,
-                            dataType: 'json',
-                            success: function (response) {
-                                if (response.real_name !== null && response.real_name !== "") {
-                                    comment.set('author_username', response.real_name);
-                                }
-                            }
-                        });
-                    }
-                }
-            });
-        },
-
         fetchComments: function (url, data) {
             var self = this;
 
@@ -426,7 +395,9 @@ $(function () {
                                 window.location.search.indexOf('moderate-comment') > -1 &&
                                 window.location.hash === '#c{0}'.format(comment.get('id')));
                             comment.set('deleted', nc_data.deleted);
-                            self.fetchAuthor(comment);
+                            comment.set('author_username', nc_data.author_display_name);
+                            comment.set('author_url', nc_app.usersUrl + nc_data.author_username);
+                            comment.set('author_avatar', nc_data.author_avatar);
 
                             nc_app.commentStore.push(comment);
 

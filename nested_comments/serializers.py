@@ -8,17 +8,22 @@ from .models import NestedComment
 class NestedCommentSerializer(serializers.ModelSerializer):
     parent = serializers.PrimaryKeyRelatedField(
         queryset=NestedComment.objects.all(),
-        allow_null=True)
-
+        allow_null=True
+    )
     author_avatar = AvatarField(source='author', required=False)
+    author_username = serializers.SerializerMethodField(read_only=True)
+    author_display_name = serializers.SerializerMethodField(read_only=True)
+    html = serializers.SerializerMethodField(read_only=True)
 
-    html = serializers.CharField(read_only=True)
+    def get_author_username(self, comment: NestedComment) -> str:
+        return comment.author.username
 
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
+    def get_author_display_name(self, comment: NestedComment) -> str:
+        return comment.author.userprofile.get_display_name()
+
+    def get_html(self, comment: NestedComment) -> str:
         parser = get_parser()
-        data["html"] = parser.render(instance.text)
-        return data
+        return parser.render(comment.text)
 
     class Meta:
         model = NestedComment
@@ -26,6 +31,8 @@ class NestedCommentSerializer(serializers.ModelSerializer):
             'id',
             'author',
             'author_avatar',
+            'author_username',
+            'author_display_name',
             'content_type',
             'object_id',
             'text',
