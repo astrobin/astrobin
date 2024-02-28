@@ -141,7 +141,7 @@ class UserService:
 
         image_ct: ContentType = ContentType.objects.get_for_model(Image)
 
-        return Image.objects.filter(
+        return Image.objects_plain.filter(
             toggleproperties__property_type='bookmark',
             toggleproperties__user=self.user,
             toggleproperties__content_type=image_ct
@@ -152,7 +152,7 @@ class UserService:
 
         image_ct: ContentType = ContentType.objects.get_for_model(Image)
 
-        return Image.objects.filter(
+        return Image.objects_plain.filter(
             toggleproperties__property_type='like',
             toggleproperties__user=self.user,
             toggleproperties__content_type=image_ct

@@ -25,12 +25,22 @@ class ImagesManager(SafeDeleteManager):
 # Use this manager when you don't want to do any prefetching.
 class ImagesPlainManager(SafeDeleteManager):
     def get_queryset(self):
-        return super(ImagesPlainManager, self).get_queryset()
+        return super(ImagesPlainManager, self).get_queryset().filter(
+            uploader_in_progress__isnull=True
+        )
 
 
 class PublicImagesManager(ImagesManager):
     def get_queryset(self):
         return super(PublicImagesManager, self).get_queryset().filter(is_wip=False)
+
+
+class PublicImagesPlainManager(SafeDeleteManager):
+    def get_queryset(self):
+        return super(PublicImagesPlainManager, self).get_queryset().filter(
+            uploader_in_progress__isnull=True,
+            is_wip=False
+        )
 
 
 class WipImagesManager(ImagesManager):
