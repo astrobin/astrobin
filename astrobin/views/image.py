@@ -1314,6 +1314,9 @@ class ImageSubmitToIotdTpProcessView(View):
         agreed = request.POST.get('agreed_to_iotd_tp_rules_and_guidelines', 'off').lower() == 'on'
         image: Image = ImageService.get_object(id, Image)
 
+        if image is None:
+            raise Http404
+
         may, reason = IotdService.submit_to_iotd_tp_process(request.user, image, auto_submit, agreed)
 
         if not may:
@@ -1342,6 +1345,9 @@ class ImageEquipmentFragment(View):
         try:
             image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
         except Image.DoesNotExist:
+            raise Http404
+
+        if image is None:
             raise Http404
 
         search_query = (
@@ -1375,6 +1381,9 @@ class ImageAcquisitionFragment(View):
         try:
             image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
         except Image.DoesNotExist:
+            raise Http404
+
+        if image is None:
             raise Http404
 
         r = self.kwargs.get('r')
