@@ -8,7 +8,6 @@
 {% load common_tags %}
 {% load toggleproperty_tags %}
 {% load tags %}
-{% load hitcount_tags %}
 
 
 {% pybb_get_profile user=post.user as post_user_profile %}
@@ -52,16 +51,21 @@
             {% timestamp post.created %}
         </div>
 
-        {% get_hit_count for post as hit_count %}
-        {% if post.created|is_after_datetime:"2021-11-04T08:00:00" and hit_count|add:"0" > 0 %}
+        {% if post.created|is_after_datetime:"2021-11-04T08:00:00" %}
             <div class="post-views">
                 &middot;&nbsp;
-                {{ hit_count }}
-                {% if hit_count|add:"0" == 1 %}
+
+                <span class="hit-count">
+                    <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
+                </span>
+
+                <span class="single-view hidden">
                     {% trans "view" context "Noun, e.g. 'This element has 1 view'" %}
-                {% else %}
+                </span>
+
+                <span class="multiple-views hidden">
                     {% trans "views" context "Noun, e.g. 'This element has 10 views'" %}
-                {% endif %}
+                </span>
             </div>
         {% endif %}
 
@@ -256,15 +260,19 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function () {
-            var hash = window.location.hash;
+            function highlightPost() {
+                const hash = window.location.hash;
 
-            if (!!hash && hash.indexOf("#post-") > -1) {
-                var $post = $(hash).next();
+                if (!!hash && hash.indexOf("#post-") > -1) {
+                    const $post = $(hash).next();
 
-                if (!!$post) {
-                    $post.addClass('highlighted');
+                    if (!!$post) {
+                        $post.addClass('highlighted');
+                    }
                 }
             }
+
+            highlightPost();
         });
     </script>
 {% endblock %}

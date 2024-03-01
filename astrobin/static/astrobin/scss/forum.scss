@@ -229,6 +229,18 @@ th.forum-name {
     }
   }
 
+  .post-views {
+    .hit-count {
+      margin: 0;
+
+      img {
+        margin-bottom: 2px;
+        height: 18px;
+        position: initial;
+      }
+    }
+  }
+
   .post-views,
   .post-likes {
     color: $grey-4;
