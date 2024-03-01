@@ -241,7 +241,58 @@
                 }
             }
 
+            function fetchHitCounts() {
+                const $posts = $('.post');
+
+                $posts.each(function() {
+                    const $post = $(this);
+                    const postId = $post.data('id');
+
+                    const isFetched = $(this).data('hit-count-fetched');
+                    const isNear = astrobin_common.isNearViewport(this);
+
+                    if (!isFetched && isNear) {
+                        $.ajax({
+                            url: `/api/v2/forum/post/${postId}/hit-count/`,
+                            type: "GET",
+                            dataType: "json",
+                            timeout: 5000,
+                            success: function (data) {
+                                const $views = $post.find('.post-views');
+                                const $hitCount = $post.find('.hit-count');
+                                const $singleView = $post.find('.single-view');
+                                const $multipleViews = $post.find('.multiple-views');
+                                const count = data['count'];
+
+                                $post.data('hit-count-fetched', true);
+
+                                if (count === 0) {
+                                    $views.remove();
+                                }
+
+                                $hitCount.text(count);
+
+                                if (count === 1) {
+                                    $singleView.removeClass('hidden');
+                                } else {
+                                    $multipleViews.removeClass('hidden');
+                                }
+
+                                $views.removeClass('hidden');
+                            },
+                            error: function () {
+                                const $views = $post.find('.post-views');
+                                $views.remove();
+                                $post.data('hit-count-fetched', true);
+                            }
+                        });
+                    }
+                });
+            }
+
             init_post_hit_counter();
+            fetchHitCounts();
+            $(window).on('scroll', astrobin_common.debounce(fetchHitCounts, 200));
         });
     </script>
 {% endblock %}

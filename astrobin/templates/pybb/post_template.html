@@ -53,6 +53,8 @@
 
         {% if post.created|is_after_datetime:"2021-11-04T08:00:00" %}
             <div class="post-views">
+                &middot;&nbsp;
+
                 <span class="hit-count">
                     <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
                 </span>
@@ -270,57 +272,7 @@
                 }
             }
 
-            function fetchHitCounts() {
-                const $posts = $('.post');
-                const postIds = $posts.map(function () {
-                    return $(this).data('id');
-                }).get();
-
-                postIds.forEach(postId => {
-                    $.ajax({
-                        url: `/api/v2/forum/post/${postId}/hit-count/`,
-                        type: "GET",
-                        dataType: "json",
-                        timeout: 5000,
-                        success: function (data) {
-                            const $post = $posts.filter(function () {
-                                return $(this).data('id') === postId;
-                            });
-
-                            const $views = $post.find('.post-views');
-                            const $hitCount = $post.find('.hit-count');
-                            const $singleView = $post.find('.single-view');
-                            const $multipleViews = $post.find('.multiple-views');
-                            const count = data['count'];
-
-                            if (count === 0) {
-                                $views.remove();
-                            }
-
-                            $hitCount.text(count);
-
-                            if (count === 1) {
-                                $singleView.removeClass('hidden');
-                            } else {
-                                $multipleViews.removeClass('hidden');
-                            }
-
-                            $views.removeClass('hidden');
-                        },
-                        error: function () {
-                            const $post = $posts.filter(function () {
-                                return $(this).data('id') === postId;
-                            });
-
-                            const $views = $post.find('.post-views');
-                            $views.remove();
-                        }
-                    });
-                });
-            }
-
             highlightPost();
-            fetchHitCounts();
         });
     </script>
 {% endblock %}
