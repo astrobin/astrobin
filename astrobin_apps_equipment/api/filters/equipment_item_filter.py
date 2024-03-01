@@ -50,6 +50,9 @@ class EquipmentItemFilter(FilterSet):
     def is_followed(self, queryset: QuerySet, value, *args, **kwargs):
         condition = args[0]
 
+        if self.request.user.is_anonymous:
+            return queryset.none()
+
         if condition:
             toggle_properties = ToggleProperty.objects.filter(
                 user=self.request.user,
