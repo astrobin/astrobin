@@ -342,7 +342,15 @@ class ImageService:
         if new_original.solution:
             # Get the solution this way, I don't know why it wouldn't work otherwise
             content_type = ContentType.objects.get_for_model(ImageRevision)
-            solution = Solution.objects.get(content_type=content_type, object_id=new_original.pk)
+            try:
+                solution = Solution.objects.get(content_type=content_type, object_id=new_original.pk)
+            except Solution.MultipleObjectsReturned:
+                solution = Solution.objects.filter(content_type=content_type, object_id=new_original.pk).first()
+                Solution.objects.filter(
+                    content_type=content_type, object_id=new_original.pk
+                ).exclude(
+                    pk=solution.pk
+                ).delete()
             solution.content_object = image
             solution.save()
 
@@ -449,6 +457,9 @@ class ImageService:
             'guiding_telescopes': [],
             'guiding_cameras': [],
         }
+
+        if self.image is None:
+            return equipment_list
 
         for klass in equipment_list.keys():
             for x in getattr(self.image, f'{klass}_2').all():
