@@ -458,6 +458,9 @@ class ImageService:
             'guiding_cameras': [],
         }
 
+        if self.image is None:
+            return equipment_list
+
         for klass in equipment_list.keys():
             for x in getattr(self.image, f'{klass}_2').all():
                 equipment_list[klass].append(
