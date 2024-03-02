@@ -1,2 +1,5 @@
 {% load i18n %}
-<a href="https://www.astrobin.com{% url 'messages_inbox' %}">{% blocktrans %}You have received a new private message.{% endblocktrans %}</a>
+
+<a href="{{ base_url }}{% url 'messages_detail' thread.id %}">
+    {% blocktrans %}You have received a new private message.{% endblocktrans %}
+</a>

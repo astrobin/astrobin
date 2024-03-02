@@ -1,5 +1,6 @@
 {% load i18n %}
-{% blocktrans %}You have received a private message on AstroBin!
-Read it at the following link:
 
-https://www.astrobin.com/messages/inbox/{% endblocktrans %}
+{% blocktrans trimmed %}You have received a private message on AstroBin! {% endblocktrans %}
+
+{% trans "View message" %}
+{{ base_url }}{% url 'messages_detail' thread.id %}
