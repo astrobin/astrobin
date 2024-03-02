@@ -229,6 +229,18 @@ th.forum-name {
     }
   }
 
+  .post-views {
+    .hit-count {
+      margin: 0;
+
+      img {
+        margin-bottom: 2px;
+        height: 18px;
+        position: initial;
+      }
+    }
+  }
+
   .post-views,
   .post-likes {
     color: $grey-4;
@@ -269,6 +281,13 @@ th.forum-name {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+
+  a {
+    -ms-hyphens: none;
+    -moz-hyphens: none;
+    -webkit-hyphens: none;
+    hyphens: none;
+  }
 
   ul, ol {
     list-style: initial;

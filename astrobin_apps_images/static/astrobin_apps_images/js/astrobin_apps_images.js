@@ -1,6 +1,6 @@
 $(document).ready(function () {
     window.loadAstroBinImages = function (fragment) {
-        var tries = {};
+        const tries = {};
 
         if ($(".loading-correct-image-size").length > 0) {
             setTimeout(function () {
@@ -10,7 +10,7 @@ $(document).ready(function () {
         }
 
         $(fragment).find('img.astrobin-image').each(function () {
-            var $img = $(this),
+            const $img = $(this),
                 randomTimeout = Math.floor(Math.random() * 100) + 100, // 100-200 ms
                 id = $img.data('id'),
                 revision = $img.data('revision'),
@@ -25,7 +25,7 @@ $(document).ready(function () {
             if (!loaded) {
                 setTimeout(function () {
                     load(url, id, revision, alias, tries, false, randomTimeout, false).then(function (url) {
-                        var $refreshedImg =
+                        const $refreshedImg =
                             $('[data-id="' + id + '"][data-alias="' + alias + '"][data-revision="' + revision + '"]');
                         $refreshedImg.attr('data-loaded', 'true').attr('src', url);
                     });
@@ -122,20 +122,16 @@ $(document).ready(function () {
                 .attr('data-hires-loaded', true)
                 .attr('src', url);
 
-            if (!window.bowser) {
-                return;
-            }
+            if (typeof (window.bowser) !== 'undefined') {
+                const browserParser = window.bowser.getParser(window.navigator.userAgent);
 
-            const browserParser = window.bowser.getParser(window.navigator.userAgent);
+                if (!!browserParser) {
+                    const browser = browserParser.getBrowser();
 
-            if (!browserParser) {
-                return;
-            }
-
-            const browser = browserParser.getBrowser();
-
-            if (browser.name === 'Chrome') {
-                $img.css('image-rendering', '-webkit-optimize-contrast');
+                    if (browser.name === 'Chrome') {
+                        $img.css('image-rendering', '-webkit-optimize-contrast');
+                    }
+                }
             }
         }
 
@@ -157,7 +153,7 @@ $(document).ready(function () {
     function load(url, id, revision, alias, tries, hires, randomTimeout, bustCache) {
         return new Promise(function(resolve) {
             if (url !== "") {
-                key = getKey(id, revision, alias);
+                const key = getKey(id, revision, alias);
 
                 if (tries[key] === undefined) {
                     tries[key] = 0;
@@ -174,7 +170,7 @@ $(document).ready(function () {
                     url: url,
                     timeout: 60000,
                     success: function (data, status, request) {
-                        var url = this[0],
+                        const url = this[0],
                             id = this[1],
                             revision = this[2],
                             alias = this[3],

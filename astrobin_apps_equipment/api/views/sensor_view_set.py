@@ -50,7 +50,7 @@ class SensorViewSet(EquipmentItemViewSet):
         sensor_pixel_width_filter = self.request.GET.get('sensor-pixel-width')
         if sensor_pixel_width_filter:
             sensor_pixel_width_object = simplejson.loads(sensor_pixel_width_filter)
-            if sensor_pixel_width_filter.get('from') is not None or sensor_pixel_width_filter.get('to') is not None:
+            if sensor_pixel_width_object.get('from') is not None or sensor_pixel_width_object.get('to') is not None:
                 queryset = queryset.filter(
                     pixel_width__isnull=False,
                     pixel_width__gte=sensor_pixel_width_object.get('from')

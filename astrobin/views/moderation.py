@@ -92,7 +92,7 @@ class ImageModerationBanAllView(LoginRequiredMixin, SuperuserRequiredMixin, JSON
     def post(self):
         images = Image.objects_including_wip.filter(moderator_decision=ModeratorDecision.REJECTED)
         for i in images:
-            i.user.userprofile.deleted_reason = UserProfile.DELETE_REASON_IMAGE_SPAM
+            i.user.userprofile.delete_reason = UserProfile.DELETE_REASON_IMAGE_SPAM
             i.user.userprofile.save(keep_deleted=True)
             i.user.userprofile.delete()
             log.info("User (%d) was deleted because of image spam" % i.user.pk)
@@ -114,7 +114,7 @@ class ForumModerationMarkAsSpamView(LoginRequiredMixin, GroupRequiredMixin, View
             try:
                 topic = Topic.objects.get(id=id)
                 user = topic.user
-                user.userprofile.deleted_reason = UserProfile.DELETE_REASON_FORUM_SPAM
+                user.userprofile.delete_reason = UserProfile.DELETE_REASON_FORUM_SPAM
                 user.userprofile.save(keep_deleted=True)
                 user.userprofile.delete()
                 log.info("User (%d) was deleted because of forum spam" % user.pk)

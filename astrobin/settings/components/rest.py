@@ -10,6 +10,7 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'users': '300/min',
         'images': '200/min',
+        'search': '300/min',
     }
 }
 

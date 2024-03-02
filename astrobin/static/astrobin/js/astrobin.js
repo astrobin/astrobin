@@ -1622,6 +1622,39 @@ astrobin_common = {
             hljs.highlightElement($element);
             hljs.lineNumbersBlock($element);
         }
+    },
+
+    isNearViewport: function(element, threshold = 300) {
+        const rect = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+        return (
+            rect.top <= windowHeight + threshold &&
+            rect.left <= windowWidth + threshold &&
+            rect.bottom >= -threshold &&
+            rect.right >= -threshold
+        );
+    },
+
+    debounce: function(func, wait, immediate) {
+        let timeout;
+        return function() {
+            const context = this, args = arguments;
+            const later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            const callNow = immediate && !timeout;
+
+            clearTimeout(timeout);
+
+            timeout = setTimeout(later, wait);
+
+            if (callNow) {
+                func.apply(context, args);
+            }
+        };
     }
 };
 

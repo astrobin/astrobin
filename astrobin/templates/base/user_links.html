@@ -107,6 +107,7 @@
 
             {% if not request.user.userprofile.exclude_from_competitions %}
                 <li id="astrobin-index-mobile-header" class="visible-phone">
+                    {{ request.user.userprofile.image_index|default:"0"|floatformat:2 }}
                 </li>
             {% endif %}
 

@@ -15,7 +15,7 @@ class CustomRedisCache(RedisCache):
             return super().get(key, default, version, client)
         except (TimeoutError, ConnectionError):
             log.debug(f"TimeoutError while getting key {key}")
-            return None
+            return default
 
     def get(self, key, default=None, version=None, client=None, operation_timeout=0.05):
         result = [default]
@@ -30,8 +30,8 @@ class CustomRedisCache(RedisCache):
         else:
             thread.join(operation_timeout)  # Wait for specified timeout
             if thread.is_alive():
-                log.debug(f"Timeout while setting key {key}")
-                return False
+                log.debug(f"Timeout while getting key {key}")
+                return default
 
         return result[0]
 

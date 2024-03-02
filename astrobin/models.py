@@ -70,7 +70,7 @@ from astrobin_apps_equipment.models import Filter as FilterV2
 from astrobin_apps_equipment.models import Accessory as AccessoryV2
 
 from astrobin_apps_images.managers import (
-    ImagesManager, ImagesPlainManager, PublicImagesManager, WipImagesManager,
+    ImagesManager, ImagesPlainManager, PublicImagesManager, PublicImagesPlainManager, WipImagesManager,
     ImageRevisionsManager,
     UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager,
 )
@@ -955,6 +955,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("GFA", "Goldfield Astronomical Observatory"),
         ("GMO", "Grand Mesa Observatory"),
         ("HAKOS", "Hakos Astro Farm"),
+        ("HCRO", "Howling Coyote Remote Observatories (HCRO)"),
         ("HMO", "Heaven's Mirror Observatory"),
         ("IC", "IC Astronomy Observatories"),
         ("ITU", "Image The Universe"),
@@ -1524,6 +1525,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ordering = ('-uploaded', '-id')
 
     objects = PublicImagesManager()
+    objects_plain = PublicImagesPlainManager()
     objects_including_wip = ImagesManager()
     objects_including_wip_plain = ImagesPlainManager()
     wip = WipImagesManager()

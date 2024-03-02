@@ -11,6 +11,7 @@ from hitcount.views import HitCountMixin
 from pybb.models import Post
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import AllowAny
 from rest_framework.renderers import BrowsableAPIRenderer
 
@@ -46,3 +47,9 @@ class PostViewSet(viewsets.ModelViewSet):
         return HttpResponse(
             simplejson.dumps(UpdateHitCountResponse(False, 'Hit from author or moderated or missing post ignored'))
         )
+
+    @action(detail=True, methods=['get'], permission_classes=[AllowAny], url_path='hit-count')
+    def hit_count(self, request, pk):
+        post: Post = get_object_or_404(self.get_queryset(), pk=pk)
+        count: HitCount = HitCount.objects.get_for_object(post)
+        return HttpResponse(simplejson.dumps({'count': count.hits}))

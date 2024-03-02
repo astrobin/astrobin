@@ -825,11 +825,12 @@ def shadow_bans(a, b):
 
 
 @register.filter
-def skip_thread_list_shadow_bans(thread_list, user):
-    # type: (QuerySet, User) -> QuerySet
-    return Participant.objects.filter(pk__in=[
-        x.pk for x in thread_list if not UserService(user).shadow_bans(x.thread.creator)
-    ])
+def skip_thread_list_shadow_bans(thread_list: QuerySet, user: User) -> QuerySet:
+    shadow_banned_user_ids: QuerySet = user.userprofile.shadow_bans.all().values_list('user_id', flat=True)
+    if shadow_banned_user_ids.count() == 0:
+        return thread_list
+
+    return thread_list.exclude(thread__creator_id__in=shadow_banned_user_ids)
 
 
 @register.filter
