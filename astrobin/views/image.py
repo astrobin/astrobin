@@ -26,7 +26,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
 from django.utils.translation import ugettext as _
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
@@ -100,7 +100,8 @@ class ImageDeleteViewBase(ImageSingleObjectMixin, DeleteView):
 
 
 class ImageFlagThumbsView(
-    LoginRequiredMixin, ImageUpdateViewBase):
+    LoginRequiredMixin, ImageUpdateViewBase
+):
     form_class = ImageFlagThumbsForm
     model = Image
     pk_url_kwarg = 'id'
@@ -122,7 +123,8 @@ class ImageFlagThumbsView(
 
 
 class ImageRemoveAsCollaboratorView(
-    LoginRequiredMixin, ImageUpdateViewBase):
+    LoginRequiredMixin, ImageUpdateViewBase
+):
     form_class = ImageRemoveAsCollaboratorForm
     model = Image
     pk_url_kwarg = 'id'
@@ -181,16 +183,19 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         try:
             url = image.thumbnail(
                 alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
-                sync=request.GET.get('sync') is not None)
+                sync=request.GET.get('sync') is not None
+            )
         except FileNotFoundError:
             url = ImageService(image).get_error_thumbnail(revision_label, alias)
 
-        return self.render_json_response({
-            'id': image.pk,
-            'alias': alias,
-            'revision': revision_label,
-            'url': iri_to_uri(url)
-        })
+        return self.render_json_response(
+            {
+                'id': image.pk,
+                'alias': alias,
+                'revision': revision_label,
+                'url': iri_to_uri(url)
+            }
+        )
 
 
 @method_decorator(
@@ -227,7 +232,8 @@ class ImageRawThumbView(ImageDetailViewBase):
         if settings.TESTING:
             thumb = image.thumbnail_raw(
                 alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
-                sync=request.GET.get('sync') is not None)
+                sync=request.GET.get('sync') is not None
+            )
 
             if thumb:
                 return redirect(thumb.url)
@@ -237,7 +243,8 @@ class ImageRawThumbView(ImageDetailViewBase):
         try:
             url = image.thumbnail(
                 alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
-                sync=request.GET.get('sync') is not None)
+                sync=request.GET.get('sync') is not None
+            )
         except FileNotFoundError:
             url = ImageService(image).get_error_thumbnail(revision_label, alias)
 
@@ -247,11 +254,13 @@ class ImageRawThumbView(ImageDetailViewBase):
         return redirect(smart_unicode(url))
 
 
-@method_decorator([
-    last_modified(CachingService.get_image_last_modified),
-    cache_control(private=True, no_cache=True),
-    vary_on_cookie
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_image_last_modified),
+        cache_control(private=True, no_cache=True),
+        vary_on_cookie
+    ], name='dispatch'
+)
 class ImageDetailView(ImageDetailViewBase):
     model = Image
     pk_url_kwarg = 'id'
@@ -283,10 +292,12 @@ class ImageDetailView(ImageDetailViewBase):
                 revision = ImageService(image).get_final_revision()
                 redirect_revision_label = revision.label if hasattr(revision, 'label') else '0'
                 if request.user.is_authenticated:
-                    messages.info(request, _(
-                        "You requested revision %s, but it doesn't exist or it was deleted. We redirected you to the "
-                        "revision currently marked as final." % revision_label
-                    ))
+                    messages.info(
+                        request, _(
+                            "You requested revision %s, but it doesn't exist or it was deleted. We redirected you to the "
+                            "revision currently marked as final." % revision_label
+                        )
+                    )
                 return redirect(reverse('image_detail', args=(image.get_id(), redirect_revision_label,)))
 
         if revision_label is None:
@@ -297,7 +308,8 @@ class ImageDetailView(ImageDetailViewBase):
                 if final.count() > 0:
                     url = reverse_lazy(
                         'image_detail',
-                        args=(image.get_id(), final[0].label,))
+                        args=(image.get_id(), final[0].label,)
+                    )
                     if 'nc' in request.GET:
                         url += '?nc=%s' % request.GET.get('nc')
                         if 'nce' in request.GET:
@@ -404,7 +416,7 @@ class ImageDetailView(ImageDetailViewBase):
                         user=image.user,
                         published__isnull=False,
                         published__lt=image.published,
-                        moderator_decision = ModeratorDecision.APPROVED,
+                        moderator_decision=ModeratorDecision.APPROVED,
                     ).order_by('-published')[0:1]
                 elif nav_ctx == 'collection':
                     try:
@@ -524,99 +536,106 @@ class ImageDetailView(ImageDetailViewBase):
         search_query = f'{self.request.GET.get("q", "")} {self.request.GET.get("telescope", "")} {self.request.GET.get("camera", "")}'.strip()
 
         response_dict = context.copy()
-        response_dict.update({
-            'SHARE_PATH': settings.SHORT_BASE_URL,
+        response_dict.update(
+            {
+                'SHARE_PATH': settings.SHORT_BASE_URL,
 
-            'alias': alias,
-            'mod': mod,
-            'revisions': ImageService(image) \
-                .get_revisions() \
-                .select_related('image__user__userprofile'),
-            'revisions_with_title_or_description': ImageService(image) \
-                .get_revisions_with_title_or_description() \
-                .select_related('image__user__userprofile'),
-            'is_revision': is_revision,
-            'revision_image': revision_image,
-            'revision_label': r,
+                'alias': alias,
+                'mod': mod,
+                'revisions': ImageService(image) \
+                    .get_revisions() \
+                    .select_related('image__user__userprofile'),
+                'revisions_with_title_or_description': ImageService(image) \
+                    .get_revisions_with_title_or_description() \
+                    .select_related('image__user__userprofile'),
+                'is_revision': is_revision,
+                'revision_image': revision_image,
+                'revision_label': r,
 
-            'instance_to_platesolve': instance_to_platesolve,
-            'show_solution': (
-                                     instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
-                                     and instance_to_platesolve.solution
-                                     and instance_to_platesolve.solution.status >= Solver.SUCCESS)
-                             or (
-                                     mod == 'solved'
-                                     and instance_to_platesolve.solution
-                                     and instance_to_platesolve.solution.status >= Solver.SUCCESS
-                             ),
-            'show_advanced_solution': (
-                instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
-                and instance_to_platesolve.solution
-                and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
-            ) or (
-                mod == 'solved'
-                and instance_to_platesolve.solution
-                and instance_to_platesolve.solution.status >= Solver.ADVANCED_SUCCESS
-            ),
-            'show_advanced_solution_on_full': (
-                instance_to_platesolve.mouse_hover_image != MouseHoverImage.NOTHING
-                and instance_to_platesolve.solution
-                and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
-            ),
-            'advanced_solution_last_live_log_entry':
-                PlateSolvingAdvancedLiveLogEntry.objects.filter(
-                    serial_number=instance_to_platesolve.solution.pixinsight_serial_number) \
+                'instance_to_platesolve': instance_to_platesolve,
+                'show_solution': (
+                                         instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
+                                         and instance_to_platesolve.solution
+                                         and instance_to_platesolve.solution.status >= Solver.SUCCESS)
+                                 or (
+                                         mod == 'solved'
+                                         and instance_to_platesolve.solution
+                                         and instance_to_platesolve.solution.status >= Solver.SUCCESS
+                                 ),
+                'show_advanced_solution': (
+                                                  instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
+                                                  and instance_to_platesolve.solution
+                                                  and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
+                                          ) or (
+                                                  mod == 'solved'
+                                                  and instance_to_platesolve.solution
+                                                  and instance_to_platesolve.solution.status >= Solver.ADVANCED_SUCCESS
+                                          ),
+                'show_advanced_solution_on_full': (
+                        instance_to_platesolve.mouse_hover_image != MouseHoverImage.NOTHING
+                        and instance_to_platesolve.solution
+                        and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
+                ),
+                'advanced_solution_last_live_log_entry':
+                    PlateSolvingAdvancedLiveLogEntry.objects.filter(
+                        serial_number=instance_to_platesolve.solution.pixinsight_serial_number
+                    ) \
                     .order_by('-timestamp').first() \
-                    if instance_to_platesolve.solution and instance_to_platesolve.solution.pixinsight_serial_number \
-                    else None,
-            'skyplot_zoom1': skyplot_zoom1,
-            'pixinsight_finding_chart': pixinsight_finding_chart,
-            'pixinsight_finding_chart_small': pixinsight_finding_chart_small,
+                        if instance_to_platesolve.solution and instance_to_platesolve.solution.pixinsight_serial_number \
+                        else None,
+                'skyplot_zoom1': skyplot_zoom1,
+                'pixinsight_finding_chart': pixinsight_finding_chart,
+                'pixinsight_finding_chart_small': pixinsight_finding_chart_small,
 
-            'image_ct': ContentType.objects.get_for_model(Image),
-            'user_ct': ContentType.objects.get_for_model(User),
-            'user_can_like': can_like(self.request.user, image),
-            'promote_form': ImagePromoteForm(instance=image),
-            'upload_revision_form': ImageRevisionUploadForm(),
-            'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
-            'show_contains': (image.subject_type == SubjectType.DEEP_SKY and subjects) or
-                             (image.subject_type != SubjectType.DEEP_SKY),
-            'subjects': subjects,
-            'subject_type': ImageService(image).get_subject_type_label(),
-            'hemisphere': ImageService(image).get_hemisphere(r),
-            'constellation': ImageService.get_constellation(revision_image.solution) \
-                if revision_image \
-                else ImageService.get_constellation(image.solution),
-            'solar_system_main_subject': ImageService(image).get_solar_system_main_subject_label(),
-            'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
-            'preferred_languages': preferred_languages,
-            'select_group_form': GroupSelectForm(
-                user=self.request.user
-            ) if self.request.user.is_authenticated else None,
-            'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
-            'in_collections': Collection.objects.filter(user=image.user, images=image) if not image.is_wip else None,
-            'auto_submit_to_iotd_tp_process_form': AutoSubmitToIotdTpProcessForm() \
-                if self.request.user.is_authenticated \
-                else None,
-            'image_next': image_next,
-            'image_prev': image_prev,
-            'nav_ctx': nav_ctx,
-            'nav_ctx_extra': nav_ctx_extra,
-            'w': w,
-            'h': h,
-            'image_uses_full_width': w is not None and w >= 940,
-            'search_query': search_query,
-            'download_original_url': download_original_url,
-        })
+                'image_ct': ContentType.objects.get_for_model(Image),
+                'user_ct': ContentType.objects.get_for_model(User),
+                'user_can_like': can_like(self.request.user, image),
+                'promote_form': ImagePromoteForm(instance=image),
+                'upload_revision_form': ImageRevisionUploadForm(),
+                'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
+                'show_contains': (image.subject_type == SubjectType.DEEP_SKY and subjects) or
+                                 (image.subject_type != SubjectType.DEEP_SKY),
+                'subjects': subjects,
+                'subject_type': ImageService(image).get_subject_type_label(),
+                'hemisphere': ImageService(image).get_hemisphere(r),
+                'constellation': ImageService.get_constellation(revision_image.solution) \
+                    if revision_image \
+                    else ImageService.get_constellation(image.solution),
+                'solar_system_main_subject': ImageService(image).get_solar_system_main_subject_label(),
+                'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
+                'preferred_languages': preferred_languages,
+                'select_group_form': GroupSelectForm(
+                    user=self.request.user
+                ) if self.request.user.is_authenticated else None,
+                'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
+                'in_collections': Collection.objects.filter(
+                    user=image.user, images=image
+                ) if not image.is_wip else None,
+                'auto_submit_to_iotd_tp_process_form': AutoSubmitToIotdTpProcessForm() \
+                    if self.request.user.is_authenticated \
+                    else None,
+                'image_next': image_next,
+                'image_prev': image_prev,
+                'nav_ctx': nav_ctx,
+                'nav_ctx_extra': nav_ctx_extra,
+                'w': w,
+                'h': h,
+                'image_uses_full_width': w is not None and w >= 940,
+                'search_query': search_query,
+                'download_original_url': download_original_url,
+            }
+        )
 
         return response_dict
 
 
-@method_decorator([
-    last_modified(CachingService.get_image_last_modified),
-    cache_control(private=True, no_cache=True),
-    vary_on_cookie
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_image_last_modified),
+        cache_control(private=True, no_cache=True),
+        vary_on_cookie
+    ], name='dispatch'
+)
 class ImageFullView(ImageDetailView):
     model = Image
     pk_url_kwarg = 'id'
@@ -649,7 +668,8 @@ class ImageFullView(ImageDetailView):
                 if final.count() > 0:
                     url = reverse_lazy(
                         'image_full',
-                        args=(image.get_id(), final[0].label,))
+                        args=(image.get_id(), final[0].label,)
+                    )
                     if 'nc' in request.GET:
                         url += '?nc=%s' % request.GET.get('nc')
                         if 'nce' in request.GET:
@@ -679,13 +699,15 @@ class ImageFullView(ImageDetailView):
             alias += "_%s" % mod
 
         response_dict = context.copy()
-        response_dict.update({
-            'real': real,
-            'alias': alias,
-            'mod': mod,
-            'revision_label': self.revision_label,
-            'max_file_size_before_warning': 25 * 1024 * 1024,
-        })
+        response_dict.update(
+            {
+                'real': real,
+                'alias': alias,
+                'mod': mod,
+                'revision_label': self.revision_label,
+                'max_file_size_before_warning': 25 * 1024 * 1024,
+            }
+        )
 
         return response_dict
 
@@ -803,8 +825,8 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
             image.updated = revision.uploaded
             image.w = revision.w
             image.h = revision.h
-            image.mouse_hover_image = revision.mouse_hover_image\
-                if revision.mouse_hover_image == MouseHoverImage.NOTHING\
+            image.mouse_hover_image = revision.mouse_hover_image \
+                if revision.mouse_hover_image == MouseHoverImage.NOTHING \
                 else MouseHoverImage.SOLUTION
 
             if revision.title:
@@ -930,9 +952,12 @@ class ImageEditBaseView(LoginRequiredMixin, ImageUpdateViewBase):
         return super(ImageEditBaseView, self).form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, _(
-            "There was one or more errors processing the form. " +
-            "You may need to scroll down to see them."))
+        messages.error(
+            self.request, _(
+                "There was one or more errors processing the form. " +
+                "You may need to scroll down to see them."
+            )
+        )
         return super(ImageEditBaseView, self).form_invalid(form)
 
 
@@ -1017,7 +1042,8 @@ class ImageEditGearView(ImageEditBaseView):
 
         if self.request.method == 'POST':
             return form_class(
-                user=image.user, instance=image, data=self.request.POST)
+                user=image.user, instance=image, data=self.request.POST
+            )
         else:
             return form_class(user=image.user, instance=image)
 
@@ -1095,7 +1121,8 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
                     revision.w, revision.h = get_image_dimensions(revision.image_file)
                 except TypeError as e:
                     logger.warning(
-                        "ImageEditRevisionView: unable to get image dimensions for %d: %s" % (revision.pk, str(e)))
+                        "ImageEditRevisionView: unable to get image dimensions for %d: %s" % (revision.pk, str(e))
+                    )
                     pass
 
                 revision.square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
@@ -1333,7 +1360,7 @@ class ImageSubmitToIotdTpProcessView(View):
     [
         last_modified(CachingService.get_image_last_modified),
         cache_control(public=True, no_cache=True, must_revalidate=True, maxAge=0),
-        csrf_protect,
+        csrf_exempt,
     ], name='dispatch'
 )
 class ImageEquipmentFragment(View):
@@ -1356,20 +1383,22 @@ class ImageEquipmentFragment(View):
             f'{self.request.GET.get("camera", "")}'
         ).strip()
 
-        return render(request, 'image/detail/image_card_equipment.html', {
-            'image': image,
-            'search_query': search_query,
-            'equipment_list': ImageService(image).get_equipment_list(
-                get_client_country_code(self.request)
-            ),
-        })
+        return render(
+            request, 'image/detail/image_card_equipment.html', {
+                'image': image,
+                'search_query': search_query,
+                'equipment_list': ImageService(image).get_equipment_list(
+                    get_client_country_code(self.request)
+                ),
+            }
+        )
 
 
 @method_decorator(
     [
         last_modified(CachingService.get_image_last_modified),
         cache_control(public=True, no_cache=True, must_revalidate=True, maxAge=0),
-        csrf_protect,
+        csrf_exempt,
     ], name='dispatch'
 )
 class ImageAcquisitionFragment(View):
@@ -1436,18 +1465,20 @@ class ImageAcquisitionFragment(View):
             f'{self.request.GET.get("camera", "")}'
         ).strip()
 
-        return render(request, 'image/detail/image_card_acquisition.html', {
-            'image': image,
-            'deep_sky_data': deep_sky_data,
-            'ssa': ssa,
-            'image_type': image_type,
-            'w': w,
-            'h': h,
-            'is_revision': is_revision,
-            'instance_to_platesolve': instance_to_platesolve,
-            'file_size': revision_image.uploader_upload_length if revision_image else image.uploader_upload_length,
-            'resolution': '%dx%d' % (w, h) if (w and h) else None,
-            'locations': locations,
-            'search_query': search_query,
-            'dates_label': _("Dates"),
-        })
+        return render(
+            request, 'image/detail/image_card_acquisition.html', {
+                'image': image,
+                'deep_sky_data': deep_sky_data,
+                'ssa': ssa,
+                'image_type': image_type,
+                'w': w,
+                'h': h,
+                'is_revision': is_revision,
+                'instance_to_platesolve': instance_to_platesolve,
+                'file_size': revision_image.uploader_upload_length if revision_image else image.uploader_upload_length,
+                'resolution': '%dx%d' % (w, h) if (w and h) else None,
+                'locations': locations,
+                'search_query': search_query,
+                'dates_label': _("Dates"),
+            }
+        )
