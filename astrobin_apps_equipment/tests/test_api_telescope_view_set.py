@@ -30,6 +30,295 @@ class TestApiTelescopeViewSet(TestCase):
         self.assertEquals(1, response.data['count'])
         self.assertEquals(telescope.name, response.data['results'][0]['name'])
 
+    def test_list_unapproved(self):
+        client = APIClient()
+
+        EquipmentGenerators.telescope(reviewer_decision=None)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+        self.assertEquals(0, response.data['count'])
+
+    def test_list_unapproved_but_creator(self):
+        client = APIClient()
+
+        user = Generators.user()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=None, created_by=user)
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(telescope.name, response.data['results'][0]['name'])
+
+    def test_list_unapproved_but_moderator(self):
+        client = APIClient()
+
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=None)
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-list'), format='json'
+        )
+
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(telescope.name, response.data['results'][0]['name'])
+
+    def test_list_unapproved_but_override(self):
+        client = APIClient()
+
+        user = Generators.user()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=None)
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-list') + '?allow-unapproved=true', format='json'
+        )
+
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(telescope.name, response.data['results'][0]['name'])
+
+    def test_serializer_no_variants(self):
+        client = APIClient()
+
+        EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+
+        self.assertEquals(0, len(response.data['results'][0]['variants']))
+
+    def test_serializer_one_variant(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+            variant_of=telescope
+        )
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.id,)), format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, len(response.data['variants']))
+        self.assertEquals(variant.name, response.data['variants'][0]['name'])
+
+    def test_serializer_diy_variant(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+            variant_of=telescope
+        )
+
+        Telescope.objects.filter(pk=variant.pk).update(brand=None)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.id,)), format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(0, len(response.data['variants']))
+
+    def test_serializer_diy_variant_but_creator(self):
+        client = APIClient()
+
+        user = Generators.user()
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+            variant_of=telescope,
+            created_by=user
+        )
+
+        Telescope.objects.filter(pk=variant.pk).update(brand=None)
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.id,)), format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, len(response.data['variants']))
+        self.assertEquals(variant.name, response.data['variants'][0]['name'])
+
+    def test_serializer_unapproved_variant(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        EquipmentGenerators.telescope(
+            reviewer_decision=None,
+            variant_of=telescope
+        )
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.id,)), format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(0, len(response.data['variants']))
+
+    def test_serializer_unapproved_variant_but_creator(self):
+        client = APIClient()
+
+        user = Generators.user()
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=None,
+            variant_of=telescope,
+            created_by=user
+        )
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.id,)), format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, len(response.data['variants']))
+        self.assertEquals(variant.name, response.data['variants'][0]['name'])
+
+    def test_serializer_unapproved_variant_but_override(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=None,
+            variant_of=telescope,
+        )
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.pk,)) + '?allow-unapproved=true',
+            format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, len(response.data['variants']))
+        self.assertEquals(variant.name, response.data['variants'][0]['name'])
+
+    def test_viewset_no_variants(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.pk,)) + 'variants/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(0, len(response.data))
+
+    def test_viewset_one_variant(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+            variant_of=telescope
+        )
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.pk,)) + 'variants/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, len(response.data))
+        self.assertEquals(variant.name, response.data[0]['name'])
+
+    def test_viewset_unapproved_variant(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        EquipmentGenerators.telescope(
+            reviewer_decision=None,
+            variant_of=telescope
+        )
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.pk,)) + 'variants/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(0, len(response.data))
+
+    def test_viewset_unapproved_variant_but_creator(self):
+        client = APIClient()
+
+        user = Generators.user()
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=None,
+            variant_of=telescope,
+            created_by=user
+        )
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.pk,)) + 'variants/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, len(response.data))
+        self.assertEquals(variant.name, response.data[0]['name'])
+
+    def test_viewset_unapproved_variant_but_moderator(self):
+        client = APIClient()
+
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=None,
+            variant_of=telescope
+        )
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.pk,)) + 'variants/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, len(response.data))
+        self.assertEquals(variant.name, response.data[0]['name'])
+
+    def test_viewset_unapproved_variant_but_override(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=None,
+            variant_of=telescope
+        )
+
+        response = client.get(
+            reverse(
+                'astrobin_apps_equipment:telescope-detail', args=(telescope.pk,)
+            ) + 'variants/?allow-unapproved=true',
+            format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, len(response.data))
+        self.assertEquals(variant.name, response.data[0]['name'])
+
     def test_deleting_not_allowed(self):
         client = APIClient()
 

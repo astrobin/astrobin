@@ -80,10 +80,18 @@ class EquipmentGenerators:
     @staticmethod
     def telescope(**kwargs):
         random_name = Generators.random_string()
+        created_by = kwargs.get('created_by')
+        brand = kwargs.get('brand')
+
+        if created_by is None:
+            created_by = Generators.user()
+
+        if brand is None:
+            brand = EquipmentGenerators.brand()
 
         return Telescope.objects.create(
-            created_by=kwargs.get('created_by', Generators.user()),
-            brand=kwargs.get('brand', EquipmentGenerators.brand()),
+            created_by=created_by,
+            brand=brand,
             name=kwargs.get('name', 'Test telescope %s' % random_name),
             variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-telescope-%s.com/' % random_name),

@@ -46,24 +46,27 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
         return ""
 
     def get_variants(self, item):
-        user = None
         request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            user = request.user
+        user = getattr(request, "user", None) if request else None
+        allow_unapproved = request and request.GET.get("allow-unapproved", "false") == "true"
 
         ModelClass = self.__class__.Meta.model
-
         variants = ModelClass.objects.filter(variant_of__pk=item.pk)
 
         if user and user.is_authenticated:
             user_groups = self.get_user_groups(user)
-            if GroupName.EQUIPMENT_MODERATORS in user_groups:
-                variants = variants.filter(EquipmentItemService.non_moderator_queryset(user))
+            is_equipment_moderator = GroupName.EQUIPMENT_MODERATORS in user_groups
         else:
-            variants = variants.filter(
-                reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
-                brand__isnull=False,
+            is_equipment_moderator = False
+
+        variants = variants.filter(
+            EquipmentItemService.non_diy_or_creator_or_moderator_queryset(user, is_equipment_moderator) &
+            EquipmentItemService.approved_or_creator_or_moderator_queryset(
+                user,
+                is_equipment_moderator,
+                allow_unapproved
             )
+        )
 
         return self.__class__(variants, many=True).data
 
