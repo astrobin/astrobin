@@ -72,14 +72,18 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         return queryset
 
     def filter_line_items(self, queryset: QuerySet) -> QuerySet:
-        if self.request.GET.get('item_type'):
-            item_type = self.request.GET.get('item_type')
+        if self.request.query_params.get('offers_by_user'):
+            user_id = self.request.query_params.get('offers_by_user')
+            queryset = queryset.filter(offers__user_id=user_id)
+
+        if self.request.query_params.get('item_type'):
+            item_type = self.request.query_params.get('item_type')
             content_type = EquipmentService.item_type_to_content_type(item_type)
             if content_type:
                 queryset = queryset.filter(item_content_type=content_type)
 
-        if self.request.GET.get('currency'):
-            currency = self.request.GET.get('currency')
+        if self.request.query_params.get('currency'):
+            currency = self.request.query_params.get('currency')
             if currency not in SUPPORTED_CURRENCIES:
                 raise ValidationError(
                     {
@@ -97,22 +101,22 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             currency = None
             exchange_rate = None
 
-        if self.request.GET.get('min_price') and currency:
-            min_price = float(self.request.GET.get('min_price'))
+        if self.request.query_params.get('min_price') and currency:
+            min_price = float(self.request.query_params.get('min_price'))
             if currency != 'CHF':
                 if exchange_rate and exchange_rate.rate:
                     min_price /= float(exchange_rate.rate)
             queryset = queryset.filter(price_chf__gte=min_price)
             
-        if self.request.GET.get('max_price') and currency:
-            max_price = float(self.request.GET.get('max_price'))
+        if self.request.query_params.get('max_price') and currency:
+            max_price = float(self.request.query_params.get('max_price'))
             if currency != 'CHF':
                 if exchange_rate and exchange_rate.rate:
                     max_price /= float(exchange_rate.rate)
             queryset = queryset.filter(price_chf__lte=max_price)
 
-        if self.request.GET.get('condition'):
-            condition = self.request.GET.get('condition')
+        if self.request.query_params.get('condition'):
+            condition = self.request.query_params.get('condition')
             if condition not in (item.value for item in MarketplaceListingCondition):
                 raise ValidationError(
                     {
@@ -121,8 +125,8 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
                 )
             queryset = queryset.filter(condition=condition)
 
-        if self.request.GET.get('query'):
-            query = self.request.GET.get('query')
+        if self.request.query_params.get('query'):
+            query = self.request.query_params.get('query')
             queryset = queryset.annotate(
                 distance=TrigramDistance('item_name', query),
             ).filter(
