@@ -1,4 +1,6 @@
-from django.contrib.auth.models import User
+from typing import Union
+
+from django.contrib.auth.models import AnonymousUser, User
 from django.db.models import Model, Q, QuerySet
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import PermissionDenied, ValidationError
@@ -132,19 +134,39 @@ class EquipmentItemService:
         return ToggleProperty.objects.toggleproperties_for_object('follow', self.item, user).exists()
 
     @staticmethod
-    def non_moderator_queryset(user) -> Q:
+    def approved_or_creator_or_moderator_queryset(
+            user: Union[User, AnonymousUser],
+            is_equipment_moderator: bool,
+            force_allow_unapproved: bool = False
+    ) -> Q:
         from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 
-        return \
-            Q(
+        if force_allow_unapproved:
+            return Q()
+
+        if user and user.is_authenticated:
+            if is_equipment_moderator:
+                return Q()
+
+            return Q(
                 Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
                 Q(created_by=user)
-            ) & \
-            Q(
+            )
+
+        return Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+
+    @staticmethod
+    def non_diy_or_creator_or_moderator_queryset(user: Union[User, AnonymousUser], is_equipment_moderator: bool) -> Q:
+        if user and user.is_authenticated:
+            if is_equipment_moderator:
+                return Q()
+
+            return Q(
                 Q(brand__isnull=False) |
                 Q(created_by=user)
             )
 
+        return Q(brand__isnull=False)
 
     @staticmethod
     def validate(user: User, attrs):

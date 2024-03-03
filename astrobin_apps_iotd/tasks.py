@@ -178,7 +178,7 @@ def resubmit_images_for_iotd_tp_consideration_if_they_did_not_get_enough_views()
     cache.set(last_check_cache_key, datetime.now(), 60 * 60 * 24)
 
 
-@shared_task(time_limit=1200)
+@shared_task(time_limit=3600, acks_late=True)
 def calculate_iotd_staff_members_stats():
     service = IotdService()
 
