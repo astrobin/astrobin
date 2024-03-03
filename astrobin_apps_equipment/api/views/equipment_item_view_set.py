@@ -66,6 +66,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         sort = self.request.query_params.get('sort')
         brand_from_query = self.request.query_params.get('brand')
         allow_unapproved = self.request.query_params.get('allow-unapproved', 'false').lower() == 'true'
+        allow_diy = self.request.query_params.get("allow-DIY", "false") == "true"
 
         manager = self.get_serializer().Meta.model.objects
         queryset = manager.all().select_related('brand')
@@ -89,7 +90,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 ) &
                 EquipmentItemService.non_diy_or_creator_or_moderator_queryset(
                     self.request.user,
-                    is_equipment_moderator
+                    is_equipment_moderator,
+                    allow_diy
                 )
             )
 
@@ -194,6 +196,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             else False
         )
         allow_unapproved = self.request.query_params.get('allow-unapproved', 'false').lower() == 'true'
+        allow_diy = self.request.query_params.get("allow-DIY", "false") == "true"
 
         queryset = item.variants.filter(
             EquipmentItemService.approved_or_creator_or_moderator_queryset(
@@ -201,7 +204,11 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 is_equipment_moderator,
                 allow_unapproved
             ) &
-            EquipmentItemService.non_diy_or_creator_or_moderator_queryset(self.request.user, is_equipment_moderator)
+            EquipmentItemService.non_diy_or_creator_or_moderator_queryset(
+                self.request.user,
+                is_equipment_moderator,
+                allow_diy
+            )
         )
 
         serializer = self.serializer_class(queryset, many=True)

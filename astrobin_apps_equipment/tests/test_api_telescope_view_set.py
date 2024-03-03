@@ -30,6 +30,56 @@ class TestApiTelescopeViewSet(TestCase):
         self.assertEquals(1, response.data['count'])
         self.assertEquals(telescope.name, response.data['results'][0]['name'])
 
+    def test_list_diy(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        Telescope.objects.filter(pk=telescope.pk).update(brand=None)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+        self.assertEquals(0, response.data['count'])
+
+    def test_list_diy_but_creator(self):
+        client = APIClient()
+
+        user = Generators.user()
+        telescope = EquipmentGenerators.telescope(
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+            created_by=user
+        )
+        Telescope.objects.filter(pk=telescope.pk).update(brand=None)
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(telescope.name, response.data['results'][0]['name'])
+
+    def test_list_diy_but_moderator(self):
+        client = APIClient()
+
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        Telescope.objects.filter(pk=telescope.pk).update(brand=None)
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(telescope.name, response.data['results'][0]['name'])
+
+    def test_list_diy_but_override(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        Telescope.objects.filter(pk=telescope.pk).update(brand=None)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list') + '?allow-DIY=true', format='json')
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(telescope.name, response.data['results'][0]['name'])
+
     def test_list_unapproved(self):
         client = APIClient()
 
