@@ -65,6 +65,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         q = self.request.query_params.get('q')
         sort = self.request.query_params.get('sort')
         brand_from_query = self.request.query_params.get('brand')
+        allow_unapproved = self.request.query_params.get('allow-unapproved', 'false').lower() == 'true'
 
         manager = self.get_serializer().Meta.model.objects
         queryset = manager.all().select_related('brand')
@@ -75,14 +76,22 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(variant_of__isnull=True)
 
         if 'EditProposal' not in str(self.get_serializer().Meta.model):
-            if self.request.user.is_authenticated:
-                if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
-                    queryset = queryset.filter(EquipmentItemService.non_moderator_queryset(self.request.user))
-            else:
-                queryset = queryset.filter(
-                    brand__isnull=False,
-                    reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+            is_equipment_moderator = (
+                UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
+                if self.request.user.is_authenticated
+                else False
+            )
+            queryset = queryset.filter(
+                EquipmentItemService.approved_or_creator_or_moderator_queryset(
+                    self.request.user,
+                    is_equipment_moderator,
+                    allow_unapproved
+                ) &
+                EquipmentItemService.non_diy_or_creator_or_moderator_queryset(
+                    self.request.user,
+                    is_equipment_moderator
                 )
+            )
 
         if q:
             brand = get_object_or_None(EquipmentBrand, name__iexact=q)
@@ -179,17 +188,21 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
     def variants(self, request, pk):
         manager = self.get_serializer().Meta.model.objects
         item: EquipmentItem = get_object_or_404(manager, pk=pk)
+        is_equipment_moderator = (
+            UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
+            if self.request.user.is_authenticated
+            else False
+        )
+        allow_unapproved = self.request.query_params.get('allow-unapproved', 'false').lower() == 'true'
 
-        if self.request.user.is_authenticated:
-            if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
-                queryset = item.variants.filter(EquipmentItemService.non_moderator_queryset(request.user))
-            else:
-                queryset = item.variants.all()
-        else:
-            queryset = item.variants.filter(
-                brand__isnull=False,
-                reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
-            )
+        queryset = item.variants.filter(
+            EquipmentItemService.approved_or_creator_or_moderator_queryset(
+                request.user,
+                is_equipment_moderator,
+                allow_unapproved
+            ) &
+            EquipmentItemService.non_diy_or_creator_or_moderator_queryset(self.request.user, is_equipment_moderator)
+        )
 
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
@@ -317,12 +330,16 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 ~Q(name=q)
             )
 
-            if not request.user.is_authenticated or not UserService(request.user).is_in_group(
-                    GroupName.EQUIPMENT_MODERATORS
-            ):
-                queryset = queryset.filter(EquipmentItemService.non_moderator_queryset(request.user))
+            is_equipment_moderator = (
+                UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
+                if self.request.user.is_authenticated
+                else False
+            )
 
-            queryset = queryset.order_by(
+            queryset = queryset.filter(
+                EquipmentItemService.approved_or_creator_or_moderator_queryset(request.user, is_equipment_moderator) &
+                EquipmentItemService.non_diy_or_creator_or_moderator_queryset(self.request.user, is_equipment_moderator)
+            ).order_by(
                 'distance'
             )[:10]
 
@@ -346,10 +363,16 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             if name:
                 queryset = queryset.exclude(name__iexact=name)
 
-            if not request.user.is_authenticated or not UserService(request.user).is_in_group(
-                    GroupName.EQUIPMENT_MODERATORS
-            ):
-                queryset = queryset.filter(EquipmentItemService.non_moderator_queryset(request.user))
+            is_equipment_moderator = (
+                UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
+                if self.request.user.is_authenticated
+                else False
+            )
+
+            queryset = queryset.filter(
+                EquipmentItemService.approved_or_creator_or_moderator_queryset(request.user, is_equipment_moderator) &
+                EquipmentItemService.non_diy_or_creator_or_moderator_queryset(self.request.user, is_equipment_moderator)
+            )
 
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
