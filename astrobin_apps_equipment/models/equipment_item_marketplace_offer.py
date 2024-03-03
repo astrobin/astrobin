@@ -1,7 +1,19 @@
 # -*- coding: utf-8 -*-
+from enum import Enum
+
 from django.contrib.auth.models import User
 from django.db import models
 from safedelete.models import SafeDeleteModel
+
+
+class EquipmentItemMarketplaceOfferStatus(Enum):
+    PENDING = 'PENDING'
+    ACCEPTED = 'ACCEPTED'
+    REJECTED = 'REJECTED'
+
+    @classmethod
+    def choices(cls):
+        return tuple((i.name, i.value) for i in cls)
 
 
 class EquipmentItemMarketplaceOffer(SafeDeleteModel):
@@ -46,6 +58,14 @@ class EquipmentItemMarketplaceOffer(SafeDeleteModel):
         decimal_places=2,
         null=True,
         blank=True,
+    )
+
+    status = models.CharField(
+        max_length=10,
+        choices=EquipmentItemMarketplaceOfferStatus.choices(),
+        default=EquipmentItemMarketplaceOfferStatus.PENDING.name,
+        null=False,
+        editable=False,
     )
 
     class Meta:
