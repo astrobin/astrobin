@@ -55,7 +55,7 @@ from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from astrobin_apps_users.services import UserService
-from common.services import AppRedirectionService, DateTimeService
+from common.services import AppRedirectionService, DateTimeService, SearchIndexUpdateService
 from common.services.constellations_service import ConstellationException, ConstellationsService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
@@ -539,7 +539,11 @@ class ImageService:
         if not self.image.is_wip:
             self.image.is_wip = True
 
+            from astrobin.search_indexes import ImageIndex
+
             UserService(self.image.user).clear_gallery_image_list_cache()
+            ImageIndex().remove_object(self.image)
+            SearchIndexUpdateService.update_index(self.image.user, 300)
 
     def delete_stories(self):
         Action.objects.target(self.image).delete()
