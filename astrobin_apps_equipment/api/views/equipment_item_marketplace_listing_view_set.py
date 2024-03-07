@@ -48,13 +48,24 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     def filter_by_expiration(self, queryset: QuerySet) -> QuerySet:
         now = DateTimeService.now()
         get_expired = self.request.query_params.get('expired', 'false') == 'true'
+        hash_param = self.request.query_params.get('hash')
 
         if get_expired and self.request.user.is_authenticated:
-            return queryset.filter(expiration__lt=now, user=self.request.user)
+            queryset = queryset.filter(Q(expiration__lt=now, user=self.request.user) | Q(expiration__gte=now))
         elif get_expired:
-            return EquipmentItemMarketplaceListing.objects.none()
+            queryset = EquipmentItemMarketplaceListing.objects.none()
         else:
-            return queryset.filter(expiration__gte=now)
+            queryset = queryset.filter(expiration__gte=now)
+
+        if hash_param:
+            queryset = queryset.filter(hash=hash_param)
+            if self.request.user.is_authenticated:
+                # Allow fetching of own expired listing by hash
+                queryset = queryset | EquipmentItemMarketplaceListing.objects.filter(
+                    hash=hash_param, user=self.request.user
+                )
+
+        return queryset
 
     def filter_by_distance(self, queryset: QuerySet) -> QuerySet:
         max_distance = self.request.GET.get('max_distance')
@@ -182,6 +193,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
     def validate_query_params(self):
         allowed_params = [
+            'page',
             'expired',
             'max_distance',
             'distance_unit',

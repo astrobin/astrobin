@@ -198,3 +198,37 @@ class EquipmentItemMarketplaceListingViewSetTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(any(item['id'] == self.listing.pk for item in response.data['results']))
 
+    def test_fetch_own_expired_listing_by_hash(self):
+        self.client.login(username='testuser', password='testpassword')  # Ensure the user is logged in
+
+        # Create an expired listing with a specific hash for the test user
+        expired_listing = EquipmentGenerators.marketplace_listing(
+            user=self.user,
+            expiration=DateTimeService.now() - timedelta(days=1),
+        )
+        EquipmentGenerators.marketplace_line_item(listing=expired_listing)
+
+        # User tries to fetch their own expired listing by hash
+        url = reverse('astrobin_apps_equipment:marketplace-listing-list')
+        response = self.client.get(url, {'hash': expired_listing.hash})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Check if the listing with the specified hash is in the results
+        found = any(listing['hash'] == expired_listing.hash for listing in response.data['results'])
+        self.assertTrue(found, "Expired listing with the specified hash was not found for the owner")
+
+    def test_different_user_cannot_fetch_expired_listing_by_hash(self):
+        url = reverse('astrobin_apps_equipment:marketplace-listing-list')
+        # Create an expired listing for the test user
+        expired_listing = EquipmentGenerators.marketplace_listing(
+            user=self.user,
+            expiration=DateTimeService.now() - timedelta(days=1),
+        )
+        EquipmentGenerators.marketplace_line_item(listing=expired_listing)
+
+        # Different user tries to fetch the test user's expired listing by hash
+        self.client.logout()
+        self.client.login(username='testuser2', password='testpassword')
+        response = self.client.get(url, {'hash': expired_listing.hash})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertFalse(any(listing['id'] == expired_listing.pk for listing in response.data['results']))
