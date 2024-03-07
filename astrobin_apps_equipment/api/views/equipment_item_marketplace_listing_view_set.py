@@ -44,8 +44,12 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         return queryset
 
     def filter_listings(self, queryset: QuerySet) -> QuerySet:
+        now = DateTimeService.now()
+
         if self.request.query_params.get('expired', 'false') == 'true':
-            queryset = queryset.filter(expiration__lt=DateTimeService.now())
+            queryset = queryset.filter(expiration__lt=now)
+        else:
+            queryset = queryset.filter(expiration__gte=now)
 
         if self.request.GET.get('max_distance') and \
                 self.request.GET.get('distance_unit') and \
