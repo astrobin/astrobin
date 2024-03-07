@@ -20,6 +20,7 @@ from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.types.marketplace_listing_condition import MarketplaceListingCondition
 from astrobin_apps_payments.models import ExchangeRate
 from common.permissions import IsObjectUserOrReadOnly
+from common.services import DateTimeService
 
 
 class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
@@ -43,6 +44,9 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         return queryset
 
     def filter_listings(self, queryset: QuerySet) -> QuerySet:
+        if self.request.query_params.get('expired', 'false') == 'true':
+            queryset = queryset.filter(expiration__lt=DateTimeService.now())
+
         if self.request.GET.get('max_distance') and \
                 self.request.GET.get('distance_unit') and \
                 self.request.GET.get('latitude') and \
@@ -75,6 +79,9 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         if self.request.query_params.get('offers_by_user'):
             user_id = self.request.query_params.get('offers_by_user')
             queryset = queryset.filter(offers__user_id=user_id)
+
+        if self.request.query_params.get('sold', 'false') == 'true':
+            queryset = queryset.filter(sold__isnull=False)
 
         if self.request.query_params.get('item_type'):
             item_type = self.request.query_params.get('item_type')
