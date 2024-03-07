@@ -56,6 +56,8 @@ class UserList(generics.ListAPIView):
     ).all()
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('username',)
 
 
 @method_decorator(
