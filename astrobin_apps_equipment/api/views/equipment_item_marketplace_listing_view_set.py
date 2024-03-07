@@ -3,7 +3,6 @@ from typing import Type
 from django.conf import settings
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Prefetch, Q, QuerySet
-from django.http import Http404
 from django.utils.translation import gettext
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -35,15 +34,131 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     filter_fields = ('hash', 'user')
 
     def get_queryset(self) -> QuerySet:
-        line_items_queryset = self.filter_line_items(
-            EquipmentItemMarketplaceListingLineItem.objects.all()
-        )
+        self.validate_query_params()
+        queryset = EquipmentItemMarketplaceListing.objects.all()
+        queryset = self.filter_by_expiration(queryset)
+        queryset = self.filter_by_distance(queryset)
+        queryset = self.filter_by_region(queryset)
 
-        queryset = self.filter_listings(
-            EquipmentItemMarketplaceListing.objects.all()
-        ).prefetch_related(
-            Prefetch('line_items', queryset=line_items_queryset)
-        )
+        line_items_queryset = EquipmentItemMarketplaceListingLineItem.objects.all()
+        line_items_queryset = self.filter_line_items(line_items_queryset)
+
+        return queryset.prefetch_related(Prefetch('line_items', queryset=line_items_queryset))
+
+    def filter_by_expiration(self, queryset: QuerySet) -> QuerySet:
+        now = DateTimeService.now()
+        get_expired = self.request.query_params.get('expired', 'false') == 'true'
+
+        if get_expired and self.request.user.is_authenticated:
+            return queryset.filter(expiration__lt=now, user=self.request.user)
+        elif get_expired:
+            return EquipmentItemMarketplaceListing.objects.none()
+        else:
+            return queryset.filter(expiration__gte=now)
+
+    def filter_by_distance(self, queryset: QuerySet) -> QuerySet:
+        max_distance = self.request.GET.get('max_distance')
+        distance_unit = self.request.GET.get('distance_unit')
+        latitude = self.request.GET.get('latitude')
+        longitude = self.request.GET.get('longitude')
+
+        if max_distance and distance_unit and latitude and longitude:
+            max_distance = float(max_distance)
+            latitude = float(latitude)
+            longitude = float(longitude)
+
+            if distance_unit == 'mi':
+                max_distance *= 1.60934  # Convert miles to kilometers
+            max_distance *= 1000  # Convert kilometers to meters
+
+            return queryset.extra(
+                where=[
+                    "earth_box(ll_to_earth(%s, %s), %s) @> ll_to_earth(latitude, longitude)",
+                    "earth_distance(ll_to_earth(%s, %s), ll_to_earth(latitude, longitude)) <= %s"
+                ],
+                params=[latitude, longitude, max_distance, latitude, longitude, max_distance]
+            )
+        return queryset
+
+    def filter_by_region(self, queryset: QuerySet) -> QuerySet:
+        region = self.request.GET.get('region')
+        if region:
+            return queryset.filter(country=region.upper())
+        return queryset
+
+    def filter_line_items(self, queryset: QuerySet) -> QuerySet:
+        queryset = self.filter_line_items_by_user(queryset)
+        queryset = self.filter_line_items_by_sold_status(queryset)
+        queryset = self.filter_line_items_by_item_type(queryset)
+        queryset = self.filter_line_items_by_price(queryset)
+        queryset = self.filter_line_items_by_condition(queryset)
+        queryset = self.filter_line_items_by_query(queryset)
+        return queryset
+
+    def filter_line_items_by_user(self, queryset: QuerySet) -> QuerySet:
+        user_id = self.request.query_params.get('offers_by_user')
+        return queryset.filter(offers__user_id=user_id) if user_id else queryset
+
+    def filter_line_items_by_sold_status(self, queryset: QuerySet) -> QuerySet:
+        sold = self.request.query_params.get('sold', 'false') == 'true'
+        return queryset.filter(sold__isnull=False) if sold else queryset
+
+    def filter_line_items_by_item_type(self, queryset: QuerySet) -> QuerySet:
+        item_type = self.request.query_params.get('item_type')
+        if item_type:
+            content_type = EquipmentService.item_type_to_content_type(item_type)
+            if content_type:
+                return queryset.filter(item_content_type=content_type)
+        return queryset
+
+    def filter_line_items_by_price(self, queryset: QuerySet) -> QuerySet:
+        currency = self.request.query_params.get('currency')
+        min_price = self.request.query_params.get('min_price')
+        max_price = self.request.query_params.get('max_price')
+
+        if currency and currency not in SUPPORTED_CURRENCIES:
+            raise ValidationError({'currency': gettext('Currency not supported.')})
+
+        exchange_rate = None
+        if currency:
+            exchange_rate = ExchangeRate.objects.filter(source='CHF', target=currency).first()
+            if exchange_rate is None:
+                raise ValidationError({'currency': gettext('AstroBin couldn\'t fetch an exchange rate for the selected currency.')})
+
+        if min_price and currency:
+            min_price = float(min_price)
+            if currency != 'CHF' and exchange_rate and exchange_rate.rate:
+                min_price /= float(exchange_rate.rate)
+            queryset = queryset.filter(price_chf__gte=min_price)
+
+        if max_price and currency:
+            max_price = float(max_price)
+            if currency != 'CHF' and exchange_rate and exchange_rate.rate:
+                max_price /= float(exchange_rate.rate)
+            queryset = queryset.filter(price_chf__lte=max_price)
+
+        return queryset
+
+    def filter_line_items_by_condition(self, queryset: QuerySet) -> QuerySet:
+        condition = self.request.query_params.get('condition')
+        if condition and condition not in (item.value for item in MarketplaceLineItemCondition):
+            raise ValidationError({'condition': gettext('Invalid condition.')})
+        return queryset.filter(condition=condition) if condition else queryset
+
+    def filter_line_items_by_query(self, queryset: QuerySet) -> QuerySet:
+        query = self.request.query_params.get('query')
+        if query:
+            if 'postgres' in settings.DATABASES['default']['ENGINE']:
+                queryset = queryset.annotate(
+                    distance=TrigramDistance('item_name', query),
+                ).filter(
+                    Q(item_name__icontains=query) |
+                    Q(distance__lte=.8)
+                ).order_by(
+                    'distance'
+                )
+            else:
+                queryset = queryset.filter(item_name__icontains=query)
 
         return queryset
 
@@ -58,123 +173,6 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
-
-    def filter_listings(self, queryset: QuerySet) -> QuerySet:
-        self.validate_query_params()
-
-        now = DateTimeService.now()
-        get_expired = self.request.query_params.get('expired', 'false') == 'true'
-
-        if get_expired:
-            if self.request.user.is_authenticated:
-                queryset = queryset.filter(expiration__lt=now, user=self.request.user)
-            else:
-                # Empty queryset for unauthenticated users
-                queryset = EquipmentItemMarketplaceListing.objects.none()
-        else:
-            queryset = queryset.filter(expiration__gte=now)
-
-        if self.request.GET.get('max_distance') and \
-                self.request.GET.get('distance_unit') and \
-                self.request.GET.get('latitude') and \
-                self.request.GET.get('longitude'):
-            max_distance = float(self.request.GET.get('max_distance'))
-            distance_unit = self.request.GET.get('distance_unit')
-            latitude = float(self.request.GET.get('latitude'))
-            longitude = float(self.request.GET.get('longitude'))
-
-            if distance_unit == 'mi':
-                max_distance *= 1.60934  # Convert miles to kilometers
-
-            max_distance *= 1000  # Convert kilometers to meters
-
-            queryset = queryset.extra(
-                where=[
-                    "earth_box(ll_to_earth(%s, %s), %s) @> ll_to_earth(latitude, longitude)",
-                    "earth_distance(ll_to_earth(%s, %s), ll_to_earth(latitude, longitude)) <= %s"
-                ],
-                params=[latitude, longitude, max_distance, latitude, longitude, max_distance]
-            )
-
-        if self.request.GET.get('region'):
-            region = self.request.GET.get('region')
-            queryset = queryset.filter(country=region.upper())
-
-        return queryset
-
-    def filter_line_items(self, queryset: QuerySet) -> QuerySet:
-        if self.request.query_params.get('offers_by_user'):
-            user_id = self.request.query_params.get('offers_by_user')
-            queryset = queryset.filter(offers__user_id=user_id)
-
-        if self.request.query_params.get('sold', 'false') == 'true':
-            queryset = queryset.filter(sold__isnull=False)
-
-        if self.request.query_params.get('item_type'):
-            item_type = self.request.query_params.get('item_type')
-            content_type = EquipmentService.item_type_to_content_type(item_type)
-            if content_type:
-                queryset = queryset.filter(item_content_type=content_type)
-
-        if self.request.query_params.get('currency'):
-            currency = self.request.query_params.get('currency')
-            if currency not in SUPPORTED_CURRENCIES:
-                raise ValidationError(
-                    {
-                        'currency': gettext('Currency not supported.')
-                    }
-                )
-            exchange_rate = ExchangeRate.objects.filter(source='CHF', target=currency).first()
-            if exchange_rate is None:
-                raise ValidationError(
-                    {
-                        'currency': gettext('AstroBin couldn\'t fetch an exchange rate for the selected currency.')
-                    }
-                )
-        else:
-            currency = None
-            exchange_rate = None
-
-        if self.request.query_params.get('min_price') and currency:
-            min_price = float(self.request.query_params.get('min_price'))
-            if currency != 'CHF':
-                if exchange_rate and exchange_rate.rate:
-                    min_price /= float(exchange_rate.rate)
-            queryset = queryset.filter(price_chf__gte=min_price)
-
-        if self.request.query_params.get('max_price') and currency:
-            max_price = float(self.request.query_params.get('max_price'))
-            if currency != 'CHF':
-                if exchange_rate and exchange_rate.rate:
-                    max_price /= float(exchange_rate.rate)
-            queryset = queryset.filter(price_chf__lte=max_price)
-
-        if self.request.query_params.get('condition'):
-            condition = self.request.query_params.get('condition')
-            if condition not in (item.value for item in MarketplaceLineItemCondition):
-                raise ValidationError(
-                    {
-                        'condition': gettext('Invalid condition.')
-                    }
-                )
-            queryset = queryset.filter(condition=condition)
-
-        if self.request.query_params.get('query'):
-            query = self.request.query_params.get('query')
-
-            if 'postgres' in settings.DATABASES['default']['ENGINE']:
-                queryset = queryset.annotate(
-                    distance=TrigramDistance('item_name', query),
-                ).filter(
-                    Q(item_name__icontains=query) |
-                    Q(distance__lte=.8)
-                ).order_by(
-                    'distance'
-                )
-            else:
-                queryset = queryset.filter(item_name__icontains=query)
-
-        return queryset
 
     def get_serializer_class(self) -> Type[serializers.ModelSerializer]:
         if self.request.method in ['PUT', 'POST']:
