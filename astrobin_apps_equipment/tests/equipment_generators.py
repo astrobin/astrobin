@@ -1,8 +1,12 @@
+from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.models import Camera, Sensor, Telescope, Mount, Filter, Accessory, Software, \
-    EquipmentItemGroup
+from astrobin_apps_equipment.models import (
+    Camera, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem, Sensor, Telescope, Mount, Filter,
+    Accessory, Software,
+    EquipmentItemGroup,
+)
 from astrobin_apps_equipment.models.accessory_base_model import AccessoryType
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
@@ -13,6 +17,7 @@ from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 from astrobin_apps_equipment.models.filter_base_model import FilterSize, FilterType
 from astrobin_apps_equipment.models.mount_base_model import MountType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
+from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
 
 
 class EquipmentGenerators:
@@ -222,4 +227,40 @@ class EquipmentGenerators:
             retailer=retailer,
             item_content_object=item_content_object,
             url=kwargs.get('url', "%s/shop/%s" % (retailer.website, slugify(brand))),
+        )
+
+    @staticmethod
+    def marketplace_line_item(**kwargs):
+        user = kwargs.get('user')
+        listing = kwargs.get('listing')
+        item = kwargs.get('item')
+
+        if user is None:
+            user = Generators.user()
+
+        if listing is None:
+            listing = EquipmentGenerators.marketplace_listing()
+
+        if item is None:
+            item = EquipmentGenerators.telescope()
+
+        return EquipmentItemMarketplaceListingLineItem.objects.create(
+            user=user,
+            listing=listing,
+            price=kwargs.get('price', 1000),
+            condition=kwargs.get('condition', MarketplaceLineItemCondition.NEW),
+            item_object_id=item.pk,
+            item_content_type=ContentType.objects.get_for_model(item),
+        )
+
+    @staticmethod
+    def marketplace_listing(**kwargs):
+        user = kwargs.get('user')
+
+        if user is None:
+            user = Generators.user()
+
+        return EquipmentItemMarketplaceListing.objects.create(
+            user=user,
+            expiration=kwargs.get('expiration')
         )

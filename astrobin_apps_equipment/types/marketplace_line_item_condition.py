@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class MarketplaceListingCondition(Enum):
+class MarketplaceLineItemCondition(Enum):
     UNOPENED = 'UNOPENED'
     NEW = 'NEW'
     USED = 'USED'

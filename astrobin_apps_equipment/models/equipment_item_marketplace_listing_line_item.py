@@ -6,16 +6,16 @@ from django.db import models
 from django.utils.translation import gettext
 
 from astrobin.fields import CURRENCY_CHOICES
-from astrobin_apps_equipment.types.marketplace_listing_condition import MarketplaceListingCondition
+from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
 from astrobin_apps_payments.models import ExchangeRate
 from common.models.hashed_model import HashedSafeDeleteModel
 
 EQUIPMENT_ITEM_MARKETPLACE_LISTING_CONDITION_CHOICES = (
-    (MarketplaceListingCondition.UNOPENED.value, gettext("Unopened")),
-    (MarketplaceListingCondition.NEW.value, gettext("New")),
-    (MarketplaceListingCondition.USED.value, gettext("Used")),
-    (MarketplaceListingCondition.DAMAGED_OR_DEFECTIVE.value, gettext("Damaged or defective")),
-    (MarketplaceListingCondition.OTHER.value, gettext("Other")),
+    (MarketplaceLineItemCondition.UNOPENED.value, gettext("Unopened")),
+    (MarketplaceLineItemCondition.NEW.value, gettext("New")),
+    (MarketplaceLineItemCondition.USED.value, gettext("Used")),
+    (MarketplaceLineItemCondition.DAMAGED_OR_DEFECTIVE.value, gettext("Damaged or defective")),
+    (MarketplaceLineItemCondition.OTHER.value, gettext("Other")),
 )
 
 

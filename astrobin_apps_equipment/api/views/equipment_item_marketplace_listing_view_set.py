@@ -1,14 +1,18 @@
 from typing import Type
 
+from django.conf import settings
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Prefetch, Q, QuerySet
+from django.http import Http404
 from django.utils.translation import gettext
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.request import Request
+from rest_framework.response import Response
 
 from astrobin.settings.components.payments import SUPPORTED_CURRENCIES
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_read_serializer import \
@@ -17,7 +21,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
     EquipmentItemMarketplaceListingSerializer
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem
 from astrobin_apps_equipment.services import EquipmentService
-from astrobin_apps_equipment.types.marketplace_listing_condition import MarketplaceListingCondition
+from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
 from astrobin_apps_payments.models import ExchangeRate
 from common.permissions import IsObjectUserOrReadOnly
 from common.services import DateTimeService
@@ -43,11 +47,30 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-    def filter_listings(self, queryset: QuerySet) -> QuerySet:
-        now = DateTimeService.now()
+    def retrieve(self, request: Request, *args: object, **kwargs: object) -> object:
+        try:
+            instance = EquipmentItemMarketplaceListing.objects.get(pk=kwargs['pk'])
+        except EquipmentItemMarketplaceListing.DoesNotExist:
+            raise NotFound()
 
-        if self.request.query_params.get('expired', 'false') == 'true':
-            queryset = queryset.filter(expiration__lt=now)
+        if instance.expiration < DateTimeService.now() and instance.user != request.user:
+            raise NotFound()
+
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+    def filter_listings(self, queryset: QuerySet) -> QuerySet:
+        self.validate_query_params()
+
+        now = DateTimeService.now()
+        get_expired = self.request.query_params.get('expired', 'false') == 'true'
+
+        if get_expired:
+            if self.request.user.is_authenticated:
+                queryset = queryset.filter(expiration__lt=now, user=self.request.user)
+            else:
+                # Empty queryset for unauthenticated users
+                queryset = EquipmentItemMarketplaceListing.objects.none()
         else:
             queryset = queryset.filter(expiration__gte=now)
 
@@ -118,7 +141,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
                 if exchange_rate and exchange_rate.rate:
                     min_price /= float(exchange_rate.rate)
             queryset = queryset.filter(price_chf__gte=min_price)
-            
+
         if self.request.query_params.get('max_price') and currency:
             max_price = float(self.request.query_params.get('max_price'))
             if currency != 'CHF':
@@ -128,7 +151,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         if self.request.query_params.get('condition'):
             condition = self.request.query_params.get('condition')
-            if condition not in (item.value for item in MarketplaceListingCondition):
+            if condition not in (item.value for item in MarketplaceLineItemCondition):
                 raise ValidationError(
                     {
                         'condition': gettext('Invalid condition.')
@@ -138,14 +161,18 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         if self.request.query_params.get('query'):
             query = self.request.query_params.get('query')
-            queryset = queryset.annotate(
-                distance=TrigramDistance('item_name', query),
-            ).filter(
-                Q(item_name__icontains=query) |
-                Q(distance__lte=.8)
-            ).order_by(
-                'distance'
-            )
+
+            if 'postgres' in settings.DATABASES['default']['ENGINE']:
+                queryset = queryset.annotate(
+                    distance=TrigramDistance('item_name', query),
+                ).filter(
+                    Q(item_name__icontains=query) |
+                    Q(distance__lte=.8)
+                ).order_by(
+                    'distance'
+                )
+            else:
+                queryset = queryset.filter(item_name__icontains=query)
 
         return queryset
 
@@ -154,3 +181,27 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             return EquipmentItemMarketplaceListingSerializer
 
         return EquipmentItemMarketplaceListingReadSerializer
+
+    def validate_query_params(self):
+        allowed_params = [
+            'expired',
+            'max_distance',
+            'distance_unit',
+            'latitude',
+            'longitude',
+            'region',
+            'offers_by_user',
+            'sold',
+            'item_type',
+            'currency',
+            'min_price',
+            'max_price',
+            'condition',
+            'query',
+            'user',
+            'hash',
+        ]
+
+        for param in self.request.query_params:
+            if param not in allowed_params:
+                raise ValidationError({'detail': f'Invalid query parameter: {param}'})
