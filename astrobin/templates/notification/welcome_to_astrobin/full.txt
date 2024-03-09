@@ -28,12 +28,6 @@ https://welcome.astrobin.com/faq
 {{ BASE_URL }}{% url 'profile_edit_basic' %}
 
 {% blocktrans trimmed %}
-    If you have astrophotography equipment, add it to your gear so that later you can associate it with the images you
-    upload:
-{% endblocktrans %}
-{{ BASE_URL }}{% url 'profile_edit_gear' %}
-
-{% blocktrans trimmed %}
     If you want, why not introduce yourself on the forums?
 {% endblocktrans %}
 {{ BASE_URL|add:'/forum/c/off-topic/introduce-yourself/' }}

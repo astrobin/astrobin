@@ -46,14 +46,6 @@
     </li>
 
     <li>
-        {% url 'profile_edit_gear' as profile_edit_gear %}
-        {% blocktrans trimmed with url=BASE_URL|add:profile_edit_gear %}
-            If you have astrophotography equipment, add it to <a href="{{ url }}">your gear</a> so that
-            later you can associate it with the images you upload.
-        {% endblocktrans %}
-    </li>
-
-    <li>
         {% blocktrans trimmed with url=BASE_URL|add:'/forum/c/off-topic/introduce-yourself/' %}
             If you want, why not <a href="{{ url }}">introduce yourself</a> on the forums?
         {% endblocktrans %}
