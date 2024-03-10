@@ -6,7 +6,7 @@ from functools import reduce
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.template.defaultfilters import striptags
 from haystack.constants import Indexable
 from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, IntegerField, MultiValueField
@@ -314,7 +314,13 @@ class UserIndex(CelerySearchIndex, Indexable):
     iotds = IntegerField()
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.all()
+        return self.get_model().objects.annotate(
+            num_images=Count('image', filter=Q(image__moderator_decision=ModeratorDecision.APPROVED)),
+            num_posts=Count('posts', filter=Q(posts__on_moderation=False)),
+            num_comments=Count('comments', filter=Q(comments__deleted=False))
+        ).filter(
+            Q(num_images__gt=0) | Q(num_posts__gt=0) | Q(num_comments__gt=0)
+        )
 
     def get_model(self):
         return User
