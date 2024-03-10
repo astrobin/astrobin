@@ -25,7 +25,7 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_users.services import UserService
-from common.utils import astrobin_index, get_segregated_reader_database
+from common.utils import get_segregated_reader_database
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -315,11 +315,13 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def index_queryset(self, using=None):
         return self.get_model().objects.annotate(
-            num_images=Count('image', filter=Q(image__moderator_decision=ModeratorDecision.APPROVED)),
+            num_images=Count(
+                'image',
+                filter=Q(image__moderator_decision=ModeratorDecision.APPROVED) & Q(image__deleted__isnull=False)
+            ),
             num_posts=Count('posts', filter=Q(posts__on_moderation=False)),
-            num_comments=Count('comments', filter=Q(comments__deleted=False))
         ).filter(
-            Q(num_images__gt=0) | Q(num_posts__gt=0) | Q(num_comments__gt=0)
+            Q(num_images__gt=0) | Q(num_posts__gt=0)
         )
 
     def get_model(self):
