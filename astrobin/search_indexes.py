@@ -21,6 +21,7 @@ from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition, Camera as LegacyCamera
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import Camera
+from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
@@ -504,6 +505,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
     software_2_id = CharField()
 
     has_modified_camera = BooleanField()
+    has_color_camera = BooleanField()
+    has_mono_camera = BooleanField()
 
     coord_ra_min = FloatField()
     coord_ra_max = FloatField()
@@ -753,6 +756,22 @@ class ImageIndex(CelerySearchIndex, Indexable):
         camera: Camera
         for camera in obj.imaging_cameras_2.all().iterator():
             if camera.modified:
+                return True
+
+        return False
+
+    def prepare_has_color_camera(self, obj):
+        camera: Camera
+        for camera in obj.imaging_cameras_2.all().iterator():
+            if camera.sensor and camera.sensor.color_or_mono == ColorOrMono.COLOR.value:
+                return True
+
+        return False
+
+    def prepare_has_mono_camera(self, obj):
+        camera: Camera
+        for camera in obj.imaging_cameras_2.all().iterator():
+            if camera.sensor and camera.sensor.color_or_mono == ColorOrMono.MONO.value:
                 return True
 
         return False

@@ -24,6 +24,7 @@ from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerD
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.models.filter_edit_proposal import FilterEditProposal
 from astrobin_apps_equipment.models.mount_edit_proposal import MountEditProposal
+from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditProposal
 from astrobin_apps_equipment.models.software_edit_proposal import SoftwareEditProposal
 from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEditProposal
@@ -336,10 +337,10 @@ def set_search_friendly_name_for_camera(sender, instance, **kwargs):
 
     search_friendly_name += f' {" ".join(UtilsService.split_text_alphanumerically(instance.name))}'
 
-    if instance.sensor and instance.sensor.color_or_mono == 'C':
+    if instance.sensor and instance.sensor.color_or_mono == ColorOrMono.COLOR.value:
         search_friendly_name += f' color'
 
-    if instance.sensor and instance.sensor.color_or_mono == 'M':
+    if instance.sensor and instance.sensor.color_or_mono == ColorOrMono.MONO.value:
         search_friendly_name += f' mono'
 
     instance.search_friendly_name = search_friendly_name.strip()
