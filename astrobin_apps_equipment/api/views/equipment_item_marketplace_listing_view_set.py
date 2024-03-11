@@ -1,8 +1,9 @@
 from typing import Type
 
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
-from django.db.models import Prefetch, Q, QuerySet
+from django.db.models import OuterRef, Prefetch, Q, QuerySet
 from django.utils.translation import gettext
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -24,6 +25,7 @@ from astrobin_apps_equipment.types.marketplace_line_item_condition import Market
 from astrobin_apps_payments.models import ExchangeRate
 from common.permissions import IsObjectUserOrReadOnly
 from common.services import DateTimeService
+from toggleproperties.models import ToggleProperty
 
 
 class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
@@ -99,6 +101,8 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
     def filter_line_items(self, queryset: QuerySet) -> QuerySet:
         queryset = self.filter_line_items_with_offers_by_user(queryset)
+        queryset = self.filter_line_items_sold_to_user(queryset)
+        queryset = self.filter_line_items_followed_by_user(queryset)
         queryset = self.filter_line_items_by_sold_status(queryset)
         queryset = self.filter_line_items_by_item_type(queryset)
         queryset = self.filter_line_items_by_price(queryset)
@@ -110,23 +114,41 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         try:
             user_id = int(self.request.query_params.get('offers_by_user'))
         except (ValueError, TypeError):
-            return queryset.none()
+            return queryset
 
         if self.request.user.is_authenticated and user_id == self.request.user.id:
             return queryset.filter(offers__user_id=user_id)
 
-        return queryset.none()
+        return queryset
 
     def filter_line_items_sold_to_user(self, queryset: QuerySet) -> QuerySet:
         try:
             user_id = int(self.request.query_params.get('sold_to_user'))
         except (ValueError, TypeError):
-            return queryset.none()
+            return queryset
 
         if self.request.user.is_authenticated and user_id == self.request.user.id:
             return queryset.filter(sold_to=user_id)
 
-        return queryset.none()
+        return queryset
+
+    def filter_line_items_followed_by_user(self, queryset: QuerySet) -> QuerySet:
+        try:
+            user_id = int(self.request.query_params.get('followed_by_user'))
+        except (ValueError, TypeError):
+            return queryset
+
+        if self.request.user.is_authenticated and user_id == self.request.user.id:
+            followed_item_ids = ToggleProperty.objects.filter(
+                user=self.request.user,
+                content_type=ContentType.objects.get_for_model(EquipmentItemMarketplaceListing),
+                object_id=OuterRef('pk'),
+                property_type='follow'
+            ).values_list('object_id', flat=True)
+
+            return queryset.filter(pk__in=followed_item_ids)
+
+        return queryset
 
     def filter_line_items_by_sold_status(self, queryset: QuerySet) -> QuerySet:
         sold = self.request.query_params.get('sold', 'false') == 'true'
@@ -220,6 +242,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             'region',
             'offers_by_user',
             'sold_to_user',
+            'followed_by_user',
             'sold',
             'item_type',
             'currency',

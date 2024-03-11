@@ -9,6 +9,8 @@ from toggleproperties.models import ToggleProperty
 
 class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
     line_items = EquipmentItemMarketplaceListingLineItemReadSerializer(many=True, read_only=True)
+    # Whether the current user is following the listing
+    followed = serializers.SerializerMethodField(read_only=True)
     follower_count = serializers.SerializerMethodField(read_only=True)
     view_count = serializers.SerializerMethodField(read_only=True)
     hitcount_pk = serializers.SerializerMethodField(read_only=True)
@@ -18,6 +20,12 @@ class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         validated_data['user'] = user
         return super().create(validated_data)
+
+    def get_followed(self, obj):
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            return ToggleProperty.objects.toggleproperties_for_object('follow', obj, request.user).exists()
+        return False
 
     def get_follower_count(self, obj):
         return ToggleProperty.objects.toggleproperties_for_object('follow', obj).count()
