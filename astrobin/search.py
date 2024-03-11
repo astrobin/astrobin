@@ -15,6 +15,7 @@ from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
 from astrobin.enums import SolarSystemSubject, SubjectType
+from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_groups.models import Group
 from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
@@ -79,6 +80,7 @@ FIELDS = (
     'size_min',
     'size_max',
     'modified_camera',
+    'color_or_mono',
     'topic',
     'filter_types',
 
@@ -167,6 +169,7 @@ class AstroBinSearchForm(SearchForm):
     size_min = forms.IntegerField(required=False)
     size_max = forms.IntegerField(required=False)
     modified_camera = forms.CharField(required=False)
+    color_or_mono = forms.CharField(required=False)
     topic = forms.IntegerField(required=False)
     filter_types = forms.CharField(required=False)
 
@@ -742,6 +745,24 @@ class AstroBinSearchForm(SearchForm):
 
         return results.filter(has_modified_camera=modified)
 
+    def filter_by_color_or_mono(self, results):
+        value = self.cleaned_data.get("color_or_mono")
+        queries = []
+
+        if value is not None and value != "":
+            types = value.split(',')
+
+            if ColorOrMono.COLOR.value in types:
+                queries.append(Q(has_color_camera=True))
+
+            if ColorOrMono.MONO.value in types:
+                queries.append(Q(has_mono_camera=True))
+
+        if len(queries) > 0:
+            results = results.filter(reduce(or_, queries))
+
+        return results
+
     def filter_by_forum_topic(self, results):
         topic = self.cleaned_data.get("topic")
 
@@ -851,6 +872,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_h(sqs)
         sqs = self.filter_by_size(sqs)
         sqs = self.filter_by_modified_camera(sqs)
+        sqs = self.filter_by_color_or_mono(sqs)
         sqs = self.filter_by_forum_topic(sqs)
         sqs = self.filter_by_filter_types(sqs)
 

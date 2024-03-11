@@ -1,8 +1,15 @@
+from enum import Enum
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
+
+
+class ColorOrMono(Enum):
+    COLOR = 'C'
+    MONO = 'M'
 
 
 class SensorBaseModel(EquipmentItem):
@@ -84,8 +91,8 @@ class SensorBaseModel(EquipmentItem):
         null=True,
         blank=True,
         choices=(
-            ('C', _('Color')),
-            ('M', _('Monochromatic')),
+            (ColorOrMono.COLOR.value, _('Color')),
+            (ColorOrMono.MONO.value, _('Monochromatic')),
         ),
         verbose_name=_("Color or mono")
     )
