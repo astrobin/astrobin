@@ -98,7 +98,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         return queryset
 
     def filter_line_items(self, queryset: QuerySet) -> QuerySet:
-        queryset = self.filter_line_items_by_user(queryset)
+        queryset = self.filter_line_items_with_offers_by_user(queryset)
         queryset = self.filter_line_items_by_sold_status(queryset)
         queryset = self.filter_line_items_by_item_type(queryset)
         queryset = self.filter_line_items_by_price(queryset)
@@ -106,9 +106,27 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         queryset = self.filter_line_items_by_query(queryset)
         return queryset
 
-    def filter_line_items_by_user(self, queryset: QuerySet) -> QuerySet:
-        user_id = self.request.query_params.get('offers_by_user')
-        return queryset.filter(offers__user_id=user_id) if user_id else queryset
+    def filter_line_items_with_offers_by_user(self, queryset: QuerySet) -> QuerySet:
+        try:
+            user_id = int(self.request.query_params.get('offers_by_user'))
+        except (ValueError, TypeError):
+            return queryset.none()
+
+        if self.request.user.is_authenticated and user_id == self.request.user.id:
+            return queryset.filter(offers__user_id=user_id)
+
+        return queryset.none()
+
+    def filter_line_items_sold_to_user(self, queryset: QuerySet) -> QuerySet:
+        try:
+            user_id = int(self.request.query_params.get('sold_to_user'))
+        except (ValueError, TypeError):
+            return queryset.none()
+
+        if self.request.user.is_authenticated and user_id == self.request.user.id:
+            return queryset.filter(sold_to=user_id)
+
+        return queryset.none()
 
     def filter_line_items_by_sold_status(self, queryset: QuerySet) -> QuerySet:
         sold = self.request.query_params.get('sold', 'false') == 'true'
@@ -201,6 +219,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             'longitude',
             'region',
             'offers_by_user',
+            'sold_to_user',
             'sold',
             'item_type',
             'currency',
