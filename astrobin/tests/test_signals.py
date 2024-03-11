@@ -1,5 +1,5 @@
 import time
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 import mock
 from django.test import TestCase, override_settings
@@ -659,6 +659,27 @@ class SignalsTest(TestCase):
                 ),
             ]
         )
+
+    def test_user_becomes_submitter_resets_iotd_reminder_flags(self):
+        admin = Generators.user()
+        user = Generators.user()
+        user.userprofile.inactive_account_reminder_sent = datetime.now()
+        user.userprofile.insufficiently_active_iotd_staff_member_reminders_sent = 1
+        user.userprofile.save()
+
+        group = Group.objects.create(
+            name='IOTD Submitters',
+            creator=admin,
+            owner=admin,
+            public=True,
+        )
+
+        group.members.add(user)
+
+        user.userprofile.refresh_from_db()
+
+        self.assertEquals(0, user.userprofile.insufficiently_active_iotd_staff_member_reminders_sent)
+        self.assertEquals(None, user.userprofile.inactive_account_reminder_sent)
 
     def test_soft_deleting_image_soft_deletes_revisions(self):
         image = Generators.image()
