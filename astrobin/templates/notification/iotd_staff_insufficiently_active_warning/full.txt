@@ -5,22 +5,19 @@
 {% endblocktrans %}
 
 {% blocktrans trimmed %}
-    While the AstroBin IOTD selection process has a good level of redundancy built into the system, it still relies on
-    the members of the staff regularly making selections from their respective queues.
+    While the AstroBin IOTD selection process has a good level of redundancy built into the system, it still relies
+    on the members of the staff regularly making selections from their respective queues.
 {% endblocktrans %}
 
 {% blocktrans trimmed %}
-   As you have not been sufficiently active for a significant amount of time, you have been removed from the IOTD staff
-   for now.
+    During the last {{min_promotions_days}} days, you have made less than {{min_promotions}} selections, and this is not
+    enough to sustain the IOTD/TP process. If this continues, unfortunately you will be automatically removed from the
+    staff.
 {% endblocktrans %}
 
 {% blocktrans trimmed %}
     This will ensure that potential IOTD or Top Pick candidates don't go unnoticed sitting in the queue of an
     inactive staff member.
-{% endblocktrans %}
-
-{% blocktrans %}
-    If the reason for your inactivity is temporary, please let us know and we will be happy to reinstate you.
 {% endblocktrans %}
 
 {% blocktrans trimmed %}

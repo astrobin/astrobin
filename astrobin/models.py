@@ -2952,6 +2952,10 @@ class UserProfile(SafeDeleteModel):
                     'and non intrusive, and it would help a lot if you didn\'t disable it. Thank you in advance!')
     )
 
+    insufficiently_active_iotd_staff_member_reminders_sent = models.PositiveSmallIntegerField(
+        default=0
+    )
+
     inactive_account_reminder_sent = models.DateTimeField(
         null=True
     )

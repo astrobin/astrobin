@@ -1,0 +1,69 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="color-or-mono-filter-template">
+    {% if valid_usersubscription|can_access_advanced_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                           selectLabel="" deselectLabel="" selectedLabel="" :multiple="true" :searchable="false"
+                           placeholder="{% trans "Select" %}">
+            </v-multiselect>
+            <input type="hidden" name="color_or_mono" :value="getFormValue()">
+        </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("color-or-mono-filter", {
+        template: "#color-or-mono-filter-template",
+        props: [
+            "colorOrMono"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                options: [
+                    {
+                        id: "C",
+                        label: "{% trans "Color" %}"
+                    },
+                    {
+                        id: "M",
+                        label: "{% trans "Mono" %}"
+                    }
+                ]
+            }
+        },
+        created: function() {
+            if (this.colorOrMono) {
+                const types = this.colorOrMono.split(',');
+
+                for (let i = 0; i < this.options.length; i++) {
+                    if (types.indexOf(this.options[i].id) > -1) {
+                        this.value.push(this.options[i]);
+                    }
+                }
+            }
+        },
+        methods: {
+            getFormValue: function () {
+                if (Array.isArray(this.value)) {
+                    return this.value.map(function (v) {
+                        return v.id;
+                    }).join(',');
+                }
+
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

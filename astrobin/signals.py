@@ -982,6 +982,12 @@ def group_members_changed(sender, instance, **kwargs):
 
         # Sync IOTD AstroBin groups with django groups
         if instance.name in list(group_sync_map.keys()):
+            for user in users:
+                UserProfile.objects.filter(user=user).update(
+                    insufficiently_active_iotd_staff_member_reminders_sent=0,
+                    inactive_account_reminder_sent=None
+                )
+
             for django_group in django_groups:
                 django_group.user_set.add(*list(users))
             if iotd_staff_group:

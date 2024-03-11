@@ -346,6 +346,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'iotd_staff_insufficiently_active_warning',
+        _("Your IOTD staff activity is insufficient"),
+        '',
+        2
+    ),
+    (
         'image_you_promoted_is_tp',
         _("An image you promoted made it to Top Pick"),
         '',

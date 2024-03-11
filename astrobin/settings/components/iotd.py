@@ -30,3 +30,6 @@ IOTD_MAX_INACTIVE_DAYS = 30
 IOTD_MAX_DISMISSALS = 5
 
 IOTD_LAST_RULES_UPDATE = datetime(2023, 11, 9)
+
+# Minimum required promotions to be considered active (promotions/days)
+IOTD_MIN_PROMOTIONS_PER_PERIOD = '7/7'

@@ -183,7 +183,6 @@ class UserService:
                 try:
                     result = user_sqs[0]
                 except IndexError:
-                    log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
                     data = {}
 
                 try:
@@ -212,7 +211,6 @@ class UserService:
                 else:
                     cache.set(key, data, 300)
             else:
-                log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
                 data = {}
 
         return data

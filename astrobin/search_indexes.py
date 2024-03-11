@@ -6,7 +6,7 @@ from functools import reduce
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.template.defaultfilters import striptags
 from haystack.constants import Indexable
 from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, IntegerField, MultiValueField
@@ -21,11 +21,12 @@ from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition, Camera as LegacyCamera
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import Camera
+from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_users.services import UserService
-from common.utils import astrobin_index, get_segregated_reader_database
+from common.utils import get_segregated_reader_database
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -314,7 +315,15 @@ class UserIndex(CelerySearchIndex, Indexable):
     iotds = IntegerField()
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.all()
+        return self.get_model().objects.annotate(
+            num_images=Count(
+                'image',
+                filter=Q(image__moderator_decision=ModeratorDecision.APPROVED) & Q(image__deleted__isnull=False)
+            ),
+            num_posts=Count('posts', filter=Q(posts__on_moderation=False)),
+        ).filter(
+            Q(num_images__gt=0) | Q(num_posts__gt=0)
+        )
 
     def get_model(self):
         return User
@@ -496,6 +505,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
     software_2_id = CharField()
 
     has_modified_camera = BooleanField()
+    has_color_camera = BooleanField()
+    has_mono_camera = BooleanField()
 
     coord_ra_min = FloatField()
     coord_ra_max = FloatField()
@@ -745,6 +756,22 @@ class ImageIndex(CelerySearchIndex, Indexable):
         camera: Camera
         for camera in obj.imaging_cameras_2.all().iterator():
             if camera.modified:
+                return True
+
+        return False
+
+    def prepare_has_color_camera(self, obj):
+        camera: Camera
+        for camera in obj.imaging_cameras_2.all().iterator():
+            if camera.sensor and camera.sensor.color_or_mono == ColorOrMono.COLOR.value:
+                return True
+
+        return False
+
+    def prepare_has_mono_camera(self, obj):
+        camera: Camera
+        for camera in obj.imaging_cameras_2.all().iterator():
+            if camera.sensor and camera.sensor.color_or_mono == ColorOrMono.MONO.value:
                 return True
 
         return False

@@ -149,6 +149,8 @@
                                 <size-filter v-if="filter.name === 'size'" :size-min="sizeMin" :size-max="sizeMax"></size-filter>
 
                                 <modified-camera-filter v-if="filter.name === 'modified_camera'" :modified-camera="modifiedCamera"></modified-camera-filter>
+                            
+                                <color-or-mono-filter v-if="filter.name === 'color_or_mono'" :colorOrMono="colorOrMono"></color-or-mono-filter>
                             </div>
 
                             {% if request.GET.d == None or request.GET.d|startswith:'i' %}
@@ -541,6 +543,12 @@
                 {% else %}
                     undefined
                 {% endif %},
+            colorOrMono:
+                {% if "color_or_mono" in request.GET and request.GET.color_or_mono %}
+                    "{{ request.GET.color_or_mono }}"
+                {% else %}
+                    undefined
+                {% endif %},
 
             sort:
                 {% if "sort" in request.GET and request.GET.sort %}
@@ -784,6 +792,12 @@
                     removable: true,
                     restricted: "FULL"
                 },
+                {
+                    name: "color_or_mono",
+                    label: "{% trans "Acquired with a color or monochromatic camera" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
             ],
             enabledFilters: []
         },
@@ -945,6 +959,10 @@
 
             {% if "modified_camera" in request.GET %}
                 this.enabledFilters.push(this.getFilterByName("modified_camera"));
+            {% endif %}
+
+            {% if "color_or_mono" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("color_or_mono"));
             {% endif %}
         },
         methods: {
