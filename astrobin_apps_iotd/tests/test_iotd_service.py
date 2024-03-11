@@ -2114,14 +2114,57 @@ class IotdServiceTest(TestCase):
 
     def test_inactive_submitters_no_submissions(self):
         submitter = Generators.user(groups=['iotd_submitters'])
-        self.assertTrue(submitter in IotdService().get_inactive_submitter_and_reviewers(3))
+        self.assertTrue(submitter in IotdService().get_inactive_submitters_and_reviewers(3))
 
     def test_inactive_submitters_superuser(self):
         submitter = Generators.user(groups=['iotd_submitters'])
         submitter.is_superuser = True
         submitter.save()
 
-        self.assertFalse(submitter in IotdService().get_inactive_submitter_and_reviewers(3))
+        self.assertFalse(submitter in IotdService().get_inactive_submitters_and_reviewers(3))
+
+    def test_insufficiently_active_submitters_and_reviewers_no_submissions(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+
+        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
+        image.designated_iotd_submitters.add(submitter)
+
+        self.assertTrue(submitter in IotdService().get_insufficiently_active_submitters_and_reviewers())
+
+    @override_settings(IOTD_MIN_PROMOTIONS_PER_PERIOD='2/7')
+    def test_insufficiently_active_submitters_and_reviewers_insufficient_submissions(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+
+        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
+        image.designated_iotd_submitters.add(submitter)
+
+        IotdGenerators.submission(submitter=submitter, image=image)
+
+        self.assertTrue(submitter in IotdService().get_insufficiently_active_submitters_and_reviewers())
+
+    @override_settings(IOTD_MIN_PROMOTIONS_PER_PERIOD='2/7')
+    def test_insufficiently_active_submitters_and_reviewers_sufficient_submissions(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+
+        image1 = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
+        image1.designated_iotd_submitters.add(submitter)
+
+        image2 = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
+        image2.designated_iotd_submitters.add(submitter)
+
+        IotdGenerators.submission(submitter=submitter, image=image1)
+        IotdGenerators.submission(submitter=submitter, image=image2)
+
+        self.assertFalse(submitter in IotdService().get_insufficiently_active_submitters_and_reviewers())
 
     def test_inactive_submitters_no_recent_submissions(self):
         uploader = Generators.user()
@@ -2136,9 +2179,9 @@ class IotdServiceTest(TestCase):
         submission.date = DateTimeService.now() - timedelta(days=5)
         submission.save()
 
-        self.assertFalse(submitter in IotdService().get_inactive_submitter_and_reviewers(4))
-        self.assertTrue(submitter in IotdService().get_inactive_submitter_and_reviewers(5))
-        self.assertFalse(submitter in IotdService().get_inactive_submitter_and_reviewers(6))
+        self.assertFalse(submitter in IotdService().get_inactive_submitters_and_reviewers(4))
+        self.assertTrue(submitter in IotdService().get_inactive_submitters_and_reviewers(5))
+        self.assertFalse(submitter in IotdService().get_inactive_submitters_and_reviewers(6))
 
     def test_inactive_submitters_recent_submissions(self):
         uploader = Generators.user()
@@ -2151,7 +2194,7 @@ class IotdServiceTest(TestCase):
 
         IotdGenerators.submission(submitter=submitter, image=image)
 
-        self.assertFalse(submitter in IotdService().get_inactive_submitter_and_reviewers(3))
+        self.assertFalse(submitter in IotdService().get_inactive_submitters_and_reviewers(3))
 
     def test_inactive_reviewers_no_votes(self):
         uploader = Generators.user()
@@ -2166,7 +2209,7 @@ class IotdServiceTest(TestCase):
 
         IotdGenerators.submission(submitter=submitter, image=image)
 
-        self.assertTrue(reviewer in IotdService().get_inactive_submitter_and_reviewers(3))
+        self.assertTrue(reviewer in IotdService().get_inactive_submitters_and_reviewers(3))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_inactive_reviewers_no_recent_votes(self):
@@ -2185,9 +2228,9 @@ class IotdServiceTest(TestCase):
         vote.date = DateTimeService.now() - timedelta(days=5)
         vote.save()
 
-        self.assertFalse(reviewer in IotdService().get_inactive_submitter_and_reviewers(4))
-        self.assertTrue(reviewer in IotdService().get_inactive_submitter_and_reviewers(5))
-        self.assertFalse(reviewer in IotdService().get_inactive_submitter_and_reviewers(6))
+        self.assertFalse(reviewer in IotdService().get_inactive_submitters_and_reviewers(4))
+        self.assertTrue(reviewer in IotdService().get_inactive_submitters_and_reviewers(5))
+        self.assertFalse(reviewer in IotdService().get_inactive_submitters_and_reviewers(6))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_inactive_reviewers_recent_votes(self):
@@ -2204,7 +2247,7 @@ class IotdServiceTest(TestCase):
         IotdGenerators.submission(submitter=submitter, image=image)
         IotdGenerators.vote(reviewer=reviewer, image=image)
 
-        self.assertFalse(reviewer in IotdService().get_inactive_submitter_and_reviewers(3))
+        self.assertFalse(reviewer in IotdService().get_inactive_submitters_and_reviewers(3))
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_may_submit_to_iotd_tp_process_unauthenticated(self, is_authenticated):

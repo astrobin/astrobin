@@ -31,10 +31,49 @@ def update_top_pick_archive():
     IotdService().update_top_pick_archive()
 
 
+@shared_task(time_limit=900)
+def send_iotd_staff_insufficiently_active_reminders_and_remove_after_max_reminders():
+    min_promotions_per_period = getattr(settings, 'IOTD_MIN_PROMOTIONS_PER_PERIOD', '7/7')
+    min_promotions = int(min_promotions_per_period.split('/')[0])
+    days = int(min_promotions_per_period.split('/')[1])
+    max_reminders = 2
+
+    insufficiently_active_members = IotdService().get_insufficiently_active_submitters_and_reviewers()
+
+    for member in insufficiently_active_members:
+        if member.userprofile.inactive_account_reminder_sent >= max_reminders:
+            member.groups.remove(Group.objects.get(name=GroupName.IOTD_STAFF))
+            member.groups.remove(Group.objects.get(name=GroupName.IOTD_REVIEWERS))
+            member.groups.remove(Group.objects.get(name=GroupName.IOTD_SUBMITTERS))
+            member.userprofile.inactive_account_reminder_sent = 0
+            member.userprofile.save(keep_deleted=True)
+
+            push_notification(
+                [member], None, 'iotd_staff_inactive_removal_notice', {
+                    'BASE_URL': settings.BASE_URL,
+                    'days': 0,
+                    'max_inactivity_days': 0,
+                    'min_promotions': min_promotions,
+                    'min_promotions_days': days,
+                    'max_reminders': max_reminders
+                }
+            )
+        else:
+            member.userprofile.inactive_account_reminder_sent += 1
+            member.userprofile.save(keep_deleted=True)
+
+            push_notification(
+                [member], None, 'iotd_staff_insufficiently_active_warning', {
+                    'BASE_URL': settings.BASE_URL,
+                    'min_promotions': min_promotions,
+                    'min_promotions_days': days,
+                }
+            )
+
 @shared_task(time_limit=180)
 def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
     final_notice_days = settings.IOTD_MAX_INACTIVE_DAYS
-    final_notice_members = IotdService().get_inactive_submitter_and_reviewers(final_notice_days)
+    final_notice_members = IotdService().get_inactive_submitters_and_reviewers(final_notice_days)
     if final_notice_members:
         for member in final_notice_members:
             member.groups.remove(Group.objects.get(name=GroupName.IOTD_STAFF))
@@ -49,7 +88,7 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
         return
 
     reminder_2_days = settings.IOTD_INACTIVE_MEMBER_REMINDER_2_DAYS
-    reminder_2_members = IotdService().get_inactive_submitter_and_reviewers(reminder_2_days)
+    reminder_2_members = IotdService().get_inactive_submitters_and_reviewers(reminder_2_days)
     if reminder_2_members:
         push_notification(reminder_2_members, None, 'iotd_staff_inactive_warning', {
             'BASE_URL': settings.BASE_URL,
@@ -59,7 +98,7 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
         return
 
     reminder_1_days = settings.IOTD_INACTIVE_MEMBER_REMINDER_1_DAYS
-    reminder_1_members = IotdService().get_inactive_submitter_and_reviewers(reminder_1_days)
+    reminder_1_members = IotdService().get_inactive_submitters_and_reviewers(reminder_1_days)
     if reminder_1_members:
         push_notification(
             reminder_1_members, None, 'iotd_staff_inactive_warning', {
