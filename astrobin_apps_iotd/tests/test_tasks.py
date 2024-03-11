@@ -24,7 +24,7 @@ class IotdTasksTest(TestCase):
         Group.objects.create(name=GroupName.IOTD_SUBMITTERS)
         Group.objects.create(name=GroupName.IOTD_REVIEWERS)
 
-    @patch('astrobin_apps_iotd.tasks.IotdService.get_inactive_submitter_and_reviewers')
+    @patch('astrobin_apps_iotd.tasks.IotdService.get_inactive_submitters_and_reviewers')
     @patch('astrobin_apps_iotd.tasks.push_notification')
     def test_send_iotd_staff_inactive_reminders_and_remove_after_max_days(
             self, push_notification, get_inactive_submitter_and_reviewers):

@@ -464,7 +464,33 @@ class IotdService:
         IotdReviewQueueEntry.objects.exclude(reviewer__groups__name=GroupName.IOTD_REVIEWERS).delete()
         IotdJudgementQueueEntry.objects.exclude(judge__groups__name=GroupName.IOTD_JUDGES).delete()
 
-    def get_inactive_submitter_and_reviewers(self, days):
+    def get_insufficiently_active_submitters_and_reviewers(self):
+        insufficiently_active_members = []
+        members = User.objects.filter(groups__name__in=[GroupName.IOTD_SUBMITTERS, GroupName.IOTD_REVIEWERS])
+        min_promotions_per_period = getattr(settings, 'IOTD_MIN_PROMOTIONS_PER_PERIOD', '7/7')
+        min_promotions = int(min_promotions_per_period.split('/')[0])
+        days = int(min_promotions_per_period.split('/')[1])
+        cutoff = DateTimeService.now() - timedelta(days=days)
+
+        for member in members.iterator():
+            if member.is_superuser:
+                continue
+
+            if GroupName.IOTD_REVIEWERS in member.groups.all().values_list('name', flat=True):
+                actions = IotdVote.objects.filter(reviewer=member, date__gte=cutoff)
+                promotion_count = actions.count()
+            elif GroupName.IOTD_SUBMITTERS in member.groups.all().values_list('name', flat=True):
+                actions = IotdSubmission.objects.filter(submitter=member, date__gte=cutoff)
+                promotion_count = actions.count()
+            else:
+                continue
+
+            if promotion_count < min_promotions:
+                insufficiently_active_members.append(member)
+
+        return insufficiently_active_members
+
+    def get_inactive_submitters_and_reviewers(self, days):
         inactive_members = []
         members = User.objects.filter(groups__name__in=[GroupName.IOTD_SUBMITTERS, GroupName.IOTD_REVIEWERS])
 
