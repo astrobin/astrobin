@@ -8,7 +8,7 @@ from common.services import DateTimeService
 
 class IotdSignalsTest(TestCase):
     @override_settings(IOTD_MIN_PROMOTIONS_PER_PERIOD='1/7')
-    def test_submitter_inactive_reminders_reset(self):
+    def test_submitter_insufficiently_active_reminders_reset(self):
         user = Generators.user()
 
         submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
@@ -25,7 +25,7 @@ class IotdSignalsTest(TestCase):
         self.assertEqual(submitter.userprofile.insufficiently_active_iotd_staff_member_reminders_sent, 0)
 
     @override_settings(IOTD_MIN_PROMOTIONS_PER_PERIOD='2/7')
-    def test_submitter_inactive_reminders_no_reset(self):
+    def test_submitter_insufficiently_active_reminders_no_reset(self):
         user = Generators.user()
 
         submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
@@ -45,7 +45,7 @@ class IotdSignalsTest(TestCase):
         IOTD_MIN_PROMOTIONS_PER_PERIOD='1/7',
         IOTD_SUBMISSION_MIN_PROMOTIONS=1
     )
-    def test_reviewer_inactive_reminders_reset(self):
+    def test_reviewer_insufficiently_active_reminders_reset(self):
         user = Generators.user()
 
         submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])

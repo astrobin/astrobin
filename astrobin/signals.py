@@ -1012,8 +1012,7 @@ def group_members_changed(sender, instance, **kwargs):
         if instance.name in list(group_sync_map.keys()):
             for user in users:
                 UserProfile.objects.filter(user=user).update(
-                    insufficiently_active_iotd_staff_member_reminders_sent=0,
-                    inactive_account_reminder_sent=None
+                    insufficiently_active_iotd_staff_member_reminders_sent=0
                 )
 
             for django_group in django_groups:
