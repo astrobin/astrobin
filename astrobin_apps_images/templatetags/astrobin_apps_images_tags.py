@@ -71,10 +71,16 @@ def astrobin_image(context, image, alias, **kwargs):
     mod = 'inverted' if 'inverted' in link_alias else None
     size = settings.THUMBNAIL_ALIASES[''][alias]['size']
 
-    if image is None or not isinstance(image, Image):
+    if image:
+        field = image.get_thumbnail_field(revision_label)
+    else:
+        field = None
+
+    if image is None or field is None or field.name is None or not isinstance(image, Image):
         return {
-            'status': 'failure',
-            'image': '',
+            'status': 'error',
+            'error_message': _("Image file not found"),
+            'image': image,
             'alias': alias,
             'revision': revision_label,
             'revision_title': None,

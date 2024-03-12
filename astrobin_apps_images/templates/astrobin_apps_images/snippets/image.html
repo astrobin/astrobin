@@ -6,21 +6,24 @@
 {% load static %}
 {% load tags %}
 
-{% if status != 'error' %}
+{% if status == 'error' %}
+    {% if error_message %}
+        <div class="alert alert-error">
+            <h4 class="alert-heading">
+                <i class="icon-fire"></i> {% trans "Error!" %}
+            </h4>
+
+            <a href="{% url 'image_detail' image.get_id %}">
+                {{ error_message }}
+            </a>
+        </div>
+    {% endif %}
+{% else %}
     <div class="astrobin-image-container
             {% if classes %} {{classes}}{% endif %}
             {% if image.is_wip %} wip{% endif %}
             {% if is_revision %} revision{% endif %}"
     >
-        {% if error_message %}
-            <div class="alert alert-error">
-                <h4 class="alert-heading">
-                    <i class="icon-fire"></i> {% trans "Error!" %}
-                </h4>
-                {{error_message}}
-            </div>
-        {% endif %}
-
         {% random_id %}
 
         {% if alias != 'histogram' and badges %}
