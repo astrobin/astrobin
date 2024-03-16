@@ -61,6 +61,7 @@ class UserCollectionsBase(View):
         numbers = UserService(user).get_image_numbers()
         context['public_images_no'] = numbers['public_images_no']
         context['wip_images_no'] = numbers['wip_images_no']
+        context['deleted_images_no'] = numbers['deleted_images_no']
 
         try:
             qs = UserService(user).get_public_images()
