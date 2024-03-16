@@ -502,7 +502,7 @@ class SignalsTest(TestCase):
         push_notification.assert_has_calls(
             [
                 mock.call(
-                    [collaborator1, collaborator2], image.user, 'added_as_collaborator', mock.ANY
+                    [collaborator1, collaborator2], image.user, 'added_you_as_collaborator', mock.ANY
                 ),
             ]
         )
@@ -517,7 +517,7 @@ class SignalsTest(TestCase):
             push_notification.assert_has_calls(
                 [
                     mock.call(
-                        [collaborator1, collaborator2], image.user, 'added_as_collaborator', mock.ANY
+                        [collaborator1, collaborator2], image.user, 'added_you_as_collaborator', mock.ANY
                     ),
                 ]
             )

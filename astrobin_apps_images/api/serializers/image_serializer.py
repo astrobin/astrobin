@@ -83,17 +83,17 @@ class ImageSerializer(serializers.ModelSerializer):
             ).data
         }
 
-    def validate_collaborators(self, collaborators):
-        if collaborators and self.initial_data.get('user') in [x.id for x in collaborators]:
+    def validate_pending_collaborators(self, pending_collaborators):
+        if pending_collaborators and self.initial_data.get('user') in [x.id for x in pending_collaborators]:
             raise ValidationError("Please do not include the image's user as a collaborator")
 
-        return collaborators
+        return pending_collaborators
 
     class Meta:
         model = Image
         fields = (
             'user',
-            'collaborators',
+            'pending_collaborators',
             'pk',
             'hash',
             'title',

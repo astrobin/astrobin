@@ -1705,6 +1705,7 @@ def gear_migration_strategy_post_save(sender, instance: GearMigrationStrategy, c
 post_save.connect(gear_migration_strategy_post_save, sender=GearMigrationStrategy)
 
 
+@receiver(m2m_changed, sender=Image.collaborators.through)
 def image_collaborators_changed(sender, instance: Image, **kwargs):
     action = kwargs.pop('action')
     pk_set = kwargs.pop('pk_set')
@@ -1715,7 +1716,7 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
         for user in users.iterator():
             UserService(user).clear_gallery_image_list_cache()
         push_notification(
-            list(users), instance.user, 'added_as_collaborator', {
+            list(users), instance.user, 'added_you_as_collaborator', {
                 'image': instance,
                 'image_thumbnail': thumb.url if thumb else None
             }
@@ -1740,7 +1741,24 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
             UserService(user).update_image_count()
 
 
-m2m_changed.connect(image_collaborators_changed, sender=Image.collaborators.through)
+@receiver(m2m_changed, sender=Image.pending_collaborators.through)
+def image_pending_collaborators_changed(sender, instance: Image, **kwargs):
+    action = kwargs.pop('action')
+    pk_set = kwargs.pop('pk_set')
+
+    if action == 'pre_add':
+        thumb = instance.thumbnail_raw('gallery', None, sync=True)
+        users = User.objects.filter(pk__in=pk_set)
+        push_notification(
+            list(users), instance.user, 'requested_as_collaborator', {
+                'image': instance,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
+    elif action == 'post_remove':
+        for user in User.objects.filter(pk__in=pk_set).iterator():
+            if instance.collaborators.filter(pk=user.pk).exists():
+                instance.collaborators.remove(user)
 
 
 @receiver(user_verified)
