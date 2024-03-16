@@ -267,6 +267,7 @@ li.astrobin-thumbnail {
     align-items: center;
     justify-content: center;
     visibility: hidden;
+    z-index: 2;
 
     span,
     i {

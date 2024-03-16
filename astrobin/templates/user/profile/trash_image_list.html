@@ -3,11 +3,13 @@
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_users_tags %}
 {% load common_tags %}
+{% load el_pagination_tags %}
 
 <h3>{% trans "Trash"%}</h3>
 
 {% if image_list %}
     <ul class="astrobin-thumbnails">
+        {% paginate 36 image_list %}
         {% for image in image_list %}
             <li
                     class="thumbnail astrobin-thumbnail trash-thumbnail"
@@ -25,7 +27,11 @@
 
             </li>
         {% endfor %}
-</ul>
+    </ul>
+
+    <div class="pagination pagination-centered">
+        {% show_pages %}
+    </div>
 {% else %}
     {% trans "There doesn't seem to be anything here." %}
 {% endif %}

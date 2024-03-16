@@ -44,8 +44,13 @@
                     images: pks
                 }),
                 dataType: "json",
-                success: function() {
-                    window.location.reload();
+                success: function(response) {
+                    if (response.message) {
+                        alert(response.message);
+                        for(const pk of pks) {
+                            $('.thumbnail[data-pk="' + pk + '"]').remove();
+                        }
+                    }
                 }
             });
         });
