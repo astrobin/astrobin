@@ -12,6 +12,10 @@
             {% blocktrans with image.user.userprofile as user %}
                 <strong>{{ user }}</strong> wants to add you as a collaborator to this image.
             {% endblocktrans %}
+
+            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/image-collaborations" target="_blank">' as _0 and '</a>' as _1 %}
+                {{ _0 }}Learn more.{{ _1 }}
+            {% endblocktrans %}
         </p>
         <div class="accept-deny-collaboration-request-form-wrapper">
             <form action="{% url "image_collaborator_request_accept" image.get_id %}" method="post">
