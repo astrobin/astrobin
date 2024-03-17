@@ -295,7 +295,7 @@ def image_post_softdelete(sender, instance, **kwargs):
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
         try:
             instance.solution.delete()
-        except AttributeError:
+        except (AttributeError, AssertionError):
             pass
 
     valid_subscription = PremiumService(instance.user).get_valid_usersubscription()
