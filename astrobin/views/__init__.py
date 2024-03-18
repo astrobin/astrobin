@@ -1248,7 +1248,7 @@ def user_page(request, username):
     elif 'trash' in request.GET:
         if request.user != user or not can_restore_from_trash(valid_subscription) and not request.user.is_superuser:
             return HttpResponseForbidden()
-        qs = Image.deleted_objects.filter(user=user)
+        qs = Image.deleted_objects.filter(user=user).order_by('-deleted')
         section = 'trash'
         subsection = None
     else:
@@ -1256,7 +1256,7 @@ def user_page(request, username):
 
     view = request.GET.get('view', 'default')
 
-    if view == 'table':
+    if view == 'table' and section != 'trash':
         qs = qs.order_by('-published')
 
     stats_data = UserService(user).get_profile_stats(getattr(request, 'LANGUAGE_CODE', 'en'))

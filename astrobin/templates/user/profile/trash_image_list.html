@@ -17,7 +17,7 @@
                     data-restore="false">
 
                 <a href="#" rel="tooltip"
-                   title="{{ image.title|escape|default:_("(no title)") }}, {% astrobin_username image.user link=False %}">
+                   title="{{ image.title|escape|default:_("(no title)") }}, {% trans 'deleted' %} {{ image.deleted | date }}">
                     {% astrobin_image image 'gallery' link=False tooltip=False %}
 
                     <div class="restore-thumbnail-overlay hide">
