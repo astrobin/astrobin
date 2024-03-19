@@ -83,6 +83,7 @@ FIELDS = (
     'color_or_mono',
     'topic',
     'filter_types',
+    'user_id',
 
     # Sorting
     'sort'
@@ -172,6 +173,7 @@ class AstroBinSearchForm(SearchForm):
     color_or_mono = forms.CharField(required=False)
     topic = forms.IntegerField(required=False)
     filter_types = forms.CharField(required=False)
+    user_id = forms.IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -785,6 +787,14 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_user_id(self, results):
+        user_id = self.cleaned_data.get("user_id")
+
+        if user_id is not None and user_id != "":
+            results = results.filter(user_id=user_id)
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -875,6 +885,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_color_or_mono(sqs)
         sqs = self.filter_by_forum_topic(sqs)
         sqs = self.filter_by_filter_types(sqs)
+        sqs = self.filter_by_user_id(sqs)
 
         sqs = self.sort(sqs)
 
