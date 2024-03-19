@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ user }} denied your request to add them as collaborator to your image
+{% endblocktrans %}{% if image.title %}: {{image.title}}{% endif %}

@@ -41,11 +41,11 @@ def send_iotd_staff_insufficiently_active_reminders_and_remove_after_max_reminde
     insufficiently_active_members = IotdService().get_insufficiently_active_submitters_and_reviewers()
 
     for member in insufficiently_active_members:
-        if member.userprofile.inactive_account_reminder_sent >= max_reminders:
+        if (member.userprofile.insufficiently_active_iotd_staff_member_reminders_sent or 0) >= max_reminders:
             member.groups.remove(Group.objects.get(name=GroupName.IOTD_STAFF))
             member.groups.remove(Group.objects.get(name=GroupName.IOTD_REVIEWERS))
             member.groups.remove(Group.objects.get(name=GroupName.IOTD_SUBMITTERS))
-            member.userprofile.inactive_account_reminder_sent = 0
+            member.userprofile.insufficiently_active_iotd_staff_member_reminders_sent = 0
             member.userprofile.save(keep_deleted=True)
 
             push_notification(
@@ -59,7 +59,10 @@ def send_iotd_staff_insufficiently_active_reminders_and_remove_after_max_reminde
                 }
             )
         else:
-            member.userprofile.inactive_account_reminder_sent += 1
+            if member.userprofile.insufficiently_active_iotd_staff_member_reminders_sent is None:
+                member.userprofile.insufficiently_active_iotd_staff_member_reminders_sent = 1
+            else:
+                member.userprofile.insufficiently_active_iotd_staff_member_reminders_sent += 1
             member.userprofile.save(keep_deleted=True)
 
             push_notification(

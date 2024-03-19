@@ -58,6 +58,7 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
+from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
@@ -515,14 +516,20 @@ class ImageDetailView(ImageDetailViewBase):
         # DOWNLOAD ORIGINAL URL    #
         ############################
 
-        if is_revision and revision_image.video_file.name:
-            download_original_url = revision_image.video_file.url
-        elif is_revision and not revision_image.video_file.name:
-            download_original_url = revision_image.image_file.url
-        elif image.video_file.name:
-            download_original_url = image.video_file.url
+        if is_revision:
+            if revision_image.video_file and revision_image.video_file.name:
+                download_original_url = revision_image.video_file.url
+            elif revision_image.image_file:
+                download_original_url = revision_image.image_file.url
+            else:
+                download_original_url = None
         else:
-            download_original_url = image.image_file.url
+            if image.video_file and image.video_file.name:
+                download_original_url = image.video_file.url
+            elif image.image_file:
+                download_original_url = image.image_file.url
+            else:
+                download_original_url = None
 
         #################
         # RESPONSE DICT #
@@ -1482,3 +1489,70 @@ class ImageAcquisitionFragment(View):
                 'dates_label': _("Dates"),
             }
         )
+
+
+class ImageCollaboratorRequestAccept(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        id: Union[str, int] = self.kwargs.get('id')
+        image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
+
+        if image is None:
+            raise Http404
+
+        if not image.pending_collaborators.filter(pk=request.user.pk).exists():
+            return HttpResponseBadRequest()
+
+        if image.collaborators.filter(pk=request.user.pk).exists():
+            return HttpResponseBadRequest()
+
+        image.collaborators.add(request.user)
+        image.save(keep_deleted=True)  # To invalidate the cache
+
+        thumb = image.thumbnail_raw('gallery', None, sync=True)
+
+        push_notification(
+            [image.user],
+            request.user,
+            'accepted_collaboration_request',
+            {
+                'image': image,
+                'user': request.user,
+                'image_thumbnail': thumb.url if thumb else None,
+            }
+        )
+
+        messages.success(request, _("You are now a collaborator on this image!"))
+
+        return HttpResponseRedirect(image.get_absolute_url())
+
+
+class ImageCollaboratorRequestDeny(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        id: Union[str, int] = self.kwargs.get('id')
+        image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
+
+        if image is None:
+            raise Http404
+
+        if not image.pending_collaborators.filter(pk=request.user.pk).exists():
+            return HttpResponseBadRequest()
+
+        image.pending_collaborators.remove(request.user)
+        image.save(keep_deleted=True)  # To invalidate the cache
+
+        thumb = image.thumbnail_raw('gallery', None, sync=True)
+
+        push_notification(
+            [image.user],
+            request.user,
+            'denied_collaboration_request',
+            {
+                'image': image,
+                'user': request.user,
+                'image_thumbnail': thumb.url if thumb else None,
+            }
+        )
+
+        messages.success(request, _("Collaborator request denied."))
+
+        return HttpResponseRedirect(image.get_absolute_url())

@@ -57,7 +57,7 @@
 
                     {% if valid_usersubscription|can_restore_from_trash %}
                         <li>
-                            <a href="{% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging" %}">
+                            <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,trash=" "public,active,sub,staging" %}">
                                 <i class="icon-trash"></i>
                                 {% trans "Trash" %}
                                 <span class="badge badge-success">

@@ -53,7 +53,10 @@ from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
 from astrobin_apps_notifications.services import NotificationsService
-from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
+from astrobin_apps_notifications.tasks import (
+    push_notification_for_new_image, push_notification_for_new_image_revision,
+    push_notification_task,
+)
 from astrobin_apps_notifications.utils import (
     build_notification_url, clear_notifications_template_cache,
     push_notification,
@@ -297,7 +300,7 @@ def image_post_softdelete(sender, instance, **kwargs):
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
         try:
             instance.solution.delete()
-        except AttributeError:
+        except (AttributeError, AssertionError):
             pass
 
     valid_subscription = PremiumService(instance.user).get_valid_usersubscription()
@@ -984,8 +987,7 @@ def group_members_changed(sender, instance, **kwargs):
         if instance.name in list(group_sync_map.keys()):
             for user in users:
                 UserProfile.objects.filter(user=user).update(
-                    insufficiently_active_iotd_staff_member_reminders_sent=0,
-                    inactive_account_reminder_sent=None
+                    insufficiently_active_iotd_staff_member_reminders_sent=0
                 )
 
             for django_group in django_groups:
@@ -1705,6 +1707,7 @@ def gear_migration_strategy_post_save(sender, instance: GearMigrationStrategy, c
 post_save.connect(gear_migration_strategy_post_save, sender=GearMigrationStrategy)
 
 
+@receiver(m2m_changed, sender=Image.collaborators.through)
 def image_collaborators_changed(sender, instance: Image, **kwargs):
     action = kwargs.pop('action')
     pk_set = kwargs.pop('pk_set')
@@ -1715,7 +1718,7 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
         for user in users.iterator():
             UserService(user).clear_gallery_image_list_cache()
         push_notification(
-            list(users), instance.user, 'added_as_collaborator', {
+            list(users), instance.user, 'added_you_as_collaborator', {
                 'image': instance,
                 'image_thumbnail': thumb.url if thumb else None
             }
@@ -1724,6 +1727,20 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
         users = User.objects.filter(pk__in=pk_set)
         for user in users.iterator():
             UserService(user).update_image_count()
+            followers = User.objects.filter(
+                toggleproperty__content_type=ContentType.objects.get_for_model(user),
+                toggleproperty__object_id=user.id,
+                toggleproperty__property_type="follow"
+            ).distinct()
+            push_notification_task.apply_async(args=(
+                list(followers.values_list('id', flat=True)),
+                user.id,
+                'new_image',
+                {
+                    'image_id': instance.id,
+                    'image_thumbnail': thumb.url if thumb else None
+                }
+            ))
     elif action == 'pre_remove':
         users = User.objects.filter(pk__in=pk_set)
         for user in users.iterator():
@@ -1740,7 +1757,24 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
             UserService(user).update_image_count()
 
 
-m2m_changed.connect(image_collaborators_changed, sender=Image.collaborators.through)
+@receiver(m2m_changed, sender=Image.pending_collaborators.through)
+def image_pending_collaborators_changed(sender, instance: Image, **kwargs):
+    action = kwargs.pop('action')
+    pk_set = kwargs.pop('pk_set')
+
+    if action == 'pre_add':
+        thumb = instance.thumbnail_raw('gallery', None, sync=True)
+        users = User.objects.filter(pk__in=pk_set)
+        push_notification(
+            list(users), instance.user, 'requested_as_collaborator', {
+                'image': instance,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
+    elif action == 'post_remove':
+        for user in User.objects.filter(pk__in=pk_set).iterator():
+            if instance.collaborators.filter(pk=user.pk).exists():
+                instance.collaborators.remove(user)
 
 
 @receiver(user_verified)

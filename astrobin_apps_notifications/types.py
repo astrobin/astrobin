@@ -412,7 +412,25 @@ NOTICE_TYPES = (
         2
     ),
     (
-        'added_as_collaborator',
+        'requested_as_collaborator',
+        _("Collaboration Request: Accept or Deny"),
+        '',
+        2
+    ),
+    (
+        'accepted_collaboration_request',
+        _("User accepted your collaboration request"),
+        '',
+        2
+    ),
+    (
+        'denied_collaboration_request',
+        _("User denied your collaboration request"),
+        '',
+        2
+    ),
+    (
+        'added_you_as_collaborator',
         _("You were added as a collaborator to an image"),
         '',
         2

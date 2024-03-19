@@ -83,6 +83,7 @@ FIELDS = (
     'color_or_mono',
     'topic',
     'filter_types',
+    'user_id',
     'telescope_ids',
     'camera_ids',
     'mount_ids',
@@ -178,6 +179,8 @@ class AstroBinSearchForm(SearchForm):
     color_or_mono = forms.CharField(required=False)
     topic = forms.IntegerField(required=False)
     filter_types = forms.CharField(required=False)
+    user_id = forms.IntegerField(required=False)
+    username = forms.CharField(required=False)
 
     # For precise ID based equipment search
     telescope_ids = forms.CharField(required=False)
@@ -799,6 +802,22 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_user_id(self, results):
+        user_id = self.cleaned_data.get("user_id")
+
+        if user_id is not None and user_id != "":
+            results = results.filter(user_id=user_id)
+
+        return results
+
+    def filter_by_username(self, results):
+        username = self.cleaned_data.get("username")
+
+        if username is not None and username != "":
+            results = results.filter(username=username)
+
+        return results
+
     def filter_by_equipment_ids(self, results):
         telescope_ids = self.cleaned_data.get("telescope_ids")
         camera_ids = self.cleaned_data.get("camera_ids")
@@ -865,14 +884,6 @@ class AstroBinSearchForm(SearchForm):
                     ]
                 )
             )
-
-        return results
-
-    def filter_by_username(self, results):
-        username = self.cleaned_data.get("username")
-
-        if username is not None and username != "":
-            results = results.filter(username=username)
 
         return results
 
@@ -966,8 +977,9 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_color_or_mono(sqs)
         sqs = self.filter_by_forum_topic(sqs)
         sqs = self.filter_by_filter_types(sqs)
-        sqs = self.filter_by_equipment_ids(sqs)
+        sqs = self.filter_by_user_id(sqs)
         sqs = self.filter_by_username(sqs)
+        sqs = self.filter_by_equipment_ids(sqs)
 
         sqs = self.sort(sqs)
 

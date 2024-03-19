@@ -244,6 +244,15 @@ li.astrobin-thumbnail {
     @include rounded-corners(20px);
   }
 
+  .alert-error {
+    width: 80px;
+    height: 80px;
+    margin: 0;
+    border-radius: 20px;
+    text-align: center;
+    padding: 24px 24px;
+  }
+
   .spam-thumbnail-overlay,
   .ham-thumbnail-overlay,
   .undecided-thumbnail-overlay,
@@ -258,6 +267,7 @@ li.astrobin-thumbnail {
     align-items: center;
     justify-content: center;
     visibility: hidden;
+    z-index: 2;
 
     span,
     i {
@@ -4762,4 +4772,9 @@ form.edit-thumbnails {
       border: 1px solid $grey-5;
     }
   }
+}
+
+.accept-deny-collaboration-request-form-wrapper {
+  display: flex;
+  gap: .5rem;
 }

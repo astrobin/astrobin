@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load astrobin_apps_notifications_tags %}
+
+{% blocktrans trimmed %}
+    <strong>{{ user }}</strong> denied your request to add them as collaborator to your image
+{% endblocktrans %}{% if image.title %}: {{ image.title }}{% endif %}
+
+{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email image.user %}
