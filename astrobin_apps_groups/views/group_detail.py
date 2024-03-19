@@ -39,7 +39,7 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
             images = images.filter(keyvaluetags__key=group.image_tag_sorting).order_by('keyvaluetags__value')
 
         # Images
-        context['image_list'] = images[:(page_size * 10)]
+        context['image_list'] = images
         context['alias'] = 'gallery'
         context['paginate_by'] = page_size
 
