@@ -545,6 +545,14 @@ urlpatterns += [
         r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
         name='image_thumb'
     ),
+    url(
+        r'^(?P<id>\w+)/collaborator-request-accept/$', image_views.ImageCollaboratorRequestAccept.as_view(),
+        name='image_collaborator_request_accept'
+    ),
+    url(
+        r'^(?P<id>\w+)/collaborator-request-deny/$', image_views.ImageCollaboratorRequestDeny.as_view(),
+        name='image_collaborator_request_deny'
+    ),
 
     ###########################################################################
     ### JSON API VIEWS                                                      ###

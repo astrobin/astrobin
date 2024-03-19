@@ -10,6 +10,7 @@ class ImagesManager(SafeDeleteManager):
         )
 
         prefetch_related = (
+            'pending_collaborators',
             'collaborators',
             'revisions',
             'thumbnails',

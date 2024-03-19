@@ -63,3 +63,23 @@
         </div>
     </div>
 </div>
+
+{% if image.pending_collaborators.all|length > 0 and request.user == image.user %}
+    <div class="subtle-container avatar-block">
+        <div class="header">
+            <h4>
+                <i class="icon-group"></i>
+                {% trans "Collaborators (pending approval)" %}
+            </h4>
+        </div>
+
+        <div class="avatar">
+            {% for collaborator in image.pending_collaborators.all %}
+                {% with user=collaborator as_collaborator=True %}
+                    {% include "./_avatar.html" %}
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+

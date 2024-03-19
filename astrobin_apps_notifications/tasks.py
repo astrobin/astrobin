@@ -24,6 +24,26 @@ def purge_old_notifications():
 
 
 @shared_task(time_limit=300)
+def push_notification_task(user_pks: list, sender_pk: int, notification_type: str, data: dict):
+    try:
+        sender = User.objects.get(pk=sender_pk)
+    except User.DoesNotExist:
+        logger.error('push_notification_task called for sender not found: %d' % sender_pk)
+        return
+
+    users = User.objects.filter(pk__in=user_pks).exclude(pk=sender_pk)
+
+    if 'image_id' in data:
+        try:
+            data['image'] = Image.objects.get(pk=data['image_id'])
+        except Image.DoesNotExist:
+            logger.error('push_notification_task called for image not found: %d' % data['image_id'])
+            return
+
+    push_notification(users, sender, notification_type, data)
+
+
+@shared_task(time_limit=300)
 def push_notification_for_approved_image(image_pk: int, moderator_pk: int):
     try:
         image = Image.objects_including_wip.get(pk=image_pk)

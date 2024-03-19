@@ -1436,6 +1436,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    pending_collaborators = models.ManyToManyField(User, blank=True, related_name='images_as_pending_collaborator')
     collaborators = models.ManyToManyField(User, blank=True, related_name='images_as_collaborator')
 
     plot_is_overlay = models.BooleanField(editable=False, default=False)

@@ -5,6 +5,38 @@
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_platesolving_tags %}
 
+{% if image.pending_collaborators.all|length > 0 and request.user in image.pending_collaborators.all and request.user not in image.collaborators.all %}
+    <div class="alert alert-warning">
+        <p>
+            <i class="icon-exclamation-sign"></i>
+            {% blocktrans with image.user.userprofile as user %}
+                <strong>{{ user }}</strong> wants to add you as a collaborator to this image.
+            {% endblocktrans %}
+
+            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/image-collaborations" target="_blank">' as _0 and '</a>' as _1 %}
+                {{ _0 }}Learn more.{{ _1 }}
+            {% endblocktrans %}
+        </p>
+        <div class="accept-deny-collaboration-request-form-wrapper">
+            <form action="{% url "image_collaborator_request_accept" image.get_id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success {% button_loading_class %}">
+                    <i class="icon-ok"></i>
+                    {% trans "Accept" %}
+                    {% button_loading_indicator %}
+                </button>
+            </form>
+            <form action="{% url "image_collaborator_request_deny" image.get_id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger {% button_loading_class %}">
+                    <i class="icon-remove-circle"></i>
+                    {% trans "Deny" %}
+                    {% button_loading_indicator %}
+                </button>
+            </form>
+        </div>
+    </div>    
+{% endif %}
 
 <div class="main-image{% if show_advanced_solution %} has-advanced-solution{% endif %}">
     <div class="enhancement-loading-indicator">
