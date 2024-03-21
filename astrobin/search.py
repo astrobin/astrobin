@@ -913,7 +913,12 @@ class AstroBinSearchView(SearchView):
 
 
 def set_max_result_window(index_name: str, max_result_window_value: int):
-    es = connections['default'].get_backend().conn
+    backend = connections['default'].get_backend()
+
+    if hasattr(backend, 'conn'):
+        es = backend.conn
+    else:
+        return
 
     body = {
         "index": {
