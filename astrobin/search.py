@@ -7,6 +7,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from haystack import connections
 from haystack.backends import SQ
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
@@ -909,3 +910,15 @@ class AstroBinSearchView(SearchView):
         context = super(AstroBinSearchView, self).get_context_data(**kwargs)
         context['object_list'] = self.queryset
         return context
+
+
+def set_max_result_window(index_name: str, max_result_window_value: int):
+    es = connections['default'].get_backend().conn
+
+    body = {
+        "index": {
+            "max_result_window": max_result_window_value
+        }
+    }
+
+    es.indices.put_settings(index=index_name, body=body)
