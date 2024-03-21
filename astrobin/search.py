@@ -7,7 +7,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from haystack.backends import SQ
+from haystack.backends import BaseEngine, SQ
+from haystack.backends.elasticsearch2_backend import Elasticsearch2SearchBackend, Elasticsearch2SearchQuery
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
 from haystack.inputs import BaseInput, Clean
@@ -88,6 +89,22 @@ FIELDS = (
     # Sorting
     'sort'
 )
+
+class CustomElasticsearch2SearchBackend(Elasticsearch2SearchBackend):
+    def build_search_kwargs(self, *args, **kwargs):
+        search_kwargs = super().build_search_kwargs(*args, **kwargs)
+
+        try:
+            search_kwargs['query']['filtered']['query']['query_string']['auto_generate_phrase_queries'] = False
+        except KeyError:
+            pass
+
+        return search_kwargs
+
+
+class CustomElasticsearch2SearchEngine(BaseEngine):
+    backend = CustomElasticsearch2SearchBackend
+    query = Elasticsearch2SearchQuery
 
 
 class CustomContain(BaseInput):
@@ -832,10 +849,14 @@ class AstroBinSearchForm(SearchForm):
     def search(self):
         q = self.cleaned_data.get('q')
         domain = self.cleaned_data.get('d')
+        type_ = self.cleaned_data.get('t')
+
+        if type_ is None or type_ == "":
+            type_ = "all"
 
         q = asciify(q)
 
-        if q is None or q == "":
+        if q is None or q == "" or type_ != 'all':
             sqs = SearchQuerySet().all()
         else:
             if domain == 'u':
