@@ -56,6 +56,6 @@ class AstroBinAppConfig(AppConfig):
         from astrobin_apps_notifications import signals  # noqa
         from astrobin.locale_extras import LOCALE_EXTRAS  # noqa
 
-        self.init_avatar()
+        self.init_actstream()
         self.init_avatar()
         self.init_search()
