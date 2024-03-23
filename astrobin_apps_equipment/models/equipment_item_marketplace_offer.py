@@ -70,7 +70,7 @@ class EquipmentItemMarketplaceOffer(SafeDeleteModel):
 
     class Meta:
         ordering = ('-created',)
-        unique_together = ('user', 'line_item')
+        unique_together = ('user', 'line_item', 'deleted')
 
     def __str__(self):
         return f'Marketplace listing line item offer for {self.line_item} by {self.user}: {self.amount}'

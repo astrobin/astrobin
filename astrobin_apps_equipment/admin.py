@@ -9,7 +9,7 @@ from safedelete import HARD_DELETE
 from astrobin_apps_equipment.models import (
     AccessoryMigrationRecord, CameraMigrationRecord, EquipmentItemMarketplaceListing,
     EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemImage,
-    EquipmentItemMarketplacePrivateConversation, EquipmentPreset,
+    EquipmentItemMarketplaceOffer, EquipmentItemMarketplacePrivateConversation, EquipmentPreset,
     FilterMigrationRecord, MountMigrationRecord,
     Sensor, Camera, SoftwareMigrationRecord, Telescope,
     CameraEditProposal, Mount,
@@ -234,6 +234,7 @@ class EquipmentItemMarketplaceListingAdmin(admin.ModelAdmin):
 
     view_line_items.short_description = 'Line Items'
 
+
 class EquipmentItemMarketplaceListingLineItemAdmin(admin.ModelAdmin):
     list_display = (
         'hash',
@@ -290,6 +291,7 @@ class EquipmentItemMarketplaceListingLineItemAdmin(admin.ModelAdmin):
         return format_html("<br>".join(image_links))
 
     view_images.short_description = 'Images'
+
 
 class EquipmentItemMarketplaceListingLineItemImageAdmin(admin.ModelAdmin):
     list_display = (
@@ -353,6 +355,32 @@ class EquipmentItemMarketplacePrivateConversationAdmin(admin.ModelAdmin):
         'comments',
     )
 
+
+class EquipmentItemMarketplaceOfferAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'listing',
+        'line_item',
+        'created',
+        'amount',
+        'status',
+    )
+
+    search_fields = (
+        'user__username',
+        'listing__hash',
+        'line_item__hash',
+    )
+
+    readonly_fields = (
+        'id',
+        'user',
+        'listing',
+        'line_item',
+        'created',
+    )
+
+
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)
@@ -383,3 +411,4 @@ admin.site.register(EquipmentItemMarketplaceListing, EquipmentItemMarketplaceLis
 admin.site.register(EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemAdmin)
 admin.site.register(EquipmentItemMarketplaceListingLineItemImage, EquipmentItemMarketplaceListingLineItemImageAdmin)
 admin.site.register(EquipmentItemMarketplacePrivateConversation, EquipmentItemMarketplacePrivateConversationAdmin)
+admin.site.register(EquipmentItemMarketplaceOffer, EquipmentItemMarketplaceOfferAdmin)
