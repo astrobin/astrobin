@@ -12,13 +12,17 @@ class EquipmentItemMarketplaceListingLineItemReadSerializer(EquipmentItemMarketp
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
+        user = self.context['request'].user
 
-        if self.context['request'].user == instance.user:
-            offers = instance.offers.filter(user=instance.user)
-        else:
+        if user == instance.user:
             offers = instance.offers.all()
+        elif user.is_authenticated:
+            offers = instance.offers.filter(user=user)
+        else:
+            offers = instance.offers.none()
 
         data['offers'] = EquipmentItemMarketplaceOfferSerializer(offers, many=True).data
+
         return data
 
     class Meta(EquipmentItemMarketplaceListingLineItemSerializer.Meta):
