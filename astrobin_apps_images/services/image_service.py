@@ -950,6 +950,14 @@ class ImageService:
             ).count()
         )
 
+    def has_pending_collaborators(self):
+        collaborators = self.image.collaborators.all()
+        pending_collaborators = self.image.pending_collaborators.all()
+
+        # Return whether there are pending collaborators that are not collaborators.
+        return pending_collaborators.exclude(pk__in=collaborators).exists()
+
+
     @staticmethod
     def get_constellation(solution):
         if solution is None or solution.ra is None or solution.dec is None:
