@@ -404,3 +404,8 @@ def revision_upload_url(image: Image, request):
 @register.filter
 def display_download_menu(user, image):
     return ImageService(image).display_download_menu(user)
+
+
+@register.filter
+def has_pending_collaborators(image):
+    return ImageService(image).has_pending_collaborators()

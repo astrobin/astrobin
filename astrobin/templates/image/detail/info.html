@@ -3,6 +3,7 @@
 {% load hitcount_tags %}
 {% load tags %} {% comment %} TODO: rename tags to astrobin_tags {% endcomment %}
 {% load static %}
+{% load astrobin_apps_images_tags %}
 
 <div class="subtle-container avatar-block{% if image.collaborators.all|length > 0 %} with-collaborators{% endif %}">
     <div class="header">
@@ -64,7 +65,7 @@
     </div>
 </div>
 
-{% if image.pending_collaborators.all|length > 0 and request.user == image.user %}
+{% if request.user == image.user and image|has_pending_collaborators %}
     <div class="subtle-container avatar-block">
         <div class="header">
             <h4>
@@ -74,10 +75,12 @@
         </div>
 
         <div class="avatar">
-            {% for collaborator in image.pending_collaborators.all %}
-                {% with user=collaborator as_collaborator=True %}
-                    {% include "./_avatar.html" %}
-                {% endwith %}
+            {% for pending_collaborator in image.pending_collaborators.all %}
+                {% if pending_collaborator not in image.collaborators.all %}
+                    {% with user=pending_collaborator as_collaborator=True %}
+                        {% include "./_avatar.html" %}
+                    {% endwith %}
+                {% endif %}
             {% endfor %}
         </div>
     </div>

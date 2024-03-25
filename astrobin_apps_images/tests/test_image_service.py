@@ -742,3 +742,16 @@ class TestImageService(TestCase):
         collection.order_by_tag = tag.key
         collection.save()
         self.assertEqual(tag.value, ImageService(image).get_collection_tag_value(collection))
+
+    def test_has_pending_collaborators(self):
+        image = Generators.image()
+        self.assertFalse(ImageService(image).has_pending_collaborators())
+
+        collaborator = Generators.user()
+        image.pending_collaborators.add(collaborator)
+
+        self.assertTrue(ImageService(image).has_pending_collaborators())
+
+        image.collaborators.add(collaborator)
+
+        self.assertFalse(ImageService(image).has_pending_collaborators())
