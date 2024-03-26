@@ -114,7 +114,10 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         if self.line_items.count() == 0:
             return f'Marketplace listing by {self.user}'
 
-        return ' / '.join([str(item) for item in self.line_items.all()])
+        if self.title:
+            return self.title
+        else:
+            return ' / '.join([str(item) for item in self.line_items.all()])
 
     def get_absolute_url(self):
         return AppRedirectionService.redirect(f'/equipment/marketplace/listing/{self.hash}')

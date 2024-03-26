@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -45,7 +46,24 @@ class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         listing_id = self.kwargs.get('listing_id')
         listing = get_object_or_404(EquipmentItemMarketplaceListing, pk=listing_id)
-        serializer.save(user=self.request.user, listing=listing, user_last_accessed=timezone.now())
+        user = self.request.user
+        now = timezone.now()
+
+        # Check if the user is the owner of the listing
+        if user == listing.user and self.request.query_params.get('user') is not None:
+            user = get_object_or_404(User, pk=self.request.query_params.get('user'))
+
+        save_params = {
+            'user': user,
+            'listing': listing,
+        }
+
+        if user == listing.user:
+            save_params['listing_user_last_accessed'] = now
+        else:
+            save_params['user_last_accessed'] = now
+
+        serializer.save(**save_params)
 
     def destroy(self, request, *args, **kwargs):
         conversation: EquipmentItemMarketplacePrivateConversation = self.get_object()
