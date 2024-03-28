@@ -1,0 +1,45 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        Great news! Your offer for listing <strong>{{ listing }}</strong> has been accepted by the seller
+        <strong>{{ seller_display_name }}</strong>.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <strong>{% trans "Offer details" %}</strong>
+</p>
+
+<p>
+    {% for offer in offers %}
+        {% trans "Item" %}: <strong>{{ offer.line_item }}</strong><br/>
+        {% trans "Offer amount" %}: <strong>{{ offer.line_item.currency }} {{ offer.amount }}</strong>
+        <br/><br/>
+    {% endfor %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Now, it's time to finalize the details with the seller. You can communicate and arrange payment and delivery either
+        through the listing’s page or private messaging on AstroBin.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Please note, while AstroBin facilitates a platform for sellers and buyers, the specifics of transactions are
+        managed directly between parties involved. We encourage both buyers and sellers to exercise caution and use secure
+        methods for payment and delivery.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ listing_url }}" class="btn btn-primary">{% trans "View listing" %}</a>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Thank you for using AstroBin, and we wish you a smooth and successful transaction!
+    {% endblocktrans %}
+</p>

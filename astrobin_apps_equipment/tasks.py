@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime, timedelta
+from typing import List, Optional
 
 from annoying.functions import get_object_or_None
 from celery import shared_task
@@ -9,15 +10,19 @@ from django.utils import timezone
 from astrobin.models import GearMigrationStrategy
 from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models import (
-    Accessory, AccessoryEditProposal, Camera, CameraEditProposal, Filter, FilterEditProposal, Mount,
+    Accessory, AccessoryEditProposal, Camera, CameraEditProposal, EquipmentItemMarketplaceListing,
+    EquipmentItemMarketplaceOffer, Filter,
+    FilterEditProposal, Mount,
     MountEditProposal,
     Sensor, SensorEditProposal, Software, SoftwareEditProposal, Telescope,
     TelescopeEditProposal,
 )
-from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.services.stock import StockImporterService
 from astrobin_apps_equipment.services.stock.plugins.agena import AgenaStockImporterPlugin
+from astrobin_apps_notifications.utils import push_notification
 
 log = logging.getLogger(__name__)
 
@@ -103,3 +108,30 @@ def reject_stuck_items():
 def import_stock_feed_agena():
     importer = StockImporterService(AgenaStockImporterPlugin())
     importer.import_stock()
+
+
+@shared_task(time_limit=300)
+def send_offer_notifications(
+        listing_id: int,
+        buyer_id: int,
+        offer_id: Optional[int],
+        recipient_ids: List[int],
+        sender_id: Optional[int],
+        notice_label: str
+):
+    listing = EquipmentItemMarketplaceListing.objects.get(pk=listing_id)
+    buyer = User.objects.get(pk=buyer_id)
+    offer = EquipmentItemMarketplaceOffer.objects.get(pk=offer_id) if offer_id else None
+
+    recipients = User.objects.filter(pk__in=recipient_ids)
+    if sender_id:
+        sender = User.objects.get(pk=sender_id)
+    else:
+        sender = None
+
+    push_notification(
+        list(recipients),
+        sender,
+        notice_label,
+        MarketplaceService.offer_notification_params(listing, buyer, offer),
+    )

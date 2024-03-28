@@ -82,7 +82,7 @@ router.register(
 router.register(
     r'marketplace/listing/(?P<listing_id>[^/.]+)/line-item/(?P<line_item_id>[^/.]+)/offer',
     EquipmentItemMarketplaceOfferViewSet,
-    basename='marketplace-image'
+    basename='marketplace-offer'
 )
 
 router.register(

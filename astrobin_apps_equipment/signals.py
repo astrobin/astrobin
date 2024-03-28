@@ -5,23 +5,27 @@ from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.db.models.signals import post_migrate, post_save, pre_save
+from django.db import transaction
+from django.db.models.signals import post_delete, post_migrate, post_save, pre_delete, pre_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from notification import models as notification
 from pybb.models import Category, Forum, Topic
-from safedelete.signals import post_softdelete
+from safedelete.signals import post_softdelete, pre_softdelete
 
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
-    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentPreset, Filter, Mount, Sensor,
+    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentItemMarketplaceMasterOffer,
+    EquipmentItemMarketplaceOffer,
+    EquipmentPreset, Filter, Mount, Sensor,
     Software, Telescope,
 )
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
+from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.models.filter_edit_proposal import FilterEditProposal
 from astrobin_apps_equipment.models.mount_edit_proposal import MountEditProposal
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
@@ -29,6 +33,7 @@ from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditPropos
 from astrobin_apps_equipment.models.software_edit_proposal import SoftwareEditProposal
 from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEditProposal
 from astrobin_apps_equipment.notice_types import EQUIPMENT_NOTICE_TYPES
+from astrobin_apps_equipment.tasks import send_offer_notifications
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.constants import GroupName
 from common.services import AppRedirectionService
@@ -47,21 +52,21 @@ def create_DSLR_mirrorless_camera_variants(sender, instance: Camera, created: bo
         return
 
     properties = dict(
-        klass = instance.klass,
-        created_by = instance.created_by,
-        brand = instance.brand,
-        name = instance.name,
-        website = instance.website,
-        group = instance.group,
-        image = instance.image,
-        type = instance.type,
-        sensor = instance.sensor,
-        cooled = False,
-        max_cooling = instance.max_cooling,
-        back_focus = instance.back_focus,
-        reviewed_by = instance.reviewed_by,
-        reviewed_timestamp = instance.reviewed_timestamp,
-        reviewer_decision = instance.reviewer_decision,
+        klass=instance.klass,
+        created_by=instance.created_by,
+        brand=instance.brand,
+        name=instance.name,
+        website=instance.website,
+        group=instance.group,
+        image=instance.image,
+        type=instance.type,
+        sensor=instance.sensor,
+        cooled=False,
+        max_cooling=instance.max_cooling,
+        back_focus=instance.back_focus,
+        reviewed_by=instance.reviewed_by,
+        reviewed_timestamp=instance.reviewed_timestamp,
+        reviewer_decision=instance.reviewer_decision,
 
     )
 
@@ -72,6 +77,7 @@ def create_DSLR_mirrorless_camera_variants(sender, instance: Camera, created: bo
     Camera.objects.filter(
         pk__in=[x.pk for x in [just_modified, modified_and_cooled, just_cooled]]
     ).update(variant_of=instance)
+
 
 @receiver(pre_save, sender=Camera)
 def mirror_camera_update_to_variants(sender, instance: Camera, **kwargs):
@@ -119,6 +125,7 @@ def rename_equipment_item_after_deletion(sender, instance, **kwargs):
 @receiver(post_softdelete, sender=Sensor)
 def remove_sensor_from_cameras_after_deletion(sender, instance, **kwargs):
     Camera.objects.filter(sensor=instance).update(sensor=None)
+
 
 @receiver(post_softdelete, sender=Camera)
 def remove_camera_from_presets_after_deletion(sender, instance, **kwargs):
@@ -418,8 +425,8 @@ def set_search_friendly_name_for_accessory(sender, instance, **kwargs):
         search_friendly_name += ' oag'
 
     if (
-        "oag" in search_friendly_name.lower() and
-        "axis" not in search_friendly_name.lower()
+            "oag" in search_friendly_name.lower() and
+            "axis" not in search_friendly_name.lower()
     ):
         search_friendly_name += ' off axis guider'
 
@@ -484,3 +491,128 @@ def create_or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kwa
             else:
                 instance.forum.delete()
                 instance.forum = None
+
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceOffer)
+def create_and_sync_master_offer(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
+    with transaction.atomic():
+        master_offer, created = EquipmentItemMarketplaceMasterOffer.objects.get_or_create(
+            listing=instance.line_item.listing,
+            user=instance.user,
+        )
+
+    if master_offer.status != instance.status:
+        master_offer.status = instance.status
+        master_offer.save()
+
+    instance.master_offer = master_offer
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceOffer)
+def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
+    if instance.master_offer.offers.count() == 1:
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.pk,
+                [instance.listing.user.pk],
+                instance.user.pk,
+                'marketplace-offer-created',
+            ], countdown=10
+        )
+
+
+@receiver(post_delete, sender=EquipmentItemMarketplaceOffer)
+def delete_master_offer(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
+    master_offer = get_object_or_None(
+        EquipmentItemMarketplaceMasterOffer,
+        listing=instance.listing,
+        user=instance.user
+    )
+
+    if master_offer and master_offer.offers.count() == 0:
+        master_offer.status = instance.status
+        master_offer.delete()
+
+
+@receiver(post_delete, sender=EquipmentItemMarketplaceMasterOffer)
+def send_offer_retracted_or_rejected_notification(sender, instance: EquipmentItemMarketplaceMasterOffer, **kwargs):
+    if instance.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value:
+        # This offer is being deleted because it was rejected. If an offer is simpy retracted, the status would be
+        # PENDING.
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                None,
+                [instance.listing.user.pk],
+                instance.user.pk,
+                'marketplace-offer-rejected-by-seller',
+            ], countdown=10
+        )
+    elif instance.status == EquipmentItemMarketplaceOfferStatus.PENDING.value:
+        # This offer must've been retracted by the user.
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                None,
+                [instance.listing.user.pk],
+                instance.user.pk,
+                'marketplace-offer-retracted',
+            ], countdown=10
+        )
+
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceOffer)
+def prepare_offer_updated_notifications(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
+    before = get_object_or_None(EquipmentItemMarketplaceOffer, pk=instance.pk)
+    after = instance
+
+    if before is not None and before.amount != after.amount:
+        instance.pre_save_amount_changed = True
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceOffer)
+def send_offer_updated_notifications(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
+    if instance.pre_save_amount_changed:
+        send_offer_notifications.apply_async(args=[
+            instance.listing.pk,
+            instance.user.pk,
+            instance.pk,
+            [instance.line_item.user.pk],
+            instance.user.pk,
+            'marketplace-offer-updated',
+        ], countdown=10)
+
+        del instance.pre_save_amount_changed
+
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceMasterOffer)
+def send_offer_accepted_notifications(sender, instance: EquipmentItemMarketplaceMasterOffer, **kwargs):
+    before = get_object_or_None(EquipmentItemMarketplaceMasterOffer, pk=instance.pk)
+    after = instance
+
+    if (
+            before is not None and
+            before.status == EquipmentItemMarketplaceOfferStatus.PENDING.value and
+            after.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+    ):
+        send_offer_notifications.apply_async(args=[
+            instance.listing.pk,
+            instance.user.pk,
+            None,
+            [instance.user.pk],
+            instance.listing.user.pk,
+            'marketplace-offer-accepted-by-seller',
+        ], countdown=10)
+
+        send_offer_notifications.apply_async(args=[
+            instance.listing.pk,
+            instance.user.pk,
+            None,
+            [instance.listing.user.pk],
+            None,
+            'marketplace-offer-accepted-by-you',
+        ], countdown=10)

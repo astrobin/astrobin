@@ -3,7 +3,6 @@ from enum import Enum
 
 from django.contrib.auth.models import User
 from django.db import models
-from safedelete.models import SafeDeleteModel
 
 
 class EquipmentItemMarketplaceOfferStatus(Enum):
@@ -16,7 +15,9 @@ class EquipmentItemMarketplaceOfferStatus(Enum):
         return tuple((i.name, i.value) for i in cls)
 
 
-class EquipmentItemMarketplaceOffer(SafeDeleteModel):
+class EquipmentItemMarketplaceOffer(models.Model):
+    pre_save_amount_changed = None
+
     user = models.ForeignKey(
         User,
         related_name='equipment_item_marketplace_listings_offers',
@@ -38,6 +39,14 @@ class EquipmentItemMarketplaceOffer(SafeDeleteModel):
         related_name='offers',
         on_delete=models.CASCADE,
         null=False,
+        editable=False,
+    )
+
+    master_offer = models.ForeignKey(
+        'astrobin_apps_equipment.EquipmentItemMarketplaceMasterOffer',
+        related_name='offers',
+        on_delete=models.CASCADE,
+        null=True,
         editable=False,
     )
 
@@ -63,14 +72,14 @@ class EquipmentItemMarketplaceOffer(SafeDeleteModel):
     status = models.CharField(
         max_length=10,
         choices=EquipmentItemMarketplaceOfferStatus.choices(),
-        default=EquipmentItemMarketplaceOfferStatus.PENDING.name,
+        default=EquipmentItemMarketplaceOfferStatus.PENDING.value,
         null=False,
         editable=False,
     )
 
     class Meta:
         ordering = ('-created',)
-        unique_together = ('user', 'line_item', 'deleted')
+        unique_together = ('user', 'line_item')
 
     def __str__(self):
         return f'Marketplace listing line item offer for {self.line_item} by {self.user}: {self.amount}'

@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        Unfortunately, your offer for the listing <strong>{{ listing }}</strong> has been retracted by the prospect
+        buyer <a href="{{ buyer_url }}">{{ buyer_display_name }}</a>.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        You may contact the prospect buyer using AstroBin's private messaging for more information.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ listing_url }}" class="btn btn-primary">{% trans "View listing" %}</a>
+</p>

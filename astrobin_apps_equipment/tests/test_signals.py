@@ -1,7 +1,11 @@
 from django.test import TestCase
+from mock import mock
+from mock.mock import patch
 
-from astrobin_apps_equipment.models import Camera
+from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models import Camera, EquipmentItemMarketplaceMasterOffer
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
 
@@ -73,3 +77,95 @@ class SignalsTest(TestCase):
         telescope.refresh_from_db()
 
         self.assertIsNone(telescope.forum)
+
+    @patch('astrobin_apps_equipment.tasks.push_notification')
+    def test_marketplace_master_offer_created(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+        line_item_1 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        line_item_2 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        buyer = Generators.user()
+        offer_1 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_1, user=buyer)
+        offer_2 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_2, user=buyer)
+
+        self.assertEqual(1, EquipmentItemMarketplaceMasterOffer.objects.filter(offers=offer_1).count())
+        self.assertEqual(1, EquipmentItemMarketplaceMasterOffer.objects.filter(offers=offer_2).count())
+
+        push_notification.assert_called_with([seller], buyer, 'marketplace-offer-created', mock.ANY)
+
+        # Two offers created still results in one notification.
+        push_notification.asset_called_once()
+
+    @patch('astrobin_apps_equipment.tasks.push_notification')
+    def test_marketplace_master_offer_deleted(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+        line_item_1 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        line_item_2 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        buyer = Generators.user()
+        offer_1 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_1, user=buyer)
+        offer_2 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_2, user=buyer)
+
+        push_notification.reset_mock()
+
+        offer_1.delete()
+        offer_2.delete()
+
+        self.assertEqual(0, EquipmentItemMarketplaceMasterOffer.objects.filter(offers=offer_1).count())
+        self.assertEqual(0, EquipmentItemMarketplaceMasterOffer.objects.filter(offers=offer_2).count())
+
+        push_notification.assert_called_with([seller], buyer, 'marketplace-offer-retracted', mock.ANY)
+
+        # Two offers deleted still results in one notification.
+        push_notification.asset_called_once()
+
+    @patch('astrobin_apps_equipment.tasks.push_notification')
+    def test_marketplace_offers_updated(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+        line_item_1 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        line_item_2 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        buyer = Generators.user()
+        offer_1 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_1, user=buyer)
+        offer_2 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_2, user=buyer)
+
+        push_notification.reset_mock()
+
+        offer_1.amount += 1
+        offer_2.amount += 1
+
+        offer_1.save()
+        offer_2.save()
+
+        push_notification.assert_has_calls([
+            mock.call([seller], buyer, 'marketplace-offer-updated', mock.ANY),
+            mock.call([seller], buyer, 'marketplace-offer-updated', mock.ANY),
+        ], any_order=True)
+
+        push_notification.asset_called_times(2)
+
+    @patch('astrobin_apps_equipment.tasks.push_notification')
+    def test_marketplace_master_offer_accepted(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+        line_item_1 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        line_item_2 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        buyer = Generators.user()
+        offer_1 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_1, user=buyer)
+        offer_2 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_2, user=buyer)
+
+        push_notification.reset_mock()
+
+        offer_1.status = EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+        offer_2.status = EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+
+        offer_1.save()
+        offer_2.save()
+
+        push_notification.assert_has_calls([
+            mock.call([buyer], seller, 'marketplace-offer-accepted-by-seller', mock.ANY),
+            mock.call([seller], None, 'marketplace-offer-accepted-by-you', mock.ANY),
+        ], any_order=True)
+
+        push_notification.asset_called_times(2)
+

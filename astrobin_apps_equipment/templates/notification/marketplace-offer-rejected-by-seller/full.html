@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        Unfortunately, your offer for the listing <strong>{{ listing }}</strong> has been rejected by the seller
+        <strong>{{ seller_display_name }}</strong>.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        You may contact the seller using the listing's page for more information.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ listing_url }}" class="btn btn-primary">{% trans "View listing" %}</a>
+</p>

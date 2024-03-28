@@ -1,0 +1,34 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        An offer for your listing <strong>{{ listing }}</strong> was updated.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <strong>{% trans "Offer details" %}</strong>
+</p>
+
+<p>
+    {% trans "Item" %}: <strong>{{ offer.line_item }}</strong><br/>
+    {% trans "Offer amount" %}: <strong>{{ offer.line_item.currency }} {{ offer.amount }}</strong><br/>
+    {% trans "Buyer" %}: <strong>{{ buyer_display_name }}</strong>
+</p>
+
+<p>
+    <strong>
+        {% blocktrans trimmed %}
+            PLEASE NOTE: listings on AstroBin's marketplace may contain more than one item. Please review the offer
+            details to ensure you understand which items the offer is for.
+        {% endblocktrans %}
+    </strong>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        To review and respond to the offer, please visit your listing page.
+    {% endblocktrans %}
+</p>
+
+<a href="{{ listing_url }}" class="btn btn-primary">{% trans "View listing" %}</a>

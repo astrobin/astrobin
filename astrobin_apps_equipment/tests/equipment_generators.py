@@ -1,9 +1,12 @@
+from datetime import timedelta
+
 from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import (
-    Camera, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem, Sensor, Telescope, Mount, Filter,
+    Camera, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceOffer,
+    Sensor, Telescope, Mount, Filter,
     Accessory, Software,
     EquipmentItemGroup,
 )
@@ -13,11 +16,13 @@ from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
+from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 from astrobin_apps_equipment.models.filter_base_model import FilterSize, FilterType
 from astrobin_apps_equipment.models.mount_base_model import MountType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
+from common.services import DateTimeService
 
 
 class EquipmentGenerators:
@@ -262,5 +267,25 @@ class EquipmentGenerators:
 
         return EquipmentItemMarketplaceListing.objects.create(
             user=user,
-            expiration=kwargs.get('expiration')
+            expiration=kwargs.get('expiration', DateTimeService.now() + timedelta(days=30)),
+        )
+
+    @staticmethod
+    def marketplace_offer(**kwargs):
+        listing = kwargs.get('listing')
+        line_item = kwargs.get('line_item')
+        user = kwargs.get('user')
+
+        if line_item is None:
+            line_item = EquipmentGenerators.marketplace_line_item()
+
+        if user is None:
+            user = Generators.user()
+
+        return EquipmentItemMarketplaceOffer.objects.create(
+            listing=listing,
+            line_item=line_item,
+            user=user,
+            amount=kwargs.get('amount', 900),
+            status=kwargs.get('status', EquipmentItemMarketplaceOfferStatus.PENDING.value),
         )

@@ -2,10 +2,11 @@
 from django.db.models import QuerySet
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, status, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
 
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_offer_serializer import \
     EquipmentItemMarketplaceOfferSerializer
@@ -13,6 +14,7 @@ from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
     EquipmentItemMarketplaceOffer,
 )
+from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from common.permissions import IsObjectUserOrReadOnly
 
 
@@ -78,3 +80,12 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
             # Raise a 404 error if listing_id is not provided in the URL
             from django.http import Http404
             raise Http404("Listing ID or LineItem ID not provided")
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        if request.user == instance.line_item.user:
+            instance.status = EquipmentItemMarketplaceOfferStatus.REJECTED.value
+
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)

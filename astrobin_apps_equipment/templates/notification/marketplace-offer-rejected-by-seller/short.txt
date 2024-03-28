@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ seller_display_name }} rejected your offer for their marketplace listing "{{ listing }}"
+{% endblocktrans %}
