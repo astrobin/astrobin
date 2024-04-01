@@ -114,6 +114,9 @@
 
         {% for i in object.imaging_cameras_2.all %}
             {{ i | asciify }} {{ i.type_label }}
+            {% if i.sensor %}
+                {{ i.sensor | asciify }}
+            {% endif %}
         {% endfor %}
 
         {% for i in object.guiding_telescopes_2.all %}
