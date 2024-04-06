@@ -1542,6 +1542,13 @@ def userprofile_post_softdelete(sender, instance, **kwargs):
     ImageRevision.objects.filter(image__user=instance.user).delete()
     NestedComment.objects.filter(author=instance.user, deleted=False).update(deleted=True)
 
+    if instance.stripe_subscription_id:
+        try:
+            stripe.api_key = settings.STRIPE['keys']['secret']
+            stripe.Subscription.cancel(instance.stripe_subscription_id)
+        except StripeError as e:
+            log.error('Error canceling Stripe subscription (%s): %s' % (instance.stripe_subscription_id, e))
+
     UserIndex().remove_object(instance.user)
 
 
