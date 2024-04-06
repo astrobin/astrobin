@@ -814,49 +814,60 @@ def subscription_signed_up(sender, **kwargs):
     PremiumService(user).clear_subscription_status_cache_keys()
     UserService(user).update_premium_counter_on_subscription(subscription)
 
-    if 'premium' in subscription.category and subscription.recurrence_unit is None:
-        # When there's a payment for an expired subscription, make sure we start the subscription from today.
-        today = DateTimeService.today()
-        if user_subscription.expires is None or user_subscription.expires < today:
-            user_subscription.expires = today
+    if 'premium' in subscription.category:
+        # Deactivate other premium subscriptions
+        UserSubscription.active_objects.filter(
+            user=user_subscription.user,
+            subscription__category__startswith='premium'
+        ).exclude(
+            pk=user_subscription.pk
+        ).update(
+            active=False
+        )
 
-        # Non recurring premium subscription are for a year, no exceptions.
-        user_subscription.expires = extend_date_by(user_subscription.expires, 1, 'Y')
-        # Non-recurring subscription are of course cancelled because they are not recurring.
-        user_subscription.cancelled = True
-        user_subscription.save()
+        if subscription.recurrence_unit is None:
+            # When there's a payment for an expired subscription, make sure we start the subscription from today.
+            today = DateTimeService.today()
+            if user_subscription.expires is None or user_subscription.expires < today:
+                user_subscription.expires = today
 
-        # Invalidate other premium subscriptions
-        UserSubscription.active_objects \
-            .filter(user=user_subscription.user,
-                    subscription__category__startswith='premium') \
-            .exclude(pk=user_subscription.pk) \
-            .update(active=False)
+            # Non-recurring premium subscription are for a year, no exceptions.
+            user_subscription.expires = extend_date_by(user_subscription.expires, 1, 'Y')
+            # Non-recurring subscription are of course cancelled because they are not recurring.
+            user_subscription.cancelled = True
+            user_subscription.save()
 
-        if Transaction.objects.filter(
-            user=user,
-            event='new usersubscription',
-            timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
-        ):
-            push_notification(
-                [user],
-                None,
-                'new_subscription',
-                {
-                    'BASE_URL': settings.BASE_URL,
-                    'subscription': subscription
-                }
-            )
-        else:
-            push_notification(
-                [user],
-                None,
-                'new_payment',
-                {
-                    'BASE_URL': settings.BASE_URL,
-                    'subscription': subscription
-                }
-            )
+            # Invalidate other premium subscriptions
+            UserSubscription.active_objects \
+                .filter(user=user_subscription.user,
+                        subscription__category__startswith='premium') \
+                .exclude(pk=user_subscription.pk) \
+                .update(active=False)
+
+            if Transaction.objects.filter(
+                user=user,
+                event='new usersubscription',
+                timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
+            ):
+                push_notification(
+                    [user],
+                    None,
+                    'new_subscription',
+                    {
+                        'BASE_URL': settings.BASE_URL,
+                        'subscription': subscription
+                    }
+                )
+            else:
+                push_notification(
+                    [user],
+                    None,
+                    'new_payment',
+                    {
+                        'BASE_URL': settings.BASE_URL,
+                        'subscription': subscription
+                    }
+                )
 
 
 signed_up.connect(subscription_signed_up)
