@@ -48,7 +48,7 @@ docker pull ${DOCKER_REGISTRY}/astrobin-${ARCH}:${RELEASE_TAG}
 
 # Install efs-utils:
 
-git clone https://github.com/aws/efs-utils && (cd efs-utils && ./build-deb.sh && apt-get -y install ./build/amazon-efs-utils*deb)
+git clone https://github.com/aws/efs-utils && (cd efs-utils && git reset --hard ddc2bd0684e8baee11907923fccd64d8e19ea83a && ./build-deb.sh && apt-get -y install ./build/amazon-efs-utils*deb)
 
 # Mount EFS:
 
