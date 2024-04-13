@@ -1546,7 +1546,7 @@ def userprofile_post_softdelete(sender, instance, **kwargs):
         try:
             stripe.api_key = settings.STRIPE['keys']['secret']
             stripe.Subscription.cancel(instance.stripe_subscription_id)
-        except StripeError as e:
+        except (StripeError, AttributeError) as e:
             log.error('Error canceling Stripe subscription (%s): %s' % (instance.stripe_subscription_id, e))
 
     UserIndex().remove_object(instance.user)
