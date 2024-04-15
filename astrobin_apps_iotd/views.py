@@ -1,6 +1,8 @@
 import logging
 
 from braces.views import JsonRequestResponseMixin
+from django.conf import settings
+from django.contrib.auth.models import Group
 from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext
@@ -16,6 +18,7 @@ from astrobin_apps_iotd.models import (
     IotdVote,
 )
 from astrobin_apps_iotd.services import IotdService
+from common.constants import GroupName
 from common.services.caching_service import CachingService
 from django.views.generic import base
 
@@ -50,13 +53,25 @@ class ImageStats(JsonRequestResponseMixin, base.View):
         if request.user != image.user and not request.user.is_superuser:
             return HttpResponseForbidden()
 
+        submitter_views = IotdSubmitterSeenImage.objects.filter(image=image).count()
+        total_submitters = Group.objects.get(name=GroupName.IOTD_SUBMITTERS).user_set.count()
+        submitter_views_percentage = 0 if total_submitters == 0 else submitter_views / total_submitters * 100
+
+        reviewer_views = IotdReviewerSeenImage.objects.filter(image=image).count()
+        total_reviewers = Group.objects.get(name=GroupName.IOTD_REVIEWERS).user_set.count()
+        reviewer_views_percentage = 0 if total_reviewers == 0 else reviewer_views / total_reviewers * 100
+
         data = {
-            'submitter_views': IotdSubmitterSeenImage.objects.filter(image=image).count(),
+            'submitter_views': submitter_views,
+            'total_submitters': total_submitters,
+            'submitter_views_percentage': f'{submitter_views_percentage:.2f}%',
             'submissions': IotdSubmission.objects.filter(image=image).count(),
-            'reviewer_views': IotdReviewerSeenImage.objects.filter(image=image).count(),
+            'reviewer_views': reviewer_views,
+            'total_reviewers': total_reviewers,
+            'reviewer_views_percentage': f'{reviewer_views_percentage:.2f}%',
             'votes': IotdVote.objects.filter(image=image).count(),
             'early_dismissal': gettext('Yes')
-            if IotdDismissedImage.objects.filter(image=image).count() >= 5
+            if IotdDismissedImage.objects.filter(image=image).count() >= settings.IOTD_MAX_DISMISSALS
             else gettext('No'),
         }
 

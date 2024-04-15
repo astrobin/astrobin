@@ -48,7 +48,7 @@
                         {% endblocktrans %}
                     </small>
                 </th>
-                <td class="submitter_views"></td>
+                <td class="submitter_views_percentage"></td>
             </tr>
 
             <tr>
@@ -98,33 +98,35 @@
 </div>
 
 <script type="text/javascript">
-    $('#image-iotd-stats-modal').on('show', function() {
-        const $modal = $(this);
-        const $loading = $modal.find('.loading');
-        const $table = $modal.find('.table');
-
-        $loading.show();
-        $table.addClass('hide');
-
-        $.ajax({
-            url: "{% url 'astrobin_apps_iotd.image_stats' image.get_id %}",
-            timeout: 0,
-            success: function(data, textStatus, jqXHR) {
-                Object.keys(data).forEach(function(key) {
-                    $table.find('.' + key).html(data[key]);
-                });
-                $loading.hide();
-                $table.removeClass('hide');
-            }
+    $(document).ready(function() {
+        const $modal = $('#image-iotd-stats-modal');
+       
+        $modal.on('show', function() {
+            const $loading = $modal.find('.loading');
+            const $table = $modal.find('.table');
+    
+            $loading.show();
+            $table.addClass('hide');
+    
+            $.ajax({
+                url: "{% url 'astrobin_apps_iotd.image_stats' image.get_id %}",
+                timeout: 0,
+                success: function(data, textStatus, jqXHR) {
+                    Object.keys(data).forEach(function(key) {
+                        $table.find('.' + key).html(data[key]);
+                    });
+                    $loading.hide();
+                    $table.removeClass('hide');
+                }
+            });
         });
-    });
-
-    $('#image-iotd-stats-modal').on('hidden', function() {
-        const $modal = $(this);
-        const $loading = $modal.find('.loading');
-        const $table = $modal.find('.table');
-
-        $loading.show();
-        $table.addClass('hide');
+    
+        $modal.on('hidden', function() {
+            const $loading = $modal.find('.loading');
+            const $table = $modal.find('.table');
+    
+            $loading.show();
+            $table.addClass('hide');
+        });
     });
 </script>
