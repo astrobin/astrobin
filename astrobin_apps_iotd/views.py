@@ -12,7 +12,7 @@ from django.views.generic import ListView
 from astrobin.models import Image
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import (
-    Iotd, IotdDismissedImage, IotdSubmission, IotdSubmitterSeenImage,
+    Iotd, IotdDismissedImage, IotdReviewerSeenImage, IotdSubmission, IotdSubmitterSeenImage,
     IotdVote,
 )
 from astrobin_apps_iotd.services import IotdService
@@ -53,6 +53,7 @@ class ImageStats(JsonRequestResponseMixin, base.View):
         data = {
             'submitter_views': IotdSubmitterSeenImage.objects.filter(image=image).count(),
             'submissions': IotdSubmission.objects.filter(image=image).count(),
+            'reviewer_views': IotdReviewerSeenImage.objects.filter(image=image).count(),
             'votes': IotdVote.objects.filter(image=image).count(),
             'early_dismissal': gettext('Yes')
             if IotdDismissedImage.objects.filter(image=image).count() >= 5
