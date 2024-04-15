@@ -6,6 +6,7 @@ from astrobin_apps_iotd.api.views.future_iotds_view_set import FutureIotdsViewSe
 from astrobin_apps_iotd.api.views.hidden_image_view_set import HiddenImageViewSet
 from astrobin_apps_iotd.api.views.judgement_queue_view_set import JudgementQueueViewSet
 from astrobin_apps_iotd.api.views.review_queue_view_set import ReviewQueueViewSet
+from astrobin_apps_iotd.api.views.reviewer_seen_image_view_set import ReviewerSeenImageViewSet
 from astrobin_apps_iotd.api.views.staff_member_settings_view_set import StaffMemberSettingsViewSet
 from astrobin_apps_iotd.api.views.stats_view_set import StatsViewSet
 from astrobin_apps_iotd.api.views.submission_queue_view_set import SubmissionQueueViewSet
@@ -19,6 +20,7 @@ router.register(r'staff-member-settings', StaffMemberSettingsViewSet, basename='
 router.register(r'hidden-image', HiddenImageViewSet, basename='hidden-image')
 router.register(r'dismissed-image', DismissedImageViewSet, basename='dismissed-image')
 router.register(r'submitter-seen-image', SubmitterSeenImageViewSet, basename='submitter-seen-image')
+router.register(r'reviewer-seen-image', ReviewerSeenImageViewSet, basename='reviewer-seen-image')
 
 router.register(r'submission-queue', SubmissionQueueViewSet, basename='submission-queue')
 router.register(r'submission', SubmissionViewSet, basename='submission-detail')

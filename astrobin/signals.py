@@ -778,17 +778,28 @@ def subscription_signed_up(sender, **kwargs):
     PremiumService(user).clear_subscription_status_cache_keys()
     UserService(user).update_premium_counter_on_subscription(subscription)
 
-    if 'premium' in subscription.category and subscription.recurrence_unit is None:
-        # When there's a payment for an expired subscription, make sure we start the subscription from today.
-        today = DateTimeService.today()
-        if user_subscription.expires is None or user_subscription.expires < today:
-            user_subscription.expires = today
+    if 'premium' in subscription.category:
+        # Deactivate other premium subscriptions
+        UserSubscription.active_objects.filter(
+            user=user_subscription.user,
+            subscription__category__startswith='premium'
+        ).exclude(
+            pk=user_subscription.pk
+        ).update(
+            active=False
+        )
 
-        # Non recurring premium subscription are for a year, no exceptions.
-        user_subscription.expires = extend_date_by(user_subscription.expires, 1, 'Y')
-        # Non-recurring subscription are of course cancelled because they are not recurring.
-        user_subscription.cancelled = True
-        user_subscription.save()
+        if subscription.recurrence_unit is None:
+            # When there's a payment for an expired subscription, make sure we start the subscription from today.
+            today = DateTimeService.today()
+            if user_subscription.expires is None or user_subscription.expires < today:
+                user_subscription.expires = today
+
+            # Non-recurring premium subscription are for a year, no exceptions.
+            user_subscription.expires = extend_date_by(user_subscription.expires, 1, 'Y')
+            # Non-recurring subscription are of course cancelled because they are not recurring.
+            user_subscription.cancelled = True
+            user_subscription.save()
 
         # Invalidate other premium subscriptions
         UserSubscription.active_objects \
@@ -799,30 +810,30 @@ def subscription_signed_up(sender, **kwargs):
             .exclude(pk=user_subscription.pk) \
             .update(active=False)
 
-        if Transaction.objects.filter(
+            if Transaction.objects.filter(
                 user=user,
                 event='new usersubscription',
                 timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
-        ):
-            push_notification(
-                [user],
-                None,
-                'new_subscription',
-                {
-                    'BASE_URL': settings.BASE_URL,
-                    'subscription': subscription
-                }
-            )
-        else:
-            push_notification(
-                [user],
-                None,
-                'new_payment',
-                {
-                    'BASE_URL': settings.BASE_URL,
-                    'subscription': subscription
-                }
-            )
+            ):
+                push_notification(
+                    [user],
+                    None,
+                    'new_subscription',
+                    {
+                        'BASE_URL': settings.BASE_URL,
+                        'subscription': subscription
+                    }
+                )
+            else:
+                push_notification(
+                    [user],
+                    None,
+                    'new_payment',
+                    {
+                        'BASE_URL': settings.BASE_URL,
+                        'subscription': subscription
+                    }
+                )
 
 
 signed_up.connect(subscription_signed_up)
@@ -1521,6 +1532,13 @@ def userprofile_post_softdelete(sender, instance, **kwargs):
     Image.objects_including_wip.filter(user=instance.user).delete()
     ImageRevision.objects.filter(image__user=instance.user).delete()
     NestedComment.objects.filter(author=instance.user, deleted=False).update(deleted=True)
+
+    if instance.stripe_subscription_id:
+        try:
+            stripe.api_key = settings.STRIPE['keys']['secret']
+            stripe.Subscription.cancel(instance.stripe_subscription_id)
+        except (StripeError, AttributeError) as e:
+            log.error('Error canceling Stripe subscription (%s): %s' % (instance.stripe_subscription_id, e))
 
     UserIndex().remove_object(instance.user)
 
