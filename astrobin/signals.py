@@ -133,8 +133,8 @@ def image_pre_save(sender, instance, **kwargs):
             instance.moderator_decision = ModeratorDecision.APPROVED
     else:
         if (
-            image.moderator_decision != ModeratorDecision.APPROVED and
-            instance.moderator_decision == ModeratorDecision.APPROVED
+                image.moderator_decision != ModeratorDecision.APPROVED and
+                instance.moderator_decision == ModeratorDecision.APPROVED
         ):
             # This image is being approved
             if not instance.is_wip and not image.skip_activity_stream:
@@ -342,6 +342,7 @@ def image_pre_delete(sender, instance: Image, **kwargs):
 def image_post_delete(sender, instance, **kwargs):
     UserService(instance.user).update_image_count()
 
+
 def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):
     if not instance.uploader_in_progress and instance.square_cropping in (None, ''):
         instance.square_cropping = ImageService(instance.image).get_default_cropping(instance.label) or ""
@@ -488,10 +489,12 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
 
+
 @receiver(post_delete, sender=NestedComment)
 def nested_comment_post_delete(sender, instance, **kwargs):
     if isinstance(instance.content_object, Image):
         ImageService(instance.content_object).update_comment_count()
+
 
 def toggleproperty_post_delete(sender, instance, **kwargs):
     if isinstance(instance.content_object, Image):
@@ -511,7 +514,6 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
     elif isinstance(instance.content_object, User) and instance.property_type == "follow":
         UserService(instance.content_object).update_followers_count()
         UserService(instance.user).update_following_count()
-
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
@@ -810,30 +812,30 @@ def subscription_signed_up(sender, **kwargs):
             .exclude(pk=user_subscription.pk) \
             .update(active=False)
 
-            if Transaction.objects.filter(
+        if Transaction.objects.filter(
                 user=user,
                 event='new usersubscription',
                 timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)
-            ):
-                push_notification(
-                    [user],
-                    None,
-                    'new_subscription',
-                    {
-                        'BASE_URL': settings.BASE_URL,
-                        'subscription': subscription
-                    }
-                )
-            else:
-                push_notification(
-                    [user],
-                    None,
-                    'new_payment',
-                    {
-                        'BASE_URL': settings.BASE_URL,
-                        'subscription': subscription
-                    }
-                )
+        ):
+            push_notification(
+                [user],
+                None,
+                'new_subscription',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                }
+            )
+        else:
+            push_notification(
+                [user],
+                None,
+                'new_payment',
+                {
+                    'BASE_URL': settings.BASE_URL,
+                    'subscription': subscription
+                }
+            )
 
 
 signed_up.connect(subscription_signed_up)
@@ -1279,6 +1281,7 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
 
     cache.delete(ForumService.home_page_latest_from_forum_cache_key(instance.user))
 
+
 post_save.connect(forum_topic_post_save, sender=Topic)
 
 
@@ -1440,6 +1443,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             cache.delete("post.%d.forum_post_pre_save_approved" % instance.pk)
 
     cache.delete(ForumService.home_page_latest_from_forum_cache_key(instance.user))
+
 
 post_save.connect(forum_post_post_save, sender=Post)
 
@@ -1750,15 +1754,17 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
                 toggleproperty__object_id=user.id,
                 toggleproperty__property_type="follow"
             ).distinct()
-            push_notification_task.apply_async(args=(
-                list(followers.values_list('id', flat=True)),
-                user.id,
-                'new_image',
-                {
-                    'image_id': instance.id,
-                    'image_thumbnail': thumb.url if thumb else None
-                }
-            ))
+            push_notification_task.apply_async(
+                args=(
+                    list(followers.values_list('id', flat=True)),
+                    user.id,
+                    'new_image',
+                    {
+                        'image_id': instance.id,
+                        'image_thumbnail': thumb.url if thumb else None
+                    }
+                )
+            )
     elif action == 'pre_remove':
         users = User.objects.filter(pk__in=pk_set)
         for user in users.iterator():
