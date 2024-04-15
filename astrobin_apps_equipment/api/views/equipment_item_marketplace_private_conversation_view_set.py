@@ -68,8 +68,8 @@ class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         conversation: EquipmentItemMarketplacePrivateConversation = self.get_object()
 
-        # Check if the current user is the owner of the conversation
-        if request.user != conversation.user:
+        # Check if the current user is the owner of the conversation or the listing
+        if request.user != conversation.user and request.user != conversation.listing.user:
             raise PermissionDenied("You do not have permission to delete this conversation.")
 
         if conversation.comments.count() > 0:
