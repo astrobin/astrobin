@@ -2,14 +2,13 @@ import logging
 
 from braces.views import JsonRequestResponseMixin
 from django.conf import settings
-from django.contrib.auth.models import Group
 from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext
 from django.views.decorators.cache import cache_control, cache_page
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
-from django.views.generic import ListView
+from django.views.generic import ListView, base
 
 from astrobin.models import Image
 from astrobin_apps_images.services import ImageService
@@ -18,9 +17,7 @@ from astrobin_apps_iotd.models import (
     IotdVote,
 )
 from astrobin_apps_iotd.services import IotdService
-from common.constants import GroupName
 from common.services.caching_service import CachingService
-from django.views.generic import base
 
 log = logging.getLogger(__name__)
 
@@ -54,11 +51,11 @@ class ImageStats(JsonRequestResponseMixin, base.View):
             return HttpResponseForbidden()
 
         submitter_views = IotdSubmitterSeenImage.objects.filter(image=image).count()
-        total_submitters = Group.objects.get(name=GroupName.IOTD_SUBMITTERS).user_set.count()
+        total_submitters = image.designated_iotd_submitters.count()
         submitter_views_percentage = 0 if total_submitters == 0 else submitter_views / total_submitters * 100
 
         reviewer_views = IotdReviewerSeenImage.objects.filter(image=image).count()
-        total_reviewers = Group.objects.get(name=GroupName.IOTD_REVIEWERS).user_set.count()
+        total_reviewers = image.designated_iotd_reviewers.count()
         reviewer_views_percentage = 0 if total_reviewers == 0 else reviewer_views / total_reviewers * 100
 
         data = {
