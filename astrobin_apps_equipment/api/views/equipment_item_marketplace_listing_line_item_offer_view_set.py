@@ -3,8 +3,8 @@ from django.db.models import QuerySet
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import permissions, status, viewsets
+from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
@@ -15,7 +15,7 @@ from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceOffer,
 )
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
-from common.permissions import IsObjectUserOrReadOnly
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 
 
 class IsOfferOwner(permissions.BasePermission):
@@ -89,3 +89,14 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(detail=True, methods=['post'], url_path='accept')
+    def accept(self, request, *args, **kwargs):
+        offer = self.get_object()
+
+        if offer.line_item.user != request.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        MarketplaceService.accept_offer(offer)
+
+        return Response(status=status.HTTP_200_OK)

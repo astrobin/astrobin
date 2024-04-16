@@ -10,7 +10,7 @@ from astrobin_apps_equipment.models import (
 )
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_notifications.utils import build_notification_url
-from common.services import AppRedirectionService
+from common.services import AppRedirectionService, DateTimeService
 
 log = logging.getLogger(__name__)
 
@@ -41,3 +41,12 @@ class MarketplaceService:
                 )
             )
         }
+
+    @staticmethod
+    def accept_offer(offer: EquipmentItemMarketplaceOffer):
+        offer.status = EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+        offer.save()
+
+        offer.line_item.sold = DateTimeService.now()
+        offer.line_item.sold_to = offer.user
+        offer.line_item.save()

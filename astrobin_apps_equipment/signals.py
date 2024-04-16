@@ -509,8 +509,8 @@ def create_and_sync_master_offer(sender, instance: EquipmentItemMarketplaceOffer
 
 
 @receiver(post_save, sender=EquipmentItemMarketplaceOffer)
-def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
-    if instance.master_offer.offers.count() == 1:
+def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceOffer, created: bool, **kwargs):
+    if created:
         send_offer_notifications.apply_async(
             args=[
                 instance.listing.pk,

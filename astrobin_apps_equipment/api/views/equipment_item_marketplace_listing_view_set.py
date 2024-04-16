@@ -151,8 +151,15 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         return queryset
 
     def filter_line_items_by_sold_status(self, queryset: QuerySet) -> QuerySet:
-        sold = self.request.query_params.get('sold', 'false') == 'true'
-        return queryset.filter(sold__isnull=False) if sold else queryset
+        sold = self.request.query_params.get('sold')
+
+        if sold is None:
+            return queryset
+
+        if sold == 'true':
+            return queryset.filter(sold__isnull=False)
+
+        return queryset.filter(sold__isnull=True)
 
     def filter_line_items_by_item_type(self, queryset: QuerySet) -> QuerySet:
         item_type = self.request.query_params.get('item_type')
