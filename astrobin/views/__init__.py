@@ -1237,7 +1237,7 @@ def user_page(request, username):
     else:
         qs = UserService(user).get_public_images(use_union)
 
-    wip_qs = UserService(user).get_wip_images(use_union)
+    wip_qs = UserService(user).get_wip_images(use_union).order_by('-uploaded', '-id')
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
