@@ -36,3 +36,12 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
             return EquipmentItemMarketplaceListingLineItemSerializer
 
         return EquipmentItemMarketplaceListingLineItemReadSerializer
+
+    # Do not allow editing a line item that has been sold
+    def perform_update(self, serializer):
+        instance = serializer.instance
+
+        if instance.sold:
+            raise serializers.ValidationError("Cannot edit a line item that has been sold")
+
+        serializer.save()

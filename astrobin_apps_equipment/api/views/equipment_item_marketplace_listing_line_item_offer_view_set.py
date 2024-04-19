@@ -2,7 +2,7 @@
 from django.db.models import QuerySet
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from rest_framework import permissions, status, viewsets
+from rest_framework import permissions, serializers, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -80,6 +80,15 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
             # Raise a 404 error if listing_id is not provided in the URL
             from django.http import Http404
             raise Http404("Listing ID or LineItem ID not provided")
+
+    # Do not allow updating offers that have already been accepted or rejected.
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        if instance.status != EquipmentItemMarketplaceOfferStatus.PENDING.value:
+            raise serializers.ValidationError("Cannot edit an offer that has been accepted or rejected")
+
+        return super().update(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
