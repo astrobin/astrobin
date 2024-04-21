@@ -43,7 +43,7 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
                     content_type=ContentType.objects.get_for_model(NestedComment),
                     object_id=comment.pk,
             ).exclude(
-                decision=ABUSE_REPORT_DECISION_CONFIRMED
+                decision=ABUSE_REPORT_DECISION_OVERRULED
             ).exists():
                 raise ValidationError(
                     _('You cannot undeleted this comment: a confirmed or pending abuse reports exists for it. '
