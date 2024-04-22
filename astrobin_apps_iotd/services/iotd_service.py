@@ -694,7 +694,7 @@ class IotdService:
             total_noctilucent_clouds_images=total_submitted_images_queryset \
                 .filter(subject_type=SubjectType.NOCTILUCENT_CLOUDS) \
                 .count(),
-            total_lanscape_images=total_submitted_images_queryset \
+            total_landscape_images=total_submitted_images_queryset \
                 .filter(subject_type=SubjectType.LANDSCAPE) \
                 .count(),
 
