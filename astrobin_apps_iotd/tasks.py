@@ -120,7 +120,7 @@ def clear_stale_queue_entries():
 @shared_task(time_limit=180)
 def send_notifications_when_promoted_image_becomes_iotd():
     try:
-        iotd = Iotd.objects.using(get_segregated_reader_database()).get(date=DateTimeService.today())
+        iotd = Iotd.objects.get(date=DateTimeService.today())
     except Iotd.DoesNotExist:
         logger.error("send_notifications_when_promoted_image_becomes_iotd: Iotd not found")
         return
@@ -129,21 +129,21 @@ def send_notifications_when_promoted_image_becomes_iotd():
     thumb = image.thumbnail_raw('gallery', None, sync=True)
 
     submitters = [
-        x.submitter for x in IotdSubmission.objects.using(get_segregated_reader_database()).filter(image=image)
+        x.submitter for x in IotdSubmission.objects.filter(image=image)
     ]
     push_notification(submitters, None, 'image_you_promoted_is_iotd', {
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
 
-    reviewers = [x.reviewer for x in IotdVote.objects.using(get_segregated_reader_database()).filter(image=image)]
+    reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
     push_notification(reviewers, None, 'image_you_promoted_is_iotd', {
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
 
     dismissers = [
-        x.user for x in IotdDismissedImage.objects.using(get_segregated_reader_database()).filter(image=image)
+        x.user for x in IotdDismissedImage.objects.filter(image=image)
     ]
     push_notification(
         dismissers, None, 'image_you_dismissed_is_iotd', {
