@@ -8,6 +8,11 @@
     You received this notification because you have an active offer on this listing, or you follow the listing.
 {% endblocktrans %}
 
+{% blocktrans trimmed %}
+    Please note that the seller may only update unsold line items and the global description or information
+    pertaining the listing. The seller may not change the price or quantity of sold line items.
+{% endblocktrans %}
+
 {% blocktrans trimmed %}View listing{% endblocktrans %}:
 
 {{ listing_url }}
