@@ -267,6 +267,7 @@ class EquipmentGenerators:
 
         return EquipmentItemMarketplaceListing.objects.create(
             user=user,
+            title=kwargs.get('title', Generators.random_string()),
             expiration=kwargs.get('expiration', DateTimeService.now() + timedelta(days=30)),
         )
 

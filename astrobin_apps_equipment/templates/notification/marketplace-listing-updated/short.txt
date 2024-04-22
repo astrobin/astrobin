@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ buyer_display_name }} updated their marketplace listing "{{ listing }}"
+{% endblocktrans %}

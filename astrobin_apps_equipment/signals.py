@@ -16,7 +16,8 @@ from safedelete.signals import post_softdelete, pre_softdelete
 
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
-    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentItemMarketplaceMasterOffer,
+    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentItemMarketplaceListing,
+    EquipmentItemMarketplaceMasterOffer,
     EquipmentItemMarketplaceOffer,
     EquipmentPreset, Filter, Mount, Sensor,
     Software, Telescope,
@@ -616,3 +617,27 @@ def send_offer_accepted_notifications(sender, instance: EquipmentItemMarketplace
             None,
             'marketplace-offer-accepted-by-you',
         ], countdown=10)
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceListing)
+def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceListing, created: bool, **kwargs):
+    if not created:
+        users_with_offers = User.objects.filter(
+            equipment_item_marketplace_listings_offers__listing=instance
+        ).distinct()
+
+        followers = User.objects.filter(
+            toggleproperty__content_type=ContentType.objects.get_for_model(instance),
+            toggleproperty__object_id=instance.id,
+            toggleproperty__property_type="follow"
+        ).distinct()
+
+        push_notification(
+            list(set(list(users_with_offers) + list(followers))),
+            instance.user,
+            'marketplace-listing-updated',
+            {
+                'listing': instance,
+                'listing_url': build_notification_url(instance.get_absolute_url())
+            }
+        )

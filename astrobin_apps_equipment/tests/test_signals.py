@@ -169,3 +169,22 @@ class SignalsTest(TestCase):
 
         push_notification.asset_called_times(2)
 
+    @patch('astrobin_apps_equipment.tasks.push_notification')
+    def test_marketplace_listing_updated(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+
+        listing.title = 'title2'
+        listing.save()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([seller], None, 'marketplace-listing-updated', mock.ANY)
+
+        offer = EquipmentGenerators.marketplace_offer(listing=listing, user=seller)
+
+        push_notification.reset_mock()
+
+        listing.title = 'title3'
+        listing.save()
+
+        push_notification.assert_called_with([offer.user], None, 'marketplace-listing-updated', mock.ANY)
