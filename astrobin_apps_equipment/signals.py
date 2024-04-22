@@ -578,14 +578,16 @@ def prepare_offer_updated_notifications(sender, instance: EquipmentItemMarketpla
 @receiver(post_save, sender=EquipmentItemMarketplaceOffer)
 def send_offer_updated_notifications(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
     if instance.pre_save_amount_changed:
-        send_offer_notifications.apply_async(args=[
-            instance.listing.pk,
-            instance.user.pk,
-            instance.pk,
-            [instance.line_item.user.pk],
-            instance.user.pk,
-            'marketplace-offer-updated',
-        ], countdown=10)
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.pk,
+                [instance.line_item.user.pk],
+                instance.user.pk,
+                'marketplace-offer-updated',
+            ], countdown=10
+        )
 
         del instance.pre_save_amount_changed
 
@@ -600,23 +602,27 @@ def send_offer_accepted_notifications(sender, instance: EquipmentItemMarketplace
             before.status == EquipmentItemMarketplaceOfferStatus.PENDING.value and
             after.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
     ):
-        send_offer_notifications.apply_async(args=[
-            instance.listing.pk,
-            instance.user.pk,
-            None,
-            [instance.user.pk],
-            instance.listing.user.pk,
-            'marketplace-offer-accepted-by-seller',
-        ], countdown=10)
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                None,
+                [instance.user.pk],
+                instance.listing.user.pk,
+                'marketplace-offer-accepted-by-seller',
+            ], countdown=10
+        )
 
-        send_offer_notifications.apply_async(args=[
-            instance.listing.pk,
-            instance.user.pk,
-            None,
-            [instance.listing.user.pk],
-            None,
-            'marketplace-offer-accepted-by-you',
-        ], countdown=10)
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                None,
+                [instance.listing.user.pk],
+                None,
+                'marketplace-offer-accepted-by-you',
+            ], countdown=10
+        )
 
 
 @receiver(post_save, sender=EquipmentItemMarketplaceListing)
@@ -632,13 +638,42 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
             toggleproperty__property_type="follow"
         ).distinct()
 
+        recipients = list(set(list(users_with_offers) + list(followers)))
+
+        if len(recipients):
+            push_notification(
+                recipients,
+                instance.user,
+                'marketplace-listing-updated',
+                {
+                    'seller_display_name': instance.user.userprofile.get_display_name(),
+                    'listing': instance,
+                    'listing_url': build_notification_url(instance.get_absolute_url())
+                }
+            )
+
+
+@receiver(post_softdelete, sender=EquipmentItemMarketplaceListing)
+def marketplace_listing_post_softdelete(sender, instance: EquipmentItemMarketplaceListing, **kwargs):
+    users_with_offers = User.objects.filter(
+        equipment_item_marketplace_listings_offers__listing=instance
+    ).distinct()
+
+    followers = User.objects.filter(
+        toggleproperty__content_type=ContentType.objects.get_for_model(instance),
+        toggleproperty__object_id=instance.id,
+        toggleproperty__property_type="follow"
+    ).distinct()
+
+    recipients = list(set(list(users_with_offers) + list(followers)))
+
+    if len(recipients):
         push_notification(
-            list(set(list(users_with_offers) + list(followers))),
+            recipients,
             instance.user,
-            'marketplace-listing-updated',
+            'marketplace-listing-deleted',
             {
                 'seller_display_name': instance.user.userprofile.get_display_name(),
                 'listing': instance,
-                'listing_url': build_notification_url(instance.get_absolute_url())
             }
         )

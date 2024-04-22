@@ -178,7 +178,7 @@ class SignalsTest(TestCase):
         listing.save()
 
         with self.assertRaises(AssertionError):
-            push_notification.assert_called_with([seller], None, 'marketplace-listing-updated', mock.ANY)
+            push_notification.assert_called_with(mock.ANY, listing.user, 'marketplace-listing-updated', mock.ANY)
 
         offer = EquipmentGenerators.marketplace_offer(listing=listing, user=seller)
 
@@ -196,3 +196,28 @@ class SignalsTest(TestCase):
         listing.save()
 
         push_notification.assert_called_with([seller, follower], listing.user, 'marketplace-listing-updated', mock.ANY)
+
+    @patch('astrobin_apps_equipment.signals.push_notification')
+    def test_marketplace_listing_deleted_no_followers(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+
+        listing.delete()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(mock.ANY, listing.user, 'marketplace-listing-deleted', mock.ANY)
+
+    @patch('astrobin_apps_equipment.signals.push_notification')
+    def test_marketplace_listing_deleted(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+
+        offer = EquipmentGenerators.marketplace_offer(listing=listing, user=seller)
+        follower = Generators.user()
+        Generators.follow(listing, user=follower)
+
+        listing.delete()
+
+        push_notification.assert_called_with(
+            [offer.user, follower], listing.user, 'marketplace-listing-deleted', mock.ANY
+        )
