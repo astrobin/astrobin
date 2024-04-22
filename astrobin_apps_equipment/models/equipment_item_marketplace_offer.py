@@ -23,6 +23,7 @@ class EquipmentItemMarketplaceOffer(models.Model):
         related_name='equipment_item_marketplace_listings_offers',
         on_delete=models.CASCADE,
         null=False,
+
         editable=False,
     )
 

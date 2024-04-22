@@ -637,6 +637,7 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
             instance.user,
             'marketplace-listing-updated',
             {
+                'seller_display_name': instance.user.userprofile.get_display_name(),
                 'listing': instance,
                 'listing_url': build_notification_url(instance.get_absolute_url())
             }
