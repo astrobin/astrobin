@@ -232,6 +232,14 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
+    def perform_destroy(self, serializer):
+        instance = serializer.instance
+
+        if instance.line_items.filter(sold__isnull=False).exists():
+            raise serializers.ValidationError("Cannot delete a listing that has sold line items")
+
+        super().perform_destroy(serializer)
+
     def get_serializer_class(self) -> Type[serializers.ModelSerializer]:
         if self.request.method in ['PUT', 'POST']:
             return EquipmentItemMarketplaceListingSerializer

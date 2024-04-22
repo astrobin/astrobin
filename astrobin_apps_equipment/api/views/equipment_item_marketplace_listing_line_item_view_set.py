@@ -44,4 +44,10 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
         if instance.sold:
             raise serializers.ValidationError("Cannot edit a line item that has been sold")
 
-        serializer.save()
+        super().perform_update(serializer)
+
+    def perform_destroy(self, instance):
+        if instance.sold:
+            raise serializers.ValidationError("Cannot delete a line item that has been sold")
+
+        super().perform_destroy(instance)
