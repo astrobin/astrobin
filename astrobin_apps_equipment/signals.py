@@ -17,7 +17,7 @@ from safedelete.signals import post_softdelete, pre_softdelete
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
     Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentItemMarketplaceListing,
-    EquipmentItemMarketplaceMasterOffer,
+    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceMasterOffer,
     EquipmentItemMarketplaceOffer,
     EquipmentPreset, Filter, Mount, Sensor,
     Software, Telescope,
@@ -677,3 +677,41 @@ def marketplace_listing_post_softdelete(sender, instance: EquipmentItemMarketpla
                 'listing': instance,
             }
         )
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceListingLineItem)
+def marketplace_listing_line_item_pre_save(sender, instance: EquipmentItemMarketplaceListingLineItem, **kwargs):
+    if instance.pk:
+        pre_save = EquipmentItemMarketplaceListingLineItem.objects.get(pk=instance.pk)
+        if pre_save.sold is None and instance.sold is not None:
+            instance.pre_save_sold = True
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceListingLineItem)
+def marketplace_listing_line_item_post_save(sender, instance: EquipmentItemMarketplaceListingLineItem, **kwargs):
+    if instance.pre_save_sold:
+        users_with_offers = User.objects.filter(
+            equipment_item_marketplace_listings_offers__line_item=instance
+        ).exclude(pk=instance.sold_to.pk).distinct()
+
+        followers = User.objects.filter(
+            toggleproperty__content_type=ContentType.objects.get_for_model(instance.listing),
+            toggleproperty__object_id=instance.listing.id,
+            toggleproperty__property_type="follow"
+        ).exclude(pk=instance.sold_to.pk).distinct()
+
+        recipients = list(set(list(users_with_offers) + list(followers)))
+
+        if len(recipients):
+            push_notification(
+                recipients,
+                instance.listing.user,
+                'marketplace-listing-line-item-sold',
+                {
+                    'seller_display_name': instance.listing.user.userprofile.get_display_name(),
+                    'listing': instance.listing,
+                    'line_item': instance,
+                    'listing_url': build_notification_url(instance.listing.get_absolute_url())
+                }
+            )
+
+        del instance.pre_save_sold

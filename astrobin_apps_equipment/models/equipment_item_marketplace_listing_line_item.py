@@ -20,6 +20,8 @@ EQUIPMENT_ITEM_MARKETPLACE_LISTING_CONDITION_CHOICES = (
 
 
 class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
+    pre_save_sold = None
+
     user = models.ForeignKey(
         User,
         related_name='created_equipment_item_marketplace_listing_line_items',

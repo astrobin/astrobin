@@ -221,3 +221,55 @@ class SignalsTest(TestCase):
         push_notification.assert_called_with(
             [offer.user, follower], listing.user, 'marketplace-listing-deleted', mock.ANY
         )
+
+    @patch('astrobin_apps_equipment.signals.push_notification')
+    def test_marketplace_listing_sold_notification_not_sent(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+        line_item = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        buyer = Generators.user()
+        offer = EquipmentGenerators.marketplace_offer(
+            listing=listing, line_item=line_item, user=buyer, status=EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+        )
+
+        line_item.sold = offer.created
+        line_item.sold_to = buyer
+        line_item.save()
+
+        # Notification not sent because the buyer and the seller get notifications about accepted offers. The line item
+        # sold notification is for followers and other offering users..
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(
+                mock.ANY, seller, 'marketplace-listing-line-item-sold', mock.ANY
+            )
+
+    @patch('astrobin_apps_equipment.signals.push_notification')
+    def test_marketplace_listing_sold_notification_sent(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+        line_item = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+
+        buyer1 = Generators.user()
+        offer1 = EquipmentGenerators.marketplace_offer(
+            listing=listing, line_item=line_item, user=buyer1, status=EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+        )
+
+        buyer2 = Generators.user()
+        offer2 = EquipmentGenerators.marketplace_offer(
+            listing=listing, line_item=line_item, user=buyer2, status=EquipmentItemMarketplaceOfferStatus.PENDING.value
+        )
+
+        follower = Generators.user()
+        Generators.follow(listing, user=follower)
+
+        line_item.sold = offer1.created
+        line_item.sold_to = buyer1
+        line_item.save()
+
+        # Notification not sent because the buyer and the seller get notifications about accepted offers. The line item
+        # sold notification is for followers and other offering users..
+
+        push_notification.assert_called_with(
+            [buyer2, follower], seller, 'marketplace-listing-line-item-sold', mock.ANY
+        )
