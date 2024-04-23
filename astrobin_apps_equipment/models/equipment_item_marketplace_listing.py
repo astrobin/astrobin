@@ -17,6 +17,8 @@ EQUIPMENT_ITEM_MARKETPLACE_SHIPPING_METHOD_CHOICES = (
 
 
 class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
+    pre_save_approved = None
+
     user = models.ForeignKey(
         User,
         related_name='created_equipment_item_marketplace_listings',

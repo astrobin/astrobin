@@ -23,4 +23,5 @@ EQUIPMENT_NOTICE_TYPES = (
     ('marketplace-listing-updated', _('Marketplace listing updated'), '', 2),
     ('marketplace-listing-deleted', _('Marketplace listing deleted'), '', 2),
     ('marketplace-listing-line-item-sold', _('Marketplace listing line item sold'), '', 2),
+    ('marketplace-listing-by-user-you-follow', _('New marketplace listing by user you follow'), '', 2),
 )

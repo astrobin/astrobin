@@ -625,9 +625,35 @@ def send_offer_accepted_notifications(sender, instance: EquipmentItemMarketplace
         )
 
 
+@receiver(pre_save, sender=EquipmentItemMarketplaceListing)
+def marketplace_listing_pre_save(sender, instance: EquipmentItemMarketplaceListing, **kwargs):
+    if instance.pk:
+        pre_save_instance = EquipmentItemMarketplaceListing.objects.get(pk=instance.pk)
+        if pre_save_instance.approved is None and instance.approved is not None:
+            instance.pre_save_approved = True
+
 @receiver(post_save, sender=EquipmentItemMarketplaceListing)
 def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceListing, created: bool, **kwargs):
     if not created:
+        if instance.pre_save_approved:
+            seller_followers = list(User.objects.filter(
+                toggleproperty__content_type=ContentType.objects.get_for_model(instance.user),
+                toggleproperty__object_id=instance.user.id,
+                toggleproperty__property_type="follow"
+            ).distinct())
+
+            if len(seller_followers):
+                push_notification(
+                    seller_followers,
+                    instance.user,
+                    'marketplace-listing-by-user-you-follow',
+                    {
+                        'seller_display_name': instance.user.userprofile.get_display_name(),
+                        'listing': instance,
+                        'listing_url': build_notification_url(instance.get_absolute_url())
+                    }
+                )
+
         users_with_offers = User.objects.filter(
             equipment_item_marketplace_listings_offers__listing=instance
         ).distinct()
@@ -678,11 +704,12 @@ def marketplace_listing_post_softdelete(sender, instance: EquipmentItemMarketpla
             }
         )
 
+
 @receiver(pre_save, sender=EquipmentItemMarketplaceListingLineItem)
 def marketplace_listing_line_item_pre_save(sender, instance: EquipmentItemMarketplaceListingLineItem, **kwargs):
     if instance.pk:
-        pre_save = EquipmentItemMarketplaceListingLineItem.objects.get(pk=instance.pk)
-        if pre_save.sold is None and instance.sold is not None:
+        pre_save_instance = EquipmentItemMarketplaceListingLineItem.objects.get(pk=instance.pk)
+        if pre_save_instance.sold is None and instance.sold is not None:
             instance.pre_save_sold = True
 
 
