@@ -38,6 +38,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     def get_queryset(self) -> QuerySet:
         self.validate_query_params()
         queryset = EquipmentItemMarketplaceListing.objects.all()
+        queryset = self.filter_by_excluded_hash(queryset)
         queryset = self.filter_by_expiration(queryset)
         queryset = self.filter_by_distance(queryset)
         queryset = self.filter_by_region(queryset)
@@ -46,6 +47,12 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         line_items_queryset = self.filter_line_items(line_items_queryset)
 
         return queryset.prefetch_related(Prefetch('line_items', queryset=line_items_queryset))
+
+    def filter_by_excluded_hash(self, queryset: QuerySet) -> QuerySet:
+        hash_param = self.request.query_params.get('exclude_listing')
+        if hash_param:
+            queryset = queryset.exclude(hash=hash_param)
+        return queryset
 
     def filter_by_expiration(self, queryset: QuerySet) -> QuerySet:
         now = DateTimeService.now()
@@ -267,6 +274,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             'query',
             'user',
             'hash',
+            'exclude_listing',
         ]
 
         for param in self.request.query_params:
