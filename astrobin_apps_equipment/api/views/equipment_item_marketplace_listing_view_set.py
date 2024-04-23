@@ -3,7 +3,7 @@ from typing import Type
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
-from django.db.models import OuterRef, Prefetch, Q, QuerySet
+from django.db.models import Exists, OuterRef, Prefetch, Q, QuerySet
 from django.utils.translation import gettext
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -139,21 +139,22 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-    def filter_line_items_followed_by_user(self, queryset: QuerySet) -> QuerySet:
+    def filter_line_items_followed_by_user(self, queryset):
         try:
             user_id = int(self.request.query_params.get('followed_by_user'))
         except (ValueError, TypeError):
             return queryset
 
         if self.request.user.is_authenticated and user_id == self.request.user.id:
-            followed_item_ids = ToggleProperty.objects.filter(
+            content_type = ContentType.objects.get_for_model(EquipmentItemMarketplaceListing)
+            followed_item_exists = ToggleProperty.objects.filter(
                 user=self.request.user,
-                content_type=ContentType.objects.get_for_model(EquipmentItemMarketplaceListing),
+                content_type=content_type,
                 object_id=OuterRef('pk'),
                 property_type='follow'
-            ).values_list('object_id', flat=True)
+            )
 
-            return queryset.filter(pk__in=followed_item_ids)
+            return queryset.annotate(follow_exists=Exists(followed_item_exists)).filter(follow_exists=True)
 
         return queryset
 
