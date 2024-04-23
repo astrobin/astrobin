@@ -654,6 +654,26 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                     }
                 )
 
+            for line_item in instance.line_items.filter(sold__isnull=True):
+                equipment_followers = list(User.objects.filter(
+                    toggleproperty__content_type=line_item.item_content_type,
+                    toggleproperty__object_id=line_item.item_object_id,
+                    toggleproperty__property_type="follow"
+                ).distinct())
+
+                if len(equipment_followers):
+                    push_notification(
+                        equipment_followers,
+                        instance.user,
+                        'marketplace-listing-for-item-you-follow',
+                        {
+                            'seller_display_name': instance.user.userprofile.get_display_name(),
+                            'listing': instance,
+                            'listing_url': build_notification_url(instance.get_absolute_url()),
+                            'line_item': line_item,
+                        }
+                    )
+
         users_with_offers = User.objects.filter(
             equipment_item_marketplace_listings_offers__listing=instance
         ).distinct()

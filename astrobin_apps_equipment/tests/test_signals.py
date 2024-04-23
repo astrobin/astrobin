@@ -297,3 +297,16 @@ class SignalsTest(TestCase):
 
         with self.assertRaises(AssertionError):
             push_notification.assert_called_with(mock.ANY, seller, 'marketplace-listing-by-user-you-follow', mock.ANY)
+
+    @patch('astrobin_apps_equipment.signals.push_notification')
+    def test_marketplace_listing_for_item_you_follow_notification(self, push_notification):
+        seller = Generators.user()
+        listing = EquipmentGenerators.marketplace_listing(user=seller)
+        line_item = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
+        follower = Generators.user()
+        Generators.follow(line_item.item_content_object, user=follower)
+
+        listing.approved = DateTimeService.now()
+        listing.save()
+
+        push_notification.assert_called_with([follower], seller, 'marketplace-listing-for-item-you-follow', mock.ANY)
