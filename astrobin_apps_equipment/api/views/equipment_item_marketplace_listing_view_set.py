@@ -216,15 +216,19 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         if query:
             if 'postgres' in settings.DATABASES['default']['ENGINE']:
                 queryset = queryset.annotate(
-                    distance=TrigramDistance('item_name', query),
+                    item_name_distance=TrigramDistance('item_name', query),
+                    title_distance=TrigramDistance('listing__title', query)
                 ).filter(
                     Q(item_name__icontains=query) |
-                    Q(distance__lte=.8)
+                    Q(item_name_distance__lte=.8) |
+                    Q(listing__title__icontains=query) |
+                    Q(title_distance__lte=.8)
                 ).order_by(
-                    'distance'
+                    'item_name_distance',
+                    'title_distance'
                 )
             else:
-                queryset = queryset.filter(item_name__icontains=query)
+                queryset = queryset.filter(Q(item_name__icontains=query) | Q(listing__title__icontains=query))
 
         return queryset
 
