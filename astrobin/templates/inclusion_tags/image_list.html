@@ -89,14 +89,16 @@
                     </td>
 
 
-                    {% if image.last_acquisition_date %}
-                        <td class="last-acquisition-date" data-value="{{ image.last_acquisition_date|date:"U"|default:0 }}">
-                            {% timestamp image.last_acquisition_date %}
-                        </td>
-                    {% else %}
-                        <td class="last-acquisition-date" data-value="0">
-                            {% trans "n/a" %}
-                        </td>
+                    {% if request.GET.sub == 'acquired' %}
+                        {% if image.last_acquisition_date %}
+                            <td class="last-acquisition-date" data-value="{{ image.last_acquisition_date|date:"U"|default:0 }}">
+                                {% timestamp image.last_acquisition_date %}
+                            </td>
+                        {% else %}
+                            <td class="last-acquisition-date" data-value="0">
+                                {% trans "n/a" %}
+                            </td>
+                        {% endif %}
                     {% endif %}
 
                     <td class="views hidden-phone">{% get_hit_count for image %}</td>
