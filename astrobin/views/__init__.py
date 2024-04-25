@@ -1256,7 +1256,10 @@ def user_page(request, username):
 
     view = request.GET.get('view', 'default')
 
-    if view == 'table' and section != 'trash':
+    if view == 'table' and subsection not in (
+        # Table views that support sorting
+        'acquired'
+    ) and section != 'trash':
         qs = qs.order_by('-published')
 
     stats_data = UserService(user).get_profile_stats(getattr(request, 'LANGUAGE_CODE', 'en'))

@@ -4423,23 +4423,18 @@ table.search-table {
 
 table.image-list {
   .title {
-    width: 50%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .user, .published {
-    width: 20%;
-  }
-
-  .published {
+  .published,
+  .last-acquisition-date {
     text-align: center;
   }
 
   .views, .likes, .bookmarks, .comments {
     text-align: center;
-    width: 7.5%;
   }
 }
 
