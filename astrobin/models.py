@@ -1827,7 +1827,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         except ThumbnailGroup.DoesNotExist:
             pass
 
-        Image.objects_including_wip.filter(pk=self.pk).update(updated=DateTimeService.now())
+        Image.objects_including_wip.filter(pk=self.pk).update(
+            final_gallery_thumbnail=None,
+            updated=DateTimeService.now()
+        )
 
     def thumbnail_invalidate(self, delete=True):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete)
