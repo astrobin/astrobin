@@ -357,15 +357,7 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
     if kwargs.get('update_fields', None):
         return
 
-    if instance.image.is_wip:
-        return
-
-    skip_notifications = instance.skip_notifications
-    skip_activity_stream = instance.skip_activity_stream
     uploading = instance.uploader_in_progress
-    just_completed_upload = cache.get("image_revision.%s.just_completed_upload" % instance.pk)
-
-    UserService(instance.image.user).clear_gallery_image_list_cache()
 
     if not uploading and instance.video_file.name:
         if not instance.image_file.name:
@@ -375,6 +367,15 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
         if not instance.encoded_video_file.name:
             log.debug(f'Encoding video file for {instance} in imagerevision_post_save signal handler')
             encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
+
+    if instance.image.is_wip:
+        return
+
+    skip_notifications = instance.skip_notifications
+    skip_activity_stream = instance.skip_activity_stream
+    just_completed_upload = cache.get("image_revision.%s.just_completed_upload" % instance.pk)
+
+    UserService(instance.image.user).clear_gallery_image_list_cache()
 
     if (created and not uploading) or just_completed_upload:
         if not skip_notifications:
