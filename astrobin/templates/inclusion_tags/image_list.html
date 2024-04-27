@@ -16,9 +16,29 @@
 
                 <th class="title" data-sortable-type="alpha">{% trans "Title" %}</th>
 
-                <th class="published" data-sortable-type="numeric" data-sorted="true" data-sorted-direction="descending">
+                <th
+                        class="published"
+                        data-sortable-type="numeric"
+                        {%  if 'sub' not in request.GET or request.GET.sub == 'published' %}
+                            data-sorted="true"
+                            data-sorted-direction="descending"
+                        {% endif %}
+                >
                     <i class="icon-unlock" title="{% trans 'Published' %}" rel="tooltip"></i>
                 </th>
+
+                {% if request.GET.sub == 'acquired' %}
+                    <th
+                            class="last-acquisition-date"
+                            data-sortable-type="numeric"
+                            {% if request.GET.sub == 'acquired' %}
+                                data-sorted="true"
+                                data-sorted-direction="descending"
+                            {% endif %}
+                    >
+                        <i class="icon-camera" title="{% trans 'Last acquisition' %}" rel="tooltip"></i>
+                    </th>
+                {% endif %}
 
                 <th class="views hidden-phone" data-sortable-type="numeric">
                     <i class="icon-eye-open" title="{% trans 'Views' %}" rel="tooltip"></i>
@@ -67,6 +87,19 @@
                             {% timestamp image.published %}
                         {% endif %}
                     </td>
+
+
+                    {% if request.GET.sub == 'acquired' %}
+                        {% if image.last_acquisition_date %}
+                            <td class="last-acquisition-date" data-value="{{ image.last_acquisition_date|date:"U"|default:0 }}">
+                                {% timestamp image.last_acquisition_date %}
+                            </td>
+                        {% else %}
+                            <td class="last-acquisition-date" data-value="0">
+                                {% trans "n/a" %}
+                            </td>
+                        {% endif %}
+                    {% endif %}
 
                     <td class="views hidden-phone">{% get_hit_count for image %}</td>
 

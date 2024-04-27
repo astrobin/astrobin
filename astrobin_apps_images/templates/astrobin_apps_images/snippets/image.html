@@ -150,7 +150,9 @@
                                 href="{{ fancybox_url }}"
                                 {% if is_video %}
                                     data-video-url="{{ fancybox_url }}"
-                                    data-src="{{ image_revision.image_file.url }}"
+                                    {% if image_revision.image_file %}
+                                        data-src="{{ image_revision.image_file.url }}"
+                                    {% endif %}
                                     data-loop-video="{{ image_revision.loop_video | yesno:'true,false' }}"
                                 {% else %}
                                     data-src="{{ fancybox_url }}"
@@ -319,7 +321,9 @@
                                     href="{{ fancybox_url }}"
                                     {% if is_video %}
                                         data-video-url="{{ fancybox_url }}"
-                                        data-src="{{ image_revision.image_file.url }}"
+                                        {% if image_revision.image_file %}
+                                            data-src="{{ image_revision.image_file.url }}"
+                                        {% endif %}
                                         data-loop-video="{{ image_revision.loop_video | yesno:"true,false" }}"
                                     {% else %}
                                         data-src="{{ fancybox_url }}"

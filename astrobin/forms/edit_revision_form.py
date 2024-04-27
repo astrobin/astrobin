@@ -26,7 +26,7 @@ class ImageEditRevisionForm(forms.ModelForm):
         def does_not_match_label(matches: bool):
             return "" if matches else " (" + __("pixel resolution does not match") + ")"
 
-        self.fields['mouse_hover_image'].choices = self.fields['mouse_hover_image'].choices + [
+        self.fields['mouse_hover_image'].choices += [
             (
                 "ORIGINAL" if matches_resolution else "__DISABLED__",
                 f'{_("Original image")}{does_not_match_label(matches_resolution)}',
@@ -36,7 +36,7 @@ class ImageEditRevisionForm(forms.ModelForm):
         for other_revision in other_revisions.all():
             if other_revision.label != self.instance.label:
                 matches_resolution: bool = other_revision.w == revision.w and other_revision.h == revision.h
-                self.fields['mouse_hover_image'].choices = self.fields['mouse_hover_image'].choices + [
+                self.fields['mouse_hover_image'].choices += [
                     (
                         f'REVISION__{other_revision.label}' if matches_resolution else '__DISABLED__',
                         f'{__("Revision")} {other_revision.label}{does_not_match_label(matches_resolution)}',
@@ -69,7 +69,7 @@ class ImageEditRevisionForm(forms.ModelForm):
 
     class Meta:
         model = ImageRevision
-        fields = ('image_file', 'title', 'description', 'mouse_hover_image', 'square_cropping')
+        fields = ('title', 'description', 'mouse_hover_image', 'square_cropping')
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
             'image_file': ImageCropWidget
