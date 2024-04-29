@@ -36,6 +36,7 @@ class CloudflareService:
         })
 
         try:
+            log.debug("CloudflareService purging cache for urls: %s", ', '.join(paths))
             requests.post(url, data, headers=headers, timeout=1)
         except Exception as e:
             log.warning("Unable to purge Cloudflare cache for files %s: %s" % (', '.join(paths), str(e)))
