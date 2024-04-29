@@ -333,6 +333,11 @@ def image_pre_delete(sender, instance: Image, **kwargs):
     if instance.image_file:
         if instance.image_file.url and getattr(instance, "purge_caches", False):
             invalidate_cdn_caches.delay([instance.image_file.url])
+        else:
+            if not instance.image_file.url:
+                log.debug(f"image_pre_delete: Image {instance.pk} has no image_file.url")
+            if not getattr(instance, "purge_caches", False):
+                log.debug(f"image_pre_delete: Image {instance.pk} has no purge_caches attribute")
         instance.image_file.delete(save=False)
 
 
@@ -414,6 +419,11 @@ def imagerevision_pre_delete(sender, instance: ImageRevision, **kwargs):
     if instance.image_file:
         if instance.image_file.url and getattr(instance, "purge_caches", False):
             invalidate_cdn_caches.delay([instance.image_file.url])
+        else:
+            if not instance.image_file.url:
+                log.debug(f"imagerevision_pre_delete: ImageRevision {instance.pk} has no image_file.url")
+            if not getattr(instance, "purge_caches", False):
+                log.debug(f"imagerevision_pre_delete: ImageRevision {instance.pk} has no purge_caches attribute")
         instance.image_file.delete(save=False)
 
 
