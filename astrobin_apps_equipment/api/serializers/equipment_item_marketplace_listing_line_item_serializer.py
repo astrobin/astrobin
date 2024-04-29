@@ -26,6 +26,9 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         return super().create(validated_data)
 
     def get_total_image_count(self, obj):
+        if obj.item_content_object is None:
+            return 0
+
         return obj.item_content_object.image_count
 
     def get_seller_image_count(self, obj):
@@ -38,6 +41,8 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         ).count()
 
     def get_item_klass(self, obj):
+        if obj.item_content_object is None:
+            return None
         return obj.item_content_object.klass
 
     def get_first_added_to_an_image(self, obj):
@@ -62,6 +67,9 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         return None
 
     def _get_equipment_query_for_image(self, item):
+        if item is None:
+            return Q()
+
         if item.klass == EquipmentItemKlass.TELESCOPE:
             return Q(imaging_telescopes_2=item) | Q(guiding_telescopes_2=item)
         elif item.klass == EquipmentItemKlass.CAMERA:

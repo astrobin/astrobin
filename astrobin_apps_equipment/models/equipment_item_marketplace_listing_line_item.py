@@ -2,7 +2,9 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import gettext
 
 from astrobin.fields import CURRENCY_CHOICES
@@ -116,9 +118,28 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
         blank=True,
     )
 
-    item_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    item_object_id = models.PositiveIntegerField()
-    item_content_object = GenericForeignKey('item_content_type', 'item_object_id')
+    item_content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    item_object_id = models.PositiveIntegerField(
+        null=True,
+        blank=True
+    )
+
+    item_content_object = GenericForeignKey(
+        'item_content_type',
+        'item_object_id',
+    )
+
+    item_plain_text = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+    )
 
     # This is a denormalized field that is updated automatically.
     item_name = models.CharField(
@@ -127,6 +148,12 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
         null=True,
         blank=True,
     )
+
+    def clean(self):
+        if not self.item_object_id and not self.item_plain_text:
+            raise ValidationError("Either item_object_id or item_plain_text must be provided.")
+
+        super().clean()
 
     def save(self, *args, **kwargs):
         self.update_price_chf()
@@ -153,11 +180,11 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
         self.item_name = str(self.item_content_object)
 
     @property
-    def slug(self):
-        return self.item_content_object.slug
+    def slug(self) -> str:
+        return slugify(str(self))
 
-    def __str__(self):
-        return str(self.item_content_object)
+    def __str__(self) -> str:
+        return str(self.item_content_object or self.item_plain_text)
 
     class Meta:
         ordering = ('created',)
