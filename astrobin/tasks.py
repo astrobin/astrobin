@@ -1007,7 +1007,7 @@ def hard_delete_deleted_users():
     max_retries=5
 )
 def invalidate_cdn_caches(paths: List[str]):
-    logger.debug(f'Invalidating CDN caches for {paths}')
+    logger.debug(f'Invalidating CDN caches for {", ".join(paths)}')
     CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation(paths)
     CloudflareService().purge_cache(paths)
 
@@ -1139,7 +1139,7 @@ def generate_sitemaps_and_upload_to_s3():
         sitemap_index = generate_sitemap_index(all_filenames, folder=custom_sitemap['folder'])
 
         # Save and upload the sitemap index
-        with open(f'f{tmp_dir}/sitemap_index.xml', 'wb') as file:
+        with open(f'{tmp_dir}/sitemap_index.xml', 'wb') as file:
             file.write(sitemap_index)
         upload_to_sitemap_folder('sitemap_index.xml', folder=custom_sitemap['folder'])
 
