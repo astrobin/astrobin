@@ -31,17 +31,16 @@ class CloudFrontService:
             return
 
         # Attempt to get the file. If it's missing, there's no need to invalidate it.
-        for x in urls:
-            cdn_url = f'{settings.MEDIA_URL}{x.strip("/")}'
-            log.debug("CloudFrontService checking if file exists: %s", cdn_url)
+        for url in urls:
+            log.debug("CloudFrontService checking if file exists: %s", url)
             try:
-                response = requests.get(cdn_url, timeout=5)
+                response = requests.get(url, timeout=5)
                 if response.status_code != 200:
-                    log.warning("CloudFrontService file %s does not exist" % x)
-                    urls.remove(x)
+                    log.warning("CloudFrontService file %s does not exist" % url)
+                    urls.remove(url)
             except Exception as e:
-                log.warning("CloudFrontService unable to get file %s: %s" % (x, str(e)))
-                urls.remove(x)
+                log.warning("CloudFrontService unable to get file %s: %s" % (url, str(e)))
+                urls.remove(url)
 
         if not urls or len(urls) == 0:
             log.warning("CloudFrontService cannot purge cache without urls")
