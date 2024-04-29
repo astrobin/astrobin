@@ -998,13 +998,9 @@ def hard_delete_deleted_users():
 
 
 @shared_task(
-    time_limit=30,
-    acks_late=True,
+    time_limit=60,
+    acks_late=False,
     rate_limit="6/m",
-    autoretry_for=(Exception,),
-    retry_backoff=True,
-    retry_jitter=True,
-    max_retries=5
 )
 def invalidate_cdn_caches(paths: List[str]):
     logger.debug(f'Invalidating CDN caches for {", ".join(paths)}')
