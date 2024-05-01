@@ -1583,18 +1583,6 @@ def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
         except InternalError as e:
             log.error("Error soft deleting user profile %d: %s" % (instance.pk, str(e)))
 
-    image_urls = [
-        x.image_file.url for x in ImageRevision.all_objects.filter(image__user=instance.user)
-        if x.image_file and x.image_file.url
-    ]
-
-    revision_urls = [
-        x.image_file.url for x in Image.all_objects.filter(user=instance.user)
-        if x.image_file and x.image_file.url
-    ]
-
-    invalidate_cdn_caches.delay(image_urls + revision_urls)
-
     for revision in ImageRevision.all_objects.filter(image__user=instance.user):
         log.debug("Deleting revision %d" % revision.pk)
         revision.purge_caches = False
