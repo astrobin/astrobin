@@ -8,33 +8,45 @@
 {% load common_tags %}
 
 {% block title %}
-    {{ collection.name }}
+    {% if collection %}
+        {{ collection.name }}
+    {% else %}
+        {% trans "Images in no collection" %}
+    {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb collection.name None %}
+    {% if collection %}
+        {% breadcrumb collection.name None %}
+    {% else %}
+        {% breadcrumb "Images not in a collection" None %}
+    {% endif %}
 {% endblock %}
 
 
 {% block collections_content %}
     <div class="collection-detail">
         <h2 class="collection-name">
-            {{ collection.name|strip_html|safe }}
-            <small>
-                {% blocktrans with collection.user.userprofile.get_display_name as username %}
-                    A collection by {{ username }}
-                {% endblocktrans %}
-            </small>
+            {% if collection %}
+                {{ collection.name|strip_html|safe }}
+                <small>
+                    {% blocktrans with collection.user.userprofile.get_display_name as username %}
+                        A collection by {{ username }}
+                    {% endblocktrans %}
+                </small>
+            {% else %}
+                {% trans "Images not in a collection" %}
+            {% endif %}
         </h2>
 
-        {% if collection.description %}
+        {% if collection and collection.description %}
             <div class="collection-description">
                 {{ collection.description|strip_html|safe|linebreaksbr }}
             </div>
         {% endif %}
 
-        {% if collection.children.all|length %}
+        {% if collection and collection.children.all|length %}
             {% with collection.children.all as collections_list %}
                 <div class="subtle-container nested-collections">
                     <div class="header">
@@ -50,7 +62,7 @@
                                         {{ collection.parent.name }}
                                     </a>
                                 {% else %}
-                                    <a href="{% url 'user_collections_list' collection.user.username %}">
+                                    <a href="{% url 'user_collections_list' requested_user.username %}">
                                         {% trans "View all collections" %}
                                     </a>
                                 {% endif %}
@@ -69,7 +81,10 @@
                 <div class="header">
                     <h4>
                         <i class="icon-picture"></i>
-                        {% trans "Images in this collection" %}
+
+                        {% if collection %}
+                            {% trans "Images in this collection" %}
+                        {% endif %}
 
                         <span class="parent-collection">
                             <i class="icon-folder-open-alt"></i>
@@ -79,7 +94,7 @@
                                     {{ collection.parent.name }}
                                 </a>
                             {% else %}
-                                <a href="{% url 'user_collections_list' collection.user.username %}">
+                                <a href="{% url 'user_collections_list' requested_user.username %}">
                                     {% trans "View all collections" %}
                                 </a>
                             {% endif %}
@@ -103,11 +118,11 @@
         {% else %}
             <p class="alert alert-warning">
                 {% trans "This collection contains no images." %}
-                {% ifequal requested_user request.user %}
+                {% if collection and requested_user == request.user %}
                     <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
                         {% trans "Would you like to add some images?" %}
                     </a>
-                {% endifequal %}
+                {% endif %}
             </p>
         {% endif %}
     </div>
