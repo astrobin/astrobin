@@ -531,6 +531,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     moon_phase = FloatField()
     first_acquisition_date = DateTimeField()
     last_acquisition_date = DateTimeField()
+    acquisition_months = MultiValueField()
     views = IntegerField()
     w = IntegerField(model_attr='w', null=True)
     h = IntegerField(model_attr='h', null=True)
@@ -916,6 +917,25 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_last_acquisition_date(self, obj):
         return _prepare_last_acquisition_date(obj)
+
+    def prepare_acquisition_months(self, obj):
+        deep_sky_acquisitions = DeepSky_Acquisition.objects.using(get_segregated_reader_database()).filter(
+            image=obj, date__isnull=False
+        )
+
+        if deep_sky_acquisitions.exists():
+            return list(set([x.date.strftime('%b') for x in deep_sky_acquisitions.all()]))
+        else:
+            try:
+                solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=obj)
+                if solar_system_acquisition.date:
+                    return [solar_system_acquisition.date.strftime('%b')]
+                else:
+                    return None
+            except SolarSystem_Acquisition.DoesNotExist:
+                return None
+
+        return None
 
     def prepare_views(self, obj):
         return _prepare_views(obj, 'image')
