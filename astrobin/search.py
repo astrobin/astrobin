@@ -85,6 +85,7 @@ FIELDS = (
     'topic',
     'filter_types',
     'user_id',
+    'acquisition_months',
 
     # Sorting
     'sort'
@@ -175,6 +176,7 @@ class AstroBinSearchForm(SearchForm):
     topic = forms.IntegerField(required=False)
     filter_types = forms.CharField(required=False)
     user_id = forms.IntegerField(required=False)
+    acquisition_months = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -796,6 +798,21 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_acquisition_months(self, results):
+        acquisition_months = self.cleaned_data.get("acquisition_months")
+
+        if acquisition_months is not None and acquisition_months != "":
+            months = acquisition_months.split(',')
+            queries = []
+
+            for month in months:
+                queries.append(Q(acquisition_months=month))
+
+            if len(queries) > 0:
+                results = results.filter(reduce(or_, queries))
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -887,6 +904,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_forum_topic(sqs)
         sqs = self.filter_by_filter_types(sqs)
         sqs = self.filter_by_user_id(sqs)
+        sqs = self.filter_by_acquisition_months(sqs)
 
         sqs = self.sort(sqs)
 
