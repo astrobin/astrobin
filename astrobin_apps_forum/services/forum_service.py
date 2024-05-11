@@ -57,12 +57,12 @@ class ForumService:
             log.error(f"Topic {topic.id} is not in an equipment forum")
             return
 
-        recipients: QuerySet = EquipmentItemService(item).get_users().exclude(pk=topic.user.pk)
+        users: QuerySet = EquipmentItemService(item).get_users().exclude(pk=topic.user.pk)
 
-        if recipients.exists():
-            log.debug(f"Found {recipients.count()} users for equipment item {item}")
+        if users.exists():
+            log.debug(f"Found {users.count()} users for equipment item {item}")
             push_notification(
-                list(recipients),
+                list(users),
                 topic.user,
                 'new_topic_for_equipment_you_use',
                 {
@@ -80,6 +80,29 @@ class ForumService:
             )
         else:
             log.debug(f"No users found for equipment item {item}")
+
+        followers = EquipmentItemService(item).get_followers().exclude(pk=topic.user.pk)
+        user_ids = users.values_list('id', flat=True)
+        if followers.exists():
+            for follower in followers:
+                if follower.id not in user_ids:
+                    push_notification(
+                        [follower],
+                        topic.user,
+                        'new_topic_for_equipment_you_follow',
+                        {
+                            'user': topic.user.userprofile.get_display_name(),
+                            'user_url': settings.BASE_URL + reverse('user_page', kwargs={'username': topic.user}),
+                            'topic_url': build_notification_url(settings.BASE_URL + topic.get_absolute_url(), topic.user),
+                            'topic_name': topic.name,
+                            'item': item,
+                            'item_url': build_notification_url(
+                                AppRedirectionService.redirect(
+                                    f'/equipment/explorer/{item.klass.lower()}/{item.pk}'
+                                )
+                            ),
+                        }
+                    )
 
     @staticmethod
     def get_topic_first_unread(topic: Topic, user: User) -> Union[Post, None]:
