@@ -1,6 +1,7 @@
 from typing import Union
 
 from django.contrib.auth.models import AnonymousUser, User
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Model, Q, QuerySet
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import PermissionDenied, ValidationError
@@ -70,8 +71,16 @@ class EquipmentItemService:
         elif self.item.klass == EquipmentItemKlass.SOFTWARE:
             queryset = User.objects.filter(image__software_2__in=items)
 
-        if queryset:
+        if queryset is not None:
             return queryset.distinct().order_by('pk')
+
+    def get_followers(self) -> QuerySet:
+        ct = ContentType.objects.get_for_model(self.item)
+        return User.objects.filter(
+            toggleproperty__object_id=self.item.pk,
+            toggleproperty__content_type=ct,
+            toggleproperty__property_type='follow'
+        )
 
     def freeze_as_ambiguous(self):
         from astrobin_apps_equipment.models import EquipmentPreset
