@@ -5,6 +5,8 @@ import time
 from typing import List
 
 import boto3
+import requests
+from django.conf import settings
 
 from astrobin.utils import extract_path_from_url
 
@@ -27,6 +29,18 @@ class CloudFrontService:
     def create_invalidation(self, urls: List[str]):
         if not self.distribution_id:
             return
+
+        # Attempt to get the file. If it's missing, there's no need to invalidate it.
+        for url in urls:
+            log.debug("CloudFrontService checking if file exists: %s", url)
+            try:
+                response = requests.get(url, timeout=5)
+                if response.status_code != 200:
+                    log.warning("CloudFrontService file %s does not exist" % url)
+                    urls.remove(url)
+            except Exception as e:
+                log.warning("CloudFrontService unable to get file %s: %s" % (url, str(e)))
+                urls.remove(url)
 
         if not urls or len(urls) == 0:
             log.warning("CloudFrontService cannot purge cache without urls")

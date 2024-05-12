@@ -271,6 +271,11 @@ urlpatterns += [
         name='user_collections_list'
     ),
     url(
+        r'^users/(?P<username>[\w.@+-]*)/collections/no-collection/$',
+        collections_views.UserCollectionsNoCollection.as_view(),
+        name='user_collections_no_collection'
+    ),
+    url(
         r'^users/(?P<username>[\w.@+-]*)/collections/create/$', collections_views.UserCollectionsCreate.as_view(),
         name='user_collections_create'
     ),

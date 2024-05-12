@@ -16,10 +16,17 @@ SRGB_PROFILE = ImageCms.createProfile("sRGB")
 
 def rounded_corners(image, rounded=False, **kwargs):
     if rounded:
+        exif_data = image.getexif()
+
+        # Load mask and ensure it's the correct size and mode
         mask = Image.open('astrobin/thumbnail-mask.png').convert('L')
         mask = mask.resize(image.size, Image.LANCZOS)
         image = ImageOps.fit(image, mask.size, centering=(0.5, 0.5))
         image.putalpha(mask)
+
+        # Remove the EXIF data because the orientation tag with PNGs is wonky in browsers.
+        if exif_data:
+            image.info.pop('exif', None)
 
     return image
 

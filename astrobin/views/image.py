@@ -118,6 +118,7 @@ class ImageFlagThumbsView(
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()
+        logger.info(f"User {request.user} flagged thumbs for image {image.get_id()}")
         ImageService(image).invalidate_all_thumbnails()
         messages.success(self.request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
         return super(ImageFlagThumbsView, self).post(self.request, args, kwargs)

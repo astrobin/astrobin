@@ -998,20 +998,17 @@ def hard_delete_deleted_users():
 
 
 @shared_task(
-    time_limit=30,
-    acks_late=True,
+    time_limit=60,
+    acks_late=False,
     rate_limit="6/m",
-    autoretry_for=(Exception,),
-    retry_backoff=True,
-    retry_jitter=True,
-    max_retries=5
 )
 def invalidate_cdn_caches(paths: List[str]):
+    logger.debug(f'Invalidating CDN caches for {", ".join(paths)}')
     CloudFrontService(settings.CLOUDFRONT_CDN_DISTRIBUTION_ID).create_invalidation(paths)
     CloudflareService().purge_cache(paths)
 
 
-@shared_task(time_limit=1800, acks_late=True)
+@shared_task(time_limit=3600, acks_late=True)
 def generate_sitemaps_and_upload_to_s3():
     invalidate_urls = []
 
@@ -1020,8 +1017,10 @@ def generate_sitemaps_and_upload_to_s3():
         s3_client = boto3.client('s3')
         bucket_name = settings.AWS_STORAGE_BUCKET_NAME
         s3_path = f'{folder}/{filename}'
+        tmp_dir = tempfile.gettempdir()
+        filepath = f'{tmp_dir}/{filename}'
 
-        with open(filename, 'rb') as file:
+        with open(filepath, 'rb') as file:
             s3_client.upload_fileobj(
                 file,
                 bucket_name,
@@ -1033,7 +1032,7 @@ def generate_sitemaps_and_upload_to_s3():
             )
             logger.debug(f'Uploaded to s3: {s3_path}')
 
-        os.remove(filename)
+        os.remove(filepath)
         invalidate_urls.append(f'/{s3_path}')
 
     def generate_sitemap_index(sitemaps, base_url=settings.AWS_STORAGE_BUCKET_NAME, folder='sitemaps'):
@@ -1115,16 +1114,18 @@ def generate_sitemaps_and_upload_to_s3():
 
     for custom_sitemap in (www_sitemaps, app_sitemaps):
         all_filenames = []
+        tmp_dir = tempfile.gettempdir()
 
         # Generate and save sitemap files
         for section, site in custom_sitemap['sitemaps'].items():
             filename = f'{section}.xml'
+            filepath = f'{tmp_dir}/{filename}'
 
             logger.debug(f'Generating sitemap {filename}')
             response = sitemap(request, custom_sitemap['sitemaps'], section)
             response.render()
 
-            with open(filename, 'wb') as file:
+            with open(filepath, 'wb') as file:
                 file.write(response.content)
             upload_to_sitemap_folder(filename, folder=custom_sitemap['folder'])
 
@@ -1134,7 +1135,7 @@ def generate_sitemaps_and_upload_to_s3():
         sitemap_index = generate_sitemap_index(all_filenames, folder=custom_sitemap['folder'])
 
         # Save and upload the sitemap index
-        with open('sitemap_index.xml', 'wb') as file:
+        with open(f'{tmp_dir}/sitemap_index.xml', 'wb') as file:
             file.write(sitemap_index)
         upload_to_sitemap_folder('sitemap_index.xml', folder=custom_sitemap['folder'])
 

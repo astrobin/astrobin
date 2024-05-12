@@ -1098,91 +1098,96 @@ class IotdService:
 
         def prepare_submitter_scores(submissions, dismissals):
             for submission in submissions:
-                if not submission.submitter:
+                try:
+                    if not submission.submitter:
+                        continue
+
+                    submitter_username = submission.submitter.username
+                    score = submitters_scores.get(submitter_username, 0)
+
+                    if is_iotd(submission.image):
+                        score += guessed_iotd_reward
+                        submitter_promotion_counts[submitter_username]['iotds'] += 1
+                    elif is_top_pick(submission.image):
+                        score += guessed_tp_reward
+                        submitter_promotion_counts[submitter_username]['top_picks'] += 1
+                    elif is_top_pick_nomination(submission.image):
+                        score += guessed_tpn_reward
+                        submitter_promotion_counts[submitter_username]['top_pick_nominations'] += 1
+                    else:
+                        score -= wasted_promotion_penalty
+                        submitter_promotion_counts[submitter_username]['wasted_promotions'] += 1
+
+                    submitters_scores[submitter_username] = score
+
+                    # Increment promotion counts
+                    submitter_promotion_counts[submitter_username]['promotions'] += 1
+                except KeyError:
                     continue
-
-                submitter_username = submission.submitter.username
-                score = submitters_scores.get(submitter_username, 0)
-
-                if is_iotd(submission.image):
-                    score += guessed_iotd_reward
-                    submitter_promotion_counts[submitter_username]['iotds'] += 1
-                elif is_top_pick(submission.image):
-                    score += guessed_tp_reward
-                    submitter_promotion_counts[submitter_username]['top_picks'] += 1
-                elif is_top_pick_nomination(submission.image):
-                    score += guessed_tpn_reward
-                    submitter_promotion_counts[submitter_username]['top_pick_nominations'] += 1
-                else:
-                    score -= wasted_promotion_penalty
-                    submitter_promotion_counts[submitter_username]['wasted_promotions'] += 1
-
-                submitters_scores[submitter_username] = score
-
-                # Increment promotion counts
-                submitter_promotion_counts[submitter_username]['promotions'] += 1
 
             # Update scoring for missed submissions and dismissals
             for submitter_username, seen_image_ids in seen_images_by_user.items():
-                submitted_image_ids = submissions_by_user.get(submitter_username, set())
-                dismissed_image_ids = dismissals_by_user.get(submitter_username, set())
+                try:
+                    submitted_image_ids = submissions_by_user.get(submitter_username, set())
+                    dismissed_image_ids = dismissals_by_user.get(submitter_username, set())
 
-                for image_id in seen_image_ids:
-                    try:
-                        image = Image.objects_including_wip.get(pk=image_id)
-                    except Image.DoesNotExist:
-                        # In case the image was deleted.
-                        continue
-                    if image_id not in submitted_image_ids:
-                        # Submitter saw an image that was promoted but did not submit it
-                        score = 0
-                        if is_iotd(image):
-                            score = submitters_scores.get(submitter_username, 0) - missed_iotd_submission_penalty
-                            submitter_promotion_counts[submitter_username]['missed_iotd_promotions'] += 1
-                        elif is_top_pick(image):
-                            score = submitters_scores.get(submitter_username, 0) - missed_tp_submission_penalty
-                            submitter_promotion_counts[submitter_username]['missed_tp_promotions'] += 1
-                        elif is_top_pick_nomination(image):
-                            score = submitters_scores.get(submitter_username, 0) - missed_tpn_submission_penalty
-                            submitter_promotion_counts[submitter_username]['missed_tpn_promotions'] += 1
-                        submitters_scores[submitter_username] = score
-
-                    if image_id not in dismissed_image_ids:
-                        # Submitter saw an image that was dismissed by others but did not submit it
+                    for image_id in seen_image_ids:
                         try:
+                            image = Image.objects_including_wip.get(pk=image_id)
+                        except Image.DoesNotExist:
+                            # In case the image was deleted.
+                            continue
+                        if image_id not in submitted_image_ids:
+                            # Submitter saw an image that was promoted but did not submit it
+                            score = 0
+                            if is_iotd(image):
+                                score = submitters_scores.get(submitter_username, 0) - missed_iotd_submission_penalty
+                                submitter_promotion_counts[submitter_username]['missed_iotd_promotions'] += 1
+                            elif is_top_pick(image):
+                                score = submitters_scores.get(submitter_username, 0) - missed_tp_submission_penalty
+                                submitter_promotion_counts[submitter_username]['missed_tp_promotions'] += 1
+                            elif is_top_pick_nomination(image):
+                                score = submitters_scores.get(submitter_username, 0) - missed_tpn_submission_penalty
+                                submitter_promotion_counts[submitter_username]['missed_tpn_promotions'] += 1
+                            submitters_scores[submitter_username] = score
+
+                        if image_id not in dismissed_image_ids:
+                            # Submitter saw an image that was dismissed by others but did not submit it
                             dismissed = image_dismissal_counts[image_id] >= settings.IOTD_MAX_DISMISSALS
                             if dismissed:
                                 score = submitters_scores.get(submitter_username, 0) - missed_dismissal_penalty
                                 submitters_scores[submitter_username] = score
                                 dismissal_counts[submitter_username]['missed_dismissals'] += 1
-                        except KeyError:
-                            # Nobody dismissed this
-                            continue
+                except KeyError:
+                    continue
 
         def prepare_reviewer_scores(votes):
             for vote in votes:
-                if not vote.reviewer:
+                try:
+                    if not vote.reviewer:
+                        continue
+
+                    reviewer_username = vote.reviewer.username
+                    score = reviewers_scores.get(reviewer_username, 0)
+
+                    if is_iotd(vote.image):
+                        score += guessed_iotd_reward
+                    elif is_top_pick(vote.image):
+                        score += guessed_tp_reward
+
+                    reviewers_scores[reviewer_username] = score
+
+                    # Increment promotion counts
+                    reviewer_promotion_counts[reviewer_username]['promotions'] += 1
+                    if is_iotd(vote.image):
+                        reviewer_promotion_counts[reviewer_username]['iotds'] += 1
+                    elif is_top_pick(vote.image):
+                        reviewer_promotion_counts[reviewer_username]['top_picks'] += 1
+                    else:
+                        score -= wasted_promotion_penalty
+                        reviewer_promotion_counts[reviewer_username]['wasted_promotions'] += 1
+                except KeyError:
                     continue
-
-                reviewer_username = vote.reviewer.username
-                score = reviewers_scores.get(reviewer_username, 0)
-
-                if is_iotd(vote.image):
-                    score += guessed_iotd_reward
-                elif is_top_pick(vote.image):
-                    score += guessed_tp_reward
-
-                reviewers_scores[reviewer_username] = score
-
-                # Increment promotion counts
-                reviewer_promotion_counts[reviewer_username]['promotions'] += 1
-                if is_iotd(vote.image):
-                    reviewer_promotion_counts[reviewer_username]['iotds'] += 1
-                elif is_top_pick(vote.image):
-                    reviewer_promotion_counts[reviewer_username]['top_picks'] += 1
-                else:
-                    score -= wasted_promotion_penalty
-                    reviewer_promotion_counts[reviewer_username]['wasted_promotions'] += 1
 
         def remove_inactive_reviewers(reviewers_scores, reviewer_promotion_counts):
             return {

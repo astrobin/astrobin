@@ -131,3 +131,31 @@ class TestTopicSaveSignals(TestCase):
 
         with self.assertRaises(AssertionError):
             push_notification.assert_called_with([user1], topic.user, 'new_topic_for_equipment_you_use', mock.ANY)
+
+    @mock.patch('astrobin_apps_forum.services.forum_service.push_notification')
+    def test_notification_for_topics_if_you_follow_equipment(self, push_notification):
+        follower = Generators.user()
+        poster = Generators.user()
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        Generators.follow(telescope, user=follower)
+
+        forum = telescope.forum
+        topic = Generators.forum_topic(forum=forum, user=poster)
+
+        push_notification.assert_called_with([follower], topic.user, 'new_topic_for_equipment_you_follow', mock.ANY)
+
+    @mock.patch('astrobin_apps_forum.services.forum_service.push_notification')
+    def test_notification_for_topics_if_you_follow_equipment_except_users(self, push_notification):
+        follower = Generators.user()
+        poster = Generators.user()
+        image = Generators.image(user=follower)
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        image.imaging_telescopes_2.add(telescope)
+        Generators.follow(telescope, user=follower)
+
+        forum = telescope.forum
+        topic = Generators.forum_topic(forum=forum, user=poster)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([follower], topic.user, 'new_topic_for_equipment_you_follow', mock.ANY)
+

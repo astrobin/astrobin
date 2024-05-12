@@ -1,0 +1,10 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{user}} posted a new topic in the forum for equipment item "{{item}}" that you follow
+{% endblocktrans %}.
+
+{% trans "Title" %}: {{topic_name}}
+{% trans "View the topic" %}: {{topic_url}}
+{% trans "View the equipment item" %}: {{item_url}}
+

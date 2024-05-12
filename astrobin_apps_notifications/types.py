@@ -208,6 +208,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_topic_for_equipment_you_follow',
+        _('New forum topic for an equipment item you follow'),
+        '',
+        2,
+    ),
+    (
         'topic_moved',
         _('Your forum topic was moved'),
         '',

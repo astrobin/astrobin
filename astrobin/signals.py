@@ -335,6 +335,11 @@ def image_pre_delete(sender, instance: Image, **kwargs):
     if instance.image_file:
         if instance.image_file.url and getattr(instance, "purge_caches", False):
             invalidate_cdn_caches.delay([instance.image_file.url])
+        else:
+            if not instance.image_file.url:
+                log.debug(f"image_pre_delete: Image {instance.pk} has no image_file.url")
+            if not getattr(instance, "purge_caches", False):
+                log.debug(f"image_pre_delete: Image {instance.pk} has no purge_caches attribute")
         instance.image_file.delete(save=False)
 
 
@@ -419,6 +424,11 @@ def imagerevision_pre_delete(sender, instance: ImageRevision, **kwargs):
     if instance.image_file:
         if instance.image_file.url and getattr(instance, "purge_caches", False):
             invalidate_cdn_caches.delay([instance.image_file.url])
+        else:
+            if not instance.image_file.url:
+                log.debug(f"imagerevision_pre_delete: ImageRevision {instance.pk} has no image_file.url")
+            if not getattr(instance, "purge_caches", False):
+                log.debug(f"imagerevision_pre_delete: ImageRevision {instance.pk} has no purge_caches attribute")
         instance.image_file.delete(save=False)
 
 
@@ -1567,18 +1577,6 @@ def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
             userprofile_post_softdelete(sender, instance, **kwargs)
         except InternalError as e:
             log.error("Error soft deleting user profile %d: %s" % (instance.pk, str(e)))
-
-    image_urls = [
-        x.image_file.url for x in ImageRevision.all_objects.filter(image__user=instance.user)
-        if x.image_file and x.image_file.url
-    ]
-
-    revision_urls = [
-        x.image_file.url for x in Image.all_objects.filter(user=instance.user)
-        if x.image_file and x.image_file.url
-    ]
-
-    invalidate_cdn_caches.delay(image_urls + revision_urls)
 
     for revision in ImageRevision.all_objects.filter(image__user=instance.user):
         log.debug("Deleting revision %d" % revision.pk)

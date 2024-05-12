@@ -11,7 +11,7 @@ from django.db import IntegrityError
 from django.db.models import Q, QuerySet
 from django.forms.utils import ErrorList
 from django.http import Http404, HttpResponseForbidden
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -114,8 +114,7 @@ class UserCollectionsBaseEdit(LoginRequiredMixin, UserCollectionsBase, View):
             return self.form_invalid(form)
 
 
-class UserCollectionsCreate(
-    UserCollectionsBaseEdit, RedirectToCollectionListMixin, CreateView):
+class UserCollectionsCreate(UserCollectionsBaseEdit, RedirectToCollectionListMixin, CreateView):
     form_class = CollectionCreateForm
     template_name = 'user_collections_create.html'
 
@@ -339,3 +338,32 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
         if self.request.is_ajax():
             return 'inclusion_tags/image_list_entries.html'
         return 'user_collections_detail.html'
+
+
+class UserCollectionsNoCollection(View):
+    model = Image
+
+    def get(self, request, *args, **kwargs):
+        username = self.kwargs['username']
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise Http404
+
+        if request.user != user:
+            return HttpResponseForbidden()
+
+        image_list = Image.objects_including_wip.filter(user__username=username, collections__isnull=True)
+        context = {
+            'requested_user': user,
+            'username': user.userprofile.get_display_name(),
+            'image_list': image_list,
+            'image_list_count': image_list.count(), 'alias': 'gallery',
+            'paginate_by': settings.PAGINATE_USER_PAGE_BY,
+        }
+
+        if self.request.is_ajax():
+            return render(self.request, 'inclusion_tags/image_list_entries.html', context)
+
+        return render(self.request, 'user_collections_detail.html', context)

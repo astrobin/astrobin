@@ -1,0 +1,80 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="acquisition-months-filter-template">
+    {% if valid_usersubscription|can_access_full_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <v-multiselect v-model="value" :options="options" track-by="id" label="label" selectLabel=""
+                           deselectLabel="" selectedLabel="" :searchable="true" :multiple="true"
+                           placeholder="{% trans "Select" %}"></v-multiselect>
+            <input type="hidden" name="acquisition_months" :value="getFormValue()">
+            <span class="help-block">
+                <p>
+                    {% blocktrans trimmed %}
+                        Results will include images that were acquired in any of the selected months.
+                    {% endblocktrans %}
+                </p>
+            </span>
+        </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("acquisition-months-filter", {
+        template: "#acquisition-months-filter-template",
+        props: [
+            "acquisitionMonths"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                options: [
+                    {id: "Jan", label: '{% trans "January" %}'},
+                    {id: "Feb", label: '{% trans "February" %}'},
+                    {id: "Mar", label: '{% trans "March" %}'},
+                    {id: "Apr", label: '{% trans "April" %}'},
+                    {id: "May", label: '{% trans "May" %}'},
+                    {id: "Jun", label: '{% trans "June" %}'},
+                    {id: "Jul", label: '{% trans "July" %}'},
+                    {id: "Aug", label: '{% trans "August" %}'},
+                    {id: "Sep", label: '{% trans "September" %}'},
+                    {id: "Oct", label: '{% trans "October" %}'},
+                    {id: "Nov", label: '{% trans "November" %}'},
+                    {id: "Dec", label: '{% trans "December" %}'},
+                    
+                ]
+            }
+        },
+        created: function () {
+            if (this.acquisitionMonths) {
+                const months = this.acquisitionMonths.split(',');
+
+                for (let i = 0; i < this.options.length; i++) {
+                    if (months.indexOf(this.options[i].id) > -1) {
+                        this.value.push(this.options[i]);
+                    }
+                }
+            }
+        },
+        methods: {
+            getFormValue: function () {
+                if (Array.isArray(this.value)) {
+                    return this.value.map(function (v) {
+                        return v.id;
+                    }).join(',');
+                }
+
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

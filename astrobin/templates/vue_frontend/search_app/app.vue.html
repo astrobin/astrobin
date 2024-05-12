@@ -151,6 +151,8 @@
                                 <modified-camera-filter v-if="filter.name === 'modified_camera'" :modified-camera="modifiedCamera"></modified-camera-filter>
                             
                                 <color-or-mono-filter v-if="filter.name === 'color_or_mono'" :colorOrMono="colorOrMono"></color-or-mono-filter>
+                                
+                                <acquisition-months-filter v-if="filter.name === 'acquisition_months'" :acquisitionMonths="acquisitionMonths"></acquisition-months-filter>
                             </div>
 
                             {% if request.GET.d == None or request.GET.d|startswith:'i' %}
@@ -549,6 +551,12 @@
                 {% else %}
                     undefined
                 {% endif %},
+            acquisitionMonths:
+                {% if "acquisition_months" in request.GET and request.GET.acquisition_months %}
+                    "{{ request.GET.acquisition_months }}"
+                {% else %}
+                    undefined
+                {% endif %},
 
             sort:
                 {% if "sort" in request.GET and request.GET.sort %}
@@ -798,6 +806,12 @@
                     removable: true,
                     restricted: "FULL"
                 },
+                {
+                    name: "acquisition_months",
+                    label: "{% trans "Acquired in certain months" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
             ],
             enabledFilters: []
         },
@@ -963,6 +977,10 @@
 
             {% if "color_or_mono" in request.GET %}
                 this.enabledFilters.push(this.getFilterByName("color_or_mono"));
+            {% endif %}
+            
+            {% if "acquisition_months" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("acquisition_months"));
             {% endif %}
         },
         methods: {
