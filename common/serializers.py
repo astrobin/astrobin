@@ -10,6 +10,7 @@ from subscription.models import UserSubscription, Subscription, Transaction
 
 from astrobin.api2.serializers.location_serializer import LocationSerializer
 from astrobin.models import UserProfile, Location
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 
@@ -39,30 +40,18 @@ class UserSerializer(serializers.ModelSerializer):
     large_avatar = LargeAvatarField(source='*')
     userprofile = PrimaryKeyRelatedField(read_only=True)
     display_name = serializers.SerializerMethodField(read_only=True)
-    marketplace_communication_feedback = serializers.SerializerMethodField(read_only=True)
-    marketplace_speed_feedback = serializers.SerializerMethodField(read_only=True)
-    marketplace_accuracy_feedback = serializers.SerializerMethodField(read_only=True)
-    marketplace_packaging_feedback = serializers.SerializerMethodField(read_only=True)
+    marketplace_feedback = serializers.SerializerMethodField(read_only=True)
     marketplace_feedback_count = serializers.SerializerMethodField(read_only=True)
     marketplace_listing_count = serializers.SerializerMethodField(read_only=True)
 
     def get_display_name(self, user: User) -> str:
         return user.userprofile.get_display_name()
 
-    def get_marketplace_communication_feedback(self, user: User) -> Optional[int]:
-        return None
-
-    def get_marketplace_speed_feedback(self, user: User) -> Optional[int]:
-        return None
-
-    def get_marketplace_accuracy_feedback(self, user: User) -> Optional[int]:
-        return None
-
-    def get_marketplace_packaging_feedback(self, user: User) -> Optional[int]:
-        return None
+    def get_marketplace_feedback(self, user: User) -> Optional[int]:
+        return MarketplaceService.calculate_received_feedback_score(user)
 
     def get_marketplace_feedback_count(self, user: User) -> Optional[int]:
-        return 0
+        return MarketplaceService.received_feedback_count(user)
 
     def get_marketplace_listing_count(self, user: User) -> Optional[int]:
         return user.created_equipment_item_marketplace_listings.count()

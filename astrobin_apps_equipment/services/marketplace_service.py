@@ -6,9 +6,11 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 from astrobin_apps_equipment.models import (
-    EquipmentItemMarketplaceListing, EquipmentItemMarketplaceOffer,
+    EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
+    EquipmentItemMarketplaceOffer,
 )
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
+from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
 from astrobin_apps_notifications.utils import build_notification_url
 from common.services import AppRedirectionService, DateTimeService
 
@@ -50,3 +52,27 @@ class MarketplaceService:
         offer.line_item.sold = DateTimeService.now()
         offer.line_item.sold_to = offer.user
         offer.line_item.save()
+
+    @staticmethod
+    def calculate_received_feedback_score(user: User) -> Optional[int]:
+        score_map = {
+            MarketplaceFeedback.POSITIVE.value: 1,
+            MarketplaceFeedback.NEUTRAL.value: 0,
+            MarketplaceFeedback.NEGATIVE.value: -1,
+        }
+
+        feedbacks = EquipmentItemMarketplaceFeedback.objects.filter(line_item__user=user)
+
+        total_score = sum(score_map[feedback.value] for feedback in feedbacks)
+
+        # Normalize the score to a 0-100 scale
+        max_score = len(feedbacks)  # Maximum possible score
+        min_score = -len(feedbacks)  # Minimum possible score
+        score_range = max_score - min_score
+        normalized_score = ((total_score - min_score) / score_range) * 100 if score_range else 0
+
+        return normalized_score
+
+    @staticmethod
+    def received_feedback_count(user: User) -> int:
+        return EquipmentItemMarketplaceFeedback.objects.filter(line_item__user=user).count()
