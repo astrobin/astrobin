@@ -58,10 +58,5 @@ class EquipmentItemMarketplaceFeedback(SafeDeleteModel):
         choices=EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_CATEGORY_CHOICES,
     )
 
-    text = models.TextField(
-        null=True,
-        blank=True,
-    )
-
     def __str__(self):
-        return f'Marketplace listing feedback for {self.listing} by {self.user}: {self.value}'
+        return f'Marketplace listing feedback for line item {self.line_item} by {self.user}: {self.category} {self.value}'
