@@ -177,7 +177,10 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
                     self.price_chf = self.price / exchange_rate.rate
 
     def update_item_name(self):
-        self.item_name = str(self.item_content_object)
+        if self.item_content_object:
+            self.item_name = str(self.item_content_object)
+        else:
+            self.item_name = self.item_plain_text
 
     @property
     def slug(self) -> str:
