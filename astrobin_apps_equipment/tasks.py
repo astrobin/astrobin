@@ -11,7 +11,7 @@ from astrobin.models import GearMigrationStrategy
 from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models import (
     Accessory, AccessoryEditProposal, Camera, CameraEditProposal, EquipmentItemMarketplaceListing,
-    EquipmentItemMarketplaceOffer, Filter,
+    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceOffer, Filter,
     FilterEditProposal, Mount,
     MountEditProposal,
     Sensor, SensorEditProposal, Software, SoftwareEditProposal, Telescope,
@@ -22,7 +22,8 @@ from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.services.stock import StockImporterService
 from astrobin_apps_equipment.services.stock.plugins.agena import AgenaStockImporterPlugin
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from common.services import DateTimeService
 
 log = logging.getLogger(__name__)
 
@@ -135,3 +136,41 @@ def send_offer_notifications(
         notice_label,
         MarketplaceService.offer_notification_params(listing, buyer, offer),
     )
+
+
+@shared_task(time_limit=300)
+def remind_about_rating_seller():
+    # Find all line items that have been sold for more than 10 days and have not been rated
+    days = 10
+    cutoff = datetime.now() - timedelta(days=days)
+    line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
+        sold__lt=cutoff,
+        feedbacks__isnull=True,
+        rate_seller_reminder_sent__isnull=True
+    )
+
+    # Keep track of users to avoid sending multiple reminders
+    users = set()
+
+    # Loop all line items and send a reminder to the buyer
+    for line_item in line_items:
+        if line_item.sold_to in users:
+            continue
+
+        listing = line_item.listing
+
+        push_notification(
+            [line_item.sold_to],
+            None,
+            'marketplace-rate-seller',
+            {
+                'seller_display_name': listing.user.userprofile.get_display_name(),
+                'listing': listing,
+                'listing_url': build_notification_url(listing.get_absolute_url())
+            }
+        )
+
+        line_item.rate_seller_reminder_sent = DateTimeService.now()
+        line_item.save(keep_deleted=True)
+
+        users.add(line_item.sold_to)

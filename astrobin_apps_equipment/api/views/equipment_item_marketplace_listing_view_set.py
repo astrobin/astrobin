@@ -69,9 +69,13 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         if hash_param:
             queryset = queryset.filter(hash=hash_param)
             if self.request.user.is_authenticated:
-                # Allow fetching of own expired listing by hash
+                # Allow fetching by hash if you're the seller or the buyer
                 queryset = queryset | EquipmentItemMarketplaceListing.objects.filter(
-                    hash=hash_param, user=self.request.user
+                    Q(hash=hash_param) &
+                    Q(
+                        Q(line_items__sold_to=self.request.user) |
+                        Q(user=self.request.user)
+                    )
                 )
 
         return queryset

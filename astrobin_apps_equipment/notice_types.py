@@ -25,4 +25,5 @@ EQUIPMENT_NOTICE_TYPES = (
     ('marketplace-listing-line-item-sold', _('Marketplace listing line item sold'), '', 2),
     ('marketplace-listing-by-user-you-follow', _('New marketplace listing by user you follow'), '', 2),
     ('marketplace-listing-for-item-you-follow', _('New marketplace listing for item you follow'), '', 2),
+    ('marketplace-rate-seller', _('Rate the seller for your recent purchase'), '', 2),
 )

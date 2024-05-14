@@ -149,6 +149,12 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
         blank=True,
     )
 
+    # The reminder to rate the seller has been sent.
+    rate_seller_reminder_sent = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     def clean(self):
         if not self.item_object_id and not self.item_plain_text:
             raise ValidationError("Either item_object_id or item_plain_text must be provided.")

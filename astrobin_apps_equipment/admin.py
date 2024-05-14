@@ -7,7 +7,7 @@ from django.utils.html import format_html
 from safedelete import HARD_DELETE
 
 from astrobin_apps_equipment.models import (
-    AccessoryMigrationRecord, CameraMigrationRecord, EquipmentItemMarketplaceListing,
+    AccessoryMigrationRecord, CameraMigrationRecord, EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing,
     EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemImage,
     EquipmentItemMarketplaceOffer, EquipmentItemMarketplacePrivateConversation, EquipmentPreset,
     FilterMigrationRecord, MountMigrationRecord,
@@ -381,6 +381,27 @@ class EquipmentItemMarketplaceOfferAdmin(admin.ModelAdmin):
     )
 
 
+class EquipmentItemMarketplaceFeedbackAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'line_item',
+        'category',
+        'value',
+        'created',
+    )
+
+    search_fields = (
+        'user__username',
+        'line_item__listing__hash',
+    )
+
+    readonly_fields = (
+        'id',
+        'user',
+        'line_item',
+        'created',
+    )
+
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)
@@ -412,3 +433,4 @@ admin.site.register(EquipmentItemMarketplaceListingLineItem, EquipmentItemMarket
 admin.site.register(EquipmentItemMarketplaceListingLineItemImage, EquipmentItemMarketplaceListingLineItemImageAdmin)
 admin.site.register(EquipmentItemMarketplacePrivateConversation, EquipmentItemMarketplacePrivateConversationAdmin)
 admin.site.register(EquipmentItemMarketplaceOffer, EquipmentItemMarketplaceOfferAdmin)
+admin.site.register(EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceFeedbackAdmin)
