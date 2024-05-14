@@ -43,6 +43,13 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         null=True,
     )
 
+    approved_by = models.ForeignKey(
+        User,
+        related_name='approved_equipment_item_marketplace_listings',
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+
     expiration = models.DateTimeField(
         null=False,
         blank=False,
