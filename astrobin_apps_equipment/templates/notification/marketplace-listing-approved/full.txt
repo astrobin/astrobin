@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Marketplace listing "{{ listing }}" was approved.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    The listing is now live. Good luck with your sale!
+{% endblocktrans %}
+
+{% blocktrans trimmed %}View listing{% endblocktrans %}:
+
+{{ listing_url }}

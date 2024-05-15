@@ -22,6 +22,7 @@ EQUIPMENT_NOTICE_TYPES = (
     ('marketplace-offer-retracted', _('Marketplace offer retracted by buyer'), '', 2),
     ('marketplace-listing-updated', _('Marketplace listing updated'), '', 2),
     ('marketplace-listing-deleted', _('Marketplace listing deleted'), '', 2),
+    ('marketplace-listing-approved', _('Marketplace listing approved'), '', 2),
     ('marketplace-listing-line-item-sold', _('Marketplace listing line item sold'), '', 2),
     ('marketplace-listing-by-user-you-follow', _('New marketplace listing by user you follow'), '', 2),
     ('marketplace-listing-for-item-you-follow', _('New marketplace listing for item you follow'), '', 2),

@@ -3,7 +3,9 @@ from typing import Optional
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse
+from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
 from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
@@ -12,6 +14,8 @@ from astrobin_apps_equipment.models import (
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
 from astrobin_apps_notifications.utils import build_notification_url
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.services import AppRedirectionService, DateTimeService
 
 log = logging.getLogger(__name__)
@@ -76,3 +80,21 @@ class MarketplaceService:
     @staticmethod
     def received_feedback_count(user: User) -> int:
         return EquipmentItemMarketplaceFeedback.objects.filter(line_item__user=user).count()
+
+    @staticmethod
+    def approve_listing(listing: EquipmentItemMarketplaceListing, moderator: User):
+        if not UserService(moderator).is_in_group(GroupName.MARKETPLACE_MODERATORS):
+            raise PermissionDenied("Only marketplace moderators can approve listings")
+
+        if getattr(listing, DELETED_FIELD_NAME, None):
+            raise PermissionDenied("Cannot approve a deleted listing")
+
+        now = DateTimeService.now()
+
+        listing.approved = now
+        listing.approved_by = moderator
+
+        if listing.first_approved is None:
+            listing.first_approved = now
+
+        listing.save()

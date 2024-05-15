@@ -629,12 +629,44 @@ def send_offer_accepted_notifications(sender, instance: EquipmentItemMarketplace
 def marketplace_listing_pre_save(sender, instance: EquipmentItemMarketplaceListing, **kwargs):
     if instance.pk:
         pre_save_instance = EquipmentItemMarketplaceListing.objects.get(pk=instance.pk)
-        if pre_save_instance.approved is None and instance.approved is not None:
+
+        # The item is being approved.
+        if (
+                pre_save_instance.approved is None and
+                pre_save_instance.first_approved is None and
+                instance.approved is not None
+        ):
             instance.pre_save_approved = True
+
+        # The item is being approved (not for the first time)
+        if (
+                pre_save_instance.approved is None and
+                pre_save_instance.first_approved is not None and
+                instance.approved is not None
+        ):
+            instance.pre_save_approved_again = True
+
+        # The item is being updated while approved
+        if pre_save_instance.approved:
+            instance.approved = None
+            instance.approved_by = None
+
 
 @receiver(post_save, sender=EquipmentItemMarketplaceListing)
 def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceListing, created: bool, **kwargs):
     if not created:
+        if instance.pre_save_approved or instance.pre_save_approved_again:
+            push_notification(
+                [instance.user],
+                None,
+                'marketplace-listing-approved',
+                {
+                    'user': instance.approved_by.userprofile.get_display_name(),
+                    'listing': instance,
+                    'listing_url': build_notification_url(instance.get_absolute_url())
+                }
+            )
+
         if instance.pre_save_approved:
             seller_followers = list(User.objects.filter(
                 toggleproperty__content_type=ContentType.objects.get_for_model(instance.user),
@@ -673,30 +705,32 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                             'line_item': line_item,
                         }
                     )
+        else:
+            # The item is being updated and not merely approved.
 
-        users_with_offers = User.objects.filter(
-            equipment_item_marketplace_listings_offers__listing=instance
-        ).distinct()
+            users_with_offers = User.objects.filter(
+                equipment_item_marketplace_listings_offers__listing=instance
+            ).distinct()
 
-        followers = User.objects.filter(
-            toggleproperty__content_type=ContentType.objects.get_for_model(instance),
-            toggleproperty__object_id=instance.id,
-            toggleproperty__property_type="follow"
-        ).distinct()
+            followers = User.objects.filter(
+                toggleproperty__content_type=ContentType.objects.get_for_model(instance),
+                toggleproperty__object_id=instance.id,
+                toggleproperty__property_type="follow"
+            ).distinct()
 
-        recipients = list(set(list(users_with_offers) + list(followers)))
+            recipients = list(set(list(users_with_offers) + list(followers)))
 
-        if len(recipients):
-            push_notification(
-                recipients,
-                instance.user,
-                'marketplace-listing-updated',
-                {
-                    'seller_display_name': instance.user.userprofile.get_display_name(),
-                    'listing': instance,
-                    'listing_url': build_notification_url(instance.get_absolute_url())
-                }
-            )
+            if len(recipients):
+                push_notification(
+                    recipients,
+                    instance.user,
+                    'marketplace-listing-updated',
+                    {
+                        'seller_display_name': instance.user.userprofile.get_display_name(),
+                        'listing': instance,
+                        'listing_url': build_notification_url(instance.get_absolute_url())
+                    }
+                )
 
 
 @receiver(post_softdelete, sender=EquipmentItemMarketplaceListing)

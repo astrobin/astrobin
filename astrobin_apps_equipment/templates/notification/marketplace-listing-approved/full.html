@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        Marketplace listing <strong>{{ listing }}</strong> was approved.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <strong>
+        {% blocktrans trimmed %}
+           The listing is now live. Good luck with your sale!
+        {% endblocktrans %}
+    </strong>
+</p>
+
+<a href="{{ listing_url }}" class="btn btn-primary">{% trans "View listing" %}</a>

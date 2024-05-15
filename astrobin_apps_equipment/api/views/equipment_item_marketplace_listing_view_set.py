@@ -9,6 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
+from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -22,6 +23,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
     EquipmentItemMarketplaceListingSerializer
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
 from astrobin_apps_payments.models import ExchangeRate
 from astrobin_apps_users.services import UserService
@@ -276,13 +278,11 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
-    def perform_destroy(self, serializer):
-        instance = serializer.instance
-
+    def perform_destroy(self, instance):
         if instance.line_items.filter(sold__isnull=False).exists():
             raise serializers.ValidationError("Cannot delete a listing that has sold line items")
 
-        super().perform_destroy(serializer)
+        super().perform_destroy(instance)
 
     def get_serializer_class(self) -> Type[serializers.ModelSerializer]:
         if self.request.method in ['PUT', 'POST']:
@@ -318,3 +318,11 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         for param in self.request.query_params:
             if param not in allowed_params:
                 raise ValidationError({'detail': f'Invalid query parameter: {param}'})
+
+    @action(detail=True, methods=['put'])
+    def approve(self, request: Request, pk: int) -> Response:
+        listing = self.get_object()
+        MarketplaceService.approve_listing(listing, request.user)
+        listing.refresh_from_db()
+        serializer = self.get_serializer(listing)
+        return Response(serializer.data)
