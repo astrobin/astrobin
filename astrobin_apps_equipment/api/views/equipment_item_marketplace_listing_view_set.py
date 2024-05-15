@@ -17,6 +17,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from astrobin.settings.components.payments import SUPPORTED_CURRENCIES
+from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_read_serializer import \
     EquipmentItemMarketplaceListingReadSerializer
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_serializer import \
@@ -39,6 +40,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     permission_classes = [
         or_permission(IsAuthenticated, ReadOnly),
         or_permission(IsObjectUser, is_group_member(GroupName.MARKETPLACE_MODERATORS), ReadOnly),
+        MayAccessMarketplace
     ]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('hash', 'user')

@@ -8,6 +8,7 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
 
+from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.permissions.may_update_marketplace_private_conversation import \
     MayUpdateMarketplacePrivateConversation
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_private_conversation_serializer import \
@@ -18,7 +19,7 @@ from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, Equi
 class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
-    permission_classes = [MayUpdateMarketplacePrivateConversation]
+    permission_classes = [MayAccessMarketplace, MayUpdateMarketplacePrivateConversation]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('id', 'user')
     serializer_class = EquipmentItemMarketplacePrivateConversationSerializer

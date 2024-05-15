@@ -8,6 +8,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
+from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_offer_serializer import \
     EquipmentItemMarketplaceOfferSerializer
 from astrobin_apps_equipment.models import (
@@ -46,9 +47,9 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         Instantiates and returns the list of permissions that this view requires.
         """
         if self.action == 'list' or self.action == 'retrieve':
-            permission_classes = [permissions.AllowAny]
+            permission_classes = [MayAccessMarketplace]
         elif self.action == 'create':
-            permission_classes = [permissions.IsAuthenticated]
+            permission_classes = [permissions.IsAuthenticated, MayAccessMarketplace]
         elif self.action == 'update' or self.action == 'partial_update':
             permission_classes = [IsOfferOwner]
         elif self.action == 'destroy':

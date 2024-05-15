@@ -6,6 +6,7 @@ from rest_framework import status, viewsets
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
+from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_feedback_serializer import \
     EquipmentItemMarketplaceFeedbackSerializer
 from astrobin_apps_equipment.models import (
@@ -18,7 +19,7 @@ from common.permissions import IsObjectUserOrReadOnly
 class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
-    permission_classes = [IsObjectUserOrReadOnly]
+    permission_classes = [IsObjectUserOrReadOnly, MayAccessMarketplace]
     serializer_class = EquipmentItemMarketplaceFeedbackSerializer
     filter_fields = ('user',)
 

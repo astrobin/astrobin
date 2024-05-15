@@ -7,6 +7,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
+from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_read_serializer import \
     EquipmentItemMarketplaceListingLineItemReadSerializer
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_serializer import \
@@ -22,6 +23,7 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
     permission_classes = [
         or_permission(IsAuthenticated, ReadOnly),
         or_permission(IsObjectUser, is_group_member(GroupName.MARKETPLACE_MODERATORS), ReadOnly),
+        MayAccessMarketplace
     ]
     filterset_fields = ['hash']
 

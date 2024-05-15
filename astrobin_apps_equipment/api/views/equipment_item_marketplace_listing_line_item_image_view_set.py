@@ -7,6 +7,7 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
+from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_image_serializer import \
     EquipmentItemMarketplaceListingLineItemImageSerializer
 from astrobin_apps_equipment.models import (
@@ -23,6 +24,7 @@ class EquipmentItemMarketplaceListingLineItemImageViewSet(viewsets.ModelViewSet)
     permission_classes = [
         or_permission(IsAuthenticated, ReadOnly),
         or_permission(IsObjectUser, is_group_member(GroupName.MARKETPLACE_MODERATORS), ReadOnly),
+        MayAccessMarketplace
     ]
     serializer_class = EquipmentItemMarketplaceListingLineItemImageSerializer
     filterset_fields = ['hash']
