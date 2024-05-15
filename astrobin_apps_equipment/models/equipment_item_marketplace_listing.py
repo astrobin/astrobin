@@ -39,6 +39,10 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         editable=False,
     )
 
+    first_approved = models.DateTimeField(
+        null=True,
+    )
+
     approved = models.DateTimeField(
         null=True,
     )

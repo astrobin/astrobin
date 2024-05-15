@@ -421,6 +421,7 @@ Group.objects.get_or_create(name=GroupName.IOTD_STAFF)
 Group.objects.get_or_create(name=GroupName.IOTD_SUBMITTERS)
 Group.objects.get_or_create(name=GroupName.IOTD_REVIEWERS)
 Group.objects.get_or_create(name=GroupName.IOTD_JUDGES)
+Group.objects.get_or_create(name=GroupName.MARKETPLACE_MODERATORS)
 
 try:
     User.objects.get(username='astrobin')

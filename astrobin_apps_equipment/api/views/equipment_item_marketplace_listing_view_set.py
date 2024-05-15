@@ -10,6 +10,7 @@ from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
 from rest_framework.exceptions import NotFound, ValidationError
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -23,7 +24,9 @@ from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, Equi
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
 from astrobin_apps_payments.models import ExchangeRate
-from common.permissions import IsObjectUserOrReadOnly
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
+from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission
 from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
 
@@ -31,13 +34,17 @@ from toggleproperties.models import ToggleProperty
 class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
-    permission_classes = [IsObjectUserOrReadOnly]
+    permission_classes = [
+        or_permission(IsAuthenticated, ReadOnly),
+        or_permission(IsObjectUser, is_group_member(GroupName.MARKETPLACE_MODERATORS), ReadOnly),
+    ]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('hash', 'user')
 
     def get_queryset(self) -> QuerySet:
         self.validate_query_params()
         queryset = EquipmentItemMarketplaceListing.objects.all()
+        queryset = self.filter_approved(queryset)
         queryset = self.filter_by_excluded_hash(queryset)
         queryset = self.filter_by_expiration(queryset)
         queryset = self.filter_by_distance(queryset)
@@ -47,6 +54,15 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         line_items_queryset = self.filter_line_items(line_items_queryset)
 
         return queryset.prefetch_related(Prefetch('line_items', queryset=line_items_queryset))
+
+    def filter_approved(self, queryset: QuerySet) -> QuerySet:
+        if not self.request.user.is_authenticated:
+            return queryset.filter(approved__isnull=False)
+
+        if UserService(self.request.user).is_in_group(GroupName.MARKETPLACE_MODERATORS):
+            return queryset
+
+        return queryset.filter(Q(approved__isnull=False) | Q(user=self.request.user))
 
     def filter_by_excluded_hash(self, queryset: QuerySet) -> QuerySet:
         hash_param = self.request.query_params.get('exclude_listing')
@@ -114,6 +130,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         queryset = self.filter_line_items_with_offers_by_user(queryset)
         queryset = self.filter_line_items_sold_to_user(queryset)
         queryset = self.filter_line_items_followed_by_user(queryset)
+        queryset = self.filter_line_items_by_pending_moderation_status(queryset)
         queryset = self.filter_line_items_by_sold_status(queryset)
         queryset = self.filter_line_items_by_item_type(queryset)
         queryset = self.filter_line_items_by_price(queryset)
@@ -161,6 +178,17 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             return queryset.annotate(follow_exists=Exists(followed_item_exists)).filter(follow_exists=True)
 
         return queryset
+
+    def filter_line_items_by_pending_moderation_status(self, queryset: QuerySet) -> QuerySet:
+        pending_moderation = self.request.query_params.get('pending_moderation')
+
+        if pending_moderation is None:
+            return queryset
+
+        if pending_moderation == 'true':
+            return queryset.filter(listing__approved__isnull=True)
+
+        return queryset.filter(listing__approved__isnull=False)
 
     def filter_line_items_by_sold_status(self, queryset: QuerySet) -> QuerySet:
         sold = self.request.query_params.get('sold')
@@ -274,6 +302,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             'offers_by_user',
             'sold_to_user',
             'followed_by_user',
+            'pending_moderation',
             'sold',
             'item_type',
             'currency',

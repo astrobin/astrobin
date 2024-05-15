@@ -4,6 +4,7 @@ from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
 from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_read_serializer import \
@@ -11,13 +12,17 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_serializer import \
     EquipmentItemMarketplaceListingLineItemSerializer
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem
-from common.permissions import IsObjectUserOrReadOnly
+from common.constants import GroupName
+from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission
 
 
 class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
-    permission_classes = [IsObjectUserOrReadOnly]
+    permission_classes = [
+        or_permission(IsAuthenticated, ReadOnly),
+        or_permission(IsObjectUser, is_group_member(GroupName.MARKETPLACE_MODERATORS), ReadOnly),
+    ]
     filterset_fields = ['hash']
 
     def get_queryset(self):

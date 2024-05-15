@@ -4,7 +4,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.parsers import FormParser, MultiPartParser
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_image_serializer import \
@@ -13,15 +13,16 @@ from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
     EquipmentItemMarketplaceListingLineItemImage,
 )
-from common.permissions import IsObjectUserOrReadOnly
+from common.constants import GroupName
+from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission
 
 
 class EquipmentItemMarketplaceListingLineItemImageViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [
-        IsAuthenticatedOrReadOnly,
-        IsObjectUserOrReadOnly
+        or_permission(IsAuthenticated, ReadOnly),
+        or_permission(IsObjectUser, is_group_member(GroupName.MARKETPLACE_MODERATORS), ReadOnly),
     ]
     serializer_class = EquipmentItemMarketplaceListingLineItemImageSerializer
     filterset_fields = ['hash']

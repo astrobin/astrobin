@@ -7,3 +7,4 @@ class GroupName:
     GLOBAL_EQUIPMENT_MIGRATORS = 'global_equipment_migrators'
     EQUIPMENT_MODERATORS = 'equipment_moderators'
     BETA_TESTERS = 'AstroBin Beta Testers'
+    MARKETPLACE_MODERATORS = 'marketplace_moderators'
