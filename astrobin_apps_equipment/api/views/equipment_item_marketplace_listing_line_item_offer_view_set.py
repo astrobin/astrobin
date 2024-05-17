@@ -109,4 +109,6 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         MarketplaceService.accept_offer(offer)
 
-        return Response(status=status.HTTP_200_OK)
+        offer.refresh_from_db()
+        serializer = self.get_serializer(offer)
+        return Response(serializer.data, status=status.HTTP_200_OK)
