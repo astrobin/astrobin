@@ -4,6 +4,7 @@ from typing import Optional
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.urls import reverse
 from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
@@ -65,7 +66,10 @@ class MarketplaceService:
             MarketplaceFeedback.NEGATIVE.value: -1,
         }
 
-        feedbacks = EquipmentItemMarketplaceFeedback.objects.filter(line_item__user=user)
+        feedbacks = EquipmentItemMarketplaceFeedback.objects.filter(
+            Q(line_item__user=user) |
+            Q(line_item__sold_to=user)
+        )
 
         total_score = sum(score_map[feedback.value] for feedback in feedbacks)
 
@@ -79,7 +83,10 @@ class MarketplaceService:
 
     @staticmethod
     def received_feedback_count(user: User) -> int:
-        return EquipmentItemMarketplaceFeedback.objects.filter(line_item__user=user).count()
+        return EquipmentItemMarketplaceFeedback.objects.filter(
+            Q(line_item__user=user) |
+            Q(line_item__sold_to=user)
+        ).count()
 
     @staticmethod
     def approve_listing(listing: EquipmentItemMarketplaceListing, moderator: User):

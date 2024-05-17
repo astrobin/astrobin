@@ -6,6 +6,7 @@ from rest_framework import status, viewsets
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
+from astrobin.models import UserProfile
 from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_feedback_serializer import \
     EquipmentItemMarketplaceFeedbackSerializer
@@ -13,7 +14,9 @@ from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceFeedback,
     EquipmentItemMarketplaceListingLineItem,
 )
+from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
 from common.permissions import IsObjectUserOrReadOnly
+from common.services import DateTimeService
 
 
 class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
@@ -58,7 +61,20 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-            return super().create(request, *args, **kwargs)
+            if request.user == line_item.listing.user:
+                target_type = MarketplaceFeedbackTargetType.BUYER.value
+            else:
+                target_type = MarketplaceFeedbackTargetType.SELLER.value
+
+            request.data['target_type'] = target_type
+
+            retval = super().create(request, *args, **kwargs)
+
+            UserProfile.objects.filter(user=request.user).update(
+                updated=DateTimeService.now()
+            )
+
+            return retval
         else:
             return Response(
                 {"detail": "Line item ID and category must be provided."}, status=status.HTTP_400_BAD_REQUEST

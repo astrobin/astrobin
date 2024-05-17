@@ -6,6 +6,7 @@ from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
 from astrobin_apps_equipment.types.marketplace_feedback_category import MarketplaceFeedbackCategory
+from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
 
 EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_CHOICES = (
     (MarketplaceFeedback.NEGATIVE.value, gettext("Negative")),
@@ -14,10 +15,18 @@ EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_CHOICES = (
 )
 
 EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_CATEGORY_CHOICES = (
+    # Common to buyer and seller
     (MarketplaceFeedbackCategory.COMMUNICATION.value, gettext("Communication and friendliness")),
-    (MarketplaceFeedbackCategory.SPEED.value, gettext("Speed of delivery")),
+    (MarketplaceFeedbackCategory.SPEED.value, gettext("Speed of delivery/payment")),
+
+    # Seller only
     (MarketplaceFeedbackCategory.ACCURACY.value, gettext("Accuracy of item descriptions")),
     (MarketplaceFeedbackCategory.PACKAGING.value, gettext("Packaging quality")),
+)
+
+EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_TARGET_TYPE_CHOICES = (
+    (MarketplaceFeedbackTargetType.SELLER.value, gettext("Seller")),
+    (MarketplaceFeedbackTargetType.BUYER.value, gettext("Buyer")),
 )
 
 
@@ -56,6 +65,11 @@ class EquipmentItemMarketplaceFeedback(SafeDeleteModel):
         null=False,
         blank=False,
         choices=EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_CATEGORY_CHOICES,
+    )
+
+    target_type = models.CharField(
+        max_length=6,
+        choices=EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_TARGET_TYPE_CHOICES,
     )
 
     def __str__(self):
