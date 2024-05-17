@@ -34,5 +34,5 @@ def groups_for_user(user: User) -> QuerySet:
 
 
 @register.filter
-def is_in_group(user: User, group_name: str) -> bool:
+def is_in_astrobin_group(user: User, group_name: str) -> bool:
     return user.joined_group_set.filter(name=group_name).exists()
