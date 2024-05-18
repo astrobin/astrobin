@@ -1,4 +1,5 @@
 import logging
+from datetime import timedelta
 from typing import Optional
 
 from django.conf import settings
@@ -104,4 +105,22 @@ class MarketplaceService:
         if listing.first_approved is None:
             listing.first_approved = now
 
+        listing.save()
+
+    @staticmethod
+    def renew_listing(listing: EquipmentItemMarketplaceListing, user: User):
+        if getattr(listing, DELETED_FIELD_NAME, None):
+            raise PermissionDenied("Cannot renew a deleted listing")
+
+        if listing.expiration is None:
+            raise PermissionDenied("Cannot renew a listing that has no expiration date set")
+
+        if listing.expiration > DateTimeService.now():
+            raise PermissionDenied("Cannot renew a listing that has not expired yet")
+
+        if listing.user != user:
+            raise PermissionDenied("Cannot renew a listing that does not belong to you")
+
+        listing.expiration = DateTimeService.now() + timedelta(days=7)
+        listing.expired_notification_sent = None
         listing.save()

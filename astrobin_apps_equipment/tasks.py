@@ -174,3 +174,31 @@ def remind_about_rating_seller():
         line_item.save(keep_deleted=True)
 
         users.add(line_item.sold_to)
+
+
+@shared_task(time_limit=300)
+def notify_about_expired_listings():
+    # Find all listings that have expired
+    listings = EquipmentItemMarketplaceListing.objects.filter(
+        expiration__lt=timezone.now(),
+        expired_notification_sent__isnull=True
+    )
+
+    # Loop all listings and send a reminder to the seller
+    for listing in listings:
+        # Skip listing in which all line items have been sold
+        if listing.line_items.filter(sold__isnull=False).count() == listing.line_items.count():
+            continue
+
+        push_notification(
+            [listing.user],
+            None,
+            'marketplace-listing-expired',
+            {
+                'listing': listing,
+                'listing_url': build_notification_url(listing.get_absolute_url())
+            }
+        )
+
+        listing.expired_notification_sent = DateTimeService.now()
+        listing.save(keep_deleted=True)

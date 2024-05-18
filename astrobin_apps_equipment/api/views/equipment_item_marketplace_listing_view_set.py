@@ -328,3 +328,14 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         listing.refresh_from_db()
         serializer = self.get_serializer(listing)
         return Response(serializer.data)
+
+    @action(detail=True, methods=['put'])
+    def renew(self, request: Request, pk: int) -> Response:
+        try:
+            listing = EquipmentItemMarketplaceListing.objects.get(pk=pk)
+        except EquipmentItemMarketplaceListing.DoesNotExist:
+            raise NotFound()
+        MarketplaceService.renew_listing(listing, request.user)
+        listing.refresh_from_db()
+        serializer = self.get_serializer(listing)
+        return Response(serializer.data)

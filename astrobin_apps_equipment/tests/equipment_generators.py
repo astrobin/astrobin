@@ -256,6 +256,8 @@ class EquipmentGenerators:
             condition=kwargs.get('condition', MarketplaceLineItemCondition.NEW),
             item_object_id=item.pk,
             item_content_type=ContentType.objects.get_for_model(item),
+            sold=kwargs.get('sold', None),
+            sold_to=kwargs.get('sold_to', None),
         )
 
     @staticmethod

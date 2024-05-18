@@ -117,6 +117,10 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         default=False,
     )
 
+    expired_notification_sent = models.DateTimeField(
+        null=True,
+    )
+
     def delete(self, *args, **kwargs):
         from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
         related_children = EquipmentItemMarketplaceListingLineItem.objects.filter(listing=self)

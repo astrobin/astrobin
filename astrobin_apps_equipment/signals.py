@@ -661,7 +661,7 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                 None,
                 'marketplace-listing-approved',
                 {
-                    'user': instance.approved_by.userprofile.get_display_name(),
+                    'user': instance.approved_by.userprofile.get_display_name() if instance.approved_by else 'AstroBin',
                     'listing': instance,
                     'listing_url': build_notification_url(instance.get_absolute_url())
                 }

@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        Your marketplace listing <strong>{{ listing }}</strong> expired
+    {% endblocktrans %}.
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+       You can renew it by clicking the button below.
+    {% endblocktrans %}
+</p>
+
+<a href="{{ listing_url }}" class="btn btn-primary">{% trans "View listing" %}</a>
