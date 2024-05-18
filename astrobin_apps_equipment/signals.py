@@ -772,13 +772,23 @@ def marketplace_listing_line_item_post_save(sender, instance: EquipmentItemMarke
     if instance.pre_save_sold:
         users_with_offers = User.objects.filter(
             equipment_item_marketplace_listings_offers__line_item=instance
-        ).exclude(pk=instance.sold_to.pk).distinct()
+        )
+
+        if instance.sold_to:
+            users_with_offers = users_with_offers.exclude(pk=instance.sold_to.pk)
+
+        users_with_offers = users_with_offers.distinct()
 
         followers = User.objects.filter(
             toggleproperty__content_type=ContentType.objects.get_for_model(instance.listing),
             toggleproperty__object_id=instance.listing.id,
             toggleproperty__property_type="follow"
-        ).exclude(pk=instance.sold_to.pk).distinct()
+        )
+
+        if instance.sold_to:
+            followers = followers.exclude(pk=instance.sold_to.pk)
+
+        followers = followers.distinct()
 
         recipients = list(set(list(users_with_offers) + list(followers)))
 

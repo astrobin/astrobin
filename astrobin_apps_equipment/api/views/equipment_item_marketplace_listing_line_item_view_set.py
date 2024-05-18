@@ -3,9 +3,12 @@ from typing import Type
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
+from rest_framework.decorators import action
+from rest_framework.exceptions import NotFound
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
 
 from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_read_serializer import \
@@ -15,6 +18,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem
 from common.constants import GroupName
 from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission
+from common.services import DateTimeService
 
 
 class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
@@ -58,3 +62,23 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError("Cannot delete a line item that has been sold")
 
         super().perform_destroy(instance)
+
+    @action(detail=True, methods=['put'], url_path='mark-as-sold')
+    def mark_as_sold(self, request, pk=None, listing_id=None):
+        try:
+            line_item = EquipmentItemMarketplaceListingLineItem.objects.get(pk=pk)
+        except EquipmentItemMarketplaceListingLineItem.DoesNotExist:
+            raise NotFound()
+
+        if line_item.sold:
+            raise serializers.ValidationError("This line item has already been marked as sold")
+
+        if line_item.listing.user != request.user:
+            raise serializers.ValidationError("You are not the owner of this listing")
+
+        line_item.sold = DateTimeService.now()
+        line_item.save()
+
+        serializer = self.get_serializer(line_item)
+
+        return Response(serializer.data)
