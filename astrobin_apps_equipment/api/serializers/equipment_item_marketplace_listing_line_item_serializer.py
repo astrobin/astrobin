@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from rest_framework import serializers
 
@@ -7,7 +8,7 @@ from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, ImageEquipmentLog
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_image_serializer import \
     EquipmentItemMarketplaceListingLineItemImageSerializer
-from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
+from astrobin_apps_equipment.models import Camera, EquipmentItemMarketplaceListingLineItem, Mount, Sensor, Telescope
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 
 
@@ -90,6 +91,15 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
     def validate_year_of_purchase(self, value):
         if value is not None and value > datetime.now().year:
             raise serializers.ValidationError("Year of purchase must not be in the future.")
+
+        return value
+
+    def validate_item_content_type(self, value):
+        if value is None:
+            raise serializers.ValidationError("Item content type must be provided.")
+
+        if value.id is ContentType.objects.get_for_model(Sensor).id:
+            raise serializers.ValidationError("Sensors are not supported in the marketplace.")
 
         return value
     
