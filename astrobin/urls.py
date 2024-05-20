@@ -541,6 +541,11 @@ urlpatterns += [
         image_views.ImageAcquisitionFragment.as_view(),
         name='image_acquisition_fragment',
     ),
+    url(
+        r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?marketplace-fragment/$',
+        image_views.ImageMarketplaceFragment.as_view(),
+        name='image_marketplace_fragment',
+    ),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
     url(
         r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),

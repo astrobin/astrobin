@@ -53,6 +53,18 @@ $(document).ready(function() {
             }
         });
     }
+    
+    function fetchMarketplaceFragment() {
+        $.ajax({
+            url: "{% url 'image_marketplace_fragment' image.get_id %}",
+            type: "POST",
+            dataType: "html",
+            timeout: 0,
+            success: function (data) {
+                $(".marketplace").html(data);
+            }
+        });
+    }
 
     function showProperImageSize() {
         var containerWidth = $(".astrobin-container").width();
@@ -399,6 +411,7 @@ $(document).ready(function() {
     initializeIotdTpModal();
     fetchEquipmentFragment();
     fetchAcquisitionFragment();
+    fetchMarketplaceFragment();
 });
 </script>
 

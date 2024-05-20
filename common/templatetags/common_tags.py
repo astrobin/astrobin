@@ -5,6 +5,7 @@ from typing import List, Optional, Union
 
 import bleach
 import six
+from babel.numbers import format_currency
 from bs4 import BeautifulSoup
 from dateutil import parser
 from django import template
@@ -16,6 +17,7 @@ from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
 from django.utils.functional import keep_lazy
 from django.utils.safestring import mark_safe
+from django.utils.translation import get_language
 from lxml import etree, html
 
 from astrobin.enums import ImageEditorStep
@@ -530,3 +532,14 @@ class RemoveMultipleSpacesNode(Node):
 @register.filter
 def contains(value, arg):
     return arg in value
+
+
+@register.filter
+def currency(value: int, currency_code: str):
+    try:
+        locale = get_language()  # Get the current language code
+        if not locale:
+            locale = 'en_US'  # Default to 'en_US' if no language code is found
+        return format_currency(value, currency_code, locale=locale)
+    except Exception as e:
+        return value  # In case of any error, return the value as is
