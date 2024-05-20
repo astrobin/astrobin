@@ -53,6 +53,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         queryset = self.filter_by_expiration(queryset)
         queryset = self.filter_by_distance(queryset)
         queryset = self.filter_by_region(queryset)
+        queryset = self.filter_by_item_id_and_content_type(queryset)
 
         line_items_queryset = EquipmentItemMarketplaceListingLineItem.objects.all()
         line_items_queryset = self.filter_line_items(line_items_queryset)
@@ -130,6 +131,16 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             return queryset.filter(country=region.upper())
         return queryset
 
+    def filter_by_item_id_and_content_type(self, queryset: QuerySet) -> QuerySet:
+        item_id = self.request.GET.get('item_id')
+        content_type_id = self.request.GET.get('content_type_id')
+
+        if item_id and content_type_id:
+            content_type = ContentType.objects.get_for_id(content_type_id)
+            return queryset.filter(line_items__item_object_id=item_id, line_items__item_content_type=content_type)
+
+        return queryset
+
     def filter_line_items(self, queryset: QuerySet) -> QuerySet:
         queryset = self.filter_line_items_with_offers_by_user(queryset)
         queryset = self.filter_line_items_sold_to_user(queryset)
@@ -140,6 +151,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         queryset = self.filter_line_items_by_price(queryset)
         queryset = self.filter_line_items_by_condition(queryset)
         queryset = self.filter_line_items_by_query(queryset)
+        queryset = self.filter_line_items_by_item_id_and_content_type(queryset)
         return queryset
 
     def filter_line_items_with_offers_by_user(self, queryset: QuerySet) -> QuerySet:
@@ -268,6 +280,16 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+    def filter_line_items_by_item_id_and_content_type(self, queryset: QuerySet) -> QuerySet:
+        item_id = self.request.GET.get('item_id')
+        content_type_id = self.request.GET.get('content_type_id')
+
+        if item_id and content_type_id:
+            content_type = ContentType.objects.get_for_id(content_type_id)
+            return queryset.filter(item_object_id=item_id, item_content_type=content_type)
+
+        return queryset
+
     def retrieve(self, request: Request, *args: object, **kwargs: object) -> object:
         try:
             instance = EquipmentItemMarketplaceListing.objects.get(pk=kwargs['pk'])
@@ -315,6 +337,8 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             'user',
             'hash',
             'exclude_listing',
+            'item_id',
+            'content_type_id',
         ]
 
         for param in self.request.query_params:
