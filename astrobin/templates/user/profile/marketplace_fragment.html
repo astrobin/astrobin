@@ -1,0 +1,28 @@
+{% load i18n %}
+{% load common_tags %}
+
+{% if line_items|length > 0 %}
+    <div class="subtle-container">
+        <div class="header">
+            <h4>
+                <i class="icon-shopping-cart"></i>
+                {% trans "From the marketplace" %}
+            </h4>
+        </div>
+
+        <table class="table table-condensed table-striped">
+            <tbody>
+                {% for line_item in line_items %}
+                    <tr>
+                        <td>
+                            <a href="{{ line_item.listing.get_absolute_url }}">{{ line_item.item_name }}</a>
+                        </td>
+                        <td>
+                            {{ line_item.price|currency:line_item.currency }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}

@@ -63,6 +63,7 @@ from astrobin.templatetags.tags import (
     has_active_uncanceled_subscription_by_name, in_upload_wizard,
 )
 from astrobin.utils import get_client_country_code
+from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
@@ -73,6 +74,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_restore_from_trash,
 )
 from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
@@ -2632,3 +2634,24 @@ def serve_file_from_cdn(file_path):
         return django_response
 
     return view
+
+
+@require_POST
+@csrf_exempt
+def user_marketplace_fragment(request, username: str):
+    user = get_object_or_404(User, username=username)
+
+    line_items = EquipmentItemMarketplaceListingLineItem.objects.none()
+
+    if UserService(request.user).is_in_astrobin_group(GroupName.BETA_TESTERS):
+        line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
+            listing__user=user,
+            sold__isnull=True,
+            listing__approved__isnull=False,
+        )
+
+    return render(
+        request, 'user/profile/marketplace_fragment.html', {
+            'line_items': line_items,
+        }
+    )

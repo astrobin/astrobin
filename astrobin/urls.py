@@ -38,7 +38,8 @@ from astrobin.views import (
     recent_images_fragment, registration as registration_views, save_gear_details, save_gear_user_info,
     serve_file_from_cdn, set_language,
     suspended_account,
-    user_ban, user_page, user_page_api_keys, user_page_bookmarks, user_page_followers, user_page_following,
+    user_ban, user_marketplace_fragment, user_page, user_page_api_keys, user_page_bookmarks, user_page_followers,
+    user_page_following,
     user_page_friends, user_page_liked, user_page_plots, user_popover_ajax, user_profile_delete,
     user_profile_edit_basic, user_profile_edit_gear, user_profile_edit_license, user_profile_edit_locations,
     user_profile_edit_preferences, user_profile_edit_privacy, user_profile_flickr_import,
@@ -309,6 +310,11 @@ urlpatterns += [
     url(r'^users/(?P<username>[\w.@+-]*)/following/$', user_page_following, name='user_page_following'),
     url(r'^users/(?P<username>[\w.@+-]*)/friends/$', user_page_friends, name='user_page_friends'),
     url(r'^users/(?P<username>[\w.@+-]*)/plots/$', user_page_plots, name='user_page_plots'),
+    url(
+        r'^users/(?P<username>[\w.@+-]*)/marketplace-fragment/$',
+        user_marketplace_fragment,
+        name='user_marketplace_fragment'
+    ),
 
     ###########################################################################
     ### PROFILE VIEWS                                                       ###
