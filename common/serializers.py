@@ -4,7 +4,7 @@ from avatar.templatetags.avatar_tags import avatar_url
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
-from rest_framework.fields import BooleanField, IntegerField, FloatField, CharField
+from rest_framework.fields import BooleanField, IntegerField, CharField
 from rest_framework.relations import PrimaryKeyRelatedField
 from subscription.models import UserSubscription, Subscription, Transaction
 

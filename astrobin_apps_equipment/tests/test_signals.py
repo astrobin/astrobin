@@ -257,7 +257,7 @@ class SignalsTest(TestCase):
         )
 
         buyer2 = Generators.user()
-        offer2 = EquipmentGenerators.marketplace_offer(
+        EquipmentGenerators.marketplace_offer(
             listing=listing, line_item=line_item, user=buyer2, status=EquipmentItemMarketplaceOfferStatus.PENDING.value
         )
 

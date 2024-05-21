@@ -80,7 +80,7 @@ class EquipmentItemMarketplaceListingViewSetTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_retrieve_view_disallows_expired_listing_for_different_authenticated_user(self):
-        other_user = User.objects.create_user(username='otheruser', password='otherpassword')
+        User.objects.create_user(username='otheruser', password='otherpassword')
         self.client.login(username='otheruser', password='otherpassword')
 
         url = reverse('astrobin_apps_equipment:marketplace-listing-detail', args=[self.listing.pk,])

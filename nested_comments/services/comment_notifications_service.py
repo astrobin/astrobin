@@ -28,7 +28,7 @@ class CommentNotificationsService:
     def __init__(self, comment):
         # type: (NestedComment) -> None
         self.comment = comment
-        
+
     def extract_context(self):
         """
         Extracts the context of the comment, i.e. the object owner, the notification type, the mentions, the URL, etc.

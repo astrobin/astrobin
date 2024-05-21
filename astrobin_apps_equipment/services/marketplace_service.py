@@ -10,8 +10,7 @@ from django.urls import reverse
 from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
 from astrobin_apps_equipment.models import (
-    EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
-    EquipmentItemMarketplaceOffer,
+    EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceOffer,
 )
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback

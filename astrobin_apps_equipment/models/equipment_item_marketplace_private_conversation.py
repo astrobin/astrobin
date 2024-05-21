@@ -26,7 +26,7 @@ class EquipmentItemMarketplacePrivateConversation(models.Model):
         null=False,
         editable=False,
     )
-    
+
     comments = GenericRelation(
         'nested_comments.NestedComment',
         related_query_name='equipment_item_marketplace_private_conversations',

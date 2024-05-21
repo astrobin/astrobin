@@ -8,7 +8,7 @@ from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, ImageEquipmentLog
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_image_serializer import \
     EquipmentItemMarketplaceListingLineItemImageSerializer
-from astrobin_apps_equipment.models import Camera, EquipmentItemMarketplaceListingLineItem, Mount, Sensor, Telescope
+from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem, Sensor
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 
 
@@ -102,7 +102,7 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
             raise serializers.ValidationError("Sensors are not supported in the marketplace.")
 
         return value
-    
+
     class Meta:
         model = EquipmentItemMarketplaceListingLineItem
         fields = '__all__'

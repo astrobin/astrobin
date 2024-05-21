@@ -6,13 +6,13 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db import transaction
-from django.db.models.signals import post_delete, post_migrate, post_save, pre_delete, pre_save
+from django.db.models.signals import post_delete, post_migrate, post_save, pre_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from notification import models as notification
 from pybb.models import Category, Forum, Topic
-from safedelete.signals import post_softdelete, pre_softdelete
+from safedelete.signals import post_softdelete
 
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (

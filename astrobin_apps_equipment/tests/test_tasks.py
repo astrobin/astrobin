@@ -5,9 +5,6 @@ from mock import mock
 from mock.mock import patch
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.models import Camera, EquipmentItemMarketplaceMasterOffer
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
-from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.tasks import notify_about_expired_listings
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.services import DateTimeService
@@ -18,7 +15,7 @@ class TasksTest(TestCase):
     def test_notify_about_expired_listings(self, push_notification):
         seller = Generators.user()
         listing = EquipmentGenerators.marketplace_listing(user=seller)
-        line_item = EquipmentGenerators.marketplace_line_item(listing=listing)
+        EquipmentGenerators.marketplace_line_item(listing=listing)
 
         listing.approved = DateTimeService.now()
         listing.approved_by = Generators.user()
@@ -41,7 +38,7 @@ class TasksTest(TestCase):
     def test_notify_about_expired_listings_if_sold(self, push_notification):
         seller = Generators.user()
         listing = EquipmentGenerators.marketplace_listing(user=seller)
-        line_item = EquipmentGenerators.marketplace_line_item(
+        EquipmentGenerators.marketplace_line_item(
             listing=listing,
             sold=DateTimeService.now(),
             sold_to=Generators.user()

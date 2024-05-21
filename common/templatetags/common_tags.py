@@ -541,5 +541,5 @@ def currency(value: int, currency_code: str):
         if not locale:
             locale = 'en_US'  # Default to 'en_US' if no language code is found
         return format_currency(value, currency_code, locale=locale)
-    except Exception as e:
+    except Exception:
         return value  # In case of any error, return the value as is
