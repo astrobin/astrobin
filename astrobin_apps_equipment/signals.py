@@ -671,7 +671,8 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
             seller_followers = list(User.objects.filter(
                 toggleproperty__content_type=ContentType.objects.get_for_model(instance.user),
                 toggleproperty__object_id=instance.user.id,
-                toggleproperty__property_type="follow"
+                toggleproperty__property_type="follow",
+                joined_group_set__name=GroupName.BETA_TESTERS
             ).distinct())
 
             if len(seller_followers):
@@ -690,7 +691,8 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                 equipment_followers = list(User.objects.filter(
                     toggleproperty__content_type=line_item.item_content_type,
                     toggleproperty__object_id=line_item.item_object_id,
-                    toggleproperty__property_type="follow"
+                    toggleproperty__property_type="follow",
+                    joined_group_set__name=GroupName.BETA_TESTERS
                 ).distinct())
 
                 if len(equipment_followers):

@@ -7,6 +7,8 @@ from astrobin_apps_equipment.models import Camera, EquipmentItemMarketplaceMaste
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from astrobin_apps_groups.models import Group
+from common.constants import GroupName
 from common.services import DateTimeService
 
 
@@ -281,6 +283,12 @@ class SignalsTest(TestCase):
         listing = EquipmentGenerators.marketplace_listing(user=seller)
         follower = Generators.user()
         Generators.follow(seller, user=follower)
+        group = Group.objects.create(
+            name=GroupName.BETA_TESTERS,
+            owner=follower,
+            creator=follower,
+        )
+        group.members.add(follower)
 
         listing.approved = DateTimeService.now()
         listing.save()
@@ -305,6 +313,12 @@ class SignalsTest(TestCase):
         line_item = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
         follower = Generators.user()
         Generators.follow(line_item.item_content_object, user=follower)
+        group = Group.objects.create(
+            name=GroupName.BETA_TESTERS,
+            owner=follower,
+            creator=follower,
+        )
+        group.members.add(follower)
 
         listing.approved = DateTimeService.now()
         listing.save()
