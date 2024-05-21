@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('contenttypes', '0002_remove_content_type_name'),
-        ('astrobin_apps_equipment', '0116_add_equipment_item_thumbnail_field'),
+        ('astrobin_apps_equipment', '0117_equipmentitemlisting_item_full_name'),
     ]
 
     operations = [
