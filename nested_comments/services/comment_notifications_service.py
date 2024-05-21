@@ -107,7 +107,7 @@ class CommentNotificationsService:
             )
 
         return model_class, obj, object_owner, notification, mentions, url, target, target_url
-    
+
     def send_notifications(self, force=False):
         if self.comment.pending_moderation and not force:
             return
@@ -171,10 +171,10 @@ class CommentNotificationsService:
     def send_mention_notifications(self, mentions=None):
         if not self.comment.pending_moderation:
             (
-                model_class,
-                obj,
-                object_owner,
-                notification,
+                _,
+                _,
+                _,
+                _,
                 mentions_,  # note the underscore: we don't want to override the `mentions` variable above.
                 url,
                 target,

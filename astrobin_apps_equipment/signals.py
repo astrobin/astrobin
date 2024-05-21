@@ -497,7 +497,7 @@ def create_or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kwa
 @receiver(pre_save, sender=EquipmentItemMarketplaceOffer)
 def create_and_sync_master_offer(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
     with transaction.atomic():
-        master_offer, created = EquipmentItemMarketplaceMasterOffer.objects.get_or_create(
+        master_offer, _ = EquipmentItemMarketplaceMasterOffer.objects.get_or_create(
             listing=instance.line_item.listing,
             user=instance.user,
         )

@@ -38,7 +38,7 @@ from astrobin.tasks import (
     compute_contribution_index, compute_image_index, encode_video_file, generate_video_preview, invalidate_cdn_caches,
     process_camera_rename_proposal,
 )
-from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem, EquipmentItemMarketplacePrivateConversation
+from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.services import ForumService
@@ -46,7 +46,7 @@ from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import (
-    Iotd, IotdDismissedImage, IotdSubmission, IotdVote, TopPickArchive,
+    IotdDismissedImage, IotdSubmission, IotdVote, TopPickArchive,
     TopPickNominationsArchive,
 )
 from astrobin_apps_iotd.services import IotdService

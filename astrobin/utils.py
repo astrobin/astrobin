@@ -449,7 +449,7 @@ def add_url_params(url, params):
 
 def generate_unique_hash(chars: int, manager) -> str:
     def generate_hash():
-        return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(chars))
+        return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(chars)) # nosec
 
     value = generate_hash()
     while value.isdigit() or manager.filter(hash=value).exists():
