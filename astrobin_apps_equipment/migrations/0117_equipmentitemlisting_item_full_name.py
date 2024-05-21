@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('astrobin_apps_equipment', '0117_add_marketplace_models'),
+        ('astrobin_apps_equipment', '0116_add_equipment_item_thumbnail_field'),
     ]
 
     operations = [
