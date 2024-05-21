@@ -1,5 +1,3 @@
-# noqa: F401
-
 from .equipment_brand_listing import EquipmentBrandListing
 from .equipment_brand import EquipmentBrand
 from .equipment_retailer import EquipmentRetailer
@@ -40,3 +38,5 @@ from .accessory_migration_record import AccessoryMigrationRecord
 from .focal_reducer_migration_record import FocalReducerMigrationRecord
 from .software_migration_record import SoftwareMigrationRecord
 from .deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord
+
+# noqa: F401
