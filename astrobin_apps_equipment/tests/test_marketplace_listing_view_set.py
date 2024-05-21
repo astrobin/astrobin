@@ -1,10 +1,12 @@
 from datetime import timedelta
+from unittest.mock import patch
 
 from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
 from common.services import DateTimeService
@@ -28,6 +30,21 @@ class EquipmentItemMarketplaceListingViewSetTestCase(APITestCase):
             listing=self.listing,
             item=telescope
         )
+
+        # Patch the has_permission and has_object_permission methods
+        self.may_access_marketplace_permission_patcher = patch.object(
+            MayAccessMarketplace, 'has_permission', return_value=True
+        )
+        self.may_access_marketplace_permission_patcher.start()
+
+        self.may_access_marketplace_object_permission_patcher = patch.object(
+            MayAccessMarketplace, 'has_object_permission', return_value=True
+        )
+        self.may_access_marketplace_object_permission_patcher.start()
+
+    def tearDown(self):
+        self.may_access_marketplace_permission_patcher.stop()
+        self.may_access_marketplace_object_permission_patcher.stop()
 
     def test_list_view_excludes_expired_listings(self):
         url = reverse('astrobin_apps_equipment:marketplace-listing-list')
