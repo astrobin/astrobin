@@ -26,6 +26,12 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         validated_data['user'] = user
         return super().create(validated_data)
 
+    def update(self, instance, validated_data):
+        if 'item_object_id' in validated_data:
+            validated_data['item_plain_text'] = None
+
+        return super().update(instance, validated_data)
+
     def get_total_image_count(self, obj):
         if obj.item_content_object is None:
             return 0
@@ -102,6 +108,16 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
             raise serializers.ValidationError("Sensors are not supported in the marketplace.")
 
         return value
+
+    def validate(self, attrs):
+        item_object_id = attrs.get('item_object_id')
+        item_plain_text = attrs.get('item_plain_text')
+
+        # Ensure that both properties cannot be non-null at the same time
+        if item_object_id is not None and item_plain_text is not None:
+            attrs['item_plain_text'] = None
+
+        return attrs
 
     class Meta:
         model = EquipmentItemMarketplaceListingLineItem
