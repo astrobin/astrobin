@@ -27,8 +27,11 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
-        if 'item_object_id' in validated_data:
+        if 'item_object_id' in validated_data and validated_data['item_object_id'] is not None:
             validated_data['item_plain_text'] = None
+
+        if 'item_plain_text' in validated_data and validated_data['item_plain_text'] is not None:
+            validated_data['item_object_id'] = None
 
         return super().update(instance, validated_data)
 
@@ -115,7 +118,7 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
 
         # Ensure that both properties cannot be non-null at the same time
         if item_object_id is not None and item_plain_text is not None:
-            attrs['item_plain_text'] = None
+            raise serializers.ValidationError("You cannot provide both item_object_id and item_plain_text.")
 
         return attrs
 
