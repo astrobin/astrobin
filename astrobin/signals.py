@@ -477,13 +477,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         mentions = MentionsService.get_mentions(instance.text)
 
         if hasattr(instance.content_object, "updated"):
-            # This will trigger the auto_now fields in the content_object
-            # We do it only if created, because the content_object needs to
-            # only be updated if the number of comments changes.
-            save_kwargs = {}
-            if issubclass(type(instance.content_object), SafeDeleteModel):
-                save_kwargs['keep_deleted'] = True
-            instance.content_object.save(**save_kwargs)
+            sender.objects.filter(pk=instance.content_object.pk).update(updated=timezone.now())
 
         if instance.pending_moderation:
             service.send_moderation_required_notification()
