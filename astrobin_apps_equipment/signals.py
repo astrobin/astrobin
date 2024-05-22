@@ -801,6 +801,9 @@ def marketplace_listing_line_item_post_save(sender, instance: EquipmentItemMarke
                 'marketplace-listing-line-item-sold',
                 {
                     'seller_display_name': instance.listing.user.userprofile.get_display_name(),
+                    'buyer_display_name': instance.sold_to.userprofile.get_display_name()
+                    if instance.sold_to
+                    else _('Unspecified'),
                     'listing': instance.listing,
                     'line_item': instance,
                     'listing_url': build_notification_url(instance.listing.get_absolute_url())

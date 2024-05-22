@@ -80,10 +80,11 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
         line_item.sold = DateTimeService.now()
         if request.data.get("sold_to"):
             sold_to_id = request.data.get("sold_to")
-            try:
-                line_item.sold_to = User.objects.get(pk=sold_to_id)
-            except User.DoesNotExist:
-                raise NotFound()
+            if sold_to_id > 0:
+                try:
+                    line_item.sold_to = User.objects.get(pk=sold_to_id)
+                except User.DoesNotExist:
+                    raise NotFound()
 
         line_item.save()
 
