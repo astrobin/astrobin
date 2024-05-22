@@ -53,8 +53,8 @@ class MarketplaceService:
         offer.status = EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
         offer.save()
 
-        offer.line_item.sold = DateTimeService.now()
-        offer.line_item.sold_to = offer.user
+        offer.line_item.reserved = DateTimeService.now()
+        offer.line_item.reserved_to = offer.user
         offer.line_item.save()
 
     @staticmethod

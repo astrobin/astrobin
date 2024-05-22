@@ -56,9 +56,9 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         queryset = self.filter_by_item_id_and_content_type(queryset)
 
         line_items_queryset = EquipmentItemMarketplaceListingLineItem.objects.all()
-        line_items_queryset = self.filter_line_items(line_items_queryset)
+        line_items_queryset = self.filter_line_items(line_items_queryset).distinct()
 
-        return queryset.prefetch_related(Prefetch('line_items', queryset=line_items_queryset))
+        return queryset.prefetch_related(Prefetch('line_items', queryset=line_items_queryset)).distinct()
 
     def filter_approved(self, queryset: QuerySet) -> QuerySet:
         if not self.request.user.is_authenticated:

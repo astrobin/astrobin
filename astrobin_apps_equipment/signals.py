@@ -552,7 +552,7 @@ def send_offer_retracted_or_rejected_notification(sender, instance: EquipmentIte
                 'marketplace-offer-rejected-by-seller',
             ], countdown=10
         )
-    elif instance.status == EquipmentItemMarketplaceOfferStatus.PENDING.value:
+    else:
         # This offer must've been retracted by the user.
         send_offer_notifications.apply_async(
             args=[

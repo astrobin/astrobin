@@ -94,8 +94,17 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
 
+        if instance.line_item.sold:
+            raise serializers.ValidationError("Cannot delete an offer for a sold item")
+
         if request.user == instance.line_item.user:
             instance.status = EquipmentItemMarketplaceOfferStatus.REJECTED.value
+
+        if instance.line_item.reserved_to == instance.user:
+            EquipmentItemMarketplaceListingLineItem.objects.filter(pk=instance.line_item.pk).update(
+                reserved=None,
+                reserved_to=None
+            )
 
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
