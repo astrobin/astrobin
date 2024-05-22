@@ -15,7 +15,9 @@
                 {% for line_item in line_items %}
                     <tr>
                         <td>
-                            <a href="{{ line_item.listing.get_absolute_url }}">{{ line_item.item_name }}</a>
+                            <a href="{{ line_item.listing.get_absolute_url }}">
+                                {{ line_item.item_name }}{% if line_item.reserved %} ({% trans "reserved" %}){% endif %}
+                            </a>
                         </td>
                         <td>
                             {{ line_item.price|currency:line_item.currency }}
