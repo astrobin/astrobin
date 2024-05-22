@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db.models import QuerySet
+from django.utils.translation import gettext_lazy
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import permissions, serializers, status, viewsets
@@ -95,7 +96,9 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
 
         if instance.line_item.sold:
-            raise serializers.ValidationError("Cannot delete an offer for a sold item")
+            raise serializers.ValidationError(
+                gettext_lazy("Cannot delete an offer for a line item that has already been sold.")
+            )
 
         if request.user == instance.line_item.user:
             instance.status = EquipmentItemMarketplaceOfferStatus.REJECTED.value
