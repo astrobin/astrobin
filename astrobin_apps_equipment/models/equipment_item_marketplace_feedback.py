@@ -34,9 +34,15 @@ class EquipmentItemMarketplaceFeedback(SafeDeleteModel):
     user = models.ForeignKey(
         User,
         related_name='equipment_item_marketplace_listings_feedbacks_given',
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+
+    recipient = models.ForeignKey(
+        User,
+        related_name='equipment_item_marketplace_listings_feedbacks_received',
         on_delete=models.CASCADE,
-        null=False,
-        editable=False,
+        null=True,
     )
 
     line_item = models.ForeignKey(

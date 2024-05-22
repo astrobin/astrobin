@@ -46,39 +46,51 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         line_item_id = self.kwargs.get('line_item_id')
         category = request.data.get('category')
+        recipient = request.data.get('recipient')
 
-        if line_item_id is not None and category is not None:
-            line_item = get_object_or_404(EquipmentItemMarketplaceListingLineItem, pk=line_item_id)
-            existing_feedback = EquipmentItemMarketplaceFeedback.objects.filter(
-                line_item=line_item,
-                user=request.user,
-                category=category
-            ).exists()
-
-            if existing_feedback:
-                return Response(
-                    {"detail": "Feedback by this user for this line item and category already exists."},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-
-            if request.user == line_item.listing.user:
-                target_type = MarketplaceFeedbackTargetType.BUYER.value
-            else:
-                target_type = MarketplaceFeedbackTargetType.SELLER.value
-
-            request.data['target_type'] = target_type
-
-            retval = super().create(request, *args, **kwargs)
-
-            UserProfile.objects.filter(user=request.user).update(
-                updated=DateTimeService.now()
-            )
-
-            return retval
-        else:
+        if line_item_id is None:
             return Response(
-                {"detail": "Line item ID and category must be provided."}, status=status.HTTP_400_BAD_REQUEST
+                {"detail": "Line item ID must be provided."}, status=status.HTTP_400_BAD_REQUEST
             )
+
+        if category is None:
+            return Response(
+                {"detail": "Category must be provided."}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if recipient is None:
+            return Response(
+                {"detail": "Recipient must be provided."}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        line_item = get_object_or_404(EquipmentItemMarketplaceListingLineItem, pk=line_item_id)
+        existing_feedback = EquipmentItemMarketplaceFeedback.objects.filter(
+            line_item=line_item,
+            user=request.user,
+            category=category
+        ).exists()
+
+        if existing_feedback:
+            return Response(
+                {"detail": "Feedback by this user for this line item and category already exists."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if request.user == line_item.listing.user:
+            target_type = MarketplaceFeedbackTargetType.BUYER.value
+        else:
+            target_type = MarketplaceFeedbackTargetType.SELLER.value
+
+        request.data['target_type'] = target_type
+        request.data['user'] = request.user.pk
+
+        retval = super().create(request, *args, **kwargs)
+
+        UserProfile.objects.filter(use__pkr=recipient).update(
+            updated=DateTimeService.now()
+        )
+
+        return retval
 
     def update(self, request, *args, **kwargs):
         return Response({"detail": "Method 'PUT' not allowed."}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

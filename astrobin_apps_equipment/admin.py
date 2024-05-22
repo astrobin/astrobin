@@ -384,6 +384,7 @@ class EquipmentItemMarketplaceOfferAdmin(admin.ModelAdmin):
 class EquipmentItemMarketplaceFeedbackAdmin(admin.ModelAdmin):
     list_display = (
         'user',
+        'recipient',
         'line_item',
         'category',
         'value',
@@ -392,12 +393,14 @@ class EquipmentItemMarketplaceFeedbackAdmin(admin.ModelAdmin):
 
     search_fields = (
         'user__username',
+        'recipient__username',
         'line_item__listing__hash',
     )
 
     readonly_fields = (
         'id',
         'user',
+        'recipient',
         'line_item',
         'created',
     )
