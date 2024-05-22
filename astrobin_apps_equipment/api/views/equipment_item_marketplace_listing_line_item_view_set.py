@@ -1,5 +1,6 @@
 from typing import Type
 
+from django.contrib.auth.models import User
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
@@ -77,6 +78,13 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError("You are not the owner of this listing")
 
         line_item.sold = DateTimeService.now()
+        if request.data.get("sold_to"):
+            sold_to_id = request.data.get("sold_to")
+            try:
+                line_item.sold_to = User.objects.get(pk=sold_to_id)
+            except User.DoesNotExist:
+                raise NotFound()
+
         line_item.save()
 
         serializer = self.get_serializer(line_item)
