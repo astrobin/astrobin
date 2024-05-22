@@ -86,7 +86,7 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
 
         retval = super().create(request, *args, **kwargs)
 
-        UserProfile.objects.filter(use__pkr=recipient).update(
+        UserProfile.objects.filter(user__pk=recipient).update(
             updated=DateTimeService.now()
         )
 
