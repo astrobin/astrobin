@@ -945,6 +945,8 @@ def group_members_changed(sender, instance, **kwargs):
     action = kwargs['action']
     pk_set = kwargs['pk_set']
 
+    UserProfile.objects.filter(user__pk__in=pk_set).update(updated=timezone.now())
+
     group_sync_map = {
         'IOTD Submitters': [GroupName.IOTD_SUBMITTERS, 'content_moderators', GroupName.IOTD_STAFF],
         'IOTD Reviewers': [GroupName.IOTD_REVIEWERS, 'content_moderators', GroupName.IOTD_STAFF],
