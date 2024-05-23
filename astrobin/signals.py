@@ -477,7 +477,9 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         mentions = MentionsService.get_mentions(instance.text)
 
         if hasattr(instance.content_object, "updated"):
-            sender.objects.filter(pk=instance.content_object.pk).update(updated=timezone.now())
+            instance.content_type.model_class().objects.filter(
+                pk=instance.content_object.pk
+            ).update(updated=timezone.now())
 
         if instance.pending_moderation:
             service.send_moderation_required_notification()
