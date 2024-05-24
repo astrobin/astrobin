@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-17 08:39+0000\n"
+"POT-Creation-Date: 2024-05-24 10:35+0000\n"
 "PO-Revision-Date: 2020-05-18 11:06+0000\n"
 "Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,6 +70,9 @@ msgstr "To zdjęcie zdobyło już IOTD w przeszłości"
 
 #, python-format
 msgid "You have already submitted %(max_allowed)s image(s) today."
+msgstr ""
+
+msgid "This image has been disqualified from the IOTD/TP process."
 msgstr ""
 
 msgid "You are not a member of the IOTD Reviewers board."
@@ -234,7 +237,19 @@ msgid ""
 "%(num_days)s days after publication."
 msgstr ""
 
+msgid ""
+"You have not agreed to the IOTD/TP rules and guidelines since their last "
+"update. Please amend this in your profile preferences and then submit the "
+"image again using the Actions menu."
+msgstr ""
+
 msgid "Unknown reason. This should never happen, please contact us!"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
 msgstr ""
 
 #~ msgid "Users with a Free membership cannot participate in the IOTD."

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-17 08:39+0000\n"
-"PO-Revision-Date: 2023-10-17 10:14+0200\n"
+"POT-Creation-Date: 2024-05-24 10:35+0000\n"
+"PO-Revision-Date: 2023-11-20 18:44+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.28 20230927-1\n"
+"X-Loco-Api-Version: 1.0.28 20240520-1\n"
 
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Вибачте, вже надто пізно скасовувати цю заявку."
@@ -70,6 +70,9 @@ msgstr "Це зображення вже було Зображенням Дня 
 #, python-format
 msgid "You have already submitted %(max_allowed)s image(s) today."
 msgstr "Ви вже надіслали %(max_allowed)s зображень сьогодні."
+
+msgid "This image has been disqualified from the IOTD/TP process."
+msgstr ""
 
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "Ви не є учасником списку Рецензентів Зображення Дня."
@@ -245,7 +248,19 @@ msgid ""
 "%(num_days)s days after publication."
 msgstr ""
 
+msgid ""
+"You have not agreed to the IOTD/TP rules and guidelines since their last "
+"update. Please amend this in your profile preferences and then submit the "
+"image again using the Actions menu."
+msgstr ""
+
 msgid "Unknown reason. This should never happen, please contact us!"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
 msgstr ""
 
 #~ msgid ""

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-17 08:39+0000\n"
-"PO-Revision-Date: 2023-10-17 10:18+0200\n"
+"POT-Creation-Date: 2024-05-24 10:35+0000\n"
+"PO-Revision-Date: 2023-10-30 11:32+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.28 20230927-1\n"
+"X-Loco-Api-Version: 1.0.28 20240520-1\n"
 
 msgid "You have a new follower"
 msgstr "Vous avez un nouvel abonné"
@@ -51,6 +51,15 @@ msgstr "Votre choix pour l'Image du Jour a reçu un nouveau commentaire"
 
 msgid "Your unapproved equipment item received a comment"
 msgstr "Votre équipement non-validé a été commenté"
+
+msgid "Your listing has a new private conversation"
+msgstr ""
+
+msgid "Your private conversation has a new comment"
+msgstr ""
+
+msgid "Your listing has a new question"
+msgstr ""
 
 msgid "There was a reply to your comment"
 msgstr "Quelqu'un a répondu à votre commentaire"
@@ -103,8 +112,11 @@ msgstr "Nouveau sujet dans un groupe dont vous êtes membre"
 msgid "New forum topic for an equipment item you use"
 msgstr "Nouveau sujet sur un équipement que vous utilisez"
 
-msgid "Your forum topic was moved"
+msgid "New forum topic for an equipment item you follow"
 msgstr ""
+
+msgid "Your forum topic was moved"
+msgstr "Le sujet de votre forum a été déplacé"
 
 msgid "You have received a new private message"
 msgstr "Vous avez reçu un nouveau message privé"
@@ -134,6 +146,9 @@ msgstr "Souhaitez-vous activer votre compte ?"
 msgid "New reply in a subscribed forum topic"
 msgstr "Nouvelle réponse dans une discussion que vous suivez"
 
+msgid "New reply in a forum topic that you started"
+msgstr ""
+
 msgid "You were mentioned in a forum post"
 msgstr "Vous avez été mentionné dans un message"
 
@@ -153,7 +168,7 @@ msgid "Image not submitted for IOTD/TP consideration"
 msgstr "Image non soumise au concours IOTD"
 
 msgid "Image approaching deadline for IOTD/TP submission"
-msgstr ""
+msgstr "La date limite de soumission à l'IOTD/TP est proche pour cette image"
 
 msgid "Thank you for getting a subscription!"
 msgstr "Merci d'avoir souscrit à un abonnement !"
@@ -171,11 +186,20 @@ msgid "You have been inactive as an IOTD staff member"
 msgstr ""
 "Vous avez été inactif en tant que membre de l'équipe de l'Image du Jour"
 
+msgid "Your IOTD staff activity is insufficient"
+msgstr ""
+
 msgid "An image you promoted made it to Top Pick"
 msgstr "Une image que vous avez promue a été nommée Top Pick"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "Une image que vous avez promue a été élue Image du Jour"
+
+msgid "An image you dismissed made it to Top Pick"
+msgstr ""
+
+msgid "An image you dismissed made it to IOTD"
+msgstr ""
 
 msgid "Your image was nominated to be a Top Pick"
 msgstr "Votre image a été nominée Top Pick"
@@ -186,11 +210,23 @@ msgstr "Votre image a été élue Top Pick"
 msgid "Your image was voted Image of the Day"
 msgstr "Votre image a été élue Image du Jour (IOTD)"
 
+msgid "Your IOTD staff member stats"
+msgstr ""
+
 msgid "You were mentioned in an image description"
 msgstr "Vous avez été mentionné dans la description d'une image"
 
 msgid "A gear item that you used was renamed"
 msgstr "Un équipement que vous utilisez a été renommé"
+
+msgid "Collaboration Request: Accept or Deny"
+msgstr ""
+
+msgid "User accepted your collaboration request"
+msgstr ""
+
+msgid "User denied your collaboration request"
+msgstr ""
 
 msgid "You were added as a collaborator to an image"
 msgstr "Vous avez été ajouté en tant que contributeur d'une image"
