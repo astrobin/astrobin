@@ -2,7 +2,7 @@
   "id": "evt_3NBuLDC0tT6bv7Hd0ISK1O1D",
   "object": "event",
   "api_version": "2020-08-27",
-  "created": 1685083295,
+  "created": STRIPE_EVENT_START_TIMESTAMP,
   "data": {
     "object": {
       "id": "pi_3NBuLDC0tT6bv7Hd0N3Dosyv",
@@ -30,7 +30,7 @@
       },
       "client_secret": "pi_3NBuLDC0tT6bv7Hd0N3Dosyv_secret_zUU9HopPCqsrgypp7farXCnYG",
       "confirmation_method": "automatic",
-      "created": 1685083295,
+      "created": STRIPE_EVENT_START_TIMESTAMP,
       "currency": "usd",
       "customer": "STRIPE_CUSTOMER_ID",
       "description": "Subscription creation",
