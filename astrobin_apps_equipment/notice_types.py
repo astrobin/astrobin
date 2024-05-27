@@ -28,4 +28,5 @@ EQUIPMENT_NOTICE_TYPES = (
     ('marketplace-listing-by-user-you-follow', _('New marketplace listing by user you follow'), '', 2),
     ('marketplace-listing-for-item-you-follow', _('New marketplace listing for item you follow'), '', 2),
     ('marketplace-rate-seller', _('Rate the seller for your recent purchase'), '', 2),
+    ('marketplace-mark-sold-reminder', _('Mark your listing as sold if needed'), '', 2),
 )

@@ -170,8 +170,11 @@ def remind_about_rating_seller():
             }
         )
 
-        line_item.rate_seller_reminder_sent = DateTimeService.now()
-        line_item.save(keep_deleted=True)
+        EquipmentItemMarketplaceListingLineItem.objects.filter(
+            pk=line_item.pk
+        ).update(
+            rate_seller_reminder_sent=DateTimeService.now()
+        )
 
         users.add(line_item.sold_to)
 
@@ -205,3 +208,42 @@ def notify_about_expired_listings():
         ).update(
             expired_notification_sent=DateTimeService.now()
         )
+
+@shared_task(time_limit=300)
+def remind_about_marking_items_as_sold():
+    # Find all line items that have been reserved for more than 10 days and have not been marked as sold
+    days = 10
+    cutoff = datetime.now() - timedelta(days=days)
+    line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
+        reserved__lt=cutoff,
+        sold__isnull=True,
+        mark_as_sold_reminder_sent__isnull=True
+    )
+
+    # Keep track of users to avoid sending multiple reminders
+    users = set()
+
+    # Loop all line items and send a reminder to the buyer
+    for line_item in line_items:
+        if line_item.sold_to in users:
+            continue
+
+        listing = line_item.listing
+
+        push_notification(
+            [line_item.user],
+            None,
+            'marketplace-mark-sold-reminder',
+            {
+                'listing': listing,
+                'listing_url': build_notification_url(listing.get_absolute_url())
+            }
+        )
+
+        EquipmentItemMarketplaceListingLineItem.objects.filter(
+            pk=line_item.pk
+        ).update(
+            mark_as_sold_reminder_sent=DateTimeService.now()
+        )
+
+        users.add(line_item.sold_to)

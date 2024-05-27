@@ -30,6 +30,10 @@
     methods for payment and delivery.
 {% endblocktrans %}
 
+{% blocktrans trimmed %}
+    PS: once you've completed the transaction, please remember to mark the listing as sold.
+{% endblocktrans %}
+
 {% trans "View listing" %}:
 {{ listing_url }}
 

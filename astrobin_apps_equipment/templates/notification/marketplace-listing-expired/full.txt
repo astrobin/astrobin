@@ -11,3 +11,7 @@
 {% blocktrans trimmed %}View listing{% endblocktrans %}:
 
 {{ listing_url }}
+
+{% blocktrans trimmed %}
+    PS: if you sold items from this listing, please mark them as sold.
+{% endblocktrans %}
