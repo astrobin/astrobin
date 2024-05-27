@@ -34,6 +34,8 @@ class CloudFrontService:
         for url in urls:
             log.debug("CloudFrontService checking if file exists: %s", url)
             try:
+                if not url.startswith('http'):
+                    url = f"{settings.MEDIA_URL}{url}"
                 response = requests.get(url, timeout=5)
                 if response.status_code != 200:
                     log.warning("CloudFrontService file %s does not exist" % url)
