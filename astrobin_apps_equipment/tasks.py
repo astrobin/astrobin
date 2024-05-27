@@ -5,12 +5,14 @@ from typing import List, Optional
 from annoying.functions import get_object_or_None
 from celery import shared_task
 from django.contrib.auth.models import User
+from django.db.models import Exists, OuterRef
 from django.utils import timezone
 
 from astrobin.models import GearMigrationStrategy
 from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models import (
-    Accessory, AccessoryEditProposal, Camera, CameraEditProposal, EquipmentItemMarketplaceListing,
+    Accessory, AccessoryEditProposal, Camera, CameraEditProposal, EquipmentItemMarketplaceFeedback,
+    EquipmentItemMarketplaceListing,
     EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceOffer, Filter,
     FilterEditProposal, Mount,
     MountEditProposal,
@@ -22,6 +24,7 @@ from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.services.stock import StockImporterService
 from astrobin_apps_equipment.services.stock.plugins.agena import AgenaStockImporterPlugin
+from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import DateTimeService
 
@@ -143,10 +146,17 @@ def remind_about_rating_seller():
     # Find all line items that have been sold for more than 10 days and have not been rated
     days = 10
     cutoff = datetime.now() - timedelta(days=days)
+
+    seller_feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
+        target_type=MarketplaceFeedbackTargetType.SELLER.value,
+        line_item=OuterRef('pk')
+    )
+
     line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
         sold__lt=cutoff,
-        feedbacks__isnull=True,
-        rate_seller_reminder_sent__isnull=True
+        rate_seller_reminder_sent__isnull=True,
+    ).exclude(
+        feedbacks=Exists(seller_feedback_exists),
     )
 
     # Keep track of users to avoid sending multiple reminders
@@ -174,6 +184,54 @@ def remind_about_rating_seller():
             pk=line_item.pk
         ).update(
             rate_seller_reminder_sent=DateTimeService.now()
+        )
+
+        users.add(line_item.sold_to)
+
+
+@shared_task(time_limit=300)
+def remind_about_rating_buyer():
+    # Find all line items that have been sold for more than 10 days and have not been rated
+    days = 10
+    cutoff = datetime.now() - timedelta(days=days)
+
+    buyer_feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
+        target_type=MarketplaceFeedbackTargetType.BUYER.value,
+        line_item=OuterRef('pk')
+    )
+
+    line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
+        sold__lt=cutoff,
+        rate_buyer_reminder_sent__isnull=True,
+    ).exclude(
+        feedbacks=Exists(buyer_feedback_exists),
+    )
+
+    # Keep track of users to avoid sending multiple reminders
+    users = set()
+
+    # Loop all line items and send a reminder to the buyer
+    for line_item in line_items:
+        if line_item.sold_to in users:
+            continue
+
+        listing = line_item.listing
+
+        push_notification(
+            [line_item.user],
+            None,
+            'marketplace-rate-buyer',
+            {
+                'seller_display_name': listing.user.userprofile.get_display_name(),
+                'listing': listing,
+                'listing_url': build_notification_url(listing.get_absolute_url())
+            }
+        )
+
+        EquipmentItemMarketplaceListingLineItem.objects.filter(
+            pk=line_item.pk
+        ).update(
+            rate_buyer_reminder_sent=DateTimeService.now()
         )
 
         users.add(line_item.sold_to)
@@ -208,6 +266,7 @@ def notify_about_expired_listings():
         ).update(
             expired_notification_sent=DateTimeService.now()
         )
+
 
 @shared_task(time_limit=300)
 def remind_about_marking_items_as_sold():

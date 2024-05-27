@@ -5,7 +5,8 @@ from django.template.defaultfilters import slugify
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import (
-    Camera, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceOffer,
+    Camera, EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
+    EquipmentItemMarketplaceOffer,
     Sensor, Telescope, Mount, Filter,
     Accessory, Software,
     EquipmentItemGroup,
@@ -21,6 +22,7 @@ from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 from astrobin_apps_equipment.models.filter_base_model import FilterSize, FilterType
 from astrobin_apps_equipment.models.mount_base_model import MountType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
+from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
 from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
 from common.services import DateTimeService
 
@@ -291,4 +293,28 @@ class EquipmentGenerators:
             user=user,
             amount=kwargs.get('amount', 900),
             status=kwargs.get('status', EquipmentItemMarketplaceOfferStatus.PENDING.value),
+        )
+
+    @staticmethod
+    def marketplace_feedback(**kwargs):
+        user = kwargs.get('user')
+        recipient = kwargs.get('recipient')
+        line_item = kwargs.get('line_item')
+
+        if user is None:
+            user = Generators.user()
+
+        if recipient is None:
+            recipient = Generators.user()
+
+        if line_item is None:
+            line_item = EquipmentGenerators.marketplace_line_item()
+
+        return EquipmentItemMarketplaceFeedback.objects.create(
+            user=user,
+            recipient=recipient,
+            line_item=line_item,
+            value=kwargs.get('value', 'positive'),
+            category=kwargs.get('category', 'communication'),
+            target_type=kwargs.get('target_type', MarketplaceFeedbackTargetType.SELLER.value),
         )

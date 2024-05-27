@@ -1,0 +1,19 @@
+{% load i18n %}
+
+{% blocktrans trimmed with open_emphasis='"' close_emphasis='"' %}
+    Hi! You recently sold an item from the marketplace listing
+    {{ open_emphasis }}{{ listing }}{{ close_emphasis }}, and we noticed that you haven't rated the buyer yet.
+{% endblocktrans %}
+
+
+{% blocktrans trimmed %}
+    It's important to leave feedback to the buyer, as it helps other users make informed decisions when purchasing
+    items from the marketplace. Please take a moment to rate your experience with the buyer.
+{% endblocktrans %}
+
+{% trans "Leave feedback" %}:
+{{ listing_url }}#feedback
+
+{% blocktrans trimmed %}
+    Thanks for your cooperation!
+{% endblocktrans %}

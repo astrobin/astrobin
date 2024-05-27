@@ -155,6 +155,12 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
         blank=True,
     )
 
+    # The reminder to rate the buyer has been sent.
+    rate_buyer_reminder_sent = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     mark_as_sold_reminder_sent = models.DateTimeField(
         null=True,
         blank=True,
