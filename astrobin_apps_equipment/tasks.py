@@ -200,5 +200,8 @@ def notify_about_expired_listings():
             }
         )
 
-        listing.expired_notification_sent = DateTimeService.now()
-        listing.save(keep_deleted=True)
+        EquipmentItemMarketplaceListing.objects.filter(
+            pk=listing.pk
+        ).update(
+            expired_notification_sent=DateTimeService.now()
+        )

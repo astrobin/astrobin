@@ -113,6 +113,9 @@ class MarketplaceService:
         if listing.user != user:
             raise PermissionDenied("Cannot renew a listing that does not belong to you")
 
-        listing.expiration = DateTimeService.now() + timedelta(days=7)
-        listing.expired_notification_sent = None
-        listing.save()
+        EquipmentItemMarketplaceListing.objects.filter(
+            pk=listing.pk
+        ).update(
+            expiration=DateTimeService.now() + timedelta(days=7),
+            expired_notification_sent=None
+        )
