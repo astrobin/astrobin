@@ -1010,6 +1010,8 @@ def invalidate_cdn_caches(paths: List[str]):
 
 @shared_task(time_limit=3600, acks_late=True)
 def generate_sitemaps_and_upload_to_s3():
+    return
+
     invalidate_urls = []
 
     def upload_to_sitemap_folder(filename, folder='sitemaps'):

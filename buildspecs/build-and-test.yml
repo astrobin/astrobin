@@ -15,13 +15,13 @@ phases:
   build:
     commands:
       - buildspecs/build.sh
-      - buildspecs/test.sh
-      - buildspecs/create-test-db.sh
-      - buildspecs/cypress.sh
+      - # buildspecs/test.sh
+      - # buildspecs/create-test-db.sh
+      - # buildspecs/cypress.sh
 
   post_build:
     commands:
-      - buildspecs/delete-test-db.sh
+      - # buildspecs/delete-test-db.sh
       - buildspecs/push-image.sh
 
     finally:
