@@ -90,11 +90,13 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         if hash_param:
             queryset = queryset.filter(hash=hash_param)
             if self.request.user.is_authenticated:
-                # Allow fetching by hash if you're the seller or the buyer
+                # Allow fetching by hash if you're the seller or the buyer, or someone with an offer
                 queryset = queryset | EquipmentItemMarketplaceListing.objects.filter(
                     Q(hash=hash_param) &
                     Q(
                         Q(line_items__sold_to=self.request.user) |
+                        Q(line_items__reserved_to=self.request.user) |
+                        Q(offers__user=self.request.user) |
                         Q(user=self.request.user)
                     )
                 )
