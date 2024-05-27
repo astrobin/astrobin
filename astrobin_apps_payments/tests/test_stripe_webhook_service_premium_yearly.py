@@ -1,5 +1,6 @@
 from datetime import date
 
+from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import Group, User
 from django.test import TestCase
 from subscription.models import Subscription, Transaction
@@ -47,7 +48,7 @@ class StripeWebhookServicePremiumYearlyTest(TestCase):
 
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_premium_2020(valid_subscription))
-        self.assertEqual(valid_subscription.expires, date(2024, 5, 26))
+        self.assertEqual(valid_subscription.expires, date.today() + relativedelta(years=1))
         self.assertFalse(valid_subscription.cancelled)
         self.assertEqual(valid_subscription.subscription, self.subscription)
         self.assertIsNotNone(user.userprofile.stripe_customer_id)
@@ -119,7 +120,7 @@ class StripeWebhookServicePremiumYearlyTest(TestCase):
 
         valid_subscription = PremiumService(user).get_valid_usersubscription()
         self.assertTrue(PremiumService.is_ultimate_2020(valid_subscription))
-        self.assertEqual(valid_subscription.expires, date(2024, 5, 26))
+        self.assertEqual(valid_subscription.expires, date.today() + relativedelta(years=1))
         self.assertFalse(valid_subscription.cancelled)
         self.assertEqual(valid_subscription.subscription, ultimate)
         self.assertIsNotNone(user.userprofile.stripe_customer_id)

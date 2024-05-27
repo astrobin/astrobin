@@ -2,7 +2,7 @@
   "id": "evt_1NBuLFC0tT6bv7HdvKCuwlkg",
   "object": "event",
   "api_version": "2020-08-27",
-  "created": 1685083295,
+  "created": STRIPE_EVENT_START_TIMESTAMP,
   "data": {
     "object": {
       "id": "in_1NBuLCC0tT6bv7Hd2Hnagnce",
@@ -26,7 +26,7 @@
       "billing_reason": "subscription_create",
       "charge": null,
       "collection_method": "charge_automatically",
-      "created": 1685083294,
+      "created": STRIPE_EVENT_START_TIMESTAMP,
       "currency": "usd",
       "custom_fields": null,
       "customer": "STRIPE_CUSTOMER_ID",
@@ -80,8 +80,8 @@
             "metadata": {
             },
             "period": {
-              "end": 1716705694,
-              "start": 1685083294
+              "end": STRIPE_EVENT_END_TIMESTAMP,
+              "start": STRIPE_EVENT_START_TIMESTAMP
             },
             "plan": {
               "id": "STRIPE_PRICE_PREMIUM_YEARLY_TIER_1_TEST",
@@ -91,7 +91,7 @@
               "amount": 2000,
               "amount_decimal": "2000",
               "billing_scheme": "per_unit",
-              "created": 1684945592,
+              "created": STRIPE_EVENT_START_TIMESTAMP,
               "currency": "chf",
               "interval": "year",
               "interval_count": 1,
@@ -110,7 +110,7 @@
               "object": "price",
               "active": true,
               "billing_scheme": "per_unit",
-              "created": 1684945592,
+              "created": STRIPE_EVENT_START_TIMESTAMP,
               "currency": "chf",
               "custom_unit_amount": null,
               "livemode": false,
@@ -166,8 +166,8 @@
         "payment_method_options": null,
         "payment_method_types": null
       },
-      "period_end": 1685083294,
-      "period_start": 1685083294,
+      "period_end": STRIPE_EVENT_START_TIMESTAMP,
+      "period_start": STRIPE_EVENT_START_TIMESTAMP,
       "post_payment_credit_notes_amount": 0,
       "pre_payment_credit_notes_amount": 0,
       "quote": null,
@@ -179,7 +179,7 @@
       "statement_descriptor": null,
       "status": "open",
       "status_transitions": {
-        "finalized_at": 1685083294,
+        "finalized_at": STRIPE_EVENT_START_TIMESTAMP,
         "marked_uncollectible_at": null,
         "paid_at": null,
         "voided_at": null

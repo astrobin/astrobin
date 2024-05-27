@@ -2,7 +2,7 @@
   "id": "evt_1NBzPZC0tT6bv7HdGMzvsdut",
   "object": "event",
   "api_version": "2020-08-27",
-  "created": 1685102785,
+  "created": STRIPE_EVENT_START_TIMESTAMP,
   "data": {
     "object": {
       "id": "sub_1NBzLdC0tT6bv7HdGW0lRgS9",
@@ -12,21 +12,21 @@
       "automatic_tax": {
         "enabled": false
       },
-      "billing_cycle_anchor": 1685102541,
+      "billing_cycle_anchor": STRIPE_EVENT_START_TIMESTAMP,
       "billing_thresholds": null,
-      "cancel_at": 1716724941,
+      "cancel_at": STRIPE_EVENT_END_TIMESTAMP,
       "cancel_at_period_end": true,
-      "canceled_at": 1685102785,
+      "canceled_at": STRIPE_EVENT_START_TIMESTAMP,
       "cancellation_details": {
         "comment": null,
         "feedback": null,
         "reason": "cancellation_requested"
       },
       "collection_method": "charge_automatically",
-      "created": 1685102541,
+      "created": STRIPE_EVENT_START_TIMESTAMP,
       "currency": "usd",
-      "current_period_end": 1716724941,
-      "current_period_start": 1685102541,
+      "current_period_end": STRIPE_EVENT_END_TIMESTAMP,
+      "current_period_start": STRIPE_EVENT_START_TIMESTAMP,
       "customer": "STRIPE_CUSTOMER_ID",
       "days_until_due": null,
       "default_payment_method": "pm_1NBzLdC0tT6bv7HdQMietTIK",
@@ -145,7 +145,7 @@
       },
       "quantity": 1,
       "schedule": null,
-      "start_date": 1685102541,
+      "start_date": STRIPE_EVENT_START_TIMESTAMP,
       "status": "active",
       "test_clock": null,
       "transfer_data": null,
