@@ -31,6 +31,7 @@ from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission
 from common.services import DateTimeService
+from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
 
 
@@ -303,6 +304,21 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+    def perform_update(self, serializer):
+        user = self.request.user
+
+        # get instance
+        instance = serializer.instance
+
+        # get caching service
+        caching_service = CachingService()
+
+        # in the caching service, set the user who is updating this instance
+        caching_service.set_in_request_cache(f'user_updating_marketplace_instance_{instance.pk}', user)
+
+        # perform the update
+        super().perform_update(serializer)
 
     def perform_destroy(self, instance):
         if instance.line_items.filter(sold__isnull=False).exists():

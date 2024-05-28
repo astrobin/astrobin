@@ -36,8 +36,10 @@ from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEdit
 from astrobin_apps_equipment.notice_types import EQUIPMENT_NOTICE_TYPES
 from astrobin_apps_equipment.tasks import send_offer_notifications
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.services import AppRedirectionService
+from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
 
 
@@ -646,8 +648,15 @@ def marketplace_listing_pre_save(sender, instance: EquipmentItemMarketplaceListi
         ):
             instance.pre_save_approved_again = True
 
+        # try to get user who is updating the listing
+        caching_service = CachingService()
+        caching_key = f'user_updating_marketplace_instance_{instance.pk}'
+        user = caching_service.get_from_request_cache(caching_key)
+        is_moderator = UserService(user).is_in_group(GroupName.MARKETPLACE_MODERATORS) if user else False
+        caching_service.delete_from_request_cache(caching_key)
+
         # The item is being updated while approved
-        if pre_save_instance.approved:
+        if pre_save_instance.approved and not is_moderator:
             instance.approved = None
             instance.approved_by = None
 
