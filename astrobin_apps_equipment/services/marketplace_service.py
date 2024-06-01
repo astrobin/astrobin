@@ -6,6 +6,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
+from geopy import Nominatim
+from geopy.exc import GeocoderServiceError, GeocoderTimedOut
 from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
 from astrobin_apps_equipment.models import (
@@ -119,3 +121,23 @@ class MarketplaceService:
             expiration=DateTimeService.now() + timedelta(days=7),
             expired_notification_sent=None
         )
+
+    @staticmethod
+    def fill_in_listing_lat_lon(listing: EquipmentItemMarketplaceListing):
+        if not listing.city or not listing.country:
+            return
+
+        if listing.latitude and listing.longitude:
+            return
+
+        geolocator = Nominatim(user_agent="astrobin")
+        location = None
+
+        try:
+            location = geolocator.geocode(f"{listing.city}, {listing.country}")
+        except (GeocoderTimedOut, GeocoderServiceError) as e:
+            log.error(f"Error while geocoding {listing.city}, {listing.country}")
+
+        if location:
+            listing.latitude = location.latitude
+            listing.longitude = location.longitude

@@ -1,3 +1,4 @@
+import logging
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from annoying.functions import get_object_or_None
@@ -34,6 +35,7 @@ from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditPropos
 from astrobin_apps_equipment.models.software_edit_proposal import SoftwareEditProposal
 from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEditProposal
 from astrobin_apps_equipment.notice_types import EQUIPMENT_NOTICE_TYPES
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.tasks import send_offer_notifications
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_users.services import UserService
@@ -42,6 +44,7 @@ from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
 
+log = logging.getLogger(__name__)
 
 @receiver(post_migrate, sender=apps.get_app_config('astrobin'))
 def create_notice_types(sender, **kwargs):
@@ -820,3 +823,9 @@ def marketplace_listing_line_item_post_save(sender, instance: EquipmentItemMarke
             )
 
         del instance.pre_save_sold
+
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceListing)
+def fill_in_listing_lat_lon(sender, instance: EquipmentItemMarketplaceListing, **kwargs):
+    if instance.country and instance.city and not instance.latitude and not instance.longitude:
+        MarketplaceService.fill_in_listing_lat_lon(instance)
