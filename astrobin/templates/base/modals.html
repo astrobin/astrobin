@@ -217,6 +217,12 @@
                 bored while having caused no harm, since nobody saw what they posted.
             {% endblocktrans %}
         </p>
+    
+        <p>
+            {% blocktrans trimmed %}
+                If they follow you, the follow will be removed, and they will not be able to follow you again.
+            {% endblocktrans %}
+        </p>
     </div>
     <div class="modal-footer">
         <form action="{% url 'profile_shadow_ban' %}" method="post">

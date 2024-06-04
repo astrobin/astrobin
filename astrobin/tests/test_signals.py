@@ -853,3 +853,15 @@ class SignalsTest(TestCase):
 
         self.assertEquals(0, user.userprofile.followers_count)
         self.assertEquals(0, follower.userprofile.following_count)
+
+    def test_follow_removed_after_shadow_ban(self):
+        user = Generators.user()
+        follower = Generators.user()
+
+        Generators.follow(user, user=follower)
+
+        self.assertEquals(1, ToggleProperty.objects.count())
+
+        user.userprofile.shadow_bans.add(follower.userprofile)
+
+        self.assertEquals(0, ToggleProperty.objects.count())

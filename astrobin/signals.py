@@ -1814,3 +1814,19 @@ def on_password_change(sender, **kwargs):
 
         if new_password != old_password:
             UserProfile.objects.filter(user=user).update(detected_insecure_password=None)
+
+
+@receiver(m2m_changed, sender=UserProfile.shadow_bans.through)
+def remove_follow_on_shadow_ban(sender, instance, **kwargs):
+    action = kwargs.pop('action')
+    pk_set = kwargs.pop('pk_set')
+
+    if action == 'post_add':
+        profiles = UserProfile.objects.filter(pk__in=pk_set)
+        for profile in profiles.iterator():
+            ToggleProperty.objects.filter(
+                user__pk=profile.user.pk,
+                property_type='follow',
+                content_type=ContentType.objects.get_for_model(profile.user),
+                object_id=instance.user.pk
+            ).delete()

@@ -22,8 +22,11 @@ def ajax_add_toggleproperty(request):
         property_type = request.POST.get("property_type")
         obj = content_type.get_object_for_this_type(pk=object_id)
 
-        if hasattr(obj, 'deleted') and obj.deleted is not None and obj.deleted != False:
+        if hasattr(obj, 'deleted') and obj.deleted is not None and obj.deleted is not False:
             return HttpResponse(_('Sorry, this object was already deleted.'), status=404)
+
+        if content_type.model == 'user' and obj.userprofile.shadow_bans.filter(pk=request.user.userprofile.pk).exists():
+            return HttpResponse(_('Sorry, you cannot follow this user.'), status=403)
 
         response_dict = {}
 
