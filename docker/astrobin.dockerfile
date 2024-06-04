@@ -60,8 +60,15 @@ RUN pip3 install --upgrade pip && \
 # Install global node dependencies
 RUN npm install -g yuglify
 
+# Check the RubyGems version and Ruby version
+RUN ruby -v && gem -v
+
+# Install ffi gem version compatible with RubyGems 3.1.2
+RUN gem install ffi -v 1.14.2
+
 # Install compass
-RUN gem install compass
+RUN gem install compass -v 1.0.3
+
 COPY astrobin/static/astrobin/scss/*.scss astrobin/static/astrobin/scss/
 RUN mkdir -p astrobin/static/astrobin/css
 RUN sass astrobin/static/astrobin/scss/astrobin.scss astrobin/static/astrobin/css/astrobin.css
