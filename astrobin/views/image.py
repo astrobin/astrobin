@@ -1527,6 +1527,7 @@ class ImageMarketplaceFragment(View):
             ):
                 for x in getattr(image, prop).all():
                     line_item_objects = EquipmentItemMarketplaceListingLineItem.objects.filter(
+                        user=image.user,
                         item_object_id=x.pk,
                         item_content_type=ContentType.objects.get_for_model(x),
                         sold__isnull=True,
