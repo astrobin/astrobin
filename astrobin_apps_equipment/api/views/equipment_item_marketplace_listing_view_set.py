@@ -130,7 +130,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
     def filter_by_region(self, queryset: QuerySet) -> QuerySet:
         region = self.request.GET.get('region')
-        if region:
+        if region and region != 'WORLDWIDE':
             return queryset.filter(country=region.upper())
         return queryset
 
