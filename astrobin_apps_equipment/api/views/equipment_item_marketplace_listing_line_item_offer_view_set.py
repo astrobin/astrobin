@@ -139,7 +139,10 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         if offer.line_item.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        if offer.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value:
+        if (
+                offer.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value or
+                offer.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value
+        ):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         if offer.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value and offer.line_item.sold_to == offer.user:
@@ -158,7 +161,10 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         if offer.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        if offer.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value:
+        if (
+                offer.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value or
+                offer.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value
+        ):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         if offer.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value and offer.line_item.sold_to == offer.user:
