@@ -505,6 +505,7 @@ def create_and_sync_master_offer(sender, instance: EquipmentItemMarketplaceOffer
         master_offer, _ = EquipmentItemMarketplaceMasterOffer.objects.get_or_create(
             listing=instance.line_item.listing,
             user=instance.user,
+            master_offer_uuid=instance.master_offer_uuid
         )
 
     if master_offer.status != instance.status:
@@ -534,7 +535,8 @@ def delete_master_offer(sender, instance: EquipmentItemMarketplaceOffer, **kwarg
     master_offer = get_object_or_None(
         EquipmentItemMarketplaceMasterOffer,
         listing=instance.listing,
-        user=instance.user
+        user=instance.user,
+        master_offer_uuid=instance.master_offer_uuid
     )
 
     if master_offer and master_offer.offers.count() == 0:

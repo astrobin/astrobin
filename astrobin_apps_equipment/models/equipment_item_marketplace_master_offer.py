@@ -9,6 +9,14 @@ from astrobin_apps_equipment.models.equipment_item_marketplace_offer import Equi
 # This class is used to have a reference object to gather all listing offers by a user.
 # This grouping can be used for notifications.
 class EquipmentItemMarketplaceMasterOffer(models.Model):
+    # UUID of the master offer. This is used to group line item offers part of the same master offer.
+    master_offer_uuid = models.CharField(
+        max_length=36,
+        null=False,
+        editable=False,
+        unique=True,
+    )
+
     user = models.ForeignKey(
         User,
         related_name='equipment_item_marketplace_listings_master_offers',
@@ -49,7 +57,7 @@ class EquipmentItemMarketplaceMasterOffer(models.Model):
 
     class Meta:
         ordering = ('-created',)
-        unique_together = ('user', 'listing')
+        unique_together = ('user', 'listing', 'master_offer_uuid')
 
     def __str__(self):
         return f'Marketplace listing master offer for {self.listing} by {self.user}'

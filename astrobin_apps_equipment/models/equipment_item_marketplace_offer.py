@@ -9,6 +9,7 @@ class EquipmentItemMarketplaceOfferStatus(Enum):
     PENDING = 'PENDING'
     ACCEPTED = 'ACCEPTED'
     REJECTED = 'REJECTED'
+    RETRACTED = 'RETRACTED'
 
     @classmethod
     def choices(cls):
@@ -23,7 +24,6 @@ class EquipmentItemMarketplaceOffer(models.Model):
         related_name='equipment_item_marketplace_listings_offers',
         on_delete=models.CASCADE,
         null=False,
-
         editable=False,
     )
 
@@ -41,6 +41,11 @@ class EquipmentItemMarketplaceOffer(models.Model):
         on_delete=models.CASCADE,
         null=False,
         editable=False,
+    )
+
+    master_offer_uuid = models.CharField(
+        max_length=36,
+        null=False,
     )
 
     master_offer = models.ForeignKey(
@@ -80,7 +85,7 @@ class EquipmentItemMarketplaceOffer(models.Model):
 
     class Meta:
         ordering = ('-created',)
-        unique_together = ('user', 'line_item')
+        unique_together = ('user', 'line_item', 'master_offer_uuid')
 
     def __str__(self):
         return f'Marketplace listing line item offer for {self.line_item} by {self.user}: {self.amount}'

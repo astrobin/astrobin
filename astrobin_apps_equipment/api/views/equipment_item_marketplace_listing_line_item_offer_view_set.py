@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.db.models import QuerySet
-from django.utils.translation import gettext_lazy
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import permissions, serializers, status, viewsets
 from rest_framework.decorators import action
+from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
@@ -18,6 +18,7 @@ from astrobin_apps_equipment.models import (
 )
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
+from common.services import DateTimeService
 
 
 class IsOfferOwner(permissions.BasePermission):
@@ -47,13 +48,13 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         """
         Instantiates and returns the list of permissions that this view requires.
         """
-        if self.action in ('list', 'retrieve', 'accept'):
+        if self.action in ('list', 'retrieve'):
             permission_classes = [MayAccessMarketplace]
         elif self.action == 'create':
             permission_classes = [permissions.IsAuthenticated, MayAccessMarketplace]
-        elif self.action in ('update', 'partial_update'):
+        elif self.action in ('update', 'partial_update', 'retract'):
             permission_classes = [IsOfferOwner]
-        elif self.action == 'destroy':
+        elif self.action in ('accept', 'reject'):
             permission_classes = [IsOfferOwnerOrListingOwner]
         else:
             permission_classes = [permissions.IsAdminUser]
@@ -83,6 +84,23 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
             from django.http import Http404
             raise Http404("Listing ID or LineItem ID not provided")
 
+    def create(self, request, *args, **kwargs):
+        # Do not allow creating offers for listings that are expired.
+        listing = EquipmentItemMarketplaceListing.objects.get(pk=request.data['listing'])
+        if listing.expiration < DateTimeService.now():
+            raise serializers.ValidationError("Cannot create an offer for an expired listing")
+
+        # Do not allow creating offers if a user already has a pending offer for the same line item.
+        line_item = EquipmentItemMarketplaceListingLineItem.objects.get(pk=request.data['line_item'])
+        if EquipmentItemMarketplaceOffer.objects.filter(
+                line_item=line_item,
+                user=request.user,
+                status=EquipmentItemMarketplaceOfferStatus.PENDING.value
+        ).exists():
+            raise serializers.ValidationError("Cannot create an offer for the same line item")
+
+        return super().create(request, *args, **kwargs)
+
     # Do not allow updating offers that have already been accepted or rejected.
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -93,34 +111,62 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         return super().update(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
+        raise MethodNotAllowed("DELETE")
 
-        if instance.line_item.sold:
-            raise serializers.ValidationError(
-                gettext_lazy("Cannot delete an offer for a line item that has already been sold.")
-            )
-
-        if request.user == instance.line_item.user:
-            instance.status = EquipmentItemMarketplaceOfferStatus.REJECTED.value
-
-        if instance.line_item.reserved_to == instance.user:
-            EquipmentItemMarketplaceListingLineItem.objects.filter(pk=instance.line_item.pk).update(
-                reserved=None,
-                reserved_to=None
-            )
-
-        self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-    @action(detail=True, methods=['post'], url_path='accept')
+    @action(detail=True, methods=['put'], url_path='accept')
     def accept(self, request, *args, **kwargs):
         offer = self.get_object()
 
         if offer.line_item.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+        if offer.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        if offer.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
         MarketplaceService.accept_offer(offer)
 
         offer.refresh_from_db()
         serializer = self.get_serializer(offer)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['put'], url_path='reject')
+    def reject(self, request, *args, **kwargs):
+        offer = self.get_object()
+
+        if offer.line_item.user != request.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        if offer.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        if offer.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value and offer.line_item.sold_to == offer.user:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        MarketplaceService.reject_offer(offer)
+
+        offer.refresh_from_db()
+        serializer = self.get_serializer(offer)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['put'], url_path='retract')
+    def retract(self, request, *args, **kwargs):
+        offer = self.get_object()
+
+        if offer.user != request.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        if offer.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        if offer.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value and offer.line_item.sold_to == offer.user:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        MarketplaceService.retract_offer(offer)
+
+        offer.refresh_from_db()
+        serializer = self.get_serializer(offer)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+

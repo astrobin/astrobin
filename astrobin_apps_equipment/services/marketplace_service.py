@@ -11,7 +11,8 @@ from geopy.exc import GeocoderServiceError, GeocoderTimedOut
 from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
 from astrobin_apps_equipment.models import (
-    EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceOffer,
+    EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
+    EquipmentItemMarketplaceOffer,
 )
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
@@ -58,6 +59,28 @@ class MarketplaceService:
         offer.line_item.reserved = DateTimeService.now()
         offer.line_item.reserved_to = offer.user
         offer.line_item.save()
+
+    @staticmethod
+    def reject_offer(offer: EquipmentItemMarketplaceOffer):
+        offer.status = EquipmentItemMarketplaceOfferStatus.REJECTED.value
+        offer.save()
+
+        if offer.line_item.reserved_to == offer.user:
+            EquipmentItemMarketplaceListingLineItem.objects.filter(pk=offer.line_item.pk).update(
+                reserved=None,
+                reserved_to=None
+            )
+
+    @staticmethod
+    def retract_offer(offer: EquipmentItemMarketplaceOffer):
+        offer.status = EquipmentItemMarketplaceOfferStatus.RETRACTED.value
+        offer.save()
+
+        if offer.line_item.reserved_to == offer.user:
+            EquipmentItemMarketplaceListingLineItem.objects.filter(pk=offer.line_item.pk).update(
+                reserved=None,
+                reserved_to=None
+            )
 
     @staticmethod
     def calculate_received_feedback_score(user: User) -> Optional[int]:
