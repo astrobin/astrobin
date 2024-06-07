@@ -515,8 +515,8 @@ def create_and_sync_master_offer(sender, instance: EquipmentItemMarketplaceOffer
     instance.master_offer = master_offer
 
 
-@receiver(post_save, sender=EquipmentItemMarketplaceOffer)
-def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceOffer, created: bool, **kwargs):
+@receiver(post_save, sender=EquipmentItemMarketplaceMasterOffer)
+def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceMasterOffer, created: bool, **kwargs):
     if created:
         send_offer_notifications.apply_async(
             args=[
@@ -526,7 +526,7 @@ def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceO
                 [instance.listing.user.pk],
                 instance.user.pk,
                 'marketplace-offer-created',
-            ], countdown=10
+            ], countdown=30
         )
 
 
@@ -542,35 +542,6 @@ def delete_master_offer(sender, instance: EquipmentItemMarketplaceOffer, **kwarg
     if master_offer and master_offer.offers.count() == 0:
         master_offer.status = instance.status
         master_offer.delete()
-
-
-@receiver(post_delete, sender=EquipmentItemMarketplaceMasterOffer)
-def send_offer_retracted_or_rejected_notification(sender, instance: EquipmentItemMarketplaceMasterOffer, **kwargs):
-    if instance.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value:
-        # This offer is being deleted because it was rejected. If an offer is simpy retracted, the status would be
-        # PENDING.
-        send_offer_notifications.apply_async(
-            args=[
-                instance.listing.pk,
-                instance.user.pk,
-                None,
-                [instance.listing.user.pk],
-                instance.user.pk,
-                'marketplace-offer-rejected-by-seller',
-            ], countdown=10
-        )
-    else:
-        # This offer must've been retracted by the user.
-        send_offer_notifications.apply_async(
-            args=[
-                instance.listing.pk,
-                instance.user.pk,
-                None,
-                [instance.listing.user.pk],
-                instance.user.pk,
-                'marketplace-offer-retracted',
-            ], countdown=10
-        )
 
 
 @receiver(pre_save, sender=EquipmentItemMarketplaceOffer)
@@ -600,7 +571,7 @@ def send_offer_updated_notifications(sender, instance: EquipmentItemMarketplaceO
 
 
 @receiver(pre_save, sender=EquipmentItemMarketplaceMasterOffer)
-def send_offer_accepted_notifications(sender, instance: EquipmentItemMarketplaceMasterOffer, **kwargs):
+def send_master_offer_notifications(sender, instance: EquipmentItemMarketplaceMasterOffer, **kwargs):
     before = get_object_or_None(EquipmentItemMarketplaceMasterOffer, pk=instance.pk)
     after = instance
 
@@ -630,6 +601,33 @@ def send_offer_accepted_notifications(sender, instance: EquipmentItemMarketplace
                 'marketplace-offer-accepted-by-you',
             ], countdown=10
         )
+
+    if before is not None and before.status != instance.status:
+        if instance.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value:
+            # This offer is being deleted because it was rejected. If an offer is simpy retracted, the status would be
+            # PENDING.
+            send_offer_notifications.apply_async(
+                args=[
+                    instance.listing.pk,
+                    instance.user.pk,
+                    None,
+                    [instance.listing.user.pk],
+                    instance.user.pk,
+                    'marketplace-offer-rejected-by-seller',
+                ], countdown=10
+            )
+        elif instance.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value:
+            # This offer must've been retracted by the user.
+            send_offer_notifications.apply_async(
+                args=[
+                    instance.listing.pk,
+                    instance.user.pk,
+                    None,
+                    [instance.listing.user.pk],
+                    instance.user.pk,
+                    'marketplace-offer-retracted',
+                ], countdown=10
+            )
 
 
 @receiver(pre_save, sender=EquipmentItemMarketplaceListing)
