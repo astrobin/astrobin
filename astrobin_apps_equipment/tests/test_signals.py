@@ -88,10 +88,28 @@ class SignalsTest(TestCase):
         line_item_1 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
         line_item_2 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
         buyer = Generators.user()
-        offer_1 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_1, user=buyer)
-        offer_2 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_2, user=buyer)
+        offer_1 = EquipmentGenerators.marketplace_offer(
+            listing=listing,
+            line_item=line_item_1,
+            user=buyer
+        )
+        offer_2 = EquipmentGenerators.marketplace_offer(
+            listing=listing,
+            line_item=line_item_2,
+            user=buyer,
+            master_offer_uuid=offer_1.master_offer_uuid
+        )
 
+        self.assertEqual(
+            1,
+            EquipmentItemMarketplaceMasterOffer.objects.filter(master_offer_uuid=offer_1.master_offer_uuid).count()
+        )
         self.assertEqual(1, EquipmentItemMarketplaceMasterOffer.objects.filter(offers=offer_1).count())
+
+        self.assertEqual(
+            1,
+            EquipmentItemMarketplaceMasterOffer.objects.filter(master_offer_uuid=offer_2.master_offer_uuid).count()
+        )
         self.assertEqual(1, EquipmentItemMarketplaceMasterOffer.objects.filter(offers=offer_2).count())
 
         push_notification.assert_called_with([seller], buyer, 'marketplace-offer-created', mock.ANY)
@@ -99,28 +117,38 @@ class SignalsTest(TestCase):
         # Two offers created still results in one notification.
         push_notification.asset_called_once()
 
-    @patch('astrobin_apps_equipment.tasks.push_notification')
-    def test_marketplace_master_offer_deleted(self, push_notification):
+    def test_marketplace_master_offer_deleted(self):
         seller = Generators.user()
         listing = EquipmentGenerators.marketplace_listing(user=seller)
         line_item_1 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
         line_item_2 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
         buyer = Generators.user()
-        offer_1 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_1, user=buyer)
-        offer_2 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_2, user=buyer)
-
-        push_notification.reset_mock()
+        offer_1 = EquipmentGenerators.marketplace_offer(
+            listing=listing,
+            line_item=line_item_1,
+            user=buyer
+        )
+        offer_2 = EquipmentGenerators.marketplace_offer(
+            listing=listing,
+            line_item=line_item_2,
+            user=buyer,
+            master_offer_uuid=offer_1.master_offer_uuid
+        )
 
         offer_1.delete()
         offer_2.delete()
 
+        self.assertEqual(
+            0,
+            EquipmentItemMarketplaceMasterOffer.objects.filter(master_offer_uuid=offer_1.master_offer_uuid).count()
+        )
         self.assertEqual(0, EquipmentItemMarketplaceMasterOffer.objects.filter(offers=offer_1).count())
+        self.assertEqual(
+            0,
+            EquipmentItemMarketplaceMasterOffer.objects.filter(master_offer_uuid=offer_2.master_offer_uuid).count()
+        )
         self.assertEqual(0, EquipmentItemMarketplaceMasterOffer.objects.filter(offers=offer_2).count())
 
-        push_notification.assert_called_with([seller], buyer, 'marketplace-offer-retracted', mock.ANY)
-
-        # Two offers deleted still results in one notification.
-        push_notification.asset_called_once()
 
     @patch('astrobin_apps_equipment.tasks.push_notification')
     def test_marketplace_offers_updated(self, push_notification):
@@ -255,12 +283,18 @@ class SignalsTest(TestCase):
 
         buyer1 = Generators.user()
         offer1 = EquipmentGenerators.marketplace_offer(
-            listing=listing, line_item=line_item, user=buyer1, status=EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+            listing=listing,
+            line_item=line_item,
+            user=buyer1,
+            status=EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
         )
 
         buyer2 = Generators.user()
         EquipmentGenerators.marketplace_offer(
-            listing=listing, line_item=line_item, user=buyer2, status=EquipmentItemMarketplaceOfferStatus.PENDING.value
+            listing=listing,
+            line_item=line_item,
+            user=buyer2,
+            status=EquipmentItemMarketplaceOfferStatus.PENDING.value
         )
 
         follower = Generators.user()

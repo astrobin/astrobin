@@ -499,20 +499,29 @@ def create_or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kwa
                 instance.forum = None
 
 
-@receiver(pre_save, sender=EquipmentItemMarketplaceOffer)
+@receiver(post_save, sender=EquipmentItemMarketplaceOffer)
 def create_and_sync_master_offer(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
-    with transaction.atomic():
-        master_offer, _ = EquipmentItemMarketplaceMasterOffer.objects.get_or_create(
+    master_offer = get_object_or_None(
+        EquipmentItemMarketplaceMasterOffer,
+        master_offer_uuid=instance.master_offer_uuid
+    )
+
+    if master_offer is None:
+        master_offer = EquipmentItemMarketplaceMasterOffer.objects.create(
             listing=instance.line_item.listing,
             user=instance.user,
-            master_offer_uuid=instance.master_offer_uuid
+            master_offer_uuid=instance.master_offer_uuid,
+            status=instance.status
         )
-
-    if master_offer.status != instance.status:
+    else:
         master_offer.status = instance.status
         master_offer.save()
 
-    instance.master_offer = master_offer
+    EquipmentItemMarketplaceOffer.objects.filter(
+        pk=instance.pk
+    ).update(
+        master_offer=master_offer,
+    )
 
 
 @receiver(post_save, sender=EquipmentItemMarketplaceMasterOffer)

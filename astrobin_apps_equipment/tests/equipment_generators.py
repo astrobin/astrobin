@@ -293,6 +293,7 @@ class EquipmentGenerators:
             user=user,
             amount=kwargs.get('amount', 900),
             status=kwargs.get('status', EquipmentItemMarketplaceOfferStatus.PENDING.value),
+            master_offer_uuid=kwargs.get('master_offer_uuid', Generators.random_string()),
         )
 
     @staticmethod
