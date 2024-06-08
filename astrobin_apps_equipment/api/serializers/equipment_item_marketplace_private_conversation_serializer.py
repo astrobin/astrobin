@@ -6,6 +6,7 @@ from astrobin_apps_equipment.models import EquipmentItemMarketplacePrivateConver
 class EquipmentItemMarketplacePrivateConversationSerializer(serializers.ModelSerializer):
     total_messages = serializers.SerializerMethodField(read_only=True)
     unread_messages = serializers.SerializerMethodField(read_only=True)
+    last_message_timestamp = serializers.SerializerMethodField(read_only=True)
 
     def get_total_messages(self, obj: EquipmentItemMarketplacePrivateConversation) -> int:
         return obj.comments.count()
@@ -22,6 +23,10 @@ class EquipmentItemMarketplacePrivateConversationSerializer(serializers.ModelSer
             count = obj.comments.filter(created__gt=obj.user_last_accessed).count()
 
         return count
+
+    def get_last_message_timestamp(self, obj: EquipmentItemMarketplacePrivateConversation) -> str:
+        last_comment = obj.comments.last()
+        return last_comment.created if last_comment else None
 
     class Meta:
         model = EquipmentItemMarketplacePrivateConversation
