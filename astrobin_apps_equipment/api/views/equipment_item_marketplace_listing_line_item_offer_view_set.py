@@ -113,6 +113,39 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         raise MethodNotAllowed("DELETE")
 
+    def perform_create(self, serializer):
+        super().perform_create(serializer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'created',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
+    def perform_update(self, serializer):
+        super().perform_update(serializer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'updated',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'deleted',
+            self.get_serializer_class(),
+            instance,
+            context={'request': self.request},
+        )
+
     @action(detail=True, methods=['put'], url_path='accept')
     def accept(self, request, *args, **kwargs):
         offer = self.get_object()
@@ -130,6 +163,15 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         offer.refresh_from_db()
         serializer = self.get_serializer(offer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'accepted',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['put'], url_path='reject')
@@ -152,6 +194,15 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         offer.refresh_from_db()
         serializer = self.get_serializer(offer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'rejected',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['put'], url_path='retract')
@@ -174,5 +225,14 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         offer.refresh_from_db()
         serializer = self.get_serializer(offer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'retracted',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
         return Response(serializer.data, status=status.HTTP_200_OK)
 

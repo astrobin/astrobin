@@ -17,6 +17,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_serializer import \
     EquipmentItemMarketplaceListingLineItemSerializer
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from common.constants import GroupName
 from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission
 from common.services import DateTimeService
@@ -49,6 +50,17 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
 
         return EquipmentItemMarketplaceListingLineItemReadSerializer
 
+    def perform_create(self, serializer):
+        super().perform_create(serializer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'created',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
     # Do not allow editing a line item that has been sold
     def perform_update(self, serializer):
         instance = serializer.instance
@@ -58,11 +70,27 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
 
         super().perform_update(serializer)
 
+        MarketplaceService.log_event(
+            self.request.user,
+            'updated',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
     def perform_destroy(self, instance):
         if instance.sold:
             raise serializers.ValidationError("Cannot delete a line item that has been sold")
 
         super().perform_destroy(instance)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'deleted',
+            self.get_serializer_class(),
+            instance,
+            context={'request': self.request},
+        )
 
     @action(detail=True, methods=['put'], url_path='mark-as-sold')
     def mark_as_sold(self, request, pk=None, listing_id=None):
@@ -89,5 +117,13 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
         line_item.save()
 
         serializer = self.get_serializer(line_item)
+
+        MarketplaceService.log_event(
+            request.user,
+            'marked as sold',
+            self.get_serializer_class(),
+            line_item,
+            context={'request': request},
+        )
 
         return Response(serializer.data)

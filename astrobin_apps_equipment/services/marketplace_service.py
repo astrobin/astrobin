@@ -8,6 +8,7 @@ from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from geopy import Nominatim
 from geopy.exc import GeocoderServiceError, GeocoderTimedOut
+from rest_framework.renderers import JSONRenderer
 from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
 
 from astrobin_apps_equipment.models import (
@@ -22,7 +23,7 @@ from common.constants import GroupName
 from common.services import AppRedirectionService, DateTimeService
 
 log = logging.getLogger(__name__)
-
+marketplace_logger = logging.getLogger("marketplace")
 
 class MarketplaceService:
     @staticmethod
@@ -164,3 +165,18 @@ class MarketplaceService:
         if location:
             listing.latitude = location.latitude
             listing.longitude = location.longitude
+
+
+    @staticmethod
+    def log_event(user: User, event: str, serializer_class, instance, context=None):
+        # Instantiate the serializer with the instance and context
+        serialized_instance = serializer_class(instance, context=context)
+        serialized_data = serialized_instance.data
+
+        # Render the serialized data to JSON
+        json_data = JSONRenderer().render(serialized_data)
+
+        # Log the JSON data
+        marketplace_logger.info(
+            f"User {user.id}/{user} {event} {instance.__class__.__name__} with data: {json_data.decode('utf-8')}"
+        )

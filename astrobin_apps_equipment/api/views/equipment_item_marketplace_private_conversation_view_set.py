@@ -14,6 +14,7 @@ from astrobin_apps_equipment.api.permissions.may_update_marketplace_private_conv
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_private_conversation_serializer import \
     EquipmentItemMarketplacePrivateConversationSerializer
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplacePrivateConversation
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 
 
 class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
@@ -64,7 +65,26 @@ class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
         else:
             save_params['user_last_accessed'] = now
 
+        MarketplaceService.log_event(
+            self.request.user,
+            'created',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
         serializer.save(**save_params)
+
+    def perform_update(self, serializer):
+        super().perform_update(serializer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'updated',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
 
     def destroy(self, request, *args, **kwargs):
         conversation: EquipmentItemMarketplacePrivateConversation = self.get_object()
@@ -78,3 +98,14 @@ class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
 
         # If the user is the owner, proceed with the deletion
         return super(EquipmentItemMarketplacePrivateConversationViewSet, self).destroy(request, *args, **kwargs)
+
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'deleted',
+            self.get_serializer_class(),
+            instance,
+            context={'request': self.request},
+        )

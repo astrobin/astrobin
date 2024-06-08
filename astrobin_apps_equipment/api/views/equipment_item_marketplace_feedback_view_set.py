@@ -14,6 +14,7 @@ from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceFeedback,
     EquipmentItemMarketplaceListingLineItem,
 )
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
 from common.permissions import IsObjectUserOrReadOnly
 from common.services import DateTimeService
@@ -91,6 +92,17 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
         )
 
         return retval
+
+    def perform_create(self, serializer):
+        super().perform_create(serializer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'created',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
 
     def update(self, request, *args, **kwargs):
         return Response({"detail": "Method 'PUT' not allowed."}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

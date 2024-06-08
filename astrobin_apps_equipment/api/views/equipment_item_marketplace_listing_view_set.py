@@ -305,6 +305,17 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
+    def perform_create(self, serializer):
+        super().perform_create(serializer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'created',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
     def perform_update(self, serializer):
         user = self.request.user
 
@@ -320,11 +331,27 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         # perform the update
         super().perform_update(serializer)
 
+        MarketplaceService.log_event(
+            user,
+            'updated',
+            self.get_serializer_class(),
+            instance,
+            context={'request': self.request},
+        )
+
     def perform_destroy(self, instance):
         if instance.line_items.filter(sold__isnull=False).exists():
             raise serializers.ValidationError("Cannot delete a listing that has sold line items")
 
         super().perform_destroy(instance)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'deleted',
+            self.get_serializer_class(),
+            instance,
+            context={'request': self.request},
+        )
 
     def get_serializer_class(self) -> Type[serializers.ModelSerializer]:
         if self.request.method in ['PUT', 'POST']:
@@ -369,6 +396,14 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         MarketplaceService.approve_listing(listing, request.user)
         listing.refresh_from_db()
         serializer = self.get_serializer(listing)
+
+        MarketplaceService.log_event(
+            request.user,
+            'approved',
+            self.get_serializer_class(),
+            listing,
+            context={'request': request},
+        )
         return Response(serializer.data)
 
     @action(detail=True, methods=['put'])
@@ -380,4 +415,13 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         MarketplaceService.renew_listing(listing, request.user)
         listing.refresh_from_db()
         serializer = self.get_serializer(listing)
+
+        MarketplaceService.log_event(
+            request.user,
+            'renewed',
+            self.get_serializer_class(),
+            listing,
+            context={'request': request},
+        )
+
         return Response(serializer.data)

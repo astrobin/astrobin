@@ -14,6 +14,7 @@ from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
     EquipmentItemMarketplaceListingLineItemImage,
 )
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from common.constants import GroupName
 from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission
 
@@ -45,3 +46,36 @@ class EquipmentItemMarketplaceListingLineItemImageViewSet(viewsets.ModelViewSet)
             # Raise a 404 error if listing_id is not provided in the URL
             from django.http import Http404
             raise Http404("Listing ID or LineItem ID not provided")
+
+    def perform_create(self, serializer):
+        super().perform_create(serializer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'created',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
+    def perform_update(self, serializer):
+        super().perform_update(serializer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'updated',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'deleted',
+            self.get_serializer_class(),
+            instance,
+            context={'request': self.request},
+        )

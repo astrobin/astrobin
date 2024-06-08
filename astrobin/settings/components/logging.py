@@ -148,6 +148,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
+        'marketplace': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
         '': {
             'handlers': ['console'],
             'level': 'DEBUG',
@@ -160,13 +165,23 @@ if DEBUG:
     for logger_name, logger_config in LOGGING['loggers'].items():
         LOGGING['loggers'][logger_name]['handlers'].append('logfile')
 
-if AWS_ACCESS_KEY_ID != 'invalid' and \
-        AWS_SECRET_ACCESS_KEY != 'invalid' and \
-        CLOUDWATCH_LOGGING_ENABLED and \
-        'localhost' not in BASE_URL:
-    boto3_session = Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
-                            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                            region_name=AWS_REGION)
+if (
+    AWS_ACCESS_KEY_ID != 'invalid' and
+    AWS_SECRET_ACCESS_KEY != 'invalid' and
+    CLOUDWATCH_LOGGING_ENABLED and
+    'localhost' not in BASE_URL
+):
+    boto3_session = Session(
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        region_name=AWS_REGION,
+    )
+
+    LOGGING['loggers']['marketplace'] = {
+        'handlers': ['watchtower_marketplace'],
+        'level': 'DEBUG',
+        'propagate': False,
+    }
 
     LOGGING['handlers']['watchtower'] = {
         'level': 'DEBUG',
@@ -177,5 +192,15 @@ if AWS_ACCESS_KEY_ID != 'invalid' and \
         'formatter': 'aws',
     }
 
+    LOGGING['handlers']['watchtower_marketplace'] = {
+        'level': 'DEBUG',
+        'class': 'watchtower.CloudWatchLogHandler',
+        'boto3_session': boto3_session,
+        'log_group': 'astrobin-marketplace',
+        'stream_name': BASE_URL.replace('https://', '').replace('http://', ''),
+        'formatter': 'aws',
+    }
+
     for logger_name, logger_config in LOGGING['loggers'].items():
         LOGGING['loggers'][logger_name]['handlers'].append('watchtower')
+        LOGGING['loggers'][logger_name]['handlers'].append('watchtower_marketplace')
