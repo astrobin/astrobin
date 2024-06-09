@@ -68,6 +68,9 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
         if instance.sold:
             raise serializers.ValidationError("Cannot edit a line item that has been sold")
 
+        if instance.reserved:
+            raise serializers.ValidationError("Cannot edit a line item that has been reserved")
+
         super().perform_update(serializer)
 
         MarketplaceService.log_event(
