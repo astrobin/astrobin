@@ -160,7 +160,7 @@ class MarketplaceService:
         try:
             location = geolocator.geocode(f"{listing.city}, {listing.country}")
         except (GeocoderTimedOut, GeocoderServiceError) as e:
-            log.error(f"Error while geocoding {listing.city}, {listing.country}")
+            log.error(f"Error while geocoding {listing.city}, {listing.country}: {str(e)}")
 
         if location:
             listing.latitude = location.latitude
