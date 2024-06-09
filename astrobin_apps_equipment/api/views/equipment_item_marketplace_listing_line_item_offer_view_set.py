@@ -150,13 +150,34 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
     def accept(self, request, *args, **kwargs):
         offer = self.get_object()
 
+        # Only the listing owner can accept an offer
         if offer.line_item.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+        # Do not allow accepting an offer that has already been rejected or retracted
         if offer.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         if offer.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        # Do not allow accepting an offer that has already been accepted
+        if offer.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        # Do not allow accepting an offer if the line item has already been sold
+        if offer.line_item.sold:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        # Do not allow accepting an offer if the line item has already been reserved
+        if offer.line_item.reserved:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        # Do not allow accepting an offer if there's another accepted offer for the same line item
+        if EquipmentItemMarketplaceOffer.objects.filter(
+                line_item=offer.line_item,
+                status=EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+        ).exists():
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         MarketplaceService.accept_offer(offer)
@@ -178,15 +199,18 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
     def reject(self, request, *args, **kwargs):
         offer = self.get_object()
 
+        # Only the listing owner can reject an offer
         if offer.line_item.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+        # Do not allow rejecting an offer that has already been rejected or retracted
         if (
                 offer.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value or
                 offer.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value
         ):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+        # Do not allow rejecting an offer that has already been accepted if the line item has been sold to the user
         if offer.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value and offer.line_item.sold_to == offer.user:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -209,15 +233,18 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
     def retract(self, request, *args, **kwargs):
         offer = self.get_object()
 
+        # Only the offer owner can retract an offer
         if offer.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+        # Do not allow retracting an offer that has already been rejected or retracted
         if (
                 offer.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value or
                 offer.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value
         ):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+        # Do not allow retracting an offer that has already been accepted if the line item has been sold to the user
         if offer.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value and offer.line_item.sold_to == offer.user:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -235,4 +262,3 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         )
 
         return Response(serializer.data, status=status.HTTP_200_OK)
-
