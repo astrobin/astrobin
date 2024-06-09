@@ -119,7 +119,7 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
 
         line_item.save()
 
-        serializer = self.get_serializer(line_item)
+        serializer = EquipmentItemMarketplaceListingLineItemReadSerializer(line_item, context={'request': request})
 
         MarketplaceService.log_event(
             request.user,
