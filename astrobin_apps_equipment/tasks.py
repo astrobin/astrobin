@@ -13,7 +13,7 @@ from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models import (
     Accessory, AccessoryEditProposal, Camera, CameraEditProposal, EquipmentItemMarketplaceFeedback,
     EquipmentItemMarketplaceListing,
-    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceOffer, Filter,
+    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceMasterOffer, EquipmentItemMarketplaceOffer, Filter,
     FilterEditProposal, Mount,
     MountEditProposal,
     Sensor, SensorEditProposal, Software, SoftwareEditProposal, Telescope,
@@ -118,6 +118,7 @@ def import_stock_feed_agena():
 def send_offer_notifications(
         listing_id: int,
         buyer_id: int,
+        master_offer_id: Optional[int],
         offer_id: Optional[int],
         recipient_ids: List[int],
         sender_id: Optional[int],
@@ -125,6 +126,7 @@ def send_offer_notifications(
 ):
     listing = EquipmentItemMarketplaceListing.objects.get(pk=listing_id)
     buyer = User.objects.get(pk=buyer_id)
+    master_offer = EquipmentItemMarketplaceMasterOffer.objects.get(pk=master_offer_id) if master_offer_id else None
     offer = EquipmentItemMarketplaceOffer.objects.get(pk=offer_id) if offer_id else None
 
     recipients = User.objects.filter(pk__in=recipient_ids)
@@ -137,7 +139,7 @@ def send_offer_notifications(
         list(recipients),
         sender,
         notice_label,
-        MarketplaceService.offer_notification_params(listing, buyer, offer),
+        MarketplaceService.offer_notification_params(listing, buyer, master_offer, offer),
     )
 
 

@@ -8,10 +8,10 @@
     Offer details
 {% endblocktrans %}
 
-{% for offer in offers %}
+{% trans "User" %}: {{ buyer_display_name }}
+{% for offer in pending_offers %}
     {% trans "Item" %}: {{ offer.line_item }}
     {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
-
 {% endfor %}
 
 {% blocktrans trimmed %}

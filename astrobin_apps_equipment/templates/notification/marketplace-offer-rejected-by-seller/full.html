@@ -8,6 +8,14 @@
 </p>
 
 <p>
+    {% for offer in rejected_offers %}
+        {% trans "Item" %}: <strong>{{ offer.line_item }}</strong><br/>
+        {% trans "Offer amount" %}: <strong>{{ offer.line_item.currency }} {{ offer.amount }}</strong>
+        <br/><br/>
+    {% endfor %}
+</p>
+
+<p>
     {% blocktrans trimmed %}
         You may contact the seller using the listing's page for more information.
     {% endblocktrans %}

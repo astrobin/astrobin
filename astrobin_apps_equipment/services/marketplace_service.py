@@ -30,15 +30,35 @@ class MarketplaceService:
     def offer_notification_params(
             listing: EquipmentItemMarketplaceListing,
             buyer: User,
+            master_offer: Optional[EquipmentItemMarketplaceOffer] = None,
             offer: Optional[EquipmentItemMarketplaceOffer] = None
     ):
         return {
             'offer': offer,
-            'offers': EquipmentItemMarketplaceOffer.objects.filter(
+            'pending_offers': EquipmentItemMarketplaceOffer.objects.filter(
                 listing=listing,
                 user=buyer,
-                status=EquipmentItemMarketplaceOfferStatus.PENDING.value
-            ),
+                status=EquipmentItemMarketplaceOfferStatus.PENDING.value,
+                master_offer=master_offer,
+            ) if master_offer else EquipmentItemMarketplaceOffer.objects.none(),
+            'accepted_offers': EquipmentItemMarketplaceOffer.objects.filter(
+                listing=listing,
+                user=buyer,
+                status=EquipmentItemMarketplaceOfferStatus.ACCEPTED.value,
+                master_offer=master_offer,
+            ) if master_offer else EquipmentItemMarketplaceOffer.objects.none(),
+            'rejected_offers': EquipmentItemMarketplaceOffer.objects.filter(
+                listing=listing,
+                user=buyer,
+                status=EquipmentItemMarketplaceOfferStatus.REJECTED.value,
+                master_offer=master_offer,
+            ) if master_offer else EquipmentItemMarketplaceOffer.objects.none(),
+            'retracted_offers': EquipmentItemMarketplaceOffer.objects.filter(
+                listing=listing,
+                user=buyer,
+                status=EquipmentItemMarketplaceOfferStatus.RETRACTED.value,
+                master_offer=master_offer,
+            ) if master_offer else EquipmentItemMarketplaceOffer.objects.none(),
             'seller_display_name': listing.user.userprofile.get_display_name(),
             'buyer_display_name': buyer.userprofile.get_display_name(),
             'buyer_url': build_notification_url(

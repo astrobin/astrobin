@@ -8,6 +8,13 @@
     You may contact the prospect buyer using AstroBin's private messaging for more information.
 {% endblocktrans %}
 
+{% trans "User" %}: {{ buyer_display_name }}
+{% for offer in retracted_offers %}
+    {% trans "Item" %}: {{ offer.line_item }}
+    {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
+{% endfor %}
+
+
 {% trans "View listing" %}:
 {{ listing_url }}
 

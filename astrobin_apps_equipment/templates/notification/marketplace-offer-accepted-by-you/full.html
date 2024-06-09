@@ -12,7 +12,7 @@
 </p>
 
 <p>
-    {% for offer in offers %}
+    {% for offer in accepted_offers %}
         {% trans "Item" %}: <strong>{{ offer.line_item }}</strong><br/>
         {% trans "Offer amount" %}: <strong>{{ offer.line_item.currency }} {{ offer.amount }}</strong>
         <br/><br/>

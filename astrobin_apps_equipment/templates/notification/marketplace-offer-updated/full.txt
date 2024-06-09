@@ -8,9 +8,9 @@
     Offer details
 {% endblocktrans %}
 
+{% trans "User" %}: {{ buyer_display_name }}
 {% trans "Item" %}: {{ offer.line_item }}
 {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
-{% trans "Buyer" %}: {{ buyer_display_name }}
 
 {% blocktrans trimmed %}
     PLEASE NOTE: listings on AstroBin's marketplace may contain more than one item. Please review the offer details

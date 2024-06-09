@@ -10,11 +10,11 @@ from common.mixins import RequestUserRestSerializerMixin
 class EquipmentItemMarketplaceOfferSerializer(RequestUserRestSerializerMixin, serializers.ModelSerializer):
     listing = serializers.PrimaryKeyRelatedField(queryset=EquipmentItemMarketplaceListing.objects.all())
     line_item = serializers.PrimaryKeyRelatedField(queryset=EquipmentItemMarketplaceListingLineItem.objects.all())
-    user_name = serializers.SerializerMethodField(read_only=True)
+    username = serializers.SerializerMethodField(read_only=True)
     user_display_name = serializers.SerializerMethodField(read_only=True)
     line_item_display_name = serializers.SerializerMethodField(read_only=True)
 
-    def get_user_name(self, obj: EquipmentItemMarketplaceOffer):
+    def get_username(self, obj: EquipmentItemMarketplaceOffer):
         return obj.user.username
 
     def get_user_display_name(self, obj: EquipmentItemMarketplaceOffer):

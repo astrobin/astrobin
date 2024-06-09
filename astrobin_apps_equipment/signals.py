@@ -531,6 +531,7 @@ def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceM
                 instance.listing.pk,
                 instance.user.pk,
                 instance.pk,
+                None,
                 [instance.listing.user.pk],
                 instance.user.pk,
                 'marketplace-offer-created',
@@ -568,6 +569,7 @@ def send_offer_updated_notifications(sender, instance: EquipmentItemMarketplaceO
             args=[
                 instance.listing.pk,
                 instance.user.pk,
+                instance.master_offer.id,
                 instance.pk,
                 [instance.line_item.user.pk],
                 instance.user.pk,
@@ -592,6 +594,7 @@ def send_master_offer_notifications(sender, instance: EquipmentItemMarketplaceMa
             args=[
                 instance.listing.pk,
                 instance.user.pk,
+                instance.pk,
                 None,
                 [instance.user.pk],
                 instance.listing.user.pk,
@@ -603,6 +606,7 @@ def send_master_offer_notifications(sender, instance: EquipmentItemMarketplaceMa
             args=[
                 instance.listing.pk,
                 instance.user.pk,
+                instance.pk,
                 None,
                 [instance.listing.user.pk],
                 None,
@@ -618,6 +622,7 @@ def send_master_offer_notifications(sender, instance: EquipmentItemMarketplaceMa
                 args=[
                     instance.listing.pk,
                     instance.user.pk,
+                    instance.pk,
                     None,
                     [instance.listing.user.pk],
                     instance.user.pk,
@@ -630,6 +635,7 @@ def send_master_offer_notifications(sender, instance: EquipmentItemMarketplaceMa
                 args=[
                     instance.listing.pk,
                     instance.user.pk,
+                    instance.pk,
                     None,
                     [instance.listing.user.pk],
                     instance.user.pk,

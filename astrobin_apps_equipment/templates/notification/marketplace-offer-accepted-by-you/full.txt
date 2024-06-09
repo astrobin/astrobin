@@ -8,7 +8,7 @@
     Offer details
 {% endblocktrans %}
 
-{% for offer in offers %}
+{% for offer in accepted_offers %}
     {% trans "Item" %}: {{ offer.line_item }}
     {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
 
