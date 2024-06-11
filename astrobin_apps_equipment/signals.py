@@ -512,15 +512,16 @@ def create_and_sync_master_offer(sender, instance: EquipmentItemMarketplaceOffer
             master_offer_uuid=instance.master_offer_uuid,
             status=instance.status
         )
-    else:
+    elif master_offer.status != instance.status:
         master_offer.status = instance.status
         master_offer.save()
 
-    EquipmentItemMarketplaceOffer.objects.filter(
-        pk=instance.pk
-    ).update(
-        master_offer=master_offer,
-    )
+    if instance.master_offer is None:
+        EquipmentItemMarketplaceOffer.objects.filter(
+            pk=instance.pk
+        ).update(
+            master_offer=master_offer,
+        )
 
 
 @receiver(post_save, sender=EquipmentItemMarketplaceMasterOffer)

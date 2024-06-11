@@ -160,6 +160,9 @@ class SignalsTest(TestCase):
         offer_1 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_1, user=buyer)
         offer_2 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_2, user=buyer)
 
+        offer_1.refresh_from_db()
+        offer_2.refresh_from_db()
+
         push_notification.reset_mock()
 
         offer_1.amount += 1
