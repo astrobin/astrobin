@@ -57,9 +57,6 @@ RUN pip3 install --upgrade pip && \
     pip3 install setuptools && \
     pip3 install --no-deps -r requirements.txt --src /src
 
-# Install global node dependencies
-RUN npm install -g yuglify
-
 # Check the RubyGems version and Ruby version
 RUN ruby -v && gem -v
 
