@@ -113,10 +113,6 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         blank=True,
     )
 
-    bundle_sale_only = models.BooleanField(
-        default=False,
-    )
-
     expired_notification_sent = models.DateTimeField(
         null=True,
     )
