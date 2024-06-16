@@ -11,7 +11,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound, ValidationError
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -27,9 +27,10 @@ from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
 from astrobin_apps_payments.models import ExchangeRate
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
-from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission
+from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission, subscription_required
 from common.services import DateTimeService
 from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
@@ -38,13 +39,39 @@ from toggleproperties.models import ToggleProperty
 class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
-    permission_classes = [
-        or_permission(IsAuthenticated, ReadOnly),
-        or_permission(IsObjectUser, is_group_member(GroupName.MARKETPLACE_MODERATORS), ReadOnly),
-        MayAccessMarketplace
-    ]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('hash', 'user')
+
+    def get_permissions(self):
+        if self.action in ('list', 'retrieve'):
+            permission_classes = [
+                MayAccessMarketplace
+            ]
+        elif self.action == 'create':
+            permission_classes = [
+                MayAccessMarketplace,
+                subscription_required([subscription.value for subscription in SubscriptionName])
+            ]
+        elif self.action in ('update', 'partial_update', 'destroy'):
+            permission_classes = [
+                MayAccessMarketplace,
+                or_permission(IsObjectUser, is_group_member(GroupName.MARKETPLACE_MODERATORS)),
+            ]
+        elif self.action == 'approve':
+            permission_classes = [
+                is_group_member(GroupName.MARKETPLACE_MODERATORS)
+            ]
+        elif self.action == 'renew':
+            permission_classes = [
+                MayAccessMarketplace,
+                IsObjectUser
+            ]
+        else:
+            permission_classes = [
+                IsAdminUser
+            ]
+
+        return [permission() for permission in permission_classes]
 
     def get_queryset(self) -> QuerySet:
         self.validate_query_params()

@@ -2,6 +2,7 @@ from typing import List, Type, Union
 
 from rest_framework import permissions
 
+from astrobin.templatetags.tags import has_subscription_by_name
 from astrobin_apps_users.services import UserService
 
 
@@ -17,6 +18,7 @@ class ReadOnly(permissions.BasePermission):
 class IsObjectUser(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj.user == request.user
+
 
 class IsObjectUserOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
@@ -50,3 +52,14 @@ def is_group_member(group_name: Union[str, List[str]]) -> Type[permissions.BaseP
             return UserService(request.user).is_in_group(group_name)
 
     return _IsGroupMember
+
+
+def subscription_required(subscription_names: Union[str, List[str]]) -> Type[permissions.BasePermission]:
+    class _SubscriptionRequired(permissions.BasePermission):
+        def has_permission(self, request, view) -> bool:
+            # Loop all subscription_name and return True if user has any of them
+            return any(
+                has_subscription_by_name(request.user, subscription_name) for subscription_name in subscription_names
+            )
+
+    return _SubscriptionRequired

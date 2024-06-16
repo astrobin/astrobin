@@ -573,7 +573,8 @@ def has_subscription_by_name(user, name):
         return False
 
     return UserSubscription.objects.filter(
-        user=user, subscription__name=name).count() > 0
+        user=user, subscription__name=name
+    ).count() > 0
 
 
 @register.filter

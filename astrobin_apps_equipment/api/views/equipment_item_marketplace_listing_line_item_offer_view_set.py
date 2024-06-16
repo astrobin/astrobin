@@ -49,15 +49,26 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         Instantiates and returns the list of permissions that this view requires.
         """
         if self.action in ('list', 'retrieve'):
-            permission_classes = [MayAccessMarketplace]
+            permission_classes = [
+                MayAccessMarketplace
+            ]
         elif self.action == 'create':
-            permission_classes = [permissions.IsAuthenticated, MayAccessMarketplace]
+            permission_classes = [
+                permissions.IsAuthenticated,
+                MayAccessMarketplace
+            ]
         elif self.action in ('update', 'partial_update', 'retract'):
-            permission_classes = [IsOfferOwner]
+            permission_classes = [
+                IsOfferOwner
+            ]
         elif self.action in ('accept', 'reject'):
-            permission_classes = [IsOfferOwnerOrListingOwner]
+            permission_classes = [
+                IsOfferOwnerOrListingOwner
+            ]
         else:
-            permission_classes = [permissions.IsAdminUser]
+            permission_classes = [
+                permissions.IsAdminUser
+            ]
 
         return [permission() for permission in permission_classes]
 
