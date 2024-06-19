@@ -7,6 +7,12 @@
 {% for offer in rejected_offers %}
     {% trans "Item" %}: {{ offer.line_item }}
     {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
+    {% if offer.line_item.shipping_cost %}
+        {% trans "Shipping" %}: {{ offer.line_item.currency }} {{ offer.shipping_cost }}
+    {% endif %}
+    {% if not forloop.last %}
+
+    {% endif %}
 {% endfor %}
 
 {% blocktrans trimmed %}

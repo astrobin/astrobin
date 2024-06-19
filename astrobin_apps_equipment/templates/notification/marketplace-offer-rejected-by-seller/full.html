@@ -11,7 +11,13 @@
     {% for offer in rejected_offers %}
         {% trans "Item" %}: <strong>{{ offer.line_item }}</strong><br/>
         {% trans "Offer amount" %}: <strong>{{ offer.line_item.currency }} {{ offer.amount }}</strong>
-        <br/><br/>
+        {% if offer.line_item.shipping_cost %}
+            <br/>
+            {% trans "Shipping cost" %}: <strong>{{ offer.line_item.currency }} {{ offer.line_item.shipping_cost }}</strong>
+        {% endif %}
+        {% if not forloop.last %}
+            <br/><br/>
+        {% endif %}
     {% endfor %}
 </p>
 
