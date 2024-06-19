@@ -110,6 +110,20 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         ).exists():
             raise serializers.ValidationError("Cannot create an offer for the same line item")
 
+        # Do not allow creating an offer with a different master_offer_uuid if there are already pending offers for
+        # other line items in the same listing with a different master_offer_uuid.
+        if 'master_offer_uuid' in request.data:
+            if EquipmentItemMarketplaceOffer.objects.filter(
+                    listing=listing,
+                    user=request.user,
+                    status=EquipmentItemMarketplaceOfferStatus.PENDING.value
+            ).exclude(
+                    master_offer_uuid=request.data['master_offer_uuid']
+            ).exists():
+                raise serializers.ValidationError(
+                    "Application error: cannot create an offer with a different master_offer_uuid"
+                )
+
         return super().create(request, *args, **kwargs)
 
     # Do not allow updating offers that have already been accepted or rejected.
