@@ -46,7 +46,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
 
 # Install pip dependencies
@@ -57,9 +57,6 @@ RUN pip3 install --upgrade pip && \
     pip3 install setuptools && \
     pip3 install pylint && \
     pip3 install --no-deps -r requirements.txt --src /src
-
-# Install global node dependencies
-RUN npm install -g yuglify
 
 # Check the RubyGems version and Ruby version
 RUN ruby -v && gem -v
