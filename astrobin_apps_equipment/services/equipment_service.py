@@ -10,7 +10,10 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from pybb.models import Category, Forum, Topic
 
-from astrobin_apps_equipment.models import EquipmentBrand, EquipmentBrandListing, EquipmentItemListing
+from astrobin_apps_equipment.models import (
+    EquipmentBrand, EquipmentBrandListing, EquipmentItemListing,
+    EquipmentItemMarketplaceListingLineItem,
+)
 from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
@@ -468,6 +471,14 @@ class EquipmentService:
         log.debug(f'reject_item: found {migration_strategies.count()} migration strategies for {item.klass}/{item.id}')
 
         if duplicate_of:
+            EquipmentItemMarketplaceListingLineItem.objects.filter(
+                item_content_type=ContentType.objects.get_for_model(ModelClass),
+                item_object_id=item.pk
+            ).update(
+                item_content_type=ContentType.objects.get_for_model(DuplicateModelClass),
+                item_object_id=duplicate_of.pk
+            )
+
             migration_strategies.update(
                 migration_object_id=duplicate_of.pk,
                 migration_content_type=ContentType.objects.get_for_model(DuplicateModelClass)
@@ -485,6 +496,14 @@ class EquipmentService:
 
             Topic.objects.filter(forum=item.forum).update(forum=duplicate_of.forum)
         else:
+            EquipmentItemMarketplaceListingLineItem.objects.filter(
+                item_content_type=ContentType.objects.get_for_model(ModelClass),
+                item_object_id=item.pk
+            ).update(
+                item_object_id=None,
+                item_plain_text=f'{str(item)}'
+            )
+
             for migration_strategy in migration_strategies:
                 log.debug(f'reject_item: undoing migration strategy {migration_strategy.id} for {item.klass}/{item.id}')
                 EquipmentService.undo_migration_strategy(migration_strategy)
