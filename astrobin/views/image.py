@@ -1208,7 +1208,7 @@ class ImageDownloadView(View):
         content_type = mimetypes.guess_type(os.path.basename(url))
 
         ret = HttpResponse(response.content, content_type=content_type)
-        ret['Content-Disposition'] = 'inline; filename=' + os.path.basename(url)
+        ret['Content-Disposition'] = 'attachment; filename=' + os.path.basename(url)
         return ret
 
     def dispatch(self, request, *args, **kwargs):

@@ -766,6 +766,21 @@ astrobin_common = {
         $pageLoadingText.css('opacity', 0);
     },
 
+    init_file_download_links: function () {
+        $(document).ready(function () {
+            $('.file-download-link').click(function (event) {
+               $.toast({
+                    heading: $.i18n._("DOWNLOADING_FILE_HEADING"),
+                    text: $.i18n._("DOWNLOADING_FILE_TEXT"),
+                    showHideTransition: 'slide',
+                    allowToastClose: true,
+                    hideAfter: 5000,
+                    position: 'bottom-right'
+                });
+            });
+        });
+    },
+
     init_page_loading_indicator: function () {
         $(window).bind("pagehide", function () {
             setTimeout(function () {
@@ -1552,6 +1567,7 @@ astrobin_common = {
 
         astrobin_common.init_timestamps();
         astrobin_common.init_page_loading_indicator();
+        astrobin_common.init_file_download_links();
 
         $("select[multiple]:not(.select2)").not('*[name="license"]').multiselect({
             searchable: false,

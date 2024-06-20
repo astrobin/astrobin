@@ -36,7 +36,9 @@
     }
 
     var dictionary = {
-        'Cancel': '{% trans "Cancel" %}'
+        'Cancel': '{% trans "Cancel" %}',
+        'DOWNLOADING_FILE_HEADING': '{% trans "Downloading file" %}',
+        'DOWNLOADING_FILE_TEXT': '{% trans "AstroBin is downloading the file you requested in the background." %}'
     };
     $.i18n.setDictionary(dictionary);
 
@@ -46,7 +48,6 @@
         path: '{% get_static_prefix %}' + 'astrobin/js/locale/',
         timeout: 500
     });
-
 
     $(document).ready(function () {
         astrobin_common.init({
