@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load common_tags %}
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -117,6 +118,8 @@ $(document).ready(function() {
         }
     {% endifequal %}
     
-    fetchMarketplaceFragment();
+    {% if request.user|is_in_astrobin_group:BETA_TESTERS_GROUP_NAME %}
+        fetchMarketplaceFragment();
+    {% endif %}
 });
 </script>

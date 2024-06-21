@@ -66,7 +66,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_se
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.exceptions import Http410
-from common.services import AppRedirectionService
+from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 
 logger = logging.getLogger(__name__)
@@ -1532,6 +1532,7 @@ class ImageMarketplaceFragment(View):
                         item_content_type=ContentType.objects.get_for_model(x),
                         sold__isnull=True,
                         listing__approved__isnull=False,
+                        listing__expiration__gt=DateTimeService.now(),
                     )
 
                     if line_item_objects.exists():

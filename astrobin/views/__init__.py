@@ -2648,6 +2648,7 @@ def user_marketplace_fragment(request, username: str):
             listing__user=user,
             sold__isnull=True,
             listing__approved__isnull=False,
+            listing__expiration__gt=DateTimeService.now(),
         )
 
     return render(

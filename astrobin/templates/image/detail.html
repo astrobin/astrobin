@@ -214,7 +214,9 @@
             {% include 'image/detail/skyplot.html' %}
             {% include 'image/detail/histogram.html' %}
             
-            <div class="marketplace"></div>
+            {% if request.user|is_in_astrobin_group:BETA_TESTERS_GROUP_NAME %}
+                <div class="marketplace"></div>
+            {% endif %}
             
             {% include 'image/detail/groups.html' %}
             {% include 'image/detail/collections.html' %}
