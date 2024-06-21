@@ -349,6 +349,12 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         # get instance
         instance = serializer.instance
 
+        if instance.line_items.filter(sold__isnull=False).exists():
+            raise serializers.ValidationError("Cannot edit a listing that has sold line items")
+
+        if instance.line_items.filter(reserved__isnull=False).exists():
+            raise serializers.ValidationError("Cannot edit a listing that has reserved line items")
+
         # get caching service
         caching_service = CachingService()
 
@@ -369,6 +375,9 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     def perform_destroy(self, instance):
         if instance.line_items.filter(sold__isnull=False).exists():
             raise serializers.ValidationError("Cannot delete a listing that has sold line items")
+
+        if instance.line_items.filter(reserved__isnull=False).exists():
+            raise serializers.ValidationError("Cannot delete a listing that has reserved line items")
 
         super().perform_destroy(instance)
 

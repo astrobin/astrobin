@@ -85,6 +85,9 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
         if instance.sold:
             raise serializers.ValidationError("Cannot delete a line item that has been sold")
 
+        if instance.reserved:
+            raise serializers.ValidationError("Cannot delete a line item that has been reserved")
+
         super().perform_destroy(instance)
 
         MarketplaceService.log_event(
