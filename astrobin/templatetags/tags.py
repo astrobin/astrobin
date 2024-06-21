@@ -217,7 +217,8 @@ def search_image_list(context, paginate=True, **kwargs):
                     Q(item_name__icontains=search_term)
                 ),
                 sold__isnull=True,
-                listing__approved__isnull=False
+                listing__approved__isnull=False,
+                listing__expiration__gt=DateTimeService.now(),
             )
 
     context.update({
