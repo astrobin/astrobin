@@ -5,7 +5,6 @@ from typing import List, Optional
 from annoying.functions import get_object_or_None
 from celery import shared_task
 from django.contrib.auth.models import User
-from django.db.models import Exists, OuterRef
 from django.utils import timezone
 
 from astrobin.models import GearMigrationStrategy
@@ -145,98 +144,96 @@ def send_offer_notifications(
 
 @shared_task(time_limit=300)
 def remind_about_rating_seller():
-    # Find all line items that have been sold for more than 10 days and have not been rated
     days = 10
-    cutoff = datetime.now() - timedelta(days=days)
+    cutoff = timezone.now() - timezone.timedelta(days=days)
 
-    seller_feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
-        target_type=MarketplaceFeedbackTargetType.SELLER.value,
-        line_item=OuterRef('pk')
-    )
-
+    # Get all sold items without a seller rating reminder
     line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
         sold__lt=cutoff,
-        rate_seller_reminder_sent__isnull=True,
-    ).exclude(
-        feedbacks=Exists(seller_feedback_exists),
-    )
+        sold_to__isnull=False,
+        rate_seller_reminder_sent__isnull=True
+    ).select_related('listing__user__userprofile', 'sold_to')
 
-    # Keep track of users to avoid sending multiple reminders
-    users = set()
+    # Dictionary to keep track of users we've reminded
+    reminded_users = {}
 
-    # Loop all line items and send a reminder to the buyer
     for line_item in line_items:
-        if line_item.sold_to in users:
-            continue
-
+        buyer = line_item.sold_to
         listing = line_item.listing
 
-        push_notification(
-            [line_item.sold_to],
-            None,
-            'marketplace-rate-seller',
-            {
-                'seller_display_name': listing.user.userprofile.get_display_name(),
-                'listing': listing,
-                'listing_url': build_notification_url(listing.get_absolute_url())
-            }
-        )
+        # Check if we've already reminded this buyer
+        if buyer.id in reminded_users:
+            continue
 
-        EquipmentItemMarketplaceListingLineItem.objects.filter(
-            pk=line_item.pk
-        ).update(
-            rate_seller_reminder_sent=DateTimeService.now()
-        )
+        # Check if feedback already exists
+        feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
+            target_type=MarketplaceFeedbackTargetType.SELLER.value,
+            line_item=line_item
+        ).exists()
 
-        users.add(line_item.sold_to)
+        if not feedback_exists:
+            push_notification(
+                [buyer],
+                None,
+                'marketplace-rate-seller',
+                {
+                    'seller_display_name': listing.user.userprofile.get_display_name(),
+                    'listing': listing,
+                    'listing_url': build_notification_url(listing.get_absolute_url())
+                }
+            )
+
+            line_item.rate_seller_reminder_sent = timezone.now()
+            line_item.save(update_fields=['rate_seller_reminder_sent'])
+
+            reminded_users[buyer.id] = True
 
 
 @shared_task(time_limit=300)
 def remind_about_rating_buyer():
-    # Find all line items that have been sold for more than 10 days and have not been rated
     days = 10
-    cutoff = datetime.now() - timedelta(days=days)
+    cutoff = timezone.now() - timezone.timedelta(days=days)
 
-    buyer_feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
-        target_type=MarketplaceFeedbackTargetType.BUYER.value,
-        line_item=OuterRef('pk')
-    )
-
+    # Get all sold items without a buyer rating reminder
     line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
         sold__lt=cutoff,
-        rate_buyer_reminder_sent__isnull=True,
-    ).exclude(
-        feedbacks=Exists(buyer_feedback_exists),
-    )
+        sold_to__isnull=False,
+        rate_buyer_reminder_sent__isnull=True
+    ).select_related('listing__user__userprofile', 'user', 'sold_to')
 
-    # Keep track of users to avoid sending multiple reminders
-    users = set()
+    # Dictionary to keep track of users we've reminded
+    reminded_users = {}
 
-    # Loop all line items and send a reminder to the buyer
     for line_item in line_items:
-        if line_item.sold_to in users:
-            continue
-
+        seller = line_item.user
         listing = line_item.listing
 
-        push_notification(
-            [line_item.user],
-            None,
-            'marketplace-rate-buyer',
-            {
-                'seller_display_name': listing.user.userprofile.get_display_name(),
-                'listing': listing,
-                'listing_url': build_notification_url(listing.get_absolute_url())
-            }
-        )
+        # Check if we've already reminded this seller
+        if seller.id in reminded_users:
+            continue
 
-        EquipmentItemMarketplaceListingLineItem.objects.filter(
-            pk=line_item.pk
-        ).update(
-            rate_buyer_reminder_sent=DateTimeService.now()
-        )
+        # Check if feedback already exists
+        feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
+            target_type=MarketplaceFeedbackTargetType.BUYER.value,
+            line_item=line_item
+        ).exists()
 
-        users.add(line_item.sold_to)
+        if not feedback_exists:
+            push_notification(
+                [seller],
+                None,
+                'marketplace-rate-buyer',
+                {
+                    'buyer_display_name': line_item.sold_to.userprofile.get_display_name(),
+                    'listing': listing,
+                    'listing_url': build_notification_url(listing.get_absolute_url())
+                }
+            )
+
+            line_item.rate_buyer_reminder_sent = timezone.now()
+            line_item.save(update_fields=['rate_buyer_reminder_sent'])
+
+            reminded_users[seller.id] = True
 
 
 @shared_task(time_limit=300)
