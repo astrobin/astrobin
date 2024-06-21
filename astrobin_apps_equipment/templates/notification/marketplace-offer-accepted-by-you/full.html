@@ -16,7 +16,7 @@
         {% trans "Item" %}: <strong>{{ offer.line_item }}</strong><br/>
         {% trans "Offer amount" %}: <strong>{{ offer.line_item.currency }} {{ offer.amount }}</strong>
         {% if offer.line_item.shipping_cost %}
-            {% trans "Shipping" %}: <strong>{{ offer.line_item.currency }} {{ offer.shipping_cost }}</strong>
+            {% trans "Shipping" %}: <strong>{{ offer.line_item.currency }} {{ offer.line_item.shipping_cost }}</strong>
         {% endif %}
         {% if not forloop.last %}
             <br/><br/>

@@ -12,7 +12,7 @@
     {% trans "Item" %}: {{ offer.line_item }}
     {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
     {% if offer.line_item.shipping_cost %}
-        {% trans "Shipping" %}: {{ offer.line_item.currency }} {{ offer.shipping_cost }}
+        {% trans "Shipping" %}: {{ offer.line_item.currency }} {{ offer.line_item.shipping_cost }}
     {% endif %}
     {% if not forloop.last %}
 
