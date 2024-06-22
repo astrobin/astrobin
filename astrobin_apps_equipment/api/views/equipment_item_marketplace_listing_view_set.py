@@ -3,7 +3,7 @@ from typing import Type
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
-from django.db.models import Exists, OuterRef, Prefetch, Q, QuerySet
+from django.db.models import Count, Exists, OuterRef, Prefetch, Q, QuerySet
 from django.utils.translation import gettext
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -75,6 +75,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self) -> QuerySet:
         self.validate_query_params()
+
         queryset = EquipmentItemMarketplaceListing.objects.all()
         queryset = self.filter_approved(queryset)
         queryset = self.filter_by_excluded_hash(queryset)
@@ -86,7 +87,11 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         line_items_queryset = EquipmentItemMarketplaceListingLineItem.objects.all()
         line_items_queryset = self.filter_line_items(line_items_queryset).distinct()
 
-        return queryset.prefetch_related(Prefetch('line_items', queryset=line_items_queryset)).distinct()
+        return queryset.filter(
+            line_items__in=line_items_queryset
+        ).prefetch_related(
+            Prefetch('line_items', queryset=line_items_queryset)
+        ).distinct()
 
     def filter_approved(self, queryset: QuerySet) -> QuerySet:
         if not self.request.user.is_authenticated:

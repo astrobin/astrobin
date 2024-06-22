@@ -207,10 +207,7 @@ class EquipmentItemMarketplaceListingViewSetTestCase(APITestCase):
 
     def test_filter_line_items_by_query(self):
         url = reverse('astrobin_apps_equipment:marketplace-listing-list')
-        query = 'specific query'
-        self.line_item.item_name = 'Item matching specific query'
-        self.line_item.save()
-
+        query = self.line_item.item_name
         response = self.client.get(url, {'query': query})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(any(item['id'] == self.listing.pk for item in response.data['results']))
