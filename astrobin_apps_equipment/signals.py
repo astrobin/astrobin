@@ -539,6 +539,18 @@ def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceM
             ], countdown=30
         )
 
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.pk,
+                None,
+                [instance.user.pk],
+                instance.listing.user.pk,
+                'marketplace-offer-created-buyer',
+            ], countdown=30
+        )
+
 
 @receiver(post_delete, sender=EquipmentItemMarketplaceOffer)
 def delete_master_offer(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
@@ -575,6 +587,18 @@ def send_offer_updated_notifications(sender, instance: EquipmentItemMarketplaceO
                 [instance.line_item.user.pk],
                 instance.user.pk,
                 'marketplace-offer-updated',
+            ], countdown=10
+        )
+
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.master_offer.id,
+                instance.pk,
+                [instance.user.pk],
+                instance.line_item.user.pk,
+                'marketplace-offer-updated-buyer',
             ], countdown=10
         )
 
@@ -641,6 +665,18 @@ def send_master_offer_notifications(sender, instance: EquipmentItemMarketplaceMa
                     [instance.listing.user.pk],
                     instance.user.pk,
                     'marketplace-offer-retracted',
+                ], countdown=10
+            )
+
+            send_offer_notifications.apply_async(
+                args=[
+                    instance.listing.pk,
+                    instance.user.pk,
+                    instance.pk,
+                    None,
+                    [instance.user.pk],
+                    instance.listing.user.pk,
+                    'marketplace-offer-retracted-buyer',
                 ], countdown=10
             )
 

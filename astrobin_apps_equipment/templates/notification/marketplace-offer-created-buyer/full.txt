@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    Great news! Your listing for {{ item }} has received a new offer.
+    Your offer for "{{ listing }}" has been recorded.
 {% endblocktrans %}
 
 {% blocktrans trimmed %}
@@ -21,12 +21,7 @@
 {% endfor %}
 
 {% blocktrans trimmed %}
-    PLEASE NOTE: listings on AstroBin's marketplace may contain more than one item. Please review the offer details
-     to ensure you understand which items the offer is for.
-{% endblocktrans %}
-
-{% blocktrans trimmed %}
-    To review and respond to the offer, please visit your listing page.
+    You can edit your offer by visiting the listing page.
 {% endblocktrans %}
 
 {{ listing_url }}#offers

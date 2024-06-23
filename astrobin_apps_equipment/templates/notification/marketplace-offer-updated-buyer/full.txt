@@ -1,0 +1,22 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Your offer for listing "{{ listing }}" was updated.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Offer details
+{% endblocktrans %}
+
+{% trans "User" %}: {{ buyer_display_name }}
+{% trans "Item" %}: {{ offer.line_item }}
+{% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
+{% if offer.line_item.shipping_cost %}
+{% trans "Shipping" %}: {{ offer.line_item.currency }} {{ offer.line_item.shipping_cost }}
+{% endif %}
+
+{% blocktrans trimmed %}
+    View listing
+{% endblocktrans %}:
+
+{{ listing_url }}#offers
