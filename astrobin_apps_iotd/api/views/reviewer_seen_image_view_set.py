@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-
+import logging
 from datetime import datetime, timedelta
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.db import IntegrityError
 from django.db.models import QuerySet
-from django.http import HttpResponseForbidden
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -19,6 +18,8 @@ from astrobin_apps_iotd.api.serializers.reviewer_seen_image_serializer import Re
 from astrobin_apps_iotd.models import IotdReviewerSeenImage
 from common.constants import GroupName
 from common.permissions import is_group_member
+
+log = logging.getLogger(__name__)
 
 
 class ReviewerSeenImageViewSet(viewsets.ModelViewSet):
@@ -54,5 +55,6 @@ class ReviewerSeenImageViewSet(viewsets.ModelViewSet):
         except IntegrityError:
             return Response(status=204)
         except Exception as e:
-            return HttpResponseForbidden(str(e))
+            log.error('Unhandled error creating IotdReviewerSeenImage: ' + e)
+            return Response(status=204)
 
