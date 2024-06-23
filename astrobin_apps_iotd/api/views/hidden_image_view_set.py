@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+import logging
 from datetime import datetime, timedelta
 
 from django.conf import settings
@@ -17,6 +17,9 @@ from astrobin_apps_iotd.api.serializers.hidden_image_serializer import HiddenIma
 from astrobin_apps_iotd.models import IotdHiddenImage
 from common.constants import GroupName
 from common.permissions import is_group_member
+
+
+log = logging.getLogger(__name__)
 
 
 class HiddenImageViewSet(viewsets.ModelViewSet):
@@ -44,6 +47,7 @@ class HiddenImageViewSet(viewsets.ModelViewSet):
         try:
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
         except ValidationError as e:
+            log.error(f"ValidationError with user {request.user} creating IotdHiddenImage: " + str(e))
             return HttpResponseForbidden(e.messages)
         except IntegrityError:
             return Response(status=204)

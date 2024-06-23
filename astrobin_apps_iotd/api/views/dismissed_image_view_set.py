@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+import logging
 from datetime import datetime, timedelta
 
 from django.conf import settings
@@ -17,6 +17,9 @@ from astrobin_apps_iotd.api.serializers.dismissed_image_serializer import Dismis
 from astrobin_apps_iotd.models import IotdDismissedImage
 from common.constants import GroupName
 from common.permissions import is_group_member
+
+
+log = logging.getLogger(__name__)
 
 
 class DismissedImageViewSet(viewsets.ModelViewSet):
@@ -42,6 +45,7 @@ class DismissedImageViewSet(viewsets.ModelViewSet):
         try:
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
         except ValidationError as e:
+            log.error(f"ValidationError with user {request.user} creating IotdDismissedImage: " + str(e))
             return HttpResponseForbidden(e.messages)
         except IntegrityError:
             return Response(status=204)

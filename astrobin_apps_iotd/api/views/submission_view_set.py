@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+import logging
 from datetime import datetime, timedelta
 
 from django.conf import settings
@@ -20,6 +20,9 @@ from common.constants import GroupName
 from common.permissions import is_group_member
 
 
+log = logging.getLogger(__name__)
+
+
 class SubmissionViewSet(viewsets.ModelViewSet):
     serializer_class = SubmissionSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
@@ -36,6 +39,7 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         try:
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
         except ValidationError as e:
+            log.error(f"ValidationError with user {request.user} creating IotdSubmission: " + str(e))
             return HttpResponseForbidden(e.messages)
         except IntegrityError:
             return Response(status=204)
