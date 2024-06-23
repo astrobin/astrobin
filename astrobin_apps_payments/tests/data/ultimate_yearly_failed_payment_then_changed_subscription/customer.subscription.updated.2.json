@@ -12,7 +12,7 @@
       "automatic_tax": {
         "enabled": false
       },
-      "billing_cycle_anchor": 1687465612,
+      "billing_cycle_anchor": STRIPE_EVENT_START_TIMESTAMP,
       "billing_thresholds": null,
       "cancel_at": null,
       "cancel_at_period_end": false,
@@ -23,10 +23,10 @@
         "reason": null
       },
       "collection_method": "charge_automatically",
-      "created": 1687465612,
+      "created": STRIPE_EVENT_START_TIMESTAMP,
       "currency": "usd",
-      "current_period_end": 1719088012,
-      "current_period_start": 1687465612,
+      "current_period_end": STRIPE_EVENT_END_TIMESTAMP,
+      "current_period_start": STRIPE_EVENT_START_TIMESTAMP,
       "customer": "STRIPE_CUSTOMER_ID",
       "days_until_due": null,
       "default_payment_method": "pm_1NLunDC0tT6bv7HdE4afa1oS",
@@ -145,7 +145,7 @@
       },
       "quantity": 1,
       "schedule": null,
-      "start_date": 1687465612,
+      "start_date": STRIPE_EVENT_START_TIMESTAMP,
       "status": "active",
       "test_clock": null,
       "transfer_data": null,

@@ -26,7 +26,7 @@
       "created": 1685127731,
       "currency": "chf",
       "current_period_end": 1779822131,
-      "current_period_start": 1748286131,
+      "current_period_start": STRIPE_EVENT_END_TIMESTAMP,
       "customer": "STRIPE_CUSTOMER_ID",
       "days_until_due": null,
       "default_payment_method": null,
@@ -158,8 +158,8 @@
       "trial_start": null
     },
     "previous_attributes": {
-      "current_period_end": 1748286131,
-      "current_period_start": 1716750131,
+      "current_period_end": STRIPE_EVENT_END_TIMESTAMP,
+      "current_period_start": STRIPE_EVENT_START_TIMESTAMP,
       "latest_invoice": "in_1NC5yVC0tT6bv7HdxPNLxFMO"
     }
   },

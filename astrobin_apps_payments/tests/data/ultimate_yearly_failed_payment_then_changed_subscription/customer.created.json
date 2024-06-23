@@ -2,7 +2,7 @@
   "id": "evt_1NLu5iC0tT6bv7HddfaPoQ7w",
   "object": "event",
   "api_version": "2020-08-27",
-  "created": 1687465612,
+  "created": STRIPE_EVENT_START_TIMESTAMP,
   "data": {
     "object": {
       "id": "STRIPE_CUSTOMER_ID",
@@ -16,7 +16,7 @@
         "state": null
       },
       "balance": 0,
-      "created": 1687465612,
+      "created": STRIPE_EVENT_START_TIMESTAMP,
       "currency": null,
       "default_currency": null,
       "default_source": null,

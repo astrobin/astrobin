@@ -18,9 +18,22 @@ class StripeGenerators(object):
 
             def replace_placeholder(match):
                 placeholder = match.group(0)  # The matched text (e.g., STRIPE_API_KEY)
-                replacement = getattr(
-                    settings, placeholder, placeholder
-                )  # Get the attribute from settings or use the placeholder if not found
+
+                if placeholder.startswith('STRIPE_PRICE_'):
+                    parts = placeholder.split('_')
+                    product = parts[2].lower()
+                    recurrence = parts[3].lower()
+                    tier = parts[5]
+
+                    replacement = settings.STRIPE['prices'][product][f'{recurrence}-tier-{tier}']
+                elif placeholder.startswith('STRIPE_PRODUCT_'):
+                    product = placeholder.split('_')[2].lower()
+                    replacement = settings.STRIPE['products'][product]
+                else:
+                    replacement = getattr(
+                        settings, placeholder, placeholder
+                    )  # Get the attribute from settings or use the placeholder if not found
+
                 return replacement
 
             # Replace all occurrences of STRIPE_EVENT_START_TIMESTAMP

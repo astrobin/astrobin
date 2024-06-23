@@ -26,7 +26,7 @@
       "billing_reason": "subscription_cycle",
       "charge": "ch_3NC61XC0tT6bv7Hd0UodWJyr",
       "collection_method": "charge_automatically",
-      "created": 1716750131,
+      "created": STRIPE_EVENT_START_TIMESTAMP,
       "currency": "chf",
       "custom_fields": null,
       "customer": "STRIPE_CUSTOMER_ID",
@@ -73,8 +73,8 @@
             "metadata": {
             },
             "period": {
-              "end": 1748286131,
-              "start": 1716750131
+              "end": STRIPE_EVENT_END_TIMESTAMP,
+              "start": STRIPE_EVENT_START_TIMESTAMP
             },
             "plan": {
               "id": "price_1NAtotC0tT6bv7Hd2LUGNacO",
@@ -159,7 +159,7 @@
         "payment_method_options": null,
         "payment_method_types": null
       },
-      "period_end": 1716750131,
+      "period_end": STRIPE_EVENT_START_TIMESTAMP,
       "period_start": 1685127731,
       "post_payment_credit_notes_amount": 0,
       "pre_payment_credit_notes_amount": 0,
