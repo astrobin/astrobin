@@ -26,7 +26,7 @@
       "billing_reason": "subscription_create",
       "charge": null,
       "collection_method": "charge_automatically",
-      "created": 1687465612,
+      "created": STRIPE_EVENT_START_TIMESTAMP,
       "currency": "usd",
       "custom_fields": null,
       "customer": "STRIPE_CUSTOMER_ID",
@@ -80,8 +80,8 @@
             "metadata": {
             },
             "period": {
-              "end": 1719088012,
-              "start": 1687465612
+              "end": STRIPE_EVENT_END_TIMESTAMP,
+              "start": STRIPE_EVENT_START_TIMESTAMP
             },
             "plan": {
               "id": "price_1NAtotC0tT6bv7Hd2LUGNacO",
@@ -166,8 +166,8 @@
         "payment_method_options": null,
         "payment_method_types": null
       },
-      "period_end": 1687465612,
-      "period_start": 1687465612,
+      "period_end": STRIPE_EVENT_START_TIMESTAMP,
+      "period_start": STRIPE_EVENT_START_TIMESTAMP,
       "post_payment_credit_notes_amount": 0,
       "pre_payment_credit_notes_amount": 0,
       "quote": null,
@@ -179,7 +179,7 @@
       "statement_descriptor": null,
       "status": "open",
       "status_transitions": {
-        "finalized_at": 1687465612,
+        "finalized_at": STRIPE_EVENT_START_TIMESTAMP,
         "marked_uncollectible_at": null,
         "paid_at": null,
         "voided_at": null
