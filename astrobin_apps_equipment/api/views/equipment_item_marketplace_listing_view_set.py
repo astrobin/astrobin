@@ -83,15 +83,11 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         queryset = self.filter_by_distance(queryset)
         queryset = self.filter_by_region(queryset)
         queryset = self.filter_by_item_id_and_content_type(queryset)
+        queryset = self.filter_followed_by_user(queryset)
+        queryset = self.filter_by_pending_moderation_status(queryset)
+        queryset = self.filter_line_items(queryset).distinct()
 
-        line_items_queryset = EquipmentItemMarketplaceListingLineItem.objects.all()
-        line_items_queryset = self.filter_line_items(line_items_queryset).distinct()
-
-        return queryset.filter(
-            line_items__in=line_items_queryset
-        ).prefetch_related(
-            Prefetch('line_items', queryset=line_items_queryset)
-        ).distinct()
+        return queryset.distinct()
 
     def filter_approved(self, queryset: QuerySet) -> QuerySet:
         if not self.request.user.is_authenticated:
@@ -176,42 +172,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-    def filter_line_items(self, queryset: QuerySet) -> QuerySet:
-        queryset = self.filter_line_items_with_offers_by_user(queryset)
-        queryset = self.filter_line_items_sold_to_user(queryset)
-        queryset = self.filter_line_items_followed_by_user(queryset)
-        queryset = self.filter_line_items_by_pending_moderation_status(queryset)
-        queryset = self.filter_line_items_by_sold_status(queryset)
-        queryset = self.filter_line_items_by_item_type(queryset)
-        queryset = self.filter_line_items_by_price(queryset)
-        queryset = self.filter_line_items_by_condition(queryset)
-        queryset = self.filter_line_items_by_query(queryset)
-        queryset = self.filter_line_items_by_item_id_and_content_type(queryset)
-        return queryset
-
-    def filter_line_items_with_offers_by_user(self, queryset: QuerySet) -> QuerySet:
-        try:
-            user_id = int(self.request.query_params.get('offers_by_user'))
-        except (ValueError, TypeError):
-            return queryset
-
-        if self.request.user.is_authenticated and user_id == self.request.user.id:
-            return queryset.filter(offers__user_id=user_id)
-
-        return queryset
-
-    def filter_line_items_sold_to_user(self, queryset: QuerySet) -> QuerySet:
-        try:
-            user_id = int(self.request.query_params.get('sold_to_user'))
-        except (ValueError, TypeError):
-            return queryset
-
-        if self.request.user.is_authenticated and user_id == self.request.user.id:
-            return queryset.filter(sold_to=user_id)
-
-        return queryset
-
-    def filter_line_items_followed_by_user(self, queryset):
+    def filter_followed_by_user(self, queryset):
         try:
             user_id = int(self.request.query_params.get('followed_by_user'))
         except (ValueError, TypeError):
@@ -230,16 +191,49 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-    def filter_line_items_by_pending_moderation_status(self, queryset: QuerySet) -> QuerySet:
+    def filter_by_pending_moderation_status(self, queryset: QuerySet) -> QuerySet:
         pending_moderation = self.request.query_params.get('pending_moderation')
 
         if pending_moderation is None:
             return queryset
 
         if pending_moderation == 'true':
-            return queryset.filter(listing__approved__isnull=True)
+            return queryset.filter(approved__isnull=True)
 
-        return queryset.filter(listing__approved__isnull=False)
+        return queryset.filter(approved__isnull=False)
+
+    def filter_line_items(self, queryset: QuerySet) -> QuerySet:
+        queryset = self.filter_line_items_with_offers_by_user(queryset)
+        queryset = self.filter_line_items_sold_to_user(queryset)
+        queryset = self.filter_line_items_by_sold_status(queryset)
+        queryset = self.filter_line_items_by_item_type(queryset)
+        queryset = self.filter_line_items_by_price(queryset)
+        queryset = self.filter_line_items_by_condition(queryset)
+        queryset = self.filter_line_items_by_query(queryset)
+        queryset = self.filter_line_items_by_item_id_and_content_type(queryset)
+        return queryset
+
+    def filter_line_items_with_offers_by_user(self, queryset: QuerySet) -> QuerySet:
+        try:
+            user_id = int(self.request.query_params.get('offers_by_user'))
+        except (ValueError, TypeError):
+            return queryset
+
+        if self.request.user.is_authenticated and user_id == self.request.user.id:
+            return queryset.filter(line_items__offers__user_id=user_id)
+
+        return queryset
+
+    def filter_line_items_sold_to_user(self, queryset: QuerySet) -> QuerySet:
+        try:
+            user_id = int(self.request.query_params.get('sold_to_user'))
+        except (ValueError, TypeError):
+            return queryset
+
+        if self.request.user.is_authenticated and user_id == self.request.user.id:
+            return queryset.filter(line_items__sold_to=user_id)
+
+        return queryset
 
     def filter_line_items_by_sold_status(self, queryset: QuerySet) -> QuerySet:
         sold = self.request.query_params.get('sold')
@@ -248,16 +242,16 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             return queryset
 
         if sold == 'true':
-            return queryset.filter(sold__isnull=False)
+            return queryset.filter(line_items__sold__isnull=False)
 
-        return queryset.filter(sold__isnull=True)
+        return queryset.filter(line_items__sold__isnull=True)
 
     def filter_line_items_by_item_type(self, queryset: QuerySet) -> QuerySet:
         item_type = self.request.query_params.get('item_type')
         if item_type:
             content_type = EquipmentService.item_type_to_content_type(item_type)
             if content_type:
-                return queryset.filter(item_content_type=content_type)
+                return queryset.filter(line_items__item_content_type=content_type)
         return queryset
 
     def filter_line_items_by_price(self, queryset: QuerySet) -> QuerySet:
@@ -278,13 +272,13 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             min_price = float(min_price)
             if currency != 'CHF' and exchange_rate and exchange_rate.rate:
                 min_price /= float(exchange_rate.rate)
-            queryset = queryset.filter(price_chf__gte=min_price)
+            queryset = queryset.filter(line_items__price_chf__gte=min_price)
 
         if max_price and currency:
             max_price = float(max_price)
             if currency != 'CHF' and exchange_rate and exchange_rate.rate:
                 max_price /= float(exchange_rate.rate)
-            queryset = queryset.filter(price_chf__lte=max_price)
+            queryset = queryset.filter(line_items__price_chf__lte=max_price)
 
         return queryset
 
@@ -292,26 +286,29 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         condition = self.request.query_params.get('condition')
         if condition and condition not in (item.value for item in MarketplaceLineItemCondition):
             raise ValidationError({'condition': gettext('Invalid condition.')})
-        return queryset.filter(condition=condition) if condition else queryset
+        return queryset.filter(line_items__condition=condition) if condition else queryset
 
     def filter_line_items_by_query(self, queryset: QuerySet) -> QuerySet:
         query = self.request.query_params.get('query')
         if query:
             if 'postgres' in settings.DATABASES['default']['ENGINE']:
                 queryset = queryset.annotate(
-                    item_name_distance=TrigramDistance('item_name', query),
-                    title_distance=TrigramDistance('listing__title', query)
+                    item_name_distance=TrigramDistance('line_items__item_name', query),
+                    title_distance=TrigramDistance('title', query)
                 ).filter(
-                    Q(item_name__icontains=query) |
+                    Q(line_items__item_name__icontains=query) |
                     Q(item_name_distance__lte=.8) |
-                    Q(listing__title__icontains=query) |
+                    Q(title__icontains=query) |
                     Q(title_distance__lte=.8)
                 ).order_by(
                     'item_name_distance',
                     'title_distance'
                 )
             else:
-                queryset = queryset.filter(Q(item_name__icontains=query) | Q(listing__title__icontains=query))
+                queryset = queryset.filter(
+                    Q(line_items__item_name__icontains=query) |
+                    Q(title__icontains=query)
+                )
 
         return queryset
 
@@ -321,7 +318,10 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
         if item_id and content_type_id:
             content_type = ContentType.objects.get_for_id(content_type_id)
-            return queryset.filter(item_object_id=item_id, item_content_type=content_type)
+            return queryset.filter(
+                line_items__item_object_id=item_id,
+                line_items__item_content_type=content_type
+            )
 
         return queryset
 
