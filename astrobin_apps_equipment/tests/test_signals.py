@@ -112,10 +112,13 @@ class SignalsTest(TestCase):
         )
         self.assertEqual(1, EquipmentItemMarketplaceMasterOffer.objects.filter(offers=offer_2).count())
 
-        push_notification.assert_called_with([seller], buyer, 'marketplace-offer-created', mock.ANY)
+        push_notification.assert_has_calls([
+            mock.call([seller], buyer, 'marketplace-offer-created', mock.ANY),
+            mock.call([buyer], seller, 'marketplace-offer-created-buyer', mock.ANY),
+        ])
 
-        # Two offers created still results in one notification.
-        push_notification.asset_called_once()
+        # Only one notification for the seller and one for the buyer
+        push_notification.asset_called_times(2)
 
     def test_marketplace_master_offer_deleted(self):
         seller = Generators.user()
