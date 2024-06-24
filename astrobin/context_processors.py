@@ -12,6 +12,7 @@ from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_premium.services.premium_service import PremiumService
 from common import constants
+from common.constants import GroupName
 from common.forms.abuse_report_form import AbuseReportForm
 
 
@@ -150,7 +151,8 @@ def common_variables(request):
             'SubjectType': SubjectType,
         },
         'constants': constants,
-        'abuse_report_form': AbuseReportForm()
+        'abuse_report_form': AbuseReportForm(),
+        'BETA_TESTERS_GROUP_NAME': GroupName.BETA_TESTERS,
     }
 
     if request.user.is_authenticated and request.user.userprofile.is_image_moderator():

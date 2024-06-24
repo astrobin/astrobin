@@ -1,0 +1,22 @@
+{% load i18n %}
+
+
+{% blocktrans trimmed %}
+    Your offer for "{{ listing }}" has been retracted.
+{% endblocktrans %}
+
+{% for offer in retracted_offers %}
+    {% trans "Item" %}: {{ offer.line_item }}
+    {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
+    {% if offer.line_item.shipping_cost %}
+        {% trans "Shipping" %}: {{ offer.line_item.currency }} {{ offer.line_item.shipping_cost }}
+    {% endif %}
+    {% if not forloop.last %}
+
+    {% endif %}
+{% endfor %}
+
+
+{% trans "View listing" %}:
+{{ listing_url }}
+

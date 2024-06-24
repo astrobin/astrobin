@@ -6,6 +6,7 @@ from rest_framework.throttling import ScopedRateThrottle
 
 from astrobin.models import Image
 from astrobin_apps_images.api.serializers import ImageSearchSerializer
+from common.api_page_size_pagination import PageSizePagination
 from common.permissions import ReadOnly
 
 
@@ -19,3 +20,4 @@ class ImageSearchView(HaystackViewSet):
     ordering = ('-published',)
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'search'
+    pagination_class = PageSizePagination

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-17 08:39+0000\n"
-"PO-Revision-Date: 2023-10-17 10:14+0200\n"
+"POT-Creation-Date: 2024-05-24 10:35+0000\n"
+"PO-Revision-Date: 2023-11-20 18:44+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.28 20230927-1\n"
+"X-Loco-Api-Version: 1.0.28 20240520-1\n"
 
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Sajnáljuk, már túl késő visszavonni ezt a beküldést."
@@ -35,7 +35,7 @@ msgid "You cannot submit your own image."
 msgstr "Nem küldheted be a saját képed."
 
 msgid "You cannot submit an image you collaborated to."
-msgstr ""
+msgstr "Ne küldhetsz be olyan képet, amihez hozzájárultál."
 
 msgid "Images in the staging area cannot be submitted."
 msgstr "Az előkészítési területen lévő képek nem küldhetők be."
@@ -70,6 +70,9 @@ msgstr "A kép már IOTD volt a múltban"
 msgid "You have already submitted %(max_allowed)s image(s) today."
 msgstr "Ma már beküldtél %(max_allowed)s képet."
 
+msgid "This image has been disqualified from the IOTD/TP process."
+msgstr ""
+
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "Nem vagy tagja az IOTD Átnézők táblájának."
 
@@ -77,7 +80,7 @@ msgid "You cannot vote for your own image."
 msgstr "Nem szavazhatsz a saját képedre."
 
 msgid "You cannot vote for an image you collaborated to."
-msgstr ""
+msgstr "Nem szavazhatsz olyan képre, amihez hozzájárultál."
 
 msgid "Images in the staging area cannot be voted for."
 msgstr "Az előkészítési területen lévő képekre nem lehet szavazni."
@@ -123,7 +126,7 @@ msgid "You cannot elect your own image."
 msgstr "Nem választhatod meg a saját képed."
 
 msgid "You cannot elect an image you collaborated to."
-msgstr ""
+msgstr "Nem választhatsz olyan képet, amihez hozzájárultál."
 
 msgid "Images in the staging area cannot be elected."
 msgstr "Az előkészítési területen lévő képek nem választhatók meg."
@@ -201,7 +204,7 @@ msgid "Image of the day"
 msgstr "A nap képe"
 
 msgid "You are not authenticated. Please log in."
-msgstr ""
+msgstr "Nem vagy hitelesítve. Kérjük, jelentkezz be."
 
 msgid "You are not the owner of this image."
 msgstr ""
@@ -233,17 +236,34 @@ msgstr ""
 
 msgid "Your settings indicate that you opted to be excluded from competitions."
 msgstr ""
+"A beállításaid alapján úgy döntöttél, hogy nem veszel részt versenyekben."
 
 msgid "You are currently serving a ban from competitions on AstroBin."
-msgstr ""
+msgstr "Jelenleg ki vagy tiltva az AstroBin versenyekből."
 
 #, python-format
 msgid ""
 "Unfortunately it's too late: images can be submitted only within "
 "%(num_days)s days after publication."
 msgstr ""
+"Sajnos már túl késő: képeket csak a közzétételt követő %(num_days)s napon "
+"belül lehet beküldeni."
+
+msgid ""
+"You have not agreed to the IOTD/TP rules and guidelines since their last "
+"update. Please amend this in your profile preferences and then submit the "
+"image again using the Actions menu."
+msgstr ""
 
 msgid "Unknown reason. This should never happen, please contact us!"
+msgstr ""
+"Ismeretlen ok. Ennek soha nem szabadna előfordulnia, kérjük, vedd fel velünk "
+"a kapcsolatot!"
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
 msgstr ""
 
 #~ msgid ""

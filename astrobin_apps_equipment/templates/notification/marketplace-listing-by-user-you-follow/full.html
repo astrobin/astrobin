@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        <strong>{{ seller_display_name }}</strong> published a marketplace listing <strong>{{ listing }}</strong>
+    {% endblocktrans %}.
+</p>
+
+<p>
+    <strong>
+        {% blocktrans trimmed %}
+           You received this notification because you follow this user.
+        {% endblocktrans %}
+    </strong>
+</p>
+
+<a href="{{ listing_url }}" class="btn btn-primary">{% trans "View listing" %}</a>

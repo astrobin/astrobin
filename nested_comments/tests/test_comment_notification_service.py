@@ -96,10 +96,9 @@ class CommentNotificationServiceTest(TestCase):
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
-    @patch("astrobin.signals.push_notification")
     @patch("nested_comments.services.comment_notifications_service.add_story")
     def test_send_notifications_top_level_with_mention_but_no_notification(
-            self, add_story, push_notification_from_signals, push_notification, get_scores):
+            self, add_story, push_notification, get_scores):
         get_scores.return_value = {'user_scores_index': 2}
 
         image = Generators.image()
@@ -108,14 +107,13 @@ class CommentNotificationServiceTest(TestCase):
         comment = NestedCommentsGenerators.comment(
             author=commenter, target=image, text='[quote="%s"]Foo[/quote]' % image.user.username)
 
-        push_notification.assert_called_with([image.user], commenter, 'new_comment', mock.ANY)
+        push_notification.assert_has_calls([
+            mock.call(mock.ANY, commenter, 'new_comment', mock.ANY),
+            mock.call(mock.ANY, commenter, 'new_comment_mention', mock.ANY),
+        ], any_order=True)
 
         with self.assertRaises(AssertionError):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment_reply', mock.ANY)
-
-        # This is called anyway but will have no effect since there is not NoticeSetting for this user. The goal of this
-        # test is to check that the 'new_comment' notification is sent.
-        push_notification_from_signals.assert_called_with(mock.ANY, commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
             comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
@@ -124,10 +122,9 @@ class CommentNotificationServiceTest(TestCase):
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
-    @patch("astrobin.signals.push_notification")
     @patch("nested_comments.services.comment_notifications_service.add_story")
     def test_send_notifications_top_level_with_mention_and_notification(
-            self, add_story, push_notification_from_signals, push_notification, get_scores):
+            self, add_story, push_notification, get_scores):
         get_scores.return_value = {'user_scores_index': 2}
 
         image = Generators.image()
@@ -143,7 +140,7 @@ class CommentNotificationServiceTest(TestCase):
         with self.assertRaises(AssertionError):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment_reply', mock.ANY)
 
-        push_notification_from_signals.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
+        push_notification.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
             comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
@@ -185,10 +182,9 @@ class CommentNotificationServiceTest(TestCase):
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
-    @patch("astrobin.signals.push_notification")
     @patch("nested_comments.services.comment_notifications_service.add_story")
     def test_send_notifications_reply_with_mention_but_no_notification(
-            self, add_story, push_notification_from_signals, push_notification, get_scores):
+            self, add_story, push_notification, get_scores):
         get_scores.return_value = {'user_scores_index': 2}
 
         image = Generators.image()
@@ -204,7 +200,6 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object)
 
         push_notification.reset_mock()
-        push_notification_from_signals.reset_mock()
         add_story.resetMock()
 
         comment = NestedCommentsGenerators.comment(
@@ -217,7 +212,7 @@ class CommentNotificationServiceTest(TestCase):
 
         # This is called anyway but will have no effect since there is not NoticeSetting for this user. The goal of this
         # test is to check that the 'new_comment' notification is sent.
-        push_notification_from_signals.assert_called_with([commenter], replier, 'new_comment_mention', mock.ANY)
+        push_notification.assert_called_with([commenter], replier, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
             comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
@@ -226,10 +221,9 @@ class CommentNotificationServiceTest(TestCase):
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
-    @patch("astrobin.signals.push_notification")
     @patch("nested_comments.services.comment_notifications_service.add_story")
     def test_send_notifications_reply_with_mention_and_notification(
-            self, add_story, push_notification_from_signals, push_notification, get_scores):
+            self, add_story, push_notification, get_scores):
         get_scores.return_value = {'user_scores_index': 2}
 
         image = Generators.image()
@@ -246,7 +240,6 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object)
 
         push_notification.reset_mock()
-        push_notification_from_signals.reset_mock()
         add_story.resetMock()
 
         comment = NestedCommentsGenerators.comment(
@@ -256,7 +249,7 @@ class CommentNotificationServiceTest(TestCase):
             mock.call([image.user], replier, 'new_comment', mock.ANY),
         ], any_order=True)
 
-        push_notification_from_signals.assert_called_with([commenter], replier, 'new_comment_mention', mock.ANY)
+        push_notification.assert_called_with([commenter], replier, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
             comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
@@ -302,10 +295,9 @@ class CommentNotificationServiceTest(TestCase):
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
-    @patch("astrobin.signals.push_notification")
     @patch("nested_comments.services.comment_notifications_service.add_story")
     def test_send_notifications_reply_to_image_owner_with_mention_but_no_notification(
-            self, add_story, push_notification_from_signals, push_notification, get_scores):
+            self, add_story, push_notification, get_scores):
         get_scores.return_value = {'user_scores_index': 2}
 
         image = Generators.image()
@@ -322,7 +314,6 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object)
 
         push_notification.reset_mock()
-        push_notification_from_signals.reset_mock()
         add_story.resetMock()
 
         comment = NestedCommentsGenerators.comment(
@@ -338,7 +329,7 @@ class CommentNotificationServiceTest(TestCase):
 
         # This is called anyway but will have no effect since there is not NoticeSetting for this user. The goal of this
         # test is to check that the 'new_comment' notification is sent.
-        push_notification_from_signals.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
+        push_notification.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
             comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
@@ -347,10 +338,9 @@ class CommentNotificationServiceTest(TestCase):
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
-    @patch("astrobin.signals.push_notification")
     @patch("nested_comments.services.comment_notifications_service.add_story")
     def test_send_notifications_reply_to_image_owner_with_mention_and_notification(
-            self, add_story, push_notification_from_signals, push_notification, get_scores):
+            self, add_story, push_notification, get_scores):
         get_scores.return_value = {'user_scores_index': 2}
 
         image = Generators.image()
@@ -368,7 +358,6 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object)
 
         push_notification.reset_mock()
-        push_notification_from_signals.reset_mock()
         add_story.resetMock()
 
         comment = NestedCommentsGenerators.comment(
@@ -380,7 +369,7 @@ class CommentNotificationServiceTest(TestCase):
         with self.assertRaises(AssertionError):
             push_notification.assert_called_with([image.user], comment.author, 'new_comment_reply', mock.ANY)
 
-        push_notification_from_signals.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
+        push_notification.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
             comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,

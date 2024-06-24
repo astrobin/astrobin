@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-17 08:39+0000\n"
-"PO-Revision-Date: 2023-10-17 10:36+0200\n"
+"POT-Creation-Date: 2024-05-24 10:34+0000\n"
+"PO-Revision-Date: 2024-02-22 23:50+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.28 20230927-1\n"
+"X-Loco-Api-Version: 1.0.28 20240520-1\n"
 
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
@@ -995,11 +995,22 @@ msgid "Cameras"
 msgstr "Camere"
 
 msgid ""
+"Sorry, you cannot automatically submit images for IOTD/TP consideration if "
+"you have not had any images selected as Top Pick or Image of the Day before. "
+"Please submit images individually using the Actions menu."
+msgstr ""
+
+msgid ""
 "You cannot be excluded from competitions and automatically submit images for "
 "IOTD/TP consideration at the same time."
 msgstr ""
 "Non puoi essere escluso dalle competizioni e inviare automaticamente le "
 "immagini alla IOTD/TP contemporaneamente."
+
+msgid ""
+"You must agree to the IOTD/TP rules and guidelines before you can "
+"automatically submit images for IOTD/TP consideration."
+msgstr ""
 
 msgid "If you have a personal website, put the address here."
 msgstr "Se hai un sito web personale, scrivi qui l'indirizzo."
@@ -1560,6 +1571,9 @@ msgstr "Aurora boreale"
 msgid "Noctilucent clouds"
 msgstr "Nubi nottilucenti"
 
+msgid "Landscape"
+msgstr ""
+
 msgid "Gear"
 msgstr "Strumentazione"
 
@@ -1746,6 +1760,13 @@ msgid "Do not notify your followers about this image upload."
 msgstr ""
 "Non notificare i tuoi follower riguardo il caricamento di questa immagine."
 
+msgid "Skip activity stream"
+msgstr ""
+
+msgid ""
+"Do not create an entry on the front page's activity stream for this event."
+msgstr ""
+
 msgid "(no title)"
 msgstr "(senza titolo)"
 
@@ -1761,6 +1782,13 @@ msgstr ""
 
 msgid "Do not notify your followers about this revision."
 msgstr "Non notificare i tuoi follower riguardo questa versione."
+
+msgid "Parent collection"
+msgstr ""
+
+msgid ""
+"If you want to create a nested collection, select the parent collection here."
+msgstr ""
 
 msgid "Images"
 msgstr "Immagini"
@@ -1788,6 +1816,9 @@ msgstr "3 - Cielo di campagna (BLU)"
 
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4 - Transizione campagna/suburbana (VERDE/GIALLO)"
+
+msgid "4.5 - Semi-Suburban/Transition sky (YELLOW)"
+msgstr ""
 
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5 - Cielo suburbano (ARANCIONE)"
@@ -2113,6 +2144,16 @@ msgid ""
 msgstr ""
 "Clicca questa casella per inviare le tue immagini alla %(0)sIOTD/TP%(1)s "
 "automaticamente quando vengono pubblicate."
+
+msgid "I agree to the IOTD/TP rules and guidelines"
+msgstr ""
+
+#, python-format
+msgid ""
+"Check this box to confirm that you have read and agree to the IOTD/TP "
+"%(_0)srules%(_1)s and %(_2)sguidelines%(_3)s. Your images won't be submitted "
+"for IOTD/TP consideration if you don't agree."
+msgstr ""
 
 msgid "Open notifications in a new tab"
 msgstr "Apri le notifiche in un nuovo tab"
@@ -2887,12 +2928,14 @@ msgstr "Zulu"
 msgid "You are not allowed to see this page."
 msgstr "L'accesso a questa pagina non ti è permesso."
 
-msgid ""
-"Sorry, but the page you are looking for is not here. If you expected an "
-"image, this means that the author deleted it."
+msgid "Sorry, but the page you are looking for is not here."
 msgstr ""
-"Spiacenti, ma la pagina che cercavi non è qui. Se ti aspettavi un immagine, "
-"questo vuol dire che è stata cancellata dal suo autore."
+
+msgid "Deleted"
+msgstr "Cancellata"
+
+msgid "Sorry, but the item you are looking for has been deleted."
+msgstr ""
 
 msgid "Fatal error"
 msgstr "Errore fatale"
@@ -2903,11 +2946,8 @@ msgstr "Niente di cui preoccuparsi, non è colpa tua."
 msgid ""
 "Something unexpected occurred! We have received an email with technical "
 "details, so we will try to fix the problem as soon as possible. Sorry about "
-"the inconvenience! "
+"the inconvenience!"
 msgstr ""
-"È accaduto qualcosa di inaspettato. Abbiamo ricevuto una e-mail con tutti i "
-"dettagli tecnici, quindi cercheremo di risolvere il problema al più presto "
-"possibile. Spiacenti per il disagio!"
 
 msgid "Go back to the home page."
 msgstr "Torna alla home."
@@ -2961,6 +3001,24 @@ msgstr "Normale"
 
 msgid "Electronically-Assisted Astronomy (EAA)"
 msgstr "Astronomia Assistita Elettronicamente (EAA)"
+
+msgid "Collection"
+msgstr "Cartella"
+
+msgid "Tools"
+msgstr "Strumenti"
+
+msgid "Create new collection"
+msgstr "Crea nuova cartella"
+
+msgid "Empty collection"
+msgstr ""
+
+msgid "No collection"
+msgstr ""
+
+msgid "This user does not have any collections."
+msgstr "Questo utente non ha alcuna cartella."
 
 msgid "AstroBin is in READ ONLY mode "
 msgstr "AstroBin è in modalità a SOLA LETTURA."
@@ -3125,6 +3183,9 @@ msgstr "Cancella avatar"
 msgid "Delete selected"
 msgstr "Cancella selezionati"
 
+msgid "Don't show this again"
+msgstr ""
+
 msgid "Hey!"
 msgstr "Ehi!"
 
@@ -3201,6 +3262,23 @@ msgstr ""
 
 msgid "Back to top"
 msgstr "Torna su"
+
+msgid ""
+"AstroBin detected that your password does not meet security requirements."
+msgstr ""
+
+msgid ""
+"To prevent spam, phishing, and other malicious activities, all your new "
+"content posted on AstroBin will be moderated until you have changed your "
+"password to meet security requirements, or you have enabled two-factor "
+"authentication."
+msgstr ""
+
+msgid "Change your password"
+msgstr "Cambia la password"
+
+msgid "Two-factor Authentication"
+msgstr "Autenticazione a due fattori"
 
 msgid "Save"
 msgstr "Salva"
@@ -3628,6 +3706,12 @@ msgstr "Esplora"
 msgid "Advanced search"
 msgstr "Ricerca avanzata"
 
+msgid "Equipment database"
+msgstr ""
+
+msgid "Equipment marketplace"
+msgstr ""
+
 msgid "Constellations"
 msgstr "Costellazioni"
 
@@ -3698,9 +3782,6 @@ msgstr "Ricevuti"
 
 msgid "Sent"
 msgstr "Inviato"
-
-msgid "Deleted"
-msgstr "Cancellata"
 
 msgid "API Keys"
 msgstr "API Keys"
@@ -3974,6 +4055,12 @@ msgstr "Contiene"
 msgid "And %(count)s more."
 msgstr "E %(count)s altre."
 
+msgid "Loading..."
+msgstr "Caricamento in corso..."
+
+msgid "Acquisition details"
+msgstr "Dettagli d'acquisizione"
+
 msgid "Remove me"
 msgstr "Rimuovimi"
 
@@ -4017,14 +4104,26 @@ msgstr ""
 msgid "Histogram"
 msgstr "Istogramma"
 
+#, python-format
+msgid ""
+"\n"
+"                <strong>%(user)s</strong> wants to add you as a collaborator "
+"to this image.\n"
+"            "
+msgstr ""
+
+#, python-format
+msgid "%(_0)sLearn more.%(_1)s"
+msgstr ""
+
+msgid "Deny"
+msgstr ""
+
 msgid "Right ascension"
 msgstr "Ascensione retta"
 
 msgid "Declination"
 msgstr "Declinazione"
-
-msgid "Acquisition details"
-msgstr "Dettagli d'acquisizione"
 
 msgid "Frames"
 msgstr "Pose"
@@ -4101,11 +4200,17 @@ msgstr ""
 "Questo strumento non è stato ancora approvato e potrebbe richiedere la tua "
 "attenzione."
 
+msgid "No equipment specified."
+msgstr ""
+
 msgid "Revision title"
 msgstr "Titolo della versione"
 
 msgid "Download original file"
 msgstr "Scarica il file originale"
+
+msgid "Original filename"
+msgstr ""
 
 msgid "Collaborators"
 msgstr "Collaboratori"
@@ -4113,8 +4218,17 @@ msgstr "Collaboratori"
 msgid "Photographer"
 msgstr "Fotografo"
 
+msgid "Collaborators (pending approval)"
+msgstr ""
+
 msgid "chosen by"
 msgstr "scelta da"
+
+msgid "From the marketplace"
+msgstr ""
+
+msgid "reserved"
+msgstr ""
 
 msgid "Actions"
 msgstr "Azioni"
@@ -4413,6 +4527,65 @@ msgstr ""
 "Questo causerà la rigenerazione di tutte le miniature per questa immagine e "
 "le sue versioni."
 
+msgid ""
+"The “AstroBin Image of the Day and Top Picks”, or IOTD/TP, is a long-running "
+"system to promote beautiful, interesting, peculiar, or otherwise amazing "
+"astrophotographs, with a focus on technical excellence."
+msgstr ""
+
+msgid "Learn more."
+msgstr "Scopri di più."
+
+msgid "Submitted"
+msgstr ""
+
+msgid ""
+"The date and time when you submitted this image for IOTD/TP consideration."
+msgstr ""
+
+msgid "Views by Submitters (available since September 19th, 2023)"
+msgstr ""
+
+#, python-format
+msgid ""
+"Every image is assigned to %(_0)s%% of available Submitters. In the event "
+"that at least 80%% of them don't view the image before its time in the IOTD/"
+"TP process expires, it's assigned to the other %(_0)s%% of Submitters and "
+"the process begins anew."
+msgstr ""
+
+msgid "Promotions by Submitters"
+msgstr ""
+
+#, python-format
+msgid ""
+"When %(_0)s distinct Submitters promote the image, it moves on to the next "
+"stage of the process: evaluation for Top Pick status. This requirement, in "
+"addition to anonymization of images and distribution to only a subset of "
+"them, prevents biases and ensures that the best images are selected."
+msgstr ""
+
+msgid "Promotions by Reviewers"
+msgstr ""
+
+#, python-format
+msgid ""
+"When %(_0)s distinct Reviewers promote the image, it moves on to the next "
+"stage of the process: evaluation for IOTD status."
+msgstr ""
+
+msgid "Early dismissal"
+msgstr ""
+
+#, python-format
+msgid ""
+"Staff members have a lot of images to inspect on a daily basis, and they can "
+"dismiss images if they believe they don't meet the requirements for IOTD/TP "
+"selection. If an image is dismissed %(_0)s times, it's removed from the "
+"process. This streamlines the process and ensures that any bias present in "
+"promotions could be overruled by other staff members."
+msgstr ""
+
 msgid "The following people like this image"
 msgstr "Alle seguenti persone piace la tua immagine"
 
@@ -4514,6 +4687,12 @@ msgstr ""
 "particolari o altrimenti straordinarie, con un'attenzione particolare "
 "all'eccellenza tecnica."
 
+#, python-format
+msgid ""
+"I have read and I agree with the IOTD/TP %(_0)srules%(_1)s and "
+"%(_2)sguidelines%(_3)s"
+msgstr ""
+
 msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
 "                    revision!"
@@ -4572,9 +4751,6 @@ msgstr "Mappa stellare"
 
 msgid "Upgrade your account to enable plate-solving."
 msgstr "Fai l'upgrade del tuo account per abilitare la riduzione astrometrica."
-
-msgid "Learn more."
-msgstr "Scopri di più."
 
 #, python-format
 msgid ""
@@ -4666,9 +4842,6 @@ msgstr "Di che tipo di immagine si tratta?"
 
 msgid "Edit your image: basic information"
 msgstr "Modifica l'immagine: informazioni di base"
-
-msgid "Loading..."
-msgstr "Caricamento in corso..."
 
 msgid "Next step: gear used"
 msgstr "Possimo passo: strumentazione usata"
@@ -4868,6 +5041,9 @@ msgstr "Zoom clicca-e-trascina non disponibile."
 msgid "Published"
 msgstr "Pubblicato"
 
+msgid "Last acquisition"
+msgstr ""
+
 msgid "Views"
 msgstr "Visite"
 
@@ -4915,10 +5091,8 @@ msgstr "Compra adesso"
 
 #, python-format
 msgid ""
-"Interested in <strong>%(name)s</strong>? Our sponsors sells this product!"
+"Interested in <strong>%(name)s</strong>? Our sponsors sell this product!"
 msgstr ""
-"Interessato a <strong>%(name)s</strong>? I nostri sponsor vendono questo "
-"prodotto!"
 
 #, python-format
 msgid ""
@@ -4932,6 +5106,21 @@ msgstr ""
 msgid ""
 "Interested in <strong>%(brand)s</strong>? Our sponsors sells this brand!"
 msgstr "Interessato a %(brand)s? I nostro sponsor vendono questo marchio!"
+
+#, python-format
+msgid ""
+"\n"
+"                                AstroBin's Marketplace has <strong>"
+"%(count)s</strong> items similar to what you're\n"
+"                                looking for!\n"
+"                            "
+msgstr ""
+
+msgid "Take a look!"
+msgstr ""
+
+msgid "Top pick nomination"
+msgstr "Nomina Top pick"
 
 msgid "Integration"
 msgstr "Integrazione"
@@ -4947,12 +5136,6 @@ msgstr "Nessun risultato. Spiacente."
 
 msgid "Please input some search terms!"
 msgstr "Inserisci qualche termine di ricerca!"
-
-msgid "Home of Astrophotography"
-msgstr "Casa dell'Astrofotografia"
-
-msgid "Latest from the forums"
-msgstr "Ultime dal forum"
 
 msgid "Closed"
 msgstr "Chiuso"
@@ -4972,8 +5155,11 @@ msgstr "Iniziato da un utente che non esiste più"
 msgid "Last post by <a href=\"%(last_post_user_url)s\">%(username)s</a>"
 msgstr "Ultimo post da <a href=\"%(last_post_user_url)s\">%(username)s</a>"
 
-msgid "This topic has no replies."
-msgstr "Questo argomento non ha risposte."
+msgid "Home of Astrophotography"
+msgstr "Casa dell'Astrofotografia"
+
+msgid "Latest from the forums"
+msgstr "Ultime dal forum"
 
 msgid "Recent images"
 msgstr "Immagini recenti"
@@ -5079,6 +5265,17 @@ msgstr "Approva selezione e banna il resto"
 msgid "There are no images in the spam list."
 msgstr "Non ci sono immagini nella lista dello spam."
 
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> accepted your request to add them as collaborator "
+"to your image"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user)s accepted your request to add them as collaborator to your image"
+msgstr ""
+
 msgid ""
 "You, or somebody on your behalf, attempted to log in to AstroBin from a "
 "different country than the one you were seen in last time, or from a country "
@@ -5088,19 +5285,11 @@ msgstr ""
 "diverso da quello in cui sei stato visto l'ultima volta, oppure da un Paese "
 "che non può essere rilevato."
 
-msgid ""
-"For your security, an additional confirmation token was sent in a separate "
-"email."
+msgid "Last known country"
 msgstr ""
-"Per la tua sicurezza, un codice di conferma aggiuntivo ti è stato inviato in "
-"una e-mail separata."
 
-msgid ""
-"If this was a legitimate login attempt, please use the token to complete the "
-"process."
+msgid "This login attempted in country"
 msgstr ""
-"Se questo era un tentativo di accesso legittimo, usa il codice per "
-"completare il processo."
 
 msgid ""
 "If you did not make this login attempt, please change your password and/or "
@@ -5108,18 +5297,6 @@ msgid ""
 msgstr ""
 "Se non hai effettuato tu questo tentativo di login, cambia la tua password e/"
 "o contatta AstroBin immediatamente."
-
-msgid ""
-"For your security, following this event, AstroBin has automatically enabled "
-"email-based two-factor authentication on your account. You can disable in "
-"your settings or using the link below."
-msgstr ""
-"Per la tua sicurezza, a seguito di questo evento, AstroBin ha "
-"automaticamente abilitato una autenticazione a due fattori via e-mail. Puoi "
-"disabilitarla nelle tue impostazioni oppure usando questo link."
-
-msgid "Two-factor Authentication"
-msgstr "Autenticazione a due fattori"
 
 msgid "Wishing you clear skies and excellent seeing!"
 msgstr "Ti auguriamo cieli sereni e ottimo seeing!"
@@ -5144,8 +5321,11 @@ msgstr ""
 msgid "Learn more about security standards on AstroBin:"
 msgstr "Scopri di più sugli standard di sicurezza su AstroBin:"
 
-msgid "Change your password:"
-msgstr "Cambia la password:"
+msgid ""
+"To prevent spam, phishing, and other malicious activities, all your new "
+"content posted on AstroBin will be moderated until you have changed your "
+"password to meet security requirements."
+msgstr ""
 
 msgid ""
 "AstroBin detected that your password does not meet security requirements"
@@ -5301,6 +5481,16 @@ msgid "Or send an email to support@astrobin.com."
 msgstr ""
 "Oppure mandare una email all'indirizzo support@astrobin.com. Parliamo "
 "Italiano!"
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> denied your request to add them as collaborator to "
+"your image"
+msgstr ""
+
+#, python-format
+msgid "%(user)s denied your request to add them as collaborator to your image"
+msgstr ""
 
 msgid "You have a new notification on AstroBin"
 msgstr "Hai una nuova notifica su AstroBin"
@@ -5505,6 +5695,15 @@ msgstr ""
 "La tua immagine non ha potuto essere sottoposta alla considerazione della "
 "IOTD/TP automaticamente"
 
+#, python-format
+msgid ""
+"You can find your preferences on the following page: %(_0)sYour preferences"
+"%(_1)s. Please look for the checkbox labelled \"I agree to the IOTD/TP rules "
+"and guidelines\". To submit your image for IOTD/TP consideration again, "
+"navigate to your image's page, find the \"Actions\" menu in the orange bar "
+"at the top, and click on \"Submit for IOTD/TP consideration\"."
+msgstr ""
+
 msgid ""
 "If you haven't already, please take a few minutes to learn how the process "
 "works:"
@@ -5518,8 +5717,8 @@ msgstr "Foto del giorno"
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> was plate-solved."
 msgstr ""
-"Non è stato possibile effettuare la riduzione astrometrica della tua <a href="
-"\"%(object_url)s\">immagine</a>."
+"<a href=\"%(object_url)s\">La tua immagine</a> è stata ridotta "
+"astrometricamente."
 
 #, python-format
 msgid "Your image at %(object_url)s was plate-solved."
@@ -5555,19 +5754,35 @@ msgstr ""
 msgid "You submitted your image for IOTD/TP consideration!"
 msgstr "Hai proposto la tua immagine al processo IOTD/TP!"
 
+msgid "An image you dismissed made it to IOTD"
+msgstr ""
+
+msgid ""
+"This means that you were in disagreement with the rest of the IOTD/TP staff. "
+"A variety of opinions and tastes is fine, but images should only be "
+"dismissed if they present glaring technical issues as documented in the IOTD "
+"manifesto:"
+msgstr ""
+
+msgid ""
+"Please only dismiss images if you are sure they are not up to the standards "
+"of the IOTD/TP."
+msgstr ""
+
+msgid "Thank you for your understanding."
+msgstr "Grazie per la comprensione."
+
+msgid "An image you dismissed made it to Top Pick"
+msgstr ""
+
 msgid "An image you promoted made it to IOTD"
 msgstr "Un'immagine per cui hai votato è diventata Foto del Giorno"
 
 msgid "An image you promoted made it to Top Pick"
 msgstr "Un'immagine per cui hai votato è diventata Top Pick"
 
-#, python-format
-msgid ""
-"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
-"more."
+msgid "You have been insufficiently active as an IOTD Submitter or Reviewer."
 msgstr ""
-"Sei stato inattivo in qualità di Propositore o Revisore IOTD per %(days)s "
-"giorni o più."
 
 msgid ""
 "While the AstroBin IOTD selection process has a good level of redundancy "
@@ -5579,11 +5794,9 @@ msgstr ""
 "selezioni nelle proprie code regolarmente."
 
 msgid ""
-"As you have not been active for a significant amount of time, you have been "
-"removed from the IOTD staff for now."
+"As you have not been sufficiently active for a significant amount of time, "
+"you have been removed from the IOTD staff for now."
 msgstr ""
-"Davo che non sei stato attivo per una quantità di tempo significativa, sei "
-"stato rimosso dallo staff IOTD per ora."
 
 msgid ""
 "This will ensure that potential IOTD or Top Pick candidates don't go "
@@ -5592,8 +5805,29 @@ msgstr ""
 "Questo assicurerà che immagini potenaizlmente IOTD or Top Pick non saranno "
 "ignorate nella coda di un membro dello staff inattivo."
 
+msgid ""
+"\n"
+"        If the reason for your inactivity is temporary, please let us know "
+"and we will be happy to reinstate you.\n"
+"    "
+msgstr ""
+
 msgid "Thank you for understanding!"
 msgstr "Grazie per la compreinsione!"
+
+msgid ""
+"\n"
+"    If the reason for your inactivity is temporary, please let us know and "
+"we will be happy to reinstate you.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
+msgstr ""
+"Sei stato inattivo in qualità di Propositore o Revisore IOTD per %(days)s "
+"giorni o più."
 
 #, python-format
 msgid ""
@@ -5602,6 +5836,14 @@ msgid ""
 msgstr ""
 "Dopo %(max_inactivity_days)s giorni di inattività (contatti dall'ultima "
 "selezione che hai fatto nella tua coda) sarai rimosso dallo staff IOTD."
+
+#, python-format
+msgid ""
+"During the last %(min_promotions_days)s days, you have made less than "
+"%(min_promotions)s selections, and this is not enough to sustain the IOTD/TP "
+"process. If this continues, unfortunately you will be automatically removed "
+"from the staff."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5918,6 +6160,54 @@ msgid "%(user)s commented on your edit proposal"
 msgstr "%(user)s ha commentato la tua proposta di modifica"
 
 #, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> started a private conversation on your "
+"marketplace listing <strong>%(target)s</strong>."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user)s started a private conversation on your marketplace listing "
+"\"%(target)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> started a private conversation on your marketplace "
+"listing <strong>%(target)s</strong>"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> started a private conversation on your marketplace "
+"listing <strong>%(target)s</strong>."
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> posted on your private conversation on "
+"marketplace listing <strong>%(target)s</strong>."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user)s posted on your private conversation on marketplace listing "
+"\"%(target)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> posted on your private conversation on marketplace "
+"listing <strong>%(target)s</strong>"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> posted on your private conversation on marketplace "
+"listing <strong>%(target)s</strong>."
+msgstr ""
+
+#, python-format
 msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> ha commentato la IOTD che hai "
@@ -5952,11 +6242,9 @@ msgstr "%(user)s ha commentato il tuo strumento non approvato \"%(target)s\"."
 
 #, python-format
 msgid ""
-"<strong>%(user)s</strong> commented on your unapproved equiment item <strong>"
-"%(target)s</strong>"
-msgstr ""
-"<strong>%(user)s</strong> ha commentato il tuo strumento non approvato "
+"<strong>%(user)s</strong> commented on your unapproved equipment item "
 "<strong>%(target)s</strong>"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6073,6 +6361,9 @@ msgstr ""
 "Se non vuoi più ricevere notifiche su nuovi post in questo topic, visita <a "
 "href=\"%(unsubscribe_url)s\">questo link.</a>"
 
+msgid "View post"
+msgstr ""
+
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> replied in a topic to which you are subscribed: "
@@ -6082,12 +6373,32 @@ msgstr ""
 "%(topic_name)s</em>"
 
 #, python-format
-msgid "<strong>%(user)s</strong> replied in topic to which you are subscribed"
-msgstr "<strong>%(user)s</strong> ha risposto in un topic a cui sei abbonato"
+msgid ""
+"<strong>%(user)s</strong> replied in a topic to which you are subscribed"
+msgstr ""
 
 #, python-format
-msgid "%(user)s replied in topic to which you are subscribed"
-msgstr "%(user)s replied in topic to which you are subscribed"
+msgid "%(user)s replied in a topic to which you are subscribed"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> replied in a topic that you started."
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> replied in a topic that you started: <em>"
+"%(topic_name)s</em>"
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> replied in a topic that you started"
+msgstr ""
+
+#, python-format
+msgid "%(user)s replied in a topic that you started"
+msgstr ""
 
 #, python-format
 msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
@@ -6253,6 +6564,31 @@ msgstr ""
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr "%(creator)s ha creato un nuovo gruppo pubblico: \"%(group_name)s\""
 
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> asked a question on your marketplace "
+"listing <strong>%(target)s</strong>."
+msgstr ""
+
+msgid "View question"
+msgstr ""
+
+#, python-format
+msgid "%(user)s asked a question on your marketplace listing \"%(target)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> asked a question on your marketplace listing "
+"<strong>%(target)s</strong>"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> asked a question on your marketplace listing "
+"<strong>%(target)s</strong>."
+msgstr ""
+
 msgid "Thank you for your subscription!"
 msgstr "Grazie per il tuo abbonamento!"
 
@@ -6278,13 +6614,43 @@ msgstr ""
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> posted a new topic in the forum for "
+"equipment item <a href=\"%(item_url)s\">%(item)s</a> that you follow."
+msgstr ""
+
+msgid "View topic"
+msgstr "Vai all'argomento"
+
+#, python-format
+msgid ""
+"%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
+"that you follow"
+msgstr ""
+
+msgid "View the topic"
+msgstr "Vai all'argomento"
+
+msgid "View the equipment item"
+msgstr "Vedi strumento"
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> posted a new topic in the forum for equipment item "
+"<strong>%(item)s</strong> that you follow: <em>%(topic_name)s</em>"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
+"that you follow: \"%(topic_name)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic in the forum for "
 "equipment item <a href=\"%(item_url)s\">%(item)s</a> that you have used."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> ha postato un nuovo argomento nel "
 "forum dello strumento <a href=\"%(item_url)s\">%(item)s</a> che tu hai usato."
-
-msgid "View topic"
-msgstr "Vai all'argomento"
 
 #, python-format
 msgid ""
@@ -6293,12 +6659,6 @@ msgid ""
 msgstr ""
 "%(user)s ha postato un nuovo argomento nel forum dello strumento \"%(item)s"
 "\" che tu hai usato"
-
-msgid "View the topic"
-msgstr "Vai all'argomento"
-
-msgid "View the equipment item"
-msgstr "Vedi strumento"
 
 #, python-format
 msgid ""
@@ -6343,29 +6703,11 @@ msgstr ""
 msgid "%(user)s posted a new topic to the group: \"%(group_name)s\""
 msgstr "%(user)s ha creato un nuovo topic nel gruppo: \"%(group_name)s\""
 
-msgid ""
-"You have received a private message on AstroBin!\n"
-"Read it at the following link:\n"
-"\n"
-"<a href=\"https://www.astrobin.com/messages/inbox/\">https://www.astrobin."
-"com/messages/inbox/</a>"
+msgid "You have received a private message on AstroBin!"
 msgstr ""
-"Hai ricevuto un messaggio privato su AstroBin!\n"
-"Leggilo al seguente indirizzo:\n"
-"\n"
-"<a href=\"https://www.astrobin.com/messages/inbox/\">http://astrobin.com/"
-"messages/inbox/</a>"
 
-msgid ""
-"You have received a private message on AstroBin!\n"
-"Read it at the following link:\n"
-"\n"
-"https://www.astrobin.com/messages/inbox/"
+msgid "View message"
 msgstr ""
-"Hai ricevuto un messaggio privato su AstroBin!\n"
-"Leggilo a questo indirizzo:\n"
-"\n"
-"https://www.astrobin.com/messages/inbox/"
 
 msgid "You have received a new private message."
 msgstr "Hai ricevuto un nuovo messaggio privato."
@@ -6383,6 +6725,18 @@ msgstr ""
 #, python-format
 msgid "%(user)s removed themselves as a collaborator to your image"
 msgstr "%(user)s ha rimosso se stesso come collaboratore alla tua immagine"
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> requested to add you as a collaborator to an image"
+msgstr ""
+
+msgid "View the image to accept or decline the invitation."
+msgstr ""
+
+#, python-format
+msgid "%(user)s requested to add you as a collaborator to an image"
+msgstr ""
 
 msgid "Subscription canceled"
 msgstr "Abbonamento annullato"
@@ -6431,14 +6785,8 @@ msgid ""
 "(<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</a>), it was "
 "moved to its dedicated forum. When new topics are posted to the forum of an "
 "equipment item, all AstroBin users who have used it get notified (unless "
-"they have opted out of this kind of notifications)."
+"they have opted out of this kind of notification)."
 msgstr ""
-"Dato che il tuo argomento si riferisce, almeno parzialmente, ad uno "
-"strumento in particolare (<a href=\"%(equipment_item_url)s\">"
-"%(equipment_item_name)s</a>), è stato spostato al suo forum dedicato. Quando "
-"dei nuovi argomenti sono postati nei forum di uno strumento, tutti gli "
-"utenti AstroBin che l'hanno usato vengono notificati (a meno che non abbiano "
-"disattivato questo tipo di notifica)."
 
 #, python-format
 msgid ""
@@ -6464,13 +6812,8 @@ msgid ""
 "(%(equipment_item_name)s), it was moved to its dedicated forum. When new "
 "topics are posted to the forum of an equipment item, all AstroBin users who "
 "have used it get notified (unless they have opted out of this kind of "
-"notifications)."
+"notification)."
 msgstr ""
-"Dato che il tuo argomento si riferisce, almeno parzialmente, ad uno "
-"strumento in particolare (%(equipment_item_name)s), è stato spostato al suo "
-"forum dedicato. Quando dei nuovi argomenti sono postati nei forum di uno "
-"strumento, tutti gli utenti AstroBin che l'hanno usato vengono notificati (a "
-"meno che non abbiano disattivato questo tipo di notifica)."
 
 #, python-format
 msgid ""
@@ -6530,15 +6873,6 @@ msgstr ""
 
 #, python-format
 msgid ""
-"If you have astrophotography equipment, add it to <a href=\"%(url)s\">your "
-"gear</a> so that later you can associate it with the images you upload."
-msgstr ""
-"Se hai della strumentazione astrofotografica, aggiungila alla <a href="
-"\"%(url)s\">tua strumentazione</a> in modo da poterla assiciare alle "
-"immagini che poi caricherai."
-
-#, python-format
-msgid ""
 "If you want, why not <a href=\"%(url)s\">introduce yourself</a> on the "
 "forums?"
 msgstr "Se ti va, perché non <a href=\"%(url)s\">presentarti</a> sul forum?"
@@ -6558,13 +6892,6 @@ msgstr "Dai un'occhiata alle nostre domande frequenti:"
 
 msgid "Head over to your settings and configure your profile:"
 msgstr "Vai alla pagine delle preferenze e configura il tuo profilo:"
-
-msgid ""
-"If you have astrophotography equipment, add it to your gear so that later "
-"you can associate it with the images you upload:"
-msgstr ""
-"Se hai della strumentazione astrofotografica, aggiungila alla tua "
-"strumentazione in modo da poterla poi associare alle immagini che caricherai."
 
 msgid "If you want, why not introduce yourself on the forums?"
 msgstr "Se ti va, perché non presentarti sul forum?"
@@ -6596,6 +6923,155 @@ msgstr "La tua immagine è stata votata come Top Pick"
 
 msgid "Your image was nominated to be a Top Pick"
 msgstr "La tua immagine è stata nominata Top Pick"
+
+msgid "Your IOTD/TP staff member stats"
+msgstr ""
+
+msgid ""
+"Every first day of the month, AstroBin sends you a summary of your "
+"activities as an IOTD/TP staff member. The entire community is undoubtedly "
+"grateful for your contribution to the IOTD/TP process, and we hope you will "
+"keep doing it with the same passion and dedication. Without further ado, "
+"here is your most recent activity data."
+msgstr ""
+
+msgid "Period"
+msgstr ""
+
+msgid "Active days"
+msgstr ""
+
+msgid "Promotions"
+msgstr ""
+
+msgid "The total number of images you promoted."
+msgstr ""
+
+msgid "Wasted promotions"
+msgstr ""
+
+msgid ""
+"The number of images you promoted, but they did not end up getting an award. "
+"Broadly speaking, lower is better. However, since your queue features only a "
+"subset of the images in the IOTD/TP process, by design, it's normal to have "
+"wasted promotions."
+msgstr ""
+
+msgid "Missed TPN promotions"
+msgstr ""
+
+msgid ""
+"The number of images you saw in your queue, decided not to promote, but they "
+"ended up being awarded Top Pick Nomination."
+msgstr ""
+
+msgid "Missed TP promotions"
+msgstr ""
+
+msgid ""
+"The number of images you saw in your queue, decided not to promote, but they "
+"ended up being awarded Top Pick."
+msgstr ""
+
+msgid "Missed IOTD promotions"
+msgstr ""
+
+msgid ""
+"The number of images you saw in your queue, decided not to promote, but they "
+"ended up being awarded IOTD."
+msgstr ""
+
+msgid "Promotions to TPN"
+msgstr ""
+
+msgid ""
+"The number of images you you promoted and ended up being awarded Top Pick "
+"Nomination."
+msgstr ""
+
+msgid "Promotions to TP"
+msgstr ""
+
+msgid ""
+"The number of images you you promoted and ended up being awarded Top Pick."
+msgstr ""
+
+msgid "Promotions to IOTD"
+msgstr ""
+
+msgid "The number of images you you promoted and ended up being awarded IOTD."
+msgstr ""
+
+msgid "Dismissals"
+msgstr ""
+
+msgid ""
+"The total number of images you dismissed. Remember to dismiss only images "
+"with serious and undeniable technical issues."
+msgstr ""
+
+msgid "Correct dismissals"
+msgstr ""
+
+msgid ""
+"The number of images you dismissed, and ended up being dismissed enough "
+"times by other staff members, thus making them exit the IOTD/TP process "
+"early."
+msgstr ""
+
+msgid "Missed dismissals"
+msgstr ""
+
+msgid ""
+"The number of images you saw in your queue, decided not to dismiss, but they "
+"ended up being dismissed by other staff members. If this number is high, you "
+"might want to use the Dismiss button more often."
+msgstr ""
+
+msgid "Dismissals to TPN"
+msgstr ""
+
+msgid ""
+"The number of images you dismissed, but they ended up being awarded Top Pick "
+"Nomination. This number should be low, as you should only dismiss images "
+"with serious and undeniable technical issues."
+msgstr ""
+
+msgid "Dismissals to TP"
+msgstr ""
+
+msgid ""
+"The number of images you dismissed, but they ended up being awarded Top Pick."
+msgstr ""
+
+msgid ""
+"This number should be very low, ideally a zero, as you should only dismiss "
+"images with serious and undeniable technical issues. If this number is "
+"large, you probably misunderstood the Dismiss button and when to use it, or "
+"you are in severe disagreement with the other staff members, which suggests "
+"a misalignment of values that should be addressed to avoid detrimental "
+"effects on the IOTD/TP process."
+msgstr ""
+
+msgid "Dismissals to IOTD"
+msgstr ""
+
+msgid ""
+"The number of images you dismissed, but they ended up being awarded IOTD."
+msgstr ""
+
+msgid ""
+"\n"
+"    Every first day of the month, AstroBin sends you a summary of your "
+"activities as an IOTD/TP staff member. The entire\n"
+"     community is undoubtedly grateful for your contribution to the IOTD/TP "
+"process, and we hope you will keep doing it\n"
+"     with the same passion and dedication. Without further ado, here is your "
+"most recent activity data.\n"
+msgstr ""
+
+msgid "Your IOTD staff member stats"
+msgstr ""
 
 msgid "Object not found"
 msgstr "Oggetto non trovato"
@@ -7110,9 +7586,6 @@ msgstr "Hai effettuato il logout. Torna presto!"
 msgid "Password changed"
 msgstr "Password cambiata"
 
-msgid "Change your password"
-msgstr "Cambia la password"
-
 msgid "Password reset successfully"
 msgstr "Password resettata con successo"
 
@@ -7253,22 +7726,6 @@ msgstr ""
 "Usa questo modulo per inserire i codici di backup per l'accesso. Questi "
 "codici sono stati generati perché tu li stampi e li tenga al sicuro. "
 "Inserisci uno di questi codici di backup per fare l'accesso al tuo account."
-
-msgid ""
-"To make sure that this is a legitimate login attempt, we just sent you a one-"
-"time password token via e-mail."
-msgstr ""
-"Per assicurarci che questo sia un tentativo di accesso legittimo, ti abbiamo "
-"appena inviato un codice di password temporanea via e-mail."
-
-#, python-format
-msgid ""
-"To make sure that this is a legitimate login attempt, we just sent you a one-"
-"time password token via e-mail to the address <strong>%(user_email)s</"
-"strong>."
-msgstr ""
-"Per assicurarci che questo sia un tentativo di login legittimo, ti abbiamo "
-"mandato un token all'indirizzo e-mail <strong>%(user_email)s</strong>."
 
 msgid "Don't want this next time?"
 msgstr "Non vuoi più vedere questo?"
@@ -7576,9 +8033,6 @@ msgid ""
 msgstr ""
 "Tieniti al corrente sugli sviluppi di AstroBin seguendo la newsletter e i "
 "canali sociali!"
-
-msgid "Thank you for your understanding."
-msgstr "Grazie per la comprensione."
 
 #, python-format
 msgid "%(user)s's gallery"
@@ -7943,6 +8397,9 @@ msgstr "Coppie chiave/valore"
 msgid "Overlays"
 msgstr "Sovrapposizioni"
 
+msgid "deleted"
+msgstr ""
+
 msgid "Restore selected"
 msgstr "Ripristina selezionate"
 
@@ -7970,9 +8427,6 @@ msgstr ""
 "Clicca sulle immagini per includerle in questa cartella (e clicca  di nuovo "
 "per escluderle). Poi clicca sul tasto Salva in fondo."
 
-msgid "Create new collection"
-msgstr "Crea nuova cartella"
-
 msgid "Delete collection?"
 msgstr "Cancellare la cartella?"
 
@@ -7982,6 +8436,31 @@ msgid ""
 msgstr ""
 "La cartella sarà cancellata permanentemente e non può essere ripristinata. "
 "Le immagini che contiene, invce, non saranno cancellate. Sei sicuro?"
+
+msgid "Images in no collection"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        A collection by %(username)s\n"
+"                    "
+msgstr ""
+
+msgid "Images not in a collection"
+msgstr ""
+
+msgid "Nested collections"
+msgstr ""
+
+msgid "Parent collection:"
+msgstr ""
+
+msgid "View all collections"
+msgstr ""
+
+msgid "Images in this collection"
+msgstr ""
 
 msgid ""
 "The following images do not have the key/value tag chosen to order this "
@@ -7996,20 +8475,8 @@ msgstr "Questa cartella non contiene alcuna immagine."
 msgid "Would you like to add some images?"
 msgstr "Vorresti aggiungere delle immagini?"
 
-msgid "Collection"
-msgstr "Cartella"
-
-msgid "Tools"
-msgstr "Strumenti"
-
 msgid "You do not have any collections."
 msgstr "Non hai alcuna cartella."
-
-msgid "Do you want to create a collection now?"
-msgstr "Vuoi creare una cartella adesso?"
-
-msgid "This user does not have any collections."
-msgstr "Questo utente non ha alcuna cartella."
 
 msgid "Quick edit: key/value tags"
 msgstr "Modifica rapida: tag chiave/valore"
@@ -8050,6 +8517,9 @@ msgstr "Cerca per"
 
 msgid "Only animated"
 msgstr "Solo animazioni"
+
+msgid "Only videos"
+msgstr ""
 
 msgid "Award"
 msgstr "Premio"
@@ -8115,6 +8585,12 @@ msgstr "Dimensione (MB)"
 msgid "Acquired with a modified camera"
 msgstr "Acquisito con camera modificata"
 
+msgid "Acquired with a color or monochromatic camera"
+msgstr ""
+
+msgid "Acquired in certain months"
+msgstr ""
+
 msgid ""
 "However, you can still perform a similar search using the free text search "
 "terms field."
@@ -8140,11 +8616,48 @@ msgstr ""
 msgid "Select"
 msgstr "Seleziona"
 
+msgid ""
+"Results will include images that were acquired in any of the selected months."
+msgstr ""
+
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
 msgid "Add filter:"
 msgstr "Aggiungi filtro:"
-
-msgid "Top pick nomination"
-msgstr "Nomina Top pick"
 
 msgid "Min"
 msgstr "Min"
@@ -8157,6 +8670,12 @@ msgstr "Quale camera è stata usata nell'acquisizione dell'immagine?"
 
 msgid "Guider/planetary"
 msgstr "Guida/Planetaria"
+
+msgid "Color"
+msgstr ""
+
+msgid "Mono"
+msgstr ""
 
 msgid "Select range"
 msgstr "Seleziona intervalli"
@@ -8552,68 +9071,6 @@ msgstr ""
 "il tuo utilizzo del sito."
 
 msgid ""
-"This cookie is set once a visitor interacts with a Survey invitation modal "
-"popup. It is used to ensure that the same invite does not reappear if it has "
-"already been shown."
-msgstr ""
-"Questo cookie è impostato quando un visitatore interagisce con un invito ad "
-"un sondaggio. È usato per assicurarci che lo stesso invito non viene "
-"ripetuto se già mostrato."
-
-msgid ""
-"This cookie is set once a visitor completes a poll using the Feedback Poll "
-"widget. It is used to ensure that the same poll does not reappear if it has "
-"already been filled in."
-msgstr ""
-"Questo cookie è impostato quando un visitatore completa un sondaggio usando "
-"il widget di feedback. È usato per assicurarci che lo stesso invito non "
-"viene ripetuto se già mostrato."
-
-msgid ""
-"This cookie is set once a visitor minimizes a Feedback Poll widget. It is "
-"used to ensure that the widget stays minimized when the visitor navigates "
-"through your site."
-msgstr ""
-"Questo cookie è impostato quando un visitatore minimizza un widget di "
-"feedback. È usato per assicurarci che il widget resti minimizzato mentre "
-"navighi sul sito."
-
-msgid ""
-"This cookie is used by Hotjar to anonymously track your usage of the website."
-msgstr ""
-"Questo cookie è usato da Hotjar per monitorare in maniera anonima il tuo "
-"utilizzo di questo sito."
-
-msgid ""
-"This session cookie is set to let Hotjar know whether that visitor is "
-"included in the sample which is used to generate funnels."
-msgstr ""
-"Questo cookie è impostato per far sapere a Hotjar se questo visitatore deve "
-"essere incluso nel campione usato per generare i funnel."
-
-msgid ""
-"This cookie is set when a visitor minimizes or completes Incoming Feedback. "
-"This is done so that the Incoming Feedback will load as minimized "
-"immediately if the visitor navigates to another page where it is set to show."
-msgstr ""
-"Questo cookie è impostato quando un visitatore minimizza o completa un "
-"feedback. Viene fatto in modo che il feedback venga caricato come "
-"minimizzato immediatamente quando il visitatore naviga verso un altra pagina "
-"del sito."
-
-msgid ""
-"This cookie is set when the customer first lands on a page with the Hotjar "
-"script. It is used to persist the Hotjar User ID, unique to that site on the "
-"browser. This ensures that behavior in subsequent visits to the same site "
-"will be attributed to the same user ID."
-msgstr ""
-"Questo cookie viene impostato quando il cliente arriva per la prima volta su "
-"una pagina con lo script Hotjar. Viene utilizzato per mantenere l'ID utente "
-"Hotjar, univoco per quel sito sul browser. Ciò garantisce che il "
-"comportamento nelle visite successive allo stesso sito sarà attribuito allo "
-"stesso ID utente."
-
-msgid ""
 "This cookie is used by Google Ad Manager to register and report the website "
 "user's actions after viewing or clicking one of the advertiser's ads with "
 "the purpose of measuring the efficacy of an ad."
@@ -8676,11 +9133,19 @@ msgstr "Immagine caricata. Grazie!"
 msgid "Sorry, AstroBin was unable to activate the requested language"
 msgstr "Spiacenti, AstroBin non ha potuto attivare la lingua richiesta."
 
+msgid "Setting this collection as a parent would create a cycle"
+msgstr ""
+
 msgid "You already have a collection with that name"
 msgstr "Hai già una cartella con quel nome"
 
 msgid "Collection updated!"
 msgstr "Cartella modificata!"
+
+msgid ""
+"Please note: some of the images you added are in your staging area and won't "
+"be visible to visitors of this collection."
+msgstr ""
 
 msgid "Images updated!"
 msgstr "Immagini modificate!"
@@ -8708,21 +9173,6 @@ msgstr ""
 "Hai richiesto la revisione %s, ma non esiste oppure è stata cancellata. Ti "
 "abbiamo rediretto alla versione che è segnata come finale."
 
-msgid "Dates"
-msgstr "Date"
-
-msgid "Avg. Moon age"
-msgstr "Giorno lunare medio"
-
-msgid "days"
-msgstr "giorni"
-
-msgid "Avg. Moon phase"
-msgstr "Fase lunare media"
-
-msgid "Mean SQM"
-msgstr "SQM medio"
-
 msgid "Image deleted."
 msgstr "Immagine cancellata."
 
@@ -8740,6 +9190,15 @@ msgstr "Immagine spostata nell'area pubblica."
 
 msgid "Image submitted to the IOTD/TP process!"
 msgstr "Immagine inviata alla IOTD/TP!"
+
+msgid "Dates"
+msgstr "Date"
+
+msgid "You are now a collaborator on this image!"
+msgstr ""
+
+msgid "Collaborator request denied."
+msgstr ""
 
 #, python-format
 msgid "%s topics deleted"
@@ -8866,6 +9325,22 @@ msgstr ""
 
 #~ msgid "Number of images by subject type"
 #~ msgstr "Numero di immagini per tipo di soggetto"
+
+#~ msgid ""
+#~ "Sorry, but the page you are looking for is not here. If you expected an "
+#~ "image, this means that the author deleted it."
+#~ msgstr ""
+#~ "Spiacenti, ma la pagina che cercavi non è qui. Se ti aspettavi un "
+#~ "immagine, questo vuol dire che è stata cancellata dal suo autore."
+
+#~ msgid ""
+#~ "Something unexpected occurred! We have received an email with technical "
+#~ "details, so we will try to fix the problem as soon as possible. Sorry "
+#~ "about the inconvenience! "
+#~ msgstr ""
+#~ "È accaduto qualcosa di inaspettato. Abbiamo ricevuto una e-mail con tutti "
+#~ "i dettagli tecnici, quindi cercheremo di risolvere il problema al più "
+#~ "presto possibile. Spiacenti per il disagio!"
 
 #~ msgid "You do not yet have an avatar. Please upload one now."
 #~ msgstr "Non hai ancora un avatar. Caricane uno adesso."
@@ -9220,6 +9695,13 @@ msgstr ""
 #~ "Visita il gruppo qui: %(url)s"
 
 #~ msgid ""
+#~ "As you have not been active for a significant amount of time, you have "
+#~ "been removed from the IOTD staff for now."
+#~ msgstr ""
+#~ "Davo che non sei stato attivo per una quantità di tempo significativa, "
+#~ "sei stato rimosso dallo staff IOTD per ora."
+
+#~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: <a "
 #~ "href=\"%(url)s\">%(url)s</a>"
 #~ msgstr ""
@@ -9433,6 +9915,19 @@ msgstr ""
 #~ "You have received a private message on AstroBin!\n"
 #~ "Read it at the following link:\n"
 #~ "\n"
+#~ "<a href=\"https://www.astrobin.com/messages/inbox/\">https://www.astrobin."
+#~ "com/messages/inbox/</a>"
+#~ msgstr ""
+#~ "Hai ricevuto un messaggio privato su AstroBin!\n"
+#~ "Leggilo al seguente indirizzo:\n"
+#~ "\n"
+#~ "<a href=\"https://www.astrobin.com/messages/inbox/\">http://astrobin.com/"
+#~ "messages/inbox/</a>"
+
+#~ msgid ""
+#~ "You have received a private message on AstroBin!\n"
+#~ "Read it at the following link:\n"
+#~ "\n"
 #~ "http://astrobin.com/messages/inbox/"
 #~ msgstr ""
 #~ "Hai ricevuto un messaggio privato su AstroBin!\n"
@@ -9442,6 +9937,23 @@ msgstr ""
 
 #~ msgid "%(user)s joined the public group: \"%(group_name)s\""
 #~ msgstr "%(user)s si è aggiunto al gruppo pubblico: \"%(group_name)s\""
+
+#~ msgid ""
+#~ "If you have astrophotography equipment, add it to <a href=\"%(url)s"
+#~ "\">your gear</a> so that later you can associate it with the images you "
+#~ "upload."
+#~ msgstr ""
+#~ "Se hai della strumentazione astrofotografica, aggiungila alla <a href="
+#~ "\"%(url)s\">tua strumentazione</a> in modo da poterla assiciare alle "
+#~ "immagini che poi caricherai."
+
+#~ msgid ""
+#~ "If you have astrophotography equipment, add it to your gear so that later "
+#~ "you can associate it with the images you upload:"
+#~ msgstr ""
+#~ "Se hai della strumentazione astrofotografica, aggiungila alla tua "
+#~ "strumentazione in modo da poterla poi associare alle immagini che "
+#~ "caricherai."
 
 #~ msgid "Search all forums and comments"
 #~ msgstr "Cerca tutti i forum e commenti"
@@ -9721,6 +10233,9 @@ msgstr ""
 #~ msgid "There are no images to recover."
 #~ msgstr "Non ci sono immagini da recuperare."
 
+#~ msgid "Do you want to create a collection now?"
+#~ msgstr "Vuoi creare una cartella adesso?"
+
 #~ msgid "Comments & forums"
 #~ msgstr "Commenti & forum"
 
@@ -9755,6 +10270,18 @@ msgstr ""
 #~ msgid "Accessory"
 #~ msgstr "Accessorio"
 
+#~ msgid "Avg. Moon age"
+#~ msgstr "Giorno lunare medio"
+
+#~ msgid "days"
+#~ msgstr "giorni"
+
+#~ msgid "Avg. Moon phase"
+#~ msgstr "Fase lunare media"
+
+#~ msgid "Mean SQM"
+#~ msgstr "SQM medio"
+
 #~ msgid "Referral code (optional)"
 #~ msgstr "Codice di riferimento (opzionale)"
 
@@ -9767,6 +10294,14 @@ msgstr ""
 #~ msgstr ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> ha risposto a un topic a cui sei "
 #~ "abbonato."
+
+#~ msgid ""
+#~ "<strong>%(user)s</strong> replied in topic to which you are subscribed"
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> ha risposto in un topic a cui sei abbonato"
+
+#~ msgid "%(user)s replied in topic to which you are subscribed"
+#~ msgstr "%(user)s replied in topic to which you are subscribed"
 
 #~ msgid ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> has published a new image revision "
@@ -9805,8 +10340,22 @@ msgstr ""
 #~ msgid "Last seen online"
 #~ msgstr "Visto online l'ultima volta"
 
+#~ msgid ""
+#~ "You have received a private message on AstroBin!\n"
+#~ "Read it at the following link:\n"
+#~ "\n"
+#~ "https://www.astrobin.com/messages/inbox/"
+#~ msgstr ""
+#~ "Hai ricevuto un messaggio privato su AstroBin!\n"
+#~ "Leggilo a questo indirizzo:\n"
+#~ "\n"
+#~ "https://www.astrobin.com/messages/inbox/"
+
 #~ msgid "Shop %(name)s at AstroBin's partners"
 #~ msgstr "Compra %(name)s presso un partner di AstroBin"
+
+#~ msgid "This topic has no replies."
+#~ msgstr "Questo argomento non ha risposte."
 
 #~ msgid ""
 #~ "Please support AstroBin by shopping for this item at one of our partners!"
@@ -9955,11 +10504,50 @@ msgstr ""
 #~ "Per favore migra la tua strumentazione al nuovo database, cosa che aiuta "
 #~ "a consolidare i dati e migliorare i risultati del motore di ricerca."
 
+#~ msgid ""
+#~ "<strong>%(user)s</strong> commented on your unapproved equiment item "
+#~ "<strong>%(target)s</strong>"
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> ha commentato il tuo strumento non approvato "
+#~ "<strong>%(target)s</strong>"
+
 #~ msgid "Ignore"
 #~ msgstr "Ignora"
 
 #~ msgid "Browse equipment"
 #~ msgstr "Esplora stumentazione"
+
+#~ msgid ""
+#~ "Interested in <strong>%(name)s</strong>? Our sponsors sells this product!"
+#~ msgstr ""
+#~ "Interessato a <strong>%(name)s</strong>? I nostri sponsor vendono questo "
+#~ "prodotto!"
+
+#~ msgid ""
+#~ "For your security, an additional confirmation token was sent in a "
+#~ "separate email."
+#~ msgstr ""
+#~ "Per la tua sicurezza, un codice di conferma aggiuntivo ti è stato inviato "
+#~ "in una e-mail separata."
+
+#~ msgid ""
+#~ "If this was a legitimate login attempt, please use the token to complete "
+#~ "the process."
+#~ msgstr ""
+#~ "Se questo era un tentativo di accesso legittimo, usa il codice per "
+#~ "completare il processo."
+
+#~ msgid ""
+#~ "For your security, following this event, AstroBin has automatically "
+#~ "enabled email-based two-factor authentication on your account. You can "
+#~ "disable in your settings or using the link below."
+#~ msgstr ""
+#~ "Per la tua sicurezza, a seguito di questo evento, AstroBin ha "
+#~ "automaticamente abilitato una autenticazione a due fattori via e-mail. "
+#~ "Puoi disabilitarla nelle tue impostazioni oppure usando questo link."
+
+#~ msgid "Change your password:"
+#~ msgstr "Cambia la password:"
 
 #~ msgid ""
 #~ "AstroBin needs an additional step to verify your login. Please enter the "
@@ -9968,6 +10556,13 @@ msgstr ""
 #~ "AstroBin ha bisogno di un passaggio aggiuntivo per verificare il tuo "
 #~ "accesso. Inserisci il codice generato dal tuo generatore di codici oppure "
 #~ "ricevuto via e-mail."
+
+#~ msgid ""
+#~ "To make sure that this is a legitimate login attempt, we just sent you a "
+#~ "one-time password token via e-mail."
+#~ msgstr ""
+#~ "Per assicurarci che questo sia un tentativo di accesso legittimo, ti "
+#~ "abbiamo appena inviato un codice di password temporanea via e-mail."
 
 #~ msgid ""
 #~ "This is your handle on AstroBin and will be part of the URL to your "
@@ -9979,3 +10574,103 @@ msgstr ""
 #~ "galleria. Se non specifici un nome e cognome qui sopra, sarà anche il "
 #~ "nominativo con coi gli altri ti vedono su AstroBin. Puoi usare lettere, "
 #~ "numeri, e i caratteri speciali @/./+/-/_."
+
+#~ msgid ""
+#~ "To make sure that this is a legitimate login attempt, we just sent you a "
+#~ "one-time password token via e-mail to the address <strong>%(user_email)s</"
+#~ "strong>."
+#~ msgstr ""
+#~ "Per assicurarci che questo sia un tentativo di login legittimo, ti "
+#~ "abbiamo mandato un token all'indirizzo e-mail <strong>%(user_email)s</"
+#~ "strong>."
+
+#~ msgid ""
+#~ "This cookie is set once a visitor interacts with a Survey invitation "
+#~ "modal popup. It is used to ensure that the same invite does not reappear "
+#~ "if it has already been shown."
+#~ msgstr ""
+#~ "Questo cookie è impostato quando un visitatore interagisce con un invito "
+#~ "ad un sondaggio. È usato per assicurarci che lo stesso invito non viene "
+#~ "ripetuto se già mostrato."
+
+#~ msgid ""
+#~ "This cookie is set once a visitor completes a poll using the Feedback "
+#~ "Poll widget. It is used to ensure that the same poll does not reappear if "
+#~ "it has already been filled in."
+#~ msgstr ""
+#~ "Questo cookie è impostato quando un visitatore completa un sondaggio "
+#~ "usando il widget di feedback. È usato per assicurarci che lo stesso "
+#~ "invito non viene ripetuto se già mostrato."
+
+#~ msgid ""
+#~ "This cookie is set once a visitor minimizes a Feedback Poll widget. It is "
+#~ "used to ensure that the widget stays minimized when the visitor navigates "
+#~ "through your site."
+#~ msgstr ""
+#~ "Questo cookie è impostato quando un visitatore minimizza un widget di "
+#~ "feedback. È usato per assicurarci che il widget resti minimizzato mentre "
+#~ "navighi sul sito."
+
+#~ msgid ""
+#~ "This cookie is used by Hotjar to anonymously track your usage of the "
+#~ "website."
+#~ msgstr ""
+#~ "Questo cookie è usato da Hotjar per monitorare in maniera anonima il tuo "
+#~ "utilizzo di questo sito."
+
+#~ msgid ""
+#~ "This session cookie is set to let Hotjar know whether that visitor is "
+#~ "included in the sample which is used to generate funnels."
+#~ msgstr ""
+#~ "Questo cookie è impostato per far sapere a Hotjar se questo visitatore "
+#~ "deve essere incluso nel campione usato per generare i funnel."
+
+#~ msgid ""
+#~ "This cookie is set when a visitor minimizes or completes Incoming "
+#~ "Feedback. This is done so that the Incoming Feedback will load as "
+#~ "minimized immediately if the visitor navigates to another page where it "
+#~ "is set to show."
+#~ msgstr ""
+#~ "Questo cookie è impostato quando un visitatore minimizza o completa un "
+#~ "feedback. Viene fatto in modo che il feedback venga caricato come "
+#~ "minimizzato immediatamente quando il visitatore naviga verso un altra "
+#~ "pagina del sito."
+
+#~ msgid ""
+#~ "This cookie is set when the customer first lands on a page with the "
+#~ "Hotjar script. It is used to persist the Hotjar User ID, unique to that "
+#~ "site on the browser. This ensures that behavior in subsequent visits to "
+#~ "the same site will be attributed to the same user ID."
+#~ msgstr ""
+#~ "Questo cookie viene impostato quando il cliente arriva per la prima volta "
+#~ "su una pagina con lo script Hotjar. Viene utilizzato per mantenere l'ID "
+#~ "utente Hotjar, univoco per quel sito sul browser. Ciò garantisce che il "
+#~ "comportamento nelle visite successive allo stesso sito sarà attribuito "
+#~ "allo stesso ID utente."
+
+#~ msgid ""
+#~ "As your topic pertains, at least partially, to a specific piece of "
+#~ "equipment (<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</"
+#~ "a>), it was moved to its dedicated forum. When new topics are posted to "
+#~ "the forum of an equipment item, all AstroBin users who have used it get "
+#~ "notified (unless they have opted out of this kind of notifications)."
+#~ msgstr ""
+#~ "Dato che il tuo argomento si riferisce, almeno parzialmente, ad uno "
+#~ "strumento in particolare (<a href=\"%(equipment_item_url)s\">"
+#~ "%(equipment_item_name)s</a>), è stato spostato al suo forum dedicato. "
+#~ "Quando dei nuovi argomenti sono postati nei forum di uno strumento, tutti "
+#~ "gli utenti AstroBin che l'hanno usato vengono notificati (a meno che non "
+#~ "abbiano disattivato questo tipo di notifica)."
+
+#~ msgid ""
+#~ "As your topic pertains, at least partially, to a specific piece of "
+#~ "equipment (%(equipment_item_name)s), it was moved to its dedicated forum. "
+#~ "When new topics are posted to the forum of an equipment item, all "
+#~ "AstroBin users who have used it get notified (unless they have opted out "
+#~ "of this kind of notifications)."
+#~ msgstr ""
+#~ "Dato che il tuo argomento si riferisce, almeno parzialmente, ad uno "
+#~ "strumento in particolare (%(equipment_item_name)s), è stato spostato al "
+#~ "suo forum dedicato. Quando dei nuovi argomenti sono postati nei forum di "
+#~ "uno strumento, tutti gli utenti AstroBin che l'hanno usato vengono "
+#~ "notificati (a meno che non abbiano disattivato questo tipo di notifica)."

@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    You retracted your offer for marketplace listing "{{ listing }}"
+{% endblocktrans %}

@@ -85,6 +85,27 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        # This notification is destined to the owner of the listing.
+        'new_comment_to_marketplace_private_conv',
+        _('Your listing has a new private conversation'),
+        '',
+        2,
+    ),
+    (
+        # This notification is destined to the user who opened the conversation, so that they may be notified if the
+        # owner of the listing adds a new top-level comment to their private conversation.
+        'new_comment_to_marketplace_private_conv2',
+        _('Your private conversation has a new comment'),
+        '',
+        2,
+    ),
+    (
+        'new_question_to_listing',
+        _('Your listing has a new question'),
+        '',
+        2,
+    ),
+    (
         'new_comment_reply',
         _('There was a reply to your comment'),
         '',

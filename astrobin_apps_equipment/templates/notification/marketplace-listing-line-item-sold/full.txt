@@ -1,0 +1,16 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+     {{ seller_display_name }} deleted their marketplace listing "{{ listing }}"
+{% endblocktrans %}.
+
+{% trans "Item" %}: {{ line_item }}
+{% trans "Buyer" %}: {{ buyer_display_name }}
+
+{% blocktrans trimmed %}
+    You received this notification because you have an active offer on this listing, or you follow the listing.
+{% endblocktrans %}
+
+{% trans "View listing" %}:
+{{ listing_url }}
+

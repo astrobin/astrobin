@@ -1,0 +1,8 @@
+{% load i18n %}
+
+<a href="{{ listing_url }}">
+    {% blocktrans trimmed %}
+        <strong>{{ seller_display_name }}</strong> sold a line item in their marketplace listing
+        <strong>{{ listing }}</strong>
+    {% endblocktrans %}
+</a>

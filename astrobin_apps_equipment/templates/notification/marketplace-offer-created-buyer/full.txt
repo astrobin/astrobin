@@ -1,0 +1,27 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Your offer for "{{ listing }}" has been recorded.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Offer details
+{% endblocktrans %}
+
+{% trans "User" %}: {{ buyer_display_name }}
+{% for offer in pending_offers %}
+    {% trans "Item" %}: {{ offer.line_item }}
+    {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
+    {% if offer.line_item.shipping_cost %}
+        {% trans "Shipping" %}: {{ offer.line_item.currency }} {{ offer.line_item.shipping_cost }}
+    {% endif %}
+    {% if not forloop.last %}
+
+    {% endif %}
+{% endfor %}
+
+{% blocktrans trimmed %}
+    You can edit your offer by visiting the listing page.
+{% endblocktrans %}
+
+{{ listing_url }}#offers

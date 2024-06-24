@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime, timedelta
+from typing import List, Optional
 
 from annoying.functions import get_object_or_None
 from celery import shared_task
@@ -9,15 +10,22 @@ from django.utils import timezone
 from astrobin.models import GearMigrationStrategy
 from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models import (
-    Accessory, AccessoryEditProposal, Camera, CameraEditProposal, Filter, FilterEditProposal, Mount,
+    Accessory, AccessoryEditProposal, Camera, CameraEditProposal, EquipmentItemMarketplaceFeedback,
+    EquipmentItemMarketplaceListing,
+    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceMasterOffer, EquipmentItemMarketplaceOffer, Filter,
+    FilterEditProposal, Mount,
     MountEditProposal,
     Sensor, SensorEditProposal, Software, SoftwareEditProposal, Telescope,
     TelescopeEditProposal,
 )
-from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.services.stock import StockImporterService
 from astrobin_apps_equipment.services.stock.plugins.agena import AgenaStockImporterPlugin
+from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from common.services import DateTimeService
 
 log = logging.getLogger(__name__)
 
@@ -103,3 +111,197 @@ def reject_stuck_items():
 def import_stock_feed_agena():
     importer = StockImporterService(AgenaStockImporterPlugin())
     importer.import_stock()
+
+
+@shared_task(time_limit=300)
+def send_offer_notifications(
+        listing_id: int,
+        buyer_id: int,
+        master_offer_id: Optional[int],
+        offer_id: Optional[int],
+        recipient_ids: List[int],
+        sender_id: Optional[int],
+        notice_label: str
+):
+    listing = EquipmentItemMarketplaceListing.objects.get(pk=listing_id)
+    buyer = User.objects.get(pk=buyer_id)
+    master_offer = EquipmentItemMarketplaceMasterOffer.objects.get(pk=master_offer_id) if master_offer_id else None
+    offer = EquipmentItemMarketplaceOffer.objects.get(pk=offer_id) if offer_id else None
+
+    recipients = User.objects.filter(pk__in=recipient_ids)
+    if sender_id:
+        sender = User.objects.get(pk=sender_id)
+    else:
+        sender = None
+
+    push_notification(
+        list(recipients),
+        sender,
+        notice_label,
+        MarketplaceService.offer_notification_params(listing, buyer, master_offer, offer),
+    )
+
+
+@shared_task(time_limit=300)
+def remind_about_rating_seller():
+    days = 10
+    cutoff = timezone.now() - timezone.timedelta(days=days)
+
+    # Get all sold items without a seller rating reminder
+    line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
+        sold__lt=cutoff,
+        sold_to__isnull=False,
+        rate_seller_reminder_sent__isnull=True
+    ).select_related('listing__user__userprofile', 'sold_to')
+
+    # Dictionary to keep track of users we've reminded
+    reminded_users = {}
+
+    for line_item in line_items:
+        buyer = line_item.sold_to
+        listing = line_item.listing
+
+        # Check if we've already reminded this buyer
+        if buyer.id in reminded_users:
+            continue
+
+        # Check if feedback already exists
+        feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
+            target_type=MarketplaceFeedbackTargetType.SELLER.value,
+            line_item=line_item
+        ).exists()
+
+        if not feedback_exists:
+            push_notification(
+                [buyer],
+                None,
+                'marketplace-rate-seller',
+                {
+                    'seller_display_name': listing.user.userprofile.get_display_name(),
+                    'listing': listing,
+                    'listing_url': build_notification_url(listing.get_absolute_url())
+                }
+            )
+
+            line_item.rate_seller_reminder_sent = timezone.now()
+            line_item.save(update_fields=['rate_seller_reminder_sent'])
+
+            reminded_users[buyer.id] = True
+
+
+@shared_task(time_limit=300)
+def remind_about_rating_buyer():
+    days = 10
+    cutoff = timezone.now() - timezone.timedelta(days=days)
+
+    # Get all sold items without a buyer rating reminder
+    line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
+        sold__lt=cutoff,
+        sold_to__isnull=False,
+        rate_buyer_reminder_sent__isnull=True
+    ).select_related('listing__user__userprofile', 'user', 'sold_to')
+
+    # Dictionary to keep track of users we've reminded
+    reminded_users = {}
+
+    for line_item in line_items:
+        seller = line_item.user
+        listing = line_item.listing
+
+        # Check if we've already reminded this seller
+        if seller.id in reminded_users:
+            continue
+
+        # Check if feedback already exists
+        feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
+            target_type=MarketplaceFeedbackTargetType.BUYER.value,
+            line_item=line_item
+        ).exists()
+
+        if not feedback_exists:
+            push_notification(
+                [seller],
+                None,
+                'marketplace-rate-buyer',
+                {
+                    'buyer_display_name': line_item.sold_to.userprofile.get_display_name(),
+                    'listing': listing,
+                    'listing_url': build_notification_url(listing.get_absolute_url())
+                }
+            )
+
+            line_item.rate_buyer_reminder_sent = timezone.now()
+            line_item.save(update_fields=['rate_buyer_reminder_sent'])
+
+            reminded_users[seller.id] = True
+
+
+@shared_task(time_limit=300)
+def notify_about_expired_listings():
+    # Find all listings that have expired
+    listings = EquipmentItemMarketplaceListing.objects.filter(
+        expiration__lt=timezone.now(),
+        expired_notification_sent__isnull=True
+    )
+
+    # Loop all listings and send a reminder to the seller
+    for listing in listings:
+        # Skip listing in which all line items have been sold
+        if listing.line_items.filter(sold__isnull=False).count() == listing.line_items.count():
+            continue
+
+        push_notification(
+            [listing.user],
+            None,
+            'marketplace-listing-expired',
+            {
+                'listing': listing,
+                'listing_url': build_notification_url(listing.get_absolute_url())
+            }
+        )
+
+        EquipmentItemMarketplaceListing.objects.filter(
+            pk=listing.pk
+        ).update(
+            expired_notification_sent=DateTimeService.now()
+        )
+
+
+@shared_task(time_limit=300)
+def remind_about_marking_items_as_sold():
+    # Find all line items that have been reserved for more than 10 days and have not been marked as sold
+    days = 10
+    cutoff = datetime.now() - timedelta(days=days)
+    line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
+        reserved__lt=cutoff,
+        sold__isnull=True,
+        mark_as_sold_reminder_sent__isnull=True
+    )
+
+    # Keep track of users to avoid sending multiple reminders
+    users = set()
+
+    # Loop all line items and send a reminder to the buyer
+    for line_item in line_items:
+        if line_item.sold_to in users:
+            continue
+
+        listing = line_item.listing
+
+        push_notification(
+            [line_item.user],
+            None,
+            'marketplace-mark-sold-reminder',
+            {
+                'listing': listing,
+                'listing_url': build_notification_url(listing.get_absolute_url())
+            }
+        )
+
+        EquipmentItemMarketplaceListingLineItem.objects.filter(
+            pk=line_item.pk
+        ).update(
+            mark_as_sold_reminder_sent=DateTimeService.now()
+        )
+
+        users.add(line_item.sold_to)

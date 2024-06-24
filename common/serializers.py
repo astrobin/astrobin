@@ -1,13 +1,17 @@
+from typing import Optional
+
 from avatar.templatetags.avatar_tags import avatar_url
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
-from rest_framework.fields import BooleanField, IntegerField, FloatField, CharField
+from rest_framework.fields import BooleanField, IntegerField, CharField
 from rest_framework.relations import PrimaryKeyRelatedField
 from subscription.models import UserSubscription, Subscription, Transaction
 
 from astrobin.api2.serializers.location_serializer import LocationSerializer
 from astrobin.models import UserProfile, Location
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
+from astrobin_apps_groups.api.serializers.group_serializer import GroupSerializer
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 
@@ -37,9 +41,22 @@ class UserSerializer(serializers.ModelSerializer):
     large_avatar = LargeAvatarField(source='*')
     userprofile = PrimaryKeyRelatedField(read_only=True)
     display_name = serializers.SerializerMethodField(read_only=True)
+    marketplace_feedback = serializers.SerializerMethodField(read_only=True)
+    marketplace_feedback_count = serializers.SerializerMethodField(read_only=True)
+    marketplace_listing_count = serializers.SerializerMethodField(read_only=True)
+    astrobin_groups = GroupSerializer(read_only=True, source='joined_group_set', many=True)
 
     def get_display_name(self, user: User) -> str:
         return user.userprofile.get_display_name()
+
+    def get_marketplace_feedback(self, user: User) -> Optional[int]:
+        return MarketplaceService.calculate_received_feedback_score(user)
+
+    def get_marketplace_feedback_count(self, user: User) -> Optional[int]:
+        return MarketplaceService.received_feedback_count(user)
+
+    def get_marketplace_listing_count(self, user: User) -> Optional[int]:
+        return user.created_equipment_item_marketplace_listings.count()
 
     class Meta:
         model = User

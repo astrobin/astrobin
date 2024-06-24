@@ -37,3 +37,14 @@ def data_download_upload_path(instance, filename: str) -> str:
 def uncompressed_source_upload_path(instance, filename: str) -> str:
     user = instance.user if instance._meta.model_name == 'image' else instance.image.user
     return upload_path('uncompressed', user.pk, filename)
+
+
+def marketplace_listing_upload_path(instance, filename: str) -> str:
+    user = instance.user
+    return upload_path('marketplace', user.pk, filename)
+
+
+def marketplace_listing_thumbnail_upload_path(instance, filename: str) -> str:
+    user = instance.user
+    return upload_path('marketplace-thumbs', user.pk, filename)
+

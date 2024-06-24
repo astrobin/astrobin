@@ -2731,7 +2731,7 @@ class ImageTest(TestCase):
 
         updated = image.updated
 
-        comment = NestedComment.objects.create(
+        NestedComment.objects.create(
             content_object=image,
             author=self.user2,
             text="Test"

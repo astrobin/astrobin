@@ -49,6 +49,7 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         user = getattr(request, "user", None) if request else None
         allow_unapproved = request and request.GET.get("allow-unapproved", "false") == "true"
+        allow_diy = request and request.GET.get("allow-DIY", "false") == "true"
 
         ModelClass = self.__class__.Meta.model
         variants = ModelClass.objects.filter(variant_of__pk=item.pk)
@@ -60,7 +61,11 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             is_equipment_moderator = False
 
         variants = variants.filter(
-            EquipmentItemService.non_diy_or_creator_or_moderator_queryset(user, is_equipment_moderator) &
+            EquipmentItemService.non_diy_or_creator_or_moderator_queryset(
+                user,
+                is_equipment_moderator,
+                allow_diy
+            ) &
             EquipmentItemService.approved_or_creator_or_moderator_queryset(
                 user,
                 is_equipment_moderator,

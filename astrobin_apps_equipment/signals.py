@@ -1,3 +1,4 @@
+import logging
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from annoying.functions import get_object_or_None
@@ -5,7 +6,7 @@ from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.db.models.signals import post_migrate, post_save, pre_save
+from django.db.models.signals import post_delete, post_migrate, post_save, pre_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -15,13 +16,17 @@ from safedelete.signals import post_softdelete
 
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
-    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentPreset, Filter, Mount, Sensor,
+    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentItemMarketplaceListing,
+    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceMasterOffer,
+    EquipmentItemMarketplaceOffer,
+    EquipmentPreset, Filter, Mount, Sensor,
     Software, Telescope,
 )
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
+from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.models.filter_edit_proposal import FilterEditProposal
 from astrobin_apps_equipment.models.mount_edit_proposal import MountEditProposal
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
@@ -29,11 +34,16 @@ from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditPropos
 from astrobin_apps_equipment.models.software_edit_proposal import SoftwareEditProposal
 from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEditProposal
 from astrobin_apps_equipment.notice_types import EQUIPMENT_NOTICE_TYPES
+from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
+from astrobin_apps_equipment.tasks import send_offer_notifications
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.services import AppRedirectionService
+from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
 
+log = logging.getLogger(__name__)
 
 @receiver(post_migrate, sender=apps.get_app_config('astrobin'))
 def create_notice_types(sender, **kwargs):
@@ -47,21 +57,21 @@ def create_DSLR_mirrorless_camera_variants(sender, instance: Camera, created: bo
         return
 
     properties = dict(
-        klass = instance.klass,
-        created_by = instance.created_by,
-        brand = instance.brand,
-        name = instance.name,
-        website = instance.website,
-        group = instance.group,
-        image = instance.image,
-        type = instance.type,
-        sensor = instance.sensor,
-        cooled = False,
-        max_cooling = instance.max_cooling,
-        back_focus = instance.back_focus,
-        reviewed_by = instance.reviewed_by,
-        reviewed_timestamp = instance.reviewed_timestamp,
-        reviewer_decision = instance.reviewer_decision,
+        klass=instance.klass,
+        created_by=instance.created_by,
+        brand=instance.brand,
+        name=instance.name,
+        website=instance.website,
+        group=instance.group,
+        image=instance.image,
+        type=instance.type,
+        sensor=instance.sensor,
+        cooled=False,
+        max_cooling=instance.max_cooling,
+        back_focus=instance.back_focus,
+        reviewed_by=instance.reviewed_by,
+        reviewed_timestamp=instance.reviewed_timestamp,
+        reviewer_decision=instance.reviewer_decision,
 
     )
 
@@ -72,6 +82,7 @@ def create_DSLR_mirrorless_camera_variants(sender, instance: Camera, created: bo
     Camera.objects.filter(
         pk__in=[x.pk for x in [just_modified, modified_and_cooled, just_cooled]]
     ).update(variant_of=instance)
+
 
 @receiver(pre_save, sender=Camera)
 def mirror_camera_update_to_variants(sender, instance: Camera, **kwargs):
@@ -119,6 +130,7 @@ def rename_equipment_item_after_deletion(sender, instance, **kwargs):
 @receiver(post_softdelete, sender=Sensor)
 def remove_sensor_from_cameras_after_deletion(sender, instance, **kwargs):
     Camera.objects.filter(sensor=instance).update(sensor=None)
+
 
 @receiver(post_softdelete, sender=Camera)
 def remove_camera_from_presets_after_deletion(sender, instance, **kwargs):
@@ -418,8 +430,8 @@ def set_search_friendly_name_for_accessory(sender, instance, **kwargs):
         search_friendly_name += ' oag'
 
     if (
-        "oag" in search_friendly_name.lower() and
-        "axis" not in search_friendly_name.lower()
+            "oag" in search_friendly_name.lower() and
+            "axis" not in search_friendly_name.lower()
     ):
         search_friendly_name += ' off axis guider'
 
@@ -484,3 +496,387 @@ def create_or_delete_equipment_item_forum(sender, instance: EquipmentItem, **kwa
             else:
                 instance.forum.delete()
                 instance.forum = None
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceOffer)
+def create_and_sync_master_offer(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
+    master_offer = get_object_or_None(
+        EquipmentItemMarketplaceMasterOffer,
+        master_offer_uuid=instance.master_offer_uuid
+    )
+
+    if master_offer is None:
+        master_offer = EquipmentItemMarketplaceMasterOffer.objects.create(
+            listing=instance.line_item.listing,
+            user=instance.user,
+            master_offer_uuid=instance.master_offer_uuid,
+            status=instance.status
+        )
+    elif master_offer.status != instance.status:
+        master_offer.status = instance.status
+        master_offer.save()
+
+    if instance.master_offer is None:
+        EquipmentItemMarketplaceOffer.objects.filter(
+            pk=instance.pk
+        ).update(
+            master_offer=master_offer,
+        )
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceMasterOffer)
+def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceMasterOffer, created: bool, **kwargs):
+    if created:
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.pk,
+                None,
+                [instance.listing.user.pk],
+                instance.user.pk,
+                'marketplace-offer-created',
+            ], countdown=30
+        )
+
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.pk,
+                None,
+                [instance.user.pk],
+                instance.listing.user.pk,
+                'marketplace-offer-created-buyer',
+            ], countdown=30
+        )
+
+
+@receiver(post_delete, sender=EquipmentItemMarketplaceOffer)
+def delete_master_offer(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
+    master_offer = get_object_or_None(
+        EquipmentItemMarketplaceMasterOffer,
+        listing=instance.listing,
+        user=instance.user,
+        master_offer_uuid=instance.master_offer_uuid
+    )
+
+    if master_offer and master_offer.offers.count() == 0:
+        master_offer.status = instance.status
+        master_offer.delete()
+
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceOffer)
+def prepare_offer_updated_notifications(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
+    before = get_object_or_None(EquipmentItemMarketplaceOffer, pk=instance.pk)
+    after = instance
+
+    if before is not None and before.amount != after.amount:
+        instance.pre_save_amount_changed = True
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceOffer)
+def send_offer_updated_notifications(sender, instance: EquipmentItemMarketplaceOffer, **kwargs):
+    if instance.pre_save_amount_changed:
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.master_offer.id,
+                instance.pk,
+                [instance.line_item.user.pk],
+                instance.user.pk,
+                'marketplace-offer-updated',
+            ], countdown=10
+        )
+
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.master_offer.id,
+                instance.pk,
+                [instance.user.pk],
+                instance.line_item.user.pk,
+                'marketplace-offer-updated-buyer',
+            ], countdown=10
+        )
+
+        del instance.pre_save_amount_changed
+
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceMasterOffer)
+def send_master_offer_notifications(sender, instance: EquipmentItemMarketplaceMasterOffer, **kwargs):
+    before = get_object_or_None(EquipmentItemMarketplaceMasterOffer, pk=instance.pk)
+    after = instance
+
+    if (
+            before is not None and
+            before.status == EquipmentItemMarketplaceOfferStatus.PENDING.value and
+            after.status == EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+    ):
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.pk,
+                None,
+                [instance.user.pk],
+                instance.listing.user.pk,
+                'marketplace-offer-accepted-by-seller',
+            ], countdown=10
+        )
+
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.pk,
+                None,
+                [instance.listing.user.pk],
+                None,
+                'marketplace-offer-accepted-by-you',
+            ], countdown=10
+        )
+
+    if before is not None and before.status != instance.status:
+        if instance.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value:
+            # This offer is being deleted because it was rejected. If an offer is simpy retracted, the status would be
+            # PENDING.
+            send_offer_notifications.apply_async(
+                args=[
+                    instance.listing.pk,
+                    instance.user.pk,
+                    instance.pk,
+                    None,
+                    [instance.listing.user.pk],
+                    instance.user.pk,
+                    'marketplace-offer-rejected-by-seller',
+                ], countdown=10
+            )
+        elif instance.status == EquipmentItemMarketplaceOfferStatus.RETRACTED.value:
+            # This offer must've been retracted by the user.
+            send_offer_notifications.apply_async(
+                args=[
+                    instance.listing.pk,
+                    instance.user.pk,
+                    instance.pk,
+                    None,
+                    [instance.listing.user.pk],
+                    instance.user.pk,
+                    'marketplace-offer-retracted',
+                ], countdown=10
+            )
+
+            send_offer_notifications.apply_async(
+                args=[
+                    instance.listing.pk,
+                    instance.user.pk,
+                    instance.pk,
+                    None,
+                    [instance.user.pk],
+                    instance.listing.user.pk,
+                    'marketplace-offer-retracted-buyer',
+                ], countdown=10
+            )
+
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceListing)
+def marketplace_listing_pre_save(sender, instance: EquipmentItemMarketplaceListing, **kwargs):
+    if instance.pk:
+        pre_save_instance = EquipmentItemMarketplaceListing.objects.get(pk=instance.pk)
+
+        # The item is being approved.
+        if (
+                pre_save_instance.approved is None and
+                pre_save_instance.first_approved is None and
+                instance.approved is not None
+        ):
+            instance.pre_save_approved = True
+
+        # The item is being approved (not for the first time)
+        if (
+                pre_save_instance.approved is None and
+                pre_save_instance.first_approved is not None and
+                instance.approved is not None
+        ):
+            instance.pre_save_approved_again = True
+
+        # try to get user who is updating the listing
+        caching_service = CachingService()
+        caching_key = f'user_updating_marketplace_instance_{instance.pk}'
+        user = caching_service.get_from_request_cache(caching_key)
+        is_moderator = UserService(user).is_in_group(GroupName.MARKETPLACE_MODERATORS) if user else False
+        caching_service.delete_from_request_cache(caching_key)
+
+        # The item is being updated while approved
+        if pre_save_instance.approved and not is_moderator:
+            instance.approved = None
+            instance.approved_by = None
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceListing)
+def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceListing, created: bool, **kwargs):
+    if not created:
+        if instance.pre_save_approved or instance.pre_save_approved_again:
+            push_notification(
+                [instance.user],
+                None,
+                'marketplace-listing-approved',
+                {
+                    'user': instance.approved_by.userprofile.get_display_name() if instance.approved_by else 'AstroBin',
+                    'listing': instance,
+                    'listing_url': build_notification_url(instance.get_absolute_url())
+                }
+            )
+
+        if instance.pre_save_approved:
+            seller_followers = list(User.objects.filter(
+                toggleproperty__content_type=ContentType.objects.get_for_model(instance.user),
+                toggleproperty__object_id=instance.user.id,
+                toggleproperty__property_type="follow",
+                joined_group_set__name=GroupName.BETA_TESTERS
+            ).distinct())
+
+            if len(seller_followers):
+                push_notification(
+                    seller_followers,
+                    instance.user,
+                    'marketplace-listing-by-user-you-follow',
+                    {
+                        'seller_display_name': instance.user.userprofile.get_display_name(),
+                        'listing': instance,
+                        'listing_url': build_notification_url(instance.get_absolute_url())
+                    }
+                )
+
+            for line_item in instance.line_items.filter(sold__isnull=True):
+                equipment_followers = list(User.objects.filter(
+                    toggleproperty__content_type=line_item.item_content_type,
+                    toggleproperty__object_id=line_item.item_object_id,
+                    toggleproperty__property_type="follow",
+                    joined_group_set__name=GroupName.BETA_TESTERS
+                ).distinct())
+
+                if len(equipment_followers):
+                    push_notification(
+                        equipment_followers,
+                        instance.user,
+                        'marketplace-listing-for-item-you-follow',
+                        {
+                            'seller_display_name': instance.user.userprofile.get_display_name(),
+                            'listing': instance,
+                            'listing_url': build_notification_url(instance.get_absolute_url()),
+                            'line_item': line_item,
+                        }
+                    )
+        else:
+            # The item is being updated and not merely approved.
+
+            users_with_offers = User.objects.filter(
+                equipment_item_marketplace_listings_offers__listing=instance
+            ).distinct()
+
+            followers = User.objects.filter(
+                toggleproperty__content_type=ContentType.objects.get_for_model(instance),
+                toggleproperty__object_id=instance.id,
+                toggleproperty__property_type="follow"
+            ).distinct()
+
+            recipients = list(set(list(users_with_offers) + list(followers)))
+
+            if len(recipients):
+                push_notification(
+                    recipients,
+                    instance.user,
+                    'marketplace-listing-updated',
+                    {
+                        'seller_display_name': instance.user.userprofile.get_display_name(),
+                        'listing': instance,
+                        'listing_url': build_notification_url(instance.get_absolute_url())
+                    }
+                )
+
+
+@receiver(post_softdelete, sender=EquipmentItemMarketplaceListing)
+def marketplace_listing_post_softdelete(sender, instance: EquipmentItemMarketplaceListing, **kwargs):
+    users_with_offers = User.objects.filter(
+        equipment_item_marketplace_listings_offers__listing=instance
+    ).distinct()
+
+    followers = User.objects.filter(
+        toggleproperty__content_type=ContentType.objects.get_for_model(instance),
+        toggleproperty__object_id=instance.id,
+        toggleproperty__property_type="follow"
+    ).distinct()
+
+    recipients = list(set(list(users_with_offers) + list(followers)))
+
+    if len(recipients):
+        push_notification(
+            recipients,
+            instance.user,
+            'marketplace-listing-deleted',
+            {
+                'seller_display_name': instance.user.userprofile.get_display_name(),
+                'listing': instance,
+            }
+        )
+
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceListingLineItem)
+def marketplace_listing_line_item_pre_save(sender, instance: EquipmentItemMarketplaceListingLineItem, **kwargs):
+    if instance.pk:
+        pre_save_instance = EquipmentItemMarketplaceListingLineItem.objects.get(pk=instance.pk)
+        if pre_save_instance.sold is None and instance.sold is not None:
+            instance.pre_save_sold = True
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceListingLineItem)
+def marketplace_listing_line_item_post_save(sender, instance: EquipmentItemMarketplaceListingLineItem, **kwargs):
+    if instance.pre_save_sold:
+        users_with_offers = User.objects.filter(
+            equipment_item_marketplace_listings_offers__line_item=instance
+        )
+
+        if instance.sold_to:
+            users_with_offers = users_with_offers.exclude(pk=instance.sold_to.pk)
+
+        users_with_offers = users_with_offers.distinct()
+
+        followers = User.objects.filter(
+            toggleproperty__content_type=ContentType.objects.get_for_model(instance.listing),
+            toggleproperty__object_id=instance.listing.id,
+            toggleproperty__property_type="follow"
+        )
+
+        if instance.sold_to:
+            followers = followers.exclude(pk=instance.sold_to.pk)
+
+        followers = followers.distinct()
+
+        recipients = list(set(list(users_with_offers) + list(followers)))
+
+        if len(recipients):
+            push_notification(
+                recipients,
+                instance.listing.user,
+                'marketplace-listing-line-item-sold',
+                {
+                    'seller_display_name': instance.listing.user.userprofile.get_display_name(),
+                    'buyer_display_name': instance.sold_to.userprofile.get_display_name()
+                    if instance.sold_to
+                    else _('Unspecified'),
+                    'listing': instance.listing,
+                    'line_item': instance,
+                    'listing_url': build_notification_url(instance.listing.get_absolute_url())
+                }
+            )
+
+        del instance.pre_save_sold
+
+
+@receiver(pre_save, sender=EquipmentItemMarketplaceListing)
+def fill_in_listing_lat_lon(sender, instance: EquipmentItemMarketplaceListing, **kwargs):
+    if instance.country and instance.city and not instance.latitude and not instance.longitude:
+        MarketplaceService.fill_in_listing_lat_lon(instance)

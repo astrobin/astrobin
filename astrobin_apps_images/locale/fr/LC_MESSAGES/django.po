@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-17 08:39+0000\n"
-"PO-Revision-Date: 2023-10-17 10:19+0200\n"
+"POT-Creation-Date: 2024-05-24 10:35+0000\n"
+"PO-Revision-Date: 2023-10-30 11:33+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20230927-1\n"
+"X-Loco-Api-Version: 1.0.28 20240520-1\n"
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Source non-compressée (max 100 MB)"
@@ -30,6 +30,78 @@ msgstr ""
 "d'archivage. Ce fichier est stocké de manière privée et vous seul y aurez "
 "accès."
 
+msgid "Dates"
+msgstr ""
+
+msgid "Frames"
+msgstr ""
+
+msgid "Integration"
+msgstr ""
+
+msgid "Darks"
+msgstr ""
+
+msgid "Flats"
+msgstr ""
+
+msgid "Flat darks"
+msgstr ""
+
+msgid "Bias"
+msgstr ""
+
+msgid "Avg. Moon age"
+msgstr ""
+
+msgid "days"
+msgstr ""
+
+msgid "Avg. Moon phase"
+msgstr ""
+
+msgid "Bortle Dark-Sky Scale"
+msgstr ""
+
+msgid "Mean SQM"
+msgstr ""
+
+msgid "Mean FWHM"
+msgstr ""
+
+msgid "Temperature"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "FPS"
+msgstr ""
+
+msgid "Exposure per frame"
+msgstr ""
+
+msgid "Focal length"
+msgstr ""
+
+msgid "CMI"
+msgstr ""
+
+msgid "CMII"
+msgstr ""
+
+msgid "CMIII"
+msgstr ""
+
+msgid "Seeing"
+msgstr ""
+
+msgid "Transparency"
+msgstr ""
+
 msgid "Error!"
 msgstr "Erreur !"
 
@@ -43,7 +115,7 @@ msgid "Top pick nomination"
 msgstr "Nominée Top Pick"
 
 msgid "Currently in the IOTD/TP queue"
-msgstr ""
+msgstr "Actuellement dans la file de sélection de l'IOTD/TP"
 
 msgid "Staging area"
 msgstr "Zone privée"
@@ -52,16 +124,20 @@ msgid "Collaboration"
 msgstr "Collaboration"
 
 msgid "Video"
-msgstr ""
+msgstr "Vidéo"
 
 msgid "There was a problem encoding this video, please upload it again."
 msgstr ""
+"Un problème est survenu lors de l'encodage de cette vidéo, veuillez la "
+"télécharger à nouveau."
 
 msgid "If the problem persists, please contact us."
-msgstr ""
+msgstr "Si le problème persiste, veuillez nous contacter."
 
 msgid "This video is still processing, please return to this page later."
 msgstr ""
+"Cette vidéo est toujours en cours de traitement, veuillez revenir sur cette "
+"page plus tard."
 
 #, python-format
 msgid "Revision %(revision)s"
@@ -75,6 +151,9 @@ msgstr "Chargement en cours..."
 
 msgid "(no title)"
 msgstr "(aucun titre)"
+
+msgid "Image file not found"
+msgstr ""
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "Données corrompues. Merci de charger cette image à nouveau. Désolé !"

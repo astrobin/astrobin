@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ seller_display_name }} published a marketplace listing "{{ listing }}"
+{% endblocktrans %}.
+
+{% blocktrans trimmed %}
+    You received this notification because you follow this user.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}View listing{% endblocktrans %}:
+
+{{ listing_url }}

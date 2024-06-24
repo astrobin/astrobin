@@ -1,0 +1,8 @@
+{% load i18n %}
+
+<a href="{{ listing_url }}">
+    {% blocktrans trimmed %}
+        Rate the seller <strong>{{ seller_display_name }}</strong> for your recent purchase from marketplace listing
+        <strong>{{ listing }}</strong>
+    {% endblocktrans %}
+</a>

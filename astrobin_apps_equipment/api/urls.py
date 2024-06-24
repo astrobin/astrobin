@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from rest_framework import routers
 
 from astrobin_apps_equipment.api.views.accessory_edit_proposal_view_set import AccessoryEditProposalViewSet
@@ -8,6 +8,18 @@ from astrobin_apps_equipment.api.views.camera_edit_proposal_view_set import Came
 from astrobin_apps_equipment.api.views.camera_view_set import CameraViewSet
 from astrobin_apps_equipment.api.views.equipment_contributors_view_set import EquipmentContributorsViewSet
 from astrobin_apps_equipment.api.views.equipment_item_group_view_set import EquipmentItemGroupViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_feedback_view_set import \
+    EquipmentItemMarketplaceFeedbackViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_item_image_view_set import \
+    EquipmentItemMarketplaceListingLineItemImageViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_item_offer_view_set import \
+    EquipmentItemMarketplaceOfferViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_line_item_view_set import \
+    EquipmentItemMarketplaceListingLineItemViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_view_set import \
+    EquipmentItemMarketplaceListingViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_private_conversation_view_set import \
+    EquipmentItemMarketplacePrivateConversationViewSet
 from astrobin_apps_equipment.api.views.equipment_preset_view_set import EquipmentPresetViewSet
 from astrobin_apps_equipment.api.views.filter_edit_proposal_view_set import FilterEditProposalViewSet
 from astrobin_apps_equipment.api.views.filter_view_set import FilterViewSet
@@ -48,6 +60,42 @@ router.register(r'software-edit-proposal', SoftwareEditProposalViewSet, basename
 router.register(r'equipment-item-group', EquipmentItemGroupViewSet, basename='equipment-item-group')
 
 router.register(r'equipment-preset', EquipmentPresetViewSet, basename='equipment-preset')
+
+router.register(
+    r'marketplace/listing',
+    EquipmentItemMarketplaceListingViewSet,
+    basename='marketplace-listing'
+)
+
+router.register(
+    r'marketplace/listing/(?P<listing_id>[^/.]+)/line-item',
+    EquipmentItemMarketplaceListingLineItemViewSet,
+    basename='marketplace-line-item'
+)
+
+router.register(
+    r'marketplace/listing/(?P<listing_id>[^/.]+)/line-item/(?P<line_item_id>[^/.]+)/image',
+    EquipmentItemMarketplaceListingLineItemImageViewSet,
+    basename='marketplace-image'
+)
+
+router.register(
+    r'marketplace/listing/(?P<listing_id>[^/.]+)/line-item/(?P<line_item_id>[^/.]+)/offer',
+    EquipmentItemMarketplaceOfferViewSet,
+    basename='marketplace-offer'
+)
+
+router.register(
+    r'marketplace/listing/(?P<listing_id>[^/.]+)/private-conversation',
+    EquipmentItemMarketplacePrivateConversationViewSet,
+    basename='marketplace-private-conversation'
+)
+
+router.register(
+    r'marketplace/line-item/(?P<line_item_id>[^/.]+)/feedback',
+    EquipmentItemMarketplaceFeedbackViewSet,
+    basename='marketplace-feedback'
+)
 
 urlpatterns = [
     url('', include(router.urls)),

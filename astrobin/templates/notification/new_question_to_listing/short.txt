@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{user}} asked a question on your marketplace listing "{{ target }}".
+{% endblocktrans %}

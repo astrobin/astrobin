@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        <strong>{{ seller_display_name }}</strong> published a marketplace listing
+        <strong>{{ listing }}</strong> with an equipment item you follow: <strong>{{ line_item }}</strong>
+    {% endblocktrans %}
+</p>
+
+<a href="{{ listing_url }}" class="btn btn-primary">{% trans "View listing" %}</a>

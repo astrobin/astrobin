@@ -66,6 +66,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         sort = self.request.query_params.get('sort')
         brand_from_query = self.request.query_params.get('brand')
         allow_unapproved = self.request.query_params.get('allow-unapproved', 'false').lower() == 'true'
+        allow_diy = self.request.query_params.get("allow-DIY", "false") == "true"
 
         manager = self.get_serializer().Meta.model.objects
         queryset = manager.all().select_related('brand')
@@ -89,7 +90,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 ) &
                 EquipmentItemService.non_diy_or_creator_or_moderator_queryset(
                     self.request.user,
-                    is_equipment_moderator
+                    is_equipment_moderator,
+                    allow_diy
                 )
             )
 
@@ -176,7 +178,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-    @method_decorator(cache_page(60*60))
+    @method_decorator(cache_page(60 * 60))
     @action(detail=False, methods=['get'])
     def count(self, request):
         return Response(self.get_queryset().count())
@@ -194,6 +196,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             else False
         )
         allow_unapproved = self.request.query_params.get('allow-unapproved', 'false').lower() == 'true'
+        allow_diy = self.request.query_params.get("allow-DIY", "false") == "true"
 
         queryset = item.variants.filter(
             EquipmentItemService.approved_or_creator_or_moderator_queryset(
@@ -201,7 +204,11 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 is_equipment_moderator,
                 allow_unapproved
             ) &
-            EquipmentItemService.non_diy_or_creator_or_moderator_queryset(self.request.user, is_equipment_moderator)
+            EquipmentItemService.non_diy_or_creator_or_moderator_queryset(
+                self.request.user,
+                is_equipment_moderator,
+                allow_diy
+            )
         )
 
         serializer = self.serializer_class(queryset, many=True)
@@ -441,10 +448,12 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         for moderator in User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS):
             if moderator != item.created_by and moderator.pk not in [x.get('key') for x in value]:
-                value.append(dict(
-                    key=moderator.pk,
-                    value=moderator.userprofile.get_display_name(),
-                ))
+                value.append(
+                    dict(
+                        key=moderator.pk,
+                        value=moderator.userprofile.get_display_name(),
+                    )
+                )
 
         return Response(status=200, data=value)
 
@@ -680,11 +689,13 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if not item.brand:
             # Nothing to do for DIY items
-            return Response(dict(
-                brand_listings=[],
-                item_listings=[],
-                allow_full_retailer_integration=allow_full_retailer_integration,
-            ))
+            return Response(
+                dict(
+                    brand_listings=[],
+                    item_listings=[],
+                    allow_full_retailer_integration=allow_full_retailer_integration,
+                )
+            )
 
         country_code = get_client_country_code(request)
         brand_listings = EquipmentService.equipment_brand_listings_by_item(item, country_code)

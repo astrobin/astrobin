@@ -1,14 +1,18 @@
 import logging
 
+from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import QuerySet
 from django.urls import reverse
 
-from astrobin.models import Image
+from astrobin.models import Image, UserProfile
 from astrobin.stories import ACTSTREAM_VERB_COMMENTED_IMAGE, add_story
-from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Sensor, Software, Telescope
+from astrobin_apps_equipment.models import (
+    Accessory, Camera, EquipmentItemMarketplaceListing, EquipmentItemMarketplacePrivateConversation, Filter,
+    Mount, Sensor, Software, Telescope,
+)
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
@@ -25,44 +29,91 @@ class CommentNotificationsService:
         # type: (NestedComment) -> None
         self.comment = comment
 
+    def extract_context(self):
+        """
+        Extracts the context of the comment, i.e. the object owner, the notification type, the mentions, the URL, etc.
+        :return:
+            - model_class: the model class of the object being commented
+            - obj: the object being commented
+            - object_owner: the owner of the object being commented
+            - notification: the notification type
+            - mentions: the mentions
+            - url: the URL of the comment
+            - target: the name of the object being commented
+            - target_url: the URL of the object being commented 
+        """
+
+        model_class = self.comment.content_type.model_class()
+        obj = self.comment.content_type.get_object_for_this_type(id=self.comment.object_id)
+        object_owner = None
+        notification = None
+        mentions = MentionsService.get_mentions(self.comment.text)
+        url = None
+        target = str(self.comment.content_object)
+        target_url = build_notification_url(
+            settings.BASE_URL + self.comment.content_object.get_absolute_url(), self.comment.author
+        ) if hasattr(self.comment.content_object, 'get_absolute_url') else None
+
+        if model_class == Image:
+            object_owner = obj.user
+            notification = 'new_comment'
+            url = settings.BASE_URL + self.comment.get_absolute_url()
+        elif hasattr(model_class, 'edit_proposal_by'):
+            object_owner = obj.edit_proposal_by
+            notification = 'new_comment_to_edit_proposal'
+            url = self.comment.get_absolute_url()
+        elif model_class == Iotd:
+            object_owner = obj.judge
+            notification = 'new_comment_to_scheduled_iotd'
+            url = AppRedirectionService.redirect(f'/iotd/judgement-queue#comments-{obj.pk}-{self.comment.pk}')
+        elif model_class in (
+                Sensor,
+                Camera,
+                Telescope,
+                Filter,
+                Mount,
+                Accessory,
+                Software
+        ):
+            object_owner = obj.created_by
+            notification = 'new_comment_to_unapproved_equipment_item'
+            url = AppRedirectionService.redirect(
+                f'/equipment/explorer/{model_class.__name__.lower()}/{obj.pk}#c{self.comment.id}'
+            )
+        elif model_class == EquipmentItemMarketplacePrivateConversation:
+            listing = obj.listing
+            url = build_notification_url(
+                settings.BASE_URL + obj.listing.get_absolute_url() + f'#c{self.comment.id}', self.comment.author
+            )
+            target = str(obj.listing)
+            target_url = build_notification_url(
+                settings.BASE_URL + obj.listing.get_absolute_url(), self.comment.author
+            )
+            if self.comment.author != listing.user:
+                object_owner = obj.listing.user
+                notification = 'new_comment_to_marketplace_private_conv'
+            else:
+                object_owner = obj.user
+                notification = 'new_comment_to_marketplace_private_conv2'
+        elif model_class == EquipmentItemMarketplaceListing:
+            object_owner = obj.user
+            notification = 'new_question_to_listing'
+            url = build_notification_url(
+                settings.BASE_URL + obj.get_absolute_url() + f'#c{self.comment.id}', self.comment.author
+            )
+            target = str(obj)
+            target_url = build_notification_url(
+                settings.BASE_URL + obj.get_absolute_url(), self.comment.author
+            )
+
+        return model_class, obj, object_owner, notification, mentions, url, target, target_url
+
     def send_notifications(self, force=False):
         if self.comment.pending_moderation and not force:
             return
 
         instance = self.comment
-
-        model_class = instance.content_type.model_class()
-        obj = instance.content_type.get_object_for_this_type(id=instance.object_id)
-        object_owner = None
-        notification = None
-        mentions = MentionsService.get_mentions(instance.text)
-        url = None
-
-        if model_class == Image:
-            object_owner = obj.user
-            notification = 'new_comment'
-            url = settings.BASE_URL + instance.get_absolute_url()
-        elif hasattr(model_class, 'edit_proposal_by'):
-            object_owner = obj.edit_proposal_by
-            notification = 'new_comment_to_edit_proposal'
-            url = instance.get_absolute_url()
-        elif model_class == Iotd:
-            object_owner = obj.judge
-            notification = 'new_comment_to_scheduled_iotd'
-            url = AppRedirectionService.redirect(f'/iotd/judgement-queue#comments-{obj.pk}-{instance.pk}')
-        elif model_class in (
-            Sensor,
-            Camera,
-            Telescope,
-            Filter,
-            Mount,
-            Accessory,
-            Software
-        ):
-            object_owner = obj.created_by
-            notification = 'new_comment_to_unapproved_equipment_item'
-            url = AppRedirectionService.redirect(f'/equipment/explorer/{model_class.__name__.lower()}/{obj.pk}#c{self.comment.id}')
-            pass
+        model_class, obj, object_owner, notification, mentions, url, target, target_url = self.extract_context()
 
         if UserService(object_owner).shadow_bans(instance.author):
             log.info("Skipping notification for comment because %d shadow-bans %d" % (
@@ -70,6 +121,13 @@ class CommentNotificationsService:
             return
 
         exclude = MentionsService.get_mentioned_users_with_notification_enabled(mentions, 'new_comment_mention')
+
+        if model_class == Image:
+            if (force or not instance.pending_moderation) and not obj.is_wip:
+                add_story(instance.author,
+                          verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+                          action_object=instance,
+                          target=obj)
 
         if instance.parent and \
                 instance.parent.author != instance.author and \
@@ -84,19 +142,10 @@ class CommentNotificationsService:
                         'user_url': settings.BASE_URL + reverse(
                             'user_page', kwargs={'username': instance.author.username}
                         ),
-                        'target': str(instance.content_object),
-                        'target_url': build_notification_url(
-                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.author
-                        ) if hasattr(instance.content_object, 'get_absolute_url') else None,
+                        'target': target,
+                        'target_url': target_url,
                     }
                 )
-
-        if model_class == Image:
-            if (force or not instance.pending_moderation) and not obj.is_wip:
-                add_story(instance.author,
-                          verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
-                          action_object=instance,
-                          target=obj)
 
         if object_owner and notification:
             collaborators = [object_owner] + list(obj.collaborators.all()) if hasattr(obj, 'collaborators') else [
@@ -114,10 +163,47 @@ class CommentNotificationsService:
                             'user_url': settings.BASE_URL + reverse(
                                 'user_page', kwargs={'username': instance.author.username}
                             ),
-                            'target': str(self.comment.content_object),
-                            'target_url': build_notification_url(
-                                settings.BASE_URL + self.comment.content_object.get_absolute_url(), self.comment.author
-                            ) if hasattr(self.comment.content_object, 'get_absolute_url') else None
+                            'target': target,
+                            'target_url': target_url,
+                        }
+                    )
+
+    def send_mention_notifications(self, mentions=None):
+        if not self.comment.pending_moderation:
+            (
+                _,
+                _,
+                _,
+                _,
+                mentions_,  # note the underscore: we don't want to override the `mentions` variable above.
+                url,
+                target,
+                target_url
+            ) = self.extract_context()
+
+            if not mentions:
+                mentions = mentions_
+
+            for username in mentions:
+                user = get_object_or_None(User, username=username)
+                if not user:
+                    try:
+                        profile = get_object_or_None(UserProfile, real_name=username)
+                        if profile:
+                            user = profile.user
+                    except UserProfile.MultipleObjectsReturned:
+                        user = None
+                if user:
+                    push_notification(
+                        [user], self.comment.author, 'new_comment_mention',
+                        {
+                            'url': build_notification_url(url, self.comment.author),
+                            'user': self.comment.author.userprofile.get_display_name(),
+                            'user_url': settings.BASE_URL + reverse(
+                                'user_page', kwargs={'username': self.comment.author}
+                            ),
+                            'target': target,
+                            'target_url': build_notification_url(target_url, self.comment.author),
                         }
                     )
 
@@ -148,8 +234,10 @@ class CommentNotificationsService:
 
     @staticmethod
     def approve_comments(queryset: QuerySet, moderator: User) -> None:
-        queryset.update(pending_moderation=False, moderator=moderator)
-
         for comment in queryset:
-            CommentNotificationsService(comment).send_notifications(force=True)
-            CommentNotificationsService(comment).send_approval_notification()
+            NestedComment.objects.filter(id=comment.id).update(pending_moderation=False, moderator=moderator)
+            comment.refresh_from_db()
+            service = CommentNotificationsService(comment)
+            service.send_notifications(force=True)
+            service.send_mention_notifications()
+            service.send_approval_notification()

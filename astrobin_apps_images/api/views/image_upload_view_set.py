@@ -58,7 +58,7 @@ class ImageUploadViewSet(TusCreateMixin,
     ]
     http_method_names = ['get', 'head', 'post', 'patch']
 
-    def get_file_field_name(self, mime_type: str):
+    def get_file_field_name(self, mime_type: str) -> str:
         mime_start = mime_type.split('/')[0]
 
         if mime_start == 'image':

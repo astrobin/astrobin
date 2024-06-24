@@ -1,4 +1,5 @@
 from braces.views import JSONResponseMixin
+from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
@@ -8,6 +9,7 @@ from astrobin.models import Image
 from astrobin.utils import get_client_country_code
 from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
 from astrobin_apps_images.services import ImageService
+from common.constants import GroupName
 
 
 class EquipmentItemPopover(JSONResponseMixin, View):
@@ -38,9 +40,11 @@ class EquipmentItemPopover(JSONResponseMixin, View):
             'html': render_to_string('popover/item.html', {
                 'item': item,
                 'item_type': item_type,
+                'item_content_type': ContentType.objects.get_for_model(item),
                 'image': image,
                 'REQUEST_COUNTRY': get_client_country_code(request),
                 'search_query': request.GET.get('q', ''),
                 'request': request,
+                'BETA_TESTERS_GROUP_NAME': GroupName.BETA_TESTERS,
             })
         })

@@ -259,6 +259,12 @@ class EquipmentItem(SafeDeleteModel):
         content_type_field='item_content_type',
     )
 
+    marketplace_listings = GenericRelation(
+        'astrobin_apps_equipment.EquipmentItemMarketplaceListing',
+        object_id_field='item_object_id',
+        content_type_field='item_content_type',
+    )
+
     ####################################################################################################################
     # This items are synced back from the search index.                                                                #
     ####################################################################################################################

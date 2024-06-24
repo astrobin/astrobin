@@ -1,0 +1,47 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        Great news! Your listing <strong>{{ listing }}</strong> has received a new offer.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <strong>{% trans "Offer details" %}</strong>
+</p>
+
+
+<p>
+    {% trans "User" %}: <strong>{{ buyer_display_name }}</strong>
+</p>
+
+<p>
+    {% for offer in pending_offers %}
+        {% trans "Item" %}: <strong>{{ offer.line_item }}</strong><br/>
+        {% trans "Offer amount" %}: <strong>{{ offer.line_item.currency }} {{ offer.amount }}</strong>
+        {% if offer.line_item.shipping_cost %}
+            <br/>
+            {% trans "Shipping cost" %}: <strong>{{ offer.line_item.currency }} {{ offer.line_item.shipping_cost }}</strong>
+        {% endif %}
+        {% if not forloop.last %}
+            <br/><br/>
+        {% endif %}
+    {% endfor %}
+</p>
+
+<p>
+    <strong>
+        {% blocktrans trimmed %}
+            PLEASE NOTE: listings on AstroBin's marketplace may contain more than one item. Please review the offer
+            details to ensure you understand which items the offer is for.
+        {% endblocktrans %}
+    </strong>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        To review and respond to the offer, please visit your listing page.
+    {% endblocktrans %}
+</p>
+
+<a href="{{ listing_url }}#offers" class="btn btn-primary">{% trans "View listing" %}</a>

@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        Unfortunately, your offer for the listing <strong>{{ listing }}</strong> has been retracted by the prospect
+        buyer <a href="{{ buyer_url }}">{{ buyer_display_name }}</a>.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% trans "User" %}: <strong>{{ buyer_display_name }}</strong>
+</p>
+
+<p>
+    {% for offer in retracted_offers %}
+        {% trans "Item" %}: <strong>{{ offer.line_item }}</strong><br/>
+        {% trans "Offer amount" %}: <strong>{{ offer.line_item.currency }} {{ offer.amount }}</strong>
+        {% if offer.line_item.shipping_cost %}
+            <br/>
+            {% trans "Shipping cost" %}: <strong>{{ offer.line_item.currency }} {{ offer.line_item.shipping_cost }}</strong>
+        {% endif %}
+        {% if not forloop.last %}
+            <br/><br/>
+        {% endif %}
+    {% endfor %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        You may contact the prospect buyer using AstroBin's private messaging for more information.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ listing_url }}" class="btn btn-primary">{% trans "View listing" %}</a>
+</p>

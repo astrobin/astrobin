@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Marketplace listing "{{ listing }}" was deleted.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    You received this notification because you have an active offer on this listing, or you follow the listing.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Please note that the seller may only deleted listings without any sold line items.
+{% endblocktrans %}

@@ -165,7 +165,14 @@ class EquipmentItemService:
         return Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
     @staticmethod
-    def non_diy_or_creator_or_moderator_queryset(user: Union[User, AnonymousUser], is_equipment_moderator: bool) -> Q:
+    def non_diy_or_creator_or_moderator_queryset(
+            user: Union[User, AnonymousUser],
+            is_equipment_moderator: bool,
+            force_allow_diy: bool = False
+    ) -> Q:
+        if force_allow_diy:
+            return Q()
+
         if user and user.is_authenticated:
             if is_equipment_moderator:
                 return Q()

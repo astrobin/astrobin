@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed with open_emphasis='<strong>' close_emphasis='</strong>' %}
+        Recently, you accepted an offer for the marketplace listing {{ open_emphasis }}{{ listing }}{{ close_emphasis }},
+        but you haven't marked the item as sold yet. Please do so as soon as possible and leave feedback to the buyer.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ listing_url }}#mark-as-sold" class="btn btn-primary">{% trans "Mark as sold" %}</a>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Thanks for your cooperation!
+    {% endblocktrans %}
+</p>

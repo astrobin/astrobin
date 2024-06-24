@@ -43,7 +43,7 @@ class UncompressedSourceUploadViewSet(TusCreateMixin,
     ]
     http_method_names = ['get', 'post', 'head', 'put', 'patch']
 
-    def get_file_field_name(self, mime_type: str):
+    def get_file_field_name(self, mime_type: str) -> str:
         return "uncompressed_source_file"
 
     def get_upload_path_function(self, mime_type: str):
@@ -59,7 +59,7 @@ class UncompressedSourceUploadViewSet(TusCreateMixin,
         except (TypeError, KeyError):
             return {}
 
-    def verify_file(self, file_path: str, mime_type: str):
+    def verify_file(self, file_path: str, mime_type: str) -> bool:
         return True
 
 

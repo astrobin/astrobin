@@ -35,7 +35,10 @@ from astrobin.utils import (
     ra_decimal_precision_from_pixel_scale,
 )
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
-from astrobin_apps_equipment.models import EquipmentBrandListing, EquipmentItemListing
+from astrobin_apps_equipment.models import (
+    EquipmentBrandListing, EquipmentItemListing,
+    EquipmentItemMarketplaceListingLineItem,
+)
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
@@ -177,15 +180,16 @@ def search_image_list(context, paginate=True, **kwargs):
     country = get_client_country_code(request)
     equipment_brand_listings = None
     equipment_item_listings = None
-    name = telescope or camera or q
+    marketplace_line_items = None
+    search_term = telescope or camera or q
 
     if telescope or camera or q:
         equipment_brand_listings = EquipmentBrandListing.objects \
-            .annotate(distance=TrigramDistance('brand__name', name)) \
+            .annotate(distance=TrigramDistance('brand__name', search_term)) \
             .filter(
                 Q(
                     Q(distance__lte=.85) |
-                    Q(brand__name__icontains=name)
+                    Q(brand__name__icontains=search_term)
                 ) &
                 Q(
                     Q(retailer__countries__icontains=country) |
@@ -193,16 +197,28 @@ def search_image_list(context, paginate=True, **kwargs):
                 )
             )
         equipment_item_listings = EquipmentItemListing.objects \
-            .annotate(distance=TrigramDistance('item_full_name', name)) \
+            .annotate(distance=TrigramDistance('item_full_name', search_term)) \
             .filter(
                 Q(
                     Q(distance__lte=.5) |
-                    Q(item_full_name__icontains=name)
+                    Q(item_full_name__icontains=search_term)
                 ) &
                 Q(
                     Q(retailer__countries__icontains=country) |
                     Q(retailer__countries__isnull=True)
                 )
+            )
+
+        marketplace_line_items = EquipmentItemMarketplaceListingLineItem.objects \
+            .annotate(distance=TrigramDistance('item_name', search_term)) \
+            .filter(
+                Q(
+                    Q(distance__lte=.5) |
+                    Q(item_name__icontains=search_term)
+                ),
+                sold__isnull=True,
+                listing__approved__isnull=False,
+                listing__expiration__gt=DateTimeService.now(),
             )
 
     context.update({
@@ -211,6 +227,8 @@ def search_image_list(context, paginate=True, **kwargs):
         'sort': context['request'].GET.get('sort'),
         'equipment_brand_listings': equipment_brand_listings,
         'equipment_item_listings': equipment_item_listings,
+        'marketplace_line_items': marketplace_line_items,
+        'search_term': search_term,
     })
 
     return context
@@ -556,7 +574,8 @@ def has_subscription_by_name(user, name):
         return False
 
     return UserSubscription.objects.filter(
-        user=user, subscription__name=name).count() > 0
+        user=user, subscription__name=name
+    ).count() > 0
 
 
 @register.filter

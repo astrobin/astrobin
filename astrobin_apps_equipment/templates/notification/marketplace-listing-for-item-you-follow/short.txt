@@ -1,0 +1,6 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ seller_display_name }} published a marketplace listing "{{ listing }}" with an equipment item you follow:
+    "{{ line_item }}"
+{% endblocktrans %}

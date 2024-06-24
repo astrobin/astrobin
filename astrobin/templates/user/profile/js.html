@@ -1,8 +1,21 @@
 {% load i18n %}
+{% load common_tags %}
 
 <script type="text/javascript">
 $(document).ready(function() {
     astrobin_common.init_ajax_csrf_token();
+    
+    function fetchMarketplaceFragment() {
+        $.ajax({
+            url: "{% url 'user_marketplace_fragment' requested_user.username %}",
+            type: "POST",
+            dataType: "html",
+            timeout: 0,
+            success: function (data) {
+                $(".user-marketplace-container").html(data);
+            }
+        });
+    }
 
     {% ifequal request.GET.view None %}
         if (astrobin_common.utils.isTouchDevice() && window.innerWidth >= 375) {
@@ -104,5 +117,9 @@ $(document).ready(function() {
             loadFancyboxList();
         }
     {% endifequal %}
+    
+    {% if request.user|is_in_astrobin_group:BETA_TESTERS_GROUP_NAME %}
+        fetchMarketplaceFragment();
+    {% endif %}
 });
 </script>

@@ -1,0 +1,17 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Your marketplace listing "{{ listing }}" expired
+{% endblocktrans %}.
+
+{% blocktrans trimmed %}
+    You can renew it by clicking the link below:
+{% endblocktrans %}
+
+{% blocktrans trimmed %}View listing{% endblocktrans %}:
+
+{{ listing_url }}
+
+{% blocktrans trimmed %}
+    PS: if you sold items from this listing, please mark them as sold.
+{% endblocktrans %}

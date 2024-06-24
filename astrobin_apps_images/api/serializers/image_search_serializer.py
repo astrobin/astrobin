@@ -49,6 +49,7 @@ class ImageSearchSerializer(HaystackSerializer):
     class Meta:
         index_classes = [ImageIndex]
         fields = [
+            'username',
             'object_id',
             'text',
             'hash',

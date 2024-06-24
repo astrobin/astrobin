@@ -1,4 +1,5 @@
 import mock
+from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from django.urls import reverse
 from pybb.models import Topic
@@ -9,7 +10,7 @@ from astrobin_apps_equipment.models import EquipmentBrand, Telescope
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemRejectionReason, EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
-from astrobin_apps_equipment.services import EquipmentItemService
+from astrobin_apps_equipment.services import EquipmentItemService, EquipmentService
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
 
@@ -27,6 +28,56 @@ class TestApiTelescopeViewSet(TestCase):
         telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(telescope.name, response.data['results'][0]['name'])
+
+    def test_list_diy(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        Telescope.objects.filter(pk=telescope.pk).update(brand=None)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+        self.assertEquals(0, response.data['count'])
+
+    def test_list_diy_but_creator(self):
+        client = APIClient()
+
+        user = Generators.user()
+        telescope = EquipmentGenerators.telescope(
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+            created_by=user
+        )
+        Telescope.objects.filter(pk=telescope.pk).update(brand=None)
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(telescope.name, response.data['results'][0]['name'])
+
+    def test_list_diy_but_moderator(self):
+        client = APIClient()
+
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        Telescope.objects.filter(pk=telescope.pk).update(brand=None)
+
+        client.login(username=user.username, password=user.password)
+        client.force_authenticate(user=user)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(telescope.name, response.data['results'][0]['name'])
+
+    def test_list_diy_but_override(self):
+        client = APIClient()
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        Telescope.objects.filter(pk=telescope.pk).update(brand=None)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list') + '?allow-DIY=true', format='json')
         self.assertEquals(1, response.data['count'])
         self.assertEquals(telescope.name, response.data['results'][0]['name'])
 
@@ -502,3 +553,48 @@ class TestApiTelescopeViewSet(TestCase):
 
         self.assertFalse(EquipmentPreset.objects.filter(imaging_telescopes=telescope).exists())
         push_notification.assert_called_with([user], None, 'ambiguous-item-removed-from-presets', mock.ANY)
+
+    def test_reject_as_duplicate_updates_marketplace_line_item(self):
+        user = Generators.user()
+        duplicate = EquipmentGenerators.telescope(created_by=user)
+        telescope = EquipmentGenerators.telescope(created_by=user)
+
+        listing = EquipmentGenerators.marketplace_listing()
+        line_item = EquipmentGenerators.marketplace_line_item(listing=listing, item=duplicate)
+
+        duplicate.reviewed_by = Generators.user()
+        duplicate.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
+        duplicate.reviewer_rejection_reason = EquipmentItemRejectionReason.DUPLICATE
+        duplicate.reviewer_rejection_duplicate_of_klass = EquipmentItemKlass.TELESCOPE
+        duplicate.reviewer_rejection_duplicate_of = telescope.id
+
+        EquipmentService.reject_item(duplicate)
+
+        line_item.refresh_from_db()
+
+        self.assertEquals(telescope, line_item.item_content_object)
+
+    def test_reject_updates_marketplace_line_item(self):
+        user = Generators.user()
+        bad = EquipmentGenerators.telescope(created_by=user)
+
+        listing = EquipmentGenerators.marketplace_listing()
+        line_item = EquipmentGenerators.marketplace_line_item(listing=listing, item=bad)
+
+        original_name = str(bad)
+
+        bad.reviewed_by = Generators.user()
+        bad.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
+        bad.reviewer_rejection_reason = EquipmentItemRejectionReason.OTHER
+
+        EquipmentService.reject_item(bad)
+
+        line_item.refresh_from_db()
+
+        # Content type didn't change
+        self.assertEquals(ContentType.objects.get_for_model(bad), line_item.item_content_type)
+
+        # Item is now reverted to plain text version
+        self.assertIsNone(line_item.item_object_id)
+        self.assertIsNone(line_item.item_content_object)
+        self.assertEquals(original_name, line_item.item_plain_text)

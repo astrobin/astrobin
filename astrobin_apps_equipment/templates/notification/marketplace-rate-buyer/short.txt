@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Rate the buyer for your recent purchase from marketplace listing "{{ listing }}"
+{% endblocktrans %}

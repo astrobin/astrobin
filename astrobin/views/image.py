@@ -52,6 +52,7 @@ from astrobin.services.gear_service import GearService
 from astrobin.services.utils_service import UtilsService
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_client_country_code, get_image_resolution
+from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
@@ -65,7 +66,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_se
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.exceptions import Http410
-from common.services import AppRedirectionService
+from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 
 logger = logging.getLogger(__name__)
@@ -1488,6 +1489,58 @@ class ImageAcquisitionFragment(View):
                 'locations': locations,
                 'search_query': search_query,
                 'dates_label': _("Dates"),
+            }
+        )
+
+
+@method_decorator(
+    [
+        csrf_exempt,
+    ], name='dispatch'
+)
+class ImageMarketplaceFragment(View):
+    def post(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            return HttpResponseBadRequest()
+
+        image_id: Union[str, int] = self.kwargs.get('id')
+        try:
+            image: Image = ImageService.get_object(image_id, Image.objects_including_wip_plain)
+        except Image.DoesNotExist:
+            raise Http404
+
+        if image is None:
+            raise Http404
+
+        line_items = []
+
+        if UserService(request.user).is_in_astrobin_group(GroupName.BETA_TESTERS):
+            for prop in (
+                'imaging_telescopes_2',
+                'guiding_telescopes_2',
+                'imaging_cameras_2',
+                'guiding_cameras_2',
+                'mounts_2',
+                'filters_2',
+                'accessories_2',
+                'software_2',
+            ):
+                for x in getattr(image, prop).all():
+                    line_item_objects = EquipmentItemMarketplaceListingLineItem.objects.filter(
+                        user=image.user,
+                        item_object_id=x.pk,
+                        item_content_type=ContentType.objects.get_for_model(x),
+                        sold__isnull=True,
+                        listing__approved__isnull=False,
+                        listing__expiration__gt=DateTimeService.now(),
+                    )
+
+                    if line_item_objects.exists():
+                        line_items.append(*list(line_item_objects))
+
+        return render(
+            request, 'image/detail/marketplace.html', {
+                'line_items': line_items,
             }
         )
 

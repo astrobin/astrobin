@@ -1,0 +1,24 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Unfortunately, your offer for listing "{{ listing }}" has been rejected by the seller {{ seller_display_name }}.
+{% endblocktrans %}
+
+{% for offer in rejected_offers %}
+    {% trans "Item" %}: {{ offer.line_item }}
+    {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
+    {% if offer.line_item.shipping_cost %}
+        {% trans "Shipping" %}: {{ offer.line_item.currency }} {{ offer.line_item.shipping_cost }}
+    {% endif %}
+    {% if not forloop.last %}
+
+    {% endif %}
+{% endfor %}
+
+{% blocktrans trimmed %}
+    You may contact the seller using the listing's page for more information.
+{% endblocktrans %}
+
+{% trans "View listing" %}:
+{{ listing_url }}
+

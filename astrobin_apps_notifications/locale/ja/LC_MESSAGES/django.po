@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-17 08:39+0000\n"
-"PO-Revision-Date: 2023-10-17 10:18+0200\n"
+"POT-Creation-Date: 2024-05-24 10:35+0000\n"
+"PO-Revision-Date: 2023-10-30 11:32+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.28 20230927-1\n"
+"X-Loco-Api-Version: 1.0.28 20240520-1\n"
 
 msgid "You have a new follower"
 msgstr "新しいフォロワーがいます"
@@ -51,6 +51,15 @@ msgstr "予定されていたIOTDに新しいコメントが届きました"
 
 msgid "Your unapproved equipment item received a comment"
 msgstr "あなたの未承認の機材にコメントが届きました"
+
+msgid "Your listing has a new private conversation"
+msgstr ""
+
+msgid "Your private conversation has a new comment"
+msgstr ""
+
+msgid "Your listing has a new question"
+msgstr ""
 
 msgid "There was a reply to your comment"
 msgstr "あなたへのコメントに返信がありました"
@@ -104,6 +113,9 @@ msgstr "あなたが所属しているグループに新しいフォーラムト
 msgid "New forum topic for an equipment item you use"
 msgstr "あなたが使用する機材に関するフォーラムに新しいトピックがありました"
 
+msgid "New forum topic for an equipment item you follow"
+msgstr ""
+
 msgid "Your forum topic was moved"
 msgstr ""
 
@@ -133,6 +145,9 @@ msgstr "アカウントのアクティベーションを行いますか？"
 
 msgid "New reply in a subscribed forum topic"
 msgstr "登録中のフォーラムトピックで新しい返信がありました"
+
+msgid "New reply in a forum topic that you started"
+msgstr ""
 
 msgid "You were mentioned in a forum post"
 msgstr "フォーラムへの投稿であなたはメンションされました"
@@ -170,11 +185,20 @@ msgstr "あなたはIOTHのスタッフから削除されました"
 msgid "You have been inactive as an IOTD staff member"
 msgstr "あなたはIOTDのスタッフから無効化されました"
 
+msgid "Your IOTD staff activity is insufficient"
+msgstr ""
+
 msgid "An image you promoted made it to Top Pick"
 msgstr "あなたが公開した画像がTop Pickに選ばれました"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "あなたが公開した画像がIOTDに選ばれました"
+
+msgid "An image you dismissed made it to Top Pick"
+msgstr ""
+
+msgid "An image you dismissed made it to IOTD"
+msgstr ""
 
 msgid "Your image was nominated to be a Top Pick"
 msgstr "あなたの画像がTop Pickにノミネートされました"
@@ -185,11 +209,23 @@ msgstr "あなたの画像がTop Pickに投票されました"
 msgid "Your image was voted Image of the Day"
 msgstr "あなたの画像が Image of the Dayに投票されました"
 
+msgid "Your IOTD staff member stats"
+msgstr ""
+
 msgid "You were mentioned in an image description"
 msgstr "画像の説明文にあなたがメンションされました"
 
 msgid "A gear item that you used was renamed"
 msgstr "あなたが使用した機材の名称が変更されました"
+
+msgid "Collaboration Request: Accept or Deny"
+msgstr ""
+
+msgid "User accepted your collaboration request"
+msgstr ""
+
+msgid "User denied your collaboration request"
+msgstr ""
 
 msgid "You were added as a collaborator to an image"
 msgstr "画像のコラボレーターとしてあなたは追加されました"

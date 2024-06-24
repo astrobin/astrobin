@@ -24,6 +24,7 @@ from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
+from astrobin.utils import generate_unique_hash
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
@@ -1043,7 +1044,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     hash = models.CharField(
         max_length=6,
-        default=image_hash,
+        default=lambda: generate_unique_hash(6, Image.all_objects),
         null=True,
         unique=True
     )
