@@ -55,6 +55,6 @@ class SubmitterSeenImageViewSet(viewsets.ModelViewSet):
         except IntegrityError:
             return Response(status=204)
         except Exception as e:
-            log.error('Unhandled error creating IotdSubmitterSeenImage: ' + e)
+            log.error('Unhandled error creating IotdSubmitterSeenImage: ' + str(e))
             return Response(status=204)
 

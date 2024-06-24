@@ -55,6 +55,6 @@ class ReviewerSeenImageViewSet(viewsets.ModelViewSet):
         except IntegrityError:
             return Response(status=204)
         except Exception as e:
-            log.error('Unhandled error creating IotdReviewerSeenImage: ' + e)
+            log.error('Unhandled error creating IotdReviewerSeenImage: ' + str(e))
             return Response(status=204)
 
