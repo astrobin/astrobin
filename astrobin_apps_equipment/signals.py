@@ -770,7 +770,7 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                             'line_item': line_item,
                         }
                     )
-        else:
+        elif not instance.pre_save_approved_again:
             # The item is being updated and not merely approved.
 
             users_with_offers = User.objects.filter(
