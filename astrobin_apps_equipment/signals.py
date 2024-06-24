@@ -649,8 +649,8 @@ def send_master_offer_notifications(sender, instance: EquipmentItemMarketplaceMa
                     instance.user.pk,
                     instance.pk,
                     None,
-                    [instance.listing.user.pk],
-                    instance.user.pk,
+                    [instance.user.pk],
+                    instance.listing.user.pk,
                     'marketplace-offer-rejected-by-seller',
                 ], countdown=10
             )
