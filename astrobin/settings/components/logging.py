@@ -201,6 +201,12 @@ if (
         'formatter': 'aws',
     }
 
+    LOGGING['loggers']['marketplace'] = {
+        'handlers': ['watchtower_marketplace'],
+        'level': 'DEBUG',
+        'propagate': False,
+    }
+
     for logger_name, logger_config in LOGGING['loggers'].items():
-        LOGGING['loggers'][logger_name]['handlers'].append('watchtower')
-        LOGGING['loggers'][logger_name]['handlers'].append('watchtower_marketplace')
+        if logger_name != 'marketplace':
+            logger_config['handlers'].append('watchtower')
