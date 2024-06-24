@@ -86,6 +86,7 @@ FIELDS = (
     'filter_types',
     'user_id',
     'acquisition_months',
+    'username',
     'telescope_ids',
     'camera_ids',
     'mount_ids',
