@@ -1258,7 +1258,7 @@ def user_page(request, username):
 
     view = request.GET.get('view', 'default')
 
-    if view == 'table' and subsection not in (
+    if view == 'table' and subsection is not None and subsection not in (
         # Table views that support sorting
         'acquired'
     ) and section != 'trash':
