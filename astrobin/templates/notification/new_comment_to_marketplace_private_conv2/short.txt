@@ -1,5 +1,5 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    {{user}} posted on your private conversation on marketplace listing "{{ target }}".
+    {{user}} sent you a private message on marketplace listing "{{ target }}".
 {% endblocktrans %}
