@@ -56,6 +56,9 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         return obj.item_content_object.klass
 
     def get_first_added_to_an_image(self, obj):
+        first_appeared_in_log_entry = None
+        first_appeared_in_image = None
+
         log_entry = ImageEquipmentLog.objects.filter(
             equipment_item_content_type=obj.item_content_type,
             equipment_item_object_id=obj.item_object_id,
@@ -63,7 +66,7 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         ).order_by('date').first()
 
         if log_entry:
-            return log_entry.date
+            first_appeared_in_log_entry = log_entry.date
 
         image = Image.objects.filter(
             Q(user=obj.user) &
@@ -72,7 +75,14 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         ).order_by('published').first()
 
         if image:
-            return image.published
+            first_appeared_in_image = image.published
+
+        if first_appeared_in_log_entry is not None and first_appeared_in_image is not None:
+            return min(first_appeared_in_log_entry, first_appeared_in_image)
+        elif first_appeared_in_log_entry is not None:
+            return first_appeared_in_log_entry
+        elif first_appeared_in_image is not None:
+            return first_appeared_in_image
 
         return None
 
