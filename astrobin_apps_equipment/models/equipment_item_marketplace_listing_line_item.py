@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext
@@ -79,6 +80,7 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
         decimal_places=2,
         null=True,
         blank=True,
+        validators=[MinValueValidator(0)]
     )
 
     currency = models.CharField(

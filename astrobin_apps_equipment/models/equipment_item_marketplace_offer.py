@@ -2,6 +2,7 @@
 from enum import Enum
 
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -73,6 +74,7 @@ class EquipmentItemMarketplaceOffer(models.Model):
         decimal_places=2,
         null=True,
         blank=True,
+        validators=[MinValueValidator(0.01)]
     )
 
     status = models.CharField(
