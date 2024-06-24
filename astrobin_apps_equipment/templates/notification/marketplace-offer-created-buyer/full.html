@@ -12,10 +12,6 @@
 
 
 <p>
-    {% trans "User" %}: <strong>{{ buyer_display_name }}</strong>
-</p>
-
-<p>
     {% for offer in pending_offers %}
         {% trans "Item" %}: <strong>{{ offer.line_item }}</strong><br/>
         {% trans "Offer amount" %}: <strong>{{ offer.line_item.currency }} {{ offer.amount }}</strong>

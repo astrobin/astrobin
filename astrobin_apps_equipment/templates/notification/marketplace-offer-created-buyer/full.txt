@@ -8,7 +8,6 @@
     Offer details
 {% endblocktrans %}
 
-{% trans "User" %}: {{ buyer_display_name }}
 {% for offer in pending_offers %}
     {% trans "Item" %}: {{ offer.line_item }}
     {% trans "Offer amount" %}: {{ offer.line_item.currency }} {{ offer.amount }}
