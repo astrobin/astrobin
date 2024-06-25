@@ -2,14 +2,13 @@
 
 <p>
     {% blocktrans trimmed %}
-        Your offer for <strong>{{ item }}</strong> has been recorded.
+        Your offer for <strong>{{ listing }}</strong> has been recorded.
     {% endblocktrans %}
 </p>
 
 <p>
     <strong>{% trans "Offer details" %}</strong>
 </p>
-
 
 <p>
     {% for offer in pending_offers %}

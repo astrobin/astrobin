@@ -536,7 +536,7 @@ def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceM
                 [instance.listing.user.pk],
                 instance.user.pk,
                 'marketplace-offer-created',
-            ], countdown=30
+            ], countdown=10
         )
 
         send_offer_notifications.apply_async(
@@ -548,7 +548,7 @@ def send_offer_created_notifications(sender, instance: EquipmentItemMarketplaceM
                 [instance.user.pk],
                 instance.listing.user.pk,
                 'marketplace-offer-created-buyer',
-            ], countdown=30
+            ], countdown=10
         )
 
 
