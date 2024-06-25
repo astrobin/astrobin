@@ -19,6 +19,7 @@ from astrobin_apps_equipment.models import (
     TelescopeEditProposal,
 )
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
+from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.services.stock import StockImporterService
@@ -127,6 +128,33 @@ def send_offer_notifications(
     buyer = User.objects.get(pk=buyer_id)
     master_offer = EquipmentItemMarketplaceMasterOffer.objects.get(pk=master_offer_id) if master_offer_id else None
     offer = EquipmentItemMarketplaceOffer.objects.get(pk=offer_id) if offer_id else None
+
+    # Integrity check in case the status of the offer has changed since the task was scheduled.
+    integrity_check_offer = None
+    if master_offer:
+        integrity_check_offer = master_offer
+    elif offer:
+        integrity_check_offer = offer
+
+    if integrity_check_offer:
+        if (
+            'offer-created' in notice_label
+            and integrity_check_offer.status != EquipmentItemMarketplaceOfferStatus.PENDING.value
+        ) or (
+            'offer-accepted' in notice_label and
+            integrity_check_offer.status != EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
+        ) or (
+            'offer-rejected' in notice_label and
+            integrity_check_offer.status != EquipmentItemMarketplaceOfferStatus.REJECTED.value
+        ) or (
+            'offer-retracted' in notice_label and
+            integrity_check_offer.status != EquipmentItemMarketplaceOfferStatus.RETRACTED.value
+        ):
+            log.warning(
+                f"Offer status doesn't match the notice label. Skipping notification. "
+                f"Offer status: {integrity_check_offer.status}, notice label: {notice_label}"
+            )
+            return
 
     recipients = User.objects.filter(pk__in=recipient_ids)
     if sender_id:
