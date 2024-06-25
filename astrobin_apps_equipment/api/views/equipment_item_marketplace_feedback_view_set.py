@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -90,6 +92,16 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
         )
 
         if existing_feedback:
+            # Check if feedback is too old to be edited
+            max_days = 30
+            if existing_feedback.created + timedelta(days=max_days) < DateTimeService.now():
+                return Response(
+                    {
+                        "detail": f"Feedback cannot be edited after {max_days} days."
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
             # Update existing feedback
             serializer = self.get_serializer(existing_feedback, data=updated_data)
             serializer.is_valid(raise_exception=True)
