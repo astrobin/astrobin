@@ -59,6 +59,12 @@ class EquipmentItemMarketplaceFeedback(SafeDeleteModel):
         editable=False,
     )
 
+    updated = models.DateTimeField(
+        auto_now=True,
+        null=False,
+        editable=False,
+    )
+
     value = models.CharField(
         max_length=16,
         null=False,

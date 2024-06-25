@@ -65,33 +65,43 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
             )
 
         line_item = get_object_or_404(EquipmentItemMarketplaceListingLineItem, pk=line_item_id)
-        existing_feedback = EquipmentItemMarketplaceFeedback.objects.filter(
-            line_item=line_item,
-            user=request.user,
-            category=category
-        ).exists()
 
-        if existing_feedback:
-            return Response(
-                {"detail": "Feedback by this user for this line item and category already exists."},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
+        # Determine the target_type based on the user's relationship to the line item
         if request.user == line_item.listing.user:
             target_type = MarketplaceFeedbackTargetType.BUYER.value
         else:
             target_type = MarketplaceFeedbackTargetType.SELLER.value
 
-        request.data['target_type'] = target_type
-        request.data['user'] = request.user.pk
+        # Prepare data for update_or_create
+        updated_data = request.data.copy()
+        updated_data['target_type'] = target_type
+        updated_data['user'] = request.user.pk
 
-        retval = super().create(request, *args, **kwargs)
+        # Check for existing feedback
+        existing_feedback = EquipmentItemMarketplaceFeedback.objects.filter(
+            line_item=line_item,
+            recipient=recipient,
+            user=request.user,
+            category=category
+        ).first()
 
         UserProfile.objects.filter(user__pk=recipient).update(
             updated=DateTimeService.now()
         )
 
-        return retval
+        if existing_feedback:
+            # Update existing feedback
+            serializer = self.get_serializer(existing_feedback, data=updated_data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_update(serializer)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            # Create new feedback
+            serializer = self.get_serializer(data=updated_data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer):
         super().perform_create(serializer)
@@ -99,6 +109,17 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
         MarketplaceService.log_event(
             self.request.user,
             'created',
+            self.get_serializer_class(),
+            serializer.instance,
+            context={'request': self.request},
+        )
+
+    def perform_update(self, serializer):
+        super().perform_update(serializer)
+
+        MarketplaceService.log_event(
+            self.request.user,
+            'updated',
             self.get_serializer_class(),
             serializer.instance,
             context={'request': self.request},
