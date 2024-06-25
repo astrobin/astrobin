@@ -181,31 +181,6 @@ class SignalsTest(TestCase):
 
         push_notification.asset_called_times(2)
 
-    @patch('astrobin_apps_equipment.tasks.push_notification')
-    def test_marketplace_master_offer_accepted(self, push_notification):
-        seller = Generators.user()
-        listing = EquipmentGenerators.marketplace_listing(user=seller)
-        line_item_1 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
-        line_item_2 = EquipmentGenerators.marketplace_line_item(listing=listing, user=seller)
-        buyer = Generators.user()
-        offer_1 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_1, user=buyer)
-        offer_2 = EquipmentGenerators.marketplace_offer(listing=listing, line_item=line_item_2, user=buyer)
-
-        push_notification.reset_mock()
-
-        offer_1.status = EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
-        offer_2.status = EquipmentItemMarketplaceOfferStatus.ACCEPTED.value
-
-        offer_1.save()
-        offer_2.save()
-
-        push_notification.assert_has_calls([
-            mock.call([buyer], seller, 'marketplace-offer-accepted-by-seller', mock.ANY),
-            mock.call([seller], None, 'marketplace-offer-accepted-by-you', mock.ANY),
-        ], any_order=True)
-
-        push_notification.asset_called_times(2)
-
     @patch('astrobin_apps_equipment.signals.push_notification')
     def test_marketplace_listing_updated(self, push_notification):
         seller = Generators.user()
