@@ -42,7 +42,7 @@ class TasksTest(TestCase):
         seller = Generators.user()
         buyer = Generators.user()
         listing = EquipmentGenerators.marketplace_listing(user=seller)
-        line_item = EquipmentGenerators.marketplace_line_item(
+        EquipmentGenerators.marketplace_line_item(
             user=seller,
             listing=listing,
             reserved=DateTimeService.now() - timedelta(days=11),
@@ -50,10 +50,11 @@ class TasksTest(TestCase):
             sold=DateTimeService.now() - timedelta(days=11),
             sold_to=buyer,
         )
+
         EquipmentGenerators.marketplace_feedback(
             user=buyer,
             recipient=seller,
-            line_item=line_item,
+            listing=listing,
             communication_value=MarketplaceFeedback.POSITIVE.value,
             speed_value=MarketplaceFeedback.POSITIVE.value,
             message="Great seller",
@@ -72,7 +73,7 @@ class TasksTest(TestCase):
         seller = Generators.user()
         buyer = Generators.user()
         listing = EquipmentGenerators.marketplace_listing(user=seller)
-        line_item = EquipmentGenerators.marketplace_line_item(
+        EquipmentGenerators.marketplace_line_item(
             user=seller,
             listing=listing,
             reserved=DateTimeService.now() - timedelta(days=11),
@@ -83,7 +84,7 @@ class TasksTest(TestCase):
         EquipmentGenerators.marketplace_feedback(
             user=seller,
             recipient=buyer,
-            line_item=line_item,
+            listing=listing,
             communication_value=MarketplaceFeedback.POSITIVE.value,
             speed_value=MarketplaceFeedback.POSITIVE.value,
             message="Great buyer",
@@ -101,6 +102,7 @@ class TasksTest(TestCase):
         seller = Generators.user()
         buyer = Generators.user()
         listing = EquipmentGenerators.marketplace_listing(user=seller)
+
         EquipmentGenerators.marketplace_line_item(
             user=seller,
             listing=listing,
@@ -132,7 +134,7 @@ class TasksTest(TestCase):
         EquipmentGenerators.marketplace_feedback(
             user=seller,
             recipient=buyer,
-            line_item=line_item,
+            listing=listing,
             communication_value=MarketplaceFeedback.POSITIVE.value,
             speed_value=MarketplaceFeedback.POSITIVE.value,
             message="Great buyer",
@@ -151,7 +153,7 @@ class TasksTest(TestCase):
         seller = Generators.user()
         buyer = Generators.user()
         listing = EquipmentGenerators.marketplace_listing(user=seller)
-        line_item = EquipmentGenerators.marketplace_line_item(
+        EquipmentGenerators.marketplace_line_item(
             user=seller,
             listing=listing,
             reserved=DateTimeService.now() - timedelta(days=11),
@@ -162,7 +164,7 @@ class TasksTest(TestCase):
         EquipmentGenerators.marketplace_feedback(
             user=buyer,
             recipient=seller,
-            line_item=line_item,
+            listing=listing,
             communication_value=MarketplaceFeedback.POSITIVE.value,
             speed_value=MarketplaceFeedback.POSITIVE.value,
             message="Great seller",

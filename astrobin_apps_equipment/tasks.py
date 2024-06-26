@@ -179,7 +179,7 @@ def remind_about_rating_seller():
     line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
         sold__lt=cutoff,
         sold_to__isnull=False,
-        rate_seller_reminder_sent__isnull=True
+        listing__rate_seller_reminder_sent__isnull=True
     ).select_related('listing__user__userprofile', 'sold_to')
 
     # Dictionary to keep track of users we've reminded
@@ -195,8 +195,9 @@ def remind_about_rating_seller():
 
         # Check if feedback already exists
         feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
+            user=buyer,
             target_type=MarketplaceFeedbackTargetType.SELLER.value,
-            line_item=line_item
+            listing=listing
         ).exists()
 
         if not feedback_exists:
@@ -211,8 +212,8 @@ def remind_about_rating_seller():
                 }
             )
 
-            line_item.rate_seller_reminder_sent = timezone.now()
-            line_item.save(update_fields=['rate_seller_reminder_sent'])
+            listing.rate_seller_reminder_sent = timezone.now()
+            listing.save(update_fields=['rate_seller_reminder_sent'])
 
             reminded_users[buyer.id] = True
 
@@ -226,7 +227,7 @@ def remind_about_rating_buyer():
     line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
         sold__lt=cutoff,
         sold_to__isnull=False,
-        rate_buyer_reminder_sent__isnull=True
+        listing__rate_buyer_reminder_sent__isnull=True
     ).select_related('listing__user__userprofile', 'user', 'sold_to')
 
     # Dictionary to keep track of users we've reminded
@@ -242,8 +243,9 @@ def remind_about_rating_buyer():
 
         # Check if feedback already exists
         feedback_exists = EquipmentItemMarketplaceFeedback.objects.filter(
+            user=seller,
             target_type=MarketplaceFeedbackTargetType.BUYER.value,
-            line_item=line_item
+            listing=listing
         ).exists()
 
         if not feedback_exists:
@@ -258,8 +260,8 @@ def remind_about_rating_buyer():
                 }
             )
 
-            line_item.rate_buyer_reminder_sent = timezone.now()
-            line_item.save(update_fields=['rate_buyer_reminder_sent'])
+            listing.rate_buyer_reminder_sent = timezone.now()
+            listing.save(update_fields=['rate_buyer_reminder_sent'])
 
             reminded_users[seller.id] = True
 

@@ -117,6 +117,18 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         null=True,
     )
 
+    # The reminder to rate the seller has been sent.
+    rate_seller_reminder_sent = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    # The reminder to rate the buyer has been sent.
+    rate_buyer_reminder_sent = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     def delete(self, *args, **kwargs):
         from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
         related_children = EquipmentItemMarketplaceListingLineItem.objects.filter(listing=self)

@@ -20,6 +20,8 @@ from astrobin_apps_equipment.api.views.equipment_item_marketplace_listing_view_s
     EquipmentItemMarketplaceListingViewSet
 from astrobin_apps_equipment.api.views.equipment_item_marketplace_private_conversation_view_set import \
     EquipmentItemMarketplacePrivateConversationViewSet
+from astrobin_apps_equipment.api.views.equipment_item_marketplace_user_feedback_view_set import \
+    EquipmentItemMarketplaceUserFeedbackViewSet
 from astrobin_apps_equipment.api.views.equipment_preset_view_set import EquipmentPresetViewSet
 from astrobin_apps_equipment.api.views.filter_edit_proposal_view_set import FilterEditProposalViewSet
 from astrobin_apps_equipment.api.views.filter_view_set import FilterViewSet
@@ -95,6 +97,12 @@ router.register(
     r'marketplace/listing/(?P<listing_id>[^/.]+)/feedback',
     EquipmentItemMarketplaceFeedbackViewSet,
     basename='marketplace-feedback'
+)
+
+router.register(
+    r'marketplace/user/(?P<user_id>[^/.]+)/feedback',
+    EquipmentItemMarketplaceUserFeedbackViewSet,
+    basename='marketplace-user-feedback'
 )
 
 urlpatterns = [

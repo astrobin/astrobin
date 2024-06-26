@@ -301,7 +301,7 @@ class EquipmentGenerators:
     def marketplace_feedback(**kwargs):
         user = kwargs.get('user')
         recipient = kwargs.get('recipient')
-        line_item = kwargs.get('line_item')
+        listing = kwargs.get('listing')
 
         if user is None:
             user = Generators.user()
@@ -309,13 +309,13 @@ class EquipmentGenerators:
         if recipient is None:
             recipient = Generators.user()
 
-        if line_item is None:
-            line_item = EquipmentGenerators.marketplace_line_item()
+        if listing is None:
+            listing = EquipmentGenerators.marketplace_listing()
 
         return EquipmentItemMarketplaceFeedback.objects.create(
             user=user,
             recipient=recipient,
-            line_item=line_item,
+            listing=listing,
             communication_value=kwargs.get('category_value', MarketplaceFeedback.POSITIVE.value),
             speed_value=kwargs.get('speed_value', MarketplaceFeedback.POSITIVE.value),
             packaging_value=kwargs.get('packaging_value', MarketplaceFeedback.POSITIVE.value),
