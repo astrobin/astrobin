@@ -335,3 +335,16 @@ def remind_about_marking_items_as_sold():
         )
 
         users.add(line_item.sold_to)
+
+
+@shared_task(time_limit=30)
+def auto_approve_marketplace_listings():
+    listings = EquipmentItemMarketplaceListing.objects.filter(
+        approved__isnull=True,
+        expiration__gt=timezone.now()
+    )
+
+    admin = User.objects.get(username='astrobin')
+
+    for listing in listings:
+        MarketplaceService.approve_listing(listing, admin)
