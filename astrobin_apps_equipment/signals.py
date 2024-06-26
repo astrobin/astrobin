@@ -16,7 +16,8 @@ from safedelete.signals import post_softdelete
 
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
-    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentItemMarketplaceListing,
+    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentItemMarketplaceFeedback,
+    EquipmentItemMarketplaceListing,
     EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceMasterOffer,
     EquipmentItemMarketplaceOffer,
     EquipmentPreset, Filter, Mount, Sensor,
@@ -880,3 +881,39 @@ def marketplace_listing_line_item_post_save(sender, instance: EquipmentItemMarke
 def fill_in_listing_lat_lon(sender, instance: EquipmentItemMarketplaceListing, **kwargs):
     if instance.country and instance.city and not instance.latitude and not instance.longitude:
         MarketplaceService.fill_in_listing_lat_lon(instance)
+
+
+@receiver(post_save, sender=EquipmentItemMarketplaceFeedback)
+def send_marketplace_feedback_notifications(sender, instance: EquipmentItemMarketplaceFeedback, created: bool, **kwargs):
+    if created:
+        push_notification(
+            [instance.recipient],
+            instance.user,
+            'marketplace-feedback-created',
+            {
+                'user': instance.user.userprofile.get_display_name(),
+                'user_url': build_notification_url(
+                    settings.BASE_URL + reverse('user_page', args=(instance.user.username,))
+                ),
+                'listing': instance.listing,
+                'listing_url': build_notification_url(instance.listing.get_absolute_url()),
+                'feedback': instance,
+                'feedback_url': build_notification_url(instance.get_absolute_url())
+            }
+        )
+    else:
+        push_notification(
+            [instance.recipient],
+            instance.user,
+            'marketplace-feedback-updated',
+            {
+                'user': instance.user.userprofile.get_display_name(),
+                'user_url': build_notification_url(
+                    settings.BASE_URL + reverse('user_page', args=(instance.user.username,))
+                ),
+                'listing': instance.listing,
+                'listing_url': build_notification_url(instance.listing.get_absolute_url()),
+                'feedback': instance,
+                'feedback_url': build_notification_url(instance.get_absolute_url())
+            }
+        )

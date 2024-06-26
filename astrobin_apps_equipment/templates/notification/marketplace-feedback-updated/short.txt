@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed with _0='"' _1='"' %}
+    {{ user }} updated your feedback for marketplace listing {{ _0}}{{ listing }}{{ _1}}
+{% endblocktrans %}

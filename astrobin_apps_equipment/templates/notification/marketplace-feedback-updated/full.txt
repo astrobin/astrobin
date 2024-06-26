@@ -1,0 +1,29 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Your feedback for a listing on the marketplace was updated by the user who left it.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Feedback details
+{% endblocktrans %}
+
+{% trans "Listing" %}: {{ listing }}
+{% trans "User" %}: {{ user }}
+{% if feedback.communication_value %}{% trans "Communication" %}: {{ feedback.communication_value }}{% endif %}
+{% if feedback.speed_value %}{% trans "Speed" %}: {{ feedback.speed_value }}{% endif %}
+{% if feedback.accuracy_value %}{% trans "Accuracy of item descriptions" %}: {{ feedback.accuracy_value }}{% endif %}
+{% if feedback.packaging_value %} {% trans "Packaging quality" %}: {{ feedback.packaging_value }}{% endif %}
+{% if feedback.message %}{% trans "Message" %}: {{ feedback.message }}{%endif %}
+
+{% blocktrans trimmed %}
+    To review and respond to the feedback, please visit the following link:
+{% endblocktrans %}
+
+{{ feedback_url }}
+
+{% blocktrans trimmed %}
+    To view the listing, please visit the following link:
+{% endblocktrans %}
+
+{{ listing_url }}

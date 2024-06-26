@@ -1,0 +1,47 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        Your feedback for a listing on the marketplace was updated by the user who left it.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Feedback details
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% trans "Listing" %}: <a href="{{ listing_url }}">{{ listing }}</a><br/>
+    {% trans "User" %}: <a href="{{ user_url }}">{{ user }}</a><br/>
+    {% if feedback.communication_value %}{% trans "Communication" %}: {{ feedback.communication_value }}<br/>{% endif %}
+    {% if feedback.speed_value %}{% trans "Speed" %}: {{ feedback.speed_value }}<br/>{% endif %}
+    {% if feedback.accuracy_value %}{% trans "Accuracy of item descriptions" %}: {{ feedback.accuracy_value }}<br/>{% endif %}
+    {% if feedback.packaging_value %} {% trans "Packaging quality" %}: {{ feedback.packaging_value }}<br/>{% endif %}
+    {% if feedback.message %}{% trans "Message" %}: {{ feedback.message }}{%endif %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        To review and respond to the feedback, please visit the following link:
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ feedback_url }}" class="btn btn-primary">
+        {% trans "View feedback "%}
+    </a>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        To view the listing, please visit the following link:
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ listing_url }}" class="btn btn-primary">
+        {% trans "View listing" %}
+    </a>
+</p>
