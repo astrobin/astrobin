@@ -33,4 +33,6 @@ EQUIPMENT_NOTICE_TYPES = (
     ('marketplace-rate-seller', _('Rate the seller for your recent purchase'), '', 2),
     ('marketplace-rate-buyer', _('Rate the buyer for your recent sale'), '', 2),
     ('marketplace-mark-sold-reminder', _('Mark your listing as sold if needed'), '', 2),
+    ('comment-to-marketplace-feedback-received', _('New comment to a marketplace feedback you received'), '', 2),
+    ('comment-to-marketplace-feedback-left', _('New comment to a marketplace feedback you left'), '', 2),
 )

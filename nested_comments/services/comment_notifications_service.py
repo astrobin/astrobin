@@ -10,7 +10,8 @@ from django.urls import reverse
 from astrobin.models import Image, UserProfile
 from astrobin.stories import ACTSTREAM_VERB_COMMENTED_IMAGE, add_story
 from astrobin_apps_equipment.models import (
-    Accessory, Camera, EquipmentItemMarketplaceListing, EquipmentItemMarketplacePrivateConversation, Filter,
+    Accessory, Camera, EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing,
+    EquipmentItemMarketplacePrivateConversation, Filter,
     Mount, Sensor, Software, Telescope,
 )
 from astrobin_apps_iotd.models import Iotd
@@ -98,6 +99,22 @@ class CommentNotificationsService:
         elif model_class == EquipmentItemMarketplaceListing:
             object_owner = obj.user
             notification = 'new_question_to_listing'
+            url = build_notification_url(
+                settings.BASE_URL + obj.get_absolute_url() + f'#c{self.comment.id}', self.comment.author
+            )
+            target = str(obj)
+            target_url = build_notification_url(
+                settings.BASE_URL + obj.get_absolute_url(), self.comment.author
+            )
+        elif model_class == EquipmentItemMarketplaceFeedback:
+            if self.comment.author != obj.recipient:
+                # We notify the recipient of the feedback
+                object_owner = obj.recipient
+                notification = 'comment-to-marketplace-feedback-received'
+            else:
+                # We notify the user who left the feedback
+                object_owner = obj.user
+                notification = 'comment-to-marketplace-feedback-left'
             url = build_notification_url(
                 settings.BASE_URL + obj.get_absolute_url() + f'#c{self.comment.id}', self.comment.author
             )

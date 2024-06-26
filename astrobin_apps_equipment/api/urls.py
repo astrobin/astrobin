@@ -105,6 +105,12 @@ router.register(
     basename='marketplace-user-feedback'
 )
 
+router.register(
+    r'marketplace/feedback',
+    EquipmentItemMarketplaceFeedbackViewSet,
+    basename='marketplace-user-feedback'
+)
+
 urlpatterns = [
     url('', include(router.urls)),
     url(r'contributors/$', EquipmentContributorsViewSet.as_view())

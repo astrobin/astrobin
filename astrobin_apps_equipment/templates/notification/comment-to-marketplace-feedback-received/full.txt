@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{user}} commented a marketplace feedback you that received.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Check it out at the following url:
+{% endblocktrans %}
+
+{{url}}

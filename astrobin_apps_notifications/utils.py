@@ -14,6 +14,12 @@ def clear_notifications_template_cache(username):
 
 
 def push_notification(recipients, from_user, notice_type, data):
+    if len(recipients) == 0:
+        return
+
+    if len(recipients) == 1 and recipients[0] == from_user:
+        return
+
     data.update({
         'notices_url': settings.BASE_URL + '/',
         'base_url': settings.BASE_URL,

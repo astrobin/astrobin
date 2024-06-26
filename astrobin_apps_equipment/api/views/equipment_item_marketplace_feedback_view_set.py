@@ -42,9 +42,8 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
                     Q(listing__user=self.request.user)
                 )
             )
-        else:
-            from django.http import Http404
-            raise Http404("listing_id not provided")
+
+        return EquipmentItemMarketplaceFeedback.objects.all()
 
     def create(self, request, *args, **kwargs):
         listing_id = self.kwargs.get('listing_id')

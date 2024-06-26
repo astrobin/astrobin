@@ -12,6 +12,7 @@ class EquipmentItemMarketplaceFeedbackSerializer(serializers.ModelSerializer):
     listing_display_name = serializers.SerializerMethodField(read_only=True)
     listing_hash = serializers.SerializerMethodField(read_only=True)
     user_display_name = serializers.SerializerMethodField(read_only=True)
+    recipient_display_name = serializers.SerializerMethodField(read_only=True)
 
     def get_marketplace_feedback(self, feedback: EquipmentItemMarketplaceFeedback) -> Optional[int]:
         return MarketplaceService.calculate_received_feedback_score(feedback.recipient)
@@ -27,6 +28,9 @@ class EquipmentItemMarketplaceFeedbackSerializer(serializers.ModelSerializer):
 
     def get_user_display_name(self, feedback: EquipmentItemMarketplaceFeedback) -> str:
         return feedback.user.userprofile.get_display_name()
+
+    def get_recipient_display_name(self, feedback: EquipmentItemMarketplaceFeedback) -> str:
+        return feedback.recipient.userprofile.get_display_name()
 
     def create(self, validated_data):
         user = self.context['request'].user

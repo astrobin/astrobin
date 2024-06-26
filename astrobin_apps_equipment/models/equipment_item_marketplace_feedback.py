@@ -6,6 +6,7 @@ from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
 from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
+from common.services import AppRedirectionService
 
 EQUIPMENT_ITEM_MARKETPLACE_FEEDBACK_CHOICES = (
     (MarketplaceFeedback.NEGATIVE.value, gettext("Negative")),
@@ -93,7 +94,12 @@ class EquipmentItemMarketplaceFeedback(SafeDeleteModel):
     )
 
     def __str__(self):
-        return f'Marketplace listing feedback for listing {self.listing} by {self.user}'
+        return f'Marketplace feedback for listing "{self.listing}" by {self.user.userprofile.get_display_name()}'
+
+    def get_absolute_url(self):
+        return AppRedirectionService.redirect(
+            f'/equipment/marketplace/users/{self.recipient.username}/feedback/{self.pk}'
+        )
 
     class Meta:
         ordering = ('-created',)

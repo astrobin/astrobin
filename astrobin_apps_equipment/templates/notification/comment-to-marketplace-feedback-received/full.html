@@ -1,0 +1,10 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    <a href="{{user_url}}">{{user}}</a> commented a marketplace feedback that you received.
+{% endblocktrans %}
+
+<br/>
+<br/>
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View comment" %}</a>
