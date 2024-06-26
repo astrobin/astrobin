@@ -34,8 +34,8 @@ class EquipmentItemMarketplaceFeedback(SafeDeleteModel):
         null=True,
     )
 
-    line_item = models.ForeignKey(
-        'astrobin_apps_equipment.EquipmentItemMarketplaceListingLineItem',
+    listing = models.ForeignKey(
+        'astrobin_apps_equipment.EquipmentItemMarketplaceListing',
         related_name='feedbacks',
         on_delete=models.CASCADE,
         null=False,
@@ -93,8 +93,8 @@ class EquipmentItemMarketplaceFeedback(SafeDeleteModel):
     )
 
     def __str__(self):
-        return f'Marketplace listing feedback for line item {self.line_item} by {self.user}'
+        return f'Marketplace listing feedback for listing {self.listing} by {self.user}'
 
     class Meta:
         ordering = ('-created',)
-        unique_together = ('user', 'line_item')
+        unique_together = ('user', 'listing')

@@ -18,10 +18,10 @@ class EquipmentItemMarketplaceFeedbackSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = self.context['request'].user
-        line_item_id = self.context['request'].data.get('line_item')
+        listing_id = self.context['request'].data.get('listing')
 
         validated_data['user'] = user
-        validated_data['line_item_id'] = line_item_id
+        validated_data['listing_id'] = listing_id
 
         return super().create(validated_data)
 

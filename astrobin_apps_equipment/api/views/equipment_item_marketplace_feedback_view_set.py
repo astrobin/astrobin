@@ -14,7 +14,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_feedback
     EquipmentItemMarketplaceFeedbackSerializer
 from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceFeedback,
-    EquipmentItemMarketplaceListingLineItem,
+    EquipmentItemMarketplaceListing,
 )
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
@@ -30,29 +30,29 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
     filter_fields = ('user',)
 
     def get_queryset(self):
-        line_item_id = self.kwargs.get('line_item_id')
+        listing_id = self.kwargs.get('listing_id')
 
-        if line_item_id is not None:
-            line_item = get_object_or_404(EquipmentItemMarketplaceListingLineItem, pk=line_item_id)
+        if listing_id is not None:
+            listing = get_object_or_404(EquipmentItemMarketplaceListing, pk=listing_id)
 
             return EquipmentItemMarketplaceFeedback.objects.filter(
-                Q(line_item=line_item) &
+                Q(listing=listing) &
                 Q(
                     Q(user=self.request.user) |
-                    Q(line_item__listing__user=self.request.user)
+                    Q(listing__user=self.request.user)
                 )
             )
         else:
             from django.http import Http404
-            raise Http404("line_item_id not provided")
+            raise Http404("listing_id not provided")
 
     def create(self, request, *args, **kwargs):
-        line_item_id = self.kwargs.get('line_item_id')
+        listing_id = self.kwargs.get('listing_id')
         recipient = request.data.get('recipient')
 
-        if line_item_id is None:
+        if listing_id is None:
             return Response(
-                {"detail": "Line item ID must be provided."}, status=status.HTTP_400_BAD_REQUEST
+                {"detail": "Listing ID must be provided."}, status=status.HTTP_400_BAD_REQUEST
             )
 
         if recipient is None:
@@ -60,10 +60,10 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
                 {"detail": "Recipient must be provided."}, status=status.HTTP_400_BAD_REQUEST
             )
 
-        line_item = get_object_or_404(EquipmentItemMarketplaceListingLineItem, pk=line_item_id)
+        listing = get_object_or_404(EquipmentItemMarketplaceListing, pk=listing_id)
 
         # Determine the target_type based on the user's relationship to the line item
-        if request.user == line_item.listing.user:
+        if request.user == listing.user:
             target_type = MarketplaceFeedbackTargetType.BUYER.value
         else:
             target_type = MarketplaceFeedbackTargetType.SELLER.value
@@ -75,7 +75,7 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
 
         # Check for existing feedback
         existing_feedback = EquipmentItemMarketplaceFeedback.objects.filter(
-            line_item=line_item,
+            listing=listing,
             recipient=recipient,
             user=request.user,
         ).first()

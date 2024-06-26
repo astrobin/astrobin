@@ -117,10 +117,10 @@ class MarketplaceService:
             return 0
 
         # Calculate total scores for each category
-        communication_score = sum(score_map[feedback.communication_value] for feedback in feedbacks)
-        speed_score = sum(score_map[feedback.speed_value] for feedback in feedbacks)
-        packaging_score = sum(score_map[feedback.packaging_value] for feedback in feedbacks)
-        accuracy_score = sum(score_map[feedback.accuracy_value] for feedback in feedbacks)
+        communication_score = sum(score_map.get(feedback.communication_value, 0) for feedback in feedbacks)
+        speed_score = sum(score_map.get(feedback.speed_value, 0) for feedback in feedbacks)
+        packaging_score = sum(score_map.get(feedback.packaging_value, 0) for feedback in feedbacks)
+        accuracy_score = sum(score_map.get(feedback.accuracy_value, 0) for feedback in feedbacks)
 
         # Total scores should consider the count of feedbacks to prevent inflation
         total_feedbacks = feedbacks.count()

@@ -385,7 +385,7 @@ class EquipmentItemMarketplaceFeedbackAdmin(admin.ModelAdmin):
     list_display = (
         'user',
         'recipient',
-        'line_item',
+        'listing',
         'communication_value',
         'speed_value',
         'accuracy_value',
@@ -397,7 +397,7 @@ class EquipmentItemMarketplaceFeedbackAdmin(admin.ModelAdmin):
     search_fields = (
         'user__username',
         'recipient__username',
-        'line_item__listing__hash',
+        'listing__hash',
         'message',
     )
 
@@ -405,7 +405,7 @@ class EquipmentItemMarketplaceFeedbackAdmin(admin.ModelAdmin):
         'id',
         'user',
         'recipient',
-        'line_item',
+        'listing',
         'created',
         'updated',
     )

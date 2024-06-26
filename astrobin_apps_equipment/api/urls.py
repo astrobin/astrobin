@@ -92,7 +92,7 @@ router.register(
 )
 
 router.register(
-    r'marketplace/line-item/(?P<line_item_id>[^/.]+)/feedback',
+    r'marketplace/listing/(?P<listing_id>[^/.]+)/feedback',
     EquipmentItemMarketplaceFeedbackViewSet,
     basename='marketplace-feedback'
 )
