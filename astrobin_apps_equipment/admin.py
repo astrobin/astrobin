@@ -386,15 +386,19 @@ class EquipmentItemMarketplaceFeedbackAdmin(admin.ModelAdmin):
         'user',
         'recipient',
         'line_item',
-        'category',
-        'value',
+        'communication_value',
+        'speed_value',
+        'accuracy_value',
+        'packaging_value',
         'created',
+        'updated',
     )
 
     search_fields = (
         'user__username',
         'recipient__username',
         'line_item__listing__hash',
+        'message',
     )
 
     readonly_fields = (
@@ -403,6 +407,7 @@ class EquipmentItemMarketplaceFeedbackAdmin(admin.ModelAdmin):
         'recipient',
         'line_item',
         'created',
+        'updated',
     )
 
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)

@@ -12,7 +12,6 @@ from astrobin_apps_equipment.tasks import (
 )
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
-from astrobin_apps_equipment.types.marketplace_feedback_category import MarketplaceFeedbackCategory
 from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
 from common.services import DateTimeService
 
@@ -55,8 +54,9 @@ class TasksTest(TestCase):
             user=buyer,
             recipient=seller,
             line_item=line_item,
-            value=MarketplaceFeedback.POSITIVE.value,
-            category=MarketplaceFeedbackCategory.COMMUNICATION.value,
+            communication_value=MarketplaceFeedback.POSITIVE.value,
+            speed_value=MarketplaceFeedback.POSITIVE.value,
+            message="Great seller",
             target_type=MarketplaceFeedbackTargetType.SELLER.value
         )
 
@@ -84,8 +84,9 @@ class TasksTest(TestCase):
             user=seller,
             recipient=buyer,
             line_item=line_item,
-            value=MarketplaceFeedback.POSITIVE.value,
-            category=MarketplaceFeedbackCategory.COMMUNICATION.value,
+            communication_value=MarketplaceFeedback.POSITIVE.value,
+            speed_value=MarketplaceFeedback.POSITIVE.value,
+            message="Great buyer",
             target_type=MarketplaceFeedbackTargetType.BUYER.value
         )
 
@@ -132,8 +133,9 @@ class TasksTest(TestCase):
             user=seller,
             recipient=buyer,
             line_item=line_item,
-            value=MarketplaceFeedback.POSITIVE.value,
-            category=MarketplaceFeedbackCategory.COMMUNICATION.value,
+            communication_value=MarketplaceFeedback.POSITIVE.value,
+            speed_value=MarketplaceFeedback.POSITIVE.value,
+            message="Great buyer",
             target_type=MarketplaceFeedbackTargetType.BUYER.value
         )
 
@@ -161,8 +163,9 @@ class TasksTest(TestCase):
             user=buyer,
             recipient=seller,
             line_item=line_item,
-            value=MarketplaceFeedback.POSITIVE.value,
-            category=MarketplaceFeedbackCategory.COMMUNICATION.value,
+            communication_value=MarketplaceFeedback.POSITIVE.value,
+            speed_value=MarketplaceFeedback.POSITIVE.value,
+            message="Great seller",
             target_type=MarketplaceFeedbackTargetType.SELLER.value
         )
 

@@ -22,6 +22,7 @@ from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 from astrobin_apps_equipment.models.filter_base_model import FilterSize, FilterType
 from astrobin_apps_equipment.models.mount_base_model import MountType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
+from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
 from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
 from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
 from common.services import DateTimeService
@@ -315,7 +316,10 @@ class EquipmentGenerators:
             user=user,
             recipient=recipient,
             line_item=line_item,
-            value=kwargs.get('value', 'positive'),
-            category=kwargs.get('category', 'communication'),
+            communication_value=kwargs.get('category_value', MarketplaceFeedback.POSITIVE.value),
+            speed_value=kwargs.get('speed_value', MarketplaceFeedback.POSITIVE.value),
+            packaging_value=kwargs.get('packaging_value', MarketplaceFeedback.POSITIVE.value),
+            accuracy_value=kwargs.get('accuracy_value', MarketplaceFeedback.POSITIVE.value),
+            message=kwargs.get('message', Generators.random_string()),
             target_type=kwargs.get('target_type', MarketplaceFeedbackTargetType.SELLER.value),
         )

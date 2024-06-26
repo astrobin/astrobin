@@ -113,16 +113,28 @@ class MarketplaceService:
 
         feedbacks = EquipmentItemMarketplaceFeedback.objects.filter(recipient=user)
 
-        total_score = sum(score_map[feedback.value] for feedback in feedbacks)
+        if not feedbacks.exists():
+            return 0
+
+        # Calculate total scores for each category
+        communication_score = sum(score_map[feedback.communication_value] for feedback in feedbacks)
+        speed_score = sum(score_map[feedback.speed_value] for feedback in feedbacks)
+        packaging_score = sum(score_map[feedback.packaging_value] for feedback in feedbacks)
+        accuracy_score = sum(score_map[feedback.accuracy_value] for feedback in feedbacks)
+
+        # Total scores should consider the count of feedbacks to prevent inflation
+        total_feedbacks = feedbacks.count()
+        average_score = (communication_score + speed_score + packaging_score + accuracy_score) / (4 * total_feedbacks)
+
+        # Calculate max and min possible scores
+        max_score = total_feedbacks  # All feedbacks are positive in all categories
+        min_score = -total_feedbacks  # All feedbacks are negative in all categories
+        score_range = max_score - min_score
 
         # Normalize the score to a 0-100 scale
-        max_score = len(feedbacks)  # Maximum possible score
-        min_score = -len(feedbacks)  # Minimum possible score
-        score_range = max_score - min_score
-        normalized_score = ((total_score - min_score) / score_range) * 100 if score_range else 0
+        normalized_score = ((average_score - min_score) / score_range) * 100 if score_range else 0
 
-        return normalized_score
-
+        return int(normalized_score)
     @staticmethod
     def received_feedback_count(user: User) -> int:
         return EquipmentItemMarketplaceFeedback.objects.filter(recipient=user).count()

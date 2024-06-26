@@ -48,17 +48,11 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         line_item_id = self.kwargs.get('line_item_id')
-        category = request.data.get('category')
         recipient = request.data.get('recipient')
 
         if line_item_id is None:
             return Response(
                 {"detail": "Line item ID must be provided."}, status=status.HTTP_400_BAD_REQUEST
-            )
-
-        if category is None:
-            return Response(
-                {"detail": "Category must be provided."}, status=status.HTTP_400_BAD_REQUEST
             )
 
         if recipient is None:
@@ -84,7 +78,6 @@ class EquipmentItemMarketplaceFeedbackViewSet(viewsets.ModelViewSet):
             line_item=line_item,
             recipient=recipient,
             user=request.user,
-            category=category
         ).first()
 
         UserProfile.objects.filter(user__pk=recipient).update(
