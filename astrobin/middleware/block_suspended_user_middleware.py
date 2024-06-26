@@ -30,6 +30,6 @@ class BlockSuspendedUserMiddleware(MiddlewareParentClass):
                     )
                 )
 
-            return redirect(reverse('suspended_account'))
+            return redirect(reverse('suspended_account') + '?requester')
 
         return response

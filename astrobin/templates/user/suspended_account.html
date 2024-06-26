@@ -6,19 +6,27 @@
 {% block content %}
     <h1>{% trans "Account suspended" %}</h1>
 
-    <p>
-        {% blocktrans %}
-            Your account is temporarily or permanently suspended. If you believe this is in error, please get in touch
-            using the Help menu.
-        {% endblocktrans %}
-    </p>
-
-    {% if request.user.userprofile.suspension_reason %}
-        <hr/>
-
-        <h4>{% trans "Suspension reason" %}</h4>
+    {% if 'requester' in request.GET %}
         <p>
-            {{ request.user.userprofile.suspension_reason|safe|linebreaksbr }}
+            {% blocktrans %}
+                Your account is temporarily or permanently suspended. If you believe this is in error, please get in touch
+                using the Help menu.
+            {% endblocktrans %}
+        </p>
+    
+        {% if request.user.userprofile.suspension_reason %}
+            <hr/>
+    
+            <h4>{% trans "Suspension reason" %}</h4>
+            <p>
+                {{ request.user.userprofile.suspension_reason|safe|linebreaksbr }}
+            </p>
+        {% endif %}
+    {% else %}
+        <p>
+            {% blocktrans %}
+                This content is not available because the user's account is suspended.
+            {% endblocktrans %}
         </p>
     {% endif %}
 {% endblock %}

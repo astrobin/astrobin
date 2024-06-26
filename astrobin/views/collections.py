@@ -84,6 +84,14 @@ class UserCollectionsList(UserCollectionsBase, ListView):
     template_name = 'user_collections_list.html'
     context_object_name = 'collections_list'
 
+    def dispatch(self, request, *args, **kwargs):
+        profile = get_object_or_404(UserProfile, user__username=self.kwargs['username'])
+
+        if profile.suspended:
+            return render(request, 'user/suspended_account.html')
+
+        return super(UserCollectionsList, self).dispatch(request, *args, **kwargs)
+
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter(parent__isnull=True)
@@ -304,6 +312,11 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
     def dispatch(self, request, *args, **kwargs):
         response = super(UserCollectionsDetail, self).dispatch(request, *args, **kwargs)
         request.collection = self.object
+        profile = self.object.user.userprofile
+
+        if profile.suspended:
+            return render(request, 'user/suspended_account.html')
+
         return response
 
     def get_context_data(self, **kwargs):

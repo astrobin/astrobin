@@ -280,6 +280,10 @@ class ImageDetailView(ImageDetailViewBase):
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
         image = self.get_object(Image.objects_including_wip)
+        profile = image.user.userprofile
+
+        if profile.suspended:
+            return render(request, 'user/suspended_account.html')
 
         if image.moderator_decision == ModeratorDecision.REJECTED:
             if not request.user.is_authenticated or \
@@ -658,6 +662,10 @@ class ImageFullView(ImageDetailView):
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
         image = self.get_object()
+        profile = image.user.userprofile
+
+        if profile.suspended:
+            return render(request, 'user/suspended_account.html')
 
         if image.moderator_decision == ModeratorDecision.REJECTED:
             raise Http404
