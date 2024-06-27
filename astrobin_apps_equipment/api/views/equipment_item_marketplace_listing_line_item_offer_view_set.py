@@ -231,7 +231,7 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         MarketplaceService.accept_offer(offer)
 
-        if 'message' in request.data:
+        if 'message' in request.data and request.data['message'].strip():
             self.create_private_message(request.user, offer, request.data['message'])
 
         offer.refresh_from_db()
@@ -268,7 +268,7 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         MarketplaceService.reject_offer(offer)
 
-        if 'message' in request.data:
+        if 'message' in request.data and request.data['message'].strip():
             self.create_private_message(request.user, offer, request.data['message'])
 
         offer.refresh_from_db()
@@ -305,7 +305,7 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         MarketplaceService.retract_offer(offer)
 
-        if 'message' in request.data:
+        if 'message' in request.data and request.data['message'].strip():
             self.create_private_message(request.user, offer, request.data['message'])
 
         offer.refresh_from_db()
