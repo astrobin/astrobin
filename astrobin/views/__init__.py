@@ -1194,6 +1194,9 @@ def user_page(request, username):
     if profile.deleted:
         raise Http404
 
+    if profile.suspended:
+        return render(request, 'user/suspended_account.html')
+
     if Image.objects_including_wip.filter(user=user, moderator_decision=ModeratorDecision.REJECTED).count() > 0:
         if (
                 not request.user.is_authenticated or
@@ -1325,6 +1328,10 @@ def user_ban(request, username):
 @require_GET
 def user_page_bookmarks(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
+    profile = user.userprofile
+
+    if profile.suspended:
+        return render(request, 'user/suspended_account.html')
 
     template_name = 'user/bookmarks.html'
     if request.is_ajax():
@@ -1346,6 +1353,10 @@ def user_page_bookmarks(request, username):
 @require_GET
 def user_page_liked(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
+    profile = user.userprofile
+
+    if profile.suspended:
+        return render(request, 'user/suspended_account.html')
 
     template_name = 'user/liked.html'
     if request.is_ajax():
@@ -1367,6 +1378,10 @@ def user_page_liked(request, username):
 @require_GET
 def user_page_following(request, username):
     user = get_object_or_404(User, username=username)
+    profile = user.userprofile
+
+    if profile.suspended:
+        return render(request, 'user/suspended_account.html')
 
     following = User.objects.filter(
         id__in=ToggleProperty.objects.filter(
@@ -1392,6 +1407,10 @@ def user_page_following(request, username):
 @require_GET
 def user_page_followers(request, username):
     user = get_object_or_404(User, username=username)
+    profile = user.userprofile
+
+    if profile.suspended:
+        return render(request, 'user/suspended_account.html')
 
     followers = User.objects.filter(
         toggleproperty__content_type=ContentType.objects.get_for_model(user),
@@ -1414,6 +1433,10 @@ def user_page_followers(request, username):
 @require_GET
 def user_page_friends(request, username):
     user = get_object_or_404(User, username=username)
+    profile = user.userprofile
+
+    if profile.suspended:
+        return render(request, 'user/suspended_account.html')
 
     content_type = ContentType.objects.get_for_model(User)
 
@@ -1460,6 +1483,9 @@ def user_page_plots(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(UserProfile, user__username=username).user
     profile = user.userprofile
+
+    if profile.suspended:
+        return render(request, 'user/suspended_account.html')
 
     response_dict = {
         'requested_user': user,
