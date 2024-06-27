@@ -8,6 +8,7 @@ from toggleproperties.models import ToggleProperty
 
 
 class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
+    user_display_name = serializers.SerializerMethodField(read_only=True)
     line_items = EquipmentItemMarketplaceListingLineItemReadSerializer(many=True, read_only=True)
     # Whether the current user is following the listing
     followed = serializers.SerializerMethodField(read_only=True)
@@ -20,6 +21,9 @@ class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         validated_data['user'] = user
         return super().create(validated_data)
+
+    def get_user_display_name(self, obj: EquipmentItemMarketplaceListing):
+        return obj.user.userprofile.get_display_name()
 
     def get_followed(self, obj):
         request = self.context.get('request')

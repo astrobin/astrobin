@@ -4,9 +4,13 @@ from astrobin_apps_equipment.models import EquipmentItemMarketplacePrivateConver
 
 
 class EquipmentItemMarketplacePrivateConversationSerializer(serializers.ModelSerializer):
+    user_display_name = serializers.SerializerMethodField(read_only=True)
     total_messages = serializers.SerializerMethodField(read_only=True)
     unread_messages = serializers.SerializerMethodField(read_only=True)
     last_message_timestamp = serializers.SerializerMethodField(read_only=True)
+
+    def get_user_display_name(self, obj: EquipmentItemMarketplacePrivateConversation) -> str:
+        return obj.user.userprofile.get_display_name()
 
     def get_total_messages(self, obj: EquipmentItemMarketplacePrivateConversation) -> int:
         return obj.comments.count()
