@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import QuerySet
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -14,11 +15,12 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_offer_se
     EquipmentItemMarketplaceOfferSerializer
 from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem,
-    EquipmentItemMarketplaceOffer,
+    EquipmentItemMarketplaceOffer, EquipmentItemMarketplacePrivateConversation,
 )
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from common.services import DateTimeService
+from nested_comments.models import NestedComment
 
 
 class IsOfferOwner(permissions.BasePermission):
@@ -171,6 +173,28 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
             context={'request': self.request},
         )
 
+    def create_private_message(self, user, offer, message):
+        private_conversation, _ = EquipmentItemMarketplacePrivateConversation.objects.get_or_create(
+            user=offer.user,
+            listing=offer.listing
+        )
+        content_type = ContentType.objects.get_for_model(EquipmentItemMarketplacePrivateConversation)
+        NestedComment.objects.create(
+            content_type=content_type,
+            object_id=private_conversation.pk,
+            author=user,
+            text=message,
+        )
+
+        if user == offer.listing.user:
+            EquipmentItemMarketplacePrivateConversation.objects.filter(pk=private_conversation.pk).update(
+                listing_user_last_accessed=DateTimeService.now(),
+            )
+        else:
+            EquipmentItemMarketplacePrivateConversation.objects.filter(pk=private_conversation.pk).update(
+                user_last_accessed=DateTimeService.now(),
+            )
+
     @action(detail=True, methods=['put'], url_path='accept')
     def accept(self, request, *args, **kwargs):
         offer = self.get_object()
@@ -207,6 +231,9 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         MarketplaceService.accept_offer(offer)
 
+        if 'message' in request.data:
+            self.create_private_message(request.user, offer, request.data['message'])
+
         offer.refresh_from_db()
         serializer = self.get_serializer(offer)
 
@@ -241,6 +268,9 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
         MarketplaceService.reject_offer(offer)
 
+        if 'message' in request.data:
+            self.create_private_message(request.user, offer, request.data['message'])
+
         offer.refresh_from_db()
         serializer = self.get_serializer(offer)
 
@@ -274,6 +304,9 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         MarketplaceService.retract_offer(offer)
+
+        if 'message' in request.data:
+            self.create_private_message(request.user, offer, request.data['message'])
 
         offer.refresh_from_db()
         serializer = self.get_serializer(offer)
