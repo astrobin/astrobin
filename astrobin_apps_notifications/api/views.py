@@ -21,7 +21,6 @@ from common.services.caching_service import CachingService
 
 @method_decorator([
     last_modified(CachingService.get_last_notification_time),
-    cache_control(private=True, no_cache=True),
     vary_on_headers('Cookie', 'Authorization')
 ], name='dispatch')
 class NotificationViewSet(viewsets.ModelViewSet):
@@ -36,6 +35,8 @@ class NotificationViewSet(viewsets.ModelViewSet):
         return Message.objects.filter(user=self.request.user).order_by('-created')
 
     @action(detail=False, methods=['get'])
+    @cache_control(private=True, max_age=60)
+    @vary_on_headers('Authorization')
     def get_unread_count(self, request):
         return Response(status=200, data=self.get_queryset().filter(read=False).count())
 
@@ -68,6 +69,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
         notification.read = read
         notification.save()
         return Response(status=200)
+
 
 class NoticeTypeViewSet(viewsets.ModelViewSet):
     serializer_class = NoticeTypeSerializer
