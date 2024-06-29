@@ -2,35 +2,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:16+0200\n"
+"POT-Creation-Date: 2024-06-29 13:47+0000\n"
 "PO-Revision-Date: 2024-06-29 13:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
-"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1"
-
-msgid "Notifications"
-msgstr "Уведомления"
-
-msgid "You have no notifications."
-msgstr "У вас нет уведомлений."
-
-msgid "Settings"
-msgstr "Настройки"
-
-msgid "Mark all as read"
-msgstr "Отметить все прочитанным"
-
-msgid "You have no new notifications."
-msgstr "У вас нет новых уведомлений"
+"X-Loco-Api-Version: 1.0.28 20240611-1\n"
 
 msgid "You have a new follower"
 msgstr "У вас подписчик"
@@ -44,14 +29,44 @@ msgstr "Новая версия изображения от пользовате
 msgid "Your image was plate-solved"
 msgstr "Ваше изображение определено по координатам"
 
+msgid "Your image was approved by a moderator"
+msgstr ""
+
 msgid "Your image could not be plate-solved"
 msgstr "Ваше изображение не может быть определено по координатам"
+
+msgid "Your image was plate-solved (advanced)"
+msgstr ""
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr ""
 
 msgid "Your image received a new comment"
 msgstr "У вашего изображения комментарий"
 
+msgid "Your edit proposal received a new comment"
+msgstr ""
+
+msgid "Your scheduled IOTD received a new comment"
+msgstr ""
+
+msgid "Your unapproved equipment item received a comment"
+msgstr ""
+
+msgid "Your listing has a new private conversation"
+msgstr ""
+
+msgid "Your private conversation has a new comment"
+msgstr ""
+
+msgid "Your listing has a new question"
+msgstr ""
+
 msgid "There was a reply to your comment"
 msgstr "Ответ на ваш комментарий"
+
+msgid "A new comment on your image requires moderation"
+msgstr ""
 
 msgid "Your comment was approved"
 msgstr ""
@@ -67,6 +82,9 @@ msgstr "Ваше изображение понравилось"
 
 msgid "Your forum post was liked"
 msgstr "Ваше сообщение на форуме понравилось"
+
+msgid "Your forum post was approved"
+msgstr ""
 
 msgid "Your API Key request has been approved"
 msgstr "Ваш запрос на API ключ одобрен"
@@ -92,6 +110,15 @@ msgstr "Пользователь, на которого вы подписаны 
 msgid "New forum topic in a group you are a member of"
 msgstr "Новая тема в группе, участником которой вы являетесь"
 
+msgid "New forum topic for an equipment item you use"
+msgstr ""
+
+msgid "New forum topic for an equipment item you follow"
+msgstr ""
+
+msgid "Your forum topic was moved"
+msgstr ""
+
 msgid "You have received a new private message"
 msgstr "У вас новое личное сообщение"
 
@@ -116,6 +143,12 @@ msgstr "У вас есть изображения без информации \"
 msgid "Would you like to activate your account?"
 msgstr "Вы хотите активировать вашу учётную запись?"
 
+msgid "New reply in a subscribed forum topic"
+msgstr ""
+
+msgid "New reply in a forum topic that you started"
+msgstr ""
+
 msgid "You were mentioned in a forum post"
 msgstr "Вы были упомянуты в сообщении на форуме"
 
@@ -128,16 +161,31 @@ msgstr "Добро пожаловать в AstroBin!"
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Поздравления с вашим первым изображением на AstroBin!"
 
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr ""
+
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr ""
+
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr ""
+
 msgid "Thank you for getting a subscription!"
 msgstr "Спасибо за подписку !"
 
 msgid "Thank you for your payment!"
 msgstr "Спасибо за ваш платеж!"
 
+msgid "Subscription canceled"
+msgstr ""
+
 msgid "You were removed from the IOTD staff"
 msgstr ""
 
 msgid "You have been inactive as an IOTD staff member"
+msgstr ""
+
+msgid "Your IOTD staff activity is insufficient"
 msgstr ""
 
 msgid "An image you promoted made it to Top Pick"
@@ -146,7 +194,10 @@ msgstr ""
 msgid "An image you promoted made it to IOTD"
 msgstr ""
 
-msgid "New reply in a subscribed forum topic"
+msgid "An image you dismissed made it to Top Pick"
+msgstr ""
+
+msgid "An image you dismissed made it to IOTD"
 msgstr ""
 
 msgid "Your image was nominated to be a Top Pick"
@@ -158,37 +209,22 @@ msgstr ""
 msgid "Your image was voted Image of the Day"
 msgstr ""
 
-msgid "Your image was plate-solved (advanced)"
-msgstr ""
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr ""
-
-msgid "A new comment on your image requires moderation"
-msgstr ""
-
-msgid "Your forum post was approved"
+msgid "Your IOTD staff member stats"
 msgstr ""
 
 msgid "You were mentioned in an image description"
 msgstr ""
 
-msgid "Your edit proposal received a new comment"
-msgstr ""
-
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr ""
-
 msgid "A gear item that you used was renamed"
 msgstr ""
 
-msgid "Your scheduled IOTD received a new comment"
+msgid "Collaboration Request: Accept or Deny"
 msgstr ""
 
-msgid "Your unapproved equipment item received a comment"
+msgid "User accepted your collaboration request"
 msgstr ""
 
-msgid "New forum topic for an equipment item you use"
+msgid "User denied your collaboration request"
 msgstr ""
 
 msgid "You were added as a collaborator to an image"
@@ -200,62 +236,23 @@ msgstr ""
 msgid "User removed self as a collaborator to your image"
 msgstr ""
 
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr ""
-
 msgid "Login attempt detected from a different country"
 msgstr ""
 
 msgid "Login attempt with weak password"
 msgstr ""
 
-msgid "Your image was approved by a moderator"
-msgstr ""
+#~ msgid "Notifications"
+#~ msgstr "Уведомления"
 
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr ""
+#~ msgid "You have no notifications."
+#~ msgstr "У вас нет уведомлений."
 
-msgid "Subscription canceled"
-msgstr ""
+#~ msgid "Settings"
+#~ msgstr "Настройки"
 
-msgid "Your forum topic was moved"
-msgstr ""
+#~ msgid "Mark all as read"
+#~ msgstr "Отметить все прочитанным"
 
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr ""
-
-msgid "Your listing has a new private conversation"
-msgstr ""
-
-msgid "Your private conversation has a new comment"
-msgstr ""
-
-msgid "Your listing has a new question"
-msgstr ""
-
-msgid "New forum topic for an equipment item you follow"
-msgstr ""
-
-msgid "New reply in a forum topic that you started"
-msgstr ""
-
-msgid "Your IOTD staff activity is insufficient"
-msgstr ""
-
-msgid "An image you dismissed made it to Top Pick"
-msgstr ""
-
-msgid "An image you dismissed made it to IOTD"
-msgstr ""
-
-msgid "Your IOTD staff member stats"
-msgstr ""
-
-msgid "Collaboration Request: Accept or Deny"
-msgstr ""
-
-msgid "User accepted your collaboration request"
-msgstr ""
-
-msgid "User denied your collaboration request"
-msgstr ""
+#~ msgid "You have no new notifications."
+#~ msgstr "У вас нет новых уведомлений"

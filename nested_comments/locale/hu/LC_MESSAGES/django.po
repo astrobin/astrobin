@@ -2,71 +2,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Comments\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:19+0200\n"
+"POT-Creation-Date: 2024-06-29 13:47+0000\n"
 "PO-Revision-Date: 2024-06-29 13:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108457\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1"
-
-msgid "You follow each other"
-msgstr ""
-
-msgid "Images"
-msgstr ""
-
-msgid "Followers"
-msgstr ""
-
-msgid "Following"
-msgstr ""
-
-msgid "User"
-msgstr ""
-
-msgid "No users."
-msgstr ""
-
-msgid "Administrator"
-msgstr ""
-
-msgid "Image moderator"
-msgstr ""
-
-msgid "IOTD Submitter"
-msgstr ""
-
-msgid "IOTD Reviewer"
-msgstr ""
-
-msgid "IOTD Judge"
-msgstr ""
-
-msgid "Premium member"
-msgstr ""
-
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
+"X-Loco-Api-Version: 1.0.28 20240611-1\n"
 
 msgid "Type your comment here..."
 msgstr "Írd ide a hozzászólásod..."
+
+msgid "Error"
+msgstr "Hiba"
 
 msgid "Cancel"
 msgstr "Mégsem"
@@ -74,60 +28,30 @@ msgstr "Mégsem"
 msgid "Add a comment"
 msgstr "Hozzászólás hozzáadása"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
-"sign up</a> to leave a comment."
-msgstr ""
-"Kérjük, <a href=\"%(login_url)s\">jelentkezz be</a> vagy <a "
-"href=\"%(signup_url)s\">regisztrálj</a>, hogy hozzászólást hagyhass."
-
 msgid "There are no comments yet."
 msgstr "Még nincsenek hozzászólások."
-
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr "Ez a hozzászólás moderálásra vár, és hamarosan felülvizsgálják."
-
-msgid "(deleted)"
-msgstr "(törölve)"
-
-msgctxt "Noun, e.g. 'This element has 10 likes'"
-msgid "likes"
-msgstr "kedvelése van"
-
-msgctxt "Noun, e.g. 'This element has 1 like'"
-msgid "like"
-msgstr ""
-
-msgid "Link"
-msgstr "Link"
-
-msgid "Undelete"
-msgstr "Törlés visszavonása"
-
-msgid "Delete"
-msgstr "Törlés"
-
-msgid "Edit"
-msgstr "Szerkesztés"
-
-msgid "Reply"
-msgstr ""
-
-msgid "Like"
-msgstr ""
-
-msgid "Unlike"
-msgstr ""
 
 msgid "The comment cannot be empty."
 msgstr "A hozzászólás nem lehet üres."
 
-msgid "Submit"
-msgstr "Beküldés"
+msgid "(deleted)"
+msgstr "(törölve)"
 
-msgid "Error"
-msgstr "Hiba"
+msgid "Delete"
+msgstr "Törlés"
+
+msgid "Undelete"
+msgstr "Törlés visszavonása"
+
+msgid "Edit"
+msgstr "Szerkesztés"
+
+msgid "Link"
+msgstr "Link"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "kedvelése van"
 
 msgctxt "Verb (imperative)"
 msgid "Like"
@@ -147,6 +71,14 @@ msgstr "Elfogadás"
 
 msgid "Report abuse"
 msgstr "Zaklatás bejelentése"
+
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
+msgstr ""
+"Kérjük, <a href=\"%(login_url)s\">jelentkezz be</a> vagy <a href="
+"\"%(signup_url)s\">regisztrálj</a>, hogy hozzászólást hagyhass."
 
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
@@ -179,6 +111,12 @@ msgstr ""
 msgid "Thank you for understanding!"
 msgstr "Köszönjük megértésed!"
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "Ez a hozzászólás moderálásra vár, és hamarosan felülvizsgálják."
+
+msgid "Submit"
+msgstr "Beküldés"
+
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
@@ -195,86 +133,5 @@ msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr "Ezt az elemet nem lehet újra jelenteni, mert egy moderátor jóváhagyta."
 
-msgid "You many not report the same item more than once."
-msgstr ""
-
 msgid "You may not report the same item more than once."
 msgstr "Ugyanazt az elemet többször is bejelentheted."
-
-msgid "Report a use"
-msgstr ""
-
-msgid "Member since"
-msgstr ""
-
-msgid "Last seen online"
-msgstr ""
-
-msgid "Total integration time"
-msgstr ""
-
-msgid "hours"
-msgstr ""
-
-msgid "Average integration time"
-msgstr ""
-
-msgid "Forum posts written"
-msgstr ""
-
-msgid "Comments written"
-msgstr ""
-
-msgid "Comments received"
-msgstr ""
-
-msgid "Likes received"
-msgstr ""
-
-msgid "Views received"
-msgstr ""
-
-msgid "No date specified"
-msgstr ""
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-
-msgid "Gear images"
-msgstr ""
-
-msgid "Deep sky"
-msgstr ""
-
-msgid "Solar system"
-msgstr ""
-
-msgid "Extremely wide field"
-msgstr ""
-
-msgid "Star trails"
-msgstr ""
-
-msgid "Northern lights"
-msgstr ""
-
-msgid "Noctilucent clouds"
-msgstr ""
-
-msgid "Gear"
-msgstr ""
-
-msgid "Other"
-msgstr ""
-
-msgid "All"
-msgstr ""
-
-msgid "n/a"
-msgstr ""
-
-msgid "No subjects specified"
-msgstr ""
-
-msgid "No acquisition details specified"
-msgstr ""

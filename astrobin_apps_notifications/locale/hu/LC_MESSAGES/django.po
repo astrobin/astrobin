@@ -2,34 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:16+0200\n"
+"POT-Creation-Date: 2024-06-29 13:47+0000\n"
 "PO-Revision-Date: 2024-06-29 13:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1"
-
-msgid "Notifications"
-msgstr "Értesítések"
-
-msgid "You have no notifications."
-msgstr "Nincsenek értesítéseid"
-
-msgid "Settings"
-msgstr "Beállítások"
-
-msgid "Mark all as read"
-msgstr "Mindegyik megjelölése olvasottként"
-
-msgid "You have no new notifications."
-msgstr "Nincsenek új értesítéseid"
+"X-Loco-Api-Version: 1.0.28 20240611-1\n"
 
 msgid "You have a new follower"
 msgstr "Van egy új követőd"
@@ -43,14 +28,44 @@ msgstr "Új képátdolgozás egy felhasználótól, akit követsz"
 msgid "Your image was plate-solved"
 msgstr "A képed meg lett oldva plate-solve megoldással"
 
+msgid "Your image was approved by a moderator"
+msgstr ""
+
 msgid "Your image could not be plate-solved"
 msgstr "A képedet nem lehetett megoldani plate-solveval"
+
+msgid "Your image was plate-solved (advanced)"
+msgstr "A képed meg lett oldva plate-solve megoldással (fejlett)"
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "A képedet nem lehetett megoldani plate-solveval (fejlett)"
 
 msgid "Your image received a new comment"
 msgstr "A képedre érkezett egy új hozzászólás"
 
+msgid "Your edit proposal received a new comment"
+msgstr "A szerkesztési javaslatodhoz új megjegyzés érkezett"
+
+msgid "Your scheduled IOTD received a new comment"
+msgstr "A beütemezett IOTD-d kapott egy új hozzászólást"
+
+msgid "Your unapproved equipment item received a comment"
+msgstr "A nem jóváhagyott felszerelési elemed megjegyzést kapott"
+
+msgid "Your listing has a new private conversation"
+msgstr ""
+
+msgid "Your private conversation has a new comment"
+msgstr ""
+
+msgid "Your listing has a new question"
+msgstr ""
+
 msgid "There was a reply to your comment"
 msgstr "Érkezett egy válasz a megjegyzésedre"
+
+msgid "A new comment on your image requires moderation"
+msgstr "Egy új hozzászólás a képeden moderálást igényel"
 
 msgid "Your comment was approved"
 msgstr "A hozzászólásodat elfogadták"
@@ -66,6 +81,9 @@ msgstr "A hozzászólásodat kedvelték"
 
 msgid "Your forum post was liked"
 msgstr "A fórumbejegyzésedet kedvelték"
+
+msgid "Your forum post was approved"
+msgstr "A fórumbejegyzésed el lett fogadva"
 
 msgid "Your API Key request has been approved"
 msgstr "Az API kulcs kérelmed el lett fogadva"
@@ -94,6 +112,15 @@ msgstr ""
 msgid "New forum topic in a group you are a member of"
 msgstr "Új fórum téma egy csoportban, aminek tagja vagy"
 
+msgid "New forum topic for an equipment item you use"
+msgstr "Új fórum téma egy felszerelési elemről, amit használsz"
+
+msgid "New forum topic for an equipment item you follow"
+msgstr ""
+
+msgid "Your forum topic was moved"
+msgstr ""
+
 msgid "You have received a new private message"
 msgstr "Kaptál egy új privát üzenetet"
 
@@ -118,6 +145,12 @@ msgstr "Vannak képeid \"Külső forrás\" nélkül"
 msgid "Would you like to activate your account?"
 msgstr "Szeretnéd aktiválni a fiókod?"
 
+msgid "New reply in a subscribed forum topic"
+msgstr "Új válasz egy fórum témában, amire fel agy iratkozva"
+
+msgid "New reply in a forum topic that you started"
+msgstr ""
+
 msgid "You were mentioned in a forum post"
 msgstr "Meg lettél említve egy fórumbejegyzésben"
 
@@ -130,11 +163,23 @@ msgstr "Köszöntünk az AstroBinen!"
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Gratulálunk az első képedhez az AstroBinen!"
 
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr ""
+
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr ""
+
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr ""
+
 msgid "Thank you for getting a subscription!"
 msgstr "Köszönjük, hogy feliratkoztál!"
 
 msgid "Thank you for your payment!"
 msgstr "Köszönjük a fizetést!"
+
+msgid "Subscription canceled"
+msgstr ""
 
 msgid "You were removed from the IOTD staff"
 msgstr "El lettél távolítva az IOTD staff tagok közül"
@@ -142,14 +187,20 @@ msgstr "El lettél távolítva az IOTD staff tagok közül"
 msgid "You have been inactive as an IOTD staff member"
 msgstr "Inaktív voltál IOTD staff tagként"
 
+msgid "Your IOTD staff activity is insufficient"
+msgstr ""
+
 msgid "An image you promoted made it to Top Pick"
 msgstr "Egy általad támogatott kép bekerült a Top Pickbe"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "Egy általad támogatott kép bekerült az IOTD-be"
 
-msgid "New reply in a subscribed forum topic"
-msgstr "Új válasz egy fórum témában, amire fel agy iratkozva"
+msgid "An image you dismissed made it to Top Pick"
+msgstr ""
+
+msgid "An image you dismissed made it to IOTD"
+msgstr ""
 
 msgid "Your image was nominated to be a Top Pick"
 msgstr "A képed Top Pick jelölt lett"
@@ -160,38 +211,23 @@ msgstr "A képedet megszavazták Top Picknek"
 msgid "Your image was voted Image of the Day"
 msgstr "A képedet megszavazták A nap képének"
 
-msgid "Your image was plate-solved (advanced)"
-msgstr "A képed meg lett oldva plate-solve megoldással (fejlett)"
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "A képedet nem lehetett megoldani plate-solveval (fejlett)"
-
-msgid "A new comment on your image requires moderation"
-msgstr "Egy új hozzászólás a képeden moderálást igényel"
-
-msgid "Your forum post was approved"
-msgstr "A fórumbejegyzésed el lett fogadva"
+msgid "Your IOTD staff member stats"
+msgstr ""
 
 msgid "You were mentioned in an image description"
 msgstr "Meg lettél említve egy kép leírásában"
 
-msgid "Your edit proposal received a new comment"
-msgstr "A szerkesztési javaslatodhoz új megjegyzés érkezett"
-
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "A képed be lett küldve IOTD/TP elbírálásra"
-
 msgid "A gear item that you used was renamed"
 msgstr "Egy felszerelési elem, amit használtál, át lett nevezve"
 
-msgid "Your scheduled IOTD received a new comment"
-msgstr "A beütemezett IOTD-d kapott egy új hozzászólást"
+msgid "Collaboration Request: Accept or Deny"
+msgstr ""
 
-msgid "Your unapproved equipment item received a comment"
-msgstr "A nem jóváhagyott felszerelési elemed megjegyzést kapott"
+msgid "User accepted your collaboration request"
+msgstr ""
 
-msgid "New forum topic for an equipment item you use"
-msgstr "Új fórum téma egy felszerelési elemről, amit használsz"
+msgid "User denied your collaboration request"
+msgstr ""
 
 msgid "You were added as a collaborator to an image"
 msgstr "Hozzáadtak hozzájárulóként egy képnél"
@@ -202,62 +238,26 @@ msgstr "Eltávolítottak a hozzájárulók közül egy képnél"
 msgid "User removed self as a collaborator to your image"
 msgstr "A felhasználó eltávolította magát egy képed hozzájárulójaként"
 
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr ""
-
 msgid "Login attempt detected from a different country"
 msgstr ""
 
 msgid "Login attempt with weak password"
 msgstr ""
 
-msgid "Your image was approved by a moderator"
-msgstr ""
+#~ msgid "Notifications"
+#~ msgstr "Értesítések"
 
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr ""
+#~ msgid "You have no notifications."
+#~ msgstr "Nincsenek értesítéseid"
 
-msgid "Subscription canceled"
-msgstr ""
+#~ msgid "Settings"
+#~ msgstr "Beállítások"
 
-msgid "Your forum topic was moved"
-msgstr ""
+#~ msgid "Mark all as read"
+#~ msgstr "Mindegyik megjelölése olvasottként"
 
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr ""
+#~ msgid "You have no new notifications."
+#~ msgstr "Nincsenek új értesítéseid"
 
-msgid "Your listing has a new private conversation"
-msgstr ""
-
-msgid "Your private conversation has a new comment"
-msgstr ""
-
-msgid "Your listing has a new question"
-msgstr ""
-
-msgid "New forum topic for an equipment item you follow"
-msgstr ""
-
-msgid "New reply in a forum topic that you started"
-msgstr ""
-
-msgid "Your IOTD staff activity is insufficient"
-msgstr ""
-
-msgid "An image you dismissed made it to Top Pick"
-msgstr ""
-
-msgid "An image you dismissed made it to IOTD"
-msgstr ""
-
-msgid "Your IOTD staff member stats"
-msgstr ""
-
-msgid "Collaboration Request: Accept or Deny"
-msgstr ""
-
-msgid "User accepted your collaboration request"
-msgstr ""
-
-msgid "User denied your collaboration request"
-msgstr ""
+#~ msgid "Your image was submitted for IOTD/TP consideration"
+#~ msgstr "A képed be lett küldve IOTD/TP elbírálásra"
