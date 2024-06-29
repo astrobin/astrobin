@@ -17,6 +17,7 @@ from astrobin_apps_equipment.models import (
 )
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
+from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
 from astrobin_apps_notifications.utils import build_notification_url
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
@@ -111,30 +112,66 @@ class MarketplaceService:
             MarketplaceFeedback.NEGATIVE.value: -1,
         }
 
-        feedbacks = EquipmentItemMarketplaceFeedback.objects.filter(recipient=user)
+        buyer_feedback = EquipmentItemMarketplaceFeedback.objects.filter(
+            recipient=user,
+            target_type=MarketplaceFeedbackTargetType.BUYER.value
+        )
+        buyer_feedback_count = buyer_feedback.count()
 
-        if not feedbacks.exists():
+        seller_feedback = EquipmentItemMarketplaceFeedback.objects.filter(
+            recipient=user,
+            target_type=MarketplaceFeedbackTargetType.SELLER.value
+        )
+        seller_feedback_count = seller_feedback.count()
+
+        if buyer_feedback_count == 0 and seller_feedback_count == 0:
             return 0
 
-        # Calculate total scores for each category
-        communication_score = sum(score_map.get(feedback.communication_value, 0) for feedback in feedbacks)
-        speed_score = sum(score_map.get(feedback.speed_value, 0) for feedback in feedbacks)
-        packaging_score = sum(score_map.get(feedback.packaging_value, 0) for feedback in feedbacks)
-        accuracy_score = sum(score_map.get(feedback.accuracy_value, 0) for feedback in feedbacks)
+        # Define scores for different feedback types
+        seller_scores = {
+            'communication': 0,
+            'speed': 0,
+            'packaging': 0,
+            'accuracy': 0,
+        }
+        buyer_scores = {
+            'communication': 0,
+            'speed': 0,
+        }
 
-        # Total scores should consider the count of feedbacks to prevent inflation
-        total_feedbacks = feedbacks.count()
-        average_score = (communication_score + speed_score + packaging_score + accuracy_score) / (4 * total_feedbacks)
+        # Aggregate scores by feedback type
+        for feedback in buyer_feedback:
+            buyer_scores['communication'] += score_map.get(feedback.communication_value, 0)
+            buyer_scores['speed'] += score_map.get(feedback.speed_value, 0)
+        for feedback in seller_feedback:
+            seller_scores['communication'] += score_map.get(feedback.communication_value, 0)
+            seller_scores['speed'] += score_map.get(feedback.speed_value, 0)
+            seller_scores['packaging'] += score_map.get(feedback.packaging_value, 0)
+            seller_scores['accuracy'] += score_map.get(feedback.accuracy_value, 0)
 
-        # Calculate max and min possible scores
-        max_score = total_feedbacks  # All feedbacks are positive in all categories
-        min_score = -total_feedbacks  # All feedbacks are negative in all categories
+        # Calculate total scores for buyer and seller separately
+        buyer_score = (
+            sum(buyer_scores.values()) / (2 * buyer_feedback_count)
+        ) if buyer_feedback_count > 0 else 0
+        seller_score = (
+            sum(seller_scores.values()) / (4 * seller_feedback_count)
+        ) if seller_feedback_count > 0 else 0
+
+        # Calculate weighted average score based on feedback counts
+        total_feedbacks = buyer_feedback_count + seller_feedback_count
+        weighted_average_score = (
+            (buyer_score * buyer_feedback_count + seller_score * seller_feedback_count) /
+            total_feedbacks
+        ) if total_feedbacks > 0 else 0
+
+        # Normalize to 0-100 scale
+        max_score = 1  # As scores are normalized to not exceed 1
+        min_score = -1  # Minimum possible normalized score
         score_range = max_score - min_score
-
-        # Normalize the score to a 0-100 scale
-        normalized_score = ((average_score - min_score) / score_range) * 100 if score_range else 0
+        normalized_score = ((weighted_average_score - min_score) / score_range) * 100
 
         return int(normalized_score)
+
     @staticmethod
     def received_feedback_count(user: User) -> int:
         return EquipmentItemMarketplaceFeedback.objects.filter(recipient=user).count()
