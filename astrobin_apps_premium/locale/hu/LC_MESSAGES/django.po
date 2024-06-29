@@ -2,19 +2,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Premium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:35+0000\n"
-"PO-Revision-Date: 2023-10-17 10:41+0200\n"
+"POT-Creation-Date: 2021-04-05 16:17+0200\n"
+"PO-Revision-Date: 2024-06-29 13:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108451\n"
-"X-Loco-Api-Version: 1.0.28 20240520-1\n"
+"X-Loco-Api-Version: 1.0.28 20240611-1"
+
+msgid "I wasn't really affected by the data loss"
+msgstr ""
+
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr ""
+
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr ""
+
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr ""
+
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr ""
+
+msgid "Requested compensation"
+msgstr ""
+
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr ""
 
 msgid "Your migration data"
 msgstr "Az áthelyezett adataid"
@@ -46,7 +67,74 @@ msgstr "Dátum"
 msgid "Subscription"
 msgstr "Feliratkozás"
 
-msgid "Paying member"
+msgid "Data loss compensation request"
+msgstr ""
+
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
+msgstr ""
+
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+
+msgid "Official statement and post-mortem"
+msgstr ""
+
+msgid "Please accept our apology once more."
+msgstr ""
+
+msgid "Please chooce your compensation from the list below"
+msgstr ""
+
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Data loss compensation reauest"
+msgstr ""
+
+msgid "Already done"
+msgstr ""
+
+msgid "Sorry, you can't do this again."
+msgstr ""
+
+msgid "Your preference was already recorded and cannot be changed."
+msgstr ""
+
+msgid "Not eligible"
+msgstr ""
+
+msgid "It looks like you're not eligible"
+msgstr ""
+
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+
+msgid "Success"
+msgstr "Siker"
+
+msgid "All done!"
+msgstr ""
+
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
 msgstr ""
 
 msgid "Migrate donations"
@@ -99,9 +187,6 @@ msgstr ""
 
 msgid "No, I want to pay for Premium"
 msgstr "Nem, szeretnék a Prémiumért fizetni"
-
-msgid "Success"
-msgstr "Siker"
 
 msgid "Your migration was successful."
 msgstr "Az áthelyezés sikeres volt"
@@ -162,8 +247,21 @@ msgstr ""
 
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically."
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
 msgstr ""
+"Automatikusan megújuló előfizetésed van az AstroBin-en, és mi megpróbáljuk "
+"automatikusan megújítani azt. Ha az előfizetésed a szokásos módon, PayPal-on "
+"keresztül lett kifizetve, akkor a PayPal megpróbálja megterhelni a "
+"hitelkártyádat, vagy lekérni a számládon rendelkezésre álló összeget."
+
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"Ha az előfizetésed manuálisan, banki átutalással történt, kérjük, vedd fel "
+"velünk a kapcsolatot az újabb fizetéshez."
 
 msgid "Thank you!"
 msgstr "Köszönjük!"
@@ -182,21 +280,362 @@ msgstr ""
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr "Az AstroBin előfizetésed automatikusan megújul 30 nap múlva"
 
-#~ msgid ""
-#~ "You have an automatically renewing subscription on AstroBin, and we will "
-#~ "attempt to renew it automatically. If your subscription was created the "
-#~ "regular way, via PayPal, then PayPal will attempt to charge your credit "
-#~ "card or retrieve funds that are available in your account."
-#~ msgstr ""
-#~ "Automatikusan megújuló előfizetésed van az AstroBin-en, és mi "
-#~ "megpróbáljuk automatikusan megújítani azt. Ha az előfizetésed a szokásos "
-#~ "módon, PayPal-on keresztül lett kifizetve, akkor a PayPal megpróbálja "
-#~ "megterhelni a hitelkártyádat, vagy lekérni a számládon rendelkezésre álló "
-#~ "összeget."
+msgid "You follow each other"
+msgstr ""
 
-#~ msgid ""
-#~ "If your subscription was created manually via a bank transfer, please get "
-#~ "in touch for a new payment."
-#~ msgstr ""
-#~ "Ha az előfizetésed manuálisan, banki átutalással történt, kérjük, vedd "
-#~ "fel velünk a kapcsolatot az újabb fizetéshez."
+msgid "Images"
+msgstr ""
+
+msgid "Followers"
+msgstr ""
+
+msgid "Following"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "No users."
+msgstr ""
+
+msgid "Administrator"
+msgstr ""
+
+msgid "Image moderator"
+msgstr ""
+
+msgid "IOTD Submitter"
+msgstr ""
+
+msgid "IOTD Reviewer"
+msgstr ""
+
+msgid "IOTD Judge"
+msgstr ""
+
+msgid "Premium member"
+msgstr ""
+
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+
+msgid "Perform a blind solve"
+msgstr ""
+
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
+msgstr ""
+
+msgid "Width of the field in degrees"
+msgstr ""
+
+msgid "Width of the field in arcminutes"
+msgstr ""
+
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr ""
+
+msgid "Field size units"
+msgstr ""
+
+msgid "Min field size"
+msgstr ""
+
+msgid "Estimate the lower bound for the width of this field."
+msgstr ""
+
+msgid "Max field size"
+msgstr ""
+
+msgid "Estimate the upper bound for the width of this field."
+msgstr ""
+
+msgid "Center RA"
+msgstr ""
+
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr ""
+
+msgid "Center dec"
+msgstr ""
+
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr ""
+
+msgid "Radius"
+msgstr ""
+
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
+msgstr ""
+
+msgid "Small"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "Large"
+msgstr ""
+
+msgid "Sample raw frame (max 100 MB)"
+msgstr ""
+
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+
+msgid "Scaled font size"
+msgstr ""
+
+msgid "Font size of the annotations on your main image page"
+msgstr ""
+
+msgid "Show equatorial grid"
+msgstr ""
+
+msgid "Show constellation borders"
+msgstr ""
+
+msgid "Show constellation lines"
+msgstr ""
+
+msgid "Show named stars"
+msgstr ""
+
+msgid "Show Messier objects"
+msgstr ""
+
+msgid "Show NGC and IC objects"
+msgstr ""
+
+msgid "Show VdB objects"
+msgstr ""
+
+msgid "Show Sharpless objects"
+msgstr ""
+
+msgid "Show Barnard objects"
+msgstr ""
+
+msgid "Show PGC objects"
+msgstr ""
+
+msgid "Show planets"
+msgstr ""
+
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+
+msgid "Show asteroids"
+msgstr ""
+
+msgid "Show GCVS stars"
+msgstr ""
+
+msgid "General Catalog of Variable Stars"
+msgstr ""
+
+msgid "Show Tycho-2 catalog"
+msgstr ""
+
+msgid "Show CGPN objects"
+msgstr ""
+
+msgid "Getting plate-solving status, please wait..."
+msgstr ""
+
+msgid "Plate-solving starting, please do not leave this page..."
+msgstr ""
+
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr ""
+
+msgid "Plate-solving started. You may leave this page."
+msgstr ""
+
+msgid "Advanced plate-solving started. You may leave this page."
+msgstr ""
+
+msgid "Plate-solving almost ready, please do not leave this page..."
+msgstr ""
+
+msgid "This image could not be plate-solved."
+msgstr ""
+
+msgid "The advanced plate-solving failed."
+msgstr ""
+
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr ""
+
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid ""
+"AstroBin could not plate-solve this image because it was not possible to "
+"establish a connection to nova.astrometry.net. Please try again later!"
+msgstr ""
+
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error."
+msgstr ""
+
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an unepexted error."
+msgstr ""
+
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+
+msgid "Show quasars"
+msgstr ""
+
+msgid "Missing"
+msgstr ""
+
+msgid "Basic pending"
+msgstr ""
+
+msgid "Basic failed"
+msgstr ""
+
+msgid "Basic success"
+msgstr ""
+
+msgid "Advanced pending"
+msgstr ""
+
+msgid "Advanced failed"
+msgstr ""
+
+msgid "Advanced success"
+msgstr ""
+
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error."
+msgstr ""
+
+msgid "n/a"
+msgstr ""
+
+msgid "Starting task..."
+msgstr ""
+
+msgid "Downloading image..."
+msgstr ""
+
+msgid "Plate-solving image..."
+msgstr ""
+
+msgid "Generating image annotations..."
+msgstr ""
+
+msgid "Processing SVG documents..."
+msgstr ""
+
+msgid "Uploading results..."
+msgstr ""
+
+msgid "Task completed"
+msgstr ""
+
+msgid "Plate-solving information"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Started"
+msgstr ""
+
+msgid "Astrometry.net job"
+msgstr ""
+
+msgid "PixInsight job"
+msgstr ""
+
+msgid "PixInsight queue size"
+msgstr ""
+
+msgid "PixInsight stage"
+msgstr ""
+
+msgid "PixInsight log"
+msgstr ""
+
+msgid "RA"
+msgstr ""
+
+msgid "center"
+msgstr ""
+
+msgid "degrees"
+msgstr ""
+
+msgid "top/left"
+msgstr ""
+
+msgid "top/right"
+msgstr ""
+
+msgid "bottom/right"
+msgstr ""
+
+msgid "bottom/left"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Invalid"
+msgstr ""
+
+msgid "Generating finding charts..."
+msgstr ""
+
+msgid "Paying member"
+msgstr ""
+
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically."
+msgstr ""

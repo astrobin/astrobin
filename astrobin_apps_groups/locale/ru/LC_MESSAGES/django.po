@@ -2,26 +2,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Groups\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:35+0000\n"
-"PO-Revision-Date: 2023-10-30 11:34+0100\n"
+"POT-Creation-Date: 2021-04-05 16:11+0200\n"
+"PO-Revision-Date: 2024-06-29 13:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108436\n"
-"X-Loco-Api-Version: 1.0.28 20240520-1\n"
-
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
+"X-Loco-Api-Version: 1.0.28 20240611-1"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Варианты отключения автодобавления изображений"
@@ -75,15 +69,6 @@ msgstr "Особенное оборудование"
 msgid "Other"
 msgstr "Прочее"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
 msgid "Name"
 msgstr "Название"
 
@@ -95,18 +80,6 @@ msgstr "Разрешены HTML теги."
 
 msgid "Category"
 msgstr "Категория"
-
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
 
 msgid "Public group"
 msgstr "Открытая группа"
@@ -137,20 +110,8 @@ msgstr ""
 "Группы без автодобавления содержат только те изображения, которые были "
 "добавлены вручную."
 
-msgid "Forum notice"
-msgstr ""
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-
 msgid "Last activity"
 msgstr "Последние действия"
-
-msgid "Date created"
-msgstr "Дата создания"
 
 msgid "Members"
 msgstr "Участники"
@@ -196,9 +157,6 @@ msgstr "Сохранить"
 msgid "Cancel"
 msgstr "Отмена"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
 msgid "Delete group?"
 msgstr "Удалить группу?"
 
@@ -235,9 +193,6 @@ msgstr "Покинуть группу"
 
 msgid "Moderate join requests"
 msgstr "Модерировать запросы на вступление"
-
-msgid "Sort images"
-msgstr ""
 
 msgid "This group is public"
 msgstr "Эта группа открытая"
@@ -287,6 +242,9 @@ msgstr "Посмотреть все"
 
 msgid "New topic"
 msgstr "Новая тема"
+
+msgid "Please join the group to view its forum."
+msgstr "Добавьтесь в группу, чтобы читать этот форум."
 
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
@@ -348,29 +306,28 @@ msgstr "Группы"
 msgid "Sort"
 msgstr "Упорядочить"
 
-msgid "Search"
-msgstr ""
+msgid "Date created"
+msgstr "Дата создания"
 
-msgid "Private groups you own"
-msgstr ""
+msgid "Your private groups"
+msgstr "Ваши закрытые группы"
 
-msgid "Private groups you are a member of"
-msgstr ""
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr "Вы владеете/участвуете/приглашены в эти закрытые группы."
 
-msgid "Private groups you are invited to"
-msgstr ""
-
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
+msgctxt "group"
+msgid "Create private group"
+msgstr "Создать закрытую группу"
 
 msgid "Public groups"
 msgstr "Открытые группы"
+
+msgid "Open to the whole community."
+msgstr "Открыто для всего сообщества."
+
+msgctxt "group"
+msgid "Create public group"
+msgstr "Создать открытую группу"
 
 msgid "No groups available."
 msgstr "Нет доступных групп."
@@ -435,12 +392,6 @@ msgstr "Отклонить"
 msgid "This group has no join requests."
 msgstr "В этой группе нет запросов на вступление."
 
-msgid "Something went wrong, Please try again later."
-msgstr ""
-
-msgid "Type your message here..."
-msgstr ""
-
 msgid "You cannot add images that are not yours!"
 msgstr "Вы не можете добавить чужие изображения!"
 
@@ -475,23 +426,71 @@ msgstr "Вы вышли из группы"
 msgid "Form saved"
 msgstr "Форма сохранена"
 
-#~ msgid "Please join the group to view its forum."
-#~ msgstr "Добавьтесь в группу, чтобы читать этот форум."
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
 
-#~ msgid "Your private groups"
-#~ msgstr "Ваши закрытые группы"
+msgid "Publication"
+msgstr ""
 
-#~ msgid ""
-#~ "You own, or are a member of, or were invited to, these private groups."
-#~ msgstr "Вы владеете/участвуете/приглашены в эти закрытые группы."
+msgid "Title"
+msgstr ""
 
-#~ msgctxt "group"
-#~ msgid "Create private group"
-#~ msgstr "Создать закрытую группу"
+msgid "Key/value tag"
+msgstr ""
 
-#~ msgid "Open to the whole community."
-#~ msgstr "Открыто для всего сообщества."
+msgid "Default image sorting"
+msgstr ""
 
-#~ msgctxt "group"
-#~ msgid "Create public group"
-#~ msgstr "Создать открытую группу"
+msgid "Image key/value tag sorting"
+msgstr ""
+
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr ""
+
+msgid "Sort images"
+msgstr ""
+
+msgid "Private groups you own"
+msgstr ""
+
+msgid "Private groups you are a member of"
+msgstr ""
+
+msgid "Private groups you are invited to"
+msgstr ""
+
+msgid "Public groups you own"
+msgstr ""
+
+msgid "Public groups you are a member of"
+msgstr ""
+
+msgid "Public groups you are invited to"
+msgstr ""
+
+msgid "Forum notice"
+msgstr ""
+
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+
+msgid "Something went wrong, Please try again later."
+msgstr ""
+
+msgid "Type your message here..."
+msgstr ""

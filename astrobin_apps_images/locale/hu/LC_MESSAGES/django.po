@@ -2,19 +2,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:35+0000\n"
-"PO-Revision-Date: 2023-10-30 11:33+0100\n"
+"POT-Creation-Date: 2021-04-05 16:13+0200\n"
+"PO-Revision-Date: 2024-06-29 13:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20240520-1\n"
+"X-Loco-Api-Version: 1.0.28 20240611-1"
+
+msgid "Conflict."
+msgstr "Konfliktus."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Tömörítetlen forrás (max 100 MB)"
@@ -28,6 +31,55 @@ msgstr ""
 "A kedvenc képszerkesztő programodból (pl. PixInsight, Adobe Photoshop, stb.) "
 "származó végleges feldolgozott képet archiválási céllal itt, az AstroBin-en "
 "tárolhatod. Ezt a fájlt bizalmasan tároljuk, és csak te férhetsz hozzá."
+
+msgid "Error!"
+msgstr "Hiba!"
+
+msgid "Staging area"
+msgstr "Előkészítési Terület"
+
+msgid "Loading"
+msgstr "Töltés"
+
+msgid "(no title)"
+msgstr "(nincs cím)"
+
+msgid "Image of the day"
+msgstr "A Nap Képe"
+
+msgid "Top pick"
+msgstr "Top Pick"
+
+msgid "Top pick nomination"
+msgstr "Top Pick jelölt"
+
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Adatkorrupció. Kérjük, töltsd fel újra a képet. Elnézést kérünk!"
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "%(revision)s számú átdolgozás"
+
+msgid "Original revision"
+msgstr "Eredeti átdolgozás"
+
+msgid "Collaboration"
+msgstr "Kollaboráció"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+
+msgid "If the problem persists, please contact us."
+msgstr ""
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
 
 msgid "Dates"
 msgstr ""
@@ -101,57 +153,5 @@ msgstr ""
 msgid "Transparency"
 msgstr ""
 
-msgid "Error!"
-msgstr "Hiba!"
-
-msgid "Image of the day"
-msgstr "A Nap Képe"
-
-msgid "Top pick"
-msgstr "Top Pick"
-
-msgid "Top pick nomination"
-msgstr "Top Pick jelölt"
-
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
-msgid "Staging area"
-msgstr "Előkészítési Terület"
-
-msgid "Collaboration"
-msgstr "Kollaboráció"
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "%(revision)s számú átdolgozás"
-
-msgid "Original revision"
-msgstr "Eredeti átdolgozás"
-
-msgid "Loading"
-msgstr "Töltés"
-
-msgid "(no title)"
-msgstr "(nincs cím)"
-
 msgid "Image file not found"
 msgstr ""
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Adatkorrupció. Kérjük, töltsd fel újra a képet. Elnézést kérünk!"
-
-#~ msgid "Conflict."
-#~ msgstr "Konfliktus."

@@ -2,19 +2,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:35+0000\n"
-"PO-Revision-Date: 2023-10-30 11:32+0100\n"
+"POT-Creation-Date: 2021-04-05 16:16+0200\n"
+"PO-Revision-Date: 2024-06-29 13:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Portuguese\n"
 "Language: pt\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.28 20240520-1\n"
+"X-Loco-Api-Version: 1.0.28 20240611-1"
+
+msgid "Notifications"
+msgstr "Notificações"
+
+msgid "You have no notifications."
+msgstr "Você não tem notificações."
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Mark all as read"
+msgstr "Marcar tudo como lido"
+
+msgid "You have no new notifications."
+msgstr "Você não tem notificações novas."
 
 msgid "You have a new follower"
 msgstr "Você possui um novo seguidor"
@@ -28,44 +43,14 @@ msgstr "Nova revisão de imagem de um usuário que você segue"
 msgid "Your image was plate-solved"
 msgstr "Sua imagem foi resolvida em placa"
 
-msgid "Your image was approved by a moderator"
-msgstr ""
-
 msgid "Your image could not be plate-solved"
 msgstr "Sua imagem não pôde ser resolvido em placa"
-
-msgid "Your image was plate-solved (advanced)"
-msgstr ""
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr ""
 
 msgid "Your image received a new comment"
 msgstr "Sua imagem recebeu um novo comentário"
 
-msgid "Your edit proposal received a new comment"
-msgstr ""
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr ""
-
-msgid "Your unapproved equipment item received a comment"
-msgstr ""
-
-msgid "Your listing has a new private conversation"
-msgstr ""
-
-msgid "Your private conversation has a new comment"
-msgstr ""
-
-msgid "Your listing has a new question"
-msgstr ""
-
 msgid "There was a reply to your comment"
 msgstr "Houve uma resposta ao seu comentário"
-
-msgid "A new comment on your image requires moderation"
-msgstr ""
 
 msgid "Your comment was approved"
 msgstr ""
@@ -80,9 +65,6 @@ msgid "Your comment was liked"
 msgstr ""
 
 msgid "Your forum post was liked"
-msgstr ""
-
-msgid "Your forum post was approved"
 msgstr ""
 
 msgid "Your API Key request has been approved"
@@ -109,15 +91,6 @@ msgstr "Um usuário que você segue criou um novo grupo público"
 msgid "New forum topic in a group you are a member of"
 msgstr "Novo tópico do fórum em um grupo do qual você é membro"
 
-msgid "New forum topic for an equipment item you use"
-msgstr ""
-
-msgid "New forum topic for an equipment item you follow"
-msgstr ""
-
-msgid "Your forum topic was moved"
-msgstr ""
-
 msgid "You have received a new private message"
 msgstr "Você recebeu uma nova mensagem privada"
 
@@ -142,12 +115,6 @@ msgstr "Você tem imagens com uma \"Origem remota\" ausente"
 msgid "Would you like to activate your account?"
 msgstr ""
 
-msgid "New reply in a subscribed forum topic"
-msgstr ""
-
-msgid "New reply in a forum topic that you started"
-msgstr ""
-
 msgid "You were mentioned in a forum post"
 msgstr ""
 
@@ -160,22 +127,10 @@ msgstr ""
 msgid "Congratulations for your first image on AstroBin!"
 msgstr ""
 
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr ""
-
 msgid "Thank you for getting a subscription!"
 msgstr ""
 
 msgid "Thank you for your payment!"
-msgstr ""
-
-msgid "Subscription canceled"
 msgstr ""
 
 msgid "You were removed from the IOTD staff"
@@ -184,19 +139,13 @@ msgstr ""
 msgid "You have been inactive as an IOTD staff member"
 msgstr ""
 
-msgid "Your IOTD staff activity is insufficient"
-msgstr ""
-
 msgid "An image you promoted made it to Top Pick"
 msgstr ""
 
 msgid "An image you promoted made it to IOTD"
 msgstr ""
 
-msgid "An image you dismissed made it to Top Pick"
-msgstr ""
-
-msgid "An image you dismissed made it to IOTD"
+msgid "New reply in a subscribed forum topic"
 msgstr ""
 
 msgid "Your image was nominated to be a Top Pick"
@@ -208,22 +157,37 @@ msgstr ""
 msgid "Your image was voted Image of the Day"
 msgstr ""
 
-msgid "Your IOTD staff member stats"
+msgid "Your image was plate-solved (advanced)"
+msgstr ""
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr ""
+
+msgid "A new comment on your image requires moderation"
+msgstr ""
+
+msgid "Your forum post was approved"
 msgstr ""
 
 msgid "You were mentioned in an image description"
 msgstr ""
 
+msgid "Your edit proposal received a new comment"
+msgstr ""
+
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr ""
+
 msgid "A gear item that you used was renamed"
 msgstr ""
 
-msgid "Collaboration Request: Accept or Deny"
+msgid "Your scheduled IOTD received a new comment"
 msgstr ""
 
-msgid "User accepted your collaboration request"
+msgid "Your unapproved equipment item received a comment"
 msgstr ""
 
-msgid "User denied your collaboration request"
+msgid "New forum topic for an equipment item you use"
 msgstr ""
 
 msgid "You were added as a collaborator to an image"
@@ -235,23 +199,62 @@ msgstr ""
 msgid "User removed self as a collaborator to your image"
 msgstr ""
 
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr ""
+
 msgid "Login attempt detected from a different country"
 msgstr ""
 
 msgid "Login attempt with weak password"
 msgstr ""
 
-#~ msgid "Notifications"
-#~ msgstr "Notificações"
+msgid "Your image was approved by a moderator"
+msgstr ""
 
-#~ msgid "You have no notifications."
-#~ msgstr "Você não tem notificações."
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr ""
 
-#~ msgid "Settings"
-#~ msgstr "Configurações"
+msgid "Subscription canceled"
+msgstr ""
 
-#~ msgid "Mark all as read"
-#~ msgstr "Marcar tudo como lido"
+msgid "Your forum topic was moved"
+msgstr ""
 
-#~ msgid "You have no new notifications."
-#~ msgstr "Você não tem notificações novas."
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr ""
+
+msgid "Your listing has a new private conversation"
+msgstr ""
+
+msgid "Your private conversation has a new comment"
+msgstr ""
+
+msgid "Your listing has a new question"
+msgstr ""
+
+msgid "New forum topic for an equipment item you follow"
+msgstr ""
+
+msgid "New reply in a forum topic that you started"
+msgstr ""
+
+msgid "Your IOTD staff activity is insufficient"
+msgstr ""
+
+msgid "An image you dismissed made it to Top Pick"
+msgstr ""
+
+msgid "An image you dismissed made it to IOTD"
+msgstr ""
+
+msgid "Your IOTD staff member stats"
+msgstr ""
+
+msgid "Collaboration Request: Accept or Deny"
+msgstr ""
+
+msgid "User accepted your collaboration request"
+msgstr ""
+
+msgid "User denied your collaboration request"
+msgstr ""

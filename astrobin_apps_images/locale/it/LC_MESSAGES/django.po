@@ -2,19 +2,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:35+0000\n"
-"PO-Revision-Date: 2023-10-30 11:33+0100\n"
+"POT-Creation-Date: 2021-04-05 16:13+0200\n"
+"PO-Revision-Date: 2024-06-29 13:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20240520-1\n"
+"X-Loco-Api-Version: 1.0.28 20240611-1"
+
+msgid "Conflict."
+msgstr "Conflitto."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Origine dati non compressa (max 100 MB)"
@@ -30,80 +33,17 @@ msgstr ""
 "ecc) qui su AstroBin, per archiviarla. Questo file è salvato privatamente e "
 "solo tu potrai accederci."
 
-msgid "Dates"
-msgstr ""
-
-msgid "Frames"
-msgstr ""
-
-msgid "Integration"
-msgstr ""
-
-msgid "Darks"
-msgstr ""
-
-msgid "Flats"
-msgstr ""
-
-msgid "Flat darks"
-msgstr ""
-
-msgid "Bias"
-msgstr ""
-
-msgid "Avg. Moon age"
-msgstr ""
-
-msgid "days"
-msgstr ""
-
-msgid "Avg. Moon phase"
-msgstr ""
-
-msgid "Bortle Dark-Sky Scale"
-msgstr ""
-
-msgid "Mean SQM"
-msgstr ""
-
-msgid "Mean FWHM"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "FPS"
-msgstr ""
-
-msgid "Exposure per frame"
-msgstr ""
-
-msgid "Focal length"
-msgstr ""
-
-msgid "CMI"
-msgstr ""
-
-msgid "CMII"
-msgstr ""
-
-msgid "CMIII"
-msgstr ""
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Transparency"
-msgstr ""
-
 msgid "Error!"
 msgstr "Errore!"
+
+msgid "Staging area"
+msgstr "Area di lavoro"
+
+msgid "Loading"
+msgstr "Caricamento"
+
+msgid "(no title)"
+msgstr "(senza titolo)"
 
 msgid "Image of the day"
 msgstr "Foto del giorno"
@@ -114,14 +54,21 @@ msgstr "Top pick"
 msgid "Top pick nomination"
 msgstr "Nomina Top pick"
 
-msgid "Currently in the IOTD/TP queue"
-msgstr "Al momento nella coda IOTD/TP"
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Corruzione dei dati. Carica questa immagine di nuovo. Spiacenti!"
 
-msgid "Staging area"
-msgstr "Area di lavoro"
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Revisione %(revision)s"
+
+msgid "Original revision"
+msgstr "Revisione originale"
 
 msgid "Collaboration"
 msgstr "Collaborazione"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr "Al momento nella coda IOTD/TP"
 
 msgid "Video"
 msgstr "Video"
@@ -139,24 +86,77 @@ msgstr ""
 "Questo video è ancora in fase di elaborazione, torna su questa pagina più "
 "tardi."
 
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "Revisione %(revision)s"
+msgid "Dates"
+msgstr "Date"
 
-msgid "Original revision"
-msgstr "Revisione originale"
+msgid "Frames"
+msgstr "Fotogrammi"
 
-msgid "Loading"
-msgstr "Caricamento"
+msgid "Integration"
+msgstr "Integrazione"
 
-msgid "(no title)"
-msgstr "(senza titolo)"
+msgid "Darks"
+msgstr "Dark"
+
+msgid "Flats"
+msgstr "Flat"
+
+msgid "Flat darks"
+msgstr "Flat dark"
+
+msgid "Bias"
+msgstr "Bias"
+
+msgid "Avg. Moon age"
+msgstr "Età lunare media"
+
+msgid "days"
+msgstr "giorni"
+
+msgid "Avg. Moon phase"
+msgstr "Fase lunare media"
+
+msgid "Bortle Dark-Sky Scale"
+msgstr "Scala Bortle"
+
+msgid "Mean SQM"
+msgstr "SQM mediano"
+
+msgid "Mean FWHM"
+msgstr "FWHM mediano"
+
+msgid "Temperature"
+msgstr "Temperatura"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Time"
+msgstr "Ora"
+
+msgid "FPS"
+msgstr "FPS"
+
+msgid "Exposure per frame"
+msgstr "Esposizione per fotogramma"
+
+msgid "Focal length"
+msgstr "Lunghezza focale"
+
+msgid "CMI"
+msgstr "CMI"
+
+msgid "CMII"
+msgstr "CMII"
+
+msgid "CMIII"
+msgstr "CMIII"
+
+msgid "Seeing"
+msgstr "Seeing"
+
+msgid "Transparency"
+msgstr "Trasparenza"
 
 msgid "Image file not found"
-msgstr ""
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Corruzione dei dati. Carica questa immagine di nuovo. Spiacenti!"
-
-#~ msgid "Conflict."
-#~ msgstr "Conflitto."
+msgstr "File immagine non trovato"

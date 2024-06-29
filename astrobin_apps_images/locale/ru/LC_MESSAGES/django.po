@@ -2,20 +2,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:35+0000\n"
-"PO-Revision-Date: 2023-10-30 11:33+0100\n"
+"POT-Creation-Date: 2021-04-05 16:13+0200\n"
+"PO-Revision-Date: 2024-06-29 13:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20240520-1\n"
+"X-Loco-Api-Version: 1.0.28 20240611-1"
+
+msgid "Conflict."
+msgstr "Конфликт."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Источник без сжатия (макс. 100 Мб)"
@@ -30,6 +33,56 @@ msgstr ""
 "вашего любимого графического редактора (например, PixInsight, Adobe "
 "Photoshop и т.д.), здесь, в AstroBin, для архивных целей. Этот файл хранится "
 "в частном порядке, и только вы будете иметь к нему доступ."
+
+msgid "Error!"
+msgstr "Ошибка!"
+
+msgid "Staging area"
+msgstr "Студия"
+
+msgid "Loading"
+msgstr "Загрузка"
+
+msgid "(no title)"
+msgstr "(без названия)"
+
+msgid "Image of the day"
+msgstr "Изображение Дня"
+
+msgid "Top pick"
+msgstr "Лучшее изображение"
+
+msgid "Top pick nomination"
+msgstr "Номинация на лучшее изображение"
+
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr ""
+"Данные повреждены. Пожалуйста, загрузите это изображение снова. Извините!"
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr ""
+
+msgid "Original revision"
+msgstr ""
+
+msgid "Collaboration"
+msgstr ""
+
+msgid "Currently in the IOTD/TP queue"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+
+msgid "If the problem persists, please contact us."
+msgstr ""
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
 
 msgid "Dates"
 msgstr ""
@@ -103,58 +156,5 @@ msgstr ""
 msgid "Transparency"
 msgstr ""
 
-msgid "Error!"
-msgstr "Ошибка!"
-
-msgid "Image of the day"
-msgstr "Изображение Дня"
-
-msgid "Top pick"
-msgstr "Лучшее изображение"
-
-msgid "Top pick nomination"
-msgstr "Номинация на лучшее изображение"
-
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
-msgid "Staging area"
-msgstr "Студия"
-
-msgid "Collaboration"
-msgstr ""
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr ""
-
-msgid "Original revision"
-msgstr ""
-
-msgid "Loading"
-msgstr "Загрузка"
-
-msgid "(no title)"
-msgstr "(без названия)"
-
 msgid "Image file not found"
 msgstr ""
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr ""
-"Данные повреждены. Пожалуйста, загрузите это изображение снова. Извините!"
-
-#~ msgid "Conflict."
-#~ msgstr "Конфликт."

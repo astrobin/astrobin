@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 10:34+0000\n"
+"POT-Creation-Date: 2024-06-29 11:39+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -3205,6 +3205,12 @@ msgstr ""
 msgid "Cancel"
 msgstr "Peruuta"
 
+msgid "Downloading file"
+msgstr ""
+
+msgid "AstroBin is downloading the file you requested in the background."
+msgstr ""
+
 msgid "No file selected"
 msgstr "Yhtään tiedostoa ei ole valittu"
 
@@ -3351,6 +3357,11 @@ msgid ""
 "They will not know that they have been shadow-banned, and the goal is that "
 "eventually they will get bored while having caused no harm, since nobody saw "
 "what they posted."
+msgstr ""
+
+msgid ""
+"If they follow you, the follow will be removed, and they will not be able to "
+"follow you again."
 msgstr ""
 
 msgid "Continue"
@@ -3511,10 +3522,7 @@ msgstr "Selaa"
 msgid "Advanced search"
 msgstr "Laajennettu haku"
 
-msgid "Equipment database"
-msgstr ""
-
-msgid "Equipment marketplace"
+msgid "Marketplace"
 msgstr ""
 
 msgid "Constellations"
@@ -3572,6 +3580,9 @@ msgstr "Tilapäinen alue"
 
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
+
+msgid "Marketplace listings"
+msgstr ""
 
 msgid "My messages"
 msgstr "Viestini"
@@ -4040,9 +4051,6 @@ msgid "Admin"
 msgstr ""
 
 msgid "Ban user"
-msgstr ""
-
-msgid "AstroBin is preparing your download. Please wait..."
 msgstr ""
 
 msgid "Original file"
@@ -5620,50 +5628,49 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> started a private conversation on your "
+"<a href=\"%(user_url)s\">%(user)s</a> sent you a private message on your "
 "marketplace listing <strong>%(target)s</strong>."
 msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s started a private conversation on your marketplace listing "
-"\"%(target)s\"."
+"%(user)s sent you a private message on your marketplace listing \"%(target)s"
+"\"."
 msgstr ""
 
 #, python-format
 msgid ""
-"<strong>%(user)s</strong> started a private conversation on your marketplace "
+"<strong>%(user)s</strong> sent you a private message on your marketplace "
 "listing <strong>%(target)s</strong>"
 msgstr ""
 
 #, python-format
 msgid ""
-"<strong>%(user)s</strong> started a private conversation on your marketplace "
+"<strong>%(user)s</strong> sent you a private message on your marketplace "
 "listing <strong>%(target)s</strong>."
 msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> posted on your private conversation on "
+"<a href=\"%(user_url)s\">%(user)s</a> sent you a private message on "
 "marketplace listing <strong>%(target)s</strong>."
 msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s posted on your private conversation on marketplace listing "
-"\"%(target)s\"."
+"%(user)s sent you a private message on marketplace listing \"%(target)s\"."
 msgstr ""
 
 #, python-format
 msgid ""
-"<strong>%(user)s</strong> posted on your private conversation on marketplace "
-"listing <strong>%(target)s</strong>"
+"<strong>%(user)s</strong> sent you a private message on marketplace listing "
+"<strong>%(target)s</strong>"
 msgstr ""
 
 #, python-format
 msgid ""
-"<strong>%(user)s</strong> posted on your private conversation on marketplace "
-"listing <strong>%(target)s</strong>."
+"<strong>%(user)s</strong> sent you a private message on marketplace listing "
+"<strong>%(target)s</strong>."
 msgstr ""
 
 #, python-format
@@ -5761,6 +5768,9 @@ msgid ""
 "topic: <a href=\"%(url)s\">%(post)s</a>."
 msgstr ""
 
+msgid "View post"
+msgstr ""
+
 #, python-format
 msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
 msgstr ""
@@ -5795,9 +5805,6 @@ msgstr ""
 msgid ""
 "If you don't want to receive notifications on new posts in this topic visit "
 "<a href=\"%(unsubscribe_url)s\">this link.</a>"
-msgstr ""
-
-msgid "View post"
 msgstr ""
 
 #, python-format
@@ -6503,7 +6510,7 @@ msgstr ""
 msgid "To post a new topic, please first select the most relevant forum"
 msgstr ""
 
-msgid "Do you want to post about a specific equipment item?"
+msgid "Do you want to post about a specific equipment item or software?"
 msgstr ""
 
 msgid "Yes"
@@ -7595,10 +7602,17 @@ msgstr ""
 
 msgid ""
 "\n"
-"            Your account is temporarily or permanently suspended. If you "
+"                Your account is temporarily or permanently suspended. If you "
 "believe this is in error, please get in touch\n"
-"            using the Help menu.\n"
-"        "
+"                using the Help menu.\n"
+"            "
+msgstr ""
+
+msgid ""
+"\n"
+"                This content is not available because the user's account is "
+"suspended.\n"
+"            "
 msgstr ""
 
 # Leave the # sign the same! This refers to the number of selected item in a
