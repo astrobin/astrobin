@@ -18,7 +18,8 @@ from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
     Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentItemMarketplaceFeedback,
     EquipmentItemMarketplaceListing,
-    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceMasterOffer,
+    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemImage,
+    EquipmentItemMarketplaceMasterOffer,
     EquipmentItemMarketplaceOffer,
     EquipmentPreset, Filter, Mount, Sensor,
     Software, Telescope,
@@ -917,3 +918,9 @@ def send_marketplace_feedback_notifications(sender, instance: EquipmentItemMarke
                 'feedback_url': build_notification_url(instance.get_absolute_url())
             }
         )
+
+
+@receiver(post_delete, sender=EquipmentItemMarketplaceListingLineItemImage)
+def delete_marketplace_image(sender, instance: EquipmentItemMarketplaceListingLineItemImage, **kwargs):
+    instance.image_file.delete(save=False)
+    instance.thumbnail_file.delete(save=False)
