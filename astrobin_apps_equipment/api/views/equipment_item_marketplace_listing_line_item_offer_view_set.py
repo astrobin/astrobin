@@ -10,6 +10,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
+from astrobin.models import UserProfile
 from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_offer_serializer import \
     EquipmentItemMarketplaceOfferSerializer
@@ -142,6 +143,14 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         super().perform_create(serializer)
+
+        UserProfile.objects.filter(
+            user=self.request.user,
+            agreed_to_marketplace_terms__isnull=True
+        ).update(
+            agreed_to_marketplace_terms=DateTimeService.now(),
+            updated=DateTimeService.now()
+        )
 
         MarketplaceService.log_event(
             self.request.user,

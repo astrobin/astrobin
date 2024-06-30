@@ -9,6 +9,7 @@ from typing import List, Optional
 from urllib.parse import urlparse
 
 import boto3
+from django.apps import apps
 from django.core.files.images import get_image_dimensions
 from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
 from django.db.models import FileField
@@ -79,6 +80,11 @@ from astrobin_apps_platesolving.models import Solution, PlateSolvingSettings, Pl
 from nested_comments.models import NestedComment
 
 log = logging.getLogger(__name__)
+
+
+def image_hasher_function():
+    model = apps.get_model('astrobin', 'Image')
+    return generate_unique_hash(6, model.all_objects)
 
 
 class HasSolutionMixin(object):
@@ -1044,7 +1050,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     hash = models.CharField(
         max_length=6,
-        default=lambda: generate_unique_hash(6, Image.all_objects),
+        default=image_hasher_function,
         null=True,
         unique=True
     )
@@ -2794,6 +2800,12 @@ class UserProfile(SafeDeleteModel):
                 '_3': '</a>'
             }
         )
+    )
+
+    agreed_to_marketplace_terms = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     banned_from_competitions = models.DateTimeField(

@@ -16,6 +16,7 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+from astrobin.models import UserProfile
 from astrobin.settings.components.payments import SUPPORTED_CURRENCIES
 from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_read_serializer import \
@@ -339,6 +340,14 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         super().perform_create(serializer)
+
+        UserProfile.objects.filter(
+            user=self.request.user,
+            agreed_to_marketplace_terms__isnull=True
+        ).update(
+            agreed_to_marketplace_terms=DateTimeService.now(),
+            updated=DateTimeService.now()
+        )
 
         MarketplaceService.log_event(
             self.request.user,
