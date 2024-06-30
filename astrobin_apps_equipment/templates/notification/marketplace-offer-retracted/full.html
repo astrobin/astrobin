@@ -1,9 +1,9 @@
 {% load i18n %}
 
 <p>
-    {% blocktrans trimmed %}
-        Unfortunately, your offer for the listing <strong>{{ listing }}</strong> has been retracted by the prospect
-        buyer <a href="{{ buyer_url }}">{{ buyer_display_name }}</a>.
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        {{ _0 }}{{ buyer_display_name }}{{ _1 }} retracted their offer for your marketplace listing
+        {{ _0 }}{{ listing }}{{ _1 }}
     {% endblocktrans %}
 </p>
 

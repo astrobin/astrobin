@@ -1,10 +1,10 @@
 {% load i18n %}
 
 <p>
-    {% blocktrans trimmed %}
-        <strong>{{ seller_display_name }}</strong> sold a line item in their marketplace listing
-        <strong>{{ listing }}</strong>.
-    {% endblocktrans %}
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        {{ _0 }}{{ seller_display_name }}{{ _1 }} sold a line item in their marketplace listing
+        {{ _0 }}{{ listing }}{{ _1 }}
+    {% endblocktrans %}.
 </p>
 
 <p>

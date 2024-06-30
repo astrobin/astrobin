@@ -1,7 +1,7 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    {{user}} commented a marketplace feedback you that received.
+{% blocktrans trimmedwith _0="'" _1="'" %}
+    {{ _0 }}{{ user }}{{ _1 }} commented a marketplace feedback that you received.
 {% endblocktrans %}
 
 {% blocktrans trimmed %}

@@ -1,8 +1,8 @@
 {% load i18n %}
 
 <p>
-    {% blocktrans trimmed %}
-        Your offer for <strong>{{ listing }}</strong> has been recorded.
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        You made an offer for marketplace listing {{ _0 }}{{ listing }}{{ _1 }}
     {% endblocktrans %}
 </p>
 

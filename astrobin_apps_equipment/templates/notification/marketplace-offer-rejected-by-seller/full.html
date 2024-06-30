@@ -1,9 +1,9 @@
 {% load i18n %}
 
 <p>
-    {% blocktrans trimmed %}
-        Unfortunately, your offer for the listing <strong>{{ listing }}</strong> has been rejected by the seller
-        <strong>{{ seller_display_name }}</strong>.
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        {{ _0 }}{{ seller_display_name }}{{ _1 }} rejected your offer for their marketplace listing
+        {{ _0 }}{{ listing }}{{ _1 }}
     {% endblocktrans %}
 </p>
 

@@ -3,7 +3,7 @@
 {% blocktrans trimmed with _0="'" _1="'" %}
     {{ _0 }}{{ seller_display_name }}{{ _1 }} accepted somebody else's offer in their marketplace listing
     {{ _0 }}{{ listing }}{{ _1 }}
-{% endblocktrans %}
+{% endblocktrans %}.
 
 {% blocktrans trimmed %}
     Unfortunately, you cannot make an offer on this listing while it is in a reserved or sold state.

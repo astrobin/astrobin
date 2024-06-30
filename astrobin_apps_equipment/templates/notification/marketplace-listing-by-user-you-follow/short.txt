@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    {{ seller_display_name }} published a marketplace listing "{{ listing }}"
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ _0 }}{{ seller_display_name }}{{ _1 }} published a marketplace listing {{ _0 }}{{ listing }}{{ _1 }}
 {% endblocktrans %}

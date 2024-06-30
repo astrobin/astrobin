@@ -1,8 +1,8 @@
 {% load i18n %}
 
 <a href="{{ listing_url }}">
-    {% blocktrans trimmed %}
-        Rate the seller <strong>{{ seller_display_name }}</strong> for your recent purchase from marketplace listing
-        <strong>{{ listing }}</strong>
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        Rate the seller {{ _0 }}{{ seller_display_name }}{{ _1 }} for your recent purchase from marketplace listing
+        {{ _0 }}{{ listing }}{{ _1 }}
     {% endblocktrans %}
 </a>

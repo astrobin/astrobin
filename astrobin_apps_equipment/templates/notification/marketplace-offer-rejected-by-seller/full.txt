@@ -1,8 +1,9 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    Unfortunately, your offer for listing "{{ listing }}" has been rejected by the seller {{ seller_display_name }}.
-{% endblocktrans %}
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ _0 }}{{ seller_display_name }}{{ _1 }} rejected your offer for their marketplace listing
+    {{ _0 }}{{ listing }}{{ _1 }}
+{% endblocktrans %}.
 
 {% for offer in rejected_offers %}
     {% trans "Item" %}: {{ offer.line_item }}

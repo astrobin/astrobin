@@ -1,10 +1,10 @@
 {% load i18n %}
 
 <p>
-    {% blocktrans trimmed with open_emphasis='<strong>' close_emphasis='</strong>' %}
+    {% blocktrans trimmed with _0='<strong>' _1='</strong>' %}
         Hi! You recently purchased an item from the marketplace listing
-        {{ open_emphasis }}{{ listing }}{{ close_emphasis }}, and we noticed that you haven't rated the seller
-        {{ open_emphasis }}{{ seller_display_name }}{{ close_emphasis }} yet.
+        {{ _0 }}{{ listing }}{{ _1 }}, and we noticed that you haven't rated the seller
+        {{ _0 }}{{ seller_display_name }}{{ _1 }} yet.
     {% endblocktrans %}
 </p>
 

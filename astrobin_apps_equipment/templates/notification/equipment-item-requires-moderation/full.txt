@@ -1,8 +1,4 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    {{ user }} created the equipment item "{{ item }}" and it requires moderation
-{% endblocktrans %}.
-
 {% trans "View item" %}:
 {{ url }}

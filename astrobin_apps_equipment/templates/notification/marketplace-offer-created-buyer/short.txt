@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    You made an offer for marketplace listing {{ listing }}
+{% blocktrans trimmed with _0="'" _1="'" %}
+    You made an offer for marketplace listing {{ _0 }}{{ listing }}{{ _1 }}
 {% endblocktrans %}

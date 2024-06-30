@@ -1,8 +1,8 @@
 {% load i18n %}
 
 <a href="{{ listing_url }}">
-    {% blocktrans trimmed %}
-        You accepted <strong>{{ buyer_display_name }}</strong>'s offer for your marketplace listing
-        <strong>{{ listing }}</strong>
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+       You accepted {{ _0 }}{{ buyer_display_name}}{{ _1 }}'s offer for your marketplace listing
+       {{ _0 }}{{ listing }}{{ _1 }}
     {% endblocktrans %}
 </a>

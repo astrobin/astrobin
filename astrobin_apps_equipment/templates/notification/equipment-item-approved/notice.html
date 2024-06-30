@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <a href="{{ item_url }}">
-    {% blocktrans trimmed %}
-        <strong>{{ user }}</strong> approved the equipment item <strong>{{ item }}</strong> that you created.
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        {{ _0 }}{{ user }}{{ _1 }} approved the equipment item {{ _0 }}{{ item }}{{ _1 }} that you created
     {% endblocktrans %}
 </a>

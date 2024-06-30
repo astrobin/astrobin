@@ -1,14 +1,14 @@
 {% load i18n %}
 
 <a href="{{ item_url }}">
-    {% if duplicate_of %}
-        {% blocktrans trimmed %}
-            Equipment item <strong>{{ item }}</strong> was removed from your image <strong>{{ image_title }}</strong>
-            and replaced with <strong>{{ duplicate_of }}</strong>.
-        {% endblocktrans %}
-    {% else %}
-        {% blocktrans trimmed %}
-            Equipment item <strong>{{ item }}</strong> was removed from your image <strong>{{ image_title }}</strong>.
-        {% endblocktrans %}
-    {% endif %}
+{% if duplicate_of %}
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        Equipment item {{ _0 }}{{ item }}{{ _1 }} was removed from your image {{ _0 }}{{ image_title }}{{ _1 }} and
+         replaced with {{ _0 }}{{ duplicate_of }}{{ _1 }}
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        Equipment item {{ _0 }}{{ item }}{{ _1 }} was removed from your image {{ _0 }}{{ image_title }}{{ _1 }}
+    {% endblocktrans %}
+{% endif %}
 </a>

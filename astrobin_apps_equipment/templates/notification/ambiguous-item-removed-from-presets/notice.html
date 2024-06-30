@@ -1,8 +1,8 @@
 {% load i18n %}
 
 <a href="{{ item_url }}">
-    {% blocktrans trimmed %}
-        Equipment item <strong>{{ item }}</strong> has been marked as ambiguous by a moderator, and removed from your
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>"%}
+        Equipment item {{ _0 }}{{ item }}{{ _1 }} has been marked as ambiguous by a moderator, and removed from your
         presets.
     {% endblocktrans %}
 </a>

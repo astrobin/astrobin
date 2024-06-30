@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    {{ user }} approved your marketplace listing "{{ listing }}"
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ _0 }}{{ user }}{{ _1 }} approved your marketplace listing {{ _0 }}{{ listing }}{{ _1 }}
 {% endblocktrans %}

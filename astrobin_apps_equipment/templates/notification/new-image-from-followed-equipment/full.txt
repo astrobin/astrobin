@@ -1,9 +1,9 @@
 {% load i18n %}
 {% load astrobin_apps_notifications_tags %}
 
-{% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-    {{ user }} has published a new image
-{% endblocktrans %}{% if image.title %}: {{ image.title }}{% endif %}
+{% blocktrans trimmed with user=image.user.userprofile.get_display_name _0="'" _1="'" %}
+    New image by {{ _0 }}{{ user }}{{ _1 }} acquired with equipment items you follow
+{% endblocktrans %}
 
 {% blocktrans trimmed %}
     You received this notification because you follow these equipment items that were used to acquire this image:

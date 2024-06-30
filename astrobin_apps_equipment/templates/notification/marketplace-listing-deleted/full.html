@@ -1,9 +1,9 @@
 {% load i18n %}
 
 <p>
-    {% blocktrans trimmed %}
-        Marketplace listing <strong>{{ listing }}</strong> was deleted.
-    {% endblocktrans %}
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        {{ _0 }}{{ seller_display_name }}{{ _1 }} deleted their marketplace listing {{ _0 }}{{ listing }}{{ _1 }}
+    {% endblocktrans %}.
 </p>
 
 <p>

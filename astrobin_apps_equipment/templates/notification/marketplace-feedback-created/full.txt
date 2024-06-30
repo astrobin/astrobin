@@ -1,8 +1,8 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    You received feedback on the marketplace.
-{% endblocktrans %}
+{% blocktrans trimmed with _0='"' _1='"' %}
+    {{ user }} left you feedback for marketplace listing {{ _0}}{{ listing }}{{ _1}}
+{% endblocktrans %}.
 
 {% blocktrans trimmed %}
     Feedback details

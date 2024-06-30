@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-    New image by {{ user }} acquired with equipment items you follow
+{% blocktrans trimmed with user=image.user.userprofile.get_display_name _0="'" _1="'" %}
+    New image by {{ _0 }}{{ user }}{{ _1 }} acquired with equipment items you follow
 {% endblocktrans %}: {{ items|join:", " }}
 

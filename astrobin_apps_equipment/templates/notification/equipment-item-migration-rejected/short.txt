@@ -1,5 +1,6 @@
 {% load i18n %}
 
-{% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
-    {{ user }} rejected the equipment item migration that you created for "{{ make }} {{ name }}"
+{% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name _0="'" _1="'" %}
+    {{ _0 }}{{ user }}{{ _1 }} rejected the equipment item migration that you created for
+    {{ _0 }}{{ make }} {{ name }}{{ _1 }}
 {% endblocktrans %}

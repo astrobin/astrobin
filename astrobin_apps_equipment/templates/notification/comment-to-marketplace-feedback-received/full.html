@@ -1,7 +1,7 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    <a href="{{user_url}}">{{user}}</a> commented a marketplace feedback that you received.
+{% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+    {{ _0 }}{{ user }}{{ _1 }} commented a marketplace feedback that you received.
 {% endblocktrans %}
 
 <br/>
