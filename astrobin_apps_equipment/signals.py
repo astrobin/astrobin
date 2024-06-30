@@ -641,6 +641,38 @@ def send_master_offer_notifications(sender, instance: EquipmentItemMarketplaceMa
             ], countdown=10
         )
 
+        other_users_with_offers = EquipmentItemMarketplaceOffer.objects.filter(
+            listing=instance.listing,
+        ).exclude(
+            user=instance.user
+        ).values_list(
+            'user', flat=True
+        ).distinct()
+
+        listing_followers = User.objects.filter(
+            toggleproperty__content_type=ContentType.objects.get_for_model(instance.listing),
+            toggleproperty__object_id=instance.listing.id,
+            toggleproperty__property_type='follow'
+        ).exclude(
+            pk=instance.user.pk
+        ).values_list(
+            'pk', flat=True
+        ).distinct()
+
+        recipients = list(set(list(other_users_with_offers) + list(listing_followers)))
+
+        send_offer_notifications.apply_async(
+            args=[
+                instance.listing.pk,
+                instance.user.pk,
+                instance.pk,
+                None,
+                recipients,
+                instance.user.pk,
+                'marketplace-listing-line-item-reserved',
+            ], countdown=10
+        )
+
     if before is not None and before.status != instance.status:
         if instance.status == EquipmentItemMarketplaceOfferStatus.REJECTED.value:
             # This offer is being deleted because it was rejected. If an offer is simpy retracted, the status would be
