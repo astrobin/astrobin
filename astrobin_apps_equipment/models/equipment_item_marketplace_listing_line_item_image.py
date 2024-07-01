@@ -41,6 +41,10 @@ class EquipmentItemMarketplaceListingLineItemImage(HashedSafeDeleteModel):
         null=True,
     )
 
+    position = models.PositiveIntegerField(
+        default=0,
+    )
+
     w = models.PositiveIntegerField(editable=False, default=0)
     thumbnail_w = models.PositiveIntegerField(editable=False, default=0)
 

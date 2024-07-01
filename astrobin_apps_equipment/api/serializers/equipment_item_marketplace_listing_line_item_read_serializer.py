@@ -1,5 +1,3 @@
-from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_feedback_serializer import \
-    EquipmentItemMarketplaceFeedbackSerializer
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_image_serializer import \
     EquipmentItemMarketplaceListingLineItemImageSerializer
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_serializer import \
@@ -25,6 +23,9 @@ class EquipmentItemMarketplaceListingLineItemReadSerializer(EquipmentItemMarketp
             offers = instance.offers.none()
 
         data['offers'] = EquipmentItemMarketplaceOfferSerializer(offers, many=True).data
+        data['images'] = EquipmentItemMarketplaceListingLineItemImageSerializer(
+            instance.images.all().order_by('position', '-created'), many=True
+        ).data
 
         return data
 
