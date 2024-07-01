@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmedwith _0="'" _1="'" %}
+{% blocktrans trimmed with _0="'" _1="'" %}
     {{ _0 }}{{ user }}{{ _1 }} commented a marketplace feedback that you received.
 {% endblocktrans %}
