@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% blocktrans trimmedwith _0="'" _1="'" %}
+{% blocktrans trimmed with _0="'" _1="'" %}
     {{ _0 }}{{ user }}{{ _1 }} assigned an edit proposal on the equipment item {{ _0 }}{{ item }}{{ _1 }} to you for
     review
 {% endblocktrans %}
