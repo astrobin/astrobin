@@ -1,5 +1,6 @@
 {% load i18n %}
 
-{% blocktrans trimmed with open_emphasis='"' close_emphasis='"' %}
-    Don't forget to mark your reserved items as sold in the listing {{ open_emphasis }}{{ listing }}{{ close_emphasis }}, if you sold them.
+{% blocktrans trimmed with _0='"' _1='"' %}
+    Don't forget to mark your reserved items as sold in the listing
+    {{ _0 }}{{ listing }}{{ _1 }}, if you sold them.
 {% endblocktrans %}

@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    Equipment item "{{ item }}" has been marked as ambiguous by a moderator, and removed from your presets
+{% blocktrans trimmed with _0="'" _1="'" %}
+    Equipment item {{ _0 }}{{ item }}{{ _1 }} has been marked as ambiguous by a moderator, and removed from your presets
 {% endblocktrans %}

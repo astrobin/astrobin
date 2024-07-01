@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    {{ user }} rejected the equipment item "{{ item }}" that you created
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ user }} rejected the equipment item {{ _0 }}{{ item }}{{ _1 }} that you created
 {% endblocktrans %}

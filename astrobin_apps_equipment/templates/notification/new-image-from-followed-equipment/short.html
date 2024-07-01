@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
-    {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-        <strong>{{ user }}</strong> has published a new image acquired with equipment items you follow
+    {% blocktrans trimmed with user=image.user.userprofile.get_display_name _0="'" _1="'" %}
+        New image by {{ _0 }}{{ user }}{{ _1 }} acquired with equipment items you follow
     {% endblocktrans %}: {{ items|join:", " }}
 </a>

@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    {{ user }} assigned the equipment item "{{ item }}" to you for review
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ _0 }}{{ user }}{{ _1 }} assigned the equipment item {{ _0 }}{{ item }}{{ _1 }} to you for review
 {% endblocktrans %}

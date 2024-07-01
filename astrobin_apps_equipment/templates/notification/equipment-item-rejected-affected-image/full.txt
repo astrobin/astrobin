@@ -1,10 +1,6 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-       Equipment item "{{ item }}" was removed from your image "{{ image_title }}"
-{% endblocktrans %}.
-
-{% blocktrans trimmed %}
     This happened because somebody rejected the creation of this equipment item. Please remember that the AstroBin
     equipment database is collectively maintained by the community in order to keep a clean and orderly set of data.
 {% endblocktrans %}

@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    Your marketplace listing "{{ listing }}" expired
+{% blocktrans trimmed with _0="'" _1="'" %}
+    Your marketplace listing {{ _0 }}{{ listing }}{{ _1 }} expired
 {% endblocktrans %}

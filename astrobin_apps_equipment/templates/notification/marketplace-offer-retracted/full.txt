@@ -1,8 +1,9 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    Unfortunately, an offer for listing "{{ listing }}" has been retracted by the prospect buyer {{ buyer_display_name }}.
-{% endblocktrans %}
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ _0 }}{{ buyer_display_name }}{{ _1 }} retracted their offer for your marketplace listing
+    {{ _0 }}{{ listing }}{{ _1 }}
+{% endblocktrans %}.
 
 {% blocktrans trimmed %}
     You may contact the prospect buyer using AstroBin's private messaging for more information.

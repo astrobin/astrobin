@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    {{ seller_display_name }} deleted their marketplace listing "{{ listing }}"
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ _0 }}{{ seller_display_name }}{{ _1 }} deleted their marketplace listing {{ _0 }}{{ listing }}{{ _1 }}
 {% endblocktrans %}

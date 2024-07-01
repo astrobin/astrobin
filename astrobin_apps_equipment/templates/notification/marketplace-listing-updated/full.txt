@@ -1,8 +1,8 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    Marketplace listing "{{ listing }}" was updated.
-{% endblocktrans %}
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ _0 }}{{ seller_display_name }}{{ _1 }} updated their marketplace listing {{ _0 }}{{ listing }}{{ _1 }}
+{% endblocktrans %}.
 
 {% blocktrans trimmed %}
     You received this notification because you have an active offer on this listing, or you follow the listing.

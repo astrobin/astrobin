@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <a href="{{ listing_url }}">
-    {% blocktrans trimmed %}
-        Your marketplace listing <strong>{{ listing }}</strong> expired
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        Your marketplace listing {{ _0 }}{{ listing }}{{ _1 }} expired
     {% endblocktrans %}
 </a>

@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <a href="{{ listing_url }}">
-    {% blocktrans trimmed %}
-        You retracted your offer for marketplace listing <strong>{{ listing }}</strong>
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        You retracted your offer for marketplace listing {{ _0 }}{{ listing }}{{ _1 }}
     {% endblocktrans %}
 </a>

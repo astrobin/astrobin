@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    {{ user }} approved the equipment item "{{ item }}" that you created
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ _0 }}{{ user }}{{ _1 }} approved the equipment item {{ _0 }}{{ item }}{{ _1 }} that you created
 {% endblocktrans %}

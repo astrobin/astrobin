@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <a href="{{ item_url }}">
-    {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
-        <em><strong>{{ make }}</strong> {{ name }}</em> has been migrated to the new AstroBin Equipment Database
+    {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name _0="<strong>" _1="</strong>" %}
+        {{ _0 }}{{ make }} {{ name }}{{ _1 }} has been migrated to the new AstroBin Equipment Database
     {% endblocktrans %}
 </a>

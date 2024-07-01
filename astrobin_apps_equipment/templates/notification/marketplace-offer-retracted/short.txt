@@ -1,5 +1,6 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    {{ buyer_display_name }} retracted their offer for your marketplace listing "{{ listing }}"
+{% blocktrans trimmed with _0="'" _1="'" %}
+    {{ _0 }}{{ buyer_display_name }}{{ _1 }} retracted their offer for your marketplace listing
+    {{ _0 }}{{ listing }}{{ _1 }}
 {% endblocktrans %}

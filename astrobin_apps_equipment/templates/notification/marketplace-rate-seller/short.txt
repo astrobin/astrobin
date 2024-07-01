@@ -1,5 +1,6 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    Rate the seller "{{ seller_display_name }}" for your recent purchase from marketplace listing "{{ listing }}"
+{% blocktrans trimmed with _0="'" _1="'" %}
+    Rate the seller {{ _0 }}{{ seller_display_name }}{{ _1 }} for your recent purchase from marketplace listing
+    {{ _0 }}{{ listing }}{{ _1 }}
 {% endblocktrans %}

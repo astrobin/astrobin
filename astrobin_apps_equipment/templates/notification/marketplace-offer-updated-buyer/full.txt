@@ -1,8 +1,8 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-    Your offer for listing "{{ listing }}" was updated.
-{% endblocktrans %}
+{% blocktrans trimmed with _0="'" _1="'" %}
+    You updated your offer for marketplace listing {{ _0 }}{{ listing }}{{ _1 }}
+{% endblocktrans %}.
 
 {% blocktrans trimmed %}
     Offer details

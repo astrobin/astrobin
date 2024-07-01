@@ -1,5 +1,6 @@
 {% load i18n %}
 
-{% blocktrans trimmed %}
-   You accepted {{ buyer_display_name}}'s offer for your marketplace listing "{{ listing }}"
+{% blocktrans trimmed with _0="'" _1="'" %}
+   You accepted {{ _0 }}{{ buyer_display_name}}{{ _1 }}'s offer for your marketplace listing
+   {{ _0 }}{{ listing }}{{ _1 }}
 {% endblocktrans %}

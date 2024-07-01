@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <a href="{{ edit_proposal_url }}">
-    {% blocktrans trimmed %}
-        <strong>{{ user }}</strong> rejected an edit proposal on the equipment item <strong>{{ item }}</strong>.
+    {% blocktrans trimmed with _0="<strong>" _1="</strong>" %}
+        {{ _0 }}{{ user }}{{ _1 }} rejected an edit proposal on the equipment item {{ _0 }}{{ item }}{{ _1 }}
     {% endblocktrans %}
 </a>
