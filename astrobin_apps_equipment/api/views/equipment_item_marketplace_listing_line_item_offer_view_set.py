@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta
+
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import QuerySet
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -188,6 +190,20 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
             listing=offer.listing
         )
         content_type = ContentType.objects.get_for_model(EquipmentItemMarketplacePrivateConversation)
+
+        # Make sure the same identical message was not just created moments ago if we have multiple line items
+        # with a new offer.
+        existing_comment = NestedComment.objects.filter(
+            content_type=content_type,
+            object_id=private_conversation.pk,
+            author=user,
+            text=message,
+            created__gte=DateTimeService.now() - timedelta(seconds=10)
+        ).first()
+
+        if existing_comment:
+            return
+
         NestedComment.objects.create(
             content_type=content_type,
             object_id=private_conversation.pk,
