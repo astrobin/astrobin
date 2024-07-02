@@ -39,14 +39,12 @@
     </a>
 </li>
 
-{% if request.user|is_in_astrobin_group:BETA_TESTERS_GROUP_NAME %}
-    <li>
-        <a href="{% app_redirection_service '/equipment/marketplace' %}/users/{{ request.user.username }}/listings">
-            <i class="icon-shopping-cart"></i>
-            {% trans "Marketplace listings" %}
-        </a>
-    </li>
-{% endif %}
+<li>
+    <a href="{% app_redirection_service '/equipment/marketplace' %}/users/{{ request.user.username }}/listings">
+        <i class="icon-shopping-cart"></i>
+        {% trans "Marketplace listings" %}
+    </a>
+</li>
 
 <li class="nav-header">{% trans "My messages" %}</li>
 

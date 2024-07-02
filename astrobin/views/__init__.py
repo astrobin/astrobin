@@ -2667,15 +2667,12 @@ def serve_file_from_cdn(file_path):
 def user_marketplace_fragment(request, username: str):
     user = get_object_or_404(User, username=username)
 
-    line_items = EquipmentItemMarketplaceListingLineItem.objects.none()
-
-    if UserService(request.user).is_in_astrobin_group(GroupName.BETA_TESTERS):
-        line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
-            listing__user=user,
-            sold__isnull=True,
-            listing__approved__isnull=False,
-            listing__expiration__gt=DateTimeService.now(),
-        )
+    line_items = EquipmentItemMarketplaceListingLineItem.objects.filter(
+        listing__user=user,
+        sold__isnull=True,
+        listing__approved__isnull=False,
+        listing__expiration__gt=DateTimeService.now(),
+    )
 
     return render(
         request, 'user/profile/marketplace_fragment.html', {

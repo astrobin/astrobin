@@ -61,9 +61,7 @@
         {% endwith %}
     {% endwith %}
 
-    {% if request.user|is_in_astrobin_group:BETA_TESTERS_GROUP_NAME %}
-        <div class="user-marketplace-container"></div>
-    {% endif %}
+    <div class="user-marketplace-container"></div>
 
     {% if PREMIUM_ENABLED and requested_user == request.user or request.user.is_superuser%}
         <div class="subtle-container hidden-phone">

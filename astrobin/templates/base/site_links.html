@@ -140,14 +140,12 @@
                     </a>
                 </li>
 
-                {% if request.user|is_in_astrobin_group:BETA_TESTERS_GROUP_NAME %}
-                    <li class="explore-menu-equipment-marketplace">
-                        <a href="{% app_redirection_service '/equipment/marketplace' %}">
-                            <i class="icon-shopping-cart"></i>
-                            {% trans "Marketplace" %}
-                        </a>
-                    </li>
-                {% endif %}
+                <li class="explore-menu-equipment-marketplace">
+                    <a href="{% app_redirection_service '/equipment/marketplace' %}">
+                        <i class="icon-shopping-cart"></i>
+                        {% trans "Marketplace" %}
+                    </a>
+                </li>
 
                 <li class="explore-menu-constellations">
                     <a href="{% app_redirection_service '/explore/constellations' %}">

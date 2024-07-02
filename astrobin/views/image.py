@@ -1522,29 +1522,28 @@ class ImageMarketplaceFragment(View):
 
         line_items = []
 
-        if UserService(request.user).is_in_astrobin_group(GroupName.BETA_TESTERS):
-            for prop in (
-                'imaging_telescopes_2',
-                'guiding_telescopes_2',
-                'imaging_cameras_2',
-                'guiding_cameras_2',
-                'mounts_2',
-                'filters_2',
-                'accessories_2',
-                'software_2',
-            ):
-                for x in getattr(image, prop).all():
-                    line_item_objects = EquipmentItemMarketplaceListingLineItem.objects.filter(
-                        user=image.user,
-                        item_object_id=x.pk,
-                        item_content_type=ContentType.objects.get_for_model(x),
-                        sold__isnull=True,
-                        listing__approved__isnull=False,
-                        listing__expiration__gt=DateTimeService.now(),
-                    )
+        for prop in (
+            'imaging_telescopes_2',
+            'guiding_telescopes_2',
+            'imaging_cameras_2',
+            'guiding_cameras_2',
+            'mounts_2',
+            'filters_2',
+            'accessories_2',
+            'software_2',
+        ):
+            for x in getattr(image, prop).all():
+                line_item_objects = EquipmentItemMarketplaceListingLineItem.objects.filter(
+                    user=image.user,
+                    item_object_id=x.pk,
+                    item_content_type=ContentType.objects.get_for_model(x),
+                    sold__isnull=True,
+                    listing__approved__isnull=False,
+                    listing__expiration__gt=DateTimeService.now(),
+                )
 
-                    if line_item_objects.exists():
-                        line_items.append(*list(line_item_objects))
+                if line_item_objects.exists():
+                    line_items.append(*list(line_item_objects))
 
         return render(
             request, 'image/detail/marketplace.html', {

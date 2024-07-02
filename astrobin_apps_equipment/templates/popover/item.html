@@ -195,14 +195,12 @@
 
             {% add_remove_toggleproperty 'follow' item request.user btn_class="btn btn-secondary btn-block-mobile" hide_icon=True %}
 
-            {% if request.user|is_in_astrobin_group:BETA_TESTERS_GROUP_NAME %}
-                <a
-                    href="{% app_redirection_service '/equipment/marketplace/create' %}?lineItemCount=1&equipmentItemId={{ item.id }}&equipmentItemContentTypeId={{ item_content_type.id }}"
-                    class="btn btn-secondary btn-block-mobile"
-                >
-                    {% trans "Sell in the marketplace" %}
-                </a>
-            {% endif %}
+            <a
+                href="{% app_redirection_service '/equipment/marketplace/create' %}?lineItemCount=1&equipmentItemId={{ item.id }}&equipmentItemContentTypeId={{ item_content_type.id }}"
+                class="btn btn-secondary btn-block-mobile"
+            >
+                {% trans "Sell in the marketplace" %}
+            </a>
         {% endif %}
 
         <a href="#" class="btn btn-secondary btn-block-mobile btn-close visible-phone">
