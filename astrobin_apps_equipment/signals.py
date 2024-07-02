@@ -15,6 +15,7 @@ from pybb.models import Category, Forum, Topic
 from safedelete.signals import post_softdelete
 
 from astrobin.services.utils_service import UtilsService
+from astrobin.stories import ACTSTREAM_VERB_CREATED_MARKETPLACE_LISTING, add_story
 from astrobin_apps_equipment.models import (
     Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentItemMarketplaceFeedback,
     EquipmentItemMarketplaceListing,
@@ -802,6 +803,8 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                             'line_item': line_item,
                         }
                     )
+
+            add_story(instance.user, verb=ACTSTREAM_VERB_CREATED_MARKETPLACE_LISTING, action_object=instance)
         elif not instance.pre_save_approved_again:
             # The item is being updated and not merely approved.
 

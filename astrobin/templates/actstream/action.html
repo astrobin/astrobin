@@ -190,9 +190,35 @@
             </div>
         {% endwith %}
     {% endif %}
-
+        
+    {% if action.verb == 'VERB_CREATED_MARKETPLACE_LISTING' %}
+        {% with listing=action.action_object user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            <div class="action-object">
+                <div class="title">
+                    <div class="inner">
+                        {{ listing }}
+                    </div>
+                </div>
+                <div class="astrobin-image-container">
+                    <a href="{{ listing.get_absolute_url }}">
+                        <img src="{{ listing.line_items.all.0.images.all.0.image_file.url }}" alt="{{ listing }}" />
+                    </a>
+                </div>
+                <div class="verb">
+                    <div class="inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> created a listing in the marketplace.
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+        {% endwith %}
+    {% endif %}
+        
     {% endcache %}
 
 </div> <!-- action -->
 
-{% endif %} {# action strts with VERB_ #}
+{% endif %} {# action starts with VERB_ #}

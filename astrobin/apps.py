@@ -42,6 +42,7 @@ class AstroBinAppConfig(AppConfig):
         registry.register('nested_comments.nestedcomment')
         registry.register('toggleproperties.toggleproperty')
         registry.register('astrobin_apps_groups.group')
+        registry.register('astrobin_apps_equipment.equipmentitemmarketplacelisting')
 
     def init_search(self):
         from astrobin.search import set_max_result_window
