@@ -197,12 +197,26 @@
             <div class="action-object">
                 <div class="title">
                     <div class="inner">
+                        {% if listing.listing_type == 'WANTED' %}
+                            <span class="wanted">[{% trans "Wanted" %}]</span>
+                        {% endif %}
                         {{ listing }}
                     </div>
                 </div>
                 <div class="astrobin-image-container">
                     <a href="{{ listing.get_absolute_url }}">
-                        <img src="{{ listing.line_items.all.0.images.all.0.image_file.url }}" alt="{{ listing }}" />
+                        {% if listing.line_items.all.0.images|length %}
+                            <img src="{{ listing.line_items.all.0.images.all.0.image_file.url }}" alt="{{ listing }}" />
+                        {% elif listing.listing_type == 'WANTED' and listing.line_items.all.0.description %}
+                            <p>{{ listing.line_items.all.0.description | safe }}</p>
+                        {% elif listing.listing_type == 'WANTED' %}
+                            <p>
+                                {% blocktrans trimmed %}
+                                    This user is looking for something specific on the AstroBin Marketplace.
+                                    Please contact them if you can help.
+                                {% endblocktrans %}
+                            </p>
+                        {% endif %}
                     </a>
                 </div>
                 <div class="verb">

@@ -22,6 +22,7 @@ from astrobin_apps_equipment.models import (
 )
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
+from astrobin_apps_equipment.types.marketplace_listing_type import MarketplaceListingType
 from common.services import DateTimeService
 from nested_comments.models import NestedComment
 
@@ -103,6 +104,10 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         # Do not allow creating offers for listings that are expired.
         listing = EquipmentItemMarketplaceListing.objects.get(pk=request.data['listing'])
+
+        if listing.listing_type == MarketplaceListingType.WANTED.value:
+            raise serializers.ValidationError("Cannot create an offer for a wanted listing")
+
         if listing.expiration < DateTimeService.now():
             raise serializers.ValidationError("Cannot create an offer for an expired listing")
 

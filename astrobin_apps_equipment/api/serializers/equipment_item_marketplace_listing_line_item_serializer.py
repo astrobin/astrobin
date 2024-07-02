@@ -51,9 +51,10 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         ).count()
 
     def get_item_klass(self, obj):
-        if obj.item_content_object is None:
+        if obj.item_content_type is None:
             return None
-        return obj.item_content_object.klass
+
+        return obj.item_content_type.model.upper()
 
     def get_first_added_to_an_image(self, obj):
         first_appeared_in_log_entry = None
