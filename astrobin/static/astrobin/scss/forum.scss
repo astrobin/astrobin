@@ -242,12 +242,31 @@ th.forum-name {
   }
 
   .post-views,
-  .post-likes {
+  .post-likes,
+  .post-link {
     color: $grey-4;
     font-size: 11px;
     font-weight: normal;
     display: inline-block;
     margin-left: .5rem;
+  }
+
+  .post-views {
+    .multiple-views {
+      margin-right: 0;
+    }
+  }
+
+  .post-link {
+    display: inline-block;
+    margin-left: .5rem;
+
+    a {
+      color: $grey-4;
+      font-size: 11px;
+      font-weight: normal;
+      border-bottom: 1px dotted $grey-4;
+    }
   }
 }
 
@@ -262,6 +281,13 @@ th.forum-name {
   .post-extra-info {
     font-size: $base-font-size - 2;
     color: #777;
+  }
+}
+
+.post-link-modal {
+  textarea {
+    width: calc(100% - 1rem);
+    cursor: text;
   }
 }
 

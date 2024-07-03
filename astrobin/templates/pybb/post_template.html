@@ -47,7 +47,6 @@
             {% endif %}
         </div>
         <div class="post-updated">
-            <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
             {% timestamp post.created %}
         </div>
 
@@ -81,6 +80,16 @@
                 {% endif %}
             </div>
         {% endif %}
+
+        <div class="post-link">
+            &middot;&nbsp;
+            <a
+                href="#post-link-modal-{{ post.id }}"
+                data-toggle="modal"
+            >
+                {% trans "Share link" %}
+            </a>
+        </div>
     </th>
     </tr>
     </thead>
@@ -253,6 +262,25 @@
 
         <div class="modal-footer">
             <a class="btn btn-primary" data-dismiss="modal">{% trans "OK" %}</a>
+        </div>
+    </div>
+
+    <div class="modal hide fade post-link-modal" id="post-link-modal-{{ post.id }}">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Share this forum post" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>
+                {% trans "Copy the URL below to share a direct link to this post." %}
+            </p>
+
+            <textarea class="post-link" readonly="readonly" rows="3">{{ BASE_URL }}{{ post.get_absolute_url }}</textarea>
+        </div>
+
+        <div class="modal-footer">
+            <a class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</a>
         </div>
     </div>
 {% endblock %}
