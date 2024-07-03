@@ -3,7 +3,7 @@ from typing import Type
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
-from django.db.models import Count, Exists, OuterRef, Prefetch, Q, QuerySet
+from django.db.models import Exists, OuterRef, Q, QuerySet
 from django.utils.translation import gettext
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -11,7 +11,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound, ValidationError
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAdminUser
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -23,15 +23,16 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
     EquipmentItemMarketplaceListingReadSerializer
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_serializer import \
     EquipmentItemMarketplaceListingSerializer
-from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem
+from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
+from astrobin_apps_equipment.types.marketplace_listing_type import MarketplaceListingType
 from astrobin_apps_payments.models import ExchangeRate
 from astrobin_apps_premium.services.premium_service import SubscriptionName
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
-from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission, subscription_required
+from common.permissions import IsObjectUser, is_group_member, or_permission, subscription_required
 from common.services import DateTimeService
 from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
@@ -86,6 +87,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         queryset = self.filter_by_item_id_and_content_type(queryset)
         queryset = self.filter_followed_by_user(queryset)
         queryset = self.filter_by_pending_moderation_status(queryset)
+        queryset = self.filter_by_listing_type(queryset)
         queryset = self.filter_line_items(queryset).distinct()
 
         return queryset.distinct()
@@ -202,6 +204,20 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             return queryset.filter(approved__isnull=True)
 
         return queryset.filter(approved__isnull=False)
+
+    def filter_by_listing_type(self, queryset: QuerySet) -> QuerySet:
+        listing_type: str = self.request.query_params.get('listing_type')
+
+        if listing_type is None or listing_type == 'all':
+            return queryset
+
+        if listing_type.upper() == MarketplaceListingType.FOR_SALE.value:
+            return queryset.filter(listing_type=MarketplaceListingType.FOR_SALE.value)
+
+        if listing_type.upper() == MarketplaceListingType.WANTED.value:
+            return queryset.filter(listing_type=MarketplaceListingType.WANTED.value)
+
+        return queryset
 
     def filter_line_items(self, queryset: QuerySet) -> QuerySet:
         queryset = self.filter_line_items_with_offers_by_user(queryset)
@@ -434,6 +450,7 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
             'exclude_listing',
             'item_id',
             'content_type_id',
+            'listing_type',
         ]
 
         for param in self.request.query_params:

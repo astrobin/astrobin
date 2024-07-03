@@ -18,6 +18,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
     EquipmentItemMarketplaceListingLineItemSerializer
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplaceListingLineItem
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
+from astrobin_apps_equipment.types.marketplace_listing_type import MarketplaceListingType
 from common.constants import GroupName
 from common.permissions import IsObjectUser, ReadOnly, is_group_member, or_permission
 from common.services import DateTimeService
@@ -104,6 +105,9 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
             line_item = EquipmentItemMarketplaceListingLineItem.objects.get(pk=pk)
         except EquipmentItemMarketplaceListingLineItem.DoesNotExist:
             raise NotFound()
+
+        if line_item.listing.listing_type == MarketplaceListingType.WANTED.value:
+            raise serializers.ValidationError("Cannot mark a wanted listing as sold")
 
         if line_item.sold:
             raise serializers.ValidationError("This line item has already been marked as sold")

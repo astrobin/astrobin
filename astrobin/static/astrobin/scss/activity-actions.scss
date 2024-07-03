@@ -85,6 +85,12 @@
         > .inner {
           padding: 12px;
 
+          .wanted {
+            margin-right: .5rem;
+            text-transform: uppercase;
+            color: $grey-4;
+          }
+
           .image-title a {
             color: $text-color;
           }
@@ -106,6 +112,11 @@
 
         img {
           width: 100%;
+        }
+
+        p {
+          margin-top: 4rem;
+          padding: 0 .75rem;
         }
       }
     }

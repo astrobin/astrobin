@@ -4,9 +4,15 @@ from django.db import models
 from django.utils.translation import gettext
 
 from astrobin.fields import COUNTRIES
+from astrobin_apps_equipment.types.marketplace_listing_type import MarketplaceListingType
 from astrobin_apps_equipment.types.marketplace_shipping_method import MarketplaceShippingMethod
 from common.models.hashed_model import HashedSafeDeleteModel
 from common.services import AppRedirectionService
+
+EQUIPMENT_ITEM_MARKETPLACE_LISTING_TYPE = {
+    (MarketplaceListingType.FOR_SALE.value, gettext("For sale")),
+    (MarketplaceListingType.WANTED.value, gettext("Wanted")),
+}
 
 EQUIPMENT_ITEM_MARKETPLACE_SHIPPING_METHOD_CHOICES = (
     (MarketplaceShippingMethod.STANDARD_MAIL.value, gettext("Standard mail")),
@@ -19,6 +25,14 @@ EQUIPMENT_ITEM_MARKETPLACE_SHIPPING_METHOD_CHOICES = (
 class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
     pre_save_approved = None
     pre_save_approved_again = None
+
+    listing_type = models.CharField(
+        max_length=8,
+        null=False,
+        blank=False,
+        choices=EQUIPMENT_ITEM_MARKETPLACE_LISTING_TYPE,
+        default=MarketplaceListingType.FOR_SALE.value,
+    )
 
     user = models.ForeignKey(
         User,
