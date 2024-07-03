@@ -17,6 +17,12 @@ class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
     hitcount_pk = serializers.SerializerMethodField(read_only=True)
     slug = serializers.ReadOnlyField()
 
+    def is_list_view(self) -> bool:
+        request = self.context.get('request')
+        if request and 'hash' in request.query_params:
+            return False
+        return isinstance(self.root, serializers.ListSerializer)
+
     def create(self, validated_data):
         user = self.context['request'].user
         validated_data['user'] = user
@@ -26,18 +32,30 @@ class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
         return obj.user.userprofile.get_display_name()
 
     def get_followed(self, obj):
+        if self.is_list_view():
+            return False
+
         request = self.context.get('request')
         if request and request.user.is_authenticated:
             return ToggleProperty.objects.toggleproperties_for_object('follow', obj, request.user).exists()
         return False
 
     def get_follower_count(self, obj):
+        if self.is_list_view():
+            return None
+
         return ToggleProperty.objects.toggleproperties_for_object('follow', obj).count()
 
     def get_view_count(self, obj):
+        if self.is_list_view():
+            return None
+
         return HitCount.objects.get_for_object(obj).hits
 
     def get_hitcount_pk(self, obj):
+        if self.is_list_view():
+            return None
+
         return HitCount.objects.get_for_object(obj).pk
 
     class Meta:

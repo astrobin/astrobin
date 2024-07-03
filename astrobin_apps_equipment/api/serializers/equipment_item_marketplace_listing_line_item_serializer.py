@@ -21,6 +21,12 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
     first_added_to_an_image = serializers.SerializerMethodField(read_only=True)
     slug = serializers.ReadOnlyField()
 
+    def is_list_view(self) -> bool:
+        request = self.context.get('request')
+        if request and 'hash' in request.query_params:
+            return False
+        return isinstance(self.root, serializers.ListSerializer)
+
     def create(self, validated_data):
         user = self.context['request'].user
         validated_data['user'] = user
@@ -36,12 +42,18 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         return super().update(instance, validated_data)
 
     def get_total_image_count(self, obj):
+        if self.is_list_view():
+            return None
+
         if obj.item_content_object is None:
             return 0
 
         return obj.item_content_object.image_count
 
     def get_seller_image_count(self, obj):
+        if self.is_list_view():
+            return None
+
         item = obj.item_content_object
 
         return Image.objects.filter(
@@ -57,6 +69,9 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         return obj.item_content_type.model.upper()
 
     def get_first_added_to_an_image(self, obj):
+        if self.is_list_view():
+            return None
+
         first_appeared_in_log_entry = None
         first_appeared_in_image = None
 
