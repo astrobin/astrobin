@@ -148,6 +148,38 @@ def get_currency_code(country_code: str) -> str:
     return 'USD'
 
 
+def get_eu_country_codes() -> List[str]:
+    return [
+        'AT',
+        'BE',
+        'BG',
+        'HR',
+        'CY',
+        'CZ',
+        'DK',
+        'EE',
+        'FI',
+        'FR',
+        'DE',
+        'GR',
+        'HU',
+        'IE',
+        'IT',
+        'LV',
+        'LT',
+        'LU',
+        'MT',
+        'NL',
+        'PL',
+        'PT',
+        'RO',
+        'SK',
+        'SI',
+        'ES',
+        'SE'
+    ]
+
+
 def get_gdpr_country_codes() -> List[str]:
     return [
         'AT',  # Austria

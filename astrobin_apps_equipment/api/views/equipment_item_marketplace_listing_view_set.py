@@ -1,5 +1,7 @@
-from typing import Type
+from typing import List, Optional, Type
 
+import pycountry
+import pycountry_convert
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
@@ -18,6 +20,7 @@ from rest_framework.response import Response
 
 from astrobin.models import UserProfile
 from astrobin.settings.components.payments import SUPPORTED_CURRENCIES
+from astrobin.utils import get_eu_country_codes
 from astrobin_apps_equipment.api.permissions.may_access_marketplace import MayAccessMarketplace
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_read_serializer import \
     EquipmentItemMarketplaceListingReadSerializer
@@ -160,8 +163,56 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         return queryset
 
     def filter_by_region(self, queryset: QuerySet) -> QuerySet:
+        def get_continent_code(continent_name: str) -> str:
+            continent_dict = {
+                'Africa': 'AF',
+                'Antarctica': 'AN',
+                'Asia': 'AS',
+                'Europe': 'EU',
+                'Americas': 'AM',  # Combined North and South America
+                'Oceania': 'OC'
+            }
+            return continent_dict.get(continent_name)
+
+        def country_to_continent(country_code: str) -> Optional[str]:
+            if country_code == 'AQ':
+                return 'AN'
+            try:
+                continent_code = pycountry_convert.country_alpha2_to_continent_code(country_code)
+                # Combine North and South America
+                return 'AM' if continent_code in ['NA', 'SA'] else continent_code
+            except KeyError:
+                return None
+
+        def get_countries_in_continent(continent_name: str) -> List[str]:
+            continent_code = get_continent_code(continent_name)
+            if continent_code is None:
+                return []
+
+            return [
+                country.alpha_2.upper()
+                for country in pycountry.countries
+                if country_to_continent(country.alpha_2) == continent_code
+            ]
+
         region = self.request.GET.get('region')
-        if region and region != 'WORLDWIDE':
+
+        if region and region.upper() != 'WORLDWIDE':
+            if region.upper() == 'EU':
+                countries = get_eu_country_codes()
+                return queryset.filter(country__in=countries)
+
+            if region.upper() in [
+                'AMERICAS',
+                'EUROPE',
+                'ASIA',
+                'AFRICA',
+                'OCEANIA',
+                'ANTARCTICA',
+            ]:
+                countries = get_countries_in_continent(region)
+                return queryset.filter(country__in=countries)
+
             return queryset.filter(country=region.upper())
         return queryset
 
