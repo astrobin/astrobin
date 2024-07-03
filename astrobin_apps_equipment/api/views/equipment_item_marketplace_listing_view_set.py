@@ -13,6 +13,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import serializers, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound, ValidationError
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAdminUser
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.request import Request
@@ -41,11 +42,16 @@ from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
 
 
+class EquipmentMarketplaceListingPagination(PageNumberPagination):
+    page_size = 20
+
+
 class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('hash', 'user')
+    pagination_class = EquipmentMarketplaceListingPagination
 
     def get_permissions(self):
         if self.action in ('list', 'retrieve'):
