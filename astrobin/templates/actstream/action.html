@@ -193,8 +193,12 @@
         
     {% if action.verb == 'VERB_CREATED_MARKETPLACE_LISTING' %}
         {% with listing=action.action_object user=action.actor %}
-            {% include 'actstream/_action_avatar.html' %}
-            <div class="action-object">
+            <div class="avatar">
+                <a href="{% url 'user_page' listing.user.username %}">
+                    {% avatar listing.user 64 %}
+                </a>
+            </div>
+            <div class="action-object has-avatar">
                 <div class="title">
                     <div class="inner">
                         {% if listing.listing_type == 'WANTED' %}
