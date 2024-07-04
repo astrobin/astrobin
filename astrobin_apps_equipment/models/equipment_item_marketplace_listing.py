@@ -167,7 +167,7 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         return '-'.join(x.slug for x in self.line_items.all())
 
     class Meta:
-        ordering = ['-approved', '-updated']
+        ordering = ['-created']
         indexes = [
             models.Index(fields=['approved', 'updated']),
             models.Index(fields=['country']),
