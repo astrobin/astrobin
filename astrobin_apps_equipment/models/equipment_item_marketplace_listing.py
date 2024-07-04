@@ -121,6 +121,12 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         choices=COUNTRIES
     )
 
+    area_level_1 = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
     city = models.CharField(
         max_length=255,
         null=True,
