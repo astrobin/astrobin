@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 09:15+0000\n"
+"POT-Creation-Date: 2024-07-04 09:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2907,6 +2907,19 @@ msgstr ""
 msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
 msgstr ""
 
+msgid "Wanted"
+msgstr ""
+
+msgid ""
+"This user is looking for something specific on the AstroBin Marketplace. "
+"Please contact them if you can help."
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_page)s\">%(user)s</a> created a listing in the marketplace."
+msgstr ""
+
 msgid "Remove ads"
 msgstr ""
 
@@ -4712,10 +4725,10 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                                AstroBin's Marketplace has <strong>"
-"%(count)s</strong> items similar to what you're\n"
-"                                looking for!\n"
-"                            "
+"                            AstroBin's Marketplace has <strong>%(count)s</"
+"strong> items similar to what you're\n"
+"                            looking for!\n"
+"                        "
 msgstr ""
 
 msgid "Take a look!"
@@ -6646,6 +6659,9 @@ msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr ""
 
+msgid "Share link"
+msgstr ""
+
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
 msgstr ""
@@ -6683,6 +6699,12 @@ msgid ""
 msgstr ""
 
 msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
+msgid "Share this forum post"
+msgstr ""
+
+msgid "Copy the URL below to share a direct link to this post."
 msgstr ""
 
 msgid "Topics you subscribe to"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 09:15+0000\n"
-"PO-Revision-Date: 2024-07-01 11:12+0200\n"
+"POT-Creation-Date: 2024-07-04 09:12+0000\n"
+"PO-Revision-Date: 2024-07-04 11:10+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -3105,6 +3105,19 @@ msgstr ""
 msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
 msgstr "<a href=\"%(user_page)s\">%(user)s</a>ist einer Gruppe beigetreten."
 
+msgid "Wanted"
+msgstr ""
+
+msgid ""
+"This user is looking for something specific on the AstroBin Marketplace. "
+"Please contact them if you can help."
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_page)s\">%(user)s</a> created a listing in the marketplace."
+msgstr ""
+
 msgid "Remove ads"
 msgstr "Werbung entfernen"
 
@@ -3411,10 +3424,11 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "Downloading file"
-msgstr ""
+msgstr "Download der Datei"
 
 msgid "AstroBin is downloading the file you requested in the background."
 msgstr ""
+"AstroBin lädt die von Ihnen angeforderte Datei im Hintergrund herunter."
 
 msgid "No file selected"
 msgstr "Keine Datei ausgewählt"
@@ -3588,6 +3602,8 @@ msgid ""
 "If they follow you, the follow will be removed, and they will not be able to "
 "follow you again."
 msgstr ""
+"Wenn sie Ihnen folgen, wird das \"Folgen\" entfernt, und sie können Ihnen "
+"nicht mehr folgen."
 
 msgid "Continue"
 msgstr "Weiter"
@@ -3762,7 +3778,7 @@ msgid "Advanced search"
 msgstr "Erweiterte Suche"
 
 msgid "Marketplace"
-msgstr ""
+msgstr "Marktplatz"
 
 msgid "Constellations"
 msgstr "Sternbilder"
@@ -3828,7 +3844,7 @@ msgid "Bookmarks"
 msgstr "Lesezeichen"
 
 msgid "Marketplace listings"
-msgstr ""
+msgstr "Marktplatz Inserate"
 
 msgid "My messages"
 msgstr "Meine Nachrichten"
@@ -5211,14 +5227,11 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                                AstroBin's Marketplace has <strong>"
-"%(count)s</strong> items similar to what you're\n"
-"                                looking for!\n"
-"                            "
+"                            AstroBin's Marketplace has <strong>%(count)s</"
+"strong> items similar to what you're\n"
+"                            looking for!\n"
+"                        "
 msgstr ""
-"\n"
-"AstroBin's Marktplatz hat <strong>%(count)s</strong> Artikel, die dem "
-"entsprechen, was Sie suchen!"
 
 msgid "Take a look!"
 msgstr "Schauen Sie sich das an!"
@@ -6299,47 +6312,63 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> sent you a private message on your "
 "marketplace listing <strong>%(target)s</strong>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hat Ihnen eine private Nachricht zu "
+"Ihrem Marktplatz Inserat <strong>%(target)s</strong> gesendet."
 
 #, python-format
 msgid ""
 "%(user)s sent you a private message on your marketplace listing \"%(target)s"
 "\"."
 msgstr ""
+"%(user)s hat Ihnen eine private Nachricht zu Ihrem Marktplatz Inserat "
+"\"%(target)s\" geschickt."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> sent you a private message on your marketplace "
 "listing <strong>%(target)s</strong>"
 msgstr ""
+"<strong>%(user)s</strong> hat Ihnen eine private Nachricht zu Ihrem "
+"Marktplatz Inserat <strong>%(target)s</strong> gesendet."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> sent you a private message on your marketplace "
 "listing <strong>%(target)s</strong>."
 msgstr ""
+"<strong>%(user)s</strong> hat Ihnen eine private Nachricht zu Ihrem "
+"Marktplatz Inserat <strong>%(target)s</strong> gesendet."
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> sent you a private message on "
 "marketplace listing <strong>%(target)s</strong>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hat Ihnen eine private Nachricht zum "
+"Marktplatz Inserat <strong>%(target)s</strong> gesendet."
 
 #, python-format
 msgid ""
 "%(user)s sent you a private message on marketplace listing \"%(target)s\"."
 msgstr ""
+"%(user)s hat Ihnen eine private Nachricht zum Marktplatz Inserat "
+"„%(target)s“ gesendet."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> sent you a private message on marketplace listing "
 "<strong>%(target)s</strong>"
 msgstr ""
+"<strong>%(user)s</strong> hat Ihnen eine private Nachricht zum Marktplatz "
+"Inserat <strong>%(target)s</strong> gesendet"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> sent you a private message on marketplace listing "
 "<strong>%(target)s</strong>."
 msgstr ""
+"<strong>%(user)s</strong> hat Ihnen eine private Nachricht zum Marktplatz "
+"Inserat <strong>%(target)s</strong> gesendet."
 
 #, python-format
 msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
@@ -7410,6 +7439,8 @@ msgstr ""
 
 msgid "Do you want to post about a specific equipment item or software?"
 msgstr ""
+"Möchten Sie einen Beitrag über ein bestimmtes Gerät oder eine bestimmte "
+"Software schreiben?"
 
 msgid "Yes"
 msgstr "Ja"
@@ -7652,6 +7683,9 @@ msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "Likes"
 
+msgid "Share link"
+msgstr ""
+
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
 msgstr ""
@@ -7695,6 +7729,12 @@ msgstr ""
 msgid "You cannot Like this post because the topic is closed."
 msgstr ""
 "Sie können diesen Beitrag nicht \"liken\", da das Thema geschlossen ist."
+
+msgid "Share this forum post"
+msgstr ""
+
+msgid "Copy the URL below to share a direct link to this post."
+msgstr ""
 
 msgid "Topics you subscribe to"
 msgstr "Themen, die Du abonniert hast"
@@ -8684,6 +8724,9 @@ msgid ""
 "                using the Help menu.\n"
 "            "
 msgstr ""
+"\n"
+"Ihr Konto ist vorübergehend oder dauerhaft gesperrt. Wenn Sie glauben, dass "
+"dies ein Irrtum ist, wenden Sie sich bitte über das Menü Hilfe an uns."
 
 msgid ""
 "\n"
@@ -8691,6 +8734,8 @@ msgid ""
 "suspended.\n"
 "            "
 msgstr ""
+"\n"
+"Dieser Inhalt ist nicht verfügbar, weil das Konto des Nutzers gesperrt ist."
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -11032,6 +11077,17 @@ msgstr ""
 
 #~ msgid "Equipment marketplace"
 #~ msgstr "Ausrüstungs-Marktplatz"
+
+#~ msgid ""
+#~ "\n"
+#~ "                                AstroBin's Marketplace has <strong>"
+#~ "%(count)s</strong> items similar to what you're\n"
+#~ "                                looking for!\n"
+#~ "                            "
+#~ msgstr ""
+#~ "\n"
+#~ "AstroBin's Marktplatz hat <strong>%(count)s</strong> Artikel, die dem "
+#~ "entsprechen, was Sie suchen!"
 
 #~ msgid ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> started a private conversation on "

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Equipment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 09:16+0000\n"
-"PO-Revision-Date: 2024-07-01 11:09+0200\n"
+"POT-Creation-Date: 2024-07-04 09:12+0000\n"
+"PO-Revision-Date: 2024-07-04 11:07+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -20,120 +20,127 @@ msgid ""
 "This edit proposal cannot be approved because an item with this brand and "
 "name already exists. Please reject it."
 msgstr ""
+"Dieser Änderungsvorschlag kann nicht genehmigt werden, da ein Artikel mit "
+"dieser Marke und diesem Namen bereits existiert. Bitte lehnen Sie ihn ab."
 
 msgid ""
 "This edit proposal needs to be approved by a moderator because it changes "
 "the name of the item."
 msgstr ""
+"Dieser Bearbeitungsvorschlag muss von einem Moderator genehmigt werden, da "
+"es den Namen des Artikels ändert."
 
 msgid "Currency not supported."
-msgstr ""
+msgstr "Nicht unterstützte Währung."
 
 msgid "AstroBin couldn't fetch an exchange rate for the selected currency."
 msgstr ""
+"AstroBin konnte keinen Wechselkurs für die ausgewählte Währung abrufen."
 
 msgid "Invalid condition."
-msgstr ""
+msgstr "Ungültige Bedingung."
 
 msgid "Someone else is working on this item right now. Please try again later."
 msgstr ""
+"Jemand anderes arbeitet gerade an diesem Artikel. Bitte versuchen Sie es "
+"später noch einmal."
 
 msgid "Computer"
-msgstr ""
+msgstr "Computer"
 
 msgid "Dew mitigation"
-msgstr ""
+msgstr "Tauminderung"
 
 msgid "Field derotator / camera rotator"
-msgstr ""
+msgstr "Feld-Derotator / Kamera-Rotator"
 
 msgid "Filter wheel"
-msgstr ""
+msgstr "Filterrad"
 
 msgid "Flat box"
-msgstr ""
+msgstr "Flat box"
 
 msgid "Focal modifier / field corrector"
-msgstr ""
+msgstr "Brennweiten-Modifikator / Bildfeldkorrektor"
 
 msgid "Focuser"
-msgstr ""
+msgstr "Fokussierer"
 
 msgid "Off-axis guider"
-msgstr ""
+msgstr "Off-Axis Guider"
 
 msgid "Observatory control"
-msgstr ""
+msgstr "Observatoriumssteuerung"
 
 msgid "Observatory dome"
-msgstr ""
+msgstr "Sternwarten-Kuppel"
 
 msgid "Power distribution"
-msgstr ""
+msgstr "Stromverteilung"
 
 msgid "Weather monitoring"
-msgstr ""
+msgstr "Wetterüberwachung"
 
 msgid "Mount control"
-msgstr ""
+msgstr "Montierung-Steuerung"
 
 msgid "Other"
-msgstr ""
+msgstr "Anderes"
 
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 msgctxt "Pertaining to cameras, e.g. a modified Canon"
 msgid "modified"
-msgstr ""
+msgstr "modifiziert"
 
 msgid "cooled"
-msgstr ""
+msgstr "gekühlt"
 
 msgid "Dedicated deep-sky camera"
-msgstr ""
+msgstr "Dedizierte Deep-Sky-Kamera"
 
 msgid "General purpose DSLR or mirrorless camera"
-msgstr ""
+msgstr "Allzweck-DSLR oder spiegellose Kamera"
 
 msgid "Guider/Planetary camera"
-msgstr ""
+msgstr "Guider/Planetenkamera"
 
 msgid "General purpose video camera"
-msgstr ""
+msgstr "Allzweck-Videokamera"
 
 msgid "Film camera"
-msgstr ""
+msgstr "Filmkamera"
 
 msgid "Sensor"
-msgstr ""
+msgstr "Sensor"
 
 msgid "Cooled"
-msgstr ""
+msgstr "Gekühlt"
 
 msgid "Max. cooling (C)"
-msgstr ""
+msgstr "Max. Kühlung (C)"
 
 msgid "Back focus (mm)"
-msgstr ""
+msgstr "Back-Fokus (mm)"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 msgid "Approved"
-msgstr ""
+msgstr "Genehmigt"
 
 msgid "Rejected"
-msgstr ""
+msgstr "Abgelehnt"
 
 msgid "Superseded"
-msgstr ""
+msgstr "Ersetzt"
 
 msgid "Camera"
 msgstr ""
@@ -181,6 +188,12 @@ msgid "Seller"
 msgstr ""
 
 msgid "Buyer"
+msgstr ""
+
+msgid "For sale"
+msgstr ""
+
+msgid "Wanted"
 msgstr ""
 
 msgid "Standard mail"
@@ -703,13 +716,6 @@ msgid ""
 "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
 msgstr ""
 
-#, python-format
-msgid ""
-"\n"
-"    %(_0)s%(user)s%(_1)s commented a marketplace feedback that you "
-"received.\n"
-msgstr ""
-
 msgid ""
 "You received this notification because you created this equipment item or "
 "this edit proposal."
@@ -1031,8 +1037,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You received this notification because you have an active offer on this "
-"listing, or you follow the listing."
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
 msgstr ""
 
 msgid ""
@@ -1069,11 +1075,6 @@ msgstr ""
 msgid ""
 "Unfortunately, you cannot make an offer on this listing while it is in a "
 "reserved or sold state."
-msgstr ""
-
-msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
 msgstr ""
 
 #, python-format

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Equipment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 09:16+0000\n"
-"PO-Revision-Date: 2024-07-01 11:09+0200\n"
+"POT-Creation-Date: 2024-07-04 09:12+0000\n"
+"PO-Revision-Date: 2024-07-04 11:07+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -181,6 +181,12 @@ msgid "Seller"
 msgstr ""
 
 msgid "Buyer"
+msgstr ""
+
+msgid "For sale"
+msgstr ""
+
+msgid "Wanted"
 msgstr ""
 
 msgid "Standard mail"
@@ -703,13 +709,6 @@ msgid ""
 "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
 msgstr ""
 
-#, python-format
-msgid ""
-"\n"
-"    %(_0)s%(user)s%(_1)s commented a marketplace feedback that you "
-"received.\n"
-msgstr ""
-
 msgid ""
 "You received this notification because you created this equipment item or "
 "this edit proposal."
@@ -1031,8 +1030,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You received this notification because you have an active offer on this "
-"listing, or you follow the listing."
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
 msgstr ""
 
 msgid ""
@@ -1069,11 +1068,6 @@ msgstr ""
 msgid ""
 "Unfortunately, you cannot make an offer on this listing while it is in a "
 "reserved or sold state."
-msgstr ""
-
-msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
 msgstr ""
 
 #, python-format

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 09:15+0000\n"
-"PO-Revision-Date: 2024-07-01 11:12+0200\n"
+"POT-Creation-Date: 2024-07-04 09:12+0000\n"
+"PO-Revision-Date: 2024-07-04 11:10+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -3005,6 +3005,19 @@ msgstr ""
 msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
 msgstr "<a href=\"%(user_page)s\">%(user)s</a> がグループに参加しました。"
 
+msgid "Wanted"
+msgstr ""
+
+msgid ""
+"This user is looking for something specific on the AstroBin Marketplace. "
+"Please contact them if you can help."
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_page)s\">%(user)s</a> created a listing in the marketplace."
+msgstr ""
+
 msgid "Remove ads"
 msgstr "広告を削除する"
 
@@ -4979,10 +4992,10 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                                AstroBin's Marketplace has <strong>"
-"%(count)s</strong> items similar to what you're\n"
-"                                looking for!\n"
-"                            "
+"                            AstroBin's Marketplace has <strong>%(count)s</"
+"strong> items similar to what you're\n"
+"                            looking for!\n"
+"                        "
 msgstr ""
 
 msgid "Take a look!"
@@ -7161,6 +7174,9 @@ msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "いいね！"
 
+msgid "Share link"
+msgstr ""
+
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
 msgstr "警告：この記事は確認調整中であり、まだ誰にも公開されていません。"
@@ -7200,6 +7216,12 @@ msgstr "投稿の編集は、作成後 %(hours)s 時間以内のみ可能です�
 msgid "You cannot Like this post because the topic is closed."
 msgstr ""
 "トピックが閉鎖されたため、この投稿に「いいね！」を付けることはできません。"
+
+msgid "Share this forum post"
+msgstr ""
+
+msgid "Copy the URL below to share a direct link to this post."
+msgstr ""
 
 msgid "Topics you subscribe to"
 msgstr "購読中のトピック"
