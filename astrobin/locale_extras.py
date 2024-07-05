@@ -18,4 +18,10 @@ LOCALE_EXTRAS = (
     _("Like"),
     _("Stop following"),
     _("Follow"),
+    _("Europe"),
+    _("Americas"),
+    _("Africa"),
+    _("Asia"),
+    _("Oceania"),
+    _("Antarctica"),
 )
