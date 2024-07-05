@@ -5,7 +5,7 @@ from django.core.cache import cache
 
 from astrobin.enums import ImageEditorStep, SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
-from astrobin.fields import COUNTRIES
+from astrobin.fields import COUNTRIES, get_country_continent, get_country_name
 from astrobin.forms.skill_level_form import SkillLevelForm
 from astrobin.models import CameraRenameProposal
 from astrobin.utils import get_client_country_code
@@ -76,6 +76,8 @@ def common_variables(request):
             complained = Complaint.objects.filter(address=request.user.email).exists()
             cache.set(cache_key, complained, 3600)
 
+    request_country = get_client_country_code(request)
+
     d = {
         'True': True,
         'False': False,
@@ -85,7 +87,7 @@ def common_variables(request):
         'LANGUAGE_CODE': request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
         'DEBUG_MODE': settings.DEBUG,
         'TESTING': settings.TESTING,
-        'REQUEST_COUNTRY': get_client_country_code(request),
+        'REQUEST_COUNTRY': request_country,
 
         'IMAGES_URL': settings.IMAGES_URL,
         'MEDIA_URL': settings.MEDIA_URL,

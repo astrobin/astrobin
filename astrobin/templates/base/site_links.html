@@ -119,6 +119,115 @@
                 {% endif %}
             </ul>
         </li>
+    
+    
+
+        <li class="dropdown marketplace-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {% trans "Marketplace" %}
+                <i class="icon-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{% app_redirection_service '/equipment/marketplace/create' %}">
+                        <i class="icon-plus"></i>
+                        {% trans "Sell" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% app_redirection_service '/equipment/marketplace/create?wanted=true' %}">
+                        <i class="icon-plus"></i>
+                        {% trans "Seek" %}
+                    </a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li class="nav-header">
+                    <i class="icon-search"></i>
+                    {% trans "Browse" %}
+                </li>
+
+                <li>
+                    <a href="{% app_redirection_service '/equipment/marketplace' %}">
+                        <i class="icon-table"></i>
+                        {% trans "Active listings" %}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% app_redirection_service '/equipment/marketplace/sold' %}">
+                        <i class="icon-money"></i>
+                        {% trans "Sold archive" %}
+                    </a>
+                </li>
+
+                {% if request.user.is_authenticated %}
+                    <li class="divider"></li>
+
+                    <li class="nav-header">
+                        <i class="icon-user"></i>
+                        {% trans "My listings" %}
+                    </li>
+
+                    <li>
+                        <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/listings">
+                            <i class="icon-shopping-cart"></i>
+                            {% trans "Selling" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/sold">
+                            <i class="icon-money"></i>
+                            {% trans "Sold" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/expired">
+                            <i class="icon-calendar-empty"></i>
+                            {% trans "Expired" %}
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+
+                    <li class="nav-header">
+                        <i class="icon-check"></i>
+                        {% trans "My interactions" %}
+                    </li>
+
+                    <li>
+                        <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/offers">
+                            <i class="icon-dollar"></i>
+                            {% trans "Offers" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/purchases">
+                            <i class="icon-certificate"></i>
+                            {% trans "Purchases" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/followed">
+                            <i class="icon-plus-sign"></i>
+                            {% trans "Followed" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/feedback">
+                            <i class="icon-star"></i>
+                            {% trans "Feedback" %}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
 
         <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/astrophotographers-list/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -137,13 +246,6 @@
                     <a href="{% app_redirection_service '/equipment/explorer' %}">
                         <i class="icon-camera-retro"></i>
                         {% trans "Equipment" %}
-                    </a>
-                </li>
-
-                <li class="explore-menu-equipment-marketplace">
-                    <a href="{% app_redirection_service '/equipment/marketplace' %}">
-                        <i class="icon-shopping-cart"></i>
-                        {% trans "Marketplace" %}
                     </a>
                 </li>
 
