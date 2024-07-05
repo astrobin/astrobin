@@ -88,8 +88,6 @@ def common_variables(request):
         'DEBUG_MODE': settings.DEBUG,
         'TESTING': settings.TESTING,
         'REQUEST_COUNTRY': request_country,
-        'REQUEST_COUNTRY_NAME': get_country_name(request_country),
-        'REQUEST_CONTINENT': get_country_continent(request_country),
 
         'IMAGES_URL': settings.IMAGES_URL,
         'MEDIA_URL': settings.MEDIA_URL,

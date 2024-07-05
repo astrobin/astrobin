@@ -106,6 +106,22 @@
         </li>
         {% endif %}
 
+        <li class="dropdown forum-menu {% current request "^/forum/" %}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {% trans "Forum" %}
+                <i class="icon-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{% url 'pybb:index' %}"><i class="icon-comments"></i> {% trans "Home" %}</a></li>
+                <li><a href="{% url 'pybb:topic_latest' %}"><i class="icon-sort-by-attributes-alt"></i> {% trans "Latest topics" %}</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'pybb:topic_subscribed' %}"><i class="icon-eye-open"></i> {% trans "Subscribed topics" %}</a></li>
+                {% endif %}
+            </ul>
+        </li>
+    
+    
+
         <li class="dropdown marketplace-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Marketplace" %}
@@ -127,34 +143,32 @@
 
                 <li class="divider"></li>
 
-                <li class="nav-header">{% trans "Active listings" %}</li>
+                <li class="nav-header">
+                    <i class="icon-search"></i>
+                    {% trans "Browse" %}
+                </li>
 
                 <li>
-                    <a href="{% app_redirection_service '/equipment/marketplace?region=WORLDWIDE' %}">
-                        <i class="icon-globe"></i>
-                        {% trans "Worldwide" %}
+                    <a href="{% app_redirection_service '/equipment/marketplace' %}">
+                        <i class="icon-table"></i>
+                        {% trans "Active listings" %}
                     </a>
                 </li>
 
-
-                {% if REQUEST_COUNTRY and REQUEST_COUNTRY != 'UNKNOWN' %}
-                    <li>
-                        <a href="{% app_redirection_service '/equipment/marketplace?region=' %}{{ REQUEST_CONTINENT }}">
-                            <i class="icon-flag-alt"></i>
-                            {% trans REQUEST_CONTINENT %}
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{% app_redirection_service '/equipment/marketplace?region=' %}{{ REQUEST_COUNTY|upper }}">
-                            <i class="icon-flag"></i>
-                            {{ REQUEST_COUNTRY_NAME }}
-                        </a>
-                    </li>
-                {% endif %}
+                <li>
+                    <a href="{% app_redirection_service '/equipment/marketplace/sold' %}">
+                        <i class="icon-money"></i>
+                        {% trans "Sold archive" %}
+                    </a>
+                </li>
 
                 {% if request.user.is_authenticated %}
-                    <li class="nav-header">{% trans "My listings" %}</li>
+                    <li class="divider"></li>
+
+                    <li class="nav-header">
+                        <i class="icon-user"></i>
+                        {% trans "My listings" %}
+                    </li>
 
                     <li>
                         <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/listings">
@@ -177,7 +191,12 @@
                         </a>
                     </li>
 
-                    <li class="nav-header">{% trans "My interactions" %}</li>
+                    <li class="divider"></li>
+
+                    <li class="nav-header">
+                        <i class="icon-check"></i>
+                        {% trans "My interactions" %}
+                    </li>
 
                     <li>
                         <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/offers">
@@ -210,20 +229,6 @@
             </ul>
         </li>
 
-        <li class="dropdown forum-menu {% current request "^/forum/" %}">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {% trans "Forum" %}
-                <i class="icon-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="{% url 'pybb:index' %}"><i class="icon-comments"></i> {% trans "Home" %}</a></li>
-                <li><a href="{% url 'pybb:topic_latest' %}"><i class="icon-sort-by-attributes-alt"></i> {% trans "Latest topics" %}</a></li>
-                {% if request.user.is_authenticated %}
-                <li><a href="{% url 'pybb:topic_subscribed' %}"><i class="icon-eye-open"></i> {% trans "Subscribed topics" %}</a></li>
-                {% endif %}
-            </ul>
-        </li>
-
         <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/astrophotographers-list/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Explore" %}
@@ -243,7 +248,7 @@
                         {% trans "Equipment" %}
                     </a>
                 </li>
-        
+
                 <li class="explore-menu-constellations">
                     <a href="{% app_redirection_service '/explore/constellations' %}">
                         <i class="icon-star"></i>
