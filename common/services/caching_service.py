@@ -147,17 +147,14 @@ class CachingService:
                 pass
         else:
             if request.user.is_authenticated:
-                try:
-                    return Message.objects.filter(user=request.user).latest('modified').modified
-                except (Message.DoesNotExist, AttributeError):
-                    pass
+                return request.user.userprofile.last_notification_update
 
             if 'HTTP_AUTHORIZATION' in request.META:
                 token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
                 try:
                     token = Token.objects.get(key=token_in_header)
-                    return Message.objects.filter(user=token.user).latest('modified').modified
-                except (Token.DoesNotExist, Message.DoesNotExist, AttributeError):
+                    return token.user.userprofile.last_notification_update
+                except (Token.DoesNotExist, AttributeError):
                     pass
 
         return DateTimeService.now()

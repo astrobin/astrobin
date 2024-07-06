@@ -26,7 +26,6 @@ from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
 from safedelete import HARD_DELETE
 from safedelete.config import FIELD_NAME as DELETED_FIELD_NAME
-from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete, post_undelete
 from stripe.error import StripeError
 from subscription.models import Subscription, Transaction, UserSubscription
@@ -1595,11 +1594,11 @@ def userprofile_pre_delete(sender, instance: UserProfile, **kwargs):
         image.delete(force_policy=HARD_DELETE)
 
 
-def persistent_message_post_save(sender, instance, **kwargs):
+@receiver(post_save, sender=Message)
+@receiver(post_delete, sender=Message)
+def update_notification_cache(sender, instance, **kwargs):
     clear_notifications_template_cache(instance.user.username)
-
-
-post_save.connect(persistent_message_post_save, sender=Message)
+    UserProfile.objects.filter(user=instance.user).update(last_notification_update=DateTimeService.now())
 
 
 def top_pick_nominations_archive_post_save(sender, instance, created, **kwargs):

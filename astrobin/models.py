@@ -2622,6 +2622,19 @@ class UserProfile(SafeDeleteModel):
         blank=True,
     )
 
+    # Update this field every time anything changes with the user's notifications, such as:
+    # - A new notification is created
+    # - A notification is marked as read/unread
+    # - A notification is deleted
+    # - A notification is updated
+    #
+    # This field is using for "last-modified" caching purposes.
+    last_notification_update = models.DateTimeField(
+        editable=False,
+        null=True,
+        blank=True,
+    )
+
     suspended = models.DateTimeField(
         verbose_name=_('Suspended'),
         null=True,

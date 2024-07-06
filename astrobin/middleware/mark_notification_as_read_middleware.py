@@ -4,6 +4,8 @@ from django.utils import timezone
 from persistent_messages.models import Message
 
 from astrobin.middleware.mixins import MiddlewareParentClass
+from astrobin.models import UserProfile
+from common.services import DateTimeService
 
 log = logging.getLogger(__name__)
 
@@ -51,4 +53,6 @@ class MarkNotificationAsReadMiddleware(MiddlewareParentClass):
                 except ValueError:
                     pass
 
-            notifications.update(read=True, modified=timezone.now())
+            now = DateTimeService.now()
+            notifications.update(read=True, modified=now)
+            UserProfile.objects.filter(user=request.user).update(last_notification_update=now)

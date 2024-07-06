@@ -1,28 +1,27 @@
-from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_headers
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from notification.models import NoticeSetting, NoticeType, NOTICE_MEDIA
+from notification.models import NOTICE_MEDIA, NoticeSetting, NoticeType
 from persistent_messages.models import Message
-from rest_framework import viewsets, permissions
+from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
+from astrobin.models import UserProfile
 from astrobin_apps_notifications.api.filters import NotificationFilter
-from astrobin_apps_notifications.api.serializers import NotificationSerializer, NoticeSettingSerializers, \
-    NoticeTypeSerializer
+from astrobin_apps_notifications.api.serializers import (
+    NoticeSettingSerializers, NoticeTypeSerializer,
+    NotificationSerializer,
+)
 from common.permissions import ReadOnly
+from common.services import DateTimeService
 from common.services.caching_service import CachingService
 
 
-@method_decorator([
-    last_modified(CachingService.get_last_notification_time),
-    vary_on_headers('Cookie', 'Authorization')
-], name='dispatch')
 class NotificationViewSet(viewsets.ModelViewSet):
     serializer_class = NotificationSerializer
     filter_class = NotificationFilter
@@ -34,18 +33,31 @@ class NotificationViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Message.objects.filter(user=self.request.user).order_by('-created')
 
+    @method_decorator(
+        last_modified(CachingService.get_last_notification_time),
+        vary_on_headers('Cookie', 'Authorization')
+    )
+    @cache_control(must_revalidate=True)
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
     @action(detail=False, methods=['get'])
-    @cache_control(private=True, max_age=60)
-    @vary_on_headers('Authorization')
+    @vary_on_headers('Cookie', 'Authorization')
+    @cache_control(must_revalidate=True)
+    @method_decorator(last_modified(CachingService.get_last_notification_time))
     def get_unread_count(self, request):
         return Response(status=200, data=self.get_queryset().filter(read=False).count())
 
     @action(detail=False, methods=['put'])
+    @cache_control(private=True, max_age=0, no_cache=True, no_store=True, must_revalidate=True)
     def mark_all_as_read(self, request):
-        self.get_queryset().filter(read=False).update(read=True, modified=timezone.now())
+        now = DateTimeService.now()
+        self.get_queryset().filter(read=False).update(read=True, modified=now)
+        UserProfile.objects.filter(user=request.user).update(last_notification_update=now)
         return Response(status=200)
 
     @action(detail=False, methods=['put'], url_path='mark-as-read-by-path-and-user')
+    @cache_control(private=True, max_age=0, no_cache=True, no_store=True, must_revalidate=True)
     def mark_as_read_by_path_and_user(self, request):
         path: str = request.data.get('path')
         from_user_pk: int = request.data.get('fromUserPk')
@@ -58,11 +70,14 @@ class NotificationViewSet(viewsets.ModelViewSet):
         if from_user_pk is not None:
             notifications = notifications.filter(from_user__pk=from_user_pk)
 
-        notifications.update(read=True, modified=timezone.now())
+        now = DateTimeService.now()
+        notifications.update(read=True, modified=now)
+        UserProfile.objects.filter(user=request.user).update(last_notification_update=now)
 
         return Response(status=200)
 
     @action(detail=True, methods=['put'], url_path='mark-as-read')
+    @cache_control(private=True, max_age=0, no_cache=True, no_store=True, must_revalidate=True)
     def mark_as_read(self, request, pk):
         notification: Message = self.get_object()
         read: bool = request.data.get('read')

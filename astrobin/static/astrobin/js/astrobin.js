@@ -1015,10 +1015,19 @@ astrobin_common = {
         window.open(link, openInNewTab ? "_blank" : "_self");
     },
 
+    unescape_html: function(html) {
+        const txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    },
+
     get_links_in_text: function (text) {
-        var regex = /href="(.*?)"/gm;
-        var m;
-        var links = [];
+        const regex = /href="(.*?)"/gm;
+        let m;
+        const links = [];
+
+        text = this.unescape_html(text);
+
 
         while ((m = regex.exec(text)) !== null) {
             // This is necessary to avoid infinite loops with zero-width matches
