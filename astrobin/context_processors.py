@@ -5,7 +5,7 @@ from django.core.cache import cache
 
 from astrobin.enums import ImageEditorStep, SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
-from astrobin.fields import COUNTRIES, get_country_continent, get_country_name
+from astrobin.fields import COUNTRIES
 from astrobin.forms.skill_level_form import SkillLevelForm
 from astrobin.models import CameraRenameProposal
 from astrobin.utils import get_client_country_code
