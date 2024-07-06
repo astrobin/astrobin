@@ -691,6 +691,9 @@ COUNTRY_TO_CONTINENT = {
 
 
 def get_country_name(code: str) -> Optional[str]:
+    if not code:
+        return None
+
     for country in COUNTRIES:
         if country[0] == code.upper():
             return country[1]
