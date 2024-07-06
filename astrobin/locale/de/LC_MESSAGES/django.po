@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-04 09:12+0000\n"
-"PO-Revision-Date: 2024-07-04 11:10+0200\n"
+"POT-Creation-Date: 2024-07-06 11:28+0000\n"
+"PO-Revision-Date: 2024-07-06 13:26+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -1092,6 +1092,21 @@ msgstr "Nicht folgen"
 
 msgid "Follow"
 msgstr "Folgen"
+
+msgid "Europe"
+msgstr ""
+
+msgid "Americas"
+msgstr ""
+
+msgid "Africa"
+msgstr ""
+
+msgid "Asia"
+msgstr ""
+
+msgid "Oceania"
+msgstr ""
 
 msgid ""
 "Your account is temporarily or permanently suspended. If you believe this is "
@@ -3106,17 +3121,21 @@ msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
 msgstr "<a href=\"%(user_page)s\">%(user)s</a>ist einer Gruppe beigetreten."
 
 msgid "Wanted"
-msgstr ""
+msgstr "Gesucht"
 
 msgid ""
 "This user is looking for something specific on the AstroBin Marketplace. "
 "Please contact them if you can help."
 msgstr ""
+"Dieser User sucht etwas Bestimmtes auf dem AstroBin-Marktplatz. Bitte "
+"kontaktieren Sie ihn, wenn Sie helfen können."
 
 #, python-format
 msgid ""
 "<a href=\"%(user_page)s\">%(user)s</a> created a listing in the marketplace."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> hat ein Inserat auf dem Marktplatz "
+"erstellt."
 
 msgid "Remove ads"
 msgstr "Werbung entfernen"
@@ -3744,6 +3763,9 @@ msgstr "Öffentliche Amateurdaten"
 msgid "Quick search"
 msgstr "Schnellsuche"
 
+msgid "Moderate"
+msgstr "Moderieren"
+
 msgid "Image queue"
 msgstr "Bild-Auswahlliste"
 
@@ -3771,14 +3793,26 @@ msgstr "Neueste Beiträge"
 msgid "Subscribed topics"
 msgstr "Abonnierte Themen"
 
+msgid "Marketplace"
+msgstr "Marktplatz"
+
+msgid "Browse Marketplace"
+msgstr ""
+
+msgid "Post listing"
+msgstr ""
+
+msgid "Sell"
+msgstr ""
+
+msgid "Seek"
+msgstr ""
+
 msgid "Explore"
 msgstr "Durchsuchen"
 
 msgid "Advanced search"
 msgstr "Erweiterte Suche"
-
-msgid "Marketplace"
-msgstr "Marktplatz"
 
 msgid "Constellations"
 msgstr "Sternbilder"
@@ -3842,9 +3876,6 @@ msgstr "Staging-Bereich"
 
 msgid "Bookmarks"
 msgstr "Lesezeichen"
-
-msgid "Marketplace listings"
-msgstr "Marktplatz Inserate"
 
 msgid "My messages"
 msgstr "Meine Nachrichten"
@@ -5232,6 +5263,9 @@ msgid ""
 "                            looking for!\n"
 "                        "
 msgstr ""
+"\n"
+"AstroBin's Marktplatz hat <strong>%(count)s</strong> Artikel, die dem "
+"entsprechen, was Sie suchen!"
 
 msgid "Take a look!"
 msgstr "Schauen Sie sich das an!"
@@ -5304,6 +5338,9 @@ msgstr "Kontakt"
 msgid "Gallery"
 msgstr "Galerie"
 
+msgid "Marketplace listings"
+msgstr "Marktplatz Inserate"
+
 msgid "Compose message"
 msgstr "Nachricht verfassen"
 
@@ -5349,9 +5386,6 @@ msgstr "Möchten Sie diese Konversation wirklich wiederherstellen?"
 
 msgid "Do you really want to delete this conversation?"
 msgstr "Möchten Sie diese Konversation wirklich löschen?"
-
-msgid "Moderate"
-msgstr "Moderieren"
 
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
@@ -7684,7 +7718,7 @@ msgid "likes"
 msgstr "Likes"
 
 msgid "Share link"
-msgstr ""
+msgstr "Link teilen"
 
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
@@ -7731,10 +7765,12 @@ msgstr ""
 "Sie können diesen Beitrag nicht \"liken\", da das Thema geschlossen ist."
 
 msgid "Share this forum post"
-msgstr ""
+msgstr "Diesen Forumsbeitrag teilen"
 
 msgid "Copy the URL below to share a direct link to this post."
 msgstr ""
+"Kopieren Sie die URL unten, um einen direkten Link zu diesem Beitrag zu "
+"teilen."
 
 msgid "Topics you subscribe to"
 msgstr "Themen, die Du abonniert hast"
