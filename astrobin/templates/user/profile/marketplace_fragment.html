@@ -20,7 +20,11 @@
                             </a>
                         </td>
                         <td>
-                            {{ line_item.price|currency:line_item.currency }}
+                            {% if line_item.listing.listing_type == 'WANTED' %}
+                                {% trans "Wanted" %}
+                            {% else %}
+                                {{ line_item.price|currency:line_item.currency }}
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
