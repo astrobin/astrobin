@@ -40,7 +40,16 @@ class PostViewSet(viewsets.ModelViewSet):
         post: Post = get_object_or_None(self.get_queryset(), pk=pk)
 
         if post and request.user != post.user:
-            hit_count: HitCount = HitCount.objects.get_for_object(post)
+            try:
+                hit_count: HitCount = HitCount.objects.get_for_object(post)
+            except HitCount.MultipleObjectsReturned:
+                hit_count = HitCount.objects.filter(object_pk=post.pk).first()
+                HitCount.objects.filter(
+                    content_type=hit_count.content_type,
+                    object_pk=post.pk
+                ).exclude(
+                    pk=hit_count.pk
+                ).delete()
             hit_count_response: UpdateHitCountResponse = HitCountMixin.hit_count(request, hit_count)
             return HttpResponse(simplejson.dumps(hit_count_response))
 
