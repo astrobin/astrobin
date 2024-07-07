@@ -483,19 +483,25 @@ class UserService:
                 if active:
                     if active.startswith('L'):
                         active_id = active[2:]
-                        queryset = queryset.filter(
-                            Q(imaging_telescopes__id=active_id) |
-                            Q(imaging_cameras__id=active_id)
-                        ).distinct()
+                        if not active_id.isdigit():
+                            queryset = queryset.none()
+                        else:
+                            queryset = queryset.filter(
+                                Q(imaging_telescopes__id=active_id) |
+                                Q(imaging_cameras__id=active_id)
+                            ).distinct()
                     elif active.startswith('N'):
                         klass = active[1]
                         active_id = active[2:]
-                        if klass in (None, 'T', 'telescope'):
-                            queryset = queryset.filter(imaging_telescopes_2__id=active_id).distinct()
-                        elif klass in ('C', 'camera'):
-                            queryset = queryset.filter(imaging_cameras_2__id=active_id).distinct()
-                        else:
+                        if not active_id.isdigit():
                             queryset = queryset.none()
+                        else:
+                            if klass in (None, 'T', 'telescope'):
+                                queryset = queryset.filter(imaging_telescopes_2__id=active_id).distinct()
+                            elif klass in ('C', 'camera'):
+                                queryset = queryset.filter(imaging_cameras_2__id=active_id).distinct()
+                            else:
+                                queryset = queryset.none()
 
 
         ###########
