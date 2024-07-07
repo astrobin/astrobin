@@ -20,7 +20,11 @@ def ajax_add_toggleproperty(request):
         object_id = request.POST.get("object_id")
         content_type = get_object_or_404(ContentType, pk=request.POST.get("content_type_id"))
         property_type = request.POST.get("property_type")
-        obj = content_type.get_object_for_this_type(pk=object_id)
+
+        try:
+            obj = content_type.get_object_for_this_type(pk=object_id)
+        except content_type.model_class().DoesNotExist:
+            return HttpResponse(_('Sorry, this object does not exist.'), status=404)
 
         if hasattr(obj, 'deleted') and obj.deleted is not None and obj.deleted is not False:
             return HttpResponse(_('Sorry, this object was already deleted.'), status=404)
@@ -90,7 +94,15 @@ def ajax_remove_toggleproperty(request):
             user=request.user
         )
         tp.delete()
-        obj = content_type.get_object_for_this_type(pk=object_id)
+
+        try:
+            obj = content_type.get_object_for_this_type(pk=object_id)
+        except content_type.model_class().DoesNotExist:
+            return HttpResponse(_('Sorry, this object does not exist.'), status=404)
+
+        if hasattr(obj, 'deleted') and obj.deleted is not None and obj.deleted is not False:
+            return HttpResponse(_('Sorry, this object was already deleted.'), status=404)
+
         if settings.TOGGLEPROPERTIES.get('show_count'):
             count = ToggleProperty.objects.toggleproperties_for_object(property_type, obj).count()
             response_dict['count'] = count
