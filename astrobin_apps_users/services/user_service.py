@@ -841,7 +841,11 @@ class UserService:
     def update_followers_count(self):
         from astrobin.models import UserProfile
 
-        profile: UserProfile = self.user.userprofile
+        try:
+            profile: UserProfile = self.user.userprofile
+        except:
+            return
+
         if profile:
             profile.followers_count = ToggleProperty.objects.filter(
                 property_type='follow',
@@ -853,7 +857,11 @@ class UserService:
     def update_following_count(self):
         from astrobin.models import UserProfile
 
-        profile: UserProfile = self.user.userprofile
+        try:
+            profile: UserProfile = self.user.userprofile
+        except:
+            return
+
         if profile:
             profile.following_count = ToggleProperty.objects.filter(
                 user=self.user,
@@ -865,7 +873,11 @@ class UserService:
     def update_image_count(self):
         from astrobin.models import UserProfile
 
-        profile: UserProfile = self.user.userprofile
+        try:
+            profile: UserProfile = self.user.userprofile
+        except:
+            return
+
         if profile:
             profile.image_count = UserService(self.user).get_public_images().count()
             profile.wip_image_count = UserService(self.user).get_wip_images().count()
