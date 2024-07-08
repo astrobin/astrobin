@@ -729,17 +729,17 @@ def image_edit_acquisition_reset(request, id):
 @never_cache
 @login_required
 @require_GET
-def image_edit_make_final(request, id):
-    image = get_image_or_404(Image.objects_including_wip, id)
+def image_edit_make_final(request, image_id):
+    image = get_image_or_404(Image.objects_including_wip, image_id)
+
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    revisions = ImageRevision.all_objects.filter(image=image)
-    for r in revisions:
-        r.is_final = False
-        r.save(keep_deleted=True)
-    image.is_final = True
-    image.save(keep_deleted=True)
+    now = DateTimeService.now()
+
+    ImageRevision.objects.filter(image=image, is_final=True).update(is_final=False)
+    Image.objects.filter(pk=image.pk).update(is_final=True, updated=now)
+    UserService(image.user).clear_gallery_image_list_cache()
 
     return HttpResponseRedirect(image.get_absolute_url())
 
@@ -747,23 +747,34 @@ def image_edit_make_final(request, id):
 @never_cache
 @login_required
 @require_GET
-def image_edit_revision_make_final(request, id):
-    r = get_object_or_404(ImageRevision, pk=id)
-    if request.user != r.image.user and not request.user.is_superuser:
+def image_edit_revision_make_final(request, revision_id):
+    revision = get_object_or_404(ImageRevision, pk=revision_id)
+
+    if request.user != revision.image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    other = ImageRevision.all_objects.filter(image=r.image)
-    for i in other:
-        i.is_final = False
-        i.save(keep_deleted=True)
+    now = DateTimeService.now()
 
-    r.image.is_final = False
-    r.image.save(keep_deleted=True)
+    ImageRevision.all_objects.filter(
+        image=revision.image, is_final=True
+    ).exclude(
+        pk=revision.pk
+    ).update(
+        is_final=False
+    )
 
-    r.is_final = True
-    r.save(keep_deleted=True)
+    Image.objects.filter(pk=revision.image.pk).update(
+        is_final=False,
+        updated=now
+    )
 
-    return HttpResponseRedirect('/%s/%s/' % (r.image.get_id(), r.label))
+    ImageRevision.objects.filter(pk=revision.pk).update(
+        is_final=True
+    )
+
+    UserService(revision.image.user).clear_gallery_image_list_cache()
+
+    return HttpResponseRedirect('/%s/%s/' % (revision.image.get_id(), revision.label))
 
 
 @login_required

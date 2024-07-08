@@ -1711,7 +1711,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
 
         response = self.client.get(
-            reverse('image_edit_make_final', kwargs={'id': image.get_id()}),
+            reverse('image_edit_make_final', kwargs={'image_id': image.get_id()}),
             follow=True
         )
         self.assertRedirects(
@@ -1730,7 +1730,7 @@ class ImageTest(TestCase):
         # Test with wrong user
         self.client.login(username='test2', password='password')
         response = self.client.get(
-            reverse('image_edit_make_final', kwargs={'id': image.get_id()})
+            reverse('image_edit_make_final', kwargs={'image_id': image.get_id()})
         )
         self.assertEqual(response.status_code, 403)
 
@@ -1757,7 +1757,7 @@ class ImageTest(TestCase):
 
         # Make B final
         response = self.client.get(
-            reverse('image_edit_revision_make_final', kwargs={'id': b.id}),
+            reverse('image_edit_revision_make_final', kwargs={'revision_id': b.id}),
             follow=True
         )
         self.assertRedirects(
@@ -1780,7 +1780,7 @@ class ImageTest(TestCase):
         # Test with wrong user
         self.client.login(username='test2', password='password')
         response = self.client.get(
-            reverse('image_edit_revision_make_final', kwargs={'id': b.id})
+            reverse('image_edit_revision_make_final', kwargs={'revision_id': b.id})
         )
         self.assertEqual(response.status_code, 403)
 

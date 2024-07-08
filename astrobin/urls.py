@@ -492,9 +492,9 @@ urlpatterns += [
         r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?restart-advanced$',
         image_restart_advanced_platesolving, name='image_restart_advanced_platesolving'
     ),
-    url(r'^edit/makefinal/(?P<id>\w+)/$', image_edit_make_final, name='image_edit_make_final'),
+    url(r'^edit/makefinal/(?P<image_id>\w+)/$', image_edit_make_final, name='image_edit_make_final'),
     url(
-        r'^edit/revision/makefinal/(?P<id>\w+)/$', image_edit_revision_make_final,
+        r'^edit/revision/makefinal/(?P<revision_id>\w+)/$', image_edit_revision_make_final,
         name='image_edit_revision_make_final'
     ),
     url(r'^edit/save/acquisition/$', image_edit_save_acquisition, name='image_edit_save_acquisition'),
