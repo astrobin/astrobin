@@ -53,7 +53,7 @@
 .visible-desktop {
   display: inherit !important;
 }
-@media (min-width: 768px) and (max-width: 979px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .hidden-desktop {
     display: inherit !important;
   }
@@ -92,7 +92,7 @@
     display: none !important;
   }
 }
-@media (min-width: 768px) and (max-width: 979px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .row {
     margin-left: -20px;
     *zoom: 1;
@@ -115,79 +115,79 @@
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container {
-    width: 724px;
+    width: calc(100% - 60px);
   }
   .span12 {
-    width: 724px;
+    width: 704px;
   }
   .span11 {
-    width: 662px;
+    width: 652px;
   }
   .span10 {
-    width: 600px;
+    width: 590px;
   }
   .span9 {
-    width: 538px;
+    width: 528px;
   }
   .span8 {
-    width: 476px;
+    width: 466px;
   }
   .span7 {
-    width: 414px;
+    width: 404px;
   }
   .span6 {
-    width: 352px;
+    width: 342px;
   }
   .span5 {
-    width: 290px;
+    width: 280px;
   }
   .span4 {
-    width: 228px;
+    width: 218px;
   }
   .span3 {
-    width: 166px;
+    width: 156px;
   }
   .span2 {
-    width: 104px;
+    width: 94px;
   }
   .span1 {
-    width: 42px;
+    width: 32px;
   }
   .offset12 {
-    margin-left: 764px;
+    margin-left: 744px;
   }
   .offset11 {
-    margin-left: 702px;
+    margin-left: 682px;
   }
   .offset10 {
-    margin-left: 640px;
+    margin-left: 620px;
   }
   .offset9 {
-    margin-left: 578px;
+    margin-left: 558px;
   }
   .offset8 {
-    margin-left: 516px;
+    margin-left: 496px;
   }
   .offset7 {
-    margin-left: 454px;
+    margin-left: 434px;
   }
   .offset6 {
-    margin-left: 392px;
+    margin-left: 372px;
   }
   .offset5 {
-    margin-left: 330px;
+    margin-left: 310px;
   }
   .offset4 {
-    margin-left: 268px;
+    margin-left: 248px;
   }
   .offset3 {
-    margin-left: 206px;
+    margin-left: 186px;
   }
   .offset2 {
-    margin-left: 144px;
+    margin-left: 124px;
   }
   .offset1 {
-    margin-left: 82px;
+    margin-left: 42px;
   }
   .row-fluid {
     width: 100%;
@@ -580,7 +580,7 @@
     position: static;
   }
 }
-@media (max-width: 979px) {
+@media (max-width: 991px) {
   body {
     padding-top: 0;
   }
@@ -731,7 +731,7 @@
     padding-right: 10px;
   }
 }
-@media (min-width: 979px + 1) {
+@media (min-width: 991px + 1) {
   .nav-collapse.collapse {
     height: auto !important;
     overflow: visible !important;

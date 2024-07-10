@@ -10,15 +10,8 @@
 .activity-actions {
   .action {
     position: relative;
-    margin-bottom: $spacer-large;
-    zoom: 1;
     display: inline-block;
-    width: 460px;
-    height: 320px;
-
-    &:nth-child(odd) {
-      margin-right: 16px;
-    }
+    width: calc(50% - 1rem - -6px);
 
     .toggleproperty-add-remove {
       position: absolute;
@@ -54,9 +47,8 @@
     }
 
     .action-object {
-      width: 460px;
-      height: 320px;
       overflow: hidden;
+      width: 100% !important;
 
       .verb {
         position: absolute;

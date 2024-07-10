@@ -1552,28 +1552,6 @@ astrobin_common = {
             changeYear: true
         });
 
-        $("#quick-search input").focus(() => {
-            if ($(window).width() >= 520) {
-                $(".search-nav").css({
-                    width: 'calc(100% - ' + (
-                        $(".site-nav").outerWidth() + $(".user-nav").outerWidth() + $(".brand").outerWidth()
-                    ) + 'px'
-                });
-            }
-        }).blur(() => {
-            if ($(window).width() >= 520) {
-                $(".search-nav").css({width: "auto"});
-            }
-        });
-
-        $(window).resize(() => {
-            if ($(window).width() >= 520) {
-                $(".search-nav").css({width: "auto"});
-            } else {
-                $(".search-nav").css({width: "calc(100% - 10px)"});
-            }
-        });
-
         astrobin_common.init_timestamps();
         astrobin_common.init_page_loading_indicator();
         astrobin_common.init_file_download_links();

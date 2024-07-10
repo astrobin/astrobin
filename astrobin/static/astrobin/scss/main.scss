@@ -83,7 +83,7 @@ html, body {
 
 body {
   background: $light-panel-color url('../images/background-tile.png');
-  @media screen and (min-width: 980px) {
+  @media screen and (min-width: 992px) {
     padding-top: 60px;
   }
 }
@@ -172,6 +172,7 @@ body.full {
 .astrobin-container {
   position: relative;
   padding: 0 30px 30px 30px;
+  margin-top: 12px;
   margin-bottom: 20px;
   -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
@@ -1290,7 +1291,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 
   .frames {
-    @media (min-width: 980px) {
+    @media (min-width: 992px) {
       margin-top: 2rem;
       margin-left: 1rem;
     }
@@ -1302,7 +1303,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 
   .multiline-dates {
-    @media (min-width: 980px) {
+    @media (min-width: 992px) {
       margin-top: 1.5rem;
       margin-left: 1rem;
     }
@@ -1530,7 +1531,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       margin: .5rem .5rem 1rem .5rem;
       text-align: center;
 
-      @media screen and (min-width: 768px) and (max-width: 979px) {
+      @media screen and (min-width: 768px) and (max-width: 991px) {
         max-width: calc(70% - 1rem);
 
         &:not(:last-child) {
@@ -1596,8 +1597,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     align-items: center;
     color: darken($text-color, 10%);
 
-    @media screen and (min-width: 768px) and (max-width: 979px) {
+    @media screen and (min-width: 768px) and (max-width: 991px) {
       justify-content: center;
+      flex-direction: column;
 
       > div {
         &:not(:last-child) {
@@ -2382,7 +2384,7 @@ form.avatar-delete {
 .image-of-the-day {
   position: relative;
 
-  @media screen and (min-width: 980px) {
+  @media screen and (min-width: 992px) {
     margin: 0 -29px 20px -29px;
   }
 
@@ -2594,6 +2596,20 @@ form.avatar-delete {
   h4 {
     .actions {
       top: 15px;
+    }
+  }
+}
+
+.activity-actions {
+  .endless {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .action,
+    .action-object {
+      margin: 0;
     }
   }
 }
@@ -3399,7 +3415,7 @@ table#private-shared-folders tr:hover a.delete-folder {
   }
 }
 
-@media screen and (max-width: 979px) {
+@media screen and (max-width: 991px) {
   .profile-details {
     ul > li > a {
       font-size: 6px;
@@ -3934,7 +3950,7 @@ pre {
       }
     }
 
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: 991px) {
       .astrobin-thumbnail {
         width: 118px;
       }

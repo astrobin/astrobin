@@ -11,7 +11,7 @@
   }
 }
 
-@media screen and (max-width: 979px) {
+@media screen and (max-width: 991px) {
   html, body {
     font-size: 16px;
   }
@@ -143,65 +143,6 @@
 
       img {
         border-radius: 0;
-      }
-    }
-  }
-
-  .activity-actions {
-    text-align: center;
-
-    .action {
-      text-align: left;
-      width: 100%;
-      height: auto;
-      margin-bottom: 24px;
-      box-shadow: 0 0 .75rem rgba(0, 0, 0, .75);
-
-      &:nth-child(odd) {
-        margin-right: 0 !important;
-      }
-
-      .toggleproperty-add-remove.property-like {
-        top: .5rem;
-        right: .5rem;
-      }
-
-      .avatar {
-        float: none;
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        z-index: 2;
-      }
-
-      .action-object {
-        float: none;
-        width: 100%;
-        height: auto;
-
-        &.has-like-button .title .inner {
-          padding-right: 35px;
-        }
-
-        .title {
-          top: initial;
-          bottom: initial;
-          position: initial;
-          backdrop-filter: none;
-        }
-
-        .verb {
-          top: initial;
-          bottom: initial;
-          position: initial;
-          width: 100%;
-          backdrop-filter: none;
-
-
-          .verb-inner {
-            padding-left: 12px;
-          }
-        }
       }
     }
   }
@@ -413,9 +354,9 @@
     box-sizing: border-box;
     padding: 11px 19px;
     font-size: 16.25px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
+    -webkit-border-radius: .25rem;
+    -moz-border-radius: .25rem;
+    border-radius: .25rem;
   }
 
   .loading {
@@ -550,6 +491,69 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+
+
+  .activity-actions {
+    text-align: center;
+
+    .action {
+      text-align: left;
+      width: 100%;
+      height: auto;
+      margin-bottom: 24px;
+      box-shadow: 0 0 .75rem rgba(0, 0, 0, .75);
+
+      &:nth-child(odd) {
+        margin-right: 0 !important;
+      }
+
+      .toggleproperty-add-remove.property-like {
+        top: .5rem;
+        right: .5rem;
+      }
+
+      .avatar {
+        float: none;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        z-index: 2;
+      }
+
+      .action-object {
+        float: none;
+        width: 100%;
+        height: auto;
+
+        &.has-like-button .title .inner {
+          padding-right: 35px;
+        }
+
+        .title {
+          top: initial;
+          bottom: initial;
+          position: initial;
+          backdrop-filter: none;
+        }
+
+        .verb {
+          top: initial;
+          bottom: initial;
+          position: initial;
+          width: 100%;
+          backdrop-filter: none;
+
+
+          .verb-inner {
+            padding-left: 12px;
+          }
+        }
+      }
     }
   }
 }

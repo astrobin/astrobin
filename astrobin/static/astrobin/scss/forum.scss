@@ -29,7 +29,7 @@ table.forums, table.topic-list {
   table-layout: auto;
 
   td {
-    @media screen and (min-width: 980px) {
+    @media screen and (min-width: 992px) {
       text-overflow: clip;
       overflow: hidden;
     }
