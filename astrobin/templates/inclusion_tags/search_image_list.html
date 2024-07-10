@@ -114,22 +114,25 @@
                         {% endwith %}
                     </div>
                 {% endif %}
-                <div class="equipment-listing-search-result alert alert-info">
-                   <span class="text">
-                        <i class="icon-bullhorn"></i>
-                        {% blocktrans with count=marketplace_line_items|length %}
-                            AstroBin's Marketplace has <strong>{{ count }}</strong> items similar to what you're
-                            looking for!
-                        {% endblocktrans %}
-                        <a
-                            href="{% app_redirection_service '/equipment/marketplace/' %}?query={{ search_term }}"
-                            class="btn btn-primary"
-                        >
-                            <i class="icon-shopping-cart"></i>
-                            {% trans "Take a look!" %}
-                        </a>
-                   </span>
-                </div>
+                
+                {% if marketplace_line_items|length > 0 %}
+                    <div class="equipment-listing-search-result alert alert-info">
+                       <span class="text">
+                            <i class="icon-bullhorn"></i>
+                            {% blocktrans with count=marketplace_line_items|length %}
+                                AstroBin's Marketplace has <strong>{{ count }}</strong> items similar to what you're
+                                looking for!
+                            {% endblocktrans %}
+                            <a
+                                href="{% app_redirection_service '/equipment/marketplace/' %}?query={{ search_term }}"
+                                class="btn btn-primary"
+                            >
+                                <i class="icon-shopping-cart"></i>
+                                {% trans "Take a look!" %}
+                            </a>
+                       </span>
+                    </div>
+                {% endif %}
             {% endif %}
         {% endwith %}
         <ul class="thumbnails astrobin-thumbnails">
