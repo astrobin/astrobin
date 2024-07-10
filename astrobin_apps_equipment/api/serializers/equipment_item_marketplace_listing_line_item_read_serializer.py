@@ -5,6 +5,8 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_
 from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_offer_serializer import \
     EquipmentItemMarketplaceOfferSerializer
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 
 class EquipmentItemMarketplaceListingLineItemReadSerializer(EquipmentItemMarketplaceListingLineItemSerializer):
@@ -14,8 +16,9 @@ class EquipmentItemMarketplaceListingLineItemReadSerializer(EquipmentItemMarketp
     def to_representation(self, instance: EquipmentItemMarketplaceListingLineItem):
         data = super().to_representation(instance)
         user = self.context['request'].user
+        is_moderator = UserService(user).is_in_group(GroupName.MARKETPLACE_MODERATORS)
 
-        if user == instance.user:
+        if user == instance.user or is_moderator:
             offers = instance.offers.all()
         elif user.is_authenticated:
             offers = instance.offers.filter(user=user)

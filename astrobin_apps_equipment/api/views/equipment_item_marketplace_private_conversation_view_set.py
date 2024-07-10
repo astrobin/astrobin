@@ -15,6 +15,8 @@ from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_private_
     EquipmentItemMarketplacePrivateConversationSerializer
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing, EquipmentItemMarketplacePrivateConversation
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 
 class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
@@ -30,8 +32,9 @@ class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
         if listing_id is not None:
             # Check if the listing exists and raise 404 if not
             listing = get_object_or_404(EquipmentItemMarketplaceListing, pk=listing_id)
+            is_moderator = UserService(self.request.user).is_in_group(GroupName.MARKETPLACE_MODERATORS)
 
-            if listing.user == self.request.user:
+            if listing.user == self.request.user or is_moderator:
                 return EquipmentItemMarketplacePrivateConversation.objects.filter(listing_id=listing_id)
 
             if self.request.user.is_authenticated:
