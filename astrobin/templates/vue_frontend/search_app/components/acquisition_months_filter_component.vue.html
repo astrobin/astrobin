@@ -34,19 +34,18 @@
             return {
                 value: [],
                 options: [
-                    {id: "Jan", label: '{% trans "January" %}'},
-                    {id: "Feb", label: '{% trans "February" %}'},
-                    {id: "Mar", label: '{% trans "March" %}'},
-                    {id: "Apr", label: '{% trans "April" %}'},
-                    {id: "May", label: '{% trans "May" %}'},
-                    {id: "Jun", label: '{% trans "June" %}'},
-                    {id: "Jul", label: '{% trans "July" %}'},
-                    {id: "Aug", label: '{% trans "August" %}'},
-                    {id: "Sep", label: '{% trans "September" %}'},
-                    {id: "Oct", label: '{% trans "October" %}'},
-                    {id: "Nov", label: '{% trans "November" %}'},
-                    {id: "Dec", label: '{% trans "December" %}'},
-                    
+                    {id: "Jan", label: "{{ _('January')|escapejs }}"},
+                    {id: "Feb", label: "{{ _('February')|escapejs }}"},
+                    {id: "Mar", label: "{{ _('March')|escapejs }}"},
+                    {id: "Apr", label: "{{ _('April')|escapejs }}"},
+                    {id: "May", label: "{{ _('May')|escapejs }}"},
+                    {id: "Jun", label: "{{ _('June')|escapejs }}"},
+                    {id: "Jul", label: "{{ _('July')|escapejs }}"},
+                    {id: "Aug", label: "{{ _('August')|escapejs }}"},
+                    {id: "Sep", label: "{{ _('September')|escapejs }}"},
+                    {id: "Oct", label: "{{ _('October')|escapejs }}"},
+                    {id: "Nov", label: "{{ _('November')|escapejs }}"},
+                    {id: "Dec", label: "{{ _('December')|escapejs }}"},
                 ]
             }
         },

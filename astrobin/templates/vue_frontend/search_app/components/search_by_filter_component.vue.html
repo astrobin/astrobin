@@ -32,54 +32,54 @@
                         options: [
                             {
                                 id: "all",
-                                label: "{% trans "Everything" %}"
+                                label: "{{ _('Everything')|escapejs }}"
                             }
                         ]
                     },
                     {
-                        group: "{% trans "By basic information" %}",
+                        group: "{{ _('By basic information')|escapejs }}",
                         options: [
                             {
                                 id: "title",
-                                label: "{% trans "Title" %}"
+                                label: "{{ _('Title')|escapejs }}"
                             },
                             {
                                 id: "description",
-                                label: "{% trans "Description" %}"
+                                label: "{{ _('Description')|escapejs }}"
                             }
                         ]
                     },
                     {
-                        group: "{% trans "By astrometry details" %}",
+                        group: "{{ _('By astrometry details')|escapejs }}",
                         options: [
                             {
                                 id: "objects_in_field",
-                                label: "{% trans "Objects in field" %}"
+                                label: "{{ _('Objects in field')|escapejs }}"
                             }
                         ]
                     },
                     {
-                        group: "{% trans "By gear used" %}",
+                        group: "{{ _('By gear used')|escapejs }}",
                         options: [
                             {
                                 id: "imaging_telescopes",
-                                label: "{% trans "Imaging telescopes" %}"
+                                label: "{{ _('Imaging telescopes')|escapejs }}"
                             },
                             {
                                 id: "guiding_telescopes",
-                                label: "{% trans "Guiding telescopes" %}"
+                                label: "{{ _('Guiding telescopes')|escapejs }}"
                             },
                             {
                                 id: "imaging_cameras",
-                                label: "{% trans "Imaging cameras" %}"
+                                label: "{{ _('Imaging cameras')|escapejs }}"
                             },
                             {
                                 id: "guiding_cameras",
-                                label: "{% trans "Guiding cameras" %}"
+                                label: "{{ _('Guiding cameras')|escapejs }}"
                             },
                             {
                                 id: "mounts",
-                                label: "{% trans "Mounts" %}"
+                                label: "{{ _('Mounts')|escapejs }}"
                             }
                         ]
                     }

@@ -30,37 +30,37 @@
                 options: [
                     {
                         id: "i",
-                        label: "{% trans "All images" %}"
+                        label: "{{ _('All images')|escapejs }}"
                     },
                     {% if request.user.is_authenticated %}
                     {
                         id: "iu",
-                        label: "{% trans "Your images" %}"
+                        label: "{{ _('Your images')|escapejs }}"
                     },
                     {
                         id: "ib",
-                        label: "{% trans "Images bookmarked by you" %}"
+                        label: "{{ _('Images bookmarked by you')|escapejs }}"
                     },
                     {
                         id: "il",
-                        label: "{% trans "Images liked by you" %}"
+                        label: "{{ _('Images liked by you')|escapejs }}"
                     },
                     {
                         id: "if",
-                        label: "{% trans "Images by users you follow" %}"
+                        label: "{{ _('Images by users you follow')|escapejs }}"
                     },
                     {% endif %}
                     {
                         id: "u",
-                        label: "{% trans "Users" %}"
+                        label: "{{ _('Users')|escapejs }}"
                     },
                     {
                         id: "f",
-                        label: "{% trans "Forums" %}"
+                        label: "{{ _('Forums')|escapejs }}"
                     },
                     {
                         id: "c",
-                        label: "{% trans "Comments" %}"
+                        label: "{{ _('Comments')|escapejs }}"
                     }
                 ]
             }
