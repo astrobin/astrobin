@@ -1816,6 +1816,9 @@ def on_password_change(sender, **kwargs):
     user = kwargs.get('instance', None)
 
     if user:
+        # Clears django-rest-framework tokens
+        Token.objects.filter(user=user).delete()
+
         new_password = user.password
         try:
             old_password = User.objects.get(pk=user.pk).password
