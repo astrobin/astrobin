@@ -30,53 +30,53 @@
                 value: [],
                 optionGroups: [
                     {
-                        group: "{% trans "Self acquired" %}",
+                        group: "{{ _('Self acquired')|escapejs }}",
                         options: [
                             {
                                 id: "BACKYARD",
-                                label: "{% trans "Backyard" %}"
+                                label: "{{ _('Backyard')|escapejs }}"
                             },
                             {
                                 id: "TRAVELLER",
-                                label: "{% trans "Traveller" %}"
+                                label: "{{ _('Traveller')|escapejs }}"
                             },
                             {
                                 id: "OWN_REMOTE",
-                                label: "{% trans "Own remote observatory" %}"
+                                label: "{{ _('Own remote observatory')|escapejs }}"
                             }
                         ]
                     },
                     {
-                        group: "{% trans "Downloaded" %}",
+                        group: "{{ _('Downloaded')|escapejs }}",
                         options: [
                             {
                                 id: "AMATEUR_HOSTING",
-                                label: "{% trans "Amateur hosting facility" %}"
+                                label: "{{ _('Amateur hosting facility')|escapejs }}"
                             },
                             {
                                 id: "PUBLIC_AMATEUR_DATA",
-                                label: "{% trans "Public amateur data" %}"
+                                label: "{{ _('Public amateur data')|escapejs }}"
                             },
                             {
                                 id: "PRO_DATA",
-                                label: "{% trans "Professional, scientific grade data" %}"
+                                label: "{{ _('Professional, scientific grade data')|escapejs }}"
                             }
                         ]
                     },
                     {
-                        group: "{% trans "Other" %}",
+                        group: "{{ _('Other')|escapejs }}",
                         options: [
                             {
                                 id: "MIX",
-                                label: "{% trans "Mix of multiple sources" %}"
+                                label: "{{ _('Mix of multiple sources')|escapejs }}"
                             },
                             {
                                 id: "OTHER",
-                                label: "{% trans "None of the above" %}"
+                                label: "{{ _('None of the above')|escapejs }}"
                             },
                             {
                                 id: "UNKNOWN",
-                                label: "{% trans "Unknown" %}"
+                                label: "{{ _('Unknown')|escapejs }}"
                             }
                         ]
                     }
