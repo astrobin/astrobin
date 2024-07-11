@@ -111,6 +111,9 @@ class EquipmentItemMarketplaceOfferViewSet(viewsets.ModelViewSet):
         if listing.expiration < DateTimeService.now():
             raise serializers.ValidationError("Cannot create an offer for an expired listing")
 
+        if not listing.approved:
+            raise serializers.ValidationError("Cannot create an offer for an unapproved listing")
+
         # Do not allow creating offers if a user already has a pending offer for the same line item.
         line_item = EquipmentItemMarketplaceListingLineItem.objects.get(pk=request.data['line_item'])
         if EquipmentItemMarketplaceOffer.objects.filter(

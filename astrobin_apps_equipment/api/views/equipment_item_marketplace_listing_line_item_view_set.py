@@ -106,6 +106,9 @@ class EquipmentItemMarketplaceListingLineItemViewSet(viewsets.ModelViewSet):
         except EquipmentItemMarketplaceListingLineItem.DoesNotExist:
             raise NotFound()
 
+        if not line_item.listing.approved:
+            raise serializers.ValidationError("This listing has not been approved yet")
+
         if line_item.listing.listing_type == MarketplaceListingType.WANTED.value:
             raise serializers.ValidationError("Cannot mark a wanted listing as sold")
 

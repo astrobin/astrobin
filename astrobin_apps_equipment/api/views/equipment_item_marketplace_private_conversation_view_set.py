@@ -54,6 +54,9 @@ class EquipmentItemMarketplacePrivateConversationViewSet(viewsets.ModelViewSet):
         user = self.request.user
         now = timezone.now()
 
+        if not listing.approved:
+            raise PermissionDenied("You cannot create a conversation for an unapproved listing.")
+
         # Check if the user is the owner of the listing
         if user == listing.user and self.request.query_params.get('user') is not None:
             user = get_object_or_404(User, pk=self.request.query_params.get('user'))
