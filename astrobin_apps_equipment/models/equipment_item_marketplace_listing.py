@@ -69,6 +69,10 @@ class EquipmentItemMarketplaceListing(HashedSafeDeleteModel):
         null=True,
     )
 
+    manual_approval_required = models.BooleanField(
+        default=False,
+    )
+
     expiration = models.DateTimeField(
         null=False,
         blank=False,

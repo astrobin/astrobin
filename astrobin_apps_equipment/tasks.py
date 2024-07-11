@@ -341,6 +341,7 @@ def remind_about_marking_items_as_sold():
 def auto_approve_marketplace_listings():
     listings = EquipmentItemMarketplaceListing.objects.filter(
         approved__isnull=True,
+        manual_approval_required=False,
         expiration__gt=timezone.now(),
         user__userprofile__detected_insecure_password__isnull=True
     )
