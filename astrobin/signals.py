@@ -1816,9 +1816,6 @@ def on_password_change(sender, **kwargs):
     user = kwargs.get('instance', None)
 
     if user:
-        # Clears django-rest-framework tokens
-        Token.objects.filter(user=user).delete()
-
         new_password = user.password
         try:
             old_password = User.objects.get(pk=user.pk).password
@@ -1827,7 +1824,8 @@ def on_password_change(sender, **kwargs):
 
         if new_password != old_password:
             UserProfile.objects.filter(user=user).update(detected_insecure_password=None)
-
+            # Clears django-rest-framework tokens
+            Token.objects.filter(user=user).delete()
 
 @receiver(m2m_changed, sender=UserProfile.shadow_bans.through)
 def remove_follow_on_shadow_ban(sender, instance, **kwargs):
