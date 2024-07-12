@@ -9,6 +9,8 @@ from toggleproperties.models import ToggleProperty
 
 class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
     user_display_name = serializers.SerializerMethodField(read_only=True)
+    user_signup_country = serializers.SerializerMethodField(read_only=True)
+    user_last_seen_in_country = serializers.SerializerMethodField(read_only=True)
     line_items = EquipmentItemMarketplaceListingLineItemReadSerializer(many=True, read_only=True)
     # Whether the current user is following the listing
     followed = serializers.SerializerMethodField(read_only=True)
@@ -28,8 +30,14 @@ class EquipmentItemMarketplaceListingSerializer(serializers.ModelSerializer):
         validated_data['user'] = user
         return super().create(validated_data)
 
-    def get_user_display_name(self, obj: EquipmentItemMarketplaceListing):
+    def get_user_display_name(self, obj: EquipmentItemMarketplaceListing) -> str:
         return obj.user.userprofile.get_display_name()
+
+    def get_user_signup_country(self, obj: EquipmentItemMarketplaceListing) -> str:
+        return obj.user.userprofile.signup_country
+
+    def get_user_last_seen_in_country(self, obj: EquipmentItemMarketplaceListing) -> str:
+        return obj.user.userprofile.last_seen_in_country
 
     def get_followed(self, obj):
         if self.is_list_view():
