@@ -56,6 +56,12 @@ body.full {
 .header-container {
   display: flex;
   justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  @media (max-width: $md-max) {
+    padding: 0 1rem;
+  }
 }
 
 .navbar-static-top .container,
@@ -225,7 +231,7 @@ body.full {
   overflow: visible;
 }
 
-.non-mobile-search {
+.header-search {
   display: inline-block;
   margin-left: 12px;
   flex-grow: 1;
@@ -241,21 +247,6 @@ body.full {
   .search-nav {
     @media screen and (max-width: 991px) {
       margin-left: 110px;
-    }
-  }
-}
-
-.mobile-search-container {
-  @media screen and (min-width: 520px) {
-    display: none;
-  }
-
-  .search-nav {
-    width: calc(100% - 10px);
-
-    .nav,
-    form {
-      margin-top: 0;
     }
   }
 }
@@ -299,7 +290,7 @@ body.full {
     margin: 0;
 
     > li > a {
-      padding: 1rem !important;
+      padding: 1rem .5rem !important;
     }
 
     .upload-button {
@@ -307,10 +298,25 @@ body.full {
         margin-right: -33px;
       }
     }
+
+    .btn-group.open .dropdown-menu {
+      left: unset;
+      right: 0;
+    }
   }
 
   .user-dropdown {
-    min-height: 20px;
+    height: 20px;
+  }
+
+  .user-avatar-dropdown {
+    border: 0;
+    box-shadow: none !important;
+    padding: 0 !important;
+
+    img {
+      border-radius: 50%;
+    }
   }
 
   .upload-button {
@@ -567,12 +573,6 @@ body.full {
 }
 
 .navbar {
-  .brand {
-    @media (min-width: 1400px) {
-      margin-left: -48px;
-    }
-    padding-right: 19px;
-  }
 
   .brand img,
   .brand-mobile img {
@@ -585,10 +585,20 @@ body.full {
     border-bottom: 0;
     background: $grey-6-dark url('../images/darker-panel-tile.png');
     box-shadow: 0 .33rem 0.5rem rgba(0, 0, 0, 0.65);
-    padding: 2px 0 8px 0;
+    padding: 8px 0;
   }
 
   .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    .dropdown-toggle > .icon-caret-down {
+      @media (max-width: $lg-max) {
+        display: none;
+      }
+    }
+
     > li > a {
       font-size: 14.4px;
       color: $link-color;
@@ -597,6 +607,17 @@ body.full {
 
       &:hover {
         color: darken($link-color, 5%);
+      }
+    }
+
+    > li > .btn-group {
+      margin-top: 0;
+      padding: 1rem .5rem;
+      display: flex;
+      flex-wrap: nowrap;
+
+      @media (max-width: $md-max) {
+        padding: 0;
       }
     }
 

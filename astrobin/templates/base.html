@@ -166,20 +166,16 @@
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
-                <div class="container header-container">
-
-                    {% include "base/site_links.html" %}
-
-                    <span class="non-mobile-search">
-                        {% include "base/search_form.html" %}
-                    </span>
-
-                    {% include "base/user_links.html" %}
-
-                </div>
-
-                <div class="container mobile-search-container">
-                    {% include "base/search_form.html" %}
+                <div class="container">
+                    <div class="header-container">
+                        {% include "base/site_links.html" %}
+    
+                        <span class="header-search d-none d-lg-block">
+                            {% include "base/search_form.html" %}
+                        </span>
+    
+                        {% include "base/user_links.html" %}
+                    </div>
                 </div>
             </div>
         </div>

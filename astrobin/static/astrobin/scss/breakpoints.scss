@@ -1,0 +1,55 @@
+$xs-max: 575.98px;
+$sm-min: 576px;
+$sm-max: 767.98px;
+$md-min: 768px;
+$md-max: 991.98px;
+$lg-min: 992px;
+$lg-max: 1199.98px;
+$xl-min: 1200px;
+$xl-max: 1399.98px;
+$xxl-min: 1400px;
+
+// Mixin to generate display classes
+@mixin generate-display-classes($breakpoint, $min-width) {
+  @media (min-width: $min-width) {
+    .d-#{$breakpoint}-none {
+      display: none !important;
+    }
+    .d-#{$breakpoint}-inline {
+      display: inline !important;
+    }
+    .d-#{$breakpoint}-inline-block {
+      display: inline-block !important;
+    }
+    .d-#{$breakpoint}-block {
+      display: block !important;
+    }
+    .d-#{$breakpoint}-flex {
+      display: flex !important;
+    }
+  }
+}
+
+// Base display classes
+.d-none {
+  display: none !important;
+}
+.d-inline {
+  display: inline !important;
+}
+.d-inline-block {
+  display: inline-block !important;
+}
+.d-block {
+  display: block !important;
+}
+.d-flex {
+  display: flex !important;
+}
+
+// Generate display classes for each breakpoint
+@include generate-display-classes(sm, $sm-min);
+@include generate-display-classes(md, $md-min);
+@include generate-display-classes(lg, $lg-min);
+@include generate-display-classes(xl, $xl-min);
+@include generate-display-classes(xxl, $xxl-min);

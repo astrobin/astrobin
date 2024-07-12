@@ -12,17 +12,13 @@
     <span class="icon-bar"></span>
 </button>
 
-<a class="brand hidden-phone hidden-tablet" href="{% url 'index' %}">
+<a class="brand d-none d-lg-block" href="{% url 'index' %}">
     <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
 </a>
 
-<a class="brand-mobile hidden-desktop" href="{% url 'index' %}">
-    <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
-</a>
-
-<div class="site-nav nav-collapse collapse pull-left">
+<div class="site-nav nav-collapse collapse">
     <ul class="nav">
-        <li class="home-menu visible-phone visible-tablet">
+        <li class="home-menu d-block d-lg-none">
             <a href="/">{% trans "Home" %}</a>
         </li>
 
@@ -300,4 +296,3 @@
         {% endif %}
     </ul>
 </div> <!-- nav-collapse -->
-
