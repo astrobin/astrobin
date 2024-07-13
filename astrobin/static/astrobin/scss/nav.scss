@@ -60,7 +60,12 @@ body.full {
   align-items: center;
 
   @media (max-width: $md-max) {
-    padding: 0 1rem;
+    padding: 0 .25rem;
+  }
+
+  @media (min-width: $lg-min) {
+    margin-left: -30px;
+    margin-right: -30px;
   }
 }
 
@@ -73,7 +78,8 @@ body.full {
 }
 
 .navbar .btn {
-  padding: 4px 12px;
+  padding: 6px 12px;
+  text-shadow: none;
 }
 
 #navbar-user-scores {
@@ -290,12 +296,11 @@ body.full {
     margin: 0;
 
     > li > a {
-      padding: 1rem .5rem !important;
-    }
+      padding: 0 10px !important;
 
-    .upload-button {
-      @media (min-width: 1400px) {
-        margin-right: -33px;
+      &.upload-button {
+        font-size: 16px;
+        padding-right: 0 !important;
       }
     }
 
@@ -317,10 +322,6 @@ body.full {
     img {
       border-radius: 50%;
     }
-  }
-
-  .upload-button {
-    font-size: 16px;
   }
 
   .username {
@@ -574,8 +575,13 @@ body.full {
 
 .navbar {
 
-  .brand img,
-  .brand-mobile img {
+  .brand {
+    float: none;
+    margin-left: 0;
+    padding-right: 17px;
+  }
+
+  .brand img {
     height: 25px;
     margin-top: -5px;
   }
@@ -585,7 +591,11 @@ body.full {
     border-bottom: 0;
     background: $grey-6-dark url('../images/darker-panel-tile.png');
     box-shadow: 0 .33rem 0.5rem rgba(0, 0, 0, 0.65);
-    padding: 8px 0;
+    padding: 5px 0 13px 0;
+
+    @media (max-width: $md-max) {
+      padding: 9px 0;
+    }
   }
 
   .nav {
@@ -602,7 +612,7 @@ body.full {
     > li > a {
       font-size: 14.4px;
       color: $link-color;
-      padding: 1rem .5rem;
+      padding: 14px 7px;
       text-shadow: none;
 
       &:hover {
@@ -612,7 +622,7 @@ body.full {
 
     > li > .btn-group {
       margin-top: 0;
-      padding: 1rem .5rem;
+      padding: 0 .5rem;
       display: flex;
       flex-wrap: nowrap;
 

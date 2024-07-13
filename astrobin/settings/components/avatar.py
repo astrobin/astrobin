@@ -1,4 +1,4 @@
-AVATAR_DEFAULT_URL = 'astrobin/images/astrobin-default-avatar.png?v=1'
+AVATAR_DEFAULT_URL = 'astrobin/images/default-avatar.jpeg?v=1'
 AVATAR_STORAGE_DIR = 'images/avatars'
 AVATAR_HASH_FILENAMES = True
 AVATAR_HASH_USERDIRNAMES = True

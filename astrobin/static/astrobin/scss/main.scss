@@ -29,6 +29,7 @@
 @import "uniform";
 @import "ui-tooltip";
 @import "ui-datepicker";
+@import "utility-classes";
 
 @import "activity-actions";
 @import "breadcrumb";
@@ -113,13 +114,6 @@ body.full {
       display: flex;
       align-items: center;
       padding: 10px 20px;
-
-      .brand-mobile {
-        position: initial;
-        margin-right: 1rem;
-        top: unset;
-        left: unset;
-      }
 
       .nav-title {
         flex: 1;
@@ -1832,8 +1826,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 #notifications-count {
   display: none;
   position: absolute;
-  top: 5px;
-  right: 3px;
+  top: -6px;
+  right: -2px;
   padding: 3px 4px;
   font-size: 75%;
   font-weight: bold;
