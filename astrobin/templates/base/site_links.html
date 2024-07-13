@@ -16,7 +16,11 @@
     <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
 </a>
 
-<div class="site-nav nav-collapse collapse">
+<div class="site-nav nav-collapse collapse d-none d-lg-block">
+    <div class="d-lg-none">
+        {% include "base/search_form.html" %}
+    </div>
+
     <ul class="nav">
         <li class="home-menu d-block d-lg-none">
             <a href="/">{% trans "Home" %}</a>
@@ -281,6 +285,12 @@
                     </a>
                 </li>
             </ul>
+        </li>
+    </ul>
+
+    <ul class="nav d-lg-none">
+        <li class="dropdown language-switcher">
+            {% include "base/language_switcher.html" %}
         </li>
     </ul>
 </div> <!-- nav-collapse -->

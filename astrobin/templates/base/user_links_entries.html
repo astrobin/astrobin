@@ -2,6 +2,22 @@
 {% load tags %}
 {% load common_tags %}
 
+<li class="d-inline d-lg-none username">
+    {{ request.user.userprofile.get_display_name }}
+</li>
+
+<li class="d-inline d-lg-none username-indexes">
+    {% if request.user.is_authenticated and not request.user.userprofile.exclude_from_competitions %}
+        <span id="astrobin-index">
+            {{ request.user.userprofile.image_index|default:"0"|floatformat:2 }}
+        </span> &middot;
+
+        <span id="contribution-index">
+            {{ request.user.userprofile.contribution_index|default:"0"|floatformat:2 }}
+        </span>
+    {% endif %}
+</li>
+
 <li>
     <a href="{% app_redirection_service '/subscriptions/options' %}">
         <i class="icon-asterisk"></i>
@@ -16,7 +32,7 @@
     </a>
 </li>
 
-<li class="nav-header">{% trans "My places" %}</li>
+<li class="divider"></li>
 
 <li>
     <a href="{% url 'user_page' request.user.username %}">
@@ -39,30 +55,14 @@
     </a>
 </li>
 
-<li class="nav-header">{% trans "My messages" %}</li>
+<li class="divider"></li>
 
 <li>
     <a href="{% url 'messages_inbox' %}">
         <i class="icon-inbox"></i>
-        {% trans "Received" %}
+        {% trans "My messages" %}
     </a>
 </li>
-
-<li>
-    <a href="{% url 'messages_outbox' %}">
-        <i class="icon-mail-forward"></i>
-        {% trans "Sent" %}
-    </a>
-</li>
-
-<li>
-    <a href="{% url 'messages_trash' %}">
-        <i class="icon-trash"></i>
-        {% trans "Deleted" %}
-    </a>
-</li>
-
-<li class="divider"></li>
 
 <li>
     <a href="{% url 'user_page_api_keys' request.user.username %}">
@@ -70,6 +70,8 @@
         {% trans "API Keys" %}
     </a>
 </li>
+
+<li class="divider"></li>
 
 <li>
     <a href="{% url 'profile_edit_basic' %}">
@@ -90,8 +92,6 @@
         {% endif %}
     </a>
 </li>
-
-<li class="divider"></li>
 
 <li>
     <a data-no-instant href="{% url 'auth_logout' %}">

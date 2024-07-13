@@ -8,7 +8,9 @@
 <div class="user-nav">
     <ul class="nav">
 
-        {% include "base/language_switcher.html" %}
+        <li class="dropdown language-switcher d-none d-lg-inline">
+            {% include "base/language_switcher.html" %}
+        </li>
 
         {% if request.user.is_authenticated %}
 

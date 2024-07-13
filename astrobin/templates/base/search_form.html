@@ -1,22 +1,18 @@
 {% load i18n %}
 
 <div class="search-nav">
-    <ul class="nav">
-        <li>
-            <form
-                    id="quick-search"
-                    class="navbar-search pull-left"
-                    action="{% url 'haystack_search' %}"
-                    method="get"
-                    autocomplete="off">
-                <input
-                        id="q"
-                        class="tbox"
-                        type="text"
-                        name="q"
-                        value="{{ request.GET.q }}"
-                        placeholder="{% trans "Quick search" %}"/>
-            </form>
-        </li>
-    </ul>
-</div>
+    <form
+            id="quick-search"
+            class="navbar-search"
+            action="{% url 'haystack_search' %}"
+            method="get"
+            autocomplete="off">
+        <input
+                id="q"
+                class="tbox"
+                type="text"
+                name="q"
+                value="{{ request.GET.q }}"
+                placeholder="{% trans "Quick search" %}"/>
+    </form>
+</div> <!-- search-nav -->

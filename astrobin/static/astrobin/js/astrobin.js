@@ -1539,6 +1539,36 @@ astrobin_common = {
         $.extend(true, astrobin_common.config, config);
 
         $(".dropdown-toggle").dropdown();
+
+        $('.dropdown-toggle').on('click', function () {
+            if (window.innerWidth < 992) {
+                $('#dropdown-overlay').show();
+            }
+        });
+
+        $('.btn-navbar').on('click', function () {
+            if (window.innerWidth < 992) {
+              $('#dropdown-overlay').show();
+              $('.site-nav').removeClass('d-none');
+            }
+        });
+
+        // Hide overlay when dropdown is closed
+        $('#dropdown-overlay').on('click', function (event) {
+          $('.dropdown').removeClass('open');
+          $('.site-nav').removeClass('in').css('height', '0').addClass('d-none');
+          $('#dropdown-overlay').hide();
+        });
+
+        $(".dropdown-menu").on('click', function(event) {
+            if ($(event.target).is('a')) {
+              // Let the link open
+              return;
+            }
+            event.stopPropagation();
+        });
+
+
         $(".carousel").carousel();
         $(".nav-tabs").tab();
         $("[rel=tooltip]").tooltip();
