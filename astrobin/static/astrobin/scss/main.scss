@@ -1838,6 +1838,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   @include rounded-corners(6px);
   @include box-shadow;
   z-index: 1040;
+
+  @media (max-width: $md-max) {
+    top: -8px;
+    right: 8px;
+  }
 }
 
 .message-container {
@@ -2635,6 +2640,13 @@ form.avatar-delete {
 
   .unread {
     background-color: #FADDD6;
+  }
+
+  i {
+    @media (max-width: $md-max) {
+      font-size: 1.5rem;
+      color: $grey-3;
+    }
   }
 }
 
