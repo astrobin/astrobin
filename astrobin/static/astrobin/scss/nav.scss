@@ -58,6 +58,7 @@ body.full {
   justify-content: space-between;
   flex-wrap: nowrap;
   align-items: center;
+  position: relative;
 
   @media (max-width: $md-max) {
     padding: 0 .25rem;
@@ -125,6 +126,8 @@ body.full {
 .dropdown-menu > li.nav-header {
   text-shadow: none;
   font-weight: normal;
+  font-size: inherit;
+  text-transform: unset;
 }
 
 .dropdown-menu > li > a {
@@ -260,6 +263,10 @@ body.full {
 .search-nav {
   display: inline-block;
   width: 100%;
+
+  @media (max-width: $md-max) {
+    width: calc(100% - 1rem);
+  }
 
   .navbar-search {
     margin-top: 4px;

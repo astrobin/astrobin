@@ -61,7 +61,8 @@
                     {% endif %}
                 {% endif %}
 
-                {% if request.user|is_iotd_reviewer or request.user|is_iotd_judge %}
+                {% if request.user|is_iotd_submitter or request.user|is_iotd_reviewer or request.user|is_iotd_judge %}
+                    <li class="divider"></li>
                     <li class="nav-header">{% trans "Image of the day" %}</li>
                 {% endif %}
 
@@ -251,9 +252,12 @@
                 <li>
                     <a href="https://welcome.astrobin.com/about" target="_blank">
                         <i class="icon-info-sign"></i>
-                        {% trans "About" %}
+                        {% trans "What is this site?" %}
                     </a>
                 </li>
+
+                <li class="divider"></li>
+
                 <li>
                     <a href="https://welcome.astrobin.com/faq" target="_blank">
                         <i class="icon-question-sign"></i>
@@ -275,8 +279,6 @@
                         {% trans "Sponsors" %}
                     </a>
                 </li>
-
-                <li class="divider"></li>
 
                 <li>
                     <a href="{% url 'contact' %}">

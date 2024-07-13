@@ -21,7 +21,15 @@
   }
 
   .brand-mobile {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    a {
+      color: $grey-2;
+    }
   }
 
   .astrobin-container {
@@ -103,7 +111,7 @@
       box-shadow: none;
 
       input {
-        width: calc(100% - 52px);
+        width: calc(100% - 32px);
       }
     }
 
