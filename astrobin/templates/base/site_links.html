@@ -282,17 +282,5 @@
                 </li>
             </ul>
         </li>
-
-        {% if request.user.is_authenticated %}
-            <li class="dropdown user-menu visible-phone">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    {% trans "User" %}
-                    <i class="icon-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    {% include "base/user_links_entries.html" %}
-                </ul>
-            </li>
-        {% endif %}
     </ul>
 </div> <!-- nav-collapse -->

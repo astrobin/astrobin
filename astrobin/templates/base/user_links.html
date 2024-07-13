@@ -23,11 +23,10 @@
                 </a>
             </li>
 
-            <li class="dropdown hidden-phone">
+            <li class="dropdown">
                 <div class="btn-group">
                     <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary d-none d-xl-inline-block">
-                        <span class="visible-phone"><i class="icon icon-user"></i></span>
-                        <span class="hidden-phone username">
+                        <span class="username">
                             {{ request.user.userprofile }}
                         </span>
                         {% if request.user.is_authenticated and not request.user.userprofile.exclude_from_competitions %}
@@ -98,12 +97,6 @@
                     <i class="icon icon-upload-alt"></i>
                 </a>
             </li>
-
-            {% if not request.user.userprofile.exclude_from_competitions %}
-                <li id="astrobin-index-mobile-header" class="visible-phone">
-                    {{ request.user.userprofile.image_index|default:"0"|floatformat:2 }}
-                </li>
-            {% endif %}
 
         {% else %} {# request.user.is_authenticated #}
 
