@@ -80,8 +80,25 @@
     z-index: 1021;
 
     .nav > li > a,
-    .dropdown-menu a {
-      font-weight: normal;
+    .dropdown-menu {
+      a {
+        font-weight: normal;
+      }
+    }
+
+    .dropdown-menu {
+      background-color: $grey-7;
+      padding: .5rem 1rem;
+      margin: 0;
+
+      li {
+        padding: .5rem 0;
+
+        &.divider {
+          display: block;
+          padding: 0;
+        }
+      }
     }
   }
 

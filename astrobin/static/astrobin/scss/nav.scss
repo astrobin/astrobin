@@ -239,6 +239,10 @@ body.full {
 .navbar .nav .open.dropdown .dropdown-toggle:hover {
   @include rounded(6px);
   background-color: $grey-7 !important;
+
+  @media (max-width: $md-max) {
+    text-align: center;
+  }
 }
 
 .navbar .nav > li > .dropdown-menu:after,
@@ -311,7 +315,10 @@ body.full {
     .btn-group.open .dropdown-menu {
       left: unset;
       right: 0;
-      font-size: 14.4px;
+
+      @media (min-width: $lg-min) {
+        font-size: 14.4px;
+      }
     }
   }
 
@@ -680,7 +687,10 @@ body.full {
     }
 
     > li > a {
-      font-size: 14.4px;
+      @media (min-width: $lg-min) {
+        font-size: 14.4px;
+      }
+      font-weight: normal;
       color: $link-color;
       padding: 14px 7px;
       text-shadow: none;
