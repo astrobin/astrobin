@@ -52,16 +52,16 @@
 
     .btn-navbar {
       margin: 0;
+      background-image: none;
+      background-color: transparent;
+      box-shadow: none;
+      border: 1px solid $grey-6;
+      padding: 4px 12px;
 
-      .text {
-        text-shadow: none;
-        position: absolute;
-        top: 4px;
-        left: 34px;
-      }
-
-      &:last-child {
-        margin-bottom: 10px;
+      i {
+        color: $grey-2;
+        margin-right: 0;
+        font-size: 1.25rem;
       }
     }
   }
@@ -79,7 +79,8 @@
     overflow: hidden;
     z-index: 1021;
 
-    .nav > li > a, .dropdown-menu a {
+    .nav > li > a,
+    .dropdown-menu a {
       font-weight: normal;
     }
   }
@@ -101,8 +102,8 @@
     border-radius: 0;
     overflow: auto;
     transition: all ease 0.25s;
-    padding: .5rem 0;
     margin: 0 !important;
+    padding-bottom: 1rem;
 
     .navbar-search {
       margin: 0;
@@ -124,7 +125,7 @@
       padding: 0;
       width: 100%;
        > li {
-          padding: .5rem 0;
+          padding: .125rem 0;
 
           .navbar-search {
             margin: 0;
