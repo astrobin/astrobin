@@ -10,7 +10,7 @@
 .recent-images {
     li.astrobin-thumbnail {
     @media (min-width: $xl-min) {
-      width: calc(100%/10- 4px);
+      width: calc(100%/10 - 4px);
     }
 
     @media (max-width: $lg-max) {
