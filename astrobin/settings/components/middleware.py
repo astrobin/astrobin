@@ -22,7 +22,6 @@ MIDDLEWARE = [
     'astrobin.middleware.SlowRequestLoggingMiddleware',
     'astrobin.middleware.ThreadLocalsMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'maintenancemode.middleware.MaintenanceModeMiddleware',
 ]
 
 if not TESTING:

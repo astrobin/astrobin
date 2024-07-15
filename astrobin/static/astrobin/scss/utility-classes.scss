@@ -1,0 +1,37 @@
+$sizes: 0, 1, 2, 3, 4, 5;
+
+@mixin generate-spacing-classes($property, $prefix) {
+  @each $size in $sizes {
+    .#{$prefix}-#{$size} {
+      #{$property}: #{$size * 0.25}rem !important;
+    }
+  }
+
+  @each $breakpoint, $min-width in (sm: $sm-min, md: $md-min, lg: $lg-min, xl: $xl-min, xxl: $xxl-min) {
+    @media (min-width: $min-width) {
+      @each $size in $sizes {
+        .#{$prefix}-#{$breakpoint}-#{$size} {
+          #{$property}: #{$size * 0.25}rem !important;
+        }
+      }
+    }
+  }
+}
+
+// Generate margin classes
+@include generate-spacing-classes(margin, m);
+@include generate-spacing-classes(margin-left, ms);
+@include generate-spacing-classes(margin-right, me);
+@include generate-spacing-classes(margin-top, mt);
+@include generate-spacing-classes(margin-bottom, mb);
+@include generate-spacing-classes(margin-left, mx); // mx is shorthand for margin-left and margin-right
+@include generate-spacing-classes(margin-top, my); // my is shorthand for margin-top and margin-bottom
+
+// Generate padding classes
+@include generate-spacing-classes(padding, p);
+@include generate-spacing-classes(padding-left, ps);
+@include generate-spacing-classes(padding-right, pe);
+@include generate-spacing-classes(padding-top, pt);
+@include generate-spacing-classes(padding-bottom, pb);
+@include generate-spacing-classes(padding-left, px); // px is shorthand for padding-left and padding-right
+@include generate-spacing-classes(padding-top, py); // py is shorthand for padding-top and padding-bottom

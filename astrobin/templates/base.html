@@ -167,19 +167,21 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-
-                    {% include "base/site_links.html" %}
-
-                    <span class="non-mobile-search">
-                        {% include "base/search_form.html" %}
-                    </span>
-
-                    {% include "base/user_links.html" %}
-
-                </div>
-
-                <div class="container mobile-search-container">
-                    {% include "base/search_form.html" %}
+                    <div class="header-container">
+                        {% include "base/site_links.html" %}
+    
+                        <span class="header-search d-none d-lg-block">
+                            {% include "base/search_form.html" %}
+                        </span>
+                          
+                        <span class="d-lg-none brand-mobile">
+                            <a href="/">
+                                AstroBin
+                            </a>
+                        </span>
+    
+                        {% include "base/user_links.html" %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -295,6 +297,11 @@
                 </script>
             {% endif %}
         {% endif %}
+    
+        <div
+            id="dropdown-overlay"
+            style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); z-index:1020;"
+        ></div>
     </body>
 </html>
 

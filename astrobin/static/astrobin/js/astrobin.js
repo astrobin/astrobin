@@ -1539,6 +1539,38 @@ astrobin_common = {
         $.extend(true, astrobin_common.config, config);
 
         $(".dropdown-toggle").dropdown();
+
+        $('.dropdown-toggle').on('click', function () {
+            const isSubNav = $(this).closest('.subnav').length > 0;
+
+            if (!isSubNav && window.innerWidth < 992) {
+                $('#dropdown-overlay').show();
+            }
+        });
+
+        $('.btn-navbar').on('click', function () {
+            if (window.innerWidth < 992) {
+              $('#dropdown-overlay').show();
+              $('.site-nav').removeClass('d-none');
+            }
+        });
+
+        // Hide overlay when dropdown is closed
+        $('#dropdown-overlay').on('click', function (event) {
+          $('.dropdown').removeClass('open');
+          $('.site-nav').removeClass('in').css('height', '0').addClass('d-none');
+          $('#dropdown-overlay').hide();
+        });
+
+        $(".dropdown-menu").on('click', function(event) {
+            if ($(event.target).is('a')) {
+              // Let the link open
+              return;
+            }
+            event.stopPropagation();
+        });
+
+
         $(".carousel").carousel();
         $(".nav-tabs").tab();
         $("[rel=tooltip]").tooltip();
@@ -1550,28 +1582,6 @@ astrobin_common = {
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true
-        });
-
-        $("#quick-search input").focus(() => {
-            if ($(window).width() >= 520) {
-                $(".search-nav").css({
-                    width: 'calc(100% - ' + (
-                        $(".site-nav").outerWidth() + $(".user-nav").outerWidth() + $(".brand").outerWidth()
-                    ) + 'px'
-                });
-            }
-        }).blur(() => {
-            if ($(window).width() >= 520) {
-                $(".search-nav").css({width: "auto"});
-            }
-        });
-
-        $(window).resize(() => {
-            if ($(window).width() >= 520) {
-                $(".search-nav").css({width: "auto"});
-            } else {
-                $(".search-nav").css({width: "calc(100% - 10px)"});
-            }
         });
 
         astrobin_common.init_timestamps();

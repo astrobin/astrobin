@@ -93,11 +93,11 @@
       display: inline-block;
       width: calc(100% - 56px);
 
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: 991px) {
         width: 100%;
       }
 
-      @media screen and (min-width: 980px) {
+      @media screen and (min-width: 992px) {
         .children {
           margin-left: -33px;
 

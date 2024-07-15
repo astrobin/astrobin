@@ -1,10 +1,33 @@
-@media screen and (min-width: 1241px) {
+@media screen and (min-width: 992px) {
   .container,
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container,
   .navbar .container {
-    width: 1140px;
+    width: 880px;
+  }
+
+  .container.header-container {
+    width: 930px;
+  }
+
+
+  #index {
+    .image-of-the-day {
+      .astrobin-image {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container,
+  .navbar-static-top .container,
+  .navbar-fixed-top .container,
+  .navbar-fixed-bottom .container,
+  .navbar .container {
+    width: 1056px;
   }
 
   .extra-alerts .alert {
@@ -13,35 +36,12 @@
   }
 
   .astrobin-container {
-    width: 1080px;
+    width: 1056px;
   }
 
   footer .container {
     max-width: unset;
-    width: 1080px;
-  }
-
-  #index {
-    .image-of-the-day {
-      .astrobin-image {
-        width: 100%;
-      }
-    }
-
-    .activity-actions {
-      .endless {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-
-        .action,
-        .action-object {
-          width: 530px;
-          height: 368px;
-          margin: 0 0 20px 0;
-        }
-      }
-    }
+    width: 1058px;
   }
 
   .image-page-left-pane {
@@ -127,5 +127,34 @@
 
   .iotd-queue-item .astrobin-image {
     width: 520px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .container,
+  .astrobin-container,
+  .navbar-static-top .container,
+  .navbar-fixed-top .container,
+  .navbar-fixed-bottom .container,
+  .navbar .container,
+  footer .container {
+    width: 1240px;
+  }
+
+  .action,
+  .action-object {
+    width: calc(33.34% - 1rem - -4px) !important
+  }
+
+  .image-page-left-pane {
+    width: calc(70% - 14px) !important;
+  }
+
+  .image-page-right-pane {
+    width: calc(30% - 14px) !important;
+  }
+
+  .revisions-container li.revisions {
+    width: calc(33.34% - 12px);
   }
 }

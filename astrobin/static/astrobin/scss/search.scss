@@ -3,7 +3,7 @@ body#search {
   .search-container {
     display: flex;
 
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: 991px) {
       flex-flow: column wrap;
     }
 
@@ -17,12 +17,12 @@ body#search {
     .search-filters-app {
       flex: 1;
 
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: 991px) {
         width: 100%;
         margin-right: 0;
       }
 
-      @media screen and (min-width: 980px) and (max-width: 1240px) {
+      @media screen and (min-width: 992px) and (max-width: 1240px) {
         width: 256px;
         min-width: 256px;
         max-width: 256px;
@@ -41,7 +41,7 @@ body#search {
     margin-right: 1rem;
     z-index: 2;
 
-    @media screen and (min-width: 980px) {
+    @media screen and (min-width: 992px) {
       &.collapsed {
         width: 40px;
         min-width: 40px;

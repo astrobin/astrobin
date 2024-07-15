@@ -2,63 +2,60 @@
 {% load i18n %}
 {% load tags %}
 
-<li class="dropdown language-switcher">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        {% get_language_code_display request %}
-        <i class="icon-caret-down"></i>
-    </a>
-    <ul class="dropdown-menu">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    {{ LANGUAGE_CODE | upper }}
+</a>
+<ul class="dropdown-menu">
 
-        {% get_native_languages as native_languages %}
-        {% for lang in native_languages %}
-            <li>
-                <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
-                    {% get_language_name lang %}
-                </a>
-            </li>
-        {% endfor %}
+    {% get_native_languages as native_languages %}
+    {% for lang in native_languages %}
+        <li>
+            <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
+                {% get_language_name lang %}
+            </a>
+        </li>
+    {% endfor %}
 
+    <li class="divider"></li>
+
+    {% get_officially_supported_languages as supported_languages %}
+    {% for lang in supported_languages %}
+        <li>
+            <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
+                {% get_language_name lang %}
+            </a>
+        </li>
+    {% endfor %}
+
+    <li class="divider"></li>
+
+    {% get_other_languages as other_languages %}
+    {% for lang in other_languages %}
+        <li>
+            <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
+                {% get_language_name lang %}
+            </a>
+        </li>
+    {% endfor %}
+
+
+    {% if request.user.is_authenticated %}
         <li class="divider"></li>
 
-        {% get_officially_supported_languages as supported_languages %}
-        {% for lang in supported_languages %}
-            <li>
-                <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
-                    {% get_language_name lang %}
-                </a>
-            </li>
-        {% endfor %}
-
-        <li class="divider"></li>
-
-        {% get_other_languages as other_languages %}
-        {% for lang in other_languages %}
-            <li>
-                <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
-                    {% get_language_name lang %}
-                </a>
-            </li>
-        {% endfor %}
-
-
-        {% if request.user.is_authenticated %}
-            <li class="divider"></li>
-
-            <li>
-                <a data-no-instant href="{% url 'contact' %}?subject=Help%20with%20translations" target="_blank">
-                    <i class="icon-tasks"></i>
-                    {% trans "Help with translations!" %}
-                </a>
-            </li>
-        {% endif %}
-
-    </ul>
-
-    {% if request.user.is_authenticated and not user_language %}
-        <div id="language-prompt">
-            <div class="bubble alert alert-warning">
-                {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
-            </div>
-        </div>
+        <li>
+            <a data-no-instant href="{% url 'contact' %}?subject=Help%20with%20translations" target="_blank">
+                <i class="icon-tasks"></i>
+                {% trans "Help with translations!" %}
+            </a>
+        </li>
     {% endif %}
-</li>
+
+</ul>
+
+{% if request.user.is_authenticated and not user_language %}
+    <div id="language-prompt">
+        <div class="bubble alert alert-warning">
+            {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
+        </div>
+    </div>
+{% endif %}

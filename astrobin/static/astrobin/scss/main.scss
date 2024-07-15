@@ -6,6 +6,7 @@
 @import "accordion";
 @import "alert";
 @import "badges.scss";
+@import "breakpoints.scss";
 @import "buttons";
 @import "ckeditor";
 @import "cookie_consent";
@@ -28,6 +29,7 @@
 @import "uniform";
 @import "ui-tooltip";
 @import "ui-datepicker";
+@import "utility-classes";
 
 @import "activity-actions";
 @import "breadcrumb";
@@ -83,7 +85,7 @@ html, body {
 
 body {
   background: $light-panel-color url('../images/background-tile.png');
-  @media screen and (min-width: 980px) {
+  @media screen and (min-width: 992px) {
     padding-top: 60px;
   }
 }
@@ -112,13 +114,6 @@ body.full {
       display: flex;
       align-items: center;
       padding: 10px 20px;
-
-      .brand-mobile {
-        position: initial;
-        margin-right: 1rem;
-        top: unset;
-        left: unset;
-      }
 
       .nav-title {
         flex: 1;
@@ -172,6 +167,7 @@ body.full {
 .astrobin-container {
   position: relative;
   padding: 0 30px 30px 30px;
+  margin-top: 16px;
   margin-bottom: 20px;
   -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
@@ -1290,7 +1286,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 
   .frames {
-    @media (min-width: 980px) {
+    @media (min-width: 992px) {
       margin-top: 2rem;
       margin-left: 1rem;
     }
@@ -1302,7 +1298,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 
   .multiline-dates {
-    @media (min-width: 980px) {
+    @media (min-width: 992px) {
       margin-top: 1.5rem;
       margin-left: 1rem;
     }
@@ -1530,7 +1526,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       margin: .5rem .5rem 1rem .5rem;
       text-align: center;
 
-      @media screen and (min-width: 768px) and (max-width: 979px) {
+      @media screen and (min-width: 768px) and (max-width: 991px) {
         max-width: calc(70% - 1rem);
 
         &:not(:last-child) {
@@ -1596,8 +1592,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     align-items: center;
     color: darken($text-color, 10%);
 
-    @media screen and (min-width: 768px) and (max-width: 979px) {
+    @media screen and (min-width: 768px) and (max-width: 991px) {
       justify-content: center;
+      flex-direction: column;
 
       > div {
         &:not(:last-child) {
@@ -1829,8 +1826,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 #notifications-count {
   display: none;
   position: absolute;
-  top: 5px;
-  right: 3px;
+  top: -6px;
+  right: -2px;
   padding: 3px 4px;
   font-size: 75%;
   font-weight: bold;
@@ -1840,7 +1837,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   @include text-shadow;
   @include rounded-corners(6px);
   @include box-shadow;
-  z-index: 1040;
+  z-index: 1020;
+
+  @media (max-width: $md-max) {
+    top: -8px;
+    right: 8px;
+  }
 }
 
 .message-container {
@@ -2382,7 +2384,7 @@ form.avatar-delete {
 .image-of-the-day {
   position: relative;
 
-  @media screen and (min-width: 980px) {
+  @media screen and (min-width: 992px) {
     margin: 0 -29px 20px -29px;
   }
 
@@ -2598,6 +2600,20 @@ form.avatar-delete {
   }
 }
 
+.activity-actions {
+  .endless {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .action,
+    .action-object {
+      margin: 0;
+    }
+  }
+}
+
 .latest-from-forums {
   .endless {
     text-align: center;
@@ -2624,6 +2640,13 @@ form.avatar-delete {
 
   .unread {
     background-color: #FADDD6;
+  }
+
+  i {
+    @media (max-width: $md-max) {
+      font-size: 1.5rem;
+      color: $grey-3;
+    }
   }
 }
 
@@ -3399,7 +3422,7 @@ table#private-shared-folders tr:hover a.delete-folder {
   }
 }
 
-@media screen and (max-width: 979px) {
+@media screen and (max-width: 991px) {
   .profile-details {
     ul > li > a {
       font-size: 6px;
@@ -3934,7 +3957,7 @@ pre {
       }
     }
 
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: 991px) {
       .astrobin-thumbnail {
         width: 118px;
       }

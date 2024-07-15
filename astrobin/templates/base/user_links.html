@@ -2,16 +2,19 @@
 {% load tags %}
 {% load astrobin_apps_donations_tags %}
 {% load static %}
+{% load avatar_tags %}
 {% load common_tags %}
 
-<div class="user-nav pull-right">
+<div class="user-nav">
     <ul class="nav">
 
-        {% include "base/language_switcher.html" %}
+        <li class="dropdown language-switcher d-none d-lg-inline">
+            {% include "base/language_switcher.html" %}
+        </li>
 
         {% if request.user.is_authenticated %}
 
-            <li class="notice-container">
+            <li class="notice-container pe-3 pe-lg-0">
                 <span id="notifications-count"></span>
 
                 <a class="notifications"
@@ -22,34 +25,43 @@
                 </a>
             </li>
 
-            <li class="dropdown hidden-phone">
-            <div class="btn-group">
-                <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
-                    <span class="visible-phone"><i class="icon icon-user"></i></span>
-                    <span class="hidden-phone username">
-                        {{ request.user.userprofile }}
-                    </span>
-                    {% if request.user.is_authenticated and not request.user.userprofile.exclude_from_competitions %}
-                        <span id="navbar-user-scores">
-                            <span id="astrobin-index">
-                                {{ request.user.userprofile.image_index|default:"0"|floatformat:2 }}
-                            </span> &middot;
-    
-                            <span id="contribution-index">
-                                {{ request.user.userprofile.contribution_index|default:"0"|floatformat:2 }}
-                            </span>
+            <li class="dropdown">
+                <div class="btn-group">
+                    <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary d-none d-xl-inline-block">
+                        <span class="username">
+                            {{ request.user.userprofile }}
                         </span>
-                    {% endif %}
-                </a>
-                <a href="#" class="btn btn-primary dropdown-toggle user-dropdown" data-toggle="dropdown">
-                    <i class="icon-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    {% include "base/user_links_entries.html" %}
-                </ul>
-            </div> <!-- btn-group -->
+                        {% if request.user.is_authenticated and not request.user.userprofile.exclude_from_competitions %}
+                            <span id="navbar-user-scores">
+                                <span id="astrobin-index">
+                                    {{ request.user.userprofile.image_index|default:"0"|floatformat:2 }}
+                                </span> &middot;
 
-            {% if request.user.is_authenticated and not request.user.userprofile.real_name and request.path != "/profile/edit/basic/" and not request.user.userprofile.seen_realname %}
+                                <span id="contribution-index">
+                                    {{ request.user.userprofile.contribution_index|default:"0"|floatformat:2 }}
+                                </span>
+                            </span>
+                        {% endif %}
+                    </a>
+                
+                    <a
+                        href="#"
+                        class="btn btn-primary dropdown-toggle user-dropdown d-none d-xl-inline-block"
+                        data-toggle="dropdown"
+                    >
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <a href="#" class="dropdown-toggle user-avatar-dropdown d-inline-block d-xl-none">
+                        {% avatar request.user 32 %}
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        {% include "base/user_links_entries.html" %}
+                    </ul>
+                </div> <!-- btn-group -->
+
+                {% if request.user.is_authenticated and not request.user.userprofile.real_name and request.path != "/profile/edit/basic/" and not request.user.userprofile.seen_realname %}
                 <div id="realname-prompt">
                     <div class="bubble alert alert-warning">
                         <p>
@@ -80,25 +92,13 @@
                     </div>
                 </div>
             {% endif %}
-        </li> <!-- user menu -->
+            </li> <!-- user menu -->
 
-            <li class="visible-phone">
-                <a href="{% url 'user_page' request.user.username %}">
-                    <i class="icon-user"></i>
-                </a>
-            </li>
-
-            <li>
+            <li class="d-none d-lg-block">
                 <a href="{% url 'image_upload' %}" class="upload-button" title="{% trans "Upload" %}">
                     <i class="icon icon-upload-alt"></i>
                 </a>
             </li>
-
-            {% if not request.user.userprofile.exclude_from_competitions %}
-                <li id="astrobin-index-mobile-header" class="visible-phone">
-                    {{ request.user.userprofile.image_index|default:"0"|floatformat:2 }}
-                </li>
-            {% endif %}
 
         {% else %} {# request.user.is_authenticated #}
 

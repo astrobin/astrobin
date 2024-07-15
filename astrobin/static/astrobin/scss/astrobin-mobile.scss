@@ -11,7 +11,7 @@
   }
 }
 
-@media screen and (max-width: 979px) {
+@media screen and (max-width: $md-max) {
   html, body {
     font-size: 16px;
   }
@@ -21,10 +21,18 @@
   }
 
   .brand-mobile {
-    position: absolute;
-    top: 25px;
-    left: 70px;
-    opacity: .25;
+    font-size: 1.25rem;
+
+    @media (min-width: $sm-min) {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    a {
+      color: $grey-2;
+    }
   }
 
   .astrobin-container {
@@ -47,19 +55,16 @@
 
     .btn-navbar {
       margin: 0;
-      position: absolute;
-      top: 24px;
-      left: 12px;
+      background-image: none;
+      background-color: transparent;
+      box-shadow: none;
+      border: 1px solid $grey-6;
+      padding: 4px 12px;
 
-      .text {
-        text-shadow: none;
-        position: absolute;
-        top: 4px;
-        left: 34px;
-      }
-
-      &:last-child {
-        margin-bottom: 10px;
+      i {
+        color: $grey-2;
+        margin-right: 0;
+        font-size: 1.25rem;
       }
     }
   }
@@ -77,17 +82,83 @@
     overflow: hidden;
     z-index: 1021;
 
-    .nav > li > a, .dropdown-menu a {
-      font-weight: normal;
-      color: #ececec !important;
+    .nav > li > a,
+    .dropdown-menu {
+      a {
+        font-weight: normal;
+      }
+    }
+
+    .dropdown-menu {
+      background-color: $grey-7;
+      padding: .5rem 1rem;
+      margin: 0;
+
+      li {
+        padding: .5rem 0;
+
+        &.divider {
+          display: block;
+          padding: 0;
+        }
+      }
     }
   }
 
   .site-nav.nav-collapse {
-    position: absolute;
-    top: 52px;
-    left: 12px;
-    background: #111;
+    left: -100%;
+
+    &.in {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      border: 0;
+      height: calc(100% - 1rem) !important;
+      width: 300px;
+      z-index: 1040;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: $grey-6-dark url('../images/darker-panel-tile.png');
+      margin: 0;
+      border-radius: 0;
+      overflow: auto;
+      transition: left ease 0.25s, height 0s;
+      margin: 0 !important;
+      padding-bottom: 1rem;
+    }
+
+    .navbar-search {
+      margin: 0;
+      padding: .5rem;
+      border: 0;
+      box-shadow: none;
+
+      input {
+        width: calc(100% - 32px);
+      }
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+       > li {
+          padding: .75rem 0;
+
+          .navbar-search {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-shadow: none;
+          }
+        }
+    }
   }
 
   .user-nav .dropdown-menu {
@@ -143,65 +214,6 @@
 
       img {
         border-radius: 0;
-      }
-    }
-  }
-
-  .activity-actions {
-    text-align: center;
-
-    .action {
-      text-align: left;
-      width: 100%;
-      height: auto;
-      margin-bottom: 24px;
-      box-shadow: 0 0 .75rem rgba(0, 0, 0, .75);
-
-      &:nth-child(odd) {
-        margin-right: 0 !important;
-      }
-
-      .toggleproperty-add-remove.property-like {
-        top: .5rem;
-        right: .5rem;
-      }
-
-      .avatar {
-        float: none;
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        z-index: 2;
-      }
-
-      .action-object {
-        float: none;
-        width: 100%;
-        height: auto;
-
-        &.has-like-button .title .inner {
-          padding-right: 35px;
-        }
-
-        .title {
-          top: initial;
-          bottom: initial;
-          position: initial;
-          backdrop-filter: none;
-        }
-
-        .verb {
-          top: initial;
-          bottom: initial;
-          position: initial;
-          width: 100%;
-          backdrop-filter: none;
-
-
-          .verb-inner {
-            padding-left: 12px;
-          }
-        }
       }
     }
   }
@@ -295,14 +307,6 @@
     .extra-alerts .alert {
       margin: 10px 0;
     }
-  }
-
-  #astrobin-index-mobile-header {
-    font-size: 12px;
-    font-style: italic;
-    line-height: 42px;
-    color: $grey-4;
-    padding: 0 4px;
   }
 
   .subtle-container .header {
@@ -413,9 +417,9 @@
     box-sizing: border-box;
     padding: 11px 19px;
     font-size: 16.25px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
+    -webkit-border-radius: .25rem;
+    -moz-border-radius: .25rem;
+    border-radius: .25rem;
   }
 
   .loading {
@@ -550,6 +554,69 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+
+
+  .activity-actions {
+    text-align: center;
+
+    .action {
+      text-align: left;
+      width: 100%;
+      height: auto;
+      margin-bottom: 24px;
+      box-shadow: 0 0 .75rem rgba(0, 0, 0, .75);
+
+      &:nth-child(odd) {
+        margin-right: 0 !important;
+      }
+
+      .toggleproperty-add-remove.property-like {
+        top: .5rem;
+        right: .5rem;
+      }
+
+      .avatar {
+        float: none;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        z-index: 2;
+      }
+
+      .action-object {
+        float: none;
+        width: 100%;
+        height: auto;
+
+        &.has-like-button .title .inner {
+          padding-right: 35px;
+        }
+
+        .title {
+          top: initial;
+          bottom: initial;
+          position: initial;
+          backdrop-filter: none;
+        }
+
+        .verb {
+          top: initial;
+          bottom: initial;
+          position: initial;
+          width: 100%;
+          backdrop-filter: none;
+
+
+          .verb-inner {
+            padding-left: 12px;
+          }
+        }
+      }
     }
   }
 }

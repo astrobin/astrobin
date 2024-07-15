@@ -6,43 +6,43 @@
   transform: rotate($amount);
 }
 
-@mixin rounded-corners($radius: 6px) {
+@mixin rounded-corners($radius: .25rem) {
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
   border-radius: $radius;
 }
 
-@mixin rounded-corners-top($radius: 6px) {
+@mixin rounded-corners-top($radius: .25rem) {
   -moz-border-radius: $radius $radius 0 0;
   -webkit-border-radius: $radius $radius 0 0;
   border-radius: $radius $radius 0 0;
 }
 
-@mixin rounded-corners-bottom($radius: 6px) {
+@mixin rounded-corners-bottom($radius: .25rem) {
   -moz-border-radius: 0 0 $radius $radius;
   -webkit-border-radius: 0 0 $radius $radius;
   border-radius: 0 0 $radius $radius;
 }
 
-@mixin rounded-corners-left($radius: 6px) {
+@mixin rounded-corners-left($radius: .25rem) {
   -moz-border-radius: $radius 0 0 $radius;
   -webkit-border-radius: $radius 0 0 $radius;
   border-radius: $radius 0 0 $radius;
 }
 
-@mixin rounded-corners-right($radius: 6px) {
+@mixin rounded-corners-right($radius: .25rem) {
   -moz-border-radius: 0 $radius $radius 0;
   -webkit-border-radius: 0 $radius $radius 0;
   border-radius: 0 $radius $radius 0;
 }
 
-@mixin rounded-corners-bottom-right($radius: 6px) {
+@mixin rounded-corners-bottom-right($radius: .25rem) {
   -moz-border-radius: 0 $radius $radius $radius;
   -webkit-border-radius: 0 $radius $radius $radius;
   border-radius: 0 $radius $radius $radius;
 }
 
-@mixin rounded-corners-bottom-left($radius: 6px) {
+@mixin rounded-corners-bottom-left($radius: .25rem) {
   -moz-border-radius: $radius 0 $radius $radius;
   -webkit-border-radius: $radius 0 $radius $radius;
   border-radius: $radius 0 $radius $radius;

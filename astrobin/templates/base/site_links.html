@@ -7,22 +7,20 @@
 {% load common_tags %}
 
 <button class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
+    <i class="icon-reorder"></i>
 </button>
 
-<a class="brand hidden-phone hidden-tablet" href="{% url 'index' %}">
+<a class="brand d-none d-lg-block ps-0" href="{% url 'index' %}">
     <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
 </a>
 
-<a class="brand-mobile hidden-desktop" href="{% url 'index' %}">
-    <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
-</a>
+<div class="site-nav nav-collapse collapse d-none d-lg-block">
+    <div class="d-lg-none">
+        {% include "base/search_form.html" %}
+    </div>
 
-<div class="site-nav nav-collapse collapse pull-left">
     <ul class="nav">
-        <li class="home-menu visible-phone visible-tablet">
+        <li class="home-menu d-block d-lg-none">
             <a href="/">{% trans "Home" %}</a>
         </li>
 
@@ -61,7 +59,8 @@
                     {% endif %}
                 {% endif %}
 
-                {% if request.user|is_iotd_reviewer or request.user|is_iotd_judge %}
+                {% if request.user|is_iotd_submitter or request.user|is_iotd_reviewer or request.user|is_iotd_judge %}
+                    <li class="divider"></li>
                     <li class="nav-header">{% trans "Image of the day" %}</li>
                 {% endif %}
 
@@ -251,9 +250,12 @@
                 <li>
                     <a href="https://welcome.astrobin.com/about" target="_blank">
                         <i class="icon-info-sign"></i>
-                        {% trans "About" %}
+                        {% trans "What is this site?" %}
                     </a>
                 </li>
+
+                <li class="divider"></li>
+
                 <li>
                     <a href="https://welcome.astrobin.com/faq" target="_blank">
                         <i class="icon-question-sign"></i>
@@ -276,8 +278,6 @@
                     </a>
                 </li>
 
-                <li class="divider"></li>
-
                 <li>
                     <a href="{% url 'contact' %}">
                         <i class="icon-envelope"></i>
@@ -286,18 +286,11 @@
                 </li>
             </ul>
         </li>
+    </ul>
 
-        {% if request.user.is_authenticated %}
-            <li class="dropdown user-menu visible-phone">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    {% trans "User" %}
-                    <i class="icon-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    {% include "base/user_links_entries.html" %}
-                </ul>
-            </li>
-        {% endif %}
+    <ul class="nav d-lg-none">
+        <li class="dropdown language-switcher">
+            {% include "base/language_switcher.html" %}
+        </li>
     </ul>
 </div> <!-- nav-collapse -->
-

@@ -10,7 +10,7 @@ dl {
   }
 
   &.dl-horizontal {
-    @media (max-width: 979px) {
+    @media (max-width: 991px) {
       dt {
         margin-bottom: .5rem;
         float: none !important;
@@ -28,7 +28,7 @@ dl {
       }
     }
 
-    @media (min-width: 980px) {
+    @media (min-width: 992px) {
       dt {
         float: left !important;
         width: auto !important;
