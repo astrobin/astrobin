@@ -166,8 +166,8 @@
   }
 
   .user-card .avatar {
-    width: 140px;
-    height: 140px;
+    width: 183px;
+    height: 183px;
     margin-top: -10px;
   }
 
@@ -265,7 +265,7 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: $sm-maxpx) {
   body, .astrobin-container {
     padding: 0;
   }
@@ -532,6 +532,11 @@
       > .user-card {
         margin: 0;
         box-shadow: 0 0 2rem $black;
+
+        .avatar {
+          width: 157px;
+          height: 157px;
+        }
       }
 
       > .about,
