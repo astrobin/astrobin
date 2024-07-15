@@ -12,10 +12,6 @@
             <h4 class="alert-heading">
                 <i class="icon-fire"></i> {% trans "Error!" %}
             </h4>
-
-            <a href="{% url 'image_detail' image.get_id %}">
-                {{ error_message }}
-            </a>
         </div>
     {% endif %}
 {% else %}

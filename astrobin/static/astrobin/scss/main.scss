@@ -241,8 +241,8 @@ li.astrobin-thumbnail {
   }
 
   .alert-error {
-    width: 80px;
-    height: 80px;
+    width: calc(100% - 48px - 4px);
+    height: calc(100% - 48px - 4px);
     margin: 0;
     border-radius: 20px;
     text-align: center;
@@ -2451,6 +2451,36 @@ form.avatar-delete {
 
   .gallery-section-public .astrobin-image-container.wip figure img {
     opacity: .4;
+  }
+
+  li.astrobin-thumbnail {
+    @media (min-width: $xl-min) {
+      width: calc(100%/7 - 4px);
+    }
+
+    @media (max-width: $lg-max) {
+      width: calc(100%/6 - 4px);
+    }
+
+    @media (max-width: $md-min) {
+      width: calc(100%/5 - 4px);
+    }
+
+    @media (max-width: $sm-min) {
+      width: calc(100%/6 - 4px);
+    }
+
+    @media (max-width: $xs-max) {
+      width: calc(100%/4 - 4px);
+    }
+
+    @media (max-width: 430px) {
+      width: calc(100%/3 - 4px);
+    }
+
+    @media (max-width: 240px) {
+      width: calc(100%/2 - 4px);
+    }
   }
 }
 
