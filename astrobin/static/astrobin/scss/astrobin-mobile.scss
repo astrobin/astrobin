@@ -265,7 +265,7 @@
   }
 }
 
-@media screen and (max-width: $sm-maxpx) {
+@media screen and (max-width: $sm-max) {
   body, .astrobin-container {
     padding: 0;
   }
