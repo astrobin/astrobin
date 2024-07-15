@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-06 11:28+0000\n"
+"POT-Creation-Date: 2024-07-15 11:11+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4840,10 +4840,10 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                            AstroBin's Marketplace has <strong>%(count)s</"
-"strong> items similar to what you're\n"
-"                            looking for!\n"
-"                        "
+"                                AstroBin's Marketplace has <strong>"
+"%(count)s</strong> items similar to what you're\n"
+"                                looking for!\n"
+"                            "
 msgstr ""
 
 msgid "Take a look!"
@@ -6970,6 +6970,13 @@ msgstr "Έχετε κάνει έξοδο. Ελάτε πίσω σύντομα!"
 msgid "Password changed"
 msgstr "Ο κωδικός σας έχει αλλάξει"
 
+#, python-format
+msgid ""
+"As AstroBin has detected that your current password is insecure, you may not "
+"change it yourself. Please <a href=\"%(contact_url)s\">contact us</a> to "
+"request a password reset."
+msgstr ""
+
 msgid "Password reset successfully"
 msgstr "Ο κωδικός σας επανήλθε με επιτυχία"
 
@@ -8105,6 +8112,9 @@ msgid ""
 msgstr ""
 
 msgid "Earth's moon"
+msgstr ""
+
+msgid "Annular solar eclipse"
 msgstr ""
 
 msgid "Other solar system object"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-06 11:28+0000\n"
+"POT-Creation-Date: 2024-07-15 11:11+0000\n"
 "PO-Revision-Date: 2021-03-23 01:39+0000\n"
 "Last-Translator: mustastum <scriptyper@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4822,10 +4822,10 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                            AstroBin's Marketplace has <strong>%(count)s</"
-"strong> items similar to what you're\n"
-"                            looking for!\n"
-"                        "
+"                                AstroBin's Marketplace has <strong>"
+"%(count)s</strong> items similar to what you're\n"
+"                                looking for!\n"
+"                            "
 msgstr ""
 
 msgid "Take a look!"
@@ -6977,6 +6977,13 @@ msgstr "Oturumunuzu kapattınız. En kısa zamanda tekrar bekliyoruz!"
 msgid "Password changed"
 msgstr "Şifre değiştirildi"
 
+#, python-format
+msgid ""
+"As AstroBin has detected that your current password is insecure, you may not "
+"change it yourself. Please <a href=\"%(contact_url)s\">contact us</a> to "
+"request a password reset."
+msgstr ""
+
 msgid "Password reset successfully"
 msgstr "Şifre sıfırlama başarılı"
 
@@ -8101,6 +8108,9 @@ msgid ""
 msgstr ""
 
 msgid "Earth's moon"
+msgstr ""
+
+msgid "Annular solar eclipse"
 msgstr ""
 
 msgid "Other solar system object"
