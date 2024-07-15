@@ -1563,7 +1563,10 @@ astrobin_common = {
         });
 
         $(".dropdown-menu").on('click', function(event) {
-            if ($(event.target).is('a')) {
+            const $target = $(event.target);
+            const $link = $target.closest('a');
+
+            if (($target.is('a') || $link.length)) {
               // Let the link open
               return;
             }
