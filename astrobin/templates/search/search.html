@@ -29,25 +29,6 @@
     {% if request.GET.d == "i" or request.GET.d == None %}
         <div class="subnav subnav-fixed">
             <ul class="nav nav-pills">
-                <li class="dropdown">
-                    {% if valid_usersubscription|can_access_advanced_search %}
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-sort icon-white"></i>
-                            {% trans "Sort" %}
-                            <span class="caret"></span>
-                        </a>
-                    {% else %}
-                        <a data-toggle="modal" href="#feature-restricted-modal">
-                            <i class="icon-sort icon-white"></i>
-                            {% trans "Sort" %}
-                        </a>
-                    {% endif %}
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">{% trans "The Sort options have moved to the filters sidebar." %}</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="pull-right">
                     <a href="javascript:;" data-fancybox-trigger="image-list">
                         <i class="icon-play"></i>
