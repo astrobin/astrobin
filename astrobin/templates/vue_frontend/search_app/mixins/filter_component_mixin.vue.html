@@ -1,15 +1,49 @@
 <script>
-    var FilterComponentMixin = {
-        data: function() {
+    const FilterComponentMixin = {
+        data: function () {
             return {
                 highlighted: true
             };
         },
         created: function () {
-            var self = this;
-            setTimeout(function() {
+            const self = this;
+
+            setTimeout(function () {
                 self.highlighted = false;
             }, 300);
+        },
+        methods: {
+            initMatchTypeSelect: function (id, name, property) {
+                const self = this;
+                const $select = $(self.$el).find(id);
+
+                astrobin_common.initSelect2($select);
+
+                // Attach a change event listener to the Select2 component
+                $select.on('change', function () {
+                    const newValue = $(this).val();
+                    self[property] = newValue;
+                    self.$emit('update:' + name, newValue);
+                    self.updateHiddenInput(name, newValue);
+                });
+
+                // Ensure the initial value is set correctly
+                $select.val(this[property]).trigger('change');
+            },
+            updateHiddenInput: function (name, value) {
+                const input = this.$el.querySelector(`input[name="${name}"]`);
+                if (input) {
+                    input.value = value;
+                }
+            },
+            unregisterMatchTypeChanges: function (id) {
+                $(this.$el).find(id).off('change');
+            }
+        },
+        computed: {
+            showMatchTypeSelect: function () {
+                return this.value && this.value.length > 1;
+            }
         }
-    }
+    };
 </script>

@@ -9,6 +9,17 @@
                            placeholder="{% trans "Select" %}">
             </v-multiselect>
             <input type="hidden" name="color_or_mono" :value="getFormValue()">
+        
+            <div v-if="showMatchTypeSelect">
+                <label for="color_or_mono_op">
+                    {{ _('Match choices')|escapejs }}
+                </label>
+                <select id="color_or_mono_op" class="form-control" data-minimum-results-for-search="Infinity">
+                    <option value="ANY">{{ _('Any')|escapejs }}</option>
+                    <option value="ALL">{{ _('All')|escapejs }}</option>
+                </select>
+                <input type="hidden" name="color_or_mono_op" :value="selectedColorOrMonoOp">
+            </div>
         </div>
     {% else %}
         {% include "./_filter_requires_ultimate.html" %}
@@ -18,15 +29,20 @@
 <script>
     Vue.component("color-or-mono-filter", {
         template: "#color-or-mono-filter-template",
-        props: [
-            "colorOrMono"
-        ],
+        props: {
+            colorOrMono: String,
+            colorOrMonoOp: {
+                type: String,
+                default: 'ANY'
+            }
+        },
         mixins: [
             FilterComponentMixin
         ],
         data: function () {
             return {
                 value: [],
+                selectedColorOrMonoOp: this.colorOrMonoOp,
                 options: [
                     {
                         id: "C",
@@ -50,6 +66,21 @@
                 }
             }
         },
+        mounted: function() {
+            this.initMatchTypeSelect("#color_or_mono_op", "colorOrMonoOp", "selectedColorOrMonoOp");
+        },
+        watch: {
+            selectedColorOrMonoOp: function (newVal) {
+                this.updateHiddenInput('color_or_mono_op', newVal);
+            },
+            showMatchTypeSelect: function (newVal) {
+                if (newVal) {
+                    this.$nextTick(() => {
+                        this.initMatchTypeSelect("#color_or_mono_op", "colorOrMonoOp", "selectedColorOrMonoOp");
+                    });
+                }
+            }
+        },
         methods: {
             getFormValue: function () {
                 if (Array.isArray(this.value)) {
@@ -64,6 +95,9 @@
 
                 return null;
             }
+        },
+        beforeDestroy: function() {
+            this.unregisterMatchTypeChanges("#color_or_mono_op");
         }
     });
 </script>

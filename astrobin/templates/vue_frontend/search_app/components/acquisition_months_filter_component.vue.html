@@ -6,8 +6,8 @@
         <div class="form-group" :class="{highlighted: highlighted}">
             <v-multiselect v-model="value" :options="options" track-by="id" label="label" selectLabel=""
                            deselectLabel="" selectedLabel="" :searchable="true" :multiple="true"
-                           placeholder="{% trans "Select" %}"></v-multiselect>
-            <input type="hidden" name="acquisition_months" :value="getFormValue()">
+                           placeholder="{% trans "Select" %}"
+            ></v-multiselect>
             <span class="help-block">
                 <p>
                     {% blocktrans trimmed %}
@@ -15,6 +15,18 @@
                     {% endblocktrans %}
                 </p>
             </span>
+            <input type="hidden" name="acquisition_months" :value="getFormValue()">
+
+            <div v-if="showMatchTypeSelect">
+                <label for="acquisition_months_op">
+                    {{ _('Match choices')|escapejs }}
+                </label>
+                <select id="acquisition_months_op" class="form-control" data-minimum-results-for-search="Infinity">
+                    <option value="ANY">{{ _('Any')|escapejs }}</option>
+                    <option value="ALL">{{ _('All')|escapejs }}</option>
+                </select>
+                <input type="hidden" name="acquisition_months_op" :value="selectedAcquisitionMonthsOp">
+            </div>
         </div>
     {% else %}
         {% include "./_filter_requires_ultimate.html" %}
@@ -24,15 +36,20 @@
 <script>
     Vue.component("acquisition-months-filter", {
         template: "#acquisition-months-filter-template",
-        props: [
-            "acquisitionMonths"
-        ],
+        props: {
+            acquisitionMonths: String,
+            acquisitionMonthsOp: {
+                type: String,
+                default: 'ANY'
+            }
+        },
         mixins: [
             FilterComponentMixin
         ],
         data: function () {
             return {
                 value: [],
+                selectedAcquisitionMonthsOp: this.acquisitionMonthsOp,
                 options: [
                     {id: "Jan", label: "{{ _('January')|escapejs }}"},
                     {id: "Feb", label: "{{ _('February')|escapejs }}"},
@@ -47,7 +64,7 @@
                     {id: "Nov", label: "{{ _('November')|escapejs }}"},
                     {id: "Dec", label: "{{ _('December')|escapejs }}"},
                 ]
-            }
+            };
         },
         created: function () {
             if (this.acquisitionMonths) {
@@ -57,6 +74,26 @@
                     if (months.indexOf(this.options[i].id) > -1) {
                         this.value.push(this.options[i]);
                     }
+                }
+            }
+        },
+        mounted: function() {
+            this.initMatchTypeSelect("#acquisition_months_op", "acquisitionMonthsOp", "selectedAcquisitionMonthsOp");
+        },
+        watch: {
+            value: function (newVal) {
+                const formValue = this.getFormValue();
+                this.$emit('update:acquisitionMonths', formValue);
+                this.updateHiddenInput('acquisition_months', formValue);
+            },
+            selectedAcquisitionMonthsOp: function (newVal) {
+                this.updateHiddenInput('acquisition_months_op', newVal);
+            },
+            showMatchTypeSelect: function (newVal) {
+                if (newVal) {
+                    this.$nextTick(() => {
+                        this.initMatchTypeSelect("#acquisition_months_op", "acquisitionMonthsOp", "selectedAcquisitionMonthsOp");
+                    });
                 }
             }
         },
@@ -73,7 +110,10 @@
                 }
 
                 return null;
-            }
+            },
+        },
+        beforeDestroy: function() {
+            this.unregisterMatchTypeChanges("#acquisition_months_op");
         }
     });
 </script>

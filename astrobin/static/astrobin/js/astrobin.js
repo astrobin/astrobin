@@ -1501,7 +1501,7 @@ astrobin_common = {
         });
     },
 
-    init: function (config) {
+    initSelect2: function ($el) {
         function formatSelect2Results(state) {
             if (!state.id) {
                 return state.text;
@@ -1535,6 +1535,35 @@ astrobin_common = {
             }
         }
 
+        const $select = $el;
+
+        if ($select.data('select2')) {
+            return; // Select2 is already initialized
+        }
+
+        const placeholder = $select.data('placeholder') || '';
+        const allowClear = $select.data('allow-clear') || false;
+        const minimumInputLength = $select.data('minimum-input-length') || 0;
+        const maximumInputLength = $select.data('maximum-input-length') || null;
+        let minimumResultsForSearch = $select.data('minimum-results-for-search') || 0;
+
+        if (minimumResultsForSearch === "Infinity") {
+            minimumResultsForSearch = Infinity;
+        }
+
+        $select.select2({
+            theme: "flat",
+            placeholder: placeholder,
+            allowClear: allowClear,
+            minimumInputLength: minimumInputLength,
+            maximumInputLength: maximumInputLength,
+            minimumResultsForSearch: minimumResultsForSearch,
+            templateResult: formatSelect2Results,
+            templateSelection: formatSelect2Selection
+        });
+    },
+
+    init: function (config) {
         /* Init */
         $.extend(true, astrobin_common.config, config);
 
@@ -1596,18 +1625,8 @@ astrobin_common = {
             dividerLocation: 0.5
         });
 
-        if (window.innerWidth >= 980) {
-            $("select:not([multiple])").select2({
-                theme: "flat",
-                templateResult: formatSelect2Results,
-                templateSelection: formatSelect2Selection
-            });
-        }
-
-        $("select.select2").select2({
-            theme: "flat",
-            templateResult: formatSelect2Results,
-            templateSelection: formatSelect2Selection
+        $("select:not([multiple])").each(function () {
+            astrobin_common.initSelect2($(this));
         });
 
         astrobin_common.init_ajax_csrf_token();
