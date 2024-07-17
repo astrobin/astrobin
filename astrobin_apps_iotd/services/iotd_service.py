@@ -603,11 +603,12 @@ class IotdService:
             return False, MayNotSubmitToIotdTpReason.NO_TELESCOPE_OR_CAMERA
 
         if image.acquisition_set.count() == 0 and image.subject_type in (
-                SubjectType.DEEP_SKY,
-                SubjectType.SOLAR_SYSTEM,
-                SubjectType.WIDE_FIELD,
-                SubjectType.STAR_TRAILS,
-                SubjectType.LANDSCAPE,
+            SubjectType.DEEP_SKY,
+            SubjectType.SOLAR_SYSTEM,
+            SubjectType.WIDE_FIELD,
+            SubjectType.STAR_TRAILS,
+            SubjectType.LANDSCAPE,
+            SubjectType.ARTIFICIAL_SATELLITE
         ):
             return False, MayNotSubmitToIotdTpReason.NO_ACQUISITIONS
 
@@ -638,6 +639,7 @@ class IotdService:
                 SubjectType.NORTHERN_LIGHTS,
                 SubjectType.NOCTILUCENT_CLOUDS,
                 SubjectType.LANDSCAPE,
+                SubjectType.ARTIFICIAL_SATELLITE,
             ]
         )
 
@@ -697,6 +699,9 @@ class IotdService:
             total_landscape_images=total_submitted_images_queryset \
                 .filter(subject_type=SubjectType.LANDSCAPE) \
                 .count(),
+            total_artificial_satellite_images=total_submitted_images_queryset \
+                .filter(subject_type=SubjectType.ARTIFICIAL_SATELLITE) \
+                .count(),
 
             deep_sky_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
@@ -725,6 +730,10 @@ class IotdService:
             landscape_iotds=Iotd.objects \
                 .filter(date__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.LANDSCAPE) \
+                .count(),
+            artificial_satellite_iotds=Iotd.objects \
+                .filter(date__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.ARTIFICIAL_SATELLITE) \
                 .count(),
 
             deep_sky_tps=TopPickArchive.objects \
@@ -755,6 +764,10 @@ class IotdService:
                 .filter(image__published__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.LANDSCAPE) \
                 .count(),
+            artificial_satellite_tps=TopPickArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.ARTIFICIAL_SATELLITE) \
+                .count(),
 
             deep_sky_tpns=TopPickNominationsArchive.objects \
                 .filter(image__published__gt=cutoff) \
@@ -783,6 +796,10 @@ class IotdService:
             landscape_tpns=TopPickNominationsArchive.objects \
                 .filter(image__published__gt=cutoff) \
                 .filter(image__subject_type=SubjectType.LANDSCAPE) \
+                .count(),
+            artificial_satellite_tpns=TopPickNominationsArchive.objects \
+                .filter(image__published__gt=cutoff) \
+                .filter(image__subject_type=SubjectType.ARTIFICIAL_SATELLITE) \
                 .count(),
 
             # Breakdown by data source.

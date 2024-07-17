@@ -405,6 +405,7 @@ class UserService:
                                 SubjectType.NORTHERN_LIGHTS,
                                 SubjectType.NOCTILUCENT_CLOUDS,
                                 SubjectType.LANDSCAPE,
+                                SubjectType.ARTIFICIAL_SATELLITE,
                                 SubjectType.OTHER
                             )
                         ) &
@@ -463,6 +464,7 @@ class UserService:
                             Q(subject_type=SubjectType.NORTHERN_LIGHTS) |
                             Q(subject_type=SubjectType.NOCTILUCENT_CLOUDS) |
                             Q(subject_type=SubjectType.LANDSCAPE) |
+                            Q(subject_type=SubjectType.ARTIFICIAL_SATELLITE) |
                             Q(subject_type=SubjectType.STAR_TRAILS)
                     ) &
                     (Q(imaging_telescopes=None) | Q(imaging_cameras=None))
@@ -515,6 +517,7 @@ class UserService:
             menu += [('NORTHERN_LIGHTS', _("Northern lights"))]
             menu += [('NOCTILUCENT_CLOUDS', _("Noctilucent clouds"))]
             menu += [('LANDSCAPE', _("Landscape"))]
+            menu += [('ARTIFICIAL_SATELLITE', _("Artificial satellite"))]
             menu += [('GEAR', _("Gear"))]
             menu += [('OTHER', _("Other"))]
 
@@ -541,6 +544,9 @@ class UserService:
 
             elif active == 'LANDSCAPE':
                 queryset = queryset.filter(subject_type=SubjectType.LANDSCAPE)
+
+            elif active == 'ARTIFICIAL_SATELLITE':
+                queryset = queryset.filter(subject_type=SubjectType.ARTIFICIAL_SATELLITE)
 
             elif active == 'GEAR':
                 queryset = queryset.filter(subject_type=SubjectType.GEAR)
@@ -602,6 +608,7 @@ class UserService:
                             SubjectType.NORTHERN_LIGHTS,
                             SubjectType.NOCTILUCENT_CLOUDS,
                             SubjectType.LANDSCAPE,
+                            SubjectType.ARTIFICIAL_SATELLITE,
                         )
                     ) &
                     (
@@ -621,6 +628,7 @@ class UserService:
                             SubjectType.NORTHERN_LIGHTS,
                             SubjectType.NOCTILUCENT_CLOUDS,
                             SubjectType.LANDSCAPE,
+                            SubjectType.ARTIFICIAL_SATELLITE,
                         )
                     ) &
                     Q(acquisition=None)
