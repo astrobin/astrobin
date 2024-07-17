@@ -15,6 +15,17 @@
                     {% endblocktrans %}
                 </p>
             </span>
+
+            <div v-if="showMatchTypeSelect">
+                <label for="filter_types_op">
+                    {{ _('Match choices')|escapejs }}
+                </label>
+                <select id="filter_types_op" class="form-control" data-minimum-results-for-search="Infinity">
+                    <option value="ANY">{{ _('Any')|escapejs }}</option>
+                    <option value="ALL">{{ _('All')|escapejs }}</option>
+                </select>
+                <input type="hidden" name="filter_types_op" :value="selectedFilterTypesOp">
+            </div>
         </div>
     {% else %}
         {% include "./_filter_requires_ultimate.html" %}
@@ -24,15 +35,20 @@
 <script>
     Vue.component("filter-types-filter", {
         template: "#filter-types-filter-template",
-        props: [
-            "filterTypes"
-        ],
+        props: {
+            filterTypes: String,
+            filterTypesOp: {
+                type: String,
+                default: 'ANY'
+            }
+        },
         mixins: [
             FilterComponentMixin
         ],
         data: function () {
             return {
                 value: [],
+                selectedFilterTypesOp: this.filterTypesOp, 
                 options: [
                     {id: "H_ALPHA", label: "{{ _('Hydrogen-alpha (Hα)')|escapejs }}"},
                     {id: "H_BETA", label: "{{ _('Hydrogen-beta (Hβ)')|escapejs }}"},
@@ -89,6 +105,21 @@
 
                 return null;
             }
-        }
+        },
+        mounted: function() {
+            this.initMatchTypeSelect("#filter_types_op", "filterTypesOp", "selectedFilterTypesOp");
+        },
+        watch: {
+            selectedFilterTypesOp: function (newVal) {
+                this.updateHiddenInput('filter_types_op', newVal);
+            },
+            showMatchTypeSelect: function (newVal) {
+                if (newVal) {
+                    this.$nextTick(() => {
+                        this.initMatchTypeSelect("#filter_types_op", "filterTypesOp", "selectedFilterTypesOp");
+                    });
+                }
+            }
+        },
     });
 </script>

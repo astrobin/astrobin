@@ -198,6 +198,7 @@ body#search {
 
       .multiselect {
         min-height: 2rem !important;
+        width: calc(100% - 3px) !important;
       }
 
       .multiselect-single {
@@ -213,6 +214,10 @@ body#search {
         position: absolute;
         top: 1rem;
         right: 1rem;
+      }
+
+      label {
+        margin-top: 1rem;
       }
     }
   }

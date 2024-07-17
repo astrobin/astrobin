@@ -1,5 +1,6 @@
 import re
 from datetime import datetime, timedelta
+from enum import Enum
 from functools import reduce
 from operator import and_, or_
 
@@ -82,10 +83,13 @@ FIELDS = (
     'size_max',
     'modified_camera',
     'color_or_mono',
+    'color_or_mono_op',
     'topic',
     'filter_types',
+    'filter_types_op',
     'user_id',
     'acquisition_months',
+    'acquisition_months_op',
     'username',
     'telescope_ids',
     'camera_ids',
@@ -97,6 +101,11 @@ FIELDS = (
     # Sorting
     'sort'
 )
+
+
+class MatchType(Enum):
+    ALL = 'ALL'
+    ANY = 'ANY'
 
 
 class CustomContain(BaseInput):
@@ -180,10 +189,13 @@ class AstroBinSearchForm(SearchForm):
     size_max = forms.IntegerField(required=False)
     modified_camera = forms.CharField(required=False)
     color_or_mono = forms.CharField(required=False)
+    color_or_mono_op = forms.CharField(required=False)
     topic = forms.IntegerField(required=False)
     filter_types = forms.CharField(required=False)
+    filter_types_op = forms.CharField(required=False)
     user_id = forms.IntegerField(required=False)
     acquisition_months = forms.CharField(required=False)
+    acquisition_months_op = forms.CharField(required=False)
     username = forms.CharField(required=False)
 
     # For precise ID based equipment search
@@ -768,7 +780,13 @@ class AstroBinSearchForm(SearchForm):
 
     def filter_by_color_or_mono(self, results):
         value = self.cleaned_data.get("color_or_mono")
+        color_or_mono_op = self.cleaned_data.get("color_or_mono_op")
         queries = []
+
+        if color_or_mono_op == MatchType.ALL.value:
+            op = and_
+        else:
+            op = or_
 
         if value is not None and value != "":
             types = value.split(',')
@@ -780,7 +798,7 @@ class AstroBinSearchForm(SearchForm):
                 queries.append(Q(has_mono_camera=True))
 
         if len(queries) > 0:
-            results = results.filter(reduce(or_, queries))
+            results = results.filter(reduce(op, queries))
 
         return results
 
@@ -794,7 +812,13 @@ class AstroBinSearchForm(SearchForm):
 
     def filter_by_filter_types(self, results):
         filter_types = self.cleaned_data.get("filter_types")
+        filter_types_op = self.cleaned_data.get("filter_types_op")
         queries = []
+
+        if filter_types_op == MatchType.ALL.value:
+            op = and_
+        else:
+            op = or_
 
         if filter_types is not None and filter_types != "":
             types = filter_types.split(',')
@@ -802,7 +826,7 @@ class AstroBinSearchForm(SearchForm):
                 queries.append(Q(filter_types=x))
 
         if len(queries) > 0:
-            results = results.filter(reduce(and_, queries))
+            results = results.filter(reduce(op, queries))
 
         return results
 
@@ -816,6 +840,12 @@ class AstroBinSearchForm(SearchForm):
 
     def filter_by_acquisition_months(self, results):
         acquisition_months = self.cleaned_data.get("acquisition_months")
+        acquisition_months_op = self.cleaned_data.get("acquisition_months_op")
+
+        if acquisition_months_op == MatchType.ALL.value:
+            op = and_
+        else:
+            op = or_
 
         if acquisition_months is not None and acquisition_months != "":
             months = acquisition_months.split(',')
@@ -825,7 +855,7 @@ class AstroBinSearchForm(SearchForm):
                 queries.append(Q(acquisition_months=month))
 
             if len(queries) > 0:
-                results = results.filter(reduce(or_, queries))
+                results = results.filter(reduce(op, queries))
 
         return results
 
