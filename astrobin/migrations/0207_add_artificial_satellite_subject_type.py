@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                          ('STAR_TRAILS', 'Star trails'), ('NORTHERN_LIGHTS', 'Northern lights'),
                          ('NOCTILUCENT_CLOUDS', 'Noctilucent clouds'), ('LANDSCAPE', 'Landscape'),
                          ('ARTIFICIAL_SATELLITE', 'Artificial satellite'), ('GEAR', 'Gear'), ('OTHER', 'Other')],
-                max_length=18, verbose_name='Subject type'
+                max_length=20, verbose_name='Subject type'
             ),
         ),
     ]
