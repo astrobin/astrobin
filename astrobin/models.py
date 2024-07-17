@@ -903,6 +903,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (SubjectType.NORTHERN_LIGHTS, _("Northern lights")),
         (SubjectType.NOCTILUCENT_CLOUDS, _("Noctilucent clouds")),
         (SubjectType.LANDSCAPE, _("Landscape")),
+        (SubjectType.ARTIFICIAL_SATELLITE, _("Artificial satellite")),
         (SubjectType.GEAR, _("Gear")),
         (SubjectType.OTHER, _("Other")),
     )

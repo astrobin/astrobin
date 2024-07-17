@@ -298,6 +298,7 @@ class IotdStats(models.Model):
     total_northern_lights_images = models.PositiveIntegerField()
     total_noctilucent_clouds_images = models.PositiveIntegerField()
     total_landscape_images = models.PositiveIntegerField()
+    total_artificial_satellite_images = models.PositiveIntegerField()
 
     deep_sky_iotds = models.PositiveIntegerField()
     solar_system_iotds = models.PositiveIntegerField()
@@ -306,6 +307,7 @@ class IotdStats(models.Model):
     northern_lights_iotds = models.PositiveIntegerField()
     noctilucent_clouds_iotds = models.PositiveIntegerField()
     landscape_iotds = models.PositiveIntegerField()
+    artificial_satellite_iotds = models.PositiveIntegerField()
 
     deep_sky_tps = models.PositiveIntegerField()
     solar_system_tps = models.PositiveIntegerField()
@@ -314,6 +316,7 @@ class IotdStats(models.Model):
     northern_lights_tps = models.PositiveIntegerField()
     noctilucent_clouds_tps = models.PositiveIntegerField()
     landscape_tps = models.PositiveIntegerField()
+    artificial_satellite_tps = models.PositiveIntegerField()
 
     deep_sky_tpns = models.PositiveIntegerField()
     solar_system_tpns = models.PositiveIntegerField()
@@ -322,6 +325,7 @@ class IotdStats(models.Model):
     northern_lights_tpns = models.PositiveIntegerField()
     noctilucent_clouds_tpns = models.PositiveIntegerField()
     landscape_tpns = models.PositiveIntegerField()
+    artificial_satellite_tpns = models.PositiveIntegerField()
 
     # Breakdown by data source.
     total_backyard_images = models.PositiveIntegerField()

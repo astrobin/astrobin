@@ -21,7 +21,9 @@ class StatsSerializer(serializers.ModelSerializer):
         r['star_trails_iotds'] = p(r['star_trails_iotds'], r['total_iotds'])
         r['northern_lights_iotds'] = p(r['northern_lights_iotds'], r['total_iotds'])
         r['noctilucent_clouds_iotds'] = p(r['noctilucent_clouds_iotds'], r['total_iotds'])
-        
+        r['landscape_iotds'] = p(r['landscape_iotds'], r['total_iotds'])
+        r['artificial_satellite_iotds'] = p(r['artificial_satellite_iotds'], r['total_iotds'])
+
         # Prepare TP percentages.
         r['deep_sky_tps'] = p(r['deep_sky_tps'], r['total_tps'])
         r['solar_system_tps'] = p(r['solar_system_tps'], r['total_tps'])
@@ -29,6 +31,8 @@ class StatsSerializer(serializers.ModelSerializer):
         r['star_trails_tps'] = p(r['star_trails_tps'], r['total_tps'])
         r['northern_lights_tps'] = p(r['northern_lights_tps'], r['total_tps'])
         r['noctilucent_clouds_tps'] = p(r['noctilucent_clouds_tps'], r['total_tps'])
+        r['landscape_tps'] = p(r['landscape_tps'], r['total_tps'])
+        r['artificial_satellite_tps'] = p(r['artificial_satellite_tps'], r['total_tps'])
 
         # Prepare TPN percentages.
         r['deep_sky_tpns'] = p(r['deep_sky_tpns'], r['total_tpns'])
@@ -37,6 +41,8 @@ class StatsSerializer(serializers.ModelSerializer):
         r['star_trails_tpns'] = p(r['star_trails_tpns'], r['total_tpns'])
         r['northern_lights_tpns'] = p(r['northern_lights_tpns'], r['total_tpns'])
         r['noctilucent_clouds_tpns'] = p(r['noctilucent_clouds_tpns'], r['total_tpns'])
+        r['landscape_tpns'] = p(r['landscape_tpns'], r['total_tpns'])
+        r['artificial_satellite_tpns'] = p(r['artificial_satellite_tpns'], r['total_tpns'])
 
         # Prepare total percentages.
         r['total_deep_sky_images'] = p(r['total_deep_sky_images'], r['total_submitted_images'])
@@ -45,6 +51,8 @@ class StatsSerializer(serializers.ModelSerializer):
         r['total_star_trails_images'] = p(r['total_star_trails_images'], r['total_submitted_images'])
         r['total_northern_lights_images'] = p(r['total_northern_lights_images'], r['total_submitted_images'])
         r['total_noctilucent_clouds_images'] = p(r['total_noctilucent_clouds_images'], r['total_submitted_images'])
+        r['total_landscape_images'] = p(r['total_landscape_images'], r['total_submitted_images'])
+        r['total_artificial_satellite_images'] = p(r['total_artificial_satellite_images'], r['total_submitted_images'])
 
         # Data source
         
