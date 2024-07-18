@@ -16,6 +16,7 @@ from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 
 from astrobin.enums.license import License
 from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, Collection, UserProfile
+from astrobin.utils import get_client_ip
 from astrobin.views import get_image_or_404
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
@@ -42,7 +43,7 @@ class AppAuthentication(Authentication):
 
         try:
             App.objects.get(secret=app_secret, key=app_key)
-            ip_address = request.META.get('REMOTE_ADDR')
+            ip_address = get_client_ip(request)
             log.info(f"API Key: {app_key}, IP: {ip_address}, Request Path: {request.path}, Request Method: {request.method}")
         except App.DoesNotExist:
             return False
