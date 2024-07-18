@@ -1,3 +1,4 @@
+import logging
 from typing import List
 
 from avatar.templatetags.avatar_tags import avatar_url
@@ -25,6 +26,9 @@ from common.utils import get_segregated_reader_database
 from toggleproperties.models import ToggleProperty
 
 
+log = logging.getLogger(__name__)
+
+
 class AppAuthentication(Authentication):
     def is_authenticated(self, request, **kwargs):
         try:
@@ -37,7 +41,9 @@ class AppAuthentication(Authentication):
             return False
 
         try:
-            app = App.objects.get(secret=app_secret, key=app_key)
+            App.objects.get(secret=app_secret, key=app_key)
+            ip_address = request.META.get('REMOTE_ADDR')
+            log.info(f"API Key: {app_key}, IP: {ip_address}, Request Path: {request.path}, Request Method: {request.method}")
         except App.DoesNotExist:
             return False
 
