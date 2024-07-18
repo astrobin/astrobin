@@ -60,6 +60,10 @@ class Solver(AbstractPlateSolvingBackend):
         if advanced_settings:
             if advanced_settings.show_grid:
                 layers.append('Grid')
+            if advanced_settings.show_ecliptic:
+                layers.append('Ecliptic')
+            if advanced_settings.show_galactic_equator:
+                layers.append('Galactic Equator')
             if advanced_settings.show_constellation_borders:
                 layers.append('Constellation Borders')
             if advanced_settings.show_constellation_lines:

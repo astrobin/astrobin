@@ -55,6 +55,16 @@ class PlateSolvingAdvancedSettings(models.Model):
         verbose_name=_("Show equatorial grid"),
     )
 
+    show_ecliptic = models.BooleanField(
+        default=True,
+        verbose_name=_("Show ecliptic"),
+    )
+
+    show_galactic_equator = models.BooleanField(
+        default=True,
+        verbose_name=_("Show galactic equator"),
+    )
+
     show_constellation_borders = models.BooleanField(
         default=True,
         verbose_name=_("Show constellation borders"),
