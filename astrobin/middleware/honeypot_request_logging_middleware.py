@@ -17,4 +17,18 @@ class HoneypotRequestLoggingMiddleware:
 
     def log_request(self, request):
         ip = get_client_ip(request)
-        self.logger.debug(f"Honeypot request from {ip}: {request.method} {request.get_full_path()}")
+        user_agent = request.META.get('HTTP_USER_AGENT', '')
+        headers = {key: value for key, value in request.META.items() if key.startswith('HTTP_')}
+        body = request.body.decode('utf-8') if request.body else 'No body content'
+
+        self.logger.info(
+            f"""
+                    Honeypot Request
+                    IP Address: {ip}
+                    Request Path: {request.path}
+                    Request Method: {request.method}
+                    User Agent: {user_agent}
+                    Headers: {headers}
+                    Body: {body}
+                """
+        )
