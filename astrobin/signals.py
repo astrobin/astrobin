@@ -1823,7 +1823,10 @@ def on_password_change(sender, **kwargs):
             old_password = None
 
         if new_password != old_password:
-            UserProfile.objects.filter(user=user).update(detected_insecure_password=None)
+            UserProfile.objects.filter(user=user).update(
+                detected_insecure_password=None,
+                password_reset_token=None,
+            )
             # Clears django-rest-framework tokens
             Token.objects.filter(user=user).delete()
 
