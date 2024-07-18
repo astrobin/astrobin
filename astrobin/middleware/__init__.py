@@ -13,3 +13,4 @@ from .thread_locals_middleware import ThreadLocalsMiddleware
 from .request_logging_middleware import RequestLoggingMiddleware
 from .sentry_middleware import SentryMiddleware
 from .slow_request_logging_middleware import SlowRequestLoggingMiddleware
+from .honeypot_request_logging_middleware import HoneypotRequestLoggingMiddleware
