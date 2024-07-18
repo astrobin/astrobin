@@ -111,7 +111,10 @@ class LoginAttemptMiddleware(MiddlewareParentClass):
             validate_password(password, user)
             log.debug(f'login_attempt_middleware: user {handle} used a correct and valid password')
         except ValidationError:
-            UserProfile.objects.filter(user=user).update(detected_insecure_password=timezone.now())
+            UserProfile.objects.filter(user=user).update(
+                detected_insecure_password=timezone.now(),
+                password_reset_token=User.objects.make_random_password(length=32)
+            )
 
             log.debug(
                 f'login_attempt_middleware: user {handle} attempted to log in with password {password} '

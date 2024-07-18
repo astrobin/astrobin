@@ -3003,6 +3003,14 @@ class UserProfile(SafeDeleteModel):
         null=True
     )
 
+    # When a user has an insecure password, (see field above) we will send them a reminder to change it.
+    # The link in the reminder will have this token in it. It's a way to make sure that the user is the one
+    # who requested the password change.
+    password_reset_token = models.CharField(
+        max_length=32,
+        null=True
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
