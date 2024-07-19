@@ -156,7 +156,13 @@ h4.alert-heading {
 }
 
 .extra-alerts {
+  margin-top: 1.5rem;
+
   .alert {
     margin: 0 -30px 12px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
