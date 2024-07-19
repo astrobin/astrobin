@@ -111,11 +111,17 @@ class LoginAttemptMiddleware(MiddlewareParentClass):
             validate_password(password, user)
             log.debug(f'login_attempt_middleware: user {handle} used a correct and valid password')
         except ValidationError:
-            password_reset_token = User.objects.make_random_password(32)
             UserProfile.objects.filter(user=user).update(
                 detected_insecure_password=timezone.now(),
-                password_reset_token=password_reset_token
             )
+
+            if not user.userprofile.password_reset_token:
+                password_reset_token = User.objects.make_random_password(32)
+                UserProfile.objects.filter(user=user).update(
+                    password_reset_token=password_reset_token
+                )
+            else:
+                password_reset_token = user.userprofile.password_reset_token
 
             log.debug(
                 f'login_attempt_middleware: user {handle} attempted to log in with password {password} '
