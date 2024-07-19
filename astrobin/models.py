@@ -962,6 +962,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("GFA", "Goldfield Astronomical Observatory"),
         ("GMO", "Grand Mesa Observatory"),
         ("HAKOS", "Hakos Astro Farm"),
+        ("HAWK", "HAWK Observatory"),
         ("HCRO", "Howling Coyote Remote Observatories (HCRO)"),
         ("HMO", "Heaven's Mirror Observatory"),
         ("IC", "IC Astronomy Observatories"),
