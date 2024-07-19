@@ -10,6 +10,7 @@ from django.utils.translation import gettext
 
 from astrobin.fields import CURRENCY_CHOICES
 from astrobin_apps_equipment.types.marketplace_line_item_condition import MarketplaceLineItemCondition
+from astrobin_apps_equipment.types.marketplace_line_item_shipping_cost_type import MarketplaceLineItemShippingCostType
 from astrobin_apps_payments.models import ExchangeRate
 from common.models.hashed_model import HashedSafeDeleteModel
 
@@ -19,6 +20,13 @@ EQUIPMENT_ITEM_MARKETPLACE_LISTING_CONDITION_CHOICES = (
     (MarketplaceLineItemCondition.USED.value, gettext("Used")),
     (MarketplaceLineItemCondition.DAMAGED_OR_DEFECTIVE.value, gettext("Damaged or defective")),
     (MarketplaceLineItemCondition.OTHER.value, gettext("Other")),
+)
+
+EQUIPMENT_ITEM_MARKETPLACE_SHIPPING_COST_TYPE_CHOICES = (
+    (MarketplaceLineItemShippingCostType.NO_SHIPPING.value, "No shipping"),
+    (MarketplaceLineItemShippingCostType.COVERED_BY_SELLER.value, "Covered by seller"),
+    (MarketplaceLineItemShippingCostType.FIXED.value, "Fixed"),
+    (MarketplaceLineItemShippingCostType.TO_BE_AGREED.value, "To be agreed"),
 )
 
 
@@ -108,6 +116,14 @@ class EquipmentItemMarketplaceListingLineItem(HashedSafeDeleteModel):
     year_of_purchase = models.PositiveSmallIntegerField(
         null=True,
         blank=True,
+    )
+
+    shipping_cost_type = models.CharField(
+        max_length=32,
+        null=False,
+        blank=False,
+        default=MarketplaceLineItemShippingCostType.FIXED.value,
+        choices=EQUIPMENT_ITEM_MARKETPLACE_SHIPPING_COST_TYPE_CHOICES,
     )
 
     shipping_cost = models.PositiveSmallIntegerField(
