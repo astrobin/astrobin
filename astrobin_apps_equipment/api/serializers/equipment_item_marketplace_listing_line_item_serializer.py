@@ -39,6 +39,17 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
         if 'item_plain_text' in validated_data and validated_data['item_plain_text'] is not None:
             validated_data['item_object_id'] = None
 
+        if 'shipping_cost_type' in validated_data:
+            if validated_data['shipping_cost_type'] == 'NO_SHIPPING':
+                validated_data['shipping_cost'] = None
+            elif validated_data['shipping_cost_type'] == 'COVERED_BY_SELLER':
+                validated_data['shipping_cost'] = 0
+            elif validated_data['shipping_cost_type'] == 'TO_BE_AGREED':
+                validated_data['shipping_cost'] = None
+            elif validated_data['shipping_cost_type'] == 'FIXED':
+                if 'shipping_cost' not in validated_data or validated_data['shipping_cost'] is None:
+                    raise serializers.ValidationError("Shipping cost must be provided for fixed shipping cost type.")
+
         return super().update(instance, validated_data)
 
     def get_total_image_count(self, obj):
