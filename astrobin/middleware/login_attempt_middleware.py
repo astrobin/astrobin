@@ -111,9 +111,10 @@ class LoginAttemptMiddleware(MiddlewareParentClass):
             validate_password(password, user)
             log.debug(f'login_attempt_middleware: user {handle} used a correct and valid password')
         except ValidationError:
+            password_reset_token = User.objects.make_random_password(32)
             UserProfile.objects.filter(user=user).update(
                 detected_insecure_password=timezone.now(),
-                password_reset_token=User.objects.make_random_password(length=32)
+                password_reset_token=password_reset_token
             )
 
             log.debug(
@@ -121,4 +122,9 @@ class LoginAttemptMiddleware(MiddlewareParentClass):
                 f'and it does not meet security standards'
             )
 
-            push_notification([user], None, 'access_attempted_with_weak_password', {})
+            push_notification(
+                [user],
+                None,
+                'access_attempted_with_weak_password', {
+                    'token': password_reset_token
+                })

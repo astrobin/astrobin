@@ -34,7 +34,7 @@
 </p>
 
 <p>
-    <a class="btn btn-primary" href="{{ base_url }}{% url 'password_change' %}">
+    <a class="btn btn-primary" href="{{ base_url }}{% url 'password_change' %}?token={{ token }}">
         {% blocktrans trimmed %}Change your password{% endblocktrans %}<br/>
     </a>
 

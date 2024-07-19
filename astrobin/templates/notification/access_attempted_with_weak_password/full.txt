@@ -24,7 +24,7 @@
 https://welcome.astrobin.com/faq#is-my-security-protected
 
 {% blocktrans trimmed %}Change your password{% endblocktrans %}:
-{{ base_url }}{% url 'password_change' %}
+{{ base_url }}{% url 'password_change' %}?token={{ token }}
 
 {% trans "Two-factor Authentication" %}
 {% url 'two_factor:profile' %}
