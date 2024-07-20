@@ -12,6 +12,12 @@
     {% endif %}
 {% endblock %}
 
+{% block extra_alerts_container_extra_classes %}
+    {% if forum.category.slug == 'group-forums' or forum.category.slug == 'equipment-forums' %}
+        has-subnav
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumb %}
     {% with forum as object %}
         {% include "pybb/breadcrumb.html" %}
