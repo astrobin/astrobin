@@ -46,9 +46,6 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
                 validated_data['shipping_cost'] = 0
             elif validated_data['shipping_cost_type'] == 'TO_BE_AGREED':
                 validated_data['shipping_cost'] = None
-            elif validated_data['shipping_cost_type'] == 'FIXED':
-                if 'shipping_cost' not in validated_data or validated_data['shipping_cost'] is None:
-                    raise serializers.ValidationError("Shipping cost must be provided for fixed shipping cost type.")
 
         return super().update(instance, validated_data)
 
