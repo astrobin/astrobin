@@ -37,9 +37,9 @@ services:
       dockerfile: docker/astrobin.dockerfile
     healthcheck:
       test: curl --fail http://localhost:8083/account/login/ || exit 1
-      interval: 1s
+      interval: 10s
       timeout: 3s
-      retries: 120
+      retries: 30
     depends_on:
       redis:
         condition: service_healthy
