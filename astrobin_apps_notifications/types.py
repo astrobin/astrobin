@@ -382,6 +382,18 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'your_image_might_become_tpn',
+        _("Your image might become a Top Pick Nomination"),
+        '',
+        2
+    ),
+    (
+        'your_image_might_become_tp',
+        _("Your image might become a Top Pick"),
+        '',
+        2
+    ),
+    (
         'your_image_is_tpn',
         _("Your image was nominated to be a Top Pick"),
         '',

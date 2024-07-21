@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from astrobin.models import Image
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
+from astrobin_apps_iotd.services import IotdService
 from common.services import DateTimeService
 
 
@@ -21,12 +22,26 @@ def iotd_post_save(sender, instance: Iotd, created: bool, **kwargs):
 def iotd_vote_post_save(sender, instance: IotdVote, created: bool, **kwargs):
     if created:
         check_activity_level_and_update_reminders_count(sender, instance)
+        check_and_send_notification_for_enough_votes(instance.image)
 
 
 @receiver(post_save, sender=IotdSubmission)
 def iotd_submission_post_save(sender, instance: IotdSubmission, created: bool, **kwargs):
     if created:
         check_activity_level_and_update_reminders_count(sender, instance)
+        check_and_send_notification_for_enough_submissions(instance.image)
+
+
+def check_and_send_notification_for_enough_submissions(image: Image):
+    min_promotions = getattr(settings, 'IOTD_SUBMISSION_MIN_PROMOTIONS', 3)
+    if image.iotdsubmission_set.count() >= min_promotions:
+        IotdService.notify_about_reaching_enough_iotd_submissions(image)
+
+
+def check_and_send_notification_for_enough_votes(image: Image):
+    min_promotions = getattr(settings, 'IOTD_REVIEW_MIN_PROMOTIONS', 3)
+    if image.iotdvote_set.count() >= min_promotions:
+        IotdService.notify_about_reaching_enough_iotd_votes(image)
 
 
 def check_activity_level_and_update_reminders_count(sender, instance):

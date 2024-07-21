@@ -1,0 +1,8 @@
+{% load i18n %}
+
+<a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
+    {% blocktrans trimmed with _prefix='<strong>' _suffix='</strong>' %}
+        Your image {{ _prefix }}{{ image_title }}{{ _suffix }} received enough votes and might become a Top Pick or higher
+    {% endblocktrans %}
+</a>
+

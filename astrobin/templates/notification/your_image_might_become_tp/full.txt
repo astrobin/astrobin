@@ -1,0 +1,19 @@
+{% load i18n %}
+{% load astrobin_apps_notifications_tags %}
+
+{% blocktrans trimmed with _prefix='"' _suffix='"' %}
+    Your image {{ _prefix }}{{ image_title }}{{ _suffix }} received enough votes and might become a Top Pick or higher
+{% endblocktrans %}
+
+{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email %}
+
+{% blocktrans trimmed %}
+    Note: AstroBin awards (Top Pick Nomination, Top Pick, Image of the Day) are assigned only after votes are finalized,
+    ensuring no votes are retracted and the image reaches its final award level. Awards are not assigned sequentially.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Want to learn about the IOTD/TP process?
+{% endblocktrans %}
+
+https://welcome.astrobin.com/iotd
