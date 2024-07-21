@@ -1,5 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed trimmed with _prefix='"' _suffix='"' %}
+{% blocktrans trimmed with _prefix='"' _suffix='"' %}
     Your image {{ _prefix }}{{ image_title }}{{ _suffix }} received enough votes and might become a Top Pick or higher
 {% endblocktrans %}
