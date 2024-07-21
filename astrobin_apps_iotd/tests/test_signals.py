@@ -88,7 +88,7 @@ class IotdSignalsTest(TestCase):
         IOTD_REVIEW_MIN_PROMOTIONS=1
     )
     @patch('astrobin_apps_iotd.signals.IotdService.notify_about_reaching_enough_iotd_votes')
-    def test_notification_for_enough_submissions(self, notify_about_reaching_enough_iotd_votes):
+    def test_notification_for_enough_votes(self, notify_about_reaching_enough_iotd_votes):
         user = Generators.user()
 
         submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
