@@ -68,7 +68,7 @@ def humanize_may_not_submit_to_iotd_tp_process_reason(reason: str) -> str:
             "This image was already submitted."
         ),
         MayNotSubmitToIotdTpReason.BAD_SUBJECT_TYPE: _(
-            "Images with subject type set to 'Gear' or 'Other' are not eligible for IOTD/TP consideration."
+            "Images with subject type set to 'Equipment' or 'Other' are not eligible for IOTD/TP consideration."
         ),
         MayNotSubmitToIotdTpReason.NO_TELESCOPE_OR_CAMERA: _(
             "Images without an imaging telescope and an imaging camera are not eligible for IOTD/TP consideration."

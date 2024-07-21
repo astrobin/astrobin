@@ -976,6 +976,32 @@ class IotdService:
                 )
 
     @staticmethod
+    def notify_about_reaching_enough_iotd_submissions(image: Image):
+        thumb = image.thumbnail_raw('gallery', None, sync=True)
+        push_notification(
+            [image.user], None, 'your_image_might_become_tpn', {
+                'image': image,
+                'image_title': image.title,
+                'image_thumbnail': thumb.url if thumb else None,
+                'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),
+                'BASE_URL': settings.BASE_URL,
+            }
+        )
+
+    @staticmethod
+    def notify_about_reaching_enough_iotd_votes(image: Image):
+        thumb = image.thumbnail_raw('gallery', None, sync=True)
+        push_notification(
+            [image.user], None, 'your_image_might_become_tp', {
+                'image': image,
+                'image_title': image.title,
+                'image_thumbnail': thumb.url if thumb else None,
+                'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),
+                'BASE_URL': settings.BASE_URL,
+            }
+        )
+
+    @staticmethod
     def get_recently_expired_unsubmitted_images(d: timedelta) -> QuerySet:
         """
             Gets images that:
