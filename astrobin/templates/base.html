@@ -188,7 +188,7 @@
 
         {% include "base/global_alerts.html" %}
 
-        <div class="container extra-alerts">
+        <div class="container extra-alerts {% block extra_alerts_container_extra_classes %}{% endblock %}">
             {% include "base/alerts.html" %}
             {% block extra_alerts %}{% endblock %}
         </div>

@@ -10,6 +10,10 @@
     font-size: 16px;
   }
 
+  body {
+    padding-top: 50px;
+  }
+
   .anchor {
     top: 0;
   }
@@ -38,7 +42,17 @@
     }
   }
 
+  .extra-alerts.has-subnav .alert:first-child {
+    margin-top: 43px;
+  }
+
   .navbar {
+    position: fixed !important;
+
+    .navbar-inner {
+      box-shadow: none;
+    }
+
     .nav {
       margin: 5px;
     }
@@ -61,6 +75,12 @@
         font-size: 1.25rem;
       }
     }
+  }
+
+  .subnav-fixed {
+    position: fixed;
+    top: 65px;
+    z-index: 1029;
   }
 
   .extra-alerts {
@@ -270,8 +290,21 @@
 }
 
 @media screen and (max-width: $sm-max) {
-  body, .astrobin-container {
+  body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .astrobin-container {
     padding: 0;
+
+    &.has-subnav {
+      padding-top: 26px;
+    }
+
+    .subtitle {
+      margin-top: 0;
+    }
   }
 
   h1, h2 {
@@ -302,6 +335,14 @@
   h4, p {
     padding: 0 12px;
   }
+
+  .subnav-fixed {
+    .nav {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
 
   .alert .btn {
     margin-left: 12px;
@@ -462,8 +503,7 @@
   }
 
   .breadcrumb {
-    margin-left: -15px;
-    width: calc(100% - 45px);
+    display: none;
   }
 
   .astrobin-container .subtitle {
@@ -562,8 +602,6 @@
 }
 
 @media (max-width: 500px) {
-
-
   .activity-actions {
     text-align: center;
 
