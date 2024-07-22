@@ -1149,10 +1149,8 @@ astrobin_common = {
         $(document).ready(function () {
             $('.user-nav .toggle-mobile-search').click(function () {
                 $('.toggle-mobile-search').fadeOut('fast');
-                $('.brand-mobile').fadeOut('fast', function () {
-                    $(this).css('display', 'none'); // Ensure it stays hidden after fade out
-                    $('.mobile-search').removeClass('d-none').hide().fadeIn('fast'); // Remove d-none, hide immediately, then fade in
-                });
+                $('.brand-mobile').css('display', 'none');
+                $('.mobile-search').removeClass('d-none');
             });
         });
     },
