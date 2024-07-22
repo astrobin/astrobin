@@ -14,6 +14,16 @@
     padding-top: 50px;
   }
 
+  body.full {
+    .navbar {
+      position: unset !important;
+
+      .brand-mobile {
+        display: none !important;
+      }
+    }
+  }
+
   .anchor {
     top: 0;
   }
