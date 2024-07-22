@@ -97,6 +97,11 @@ class StripeWebhookService(object):
         return StripeWebhookService.get_subscription_from_product_id(product_id, recurring_unit)
 
     @staticmethod
+    def get_overdue_subscriptions(customer_id):
+        subscriptions = stripe.Subscription.list(customer=customer_id)
+        return [sub for sub in subscriptions.auto_paging_iter() if sub.status == 'past_due']
+
+    @staticmethod
     def on_customer_created(event):
         session = StripeWebhookService.get_session_from_event(event)
         UserProfile.objects.filter(user__email=session['email']).update(stripe_customer_id=session['id'])
@@ -323,6 +328,19 @@ class StripeWebhookService(object):
 
         user_subscription.expires = datetime.fromtimestamp(session['current_period_end']).date()
         user_subscription.save()
+
+        try:
+            overdue_subscriptions = StripeWebhookService.get_overdue_subscriptions(session['customer'])
+            for overdue_subscription in overdue_subscriptions:
+                stripe.Subscription.modify(overdue_subscription.id, pause_collection={'behavior': 'mark_uncollectible'})
+                stripe.Subscription.cancel(overdue_subscription.id)
+        except StripeError as e:
+            log.exception(f"stripe_webhook: unable to cancel overdue subscriptions for {session['customer']}: {str(e)}")
+        except Exception as e:
+            log.exception(
+                f"stripe_webhook: unexpected error while trying to cancel overdue subscriptions for "
+                f"{session['customer']}: {str(e)}"
+            )
 
         log.debug(
             f"on_customer_subscription_created: Subscription for user {user.pk}, {subscription.name}, saved: "
