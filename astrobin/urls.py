@@ -35,7 +35,9 @@ from astrobin.views import (
     image_edit_watermark, image_restart_advanced_platesolving, image_restart_platesolving,
     image_revision_upload_process, image_upload, image_upload_process, index, latest_from_forums_fragment, me,
     moderation as moderation_views,
-    recent_images_fragment, registration as registration_views, save_gear_details, save_gear_user_info,
+    password_change, password_change_request_token, recent_images_fragment, registration as registration_views,
+    save_gear_details,
+    save_gear_user_info,
     serve_file_from_cdn, set_language,
     suspended_account,
     user_ban, user_marketplace_fragment, user_page, user_page_api_keys, user_page_bookmarks, user_page_followers,
@@ -88,8 +90,13 @@ urlpatterns += [
     ###########################################################################
 
     url(
+       r'^accounts/password/change/request-token/$',
+       password_change_request_token,
+       name='password_change_request_token'
+    ),
+    url(
         r'^accounts/password/change/$',
-        auth_views.PasswordChangeView.as_view(form_class=PasswordChangeForm),
+        password_change,
         name='password_change'
     ),
     url(

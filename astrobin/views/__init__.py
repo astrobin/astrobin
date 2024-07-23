@@ -2,6 +2,7 @@ import csv
 import logging
 import operator
 import os
+import textwrap
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -16,9 +17,11 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
+from django.core.mail import send_mail
 from django.core.paginator import InvalidPage, Paginator
 from django.db.models import Exists, OuterRef, Q
 from django.forms.models import inlineformset_factory
@@ -50,6 +53,8 @@ from astrobin.forms import (
     SoftwareEditForm, SoftwareEditNewForm, SolarSystem_AcquisitionForm, TelescopeEditForm, TelescopeEditNewForm,
     UserProfileEditBasicForm, UserProfileEditGearForm, UserProfileEditPreferencesForm,
 )
+from astrobin.forms.password_change_form import PasswordChangeForm
+from astrobin.forms.password_change_request_token_form import PasswordChangeRequestTokenForm
 from astrobin.forms.profile_edit_privacy_form import UserProfileEditPrivacyForm
 from astrobin.gear import get_correct_gear, is_gear_complete
 from astrobin.models import (
@@ -2690,3 +2695,61 @@ def user_marketplace_fragment(request, username: str):
             'line_items': line_items,
         }
     )
+
+
+@login_required
+def password_change(request):
+    userprofile = request.user.userprofile
+    request_token = request.GET.get('token', None)
+    user_token = userprofile.password_reset_token
+
+    if userprofile.detected_insecure_password and request_token != user_token:
+        return HttpResponseRedirect(reverse('password_change_request_token'))
+
+    return PasswordChangeView.as_view(form_class=PasswordChangeForm)(request)
+
+
+@login_required
+def password_change_request_token(request):
+    if request.method == 'GET':
+        return render(
+            request,
+            'registration/password_change_request_token_form.html',
+            {'form': PasswordChangeRequestTokenForm()}
+        )
+
+    if request.method == 'POST':
+        form = PasswordChangeRequestTokenForm(request.POST)
+        if form.is_valid():
+            email = request.user.email
+            subject = _("Your secure password reset link")
+            token = request.user.userprofile.password_reset_token
+            url = request.build_absolute_uri(reverse('password_change'))
+            message = textwrap.dedent(f"""
+            Dear {request.user.first_name or request.user.userprofile.get_display_name()},
+
+            We received a request to reset the password for your account. To proceed with the password reset, please click the link below or copy and paste it into your browser:
+
+            {url}?token={token}
+
+            If you did not request a password reset, please contact our support team immediately at support@astrobin.com.
+
+            Thank you for using AstroBin!
+
+            ---
+
+            If you are having trouble clicking the password reset link, copy and paste the URL below into your web browser:
+            {url}?token={token}
+            """)
+
+            try:
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
+                log.debug(f"Password reset token email sent to {email}")
+                return HttpResponseRedirect(reverse('password_change_request_token') + '?sent=true')
+            except Exception as e:
+                log.error(f"Error sending password change token email: {str(e)}")
+                messages.error(request, _('There was an error sending the email.'))
+                return HttpResponseRedirect(reverse('password_change_request_token'))
+        else:
+            messages.error(request, _('Please confirm that you are not a robot.'))
+            return HttpResponseRedirect(reverse('password_change_request_token'))
