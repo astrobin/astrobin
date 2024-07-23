@@ -29,6 +29,7 @@
                             googletag.pubads().setTargeting("{{ key }}", "{{ value }}");
                         {% endfor %}
                     {% endif %}
+                    googletag.pubads().setTargeting("language", "{{ request.LANGUAGE_CODE|lower|slice:':2' }}");
                     googletag.display('{{ NATIVE_RESPONSIVE_RECTANGULAR_SLOT }}');
                 });
             </script>
@@ -43,6 +44,7 @@
                                 googletag.pubads().setTargeting("{{ key }}", "{{ value }}");
                             {% endfor %}
                         {% endif %}
+                        googletag.pubads().setTargeting("language", "{{ request.LANGUAGE_CODE|lower|slice:':2' }}");
                         googletag.display('{{ NATIVE_RESPONSIVE_RECTANGULAR_SLOT_2 }}');
                     });
                 </script>

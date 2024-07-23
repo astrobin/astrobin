@@ -28,6 +28,7 @@
                             googletag.pubads().setTargeting("{{ key }}", "{{ value }}");
                         {% endfor %}
                     {% endif %}
+                    googletag.pubads().setTargeting("language", "{{ request.LANGUAGE_CODE|lower|slice:':2' }}");
                     googletag.display('{{ NATIVE_RESPONSIVE_WIDE_SLOT }}');
                 });
             </script>
