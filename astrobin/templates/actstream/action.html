@@ -209,7 +209,7 @@
                 </div>
                 <div class="astrobin-image-container">
                     <a href="{{ listing.get_absolute_url }}">
-                        {% if listing.line_items.all.0.images|length %}
+                        {% if listing.line_items.all.0.images.all|length %}
                             <img src="{{ listing.line_items.all.0.images.all.0.image_file.url }}" alt="{{ listing }}" />
                         {% elif listing.listing_type == 'WANTED' and listing.line_items.all.0.description %}
                             <p>{{ listing.line_items.all.0.description | safe }}</p>
