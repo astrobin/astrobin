@@ -12,6 +12,12 @@
             {% include "base/language_switcher.html" %}
         </li>
 
+        <li class="d-inline d-lg-none">
+            <a href="#" class="toggle-mobile-search">
+                <i class="icon-search"></i>
+            </a>
+        </li>
+
         {% if request.user.is_authenticated %}
 
             <li class="notice-container pe-3 pe-lg-0">

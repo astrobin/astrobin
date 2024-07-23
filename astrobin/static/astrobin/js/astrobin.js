@@ -1145,6 +1145,16 @@ astrobin_common = {
       });
     },
 
+    init_mobile_search: function () {
+        $(document).ready(function () {
+            $('.user-nav .toggle-mobile-search').click(function () {
+                $('.toggle-mobile-search').fadeOut('fast');
+                $('.brand-mobile').css('display', 'none');
+                $('.mobile-search').removeClass('d-none');
+            });
+        });
+    },
+
     abuse_report_modal_show: function () {
         return new Promise(function (resolve, reject) {
             const $modal = $('#report-abuse-modal');
@@ -1641,6 +1651,8 @@ astrobin_common = {
         astrobin_common.init_toggle_high_contrast_theme();
 
         astrobin_common.init_popup_messages();
+
+        astrobin_common.init_mobile_search();
     },
 
     highlightCodePrepare: function () {

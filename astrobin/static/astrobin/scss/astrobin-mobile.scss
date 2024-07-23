@@ -43,6 +43,24 @@
     }
   }
 
+  .nav {
+    .toggle-mobile-search {
+      i {
+        color: $grey-2;
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  .mobile-search {
+    flex-grow: 1;
+    margin-left: 1rem;
+
+    .search-nav {
+      width: 100%;
+    }
+  }
+
   .astrobin-container {
     padding-bottom: 28px;
     margin-bottom: 0;
