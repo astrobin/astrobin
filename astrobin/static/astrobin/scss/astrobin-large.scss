@@ -7,10 +7,13 @@
     width: 880px;
   }
 
+  .container.accordion {
+    width: 940px;
+  }
+
   .container.header-container {
     width: 930px;
   }
-
 
   #index {
     .image-of-the-day {
@@ -28,6 +31,10 @@
   .navbar-fixed-bottom .container,
   .navbar .container {
     width: 1056px;
+  }
+
+  .container.accordion {
+    width: 1116px;
   }
 
   .astrobin-container {
@@ -134,6 +141,10 @@
   .navbar .container,
   footer .container {
     width: 1240px;
+  }
+
+  .container.accordion {
+    width: 1300px;
   }
 
   .action,

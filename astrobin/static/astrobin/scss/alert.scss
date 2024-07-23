@@ -1,11 +1,7 @@
 #global-alerts {
   > .container {
-    margin-top: 12px;
+    margin-top: 24px;
     margin-bottom: 0;
-
-    &:last-child {
-      margin-bottom: 12px;
-    }
   }
 
   .accordion.container > .accordion-group {
