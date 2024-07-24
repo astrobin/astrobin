@@ -3,8 +3,6 @@
 {% load astrobin_apps_premium_tags %}
 {% load bootstrap_toolkit %}
 
-<div id="global-alerts">
-
 {% if request.user.is_authenticated and request.user.userprofile.detected_insecure_password is not None %}
     <div class="accordion container" id="insecure-password-accordion">
         <div class="accordion-group">
@@ -274,5 +272,3 @@
     </div>
     
 {% endif %}
-
-</div>

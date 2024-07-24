@@ -17,6 +17,12 @@
     {% endif %}
 {% endblock %}
 
+{% block global_alerts_container_extra_classes %}
+    {% if user.is_authenticated %}
+        has-subnav
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumb %}
     {% include "pybb/breadcrumb.html" %}
 {% endblock %}

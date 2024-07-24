@@ -20,6 +20,12 @@
     {% endif %}
 {% endblock %}
 
+{% block global_alerts_container_extra_classes %}
+    {% if request.GET.d == "i" or request.GET.d == None %}
+        has-subnav
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb_safe 'Explore' None %}

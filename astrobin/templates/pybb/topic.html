@@ -24,6 +24,14 @@
     {% endif %}
 {% endblock %}
 
+{% block global_alerts_container_extra_classes %}
+    {% if not READONLY_MODE %}
+        {% if user.is_superuser or user.is_subscribed or user|pybb_may_subscribe_topic:topic %}
+            has-subnav
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumb %}
     {% with object=topic %}
         {% include "pybb/breadcrumb.html" %}
