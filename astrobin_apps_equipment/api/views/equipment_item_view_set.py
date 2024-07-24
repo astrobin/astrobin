@@ -68,6 +68,11 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         allow_unapproved = self.request.query_params.get('allow-unapproved', 'false').lower() == 'true'
         allow_diy = self.request.query_params.get("allow-DIY", "false") == "true"
 
+        try:
+            limit = int(self.request.query_params.get('limit', 50))
+        except ValueError:
+            limit = 50
+
         manager = self.get_serializer().Meta.model.objects
         queryset = manager.all().select_related('brand')
 
@@ -108,7 +113,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 brand_queryset = queryset.filter(query).order_by(Lower('name'))
             if brand_queryset.exists():
                 self.paginator.page_size = brand_queryset.count()
-                queryset = brand_queryset
+                queryset = brand_queryset[:limit]
             else:
                 if 'postgresql' in settings.DATABASES['default']['ENGINE']:
                     contains_queryset = queryset.annotate(
@@ -158,8 +163,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                         Lower('search_friendly_name'),
                         Lower('full_name'),
                     )
-
-                queryset = queryset[:50]
+                queryset = queryset[:limit]
         elif sort == 'az':
             queryset = queryset.order_by(Lower('search_friendly_name'))
         elif sort == '-az':
