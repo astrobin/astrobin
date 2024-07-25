@@ -8,6 +8,7 @@ from astrobin.models import Image
 from astrobin_apps_images.api.serializers import ImageSearchSerializer
 from common.api_page_size_pagination import PageSizePagination
 from common.permissions import ReadOnly
+from common.services.search_service import SearchService
 
 
 class ImageSearchView(HaystackViewSet):
@@ -21,3 +22,12 @@ class ImageSearchView(HaystackViewSet):
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'search'
     pagination_class = PageSizePagination
+
+
+    def filter_queryset(self, queryset):
+        queryset = super().filter_queryset(queryset)
+
+        # Composite filters
+        queryset = SearchService.filter_by_subject(self.request.query_params, queryset)
+
+        return queryset

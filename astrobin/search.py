@@ -12,13 +12,13 @@ from haystack import connections
 from haystack.backends import SQ
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
-from haystack.inputs import BaseInput, Clean
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_groups.models import Group
+from common.services.search_service import CustomContain, SearchService
 from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
 from .models import Image
@@ -108,26 +108,6 @@ class MatchType(Enum):
     ANY = 'ANY'
 
 
-class CustomContain(BaseInput):
-    """
-    An input type for making wildcard matches.
-    """
-    input_type_name = 'custom_contain'
-
-    def prepare(self, query_obj):
-        query_string = super(CustomContain, self).prepare(query_obj)
-        try:
-            query_string = query_string.decode('utf-8')
-        except AttributeError:
-            pass
-        query_string = query_obj.clean(query_string)
-
-        exact_bits = [Clean(bit).prepare(query_obj) for bit in query_string.split(' ') if bit]
-        query_string = ' '.join(exact_bits)
-
-        return '*{}*'.format(query_string)
-
-
 class AstroBinSearchForm(SearchForm):
     # q is inherited from the parent form.
 
@@ -210,33 +190,6 @@ class AstroBinSearchForm(SearchForm):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
         self.data = {x: kwargs.pop(x, None) for x in FIELDS}
         self.request = kwargs.pop('request')
-
-    def find_catalog_subjects(self, text: str):
-        text = text \
-            .lower() \
-            .replace('sh2-', 'sh2_') \
-            .replace('sh2 ', 'sh2_') \
-            .replace('messier', 'm') \
-            .replace('"', '') \
-            .replace("'", '') \
-            .strip()
-
-        pattern = r"(?P<catalog>Messier|M|NGC|IC|PGC|LDN|LBN|SH2_)\s?(?P<id>\d+)"
-        return re.finditer(pattern, text, re.IGNORECASE)
-
-    def filter_by_subject_text(self, results, text):
-        if text is not None and text != "":
-            catalog_entries = []
-            matches = self.find_catalog_subjects(text)
-
-            for matchNum, match in enumerate(matches, start=1):
-                groups = match.groups()
-                catalog_entries.append("%s %s" % (groups[0], groups[1]))
-
-            for entry in catalog_entries:
-                results = results.narrow(f'objects_in_field:"{entry}"')
-
-        return results
 
     def filter_by_domain(self, results):
         d = self.cleaned_data.get("d")
@@ -668,22 +621,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_subject(self, results):
-        subject = self.cleaned_data.get("subject")
-        q = self.cleaned_data.get("q")
-
-        if subject is not None and subject != "":
-            if list(self.find_catalog_subjects(subject)):
-                results = self.filter_by_subject_text(results, subject)
-            else:
-                results = results.filter(objects_in_field=CustomContain(subject))
-
-        if q is not None and q != "":
-            if list(self.find_catalog_subjects(q)):
-                results |= self.filter_by_subject_text(results, q)
-
-        return results
-
     def filter_by_telescope(self, results):
         telescope = self.cleaned_data.get("telescope")
 
@@ -1015,7 +952,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_mount_max_payload(sqs)
         sqs = self.filter_by_integration_time(sqs)
         sqs = self.filter_by_constellation(sqs)
-        sqs = self.filter_by_subject(sqs)
+        sqs = SearchService.filter_by_subject(self.cleaned_data, sqs)
         sqs = self.filter_by_telescope(sqs)
         sqs = self.filter_by_camera(sqs)
         sqs = self.filter_by_bortle_scale(sqs)
