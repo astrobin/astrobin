@@ -8,6 +8,7 @@
 {% block title %}{{object.name}}: {% trans "members list" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 {% block extra_alerts_container_extra_classes %}has-subnav{% endblock %}
+{% block global_alerts_container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     {% paginate 50 members %}

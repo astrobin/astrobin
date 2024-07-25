@@ -74,7 +74,8 @@
     }
   }
 
-  .extra-alerts.has-subnav .alert:first-child {
+  .extra-alerts.has-subnav .alert:first-child,
+  #global-alerts.has-subnav > .container:first-child {
     margin-top: 43px;
   }
 
@@ -113,6 +114,7 @@
     position: fixed;
     top: 65px;
     z-index: 1029;
+    border-radius: 0;
   }
 
   .extra-alerts {

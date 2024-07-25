@@ -191,7 +191,9 @@
             </div>
         </div>
 
-        {% include "base/global_alerts.html" %}
+        <div id="global-alerts" class="{% block global_alerts_container_extra_classes %}{% endblock %}">
+            {% include "base/global_alerts.html" %}
+        </div>
 
         <div class="container extra-alerts {% block extra_alerts_container_extra_classes %}{% endblock %}">
             {% include "base/alerts.html" %}
