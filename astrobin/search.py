@@ -621,17 +621,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_telescope(self, results):
-        telescope = self.cleaned_data.get("telescope")
-
-        if telescope is not None and telescope != "":
-            results = results.filter(
-                SQ(imaging_telescopes=CustomContain(telescope)) |
-                SQ(imaging_telescopes_2=CustomContain(telescope))
-            )
-
-        return results
-
     def filter_by_camera(self, results):
         camera = self.cleaned_data.get("camera")
 
@@ -953,7 +942,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_integration_time(sqs)
         sqs = self.filter_by_constellation(sqs)
         sqs = SearchService.filter_by_subject(self.cleaned_data, sqs)
-        sqs = self.filter_by_telescope(sqs)
+        sqs = SearchService.filter_by_telescope(self.cleaned_data, sqs)
         sqs = self.filter_by_camera(sqs)
         sqs = self.filter_by_bortle_scale(sqs)
         sqs = self.filter_by_w(sqs)
