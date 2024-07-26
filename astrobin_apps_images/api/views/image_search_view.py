@@ -90,5 +90,6 @@ class ImageSearchView(HaystackViewSet):
 
         queryset = SearchService.filter_by_subject(self.request.query_params, queryset)
         queryset = SearchService.filter_by_telescope(self.request.query_params, queryset)
+        queryset = SearchService.filter_by_camera(self.request.query_params, queryset)
 
         return queryset
