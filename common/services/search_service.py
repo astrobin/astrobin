@@ -1,5 +1,6 @@
 import re
 
+from haystack.backends import SQ
 from haystack.inputs import BaseInput, Clean
 
 
@@ -67,5 +68,59 @@ class SearchService:
 
             for entry in catalog_entries:
                 results = results.narrow(f'objects_in_field:"{entry}"')
+
+        return results
+
+    @staticmethod
+    def filter_by_telescope(data, results):
+        telescope = data.get("telescope")
+
+        if not telescope:
+            return results
+
+        try:
+            telescope_id = int(telescope)
+        except (ValueError, TypeError):
+            telescope_id = None
+
+        if isinstance(telescope, dict):
+            telescope_id = telescope.get("id")
+            telescope = telescope.get("name")
+
+        if telescope_id and telescope_id != "":
+            return results.filter(imaging_telescopes_2_id=telescope_id)
+
+        if telescope and telescope != "":
+            return results.filter(
+                SQ(imaging_telescopes=CustomContain(telescope)) |
+                SQ(imaging_telescopes_2=CustomContain(telescope))
+            )
+
+        return results
+
+    @staticmethod
+    def filter_by_camera(data, results):
+        camera = data.get("camera")
+
+        if not camera:
+            return results
+
+        try:
+            camera_id = int(camera)
+        except (ValueError, TypeError):
+            camera_id = None
+
+        if isinstance(camera, dict):
+            camera_id = camera.get("id")
+            camera = camera.get("name")
+
+        if camera_id and camera_id != "":
+            return results.filter(imaging_cameras_2_id=camera_id)
+
+        if camera and camera != "":
+            return results.filter(
+                SQ(imaging_cameras=CustomContain(camera)) |
+                SQ(imaging_cameras_2=CustomContain(camera))
+            )
 
         return results
