@@ -40,6 +40,15 @@ class ImageSearchView(HaystackViewSet):
         return base64_string
 
     def initialize_request(self, request, *args, **kwargs):
+        def is_json(value):
+            try:
+                json_obj = json.loads(value)
+                if isinstance(json_obj, (dict, list, bool, type(None))):
+                    return True
+                return False
+            except json.JSONDecodeError:
+                return False
+
         # Decode and decompress params before handling the request
         request = super().initialize_request(request, *args, **kwargs)
         params = request.query_params.get('params')
@@ -61,7 +70,7 @@ class ImageSearchView(HaystackViewSet):
 
                 # Convert JSON strings back to objects where applicable
                 for key, value in decoded_params.items():
-                    if isinstance(value, str):
+                    if isinstance(value, str) and is_json(value):
                         try:
                             decoded_params[key] = json.loads(value)
                         except json.JSONDecodeError:
