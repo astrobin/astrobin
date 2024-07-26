@@ -1,25 +1,18 @@
-# Python
-from datetime import datetime, timedelta
+from datetime import date, timedelta
 
-# Django
-from django.conf import settings
 from django.core.management.base import BaseCommand
-
-# Third party
 from subscription.models import UserSubscription
 
-# AstroBin
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 
 
 class Command(BaseCommand):
-    help = "Send a notification to user when their premium subscription " +\
-           "is expired."
+    help = "Send a notification to user when their premium subscription is expired."
 
     def handle(self, *args, **kwargs):
         user_subscriptions = UserSubscription.objects.filter(
-            subscription__name__in = [
+            subscription__name__in=[
                 SubscriptionName.LITE_CLASSIC.value,
                 SubscriptionName.PREMIUM_CLASSIC.value,
                 SubscriptionName.LITE_CLASSIC_AUTORENEW.value,
@@ -35,12 +28,18 @@ class Command(BaseCommand):
                 SubscriptionName.ULTIMATE_2020_AUTORENEW_YEARLY.value,
             ],
             active=True,
-            expires=datetime.now() - timedelta(days=2))
+            expires=date.today() - timedelta(days=2)
+        )
 
         for user_subscription in user_subscriptions:
             valid_subscription = PremiumService(user_subscription.user).get_valid_usersubscription()
             if not PremiumService.is_any_paid_subscription(valid_subscription):
-                push_notification([user_subscription.user], None, 'expired_subscription', {
-                    'user_subscription': user_subscription,
-                    'url': 'https://app.astrobin.com/subscriptions/options'
-                })
+                push_notification(
+                    [user_subscription.user],
+                    None,
+                    'expired_subscription',
+                    {
+                        'user_subscription': user_subscription,
+                        'url': 'https://app.astrobin.com/subscriptions/view'
+                    }
+                )
