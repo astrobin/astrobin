@@ -621,17 +621,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_camera(self, results):
-        camera = self.cleaned_data.get("camera")
-
-        if camera is not None and camera != "":
-            results = results.filter(
-                SQ(imaging_cameras=CustomContain(camera)) |
-                SQ(imaging_cameras_2=CustomContain(camera))
-            )
-
-        return results
-
     def filter_by_bortle_scale(self, results):
         try:
             min = float(self.cleaned_data.get("bortle_scale_min"))
@@ -943,7 +932,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_constellation(sqs)
         sqs = SearchService.filter_by_subject(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_telescope(self.cleaned_data, sqs)
-        sqs = self.filter_by_camera(sqs)
+        sqs = SearchService.filter_by_camera(self.cleaned_data, sqs)
         sqs = self.filter_by_bortle_scale(sqs)
         sqs = self.filter_by_w(sqs)
         sqs = self.filter_by_h(sqs)

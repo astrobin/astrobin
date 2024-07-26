@@ -97,3 +97,30 @@ class SearchService:
             )
 
         return results
+
+    @staticmethod
+    def filter_by_camera(data, results):
+        camera = data.get("camera")
+
+        if not camera:
+            return results
+
+        try:
+            camera_id = int(camera)
+        except (ValueError, TypeError):
+            camera_id = None
+
+        if isinstance(camera, dict):
+            camera_id = camera.get("id")
+            camera = camera.get("name")
+
+        if camera_id and camera_id != "":
+            return results.filter(imaging_cameras_2_id=camera_id)
+
+        if camera and camera != "":
+            return results.filter(
+                SQ(imaging_cameras=CustomContain(camera)) |
+                SQ(imaging_cameras_2=CustomContain(camera))
+            )
+
+        return results
