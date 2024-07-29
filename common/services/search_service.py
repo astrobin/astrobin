@@ -2,6 +2,7 @@ import re
 from enum import Enum
 from functools import reduce
 
+from django.db.models import Q
 from haystack.backends import SQ
 from haystack.inputs import BaseInput, Clean
 from operator import and_, or_
