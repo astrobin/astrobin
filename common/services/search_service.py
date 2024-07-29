@@ -124,3 +124,23 @@ class SearchService:
             )
 
         return results
+
+    @staticmethod
+    def filter_by_telescope_type(data, results):
+        telescope_type = data.get("telescope_type")
+
+        if telescope_type is not None and telescope_type != "":
+            types = telescope_type.split(',')
+            results = results.filter(telescope_types__in=types)
+
+        return results
+
+    @staticmethod
+    def filter_by_camera_type(data, results):
+        camera_type = data.get("camera_type")
+
+        if camera_type is not None and camera_type != "":
+            types = camera_type.split(',')
+            results = results.filter(camera_types__in=types)
+
+        return results

@@ -7,6 +7,7 @@ import msgpack
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from drf_haystack.filters import HaystackFilter, HaystackOrderingFilter
 from drf_haystack.viewsets import HaystackViewSet
+from haystack.query import SearchQuerySet
 from rest_framework.exceptions import ParseError
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.throttling import ScopedRateThrottle
@@ -83,13 +84,16 @@ class ImageSearchView(HaystackViewSet):
 
             except (ValueError, TypeError, base64.binascii.Error, zlib.error) as e:
                 raise ParseError(f"Error decoding parameters: {str(e)}")
+
         return request
 
-    def filter_queryset(self, queryset):
+    def filter_queryset(self, queryset: SearchQuerySet) -> SearchQuerySet:
         queryset = super().filter_queryset(queryset)
 
         queryset = SearchService.filter_by_subject(self.request.query_params, queryset)
         queryset = SearchService.filter_by_telescope(self.request.query_params, queryset)
         queryset = SearchService.filter_by_camera(self.request.query_params, queryset)
+        queryset = SearchService.filter_by_telescope_type(self.request.query_params, queryset)
+        queryset = SearchService.filter_by_camera_type(self.request.query_params, queryset)
 
         return queryset

@@ -322,15 +322,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_camera_type(self, results):
-        camera_type = self.cleaned_data.get("camera_type")
-
-        if camera_type is not None and camera_type != "":
-            types = camera_type.split(',')
-            results = results.filter(camera_types__in=types)
-
-        return results
-
     def filter_by_camera_pixel_size(self, results):
         try:
             min = float(self.cleaned_data.get("camera_pixel_size_min"))
@@ -511,15 +502,6 @@ class AstroBinSearchForm(SearchForm):
             results = results.filter(subject_type_char=subject_type)
         elif subject_type in list(vars(SolarSystemSubject).keys()):
             results = results.filter(solar_system_main_subject_char=subject_type)
-
-        return results
-
-    def filter_by_telescope_type(self, results):
-        telescope_type = self.cleaned_data.get("telescope_type")
-
-        if telescope_type is not None and telescope_type != "":
-            types = telescope_type.split(',')
-            results = results.filter(telescope_types__in=types)
 
         return results
 
@@ -907,7 +889,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_video(sqs)
         sqs = self.filter_by_award(sqs)
         sqs = self.filter_by_groups(sqs)
-        sqs = self.filter_by_camera_type(sqs)
+        sqs = SearchService.filter_by_camera_type(self.cleaned_data, sqs)
         sqs = self.filter_by_camera_pixel_size(sqs)
         sqs = self.filter_by_country(sqs)
         sqs = self.filter_by_acquisition_type(sqs)
@@ -922,7 +904,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_pixel_scale(sqs)
         sqs = self.filter_by_remote_source(sqs)
         sqs = self.filter_by_subject_type(sqs)
-        sqs = self.filter_by_telescope_type(sqs)
+        sqs = SearchService.filter_by_telescope_type(self.cleaned_data.sqs)
         sqs = self.filter_by_telescope_diameter(sqs)
         sqs = self.filter_by_telescope_weight(sqs)
         sqs = self.filter_by_telescope_focal_length(sqs)
