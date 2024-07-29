@@ -39,6 +39,9 @@ class ImageSearchView(HaystackViewSet):
         if missing_padding:
             base64_string += '=' * (4 - missing_padding)
         return base64_string
+    
+    def simplify_one_item_lists(self, params):
+        return {key: value[0] if len(value) == 1 else value for key, value in params.items()}
 
     def initialize_request(self, request, *args, **kwargs):
         def is_json(value):
@@ -67,7 +70,7 @@ class ImageSearchView(HaystackViewSet):
                 parsed_params = parse_qs(query_string)
 
                 # Convert lists to single values if necessary
-                decoded_params = {key: value[0] if len(value) == 1 else value for key, value in parsed_params.items()}
+                decoded_params = self.simplify_one_item_lists(parsed_params)
 
                 # Convert JSON strings back to objects where applicable
                 for key, value in decoded_params.items():
@@ -89,12 +92,14 @@ class ImageSearchView(HaystackViewSet):
 
     def filter_queryset(self, queryset: SearchQuerySet) -> SearchQuerySet:
         queryset = super().filter_queryset(queryset)
+        
+        params = self.simplify_one_item_lists(self.request.query_params)
 
-        queryset = SearchService.filter_by_subject(self.request.query_params, queryset)
-        queryset = SearchService.filter_by_telescope(self.request.query_params, queryset)
-        queryset = SearchService.filter_by_camera(self.request.query_params, queryset)
-        queryset = SearchService.filter_by_telescope_type(self.request.query_params, queryset)
-        queryset = SearchService.filter_by_camera_type(self.request.query_params, queryset)
-        queryset = SearchService.filter_by_acquisition_months(self.request.query_params, queryset)
+        queryset = SearchService.filter_by_subject(params, queryset)
+        queryset = SearchService.filter_by_telescope(params, queryset)
+        queryset = SearchService.filter_by_camera(params, queryset)
+        queryset = SearchService.filter_by_telescope_type(params, queryset)
+        queryset = SearchService.filter_by_camera_type(params, queryset)
+        queryset = SearchService.filter_by_acquisition_months(params, queryset)
 
         return queryset

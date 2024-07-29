@@ -158,8 +158,12 @@ class SearchService:
 
     @staticmethod
     def filter_by_acquisition_months(data, results: SearchQuerySet) -> SearchQuerySet:
-        acquisition_months = data.get("acquisition_months")
-        acquisition_months_op = data.get("acquisition_months_op")
+        if isinstance(data.get("acquisition_months"), dict):
+            acquisition_months = data.get("acquisition_months").get("months")
+            acquisition_months_op = data.get("acquisition_months").get("matchType")
+        else:
+            acquisition_months = data.get("acquisition_months")
+            acquisition_months_op = data.get("acquisition_months_op")
 
         if acquisition_months_op == MatchType.ALL.value:
             op = and_
@@ -167,7 +171,11 @@ class SearchService:
             op = or_
 
         if acquisition_months is not None and acquisition_months != "":
-            months = acquisition_months.split(',')
+            if isinstance(acquisition_months, str):
+                months = acquisition_months.split(',')
+            else:
+                months = acquisition_months
+
             queries = []
 
             for month in months:
