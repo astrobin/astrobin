@@ -185,3 +185,12 @@ class SearchService:
                 results = results.filter(reduce(op, queries))
 
         return results
+
+    @staticmethod
+    def filter_by_remote_source(data, results: SearchQuerySet) -> SearchQuerySet:
+        remote_source = data.get("remote_source")
+
+        if remote_source is not None and remote_source != "":
+            results = results.filter(remote_source=remote_source)
+
+        return results

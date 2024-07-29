@@ -480,14 +480,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_remote_source(self, results):
-        remote_source = self.cleaned_data.get("remote_source")
-
-        if remote_source is not None and remote_source != "":
-            results = results.filter(remote_source=remote_source)
-
-        return results
-
     def filter_by_subject_type(self, results):
         subject_type = self.cleaned_data.get("subject_type")
 
@@ -874,7 +866,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_moon_phase(sqs)
         sqs = self.filter_by_coords(sqs)
         sqs = self.filter_by_pixel_scale(sqs)
-        sqs = self.filter_by_remote_source(sqs)
+        sqs = SearchService.filter_by_remote_source(self.cleaned_data, sqs)
         sqs = self.filter_by_subject_type(sqs)
         sqs = SearchService.filter_by_telescope_type(self.cleaned_data, sqs)
         sqs = self.filter_by_telescope_diameter(sqs)
