@@ -2,5 +2,5 @@
 
 {% blocktrans trimmed %}
     {{ user }} replied in a topic to which you are subscribed
-{% endblocktrans %}
+{% endblocktrans %}: {{ topic_name }}
 
