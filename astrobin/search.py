@@ -1,6 +1,4 @@
-import re
 from datetime import datetime, timedelta
-from enum import Enum
 from functools import reduce
 from operator import and_, or_
 
@@ -18,7 +16,7 @@ from pybb.models import Post, Topic
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_groups.models import Group
-from common.services.search_service import CustomContain, SearchService
+from common.services.search_service import CustomContain, MatchType, SearchService
 from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
 from .models import Image
@@ -101,11 +99,6 @@ FIELDS = (
     # Sorting
     'sort'
 )
-
-
-class MatchType(Enum):
-    ALL = 'ALL'
-    ANY = 'ANY'
 
 
 class AstroBinSearchForm(SearchForm):
@@ -735,27 +728,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_acquisition_months(self, results):
-        acquisition_months = self.cleaned_data.get("acquisition_months")
-        acquisition_months_op = self.cleaned_data.get("acquisition_months_op")
-
-        if acquisition_months_op == MatchType.ALL.value:
-            op = and_
-        else:
-            op = or_
-
-        if acquisition_months is not None and acquisition_months != "":
-            months = acquisition_months.split(',')
-            queries = []
-
-            for month in months:
-                queries.append(Q(acquisition_months=month))
-
-            if len(queries) > 0:
-                results = results.filter(reduce(op, queries))
-
-        return results
-
     def filter_by_username(self, results):
         username = self.cleaned_data.get("username")
 
@@ -904,7 +876,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_pixel_scale(sqs)
         sqs = self.filter_by_remote_source(sqs)
         sqs = self.filter_by_subject_type(sqs)
-        sqs = SearchService.filter_by_telescope_type(self.cleaned_data.sqs)
+        sqs = SearchService.filter_by_telescope_type(self.cleaned_data, sqs)
         sqs = self.filter_by_telescope_diameter(sqs)
         sqs = self.filter_by_telescope_weight(sqs)
         sqs = self.filter_by_telescope_focal_length(sqs)
@@ -924,7 +896,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_forum_topic(sqs)
         sqs = self.filter_by_filter_types(sqs)
         sqs = self.filter_by_user_id(sqs)
-        sqs = self.filter_by_acquisition_months(sqs)
+        sqs = SearchService.filter_by_acquisition_months(self.cleaned_data, sqs)
         sqs = self.filter_by_username(sqs)
         sqs = self.filter_by_equipment_ids(sqs)
 

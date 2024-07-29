@@ -1,7 +1,17 @@
 import re
+from enum import Enum
+from functools import reduce
 
 from haystack.backends import SQ
 from haystack.inputs import BaseInput, Clean
+from operator import and_, or_
+
+from haystack.query import SearchQuerySet
+
+
+class MatchType(Enum):
+    ALL = 'ALL'
+    ANY = 'ANY'
 
 
 class CustomContain(BaseInput):
@@ -26,7 +36,7 @@ class CustomContain(BaseInput):
 
 class SearchService:
     @staticmethod
-    def filter_by_subject(data, results):
+    def filter_by_subject(data, results: SearchQuerySet) -> SearchQuerySet:
         subject = data.get("subject")
         q = data.get("q")
 
@@ -57,7 +67,7 @@ class SearchService:
         return re.finditer(pattern, text, re.IGNORECASE)
 
     @staticmethod
-    def filter_by_subject_text(results, text):
+    def filter_by_subject_text(results: SearchQuerySet, text: str) -> SearchQuerySet:
         if text is not None and text != "":
             catalog_entries = []
             matches = SearchService.find_catalog_subjects(text)
@@ -72,7 +82,7 @@ class SearchService:
         return results
 
     @staticmethod
-    def filter_by_telescope(data, results):
+    def filter_by_telescope(data, results: SearchQuerySet) -> SearchQuerySet:
         telescope = data.get("telescope")
 
         if not telescope:
@@ -99,7 +109,7 @@ class SearchService:
         return results
 
     @staticmethod
-    def filter_by_camera(data, results):
+    def filter_by_camera(data, results: SearchQuerySet) -> SearchQuerySet:
         camera = data.get("camera")
 
         if not camera:
@@ -126,7 +136,7 @@ class SearchService:
         return results
 
     @staticmethod
-    def filter_by_telescope_type(data, results):
+    def filter_by_telescope_type(data, results: SearchQuerySet) -> SearchQuerySet:
         telescope_type = data.get("telescope_type")
 
         if telescope_type is not None and telescope_type != "":
@@ -136,11 +146,33 @@ class SearchService:
         return results
 
     @staticmethod
-    def filter_by_camera_type(data, results):
+    def filter_by_camera_type(data, results: SearchQuerySet) -> SearchQuerySet:
         camera_type = data.get("camera_type")
 
         if camera_type is not None and camera_type != "":
             types = camera_type.split(',')
             results = results.filter(camera_types__in=types)
+
+        return results
+
+    @staticmethod
+    def filter_by_acquisition_months(data, results: SearchQuerySet) -> SearchQuerySet:
+        acquisition_months = data.get("acquisition_months")
+        acquisition_months_op = data.get("acquisition_months_op")
+
+        if acquisition_months_op == MatchType.ALL.value:
+            op = and_
+        else:
+            op = or_
+
+        if acquisition_months is not None and acquisition_months != "":
+            months = acquisition_months.split(',')
+            queries = []
+
+            for month in months:
+                queries.append(Q(acquisition_months=month))
+
+            if len(queries) > 0:
+                results = results.filter(reduce(op, queries))
 
         return results
