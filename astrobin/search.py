@@ -13,7 +13,6 @@ from haystack.generic_views import SearchView
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
-from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_groups.models import Group
 from common.services.search_service import CustomContain, MatchType, SearchService
@@ -480,16 +479,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_subject_type(self, results):
-        subject_type = self.cleaned_data.get("subject_type")
-
-        if subject_type in list(vars(SubjectType).keys()):
-            results = results.filter(subject_type_char=subject_type)
-        elif subject_type in list(vars(SolarSystemSubject).keys()):
-            results = results.filter(solar_system_main_subject_char=subject_type)
-
-        return results
-
     def filter_by_telescope_diameter(self, results):
         try:
             min = int(self.cleaned_data.get("telescope_diameter_min"))
@@ -867,7 +856,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_coords(sqs)
         sqs = self.filter_by_pixel_scale(sqs)
         sqs = SearchService.filter_by_remote_source(self.cleaned_data, sqs)
-        sqs = self.filter_by_subject_type(sqs)
+        sqs = SearchService.filter_by_subject_type(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_telescope_type(self.cleaned_data, sqs)
         sqs = self.filter_by_telescope_diameter(sqs)
         sqs = self.filter_by_telescope_weight(sqs)

@@ -9,6 +9,8 @@ from operator import and_, or_
 
 from haystack.query import SearchQuerySet
 
+from astrobin.enums import SolarSystemSubject, SubjectType
+
 
 class MatchType(Enum):
     ALL = 'ALL'
@@ -192,5 +194,16 @@ class SearchService:
 
         if remote_source is not None and remote_source != "":
             results = results.filter(remote_source=remote_source)
+
+        return results
+
+    @staticmethod
+    def filter_by_subject_type(data, results: SearchQuerySet) -> SearchQuerySet:
+        subject_type = data.get("subject_type")
+
+        if subject_type in list(vars(SubjectType).keys()):
+            results = results.filter(subject_type_char=subject_type)
+        elif subject_type in list(vars(SolarSystemSubject).keys()):
+            results = results.filter(solar_system_main_subject_char=subject_type)
 
         return results
