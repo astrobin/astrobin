@@ -130,6 +130,7 @@ class EquipmentItemService:
                     None,
                     'ambiguous-item-removed-from-presets',
                     {
+                        'preheader': str(self.item),
                         'item': str(self.item),
                         'item_url': build_notification_url(
                             AppRedirectionService.redirect(

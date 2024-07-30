@@ -66,6 +66,7 @@ class GearService:
                     'reason': reason,
                     'comment': comment,
                     'legacy_item': strategy.gear,
+                    'preheader': f'{target.brand.name if target.brand else gettext("(DIY)")} {target.name}' if target else None,
                     'target_item': f'{target.brand.name if target.brand else gettext("(DIY)")} {target.name}' if target else None,
                     'target_url': build_notification_url(
                         AppRedirectionService.redirect(
@@ -100,6 +101,7 @@ class GearService:
                     'reason': reason,
                     'comment': comment,
                     'legacy_item': strategy.gear,
+                    'preheader': f'{target.brand.name if target.brand else gettext("(DIY)")} {target.name}' if target else None,
                     'target_item': f'{target.brand.name if target.brand else gettext("(DIY)")} {target.name}' if target else None,
                     'target_url': build_notification_url(
                         AppRedirectionService.redirect(
@@ -255,6 +257,7 @@ class GearService:
                     None,
                     'gear_renamed',
                     {
+                        'preheader': GearService(proposal.gear).display_name(for_user=user),
                         'gear_display_name': GearService(proposal.gear).display_name(for_user=user),
                         'item': camera,
                     }

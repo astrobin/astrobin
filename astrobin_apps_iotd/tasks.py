@@ -132,12 +132,14 @@ def send_notifications_when_promoted_image_becomes_iotd():
         x.submitter for x in IotdSubmission.objects.filter(image=image)
     ]
     push_notification(submitters, None, 'image_you_promoted_is_iotd', {
+        'preheader': image.title,
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
 
     reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
     push_notification(reviewers, None, 'image_you_promoted_is_iotd', {
+        'preheader': image.title,
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
@@ -147,6 +149,7 @@ def send_notifications_when_promoted_image_becomes_iotd():
     ]
     push_notification(
         dismissers, None, 'image_you_dismissed_is_iotd', {
+            'preheader': image.title,
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         }
@@ -154,6 +157,7 @@ def send_notifications_when_promoted_image_becomes_iotd():
 
     collaborators = [image.user] + list(image.collaborators.all())
     push_notification(collaborators, None, 'your_image_is_iotd', {
+        'preheader': image.title,
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })

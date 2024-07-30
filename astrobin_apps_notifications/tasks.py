@@ -64,6 +64,7 @@ def push_notification_for_approved_image(image_pk: int, moderator_pk: int):
         moderator,
         'image_approved',
         {
+            'preheader': image.title,
             'image': image,
             'image_thumbnail': thumb.url if thumb else None,
             'moderator': moderator
@@ -177,6 +178,7 @@ def push_notification_for_new_image(image_pk: int):
                 image.user,
                 'new_image',
                 {
+                    'preheader': image.title,
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None,
                     'followed_equipment_items': user_equipment_dictionary[follower.pk]['items']
@@ -198,6 +200,7 @@ def push_notification_for_new_image(image_pk: int):
                 image.user,
                 'new-image-from-followed-equipment',
                 {
+                    'preheader': image.title,
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None,
                     'items': equipment_items
@@ -241,6 +244,7 @@ def push_notification_for_new_image_revision(revision_pk):
             'user_url': build_notification_url(
                 settings.BASE_URL + revision.image.user.userprofile.get_absolute_url(), revision.image.user),
             'user': revision.image.user.userprofile.get_display_name(),
+            'preheader': revision.image.title,
             'image_title': revision.image.title,
             'title': revision.title,
             'description': revision.description,

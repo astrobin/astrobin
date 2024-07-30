@@ -551,6 +551,7 @@ class IotdService:
             thumb = image.thumbnail_raw('gallery', None, sync=True)
             push_notification(
                 [image.user], None, 'image_submitted_to_iotd_tp', {
+                    'preheader': image.title,
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None
                 }
@@ -967,6 +968,7 @@ class IotdService:
 
                 push_notification(
                     [image.user], None, 'iotd_tp_submission_deadline', {
+                        'preheader': image.title,
                         'image': image,
                         'image_thumbnail': thumb.url if thumb else None,
                         'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),
@@ -981,6 +983,7 @@ class IotdService:
         push_notification(
             [image.user], None, 'your_image_might_become_tpn', {
                 'image': image,
+                'preheader': image.title,
                 'image_title': image.title,
                 'image_thumbnail': thumb.url if thumb else None,
                 'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),
@@ -994,6 +997,7 @@ class IotdService:
         push_notification(
             [image.user], None, 'your_image_might_become_tp', {
                 'image': image,
+                'preheader': image.title,
                 'image_title': image.title,
                 'image_thumbnail': thumb.url if thumb else None,
                 'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),

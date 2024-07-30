@@ -242,6 +242,7 @@ def send_edit_proposal_created_notification(sender, instance, created, **kwargs)
                     'user_url': build_notification_url(
                         settings.BASE_URL + reverse('user_page', args=(user.username,))
                     ),
+                    'preheader': f'{target.brand.name if target.brand else _("(DIY)")} {target.name}',
                     'item': f'{target.brand.name if target.brand else _("(DIY)")} {target.name}',
                     'item_url': build_notification_url(
                         AppRedirectionService.redirect(

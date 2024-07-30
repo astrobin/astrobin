@@ -38,6 +38,7 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
                     group.moderators.all(), request.user, 'new_group_join_request',
                     {
                         'requester': request.user.userprofile.get_display_name(),
+                        'preheader': group.name,
                         'group_name': group.name,
                         'url': build_notification_url(
                             settings.BASE_URL + reverse('group_moderate_join_requests', args=(group.pk,)), request.user)
