@@ -1117,7 +1117,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     subject_type = models.CharField(
         verbose_name=_("Subject type"),
         choices=SUBJECT_TYPE_CHOICES,
-        max_length=18,
+        max_length=20,
         null=False,
     )
 
