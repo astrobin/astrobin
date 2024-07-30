@@ -10,6 +10,7 @@ from django.utils.translation import gettext
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
+from pycountry_convert.convert_country_alpha2_to_continent_code import COUNTRY_ALPHA2_TO_CONTINENT_CODE
 from rest_framework import serializers, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound, ValidationError
@@ -175,7 +176,8 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
                 'Antarctica': 'AN',
                 'Asia': 'AS',
                 'Europe': 'EU',
-                'Americas': 'AM',  # Combined North and South America
+                'North America': 'NA',
+                'South America': 'SA',
                 'Oceania': 'OC'
             }
             return continent_dict.get(continent_name)
@@ -183,12 +185,8 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         def country_to_continent(country_code: str) -> Optional[str]:
             if country_code == 'AQ':
                 return 'AN'
-            try:
-                continent_code = pycountry_convert.country_alpha2_to_continent_code(country_code)
-                # Combine North and South America
-                return 'AM' if continent_code in ['NA', 'SA'] else continent_code
-            except KeyError:
-                return None
+
+            return pycountry_convert.country_alpha2_to_continent_code(country_code)
 
         def get_countries_in_continent(continent_name: str) -> List[str]:
             continent_code = get_continent_code(continent_name)
@@ -196,9 +194,9 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
                 return []
 
             return [
-                country.alpha_2.upper()
-                for country in pycountry.countries
-                if country_to_continent(country.alpha_2) == continent_code
+                country_code.upper()
+                for country_code in COUNTRY_ALPHA2_TO_CONTINENT_CODE.keys()
+                if country_to_continent(country_code) == continent_code
             ]
 
         region = self.request.GET.get('region')
@@ -208,8 +206,13 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
                 countries = get_eu_country_codes()
                 return queryset.filter(country__in=countries)
 
+            if region.upper() == 'AMERICAS':
+                countries = get_countries_in_continent('North America') + get_countries_in_continent('South America')
+                return queryset.filter(country__in=countries)
+
             if region.upper() in [
-                'AMERICAS',
+                'NORTH AMERICA',
+                'SOUTH AMERICA',
                 'EUROPE',
                 'ASIA',
                 'AFRICA',

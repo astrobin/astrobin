@@ -20,6 +20,8 @@ LOCALE_EXTRAS = (
     _("Follow"),
     _("Europe"),
     _("Americas"),
+    _("North America"),
+    _("South America"),
     _("Africa"),
     _("Asia"),
     _("Oceania"),
