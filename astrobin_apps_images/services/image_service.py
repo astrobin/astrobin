@@ -499,6 +499,7 @@ class ImageService:
             'removed_self_as_collaborator',
             {
                 'user': user,
+                'preheader': self.image.title,
                 'image': self.image,
                 'image_thumbnail': thumb.url if thumb else None,
             }

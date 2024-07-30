@@ -497,6 +497,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     'user_url': build_notification_url(
                         settings.BASE_URL + reverse('user_page', args=(request.user.username,))
                     ),
+                    'preheader': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
                     'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
                     'item_url': build_notification_url(
                         AppRedirectionService.redirect(

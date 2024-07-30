@@ -3426,8 +3426,11 @@ class AppApiKeyRequest(models.Model):
                 [self.registrar], None, 'api_key_request_approved',
                 {'api_docs_url': settings.BASE_URL + '/help/api/',
                  'api_keys_url': settings.BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
+                 'preheader': app.key,
                  'key': app.key,
-                 'secret': app.secret})
+                 'secret': app.secret
+                }
+            )
         else:
             app.active = True
 

@@ -1576,6 +1576,7 @@ class ImageCollaboratorRequestAccept(LoginRequiredMixin, View):
             request.user,
             'accepted_collaboration_request',
             {
+                'preheader': image.title,
                 'image': image,
                 'user': request.user,
                 'image_thumbnail': thumb.url if thumb else None,
@@ -1608,6 +1609,7 @@ class ImageCollaboratorRequestDeny(LoginRequiredMixin, View):
             request.user,
             'denied_collaboration_request',
             {
+                'preheader': image.title,
                 'image': image,
                 'user': request.user,
                 'image_thumbnail': thumb.url if thumb else None,

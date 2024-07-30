@@ -220,6 +220,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             push_notification(
                 [user], instance.user, 'new_image_description_mention',
                 {
+                    'preheader': instance.title,
                     'image': instance,
                     'image_thumbnail': thumb.url if thumb else None,
                     'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
@@ -275,6 +276,7 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                     thumb = instance.thumbnail_raw('gallery', None, sync=True)
                     push_notification(
                         [instance.user], None, 'image_not_submitted_to_iotd_tp', {
+                            'preheader': instance.title,
                             'image': instance,
                             'image_thumbnail': thumb.url if thumb else None,
                             'reason': humanize_may_not_submit_to_iotd_tp_process_reason(reason),
@@ -583,6 +585,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'url': build_notification_url(
                             settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user
                         ),
+                        'preheader': instance.content_object.title,
                         'title': instance.content_object.title,
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
@@ -624,7 +627,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.user.username}
                         ),
-
+                        'preheader': instance.content_object.topic.name,
                         'post': instance.content_object.topic.name
                     }
                 )
@@ -709,6 +712,7 @@ def solution_pre_save(sender, instance, **kwargs):
         notification,
         {
             'object_url': build_notification_url(settings.BASE_URL + target.get_absolute_url()),
+            'preheader': title,
             'title': title,
             'image_thumbnail': thumb.url if thumb else None,
         }
@@ -933,6 +937,7 @@ def group_post_save(sender, instance, created, **kwargs):
                 followers, instance.creator, 'new_public_group_created',
                 {
                     'creator': instance.creator.userprofile.get_display_name(),
+                    'preheader': instance.name,
                     'group_name': instance.name,
                     'url': settings.BASE_URL + reverse_url('group_detail', args=(instance.pk,)),
                 }
@@ -991,6 +996,7 @@ def group_members_changed(sender, instance, **kwargs):
                                 settings.BASE_URL + reverse_url('user_page', kwargs={'username': user.username}),
                                 user
                             ),
+                            'preheader': instance.name,
                             'group_name': instance.name,
                             'url': build_notification_url(
                                 settings.BASE_URL + reverse_url('group_detail', args=(instance.pk,)),
@@ -1219,6 +1225,7 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                         f'/equipment/explorer/{EquipmentItemService(equipment_item).get_type()}/{equipment_item.pk}'
                     )
                 ) if equipment_item else None,
+                'preheader': instance.name,
                 'topic_title': instance.name,
             },
         )
@@ -1252,6 +1259,7 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                         reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user
                     ),
                     'group_name': group.name,
+                    'preheader': instance.name,
                     'topic_title': instance.name,
                 },
             )
@@ -1287,6 +1295,7 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
                         settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user
                     ),
                     'group_name': group.name,
+                    'preheader': instance.name,
                     'topic_title': instance.name,
                 },
             )
@@ -1372,6 +1381,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                     'topic_url': build_notification_url(
                         settings.BASE_URL + instance.topic.get_absolute_url(), instance.user
                     ),
+                    'preheader': instance.topic.name,
                     'topic_name': instance.topic.name,
                     'unsubscribe_url': build_notification_url(
                         settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]),
@@ -1386,6 +1396,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                 instance.user,
                 'new_forum_reply',
                 {
+                    'preheader': instance.topic.name,
                     'user': instance.user.userprofile.get_display_name(),
                     'user_url': settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user}),
                     'post_url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
@@ -1421,6 +1432,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.user}
                         ),
+                        'preheader': instance.topic.name,
                         'post': instance.topic.name,
                     }
                 )
@@ -1450,6 +1462,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
         if cache.get("post.%d.forum_post_pre_save_approved" % instance.pk):
             push_notification(
                 [instance.user], None, 'forum_post_approved', {
+                    'preheader': instance.topic.name,
                     'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url())
                 }
             )
@@ -1609,6 +1622,7 @@ def top_pick_nominations_archive_post_save(sender, instance, created, **kwargs):
         collaborators = [image.user] + list(image.collaborators.all())
         push_notification(
             collaborators, None, 'your_image_is_tpn', {
+                'preheader': image.title,
                 'image': image,
                 'image_thumbnail': thumb.url if thumb else None
             }
@@ -1626,6 +1640,7 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
         submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
         push_notification(
             submitters, None, 'image_you_promoted_is_tp', {
+                'preheader': image.title,
                 'image': image,
                 'image_thumbnail': thumb.url if thumb else None
             }
@@ -1642,6 +1657,7 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
         dismissers = [x.user for x in IotdDismissedImage.objects.filter(image=image)]
         push_notification(
             dismissers, None, 'image_you_dismissed_is_tp', {
+                'preheader': image.title,
                 'image': image,
                 'image_thumbnail': thumb.url if thumb else None
             }
@@ -1650,6 +1666,7 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
         collaborators = [image.user] + list(image.collaborators.all())
         push_notification(
             collaborators, None, 'your_image_is_tp', {
+                'preheader': image.title,
                 'image': image,
                 'image_thumbnail': thumb.url if thumb else None
             }
@@ -1745,6 +1762,7 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
             UserService(user).clear_gallery_image_list_cache()
         push_notification(
             list(users), instance.user, 'added_you_as_collaborator', {
+                'preheader': instance.title,
                 'image': instance,
                 'image_thumbnail': thumb.url if thumb else None
             }
@@ -1764,6 +1782,7 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
                     user.id,
                     'new_image',
                     {
+                        'preheader': instance.title,
                         'image_id': instance.id,
                         'image_thumbnail': thumb.url if thumb else None
                     }
@@ -1775,6 +1794,7 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
             UserService(user).clear_gallery_image_list_cache()
         push_notification(
             list(users), instance.user, 'removed_as_collaborator', {
+                'preheader': instance.title,
                 'image': instance,
                 'image_thumbnail': thumb.url if thumb else None
             }
@@ -1795,6 +1815,7 @@ def image_pending_collaborators_changed(sender, instance: Image, **kwargs):
         users = User.objects.filter(pk__in=pk_set)
         push_notification(
             list(users), instance.user, 'requested_as_collaborator', {
+                'preheader': instance.title,
                 'image': instance,
                 'image_thumbnail': thumb.url if thumb else None
             }

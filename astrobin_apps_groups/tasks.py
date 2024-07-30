@@ -33,6 +33,7 @@ def push_notification_for_group_join_request_approval(group_pk, user_pk, moderat
     push_notification(
         [user], moderator, 'group_join_request_approved',
         {
+            'preheader': group.name,
             'group_name': group.name,
             'url': build_notification_url(
                 settings.BASE_URL + reverse('group_detail', args=(group.pk, group.slug)), moderator
@@ -63,6 +64,7 @@ def push_notification_for_group_join_request_rejection(group_pk, user_pk, modera
     push_notification(
         [user], moderator, 'group_join_request_rejected',
         {
+            'preheader': group.name,
             'group_name': group.name,
             'url': build_notification_url(
                 settings.BASE_URL + reverse('group_detail', args=(group.pk,)), moderator

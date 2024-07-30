@@ -69,6 +69,7 @@ class ForumService:
                     'user': topic.user.userprofile.get_display_name(),
                     'user_url': settings.BASE_URL + reverse('user_page', kwargs={'username': topic.user}),
                     'topic_url': build_notification_url(settings.BASE_URL + topic.get_absolute_url(), topic.user),
+                    'preheader': topic.name,
                     'topic_name': topic.name,
                     'item': item,
                     'item_url': build_notification_url(
@@ -94,6 +95,7 @@ class ForumService:
                             'user': topic.user.userprofile.get_display_name(),
                             'user_url': settings.BASE_URL + reverse('user_page', kwargs={'username': topic.user}),
                             'topic_url': build_notification_url(settings.BASE_URL + topic.get_absolute_url(), topic.user),
+                            'preheader': topic.name,
                             'topic_name': topic.name,
                             'item': item,
                             'item_url': build_notification_url(

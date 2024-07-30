@@ -30,6 +30,19 @@
             height: 100%;
             line-height: 1.6;
         }
+        
+        .preheader {
+            display: none !important;
+            visibility: hidden;
+            opacity: 0;
+            color: transparent;
+            height: 0;
+            width: 0;
+            mso-hide: all;
+            max-height: 0;
+            max-width: 0;
+            overflow: hidden;
+        }
 
         /* Let's make sure all tables have defaults */
         table td {
@@ -303,6 +316,9 @@
     </head>
 
     <body>
+        {% if preheader %}
+            <div class="preheader">{{ preheader }}&nbsp;-&nbsp;</div>
+        {% endif %}
 
         <table class="body-wrap">
             <tr>
