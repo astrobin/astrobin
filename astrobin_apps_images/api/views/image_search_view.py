@@ -103,5 +103,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_acquisition_months(params, queryset)
         queryset = SearchService.filter_by_remote_source(params, queryset)
         queryset = SearchService.filter_by_subject_type(params, queryset)
+        queryset = SearchService.filter_by_color_or_mono(params, queryset)
 
         return queryset
