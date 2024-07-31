@@ -637,18 +637,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_modified_camera(self, results):
-        value: str = self.cleaned_data.get("modified_camera")
-
-        if value.upper() == 'Y':
-            modified = 1
-        elif value.upper() == 'N':
-            modified = 0
-        else:
-            return results
-
-        return results.filter(has_modified_camera=modified)
-
     def filter_by_forum_topic(self, results):
         topic = self.cleaned_data.get("topic")
 
@@ -848,7 +836,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_w(sqs)
         sqs = self.filter_by_h(sqs)
         sqs = self.filter_by_size(sqs)
-        sqs = self.filter_by_modified_camera(sqs)
+        sqs = SearchService.filter_by_modified_camera(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_color_or_mono(self.cleaned_data, sqs)
         sqs = self.filter_by_forum_topic(sqs)
         sqs = self.filter_by_filter_types(sqs)

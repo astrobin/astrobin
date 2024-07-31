@@ -1,6 +1,7 @@
 import re
 from enum import Enum
 from functools import reduce
+from typing import Optional, Union
 
 from django.db.models import Q
 from haystack.backends import SQ
@@ -238,3 +239,33 @@ class SearchService:
             results = results.filter(reduce(op, queries))
 
         return results
+
+    @staticmethod
+    def filter_by_modified_camera(data, results: SearchQuerySet) -> SearchQuerySet:
+        value: Optional[Union[str, bool]] = data.get("modified_camera")
+
+        if value is None:
+            return results
+
+        if (
+                value is True or
+                isinstance(value, str) and (
+                        value.upper() == 'Y' or
+                        value == '1' or
+                        value.lower() == 'true'
+                )
+        ):
+            modified = 1
+        elif (
+                value is False or
+                isinstance(value, str) and (
+                        value.upper() == 'N'
+                        or value == '0'
+                        or value.lower() == 'false'
+                )
+        ):
+            modified = 0
+        else:
+            return results
+
+        return results.filter(has_modified_camera=modified)
