@@ -637,42 +637,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_modified_camera(self, results):
-        value: str = self.cleaned_data.get("modified_camera")
-
-        if value.upper() == 'Y':
-            modified = 1
-        elif value.upper() == 'N':
-            modified = 0
-        else:
-            return results
-
-        return results.filter(has_modified_camera=modified)
-
-    def filter_by_color_or_mono(self, results):
-        value = self.cleaned_data.get("color_or_mono")
-        color_or_mono_op = self.cleaned_data.get("color_or_mono_op")
-        queries = []
-
-        if color_or_mono_op == MatchType.ALL.value:
-            op = and_
-        else:
-            op = or_
-
-        if value is not None and value != "":
-            types = value.split(',')
-
-            if ColorOrMono.COLOR.value in types:
-                queries.append(Q(has_color_camera=True))
-
-            if ColorOrMono.MONO.value in types:
-                queries.append(Q(has_mono_camera=True))
-
-        if len(queries) > 0:
-            results = results.filter(reduce(op, queries))
-
-        return results
-
     def filter_by_forum_topic(self, results):
         topic = self.cleaned_data.get("topic")
 
@@ -872,8 +836,8 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_w(sqs)
         sqs = self.filter_by_h(sqs)
         sqs = self.filter_by_size(sqs)
-        sqs = self.filter_by_modified_camera(sqs)
-        sqs = self.filter_by_color_or_mono(sqs)
+        sqs = SearchService.filter_by_modified_camera(self.cleaned_data, sqs)
+        sqs = SearchService.filter_by_color_or_mono(self.cleaned_data, sqs)
         sqs = self.filter_by_forum_topic(sqs)
         sqs = self.filter_by_filter_types(sqs)
         sqs = self.filter_by_user_id(sqs)

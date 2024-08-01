@@ -1,6 +1,7 @@
 import re
 from enum import Enum
 from functools import reduce
+from typing import Optional, Union
 
 from django.db.models import Q
 from haystack.backends import SQ
@@ -10,6 +11,7 @@ from operator import and_, or_
 from haystack.query import SearchQuerySet
 
 from astrobin.enums import SolarSystemSubject, SubjectType
+from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 
 
 class MatchType(Enum):
@@ -207,3 +209,63 @@ class SearchService:
             results = results.filter(solar_system_main_subject_char=subject_type)
 
         return results
+
+    @staticmethod
+    def filter_by_color_or_mono(data, results: SearchQuerySet) -> SearchQuerySet:
+        if isinstance(data.get("color_or_mono"), dict):
+            value = data.get("color_or_mono").get("value")
+            color_or_mono_op = data.get("color_or_mono").get("matchType")
+        else:
+            value = data.get("color_or_mono")
+            color_or_mono_op = data.get("color_or_mono_op")
+        queries = []
+
+        if color_or_mono_op == MatchType.ALL.value:
+            op = and_
+        else:
+            op = or_
+
+        if value is not None and value != "":
+            if isinstance(value, str):
+                value = value.split(',')
+
+            if ColorOrMono.COLOR.value in value:
+                queries.append(Q(has_color_camera=True))
+
+            if ColorOrMono.MONO.value in value:
+                queries.append(Q(has_mono_camera=True))
+
+        if len(queries) > 0:
+            results = results.filter(reduce(op, queries))
+
+        return results
+
+    @staticmethod
+    def filter_by_modified_camera(data, results: SearchQuerySet) -> SearchQuerySet:
+        value: Optional[Union[str, bool]] = data.get("modified_camera")
+
+        if value is None:
+            return results
+
+        if (
+                value is True or
+                isinstance(value, str) and (
+                        value.upper() == 'Y' or
+                        value == '1' or
+                        value.lower() == 'true'
+                )
+        ):
+            modified = 1
+        elif (
+                value is False or
+                isinstance(value, str) and (
+                        value.upper() == 'N'
+                        or value == '0'
+                        or value.lower() == 'false'
+                )
+        ):
+            modified = 0
+        else:
+            return results
+
+        return results.filter(has_modified_camera=modified)

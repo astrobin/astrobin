@@ -39,9 +39,14 @@ class ImageSearchView(HaystackViewSet):
         if missing_padding:
             base64_string += '=' * (4 - missing_padding)
         return base64_string
-    
+
     def simplify_one_item_lists(self, params):
-        return {key: value[0] if len(value) == 1 else value for key, value in params.items()}
+        return {
+            key: value[0]
+            if isinstance(value, list) and len(value) == 1
+            else value
+            for key, value in params.items()
+        }
 
     def initialize_request(self, request, *args, **kwargs):
         def is_json(value):
@@ -92,7 +97,7 @@ class ImageSearchView(HaystackViewSet):
 
     def filter_queryset(self, queryset: SearchQuerySet) -> SearchQuerySet:
         queryset = super().filter_queryset(queryset)
-        
+
         params = self.simplify_one_item_lists(self.request.query_params)
 
         queryset = SearchService.filter_by_subject(params, queryset)
@@ -103,5 +108,7 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_acquisition_months(params, queryset)
         queryset = SearchService.filter_by_remote_source(params, queryset)
         queryset = SearchService.filter_by_subject_type(params, queryset)
+        queryset = SearchService.filter_by_color_or_mono(params, queryset)
+        queryset = SearchService.filter_by_modified_camera(params, queryset)
 
         return queryset
