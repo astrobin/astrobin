@@ -349,24 +349,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_minimum_data(self, results):
-        minimum_data = self.cleaned_data.get("minimum_data")
-
-        if minimum_data is not None and minimum_data != "":
-            minimum = minimum_data.split(',')
-
-            for data in minimum:
-                if data == 't':
-                    results = results.exclude(SQ(_missing_="imaging_telescopes") & SQ(_missing_="imaging_telescopes_2"))
-                if data == "c":
-                    results = results.exclude(SQ(_missing_="imaging_cameras") & SQ(_missing_="imaging_cameras_2"))
-                if data == "a":
-                    results = results.exclude(_missing_="first_acquisition_date")
-                if data == "s":
-                    results = results.exclude(_missing_="pixel_scale")
-
-        return results
-
     def filter_by_moon_phase(self, results):
         try:
             min = float(self.cleaned_data.get("moon_phase_min"))
@@ -762,7 +744,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_date_acquired(sqs)
         sqs = self.filter_by_license(sqs)
         sqs = self.filter_by_field_radius(sqs)
-        sqs = self.filter_by_minimum_data(sqs)
+        sqs = SearchService.filter_by_minimum_data(self.cleaned_data, sqs)
         sqs = self.filter_by_moon_phase(sqs)
         sqs = self.filter_by_coords(sqs)
         sqs = self.filter_by_pixel_scale(sqs)

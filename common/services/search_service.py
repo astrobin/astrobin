@@ -327,3 +327,25 @@ class SearchService:
             results = results.filter(data_source=data_source)
 
         return results
+
+    @staticmethod
+    def filter_by_minimum_data(data, results: SearchQuerySet) -> SearchQuerySet:
+        minimum_data = data.get("minimum_data")
+
+        if minimum_data is not None and minimum_data != "":
+            if isinstance(minimum_data, str):
+                minimum = minimum_data.split(',')
+            else:
+                minimum = minimum_data
+
+            for data in minimum:
+                if data == 't':
+                    results = results.exclude(SQ(_missing_="imaging_telescopes") & SQ(_missing_="imaging_telescopes_2"))
+                if data == "c":
+                    results = results.exclude(SQ(_missing_="imaging_cameras") & SQ(_missing_="imaging_cameras_2"))
+                if data == "a":
+                    results = results.exclude(_missing_="first_acquisition_date")
+                if data == "s":
+                    results = results.exclude(_missing_="pixel_scale")
+
+        return results
