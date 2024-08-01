@@ -283,3 +283,29 @@ class SearchService:
     @staticmethod
     def filter_by_video(data, results: SearchQuerySet) -> SearchQuerySet:
         return SearchService.apply_boolean_filter(data, results, "video", "video")
+
+    @staticmethod
+    def filter_by_award(data, results: SearchQuerySet) -> SearchQuerySet:
+        award = data.get("award")
+
+        queries = []
+
+        if award is not None and award != "":
+            if isinstance(award, str):
+                types = award.split(',')
+            else:
+                types = award
+
+            if "iotd" in types:
+                queries.append(Q(is_iotd=True))
+
+            if "top-pick" in types:
+                queries.append(Q(is_top_pick=True))
+
+            if "top-pick-nomination" in types:
+                queries.append(Q(is_top_pick_nomination=True))
+
+        if len(queries) > 0:
+            results = results.filter(reduce(or_, queries))
+
+        return results

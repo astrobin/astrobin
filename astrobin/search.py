@@ -260,27 +260,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_award(self, results):
-        award = self.cleaned_data.get("award")
-        queries = []
-
-        if award is not None and award != "":
-            types = award.split(',')
-
-            if "iotd" in types:
-                queries.append(Q(is_iotd=True))
-
-            if "top-pick" in types:
-                queries.append(Q(is_top_pick=True))
-
-            if "top-pick-nomination" in types:
-                queries.append(Q(is_top_pick_nomination=True))
-
-        if len(queries) > 0:
-            results = results.filter(reduce(or_, queries))
-
-        return results
-
     def filter_by_groups(self, results):
         groups = self.cleaned_data.get("groups")
         queries = []
@@ -788,7 +767,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_type(sqs)
         sqs = SearchService.filter_by_animated(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_video(self.cleaned_data, sqs)
-        sqs = self.filter_by_award(sqs)
+        sqs = SearchService.filter_by_award(self.cleaned_data, sqs)
         sqs = self.filter_by_groups(sqs)
         sqs = SearchService.filter_by_camera_type(self.cleaned_data, sqs)
         sqs = self.filter_by_camera_pixel_size(sqs)
