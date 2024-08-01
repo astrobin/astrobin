@@ -318,3 +318,12 @@ class SearchService:
             results = results.filter(countries=CustomContain('__%s__' % country))
 
         return results
+
+    @staticmethod
+    def filter_by_data_source(data, results: SearchQuerySet) -> SearchQuerySet:
+        data_source = data.get("data_source")
+
+        if data_source is not None and data_source != "":
+            results = results.filter(data_source=data_source)
+
+        return results

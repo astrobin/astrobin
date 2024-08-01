@@ -300,14 +300,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_data_source(self, results):
-        data_source = self.cleaned_data.get("data_source")
-
-        if data_source is not None and data_source != "":
-            results = results.filter(data_source=data_source)
-
-        return results
-
     def filter_by_date_published(self, results):
         date_published_min = self.cleaned_data.get("date_published_min")
         date_published_max = self.cleaned_data.get("date_published_max")
@@ -765,7 +757,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_camera_pixel_size(sqs)
         sqs = SearchService.filter_by_country(self.cleaned_data, sqs)
         sqs = self.filter_by_acquisition_type(sqs)
-        sqs = self.filter_by_data_source(sqs)
+        sqs = SearchService.filter_by_data_source(self.cleaned_data, sqs)
         sqs = self.filter_by_date_published(sqs)
         sqs = self.filter_by_date_acquired(sqs)
         sqs = self.filter_by_license(sqs)
