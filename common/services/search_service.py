@@ -41,6 +41,38 @@ class CustomContain(BaseInput):
 
 class SearchService:
     @staticmethod
+    def get_boolean_filter_value(value: Optional[Union[str, bool]]) -> Optional[int]:
+        if value is None:
+            return None
+
+        if (
+                value is True or
+                isinstance(value, str) and (
+                value.upper() == 'Y' or
+                value == '1' or
+                value.lower() == 'true'
+        )
+        ):
+            return 1
+        elif (
+                value is False or
+                isinstance(value, str) and (
+                        value.upper() == 'N'
+                        or value == '0'
+                        or value.lower() == 'false'
+                )
+        ):
+            return 0
+        else:
+            return None
+
+    def apply_boolean_filter(data: dict, results: SearchQuerySet, param_name: str, filter_attr: str) -> SearchQuerySet:
+        value = SearchService.get_boolean_filter_value(data.get(param_name))
+        if value is None:
+            return results
+        return results.filter(**{filter_attr: value})
+
+    @staticmethod
     def filter_by_subject(data, results: SearchQuerySet) -> SearchQuerySet:
         subject = data.get("subject")
         q = data.get("q")
@@ -242,60 +274,12 @@ class SearchService:
 
     @staticmethod
     def filter_by_modified_camera(data, results: SearchQuerySet) -> SearchQuerySet:
-        value: Optional[Union[str, bool]] = data.get("modified_camera")
-
-        if value is None:
-            return results
-
-        if (
-                value is True or
-                isinstance(value, str) and (
-                        value.upper() == 'Y' or
-                        value == '1' or
-                        value.lower() == 'true'
-                )
-        ):
-            modified = 1
-        elif (
-                value is False or
-                isinstance(value, str) and (
-                        value.upper() == 'N'
-                        or value == '0'
-                        or value.lower() == 'false'
-                )
-        ):
-            modified = 0
-        else:
-            return results
-
-        return results.filter(has_modified_camera=modified)
+        return SearchService.apply_boolean_filter(data, results, "modified_camera", "has_modified_camera")
 
     @staticmethod
     def filter_by_animated(data, results: SearchQuerySet) -> SearchQuerySet:
-        value: Optional[Union[str, bool]] = data.get("animated")
+        return SearchService.apply_boolean_filter(data, results, "animated", "animated")
 
-        if value is None:
-            return results
-
-        if (
-                value is True or
-                isinstance(value, str) and (
-                        value.upper() == 'Y' or
-                        value == '1' or
-                        value.lower() == 'true'
-                )
-        ):
-            animated = 1
-        elif (
-                value is False or
-                isinstance(value, str) and (
-                        value.upper() == 'N'
-                        or value == '0'
-                        or value.lower() == 'false'
-                )
-        ):
-            animated = 0
-        else:
-            return results
-
-        return results.filter(animated=animated)
+    @staticmethod
+    def filter_by_video(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_boolean_filter(data, results, "video", "video")
