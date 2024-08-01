@@ -229,6 +229,12 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         include_frozen = request.GET.get('include-frozen', 'false').lower() == 'true'
         q = request.GET.get('q', '')
+        user_id = request.GET.get('user', None)
+
+        if user_id:
+            user = User.objects.get(id=user_id)
+        else:
+            user = request.user
 
         from astrobin_apps_equipment.models import Sensor
         from astrobin_apps_equipment.models import Camera
@@ -241,81 +247,80 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if manager.model == Sensor:
             return Response("This API does not support sensors", HTTP_400_BAD_REQUEST)
 
-        if request.user.is_authenticated:
-            usage_type = request.query_params.get('usage-type')
-            recent_items = set()
+        usage_type = request.query_params.get('usage-type')
+        recent_items = set()
 
-            props: List[str] = []
-            klass: str = None
-            if manager.model == Camera:
-                klass = 'camera'
-                if usage_type == 'imaging':
-                    props = ['imaging_cameras_2']
-                elif usage_type == 'guiding':
-                    props = ['guiding_cameras_2']
-                else:
-                    props = ['imaging_cameras_2', 'guiding_cameras_2']
-            elif manager.model == Telescope:
-                klass = 'telescope'
-                if usage_type == 'imaging':
-                    props = ['imaging_telescopes_2']
-                elif usage_type == 'guiding':
-                    props = ['guiding_telescopes_2']
-                else:
-                    props = ['imaging_telescopes_2', 'guiding_telescopes_2']
-            elif manager.model == Mount:
-                klass = 'mount'
-                props = ['mounts_2']
-            elif manager.model == Filter:
-                klass = 'filter'
-                props = ['filters_2']
-            elif manager.model == Accessory:
-                klass = 'accessory'
-                props = ['accessories_2']
-            elif manager.model == Software:
-                klass = 'software'
-                props = ['software_2']
+        props: List[str] = []
+        klass: str = None
+        if manager.model == Camera:
+            klass = 'camera'
+            if usage_type == 'imaging':
+                props = ['imaging_cameras_2']
+            elif usage_type == 'guiding':
+                props = ['guiding_cameras_2']
+            else:
+                props = ['imaging_cameras_2', 'guiding_cameras_2']
+        elif manager.model == Telescope:
+            klass = 'telescope'
+            if usage_type == 'imaging':
+                props = ['imaging_telescopes_2']
+            elif usage_type == 'guiding':
+                props = ['guiding_telescopes_2']
+            else:
+                props = ['imaging_telescopes_2', 'guiding_telescopes_2']
+        elif manager.model == Mount:
+            klass = 'mount'
+            props = ['mounts_2']
+        elif manager.model == Filter:
+            klass = 'filter'
+            props = ['filters_2']
+        elif manager.model == Accessory:
+            klass = 'accessory'
+            props = ['accessories_2']
+        elif manager.model == Software:
+            klass = 'software'
+            props = ['software_2']
 
-            if klass and props:
-                for prop in props:
-                    user_q = Q(image__user=request.user)
-                    query_q = Q(
-                        Q(**{f'{klass}__name__icontains': q}) |
-                        Q(**{f'{klass}__brand__name__icontains': q})
+        if klass and props:
+            for prop in props:
+                user_q = Q(image__user=user)
+                query_q = Q(
+                    Q(**{f'{klass}__name__icontains': q}) |
+                    Q(**{f'{klass}__brand__name__icontains': q})
+                )
+
+                if 'postgresql' in settings.DATABASES['default']['ENGINE']:
+                    ids = list(
+                        getattr(Image, prop).through.objects.annotate(
+                            item_full_name=Concat(
+                                f'{klass}__brand__name',
+                                Value(' '),
+                                f'{klass}__name'
+                            )
+                        ).annotate(
+                            distance=TrigramDistance(f'item_full_name', q)
+                        ).filter(
+                            user_q & (query_q | Q(distance__lte=.8))
+                        ).values_list(
+                            klass, flat=True
+                        ).distinct()
+                    )
+                else:
+                    ids = list(
+                        getattr(Image, prop).through.objects.filter(
+                            user_q & query_q
+                        ).values_list(
+                            klass, flat=True
+                        ).distinct()
                     )
 
-                    if 'postgresql' in settings.DATABASES['default']['ENGINE']:
-                        ids = list(
-                            getattr(Image, prop).through.objects.annotate(
-                                item_full_name=Concat(
-                                    f'{klass}__brand__name',
-                                    Value(' '),
-                                    f'{klass}__name'
-                                )
-                            ).annotate(
-                                distance=TrigramDistance(f'item_full_name', q)
-                            ).filter(
-                                user_q & (query_q | Q(distance__lte=.8))
-                            ).values_list(
-                                klass, flat=True
-                            ).distinct()
-                        )
-                    else:
-                        ids = list(
-                            getattr(Image, prop).through.objects.filter(
-                                user_q & query_q
-                            ).values_list(
-                                klass, flat=True
-                            ).distinct()
-                        )
+                for x in ids:
+                    recent_items.add(x)
 
-                    for x in ids:
-                        recent_items.add(x)
+        objects = manager.filter(pk__in=recent_items)
 
-            objects = manager.filter(pk__in=recent_items)
-
-            if not include_frozen:
-                objects = objects.exclude(frozen_as_ambiguous=True)
+        if not include_frozen:
+            objects = objects.exclude(frozen_as_ambiguous=True)
 
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)

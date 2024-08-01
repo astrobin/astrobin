@@ -25,6 +25,7 @@ from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Sof
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
+from common.permissions import IsSuperUser, or_permission
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +38,7 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
     filter_class = ImageFilter
     permission_classes = [
         IsAuthenticatedOrReadOnly,
-        IsImageOwnerOrReadOnly
+        or_permission(IsImageOwnerOrReadOnly, IsSuperUser)
     ]
     http_method_names = ['get', 'head', 'put']
     throttle_classes = [ScopedRateThrottle]
