@@ -6,6 +6,11 @@ from astrobin.templatetags.tags import has_subscription_by_name
 from astrobin_apps_users.services import UserService
 
 
+class IsSuperUser(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.is_superuser
+
+
 class ReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
         # Read permissions are allowed to any request
