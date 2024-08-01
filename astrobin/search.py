@@ -292,14 +292,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_country(self, results):
-        country = self.cleaned_data.get("country")
-
-        if country is not None and country != "":
-            results = results.filter(countries=CustomContain('__%s__' % country))
-
-        return results
-
     def filter_by_acquisition_type(self, results):
         acquisition_type = self.cleaned_data.get("acquisition_type")
 
@@ -771,7 +763,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_groups(sqs)
         sqs = SearchService.filter_by_camera_type(self.cleaned_data, sqs)
         sqs = self.filter_by_camera_pixel_size(sqs)
-        sqs = self.filter_by_country(sqs)
+        sqs = SearchService.filter_by_country(self.cleaned_data, sqs)
         sqs = self.filter_by_acquisition_type(sqs)
         sqs = self.filter_by_data_source(sqs)
         sqs = self.filter_by_date_published(sqs)

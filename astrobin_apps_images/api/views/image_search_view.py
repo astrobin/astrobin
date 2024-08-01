@@ -113,5 +113,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_animated(params, queryset)
         queryset = SearchService.filter_by_video(params, queryset)
         queryset = SearchService.filter_by_award(params, queryset)
+        queryset = SearchService.filter_by_country(params, queryset)
 
         return queryset

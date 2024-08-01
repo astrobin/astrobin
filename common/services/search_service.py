@@ -309,3 +309,12 @@ class SearchService:
             results = results.filter(reduce(or_, queries))
 
         return results
+
+    @staticmethod
+    def filter_by_country(data, results: SearchQuerySet) -> SearchQuerySet:
+        country = data.get("country")
+
+        if country is not None and country != "":
+            results = results.filter(countries=CustomContain('__%s__' % country))
+
+        return results
