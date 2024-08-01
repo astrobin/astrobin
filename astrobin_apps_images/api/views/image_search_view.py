@@ -110,5 +110,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_subject_type(params, queryset)
         queryset = SearchService.filter_by_color_or_mono(params, queryset)
         queryset = SearchService.filter_by_modified_camera(params, queryset)
+        queryset = SearchService.filter_by_animated(params, queryset)
 
         return queryset

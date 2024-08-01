@@ -269,3 +269,33 @@ class SearchService:
             return results
 
         return results.filter(has_modified_camera=modified)
+
+    @staticmethod
+    def filter_by_animated(data, results: SearchQuerySet) -> SearchQuerySet:
+        value: Optional[Union[str, bool]] = data.get("animated")
+
+        if value is None:
+            return results
+
+        if (
+                value is True or
+                isinstance(value, str) and (
+                        value.upper() == 'Y' or
+                        value == '1' or
+                        value.lower() == 'true'
+                )
+        ):
+            animated = 1
+        elif (
+                value is False or
+                isinstance(value, str) and (
+                        value.upper() == 'N'
+                        or value == '0'
+                        or value.lower() == 'false'
+                )
+        ):
+            animated = 0
+        else:
+            return results
+
+        return results.filter(animated=animated)

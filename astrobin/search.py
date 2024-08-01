@@ -260,14 +260,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_animated(self, results):
-        t = self.cleaned_data.get("animated")
-
-        if t:
-            results = results.filter(animated=1)
-
-        return results
-
     def filter_by_video(self, results):
         t = self.cleaned_data.get("video")
 
@@ -802,7 +794,7 @@ class AstroBinSearchForm(SearchForm):
 
         # Images
         sqs = self.filter_by_type(sqs)
-        sqs = self.filter_by_animated(sqs)
+        sqs = SearchService.filter_by_animated(self.cleaned_data, sqs)
         sqs = self.filter_by_video(sqs)
         sqs = self.filter_by_award(sqs)
         sqs = self.filter_by_groups(sqs)
