@@ -21,6 +21,38 @@
       .brand-mobile {
         display: none !important;
       }
+
+      .nav > li {
+        float: none;
+
+        > .btn {
+          padding: .75rem !important;
+        }
+
+        > .toggleproperty-add-remove .btn {
+          padding: calc(.75rem - 3px) !important;
+        }
+      }
+
+      .nav.buttons {
+        gap: .75rem;
+        align-items: center;
+
+        .hidden-desktop[for=enable-solution-overlay] {
+          display: inline-block !important;
+          vertical-align: middle;
+          margin: 0 .5rem 0 0;
+          font-size: 1.25rem;
+        }
+
+        .btn {
+          margin: 0 !important;
+
+          [class^="icon-"] {
+            margin: 0;
+          }
+        }
+      }
     }
   }
 
