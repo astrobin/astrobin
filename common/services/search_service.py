@@ -507,3 +507,14 @@ class SearchService:
             'min_mount_payload',
             'max_mount_payload'
         )
+
+    @staticmethod
+    def filter_by_telescope_focal_length(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'telescope_focal_length',
+            'min_focal_length',
+            'max_focal_length',
+            int
+        )
