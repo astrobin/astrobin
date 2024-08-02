@@ -487,3 +487,13 @@ class SearchService:
             'min_telescope_weight',
             'max_telescope_weight'
         )
+
+    @staticmethod
+    def filter_by_mount_weight(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'mount_weight',
+            'min_mount_weight',
+            'max_mount_weight'
+        )
