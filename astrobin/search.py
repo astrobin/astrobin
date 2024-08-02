@@ -354,21 +354,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_mount_max_payload(self, results):
-        try:
-            min = int(self.cleaned_data.get("mount_max_payload_min"))
-            results = results.filter(min_mount_max_payload__gte=min)
-        except TypeError:
-            pass
-
-        try:
-            max = int(self.cleaned_data.get("mount_max_payload_max"))
-            results = results.filter(max_mount_max_payload__lte=max)
-        except TypeError:
-            pass
-
-        return results
-
     def filter_by_telescope_focal_length(self, results):
         try:
             min = int(self.cleaned_data.get("telescope_focal_length_min"))
@@ -633,7 +618,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_telescope_weight(self.cleaned_data, sqs)
         sqs = self.filter_by_telescope_focal_length(sqs)
         sqs = SearchService.filter_by_mount_weight(self.cleaned_data, sqs)
-        sqs = self.filter_by_mount_max_payload(sqs)
+        sqs = SearchService.filter_by_mount_max_payload(self.cleaned_data, sqs)
         sqs = self.filter_by_integration_time(sqs)
         sqs = SearchService.filter_by_constellation(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_subject(self.cleaned_data, sqs)

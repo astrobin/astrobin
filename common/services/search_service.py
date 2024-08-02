@@ -497,3 +497,13 @@ class SearchService:
             'min_mount_weight',
             'max_mount_weight'
         )
+
+    @staticmethod
+    def filter_by_mount_max_payload(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'mount_max_payload',
+            'min_mount_payload',
+            'max_mount_payload'
+        )

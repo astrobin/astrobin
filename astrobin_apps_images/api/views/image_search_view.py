@@ -125,5 +125,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_telescope_diameter(params, queryset)
         queryset = SearchService.filter_by_telescope_weight(params, queryset)
         queryset = SearchService.filter_by_mount_weight(params, queryset)
+        queryset = SearchService.filter_by_mount_max_payload(params, queryset)
 
         return queryset
