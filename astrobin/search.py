@@ -496,22 +496,7 @@ class AstroBinSearchForm(SearchForm):
         except TypeError:
             pass
 
-        return results
-
-    def filter_by_bortle_scale(self, results):
-        try:
-            min = float(self.cleaned_data.get("bortle_scale_min"))
-            results = results.filter(bortle_scale__gte=min)
-        except TypeError:
-            pass
-
-        try:
-            max = float(self.cleaned_data.get("bortle_scale_max"))
-            results = results.filter(bortle_scale__lte=max)
-        except TypeError:
-            pass
-
-        return results
+        return
 
     def filter_by_w(self, results):
         try:
@@ -753,7 +738,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_subject(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_telescope(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_camera(self.cleaned_data, sqs)
-        sqs = self.filter_by_bortle_scale(sqs)
+        sqs = SearchService.filter_by_bortle_scale(self.cleaned_data, sqs)
         sqs = self.filter_by_w(sqs)
         sqs = self.filter_by_h(sqs)
         sqs = self.filter_by_size(sqs)

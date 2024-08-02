@@ -117,5 +117,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_data_source(params, queryset)
         queryset = SearchService.filter_by_minimum_data(params, queryset)
         queryset = SearchService.filter_by_constellation(params, queryset)
+        queryset = SearchService.filter_by_bortle_scale(params, queryset)
 
         return queryset

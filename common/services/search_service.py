@@ -358,3 +358,30 @@ class SearchService:
             results = results.filter(constellation="__%s__" % constellation)
 
         return results
+
+    @staticmethod
+    def filter_by_bortle_scale(data, results: SearchQuerySet) -> SearchQuerySet:
+        if 'bortle_scale_min' in data:
+            try:
+                minimum = float(data.get('bortle_scale_min'))
+                results = results.filter(bortle_scale__gte=minimum)
+            except TypeError:
+                return results
+
+        if 'bortle_scale_max' in data:
+            try:
+                maximum = float(data.get('bortle_scale_max'))
+                results = results.filter(bortle_scale__lte=maximum)
+            except TypeError:
+                return results
+
+        if 'bortle_scale' in data:
+            try:
+                value = data.get('bortle_scale')
+                minimum = float(value.get('min'))
+                maximum = float(value.get('max'))
+                results = results.filter(bortle_scale__gte=minimum, bortle_scale__lte=maximum)
+            except (TypeError, AttributeError):
+                return results
+
+        return results
