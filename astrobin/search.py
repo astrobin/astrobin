@@ -487,7 +487,7 @@ class AstroBinSearchForm(SearchForm):
         except TypeError:
             pass
 
-        return
+        return results
 
     def filter_by_w(self, results):
         try:
