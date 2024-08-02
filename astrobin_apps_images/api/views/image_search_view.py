@@ -116,5 +116,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_country(params, queryset)
         queryset = SearchService.filter_by_data_source(params, queryset)
         queryset = SearchService.filter_by_minimum_data(params, queryset)
+        queryset = SearchService.filter_by_constellation(params, queryset)
 
         return queryset

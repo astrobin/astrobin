@@ -349,3 +349,12 @@ class SearchService:
                     results = results.exclude(_missing_="pixel_scale")
 
         return results
+
+    @staticmethod
+    def filter_by_constellation(data, results: SearchQuerySet) -> SearchQuerySet:
+        constellation = data.get("constellation")
+
+        if constellation is not None and constellation != "":
+            results = results.filter(constellation="__%s__" % constellation)
+
+        return results

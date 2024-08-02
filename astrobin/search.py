@@ -498,14 +498,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_constellation(self, results):
-        constellation = self.cleaned_data.get("constellation")
-
-        if constellation is not None and constellation != "":
-            results = results.filter(constellation="__%s__" % constellation)
-
-        return results
-
     def filter_by_bortle_scale(self, results):
         try:
             min = float(self.cleaned_data.get("bortle_scale_min"))
@@ -757,7 +749,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_mount_weight(sqs)
         sqs = self.filter_by_mount_max_payload(sqs)
         sqs = self.filter_by_integration_time(sqs)
-        sqs = self.filter_by_constellation(sqs)
+        sqs = SearchService.filter_by_constellation(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_subject(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_telescope(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_camera(self.cleaned_data, sqs)
