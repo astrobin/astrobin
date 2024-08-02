@@ -354,21 +354,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_pixel_scale(self, results):
-        try:
-            min = float(self.cleaned_data.get("pixel_scale_min"))
-            results = results.filter(pixel_scale__gte=min)
-        except TypeError:
-            pass
-
-        try:
-            max = float(self.cleaned_data.get("pixel_scale_max"))
-            results = results.filter(pixel_scale__lte=max)
-        except TypeError:
-            pass
-
-        return results
-
     def filter_by_telescope_diameter(self, results):
         try:
             min = int(self.cleaned_data.get("telescope_diameter_min"))
@@ -685,7 +670,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_minimum_data(self.cleaned_data, sqs)
         sqs = self.filter_by_moon_phase(sqs)
         sqs = self.filter_by_coords(sqs)
-        sqs = self.filter_by_pixel_scale(sqs)
+        sqs = SearchService.filter_by_pixel_scale(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_remote_source(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_subject_type(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_telescope_type(self.cleaned_data, sqs)

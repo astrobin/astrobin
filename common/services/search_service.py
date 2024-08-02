@@ -455,3 +455,13 @@ class SearchService:
             'field_radius',
             'field_radius'
         )
+
+    @staticmethod
+    def filter_by_pixel_scale(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'pixel_scale',
+            'pixel_scale',
+            'pixel_scale'
+        )
