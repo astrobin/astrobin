@@ -477,3 +477,14 @@ class SearchService:
             'max_aperture',
             int
         )
+
+    @staticmethod
+    def filter_by_telescope_weight(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'telescope_weight',
+            'min_telescope_weight',
+            'max_telescope_weight',
+            int
+        )
