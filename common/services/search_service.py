@@ -485,6 +485,5 @@ class SearchService:
             results,
             'telescope_weight',
             'min_telescope_weight',
-            'max_telescope_weight',
-            int
+            'max_telescope_weight'
         )
