@@ -385,3 +385,14 @@ class SearchService:
                 return results
 
         return results
+
+    @staticmethod
+    def filter_by_license(data, results: SearchQuerySet) -> SearchQuerySet:
+        licenses = data.get("license")
+
+        if licenses is not None and licenses != "":
+            if isinstance(licenses, str):
+                licenses = license.split(',')
+            results = results.filter(license_name__in=licenses)
+
+        return results

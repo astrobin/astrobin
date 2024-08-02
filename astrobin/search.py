@@ -364,15 +364,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_license(self, results):
-        license = self.cleaned_data.get("license")
-
-        if license is not None and license != "":
-            licenses = license.split(',')
-            results = results.filter(license_name__in=licenses)
-
-        return results
-
     def filter_by_coords(self, results):
         # Intersection between the filter ra,dec area and the image area.
         try:
@@ -719,7 +710,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_data_source(self.cleaned_data, sqs)
         sqs = self.filter_by_date_published(sqs)
         sqs = self.filter_by_date_acquired(sqs)
-        sqs = self.filter_by_license(sqs)
+        sqs = SearchService.filter_by_license(self.cleaned_data, sqs)
         sqs = self.filter_by_field_radius(sqs)
         sqs = SearchService.filter_by_minimum_data(self.cleaned_data, sqs)
         sqs = self.filter_by_moon_phase(sqs)
