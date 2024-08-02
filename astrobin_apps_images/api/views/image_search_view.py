@@ -122,5 +122,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_camera_pixel_size(params, queryset)
         queryset = SearchService.filter_by_field_radius(params, queryset)
         queryset = SearchService.filter_by_pixel_scale(params, queryset)
+        queryset = SearchService.filter_by_telescope_diameter(params, queryset)
 
         return queryset

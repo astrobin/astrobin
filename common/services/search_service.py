@@ -1,7 +1,7 @@
 import re
 from enum import Enum
 from functools import reduce
-from typing import Optional, Union
+from typing import Optional, Type, Union
 
 from django.db.models import Q
 from haystack.backends import SQ
@@ -84,18 +84,19 @@ class SearchService:
             results: SearchQuerySet,
             param_name: str, 
             min_filter_attr: str,
-            max_filter_attr: str = None
+            max_filter_attr: str = None,
+            value_type: Type[Union[int, float]] = float
     ) -> SearchQuerySet:
         if f'{param_name}_min' in data:
             try:
-                minimum = float(data.get(f'{param_name}_min'))
+                minimum = value_type(data.get(f'{param_name}_min'))
                 results = results.filter(**{f'{min_filter_attr}__gte': minimum})
             except TypeError:
                 pass
 
         if f'{param_name}_max' in data:
             try:
-                maximum = float(data.get(f'{param_name}_max'))
+                maximum = value_type(data.get(f'{param_name}_max'))
                 results = results.filter(**{f'{max_filter_attr}__lte': maximum})
             except TypeError:
                 pass
@@ -103,8 +104,8 @@ class SearchService:
         if param_name in data:
             try:
                 value = data.get(param_name)
-                minimum = float(value.get('min'))
-                maximum = float(value.get('max'))
+                minimum = value_type(value.get('min'))
+                maximum = value_type(value.get('max'))
                 results = results.filter(**{f'{min_filter_attr}__gte': minimum, f'{max_filter_attr}__lte': maximum})
             except (TypeError, AttributeError):
                 pass
@@ -464,4 +465,15 @@ class SearchService:
             'pixel_scale',
             'pixel_scale',
             'pixel_scale'
+        )
+
+    @staticmethod
+    def filter_by_telescope_diameter(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'telescope_diameter',
+            'min_aperture',
+            'max_aperture',
+            int
         )
