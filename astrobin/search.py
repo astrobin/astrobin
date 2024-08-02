@@ -277,21 +277,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_camera_pixel_size(self, results):
-        try:
-            min = float(self.cleaned_data.get("camera_pixel_size_min"))
-            results = results.filter(min_camera_pixel_size__gte=min)
-        except TypeError:
-            pass
-
-        try:
-            max = float(self.cleaned_data.get("camera_pixel_size_max"))
-            results = results.filter(max_camera_pixel_size__lte=max)
-        except TypeError:
-            pass
-
-        return results
-
     def filter_by_acquisition_type(self, results):
         acquisition_type = self.cleaned_data.get("acquisition_type")
 
@@ -704,7 +689,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_award(self.cleaned_data, sqs)
         sqs = self.filter_by_groups(sqs)
         sqs = SearchService.filter_by_camera_type(self.cleaned_data, sqs)
-        sqs = self.filter_by_camera_pixel_size(sqs)
+        sqs = SearchService.filter_by_camera_pixel_size(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_country(self.cleaned_data, sqs)
         sqs = self.filter_by_acquisition_type(sqs)
         sqs = SearchService.filter_by_data_source(self.cleaned_data, sqs)

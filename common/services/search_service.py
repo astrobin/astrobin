@@ -396,3 +396,30 @@ class SearchService:
             results = results.filter(license_name__in=licenses)
 
         return results
+
+    @staticmethod
+    def filter_by_camera_pixel_size(data, results: SearchQuerySet) -> SearchQuerySet:
+        if 'camera_pixel_size_min' in data:
+            try:
+                minimum = float(data.get("camera_pixel_size_min"))
+                results = results.filter(min_camera_pixel_size__gte=minimum)
+            except TypeError:
+                pass
+
+        if 'camera_pixel_size_max' in data:
+            try:
+                maximum = float(data.get("camera_pixel_size_max"))
+                results = results.filter(max_camera_pixel_size__lte=maximum)
+            except TypeError:
+                pass
+
+        if 'camera_pixel_size' in data:
+            try:
+                value = data.get("camera_pixel_size")
+                minimum = float(value.get("min"))
+                maximum = float(value.get("max"))
+                results = results.filter(min_camera_pixel_size__gte=minimum, max_camera_pixel_size__lte=maximum)
+            except (TypeError, AttributeError):
+                pass
+
+        return results
