@@ -120,5 +120,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_bortle_scale(params, queryset)
         queryset = SearchService.filter_by_license(params, queryset)
         queryset = SearchService.filter_by_camera_pixel_size(params, queryset)
+        queryset = SearchService.filter_by_field_radius(params, queryset)
 
         return queryset

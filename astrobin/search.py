@@ -319,21 +319,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_field_radius(self, results):
-        try:
-            min = float(self.cleaned_data.get("field_radius_min"))
-            results = results.filter(field_radius__gte=min)
-        except TypeError:
-            pass
-
-        try:
-            max = float(self.cleaned_data.get("field_radius_max"))
-            results = results.filter(field_radius__lte=max)
-        except TypeError:
-            pass
-
-        return results
-
     def filter_by_moon_phase(self, results):
         try:
             min = float(self.cleaned_data.get("moon_phase_min"))
@@ -696,7 +681,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_date_published(sqs)
         sqs = self.filter_by_date_acquired(sqs)
         sqs = SearchService.filter_by_license(self.cleaned_data, sqs)
-        sqs = self.filter_by_field_radius(sqs)
+        sqs = SearchService.filter_by_field_radius(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_minimum_data(self.cleaned_data, sqs)
         sqs = self.filter_by_moon_phase(sqs)
         sqs = self.filter_by_coords(sqs)

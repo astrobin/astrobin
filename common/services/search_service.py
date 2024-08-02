@@ -66,11 +66,50 @@ class SearchService:
         else:
             return None
 
-    def apply_boolean_filter(data: dict, results: SearchQuerySet, param_name: str, filter_attr: str) -> SearchQuerySet:
+    @staticmethod
+    def apply_boolean_filter(
+            data: dict, 
+            results: SearchQuerySet,
+            param_name: str,
+            filter_attr: str
+    ) -> SearchQuerySet:
         value = SearchService.get_boolean_filter_value(data.get(param_name))
         if value is None:
             return results
         return results.filter(**{filter_attr: value})
+
+    @staticmethod
+    def apply_range_filter(
+            data: dict, 
+            results: SearchQuerySet,
+            param_name: str, 
+            min_filter_attr: str,
+            max_filter_attr: str = None
+    ) -> SearchQuerySet:
+        if f'{param_name}_min' in data:
+            try:
+                minimum = float(data.get(f'{param_name}_min'))
+                results = results.filter(**{f'{min_filter_attr}__gte': minimum})
+            except TypeError:
+                pass
+
+        if f'{param_name}_max' in data:
+            try:
+                maximum = float(data.get(f'{param_name}_max'))
+                results = results.filter(**{f'{max_filter_attr}__lte': maximum})
+            except TypeError:
+                pass
+            
+        if param_name in data:
+            try:
+                value = data.get(param_name)
+                minimum = float(value.get('min'))
+                maximum = float(value.get('max'))
+                results = results.filter(**{f'{min_filter_attr}__gte': minimum, f'{max_filter_attr}__lte': maximum})
+            except (TypeError, AttributeError):
+                pass
+
+        return results
 
     @staticmethod
     def filter_by_subject(data, results: SearchQuerySet) -> SearchQuerySet:
@@ -399,27 +438,20 @@ class SearchService:
 
     @staticmethod
     def filter_by_camera_pixel_size(data, results: SearchQuerySet) -> SearchQuerySet:
-        if 'camera_pixel_size_min' in data:
-            try:
-                minimum = float(data.get("camera_pixel_size_min"))
-                results = results.filter(min_camera_pixel_size__gte=minimum)
-            except TypeError:
-                pass
-
-        if 'camera_pixel_size_max' in data:
-            try:
-                maximum = float(data.get("camera_pixel_size_max"))
-                results = results.filter(max_camera_pixel_size__lte=maximum)
-            except TypeError:
-                pass
-
-        if 'camera_pixel_size' in data:
-            try:
-                value = data.get("camera_pixel_size")
-                minimum = float(value.get("min"))
-                maximum = float(value.get("max"))
-                results = results.filter(min_camera_pixel_size__gte=minimum, max_camera_pixel_size__lte=maximum)
-            except (TypeError, AttributeError):
-                pass
-
-        return results
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'camera_pixel_size',
+            'min_camera_pixel_size',
+            'max_camera_pixel_size'
+        )
+    
+    @staticmethod
+    def filter_by_field_radius(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'field_radius',
+            'field_radius',
+            'field_radius'
+        )
