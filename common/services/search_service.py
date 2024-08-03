@@ -1,7 +1,7 @@
 import re
 from enum import Enum
 from functools import reduce
-from typing import Optional, Type, Union
+from typing import Any, Callable, Optional, Type, Union
 
 from django.db.models import Q
 from haystack.backends import SQ
@@ -117,6 +117,37 @@ class SearchService:
                 })
             except (TypeError, AttributeError):
                 pass
+
+        return results
+
+    @staticmethod
+    def apply_match_type_filter(
+        data: dict,
+        results: SearchQuerySet,
+        key: str,
+        match_type_key: str,
+        query_func: Callable[[Any], Q]
+    ) -> SearchQuerySet:
+        if isinstance(data.get(key), dict):
+            values = data.get(key).get("value")
+            match_type = data.get(key).get("matchType")
+        else:
+            values = data.get(key)
+            match_type = data.get(match_type_key)
+
+        if match_type == MatchType.ALL.value:
+            op = and_
+        else:
+            op = or_
+
+        if values is not None and values != "":
+            if isinstance(values, str):
+                values = values.split(',')
+
+            queries = [query_func(value) for value in values]
+
+            if queries:
+                results = results.filter(reduce(op, queries))
 
         return results
 
@@ -242,33 +273,46 @@ class SearchService:
 
     @staticmethod
     def filter_by_acquisition_months(data, results: SearchQuerySet) -> SearchQuerySet:
-        if isinstance(data.get("acquisition_months"), dict):
-            acquisition_months = data.get("acquisition_months").get("months")
-            acquisition_months_op = data.get("acquisition_months").get("matchType")
-        else:
-            acquisition_months = data.get("acquisition_months")
-            acquisition_months_op = data.get("acquisition_months_op")
+        def query_func(month):
+            return Q(acquisition_months=month)
 
-        if acquisition_months_op == MatchType.ALL.value:
-            op = and_
-        else:
-            op = or_
+        return SearchService.apply_match_type_filter(
+            data,
+            results,
+            "acquisition_months",
+            "acquisition_months_op",
+            query_func
+        )
 
-        if acquisition_months is not None and acquisition_months != "":
-            if isinstance(acquisition_months, str):
-                months = acquisition_months.split(',')
-            else:
-                months = acquisition_months
+    @staticmethod
+    def filter_by_filter_types(data: dict, results: SearchQuerySet) -> SearchQuerySet:
+        def query_func(filter_type):
+            return Q(filter_types=filter_type)
 
-            queries = []
+        return SearchService.apply_match_type_filter(
+            data,
+            results,
+            "filter_types",
+            "filter_types_op",
+            query_func
+        )
 
-            for month in months:
-                queries.append(Q(acquisition_months=month))
+    @staticmethod
+    def filter_by_color_or_mono(data, results: SearchQuerySet) -> SearchQuerySet:
+        def query_func(value):
+            if value == ColorOrMono.COLOR.value:
+                return Q(has_color_camera=True)
+            elif value == ColorOrMono.MONO.value:
+                return Q(has_mono_camera=True)
+            return Q()
 
-            if len(queries) > 0:
-                results = results.filter(reduce(op, queries))
-
-        return results
+        return SearchService.apply_match_type_filter(
+            data,
+            results,
+            "color_or_mono",
+            "color_or_mono_op",
+            query_func
+        )
 
     @staticmethod
     def filter_by_remote_source(data, results: SearchQuerySet) -> SearchQuerySet:
@@ -287,36 +331,6 @@ class SearchService:
             results = results.filter(subject_type_char=subject_type)
         elif subject_type in list(vars(SolarSystemSubject).keys()):
             results = results.filter(solar_system_main_subject_char=subject_type)
-
-        return results
-
-    @staticmethod
-    def filter_by_color_or_mono(data, results: SearchQuerySet) -> SearchQuerySet:
-        if isinstance(data.get("color_or_mono"), dict):
-            value = data.get("color_or_mono").get("value")
-            color_or_mono_op = data.get("color_or_mono").get("matchType")
-        else:
-            value = data.get("color_or_mono")
-            color_or_mono_op = data.get("color_or_mono_op")
-        queries = []
-
-        if color_or_mono_op == MatchType.ALL.value:
-            op = and_
-        else:
-            op = or_
-
-        if value is not None and value != "":
-            if isinstance(value, str):
-                value = value.split(',')
-
-            if ColorOrMono.COLOR.value in value:
-                queries.append(Q(has_color_camera=True))
-
-            if ColorOrMono.MONO.value in value:
-                queries.append(Q(has_mono_camera=True))
-
-        if len(queries) > 0:
-            results = results.filter(reduce(op, queries))
 
         return results
 

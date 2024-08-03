@@ -407,26 +407,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_filter_types(self, results):
-        filter_types = self.cleaned_data.get("filter_types")
-        filter_types_op = self.cleaned_data.get("filter_types_op")
-        queries = []
-
-        if filter_types_op == MatchType.ALL.value:
-            op = and_
-        else:
-            op = or_
-
-        if filter_types is not None and filter_types != "":
-            types = filter_types.split(',')
-            for x in types:
-                queries.append(Q(filter_types=x))
-
-        if len(queries) > 0:
-            results = results.filter(reduce(op, queries))
-
-        return results
-
     def filter_by_user_id(self, results):
         user_id = self.cleaned_data.get("user_id")
 
@@ -601,7 +581,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_modified_camera(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_color_or_mono(self.cleaned_data, sqs)
         sqs = self.filter_by_forum_topic(sqs)
-        sqs = self.filter_by_filter_types(sqs)
+        sqs = SearchService.filter_by_filter_types(self.cleaned_data, sqs)
         sqs = self.filter_by_user_id(sqs)
         sqs = SearchService.filter_by_acquisition_months(self.cleaned_data, sqs)
         sqs = self.filter_by_username(sqs)
