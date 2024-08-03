@@ -129,5 +129,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_telescope_focal_length(params, queryset)
         queryset = SearchService.filter_by_integration_time(params, queryset)
         queryset = SearchService.filter_by_filter_types(params, queryset)
+        queryset = SearchService.filter_by_size(params, queryset)
 
         return queryset

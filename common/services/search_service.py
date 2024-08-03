@@ -86,22 +86,23 @@ class SearchService:
             min_filter_attr: str,
             max_filter_attr: str = None,
             value_type: Type[Union[int, float]] = float,
-            multiplier: float = 1.0
+            param_multiplier: float = 1.0,
+            value_multiplier: float = 1.0
     ) -> SearchQuerySet:
         if f'{param_name}_min' in data:
             try:
-                minimum = value_type(data.get(f'{param_name}_min'))
+                minimum = value_type(data.get(f'{param_name}_min') * param_multiplier)
                 results = results.filter(**{
-                    f'{min_filter_attr}__gte': minimum * value_type(multiplier)
+                    f'{min_filter_attr}__gte': minimum * value_type(value_multiplier)
                 })
             except TypeError:
                 pass
 
         if f'{param_name}_max' in data:
             try:
-                maximum = value_type(data.get(f'{param_name}_max'))
+                maximum = value_type(data.get(f'{param_name}_max') * param_multiplier)
                 results = results.filter(**{
-                    f'{max_filter_attr}__lte': maximum * value_type(multiplier)
+                    f'{max_filter_attr}__lte': maximum * value_type(value_multiplier)
                 })
             except TypeError:
                 pass
@@ -109,11 +110,11 @@ class SearchService:
         if param_name in data:
             try:
                 value = data.get(param_name)
-                minimum = value_type(value.get('min'))
-                maximum = value_type(value.get('max'))
+                minimum = value_type(value.get('min') * param_multiplier)
+                maximum = value_type(value.get('max') * param_multiplier)
                 results = results.filter(**{
-                    f'{min_filter_attr}__gte': minimum * value_type(multiplier),
-                    f'{max_filter_attr}__lte': maximum * value_type(multiplier)
+                    f'{min_filter_attr}__gte': minimum * value_type(value_multiplier),
+                    f'{max_filter_attr}__lte': maximum * value_type(value_multiplier)
                 })
             except (TypeError, AttributeError):
                 pass
@@ -549,5 +550,17 @@ class SearchService:
             'integration_time',
             'integration',
             'integration',
-            multiplier=3600
+            value_multiplier=3600
+        )
+
+    @staticmethod
+    def filter_by_size(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'size',
+            'size',
+            'size',
+            int,
+            param_multiplier=1e6
         )
