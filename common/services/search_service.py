@@ -85,19 +85,24 @@ class SearchService:
             param_name: str, 
             min_filter_attr: str,
             max_filter_attr: str = None,
-            value_type: Type[Union[int, float]] = float
+            value_type: Type[Union[int, float]] = float,
+            multiplier: float = 1.0
     ) -> SearchQuerySet:
         if f'{param_name}_min' in data:
             try:
                 minimum = value_type(data.get(f'{param_name}_min'))
-                results = results.filter(**{f'{min_filter_attr}__gte': minimum})
+                results = results.filter(**{
+                    f'{min_filter_attr}__gte': minimum * value_type(multiplier)
+                })
             except TypeError:
                 pass
 
         if f'{param_name}_max' in data:
             try:
                 maximum = value_type(data.get(f'{param_name}_max'))
-                results = results.filter(**{f'{max_filter_attr}__lte': maximum})
+                results = results.filter(**{
+                    f'{max_filter_attr}__lte': maximum * value_type(multiplier)
+                })
             except TypeError:
                 pass
             
@@ -106,7 +111,10 @@ class SearchService:
                 value = data.get(param_name)
                 minimum = value_type(value.get('min'))
                 maximum = value_type(value.get('max'))
-                results = results.filter(**{f'{min_filter_attr}__gte': minimum, f'{max_filter_attr}__lte': maximum})
+                results = results.filter(**{
+                    f'{min_filter_attr}__gte': minimum * value_type(multiplier),
+                    f'{max_filter_attr}__lte': maximum * value_type(multiplier)
+                })
             except (TypeError, AttributeError):
                 pass
 
@@ -517,4 +525,15 @@ class SearchService:
             'min_focal_length',
             'max_focal_length',
             int
+        )
+
+    @staticmethod
+    def filter_by_integration_time(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'integration_time',
+            'integration',
+            'integration',
+            multiplier=3600
         )
