@@ -504,8 +504,8 @@ class SearchService:
             data,
             results,
             'mount_max_payload',
-            'min_mount_payload',
-            'max_mount_payload'
+            'min_mount_max_payload',
+            'max_mount_max_payload'
         )
 
     @staticmethod
