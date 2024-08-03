@@ -9,6 +9,7 @@ from drf_haystack.filters import HaystackFilter, HaystackOrderingFilter
 from drf_haystack.viewsets import HaystackViewSet
 from haystack.query import SearchQuerySet
 from rest_framework.exceptions import ParseError
+from rest_framework.fields import BooleanField
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.throttling import ScopedRateThrottle
 
@@ -48,6 +49,23 @@ class ImageSearchView(HaystackViewSet):
             for key, value in params.items()
         }
 
+    def preprocess_query_params(self, params):
+        for key in params.keys():
+            value = params[key]
+            if isinstance(value, bool):
+                value = 'true' if value else 'false'
+            elif isinstance(value, str) and value.lower() in ('true', 'false'):
+                value = value.lower()
+            params[key] = value
+
+        return params
+
+    def update_request_params(self, request, params):
+        request._request.GET = request._request.GET.copy()
+        for key, value in params.items():
+            request._request.GET[key] = value
+        return request
+
     def initialize_request(self, request, *args, **kwargs):
         def is_json(value):
             try:
@@ -85,10 +103,7 @@ class ImageSearchView(HaystackViewSet):
                         except json.JSONDecodeError:
                             continue
 
-                # Replace request.query_params with decoded_params
-                request._request.GET = request._request.GET.copy()
-                for key, value in decoded_params.items():
-                    request._request.GET[key] = value
+                request = self.update_request_params(request, decoded_params)
 
             except (ValueError, TypeError, base64.binascii.Error, zlib.error) as e:
                 raise ParseError(f"Error decoding parameters: {str(e)}")
@@ -96,9 +111,13 @@ class ImageSearchView(HaystackViewSet):
         return request
 
     def filter_queryset(self, queryset: SearchQuerySet) -> SearchQuerySet:
-        queryset = super().filter_queryset(queryset)
-
+        # Preprocess query params to handle boolean fields
         params = self.simplify_one_item_lists(self.request.query_params)
+        params = self.preprocess_query_params(params)
+
+        self.request = self.update_request_params(self.request, params)
+
+        queryset = super().filter_queryset(queryset)
 
         queryset = SearchService.filter_by_subject(params, queryset)
         queryset = SearchService.filter_by_telescope(params, queryset)
