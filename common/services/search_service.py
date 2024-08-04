@@ -85,37 +85,36 @@ class SearchService:
             param_name: str, 
             min_filter_attr: str,
             max_filter_attr: str = None,
-            value_type: Type[Union[int, float]] = float,
-            param_multiplier: float = 1.0,
-            value_multiplier: float = 1.0
+            value_type: Type[Union[int, float, str]] = float,
+            value_multiplier: Optional[Union[int, float, str]] = None
     ) -> SearchQuerySet:
-        if f'{param_name}_min' in data:
+        def get_adjusted_value(value: Union[int, float, str]) -> Optional[Union[int, float]]:
             try:
-                minimum = value_type(data.get(f'{param_name}_min') * param_multiplier)
-                results = results.filter(**{
-                    f'{min_filter_attr}__gte': minimum * value_type(value_multiplier)
-                })
-            except TypeError:
-                pass
+                adjusted_value = value_type(value)
+                if value_multiplier is not None:
+                    adjusted_value *= value_type(value_multiplier)
+                return adjusted_value
+            except (TypeError, ValueError):
+                return None
+
+        def apply_filter(value: Union[int, float, str], filter_attr: str, operator: str) -> SearchQuerySet:
+            adjusted_value = get_adjusted_value(value)
+            if adjusted_value is None or isinstance(adjusted_value, str) and adjusted_value == '':
+                return results
+            return results.filter(**{f'{filter_attr}{operator}': adjusted_value})
+
+        if f'{param_name}_min' in data:
+            results = apply_filter(data.get(f'{param_name}_min'), min_filter_attr, '__gte')
 
         if f'{param_name}_max' in data:
-            try:
-                maximum = value_type(data.get(f'{param_name}_max') * param_multiplier)
-                results = results.filter(**{
-                    f'{max_filter_attr}__lte': maximum * value_type(value_multiplier)
-                })
-            except TypeError:
-                pass
-            
+            results = apply_filter(data.get(f'{param_name}_max'), max_filter_attr, '__lte')
+
         if param_name in data:
             try:
                 value = data.get(param_name)
-                minimum = value_type(value.get('min') * param_multiplier)
-                maximum = value_type(value.get('max') * param_multiplier)
-                results = results.filter(**{
-                    f'{min_filter_attr}__gte': minimum * value_type(value_multiplier),
-                    f'{max_filter_attr}__lte': maximum * value_type(value_multiplier)
-                })
+                if isinstance(value, dict):
+                    results = apply_filter(value.get('min'), min_filter_attr, '__gte')
+                    results = apply_filter(value.get('max'), max_filter_attr, '__lte')
             except (TypeError, AttributeError):
                 pass
 
@@ -562,7 +561,29 @@ class SearchService:
             'size',
             'size',
             int,
-            param_multiplier=1e6
+            value_multiplier=1e6
+        )
+
+    @staticmethod
+    def filter_by_date_published(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'date_published',
+            'published',
+            'published',
+            str
+        )
+
+    @staticmethod
+    def filter_by_date_acquired(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'date_acquired',
+            'last_acquisition_date',
+            'last_acquisition_date',
+            str
         )
 
     @staticmethod

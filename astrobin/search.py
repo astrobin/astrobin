@@ -309,6 +309,12 @@ class AstroBinSearchForm(SearchForm):
         except ValueError:
             pass
 
+    def filter_by_acquisition_type(self, results):
+        acquisition_type = self.cleaned_data.get("acquisition_type")
+
+        if acquisition_type is not None and acquisition_type != "":
+            results = results.filter(acquisition_type=acquisition_type)
+
         return results
 
     def filter_by_moon_phase(self, results):
@@ -530,8 +536,8 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_country(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_acquisition_type(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_data_source(self.cleaned_data, sqs)
-        sqs = self.filter_by_date_published(sqs)
-        sqs = self.filter_by_date_acquired(sqs)
+        sqs = SearchService.filter_by_date_published(self.cleaned_data, sqs)
+        sqs = SearchService.filter_by_date_acquired(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_license(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_field_radius(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_minimum_data(self.cleaned_data, sqs)
