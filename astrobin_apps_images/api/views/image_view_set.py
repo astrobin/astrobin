@@ -9,10 +9,12 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db.models import Count, Value
 from django.db.models.functions import Concat
+from django.utils.translation import gettext_lazy
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import mixins
 from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
@@ -129,6 +131,9 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
                 data_str = simplejson.dumps(data, default=str)
                 logger.error(f"Error creating DeepSky_Acquisition: {e}. Data: {data_str}")
                 raise e
+
+        if 'solar_system_acquisitions' in request.data and len(request.data.get('solar_system_acquisitions')) > 1:
+            raise ValidationError(gettext_lazy("Only one video-based acquisition is allowed per image."))
 
         SolarSystem_Acquisition.objects.filter(image=instance).delete()
         for item in request.data.get('solar_system_acquisitions'):

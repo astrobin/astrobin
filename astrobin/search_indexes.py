@@ -928,11 +928,14 @@ class ImageIndex(CelerySearchIndex, Indexable):
         else:
             try:
                 solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=obj)
-                if solar_system_acquisition.date:
-                    return [solar_system_acquisition.date.strftime('%b')]
-                else:
-                    return None
+            except SolarSystem_Acquisition.MultipleObjectsReturned:
+                solar_system_acquisition = SolarSystem_Acquisition.objects.filter(image=obj).first()
             except SolarSystem_Acquisition.DoesNotExist:
+                return None
+
+            if solar_system_acquisition.date:
+                return [solar_system_acquisition.date.strftime('%b')]
+            else:
                 return None
 
         return None
