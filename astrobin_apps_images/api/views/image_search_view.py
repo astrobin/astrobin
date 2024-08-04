@@ -149,5 +149,7 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_integration_time(params, queryset)
         queryset = SearchService.filter_by_filter_types(params, queryset)
         queryset = SearchService.filter_by_size(params, queryset)
+        queryset = SearchService.filter_by_date_published(params, queryset)
+        queryset = SearchService.filter_by_date_acquired(params, queryset)
 
         return queryset
