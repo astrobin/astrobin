@@ -277,14 +277,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_acquisition_type(self, results):
-        acquisition_type = self.cleaned_data.get("acquisition_type")
-
-        if acquisition_type is not None and acquisition_type != "":
-            results = results.filter(acquisition_type=acquisition_type)
-
-        return results
-
     def filter_by_date_published(self, results):
         date_published_min = self.cleaned_data.get("date_published_min")
         date_published_max = self.cleaned_data.get("date_published_max")
@@ -536,7 +528,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_camera_type(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_camera_pixel_size(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_country(self.cleaned_data, sqs)
-        sqs = self.filter_by_acquisition_type(sqs)
+        sqs = SearchService.filter_by_acquisition_type(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_data_source(self.cleaned_data, sqs)
         sqs = self.filter_by_date_published(sqs)
         sqs = self.filter_by_date_acquired(sqs)
