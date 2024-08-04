@@ -277,6 +277,38 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_date_published(self, results):
+        date_published_min = self.cleaned_data.get("date_published_min")
+        date_published_max = self.cleaned_data.get("date_published_max")
+
+        try:
+            if date_published_min is not None and date_published_min != "":
+                results = results.filter(published__gte=date_published_min)
+
+            if date_published_max is not None and date_published_max != "":
+                results = results.filter(
+                    published__lt=datetime.strptime(date_published_max, '%Y-%m-%d') + timedelta(1)
+                )
+        except ValueError:
+            pass
+
+        return results
+
+    def filter_by_date_acquired(self, results):
+        date_acquired_min = self.cleaned_data.get("date_acquired_min")
+        date_acquired_max = self.cleaned_data.get("date_acquired_max")
+
+        try:
+            if date_acquired_min is not None and date_acquired_min != "":
+                results = results.filter(first_acquisition_date__gte=date_acquired_min)
+
+            if date_acquired_max is not None and date_acquired_max != "":
+                results = results.filter(
+                    last_acquisition_date__lt=datetime.strptime(date_acquired_max, '%Y-%m-%d') + timedelta(1)
+                )
+        except ValueError:
+            pass
+
     def filter_by_acquisition_type(self, results):
         acquisition_type = self.cleaned_data.get("acquisition_type")
 
@@ -502,7 +534,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_camera_type(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_camera_pixel_size(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_country(self.cleaned_data, sqs)
-        sqs = self.filter_by_acquisition_type(sqs)
+        sqs = SearchService.filter_by_acquisition_type(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_data_source(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_date_published(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_date_acquired(self.cleaned_data, sqs)

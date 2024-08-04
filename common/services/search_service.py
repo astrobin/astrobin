@@ -585,3 +585,12 @@ class SearchService:
             'last_acquisition_date',
             str
         )
+
+    @staticmethod
+    def filter_by_acquisition_type(data, results: SearchQuerySet) -> SearchQuerySet:
+        acquisition_type = data.get("acquisition_type")
+
+        if acquisition_type is not None and acquisition_type != "":
+            results = results.filter(acquisition_type=acquisition_type)
+
+        return results
