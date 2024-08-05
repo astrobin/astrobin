@@ -317,26 +317,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_coords(self, results):
-        # Intersection between the filter ra,dec area and the image area.
-        try:
-            ra_min = float(self.cleaned_data.get("coord_ra_min"))
-            ra_max = float(self.cleaned_data.get("coord_ra_max"))
-            results = results.filter(coord_ra_min__lte=ra_max)
-            results = results.filter(coord_ra_max__gte=ra_min)
-        except TypeError:
-            pass
-
-        try:
-            dec_min = float(self.cleaned_data.get("coord_dec_min"))
-            dec_max = float(self.cleaned_data.get("coord_dec_max"))
-            results = results.filter(coord_dec_min__lte=dec_max)
-            results = results.filter(coord_dec_max__gte=dec_min)
-        except TypeError:
-            pass
-
-        return results
-
     def filter_by_w(self, results):
         try:
             min = int(self.cleaned_data.get("w_min"))
@@ -527,7 +507,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_field_radius(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_minimum_data(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_moon_phase(self.cleaned_data, sqs)
-        sqs = self.filter_by_coords(sqs)
+        sqs = SearchService.filter_by_coords(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_pixel_scale(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_remote_source(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_subject_type(self.cleaned_data, sqs)

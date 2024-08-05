@@ -604,3 +604,37 @@ class SearchService:
             'moon_phase',
             'moon_phase'
         )
+
+    @staticmethod
+    def filter_by_coords(data, results: SearchQuerySet) -> SearchQuerySet:
+        # Intersection between the filter ra,dec area and the image area.
+        try:
+            ra_min = float(data.get("coord_ra_min"))
+            ra_max = float(data.get("coord_ra_max"))
+            results = results.filter(coord_ra_min__lte=ra_max)
+            results = results.filter(coord_ra_max__gte=ra_min)
+        except TypeError:
+            pass
+
+        try:
+            dec_min = float(data.get("coord_dec_min"))
+            dec_max = float(data.get("coord_dec_max"))
+            results = results.filter(coord_dec_min__lte=dec_max)
+            results = results.filter(coord_dec_max__gte=dec_min)
+        except TypeError:
+            pass
+        
+        try:
+            coords = data.get("coords")
+            ra_min = float(coords.get("ra").get("min"))
+            ra_max = float(coords.get("ra").get("max"))
+            dec_min = float(coords.get("dec").get("min"))
+            dec_max = float(coords.get("dec").get("max"))
+            results = results.filter(coord_ra_min__lte=ra_max)
+            results = results.filter(coord_ra_max__gte=ra_min)
+            results = results.filter(coord_dec_min__lte=dec_max)
+            results = results.filter(coord_dec_max__gte=dec_min)
+        except (TypeError, AttributeError):
+            pass
+
+        return results
