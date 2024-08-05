@@ -317,21 +317,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_moon_phase(self, results):
-        try:
-            min = float(self.cleaned_data.get("moon_phase_min"))
-            results = results.filter(moon_phase__gte=min)
-        except TypeError:
-            pass
-
-        try:
-            max = float(self.cleaned_data.get("moon_phase_max"))
-            results = results.filter(moon_phase__lte=max)
-        except TypeError:
-            pass
-
-        return results
-
     def filter_by_coords(self, results):
         # Intersection between the filter ra,dec area and the image area.
         try:
@@ -541,7 +526,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_license(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_field_radius(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_minimum_data(self.cleaned_data, sqs)
-        sqs = self.filter_by_moon_phase(sqs)
+        sqs = SearchService.filter_by_moon_phase(self.cleaned_data, sqs)
         sqs = self.filter_by_coords(sqs)
         sqs = SearchService.filter_by_pixel_scale(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_remote_source(self.cleaned_data, sqs)

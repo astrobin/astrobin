@@ -594,3 +594,13 @@ class SearchService:
             results = results.filter(acquisition_type=acquisition_type)
 
         return results
+
+    @staticmethod
+    def filter_by_moon_phase(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_range_filter(
+            data,
+            results,
+            'moon_phase',
+            'moon_phase',
+            'moon_phase'
+        )

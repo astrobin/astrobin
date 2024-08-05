@@ -152,5 +152,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_acquisition_type(params, queryset)
         queryset = SearchService.filter_by_date_published(params, queryset)
         queryset = SearchService.filter_by_date_acquired(params, queryset)
+        queryset = SearchService.filter_by_moon_phase(params, queryset)
 
         return queryset
