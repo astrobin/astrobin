@@ -2510,14 +2510,6 @@ class SolarSystem_Acquisition(Acquisition):
         max_length=5,
     )
 
-    def clean(self):
-        if self.pk is None and SolarSystem_Acquisition.objects.filter(image=self.image).exists():
-            raise ValidationError(_("An video-based acquisition already exists for this image."))
-
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        super().save(*args, **kwargs)
-
     class Meta:
         app_label = 'astrobin'
 
