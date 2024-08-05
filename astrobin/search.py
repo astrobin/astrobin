@@ -317,36 +317,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_w(self, results):
-        try:
-            min = int(self.cleaned_data.get("w_min"))
-            results = results.filter(w__gte=min)
-        except TypeError:
-            pass
-
-        try:
-            max = int(self.cleaned_data.get("w_max"))
-            results = results.filter(w__lte=max)
-        except TypeError:
-            pass
-
-        return results
-
-    def filter_by_h(self, results):
-        try:
-            min = int(self.cleaned_data.get("h_min"))
-            results = results.filter(h__gte=min)
-        except TypeError:
-            pass
-
-        try:
-            max = int(self.cleaned_data.get("h_max"))
-            results = results.filter(h__lte=max)
-        except TypeError:
-            pass
-
-        return results
-
     def filter_by_forum_topic(self, results):
         topic = self.cleaned_data.get("topic")
 
@@ -523,8 +493,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_telescope(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_camera(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_bortle_scale(self.cleaned_data, sqs)
-        sqs = self.filter_by_w(sqs)
-        sqs = self.filter_by_h(sqs)
+        sqs = SearchService.filter_by_image_size(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_size(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_modified_camera(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_color_or_mono(self.cleaned_data, sqs)

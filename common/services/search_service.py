@@ -626,14 +626,57 @@ class SearchService:
         
         try:
             coords = data.get("coords")
-            ra_min = float(coords.get("ra").get("min"))
-            ra_max = float(coords.get("ra").get("max"))
-            dec_min = float(coords.get("dec").get("min"))
-            dec_max = float(coords.get("dec").get("max"))
-            results = results.filter(coord_ra_min__lte=ra_max)
-            results = results.filter(coord_ra_max__gte=ra_min)
-            results = results.filter(coord_dec_min__lte=dec_max)
-            results = results.filter(coord_dec_max__gte=dec_min)
+            if coords:
+                ra_min = float(coords.get("ra").get("min"))
+                ra_max = float(coords.get("ra").get("max"))
+                dec_min = float(coords.get("dec").get("min"))
+                dec_max = float(coords.get("dec").get("max"))
+                results = results.filter(
+                    coord_ra_min__lte=ra_max,
+                    coord_ra_max__gte=ra_min,
+                    coord_dec_min__lte=dec_max,
+                    coord_dec_max__gte=dec_min
+                )
+        except (TypeError, AttributeError):
+            pass
+
+        return results
+
+    @staticmethod
+    def filter_by_image_size(data, results: SearchQuerySet) -> SearchQuerySet:
+        try:
+            width_min = int(data.get("w_min"))
+            width_max = int(data.get("w_max"))
+            results = results.filter(
+                w__gte=width_min,
+                w__lte=width_max
+            )
+        except (TypeError, ValueError):
+            pass
+
+        try:
+            height_min = int(data.get("h_min"))
+            height_max = int(data.get("h_max"))
+            results = results.filter(
+                h__gte=height_min,
+                h__lte=height_max
+            )
+        except (TypeError, ValueError):
+            pass
+
+        try:
+            image_size = data.get("image_size")
+            if image_size:
+                width_min = int(image_size.get("w").get("min"))
+                width_max = int(image_size.get("w").get("max"))
+                height_min = int(image_size.get("h").get("min"))
+                height_max = int(image_size.get("h").get("max"))
+                results = results.filter(
+                    w__gte=width_min,
+                    w__lte=width_max,
+                    h__gte=height_min,
+                    h__lte=height_max
+                )
         except (TypeError, AttributeError):
             pass
 
