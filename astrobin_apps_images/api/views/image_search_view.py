@@ -155,5 +155,6 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_moon_phase(params, queryset)
         queryset = SearchService.filter_by_coords(params, queryset)
         queryset = SearchService.filter_by_image_size(params, queryset)
+        queryset = SearchService.filter_by_groups(params, self.request.user, queryset)
 
         return queryset

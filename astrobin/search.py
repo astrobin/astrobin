@@ -260,23 +260,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_groups(self, results):
-        groups = self.cleaned_data.get("groups")
-        queries = []
-
-        if groups is not None and groups != "":
-            pks = groups.split(',')
-            if len(pks) > 0:
-                groups = Group.objects.filter(pk__in=pks)
-                for group in groups:
-                    if self.request.user in group.members.all():
-                        queries.append(Q(groups=CustomContain(f'_{group.pk}__')))
-
-        if len(queries) > 0:
-            results = results.filter(reduce(or_, queries))
-
-        return results
-
     def filter_by_date_published(self, results):
         date_published_min = self.cleaned_data.get("date_published_min")
         date_published_max = self.cleaned_data.get("date_published_max")
@@ -465,7 +448,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_animated(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_video(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_award(self.cleaned_data, sqs)
-        sqs = self.filter_by_groups(sqs)
+        sqs = SearchService.filter_by_groups(self.cleaned_data, self.request.user, sqs)
         sqs = SearchService.filter_by_camera_type(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_camera_pixel_size(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_country(self.cleaned_data, sqs)

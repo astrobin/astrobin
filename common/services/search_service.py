@@ -3,6 +3,7 @@ from enum import Enum
 from functools import reduce
 from typing import Any, Callable, Optional, Type, Union
 
+from django.contrib.auth.models import User
 from django.db.models import Q
 from haystack.backends import SQ
 from haystack.inputs import BaseInput, Clean
@@ -12,6 +13,7 @@ from haystack.query import SearchQuerySet
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
+from astrobin_apps_groups.models import Group
 
 
 class MatchType(Enum):
@@ -679,5 +681,36 @@ class SearchService:
                 )
         except (TypeError, AttributeError):
             pass
+
+        return results
+
+    @staticmethod
+    def filter_by_groups(data, user: User, results: SearchQuerySet) -> SearchQuerySet:
+        groups = data.get("groups")
+        queries = []
+        op = or_
+
+        def build_queries(pks):
+            if len(pks) > 0:
+                group_objects = Group.objects.filter(pk__in=pks)
+                for group_object in group_objects.iterator():
+                    if user in group_object.members.all():
+                        queries.append(Q(groups=CustomContain(f'__{group_object.pk}__')))
+
+        if groups is not None:
+            if isinstance(groups, str) and groups != '':
+                pks = groups.split(',')
+                build_queries(pks)
+            elif isinstance(groups, dict):
+                pks = groups.get('value')
+                match_type = groups.get('matchType')
+                build_queries(pks)
+                if match_type == MatchType.ALL.value:
+                    op = and_
+                else:
+                    op = or_
+
+        if len(queries) > 0:
+            results = results.filter(reduce(op, queries))
 
         return results
