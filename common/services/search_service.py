@@ -76,7 +76,7 @@ class SearchService:
             filter_attr: str
     ) -> SearchQuerySet:
         value = SearchService.get_boolean_filter_value(data.get(param_name))
-        if value is None:
+        if value is not True:
             return results
         return results.filter(**{filter_attr: value})
 

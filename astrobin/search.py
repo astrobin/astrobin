@@ -1,6 +1,6 @@
-from datetime import datetime, timedelta
 from functools import reduce
-from operator import and_, or_
+from functools import reduce
+from operator import or_
 
 from django import forms
 from django.contrib.auth.models import User
@@ -13,9 +13,7 @@ from haystack.generic_views import SearchView
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
-from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
-from astrobin_apps_groups.models import Group
-from common.services.search_service import CustomContain, MatchType, SearchService
+from common.services.search_service import CustomContain, SearchService
 from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
 from .models import Image
@@ -257,46 +255,6 @@ class AstroBinSearchForm(SearchForm):
             )
         elif t != "all":
             results = results.filter(**{t: self.cleaned_data.get('q')})
-
-        return results
-
-    def filter_by_date_published(self, results):
-        date_published_min = self.cleaned_data.get("date_published_min")
-        date_published_max = self.cleaned_data.get("date_published_max")
-
-        try:
-            if date_published_min is not None and date_published_min != "":
-                results = results.filter(published__gte=date_published_min)
-
-            if date_published_max is not None and date_published_max != "":
-                results = results.filter(
-                    published__lt=datetime.strptime(date_published_max, '%Y-%m-%d') + timedelta(1)
-                )
-        except ValueError:
-            pass
-
-        return results
-
-    def filter_by_date_acquired(self, results):
-        date_acquired_min = self.cleaned_data.get("date_acquired_min")
-        date_acquired_max = self.cleaned_data.get("date_acquired_max")
-
-        try:
-            if date_acquired_min is not None and date_acquired_min != "":
-                results = results.filter(first_acquisition_date__gte=date_acquired_min)
-
-            if date_acquired_max is not None and date_acquired_max != "":
-                results = results.filter(
-                    last_acquisition_date__lt=datetime.strptime(date_acquired_max, '%Y-%m-%d') + timedelta(1)
-                )
-        except ValueError:
-            pass
-
-    def filter_by_acquisition_type(self, results):
-        acquisition_type = self.cleaned_data.get("acquisition_type")
-
-        if acquisition_type is not None and acquisition_type != "":
-            results = results.filter(acquisition_type=acquisition_type)
 
         return results
 
