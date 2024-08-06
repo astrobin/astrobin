@@ -8,6 +8,11 @@ class LocationSerializer(serializers.ModelSerializer):
     # default which would be read-only.
     id = serializers.IntegerField(required=False)
 
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user.userprofile
+        return super().create(validated_data)
+
     class Meta:
         model = Location
         fields = '__all__'
