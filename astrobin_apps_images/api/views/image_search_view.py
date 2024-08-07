@@ -157,4 +157,19 @@ class ImageSearchView(HaystackViewSet):
         queryset = SearchService.filter_by_image_size(params, queryset)
         queryset = SearchService.filter_by_groups(params, self.request.user, queryset)
 
+        if 'ordering' in params and params.get('ordering') != 'relevance':
+            ordering = params.get('ordering')
+
+            # Special fixes for some fields.
+            if ordering.endswith('field_radius'):
+                queryset = queryset.exclude(_missing_='field_radius')
+            elif ordering.endswith('pixel_scale'):
+                queryset = queryset.exclude(_missing_='pixel_scale')
+            elif ordering.endswith('coord_ra_min'):
+                queryset = queryset.exclude(_missing_='coord_ra_min')
+            elif ordering.endswith('coord_dec_min'):
+                queryset = queryset.exclude(_missing_='coord_dec_min')
+                
+            queryset = queryset.order_by(ordering)
+
         return queryset
