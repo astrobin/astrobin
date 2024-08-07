@@ -154,6 +154,35 @@ class SearchService:
         return results
 
     @staticmethod
+    def apply_equipment_filter(data, results: SearchQuerySet, key: str, id_field: str) -> SearchQuerySet:
+        item = data.get(key)
+        queries = []
+        op = or_
+
+        if not item:
+            return results
+
+        try:
+            item_ids = [int(item)]
+        except (ValueError, TypeError):
+            item_ids = []
+
+        if isinstance(item, dict):
+            items = item.get("value")
+            item_ids = [x['id'] for x in items]
+            match_type = item.get("matchType", MatchType.ALL.value)
+            op = or_ if match_type == MatchType.ANY.value else and_
+
+        if item_ids:
+            for item_id in item_ids:
+                queries.append(Q(**{id_field: item_id}))
+
+        if len(queries) > 0:
+            results = results.filter(reduce(op, queries))
+
+        return results
+
+    @staticmethod
     def filter_by_subject(data, results: SearchQuerySet) -> SearchQuerySet:
         subject = data.get("subject")
         q = data.get("q")
@@ -201,57 +230,21 @@ class SearchService:
 
     @staticmethod
     def filter_by_telescope(data, results: SearchQuerySet) -> SearchQuerySet:
-        telescope = data.get("telescope")
-
-        if not telescope:
-            return results
-
-        try:
-            telescope_id = int(telescope)
-        except (ValueError, TypeError):
-            telescope_id = None
-
-        if isinstance(telescope, dict):
-            telescope_id = telescope.get("id")
-            telescope = telescope.get("name")
-
-        if telescope_id and telescope_id != "":
-            return results.filter(imaging_telescopes_2_id=telescope_id)
-
-        if telescope and telescope != "":
-            return results.filter(
-                SQ(imaging_telescopes=CustomContain(telescope)) |
-                SQ(imaging_telescopes_2=CustomContain(telescope))
-            )
-
-        return results
+        return SearchService.apply_equipment_filter(
+            data,
+            results,
+            key="telescope",
+            id_field="imaging_telescopes_2_id",
+        )
 
     @staticmethod
     def filter_by_camera(data, results: SearchQuerySet) -> SearchQuerySet:
-        camera = data.get("camera")
-
-        if not camera:
-            return results
-
-        try:
-            camera_id = int(camera)
-        except (ValueError, TypeError):
-            camera_id = None
-
-        if isinstance(camera, dict):
-            camera_id = camera.get("id")
-            camera = camera.get("name")
-
-        if camera_id and camera_id != "":
-            return results.filter(imaging_cameras_2_id=camera_id)
-
-        if camera and camera != "":
-            return results.filter(
-                SQ(imaging_cameras=CustomContain(camera)) |
-                SQ(imaging_cameras_2=CustomContain(camera))
-            )
-
-        return results
+        return SearchService.apply_equipment_filter(
+            data,
+            results,
+            key="camera",
+            id_field="imaging_cameras_2_id",
+        )
 
     @staticmethod
     def filter_by_telescope_type(data, results: SearchQuerySet) -> SearchQuerySet:
