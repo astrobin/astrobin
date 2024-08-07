@@ -70,7 +70,7 @@ class SearchService:
 
     @staticmethod
     def apply_boolean_filter(
-            data: dict, 
+            data: dict,
             results: SearchQuerySet,
             param_name: str,
             filter_attr: str
@@ -82,9 +82,9 @@ class SearchService:
 
     @staticmethod
     def apply_range_filter(
-            data: dict, 
+            data: dict,
             results: SearchQuerySet,
-            param_name: str, 
+            param_name: str,
             min_filter_attr: str,
             max_filter_attr: str = None,
             value_type: Type[Union[int, float, str]] = float,
@@ -124,11 +124,11 @@ class SearchService:
 
     @staticmethod
     def apply_match_type_filter(
-        data: dict,
-        results: SearchQuerySet,
-        key: str,
-        match_type_key: str,
-        query_func: Callable[[Any], Q]
+            data: dict,
+            results: SearchQuerySet,
+            key: str,
+            match_type_key: str,
+            query_func: Callable[[Any], Q]
     ) -> SearchQuerySet:
         if isinstance(data.get(key), dict):
             values = data.get(key).get("value")
@@ -154,7 +154,14 @@ class SearchService:
         return results
 
     @staticmethod
-    def apply_equipment_filter(data, results: SearchQuerySet, key: str, id_field: str) -> SearchQuerySet:
+    def apply_equipment_filter(
+            data,
+            results: SearchQuerySet,
+            key: str,
+            id_field: str,
+            legacy_field: str,
+            new_field: str
+    ) -> SearchQuerySet:
         item = data.get(key)
         queries = []
         op = or_
@@ -162,20 +169,24 @@ class SearchService:
         if not item:
             return results
 
-        try:
-            item_ids = [int(item)]
-        except (ValueError, TypeError):
-            item_ids = []
-
         if isinstance(item, dict):
             items = item.get("value")
             item_ids = [x['id'] for x in items]
             match_type = item.get("matchType", MatchType.ALL.value)
             op = or_ if match_type == MatchType.ANY.value else and_
+        elif isinstance(item, list):
+            item_ids = item
+        else:
+            item_ids = None
 
         if item_ids:
             for item_id in item_ids:
                 queries.append(Q(**{id_field: item_id}))
+        elif isinstance(item, str):
+            queries.append(
+                Q(**{legacy_field: CustomContain(item)}) |
+                Q(**{new_field: CustomContain(item)})
+            )
 
         if len(queries) > 0:
             results = results.filter(reduce(op, queries))
@@ -235,6 +246,8 @@ class SearchService:
             results,
             key="telescope",
             id_field="imaging_telescopes_2_id",
+            legacy_field="imaging_telescopes",
+            new_field="imaging_telescopes_2"
         )
 
     @staticmethod
@@ -244,6 +257,8 @@ class SearchService:
             results,
             key="camera",
             id_field="imaging_cameras_2_id",
+            legacy_field="imaging_cameras",
+            new_field="imaging_cameras_2"
         )
 
     @staticmethod
@@ -463,7 +478,7 @@ class SearchService:
             'min_camera_pixel_size',
             'max_camera_pixel_size'
         )
-    
+
     @staticmethod
     def filter_by_field_radius(data, results: SearchQuerySet) -> SearchQuerySet:
         return SearchService.apply_range_filter(
@@ -618,7 +633,7 @@ class SearchService:
             results = results.filter(coord_dec_max__gte=dec_min)
         except TypeError:
             pass
-        
+
         try:
             coords = data.get("coords")
             if coords:
