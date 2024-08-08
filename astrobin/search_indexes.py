@@ -2,6 +2,7 @@ import datetime
 import logging
 import sys
 from functools import reduce
+from typing import Optional
 
 from avatar.templatetags.avatar_tags import avatar_url
 from celery_haystack.indexes import CelerySearchIndex
@@ -21,7 +22,10 @@ from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Camera as LegacyCamera, DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition
 from astrobin.services.utils_service import UtilsService
-from astrobin_apps_equipment.models import Camera
+from astrobin_apps_equipment.models import (
+    Camera, EquipmentItemMarketplaceListing,
+    EquipmentItemMarketplacePrivateConversation,
+)
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
@@ -1030,9 +1034,15 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
 
 class NestedCommentIndex(CelerySearchIndex, Indexable):
+    id = CharField(model_attr='id')
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated')
+    image_thumbnail = CharField()
+    user_display_name = CharField()
+    user_avatar = CharField()
+    content_object_title = CharField()
+    content_object_url = CharField()
 
     def get_model(self):
         return NestedComment
@@ -1055,10 +1065,34 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
             ):
                 return False
 
+        if isinstance(instance.content_object, EquipmentItemMarketplacePrivateConversation):
+            return False
+
         return True
 
     def get_updated_field(self):
         return "updated"
+
+    def prepare_image_thumbnail(self, obj: NestedComment) -> Optional[str]:
+        if isinstance(obj.content_object, Image):
+            return obj.content_object.thumbnail('gallery', 'final', sync=True)
+        elif isinstance(obj.content_object, EquipmentItemMarketplaceListing):
+            first_line_item = obj.content_object.line_items.first()
+            if first_line_item and first_line_item.images.exists():
+                return first_line_item.images.first().thumbnail_file.url
+        return None
+
+    def prepare_user_display_name(self, obj: NestedComment) -> str:
+        return obj.author.userprofile.get_display_name()
+
+    def prepare_user_avatar(self, obj: NestedComment) -> str:
+        return avatar_url(obj.author, 200)
+
+    def prepare_content_object_title(self, obj: NestedComment) -> str:
+        return str(obj.content_object)
+
+    def prepare_content_object_url(self, obj: NestedComment) -> str:
+        return obj.content_object.get_absolute_url()
 
 
 class ForumTopicIndex(CelerySearchIndex, Indexable):

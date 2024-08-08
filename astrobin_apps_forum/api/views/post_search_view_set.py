@@ -30,9 +30,9 @@ class PostSearchViewSet(EncodedSearchViewSet):
 
         text = params.get('text', '')
 
-        queryset = super().filter_queryset(queryset)
+        queryset = SearchQuerySet().models(Post)
 
         if text:
             queryset = queryset.auto_query(text)
 
-        return queryset.models(Post)
+        return queryset

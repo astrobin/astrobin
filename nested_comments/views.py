@@ -6,17 +6,25 @@ from django.http import Http404
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django_filters.rest_framework import DjangoFilterBackend
+from djangorestframework_camel_case.render import CamelCaseJSONRenderer
+from drf_haystack.filters import HaystackFilter
+from haystack.query import SearchQuerySet
 from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.generics import get_object_or_404
+from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
+from rest_framework.throttling import ScopedRateThrottle
 
+from common.api_page_size_pagination import PageSizePagination
+from common.encoded_search_viewset import EncodedSearchViewSet
 from common.models import AbuseReport, ABUSE_REPORT_DECISION_CONFIRMED, ABUSE_REPORT_DECISION_OVERRULED
+from common.permissions import ReadOnly
 from .models import NestedComment
 from .permissions import IsOwnerOrReadOnly
-from .serializers import NestedCommentSerializer
+from .serializers import NestedCommentSearchSerializer, NestedCommentSerializer
 from .services import CommentNotificationsService
 
 
@@ -125,3 +133,30 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
         )
 
         return Response(status=200)
+
+
+class NestedCommentSearchViewSet(EncodedSearchViewSet):
+    index_models = [NestedComment]
+    serializer_class = NestedCommentSearchSerializer
+    renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
+    permission_classes = [ReadOnly]
+    filter_backends = (HaystackFilter,)
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'search'
+    pagination_class = PageSizePagination
+
+    def filter_queryset(self, queryset: SearchQuerySet) -> SearchQuerySet:
+        # Preprocess query params to handle boolean fields
+        params = self.simplify_one_item_lists(self.request.query_params)
+        params = self.preprocess_query_params(params)
+
+        self.request = self.update_request_params(self.request, params)
+
+        text = params.get('text', '')
+
+        queryset = SearchQuerySet().models(NestedComment)
+
+        if text:
+            queryset = queryset.auto_query(text)
+
+        return queryset

@@ -1,6 +1,8 @@
+from drf_haystack.serializers import HaystackSerializer
 from precise_bbcode.bbcode import get_parser
 from rest_framework import serializers
 
+from astrobin.search_indexes import NestedCommentIndex
 from common.serializers import AvatarField
 from .models import NestedComment
 
@@ -45,3 +47,8 @@ class NestedCommentSerializer(serializers.ModelSerializer):
             'depth',
             'likes',
         )
+
+
+class NestedCommentSearchSerializer(HaystackSerializer):
+    class Meta:
+        index_classes = [NestedCommentIndex]
