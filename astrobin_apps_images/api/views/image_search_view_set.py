@@ -63,6 +63,7 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         queryset = SearchService.filter_by_coords(params, queryset)
         queryset = SearchService.filter_by_image_size(params, queryset)
         queryset = SearchService.filter_by_groups(params, self.request.user, queryset)
+        queryset = SearchService.filter_by_personal_filters(params, self.request.user, queryset)
 
         ordering = params.get('ordering', '-published')
 

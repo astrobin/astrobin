@@ -722,3 +722,41 @@ class SearchService:
             results = results.filter(reduce(op, queries))
 
         return results
+
+    @staticmethod
+    def filter_by_personal_filters(data, user: User, results: SearchQuerySet) -> SearchQuerySet:
+        personal_filters = data.get("personal_filters")
+
+        if personal_filters is None:
+            return results
+
+        value = personal_filters.get("value")
+
+        # value is a list of strings. See if 'my_images' is in it.
+        filter_my_images = "my_images" in value
+        filter_my_likes = "my_likes" in value
+        filter_my_bookmarks = "my_bookmarks" in value
+        filter_my_followed_users = "my_followed_users" in value
+
+        match_type = personal_filters.get("matchType", MatchType.ANY.value)
+
+        op = match_type == MatchType.ALL.value and and_ or or_
+
+        queries = []
+
+        if filter_my_images:
+            queries.append(Q(username=user.username))
+
+        if filter_my_likes:
+            queries.append(Q(liked_by=user.pk))
+
+        if filter_my_bookmarks:
+            queries.append(Q(bookmarked_by=user.pk))
+
+        if filter_my_followed_users:
+            queries.append(Q(user_followed_by=user.pk))
+
+        if len(queries) > 0:
+            results = results.filter(reduce(op, queries))
+
+        return results
