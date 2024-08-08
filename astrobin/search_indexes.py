@@ -1034,7 +1034,6 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
 
 class NestedCommentIndex(CelerySearchIndex, Indexable):
-    id = CharField(model_attr='id')
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated')
@@ -1129,7 +1128,6 @@ class ForumTopicIndex(CelerySearchIndex, Indexable):
 
 class ForumPostIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
-    id = CharField(model_attr='id')
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated', null=True)
     topic_id = IntegerField(model_attr='topic__pk', null=False)

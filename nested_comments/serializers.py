@@ -50,5 +50,7 @@ class NestedCommentSerializer(serializers.ModelSerializer):
 
 
 class NestedCommentSearchSerializer(HaystackSerializer):
+    id = serializers.CharField(read_only=True)
+
     class Meta:
         index_classes = [NestedCommentIndex]
