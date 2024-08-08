@@ -158,5 +158,7 @@ class NestedCommentSearchViewSet(EncodedSearchViewSet):
 
         if text:
             queryset = queryset.auto_query(text)
+        else:
+            queryset = queryset.order_by('-created')
 
         return queryset
