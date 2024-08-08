@@ -353,6 +353,10 @@ def image_post_delete(sender, instance, **kwargs):
     UserService(instance.user).update_image_count()
     for collaborator in instance.collaborators.all():
         UserService(collaborator).update_image_count()
+    NestedComment.objects.filter(
+        content_type=ContentType.objects.get_for_model(Image),
+        object_id=instance.pk
+    ).delete()
 
 
 def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):

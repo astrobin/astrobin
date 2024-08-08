@@ -1089,10 +1089,14 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
         return avatar_url(obj.author, 200)
 
     def prepare_content_object_title(self, obj: NestedComment) -> str:
-        return str(obj.content_object)
+        if obj.content_object:
+            return str(obj.content_object)
+        return ""
 
     def prepare_content_object_url(self, obj: NestedComment) -> str:
-        return obj.content_object.get_absolute_url()
+        if obj.content_object:
+            return obj.content_object.get_absolute_url()
+        return ""
 
 
 class ForumTopicIndex(CelerySearchIndex, Indexable):

@@ -22,7 +22,7 @@ from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemImage,
     EquipmentItemMarketplaceMasterOffer,
     EquipmentItemMarketplaceOffer,
-    EquipmentPreset, Filter, Mount, Sensor,
+    EquipmentItemMarketplacePrivateConversation, EquipmentPreset, Filter, Mount, Sensor,
     Software, Telescope,
 )
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
@@ -958,3 +958,11 @@ def send_marketplace_feedback_notifications(sender, instance: EquipmentItemMarke
 def delete_marketplace_image(sender, instance: EquipmentItemMarketplaceListingLineItemImage, **kwargs):
     instance.image_file.delete(save=False)
     instance.thumbnail_file.delete(save=False)
+
+
+@receiver(post_delete, sender=EquipmentItemMarketplacePrivateConversation)
+def delete_private_messages(sender, instance: EquipmentItemMarketplacePrivateConversation, **kwargs):
+    NestedComment.objects.filter(
+        content_type=ContentType.objects.get_for_model(instance),
+        object_id=instance.id
+    ).delete()
