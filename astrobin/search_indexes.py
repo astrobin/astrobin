@@ -3,6 +3,8 @@ import logging
 import sys
 from functools import reduce
 
+from avatar.templatetags.avatar_tags import avatar_url
+from celery_haystack.indexes import CelerySearchIndex
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
@@ -10,7 +12,6 @@ from django.db.models import Count, Q
 from django.template.defaultfilters import striptags
 from haystack.constants import Indexable
 from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, IntegerField, MultiValueField
-from celery_haystack.indexes import CelerySearchIndex
 from hitcount.models import HitCount
 from precise_bbcode.templatetags.bbcode_tags import bbcode
 from pybb.models import Post, Topic
@@ -18,7 +19,7 @@ from safedelete.models import SafeDeleteModel
 
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
-from astrobin.models import DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition, Camera as LegacyCamera
+from astrobin.models import Camera as LegacyCamera, DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import Camera
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
@@ -1090,9 +1091,14 @@ class ForumTopicIndex(CelerySearchIndex, Indexable):
 
 class ForumPostIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
+    id = CharField(model_attr='id')
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated', null=True)
     topic_id = IntegerField(model_attr='topic__pk', null=False)
+    topic_name = CharField(model_attr='topic__name', null=False)
+    user = CharField(model_attr='user__username', null=False)
+    user_display_name = CharField()
+    user_avatar = CharField()
 
     def get_model(self):
         return Post
@@ -1115,3 +1121,9 @@ class ForumPostIndex(CelerySearchIndex, Indexable):
 
     def get_updated_field(self):
         return "updated"
+
+    def prepare_user_display_name(self, obj: Post) -> str:
+        return obj.user.userprofile.get_display_name()
+
+    def prepare_user_avatar(self, obj: Post) -> str:
+        return avatar_url(obj.user, 200)
