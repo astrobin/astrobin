@@ -1042,6 +1042,7 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
     user_avatar = CharField()
     content_object_title = CharField()
     content_object_url = CharField()
+    class_name = CharField()
 
     def get_model(self):
         return NestedComment
@@ -1095,6 +1096,11 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
     def prepare_content_object_url(self, obj: NestedComment) -> str:
         if obj.content_object:
             return obj.content_object.get_absolute_url()
+        return ""
+
+    def prepare_class_name(self, obj: NestedComment) -> str:
+        if obj.content_object:
+            return obj.content_object.__class__.__name__
         return ""
 
 
