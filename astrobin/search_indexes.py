@@ -1054,6 +1054,9 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
         if instance.deleted:
             return False
 
+        if instance.content_object is None:
+            return False
+
         if issubclass(type(instance.content_object), SafeDeleteModel):
             if instance.content_object.deleted:
                 return False
@@ -1074,12 +1077,16 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
         return "updated"
 
     def prepare_image_thumbnail(self, obj: NestedComment) -> Optional[str]:
+        if obj.content_object is None:
+            return None
+
         if isinstance(obj.content_object, Image):
             return obj.content_object.thumbnail('gallery', 'final', sync=True)
         elif isinstance(obj.content_object, EquipmentItemMarketplaceListing):
             first_line_item = obj.content_object.line_items.first()
             if first_line_item and first_line_item.images.exists():
                 return first_line_item.images.first().thumbnail_file.url
+
         return None
 
     def prepare_user_display_name(self, obj: NestedComment) -> str:
