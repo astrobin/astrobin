@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.utils import timezone
 
 from astrobin.models import (
-    Gear, GearUserInfo, ImageEquipmentLog, PopupMessage, PopupMessageUserStatus, Telescope,
+    Gear, GearUserInfo, ImageEquipmentLog, PopupMessage, PopupMessageUserStatus, SavedSearch, Telescope,
     Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image,
     ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay,
     ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord, GearMigrationStrategy,
@@ -303,6 +303,12 @@ class PopupMessageUserStatusAdmin(admin.ModelAdmin):
         return obj.popup_message.active
     popup_message_active.short_description = 'Popup Message Active'
     popup_message_active.boolean = True
+
+
+@admin.register(SavedSearch)
+class SavedSearchAdmin(admin.ModelAdmin):
+    list_display = ('user', 'name', 'created', 'updated', 'params')
+    search_fields = ('user__username', 'name')
 
 
 admin.site.register(Gear, GearAdmin)

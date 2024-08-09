@@ -13,6 +13,7 @@ from astrobin.api2.views.gear_view_set import GearViewSet
 from astrobin.api2.views.image_equipment_log_view_set import ImageEquipmentLogViewSet
 from astrobin.api2.views.location_view_set import LocationViewSet
 from astrobin.api2.views.mount_view_set import MountViewSet
+from astrobin.api2.views.saved_search_view_set import SavedSearchViewSet
 from astrobin.api2.views.software_view_set import SoftwareViewSet
 from astrobin.api2.views.telescope_view_set import TelescopeViewSet
 
@@ -31,6 +32,7 @@ router.register(r'gear-user-info', GearUserInfoViewSet, basename='gear-user-info
 router.register(r'location', LocationViewSet, basename='location')
 router.register(r'collection', CollectionViewSet, basename='collection')
 router.register(r'image-equipment-log', ImageEquipmentLogViewSet, basename='image-equipment-log')
+router.register(r'saved-search', SavedSearchViewSet, basename='saved-search')
 
 urlpatterns = [
     url('', include(router.urls)),

@@ -21,7 +21,6 @@ from astrobin.api import (
     TopPickNominationResource, TopPickResource, UserProfileResource,
 )
 from astrobin.api2.views.custom_auth_token_view import CustomAuthTokenView
-from astrobin.forms.password_change_form import PasswordChangeForm
 from astrobin.forms.password_reset_form import PasswordResetForm
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (

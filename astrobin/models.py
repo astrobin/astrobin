@@ -3613,3 +3613,19 @@ class PopupMessageUserStatus(models.Model):
         indexes = [
             models.Index(fields=['user', 'popup_message', 'seen']),
         ]
+
+
+class SavedSearch(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=256)
+    params = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ('-created',)
+        unique_together = ('user', 'name')
