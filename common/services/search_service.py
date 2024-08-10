@@ -760,3 +760,29 @@ class SearchService:
             results = results.filter(reduce(op, queries))
 
         return results
+
+    @staticmethod
+    def filter_by_equipment_ids(data, results: SearchQuerySet) -> SearchQuerySet:
+        def apply_filter(results: SearchQuerySet, ids: str, query_templates: list) -> SearchQuerySet:
+            if ids is not None and ids != "":
+                queries = reduce(or_, [Q(**{template: x}) for x in ids.split(',') for template in query_templates])
+                results = results.filter(queries)
+            return results
+
+        filters = [
+            ("all_telescopes_2_id", ["imaging_telescopes_2_id", "guiding_telescopes_2_id"]),
+            ("imaging_telescopes_2_id", ["imaging_telescopes_2_id"]),
+            ("guiding_telescopes_2_id", ["guiding_telescopes_2_id"]),
+            ("all_cameras_2_id", ["imaging_cameras_2_id", "guiding_cameras_2_id"]),
+            ("imaging_cameras_2_id", ["imaging_cameras_2_id"]),
+            ("guiding_cameras_2_id", ["guiding_cameras_2_id"]),
+            ("mounts_2_id", ["mounts_2_id"]),
+            ("filters_2_id", ["filters_2_id"]),
+            ("accessories_2_id", ["accessories_2_id"]),
+            ("software_2_id", ["software_2_id"]),
+        ]
+
+        for key, query_templates in filters:
+            results = apply_filter(results, data.get(key), query_templates)
+
+        return results
