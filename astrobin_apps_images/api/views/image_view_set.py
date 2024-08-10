@@ -32,8 +32,13 @@ from common.permissions import IsSuperUser, or_permission
 logger = logging.getLogger(__name__)
 
 
-class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin,
-                   GenericViewSet):
+class ImageViewSet(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    GenericViewSet
+):
     queryset = Image.objects_including_wip.all()
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]

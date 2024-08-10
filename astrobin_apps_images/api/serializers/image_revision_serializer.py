@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from astrobin.models import ImageRevision, Image
+from astrobin_apps_platesolving.serializers import SolutionSerializer
 
 
 class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
@@ -10,6 +11,7 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
     w = serializers.IntegerField()
     h = serializers.IntegerField()
     uploader_in_progress = serializers.NullBooleanField()
+    solution = SolutionSerializer(read_only=True)
 
     class Meta:
         model = ImageRevision
@@ -27,4 +29,6 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'w',
             'h',
             'uploader_in_progress',
+            'solution',
+            'constellation',
         )

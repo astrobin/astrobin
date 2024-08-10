@@ -967,7 +967,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return [x.user.pk for x in bookmarks.all()]
 
     def prepare_constellation(self, obj):
-        constellation = ImageService.get_constellation(obj.solution)
+        final_revision = ImageService(obj).get_final_revision()
+        constellation = ImageService.get_constellation(final_revision.solution)
         # Escape with __ because And (Andromeda) is not searchable, due to it being the same word as the AND operator.
         return "__%s__" % constellation.get('abbreviation') if constellation else None
 

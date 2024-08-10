@@ -729,19 +729,29 @@ pre_save.connect(solution_pre_save, sender=Solution)
 @receiver(post_save, sender=Solution)
 def solution_post_save(sender, instance, created, **kwargs):
     is_solved = instance.status >= Solver.SUCCESS
-    is_image = instance.content_type.model == 'image'
+    model = instance.content_type.model
+    is_image = model == 'image'
+    is_imagerevision = model == 'imagerevision'
 
-    if is_solved and is_image:
+    if is_solved:
         constellation = ImageService.get_constellation(instance)
         if constellation:
-            log.debug(f"Setting constellation {constellation.get('name')} for image {instance.object_id}")
-            Image.objects_including_wip.filter(
-                pk=instance.object_id
-            ).update(
-                constellation=constellation.get('abbreviation')
-            )
+            log.debug(f"Setting constellation {constellation.get('name')} for {model} {instance.object_id}")
+
+            if is_image:
+                Image.objects_including_wip.filter(
+                    pk=instance.object_id
+                ).update(
+                    constellation=constellation.get('abbreviation')
+                )
+            elif is_imagerevision:
+                ImageRevision.objects.filter(
+                    pk=instance.object_id
+                ).update(
+                    constellation=constellation.get('abbreviation')
+                )
         else:
-            log.debug(f"Could not find constellation for image {instance.object_id}")
+            log.debug(f"Could not find constellation for {model} {instance.object_id}")
 
 
 @receiver(pre_delete, sender=Solution)

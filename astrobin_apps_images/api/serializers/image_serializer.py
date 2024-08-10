@@ -16,12 +16,18 @@ from astrobin_apps_equipment.api.serializers.mount_serializer import MountSerial
 from astrobin_apps_equipment.api.serializers.software_serializer import SoftwareSerializer as SoftwareSerializer2
 from astrobin_apps_equipment.api.serializers.telescope_serializer import TelescopeSerializer as TelescopeSerializer2
 from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
+from astrobin_apps_images.api.serializers import ImageRevisionSerializer
 from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import DeepSkyAcquisitionSerializer
 from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
+from astrobin_apps_platesolving.serializers import SolutionSerializer
+from common.serializers import AvatarField
 
 
 class ImageSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    username = serializers.CharField(source='user.username', read_only=True)
+    user_display_name = serializers.CharField(source='user.userprofile.get_display_name', read_only=True)
+    user_avatar = AvatarField(source='user', read_only=True)
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
     h = serializers.IntegerField()
@@ -52,6 +58,11 @@ class ImageSerializer(serializers.ModelSerializer):
 
     video_file = serializers.FileField(required=False, allow_null=True, read_only=True)
     encoded_video_file = serializers.FileField(required=False, allow_null=True, read_only=True)
+
+    solution = SolutionSerializer(read_only=True)
+    revisions = ImageRevisionSerializer(many=True, read_only=True)
+
+    user_follower_count = serializers.SerializerMethodField(read_only=True)
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
@@ -89,12 +100,19 @@ class ImageSerializer(serializers.ModelSerializer):
 
         return pending_collaborators
 
+    def get_user_follower_count(self, obj):
+        return obj.user.userprofile.followers_count
+
     class Meta:
         model = Image
         fields = (
-            'user',
-            'pending_collaborators',
             'pk',
+            'user',
+            'username',
+            'user_display_name',
+            'user_avatar',
+            'pending_collaborators',
+            'collaborators',
             'hash',
             'title',
             'is_wip',
@@ -120,6 +138,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'accessories_2',
             'software_2',
             'published',
+            'uploaded',
             'license',
             'description',
             'description_bbcode',
@@ -151,4 +170,12 @@ class ImageSerializer(serializers.ModelSerializer):
             'loop_video',
             'video_file',
             'encoded_video_file',
+            'solution',
+            'revisions',
+            'constellation',
+            'is_final',
+            'like_count',
+            'bookmark_count',
+            'comment_count',
+            'user_follower_count',
         )
