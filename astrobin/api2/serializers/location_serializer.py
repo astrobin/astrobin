@@ -13,6 +13,16 @@ class LocationSerializer(serializers.ModelSerializer):
         validated_data['user'] = user.userprofile
         return super().create(validated_data)
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        request_user = self.context['request'].user
+
+        if not request_user.is_authenticated or request_user.userprofile != instance.user:
+            for field in ['lat_min', 'lat_sec', 'lon_min', 'lon_sec']:
+                representation.pop(field, None)
+
+        return representation
+
     class Meta:
         model = Location
         fields = '__all__'

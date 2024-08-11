@@ -5,6 +5,7 @@ from astrobin.api2.serializers.accessory_serializer import AccessorySerializer
 from astrobin.api2.serializers.camera_serializer import CameraSerializer
 from astrobin.api2.serializers.filter_serializer import FilterSerializer
 from astrobin.api2.serializers.focal_reducer_serializer import FocalReducerSerializer
+from astrobin.api2.serializers.location_serializer import LocationSerializer
 from astrobin.api2.serializers.mount_serializer import MountSerializer
 from astrobin.api2.serializers.software_serializer import SoftwareSerializer
 from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
@@ -61,8 +62,8 @@ class ImageSerializer(serializers.ModelSerializer):
 
     solution = SolutionSerializer(read_only=True)
     revisions = ImageRevisionSerializer(many=True, read_only=True)
-
     user_follower_count = serializers.SerializerMethodField(read_only=True)
+    location_objects = LocationSerializer(source="locations", many=True, read_only=True)
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
@@ -165,6 +166,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'sharpen_thumbnails',
             'key_value_tags',
             'locations',
+            'location_objects',
             'full_size_display_limitation',
             'download_limitation',
             'loop_video',
