@@ -29,6 +29,6 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'w',
             'h',
             'uploader_in_progress',
-            'solution',
+            'uploader_upload_length',
             'constellation',
         )

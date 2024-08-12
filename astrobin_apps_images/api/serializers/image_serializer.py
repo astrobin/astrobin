@@ -181,4 +181,5 @@ class ImageSerializer(serializers.ModelSerializer):
             'bookmark_count',
             'comment_count',
             'user_follower_count',
+            'uploader_upload_length',
         )
