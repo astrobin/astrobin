@@ -21,7 +21,7 @@ from astrobin_apps_images.api.serializers import ImageRevisionSerializer
 from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import DeepSkyAcquisitionSerializer
 from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
 from astrobin_apps_platesolving.serializers import SolutionSerializer
-from common.serializers import AvatarField
+from common.serializers import AvatarField, UserSerializer
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -64,6 +64,7 @@ class ImageSerializer(serializers.ModelSerializer):
     revisions = ImageRevisionSerializer(many=True, read_only=True)
     user_follower_count = serializers.SerializerMethodField(read_only=True)
     location_objects = LocationSerializer(source="locations", many=True, read_only=True)
+    collaborators = UserSerializer(many=True, read_only=True)
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
