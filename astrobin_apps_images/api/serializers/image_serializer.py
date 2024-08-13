@@ -72,16 +72,34 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance: Image):
         representation = super().to_representation(instance)
-        representation.update({
-            'thumbnails': [
+        final_thumbnails = [
+            {
+                'alias': alias,
+                'id': instance.pk,
+                'revision': 'final',
+                'url': instance.thumbnail(alias, None, sync=True)
+            } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
+        ]
+
+        if instance.is_final:
+            representation.update(
                 {
-                    'alias': alias,
-                    'id': instance.pk,
-                    'revision': 'final',
-                    'url': instance.thumbnail(alias, None, sync=True)
-                } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
-            ]
-        })
+                    'thumbnails': final_thumbnails
+                }
+            )
+        else:
+            representation.update(
+                {
+                    'thumbnails': final_thumbnails + [
+                        {
+                            'alias': alias,
+                            'id': instance.pk,
+                            'revision': '0',
+                            'url': instance.thumbnail(alias, '0', sync=True)
+                        } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
+                    ]
+                }
+            )
         representation.update(self.acquisitions_representation(instance))
         return representation
 
