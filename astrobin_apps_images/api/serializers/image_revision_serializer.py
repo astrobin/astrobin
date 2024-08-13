@@ -13,6 +13,20 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
     uploader_in_progress = serializers.NullBooleanField()
     solution = SolutionSerializer(read_only=True)
 
+    def to_representation(self, instance: Image):
+        representation = super().to_representation(instance)
+        representation.update({
+            'thumbnails': [
+                {
+                    'alias': alias,
+                    'id': instance.pk,
+                    'revision': instance.label,
+                    'url': instance.thumbnail(alias, sync=True)
+                } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
+            ]
+        })
+        return representation
+
     class Meta:
         model = ImageRevision
         fields = (
