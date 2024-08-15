@@ -1,3 +1,4 @@
+from hitcount.models import HitCount
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
@@ -69,6 +70,7 @@ class ImageSerializer(serializers.ModelSerializer):
     iotd_date = serializers.DateField(source="iotd.date", read_only=True)
     is_top_pick = serializers.SerializerMethodField(read_only=True)
     is_top_pick_nomination = serializers.SerializerMethodField(read_only=True)
+    view_count = serializers.SerializerMethodField(read_only=True)
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
@@ -132,6 +134,9 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def get_is_top_pick_nomination(self, obj):
         return TopPickNominationsArchive.objects.filter(image=obj).exists()
+
+    def get_view_count(self, obj):
+        return HitCount.objects.get_for_object(obj).hits
 
     class Meta:
         model = Image
@@ -213,4 +218,5 @@ class ImageSerializer(serializers.ModelSerializer):
             'iotd_date',
             'is_top_pick',
             'is_top_pick_nomination',
+            'view_count',
         )
