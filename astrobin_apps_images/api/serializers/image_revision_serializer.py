@@ -46,4 +46,5 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'uploader_upload_length',
             'constellation',
             'solution',
+            'mouse_hover_image',
         )
