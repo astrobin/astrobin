@@ -770,16 +770,19 @@ class SearchService:
             return results
 
         filters = [
-            ("all_telescopes_2_id", ["imaging_telescopes_2_id", "guiding_telescopes_2_id"]),
-            ("imaging_telescopes_2_id", ["imaging_telescopes_2_id"]),
-            ("guiding_telescopes_2_id", ["guiding_telescopes_2_id"]),
-            ("all_cameras_2_id", ["imaging_cameras_2_id", "guiding_cameras_2_id"]),
-            ("imaging_cameras_2_id", ["imaging_cameras_2_id"]),
-            ("guiding_cameras_2_id", ["guiding_cameras_2_id"]),
-            ("mounts_2_id", ["mounts_2_id"]),
-            ("filters_2_id", ["filters_2_id"]),
-            ("accessories_2_id", ["accessories_2_id"]),
-            ("software_2_id", ["software_2_id"]),
+            ("all_telescope_ids", ["imaging_telescopes_2_id", "guiding_telescopes_2_id"]),
+            ("imaging_telescope_ids", ["imaging_telescopes_2_id"]),
+            ("guiding_telescope_ids", ["guiding_telescopes_2_id"]),
+            ("all_camera_ids", ["imaging_cameras_2_id", "guiding_cameras_2_id"]),
+            ("imaging_camera_ids", ["imaging_cameras_2_id"]),
+            ("guiding_camera_ids", ["guiding_cameras_2_id"]),
+            ("all_sensor_ids", ["imaging_sensors_id", "guiding_sensors_id"]),
+            ("imaging_sensor_ids", ["imaging_sensors_id"]),
+            ("guiding_sensor_ids", ["guiding_sensors_id"]),
+            ("mount_ids", ["mounts_2_id"]),
+            ("filter_ids", ["filters_2_id"]),
+            ("accessory_ids", ["accessories_2_id"]),
+            ("software_ids", ["software_2_id"]),
         ]
 
         for key, query_templates in filters:

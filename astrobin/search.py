@@ -86,8 +86,15 @@ FIELDS = (
     'acquisition_months',
     'acquisition_months_op',
     'username',
-    'telescope_ids',
-    'camera_ids',
+    'all_telescope_ids',
+    'imaging_telescope_ids',
+    'guiding_telescope_ids',
+    'all_camera_ids',
+    'imaging_camera_ids',
+    'guiding_camera_ids',
+    'all_sensor_ids',
+    'imaging_sensor_ids',
+    'guiding_sensor_ids',
     'mount_ids',
     'filter_ids',
     'accessory_ids',
@@ -169,8 +176,15 @@ class AstroBinSearchForm(SearchForm):
     username = forms.CharField(required=False)
 
     # For precise ID based equipment search
-    telescope_ids = forms.CharField(required=False)
-    camera_ids = forms.CharField(required=False)
+    all_telescope_ids = forms.CharField(required=False)
+    imaging_telescope_ids = forms.CharField(required=False)
+    guiding_telescope_ids = forms.CharField(required=False)
+    all_camera_ids = forms.CharField(required=False)
+    imaging_camera_ids = forms.CharField(required=False)
+    guiding_camera_ids = forms.CharField(required=False)
+    all_sensor_ids = forms.CharField(required=False)
+    imaging_sensor_ids = forms.CharField(required=False)
+    guiding_sensor_ids = forms.CharField(required=False)
     mount_ids = forms.CharField(required=False)
     filter_ids = forms.CharField(required=False)
     accessory_ids = forms.CharField(required=False)
