@@ -34,13 +34,13 @@ def iotd_submission_post_save(sender, instance: IotdSubmission, created: bool, *
 
 def check_and_send_notification_for_enough_submissions(image: Image):
     min_promotions = getattr(settings, 'IOTD_SUBMISSION_MIN_PROMOTIONS', 3)
-    if image.iotdsubmission_set.count() >= min_promotions:
+    if image.iotdsubmission_set.count() == min_promotions:
         IotdService.notify_about_reaching_enough_iotd_submissions(image)
 
 
 def check_and_send_notification_for_enough_votes(image: Image):
     min_promotions = getattr(settings, 'IOTD_REVIEW_MIN_PROMOTIONS', 3)
-    if image.iotdvote_set.count() >= min_promotions:
+    if image.iotdvote_set.count() == min_promotions:
         IotdService.notify_about_reaching_enough_iotd_votes(image)
 
 
