@@ -20,7 +20,10 @@ from safedelete.models import SafeDeleteModel
 
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
-from astrobin.models import Camera as LegacyCamera, DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition
+from astrobin.models import (
+    Camera as LegacyCamera, DeepSky_Acquisition, GearUserInfo, Image, ImageRevision,
+    SolarSystem_Acquisition,
+)
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
     Camera, EquipmentItemMarketplaceListing,
@@ -993,18 +996,22 @@ class ImageIndex(CelerySearchIndex, Indexable):
             not IotdService().is_iotd(obj)
 
     def prepare_objects_in_field(self, obj):
-        if not obj.solution or not obj.solution.objects_in_field:
-            return None
+        def process_solution(solution):
+            result = ''
+            if solution and solution.objects_in_field:
+                result = ' '.join(SolutionService(solution).duplicate_objects_in_field_by_catalog_space()).strip()
+                for x in solution.objects_in_field.split(','):
+                    synonyms = UtilsService.get_search_synonyms_text(x.strip())
+                    if synonyms:
+                        result = f'{result} {" ".join(synonyms.split(","))}'.strip()
+            return result
 
-        objects = ' '.join(SolutionService(obj.solution).duplicate_objects_in_field_by_catalog_space()).strip()
+        objects = process_solution(obj.solution)
 
-        for x in obj.solution.objects_in_field.split(','):
-            synonyms = UtilsService.get_search_synonyms_text(x.strip())
-            if synonyms:
-                objects = f'{objects} {" ".join(synonyms.split(","))}'.strip()
+        for revision in ImageRevision.objects.filter(image=obj):
+            objects = f'{objects} {process_solution(revision.solution)}'.strip()
 
-        return objects
-
+        return objects if objects else None
 
     def prepare_countries(self, obj):
         # Escape with __ because for whatever reason some country codes don't work, including IT.
