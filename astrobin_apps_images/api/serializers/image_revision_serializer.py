@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import ImageRevision, Image
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 
@@ -15,16 +16,34 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
 
     def to_representation(self, instance: Image):
         representation = super().to_representation(instance)
-        representation.update({
-            'thumbnails': [
+
+        thumbnails = [
+            {
+                'alias': alias,
+                'id': instance.pk,
+                'revision': instance.label,
+                'url': instance.thumbnail(alias, sync=True)
+            } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
+        ]
+
+        if instance.mouse_hover_image == MouseHoverImage.INVERTED:
+            thumbnails += [
                 {
-                    'alias': alias,
+                    'alias': 'hd_inverted',
                     'id': instance.pk,
                     'revision': instance.label,
-                    'url': instance.thumbnail(alias, sync=True)
-                } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
+                    'url': instance.thumbnail('hd_inverted', sync=True)
+                },
+                {
+                    'alias': 'qhd_inverted',
+                    'id': instance.pk,
+                    'revision': instance.label,
+                    'url': instance.thumbnail('qhd_inverted', sync=True)
+                }
             ]
-        })
+
+        representation.update({'thumbnails': thumbnails})
+
         return representation
 
     class Meta:

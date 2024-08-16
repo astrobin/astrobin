@@ -10,6 +10,7 @@ from astrobin.api2.serializers.location_serializer import LocationSerializer
 from astrobin.api2.serializers.mount_serializer import MountSerializer
 from astrobin.api2.serializers.software_serializer import SoftwareSerializer
 from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
+from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
 from astrobin_apps_equipment.api.serializers.accessory_serializer import AccessorySerializer as AccessorySerializer2
 from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSerializer as CameraSerializer2
@@ -78,7 +79,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance: Image):
         representation = super().to_representation(instance)
-        final_thumbnails = [
+        thumbnails = [
             {
                 'alias': alias,
                 'id': instance.pk,
@@ -87,26 +88,38 @@ class ImageSerializer(serializers.ModelSerializer):
             } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
         ]
 
-        if instance.is_final:
-            representation.update(
+        if not instance.is_final:
+            thumbnails += [
                 {
-                    'thumbnails': final_thumbnails
-                }
-            )
-        else:
-            representation.update(
+                    'alias': alias,
+                    'id': instance.pk,
+                    'revision': '0',
+                    'url': instance.thumbnail(alias, '0', sync=True)
+                } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
+            ]
+
+        if instance.mouse_hover_image == MouseHoverImage.INVERTED:
+            thumbnails += [
                 {
-                    'thumbnails': final_thumbnails + [
-                        {
-                            'alias': alias,
-                            'id': instance.pk,
-                            'revision': '0',
-                            'url': instance.thumbnail(alias, '0', sync=True)
-                        } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
-                    ]
+                    'alias': 'hd_inverted',
+                    'id': instance.pk,
+                    'revision': '0',
+                    'url': instance.thumbnail('hd_inverted', '0', sync=True)
+                },
+                {
+                    'alias': 'qhd_inverted',
+                    'id': instance.pk,
+                    'revision': '0',
+                    'url': instance.thumbnail('qhd_inverted', '0', sync=True)
                 }
-            )
+            ]
+
+        representation.update({
+            'thumbnails': thumbnails,
+        })
+
         representation.update(self.acquisitions_representation(instance))
+
         return representation
 
     @staticmethod
