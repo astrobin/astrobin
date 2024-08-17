@@ -65,6 +65,7 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         queryset = SearchService.filter_by_groups(params, self.request.user, queryset)
         queryset = SearchService.filter_by_personal_filters(params, self.request.user, queryset)
         queryset = SearchService.filter_by_equipment_ids(params, queryset)
+        queryset = SearchService.filter_by_user_id(params, queryset)
 
         ordering = params.get('ordering', '-published')
 

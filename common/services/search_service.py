@@ -789,3 +789,12 @@ class SearchService:
             results = apply_filter(results, data.get(key), query_templates)
 
         return results
+
+    @staticmethod
+    def filter_by_user_id(data, results: SearchQuerySet) -> SearchQuerySet:
+        user_id = data.get("user_id")
+
+        if user_id is not None and user_id != "":
+            results = results.filter(user_id=user_id)
+
+        return results
