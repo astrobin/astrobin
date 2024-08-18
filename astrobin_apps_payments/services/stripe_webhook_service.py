@@ -98,6 +98,7 @@ class StripeWebhookService(object):
 
     @staticmethod
     def get_overdue_subscriptions(customer_id):
+        stripe.api_key = settings.STRIPE['keys']['secret']
         subscriptions = stripe.Subscription.list(customer=customer_id)
         return [sub for sub in subscriptions.auto_paging_iter() if sub.status == 'past_due']
 
@@ -332,6 +333,7 @@ class StripeWebhookService(object):
         try:
             overdue_subscriptions = StripeWebhookService.get_overdue_subscriptions(session['customer'])
             for overdue_subscription in overdue_subscriptions:
+                stripe.api_key = settings.STRIPE['keys']['secret']
                 stripe.Subscription.modify(overdue_subscription.id, pause_collection={'behavior': 'mark_uncollectible'})
                 stripe.Subscription.cancel(overdue_subscription.id)
         except StripeError as e:

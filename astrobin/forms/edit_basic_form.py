@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext as __, ugettext_lazy as _
 
+from astrobin.fields import NoneChoiceField
 from astrobin.forms.utils import parseKeyValueTags
 from astrobin.models import Image, Location
 from astrobin.widgets.select_with_disabled_choices import SelectWithDisabledChoices
@@ -24,7 +25,8 @@ class ImageEditBasicForm(forms.ModelForm):
         required=False,
         label=_("Link to TIFF/FITS"),
         help_text=_(
-            "If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."),
+            "If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."
+        ),
         error_messages={'invalid': "The address must start with http:// or https://."},
     )
 
@@ -34,23 +36,25 @@ class ImageEditBasicForm(forms.ModelForm):
         help_text=_("Submit this image to the selected groups."),
     )
 
-    mouse_hover_image = forms.ChoiceField(
+    mouse_hover_image = NoneChoiceField(
         required=False,
         label=_("Mouse hover image"),
         help_text=_(
             "Choose what will be displayed when somebody hovers the mouse over this image. Please note: only "
             "revisions with the same width and height of your original image can be considered."
         ),
-        choices=Image.MOUSE_HOVER_CHOICES,
+        choices=[(NoneChoiceField.none_value(), _("Nothing"))] + Image.MOUSE_HOVER_CHOICES,
         widget=SelectWithDisabledChoices(attrs={'class': 'form-control'}),
     )
 
     keyvaluetags = forms.CharField(
         required=False,
         label=_("Key/value tags"),
-        help_text=_("Provide a list of unique key/value pairs to tag this image with. Use the '=' symbol between key "
-                    "and value, and provide one pair per line. These tags can be used to sort images by arbitrary "
-                    "properties."),
+        help_text=_(
+            "Provide a list of unique key/value pairs to tag this image with. Use the '=' symbol between key "
+            "and value, and provide one pair per line. These tags can be used to sort images by arbitrary "
+            "properties."
+        ),
         widget=forms.Textarea(attrs={'rows': 4})
     )
 
@@ -73,7 +77,7 @@ class ImageEditBasicForm(forms.ModelForm):
     def __initGroups(self):
         if self.instance.is_wip:
             self.fields['groups'].widget.attrs['disabled'] = 'disabled'
-            self.fields['groups'].help_text =\
+            self.fields['groups'].help_text = \
                 _("Editing groups is not possible while the image is not in your public area.")
 
         groups = Group.objects.filter(autosubmission=False, members=self.instance.user)
@@ -82,7 +86,8 @@ class ImageEditBasicForm(forms.ModelForm):
             self.fields['groups'].initial = [
                 x.pk for x in self.instance.part_of_group_set.filter(
                     autosubmission=False,
-                    members=self.instance.user)]
+                    members=self.instance.user
+                )]
         else:
             self.fields.pop('groups')
 
