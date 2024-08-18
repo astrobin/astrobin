@@ -194,8 +194,8 @@
 
                         const player = window.videojs(id, {}, function () {
                             this.src([
-                                {type: slide.videoFormat, src: slide.videoUrl},
-                                {type: "video/mp4", src: slide.encodedVideoUrl}
+                                {type: "video/mp4", src: slide.encodedVideoUrl},
+                                {type: slide.videoFormat, src: slide.videoUrl}
                             ]);
                         });
 
