@@ -854,4 +854,6 @@ class SearchService:
             else:
                 results = results.none()
 
+            return results.exclude(SQ(object_id=image_id) | SQ(hash=image.hash))
+
         return results
