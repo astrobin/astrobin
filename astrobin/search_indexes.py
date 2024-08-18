@@ -1160,6 +1160,7 @@ class ForumPostIndex(CelerySearchIndex, Indexable):
     user = CharField(model_attr='user__username', null=False)
     user_display_name = CharField()
     user_avatar = CharField()
+    body_html = CharField(model_attr='body_html', null=False)
 
     def get_model(self):
         return Post
