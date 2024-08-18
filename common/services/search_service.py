@@ -14,10 +14,14 @@ from haystack.query import SearchQuerySet
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.models import Image
-from astrobin_apps_equipment.models import EquipmentBrandListing, EquipmentItemListing
+from astrobin_apps_equipment.models import (
+    EquipmentBrandListing, EquipmentItemListing,
+    EquipmentItemMarketplaceListingLineItem,
+)
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
+from common.services import DateTimeService
 
 
 class MatchType(Enum):
@@ -862,30 +866,44 @@ class SearchService:
 
     @staticmethod
     def get_equipment_brand_listings(q: str, country: str):
-        return EquipmentBrandListing.objects \
-            .annotate(distance=TrigramDistance('brand__name', q)) \
-            .filter(
-                Q(
-                    Q(distance__lte=.85) |
-                    Q(brand__name__icontains=q)
-                ) &
-                Q(
-                    Q(retailer__countries__icontains=country) |
-                    Q(retailer__countries__isnull=True)
-                )
+        return EquipmentBrandListing.objects.annotate(
+            distance=TrigramDistance('brand__name', q)
+        ).filter(
+            Q(
+                Q(distance__lte=.85) |
+                Q(brand__name__icontains=q)
+            ) &
+            Q(
+                Q(retailer__countries__icontains=country) |
+                Q(retailer__countries__isnull=True)
             )
+        )
 
     @staticmethod
     def get_equipment_item_listings(q: str, country: str):
-        return EquipmentItemListing.objects \
-            .annotate(distance=TrigramDistance('name', q)) \
-            .filter(
-                Q(
-                    Q(distance__lte=.5) |
-                    Q(item_full_name__icontains=q)
-                ) &
-                Q(
-                    Q(retailer__countries__icontains=country) |
-                    Q(retailer__countries__isnull=True)
-                )
+        return EquipmentItemListing.objects.annotate(
+            distance=TrigramDistance('name', q)
+        ).filter(
+            Q(
+                Q(distance__lte=.5) |
+                Q(item_full_name__icontains=q)
+            ) &
+            Q(
+                Q(retailer__countries__icontains=country) |
+                Q(retailer__countries__isnull=True)
             )
+        )
+
+    @staticmethod
+    def get_marketplace_line_items(q: str):
+        return EquipmentItemMarketplaceListingLineItem.objects.annotate(
+            distance=TrigramDistance('item_name', q)
+        ).filter(
+            Q(
+                Q(distance__lte=.5) |
+                Q(item_name__icontains=q)
+            ),
+            sold__isnull=True,
+            listing__approved__isnull=False,
+            listing__expiration__gt=DateTimeService.now(),
+        )

@@ -187,18 +187,7 @@ def search_image_list(context, paginate=True, **kwargs):
     if telescope or camera or q:
         equipment_brand_listings = SearchService.get_equipment_brand_listings(search_term, country)
         equipment_item_listings = SearchService.get_equipment_item_listings(search_term, country)
-
-        marketplace_line_items = EquipmentItemMarketplaceListingLineItem.objects \
-            .annotate(distance=TrigramDistance('item_name', search_term)) \
-            .filter(
-                Q(
-                    Q(distance__lte=.5) |
-                    Q(item_name__icontains=search_term)
-                ),
-                sold__isnull=True,
-                listing__approved__isnull=False,
-                listing__expiration__gt=DateTimeService.now(),
-            )
+        marketplace_line_items = SearchService.get_marketplace_line_items(search_term)
 
     context.update({
         'paginate': paginate,

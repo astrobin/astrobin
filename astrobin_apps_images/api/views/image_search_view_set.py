@@ -9,6 +9,8 @@ from rest_framework.throttling import ScopedRateThrottle
 from astrobin import utils
 from astrobin.models import Image
 from astrobin_apps_equipment.api.serializers.brand_listing_serializer import BrandListingSerializer
+from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_serializer import \
+    EquipmentItemMarketplaceListingLineItemSerializer
 from astrobin_apps_equipment.api.serializers.item_listing_serializer import ItemListingSerializer
 from astrobin_apps_images.api.serializers import ImageSearchSerializer
 from astrobin_apps_premium.services.premium_service import PremiumService
@@ -53,6 +55,7 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         if q:
             item_listings_cache_key = f'equipment_item_listings__{q}__{request_country}'
             brand_listings_cache_key = f'equipment_brand_listings__{q}__{request_country}'
+            marketplace_line_items_cache_key = f'marketplace_line_items__{q}'
 
             equipment_item_listings = cache.get(item_listings_cache_key)
             if equipment_item_listings is None:
@@ -70,12 +73,21 @@ class ImageSearchViewSet(EncodedSearchViewSet):
                 ).data
                 cache.set(brand_listings_cache_key, equipment_brand_listings, 60 * 60)
 
+            marketplace_line_items = cache.get(marketplace_line_items_cache_key)
+            if marketplace_line_items is None:
+                marketplace_line_items = EquipmentItemMarketplaceListingLineItemSerializer(
+                    SearchService.get_marketplace_line_items(q),
+                    many=True
+                ).data
+                cache.set(marketplace_line_items_cache_key, marketplace_line_items, 60 * 60)
+
             valid_subscription = PremiumService(request.user).get_valid_usersubscription()
             allow_full_retailer_integration = PremiumService.allow_full_retailer_integration(valid_subscription, None)
 
             additional_info = {
                 'equipment_item_listings': equipment_item_listings,
                 'equipment_brand_listings': equipment_brand_listings,
+                'marketplace_line_items': marketplace_line_items,
                 'allow_full_retailer_integration': allow_full_retailer_integration,
             }
 
