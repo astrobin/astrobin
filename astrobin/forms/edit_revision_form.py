@@ -2,21 +2,25 @@ from django import forms
 from django.utils.translation import ugettext as __, ugettext_lazy as _
 from image_cropping import ImageCropWidget
 
+from astrobin.fields import NoneChoiceField
 from astrobin.models import Image, ImageRevision
 from astrobin.widgets.select_with_disabled_choices import SelectWithDisabledChoices
 
 
 class ImageEditRevisionForm(forms.ModelForm):
-    mouse_hover_image = forms.ChoiceField(
+    mouse_hover_image = NoneChoiceField(
         required=False,
         label=_("Mouse hover image"),
-        help_text=_("Choose what will be displayed when somebody hovers the mouse over this image revision. Please"
-                    "note: only revisions with the same width and height as this one can be considered."),
+        help_text=_(
+            "Choose what will be displayed when somebody hovers the mouse over this image revision. Please"
+            "note: only revisions with the same width and height as this one can be considered."
+        ),
         widget=SelectWithDisabledChoices(attrs={'class': 'form-control'}),
     )
 
     def __init_mouse_hover_image(self):
-        self.fields['mouse_hover_image'].choices = Image.MOUSE_HOVER_CHOICES
+        self.fields['mouse_hover_image'].choices = \
+            [(NoneChoiceField.none_value(), _("Nothing"))] + Image.MOUSE_HOVER_CHOICES
 
         revision = self.instance
         image = revision.image

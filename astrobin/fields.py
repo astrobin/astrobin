@@ -1,5 +1,6 @@
 from typing import Optional
 
+from django import forms
 from django.db import models
 from django.forms import ModelMultipleChoiceField
 from django.utils.translation import ugettext_lazy as _
@@ -465,3 +466,22 @@ class GearItemChoiceField(ModelMultipleChoiceField):
     def label_from_instance(self, obj):
         from astrobin.services.gear_service import GearService
         return GearService(obj).display_name(self.user)
+
+
+class NoneChoiceField(forms.ChoiceField):
+    @staticmethod
+    def none_value():
+        return 'none_value'
+
+    def __init__(self, *args, **kwargs):
+        super(NoneChoiceField, self).__init__(*args, **kwargs)
+
+    def prepare_value(self, value):
+        if value is None:
+            return self.none_value()
+        return super(NoneChoiceField, self).prepare_value(value)
+
+    def clean(self, value):
+        if value == self.none_value():
+            return None
+        return super(NoneChoiceField, self).clean(value)
