@@ -23,10 +23,11 @@ from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.viewsets import GenericViewSet
 
 from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
-from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
+from astrobin_apps_equipment.models import Filter
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
+from astrobin_apps_images.services import ImageService
 from common.permissions import IsSuperUser, or_permission
 
 logger = logging.getLogger(__name__)
@@ -51,23 +52,10 @@ class ImageViewSet(
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'images'
 
-    @staticmethod
-    def _get_equipment_classes():
-        return (
-            ('imaging_telescopes_2', Telescope),
-            ('imaging_cameras_2', Camera),
-            ('guiding_telescopes_2', Telescope),
-            ('guiding_cameras_2', Camera),
-            ('mounts_2', Mount),
-            ('filters_2', Filter),
-            ('accessories_2', Accessory),
-            ('software_2', Software),
-        )
-
     def _prepare_equipment_data(self, request):
         data = {}
 
-        for klass in ImageViewSet._get_equipment_classes():
+        for klass in ImageService.get_equipment_classes():
             try:
                 data[klass[0]] = request.data.pop(klass[0])
             except KeyError:
@@ -76,7 +64,7 @@ class ImageViewSet(
         return data
 
     def _update_equipment(self, data, instance: Image):
-        for klass in ImageViewSet._get_equipment_classes():
+        for klass in ImageService.get_equipment_classes():
             # Get the current set of related objects
             current_objs = set(getattr(instance, klass[0]).all())
 

@@ -46,7 +46,7 @@ from astrobin.utils import (
     base26_decode, base26_encode, decimal_to_degrees_minutes_seconds_string,
     decimal_to_hours_minutes_seconds_string,
 )
-from astrobin_apps_equipment.models import EquipmentBrandListing
+from astrobin_apps_equipment.models import Accessory, Camera, EquipmentBrandListing, Filter, Mount, Software, Telescope
 from astrobin_apps_images.models import KeyValueTag, ThumbnailGroup
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_notifications.utils import push_notification
@@ -1075,3 +1075,16 @@ class ImageService:
             'iotd', 'iotd_mobile', 'iotd_candidate',
             'story', 'story_crop',
         )
+
+    @staticmethod
+    def get_equipment_classes():
+        return [
+            ('imaging_telescopes_2', Telescope),
+            ('imaging_cameras_2', Camera),
+            ('guiding_telescopes_2', Telescope),
+            ('guiding_cameras_2', Camera),
+            ('mounts_2', Mount),
+            ('filters_2', Filter),
+            ('accessories_2', Accessory),
+            ('software_2', Software),
+        ]

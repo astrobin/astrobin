@@ -4,6 +4,7 @@ from functools import reduce
 from typing import Any, Callable, Optional, Type, Union
 
 from django.contrib.auth.models import User
+from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
 from haystack.backends import SQ
 from haystack.inputs import BaseInput, Clean
@@ -13,6 +14,7 @@ from haystack.query import SearchQuerySet
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.models import Image
+from astrobin_apps_equipment.models import EquipmentBrandListing, EquipmentItemListing
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
@@ -857,3 +859,33 @@ class SearchService:
             return results.exclude(SQ(object_id=image_id) | SQ(hash=image.hash))
 
         return results
+
+    @staticmethod
+    def get_equipment_brand_listings(q: str, country: str):
+        return EquipmentBrandListing.objects \
+            .annotate(distance=TrigramDistance('brand__name', q)) \
+            .filter(
+                Q(
+                    Q(distance__lte=.85) |
+                    Q(brand__name__icontains=q)
+                ) &
+                Q(
+                    Q(retailer__countries__icontains=country) |
+                    Q(retailer__countries__isnull=True)
+                )
+            )
+
+    @staticmethod
+    def get_equipment_item_listings(q: str, country: str):
+        return EquipmentItemListing.objects \
+            .annotate(distance=TrigramDistance('name', q)) \
+            .filter(
+                Q(
+                    Q(distance__lte=.5) |
+                    Q(item_full_name__icontains=q)
+                ) &
+                Q(
+                    Q(retailer__countries__icontains=country) |
+                    Q(retailer__countries__isnull=True)
+                )
+            )

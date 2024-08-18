@@ -50,7 +50,7 @@ class EquipmentItemListing(SafeDeleteModel):
         blank=True,
     )
 
-    # This name might be something different than the item's name on AstroBin, in case the retailer calls it something
+    # This name might be something different from the item's name on AstroBin, in case the retailer calls it something
     # else.
     name = models.CharField(
         max_length=256,
