@@ -543,6 +543,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
     views = IntegerField()
     w = IntegerField(model_attr='w', null=True)
     h = IntegerField(model_attr='h', null=True)
+    final_w = IntegerField()
+    final_h = IntegerField()
     pixel_count = IntegerField(null=True)
     size = IntegerField(model_attr='uploader_upload_length', null=True)
 
@@ -951,6 +953,14 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_views(self, obj):
         return _prepare_views(obj, 'image')
+
+    def prepare_final_w(self, obj):
+        final_revision = ImageService(obj).get_final_revision()
+        return final_revision.w
+
+    def prepare_final_h(self, obj):
+        final_revision = ImageService(obj).get_final_revision()
+        return final_revision.h
 
     def prepare_pixel_count(self, obj):
         if obj.w and obj.h:
