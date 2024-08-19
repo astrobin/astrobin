@@ -24,7 +24,6 @@ class SolutionSerializer(serializers.ModelSerializer):
             'advanced_dec',
             'advanced_pixscale',
             'advanced_orientation',
-            'advanced_piixscale',
         )
 
 

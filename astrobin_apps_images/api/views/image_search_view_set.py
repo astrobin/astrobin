@@ -1,11 +1,19 @@
+from django.core.cache import cache
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from drf_haystack.filters import HaystackFilter, HaystackOrderingFilter
 from haystack.query import SearchQuerySet
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
 
+from astrobin import utils
 from astrobin.models import Image
+from astrobin_apps_equipment.api.serializers.brand_listing_serializer import BrandListingSerializer
+from astrobin_apps_equipment.api.serializers.equipment_item_marketplace_listing_line_item_serializer import \
+    EquipmentItemMarketplaceListingLineItemSerializer
+from astrobin_apps_equipment.api.serializers.item_listing_serializer import ItemListingSerializer
 from astrobin_apps_images.api.serializers import ImageSearchSerializer
+from astrobin_apps_premium.services.premium_service import PremiumService
 from common.api_page_size_pagination import PageSizePagination
 from common.encoded_search_viewset import EncodedSearchViewSet
 from common.permissions import ReadOnly
@@ -23,6 +31,69 @@ class ImageSearchViewSet(EncodedSearchViewSet):
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'search'
     pagination_class = PageSizePagination
+
+    def list(self, request, *args, **kwargs):
+        response = super(ImageSearchViewSet, self).list(request, *args, **kwargs)
+        data = response.data
+
+        request_country = utils.get_client_country_code(request)
+
+        text = request.query_params.get('text')
+        if text and len(text) > 0:
+            text = text[0]
+
+        telescope = request.query_params.get('telescope')
+        if telescope and len(telescope) > 0:
+            telescope = telescope.get('value')[0].get('name')
+
+        camera = request.query_params.get('camera')
+        if camera and len(camera) > 0:
+            camera = camera.get('value')[0].get('name')
+
+        q = telescope or camera or text
+
+        if q:
+            item_listings_cache_key = f'equipment_item_listings__{q}__{request_country}'
+            brand_listings_cache_key = f'equipment_brand_listings__{q}__{request_country}'
+            marketplace_line_items_cache_key = f'marketplace_line_items__{q}'
+
+            equipment_item_listings = cache.get(item_listings_cache_key)
+            if equipment_item_listings is None:
+                equipment_item_listings = ItemListingSerializer(
+                    SearchService.get_equipment_item_listings(q, request_country),
+                    many=True
+                ).data
+                cache.set(item_listings_cache_key, equipment_item_listings, 60 * 60)
+
+            equipment_brand_listings = cache.get(brand_listings_cache_key)
+            if equipment_brand_listings is None:
+                equipment_brand_listings = BrandListingSerializer(
+                    SearchService.get_equipment_brand_listings(q, request_country),
+                    many=True
+                ).data
+                cache.set(brand_listings_cache_key, equipment_brand_listings, 60 * 60)
+
+            marketplace_line_items = cache.get(marketplace_line_items_cache_key)
+            if marketplace_line_items is None:
+                marketplace_line_items = EquipmentItemMarketplaceListingLineItemSerializer(
+                    SearchService.get_marketplace_line_items(q),
+                    many=True
+                ).data
+                cache.set(marketplace_line_items_cache_key, marketplace_line_items, 60 * 60)
+
+            valid_subscription = PremiumService(request.user).get_valid_usersubscription()
+            allow_full_retailer_integration = PremiumService.allow_full_retailer_integration(valid_subscription, None)
+
+            additional_info = {
+                'equipment_item_listings': equipment_item_listings,
+                'equipment_brand_listings': equipment_brand_listings,
+                'marketplace_line_items': marketplace_line_items,
+                'allow_full_retailer_integration': allow_full_retailer_integration,
+            }
+
+            data.update(additional_info)
+
+        return Response(data)
 
     def filter_images(self, params: dict, queryset: SearchQuerySet) -> SearchQuerySet:
         queryset = queryset.models(Image)
@@ -65,6 +136,8 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         queryset = SearchService.filter_by_groups(params, self.request.user, queryset)
         queryset = SearchService.filter_by_personal_filters(params, self.request.user, queryset)
         queryset = SearchService.filter_by_equipment_ids(params, queryset)
+        queryset = SearchService.filter_by_user_id(params, queryset)
+        queryset = SearchService.filter_by_similar_images(params, queryset)
 
         ordering = params.get('ordering', '-published')
 

@@ -1543,7 +1543,8 @@ class ImageMarketplaceFragment(View):
                 )
 
                 if line_item_objects.exists():
-                    line_items.append(*list(line_item_objects))
+                    for line_item_object in line_item_objects.iterator():
+                        line_items.append(line_item_object)
 
         return render(
             request, 'image/detail/marketplace.html', {

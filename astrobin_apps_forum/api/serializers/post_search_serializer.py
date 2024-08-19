@@ -19,4 +19,5 @@ class PostSearchSerializer(HaystackSerializer):
             'user',
             'user_display_name',
             'user_avatar',
+            'body_html',
         ]

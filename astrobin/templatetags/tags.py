@@ -50,6 +50,7 @@ from astrobin_apps_remote_source_affiliation.services.remote_source_affiliation_
 from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
 from common.services.popup_message_service import PopupMessageService
+from common.services.search_service import SearchService
 
 register = Library()
 log = logging.getLogger(__name__)
@@ -184,42 +185,9 @@ def search_image_list(context, paginate=True, **kwargs):
     search_term = telescope or camera or q
 
     if telescope or camera or q:
-        equipment_brand_listings = EquipmentBrandListing.objects \
-            .annotate(distance=TrigramDistance('brand__name', search_term)) \
-            .filter(
-                Q(
-                    Q(distance__lte=.85) |
-                    Q(brand__name__icontains=search_term)
-                ) &
-                Q(
-                    Q(retailer__countries__icontains=country) |
-                    Q(retailer__countries__isnull=True)
-                )
-            )
-        equipment_item_listings = EquipmentItemListing.objects \
-            .annotate(distance=TrigramDistance('item_full_name', search_term)) \
-            .filter(
-                Q(
-                    Q(distance__lte=.5) |
-                    Q(item_full_name__icontains=search_term)
-                ) &
-                Q(
-                    Q(retailer__countries__icontains=country) |
-                    Q(retailer__countries__isnull=True)
-                )
-            )
-
-        marketplace_line_items = EquipmentItemMarketplaceListingLineItem.objects \
-            .annotate(distance=TrigramDistance('item_name', search_term)) \
-            .filter(
-                Q(
-                    Q(distance__lte=.5) |
-                    Q(item_name__icontains=search_term)
-                ),
-                sold__isnull=True,
-                listing__approved__isnull=False,
-                listing__expiration__gt=DateTimeService.now(),
-            )
+        equipment_brand_listings = SearchService.get_equipment_brand_listings(search_term, country)
+        equipment_item_listings = SearchService.get_equipment_item_listings(search_term, country)
+        marketplace_line_items = SearchService.get_marketplace_line_items(search_term)
 
     context.update({
         'paginate': paginate,

@@ -4,6 +4,7 @@ from functools import reduce
 from typing import Any, Callable, Optional, Type, Union
 
 from django.contrib.auth.models import User
+from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
 from haystack.backends import SQ
 from haystack.inputs import BaseInput, Clean
@@ -12,8 +13,15 @@ from operator import and_, or_
 from haystack.query import SearchQuerySet
 
 from astrobin.enums import SolarSystemSubject, SubjectType
+from astrobin.models import Image
+from astrobin_apps_equipment.models import (
+    EquipmentBrandListing, EquipmentItemListing,
+    EquipmentItemMarketplaceListingLineItem,
+)
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_groups.models import Group
+from astrobin_apps_images.services import ImageService
+from common.services import DateTimeService
 
 
 class MatchType(Enum):
@@ -789,3 +797,113 @@ class SearchService:
             results = apply_filter(results, data.get(key), query_templates)
 
         return results
+
+    @staticmethod
+    def filter_by_user_id(data, results: SearchQuerySet) -> SearchQuerySet:
+        user_id = data.get("user_id")
+
+        if user_id is not None and user_id != "":
+            results = results.filter(user_id=user_id)
+
+        return results
+
+    @staticmethod
+    def filter_by_similar_images(data, results: SearchQuerySet) -> SearchQuerySet:
+        image_id = data.get("similar_to_image_id")
+
+        if image_id is not None and image_id != "":
+            image = ImageService.get_object(
+                image_id,
+                Image.objects_plain.only('id', 'subject_type', 'solar_system_main_subject')
+            )
+            if image.subject_type in (SubjectType.DEEP_SKY, SubjectType.WIDE_FIELD):
+                if image.solution and image.solution.ra and image.solution.dec:
+                    target_ra = float(image.solution.advanced_ra or image.solution.ra)
+                    target_dec = float(image.solution.advanced_dec or image.solution.dec)
+                    delta = float(image.solution.radius)
+
+                    search_ra_min = target_ra - delta
+                    search_ra_max = target_ra + delta
+                    search_dec_min = target_dec - delta
+                    search_dec_max = target_dec + delta
+
+                    results = results.filter(
+                        coord_ra_min__lte=search_ra_max,
+                        coord_ra_max__gte=search_ra_min,
+                        coord_dec_min__lte=search_dec_max,
+                        coord_dec_max__gte=search_dec_min
+                    )
+                else:
+                    # No solution, let's see if there's a catalog name in the title.
+                    title = image.title.lower()
+                    matches = SearchService.find_catalog_subjects(title)
+                    first_match = next(matches, None)
+                    if first_match:
+                        groups = first_match.groups()
+                        catalog_entry = "%s %s" % (groups[0], groups[1])
+                        results = results.filter(
+                            SQ(title=CustomContain(catalog_entry)) |
+                            SQ(objects_in_field=catalog_entry)
+                        )
+            elif image.subject_type in (
+                SubjectType.STAR_TRAILS,
+                SubjectType.NORTHERN_LIGHTS,
+                SubjectType.NOCTILUCENT_CLOUDS,
+                SubjectType.LANDSCAPE,
+                SubjectType.ARTIFICIAL_SATELLITE,
+                SubjectType.GEAR,
+                SubjectType.OTHER
+            ):
+                results = results.filter(subject_type_char=image.subject_type)
+            elif image.subject_type == SubjectType.SOLAR_SYSTEM:
+                results = results.filter(solar_system_main_subject_char=image.solar_system_main_subject)
+            else:
+                results = results.none()
+
+            return results.exclude(SQ(object_id=image_id) | SQ(hash=image.hash))
+
+        return results
+
+    @staticmethod
+    def get_equipment_brand_listings(q: str, country: str):
+        return EquipmentBrandListing.objects.annotate(
+            distance=TrigramDistance('brand__name', q)
+        ).filter(
+            Q(
+                Q(distance__lte=.85) |
+                Q(brand__name__icontains=q)
+            ) &
+            Q(
+                Q(retailer__countries__icontains=country) |
+                Q(retailer__countries__isnull=True)
+            )
+        )
+
+    @staticmethod
+    def get_equipment_item_listings(q: str, country: str):
+        return EquipmentItemListing.objects.annotate(
+            distance=TrigramDistance('name', q)
+        ).filter(
+            Q(
+                Q(distance__lte=.5) |
+                Q(item_full_name__icontains=q)
+            ) &
+            Q(
+                Q(retailer__countries__icontains=country) |
+                Q(retailer__countries__isnull=True)
+            )
+        )
+
+    @staticmethod
+    def get_marketplace_line_items(q: str):
+        return EquipmentItemMarketplaceListingLineItem.objects.annotate(
+            distance=TrigramDistance('item_name', q)
+        ).filter(
+            Q(
+                Q(distance__lte=.5) |
+                Q(item_name__icontains=q)
+            ),
+            sold__isnull=True,
+            listing__approved__isnull=False,
+            listing__expiration__gt=DateTimeService.now(),
+        )

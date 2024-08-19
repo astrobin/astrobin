@@ -20,7 +20,10 @@ from safedelete.models import SafeDeleteModel
 
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
-from astrobin.models import Camera as LegacyCamera, DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition
+from astrobin.models import (
+    Camera as LegacyCamera, DeepSky_Acquisition, GearUserInfo, Image, ImageRevision,
+    SolarSystem_Acquisition,
+)
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
     Camera, EquipmentItemMarketplaceListing,
@@ -540,6 +543,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
     views = IntegerField()
     w = IntegerField(model_attr='w', null=True)
     h = IntegerField(model_attr='h', null=True)
+    final_w = IntegerField()
+    final_h = IntegerField()
     pixel_count = IntegerField(null=True)
     size = IntegerField(model_attr='uploader_upload_length', null=True)
 
@@ -605,6 +610,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     bortle_scale = FloatField()
 
     gallery_thumbnail = CharField()
+    regular_thumbnail = CharField()
 
     user_followed_by = MultiValueField()
 
@@ -948,6 +954,14 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_views(self, obj):
         return _prepare_views(obj, 'image')
 
+    def prepare_final_w(self, obj):
+        final_revision = ImageService(obj).get_final_revision()
+        return final_revision.w
+
+    def prepare_final_h(self, obj):
+        final_revision = ImageService(obj).get_final_revision()
+        return final_revision.h
+
     def prepare_pixel_count(self, obj):
         if obj.w and obj.h:
             return obj.w * obj.h
@@ -967,7 +981,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return [x.user.pk for x in bookmarks.all()]
 
     def prepare_constellation(self, obj):
-        constellation = ImageService.get_constellation(obj.solution)
+        final_revision = ImageService(obj).get_final_revision()
+        constellation = ImageService.get_constellation(final_revision.solution)
         # Escape with __ because And (Andromeda) is not searchable, due to it being the same word as the AND operator.
         return "__%s__" % constellation.get('abbreviation') if constellation else None
 
@@ -992,18 +1007,22 @@ class ImageIndex(CelerySearchIndex, Indexable):
             not IotdService().is_iotd(obj)
 
     def prepare_objects_in_field(self, obj):
-        if not obj.solution or not obj.solution.objects_in_field:
-            return None
+        def process_solution(solution):
+            result = ''
+            if solution and solution.objects_in_field:
+                result = ' '.join(SolutionService(solution).duplicate_objects_in_field_by_catalog_space()).strip()
+                for x in solution.objects_in_field.split(','):
+                    synonyms = UtilsService.get_search_synonyms_text(x.strip())
+                    if synonyms:
+                        result = f'{result} {" ".join(synonyms.split(","))}'.strip()
+            return result
 
-        objects = ' '.join(SolutionService(obj.solution).duplicate_objects_in_field_by_catalog_space()).strip()
+        objects = process_solution(obj.solution)
 
-        for x in obj.solution.objects_in_field.split(','):
-            synonyms = UtilsService.get_search_synonyms_text(x.strip())
-            if synonyms:
-                objects = f'{objects} {" ".join(synonyms.split(","))}'.strip()
+        for revision in ImageRevision.objects.filter(image=obj):
+            objects = f'{objects} {process_solution(revision.solution)}'.strip()
 
-        return objects
-
+        return objects if objects else None
 
     def prepare_countries(self, obj):
         # Escape with __ because for whatever reason some country codes don't work, including IT.
@@ -1024,6 +1043,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_gallery_thumbnail(self, obj: Image):
         return obj.thumbnail('gallery', 'final', sync=True)
+
+    def prepare_regular_thumbnail(self, obj: Image):
+        return obj.thumbnail('regular', 'final', sync=True)
 
     def prepare_user_followed_by(self, obj: Image):
         follows = ToggleProperty.objects.toggleproperties_for_object("follow", obj.user)
@@ -1148,6 +1170,7 @@ class ForumPostIndex(CelerySearchIndex, Indexable):
     user = CharField(model_attr='user__username', null=False)
     user_display_name = CharField()
     user_avatar = CharField()
+    body_html = CharField(model_attr='body_html', null=False)
 
     def get_model(self):
         return Post

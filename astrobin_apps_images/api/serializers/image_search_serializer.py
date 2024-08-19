@@ -87,8 +87,11 @@ class ImageSearchSerializer(HaystackSerializer):
 
             'w',
             'h',
+            'final_w',
+            'final_h',
             'likes',
             'gallery_thumbnail',
+            'regular_thumbnail',
             'animated',
             'video',
             'is_iotd',

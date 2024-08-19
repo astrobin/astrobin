@@ -2051,6 +2051,14 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         help_text=_("Do not create an entry on the front page's activity stream for this event.")
     )
 
+    # To prevent expensive queries, we store the constellation here. It gets update with a signal every time the
+    # Solution is saved.
+    constellation = models.CharField(
+        max_length=3,
+        null=True,
+        blank=True,
+    )
+
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
 
     # Size of the image in bytes

@@ -20,6 +20,7 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
     username = serializers.CharField(source='user.username', read_only=True)
     first_added_to_an_image = serializers.SerializerMethodField(read_only=True)
     slug = serializers.ReadOnlyField()
+    listing_hash = serializers.SerializerMethodField()
 
     def is_list_view(self) -> bool:
         request = self.context.get('request')
@@ -110,6 +111,9 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
 
         return None
 
+    def get_listing_hash(self, obj):
+        return obj.listing.hash if obj.listing else None
+
     def _get_equipment_query_for_image(self, item):
         if item is None:
             return Q()
@@ -159,4 +163,4 @@ class EquipmentItemMarketplaceListingLineItemSerializer(serializers.ModelSeriali
     class Meta:
         model = EquipmentItemMarketplaceListingLineItem
         fields = '__all__'
-        read_only_fields = ['id', 'hash', 'user', 'created', 'updated']
+        read_only_fields = ['id', 'hash', 'listing_hash', 'user', 'created', 'updated']

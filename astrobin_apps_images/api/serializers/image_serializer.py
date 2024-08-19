@@ -1,3 +1,4 @@
+from hitcount.models import HitCount
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
@@ -5,10 +6,13 @@ from astrobin.api2.serializers.accessory_serializer import AccessorySerializer
 from astrobin.api2.serializers.camera_serializer import CameraSerializer
 from astrobin.api2.serializers.filter_serializer import FilterSerializer
 from astrobin.api2.serializers.focal_reducer_serializer import FocalReducerSerializer
+from astrobin.api2.serializers.location_serializer import LocationSerializer
 from astrobin.api2.serializers.mount_serializer import MountSerializer
 from astrobin.api2.serializers.software_serializer import SoftwareSerializer
 from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
+from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
+from astrobin.moon import MoonPhase
 from astrobin_apps_equipment.api.serializers.accessory_serializer import AccessorySerializer as AccessorySerializer2
 from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSerializer as CameraSerializer2
 from astrobin_apps_equipment.api.serializers.filter_serializer import FilterSerializer as FilterSerializer2
@@ -16,12 +20,19 @@ from astrobin_apps_equipment.api.serializers.mount_serializer import MountSerial
 from astrobin_apps_equipment.api.serializers.software_serializer import SoftwareSerializer as SoftwareSerializer2
 from astrobin_apps_equipment.api.serializers.telescope_serializer import TelescopeSerializer as TelescopeSerializer2
 from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
+from astrobin_apps_images.api.serializers import ImageRevisionSerializer
 from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import DeepSkyAcquisitionSerializer
 from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
+from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
+from astrobin_apps_platesolving.serializers import SolutionSerializer
+from common.serializers import AvatarField, UserSerializer
 
 
 class ImageSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    username = serializers.CharField(source='user.username', read_only=True)
+    user_display_name = serializers.CharField(source='user.userprofile.get_display_name', read_only=True)
+    user_avatar = AvatarField(source='user', read_only=True)
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
     h = serializers.IntegerField()
@@ -53,23 +64,65 @@ class ImageSerializer(serializers.ModelSerializer):
     video_file = serializers.FileField(required=False, allow_null=True, read_only=True)
     encoded_video_file = serializers.FileField(required=False, allow_null=True, read_only=True)
 
+    solution = SolutionSerializer(read_only=True)
+    revisions = ImageRevisionSerializer(many=True, read_only=True)
+    user_follower_count = serializers.SerializerMethodField(read_only=True)
+    location_objects = LocationSerializer(source="locations", many=True, read_only=True)
+    collaborators = UserSerializer(many=True, read_only=True)
+    iotd_date = serializers.DateField(source="iotd.date", read_only=True)
+    is_top_pick = serializers.SerializerMethodField(read_only=True)
+    is_top_pick_nomination = serializers.SerializerMethodField(read_only=True)
+    view_count = serializers.SerializerMethodField(read_only=True)
+    average_moon_age = serializers.SerializerMethodField(read_only=True)
+    average_moon_illumination = serializers.SerializerMethodField(read_only=True)
+
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
 
     def to_representation(self, instance: Image):
         representation = super().to_representation(instance)
-        representation.update({
-            'thumbnails': [
+        thumbnails = [
+            {
+                'alias': alias,
+                'id': instance.pk,
+                'revision': 'final',
+                'url': instance.thumbnail(alias, None, sync=True)
+            } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
+        ]
+
+        if not instance.is_final:
+            thumbnails += [
                 {
                     'alias': alias,
                     'id': instance.pk,
-                    'revision': 'final',
-                    'url': instance.thumbnail(alias, None, sync=True)
+                    'revision': '0',
+                    'url': instance.thumbnail(alias, '0', sync=True)
                 } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
             ]
+
+        if instance.mouse_hover_image == MouseHoverImage.INVERTED:
+            thumbnails += [
+                {
+                    'alias': 'hd_inverted',
+                    'id': instance.pk,
+                    'revision': '0',
+                    'url': instance.thumbnail('hd_inverted', '0', sync=True)
+                },
+                {
+                    'alias': 'qhd_inverted',
+                    'id': instance.pk,
+                    'revision': '0',
+                    'url': instance.thumbnail('qhd_inverted', '0', sync=True)
+                }
+            ]
+
+        representation.update({
+            'thumbnails': thumbnails,
         })
+
         representation.update(self.acquisitions_representation(instance))
+
         return representation
 
     @staticmethod
@@ -89,12 +142,42 @@ class ImageSerializer(serializers.ModelSerializer):
 
         return pending_collaborators
 
+    def get_user_follower_count(self, obj):
+        return obj.user.userprofile.followers_count
+
+    def get_is_top_pick(self, obj):
+        return TopPickArchive.objects.filter(image=obj).exists()
+
+    def get_is_top_pick_nomination(self, obj):
+        return TopPickNominationsArchive.objects.filter(image=obj).exists()
+
+    def get_view_count(self, obj):
+        return HitCount.objects.get_for_object(obj).hits
+
+    def get_average_moon_age(self, obj):
+        data = []
+        for acquisition in DeepSky_Acquisition.objects.filter(image=obj, date__isnull=False).iterator():
+            data.append(MoonPhase(acquisition.date).age)
+
+        return sum(data) / len(data) if data else None
+
+    def get_average_moon_illumination(self, obj):
+        data = []
+        for acquisition in DeepSky_Acquisition.objects.filter(image=obj, date__isnull=False).iterator():
+            data.append(MoonPhase(acquisition.date).illuminated)
+
+        return sum(data) / len(data) if data else None
+
     class Meta:
         model = Image
         fields = (
-            'user',
-            'pending_collaborators',
             'pk',
+            'user',
+            'username',
+            'user_display_name',
+            'user_avatar',
+            'pending_collaborators',
+            'collaborators',
             'hash',
             'title',
             'is_wip',
@@ -120,6 +203,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'accessories_2',
             'software_2',
             'published',
+            'uploaded',
             'license',
             'description',
             'description_bbcode',
@@ -146,9 +230,25 @@ class ImageSerializer(serializers.ModelSerializer):
             'sharpen_thumbnails',
             'key_value_tags',
             'locations',
+            'location_objects',
             'full_size_display_limitation',
             'download_limitation',
             'loop_video',
             'video_file',
             'encoded_video_file',
+            'solution',
+            'revisions',
+            'constellation',
+            'is_final',
+            'like_count',
+            'bookmark_count',
+            'comment_count',
+            'user_follower_count',
+            'uploader_upload_length',
+            'iotd_date',
+            'is_top_pick',
+            'is_top_pick_nomination',
+            'view_count',
+            'average_moon_age',
+            'average_moon_illumination',
         )
