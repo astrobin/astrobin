@@ -816,6 +816,10 @@ class SearchService:
                 image_id,
                 Image.objects_plain.only('id', 'subject_type', 'solar_system_main_subject')
             )
+
+            if image is None:
+                return results.none()
+
             if image.subject_type in (SubjectType.DEEP_SKY, SubjectType.WIDE_FIELD):
                 if image.solution and image.solution.ra and image.solution.dec:
                     target_ra = float(image.solution.advanced_ra or image.solution.ra)
