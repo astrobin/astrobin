@@ -12,6 +12,7 @@ from astrobin.api2.serializers.software_serializer import SoftwareSerializer
 from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
+from astrobin.moon import MoonPhase
 from astrobin_apps_equipment.api.serializers.accessory_serializer import AccessorySerializer as AccessorySerializer2
 from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSerializer as CameraSerializer2
 from astrobin_apps_equipment.api.serializers.filter_serializer import FilterSerializer as FilterSerializer2
@@ -72,6 +73,8 @@ class ImageSerializer(serializers.ModelSerializer):
     is_top_pick = serializers.SerializerMethodField(read_only=True)
     is_top_pick_nomination = serializers.SerializerMethodField(read_only=True)
     view_count = serializers.SerializerMethodField(read_only=True)
+    average_moon_age = serializers.SerializerMethodField(read_only=True)
+    average_moon_illumination = serializers.SerializerMethodField(read_only=True)
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
@@ -150,6 +153,20 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def get_view_count(self, obj):
         return HitCount.objects.get_for_object(obj).hits
+
+    def get_average_moon_age(self, obj):
+        data = []
+        for acquisition in DeepSky_Acquisition.objects.filter(image=obj, date__isnull=False).iterator():
+            data.append(MoonPhase(acquisition.date).age)
+
+        return sum(data) / len(data) if data else None
+
+    def get_average_moon_illumination(self, obj):
+        data = []
+        for acquisition in DeepSky_Acquisition.objects.filter(image=obj, date__isnull=False).iterator():
+            data.append(MoonPhase(acquisition.date).illuminated)
+
+        return sum(data) / len(data) if data else None
 
     class Meta:
         model = Image
@@ -232,4 +249,6 @@ class ImageSerializer(serializers.ModelSerializer):
             'is_top_pick',
             'is_top_pick_nomination',
             'view_count',
+            'average_moon_age',
+            'average_moon_illumination',
         )
