@@ -472,7 +472,7 @@ class SearchService:
 
         if licenses is not None and licenses != "":
             if isinstance(licenses, str):
-                licenses = license.split(',')
+                licenses = licenses.split(',')
             results = results.filter(license_name__in=licenses)
 
         return results
