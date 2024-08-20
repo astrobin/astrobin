@@ -117,11 +117,11 @@ class ImageSerializer(serializers.ModelSerializer):
                 }
             ]
 
-        representation.update({
-            'thumbnails': thumbnails,
-        })
-
+        representation.update({'thumbnails': thumbnails})
         representation.update(self.acquisitions_representation(instance))
+
+        if instance.image_file and instance.image_file.name.lower().endswith('.gif'):
+            representation.update({'image_file': instance.image_file.url})
 
         return representation
 

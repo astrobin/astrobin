@@ -44,6 +44,9 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
 
         representation.update({'thumbnails': thumbnails})
 
+        if instance.image_file and instance.image_file.name.lower().endswith('.gif'):
+            representation.update({'image_file': instance.image_file.url})
+
         return representation
 
     class Meta:
