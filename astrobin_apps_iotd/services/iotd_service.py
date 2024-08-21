@@ -574,6 +574,8 @@ class IotdService:
         image.designated_iotd_submitters.clear()
         image.designated_iotd_submitters.add(*new_submitters)
 
+        IotdSubmissionQueueEntry.objects.filter(image=image).delete()
+
         Image.objects_including_wip.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=timezone.now())
 
     @staticmethod
