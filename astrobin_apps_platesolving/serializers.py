@@ -6,7 +6,6 @@ from astrobin_apps_platesolving.models import Solution, PlateSolvingAdvancedTask
 class SolutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Solution
-        fields = '__all__'
         read_only_fields = (
             'status',
             'submission_id',
@@ -25,6 +24,13 @@ class SolutionSerializer(serializers.ModelSerializer):
             'advanced_pixscale',
             'advanced_orientation',
         )
+        exclude = [
+            'advanced_matrix_rect',
+            'advanced_matrix_delta',
+            'advanced_ra_matrix',
+            'advanced_dec_matrix',
+            'advanced_annotations',
+        ]
 
 
 class AdvancedTaskSerializer(serializers.ModelSerializer):
