@@ -39,7 +39,7 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         request_country = utils.get_client_country_code(request)
 
         text = request.query_params.get('text')
-        if text and len(text) > 0:
+        if text and isinstance(text, list) and len(text) > 0:
             text = text[0]
 
         telescope = request.query_params.get('telescope')
@@ -52,7 +52,7 @@ class ImageSearchViewSet(EncodedSearchViewSet):
 
         q = telescope or camera or text
 
-        if q:
+        if q and isinstance(q, str) and len(q) > 0:
             item_listings_cache_key = f'equipment_item_listings__{q}__{request_country}'
             brand_listings_cache_key = f'equipment_brand_listings__{q}__{request_country}'
             marketplace_line_items_cache_key = f'marketplace_line_items__{q}'
