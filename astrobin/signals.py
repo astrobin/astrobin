@@ -372,20 +372,25 @@ def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):
 pre_save.connect(imagerevision_pre_save, sender=ImageRevision)
 
 
-def imagerevision_post_save(sender, instance, created, **kwargs):
+def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kwargs):
     if kwargs.get('update_fields', None):
         return
 
     uploading = instance.uploader_in_progress
 
-    if not uploading and instance.video_file.name:
-        if not instance.image_file.name:
-            ImageService(instance).generate_loading_placeholder()
-            generate_video_preview.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
+    if not uploading:
+        if instance.video_file.name:
+            if not instance.image_file.name:
+                ImageService(instance.image).generate_loading_placeholder()
+                generate_video_preview.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
 
-        if not instance.encoded_video_file.name:
-            log.debug(f'Encoding video file for {instance} in imagerevision_post_save signal handler')
-            encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
+            if not instance.encoded_video_file.name:
+                log.debug(f'Encoding video file for {instance} in imagerevision_post_save signal handler')
+                encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
+
+        if instance.image.submitted_for_iotd_tp_consideration:
+            for alias in ('story', 'hd_anonymized', 'hd_anonymized_crop', 'real_anonymized'):
+                instance.thumbnail(alias)
 
     if instance.image.is_wip:
         return

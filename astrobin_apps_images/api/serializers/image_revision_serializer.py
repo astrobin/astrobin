@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import ImageRevision, Image
+from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 
 
@@ -14,7 +15,7 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
     uploader_in_progress = serializers.NullBooleanField()
     solution = SolutionSerializer(read_only=True)
 
-    def to_representation(self, instance: Image):
+    def to_representation(self, instance: ImageRevision):
         representation = super().to_representation(instance)
 
         thumbnails = [
@@ -25,6 +26,20 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
                 'url': instance.thumbnail(alias, sync=True)
             } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
         ]
+
+        # Add hd_anonymized only if it's available (for IOTD/TP queue purposes)
+        thumbnail_group = ThumbnailGroup.objects.filter(
+            image=instance.image,
+            revision=instance.label,
+            hd_anonymized__isnull=False
+        )
+        if thumbnail_group.exists():
+            thumbnails.append({
+                'alias': 'hd_anonymized',
+                'id': instance.pk,
+                'revision': instance.label,
+                'url': thumbnail_group.first().hd_anonymized
+            })
 
         if instance.mouse_hover_image == MouseHoverImage.INVERTED:
             thumbnails += [

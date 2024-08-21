@@ -23,6 +23,7 @@ from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
 from astrobin_apps_images.api.serializers import ImageRevisionSerializer
 from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import DeepSkyAcquisitionSerializer
 from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
+from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from common.serializers import AvatarField, UserSerializer
@@ -100,6 +101,22 @@ class ImageSerializer(serializers.ModelSerializer):
                     'url': instance.thumbnail(alias, '0', sync=True)
                 } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
             ]
+
+            # Add hd_anonymized only if it's available (for IOTD/TP queue purposes)
+            thumbnail_group = ThumbnailGroup.objects.filter(
+                image=instance,
+                revision='0',
+                hd_anonymized__isnull=False
+            )
+            if thumbnail_group.exists():
+                thumbnails.append(
+                    {
+                        'alias': 'hd_anonymized',
+                        'id': instance.pk,
+                        'revision': '0',
+                        'url': thumbnail_group.first().hd_anonymized
+                    }
+                )
 
         if instance.mouse_hover_image == MouseHoverImage.INVERTED:
             thumbnails += [

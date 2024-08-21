@@ -535,6 +535,8 @@ class IotdService:
 
             for alias in ('story', 'hd_anonymized', 'hd_anonymized_crop', 'real_anonymized'):
                 image.thumbnail(alias, 'final')
+                for revision in image.revisions.all():
+                    revision.thumbnail(alias, revision.label)
 
             Image.objects_including_wip.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=timezone.now())
 
