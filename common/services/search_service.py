@@ -240,7 +240,15 @@ class SearchService:
 
             for matchNum, match in enumerate(matches, start=1):
                 groups = match.groups()
-                catalog_entries.append("%s %s" % (groups[0], groups[1]))
+                catalog_name = groups[0].lower()
+                catalog_id = groups[1]
+
+                if catalog_name == "sh2_":
+                    entry = "%s%s" % (catalog_name, catalog_id)
+                else:
+                    entry = "%s %s" % (catalog_name, catalog_id)
+
+                catalog_entries.append(entry)
 
             for entry in catalog_entries:
                 results = results.narrow(f'objects_in_field:"{entry}"')
