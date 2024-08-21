@@ -604,7 +604,14 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
         submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
-        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
+        image = Generators.image(
+            user=user,
+            submitted_for_iotd_tp_consideration=(
+                datetime.now() -
+                timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) +
+                timedelta(hours=1)
+            )
+        )
         image.designated_iotd_submitters.add(submitter)
 
         update_submission_queues()
@@ -697,7 +704,14 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
         submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
-        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
+        image = Generators.image(
+            user=user,
+            submitted_for_iotd_tp_consideration=(
+                datetime.now() -
+                timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) +
+                timedelta(hours=1)
+            )
+        )
         image.designated_iotd_submitters.add(submitter)
 
         IotdSubmission.objects.create(
@@ -746,8 +760,14 @@ class IotdServiceTest(TestCase):
     def test_get_submission_queue_dismissed_3_times(self):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
-        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
-
+        image = Generators.image(
+            user=user,
+            submitted_for_iotd_tp_consideration=(
+                datetime.now() -
+                timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) +
+                timedelta(hours=1)
+            )
+        )
         submitter1 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         submitter2 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
         submitter3 = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
@@ -789,7 +809,14 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
         submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
-        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
+        image = Generators.image(
+            user=user,
+            submitted_for_iotd_tp_consideration=(
+                datetime.now() -
+                timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) +
+                timedelta(hours=1)
+            )
+        )
         image.designated_iotd_submitters.add(submitter)
 
         IotdGenerators.submission(image=image)
@@ -806,7 +833,14 @@ class IotdServiceTest(TestCase):
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
 
         submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
-        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.now())
+        image = Generators.image(
+            user=user,
+            submitted_for_iotd_tp_consideration=(
+                datetime.now() -
+                timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) +
+                timedelta(hours=1)
+            )
+        )
         image.designated_iotd_submitters.add(submitter)
 
         IotdGenerators.submission(image=image)
@@ -818,13 +852,29 @@ class IotdServiceTest(TestCase):
         image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
         image.save()
 
+        update_submission_queues()
+
         self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_sort_order(self):
         user = Generators.user()
         Generators.premium_subscription(user, SubscriptionName.ULTIMATE_2020)
-        image1 = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now() - timedelta(hours=1))
-        image2 = Generators.image(user=user, submitted_for_iotd_tp_consideration=DateTimeService.now())
+        image1 = Generators.image(
+            user=user,
+            submitted_for_iotd_tp_consideration=(
+                datetime.now() -
+                timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) +
+                timedelta(hours=1)
+            )
+        )
+        image2 = Generators.image(
+            user=user,
+            submitted_for_iotd_tp_consideration=(
+                    datetime.now() -
+                    timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) +
+                    timedelta(hours=2)
+            )
+        )
 
         submitter = Generators.user(groups=[GroupName.IOTD_SUBMITTERS])
 

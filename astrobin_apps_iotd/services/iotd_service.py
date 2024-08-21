@@ -98,6 +98,9 @@ class IotdService:
         ]
 
         images: List[IotdSubmissionQueueEntry] = []
+        now = DateTimeService.now()
+        start = now - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        end = now - timedelta(1)
 
         for entry in IotdSubmissionQueueEntry.objects.select_related(
             'image'
@@ -105,9 +108,8 @@ class IotdService:
             'image__imaging_telescopes_2', 'image__imaging_cameras_2'
         ).filter(
             submitter=submitter,
-            image__submitted_for_iotd_tp_consideration__gte=DateTimeService.now() - timedelta(
-                settings.IOTD_SUBMISSION_WINDOW_DAYS
-            )
+            published__gte=start,
+            published__lt=end,
         ).order_by(
             *order_by
         ).iterator():
