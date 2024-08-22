@@ -1051,7 +1051,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         follows = ToggleProperty.objects.toggleproperties_for_object("follow", obj.user)
         return [x.user.pk for x in follows.all()]
 
-    def prapare_user_display_name(self, obj: Image):
+    def prepare_user_display_name(self, obj: Image):
         return obj.user.userprofile.get_display_name()
 
 
