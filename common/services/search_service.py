@@ -228,7 +228,7 @@ class SearchService:
 
                 # Build the SQ object with the OR conditions
                 for entry in catalog_entries:
-                    subject_query |= SQ(objects_in_field=entry)
+                    subject_query |= SQ(objects_in_field__exact=entry)
 
             return subject_query
 
@@ -238,7 +238,7 @@ class SearchService:
                 if list(SearchService.find_catalog_subjects(subject)):
                     return _build_subject_query(subject)
                 else:
-                    return SQ(objects_in_field=CustomContain(subject))
+                    return SQ(objects_in_field__exact=subject)
             return SQ()
 
         def _build_multiple_subject_filters(subjects: list, match_type: str) -> SQ:
