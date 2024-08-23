@@ -84,9 +84,9 @@ class SearchService:
             filter_attr: str
     ) -> SearchQuerySet:
         value = SearchService.get_boolean_filter_value(data.get(param_name))
-        if value is not True:
-            return results
-        return results.filter(**{filter_attr: value})
+        if value is True or value == 1:
+            return results.filter(**{filter_attr: value})
+        return results
 
     @staticmethod
     def apply_range_filter(
