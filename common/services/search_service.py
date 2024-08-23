@@ -204,17 +204,44 @@ class SearchService:
     @staticmethod
     def filter_by_subject(data, results: SearchQuerySet) -> SearchQuerySet:
         subject = data.get("subject")
+        subjects = data.get("subjects")
         q = data.get("q")
 
-        if subject is not None and subject != "":
-            if list(SearchService.find_catalog_subjects(subject)):
-                results = SearchService.filter_by_subject_text(results, subject)
-            else:
-                results = results.filter(objects_in_field=CustomContain(subject))
+        def _apply_subject_filter(results, subject):
+            """Apply a filter for a single subject."""
+            if subject:
+                if list(SearchService.find_catalog_subjects(subject)):
+                    return SearchService.filter_by_subject_text(results, subject)
+                else:
+                    return results.filter(objects_in_field=CustomContain(subject))
+            return results
 
-        if q is not None and q != "":
-            if list(SearchService.find_catalog_subjects(q)):
-                results |= SearchService.filter_by_subject_text(results, q)
+        def _apply_multiple_subject_filters(results, subjects, match_type):
+            """Apply filters for multiple subjects with the specified match type (AND/OR)."""
+            if match_type == MatchType.ANY.value:
+                # Apply OR logic by combining filters
+                queries = [_apply_subject_filter(results, subject) for subject in subjects]
+                return reduce(or_, queries)
+            else:
+                # Apply AND logic by chaining filters
+                for subject in subjects:
+                    results = _apply_subject_filter(results, subject)
+                return results
+
+        # Handle the "subjects" input
+        if subjects and isinstance(subjects, dict):
+            subject_values = subjects.get("value", [])
+            match_type = subjects.get("matchType", MatchType.ANY.value)
+            results = _apply_multiple_subject_filters(results, subject_values, match_type)
+
+        # Handle the "subject" input
+        if subject:
+            results = _apply_subject_filter(results, subject)
+
+        # Handle the "q" input separately and combine using OR
+        if q:
+            q_filtered_results = _apply_subject_filter(results, q)
+            results = results | q_filtered_results
 
         return results
 
