@@ -207,40 +207,64 @@ class SearchService:
         subjects = data.get("subjects")
         q = data.get("q")
 
-        def _apply_subject_filter(results, subject):
-            """Apply a filter for a single subject."""
+        def _build_subject_query(text: str) -> SQ:
+            subject_query = SQ()
+
+            if text is not None and text != "":
+                catalog_entries = []
+                matches = SearchService.find_catalog_subjects(text)
+
+                for match in matches:
+                    groups = match.groups()
+                    catalog_name = groups[0].lower()
+                    catalog_id = groups[1]
+
+                    if catalog_name == "sh2_":
+                        entry = f"{catalog_name}{catalog_id}"
+                    else:
+                        entry = f"{catalog_name} {catalog_id}"
+
+                    catalog_entries.append(entry)
+
+                # Build the SQ object with the OR conditions
+                for entry in catalog_entries:
+                    subject_query |= SQ(objects_in_field=entry)
+
+            return subject_query
+
+        def _build_subject_filter(subject: str) -> SQ:
+            """Build the SQ filter for a single subject."""
             if subject:
                 if list(SearchService.find_catalog_subjects(subject)):
-                    return SearchService.filter_by_subject_text(results, subject)
+                    return _build_subject_query(subject)
                 else:
-                    return results.filter(objects_in_field=CustomContain(subject))
-            return results
+                    return SQ(objects_in_field=CustomContain(subject))
+            return SQ()
 
-        def _apply_multiple_subject_filters(results, subjects, match_type):
-            """Apply filters for multiple subjects with the specified match type (AND/OR)."""
+        def _build_multiple_subject_filters(subjects: list, match_type: str) -> SQ:
+            """Build the SQ filters for multiple subjects with the specified match type (AND/OR)."""
             if match_type == MatchType.ANY.value:
-                # Apply OR logic by combining filters
-                queries = [_apply_subject_filter(results, subject) for subject in subjects]
+                # Apply OR logic by combining SQ filters
+                queries = [_build_subject_filter(subject) for subject in subjects]
                 return reduce(or_, queries)
             else:
-                # Apply AND logic by chaining filters
-                for subject in subjects:
-                    results = _apply_subject_filter(results, subject)
-                return results
+                # Apply AND logic by chaining SQ filters
+                queries = [_build_subject_filter(subject) for subject in subjects]
+                return reduce(and_, queries)
 
         # Handle the "subjects" input
         if subjects and isinstance(subjects, dict):
             subject_values = subjects.get("value", [])
             match_type = subjects.get("matchType", MatchType.ANY.value)
-            results = _apply_multiple_subject_filters(results, subject_values, match_type)
+            results = results.narrow(_build_multiple_subject_filters(subject_values, match_type))
 
         # Handle the "subject" input
         if subject:
-            results = _apply_subject_filter(results, subject)
+            results = results.narrow(_build_subject_filter(subject))
 
         # Handle the "q" input separately and combine using OR
         if q:
-            q_filtered_results = _apply_subject_filter(results, q)
+            q_filtered_results = results.narrow(_build_subject_filter(q))
             results = results | q_filtered_results
 
         return results
@@ -258,29 +282,6 @@ class SearchService:
 
         pattern = r"(?P<catalog>Messier|M|NGC|IC|PGC|LDN|LBN|SH2_)\s?(?P<id>\d+)"
         return re.finditer(pattern, text, re.IGNORECASE)
-
-    @staticmethod
-    def filter_by_subject_text(results: SearchQuerySet, text: str) -> SearchQuerySet:
-        if text is not None and text != "":
-            catalog_entries = []
-            matches = SearchService.find_catalog_subjects(text)
-
-            for matchNum, match in enumerate(matches, start=1):
-                groups = match.groups()
-                catalog_name = groups[0].lower()
-                catalog_id = groups[1]
-
-                if catalog_name == "sh2_":
-                    entry = "%s%s" % (catalog_name, catalog_id)
-                else:
-                    entry = "%s %s" % (catalog_name, catalog_id)
-
-                catalog_entries.append(entry)
-
-            for entry in catalog_entries:
-                results = results.narrow(f'objects_in_field:"{entry}"')
-
-        return results
 
     @staticmethod
     def filter_by_telescope(data, results: SearchQuerySet) -> SearchQuerySet:
