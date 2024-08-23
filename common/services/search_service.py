@@ -278,6 +278,32 @@ class SearchService:
         )
 
     @staticmethod
+    def filter_by_telescope_types(data, results: SearchQuerySet) -> SearchQuerySet:
+        def query_func(telescope_type):
+            return Q(telescope_types=telescope_type)
+
+        return SearchService.apply_match_type_filter(
+            data,
+            results,
+            "telescope_types",
+            "telescope_types_op",
+            query_func
+        )
+
+    @staticmethod
+    def filter_by_camera_types(data, results: SearchQuerySet) -> SearchQuerySet:
+        def query_func(camera_type):
+            return Q(camera_types=camera_type)
+
+        return SearchService.apply_match_type_filter(
+            data,
+            results,
+            "camera_types",
+            "camera_types_op",
+            query_func
+        )
+
+    @staticmethod
     def filter_by_telescope_type(data, results: SearchQuerySet) -> SearchQuerySet:
         telescope_type = data.get("telescope_type")
 

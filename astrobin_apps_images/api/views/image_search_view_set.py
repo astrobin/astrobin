@@ -100,8 +100,12 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         queryset = SearchService.filter_by_subject(params, queryset)
         queryset = SearchService.filter_by_telescope(params, queryset)
         queryset = SearchService.filter_by_camera(params, queryset)
+        # Remove next method after the old search page is gone.
         queryset = SearchService.filter_by_telescope_type(params, queryset)
+        queryset = SearchService.filter_by_telescope_types(params, queryset)
+        # Remove next method after the old search page is gone.
         queryset = SearchService.filter_by_camera_type(params, queryset)
+        queryset = SearchService.filter_by_camera_types(params, queryset)
         queryset = SearchService.filter_by_acquisition_months(params, queryset)
         queryset = SearchService.filter_by_remote_source(params, queryset)
         queryset = SearchService.filter_by_subject_type(params, queryset)
