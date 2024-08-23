@@ -1,6 +1,9 @@
+import re
+
 from django.core.cache import cache
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from drf_haystack.filters import HaystackFilter, HaystackOrderingFilter
+from haystack.backends import SQ
 from haystack.query import SearchQuerySet
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
@@ -160,6 +163,44 @@ class ImageSearchViewSet(EncodedSearchViewSet):
 
         return queryset
 
+    @staticmethod
+    def parse_search_query(query):
+        # This regex will match phrases wrapped in single or double quotes and individual words
+        pattern = r'(-?"[^"]+"|-?\'[^\']+\'|-?\S+)'
+        terms = re.findall(pattern, query)
+
+        include_terms = []
+        exclude_terms = []
+
+        for term in terms:
+            if term.startswith('-'):
+                exclude_terms.append(term[1:].strip('\'"'))
+            else:
+                include_terms.append(term.strip('\'"'))
+
+        return include_terms, exclude_terms
+
+    @staticmethod
+    def build_search_query(results, query):
+        include_terms, exclude_terms = ImageSearchViewSet.parse_search_query(query)
+        search_query = SQ()
+
+        # Handle included terms (AND logic)
+        for term in include_terms:
+            if ' ' in term:
+                search_query &= SQ(text__exact=term)
+            else:
+                search_query &= SQ(text__contains=term)
+
+        # Handle excluded terms (NOT logic)
+        for term in exclude_terms:
+            if ' ' in term:
+                search_query &= ~SQ(text__exact=term)
+            else:
+                search_query &= ~SQ(text__contains=term)
+
+        return results.filter(search_query)
+
     def filter_queryset(self, queryset: SearchQuerySet) -> SearchQuerySet:
         # Preprocess query params to handle boolean fields
         params = self.simplify_one_item_lists(self.request.query_params)
@@ -170,7 +211,8 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         text = params.get('text', '')
 
         if text:
-            queryset = queryset.auto_query(text)
+            queryset = self.build_search_query(queryset, text)
+
         queryset = self.filter_images(params, queryset)
 
         return queryset
