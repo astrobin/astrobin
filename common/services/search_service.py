@@ -870,6 +870,15 @@ class SearchService:
         return results
 
     @staticmethod
+    def filter_by_username(data, results: SearchQuerySet) -> SearchQuerySet:
+        username = data.get("username")
+
+        if username is not None and username != "":
+            results = results.filter(username=username)
+
+        return results
+
+    @staticmethod
     def filter_by_similar_images(data, results: SearchQuerySet) -> SearchQuerySet:
         image_id = data.get("similar_to_image_id")
 

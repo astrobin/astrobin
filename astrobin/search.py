@@ -387,7 +387,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_filter_types(self.cleaned_data, sqs)
         sqs = self.filter_by_user_id(sqs)
         sqs = SearchService.filter_by_acquisition_months(self.cleaned_data, sqs)
-        sqs = self.filter_by_username(sqs)
+        sqs = SearchService.filter_by_username(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_equipment_ids(self.cleaned_data, sqs)
 
         sqs = self.sort(sqs)
