@@ -12,6 +12,7 @@ from rest_framework import generics, mixins
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
 from subscription.models import Subscription, Transaction, UserSubscription
 
@@ -87,6 +88,20 @@ class TogglePropertyList(generics.ListCreateAPIView):
     ]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ['property_type', 'object_id', 'content_type', 'user_id']
+
+    def create(self, request, *args, **kwargs):
+        existing = ToggleProperty.objects.filter(
+            content_type=request.data.get('content_type'),
+            object_id=request.data.get('object_id'),
+            property_type=request.data.get('property_type'),
+            user=request.user
+        )
+
+        if existing.exists():
+            serializer = self.get_serializer(existing.first())
+            return Response(serializer.data, status=200)
+
+        return super().create(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         try:
