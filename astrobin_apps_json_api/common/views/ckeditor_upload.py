@@ -22,7 +22,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 log = logging.getLogger(__name__)
 
 
-class CkEditorUpload(CsrfExemptMixin, LoginRequiredMixin, JSONResponseMixin, View):
+class CkEditorUpload(CsrfExemptMixin, JSONResponseMixin, View):
     def upload_error(self, request, message=None):
         if message is None:
             message = _("File upload failed. An unexpected error occurred")
@@ -60,6 +60,9 @@ class CkEditorUpload(CsrfExemptMixin, LoginRequiredMixin, JSONResponseMixin, Vie
             return self.upload_error(
                 request,
                 _("AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
+
+        if not request.user.is_authenticated:
+            return self.upload_error(request, _("You must be logged in to upload files"))
 
         MB = 1024 * 1024
 
