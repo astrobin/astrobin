@@ -3,7 +3,7 @@ import sentry_sdk
 
 
 SENTRY_DNS = os.environ.get('SENTRY_DNS')
-TRACE_SAMPLE_RATE = 1.0 if DEBUG else 0.2
+TRACE_SAMPLE_RATE = 1.0 if DEBUG else 0.1
 PROFILES_SAMPLE_RATE = 1.0 if DEBUG else 0.1
 
 if SENTRY_DNS:
