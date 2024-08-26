@@ -914,7 +914,7 @@ class SearchService:
         elif users is not None:
             match_type = users.get('matchType')
             user_ids = [x.get('id') for x in users.get('value')]
-            op = or_ if match_type == MatchType.ANY.value else and_
+            op = and_ if match_type == MatchType.ALL.value else or_
             results = results.filter(reduce(op, [(SQ(user_id=x) | SQ(collaborator_ids=x)) for x in user_ids]))
 
         return results
