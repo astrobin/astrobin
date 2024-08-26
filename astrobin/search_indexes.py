@@ -469,6 +469,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
     object_id = CharField(model_attr='id')
+    collaborator_ids = MultiValueField(model_attr='collaborators__id')
     hash = CharField(null=True, model_attr='hash')
     title = CharField(model_attr='title')
     description = CharField(null=True)

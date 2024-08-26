@@ -907,9 +907,15 @@ class SearchService:
     @staticmethod
     def filter_by_user_id(data, results: SearchQuerySet) -> SearchQuerySet:
         user_id = data.get("user_id")
+        users = data.get("users")
 
         if user_id is not None and user_id != "":
             results = results.filter(user_id=user_id)
+        elif users is not None:
+            match_type = users.get('matchType')
+            user_ids = [x.get('id') for x in users.get('value')]
+            op = or_ if match_type == MatchType.ANY.value else and_
+            results = results.filter(reduce(op, [(SQ(user_id=x) | SQ(collaborator_ids=x)) for x in user_ids]))
 
         return results
 
