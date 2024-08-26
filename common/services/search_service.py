@@ -306,6 +306,50 @@ class SearchService:
         )
 
     @staticmethod
+    def filter_by_mount(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_equipment_filter(
+            data,
+            results,
+            key="mount",
+            id_field="mounts_2_id",
+            legacy_field="mounts",
+            new_field="mounts_2"
+        )
+
+    @staticmethod
+    def filter_by_filter(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_equipment_filter(
+            data,
+            results,
+            key="filter",
+            id_field="filters_2_id",
+            legacy_field="filters",
+            new_field="filters_2"
+        )
+
+    @staticmethod
+    def filter_by_accessory(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_equipment_filter(
+            data,
+            results,
+            key="accessory",
+            id_field="accessories_2_id",
+            legacy_field="accessories",
+            new_field="accessories_2"
+        )
+
+    @staticmethod
+    def filter_by_software(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_equipment_filter(
+            data,
+            results,
+            key="software",
+            id_field="software_2_id",
+            legacy_field="software",
+            new_field="software_2"
+        )
+
+    @staticmethod
     def filter_by_telescope_types(data, results: SearchQuerySet) -> SearchQuerySet:
         def query_func(telescope_type):
             return Q(telescope_types=telescope_type)
