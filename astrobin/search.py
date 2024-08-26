@@ -1,11 +1,14 @@
-from functools import reduce
-from functools import reduce
-from operator import or_
+import base64
+import json
+import zlib
+from urllib.parse import quote
 
+import msgpack
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.shortcuts import redirect
 from haystack import connections
 from haystack.backends import SQ
 from haystack.forms import SearchForm
@@ -13,6 +16,7 @@ from haystack.generic_views import SearchView
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
+from common.services import AppRedirectionService
 from common.services.search_service import CustomContain, SearchService
 from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
@@ -399,6 +403,68 @@ class AstroBinSearchView(SearchView):
     query = None
     results = None
     form_class = AstroBinSearchForm
+
+    @staticmethod
+    def custom_urlencode(params):
+        def encode_value(v):
+            if isinstance(v, str):
+                # Encode the value, but replace spaces with %20 instead of +
+                return quote(v, safe='')
+            elif isinstance(v, (list, dict)):
+                # For lists and dicts, encode as JSON then URL-encode
+                return quote(json.dumps(v), safe='')
+            else:
+                return quote(str(v), safe='')
+
+        return '&'.join(f"{quote(str(k))}={encode_value(v)}" for k, v in params.items())
+
+    @staticmethod
+    def remove_base64_padding(base64_string: str) -> str:
+        return base64_string.rstrip('=')
+
+    @staticmethod
+    def encode_query_params(params):
+        # Use custom URL encoding
+        query_string = AstroBinSearchView.custom_urlencode(params)
+
+        # Pack the query string using msgpack
+        packed_data = msgpack.packb(query_string)
+
+        # Compress the packed data using zlib
+        compressed_data = zlib.compress(packed_data)
+
+        # Encode the compressed data with base64
+        base64_encoded = base64.b64encode(compressed_data).decode('ascii')
+
+        # Remove padding from the base64 encoded string
+        unpadded_base64 = AstroBinSearchView.remove_base64_padding(base64_encoded)
+
+        # URL-encode the result
+        encoded_params = quote(unpadded_base64)
+
+        return encoded_params
+
+    @staticmethod
+    def translate_params(params):
+        params = params.copy()
+
+        if 'q' in params:
+            params['text'] = params.pop('q')[0]
+
+        # Drop all params except text
+        for key in list(params.keys()):
+            if key != 'text':
+                params.pop(key)
+
+        return params
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.userprofile.enable_new_search_experience:
+            translated_params = AstroBinSearchView.translate_params(request.GET)
+            encoded_params = AstroBinSearchView.encode_query_params(translated_params)
+            return redirect(AppRedirectionService.redirect('/search') + f'?p={encoded_params}')
+        else:
+            return super(AstroBinSearchView, self).get(request, *args, **kwargs)
 
     def get_form(self, form_class=None):
         context = {'request': self.request}

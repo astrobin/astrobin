@@ -55,7 +55,7 @@ from django.db import IntegrityError, models
 from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.utils import timezone
-from django.utils.translation import pgettext, ugettext_lazy as _
+from django.utils.translation import gettext, pgettext, ugettext_lazy as _
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 
 from celery.result import AsyncResult
@@ -2991,6 +2991,18 @@ class UserProfile(SafeDeleteModel):
         help_text=_('AstroBin may associate with retailers of astronomy and astrophotography equipment to enhance '
                     'the display of equipment items with links to sponsoring partners. The integration is subtle '
                     'and non intrusive, and it would help a lot if you didn\'t disable it. Thank you in advance!')
+    )
+
+    enable_new_search_experience = models.NullBooleanField(
+        default=None,
+        verbose_name=_('Enable new search experience'),
+        help_text=
+            gettext('Enable the new search experience, which includes new filters and a new layout.') +
+            ' ' +
+            '<a href="https://welcome.astrobin.com/blog/introducing-the-new-astrobin-search-experience" ' +
+            'target="_blank">' +
+            gettext('Learn more') +
+            '</a>'
     )
 
     insufficiently_active_iotd_staff_member_reminders_sent = models.PositiveSmallIntegerField(

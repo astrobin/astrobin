@@ -12,6 +12,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_remove_retailer_integration,
 )
 
+
 class UserProfileEditPreferencesForm(forms.ModelForm):
     agreed_to_iotd_tp_rules_and_guidelines_checkbox = forms.BooleanField(
         label=UserProfile._meta.get_field('agreed_to_iotd_tp_rules_and_guidelines').verbose_name,
@@ -36,6 +37,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'receive_marketing_and_commercial_material',
             'allow_astronomy_ads',
             'allow_retailer_integration',
+            'enable_new_search_experience',
         ]
         widgets = {
             'other_languages': SelectMultiple(
