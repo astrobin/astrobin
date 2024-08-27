@@ -7,3 +7,15 @@ class SoftwareSerializer(EquipmentItemSerializer):
         model = Software
         fields = '__all__'
         abstract = False
+
+
+class SoftwareSerializerForImage(SoftwareSerializer):
+    class Meta(SoftwareSerializer.Meta):
+        fields = (
+            'id',
+            'name',
+            'brand',
+            'brand_name',
+            'klass',
+            'listings',
+        )

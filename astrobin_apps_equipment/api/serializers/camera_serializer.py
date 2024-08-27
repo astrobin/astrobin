@@ -16,3 +16,15 @@ class CameraSerializer(EquipmentItemSerializer):
         model = Camera
         fields = '__all__'
         abstract = False
+
+
+class CameraSerializerForImage(CameraSerializer):
+    class Meta(CameraSerializer.Meta):
+        fields = (
+            'id',
+            'name',
+            'brand',
+            'brand_name',
+            'klass',
+            'listings',
+        )

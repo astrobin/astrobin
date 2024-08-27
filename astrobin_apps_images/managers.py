@@ -1,3 +1,4 @@
+from django.db.models import QuerySet
 from safedelete.managers import SafeDeleteManager
 
 
@@ -56,12 +57,15 @@ class UploadsInProgressImagesManager(ImagesManager):
 
 
 class ImageRevisionsManager(SafeDeleteManager):
-    def get_queryset(self):
-        return super(ImageRevisionsManager, self).get_queryset().filter(uploader_in_progress__isnull=True)
+    def get_queryset(self) -> QuerySet:
+        return super().get_queryset().filter(
+            uploader_in_progress__isnull=True
+        )
 
 
-class UploadsInProgressImageRevisionsManager(ImagesManager):
-    def get_queryset(self):
-        from astrobin.models import ImageRevision
-        return ImageRevision.all_objects.filter(deleted__isnull=True, uploader_in_progress=True)
+class UploadsInProgressImageRevisionsManager(ImageRevisionsManager):
+    def get_queryset(self) -> QuerySet:
+        return super().get_queryset().filter(
+            deleted__isnull=True, uploader_in_progress=True
+        )
 

@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from hitcount.models import HitCount
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
@@ -13,17 +15,28 @@ from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
 from astrobin.moon import MoonPhase
-from astrobin_apps_equipment.api.serializers.accessory_serializer import AccessorySerializer as AccessorySerializer2
-from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSerializer as CameraSerializer2
-from astrobin_apps_equipment.api.serializers.filter_serializer import FilterSerializer as FilterSerializer2
-from astrobin_apps_equipment.api.serializers.mount_serializer import MountSerializer as MountSerializer2
-from astrobin_apps_equipment.api.serializers.software_serializer import SoftwareSerializer as SoftwareSerializer2
-from astrobin_apps_equipment.api.serializers.telescope_serializer import TelescopeSerializer as TelescopeSerializer2
+from astrobin_apps_equipment.api.serializers.accessory_serializer import (
+    AccessorySerializerForImage,
+)
+from astrobin_apps_equipment.api.serializers.camera_serializer import (
+    CameraSerializerForImage,
+)
+from astrobin_apps_equipment.api.serializers.filter_serializer import (
+    FilterSerializerForImage,
+)
+from astrobin_apps_equipment.api.serializers.mount_serializer import (
+    MountSerializerForImage,
+)
+from astrobin_apps_equipment.api.serializers.software_serializer import (
+    SoftwareSerializerForImage,
+)
+from astrobin_apps_equipment.api.serializers.telescope_serializer import (
+    TelescopeSerializerForImage,
+)
 from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
 from astrobin_apps_images.api.serializers import ImageRevisionSerializer
 from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import DeepSkyAcquisitionSerializer
 from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
-from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from common.serializers import AvatarField, UserSerializer
@@ -50,14 +63,14 @@ class ImageSerializer(serializers.ModelSerializer):
     accessories = AccessorySerializer(many=True, read_only=True)
     software = SoftwareSerializer(many=True, read_only=True)
 
-    imaging_telescopes_2 = TelescopeSerializer2(many=True, required=False)
-    imaging_cameras_2 = CameraSerializer2(many=True, required=False)
-    guiding_telescopes_2 = TelescopeSerializer2(many=True, required=False)
-    guiding_cameras_2 = CameraSerializer2(many=True, required=False)
-    mounts_2 = MountSerializer2(many=True, required=False)
-    filters_2 = FilterSerializer2(many=True, required=False)
-    accessories_2 = AccessorySerializer2(many=True, required=False)
-    software_2 = SoftwareSerializer2(many=True, required=False)
+    imaging_telescopes_2 = TelescopeSerializerForImage(many=True, required=False)
+    imaging_cameras_2 = CameraSerializerForImage(many=True, required=False)
+    guiding_telescopes_2 = TelescopeSerializerForImage(many=True, required=False)
+    guiding_cameras_2 = CameraSerializerForImage(many=True, required=False)
+    mounts_2 = MountSerializerForImage(many=True, required=False)
+    filters_2 = FilterSerializerForImage(many=True, required=False)
+    accessories_2 = AccessorySerializerForImage(many=True, required=False)
+    software_2 = SoftwareSerializerForImage(many=True, required=False)
 
     deep_sky_acquisitions = DeepSkyAcquisitionSerializer(many=True, required=False, read_only=True)
     solar_system_acquisitions = SolarSystemAcquisitionSerializer(many=True, required=False, read_only=True)
@@ -82,6 +95,9 @@ class ImageSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
     def to_representation(self, instance: Image):
+        # Pass the current Image instance to the context of the nested serializer
+        self.fields['revisions'].context.update({'image': instance})
+
         representation = super().to_representation(instance)
         thumbnails = [
             {
@@ -102,22 +118,6 @@ class ImageSerializer(serializers.ModelSerializer):
                 } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
             ]
 
-            # Add hd_anonymized only if it's available (for IOTD/TP queue purposes)
-            thumbnail_group = ThumbnailGroup.objects.filter(
-                image=instance,
-                revision='0',
-                hd_anonymized__isnull=False
-            )
-            if thumbnail_group.exists():
-                thumbnails.append(
-                    {
-                        'alias': 'hd_anonymized',
-                        'id': instance.pk,
-                        'revision': '0',
-                        'url': thumbnail_group.first().hd_anonymized
-                    }
-                )
-
         if instance.mouse_hover_image == MouseHoverImage.INVERTED:
             thumbnails += [
                 {
@@ -133,6 +133,26 @@ class ImageSerializer(serializers.ModelSerializer):
                     'url': instance.thumbnail('qhd_inverted', '0', sync=True)
                 }
             ]
+
+        if (
+                instance.is_final and
+                instance.submitted_for_iotd_tp_consideration and
+                instance.submitted_for_iotd_tp_consideration > datetime.now() - timedelta(days=60)
+        ):
+            # Add hd_anonymized only if it's available (for IOTD/TP queue purposes)
+            thumbnail_group = instance.thumbnails.filter(
+                revision='0',
+                hd_anonymized__isnull=False
+            )
+            if thumbnail_group.exists():
+                thumbnails.append(
+                    {
+                        'alias': 'hd_anonymized',
+                        'id': instance.pk,
+                        'revision': 'final',
+                        'url': thumbnail_group.first().hd_anonymized
+                    }
+                )
 
         representation.update({'thumbnails': thumbnails})
         representation.update(self.acquisitions_representation(instance))
