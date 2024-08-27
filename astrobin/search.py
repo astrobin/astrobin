@@ -456,6 +456,55 @@ class AstroBinSearchView(SearchView):
             if key != 'text':
                 params.pop(key)
 
+        subject_matches = SearchService.find_catalog_subjects(params.get('text', ''))
+        catalog_entries = []
+        for match in subject_matches:
+            groups = match.groups()
+            catalog_name = groups[0].upper()
+            catalog_id = groups[1]
+
+            if catalog_name == "SH2_":
+                entry = f"SH2-{catalog_id}"
+            else:
+                entry = f"{catalog_name} {catalog_id}"
+
+            catalog_entries.append(entry)
+
+            if catalog_entries:
+                params['subjects'] = {
+                    'value': catalog_entries,
+                    'matchType': None
+                }
+                params.pop('text')
+
+        if params.get('text', '').lower() in ('moon', 'luna', 'lua', 'lune', 'mond'):
+            params['subject_type'] = 'MOON'
+            params.pop('text')
+        elif params.get('text', '').lower() in ('sun', 'soleil', 'sonne', 'sol', 'sole'):
+            params['subject_type'] = 'SUN'
+            params.pop('text')
+        elif params.get('text', '').lower() in ('mercury', 'mercure', 'merkur', 'mercurio'):
+            params['subject_type'] = 'MERCURY'
+            params.pop('text')
+        elif params.get('text', '').lower() in ('venus', 'vénus', 'venere'):
+            params['subject_type'] = 'VENUS'
+            params.pop('text')
+        elif params.get('text', '').lower() in ('mars', 'mars', 'marte'):
+            params['subject_type'] = 'MARS'
+            params.pop('text')
+        elif params.get('text', '').lower() in ('jupiter', 'jupiter', 'júpiter', 'giove'):
+            params['subject_type'] = 'JUPITER'
+            params.pop('text')
+        elif params.get('text', '').lower() in ('saturn', 'saturne', 'saturno'):
+            params['subject_type'] = 'SATURN'
+            params.pop('text')
+        elif params.get('text', '').lower() in ('uranus', 'uranus', 'urano'):
+            params['subject_type'] = 'URANUS'
+            params.pop('text')
+        elif params.get('text', '').lower() in ('neptune', 'neptune', 'neptuno', 'nettuno'):
+            params['subject_type'] = 'NEPTUNE'
+            params.pop('text')
+
         return params
 
     def get(self, request, *args, **kwargs):
