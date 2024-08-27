@@ -7,3 +7,15 @@ class MountSerializer(EquipmentItemSerializer):
         model = Mount
         fields = '__all__'
         abstract = False
+
+
+class MountSerializerForImage(MountSerializer):
+    class Meta(MountSerializer.Meta):
+        fields = (
+            'id',
+            'name',
+            'brand',
+            'brand_name',
+            'klass',
+            'listings',
+        )

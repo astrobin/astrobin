@@ -1627,16 +1627,21 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         # We default to the original upload
         field = self.image_file
 
+        if hasattr(self, '_prefetched_objects_cache') and 'revisions' in self._prefetched_objects_cache:
+            revisions = self._prefetched_objects_cache['revisions']
+        else:
+            revisions = self.revisions
+
         if revision_label == '0':
             pass
         elif revision_label == 'final':
-            for r in self.revisions.all():
+            for r in revisions.all():
                 if r.is_final:
                     field = r.image_file
         else:
             # We have some label
             try:
-                r = ImageRevision.objects.get(image=self, label=revision_label)
+                r = revisions.get(label=revision_label)
                 field = r.image_file
             except ImageRevision.DoesNotExist:
                 pass
@@ -1737,7 +1742,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 return normalize_url_security(self.final_gallery_thumbnail, thumbnail_settings)
             revision_label = final_revision_label
 
-        field = self.get_thumbnail_field(revision_label)
+        field = kwargs.pop('thumbnail_field', None)
+        if not field:
+            field = self.get_thumbnail_field(revision_label)
         if not field.name or 'placeholder' in field.url:
             return placeholder
 
@@ -2142,7 +2149,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         return self.image.thumbnail_raw(alias, self.label, **kwargs)
 
     def thumbnail(self, alias, **kwargs):
-        return self.image.thumbnail(alias, self.label, **kwargs)
+        return self.image.thumbnail(alias, self.label, thumbnail_field=self.image_file, **kwargs)
 
     def thumbnail_invalidate(self, delete=True):
         return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete)

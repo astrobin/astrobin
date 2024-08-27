@@ -1,8 +1,9 @@
+from datetime import datetime, timedelta
+
 from rest_framework import serializers
 
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import ImageRevision, Image
-from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 
 
@@ -16,6 +17,12 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
     solution = SolutionSerializer(read_only=True)
 
     def to_representation(self, instance: ImageRevision):
+        # Get the Image instance from context if provided
+        image = self.context.get('image', None)
+        if image:
+            # Use the passed image instance instead of fetching it
+            instance.image = image
+
         representation = super().to_representation(instance)
 
         thumbnails = [
@@ -26,20 +33,6 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
                 'url': instance.thumbnail(alias, sync=True)
             } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
         ]
-
-        # Add hd_anonymized only if it's available (for IOTD/TP queue purposes)
-        thumbnail_group = ThumbnailGroup.objects.filter(
-            image=instance.image,
-            revision=instance.label,
-            hd_anonymized__isnull=False
-        )
-        if thumbnail_group.exists():
-            thumbnails.append({
-                'alias': 'hd_anonymized',
-                'id': instance.pk,
-                'revision': instance.label,
-                'url': thumbnail_group.first().hd_anonymized
-            })
 
         if instance.mouse_hover_image == MouseHoverImage.INVERTED:
             thumbnails += [
@@ -56,6 +49,26 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
                     'url': instance.thumbnail('qhd_inverted', sync=True)
                 }
             ]
+
+        if (
+                instance.is_final and
+                instance.image.submitted_for_iotd_tp_consideration and
+                instance.image.submitted_for_iotd_tp_consideration > datetime.now() - timedelta(days=60)
+        ):
+            # Add hd_anonymized only if it's available (for IOTD/TP queue purposes)
+            thumbnail_group = instance.image.thumbnails.filter(
+                revision=instance.label,
+                hd_anonymized__isnull=False
+            )
+            if thumbnail_group.exists():
+                thumbnails.append(
+                    {
+                        'alias': 'hd_anonymized',
+                        'id': instance.pk,
+                        'revision': instance.label,
+                        'url': thumbnail_group.first().hd_anonymized
+                    }
+                )
 
         representation.update({'thumbnails': thumbnails})
 

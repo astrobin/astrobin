@@ -7,3 +7,15 @@ class AccessorySerializer(EquipmentItemSerializer):
         model = Accessory
         fields = '__all__'
         abstract = False
+
+
+class AccessorySerializerForImage(AccessorySerializer):
+    class Meta(AccessorySerializer.Meta):
+        fields = (
+            'id',
+            'name',
+            'brand',
+            'brand_name',
+            'klass',
+            'listings',
+        )

@@ -7,3 +7,15 @@ class FilterSerializer(EquipmentItemSerializer):
         model = Filter
         fields = '__all__'
         abstract = False
+
+
+class FilterSerializerForImage(FilterSerializer):
+    class Meta(FilterSerializer.Meta):
+        fields = (
+            'id',
+            'name',
+            'brand',
+            'brand_name',
+            'klass',
+            'listings',
+        )

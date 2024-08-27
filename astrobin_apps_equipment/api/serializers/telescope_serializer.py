@@ -7,3 +7,15 @@ class TelescopeSerializer(EquipmentItemSerializer):
         model = Telescope
         fields = '__all__'
         abstract = False
+
+
+class TelescopeSerializerForImage(TelescopeSerializer):
+    class Meta(TelescopeSerializer.Meta):
+        fields = (
+            'id',
+            'name',
+            'brand',
+            'brand_name',
+            'klass',
+            'listings',
+        )
