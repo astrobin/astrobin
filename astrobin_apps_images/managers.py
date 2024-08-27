@@ -65,7 +65,6 @@ class ImageRevisionsManager(SafeDeleteManager):
 
 class UploadsInProgressImageRevisionsManager(ImageRevisionsManager):
     def get_queryset(self) -> QuerySet:
-        return super().get_queryset().filter(
-            deleted__isnull=True, uploader_in_progress=True
-        )
+        from astrobin.models import ImageRevision
+        return ImageRevision.all_objects.filter(deleted__isnull=True, uploader_in_progress=True)
 
