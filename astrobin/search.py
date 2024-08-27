@@ -447,17 +447,35 @@ class AstroBinSearchView(SearchView):
     @staticmethod
     def translate_params(params):
         params = params.copy()
+        supported_params = [
+            'text',
+            'subjects',
+            'subject_type',
+            'coords',
+            'field_radius',
+        ]
 
         if 'q' in params:
             params['text'] = params.pop('q')[0]
 
-        # Drop all params except text
+        # Process and translate different parts of the params
+        params = AstroBinSearchView._process_subjects(params)
+        params = AstroBinSearchView._process_subject_type(params)
+        params = AstroBinSearchView._process_coords(params)
+        params = AstroBinSearchView._process_field_radius(params)
+
+        # Drop all params except supported params
         for key in list(params.keys()):
-            if key != 'text':
+            if key not in supported_params:
                 params.pop(key)
 
+        return params
+
+    @staticmethod
+    def _process_subjects(params):
         subject_matches = SearchService.find_catalog_subjects(params.get('text', ''))
         catalog_entries = []
+
         for match in subject_matches:
             groups = match.groups()
             catalog_name = groups[0].upper()
@@ -470,40 +488,67 @@ class AstroBinSearchView(SearchView):
 
             catalog_entries.append(entry)
 
-            if catalog_entries:
-                params['subjects'] = {
-                    'value': catalog_entries,
-                    'matchType': None
-                }
-                params.pop('text')
+        if catalog_entries:
+            params['subjects'] = {
+                'value': catalog_entries,
+                'matchType': None
+            }
+            params.pop('text')
 
-        if params.get('text', '').lower() in ('moon', 'luna', 'lua', 'lune', 'mond'):
-            params['subject_type'] = 'MOON'
-            params.pop('text')
-        elif params.get('text', '').lower() in ('sun', 'soleil', 'sonne', 'sol', 'sole'):
-            params['subject_type'] = 'SUN'
-            params.pop('text')
-        elif params.get('text', '').lower() in ('mercury', 'mercure', 'merkur', 'mercurio'):
-            params['subject_type'] = 'MERCURY'
-            params.pop('text')
-        elif params.get('text', '').lower() in ('venus', 'vénus', 'venere'):
-            params['subject_type'] = 'VENUS'
-            params.pop('text')
-        elif params.get('text', '').lower() in ('mars', 'mars', 'marte'):
-            params['subject_type'] = 'MARS'
-            params.pop('text')
-        elif params.get('text', '').lower() in ('jupiter', 'jupiter', 'júpiter', 'giove'):
-            params['subject_type'] = 'JUPITER'
-            params.pop('text')
-        elif params.get('text', '').lower() in ('saturn', 'saturne', 'saturno'):
-            params['subject_type'] = 'SATURN'
-            params.pop('text')
-        elif params.get('text', '').lower() in ('uranus', 'uranus', 'urano'):
-            params['subject_type'] = 'URANUS'
-            params.pop('text')
-        elif params.get('text', '').lower() in ('neptune', 'neptune', 'neptuno', 'nettuno'):
-            params['subject_type'] = 'NEPTUNE'
-            params.pop('text')
+        return params
+
+    @staticmethod
+    def _process_subject_type(params):
+        text = params.get('text', '').lower()
+
+        subject_types = {
+            'moon': ['moon', 'luna', 'lua', 'lune', 'mond'],
+            'sun': ['sun', 'soleil', 'sonne', 'sol', 'sole'],
+            'mercury': ['mercury', 'mercure', 'merkur', 'mercurio'],
+            'venus': ['venus', 'vénus', 'venere'],
+            'mars': ['mars', 'mars', 'marte'],
+            'jupiter': ['jupiter', 'jupiter', 'júpiter', 'giove'],
+            'saturn': ['saturn', 'saturne', 'saturno'],
+            'uranus': ['uranus', 'uranus', 'urano'],
+            'neptune': ['neptune', 'neptune', 'neptuno', 'nettuno']
+        }
+
+        for subject_type, keywords in subject_types.items():
+            if text in keywords:
+                params['subject_type'] = subject_type.upper()
+                params.pop('text')
+                break
+
+        return params
+
+    @staticmethod
+    def _process_coords(params):
+        if (
+                'coord_ra_min' in params and
+                'coord_ra_max' in params and
+                'coord_dec_min' in params and
+                'coord_dec_max' in params
+        ):
+            params['coords'] = {
+                'ra': {
+                    'min': params.pop('coord_ra_min')[0],
+                    'max': params.pop('coord_ra_max')[0]
+                },
+                'dec': {
+                    'min': params.pop('coord_dec_min')[0],
+                    'max': params.pop('coord_dec_max')[0]
+                }
+            }
+
+        return params
+
+    @staticmethod
+    def _process_field_radius(params):
+        if 'field_radius_min' in params and 'field_radius_max' in params:
+            params['field_radius'] = {
+                'min': params.pop('field_radius_min')[0],
+                'max': params.pop('field_radius_max')[0]
+            }
 
         return params
 
