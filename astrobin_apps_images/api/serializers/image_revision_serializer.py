@@ -58,15 +58,24 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             # Add hd_anonymized only if it's available (for IOTD/TP queue purposes)
             thumbnail_group = instance.image.thumbnails.filter(
                 revision=instance.label,
-                hd_anonymized__isnull=False
-            )
-            if thumbnail_group.exists():
+                hd_anonymized__isnull=False,
+                hd_anonymized_crop__isnull=False
+            ).first()
+            if thumbnail_group:
                 thumbnails.append(
                     {
                         'alias': 'hd_anonymized',
                         'id': instance.pk,
                         'revision': instance.label,
                         'url': thumbnail_group.first().hd_anonymized
+                    }
+                )
+                thumbnails.append(
+                    {
+                        'alias': 'hd_anonymized_crop',
+                        'id': instance.pk,
+                        'revision': instance.label,
+                        'url': thumbnail_group.first().hd_anonymized_crop
                     }
                 )
 
