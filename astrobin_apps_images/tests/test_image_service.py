@@ -364,8 +364,6 @@ class TestImageService(TestCase):
 
         ImageService(image).delete_original()
 
-        image = Image.objects.get(pk=image.pk)
-
         self.assertEqual('revision.jpg', image.image_file)
         self.assertTrue(image.is_final)
 

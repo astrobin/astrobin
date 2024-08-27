@@ -355,6 +355,7 @@ class ImageService:
             solution.content_object = image
             solution.save()
 
+        new_original.is_final = False
         new_original.delete()
         image.thumbnails.filter(revision=new_original.label).delete()
         image.thumbnail_invalidate()
