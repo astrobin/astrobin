@@ -67,7 +67,7 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
                         'alias': 'hd_anonymized',
                         'id': instance.pk,
                         'revision': instance.label,
-                        'url': thumbnail_group.first().hd_anonymized
+                        'url': thumbnail_group.hd_anonymized
                     }
                 )
                 thumbnails.append(
@@ -75,7 +75,7 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
                         'alias': 'hd_anonymized_crop',
                         'id': instance.pk,
                         'revision': instance.label,
-                        'url': thumbnail_group.first().hd_anonymized_crop
+                        'url': thumbnail_group.hd_anonymized_crop
                     }
                 )
 

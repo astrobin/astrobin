@@ -151,7 +151,7 @@ class ImageSerializer(serializers.ModelSerializer):
                         'alias': 'hd_anonymized',
                         'id': instance.pk,
                         'revision': 'final',
-                        'url': thumbnail_group.first()
+                        'url': thumbnail_group.hd_anonymized
                     }
                 )
                 thumbnails.append(
@@ -159,7 +159,7 @@ class ImageSerializer(serializers.ModelSerializer):
                         'alias': 'hd_anonymized_crop',
                         'id': instance.pk,
                         'revision': 'final',
-                        'url': thumbnail_group.first()
+                        'url': thumbnail_group.hd_anonymized_crop
                     }
                 )
 
