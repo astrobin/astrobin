@@ -20,7 +20,7 @@ from astrobin_apps_premium.services.premium_service import PremiumService
 from common.api_page_size_pagination import PageSizePagination
 from common.encoded_search_viewset import EncodedSearchViewSet
 from common.permissions import ReadOnly
-from common.services.search_service import SearchService
+from common.services.search_service import MatchType, SearchService
 
 
 class ImageSearchViewSet(EncodedSearchViewSet):
@@ -187,22 +187,23 @@ class ImageSearchViewSet(EncodedSearchViewSet):
 
     @staticmethod
     def build_search_query(results, query):
-        include_terms, exclude_terms = ImageSearchViewSet.parse_search_query(query)
+        include_terms, exclude_terms = ImageSearchViewSet.parse_search_query(query.get('value', ''))
+        match_type = query.get('matchType', MatchType.ANY.value)
         search_query = SQ()
 
-        # Handle included terms (AND logic)
+        # Handle included terms (AND logic or OR logic depending on matchType)
         for term in include_terms:
-            if ' ' in term:
-                search_query &= SQ(text__exact=term)
-            else:
+            if match_type == MatchType.ALL.value:
                 search_query &= SQ(text__contains=term)
+            else:
+                search_query |= SQ(text__contains=term)
 
         # Handle excluded terms (NOT logic)
         for term in exclude_terms:
-            if ' ' in term:
-                search_query &= ~SQ(text__exact=term)
-            else:
+            if match_type == MatchType.ALL.value:
                 search_query &= ~SQ(text__contains=term)
+            else:
+                search_query |= ~SQ(text__contains=term)
 
         return results.filter(search_query)
 
@@ -213,9 +214,13 @@ class ImageSearchViewSet(EncodedSearchViewSet):
 
         self.request = self.update_request_params(self.request, params)
 
-        text = params.get('text', '')
+        text = params.get('text', dict(value=''))
+        if isinstance(text, str):
+            text = dict(value=text)
+            if ' ' in text:
+                text['matchType'] = MatchType.ALL.value
 
-        if text:
+        if text.get('value'):
             queryset = self.build_search_query(queryset, text)
 
         queryset = self.filter_images(params, queryset)

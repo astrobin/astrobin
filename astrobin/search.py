@@ -456,7 +456,7 @@ class AstroBinSearchView(SearchView):
         ]
 
         if 'q' in params:
-            params['text'] = params.pop('q')[0]
+            params['text'] = dict(value=params.pop('q')[0])
 
         # Process and translate different parts of the params
         params = AstroBinSearchView._process_subjects(params)
@@ -473,7 +473,7 @@ class AstroBinSearchView(SearchView):
 
     @staticmethod
     def _process_subjects(params):
-        subject_matches = SearchService.find_catalog_subjects(params.get('text', ''))
+        subject_matches = SearchService.find_catalog_subjects(params.get('text', dict(value='')).get('value'))
         catalog_entries = []
 
         for match in subject_matches:
@@ -499,7 +499,7 @@ class AstroBinSearchView(SearchView):
 
     @staticmethod
     def _process_subject_type(params):
-        text = params.get('text', '').lower()
+        text = params.get('text', dict(value='')).get('value').lower()
 
         subject_types = {
             'moon': ['moon', 'luna', 'lua', 'lune', 'mond'],
