@@ -31,6 +31,9 @@ class ModerationService(object):
 
     @staticmethod
     def auto_approve(user: User) -> bool:
+        if user.is_superuser:
+            return True
+
         for domain in settings.AUTO_APPROVE_DOMAINS:
             if user.email.endswith(domain):
                 return True

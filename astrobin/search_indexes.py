@@ -364,7 +364,6 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_likes_given(self, obj):
         return ToggleProperty.objects.toggleproperties_for_model('like', Image, obj).count()
 
-
     def prepare_normalized_likes(self, obj):
         return obj.userprofile.image_index
 
@@ -398,7 +397,6 @@ class UserIndex(CelerySearchIndex, Indexable):
             forum_post_likes_received = self.prepare_forum_post_likes_received(obj)
 
         return likes + comment_likes_received + forum_post_likes_received
-
 
     def prepare_followers(self, obj):
         return ToggleProperty.objects.filter(
@@ -903,9 +901,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return obj.video_file.name is not None and obj.video_file.name != ''
 
     def prepare_video_url(self, obj):
-        return obj.encoded_video_file.url\
+        return obj.encoded_video_file.url \
             if (obj.encoded_video_file.name is not None and
-                obj.encoded_video_file.name != '')\
+                obj.encoded_video_file.name != '') \
             else None
 
     def prepare_loop_video(self, obj):
@@ -1085,16 +1083,12 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
                 return False
 
         if isinstance(instance.content_object, Image):
-            if (
-                    instance.content_object.is_wip or
-                    instance.content_object.moderator_decision != ModeratorDecision.APPROVED
-            ):
-                return False
+            return (
+                    not instance.content_object.is_wip and
+                    instance.content_object.moderator_decision == ModeratorDecision.APPROVED
+            )
 
-        if isinstance(instance.content_object, EquipmentItemMarketplacePrivateConversation):
-            return False
-
-        return True
+        return False
 
     def get_updated_field(self):
         return "updated"

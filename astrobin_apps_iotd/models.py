@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from astrobin.models import Image
 from astrobin_apps_iotd.permissions import may_elect_iotd, may_toggle_submission_image, may_toggle_vote_image
+from common.services import AppRedirectionService
 
 
 class IotdQueueSortOrder:
@@ -98,6 +99,9 @@ class Iotd(models.Model):
         # Force validation on save
         self.full_clean()
         return super(Iotd, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return AppRedirectionService.redirect(f'/iotd/judgement-queue#comments-{self.pk}')
 
 
 class IotdHiddenImage(models.Model):

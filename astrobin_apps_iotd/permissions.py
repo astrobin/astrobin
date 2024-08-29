@@ -9,6 +9,9 @@ from common.services import DateTimeService
 
 
 def may_toggle_submission_image(user, image):
+    if user.is_superuser:
+        return True, None
+
     if not UserService(user).is_in_group('iotd_submitters'):
         return False, _("You are not a member of the IOTD Submitters board.")
 
@@ -67,6 +70,9 @@ def may_toggle_submission_image(user, image):
 
 
 def may_toggle_vote_image(user, image):
+    if user.is_superuser:
+        return True, None
+
     if not UserService(user).is_in_group(GroupName.IOTD_REVIEWERS):
         return False, _("You are not a member of the IOTD Reviewers board.")
 
@@ -138,6 +144,9 @@ def may_toggle_vote_image(user, image):
 
 
 def may_elect_iotd(user, image):
+    if user.is_superuser:
+        return True, None
+
     if not UserService(user).is_in_group(GroupName.IOTD_JUDGES):
         return False, _("You are not a member of the IOTD Judges board.")
 
@@ -222,6 +231,9 @@ def may_elect_iotd(user, image):
 
 
 def may_unelect_iotd(user, image):
+    if user.is_superuser:
+        return True, None
+
     if not UserService(user).is_in_group(GroupName.IOTD_JUDGES):
         return False, _("You are not a member of the IOTD Judges board.")
 

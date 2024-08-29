@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from astrobin_apps_iotd.models import (
-    IotdStaffMemberScore, IotdStats, IotdSubmission, IotdSubmissionQueueEntry, IotdVote, Iotd,
+    IotdJudgementQueueEntry, IotdStaffMemberScore, IotdStats, IotdSubmission, IotdSubmissionQueueEntry, IotdVote, Iotd,
     TopPickNominationsArchive,
     TopPickArchive,
 )
@@ -34,6 +34,12 @@ class IotdAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Iotd, IotdAdmin)
+
+
+@admin.register(IotdJudgementQueueEntry)
+class IotdJudgmentQueueEntryAdmin(admin.ModelAdmin):
+    fields = ('judge', 'image', 'last_vote_timestamp')
+    list_display = ('judge', 'image',)
 
 
 class IotdStatsAdmin(admin.ModelAdmin):
