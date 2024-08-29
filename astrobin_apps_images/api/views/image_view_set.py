@@ -206,3 +206,15 @@ class ImageViewSet(
         value = cache.get(f"video-encoding-progress-{content_type.pk}-{pk}")
 
         return Response(value, HTTP_200_OK)
+
+    @action(detail=True, methods=['put'], url_path='publish')
+    def publish(self, request, pk=None):
+        image = self.get_object()
+
+        if image.is_wip:
+            image.skip_notifications = self.request.data.get('skip_notifications', False)
+            image.skip_activity_stream = self.request.data.get('skip_activity_stream', False)
+            ImageService(image).promote_to_public_area(image.skip_notifications, image.skip_activity_stream)
+            image.save()
+
+        return Response(status=HTTP_200_OK)
