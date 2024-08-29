@@ -9,8 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from drf_haystack.filters import HaystackFilter
 from haystack.query import SearchQuerySet
-from rest_framework import permissions
-from rest_framework import viewsets
+from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.generics import get_object_or_404
@@ -20,8 +19,9 @@ from rest_framework.throttling import ScopedRateThrottle
 
 from common.api_page_size_pagination import PageSizePagination
 from common.encoded_search_viewset import EncodedSearchViewSet
-from common.models import AbuseReport, ABUSE_REPORT_DECISION_CONFIRMED, ABUSE_REPORT_DECISION_OVERRULED
+from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.permissions import ReadOnly
+from common.services.search_service import MatchType
 from .models import NestedComment
 from .permissions import IsOwnerOrReadOnly
 from .serializers import NestedCommentSearchSerializer, NestedCommentSerializer
@@ -54,8 +54,10 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
                 decision=ABUSE_REPORT_DECISION_OVERRULED
             ).exists():
                 raise ValidationError(
-                    _('You cannot undeleted this comment: a confirmed or pending abuse reports exists for it. '
-                      'If you believe that your comment was reported unfairly please contact us.')
+                    _(
+                        'You cannot undeleted this comment: a confirmed or pending abuse reports exists for it. '
+                        'If you believe that your comment was reported unfairly please contact us.'
+                    )
                 )
 
         return super(NestedCommentViewSet, self).update(request, args, kwargs)
@@ -152,13 +154,17 @@ class NestedCommentSearchViewSet(EncodedSearchViewSet):
 
         self.request = self.update_request_params(self.request, params)
 
-        text = params.get('text', '')
+        text = params.get('text', dict(value=''))
+        if isinstance(text, str):
+            text = dict(value=text)
+            if ' ' in text:
+                text['matchType'] = MatchType.ALL.value
 
         queryset = SearchQuerySet().models(NestedComment)
 
-        if text:
-            queryset = queryset.auto_query(text)
-        else:
-            queryset = queryset.order_by('-created')
+        if text.get('value'):
+            queryset = EncodedSearchViewSet.build_search_query(queryset, text)
+
+        queryset = queryset.order_by('-created')
 
         return queryset

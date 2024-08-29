@@ -276,14 +276,6 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filter_by_forum_topic(self, results):
-        topic = self.cleaned_data.get("topic")
-
-        if topic is not None and topic != "":
-            results = results.models(Post).filter(topic_id=topic)
-
-        return results
-
     def filter_by_user_id(self, results):
         user_id = self.cleaned_data.get("user_id")
 
@@ -387,7 +379,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = SearchService.filter_by_size(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_modified_camera(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_color_or_mono(self.cleaned_data, sqs)
-        sqs = self.filter_by_forum_topic(sqs)
+        sqs = SearchService.filter_by_forum_topic(self.cleaned_data, sqs)
         sqs = SearchService.filter_by_filter_types(self.cleaned_data, sqs)
         sqs = self.filter_by_user_id(sqs)
         sqs = SearchService.filter_by_acquisition_months(self.cleaned_data, sqs)
@@ -453,12 +445,15 @@ class AstroBinSearchView(SearchView):
             'subject_type',
             'coords',
             'field_radius',
+            'searchType',
+            'topic',
         ]
 
         if 'q' in params:
             params['text'] = dict(value=params.pop('q')[0])
 
         # Process and translate different parts of the params
+        params = AstroBinSearchView._process_search_type(params)
         params = AstroBinSearchView._process_subjects(params)
         params = AstroBinSearchView._process_subject_type(params)
         params = AstroBinSearchView._process_coords(params)
@@ -469,6 +464,17 @@ class AstroBinSearchView(SearchView):
             if key not in supported_params:
                 params.pop(key)
 
+        return params
+
+    @staticmethod
+    def _process_search_type(params):
+        domain = params.get('d')
+        if domain == 'f':
+            params['searchType'] = 'forums'
+        elif domain == 'c':
+            params['searchType'] = 'comments'
+
+        params.pop('d')
         return params
 
     @staticmethod

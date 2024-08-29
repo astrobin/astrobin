@@ -9,6 +9,7 @@ from astrobin_apps_forum.api.serializers.post_search_serializer import PostSearc
 from common.api_page_size_pagination import PageSizePagination
 from common.encoded_search_viewset import EncodedSearchViewSet
 from common.permissions import ReadOnly
+from common.services.search_service import MatchType, SearchService
 
 
 class PostSearchViewSet(EncodedSearchViewSet):
@@ -21,6 +22,11 @@ class PostSearchViewSet(EncodedSearchViewSet):
     throttle_scope = 'search'
     pagination_class = PageSizePagination
 
+    def filter_posts(self, params: dict, queryset: SearchQuerySet) -> SearchQuerySet:
+        queryset = SearchQuerySet().models(Post)
+        queryset = SearchService.filter_by_forum_topic(params, queryset)
+        return queryset
+
     def filter_queryset(self, queryset: SearchQuerySet) -> SearchQuerySet:
         # Preprocess query params to handle boolean fields
         params = self.simplify_one_item_lists(self.request.query_params)
@@ -28,13 +34,17 @@ class PostSearchViewSet(EncodedSearchViewSet):
 
         self.request = self.update_request_params(self.request, params)
 
-        text = params.get('text', '')
+        text = params.get('text', dict(value=''))
+        if isinstance(text, str):
+            text = dict(value=text)
+            if ' ' in text:
+                text['matchType'] = MatchType.ALL.value
 
-        queryset = SearchQuerySet().models(Post)
+        if text.get('value'):
+            queryset = EncodedSearchViewSet.build_search_query(queryset, text)
 
-        if text:
-            queryset = queryset.auto_query(text)
-        else:
-            queryset = queryset.order_by('-created')
+        queryset = self.filter_posts(params, queryset)
+
+        queryset = queryset.order_by('-created')
 
         return queryset

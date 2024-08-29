@@ -929,6 +929,15 @@ class SearchService:
         return results
 
     @staticmethod
+    def filter_by_forum_topic(data, results: SearchQuerySet) -> SearchQuerySet:
+        topic = data.get("topic")
+
+        if topic is not None and topic != "":
+            results = results.filter(topic_id=int(topic))
+
+        return results
+
+    @staticmethod
     def filter_by_similar_images(data, results: SearchQuerySet) -> SearchQuerySet:
         image_id = data.get("similar_to_image_id")
 

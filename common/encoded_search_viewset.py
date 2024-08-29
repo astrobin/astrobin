@@ -1,11 +1,15 @@
 import base64
 import json
+import re
 import zlib
 from urllib.parse import parse_qs, unquote
 
 import msgpack
 from drf_haystack.viewsets import HaystackViewSet
+from haystack.backends import SQ
 from rest_framework.exceptions import ParseError
+
+from common.services.search_service import MatchType
 
 
 class EncodedSearchViewSet(HaystackViewSet):
@@ -46,6 +50,45 @@ class EncodedSearchViewSet(HaystackViewSet):
         for key, value in params.items():
             request._request.GET[key] = value
         return request
+
+    @staticmethod
+    def parse_search_query(query):
+        # This regex will match phrases wrapped in single or double quotes and individual words
+        pattern = r'(-?"[^"]+"|-?\'[^\']+\'|-?\S+)'
+        terms = re.findall(pattern, query)
+
+        include_terms = []
+        exclude_terms = []
+
+        for term in terms:
+            if term.startswith('-'):
+                exclude_terms.append(term[1:].strip('\'"'))
+            else:
+                include_terms.append(term.strip('\'"'))
+
+        return include_terms, exclude_terms
+
+    @staticmethod
+    def build_search_query(results, query):
+        include_terms, exclude_terms = EncodedSearchViewSet.parse_search_query(query.get('value', ''))
+        match_type = query.get('matchType', MatchType.ANY.value)
+        search_query = SQ()
+
+        # Handle included terms (AND logic or OR logic depending on matchType)
+        for term in include_terms:
+            if match_type == MatchType.ALL.value:
+                search_query &= SQ(text__contains=term)
+            else:
+                search_query |= SQ(text__contains=term)
+
+        # Handle excluded terms (NOT logic)
+        for term in exclude_terms:
+            if match_type == MatchType.ALL.value:
+                search_query &= ~SQ(text__contains=term)
+            else:
+                search_query |= ~SQ(text__contains=term)
+
+        return results.filter(search_query)
 
     def initialize_request(self, request, *args, **kwargs):
         def is_json(value):
