@@ -77,16 +77,16 @@ class EncodedSearchViewSet(HaystackViewSet):
         # Handle included terms (AND logic or OR logic depending on matchType)
         for term in include_terms:
             if match_type == MatchType.ALL.value:
-                search_query &= SQ(text__contains=term)
+                search_query &= SQ(text=term)
             else:
-                search_query |= SQ(text__contains=term)
+                search_query |= SQ(text=term)
 
         # Handle excluded terms (NOT logic)
         for term in exclude_terms:
             if match_type == MatchType.ALL.value:
-                search_query &= ~SQ(text__contains=term)
+                search_query &= ~SQ(text=term)
             else:
-                search_query |= ~SQ(text__contains=term)
+                search_query |= ~SQ(text=term)
 
         return results.filter(search_query)
 
