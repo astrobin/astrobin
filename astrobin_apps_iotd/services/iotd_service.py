@@ -1022,7 +1022,11 @@ class IotdService:
         :return: the queryset of images
         """
 
-        deadline_lower: datetime = DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        deadline_lower: datetime = (
+                DateTimeService.now() -
+                timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) -
+                timedelta(minutes=30)
+        )
         deadline_upper: datetime = DateTimeService.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) + d
         submitted_time_query: Q = \
             Q(submitted_for_iotd_tp_consideration__gte=deadline_lower) & \
