@@ -308,24 +308,6 @@
     }
   }
 
-  .iotd-queue-item {
-    .iotd-queue-item-actions {
-      visibility: visible;
-
-      a {
-        padding: 16px 24px;
-      }
-    }
-
-    img {
-      width: 354px !important;
-    }
-  }
-
-  .top-picks-item img {
-    width: 354px !important;
-  }
-
   .revisions-container {
     li.revisions {
       .revision {
@@ -590,7 +572,7 @@
     justify-content: center;
   }
 
-  .iotd-queue-item, .top-picks-item {
+  .top-picks-item {
     margin-right: 0 !important;
 
     .image-title {

@@ -4321,130 +4321,20 @@ table.search-table {
   }
 }
 
-.iotd-queue-item {
-  display: inline-block;
-  margin-bottom: 22px;
-  position: relative;
-
-  &:nth-of-type(odd) {
-    margin-right: 16px;
-  }
-
-  > .iotd-queue-item-actions {
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 10px;
-    background: rgba(0, 0, 0, 0.66);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    z-index: 2;
-
-    a {
-      font-size: 16px;
-      padding: 8px 16px;
-      display: block;
-      text-align: center;
-      margin-bottom: 8px;
-      text-shadow: 1px 1px 1px black;
-    }
-  }
-
-  &:hover > .iotd-queue-item-actions {
-    visibility: visible;
-    z-index: 3;
-  }
-
-  > .iotd-queue-item-loading-overlay {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 20px;
-    background-color: orange;
-    background-color: rgba(255, 165, 0, 0.4);
-    color: white;
-    z-index: 2;
-
-    i {
-      display: inline-block;
-      padding: 10px;
-    }
-  }
-
-  > .iotd-queue-item-selected-overlay {
-    visibility: hidden;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 20px;
-    background-color: $green;
-    background-color: rgba(0, 255, 0, 0.4);
-    color: white;
-    z-index: 2;
-
-    i {
-      display: inline-block;
-      padding: 10px;
-    }
-  }
-
-  &.selected > .iotd-queue-item-selected-overlay {
-    visibility: visible;
-  }
-
-  > .iotd-queue-item-may-not-select-overlay {
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-  }
-
-  &.may-not-select > .iotd-queue-item-may-not-select-overlay {
-    visibility: visible;
-  }
-
-  .submissions-count, .votes-count {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 2;
-
-    .badge {
-      font-size: 16px;
-      padding: 4px 8px;
-      border: 1px solid white;
-      text-shaadow: 1px 1px 0 #757575;
-      text-decoration: underline;
-    }
-  }
-
-  .submissions-count .badge {
-    background-color: #3092cf;
-  }
-
-  .votes-count .badge {
-    background-color: #e2bd35;
-  }
-}
-
-.top-picks, .iotd-promotion-queue {
+.top-picks {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 1rem;
+
+  @media (max-width: $sm-max) {
+    gap: .5rem;
+  }
 }
 
 .top-picks-item {
   display: inline-block;
   position: relative;
-  margin-bottom: 10px;
-
-  &:nth-child(odd) {
-    margin-right: 10px;
-  }
+  width: calc(33% - 1rem);
 
   .overlay {
     position: absolute;
@@ -4471,6 +4361,20 @@ table.search-table {
         margin-top: .25rem;
       }
     }
+  }
+
+  @media (max-width: $md-max) {
+    width: calc(50% - 1rem);
+  }
+
+
+  @media (max-width: $sm-max) {
+    width: calc(50% - .5rem);
+  }
+
+
+  @media (max-width: $xs-max) {
+    width: 100%;
   }
 }
 
