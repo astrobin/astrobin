@@ -470,13 +470,15 @@ class AstroBinSearchView(SearchView):
 
     @staticmethod
     def _process_search_type(params):
-        domain = params.get('d')
+        domain = params.get('d', ['i'])[0]
         if domain == 'f':
             params['searchType'] = 'forums'
         elif domain == 'c':
             params['searchType'] = 'comments'
 
-        params.pop('d')
+        if 'd' in params:
+            params.pop('d')
+
         return params
 
     @staticmethod
