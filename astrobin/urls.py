@@ -511,6 +511,7 @@ urlpatterns += [
         r'^edit/thumbnails/(?P<id>\w+)/$',
         never_cache(image_views.ImageEditThumbnailsView.as_view()), name='image_edit_thumbnails'
     ),
+    # DEPRECATED
     url(
         r'^edit/revision/(?P<id>\w+)/$',
         never_cache(image_views.ImageEditRevisionView.as_view()), name='image_edit_revision'

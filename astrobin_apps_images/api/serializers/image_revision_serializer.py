@@ -106,4 +106,5 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'constellation',
             'solution',
             'mouse_hover_image',
+            'square_cropping',
         )

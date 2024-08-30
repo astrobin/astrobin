@@ -359,6 +359,7 @@ def image_post_delete(sender, instance, **kwargs):
     ).delete()
 
 
+@receiver(pre_save, sender=ImageRevision)
 def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):
     if not instance.uploader_in_progress and instance.square_cropping in (None, ''):
         instance.square_cropping = ImageService(instance.image).get_default_cropping(instance.label) or ""
@@ -368,8 +369,14 @@ def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):
         if pre_save_instance and not instance.uploader_in_progress:
             cache.set("image_revision.%s.just_completed_upload" % instance.pk, True, 10)
 
+        if not pre_save_instance:
+            pre_save_instance = get_object_or_None(ImageRevision, pk=instance.pk)
 
-pre_save.connect(imagerevision_pre_save, sender=ImageRevision)
+            if (
+                    pre_save_instance.square_cropping not in (None, '', '0,0,0,0') and
+                    pre_save_instance.square_cropping != instance.square_cropping
+            ):
+                instance.thumbnail_invalidate()
 
 
 def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kwargs):
@@ -382,7 +389,9 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
         if instance.video_file.name:
             if not instance.image_file.name:
                 ImageService(instance.image).generate_loading_placeholder()
-                generate_video_preview.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
+                generate_video_preview.apply_async(
+                    args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk)
+                )
 
             if not instance.encoded_video_file.name:
                 log.debug(f'Encoding video file for {instance} in imagerevision_post_save signal handler')
@@ -1869,6 +1878,7 @@ def on_password_change(sender, **kwargs):
             )
             # Clears django-rest-framework tokens
             Token.objects.filter(user=user).delete()
+
 
 @receiver(m2m_changed, sender=UserProfile.shadow_bans.through)
 def remove_follow_on_shadow_ban(sender, instance, **kwargs):
