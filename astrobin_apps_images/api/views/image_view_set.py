@@ -218,3 +218,13 @@ class ImageViewSet(
             image.save()
 
         return Response(status=HTTP_200_OK)
+
+    @action(detail=True, methods=['put'], url_path='unpublish')
+    def unpublish(self, request, pk=None):
+        image = self.get_object()
+
+        if not image.is_wip:
+            ImageService(image).demote_to_staging_area()
+            image.save()
+
+        return Response(status=HTTP_200_OK)
