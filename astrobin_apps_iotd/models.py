@@ -158,16 +158,18 @@ class IotdReviewerSeenImage(models.Model):
 
 class TopPickNominationsArchive(models.Model):
     image = models.OneToOneField(Image, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-image__published']
+        ordering = ['-created']
 
 
 class TopPickArchive(models.Model):
     image = models.OneToOneField(Image, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-image__published']
+        ordering = ['-created']
 
 
 class IotdStaffMemberSettings(models.Model):

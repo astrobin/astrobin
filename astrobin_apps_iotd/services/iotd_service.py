@@ -66,7 +66,7 @@ class IotdService:
              profile.banned_from_competitions > image.submitted_for_iotd_tp_consideration)
 
     def get_top_picks(self) -> QuerySet:
-        return TopPickArchive.objects.all()
+        return TopPickArchive.objects.all().select_related('image')
 
     def is_top_pick_nomination(self, image: Image) -> bool:
         profile = image.user.userprofile
@@ -76,7 +76,7 @@ class IotdService:
              profile.banned_from_competitions > image.submitted_for_iotd_tp_consideration)
 
     def get_top_pick_nominations(self) -> QuerySet:
-        return TopPickNominationsArchive.objects.all()
+        return TopPickNominationsArchive.objects.all().select_related('image')
 
     def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> List[IotdSubmissionQueueEntry]:
         member_settings: IotdStaffMemberSettings

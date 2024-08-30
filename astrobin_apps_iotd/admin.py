@@ -51,7 +51,7 @@ admin.site.register(IotdStats, IotdStatsAdmin)
 
 class TopPickNominationsArchiveAdmin(admin.ModelAdmin):
     fields = ('image',)
-    list_display = ('image',)
+    list_display = ('image', 'created',)
 
 
 admin.site.register(TopPickNominationsArchive, TopPickNominationsArchiveAdmin)
@@ -59,7 +59,7 @@ admin.site.register(TopPickNominationsArchive, TopPickNominationsArchiveAdmin)
 
 class TopPickArchiveAdmin(admin.ModelAdmin):
     fields = ('image',)
-    list_display = ('image',)
+    list_display = ('image', 'created',)
 
 
 admin.site.register(TopPickArchive, TopPickArchiveAdmin)
