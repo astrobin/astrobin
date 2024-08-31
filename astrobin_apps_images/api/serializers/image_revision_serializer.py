@@ -84,6 +84,10 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
         if instance.image_file and instance.image_file.name.lower().endswith('.gif'):
             representation.update({'image_file': instance.image_file.url})
 
+        if self.context['request'].user == instance.image.user:
+            representation['image_file'] = instance.image_file.url if instance.image_file else None
+            representation['video_file'] = instance.video_file.url if instance.video_file else None
+
         return representation
 
     class Meta:
@@ -92,7 +96,6 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'pk',
             'uploaded',
             'image',
-            'image_file',
             'title',
             'description',
             'skip_notifications',
