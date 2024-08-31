@@ -548,6 +548,53 @@ class ImageService:
             ImageIndex().remove_object(self.image)
             SearchIndexUpdateService.update_index(self.image.user, 300)
 
+    def mark_as_final(self, revision_label: str = '0'):
+        now = DateTimeService.now()
+
+        if revision_label == '0':
+            # Make any other final revision not final.
+            ImageRevision.objects.filter(
+                image=self.image,
+                is_final=True
+            ).update(
+                is_final=False,
+            )
+
+            # Make the image final.
+            Image.objects.filter(pk=self.image.pk).update(
+                is_final=True,
+                updated=now
+            )
+        else:
+            # Make any other revision not final.
+            ImageRevision.objects.filter(
+                image=self.image,
+                is_final=True
+            ).exclude(
+                label=revision_label
+            ).update(
+                is_final=False,
+            )
+
+            # Make this revision final.
+            ImageRevision.objects.filter(
+                image=self.image,
+                label=revision_label
+            ).update(
+                is_final=True,
+            )
+
+            # Make the image not final.
+            Image.objects.filter(
+                pk=self.image.pk,
+                is_final=True
+            ).update(
+                is_final=False,
+                updated=now
+            )
+
+        UserService(self.image.user).clear_gallery_image_list_cache()
+
     def delete_stories(self):
         Action.objects.target(self.image).delete()
         Action.objects.action_object(self.image).delete()

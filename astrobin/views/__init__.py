@@ -740,11 +740,7 @@ def image_edit_make_final(request, image_id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    now = DateTimeService.now()
-
-    ImageRevision.objects.filter(image=image, is_final=True).update(is_final=False)
-    Image.objects.filter(pk=image.pk).update(is_final=True, updated=now)
-    UserService(image.user).clear_gallery_image_list_cache()
+    ImageService(image).mark_as_final()
 
     return HttpResponseRedirect(image.get_absolute_url())
 
@@ -758,26 +754,7 @@ def image_edit_revision_make_final(request, revision_id):
     if request.user != revision.image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    now = DateTimeService.now()
-
-    ImageRevision.all_objects.filter(
-        image=revision.image, is_final=True
-    ).exclude(
-        pk=revision.pk
-    ).update(
-        is_final=False
-    )
-
-    Image.objects.filter(pk=revision.image.pk).update(
-        is_final=False,
-        updated=now
-    )
-
-    ImageRevision.objects.filter(pk=revision.pk).update(
-        is_final=True
-    )
-
-    UserService(revision.image.user).clear_gallery_image_list_cache()
+    ImageService(revision.image).mark_as_final(revision.label)
 
     return HttpResponseRedirect('/%s/%s/' % (revision.image.get_id(), revision.label))
 
