@@ -28,7 +28,20 @@ class ImageRevisionViewSet(
         IsAuthenticatedOrReadOnly,
         IsImageOwnerOrReadOnly
     ]
-    http_method_names = ['get', 'head', 'put']
+    http_method_names = ['get', 'head', 'put', 'patch']
+
+    def partial_update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+
+        # Doing these manually because we don't have a CamelCaseJSONParser here.
+
+        if 'squareCropping' in request.data:
+            request.data['square_cropping'] = request.data.pop('squareCropping')
+
+        if 'mouseHoverImage' in request.data:
+            request.data['mouse_hover_image'] = request.data.pop('mouseHoverImage')
+
+        return self.update(request, *args, **kwargs)
 
     @action(detail=True, methods=['get'], url_path='video-encoding-progress')
     def video_encoding_progress(self, request, pk=None):

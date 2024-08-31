@@ -11,8 +11,10 @@ from rest_framework.reverse import reverse
 
 from astrobin.models import ImageRevision, Image
 from astrobin_apps_images.api.filters import ImageRevisionFilter
-from astrobin_apps_images.api.mixins import TusPatchMixin, TusHeadMixin, TusTerminateMixin, \
-    TusCreateMixin
+from astrobin_apps_images.api.mixins import (
+    TusPatchMixin, TusHeadMixin, TusTerminateMixin,
+    TusCreateMixin,
+)
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.permissions.has_revision_uploader_access_or_read_only import \
@@ -23,11 +25,13 @@ from astrobin_apps_images.services import ImageService
 from common.upload_paths import image_upload_path, video_upload_path
 
 
-class ImageRevisionUploadViewSet(TusCreateMixin,
-                                 TusPatchMixin,
-                                 TusHeadMixin,
-                                 TusTerminateMixin,
-                                 viewsets.ModelViewSet):
+class ImageRevisionUploadViewSet(
+    TusCreateMixin,
+    TusPatchMixin,
+    TusHeadMixin,
+    TusTerminateMixin,
+    viewsets.ModelViewSet
+):
     serializer_class = ImageRevisionUploadSerializer
     queryset = ImageRevision.objects.all()
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
@@ -81,24 +85,24 @@ class ImageRevisionUploadViewSet(TusCreateMixin,
             width = 0
             height = 0
 
-        return self.get_serializer(data={
-            'upload_length': upload_length,
-            'upload_metadata': json.dumps(upload_metadata),
-            'filename': filename,
-            'title': upload_metadata['title'] if upload_metadata['title'] != 'NO_VALUE' else None,
-            'description': upload_metadata['description'] if upload_metadata['description'] != 'NO_VALUE' else '',
-            'skip_notifications': upload_metadata['skip_notifications']
-            if 'skip_notifications' in upload_metadata else False,
-            'skip_activity_stream': upload_metadata['skip_activity_stream']
-            if 'skip_activity_stream' in upload_metadata else False,
-            'is_final': upload_metadata[
-                'mark_as_final'] if 'mark_as_final' in upload_metadata else False,
-            'image': upload_metadata['image_id'],
-            'label': ImageService(image).get_next_available_revision_label(),
-            'w': width,
-            'h': height,
-            'uploader_in_progress': True,
-        })
+        return self.get_serializer(
+            data={
+                'upload_length': upload_length,
+                'upload_metadata': json.dumps(upload_metadata),
+                'filename': filename,
+                'skip_notifications': upload_metadata['skip_notifications']
+                if 'skip_notifications' in upload_metadata else False,
+                'skip_activity_stream': upload_metadata['skip_activity_stream']
+                if 'skip_activity_stream' in upload_metadata else False,
+                'is_final': upload_metadata[
+                    'mark_as_final'] if 'mark_as_final' in upload_metadata else False,
+                'image': upload_metadata['image_id'],
+                'label': ImageService(image).get_next_available_revision_label(),
+                'w': width,
+                'h': height,
+                'uploader_in_progress': True,
+            }
+        )
 
     def get_success_headers(self, data):
         try:
