@@ -228,3 +228,11 @@ class ImageViewSet(
             image.save()
 
         return Response(status=HTTP_200_OK)
+
+    @action(detail=True, methods=['put'], url_path='mark-as-final')
+    def mark_as_final(self, request, pk=None):
+        image = self.get_object()
+
+        ImageService(image).mark_as_final()
+
+        return Response(status=HTTP_200_OK)

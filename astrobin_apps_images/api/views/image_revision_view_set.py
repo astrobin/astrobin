@@ -14,6 +14,7 @@ from astrobin.models import ImageRevision
 from astrobin_apps_images.api.filters import ImageRevisionFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageRevisionSerializer
+from astrobin_apps_images.services import ImageService
 
 
 class ImageRevisionViewSet(
@@ -37,3 +38,11 @@ class ImageRevisionViewSet(
         value = cache.get(f"video-encoding-progress-{content_type.pk}-{pk}")
 
         return Response(value, HTTP_200_OK)
+
+    @action(detail=True, methods=['put'], url_path='mark-as-final')
+    def mark_as_final(self, request, pk=None):
+        revision: ImageRevision = self.get_object()
+
+        ImageService(revision.image).mark_as_final(revision.label)
+
+        return Response(status=HTTP_200_OK)
