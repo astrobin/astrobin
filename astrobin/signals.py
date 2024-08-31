@@ -426,6 +426,7 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
 
 
+@receiver(post_softdelete, sender=ImageRevision)
 def imagerevision_post_softdelete(sender, instance, **kwargs):
     UserService(instance.image.user).clear_gallery_image_list_cache()
     if instance.solution:
@@ -435,8 +436,12 @@ def imagerevision_post_softdelete(sender, instance, **kwargs):
         except AttributeError:
             pass
 
-
-post_softdelete.connect(imagerevision_post_softdelete, sender=ImageRevision)
+    if instance.is_final:
+        instance.image.revisions.filter(pk=instance.pk).update(is_final=False)
+        Image.objects_including_wip.filter(pk=instance.image.pk).update(
+            is_final=True,
+            updated=timezone.now()
+        )
 
 
 @receiver(pre_delete, sender=ImageRevision)

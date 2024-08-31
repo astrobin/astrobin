@@ -29,7 +29,7 @@ class ImageRevisionViewSet(
         IsAuthenticatedOrReadOnly,
         IsImageOwnerOrReadOnly
     ]
-    http_method_names = ['get', 'head', 'put', 'patch']
+    http_method_names = ['get', 'head', 'put', 'patch', 'delete']
 
     def partial_update(self, request, *args, **kwargs):
         kwargs['partial'] = True
