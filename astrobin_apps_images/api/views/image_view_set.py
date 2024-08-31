@@ -233,6 +233,6 @@ class ImageViewSet(
     def mark_as_final(self, request, pk=None):
         image = self.get_object()
 
-        ImageService(image).mark_as_final()
+        ImageService(image).mark_as_final(request.data.get('revision_label', '0'))
 
         return Response(status=HTTP_200_OK)
