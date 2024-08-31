@@ -48,7 +48,7 @@ class ImageViewSet(
         IsAuthenticatedOrReadOnly,
         or_permission(IsImageOwnerOrReadOnly, IsSuperUser)
     ]
-    http_method_names = ['get', 'head', 'put']
+    http_method_names = ['get', 'head', 'put', 'patch']
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'images'
 
@@ -236,3 +236,16 @@ class ImageViewSet(
         ImageService(image).mark_as_final(request.data.get('revision_label', '0'))
 
         return Response(status=HTTP_200_OK)
+
+    @action(detail=True, methods=['patch'], url_path='delete-original')
+    def delete_original(self, request, pk=None):
+        image = self.get_object()
+
+        revisions = ImageService(image).get_revisions()
+        if not revisions.exists():
+            return Response(status=HTTP_400_BAD_REQUEST)
+
+        ImageService(image).delete_original()
+
+        serializer = self.get_serializer(image)
+        return Response(serializer.data, HTTP_200_OK)

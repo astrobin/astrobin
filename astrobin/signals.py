@@ -373,6 +373,7 @@ def imagerevision_pre_save(sender, instance: ImageRevision, **kwargs):
             pre_save_instance = get_object_or_None(ImageRevision, pk=instance.pk)
 
             if (
+                    pre_save_instance and
                     pre_save_instance.square_cropping not in (None, '', '0,0,0,0') and
                     pre_save_instance.square_cropping != instance.square_cropping
             ):

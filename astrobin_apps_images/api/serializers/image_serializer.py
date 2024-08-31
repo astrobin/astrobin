@@ -79,7 +79,7 @@ class ImageSerializer(serializers.ModelSerializer):
     encoded_video_file = serializers.FileField(required=False, allow_null=True, read_only=True)
 
     solution = SolutionSerializer(read_only=True)
-    revisions = ImageRevisionSerializer(many=True, read_only=True)
+    revisions = serializers.SerializerMethodField()
     user_follower_count = serializers.SerializerMethodField(read_only=True)
     location_objects = LocationSerializer(source="locations", many=True, read_only=True)
     collaborators = UserSerializer(many=True, read_only=True)
@@ -191,6 +191,10 @@ class ImageSerializer(serializers.ModelSerializer):
             raise ValidationError("Please do not include the image's user as a collaborator")
 
         return pending_collaborators
+
+    def get_revisions(self, obj):
+        revisions = obj.revisions.filter(deleted__isnull=True)
+        return ImageRevisionSerializer(revisions, many=True, context=self.context).data
 
     def get_user_follower_count(self, obj):
         return obj.user.userprofile.followers_count
