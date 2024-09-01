@@ -752,7 +752,8 @@ class ImageDeleteView(LoginRequiredMixin, ImageDeleteViewBase):
     def post(self, *args, **kwargs):
         image = self.get_object()
 
-        ImageService(image).invalidate_all_thumbnails()
+        from astrobin.tasks import invalidate_all_image_thumbnails
+        invalidate_all_image_thumbnails.delay(image.pk)
 
         messages.success(self.request, _("Image deleted."))
         return super(ImageDeleteView, self).post(args, kwargs)

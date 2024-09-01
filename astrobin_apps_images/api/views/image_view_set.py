@@ -48,7 +48,7 @@ class ImageViewSet(
         IsAuthenticatedOrReadOnly,
         or_permission(IsImageOwnerOrReadOnly, IsSuperUser)
     ]
-    http_method_names = ['get', 'head', 'put', 'patch']
+    http_method_names = ['get', 'head', 'put', 'patch', 'delete']
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'images'
 
@@ -182,6 +182,11 @@ class ImageViewSet(
         self._update_acquisition(request, instance)
 
         return response
+
+    def perform_destroy(self, instance):
+        from astrobin.tasks import invalidate_all_image_thumbnails
+        invalidate_all_image_thumbnails.delay(instance.pk)
+        return super().perform_destroy(instance)
 
     @action(detail=False, methods=['get'], url_path='public-images-count')
     def public_images_count(self, request):
