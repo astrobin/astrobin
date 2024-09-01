@@ -23,13 +23,13 @@ class SolutionSerializer(serializers.ModelSerializer):
             'advanced_dec',
             'advanced_pixscale',
             'advanced_orientation',
+            'advanced_annotations',
         )
         exclude = [
             'advanced_matrix_rect',
             'advanced_matrix_delta',
             'advanced_ra_matrix',
             'advanced_dec_matrix',
-            'advanced_annotations',
         ]
 
 
