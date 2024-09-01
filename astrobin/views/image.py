@@ -1209,20 +1209,9 @@ class ImageUploadUncompressedSource(ImageEditBaseView):
 
 
 class ImageDownloadView(View):
-    def download(self, url: str) -> HttpResponse:
-        response = UtilsService.http_with_retries(
-            url,
-            headers={'User-Agent': 'Mozilla/5.0'}
-        )
-        content_type = mimetypes.guess_type(os.path.basename(url))
-
-        ret = HttpResponse(response.content, content_type=content_type)
-        ret['Content-Disposition'] = 'attachment; filename=' + os.path.basename(url)
-        return ret
-
     def dispatch(self, request, *args, **kwargs):
-        id: Union[str, int] = self.kwargs.get('id')
-        image: Image = ImageService.get_object(id, Image.objects_including_wip)
+        image_id: Union[str, int] = self.kwargs.get('id')
+        image: Image = ImageService.get_object(image_id, Image.objects_including_wip)
 
         if image is None:
             raise Http404
@@ -1233,113 +1222,16 @@ class ImageDownloadView(View):
         return super().dispatch(request, args, kwargs)
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
-        id: Union[str, int] = self.kwargs.pop('id')
+        image_id: Union[str, int] = self.kwargs.pop('id')
         revision_label: str = self.kwargs.pop('revision_label')
         version: str = self.kwargs.pop('version')
 
-        image: Image = ImageService.get_object(id, Image.objects_including_wip)
-        revision: Optional[ImageRevision] = None
+        image: Image = ImageService.get_object(image_id, Image.objects_including_wip)
 
         if image is None:
             raise Http404
 
-        if revision_label not in (None, 0, '0'):
-            try:
-                revision = ImageService(image).get_revision(revision_label)
-            except ImageRevision.DoesNotExist:
-                raise Http404
-
-        if version == 'original':
-            if request.user != image.user and not request.user.is_superuser:
-                return render(request, "403.html", {})
-            if revision:
-                return self.download(revision.video_file.url if revision.video_file.name else revision.image_file.url)
-            else:
-                return self.download(image.video_file.url if image.video_file.name else image.image_file.url)
-
-        if version == 'basic_annotations':
-            return self.download(revision.solution.image_file.url if revision else image.solution.image_file.url)
-
-        if version == 'advanced_annotations':
-            solution: Solution = revision.solution if revision and revision.solution else image.solution
-
-            # Download SVG
-            response = UtilsService.http_with_retries(
-                f'{settings.MEDIA_URL}{solution.pixinsight_svg_annotation_hd}',
-                headers={'User-Agent': 'Mozilla/5.0'}
-            )
-            local_svg: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.svg', delete=False)
-            for block in response.iter_content(1024 * 8):
-                if not block:
-                    break
-                local_svg.write(block)
-            local_svg.seek(0)
-            local_svg.close()
-
-            # Download HD thumbnail
-            thumbnail_url = image.thumbnail('qhd', revision_label, sync=True)
-            response = UtilsService.http_with_retries(
-                thumbnail_url,
-                headers={'User-Agent': 'Mozilla/5.0'}
-            )
-            local_hd: NamedTemporaryFile = NamedTemporaryFile('w+b', delete=False)
-            for block in response.iter_content(1024 * 8):
-                if not block:
-                    break
-                local_hd.write(block)
-            local_hd.seek(0)
-            local_hd.close()
-
-            # Build image
-            local_result: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.png', delete=False)
-            parent_width = min(settings.THUMBNAIL_ALIASES['']['qhd']['size'][0], image.w)
-            parent_height = int(image.h / (image.w / float(parent_width)))
-            svg2png(
-                url=local_svg.name,
-                write_to=local_result.name,
-                parent_width=parent_width,
-                parent_height=parent_height
-            )
-            local_result.seek(0)
-            local_result.close()
-
-            background = PILImage.open(local_hd.name)
-            foreground = PILImage.open(local_result.name)
-
-            icc_profile = background.info.get('icc_profile')
-            background.paste(foreground, (0, 0), foreground)
-
-            if background.mode != 'RGBA':
-                local_result.name = local_result.name.replace('.png', '.jpg')
-                save_format = 'JPEG'
-            else:
-                save_format = 'PNG'
-            background.save(local_result.name, format=save_format, icc_profile=icc_profile)
-
-            result_path: str = f'tmp/{solution.pixinsight_serial_number}-{int(time.time())}.jpg'
-
-            with open(local_result.name, 'rb') as result_file:
-                session = boto3.session.Session(
-                    aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-                    aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
-                )
-                s3 = session.resource('s3')
-                s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME).put_object(Key=result_path, Body=result_file)
-
-            response = self.download(f'https://{settings.AWS_STORAGE_BUCKET_NAME}/{result_path}')
-
-            os.unlink(local_svg.name)
-            os.unlink(local_hd.name)
-            os.unlink(local_result.name)
-
-            return response
-
-        if image.animated:
-            thumbnail_url = revision.image_file.url if revision else image.image_file.url
-        else:
-            thumbnail_url = image.thumbnail(version, revision_label, sync=True)
-
-        return self.download(thumbnail_url)
+        return ImageService(image).download(request.user, revision_label, version)
 
 
 class ImageSubmitToIotdTpProcessView(View):
@@ -1523,14 +1415,14 @@ class ImageMarketplaceFragment(View):
         line_items = []
 
         for prop in (
-            'imaging_telescopes_2',
-            'guiding_telescopes_2',
-            'imaging_cameras_2',
-            'guiding_cameras_2',
-            'mounts_2',
-            'filters_2',
-            'accessories_2',
-            'software_2',
+                'imaging_telescopes_2',
+                'guiding_telescopes_2',
+                'imaging_cameras_2',
+                'guiding_cameras_2',
+                'mounts_2',
+                'filters_2',
+                'accessories_2',
+                'software_2',
         ):
             for x in getattr(image, prop).all():
                 line_item_objects = EquipmentItemMarketplaceListingLineItem.objects.filter(

@@ -5,28 +5,34 @@ import os
 import re
 import shutil
 import subprocess
+import time
 from collections import namedtuple
 from datetime import timedelta
 from functools import reduce
 from typing import Optional, Union
 from urllib.parse import urlencode
 
+import boto3
 from actstream.models import Action
 from annoying.functions import get_object_or_None
+from cairosvg import svg2png
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.core.exceptions import PermissionDenied
 from django.core.files import File
 from django.core.files.images import get_image_dimensions
 from django.core.files.temp import NamedTemporaryFile
 from django.db.models import Q, QuerySet
+from django.http import HttpResponse
 from django.template.defaultfilters import floatformat
 from django.utils.translation import ugettext as _
 
 from django.urls import reverse
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
+from PIL import Image as PILImage
 from moviepy.editor import VideoFileClip
 from numpy import average
 
@@ -70,10 +76,9 @@ class ImageService:
         # type: (Image) -> None
         self.image = image
 
-    def get_revision(self, label):
-        # type: (str) -> ImageRevision
+    def get_revision(self, label: str) -> ImageRevision:
         if label is None or label == 0 or label == '0':
-            raise ValueError("`label` must be a revision label (B or more)")
+            raise ValueError("`label` must be a revision label (B or more), or 'final'")
 
         if label == 'final':
             label = self.get_final_revision_label()
@@ -1007,6 +1012,123 @@ class ImageService:
         # Return whether there are pending collaborators that are not collaborators.
         return pending_collaborators.exclude(pk__in=collaborators).exists()
 
+    def download(self, user: User, revision_label: str, version: str) -> HttpResponse:
+        def _do_download(url: str) -> HttpResponse:
+            response = UtilsService.http_with_retries(
+                url,
+                headers={'User-Agent': 'Mozilla/5.0'}
+            )
+            content_type = mimetypes.guess_type(os.path.basename(url))
+
+            ret = HttpResponse(response.content, content_type=content_type)
+            ret['Content-Disposition'] = 'attachment; filename=' + os.path.basename(url)
+
+            return ret
+
+        def _do_download_advanced_annotations_image(solution: Solution) -> HttpResponse:
+            # Download SVG
+            response = UtilsService.http_with_retries(
+                f'{settings.MEDIA_URL}{solution.pixinsight_svg_annotation_hd}',
+                headers={'User-Agent': 'Mozilla/5.0'}
+            )
+            local_svg: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.svg', delete=False)
+            for block in response.iter_content(1024 * 8):
+                if not block:
+                    break
+                local_svg.write(block)
+            local_svg.seek(0)
+            local_svg.close()
+
+            # Download QHD thumbnail
+            thumbnail_url = image.thumbnail('qhd', revision_label, sync=True)
+            response = UtilsService.http_with_retries(
+                thumbnail_url,
+                headers={'User-Agent': 'Mozilla/5.0'}
+            )
+            local_hd: NamedTemporaryFile = NamedTemporaryFile('w+b', delete=False)
+            for block in response.iter_content(1024 * 8):
+                if not block:
+                    break
+                local_hd.write(block)
+            local_hd.seek(0)
+            local_hd.close()
+
+            # Build image
+            local_result: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.png', delete=False)
+            parent_width = min(settings.THUMBNAIL_ALIASES['']['qhd']['size'][0], image.w)
+            parent_height = int(image.h / (image.w / float(parent_width)))
+            svg2png(
+                url=local_svg.name,
+                write_to=local_result.name,
+                parent_width=parent_width,
+                parent_height=parent_height
+            )
+            local_result.seek(0)
+            local_result.close()
+
+            background = PILImage.open(local_hd.name)
+            foreground = PILImage.open(local_result.name)
+
+            icc_profile = background.info.get('icc_profile')
+            background.paste(foreground, (0, 0), foreground)
+
+            if background.mode != 'RGBA':
+                local_result.name = local_result.name.replace('.png', '.jpg')
+                save_format = 'JPEG'
+            else:
+                save_format = 'PNG'
+            background.save(local_result.name, format=save_format, icc_profile=icc_profile)
+
+            result_path: str = f'tmp/{solution.pixinsight_serial_number}-{int(time.time())}.jpg'
+
+            with open(local_result.name, 'rb') as result_file:
+                session = boto3.session.Session(
+                    aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                    aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
+                )
+                s3 = session.resource('s3')
+                s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME).put_object(Key=result_path, Body=result_file)
+
+            response = _do_download(f'https://{settings.AWS_STORAGE_BUCKET_NAME}/{result_path}')
+
+            os.unlink(local_svg.name)
+            os.unlink(local_hd.name)
+            os.unlink(local_result.name)
+
+            return response
+
+        if not self.display_download_menu(user):
+            raise PermissionDenied
+
+        image = self.image
+        try:
+            revision = self.get_revision(revision_label)
+        except (ValueError, ImageRevision.DoesNotExist):
+            revision = image
+
+        if version == 'original':
+            if user == image.user or user.is_superuser:
+                return _do_download(revision.video_file.url if revision.video_file.name else revision.image_file.url)
+            raise PermissionDenied
+
+        if version == 'basic_annotations':
+            if revision.solution and revision.solution.image_file:
+                return _do_download(revision.solution.image_file.url)
+            raise FileNotFoundError
+
+        if version == 'advanced_annotations':
+            if revision.solution and revision.solution.pixinsight_svg_annotation_hd:
+                return _do_download_advanced_annotations_image(revision.solution)
+            raise FileNotFoundError
+
+        if version in ('regular', 'hd', 'qhd', 'real'):
+            if revision.video_file:
+                return _do_download(revision.video_file.url)
+            if revision.animated:
+                return _do_download(revision.image_file.url)
+            return _do_download(image.thumbnail(version, revision_label, sync=True))
+
+        raise FileNotFoundError
 
     @staticmethod
     def get_constellation(solution):
