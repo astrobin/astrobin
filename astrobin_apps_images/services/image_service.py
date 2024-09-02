@@ -1124,7 +1124,7 @@ class ImageService:
         if version in ('regular', 'hd', 'qhd', 'real'):
             if revision.video_file:
                 return _do_download(revision.video_file.url)
-            if revision.animated:
+            if hasattr(revision, 'animated') and revision.animated:
                 return _do_download(revision.image_file.url)
             return _do_download(image.thumbnail(version, revision_label, sync=True))
 
