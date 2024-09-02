@@ -299,6 +299,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'comment_count',
             'user_follower_count',
             'uploader_upload_length',
+            'uploader_name',
             'iotd_date',
             'is_top_pick',
             'is_top_pick_nomination',
