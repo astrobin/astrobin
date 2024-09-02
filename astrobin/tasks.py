@@ -1158,3 +1158,10 @@ def compute_image_index(user_id: int):
     if user:
         index = UserService(user).compute_image_index()
         UserProfile.objects.filter(user=user).update(image_index=index)
+
+
+@shared_task(time_limit=120)
+def invalidate_all_image_thumbnails(pk: int):
+    image = get_object_or_None(Image.all_objects, pk=pk)
+    if image:
+        ImageService(image).invalidate_all_thumbnails()
