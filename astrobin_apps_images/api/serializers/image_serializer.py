@@ -172,6 +172,9 @@ class ImageSerializer(serializers.ModelSerializer):
         if self.context['request'].user == instance.user:
             representation['image_file'] = instance.image_file.url if instance.image_file else None
             representation['video_file'] = instance.video_file.url if instance.video_file else None
+            representation['uncompressed_source_file'] = instance.uncompressed_source_file.url \
+                if instance.uncompressed_source_file \
+                else None
 
         return representation
 

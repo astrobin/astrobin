@@ -254,3 +254,13 @@ class ImageViewSet(
 
         serializer = self.get_serializer(image)
         return Response(serializer.data, HTTP_200_OK)
+
+    @action(detail=True, methods=['patch'], url_path='delete-uncompressed-source-file')
+    def delete_uncompressed_source_file(self, request, pk=None):
+        image = self.get_object()
+
+        image.uncompressed_source_file.delete(save=False)
+        image.save(keep_deleted=True)
+
+        serializer = self.get_serializer(image)
+        return Response(serializer.data, HTTP_200_OK)
