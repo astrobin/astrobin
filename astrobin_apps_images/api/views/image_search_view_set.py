@@ -1,9 +1,8 @@
-import re
+import logging
 
 from django.core.cache import cache
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from drf_haystack.filters import HaystackFilter, HaystackOrderingFilter
-from haystack.backends import SQ
 from haystack.query import SearchQuerySet
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
@@ -21,6 +20,8 @@ from common.api_page_size_pagination import PageSizePagination
 from common.encoded_search_viewset import EncodedSearchViewSet
 from common.permissions import ReadOnly
 from common.services.search_service import MatchType, SearchService
+
+log = logging.getLogger(__name__)
 
 
 class ImageSearchViewSet(EncodedSearchViewSet):
@@ -182,6 +183,7 @@ class ImageSearchViewSet(EncodedSearchViewSet):
                 text['matchType'] = MatchType.ALL.value
 
         if text.get('value'):
+            log.debug(f"Searching for: {text.get('value')}")
             queryset = EncodedSearchViewSet.build_search_query(queryset, text)
 
         queryset = self.filter_images(params, queryset)
