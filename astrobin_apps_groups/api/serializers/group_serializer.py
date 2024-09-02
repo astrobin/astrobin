@@ -19,6 +19,7 @@ class GroupSerializer(serializers.ModelSerializer):
             'moderated',
             'autosubmission',
             'forum',
+            'members',
         ]
 
     def create(self, validated_data):
