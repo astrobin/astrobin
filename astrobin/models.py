@@ -3001,7 +3001,7 @@ class UserProfile(SafeDeleteModel):
     )
 
     enable_new_search_experience = models.NullBooleanField(
-        default=None,
+        default=True,
         verbose_name=_('Enable new search experience'),
         help_text=
             gettext('Enable the new search experience, which includes new filters and a new layout.') +
