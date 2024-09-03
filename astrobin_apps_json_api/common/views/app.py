@@ -58,6 +58,7 @@ class AppConfig(JSONResponseMixin, View):
             'IOTD_JUDGEMENT_MAX_FUTURE_DAYS': settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS,
             'IOTD_QUEUES_PAGE_SIZE': settings.IOTD_QUEUES_PAGE_SIZE,
             'IOTD_MAX_DISMISSALS': settings.IOTD_MAX_DISMISSALS,
+            'IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE': settings.IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE,
             'IMAGE_UPLOAD_ENDPOINT': '/api/v2/images/image-upload/',
             'IMAGE_REVISION_UPLOAD_ENDPOINT': '/api/v2/images/image-revision-upload/',
             'DATA_UPLOAD_MAX_MEMORY_SIZE': settings.DATA_UPLOAD_MAX_MEMORY_SIZE,
