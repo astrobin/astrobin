@@ -309,4 +309,5 @@ class ImageSerializer(serializers.ModelSerializer):
             'view_count',
             'average_moon_age',
             'average_moon_illumination',
+            'submitted_for_iotd_tp_consideration',
         )

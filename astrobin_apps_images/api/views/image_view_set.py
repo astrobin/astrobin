@@ -22,12 +22,14 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NO
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.viewsets import GenericViewSet
 
-from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
+from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition, UserProfile
 from astrobin_apps_equipment.models import Filter
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_iotd.services import IotdService
+from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
 from common.permissions import IsSuperUser, or_permission
 
 logger = logging.getLogger(__name__)
@@ -262,5 +264,47 @@ class ImageViewSet(
         image.uncompressed_source_file.delete(save=False)
         image.save(keep_deleted=True)
 
+        serializer = self.get_serializer(image)
+        return Response(serializer.data, HTTP_200_OK)
+
+    @action(detail=True, methods=['get'], url_path='may-submit-for-iotd-tp-consideration')
+    def may_submit_for_iotd_tp_consideration(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response(False, HTTP_200_OK)
+
+        image: Image = self.get_object()
+        iotd_service: IotdService = IotdService()
+        user_profile: UserProfile = request.user.userprofile
+        user_profile_agreed = user_profile.agreed_to_iotd_tp_rules_and_guidelines
+
+        may, reason = iotd_service.may_submit_to_iotd_tp_process(
+            request.user,
+            image,
+            user_profile_agreed
+        )
+
+        response = {
+            'may': may,
+            'reason': reason,
+            'humanizedReason': humanize_may_not_submit_to_iotd_tp_process_reason(reason)
+        }
+
+        return Response(response, HTTP_200_OK)
+
+    @action(detail=True, methods=['patch'], url_path='submit-for-iotd-tp-consideration')
+    def submit_for_iotd_tp_consideration(self, request, pk=None):
+        image: Image = self.get_object()
+        iotd_service: IotdService = IotdService()
+        request_agreed = request.data.get('agreed_to_iotd_tp_rules_and_guidelines', None)
+
+        if request_agreed is not True:
+            return Response({'reason': 'agreed_to_iotd_tp_rules_and_guidelines is required'}, HTTP_400_BAD_REQUEST)
+
+        may, _ = iotd_service.submit_to_iotd_tp_process(request.user, image)
+
+        if not may:
+            return Response({'reason': 'Image does not meet the requirements'}, HTTP_400_BAD_REQUEST)
+
+        image.refresh_from_db()
         serializer = self.get_serializer(image)
         return Response(serializer.data, HTTP_200_OK)

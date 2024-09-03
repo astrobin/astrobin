@@ -14,6 +14,9 @@ urlpatterns = (
         name='iotd_archive'
     ),
 
+    # DEPRECATED
+    # See astrobin_apps_iotd/api/urls.py
+    # REMOVE when image page is fully migrated to Angular.
     url(
         r'^iotd-stats/(?P<image_id>\w+)/$',
         never_cache(ImageStats.as_view()),

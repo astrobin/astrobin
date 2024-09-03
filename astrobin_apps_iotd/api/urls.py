@@ -1,4 +1,6 @@
 from django.conf.urls import url, include
+from django.urls import re_path
+from django.views.decorators.cache import never_cache
 from rest_framework import routers
 
 from astrobin_apps_iotd.api.views.dismissed_image_view_set import DismissedImageViewSet
@@ -13,6 +15,7 @@ from astrobin_apps_iotd.api.views.submission_queue_view_set import SubmissionQue
 from astrobin_apps_iotd.api.views.submission_view_set import SubmissionViewSet
 from astrobin_apps_iotd.api.views.submitter_seen_image_view_set import SubmitterSeenImageViewSet
 from astrobin_apps_iotd.api.views.vote_view_set import VoteViewSet
+from astrobin_apps_iotd.views import ImageStats
 
 router = routers.DefaultRouter()
 
@@ -34,5 +37,10 @@ router.register(r'future-iotds', FutureIotdsViewSet, basename='future-iotds')
 router.register(r'stats', StatsViewSet, basename='stats')
 
 urlpatterns = [
+    re_path(
+        r'^image-stats/(?P<image_id>\w+)/$',
+        never_cache(ImageStats.as_view()),
+        name='image-stats'
+    ),
     url('', include(router.urls)),
 ]

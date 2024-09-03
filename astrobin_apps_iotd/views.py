@@ -9,6 +9,7 @@ from django.views.decorators.cache import cache_control, cache_page
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import ListView, base
+from rest_framework.authtoken.models import Token
 
 from astrobin.models import Image
 from astrobin_apps_images.services import ImageService
@@ -47,7 +48,13 @@ class ImageStats(JsonRequestResponseMixin, base.View):
         if image is None:
             return HttpResponseNotFound()
 
-        if request.user != image.user and not request.user.is_superuser:
+        user = request.user
+        if not user.is_authenticated and 'HTTP_AUTHORIZATION' in request.META:
+            token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
+            token = Token.objects.get(key=token_in_header)
+            user = token.user
+
+        if user != image.user and not user.is_superuser:
             return HttpResponseForbidden()
 
         submitter_views = IotdSubmitterSeenImage.objects.filter(image=image).count()
