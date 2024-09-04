@@ -91,6 +91,8 @@ class ImageSearchSerializer(HaystackSerializer):
             'final_w',
             'final_h',
             'likes',
+            'bookmarks',
+            'comments',
             'gallery_thumbnail',
             'regular_thumbnail',
             'animated',
