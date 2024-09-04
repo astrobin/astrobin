@@ -123,11 +123,15 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         hash_param = self.request.query_params.get('hash')
 
         if get_expired and self.request.user.is_authenticated:
-            queryset = queryset.filter(Q(expiration__lt=now, user=self.request.user) | Q(expiration__gte=now))
+            queryset = queryset.filter(
+                Q(expiration__lt=now, user=self.request.user) |
+                Q(expiration__gte=now) |
+                Q(line_items__sold__isnull=False)
+            )
         elif get_expired:
             queryset = EquipmentItemMarketplaceListing.objects.none()
         else:
-            queryset = queryset.filter(expiration__gte=now)
+            queryset = queryset.filter(Q(expiration__gte=now) | Q(line_items__sold__isnull=False))
 
         if hash_param:
             queryset = queryset.filter(hash=hash_param)
@@ -408,11 +412,15 @@ class EquipmentItemMarketplaceListingViewSet(viewsets.ModelViewSet):
         except EquipmentItemMarketplaceListing.DoesNotExist:
             raise NotFound()
 
-        if instance.expiration < DateTimeService.now() and instance.user != request.user:
-            raise NotFound()
+        if (
+            instance.expiration >= DateTimeService.now() or
+            instance.user == request.user or
+            instance.line_items.filter(sold__isnull=False).exists()
+        ):
+            serializer = self.get_serializer(instance)
+            return Response(serializer.data)
 
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        raise NotFound()
 
     def perform_create(self, serializer):
         super().perform_create(serializer)
