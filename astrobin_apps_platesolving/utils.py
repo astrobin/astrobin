@@ -1,5 +1,6 @@
 from typing import Union
 
+from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
@@ -52,7 +53,7 @@ def get_target(object_id, content_type_id):
     manager = content_type.model_class()
     if hasattr(manager, 'objects_including_wip'):
         manager = manager.objects_including_wip
-    return get_object_or_404(manager, pk=object_id)
+    return get_object_or_None(manager, pk=object_id)
 
 
 def get_solution(object_id, content_type_id):

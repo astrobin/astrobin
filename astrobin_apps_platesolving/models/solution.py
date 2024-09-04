@@ -36,6 +36,15 @@ class Solution(models.Model):
         choices=STATUS_CHOICES,
     )
 
+    error = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    attempts = models.PositiveIntegerField(
+        default=0,
+    )
+
     submission_id = models.PositiveIntegerField(
         null=True,
         blank=True,
@@ -334,9 +343,11 @@ class Solution(models.Model):
         self._do_clear_advanced()
         self.save()
 
-    def clear_advanced(self):
+    def clear_advanced(self, save: bool):
         self._do_clear_advanced()
-        self.save()
+
+        if save:
+            self.save()
 
     class Meta:
         app_label = 'astrobin_apps_platesolving'

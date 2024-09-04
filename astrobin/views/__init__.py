@@ -73,16 +73,17 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
 from astrobin_apps_platesolving.services import SolutionService
+from astrobin_apps_platesolving.solver import SolverBase
 from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_perform_advanced_platesolving,
     can_restore_from_trash,
 )
 from astrobin_apps_users.services import UserService
-from common.constants import GroupName
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
+from astrobin_apps_platesolving.tasks import start_basic_solver, start_advanced_solver
 
 log = logging.getLogger(__name__)
 
@@ -107,10 +108,12 @@ def get_image_or_404(queryset, id):
     return image
 
 
-def object_list(request, queryset, paginate_by=None, page=None,
-                allow_empty=True, template_name=None, template_loader=loader,
-                extra_context=None, context_processors=None, template_object_name='object',
-                mimetype=None):
+def object_list(
+        request, queryset, paginate_by=None, page=None,
+        allow_empty=True, template_name=None, template_loader=loader,
+        extra_context=None, context_processors=None, template_object_name='object',
+        mimetype=None
+):
     """
     Generic list of objects.
 
@@ -145,7 +148,8 @@ def object_list(request, queryset, paginate_by=None, page=None,
         page_range:
             A list of the page numbers (1-indexed).
     """
-    if extra_context is None: extra_context = {}
+    if extra_context is None:
+        extra_context = {}
 
     queryset = queryset._clone()
 
@@ -168,33 +172,37 @@ def object_list(request, queryset, paginate_by=None, page=None,
         except InvalidPage:
             raise Http404
 
-        c = RequestContext(request, {
-            '%s_list' % template_object_name: page_obj.object_list,
-            'paginator': paginator,
-            'page_obj': page_obj,
-            'is_paginated': page_obj.has_other_pages(),
+        c = RequestContext(
+            request, {
+                '%s_list' % template_object_name: page_obj.object_list,
+                'paginator': paginator,
+                'page_obj': page_obj,
+                'is_paginated': page_obj.has_other_pages(),
 
-            # Legacy template context stuff. New templates should use page_obj
-            # to access this instead.
-            'results_per_page': paginator.per_page,
-            'has_next': page_obj.has_next(),
-            'has_previous': page_obj.has_previous(),
-            'page': page_obj.number,
-            'next': page_obj.next_page_number() if page_obj.has_next() else None,
-            'previous': page_obj.previous_page_number() if page_obj.has_previous() else None,
-            'first_on_page': page_obj.start_index(),
-            'last_on_page': page_obj.end_index(),
-            'pages': paginator.num_pages,
-            'hits': paginator.count,
-            'page_range': paginator.page_range,
-        }, context_processors)
+                # Legacy template context stuff. New templates should use page_obj
+                # to access this instead.
+                'results_per_page': paginator.per_page,
+                'has_next': page_obj.has_next(),
+                'has_previous': page_obj.has_previous(),
+                'page': page_obj.number,
+                'next': page_obj.next_page_number() if page_obj.has_next() else None,
+                'previous': page_obj.previous_page_number() if page_obj.has_previous() else None,
+                'first_on_page': page_obj.start_index(),
+                'last_on_page': page_obj.end_index(),
+                'pages': paginator.num_pages,
+                'hits': paginator.count,
+                'page_range': paginator.page_range,
+            }, context_processors
+        )
     else:
-        c = RequestContext(request, {
-            '%s_list' % template_object_name: queryset,
-            'paginator': None,
-            'page_obj': None,
-            'is_paginated': False,
-        }, context_processors)
+        c = RequestContext(
+            request, {
+                '%s_list' % template_object_name: queryset,
+                'paginator': None,
+                'page_obj': None,
+                'is_paginated': False,
+            }, context_processors
+        )
 
         if not allow_empty and len(queryset) == 0:
             raise Http404
@@ -220,7 +228,8 @@ def object_list(request, queryset, paginate_by=None, page=None,
 
 def monthdelta(date, delta):
     m, y = (date.month + delta) % 12, date.year + ((date.month) + delta - 1) // 12
-    if not m: m = 12
+    if not m:
+        m = 12
     d = [31,
          29 if y % 4 == 0 and not y % 400 == 0 else 28,
          31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1]
@@ -247,8 +256,10 @@ def valueReader(source, field):
         return [], ""
 
     items = []
-    reader = csv.reader(utf_8_encoder([value]),
-                        skipinitialspace=True)
+    reader = csv.reader(
+        utf_8_encoder([value]),
+        skipinitialspace=True
+    )
     for row in reader:
         items += [unicode_truncate(str(x, 'utf-8'), 64) for x in row if x != '']
 
@@ -330,11 +341,13 @@ def upload_max_revisions_error(request, max_revisions, image):
     msg_singular = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revision per image. %(open_link)sWould you like to upgrade?%(close_link)s"
     msg_plural = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revisions per image. %(open_link)sWould you like to upgrade?%(close_link)s"
 
-    messages.error(request, _n(msg_singular, msg_plural, max_revisions) % {
-        "max_revisions": max_revisions,
-        "open_link": open_link,
-        "close_link": close_link
-    })
+    messages.error(
+        request, _n(msg_singular, msg_plural, max_revisions) % {
+            "max_revisions": max_revisions,
+            "open_link": open_link,
+            "close_link": close_link
+        }
+                 )
 
     return HttpResponseRedirect(image.get_absolute_url())
 
@@ -363,9 +376,11 @@ def index(request, template='index/root.html') -> HttpResponse:
 @login_required
 @require_GET
 def latest_from_forums_fragment(request):
-    return render(request, 'index/latest_from_forums.html', {
-        'page': request.GET.get('latest_from_forums_page', 1),
-    })
+    return render(
+        request, 'index/latest_from_forums.html', {
+            'page': request.GET.get('latest_from_forums_page', 1),
+        }
+    )
 
 
 @login_required
@@ -502,7 +517,8 @@ def recent_images_fragment(request, section):
         followed = [x.object_id for x in ToggleProperty.objects.filter(
             property_type="follow",
             content_type=ContentType.objects.get_for_model(User),
-            user=request.user)]
+            user=request.user
+        )]
 
         recent_images = recent_images.filter(user__in=followed)
 
@@ -767,10 +783,12 @@ def image_edit_license(request, id):
         return HttpResponseForbidden()
 
     form = ImageLicenseForm(instance=image)
-    return render(request, 'image/edit/license.html', {
-        'form': form,
-        'image': image
-    })
+    return render(
+        request, 'image/edit/license.html', {
+            'form': form,
+            'image': image
+        }
+    )
 
 
 @never_cache
@@ -790,21 +808,25 @@ def image_edit_platesolving_settings(request, id, revision_label):
         try:
             solution, created = Solution.objects.get_or_create(
                 content_type=ContentType.objects.get_for_model(Image),
-                object_id=image.pk)
+                object_id=image.pk
+            )
         except Solution.MultipleObjectsReturned:
             solution = Solution.objects.filter(
                 content_type=ContentType.objects.get_for_model(Image),
-                object_id=image.pk).order_by('-pk')[0]
+                object_id=image.pk
+            ).order_by('-pk')[0]
             Solution.objects.filter(
                 content_type=ContentType.objects.get_for_model(Image),
-                object_id=image.pk).exclude(pk=solution.pk).delete()
+                object_id=image.pk
+            ).exclude(pk=solution.pk).delete()
     else:
         url = reverse('image_edit_platesolving_settings', args=(image.get_id(), revision_label,))
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
         revision = ImageRevision.objects.get(image=image, label=revision_label)
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(ImageRevision),
-            object_id=revision.pk)
+            object_id=revision.pk
+        )
 
     settings = solution.settings
     if settings is None:
@@ -818,10 +840,12 @@ def image_edit_platesolving_settings(request, id, revision_label):
             revision_label=revision_label,
             return_url=return_url
         )
-        return render(request, 'image/edit/platesolving_settings.html', {
-            'form': form,
-            'image': image,
-        })
+        return render(
+            request, 'image/edit/platesolving_settings.html', {
+                'form': form,
+                'image': image,
+            }
+        )
 
     if request.method == 'POST':
         form = PlateSolvingSettingsForm(
@@ -834,11 +858,14 @@ def image_edit_platesolving_settings(request, id, revision_label):
         if not form.is_valid():
             messages.error(
                 request,
-                _("There was one or more errors processing the form. You may need to scroll down to see them."))
-            return render(request, 'image/edit/platesolving_settings.html', {
-                'form': form,
-                'image': image,
-            })
+                _("There was one or more errors processing the form. You may need to scroll down to see them.")
+            )
+            return render(
+                request, 'image/edit/platesolving_settings.html', {
+                    'form': form,
+                    'image': image,
+                }
+            )
 
         form.save()
         solution.clear()
@@ -864,7 +891,8 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
             return_url = reverse('image_detail', args=(image.get_id(),))
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Image),
-            object_id=image.pk)
+            object_id=image.pk
+        )
         advanced_settings = solution.advanced_settings
         if advanced_settings is None:
             solution.advanced_settings, created = SolutionService.get_or_create_advanced_settings(image)
@@ -874,7 +902,8 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
         revision = ImageRevision.objects.get(image=image, label=revision_label)
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(ImageRevision),
-            object_id=revision.pk)
+            object_id=revision.pk
+        )
         advanced_settings = solution.advanced_settings
         if advanced_settings is None:
             solution.advanced_settings, created = SolutionService.get_or_create_advanced_settings(revision)
@@ -882,32 +911,38 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
 
     if request.method == 'GET':
         form = PlateSolvingAdvancedSettingsForm(instance=advanced_settings)
-        return render(request, 'image/edit/platesolving_advanced_settings.html', {
-            'form': form,
-            'image': image,
-            'revision_label': revision_label,
-            'return_url': return_url,
-        })
+        return render(
+            request, 'image/edit/platesolving_advanced_settings.html', {
+                'form': form,
+                'image': image,
+                'revision_label': revision_label,
+                'return_url': return_url,
+            }
+        )
 
     if request.method == 'POST':
         form = PlateSolvingAdvancedSettingsForm(request.POST or None, request.FILES or None, instance=advanced_settings)
         if not form.is_valid():
             messages.error(
                 request,
-                _("There was one or more errors processing the form. You may need to scroll down to see them."))
-            return render(request, 'image/edit/platesolving_advanced_settings.html', {
-                'form': form,
-                'image': image,
-                'revision_label': revision_label,
-                'return_url': return_url,
-            })
+                _("There was one or more errors processing the form. You may need to scroll down to see them.")
+            )
+            return render(
+                request, 'image/edit/platesolving_advanced_settings.html', {
+                    'form': form,
+                    'image': image,
+                    'revision_label': revision_label,
+                    'return_url': return_url,
+                }
+            )
 
         form.save()
-        solution.clear_advanced()
+        solution.clear_advanced(save=True)
 
         messages.success(
             request,
-            _("Form saved. A new advanced plate-solving process will start now."))
+            _("Form saved. A new advanced plate-solving process will start now.")
+        )
         return HttpResponseRedirect(return_url)
 
 
@@ -931,6 +966,7 @@ def image_restart_platesolving(request, id, revision_label):
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
 
     Solution.objects.filter(content_type=content_type, object_id=object_id).delete()
+    start_basic_solver.delay(content_type_id=content_type.pk, object_id=object_id)
 
     return HttpResponseRedirect(return_url)
 
@@ -949,15 +985,18 @@ def image_restart_advanced_platesolving(request, id, revision_label):
             return_url = reverse('image_detail', args=(image.get_id(),))
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Image),
-            object_id=image.pk)
+            object_id=image.pk
+        )
     else:
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
         revision = ImageRevision.objects.get(image=image, label=revision_label)
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(ImageRevision),
-            object_id=revision.pk)
+            object_id=revision.pk
+        )
 
-    solution.clear_advanced()
+    solution.clear_advanced(save=True)
+    start_advanced_solver.delay(solution.id)
 
     return HttpResponseRedirect(return_url)
 
@@ -977,18 +1016,23 @@ def image_edit_save_watermark(request):
 
     form = ImageEditWatermarkForm(data=request.POST, instance=image)
     if not form.is_valid():
-        messages.error(request,
-                       _("There was one or more errors processing the form. You may need to scroll down to see them."))
-        return render(request, 'image/edit/watermark.html', {
-            'image': image,
-            'form': form,
-        })
+        messages.error(
+            request,
+            _("There was one or more errors processing the form. You may need to scroll down to see them.")
+        )
+        return render(
+            request, 'image/edit/watermark.html', {
+                'image': image,
+                'form': form,
+            }
+        )
 
     form.save()
 
     if in_upload_wizard(image, request):
         return HttpResponseRedirect(
-            reverse('image_edit_basic', kwargs={'id': image.get_id()}) + "?upload")
+            reverse('image_edit_basic', kwargs={'id': image.get_id()}) + "?upload"
+        )
 
     return HttpResponseRedirect(image.get_absolute_url())
 
@@ -1102,8 +1146,11 @@ def image_edit_save_acquisition(request):
             if deep_sky_acquisition_basic_form.is_valid():
                 deep_sky_acquisition_basic_form.save()
             else:
-                messages.error(request, _(
-                    "There was one or more errors processing the form. You may need to scroll down to see them."))
+                messages.error(
+                    request, _(
+                        "There was one or more errors processing the form. You may need to scroll down to see them."
+                    )
+                )
                 response_dict['deep_sky_acquisition_basic_form'] = deep_sky_acquisition_basic_form
                 return render(request, 'image/edit/acquisition.html', response_dict)
 
@@ -1113,8 +1160,11 @@ def image_edit_save_acquisition(request):
         response_dict['ssa_form'] = form
         if not form.is_valid():
             response_dict['ssa_form'] = form
-            messages.error(request, _(
-                "There was one or more errors processing the form. You may need to scroll down to see them."))
+            messages.error(
+                request, _(
+                    "There was one or more errors processing the form. You may need to scroll down to see them."
+                )
+            )
             return render(request, 'image/edit/acquisition.html', response_dict)
         form.save()
 
@@ -1139,12 +1189,16 @@ def image_edit_save_license(request):
 
     form = ImageLicenseForm(data=request.POST, instance=image)
     if not form.is_valid():
-        messages.error(request,
-                       _("There was one or more errors processing the form. You may need to scroll down to see them."))
-        return render(request, 'image/edit/license.html', {
-            'form': form,
-            'image': image
-        })
+        messages.error(
+            request,
+            _("There was one or more errors processing the form. You may need to scroll down to see them.")
+        )
+        return render(
+            request, 'image/edit/license.html', {
+                'form': form,
+                'image': image
+            }
+        )
 
     form.save()
 
@@ -1255,8 +1309,8 @@ def user_page(request, username):
     view = request.GET.get('view', 'default')
 
     if view == 'table' and subsection is not None and subsection not in (
-        # Table views that support sorting
-        'acquired'
+            # Table views that support sorting
+            'acquired'
     ) and section != 'trash':
         qs = qs.order_by('-published')
 
@@ -1311,10 +1365,12 @@ def user_ban(request, username):
         user.userprofile.delete()
         log.info("User (%d) was banned" % user.pk)
 
-    return render(request, 'user/ban.html', {
-        'user': user,
-        'deleted': request.method == 'POST',
-    })
+    return render(
+        request, 'user/ban.html', {
+            'user': user,
+            'deleted': request.method == 'POST',
+        }
+    )
 
 
 @never_cache
@@ -1551,9 +1607,11 @@ def user_profile_save_basic(request):
 def user_profile_edit_license(request):
     profile = request.user.userprofile
     form = DefaultImageLicenseForm(instance=profile)
-    return render(request, 'user/profile/edit/license.html', {
-        'form': form
-    })
+    return render(
+        request, 'user/profile/edit/license.html', {
+            'form': form
+        }
+    )
 
 
 @never_cache
@@ -1564,9 +1622,11 @@ def user_profile_save_license(request):
     form = DefaultImageLicenseForm(data=request.POST, instance=profile)
 
     if not form.is_valid():
-        return render(request, 'user/profile/edit/license.html', {
-            'form': form
-        })
+        return render(
+            request, 'user/profile/edit/license.html', {
+                'form': form
+            }
+        )
 
     form.save()
 
@@ -1616,12 +1676,15 @@ def user_profile_edit_gear(request):
 def user_profile_edit_locations(request):
     profile = request.user.userprofile
     LocationsFormset = inlineformset_factory(
-        UserProfile, Location, form=LocationEditForm, extra=1)
+        UserProfile, Location, form=LocationEditForm, extra=1
+    )
 
-    return render(request, 'user/profile/edit/locations.html', {
-        'formset': LocationsFormset(instance=profile),
-        'profile': profile,
-    })
+    return render(
+        request, 'user/profile/edit/locations.html', {
+            'formset': LocationsFormset(instance=profile),
+            'profile': profile,
+        }
+    )
 
 
 @never_cache
@@ -1630,15 +1693,20 @@ def user_profile_edit_locations(request):
 def user_profile_save_locations(request):
     profile = request.user.userprofile
     LocationsFormset = inlineformset_factory(
-        UserProfile, Location, form=LocationEditForm, extra=1)
+        UserProfile, Location, form=LocationEditForm, extra=1
+    )
     formset = LocationsFormset(data=request.POST, instance=profile)
     if not formset.is_valid():
-        messages.error(request,
-                       _("There was one or more errors processing the form. You may need to scroll down to see them."))
-        return render(request, 'user/profile/edit/locations.html', {
-            'formset': formset,
-            'profile': profile,
-        })
+        messages.error(
+            request,
+            _("There was one or more errors processing the form. You may need to scroll down to see them.")
+        )
+        return render(
+            request, 'user/profile/edit/locations.html', {
+                'formset': formset,
+                'profile': profile,
+            }
+        )
 
     formset.save()
     messages.success(request, _("Form saved. Thank you!"))
@@ -1672,14 +1740,15 @@ def user_profile_save_gear(request):
 
         return render(request, "user/profile/edit/gear.html", response_dict)
 
-    for k, v in {"telescopes": [Telescope, profile.telescopes],
-                 "mounts": [Mount, profile.mounts],
-                 "cameras": [Camera, profile.cameras],
-                 "focal_reducers": [FocalReducer, profile.focal_reducers],
-                 "software": [Software, profile.software],
-                 "filters": [Filter, profile.filters],
-                 "accessories": [Accessory, profile.accessories],
-                 }.items():
+    for k, v in {
+        "telescopes": [Telescope, profile.telescopes],
+        "mounts": [Mount, profile.mounts],
+        "cameras": [Camera, profile.cameras],
+        "focal_reducers": [FocalReducer, profile.focal_reducers],
+        "software": [Software, profile.software],
+        "filters": [Filter, profile.filters],
+        "accessories": [Accessory, profile.accessories],
+    }.items():
         (names, value) = valueReader(request.POST, k)
         for name in names:
             try:
@@ -1728,10 +1797,12 @@ def user_profile_flickr_import(request):
             request.session['flickr_token_token_user_nsid'],
         )
 
-    flickr = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
-                                 settings.FLICKR_SECRET,
-                                 username=request.user.username,
-                                 token=flickr_token)
+    flickr = flickrapi.FlickrAPI(
+        settings.FLICKR_API_KEY,
+        settings.FLICKR_SECRET,
+        username=request.user.username,
+        token=flickr_token
+    )
 
     if not flickr.token_valid(perms='read'):
         # We were never authenticated, or authentication expired. We need
@@ -1791,8 +1862,10 @@ def user_profile_flickr_import(request):
                             found_size = size
 
                 if found_size is not None:
-                    log.debug("Flickr import (user %s): found largest side of photo %s" % (
-                        request.user.username, photo_id))
+                    log.debug(
+                        "Flickr import (user %s): found largest side of photo %s" % (
+                            request.user.username, photo_id)
+                        )
                     source = found_size.attrib['source']
 
                     img = NamedTemporaryFile(delete=True)
@@ -1802,18 +1875,22 @@ def user_profile_flickr_import(request):
                     f = File(img)
 
                     profile = request.user.userprofile
-                    image = Image(image_file=f,
-                                  user=request.user,
-                                  title=title if title is not None else '',
-                                  description=description if description is not None else '',
-                                  subject_type=SubjectType.OTHER,
-                                  is_wip=True,
-                                  license=profile.default_license)
+                    image = Image(
+                        image_file=f,
+                        user=request.user,
+                        title=title if title is not None else '',
+                        description=description if description is not None else '',
+                        subject_type=SubjectType.OTHER,
+                        is_wip=True,
+                        license=profile.default_license
+                    )
                     image.save(keep_deleted=True)
                     log.debug("Flickr import (user %d): saved image %d" % (request.user.pk, image.pk))
 
-        log.debug("Flickr import (user %s): returning ajax response: %s" % (
-            request.user.username, simplejson.dumps(response_dict)))
+        log.debug(
+            "Flickr import (user %s): returning ajax response: %s" % (
+                request.user.username, simplejson.dumps(response_dict))
+            )
         return ajax_response(response_dict)
 
     return render(request, "user/profile/flickr_import.html", response_dict)
@@ -1824,7 +1901,8 @@ def flickr_auth_callback(request):
     log.debug("Flickr import (user %d): received auth callback" % request.user.pk)
     flickr = flickrapi.FlickrAPI(
         settings.FLICKR_API_KEY, settings.FLICKR_SECRET,
-        username=request.user.username)
+        username=request.user.username
+    )
     flickr.flickr_oauth.resource_owner_key = request.session['request_token']
     flickr.flickr_oauth.resource_owner_secret = request.session['request_token_secret']
     flickr.flickr_oauth.requested_permissions = request.session['requested_permissions']
@@ -1967,9 +2045,11 @@ def user_profile_save_preferences(request):
 @login_required
 @require_GET
 def user_profile_edit_privacy(request):
-    return render(request, "user/profile/edit/privacy.html", {
-        'form': UserProfileEditPrivacyForm(instance=request.user.userprofile),
-    })
+    return render(
+        request, "user/profile/edit/privacy.html", {
+            'form': UserProfileEditPrivacyForm(instance=request.user.userprofile),
+        }
+    )
 
 
 @login_required
@@ -2029,21 +2109,25 @@ def user_profile_delete(request):
             request.user.userprofile.save(keep_deleted=True)
             request.user.userprofile.delete()
 
-            log.info("User %s (%d) deleted their account with reason %s ('%s')" % (
-                request.user.username,
-                request.user.pk,
-                request.user.userprofile.delete_reason,
-                request.user.userprofile.delete_reason_other,
-            ))
+            log.info(
+                "User %s (%d) deleted their account with reason %s ('%s')" % (
+                    request.user.username,
+                    request.user.pk,
+                    request.user.userprofile.delete_reason,
+                    request.user.userprofile.delete_reason_other,
+                )
+                )
 
             return render(request, 'user/profile/deleted.html', {})
     elif request.method == 'GET':
         form = DeleteAccountForm(instance=request.user.userprofile)
 
-    return render(request, 'user/profile/delete.html', {
-        'form': form,
-        'has_recurring_subscription': has_recurring_subscription
-    })
+    return render(
+        request, 'user/profile/delete.html', {
+            'form': form,
+            'has_recurring_subscription': has_recurring_subscription
+        }
+    )
 
 
 @never_cache
@@ -2096,8 +2180,11 @@ def image_revision_upload_process(request):
             image_file.file.seek(0)  # Because we opened it with PIL
 
             if ext == '.png' and trial_image.mode == 'I':
-                messages.warning(request, _(
-                    "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
+                messages.warning(
+                    request, _(
+                        "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."
+                    )
+                )
         except:
             return upload_error(request, image)
 
@@ -2249,10 +2336,12 @@ def location_edit(request, id):
     location = get_object_or_404(Location, pk=id)
     form = LocationEditForm(instance=location)
 
-    return render(request, 'location/edit.html', {
-        'form': form,
-        'id': id,
-    })
+    return render(
+        request, 'location/edit.html', {
+            'form': form,
+            'id': id,
+        }
+    )
 
 
 @never_cache
@@ -2322,7 +2411,8 @@ def get_edit_gear_form(request, id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2347,7 +2437,8 @@ def get_empty_edit_gear_form(request, gear_type):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2404,10 +2495,12 @@ def save_gear_details(request):
             if request.POST.get('make'):
                 gear, created = CLASS_LOOKUP[gear_type].objects.get_or_create(
                     make=request.POST.get('make'),
-                    name=request.POST.get('name'))
+                    name=request.POST.get('name')
+                )
             else:
                 gear, created = CLASS_LOOKUP[gear_type].objects.get_or_create(
-                    name=request.POST.get('name'))
+                    name=request.POST.get('name')
+                )
         except CLASS_LOOKUP[gear_type].MultipleObjectsReturned:
             gear = CLASS_LOOKUP[gear_type].objects.filter(filters)[0]
 
@@ -2420,7 +2513,8 @@ def save_gear_details(request):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            content_type='application/javascript')
+            content_type='application/javascript'
+        )
 
     form.save()
 
@@ -2445,7 +2539,8 @@ def save_gear_details(request):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2454,7 +2549,8 @@ def save_gear_details(request):
 def get_is_gear_complete(request, id):
     return HttpResponse(
         simplejson.dumps({'complete': is_gear_complete(id)}),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2476,7 +2572,8 @@ def get_gear_user_info_form(request, id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2497,7 +2594,8 @@ def save_gear_user_info(request):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            content_type='application/javascript')
+            content_type='application/javascript'
+        )
 
     form.save()
     return ajax_success()
@@ -2510,16 +2608,18 @@ def gear_popover_ajax(request, id, image_id):
     image = get_object_or_404(Image.objects_including_wip, id=image_id)
     template = 'popover/gear.html'
 
-    html = render_to_string(template, {
-        'request': request,
-        'user': request.user,
-        'gear': gear,
-        'image': image,
-        'is_authenticated': request.user.is_authenticated,
-        'IMAGES_URL': settings.IMAGES_URL,
-        'REQUEST_COUNTRY': get_client_country_code(request),
-        'search_query': request.GET.get('q', ''),
-    })
+    html = render_to_string(
+        template, {
+            'request': request,
+            'user': request.user,
+            'gear': gear,
+            'image': image,
+            'is_authenticated': request.user.is_authenticated,
+            'IMAGES_URL': settings.IMAGES_URL,
+            'REQUEST_COUNTRY': get_client_country_code(request),
+            'search_query': request.GET.get('q', ''),
+        }
+    )
 
     response_dict = {
         'success': True,
@@ -2528,7 +2628,8 @@ def gear_popover_ajax(request, id, image_id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2547,14 +2648,16 @@ def user_popover_ajax(request, username):
     else:
         member_since = _("%s ago") % span
 
-    html = render_to_string(template,
-                            {
-                                'user': profile.user,
-                                'images': UserService(profile.user).get_public_images().count(),
-                                'member_since': member_since,
-                                'is_authenticated': request.user.is_authenticated,
-                                'request': request,
-                            })
+    html = render_to_string(
+        template,
+        {
+            'user': profile.user,
+            'images': UserService(profile.user).get_public_images().count(),
+            'member_since': member_since,
+            'is_authenticated': request.user.is_authenticated,
+            'request': request,
+        }
+    )
 
     response_dict = {
         'success': True,
@@ -2563,7 +2666,8 @@ def user_popover_ajax(request, username):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2582,7 +2686,8 @@ def gear_by_image(request, image_id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2606,7 +2711,8 @@ def gear_by_make(request, make):
 
     return HttpResponse(
         simplejson.dumps(ret),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2616,7 +2722,8 @@ def gear_by_ids(request, ids):
     gear = [[str(x.id), x.get_make(), x.get_name()] for x in Gear.objects.filter(filters)]
     return HttpResponse(
         simplejson.dumps(gear),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 @never_cache
@@ -2632,7 +2739,8 @@ def get_makes_by_type(request, klass):
     ret['makes'] = unique_items([x.get_make() for x in CLASS_LOOKUP[klass].objects.exclude(make='').exclude(make=None)])
     return HttpResponse(
         simplejson.dumps(ret),
-        content_type='application/javascript')
+        content_type='application/javascript'
+    )
 
 
 def serve_file_from_cdn(file_path):
@@ -2702,7 +2810,8 @@ def password_change_request_token(request):
             subject = _("Your secure password reset link")
             token = request.user.userprofile.password_reset_token
             url = request.build_absolute_uri(reverse('password_change'))
-            message = textwrap.dedent(f"""
+            message = textwrap.dedent(
+                f"""
             Dear {request.user.first_name or request.user.userprofile.get_display_name()},
 
             We received a request to reset the password for your account. To proceed with the password reset, please click the link below or copy and paste it into your browser:
@@ -2717,7 +2826,8 @@ def password_change_request_token(request):
 
             If you are having trouble clicking the password reset link, copy and paste the URL below into your web browser:
             {url}?token={token}
-            """)
+            """
+            )
 
             try:
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])

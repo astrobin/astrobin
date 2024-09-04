@@ -1,328 +1,33 @@
 import base64
 import logging
-import os
-import time
 import urllib.error
 import urllib.parse
 import urllib.request
 import uuid
 
-import simplejson
-from braces.views import CsrfExemptMixin
 from dateutil import parser
 from django.conf import settings
-from django.core.files import File
 from django.core.files.base import ContentFile
-from django.core.files.temp import NamedTemporaryFile
-from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import base
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from rest_framework import generics
-from rest_framework import permissions
+from rest_framework import generics, permissions
 from rest_framework.renderers import BrowsableAPIRenderer
 
-from astrobin.models import DeepSky_Acquisition
-from astrobin.services.utils_service import UtilsService
-from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
-from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.api_filters.advanced_task_filter import AdvancedTaskFilter
 from astrobin_apps_platesolving.api_filters.solution_list_filter import SolutionListFilter
-from astrobin_apps_platesolving.backends.astrometry_net.errors import RequestError
-from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask, PlateSolvingAdvancedLiveLogEntry
-from astrobin_apps_platesolving.models import PlateSolvingSettings
-from astrobin_apps_platesolving.models import Solution
-from astrobin_apps_platesolving.serializers import SolutionSerializer, AdvancedTaskSerializer
-from astrobin_apps_platesolving.services import SolutionService
-from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
-from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_target, get_solution, corrected_pixscale
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, PlateSolvingAdvancedTask, Solution
+from astrobin_apps_platesolving.serializers import AdvancedTaskSerializer, SolutionSerializer
+from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_platesolving.utils import corrected_pixscale
 from common.permissions import ReadOnly
 from common.utils import lock_table
 
 log = logging.getLogger(__name__)
-
-
-class SolveView(base.View):
-    def post(self, request, *args, **kwargs):
-        target = get_target(kwargs.get('object_id'), kwargs.get('content_type_id'))
-        solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
-        error = None
-
-        if target._meta.model_name == 'image':
-            image = target
-        else:
-            image = target.image
-
-        if solution.settings is None:
-            settings = PlateSolvingSettings.objects.create()
-            solution.settings = settings
-            Solution.objects.filter(pk=solution.pk).update(settings=settings)
-
-        if solution.submission_id is None or solution.submission_id == 0:
-            solver = Solver()
-
-            try:
-                url = image.thumbnail(
-                    'real',
-                    '0' if target._meta.model_name == 'image' else target.label,
-                    sync=True)
-
-                if solution.settings.blind:
-                    submission = solver.solve(
-                        url,
-                        downsample_factor=solution.settings.downsample_factor,
-                        use_sextractor=solution.settings.use_sextractor,
-                    )
-                else:
-                    submission = solver.solve(
-                        url,
-                        scale_units=solution.settings.scale_units,
-                        scale_lower=solution.settings.scale_min,
-                        scale_upper=solution.settings.scale_max,
-                        center_ra=solution.settings.center_ra,
-                        center_dec=solution.settings.center_dec,
-                        radius=solution.settings.radius,
-                        downsample_factor=solution.settings.downsample_factor,
-                        use_sextractor=solution.settings.use_sextractor,
-                    )
-                solution.status = Solver.PENDING
-                solution.submission_id = submission
-                solution.save()
-            except Exception as e:
-                log.error("Error during basic plate-solving: %s" % str(e))
-                solution.status = Solver.MISSING
-                solution.submission_id = None
-                solution.save()
-                error = str(e)
-
-        context = {
-            'solution': solution.id,
-            'submission': solution.submission_id,
-            'status': solution.status,
-            'error': error
-        }
-        return HttpResponse(simplejson.dumps(context), content_type='application/json')
-
-
-class SolveAdvancedView(base.View):
-    def post(self, request, *args, **kwargs):
-        target = get_target(kwargs.get('object_id'), kwargs.get('content_type_id'))
-        solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
-
-        if solution.advanced_settings is None:
-            advanced_settings, created = SolutionService.get_or_create_advanced_settings(target)
-            solution.advanced_settings = advanced_settings
-            Solution.objects.filter(pk=solution.pk).update(advanced_settings=advanced_settings)
-
-        if solution.pixinsight_serial_number is None or solution.status == SolverBase.SUCCESS:
-            solver = AdvancedSolver()
-
-            try:
-                observation_time = None
-                latitude = None
-                longitude = None
-                altitude = None
-
-                if target._meta.model_name == 'image':
-                    image = target
-                else:
-                    image = target.image
-
-                if solution.advanced_settings.sample_raw_frame_file:
-                    url = solution.advanced_settings.sample_raw_frame_file.url
-                else:
-                    url = image.thumbnail(
-                        'hd_sharpened' if image.sharpen_thumbnails else 'hd',
-                        '0' if target._meta.model_name == 'image' else target.label,
-                        sync=True)
-
-                acquisitions = DeepSky_Acquisition.objects.filter(image=image)
-                if acquisitions.count() > 0 and acquisitions[0].date:
-                    observation_time = acquisitions[0].date.isoformat()
-
-                locations = image.locations.all()
-                if locations.count() > 0:
-                    location = locations[0]  # Type: Location
-                    latitude = degrees_minutes_seconds_to_decimal_degrees(
-                        location.lat_deg, location.lat_min, location.lat_sec, location.lat_side
-                    )
-                    longitude = degrees_minutes_seconds_to_decimal_degrees(
-                        location.lon_deg, location.lon_min, location.lon_sec, location.lon_side
-                    )
-                    altitude = location.altitude
-
-                submission = solver.solve(
-                    url,
-                    ra=solution.ra,
-                    dec=solution.dec,
-                    pixscale=solution.pixscale,
-                    observation_time=observation_time,
-                    latitude=latitude,
-                    longitude=longitude,
-                    altitude=altitude,
-                    advanced_settings=solution.advanced_settings,
-                    image_width=target.w,
-                    image_height=target.h)
-
-                solution.status = Solver.ADVANCED_PENDING
-                solution.pixinsight_serial_number = submission
-                solution.save()
-            except Exception as e:
-                log.error("Error during advanced plate-solving: %s" % str(e))
-                solution.status = Solver.SUCCESS
-                solution.submission_id = None
-                solution.save()
-
-        context = {
-            'solution': solution.id,
-            'submission': solution.pixinsight_serial_number,
-            'status': solution.status,
-        }
-        return HttpResponse(simplejson.dumps(context), content_type='application/json')
-
-
-class SolutionUpdateView(base.View):
-    def post(self, request, *args, **kwargs):
-        solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
-        solver = None
-        status = None
-        error = None
-        queue_size = None
-        pixinsight_stage = None
-        pixinsight_log = None
-
-        try:
-            if solution.status < SolverBase.ADVANCED_PENDING:
-                solver = Solver()
-                status = solver.status(solution.submission_id)
-            else:
-                status = solution.status
-
-                try:
-                    task = PlateSolvingAdvancedTask.objects.get(serial_number=solution.pixinsight_serial_number)
-                    queue_size = PlateSolvingAdvancedTask.objects.filter(active=True, created__lt=task.created).count()
-                    error = task.error_message
-                except PlateSolvingAdvancedTask.DoesNotExist:
-                    log.error("PixInsight task %s does not exist!" % solution.pixinsight_serial_number)
-
-                if solution.pixinsight_serial_number:
-                    live_log_entry = PlateSolvingAdvancedLiveLogEntry.objects.filter(
-                        serial_number=solution.pixinsight_serial_number
-                    ).only(
-                        'stage', 'log'
-                    ).order_by(
-                        '-timestamp'
-                    ).first()
-                    if live_log_entry:
-                        pixinsight_stage = live_log_entry.stage
-                        pixinsight_log = live_log_entry.log
-
-            if status == Solver.MISSING:
-                solution.status = status
-                solution.save()
-        except Exception as e:
-            log.error("Error during basic plate-solving: %s" % str(e))
-            solution.status = Solver.MISSING
-            solution.submission_id = None
-            solution.save()
-            error = str(e)
-
-        context = {
-            'status': status,
-            'started': solution.created.timestamp() * 1000,
-            'submission_id': solution.submission_id,
-            'pixinsight_serial_number': solution.pixinsight_serial_number,
-            'pixinsight_stage': pixinsight_stage,
-            'pixinsight_log': pixinsight_log,
-            'queue_size': queue_size,
-            'error': error
-        }
-        return HttpResponse(simplejson.dumps(context), content_type='application/json')
-
-
-class SolutionFinalizeView(CsrfExemptMixin, base.View):
-    def post(self, request, *args, **kwargs):
-        solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
-        solver = Solver()
-        status = solver.status(solution.submission_id)
-
-        if status == Solver.SUCCESS:
-            info = solver.info(solution.submission_id)
-
-            if 'objects_in_field' in info:
-                solution.objects_in_field = ', '.join(info['objects_in_field'])
-
-            if 'calibration' in info:
-                solution.ra = "%.3f" % info['calibration']['ra']
-                solution.dec = "%.3f" % info['calibration']['dec']
-                solution.orientation = "%.3f" % info['calibration']['orientation']
-                solution.radius = "%.3f" % info['calibration']['radius']
-                solution.pixscale = "%.3f" % info['calibration']['pixscale']
-
-            try:
-                target = solution.content_type.get_object_for_this_type(pk=solution.object_id)
-            except solution.content_type.model_class().DoesNotExist:
-                # Target image was deleted meanwhile
-                context = {'status': Solver.FAILED}
-                return HttpResponse(simplejson.dumps(context), content_type='application/json')
-
-            # Annotate image
-            try:
-                annotations_obj = solver.annotations(solution.submission_id)
-                solution.annotations = simplejson.dumps(annotations_obj)
-                annotator = Annotator(solution)
-                annotated_image = annotator.annotate()
-            except RequestError as e:
-                solution.status = Solver.FAILED
-                solution.save()
-                context = {'status': solution.status, 'error': str(e)}
-                return HttpResponse(simplejson.dumps(context), content_type='application/json')
-            except ThumbnailNotReadyException:
-                solution.status = Solver.PENDING
-                solution.save()
-                context = {'status': solution.status}
-                return HttpResponse(simplejson.dumps(context), content_type='application/json')
-
-            filename, ext = os.path.splitext(target.image_file.name)
-            annotated_filename = "%s-%d%s" % (filename, int(time.time()), '.jpg')
-            if annotated_image:
-                solution.image_file.save(annotated_filename, annotated_image, save=False)
-
-            # Get sky plot image
-            url = solver.sky_plot_zoom1_image_url(solution.submission_id)
-            if url:
-                try:
-                    img = NamedTemporaryFile()
-                    data = UtilsService.http_with_retries(url)
-                    img.write(data.content)
-                    img.flush()
-                    img.seek(0)
-                    f = File(img)
-                    try:
-                        solution.skyplot_zoom1.save(target.image_file.name, f)
-                    except IntegrityError:
-                        pass
-                except urllib.error.URLError:
-                    log.error("Error downloading sky plot image: %s" % url)
-                    pass
-
-
-        solution.status = status
-        solution.save()
-
-        context = {'status': solution.status}
-        return HttpResponse(simplejson.dumps(context), content_type='application/json')
-
-
-class SolutionFinalizeAdvancedView(base.View):
-    def post(self, request, *args, **kwargs):
-        solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
-        context = {'status': solution.status}
-        return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
 
 class SolutionPixInsightNextTask(base.View):
@@ -398,7 +103,8 @@ class SolutionPixInsightWebhook(base.View):
 
             if svg_regular:
                 solution.pixinsight_svg_annotation_regular.save(
-                    serial_number + ".svg", ContentFile(svg_regular.encode('utf-8')))
+                    serial_number + ".svg", ContentFile(svg_regular.encode('utf-8'))
+                )
 
             if finding_chart:
                 data = base64.b64decode(urllib.parse.unquote(finding_chart))
@@ -490,6 +196,7 @@ class SolutionList(generics.ListCreateAPIView):
             if len(object_ids) > max_object_ids:
                 return HttpResponseBadRequest(f'Please do not request more than {max_object_ids} object ids.')
         return super().list(request, *args, **kwargs)
+
 
 class SolutionDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Solution
