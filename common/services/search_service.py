@@ -19,6 +19,7 @@ from astrobin_apps_equipment.models import (
     EquipmentItemMarketplaceListingLineItem,
 )
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
+from astrobin_apps_equipment.types.marketplace_listing_type import MarketplaceListingType
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 from common.services import DateTimeService
@@ -1037,6 +1038,7 @@ class SearchService:
                 Q(distance__lte=.5) |
                 Q(item_name__icontains=q)
             ),
+            listing__listing_type=MarketplaceListingType.FOR_SALE.value,
             sold__isnull=True,
             listing__approved__isnull=False,
             listing__expiration__gt=DateTimeService.now(),
