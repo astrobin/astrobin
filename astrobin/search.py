@@ -17,7 +17,7 @@ from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
 from common.services import AppRedirectionService
-from common.services.search_service import CustomContain, SearchService
+from common.services.search_service import CustomContain, MatchType, SearchService
 from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
 from .models import Image
@@ -451,7 +451,12 @@ class AstroBinSearchView(SearchView):
         ]
 
         if 'q' in params:
-            params['text'] = dict(value=params.pop('q')[0])
+            q = params.get('q', '')
+            words = q.split(' ')
+            params['text'] = dict(
+                value=q,
+                matchType=MatchType.ALL.value if len(words) > 1 else None
+            )
 
         # Process and translate different parts of the params
         params = AstroBinSearchView._process_search_type(params)
