@@ -1,6 +1,7 @@
 from django.contrib.contenttypes import fields
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_platesolving.models.plate_solving_advanced_settings import PlateSolvingAdvancedSettings
@@ -278,12 +279,17 @@ class Solution(models.Model):
         super(Solution, self).save(*args, **kwargs)
 
         # Save target to trigger index update if applicable.
-        if (self.status in (
+        if self.content_object and hasattr(self.content_object, 'updated') and self.status in (
                 Solver.SUCCESS,
                 Solver.FAILED,
                 Solver.ADVANCED_SUCCESS,
-                Solver.ADVANCED_FAILED)):
-            self.content_object.save(keep_deleted=True)
+                Solver.ADVANCED_FAILED
+        ):
+            model = self.content_type.model_class()
+            manager = model.objects
+            if hasattr(manager, 'objects_including_wip'):
+                manager = manager.objects_including_wip
+            manager.filter(pk=self.content_object.pk).update(updated=timezone.now())
 
     def delete(self, *args, **kwargs):
         self._do_clear_basic()

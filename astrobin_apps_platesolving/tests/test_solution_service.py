@@ -10,8 +10,12 @@ from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvin
 class SolutionServiceTest(TestCase):
     def setUp(self):
         self.image = Generators.image()
-        self.solution = PlateSolvingGenerators.solution(self.image)
+        self.solution = self.image.solution
         self.service = SolutionService(self.solution)
+
+    def tearDown(self):
+        self.image.solution.delete()
+        self.image.delete()
 
     def test_get_or_create_advanced_settings_only_image(self):
         advanced_settings, created = SolutionService.get_or_create_advanced_settings(self.image)

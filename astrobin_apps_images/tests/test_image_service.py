@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from actstream.models import Action
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import TestCase
@@ -193,13 +195,12 @@ class TestImageService(TestCase):
 
     def test_get_hemisphere_no_solution(self):
         image = Generators.image()
-        PlateSolvingGenerators.solution(image)
 
         self.assertEqual(Image.HEMISPHERE_TYPE_UNKNOWN, ImageService(image).get_hemisphere())
 
     def test_get_hemisphere_no_revision(self):
         image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
+        solution = Solution.objects.get(pk=image.solution.pk)
 
         solution.dec = 0
         solution.save()
@@ -209,16 +210,15 @@ class TestImageService(TestCase):
 
     def test_get_hemisphere_no_declination(self):
         image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
 
-        solution.dec = None
-        solution.save()
+        image.solution.dec = None
+        image.solution.save()
 
         self.assertEqual(Image.HEMISPHERE_TYPE_UNKNOWN, ImageService(image).get_hemisphere())
 
     def test_get_hemisphere_zero_declination(self):
         image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
+        solution = Solution.objects.get(pk=image.solution.pk)
 
         solution.dec = 0
         solution.save()
@@ -227,7 +227,7 @@ class TestImageService(TestCase):
 
     def test_get_hemisphere_positive_declination(self):
         image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
+        solution = Solution.objects.get(pk=image.solution.pk)
 
         solution.dec = 1
         solution.save()
@@ -236,19 +236,19 @@ class TestImageService(TestCase):
 
     def test_get_hemisphere_negative_declination(self):
         image = Generators.image()
-        solution = PlateSolvingGenerators.solution(image)
+        solution = Solution.objects.get(pk=image.solution.pk)
 
-        solution.dec = -1
+        solution.dec = Decimal(-1.0)
         solution.save()
 
         self.assertEqual(Image.HEMISPHERE_TYPE_SOUTHERN, ImageService(image).get_hemisphere())
 
     def test_get_hemisphere_positive_declination_revision(self):
         image = Generators.image()
-        image_solution = PlateSolvingGenerators.solution(image)
+        image_solution = Solution.objects.get(pk=image.solution.pk)
 
         revision = Generators.image_revision(image=image)
-        revision_solution = PlateSolvingGenerators.solution(revision)
+        revision_solution = Solution.objects.get(pk=revision.solution.pk)
 
         image_solution.dec = 1
         image_solution.save()
@@ -260,8 +260,8 @@ class TestImageService(TestCase):
         self.assertEqual(Image.HEMISPHERE_TYPE_SOUTHERN, ImageService(image).get_hemisphere(revision.label))
 
     def test_delete_original_when_no_revisions(self):
-        image= Generators.image()
-        PlateSolvingGenerators.solution(image)
+        image = Generators.image()
+        Solution.objects.get(pk=image.solution.pk)
 
         self.assertEqual(1, Image.objects.all().count())
         self.assertEqual(1, Solution.objects.all().count())
@@ -344,17 +344,16 @@ class TestImageService(TestCase):
 
     def test_delete_original_when_one_revision_and_original_is_final(self):
         image = Generators.image(image_file='original.jpg')
-        PlateSolvingGenerators.solution(image, image_file='original_solution.jpg')
+        Solution.objects.filter(pk=image.solution.pk).update(image_file='original_solution.jpg')
 
         revision = Generators.image_revision(image=image, image_file='revision.jpg')
-        revision_solution = PlateSolvingGenerators.solution(revision, image_file='revision_solution.jpg')
+        Solution.objects.filter(pk=revision.solution.pk).update(image_file='revision_solution.jpg')
 
         ImageService(image).delete_original()
 
         self.assertEqual('revision.jpg', image.image_file)
         self.assertTrue(image.is_final)
-        self.assertEqual('revision_solution.jpg', revision_solution.image_file)
-        self.assertEqual(image.pk, revision_solution.object_id)
+        self.assertFalse(ImageRevision.objects.filter(pk=revision.pk).exists())
         self.assertEqual(1, Image.objects.all().count())
         self.assertEqual(1, Solution.objects.all().count())
 

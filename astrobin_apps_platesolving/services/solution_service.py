@@ -19,7 +19,7 @@ from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.backends.astrometry_net.errors import RequestError
 from astrobin_apps_platesolving.models import (PlateSolvingAdvancedSettings, PlateSolvingSettings, Solution)
-from astrobin_apps_platesolving.solver import AdvancedSolver, Solver, SolverBase
+from astrobin_apps_platesolving.solver import AdvancedSolver, Solver
 from astrobin_apps_platesolving.utils import ThumbnailNotReadyException
 
 log = logging.getLogger(__name__)

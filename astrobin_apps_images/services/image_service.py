@@ -266,11 +266,7 @@ class ImageService:
             uploaded__lt=DateTimeService.now() - timedelta(minutes=10)
         )
 
-    def get_hemisphere(self, revision_label=None):
-        # type: (str) -> str
-
-        target = None  # type: union[Image, ImageRevision]
-
+    def get_hemisphere(self, revision_label: Optional[str] = None) -> str:
         if revision_label is None or revision_label == '0':
             target = self.image
         else:
@@ -279,7 +275,7 @@ class ImageService:
             except ImageRevision.DoesNotExist:
                 return Image.HEMISPHERE_TYPE_UNKNOWN
 
-        solution = target.solution  # type: Solution
+        solution: Solution = target.solution
 
         if solution is None or solution.dec is None:
             return Image.HEMISPHERE_TYPE_UNKNOWN
@@ -347,18 +343,25 @@ class ImageService:
 
         if new_original.solution:
             # Get the solution this way, I don't know why it wouldn't work otherwise
-            content_type = ContentType.objects.get_for_model(ImageRevision)
+
+            image_revision_ct = ContentType.objects.get_for_model(ImageRevision)
+            image_ct = ContentType.objects.get_for_model(Image)
+
             try:
-                solution = Solution.objects.get(content_type=content_type, object_id=new_original.pk)
+                solution = Solution.objects.get(content_type=image_revision_ct, object_id=new_original.pk)
             except Solution.MultipleObjectsReturned:
-                solution = Solution.objects.filter(content_type=content_type, object_id=new_original.pk).first()
+                solution = Solution.objects.filter(content_type=image_revision_ct, object_id=new_original.pk).first()
                 Solution.objects.filter(
-                    content_type=content_type, object_id=new_original.pk
+                    content_type=image_revision_ct, object_id=new_original.pk
                 ).exclude(
                     pk=solution.pk
                 ).delete()
-            solution.content_object = image
-            solution.save()
+
+            # Get rid of the other solution if it exists.
+            Solution.objects.filter(content_type=image_ct, object_id=image.pk).delete()
+
+            # Set the solution to the image.
+            Solution.objects.filter(pk=solution.pk).update(content_type=image_ct, object_id=image.pk)
 
         new_original.is_final = False
         new_original.delete()
