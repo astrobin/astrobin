@@ -7,6 +7,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from functools import reduce
+from typing import Optional, Union
 
 import flickrapi
 import requests
@@ -792,20 +793,19 @@ def image_edit_license(request, id):
 
 @never_cache
 @login_required
-def image_edit_platesolving_settings(request, id, revision_label):
-    image = get_image_or_404(Image.objects_including_wip, id)
+def image_edit_platesolving_settings(request, image_id: Union[str, int], revision_label: Optional[str]):
+    image: Image = get_image_or_404(Image.objects_including_wip, image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     if revision_label in (None, 'None', '0'):
-        url = reverse('image_edit_platesolving_settings', args=(image.get_id(),))
         if image.revisions.count() > 0:
             return_url = reverse('image_detail', args=(image.get_id(), '0',))
         else:
             return_url = reverse('image_detail', args=(image.get_id(),))
 
         try:
-            solution, created = Solution.objects.get_or_create(
+            solution, __ = Solution.objects.get_or_create(
                 content_type=ContentType.objects.get_for_model(Image),
                 object_id=image.pk
             )
@@ -813,29 +813,38 @@ def image_edit_platesolving_settings(request, id, revision_label):
             solution = Solution.objects.filter(
                 content_type=ContentType.objects.get_for_model(Image),
                 object_id=image.pk
-            ).order_by('-pk')[0]
+            ).order_by('-pk').first()
             Solution.objects.filter(
                 content_type=ContentType.objects.get_for_model(Image),
                 object_id=image.pk
             ).exclude(pk=solution.pk).delete()
     else:
-        url = reverse('image_edit_platesolving_settings', args=(image.get_id(), revision_label,))
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
         revision = ImageRevision.objects.get(image=image, label=revision_label)
-        solution, created = Solution.objects.get_or_create(
-            content_type=ContentType.objects.get_for_model(ImageRevision),
-            object_id=revision.pk
-        )
+        try:
+            solution, __ = Solution.objects.get_or_create(
+                content_type=ContentType.objects.get_for_model(ImageRevision),
+                object_id=revision.pk
+            )
+        except Solution.MultipleObjectsReturned:
+            solution = Solution.objects.filter(
+                content_type=ContentType.objects.get_for_model(ImageRevision),
+                object_id=revision.pk
+            ).order_by('-pk').first()
+            Solution.objects.filter(
+                content_type=ContentType.objects.get_for_model(ImageRevision),
+                object_id=revision.pk
+            ).exclude(pk=solution.pk).delete()
 
-    settings = solution.settings
-    if settings is None:
+    settings_ = solution.settings
+    if settings_ is None:
         solution.settings = PlateSolvingSettings.objects.create()
         solution.save()
 
     if request.method == 'GET':
         form = PlateSolvingSettingsForm(
             image=image,
-            instance=settings,
+            instance=settings_,
             revision_label=revision_label,
             return_url=return_url
         )
@@ -849,7 +858,7 @@ def image_edit_platesolving_settings(request, id, revision_label):
     if request.method == 'POST':
         form = PlateSolvingSettingsForm(
             image=image,
-            instance=settings,
+            instance=settings_,
             revision_label=revision_label,
             return_url=return_url,
             data=request.POST,
@@ -868,6 +877,7 @@ def image_edit_platesolving_settings(request, id, revision_label):
 
         form.save()
         solution.clear()
+        start_basic_solver.delay(content_type_id=solution.content_type_id, object_id=solution.object_id)
 
         messages.success(request, _("Form saved. A new plate-solving process will start now."))
 
@@ -876,8 +886,8 @@ def image_edit_platesolving_settings(request, id, revision_label):
 
 @never_cache
 @login_required
-def image_edit_platesolving_advanced_settings(request, id, revision_label):
-    image = get_image_or_404(Image.objects_including_wip, id)
+def image_edit_platesolving_advanced_settings(request, image_id: Union[str, int], revision_label: Optional[str]):
+    image: Image = get_image_or_404(Image.objects_including_wip, image_id)
     if request.user != image.user and not request.user.is_superuser and not can_perform_advanced_platesolving(
             PremiumService(image.user).get_valid_usersubscription()
     ):
@@ -888,7 +898,7 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
             return_url = reverse('image_detail', args=(image.get_id(), '0',))
         else:
             return_url = reverse('image_detail', args=(image.get_id(),))
-        solution, created = Solution.objects.get_or_create(
+        solution, __ = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Image),
             object_id=image.pk
         )
@@ -899,7 +909,7 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
     else:
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
         revision = ImageRevision.objects.get(image=image, label=revision_label)
-        solution, created = Solution.objects.get_or_create(
+        solution, __ = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(ImageRevision),
             object_id=revision.pk
         )
@@ -937,6 +947,7 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
 
         form.save()
         solution.clear_advanced(save=True)
+        start_advanced_solver.delay(solution.id)
 
         messages.success(
             request,

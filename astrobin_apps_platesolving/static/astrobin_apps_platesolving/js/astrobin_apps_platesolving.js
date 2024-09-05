@@ -41,7 +41,7 @@
 
                 const solution = response[0];
 
-                if (solution.error && solution.attempts > 3) {
+                if (solution.error && solution.attempts >= 3) {
                     self.onError(solution.error);
                     return;
                 }
@@ -103,11 +103,9 @@
         },
 
         onStatusMissing(attempts) {
-            if (attempts < 3) {
-                setTimeout(() => {
-                    this.getStatus();
-                }, 10000);
-            }
+            setTimeout(() => {
+                this.getStatus();
+            }, 2000);
         },
 
         onStatusPending() {

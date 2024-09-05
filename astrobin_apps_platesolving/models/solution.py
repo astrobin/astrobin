@@ -293,6 +293,8 @@ class Solution(models.Model):
     def _do_clear_basic(self):
         self.status = Solver.MISSING
         self.submission_id = None
+        self.error = None
+        self.attempts = 0
 
         self.image_file.delete(save=False)
         self.image_file = None

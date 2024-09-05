@@ -56,17 +56,6 @@ def get_target(object_id, content_type_id):
     return get_object_or_None(manager, pk=object_id)
 
 
-def get_solution(object_id, content_type_id):
-    content_type = ContentType.objects.get_for_id(content_type_id)
-    try:
-        solution, created = Solution.objects.get_or_create(object_id=object_id, content_type=content_type)
-    except Solution.MultipleObjectsReturned:
-        solution = Solution.objects.filter(object_id=object_id, content_type=content_type).order_by('-status').first()
-        Solution.objects.filter(object_id=object_id, content_type=content_type).exclude(pk=solution.pk).delete()
-
-    return solution
-
-
 def corrected_pixscale(solution, pixscale):
     # type: (Solution, float) -> float
     if solution.content_object:

@@ -3,7 +3,7 @@ import os
 import re
 import time
 import urllib
-from typing import List, Union
+from typing import List, Optional, Union
 
 import simplejson
 from django.contrib.contenttypes.models import ContentType
@@ -13,7 +13,7 @@ from django.db import IntegrityError
 from django.db.models import QuerySet
 from django.urls import reverse
 
-from astrobin.models import DeepSky_Acquisition, Image, ImageRevision
+from astrobin.models import DeepSky_Acquisition, Image, ImageRevision, Location
 from astrobin.services.utils_service import UtilsService
 from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
@@ -60,54 +60,76 @@ class SolutionService:
 
         return PlateSolvingAdvancedSettings.objects.create(), True
 
-    def __init__(self, solution):
-        # type: (Solution) -> None
-
+    def __init__(self, solution: Solution) -> None:
         self.solution = solution
 
-    def start_basic_solver(self):
+    def enforce_settings(self) -> None:
         if self.solution.settings is None:
             settings_ = PlateSolvingSettings.objects.create()
             self.solution.settings = settings_
             Solution.objects.filter(pk=self.solution.pk).update(settings=settings_)
 
-        if self.solution.submission_id is None or self.solution.submission_id == 0:
-            solver = Solver()
-            self.solution.attempts += 1
+        if self.solution.advanced_settings is None:
+            advanced_settings, _ = self.get_or_create_advanced_settings(self.solution.content_object)
+            self.solution.advanced_settings = advanced_settings
+            Solution.objects.filter(pk=self.solution.pk).update(advanced_settings=advanced_settings)
 
-            try:
-                if self.solution.content_object.__class__.__name__ == 'ImageRevision':
-                    url = self.solution.content_object.thumbnail('real', sync=True)
-                else:
-                    url = self.solution.content_object.thumbnail('real', '0', sync=True)
+    def has_submission_id(self) -> bool:
+        return self.solution.submission_id is not None and self.solution.submission_id > 0
 
-                if self.solution.settings.blind:
-                    submission = solver.solve(
-                        url,
-                        downsample_factor=self.solution.settings.downsample_factor,
-                        use_sextractor=self.solution.settings.use_sextractor,
-                    )
-                else:
-                    submission = solver.solve(
-                        url,
-                        scale_units=self.solution.settings.scale_units,
-                        scale_lower=self.solution.settings.scale_min,
-                        scale_upper=self.solution.settings.scale_max,
-                        center_ra=self.solution.settings.center_ra,
-                        center_dec=self.solution.settings.center_dec,
-                        radius=self.solution.settings.radius,
-                        downsample_factor=self.solution.settings.downsample_factor,
-                        use_sextractor=self.solution.settings.use_sextractor,
-                    )
-                self.solution.status = Solver.PENDING
-                self.solution.submission_id = submission
-                self.solution.save()
-            except Exception as e:
-                log.error("Error during basic plate-solving: %s" % str(e))
-                self.solution.status = self.solution.attempts > 3 and Solver.FAILED or Solver.PENDING
-                self.solution.submission_id = None
-                self.solution.error = str(e)
-                self.solution.save()
+    def target_is_image(self) -> bool:
+        return self.solution.content_object.__class__.__name__ == 'Image'
+
+    def target_is_image_revision(self) -> bool:
+        return self.solution.content_object.__class__.__name__ == 'ImageRevision'
+
+    def target_thumbnail_url(self, alias: str) -> str:
+        if self.target_is_image_revision():
+            return self.solution.content_object.thumbnail(alias, sync=True)
+        return self.solution.content_object.thumbnail(alias, '0', sync=True)
+
+    def start_basic_solver(self) -> None:
+        self.enforce_settings()
+
+        if self.has_submission_id():
+            log.debug(
+                "start_basic_solver: returning because solution %d already has a submission ID" % self.solution.pk
+            )
+            return
+
+        solver = Solver()
+        self.solution.attempts += 1
+
+        try:
+            url = self.target_thumbnail_url('real')
+
+            if self.solution.settings.blind:
+                self.solution.submission_id = solver.solve(
+                    url,
+                    downsample_factor=self.solution.settings.downsample_factor,
+                    use_sextractor=self.solution.settings.use_sextractor,
+                )
+            else:
+                self.solution.submission_id = solver.solve(
+                    url,
+                    scale_units=self.solution.settings.scale_units,
+                    scale_lower=self.solution.settings.scale_min,
+                    scale_upper=self.solution.settings.scale_max,
+                    center_ra=self.solution.settings.center_ra,
+                    center_dec=self.solution.settings.center_dec,
+                    radius=self.solution.settings.radius,
+                    downsample_factor=self.solution.settings.downsample_factor,
+                    use_sextractor=self.solution.settings.use_sextractor,
+                )
+            self.solution.status = Solver.PENDING
+            self.solution.error = None
+        except Exception as e:
+            log.error("Error during basic plate-solving: %s" % str(e))
+            self.solution.status = self.solution.attempts >= 3 and Solver.FAILED or Solver.PENDING
+            self.solution.submission_id = None
+            self.solution.error = str(e)
+        finally:
+            self.solution.save()
 
     def get_basic_solver_status(self) -> int:
         return Solver().status(self.solution.submission_id)
@@ -115,13 +137,12 @@ class SolutionService:
     def get_advanced_solver_status(self):
         return self.solution.status
 
-    def get_solver_status(self) -> int:
+    def update_solver_status(self) -> int:
         try:
             if self.solution.status < Solver.ADVANCED_PENDING:
                 self.solution.status = self.get_basic_solver_status()
             else:
                 self.solution.status = self.get_advanced_solver_status()
-            self.solution.save()
         except Exception as e:
             error = str(e)
             status = Solver.FAILED
@@ -130,80 +151,98 @@ class SolutionService:
             self.solution.status = status
             self.solution.submission_id = None
             self.solution.error = error
+        finally:
             self.solution.save()
 
         return self.solution.status
 
+    def get_target_image(self) -> Image:
+        target: Union[Image, ImageRevision] = self.solution.content_object
+
+        if self.target_is_image_revision():
+            return target.image
+
+        return target
+
+    def get_observation_time_and_location(self) -> (Optional[str], Optional[str], Optional[str], Optional[int]):
+        observation_time: Optional[str] = None
+        latitude: Optional[str] = None
+        longitude: Optional[str] = None
+        altitude: Optional[int] = None
+
+        image = self.get_target_image()
+
+        acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+        if acquisitions.count() > 0 and acquisitions[0].date:
+            observation_time = acquisitions[0].date.isoformat()
+
+        locations = image.locations.all()
+        if locations.count() > 0:
+            location: Location = locations.first()
+            latitude = degrees_minutes_seconds_to_decimal_degrees(
+                location.lat_deg, location.lat_min, location.lat_sec, location.lat_side
+            )
+            longitude = degrees_minutes_seconds_to_decimal_degrees(
+                location.lon_deg, location.lon_min, location.lon_sec, location.lon_side
+            )
+            altitude = location.altitude
+
+        return observation_time, latitude, longitude, altitude
+
     def start_advanced_solver(self):
         target = self.solution.content_object
-        if self.solution.advanced_settings is None:
-            advanced_settings, _ = self.get_or_create_advanced_settings(target)
-            self.solution.advanced_settings = advanced_settings
-            Solution.objects.filter(pk=self.solution.pk).update(advanced_settings=advanced_settings)
+        self.enforce_settings()
 
-        if self.solution.pixinsight_serial_number is None or self.solution.status == SolverBase.SUCCESS:
-            solver = AdvancedSolver()
+        if self.solution.pixinsight_serial_number:
+            log.debug(
+                "start_advanced_solver: returning because solution %d already has a PixInsight serial number"
+                % self.solution.pk
+            )
+            return
 
-            try:
-                observation_time = None
-                latitude = None
-                longitude = None
-                altitude = None
+        if self.solution.status != Solver.SUCCESS:
+            log.debug(
+                "start_advanced_solver: returning because solution %d is not in SUCCESS state" % self.solution.pk
+            )
+            return
 
-                if target.__class__.__name__ == 'ImageRevision':
-                    image = target.image
-                else:
-                    image = target
+        solver = AdvancedSolver()
 
-                if self.solution.advanced_settings.sample_raw_frame_file:
-                    url = self.solution.advanced_settings.sample_raw_frame_file.url
-                else:
-                    if target.__class__.__name__ == 'ImageRevision':
-                        url = target.thumbnail('hd', sync=True)
-                    else:
-                        url = target.thumbnail('hd', '0', sync=True)
+        try:
+            if self.solution.advanced_settings.sample_raw_frame_file:
+                url = self.solution.advanced_settings.sample_raw_frame_file.url
+            else:
+                url = self.target_thumbnail_url('hd')
 
-                acquisitions = DeepSky_Acquisition.objects.filter(image=image)
-                if acquisitions.count() > 0 and acquisitions[0].date:
-                    observation_time = acquisitions[0].date.isoformat()
+            observation_time, latitude, longitude, altitude = self.get_observation_time_and_location()
 
-                locations = image.locations.all()
-                if locations.count() > 0:
-                    location = locations[0]  # Type: Location
-                    latitude = degrees_minutes_seconds_to_decimal_degrees(
-                        location.lat_deg, location.lat_min, location.lat_sec, location.lat_side
-                    )
-                    longitude = degrees_minutes_seconds_to_decimal_degrees(
-                        location.lon_deg, location.lon_min, location.lon_sec, location.lon_side
-                    )
-                    altitude = location.altitude
+            submission = solver.solve(
+                url,
+                ra=self.solution.ra,
+                dec=self.solution.dec,
+                pixscale=self.solution.pixscale,
+                observation_time=observation_time,
+                latitude=latitude,
+                longitude=longitude,
+                altitude=altitude,
+                advanced_settings=self.solution.advanced_settings,
+                image_width=target.w,
+                image_height=target.h
+            )
 
-                submission = solver.solve(
-                    url,
-                    ra=self.solution.ra,
-                    dec=self.solution.dec,
-                    pixscale=self.solution.pixscale,
-                    observation_time=observation_time,
-                    latitude=latitude,
-                    longitude=longitude,
-                    altitude=altitude,
-                    advanced_settings=self.solution.advanced_settings,
-                    image_width=target.w,
-                    image_height=target.h
-                )
+            self.solution.status = Solver.ADVANCED_PENDING
+            self.solution.pixinsight_serial_number = submission
+            self.solution.error = None
+        except Exception as e:
+            error = str(e)
+            log.error("Error during advanced plate-solving: %s" % error)
+            self.solution.status = Solver.ADVANCED_FAILED
+            self.solution.pixinsight_serial_number = None
+            self.solution.error = error
+        finally:
+            self.solution.save()
 
-                self.solution.status = Solver.ADVANCED_PENDING
-                self.solution.pixinsight_serial_number = submission
-                self.solution.save()
-            except Exception as e:
-                error = str(e)
-                log.error("Error during advanced plate-solving: %s" % error)
-                self.solution.status = Solver.ADVANCED_FAILED
-                self.solution.submission_id = None
-                self.solution.error = error
-                self.solution.save()
-
-    def finalize_basic_solver(self):
+    def finalize_basic_solver(self) -> None:
         solver = Solver()
         status = solver.status(self.solution.submission_id)
 
@@ -224,7 +263,7 @@ class SolutionService:
                 target = self.solution.content_type.get_object_for_this_type(pk=self.solution.object_id)
             except self.solution.content_type.model_class().DoesNotExist:
                 # Target image was deleted meanwhile
-                return {'status': Solver.FAILED}
+                return
 
             # Annotate image
             try:
@@ -234,12 +273,14 @@ class SolutionService:
                 annotated_image = annotator.annotate()
             except RequestError as e:
                 self.solution.status = Solver.FAILED
+                self.solution.error = str(e)
                 self.solution.save()
-                return {'status': self.solution.status, 'error': str(e)}
-            except ThumbnailNotReadyException:
+                return
+            except ThumbnailNotReadyException as e:
                 self.solution.status = Solver.PENDING
+                self.solution.error = str(e)
                 self.solution.save()
-                return {'status': self.solution.status}
+                return
 
             filename, _ = os.path.splitext(target.image_file.name)
             annotated_filename = "%s-%d%s" % (filename, int(time.time()), '.jpg')
