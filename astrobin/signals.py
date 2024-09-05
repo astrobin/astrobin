@@ -710,13 +710,13 @@ def solution_pre_save(sender, instance, **kwargs):
     if solution_before_save.status >= instance.status:
         return
 
-    if instance.status == Solver.FAILED:
+    if instance.status == Solver.FAILED and instance.attempts >= 3:
         notification = 'image_not_solved'
     elif instance.status == Solver.SUCCESS:
         notification = 'image_solved'
     elif instance.status == Solver.ADVANCED_SUCCESS:
         notification = 'image_solved_advanced'
-    elif instance.status == Solver.ADVANCED_FAILED:
+    elif instance.status == Solver.ADVANCED_FAILED and instance.attempts >= 3:
         notification = 'image_not_solved_advanced'
     else:
         return

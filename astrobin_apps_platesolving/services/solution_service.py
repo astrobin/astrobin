@@ -125,7 +125,7 @@ class SolutionService:
             self.solution.error = None
         except Exception as e:
             log.error("Error during basic plate-solving: %s" % str(e))
-            self.solution.status = self.solution.attempts >= 3 and Solver.FAILED or Solver.PENDING
+            self.solution.status = Solver.FAILED
             self.solution.submission_id = None
             self.solution.error = str(e)
         finally:

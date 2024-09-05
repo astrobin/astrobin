@@ -89,7 +89,7 @@ def check_basic_solver_status(solution_id: int):
     image_id, revision_label = get_target_image_id_and_label(solution.content_object)
     logger.debug(
         f'check_basic_solver_status: {solution_id} for {image_id}/{revision_label} - '
-        f'{SolverBase().get_status_name(status)}'
+        f'{SolverBase().get_status_name(status)} (attempts: {solution.attempts})'
     )
 
     if status == Solver.PENDING:
