@@ -129,11 +129,11 @@
             self._setProgressText(self.advancedSolvingMsg);
             self._showStatus();
 
-            if (queueSize !== null && queueSize !== undefined) {
+            if (queueSize !== null && typeof queueSize !== "undefined") {
                 self._updateInfoModal("pixinsight-queue-size", queueSize);
             }
 
-            if (stage !== null && stage !== undefined) {
+            if (stage !== null && typeof stage !== "undefined") {
                 self._updateInfoModal("pixinsight-stage", self._humanizePixInsightStage(stage));
             }
 
