@@ -986,7 +986,7 @@ def image_restart_platesolving(request, id, revision_label):
         content_type = ContentType.objects.get_for_model(ImageRevision)
         revision = ImageRevision.objects.get(image=image, label=revision_label)
         object_id = revision.pk
-        return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
+        return_url = reverse('image_detail', args=(image.get_id(), revision_label,)) + f'?t={now}'
 
     Solution.objects.filter(content_type=content_type, object_id=object_id).delete()
     cache.delete(f'astrobin_solution_{content_type.model}_{object_id}')
@@ -1015,7 +1015,7 @@ def image_restart_advanced_platesolving(request, id, revision_label):
             object_id=image.pk
         )
     else:
-        return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
+        return_url = reverse('image_detail', args=(image.get_id(), revision_label,)) + f'?t={now}'
         revision = ImageRevision.objects.get(image=image, label=revision_label)
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(ImageRevision),
