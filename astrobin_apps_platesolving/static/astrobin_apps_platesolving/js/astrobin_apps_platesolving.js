@@ -174,7 +174,7 @@
         onStatusSuccess() {
             const self = this;
 
-            if (self.perform_advanced) {
+            if (self.perform_advanced === "True") {
                 self.onStatusAdvancedPending();
                 return;
             }
