@@ -183,6 +183,8 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
     if getattr(instance, DELETED_FIELD_NAME, None):
         return
 
+    content_type = ContentType.objects.get_for_model(Image)
+
     if created:
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save(keep_deleted=True)
@@ -233,11 +235,11 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
         if instance.video_file.name:
             if not instance.image_file.name:
                 ImageService(instance).generate_loading_placeholder()
-                generate_video_preview.apply_async(args=(instance.pk, ContentType.objects.get_for_model(Image).pk))
+                generate_video_preview.apply_async(args=(instance.pk, content_type.pk))
 
             if not instance.encoded_video_file.name:
                 log.debug(f'Encoding video file for {instance} in image_post_save signal handler')
-                encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(Image).pk))
+                encode_video_file.apply_async(args=(instance.pk, content_type.pk))
 
         groups = instance.user.joined_group_set.filter(autosubmission=True)
         for group in groups:
@@ -257,6 +259,10 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             UserService(instance.user).update_image_count()
             for collaborator in instance.collaborators.all():
                 UserService(collaborator).update_image_count()
+
+        if not instance.solution and instance.subject_type:
+            from astrobin_apps_platesolving.tasks import start_basic_solver
+            start_basic_solver.apply_async(args=(instance.pk, content_type.pk), countdown=30)
 
         UserService(instance.user).clear_gallery_image_list_cache()
         ImageService(instance).clear_badges_cache()
@@ -385,22 +391,25 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
         return
 
     uploading = instance.uploader_in_progress
+    content_type = ContentType.objects.get_for_model(ImageRevision)
 
     if not uploading:
         if instance.video_file.name:
             if not instance.image_file.name:
                 ImageService(instance.image).generate_loading_placeholder()
-                generate_video_preview.apply_async(
-                    args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk)
-                )
+                generate_video_preview.apply_async(args=(instance.pk, content_type.pk))
 
             if not instance.encoded_video_file.name:
                 log.debug(f'Encoding video file for {instance} in imagerevision_post_save signal handler')
-                encode_video_file.apply_async(args=(instance.pk, ContentType.objects.get_for_model(ImageRevision).pk))
+                encode_video_file.apply_async(args=(instance.pk, content_type.pk))
 
         if instance.image.submitted_for_iotd_tp_consideration:
             for alias in ('story', 'hd_anonymized', 'hd_anonymized_crop', 'real_anonymized'):
                 instance.thumbnail(alias)
+
+        if not instance.solution and instance.image.subject_type:
+            from astrobin_apps_platesolving.tasks import start_basic_solver
+            start_basic_solver.apply_async(args=(instance.pk, content_type.pk), countdown=30)
 
     if instance.image.is_wip:
         return

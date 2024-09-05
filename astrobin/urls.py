@@ -483,7 +483,7 @@ urlpatterns += [
     url(r'^edit/gear/(?P<id>\w+)/$', never_cache(image_views.ImageEditGearView.as_view()), name='image_edit_gear'),
     url(r'^edit/license/(?P<id>\w+)/$', image_edit_license, name='image_edit_license'),
     url(
-        r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
+        r'^edit/platesolving/(?P<image_id>\w+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
         name='image_edit_platesolving_settings'
     ),
     url(
@@ -491,7 +491,7 @@ urlpatterns += [
         name='image_restart_platesolving'
     ),
     url(
-        r'^edit/platesolving-advanced/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$',
+        r'^edit/platesolving-advanced/(?P<image_id>\w+)/(?:(?P<revision_label>\w+)/)?$',
         image_edit_platesolving_advanced_settings, name='image_edit_platesolving_advanced_settings'
     ),
     url(

@@ -15,6 +15,16 @@ class SolverBase(object):
     ADVANCED_FAILED = 5
     ADVANCED_SUCCESS = 6
 
+    status_map = {value: name for name, value in vars().items() if not name.startswith('__') and not callable(value)}
+
+    @classmethod
+    def get_status_name(cls, value):
+        return cls.status_map.get(value, "Unknown Status")
+
+    def is_successful(self, value):
+        # Accessing class-level constants using self.__class__
+        return value in {self.__class__.SUCCESS, self.__class__.ADVANCED_SUCCESS}
+
 
 class Solver(SolverBase):
     def backend(self):

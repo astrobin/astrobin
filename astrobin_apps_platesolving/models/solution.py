@@ -1,6 +1,7 @@
 from django.contrib.contenttypes import fields
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_platesolving.models.plate_solving_advanced_settings import PlateSolvingAdvancedSettings
@@ -34,6 +35,15 @@ class Solution(models.Model):
     status = models.PositiveIntegerField(
         default=Solver.MISSING,
         choices=STATUS_CHOICES,
+    )
+
+    error = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    attempts = models.PositiveIntegerField(
+        default=0,
     )
 
     submission_id = models.PositiveIntegerField(
@@ -269,12 +279,17 @@ class Solution(models.Model):
         super(Solution, self).save(*args, **kwargs)
 
         # Save target to trigger index update if applicable.
-        if (self.status in (
+        if self.content_object and hasattr(self.content_object, 'updated') and self.status in (
                 Solver.SUCCESS,
                 Solver.FAILED,
                 Solver.ADVANCED_SUCCESS,
-                Solver.ADVANCED_FAILED)):
-            self.content_object.save(keep_deleted=True)
+                Solver.ADVANCED_FAILED
+        ):
+            model = self.content_type.model_class()
+            manager = model.objects
+            if hasattr(manager, 'objects_including_wip'):
+                manager = manager.objects_including_wip
+            manager.filter(pk=self.content_object.pk).update(updated=timezone.now())
 
     def delete(self, *args, **kwargs):
         self._do_clear_basic()
@@ -284,6 +299,8 @@ class Solution(models.Model):
     def _do_clear_basic(self):
         self.status = Solver.MISSING
         self.submission_id = None
+        self.error = None
+        self.attempts = 0
 
         self.image_file.delete(save=False)
         self.image_file = None
@@ -334,9 +351,11 @@ class Solution(models.Model):
         self._do_clear_advanced()
         self.save()
 
-    def clear_advanced(self):
+    def clear_advanced(self, save: bool):
         self._do_clear_advanced()
-        self.save()
+
+        if save:
+            self.save()
 
     class Meta:
         app_label = 'astrobin_apps_platesolving'

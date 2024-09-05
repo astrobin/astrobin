@@ -1129,6 +1129,24 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   display: none;
 }
 
+#platesolving-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .25rem;
+  margin-bottom: .25rem;
+  background: $grey-7;
+  padding: .25rem .75rem .25rem .25rem;
+  font-size: .9rem;
+  color: $grey-4;
+  border-radius: .25rem;
+
+  .text {
+    flex-grow: 1;
+    padding: .25rem;
+  }
+}
+
 .main-image {
   overflow: hidden;
   position: relative;
@@ -2455,31 +2473,31 @@ form.avatar-delete {
 
   li.astrobin-thumbnail {
     @media (min-width: $xl-min) {
-      width: calc(100%/7 - 4px);
+      width: calc(100% / 7 - 4px);
     }
 
     @media (max-width: $lg-max) {
-      width: calc(100%/6 - 4px);
+      width: calc(100% / 6 - 4px);
     }
 
     @media (max-width: $md-max) {
-      width: calc(100%/5 - 4px);
+      width: calc(100% / 5 - 4px);
     }
 
     @media (max-width: $sm-max) {
-      width: calc(100%/5 - 4px);
+      width: calc(100% / 5 - 4px);
     }
 
     @media (max-width: $xs-max) {
-      width: calc(100%/4 - 4px);
+      width: calc(100% / 4 - 4px);
     }
 
     @media (max-width: 430px) {
-      width: calc(100%/3 - 4px);
+      width: calc(100% / 3 - 4px);
     }
 
     @media (max-width: 240px) {
-      width: calc(100%/2 - 4px);
+      width: calc(100% / 2 - 4px);
     }
   }
 }
