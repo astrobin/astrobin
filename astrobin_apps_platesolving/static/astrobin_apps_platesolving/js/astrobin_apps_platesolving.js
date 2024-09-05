@@ -174,6 +174,11 @@
         onStatusSuccess() {
             const self = this;
 
+            if (self.perform_advanced) {
+                self.onStatusAdvancedPending();
+                return;
+            }
+
             if (self.previouslyPending) {
                 self._hideLoading();
                 self._setProgressText(self.solveSuccessMsg);

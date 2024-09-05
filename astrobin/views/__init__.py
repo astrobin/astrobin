@@ -798,11 +798,15 @@ def image_edit_platesolving_settings(request, image_id: Union[str, int], revisio
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
+    now = timezone.now().timestamp()
+
     if revision_label in (None, 'None', '0'):
+        content_type = ContentType.objects.get_for_model(Image)
+        object_id = image.pk
         if image.revisions.count() > 0:
-            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+            return_url = reverse('image_detail', args=(image.get_id(), '0',)) + f'?t={now}'
         else:
-            return_url = reverse('image_detail', args=(image.get_id(),))
+            return_url = reverse('image_detail', args=(image.get_id(),)) + f'?t={now}'
 
         try:
             solution, __ = Solution.objects.get_or_create(
@@ -821,6 +825,8 @@ def image_edit_platesolving_settings(request, image_id: Union[str, int], revisio
     else:
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
         revision = ImageRevision.objects.get(image=image, label=revision_label)
+        content_type = ContentType.objects.get_for_model(ImageRevision)
+        object_id = revision.pk
         try:
             solution, __ = Solution.objects.get_or_create(
                 content_type=ContentType.objects.get_for_model(ImageRevision),
@@ -877,6 +883,8 @@ def image_edit_platesolving_settings(request, image_id: Union[str, int], revisio
 
         form.save()
         solution.clear()
+        cache.delete(f'astrobin_solution_{content_type.model}_{object_id}')
+        Image.objects_including_wip.filter(id=image.id).update(updated=timezone.now())
         start_basic_solver.delay(content_type_id=solution.content_type_id, object_id=solution.object_id)
 
         messages.success(request, _("Form saved. A new plate-solving process will start now."))
@@ -893,11 +901,13 @@ def image_edit_platesolving_advanced_settings(request, image_id: Union[str, int]
     ):
         return HttpResponseForbidden()
 
+    now = timezone.now().timestamp()
+
     if revision_label in (None, 'None', '0'):
         if image.revisions.count() > 0:
-            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+            return_url = reverse('image_detail', args=(image.get_id(), '0',)) + f'?t={now}'
         else:
-            return_url = reverse('image_detail', args=(image.get_id(),))
+            return_url = reverse('image_detail', args=(image.get_id(),)) + f'?t={now}'
         solution, __ = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Image),
             object_id=image.pk
@@ -947,6 +957,7 @@ def image_edit_platesolving_advanced_settings(request, image_id: Union[str, int]
 
         form.save()
         solution.clear_advanced(save=True)
+        Image.objects_including_wip.filter(id=image.id).update(updated=timezone.now())
         start_advanced_solver.delay(solution.id)
 
         messages.success(
@@ -962,13 +973,15 @@ def image_restart_platesolving(request, id, revision_label):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
+    now = timezone.now().timestamp()
+
     if revision_label in (None, 'None', '0'):
         content_type = ContentType.objects.get_for_model(Image)
         object_id = image.pk
         if image.revisions.count() > 0:
-            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+            return_url = reverse('image_detail', args=(image.get_id(), '0',)) + f'?t={now}'
         else:
-            return_url = reverse('image_detail', args=(image.get_id(),))
+            return_url = reverse('image_detail', args=(image.get_id(),)) + f'?t={now}'
     else:
         content_type = ContentType.objects.get_for_model(ImageRevision)
         revision = ImageRevision.objects.get(image=image, label=revision_label)
@@ -976,6 +989,8 @@ def image_restart_platesolving(request, id, revision_label):
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
 
     Solution.objects.filter(content_type=content_type, object_id=object_id).delete()
+    cache.delete(f'astrobin_solution_{content_type.model}_{object_id}')
+    Image.objects_including_wip.filter(id=image.id).update(updated=timezone.now())
     start_basic_solver.delay(content_type_id=content_type.pk, object_id=object_id)
 
     return HttpResponseRedirect(return_url)
@@ -988,11 +1003,13 @@ def image_restart_advanced_platesolving(request, id, revision_label):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
+    now = timezone.now().timestamp()
+
     if revision_label in (None, 'None', '0'):
         if image.revisions.count() > 0:
-            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+            return_url = reverse('image_detail', args=(image.get_id(), '0',)) + f'?t={now}'
         else:
-            return_url = reverse('image_detail', args=(image.get_id(),))
+            return_url = reverse('image_detail', args=(image.get_id(),)) + f'?t={now}'
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Image),
             object_id=image.pk
@@ -1006,6 +1023,7 @@ def image_restart_advanced_platesolving(request, id, revision_label):
         )
 
     solution.clear_advanced(save=True)
+    Image.objects_including_wip.filter(id=image.id).update(updated=timezone.now())
     start_advanced_solver.delay(solution.id)
 
     return HttpResponseRedirect(return_url)
