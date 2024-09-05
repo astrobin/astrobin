@@ -621,3 +621,10 @@ red rectangle,hd 44179
                     return row
 
         return None
+
+    @staticmethod
+    def snake_to_camel(snake_str: str) -> str:
+        """Helper function to convert snake_case to camelCase"""
+        components = snake_str.split('_')
+        return components[0] + ''.join(x.title() for x in components[1:])
+

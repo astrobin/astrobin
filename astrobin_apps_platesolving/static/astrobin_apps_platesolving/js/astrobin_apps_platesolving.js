@@ -29,7 +29,7 @@
 
 
             $.ajax({
-                url: self.apiURL + `?object_id=${self.object_id}&content_type=${self.content_type_id}`,
+                url: self.apiURL + `?object_id=${self.object_id}&content_type=${self.content_type_id}&include-pixinsight-details`,
                 cache: false,
                 timeout: 5000
             })
