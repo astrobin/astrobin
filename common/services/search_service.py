@@ -14,6 +14,7 @@ from haystack.query import SearchQuerySet
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.models import Image
+from astrobin.utils import ra_minutes_to_degrees
 from astrobin_apps_equipment.models import (
     EquipmentBrandListing, EquipmentItemListing,
     EquipmentItemMarketplaceListingLineItem,
@@ -752,8 +753,8 @@ class SearchService:
         try:
             coords = data.get("coords")
             if coords:
-                ra_min = float(coords.get("ra").get("min"))
-                ra_max = float(coords.get("ra").get("max"))
+                ra_min = ra_minutes_to_degrees(float(coords.get("ra").get("min")))
+                ra_max = ra_minutes_to_degrees(float(coords.get("ra").get("max")))
                 dec_min = float(coords.get("dec").get("min"))
                 dec_max = float(coords.get("dec").get("max"))
                 results = results.filter(

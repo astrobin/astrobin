@@ -303,6 +303,7 @@ def dec_decimal_precision_from_pixel_scale(pixel_scale: float = 0) -> int:
 
     return 2
 
+
 def ra_decimal_precision_from_pixel_scale(pixel_scale: float = 0) -> int:
     return dec_decimal_precision_from_pixel_scale(pixel_scale) + 1
 
@@ -331,6 +332,15 @@ def number_unit_decimals_html(value, unit, precision, must_be_less_than=None):
         value = '%s<span class="symbol">%s</span>.%s' % (("%d" % value).rjust(2, '0'), unit, decimal_part)
 
     return value
+
+
+def ra_minutes_to_degrees(minutes: float) -> float:
+    """
+    Convert Right Ascension minutes to degrees.
+    1 minute of RA = 0.25 degrees.
+    """
+    return minutes * 0.25
+
 
 def decimal_to_hours_minutes_seconds(value):
     if value is None:
