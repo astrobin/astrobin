@@ -2138,10 +2138,10 @@ class ImageTest(TestCase):
 
     def test_image_revision_keeps_plate_solving_settings_from_image(self):
         image = Generators.image(user=self.user)
-        solution = PlateSolvingGenerators.solution(image)
-        settings = PlateSolvingGenerators.settings(blind=False)
+        solution = Solution.objects.get(pk=image.solution.pk)
+        settings_ = PlateSolvingGenerators.settings(blind=False)
         advanced_settings = PlateSolvingGenerators.advanced_settings(scaled_font_size='S')
-        solution.settings = settings
+        solution.settings = settings_
         solution.advanced_settings = advanced_settings
         solution.save()
         image.save(keep_deleted=True)
@@ -3164,9 +3164,9 @@ class ImageTest(TestCase):
 
     def test_solution_deleted_if_image_deleted(self):
         image = Generators.image()
-        PlateSolvingGenerators.solution(image)
+        solution = Solution.objects.get(pk=image.solution.pk)
 
-        self.assertIsNotNone(image.solution)
+        self.assertIsNotNone(solution)
 
         image.delete()
 
@@ -3177,7 +3177,7 @@ class ImageTest(TestCase):
     def test_solution_deleted_if_image_revision_deleted(self):
         image = Generators.image()
         revision = Generators.image_revision(image=image)
-        PlateSolvingGenerators.solution(revision)
+        solution = Solution.objects.get(pk=image.solution.pk)
 
         self.assertIsNotNone(revision.solution)
 
@@ -3239,7 +3239,7 @@ class ImageTest(TestCase):
         image.data_source = DataSource.BACKYARD
         image.save()
 
-        solution: Solution = PlateSolvingGenerators.solution(image)
+        solution: Solution = Solution.objects.get(pk=image.solution.pk)
         solution.status = Solver.SUCCESS
         solution.ra = 0
         solution.dec = 0

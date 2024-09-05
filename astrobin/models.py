@@ -2123,15 +2123,16 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         if self.image.solution and self.image.solution.settings:
             solution, created = Solution.objects.get_or_create(
                 content_type=ContentType.objects.get_for_model(ImageRevision),
-                object_id=self.pk)
-            if created:
-                settings = self.image.solution.settings  # type: PlateSolvingSettings
-                settings.pk = None
-                settings.save()
-                solution.settings = settings
+                object_id=self.pk
+            )
+            if not solution.settings:
+                settings_: PlateSolvingSettings = self.image.solution.settings
+                settings_.pk = None
+                settings_.save()
+                solution.settings = settings_
 
                 if self.image.solution.advanced_settings:
-                    advanced_settings = self.image.solution.advanced_settings  # type: PlateSolvingAdvancedSettings
+                    advanced_settings: PlateSolvingAdvancedSettings = self.image.solution.advanced_settings
                     advanced_settings.pk = None
                     advanced_settings.save()
                     solution.advanced_settings = advanced_settings
