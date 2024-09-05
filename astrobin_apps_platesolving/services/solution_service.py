@@ -32,7 +32,7 @@ class SolutionService:
     def get_or_create_solution(target: Union[Image, ImageRevision]) -> (Solution, bool):
         content_type = ContentType.objects.get_for_model(target)
         try:
-            solution, created = Solution.objects.get_or_create(object_id=target.id, content_type=content_type)
+            solution, _ = Solution.objects.get_or_create(object_id=target.id, content_type=content_type)
         except Solution.MultipleObjectsReturned:
             solution = Solution.objects.filter(object_id=target.id, content_type=content_type).order_by(
                 '-status'
@@ -137,7 +137,7 @@ class SolutionService:
     def start_advanced_solver(self):
         target = self.solution.content_object
         if self.solution.advanced_settings is None:
-            advanced_settings, created = self.get_or_create_advanced_settings(target)
+            advanced_settings, _ = self.get_or_create_advanced_settings(target)
             self.solution.advanced_settings = advanced_settings
             Solution.objects.filter(pk=self.solution.pk).update(advanced_settings=advanced_settings)
 
@@ -241,7 +241,7 @@ class SolutionService:
                 self.solution.save()
                 return {'status': self.solution.status}
 
-            filename, ext = os.path.splitext(target.image_file.name)
+            filename, _ = os.path.splitext(target.image_file.name)
             annotated_filename = "%s-%d%s" % (filename, int(time.time()), '.jpg')
             if annotated_image:
                 self.solution.image_file.save(annotated_filename, annotated_image, save=False)
@@ -262,7 +262,6 @@ class SolutionService:
                         pass
                 except urllib.error.URLError:
                     log.error("Error downloading sky plot image: %s" % url)
-                    pass
 
         self.solution.status = status
         self.solution.save()

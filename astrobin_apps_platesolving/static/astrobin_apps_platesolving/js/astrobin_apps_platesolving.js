@@ -10,7 +10,7 @@
     };
 
     function Platesolving(config) {
-        this.apiURL = '/api/v2/platesolving/solutions/';
+        this.apiURL = "/api/v2/platesolving/solutions/";
         this.i18n = config.i18n;
         this.errorAlreadyShown = false;
         this.previouslyPending = false;
@@ -31,79 +31,78 @@
             $.ajax({
                 url: self.apiURL + `?object_id=${self.object_id}&content_type=${self.content_type_id}`,
                 cache: false,
-                timeout: 5000,
-                success: function (response, textStatus, jqXHR) {
-                    if (!response || response.length === 0) {
-                        self.onStatusPending();
-                        return;
-                    }
+                timeout: 5000
+            })
+            .done(function (response, textStatus, jqXHR) {
+                if (!response || response.length === 0) {
+                    self.onStatusPending();
+                    return;
+                }
 
-                    const solution = response[0]
+                const solution = response[0];
 
-                    if (solution.error && solution.attempts > 3) {
-                        self.onError(solution.error);
-                        return;
-                    }
+                if (solution.error && solution.attempts > 3) {
+                    self.onError(solution.error);
+                    return;
+                }
 
-                    self._setInfoModalLoading(false);
-                    self._updateInfoModal("status", self._humanizeStatus(solution.status));
+                self._setInfoModalLoading(false);
+                self._updateInfoModal("status", self._humanizeStatus(solution.status));
 
-                    if (solution.created) {
-                        self._updateInfoModal(
-                            "started",
-                            `<abbr 
-                                class="timestamp"
-                                data-epoch="${Math.floor(new Date(solution.created.split('.')[0] + 'Z').getTime())}"
-                            >...</abbr>`
-                        );
-                        astrobin_common.init_timestamps();
-                    }
-
+                if (solution.created) {
                     self._updateInfoModal(
-                        "astrometry-job",
-                        `<a href="http://nova.astrometry.net/status/${solution.submission_id}" target="_blank">${solution.submission_id}</a>`
+                        "started",
+                        `<abbr 
+                            class="timestamp"
+                            data-epoch="${Math.floor(new Date(solution.created.split(".")[0] + "Z").getTime())}"
+                        >...</abbr>`
                     );
+                    astrobin_common.init_timestamps();
+                }
 
-                    self._updateInfoModal("pixinsight-job", solution.pixinsight_serial_number);
-                    self._updateInfoModal("pixinsight-stage", self._humanizePixInsightStage(solution.pixinsight_stage));
+                self._updateInfoModal(
+                    "astrometry-job",
+                    `<a href="http://nova.astrometry.net/status/${solution.submission_id}" target="_blank">${solution.submission_id}</a>`
+                );
 
+                self._updateInfoModal("pixinsight-job", solution.pixinsight_serial_number);
+                self._updateInfoModal("pixinsight-stage", self._humanizePixInsightStage(solution.pixinsight_stage));
 
-                    switch (solution.status) {
-                        case Status.MISSING:
-                            self.onStatusMissing(solution.attempts);
-                            break;
-                        case Status.PENDING:
-                            self.onStatusPending();
-                            break;
-                        case Status.FAILED:
-                            self.onStatusFailed(solution.attempts);
-                            break;
-                        case Status.SUCCESS:
-                            self.onStatusSuccess();
-                            break;
-                        case Status.ADVANCED_PENDING:
-                            self.onStatusAdvancedPending(solution.pixinsight_queue_size, solution.pixinsight_stage);
-                            break;
-                        case Status.ADVANCED_FAILED:
-                            self.onStatusAdvancedFailed(solution.attempts);
-                            break;
-                        case Status.ADVANCED_SUCCESS:
-                            self.onStatusAdvancedSuccess();
-                            break;
-                    }
-                },
-                fail: function (jqXHR, textStatus, errorThrown) {
-                    if (attempts < 3) {
-                        setTimeout(function () {
-                            self.getStatus();
-                        }, 1000);
-                        attempts++;
-                    }
+                switch (solution.status) {
+                    case Status.MISSING:
+                        self.onStatusMissing(solution.attempts);
+                        break;
+                    case Status.PENDING:
+                        self.onStatusPending();
+                        break;
+                    case Status.FAILED:
+                        self.onStatusFailed(solution.attempts);
+                        break;
+                    case Status.SUCCESS:
+                        self.onStatusSuccess();
+                        break;
+                    case Status.ADVANCED_PENDING:
+                        self.onStatusAdvancedPending(solution.pixinsight_queue_size, solution.pixinsight_stage);
+                        break;
+                    case Status.ADVANCED_FAILED:
+                        self.onStatusAdvancedFailed(solution.attempts);
+                        break;
+                    case Status.ADVANCED_SUCCESS:
+                        self.onStatusAdvancedSuccess();
+                        break;
+                }
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                if (attempts < 3) {
+                    setTimeout(function () {
+                        self.getStatus();
+                    }, 1000);
+                    attempts++;
                 }
             });
         },
 
-        onStatusMissing: function (attempts) {
+        onStatusMissing(attempts) {
             if (attempts < 3) {
                 setTimeout(() => {
                     this.getStatus();
@@ -111,7 +110,7 @@
             }
         },
 
-        onStatusPending: function () {
+        onStatusPending() {
             const self = this;
 
             self.previouslyPending = true;
@@ -123,7 +122,7 @@
             }, 10000);
         },
 
-        onStatusAdvancedPending: function (queueSize, stage) {
+        onStatusAdvancedPending(queueSize, stage) {
             const self = this;
 
             self.previouslyPending = true;
@@ -143,7 +142,7 @@
             }, 10000);
         },
 
-        onStatusFailed: function (attempts) {
+        onStatusFailed(attempts) {
             const self = this;
 
             if (attempts < 3) {
@@ -159,7 +158,7 @@
             }
         },
 
-        onStatusAdvancedFailed: function (attempts) {
+        onStatusAdvancedFailed(attempts) {
             const self = this;
 
             if (attempts < 3) {
@@ -174,7 +173,7 @@
             }
         },
 
-        onStatusSuccess: function () {
+        onStatusSuccess() {
             const self = this;
 
             if (self.previouslyPending) {
@@ -183,7 +182,7 @@
             }
         },
 
-        onStatusAdvancedSuccess: function () {
+        onStatusAdvancedSuccess() {
             const self = this;
 
             if (self.previouslyPending) {
@@ -193,7 +192,7 @@
             }
         },
 
-        onError: function (error) {
+        onError(error) {
             const self = this;
             let message;
 
@@ -211,12 +210,12 @@
                 $.toast({
                     heading: self.i18n.error,
                     text: message,
-                    showHideTransition: 'slide',
+                    showHideTransition: "slide",
                     allowToastClose: true,
-                    position: 'top-right',
+                    position: "top-right",
                     loader: false,
                     hideAfter: false,
-                    icon: 'error'
+                    icon: "error"
                 });
                 self.errorAlreadyShown = true;
             }
@@ -224,16 +223,16 @@
             self.onStatusFailed();
         },
 
-        _setProgressText: function (text) {
-            $('#platesolving-status').find('.text').text(text);
+        _setProgressText(text) {
+            $("#platesolving-status").find(".text").text(text);
         },
 
         _showStatus() {
-            $('#platesolving-status').removeClass('d-none');
+            $("#platesolving-status").removeClass("d-none");
         },
 
         _hideLoading() {
-            $('#platesolving-status').find(".loading").hide();
+            $("#platesolving-status").find(".loading").hide();
         },
 
         _setInfoModalLoading(loading) {
@@ -309,9 +308,9 @@
         }
 
         const browser = browserParser.getBrowser();
-        const isSafari = browser.name === 'Safari';
-        const isFirefox = browser.name === 'Firefox';
-        const isFirefox92 = isFirefox && browser.version.indexOf('92') === 0;
+        const isSafari = browser.name === "Safari";
+        const isFirefox = browser.name === "Firefox";
+        const isFirefox92 = isFirefox && browser.version.indexOf("92") === 0;
 
         if (isSafari || isFirefox92) {
             const contentDocument = document.getElementById("advanced-plate-solution-svg").contentDocument;

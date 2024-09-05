@@ -73,7 +73,6 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
 from astrobin_apps_platesolving.services import SolutionService
-from astrobin_apps_platesolving.solver import SolverBase
 from astrobin_apps_premium.services.premium_service import PremiumService, SubscriptionName
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_perform_advanced_platesolving,
