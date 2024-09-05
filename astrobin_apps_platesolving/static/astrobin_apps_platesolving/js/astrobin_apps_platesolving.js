@@ -41,7 +41,7 @@
 
                 const solution = response[0];
 
-                if (solution.error && solution.attempts >= 3) {
+                if (solution.error && solution.attempts >= 1) {
                     self.onError(solution.error);
                     return;
                 }
@@ -93,7 +93,7 @@
                 }
             })
             .fail(function (jqXHR, textStatus, errorThrown) {
-                if (attempts < 3) {
+                if (attempts < 1) {
                     setTimeout(function () {
                         self.getStatus();
                     }, 1000);
@@ -143,7 +143,7 @@
         onStatusFailed(attempts) {
             const self = this;
 
-            if (attempts < 3) {
+            if (attempts < 1) {
                 setTimeout(() => {
                     this.getStatus();
                 }, 10000);
@@ -159,7 +159,7 @@
         onStatusAdvancedFailed(attempts) {
             const self = this;
 
-            if (attempts < 3) {
+            if (attempts < 1) {
                 setTimeout(() => {
                     this.getStatus();
                 }, 10000);

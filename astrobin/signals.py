@@ -260,9 +260,8 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             for collaborator in instance.collaborators.all():
                 UserService(collaborator).update_image_count()
 
-        if not instance.solution and instance.subject_type:
-            from astrobin_apps_platesolving.tasks import start_basic_solver
-            start_basic_solver.apply_async(args=(instance.pk, content_type.pk), countdown=30)
+        from astrobin_apps_platesolving.tasks import start_basic_solver
+        start_basic_solver.apply_async(args=(instance.pk, content_type.pk), countdown=30)
 
         UserService(instance.user).clear_gallery_image_list_cache()
         ImageService(instance).clear_badges_cache()
@@ -407,9 +406,8 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
             for alias in ('story', 'hd_anonymized', 'hd_anonymized_crop', 'real_anonymized'):
                 instance.thumbnail(alias)
 
-        if not instance.solution and instance.image.subject_type:
-            from astrobin_apps_platesolving.tasks import start_basic_solver
-            start_basic_solver.apply_async(args=(instance.pk, content_type.pk), countdown=30)
+        from astrobin_apps_platesolving.tasks import start_basic_solver
+        start_basic_solver.apply_async(args=(instance.pk, content_type.pk), countdown=30)
 
     if instance.image.is_wip:
         return
@@ -710,13 +708,13 @@ def solution_pre_save(sender, instance, **kwargs):
     if solution_before_save.status >= instance.status:
         return
 
-    if instance.status == Solver.FAILED and instance.attempts >= 3:
+    if instance.status == Solver.FAILED and instance.attempts >= 1:
         notification = 'image_not_solved'
     elif instance.status == Solver.SUCCESS:
         notification = 'image_solved'
     elif instance.status == Solver.ADVANCED_SUCCESS:
         notification = 'image_solved_advanced'
-    elif instance.status == Solver.ADVANCED_FAILED and instance.attempts >= 3:
+    elif instance.status == Solver.ADVANCED_FAILED and instance.attempts >= 1:
         notification = 'image_not_solved_advanced'
     else:
         return

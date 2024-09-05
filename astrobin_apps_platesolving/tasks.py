@@ -96,7 +96,7 @@ def check_basic_solver_status(solution_id: int):
         check_basic_solver_status.apply_async((solution_id,), countdown=30)
     elif status in (Solver.MISSING, Solver.FAILED):
         Solution.objects.filter(pk=solution_id).update(status=Solver.MISSING)
-        if solution.attempts < 3:
+        if solution.attempts < 1:
             start_basic_solver.delay(solution.content_object.pk, solution.content_type_id)
     elif status == Solver.SUCCESS:
         finalize_basic_solver.delay(solution_id)
