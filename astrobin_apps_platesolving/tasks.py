@@ -4,6 +4,7 @@ from typing import Union
 
 from annoying.functions import get_object_or_None
 from celery import shared_task
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils import timezone
 from subscription.models import UserSubscription
@@ -63,6 +64,9 @@ def start_basic_solver(object_id: int, content_type_id: int):
 
     if solution.status != Solver.MISSING:
         logger.debug(f'start_basic_solver: returning because solution {solution.pk} is in status {solution.status}')
+        return
+
+    if settings.TESTING:
         return
 
     SolutionService(solution).start_basic_solver()
