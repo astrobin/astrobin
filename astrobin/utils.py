@@ -341,6 +341,13 @@ def ra_minutes_to_degrees(minutes: float) -> float:
     """
     return minutes * 0.25
 
+def ra_degrees_to_minutes(degrees: float) -> float:
+    """
+    Convert Right Ascension degrees to minutes.
+    1 degree of RA = 4 minutes.
+    """
+    return degrees * 4
+
 
 def decimal_to_hours_minutes_seconds(value):
     if value is None:

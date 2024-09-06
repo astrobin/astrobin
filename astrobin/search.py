@@ -21,6 +21,7 @@ from common.services.search_service import CustomContain, MatchType, SearchServi
 from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
 from .models import Image
+from .utils import ra_degrees_to_minutes
 
 FIELDS = (
     # Filtering
@@ -546,8 +547,8 @@ class AstroBinSearchView(SearchView):
         ):
             params['coords'] = {
                 'ra': {
-                    'min': params.pop('coord_ra_min')[0],
-                    'max': params.pop('coord_ra_max')[0]
+                    'min': ra_degrees_to_minutes(float(params.pop('coord_ra_min')[0])),
+                    'max': ra_degrees_to_minutes(float(params.pop('coord_ra_max')[0]))
                 },
                 'dec': {
                     'min': params.pop('coord_dec_min')[0],
