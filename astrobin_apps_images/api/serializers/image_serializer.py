@@ -37,7 +37,7 @@ from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
 from astrobin_apps_images.api.serializers import ImageRevisionSerializer
 from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import DeepSkyAcquisitionSerializer
 from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
-from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
+from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from common.serializers import AvatarField, UserSerializer
 
@@ -84,6 +84,7 @@ class ImageSerializer(serializers.ModelSerializer):
     location_objects = LocationSerializer(source="locations", many=True, read_only=True)
     collaborators = UserSerializer(many=True, read_only=True)
     iotd_date = serializers.DateField(source="iotd.date", read_only=True)
+    is_iotd = serializers.SerializerMethodField(read_only=True)
     is_top_pick = serializers.SerializerMethodField(read_only=True)
     is_top_pick_nomination = serializers.SerializerMethodField(read_only=True)
     view_count = serializers.SerializerMethodField(read_only=True)
@@ -202,11 +203,14 @@ class ImageSerializer(serializers.ModelSerializer):
     def get_user_follower_count(self, obj):
         return obj.user.userprofile.followers_count
 
+    def get_is_iotd(self, obj):
+        return IotdService().is_iotd(obj) and obj.iotd.date >= datetime.now().date()
+
     def get_is_top_pick(self, obj):
-        return TopPickArchive.objects.filter(image=obj).exists()
+        return IotdService().is_top_pick(obj)
 
     def get_is_top_pick_nomination(self, obj):
-        return TopPickNominationsArchive.objects.filter(image=obj).exists()
+        return IotdService().is_top_pick_nomination(obj)
 
     def get_view_count(self, obj):
         return HitCount.objects.get_for_object(obj).hits
@@ -304,6 +308,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'uploader_upload_length',
             'uploader_name',
             'iotd_date',
+            'is_iotd',
             'is_top_pick',
             'is_top_pick_nomination',
             'view_count',
