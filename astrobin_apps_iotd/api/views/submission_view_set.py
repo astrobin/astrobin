@@ -15,7 +15,7 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
 from astrobin_apps_iotd.api.serializers.submission_serializer import SubmissionSerializer
-from astrobin_apps_iotd.models import IotdSubmission
+from astrobin_apps_iotd.models import IotdSubmission, IotdSubmitterSeenImage
 from common.constants import GroupName
 from common.permissions import is_group_member
 
@@ -37,7 +37,15 @@ class SubmissionViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         try:
-            return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
+            result = super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
+            try:
+                IotdSubmitterSeenImage.objects.get_or_create(
+                    submitter=request.user,
+                    image=result.data.get("image"),
+                )
+            except:
+                log.error(f"Error creating IotdSubmitterSeenImage when creating IotdSubmission for user {request.user}")
+            return result
         except ValidationError as e:
             log.error(f"ValidationError with user {request.user} creating IotdSubmission: " + str(e))
             return HttpResponseForbidden(e.messages)
