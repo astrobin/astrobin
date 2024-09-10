@@ -110,4 +110,7 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'solution',
             'mouse_hover_image',
             'square_cropping',
+            'loop_video',
+            'video_file',
+            'encoded_video_file',
         )
