@@ -571,7 +571,8 @@ class ImageService:
             # Make the image final.
             Image.objects.filter(pk=self.image.pk).update(
                 is_final=True,
-                updated=now
+                final_gallery_thumbnail=self.image.thumbnail('gallery', '0', sync=True),
+                updated = now,
             )
         else:
             # Make any other revision not final.
@@ -598,6 +599,7 @@ class ImageService:
                 is_final=True
             ).update(
                 is_final=False,
+                final_gallery_thumbnail=self.image.thumbnail('gallery', revision_label, sync=True),
                 updated=now
             )
 

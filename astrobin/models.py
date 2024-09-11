@@ -1669,7 +1669,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return options
 
-    def thumbnail_raw(self, alias: str, revision_label: str, **kwargs) -> Optional[ThumbnailFile]:
+    def thumbnail_raw(self, alias: str, revision_label: Optional[str], **kwargs) -> Optional[ThumbnailFile]:
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
