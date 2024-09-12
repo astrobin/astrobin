@@ -15,13 +15,18 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import base
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from rest_framework import generics, permissions
+from rest_framework import generics
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
+from rest_framework.views import APIView
 
 from astrobin_apps_platesolving.api_filters.advanced_task_filter import AdvancedTaskFilter
 from astrobin_apps_platesolving.api_filters.solution_list_filter import SolutionListFilter
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, PlateSolvingAdvancedTask, Solution
+from astrobin_apps_platesolving.permissions.is_solution_target_owner_or_readonly import IsSolutionTargetOwnerOrReadOnly
 from astrobin_apps_platesolving.serializers import AdvancedTaskSerializer, SolutionSerializer
+from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.utils import corrected_pixscale
 from common.permissions import ReadOnly
@@ -184,7 +189,7 @@ class SolutionList(generics.ListCreateAPIView):
     model = Solution
     queryset = Solution.objects.order_by('pk')
     serializer_class = SolutionSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsSolutionTargetOwnerOrReadOnly,)
     filter_class = SolutionListFilter
     pagination_class = None
 
@@ -201,8 +206,18 @@ class SolutionList(generics.ListCreateAPIView):
 class SolutionDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Solution
     serializer_class = SolutionSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsSolutionTargetOwnerOrReadOnly,)
     queryset = Solution.objects.all()
+
+
+class SolutionRestartView(APIView):
+    permission_classes = (IsSolutionTargetOwnerOrReadOnly,)
+
+    def patch(self, request, pk):
+        solution = Solution.objects.get(pk=pk)
+        SolutionService(solution).restart()
+        solution.refresh_from_db()
+        return Response(SolutionSerializer(solution).data, status=HTTP_200_OK)
 
 
 class AdvancedTaskList(generics.ListAPIView):
