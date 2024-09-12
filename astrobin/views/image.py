@@ -145,7 +145,7 @@ class ImageRemoveAsCollaboratorView(
         if self.request.user not in image.collaborators.all():
             messages.error(self.request, _("You are not a collaborator to this image."))
 
-        ImageService(image).remove_as_collaborator(self.request.user)
+        ImageService(image).remove_collaborator(self.request.user, self.request.user)
 
         messages.success(self.request, _("You have been removed as a collaborator to this image."))
 
@@ -1448,34 +1448,16 @@ class ImageMarketplaceFragment(View):
 
 class ImageCollaboratorRequestAccept(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
-        id: Union[str, int] = self.kwargs.get('id')
-        image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
+        image_id: Union[str, int] = self.kwargs.get('id')
+        image: Image = ImageService.get_object(image_id, Image.objects_including_wip_plain)
 
         if image is None:
             raise Http404
 
-        if not image.pending_collaborators.filter(pk=request.user.pk).exists():
-            return HttpResponseBadRequest()
-
-        if image.collaborators.filter(pk=request.user.pk).exists():
-            return HttpResponseBadRequest()
-
-        image.collaborators.add(request.user)
-        image.save(keep_deleted=True)  # To invalidate the cache
-
-        thumb = image.thumbnail_raw('gallery', None, sync=True)
-
-        push_notification(
-            [image.user],
-            request.user,
-            'accepted_collaboration_request',
-            {
-                'preheader': image.title,
-                'image': image,
-                'user': request.user,
-                'image_thumbnail': thumb.url if thumb else None,
-            }
-        )
+        try:
+            ImageService(image).accept_collaborator_request(request.user)
+        except Exception as e:
+            return HttpResponseBadRequest(str(e))
 
         messages.success(request, _("You are now a collaborator on this image!"))
 
@@ -1484,31 +1466,16 @@ class ImageCollaboratorRequestAccept(LoginRequiredMixin, View):
 
 class ImageCollaboratorRequestDeny(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
-        id: Union[str, int] = self.kwargs.get('id')
-        image: Image = ImageService.get_object(id, Image.objects_including_wip_plain)
+        image_id: Union[str, int] = self.kwargs.get('id')
+        image: Image = ImageService.get_object(image_id, Image.objects_including_wip_plain)
 
         if image is None:
             raise Http404
 
-        if not image.pending_collaborators.filter(pk=request.user.pk).exists():
-            return HttpResponseBadRequest()
-
-        image.pending_collaborators.remove(request.user)
-        image.save(keep_deleted=True)  # To invalidate the cache
-
-        thumb = image.thumbnail_raw('gallery', None, sync=True)
-
-        push_notification(
-            [image.user],
-            request.user,
-            'denied_collaboration_request',
-            {
-                'preheader': image.title,
-                'image': image,
-                'user': request.user,
-                'image_thumbnail': thumb.url if thumb else None,
-            }
-        )
+        try:
+            ImageService(image).deny_collaborator_request(request.user)
+        except Exception as e:
+            return HttpResponseBadRequest(str(e))
 
         messages.success(request, _("Collaborator request denied."))
 

@@ -498,23 +498,6 @@ class ImageService:
         for revision in self.get_revisions().iterator():
             revision.thumbnail_invalidate()
 
-    def remove_as_collaborator(self, user: User):
-        self.image.collaborators.remove(user)
-
-        thumb = self.image.thumbnail_raw('gallery', None, sync=True)
-
-        push_notification(
-            [self.image.user],
-            user,
-            'removed_self_as_collaborator',
-            {
-                'user': user,
-                'preheader': self.image.title,
-                'image': self.image,
-                'image_thumbnail': thumb.url if thumb else None,
-            }
-        )
-
     def get_error_thumbnail(self, revision_label, alias):
         w, h = self.image.w, self.image.h
         thumb_w, thumb_h = w, h
@@ -1134,6 +1117,84 @@ class ImageService:
             return _do_download(image.thumbnail(version, revision_label, sync=True))
 
         raise FileNotFoundError
+
+    def accept_collaborator_request(self, user: User):
+        if user == self.image.user:
+            raise Exception('User is the owner of the image')
+
+        if user not in self.image.pending_collaborators.all():
+            raise Exception('User is not a pending collaborator')
+
+        if user in self.image.collaborators.all():
+            raise Exception('User is already a collaborator')
+
+        self.image.collaborators.add(user)
+        self.image.save(keep_deleted=True)  # To invalidate the cache
+
+        thumb = self.image.thumbnail_raw('gallery', None, sync=True)
+
+        push_notification(
+            [self.image.user],
+            user,
+            'accepted_collaboration_request',
+            {
+                'preheader': self.image.title,
+                'image': self.image,
+                'user': user,
+                'image_thumbnail': thumb.url if thumb else None,
+            }
+        )
+
+    def deny_collaborator_request(self, user: User):
+        if user == self.image.user:
+            raise Exception('User is the owner of the image')
+
+        if user not in self.image.pending_collaborators.all():
+            raise Exception('User is not a pending collaborator')
+
+        self.image.pending_collaborators.remove(user)
+        self.image.save(keep_deleted=True)  # To invalidate the cache
+
+        thumb = self.image.thumbnail_raw('gallery', None, sync=True)
+
+        push_notification(
+            [self.image.user],
+            user,
+            'denied_collaboration_request',
+            {
+                'preheader': self.image.title,
+                'image': self.image,
+                'user': user,
+                'image_thumbnail': thumb.url if thumb else None,
+            }
+        )
+
+    def remove_collaborator(self, requester: User, user: User):
+        if user == self.image.user:
+            raise Exception('User is the owner of the image')
+
+        if user not in self.image.collaborators.all():
+            raise Exception('User is not a collaborator')
+
+        if requester != self.image.user and requester not in self.image.collaborators.all():
+            raise Exception('Requester is not the owner of the image or a collaborator')
+
+        self.image.collaborators.remove(user)
+        self.image.pending_collaborators.remove(user)
+
+        thumb = self.image.thumbnail_raw('gallery', None, sync=True)
+
+        push_notification(
+            [self.image.user],
+            user,
+            'removed_self_as_collaborator',
+            {
+                'user': user,
+                'preheader': self.image.title,
+                'image': self.image,
+                'image_thumbnail': thumb.url if thumb else None,
+            }
+        )
 
     @staticmethod
     def get_constellation(solution):
