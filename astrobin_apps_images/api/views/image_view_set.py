@@ -308,3 +308,66 @@ class ImageViewSet(
         image.refresh_from_db()
         serializer = self.get_serializer(image)
         return Response(serializer.data, HTTP_200_OK)
+
+    @action(detail=True, methods=['patch'], url_path='accept-collaborator-request')
+    def accept_collaborator_request(self, request, pk=None):
+        image: Image = self.get_object()
+        collaborator_id = request.data.get('user_id', None)
+
+        if collaborator_id is None:
+            return Response("user_id not provided", HTTP_400_BAD_REQUEST)
+
+        collaborator = get_object_or_None(User, id=collaborator_id)
+
+        if collaborator is None:
+            return Response("User not found", HTTP_404_NOT_FOUND)
+
+        try:
+            ImageService(image).accept_collaborator_request(collaborator)
+        except Exception as e:
+            return Response(str(e), HTTP_400_BAD_REQUEST)
+
+        serializer = self.get_serializer(image)
+        return Response(serializer.data, HTTP_200_OK)
+
+    @action(detail=True, methods=['patch'], url_path='deny-collaborator-request')
+    def deny_collaborator_request(self, request, pk=None):
+        image: Image = self.get_object()
+        collaborator_id = request.data.get('user_id', None)
+
+        if collaborator_id is None:
+            return Response("user_id not provided", HTTP_400_BAD_REQUEST)
+
+        collaborator = get_object_or_None(User, id=collaborator_id)
+
+        if collaborator is None:
+            return Response("User not found", HTTP_404_NOT_FOUND)
+
+        try:
+            ImageService(image).deny_collaborator_request(collaborator)
+        except Exception as e:
+            return Response(str(e), HTTP_400_BAD_REQUEST)
+
+        serializer = self.get_serializer(image)
+        return Response(serializer.data, HTTP_200_OK)
+
+    @action(detail=True, methods=['patch'], url_path='remove-collaborator')
+    def remove_collaborator(self, request, pk=None):
+        image: Image = self.get_object()
+        collaborator_id = request.data.get('user_id', None)
+
+        if collaborator_id is None:
+            return Response("user_id not provided", HTTP_400_BAD_REQUEST)
+
+        collaborator = get_object_or_None(User, id=collaborator_id)
+
+        if collaborator is None:
+            return Response("User not found", HTTP_404_NOT_FOUND)
+
+        try:
+            ImageService(image).remove_collaborator(request.user, collaborator)
+        except Exception as e:
+            return Response(str(e), HTTP_400_BAD_REQUEST)
+
+        serializer = self.get_serializer(image)
+        return Response(serializer.data, HTTP_200_OK)
