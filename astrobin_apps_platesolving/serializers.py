@@ -4,7 +4,10 @@ from annoying.functions import get_object_or_None
 from rest_framework import serializers
 
 from astrobin.services.utils_service import UtilsService
-from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution, PlateSolvingAdvancedTask
+from astrobin_apps_platesolving.models import (
+    PlateSolvingAdvancedLiveLogEntry, PlateSolvingAdvancedSettings, PlateSolvingSettings, Solution,
+    PlateSolvingAdvancedTask,
+)
 
 
 # DEPRECATION NOTE:
@@ -83,3 +86,26 @@ class AdvancedTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlateSolvingAdvancedTask
         fields = '__all__'
+
+
+class PlateSolvingSettingsBaseSerializer(serializers.ModelSerializer):
+    solution = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        fields = '__all__'
+
+
+class PlateSolvingSettingsSerializer(PlateSolvingSettingsBaseSerializer):
+    class Meta(PlateSolvingSettingsBaseSerializer.Meta):
+        model = PlateSolvingSettings
+
+
+class PlateSolvingAdvancedSettingsSerializer(PlateSolvingSettingsBaseSerializer):
+    class Meta(PlateSolvingSettingsBaseSerializer.Meta):
+        model = PlateSolvingAdvancedSettings
+
+
+class PlateSolvingAdvancedSettingsSampleRawFrameFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlateSolvingAdvancedSettings
+        fields = ('sample_raw_frame_file',)
