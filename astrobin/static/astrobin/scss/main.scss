@@ -1227,6 +1227,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       border-radius: .5rem;
       box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
     }
+
+    img[src*="/precise_bbcode/smilies"] {
+      height: 1.25rem;
+      vertical-align: bottom;
+    }
   }
 }
 
