@@ -9,7 +9,7 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
-from astrobin_apps_platesolving.permissions.is_solution_target_owner_or_readonly import IsSolutionTargetOwnerOrReadOnly
+from astrobin_apps_platesolving.permissions.is_settings_solution_target_owner_or_readonly import IsSettingsSolutionTargetOwnerOrReadOnly
 from astrobin_apps_platesolving.serializers import (
     PlateSolvingAdvancedSettingsSampleRawFrameFileSerializer, PlateSolvingAdvancedSettingsSerializer,
     PlateSolvingSettingsSerializer,
@@ -22,7 +22,7 @@ class PlateSolvingSettingsBaseViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     parser_classes = (CamelCaseJSONParser,)
     renderer_classes = (BrowsableAPIRenderer, CamelCaseJSONRenderer,)
-    permission_classes = [IsSolutionTargetOwnerOrReadOnly]
+    permission_classes = [IsSettingsSolutionTargetOwnerOrReadOnly]
 
     def get_queryset(self):
         solution_id = self.request.query_params.get('solution', None)

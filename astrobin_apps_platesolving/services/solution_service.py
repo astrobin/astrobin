@@ -12,6 +12,7 @@ from django.core.files.temp import NamedTemporaryFile
 from django.db import IntegrityError
 from django.db.models import QuerySet
 from django.urls import reverse
+from django.utils import timezone
 
 from astrobin.models import DeepSky_Acquisition, Image, ImageRevision, Location
 from astrobin.services.utils_service import UtilsService
@@ -306,6 +307,20 @@ class SolutionService:
 
         self.solution.status = status
         self.solution.save()
+
+    def restart(self):
+        self.solution.clear()
+        target = self.solution.content_object
+
+        if hasattr(target, 'updated'):
+            model = self.solution.content_type.model_class()
+            if model.__name__ == 'Image':
+                Image.objects_including_wip.filter(pk=target.pk).update(updated=timezone.now())
+            elif model.__name__ == 'ImageRevision':
+                Image.objects_including_wip.filter(pk=target.image.pk).update(updated=timezone.now())
+
+        from astrobin_apps_platesolving.tasks import start_basic_solver
+        start_basic_solver.delay(content_type_id=self.solution.content_type.pk, object_id=self.solution.object_id)
 
     def get_objects_in_field(self, clean=True) -> List[str]:
         objects = []

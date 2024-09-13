@@ -988,10 +988,11 @@ def image_restart_platesolving(request, id, revision_label):
         object_id = revision.pk
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,)) + f'?t={now}'
 
-    Solution.objects.filter(content_type=content_type, object_id=object_id).delete()
-    cache.delete(f'astrobin_solution_{content_type.model}_{object_id}')
-    Image.objects_including_wip.filter(id=image.id).update(updated=timezone.now())
-    start_basic_solver.delay(content_type_id=content_type.pk, object_id=object_id)
+    try:
+        solution = Solution.objects.get(content_type=content_type, object_id=object_id)
+        SolutionService(solution).restart()
+    except Solution.DoesNotExist:
+        messages.error(request, _("Solution not found."))
 
     return HttpResponseRedirect(return_url)
 
