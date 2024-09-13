@@ -1007,14 +1007,15 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_objects_in_field(self, obj):
         def process_solution(solution):
-            result = ''
-            if solution and solution.objects_in_field:
+            if solution and (solution.objects_in_field or solution.advanced_annotations):
+                objects = SolutionService(solution).get_objects_in_field()
                 result = ' '.join(SolutionService(solution).duplicate_objects_in_field_by_catalog_space()).strip()
-                for x in solution.objects_in_field.split(','):
+                for x in objects:
                     synonyms = UtilsService.get_search_synonyms_text(x.strip())
                     if synonyms:
                         result = f'{result} {" ".join(synonyms.split(","))}'.strip()
-            return result
+                return result
+            return ""
 
         objects = process_solution(obj.solution)
 
