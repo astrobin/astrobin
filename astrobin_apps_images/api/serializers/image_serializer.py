@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from hitcount.models import HitCount
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from subscription.models import UserSubscription
 
 from astrobin.api2.serializers.accessory_serializer import AccessorySerializer
 from astrobin.api2.serializers.camera_serializer import CameraSerializer
@@ -39,6 +40,7 @@ from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import
 from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.serializers import SolutionSerializer
+from astrobin_apps_premium.services.premium_service import PremiumService
 from common.serializers import AvatarField, UserSerializer
 
 
@@ -47,6 +49,7 @@ class ImageSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
     user_display_name = serializers.CharField(source='user.userprofile.get_display_name', read_only=True)
     user_avatar = AvatarField(source='user', read_only=True)
+    allow_ads = serializers.SerializerMethodField(read_only=True)
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
     h = serializers.IntegerField()
@@ -196,6 +199,12 @@ class ImageSerializer(serializers.ModelSerializer):
 
         return pending_collaborators
 
+    def get_allow_ads(self, obj: Image):
+        valid_usersubscription: UserSubscription = PremiumService(obj.user).get_valid_usersubscription()
+        is_ultimate: bool = valid_usersubscription and PremiumService.is_any_ultimate(valid_usersubscription)
+        allow_ads = obj.user.userprofile.allow_astronomy_ads
+        return allow_ads or not is_ultimate
+
     def get_revisions(self, obj):
         revisions = obj.revisions.filter(deleted__isnull=True)
         return ImageRevisionSerializer(revisions, many=True, context=self.context).data
@@ -237,6 +246,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'username',
             'user_display_name',
             'user_avatar',
+            'allow_ads',
             'pending_collaborators',
             'collaborators',
             'hash',
