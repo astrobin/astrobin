@@ -173,7 +173,7 @@ gcl 1,c 106,ngc 104,caldwell 106
 gcl 40,caldwell 107,c 107,ngc 6101
 c 108,gcl 19,ngc 4372,caldwell 108
 c 109,ngc 3195,caldwell 109
-ngc 7635,bubble nebula,lbn 548,ngc 4874,sharpless 162,sh 2 162
+ngc 7635,bubble nebula,lbn 548,sharpless 162,sh 2 162
 caldwell 12,ugc 11597,ngc 6946,c 12,ngc 4872
 owl cluster,c 13,et cluster,ocl 321,ngc 457,caldwell 13
 h persei cluster,ngc 869,ocl 353,chi persei cluster,ocl 350,ngc 884
