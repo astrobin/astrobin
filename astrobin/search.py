@@ -576,7 +576,7 @@ class AstroBinSearchView(SearchView):
         return params
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.userprofile.enable_new_search_experience:
+        if not request.user.is_authenticated or request.user.userprofile.enable_new_search_experience:
             translated_params = AstroBinSearchView.translate_params(request.GET)
             encoded_params = AstroBinSearchView.encode_query_params(translated_params)
             return redirect(AppRedirectionService.redirect('/search') + f'?p={encoded_params}')
