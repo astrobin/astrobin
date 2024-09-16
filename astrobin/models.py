@@ -2121,10 +2121,24 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         UserProfile.all_objects.filter(pk=self.image.user.pk).update(updated=timezone.now())
 
         if self.image.solution and self.image.solution.settings:
-            solution, created = Solution.objects.get_or_create(
-                content_type=ContentType.objects.get_for_model(ImageRevision),
-                object_id=self.pk
-            )
+            revision_ct = ContentType.objects.get_for_model(ImageRevision)
+            try:
+                solution, created = Solution.objects.get_or_create(
+                    content_type=revision_ct,
+                    object_id=self.pk
+                )
+            except Solution.MultipleObjectsReturned:
+                solution = Solution.objects.filter(
+                    content_type=revision_ct,
+                    object_id=self.pk
+                ).first()
+                Solution.objects.filter(
+                    content_type=revision_ct,
+                    object_id=self.pk
+                ).exclude(
+                    pk=solution.pk
+                ).delete()
+
             if not solution.settings:
                 settings_: PlateSolvingSettings = self.image.solution.settings
                 settings_.pk = None
