@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+from decimal import InvalidOperation
 from typing import Optional
 
 import simplejson
@@ -7,6 +8,7 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.db import IntegrityError
 from django.db.models import Count, Value
 from django.db.models.functions import Concat
 from django.utils.translation import gettext_lazy
@@ -86,7 +88,10 @@ class ImageViewSet(
             # Update the m2m relationship
             m2m_relation = getattr(instance, klass[0])
             for obj in objs_to_add:
-                m2m_relation.add(obj)
+                try:
+                    m2m_relation.add(obj)
+                except IntegrityError:
+                    pass
             for obj in objs_to_remove:
                 m2m_relation.remove(obj)
 
@@ -122,6 +127,12 @@ class ImageViewSet(
                 del data['id']
             try:
                 DeepSky_Acquisition.objects.create(**data)
+            except ValueError as e:
+                data_str = simplejson.dumps(data, default=str)
+                logger.error(f"Error creating DeepSky_Acquisition: {e}. Data: {data_str}")
+            except InvalidOperation as e:
+                data_str = simplejson.dumps(data, default=str)
+                logger.error(f"Error creating DeepSky_Acquisition: {e}. Data: {data_str}")
             except Exception as e:
                 data_str = simplejson.dumps(data, default=str)
                 logger.error(f"Error creating DeepSky_Acquisition: {e}. Data: {data_str}")
