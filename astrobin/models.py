@@ -2801,6 +2801,13 @@ class UserProfile(SafeDeleteModel):
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
 
+    gallery_header_image = models.CharField(
+        max_length=512,
+        editable=False,
+        null=True,
+        blank=True,
+    )
+
     exclude_from_competitions = models.BooleanField(
         default=False,
         verbose_name=_("I want to be excluded from competitions"),

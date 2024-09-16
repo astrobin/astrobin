@@ -57,6 +57,7 @@ class ImageSearchSerializer(HaystackSerializer):
             'published',
             'title',
             'description',
+            'square_cropping',
 
             'all_sensors',
             'imaging_sensors',
