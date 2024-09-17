@@ -4,35 +4,31 @@
 {% load bootstrap_toolkit %}
 
 {% if request.user.is_authenticated and request.user.userprofile.detected_insecure_password is not None %}
-    <div class="accordion container" id="insecure-password-accordion">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
-                   data-parent="#insecure-password-accordion" href="#insecure-password-accordion-content">
-                    <i class="icon-warning-sign"></i>
-                    {% blocktrans trimmed %}
-                        AstroBin detected that your password does not meet security requirements.
-                    {% endblocktrans %}
+    <div class="container alert alert-warning global-alert">
+        <div class="alert-heading">
+            <h3>
+                {% blocktrans trimmed %}
+                    AstroBin detected that your password does not meet security requirements.
+                {% endblocktrans %}
+            </h3>
+        </div>
+
+        <div class="alert-body">
+            <p>
+                Accounts with an insecure password pose a threat to the entire community as they are at risk of being
+                compromised.
+
+                Change your password <strong>NOW</strong> to avoid being locked out of your account.
+            </p>
+
+            <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem;">
+                <a class="btn btn-primary m-0" href="{{ base_url }}{% url 'password_change' %}">
+                    {% blocktrans trimmed %}Change your password{% endblocktrans %}<br/>
                 </a>
-            </div>
-            <div id="insecure-password-accordion-content" class="accordion-body collapse">
-                <div class="accordion-inner alert alert-info global-alert">
-                    {% blocktrans trimmed %}
-                        To prevent spam, phishing, and other malicious activities, all your new content posted on
-                        AstroBin will be moderated until you have changed your password to meet security requirements,
-                        or you have enabled two-factor authentication.
-                    {% endblocktrans %}
-
-                    <div>
-                        <a class="btn btn-primary" href="{{ base_url }}{% url 'password_change' %}">
-                            {% blocktrans trimmed %}Change your password{% endblocktrans %}<br/>
-                        </a>
-
-                        <a class="btn btn-secondary" href="{{ base_url }}{% url 'two_factor:profile' %}">
-                            {% trans "Two-factor Authentication" %}
-                        </a>
-                    </div>
-                </div>
+            
+                <a href="https://welcome.astrobin.com/features/security" target="_blank" rel="noopener">
+                    {% blocktrans trimmed %}Learn more{% endblocktrans %}
+                </a>
             </div>
         </div>
     </div>
