@@ -29,6 +29,7 @@ from astrobin_apps_equipment.models import Filter
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
+from astrobin_apps_images.api.serializers.image_serializer_gallery import ImageSerializerGallery
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
@@ -163,6 +164,12 @@ class ImageViewSet(
                 self.request.query_params.get('skip-thumbnails').lower() in ('true', '1')
         ):
             return ImageSerializerSkipThumbnails
+
+        if (
+            'gallery-serializer' in self.request.query_params and
+            self.request.query_params.get('gallery-serializer').lower() in ('true', '1')
+        ):
+            return ImageSerializerGallery
 
         return ImageSerializer
 
