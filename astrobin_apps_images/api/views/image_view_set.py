@@ -196,6 +196,9 @@ class ImageViewSet(
         if 'hash' in self.request.query_params:
             return queryset.filter(hash=self.request.query_params.get('hash'))
 
+        if 'pk' in self.kwargs:
+            return queryset.filter(pk=self.kwargs['pk'])
+
         if (
                 self.request.query_params.get('include-staging-area') and
                 self.request.query_params.get('include-staging-area').lower() == 'true'
