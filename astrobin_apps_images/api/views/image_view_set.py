@@ -190,18 +190,6 @@ class ImageViewSet(
                 num_solarsystem_acquisitions__gt=0
             )
 
-        requested_user = self.request.query_params.get('user')
-        request_user = self.request.user
-        request_user_is_requested_user_or_superuser = (
-                requested_user and
-                requested_user.isdigit() and
-                request_user.is_authenticated and
-                (
-                        requested_user == str(request_user.pk) or
-                        request_user.is_superuser
-                )
-        )
-
         # Having a hash in the request means we want to retrieve a single image by hash. This should work even if the
         # image is in the staging area, so we act like the retrieval method. This makes the ImageFilter 'hash' field
         # redundant, but we keep it for consistency.

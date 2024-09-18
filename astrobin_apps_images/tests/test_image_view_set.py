@@ -23,7 +23,7 @@ class TestImageViewSet(APITestCase):
         self.assertEqual(response.data.get("count"), 0)
 
     def test_list_including_wip_image_without_user(self):
-        image = Generators.image(is_wip=True)
+        Generators.image(is_wip=True)
         response = self.client.get(f'/api/v2/images/image/?include-staging-area=true')
         self.assertEqual(response.status_code, 400)
 

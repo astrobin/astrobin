@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from astrobin.models import Image
-from astrobin_apps_images.api.serializers import ImageRevisionSerializer, ImageSerializer
+from astrobin_apps_images.api.serializers import ImageSerializer
 from astrobin_apps_images.api.serializers.image_revision_gallery_serializer import ImageRevisionGallerySerializer
 
 
