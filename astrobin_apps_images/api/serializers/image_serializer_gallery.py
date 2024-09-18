@@ -35,6 +35,7 @@ class ImageSerializerGallery(ImageSerializer):
             'pk',
             'hash',
             'title',
+            'is_wip',
             'w',
             'h',
             'square_cropping',
