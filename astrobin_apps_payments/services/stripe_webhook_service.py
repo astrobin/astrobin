@@ -336,6 +336,10 @@ class StripeWebhookService(object):
                 stripe.api_key = settings.STRIPE['keys']['secret']
                 stripe.Subscription.modify(overdue_subscription.id, pause_collection={'behavior': 'mark_uncollectible'})
                 stripe.Subscription.cancel(overdue_subscription.id)
+
+                if hasattr(overdue_subscription, 'latest_invoice') and overdue_subscription.latest_invoice:
+                    stripe.Invoice.void_invoice(overdue_subscription.latest_invoice)
+                    stripe.Invoice.mark_uncollectible(overdue_subscription.latest_invoice)
         except StripeError as e:
             log.exception(f"stripe_webhook: unable to cancel overdue subscriptions for {session['customer']}: {str(e)}")
         except Exception as e:
