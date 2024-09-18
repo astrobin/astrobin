@@ -165,4 +165,10 @@ class TestImageViewSet(APITestCase):
         response = self.client.get(f'/api/v2/images/image/?only-staging-area=true&user={image.user.id}')
         self.assertEqual(response.status_code, 403)
 
-
+    def test_list_by_user(self):
+        image1 = Generators.image()
+        Generators.image()
+        response = self.client.get(f'/api/v2/images/image/?user={image1.user.id}')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 1)
+        self.assertEqual(response.data.get("results")[0].get("pk"), image1.pk)

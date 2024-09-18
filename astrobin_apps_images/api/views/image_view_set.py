@@ -215,12 +215,12 @@ class ImageViewSet(
         requested_user = request.query_params.get('user')
         request_user = request.user
         request_user_is_requested_user_or_superuser = (
-            requested_user and
-            requested_user.isdigit() and
-            request_user.is_authenticated and (
-                requested_user == str(request_user.pk) or
-                request_user.is_superuser
-            )
+                requested_user and
+                requested_user.isdigit() and
+                request_user.is_authenticated and (
+                        requested_user == str(request_user.pk) or
+                        request_user.is_superuser
+                )
         )
 
         # Handle case where 'include-staging-area' is set but 'user' parameter is missing
@@ -252,14 +252,7 @@ class ImageViewSet(
             )
 
         # Proceed with the default list behavior
-        queryset = self.get_queryset()
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return super().list(request, *args, **kwargs)
 
     def retrieve(self, request, *args, **kwargs):
         # Retrieving an image by PK should work even if the image is in the staging area.
