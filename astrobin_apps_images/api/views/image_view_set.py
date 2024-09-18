@@ -166,8 +166,8 @@ class ImageViewSet(
             return ImageSerializerSkipThumbnails
 
         if (
-            'gallery-serializer' in self.request.query_params and
-            self.request.query_params.get('gallery-serializer').lower() in ('true', '1')
+                'gallery-serializer' in self.request.query_params and
+                self.request.query_params.get('gallery-serializer').lower() in ('true', '1')
         ):
             return ImageSerializerGallery
 
@@ -189,6 +189,25 @@ class ImageViewSet(
             ).filter(
                 num_solarsystem_acquisitions__gt=0
             )
+
+        if self.request.query_params.get('staging') == 'true':
+            if self.request.query_params.get('hash'):
+                raise ValidationError("Do not use 'hash' with 'staging'")
+            requested_user = self.request.query_params.get('user')
+            if (
+                    requested_user and
+                    requested_user.isdigit() and
+                    self.request.user.is_authenticated and
+                    (
+                            requested_user == str(self.request.user.pk) or
+                            self.request.user.is_superuser
+                    )
+            ):
+                queryset = queryset.filter(is_wip=True)
+            else:
+                queryset = queryset.none()
+        elif 'hash' not in self.request.query_params:
+            queryset = queryset.filter(is_wip=False)
 
         return queryset
 
