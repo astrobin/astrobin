@@ -49,7 +49,8 @@ class Generators:
         user = User.objects.create_user(
             email=kwargs.pop('email', "%s@%s.com" % (Generators.random_string(), Generators.random_string())),
             username=kwargs.pop('username', Generators.random_string()),
-            password=kwargs.pop('password', 'password')
+            password=kwargs.pop('password', 'password'),
+            is_superuser=kwargs.pop('is_superuser', False),
         )
 
         group_names = kwargs.pop('groups', [])

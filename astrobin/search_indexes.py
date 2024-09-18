@@ -473,6 +473,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     description = CharField(null=True)
     published = DateTimeField(model_attr='published')
     uploaded = DateTimeField(model_attr='uploaded')
+    square_cropping = CharField()
 
     # Old DB
     imaging_telescopes = CharField()
@@ -632,6 +633,10 @@ class ImageIndex(CelerySearchIndex, Indexable):
         if obj.description_bbcode:
             return striptags(bbcode(obj.description_bbcode))
         return striptags(obj.description)
+
+    def prepare_square_cropping(self, obj):
+        final_revision = ImageService(obj).get_final_revision()
+        return final_revision.square_cropping
 
     ###################################################################################################################
     ###################################################################################################################
