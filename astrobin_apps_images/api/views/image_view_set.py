@@ -20,7 +20,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.viewsets import GenericViewSet
 
@@ -190,26 +190,98 @@ class ImageViewSet(
                 num_solarsystem_acquisitions__gt=0
             )
 
-        if self.request.query_params.get('staging') == 'true':
-            if self.request.query_params.get('hash'):
-                raise ValidationError("Do not use 'hash' with 'staging'")
-            requested_user = self.request.query_params.get('user')
-            if (
-                    requested_user and
-                    requested_user.isdigit() and
-                    self.request.user.is_authenticated and
-                    (
-                            requested_user == str(self.request.user.pk) or
-                            self.request.user.is_superuser
-                    )
-            ):
-                queryset = queryset.filter(is_wip=True)
-            else:
-                queryset = queryset.none()
-        elif 'hash' not in self.request.query_params:
-            queryset = queryset.filter(is_wip=False)
+        requested_user = self.request.query_params.get('user')
+        request_user = self.request.user
+        request_user_is_requested_user_or_superuser = (
+                requested_user and
+                requested_user.isdigit() and
+                request_user.is_authenticated and
+                (
+                        requested_user == str(request_user.pk) or
+                        request_user.is_superuser
+                )
+        )
 
-        return queryset
+        # Having a hash in the request means we want to retrieve a single image by hash. This should work even if the
+        # image is in the staging area, so we act like the retrieval method. This makes the ImageFilter 'hash' field
+        # redundant, but we keep it for consistency.
+        if 'hash' in self.request.query_params:
+            return queryset.filter(hash=self.request.query_params.get('hash'))
+
+        if (
+                self.request.query_params.get('include-staging-area') and
+                self.request.query_params.get('include-staging-area').lower() == 'true'
+        ):
+            return queryset
+
+        if (
+                self.request.query_params.get('only-staging-area') and
+                self.request.query_params.get('only-staging-area').lower() == 'true'
+        ):
+            return queryset.filter(is_wip=True)
+
+        return queryset.filter(is_wip=False)
+
+    def list(self, request, *args, **kwargs):
+        # Perform validation checks here before proceeding to get_queryset
+        requested_user = request.query_params.get('user')
+        request_user = request.user
+        request_user_is_requested_user_or_superuser = (
+            requested_user and
+            requested_user.isdigit() and
+            request_user.is_authenticated and (
+                requested_user == str(request_user.pk) or
+                request_user.is_superuser
+            )
+        )
+
+        # Handle case where 'include-staging-area' is set but 'user' parameter is missing
+        if request.query_params.get('include-staging-area') and not requested_user:
+            return Response(
+                "'user' parameter is required when including the staging area.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        # Handle permission error when requesting staging area for another user
+        if request.query_params.get('include-staging-area') and not request_user_is_requested_user_or_superuser:
+            return Response(
+                "You can only include the staging area for your own images or if you are a superuser.",
+                status=HTTP_403_FORBIDDEN
+            )
+
+        # Handle case where 'only-staging-area' is set but 'user' parameter is missing
+        if request.query_params.get('only-staging-area') and not requested_user:
+            return Response(
+                "'user' parameter is required when reqiestomg the staging area.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        # Handle permission error when requesting staging area for another user
+        if request.query_params.get('only-staging-area') and not request_user_is_requested_user_or_superuser:
+            return Response(
+                "You can only request the staging area for your own images or if you are a superuser.",
+                status=HTTP_403_FORBIDDEN
+            )
+
+        # Proceed with the default list behavior
+        queryset = self.get_queryset()
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, *args, **kwargs):
+        # Retrieving an image by PK should work even if the image is in the staging area.
+        instance: Image = get_object_or_None(self.queryset, pk=kwargs['pk'])
+
+        if not instance:
+            return Response(status=HTTP_404_NOT_FOUND)
+
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
     def update(self, request, *args, **kwargs):
         equipment_data = self._prepare_equipment_data(request)
