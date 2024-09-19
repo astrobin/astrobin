@@ -41,4 +41,11 @@ class ImageSerializerGallery(ImageSerializer):
             'square_cropping',
             'revisions',
             'final_gallery_thumbnail',
+            'published',
+            'uploaded',
+            'like_count',
+            'bookmark_count',
+            'comment_count',
+            'username',
+            'user_display_name',
         )
