@@ -48,4 +48,7 @@ class ImageSerializerGallery(ImageSerializer):
             'comment_count',
             'username',
             'user_display_name',
+            'is_iotd',
+            'is_top_pick',
+            'is_top_pick_nomination',
         )

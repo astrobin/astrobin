@@ -213,7 +213,7 @@ class ImageSerializer(serializers.ModelSerializer):
         return obj.user.userprofile.followers_count
 
     def get_is_iotd(self, obj):
-        return IotdService().is_iotd(obj) and obj.iotd.date >= datetime.now().date()
+        return IotdService().is_iotd(obj)
 
     def get_is_top_pick(self, obj):
         return IotdService().is_top_pick(obj)
