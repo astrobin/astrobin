@@ -12,7 +12,10 @@ from django.core.cache import cache
 from django.db.models import Count, Q
 from django.template.defaultfilters import striptags
 from haystack.constants import Indexable
-from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, IntegerField, MultiValueField
+from haystack.fields import (
+    BooleanField, CharField, DateTimeField, EdgeNgramField, FloatField, IntegerField,
+    MultiValueField,
+)
 from hitcount.models import HitCount
 from precise_bbcode.templatetags.bbcode_tags import bbcode
 from pybb.models import Post, Topic
@@ -27,7 +30,6 @@ from astrobin.models import (
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
     Camera, EquipmentItemMarketplaceListing,
-    EquipmentItemMarketplacePrivateConversation,
 )
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_images.services import ImageService
@@ -267,6 +269,8 @@ class UserIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
     username = CharField(model_attr='username')
+    display_name = EdgeNgramField()
+    avatar_url = CharField()
     exclude_from_competitions = BooleanField(model_attr='userprofile__exclude_from_competitions')
 
     avg_integration = FloatField()
@@ -309,7 +313,7 @@ class UserIndex(CelerySearchIndex, Indexable):
     # Number of bookmarks on own images
     bookmarks = IntegerField()
 
-    # Comments received on on own images
+    # Comments received on own images
     comments = IntegerField()
 
     comments_written = IntegerField()
@@ -338,6 +342,12 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def get_updated_field(self):
         return "userprofile__updated"
+
+    def prepare_display_name(self, obj: User):
+        return obj.userprofile.get_display_name()
+
+    def prepare_avatar_url(self, obj: User):
+        return avatar_url(obj, 200)
 
     def prepare_images(self, obj):
         return UserService(obj).get_public_images().count()
