@@ -1,3 +1,4 @@
+import logging
 from typing import Optional
 
 from avatar.templatetags.avatar_tags import avatar_url
@@ -15,6 +16,7 @@ from astrobin_apps_groups.api.serializers.group_serializer import GroupSerialize
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 
+log = logging.getLogger(__name__)
 
 class ContentTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -129,6 +131,20 @@ class UserProfileSerializerPrivate(UserProfileSerializer):
 
     class Meta(UserProfileSerializer.Meta):
         exclude = ()
+
+
+class UserProfileStatsSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance: UserProfile):
+        try:
+            request = self.context['request'] if 'request' in self.context else None
+            if request:
+                language = request.LANGUAGE_CODE
+            else:
+                language = 'en'
+            return UserService(instance.user).get_profile_stats(language)
+        except Exception as e:
+            log.exception(e)
+            return []
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):

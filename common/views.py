@@ -22,7 +22,8 @@ from toggleproperties.models import ToggleProperty
 from .permissions import ReadOnly
 from .serializers import (
     ContentTypeSerializer, PaymentSerializer, SubscriptionSerializer, TogglePropertySerializer,
-    UserProfileSerializer, UserProfileSerializerPrivate, UserSerializer, UserSubscriptionSerializer,
+    UserProfileSerializer, UserProfileSerializerPrivate, UserProfileStatsSerializer, UserSerializer,
+    UserSubscriptionSerializer,
 )
 from .services.caching_service import CachingService
 
@@ -170,6 +171,23 @@ class UserProfileDetail(generics.RetrieveAPIView):
         if profile.user.pk == self.request.user.pk:
             return UserProfileSerializerPrivate
         return UserProfileSerializer
+
+
+@method_decorator(
+    [
+        last_modified(CachingService.get_userprofile_detail_last_modified),
+        cache_control(private=True, no_cache=True),
+    ], name='dispatch'
+)
+class UserProfileStats(generics.RetrieveAPIView):
+    model = UserProfile
+    permission_classes = (ReadOnly,)
+    queryset = UserProfile.objects.all()
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
+
+    def get_serializer_class(self):
+        return UserProfileStatsSerializer
 
 
 @method_decorator(
