@@ -795,6 +795,7 @@ def subscription_paid(sender, **kwargs):
     UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
     PremiumService(user).clear_subscription_status_cache_keys()
     UserService(user).update_premium_counter_on_subscription(subscription)
+    UserService(user).start_platesolving_tasks()
 
     if subscription.recurrence_unit is not None:
         return

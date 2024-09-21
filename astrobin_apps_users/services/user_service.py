@@ -648,6 +648,14 @@ class UserService:
             profile.premium_counter = Image.objects_including_wip.filter(user=self.user).count()
             profile.save(keep_deleted=True)
 
+    def start_platesolving_tasks(self):
+        from astrobin_apps_platesolving.tasks import start_basic_solver
+
+        for image in self.get_all_images():
+            start_basic_solver.delay(image.pk, ContentType.objects.get_for_model(image).pk)
+            for revision in image.revisions.all():
+                start_basic_solver.delay(revision.pk, ContentType.objects.get_for_model(revision).pk)
+
     def is_in_group(self, group_name: Union[str, List[str]]) -> bool:
         if not self.user or not self.user.is_authenticated:
             return False

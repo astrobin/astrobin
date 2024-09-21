@@ -988,11 +988,8 @@ def image_restart_platesolving(request, id, revision_label):
         object_id = revision.pk
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,)) + f'?t={now}'
 
-    try:
-        solution = Solution.objects.get(content_type=content_type, object_id=object_id)
-        SolutionService(solution).restart()
-    except Solution.DoesNotExist:
-        messages.error(request, _("Solution not found."))
+    solution, _ = Solution.objects.get_or_create(content_type=content_type, object_id=object_id)
+    SolutionService(solution).restart()
 
     return HttpResponseRedirect(return_url)
 
