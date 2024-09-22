@@ -542,6 +542,7 @@ def nested_comment_post_delete(sender, instance, **kwargs):
 
 
 def toggleproperty_post_delete(sender, instance, **kwargs):
+    log.debug(f"toggleproperty_post_delete: {instance.pk}/{instance.property_type}/{instance.content_object}")
     if isinstance(instance.content_object, Image):
         ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
         compute_image_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
@@ -565,6 +566,7 @@ post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 
 
 def toggleproperty_post_save(sender, instance, created, **kwargs):
+    log.debug(f"toggleproperty_post_save: {instance.pk}/{instance.property_type}/{instance.content_object}")
     if isinstance(instance.content_object, Image):
         Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
 
