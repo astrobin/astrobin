@@ -231,10 +231,15 @@ class ImageSerializer(serializers.ModelSerializer):
 
         return sum(data) / len(data) if data else None
 
-    def get_average_moon_illumination(self, obj):
+    def get_average_moon_illumination(self, obj: Image):
         data = []
+
         for acquisition in DeepSky_Acquisition.objects.filter(image=obj, date__isnull=False).iterator():
             data.append(MoonPhase(acquisition.date).illuminated)
+
+        if len(data) == 0:
+            for acquisition in SolarSystem_Acquisition.objects.filter(image=obj, date__isnull=False).iterator():
+                data.append(MoonPhase(acquisition.date).illuminated)
 
         return sum(data) / len(data) if data else None
 
