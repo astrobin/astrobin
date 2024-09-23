@@ -543,7 +543,7 @@ def nested_comment_post_delete(sender, instance, **kwargs):
 
 def toggleproperty_post_delete(sender, instance, **kwargs):
     log.debug(f"toggleproperty_post_delete: {instance.pk}/{instance.user.username}/{instance.property_type}/{instance.content_object}")
-    if isinstance(instance.content_object, Image):
+    if isinstance(instance.content_object, Image) and not instance.content_object.deleted:
         ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
         compute_image_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
 
