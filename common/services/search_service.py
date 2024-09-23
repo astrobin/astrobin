@@ -230,7 +230,11 @@ class SearchService:
 
                 # Build the SQ object with the OR conditions
                 for entry in catalog_entries:
-                    subject_query |= SQ(objects_in_field__exact=entry)
+                    subject_query |= (
+                            SQ(objects_in_field__exact=entry) |
+                            SQ(title__icontains=entry) |
+                            SQ(title__icontains=entry.replace(' ', ''))
+                    )
 
             return subject_query
 
@@ -240,7 +244,11 @@ class SearchService:
                 if list(SearchService.find_catalog_subjects(subject)):
                     return _build_subject_query(subject)
                 else:
-                    return SQ(objects_in_field__exact=subject)
+                    return (
+                            SQ(objects_in_field__exact=subject) |
+                            SQ(title__icontains=subject) |
+                            SQ(title__icontains=subject.replace(' ', ''))
+                    )
             return SQ()
 
         def _build_multiple_subject_filters(subjects: list, match_type: str) -> SQ:
@@ -982,13 +990,13 @@ class SearchService:
                             SQ(objects_in_field=catalog_entry)
                         )
             elif image.subject_type in (
-                SubjectType.STAR_TRAILS,
-                SubjectType.NORTHERN_LIGHTS,
-                SubjectType.NOCTILUCENT_CLOUDS,
-                SubjectType.LANDSCAPE,
-                SubjectType.ARTIFICIAL_SATELLITE,
-                SubjectType.GEAR,
-                SubjectType.OTHER
+                    SubjectType.STAR_TRAILS,
+                    SubjectType.NORTHERN_LIGHTS,
+                    SubjectType.NOCTILUCENT_CLOUDS,
+                    SubjectType.LANDSCAPE,
+                    SubjectType.ARTIFICIAL_SATELLITE,
+                    SubjectType.GEAR,
+                    SubjectType.OTHER
             ):
                 results = results.filter(subject_type_char=image.subject_type)
             elif image.subject_type == SubjectType.SOLAR_SYSTEM:
