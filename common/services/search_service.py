@@ -290,7 +290,7 @@ class SearchService:
             .replace("'", '') \
             .strip()
 
-        pattern = r"(?P<catalog>Messier|M|NGC|IC|PGC|LDN|LBN|SH2_)\s?(?P<id>\d+)"
+        pattern = r"(?P<catalog>Messier|M|NGC|IC|PGC|LDN|LBN|SH2_|VDB)\s?(?P<id>\d+)"
         return re.finditer(pattern, text, re.IGNORECASE)
 
     @staticmethod

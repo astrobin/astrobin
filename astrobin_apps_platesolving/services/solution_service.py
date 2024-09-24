@@ -338,7 +338,7 @@ class SolutionService:
                 advanced_annotation = line.split(',')[-1]
 
                 if clean:
-                    regex = r"^(?P<catalog>M|NGC|IC|LDN|LBN|PGC)(?P<id>\d+)$"
+                    regex = r"^(?P<catalog>M|NGC|IC|LDN|LBN|PGC|VDB)(?P<id>\d+)$"
                     matches = re.findall(regex, advanced_annotation)
                     if len(matches) == 1:
                         catalog = matches[0][0]
@@ -353,7 +353,7 @@ class SolutionService:
     def duplicate_objects_in_field_by_catalog_space(self) -> List[str]:
         value = []
         objects = self.get_objects_in_field()
-        space_regex = r"^(?P<catalog>M|NGC|IC|PGC|LDN|LBN|PGC) (?P<id>\d+)$"
+        space_regex = r"^(?P<catalog>M|NGC|IC|PGC|LDN|LBN|PGC|VDB) (?P<id>\d+)$"
         dash_regex = r"^(?P<catalog>Sh2|TYC)(?P<id>.*)$"
 
         for obj in objects:
