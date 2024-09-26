@@ -411,11 +411,17 @@ class ImageService:
             is_free(valid_subscription)
 
     def is_platesolvable(self):
-        return \
-                (self.image.subject_type == SubjectType.DEEP_SKY) or \
-                (self.image.subject_type == SubjectType.WIDE_FIELD) or \
-                (self.image.subject_type == SubjectType.SOLAR_SYSTEM and
-                 self.image.solar_system_main_subject == SolarSystemSubject.COMET)
+        return (
+            not self.image.video_file.name and
+            (
+                    self.image.subject_type == SubjectType.DEEP_SKY or
+                    self.image.subject_type == SubjectType.WIDE_FIELD or
+                    (
+                            self.image.subject_type == SubjectType.SOLAR_SYSTEM and
+                            self.image.solar_system_main_subject == SolarSystemSubject.COMET
+                    )
+            )
+        )
 
     def is_platesolving_attempted(self):
         return self.image.solution and self.image.solution.status != Solver.MISSING
