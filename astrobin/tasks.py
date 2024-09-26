@@ -8,6 +8,7 @@ import uuid
 import zipfile
 from datetime import datetime, timedelta
 from io import StringIO
+from PIL import Image as PILImage
 from time import sleep
 from typing import List, Union
 from xml.etree.ElementTree import Element, SubElement, tostring
@@ -214,9 +215,23 @@ def generate_video_preview(object_id: int, content_type_id: int):
             temp_file = ImageService(obj).get_local_video_file()
             temp_path = temp_file.name
             video = VideoFileClip(temp_path)
+            width, height = video.size
 
+            # Check for rotation and apply it if necessary
+            if hasattr(video, 'rotation'):
+                if video.rotation in [90, 270]:
+                    # Swap width and height if the video is rotated 90 or 270 degrees
+                    width, height = height, width  # Swap dimensions
+
+            # Generate thumbnail in the middle of the video duration
             thumbnail_path = f'/astrobin-temporary-files/files/video-thumb-{content_type_id}-{object_id}-{datetime.now().timestamp()}.jpg'
             video.save_frame(thumbnail_path, t=video.duration / 2)
+
+            # Post-process the thumbnail to adjust for correct aspect ratio
+            with PILImage.open(thumbnail_path) as img:
+                img = img.resize((width, height), PILImage.LANCZOS)
+                img.save(thumbnail_path)
+
             thumbnail_file = File(open(thumbnail_path, "rb"))
             obj.image_file.save("video-thumbnail.jpg", thumbnail_file, save=False)
             obj.save(update_fields=['image_file'], keep_deleted=True)
@@ -261,7 +276,13 @@ def encode_video_file(object_id: int, content_type_id: int):
             temp_path = temp_file.name
             video = VideoFileClip(temp_path)
 
+            # Get the corrected video size
             width, height = video.size
+
+            # If the video has a 90 or 270-degree rotation, swap width and height
+            if hasattr(video, 'rotation'):
+                if video.rotation in [90, 270]:
+                    width, height = height, width
 
             resize_video = False
             if width % 2 == 1:
@@ -271,6 +292,7 @@ def encode_video_file(object_id: int, content_type_id: int):
                 height -= 1
                 resize_video = True
 
+            # Resize the video if needed
             if resize_video:
                 video = video.fx(resize.resize, newsize=(width, height))
 
