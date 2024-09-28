@@ -268,11 +268,11 @@ class SearchService:
         if subjects and isinstance(subjects, dict):
             subject_values = subjects.get("value", [])
             match_type = subjects.get("matchType", MatchType.ANY.value)
-            results = results.narrow(_build_multiple_subject_filters(subject_values, match_type))
+            results = results.filter(_build_multiple_subject_filters(subject_values, match_type))
 
         # Handle the "subject" input
         if subject:
-            results = results.narrow(_build_subject_filter(subject))
+            results = results.filter(_build_subject_filter(subject))
 
         # Handle the "q" input separately and combine using OR
         if q:
