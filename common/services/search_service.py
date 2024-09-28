@@ -233,9 +233,9 @@ class SearchService:
                 # Build the SQ object with the OR conditions
                 for x in catalog_entries:
                     subject_query |= (
-                            SQ(objects_in_field__exact=x.subject_entry) |
-                            SQ(title__icontains=x.title_entry) |
-                            SQ(title__icontains=x.title_entry.replace(' ', ''))
+                            SQ(objects_in_field__exact=x.get('subject_entry')) |
+                            SQ(title__icontains=x.get('title_entry')) |
+                            SQ(title__icontains=x.get('title_entry').replace(' ', ''))
                     )
 
             return subject_query
