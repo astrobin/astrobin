@@ -222,18 +222,20 @@ class SearchService:
                     catalog_id = groups[1]
 
                     if catalog_name == "sh2_":
-                        entry = f"{catalog_name}{catalog_id}"
+                        subject_entry = f"{catalog_name}{catalog_id}"
+                        title_entry = f"Sh2-{catalog_id}"
                     else:
-                        entry = f"{catalog_name} {catalog_id}"
+                        subject_entry = f"{catalog_name} {catalog_id}"
+                        title_entry = f"{catalog_name} {catalog_id}"
 
-                    catalog_entries.append(entry)
+                    catalog_entries.append(dict(subject_entry=subject_entry, title_entry=title_entry))
 
                 # Build the SQ object with the OR conditions
-                for entry in catalog_entries:
+                for x in catalog_entries:
                     subject_query |= (
-                            SQ(objects_in_field__exact=entry) |
-                            SQ(title__icontains=entry) |
-                            SQ(title__icontains=entry.replace(' ', ''))
+                            SQ(objects_in_field__exact=x.subject_entry) |
+                            SQ(title__icontains=x.title_entry) |
+                            SQ(title__icontains=x.title_entry.replace(' ', ''))
                     )
 
             return subject_query
@@ -290,7 +292,7 @@ class SearchService:
             .replace("'", '') \
             .strip()
 
-        pattern = r"\b(?P<catalog>Messier|M|NGC|IC|PGC|LDN|LBN|SH2_|VDB)\b\s?(?P<id>\d+)"
+        pattern = r"\b(?P<catalog>Messier|M|NGC|IC|PGC|LDN|LBN|SH2_|VDB)\s?(?P<id>\d+)"
         return re.finditer(pattern, text, re.IGNORECASE)
 
     @staticmethod
