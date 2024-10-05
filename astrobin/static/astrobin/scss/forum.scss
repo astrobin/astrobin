@@ -61,6 +61,8 @@ table.forums, table.topic-list {
       display: inline;
       margin-right: .5rem;
       color: $white;
+      word-break: break-word;
+      hyphens: auto;
 
       &:hover {
         color: $link-color !important;
