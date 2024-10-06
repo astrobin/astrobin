@@ -51,6 +51,7 @@ from astrobin.models import (
     BroadcastEmail, CameraRenameProposal, DataDownloadRequest, DeepSky_Acquisition, Gear, GearMigrationStrategy,
     Image, ImageRevision, SolarSystem_Acquisition, UserProfile,
 )
+from astrobin.monkeypatch import _get_video_dimensions
 from astrobin.services import CloudflareService
 from astrobin.services.cloudfront_service import CloudFrontService
 from astrobin.services.gear_service import GearService
@@ -214,18 +215,15 @@ def generate_video_preview(object_id: int, content_type_id: int):
 
             temp_file = ImageService(obj).get_local_video_file()
             temp_path = temp_file.name
-            video = VideoFileClip(temp_path)
-            width, height = video.size
 
-            # Check for rotation and apply it if necessary
-            if hasattr(video, 'rotation'):
-                if video.rotation in [90, 270]:
-                    # Swap width and height if the video is rotated 90 or 270 degrees
-                    width, height = height, width  # Swap dimensions
+            # Use _get_video_dimensions function to get the correct dimensions
+            width, height = _get_video_dimensions(temp_path)
 
             # Generate thumbnail in the middle of the video duration
             thumbnail_path = f'/astrobin-temporary-files/files/video-thumb-{content_type_id}-{object_id}-{datetime.now().timestamp()}.jpg'
+            video = VideoFileClip(temp_path)
             video.save_frame(thumbnail_path, t=video.duration / 2)
+            video.close()
 
             # Post-process the thumbnail to adjust for correct aspect ratio
             with PILImage.open(thumbnail_path) as img:
@@ -236,8 +234,6 @@ def generate_video_preview(object_id: int, content_type_id: int):
             obj.image_file.save("video-thumbnail.jpg", thumbnail_file, save=False)
             obj.save(update_fields=['image_file'], keep_deleted=True)
 
-            # Note: temp_path is not removed because it might be reused by another task. It will be removed by a
-            # periodic task.
             os.unlink(thumbnail_path)
         except Exception as e:
             logger.debug("Error generating video preview: %s" % str(e))
@@ -274,16 +270,12 @@ def encode_video_file(object_id: int, content_type_id: int):
 
             temp_file = ImageService(obj).get_local_video_file()
             temp_path = temp_file.name
-            video = VideoFileClip(temp_path)
 
-            # Get the corrected video size
-            width, height = video.size
+            # Use _get_video_dimensions to get the corrected video size
+            width, height = _get_video_dimensions(temp_path)
+            logger.debug(f'Video size after adjustment: {width}x{height}')
 
-            # If the video has a 90 or 270-degree rotation, swap width and height
-            if hasattr(video, 'rotation'):
-                if video.rotation in [90, 270]:
-                    width, height = height, width
-
+            # Ensure the video dimensions are even
             resize_video = False
             if width % 2 == 1:
                 width -= 1
@@ -293,6 +285,7 @@ def encode_video_file(object_id: int, content_type_id: int):
                 resize_video = True
 
             # Resize the video if needed
+            video = VideoFileClip(temp_path)
             if resize_video:
                 video = video.fx(resize.resize, newsize=(width, height))
 
@@ -313,7 +306,6 @@ def encode_video_file(object_id: int, content_type_id: int):
                             self.last_message = value
 
                     def bars_callback(self, bar, attr, value, old_value=None):
-                        # Every time the logger progress is updated, this function is called
                         if 'Writing video' in self.last_message:
                             percentage = (value / self.bars[bar]['total']) * 100
                             if 0 < percentage < 100:
@@ -346,9 +338,10 @@ def encode_video_file(object_id: int, content_type_id: int):
                     logger=ProgressLogger(content_type_id, object_id)
                 )
 
-                output_file.seek(0)  # reset file pointer to beginning
+                output_file.seek(0)  # reset file pointer to the beginning
                 django_file = File(output_file)
 
+                # Close and reset database connections to avoid stale connections
                 for connection in connections.all():
                     connection.close_if_unusable_or_obsolete()
 
@@ -361,6 +354,7 @@ def encode_video_file(object_id: int, content_type_id: int):
             # periodic task.
             os.remove(output_file.name)
 
+            # Mark encoding progress as complete
             cache.set(f'video-encoding-progress-{content_type_id}-{object_id}', 100)
         except Exception as e:
             cache.delete(f'video-encoding-progress-{content_type_id}-{object_id}')

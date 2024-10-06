@@ -9,25 +9,26 @@ from os.path import splitext
 
 from django.conf import settings
 from django.core.files.images import ImageFile, get_image_dimensions
-from moviepy.editor import VideoFileClip
 
 logger = logging.getLogger(__name__)
 
 
 def _get_video_dimensions(file_or_path):
-    def get_video_rotation(path):
+    def get_video_metadata(path):
         cmd = [
             'ffprobe',
             '-v', 'error',
             '-select_streams', 'v:0',
-            '-show_entries', 'stream_tags=rotate',
+            '-show_entries', 'stream=width,height,display_aspect_ratio:stream_tags=rotate',
             '-of', 'json',
             path
         ]
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         metadata = json.loads(result.stdout.decode('utf-8'))
-        return int(metadata['streams'][0]['tags'].get('rotate', '0'))
+        logger.debug(result.stdout.decode('utf-8'))
+        return metadata
 
+    # Handle file or file path input
     if hasattr(file_or_path, 'read'):
         file = file_or_path
         file.seek(0)
@@ -38,14 +39,27 @@ def _get_video_dimensions(file_or_path):
         temp.write(file.read())
         temp_path = temp.name
 
-    clip = VideoFileClip(temp_path)
-    width, height = clip.size
-    clip.close()
+    # Get video metadata
+    metadata = get_video_metadata(temp_path)
+    width = metadata['streams'][0].get('width')
+    height = metadata['streams'][0].get('height')
+    tags = metadata['streams'][0].get('tags', {})
+    rotation = int(tags.get('rotate', 0))  # Default to 0 if no rotate tag
 
-    rotation = get_video_rotation(temp_path)
+    # If no rotate tag, check display_aspect_ratio (DAR) as a fallback
+    if rotation == 0:
+        display_aspect_ratio = metadata['streams'][0].get('display_aspect_ratio')
+        if display_aspect_ratio:
+            dar_width, dar_height = map(int, display_aspect_ratio.split(":"))
+            if dar_height > dar_width:
+                # If DAR suggests portrait mode, swap width and height
+                width, height = height, width
+
+    # Adjust dimensions if rotation is 90 or 270 degrees
     if rotation == 90 or rotation == 270:
         width, height = height, width
 
+    # Cleanup temporary file
     os.unlink(temp_path)
 
     return width, height
