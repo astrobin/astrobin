@@ -20,7 +20,10 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
+from rest_framework.status import (
+    HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN,
+    HTTP_404_NOT_FOUND,
+)
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.viewsets import GenericViewSet
 
@@ -30,9 +33,11 @@ from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
 from astrobin_apps_images.api.serializers.image_serializer_gallery import ImageSerializerGallery
+from astrobin_apps_images.api.serializers.image_serializer_trash import ImageSerializerTrash
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
+from astrobin_apps_premium.services.premium_service import PremiumService
 from common.permissions import IsSuperUser, or_permission
 
 logger = logging.getLogger(__name__)
@@ -160,16 +165,22 @@ class ImageViewSet(
 
     def get_serializer_class(self):
         if (
-                'skip-thumbnails' in self.request.query_params and
-                self.request.query_params.get('skip-thumbnails').lower() in ('true', '1')
+            'trash' in self.request.query_params and
+            self.request.query_params.get('trash').lower() == 'true'
         ):
-            return ImageSerializerSkipThumbnails
+            return ImageSerializerTrash
 
         if (
                 'gallery-serializer' in self.request.query_params and
                 self.request.query_params.get('gallery-serializer').lower() in ('true', '1')
         ):
             return ImageSerializerGallery
+
+        if (
+                'skip-thumbnails' in self.request.query_params and
+                self.request.query_params.get('skip-thumbnails').lower() in ('true', '1')
+        ):
+            return ImageSerializerSkipThumbnails
 
         return ImageSerializer
 
@@ -198,6 +209,12 @@ class ImageViewSet(
 
         if 'pk' in self.kwargs:
             return queryset.filter(pk=self.kwargs['pk'])
+
+        if (
+            self.request.query_params.get('trash') and
+            self.request.query_params.get('trash').lower() == 'true'
+        ):
+            return Image.deleted_objects.filter(user=self.request.user)
 
         if (
                 self.request.query_params.get('include-staging-area') and
@@ -231,6 +248,13 @@ class ImageViewSet(
             return Response(
                 "'user' parameter is required when including the staging area.",
                 status=HTTP_400_BAD_REQUEST
+            )
+
+        # Handle permission error when requesting the trash for another user
+        if request.query_params.get('trash') and not request_user_is_requested_user_or_superuser:
+            return Response(
+                "You can only request the trash for your own images or if you are a superuser.",
+                status=HTTP_403_FORBIDDEN
             )
 
         # Handle permission error when requesting staging area for another user
@@ -462,5 +486,26 @@ class ImageViewSet(
         except Exception as e:
             return Response(str(e), HTTP_400_BAD_REQUEST)
 
+        serializer = self.get_serializer(image)
+        return Response(serializer.data, HTTP_200_OK)
+
+    @action(detail=True, methods=['patch'])
+    def undelete(self, request, pk=None):
+        try:
+            image: Image = Image.deleted_objects.get(pk=pk)
+        except Image.DoesNotExist:
+            return Response("Image not found", HTTP_404_NOT_FOUND)
+
+        if not request.user.is_authenticated:
+            return Response("Authentication required", HTTP_401_UNAUTHORIZED)
+
+        if not request.user.is_superuser and image.user != request.user:
+            return Response("Permission denied", HTTP_403_FORBIDDEN)
+
+        valid_usersubscription = PremiumService(request.user).get_valid_usersubscription()
+        if not PremiumService.is_any_ultimate(valid_usersubscription):
+            return Response("Permission denied", HTTP_403_FORBIDDEN)
+
+        image.undelete()
         serializer = self.get_serializer(image)
         return Response(serializer.data, HTTP_200_OK)

@@ -1,6 +1,7 @@
 from rest_framework.test import APITestCase
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_premium.services.premium_service import SubscriptionName
 
 
 class TestImageViewSet(APITestCase):
@@ -172,3 +173,32 @@ class TestImageViewSet(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.get("count"), 1)
         self.assertEqual(response.data.get("results")[0].get("pk"), image1.pk)
+
+    def test_undelete_by_anoymous(self):
+        image = Generators.image()
+        image.delete()
+        response = self.client.post(f'/api/v2/images/image/{image.pk}/undelete/')
+        self.assertEqual(response.status_code, 401)
+
+    def test_undelete_by_non_owner(self):
+        image = Generators.image()
+        image.delete()
+        self.client.force_authenticate(user=Generators.user())
+        response = self.client.patch(f'/api/v2/images/image/{image.pk}/undelete/')
+        self.assertEqual(response.status_code, 403)
+
+    def test_undelete_by_owner_non_ultimate(self):
+        image = Generators.image()
+        image.delete()
+        self.client.force_authenticate(user=Generators.user())
+        response = self.client.patch(f'/api/v2/images/image/{image.pk}/undelete/')
+        self.assertEqual(response.status_code, 403)
+
+    def test_undelete_by_owner(self):
+        image = Generators.image()
+        image.delete()
+        Generators.premium_subscription(image.user, SubscriptionName.ULTIMATE_2020)
+        self.client.force_authenticate(user=image.user)
+        response = self.client.patch(f'/api/v2/images/image/{image.pk}/undelete/')
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.data.get("deleted"))

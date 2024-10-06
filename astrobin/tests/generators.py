@@ -114,6 +114,7 @@ class Generators:
             published=kwargs.pop('published', None),
             submitted_for_iotd_tp_consideration=kwargs.pop('submitted_for_iotd_tp_consideration', None),
             moderator_decision=kwargs.pop('moderator_decision', ModeratorDecision.UNDECIDED),
+            deleted=kwargs.pop('deleted', None),
         )
 
     @staticmethod
