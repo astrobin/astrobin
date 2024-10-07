@@ -80,6 +80,24 @@ class UserDetail(generics.RetrieveAPIView):
     throttle_scope = 'users'
 
 
+class UserEmptyTrash(generics.GenericAPIView):
+    model = User
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
+    queryset = User.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        user = self.get_object()
+
+        if user == request.user or request.user.is_superuser:
+            UserService(user).empty_trash()
+            return Response(status=204)
+
+        raise ValidationError('Cannot empty another user\'s trash')
+
+
 class TogglePropertyList(generics.ListCreateAPIView):
     model = ToggleProperty
     serializer_class = TogglePropertySerializer

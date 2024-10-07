@@ -2,7 +2,7 @@ from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 
 from common.views import (
-    ContentTypeList, ContentTypeDetail, UserList, UserDetail, UserProfileList, UserProfileDetail,
+    ContentTypeList, ContentTypeDetail, UserEmptyTrash, UserList, UserDetail, UserProfileList, UserProfileDetail,
     CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserProfileStats, UserSubscriptionList,
     UserSubscriptionDetail,
     TogglePropertyList, TogglePropertyDetail, PaymentList, UserProfilePartialUpdate,
@@ -14,6 +14,7 @@ urlpatterns = (
 
     url(r'^users/$', UserList.as_view(), name='user-list'),
     url(r'^users/(?P<pk>\d+)/$', UserDetail.as_view(), name='user-detail'),
+    url(r'^users/(?P<pk>\d+)/empty-trash/$', UserEmptyTrash.as_view(), name='user-empty-trash'),
 
     url(r'^toggleproperties/$', TogglePropertyList.as_view(), name='toggleproperty-list'),
     url(r'^toggleproperties/(?P<pk>\d+)/$', TogglePropertyDetail.as_view(), name='toggleproperty-detail'),
