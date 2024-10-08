@@ -117,7 +117,7 @@
 {% endif %}
 
 {% if instance_to_platesolve.solution and request.user|can_view_full_technical_card %}
-    {% if not instance_to_platesolve.solution|has_started_advanced_platesolving %}
+    {% if not instance_to_platesolve.solution|has_started_advanced_platesolving and image.astrometry_net_publicly_available %}
         <div class="astrometry-header basic">{% trans "Basic astrometry details" %}</div>
 
         <p>

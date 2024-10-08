@@ -37,6 +37,7 @@ class PlateSolvingSettingsForm(forms.ModelForm):
             ),
             Fieldset(
                 '',
+                'astrometry_net_publicly_visible',
                 'blind',
                 'scale_units',
                 'scale_min',
