@@ -283,7 +283,10 @@ class ImageViewSet(
 
     def retrieve(self, request, *args, **kwargs):
         # Retrieving an image by PK should work even if the image is in the staging area.
-        instance: Image = get_object_or_None(self.queryset, pk=kwargs['pk'])
+        try:
+            instance: Image = get_object_or_None(self.queryset, pk=kwargs['pk'])
+        except ValueError:
+            return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'Invalid image ID'})
 
         if not instance:
             return Response(status=HTTP_404_NOT_FOUND)
