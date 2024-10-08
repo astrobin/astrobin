@@ -11,6 +11,7 @@ class ImageFilter(FilterSet):
     id = ListFilter(field_name="id", lookup_expr='in')
     hash = ListFilter(field_name="hash", lookup_expr='in')
     q = CharFilter(method='search')
+    collection = ListFilter(field_name="collections", lookup_expr='in')
 
     def search(self, queryset: QuerySet, name, value):
         return queryset.annotate(search=SearchVector('title', 'description')).filter(search=value)
