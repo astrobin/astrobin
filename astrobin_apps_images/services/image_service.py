@@ -339,6 +339,13 @@ class ImageService:
         else:
             image.description = new_original.description
 
+        image.uploader_name = new_original.uploader_name
+        image.uploader_upload_length = new_original.uploader_upload_length
+        image.uploader_offset = new_original.uploader_offset
+        image.uploader_expires = new_original.uploader_expires
+        image.uploader_metadata = new_original.uploader_metadata
+        image.uploader_temporary_file_path = new_original.uploader_temporary_file_path
+
         image.save(keep_deleted=True)
 
         if new_original.solution:
