@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from decimal import Decimal
 
 from actstream.models import Action
@@ -13,7 +14,6 @@ from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.models import Solution
-from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
 
 
 class TestImageService(TestCase):
@@ -282,6 +282,38 @@ class TestImageService(TestCase):
         self.assertEqual('Foo (Bar)', image.title)
         self.assertEqual('Foo\nBar', image.description)
         self.assertEqual(1, Image.objects.all().count())
+
+    def test_delete_original_copies_uploader_attributes(self):
+        image = Generators.image(image_file='original.jpg', title='Foo', description='Foo')
+        revision = Generators.image_revision(image=image, image_file='revision.jpg', title='Bar', description='Bar')
+
+        image.uploader_name = "ciao.jpg"
+        image.uploader_upload_length = 1000
+        image.uploader_offset = 1000
+        image.uploader_expires = datetime.now()
+        image.uploader_metadata = "test"
+        image.uploader_temporary_file_path = "test.xyz"
+        image.save()
+
+        revision.uploader_name = "rciao.jpg"
+        revision.uploader_upload_length = 1001
+        revision.uploader_offset = 1001
+        revision.uploader_expires = datetime.now() + timedelta(days=1)
+        revision.uploader_metadata = "rtest"
+        revision.uploader_temporary_file_path = "rtest.xyz"
+        revision.save()
+
+        ImageService(image).delete_original()
+
+        image = Image.objects.get(pk=image.pk)
+
+        self.assertEqual(revision.uploader_name, image.uploader_name)
+        self.assertEqual(revision.uploader_upload_length, image.uploader_upload_length)
+        self.assertEqual(revision.uploader_offset, image.uploader_offset)
+        self.assertEqual(revision.uploader_expires, image.uploader_expires)
+        self.assertEqual(revision.uploader_metadata, image.uploader_metadata)
+        self.assertEqual(revision.uploader_temporary_file_path, image.uploader_temporary_file_path)
+
 
     def test_delete_original_preserves_square_cropping(self):
         image = Generators.image(image_file='original.jpg')
