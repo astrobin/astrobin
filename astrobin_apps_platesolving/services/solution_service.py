@@ -107,12 +107,14 @@ class SolutionService:
             if self.solution.settings.blind:
                 self.solution.submission_id = solver.solve(
                     url,
+                    publicly_visible='y' if self.solution.settings.astrometry_net_publicly_visible else 'n',
                     downsample_factor=self.solution.settings.downsample_factor,
                     use_sextractor=self.solution.settings.use_sextractor,
                 )
             else:
                 self.solution.submission_id = solver.solve(
                     url,
+                    publicly_visible='y' if self.solution.settings.astrometry_net_publicly_visible else 'n',
                     scale_units=self.solution.settings.scale_units,
                     scale_lower=self.solution.settings.scale_min,
                     scale_upper=self.solution.settings.scale_max,

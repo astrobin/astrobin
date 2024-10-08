@@ -194,7 +194,7 @@ class Solver(AbstractPlateSolvingBackend):
         for key, default, typ in [
             ('allow_commercial_use', 'n', str),
             ('allow_modifications', 'n', str),
-            ('publicly_visible', 'y', str),
+            ('publicly_visible', 'n', str),
             ('scale_units', None, str),
             ('scale_type', None, str),
             ('scale_lower', None, float),

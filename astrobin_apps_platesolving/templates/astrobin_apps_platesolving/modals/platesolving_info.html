@@ -38,19 +38,21 @@
                         {% endif %}
                     </td>
                 </tr>
-                <tr>
-                    <td>{% trans "Astrometry.net job" %}</td>
-                    <td class="astrometry-job">
-                        {% if instance_to_platesolve.solution and instance_to_platesolve.solution.submission_id %}
-                            <a href="http://nova.astrometry.net/status/{{ instance_to_platesolve.solution.submission_id }}"
-                               target="_blank">
-                                {{ instance_to_platesolve.solution.submission_id }}
-                            </a>
-                        {% else %}
-                            {% trans "n/a" %}
-                        {% endif %}
-                    </td>
-                </tr>
+                {% if instance_to_platesolve.solution.settings.astrometry_net_publicly_visible %}
+                    <tr>
+                        <td>{% trans "Astrometry.net job" %}</td>
+                        <td class="astrometry-job">
+                            {% if instance_to_platesolve.solution and instance_to_platesolve.solution.submission_id %}
+                                <a href="http://nova.astrometry.net/status/{{ instance_to_platesolve.solution.submission_id }}"
+                                   target="_blank">
+                                    {{ instance_to_platesolve.solution.submission_id }}
+                                </a>
+                            {% else %}
+                                {% trans "n/a" %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
                 <tr>
                     <td>{% trans "PixInsight job" %}</td>
                     <td class="pixinsight-job">

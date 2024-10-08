@@ -4,6 +4,16 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class PlateSolvingSettings(models.Model):
+    astrometry_net_publicly_visible = models.BooleanField(
+        default=False,
+        verbose_name=_("Publicly visible astrometry.net submission"),
+        help_text=_(
+            "If checked, the astrometry.net submission will be publicly visible. If you leave this unchecked,"
+            "you won't be able to see the full log of the astrometry.net submission, but the image will still"
+            "be plate-solved and annotated."
+        )
+    )
+
     blind = models.BooleanField(
         default=True,
         verbose_name=_("Perform a blind solve"),
