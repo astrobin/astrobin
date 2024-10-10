@@ -78,7 +78,7 @@ from nested_comments.services.comment_notifications_service import CommentNotifi
 from toggleproperties.models import ToggleProperty
 from .enums.moderator_decision import ModeratorDecision
 from .models import (
-    Accessory, Camera, CameraRenameProposal, Filter, FocalReducer, Gear, GearMigrationStrategy, Image,
+    Accessory, Camera, CameraRenameProposal, Collection, Filter, FocalReducer, Gear, GearMigrationStrategy, Image,
     ImageEquipmentLog, ImageRevision,
     Mount,
     Software, Telescope,
@@ -1910,3 +1910,42 @@ def remove_follow_on_shadow_ban(sender, instance, **kwargs):
                 content_type=ContentType.objects.get_for_model(profile.user),
                 object_id=instance.user.pk
             ).delete()
+
+
+@receiver(m2m_changed, sender=Collection.images.through)
+def update_collection_image_count(sender, instance, action, reverse, model, pk_set, **kwargs):
+    if action == "post_add":
+        if reverse:
+            # This case handles Image.collections.add()
+            for pk in pk_set:
+                collection = Collection.objects.get(pk=pk)
+                collection.image_count = collection.images.count()
+                collection.save()
+        else:
+            # This case handles Collection.images.add()
+            instance.image_count = instance.images.count()
+            instance.save()
+
+    elif action == "post_remove":
+        if reverse:
+            # This case handles Image.collections.remove()
+            for pk in pk_set:
+                collection = Collection.objects.get(pk=pk)
+                collection.image_count = collection.images.count()
+                collection.save()
+        else:
+            # This case handles Collection.images.remove()
+            instance.image_count = instance.images.count()
+            instance.save()
+
+    elif action == "post_clear":
+        if reverse:
+            # This case handles Image.collections.clear()
+            if instance:
+                for collection in Collection.objects.all():
+                    collection.image_count = collection.images.count()
+                    collection.save()
+        else:
+            # This case handles Collection.images.clear()
+            instance.image_count = 0
+            instance.save()

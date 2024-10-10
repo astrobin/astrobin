@@ -2232,6 +2232,11 @@ class Collection(models.Model):
         verbose_name=_("Order by image tag")
     )
 
+    image_count = models.PositiveIntegerField(
+        default=0,
+        editable=False,
+    )
+
     class Meta:
         app_label = 'astrobin'
         unique_together = ('user', 'name')

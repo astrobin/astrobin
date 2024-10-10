@@ -18,7 +18,7 @@ class CollectionViewSet(viewsets.ModelViewSet):
     parser_classes = [CamelCaseJSONParser]
 
     def get_queryset(self) -> QuerySet:
-        queryset: QuerySet = Collection.objects.all().prefetch_related('images')
+        queryset: QuerySet = Collection.objects.all()
 
         if 'user' in self.request.GET:
             queryset = queryset.filter(user__pk=self.request.GET.get('user'))

@@ -287,3 +287,31 @@ class CollectionTest(TestCase):
 
         self.assertContains(response, "data-test=\"image-prev-" + image2.get_id() + "\"")
         self.assertContains(response, "data-test=\"image-next-none\"")
+
+    def test_collection_image_count(self):
+        collection = Collection.objects.create(user=self.user)
+        image = Generators.image(user=self.user)
+
+        collection.images.add(image)
+        collection.refresh_from_db()
+
+        self.assertEqual(collection.image_count, 1)
+
+        collection.images.clear()
+        collection.refresh_from_db()
+
+        self.assertEqual(collection.image_count, 0)
+
+    def test_collection_image_count_reverse(self):
+        collection = Collection.objects.create(user=self.user)
+        image = Generators.image(user=self.user)
+
+        image.collections.add(collection)
+        collection.refresh_from_db()
+
+        self.assertEqual(collection.image_count, 1)
+
+        image.collections.clear()
+        collection.refresh_from_db()
+
+        self.assertEqual(collection.image_count, 0)
