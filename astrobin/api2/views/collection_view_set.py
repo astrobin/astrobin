@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.db.models import QuerySet
+from djangorestframework_camel_case.parser import CamelCaseJSONParser
+from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
+from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
 from astrobin.api2.serializers.collection_serializer import CollectionSerializer
@@ -11,9 +14,11 @@ from common.permissions import ReadOnly
 class CollectionViewSet(viewsets.ModelViewSet):
     serializer_class = CollectionSerializer
     permission_classes = [ReadOnly]
+    renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
+    parser_classes = [CamelCaseJSONParser]
 
     def get_queryset(self) -> QuerySet:
-        queryset: QuerySet = Collection.objects.all()
+        queryset: QuerySet = Collection.objects.all().prefetch_related('images')
 
         if 'user' in self.request.GET:
             queryset = queryset.filter(user__pk=self.request.GET.get('user'))
