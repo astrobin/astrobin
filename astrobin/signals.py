@@ -289,6 +289,10 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
                         }
                     )
 
+        if instance.user.userprofile.gallery_header_image is None:
+            instance.user.userprofile.gallery_header_image = instance.thumbnail('hd', None, sync=True)
+            instance.user.userprofile.save(keep_deleted=True)
+
 
 @receiver(post_softdelete, sender=Image)
 def image_post_softdelete(sender, instance, **kwargs):
