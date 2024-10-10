@@ -33,7 +33,10 @@ class CollectionViewSet(viewsets.ModelViewSet):
             if parent == 'null':
                 queryset = queryset.filter(parent__isnull=True)
             else:
-                queryset = queryset.filter(parent__pk=self.request.GET.get('parent'))
+                queryset = queryset.filter(parent__pk=parent)
+        else:
+            # When no parent filter is applied, order by parent__isnull=True first
+            queryset = queryset.order_by('-parent__isnull', 'id')
 
         return queryset
 
