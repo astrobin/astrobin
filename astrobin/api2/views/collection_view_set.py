@@ -8,12 +8,12 @@ from rest_framework.response import Response
 
 from astrobin.api2.serializers.collection_serializer import CollectionSerializer
 from astrobin.models import Collection
-from common.permissions import ReadOnly
+from common.permissions import IsObjectUserOrReadOnly
 
 
 class CollectionViewSet(viewsets.ModelViewSet):
     serializer_class = CollectionSerializer
-    permission_classes = [ReadOnly]
+    permission_classes = [IsObjectUserOrReadOnly]
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
 

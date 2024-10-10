@@ -30,7 +30,7 @@ class IsObjectUserOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return obj.user == request.user
+        return hasattr(obj, 'user') and obj.user == request.user
 
 
 def or_permission(*perms):
