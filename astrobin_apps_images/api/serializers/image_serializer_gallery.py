@@ -41,4 +41,5 @@ class ImageSerializerGallery(ImageSerializer):
             'is_iotd',
             'is_top_pick',
             'is_top_pick_nomination',
+            'collaborators'
         )

@@ -38,6 +38,7 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
 from astrobin_apps_premium.services.premium_service import PremiumService
+from astrobin_apps_users.services import UserService
 from common.permissions import IsSuperUser, or_permission
 
 logger = logging.getLogger(__name__)
@@ -187,20 +188,6 @@ class ImageViewSet(
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        has_deepsky_acquisitions_filter = self.request.GET.get('has-deepsky-acquisitions')
-        if has_deepsky_acquisitions_filter and has_deepsky_acquisitions_filter.lower() in ['1', 'true', 'yes']:
-            queryset = queryset.annotate(num_deepsky_acquisitions=Count('acquisition__deepsky_acquisition')).filter(
-                num_deepsky_acquisitions__gt=0
-            )
-
-        has_solarsystem_acquisitions_filter = self.request.GET.get('has-solarsystem-acquisitions')
-        if has_solarsystem_acquisitions_filter and has_solarsystem_acquisitions_filter.lower() in ['1', 'true', 'yes']:
-            queryset = queryset.annotate(
-                num_solarsystem_acquisitions=Count('acquisition__solarsystem_acquisition')
-            ).filter(
-                num_solarsystem_acquisitions__gt=0
-            )
-
         # Having a hash in the request means we want to retrieve a single image by hash. This should work even if the
         # image is in the staging area, so we act like the retrieval method. This makes the ImageFilter 'hash' field
         # redundant, but we keep it for consistency.
@@ -210,23 +197,49 @@ class ImageViewSet(
         if 'pk' in self.kwargs:
             return queryset.filter(pk=self.kwargs['pk'])
 
-        if (
-            self.request.query_params.get('trash') and
-            self.request.query_params.get('trash').lower() == 'true'
-        ):
-            return Image.deleted_objects.filter(user=self.request.user)
+        if self.request.query_params.get('user'):
+            user_id = self.request.query_params.get('user')
+            user = get_object_or_None(User, pk=user_id)
+            if not user:
+                return Image.objects.none()
 
-        if (
-                self.request.query_params.get('include-staging-area') and
-                self.request.query_params.get('include-staging-area').lower() == 'true'
-        ):
-            return queryset
+            truism = ['1', 'true', 'yes']
 
-        if (
-                self.request.query_params.get('only-staging-area') and
-                self.request.query_params.get('only-staging-area').lower() == 'true'
-        ):
-            return queryset.filter(is_wip=True)
+            has_deep_sky_acquisitions_filter = self.request.GET.get('has-deepsky-acquisitions')
+            if has_deep_sky_acquisitions_filter and has_deep_sky_acquisitions_filter.lower() in truism:
+                return UserService(user).get_all_images().annotate(
+                    num_deepsky_acquisitions=Count('acquisition__deepsky_acquisition')
+                ).filter(
+                    num_deepsky_acquisitions__gt=0
+                )
+
+            has_solar_system_acquisitions_filter = self.request.GET.get('has-solarsystem-acquisitions')
+            if has_solar_system_acquisitions_filter and has_solar_system_acquisitions_filter.lower() in truism:
+                return UserService(user).get_all_images().annotate(
+                    num_solarsystem_acquisitions=Count('acquisition__solarsystem_acquisition')
+                ).filter(
+                    num_solarsystem_acquisitions__gt=0
+                )
+
+            if (
+                self.request.query_params.get('trash') and
+                self.request.query_params.get('trash').lower() == 'true'
+            ):
+                return UserService(user).get_deleted_images()
+
+            if (
+                    self.request.query_params.get('include-staging-area') and
+                    self.request.query_params.get('include-staging-area').lower() == 'true'
+            ):
+                return UserService(user).get_all_images(use_union=True)
+
+            if (
+                    self.request.query_params.get('only-staging-area') and
+                    self.request.query_params.get('only-staging-area').lower() == 'true'
+            ):
+                return UserService(user).get_wip_images()
+
+            return UserService(user).get_public_images()
 
         return queryset.filter(is_wip=False)
 
@@ -242,6 +255,41 @@ class ImageViewSet(
                         request_user.is_superuser
                 )
         )
+
+        # Handle case where 'has-deepsky-acquisitions' is set but 'user' parameter is missing
+        if request.query_params.get('has-deepsky-acquisitions') and not requested_user:
+            return Response(
+                "'user' parameter is required when filtering by deep sky acquisitions.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        # Handle case where 'has-solarsystem-acquisitions' is set but 'user' parameter is missing
+        if request.query_params.get('has-solarsystem-acquisitions') and not requested_user:
+            return Response(
+                "'user' parameter is required when filtering by solar system acquisitions.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        # handle case where has-deepsky-acquisitions is set but has-solarsystem-acquisitions is also set
+        if (
+                request.query_params.get('has-deepsky-acquisitions') and
+                request.query_params.get('has-solarsystem-acquisitions')
+        ):
+            return Response(
+                "You can only filter by deep sky acquisitions or solar system acquisitions, not both.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        # Handle case where trying to filter by has-deepsky-acquisitions or has-solarsystem-acquisitions for another
+        # user
+        if (
+                request.query_params.get('has-deepsky-acquisitions') or
+                request.query_params.get('has-solarsystem-acquisitions')
+        ) and not request_user_is_requested_user_or_superuser:
+            return Response(
+                "You can only filter by acquisitions for your own images or if you are a superuser.",
+                status=HTTP_403_FORBIDDEN
+            )
 
         # Handle case where 'include-staging-area' is set but 'user' parameter is missing
         if request.query_params.get('include-staging-area') and not requested_user:

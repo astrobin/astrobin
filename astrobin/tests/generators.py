@@ -18,7 +18,7 @@ from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import (
     Accessory, Camera, Collection, DeepSky_Acquisition, Filter, FocalReducer, GearMigrationStrategy, Image,
     ImageRevision, Mount, Software,
-    Telescope,
+    SolarSystem_Acquisition, Telescope,
 )
 from astrobin_apps_images.models import KeyValueTag
 from astrobin_apps_premium.services.premium_service import SubscriptionName
@@ -358,4 +358,10 @@ class Generators:
             image=image,
             number=kwargs.pop('number', 1),
             duration=kwargs.pop('duration', 300),
+        )
+
+    @staticmethod
+    def solar_system_acquisition(image: Image, **kwargs) -> SolarSystem_Acquisition:
+        return SolarSystem_Acquisition.objects.create(
+            image=image,
         )

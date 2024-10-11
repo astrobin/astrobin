@@ -10,12 +10,75 @@ class TestImageViewSet(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.get("count"), 0)
 
+    def test_list_has_deep_sky_acquisitions(self):
+        image = Generators.image()
+        response = self.client.get('/api/v2/images/image/?has-deepsky-acquisitions=true')
+
+        self.assertEqual(response.status_code, 400)  # Bad request because there's no user
+
+        response = self.client.get(f'/api/v2/images/image/?user={image.user.id}&has-deepsky-acquisitions=true')
+
+        self.assertEqual(response.status_code, 403)  # I'm not the owner
+
+        self.client.force_authenticate(user=image.user)
+
+        response = self.client.get(f'/api/v2/images/image/?user={image.user.id}&has-deepsky-acquisitions=true')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 0)
+
+        Generators.deep_sky_acquisition(image)
+
+        response = self.client.get(f'/api/v2/images/image/?user={image.user.id}&has-deepsky-acquisitions=true')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 1)
+
+    def test_list_has_solar_system_acquisitions(self):
+        image = Generators.image()
+        response = self.client.get('/api/v2/images/image/?has-solarsystem-acquisitions=true')
+
+        self.assertEqual(response.status_code, 400)  # Bad request because there's no user
+
+        response = self.client.get(f'/api/v2/images/image/?user={image.user.id}&has-solarsystem-acquisitions=true')
+
+        self.assertEqual(response.status_code, 403)  # I'm not the owner
+
+        self.client.force_authenticate(user=image.user)
+        response = self.client.get(f'/api/v2/images/image/?user={image.user.id}&has-solarsystem-acquisitions=true')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 0)  # No acquisitions
+
+        Generators.solar_system_acquisition(image)
+
+        response = self.client.get(f'/api/v2/images/image/?user={image.user.id}&has-solarsystem-acquisitions=true')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 1)
+
     def test_list_public_image(self):
         image = Generators.image()
         response = self.client.get('/api/v2/images/image/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.get("count"), 1)
         self.assertEqual(response.data.get("results")[0].get("pk"), image.pk)
+
+    def test_list_public_image_as_collaborator(self):
+        image = Generators.image()
+        collaborator = Generators.user()
+        another_user = Generators.user()
+        image.collaborators.add(collaborator)
+
+        response = self.client.get('/api/v2/images/image/?user={}'.format(collaborator.id))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 1)
+
+        response = self.client.get('/api/v2/images/image/?user={}'.format(image.user.id))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 1)
+
+        response = self.client.get('/api/v2/images/image/?user={}'.format(another_user.id))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 0)
 
     def test_list_wip_image(self):
         Generators.image(is_wip=True)
