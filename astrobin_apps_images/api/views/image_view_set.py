@@ -267,7 +267,7 @@ class ImageViewSet(
         # Handle case where 'only-staging-area' is set but 'user' parameter is missing
         if request.query_params.get('only-staging-area') and not requested_user:
             return Response(
-                "'user' parameter is required when reqiestomg the staging area.",
+                "'user' parameter is required when requesting the staging area.",
                 status=HTTP_400_BAD_REQUEST
             )
 
