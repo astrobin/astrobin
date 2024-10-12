@@ -17,6 +17,7 @@ from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import
 from astrobin_apps_equipment.models import Filter as Filter2
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from astrobin_apps_images.models import ThumbnailGroup
 from common.constants import GroupName
 
 
@@ -1083,6 +1084,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
                 image = Generators.image(user=user)
                 Image.objects.filter(pk=image.pk).update(id=image_id)
                 image = Image.objects.get(id=image_id)
+                ThumbnailGroup.objects.filter(image_id=1).update(image_id=image_id)
 
             legacy_filter = get_object_or_None(Filter, id=filter_id)
             if not legacy_filter:
