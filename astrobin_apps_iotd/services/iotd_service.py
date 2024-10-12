@@ -100,7 +100,7 @@ class IotdService:
         images: List[IotdSubmissionQueueEntry] = []
         now = DateTimeService.now()
         start = now - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
-        end = now - timedelta(hours=36)
+        end = now - timedelta(hours=12)
 
         for entry in IotdSubmissionQueueEntry.objects.select_related(
             'image'
