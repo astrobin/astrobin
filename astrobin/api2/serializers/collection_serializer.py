@@ -13,6 +13,20 @@ class CollectionSerializer(serializers.ModelSerializer):
             return instance.cover.thumbnail('regular', None, sync=True)
         return None
 
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user
+        return super().create(validated_data)
+
     class Meta:
         model = Collection
         exclude = ['images']
+        read_only_fields = [
+            'date_created',
+            'date_updated',
+            'user',
+            'images',
+            'cover',
+            'image_count',
+            'image_count_including_wip',
+        ]
