@@ -1918,38 +1918,40 @@ def remove_follow_on_shadow_ban(sender, instance, **kwargs):
 
 @receiver(m2m_changed, sender=Collection.images.through)
 def update_collection_image_count(sender, instance, action, reverse, model, pk_set, **kwargs):
+    def _update_counts(collection):
+        collection.image_count = Image.objects_plain.filter(collections=collection).count()
+        collection.image_count_including_wip = Image.objects_including_wip_plain.filter(collections=collection).count()
+        collection.save()
+
     if action == "post_add":
         if reverse:
             # This case handles Image.collections.add()
             for pk in pk_set:
                 collection = Collection.objects.get(pk=pk)
-                collection.image_count = collection.images.count()
-                collection.save()
+                _update_counts(collection)
         else:
             # This case handles Collection.images.add()
-            instance.image_count = instance.images.count()
-            instance.save()
+            _update_counts(instance)
 
     elif action == "post_remove":
         if reverse:
             # This case handles Image.collections.remove()
             for pk in pk_set:
                 collection = Collection.objects.get(pk=pk)
-                collection.image_count = collection.images.count()
-                collection.save()
+                _update_counts(collection)
         else:
             # This case handles Collection.images.remove()
-            instance.image_count = instance.images.count()
-            instance.save()
+            _update_counts(instance)
 
-    elif action == "post_clear":
+    elif action == "pre_clear":
         if reverse:
             # This case handles Image.collections.clear()
-            if instance:
-                for collection in Collection.objects.all():
-                    collection.image_count = collection.images.count()
-                    collection.save()
+            for collection in Collection.objects.filter(images=instance):
+                collection.image_count = 0
+                collection.image_count_including_wip = 0
+                collection.save()
         else:
             # This case handles Collection.images.clear()
             instance.image_count = 0
+            instance.image_count_including_wip = 0
             instance.save()

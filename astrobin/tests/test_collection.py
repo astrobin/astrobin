@@ -296,11 +296,14 @@ class CollectionTest(TestCase):
         collection.refresh_from_db()
 
         self.assertEqual(collection.image_count, 1)
+        self.assertEqual(collection.image_count_including_wip, 1)
 
         collection.images.clear()
         collection.refresh_from_db()
 
         self.assertEqual(collection.image_count, 0)
+        self.assertEqual(collection.image_count_including_wip, 0)
+        self.assertEqual(collection.image_count_including_wip, 0)
 
     def test_collection_image_count_reverse(self):
         collection = Collection.objects.create(user=self.user)
@@ -308,10 +311,13 @@ class CollectionTest(TestCase):
 
         image.collections.add(collection)
         collection.refresh_from_db()
+        image.refresh_from_db()
 
         self.assertEqual(collection.image_count, 1)
+        self.assertEqual(collection.image_count_including_wip, 1)
 
         image.collections.clear()
         collection.refresh_from_db()
 
         self.assertEqual(collection.image_count, 0)
+        self.assertEqual(collection.image_count_including_wip, 0)
