@@ -3,7 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import IntegrityError
 from django.db.models import Q, QuerySet
 from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_control, cache_page
+from django.views.decorators.cache import cache_control, cache_page, never_cache
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_headers
 from django_filters.rest_framework import DjangoFilterBackend
@@ -16,7 +16,8 @@ from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
 from subscription.models import Subscription, Transaction, UserSubscription
 
-from astrobin.models import UserProfile
+from astrobin.models import Image, UserProfile
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 from .permissions import ReadOnly
@@ -206,6 +207,36 @@ class UserProfileStats(generics.RetrieveAPIView):
 
     def get_serializer_class(self):
         return UserProfileStatsSerializer
+
+
+@method_decorator(never_cache, name='dispatch')
+class UserProfileChangeGalleryHeader(generics.UpdateAPIView):
+    model = UserProfile
+    permission_classes = [IsAuthenticated]
+    queryset = UserProfile.objects.all()
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
+
+    def update(self, request, *args, **kwargs):
+        profile: UserProfile = self.get_object()
+
+        if profile.user != request.user:
+            self.permission_denied(request, message='Cannot change another user\'s gallery header')
+
+        image_id: str = kwargs.get('image_id')
+        image: Image = ImageService.get_object(image_id, Image.objects_including_wip_plain)
+
+        if not image:
+            return Response(status=404, data={'detail': 'Image not found'})
+
+        if image.user != request.user:
+            self.permission_denied(request, message='Cannot use another user\'s image as gallery header')
+
+        thumbnail: str = image.thumbnail('hd', None, sync=True)
+        profile.gallery_header_image = thumbnail
+        profile.save()
+
+        return Response(UserProfileSerializerPrivate(profile, context=dict(request=request)).data)
 
 
 @method_decorator(

@@ -2,7 +2,8 @@ from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 
 from common.views import (
-    ContentTypeList, ContentTypeDetail, UserEmptyTrash, UserList, UserDetail, UserProfileList, UserProfileDetail,
+    ContentTypeList, ContentTypeDetail, UserEmptyTrash, UserList, UserDetail, UserProfileChangeGalleryHeader,
+    UserProfileList, UserProfileDetail,
     CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserProfileStats, UserSubscriptionList,
     UserSubscriptionDetail,
     TogglePropertyList, TogglePropertyDetail, PaymentList, UserProfilePartialUpdate,
@@ -23,6 +24,11 @@ urlpatterns = (
     url(r'^userprofiles/$', UserProfileList.as_view(), name='userprofile-list'),
     url(r'^userprofiles/(?P<pk>\d+)/$', UserProfileDetail.as_view(), name='userprofile-detail'),
     url(r'^userprofiles/(?P<pk>\d+)/stats/$', UserProfileStats.as_view(), name='userprofile-stats'),
+    url(
+        r'^userprofiles/(?P<pk>\d+)/change-gallery-header-image/(?P<image_id>\w+)/$',
+        UserProfileChangeGalleryHeader.as_view(),
+        name='userprofile-change-gallery-header'
+    ),
     url(r'^userprofiles/current/$', CurrentUserProfileDetail.as_view(), name='userprofile-detail-current'),
     url(r'^userprofiles/(?P<pk>\d+)/partial/$', UserProfilePartialUpdate.as_view(), name='userprofile-partial-update'),
 
