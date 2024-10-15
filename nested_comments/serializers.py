@@ -1,3 +1,4 @@
+from django.utils.translation import gettext
 from drf_haystack.serializers import HaystackSerializer
 from precise_bbcode.bbcode import get_parser
 from rest_framework import serializers
@@ -18,14 +19,30 @@ class NestedCommentSerializer(serializers.ModelSerializer):
     html = serializers.SerializerMethodField(read_only=True)
 
     def get_author_username(self, comment: NestedComment) -> str:
+        if comment.author is None or comment.deleted:
+            return gettext('(deleted)')
+
         return comment.author.username
 
     def get_author_display_name(self, comment: NestedComment) -> str:
+        if comment.author is None or comment.deleted:
+            return gettext('(deleted)')
+
         return comment.author.userprofile.get_display_name()
 
     def get_html(self, comment: NestedComment) -> str:
+        if comment.deleted:
+            return gettext('(deleted)')
+
         parser = get_parser()
         return parser.render(comment.text)
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        if instance.deleted:
+            representation['text'] = gettext('(deleted)')
+            representation['author_avatar'] = None
+        return representation
 
     class Meta:
         model = NestedComment
