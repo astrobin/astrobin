@@ -321,3 +321,17 @@ class CollectionTest(TestCase):
 
         self.assertEqual(collection.image_count, 0)
         self.assertEqual(collection.image_count_including_wip, 0)
+
+    def test_collection_nested_collection_count(self):
+        collection = Collection.objects.create(user=self.user, name="collection")
+        nested_collection = Collection.objects.create(user=self.user, parent=collection, name="nested")
+
+        collection.refresh_from_db()
+
+        self.assertEqual(collection.nested_collection_count, 1)
+        self.assertEqual(nested_collection.nested_collection_count, 0)
+
+        nested_collection.delete()
+        collection.refresh_from_db()
+
+        self.assertEqual(collection.nested_collection_count, 0)

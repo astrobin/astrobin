@@ -1955,3 +1955,19 @@ def update_collection_image_count(sender, instance, action, reverse, model, pk_s
             instance.image_count = 0
             instance.image_count_including_wip = 0
             instance.save()
+
+
+@receiver(post_save, sender=Collection)
+def update_nested_collection_count_on_create(sender, instance: Collection, created: bool, **kwargs):
+    if created and instance.parent:
+        instance.parent.nested_collection_count += 1
+        instance.parent.save()
+
+
+@receiver(pre_delete, sender=Collection)
+def update_nested_collection_count_on_delete(sender, instance: Collection, **kwargs):
+    if instance.parent:
+        instance.parent.nested_collection_count -= 1
+        if instance.parent.nested_collection_count < 0:
+            instance.parent.nested_collection_count = 0
+        instance.parent.save()

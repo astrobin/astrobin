@@ -2242,6 +2242,11 @@ class Collection(models.Model):
         editable=False,
     )
 
+    nested_collection_count = models.PositiveIntegerField(
+        default=0,
+        editable=False,
+    )
+
     class Meta:
         app_label = 'astrobin'
         unique_together = ('user', 'name')
