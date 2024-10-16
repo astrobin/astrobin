@@ -1,3 +1,4 @@
+import json
 import re
 
 import simplejson
@@ -354,3 +355,142 @@ class CollectionTest(TestCase):
         self.assertEqual(Image.all_objects.filter(collections=collection).count(), 0)
         self.assertEqual(collection.image_count, 0)
         self.assertEqual(collection.image_count_including_wip, 0)
+
+    def test_set_cover_image_anon(self):
+        collection = Collection.objects.create(user=Generators.user())
+        image = Generators.image(user=collection.user)
+
+        collection.images.add(image)
+        collection.refresh_from_db()
+
+        self.assertIsNone(collection.cover)
+
+        response = self.client.post(
+            f'/api/v2/astrobin/collection/{collection.pk}/set-cover-image/',
+            data=json.dumps(
+                {
+                    'image': image.pk,
+                }
+            ),
+            content_type='application/json',
+            follow=True,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+
+        self.assertEqual(response.status_code, 404)
+
+    def test_set_cover_image_not_collection_owner(self):
+        collection = Collection.objects.create(user=Generators.user())
+        image = Generators.image(user=collection.user)
+        other_user = Generators.user()
+
+        collection.images.add(image)
+        collection.refresh_from_db()
+
+        self.assertIsNone(collection.cover)
+
+        self.client.force_login(other_user)
+        response = self.client.post(
+            f'/api/v2/astrobin/collection/{collection.pk}/set-cover-image/',
+            data=json.dumps(
+                {
+                    'image': image.pk,
+                }
+            ),
+            content_type='application/json',
+            follow=True,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+
+        self.assertEqual(response.status_code, 404)
+
+    def test_set_cover_image_not_image_owner(self):
+        collection = Collection.objects.create(user=Generators.user())
+        image = Generators.image(user=Generators.user())
+
+        collection.images.add(image)
+        collection.refresh_from_db()
+
+        self.assertIsNone(collection.cover)
+
+        self.client.force_login(collection.user)
+        response = self.client.post(
+            f'/api/v2/astrobin/collection/{collection.pk}/set-cover-image/',
+            data=json.dumps(
+                {
+                    'image': image.pk,
+                }
+            ),
+            content_type='application/json',
+            follow=True,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_set_cover_image_when_image_does_not_exist(self):
+        collection = Collection.objects.create(user=Generators.user())
+
+        self.assertIsNone(collection.cover)
+
+        self.client.force_login(collection.user)
+        response = self.client.post(
+            f'/api/v2/astrobin/collection/{collection.pk}/set-cover-image/',
+            data=json.dumps(
+                {
+                    'image': 999,
+                }
+            ),
+            content_type='application/json',
+            follow=True,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_set_cover_image_when_image_is_not_in_collection(self):
+        collection = Collection.objects.create(user=Generators.user())
+        image = Generators.image(user=collection.user)
+        self.assertIsNone(collection.cover)
+
+        self.client.force_login(collection.user)
+        response = self.client.post(
+            f'/api/v2/astrobin/collection/{collection.pk}/set-cover-image/',
+            data=json.dumps(
+                {
+                    'image': image.pk,
+                }
+            ),
+            content_type='application/json',
+            follow=True,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_set_cover_image(self):
+        collection = Collection.objects.create(user=Generators.user())
+        image = Generators.image(user=collection.user)
+
+        collection.images.add(image)
+        collection.refresh_from_db()
+
+        self.assertIsNone(collection.cover)
+
+        self.client.force_login(collection.user)
+        response = self.client.post(
+            f'/api/v2/astrobin/collection/{collection.pk}/set-cover-image/',
+            data=json.dumps(
+                {
+                    'image': image.pk,
+                }
+            ),
+            content_type='application/json',
+            follow=True,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+
+        collection.refresh_from_db()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(collection.cover, image)

@@ -30,6 +30,8 @@ class CollectionViewSet(viewsets.ModelViewSet):
         if 'user' in self.request.GET:
             queryset = queryset.filter(user__pk=self.request.GET.get('user'))
         else:
+            if not self.request.user.is_authenticated:
+                return Collection.objects.none()
             queryset = queryset.filter(user=self.request.user)
 
         if 'ids' in self.request.GET:
@@ -111,3 +113,32 @@ class CollectionViewSet(viewsets.ModelViewSet):
         image.collections.remove(collection)
 
         return Response({'detail': 'Image removed from collection.'})
+
+    @action(detail=True, methods=['post'], url_path='set-cover-image')
+    def set_cover_image(self, request, pk=None):
+        collection: Collection = self.get_object()
+
+        if 'image' not in request.data:
+            return Response({'detail': 'You must provide an image parameter.'}, status=400)
+
+        try:
+            image = Image.objects_including_wip_plain.get(pk=request.data['image'])
+        except Image.DoesNotExist:
+            return Response({'detail': 'Image does not exist.'}, status=400)
+
+        if collection.user != request.user:
+            return Response({'detail': 'You can only set the cover image of your own collection.'}, status=400)
+
+        if image.user != request.user:
+            return Response(
+                {'detail': 'You can only set your own images as the cover image of a collection.'}, status=400
+            )
+
+        if not Image.objects_including_wip_plain.filter(pk=image.pk, collections=collection).exists():
+            return Response({'detail': 'Image is not in collection.'}, status=400)
+
+        collection.cover = image
+        collection.save()
+
+        serializer = self.get_serializer(collection)
+        return Response(serializer.data)
