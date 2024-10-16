@@ -337,6 +337,8 @@ def image_post_softdelete(sender, instance, **kwargs):
         # Possibly the user is being deleted
         pass
 
+    instance.collections.clear()
+
 
 @receiver(pre_delete, sender=Image)
 def image_pre_delete(sender, instance: Image, **kwargs):

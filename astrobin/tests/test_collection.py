@@ -335,3 +335,22 @@ class CollectionTest(TestCase):
         collection.refresh_from_db()
 
         self.assertEqual(collection.nested_collection_count, 0)
+
+    def test_deleting_image_updates_collection_counts(self):
+        collection = Collection.objects.create(user=self.user)
+        image = Generators.image(user=self.user)
+
+        collection.images.add(image)
+        image.refresh_from_db()
+        collection.refresh_from_db()
+
+        self.assertEqual(collection.image_count, 1)
+        self.assertEqual(collection.image_count_including_wip, 1)
+
+        image.delete()
+        collection.refresh_from_db()
+
+        self.assertEqual(collection.images.count(), 0)
+        self.assertEqual(Image.all_objects.filter(collections=collection).count(), 0)
+        self.assertEqual(collection.image_count, 0)
+        self.assertEqual(collection.image_count_including_wip, 0)
