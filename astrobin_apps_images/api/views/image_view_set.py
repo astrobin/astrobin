@@ -240,7 +240,11 @@ class ImageViewSet(
                     ).values('value')[:1]
 
                     # Annotate queryset with the tag value and order by it
-                    return queryset.annotate(tag_value=Subquery(tag_value_subquery)).order_by('tag_value')
+                    return queryset.annotate(
+                        tag_value=Subquery(tag_value_subquery)
+                    ).filter(
+                        collections=collection
+                    ).order_by('tag_value')
 
             if (
                 self.request.query_params.get('trash') and
