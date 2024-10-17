@@ -245,6 +245,8 @@ class ImageViewSet(
                     ).filter(
                         collections=collection
                     ).order_by('tag_value')
+                else:
+                    return queryset.filter(collections=collection)
 
             if (
                 self.request.query_params.get('trash') and
