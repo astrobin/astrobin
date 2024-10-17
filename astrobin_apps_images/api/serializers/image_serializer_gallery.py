@@ -1,14 +1,26 @@
 from rest_framework.serializers import ModelSerializer
-
 from astrobin.models import Image
 from astrobin_apps_images.api.serializers import ImageSerializer
 
 
 class ImageSerializerGallery(ImageSerializer):
+
     def to_representation(self, instance: Image):
         representation = ModelSerializer.to_representation(self, instance)
 
-        thumbnails = [
+        # Set thumbnails
+        thumbnails = self.get_thumbnails(instance)
+        representation.update({'thumbnails': thumbnails})
+
+        # Set key_value_tags if applicable
+        key_value_tags = self.get_key_value_tags(instance)
+        if key_value_tags:
+            representation.update({'key_value_tags': key_value_tags})
+
+        return representation
+
+    def get_thumbnails(self, instance: Image):
+        return [
             {
                 'alias': 'regular',
                 'id': instance.pk,
@@ -17,9 +29,13 @@ class ImageSerializerGallery(ImageSerializer):
             }
         ]
 
-        representation.update({'thumbnails': thumbnails})
-
-        return representation
+    def get_key_value_tags(self, instance: Image):
+        request = self.context.get('request', None)
+        if request and request.user == instance.user and request.query_params.get('collection'):
+            return ','.join(
+                [f"{tag['key']}={tag['value']}" for tag in instance.keyvaluetags.all().values('key', 'value')]
+            )
+        return None
 
     class Meta(ImageSerializer.Meta):
         fields = (
