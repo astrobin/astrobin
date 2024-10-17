@@ -350,6 +350,7 @@ class Generators:
         return Collection.objects.create(
             user=user,
             name=kwargs.pop('name', Generators.random_string()),
+            order_by_tag=kwargs.pop('order_by_tag', None),
         )
 
     @staticmethod

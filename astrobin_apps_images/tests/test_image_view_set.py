@@ -237,7 +237,50 @@ class TestImageViewSet(APITestCase):
         self.assertEqual(response.data.get("count"), 1)
         self.assertEqual(response.data.get("results")[0].get("pk"), image1.pk)
 
-    def test_undelete_by_anoymous(self):
+    def test_list_by_user_and_collection(self):
+        image1 = Generators.image()
+        Generators.image()  # Another image will not be included
+        collection = Generators.collection()
+        image1.collections.add(collection)
+
+        response = self.client.get(f'/api/v2/images/image/?user={image1.user.id}&collection={collection.pk}')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 1)
+        self.assertEqual(response.data.get("results")[0].get("pk"), image1.pk)
+
+    def test_list_by_user_and_collection_with_order_by_tag(self):
+        user = Generators.user()
+        image1 = Generators.image(user=user)
+        image2 = Generators.image(user=user)
+        kv1 = Generators.key_value_tag(key="a", value=1, image=image1)
+        kv2 = Generators.key_value_tag(key="a", value=2, image=image2)
+        collection = Generators.collection(order_by_tag="a")
+        collection.images.add(image1)
+        collection.images.add(image2)
+
+        response = self.client.get(f'/api/v2/images/image/?user={image1.user.id}&collection={collection.pk}')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 2)
+        self.assertEqual(response.data.get("results")[0].get("pk"), image1.pk)
+        self.assertEqual(response.data.get("results")[1].get("pk"), image2.pk)
+
+        kv1.value = 2
+        kv1.save()
+
+        kv2.value = 1
+        kv2.save()
+
+        response = self.client.get(f'/api/v2/images/image/?user={image1.user.id}&collection={collection.pk}')
+
+        # Images will be inverted
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 2)
+        self.assertEqual(response.data.get("results")[0].get("pk"), image2.pk)
+        self.assertEqual(response.data.get("results")[1].get("pk"), image1.pk)
+
+    def test_undelete_by_anonymous(self):
         image = Generators.image()
         image.delete()
         response = self.client.post(f'/api/v2/images/image/{image.pk}/undelete/')

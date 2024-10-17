@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db import IntegrityError
-from django.db.models import Count, Value
+from django.db.models import Count, OuterRef, Subquery, Value
 from django.db.models.functions import Concat
 from django.utils.translation import gettext_lazy
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -27,13 +27,14 @@ from rest_framework.status import (
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.viewsets import GenericViewSet
 
-from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition, UserProfile
+from astrobin.models import Collection, DeepSky_Acquisition, Image, SolarSystem_Acquisition, UserProfile
 from astrobin_apps_equipment.models import Filter
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer, ImageSerializerSkipThumbnails
 from astrobin_apps_images.api.serializers.image_serializer_gallery import ImageSerializerGallery
 from astrobin_apps_images.api.serializers.image_serializer_trash import ImageSerializerTrash
+from astrobin_apps_images.models import KeyValueTag
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
@@ -220,6 +221,26 @@ class ImageViewSet(
                 ).filter(
                     num_solarsystem_acquisitions__gt=0
                 )
+
+            collection_id = self.request.query_params.get('collection')
+            if collection_id:
+                try:
+                    collection = Collection.objects.get(pk=collection_id)
+                except Collection.DoesNotExist:
+                    return Image.objects.none()
+
+                # If the collection has an order_by_tag, sort images by that tag
+                if collection.order_by_tag:
+                    tag_key = collection.order_by_tag
+
+                    # Subquery to get the tag value for each image
+                    tag_value_subquery = KeyValueTag.objects.filter(
+                        image=OuterRef('pk'),
+                        key=tag_key
+                    ).values('value')[:1]
+
+                    # Annotate queryset with the tag value and order by it
+                    return queryset.annotate(tag_value=Subquery(tag_value_subquery)).order_by('tag_value')
 
             if (
                 self.request.query_params.get('trash') and
