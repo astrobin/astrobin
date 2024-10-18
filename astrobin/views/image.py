@@ -522,20 +522,7 @@ class ImageDetailView(ImageDetailViewBase):
         # DOWNLOAD ORIGINAL URL    #
         ############################
 
-        if is_revision:
-            if revision_image.video_file and revision_image.video_file.name:
-                download_original_url = revision_image.video_file.url
-            elif revision_image.image_file:
-                download_original_url = revision_image.image_file.url
-            else:
-                download_original_url = None
-        else:
-            if image.video_file and image.video_file.name:
-                download_original_url = image.video_file.url
-            elif image.image_file:
-                download_original_url = image.image_file.url
-            else:
-                download_original_url = None
+        download_original_url = reverse('image_download', args=(image.get_id(), r or 'final', 'original'))
 
         #################
         # RESPONSE DICT #

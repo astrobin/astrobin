@@ -1014,7 +1014,7 @@ class ImageService:
         return pending_collaborators.exclude(pk__in=collaborators).exists()
 
     def download(self, user: User, revision_label: str, version: str) -> HttpResponse:
-        def _do_download(url: str) -> HttpResponse:
+        def _do_download(url: str, filename: Optional[str] = None) -> HttpResponse:
             response = UtilsService.http_with_retries(
                 url,
                 headers={'User-Agent': 'Mozilla/5.0'}
@@ -1022,7 +1022,7 @@ class ImageService:
             content_type = mimetypes.guess_type(os.path.basename(url))
 
             ret = HttpResponse(response.content, content_type=content_type)
-            ret['Content-Disposition'] = 'attachment; filename=' + os.path.basename(url)
+            ret['Content-Disposition'] = 'attachment; filename=' + (filename or os.path.basename(url))
 
             return ret
 
@@ -1109,7 +1109,10 @@ class ImageService:
 
         if version == 'original':
             if user == image.user or user.is_superuser:
-                return _do_download(revision.video_file.url if revision.video_file.name else revision.image_file.url)
+                return _do_download(
+                    revision.video_file.url if revision.video_file.name else revision.image_file.url,
+                    filename=revision.uploader_name
+                )
             raise PermissionDenied
 
         if version == 'basic_annotations':
