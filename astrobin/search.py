@@ -448,7 +448,8 @@ class AstroBinSearchView(SearchView):
             'field_radius',
             'searchType',
             'topic',
-            'remote_source'
+            'remote_source',
+            'date_published',
         ]
 
         if 'q' in params:
@@ -466,6 +467,7 @@ class AstroBinSearchView(SearchView):
         params = AstroBinSearchView._process_coords(params)
         params = AstroBinSearchView._process_field_radius(params)
         params = AstroBinSearchView._process_remote_source(params)
+        params = AstroBinSearchView._process_publication_date(params)
 
         # Drop all params except supported params
         for key in list(params.keys()):
@@ -572,6 +574,16 @@ class AstroBinSearchView(SearchView):
     def _process_remote_source(params):
         if 'remote_source' in params:
             params['remote_source'] = params.pop('remote_source')[0]
+
+        return params
+
+    @staticmethod
+    def _process_publication_date(params):
+        if 'date_published_min' in params and 'date_published_max' in params:
+            params['date_published'] = {
+                'min': params.pop('date_published_min')[0],
+                'max': params.pop('date_published_max')[0]
+            }
 
         return params
 
