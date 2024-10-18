@@ -1,4 +1,5 @@
 import re
+from datetime import datetime, time
 from enum import Enum
 from functools import reduce
 from typing import Any, Callable, Optional, Type, Union
@@ -100,8 +101,11 @@ class SearchService:
             value_type: Type[Union[int, float, str]] = float,
             value_multiplier: Optional[Union[int, float, str]] = None
     ) -> SearchQuerySet:
-        def get_adjusted_value(value: Union[int, float, str]) -> Optional[Union[int, float]]:
+        def get_adjusted_value(value: Union[int, float, str]) -> Optional[Union[int, float, datetime]]:
             try:
+                # Parse the value if it's a date string in "YYYY-MM-DD" format
+                if value_type == str and isinstance(value, str):
+                    return datetime.strptime(value, "%Y-%m-%d")  # Convert string to datetime
                 adjusted_value = value_type(value)
                 if value_multiplier is not None:
                     adjusted_value *= value_type(value_multiplier)
@@ -109,18 +113,27 @@ class SearchService:
             except (TypeError, ValueError):
                 return None
 
-        def apply_filter(value: Union[int, float, str], filter_attr: str, operator: str) -> SearchQuerySet:
+        def apply_filter(value: Union[int, float, str, datetime], filter_attr: str, operator: str) -> SearchQuerySet:
             adjusted_value = get_adjusted_value(value)
-            if adjusted_value is None or isinstance(adjusted_value, str) and adjusted_value == '':
+
+            # Handle the case where value is a date (for the max filter)
+            if operator == '__lte' and isinstance(adjusted_value, datetime):
+                # If time is not specified, append the end of the day time (23:59:59.99999)
+                if adjusted_value.time() == time.min:  # Means only date is provided
+                    adjusted_value = adjusted_value.replace(hour=23, minute=59, second=59, microsecond=999999)
+
+            if adjusted_value is None or (isinstance(adjusted_value, str) and adjusted_value == ''):
                 return results
             return results.filter(**{f'{filter_attr}{operator}': adjusted_value})
 
+        # Apply the min and max filters based on the data
         if f'{param_name}_min' in data:
             results = apply_filter(data.get(f'{param_name}_min'), min_filter_attr, '__gte')
 
         if f'{param_name}_max' in data:
             results = apply_filter(data.get(f'{param_name}_max'), max_filter_attr, '__lte')
 
+        # Handle dictionary-style filtering
         if param_name in data:
             try:
                 value = data.get(param_name)
