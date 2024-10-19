@@ -978,7 +978,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("REMSG", "Remote Skygems"),
         ("RLD", "Riverland Dingo Observatory"),
         ("ROBO", "RoboScopes"),
-        ("ROCKCHUCK", "Rockchuck Summit Observatory"),
+        ("SADR", "Sadr Astro Remote Observatory"),
         ("SS", "Sahara Sky"),
         ("SPVO", "San Pedro Valley Observatory"),
         ("SRO", "Sierra Remote Observatories"),
