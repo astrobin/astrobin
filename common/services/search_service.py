@@ -599,7 +599,7 @@ class SearchService:
 
     @staticmethod
     def filter_by_license(data, results: SearchQuerySet) -> SearchQuerySet:
-        licenses = data.get("license")
+        licenses = data.get("licenses") or data.get("license")
 
         if licenses is not None and licenses != "":
             if isinstance(licenses, str):
