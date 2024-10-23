@@ -344,7 +344,7 @@ class UserService:
     def display_wip_images_on_public_gallery(self) -> bool:
         return self.user.userprofile.display_wip_images_on_public_gallery in (None, True)
 
-    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: Optional[str], klass: Optional[str]):
+    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: Optional[str]):
         from astrobin.models import Acquisition, Camera, Image, Telescope
         from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
 
@@ -384,6 +384,7 @@ class UserService:
         # YEAR #
         ########
         elif subsection == 'year':
+            no_data_message = _("No date specified")
             acquisitions = Acquisition.objects.filter(
                 image__user=self.user,
                 image__is_wip=False,
@@ -391,7 +392,6 @@ class UserService:
             )
             if acquisitions:
                 distinct_years = sorted(list(set([a.date.year for a in acquisitions if a.date])), reverse=True)
-                no_data_message = _("No date specified")
                 menu = [(str(year), str(year)) for year in distinct_years] + [('0', no_data_message)]
 
                 if active == '0':
@@ -417,6 +417,13 @@ class UserService:
 
                     if active:
                         queryset = queryset.filter(acquisition__date__year=active).order_by('-published').distinct()
+            else:
+                menu = [('0', no_data_message)]
+                if active not in (None, ''):
+                    active = None
+                    queryset = queryset.none()
+                else:
+                    active = '0'
 
         ########
         # GEAR #

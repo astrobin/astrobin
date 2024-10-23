@@ -1306,7 +1306,6 @@ def user_page(request, username):
         return HttpResponseRedirect(reverse('user_collections_list', args=(username,)))
 
     active = request.GET.get('active')
-    klass = request.GET.get('klass')
     menu = []
     use_union = subsection in ['uploaded', 'title']
 
@@ -1330,7 +1329,7 @@ def user_page(request, username):
         section = 'trash'
         subsection = None
     else:
-        qs, menu, active = UserService(user).sort_gallery_by(qs, subsection, active, klass)
+        qs, menu, active = UserService(user).sort_gallery_by(qs, subsection, active)
 
     view = request.GET.get('view', 'default')
 
@@ -1363,7 +1362,7 @@ def user_page(request, username):
     try:
         qs = UserService(user).get_public_images()
         response_dict['mobile_header_background'] = \
-            UserService(user).sort_gallery_by(qs, 'uploaded', None, None)[0] \
+            UserService(user).sort_gallery_by(qs, 'uploaded', None)[0] \
                 .first() \
                 .thumbnail('regular', None, sync=True) \
                 if UserService(user).get_public_images().exists() \

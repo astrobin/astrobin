@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db import IntegrityError
-from django.db.models import Count, OuterRef, Subquery, Value
+from django.db.models import Count, OuterRef, QuerySet, Subquery, Value
 from django.db.models.functions import Concat
 from django.utils.translation import gettext_lazy
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -63,6 +63,11 @@ class ImageViewSet(
     http_method_names = ['get', 'head', 'put', 'patch', 'delete']
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'images'
+
+    user: Optional[User] = None
+    menu: Optional[str] = None
+    active: Optional[str] = None
+    sorted_queryset: Optional[QuerySet] = None
 
     def _prepare_equipment_data(self, request):
         data = {}
@@ -187,28 +192,26 @@ class ImageViewSet(
         return ImageSerializer
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-
         # Having a hash in the request means we want to retrieve a single image by hash. This should work even if the
         # image is in the staging area, so we act like the retrieval method. This makes the ImageFilter 'hash' field
         # redundant, but we keep it for consistency.
         if 'hash' in self.request.query_params:
-            return queryset.filter(hash=self.request.query_params.get('hash'))
+            return Image.objects_including_wip.filter(hash=self.request.query_params.get('hash'))
 
         if 'pk' in self.kwargs:
-            return queryset.filter(pk=self.kwargs['pk'])
+            return Image.objects_including_wip.filter(pk=self.kwargs['pk'])
+
+        if self.sorted_queryset is not None:
+            queryset = self.sorted_queryset
+        else:
+            queryset = Image.objects.all()
 
         if self.request.query_params.get('user'):
-            user_id = self.request.query_params.get('user')
-            user = get_object_or_None(User, pk=user_id)
-            if not user:
-                return Image.objects.none()
-
             truism = ['1', 'true', 'yes']
 
             has_deep_sky_acquisitions_filter = self.request.GET.get('has-deepsky-acquisitions')
             if has_deep_sky_acquisitions_filter and has_deep_sky_acquisitions_filter.lower() in truism:
-                return UserService(user).get_all_images().annotate(
+                queryset = queryset.annotate(
                     num_deepsky_acquisitions=Count('acquisition__deepsky_acquisition')
                 ).filter(
                     num_deepsky_acquisitions__gt=0
@@ -216,7 +219,7 @@ class ImageViewSet(
 
             has_solar_system_acquisitions_filter = self.request.GET.get('has-solarsystem-acquisitions')
             if has_solar_system_acquisitions_filter and has_solar_system_acquisitions_filter.lower() in truism:
-                return UserService(user).get_all_images().annotate(
+                queryset = queryset.annotate(
                     num_solarsystem_acquisitions=Count('acquisition__solarsystem_acquisition')
                 ).filter(
                     num_solarsystem_acquisitions__gt=0
@@ -240,120 +243,48 @@ class ImageViewSet(
                     ).values('value')[:1]
 
                     # Annotate queryset with the tag value and order by it
-                    return queryset.annotate(
+                    queryset = queryset.annotate(
                         tag_value=Subquery(tag_value_subquery)
                     ).filter(
                         collections=collection
                     ).order_by('tag_value')
                 else:
-                    return queryset.filter(collections=collection)
+                    queryset = queryset.filter(collections=collection)
 
-            if (
-                self.request.query_params.get('trash') and
-                self.request.query_params.get('trash').lower() == 'true'
-            ):
-                return UserService(user).get_deleted_images()
-
-            if (
-                    self.request.query_params.get('include-staging-area') and
-                    self.request.query_params.get('include-staging-area').lower() == 'true'
-            ):
-                return UserService(user).get_all_images(use_union=True)
-
-            if (
-                    self.request.query_params.get('only-staging-area') and
-                    self.request.query_params.get('only-staging-area').lower() == 'true'
-            ):
-                return UserService(user).get_wip_images()
-
-            return UserService(user).get_public_images()
+            return queryset
 
         return queryset.filter(is_wip=False)
 
     def list(self, request, *args, **kwargs):
-        # Perform validation checks here before proceeding to get_queryset
-        requested_user = request.query_params.get('user')
-        request_user = request.user
-        request_user_is_requested_user_or_superuser = (
-                requested_user and
-                requested_user.isdigit() and
-                request_user.is_authenticated and (
-                        requested_user == str(request_user.pk) or
-                        request_user.is_superuser
-                )
-        )
+        # Validate the request parameters
+        validation_response = self._validate_list_request(request)
+        if validation_response:
+            return validation_response
 
-        # Handle case where 'has-deepsky-acquisitions' is set but 'user' parameter is missing
-        if request.query_params.get('has-deepsky-acquisitions') and not requested_user:
-            return Response(
-                "'user' parameter is required when filtering by deep sky acquisitions.",
-                status=HTTP_400_BAD_REQUEST
-            )
+        if 'user' in request.query_params:
+            # Get sorted queryset and extra data
+            sorted_queryset, menu, active = self._get_sorted_queryset_and_extra_data(request)
+            self.menu = menu
+            self.active = active
+            self.sorted_queryset = sorted_queryset
 
-        # Handle case where 'has-solarsystem-acquisitions' is set but 'user' parameter is missing
-        if request.query_params.get('has-solarsystem-acquisitions') and not requested_user:
-            return Response(
-                "'user' parameter is required when filtering by solar system acquisitions.",
-                status=HTTP_400_BAD_REQUEST
-            )
+            # Proceed with the default list behavior
+            response = super().list(request, *args, **kwargs)
 
-        # handle case where has-deepsky-acquisitions is set but has-solarsystem-acquisitions is also set
-        if (
-                request.query_params.get('has-deepsky-acquisitions') and
-                request.query_params.get('has-solarsystem-acquisitions')
-        ):
-            return Response(
-                "You can only filter by deep sky acquisitions or solar system acquisitions, not both.",
-                status=HTTP_400_BAD_REQUEST
-            )
+            # Inject 'menu' and 'active' into the paginated response
+            if self.paginator and hasattr(response, 'data'):
+                response.data['menu'] = self.menu
+                response.data['active'] = self.active
+            else:
+                # If not paginated, add 'menu' and 'active' to the response
+                response = Response({
+                    'menu': self.menu,
+                    'active': self.active,
+                    'results': response.data
+                }, status=response.status_code)
 
-        # Handle case where trying to filter by has-deepsky-acquisitions or has-solarsystem-acquisitions for another
-        # user
-        if (
-                request.query_params.get('has-deepsky-acquisitions') or
-                request.query_params.get('has-solarsystem-acquisitions')
-        ) and not request_user_is_requested_user_or_superuser:
-            return Response(
-                "You can only filter by acquisitions for your own images or if you are a superuser.",
-                status=HTTP_403_FORBIDDEN
-            )
+            return response
 
-        # Handle case where 'include-staging-area' is set but 'user' parameter is missing
-        if request.query_params.get('include-staging-area') and not requested_user:
-            return Response(
-                "'user' parameter is required when including the staging area.",
-                status=HTTP_400_BAD_REQUEST
-            )
-
-        # Handle permission error when requesting the trash for another user
-        if request.query_params.get('trash') and not request_user_is_requested_user_or_superuser:
-            return Response(
-                "You can only request the trash for your own images or if you are a superuser.",
-                status=HTTP_403_FORBIDDEN
-            )
-
-        # Handle permission error when requesting staging area for another user
-        if request.query_params.get('include-staging-area') and not request_user_is_requested_user_or_superuser:
-            return Response(
-                "You can only include the staging area for your own images or if you are a superuser.",
-                status=HTTP_403_FORBIDDEN
-            )
-
-        # Handle case where 'only-staging-area' is set but 'user' parameter is missing
-        if request.query_params.get('only-staging-area') and not requested_user:
-            return Response(
-                "'user' parameter is required when requesting the staging area.",
-                status=HTTP_400_BAD_REQUEST
-            )
-
-        # Handle permission error when requesting staging area for another user
-        if request.query_params.get('only-staging-area') and not request_user_is_requested_user_or_superuser:
-            return Response(
-                "You can only request the staging area for your own images or if you are a superuser.",
-                status=HTTP_403_FORBIDDEN
-            )
-
-        # Proceed with the default list behavior
         return super().list(request, *args, **kwargs)
 
     def retrieve(self, request, *args, **kwargs):
@@ -587,3 +518,120 @@ class ImageViewSet(
         image.undelete()
         serializer = self.get_serializer(image)
         return Response(serializer.data, HTTP_200_OK)
+
+    def _validate_list_request(self, request):
+        """
+        Validates the request parameters.
+        Returns a Response object if validation fails, else None.
+        """
+        requested_user = request.query_params.get('user')
+        request_user = request.user
+        request_user_is_requested_user_or_superuser = (
+                requested_user and
+                requested_user.isdigit() and
+                request_user.is_authenticated and (
+                        requested_user == str(request_user.pk) or
+                        request_user.is_superuser
+                )
+        )
+
+        # Define helper functions for common checks
+        def has_param(param):
+            return param in request.query_params
+
+        def is_truism(value):
+            return value.lower() in ['1', 'true', 'yes']
+
+        # Validation Rules
+        if has_param('has-deepsky-acquisitions') and not requested_user:
+            return Response(
+                "'user' parameter is required when filtering by deep sky acquisitions.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        if has_param('has-solarsystem-acquisitions') and not requested_user:
+            return Response(
+                "'user' parameter is required when filtering by solar system acquisitions.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        if has_param('has-deepsky-acquisitions') and has_param('has-solarsystem-acquisitions'):
+            return Response(
+                "You can only filter by deep sky acquisitions or solar system acquisitions, not both.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        if (has_param('has-deepsky-acquisitions') or has_param(
+                'has-solarsystem-acquisitions'
+        )) and not request_user_is_requested_user_or_superuser:
+            return Response(
+                "You can only filter by acquisitions for your own images or if you are a superuser.",
+                status=HTTP_403_FORBIDDEN
+            )
+
+        if has_param('include-staging-area') and not requested_user:
+            return Response(
+                "'user' parameter is required when including the staging area.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        if has_param('trash') and not request_user_is_requested_user_or_superuser:
+            return Response(
+                "You can only request the trash for your own images or if you are a superuser.",
+                status=HTTP_403_FORBIDDEN
+            )
+
+        if has_param('include-staging-area') and not request_user_is_requested_user_or_superuser:
+            return Response(
+                "You can only include the staging area for your own images or if you are a superuser.",
+                status=HTTP_403_FORBIDDEN
+            )
+
+        if has_param('only-staging-area') and not requested_user:
+            return Response(
+                "'user' parameter is required when requesting the staging area.",
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        if has_param('only-staging-area') and not request_user_is_requested_user_or_superuser:
+            return Response(
+                "You can only request the staging area for your own images or if you are a superuser.",
+                status=HTTP_403_FORBIDDEN
+            )
+
+        # If all validations pass, return None
+        return None
+
+    def _get_sorted_queryset_and_extra_data(self, request):
+        """
+        Sorts the queryset and retrieves 'menu' and 'active' data.
+        Returns a tuple of (sorted_queryset, menu, active).
+        """
+        user = self._get_user(request)
+        if not user:
+            return self.get_queryset(), None, None
+
+        is_owner = request.user == user
+        only_wip = request.query_params.get('only-staging-area')
+        include_wip = request.query_params.get('include-staging-area')
+        trash = request.query_params.get('trash')
+
+        if is_owner and only_wip:
+            queryset = UserService(user).get_wip_images()
+        elif is_owner and trash:
+            queryset = UserService(user).get_deleted_images()
+        elif is_owner and include_wip:
+            queryset = UserService(user).get_all_images()
+        else:
+            queryset = UserService(user).get_public_images()
+
+        subsection = request.query_params.get('subsection', 'uploaded')
+        active = request.query_params.get('active')
+        sorted_queryset, menu, active = UserService(user).sort_gallery_by(queryset, subsection, active)
+        return sorted_queryset, menu, active
+
+    def _get_user(self, request) -> User:
+        if not self.user:
+            user_id = request.query_params.get('user')
+            self.user = get_object_or_None(User, pk=user_id)
+        return self.user

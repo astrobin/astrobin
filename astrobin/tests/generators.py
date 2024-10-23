@@ -359,6 +359,7 @@ class Generators:
             image=image,
             number=kwargs.pop('number', 1),
             duration=kwargs.pop('duration', 300),
+            date=kwargs.pop('date', None),
         )
 
     @staticmethod

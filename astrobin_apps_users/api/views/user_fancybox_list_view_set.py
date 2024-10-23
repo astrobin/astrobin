@@ -31,7 +31,6 @@ class UserFancyboxListViewSet(viewsets.ModelViewSet):
 
         subsection = self.request.GET.get('subsection') or 'uploaded'
         active = self.request.GET.get('active')
-        klass = self.request.GET.get('klass')
         use_union = subsection in ['uploaded', 'title']  # Only for subsections that don't require additional filtering.
 
         if include_wip:
@@ -60,7 +59,6 @@ class UserFancyboxListViewSet(viewsets.ModelViewSet):
         return user_service.sort_gallery_by(
             images,
             subsection,
-            active,
-            klass
+            active
         )[0]
 

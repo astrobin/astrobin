@@ -181,6 +181,7 @@ class TestImageViewSet(APITestCase):
         image = Generators.image(is_wip=True)
         response = self.client.get(f'/api/v2/images/image/?hash={image.hash}')
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 1)
         self.assertEqual(response.data.get("results")[0].get("pk"), image.pk)
 
     def test_retrieve_wip_image_by_hash_as_owner(self):
@@ -188,6 +189,7 @@ class TestImageViewSet(APITestCase):
         self.client.force_authenticate(user=image.user)
         response = self.client.get(f'/api/v2/images/image/?hash={image.hash}')
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 1)
         self.assertEqual(response.data.get("results")[0].get("pk"), image.pk)
 
     def test_retrieve_wip_image_by_hash_as_other_user(self):
@@ -196,6 +198,7 @@ class TestImageViewSet(APITestCase):
         self.client.force_authenticate(user=Generators.user())
         response = self.client.get(f'/api/v2/images/image/?hash={image.hash}')
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("count"), 1)
         self.assertEqual(response.data.get("results")[0].get("pk"), image.pk)
 
     def test_list_only_staging_area_with_user(self):
@@ -236,6 +239,45 @@ class TestImageViewSet(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.get("count"), 1)
         self.assertEqual(response.data.get("results")[0].get("pk"), image1.pk)
+
+    def test_list_by_user_and_year(self):
+        image1 = Generators.image()
+        Generators.image()  # Image from another user will not be included.
+
+        response = self.client.get(f'/api/v2/images/image/?user={image1.user.id}&subsection=year')
+        self.assertEqual(response.status_code, 200)
+
+        # Nothing in the menu as there is no acquisition.
+        self.assertEqual(response.data.get("menu"), [('0', 'No date specified')])
+        # The image is still there but UI won't use it.
+        self.assertEqual(response.data.get("count"), 1)
+        self.assertEqual(response.data.get("results")[0].get("pk"), image1.pk)
+
+        response = self.client.get(f'/api/v2/images/image/?user={image1.user.id}&subsection=year&active=1920')
+        self.assertEqual(response.status_code, 200)
+
+        # Nothing in the menu as there is no acquisition.
+        self.assertEqual(response.data.get("menu"), [('0', 'No date specified')])
+        # No images in 1920.
+        self.assertEqual(response.data.get("count"), 0)
+
+        Generators.deep_sky_acquisition(image1, date="1920-01-01")
+
+        response = self.client.get(f'/api/v2/images/image/?user={image1.user.id}&subsection=year')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("menu"), [('1920', '1920'), ('0', 'No date specified')])
+        self.assertEqual(response.data.get("results")[0].get("pk"), image1.pk)
+
+        response = self.client.get(f'/api/v2/images/image/?user={image1.user.id}&subsection=year&active=1920')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("menu"), [('1920', '1920'), ('0', 'No date specified')])
+        self.assertEqual(response.data.get("count"), 1)
+        self.assertEqual(response.data.get("results")[0].get("pk"), image1.pk)
+
+        response = self.client.get(f'/api/v2/images/image/?user={image1.user.id}&subsection=year&active=1921')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.get("menu"), [('1920', '1920'), ('0', 'No date specified')])
+        self.assertEqual(response.data.get("count"), 0)
 
     def test_list_by_user_and_collection(self):
         image1 = Generators.image()

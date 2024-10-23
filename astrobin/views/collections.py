@@ -66,7 +66,7 @@ class UserCollectionsBase(View):
         try:
             qs = UserService(user).get_public_images()
             context['mobile_header_background'] = \
-                UserService(user).sort_gallery_by(qs, 'uploaded', None, None)[0] \
+                UserService(user).sort_gallery_by(qs, 'uploaded', None)[0] \
                     .first() \
                     .thumbnail('regular', None, sync=True) \
                     if UserService(user).get_public_images().exists() \

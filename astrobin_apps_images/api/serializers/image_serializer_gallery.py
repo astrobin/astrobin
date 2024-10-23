@@ -4,7 +4,6 @@ from astrobin_apps_images.api.serializers import ImageSerializer
 
 
 class ImageSerializerGallery(ImageSerializer):
-
     def to_representation(self, instance: Image):
         representation = ModelSerializer.to_representation(self, instance)
 
