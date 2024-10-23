@@ -617,13 +617,13 @@ class ImageViewSet(
         trash = request.query_params.get('trash')
 
         if is_owner and only_wip:
-            queryset = UserService(user).get_wip_images()
+            queryset = UserService(user).get_wip_images(use_union=False)
         elif is_owner and trash:
             queryset = UserService(user).get_deleted_images()
         elif is_owner and include_wip:
             queryset = UserService(user).get_all_images()
         else:
-            queryset = UserService(user).get_public_images()
+            queryset = UserService(user).get_public_images(use_union=False)
 
         subsection = request.query_params.get('subsection', 'uploaded')
         active = request.query_params.get('active')
