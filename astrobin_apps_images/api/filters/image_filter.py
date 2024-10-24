@@ -1,6 +1,6 @@
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import TrigramDistance
 from django.db import models
-from django.db.models import QuerySet
+from django.db.models import Q, QuerySet
 from django_filters import CharFilter, FilterSet, IsoDateTimeFilter
 
 from astrobin.models import Image
@@ -11,8 +11,11 @@ class ImageFilter(FilterSet):
 
     def search(self, queryset: QuerySet, name: str, value: str) -> QuerySet:
         return queryset.annotate(
-            search=SearchVector('title', 'description')
-        ).filter(search__icontains=value)
+            distance=TrigramDistance('title', value)
+        ).filter(
+            Q(distance__lte=0.5) |
+            Q(title__icontains=value)
+        ).order_by('distance')
 
     class Meta:
         model = Image
