@@ -9,8 +9,10 @@ from astrobin.models import Image
 class ImageFilter(FilterSet):
     q = CharFilter(method='search')
 
-    def search(self, queryset: QuerySet, name, value):
-        return queryset.annotate(search=SearchVector('title', 'description')).filter(search=value)
+    def search(self, queryset: QuerySet, name: str, value: str) -> QuerySet:
+        return queryset.annotate(
+            search=SearchVector('title', 'description')
+        ).filter(search__icontains=value)
 
     class Meta:
         model = Image

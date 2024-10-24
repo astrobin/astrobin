@@ -615,18 +615,18 @@ class ImageViewSet(
         only_wip = request.query_params.get('only-staging-area')
         include_wip = request.query_params.get('include-staging-area')
         trash = request.query_params.get('trash')
+        subsection = request.query_params.get('subsection', 'uploaded')
+        active = request.query_params.get('active')
+        use_union = subsection in ['uploaded', 'title']
 
         if is_owner and only_wip:
-            queryset = UserService(user).get_wip_images(use_union=False)
+            queryset = UserService(user).get_wip_images(use_union=use_union)
         elif is_owner and trash:
             queryset = UserService(user).get_deleted_images()
         elif is_owner and include_wip:
-            queryset = UserService(user).get_all_images()
+            queryset = UserService(user).get_all_images(use_union=use_union)
         else:
-            queryset = UserService(user).get_public_images(use_union=False)
-
-        subsection = request.query_params.get('subsection', 'uploaded')
-        active = request.query_params.get('active')
+            queryset = UserService(user).get_public_images(use_union=use_union)
         sorted_queryset, menu, active = UserService(user).sort_gallery_by(queryset, subsection, active)
         return sorted_queryset, menu, active
 
