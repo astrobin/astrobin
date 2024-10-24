@@ -617,7 +617,8 @@ class ImageViewSet(
         trash = request.query_params.get('trash')
         subsection = request.query_params.get('subsection', 'uploaded')
         active = request.query_params.get('active')
-        use_union = subsection in ['uploaded', 'title']
+        q = request.query_params.get('q')
+        use_union = subsection in ['uploaded', 'title'] and q is None
 
         if is_owner and only_wip:
             queryset = UserService(user).get_wip_images(use_union=use_union)
