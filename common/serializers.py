@@ -18,6 +18,7 @@ from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger(__name__)
 
+
 class ContentTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContentType
@@ -145,6 +146,33 @@ class UserProfileStatsSerializer(serializers.ModelSerializer):
         except Exception as e:
             log.exception(e)
             return []
+
+
+class UserProfileFollowersSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance: UserProfile):
+        return {
+            'followers': UserService(instance.user).get_followers().values_list(
+                'id', 'username', 'userprofile__real_name'
+            )
+        }
+
+
+class UserProfileFollowingSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance: UserProfile):
+        return {
+            'following': UserService(instance.user).get_following().values_list(
+                'id', 'username', 'userprofile__real_name'
+            )
+        }
+
+
+class UserProfileMutualFollowersSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance: UserProfile):
+        return {
+            'mutual-followers': UserService(instance.user).get_mutual_followers().values_list(
+                'id', 'username', 'userprofile__real_name'
+            )
+        }
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):

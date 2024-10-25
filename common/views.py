@@ -23,7 +23,10 @@ from toggleproperties.models import ToggleProperty
 from .permissions import ReadOnly
 from .serializers import (
     ContentTypeSerializer, PaymentSerializer, SubscriptionSerializer, TogglePropertySerializer,
-    UserProfileSerializer, UserProfileSerializerPrivate, UserProfileStatsSerializer, UserSerializer,
+    UserProfileFollowersSerializer, UserProfileFollowingSerializer, UserProfileMutualFollowersSerializer,
+    UserProfileSerializer, UserProfileSerializerPrivate,
+    UserProfileStatsSerializer,
+    UserSerializer,
     UserSubscriptionSerializer,
 )
 from .services.caching_service import CachingService
@@ -207,6 +210,39 @@ class UserProfileStats(generics.RetrieveAPIView):
 
     def get_serializer_class(self):
         return UserProfileStatsSerializer
+
+
+class UserProfileFollowers(generics.RetrieveAPIView):
+    model = UserProfile
+    permission_classes = (ReadOnly,)
+    queryset = UserProfile.objects.all()
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
+
+    def get_serializer_class(self):
+        return UserProfileFollowersSerializer
+
+
+class UserProfileFollowing(generics.RetrieveAPIView):
+    model = UserProfile
+    permission_classes = (ReadOnly,)
+    queryset = UserProfile.objects.all()
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
+
+    def get_serializer_class(self):
+        return UserProfileFollowingSerializer
+
+
+class UserProfileMutualFollowers(generics.RetrieveAPIView):
+    model = UserProfile
+    permission_classes = (ReadOnly,)
+    queryset = UserProfile.objects.all()
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
+
+    def get_serializer_class(self):
+        return UserProfileMutualFollowersSerializer
 
 
 @method_decorator(never_cache, name='dispatch')
