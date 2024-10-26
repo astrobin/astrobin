@@ -6,6 +6,8 @@ from typing import List, Set
 
 import stripe
 from annoying.functions import get_object_or_None
+from avatar.models import Avatar
+from avatar.signals import avatar_deleted, avatar_updated
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.contrib.auth.models import Group as DjangoGroup, User
@@ -1973,3 +1975,13 @@ def update_nested_collection_count_on_delete(sender, instance: Collection, **kwa
         if instance.parent.nested_collection_count < 0:
             instance.parent.nested_collection_count = 0
         instance.parent.save()
+
+
+@receiver(avatar_updated, sender=Avatar)
+def on_avatar_updated(sender, user, avatar, **kwargs):
+    UserProfile.objects.filter(user=user).update(updated=timezone.now())
+
+
+@receiver(avatar_deleted, sender=Avatar)
+def on_avatar_deleted(sender, user, avatar, **kwargs):
+    UserProfile.objects.filter(user=user).update(updated=timezone.now())
