@@ -870,10 +870,12 @@ class UserService:
 
     def get_following(self) -> QuerySet:
         return User.objects.filter(
-            toggleproperty__property_type='follow',
-            toggleproperty__user=self.user,
-            toggleproperty__content_type=ContentType.objects.get_for_model(User)
-        )
+            id__in=ToggleProperty.objects.filter(
+                property_type="follow",
+                content_type=ContentType.objects.get_for_model(User),
+                user=self.user
+            ).values_list('object_id', flat=True)
+        ).distinct()
 
     def get_mutual_followers(self) -> QuerySet:
         return self.get_followers() & self.get_following()
