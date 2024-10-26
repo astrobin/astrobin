@@ -3,8 +3,9 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from common.views import (
     ContentTypeList, ContentTypeDetail, UserEmptyTrash, UserList, UserDetail, UserProfileChangeGalleryHeader,
-    UserProfileList, UserProfileDetail,
-    CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserProfileStats, UserSubscriptionList,
+    UserProfileFollowers, UserProfileFollowing, UserProfileList, UserProfileDetail,
+    CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserProfileMutualFollowers, UserProfileStats,
+    UserSubscriptionList,
     UserSubscriptionDetail,
     TogglePropertyList, TogglePropertyDetail, PaymentList, UserProfilePartialUpdate,
 )
@@ -24,6 +25,13 @@ urlpatterns = (
     url(r'^userprofiles/$', UserProfileList.as_view(), name='userprofile-list'),
     url(r'^userprofiles/(?P<pk>\d+)/$', UserProfileDetail.as_view(), name='userprofile-detail'),
     url(r'^userprofiles/(?P<pk>\d+)/stats/$', UserProfileStats.as_view(), name='userprofile-stats'),
+    url(r'^userprofiles/(?P<pk>\d+)/followers/$', UserProfileFollowers.as_view(), name='userprofile-followers'),
+    url(r'^userprofiles/(?P<pk>\d+)/following/$', UserProfileFollowing.as_view(), name='userprofile-following'),
+    url(
+        r'^userprofiles/(?P<pk>\d+)/mutual-followers/$',
+        UserProfileMutualFollowers.as_view(),
+        name='userprofile-mutual-followers'
+    ),
     url(
         r'^userprofiles/(?P<pk>\d+)/change-gallery-header-image/(?P<image_id>\w+)/$',
         UserProfileChangeGalleryHeader.as_view(),
