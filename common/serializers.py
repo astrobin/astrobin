@@ -4,6 +4,8 @@ from typing import Optional
 from avatar.templatetags.avatar_tags import avatar_url
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.postgres.search import TrigramDistance
+from django.db.models import Q
 from rest_framework import serializers
 from rest_framework.fields import BooleanField, IntegerField, CharField
 from rest_framework.relations import PrimaryKeyRelatedField
@@ -150,19 +152,43 @@ class UserProfileStatsSerializer(serializers.ModelSerializer):
 
 class UserProfileFollowersSerializer(serializers.ModelSerializer):
     def to_representation(self, instance: UserProfile):
-        return {
-            'followers': UserService(instance.user).get_followers().values_list(
-                'id', 'username', 'userprofile__real_name'
+        q = self.context['request'].query_params.get('q', None)
+        followers = UserService(instance.user).get_followers().select_related('userprofile')
+
+        if q:
+            followers = followers.annotate(
+                username_distance=TrigramDistance('username', q),
+                real_name_distance=TrigramDistance('userprofile__real_name', q)
+            ).filter(
+                Q(username_distance__lte=0.5) |
+                Q(real_name_distance__lte=0.5) |
+                Q(username__icontains=q) |
+                Q(userprofile__real_name__icontains=q)
             )
+
+        return {
+            'followers': followers.values_list('id', 'username', 'userprofile__real_name')
         }
 
 
 class UserProfileFollowingSerializer(serializers.ModelSerializer):
     def to_representation(self, instance: UserProfile):
-        return {
-            'following': UserService(instance.user).get_following().values_list(
-                'id', 'username', 'userprofile__real_name'
+        q = self.context['request'].query_params.get('q', None)
+        following = UserService(instance.user).get_following().select_related('userprofile')
+
+        if q:
+            following = following.annotate(
+                username_distance=TrigramDistance('username', q),
+                real_name_distance=TrigramDistance('userprofile__real_name', q)
+            ).filter(
+                Q(username_distance__lte=0.5) |
+                Q(real_name_distance__lte=0.5) |
+                Q(username__icontains=q) |
+                Q(userprofile__real_name__icontains=q)
             )
+
+        return {
+            'following': following.values_list('id', 'username', 'userprofile__real_name')
         }
 
 
