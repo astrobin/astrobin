@@ -48,6 +48,7 @@ class ImageSerializerGallery(ImageSerializer):
             'final_gallery_thumbnail',
             'published',
             'uploaded',
+            'view_count',
             'like_count',
             'bookmark_count',
             'comment_count',
