@@ -338,9 +338,10 @@ class UserIndex(CelerySearchIndex, Indexable):
         )
 
     def should_update(self, instance, **kwargs):
+        image_index = instance.userprofile.image_index
         image_count = Image.objects.filter(user=instance, moderator_decision=ModeratorDecision.APPROVED).count()
         post_count = Post.objects.filter(user=instance, on_moderation=False).count()
-        return image_count > 0 or post_count > 0
+        return image_count > 0 or post_count > 0 or (image_index is not None and image_index > 0)
 
     def get_model(self):
         return User
