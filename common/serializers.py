@@ -15,6 +15,7 @@ from astrobin.api2.serializers.location_serializer import LocationSerializer
 from astrobin.models import UserProfile, Location
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_groups.api.serializers.group_serializer import GroupSerializer
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 
@@ -50,6 +51,7 @@ class UserSerializer(serializers.ModelSerializer):
     marketplace_feedback_count = serializers.SerializerMethodField(read_only=True)
     marketplace_listing_count = serializers.SerializerMethodField(read_only=True)
     astrobin_groups = GroupSerializer(read_only=True, source='joined_group_set', many=True)
+    valid_subscription = serializers.SerializerMethodField(read_only=True)
 
     def get_display_name(self, user: User) -> str:
         return user.userprofile.get_display_name()
@@ -62,6 +64,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_marketplace_listing_count(self, user: User) -> Optional[int]:
         return user.created_equipment_item_marketplace_listings.count()
+
+    def get_valid_subscription(self, user: User) -> str:
+        user_subscription: UserSubscription = PremiumService(user).get_valid_usersubscription()
+        return user_subscription.subscription.name if user_subscription else None
 
     class Meta:
         model = User
