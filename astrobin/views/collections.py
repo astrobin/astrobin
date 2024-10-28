@@ -11,7 +11,7 @@ from django.db import IntegrityError
 from django.db.models import Q, QuerySet
 from django.forms.utils import ErrorList
 from django.http import Http404, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -26,6 +26,7 @@ from astrobin.models import Collection, Image, UserProfile
 from astrobin_apps_images.models import KeyValueTag
 from astrobin_apps_images.services import CollectionService
 from astrobin_apps_users.services import UserService
+from common.services import AppRedirectionService
 
 
 class EnsureCollectionOwnerMixin(View):
@@ -85,10 +86,14 @@ class UserCollectionsList(UserCollectionsBase, ListView):
     context_object_name = 'collections_list'
 
     def dispatch(self, request, *args, **kwargs):
-        profile = get_object_or_404(UserProfile, user__username=self.kwargs['username'])
+        username: str = self.kwargs['username']
+        profile = get_object_or_404(UserProfile, user__username=username)
 
         if profile.suspended:
             return render(request, 'user/suspended_account.html')
+
+        if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+            return redirect(AppRedirectionService.redirect(f'/u/{username}#gallery'))
 
         return super(UserCollectionsList, self).dispatch(request, *args, **kwargs)
 
@@ -316,6 +321,11 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
 
         if profile.suspended:
             return render(request, 'user/suspended_account.html')
+
+        if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+            return redirect(
+                AppRedirectionService.redirect(f'/u/{self.object.user.username}?collection={self.object.id}#gallery')
+            )
 
         return response
 

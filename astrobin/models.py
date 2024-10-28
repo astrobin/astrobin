@@ -3049,6 +3049,18 @@ class UserProfile(SafeDeleteModel):
             '</a>'
     )
 
+    enable_new_gallery_experience = models.NullBooleanField(
+        default=None,
+        verbose_name=_('Enable new gallery experience'),
+        help_text=
+            gettext('Enable the new gallery experience, with improved navigation and a new image viewer.') +
+            ' ' +
+            '<a href="https://welcome.astrobin.com/blog/introducing-the-new-astrobin-gallery-experience" ' +
+            'target="_blank">' +
+            gettext('Learn more') +
+            '</a>'
+    )
+
     insufficiently_active_iotd_staff_member_reminders_sent = models.PositiveSmallIntegerField(
         default=0
     )

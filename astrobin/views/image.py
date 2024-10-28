@@ -291,6 +291,12 @@ class ImageDetailView(ImageDetailViewBase):
                     not request.user.userprofile.is_image_moderator():
                 raise Http404
 
+        if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+            redirect_url = AppRedirectionService.redirect(f'/i/{image.get_id()}')
+            if revision_label := kwargs.get('r'):
+                redirect_url += f'?r={revision_label}'
+            return redirect(redirect_url)
+
         revision_label = kwargs.get('r')
         if revision_label is not None and revision_label != '0':
             try:
@@ -656,6 +662,13 @@ class ImageFullView(ImageDetailView):
 
         if image.moderator_decision == ModeratorDecision.REJECTED:
             raise Http404
+
+        if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+            redirect_url = AppRedirectionService.redirect(f'/i/{image.get_id()}')
+            if revision_label := kwargs.get('r'):
+                redirect_url += f'?r={revision_label}'
+            redirect_url += '#fullscreen'
+            return redirect(redirect_url)
 
         self.revision_label = kwargs['r']
         if self.revision_label != '0':
