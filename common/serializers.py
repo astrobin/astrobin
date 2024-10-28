@@ -200,10 +200,22 @@ class UserProfileFollowingSerializer(serializers.ModelSerializer):
 
 class UserProfileMutualFollowersSerializer(serializers.ModelSerializer):
     def to_representation(self, instance: UserProfile):
-        return {
-            'mutual-followers': UserService(instance.user).get_mutual_followers().values_list(
-                'id', 'username', 'userprofile__real_name'
+        q = self.context['request'].query_params.get('q', None)
+        mutual_followers = UserService(instance.user).get_mutual_followers().select_related('userprofile')
+
+        if q:
+            mutual_followers = mutual_followers.annotate(
+                username_distance=TrigramDistance('username', q),
+                real_name_distance=TrigramDistance('userprofile__real_name', q)
+            ).filter(
+                Q(username_distance__lte=0.5) |
+                Q(real_name_distance__lte=0.5) |
+                Q(username__icontains=q) |
+                Q(userprofile__real_name__icontains=q)
             )
+
+        return {
+            'mutual-followers': mutual_followers.values_list('id', 'username', 'userprofile__real_name')
         }
 
 
