@@ -878,7 +878,17 @@ class UserService:
         ).distinct()
 
     def get_mutual_followers(self) -> QuerySet:
-        return self.get_followers() & self.get_following()
+        return User.objects.filter(
+            toggleproperty__property_type='follow',
+            toggleproperty__object_id=self.user.pk,
+            toggleproperty__content_type=ContentType.objects.get_for_model(User)
+        ).filter(
+            id__in=ToggleProperty.objects.filter(
+                property_type="follow",
+                content_type=ContentType.objects.get_for_model(User),
+                user=self.user
+            ).values_list('object_id', flat=True)
+        ).distinct()
 
     def update_followers_count(self):
         from astrobin.models import UserProfile
