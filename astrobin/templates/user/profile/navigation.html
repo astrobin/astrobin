@@ -70,6 +70,7 @@
 
                 <li class="divider"></li>
 
+                {% if requested_user == request.user %}
                 <li>
                     <a href="{% url 'user_page_bookmarks' requested_user.username %}">
                         <i class="icon-bookmark"></i>
@@ -85,6 +86,7 @@
                 </li>
 
                 <li class="divider"></li>
+                {% endif %}
 
                 <li>
                     <a href="{% url 'user_page_plots' requested_user.username %}">
