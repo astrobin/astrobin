@@ -310,11 +310,11 @@ class ImageViewSet(
         except ValueError:
             return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'Invalid image ID'})
 
-        if instance.user.userprofile.suspended:
-            return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'User is suspended'})
-
         if not instance:
             return Response(status=HTTP_404_NOT_FOUND)
+
+        if instance.user.userprofile.suspended:
+            return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'User is suspended'})
 
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
