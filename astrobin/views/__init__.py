@@ -1527,6 +1527,9 @@ def user_page_friends(request, username):
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
 
+    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        return redirect(AppRedirectionService.redirect(f'/u/{username}?mutual-followers'))
+
     content_type = ContentType.objects.get_for_model(User)
 
     # Subquery to check if a reverse follow relationship exists
