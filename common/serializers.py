@@ -98,6 +98,13 @@ class TogglePropertySerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     username = CharField(read_only=True, source="user.username")
+    allow_ads = serializers.SerializerMethodField(read_only=True)
+
+    def get_allow_ads(self, obj: UserProfile) -> bool:
+        valid_usersubscription: UserSubscription = PremiumService(obj.user).get_valid_usersubscription()
+        is_ultimate: bool = valid_usersubscription and PremiumService.is_any_ultimate(valid_usersubscription)
+        allow_ads = obj.user.userprofile.allow_astronomy_ads
+        return allow_ads or not is_ultimate
 
     def update(self, instance, validated_data):
         return super(serializers.ModelSerializer, self).update(instance, validated_data)
