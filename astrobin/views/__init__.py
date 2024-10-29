@@ -347,7 +347,7 @@ def upload_max_revisions_error(request, max_revisions, image):
             "open_link": open_link,
             "close_link": close_link
         }
-                 )
+    )
 
     return HttpResponseRedirect(image.get_absolute_url())
 
@@ -1254,6 +1254,9 @@ def me(request):
 @cache_control(private=True, no_cache=True)
 @vary_on_cookie
 def user_page(request, username):
+    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        return redirect(AppRedirectionService.gallery_redirect(request, username))
+
     try:
         user = UserService.get_case_insensitive(username)
     except User.DoesNotExist:
@@ -1407,6 +1410,9 @@ def user_page_bookmarks(request, username):
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
 
+    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        return redirect(AppRedirectionService.search_redirect({"personal_filters": {"value": ["my_bookmarks"]}}))
+
     template_name = 'user/bookmarks.html'
     if request.is_ajax():
         template_name = 'inclusion_tags/image_list_entries.html'
@@ -1432,6 +1438,9 @@ def user_page_liked(request, username):
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
 
+    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        return redirect(AppRedirectionService.search_redirect({"personal_filters": {"value": ["my_likes"]}}))
+
     template_name = 'user/liked.html'
     if request.is_ajax():
         template_name = 'inclusion_tags/image_list_entries.html'
@@ -1456,6 +1465,9 @@ def user_page_following(request, username):
 
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
+
+    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        return redirect(AppRedirectionService.redirect(f'/u/{username}?following'))
 
     following = User.objects.filter(
         id__in=ToggleProperty.objects.filter(
@@ -1486,6 +1498,9 @@ def user_page_followers(request, username):
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
 
+    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        return redirect(AppRedirectionService.redirect(f'/u/{username}?followers'))
+
     followers = User.objects.filter(
         toggleproperty__content_type=ContentType.objects.get_for_model(user),
         toggleproperty__object_id=user.id,
@@ -1511,6 +1526,9 @@ def user_page_friends(request, username):
 
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
+
+    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        return redirect(AppRedirectionService.redirect(f'/u/{username}?mutual-followers'))
 
     content_type = ContentType.objects.get_for_model(User)
 
@@ -1890,7 +1908,7 @@ def user_profile_flickr_import(request):
                     log.debug(
                         "Flickr import (user %s): found largest side of photo %s" % (
                             request.user.username, photo_id)
-                        )
+                    )
                     source = found_size.attrib['source']
 
                     img = NamedTemporaryFile(delete=True)
@@ -1915,7 +1933,7 @@ def user_profile_flickr_import(request):
         log.debug(
             "Flickr import (user %s): returning ajax response: %s" % (
                 request.user.username, simplejson.dumps(response_dict))
-            )
+        )
         return ajax_response(response_dict)
 
     return render(request, "user/profile/flickr_import.html", response_dict)
@@ -2141,7 +2159,7 @@ def user_profile_delete(request):
                     request.user.userprofile.delete_reason,
                     request.user.userprofile.delete_reason_other,
                 )
-                )
+            )
 
             return render(request, 'user/profile/deleted.html', {})
     elif request.method == 'GET':

@@ -6,7 +6,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from astrobin.enums import ImageEditorStep
-from common.constants import GroupName
 
 
 class AppRedirectionService:
@@ -19,6 +18,8 @@ class AppRedirectionService:
             path = path.replace(settings.BASE_URL, '')
 
         # from astrobin.middleware.thread_locals_middleware import get_request_cache
+        # from common.constants import GroupName
+        #
         # user = get_request_cache().get('user', None)
         #
         # if (
@@ -54,6 +55,34 @@ class AppRedirectionService:
 
         if query_string and query_string != '':
             url = url + '?%s' % query_string
+
+        return url
+
+    @staticmethod
+    def gallery_redirect(request, username) -> str:
+        url = AppRedirectionService.redirect(f'/u/{username}')
+
+        if 'staging' in request.GET:
+            return url + '#staging'
+        elif 'trash' in request.GET:
+            return url + '#trash'
+        elif 'sub' in request.GET:
+            url += f'?folder-type={request.GET.get("sub")}'
+            if 'active' in request.GET:
+                url += f'&active={request.GET.get("active")}'
+            url += '#smart-folders'
+            return url
+
+        return url
+
+    @staticmethod
+    def search_redirect(query: dict) -> str:
+        from astrobin.search import AstroBinSearchView
+
+        url = f'{settings.APP_URL}/search'
+
+        if query:
+            url += f'?p={AstroBinSearchView.encode_query_params(query)}'
 
         return url
 

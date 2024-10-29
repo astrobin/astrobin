@@ -27,6 +27,7 @@ from rest_framework.status import (
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.viewsets import GenericViewSet
 
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Collection, DeepSky_Acquisition, Image, SolarSystem_Acquisition, UserProfile
 from astrobin_apps_equipment.models import Filter
 from astrobin_apps_images.api.filters import ImageFilter
@@ -196,10 +197,20 @@ class ImageViewSet(
         # image is in the staging area, so we act like the retrieval method. This makes the ImageFilter 'hash' field
         # redundant, but we keep it for consistency.
         if 'hash' in self.request.query_params:
-            return Image.objects_including_wip.filter(hash=self.request.query_params.get('hash'))
+            return Image.objects_including_wip.filter(
+                hash=self.request.query_params.get('hash'),
+                user__userprofile__suspended__isnull=True
+            ).exclude(
+                moderator_decision=ModeratorDecision.REJECTED
+            )
 
         if 'pk' in self.kwargs:
-            return Image.objects_including_wip.filter(pk=self.kwargs['pk'])
+            return Image.objects_including_wip.filter(
+                pk=self.kwargs['pk'],
+                user__userprofile__suspended__isnull=True,
+            ).exclude(
+                moderator_decision=ModeratorDecision.REJECTED
+            )
 
         if self.sorted_queryset is not None:
             queryset = self.sorted_queryset
@@ -253,7 +264,12 @@ class ImageViewSet(
 
             return queryset
 
-        return queryset.filter(is_wip=False)
+        return queryset.filter(
+            is_wip=False,
+            user__userprofile__suspended__isnull=True
+        ).exclude(
+            moderator_decision=ModeratorDecision.REJECTED
+        )
 
     def list(self, request, *args, **kwargs):
         # Validate the request parameters
@@ -296,6 +312,9 @@ class ImageViewSet(
 
         if not instance:
             return Response(status=HTTP_404_NOT_FOUND)
+
+        if instance.user.userprofile.suspended:
+            return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'User is suspended'})
 
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
@@ -538,9 +557,6 @@ class ImageViewSet(
         # Define helper functions for common checks
         def has_param(param):
             return param in request.query_params
-
-        def is_truism(value):
-            return value.lower() in ['1', 'true', 'yes']
 
         # Validation Rules
         if has_param('has-deepsky-acquisitions') and not requested_user:
