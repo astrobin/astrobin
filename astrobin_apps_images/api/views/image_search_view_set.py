@@ -103,6 +103,7 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         queryset = queryset.models(Image)
         queryset = SearchService.filter_by_subject(params, queryset)
         queryset = SearchService.filter_by_telescope(params, queryset)
+        queryset = SearchService.filter_by_sensor(params, queryset)
         queryset = SearchService.filter_by_camera(params, queryset)
         queryset = SearchService.filter_by_mount(params, queryset)
         queryset = SearchService.filter_by_filter(params, queryset)

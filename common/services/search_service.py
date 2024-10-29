@@ -182,7 +182,7 @@ class SearchService:
             results: SearchQuerySet,
             key: str,
             id_field: str,
-            legacy_field: str,
+            legacy_field: Optional[str],
             new_field: str
     ) -> SearchQuerySet:
         item = data.get(key)
@@ -206,10 +206,15 @@ class SearchService:
             for item_id in item_ids:
                 queries.append(Q(**{id_field: item_id}))
         elif isinstance(item, str):
-            queries.append(
-                Q(**{legacy_field: CustomContain(item)}) |
-                Q(**{new_field: CustomContain(item)})
-            )
+            if legacy_field is not None:
+                queries.append(
+                    Q(**{legacy_field: CustomContain(item)}) |
+                    Q(**{new_field: CustomContain(item)})
+                )
+            else:
+                queries.append(
+                    Q(**{new_field: CustomContain(item)})
+                )
 
         if len(queries) > 0:
             results = results.filter(reduce(op, queries))
@@ -317,6 +322,17 @@ class SearchService:
             id_field="imaging_telescopes_2_id",
             legacy_field="imaging_telescopes",
             new_field="imaging_telescopes_2"
+        )
+
+    @staticmethod
+    def filter_by_sensor(data, results: SearchQuerySet) -> SearchQuerySet:
+        return SearchService.apply_equipment_filter(
+            data,
+            results,
+            key="sensor",
+            id_field="imaging_sensors_id",
+            legacy_field=None,
+            new_field="imaging_sensors"
         )
 
     @staticmethod
