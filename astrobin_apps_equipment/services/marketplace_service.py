@@ -211,7 +211,7 @@ class MarketplaceService:
         EquipmentItemMarketplaceListing.objects.filter(
             pk=listing.pk
         ).update(
-            expiration=DateTimeService.now() + timedelta(days=7),
+            expiration=DateTimeService.now() + timedelta(days=28),
             expired_notification_sent=None
         )
 
