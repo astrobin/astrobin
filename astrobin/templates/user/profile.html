@@ -57,6 +57,33 @@
 
     {% include 'user/profile/navigation.html' %}
 
+    {% if request.user.is_authenticated and request.user.userprofile.may_enable_new_gallery_experience and request.user.userprofile.enable_new_gallery_experience == None %}
+        <div class="alert alert-info new-gallery-experience">
+            <h4>
+                {% trans "Would you like to try the new gallery experience?" %}
+            </h4>
+            <p>
+                {% blocktrans trimmed %}
+                    AstroBin has a new gallery experience that is faster, more modern, and more user-friendly. Try it
+                    out now, you can always switch back to the old one in your preferences.
+                {% endblocktrans %}
+
+                <a
+                    href="https://welcome.astrobin.com/blog/introducing-the-new-astrobin-gallery-experience"
+                    target="_blank"
+                >
+                    {% trans "Learn more." %}
+                </a>
+            </p>
+            <a class="btn btn-primary" href="/json-api/user/enable-new-gallery-experience/">
+                {% trans "Enable" %}
+            </a>
+            <a class="btn btn-secondary no-page-loader" href="/json-api/user/never-show-enable-new-gallery-experience/">
+                {% trans "Nah, I'm good" %}
+            </a>
+        </div>
+    {% endif %}
+
     {% if requested_user == request.user and section == 'staging' %}
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>

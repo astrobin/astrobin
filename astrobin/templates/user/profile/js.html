@@ -4,6 +4,34 @@
 <script type="text/javascript">
 $(document).ready(function() {
     astrobin_common.init_ajax_csrf_token();
+
+    $().ready(function() {
+        $(".new-gallery-experience.alert .btn-primary").click(function(e) {
+           e.preventDefault();
+           $.ajax({
+               url: $(this).attr("href"),
+               type: "POST",
+               dataType: "json",
+               timeout: 0,
+               success: function(data) {
+                   window.location.reload();
+               }
+           });
+        });
+
+        $(".new-gallery-experience.alert .btn-secondary").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+              url: $(this).attr("href"),
+              type: "POST",
+              dataType: "json",
+              timeout: 0,
+              success: function(data) {
+                 $(".new-gallery-experience.alert").remove();
+              }
+            });
+        });
+    });
     
     function fetchMarketplaceFragment() {
         $.ajax({

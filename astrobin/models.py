@@ -3061,6 +3061,11 @@ class UserProfile(SafeDeleteModel):
             '</a>'
     )
 
+    may_enable_new_gallery_experience = models.NullBooleanField(
+        editable=False,
+        default=None,
+    )
+
     insufficiently_active_iotd_staff_member_reminders_sent = models.PositiveSmallIntegerField(
         default=0
     )
