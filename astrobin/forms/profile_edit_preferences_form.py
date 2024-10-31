@@ -14,10 +14,21 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 
 
 class UserProfileEditPreferencesForm(forms.ModelForm):
+    nullable_boolean_field_choices = (
+        ('None', _('Let AstroBin decide')),
+        ('True', _('Yes')),
+        ('False', _('No')),
+    )
+
     agreed_to_iotd_tp_rules_and_guidelines_checkbox = forms.BooleanField(
         label=UserProfile._meta.get_field('agreed_to_iotd_tp_rules_and_guidelines').verbose_name,
         help_text=UserProfile._meta.get_field('agreed_to_iotd_tp_rules_and_guidelines').help_text,
         required=False
+    )
+
+    enable_new_search_experience = forms.ChoiceField(
+        required=False,
+        choices=nullable_boolean_field_choices,
     )
 
     class Meta:
@@ -37,7 +48,6 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'receive_marketing_and_commercial_material',
             'allow_astronomy_ads',
             'allow_retailer_integration',
-            'enable_new_search_experience',
         ]
         widgets = {
             'other_languages': SelectMultiple(
@@ -49,19 +59,36 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
 
     def __init__(self, **kwargs):
         super(UserProfileEditPreferencesForm, self).__init__(**kwargs)
-        profile = getattr(self, 'instance', None)
+        profile: UserProfile = getattr(self, 'instance', None)
 
         valid_usersubscription = PremiumService(profile.user).get_valid_usersubscription()
 
         if not can_remove_ads(valid_usersubscription):
             self.fields['allow_astronomy_ads'].widget.attrs['disabled'] = True
 
+        if profile.enable_new_search_experience is None:
+            self.fields['enable_new_search_experience'].initial = 'None'
+        else:
+            self.fields['enable_new_search_experience'].initial = str(profile.enable_new_search_experience)
+
+        if profile.may_enable_new_gallery_experience:
+            self.fields['enable_new_gallery_experience'] = forms.ChoiceField(
+                required=False,
+                choices=self.nullable_boolean_field_choices,
+            )
+            if profile.enable_new_gallery_experience is None:
+                self.fields['enable_new_gallery_experience'].initial = 'None'
+            else:
+                self.fields['enable_new_gallery_experience'].initial = str(profile.enable_new_gallery_experience)
+
         if not can_remove_retailer_integration(valid_usersubscription):
             self.fields['allow_retailer_integration'].widget.attrs['disabled'] = True
 
-        if (self.instance and
+        if (
+                self.instance and
                 self.instance.agreed_to_iotd_tp_rules_and_guidelines and
-                self.instance.agreed_to_iotd_tp_rules_and_guidelines > settings.IOTD_LAST_RULES_UPDATE):
+                self.instance.agreed_to_iotd_tp_rules_and_guidelines > settings.IOTD_LAST_RULES_UPDATE
+        ):
             self.fields['agreed_to_iotd_tp_rules_and_guidelines_checkbox'].initial = True
 
     def save(self, commit=True):
@@ -99,6 +126,18 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             )
 
         return auto_submit
+
+    def clean_enable_new_search_experience(self):
+        value = self.cleaned_data['enable_new_search_experience']
+        if value == 'None':
+            return None
+        return value == 'True'
+
+    def clean_enable_new_gallery_experience(self):
+        value = self.cleaned_data['enable_new_gallery_experience']
+        if value == 'None':
+            return None
+        return value == 'True'
 
     def clean(self):
         cleaned_data = super().clean()
