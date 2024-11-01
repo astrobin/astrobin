@@ -2,10 +2,10 @@ from datetime import timedelta
 
 from annoying.functions import get_object_or_None
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 from django.http import Http404
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from drf_haystack.filters import HaystackFilter
 from haystack.query import SearchQuerySet
@@ -35,10 +35,37 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
     model = NestedComment
     queryset = NestedComment.objects.select_related('author', 'author__userprofile').all().order_by('pk')
     serializer_class = NestedCommentSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('content_type', 'object_id',)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
     pagination_class = None
+
+    def get_queryset(self):
+        queryset = NestedComment.objects.select_related('author', 'author__userprofile').all().order_by('pk')
+
+        content_type_id = self.request.query_params.get('content_type')
+        object_id = self.request.query_params.get('object_id')
+
+        # Filter out comments by shadow-banned users
+        if content_type_id and object_id:
+            queryset = queryset.filter(
+                content_type__id=content_type_id,
+                object_id=object_id,
+            )
+
+            content_type = ContentType.objects.get_for_id(content_type_id)
+            if content_type.model == 'image':
+                image = content_type.get_object_for_this_type(pk=object_id)
+
+                if self.request.user.is_authenticated:
+                    queryset = queryset.filter(
+                        ~Q(author__pk__in=image.user.userprofile.shadow_bans.values_list('id', flat=True)) |
+                        Q(author=self.request.user)
+                    )
+                else:
+                    queryset = queryset.filter(
+                        ~Q(author__pk__in=image.user.userprofile.shadow_bans.values_list('id', flat=True))
+                    )
+
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
