@@ -1,23 +1,16 @@
 import logging
-import mimetypes
-import os
-import time
-from typing import Optional, Union
+from typing import Union
 
-import boto3
-from PIL import Image as PILImage
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
 )
-from cairosvg import svg2png
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import MultipleObjectsReturned, PermissionDenied
 from django.core.files.images import get_image_dimensions
-from django.core.files.temp import NamedTemporaryFile
 from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
@@ -26,8 +19,8 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
 from django.utils.translation import ugettext as _
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_control
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import (
@@ -49,7 +42,6 @@ from astrobin.forms.remove_as_collaborator_form import ImageRemoveAsCollaborator
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevision, LANGUAGES, SolarSystem_Acquisition)
 from astrobin.services.gear_service import GearService
-from astrobin.services.utils_service import UtilsService
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_client_country_code, get_image_resolution
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
@@ -59,7 +51,6 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may_not_submit_to_iotd_tp_process_reason
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
-from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
@@ -291,7 +282,11 @@ class ImageDetailView(ImageDetailViewBase):
                     not request.user.userprofile.is_image_moderator():
                 raise Http404
 
-        if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        if (
+                request.user.is_authenticated and
+                request.user.userprofile.enable_new_gallery_experience and
+                'force-classic-view' not in request.GET
+        ):
             redirect_url = AppRedirectionService.redirect(f'/i/{image.get_id()}')
             if revision_label := kwargs.get('r'):
                 redirect_url += f'?r={revision_label}'
