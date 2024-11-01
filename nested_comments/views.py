@@ -23,7 +23,7 @@ from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.permissions import ReadOnly
 from common.services.search_service import MatchType
 from .models import NestedComment
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsCommentAuthorOrContentOwnerOrReadOnly
 from .serializers import NestedCommentSearchSerializer, NestedCommentSerializer
 from .services import CommentNotificationsService
 
@@ -35,7 +35,7 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
     model = NestedComment
     queryset = NestedComment.objects.select_related('author', 'author__userprofile').all().order_by('pk')
     serializer_class = NestedCommentSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsCommentAuthorOrContentOwnerOrReadOnly)
     pagination_class = None
 
     def get_queryset(self):
@@ -114,7 +114,10 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
             request.user
         )
 
-        return Response(status=200)
+        comment.refresh_from_db()
+
+        serializer = self.get_serializer(comment)
+        return Response(serializer.data)
 
     @action(detail=True, methods=['post'], url_path='report-abuse')
     def report_abuse(self, request, pk):
