@@ -1,9 +1,11 @@
 import urllib.error
 import urllib.parse
 import urllib.request
+from typing import Optional, Union
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from astrobin.enums import ImageEditorStep
 
@@ -85,6 +87,33 @@ class AppRedirectionService:
             url += f'?p={AstroBinSearchView.encode_query_params(query)}'
 
         return url
+
+    @staticmethod
+    def image_redirect(
+            request,
+            image_id: Union[str, int],
+            revision_label: Optional[str] = None,
+            comment_id: Optional[int] = None,
+    ) -> str:
+        if (
+                request.user.is_authenticated and
+                request.user.userprofile.enable_new_gallery_experience and
+                'force-classic-view' not in request.GET
+        ):
+            redirect_url = AppRedirectionService.redirect(f'/i/{image_id}')
+            if revision_label:
+                redirect_url += f'?r={revision_label}'
+            if comment_id:
+                redirect_url += f'#c{comment_id}'
+            return redirect_url
+
+        redirect_url = reverse('image_detail', kwargs={
+            'pk': image_id,
+            'r': revision_label,
+        })
+        if comment_id:
+            redirect_url += f'#c{comment_id}'
+        return redirect_url
 
     @staticmethod
     def cookie_domain(request):

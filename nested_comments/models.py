@@ -90,7 +90,7 @@ class NestedComment(models.Model):
 
     def get_absolute_url(self):
         object_url = self.content_type.get_object_for_this_type(id=self.object_id).get_absolute_url()
-        return '%s#c%d' % (object_url, self.id)
+        return '%s?cid=%d#c%d' % (object_url, self.id, self.id)
 
     def delete(self, *args, **kwargs):
         if not self.deleted:

@@ -239,7 +239,12 @@ class CommentNotificationsService:
                     'preheader': image.title,
                     'title': image.title,
                     'url': build_notification_url(
-                        '%s%s#c%d' % (settings.BASE_URL, image.get_absolute_url(), self.comment.pk),
+                        '%s%s?cid=%d#c%d' % (
+                            settings.BASE_URL,
+                            image.get_absolute_url(),
+                            self.comment.pk,
+                            self.comment.pk
+                        ),
                         additional_query_args={'moderate-comment': 1})
                 })
 

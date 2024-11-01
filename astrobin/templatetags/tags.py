@@ -8,7 +8,6 @@ import dateutil
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.postgres.search import TrigramDistance
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q, QuerySet
@@ -35,10 +34,6 @@ from astrobin.utils import (
     ra_decimal_precision_from_pixel_scale,
 )
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
-from astrobin_apps_equipment.models import (
-    EquipmentBrandListing, EquipmentItemListing,
-    EquipmentItemMarketplaceListingLineItem,
-)
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (

@@ -287,10 +287,9 @@ class ImageDetailView(ImageDetailViewBase):
                 request.user.userprofile.enable_new_gallery_experience and
                 'force-classic-view' not in request.GET
         ):
-            redirect_url = AppRedirectionService.redirect(f'/i/{image.get_id()}')
-            if revision_label := kwargs.get('r'):
-                redirect_url += f'?r={revision_label}'
-            return redirect(redirect_url)
+            return redirect(
+                AppRedirectionService.image_redirect(request, image.get_id(), kwargs.get('r'), kwargs.get('cid'))
+            )
 
         revision_label = kwargs.get('r')
         if revision_label is not None and revision_label != '0':
