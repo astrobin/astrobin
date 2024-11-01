@@ -1,9 +1,13 @@
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from astrobin.models import Image
 from astrobin_apps_images.api.serializers import ImageSerializer
+from astrobin_apps_images.services import ImageService
 
 
 class ImageSerializerGallery(ImageSerializer):
+    is_playable = serializers.SerializerMethodField()
+
     def to_representation(self, instance: Image):
         representation = ModelSerializer.to_representation(self, instance)
 
@@ -27,6 +31,22 @@ class ImageSerializerGallery(ImageSerializer):
                 'url': instance.thumbnail('regular', None, sync=True)
             }
         ]
+
+    def get_is_playable(self, instance: Image) -> bool:
+        # As this is the gallery serializer, we need to check the final revision. This field will be used to determine
+        # whether to render a play button on the thumbnail.
+        final_revision = ImageService(instance).get_final_revision()
+
+        video_file = final_revision.video_file
+        if video_file:
+            return True
+
+        # If the image is a gif, we also want to render a play button on the thumbnail.
+        name = final_revision.image_file.name if final_revision.image_file else None
+        if name and name.lower().endswith('.gif'):
+            return True
+
+        return False
 
     def get_key_value_tags(self, instance: Image):
         request = self.context.get('request', None)
@@ -57,5 +77,6 @@ class ImageSerializerGallery(ImageSerializer):
             'is_iotd',
             'is_top_pick',
             'is_top_pick_nomination',
-            'collaborators'
+            'collaborators',
+            'is_playable',
         )
