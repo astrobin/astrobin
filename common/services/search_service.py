@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
 from haystack.backends import SQ
-from haystack.inputs import BaseInput, Clean
+from haystack.inputs import BaseInput, Clean, Raw
 from operator import and_, or_
 
 from haystack.query import SearchQuerySet
@@ -252,8 +252,8 @@ class SearchService:
                 for x in catalog_entries:
                     subject_query |= (
                             SQ(objects_in_field__exact=x.get('subject_entry')) |
-                            SQ(title__icontains=x.get('title_entry')) |
-                            SQ(title__icontains=x.get('title_entry').replace(' ', ''))
+                            SQ(title=Raw(f'"{x.get("title_entry")}"')) |
+                            SQ(title=Raw(f'"{x.get("title_entry").replace(" ", "")}"'))
                     )
 
             return subject_query
