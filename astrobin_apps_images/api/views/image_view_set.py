@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db import IntegrityError
-from django.db.models import Count, OuterRef, QuerySet, Subquery, Value
+from django.db.models import Count, OuterRef, Q, QuerySet, Subquery, Value
 from django.db.models.functions import Concat
 from django.utils.translation import gettext_lazy
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
@@ -173,8 +173,8 @@ class ImageViewSet(
 
     def get_serializer_class(self):
         if (
-            'trash' in self.request.query_params and
-            self.request.query_params.get('trash').lower() == 'true'
+                'trash' in self.request.query_params and
+                self.request.query_params.get('trash').lower() == 'true'
         ):
             return ImageSerializerTrash
 
@@ -293,11 +293,13 @@ class ImageViewSet(
                 response.data['active'] = self.active
             else:
                 # If not paginated, add 'menu' and 'active' to the response
-                response = Response({
-                    'menu': self.menu,
-                    'active': self.active,
-                    'results': response.data
-                }, status=response.status_code)
+                response = Response(
+                    {
+                        'menu': self.menu,
+                        'active': self.active,
+                        'results': response.data
+                    }, status=response.status_code
+                )
 
             return response
 
@@ -537,6 +539,32 @@ class ImageViewSet(
         image.undelete()
         serializer = self.get_serializer(image)
         return Response(serializer.data, HTTP_200_OK)
+
+    @action(detail=True, methods=['get'], url_path='users-who-like')
+    def users_who_like(self, request, pk=None):
+        image = self.get_object()
+        users = User.objects.filter(
+            toggleproperty__content_type=ContentType.objects.get_for_model(Image),
+            toggleproperty__object_id=image.pk,
+            toggleproperty__property_type='like',
+        )
+
+        if 'users-who-like-q' in request.query_params:
+            q = request.query_params.get('users-who-like-q')
+            users = users.filter(
+                Q(username__icontains=q) |
+                Q(userprofile__real_name__icontains=q)
+            )
+
+        return Response(
+            [
+                {
+                    'username': user.username,
+                    'displayName': user.userprofile.get_display_name(),
+                } for user in users
+            ],
+            HTTP_200_OK
+        )
 
     def _validate_list_request(self, request):
         """
