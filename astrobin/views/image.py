@@ -43,7 +43,7 @@ from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUpl
 from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevision, LANGUAGES, SolarSystem_Acquisition)
 from astrobin.services.gear_service import GearService
 from astrobin.templatetags.tags import can_like
-from astrobin.utils import get_client_country_code, get_image_resolution
+from astrobin.utils import add_url_params, get_client_country_code, get_image_resolution
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListingLineItem
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
 from astrobin_apps_groups.models import Group
@@ -313,14 +313,28 @@ class ImageDetailView(ImageDetailViewBase):
             if not image.is_final:
                 final = image.revisions.filter(is_final=True)
                 if final.count() > 0:
-                    url = reverse_lazy(
-                        'image_detail',
-                        args=(image.get_id(), final[0].label,)
+                    url = str(
+                        reverse_lazy(
+                            'image_detail',
+                            args=(image.get_id(), final[0].label,)
+                        )
                     )
+
+                    params = {}
                     if 'nc' in request.GET:
-                        url += '?nc=%s' % request.GET.get('nc')
+                        params['nc'] = request.GET.get('nc')
                         if 'nce' in request.GET:
-                            url += '&nce=%s' % request.GET.get('nce')
+                            params['nce'] = request.GET.get('nce')
+
+                    if 'cid' in request.GET:
+                        params['cid'] = request.GET.get('cid')
+
+                    if 'force-classic-view' in request.GET:
+                        params['force-classic-view'] = ''
+
+                    # Add parameters to URL
+                    url = add_url_params(url, params)
+
                     return redirect(url)
 
         return super(ImageDetailView, self).dispatch(request, *args, **kwargs)
