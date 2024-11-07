@@ -277,6 +277,31 @@ class ImageViewSet(
         if validation_response:
             return validation_response
 
+        if 'hash' in request.query_params:
+            hash: str = request.query_params.get('hash')
+            image: Image = get_object_or_None(Image.objects_including_wip_plain, hash=hash)
+            cache_key: str = f'api_image_{hash}_{request.query_params.get("skip-thumbnails", False)}'
+            cached_data = cache.get(cache_key)
+
+            if cached_data:
+                cached_timestamp = cached_data.get('timestamp')
+                if cached_timestamp and cached_timestamp >= image.updated.timestamp():
+                    return Response(cached_data.get('data'))
+
+            # Get fresh data
+            serialized = self.get_serializer(image).data
+            cache_data = {
+                'data': {
+                    'count': 1,
+                    'next': None,
+                    'prev': None,
+                    'results': [serialized]
+                },
+                'timestamp': image.updated.timestamp()
+            }
+            cache.set(cache_key, cache_data, 3600)
+            return Response(cache_data.get('data'))
+
         if 'user' in request.query_params:
             # Get sorted queryset and extra data
             sorted_queryset, menu, active = self._get_sorted_queryset_and_extra_data(request)

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.db import IntegrityError
 from django.db.models import Q, QuerySet
 from django.utils.decorators import method_decorator
@@ -10,6 +11,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import generics, mixins
 from rest_framework.exceptions import ValidationError
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
@@ -64,6 +66,41 @@ class UserList(generics.ListAPIView):
     throttle_scope = 'users'
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('username',)
+
+    def get_cache_key(self, username):
+        return f"api_common_user_list:{username}"
+
+    def list(self, request, *args, **kwargs):
+        username = request.GET.get('username')
+
+        if not username:
+            return super().list(request, *args, **kwargs)
+
+        cache_key = self.get_cache_key(username)
+
+        # Try to get from cache
+        cached_data = cache.get(cache_key)
+
+        # Get the user for profile timestamp comparison
+        user = get_object_or_404(User.objects.select_related('userprofile'), username=username)
+
+        if cached_data:
+            cache_timestamp = cached_data.get('timestamp')
+            if cache_timestamp and cache_timestamp >= user.userprofile.updated.timestamp():
+                return Response([cached_data['data']])
+
+        # Get fresh data
+        queryset = self.filter_queryset(self.get_queryset())
+        instance = get_object_or_404(queryset, username=username)
+        serialized = self.get_serializer(instance).data
+
+        # Cache the fresh data
+        cache_data = {
+            'data': serialized,
+            'timestamp': user.userprofile.updated.timestamp()
+        }
+        cache.set(cache_key, cache_data)
+        return Response([serialized])
 
 
 @method_decorator(
