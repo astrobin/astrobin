@@ -72,7 +72,7 @@ class TelescopeBaseModel(EquipmentItem):
         (TelescopeType.CATADIOPTRIC_SCHMIDT_CAMERA, _("Catadioptric: Schmidt camera")),
         (TelescopeType.CATADIOPTRIC_SCHMIDT_CASSEGRAIN, _("Catadioptric: Schmidt-Cassegrain")),
         (TelescopeType.CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN, _("Catadioptric: ACF Schmidt-Cassegrain")),
-        (TelescopeType.CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT, _("Catadioptric: Rowe-Atkinson Schmidt astrograph")),
+        (TelescopeType.CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT, _("Catadioptric: Rowe-Ackermann Schmidt astrograph")),
         (TelescopeType.CATADIOPTRIC_RICCARDI_HONDERS, _("Catadioptric: Riccardi-Honders")),
         (TelescopeType.CATADIOPTRIC_MODIFIED_HARMER_WYNNE, _("Catadioptric: modified Harmer-Wynne")),
 
