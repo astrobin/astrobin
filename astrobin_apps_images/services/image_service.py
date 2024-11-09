@@ -605,11 +605,20 @@ class ImageService:
         Action.objects.target(self.image).delete()
         Action.objects.action_object(self.image).delete()
 
-    def generate_loading_placeholder(self, save=True):
-        logger.debug('Generating loading placeholder for %s' % self.image)
+    def generate_loading_placeholder(self, revision_label=None, save=True):
+        logger.debug(f'Generating loading placeholder for {self.image}/{revision_label}')
+        revision: Union[Image, ImageRevision]
 
-        if self.image.w and self.image.h:
-            w, h = self.image.w, self.image.h
+        if revision_label:
+            try:
+                revision = self.get_revision(revision_label)
+            except ImageRevision.DoesNotExist:
+                return
+        else:
+            revision = self.image
+
+        if revision.w and revision.h:
+            w, h = revision.w, revision.h
         else:
             w, h = 1024, 1024
 
@@ -625,11 +634,10 @@ class ImageService:
             img_temp.flush()
             img_temp.seek(0)
 
-            # Assuming `image` is the ImageField
-            self.image.image_file.save("astrobin-video-placeholder.jpg", File(img_temp), save=False)
+            revision.image_file.save("astrobin-video-placeholder.jpg", File(img_temp), save=False)
 
             if save:
-                self.image.save(update_fields=['image_file'], keep_deleted=True)
+                revision.save(update_fields=['image_file'], keep_deleted=True)
 
     def get_local_video_file(self) -> File:
         chunk_size = 4096

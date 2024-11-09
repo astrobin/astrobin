@@ -403,7 +403,7 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
     if not uploading:
         if instance.video_file.name:
             if not instance.image_file.name:
-                ImageService(instance.image).generate_loading_placeholder()
+                ImageService(instance.image).generate_loading_placeholder(revision_label=instance.label)
                 generate_video_preview.apply_async(args=(instance.pk, content_type.pk))
 
             if not instance.encoded_video_file.name:
