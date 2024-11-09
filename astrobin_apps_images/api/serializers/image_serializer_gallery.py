@@ -3,9 +3,16 @@ from rest_framework.serializers import ModelSerializer
 from astrobin.models import Image
 from astrobin_apps_images.api.serializers import ImageSerializer
 from astrobin_apps_images.services import ImageService
+from common.serializers import UserSerializer
 
 
 class ImageSerializerGallery(ImageSerializer):
+    class CollaboratorSerializer(UserSerializer):
+        class Meta(UserSerializer.Meta):
+            fields = ('id', 'username', 'display_name', 'avatar')
+            exclude = None
+
+    collaborators = CollaboratorSerializer(many=True, read_only=True)
     is_playable = serializers.SerializerMethodField()
 
     def to_representation(self, instance: Image):
