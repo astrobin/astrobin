@@ -10,7 +10,7 @@
 -e git+https://github.com/siovene/pybbm.git@1658f189908ee664530f663dfd37da4ee9ad45ae#egg=pybbm
 -e git+https://github.com/astrobin/django-otp.git@892fedb74a9106387d47021b5f9c6ba0b1ffac54#egg=django_otp
 -e git+https://github.com/caktus/django-celery-monitor.git@3ad31848901fd8c095cf541b76c1c645d83130f4#egg=django-celery-monitor
-amqp==2.6.1
+amqp==5.3.1
 amqplib==1.0.2
 anyjson==0.3.3
 asgiref==3.6.0
