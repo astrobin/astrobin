@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from typing import Optional
 
 from hitcount.models import HitCount
 from rest_framework import serializers
@@ -87,12 +88,17 @@ class ImageSerializer(serializers.ModelSerializer):
     location_objects = LocationSerializer(source="locations", many=True, read_only=True)
     collaborators = UserSerializer(many=True, read_only=True)
     iotd_date = serializers.DateField(source="iotd.date", read_only=True)
+    is_in_iotd_queue = serializers.SerializerMethodField(read_only=True)
     is_iotd = serializers.SerializerMethodField(read_only=True)
     is_top_pick = serializers.SerializerMethodField(read_only=True)
     is_top_pick_nomination = serializers.SerializerMethodField(read_only=True)
     view_count = serializers.SerializerMethodField(read_only=True)
     average_moon_age = serializers.SerializerMethodField(read_only=True)
     average_moon_illumination = serializers.SerializerMethodField(read_only=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.iotd_service = IotdService()
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
@@ -199,7 +205,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
         return pending_collaborators
 
-    def get_allow_ads(self, obj: Image):
+    def get_allow_ads(self, obj: Image) -> bool:
         valid_usersubscription: UserSubscription = PremiumService(obj.user).get_valid_usersubscription()
         is_ultimate: bool = valid_usersubscription and PremiumService.is_any_ultimate(valid_usersubscription)
         allow_ads = obj.user.userprofile.allow_astronomy_ads
@@ -209,29 +215,32 @@ class ImageSerializer(serializers.ModelSerializer):
         revisions = obj.revisions.filter(deleted__isnull=True)
         return ImageRevisionSerializer(revisions, many=True, context=self.context).data
 
-    def get_user_follower_count(self, obj):
+    def get_user_follower_count(self, obj) -> int:
         return obj.user.userprofile.followers_count
 
-    def get_is_iotd(self, obj):
-        return IotdService().is_iotd(obj)
+    def get_is_in_iotd_queue(self, obj) -> bool:
+        return self.iotd_service.is_in_iotd_queue(obj)
 
-    def get_is_top_pick(self, obj):
-        return IotdService().is_top_pick(obj)
+    def get_is_iotd(self, obj) -> bool:
+        return self.iotd_service.is_iotd(obj)
 
-    def get_is_top_pick_nomination(self, obj):
-        return IotdService().is_top_pick_nomination(obj)
+    def get_is_top_pick(self, obj) -> bool:
+        return self.iotd_service.is_top_pick(obj)
 
-    def get_view_count(self, obj):
+    def get_is_top_pick_nomination(self, obj) -> bool:
+        return self.iotd_service.is_top_pick_nomination(obj)
+
+    def get_view_count(self, obj) -> int:
         return HitCount.objects.get_for_object(obj).hits
 
-    def get_average_moon_age(self, obj):
+    def get_average_moon_age(self, obj) -> Optional[float]:
         data = []
         for acquisition in DeepSky_Acquisition.objects.filter(image=obj, date__isnull=False).iterator():
             data.append(MoonPhase(acquisition.date).age)
 
         return sum(data) / len(data) if data else None
 
-    def get_average_moon_illumination(self, obj: Image):
+    def get_average_moon_illumination(self, obj: Image) -> Optional[float]:
         data = []
 
         for acquisition in DeepSky_Acquisition.objects.filter(image=obj, date__isnull=False).iterator():
@@ -326,6 +335,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'is_iotd',
             'is_top_pick',
             'is_top_pick_nomination',
+            'is_in_iotd_queue',
             'view_count',
             'average_moon_age',
             'average_moon_illumination',
