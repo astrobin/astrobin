@@ -64,8 +64,6 @@ class UserList(generics.ListAPIView):
     ).all()
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('username',)
 
     def get_cache_key(self, username):
         return f"api_common_user_list:{username}"
@@ -81,8 +79,10 @@ class UserList(generics.ListAPIView):
         # Try to get from cache
         cached_data = cache.get(cache_key)
 
-        # Get the user for profile timestamp comparison
-        user = get_object_or_404(User.objects.select_related('userprofile'), username=username)
+        try:
+            user = UserService.get_case_insensitive(username)
+        except User.DoesNotExist:
+            return Response(status=404)
 
         if cached_data:
             cache_timestamp = cached_data.get('timestamp')
@@ -91,8 +91,7 @@ class UserList(generics.ListAPIView):
 
         # Get fresh data
         queryset = self.filter_queryset(self.get_queryset())
-        instance = get_object_or_404(queryset, username=username)
-        serialized = self.get_serializer(instance).data
+        serialized = self.get_serializer(user).data
 
         # Cache the fresh data
         cache_data = {
