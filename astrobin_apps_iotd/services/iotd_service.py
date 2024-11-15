@@ -39,26 +39,13 @@ class IotdService:
         if image.submitted_for_iotd_tp_consideration is None:
             return False
 
-        if image.submitted_for_iotd_tp_consideration < timezone.now() - timedelta(
+        cutoff = timezone.now() - timedelta(
                 settings.IOTD_SUBMISSION_WINDOW_DAYS +
                 settings.IOTD_REVIEW_WINDOW_DAYS +
                 settings.IOTD_JUDGEMENT_WINDOW_DAYS
-        ) - timedelta(minutes=30):
-            return False
+        ) - timedelta(minutes=30)
 
-        if IotdSubmissionQueueEntry.objects.filter(image=image).exists():
-            return True
-
-        if IotdReviewQueueEntry.objects.filter(image=image).exists():
-            return True
-
-        if IotdJudgementQueueEntry.objects.filter(image=image).exists():
-            return True
-
-        if self.is_future_iotd(image):
-            return True
-
-        return False
+        return image.submitted_for_iotd_tp_consideration > cutoff or self.is_future_iotd(image)
 
     def is_iotd(self, image: Image) -> bool:
         return \
