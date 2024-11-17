@@ -964,6 +964,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("HAKOS", "Hakos Astro Farm"),
         ("HAWK", "HAWK Observatory"),
         ("HCRO", "Howling Coyote Remote Observatories (HCRO)"),
+        ("HELLAS", "Hellas-Sky"),
         ("HMO", "Heaven's Mirror Observatory"),
         ("IC", "IC Astronomy Observatories"),
         ("ITU", "Image The Universe"),
