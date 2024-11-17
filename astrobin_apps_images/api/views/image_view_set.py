@@ -280,6 +280,9 @@ class ImageViewSet(
         if 'hash' in request.query_params:
             hash: str = request.query_params.get('hash')
             image: Image = get_object_or_None(Image.objects_including_wip_plain, hash=hash)
+            if not image:
+                return Response(status=HTTP_404_NOT_FOUND)
+
             cache_key: str = f'api_image_{hash}_{request.query_params.get("skip-thumbnails", False)}'
             cached_data = cache.get(cache_key)
 
