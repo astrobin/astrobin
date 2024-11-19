@@ -12,6 +12,7 @@ from astrobin.models import Image, ImageRevision, UserProfile
 from astrobin.signals import imagerevision_post_save
 from astrobin.stories import ACTSTREAM_VERB_UPLOADED_REVISION
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models import EquipmentPreset
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_groups.models import Group
 from toggleproperties.models import ToggleProperty
@@ -102,10 +103,12 @@ class SignalsTest(TestCase):
             push_notification.assert_called_with([follower], user, 'new_image_revision', mock.ANY)
 
         with self.assertRaises(AssertionError):
-            add_story.assert_called_with(user, dict(
-                verb=ACTSTREAM_VERB_UPLOADED_REVISION,
-                action_object=revision,
-                target=image)
+            add_story.assert_called_with(
+                user, dict(
+                    verb=ACTSTREAM_VERB_UPLOADED_REVISION,
+                    action_object=revision,
+                    target=image
+                )
             )
 
     @patch("astrobin.signals.push_notification")
@@ -379,7 +382,6 @@ class SignalsTest(TestCase):
         image.refresh_from_db()
 
         self.assertGreater(image.updated, before)
-
 
     def test_accessory_2_change_causes_image_to_be_saved(self):
         image = Generators.image()
@@ -865,3 +867,44 @@ class SignalsTest(TestCase):
         user.userprofile.shadow_bans.add(follower.userprofile)
 
         self.assertEquals(0, ToggleProperty.objects.count())
+
+    @patch('astrobin.signals.update_equipment_preset_image_count.delay')
+    @patch('astrobin.signals.update_equipment_preset_total_integration.delay')
+    def test_update_equipment_preset_image_count_on_equipment_changed(
+            self,
+            update_equipment_preset_total_integration,
+            update_equipment_preset_image_count
+    ):
+        user = Generators.user()
+        preset = EquipmentPreset.objects.create(user=user, name='test')
+
+        image = Generators.image(user=user)
+
+        telescope = EquipmentGenerators.telescope()
+        image.imaging_telescopes_2.add(telescope)
+        preset.imaging_telescopes.add(telescope)
+
+        image.save()
+
+        update_equipment_preset_image_count.assert_called_with(preset.pk)
+        update_equipment_preset_total_integration.assert_called_with(preset.pk)
+
+    @patch('astrobin.signals.update_equipment_preset_total_integration.delay')
+    def test_update_equipment_preset_total_integration_called_on_acquisition_changed(
+            self,
+            update_equipment_preset_total_integration
+    ):
+        user = Generators.user()
+        preset = EquipmentPreset.objects.create(user=user, name='test')
+
+        image = Generators.image(user=user)
+
+        telescope = EquipmentGenerators.telescope()
+        image.imaging_telescopes_2.add(telescope)
+        preset.imaging_telescopes.add(telescope)
+
+        update_equipment_preset_total_integration.reset_mock()
+
+        image.save()
+
+        update_equipment_preset_total_integration.assert_called_with(preset.pk)

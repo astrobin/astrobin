@@ -4,6 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
+from common.upload_paths import upload_path
+
+
+def image_upload_path(instance, filename):
+    return upload_path('equipment_preset_images', instance.user.pk if instance.user else 0, filename)
 
 
 class EquipmentPreset(SafeDeleteModel):
@@ -95,6 +100,29 @@ class EquipmentPreset(SafeDeleteModel):
         blank=True,
         related_name='presets_using',
         verbose_name=_("Accessories")
+    )
+
+    description = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    image_file = models.ImageField(
+        upload_to=image_upload_path,
+        null=True,
+        blank=True,
+    )
+
+    # The following fields will be computed asynchronously.
+
+    image_count = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+    )
+
+    total_integration = models.FloatField(
+        null=True,
+        blank=True,
     )
 
     def __str__(self):

@@ -39,9 +39,12 @@ from astrobin.tasks import (
     compute_contribution_index, compute_image_index, encode_video_file, generate_video_preview, invalidate_cdn_caches,
     process_camera_rename_proposal,
 )
-from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
+from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem, EquipmentPreset
 from astrobin_apps_equipment.services import EquipmentItemService
-from astrobin_apps_equipment.tasks import approve_migration_strategy
+from astrobin_apps_equipment.tasks import (
+    approve_migration_strategy, update_equipment_preset_image_count,
+    update_equipment_preset_total_integration,
+)
 from astrobin_apps_forum.services import ForumService
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
@@ -80,7 +83,8 @@ from nested_comments.services.comment_notifications_service import CommentNotifi
 from toggleproperties.models import ToggleProperty
 from .enums.moderator_decision import ModeratorDecision
 from .models import (
-    Accessory, Camera, CameraRenameProposal, Collection, Filter, FocalReducer, Gear, GearMigrationStrategy, Image,
+    Accessory, Camera, CameraRenameProposal, Collection, DeepSky_Acquisition, Filter, FocalReducer, Gear,
+    GearMigrationStrategy, Image,
     ImageEquipmentLog, ImageRevision,
     Mount,
     Software, Telescope,
@@ -294,6 +298,10 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
         if instance.user.userprofile.gallery_header_image is None:
             instance.user.userprofile.gallery_header_image = instance.thumbnail('hd', None, sync=True)
             instance.user.userprofile.save(keep_deleted=True)
+
+        for preset in EquipmentPreset.objects.filter(user=instance.user):
+            update_equipment_preset_image_count.delay(preset.pk)
+            update_equipment_preset_total_integration.delay(preset.pk)
 
 
 @receiver(post_softdelete, sender=Image)
