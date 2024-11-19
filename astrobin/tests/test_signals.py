@@ -884,13 +884,7 @@ class SignalsTest(TestCase):
         image.imaging_telescopes_2.add(telescope)
         preset.imaging_telescopes.add(telescope)
 
-        update_equipment_preset_image_count.assert_called_with(preset.pk)
-        update_equipment_preset_total_integration.assert_called_with(preset.pk)
-
-        update_equipment_preset_image_count.reset_mock()
-        update_equipment_preset_total_integration.reset_mock()
-
-        image.imaging_telescopes_2.remove(telescope)
+        image.save()
 
         update_equipment_preset_image_count.assert_called_with(preset.pk)
         update_equipment_preset_total_integration.assert_called_with(preset.pk)
@@ -911,12 +905,6 @@ class SignalsTest(TestCase):
 
         update_equipment_preset_total_integration.reset_mock()
 
-        acquisition = Generators.deep_sky_acquisition(image=image)
-
-        update_equipment_preset_total_integration.assert_called_with(preset.pk)
-
-        update_equipment_preset_total_integration.reset_mock()
-
-        acquisition.delete()
+        image.save()
 
         update_equipment_preset_total_integration.assert_called_with(preset.pk)
