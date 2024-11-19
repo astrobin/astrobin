@@ -635,3 +635,27 @@ class EquipmentService:
             app_label='astrobin_apps_equipment',
             model=klass.lower()
         )
+
+    @staticmethod
+    def find_images_featuring_preset(preset, image_queryset: Optional[QuerySet]) -> QuerySet:
+        if image_queryset is None:
+            from astrobin.models import Image
+            image_queryset = Image.objects.all()
+
+        prop_map = {
+            'imaging_telescopes': 'imaging_telescopes_2',
+            'guiding_telescopes': 'guiding_telescopes_2',
+            'mounts': 'mounts_2',
+            'imaging_cameras': 'imaging_cameras_2',
+            'guiding_cameras': 'guiding_cameras_2',
+            'filters': 'filters_2',
+            'accessories': 'accessories_2',
+            'software': 'software_2',
+        }
+
+        for prop in prop_map:
+            if getattr(preset, prop).exists():
+                ids = list(getattr(preset, prop).values_list('id', flat=True))
+                image_queryset = image_queryset.filter(**{f"{prop_map[prop]}__in": ids})
+
+        return image_queryset

@@ -7,12 +7,13 @@ from celery import shared_task
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-from astrobin.models import GearMigrationStrategy
+from astrobin.models import GearMigrationStrategy, Image
 from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models import (
     Accessory, AccessoryEditProposal, Camera, CameraEditProposal, EquipmentItemMarketplaceFeedback,
     EquipmentItemMarketplaceListing,
-    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceMasterOffer, EquipmentItemMarketplaceOffer, Filter,
+    EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceMasterOffer, EquipmentItemMarketplaceOffer,
+    EquipmentPreset, Filter,
     FilterEditProposal, Mount,
     MountEditProposal,
     Sensor, SensorEditProposal, Software, SoftwareEditProposal, Telescope,
@@ -25,6 +26,7 @@ from astrobin_apps_equipment.services.marketplace_service import MarketplaceServ
 from astrobin_apps_equipment.services.stock import StockImporterService
 from astrobin_apps_equipment.services.stock.plugins.agena import AgenaStockImporterPlugin
 from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import DateTimeService
 
@@ -350,3 +352,41 @@ def auto_approve_marketplace_listings():
 
     for listing in listings:
         MarketplaceService.approve_listing(listing, admin)
+
+
+@shared_task(time_limit=30)
+def update_equipment_preset_image_count(pk: int):
+    try:
+        preset = EquipmentPreset.objects.get(pk=pk)
+        images = EquipmentService.find_images_featuring_preset(preset, Image.objects.filter(user=preset.user))
+        count = images.count()
+
+        if count != preset.image_count:
+            EquipmentPreset.objects.filter(pk=pk).update(image_count=count)
+            log.debug(
+                f"update_equipment_preset_image_count: updated image count for EquipmentPreset with pk={pk}: {count}"
+            )
+    except EquipmentPreset.DoesNotExist:
+        log.warning(f"update_equipment_preset_image_count: EquipmentPreset with pk={pk} not found")
+
+
+@shared_task(time_limit=30)
+def update_equipment_preset_total_integration(pk: int):
+    try:
+        preset = EquipmentPreset.objects.get(pk=pk)
+        images = EquipmentService.find_images_featuring_preset(preset, Image.objects.filter(user=preset.user))
+        total_integration = 0
+
+        for image in images.iterator():
+            _, _, acquisition_data = ImageService(image).get_deep_sky_acquisition_raw_data()
+            if acquisition_data and acquisition_data['integration']:
+                total_integration += acquisition_data['integration']
+
+        if total_integration != preset.total_integration:
+            EquipmentPreset.objects.filter(pk=pk).update(total_integration=total_integration)
+            log.debug(
+                f"update_equipment_preset_total_integration_hours: updated total integration for "
+                f"EquipmentPreset with pk={pk}: {total_integration}"
+            )
+    except EquipmentPreset.DoesNotExist:
+        log.warning(f"update_equipment_preset_total_integration_hours: EquipmentPreset with pk={pk} not found")
