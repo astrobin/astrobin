@@ -54,6 +54,7 @@ class EquipmentPresetViewSet(viewsets.ModelViewSet):
 
         if obj.image_file is not None:
             obj.image_file = None
+            obj.thumbnail = None
             obj.save()
 
         return Response(self.serializer_class(obj).data)

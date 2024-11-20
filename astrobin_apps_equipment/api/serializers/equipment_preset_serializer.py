@@ -17,6 +17,7 @@ class EquipmentPresetSerializer(serializers.ModelSerializer):
             'user',
             'remote_source',
             'image_file',
+            'thumbnail',
             'total_integration',
             'image_count',
         ]
