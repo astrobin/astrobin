@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
+from common.mixins import ThumbnailMixin
 from common.upload_paths import upload_path
 
 
@@ -11,7 +12,13 @@ def image_upload_path(instance, filename):
     return upload_path('equipment_preset_images', instance.user.pk if instance.user else 0, filename)
 
 
-class EquipmentPreset(SafeDeleteModel):
+def thumbnail_upload_path(instance, filename):
+    return upload_path('equipment_preset_thumbs', instance.user.pk if instance.user else 0, filename)
+
+
+class EquipmentPreset(SafeDeleteModel, ThumbnailMixin):
+    image_field_name = 'image_file'
+
     created = models.DateTimeField(
         auto_now_add=True,
         null=False,
@@ -109,6 +116,12 @@ class EquipmentPreset(SafeDeleteModel):
 
     image_file = models.ImageField(
         upload_to=image_upload_path,
+        null=True,
+        blank=True,
+    )
+
+    thumbnail = models.ImageField(
+        upload_to=thumbnail_upload_path,
         null=True,
         blank=True,
     )

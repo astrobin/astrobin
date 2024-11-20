@@ -18,6 +18,7 @@ from astrobin_apps_equipment.models.equipment_item_group import (
     EQUIPMENT_ITEM_KLASS_CHOICES, EQUIPMENT_ITEM_USAGE_TYPE_CHOICES, EquipmentItemGroup,
 )
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
+from common.mixins import ThumbnailMixin
 from common.services import AppRedirectionService
 from common.upload_paths import upload_path
 
@@ -46,10 +47,7 @@ class EquipmentItemRejectionReason:
     OTHER = 'OTHER'
 
 
-class EquipmentItem(SafeDeleteModel):
-    # Flag to prevent recursive thumbnail creation
-    _creating_thumbnail = False
-
+class EquipmentItem(SafeDeleteModel, ThumbnailMixin):
     klass = models.CharField(
         max_length=16,
         null=True,
@@ -293,55 +291,6 @@ class EquipmentItem(SafeDeleteModel):
     @property
     def slug(self):
         return slugify(f'{self.brand.name if self.brand else "diy"} {self.name}').replace('_', '-')
-
-    def create_thumbnail(self):
-        if self._creating_thumbnail:
-            logger.debug('create_thumbnail: skipping thumbnail creation because it\'s already in progress')
-            return  # Prevent recursion
-
-        if not self.image:
-            logger.debug('create_thumbnail: skipping thumbnail creation because there is no image')
-            return
-
-        self._creating_thumbnail = True
-
-        def _get_thumbnail_bytes(options):
-            thumbnailer = get_thumbnailer(self.image)
-            thumbnail = thumbnailer.get_thumbnail(options)
-
-            thumb_io = BytesIO()
-            thumb_io.write(thumbnail.read())
-            thumb_io.seek(0)
-
-            return thumbnail, thumb_io
-
-
-        try:
-            options = {
-                'size': (512, 0),
-                'crop': True,
-                'keep_icc_profile': True,
-                'quality': 80,
-            }
-
-            thumbnail, thumb_io = _get_thumbnail_bytes(options)
-
-            if thumb_io.getbuffer().nbytes == 0:
-                # Try again
-                thumbnail, thumb_io = _get_thumbnail_bytes(options)
-
-                if thumb_io.getbuffer().nbytes == 0:
-                    logger.debug('create_thumbnail: skipping thumbnail creation because the image is invalid')
-                    return
-
-            self.thumbnail.save(thumbnail.name, ContentFile(thumb_io.getvalue()))
-            thumb_io.close()
-
-            logger.debug('create_thumbnail: thumbnail created successfully %s' % self.thumbnail.url)
-        except InvalidImageFormatError:
-            logger.debug('create_thumbnail: skipping thumbnail creation because the image is invalid')
-        finally:
-            self._creating_thumbnail = False
 
     def __str__(self):
         if not self.brand:

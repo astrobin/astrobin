@@ -48,6 +48,7 @@ from nested_comments.models import NestedComment
 
 log = logging.getLogger(__name__)
 
+
 @receiver(post_migrate, sender=apps.get_app_config('astrobin'))
 def create_notice_types(sender, **kwargs):
     for notice_type in EQUIPMENT_NOTICE_TYPES:
@@ -767,11 +768,13 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
             )
 
         if instance.pre_save_approved:
-            seller_followers = list(User.objects.filter(
-                toggleproperty__content_type=ContentType.objects.get_for_model(instance.user),
-                toggleproperty__object_id=instance.user.id,
-                toggleproperty__property_type="follow",
-            ).distinct())
+            seller_followers = list(
+                User.objects.filter(
+                    toggleproperty__content_type=ContentType.objects.get_for_model(instance.user),
+                    toggleproperty__object_id=instance.user.id,
+                    toggleproperty__property_type="follow",
+                ).distinct()
+            )
 
             if len(seller_followers):
                 push_notification(
@@ -786,11 +789,13 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                 )
 
             for line_item in instance.line_items.filter(sold__isnull=True):
-                equipment_followers = list(User.objects.filter(
-                    toggleproperty__content_type=line_item.item_content_type,
-                    toggleproperty__object_id=line_item.item_object_id,
-                    toggleproperty__property_type="follow",
-                ).distinct())
+                equipment_followers = list(
+                    User.objects.filter(
+                        toggleproperty__content_type=line_item.item_content_type,
+                        toggleproperty__object_id=line_item.item_object_id,
+                        toggleproperty__property_type="follow",
+                    ).distinct()
+                )
 
                 if len(equipment_followers):
                     push_notification(
@@ -919,7 +924,9 @@ def fill_in_listing_lat_lon(sender, instance: EquipmentItemMarketplaceListing, *
 
 
 @receiver(post_save, sender=EquipmentItemMarketplaceFeedback)
-def send_marketplace_feedback_notifications(sender, instance: EquipmentItemMarketplaceFeedback, created: bool, **kwargs):
+def send_marketplace_feedback_notifications(
+        sender, instance: EquipmentItemMarketplaceFeedback, created: bool, **kwargs
+):
     if created:
         push_notification(
             [instance.recipient],
