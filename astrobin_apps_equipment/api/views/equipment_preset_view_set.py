@@ -22,6 +22,10 @@ class EquipmentPresetViewSet(viewsets.ModelViewSet):
     pagination_class = None
 
     def get_queryset(self) -> QuerySet:
+        user_id = self.request.query_params.get('user', None)
+        if user_id:
+            return self.serializer_class.Meta.model.objects.filter(user_id=user_id)
+
         return self.serializer_class.Meta.model.objects.filter(user=self.request.user)
 
     @action(
