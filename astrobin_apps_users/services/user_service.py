@@ -451,8 +451,8 @@ class UserService:
                 images_using_for_imaging__is_wip=False,
             ).distinct()
 
-            no_data_message = _("No imaging telescopes or lenses, or no imaging cameras specified")
-            gear_images_message = _("Gear images")
+            no_data_message = _("No optics or no cameras")
+            gear_images_message = _("Equipment images")
 
             # L = LEGACY, N = NEW
             menu += [(f'LT{x.id}', str(x)) for x in telescopes]
@@ -598,7 +598,7 @@ class UserService:
         # NO DATA #
         ###########
         elif subsection == 'nodata':
-            menu += [('GEAR', _("No imaging telescopes or lenses, or no imaging cameras specified"))]
+            menu += [('GEAR', _("No optics or no cameras"))]
             menu += [('ACQ', _("No acquisition details specified"))]
 
             if active is None:
