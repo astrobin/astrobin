@@ -474,7 +474,7 @@ class UserService:
                             Q(subject_type=SubjectType.ARTIFICIAL_SATELLITE) |
                             Q(subject_type=SubjectType.STAR_TRAILS)
                     ) &
-                    (Q(imaging_telescopes=None) | Q(imaging_cameras=None))
+                    (Q(imaging_telescopes_2=None) | Q(imaging_cameras_2=None))
                 ).distinct()
             elif active == '-1':
                 queryset = queryset.filter(Q(subject_type=SubjectType.GEAR)).distinct()
