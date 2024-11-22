@@ -36,14 +36,24 @@ log = logging.getLogger(__name__)
 
 class IotdService:
     def is_in_iotd_queue(self, image: Image) -> bool:
-        if image.submitted_for_iotd_tp_consideration is None:
+        if image.submitted_for_iotd_tp_consideration is None or image.disqualified_from_iotd_tp is not None:
             return False
 
-        cutoff = timezone.now() - timedelta(
+        if IotdSubmission.objects.filter(image=image).count() < settings.IOTD_SUBMISSION_MIN_PROMOTIONS:
+            cutoff = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        elif IotdVote.objects.filter(image=image).count() < settings.IOTD_REVIEW_MIN_PROMOTIONS:
+            cutoff = datetime.now() - timedelta(
+                settings.IOTD_SUBMISSION_WINDOW_DAYS +
+                settings.IOTD_REVIEW_WINDOW_DAYS
+            )
+        else:
+            cutoff = datetime.now() - timedelta(
                 settings.IOTD_SUBMISSION_WINDOW_DAYS +
                 settings.IOTD_REVIEW_WINDOW_DAYS +
                 settings.IOTD_JUDGEMENT_WINDOW_DAYS
-        ) - timedelta(minutes=30)
+            )
+
+        cutoff -= timedelta(minutes=30)
 
         return image.submitted_for_iotd_tp_consideration > cutoff or self.is_future_iotd(image)
 
@@ -115,7 +125,7 @@ class IotdService:
         end = now - timedelta(hours=12)
 
         for entry in IotdSubmissionQueueEntry.objects.select_related(
-            'image'
+                'image'
         ).prefetch_related(
             'image__imaging_telescopes_2', 'image__imaging_cameras_2'
         ).filter(
@@ -155,7 +165,7 @@ class IotdService:
         images: List[IotdReviewQueueEntry] = []
 
         for entry in IotdReviewQueueEntry.objects.select_related(
-            'image'
+                'image'
         ).prefetch_related(
             'image__imaging_telescopes_2', 'image__imaging_cameras_2'
         ).filter(
@@ -194,7 +204,7 @@ class IotdService:
         images: List[IotdJudgementQueueEntry] = []
 
         for entry in IotdJudgementQueueEntry.objects.select_related(
-            'image'
+                'image'
         ).prefetch_related(
             'image__imaging_telescopes_2', 'image__imaging_cameras_2'
         ).filter(
@@ -303,7 +313,6 @@ class IotdService:
         for item in items.iterator():
             TopPickNominationsArchive.objects.get_or_create(image=item)
             ImageService(item).clear_badges_cache()
-
 
     def update_top_pick_archive(self):
         items = Image.objects.annotate(
@@ -622,12 +631,12 @@ class IotdService:
             return False, MayNotSubmitToIotdTpReason.NO_TELESCOPE_OR_CAMERA
 
         if image.acquisition_set.count() == 0 and image.subject_type in (
-            SubjectType.DEEP_SKY,
-            SubjectType.SOLAR_SYSTEM,
-            SubjectType.WIDE_FIELD,
-            SubjectType.STAR_TRAILS,
-            SubjectType.LANDSCAPE,
-            SubjectType.ARTIFICIAL_SATELLITE
+                SubjectType.DEEP_SKY,
+                SubjectType.SOLAR_SYSTEM,
+                SubjectType.WIDE_FIELD,
+                SubjectType.STAR_TRAILS,
+                SubjectType.LANDSCAPE,
+                SubjectType.ARTIFICIAL_SATELLITE
         ):
             return False, MayNotSubmitToIotdTpReason.NO_ACQUISITIONS
 
