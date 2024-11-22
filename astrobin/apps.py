@@ -3,7 +3,7 @@ from PIL.ImageFile import ImageFile
 from django.apps import AppConfig
 from django.conf import settings
 
-Image.MAX_IMAGE_PIXELS = 16536 * 16536
+Image.MAX_IMAGE_PIXELS = 32768 * 32768
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
