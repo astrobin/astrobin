@@ -276,18 +276,14 @@ def encode_video_file(object_id: int, content_type_id: int):
             logger.debug(f'Video size after adjustment: {width}x{height}')
 
             # Ensure the video dimensions are even
-            resize_video = False
             if width % 2 == 1:
                 width -= 1
-                resize_video = True
             if height % 2 == 1:
                 height -= 1
-                resize_video = True
 
             # Resize the video if needed
             video = VideoFileClip(temp_path)
-            if resize_video:
-                video = video.fx(resize.resize, newsize=(width, height))
+            video = video.fx(resize.resize, newsize=(width, height))
 
             with NamedTemporaryFile(suffix='.mp4', delete=False) as output_file:
                 class ProgressLogger(ProgressBarLogger):

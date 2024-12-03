@@ -51,8 +51,10 @@ def _get_video_dimensions(file_or_path):
         display_aspect_ratio = metadata['streams'][0].get('display_aspect_ratio')
         if display_aspect_ratio:
             dar_width, dar_height = map(int, display_aspect_ratio.split(":"))
-            if dar_height > dar_width:
-                # If DAR suggests portrait mode, swap width and height
+            # Check if DAR orientation doesn't match pixel dimension orientation
+            dar_is_portrait = dar_height > dar_width
+            pixels_are_portrait = height > width
+            if dar_is_portrait != pixels_are_portrait:
                 width, height = height, width
 
     # Adjust dimensions if rotation is 90 or 270 degrees
