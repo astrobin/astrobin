@@ -51,13 +51,13 @@ class MountBaseModel(EquipmentItem):
         verbose_name=_("Weight (kg)"),
         null=True,
         blank=True,
-        max_digits=6,
+        max_digits=7,
         decimal_places=2
     )
 
     max_payload = models.DecimalField(
         verbose_name=_("Payload (kg)"),
-        max_digits=6,
+        max_digits=7,
         decimal_places=2,
         null=True,
         blank=True,
