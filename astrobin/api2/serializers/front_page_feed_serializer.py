@@ -38,6 +38,8 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
     action_object_user_avatar = serializers.SerializerMethodField()
 
     image = serializers.SerializerMethodField()
+    image_w = serializers.SerializerMethodField()
+    image_h = serializers.SerializerMethodField()
     thumbnail = serializers.SerializerMethodField()
 
     others_count = serializers.SerializerMethodField()
@@ -138,6 +140,64 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
                         image = line_item.images.first()
                         if image:
                             return image.thumbnail_file.url
+
+        return None
+
+    def get_image_w(self, obj) -> Optional[int]:
+        for content_type, object_id in [
+            (obj.action_object_content_type, obj.action_object_object_id),
+            (obj.target_content_type, obj.target_object_id)
+        ]:
+            # Check for Image
+            if self._is_image(content_type):
+                image = get_object_or_None(Image.objects_including_wip_plain, pk=object_id)
+                if image:
+                    return image.w
+
+            # Check for ImageRevision
+            if self._is_image_revision(content_type):
+                revision = get_object_or_None(ImageRevision.objects, pk=object_id)
+                if revision:
+                    return revision.w
+
+            # Check for EquipmentItemMarketplaceListing
+            if content_type == self.marketplace_listing_ct:
+                listing = get_object_or_None(EquipmentItemMarketplaceListing.objects, pk=object_id)
+                if listing:
+                    line_item = listing.line_items.first()
+                    if line_item:
+                        image = line_item.images.first()
+                        if image:
+                            return image.w
+
+        return None
+
+    def get_image_h(self, obj) -> Optional[int]:
+        for content_type, object_id in [
+            (obj.action_object_content_type, obj.action_object_object_id),
+            (obj.target_content_type, obj.target_object_id)
+        ]:
+            # Check for Image
+            if self._is_image(content_type):
+                image = get_object_or_None(Image.objects_including_wip_plain, pk=object_id)
+                if image:
+                    return image.h
+
+            # Check for ImageRevision
+            if self._is_image_revision(content_type):
+                revision = get_object_or_None(ImageRevision.objects, pk=object_id)
+                if revision:
+                    return revision.h
+
+            # Check for EquipmentItemMarketplaceListing
+            if content_type == self.marketplace_listing_ct:
+                listing = get_object_or_None(EquipmentItemMarketplaceListing.objects, pk=object_id)
+                if listing:
+                    line_item = listing.line_items.first()
+                    if line_item:
+                        image = line_item.images.first()
+                        if image:
+                            return image.h
 
         return None
 
