@@ -13,4 +13,3 @@ REST_FRAMEWORK = {
         'search': '300/min',
     }
 }
-
