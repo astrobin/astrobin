@@ -62,6 +62,7 @@ from astrobin.models import (
     Accessory, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
+from astrobin.services.activity_stream_service import ActivityStreamService
 from astrobin.services.gear_service import GearService
 from astrobin.services.utils_service import UtilsService
 from astrobin.shortcuts import ajax_response, ajax_success
@@ -359,12 +360,15 @@ def upload_max_revisions_error(request, max_revisions, image):
 @cache_control(private=True)
 def index(request, template='index/root.html') -> HttpResponse:
     """Main page"""
+    # from django.shortcuts import redirect
 
     if not request.user.is_authenticated:
-        from django.shortcuts import redirect
         return redirect("https://welcome.astrobin.com/")
 
     profile = request.user.userprofile
+
+    # if profile.enable_new_gallery_experience and 'force-classic-view' not in request.GET:
+    #     return redirect(AppRedirectionService.redirect('/'))
 
     section = request.GET.get('s')
     if section is None:
@@ -389,106 +393,13 @@ def latest_from_forums_fragment(request):
 @vary_on_cookie
 @cache_control(private=True)
 def activity_stream_fragment(request, section: str):
-    image_ct = ContentType.objects.get_for_model(Image)
-    image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
-    user_ct = ContentType.objects.get_for_model(User)
-    actions = None
+    actions = Action.objects.none()
+    service = ActivityStreamService(request.user)
 
     if section == 'global':
-        actions = Action.objects.all().prefetch_related(
-            'actor__userprofile',
-            'target_content_type',
-            'target'
-        )
-
+        actions = service.get_global_stream()
     elif section == 'personal':
-        cache_key = 'astrobin_users_image_ids_%s' % request.user
-        users_image_ids = cache.get(cache_key)
-        if users_image_ids is None:
-            users_image_ids = [
-                str(x) for x in
-                Image.objects.filter(user=request.user).values_list('id', flat=True)
-            ]
-            cache.set(cache_key, users_image_ids, 300)
-
-        cache_key = 'astrobin_users_revision_ids_%s' % request.user
-        users_revision_ids = cache.get(cache_key)
-        if users_revision_ids is None:
-            users_revision_ids = [
-                str(x) for x in
-                ImageRevision.objects.filter(image__user=request.user).values_list('id', flat=True)
-            ]
-            cache.set(cache_key, users_revision_ids, 300)
-
-        cache_key = 'astrobin_followed_user_ids_%s' % request.user
-        followed_user_ids = cache.get(cache_key)
-        if followed_user_ids is None:
-            followed_user_ids = [
-                str(x) for x in
-                ToggleProperty.objects.filter(
-                    property_type="follow",
-                    user=request.user,
-                    content_type=user_ct
-                ).values_list('object_id', flat=True)
-            ]
-            cache.set(cache_key, followed_user_ids, 900)
-
-        cache_key = 'astrobin_followees_image_ids_%s' % request.user
-        followees_image_ids = cache.get(cache_key)
-        if followees_image_ids is None:
-            followees_image_ids = [
-                str(x) for x in
-                Image.objects.filter(user_id__in=followed_user_ids).values_list('id', flat=True)
-            ]
-            cache.set(cache_key, followees_image_ids, 900)
-
-        actions = Action.objects.prefetch_related(
-            'actor__userprofile',
-            'target_content_type',
-            'target'
-        ).filter(
-            # Actor is user, or...
-            Q(
-                Q(actor_content_type=user_ct) &
-                Q(actor_object_id=request.user.id)
-            ) |
-
-            # Action concerns user's images as target, or...
-            Q(
-                Q(target_content_type=image_ct) &
-                Q(target_object_id__in=users_image_ids)
-            ) |
-            Q(
-                Q(target_content_type=image_rev_ct) &
-                Q(target_object_id__in=users_revision_ids)
-            ) |
-
-            # Action concerns user's images as object, or...
-            Q(
-                Q(action_object_content_type=image_ct) &
-                Q(action_object_object_id__in=users_image_ids)
-            ) |
-            Q(
-                Q(action_object_content_type=image_rev_ct) &
-                Q(action_object_object_id__in=users_revision_ids)
-            ) |
-
-            # Actor is somebody the user follows, or...
-            Q(
-                Q(actor_content_type=user_ct) &
-                Q(actor_object_id__in=followed_user_ids)
-            ) |
-
-            # Action concerns an image by a followed user...
-            Q(
-                Q(target_content_type=image_ct) &
-                Q(target_object_id__in=followees_image_ids)
-            ) |
-            Q(
-                Q(action_object_content_type=image_ct) &
-                Q(action_object_object_id__in=followees_image_ids)
-            )
-        )
+        actions = service.get_personal_stream()
 
     return render(
         request,
@@ -508,19 +419,12 @@ def activity_stream_fragment(request, section: str):
 @vary_on_cookie
 @cache_control(private=True)
 def recent_images_fragment(request, section):
-    recent_images = Image.objects.filter(
-        Q(moderator_decision=ModeratorDecision.APPROVED) &
-        Q(published__isnull=False)
-    ).order_by('-published')
+    service = ActivityStreamService(request.user)
 
     if section == 'followed':
-        followed = [x.object_id for x in ToggleProperty.objects.filter(
-            property_type="follow",
-            content_type=ContentType.objects.get_for_model(User),
-            user=request.user
-        )]
-
-        recent_images = recent_images.filter(user__in=followed)
+        recent_images = service.get_recent_followed_images()
+    else:
+        recent_images = service.get_recent_images()
 
     return render(
         request,

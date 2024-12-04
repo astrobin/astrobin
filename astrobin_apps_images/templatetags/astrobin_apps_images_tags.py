@@ -197,22 +197,6 @@ def astrobin_image(context, image, alias, **kwargs):
                 badges.append('video')
 
             if image.submitted_for_iotd_tp_consideration and not image.disqualified_from_iotd_tp:
-                num_submissions = IotdSubmission.objects.filter(image=image).count()
-                num_votes = IotdVote.objects.filter(image=image).count()
-
-                if num_submissions < settings.IOTD_SUBMISSION_MIN_PROMOTIONS:
-                    cutoff = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
-                elif num_votes < settings.IOTD_REVIEW_MIN_PROMOTIONS:
-                    cutoff = datetime.now() - timedelta(
-                        settings.IOTD_SUBMISSION_WINDOW_DAYS + settings.IOTD_REVIEW_WINDOW_DAYS
-                    )
-                else:
-                    cutoff = datetime.now() - timedelta(
-                        settings.IOTD_SUBMISSION_WINDOW_DAYS +
-                        settings.IOTD_REVIEW_WINDOW_DAYS +
-                        settings.IOTD_JUDGEMENT_WINDOW_DAYS
-                    )
-
                 if iotd_service.is_iotd(image):
                     badges.append('iotd')
                 elif iotd_service.is_top_pick(image):

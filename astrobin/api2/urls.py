@@ -7,6 +7,7 @@ from astrobin.api2.views.camera_view_set import CameraViewSet
 from astrobin.api2.views.collection_view_set import CollectionViewSet
 from astrobin.api2.views.filter_view_set import FilterViewSet
 from astrobin.api2.views.focal_reducer_view_set import FocalReducerViewSet
+from astrobin.api2.views.frontpage_feed_view_set import FrontPageFeedViewSet
 from astrobin.api2.views.gear_migration_strategy_view_set import GearMigrationStrategyViewSet
 from astrobin.api2.views.gear_user_info_view_set import GearUserInfoViewSet
 from astrobin.api2.views.gear_view_set import GearViewSet
@@ -33,6 +34,7 @@ router.register(r'location', LocationViewSet, basename='location')
 router.register(r'collection', CollectionViewSet, basename='collection')
 router.register(r'image-equipment-log', ImageEquipmentLogViewSet, basename='image-equipment-log')
 router.register(r'saved-search', SavedSearchViewSet, basename='saved-search')
+router.register(r'frontpage-feed', FrontPageFeedViewSet, basename='frontpage-feed')
 
 urlpatterns = [
     url('', include(router.urls)),
