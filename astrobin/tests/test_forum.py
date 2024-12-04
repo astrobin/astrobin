@@ -413,6 +413,13 @@ class ForumTest(TestCase):
             mock.call([reply1.user], reply2.user, 'new_forum_reply', mock.ANY),
         ], any_order=True)
 
+    @patch("astrobin.signals.push_notification")
+    def test_does_not_send_new_forum_reply_started_topic_if_starter_is_unsubscribed(self, push_notification):
+        post = Generators.forum_post()
+        post.topic.subscribers.clear()
+        Generators.forum_post(topic=post.topic)
+        push_notification.assert_not_called()
+
     @patch("astrobin.signals.MentionsService.get_mentions")
     @patch("astrobin.signals.push_notification")
     def test_does_not_send_new_forum_reply_started_topic_if_starter_is_mentioned(self, push_notification, get_mentions):

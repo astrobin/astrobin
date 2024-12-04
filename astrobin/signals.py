@@ -1429,7 +1429,11 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             )
         )
 
-        if instance.topic.user != instance.user and instance.topic.user.username not in mentions:
+        if (
+                instance.topic.user != instance.user and
+                instance.topic.user.username not in mentions and
+                instance.topic.subscribers.filter(pk=instance.topic.user.pk).exists()
+        ):
             push_notification(
                 [instance.topic.user],
                 instance.user,
