@@ -99,7 +99,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
         else:
             instance.agreed_to_iotd_tp_rules_and_guidelines = None
 
-        if 'enable_new_gallery_experience' in self.cleaned_data:
+        if 'enable_new_search_experience' in self.cleaned_data:
             instance.enable_new_search_experience = self.cleaned_data['enable_new_search_experience']
 
         if 'enable_new_gallery_experience' in self.cleaned_data:
