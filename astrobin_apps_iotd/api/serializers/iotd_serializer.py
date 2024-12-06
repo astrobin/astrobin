@@ -7,6 +7,9 @@ from astrobin_apps_iotd.models import Iotd
 
 class IotdSerializer(serializers.ModelSerializer):
     date = serializers.DateField(required=False)
+    thumbnail = serializers.SerializerMethodField()
+    title = serializers.CharField(source='image.title', read_only=True)
+    user_display_names = serializers.SerializerMethodField()
 
     def create(self, validated_data):
         if 'judge' not in validated_data:
@@ -20,6 +23,20 @@ class IotdSerializer(serializers.ModelSerializer):
 
         return super().create(validated_data)
 
+    def get_thumbnail(self, obj: Iotd) -> str:
+        return obj.image.thumbnail('hd', None, sync=True)
+
+    def get_user_display_names(self, obj: Iotd) -> str:
+        if obj.image.collaborators.exists():
+            return ', '.join(
+                [obj.image.user.userprofile.get_display_name()] +
+                [
+                    collaborator.userprofile.get_display_name() for collaborator in obj.image.collaborators.all()
+                ]
+            )
+
+        return obj.image.user.userprofile.get_display_name()
+
     class Meta:
         model = Iotd
         fields = (
@@ -27,4 +44,7 @@ class IotdSerializer(serializers.ModelSerializer):
             'judge',
             'image',
             'date',
+            'thumbnail',
+            'title',
+            'user_display_names',
         )

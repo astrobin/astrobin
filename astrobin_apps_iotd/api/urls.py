@@ -3,6 +3,7 @@ from django.urls import re_path
 from django.views.decorators.cache import never_cache
 from rest_framework import routers
 
+from astrobin_apps_iotd.api.views.current_iotd_view_set import CurrentIotdViewSet
 from astrobin_apps_iotd.api.views.dismissed_image_view_set import DismissedImageViewSet
 from astrobin_apps_iotd.api.views.future_iotds_view_set import FutureIotdsViewSet
 from astrobin_apps_iotd.api.views.hidden_image_view_set import HiddenImageViewSet
@@ -33,6 +34,7 @@ router.register(r'vote', VoteViewSet, basename='vote-detail')
 
 router.register(r'judgement-queue', JudgementQueueViewSet, basename='judgement-queue')
 router.register(r'future-iotds', FutureIotdsViewSet, basename='future-iotds')
+router.register(r'current-iotd', CurrentIotdViewSet, basename='current-iotd')
 
 router.register(r'stats', StatsViewSet, basename='stats')
 

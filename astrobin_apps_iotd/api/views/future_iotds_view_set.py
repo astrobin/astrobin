@@ -20,6 +20,7 @@ from common.services import DateTimeService
 
 log = logging.getLogger(__name__)
 
+
 class FutureIotdsViewSet(viewsets.ModelViewSet):
     serializer_class = IotdSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
