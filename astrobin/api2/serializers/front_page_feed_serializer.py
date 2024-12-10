@@ -12,6 +12,7 @@ from astrobin.stories import (
     ACTSTREAM_VERB_BOOKMARKED_IMAGE, ACTSTREAM_VERB_COMMENTED_IMAGE, ACTSTREAM_VERB_LIKED_IMAGE,
 )
 from astrobin_apps_equipment.models import EquipmentItemMarketplaceListing
+from astrobin_apps_groups.models import Group
 
 
 class FrontPageFeedSerializer(serializers.ModelSerializer):
@@ -19,6 +20,7 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
     image_ct: ContentType
     image_revision_ct: ContentType
     marketplace_listing_ct: ContentType
+    group_ct: ContentType
 
     actor_display_name = serializers.SerializerMethodField()
     actor_username = serializers.SerializerMethodField()
@@ -50,6 +52,7 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
         self.image_ct = ContentType.objects.get_for_model(Image)
         self.image_revision_ct = ContentType.objects.get_for_model(ImageRevision)
         self.marketplace_listing_ct = ContentType.objects.get_for_model(EquipmentItemMarketplaceListing)
+        self.group_ct = ContentType.objects.get_for_model(Group)
 
     def get_actor_display_name(self, obj) -> Optional[str]:
         return self._get_user_display_name(obj.actor_content_type, obj.actor)
@@ -72,6 +75,9 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
 
         if self._is_marketplace_listing(obj.target_content_type):
             return obj.target.title
+
+        if self._is_group(obj.target_content_type):
+            return obj.target.name
 
         return None
 
@@ -99,6 +105,9 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
 
         if self._is_marketplace_listing(obj.action_object_content_type):
             return obj.action_object.title
+
+        if self._is_group(obj.action_object_content_type):
+            return obj.action_object.name
 
         return None
 
@@ -251,6 +260,9 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
 
     def _is_marketplace_listing(self, content_type: ContentType) -> bool:
         return content_type == self.marketplace_listing_ct
+
+    def _is_group(self, content_type: ContentType) -> bool:
+        return content_type == self.group_ct
 
     def _get_url(self, content_type: ContentType, obj) -> Optional[str]:
         if obj is None:
