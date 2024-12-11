@@ -49,7 +49,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.cache import cache, caches
+from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, models
 from django.db.models.signals import post_save
@@ -3711,3 +3711,22 @@ class SavedSearch(models.Model):
         app_label = 'astrobin'
         ordering = ('-created',)
         unique_together = ('user', 'name')
+
+
+class ActionArchive(models.Model):
+    actor_content_type = models.ForeignKey(ContentType, blank=True, null=True, on_delete=models.CASCADE, related_name='actor_archives')
+    actor_object_id = models.CharField(max_length=255, blank=True, null=True)
+    verb = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    target_content_type = models.ForeignKey(ContentType, blank=True, null=True, on_delete=models.CASCADE, related_name='target_archives')
+    target_object_id = models.CharField(max_length=255, blank=True, null=True)
+    action_object_content_type = models.ForeignKey(ContentType, blank=True, null=True, on_delete=models.CASCADE, related_name='action_object_archives')
+    action_object_object_id = models.CharField(max_length=255, blank=True, null=True)
+    timestamp = models.DateTimeField(db_index=True)
+    public = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['-timestamp']
+        indexes = [
+            models.Index(fields=['-timestamp']),
+        ]
