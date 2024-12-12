@@ -45,6 +45,7 @@ class AstroBinAppConfig(AppConfig):
         registry.register('astrobin_apps_equipment.equipmentitemmarketplacelisting')
         registry.register('astrobin_apps_equipment.telescope')
         registry.register('astrobin_apps_equipment.camera')
+        registry.register('astrobin_apps_equipment.sensor')
         registry.register('astrobin_apps_equipment.mount')
         registry.register('astrobin_apps_equipment.filter')
         registry.register('astrobin_apps_equipment.software')
