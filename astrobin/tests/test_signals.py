@@ -616,7 +616,6 @@ class SignalsTest(TestCase):
             property_type='follow',
             user=owner,
             content_object=user
-
         )
 
         group = Group.objects.create(

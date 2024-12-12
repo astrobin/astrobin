@@ -5,6 +5,7 @@ from itertools import chain
 from typing import List, Set
 
 import stripe
+from actstream.actions import follow, unfollow
 from annoying.functions import get_object_or_None
 from avatar.models import Avatar
 from avatar.signals import avatar_deleted, avatar_updated
@@ -577,6 +578,9 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
         UserService(instance.content_object).update_followers_count()
         UserService(instance.user).update_following_count()
 
+    if instance.property_type == 'follow':
+        unfollow(instance.user, instance.content_object)
+
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 
@@ -704,6 +708,8 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         ),
                     }
                 )
+
+            follow(instance.user, instance.content_object, send_action=False, actor_only=False)
 
 
 post_save.connect(toggleproperty_post_save, sender=ToggleProperty)

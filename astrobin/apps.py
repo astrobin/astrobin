@@ -43,6 +43,12 @@ class AstroBinAppConfig(AppConfig):
         registry.register('toggleproperties.toggleproperty')
         registry.register('astrobin_apps_groups.group')
         registry.register('astrobin_apps_equipment.equipmentitemmarketplacelisting')
+        registry.register('astrobin_apps_equipment.telescope')
+        registry.register('astrobin_apps_equipment.camera')
+        registry.register('astrobin_apps_equipment.mount')
+        registry.register('astrobin_apps_equipment.filter')
+        registry.register('astrobin_apps_equipment.software')
+        registry.register('astrobin_apps_equipment.accessory')
 
     def init_search(self):
         from astrobin.search import set_max_result_window
