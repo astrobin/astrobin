@@ -27,6 +27,7 @@ include(
 
     # Apps settings
     'components/account.py',
+    'components/actstream.py',
     'components/avatar.py',
     'components/celery.py',
     'components/forum.py',

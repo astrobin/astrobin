@@ -1,0 +1,3 @@
+ACTSTREAM_SETTINGS = {
+    "USE_JSONFIELD": True,
+}

@@ -443,7 +443,10 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
                 instance.image.user,
                 verb=ACTSTREAM_VERB_UPLOADED_REVISION,
                 action_object=instance,
-                target=instance.image
+                target=instance.image,
+                like_count=instance.image.like_count,
+                bookmark_count=instance.image.bookmark_count,
+                comment_count=instance.image.comment_count,
             )
 
 
@@ -605,6 +608,9 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
 
     if created:
         verb = None
+        like_count = None
+        bookmark_count = None
+        comment_count = None
 
         if instance.property_type in ("like", "bookmark"):
 
@@ -620,10 +626,16 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 if image.is_wip:
                     return
 
+                like_count = image.like_count
+                bookmark_count = image.bookmark_count
+                comment_count = image.comment_count
+
                 if instance.property_type == "like":
                     verb = ACTSTREAM_VERB_LIKED_IMAGE
+                    like_count += 1
                 elif instance.property_type == "bookmark":
                     verb = ACTSTREAM_VERB_BOOKMARKED_IMAGE
+                    bookmark_count += 1
                 else:
                     return
 
@@ -691,7 +703,10 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 add_story(
                     instance.user,
                     verb=verb,
-                    action_object=instance.content_object
+                    action_object=instance.content_object,
+                    like_count=like_count,
+                    bookmark_count=bookmark_count,
+                    comment_count=comment_count,
                 )
 
         elif instance.property_type == "follow":

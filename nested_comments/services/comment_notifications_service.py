@@ -141,10 +141,15 @@ class CommentNotificationsService:
 
         if model_class == Image:
             if (force or not instance.pending_moderation) and not obj.is_wip:
-                add_story(instance.author,
-                          verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
-                          action_object=instance,
-                          target=obj)
+                add_story(
+                    instance.author,
+                    verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+                    action_object=instance,
+                    target=obj,
+                    like_count=obj.like_count,
+                    bookmark_count=obj.bookmark_count,
+                    comment_count=obj.comment_count + 1,
+                )
 
         if instance.parent and \
                 instance.parent.author != instance.author and \
