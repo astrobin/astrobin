@@ -81,6 +81,7 @@ INSTALLED_APPS += [
     'two_factor.plugins.phonenumber',
     'cookie_consent',
     'robots',
+    'django_jsonfield_backport',
 
     'astrobin.apps.AstroBinAppConfig',
 ]

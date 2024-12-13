@@ -1,3 +1,4 @@
+import json
 from typing import Optional
 
 from actstream.models import Action
@@ -45,6 +46,8 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
     thumbnail = serializers.SerializerMethodField()
 
     others_count = serializers.SerializerMethodField()
+
+    data = serializers.SerializerMethodField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
@@ -247,6 +250,11 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
         if obj.verb == ACTSTREAM_VERB_BOOKMARKED_IMAGE:
             return obj.action_object.bookmark_count - 1
 
+        return None
+
+    def get_data(self, obj) -> Optional[dict]:
+        if obj.data:
+            return json.loads(obj.data)
         return None
 
     def _is_user(self, content_type: ContentType) -> bool:

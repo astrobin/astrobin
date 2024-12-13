@@ -21,6 +21,7 @@ from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService
 from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
+from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger(__name__)
 
@@ -146,9 +147,13 @@ class CommentNotificationsService:
                     verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
                     action_object=instance,
                     target=obj,
-                    like_count=obj.like_count,
-                    bookmark_count=obj.bookmark_count,
-                    comment_count=obj.comment_count + 1,
+                    like_count=ToggleProperty.objects.toggleproperties_for_object('like', obj).count(),
+                    bookmark_count=ToggleProperty.objects.toggleproperties_for_object('bookmark', obj).count(),
+                    comment_count=NestedComment.objects.filter(
+                        content_type__pk=instance.content_type_id,
+                        object_id=instance.object_id,
+                        deleted=False
+                    ).count(),
                 )
 
         if instance.parent and \

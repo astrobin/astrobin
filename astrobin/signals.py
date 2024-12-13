@@ -444,9 +444,13 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
                 verb=ACTSTREAM_VERB_UPLOADED_REVISION,
                 action_object=instance,
                 target=instance.image,
-                like_count=instance.image.like_count,
-                bookmark_count=instance.image.bookmark_count,
-                comment_count=instance.image.comment_count,
+                like_count=ToggleProperty.objects.toggleproperties_for_object('like', instance.image).count(),
+                bookmark_count=ToggleProperty.objects.toggleproperties_for_object('bookmark', instance.image).count(),
+                comment_count=NestedComment.objects.filter(
+                    content_type=ContentType.objects.get_for_model(Image),
+                    object_id=instance.image.pk,
+                    deleted=False
+                ).count()
             )
 
 
@@ -626,16 +630,18 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 if image.is_wip:
                     return
 
-                like_count = image.like_count
-                bookmark_count = image.bookmark_count
-                comment_count = image.comment_count
+                like_count = ToggleProperty.objects.toggleproperties_for_object('like', image).count()
+                bookmark_count = ToggleProperty.objects.toggleproperties_for_object('bookmark', image).count()
+                comment_count = NestedComment.objects.filter(
+                    content_type=instance.content_type,
+                    object_id=image.pk,
+                    deleted=False
+                ).count()
 
                 if instance.property_type == "like":
                     verb = ACTSTREAM_VERB_LIKED_IMAGE
-                    like_count += 1
                 elif instance.property_type == "bookmark":
                     verb = ACTSTREAM_VERB_BOOKMARKED_IMAGE
-                    bookmark_count += 1
                 else:
                     return
 

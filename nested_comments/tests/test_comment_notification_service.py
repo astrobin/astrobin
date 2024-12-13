@@ -90,9 +90,14 @@ class CommentNotificationServiceTest(TestCase):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=1
+        )
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
@@ -116,9 +121,14 @@ class CommentNotificationServiceTest(TestCase):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment_reply', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=1
+        )
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
@@ -143,9 +153,14 @@ class CommentNotificationServiceTest(TestCase):
         push_notification.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=1
+        )
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
@@ -161,9 +176,14 @@ class CommentNotificationServiceTest(TestCase):
 
         push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=1
+        )
 
         push_notification.reset_mock()
         add_story.resetMock()
@@ -176,9 +196,13 @@ class CommentNotificationServiceTest(TestCase):
         ], any_order=True)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=2)
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
@@ -195,9 +219,14 @@ class CommentNotificationServiceTest(TestCase):
 
         push_notification.assert_called_with([image.user], commenter, 'new_comment', mock.ANY)
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=1
+        )
 
         push_notification.reset_mock()
         add_story.resetMock()
@@ -215,9 +244,14 @@ class CommentNotificationServiceTest(TestCase):
         push_notification.assert_called_with([commenter], replier, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=2
+        )
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
@@ -237,7 +271,11 @@ class CommentNotificationServiceTest(TestCase):
         add_story.assert_called_with(
             comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=1
+        )
 
         push_notification.reset_mock()
         add_story.resetMock()
@@ -252,9 +290,14 @@ class CommentNotificationServiceTest(TestCase):
         push_notification.assert_called_with([commenter], replier, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=2
+        )
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
@@ -271,9 +314,14 @@ class CommentNotificationServiceTest(TestCase):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=1
+        )
 
         push_notification.reset_mock()
         add_story.resetMock()
@@ -289,9 +337,14 @@ class CommentNotificationServiceTest(TestCase):
         push_notification.assert_has_calls(calls, any_order=True)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=2
+        )
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
@@ -309,9 +362,14 @@ class CommentNotificationServiceTest(TestCase):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=1
+        )
 
         push_notification.reset_mock()
         add_story.resetMock()
@@ -332,9 +390,14 @@ class CommentNotificationServiceTest(TestCase):
         push_notification.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=2
+        )
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
@@ -353,9 +416,14 @@ class CommentNotificationServiceTest(TestCase):
             push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=1
+        )
 
         push_notification.reset_mock()
         add_story.resetMock()
@@ -372,9 +440,14 @@ class CommentNotificationServiceTest(TestCase):
         push_notification.assert_called_with([image.user], commenter, 'new_comment_mention', mock.ANY)
 
         add_story.assert_called_with(
-            comment.author, verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
+            comment.author,
+            verb=ACTSTREAM_VERB_COMMENTED_IMAGE,
             action_object=comment,
-            target=comment.content_object)
+            target=comment.content_object,
+            like_count=0,
+            bookmark_count=0,
+            comment_count=2
+        )
 
     @patch("nested_comments.services.comment_notifications_service.push_notification")
     def test_send_moderation_required_notification_non_pending_moderation(self, push_notification):
