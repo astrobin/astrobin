@@ -96,7 +96,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=1
+            comment_count=1,
+            comment_html=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -127,7 +128,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=1
+            comment_count=1,
+            comment_html=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -159,7 +161,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=1
+            comment_count=1,
+            comment_html=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -182,7 +185,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=1
+            comment_count=1,
+            comment_html=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -202,7 +206,9 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=2)
+            comment_count=2,
+            comment_html=mock.ANY
+        )
 
     @patch("astrobin.models.UserProfile.get_scores")
     @patch("nested_comments.services.comment_notifications_service.push_notification")
@@ -225,7 +231,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=1
+            comment_count=1,
+            comment_html=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -250,7 +257,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=2
+            comment_count=2,
+            comment_html=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -274,7 +282,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=1
+            comment_count=1,
+            comment_html=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -296,7 +305,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=2
+            comment_count=2,
+            comment_html=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -320,7 +330,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=1
+            comment_count=1,
+            comment_html=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -343,7 +354,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=2
+            comment_count=2,
+            comment_html=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -368,7 +380,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=1
+            comment_count=1,
+            comment_html=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -396,7 +409,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=2
+            comment_count=2,
+            comment_html=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -422,7 +436,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=1
+            comment_count=1,
+            comment_html=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -446,7 +461,8 @@ class CommentNotificationServiceTest(TestCase):
             target=comment.content_object,
             like_count=0,
             bookmark_count=0,
-            comment_count=2
+            comment_count=2,
+            comment_html=mock.ANY
         )
 
     @patch("nested_comments.services.comment_notifications_service.push_notification")
