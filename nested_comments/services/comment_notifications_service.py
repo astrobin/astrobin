@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import QuerySet
 from django.urls import reverse
+from precise_bbcode.templatetags.bbcode_tags import bbcode
 
 from astrobin.models import Image, UserProfile
 from astrobin.stories import ACTSTREAM_VERB_COMMENTED_IMAGE, add_story
@@ -154,6 +155,7 @@ class CommentNotificationsService:
                         object_id=instance.object_id,
                         deleted=False
                     ).count(),
+                    comment_html=bbcode(instance.text),
                 )
 
         if instance.parent and \
