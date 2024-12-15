@@ -10,6 +10,9 @@ class IotdSerializer(serializers.ModelSerializer):
     thumbnail = serializers.SerializerMethodField()
     title = serializers.CharField(source='image.title', read_only=True)
     user_display_names = serializers.SerializerMethodField()
+    square_cropping = serializers.CharField(source='image.square_cropping', read_only=True)
+    w = serializers.IntegerField(source='image.w', read_only=True)
+    h = serializers.IntegerField(source='image.h', read_only=True)
 
     def create(self, validated_data):
         if 'judge' not in validated_data:
@@ -37,12 +40,16 @@ class IotdSerializer(serializers.ModelSerializer):
 
         return obj.image.user.userprofile.get_display_name()
 
+
     class Meta:
         model = Iotd
         fields = (
             'id',
             'judge',
             'image',
+            'square_cropping',
+            'w',
+            'h',
             'date',
             'thumbnail',
             'title',
