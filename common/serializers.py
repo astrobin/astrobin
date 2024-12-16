@@ -14,7 +14,7 @@ from subscription.models import UserSubscription, Subscription, Transaction
 from astrobin.api2.serializers.location_serializer import LocationSerializer
 from astrobin.models import UserProfile, Location
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
-from astrobin_apps_groups.api.serializers.group_serializer import GroupSerializer
+from astrobin_apps_groups.api.serializers.simple_group_serializer import SimpleGroupSerializer
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
@@ -50,7 +50,7 @@ class UserSerializer(serializers.ModelSerializer):
     marketplace_feedback = serializers.SerializerMethodField(read_only=True)
     marketplace_feedback_count = serializers.SerializerMethodField(read_only=True)
     marketplace_listing_count = serializers.SerializerMethodField(read_only=True)
-    astrobin_groups = GroupSerializer(read_only=True, source='joined_group_set', many=True)
+    astrobin_groups = SimpleGroupSerializer(read_only=True, source='joined_group_set', many=True)
     valid_subscription = serializers.SerializerMethodField(read_only=True)
 
     def get_display_name(self, user: User) -> str:
