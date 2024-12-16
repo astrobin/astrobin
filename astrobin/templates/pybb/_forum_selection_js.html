@@ -122,5 +122,9 @@
         }
 
         initForumSelectionModal();
+        
+        if (window.location.hash === "#new-topic") {
+            $("#select-forum-modal").modal("show");
+        }
     });
 </script>
