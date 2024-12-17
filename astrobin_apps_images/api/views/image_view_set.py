@@ -279,7 +279,11 @@ class ImageViewSet(
 
         if 'hash' in request.query_params:
             hash: str = request.query_params.get('hash')
-            image: Image = get_object_or_None(Image.objects_including_wip_plain, hash=hash)
+            image: Image = get_object_or_None(
+                Image.objects_including_wip_plain,
+                hash=hash,
+                user__userprofile__suspended__isnull=True
+            )
             if not image:
                 return Response(status=HTTP_404_NOT_FOUND)
 

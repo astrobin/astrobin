@@ -58,7 +58,10 @@ class UserList(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
     pagination_class = None
-    queryset = User.objects.prefetch_related(
+    queryset = User.objects.filter(
+        userprofile__deleted__isnull=True,
+        userprofile__suspended__isnull=True
+    ).prefetch_related(
         'groups',
         'groups__permissions'
     ).all()
@@ -90,7 +93,6 @@ class UserList(generics.ListAPIView):
                 return Response([cached_data['data']])
 
         # Get fresh data
-        queryset = self.filter_queryset(self.get_queryset())
         serialized = self.get_serializer(user).data
 
         # Cache the fresh data
@@ -112,7 +114,10 @@ class UserDetail(generics.RetrieveAPIView):
     model = User
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
-    queryset = User.objects.prefetch_related(
+    queryset = User.objects.filter(
+        userprofile__deleted__isnull=True,
+        userprofile__suspended__isnull=True
+    ).prefetch_related(
         'groups',
         'groups__permissions'
     ).all()
@@ -205,10 +210,17 @@ class UserProfileList(generics.ListAPIView):
         if 'q' in self.request.query_params:
             q = self.request.query_params.get('q')
             return UserProfile.objects.filter(
-                Q(real_name__icontains=q) | Q(user__username__icontains=q)
+                Q(suspended__isnull=True) &
+                Q(
+                    Q(real_name__icontains=q) |
+                    Q(user__username__icontains=q)
+                )
             ).distinct()[:20]
 
-        return UserProfile.objects.all()
+        return UserProfile.objects.filter(
+            deleted__isnull=True,
+            suspended__isnull=True
+        )
 
 
 @method_decorator(
@@ -220,7 +232,9 @@ class UserProfileList(generics.ListAPIView):
 class UserProfileDetail(generics.RetrieveAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
-    queryset = UserProfile.objects.all()
+    queryset = UserProfile.objects.filter(
+        suspended__isnull=True
+    )
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
 
@@ -240,7 +254,9 @@ class UserProfileDetail(generics.RetrieveAPIView):
 class UserProfileStats(generics.RetrieveAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
-    queryset = UserProfile.objects.all()
+    queryset = UserProfile.objects.filter(
+        suspended__isnull=True
+    )
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
 
@@ -251,7 +267,9 @@ class UserProfileStats(generics.RetrieveAPIView):
 class UserProfileFollowers(generics.RetrieveAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
-    queryset = UserProfile.objects.all()
+    queryset = UserProfile.objects.filter(
+        suspended__isnull=True
+    )
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
 
@@ -285,7 +303,9 @@ class UserProfileMutualFollowers(generics.RetrieveAPIView):
 class UserProfileChangeGalleryHeader(generics.UpdateAPIView):
     model = UserProfile
     permission_classes = [IsAuthenticated]
-    queryset = UserProfile.objects.all()
+    queryset = UserProfile.objects.filter(
+        suspended__isnull=True
+    )
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
 
@@ -321,7 +341,9 @@ class UserProfileChangeGalleryHeader(generics.UpdateAPIView):
 class CurrentUserProfileDetail(generics.ListAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
-    queryset = UserProfile.objects.all()
+    queryset = UserProfile.objects.filter(
+        suspended__isnull=True
+    )
     pagination_class = None
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
@@ -347,7 +369,7 @@ class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin)
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return self.model.objects.filter(user=self.request.user)
+            return self.model.objects.filter(user=self.request.user, suspended__isnull=True)
         return self.model.objects.none()
 
     def put(self, request, *args, **kwargs):
