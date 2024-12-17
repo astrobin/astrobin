@@ -2,7 +2,7 @@ from django.core.cache import cache
 from django.db.models import QuerySet
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from rest_framework import permissions, viewsets
+from rest_framework import viewsets
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
@@ -13,7 +13,7 @@ from common.permissions import ReadOnly
 
 
 class FrontPageFeedViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated, ReadOnly)
+    permission_classes = (ReadOnly,)
     serializer_class = FrontPageFeedSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
