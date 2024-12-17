@@ -3,6 +3,8 @@ from rest_framework import serializers
 
 
 class TopicSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    display_name = serializers.CharField(source='user.userprofile.get_display_name', read_only=True)
     read = serializers.SerializerMethodField()
     forum_name = serializers.CharField(source='forum.name', read_only=True)
     last_post_username = serializers.CharField(source='last_post.user.username', read_only=True)

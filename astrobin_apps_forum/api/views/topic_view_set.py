@@ -20,5 +20,5 @@ class TopicViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'head']
 
     def get_queryset(self) -> QuerySet:
-        queryset = Topic.objects.filter(on_moderation=False)
+        queryset = Topic.objects.filter(on_moderation=False).select_related('forum', 'user')
         return CustomForumPermissions().filter_topics(self.request.user, queryset)
