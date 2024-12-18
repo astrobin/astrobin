@@ -4,6 +4,7 @@ from django.core.cache import cache
 from django.db import IntegrityError
 from django.db.models import Q, QuerySet
 from django.utils.decorators import method_decorator
+from django.utils.translation import gettext
 from django.views.decorators.cache import cache_control, cache_page, never_cache
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_headers
@@ -11,10 +12,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import generics, mixins
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import get_object_or_404
+from rest_framework.generics import GenericAPIView, get_object_or_404
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN
 from rest_framework.throttling import ScopedRateThrottle
 from subscription.models import Subscription, Transaction, UserSubscription
 
@@ -375,6 +377,71 @@ class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin)
     def put(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
 
+
+class UserProfileShadowBanView(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
+
+    @method_decorator(never_cache)
+    def post(self, request, pk):
+        if int(pk) == request.user.pk:
+            return Response(
+                {'detail': 'Cannot shadow-ban yourself'},
+                status=HTTP_403_FORBIDDEN
+            )
+
+        profile_to_ban = get_object_or_404(UserProfile, user_id=pk)
+        requester_profile = request.user.userprofile
+
+        if profile_to_ban in requester_profile.shadow_bans.all():
+            return Response(
+                {'detail': 'User is already shadow-banned'},
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        requester_profile.shadow_bans.add(profile_to_ban)
+
+        return Response(
+            {
+                'message': gettext(
+                    "You have shadow-banned %s. They will not be notified about it."
+                ) % profile_to_ban.get_display_name()
+            }, status=HTTP_200_OK
+        )
+
+
+class UserProfileRemoveShadowBanView(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'users'
+
+    @method_decorator(never_cache)
+    def post(self, request, pk):
+        if int(pk) == request.user.pk:
+            return Response(
+                {'detail': 'Cannot remove shadow-ban from yourself'},
+                status=HTTP_403_FORBIDDEN
+            )
+
+        profile_to_unban = get_object_or_404(UserProfile, user_id=pk)
+        requester_profile = request.user.userprofile
+
+        if profile_to_unban not in requester_profile.shadow_bans.all():
+            return Response(
+                {'detail': 'User is not shadow-banned'},
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        requester_profile.shadow_bans.remove(profile_to_unban)
+
+        return Response(
+            {
+                'message': gettext(
+                    "You have removed your shadow-ban for %s. They will not be notified about it."
+                ) % profile_to_unban.get_display_name()
+            }, status=HTTP_200_OK
+        )
 
 class SubscriptionList(generics.ListAPIView):
     model = Subscription

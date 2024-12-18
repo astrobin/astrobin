@@ -4,7 +4,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from common.views import (
     ContentTypeList, ContentTypeDetail, UserEmptyTrash, UserList, UserDetail, UserProfileChangeGalleryHeader,
     UserProfileFollowers, UserProfileFollowing, UserProfileList, UserProfileDetail,
-    CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserProfileMutualFollowers, UserProfileStats,
+    CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserProfileMutualFollowers,
+    UserProfileRemoveShadowBanView, UserProfileShadowBanView, UserProfileStats,
     UserSubscriptionList,
     UserSubscriptionDetail,
     TogglePropertyList, TogglePropertyDetail, PaymentList, UserProfilePartialUpdate,
@@ -39,7 +40,16 @@ urlpatterns = (
     ),
     url(r'^userprofiles/current/$', CurrentUserProfileDetail.as_view(), name='userprofile-detail-current'),
     url(r'^userprofiles/(?P<pk>\d+)/partial/$', UserProfilePartialUpdate.as_view(), name='userprofile-partial-update'),
-
+    url(
+        r'^userprofiles/(?P<pk>\d+)/shadow-ban/$',
+        UserProfileShadowBanView.as_view(),
+        name='userprofile-shadow-ban'
+    ),
+    url(
+        r'^userprofiles/(?P<pk>\d+)/remove-shadow-ban/$',
+        UserProfileRemoveShadowBanView.as_view(),
+        name='userprofile-remove-shadow-ban'
+    ),
     url(r'^subscriptions/$', SubscriptionList.as_view(), name='subscription-list'),
     url(r'^subscriptions/(?P<pk>\d+)/$', SubscriptionDetail.as_view(), name='subscription-detail'),
 
