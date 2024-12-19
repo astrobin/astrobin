@@ -220,6 +220,20 @@ class SolutionRestartView(APIView):
         return Response(SolutionSerializer(solution).data, status=HTTP_200_OK)
 
 
+class SolutionPixInsightMatrix(APIView):
+    permission_classes = (ReadOnly,)
+
+    def get(self, request, pk):
+        solution = Solution.objects.get(pk=pk)
+        matrix = {
+            'matrixRect': solution.advanced_matrix_rect,
+            'matrixDelta': solution.advanced_matrix_delta,
+            'raMatrix': solution.advanced_ra_matrix,
+            'decMatrix': solution.advanced_dec_matrix,
+        }
+        return Response(matrix)
+
+
 class AdvancedTaskList(generics.ListAPIView):
     model = PlateSolvingAdvancedTask
     queryset = PlateSolvingAdvancedTask.objects.order_by('-created')
