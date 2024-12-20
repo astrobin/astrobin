@@ -360,15 +360,13 @@ def upload_max_revisions_error(request, max_revisions, image):
 @cache_control(private=True)
 def index(request, template='index/root.html') -> HttpResponse:
     """Main page"""
-    # from django.shortcuts import redirect
-
     if not request.user.is_authenticated:
         return redirect("https://welcome.astrobin.com/")
 
     profile = request.user.userprofile
 
-    # if profile.enable_new_gallery_experience and 'force-classic-view' not in request.GET:
-    #     return redirect(AppRedirectionService.redirect('/'))
+    if profile.enable_new_gallery_experience and 'force-classic-view' not in request.GET:
+        return redirect(AppRedirectionService.redirect('/'))
 
     section = request.GET.get('s')
     if section is None:
