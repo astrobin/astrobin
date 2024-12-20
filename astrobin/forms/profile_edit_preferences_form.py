@@ -27,6 +27,8 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
     )
 
     enable_new_search_experience = forms.ChoiceField(
+        label=UserProfile._meta.get_field('enable_new_search_experience').verbose_name,
+        help_text=UserProfile._meta.get_field('enable_new_search_experience').help_text,
         required=False,
         choices=nullable_boolean_field_choices,
     )
@@ -73,6 +75,8 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
 
         if profile.may_enable_new_gallery_experience:
             self.fields['enable_new_gallery_experience'] = forms.ChoiceField(
+                label=UserProfile._meta.get_field('enable_new_gallery_experience').verbose_name,
+                help_text=UserProfile._meta.get_field('enable_new_gallery_experience').help_text,
                 required=False,
                 choices=self.nullable_boolean_field_choices,
             )
