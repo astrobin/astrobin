@@ -184,7 +184,6 @@ ic 5146,c 19,cocoon nebula,sh 2 125,lbn 424,sharpless 125,caldwell 19
 north america,ngc 7000,sh 2 117,caldwell 20,lbn 373,sharpless 117,c 20,north america nebula
 caldwell 21,c 21,ngc 4449
 caldwell 22,ngc 7662,c 22,copeland's blue snowball
-ngc 891,caldwell 23,vdb 52,lbn 954,ngc 2023,c 23,ugc 1831
 ngc 1275,per a,perseus a
 caldwell 26,c 26,ngc 4244
 sh 2 105,ngc 6888,ngc 4881,sharpless 105,crescent nebula,c 27,lbn 203,caldwell 27
