@@ -76,7 +76,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2g
+          memory: 12g
 
   celery_haystack:
     image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
