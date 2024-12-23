@@ -21,7 +21,10 @@ class Annotator:
             min(
                 settings.THUMBNAIL_ALIASES['']['hd']['size'][0],
                 solution.content_object.w
-            ) / float(solution.content_object.w)
+            ) / min(
+                settings.THUMBNAIL_ALIASES['']['real']['size'][0],
+                float(solution.content_object.w)
+            )
         self.line_thickness = 2
         self.solver = Solver()
 
