@@ -325,7 +325,7 @@ ngc 5953,ngc 5954
 ngc 2936,ugc 5130
 aco 262,ngc 704,ngc 708,galaxy 55,ngc 705
 gcl 93,ngc 6624
-ngc 1316,fornax a,for a
+ngc 1316,fornax a
 ngc 2282,vdb 85
 ngc 680,galaxy 50
 ngc 17,ngc 34
