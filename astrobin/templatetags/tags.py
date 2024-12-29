@@ -35,6 +35,7 @@ from astrobin.utils import (
 )
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_forum.services import ForumService
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_any_ultimate, is_free, is_lite,
@@ -587,7 +588,7 @@ def is_image_moderator(user):
 
 @register.filter
 def is_forum_moderator(user):
-    return UserService(user).is_in_group('forum_moderators')
+    return ForumService.is_forum_moderator(user)
 
 
 @register.filter
@@ -922,25 +923,11 @@ def license_logo(image):
 
 
 @register.simple_tag(takes_context=True)
-def forum_latest_topics(context, user=None):
+def forum_latest_topics(context, user=None) -> QuerySet:
     if not user:
         user = context['user']
 
-    qs = Topic.objects.select_related()
-
-    if user and user.is_authenticated:
-        qs = qs.filter(
-            Q(forum__group=None) |
-            Q(forum__group__owner=user) |
-            Q(forum__group__members=user)
-        )
-
-        if not is_forum_moderator(user):
-            qs = qs.filter(on_moderation=False)
-    else:
-        qs = qs.filter(forum__group=None, on_moderation=False)
-
-    return qs.distinct().order_by('-updated', '-id')
+    return ForumService.latest_topics(user)
 
 
 @register.simple_tag(takes_context=True)

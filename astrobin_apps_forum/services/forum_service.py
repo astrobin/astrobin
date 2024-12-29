@@ -6,7 +6,7 @@ from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache.utils import make_template_fragment_key
-from django.db.models import QuerySet
+from django.db.models import Q, QuerySet
 from django.urls import reverse
 from django.utils import timezone
 from pybb.models import Forum, ForumReadTracker, Post, Topic, TopicReadTracker
@@ -15,6 +15,7 @@ from astrobin_apps_equipment.models import Accessory, Camera, EquipmentItem, Fil
 from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_forum.models import TopicRedirect
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService
 
 log = logging.getLogger(__name__)
@@ -156,3 +157,25 @@ class ForumService:
             'home_page_latest_from_forums',
             (user.pk, user.userprofile.language)
         )
+
+    @staticmethod
+    def is_forum_moderator(user: User) -> bool:
+        return UserService(user).is_in_group('forum_moderators')
+
+    @staticmethod
+    def latest_topics(user: User) -> QuerySet:
+        queryset = Topic.objects.select_related()
+
+        if user and user.is_authenticated:
+            queryset = queryset.filter(
+                Q(forum__group=None) |
+                Q(forum__group__owner=user) |
+                Q(forum__group__members=user)
+            )
+
+            if not ForumService.is_forum_moderator(user):
+                queryset = queryset.filter(on_moderation=False)
+        else:
+            queryset = queryset.filter(forum__group=None, on_moderation=False)
+
+        return queryset.distinct().order_by('-updated', '-id')
