@@ -1001,12 +1001,15 @@ class SearchService:
                     search_ra_max = target_ra + delta
                     search_dec_min = target_dec - delta
                     search_dec_max = target_dec + delta
+                    field_radius_min = delta / 4
+                    field_radius_max = max(180, delta * 4)
 
                     results = results.filter(
                         coord_ra_min__lte=search_ra_max,
                         coord_ra_max__gte=search_ra_min,
                         coord_dec_min__lte=search_dec_max,
-                        coord_dec_max__gte=search_dec_min
+                        coord_dec_max__gte=search_dec_min,
+                        field_radius__range=(field_radius_min, field_radius_max)
                     )
                 else:
                     # No solution, let's see if there's a catalog name in the title.
