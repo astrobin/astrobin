@@ -1002,7 +1002,7 @@ class SearchService:
                     search_dec_min = target_dec - delta
                     search_dec_max = target_dec + delta
                     field_radius_min = delta / 4
-                    field_radius_max = max(180, delta * 4)
+                    field_radius_max = min(180.0, delta * 4)
 
                     results = results.filter(
                         coord_ra_min__lte=search_ra_max,
