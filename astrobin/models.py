@@ -1263,6 +1263,22 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ),
     )
 
+    allow_image_adjustments_widget = models.NullBooleanField(
+        null=True,
+        blank=True,
+    )
+
+    max_zoom = models.SmallIntegerField(
+        choices=(
+            (8, "8x"),
+            (4, "4x"),
+            (2, "2x"),
+            (1, "1x"),
+        ),
+        null=True,
+        blank=True,
+    )
+
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     published = models.DateTimeField(editable=False, null=True, blank=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
@@ -2976,11 +2992,47 @@ class UserProfile(SafeDeleteModel):
         verbose_name=_("Default gallery sorting"),
     )
 
+    default_allow_image_adjustments_widget = models.BooleanField(
+        default=True,
+        verbose_name=_("Allow image adjustments widget on your images"),
+        help_text=_(
+            "If you disable this option, the image adjustments widget will not be shown on your images. "
+            "This setting only affects the new gallery and search experiences."
+        ),
+    )
+
+    default_max_zoom = models.SmallIntegerField(
+        choices=(
+            (8, "8x"),
+            (4, "4x"),
+            (2, "2x"),
+            (1, "1x"),
+        ),
+        default=8,
+        verbose_name=_("Maximum zoom allowed on your images"),
+        help_text=_(
+            "Select the maximum zoom allowed on your images. 1x refers to the native resolution of an image. "
+            "This setting only affects the new gallery and search experiences."
+        ),
+    )
+
+    display_collections_on_public_gallery = models.BooleanField(
+        default=True,
+        verbose_name=_("Display collections on your public gallery"),
+        help_text=_(
+            "Select if you want your collections to be displayed on your public gallery. If you disable this, "
+            "your collections will be displayed separately. This setting only affects the new gallery "
+            "experience."
+        ),
+    )
+
     display_wip_images_on_public_gallery = models.NullBooleanField(
         verbose_name=_("See your own Staging Area images on your gallery"),
-        help_text=_("Select if you want your Staging Area images to appear on your own view of your gallery when you "
-                    "are logged. If you choose 'No', your Staging Area images can be located via the 'View' menu entry "
-                    "on your gallery page."),
+        help_text=_(
+            "Select if you want your Staging Area images to appear on your own view of your gallery when you "
+            "are logged in. If you disable this, your Staging Area images can be visible separately (only "
+            "to you."
+        ),
     )
 
     default_license = models.CharField(

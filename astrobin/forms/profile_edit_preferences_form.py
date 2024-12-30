@@ -33,6 +33,18 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
         choices=nullable_boolean_field_choices,
     )
 
+    display_wip_images_on_public_gallery = forms.BooleanField(
+        label=UserProfile._meta.get_field('display_wip_images_on_public_gallery').verbose_name,
+        help_text=UserProfile._meta.get_field('display_wip_images_on_public_gallery').help_text,
+        required=False
+    )
+
+    open_notifications_in_new_tab = forms.BooleanField(
+        label=UserProfile._meta.get_field('open_notifications_in_new_tab').verbose_name,
+        help_text=UserProfile._meta.get_field('open_notifications_in_new_tab').help_text,
+        required=False
+    )
+
     class Meta:
         model = UserProfile
         fields = [
@@ -40,6 +52,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'other_languages',
             'default_frontpage_section',
             'default_gallery_sorting',
+            'display_collections_on_public_gallery',
             'display_wip_images_on_public_gallery',
             'open_notifications_in_new_tab',
             'exclude_from_competitions',
@@ -50,6 +63,8 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'receive_marketing_and_commercial_material',
             'allow_astronomy_ads',
             'allow_retailer_integration',
+            'default_allow_image_adjustments_widget',
+            'default_max_zoom',
         ]
         widgets = {
             'other_languages': SelectMultiple(
