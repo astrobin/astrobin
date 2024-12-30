@@ -96,6 +96,11 @@ class ImageSerializer(serializers.ModelSerializer):
     average_moon_age = serializers.SerializerMethodField(read_only=True)
     average_moon_illumination = serializers.SerializerMethodField(read_only=True)
 
+    default_max_zoom = serializers.IntegerField(source='user.userprofile.default_max_zoom', read_only=True)
+    default_allow_image_adjustments_widget = serializers.BooleanField(
+        source='user.userprofile.default_allow_image_adjustments_widget', read_only=True
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.iotd_service = IotdService()
@@ -317,6 +322,10 @@ class ImageSerializer(serializers.ModelSerializer):
             'locations',
             'location_objects',
             'full_size_display_limitation',
+            'max_zoom',
+            'default_max_zoom',
+            'allow_image_adjustments_widget',
+            'default_allow_image_adjustments_widget',
             'download_limitation',
             'loop_video',
             'video_file',
