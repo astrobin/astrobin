@@ -800,10 +800,21 @@ pre_save.connect(solution_pre_save, sender=Solution)
 
 @receiver(post_save, sender=Solution)
 def solution_post_save(sender, instance, created, **kwargs):
-    is_solved = instance.status >= Solver.SUCCESS
-    model = instance.content_type.model
-    is_image = model == 'image'
-    is_imagerevision = model == 'imagerevision'
+    is_solved: bool = instance.status >= Solver.SUCCESS
+    model: str = instance.content_type.model
+    is_image: bool = model == 'image'
+    is_imagerevision: bool = model == 'imagerevision'
+    image: Image = None
+
+    if is_image:
+        image = Image.objects_including_wip.get(pk=instance.object_id)
+    elif is_imagerevision:
+        image = ImageRevision.objects.get(pk=instance.object_id).image
+
+    if image:
+        Image.objects_including_wip.filter(pk=image.pk).update(
+            updated=timezone.now(),
+        )
 
     if is_solved:
         constellation = ImageService.get_constellation(instance)
