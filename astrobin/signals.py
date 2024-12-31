@@ -807,9 +807,16 @@ def solution_post_save(sender, instance, created, **kwargs):
     image: Image = None
 
     if is_image:
-        image = Image.objects_including_wip.get(pk=instance.object_id)
+        try:
+            image = Image.objects_including_wip.get(pk=instance.object_id)
+        except Image.DoesNotExist:
+            pass
     elif is_imagerevision:
-        image = ImageRevision.objects.get(pk=instance.object_id).image
+        try:
+            revision = ImageRevision.objects.get(pk=instance.object_id)
+            image = revision.image
+        except ImageRevision.DoesNotExist:
+            pass
 
     if image:
         Image.objects_including_wip.filter(pk=image.pk).update(
