@@ -9,11 +9,12 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db import IntegrityError
-from django.db.models import Count, OuterRef, Q, QuerySet, Subquery, Value
-from django.db.models.functions import Concat
+from django.db.models import CharField, Count, OuterRef, Q, QuerySet, Subquery, Value
+from django.db.models.functions import Cast, Concat
 from django.utils.translation import gettext_lazy
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
+from hitcount.models import HitCount
 from rest_framework import mixins
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
@@ -314,6 +315,40 @@ class ImageViewSet(
             sorted_queryset, menu, active = self._get_sorted_queryset_and_extra_data(request)
             self.menu = menu
             self.active = active
+
+            if 'ordering' in request.query_params:
+                ordering = request.query_params.get('ordering')
+                ordering_map = {
+                    'views': '-view_count',
+                    'likes': '-like_count',
+                    'bookmarks': '-bookmark_count',
+                    'comments': '-comment_count',
+                }
+
+                if ordering not in (
+                    'views',
+                    'likes',
+                    'bookmarks',
+                    'comments',
+                ):
+                    return Response(
+                        "Invalid ordering parameter.",
+                        status=HTTP_400_BAD_REQUEST
+                    )
+
+                if ordering == 'views':
+                    # This needs special handling because the view count is not on the Image model
+                    sorted_queryset = sorted_queryset.annotate(
+                        view_count=Subquery(
+                            HitCount.objects.filter(
+                                object_pk=Cast(OuterRef('id'), output_field=CharField()),
+                                content_type__model='image'
+                            ).values('hits')[:1]
+                        )
+                    ).order_by('-view_count')
+                else:
+                    sorted_queryset = sorted_queryset.order_by(ordering_map[ordering])
+
             self.sorted_queryset = sorted_queryset
 
             # Proceed with the default list behavior

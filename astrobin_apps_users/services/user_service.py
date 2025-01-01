@@ -359,7 +359,7 @@ class UserService:
         ############
         # UPLOADED #
         ############
-        if subsection == 'uploaded':
+        elif subsection == 'uploaded':
             queryset = queryset.order_by('-published', '-uploaded')
 
         ############
