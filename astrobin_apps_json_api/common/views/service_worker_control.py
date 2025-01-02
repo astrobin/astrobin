@@ -10,6 +10,6 @@ class ServiceWorkerControl(JSONResponseMixin, View):
     def get(self, request, *args, **kwargs):
         return self.render_json_response(
             {
-                'swEnabled': True
+                'swEnabled': False
             }
         )
