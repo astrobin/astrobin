@@ -13,7 +13,7 @@ class NestedCommentSerializer(serializers.ModelSerializer):
         queryset=NestedComment.objects.all(),
         allow_null=True
     )
-    author_avatar = AvatarField(source='author', required=False)
+    author_avatar = AvatarField(source='author', required=False, read_only=True)
     author_username = serializers.SerializerMethodField(read_only=True)
     author_display_name = serializers.SerializerMethodField(read_only=True)
     html = serializers.SerializerMethodField(read_only=True)
