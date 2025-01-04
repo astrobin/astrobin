@@ -11,6 +11,10 @@ class CollectionSerializer(serializers.ModelSerializer):
     def get_cover_thumbnail(self, instance: Collection) -> Optional[str]:
         if instance.cover:
             return instance.cover.thumbnail('regular', None, sync=True)
+
+        if instance.images.exists():
+            return instance.images.first().thumbnail('regular', None, sync=True)
+
         return None
 
     def create(self, validated_data):
