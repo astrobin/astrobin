@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext, ugettext as _
 
 from astrobin.forms.utils import NULL_CHOICE
 from astrobin.models import Collection
@@ -24,13 +24,34 @@ class CollectionUpdateForm(forms.ModelForm):
             .distinct() \
             .values_list("key", flat=True)
 
+        self.fields['cover'].required = False
+        self.fields['cover'].widget.attrs.update(
+            {
+                'data-allow-clear': 'true',
+                'data-placeholder': gettext('Use the most recent image automatically')
+            }
+        )
+
         self.fields['order_by_tag'].choices = NULL_CHOICE + [(x, x) for x in tag_keys]
+        self.fields['order_by_tag'].widget.attrs.update(
+            {
+                'data-allow-clear': 'true',
+                'data-placeholder': '--------'
+            }
+        )
+
         self.fields['parent'].queryset = Collection.objects.filter(
             user=self.instance.user
         ).exclude(
             pk=self.instance.pk
         ).order_by(
             'name'
+        )
+        self.fields['parent'].widget.attrs.update(
+            {
+                'data-allow-clear': 'true',
+                'data-placeholder': '--------'
+            }
         )
 
     class Meta:
