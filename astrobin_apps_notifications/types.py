@@ -395,7 +395,7 @@ NOTICE_TYPES = (
     ),
     (
         'your_image_is_tpn',
-        _("Your image was nominated to be a Top Pick"),
+        _("Your image was voted Top Pick Nomination"),
         '',
         2
     ),
