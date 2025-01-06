@@ -9,12 +9,11 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db import IntegrityError
-from django.db.models import CharField, Count, OuterRef, Q, QuerySet, Subquery, Value
-from django.db.models.functions import Cast, Concat
+from django.db.models import Count, OuterRef, Q, QuerySet, Subquery, Value
+from django.db.models.functions import Concat
 from django.utils.translation import gettext_lazy
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from hitcount.models import HitCount
 from rest_framework import mixins
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
@@ -43,6 +42,7 @@ from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import humanize_may
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_users.services import UserService
 from common.permissions import IsSuperUser, or_permission
+from toggleproperties.models import ToggleProperty
 
 logger = logging.getLogger(__name__)
 
@@ -325,9 +325,9 @@ class ImageViewSet(
                 }
 
                 if ordering not in (
-                    'likes',
-                    'bookmarks',
-                    'comments',
+                        'likes',
+                        'bookmarks',
+                        'comments',
                 ):
                     return Response(
                         "Invalid ordering parameter.",
@@ -597,25 +597,67 @@ class ImageViewSet(
     @action(detail=True, methods=['get'], url_path='users-who-like')
     def users_who_like(self, request, pk=None):
         image = self.get_object()
-        users = User.objects.filter(
-            toggleproperty__content_type=ContentType.objects.get_for_model(Image),
-            toggleproperty__object_id=image.pk,
-            toggleproperty__property_type='like',
-        )
+        content_type = ContentType.objects.get_for_model(Image)
+
+        # First query the specific ToggleProperties we want
+        properties = ToggleProperty.objects.filter(
+            content_type=content_type,
+            object_id=image.pk,
+            property_type='like'
+        ).select_related('user', 'user__userprofile')
+
+        # Then order these by timestamp
+        properties = properties.order_by('-created_on')
 
         if 'users-who-like-q' in request.query_params:
             q = request.query_params.get('users-who-like-q')
-            users = users.filter(
-                Q(username__icontains=q) |
-                Q(userprofile__real_name__icontains=q)
+            properties = properties.filter(
+                Q(user__username__icontains=q) |
+                Q(user__userprofile__real_name__icontains=q)
             )
 
         return Response(
             [
                 {
-                    'username': user.username,
-                    'displayName': user.userprofile.get_display_name(),
-                } for user in users
+                    'userId': prop.user.pk,
+                    'username': prop.user.username,
+                    'displayName': prop.user.userprofile.get_display_name(),
+                    'timestamp': prop.created_on,
+                } for prop in properties
+            ],
+            HTTP_200_OK
+        )
+
+    @action(detail=True, methods=['get'], url_path='users-who-bookmarked')
+    def users_who_bookmarked(self, request, pk=None):
+        image = self.get_object()
+        content_type = ContentType.objects.get_for_model(Image)
+
+        # First query the specific ToggleProperties we want
+        properties = ToggleProperty.objects.filter(
+            content_type=content_type,
+            object_id=image.pk,
+            property_type='bookmarked'
+        ).select_related('user', 'user__userprofile')
+
+        # Then order these by timestamp
+        properties = properties.order_by('-created_on')
+
+        if 'users-who-bookmarked-q' in request.query_params:
+            q = request.query_params.get('users-who-bookmarked-q')
+            properties = properties.filter(
+                Q(user__username__icontains=q) |
+                Q(user__userprofile__real_name__icontains=q)
+            )
+
+        return Response(
+            [
+                {
+                    'userId': prop.user.pk,
+                    'username': prop.user.username,
+                    'displayName': prop.user.userprofile.get_display_name(),
+                    'timestamp': prop.created_on,
+                } for prop in properties
             ],
             HTTP_200_OK
         )
