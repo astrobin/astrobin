@@ -619,9 +619,10 @@ class ImageViewSet(
         return Response(
             [
                 {
-                    'userId': prop.user.pk,
-                    'username': prop.user.username,
-                    'displayName': prop.user.userprofile.get_display_name(),
+                    'userId': prop.user.pk if prop.user is not None else None,
+                    'username': prop.user.username if prop.user is not None else None,
+                    'displayName': prop.user.userprofile.get_display_name()
+                    if prop.user is not None and prop.user.userprofile is not None else None,
                     'timestamp': prop.created_on,
                 } for prop in properties
             ],
@@ -653,9 +654,10 @@ class ImageViewSet(
         return Response(
             [
                 {
-                    'userId': prop.user.pk,
-                    'username': prop.user.username,
-                    'displayName': prop.user.userprofile.get_display_name(),
+                    'userId': prop.user.pk if prop.user is not None else None,
+                    'username': prop.user.username if prop.user is not None else None,
+                    'displayName': prop.user.userprofile.get_display_name()
+                    if prop.user is not None and prop.user.userprofile is not None else None,
                     'timestamp': prop.created_on,
                 } for prop in properties
             ],
