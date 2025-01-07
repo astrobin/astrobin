@@ -645,7 +645,7 @@ class ImageViewSet(
                     property_type='follow',
                     object_id=prop.user.pk,
                     content_type=ContentType.objects.get_for_model(User)
-                ).exists()
+                ).exists() if prop.user is not None else False
             } for prop in page
         ]
 
