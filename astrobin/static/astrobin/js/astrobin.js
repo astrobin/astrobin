@@ -407,7 +407,7 @@ astrobin_common = {
             }
 
             // Bump this anytime a plugin or other CKEDITOR resource is updated.
-            CKEDITOR.timestamp = "25070100";
+            CKEDITOR.timestamp = "25010700";
 
             return options;
         },
