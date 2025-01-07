@@ -594,75 +594,70 @@ class ImageViewSet(
         serializer = self.get_serializer(image)
         return Response(serializer.data, HTTP_200_OK)
 
-    @action(detail=True, methods=['get'], url_path='users-who-like')
-    def users_who_like(self, request, pk=None):
+    def _get_users_with_property(self, request, property_type, query_param_name):
+        """
+        Base method to get users who have a specific property on an image.
+
+        Args:
+            request: The request object
+            property_type: The type of property to filter ('like' or 'bookmark')
+            query_param_name: Name of the query parameter for search
+        """
+        if not request.user.is_authenticated:
+            return Response("Authentication required", HTTP_401_UNAUTHORIZED)
+
         image = self.get_object()
+
+        if image.user != request.user and not request.user.is_superuser:
+            return Response("Permission denied", HTTP_403_FORBIDDEN)
+
         content_type = ContentType.objects.get_for_model(Image)
 
-        # First query the specific ToggleProperties we want
+        # Query the specific ToggleProperties
         properties = ToggleProperty.objects.filter(
             content_type=content_type,
             object_id=image.pk,
-            property_type='like'
+            property_type=property_type
         ).select_related('user', 'user__userprofile')
 
-        # Then order these by timestamp
+        # Order by timestamp
         properties = properties.order_by('-created_on')
 
-        if 'users-who-like-q' in request.query_params:
-            q = request.query_params.get('users-who-like-q')
+        # Apply search filter if present
+        if query_param_name in request.query_params:
+            q = request.query_params.get(query_param_name)
             properties = properties.filter(
                 Q(user__username__icontains=q) |
                 Q(user__userprofile__real_name__icontains=q)
             )
 
-        return Response(
-            [
-                {
-                    'userId': prop.user.pk if prop.user is not None else None,
-                    'username': prop.user.username if prop.user is not None else None,
-                    'displayName': prop.user.userprofile.get_display_name()
-                    if prop.user is not None and prop.user.userprofile is not None else None,
-                    'timestamp': prop.created_on,
-                } for prop in properties
-            ],
-            HTTP_200_OK
-        )
+        page = self.paginate_queryset(properties)
+
+        data = [
+            {
+                'userId': prop.user.pk if prop.user is not None else None,
+                'username': prop.user.username if prop.user is not None else None,
+                'displayName': prop.user.userprofile.get_display_name()
+                if prop.user is not None and prop.user.userprofile is not None else None,
+                'timestamp': prop.created_on,
+                'followed': ToggleProperty.objects.filter(
+                    user=request.user,
+                    property_type='follow',
+                    object_id=prop.user.pk,
+                    content_type=ContentType.objects.get_for_model(User)
+                ).exists()
+            } for prop in page
+        ]
+
+        return self.get_paginated_response(data)
+
+    @action(detail=True, methods=['get'], url_path='users-who-like')
+    def users_who_like(self, request, pk=None):
+        return self._get_users_with_property(request, 'like', 'users-who-like-q')
 
     @action(detail=True, methods=['get'], url_path='users-who-bookmarked')
     def users_who_bookmarked(self, request, pk=None):
-        image = self.get_object()
-        content_type = ContentType.objects.get_for_model(Image)
-
-        # First query the specific ToggleProperties we want
-        properties = ToggleProperty.objects.filter(
-            content_type=content_type,
-            object_id=image.pk,
-            property_type='bookmark'
-        ).select_related('user', 'user__userprofile')
-
-        # Then order these by timestamp
-        properties = properties.order_by('-created_on')
-
-        if 'users-who-bookmarked-q' in request.query_params:
-            q = request.query_params.get('users-who-bookmarked-q')
-            properties = properties.filter(
-                Q(user__username__icontains=q) |
-                Q(user__userprofile__real_name__icontains=q)
-            )
-
-        return Response(
-            [
-                {
-                    'userId': prop.user.pk if prop.user is not None else None,
-                    'username': prop.user.username if prop.user is not None else None,
-                    'displayName': prop.user.userprofile.get_display_name()
-                    if prop.user is not None and prop.user.userprofile is not None else None,
-                    'timestamp': prop.created_on,
-                } for prop in properties
-            ],
-            HTTP_200_OK
-        )
+        return self._get_users_with_property(request, 'bookmark', 'users-who-bookmarked-q')
 
     def _validate_list_request(self, request):
         """
