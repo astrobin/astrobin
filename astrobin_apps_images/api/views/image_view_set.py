@@ -638,7 +638,7 @@ class ImageViewSet(
         properties = ToggleProperty.objects.filter(
             content_type=content_type,
             object_id=image.pk,
-            property_type='bookmarked'
+            property_type='bookmark'
         ).select_related('user', 'user__userprofile')
 
         # Then order these by timestamp
