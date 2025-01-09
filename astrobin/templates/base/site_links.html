@@ -184,27 +184,12 @@
                     </a>
                 </li>
 
-                <li class="divider"></li>
-                <li class="explore-menu-top-pick-nominations">
-                    <a href="{% url 'top_pick_nominations' %}">
-                        <i class="icon-arrow-up"></i>
-                        {% trans "Top pick nominations" %}
-                    </a>
-                </li>
-                <li class="explore-menu-top-picks">
-                    <a href="{% url 'top_picks' %}">
-                        <i class="icon-star"></i>
-                        {% trans "Top picks" %}
-                    </a>
-                </li>
-                <li class="explore-menu-iotd">
-                    <a href="{% url 'iotd_archive' %}">
+                <li class="explore-menu-iotd-tp-archive">
+                    <a href="{% app_redirection_service '/explore/iotd-tp-archive' %}">
                         <i class="icon-trophy"></i>
-                        {% trans "Image of the day" %}
+                        {% trans "IOTD/TP Archive" %}
                     </a>
                 </li>
-
-                <li class="divider"></li>
 
                 <li class="explore-menu-groups">
                     <a href="{% url 'group_list' %}">
