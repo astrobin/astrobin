@@ -182,7 +182,7 @@
                             {% if alias == 'story' %}
                         src="{% static 'astrobin/images/placeholder-stories.jpg' %}"
                             {% else %}
-                        src="https://via.placeholder.com/{{ placehold_size }}/222/333&text={% trans "Loading" %}"
+                        src="https://placehold.co/{{ placehold_size }}/222/333?text={% trans "Loading" %}&font=roboto"
                             {% endif %}
                         {% endif %}
                         data-preloaded="false"

@@ -527,7 +527,7 @@ class ImageService:
             if thumb_h == 0:
                 thumb_h = math.floor(thumb_h * (w / float(thumb_w)))
 
-        return f'https://via.placeholder.com/{thumb_w}x{thumb_h}/222/333&text=ERROR'
+        return f'https://placehold.co/{thumb_w}x{thumb_h}/222/333/?text=ERROR&font=roboto'
 
     def promote_to_public_area(self, skip_notifications: bool, skip_activity_stream: bool):
         if self.image.is_wip:
@@ -622,7 +622,7 @@ class ImageService:
         else:
             w, h = 1024, 1024
 
-        placeholder_url = f'https://via.placeholder.com/{w}x{h}/222/333&text=PREVIEW NOT READY'
+        placeholder_url = f'https://placehold.co/{w}x{h}/222/333?text=PREVIEW+NOT+READY&font=roboto'
         response = UtilsService.http_with_retries(placeholder_url, stream=True)
         if response.status_code == 200:
             img_temp = NamedTemporaryFile()
