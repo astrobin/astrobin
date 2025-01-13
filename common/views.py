@@ -153,7 +153,12 @@ class TogglePropertyList(generics.ListCreateAPIView):
         IsAuthenticatedOrReadOnly,
     ]
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ['property_type', 'object_id', 'content_type', 'user_id']
+    filterset_fields = {
+        'property_type': ['exact'],
+        'content_type': ['exact'],
+        'object_id': ['exact', 'in'],
+        'user_id': ['exact', 'in']
+    }
 
     def create(self, request, *args, **kwargs):
         existing = ToggleProperty.objects.filter(
