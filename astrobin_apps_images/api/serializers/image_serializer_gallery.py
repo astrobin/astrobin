@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from astrobin.models import Image
+from astrobin.models import Image, ImageRevision
 from astrobin_apps_images.api.serializers import ImageSerializer
 from astrobin_apps_images.services import ImageService
 from common.serializers import UserSerializer
@@ -12,8 +12,14 @@ class ImageSerializerGallery(ImageSerializer):
             fields = ('id', 'username', 'display_name', 'avatar')
             exclude = None
 
+    class RevisionSerializer(ModelSerializer):
+        class Meta:
+            model = ImageRevision
+            fields = ('pk', 'label', 'w', 'h')
+
     collaborators = CollaboratorSerializer(many=True, read_only=True)
     is_playable = serializers.SerializerMethodField()
+    revisions = RevisionSerializer(many=True, read_only=True)
 
     def to_representation(self, instance: Image):
         representation = ModelSerializer.to_representation(self, instance)
@@ -87,4 +93,5 @@ class ImageSerializerGallery(ImageSerializer):
             'is_in_iotd_queue',
             'collaborators',
             'is_playable',
+            'revisions'
         )
