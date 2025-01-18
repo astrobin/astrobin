@@ -1177,3 +1177,8 @@ def invalidate_all_image_thumbnails(pk: int):
     image = get_object_or_None(Image.all_objects, pk=pk)
     if image:
         ImageService(image).invalidate_all_thumbnails()
+
+
+@shared_task(time_limit=600)
+def remove_deleted_images_from_search_index(time_limit: str):
+    call_command("remove_deleted_images_from_search_index", time_limit=time_limit)
