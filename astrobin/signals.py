@@ -321,7 +321,7 @@ def image_post_softdelete(sender, instance, **kwargs):
         for collaborator in instance.collaborators.all():
             UserService(collaborator).update_image_count()
 
-    if instance.solution:
+    if instance.solution and instance.solution.pk:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
         try:
             instance.solution.delete()
@@ -460,7 +460,7 @@ post_save.connect(imagerevision_post_save, sender=ImageRevision)
 @receiver(post_softdelete, sender=ImageRevision)
 def imagerevision_post_softdelete(sender, instance, **kwargs):
     UserService(instance.image.user).clear_gallery_image_list_cache()
-    if instance.solution:
+    if instance.solution and instance.solution.pk:
         cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
         try:
             instance.solution.delete()
