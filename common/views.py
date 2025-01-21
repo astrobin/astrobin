@@ -9,6 +9,7 @@ from django.views.decorators.cache import cache_control, cache_page, never_cache
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_headers
 from django_filters.rest_framework import DjangoFilterBackend
+from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import generics, mixins
 from rest_framework.exceptions import ValidationError
@@ -373,6 +374,7 @@ class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin)
     permission_classes = [IsAuthenticated]
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'users'
+    parser_classes = [CamelCaseJSONParser]
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
