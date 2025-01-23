@@ -10,8 +10,9 @@
 {% endblocktrans %}
 
 {% blocktrans trimmed with max=PREMIUM_MAX_IMAGES_FREE %}
-    Keep in mind that AstroBin is not meant to be a free service. If you are still on a free account, you can
-    upload images {{ max }} times before you will be asked to upgrade. More info on the pricing page:
+    AstroBin is a premium service designed to offer exceptional value to its users. If you're currently using a free
+    account, you can enjoy {{ max }} upload opportunities before upgrading to unlock even more features. For details,
+    please visit our pricing page!
 {% endblocktrans %}
 https://welcome.astrobin.com/pricing
 
