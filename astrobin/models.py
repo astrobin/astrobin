@@ -943,6 +943,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (None, "---------"),
         ("OWN", _("Non-commercial independent facility")),
         (None, "---------"),
+        ("AAAN", "AAA Gateway North"),
+        ("AAAS", "AAA Gateway South"),
         ("ALNI", "Alnitak Remote Observatories"),
         ("AC", "AstroCamp"),
         ("AHK", "Astro Hostel Krasnodar"),
