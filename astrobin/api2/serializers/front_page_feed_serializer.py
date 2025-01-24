@@ -167,13 +167,13 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
                     return image.w
 
             # Check for ImageRevision
-            if self._is_image_revision(content_type):
+            elif self._is_image_revision(content_type):
                 revision = get_object_or_None(ImageRevision.objects, pk=object_id)
                 if revision:
                     return revision.w
 
             # Check for EquipmentItemMarketplaceListing
-            if content_type == self.marketplace_listing_ct:
+            elif content_type == self.marketplace_listing_ct:
                 listing = get_object_or_None(EquipmentItemMarketplaceListing.objects, pk=object_id)
                 if listing:
                     line_item = listing.line_items.first()
@@ -181,6 +181,9 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
                         image = line_item.images.first()
                         if image:
                             return image.w
+
+            elif self._is_group(content_type):
+                return 460
 
         return None
 
@@ -196,13 +199,13 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
                     return image.h
 
             # Check for ImageRevision
-            if self._is_image_revision(content_type):
+            elif self._is_image_revision(content_type):
                 revision = get_object_or_None(ImageRevision.objects, pk=object_id)
                 if revision:
                     return revision.h
 
             # Check for EquipmentItemMarketplaceListing
-            if content_type == self.marketplace_listing_ct:
+            elif content_type == self.marketplace_listing_ct:
                 listing = get_object_or_None(EquipmentItemMarketplaceListing.objects, pk=object_id)
                 if listing:
                     line_item = listing.line_items.first()
@@ -210,6 +213,9 @@ class FrontPageFeedSerializer(serializers.ModelSerializer):
                         image = line_item.images.first()
                         if image:
                             return image.h
+
+            elif self._is_group(content_type):
+                return 320
 
         return None
 
