@@ -24,7 +24,6 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
         # serialized.
         self._user_groups = None
         self._allow_full_retailer_integration = None
-        self._followed = None
 
     def get_user_groups(self, user):
         if self._user_groups is None:
@@ -99,10 +98,7 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
         if request is None or not request.user.is_authenticated:
             return False
 
-        if self._followed is None:
-            self._followed = EquipmentItemService(item).is_followed_by_user(request.user)
-
-        return self._followed
+        return EquipmentItemService(item).is_followed_by_user(request.user)
 
     def get_content_type(self, item):
         return ContentType.objects.get_for_model(item).id
