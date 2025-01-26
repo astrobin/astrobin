@@ -912,7 +912,9 @@ class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
 
         ImageService(image).demote_to_staging_area()
 
-        messages.success(self.request, _("Image moved to the staging area."))
+        # No need to show the success message if the user is going to be redirected to the new page.
+        if not image.user.userprofile.enable_new_gallery_experience:
+            messages.success(self.request, _("Image moved to the staging area."))
 
         return super().form_valid(form)
 
@@ -945,7 +947,9 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
 
         ImageService(image).promote_to_public_area(image.skip_notifications, image.skip_activity_stream)
 
-        messages.success(self.request, _("Image moved to the public area."))
+        # No need to show the success message if the user is going to be redirected to the new page.
+        if not image.user.userprofile.enable_new_gallery_experience:
+            messages.success(self.request, _("Image moved to the public area."))
 
         return super().form_valid(form)
 
