@@ -82,7 +82,7 @@
                         self.onStatusSuccess();
                         break;
                     case Status.ADVANCED_PENDING:
-                        self.onStatusAdvancedPending(solution.pixinsight_queue_size, solution.pixinsight_stage);
+                        self.onStatusAdvancedPending(solution.pixinsightQueueSize, solution.pixinsightStage);
                         break;
                     case Status.ADVANCED_FAILED:
                         self.onStatusAdvancedFailed(solution.attempts);
