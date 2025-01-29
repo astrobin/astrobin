@@ -219,6 +219,16 @@ th.forum-name {
     display: inline-block;
   }
 
+  .topic-starter {
+    font-size: .85rem;
+    color: $grey-8;
+    background-color: $grey-2;
+    border-radius: .5rem;
+    padding: .25rem .75rem;
+    margin-left: .5rem;
+    font-weight: normal;
+  }
+
   .post-updated {
     color: $grey-4;
     font-size: 11px;
