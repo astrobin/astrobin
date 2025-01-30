@@ -46,6 +46,11 @@
                 {% trans "(deleted)" %}
             {% endif %}
         </div>
+
+        {% if post.user.pk == post.topic.user.pk and post.pk != topic.head.pk %}
+            <span class="topic-starter">{% trans "Topic starter" %}</span>
+        {% endif %}
+
         <div class="post-updated">
             {% timestamp post.created %}
         </div>
