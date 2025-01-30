@@ -23,7 +23,6 @@ class PostSearchViewSet(EncodedSearchViewSet):
     pagination_class = PageSizePagination
 
     def filter_posts(self, params: dict, queryset: SearchQuerySet) -> SearchQuerySet:
-        queryset = SearchQuerySet().models(Post)
         queryset = SearchService.filter_by_forum_topic(params, queryset)
         return queryset
 
