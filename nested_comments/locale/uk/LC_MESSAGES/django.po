@@ -1,27 +1,70 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin Apps: Comments\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
-"PO-Revision-Date: 2024-07-06 13:25+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: Ukrainian\n"
 "Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 108457\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
+"Content-Transfer-Encoding: 8bit"
+
+msgid "You follow each other"
+msgstr "Ви підписані один на одного"
+
+msgid "Images"
+msgstr "Зображення"
+
+msgid "Followers"
+msgstr "Підписники"
+
+msgid "Following"
+msgstr "Підписки"
+
+msgid "User"
+msgstr "Користувач"
+
+msgid "No users."
+msgstr "Немає користувачів."
+
+msgid "Administrator"
+msgstr "Адміністратор"
+
+msgid "Image moderator"
+msgstr "Модератор зображень"
+
+msgid "IOTD Submitter"
+msgstr "Номінуючий IOTD"
+
+msgid "IOTD Reviewer"
+msgstr "Рецензент IOTD"
+
+msgid "IOTD Judge"
+msgstr "Суддя IOTD"
+
+msgid "Premium member"
+msgstr "Учасник Преміум"
+
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Ваші звіти про відмови електронної пошти видалено з AstroBin. Переконайтеся, "
+"що Ваша електронна пошта працює добре, інакше Ви знову отримаєте те саме "
+"попередження. Дякуємо!"
+
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Ваші повідомлення про спам було видалено з AstroBin. Переконайтеся, що у Вас "
+"немає фільтра або правила, щоб завжди помічати листи AstroBin як спам! Якщо "
+"Ви не бажаєте отримувати електронні листи від AstroBin, знайдіть посилання "
+"налаштувань, які знаходяться внизу кожного електронного листа. Дякуємо!"
 
 msgid "Type your comment here..."
 msgstr "Введіть коментар тут..."
-
-msgid "Error"
-msgstr "Помилка"
 
 msgid "Cancel"
 msgstr "Скасувати"
@@ -29,30 +72,60 @@ msgstr "Скасувати"
 msgid "Add a comment"
 msgstr "Додати коментар"
 
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
+msgstr ""
+"Будь ласка, <a href=\"%(login_url)s\">увійдіть</a> або <a "
+"href=\"%(signup_url)s\">зареєструйтеся</a>, щоб залишити коментар."
+
 msgid "There are no comments yet."
 msgstr "Поки що немає коментарів."
 
-msgid "The comment cannot be empty."
-msgstr "Коментар не може бути порожнім."
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "Цей коментар очікує на модерацію і буде розглянутий найближчим часом."
 
 msgid "(deleted)"
 msgstr "(видалено)"
 
-msgid "Delete"
-msgstr "Видалити"
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "лайків"
 
-msgid "Undelete"
-msgstr "Відновити"
-
-msgid "Edit"
-msgstr "Правка"
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "лайк"
 
 msgid "Link"
 msgstr "Посилання"
 
-msgctxt "Noun, e.g. 'This element has 10 likes'"
-msgid "likes"
-msgstr "лайків"
+msgid "Undelete"
+msgstr "Відновити"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Edit"
+msgstr "Правка"
+
+msgid "Reply"
+msgstr "Відповісти"
+
+msgid "Like"
+msgstr "Лайк"
+
+msgid "Unlike"
+msgstr "Не подобається"
+
+msgid "The comment cannot be empty."
+msgstr "Коментар не може бути порожнім."
+
+msgid "Submit"
+msgstr "Надіслати"
+
+msgid "Error"
+msgstr "Помилка"
 
 msgctxt "Verb (imperative)"
 msgid "Like"
@@ -72,14 +145,6 @@ msgstr "Затвердити"
 
 msgid "Report abuse"
 msgstr "Повідомити про зловживання"
-
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"Будь ласка, <a href=\"%(login_url)s\">увійдіть</a> або <a href="
-"\"%(signup_url)s\">зареєструйтеся</a>, щоб залишити коментар."
 
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
@@ -111,12 +176,6 @@ msgstr "Цей процес необхідний для запобігання �
 msgid "Thank you for understanding!"
 msgstr "Дякуємо за розуміння!"
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr "Цей коментар очікує на модерацію і буде розглянутий найближчим часом."
-
-msgid "Submit"
-msgstr "Надіслати"
-
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
@@ -133,158 +192,88 @@ msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr "Не можна повідомити повторно, оскільки це схвалив модератор."
 
+msgid "You many not report the same item more than once."
+msgstr ""
+"Ви не можете повідомити про один і той самий елемент більше одного разу."
+
 msgid "You may not report the same item more than once."
 msgstr ""
 "Ви не можете повідомити про один і той самий елемент більше одного разу."
 
-#~ msgid "You follow each other"
-#~ msgstr "Ви підписані один на одного"
+msgid "Report a use"
+msgstr "Повідомити про зловживання"
 
-#~ msgid "Images"
-#~ msgstr "Зображення"
+msgid "Member since"
+msgstr "Учасник з"
 
-#~ msgid "Followers"
-#~ msgstr "Підписники"
+msgid "Last seen online"
+msgstr "Востаннє онлайн"
 
-#~ msgid "Following"
-#~ msgstr "Підписки"
+msgid "Total integration time"
+msgstr "Загальний час інтеграції"
 
-#~ msgid "User"
-#~ msgstr "Користувач"
+msgid "hours"
+msgstr "годин"
 
-#~ msgid "No users."
-#~ msgstr "Немає користувачів."
+msgid "Average integration time"
+msgstr "Середній час інтеграції"
 
-#~ msgid "Administrator"
-#~ msgstr "Адміністратор"
+msgid "Forum posts written"
+msgstr "Повідомлень на форумі"
 
-#~ msgid "Image moderator"
-#~ msgstr "Модератор зображень"
+msgid "Comments written"
+msgstr "Написано коментарів"
 
-#~ msgid "IOTD Submitter"
-#~ msgstr "Номінуючий IOTD"
+msgid "Comments received"
+msgstr "Отримано коментарів"
 
-#~ msgid "IOTD Reviewer"
-#~ msgstr "Рецензент IOTD"
+msgid "Likes received"
+msgstr "Отримано лайків"
 
-#~ msgid "IOTD Judge"
-#~ msgstr "Суддя IOTD"
+msgid "Views received"
+msgstr "Отримано переглядів"
 
-#~ msgid "Premium member"
-#~ msgstr "Учасник Преміум"
+msgid "No date specified"
+msgstr "Дата не вказана"
 
-#~ msgid ""
-#~ "Your email bounce reports have been removed from AstroBin. Please make "
-#~ "sure that your email works well or you will get the same warning message "
-#~ "again. Thanks!"
-#~ msgstr ""
-#~ "Ваші звіти про відмови електронної пошти видалено з AstroBin. "
-#~ "Переконайтеся, що Ваша електронна пошта працює добре, інакше Ви знову "
-#~ "отримаєте те саме попередження. Дякуємо!"
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "Телескопи, об’єктиви або камери не вказано"
 
-#~ msgid ""
-#~ "Your spam reports have been removed from AstroBin. Please make sure you "
-#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
-#~ "you don't want to receive emails from AstroBin, look for the settings "
-#~ "link that's at the bottom of every email. Thanks!"
-#~ msgstr ""
-#~ "Ваші повідомлення про спам було видалено з AstroBin. Переконайтеся, що у "
-#~ "Вас немає фільтра або правила, щоб завжди помічати листи AstroBin як "
-#~ "спам! Якщо Ви не бажаєте отримувати електронні листи від AstroBin, "
-#~ "знайдіть посилання налаштувань, які знаходяться внизу кожного "
-#~ "електронного листа. Дякуємо!"
+msgid "Gear images"
+msgstr "Зображення обладнання"
 
-#~ msgctxt "Noun, e.g. 'This element has 1 like'"
-#~ msgid "like"
-#~ msgstr "лайк"
+msgid "Deep sky"
+msgstr "Глибокий космос"
 
-#~ msgid "Reply"
-#~ msgstr "Відповісти"
+msgid "Solar system"
+msgstr "Сонячна система"
 
-#~ msgid "Like"
-#~ msgstr "Лайк"
+msgid "Extremely wide field"
+msgstr "Надзвичайно широке поле"
 
-#~ msgid "Unlike"
-#~ msgstr "Не подобається"
+msgid "Star trails"
+msgstr "Зоряні стежки"
 
-#~ msgid "You many not report the same item more than once."
-#~ msgstr ""
-#~ "Ви не можете повідомити про один і той самий елемент більше одного разу."
+msgid "Northern lights"
+msgstr "Північне сяйво"
 
-#~ msgid "Report a use"
-#~ msgstr "Повідомити про зловживання"
+msgid "Noctilucent clouds"
+msgstr "Світлові хмари"
 
-#~ msgid "Member since"
-#~ msgstr "Учасник з"
+msgid "Gear"
+msgstr "Обладнання"
 
-#~ msgid "Last seen online"
-#~ msgstr "Востаннє онлайн"
+msgid "Other"
+msgstr "Інше"
 
-#~ msgid "Total integration time"
-#~ msgstr "Загальний час інтеграції"
+msgid "All"
+msgstr "Все"
 
-#~ msgid "hours"
-#~ msgstr "годин"
+msgid "n/a"
+msgstr "н/д"
 
-#~ msgid "Average integration time"
-#~ msgstr "Середній час інтеграції"
+msgid "No subjects specified"
+msgstr "Предмети не вказані"
 
-#~ msgid "Forum posts written"
-#~ msgstr "Повідомлень на форумі"
-
-#~ msgid "Comments written"
-#~ msgstr "Написано коментарів"
-
-#~ msgid "Comments received"
-#~ msgstr "Отримано коментарів"
-
-#~ msgid "Likes received"
-#~ msgstr "Отримано лайків"
-
-#~ msgid "Views received"
-#~ msgstr "Отримано переглядів"
-
-#~ msgid "No date specified"
-#~ msgstr "Дата не вказана"
-
-#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-#~ msgstr "Телескопи, об’єктиви або камери не вказано"
-
-#~ msgid "Gear images"
-#~ msgstr "Зображення обладнання"
-
-#~ msgid "Deep sky"
-#~ msgstr "Глибокий космос"
-
-#~ msgid "Solar system"
-#~ msgstr "Сонячна система"
-
-#~ msgid "Extremely wide field"
-#~ msgstr "Надзвичайно широке поле"
-
-#~ msgid "Star trails"
-#~ msgstr "Зоряні стежки"
-
-#~ msgid "Northern lights"
-#~ msgstr "Північне сяйво"
-
-#~ msgid "Noctilucent clouds"
-#~ msgstr "Світлові хмари"
-
-#~ msgid "Gear"
-#~ msgstr "Обладнання"
-
-#~ msgid "Other"
-#~ msgstr "Інше"
-
-#~ msgid "All"
-#~ msgstr "Все"
-
-#~ msgid "n/a"
-#~ msgstr "н/д"
-
-#~ msgid "No subjects specified"
-#~ msgstr "Предмети не вказані"
-
-#~ msgid "No acquisition details specified"
-#~ msgstr "Деталі отримання не вказано"
+msgid "No acquisition details specified"
+msgstr "Деталі отримання не вказано"

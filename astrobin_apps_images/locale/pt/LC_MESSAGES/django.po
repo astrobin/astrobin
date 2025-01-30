@@ -1,20 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin Apps: Images\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
-"PO-Revision-Date: 2024-07-06 13:25+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: Portuguese\n"
 "Language: pt\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
+"Content-Transfer-Encoding: 8bit"
+
+msgid "Conflict."
+msgstr "Conflito."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Fonte não comprimida (máx. 100 MB)"
@@ -29,6 +22,55 @@ msgstr ""
 "imagens favorito (por exemplo, PixInsight, Adobe Photoshop, etc) aqui no "
 "AstroBin, para fins de arquivamento. Este arquivo é armazenado de forma "
 "privada e somente você terá acesso a ele."
+
+msgid "Error!"
+msgstr "Erro!"
+
+msgid "Staging area"
+msgstr ""
+
+msgid "Loading"
+msgstr "Carregando"
+
+msgid "(no title)"
+msgstr "(sem título)"
+
+msgid "Image of the day"
+msgstr ""
+
+msgid "Top pick"
+msgstr ""
+
+msgid "Top pick nomination"
+msgstr ""
+
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Corrupção de dados. Por favor, envie esta imagem novamente. Desculpe!"
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr ""
+
+msgid "Original revision"
+msgstr ""
+
+msgid "Collaboration"
+msgstr ""
+
+msgid "Currently in the IOTD/TP queue"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+
+msgid "If the problem persists, please contact us."
+msgstr ""
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
 
 msgid "Dates"
 msgstr ""
@@ -102,57 +144,8 @@ msgstr ""
 msgid "Transparency"
 msgstr ""
 
-msgid "Error!"
-msgstr "Erro!"
-
-msgid "Image of the day"
-msgstr ""
-
-msgid "Top pick"
-msgstr ""
-
-msgid "Top pick nomination"
-msgstr ""
-
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
-msgid "Staging area"
-msgstr ""
-
-msgid "Collaboration"
-msgstr ""
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr ""
-
-msgid "Original revision"
-msgstr ""
-
-msgid "Loading"
-msgstr "Carregando"
-
-msgid "(no title)"
-msgstr "(sem título)"
-
 msgid "Image file not found"
 msgstr ""
 
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Corrupção de dados. Por favor, envie esta imagem novamente. Desculpe!"
-
-#~ msgid "Conflict."
-#~ msgstr "Conflito."
+msgid "Only one video-based acquisition is allowed per image."
+msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
+"POT-Creation-Date: 2025-01-30 22:17+0000\n"
 "PO-Revision-Date: 2013-11-12 19:56+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,6 +53,12 @@ msgid "Font size of the annotations on your main image page"
 msgstr ""
 
 msgid "Show equatorial grid"
+msgstr ""
+
+msgid "Show ecliptic"
+msgstr ""
+
+msgid "Show galactic equator"
 msgstr ""
 
 msgid "Show constellation borders"
@@ -140,6 +146,15 @@ msgid "Show CGPN objects"
 msgstr ""
 
 msgid "Show quasars"
+msgstr ""
+
+msgid "Publicly visible astrometry.net submission"
+msgstr ""
+
+msgid ""
+"If checked, the astrometry.net submission will be publicly visible. If you "
+"leave this unchecked,you won't be able to see the full log of the astrometry."
+"net submission, but the image will stillbe plate-solved and annotated."
 msgstr ""
 
 msgid "Perform a blind solve"
@@ -231,23 +246,17 @@ msgstr ""
 msgid "Advanced success"
 msgstr ""
 
+msgid "Loading..."
+msgstr ""
+
 msgid "Getting plate-solving status, please wait..."
 msgstr "Ophalen van de plate-solve status. Even geduld..."
 
-msgid "Plate-solving starting, please do not leave this page..."
+msgid "AstroBin is plate-solving this image with Astrometry.net..."
 msgstr ""
 
-msgid "Advanced plate-solving starting, please do not leave this page..."
+msgid "AstroBin is plate-solving this image with PixInsight..."
 msgstr ""
-
-msgid "Plate-solving started. You may leave this page."
-msgstr ""
-
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr ""
-
-msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr "Plate-solving is bijna klaar. Gelieve deze pagina niet te verlaten..."
 
 msgid "This image could not be plate-solved."
 msgstr "Deze foto kon niet worden ge-plate-solved."
@@ -359,3 +368,7 @@ msgstr ""
 
 msgid "Invalid"
 msgstr ""
+
+#~ msgid "Plate-solving almost ready, please do not leave this page..."
+#~ msgstr ""
+#~ "Plate-solving is bijna klaar. Gelieve deze pagina niet te verlaten..."

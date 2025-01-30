@@ -1,20 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin Apps: Images\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
-"PO-Revision-Date: 2024-07-06 13:25+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: French\n"
 "Language: fr\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
+"Content-Transfer-Encoding: 8bit"
+
+msgid "Conflict."
+msgstr "Conflit."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Source non-compressée (max 100 MB)"
@@ -26,84 +19,20 @@ msgid ""
 "access to it."
 msgstr ""
 "Vous pouvez conserver l'image finale traitée avec votre logiciel préféré "
-"(PixInsight, Adobe Photoshop, etc.) ici sur AstroBin, à des fins "
-"d'archivage. Ce fichier est stocké de manière privée et vous seul y aurez "
-"accès."
-
-msgid "Dates"
-msgstr ""
-
-msgid "Frames"
-msgstr ""
-
-msgid "Integration"
-msgstr ""
-
-msgid "Darks"
-msgstr ""
-
-msgid "Flats"
-msgstr ""
-
-msgid "Flat darks"
-msgstr ""
-
-msgid "Bias"
-msgstr ""
-
-msgid "Avg. Moon age"
-msgstr ""
-
-msgid "days"
-msgstr ""
-
-msgid "Avg. Moon phase"
-msgstr ""
-
-msgid "Bortle Dark-Sky Scale"
-msgstr ""
-
-msgid "Mean SQM"
-msgstr ""
-
-msgid "Mean FWHM"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "FPS"
-msgstr ""
-
-msgid "Exposure per frame"
-msgstr ""
-
-msgid "Focal length"
-msgstr ""
-
-msgid "CMI"
-msgstr ""
-
-msgid "CMII"
-msgstr ""
-
-msgid "CMIII"
-msgstr ""
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Transparency"
-msgstr ""
+"(PixInsight, Adobe Photoshop, etc.) ici sur AstroBin, à des fins d'archivage."
+" Ce fichier est stocké de manière privée et vous seul y aurez accès."
 
 msgid "Error!"
 msgstr "Erreur !"
+
+msgid "Staging area"
+msgstr "Zone privée"
+
+msgid "Loading"
+msgstr "Chargement en cours..."
+
+msgid "(no title)"
+msgstr "(aucun titre)"
 
 msgid "Image of the day"
 msgstr "Image du Jour"
@@ -114,14 +43,21 @@ msgstr "Top Pick"
 msgid "Top pick nomination"
 msgstr "Nominée Top Pick"
 
-msgid "Currently in the IOTD/TP queue"
-msgstr "Actuellement dans la file de sélection de l'IOTD/TP"
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Données corrompues. Merci de charger cette image à nouveau. Désolé !"
 
-msgid "Staging area"
-msgstr "Zone privée"
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Nouvelle version %(revision)s"
+
+msgid "Original revision"
+msgstr "Nouvelle version originale"
 
 msgid "Collaboration"
 msgstr "Collaboration"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr "Actuellement dans la file de sélection de l'IOTD/TP"
 
 msgid "Video"
 msgstr "Vidéo"
@@ -139,24 +75,80 @@ msgstr ""
 "Cette vidéo est toujours en cours de traitement, veuillez revenir sur cette "
 "page plus tard."
 
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "Nouvelle version %(revision)s"
+msgid "Dates"
+msgstr "Dates"
 
-msgid "Original revision"
-msgstr "Nouvelle version originale"
+msgid "Frames"
+msgstr "Images"
 
-msgid "Loading"
-msgstr "Chargement en cours..."
+msgid "Integration"
+msgstr "Acquisition"
 
-msgid "(no title)"
-msgstr "(aucun titre)"
+msgid "Darks"
+msgstr "Darks"
+
+msgid "Flats"
+msgstr "Flats"
+
+msgid "Flat darks"
+msgstr "Flat-darks"
+
+msgid "Bias"
+msgstr "Bias"
+
+msgid "Avg. Moon age"
+msgstr "Âge Lunaire moyen"
+
+msgid "days"
+msgstr "jours"
+
+msgid "Avg. Moon phase"
+msgstr "Phase lunaire moyenne"
+
+msgid "Bortle Dark-Sky Scale"
+msgstr "Echelle d'obscurité du ciel Bortle"
+
+msgid "Mean SQM"
+msgstr "SQM moyen"
+
+msgid "Mean FWHM"
+msgstr "FWHM moyen"
+
+msgid "Temperature"
+msgstr "Température"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Time"
+msgstr "Heure"
+
+msgid "FPS"
+msgstr "FPS (Images par seconde)"
+
+msgid "Exposure per frame"
+msgstr "Temps d'acquisition par image"
+
+msgid "Focal length"
+msgstr "Focale"
+
+msgid "CMI"
+msgstr "CMI"
+
+msgid "CMII"
+msgstr "CMII"
+
+msgid "CMIII"
+msgstr "CMIII"
+
+msgid "Seeing"
+msgstr "Seeing"
+
+msgid "Transparency"
+msgstr "Transparence"
 
 msgid "Image file not found"
+msgstr "Fichier image non trouvé"
+
+msgid "Only one video-based acquisition is allowed per image."
 msgstr ""
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Données corrompues. Merci de charger cette image à nouveau. Désolé !"
-
-#~ msgid "Conflict."
-#~ msgstr "Conflit."

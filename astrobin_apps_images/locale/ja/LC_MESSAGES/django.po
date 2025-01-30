@@ -1,20 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin Apps: Images\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
-"PO-Revision-Date: 2024-07-06 13:25+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: Japanese\n"
 "Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
+"Content-Transfer-Encoding: 8bit"
+
+msgid "Conflict."
+msgstr "コンフリクトしています。"
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "非圧縮ファイル（最大100MB）"
@@ -25,9 +18,57 @@ msgid ""
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
-"お好きな画像編集ソフト（PixInsight、Adobe Photoshopなど）から出力された最終処"
-"理画像を、アーカイブ用としてこのAstroBinに保存することができます。このファイ"
-"ルはプライベート環境に保存され、あなただけがアクセスすることができます。"
+"お好きな画像編集ソフト（PixInsight、Adobe "
+"Photoshopなど）から出力された最終処理画像を、アーカイブ用としてこのAstroBinに保存することができます。このファイルはプライベート環境に保存され、あなただけがアクセスすることができます。"
+
+msgid "Error!"
+msgstr "エラー！"
+
+msgid "Staging area"
+msgstr "ステージング領域"
+
+msgid "Loading"
+msgstr "読み込み中"
+
+msgid "(no title)"
+msgstr "(no title)"
+
+msgid "Image of the day"
+msgstr "Image of the day"
+
+msgid "Top pick"
+msgstr "Top pick"
+
+msgid "Top pick nomination"
+msgstr "Top pickノミネート"
+
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "データが破損しています。この画像を再度アップロードしてください。申し訳ございません。"
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "バージョン %(revision)s"
+
+msgid "Original revision"
+msgstr "オリジナル版"
+
+msgid "Collaboration"
+msgstr "コラボレーション"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+
+msgid "If the problem persists, please contact us."
+msgstr ""
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
 
 msgid "Dates"
 msgstr ""
@@ -101,59 +142,8 @@ msgstr ""
 msgid "Transparency"
 msgstr ""
 
-msgid "Error!"
-msgstr "エラー！"
-
-msgid "Image of the day"
-msgstr "Image of the day"
-
-msgid "Top pick"
-msgstr "Top pick"
-
-msgid "Top pick nomination"
-msgstr "Top pickノミネート"
-
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
-msgid "Staging area"
-msgstr "ステージング領域"
-
-msgid "Collaboration"
-msgstr "コラボレーション"
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "バージョン %(revision)s"
-
-msgid "Original revision"
-msgstr "オリジナル版"
-
-msgid "Loading"
-msgstr "読み込み中"
-
-msgid "(no title)"
-msgstr "(no title)"
-
 msgid "Image file not found"
 msgstr ""
 
-msgid "Data corruption. Please upload this image again. Sorry!"
+msgid "Only one video-based acquisition is allowed per image."
 msgstr ""
-"データが破損しています。この画像を再度アップロードしてください。申し訳ござい"
-"ません。"
-
-#~ msgid "Conflict."
-#~ msgstr "コンフリクトしています。"
