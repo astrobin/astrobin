@@ -1,10 +1,21 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Solo le seguenti categorie supportano l'aggiunta automatica: Rete "
+"professionale, Club o associazione, Comunità Internet, Amici o soci, Area "
+"geografica"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Strategia di disattivazione aggiunta automatica"
@@ -60,6 +71,15 @@ msgstr "Specifico di una certa strumentazione"
 msgid "Other"
 msgstr "Altro"
 
+msgid "Publication"
+msgstr "Pubblicazione"
+
+msgid "Title"
+msgstr "Titolo"
+
+msgid "Key/value tag"
+msgstr "Tag chiave/valore"
+
 msgid "Name"
 msgstr "Nome"
 
@@ -71,6 +91,21 @@ msgstr "I tag HTML sono permessi."
 
 msgid "Category"
 msgstr "Categoria"
+
+msgid "Default image sorting"
+msgstr "Ordine delle immagini predefinito"
+
+msgid "Image key/value tag sorting"
+msgstr "Ordine delle immagini per tag chiave/valore"
+
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Se le immagini sono ordinate per un tag chiave/valore, per favore specifica "
+"quale. <a target='_blank' href='https://welcome.astrobin.com/features/"
+"groups'>Scopri di più.</a>"
 
 msgid "Public group"
 msgstr "Gruppo pubblico"
@@ -102,8 +137,24 @@ msgstr ""
 "tutti i membri. I gruppi senza aggiunta automatica contengono solo immagini "
 "che sono esplicitamente aggiunte ad essi."
 
+msgid "Forum notice"
+msgstr "Annuncio del forum"
+
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Inserisci un 'Annuncio del forum' che viene mostrata sopra il modulo per "
+"creare un nuovo argomento. Usalo per comunicare le regole del forum, esoneri "
+"da responsabilità, o informazioni importanti per gli utenti prima che creino "
+"un nuovo argomento. Assicurati che il tuo messaggio sia chiaro e conciso."
+
 msgid "Last activity"
 msgstr "Ultima attività"
+
+msgid "Date created"
+msgstr "Data di creazione"
 
 msgid "Members"
 msgstr "Membri"
@@ -148,6 +199,9 @@ msgstr "Salva"
 msgid "Cancel"
 msgstr "Annulla"
 
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Per favore non aggiungere più di 100 immagini alla volta, grazie!"
+
 msgid "Delete group?"
 msgstr "Cancellare il gruppo?"
 
@@ -184,6 +238,9 @@ msgstr "Lascia il gruppo"
 
 msgid "Moderate join requests"
 msgstr "Modera le richieste di aggiunta"
+
+msgid "Sort images"
+msgstr "Ordina immagini"
 
 msgid "This group is public"
 msgstr "Questo gruppo è pubblico"
@@ -234,9 +291,6 @@ msgstr "Vedi tutti"
 msgid "New topic"
 msgstr "Nuovo argomento"
 
-msgid "Please join the group to view its forum."
-msgstr "Unisciti al gruppo per vedere il suo forum."
-
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
@@ -252,8 +306,8 @@ msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
-"Questo gruppo è pubblico: tutto il suo contento, inclusa la lista dei membri,"
-" è disponibile ai non-membri."
+"Questo gruppo è pubblico: tutto il suo contento, inclusa la lista dei "
+"membri, è disponibile ai non-membri."
 
 msgid "This is a private group: only members have access to its contents."
 msgstr "Questo gruppo è privato: solo i membri hanno accesso al suo contenuto."
@@ -299,28 +353,29 @@ msgstr "Gruppi"
 msgid "Sort"
 msgstr "Ordina"
 
-msgid "Date created"
-msgstr "Data di creazione"
+msgid "Search"
+msgstr "Cerca"
 
-msgid "Your private groups"
+msgid "Private groups you own"
 msgstr "I tuoi gruppi privati"
 
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr "Sei proprietario, o membro, o invitato, ai seguenti gruppi."
+msgid "Private groups you are a member of"
+msgstr "I gruppi privati di cui sei membro"
 
-msgctxt "group"
-msgid "Create private group"
-msgstr "Crea un gruppo privato"
+msgid "Private groups you are invited to"
+msgstr "I gruppi privati a cui sei invitato"
+
+msgid "Public groups you own"
+msgstr "I tuoi gruppi pubblici"
+
+msgid "Public groups you are a member of"
+msgstr "I gruppi pubblici di cui sei membro"
+
+msgid "Public groups you are invited to"
+msgstr "I gruppi pubblici a cui sei invitato"
 
 msgid "Public groups"
 msgstr "Gruppi pubblici"
-
-msgid "Open to the whole community."
-msgstr "Disponibili a tutta la comunità."
-
-msgctxt "group"
-msgid "Create public group"
-msgstr "Crea un gruppo pubblico"
 
 msgid "No groups available."
 msgstr "Nessun gruppo disponibile."
@@ -385,6 +440,12 @@ msgstr "Declina"
 msgid "This group has no join requests."
 msgstr "Questo gruppo non ha richieste di aggiunta."
 
+msgid "Something went wrong, Please try again later."
+msgstr "Qualcosa è andata storta, prova di nuovo più tardi."
+
+msgid "Type your message here..."
+msgstr "Scrivi qui il tuo messaggio..."
+
 msgid "You cannot add images that are not yours!"
 msgstr "Non puoi aggiungere immagini che non sono tue!"
 
@@ -419,81 +480,23 @@ msgstr "Hai lasciato il gruppo"
 msgid "Form saved"
 msgstr "Modulo salvato"
 
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Solo le seguenti categorie supportano l'aggiunta automatica: Rete "
-"professionale, Club o associazione, Comunità Internet, Amici o soci, Area "
-"geografica"
+#~ msgid "Please join the group to view its forum."
+#~ msgstr "Unisciti al gruppo per vedere il suo forum."
 
-msgid "Publication"
-msgstr "Pubblicazione"
+#~ msgid "Your private groups"
+#~ msgstr "I tuoi gruppi privati"
 
-msgid "Title"
-msgstr "Titolo"
+#~ msgid ""
+#~ "You own, or are a member of, or were invited to, these private groups."
+#~ msgstr "Sei proprietario, o membro, o invitato, ai seguenti gruppi."
 
-msgid "Key/value tag"
-msgstr "Tag chiave/valore"
+#~ msgctxt "group"
+#~ msgid "Create private group"
+#~ msgstr "Crea un gruppo privato"
 
-msgid "Default image sorting"
-msgstr "Ordine delle immagini predefinito"
+#~ msgid "Open to the whole community."
+#~ msgstr "Disponibili a tutta la comunità."
 
-msgid "Image key/value tag sorting"
-msgstr "Ordine delle immagini per tag chiave/valore"
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Se le immagini sono ordinate per un tag chiave/valore, per favore specifica "
-"quale. <a target='_blank' href='https://welcome.astrobin."
-"com/features/groups'>Scopri di più.</a>"
-
-msgid "Search"
-msgstr "Cerca"
-
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Per favore non aggiungere più di 100 immagini alla volta, grazie!"
-
-msgid "Sort images"
-msgstr "Ordina immagini"
-
-msgid "Private groups you own"
-msgstr "I tuoi gruppi privati"
-
-msgid "Private groups you are a member of"
-msgstr "I gruppi privati di cui sei membro"
-
-msgid "Private groups you are invited to"
-msgstr "I gruppi privati a cui sei invitato"
-
-msgid "Public groups you own"
-msgstr "I tuoi gruppi pubblici"
-
-msgid "Public groups you are a member of"
-msgstr "I gruppi pubblici di cui sei membro"
-
-msgid "Public groups you are invited to"
-msgstr "I gruppi pubblici a cui sei invitato"
-
-msgid "Forum notice"
-msgstr "Annuncio del forum"
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Inserisci un 'Annuncio del forum' che viene mostrata sopra il modulo per "
-"creare un nuovo argomento. Usalo per comunicare le regole del forum, esoneri "
-"da responsabilità, o informazioni importanti per gli utenti prima che creino "
-"un nuovo argomento. Assicurati che il tuo messaggio sia chiaro e conciso."
-
-msgid "Something went wrong, Please try again later."
-msgstr "Qualcosa è andata storta, prova di nuovo più tardi."
-
-msgid "Type your message here..."
-msgstr "Scrivi qui il tuo messaggio..."
+#~ msgctxt "group"
+#~ msgid "Create public group"
+#~ msgstr "Crea un gruppo pubblico"

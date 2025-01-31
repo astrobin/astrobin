@@ -1,25 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: de\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
-
-msgid "Notifications"
-msgstr "Benachrichtigungen"
-
-msgid "You have no notifications."
-msgstr "Du hast keine Benachrichtigungen."
-
-msgid "Settings"
-msgstr "Einstellungen"
-
-msgid "Mark all as read"
-msgstr "Alle als gelesen markieren"
-
-msgid "You have no new notifications."
-msgstr "Du hast keine neuen Benachrichtigungen."
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgid "You have a new follower"
 msgstr "Du hast einen neuen Follower"
@@ -33,14 +20,44 @@ msgstr "Neue Bildrevision von einem Benutzer, dem du folgst"
 msgid "Your image was plate-solved"
 msgstr "Dein Bild wurde astrometriert"
 
+msgid "Your image was approved by a moderator"
+msgstr "Ihr Bild wurde von einem Moderator genehmigt"
+
 msgid "Your image could not be plate-solved"
 msgstr "Dein Bild konnte nicht astrometriert werden"
+
+msgid "Your image was plate-solved (advanced)"
+msgstr "Ihr Bild wurde astrometriert (erweitert)"
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Ihr Bild konnte nicht astrometriert werden (erweitert)"
 
 msgid "Your image received a new comment"
 msgstr "Dein Bild hat einen neuen Kommentar erhalten"
 
+msgid "Your edit proposal received a new comment"
+msgstr "Ihr Bearbeitungsvorschlag hat einen neuen Kommentar erhalten"
+
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Ihr geplantes IOTD hat einen neuen Kommentar erhalten."
+
+msgid "Your unapproved equipment item received a comment"
+msgstr "Ihr ungeprüfter Ausrüstungsgegenstand erhielt einen Kommentar"
+
+msgid "Your listing has a new private conversation"
+msgstr "Ihr Inserat hat eine neue private Unterhaltung"
+
+msgid "Your private conversation has a new comment"
+msgstr "Ihre private Unterhaltung hat einen neuen Beitrag"
+
+msgid "Your listing has a new question"
+msgstr "Ihr Inserat hat eine neue Frage"
+
 msgid "There was a reply to your comment"
 msgstr "Es gab eine Antwort auf Deinen Kommentar"
+
+msgid "A new comment on your image requires moderation"
+msgstr "Ein neuer Kommentar zu Ihrem Bild muss moderiert werden"
 
 msgid "Your comment was approved"
 msgstr "Ihr Kommentar wurde genehmigt"
@@ -56,6 +73,9 @@ msgstr "Dein Kommentar wurde geliked"
 
 msgid "Your forum post was liked"
 msgstr "hr Forumsbeitrag wurde geliked"
+
+msgid "Your forum post was approved"
+msgstr "Ihr Forumsbeitrag wurde genehmigt"
 
 msgid "Your API Key request has been approved"
 msgstr "Dein API-Schlüsselantrag wurde genehmigt"
@@ -81,6 +101,16 @@ msgstr "Ein Benutzer, dem Du folgst, hat eine neue öffentliche Gruppe erstellt"
 msgid "New forum topic in a group you are a member of"
 msgstr "Neues Forenthema in einer Gruppe, in der Du Mitglied bist"
 
+msgid "New forum topic for an equipment item you use"
+msgstr ""
+"Neues Forumsthema für einen von Ihnen verwendeten Ausrüstungsgegenstand"
+
+msgid "New forum topic for an equipment item you follow"
+msgstr "Neues Forumsthema für einen Ausrüstungsgegenstand, dem Sie folgen"
+
+msgid "Your forum topic was moved"
+msgstr "Ihr Forumsthema wurde verschoben"
+
 msgid "You have received a new private message"
 msgstr "Du hast eine neue private Nachricht"
 
@@ -105,6 +135,12 @@ msgstr "Du hast Bilder mit einer fehlenden \"Remote-Quelle\""
 msgid "Would you like to activate your account?"
 msgstr "Möchtest Du dein Konto aktivieren?"
 
+msgid "New reply in a subscribed forum topic"
+msgstr "Neue Antwort in einem abonnierten Forumsthema"
+
+msgid "New reply in a forum topic that you started"
+msgstr "Neue Antwort in einem von Ihnen begonnenen Forumsthema"
+
 msgid "You were mentioned in a forum post"
 msgstr "Sie wurden in einem Forumsbeitrag erwähnt"
 
@@ -117,11 +153,23 @@ msgstr "Willkommen bei AstroBin!"
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Herzlichen Glückwunsch zu Ihrem ersten Bild auf AstroBin!"
 
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "Sie haben Ihr Bild zur IOTD/TP Auswahl eingereicht"
+
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Bild wurde nicht zur IOTD/TP-Prüfung eingereicht"
+
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "Das Bild nähert sich der Deadline für die IOTD/TP-Einreichung"
+
 msgid "Thank you for getting a subscription!"
 msgstr "Danke, dass Sie ein Abonnement abgeschlossen haben!"
 
 msgid "Thank you for your payment!"
 msgstr "Vielen Dank für Ihre Zahlung!"
+
+msgid "Subscription canceled"
+msgstr "Abonnement gekündigt"
 
 msgid "You were removed from the IOTD staff"
 msgstr "Sie wurden aus dem IOTD-Team entfernt"
@@ -129,108 +177,14 @@ msgstr "Sie wurden aus dem IOTD-Team entfernt"
 msgid "You have been inactive as an IOTD staff member"
 msgstr "Sie sind als IOTD-Team-Mitglied nicht aktiv gewesen"
 
+msgid "Your IOTD staff activity is insufficient"
+msgstr "Ihre IOTD-Mitarbeiter Aktivität ist unzureichend"
+
 msgid "An image you promoted made it to Top Pick"
 msgstr "Ein von Ihnen vorgeschlagenes Bild wurde zum Top Pick gewählt"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "Ein von Ihnen vorgeschlagenes Bild wurde zum IOTD gewählt"
-
-msgid "New reply in a subscribed forum topic"
-msgstr "Neue Antwort in einem abonnierten Forumsthema"
-
-msgid "Your image was nominated to be a Top Pick"
-msgstr "Ihr Bild wurde zum Top Pick nominiert"
-
-msgid "Your image was voted Top Pick"
-msgstr "Ihr Bild wurde zum Top Pick gewählt"
-
-msgid "Your image was voted Image of the Day"
-msgstr "Ihr Bild wurde zum Bild des Tages gewählt"
-
-msgid "Your image was plate-solved (advanced)"
-msgstr "Ihr Bild wurde astrometriert (erweitert)"
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "Ihr Bild konnte nicht astrometriert werden (erweitert)"
-
-msgid "A new comment on your image requires moderation"
-msgstr "Ein neuer Kommentar zu Ihrem Bild muss moderiert werden"
-
-msgid "Your forum post was approved"
-msgstr "Ihr Forumsbeitrag wurde genehmigt"
-
-msgid "You were mentioned in an image description"
-msgstr "Sie wurden in einer Bildbeschreibung erwähnt"
-
-msgid "Your edit proposal received a new comment"
-msgstr "Ihr Bearbeitungsvorschlag hat einen neuen Kommentar erhalten"
-
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "Ihr Bild wurde für IOTD/TP eingereicht"
-
-msgid "A gear item that you used was renamed"
-msgstr "Ein Ausrüstungsgegenstand, den Sie benutzt haben, wurde umbenannt"
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr "Ihr geplantes IOTD hat einen neuen Kommentar erhalten."
-
-msgid "Your unapproved equipment item received a comment"
-msgstr "Ihr ungeprüfter Ausrüstungsgegenstand erhielt einen Kommentar"
-
-msgid "New forum topic for an equipment item you use"
-msgstr ""
-"Neues Forumsthema für einen von Ihnen verwendeten Ausrüstungsgegenstand"
-
-msgid "You were added as a collaborator to an image"
-msgstr "Sie wurden als Mitwirkender zu einem Bild hinzugefügt"
-
-msgid "You were removed as a collaborator to an image"
-msgstr "Sie wurden als Mitwirkender an einem Bild entfernt"
-
-msgid "User removed self as a collaborator to your image"
-msgstr "Benutzer entfernt sich selbst als Mitwirkender an Ihrem Bild"
-
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr "Sie haben Ihr Bild zur IOTD/TP Auswahl eingereicht"
-
-msgid "Login attempt detected from a different country"
-msgstr "Login-Versuch aus einem anderen Land erkannt"
-
-msgid "Login attempt with weak password"
-msgstr "Login-Versuch mit schwachem Passwort"
-
-msgid "Your image was approved by a moderator"
-msgstr "Ihr Bild wurde von einem Moderator genehmigt"
-
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr "Bild wurde nicht zur IOTD/TP-Prüfung eingereicht"
-
-msgid "Subscription canceled"
-msgstr "Abonnement gekündigt"
-
-msgid "Your forum topic was moved"
-msgstr "Ihr Forumsthema wurde verschoben"
-
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr "Das Bild nähert sich der Deadline für die IOTD/TP-Einreichung"
-
-msgid "Your listing has a new private conversation"
-msgstr "Ihr Inserat hat eine neue private Unterhaltung"
-
-msgid "Your private conversation has a new comment"
-msgstr "Ihre private Unterhaltung hat einen neuen Beitrag"
-
-msgid "Your listing has a new question"
-msgstr "Ihr Inserat hat eine neue Frage"
-
-msgid "New forum topic for an equipment item you follow"
-msgstr "Neues Forumsthema für einen Ausrüstungsgegenstand, dem Sie folgen"
-
-msgid "New reply in a forum topic that you started"
-msgstr "Neue Antwort in einem von Ihnen begonnenen Forumsthema"
-
-msgid "Your IOTD staff activity is insufficient"
-msgstr "Ihre IOTD-Mitarbeiter Aktivität ist unzureichend"
 
 msgid "An image you dismissed made it to Top Pick"
 msgstr "Ein von Ihnen verworfenes Bild hat es zum Top Pick geschafft"
@@ -238,8 +192,29 @@ msgstr "Ein von Ihnen verworfenes Bild hat es zum Top Pick geschafft"
 msgid "An image you dismissed made it to IOTD"
 msgstr "Ein von Ihnen verworfenes Bild hat es zum IOTD geschafft"
 
+msgid "Your image might become a Top Pick Nomination"
+msgstr "Ihr Bild könnte eine Top-Pick-Nominierung bekommen"
+
+msgid "Your image might become a Top Pick"
+msgstr "Ihr Bild könnte ein Top Pick werden"
+
+msgid "Your image was voted Top Pick Nomination"
+msgstr "Ihr Bild wurde zur Top Pick Nominierung gewählt"
+
+msgid "Your image was voted Top Pick"
+msgstr "Ihr Bild wurde zum Top Pick gewählt"
+
+msgid "Your image was voted Image of the Day"
+msgstr "Ihr Bild wurde zum Bild des Tages gewählt"
+
 msgid "Your IOTD staff member stats"
 msgstr "Ihre IOTD-Mitarbeiter-Statistiken"
+
+msgid "You were mentioned in an image description"
+msgstr "Sie wurden in einer Bildbeschreibung erwähnt"
+
+msgid "A gear item that you used was renamed"
+msgstr "Ein Ausrüstungsgegenstand, den Sie benutzt haben, wurde umbenannt"
 
 msgid "Collaboration Request: Accept or Deny"
 msgstr "Anfrage zur Zusammenarbeit: Annehmen oder Ablehnen"
@@ -250,11 +225,38 @@ msgstr "Nutzer hat Ihre Anfrage zur Zusammenarbeit akzeptiert"
 msgid "User denied your collaboration request"
 msgstr "Nutzer hat Ihre Anfrage zur Zusammenarbeit abgelehnt"
 
-msgid "Your image might become a Top Pick Nomination"
-msgstr "Ihr Bild könnte eine Top-Pick-Nominierung bekommen"
+msgid "You were added as a collaborator to an image"
+msgstr "Sie wurden als Mitwirkender zu einem Bild hinzugefügt"
 
-msgid "Your image might become a Top Pick"
-msgstr "Ihr Bild könnte ein Top Pick werden"
+msgid "You were removed as a collaborator to an image"
+msgstr "Sie wurden als Mitwirkender an einem Bild entfernt"
 
-msgid "Your image was voted Top Pick Nomination"
-msgstr "Ihr Bild wurde zur Top Pick Nominierung gewählt"
+msgid "User removed self as a collaborator to your image"
+msgstr "Benutzer entfernt sich selbst als Mitwirkender an Ihrem Bild"
+
+msgid "Login attempt detected from a different country"
+msgstr "Login-Versuch aus einem anderen Land erkannt"
+
+msgid "Login attempt with weak password"
+msgstr "Login-Versuch mit schwachem Passwort"
+
+#~ msgid "Notifications"
+#~ msgstr "Benachrichtigungen"
+
+#~ msgid "You have no notifications."
+#~ msgstr "Du hast keine Benachrichtigungen."
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Mark all as read"
+#~ msgstr "Alle als gelesen markieren"
+
+#~ msgid "You have no new notifications."
+#~ msgstr "Du hast keine neuen Benachrichtigungen."
+
+#~ msgid "Your image was nominated to be a Top Pick"
+#~ msgstr "Ihr Bild wurde zum Top Pick nominiert"
+
+#~ msgid "Your image was submitted for IOTD/TP consideration"
+#~ msgstr "Ihr Bild wurde für IOTD/TP eingereicht"

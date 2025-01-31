@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
-"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 
-msgid "Conflict."
-msgstr "Конфликт."
+msgid "Only one video-based acquisition is allowed per image."
+msgstr ""
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Источник без сжатия (макс. 100 Мб)"
@@ -23,56 +25,6 @@ msgstr ""
 "вашего любимого графического редактора (например, PixInsight, Adobe "
 "Photoshop и т.д.), здесь, в AstroBin, для архивных целей. Этот файл хранится "
 "в частном порядке, и только вы будете иметь к нему доступ."
-
-msgid "Error!"
-msgstr "Ошибка!"
-
-msgid "Staging area"
-msgstr "Студия"
-
-msgid "Loading"
-msgstr "Загрузка"
-
-msgid "(no title)"
-msgstr "(без названия)"
-
-msgid "Image of the day"
-msgstr "Изображение Дня"
-
-msgid "Top pick"
-msgstr "Лучшее изображение"
-
-msgid "Top pick nomination"
-msgstr "Номинация на лучшее изображение"
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr ""
-"Данные повреждены. Пожалуйста, загрузите это изображение снова. Извините!"
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr ""
-
-msgid "Original revision"
-msgstr ""
-
-msgid "Collaboration"
-msgstr ""
-
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
 
 msgid "Dates"
 msgstr ""
@@ -146,8 +98,58 @@ msgstr ""
 msgid "Transparency"
 msgstr ""
 
+msgid "Error!"
+msgstr "Ошибка!"
+
+msgid "Image of the day"
+msgstr "Изображение Дня"
+
+msgid "Top pick"
+msgstr "Лучшее изображение"
+
+msgid "Top pick nomination"
+msgstr "Номинация на лучшее изображение"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr ""
+
+msgid "Staging area"
+msgstr "Студия"
+
+msgid "Collaboration"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+
+msgid "If the problem persists, please contact us."
+msgstr ""
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr ""
+
+msgid "Original revision"
+msgstr ""
+
+msgid "Loading"
+msgstr "Загрузка"
+
+msgid "(no title)"
+msgstr "(без названия)"
+
 msgid "Image file not found"
 msgstr ""
 
-msgid "Only one video-based acquisition is allowed per image."
+msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr ""
+"Данные повреждены. Пожалуйста, загрузите это изображение снова. Извините!"
+
+#~ msgid "Conflict."
+#~ msgstr "Конфликт."

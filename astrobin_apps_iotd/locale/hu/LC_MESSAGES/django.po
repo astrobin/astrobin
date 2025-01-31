@@ -1,10 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: hu\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Sajnáljuk, már túl késő visszavonni ezt a beküldést."
@@ -12,11 +14,20 @@ msgstr "Sajnáljuk, már túl késő visszavonni ezt a beküldést."
 msgid "Sorry, it's now too late to retract this vote."
 msgstr "Sajnáljuk, már túl késő visszavonni ezt a szavazatot."
 
+msgid "Newest first"
+msgstr "Legrégibb első"
+
+msgid "Oldest first"
+msgstr "Legújabb első"
+
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Nem vagy tagja az IOTD Beküldők táblájának."
 
 msgid "You cannot submit your own image."
 msgstr "Nem küldheted be a saját képed."
+
+msgid "You cannot submit an image you collaborated to."
+msgstr "Ne küldhetsz be olyan képet, amihez hozzájárultál."
 
 msgid "Images in the staging area cannot be submitted."
 msgstr "Az előkészítési területen lévő képek nem küldhetők be."
@@ -27,152 +38,6 @@ msgstr "A felhasználó azt kérte, hogy hagyják ki a versenyekből."
 msgid "This user has been banned from competitions."
 msgstr "Ezt a felhasználót kitiltottuk a versenyekből."
 
-#, python-format
-msgid ""
-"You cannot submit an image that was published more than %(max_days)s days "
-"ago."
-msgstr ""
-"Nem küldhetsz be olyan képet, amely több, mint %(max_days)s napja lett "
-"közzétéve."
-
-msgid "Users with a Free membership cannot participate in the IOTD."
-msgstr "Free tagsággal rendelkező tagok nem vehetnek részt az IOTD-ben."
-
-msgid "This image has already been an IOTD in the past"
-msgstr "A kép már IOTD volt a múltban"
-
-#, python-format
-msgid "You have already submitted %(max_allowed)s images today."
-msgstr "Ma már beküldtél %(max_allowed)s képet."
-
-msgid "You are not a member of the IOTD Reviewers board."
-msgstr "Nem vagy tagja az IOTD Átnézők táblájának."
-
-msgid "You cannot vote for your own image."
-msgstr "Nem szavazhatsz a saját képedre."
-
-msgid "Images in the staging area cannot be voted for."
-msgstr "Az előkészítési területen lévő képekre nem lehet szavazni."
-
-msgid "You cannot vote for an image that has not been submitted."
-msgstr "Nem szavazhatsz egy képre, amit nem küldtek be."
-
-msgid "You cannot vote for your own submission."
-msgstr "Nem szavazhatsz a saját beküldésedre."
-
-#, python-format
-msgid ""
-"You cannot vote for an image that has been in the submission queue for more "
-"than %(max_days)s days."
-msgstr ""
-"Nem szavazhatsz olyan képre, amely több, mint %(max_days)s napja a beküldési "
-"sorban van."
-
-#, python-format
-msgid "You have already voted for %(max_allowed)s images today."
-msgstr "Ma már %(max_allowed)s képre szavaztál."
-
-msgid "You are not a member of the IOTD Judges board."
-msgstr "Nem vagy tagja az IOTD Bírók táblájának."
-
-msgid "You cannot elect your own image."
-msgstr "Nem választhatod meg a saját képed."
-
-msgid "Images in the staging area cannot be elected."
-msgstr "Az előkészítési területen lévő képek nem választhatók meg."
-
-msgid "You cannot elect an image that has not been voted."
-msgstr "Nem választhatsz meg egy képet, amire nem szavaztak."
-
-msgid "You cannot elect your own submission."
-msgstr "Nem választhatod meg a saját beküldésed."
-
-msgid "You cannot elect an image you voted for."
-msgstr "Nem választhatsz meg egy képet, amire szavaztál."
-
-#, python-format
-msgid ""
-"You cannot elect an image that has been in the review queue for more than "
-"%(max_days)s days."
-msgstr ""
-"Nem választhatsz meg egy olyan képet, amely több, mint %(max_days)s napja a "
-"felülvizsgálási várólistán van."
-
-#, python-format
-msgid "You have already elected %(max_allowed)s images today."
-msgstr "Ma már megválasztottál %(max_allowed)s képet."
-
-#, python-format
-msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgstr "Már beütemeztél %(max_allowed)s IOTD-t."
-
-msgid "You cannot unelect your own submission."
-msgstr "Nem vonhatod vissza a szavazatod a saját képedről."
-
-msgid "You cannot unelect an image you voted for."
-msgstr "Nem vonhatod vissza a szavazatod egy képről, amire te szavaztál."
-
-msgid "You cannot unelect an image elected by another judge."
-msgstr ""
-"Nem vonhatod vissza a szavazatod egy képről, amit egy másik bíró "
-"megválasztott."
-
-msgid "You cannot unelect a past or current IOTD."
-msgstr "Nem vonhatod vissza a szavazatod egy régebbi vagy jelenlegi IOTD-ről."
-
-#, python-format
-msgid "you already selected %s IOTD today (UTC)"
-msgstr "már kiválasztottál %s IOTD-t ma (UTC)"
-
-#, python-format
-msgid "you already selected %s scheduled IOTDs"
-msgstr "már kiválasztottál %s beütemezett IOTD-t"
-
-#, python-format
-msgid "there are already %s scheduled IOTDs"
-msgstr "már %s beütemezett IOTD van"
-
-msgid "Image of the day"
-msgstr "A nap képe"
-
-msgid "IOTD Judgement Queue"
-msgstr "IOTD Elbírálási Várólista"
-
-msgid ""
-"Please select the images that you want to elect to IOTD by clicking on them."
-msgstr ""
-"Kérjük, válaszd ki azokat a képeket, amelyeket az IOTD-nek szeretnél "
-"megválasztani, azzal, hogy rájuk kattintasz."
-
-#, python-format
-msgid ""
-"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
-"<strong>%(time)s</strong>."
-msgstr ""
-"Sajnáljuk, jelenleg nem választhatsz ki IOTD-t: %(reason)s. Kérjük próbáld "
-"újra <strong>%(time)s</strong> múlva."
-
-msgid "This queue is currently empty."
-msgstr "Ez a várólista jelenleg üres."
-
-msgid "Error"
-msgstr "Hiba"
-
-msgid "You cannot unelect an IOTD elected by another judge."
-msgstr ""
-"Nem veheted vissza a szavazatod egy IOTD-ről, amit egy másik bíró már "
-"megválasztott."
-
-#, python-format
-msgid "All IOTD slots for the next %(days)s days are already filled."
-msgstr "A következő %(days)s nap összes IOTD helye már betelt."
-
-msgid "Newest first"
-msgstr "Legrégibb első"
-
-msgid "Oldest first"
-msgstr "Legújabb első"
-
 msgid "You cannot submit an image that you already dismissed."
 msgstr "Nem küldhetsz be egy képet, amit már elutasítottál."
 
@@ -181,6 +46,36 @@ msgid ""
 "You cannot submit an image that has been dismissed by %(number)s members of "
 "the IOTD Staff."
 msgstr "Nem küldhetsz be egy képet, amit %(number)s IOTD bíró elutasított."
+
+#, python-format
+msgid ""
+"You cannot submit an image that was submitted for consideration more than "
+"%(max_days)s day(s) ago."
+msgstr ""
+"Nem küldhetsz be egy képet, ami több, mint %(max_days)s napja lett beküldve "
+"elbírálásra."
+
+msgid "This image has already been an IOTD in the past"
+msgstr "A kép már IOTD volt a múltban"
+
+#, python-format
+msgid "You have already submitted %(max_allowed)s image(s) today."
+msgstr "Ma már beküldtél %(max_allowed)s képet."
+
+msgid "This image has been disqualified from the IOTD/TP process."
+msgstr ""
+
+msgid "You are not a member of the IOTD Reviewers board."
+msgstr "Nem vagy tagja az IOTD Átnézők táblájának."
+
+msgid "You cannot vote for your own image."
+msgstr "Nem szavazhatsz a saját képedre."
+
+msgid "You cannot vote for an image you collaborated to."
+msgstr "Nem szavazhatsz olyan képre, amihez hozzájárultál."
+
+msgid "Images in the staging area cannot be voted for."
+msgstr "Az előkészítési területen lévő képekre nem lehet szavazni."
 
 msgid "You cannot vote for an image that you already dismissed."
 msgstr "Nem szavazhatsz egy képre, amit már elutasítottál."
@@ -191,16 +86,11 @@ msgid ""
 "of the IOTD Staff."
 msgstr "Nem szavazhatsz egy képre, amit %(number)s IOTD bíró elutasított."
 
-#, python-format
-msgid ""
-"You cannot submit an image that was published more than %(max_days)s day(s) "
-"ago."
-msgstr ""
-"Nem küldhetsz be egy képet, amit több, mint %(max_days)s napja tettél közzé."
+msgid "You cannot vote for an image that has not been submitted."
+msgstr "Nem szavazhatsz egy képre, amit nem küldtek be."
 
-#, python-format
-msgid "You have already submitted %(max_allowed)s image(s) today."
-msgstr "Ma már beküldtél %(max_allowed)s képet."
+msgid "You cannot vote for your own submission."
+msgstr "Nem szavazhatsz a saját beküldésedre."
 
 #, python-format
 msgid ""
@@ -221,11 +111,32 @@ msgstr ""
 msgid "You have already voted for %(max_allowed)s image(s) today."
 msgstr "Ma már szavaztál %(max_allowed)s képre."
 
+msgid "You are not a member of the IOTD Judges board."
+msgstr "Nem vagy tagja az IOTD Bírók táblájának."
+
+msgid "You cannot elect your own image."
+msgstr "Nem választhatod meg a saját képed."
+
+msgid "You cannot elect an image you collaborated to."
+msgstr "Nem választhatsz olyan képet, amihez hozzájárultál."
+
+msgid "Images in the staging area cannot be elected."
+msgstr "Az előkészítési területen lévő képek nem választhatók meg."
+
 #, python-format
 msgid ""
 "You cannot submit an image that has been dismissed by %(number)s member(s) "
 "of the IOTD Staff."
 msgstr "Nem küldhetsz be egy képet, amit %(number)s IOTD bíró elutasított."
+
+msgid "You cannot elect an image that has not been voted."
+msgstr "Nem választhatsz meg egy képet, amire nem szavaztak."
+
+msgid "You cannot elect your own submission."
+msgstr "Nem választhatod meg a saját beküldésed."
+
+msgid "You cannot elect an image you voted for."
+msgstr "Nem választhatsz meg egy képet, amire szavaztál."
 
 #, python-format
 msgid ""
@@ -250,6 +161,25 @@ msgstr ""
 "Nem szavazhatsz olyan képre, amelyre még nem szavaztak legalább %(num)s "
 "alkalommal."
 
+msgid "You cannot unelect your own submission."
+msgstr "Nem vonhatod vissza a szavazatod a saját képedről."
+
+msgid "You cannot unelect an image you voted for."
+msgstr "Nem vonhatod vissza a szavazatod egy képről, amire te szavaztál."
+
+msgid "You cannot unelect an image elected by another judge."
+msgstr ""
+"Nem vonhatod vissza a szavazatod egy képről, amit egy másik bíró "
+"megválasztott."
+
+msgid "You cannot unelect a past or current IOTD."
+msgstr "Nem vonhatod vissza a szavazatod egy régebbi vagy jelenlegi IOTD-ről."
+
+msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
+msgstr ""
+"Nem vonhatod vissza a szavazatod egy IOTD-ről, ami holnapra van időzítve "
+"(UTC)."
+
 #, python-format
 msgid "you already selected %s IOTD(s) today (UTC)"
 msgstr "ma már kiválasztottál %s időzített IOTD-t (UTC)"
@@ -262,27 +192,8 @@ msgstr "már kiválasztottál %s időzített IOTD-t"
 msgid "there are already %s scheduled IOTD(s)"
 msgstr "már %s időzített IOTD van"
 
-msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
-msgstr ""
-"Nem vonhatod vissza a szavazatod egy IOTD-ről, ami holnapra van időzítve "
-"(UTC)."
-
-#, python-format
-msgid ""
-"You cannot submit an image that was submitted for consideration more than "
-"%(max_days)s day(s) ago."
-msgstr ""
-"Nem küldhetsz be egy képet, ami több, mint %(max_days)s napja lett beküldve "
-"elbírálásra."
-
-msgid "You cannot submit an image you collaborated to."
-msgstr "Ne küldhetsz be olyan képet, amihez hozzájárultál."
-
-msgid "You cannot vote for an image you collaborated to."
-msgstr "Nem szavazhatsz olyan képre, amihez hozzájárultál."
-
-msgid "You cannot elect an image you collaborated to."
-msgstr "Nem választhatsz olyan képet, amihez hozzájárultál."
+msgid "Image of the day"
+msgstr "A nap képe"
 
 msgid "You are not authenticated. Please log in."
 msgstr "Nem vagy hitelesítve. Kérjük, jelentkezz be."
@@ -301,7 +212,7 @@ msgid "This image was already submitted."
 msgstr ""
 
 msgid ""
-"Images with subject type set to 'Gear' or 'Other' are not eligible for "
+"Images with subject type set to 'Equipment' or 'Other' are not eligible for "
 "IOTD/TP consideration."
 msgstr ""
 
@@ -324,19 +235,11 @@ msgstr "Jelenleg ki vagy tiltva az AstroBin versenyekből."
 
 #, python-format
 msgid ""
-"Unfortunately it's too late: images can be submitted only within %(num_days)"
-"s days after publication."
+"Unfortunately it's too late: images can be submitted only within "
+"%(num_days)s days after publication."
 msgstr ""
 "Sajnos már túl késő: képeket csak a közzétételt követő %(num_days)s napon "
 "belül lehet beküldeni."
-
-msgid "Unknown reason. This should never happen, please contact us!"
-msgstr ""
-"Ismeretlen ok. Ennek soha nem szabadna előfordulnia, kérjük, vedd fel velünk "
-"a kapcsolatot!"
-
-msgid "This image has been disqualified from the IOTD/TP process."
-msgstr ""
 
 msgid ""
 "You have not agreed to the IOTD/TP rules and guidelines since their last "
@@ -344,13 +247,96 @@ msgid ""
 "image again using the Actions menu."
 msgstr ""
 
+msgid "Unknown reason. This should never happen, please contact us!"
+msgstr ""
+"Ismeretlen ok. Ennek soha nem szabadna előfordulnia, kérjük, vedd fel velünk "
+"a kapcsolatot!"
+
 msgid "Yes"
 msgstr ""
 
 msgid "No"
 msgstr ""
 
-msgid ""
-"Images with subject type set to 'Equipment' or 'Other' are not eligible for "
-"IOTD/TP consideration."
-msgstr ""
+#~ msgid ""
+#~ "You cannot submit an image that was published more than %(max_days)s days "
+#~ "ago."
+#~ msgstr ""
+#~ "Nem küldhetsz be olyan képet, amely több, mint %(max_days)s napja lett "
+#~ "közzétéve."
+
+#~ msgid "Users with a Free membership cannot participate in the IOTD."
+#~ msgstr "Free tagsággal rendelkező tagok nem vehetnek részt az IOTD-ben."
+
+#~ msgid "You have already submitted %(max_allowed)s images today."
+#~ msgstr "Ma már beküldtél %(max_allowed)s képet."
+
+#~ msgid ""
+#~ "You cannot vote for an image that has been in the submission queue for "
+#~ "more than %(max_days)s days."
+#~ msgstr ""
+#~ "Nem szavazhatsz olyan képre, amely több, mint %(max_days)s napja a "
+#~ "beküldési sorban van."
+
+#~ msgid "You have already voted for %(max_allowed)s images today."
+#~ msgstr "Ma már %(max_allowed)s képre szavaztál."
+
+#~ msgid ""
+#~ "You cannot elect an image that has been in the review queue for more than "
+#~ "%(max_days)s days."
+#~ msgstr ""
+#~ "Nem választhatsz meg egy olyan képet, amely több, mint %(max_days)s napja "
+#~ "a felülvizsgálási várólistán van."
+
+#~ msgid "You have already elected %(max_allowed)s images today."
+#~ msgstr "Ma már megválasztottál %(max_allowed)s képet."
+
+#~ msgid "You have already scheduled %(max_allowed)s IOTDs."
+#~ msgstr "Már beütemeztél %(max_allowed)s IOTD-t."
+
+#~ msgid "you already selected %s IOTD today (UTC)"
+#~ msgstr "már kiválasztottál %s IOTD-t ma (UTC)"
+
+#~ msgid "you already selected %s scheduled IOTDs"
+#~ msgstr "már kiválasztottál %s beütemezett IOTD-t"
+
+#~ msgid "there are already %s scheduled IOTDs"
+#~ msgstr "már %s beütemezett IOTD van"
+
+#~ msgid "IOTD Judgement Queue"
+#~ msgstr "IOTD Elbírálási Várólista"
+
+#~ msgid ""
+#~ "Please select the images that you want to elect to IOTD by clicking on "
+#~ "them."
+#~ msgstr ""
+#~ "Kérjük, válaszd ki azokat a képeket, amelyeket az IOTD-nek szeretnél "
+#~ "megválasztani, azzal, hogy rájuk kattintasz."
+
+#~ msgid ""
+#~ "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again "
+#~ "in <strong>%(time)s</strong>."
+#~ msgstr ""
+#~ "Sajnáljuk, jelenleg nem választhatsz ki IOTD-t: %(reason)s. Kérjük "
+#~ "próbáld újra <strong>%(time)s</strong> múlva."
+
+#~ msgid "This queue is currently empty."
+#~ msgstr "Ez a várólista jelenleg üres."
+
+#~ msgid "Error"
+#~ msgstr "Hiba"
+
+#~ msgid "You cannot unelect an IOTD elected by another judge."
+#~ msgstr ""
+#~ "Nem veheted vissza a szavazatod egy IOTD-ről, amit egy másik bíró már "
+#~ "megválasztott."
+
+#~ msgid "All IOTD slots for the next %(days)s days are already filled."
+#~ msgstr "A következő %(days)s nap összes IOTD helye már betelt."
+
+#~ msgid ""
+#~ "You cannot submit an image that was published more than %(max_days)s "
+#~ "day(s) ago."
+#~ msgstr ""
+#~ "Nem küldhetsz be egy képet, amit több, mint %(max_days)s napja tettél "
+#~ "közzé."
