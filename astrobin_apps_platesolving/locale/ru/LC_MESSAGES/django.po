@@ -1,21 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
-"PO-Revision-Date: 2024-07-06 13:25+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: Russian\n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
 "%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 108448\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
 
 msgid "Small"
 msgstr "Маленький"
@@ -66,6 +58,12 @@ msgstr "Размер шрифта аннотаций на главной стр�
 
 msgid "Show equatorial grid"
 msgstr "Показывать экваториальную сетку"
+
+msgid "Show ecliptic"
+msgstr ""
+
+msgid "Show galactic equator"
+msgstr ""
 
 msgid "Show constellation borders"
 msgstr "Показывать границы созвездий"
@@ -154,6 +152,15 @@ msgid "Show CGPN objects"
 msgstr "Показывать CGPN объекты"
 
 msgid "Show quasars"
+msgstr ""
+
+msgid "Publicly visible astrometry.net submission"
+msgstr ""
+
+msgid ""
+"If checked, the astrometry.net submission will be publicly visible. If you "
+"leave this unchecked,you won't be able to see the full log of the astrometry."
+"net submission, but the image will stillbe plate-solved and annotated."
 msgstr ""
 
 msgid "Perform a blind solve"
@@ -249,26 +256,17 @@ msgstr ""
 msgid "Advanced success"
 msgstr ""
 
+msgid "Loading..."
+msgstr ""
+
 msgid "Getting plate-solving status, please wait..."
 msgstr "Получение статуса для размещения координат, пожалуйста ждите..."
 
-msgid "Plate-solving starting, please do not leave this page..."
-msgstr "Плейтсолв начинается, пожалуйста не покидайте эту страницу..."
-
-msgid "Advanced plate-solving starting, please do not leave this page..."
+msgid "AstroBin is plate-solving this image with Astrometry.net..."
 msgstr ""
-"Продвинутый плейтсолв начинается, пожалуйста не покидайте эту страницу..."
 
-msgid "Plate-solving started. You may leave this page."
-msgstr "Плейтсолв начался. Вы можете покинуть эту страницу."
-
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr "Продвинутый плейтсолв начался. Вы можете покинуть эту страницу."
-
-msgid "Plate-solving almost ready, please do not leave this page..."
+msgid "AstroBin is plate-solving this image with PixInsight..."
 msgstr ""
-"Размещение по координатам почти готово, пожалуйста не покидайте эту "
-"страницу..."
 
 msgid "This image could not be plate-solved."
 msgstr "Это изображение не может быть размещено по координатам."
@@ -387,6 +385,24 @@ msgstr ""
 
 msgid "Invalid"
 msgstr ""
+
+#~ msgid "Plate-solving starting, please do not leave this page..."
+#~ msgstr "Плейтсолв начинается, пожалуйста не покидайте эту страницу..."
+
+#~ msgid "Advanced plate-solving starting, please do not leave this page..."
+#~ msgstr ""
+#~ "Продвинутый плейтсолв начинается, пожалуйста не покидайте эту страницу..."
+
+#~ msgid "Plate-solving started. You may leave this page."
+#~ msgstr "Плейтсолв начался. Вы можете покинуть эту страницу."
+
+#~ msgid "Advanced plate-solving started. You may leave this page."
+#~ msgstr "Продвинутый плейтсолв начался. Вы можете покинуть эту страницу."
+
+#~ msgid "Plate-solving almost ready, please do not leave this page..."
+#~ msgstr ""
+#~ "Размещение по координатам почти готово, пожалуйста не покидайте эту "
+#~ "страницу..."
 
 #~ msgid ""
 #~ "AstroBin could not plate-solve this image because nova.astrometry.net "

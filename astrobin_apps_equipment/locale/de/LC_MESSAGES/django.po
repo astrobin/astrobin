@@ -1,20 +1,12 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin Apps: Equipment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:12+0000\n"
-"PO-Revision-Date: 2024-07-15 00:04+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: German\n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 159817\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
 
 msgid ""
 "This edit proposal cannot be approved because an item with this brand and "
@@ -502,8 +494,8 @@ msgstr "Katadioptrisch: Schmidt-Cassegrain"
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Katadioptrisch: ACF Schmidt-Cassegrain"
 
-msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
-msgstr "Katadioptrisch: Rowe-Atkinson Schmidt Astrograph"
+msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
+msgstr "Catadioptric: Rowe-Ackermann Schmidt Astrograph"
 
 msgid "Catadioptric: Riccardi-Honders"
 msgstr "Katadioptrisch: Riccardi-Honders"
@@ -688,18 +680,24 @@ msgid ""
 "Equipment item \"%(item)s\" has been marked as ambiguous by a moderator, and "
 "removed from your presets"
 msgstr ""
+"Der Ausrüstungsgegenstand „%(item)s“ wurde von einem Moderator als "
+"zweideutig markiert und aus Ihren Voreinstellungen entfernt."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets."
 msgstr ""
+"Der Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s wurde von einem Moderator als "
+"zweideutig markiert und aus Ihren Voreinstellungen entfernt."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets"
 msgstr ""
+"Der Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s wurde von einem Moderator als "
+"zweideutig markiert und aus Ihren Voreinstellungen entfernt"
 
 #, python-format
 msgid ""
@@ -722,92 +720,124 @@ msgstr "Ssehen Sie unter der folgenden URL nach:"
 #, python-format
 msgid "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you left."
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat eine Marktplatzbewertung kommentiert, die Sie "
+"hinterlassen haben."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat eine Marktplatzbewertung kommentiert, die Sie "
+"erhalten haben."
 
 msgid ""
 "You received this notification because you created this equipment item or "
 "this edit proposal."
 msgstr ""
+"Sie haben diese Benachrichtigung erhalten, weil Sie diesen "
+"Ausrüstungsgegenstand oder diesen Bearbeitungsvorschlag erstellt haben."
 
 msgid "The reviewer left the following comment:"
-msgstr ""
+msgstr "Der Rezensent hat folgenden Kommentar hinterlassen:"
 
 msgid "View edit proposal"
-msgstr ""
+msgstr "Änderungsvorschlag ansehen"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
 "%(item)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat einen Änderungsvorschlag für den "
+"Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s genehmigt"
 
 msgid "Please review it as soon as possible, thank you!"
-msgstr ""
+msgstr "Bitte überprüfen Sie es so schnell wie möglich, danke!"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
 "%(item)s%(_1)s to you for review"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat Ihnen einen Bearbeitungsvorschlag für den "
+"Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s zur Überprüfung zugewiesen"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> proposed an edit to the equipment item "
 "<a href=\"%(item_url)s\">%(item)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hat eine Bearbeitung des "
+"Ausrüstungsgegenstands <a href=\"%(item_url)s\">%(item)s</a> vorgeschlagen."
 
 msgid "Please note"
-msgstr ""
+msgstr "Bitte beachten Sie"
 
 msgid ""
 "This item has not been approved yet, therefore is not yet officially part of "
 "AstroBin's equipment database. Please review this edit proposal as soon as "
 "possible to prevent the possibility that this item be rejected."
 msgstr ""
+"Dieser Artikel wurde noch nicht genehmigt und ist daher noch nicht offiziell "
+"Teil der AstroBin Ausrüstungsdatenbank. Bitte überprüfen Sie diesen "
+"Bearbeitungsvorschlag so schnell wie möglich, um zu verhindern, dass dieser "
+"Artikel abgelehnt wird."
 
 msgid "Please review it as soon as possible."
-msgstr ""
+msgstr "Bitte überprüfen Sie sie so bald wie möglich."
 
 msgid ""
 "You received this notification because you created this equipment item, or "
 "you created/approved/rejected/commented an edit proposal for this item in "
 "the past."
 msgstr ""
+"Sie haben diese Benachrichtigung erhalten, weil Sie diesen "
+"Ausrüstungsgegenstand erstellt haben oder weil Sie in der Vergangenheit "
+"einen Bearbeitungsvorschlag für diesen Gegenstand erstellt/genehmigt/"
+"abgelehnt/kommentiert haben."
 
 #, python-format
 msgid "%(user)s proposed an edit to the equipment item \"%(item)s\"."
 msgstr ""
+"%(user)s hat eine Bearbeitung des Ausrüstungsgegenstands \"%(item)s\" "
+"vorgeschlagen."
 
 #, python-format
 msgid ""
 "Please review an edit proposal for equipment item %(_0)s%(item)s%(_1)s by "
 "%(_0)s%(user)s%(_1)s"
 msgstr ""
+"Bitte überprüfen Sie einen Bearbeitungsvorschlag für den "
+"Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s von %(_0)s%(user)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
 "%(item)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat einen Bearbeitungsvorschlag für das "
+"Ausrüstungselement %(_0)s%(item)s%(_1)s abgelehnt"
 
 msgid "This item can now be added to images by anyone on AstroBin."
 msgstr ""
+"Dieses Element kann jetzt von jedem auf AstroBin zu Bildern hinzugefügt "
+"werden."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s approved the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat den von Ihnen erstellten Ausrüstungsgegenstand "
+"%(_0)s%(item)s%(_1)s genehmigt"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s assigned the equipment item %(_0)s%(item)s%(_1)s to you "
 "for review"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat Ihnen den Ausrüstungsgegenstand %(_0)s%(item)s"
+"%(_1)s zur Überprüfung zugewiesen"
 
 #, python-format
 msgid ""
@@ -815,6 +845,9 @@ msgid ""
 "used on some of your images on AstroBin, has been migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
+"<em><strong>%(make)s</strong> %(name)s</em>, ein Ausrüstungsgegenstand, den "
+"Sie auf einigen Ihrer Bilder auf AstroBin verwendet haben, wurde in die neue "
+"AstroBin-Ausrüstungsdatenbank migriert."
 
 #, python-format
 msgid ""
@@ -822,28 +855,36 @@ msgid ""
 "used on some of your images on AstroBin, could not be migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
+"<em><strong>%(make)s</strong> %(name)s</em>, ein Ausrüstungsgegenstand, den "
+"Sie auf einigen Ihrer Bilder auf AstroBin verwendet haben, konnte nicht in "
+"die neue AstroBin-Ausrüstungsdatenbank migriert werden."
 
 msgid "Reason"
-msgstr ""
+msgstr "Grund"
 
 msgid "Target item"
-msgstr ""
+msgstr "Zielobjekt"
 
 msgid "If you don't know what this means, please read this:"
-msgstr ""
+msgstr "Wenn Sie nicht wissen, was das bedeutet, lesen Sie bitte dies:"
 
 msgid ""
 "You can see all your migrations and undo any mistakes on the following page:"
 msgstr ""
+"Auf der folgenden Seite können Sie alle Ihre Migrationen einsehen und "
+"eventuelle Fehler rückgängig machen:"
 
 msgid "Thanks for your cooperation!"
-msgstr ""
+msgstr "Vielen Dank für Ihre Mitarbeit!"
 
 #, python-format
 msgid ""
 "\"%(make)s %(name)s\", an equipment item that you have used on some of your "
 "images on AstroBin, has been migrated to the new AstroBin Equipment Database."
 msgstr ""
+"\"%(make)s %(name)s\", ein Ausrüstungsgegenstand, den Sie auf einigen Ihrer "
+"Bilder auf AstroBin verwendet haben, wurde in die neue AstroBin-"
+"Ausrüstungsdatenbank migriert."
 
 #, python-format
 msgid ""
@@ -851,54 +892,72 @@ msgid ""
 "images on AstroBin, could not be migrated to the new AstroBin Equipment "
 "Database."
 msgstr ""
+"\"%(make)s %(name)s\", ein Ausrüstungsgegenstand, den Sie auf einigen Ihrer "
+"Bilder auf AstroBin verwendet haben, konnte nicht in die neue AstroBin-"
+"Ausrüstungsdatenbank migriert werden."
 
 #, python-format
 msgid ""
 "%(_0)s%(make)s %(name)s%(_1)s has been migrated to the new AstroBin "
 "Equipment Database"
 msgstr ""
+"%(_0)s%(make)s %(name)s%(_1)s wurde in die neue AstroBin-Gerätedatenbank "
+"migriert"
 
 msgid "Proposed strategy"
-msgstr ""
+msgstr "Vorgeschlagene Strategie"
 
 msgid "Reviewer's reason"
-msgstr ""
+msgstr "Begründung des Reviewers"
 
 msgid "Reviewer's comment"
-msgstr ""
+msgstr "Kommentar des Reviewers"
 
 msgid ""
 "The equipment item still needs to be migrated to the new database, so please "
 "try again after reading the reason and the comment provided by the reviewer "
 "below."
 msgstr ""
+"Der Ausrüstungsgegenstand muss noch in die neue Datenbank migriert werden. "
+"Bitte versuchen Sie es erneut, nachdem Sie den Grund und den Kommentar des "
+"Reviewers unten gelesen haben."
 
 msgid "To try again with different parameters, please visit this page:"
 msgstr ""
+"Um es es noch einmal mit anderen Parametern zu versuchen, besuchen Sie bitte "
+"diese Seite:"
 
 msgid "Migration tool"
-msgstr ""
+msgstr "Migrationswerkzeug"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
 "%(_1)s that you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat den von Ihnen erstellten Ausrüstungsgegenstand für "
+"%(_0)s%(make)s %(name)s%(_1)s abgelehnt"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item migration that you created "
 "for %(_0)s%(make)s %(name)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat die Migration des Ausrüstungsgegenstands abgelehnt, "
+"die Sie für %(_0)s%(make)s %(name)s%(_1)s erstellt haben"
 
 msgid ""
 "This happened because somebody rejected the creation of this equipment item. "
 "Please remember that the AstroBin equipment database is collectively "
 "maintained by the community in order to keep a clean and orderly set of data."
 msgstr ""
+"Dies geschah, weil jemand die Erstellung dieses Ausrüstungsgegenstandes "
+"abgelehnt hat. Bitte denken Sie daran, dass die AstroBin-"
+"Ausrüstungsdatenbank kollektiv von der Gemeinschaft gepflegt wird, um einen "
+"sauberen und ordentlichen Datensatz zu erhalten."
 
 msgid "The reviewer cited the following code as the reason for the rejection:"
-msgstr ""
+msgstr "Als Grund für die Ablehnung nannte der Rezensent folgenden Code:"
 
 #, python-format
 msgid ""
@@ -906,34 +965,49 @@ msgid ""
 "\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
 "accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
+"Da Ihr Ausrüstungsgegenstand als Duplikat von <a href=\"%(duplicate_of_url)s"
+"\">%(duplicate_of)s</a> markiert wurde, wurde Ihr Bild entsprechend "
+"aktualisiert, und <strong>Sie müssen nichts tun</strong>."
 
 msgid ""
 "Please edit your image and try adding the relevant equipment item again. If "
 "possible, use one of the offered suggestions to avoid creating a duplicate."
 msgstr ""
+"Bitte editieren Sie Ihr Bild und versuchen Sie erneut, die betreffende "
+"Ausrüstung hinzuzufügen. Wenn möglich, verwenden Sie einen der angebotenen "
+"Vorschläge, um ein Duplikat zu vermeiden."
 
 #, python-format
 msgid ""
 "Since your equipment item was marked as duplicate of \"%(duplicate_of)s\", "
 "your image has been updated accordingly, and you don't need to do anything."
 msgstr ""
+"Da Ihr Ausrüstungsgegenstand als Duplikat von \"%(duplicate_of)s\" markiert "
+"wurde, ist Ihr Bild entsprechend aktualisiert worden, und Sie brauchen "
+"nichts zu tun."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
 "%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
+"Der Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s wurde aus Ihrem Bild %(_0)s"
+"%(image_title)s%(_1)s entfernt und durch %(_0)s%(duplicate_of)s%(_1)s ersetzt"
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
 "%(image_title)s%(_1)s"
 msgstr ""
+"Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s wurde aus Ihrem Bild %(_0)s"
+"%(image_title)s%(_1)s entfernt"
 
 msgid ""
 "This item has been deleted. Please contact AstroBin if you think this was in "
 "error."
 msgstr ""
+"Dieser Gegenstand wurde gelöscht. Bitte kontaktieren Sie AstroBin, wenn Sie "
+"glauben, dass dies ein Fehler war."
 
 #, python-format
 msgid ""
@@ -941,135 +1015,171 @@ msgid ""
 "\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
+"Ihr Ausrüstungsgegenstand wurde als Duplikat von <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a> markiert. Wenn Sie ihn zu "
+"Bildern hinzugefügt haben, wurden diese entsprechend aktualisiert."
 
 #, python-format
 msgid ""
 "Your equipment item was marked as a duplicate of \"%(duplicate_of)s\". If "
 "you added it to any images, they will have been updated accordingly."
 msgstr ""
+"Ihr Ausrüstungsgegenstand wurde als ein Duplikat von \"%(duplicate_of)s\" "
+"markiert. Wenn Sie ihn zu einem Bild hinzugefügt haben, wurde es "
+"entsprechend aktualisiert."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat den von Ihnen erstellten Ausrüstungsgegenstand "
+"%(_0)s%(item)s%(_1)s abgelehnt"
 
 #, python-format
 msgid ""
 "%(user)s rejected the equipment item %(_0)s%(item)s%(_1)s that you created"
 msgstr ""
+"%(user)s hat den von Ihnen erstellten Ausrüstungsgegenstand %(_0)s%(item)s"
+"%(_1)s abgelehnt"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s created the equipment item %(_0)s%(item)s%(_1)s and it "
 "requires moderation"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat den Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s "
+"erstellt und er muss moderiert werden"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat Ihnen eine Bewertung für das Marktplatz-Inserat "
+"%(_0)s%(listing)s%(_1)s hinterlassen"
 
 msgid "Feedback details"
-msgstr ""
+msgstr "Feedbackdetails"
 
 msgid "Listing"
-msgstr ""
+msgstr "Inserat"
 
 msgid "User"
-msgstr ""
+msgstr "User"
 
 msgid "Communication"
-msgstr ""
+msgstr "Kommunikation"
 
 msgid "Speed"
-msgstr ""
+msgstr "Geschwindigkeit"
 
 msgid "Accuracy of item descriptions"
-msgstr ""
+msgstr "Genauigkeit der Artikelbeschreibungen"
 
 msgid "Packaging quality"
-msgstr ""
+msgstr "Verpackungsqualität"
 
 msgid "Message"
-msgstr ""
+msgstr "Nachricht"
 
 msgid "To review and respond to the feedback, please visit the following link:"
 msgstr ""
+"Um das Feedback zu prüfen und zu beantworten, verwenden Sie bitte den "
+"folgenden Link:"
 
 msgid "View feedback "
-msgstr ""
+msgstr "Feedback anzeigen"
 
 msgid "To view the listing, please visit the following link:"
-msgstr ""
+msgstr "Das Inserat kann unter folgendem Link abgerufen werden:"
 
 msgid "View listing"
-msgstr ""
+msgstr "Inserat ansehen"
 
 #, python-format
 msgid ""
 "%(user)s left you feedback for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(user)s hat Ihnen eine Bewertung für das Marktplatz-Inserat %(_0)s"
+"%(listing)s%(_1)s hinterlassen"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat Ihre Bewertung für das Marktplatz-Inserat %(_0)s"
+"%(listing)s%(_1)s aktualisiert"
 
 #, python-format
 msgid ""
 "%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
 "%(_1)s"
 msgstr ""
+"%(user)s hat Ihre Bewertung für das Marktplatz-Inserat %(_0)s%(listing)s"
+"%(_1)s aktualisiert"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
 "%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hat Ihr Marktplatz-Inserat genehmigt %(_0)s%(listing)s"
+"%(_1)s"
 
 msgid "The listing is now live. Good luck with your sale!"
-msgstr ""
+msgstr "Das Inserat ist jetzt live. Viel Glück mit Ihrem Verkauf!"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hat ein Marktplatz-Inserat "
+"veröffentlicht %(_0)s%(listing)s%(_1)s"
 
 msgid "You received this notification because you follow this user."
 msgstr ""
+"Sie haben diese Benachrichtigung erhalten, weil Sie diesem User folgen."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hat sein Marktplatz-Inserat gelöscht "
+"%(_0)s%(listing)s%(_1)s"
 
 msgid ""
 "You received this notification because you have an offer on this listing, or "
 "you follow the listing."
 msgstr ""
+"Sie haben diese Benachrichtigung erhalten, weil Sie ein Angebot für dieses "
+"Inserat haben oder weil Sie das Inserat verfolgen."
 
 msgid ""
 "Please note that the seller may only deleted listings without any sold line "
 "items."
 msgstr ""
+"Bitte beachten Sie, dass der Verkäufer nur Inserate ohne verkaufte "
+"Positionen löschen darf."
 
 #, python-format
 msgid "Your marketplace listing %(_0)s%(listing)s%(_1)s expired"
-msgstr ""
+msgstr "Ihr Marktplatz-Inserat %(_0)s%(listing)s%(_1)s ist abgelaufen"
 
 msgid "You can renew it by clicking the button below."
-msgstr ""
+msgstr "Sie können es erneuern, indem Sie auf die Schaltfläche unten klicken."
 
 msgid "PS: if you sold items from this listing, please mark them as sold."
 msgstr ""
+"PS: Wenn Sie Artikel aus diesem Inserat verkauft haben, markieren Sie sie "
+"bitte als verkauft."
 
 msgid "You can renew it by clicking the link below:"
 msgstr ""
+"Sie können es verlängern, indem Sie auf den unten stehenden Link klicken:"
 
 #, python-format
 msgid ""
@@ -1077,38 +1187,53 @@ msgid ""
 "%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
 "%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hat ein Marktplatz-Inserat %(_0)s"
+"%(listing)s%(_1)s mit einem Ausrüstungsgegenstand veröffentlicht, dem Sie "
+"folgen: %(_0)s%(line_item)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted somebody else's offer in their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hat das Angebot einer anderen Person in "
+"seinem Marktplatz-Inserat angenommen %(_0)s%(listing)s%(_1)s"
 
 msgid ""
 "Unfortunately, you cannot make an offer on this listing while it is in a "
 "reserved or sold state."
 msgstr ""
+"Leider können Sie kein Angebot für dieses Inserat machen, solange es sich im "
+"Zustand reserviert oder verkauft befindet."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hat einen Gegenstand in seinem "
+"Marktplatz-Inserat %(_0)s%(listing)s%(_1)s verkauft"
 
 msgid "Item"
-msgstr ""
+msgstr "Gegenstand"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hat sein Marktplatz-Inserat aktualisiert "
+"%(_0)s%(listing)s%(_1)s"
 
 msgid ""
 "Please note that the seller may only update unsold line items and the global "
 "description or information pertaining the listing. The seller may not change "
 "the price or quantity of sold line items."
 msgstr ""
+"Bitte beachten Sie, dass der Verkäufer nur die nicht verkauften Positionen "
+"und die allgemeine Beschreibung oder Informationen zum Inserat aktualisieren "
+"kann. Der Verkäufer kann den Preis oder die Menge der verkauften Positionen "
+"nicht ändern."
 
 #, python-format
 msgid ""
@@ -1116,36 +1241,47 @@ msgid ""
 "%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
 "possible and leave feedback to the buyer."
 msgstr ""
+"Sie haben kürzlich ein Angebot für das Marktplatz-Inserat %(_0)s%(listing)s"
+"%(_1)s angenommen, den Artikel aber noch nicht als verkauft markiert. Bitte "
+"tun Sie dies so bald wie möglich und hinterlassen Sie dem Käufer eine "
+"Rückmeldung."
 
 msgid "Mark as sold"
-msgstr ""
+msgstr "Als verkauft markieren"
 
 #, python-format
 msgid ""
 "Don't forget to mark your reserved items as sold in the listing %(_0)s"
 "%(listing)s%(_1)s, if you sold them."
 msgstr ""
+"Vergessen Sie nicht, Ihre reservierten Artikel in den %(_0)s%(listing)s"
+"%(_1)s als verkauft zu markieren, wenn Sie es verkauft haben."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hat Ihr Angebot für sein Marktplatz-"
+"Inserat %(_0)s%(listing)s%(_1)s angenommen"
 
 msgid "Offer details"
-msgstr ""
+msgstr "Details zum Angebot"
 
 msgid "Offer amount"
-msgstr ""
+msgstr "Angebotsbetrag"
 
 msgid "Shipping"
-msgstr ""
+msgstr "Versand"
 
 msgid ""
 "Now, it's time to finalize the details with the seller. You can communicate "
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
+"Nun ist es an der Zeit, die Details mit dem Verkäufer zu klären. Sie können "
+"entweder über die Inserat-Seite oder über eine private Nachricht auf "
+"AstroBin kommunizieren und Zahlung und Lieferung vereinbaren."
 
 msgid ""
 "Please note, while AstroBin facilitates a platform for sellers and buyers, "
@@ -1153,113 +1289,159 @@ msgid ""
 "We encourage both buyers and sellers to exercise caution and use secure "
 "methods for payment and delivery."
 msgstr ""
+"Bitte beachten Sie, dass AstroBin zwar eine Plattform für Verkäufer und "
+"Käufer bereitstellt, die Einzelheiten der Transaktionen jedoch direkt "
+"zwischen den beteiligten Parteien abgewickelt werden. Wir empfehlen sowohl "
+"Käufern als auch Verkäufern, Vorsicht walten zu lassen und sichere Methoden "
+"für Zahlung und Lieferung zu verwenden."
 
 msgid ""
 "Thank you for using AstroBin, and we wish you a smooth and successful "
 "transaction!"
 msgstr ""
+"Vielen Dank, dass Sie AstroBin nutzen, und wir wünschen Ihnen eine "
+"reibungslose und erfolgreiche Transaktion!"
 
 #, python-format
 msgid ""
 "You accepted %(_0)s%(buyer_display_name)s%(_1)s's offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Sie haben das Angebot von %(_0)s%(buyer_display_name)s%(_1)s's für Ihr "
+"Marktplatz-Inserat %(_0)s%(listing)s%(_1)s angenommen"
 
 msgid ""
 "PLEASE NOTE: listings on AstroBin's marketplace may contain more than one "
 "item. Please review the offer details to ensure you understand which items "
 "the offer is for."
 msgstr ""
+"BITTE BEACHTEN SIE: Inserate im AstroBin-Marktplatz können mehr als einen "
+"Artikel enthalten. Bitte überprüfen Sie die Angebotsdetails, um "
+"sicherzustellen, dass Sie verstehen, für welche Artikel das Angebot gilt."
 
 msgid ""
 "Now, it's time to finalize the details with the buyer. You can communicate "
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
+"Nun ist es an der Zeit, die Details mit dem Käufer zu klären. Sie können die "
+"Zahlung und Lieferung entweder über die Inserat-Seite oder über eine private "
+"Nachricht auf AstroBin vereinbaren."
 
 msgid ""
 "PS: once you've completed the transaction, please remember to mark the "
 "listing as sold."
 msgstr ""
+"PS: Sobald Sie die Transaktion abgeschlossen haben, denken Sie bitte daran, "
+"das Inserat als verkauft zu markieren."
 
 #, python-format
 msgid "You made an offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Sie haben ein Angebot für das Marktplatz-Inserat %(_0)s%(listing)s%(_1)s "
+"abgegeben"
 
 msgid "Shipping cost"
-msgstr ""
+msgstr "Versandkosten"
 
 msgid "You can edit your offer by visiting the listing page."
 msgstr ""
+"Sie können Ihr Inserat bearbeiten, indem Sie die Inserats-Seite besuchen."
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s made an offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s hat ein Angebot für Ihr Inserat %(_0)s"
+"%(listing)s%(_1)s abgegeben"
 
 msgid "To review and respond to the offer, please visit your listing page."
 msgstr ""
+"Um das Angebot zu prüfen und darauf zu antworten, besuchen Sie bitte die "
+"Inserats-Seite."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s rejected your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hat Ihr Angebot für sein Inserat %(_0)s"
+"%(listing)s%(_1)s abgelehnt"
 
 msgid ""
 "You may contact the seller using the listing's page for more information."
 msgstr ""
+"Sie können den Verkäufer über die Inserats-Seite für weitere Informationen "
+"kontaktieren."
 
 #, python-format
 msgid ""
 "You retracted your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Sie haben Ihr Angebot für das Inserat %(_0)s%(listing)s%(_1)s zurückgezogen"
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s retracted their offer for your "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s hat sein Angebot für Ihr Inserat %(_0)s"
+"%(listing)s%(_1)s zurückgezogen"
 
 msgid ""
 "You may contact the prospect buyer using AstroBin's private messaging for "
 "more information."
 msgstr ""
+"Sie können den Kaufinteressenten über AstroBin's Private Messaging für "
+"weitere Informationen kontaktieren."
 
 msgid "View buyer's profile"
-msgstr ""
+msgstr "Profil des Käufers ansehen"
 
 #, python-format
 msgid "You updated your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Sie haben Ihr Angebot für das Marktplatz-Inserat %(_0)s%(listing)s%(_1)s "
+"aktualisiert"
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s updated their offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s hat sein Angebot für Ihr Inserat %(_0)s"
+"%(listing)s%(_1)s aktualisiert"
 
 #, python-format
 msgid ""
 "Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
 "%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
+"Hallo! Sie haben kürzlich einen Artikel aus dem Inserat %(_0)s%(listing)s"
+"%(_1)s verkauft, und wir haben festgestellt, dass Sie den Käufer noch nicht "
+"bewertet haben."
 
 msgid ""
 "It's important to leave feedback to the buyer, as it helps other users make "
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the buyer."
 msgstr ""
+"Es ist wichtig, dem Käufer ein Feedback zu geben, da dies anderen Nutzern "
+"hilft, fundierte Entscheidungen beim Kauf von Artikeln auf dem Marktplatz zu "
+"treffen. Bitte nehmen Sie sich einen Moment Zeit, um Ihre Erfahrung mit dem "
+"Käufer zu bewerten."
 
 msgid "Leave feedback"
-msgstr ""
+msgstr "Feedback abgeben"
 
 #, python-format
 msgid ""
 "Rate the buyer for your recent purchase from marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"Bewerten Sie den Käufer für Ihren letzten Kauf aus dem Inserat %(_0)s"
+"%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
@@ -1267,66 +1449,82 @@ msgid ""
 "%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
 "%(seller_display_name)s%(_1)s yet."
 msgstr ""
+"Hallo! Sie haben vor kurzem einen Artikel aus dem Inserat %(_0)s%(listing)s"
+"%(_1)s gekauft und uns ist aufgefallen, dass Sie den Verkäufer%(_0)s"
+"%(seller_display_name)s%(_1)s noch nicht bewertet haben."
 
 msgid ""
 "It's important to leave feedback to the seller, as it helps other users make "
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the seller."
 msgstr ""
+"Es ist wichtig, ein Feedback zum Verkäufer zu geben, da dies anderen Nutzern "
+"hilft, fundierte Entscheidungen beim Kauf von Artikeln auf dem Marktplatz zu "
+"treffen. Bitte nehmen Sie sich einen Moment Zeit, um Ihre Erfahrungen mit "
+"dem Verkäufer zu bewerten."
 
 #, python-format
 msgid ""
 "Rate the seller %(_0)s%(seller_display_name)s%(_1)s for your recent purchase "
 "from marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Bewerten Sie den Verkäufer %(_0)s%(seller_display_name)s%(_1)s für Ihren "
+"letzten Kauf aus dem Inserat %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "New image by %(_0)s%(user)s%(_1)s acquired with equipment items you follow"
 msgstr ""
+"Neues Bild von %(_0)s%(user)s%(_1)s aufgenommen mit Ausrüstungsgegenständen, "
+"denen Sie folgen"
 
 msgid ""
 "You received this notification because you follow these equipment items that "
 "were used to acquire this image:"
 msgstr ""
+"Sie haben diese Benachrichtigung erhalten, weil Sie diesen "
+"Ausrüstungsgegenstände folgen, die zur Aufnahme dieses Bildes verwendet "
+"wurden:"
 
 msgid "This image is a group effort among the following collaborators:"
-msgstr ""
+msgstr "Dieses Bild ist eine Gemeinschaftsarbeit der folgenden Mitarbeiter:"
 
 msgid "This image is a group effort with the following collaborators:"
-msgstr ""
+msgstr "Dieses Bild ist eine Gemeinschaftsarbeit mit folgenden Mitarbeitern:"
 
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 msgid "Users"
-msgstr ""
+msgstr "Users"
 
 msgid "Images"
-msgstr ""
+msgstr "Bilder"
 
 msgid "Please support AstroBin by shopping at one of our partners!"
 msgstr ""
+"Bitte unterstützen Sie AstroBin durch Ihren Einkauf bei einem unserer "
+"Partner!"
 
 msgid "Disable retailer integration"
-msgstr ""
+msgstr "Händlerintegration deaktivieren"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
+msgstr "Kaufen Sie <strong>%(name)s</strong> bei %(retailer)s"
 
 msgid "Last update"
-msgstr ""
+msgstr "Letzte Aktualisierung"
 
 msgid "Stock status unknown"
-msgstr ""
+msgstr "Lagerstatus unbekannt"
 
 msgid "Back ordered"
-msgstr ""
+msgstr "Nachbestellt"
 
 #, python-format
 msgid "%(x)s in stock"
-msgstr ""
+msgstr "%(x)s auf Lager"
 
 msgid "Currently out of stock"
 msgstr "Zurzeit nicht lieferbar"
@@ -1342,3 +1540,40 @@ msgstr "Verkaufen auf dem Marktplatz"
 
 msgid "Close"
 msgstr "Schließen"
+
+#~ msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
+#~ msgstr "Katadioptrisch: Rowe-Atkinson Schmidt Astrograph"
+
+#~ msgid ""
+#~ "\n"
+#~ "    %(_0)s%(user)s%(_1)s commented a marketplace feedback that you "
+#~ "received.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "    %(_0)s%(user)s%(_1)s hat eine Marktplatzbewertung kommentiert, die "
+#~ "Sie erhalten haben.\n"
+
+#~ msgid ""
+#~ "%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item "
+#~ "%(_0)s%(item)s%(_1)s."
+#~ msgstr ""
+#~ "%(_0)s%(user)s%(_1)s hat einen Änderungsvorschlag für den "
+#~ "Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s genehmigt."
+
+#~ msgid ""
+#~ "\n"
+#~ "    %(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item "
+#~ "%(_0)s%(item)s%(_1)s to you for\n"
+#~ "    review\n"
+#~ msgstr ""
+#~ "\n"
+#~ "    %(_0)s%(user)s%(_1)s hat Ihnen einen Bearbeitungsvorschlag für den "
+#~ "Ausrüstungsgegenstand %(_0)s%(item)s%(_1)s zur\n"
+#~ "    Überprüfung zugewiesen\n"
+
+#~ msgid ""
+#~ "You received this notification because you have an active offer on this "
+#~ "listing, or you follow the listing."
+#~ msgstr ""
+#~ "Sie haben diese Benachrichtigung erhalten, weil Sie ein aktives Angebot "
+#~ "für dieses Inserat haben oder das Inserat verfolgen."
