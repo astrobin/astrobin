@@ -1043,6 +1043,17 @@ class SearchService:
         return results
 
     @staticmethod
+    def filter_by_collaboration(data, results: SearchQuerySet) -> SearchQuerySet:
+        collaboration = data.get("collaboration")
+
+        if collaboration == 'true':
+            results = results.exclude(_missing_="collaborator_ids")
+        elif collaboration == 'false':
+            results = results.filter(_missing_="collaborator_ids")
+
+        return results
+
+    @staticmethod
     def get_equipment_brand_listings(q: str, country: str):
         return EquipmentBrandListing.objects.annotate(
             distance=TrigramDistance('brand__name', q)

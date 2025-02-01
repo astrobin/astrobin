@@ -152,6 +152,7 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         queryset = SearchService.filter_by_user_id(params, queryset)
         queryset = SearchService.filter_by_username(params, queryset)
         queryset = SearchService.filter_by_similar_images(params, queryset)
+        queryset = SearchService.filter_by_collaboration(params, queryset)
 
         ordering = params.get('ordering', '-published')
 
