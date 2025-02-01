@@ -111,6 +111,11 @@ class SolutionService:
                     downsample_factor=self.solution.settings.downsample_factor,
                     use_sextractor=self.solution.settings.use_sextractor,
                 )
+
+                if not self.solution.submission_id:
+                    self.solution.error = "No submission ID returned"
+                    self.solution.status = Solver.FAILED
+                    self.solution.save()
             else:
                 self.solution.submission_id = solver.solve(
                     url,

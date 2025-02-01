@@ -36,7 +36,7 @@ class Solver(SolverBase):
         try:
             return self.backend().start(image_url, **kwargs)
         except RequestError:
-            return 0
+            return None
 
     def status(self, submission):
         if submission is None or submission == 0:
