@@ -222,24 +222,6 @@ class SearchService:
         return results
 
     @staticmethod
-    def filter_by_title_or_description(data, results: SearchQuerySet) -> SearchQuerySet:
-        text = data.get("text")
-
-        if text is None or text == "":
-            return results
-
-        value = text.get("value")
-        only_search_in_title_and_description = text.get("onlySearchInTitlesAndDescriptions")
-
-        if not only_search_in_title_and_description:
-            return results
-
-        return results.filter(
-            SQ(title=CustomContain(value)) |
-            SQ(description=CustomContain(value))
-        )
-
-    @staticmethod
     def filter_by_subject(data, results: SearchQuerySet) -> SearchQuerySet:
         subject = data.get("subject")
         subjects = data.get("subjects")

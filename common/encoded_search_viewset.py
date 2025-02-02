@@ -1,12 +1,12 @@
 import base64
 import json
-import re
 import zlib
 from urllib.parse import parse_qs, unquote
 
 import msgpack
 from drf_haystack.viewsets import HaystackViewSet
 from haystack.backends import SQ
+from haystack.inputs import AutoQuery
 from rest_framework.exceptions import ParseError
 
 from common.services.search_service import MatchType
@@ -53,42 +53,103 @@ class EncodedSearchViewSet(HaystackViewSet):
 
     @staticmethod
     def parse_search_query(query):
-        # This regex will match phrases wrapped in single or double quotes and individual words
-        pattern = r'(-?"[^"]+"|-?\'[^\']+\'|-?\S+)'
-        terms = re.findall(pattern, query)
+        terms = []
+        current_term = []
+        in_quotes = None  # None, '"' or "'"
+        i = 0
 
-        include_terms = []
-        exclude_terms = []
+        while i < len(query):
+            char = query[i]
 
-        for term in terms:
-            if term.startswith('-'):
-                exclude_terms.append(term[1:].strip('\'"'))
+            # Handle quotes
+            if char in '"\'':
+                if in_quotes == char:  # Closing quote
+                    current_term.append(char)
+                    if current_term:
+                        terms.append(''.join(current_term))
+                    current_term = []
+                    in_quotes = None
+                elif in_quotes is None:  # Opening quote
+                    if current_term:  # Save any accumulated non-quoted term
+                        terms.append(''.join(current_term))
+                    current_term = [char]
+                    in_quotes = char
+                else:  # Quote within another type of quote
+                    current_term.append(char)
+
+            # Handle spaces
+            elif char.isspace():
+                if in_quotes:  # Space within quotes
+                    current_term.append(char)
+                elif current_term:  # Space outside quotes - terminate current term
+                    terms.append(''.join(current_term))
+                    current_term = []
+
+            # Handle all other characters
             else:
-                include_terms.append(term.strip('\'"'))
+                current_term.append(char)
 
-        return include_terms, exclude_terms
+            i += 1
+
+        # Handle any remaining term and unclosed quotes
+        if current_term:
+            terms.append(''.join(current_term))
+
+        return [term for term in terms if term.strip()]
 
     @staticmethod
-    def build_search_query(results, query):
-        include_terms, exclude_terms = EncodedSearchViewSet.parse_search_query(query.get('value', ''))
+    def build_search_query(results, query, only_search_in_titles_and_descriptions=False):
+        search_value = query.get('value', '')
         match_type = query.get('matchType', MatchType.ANY.value)
-        search_query = SQ()
 
-        # Handle included terms (AND logic or OR logic depending on matchType)
-        for term in include_terms:
-            if match_type == MatchType.ALL.value:
-                search_query &= SQ(text=term)
-            else:
-                search_query |= SQ(text=term)
+        terms = EncodedSearchViewSet.parse_search_query(search_value)
 
-        # Handle excluded terms (NOT logic)
+        # Split into include and exclude terms
+        include_terms = [term[1:] if term.startswith('"') and term.startswith('-', 1) else term
+                         for term in terms if not term.startswith('-') or term.startswith('-"')]
+        exclude_terms = [term[1:] for term in terms if term.startswith('-')]
+
+        sqs = results
+
+        # Determine which fields to search
+        search_fields = ['title', 'description'] if only_search_in_titles_and_descriptions else ['text']
+
+        # Handle inclusion
+        if include_terms:
+            q = None
+            for term in include_terms:
+                term_q = None
+                for field in search_fields:
+                    if term_q is None:
+                        term_q = SQ(**{field: AutoQuery(term)})
+                    else:
+                        term_q |= SQ(**{field: AutoQuery(term)})
+
+                if match_type == MatchType.ALL.value:
+                    if q is None:
+                        q = term_q
+                    else:
+                        q &= term_q
+                else:  # ANY
+                    if q is None:
+                        q = term_q
+                    else:
+                        q |= term_q
+
+            if q is not None:
+                sqs = sqs.filter(q)
+
+        # Handle exclusion - always use AND NOT for each field
         for term in exclude_terms:
-            if match_type == MatchType.ALL.value:
-                search_query &= ~SQ(text=term)
-            else:
-                search_query |= ~SQ(text=term)
+            exclude_q = None
+            for field in search_fields:
+                if exclude_q is None:
+                    exclude_q = SQ(**{field: AutoQuery(term)})
+                else:
+                    exclude_q |= SQ(**{field: AutoQuery(term)})
+            sqs = sqs.exclude(exclude_q)
 
-        return results.filter(search_query)
+        return sqs
 
     def initialize_request(self, request, *args, **kwargs):
         def is_json(value):
