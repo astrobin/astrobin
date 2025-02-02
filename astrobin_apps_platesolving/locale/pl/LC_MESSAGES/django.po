@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "PO-Revision-Date: 2020-10-26 10:56+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,6 +66,12 @@ msgstr "Rozmiar czcionki podpisów na głównej stronie ze zdjęciami"
 
 msgid "Show equatorial grid"
 msgstr "Pokaż siatkę równikową"
+
+msgid "Show ecliptic"
+msgstr ""
+
+msgid "Show galactic equator"
+msgstr ""
 
 msgid "Show constellation borders"
 msgstr "Pokaż granice konstelacji"
@@ -152,6 +158,15 @@ msgid "Show CGPN objects"
 msgstr "Pokaż obiekty z katalogy CGPN"
 
 msgid "Show quasars"
+msgstr ""
+
+msgid "Publicly visible astrometry.net submission"
+msgstr ""
+
+msgid ""
+"If checked, the astrometry.net submission will be publicly visible. If you "
+"leave this unchecked,you won't be able to see the full log of the astrometry."
+"net submission, but the image will stillbe plate-solved and annotated."
 msgstr ""
 
 msgid "Perform a blind solve"
@@ -247,28 +262,17 @@ msgstr ""
 msgid "Advanced success"
 msgstr ""
 
+msgid "Loading..."
+msgstr ""
+
 msgid "Getting plate-solving status, please wait..."
 msgstr "Pobieram status mapowania szczegółów zdjęcia, proszę czekać..."
 
-msgid "Plate-solving starting, please do not leave this page..."
+msgid "AstroBin is plate-solving this image with Astrometry.net..."
 msgstr ""
-"Redukcja astrometryczna zdjęcia rozpoczęta, proszę nie opuszczać strony..."
 
-msgid "Advanced plate-solving starting, please do not leave this page..."
+msgid "AstroBin is plate-solving this image with PixInsight..."
 msgstr ""
-"Zaawansowana redukcja astrometryczna zdjęcia rozpoczęta, proszę nie "
-"opuszczać strony..."
-
-msgid "Plate-solving started. You may leave this page."
-msgstr ""
-"Redukcja astrometryczna zdjęcia uruchomiona w tle. Możesz opuścić stronę."
-
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr "Mapowanie szczegółów zdjęcia uruchomione w tle. Możesz opuścić stronę."
-
-msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr ""
-"Mapowanie szczegółów zdjęcia prawie gotowe, proszę nie opuszczać strony..."
 
 msgid "This image could not be plate-solved."
 msgstr "Mapowanie szczegółów nie jest możliwe dla tego zdjęcia."
@@ -384,3 +388,24 @@ msgstr ""
 
 msgid "Invalid"
 msgstr ""
+
+#~ msgid "Plate-solving starting, please do not leave this page..."
+#~ msgstr ""
+#~ "Redukcja astrometryczna zdjęcia rozpoczęta, proszę nie opuszczać strony..."
+
+#~ msgid "Advanced plate-solving starting, please do not leave this page..."
+#~ msgstr ""
+#~ "Zaawansowana redukcja astrometryczna zdjęcia rozpoczęta, proszę nie "
+#~ "opuszczać strony..."
+
+#~ msgid "Plate-solving started. You may leave this page."
+#~ msgstr ""
+#~ "Redukcja astrometryczna zdjęcia uruchomiona w tle. Możesz opuścić stronę."
+
+#~ msgid "Advanced plate-solving started. You may leave this page."
+#~ msgstr ""
+#~ "Mapowanie szczegółów zdjęcia uruchomione w tle. Możesz opuścić stronę."
+
+#~ msgid "Plate-solving almost ready, please do not leave this page..."
+#~ msgstr ""
+#~ "Mapowanie szczegółów zdjęcia prawie gotowe, proszę nie opuszczać strony..."

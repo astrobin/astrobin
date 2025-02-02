@@ -1,20 +1,22 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
-"PO-Revision-Date: 2024-07-14 23:24+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: Italian\n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
+
+msgid ""
+"You have reached the maximum number of saved searches. Please delete some to "
+"make room for new ones."
+msgstr ""
+"Hai raggiunto il numero massimo di ricerche da salvare. Cancellane una per "
+"fare spazio alla nuova!"
+
+msgid "You already have a saved search with this name."
+msgstr "Hai già una ricerca salvata con questo nome."
 
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
@@ -794,6 +796,9 @@ msgstr ""
 "opzioni qui, è perché nessuna delle immagini in questa raccolta ha dei tag "
 "chiave/valore. PS: immagini senza tag appariranno in fondo alla raccolta."
 
+msgid "Use the most recent image automatically"
+msgstr "Usa l'immagine più recente automaticamente"
+
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Usa il seguente formato: aaaa-mm-gg"
 
@@ -842,6 +847,9 @@ msgstr ""
 "Scegli cosa sarà mostrato quando qualcuno passa il mouse su questa immagine. "
 "Nota bene: solo le versioni con le stesse dimensioni della tua immagine "
 "originale possono essere considerate."
+
+msgid "Nothing"
+msgstr "Niente/nessuno"
 
 msgid "Key/value tags"
 msgstr "Tag chiave/valore"
@@ -994,6 +1002,15 @@ msgstr "Telescopi ed obiettivi"
 msgid "Cameras"
 msgstr "Camere"
 
+msgid "Let AstroBin decide"
+msgstr "Lascia che decida AstroBin"
+
+msgid "Yes"
+msgstr "Sì"
+
+msgid "No"
+msgstr "No"
+
 msgid ""
 "Sorry, you cannot automatically submit images for IOTD/TP consideration if "
 "you have not had any images selected as Top Pick or Image of the Day before. "
@@ -1097,6 +1114,12 @@ msgstr "Europa"
 
 msgid "Americas"
 msgstr "America"
+
+msgid "North America"
+msgstr "Nord America"
+
+msgid "South America"
+msgstr "Sud America"
 
 msgid "Africa"
 msgstr "Africa"
@@ -1596,6 +1619,9 @@ msgstr "Nubi nottilucenti"
 msgid "Landscape"
 msgstr "Paesaggio"
 
+msgid "Artificial satellite"
+msgstr "Satellite artificiale"
+
 msgid "Gear"
 msgstr "Strumentazione"
 
@@ -1631,9 +1657,6 @@ msgstr "Nessuna delle precedenti"
 
 msgid "Non-commercial independent facility"
 msgstr "Struttura non commerciale indipendente"
-
-msgid "Nothing"
-msgstr "Niente/nessuno"
 
 msgid "Plate-solution annotations (if available)"
 msgstr "Annotazioni astrometriche (se disponibili)"
@@ -1808,12 +1831,13 @@ msgid "Do not notify your followers about this revision."
 msgstr "Non notificare i tuoi follower riguardo questa versione."
 
 msgid "Parent collection"
-msgstr "Cartella madre"
+msgstr "Raccolta genitore"
 
 msgid ""
 "If you want to create a nested collection, select the parent collection here."
 msgstr ""
-"Se desideri creare una cartella nidificata, seleziona qui la cartella madre."
+"Se desideri creare una raccolta nidificata, seleziona qui la raccolta "
+"genitore."
 
 msgid "Images"
 msgstr "Immagini"
@@ -2211,7 +2235,7 @@ msgid "Year"
 msgstr "Anno"
 
 msgid "Collections"
-msgstr "Cartelle"
+msgstr "Raccolte"
 
 msgid "Constellation"
 msgstr "Costellazione"
@@ -2219,18 +2243,54 @@ msgstr "Costellazione"
 msgid "Default gallery sorting"
 msgstr "Ordine di default della galleria"
 
+msgid "Allow image adjustments widget on your images"
+msgstr "Mostra il widget di regolazione delle immagini sulle tue foto"
+
+msgid ""
+"If you disable this option, the image adjustments widget will not be shown "
+"on your images. This setting only affects the new gallery and search "
+"experiences."
+msgstr ""
+"Se disattivi questa opzione, il widget di regolazioni non sarà visibile "
+"sulle tue immagini. Questa impostazione è disponibile soltanto per le nuove "
+"pagine di galleria e ricerca."
+
+msgid "Maximum zoom allowed on your images"
+msgstr "Zoom massimo sulle tue foto"
+
+msgid ""
+"Select the maximum zoom allowed on your images. 1x refers to the native "
+"resolution of an image. This setting only affects the new gallery and search "
+"experiences."
+msgstr ""
+"Seleziona lo zoom massimo che vuoi permettere sulle tue foto. 1x si "
+"riferisce alla risoluzione nativa di una foto. Questa impostazione è "
+"disponibile soltanto per le nuove pagine di galleria e ricerca."
+
+msgid "Display collections on your public gallery"
+msgstr "Mostra le raccolte con la galleria pubblica"
+
+msgid ""
+"Select if you want your collections to be displayed on your public gallery. "
+"If you disable this, your collections will be displayed separately. This "
+"setting only affects the new gallery experience."
+msgstr ""
+"Seleziona questa voce se vuoi che le tue raccolte siamo mostrate sulla tua "
+"galleria pubblica. Se lo disattivi, le tue raccolte saranno mostrate "
+"separatamente. Questa impostazione è disponibile soltanto per le nuove "
+"pagina della galleria."
+
 msgid "See your own Staging Area images on your gallery"
 msgstr "Vedi i lavori in corso nella tua galleria"
 
 msgid ""
 "Select if you want your Staging Area images to appear on your own view of "
-"your gallery when you are logged. If you choose 'No', your Staging Area "
-"images can be located via the 'View' menu entry on your gallery page."
+"your gallery when you are logged in. If you disable this, your Staging Area "
+"images can be visible separately (only to you."
 msgstr ""
-"Seleziona se vuoi che te le tue immagini nell'Area di Lavoro siano mostrate "
-"quando vedi la tua galleria dopo aver fatto il login. Se scegli di no, le "
-"tue immagini nell'Area di Lavoro possono essere trovate usando il menu "
-"\"Visualizza\" sulla tua galleria."
+"Selezione questa voce se vuoi che la tua Area di Lavoro appaia assieme alle "
+"tue immagini pubbliche (solo per te). Se la disattivi, la tua Area di Lavoro "
+"sarà mostrata separatamente."
 
 msgid "Default license"
 msgstr "Licenza predefinita"
@@ -2301,6 +2361,28 @@ msgstr ""
 "astrofotografia per arricchire la visualizzazione della strumentazione con "
 "dei link agli sponsor. L'integrazione è delicato e non intrusiva, e sarebbe "
 "di grosso aiuto se decidessi di non disabilitarla. Grazie anticipatamente!"
+
+msgid "Enable new search experience"
+msgstr "Abilita la nuova pagina di ricerca"
+
+msgid ""
+"Enable the new search experience, which includes new filters and a new "
+"layout."
+msgstr ""
+"Abilita la nuova pagina di ricerca, con nuovi filtri ed un nuovo aspetto."
+
+msgid "Learn more"
+msgstr "Scopri di più"
+
+msgid "Enable new gallery experience"
+msgstr "Abilita la nuova galleria"
+
+msgid ""
+"Enable the new gallery experience, with improved navigation and a new image "
+"viewer."
+msgstr ""
+"Abilita la nuova galleria, con una navigazione migliore ed un nuovo "
+"visualizzatore di immagini."
 
 msgid "Language"
 msgstr "Lingua"
@@ -3034,22 +3116,22 @@ msgid "Electronically-Assisted Astronomy (EAA)"
 msgstr "Astronomia Assistita Elettronicamente (EAA)"
 
 msgid "Collection"
-msgstr "Cartella"
+msgstr "Raccolta"
 
 msgid "Tools"
 msgstr "Strumenti"
 
 msgid "Create new collection"
-msgstr "Crea nuova cartella"
+msgstr "Crea nuova raccolta"
 
 msgid "Empty collection"
-msgstr "Cartella vuota"
+msgstr "Raccolta vuota"
 
 msgid "No collection"
-msgstr "Nessuna cartella"
+msgstr "Nessuna raccolta"
 
 msgid "This user does not have any collections."
-msgstr "Questo utente non ha alcuna cartella."
+msgstr "Questo utente non ha alcuna raccolta."
 
 msgid "AstroBin is in READ ONLY mode "
 msgstr "AstroBin è in modalità a SOLA LETTURA."
@@ -3316,22 +3398,8 @@ msgstr ""
 "AstroBin ha rilevato che la tua password non soddisfa i requisiti di "
 "sicurezza."
 
-msgid ""
-"To prevent spam, phishing, and other malicious activities, all your new "
-"content posted on AstroBin will be moderated until you have changed your "
-"password to meet security requirements, or you have enabled two-factor "
-"authentication."
-msgstr ""
-"Per prevenire spam, phishing e altre attività dannose, tutti i tuoi nuovi "
-"contenuti pubblicati su AstroBin saranno moderati finché non avrai "
-"modificato la password per soddisfare i requisiti di sicurezza o finché non "
-"avrai abilitato l'autenticazione a due fattori."
-
 msgid "Change your password"
 msgstr "Cambia la password"
-
-msgid "Two-factor Authentication"
-msgstr "Autenticazione a due fattori"
 
 msgid "Save"
 msgstr "Salva"
@@ -3791,6 +3859,9 @@ msgstr "Ricerca avanzata"
 msgid "Constellations"
 msgstr "Costellazioni"
 
+msgid "IOTD/TP Archive"
+msgstr "Archivio IOTD/TP"
+
 msgid "Remote astrophotography"
 msgstr "Astrofotografia remota"
 
@@ -3802,6 +3873,9 @@ msgstr "(beta)"
 
 msgid "Help"
 msgstr "Aiuto"
+
+msgid "What is this site?"
+msgstr "Che cos'è questo sito?"
 
 msgid "Support"
 msgstr "Supporto"
@@ -3838,9 +3912,6 @@ msgstr ""
 "premiare commenti informativi, costruttivi, e di valore, su AstroBin. "
 "%(_0)sScopri di più.%(_1)s"
 
-msgid "My places"
-msgstr "I miei posti"
-
 msgid "Public Gallery"
 msgstr "Galleria pubblica"
 
@@ -3852,12 +3923,6 @@ msgstr "Segnalibri"
 
 msgid "My messages"
 msgstr "La mia posta"
-
-msgid "Received"
-msgstr "Ricevuti"
-
-msgid "Sent"
-msgstr "Inviato"
 
 msgid "API Keys"
 msgstr "API Keys"
@@ -3962,6 +4027,9 @@ msgstr "Messaggi nel forum"
 
 msgid "Written"
 msgstr "Scritti"
+
+msgid "Received"
+msgstr "Ricevuti"
 
 msgid "Accepted"
 msgstr "Accettato"
@@ -4432,7 +4500,7 @@ msgid "User gallery"
 msgstr "Galleria utente"
 
 msgid "User collection"
-msgstr "Cartella"
+msgstr "Raccolta"
 
 msgid "Public group"
 msgstr "Gruppo pubblico"
@@ -4687,9 +4755,6 @@ msgstr ""
 
 msgid "The following people like this image"
 msgstr "Alle seguenti persone piace la tua immagine"
-
-msgid "Warning"
-msgstr "Attenzione"
 
 msgid "This image cannot be submitted for the IOTD/TP consideration."
 msgstr "Questa immagine non può essere inviata alla IOTD/TP."
@@ -5115,6 +5180,9 @@ msgstr "Longitudine galattica"
 msgid "Galactic latitude"
 msgstr "Latitudine galattica"
 
+msgid "Warning"
+msgstr "Attenzione"
+
 msgid ""
 "You are about to open a large file. Depending on your download speed, it "
 "might take several seconds or even minutes to view the file."
@@ -5285,18 +5353,6 @@ msgstr ""
 "Se questo luogo ha dei dati mancanti, oppure incorretti, per favore "
 "correggili."
 
-msgid "What is this site?"
-msgstr "Che cos'è questo sito?"
-
-msgid "Contact"
-msgstr "Contattaci"
-
-msgid "Gallery"
-msgstr "Galleria"
-
-msgid "Marketplace listings"
-msgstr "Inserzioni nel mercatino"
-
 msgid "Compose message"
 msgstr "Nuovo messaggio"
 
@@ -5320,6 +5376,9 @@ msgstr "Ultimo messaggio"
 
 msgid "No messages"
 msgstr "Nessun messaggio"
+
+msgid "Sent"
+msgstr "Inviato"
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -5423,6 +5482,17 @@ msgstr ""
 "rilevato che la tua password non soddisfa i requisiti di sicurezza."
 
 msgid ""
+"To prevent spam, phishing, and other malicious activities, all your new "
+"content posted on AstroBin will be moderated until you have changed your "
+"password to meet security requirements, or you have enabled two-factor "
+"authentication."
+msgstr ""
+"Per prevenire spam, phishing e altre attività dannose, tutti i tuoi nuovi "
+"contenuti pubblicati su AstroBin saranno moderati finché non avrai "
+"modificato la password per soddisfare i requisiti di sicurezza o finché non "
+"avrai abilitato l'autenticazione a due fattori."
+
+msgid ""
 "We recommend that you change your password as soon as possible, for your "
 "security and the safety of the other members of the AstroBin community."
 msgstr ""
@@ -5431,6 +5501,9 @@ msgstr ""
 
 msgid "Learn more about security standards on AstroBin:"
 msgstr "Scopri di più sugli standard di sicurezza su AstroBin:"
+
+msgid "Two-factor Authentication"
+msgstr "Autenticazione a due fattori"
 
 msgid ""
 "To prevent spam, phishing, and other malicious activities, all your new "
@@ -5519,14 +5592,16 @@ msgstr "Permettimi di offrire alcuni consigli:"
 
 #, python-format
 msgid ""
-"Keep in mind that AstroBin is not meant to be a free service. If you are "
-"still on a free account, you can upload images %(max)s times before you will "
-"be asked to upgrade. More info on the <a href=\"%(url)s\">pricing page</a>."
+"AstroBin is a premium service designed to offer exceptional value to its "
+"users. If you're currently using a free account, you can enjoy %(max)s "
+"upload opportunities before upgrading to unlock even more features. For "
+"details, please visit our <a href=\"%(url)s\">pricing page</a>!"
 msgstr ""
-"Ricorda che AstroBin non è un servizio gratuito. Se sei ancora con un "
-"account free, puoi caricare immagini al massimo %(max)s volte prima che ti "
-"sarà chiesto di comprare un abbonamento. Per ulteriori informazioni visita "
-"<a href=\"%(url)s\">il prezziario</a>."
+"AstroBin è un servizio premium progettato per offrire ottimi vantaggi ai "
+"suoi utenti. Se al momento usi un account gratuito, puoi usufruire di "
+"%(max)s opportunità di upload prima di necessitare di fare l'upgrade per "
+"sbloccare molte più funzionalità. Per ulteriori informazioni, visita <a href="
+"\"%(url)s\">il prezzario</a>!"
 
 #, python-format
 msgid ""
@@ -5562,14 +5637,16 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Keep in mind that AstroBin is not meant to be a free service. If you are "
-"still on a free account, you can upload images %(max)s times before you will "
-"be asked to upgrade. More info on the pricing page:"
+"AstroBin is a premium service designed to offer exceptional value to its "
+"users. If you're currently using a free account, you can enjoy %(max)s "
+"upload opportunities before upgrading to unlock even more features. For "
+"details, please visit our pricing page!"
 msgstr ""
-"Tieni a mente che AstroBin non è un servizio gratuito. Se hai ancora un "
-"account free, puoi caricare immagini al massimo %(max)s volte prima che ti "
-"venga chiesto di comprare un abbonamento. Ulteriori informazioni sul "
-"prezziario:"
+"AstroBin è un servizio premium progettato per offrire ottimi vantaggi ai "
+"suoi utenti. Se al momento usi un account gratuito, puoi usufruire di "
+"%(max)s opportunità di upload prima di necessitare di fare l'upgrade per "
+"sbloccare molte più funzionalità. Per ulteriori informazioni, visita il "
+"prezzario!"
 
 msgid ""
 "New uploads go to your \"staging area\", where they are unlisted. You can "
@@ -6532,12 +6609,6 @@ msgstr ""
 "%(topic_name)s</em>"
 
 #, python-format
-msgid ""
-"<strong>%(user)s</strong> replied in a topic to which you are subscribed"
-msgstr ""
-"<strong>%(user)s</strong> ha risposto in un argomento a cui sei iscritto"
-
-#, python-format
 msgid "%(user)s replied in a topic to which you are subscribed"
 msgstr "%(user)s ha risposto in un argomento a cui sei iscritto"
 
@@ -7117,8 +7188,35 @@ msgstr ""
 msgid "Your image was voted Top Pick"
 msgstr "La tua immagine è stata votata come Top Pick"
 
-msgid "Your image was nominated to be a Top Pick"
-msgstr "La tua immagine è stata nominata Top Pick"
+msgid "Your image was voted Top Pick Nomination"
+msgstr "La tua foto è stata votata come Top Pick Nomination"
+
+#, python-format
+msgid ""
+"Your image %(_prefix)s%(image_title)s%(_suffix)s received enough votes and "
+"might become a Top Pick or higher"
+msgstr ""
+"La tua foto %(_prefix)s%(image_title)s%(_suffix)s ha ricevuto voti a "
+"sufficienza e potrebbe diventare una Top Pick o superiore"
+
+msgid ""
+"Note: AstroBin awards (Top Pick Nomination, Top Pick, Image of the Day) are "
+"assigned only after votes are finalized, ensuring no votes are retracted and "
+"the image reaches its final award level. Awards are not assigned "
+"sequentially."
+msgstr ""
+"Nota: le premiazioni su AstroBin (Top Pick Nomination, Top Pick, Foto del "
+"Giorno) sono assegnate solo una volta che i voti sono finalizzati, per "
+"assicurarsi che nessun voto sia ritirato. Le premiazioni non vengono "
+"assegnate in maniera sequenziale."
+
+#, python-format
+msgid ""
+"Your image %(_prefix)s%(image_title)s%(_suffix)s received enough votes and "
+"might become a Top Pick Nomination or higher"
+msgstr ""
+"La tua foto %(_prefix)s%(image_title)s%(_suffix)s ha ricevuto voti a "
+"sufficienza e potrebbe diventare una Top Pick Nomination o superiore"
 
 msgid "Your IOTD/TP staff member stats"
 msgstr "Le statistiche in quanto membro dello staff IOTD/TP"
@@ -7366,6 +7464,9 @@ msgstr "Cerca immagini"
 msgid "Member since"
 msgstr "Utente da"
 
+msgid "Gallery"
+msgstr "Galleria"
+
 msgid "Every equipment item on AstroBin has a forum associated with it."
 msgstr "Ogni strumento su AstroBin ha un forum associato ad esso."
 
@@ -7407,12 +7508,6 @@ msgstr ""
 
 msgid "Do you want to post about a specific equipment item or software?"
 msgstr "Vuoi pubblicare un post su uno strumento o un software specifico?"
-
-msgid "Yes"
-msgstr "Sì"
-
-msgid "No"
-msgstr "No"
 
 msgid ""
 "Anybody who used an equipment item is notified of new topics in its forum, "
@@ -7634,6 +7729,9 @@ msgstr "Qualcosa è andato storto, spiacenti! Prova di nuovo."
 msgid "(deleted)"
 msgstr "(cancellato)"
 
+msgid "Topic starter"
+msgstr ""
+
 msgctxt "Noun, e.g. 'This element has 1 view'"
 msgid "view"
 msgstr "visualizzazione"
@@ -7841,12 +7939,34 @@ msgstr "Hai effettuato il logout. Torna presto!"
 msgid "Password changed"
 msgstr "Password cambiata"
 
-#, python-format
+msgid "Request a secure link to change your password"
+msgstr "Richiedi un link sicuro per cambiare la tua password"
+
 msgid ""
-"As AstroBin has detected that your current password is insecure, you may not "
-"change it yourself. Please <a href=\"%(contact_url)s\">contact us</a> to "
-"request a password reset."
+"Your password is already secure, and you can change it at any time. You do "
+"not need to request a secure link to change your password."
 msgstr ""
+"La tua password è già sicura, e puoi cambiarla quando vuoi. Non c'è bisogno "
+"di richiedere un link sicuro per farlo."
+
+msgid ""
+"We have emailed you with a secure link to change your password. Please check "
+"your inbox and follow the instructions in the email."
+msgstr ""
+"Ti abbiamo inviato via email un link sicuro per cambiare la tua password. "
+"Segui le istruzioni nella mail."
+
+msgid ""
+"On your last login attempt, we detected that your password is not secure. To "
+"prevent account theft, we require that you confirm your email address before "
+"changing your password."
+msgstr ""
+"Durante il tuo ultimo tentativo di login, abbiamo rilevato che la tua "
+"password non è sufficientemente sicura. Per prevenire furti di account, ti "
+"chiediamo di confermare il tuo indirizzo email prima di cambiare la password."
+
+msgid "Request secure link"
+msgstr "Richiedi link sicuro"
 
 msgid "Password reset successfully"
 msgstr "Password resettata con successo"
@@ -7913,14 +8033,6 @@ msgid ""
 msgstr ""
 "Iscrivendoti ad AstroBin, accetti le nostre <a href=\"https://welcome."
 "astrobin.com/terms-of-service\">condizioni d'uso</a>."
-
-msgid "Sort"
-msgstr "Ordina"
-
-msgid "The Sort options have moved to the filters sidebar."
-msgstr ""
-"Le opzioni di ordinamento sono state spostate nella barra laterale dei "
-"filtri."
 
 msgid "This list is currently empty."
 msgstr "Questa lista è al momento vuota."
@@ -8304,6 +8416,24 @@ msgstr "Galleria di %(user)s"
 msgid "Astrophotography by %(user)s on AstroBin"
 msgstr "Astrofotografia di %(user)s su AstroBin"
 
+msgid "Would you like to try the new gallery experience?"
+msgstr "Vuoi provare la nuova galleria?"
+
+msgid ""
+"AstroBin has a new gallery experience that is faster, better on mobile, more "
+"modern, more user-friendly. Try it out now, you can always switch back to "
+"the old one in your preferences."
+msgstr ""
+"AstroBin ha una nuova galleria che è più veloce, migliore da dispositivi "
+"mobili, più moderna, più user-friendly. Provala adesso, puoi sempre tornare "
+"alla vecchia nelle tue impostazioni."
+
+msgid "Enable"
+msgstr "Attiva"
+
+msgid "Nah, I'm good"
+msgstr "No, sto bene così"
+
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
 "can show people individual images by sharing them using the <em>Share</em> "
@@ -8641,11 +8771,14 @@ msgstr "Following"
 msgid "Friends"
 msgstr "Amici"
 
+msgid "Sort"
+msgstr "Ordina"
+
 msgid "Lacking data"
 msgstr "Senza dati"
 
 msgid "Collection tools"
-msgstr "Strumenti della cartella"
+msgstr "Strumenti della raccolta"
 
 msgid "Add/remove images"
 msgstr "Aggiungi/rimuovi immagini"
@@ -8699,21 +8832,21 @@ msgid ""
 "Click on the images to include them in this collection (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
-"Clicca sulle immagini per includerle in questa cartella (e clicca  di nuovo "
+"Clicca sulle immagini per includerle in questa raccolta (e clicca  di nuovo "
 "per escluderle). Poi clicca sul tasto Salva in fondo."
 
 msgid "Delete collection?"
-msgstr "Cancellare la cartella?"
+msgstr "Cancellare la raccolta?"
 
 msgid ""
 "The collection will be permanently deleted and cannot be recovered. The "
 "images it contains, though, are not going to be deleted. Are you sure?"
 msgstr ""
-"La cartella sarà cancellata permanentemente e non può essere ripristinata. "
-"Le immagini che contiene, invce, non saranno cancellate. Sei sicuro?"
+"La raccolta sarà cancellata permanentemente e non può essere ripristinata. "
+"Le immagini che contiene, invece, non saranno cancellate. Sei sicuro?"
 
 msgid "Images in no collection"
-msgstr "Immagini in nessuna cartella"
+msgstr "Immagini in nessuna raccolta"
 
 #, python-format
 msgid ""
@@ -8722,23 +8855,23 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"                        Una cartella di %(username)s\n"
+"                        Una raccolta di %(username)s\n"
 "                    "
 
 msgid "Images not in a collection"
-msgstr "Immagini non presenti in una cartella"
+msgstr "Immagini non presenti in una raccolta"
 
 msgid "Nested collections"
-msgstr "Cartelle nidificate"
+msgstr "Raccolte nidificate"
 
 msgid "Parent collection:"
-msgstr "Cartella madre:"
+msgstr "Raccolta genitore:"
 
 msgid "View all collections"
-msgstr "Visualizza tutte le cartelle"
+msgstr "Visualizza tutte le raccolte"
 
 msgid "Images in this collection"
-msgstr "Immagini in questa cartella"
+msgstr "Immagini in questa raccolta"
 
 msgid ""
 "The following images do not have the key/value tag chosen to order this "
@@ -8748,19 +8881,19 @@ msgstr ""
 "questa collezione, quindi sono mostrate qui senza un ordine particolare."
 
 msgid "This collection contains no images."
-msgstr "Questa cartella non contiene alcuna immagine."
+msgstr "Questa raccolta non contiene alcuna immagine."
 
 msgid "Would you like to add some images?"
 msgstr "Vorresti aggiungere delle immagini?"
 
 msgid "You do not have any collections."
-msgstr "Non hai alcuna cartella."
+msgstr "Non hai alcuna raccolta."
 
 msgid "Quick edit: key/value tags"
 msgstr "Modifica rapida: tag chiave/valore"
 
 msgid "Edit collection"
-msgstr "Modifica cartella"
+msgstr "Modifica raccolta"
 
 msgid "Show filters"
 msgstr "Mostra filtri"
@@ -8899,6 +9032,12 @@ msgid ""
 msgstr ""
 "I risultati includeranno immagini acquisite in uno qualsiasi dei mesi "
 "selezionati."
+
+msgid "Match choices"
+msgstr "Opzioni di ricerca"
+
+msgid "Any"
+msgstr "Qualsiasi"
 
 msgid "January"
 msgstr "Gennaio"
@@ -9131,7 +9270,7 @@ msgid "Earth's moon"
 msgstr "Luna terrestre"
 
 msgid "Annular solar eclipse"
-msgstr ""
+msgstr "Eclisse solare anulare"
 
 msgid "Other solar system object"
 msgstr "Altro corpo del sistema solare"
@@ -9416,27 +9555,36 @@ msgstr "Immagine caricata. Grazie!"
 msgid "Sorry, AstroBin was unable to activate the requested language"
 msgstr "Spiacenti, AstroBin non ha potuto attivare la lingua richiesta."
 
+msgid "Your secure password reset link"
+msgstr "Il tuo link sicuro per il reset della password"
+
+msgid "There was an error sending the email."
+msgstr "C'è stato un errore nello spedire la mail."
+
+msgid "Please confirm that you are not a robot."
+msgstr "Conferma che non sei un bot."
+
 msgid "Setting this collection as a parent would create a cycle"
-msgstr "L'impostazione di questa cartelle come madre creerebbe un ciclo"
+msgstr "L'impostazione di questa raccolta come genitore creerebbe un ciclo"
 
 msgid "You already have a collection with that name"
-msgstr "Hai già una cartella con quel nome"
+msgstr "Hai già una raccolta con quel nome"
 
 msgid "Collection updated!"
-msgstr "Cartella modificata!"
+msgstr "Raccolta modificata!"
 
 msgid ""
 "Please note: some of the images you added are in your staging area and won't "
 "be visible to visitors of this collection."
 msgstr ""
 "Nota: alcune delle immagini che hai aggiunto si trovano nella tua area di "
-"lavoro e non saranno visibili ai visitatori di questa cartella."
+"lavoro e non saranno visibili ai visitatori di questa raccolta."
 
 msgid "Images updated!"
 msgstr "Immagini modificate!"
 
 msgid "Collection deleted!"
-msgstr "Cartella cancellata!"
+msgstr "Raccolta cancellata!"
 
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
@@ -9560,6 +9708,16 @@ msgstr ""
 #~ msgid "Acquisition time"
 #~ msgstr "Data di acquisizione"
 
+#~ msgid ""
+#~ "Select if you want your Staging Area images to appear on your own view of "
+#~ "your gallery when you are logged. If you choose 'No', your Staging Area "
+#~ "images can be located via the 'View' menu entry on your gallery page."
+#~ msgstr ""
+#~ "Seleziona se vuoi che te le tue immagini nell'Area di Lavoro siano "
+#~ "mostrate quando vedi la tua galleria dopo aver fatto il login. Se scegli "
+#~ "di no, le tue immagini nell'Area di Lavoro possono essere trovate usando "
+#~ "il menu \"Visualizza\" sulla tua galleria."
+
 #~ msgid "Romanian / Moldavian / Moldovan"
 #~ msgstr "Rumeno / Moldavo / Moldovo"
 
@@ -9648,6 +9806,12 @@ msgstr ""
 
 #~ msgid "The Big Wall"
 #~ msgstr "Il Grande Muro"
+
+#~ msgid "Contact"
+#~ msgstr "Contattaci"
+
+#~ msgid "My places"
+#~ msgstr "I miei posti"
 
 #~ msgid ""
 #~ "AstroBin saves small pieces of text information (cookies) on your device "
@@ -9958,6 +10122,27 @@ msgstr ""
 
 #~ msgid "The following comment of yours was just approved by a moderator."
 #~ msgstr "Il seguente commento è stato approvato da un moderatore."
+
+#~ msgid ""
+#~ "Keep in mind that AstroBin is not meant to be a free service. If you are "
+#~ "still on a free account, you can upload images %(max)s times before you "
+#~ "will be asked to upgrade. More info on the <a href=\"%(url)s\">pricing "
+#~ "page</a>."
+#~ msgstr ""
+#~ "Ricorda che AstroBin non è un servizio gratuito. Se sei ancora con un "
+#~ "account free, puoi caricare immagini al massimo %(max)s volte prima che "
+#~ "ti sarà chiesto di comprare un abbonamento. Per ulteriori informazioni "
+#~ "visita <a href=\"%(url)s\">il prezziario</a>."
+
+#~ msgid ""
+#~ "Keep in mind that AstroBin is not meant to be a free service. If you are "
+#~ "still on a free account, you can upload images %(max)s times before you "
+#~ "will be asked to upgrade. More info on the pricing page:"
+#~ msgstr ""
+#~ "Tieni a mente che AstroBin non è un servizio gratuito. Se hai ancora un "
+#~ "account free, puoi caricare immagini al massimo %(max)s volte prima che "
+#~ "ti venga chiesto di comprare un abbonamento. Ulteriori informazioni sul "
+#~ "prezziario:"
 
 #~ msgid ""
 #~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
@@ -10519,7 +10704,7 @@ msgstr ""
 #~ msgstr "Non ci sono immagini da recuperare."
 
 #~ msgid "Do you want to create a collection now?"
-#~ msgstr "Vuoi creare una cartella adesso?"
+#~ msgstr "Vuoi creare una raccolta adesso?"
 
 #~ msgid "Comments & forums"
 #~ msgstr "Commenti & forum"
@@ -10614,6 +10799,9 @@ msgstr ""
 
 #~ msgid "New image revision by %(user)s on \"%(title)s\""
 #~ msgstr "Nuova versione da %(user)s di \"%(title)s\""
+
+#~ msgid "Your image was nominated to be a Top Pick"
+#~ msgstr "La tua immagine è stata nominata Top Pick"
 
 #~ msgid ""
 #~ "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or "
@@ -10777,6 +10965,11 @@ msgstr ""
 #~ "Questa pagina non è più necessaria, dato che adesso puoi aggiungere nuova "
 #~ "strumentazione direttamente dalla pagina in cui carichi o modifichi "
 #~ "immagini."
+
+#~ msgid "The Sort options have moved to the filters sidebar."
+#~ msgstr ""
+#~ "Le opzioni di ordinamento sono state spostate nella barra laterale dei "
+#~ "filtri."
 
 #~ msgid ""
 #~ "You are seeing this message because you have images on AstroBin "
@@ -11042,6 +11235,14 @@ msgstr ""
 #~ "sull'inserzione sul mercatino <strong>%(target)s</strong>."
 
 #~ msgid ""
+#~ "<strong>%(user)s</strong> replied in a topic to which you are subscribed"
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> ha risposto in un argomento a cui sei iscritto"
+
+#~ msgid "Marketplace listings"
+#~ msgstr "Inserzioni nel mercatino"
+
+#~ msgid ""
 #~ "\n"
 #~ "                            AstroBin's Marketplace has <strong>%(count)s</"
 #~ "strong> items similar to what you're\n"
@@ -11053,3 +11254,12 @@ msgstr ""
 #~ "%(count)s</strong> articoli simili a quello che stai\n"
 #~ "                            cercando!\n"
 #~ "                        "
+
+#~ msgid ""
+#~ "As AstroBin has detected that your current password is insecure, you may "
+#~ "not change it yourself. Please <a href=\"%(contact_url)s\">contact us</a> "
+#~ "to request a password reset."
+#~ msgstr ""
+#~ "Dato che AstroBin ha rilevato che la tua password al momento non è "
+#~ "sicura, non puoi cambiarla da solo. <a href=\"%(contact_url)s"
+#~ "\">Contattaci</a> per richiedere un reset della password."

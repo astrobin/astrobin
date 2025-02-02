@@ -1,20 +1,12 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
-"PO-Revision-Date: 2024-07-06 13:25+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: French\n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
 
 msgid "You have a new follower"
 msgstr "Vous avez un nouvel abonné"
@@ -53,13 +45,13 @@ msgid "Your unapproved equipment item received a comment"
 msgstr "Votre équipement non-validé a été commenté"
 
 msgid "Your listing has a new private conversation"
-msgstr ""
+msgstr "Votre annonce a reçu une nouvelle conversation privée."
 
 msgid "Your private conversation has a new comment"
-msgstr ""
+msgstr "Votre annonce a reçu un nouveau commentaire"
 
 msgid "Your listing has a new question"
-msgstr ""
+msgstr "Votre annonce a reçu une nouvelle question"
 
 msgid "There was a reply to your comment"
 msgstr "Quelqu'un a répondu à votre commentaire"
@@ -113,7 +105,7 @@ msgid "New forum topic for an equipment item you use"
 msgstr "Nouveau sujet sur un équipement que vous utilisez"
 
 msgid "New forum topic for an equipment item you follow"
-msgstr ""
+msgstr "Nouveau sujet de discussion relatif à un matériel que vous suivez"
 
 msgid "Your forum topic was moved"
 msgstr "Le sujet de votre forum a été déplacé"
@@ -147,7 +139,7 @@ msgid "New reply in a subscribed forum topic"
 msgstr "Nouvelle réponse dans une discussion que vous suivez"
 
 msgid "New reply in a forum topic that you started"
-msgstr ""
+msgstr "Nouvelle réponse dans un sujet de discussion que vous avez créé"
 
 msgid "You were mentioned in a forum post"
 msgstr "Vous avez été mentionné dans un message"
@@ -188,6 +180,8 @@ msgstr ""
 
 msgid "Your IOTD staff activity is insufficient"
 msgstr ""
+"Votre activité en tant que membre du process de sélection de l'Image du Jour "
+"(IOTD) est insuffisante. "
 
 msgid "An image you promoted made it to Top Pick"
 msgstr "Une image que vous avez promue a été nommée Top Pick"
@@ -196,13 +190,19 @@ msgid "An image you promoted made it to IOTD"
 msgstr "Une image que vous avez promue a été élue Image du Jour"
 
 msgid "An image you dismissed made it to Top Pick"
-msgstr ""
+msgstr "Une image que vous avez rejetée a été sélectionnée comme Top Pick"
 
 msgid "An image you dismissed made it to IOTD"
+msgstr "Une image que vous avez rejetée a été élue Image du Jour (IOTD)"
+
+msgid "Your image might become a Top Pick Nomination"
 msgstr ""
 
-msgid "Your image was nominated to be a Top Pick"
-msgstr "Votre image a été nominée Top Pick"
+msgid "Your image might become a Top Pick"
+msgstr ""
+
+msgid "Your image was voted Top Pick Nomination"
+msgstr ""
 
 msgid "Your image was voted Top Pick"
 msgstr "Votre image a été élue Top Pick"
@@ -211,7 +211,7 @@ msgid "Your image was voted Image of the Day"
 msgstr "Votre image a été élue Image du Jour (IOTD)"
 
 msgid "Your IOTD staff member stats"
-msgstr ""
+msgstr "Vos stats dans le process de sélection IOTD"
 
 msgid "You were mentioned in an image description"
 msgstr "Vous avez été mentionné dans la description d'une image"
@@ -220,13 +220,13 @@ msgid "A gear item that you used was renamed"
 msgstr "Un équipement que vous utilisez a été renommé"
 
 msgid "Collaboration Request: Accept or Deny"
-msgstr ""
+msgstr "Demande de Collaboration : accepter ou refuser"
 
 msgid "User accepted your collaboration request"
-msgstr ""
+msgstr "L'utilisateur a accepté votre demande de collaboration"
 
 msgid "User denied your collaboration request"
-msgstr ""
+msgstr "L'utilisateur a refusé votre demande de collaboration"
 
 msgid "You were added as a collaborator to an image"
 msgstr "Vous avez été ajouté en tant que contributeur d'une image"
@@ -259,6 +259,9 @@ msgstr "Tentative de connexion avec un mot de passe faible"
 
 #~ msgid "You have no new notifications."
 #~ msgstr "Vous n'avez aucune nouvelle notification."
+
+#~ msgid "Your image was nominated to be a Top Pick"
+#~ msgstr "Votre image a été nominée Top Pick"
 
 #~ msgid "Your image was submitted for IOTD/TP consideration"
 #~ msgstr "Votre image a été soumise pour l'IOTD/TP"

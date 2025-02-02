@@ -1,20 +1,12 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
-"PO-Revision-Date: 2024-07-06 13:25+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: Italian\n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 108448\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
 
 msgid "Small"
 msgstr "Piccolo"
@@ -65,6 +57,12 @@ msgstr ""
 
 msgid "Show equatorial grid"
 msgstr "Mostra la griglia equatoriale"
+
+msgid "Show ecliptic"
+msgstr "Mostra eclittica"
+
+msgid "Show galactic equator"
+msgstr "Mostra equatore galattico"
 
 msgid "Show constellation borders"
 msgstr "Mostra confini costellazioni"
@@ -162,6 +160,18 @@ msgstr "Mostra oggetti CGPN"
 
 msgid "Show quasars"
 msgstr "Mostra quasar"
+
+msgid "Publicly visible astrometry.net submission"
+msgstr "Pagina astrometry.net pubblica"
+
+msgid ""
+"If checked, the astrometry.net submission will be publicly visible. If you "
+"leave this unchecked,you won't be able to see the full log of the astrometry."
+"net submission, but the image will stillbe plate-solved and annotated."
+msgstr ""
+"Se selezionato, la pagina di astrometry.net sarà visibile pubblicamente. "
+"Altrimenti, non potrai vedere il log completo del processo su astrometry."
+"net, ma l'immagine sarà comunque risolta e annotata."
 
 msgid "Perform a blind solve"
 msgstr "Fai la riduzione alla cieca"
@@ -261,26 +271,21 @@ msgstr "Avanzata fallita"
 msgid "Advanced success"
 msgstr "Avanzata riuscita"
 
+msgid "Loading..."
+msgstr "Caricamento..."
+
 msgid "Getting plate-solving status, please wait..."
 msgstr "Controllo dello stato della riduzione astrometrica, attendere..."
 
-msgid "Plate-solving starting, please do not leave this page..."
+msgid "AstroBin is plate-solving this image with Astrometry.net..."
 msgstr ""
-"Riduzione astrometrica in fase di iniziazione, non chiudere questa pagina..."
+"AstroBin sta facendo la riduzione astrometrica di questa immagine con "
+"Astrometry.net..."
 
-msgid "Advanced plate-solving starting, please do not leave this page..."
+msgid "AstroBin is plate-solving this image with PixInsight..."
 msgstr ""
-"Riduzione astrometrica iavanzata n fase di iniziazione, non chiudere questa "
-"pagina..."
-
-msgid "Plate-solving started. You may leave this page."
-msgstr "Riduzione astrometrica in corso. Puoi chiudere questa pagina."
-
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr "Riduzione astrometrica avanzata in corso. Puoi chiudere questa pagina."
-
-msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr "Riduzione astrmetrica quasi pronta, non chiudere questa pagina..."
+"AstroBin sta facendo la riduzione astrometrica di questa immagine con "
+"PixInsight..."
 
 msgid "This image could not be plate-solved."
 msgstr "Non è stato possibile ridurre l'immagine astrometricamente."
@@ -404,6 +409,26 @@ msgstr "Chiudi"
 
 msgid "Invalid"
 msgstr "Invalido"
+
+#~ msgid "Plate-solving starting, please do not leave this page..."
+#~ msgstr ""
+#~ "Riduzione astrometrica in fase di iniziazione, non chiudere questa "
+#~ "pagina..."
+
+#~ msgid "Advanced plate-solving starting, please do not leave this page..."
+#~ msgstr ""
+#~ "Riduzione astrometrica iavanzata n fase di iniziazione, non chiudere "
+#~ "questa pagina..."
+
+#~ msgid "Plate-solving started. You may leave this page."
+#~ msgstr "Riduzione astrometrica in corso. Puoi chiudere questa pagina."
+
+#~ msgid "Advanced plate-solving started. You may leave this page."
+#~ msgstr ""
+#~ "Riduzione astrometrica avanzata in corso. Puoi chiudere questa pagina."
+
+#~ msgid "Plate-solving almost ready, please do not leave this page..."
+#~ msgstr "Riduzione astrmetrica quasi pronta, non chiudere questa pagina..."
 
 #~ msgid ""
 #~ "AstroBin could not plate-solve this image because nova.astrometry.net "

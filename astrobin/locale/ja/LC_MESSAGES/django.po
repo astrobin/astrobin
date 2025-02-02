@@ -1,20 +1,20 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-15 11:11+0000\n"
-"PO-Revision-Date: 2024-07-14 23:24+0200\n"
-"Last-Translator: Salvatore Iovene\n"
-"Language-Team: Japanese\n"
+"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Loco https://localise.biz\n"
-"X-Loco-Source-Locale: en\n"
-"X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.28 20240611-1\n"
+
+msgid ""
+"You have reached the maximum number of saved searches. Please delete some to "
+"make room for new ones."
+msgstr ""
+
+msgid "You already have a saved search with this name."
+msgstr ""
 
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
@@ -788,6 +788,9 @@ msgstr ""
 "合、このコレクション内の画像には key/valueタグがないためです。追記：このタグ"
 "がない画像は、コレクションの一番下に表示されます。"
 
+msgid "Use the most recent image automatically"
+msgstr ""
+
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "以下のフォーマットをご利用ください： yyyy-mm-dd"
 
@@ -834,6 +837,9 @@ msgid ""
 msgstr ""
 "この画像の上にマウスを置いたときに表示される内容を選択してください。注意：オ"
 "リジナル画像と同じ幅と高さの修正版のみが考慮されます。"
+
+msgid "Nothing"
+msgstr "なし"
 
 msgid "Key/value tags"
 msgstr "Key/value タグ"
@@ -977,6 +983,15 @@ msgstr "望遠鏡とレンズ"
 msgid "Cameras"
 msgstr "カメラ"
 
+msgid "Let AstroBin decide"
+msgstr ""
+
+msgid "Yes"
+msgstr "はい"
+
+msgid "No"
+msgstr "いいえ"
+
 msgid ""
 "Sorry, you cannot automatically submit images for IOTD/TP consideration if "
 "you have not had any images selected as Top Pick or Image of the Day before. "
@@ -1070,6 +1085,12 @@ msgid "Europe"
 msgstr ""
 
 msgid "Americas"
+msgstr ""
+
+msgid "North America"
+msgstr ""
+
+msgid "South America"
 msgstr ""
 
 msgid "Africa"
@@ -1562,6 +1583,9 @@ msgstr "夜光雲"
 msgid "Landscape"
 msgstr ""
 
+msgid "Artificial satellite"
+msgstr ""
+
 msgid "Gear"
 msgstr "機材"
 
@@ -1597,9 +1621,6 @@ msgstr "該当なし"
 
 msgid "Non-commercial independent facility"
 msgstr "非商用の独立施設"
-
-msgid "Nothing"
-msgstr "なし"
 
 msgid "Plate-solution annotations (if available)"
 msgstr "プレートソルビングのソリューションの解説（可能な場合）"
@@ -2154,17 +2175,41 @@ msgstr "星座"
 msgid "Default gallery sorting"
 msgstr "ギャラリーのデフォルトの並び替え"
 
+msgid "Allow image adjustments widget on your images"
+msgstr ""
+
+msgid ""
+"If you disable this option, the image adjustments widget will not be shown "
+"on your images. This setting only affects the new gallery and search "
+"experiences."
+msgstr ""
+
+msgid "Maximum zoom allowed on your images"
+msgstr ""
+
+msgid ""
+"Select the maximum zoom allowed on your images. 1x refers to the native "
+"resolution of an image. This setting only affects the new gallery and search "
+"experiences."
+msgstr ""
+
+msgid "Display collections on your public gallery"
+msgstr ""
+
+msgid ""
+"Select if you want your collections to be displayed on your public gallery. "
+"If you disable this, your collections will be displayed separately. This "
+"setting only affects the new gallery experience."
+msgstr ""
+
 msgid "See your own Staging Area images on your gallery"
 msgstr "自分のステージングエリアの画像をギャラリーで見ることができる"
 
 msgid ""
 "Select if you want your Staging Area images to appear on your own view of "
-"your gallery when you are logged. If you choose 'No', your Staging Area "
-"images can be located via the 'View' menu entry on your gallery page."
+"your gallery when you are logged in. If you disable this, your Staging Area "
+"images can be visible separately (only to you."
 msgstr ""
-"ログイン時にステージングエリアのイメージを自分のギャラリーのビューに表示させ"
-"るかどうかを選択します。「いいえ」を選択した場合、ステージングエリアの画像"
-"は、ギャラリーページの「表示」メニュー項目から確認することができます。"
 
 msgid "Default license"
 msgstr "デフォルトライセンス"
@@ -2229,6 +2274,25 @@ msgstr ""
 "AstroBinは、天文および天体写真機器の小売業者と提携して、スポンサーパートナー"
 "へのリンクで機器アイテムの表示を強化することがあります。この統合は微妙で邪魔"
 "にならないので、無効化しないでいただけると助かります。よろしくお願いします。"
+
+msgid "Enable new search experience"
+msgstr ""
+
+msgid ""
+"Enable the new search experience, which includes new filters and a new "
+"layout."
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
+
+msgid "Enable new gallery experience"
+msgstr ""
+
+msgid ""
+"Enable the new gallery experience, with improved navigation and a new image "
+"viewer."
+msgstr ""
 
 msgid "Language"
 msgstr "言語"
@@ -3220,18 +3284,8 @@ msgid ""
 "AstroBin detected that your password does not meet security requirements."
 msgstr ""
 
-msgid ""
-"To prevent spam, phishing, and other malicious activities, all your new "
-"content posted on AstroBin will be moderated until you have changed your "
-"password to meet security requirements, or you have enabled two-factor "
-"authentication."
-msgstr ""
-
 msgid "Change your password"
 msgstr "パスワードの変更"
-
-msgid "Two-factor Authentication"
-msgstr ""
 
 msgid "Save"
 msgstr "保存する"
@@ -3677,6 +3731,9 @@ msgstr "高度な検索"
 msgid "Constellations"
 msgstr "星座"
 
+msgid "IOTD/TP Archive"
+msgstr ""
+
 msgid "Remote astrophotography"
 msgstr "リモート天体撮影"
 
@@ -3688,6 +3745,9 @@ msgstr "(β)"
 
 msgid "Help"
 msgstr "ヘルプ"
+
+msgid "What is this site?"
+msgstr "このサイトについて教えてください。"
 
 msgid "Support"
 msgstr ""
@@ -3723,9 +3783,6 @@ msgstr ""
 "<strong>Contribution Index (β)</strong>は、AstroBinへの有益で建設的、かつ価値"
 "あるコメントに対して贈られるシステムです。%(_0)sLearn more.%(_1)s"
 
-msgid "My places"
-msgstr "マイプレイス"
-
 msgid "Public Gallery"
 msgstr "公開ギャラリー"
 
@@ -3737,12 +3794,6 @@ msgstr "ブックマーク"
 
 msgid "My messages"
 msgstr "メッセージ"
-
-msgid "Received"
-msgstr "受信"
-
-msgid "Sent"
-msgstr "送信"
 
 msgid "API Keys"
 msgstr "APIキー"
@@ -3845,6 +3896,9 @@ msgstr "フォーラムへの投稿"
 
 msgid "Written"
 msgstr "書き込み"
+
+msgid "Received"
+msgstr "受信"
 
 msgid "Accepted"
 msgstr ""
@@ -4511,9 +4565,6 @@ msgstr ""
 msgid "The following people like this image"
 msgstr "この画像を「いいね！」しているユーザーは以下です"
 
-msgid "Warning"
-msgstr "警告"
-
 msgid "This image cannot be submitted for the IOTD/TP consideration."
 msgstr "この画像はIOTD/TPの選考に応募ことはできません。"
 
@@ -4922,6 +4973,9 @@ msgstr "銀河系経度"
 msgid "Galactic latitude"
 msgstr "銀河系緯度"
 
+msgid "Warning"
+msgstr "警告"
+
 msgid ""
 "You are about to open a large file. Depending on your download speed, it "
 "might take several seconds or even minutes to view the file."
@@ -5087,18 +5141,6 @@ msgstr ""
 "この場所のデータが不足している、または誤ったデータがある場合は、修正をお願い"
 "します。"
 
-msgid "What is this site?"
-msgstr "このサイトについて教えてください。"
-
-msgid "Contact"
-msgstr "お問い合わせ"
-
-msgid "Gallery"
-msgstr "ギャラリー"
-
-msgid "Marketplace listings"
-msgstr ""
-
 msgid "Compose message"
 msgstr "メッセージの作成"
 
@@ -5122,6 +5164,9 @@ msgstr "最終送信日"
 
 msgid "No messages"
 msgstr "メッセージなし"
+
+msgid "Sent"
+msgstr "送信"
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -5214,11 +5259,21 @@ msgid ""
 msgstr ""
 
 msgid ""
+"To prevent spam, phishing, and other malicious activities, all your new "
+"content posted on AstroBin will be moderated until you have changed your "
+"password to meet security requirements, or you have enabled two-factor "
+"authentication."
+msgstr ""
+
+msgid ""
 "We recommend that you change your password as soon as possible, for your "
 "security and the safety of the other members of the AstroBin community."
 msgstr ""
 
 msgid "Learn more about security standards on AstroBin:"
+msgstr ""
+
+msgid "Two-factor Authentication"
 msgstr ""
 
 msgid ""
@@ -5302,13 +5357,11 @@ msgstr "そこで、私からもいくつかのアドバイスをさせてくだ
 
 #, python-format
 msgid ""
-"Keep in mind that AstroBin is not meant to be a free service. If you are "
-"still on a free account, you can upload images %(max)s times before you will "
-"be asked to upgrade. More info on the <a href=\"%(url)s\">pricing page</a>."
+"AstroBin is a premium service designed to offer exceptional value to its "
+"users. If you're currently using a free account, you can enjoy %(max)s "
+"upload opportunities before upgrading to unlock even more features. For "
+"details, please visit our <a href=\"%(url)s\">pricing page</a>!"
 msgstr ""
-"AstroBinは無料サービスではありませんので、ご注意ください。無料アカウントの場"
-"合、アップグレードを要求されるまでに、%(max)s 回をアップロードすることができ"
-"ます。詳しくは、<a href=\"%(url)s\">価格ページ</a>をご覧ください。"
 
 #, python-format
 msgid ""
@@ -5342,13 +5395,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Keep in mind that AstroBin is not meant to be a free service. If you are "
-"still on a free account, you can upload images %(max)s times before you will "
-"be asked to upgrade. More info on the pricing page:"
+"AstroBin is a premium service designed to offer exceptional value to its "
+"users. If you're currently using a free account, you can enjoy %(max)s "
+"upload opportunities before upgrading to unlock even more features. For "
+"details, please visit our pricing page!"
 msgstr ""
-"AstroBinは無料サービスではありませんので、ご注意ください。無料アカウントの場"
-"合、アップグレードを要求されるまでに、%(max)s 回をアップロードすることができ"
-"ます。詳しくは、価格ページをご覧ください。"
 
 msgid ""
 "New uploads go to your \"staging area\", where they are unlisted. You can "
@@ -6232,11 +6283,6 @@ msgstr ""
 "%(topic_name)s</em> に返信しました。"
 
 #, python-format
-msgid ""
-"<strong>%(user)s</strong> replied in a topic to which you are subscribed"
-msgstr ""
-
-#, python-format
 msgid "%(user)s replied in a topic to which you are subscribed"
 msgstr ""
 
@@ -6745,8 +6791,27 @@ msgstr ""
 msgid "Your image was voted Top Pick"
 msgstr "あなたの画像がTop Pickに選ばれました"
 
-msgid "Your image was nominated to be a Top Pick"
-msgstr "あなたの画像がTop Pickに選ばれました"
+msgid "Your image was voted Top Pick Nomination"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your image %(_prefix)s%(image_title)s%(_suffix)s received enough votes and "
+"might become a Top Pick or higher"
+msgstr ""
+
+msgid ""
+"Note: AstroBin awards (Top Pick Nomination, Top Pick, Image of the Day) are "
+"assigned only after votes are finalized, ensuring no votes are retracted and "
+"the image reaches its final award level. Awards are not assigned "
+"sequentially."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your image %(_prefix)s%(image_title)s%(_suffix)s received enough votes and "
+"might become a Top Pick Nomination or higher"
+msgstr ""
 
 msgid "Your IOTD/TP staff member stats"
 msgstr ""
@@ -6939,6 +7004,9 @@ msgstr "画像をみる"
 msgid "Member since"
 msgstr "会員登録日"
 
+msgid "Gallery"
+msgstr "ギャラリー"
+
 msgid "Every equipment item on AstroBin has a forum associated with it."
 msgstr "AstroBinのすべての機材には、それに関連するフォーラムがあります。"
 
@@ -6977,12 +7045,6 @@ msgstr ""
 
 msgid "Do you want to post about a specific equipment item or software?"
 msgstr ""
-
-msgid "Yes"
-msgstr "はい"
-
-msgid "No"
-msgstr "いいえ"
 
 msgid ""
 "Anybody who used an equipment item is notified of new topics in its forum, "
@@ -7185,6 +7247,9 @@ msgstr "何か問題が発生したようです。もう一度お試しくださ
 msgid "(deleted)"
 msgstr "（削除）"
 
+msgid "Topic starter"
+msgstr ""
+
 msgctxt "Noun, e.g. 'This element has 1 view'"
 msgid "view"
 msgstr "閲覧する"
@@ -7381,11 +7446,26 @@ msgstr "ログアウトされました。また来てください。"
 msgid "Password changed"
 msgstr "パスワードを変更しました"
 
-#, python-format
+msgid "Request a secure link to change your password"
+msgstr ""
+
 msgid ""
-"As AstroBin has detected that your current password is insecure, you may not "
-"change it yourself. Please <a href=\"%(contact_url)s\">contact us</a> to "
-"request a password reset."
+"Your password is already secure, and you can change it at any time. You do "
+"not need to request a secure link to change your password."
+msgstr ""
+
+msgid ""
+"We have emailed you with a secure link to change your password. Please check "
+"your inbox and follow the instructions in the email."
+msgstr ""
+
+msgid ""
+"On your last login attempt, we detected that your password is not secure. To "
+"prevent account theft, we require that you confirm your email address before "
+"changing your password."
+msgstr ""
+
+msgid "Request secure link"
 msgstr ""
 
 msgid "Password reset successfully"
@@ -7452,12 +7532,6 @@ msgid ""
 msgstr ""
 "AstroBinに登録することにより、お客様は当サービスの<a href=\"https://welcome."
 "astrobin.com/terms-of-service\">利用規約</a>に同意したことになります。"
-
-msgid "Sort"
-msgstr "並べ替え"
-
-msgid "The Sort options have moved to the filters sidebar."
-msgstr "並べ替えオプションは、フィルター用のサイドバーに移動しました。"
 
 msgid "This list is currently empty."
 msgstr "このリストは現在空です。"
@@ -7792,6 +7866,21 @@ msgstr "%(user)s のギャラリー"
 msgid "Astrophotography by %(user)s on AstroBin"
 msgstr ""
 
+msgid "Would you like to try the new gallery experience?"
+msgstr ""
+
+msgid ""
+"AstroBin has a new gallery experience that is faster, better on mobile, more "
+"modern, more user-friendly. Try it out now, you can always switch back to "
+"the old one in your preferences."
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Nah, I'm good"
+msgstr ""
+
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
 "can show people individual images by sharing them using the <em>Share</em> "
@@ -8115,6 +8204,9 @@ msgstr "フォロー"
 msgid "Friends"
 msgstr "友達"
 
+msgid "Sort"
+msgstr "並べ替え"
+
 msgid "Lacking data"
 msgstr "データ欠落"
 
@@ -8359,6 +8451,12 @@ msgstr "選択"
 
 msgid ""
 "Results will include images that were acquired in any of the selected months."
+msgstr ""
+
+msgid "Match choices"
+msgstr ""
+
+msgid "Any"
 msgstr ""
 
 msgid "January"
@@ -8838,6 +8936,15 @@ msgstr ""
 "申し訳ありませんが、AstroBinは要求された言語を有効にすることができませんでし"
 "た。"
 
+msgid "Your secure password reset link"
+msgstr ""
+
+msgid "There was an error sending the email."
+msgstr ""
+
+msgid "Please confirm that you are not a robot."
+msgstr ""
+
 msgid "Setting this collection as a parent would create a cycle"
 msgstr ""
 
@@ -8974,6 +9081,15 @@ msgstr ""
 #~ msgid "Acquisition time"
 #~ msgstr "撮影日"
 
+#~ msgid ""
+#~ "Select if you want your Staging Area images to appear on your own view of "
+#~ "your gallery when you are logged. If you choose 'No', your Staging Area "
+#~ "images can be located via the 'View' menu entry on your gallery page."
+#~ msgstr ""
+#~ "ログイン時にステージングエリアのイメージを自分のギャラリーのビューに表示さ"
+#~ "せるかどうかを選択します。「いいえ」を選択した場合、ステージングエリアの画"
+#~ "像は、ギャラリーページの「表示」メニュー項目から確認することができます。"
+
 #~ msgid "Romanian / Moldavian / Moldovan"
 #~ msgstr "ルーマニア語"
 
@@ -9062,6 +9178,12 @@ msgstr ""
 
 #~ msgid "The Big Wall"
 #~ msgstr "The Big Wall"
+
+#~ msgid "Contact"
+#~ msgstr "お問い合わせ"
+
+#~ msgid "My places"
+#~ msgstr "マイプレイス"
 
 #~ msgid ""
 #~ "AstroBin saves small pieces of text information (cookies) on your device "
@@ -9357,6 +9479,25 @@ msgstr ""
 #~ msgid "The following comment of yours was just approved by a moderator."
 #~ msgstr ""
 #~ "あなたの以下のコメントは、モデレーターによって承認されたところです。"
+
+#~ msgid ""
+#~ "Keep in mind that AstroBin is not meant to be a free service. If you are "
+#~ "still on a free account, you can upload images %(max)s times before you "
+#~ "will be asked to upgrade. More info on the <a href=\"%(url)s\">pricing "
+#~ "page</a>."
+#~ msgstr ""
+#~ "AstroBinは無料サービスではありませんので、ご注意ください。無料アカウントの"
+#~ "場合、アップグレードを要求されるまでに、%(max)s 回をアップロードすることが"
+#~ "できます。詳しくは、<a href=\"%(url)s\">価格ページ</a>をご覧ください。"
+
+#~ msgid ""
+#~ "Keep in mind that AstroBin is not meant to be a free service. If you are "
+#~ "still on a free account, you can upload images %(max)s times before you "
+#~ "will be asked to upgrade. More info on the pricing page:"
+#~ msgstr ""
+#~ "AstroBinは無料サービスではありませんので、ご注意ください。無料アカウントの"
+#~ "場合、アップグレードを要求されるまでに、%(max)s 回をアップロードすることが"
+#~ "できます。詳しくは、価格ページをご覧ください。"
 
 #~ msgid ""
 #~ "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
@@ -9998,6 +10139,9 @@ msgstr ""
 #~ msgid "New image revision by %(user)s on \"%(title)s\""
 #~ msgstr "%(user)s による \"%(title)s\"の新しい修正版"
 
+#~ msgid "Your image was nominated to be a Top Pick"
+#~ msgstr "あなたの画像がTop Pickに選ばれました"
+
 #~ msgid ""
 #~ "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or "
 #~ "Premium</a> subscription."
@@ -10154,6 +10298,9 @@ msgstr ""
 #~ msgstr ""
 #~ "画像のアップロードや編集の際に、新しい機材を直接追加できるため、このページ"
 #~ "は不要になりました。"
+
+#~ msgid "The Sort options have moved to the filters sidebar."
+#~ msgstr "並べ替えオプションは、フィルター用のサイドバーに移動しました。"
 
 #~ msgid ""
 #~ "You are seeing this message because you have images on AstroBin "
