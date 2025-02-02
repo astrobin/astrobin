@@ -109,4 +109,5 @@ class ImageSearchSerializer(HaystackSerializer):
             'is_iotd',
             'is_top_pick',
             'is_top_pick_nomination',
+            'collaborator_ids',
         ]
