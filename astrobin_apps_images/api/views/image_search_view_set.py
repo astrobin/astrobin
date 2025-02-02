@@ -101,6 +101,7 @@ class ImageSearchViewSet(EncodedSearchViewSet):
 
     def filter_images(self, params: dict, queryset: SearchQuerySet) -> SearchQuerySet:
         queryset = queryset.models(Image)
+        queryset = SearchService.filter_by_title_or_description(params, queryset)
         queryset = SearchService.filter_by_subject(params, queryset)
         queryset = SearchService.filter_by_telescope(params, queryset)
         queryset = SearchService.filter_by_sensor(params, queryset)
@@ -186,7 +187,9 @@ class ImageSearchViewSet(EncodedSearchViewSet):
 
         if text.get('value'):
             log.debug(f"Searching for: {text.get('value')}")
-            queryset = EncodedSearchViewSet.build_search_query(queryset, text)
+
+            if 'onlySearchInTitlesAndDescriptions' not in text:
+                queryset = EncodedSearchViewSet.build_search_query(queryset, text)
 
         queryset = self.filter_images(params, queryset)
 
