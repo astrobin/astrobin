@@ -3019,7 +3019,7 @@ class UserProfile(SafeDeleteModel):
     )
 
     display_collections_on_public_gallery = models.BooleanField(
-        default=True,
+        default=False,
         verbose_name=_("Display collections on your public gallery"),
         help_text=_(
             "Select if you want your collections to be displayed on your public gallery. If you disable this, "
