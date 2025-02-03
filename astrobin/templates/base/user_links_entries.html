@@ -34,6 +34,12 @@
 
 <li class="divider"></li>
 
+<li class="disabled">
+    <a tabindex="-1" href="#">
+        {% trans "My places" %}
+    </a>
+</li>
+
 <li>
     <a href="{% url 'user_page' request.user.username %}">
         <i class="icon-picture"></i>
@@ -60,7 +66,14 @@
 <li>
     <a href="{% url 'messages_inbox' %}">
         <i class="icon-inbox"></i>
-        {% trans "My messages" %}
+        {% trans "Messages" %}
+    </a>
+</li>
+
+<li>
+    <a href="{% app_redirection_service '/equipment/marketplace/users/' %}{{ request.user.username }}/listings">
+        <i class="icon-shopping-cart"></i>
+        {% trans "Marketplace listings" %}
     </a>
 </li>
 
@@ -76,7 +89,7 @@
 <li>
     <a href="{% url 'profile_edit_basic' %}">
         <i class="icon-edit"></i>
-        {% trans "My settings" %}
+        {% trans "Settings" %}
     </a>
 </li>
 
