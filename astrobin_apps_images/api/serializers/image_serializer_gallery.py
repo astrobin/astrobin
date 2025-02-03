@@ -72,6 +72,7 @@ class ImageSerializerGallery(ImageSerializer):
     class Meta(ImageSerializer.Meta):
         fields = (
             'pk',
+            'user',
             'hash',
             'title',
             'is_wip',
