@@ -5,6 +5,7 @@ import urllib.parse
 import urllib.request
 import uuid
 
+from annoying.functions import get_object_or_None
 from dateutil import parser
 from django.conf import settings
 from django.core.files.base import ContentFile
@@ -214,17 +215,22 @@ class SolutionRestartView(APIView):
     permission_classes = (IsSolutionTargetOwnerOrReadOnly,)
 
     def patch(self, request, pk):
-        solution = Solution.objects.get(pk=pk)
-        SolutionService(solution).restart()
-        solution.refresh_from_db()
-        return Response(SolutionSerializer(solution).data, status=HTTP_200_OK)
+        solution = get_object_or_None(Solution, pk=pk)
+        if solution:
+            SolutionService(solution).restart()
+            solution.refresh_from_db()
+            return Response(SolutionSerializer(solution).data, status=HTTP_200_OK)
+        return Response(status=HTTP_200_OK)
 
 
 class SolutionPixInsightMatrix(APIView):
     permission_classes = (ReadOnly,)
 
     def get(self, request, pk):
-        solution = Solution.objects.get(pk=pk)
+        solution = get_object_or_None(Solution, pk=pk)
+        if solution is None:
+            return Response(status=HTTP_200_OK)
+
         matrix = {
             'matrixRect': solution.advanced_matrix_rect,
             'matrixDelta': solution.advanced_matrix_delta,
