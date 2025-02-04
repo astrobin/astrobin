@@ -35,13 +35,19 @@ class FrontPageFeedViewSet(viewsets.ModelViewSet):
     def get_queryset(self) -> QuerySet:
         service = ActivityStreamService(self.request.user)
         if 'personal' in self.request.query_params:
-            return service.get_personal_stream()
+            if self.request.user.is_authenticated:
+                return service.get_personal_stream()
+            else:
+                return service.get_global_stream()
 
         if 'recent' in self.request.query_params:
             return service.get_recent_images()
 
         if 'followed' in self.request.query_params:
-            return service.get_recent_followed_images()
+            if self.request.user.is_authenticated:
+                return service.get_recent_followed_images()
+            else:
+                return service.get_recent_images()
 
         return service.get_global_stream()
 
