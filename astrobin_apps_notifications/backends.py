@@ -33,13 +33,13 @@ class PersistentMessagesBackend(BaseBackend):
         template = 'notice.html'
         message = self.get_formatted_messages([template], notice_type.label, context)[template]
         level = persistent_messages.INFO
-        extra_tags = extra_context.get('extra_tags', None)
+        extra_tags = extra_context.get('extra_tags')
         persistent_message = Message(
             user=recipient,
             from_user=sender,
             level=level,
             message=message,
-            extra_tags=json.dumps(extra_tags) if extra_tags is not None else None,
+            **({"extra_tags": json.dumps(extra_tags)} if extra_tags is not None else {})
         )
         persistent_message.save()
 
