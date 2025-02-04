@@ -67,6 +67,7 @@ from astrobin.sitemaps.telescope_sitemap import TelescopeSitemap
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
@@ -420,7 +421,10 @@ def send_never_activated_account_reminder():
                 'activation_link': '%s/%s' % (
                     settings.BASE_URL,
                     reverse('registration_activate', args=(RegistrationView().get_activation_key(user),)),
-                )
+                ),
+                'extra_tags': {
+                    'context': NotificationContext.AUTHENTICATION
+                },
             }
         )
 

@@ -4,6 +4,7 @@ from django.db.models import Q
 
 from astrobin.enums import SubjectType
 from astrobin.models import Image
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
 
 
@@ -28,5 +29,8 @@ class Command(BaseCommand):
                     'lacking_data_reminder',
                     {
                         'number': number,
-                        'url': build_notification_url(user.get_absolute_url() + '?public&sub=nodata')
+                        'url': build_notification_url(user.get_absolute_url() + '?public&sub=nodata'),
+                        'extra_tags': {
+                            'context': NotificationContext.USER
+                        },
                     })

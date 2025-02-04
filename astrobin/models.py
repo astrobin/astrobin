@@ -29,6 +29,7 @@ from astrobin.utils import generate_unique_hash
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.services import DateTimeService
@@ -43,6 +44,7 @@ try:
     from hashlib import sha1
 except ImportError:
     import sha
+
     sha1 = sha.sha
 
 from django.conf import settings
@@ -259,7 +261,8 @@ class Gear(models.Model):
     name = models.CharField(
         verbose_name=_("Name"),
         help_text=_(
-            "Just the name of this product, without any properties or personal customizations. Try to use the international name, in English language, if applicable. This name is shared among all users on AstroBin."),
+            "Just the name of this product, without any properties or personal customizations. Try to use the international name, in English language, if applicable. This name is shared among all users on AstroBin."
+        ),
         max_length=128,
         null=False,
         blank=False,
@@ -484,7 +487,7 @@ class GearMigrationStrategy(models.Model):
             'gear',
             'user',
         )
-        ordering=('-pk',)
+        ordering = ('-pk',)
 
 
 class GearRenameProposal(models.Model):
@@ -675,7 +678,7 @@ class Telescope(Gear):
 
     def attributes(self):
         return super(Telescope, self).attributes() + \
-               [('aperture', _("mm")), ('focal_length', _("mm"))]
+            [('aperture', _("mm")), ('focal_length', _("mm"))]
 
     def type_label(self):
         if self.type is not None:
@@ -710,7 +713,7 @@ class Mount(Gear):
 
     def attributes(self):
         return super(Mount, self).attributes() + \
-               [('max_payload', _("kg")), ('pe', "\"")]
+            [('max_payload', _("kg")), ('pe', "\"")]
 
     class Meta:
         app_label = 'astrobin'
@@ -763,7 +766,7 @@ class Camera(Gear):
 
     def attributes(self):
         return super(Camera, self).attributes() + \
-               [('sensor_width', _("mm")), ('sensor_height', _("mm")), ('pixel_size', _("&mu;m"))]
+            [('sensor_width', _("mm")), ('sensor_height', _("mm")), ('pixel_size', _("&mu;m"))]
 
     def type_label(self):
         if self.type is not None:
@@ -842,7 +845,7 @@ class Filter(Gear):
 
     def attributes(self):
         return super(Filter, self).attributes() + \
-               [('bandwidth', _("nm"))]
+            [('bandwidth', _("nm"))]
 
     class Meta:
         app_label = 'astrobin'
@@ -1145,7 +1148,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     solar_system_main_subject = models.CharField(
         verbose_name=_("Main solar system subject"),
         help_text=_(
-            "If the main subject of your image is a body in the solar system, please select which (or which type) it is."),
+            "If the main subject of your image is a body in the solar system, please select which (or which type) it is."
+        ),
         null=True,
         blank=True,
         max_length=32,
@@ -1221,7 +1225,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         help_text=_(
             "You can store the final processed image that came out of your favorite image editor (e.g. PixInsight, "
             "Adobe Photoshop, etc) here on AstroBin, for archival purposes. This file is stored privately and only you "
-            "will have access to it."),
+            "will have access to it."
+        ),
         max_length=256,
         null=True,
     )
@@ -1238,7 +1243,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         verbose_name=_('Sharpen thumbnails'),
         help_text=_(
             'If selected, AstroBin will use a resizing algorithm that slightly sharpens all sizes of the image except '
-            'the full size version.')
+            'the full size version.'
+        )
         ,
     )
 
@@ -1618,7 +1624,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 deleted=False,
                 content_type__app_label='astrobin',
                 content_type__model='image',
-                object_id=self.id) \
+                object_id=self.id
+            ) \
                 .select_related('author') \
                 .values_list('author', flat=True) \
                 .distinct()
@@ -1635,7 +1642,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 deleted=False,
                 content_type__app_label='astrobin',
                 content_type__model='image',
-                object_id=self.id) \
+                object_id=self.id
+            ) \
                 .select_related('author') \
                 .values_list('author', flat=True)
             val = [profile.user for profile in UserProfile.objects.filter(user__pk__in=user_pks)]
@@ -1724,7 +1732,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     def thumbnail_cache_key(self, field: FileField, alias: str, revision_label: str) -> str:
         app_model = "{0}.{1}".format(
             self._meta.app_label,
-            self._meta.object_name).lower()
+            self._meta.object_name
+        ).lower()
         cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s_%s' % (
             app_model,
             unicodedata.normalize('NFKD', str(field)).encode('ascii', 'ignore'),
@@ -1936,6 +1945,7 @@ class ImageEquipmentLog(models.Model):
             models.Index(fields=['image']),
         ]
 
+
 class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
         Image,
@@ -2100,7 +2110,8 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
 
     label = models.CharField(
         max_length=2,
-        editable=False)
+        editable=False
+    )
 
     class Meta:
         app_label = 'astrobin'
@@ -2118,8 +2129,10 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
             try:
                 self.w, self.h = get_image_dimensions(self.image_file.file)
             except Exception as e:
-                log.warning("ImageRevision.save: unable to get image dimensions for %d: %s" % (
-                    self.pk if self.pk else 0, str(e)))
+                log.warning(
+                    "ImageRevision.save: unable to get image dimensions for %d: %s" % (
+                        self.pk if self.pk else 0, str(e))
+                    )
                 pass
 
         if self.w == self.image.w and self.h == self.image.h and not self.square_cropping:
@@ -2665,7 +2678,7 @@ class UserProfile(SafeDeleteModel):
         _('I don\'t define myself as an astrophotographer at this time.')
     SKILL_LEVEL_BEGINNER_DESCRIPTION = \
         _('I started out recently and I\'m still getting familiar with the hobby.')
-    SKILL_LEVEL_INTERMEDIATE_DESCRIPTION =\
+    SKILL_LEVEL_INTERMEDIATE_DESCRIPTION = \
         _('I have been doing astrophotography for a while and wouldn\'t classify myself as a beginner anymore.')
     SKILL_LEVEL_ADVANCED_DESCRIPTION = \
         _('I developed a comprehensive set of skills and master most aspects of astrophotography.')
@@ -2784,8 +2797,10 @@ class UserProfile(SafeDeleteModel):
             MaxLengthValidator(31),
             RegexValidator(
                 '^@[\w](?!.*?\.{2})[\w.]{1,28}[\w]$',
-                _('An Instagram username must be between 3 and 30 characters, start with an @ sign, and only '
-                  'have letters, numbers, periods, and underlines.')
+                _(
+                    'An Instagram username must be between 3 and 30 characters, start with an @ sign, and only '
+                    'have letters, numbers, periods, and underlines.'
+                )
             )
         ],
         max_length=31,
@@ -2862,7 +2877,8 @@ class UserProfile(SafeDeleteModel):
         help_text=_(
             "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top "
             "Picks, other custom contests. This will remove you from the leaderboards and hide your Image Index "
-            "and Contribution Index."),
+            "and Contribution Index."
+        ),
     )
 
     auto_submit_to_iotd_tp_process = models.BooleanField(
@@ -3060,14 +3076,16 @@ class UserProfile(SafeDeleteModel):
         default=False,
         verbose_name=_('I accept to receive rare important communications via email'),
         help_text=_(
-            'This is highly recommended. These are very rare and contain information that you probably want to have.')
+            'This is highly recommended. These are very rare and contain information that you probably want to have.'
+        )
     )
 
     receive_newsletter = models.BooleanField(
         default=False,
         verbose_name=_('I accept to receive occasional newsletters via email'),
         help_text=_(
-            'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.')
+            'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.'
+        )
     )
 
     receive_marketing_and_commercial_material = models.BooleanField(
@@ -3079,41 +3097,45 @@ class UserProfile(SafeDeleteModel):
     allow_astronomy_ads = models.BooleanField(
         default=True,
         verbose_name=_('Allow astronomy ads from our partners'),
-        help_text=_('It would mean a lot if you chose to allow astronomy relevant, non intrusive ads on this website. '
-                    'AstroBin is a small business run by a single person, and this kind of support would be amazing. '
-                    'Thank you in advance!')
+        help_text=_(
+            'It would mean a lot if you chose to allow astronomy relevant, non intrusive ads on this website. '
+            'AstroBin is a small business run by a single person, and this kind of support would be amazing. '
+            'Thank you in advance!'
+        )
     )
 
     allow_retailer_integration = models.BooleanField(
         default=True,
         verbose_name=_('Allow retailer integration'),
-        help_text=_('AstroBin may associate with retailers of astronomy and astrophotography equipment to enhance '
-                    'the display of equipment items with links to sponsoring partners. The integration is subtle '
-                    'and non intrusive, and it would help a lot if you didn\'t disable it. Thank you in advance!')
+        help_text=_(
+            'AstroBin may associate with retailers of astronomy and astrophotography equipment to enhance '
+            'the display of equipment items with links to sponsoring partners. The integration is subtle '
+            'and non intrusive, and it would help a lot if you didn\'t disable it. Thank you in advance!'
+        )
     )
 
     enable_new_search_experience = models.NullBooleanField(
         default=True,
         verbose_name=_('Enable new search experience'),
         help_text=
-            gettext('Enable the new search experience, which includes new filters and a new layout.') +
-            ' ' +
-            '<a href="https://welcome.astrobin.com/blog/introducing-the-new-astrobin-search-experience" ' +
-            'target="_blank">' +
-            gettext('Learn more') +
-            '</a>'
+        gettext('Enable the new search experience, which includes new filters and a new layout.') +
+        ' ' +
+        '<a href="https://welcome.astrobin.com/blog/introducing-the-new-astrobin-search-experience" ' +
+        'target="_blank">' +
+        gettext('Learn more') +
+        '</a>'
     )
 
     enable_new_gallery_experience = models.NullBooleanField(
         default=None,
         verbose_name=_('Enable new gallery experience'),
         help_text=
-            gettext('Enable the new gallery experience, with improved navigation and a new image viewer.') +
-            ' ' +
-            '<a href="https://welcome.astrobin.com/blog/introducing-the-new-astrobin-gallery-experience" ' +
-            'target="_blank">' +
-            gettext('Learn more') +
-            '</a>'
+        gettext('Enable the new gallery experience, with improved navigation and a new image viewer.') +
+        ' ' +
+        '<a href="https://welcome.astrobin.com/blog/introducing-the-new-astrobin-gallery-experience" ' +
+        'target="_blank">' +
+        gettext('Learn more') +
+        '</a>'
     )
 
     may_enable_new_gallery_experience = models.NullBooleanField(
@@ -3162,8 +3184,10 @@ class UserProfile(SafeDeleteModel):
         blank=True,
         null=True,
         verbose_name=_("Other languages"),
-        help_text=_("Other languages that you can read and write. This can be useful to other AstroBin members who "
-                    "would like to communicate with you.")
+        help_text=_(
+            "Other languages that you can read and write. This can be useful to other AstroBin members who "
+            "would like to communicate with you."
+        )
     )
 
     skill_level = models.CharField(
@@ -3197,27 +3221,32 @@ class UserProfile(SafeDeleteModel):
     signature = models.TextField(
         _('Signature'),
         blank=True,
-        max_length=1024)
+        max_length=1024
+    )
 
     signature_html = models.TextField(
         _('Signature HTML Version'),
         blank=True,
-        max_length=1024 + 30)
+        max_length=1024 + 30
+    )
 
     show_signatures = models.BooleanField(
         _('Show signatures'),
         blank=True,
-        default=True)
+        default=True
+    )
 
     post_count = models.IntegerField(
         _('Post count'),
         blank=True,
-        default=0)
+        default=0
+    )
 
     autosubscribe = models.BooleanField(
         _('Automatically subscribe'),
         help_text=_('Automatically subscribe to topics that you answer'),
-        default=True)
+        default=True
+    )
 
     @property
     def receive_emails(self):
@@ -3225,7 +3254,8 @@ class UserProfile(SafeDeleteModel):
 
     receive_forum_emails = models.BooleanField(
         _('Receive e-mails from subscribed forum topics'),
-        default=True)
+        default=True
+    )
 
     image_recovery_process_started = models.DateTimeField(
         null=True,
@@ -3422,7 +3452,8 @@ class Location(models.Model):
     altitude = models.IntegerField(
         verbose_name=_("Altitude"),
         help_text=_("In meters."),
-        null=True, blank=True)
+        null=True, blank=True
+    )
 
     user = models.ForeignKey(
         UserProfile,
@@ -3432,10 +3463,12 @@ class Location(models.Model):
     )
 
     def __str__(self):
-        return ', '.join([_f for _f in [
-            self.name, self.city, self.state,
-            str(get_country_name(self.country))
-        ] if _f])
+        return ', '.join(
+            [_f for _f in [
+                self.name, self.city, self.state,
+                str(get_country_name(self.country))
+            ] if _f]
+        )
 
     class Meta:
         app_label = 'astrobin'
@@ -3451,31 +3484,37 @@ class App(models.Model):
 
     name = models.CharField(
         max_length=256,
-        blank=False)
+        blank=False
+    )
 
     description = models.TextField(
         null=True,
-        blank=True)
+        blank=True
+    )
 
     key = models.CharField(
         max_length=256,
         editable=False,
         blank=True,
-        default='')
+        default=''
+    )
 
     secret = models.CharField(
         max_length=256,
         editable=False,
         blank=True,
-        default='')
+        default=''
+    )
 
     active = models.BooleanField(
         editable=False,
-        default=True)
+        default=True
+    )
 
     created = models.DateTimeField(
         editable=False,
-        auto_now_add=True)
+        auto_now_add=True
+    )
 
     class Meta:
         ordering = ['-created']
@@ -3503,7 +3542,8 @@ class AppApiKeyRequest(models.Model):
         User,
         editable=False,
         related_name='app_api_key_request',
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE
+    )
 
     name = models.CharField(
         verbose_name=_("Name"),
@@ -3552,7 +3592,8 @@ class AppApiKeyRequest(models.Model):
     def approve(self):
         app, created = App.objects.get_or_create(
             registrar=self.registrar, name=self.name,
-            description=self.description)
+            description=self.description
+        )
 
         self.approved = True
         self.save()
@@ -3560,11 +3601,15 @@ class AppApiKeyRequest(models.Model):
         if created:
             push_notification(
                 [self.registrar], None, 'api_key_request_approved',
-                {'api_docs_url': settings.BASE_URL + '/help/api/',
-                 'api_keys_url': settings.BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
-                 'preheader': app.key,
-                 'key': app.key,
-                 'secret': app.secret
+                {
+                    'api_docs_url': settings.BASE_URL + '/help/api/',
+                    'api_keys_url': settings.BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
+                    'preheader': app.key,
+                    'key': app.key,
+                    'secret': app.secret,
+                    'extra_tags': {
+                        'context': NotificationContext.API
+                    },
                 }
             )
         else:
@@ -3577,10 +3622,12 @@ class ImageOfTheDay(models.Model):
     image = models.ForeignKey(
         Image,
         related_name='image_of_the_day',
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE
+    )
 
     date = models.DateField(
-        auto_now_add=True)
+        auto_now_add=True
+    )
 
     runnerup_1 = models.ForeignKey(
         Image,
@@ -3615,10 +3662,12 @@ class ImageOfTheDayCandidate(models.Model):
     image = models.ForeignKey(
         Image,
         related_name='image_of_the_day_candidate',
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE
+    )
 
     date = models.DateField(
-        auto_now_add=True)
+        auto_now_add=True
+    )
 
     position = models.PositiveIntegerField()
 
@@ -3768,13 +3817,19 @@ class SavedSearch(models.Model):
 
 
 class ActionArchive(models.Model):
-    actor_content_type = models.ForeignKey(ContentType, blank=True, null=True, on_delete=models.CASCADE, related_name='actor_archives')
+    actor_content_type = models.ForeignKey(
+        ContentType, blank=True, null=True, on_delete=models.CASCADE, related_name='actor_archives'
+    )
     actor_object_id = models.CharField(max_length=255, blank=True, null=True)
     verb = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    target_content_type = models.ForeignKey(ContentType, blank=True, null=True, on_delete=models.CASCADE, related_name='target_archives')
+    target_content_type = models.ForeignKey(
+        ContentType, blank=True, null=True, on_delete=models.CASCADE, related_name='target_archives'
+    )
     target_object_id = models.CharField(max_length=255, blank=True, null=True)
-    action_object_content_type = models.ForeignKey(ContentType, blank=True, null=True, on_delete=models.CASCADE, related_name='action_object_archives')
+    action_object_content_type = models.ForeignKey(
+        ContentType, blank=True, null=True, on_delete=models.CASCADE, related_name='action_object_archives'
+    )
     action_object_object_id = models.CharField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(db_index=True)
     public = models.BooleanField(default=True)

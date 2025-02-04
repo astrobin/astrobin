@@ -12,6 +12,7 @@ from registration.signals import user_registered
 
 from astrobin.models import UserProfile
 from astrobin.utils import get_client_country_code
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
@@ -247,6 +248,9 @@ def user_created(sender, user, request, **kwargs):
 
     push_notification([user], None, 'welcome_to_astrobin', {
         'BASE_URL': settings.BASE_URL,
+        'extra_tags': {
+            'context': NotificationContext.USER
+        },
     })
 
 

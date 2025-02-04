@@ -18,6 +18,7 @@ from astrobin_apps_equipment.models import (
 from astrobin_apps_equipment.models.equipment_item_marketplace_offer import EquipmentItemMarketplaceOfferStatus
 from astrobin_apps_equipment.types.marketplace_feedback import MarketplaceFeedback
 from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
@@ -70,7 +71,10 @@ class MarketplaceService:
                 AppRedirectionService.redirect(
                     f'/equipment/marketplace/listing/{listing.hash}'
                 )
-            )
+            ),
+            'extra_tags': {
+                'context': NotificationContext.MARKETPLACE
+            },
         }
 
     @staticmethod

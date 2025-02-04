@@ -11,6 +11,7 @@ from django_bouncy.models import Bounce, Complaint, Delivery
 
 from astrobin.models import Image, ImageRevision
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
@@ -67,7 +68,11 @@ def push_notification_for_approved_image(image_pk: int, moderator_pk: int):
             'preheader': image.title,
             'image': image,
             'image_thumbnail': thumb.url if thumb else None,
-            'moderator': moderator
+            'moderator': moderator,
+            'extra_tags': {
+                'context': NotificationContext.IMAGE,
+                'image_id': image.get_id(),
+            },
         }
     )
 
@@ -183,6 +188,10 @@ def push_notification_for_new_image(image_pk: int):
                     'image_thumbnail': thumb.url if thumb else None,
                     'followed_equipment_items': user_equipment_dictionary[follower.pk]['items']
                     if follower.pk in user_equipment_dictionary else [],
+                    'extra_tags': {
+                        'context': NotificationContext.IMAGE,
+                        'image_id': image.get_id(),
+                    },
                 }
             )
     else:
@@ -203,7 +212,11 @@ def push_notification_for_new_image(image_pk: int):
                     'preheader': image.title,
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None,
-                    'items': equipment_items
+                    'items': equipment_items,
+                    'extra_tags': {
+                        'context': NotificationContext.IMAGE,
+                        'image_id': image.get_id(),
+                    },
                 }
             )
     else:
@@ -253,6 +266,11 @@ def push_notification_for_new_image_revision(revision_pk):
                 previous_revision.uploaded if previous_revision is not None else datetime.min
             ), "DATE_FORMAT"),
             'image_thumbnail': thumb.url if thumb else None,
+            'extra_tags': {
+                'context': NotificationContext.IMAGE,
+                'image_id': revision.image.get_id(),
+                'revision_label': revision.label,
+            },
         })
     else:
         logger.info(

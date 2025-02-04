@@ -16,6 +16,7 @@ from astrobin_apps_equipment.models import (
 )
 from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 
@@ -458,6 +459,9 @@ class EquipmentService:
                             f'/{duplicate_of.slug}'
                         )
                     ) if duplicate_of else None,
+                    'extra_tags': {
+                        'context': NotificationContext.EQUIPMENT
+                    },
                 }
             )
 
@@ -604,6 +608,9 @@ class EquipmentService:
                             settings.BASE_URL + reverse('image_detail', args=(image.get_id(),))
                         ),
                         'image_title': image.title,
+                        'extra_tags': {
+                            'context': NotificationContext.EQUIPMENT
+                        },
                     }
                 )
 

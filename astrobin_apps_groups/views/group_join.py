@@ -9,6 +9,7 @@ from django.views.generic import UpdateView
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.views.mixins import RedirectToGroupDetailMixin
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
 
 
@@ -41,7 +42,11 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
                         'preheader': group.name,
                         'group_name': group.name,
                         'url': build_notification_url(
-                            settings.BASE_URL + reverse('group_moderate_join_requests', args=(group.pk,)), request.user)
+                            settings.BASE_URL + reverse('group_moderate_join_requests', args=(group.pk,)), request.user
+                        ),
+                        'extra_tags': {
+                            'context': NotificationContext.GROUPS
+                        },
                     })
                 return redirect(self.get_success_url())
             else:

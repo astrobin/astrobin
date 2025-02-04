@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
+
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification
 from astrobin.models import Image
 
@@ -16,5 +18,8 @@ class Command(BaseCommand):
             if images.count() > 0:
                 push_notification([user], None, 'missing_remote_source', {
                     'BASE_URL': settings.BASE_URL,
-                    'images': images
+                    'images': images,
+                    'extra_tags': {
+                        'context': NotificationContext.USER
+                    },
                 })

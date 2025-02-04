@@ -21,6 +21,7 @@ from subscription.models import (
 from subscription.signals import paid
 
 from astrobin.models import UserProfile
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_payments.tasks import process_stripe_webhook_event
 from astrobin_apps_premium.services.premium_service import SubscriptionName
@@ -180,6 +181,9 @@ class StripeWebhookService(object):
                 'new_payment',
                 {
                     'BASE_URL': settings.BASE_URL,
+                    'extra_tags': {
+                        'context': NotificationContext.SUBSCRIPTIONS
+                    },
                 }
             )
         else:
@@ -271,7 +275,10 @@ class StripeWebhookService(object):
                         'new_subscription',
                         {
                             'BASE_URL': settings.BASE_URL,
-                            'subscription': subscription
+                            'subscription': subscription,
+                            'extra_tags': {
+                                'context': NotificationContext.SUBSCRIPTIONS
+                            },
                         }
                     )
 
@@ -360,7 +367,10 @@ class StripeWebhookService(object):
                 'new_subscription',
                 {
                     'BASE_URL': settings.BASE_URL,
-                    'subscription': subscription
+                    'subscription': subscription,
+                    'extra_tags': {
+                        'context': NotificationContext.SUBSCRIPTIONS
+                    },
                 }
             )
 

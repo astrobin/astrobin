@@ -27,6 +27,7 @@ from astrobin_apps_equipment.services.stock import StockImporterService
 from astrobin_apps_equipment.services.stock.plugins.agena import AgenaStockImporterPlugin
 from astrobin_apps_equipment.types.marketplace_feedback_target_type import MarketplaceFeedbackTargetType
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import DateTimeService
 
@@ -210,7 +211,10 @@ def remind_about_rating_seller():
                 {
                     'seller_display_name': listing.user.userprofile.get_display_name(),
                     'listing': listing,
-                    'listing_url': build_notification_url(listing.get_absolute_url())
+                    'listing_url': build_notification_url(listing.get_absolute_url()),
+                    'extra_tags': {
+                        'context': NotificationContext.MARKETPLACE
+                    },
                 }
             )
 
@@ -258,7 +262,10 @@ def remind_about_rating_buyer():
                 {
                     'buyer_display_name': line_item.sold_to.userprofile.get_display_name(),
                     'listing': listing,
-                    'listing_url': build_notification_url(listing.get_absolute_url())
+                    'listing_url': build_notification_url(listing.get_absolute_url()),
+                    'extra_tags': {
+                        'context': NotificationContext.MARKETPLACE
+                    },
                 }
             )
 
@@ -288,7 +295,10 @@ def notify_about_expired_listings():
             'marketplace-listing-expired',
             {
                 'listing': listing,
-                'listing_url': build_notification_url(listing.get_absolute_url())
+                'listing_url': build_notification_url(listing.get_absolute_url()),
+                'extra_tags': {
+                    'context': NotificationContext.MARKETPLACE
+                },
             }
         )
 
@@ -326,7 +336,10 @@ def remind_about_marking_items_as_sold():
             'marketplace-mark-sold-reminder',
             {
                 'listing': listing,
-                'listing_url': build_notification_url(listing.get_absolute_url())
+                'listing_url': build_notification_url(listing.get_absolute_url()),
+                'extra_tags': {
+                    'context': NotificationContext.MARKETPLACE
+                },
             }
         )
 

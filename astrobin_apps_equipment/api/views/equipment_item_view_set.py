@@ -38,6 +38,7 @@ from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerD
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_equipment.tasks import reject_item
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_access_full_search
@@ -509,6 +510,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                             f'/equipment/explorer/{EquipmentItemService(item).get_type()}/{item.pk}'
                         )
                     ),
+                    'extra_tags': {
+                        'context': NotificationContext.EQUIPMENT
+                    },
                 }
             )
 
@@ -557,6 +561,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                         )
                     ),
                     'comment': item.reviewer_comment,
+                    'extra_tags': {
+                        'context': NotificationContext.EQUIPMENT
+                    },
                 }
             )
 

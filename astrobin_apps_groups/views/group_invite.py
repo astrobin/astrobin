@@ -8,6 +8,7 @@ from astrobin.models import UserProfile
 from astrobin_apps_groups.forms import GroupInviteForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.views.mixins import RestrictToGroupOwnerMixin, RedirectToGroupDetailMixin
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
 
 
@@ -37,6 +38,9 @@ class GroupInviteView(
                     'group_name': group.name,
                     'group_page': build_notification_url(
                         settings.BASE_URL + reverse('group_detail', args=(group.pk, group.slug)), request.user),
+                    'extra_tags': {
+                        'context': NotificationContext.GROUPS
+                    },
                 })
 
         if request.is_ajax():
