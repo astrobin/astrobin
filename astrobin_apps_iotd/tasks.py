@@ -13,6 +13,7 @@ from astrobin_apps_iotd.models import (
     IotdSubmitterSeenImage, IotdVote,
 )
 from astrobin_apps_iotd.services import IotdService
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification
 from common.constants import GroupName
 from common.services import DateTimeService
@@ -55,7 +56,10 @@ def send_iotd_staff_insufficiently_active_reminders_and_remove_after_max_reminde
                     'max_inactivity_days': 0,
                     'min_promotions': min_promotions,
                     'min_promotions_days': days,
-                    'max_reminders': max_reminders
+                    'max_reminders': max_reminders,
+                    'extra_tags': {
+                        'context': NotificationContext.IOTD
+                    },
                 }
             )
         else:
@@ -70,6 +74,9 @@ def send_iotd_staff_insufficiently_active_reminders_and_remove_after_max_reminde
                     'BASE_URL': settings.BASE_URL,
                     'min_promotions': min_promotions,
                     'min_promotions_days': days,
+                    'extra_tags': {
+                        'context': NotificationContext.IOTD
+                    },
                 }
             )
 
@@ -86,7 +93,10 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
         push_notification(final_notice_members, None, 'iotd_staff_inactive_removal_notice', {
             'BASE_URL': settings.BASE_URL,
             'days': final_notice_days,
-            'max_inactivity_days': final_notice_days
+            'max_inactivity_days': final_notice_days,
+            'extra_tags': {
+                'context': NotificationContext.IOTD
+            },
         })
         return
 
@@ -96,7 +106,10 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
         push_notification(reminder_2_members, None, 'iotd_staff_inactive_warning', {
             'BASE_URL': settings.BASE_URL,
             'days': reminder_2_days,
-            'max_inactivity_days': final_notice_days
+            'max_inactivity_days': final_notice_days,
+            'extra_tags': {
+                'context': NotificationContext.IOTD
+            },
         })
         return
 
@@ -107,7 +120,10 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
             reminder_1_members, None, 'iotd_staff_inactive_warning', {
                 'BASE_URL': settings.BASE_URL,
                 'days': reminder_1_days,
-                'max_inactivity_days': final_notice_days
+                'max_inactivity_days': final_notice_days,
+                'extra_tags': {
+                    'context': NotificationContext.IOTD
+                },
             }
         )
 
@@ -134,14 +150,22 @@ def send_notifications_when_promoted_image_becomes_iotd():
     push_notification(submitters, None, 'image_you_promoted_is_iotd', {
         'preheader': image.title,
         'image': image,
-        'image_thumbnail': thumb.url if thumb else None
+        'image_thumbnail': thumb.url if thumb else None,
+        'extra_tags': {
+            'context': NotificationContext.IMAGE,
+            'image_id': image.get_id(),
+        },
     })
 
     reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
     push_notification(reviewers, None, 'image_you_promoted_is_iotd', {
         'preheader': image.title,
         'image': image,
-        'image_thumbnail': thumb.url if thumb else None
+        'image_thumbnail': thumb.url if thumb else None,
+        'extra_tags': {
+            'context': NotificationContext.IMAGE,
+            'image_id': image.get_id(),
+        },
     })
 
     dismissers = [
@@ -151,7 +175,11 @@ def send_notifications_when_promoted_image_becomes_iotd():
         dismissers, None, 'image_you_dismissed_is_iotd', {
             'preheader': image.title,
             'image': image,
-            'image_thumbnail': thumb.url if thumb else None
+            'image_thumbnail': thumb.url if thumb else None,
+            'extra_tags': {
+                'context': NotificationContext.IMAGE,
+                'image_id': image.get_id(),
+            },
         }
     )
 
@@ -159,7 +187,11 @@ def send_notifications_when_promoted_image_becomes_iotd():
     push_notification(collaborators, None, 'your_image_is_iotd', {
         'preheader': image.title,
         'image': image,
-        'image_thumbnail': thumb.url if thumb else None
+        'image_thumbnail': thumb.url if thumb else None,
+        'extra_tags': {
+            'context': NotificationContext.IMAGE,
+            'image_id': image.get_id(),
+        },
     })
 
 
@@ -265,5 +297,8 @@ def calculate_iotd_staff_members_stats():
                 [user], None, 'your_iotd_staff_member_stats', {
                     'BASE_URL': settings.BASE_URL,
                     'stats': stats,
+                    'extra_tags': {
+                        'context': NotificationContext.IOTD
+                    },
                 }
             )

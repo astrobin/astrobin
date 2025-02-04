@@ -54,6 +54,7 @@ from astrobin.utils import (
 )
 from astrobin_apps_equipment.models import Accessory, Camera, EquipmentBrandListing, Filter, Mount, Software, Telescope
 from astrobin_apps_images.models import KeyValueTag, ThumbnailGroup
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
@@ -1166,6 +1167,10 @@ class ImageService:
                 'image': self.image,
                 'user': user,
                 'image_thumbnail': thumb.url if thumb else None,
+                'extra_tags': {
+                    'context': NotificationContext.IMAGE,
+                    'image_id': self.image.get_id(),
+                },
             }
         )
 
@@ -1190,6 +1195,10 @@ class ImageService:
                 'image': self.image,
                 'user': user,
                 'image_thumbnail': thumb.url if thumb else None,
+                'extra_tags': {
+                    'context': NotificationContext.IMAGE,
+                    'image_id': self.image.get_id(),
+                },
             }
         )
 
@@ -1217,6 +1226,10 @@ class ImageService:
                 'preheader': self.image.title,
                 'image': self.image,
                 'image_thumbnail': thumb.url if thumb else None,
+                'extra_tags': {
+                    'context': NotificationContext.IMAGE,
+                    'image_id': self.image.get_id(),
+                },
             }
         )
 

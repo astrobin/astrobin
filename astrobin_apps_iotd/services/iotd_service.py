@@ -24,6 +24,7 @@ from astrobin_apps_iotd.models import (
     TopPickNominationsArchive,
 )
 from astrobin_apps_iotd.types.may_not_submit_to_iotd_tp_reason import MayNotSubmitToIotdTpReason
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
@@ -578,7 +579,11 @@ class IotdService:
                 [image.user], None, 'image_submitted_to_iotd_tp', {
                     'preheader': image.title,
                     'image': image,
-                    'image_thumbnail': thumb.url if thumb else None
+                    'image_thumbnail': thumb.url if thumb else None,
+                    'extra_tags': {
+                        'context': NotificationContext.IMAGE,
+                        'image_id': image.get_id(),
+                    },
                 }
             )
 
@@ -1001,6 +1006,10 @@ class IotdService:
                         'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),
                         'days': settings.IOTD_SUBMISSION_FOR_CONSIDERATION_REMINDER_DAYS,
                         'BASE_URL': settings.BASE_URL,
+                        'extra_tags': {
+                            'context': NotificationContext.IMAGE,
+                            'image_id': image.get_id(),
+                        },
                     }
                 )
 
@@ -1015,6 +1024,10 @@ class IotdService:
                 'image_thumbnail': thumb.url if thumb else None,
                 'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),
                 'BASE_URL': settings.BASE_URL,
+                'extra_tags': {
+                    'context': NotificationContext.IMAGE,
+                    'image_id': image.get_id(),
+                },
             }
         )
 
@@ -1029,6 +1042,10 @@ class IotdService:
                 'image_thumbnail': thumb.url if thumb else None,
                 'url': build_notification_url(settings.BASE_URL + image.get_absolute_url(), image.user),
                 'BASE_URL': settings.BASE_URL,
+                'extra_tags': {
+                    'context': NotificationContext.IMAGE,
+                    'image_id': image.get_id(),
+                },
             }
         )
 

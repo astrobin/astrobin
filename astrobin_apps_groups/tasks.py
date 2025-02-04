@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 from astrobin_apps_groups.models import Group
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
 
 logger = logging.getLogger(__name__)
@@ -38,6 +39,9 @@ def push_notification_for_group_join_request_approval(group_pk, user_pk, moderat
             'url': build_notification_url(
                 settings.BASE_URL + reverse('group_detail', args=(group.pk, group.slug)), moderator
             ),
+            'extra_tags': {
+                'context': NotificationContext.GROUPS
+            },
         })
 
 
@@ -69,5 +73,8 @@ def push_notification_for_group_join_request_rejection(group_pk, user_pk, modera
             'url': build_notification_url(
                 settings.BASE_URL + reverse('group_detail', args=(group.pk,)), moderator
             ),
+            'extra_tags': {
+                'context': NotificationContext.GROUPS
+            },
         })
 

@@ -17,6 +17,7 @@ from astrobin_apps_equipment.models import (
 )
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.services import NotificationsService
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService
@@ -52,6 +53,7 @@ class CommentNotificationsService:
         notification = None
         mentions = MentionsService.get_mentions(self.comment.text)
         url = None
+        notification_extra_context = None
         target = str(self.comment.content_object)
         target_url = build_notification_url(
             settings.BASE_URL + self.comment.content_object.get_absolute_url(), self.comment.author
@@ -61,14 +63,17 @@ class CommentNotificationsService:
             object_owner = obj.user
             notification = 'new_comment'
             url = settings.BASE_URL + self.comment.get_absolute_url()
+            notification_extra_context = NotificationContext.IMAGE
         elif hasattr(model_class, 'edit_proposal_by'):
             object_owner = obj.edit_proposal_by
             notification = 'new_comment_to_edit_proposal'
             url = self.comment.get_absolute_url()
+            notification_extra_context = NotificationContext.EQUIPMENT
         elif model_class == Iotd:
             object_owner = obj.judge
             notification = 'new_comment_to_scheduled_iotd'
             url = AppRedirectionService.redirect(f'/iotd/judgement-queue#comments-{obj.pk}-{self.comment.pk}')
+            notification_extra_context = NotificationContext.IOTD
         elif model_class in (
                 Sensor,
                 Camera,
@@ -83,6 +88,7 @@ class CommentNotificationsService:
             url = AppRedirectionService.redirect(
                 f'/equipment/explorer/{model_class.__name__.lower()}/{obj.pk}#c{self.comment.id}'
             )
+            notification_extra_context = NotificationContext.EQUIPMENT
         elif model_class == EquipmentItemMarketplacePrivateConversation:
             listing = obj.listing
             url = build_notification_url(
@@ -92,6 +98,7 @@ class CommentNotificationsService:
             target_url = build_notification_url(
                 settings.BASE_URL + obj.listing.get_absolute_url(), self.comment.author
             )
+            notification_extra_context = NotificationContext.MARKETPLACE
             if self.comment.author != listing.user:
                 object_owner = obj.listing.user
                 notification = 'new_comment_to_marketplace_private_conv'
@@ -108,6 +115,7 @@ class CommentNotificationsService:
             target_url = build_notification_url(
                 settings.BASE_URL + obj.get_absolute_url(), self.comment.author
             )
+            notification_extra_context = NotificationContext.MARKETPLACE
         elif model_class == EquipmentItemMarketplaceFeedback:
             if self.comment.author != obj.recipient:
                 # We notify the recipient of the feedback
@@ -124,15 +132,36 @@ class CommentNotificationsService:
             target_url = build_notification_url(
                 settings.BASE_URL + obj.get_absolute_url(), self.comment.author
             )
+            notification_extra_context = NotificationContext.MARKETPLACE
 
-        return model_class, obj, object_owner, notification, mentions, url, target, target_url
+        return (
+            model_class,
+            obj,
+            object_owner,
+            notification,
+            mentions,
+            url,
+            target,
+            target_url,
+            notification_extra_context,
+        )
 
     def send_notifications(self, force=False):
         if self.comment.pending_moderation and not force:
             return
 
         instance = self.comment
-        model_class, obj, object_owner, notification, mentions, url, target, target_url = self.extract_context()
+        (
+            model_class,
+            obj,
+            object_owner,
+            notification,
+            mentions,
+            url,
+            target,
+            target_url,
+            notification_extra_context,
+        ) = self.extract_context()
 
         if UserService(object_owner).shadow_bans(instance.author):
             log.info("Skipping notification for comment because %d shadow-bans %d" % (
@@ -173,6 +202,9 @@ class CommentNotificationsService:
                         ),
                         'target': target,
                         'target_url': target_url,
+                        'extra_tags': {
+                            'context': notification_extra_context
+                        },
                     }
                 )
 
@@ -194,6 +226,9 @@ class CommentNotificationsService:
                             ),
                             'target': target,
                             'target_url': target_url,
+                            'extra_tags': {
+                                'context': notification_extra_context
+                            },
                         }
                     )
 
@@ -207,7 +242,8 @@ class CommentNotificationsService:
                 mentions_,  # note the underscore: we don't want to override the `mentions` variable above.
                 url,
                 target,
-                target_url
+                target_url,
+                notification_extra_context,
             ) = self.extract_context()
 
             if not mentions:
@@ -233,6 +269,9 @@ class CommentNotificationsService:
                             ),
                             'target': target,
                             'target_url': build_notification_url(target_url, self.comment.author),
+                            'extra_tags': {
+                                'context': notification_extra_context
+                            },
                         }
                     )
 
@@ -257,7 +296,12 @@ class CommentNotificationsService:
                             self.comment.pk,
                             self.comment.pk
                         ),
-                        additional_query_args={'moderate-comment': 1})
+                        additional_query_args={'moderate-comment': 1}
+                    ),
+                    'extra_tags': {
+                        'context': NotificationContext.IMAGE,
+                        'image_id': image.get_id(),
+                    },
                 })
 
     @staticmethod

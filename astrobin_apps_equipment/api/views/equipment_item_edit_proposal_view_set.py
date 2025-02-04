@@ -19,6 +19,7 @@ from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentI
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import EquipmentItemEditProposalMixin
 from astrobin_apps_equipment.services import EquipmentItemService
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
@@ -145,6 +146,9 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
                             f'/{edit_proposal.pk}/'
                         )
                     ),
+                    'extra_tags': {
+                        'context': NotificationContext.EQUIPMENT
+                    },
                 }
             )
 
@@ -243,7 +247,10 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
                         f'/{edit_proposal.pk}/'
                     )
                 ),
-                'comment': edit_proposal.edit_proposal_review_comment
+                'comment': edit_proposal.edit_proposal_review_comment,
+                'extra_tags': {
+                    'context': NotificationContext.EQUIPMENT
+                },
             }
         )
 
@@ -299,7 +306,10 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
                         f'/{edit_proposal.pk}/'
                     )
                 ),
-                'comment': edit_proposal.edit_proposal_review_comment
+                'comment': edit_proposal.edit_proposal_review_comment,
+                'extra_tags': {
+                    'context': NotificationContext.EQUIPMENT
+                },
             }
         )
 

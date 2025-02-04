@@ -14,6 +14,7 @@ from pybb.models import Forum, ForumReadTracker, Post, Topic, TopicReadTracker
 from astrobin_apps_equipment.models import Accessory, Camera, EquipmentItem, Filter, Mount, Sensor, Software, Telescope
 from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_forum.models import TopicRedirect
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService
@@ -78,6 +79,9 @@ class ForumService:
                             f'/equipment/explorer/{item.klass.lower()}/{item.pk}'
                         )
                     ),
+                    'extra_tags': {
+                        'context': NotificationContext.FORUM
+                    },
                 }
             )
         else:
@@ -104,6 +108,9 @@ class ForumService:
                                     f'/equipment/explorer/{item.klass.lower()}/{item.pk}'
                                 )
                             ),
+                            'extra_tags': {
+                                'context': NotificationContext.FORUM
+                            },
                         }
                     )
 

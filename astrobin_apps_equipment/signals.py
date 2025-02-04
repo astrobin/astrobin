@@ -39,6 +39,7 @@ from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEdit
 from astrobin_apps_equipment.notice_types import EQUIPMENT_NOTICE_TYPES
 from astrobin_apps_equipment.services.marketplace_service import MarketplaceService
 from astrobin_apps_equipment.tasks import send_offer_notifications
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
@@ -264,6 +265,9 @@ def send_edit_proposal_created_notification(sender, instance, created, **kwargs)
                             f'/{instance.pk}/'
                         )
                     ),
+                    'extra_tags': {
+                        'context': NotificationContext.EQUIPMENT
+                    },
                 }
             )
 
@@ -328,7 +332,10 @@ def send_equipment_item_requires_moderation_notification(sender, instance, creat
                 settings.BASE_URL + reverse('user_page', args=(instance.created_by.username,))
             ),
             'item': instance,
-            'url': url
+            'url': url,
+            'extra_tags': {
+                'context': NotificationContext.EQUIPMENT
+            },
         }
     )
 
@@ -763,7 +770,10 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                 {
                     'user': instance.approved_by.userprofile.get_display_name() if instance.approved_by else 'AstroBin',
                     'listing': instance,
-                    'listing_url': build_notification_url(instance.get_absolute_url())
+                    'listing_url': build_notification_url(instance.get_absolute_url()),
+                    'extra_tags': {
+                        'context': NotificationContext.MARKETPLACE
+                    },
                 }
             )
 
@@ -784,7 +794,10 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                     {
                         'seller_display_name': instance.user.userprofile.get_display_name(),
                         'listing': instance,
-                        'listing_url': build_notification_url(instance.get_absolute_url())
+                        'listing_url': build_notification_url(instance.get_absolute_url()),
+                        'extra_tags': {
+                            'context': NotificationContext.MARKETPLACE
+                        },
                     }
                 )
 
@@ -807,6 +820,9 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                             'listing': instance,
                             'listing_url': build_notification_url(instance.get_absolute_url()),
                             'line_item': line_item,
+                            'extra_tags': {
+                                'context': NotificationContext.MARKETPLACE
+                            },
                         }
                     )
 
@@ -834,7 +850,10 @@ def marketplace_listing_post_save(sender, instance: EquipmentItemMarketplaceList
                     {
                         'seller_display_name': instance.user.userprofile.get_display_name(),
                         'listing': instance,
-                        'listing_url': build_notification_url(instance.get_absolute_url())
+                        'listing_url': build_notification_url(instance.get_absolute_url()),
+                        'extra_tags': {
+                            'context': NotificationContext.MARKETPLACE
+                        },
                     }
                 )
 
@@ -861,6 +880,9 @@ def marketplace_listing_post_softdelete(sender, instance: EquipmentItemMarketpla
             {
                 'seller_display_name': instance.user.userprofile.get_display_name(),
                 'listing': instance,
+                'extra_tags': {
+                    'context': NotificationContext.MARKETPLACE
+                },
             }
         )
 
@@ -910,7 +932,10 @@ def marketplace_listing_line_item_post_save(sender, instance: EquipmentItemMarke
                     else _('Unspecified'),
                     'listing': instance.listing,
                     'line_item': instance,
-                    'listing_url': build_notification_url(instance.listing.get_absolute_url())
+                    'listing_url': build_notification_url(instance.listing.get_absolute_url()),
+                    'extra_tags': {
+                        'context': NotificationContext.MARKETPLACE
+                    },
                 }
             )
 
@@ -940,7 +965,10 @@ def send_marketplace_feedback_notifications(
                 'listing': instance.listing,
                 'listing_url': build_notification_url(instance.listing.get_absolute_url()),
                 'feedback': instance,
-                'feedback_url': build_notification_url(instance.get_absolute_url())
+                'feedback_url': build_notification_url(instance.get_absolute_url()),
+                'extra_tags': {
+                    'context': NotificationContext.MARKETPLACE
+                },
             }
         )
     else:
@@ -956,7 +984,10 @@ def send_marketplace_feedback_notifications(
                 'listing': instance.listing,
                 'listing_url': build_notification_url(instance.listing.get_absolute_url()),
                 'feedback': instance,
-                'feedback_url': build_notification_url(instance.get_absolute_url())
+                'feedback_url': build_notification_url(instance.get_absolute_url()),
+                'extra_tags': {
+                    'context': NotificationContext.MARKETPLACE
+                },
             }
         )
 

@@ -13,6 +13,7 @@ from astrobin.models import CameraRenameProposal, Gear, GearMigrationStrategy, G
 from astrobin_apps_equipment.models import Camera, EquipmentBrand, Sensor
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 
@@ -76,6 +77,9 @@ class GearService:
                             f'/{target.slug}'
                         )
                     ) if target else None,
+                    'extra_tags': {
+                        'context': NotificationContext.EQUIPMENT
+                    },
                 }
             )
 
@@ -117,6 +121,9 @@ class GearService:
                             f'/migration-tool'
                         )
                     ) if target else None,
+                    'extra_tags': {
+                        'context': NotificationContext.EQUIPMENT
+                    },
                 }
             )
 
@@ -260,6 +267,9 @@ class GearService:
                         'preheader': GearService(proposal.gear).display_name(for_user=user),
                         'gear_display_name': GearService(proposal.gear).display_name(for_user=user),
                         'item': camera,
+                        'extra_tags': {
+                            'context': NotificationContext.EQUIPMENT
+                        },
                     }
                 )
 

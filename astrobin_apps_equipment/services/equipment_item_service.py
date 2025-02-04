@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import PermissionDenied, ValidationError
 
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
@@ -137,6 +138,9 @@ class EquipmentItemService:
                                 f'/equipment/explorer/{EquipmentItemService(self.item).get_type()}/{self.item.pk}'
                             )
                         ),
+                        'extra_tags': {
+                            'context': NotificationContext.EQUIPMENT
+                        },
                     }
                 )
 

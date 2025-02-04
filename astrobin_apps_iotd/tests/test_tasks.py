@@ -14,6 +14,7 @@ from astrobin_apps_iotd.tasks import (
     send_iotd_staff_inactive_reminders_and_remove_after_max_days, send_notifications_when_promoted_image_becomes_iotd,
 )
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from common.constants import GroupName
 from common.utils import make_custom_cache_get_side_effect
 
@@ -40,7 +41,8 @@ class IotdTasksTest(TestCase):
         push_notification.assert_called_with([submitter], None, 'iotd_staff_inactive_removal_notice', {
             'BASE_URL': settings.BASE_URL,
             'days': settings.IOTD_MAX_INACTIVE_DAYS,
-            'max_inactivity_days': settings.IOTD_MAX_INACTIVE_DAYS
+            'max_inactivity_days': settings.IOTD_MAX_INACTIVE_DAYS,
+            'extra_tags': { 'context': NotificationContext.IOTD }
         })
 
     @patch('astrobin_apps_iotd.tasks.IotdService.get_recently_expired_unsubmitted_images')

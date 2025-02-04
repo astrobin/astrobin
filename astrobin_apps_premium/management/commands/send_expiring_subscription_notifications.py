@@ -4,6 +4,7 @@ from dateutil.relativedelta import relativedelta
 from django.core.management.base import BaseCommand
 from subscription.models import UserSubscription
 
+from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_premium.services.premium_service import SubscriptionName
 
@@ -28,6 +29,9 @@ class Command(BaseCommand):
             push_notification(
                 [user_subscription.user], None, 'expiring_subscription', {
                     'user_subscription': user_subscription,
-                    'url': 'https://app.astrobin.com/subscriptions/view'
+                    'url': 'https://app.astrobin.com/subscriptions/view',
+                    'extra_tags': {
+                        'context': NotificationContext.SUBSCRIPTIONS
+                    },
                 }
             )
