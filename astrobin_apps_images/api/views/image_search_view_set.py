@@ -48,11 +48,29 @@ class ImageSearchViewSet(EncodedSearchViewSet):
 
         telescope = request.query_params.get('telescope')
         if telescope and len(telescope) > 0:
-            telescope = telescope.get('value')[0].get('name')
+            if isinstance(telescope, dict):
+                value = telescope.get('value')[0]
+                if value and isinstance(value, dict):
+                    telescope = value.get('name')
+                elif value and isinstance(value, str):
+                    telescope = value
+                else:
+                    telescope = None
+            elif isinstance(telescope, str):
+                telescope = telescope
 
         camera = request.query_params.get('camera')
         if camera and len(camera) > 0:
-            camera = camera.get('value')[0].get('name')
+            if isinstance(camera, dict):
+                value = camera.get('value')[0]
+                if value and isinstance(value, dict):
+                    camera = value.get('name')
+                elif value and isinstance(value, str):
+                    camera = value
+                else:
+                    camera = None
+            elif isinstance(camera, str):
+                camera = camera
 
         q = telescope or camera or text
 
