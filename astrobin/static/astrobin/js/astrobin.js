@@ -141,6 +141,8 @@ astrobin_common = {
                     'notification,' +
                     'notificationaggregator,' +
                     'panel,' +
+                    'pastefromgdocs,' +
+                    'pastetools,' +
                     'popup,' +
                     'SimpleLink,' +
                     'simpleuploads,' +
@@ -342,7 +344,7 @@ astrobin_common = {
                     '&oelig;', '&#372;', '&#374', '&#373', '&#375;', '&sbquo;', '&#8219;', '&bdquo;', '&hellip;',
                     '&trade;', '&#9658;', '&bull;', '&rarr;', '&rArr;', '&hArr;', '&diams;', '&asymp;'
                 ],
-                fontSize_sizes: "50%/50%;100%/100%;200%/200%",
+                fontSize_sizes: "XS/50%;S/75%;M/100%;L/150%;XL/200%",
                 codeSnippet_languages: {
                     bash: 'Bash',
                     coffeescript: 'CoffeeScript',
@@ -407,7 +409,7 @@ astrobin_common = {
             }
 
             // Bump this anytime a plugin or other CKEDITOR resource is updated.
-            CKEDITOR.timestamp = "25010700";
+            CKEDITOR.timestamp = "25020601";
 
             return options;
         },

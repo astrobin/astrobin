@@ -759,6 +759,13 @@
                             value;
 
                         var tagName = element.name;
+
+                        if (tagName == 'p') {
+                            // Add double newline between paragraphs
+                            element.children.unshift(new CKEDITOR.htmlParser.text('\n\n'));
+                            return null;
+                        }
+
                         if (tagName in convertMap)
                             tagName = convertMap[tagName];
                         else if (tagName == 'span') {

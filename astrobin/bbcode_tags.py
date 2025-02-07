@@ -72,6 +72,36 @@ class PreBBCodeTag(BBCodeTag):
         return f'<pre>{content}</pre>'
 
 
+class SizeBBCOdeTag(BBCodeTag):
+    name = 'size'
+
+    class Options:
+        strip = True
+
+    def render(self, value, option=None, parent=None):
+        content = str(value)
+        size = str(option).replace('"', '')
+
+        # Check if the size is a valid number
+        if not size.isdigit():
+            return content
+
+        size = int(size)
+        if size <= 50:
+            size = '.5rem'
+        elif size <= 75:
+            size = '.75rem'
+        elif size <= 100:
+            size = '1rem'
+        elif size <= 150:
+            size = '1.5rem'
+        else:
+            size = '2rem'
+
+        return f'<span style="font-size: {size}">{content}</span>'
+
+
 tag_pool.register_tag(QuoteBBCodeTag)
 tag_pool.register_tag(CodeBBCodeTag)
 tag_pool.register_tag(PreBBCodeTag)
+tag_pool.register_tag(SizeBBCOdeTag)
