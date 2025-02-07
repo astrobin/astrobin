@@ -273,7 +273,7 @@ def strip_html(value: str, allowed_tags=settings.SANITIZER_ALLOWED_TAGS) -> str:
             document,
             tags=allowed_tags,
             attributes=settings.SANITIZER_ALLOWED_ATTRIBUTES,
-            styles=[],
+            styles=settings.SANITIZER_ALLOWED_STYLES,
             strip=True
         )
 

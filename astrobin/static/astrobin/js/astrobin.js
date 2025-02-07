@@ -446,6 +446,29 @@ astrobin_common = {
                             }
 
                             delete element.attributes.bbcode;
+                        } else if (element.attributes.style && element.attributes.style.includes("font-size:")) {
+                            // Handle percentage-based font size
+                            const sizeMatch = element.attributes.style.match(/font-size:(\d+)%/);
+                            if (sizeMatch) {
+                                const size = parseInt(sizeMatch[1], 10);
+                                let remSize;
+
+                                // Use the same three-tier system
+                                if (size <= 50) {
+                                    remSize = ".5rem";
+                                } else if (size <= 75) {
+                                    remSize = ".75rem";
+                                } else if (size <= 100) {
+                                    remSize = "1rem";
+                                } else if (size <= 150) {
+                                    remSize = "1.5rem";
+                                } else {
+                                    remSize = "2rem";
+                                }
+
+                                // Replace the percentage-based style with rem-based
+                                element.attributes.style = `font-size: ${remSize}`;
+                            }
                         }
                     },
                     ol: function (element) {
@@ -491,10 +514,10 @@ astrobin_common = {
                             $.ajax({
                                 url: `/json-api/common/ckeditor-upload/?path=${encodeURIComponent(urlPath)}`,
                                 async: false,  // Make the request synchronous
-                                success: function(data) {
+                                success: function (data) {
                                     thumbnailSrc = data.thumbnail;
                                 },
-                                error: function() {
+                                error: function () {
                                     console.error('Error fetching thumbnail.');
                                 }
                             });
@@ -771,7 +794,7 @@ astrobin_common = {
     init_file_download_links: function () {
         $(document).ready(function () {
             $('.file-download-link').click(function (event) {
-               $.toast({
+                $.toast({
                     heading: $.i18n._("DOWNLOADING_FILE_HEADING"),
                     text: $.i18n._("DOWNLOADING_FILE_TEXT"),
                     showHideTransition: 'slide',
@@ -942,7 +965,7 @@ astrobin_common = {
         const $rows = $('#notifications-modal tr:not(.no-new-notifications)'),
             $count_badge = $('#notifications-count'),
             $btn = $('#mark-all-notifications-as-read');
-        
+
         $btn.addClass('running');
         $btn.attr('disabled', 'disabled');
 
@@ -1017,7 +1040,7 @@ astrobin_common = {
         window.open(link, openInNewTab ? "_blank" : "_self");
     },
 
-    unescape_html: function(html) {
+    unescape_html: function (html) {
         const txt = document.createElement("textarea");
         txt.innerHTML = html;
         return txt.value;
@@ -1112,39 +1135,39 @@ astrobin_common = {
     },
 
     init_popup_messages: function () {
-      $(document).ready(function () {
-         $('.popup-message-dont-show-again').click(function () {
-            const popupMessage = $(this).closest('.popup-message');
-            const id = popupMessage.data('id');
+        $(document).ready(function () {
+            $('.popup-message-dont-show-again').click(function () {
+                const popupMessage = $(this).closest('.popup-message');
+                const id = popupMessage.data('id');
 
-            $(this).html()
+                $(this).html()
 
-            $.ajax({
-                url: `/json-api/user/dont-show-popup-message-again/`,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    'popup_id': id
-                },
-                timeout: 5000,
-                success: function () {
-                     popupMessage.remove();
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $.toast({
-                        heading: 'Error',
-                        text: 'An error occurred. Please try again later.',
-                        showHideTransition: 'slide',
-                        allowToastClose: true,
-                        position: 'top-right',
-                        loader: false,
-                        hideAfter: false,
-                        icon: 'error'
-                    });
-                }
+                $.ajax({
+                    url: `/json-api/user/dont-show-popup-message-again/`,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'popup_id': id
+                    },
+                    timeout: 5000,
+                    success: function () {
+                        popupMessage.remove();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'An error occurred. Please try again later.',
+                            showHideTransition: 'slide',
+                            allowToastClose: true,
+                            position: 'top-right',
+                            loader: false,
+                            hideAfter: false,
+                            icon: 'error'
+                        });
+                    }
+                });
             });
-         });
-      });
+        });
     },
 
     init_mobile_search: function () {
@@ -1591,25 +1614,25 @@ astrobin_common = {
 
         $('.btn-navbar').on('click', function () {
             if (window.innerWidth < 992) {
-              $('#dropdown-overlay').show();
-              $('.site-nav').removeClass('d-none');
+                $('#dropdown-overlay').show();
+                $('.site-nav').removeClass('d-none');
             }
         });
 
         // Hide overlay when dropdown is closed
         $('#dropdown-overlay').on('click', function (event) {
-          $('.dropdown').removeClass('open');
-          $('.site-nav').removeClass('in').css('height', '0').addClass('d-none');
-          $('#dropdown-overlay').hide();
+            $('.dropdown').removeClass('open');
+            $('.site-nav').removeClass('in').css('height', '0').addClass('d-none');
+            $('#dropdown-overlay').hide();
         });
 
-        $(".dropdown-menu").on('click', function(event) {
+        $(".dropdown-menu").on('click', function (event) {
             const $target = $(event.target);
             const $link = $target.closest('a');
 
             if (($target.is('a') || $link.length)) {
-              // Let the link open
-              return;
+                // Let the link open
+                return;
             }
             event.stopPropagation();
         });
@@ -1695,7 +1718,7 @@ astrobin_common = {
         }
     },
 
-    isNearViewport: function(element, threshold = 300) {
+    isNearViewport: function (element, threshold = 300) {
         const rect = element.getBoundingClientRect();
         const windowHeight = window.innerHeight || document.documentElement.clientHeight;
         const windowWidth = window.innerWidth || document.documentElement.clientWidth;
@@ -1708,11 +1731,11 @@ astrobin_common = {
         );
     },
 
-    debounce: function(func, wait, immediate) {
+    debounce: function (func, wait, immediate) {
         let timeout;
-        return function() {
+        return function () {
             const context = this, args = arguments;
-            const later = function() {
+            const later = function () {
                 timeout = null;
                 if (!immediate) func.apply(context, args);
             };
