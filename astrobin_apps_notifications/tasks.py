@@ -1,4 +1,6 @@
 import logging
+import time
+
 from datetime import datetime, timedelta
 
 from celery import shared_task
@@ -79,15 +81,18 @@ def push_notification_for_approved_image(image_pk: int, moderator_pk: int):
 
 @shared_task(time_limit=1800)
 def push_notification_for_new_image(image_pk: int):
+    time.sleep(5) # TODO: remove this
+
     try:
         image = Image.objects_including_wip.get(pk=image_pk)
     except Image.DoesNotExist:
         logger.error('push_notification_for_new_image called for image not found: %d' % image_pk)
         return
 
-    if image.is_wip:
-        logger.error('push_notification_for_new_image called for image that is wip: %d' % image_pk)
-        return
+    # TODO: uncomment this
+    # if image.is_wip:
+    #     logger.error('push_notification_for_new_image called for image that is wip: %d' % image_pk)
+    #     return
 
     def get_image_followers():
         user_pks = [image.user.pk] + list(image.collaborators.all().values_list('pk', flat=True))
@@ -97,6 +102,14 @@ def push_notification_for_new_image(image_pk: int):
             content_type=ContentType.objects.get_for_model(User),
             object_id__in=user_pks
         ).order_by('object_id')]))
+
+    def get_image_group_members():
+        all_groups = image.part_of_group_set.all()
+        all_users = []
+        for group in all_groups:
+            all_users.extend([{'user': group.owner, 'group': group}])
+            all_users.extend([{'user': u, 'group': group} for u in group.members.all()])
+        return all_users
 
     def get_equipment_dictionary():
         """
@@ -170,10 +183,11 @@ def push_notification_for_new_image(image_pk: int):
         return val
 
     user_followers = get_image_followers()
+    user_group_members = get_image_group_members()
     equipment_dictionary = get_equipment_dictionary()
     user_equipment_dictionary = get_user_equipment_dictionary()
     thumb = image.thumbnail_raw('gallery', None, sync=True)
-    new_image_sent_to = []
+    new_image_sent_to = [image.user] # they already know
 
     if len(user_followers) > 0:
         for follower in user_followers:
@@ -199,6 +213,24 @@ def push_notification_for_new_image(image_pk: int):
             'push_notification_for_new_image called for image %d whose author %d has no followers' % (
                 image.pk, image.user.pk)
         )
+
+        for user_group in user_group_members:
+            user = user_group['user']
+            group = user_group['group']
+            if user not in new_image_sent_to:
+                new_image_sent_to.append(user)
+                push_notification(
+                    [user],
+                    image.user,
+                    'new_image_in_group',
+                    {
+                        'image': image,
+                        'image_thumbnail': thumb.url if thumb else None,
+                        'group_name': group.name,
+                        'followed_equipment_items': user_equipment_dictionary[user.pk]['items']
+                        if user.pk in user_equipment_dictionary else [],
+                    }
+                )
 
     for key in user_equipment_dictionary.keys():
         follower = user_equipment_dictionary[key]['user']
