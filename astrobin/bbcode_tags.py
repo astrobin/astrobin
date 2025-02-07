@@ -3,7 +3,7 @@ import re
 from annoying.functions import get_object_or_None
 from django.core.exceptions import MultipleObjectsReturned
 from precise_bbcode.bbcode.tag import BBCodeTag
-from precise_bbcode.tag_pool import tag_pool
+from precise_bbcode.tag_pool import TagAlreadyCreated, tag_pool
 
 from astrobin.models import UserProfile
 
@@ -72,7 +72,7 @@ class PreBBCodeTag(BBCodeTag):
         return f'<pre>{content}</pre>'
 
 
-class SizeBBCOdeTag(BBCodeTag):
+class SizeBBCodeTag(BBCodeTag):
     name = 'size'
 
     class Options:
@@ -101,7 +101,10 @@ class SizeBBCOdeTag(BBCodeTag):
         return f'<span style="font-size: {size}">{content}</span>'
 
 
-tag_pool.register_tag(QuoteBBCodeTag)
-tag_pool.register_tag(CodeBBCodeTag)
-tag_pool.register_tag(PreBBCodeTag)
-tag_pool.register_tag(SizeBBCOdeTag)
+try:
+    tag_pool.register_tag(QuoteBBCodeTag)
+    tag_pool.register_tag(CodeBBCodeTag)
+    tag_pool.register_tag(PreBBCodeTag)
+    tag_pool.register_tag(SizeBBCodeTag)
+except TagAlreadyCreated:
+    pass
