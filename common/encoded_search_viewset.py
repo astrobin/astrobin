@@ -98,55 +98,87 @@ class EncodedSearchViewSet(HaystackViewSet):
         return [term for term in terms if term.strip()]
 
     @staticmethod
+    def prepare_search_value(search_value, match_type, only_search_in_titles_and_descriptions):
+        """
+        If only_search_in_titles_and_descriptions is True, match_type is ALL, and the query
+        contains no quotation marks, wrap contiguous inclusion tokens in quotes while leaving
+        exclusion tokens (starting with '-') as-is.
+        """
+        if only_search_in_titles_and_descriptions and match_type == MatchType.ALL.value and '"' not in search_value:
+            tokens = search_value.split()
+            new_tokens = []
+            i = 0
+            while i < len(tokens):
+                # Leave exclusions unchanged.
+                if tokens[i].startswith('-'):
+                    new_tokens.append(tokens[i])
+                    i += 1
+                else:
+                    group = []
+                    # Group contiguous tokens that are not exclusions.
+                    while i < len(tokens) and not tokens[i].startswith('-'):
+                        group.append(tokens[i])
+                        i += 1
+                    # Wrap group in quotes if more than one token.
+                    new_tokens.append(f'"{" ".join(group)}"' if len(group) > 1 else group[0])
+            return " ".join(new_tokens)
+        return search_value
+
+    @staticmethod
+    def split_include_exclude_terms(terms):
+        """
+        Splits a list of search query terms into inclusion and exclusion terms.
+
+        Any term that starts with '-' is treated as an exclusion term (the leading '-' is removed),
+        and all other terms are treated as inclusion terms.
+        """
+        include_terms = []
+        exclude_terms = []
+        for term in terms:
+            if term.startswith('-'):
+                exclude_terms.append(term[1:])
+            else:
+                include_terms.append(term)
+        return include_terms, exclude_terms
+
+    @staticmethod
     def build_search_query(results, query, only_search_in_titles_and_descriptions=False):
+        # Prepare the search value using the extracted method.
         search_value = query.get('value', '')
         match_type = query.get('matchType', MatchType.ANY.value)
+        search_value = EncodedSearchViewSet.prepare_search_value(
+            search_value, match_type, only_search_in_titles_and_descriptions
+        )
 
         terms = EncodedSearchViewSet.parse_search_query(search_value)
 
-        # Split into include and exclude terms
-        include_terms = [term[1:] if term.startswith('"') and term.startswith('-', 1) else term
-                         for term in terms if not term.startswith('-') or term.startswith('-"')]
-        exclude_terms = [term[1:] for term in terms if term.startswith('-')]
+        include_terms, exclude_terms = EncodedSearchViewSet.split_include_exclude_terms(terms)
 
         sqs = results
 
-        # Determine which fields to search
+        # Determine which fields to search.
         search_fields = ['title', 'description'] if only_search_in_titles_and_descriptions else ['text']
 
-        # Handle inclusion
+        # Handle inclusion.
         if include_terms:
             q = None
             for term in include_terms:
                 term_q = None
                 for field in search_fields:
-                    if term_q is None:
-                        term_q = SQ(**{field: AutoQuery(term)})
-                    else:
-                        term_q |= SQ(**{field: AutoQuery(term)})
-
-                if match_type == MatchType.ALL.value:
-                    if q is None:
-                        q = term_q
-                    else:
-                        q &= term_q
-                else:  # ANY
-                    if q is None:
-                        q = term_q
-                    else:
-                        q |= term_q
-
+                    term_q = SQ(**{field: AutoQuery(term)}) if term_q is None else term_q | SQ(
+                        **{field: AutoQuery(term)}
+                    )
+                q = term_q if q is None else (q & term_q if match_type == MatchType.ALL.value else q | term_q)
             if q is not None:
                 sqs = sqs.filter(q)
 
-        # Handle exclusion - always use AND NOT for each field
+        # Handle exclusion.
         for term in exclude_terms:
             exclude_q = None
             for field in search_fields:
-                if exclude_q is None:
-                    exclude_q = SQ(**{field: AutoQuery(term)})
-                else:
-                    exclude_q |= SQ(**{field: AutoQuery(term)})
+                exclude_q = SQ(**{field: AutoQuery(term)}) if exclude_q is None else exclude_q | SQ(
+                    **{field: AutoQuery(term)}
+                )
             sqs = sqs.exclude(exclude_q)
 
         return sqs
