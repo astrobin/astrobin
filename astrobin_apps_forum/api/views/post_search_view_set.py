@@ -41,9 +41,10 @@ class PostSearchViewSet(EncodedSearchViewSet):
 
         if text.get('value'):
             queryset = EncodedSearchViewSet.build_search_query(queryset, text)
+            queryset = queryset.order_by('-_score')
+        else:
+            queryset = queryset.order_by('-created')
 
         queryset = self.filter_posts(params, queryset)
-
-        queryset = queryset.order_by('-created')
 
         return queryset

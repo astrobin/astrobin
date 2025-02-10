@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from drf_haystack.filters import HaystackFilter
+from haystack.inputs import AutoQuery
 from haystack.query import SearchQuerySet
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
@@ -33,13 +34,13 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
     API endpoint that represents a list of nested comments.
     """
     model = NestedComment
-    queryset = NestedComment.objects.select_related('author', 'author__userprofile').all().order_by('pk')
+    queryset = NestedComment.objects.select_related('author', 'author__userprofile').all()
     serializer_class = NestedCommentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsCommentAuthorOrContentOwnerOrReadOnly)
     pagination_class = None
 
     def get_queryset(self):
-        queryset = NestedComment.objects.select_related('author', 'author__userprofile').all().order_by('pk')
+        queryset = NestedComment.objects.select_related('author', 'author__userprofile').all()
 
         content_type_id = self.request.query_params.get('content_type')
         object_id = self.request.query_params.get('object_id')
@@ -194,7 +195,9 @@ class NestedCommentSearchViewSet(EncodedSearchViewSet):
 
         if text.get('value'):
             queryset = EncodedSearchViewSet.build_search_query(queryset, text)
+            queryset = queryset.order_by('-_score')
+        else:
+            queryset = queryset.order_by('-created')
 
-        queryset = queryset.order_by('-created')
 
         return queryset

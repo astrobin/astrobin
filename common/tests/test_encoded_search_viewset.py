@@ -58,26 +58,26 @@ class EncodedSearchViewSetTests(TestCase):
         self.assertEqual(result, original)
 
     def test_prepare_search_value_wrap_contiguous_inclusions_two_words(self):
-        original = "a b"
-        expected = '"a b"'
+        original = "M 31"
+        expected = '"M 31"'
         result = EncodedSearchViewSet.prepare_search_value(original, MatchType.ALL.value, True)
         self.assertEqual(result, expected)
 
     def test_prepare_search_value_wrap_inclusions_with_exclusion(self):
-        original = "a b -c"
-        expected = '"a b" -c'
+        original = "foo M 31 -c"
+        expected = 'foo "M 31" -c'
         result = EncodedSearchViewSet.prepare_search_value(original, MatchType.ALL.value, True)
         self.assertEqual(result, expected)
 
     def test_prepare_search_value_wrap_multiple_groups(self):
-        original = "a b -c d e"
-        expected = '"a b" -c "d e"'
+        original = "foo M 31 -c d e"
+        expected = 'foo "M 31" -c d e'
         result = EncodedSearchViewSet.prepare_search_value(original, MatchType.ALL.value, True)
         self.assertEqual(result, expected)
 
     def test_prepare_search_value_exclusion_first_then_inclusions(self):
-        original = "-c a b"
-        expected = '-c "a b"'
+        original = "-c M 31"
+        expected = '-c "M 31"'
         result = EncodedSearchViewSet.prepare_search_value(original, MatchType.ALL.value, True)
         self.assertEqual(result, expected)
 
