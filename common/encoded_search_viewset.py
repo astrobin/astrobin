@@ -99,31 +99,54 @@ class EncodedSearchViewSet(HaystackViewSet):
         return [term for term in terms if term.strip()]
 
     @staticmethod
+    def is_astronomy_catalog(term):
+        # Return True if term exactly matches one of the known catalog patterns.
+        if re.match(r'^(Sh2)[-\s]?(\d+)$', term, re.IGNORECASE):
+            return True
+        if re.match(r'^(M|NGC|IC|PGC|LDN|LBN|VDB)\s?(\d+)$', term, re.IGNORECASE):
+            return True
+        return False
+
+    @staticmethod
     def prepare_search_value(search_value, match_type, only_search_in_titles_and_descriptions):
         """
         If only_search_in_titles_and_descriptions is True, match_type is ALL, and the query
-        contains no quotation marks, wrap contiguous inclusion tokens in quotes while leaving
-        exclusion tokens (starting with '-') as-is.
+        contains no quotation marks, then only wrap contiguous tokens in quotes if they form
+        an astronomy catalog name. Otherwise leave the tokens unchanged.
+
+        For example:
+          - "M 31" becomes '"M 31"'
+          - "foo bar" remains "foo bar"
+          - "foo M 31 bar" becomes 'foo "M 31" bar'
         """
-        if only_search_in_titles_and_descriptions and match_type == MatchType.ALL.value and '"' not in search_value:
-            tokens = search_value.split()
-            new_tokens = []
-            i = 0
-            while i < len(tokens):
-                # Leave exclusions unchanged.
-                if tokens[i].startswith('-'):
+        # Only modify if conditions are met.
+        if not (
+                only_search_in_titles_and_descriptions and match_type == MatchType.ALL.value and '"' not in search_value):
+            return search_value
+
+        tokens = search_value.split()
+        new_tokens = []
+        i = 0
+        while i < len(tokens):
+            if tokens[i].startswith('-'):
+                new_tokens.append(tokens[i])
+                i += 1
+            else:
+                # Attempt to combine current token with the next one if available.
+                if i + 1 < len(tokens) and not tokens[i + 1].startswith('-'):
+                    candidate = tokens[i] + " " + tokens[i + 1]
+                    if EncodedSearchViewSet.is_astronomy_catalog(candidate):
+                        new_tokens.append(f'"{candidate}"')
+                        i += 2
+                        continue
+                # Otherwise, if the single token is an astro catalog (e.g. "NGC1234"),
+                # leave it as is.
+                if EncodedSearchViewSet.is_astronomy_catalog(tokens[i]):
                     new_tokens.append(tokens[i])
-                    i += 1
                 else:
-                    group = []
-                    # Group contiguous tokens that are not exclusions.
-                    while i < len(tokens) and not tokens[i].startswith('-'):
-                        group.append(tokens[i])
-                        i += 1
-                    # Wrap group in quotes if more than one token.
-                    new_tokens.append(f'"{" ".join(group)}"' if len(group) > 1 else group[0])
-            return " ".join(new_tokens)
-        return search_value
+                    new_tokens.append(tokens[i])
+                i += 1
+        return " ".join(new_tokens)
 
     @staticmethod
     def split_include_exclude_terms(terms):
