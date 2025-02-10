@@ -1,5 +1,6 @@
 import base64
 import json
+import re
 import zlib
 from urllib.parse import parse_qs, unquote
 
@@ -142,8 +143,32 @@ class EncodedSearchViewSet(HaystackViewSet):
         return include_terms, exclude_terms
 
     @staticmethod
+    def expand_catalog_term(term):
+        # Remove outer quotes if present (case-insensitive, no case conversion needed)
+        if term and term[0] in ('"', "'") and term[-1] == term[0]:
+            term = term[1:-1]
+
+        # Sh2 catalog (case-insensitive)
+        m = re.match(r'^(Sh2)[-\s]?(\d+)$', term, re.IGNORECASE)
+        if m:
+            prefix, number = m.groups()
+            variant1 = f"{prefix}-{number}"
+            variant2 = f"{prefix} {number}"
+            return [variant1, variant2] if variant1 != variant2 else [variant1]
+
+        # Other catalogs (case-insensitive)
+        m = re.match(r'^(M|NGC|IC|PGC|LDN|LBN|VDB)\s?(\d+)$', term, re.IGNORECASE)
+        if m:
+            prefix, number = m.groups()
+            variant1 = f"{prefix}{number}"
+            variant2 = f"{prefix} {number}"
+            return [variant1, variant2] if variant1 != variant2 else [variant1]
+
+        return [term]
+
+    @staticmethod
     def build_search_query(results, query, only_search_in_titles_and_descriptions=False):
-        # Prepare the search value using the extracted method.
+        # Prepare the search value.
         search_value = query.get('value', '')
         match_type = query.get('matchType', MatchType.ANY.value)
         search_value = EncodedSearchViewSet.prepare_search_value(
@@ -151,35 +176,47 @@ class EncodedSearchViewSet(HaystackViewSet):
         )
 
         terms = EncodedSearchViewSet.parse_search_query(search_value)
-
         include_terms, exclude_terms = EncodedSearchViewSet.split_include_exclude_terms(terms)
 
         sqs = results
-
-        # Determine which fields to search.
         search_fields = ['title', 'description'] if only_search_in_titles_and_descriptions else ['text']
 
         # Handle inclusion.
         if include_terms:
             q = None
             for term in include_terms:
+                variants = EncodedSearchViewSet.expand_catalog_term(term)
                 term_q = None
                 for field in search_fields:
-                    term_q = SQ(**{field: AutoQuery(term)}) if term_q is None else term_q | SQ(
-                        **{field: AutoQuery(term)}
-                    )
-                q = term_q if q is None else (q & term_q if match_type == MatchType.ALL.value else q | term_q)
+                    for variant in variants:
+                        variant_value = EncodedSearchViewSet.prepare_search_value(
+                            variant, match_type, only_search_in_titles_and_descriptions
+                        )
+                        q_variant = SQ(**{field: AutoQuery(variant_value)})
+                        term_q = q_variant if term_q is None else term_q | q_variant
+                if q is None:
+                    q = term_q
+                else:
+                    if match_type == MatchType.ALL.value:
+                        q &= term_q
+                    else:
+                        q |= term_q
             if q is not None:
                 sqs = sqs.filter(q)
 
-        # Handle exclusion.
+        # Handle exclusion: call exclude() for each exclusion term separately.
         for term in exclude_terms:
-            exclude_q = None
+            variants = EncodedSearchViewSet.expand_catalog_term(term)
+            term_exclusion_q = None
             for field in search_fields:
-                exclude_q = SQ(**{field: AutoQuery(term)}) if exclude_q is None else exclude_q | SQ(
-                    **{field: AutoQuery(term)}
-                )
-            sqs = sqs.exclude(exclude_q)
+                for variant in variants:
+                    variant_value = EncodedSearchViewSet.prepare_search_value(
+                        variant, match_type, only_search_in_titles_and_descriptions
+                    )
+                    q_variant = SQ(**{field: AutoQuery(variant_value)})
+                    term_exclusion_q = q_variant if term_exclusion_q is None else term_exclusion_q | q_variant
+            if term_exclusion_q is not None:
+                sqs = sqs.exclude(term_exclusion_q)
 
         return sqs
 

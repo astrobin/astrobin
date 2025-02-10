@@ -1,7 +1,42 @@
+import shlex
+
 from django.test import TestCase
+from mock import patch
 
 from common.encoded_search_viewset import EncodedSearchViewSet
 from common.services.search_service import MatchType
+
+
+# Dummy query object that supports AND (&) and OR (|) operations.
+class DummyQuery:
+    def __init__(self, query):
+        self.query = query
+
+    def __or__(self, other):
+        return DummyQuery(f"({self.query} OR {other.query})")
+
+    def __and__(self, other):
+        return DummyQuery(f"({self.query} AND {other.query})")
+
+    def __str__(self):
+        return self.query
+
+    def __repr__(self):
+        return self.query
+
+# Fake SQS to record filter() and exclude() calls.
+class FakeSQS:
+    def __init__(self):
+        self.filter_calls = []
+        self.exclude_calls = []
+
+    def filter(self, query):
+        self.filter_calls.append(query)
+        return self
+
+    def exclude(self, query):
+        self.exclude_calls.append(query)
+        return self
 
 
 class EncodedSearchViewSetTests(TestCase):
@@ -76,3 +111,134 @@ class EncodedSearchViewSetTests(TestCase):
         include_terms, exclude_terms = EncodedSearchViewSet.split_include_exclude_terms(terms)
         self.assertEqual(include_terms, ["a", "e"])
         self.assertEqual(exclude_terms, ['"b c"', "d", '"f g h"', "i"])
+
+    def test_expand_catalog_term_non_catalog_term(self):
+        term = "hello"
+        self.assertEqual(EncodedSearchViewSet.expand_catalog_term(term), ["hello"])
+
+    def test_expand_catalog_term_M_catalog_with_space(self):
+        term = "M 101"
+        expected = ["M101", "M 101"]
+        self.assertEqual(set(EncodedSearchViewSet.expand_catalog_term(term)), set(expected))
+
+    def test_expand_catalog_term_M_catalog_without_space(self):
+        term = "M101"
+        expected = ["M101", "M 101"]
+        self.assertEqual(set(EncodedSearchViewSet.expand_catalog_term(term)), set(expected))
+
+    def test_expand_catalog_term_NGC_catalog(self):
+        term = "NGC1234"
+        expected = ["NGC1234", "NGC 1234"]
+        self.assertEqual(set(EncodedSearchViewSet.expand_catalog_term(term)), set(expected))
+
+    def test_expand_catalog_term_Sh2_catalog_with_dash(self):
+        term = "Sh2-188"
+        expected = ["Sh2-188", "Sh2 188"]
+        self.assertEqual(set(EncodedSearchViewSet.expand_catalog_term(term)), set(expected))
+
+    def test_expand_catalog_term_Sh2_catalog_with_space(self):
+        term = "Sh2 144"
+        expected = ["Sh2-144", "Sh2 144"]
+        self.assertEqual(set(EncodedSearchViewSet.expand_catalog_term(term)), set(expected))
+
+
+class BuildSearchQueryTests(TestCase):
+    def setUp(self):
+        # Patch SQ and AutoQuery in the module where they are used.
+        self.sq_patcher = patch(
+            'common.encoded_search_viewset.SQ',
+            new=lambda **kwargs: DummyQuery(":".join(f"{k}:{v}" for k, v in kwargs.items()))
+        )
+        self.autoquery_patcher = patch(
+            'common.encoded_search_viewset.AutoQuery',
+            new=lambda term: term
+        )
+        self.sq_patcher.start()
+        self.autoquery_patcher.start()
+        # Override the static method parse_search_query directly.
+        self.orig_parse = EncodedSearchViewSet.parse_search_query
+        EncodedSearchViewSet.parse_search_query = staticmethod(lambda value: shlex.split(value))
+
+    def tearDown(self):
+        self.sq_patcher.stop()
+        self.autoquery_patcher.stop()
+        EncodedSearchViewSet.parse_search_query = self.orig_parse
+
+    def test_inclusion_query(self):
+        # With matchType ALL and only_search_in_titles_and_descriptions True,
+        # prepare_search_value will wrap "M 31" so that parse_search_query returns ['M 31'].
+        # Then expand_catalog_term expands "M 31" into ["M31", "M 31"], but when re-prepared,
+        # the multi-word variant becomes '"M 31"'.
+        query = {'value': 'M 31', 'matchType': MatchType.ALL.value}
+        fake = FakeSQS()
+        EncodedSearchViewSet.build_search_query(fake, query, only_search_in_titles_and_descriptions=True)
+        # Expect one filter() call and no exclude() calls.
+        self.assertEqual(len(fake.filter_calls), 1)
+        self.assertEqual(len(fake.exclude_calls), 0)
+        qstr = str(fake.filter_calls[0])
+        # For the single-word variant, we expect no quotes.
+        self.assertIn("title:M31", qstr)
+        self.assertIn("description:M31", qstr)
+        # For the multi-word variant, we now expect the enforced quotes.
+        self.assertIn('title:"M 31"', qstr)
+        self.assertIn('description:"M 31"', qstr)
+
+    def test_exclusion_query(self):
+        # For an exclusion query "-NGC1234", the token becomes "NGC1234" and expands to
+        # ["NGC1234", "NGC 1234"] for each field.
+        query = {'value': '-NGC1234', 'matchType': MatchType.ANY.value}
+        fake = FakeSQS()
+        EncodedSearchViewSet.build_search_query(fake, query, only_search_in_titles_and_descriptions=True)
+        # No filter() call; expect one exclude() call.
+        self.assertEqual(len(fake.filter_calls), 0)
+        self.assertEqual(len(fake.exclude_calls), 1)
+        qstr = str(fake.exclude_calls[0])
+        for expected in ["title:NGC1234", "title:NGC 1234", "description:NGC1234", "description:NGC 1234"]:
+            self.assertIn(expected, qstr)
+
+    def test_mixed_query(self):
+        # With matchType ALL, "M 31" is wrapped as one token (expanding to both variants)
+        # and "-NGC1234" is processed as an exclusion term.
+        query = {'value': 'M 31 -NGC1234', 'matchType': MatchType.ALL.value}
+        fake = FakeSQS()
+        EncodedSearchViewSet.build_search_query(fake, query, only_search_in_titles_and_descriptions=True)
+        self.assertEqual(len(fake.filter_calls), 1)
+        self.assertEqual(len(fake.exclude_calls), 1)
+        inc_str = str(fake.filter_calls[0])
+        exc_str = str(fake.exclude_calls[0])
+        for expected in ["title:M31", "title:\"M 31\"", "description:M31", "description:\"M 31\""]:
+            self.assertIn(expected, inc_str)
+        for expected in ["title:NGC1234", "title:\"NGC 1234\"", "description:NGC1234", "description:\"NGC 1234\""]:
+            self.assertIn(expected, exc_str)
+
+    def test_multiple_astronomy_catalogs_inclusion(self):
+        # Multiple inclusion tokens as quoted phrases.
+        query = {'value': '"M 31" "NGC1234" "IC342"', 'matchType': MatchType.ALL.value}
+        fake = FakeSQS()
+        EncodedSearchViewSet.build_search_query(fake, query, only_search_in_titles_and_descriptions=True)
+        self.assertEqual(len(fake.filter_calls), 1)
+        self.assertEqual(len(fake.exclude_calls), 0)
+        qstr = str(fake.filter_calls[0])
+        for expected in ["title:M31", "title:\"M 31\"", "description:M31", "description:\"M 31\""]:
+            self.assertIn(expected, qstr)
+        for expected in ["title:NGC1234", "title:\"NGC 1234\"", "description:NGC1234", "description:\"NGC 1234\""]:
+            self.assertIn(expected, qstr)
+        for expected in ["title:IC342", "title:\"IC 342\"", "description:IC342", "description:\"IC 342\""]:
+            self.assertIn(expected, qstr)
+
+    def test_multiple_astronomy_catalogs_exclusion(self):
+        # Multiple exclusion tokens. The current implementation calls exclude() per token.
+        query = {'value': '-NGC1234 -IC342', 'matchType': MatchType.ANY.value}
+        fake = FakeSQS()
+        EncodedSearchViewSet.build_search_query(fake, query, only_search_in_titles_and_descriptions=True)
+        # Expect two separate exclude() calls.
+        self.assertEqual(len(fake.exclude_calls), 2)
+        # Verify each call contains the expected variants.
+        for call in fake.exclude_calls:
+            call_str = str(call)
+            if "NGC" in call_str:
+                for expected in ["title:NGC1234", "title:NGC 1234", "description:NGC1234", "description:NGC 1234"]:
+                    self.assertIn(expected, call_str)
+            elif "IC" in call_str:
+                for expected in ["title:IC342", "title:IC 342", "description:IC342", "description:IC 342"]:
+                    self.assertIn(expected, call_str)
