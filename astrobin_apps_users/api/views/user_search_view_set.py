@@ -3,6 +3,7 @@ import logging
 from django.contrib.auth.models import User
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from drf_haystack.filters import HaystackFilter, HaystackOrderingFilter
+from haystack.inputs import AutoQuery
 from haystack.query import SearchQuerySet
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.throttling import ScopedRateThrottle
@@ -22,8 +23,8 @@ class UserSearchViewSet(EncodedSearchViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [ReadOnly]
     filter_backends = (HaystackFilter, HaystackOrderingFilter)
-    ordering_fields = ('username', 'date_joined', 'last_login')
-    ordering = ('username',)
+    ordering_fields = ('_score', 'username', 'date_joined', 'last_login')
+    ordering = ('-_score',)
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'search'
     pagination_class = PageSizePagination
@@ -43,6 +44,6 @@ class UserSearchViewSet(EncodedSearchViewSet):
 
         if text.get('value'):
             log.debug(f"Searching for: {text.get('value')}")
-            queryset = SearchQuerySet().models(User).filter(display_name=text.get('value'))
+            queryset = SearchQuerySet().models(User).filter(display_name=AutoQuery(text.get('value')))
 
         return queryset

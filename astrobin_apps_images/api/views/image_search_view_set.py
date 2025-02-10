@@ -30,8 +30,8 @@ class ImageSearchViewSet(EncodedSearchViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [ReadOnly]
     filter_backends = (HaystackFilter, HaystackOrderingFilter)
-    ordering_fields = ('published', 'title', 'w', 'h', 'likes')
-    ordering = ('-published',)
+    ordering_fields = ('_score', 'published', 'title', 'w', 'h', 'likes')
+    ordering = ('-_score',)
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'search'
     pagination_class = PageSizePagination
@@ -172,7 +172,10 @@ class ImageSearchViewSet(EncodedSearchViewSet):
         queryset = SearchService.filter_by_similar_images(params, queryset)
         queryset = SearchService.filter_by_collaboration(params, queryset)
 
-        ordering = params.get('ordering', '-published')
+        if params.get('text', dict(value='')).get('value'):
+            ordering = params.get('ordering', '-_score')
+        else:
+            ordering = params.get('ordering', '-published')
 
         # Special fixes for some fields.
         if ordering.endswith('field_radius'):

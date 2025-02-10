@@ -1,5 +1,6 @@
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from drf_haystack.filters import HaystackFilter
+from haystack.inputs import AutoQuery
 from haystack.query import SearchQuerySet
 from pybb.models import Post
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -41,9 +42,11 @@ class PostSearchViewSet(EncodedSearchViewSet):
 
         if text.get('value'):
             queryset = EncodedSearchViewSet.build_search_query(queryset, text)
+            queryset = queryset.order_by('-_score')
+        else:
+            queryset = queryset.order_by('-created')
 
         queryset = self.filter_posts(params, queryset)
 
-        queryset = queryset.order_by('-created')
 
         return queryset
