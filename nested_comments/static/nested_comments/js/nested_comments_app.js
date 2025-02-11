@@ -400,7 +400,10 @@ $(function () {
                             comment.set('author_avatar', nc_data.author_avatar);
 
                             nc_app.commentStore.push(comment);
+                        });
 
+                        // Now that all comments are in commentStore, we can add them to the view
+                        $.each(nc_app.commentStore, function (i, comment) {
                             function commentIsShadowBanned(commentId) {
                                 if (commentId === null) {
                                     return false;
@@ -431,8 +434,6 @@ $(function () {
                         if (!self.get('ready')) {
                             self.set('ready', true);
                         }
-
-                        self.fetchComments(response.next, data);
                     }
                 });
             }
