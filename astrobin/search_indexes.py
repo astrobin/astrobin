@@ -466,16 +466,25 @@ class UserIndex(CelerySearchIndex, Indexable):
         return Post.objects.using(get_segregated_reader_database()).filter(user=obj).count()
 
     def prepare_top_pick_nominations(self, obj):
+        if obj.userprofile.exclude_from_competitions:
+            return 0
+
         return IotdService().get_top_pick_nominations().filter(
             Q(image__user=obj) | Q(image__collaborators=obj)
         ).distinct().count()
 
     def prepare_top_picks(self, obj):
+        if obj.userprofile.exclude_from_competitions:
+            return 0
+
         return IotdService().get_top_picks().filter(
             Q(image__user=obj) | Q(image__collaborators=obj)
         ).distinct().count()
 
     def prepare_iotds(self, obj):
+        if obj.userprofile.exclude_from_competitions:
+            return 0
+
         return IotdService().get_iotds().filter(Q(image__user=obj) | Q(image__collaborators=obj)).distinct().count()
 
 

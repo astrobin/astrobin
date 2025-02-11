@@ -1738,6 +1738,12 @@ def userprofile_pre_save(sender, instance: UserProfile, **kwargs):
         else:
             service.unsubscribe(list_id)
 
+    if before_save.exclude_from_competitions != instance.exclude_from_competitions:
+        SearchIndexUpdateService.update_index(instance.user)
+
+        for image in Image.objects_including_wip.filter(user=instance.user):
+            SearchIndexUpdateService.update_index(image)
+
 
 @receiver(post_softdelete, sender=UserProfile)
 def userprofile_post_softdelete(sender, instance, **kwargs):
