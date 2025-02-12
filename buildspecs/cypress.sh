@@ -8,12 +8,11 @@ export ARCH=$(uname -m)
 export POSTGRES_PASSWORD="v3rys3cr3t"
 export SUBNET_GROUP_NAME="default-vpc-b5c428ce"
 
-compose="docker-compose \
+compose="docker-compose --compatibility \
     -f docker/docker-compose-app.yml \
     -f docker/docker-compose-worker.yml \
     -f docker/docker-compose-scheduler.yml \
-    -f docker/docker-compose-local.yml \
-    -f docker/docker-compose-ci.yml"
+    -f docker/docker-compose-local.yml"
 
 if [ $"${ARCH}" == "aarch64" ]; then
     # https://docs.cypress.io/guides/getting-started/installing-cypress#Download-URLs
