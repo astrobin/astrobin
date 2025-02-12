@@ -1,0 +1,18 @@
+version: '3'
+services:
+  astrobin:
+    deploy: {}
+  celery_default:
+    deploy: {}
+  celery_email:
+    deploy: {}
+  celery_thumbnails:
+    deploy: {}
+  celery_haystack:
+    deploy: {}
+  celery_monitor:
+    deploy: {}
+  beat:
+    deploy: {}
+  flower:
+    deploy: {}
