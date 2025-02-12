@@ -1004,6 +1004,19 @@ class ImageService:
                 ).count()}
             )
 
+    def update_view_count(self):
+        if self.image and hasattr(self.image, 'view_count'):
+            try:
+                hit_count = HitCount.objects.get_for_object(self.image)
+                if hit_count and hasattr(hit_count, 'hits'):
+                    hits = hit_count.hits
+            except (HitCount.DoesNotExist, HitCount.MultipleObjectsReturned):
+                hits = 0
+
+            Image.all_objects.filter(pk=self.image.pk).update(
+                view_count=hits
+            )
+
     def update_comment_count(self):
         Image.all_objects.filter(pk=self.image.pk).update(
             comment_count=NestedComment.objects.filter(

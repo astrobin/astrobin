@@ -1312,6 +1312,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     like_count = models.PositiveIntegerField(editable=False, default=0)
     bookmark_count = models.PositiveIntegerField(editable=False, default=0)
     comment_count = models.PositiveIntegerField(editable=False, default=0)
+    view_count = models.PositiveIntegerField(editable=False, default=0)
 
     watermark_text = models.CharField(
         max_length=128,

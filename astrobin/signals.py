@@ -22,6 +22,7 @@ from django.dispatch import receiver
 from django.urls import reverse as reverse_url
 from django.utils import timezone
 from django.utils.translation import gettext, override
+from hitcount.models import HitCount
 from persistent_messages.models import Message
 from pybb.models import Forum, Post, Topic, TopicReadTracker
 from pybb.permissions import perms
@@ -579,7 +580,9 @@ def nested_comment_post_delete(sender, instance, **kwargs):
 
 
 def toggleproperty_post_delete(sender, instance, **kwargs):
-    log.debug(f"toggleproperty_post_delete: {instance.pk}/{instance.user.username}/{instance.property_type}/{instance.content_object}")
+    log.debug(
+        f"toggleproperty_post_delete: {instance.pk}/{instance.user.username}/{instance.property_type}/{instance.content_object}"
+    )
     if isinstance(instance.content_object, Image) and not instance.content_object.deleted:
         ImageService(instance.content_object).update_toggleproperty_count(instance.property_type)
         compute_image_index.apply_async(args=(instance.content_object.user.pk,), countdown=10)
@@ -606,7 +609,9 @@ post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 
 
 def toggleproperty_post_save(sender, instance, created, **kwargs):
-    log.debug(f"toggleproperty_post_save: {instance.pk}/{instance.user.username}/{instance.property_type}/{instance.content_object}")
+    log.debug(
+        f"toggleproperty_post_save: {instance.pk}/{instance.user.username}/{instance.property_type}/{instance.content_object}"
+    )
     if isinstance(instance.content_object, Image):
         Image.all_objects.filter(pk=instance.object_id).update(updated=timezone.now())
 
@@ -765,6 +770,18 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(toggleproperty_post_save, sender=ToggleProperty)
+
+
+@receiver(post_save, sender=HitCount)
+def hit_count_post_save(sender, instance, created, **kwargs):
+    if isinstance(instance.content_object, Image):
+        ImageService(instance.content_object).update_view_count()
+
+
+@receiver(post_delete, sender=HitCount)
+def hit_count_post_delete(sender, instance, **kwargs):
+    if isinstance(instance.content_object, Image):
+        ImageService(instance.content_object).update_view_count()
 
 
 def create_auth_token(sender, instance, created, **kwargs):
