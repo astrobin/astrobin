@@ -2,7 +2,7 @@
 
 export ARCH=$(uname -m)
 
-if [ "${ARCH}" == "aarch64" ]; then
+if [ "$ARCH" = "aarch64" ]; then
     # https://docs.cypress.io/guides/getting-started/installing-cypress#Download-URLs
     echo "Skipping this step on aarch64 because we're not running Cypress tests there."
     exit 0
@@ -23,4 +23,5 @@ aws rds create-db-instance \
     --no-multi-az \
     --publicly-accessible \
     --no-deletion-protection \
+    --no-snapshot \
     --db-subnet-group-name ${SUBNET_GROUP_NAME}
