@@ -8,6 +8,11 @@ export ARCH=$(uname -m)
 export POSTGRES_PASSWORD="v3rys3cr3t"
 export SUBNET_GROUP_NAME="default-vpc-b5c428ce"
 
+yq eval 'del(.services[].deploy)' -i docker/docker-compose-app.yml
+yq eval 'del(.services[].deploy)' -i docker/docker-compose-worker.yml
+yq eval 'del(.services[].deploy)' -i docker/docker-compose-scheduler.yml
+yq eval 'del(.services[].deploy)' -i docker/docker-compose-local.yml
+
 compose="docker-compose --compatibility \
     -f docker/docker-compose-app.yml \
     -f docker/docker-compose-worker.yml \

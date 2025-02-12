@@ -9,6 +9,8 @@ phases:
     commands:
       - buildspecs/create-test-db.sh
       - buildspecs/install-docker.sh
+      - wget https://github.com/mikefarah/yq/releases/download/v4.33.3/yq_linux_amd64 -O /usr/bin/yq
+      - chmod +x /usr/bin/yq
       - npm ci
       - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
       - buildspecs/pull-image.sh
