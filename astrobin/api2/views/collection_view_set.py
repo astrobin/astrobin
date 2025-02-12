@@ -29,10 +29,6 @@ class CollectionViewSet(viewsets.ModelViewSet):
 
         if 'user' in self.request.GET:
             queryset = queryset.filter(user__pk=self.request.GET.get('user'))
-        else:
-            if not self.request.user.is_authenticated:
-                return Collection.objects.none()
-            queryset = queryset.filter(user=self.request.user)
 
         if 'ids' in self.request.GET:
             queryset = queryset.filter(pk__in=self.request.GET.get('ids', '').split(','))
