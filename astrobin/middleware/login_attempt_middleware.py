@@ -11,7 +11,7 @@ from astrobin.fields import get_country_name
 from astrobin.middleware.mixins import MiddlewareParentClass
 from astrobin.models import UserProfile
 from astrobin.services.utils_service import UtilsService
-from astrobin.utils import get_client_country_code
+from astrobin.utils import get_client_country_code, get_client_ip
 from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
@@ -103,7 +103,7 @@ class LoginAttemptMiddleware(MiddlewareParentClass):
                     if user.userprofile.last_seen_in_country
                     else 'UNKNOWN',
                     'new_country': get_country_name(country_code.upper()) if country_code else 'UNKNOWN',
-                    'ip': request.META.get('REMOTE_ADDR'),
+                    'ip': get_client_ip(request),
                     'extra_tags': {
                         'context': NotificationContext.AUTHENTICATION
                     },
