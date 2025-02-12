@@ -92,7 +92,6 @@ class ImageSerializer(serializers.ModelSerializer):
     is_iotd = serializers.SerializerMethodField(read_only=True)
     is_top_pick = serializers.SerializerMethodField(read_only=True)
     is_top_pick_nomination = serializers.SerializerMethodField(read_only=True)
-    view_count = serializers.SerializerMethodField(read_only=True)
     average_moon_age = serializers.SerializerMethodField(read_only=True)
     average_moon_illumination = serializers.SerializerMethodField(read_only=True)
 
@@ -234,9 +233,6 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def get_is_top_pick_nomination(self, obj) -> bool:
         return self.iotd_service.is_top_pick_nomination(obj)
-
-    def get_view_count(self, obj) -> int:
-        return HitCount.objects.get_for_object(obj).hits
 
     def get_average_moon_age(self, obj) -> Optional[float]:
         data = []

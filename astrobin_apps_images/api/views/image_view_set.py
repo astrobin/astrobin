@@ -322,12 +322,14 @@ class ImageViewSet(
                     'likes': '-like_count',
                     'bookmarks': '-bookmark_count',
                     'comments': '-comment_count',
+                    'views': '-view_count',
                 }
 
                 if ordering not in (
                         'likes',
                         'bookmarks',
                         'comments',
+                        'views',
                 ):
                     return Response(
                         "Invalid ordering parameter.",
