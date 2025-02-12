@@ -23,5 +23,4 @@ aws rds create-db-instance \
     --no-multi-az \
     --publicly-accessible \
     --no-deletion-protection \
-    --no-snapshot \
     --db-subnet-group-name ${SUBNET_GROUP_NAME}
