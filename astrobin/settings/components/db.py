@@ -31,7 +31,7 @@ else:
             'CONN_MAX_AGE': 60,
         }
         REPLICA_DATABASES = ['reader']
-        MULTIDB_PINNING_SECONDS = 15
+        MULTIDB_PINNING_SECONDS = 1
         DATABASE_ROUTERS = ('multidb.PinningReplicaRouter',)
 
     if os.environ.get('POSTGRES_READ_REPLICA_SEGREGATED_HOST'):
