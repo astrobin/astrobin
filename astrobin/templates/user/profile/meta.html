@@ -141,10 +141,10 @@
                         class="info"
                         rel="tooltip"
                         title="
-                            {% trans 'The <strong>Last seen online</strong> field is updated hourly.' %}
+                            {{ _('The <strong>Last seen online</strong> field is updated hourly.') | force_escape }}
                             {% if request.user == requested_user %}
                                 <br/>
-                                {% trans "To change the visibility of these fields, edit your privacy settings." %}
+                               {{ _('To change the visibility of these fields, edit your privacy settings.') }}
                             {% endif %}"
                         data-container="body"
                         data-html="true"
