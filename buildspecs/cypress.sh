@@ -5,6 +5,12 @@ export ASTROBIN_HOST_TEMPORARY_FILES=/astrobin-temporary-files
 export ASTROBIN_GUNICORN_WORKERS=1
 export ARCH=$(uname -m)
 
+if [ $"${ARCH}" == "aarch64" ]; then
+    # https://docs.cypress.io/guides/getting-started/installing-cypress#Download-URLs
+    echo "Skipping Cypress tests on aarch64 because Cypress does not support it yet."
+    exit 0
+fi
+
 export POSTGRES_PASSWORD="v3rys3cr3t"
 export SUBNET_GROUP_NAME="default-vpc-b5c428ce"
 
@@ -19,12 +25,8 @@ compose="docker-compose --compatibility \
     -f docker/docker-compose-scheduler.yml \
     -f docker/docker-compose-local.yml"
 
-if [ $"${ARCH}" == "aarch64" ]; then
-    # https://docs.cypress.io/guides/getting-started/installing-cypress#Download-URLs
-    echo "Skipping Cypress tests on aarch64 because Cypress does not support it yet."
-    exit 0
-fi
-
+wget https://github.com/mikefarah/yq/releases/download/v4.33.3/yq_linux_amd64 -O /usr/bin/yq
+chmod +x /usr/bin/yq
 apt-get install -y ncat || exit 1
 
 GET_POSTGRES_ENDPOINT="aws rds describe-db-instances --db-instance-identifier astrobin-test-${CODEBUILD_BUILD_NUMBER}"
