@@ -18,3 +18,7 @@ class TurnstileWidget(forms.Widget):
             <div class="cf-turnstile" data-sitekey="{sitekey}" data-theme="dark"></div>
             <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
         '''.format(sitekey=final_attrs['data-sitekey'])
+
+    def value_from_datadict(self, data, files, name):
+        # Get the value from cf-turnstile-response instead of the field name
+        return data.get('cf-turnstile-response')
