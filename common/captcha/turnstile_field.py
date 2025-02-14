@@ -17,10 +17,10 @@ class TurnstileField(forms.CharField):
         super().__init__(*args, **kwargs)
 
     def clean(self, value):
+        if settings.DEBUG or getattr(settings, 'TESTING', False):
+            return value  # Skip validation in test/debug mode
+
         if not value:
-            if settings.DEBUG and settings.TURNSTILE_SITE_KEY == settings.TURNSTILE_TEST_SITE_KEY:
-                # In test mode with test key, bypass validation
-                return value
             raise forms.ValidationError(self.error_messages['required'])
 
         import requests
@@ -32,9 +32,6 @@ class TurnstileField(forms.CharField):
         )
 
         if not response.json().get('success'):
-            if settings.DEBUG and settings.TURNSTILE_SITE_KEY == settings.TURNSTILE_TEST_SITE_KEY:
-                # In test mode with test key, bypass validation
-                return value
             raise forms.ValidationError(self.error_messages['invalid'])
 
         return value

@@ -9,6 +9,9 @@ class TurnstileWidget(forms.Widget):
         self.attrs['data-sitekey'] = settings.TURNSTILE_SITE_KEY
 
     def render(self, name, value, attrs=None, renderer=None):
+        if settings.DEBUG or getattr(settings, 'TESTING', False):
+            return ''  # Return empty string in test/debug mode
+
         attrs = attrs or {}
         final_attrs = self.build_attrs(self.attrs, attrs)
         return '''
