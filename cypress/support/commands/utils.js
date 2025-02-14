@@ -5,13 +5,7 @@ Cypress.Commands.add("select2", (selector, option) => {
     });
 });
 
-Cypress.Commands.add('bypassReCAPTCHA', () => {
+Cypress.Commands.add('bypassCaptcha', () => {
     cy.wait(3000);
-    cy.get('#id_recaptcha iframe').then(iframe => {
-        const body = iframe.contents().find('body');
-        cy.wrap(body)
-            .find('.recaptcha-checkbox-border')
-            .should('be.visible')
-            .click();
-    });
+    cy.get('.cf-turnstile iframe').should('be.visible');
 });

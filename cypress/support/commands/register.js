@@ -14,7 +14,7 @@ Cypress.Commands.add('register', (opts={}) => {
     cy.get(".select2-results__option:nth-child(2)").click();
     cy.get("#uniform-id_tos").click();
 
-    cy.bypassReCAPTCHA();
+    cy.bypassCaptcha();
     cy.wait(1500);
 
     cy.get(".form-horizontal .btn[type='submit']").click();
