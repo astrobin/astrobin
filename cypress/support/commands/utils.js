@@ -4,8 +4,3 @@ Cypress.Commands.add("select2", (selector, option) => {
         cy.get("#select2-" + id + "-results .select2-results__option").contains(option).click();
     });
 });
-
-Cypress.Commands.add('bypassCaptcha', () => {
-    cy.wait(3000);
-    cy.get('.cf-turnstile iframe').should('be.visible');
-});
