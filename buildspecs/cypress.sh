@@ -14,6 +14,8 @@ fi
 export POSTGRES_PASSWORD="v3rys3cr3t"
 export SUBNET_GROUP_NAME="default-vpc-b5c428ce"
 
+wget https://github.com/mikefarah/yq/releases/download/v4.33.3/yq_linux_amd64 -O /usr/bin/yq
+chmod +x /usr/bin/yq
 yq eval 'del(.services[].deploy)' -i docker/docker-compose-app.yml
 yq eval 'del(.services[].deploy)' -i docker/docker-compose-worker.yml
 yq eval 'del(.services[].deploy)' -i docker/docker-compose-scheduler.yml
@@ -25,8 +27,6 @@ compose="docker-compose --compatibility \
     -f docker/docker-compose-scheduler.yml \
     -f docker/docker-compose-local.yml"
 
-wget https://github.com/mikefarah/yq/releases/download/v4.33.3/yq_linux_amd64 -O /usr/bin/yq
-chmod +x /usr/bin/yq
 apt-get install -y ncat || exit 1
 
 GET_POSTGRES_ENDPOINT="aws rds describe-db-instances --db-instance-identifier astrobin-test-${CODEBUILD_BUILD_NUMBER}"
