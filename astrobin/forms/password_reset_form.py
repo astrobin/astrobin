@@ -1,24 +1,18 @@
 import logging
 
-from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV2Checkbox
 from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.translation import gettext
 from djangojs.conf import settings
 
+from common.captcha import TurnstileField
+
+
 log = logging.getLogger(__name__)
 
 
 class PasswordResetForm(BasePasswordResetForm):
-    recaptcha = ReCaptchaField(
-        label=gettext('Are you a robot?'),
-        widget=ReCaptchaV2Checkbox(
-            attrs={
-                'data-theme': 'dark',
-            }
-        )
-    )
+    captcha = TurnstileField()
 
     subject_template_name = 'registration/password_reset_subject.txt'
     email_template_name = 'registration/password_reset_email.txt'

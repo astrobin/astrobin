@@ -1,7 +1,5 @@
-from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV2Checkbox
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Fieldset, HTML, Layout, Submit
+from crispy_forms.layout import Div, Fieldset, HTML, Layout
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import Group, User
@@ -15,6 +13,7 @@ from astrobin.utils import get_client_country_code
 from astrobin_apps_notifications.services.notifications_service import NotificationContext
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
+from common.captcha import TurnstileField
 from common.constants import GroupName
 from common.templatetags.common_tags import button_loading_class, button_loading_indicator
 
@@ -52,14 +51,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
         label=_('I accept to receive occasional marketing and commercial material via email'),
         help_text=_('These emails may contain offers, commercial news, and promotions from AstroBin or its partners.'))
 
-    recaptcha = ReCaptchaField(
-        label=_('Are you a robot?'),
-        widget=ReCaptchaV2Checkbox(
-            attrs={
-                'data-theme': 'dark',
-            }
-        )
-    )
+    captcha = TurnstileField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -95,7 +87,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             ),
             Fieldset(
                 '',
-                'recaptcha',
+                'captcha',
             ) if not settings.TESTING else Fieldset(''),
             Div(
                 HTML(
@@ -175,7 +167,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
         'important_communications',
         'newsletter',
         'marketing_material',
-        'recaptcha',
+        'captcha',
     ]
 
     class Meta(RegistrationForm.Meta):

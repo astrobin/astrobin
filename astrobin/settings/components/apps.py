@@ -68,7 +68,6 @@ INSTALLED_APPS += [
     'corsheaders',
     'image_cropping',
     'django_extensions',
-    'captcha',
     'django_celery_monitor',
     'celery_haystack',
     'django_pwnedpasswords_validator',

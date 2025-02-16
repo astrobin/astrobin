@@ -377,7 +377,7 @@ class CollectionTest(TestCase):
             HTTP_X_REQUESTED_WITH='XMLHttpRequest',
         )
 
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 401)
 
     def test_set_cover_image_not_collection_owner(self):
         collection = Collection.objects.create(user=Generators.user())
@@ -402,7 +402,7 @@ class CollectionTest(TestCase):
             HTTP_X_REQUESTED_WITH='XMLHttpRequest',
         )
 
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 403)
 
     def test_set_cover_image_not_image_owner(self):
         collection = Collection.objects.create(user=Generators.user())

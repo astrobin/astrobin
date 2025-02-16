@@ -35,7 +35,6 @@ class MessagesTest(TestCase):
             'recipient': 'user2',
             'subject': subject,
             'body': 'I am a body',
-            'g-recaptcha-response': '1',
         }, follow=True)
 
         self.assertEqual(response.status_code, 200)
@@ -58,7 +57,6 @@ class MessagesTest(TestCase):
             'recipient': 'user2',
             'subject': subject,
             'body': body,
-            'g-recaptcha-response': '1',
         }, follow=True)
 
         thread = Thread.objects.all()[0]  # type: Thread
@@ -81,7 +79,6 @@ class MessagesTest(TestCase):
             'recipient': 'user2',
             'subject': subject,
             'body': body,
-            # No 'g-recaptcha-response' parameter!
         }, follow=True)
 
         thread: Thread = Thread.objects.all()[0]
