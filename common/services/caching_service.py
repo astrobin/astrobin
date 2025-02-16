@@ -140,6 +140,10 @@ class CachingService:
 
     @staticmethod
     def get_last_notification_time(request, pk=None):
+        # Disable caching for search queries
+        if 'message' in request.GET:
+            return DateTimeService.now()
+
         if pk:
             try:
                 return Message.objects.get(pk=pk).modified

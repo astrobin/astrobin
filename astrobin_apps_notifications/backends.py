@@ -38,6 +38,7 @@ class PersistentMessagesBackend(BaseBackend):
             user=recipient,
             from_user=sender,
             level=level,
+            subject=notice_type.label,
             message=message,
             **({"extra_tags": json.dumps(extra_tags)} if extra_tags is not None else {})
         )
