@@ -77,6 +77,15 @@
                             {% trans "Advanced annotations" %}
                         </a>
                     </li>
+                    
+                    <li>
+                        <a href="{% url 'image_download' image.get_id revision_label 'advanced_annotations_large_font' %}"
+                           class="no-page-loader file-download-link"
+                        >
+                            <i class="icon-star-empty"></i>
+                            {% trans "Advanced annotations (large font)" %}
+                        </a>
+                    </li>
                 {% endif %}
             {% endif %}
 

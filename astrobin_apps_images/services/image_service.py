@@ -1048,10 +1048,15 @@ class ImageService:
 
             return ret
 
-        def _do_download_advanced_annotations_image(solution: Solution) -> HttpResponse:
+        def _do_download_advanced_annotations_image(solution: Solution, annotation_size: str) -> HttpResponse:
+            if annotation_size == 'regular':
+                field = 'pixinsight_svg_annotation_regular'
+            else:
+                field = 'pixinsight_svg_annotation_hd'
+
             # Download SVG
             response = UtilsService.http_with_retries(
-                f'{settings.MEDIA_URL}{solution.pixinsight_svg_annotation_hd}',
+                f'{settings.MEDIA_URL}{getattr(solution, field)}',
                 headers={'User-Agent': 'Mozilla/5.0'}
             )
             local_svg: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.svg', delete=False)
@@ -1144,7 +1149,12 @@ class ImageService:
 
         if version == 'advanced_annotations':
             if revision.solution and revision.solution.pixinsight_svg_annotation_hd:
-                return _do_download_advanced_annotations_image(revision.solution)
+                return _do_download_advanced_annotations_image(revision.solution, 'hd')
+            raise FileNotFoundError
+
+        if version == 'advanced_annotations_large_font':
+            if revision.solution and revision.solution.pixinsight_svg_annotation_regular:
+                return _do_download_advanced_annotations_image(revision.solution, 'regular')
             raise FileNotFoundError
 
         if version in ('regular', 'hd', 'qhd', 'real'):
