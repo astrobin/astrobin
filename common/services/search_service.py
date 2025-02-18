@@ -29,7 +29,8 @@ from common.services import DateTimeService
 
 class MatchType(Enum):
     ALL = 'ALL'
-    ANY = 'ANY'
+    ANY = 'ANY',
+    EXACT = 'EXACT'
 
 
 class CustomContain(BaseInput):
@@ -188,6 +189,8 @@ class SearchService:
         item = data.get(key)
         queries = []
         op = or_
+        match_type = None
+        exact_match = False  # Used for single items where match_type is not available.
 
         if not item:
             return results
@@ -196,6 +199,7 @@ class SearchService:
             items = item.get("value")
             item_ids = [x['id'] for x in items]
             match_type = item.get("matchType", MatchType.ALL.value)
+            exact_match = item.get("exactMatch", False)
             op = or_ if match_type == MatchType.ANY.value else and_
         elif isinstance(item, list):
             item_ids = item
@@ -203,8 +207,15 @@ class SearchService:
             item_ids = None
 
         if item_ids:
-            for item_id in item_ids:
-                queries.append(Q(**{id_field: item_id}))
+            if exact_match or match_type == MatchType.EXACT.value:
+                # Build a term query for each ID.
+                for item_id in item_ids:
+                    queries.append(Q(**{id_field: item_id}))
+                # Additional filter to ensure the count matches exactly.
+                queries.append(Q(**{f"{id_field}_count": len(item_ids)}))
+            else:
+                for item_id in item_ids:
+                    queries.append(Q(**{id_field: item_id}))
         elif isinstance(item, str):
             if legacy_field is not None:
                 queries.append(
@@ -216,7 +227,7 @@ class SearchService:
                     Q(**{new_field: CustomContain(item)})
                 )
 
-        if len(queries) > 0:
+        if queries:
             results = results.filter(reduce(op, queries))
 
         return results
