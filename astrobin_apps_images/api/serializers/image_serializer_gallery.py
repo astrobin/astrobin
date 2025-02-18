@@ -42,6 +42,12 @@ class ImageSerializerGallery(ImageSerializer):
                 'id': instance.pk,
                 'revision': 'final',
                 'url': instance.thumbnail('regular', None, sync=True)
+            },
+            {
+                'alias': 'hd',
+                'id': instance.pk,
+                'revision': 'final',
+                'url': instance.thumbnail('hd', None, sync=True)
             }
         ]
 
