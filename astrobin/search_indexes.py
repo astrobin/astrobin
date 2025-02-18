@@ -541,6 +541,11 @@ class ImageIndex(CelerySearchIndex, Indexable):
     software_2 = CharField()
     software_2_id = CharField()
 
+    # Counts used for exact matches
+    imaging_telescopes_2_id_count = IntegerField()
+    imaging_cameras_2_id_count = IntegerField()
+    mounts_2_id_count = IntegerField()
+
     has_modified_camera = BooleanField()
     has_color_camera = BooleanField()
     has_mono_camera = BooleanField()
@@ -786,6 +791,17 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_software_2_id(self, obj):
         return [f"{x.id}" for x in obj.software_2.all()]
+
+    ###################################################################################################################
+
+    def prepare_imaging_telescopes_2_id_count(self, obj):
+        return obj.imaging_telescopes_2.count()
+
+    def prepare_imaging_cameras_2_id_count(self, obj):
+        return obj.imaging_cameras_2.count()
+
+    def prepare_mounts_2_id_count(self, obj):
+        return obj.mounts_2.count()
 
     ###################################################################################################################
 
