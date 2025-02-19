@@ -641,6 +641,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     gallery_thumbnail = CharField()
     regular_thumbnail = CharField()
+    hd_thumbnail = CharField()
 
     user_followed_by = MultiValueField()
 
@@ -1092,6 +1093,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_regular_thumbnail(self, obj: Image):
         return obj.thumbnail('regular', 'final', sync=True)
+
+    def prepare_hd_thumbnail(self, obj: Image):
+        return obj.thumbnail('hd', 'final', sync=True)
 
     def prepare_user_followed_by(self, obj: Image):
         follows = ToggleProperty.objects.toggleproperties_for_object("follow", obj.user)
