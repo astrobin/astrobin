@@ -18,4 +18,7 @@ class FilterSerializerForImage(FilterSerializer):
             'brand_name',
             'klass',
             'listings',
+            'type',
+            'bandwidth',
+            'size',
         )

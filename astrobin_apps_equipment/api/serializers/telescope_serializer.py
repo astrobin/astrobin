@@ -18,4 +18,9 @@ class TelescopeSerializerForImage(TelescopeSerializer):
             'brand_name',
             'klass',
             'listings',
+            'type',
+            'aperture',
+            'min_focal_length',
+            'max_focal_length',
+            'weight',
         )
