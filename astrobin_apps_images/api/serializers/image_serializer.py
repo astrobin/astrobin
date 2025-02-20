@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from typing import Optional
 
-from hitcount.models import HitCount
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from subscription.models import UserSubscription

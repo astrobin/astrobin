@@ -18,4 +18,5 @@ class AccessorySerializerForImage(AccessorySerializer):
             'brand_name',
             'klass',
             'listings',
+            'type',
         )

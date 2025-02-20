@@ -18,4 +18,11 @@ class MountSerializerForImage(MountSerializer):
             'brand_name',
             'klass',
             'listings',
+            'type',
+            'weight',
+            'max_payload',
+            'computerized',
+            'periodic_error',
+            'pec',
+            'slew_speed',
         )

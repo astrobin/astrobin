@@ -27,4 +27,9 @@ class CameraSerializerForImage(CameraSerializer):
             'brand_name',
             'klass',
             'listings',
+            'type',
+            'sensor',
+            'cooled',
+            'max_cooling',
+            'back_focus'
         )
