@@ -9,6 +9,7 @@ from django.urls import reverse
 from precise_bbcode.templatetags.bbcode_tags import bbcode
 
 from astrobin.models import Image, UserProfile
+from astrobin.services.utils_service import UtilsService
 from astrobin.stories import ACTSTREAM_VERB_COMMENTED_IMAGE, add_story
 from astrobin_apps_equipment.models import (
     Accessory, Camera, EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing,
@@ -185,6 +186,7 @@ class CommentNotificationsService:
                         deleted=False
                     ).count(),
                     comment_html=bbcode(instance.text),
+                    comment_language=UtilsService.detect_language(UtilsService.strip_bbcode(instance.text)),
                 )
 
         if instance.parent and \

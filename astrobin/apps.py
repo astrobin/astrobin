@@ -63,7 +63,10 @@ class AstroBinAppConfig(AppConfig):
         from astrobin import signals  # noqa
         from astrobin_apps_notifications import signals  # noqa
         from astrobin.locale_extras import LOCALE_EXTRAS  # noqa
+        from langdetect import DetectorFactory
 
         self.init_actstream()
         self.init_avatar()
         self.init_search()
+
+        DetectorFactory.seed = 0
