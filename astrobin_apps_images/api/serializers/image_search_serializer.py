@@ -104,6 +104,7 @@ class ImageSearchSerializer(HaystackSerializer):
             'coord_dec_max',
             'gallery_thumbnail',
             'regular_thumbnail',
+            'hd_thumbnail',
             'animated',
             'video',
             'is_iotd',
