@@ -29,7 +29,7 @@ from common.services import DateTimeService
 
 class MatchType(Enum):
     ALL = 'ALL'
-    ANY = 'ANY',
+    ANY = 'ANY'
     EXACT = 'EXACT'
 
 
