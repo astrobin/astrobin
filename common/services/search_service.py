@@ -29,7 +29,7 @@ from common.services import DateTimeService
 
 class MatchType(Enum):
     ALL = 'ALL'
-    ANY = 'ANY',
+    ANY = 'ANY'
     EXACT = 'EXACT'
 
 
@@ -199,7 +199,7 @@ class SearchService:
             items = item.get("value")
             item_ids = [x['id'] for x in items]
             match_type = item.get("matchType", MatchType.ALL.value)
-            exact_match = item.get("exactMatch", False)
+            exact_match = item.get("exactMatch", False) and len(item_ids) == 1
             op = or_ if match_type == MatchType.ANY.value else and_
         elif isinstance(item, list):
             item_ids = item
