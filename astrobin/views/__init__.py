@@ -1156,7 +1156,11 @@ def me(request):
 @cache_control(private=True, no_cache=True)
 @vary_on_cookie
 def user_page(request, username):
-    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+    if (
+            request.user.is_authenticated and
+            request.user.userprofile.enable_new_gallery_experience and
+            'force-classic-view' not in request.GET
+    ):
         return redirect(AppRedirectionService.gallery_redirect(request, username))
 
     try:
