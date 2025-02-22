@@ -3,6 +3,7 @@ import logging
 from braces.views import JsonRequestResponseMixin
 from django.conf import settings
 from django.http import HttpResponseForbidden, HttpResponseNotFound
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext
 from django.views.decorators.cache import cache_control, cache_page
@@ -18,6 +19,7 @@ from astrobin_apps_iotd.models import (
     IotdVote,
 )
 from astrobin_apps_iotd.services import IotdService
+from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
 
 log = logging.getLogger(__name__)
@@ -38,6 +40,15 @@ class IotdArchiveView(ListView):
 
     def get_queryset(self):
         return IotdService().get_iotds()
+
+    def dispatch(self, request, *args, **kwargs):
+        if (
+                request.user.is_authenticated and
+                request.user.userprofile.enable_new_gallery_experience
+        ):
+            return redirect(AppRedirectionService.redirect('/explore/iotd-tp-archive'))
+        return super().dispatch(request, *args, **kwargs)
+
 
 
 class ImageStats(JsonRequestResponseMixin, base.View):

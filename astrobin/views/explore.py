@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_control, cache_page
 from django.views.decorators.http import last_modified
@@ -7,6 +8,7 @@ from django.views.generic import ListView
 from astrobin.models import Image
 from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_iotd.services import IotdService
+from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
 
 
@@ -36,12 +38,14 @@ class TopPickBaseView(ListView):
         return context
 
 
-@method_decorator([
-    cache_page(600),
-    last_modified(CachingService.get_latest_top_pick_datetime),
-    cache_control(private=True),
-    vary_on_cookie
-], name='dispatch')
+@method_decorator(
+    [
+        cache_page(600),
+        last_modified(CachingService.get_latest_top_pick_datetime),
+        cache_control(private=True),
+        vary_on_cookie
+    ], name='dispatch'
+)
 class TopPicksView(TopPickBaseView):
     model = TopPickArchive
     template_name = 'top_picks.html'
@@ -53,13 +57,23 @@ class TopPicksView(TopPickBaseView):
         queryset = self.filter_by_acquisition_type(queryset)
         return queryset
 
+    def dispatch(self, request, *args, **kwargs):
+        if (
+                request.user.is_authenticated and
+                request.user.userprofile.enable_new_gallery_experience
+        ):
+            return redirect(AppRedirectionService.redirect('/explore/iotd-tp-archive#top-pick'))
+        return super().dispatch(request, *args, **kwargs)
 
-@method_decorator([
-    cache_page(600),
-    last_modified(CachingService.get_latest_top_pick_nomination_datetime),
-    cache_control(private=True),
-    vary_on_cookie
-], name='dispatch')
+
+@method_decorator(
+    [
+        cache_page(600),
+        last_modified(CachingService.get_latest_top_pick_nomination_datetime),
+        cache_control(private=True),
+        vary_on_cookie
+    ], name='dispatch'
+)
 class TopPickNominationsView(TopPickBaseView):
     model = TopPickNominationsArchive
     template_name = 'top_pick_nominations.html'
@@ -70,3 +84,12 @@ class TopPickNominationsView(TopPickBaseView):
         queryset = self.filter_by_datasource(queryset)
         queryset = self.filter_by_acquisition_type(queryset)
         return queryset
+
+    def dispatch(self, request, *args, **kwargs):
+        if (
+                request.user.is_authenticated and
+                request.user.userprofile.enable_new_gallery_experience
+        ):
+            return redirect(AppRedirectionService.redirect('/explore/iotd-tp-archive#top-pick-nomination'))
+        return super().dispatch(request, *args, **kwargs)
+
