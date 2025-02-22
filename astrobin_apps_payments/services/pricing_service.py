@@ -252,7 +252,7 @@ class PricingService:
             "DE",  # Germany
             "GG",  # Guernsey
             "BE",  # Belgium
-            "TW",  # Taiwan
+            "TW",  # Republic of China (Taiwan)
             "AD",  # Andorra
             "AU",  # Australia
             "BH",  # Bahrain
