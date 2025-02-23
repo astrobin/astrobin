@@ -24,7 +24,6 @@ from rest_framework.status import (
     HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN,
     HTTP_404_NOT_FOUND,
 )
-from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.viewsets import GenericViewSet
 
 from astrobin.enums.moderator_decision import ModeratorDecision
@@ -63,8 +62,6 @@ class ImageViewSet(
         or_permission(IsImageOwnerOrReadOnly, IsSuperUser)
     ]
     http_method_names = ['get', 'head', 'put', 'patch', 'delete']
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'images'
 
     user: Optional[User] = None
     menu: Optional[str] = None

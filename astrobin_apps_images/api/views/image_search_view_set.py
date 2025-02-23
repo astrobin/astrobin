@@ -6,7 +6,6 @@ from drf_haystack.filters import HaystackFilter, HaystackOrderingFilter
 from haystack.query import SearchQuerySet
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
-from rest_framework.throttling import ScopedRateThrottle
 
 from astrobin import utils
 from astrobin.models import Image
@@ -32,8 +31,6 @@ class ImageSearchViewSet(EncodedSearchViewSet):
     filter_backends = (HaystackFilter, HaystackOrderingFilter)
     ordering_fields = ('_score', 'published', 'title', 'w', 'h', 'likes')
     ordering = ('-_score',)
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'search'
     pagination_class = PageSizePagination
 
     def list(self, request, *args, **kwargs):

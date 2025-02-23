@@ -9,6 +9,7 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
+from astrobin.api2.throttle import MultiRateThrottle
 from astrobin.utils import get_client_country_code
 from astrobin_apps_equipment.api.filters.equipment_brand_filter import EquipmentBrandFilter
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
@@ -29,7 +30,7 @@ class BrandViewSet(viewsets.ModelViewSet):
     permission_classes = [IsEquipmentModeratorOrOwnMigratorOrReadOnly]
     filter_class = EquipmentBrandFilter
     http_method_names = ['get', 'post', 'head']
-    throttle_classes = [EquipmentCreateThrottle]
+    throttle_classes = [EquipmentCreateThrottle, MultiRateThrottle]
 
     def get_queryset(self):
         q = self.request.GET.get('q')
