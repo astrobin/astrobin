@@ -15,7 +15,7 @@ class ImageSerializerGallery(ImageSerializer):
     class RevisionSerializer(ModelSerializer):
         class Meta:
             model = ImageRevision
-            fields = ('pk', 'label', 'w', 'h')
+            fields = ('pk', 'label', 'w', 'h', 'square_cropping', 'is_final',)
 
     collaborators = CollaboratorSerializer(many=True, read_only=True)
     is_playable = serializers.SerializerMethodField()
@@ -82,6 +82,7 @@ class ImageSerializerGallery(ImageSerializer):
             'hash',
             'title',
             'is_wip',
+            'is_final',
             'w',
             'h',
             'square_cropping',
