@@ -17,10 +17,10 @@ MULTI_THROTTLE_RATES = {
     },
     'user': {
         'read': ["80/10s", "300/60s", "1000/5min"],
-        'write': ["60/60s", "300/5min"],
+        'write': ["200/60s", "1000/5min"],
     },
     'premium': {
         'read': ["120/10s", "500/60s", "2000/5min"],
-        'write': ["100/60s", "500/5min"],
+        'write': ["400/60s", "2000/5min"],
     },
 }
