@@ -38,6 +38,12 @@ class ImageSerializerGallery(ImageSerializer):
     def get_thumbnails(self, instance: Image):
         return [
             {
+                'alias': 'gallery',
+                'id': instance.pk,
+                'revision': 'final',
+                'url': instance.thumbnail('gallery', None, sync=True)
+            },
+            {
                 'alias': 'regular',
                 'id': instance.pk,
                 'revision': 'final',
