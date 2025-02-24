@@ -56,6 +56,20 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
     permission_classes = [IsEquipmentModeratorOrOwnMigratorOrReadOnly]
     http_method_names = ['get', 'post', 'head']
     throttle_classes = [EquipmentCreateThrottle, MultiRateThrottle]
+    throttle_rates = {
+        'anon': {
+            'read': ["150/60s", "500/5min"],
+            'write': ["40/60s", "200/5min"],
+        },
+        'user': {
+            'read': ["1000/5min"],
+            'write': ["60/60s", "300/5min"],
+        },
+        'premium': {
+            'read': ["500/60s", "2000/5min"],
+            'write': ["100/60s", "500/5min"],
+        },
+    }
 
     def _conflict_response(self):
         return Response(
