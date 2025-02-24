@@ -192,6 +192,12 @@ class SearchService:
         match_type = None
         exact_match = False  # Used for single items where match_type is not available.
 
+        supports_exact_match = key in [
+            'telescope',
+            'camera',
+            'mount',
+        ]
+
         if not item:
             return results
 
@@ -199,7 +205,7 @@ class SearchService:
             items = item.get("value")
             item_ids = [x['id'] for x in items]
             match_type = item.get("matchType", MatchType.ALL.value)
-            exact_match = item.get("exactMatch", False) and len(item_ids) == 1
+            exact_match = supports_exact_match and item.get("exactMatch", False) and len(item_ids) == 1
             op = or_ if match_type == MatchType.ANY.value else and_
         elif isinstance(item, list):
             item_ids = item
