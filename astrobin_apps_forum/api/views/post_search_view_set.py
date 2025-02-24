@@ -3,7 +3,6 @@ from drf_haystack.filters import HaystackFilter
 from haystack.query import SearchQuerySet
 from pybb.models import Post
 from rest_framework.renderers import BrowsableAPIRenderer
-from rest_framework.throttling import ScopedRateThrottle
 
 from astrobin_apps_forum.api.serializers.post_search_serializer import PostSearchSerializer
 from common.api_page_size_pagination import PageSizePagination
@@ -18,8 +17,6 @@ class PostSearchViewSet(EncodedSearchViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [ReadOnly]
     filter_backends = (HaystackFilter,)
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'search'
     pagination_class = PageSizePagination
 
     def filter_posts(self, params: dict, queryset: SearchQuerySet) -> SearchQuerySet:

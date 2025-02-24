@@ -6,7 +6,6 @@ from drf_haystack.filters import HaystackFilter, HaystackOrderingFilter
 from haystack.inputs import AutoQuery
 from haystack.query import SearchQuerySet
 from rest_framework.renderers import BrowsableAPIRenderer
-from rest_framework.throttling import ScopedRateThrottle
 
 from astrobin_apps_users.api.serializers.user_search_serializer import UserSearchSerializer
 from common.api_page_size_pagination import PageSizePagination
@@ -25,8 +24,6 @@ class UserSearchViewSet(EncodedSearchViewSet):
     filter_backends = (HaystackFilter, HaystackOrderingFilter)
     ordering_fields = ('_score', 'username', 'date_joined', 'last_login')
     ordering = ('-_score',)
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'search'
     pagination_class = PageSizePagination
 
     def filter_queryset(self, queryset: SearchQuerySet) -> SearchQuerySet:

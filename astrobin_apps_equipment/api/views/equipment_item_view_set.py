@@ -26,6 +26,7 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
 
+from astrobin.api2.throttle import MultiRateThrottle
 from astrobin.models import Image
 from astrobin.utils import get_client_country_code
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
@@ -54,7 +55,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
     parser_classes = [CamelCaseJSONParser]
     permission_classes = [IsEquipmentModeratorOrOwnMigratorOrReadOnly]
     http_method_names = ['get', 'post', 'head']
-    throttle_classes = [EquipmentCreateThrottle]
+    throttle_classes = [EquipmentCreateThrottle, MultiRateThrottle]
 
     def _conflict_response(self):
         return Response(

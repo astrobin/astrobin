@@ -15,7 +15,6 @@ from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
-from rest_framework.throttling import ScopedRateThrottle
 
 from common.api_page_size_pagination import PageSizePagination
 from common.encoded_search_viewset import EncodedSearchViewSet
@@ -173,8 +172,6 @@ class NestedCommentSearchViewSet(EncodedSearchViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [ReadOnly]
     filter_backends = (HaystackFilter,)
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'search'
     pagination_class = PageSizePagination
 
     def filter_queryset(self, queryset: SearchQuerySet) -> SearchQuerySet:

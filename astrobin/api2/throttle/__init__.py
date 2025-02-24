@@ -1,1 +1,2 @@
 from .auth_token_throttle import AuthTokenThrottle
+from .multi_rate_throttle import MultiRateThrottle

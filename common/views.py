@@ -18,7 +18,6 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN
-from rest_framework.throttling import ScopedRateThrottle
 from subscription.models import Subscription, Transaction, UserSubscription
 
 from astrobin.models import Image, UserProfile
@@ -68,8 +67,6 @@ class UserList(generics.ListAPIView):
         'groups',
         'groups__permissions'
     ).all()
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     def get_cache_key(self, username):
         return f"api_common_user_list:{username}"
@@ -124,16 +121,12 @@ class UserDetail(generics.RetrieveAPIView):
         'groups',
         'groups__permissions'
     ).all()
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
 
 class UserEmptyTrash(generics.GenericAPIView):
     model = User
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
     queryset = User.objects.all()
 
     def post(self, request, *args, **kwargs):
@@ -211,8 +204,6 @@ class UserProfileList(generics.ListAPIView):
     pagination_class = None
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('user',)
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     def get_queryset(self) -> QuerySet:
         if 'q' in self.request.query_params:
@@ -243,8 +234,6 @@ class UserProfileDetail(generics.RetrieveAPIView):
     queryset = UserProfile.objects.filter(
         suspended__isnull=True
     )
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     def get_serializer_class(self):
         profile = self.get_queryset().first()
@@ -265,8 +254,6 @@ class UserProfileStats(generics.RetrieveAPIView):
     queryset = UserProfile.objects.filter(
         suspended__isnull=True
     )
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     def get_serializer_class(self):
         return UserProfileStatsSerializer
@@ -278,8 +265,6 @@ class UserProfileFollowers(generics.RetrieveAPIView):
     queryset = UserProfile.objects.filter(
         suspended__isnull=True
     )
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     def get_serializer_class(self):
         return UserProfileFollowersSerializer
@@ -289,8 +274,6 @@ class UserProfileFollowing(generics.RetrieveAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
     queryset = UserProfile.objects.all()
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     def get_serializer_class(self):
         return UserProfileFollowingSerializer
@@ -300,8 +283,6 @@ class UserProfileMutualFollowers(generics.RetrieveAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
     queryset = UserProfile.objects.all()
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     def get_serializer_class(self):
         return UserProfileMutualFollowersSerializer
@@ -314,8 +295,6 @@ class UserProfileChangeGalleryHeader(generics.UpdateAPIView):
     queryset = UserProfile.objects.filter(
         suspended__isnull=True
     )
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     def update(self, request, *args, **kwargs):
         profile: UserProfile = self.get_object()
@@ -353,8 +332,6 @@ class CurrentUserProfileDetail(generics.ListAPIView):
         suspended__isnull=True
     )
     pagination_class = None
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     def get_serializer_class(self):
         profile = self.get_queryset().first()
@@ -372,8 +349,6 @@ class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin)
     model = UserProfile
     serializer_class = UserProfileSerializerPrivate
     permission_classes = [IsAuthenticated]
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
     parser_classes = [CamelCaseJSONParser]
 
     def get_queryset(self):
@@ -387,8 +362,6 @@ class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin)
 
 class UserProfileShadowBanView(GenericAPIView):
     permission_classes = [IsAuthenticated]
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     @method_decorator(never_cache)
     def post(self, request, pk):
@@ -420,8 +393,6 @@ class UserProfileShadowBanView(GenericAPIView):
 
 class UserProfileRemoveShadowBanView(GenericAPIView):
     permission_classes = [IsAuthenticated]
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'users'
 
     @method_decorator(never_cache)
     def post(self, request, pk):
