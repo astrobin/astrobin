@@ -92,7 +92,7 @@ class PlateSolvingAdvancedSettings(models.Model):
     hd_max_magnitude = models.DecimalField(
         null=True,
         blank=True,
-        default=9,
+        default=6,
         max_digits=4,
         decimal_places=2,
         verbose_name=_("Max. magnitude"),
