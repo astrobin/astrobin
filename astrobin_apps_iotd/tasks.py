@@ -5,6 +5,7 @@ from celery import shared_task
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.core.cache import cache
+from django.core.mail import mail_admins
 from django.db.models import Q, QuerySet
 
 from astrobin.models import Image
@@ -43,11 +44,36 @@ def send_iotd_staff_insufficiently_active_reminders_and_remove_after_max_reminde
 
     for member in insufficiently_active_members:
         if (member.userprofile.insufficiently_active_iotd_staff_member_reminders_sent or 0) >= max_reminders:
+            # Determine member roles before removing them
+            was_reviewer = member.groups.filter(name=GroupName.IOTD_REVIEWERS).exists()
+            was_submitter = member.groups.filter(name=GroupName.IOTD_SUBMITTERS).exists()
+            
             member.groups.remove(Group.objects.get(name=GroupName.IOTD_STAFF))
             member.groups.remove(Group.objects.get(name=GroupName.IOTD_REVIEWERS))
             member.groups.remove(Group.objects.get(name=GroupName.IOTD_SUBMITTERS))
             member.userprofile.insufficiently_active_iotd_staff_member_reminders_sent = 0
             member.userprofile.save(keep_deleted=True)
+            
+            roles = []
+            if was_submitter:
+                roles.append("Submitter")
+            if was_reviewer:
+                roles.append("Reviewer")
+                
+            role_str = " and ".join(roles)
+            logger.info(
+                f"Removed {member.username}/{member.pk} ({role_str}) from IOTD staff groups due to insufficient "
+                f"activity"
+            )
+            
+            # Email admins about the removal
+            mail_admins(
+                subject=f"IOTD: {member.username} ({role_str}) removed from staff due to inactivity",
+                message=f"User {member.username} (ID: {member.pk}) has been removed from the IOTD staff groups.\n\n"
+                        f"Role(s): {role_str}\n\n"
+                        f"Reason: They did not meet the minimum requirement of {min_promotions} promotions in {days}"
+                        f" days after receiving {max_reminders} reminders."
+            )
 
             push_notification(
                 [member], None, 'iotd_staff_inactive_removal_notice', {
@@ -80,15 +106,42 @@ def send_iotd_staff_insufficiently_active_reminders_and_remove_after_max_reminde
                 }
             )
 
+
 @shared_task(time_limit=180)
 def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
     final_notice_days = settings.IOTD_MAX_INACTIVE_DAYS
     final_notice_members = IotdService().get_inactive_submitters_and_reviewers(final_notice_days)
     if final_notice_members:
         for member in final_notice_members:
+            # Determine member roles before removing them
+            was_reviewer = member.groups.filter(name=GroupName.IOTD_REVIEWERS).exists()
+            was_submitter = member.groups.filter(name=GroupName.IOTD_SUBMITTERS).exists()
+            
             member.groups.remove(Group.objects.get(name=GroupName.IOTD_STAFF))
-            member.groups.remove(Group.objects.get(name=GroupName.IOTD_REVIEWERS))
-            member.groups.remove(Group.objects.get(name=GroupName.IOTD_SUBMITTERS))
+
+            if was_reviewer:
+                member.groups.remove(Group.objects.get(name=GroupName.IOTD_REVIEWERS))
+                logger.info(f"Removed {member.username}/{member.pk} from IOTD_REVIEWERS group")
+
+            if was_submitter:
+                member.groups.remove(Group.objects.get(name=GroupName.IOTD_SUBMITTERS))
+                logger.info(f"Removed {member.username}/{member.pk} from IOTD_SUBMITTERS group")
+                
+            roles = []
+            if was_submitter:
+                roles.append("Submitter")
+            if was_reviewer:
+                roles.append("Reviewer")
+                
+            role_str = " and ".join(roles)
+            
+            # Email admins about the removal
+            mail_admins(
+                subject=f"IOTD: {member.username} ({role_str}) removed from staff due to inactivity",
+                message=f"User {member.username} (ID: {member.pk}) has been removed from the IOTD staff groups.\n\n"
+                        f"Role(s): {role_str}\n\n"
+                        f"Reason: They have been inactive for {final_notice_days} days."
+            )
 
         push_notification(final_notice_members, None, 'iotd_staff_inactive_removal_notice', {
             'BASE_URL': settings.BASE_URL,
