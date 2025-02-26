@@ -197,7 +197,7 @@ class SolutionService:
 
         return observation_time, latitude, longitude, altitude
 
-    def start_advanced_solver(self):
+    def start_advanced_solver(self, priority='normal'):
         target = self.solution.content_object
         self.enforce_settings()
 
@@ -235,7 +235,8 @@ class SolutionService:
                 altitude=altitude,
                 advanced_settings=self.solution.advanced_settings,
                 image_width=target.w,
-                image_height=target.h
+                image_height=target.h,
+                priority=priority
             )
 
             self.solution.status = Solver.ADVANCED_PENDING
@@ -290,6 +291,10 @@ class SolutionService:
                 self.solution.save()
                 return
 
+            # Set advanced settings based on field radius
+            self.enforce_settings()
+            self._set_advanced_settings_based_on_radius()
+
             filename, _ = os.path.splitext(target.image_file.name)
             annotated_filename = "%s-%d%s" % (filename, int(time.time()), '.jpg')
             if annotated_image:
@@ -314,6 +319,132 @@ class SolutionService:
 
         self.solution.status = status
         self.solution.save()
+        
+    def _set_advanced_settings_based_on_radius(self) -> None:
+        """
+        Set advanced settings based on field radius.
+        The smaller the radius, the more detailed the annotations we can show.
+        """
+        if self.solution.radius is None:
+            return
+            
+        radius = float(self.solution.radius)
+        advanced_settings = self.solution.advanced_settings
+        
+        # Always show these no matter the field size
+        advanced_settings.show_grid = True
+        advanced_settings.show_ecliptic = True
+        advanced_settings.show_galactic_equator = True
+        advanced_settings.show_constellation_borders = True
+        advanced_settings.show_constellation_lines = True
+        
+        # Very large field - only show structural elements (>30 degrees)
+        if radius > 30:
+            advanced_settings.scaled_font_size = "S"
+            advanced_settings.show_named_stars = True
+            advanced_settings.show_hd = False
+            advanced_settings.show_messier = True
+            advanced_settings.show_ngc_ic = False
+            advanced_settings.show_vdb = False
+            advanced_settings.show_sharpless = False
+            advanced_settings.show_barnard = False
+            advanced_settings.show_lbn = False
+            advanced_settings.show_ldn = False
+            advanced_settings.show_pgc = False
+            advanced_settings.show_planets = True
+            advanced_settings.show_asteroids = False
+            advanced_settings.show_gcvs = False
+            advanced_settings.show_tycho_2 = False
+            advanced_settings.show_cgpn = False
+            advanced_settings.show_quasars = False
+            
+        # Large field (15-30 degrees)
+        elif radius > 15:
+            advanced_settings.scaled_font_size = "S"
+            advanced_settings.show_named_stars = True
+            advanced_settings.show_hd = True
+            advanced_settings.hd_max_magnitude = 4.5
+            advanced_settings.show_messier = True
+            advanced_settings.show_ngc_ic = False
+            advanced_settings.show_vdb = False
+            advanced_settings.show_sharpless = True
+            advanced_settings.show_barnard = False
+            advanced_settings.show_lbn = False
+            advanced_settings.show_ldn = False
+            advanced_settings.show_pgc = False
+            advanced_settings.show_planets = True
+            advanced_settings.show_asteroids = False
+            advanced_settings.show_gcvs = False
+            advanced_settings.show_tycho_2 = False
+            advanced_settings.show_cgpn = True
+            advanced_settings.show_quasars = False
+            
+        # Medium field (4-15 degrees)
+        elif radius > 4:
+            advanced_settings.scaled_font_size = "M"
+            advanced_settings.show_named_stars = True
+            advanced_settings.show_hd = True
+            advanced_settings.hd_max_magnitude = 6.0
+            advanced_settings.show_messier = True
+            advanced_settings.show_ngc_ic = True
+            advanced_settings.show_vdb = True
+            advanced_settings.show_sharpless = True
+            advanced_settings.show_barnard = True
+            advanced_settings.show_lbn = True
+            advanced_settings.show_ldn = True
+            advanced_settings.show_pgc = False
+            advanced_settings.show_planets = True
+            advanced_settings.show_asteroids = True
+            advanced_settings.show_gcvs = False
+            advanced_settings.show_tycho_2 = False
+            advanced_settings.show_cgpn = True
+            advanced_settings.show_quasars = False
+            
+        # Small field (1-4 degrees)
+        elif radius > 1:
+            advanced_settings.scaled_font_size = "M"
+            advanced_settings.show_named_stars = True
+            advanced_settings.show_hd = True
+            advanced_settings.hd_max_magnitude = 6
+            advanced_settings.show_messier = True
+            advanced_settings.show_ngc_ic = True
+            advanced_settings.show_vdb = True
+            advanced_settings.show_sharpless = True
+            advanced_settings.show_barnard = True
+            advanced_settings.show_lbn = True
+            advanced_settings.show_ldn = True
+            advanced_settings.show_pgc = True
+            advanced_settings.show_planets = True
+            advanced_settings.show_asteroids = True
+            advanced_settings.show_gcvs = True
+            advanced_settings.gcvs_max_magnitude = 10.0
+            advanced_settings.show_tycho_2 = False
+            advanced_settings.show_cgpn = True
+            advanced_settings.show_quasars = False
+            
+        # Very small field (<1 degree) - show everything
+        else:
+            advanced_settings.show_named_stars = True
+            advanced_settings.show_hd = True
+            advanced_settings.hd_max_magnitude = 8
+            advanced_settings.show_messier = True
+            advanced_settings.show_ngc_ic = True
+            advanced_settings.show_vdb = True
+            advanced_settings.show_sharpless = True
+            advanced_settings.show_barnard = True
+            advanced_settings.show_lbn = True
+            advanced_settings.show_ldn = True
+            advanced_settings.show_pgc = True
+            advanced_settings.show_planets = True
+            advanced_settings.show_asteroids = True
+            advanced_settings.show_gcvs = True
+            advanced_settings.gcvs_max_magnitude = 12.0
+            advanced_settings.show_tycho_2 = True
+            advanced_settings.tycho_2_max_magnitude = 11.0
+            advanced_settings.show_cgpn = True
+            advanced_settings.show_quasars = True
+            
+        advanced_settings.save()
 
     def restart(self):
         self.solution.clear()

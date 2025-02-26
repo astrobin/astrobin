@@ -123,7 +123,7 @@ def finalize_basic_solver(solution_id: int):
 
 
 @shared_task(time_limit=300)
-def start_advanced_solver(solution_id: int):
+def start_advanced_solver(solution_id: int, priority: str = 'normal'):
     solution: Solution = get_object_or_None(Solution, pk=solution_id)
     if solution is None:
         logger.error(f'start_advanced_solver: returning because solution {solution_id} not found')
@@ -147,5 +147,5 @@ def start_advanced_solver(solution_id: int):
     image_id: Union[str, int]
     revision_label: str
     image_id, revision_label = get_target_image_id_and_label(solution.content_object)
-    SolutionService(solution).start_advanced_solver()
-    logger.debug(f'start_advanced_solver: {solution_id} for {image_id}/{revision_label}')
+    SolutionService(solution).start_advanced_solver(priority=priority)
+    logger.debug(f'start_advanced_solver: {solution_id} for {image_id}/{revision_label} with priority {priority}')

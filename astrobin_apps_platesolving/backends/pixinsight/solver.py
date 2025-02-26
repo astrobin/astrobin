@@ -2,28 +2,29 @@ import logging
 import random
 import string
 import urllib.request, urllib.parse, urllib.error
+from typing import Optional
 
 from django.conf import settings
 from django.urls import reverse
 
 from astrobin.templatetags.tags import thumbnail_scale
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
-from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedSettings, PlateSolvingAdvancedTask
 
 log = logging.getLogger(__name__)
 
 
 class Solver(AbstractPlateSolvingBackend):
     def start(self, image_url, **kwargs):
-        advanced_settings = kwargs.pop('advanced_settings', None)  # type: PlateSolvingAdvancedSettings
-        image_width = kwargs.pop('image_width')  # type: int
-        image_height = kwargs.pop('image_height')  # type: int
+        advanced_settings: Optional[PlateSolvingAdvancedSettings] = kwargs.pop('advanced_settings', None)
+        image_width: int = kwargs.pop('image_width')
+        image_height: int = kwargs.pop('image_height')
         small_size_ratio: float = thumbnail_scale(image_width, 'hd', 'regular')
-        pixscale = kwargs.pop('pixscale')  # type: float
-        hd_width = min(image_width, settings.THUMBNAIL_ALIASES['']['hd']['size'][0])  # type: int
-        hd_ratio = max(1, image_width / float(hd_width))  # type: float
-        hd_height = int(image_height / hd_ratio)  # type: int
-        settings_hd_width = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
+        pixscale: float = kwargs.pop('pixscale')
+        hd_width: int = min(image_width, settings.THUMBNAIL_ALIASES['']['hd']['size'][0])
+        hd_ratio: float = max(1.0, image_width / float(hd_width))
+        hd_height: int = int(image_height / hd_ratio)
+        settings_hd_width: int = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
 
         if image_width > settings_hd_width and advanced_settings and not advanced_settings.sample_raw_frame_file:
             ratio = image_width / float(settings_hd_width)
@@ -114,23 +115,29 @@ class Solver(AbstractPlateSolvingBackend):
         if len(layers) > 0:
             task_params.append('layers=%s' % '|'.join(layers))
 
-        layerMaxMagnitudes = []
+        layer_max_magnitudes = []
         for layer in layers:
             if layer == 'HD Cross-Reference' and advanced_settings.hd_max_magnitude is not None:
-                layerMaxMagnitudes.append(str(advanced_settings.hd_max_magnitude))
+                layer_max_magnitudes.append(str(advanced_settings.hd_max_magnitude))
             elif layer == 'GCVS' and advanced_settings.gcvs_max_magnitude is not None:
-                layerMaxMagnitudes.append(str(advanced_settings.gcvs_max_magnitude))
+                layer_max_magnitudes.append(str(advanced_settings.gcvs_max_magnitude))
             elif layer == 'TYCHO-2' and advanced_settings.tycho_2_max_magnitude is not None:
-                layerMaxMagnitudes.append(str(advanced_settings.tycho_2_max_magnitude))
+                layer_max_magnitudes.append(str(advanced_settings.tycho_2_max_magnitude))
             else:
-                layerMaxMagnitudes.append("")
+                layer_max_magnitudes.append("")
 
-        if len(layerMaxMagnitudes) > 0:
-            task_params.append(f'layerMagnitudeLimits={"|".join(layerMaxMagnitudes)}')
+        if len(layer_max_magnitudes) > 0:
+            task_params.append(f'layerMagnitudeLimits={"|".join(layer_max_magnitudes)}')
+
+        # Get priority from kwargs, default to 'normal'
+        priority = kwargs.pop('priority', 'normal')
+        if priority not in ('normal', 'low'):
+            priority = 'normal'
 
         task = PlateSolvingAdvancedTask.objects.create(
             serial_number=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32)),
             task_params=urllib.parse.quote('\n'.join(task_params)),
+            priority=priority,
         )
 
         log.debug("PixInsight plate-solving: created task %s" % task.serial_number)

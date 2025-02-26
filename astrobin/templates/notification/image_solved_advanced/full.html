@@ -9,6 +9,13 @@
 
 <br /><br />
 
+{% blocktrans trimmed %}
+    AstroBin applied default settings that should work well for the field size of this image.
+    You are free to change these settings using the "Edit plate-solving settings" menu in your image.
+{% endblocktrans %}
+
+<br /><br />
+
 {% if image_thumbnail %}
     <a href="{{ object_url }}">
         <img src="{{ image_thumbnail }}" />

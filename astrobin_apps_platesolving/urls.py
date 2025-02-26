@@ -8,8 +8,14 @@ from astrobin_apps_platesolving.views.solution import (
 urlpatterns = (
     url(
         r'pixinsight/next-task/$',
-        SolutionPixInsightNextTask.as_view(),
+        SolutionPixInsightNextTask.as_view(priority='normal'),
         name='astrobin_apps_platesolving.pixinsight_next_task'
+    ),
+    
+    url(
+        r'pixinsight/next-task-low-priority/$',
+        SolutionPixInsightNextTask.as_view(priority='low'),
+        name='astrobin_apps_platesolving.pixinsight_next_task_low_priority'
     ),
 
     url(

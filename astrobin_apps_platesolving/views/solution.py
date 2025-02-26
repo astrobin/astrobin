@@ -37,6 +37,12 @@ log = logging.getLogger(__name__)
 
 
 class SolutionPixInsightNextTask(base.View):
+    priority = 'normal'
+    
+    def __init__(self, **kwargs):
+        self.priority = kwargs.pop('priority', 'normal')
+        super(SolutionPixInsightNextTask, self).__init__(**kwargs)
+    
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super(SolutionPixInsightNextTask, self).dispatch(request, *args, **kwargs)
@@ -49,7 +55,10 @@ class SolutionPixInsightNextTask(base.View):
             return HttpResponseForbidden()
 
         with lock_table(PlateSolvingAdvancedTask):
-            task = PlateSolvingAdvancedTask.objects.filter(active=True).order_by('-created').last()
+            task = PlateSolvingAdvancedTask.objects.filter(
+                active=True, 
+                priority=self.priority
+            ).order_by('-created').last()
 
             if task is None:
                 return HttpResponse('')

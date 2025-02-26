@@ -801,6 +801,17 @@ def solution_pre_save(sender, instance, **kwargs):
     if solution_before_save.status >= instance.status:
         return
 
+    # Check if this is a low priority task and skip notification if so
+    skip_notification = False
+    if instance.pixinsight_serial_number:
+        from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
+        task = PlateSolvingAdvancedTask.objects.filter(
+            serial_number=instance.pixinsight_serial_number
+        ).first()
+        
+        if task and task.priority == 'low':
+            skip_notification = True
+
     if instance.status == Solver.FAILED and instance.attempts >= 1:
         notification = 'image_not_solved'
     elif instance.status == Solver.SUCCESS:
@@ -832,6 +843,10 @@ def solution_pre_save(sender, instance, **kwargs):
         image_id = target.image.get_id()
         revision_label = target.label
     else:
+        return
+
+    # Skip sending notification for low priority tasks
+    if skip_notification:
         return
 
     push_notification(
