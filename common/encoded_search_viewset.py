@@ -54,6 +54,9 @@ class EncodedSearchViewSet(HaystackViewSet):
 
     @staticmethod
     def parse_search_query(query):
+        # First, strip out consecutive empty quotes ('' or "")
+        query = query.replace("''", "").replace('""', "")
+        
         terms = []
         current_term = []
         in_quotes = None  # None, '"' or "'"
@@ -112,7 +115,7 @@ class EncodedSearchViewSet(HaystackViewSet):
         """
         If only_search_in_titles_and_descriptions is True, match_type is ALL, and the query
         contains no quotation marks, then only wrap contiguous tokens in quotes if they form
-        an astronomy catalog name. Otherwise leave the tokens unchanged.
+        an astronomy catalog name. Otherwise, leave the tokens unchanged.
 
         For example:
           - "M 31" becomes '"M 31"'
@@ -167,12 +170,17 @@ class EncodedSearchViewSet(HaystackViewSet):
 
     @staticmethod
     def expand_catalog_term(term):
+        # Save original term for later use if it's not a catalog
+        original_term = term
+        
         # Remove outer quotes if present (case-insensitive, no case conversion needed)
         if term and term[0] in ('"', "'") and term[-1] == term[0]:
-            term = term[1:-1]
+            unquoted_term = term[1:-1]
+        else:
+            unquoted_term = term
 
         # Sh2 catalog (case-insensitive)
-        m = re.match(r'^(Sh2)[-\s]?(\d+)$', term, re.IGNORECASE)
+        m = re.match(r'^(Sh2)[-\s]?(\d+)$', unquoted_term, re.IGNORECASE)
         if m:
             prefix, number = m.groups()
             variant1 = f"{prefix}-{number}"
@@ -180,14 +188,15 @@ class EncodedSearchViewSet(HaystackViewSet):
             return [variant1, variant2] if variant1 != variant2 else [variant1]
 
         # Other catalogs (case-insensitive)
-        m = re.match(r'^(M|NGC|IC|PGC|LDN|LBN|VDB)\s?(\d+)$', term, re.IGNORECASE)
+        m = re.match(r'^(M|NGC|IC|PGC|LDN|LBN|VDB)\s?(\d+)$', unquoted_term, re.IGNORECASE)
         if m:
             prefix, number = m.groups()
             variant1 = f"{prefix}{number}"
             variant2 = f"{prefix} {number}"
             return [variant1, variant2] if variant1 != variant2 else [variant1]
 
-        return [term]
+        # If we get here, it's not a catalog term, so return the original (possibly quoted) term
+        return [original_term]
 
     @staticmethod
     def build_search_query(results, query, only_search_in_titles_and_descriptions=False):
