@@ -69,10 +69,8 @@ class EncodedSearchViewSet(HaystackViewSet):
             if char in '"\'':
                 if in_quotes == char:  # Closing quote
                     current_term.append(char)
-                    term_content = ''.join(current_term)
-                    # Check if there's actual content between quotes
-                    if len(term_content) > 2:  # More than just opening and closing quotes
-                        terms.append(term_content)
+                    if current_term:
+                        terms.append(''.join(current_term))
                     current_term = []
                     in_quotes = None
                 elif in_quotes is None:  # Opening quote
@@ -97,28 +95,11 @@ class EncodedSearchViewSet(HaystackViewSet):
 
             i += 1
 
-        # Handle any remaining term
+        # Handle any remaining term and unclosed quotes
         if current_term:
-            term_content = ''.join(current_term)
-            if term_content.strip():
-                terms.append(term_content)
+            terms.append(''.join(current_term))
 
-        # Filter out empty terms and terms that are just quotes (e.g., "" or '')
-        filtered_terms = []
-        for term in terms:
-            stripped_term = term.strip()
-            # Keep only terms that have meaningful content
-            if stripped_term:
-                # Filter out terms that are just quotes with nothing in between
-                is_empty_quotes = (
-                    len(stripped_term) == 2 and
-                    ((stripped_term[0] == '"' and stripped_term[1] == '"') or
-                     (stripped_term[0] == "'" and stripped_term[1] == "'"))
-                )
-                if not is_empty_quotes:
-                    filtered_terms.append(term)
-        
-        return filtered_terms
+        return [term for term in terms if term.strip()]
 
     @staticmethod
     def is_astronomy_catalog(term):
@@ -134,7 +115,7 @@ class EncodedSearchViewSet(HaystackViewSet):
         """
         If only_search_in_titles_and_descriptions is True, match_type is ALL, and the query
         contains no quotation marks, then only wrap contiguous tokens in quotes if they form
-        an astronomy catalog name. Otherwise leave the tokens unchanged.
+        an astronomy catalog name. Otherwise, leave the tokens unchanged.
 
         For example:
           - "M 31" becomes '"M 31"'
@@ -182,12 +163,9 @@ class EncodedSearchViewSet(HaystackViewSet):
         exclude_terms = []
         for term in terms:
             if term.startswith('-'):
-                term_without_dash = term[1:]
-                if term_without_dash.strip():  # Check if the term is not empty after removing the dash
-                    exclude_terms.append(term_without_dash)
+                exclude_terms.append(term[1:])
             else:
-                if term.strip():  # Check if the term is not empty
-                    include_terms.append(term)
+                include_terms.append(term)
         return include_terms, exclude_terms
 
     @staticmethod

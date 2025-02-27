@@ -99,7 +99,14 @@ class EncodedSearchViewSetTests(TestCase):
         self.assertEqual(include_terms, [])
         self.assertEqual(exclude_terms, ["c", "d"])
 
-    def test_split_include_exclude_terms_inclusion_with_dash_quote(self):
+    def test_split_include_terms_inclusion_with_dash_quote(self):
+        # Searching for '"a b"' should include "a b"
+        terms = ['"a b"']
+        include_terms, exclude_terms = EncodedSearchViewSet.split_include_exclude_terms(terms)
+        self.assertEqual(include_terms, ['"a b"'])
+        self.assertEqual(exclude_terms, [])
+
+    def test_split_exclude_terms_inclusion_with_dash_quote(self):
         # Searching for '-"a b"' should exclude "a b"
         terms = ['-"a b"']
         include_terms, exclude_terms = EncodedSearchViewSet.split_include_exclude_terms(terms)
@@ -305,3 +312,13 @@ class BuildSearchQueryTests(TestCase):
             if "text:" in part:
                 # Ensure no empty query terms (this was the bug - empty text:)
                 self.assertNotEqual(part.strip(), "text:")
+
+    def test_quotes_wrapping_everything(self):
+        """Test that the entire query is wrapped in quotes."""
+        query = {'value': '"a b c"', 'matchType': MatchType.ALL.value}
+        fake = FakeSQS()
+        EncodedSearchViewSet.build_search_query(fake, query)
+        self.assertEqual(len(fake.filter_calls), 1)
+        self.assertEqual(len(fake.exclude_calls), 0)
+        qstr = str(fake.filter_calls[0])
+        self.assertEqual(qstr, 'text:"a b c"')
