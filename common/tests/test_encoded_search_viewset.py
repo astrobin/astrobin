@@ -141,6 +141,43 @@ class EncodedSearchViewSetTests(TestCase):
         expected = ["Sh2-144", "Sh2 144"]
         self.assertEqual(set(EncodedSearchViewSet.expand_catalog_term(term)), set(expected))
 
+    def test_parse_search_query_with_consecutive_single_quotes(self):
+        """Test that consecutive single quotes are removed."""
+        query = "gso 8''"
+        terms = EncodedSearchViewSet.parse_search_query(query)
+        # Should parse as two terms: 'gso' and '8'
+        self.assertEqual(len(terms), 2)
+        self.assertEqual(terms[0], "gso")
+        self.assertEqual(terms[1], "8")
+        # Most importantly, there should not be any empty terms
+        self.assertTrue(all(term.strip() for term in terms))
+
+    def test_parse_search_query_with_consecutive_double_quotes(self):
+        """Test that consecutive double quotes are removed."""
+        query = 'telescope 10""'
+        terms = EncodedSearchViewSet.parse_search_query(query)
+        # Should parse as two terms: 'telescope' and '10'
+        self.assertEqual(len(terms), 2)
+        self.assertEqual(terms[0], "telescope")
+        self.assertEqual(terms[1], '10')
+        # Most importantly, there should not be any empty terms
+        self.assertTrue(all(term.strip() for term in terms))
+        
+    def test_parse_search_query_with_empty_quotes(self):
+        """Test that empty quoted strings are filtered out."""
+        query = 'a "" b \'\' c'
+        terms = EncodedSearchViewSet.parse_search_query(query)
+        # Should only include non-empty terms: 'a', 'b', and 'c'
+        self.assertEqual(len(terms), 3)
+        self.assertEqual(terms, ["a", "b", "c"])
+        
+    def test_parse_search_query_with_mixed_quotes(self):
+        """Test parsing with mixed single and double quotes."""
+        query = 'a "quoted phrase" b \'single quoted\' c'
+        terms = EncodedSearchViewSet.parse_search_query(query)
+        self.assertEqual(len(terms), 5)
+        self.assertEqual(terms, ["a", "\"quoted phrase\"", "b", "'single quoted'", "c"])
+
 
 class BuildSearchQueryTests(TestCase):
     def setUp(self):
@@ -242,3 +279,29 @@ class BuildSearchQueryTests(TestCase):
             elif "IC" in call_str:
                 for expected in ["title:IC342", "title:IC 342", "description:IC342", "description:IC 342"]:
                     self.assertIn(expected, call_str)
+    
+    def test_consecutive_single_quotes_in_search_value(self):
+        """Test the specific bug fix for 'gso 8'' issue."""
+        query = {'value': "gso 8''", 'matchType': MatchType.ALL.value}
+        fake = FakeSQS()
+        
+        # Let the actual implementation parse the query
+        EncodedSearchViewSet.build_search_query(fake, query)
+        
+        # Verify that there's exactly one filter call and no exclude calls
+        self.assertEqual(len(fake.filter_calls), 1)
+        self.assertEqual(len(fake.exclude_calls), 0)
+        
+        # Get the query string
+        qstr = str(fake.filter_calls[0])
+        
+        # Verify the query contains text:gso and text:8 (no quotes)
+        self.assertIn("text:gso", qstr)
+        self.assertIn("text:8", qstr)
+        
+        # Make sure we don't have empty text: terms
+        parts = qstr.replace("(", "").split(")")
+        for part in parts:
+            if "text:" in part:
+                # Ensure no empty query terms (this was the bug - empty text:)
+                self.assertNotEqual(part.strip(), "text:")
