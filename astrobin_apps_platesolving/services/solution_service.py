@@ -28,6 +28,26 @@ log = logging.getLogger(__name__)
 
 class SolutionService:
     solution: Solution = None
+    
+    @staticmethod
+    def get_radius_category(radius):
+        """
+        Categorize a solution's field radius
+        """
+        if radius is None:
+            return None
+            
+        radius = float(radius)
+        if radius > 30:
+            return "very_large"  # >30 degrees
+        elif radius > 15:
+            return "large"       # 15-30 degrees
+        elif radius > 4:
+            return "medium"      # 4-15 degrees
+        elif radius > 1:
+            return "small"       # 1-4 degrees
+        else:
+            return "very_small"  # <1 degree
 
     @staticmethod
     def get_or_create_solution(target: Union[Image, ImageRevision]) -> (Solution, bool):
@@ -43,37 +63,237 @@ class SolutionService:
         return solution
 
     @staticmethod
-    def get_or_create_advanced_settings(target: Union[Image, ImageRevision]) -> (PlateSolvingAdvancedSettings, bool):
-        if target._meta.model_name == 'image':
+    def get_default_advanced_settings_for_radius_category(radius_category: Optional[str]) -> dict:
+        """
+        Get the default advanced settings for a specific radius category.
+        
+        Args:
+            radius_category: One of "very_large", "large", "medium", "small", "very_small", or None
+            
+        Returns:
+            A dictionary of default settings appropriate for the radius category
+        """
+        defaults = {}
+        
+        # If no radius category, return empty defaults
+        if not radius_category:
+            return defaults
+            
+        # Default settings for all field sizes
+        defaults.update({
+            'show_grid': True,
+            'show_ecliptic': True,
+            'show_galactic_equator': True,
+            'show_constellation_borders': True,
+            'show_constellation_lines': True,
+        })
+        
+        # Very large field - only show structural elements (>30 degrees)
+        if radius_category == "very_large":
+            defaults.update({
+                'scaled_font_size': "S",
+                'show_named_stars': True,
+                'show_hd': False,
+                'show_messier': True,
+                'show_ngc_ic': False,
+                'show_vdb': False,
+                'show_sharpless': False,
+                'show_barnard': False,
+                'show_lbn': False,
+                'show_ldn': False,
+                'show_pgc': False,
+                'show_planets': True,
+                'show_asteroids': False,
+                'show_gcvs': False,
+                'show_tycho_2': False,
+                'show_cgpn': False,
+                'show_quasars': False,
+            })
+            
+        # Large field (15-30 degrees)
+        elif radius_category == "large":
+            defaults.update({
+                'scaled_font_size': "S",
+                'show_named_stars': True,
+                'show_hd': True,
+                'hd_max_magnitude': 4.5,
+                'show_messier': True,
+                'show_ngc_ic': False,
+                'show_vdb': False,
+                'show_sharpless': True,
+                'show_barnard': False,
+                'show_lbn': False,
+                'show_ldn': False,
+                'show_pgc': False,
+                'show_planets': True,
+                'show_asteroids': False,
+                'show_gcvs': False,
+                'show_tycho_2': False,
+                'show_cgpn': True,
+                'show_quasars': False,
+            })
+            
+        # Medium field (4-15 degrees)
+        elif radius_category == "medium":
+            defaults.update({
+                'scaled_font_size': "M",
+                'show_named_stars': True,
+                'show_hd': True,
+                'hd_max_magnitude': 6.0,
+                'show_messier': True,
+                'show_ngc_ic': True,
+                'show_vdb': True,
+                'show_sharpless': True,
+                'show_barnard': True,
+                'show_lbn': True,
+                'show_ldn': True,
+                'show_pgc': False,
+                'show_planets': True,
+                'show_asteroids': True,
+                'show_gcvs': False,
+                'show_tycho_2': False,
+                'show_cgpn': True,
+                'show_quasars': False,
+            })
+            
+        # Small field (1-4 degrees)
+        elif radius_category == "small":
+            defaults.update({
+                'scaled_font_size': "M",
+                'show_named_stars': True,
+                'show_hd': True,
+                'hd_max_magnitude': 6,
+                'show_messier': True,
+                'show_ngc_ic': True,
+                'show_vdb': True,
+                'show_sharpless': True,
+                'show_barnard': True,
+                'show_lbn': True,
+                'show_ldn': True,
+                'show_pgc': True,
+                'show_planets': True,
+                'show_asteroids': True,
+                'show_gcvs': True,
+                'gcvs_max_magnitude': 10.0,
+                'show_tycho_2': False,
+                'show_cgpn': True,
+                'show_quasars': False,
+            })
+            
+        # Very small field (<1 degree) - show everything
+        elif radius_category == "very_small":
+            defaults.update({
+                'scaled_font_size': "M",
+                'show_named_stars': True,
+                'show_hd': True,
+                'hd_max_magnitude': 8,
+                'show_messier': True,
+                'show_ngc_ic': True,
+                'show_vdb': True,
+                'show_sharpless': True,
+                'show_barnard': True,
+                'show_lbn': True,
+                'show_ldn': True,
+                'show_pgc': True,
+                'show_planets': True,
+                'show_asteroids': True,
+                'show_gcvs': True,
+                'gcvs_max_magnitude': 12.0,
+                'show_tycho_2': True,
+                'tycho_2_max_magnitude': 11.0,
+                'show_cgpn': True,
+                'show_quasars': True,
+            })
+            
+        return defaults
+
+    @staticmethod
+    def get_or_create_advanced_settings(target: Union[Image, ImageRevision], solution=None) -> (PlateSolvingAdvancedSettings, bool):
+        # Get radius of the current target if it already has a solution
+        current_radius_category = None
+        
+        # If a solution is provided (e.g., from finalize_basic_solver), use its radius
+        if solution and solution.radius:
+            current_radius_category = SolutionService.get_radius_category(solution.radius)
+        elif target._meta.model_name == 'image' and hasattr(target, 'solution') and target.solution and target.solution.radius:
+            current_radius_category = SolutionService.get_radius_category(target.solution.radius)
+        elif target._meta.model_name == 'imagerevision' and hasattr(target.image, 'solution') and target.image.solution and target.image.solution.radius:
+            current_radius_category = SolutionService.get_radius_category(target.image.solution.radius)
+            
+        # Check if we can reuse settings from another image
+        if target._meta.model_name == 'image' and hasattr(target, 'user'):
             images = Image.objects_including_wip.filter(user=target.user).order_by('-pk')  # type: QuerySet[Image]
             for image in images:
+                # Skip the current image
+                if image.pk == target.pk:
+                    continue
+                    
                 if image.solution and image.solution.advanced_settings:
+                    # If we know the radius category of current image, try to match with similar images
+                    if current_radius_category and image.solution.radius:
+                        image_radius_category = SolutionService.get_radius_category(image.solution.radius)
+                        # Only use settings from images with similar field size
+                        if image_radius_category != current_radius_category:
+                            continue
+                            
                     latest_settings = image.solution.advanced_settings  # type: PlateSolvingAdvancedSettings
                     latest_settings.pk = None
                     latest_settings.sample_raw_frame_file = None
                     latest_settings.save()
+                    log.debug(
+                        f'SolutionService: solution {solution.pk if solution else "None"} - '
+                        f'using settings from image {image.pk}'
+                    )
                     return latest_settings, False
-        elif target.image.solution and target.image.solution.advanced_settings:
+                    
+        # Try to use settings from parent image for revisions
+        elif target._meta.model_name == 'imagerevision' and hasattr(target, 'image') and target.image.solution and target.image.solution.advanced_settings:
             latest_settings = target.image.solution.advanced_settings
             latest_settings.pk = None
             latest_settings.save()
+            log.debug(
+                f'SolutionService: solution {solution.pk if solution else "None"} - '
+                f'using settings for revision from image {target.image.pk}'
+            )
             return latest_settings, False
 
-        return PlateSolvingAdvancedSettings.objects.create(), True
+        # Get defaults for the radius category
+        defaults = SolutionService.get_default_advanced_settings_for_radius_category(current_radius_category)
+        
+        # Create the settings with all properties in one go
+        new_settings = PlateSolvingAdvancedSettings.objects.create(**defaults)
+
+        log.debug(
+            f'SolutionService: solution {solution.pk if solution else "None"} - '
+            f'using default settings for radius category {current_radius_category}'
+        )
+            
+        return new_settings, True
 
     def __init__(self, solution: Solution) -> None:
         self.solution = solution
 
-    def enforce_settings(self) -> None:
+    def enforce_basic_settings(self) -> None:
+        """Ensures that the solution has basic settings"""
         if self.solution.settings is None:
             settings_ = PlateSolvingSettings.objects.create()
             self.solution.settings = settings_
             Solution.objects.filter(pk=self.solution.pk).update(settings=settings_)
 
+    def enforce_advanced_settings(self) -> None:
+        """Ensures that the solution has advanced settings with appropriate defaults"""
         if self.solution.advanced_settings is None:
-            advanced_settings, _ = self.get_or_create_advanced_settings(self.solution.content_object)
+            advanced_settings, _ = self.get_or_create_advanced_settings(
+                self.solution.content_object, 
+                solution=self.solution
+            )
             self.solution.advanced_settings = advanced_settings
             Solution.objects.filter(pk=self.solution.pk).update(advanced_settings=advanced_settings)
+            
+    def enforce_settings(self) -> None:
+        """Legacy method that ensures both basic and advanced settings exist"""
+        self.enforce_basic_settings()
+        self.enforce_advanced_settings()
 
     def has_submission_id(self) -> bool:
         return self.solution.submission_id is not None and self.solution.submission_id > 0
@@ -90,7 +310,8 @@ class SolutionService:
         return self.solution.content_object.thumbnail(alias, '0', sync=True)
 
     def start_basic_solver(self) -> None:
-        self.enforce_settings()
+        # For basic solver, we only need the basic settings
+        self.enforce_basic_settings()
 
         if self.has_submission_id():
             log.debug(
@@ -199,6 +420,7 @@ class SolutionService:
 
     def start_advanced_solver(self, priority='normal'):
         target = self.solution.content_object
+        # For advanced solver, we need both basic and advanced settings
         self.enforce_settings()
 
         if self.solution.pixinsight_serial_number:
@@ -229,6 +451,7 @@ class SolutionService:
                 ra=self.solution.ra,
                 dec=self.solution.dec,
                 pixscale=self.solution.pixscale,
+                radius=self.solution.radius,
                 observation_time=observation_time,
                 latitude=latitude,
                 longitude=longitude,
@@ -291,9 +514,9 @@ class SolutionService:
                 self.solution.save()
                 return
 
-            # Set advanced settings based on field radius
-            self.enforce_settings()
-            self._set_advanced_settings_based_on_radius()
+            # Now that we have the radius from the basic solver, we can enforce advanced settings
+            # which will use the radius to set appropriate defaults
+            self.enforce_advanced_settings()
 
             filename, _ = os.path.splitext(target.image_file.name)
             annotated_filename = "%s-%d%s" % (filename, int(time.time()), '.jpg')
@@ -320,131 +543,6 @@ class SolutionService:
         self.solution.status = status
         self.solution.save()
         
-    def _set_advanced_settings_based_on_radius(self) -> None:
-        """
-        Set advanced settings based on field radius.
-        The smaller the radius, the more detailed the annotations we can show.
-        """
-        if self.solution.radius is None:
-            return
-            
-        radius = float(self.solution.radius)
-        advanced_settings = self.solution.advanced_settings
-        
-        # Always show these no matter the field size
-        advanced_settings.show_grid = True
-        advanced_settings.show_ecliptic = True
-        advanced_settings.show_galactic_equator = True
-        advanced_settings.show_constellation_borders = True
-        advanced_settings.show_constellation_lines = True
-        
-        # Very large field - only show structural elements (>30 degrees)
-        if radius > 30:
-            advanced_settings.scaled_font_size = "S"
-            advanced_settings.show_named_stars = True
-            advanced_settings.show_hd = False
-            advanced_settings.show_messier = True
-            advanced_settings.show_ngc_ic = False
-            advanced_settings.show_vdb = False
-            advanced_settings.show_sharpless = False
-            advanced_settings.show_barnard = False
-            advanced_settings.show_lbn = False
-            advanced_settings.show_ldn = False
-            advanced_settings.show_pgc = False
-            advanced_settings.show_planets = True
-            advanced_settings.show_asteroids = False
-            advanced_settings.show_gcvs = False
-            advanced_settings.show_tycho_2 = False
-            advanced_settings.show_cgpn = False
-            advanced_settings.show_quasars = False
-            
-        # Large field (15-30 degrees)
-        elif radius > 15:
-            advanced_settings.scaled_font_size = "S"
-            advanced_settings.show_named_stars = True
-            advanced_settings.show_hd = True
-            advanced_settings.hd_max_magnitude = 4.5
-            advanced_settings.show_messier = True
-            advanced_settings.show_ngc_ic = False
-            advanced_settings.show_vdb = False
-            advanced_settings.show_sharpless = True
-            advanced_settings.show_barnard = False
-            advanced_settings.show_lbn = False
-            advanced_settings.show_ldn = False
-            advanced_settings.show_pgc = False
-            advanced_settings.show_planets = True
-            advanced_settings.show_asteroids = False
-            advanced_settings.show_gcvs = False
-            advanced_settings.show_tycho_2 = False
-            advanced_settings.show_cgpn = True
-            advanced_settings.show_quasars = False
-            
-        # Medium field (4-15 degrees)
-        elif radius > 4:
-            advanced_settings.scaled_font_size = "M"
-            advanced_settings.show_named_stars = True
-            advanced_settings.show_hd = True
-            advanced_settings.hd_max_magnitude = 6.0
-            advanced_settings.show_messier = True
-            advanced_settings.show_ngc_ic = True
-            advanced_settings.show_vdb = True
-            advanced_settings.show_sharpless = True
-            advanced_settings.show_barnard = True
-            advanced_settings.show_lbn = True
-            advanced_settings.show_ldn = True
-            advanced_settings.show_pgc = False
-            advanced_settings.show_planets = True
-            advanced_settings.show_asteroids = True
-            advanced_settings.show_gcvs = False
-            advanced_settings.show_tycho_2 = False
-            advanced_settings.show_cgpn = True
-            advanced_settings.show_quasars = False
-            
-        # Small field (1-4 degrees)
-        elif radius > 1:
-            advanced_settings.scaled_font_size = "M"
-            advanced_settings.show_named_stars = True
-            advanced_settings.show_hd = True
-            advanced_settings.hd_max_magnitude = 6
-            advanced_settings.show_messier = True
-            advanced_settings.show_ngc_ic = True
-            advanced_settings.show_vdb = True
-            advanced_settings.show_sharpless = True
-            advanced_settings.show_barnard = True
-            advanced_settings.show_lbn = True
-            advanced_settings.show_ldn = True
-            advanced_settings.show_pgc = True
-            advanced_settings.show_planets = True
-            advanced_settings.show_asteroids = True
-            advanced_settings.show_gcvs = True
-            advanced_settings.gcvs_max_magnitude = 10.0
-            advanced_settings.show_tycho_2 = False
-            advanced_settings.show_cgpn = True
-            advanced_settings.show_quasars = False
-            
-        # Very small field (<1 degree) - show everything
-        else:
-            advanced_settings.show_named_stars = True
-            advanced_settings.show_hd = True
-            advanced_settings.hd_max_magnitude = 8
-            advanced_settings.show_messier = True
-            advanced_settings.show_ngc_ic = True
-            advanced_settings.show_vdb = True
-            advanced_settings.show_sharpless = True
-            advanced_settings.show_barnard = True
-            advanced_settings.show_lbn = True
-            advanced_settings.show_ldn = True
-            advanced_settings.show_pgc = True
-            advanced_settings.show_planets = True
-            advanced_settings.show_asteroids = True
-            advanced_settings.show_gcvs = True
-            advanced_settings.gcvs_max_magnitude = 12.0
-            advanced_settings.show_tycho_2 = True
-            advanced_settings.tycho_2_max_magnitude = 11.0
-            advanced_settings.show_cgpn = True
-            advanced_settings.show_quasars = True
-            
-        advanced_settings.save()
 
     def restart(self):
         self.solution.clear()

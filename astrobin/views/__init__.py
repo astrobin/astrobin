@@ -831,7 +831,7 @@ def image_edit_platesolving_advanced_settings(request, image_id: Union[str, int]
             solution.save()
 
     if request.method == 'GET':
-        form = PlateSolvingAdvancedSettingsForm(instance=advanced_settings)
+        form = PlateSolvingAdvancedSettingsForm(instance=advanced_settings, solution=solution)
         return render(
             request, 'image/edit/platesolving_advanced_settings.html', {
                 'form': form,
@@ -842,7 +842,7 @@ def image_edit_platesolving_advanced_settings(request, image_id: Union[str, int]
         )
 
     if request.method == 'POST':
-        form = PlateSolvingAdvancedSettingsForm(request.POST or None, request.FILES or None, instance=advanced_settings)
+        form = PlateSolvingAdvancedSettingsForm(request.POST or None, request.FILES or None, instance=advanced_settings, solution=solution)
         if not form.is_valid():
             messages.error(
                 request,

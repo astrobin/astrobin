@@ -848,22 +848,30 @@ def solution_pre_save(sender, instance, **kwargs):
     # Skip sending notification for low priority tasks
     if skip_notification:
         return
-
+        
+    # For advanced solved images, check if we're using default field-based settings
+    notification_data = {
+        'object_url': build_notification_url(settings.BASE_URL + target.get_absolute_url()),
+        'preheader': title,
+        'title': title,
+        'image_thumbnail': thumb.url if thumb else None,
+        'extra_tags': {
+            'context': NotificationContext.IMAGE,
+            'image_id': image_id,
+            'revision_label': revision_label,
+        },
+    }
+    
+    # Add radius info for the field size note in the notification
+    if notification == 'image_solved_advanced' and instance.radius:
+        notification_data['field_radius'] = round(float(instance.radius), 2)  # Round to 2 decimal places
+        notification_data['should_show_field_size_note'] = True
+    
     push_notification(
         [user],
         None,
         notification,
-        {
-            'object_url': build_notification_url(settings.BASE_URL + target.get_absolute_url()),
-            'preheader': title,
-            'title': title,
-            'image_thumbnail': thumb.url if thumb else None,
-            'extra_tags': {
-                'context': NotificationContext.IMAGE,
-                'image_id': image_id,
-                'revision_label': revision_label,
-            },
-        }
+        notification_data
     )
 
 

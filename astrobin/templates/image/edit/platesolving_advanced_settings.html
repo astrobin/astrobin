@@ -17,6 +17,28 @@
 {% block content %}
     <h1>{% trans "Advanced plate-solving settings" %}</h1>
 
+    {% if form.radius_category %}
+    <div class="alert alert-info">
+        <strong>{% trans "Note:" %}</strong> 
+        {% blocktrans with category=form.radius_category %}
+        Based on the image's field radius, some features are not available for this field size category ({{ category }}).
+        {% endblocktrans %}
+        
+        {% if form.hidden_fields %}
+        <p>
+            {% blocktrans %}
+            The following features have been turned off by default and cannot be enabled:
+            {% endblocktrans %}
+            <ul>
+                {% for field in form.hidden_fields %}
+                <li>{{ field }}</li>
+                {% endfor %}
+            </ul>
+        </p>
+        {% endif %}
+    </div>
+    {% endif %}
+
     <form
             id="advanced-platesolving-settings"
             class="form-horizontal"

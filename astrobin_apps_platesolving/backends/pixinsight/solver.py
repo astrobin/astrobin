@@ -2,7 +2,7 @@ import logging
 import random
 import string
 import urllib.request, urllib.parse, urllib.error
-from typing import Optional
+from typing import Optional, Dict, Any
 
 from django.conf import settings
 from django.urls import reverse
@@ -10,6 +10,7 @@ from django.urls import reverse
 from astrobin.templatetags.tags import thumbnail_scale
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedSettings, PlateSolvingAdvancedTask
+from astrobin_apps_platesolving.services.solution_service import SolutionService
 
 log = logging.getLogger(__name__)
 
@@ -25,10 +26,20 @@ class Solver(AbstractPlateSolvingBackend):
         hd_ratio: float = max(1.0, image_width / float(hd_width))
         hd_height: int = int(image_height / hd_ratio)
         settings_hd_width: int = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
-
+        
+        # Get radius from kwargs
+        radius = kwargs.pop('radius', None)
+        
         if image_width > settings_hd_width and advanced_settings and not advanced_settings.sample_raw_frame_file:
             ratio = image_width / float(settings_hd_width)
             pixscale = float(pixscale) * ratio
+
+        # Check if we need to enforce limitations based on the radius category
+        if advanced_settings and radius is not None:
+            radius_category = SolutionService.get_radius_category(radius)
+            log.debug(f"Radius: {radius} - Radius category: {radius_category}")
+            if radius_category:
+                self._enforce_setting_limitations(advanced_settings, radius_category)
 
         task_params = [
             'imageURL=%s' % image_url,
@@ -142,3 +153,42 @@ class Solver(AbstractPlateSolvingBackend):
 
         log.debug("PixInsight plate-solving: created task %s" % task.serial_number)
         return task.serial_number
+        
+    def _enforce_setting_limitations(self, advanced_settings: PlateSolvingAdvancedSettings, radius_category: str) -> None:
+        """
+        Enforce setting limitations based on the radius category.
+        This prevents enabling features that should be off by default for the given radius category,
+        but allows users to turn off any feature they want.
+        """
+        log.debug(f"Enforcing settings limitations for radius category: {radius_category}")
+        
+        # Get default settings for this category directly from the service
+        default_settings_dict = SolutionService.get_default_advanced_settings_for_radius_category(radius_category)
+        
+        # Convert the dictionary to an object for easier attribute access
+        default_settings = PlateSolvingAdvancedSettings()
+        for key, value in default_settings_dict.items():
+            setattr(default_settings, key, value)
+        
+        # For each feature that should be OFF by default, ensure it's OFF in the user settings
+        for attr in dir(default_settings):
+            if attr.startswith('show_') and not attr.startswith('_'):
+                default_value = getattr(default_settings, attr)
+                if not default_value:  # If the feature should be OFF by default
+                    user_value = getattr(advanced_settings, attr)
+                    if user_value:  # But the user has it ON
+                        log.debug(f"Turning off {attr} because it should be OFF for {radius_category} field radius")
+                        setattr(advanced_settings, attr, False)
+        
+        # Apply max magnitude limits from default settings
+        if hasattr(default_settings, 'hd_max_magnitude') and advanced_settings.hd_max_magnitude is not None:
+            if default_settings.hd_max_magnitude is not None:
+                advanced_settings.hd_max_magnitude = min(advanced_settings.hd_max_magnitude, default_settings.hd_max_magnitude)
+                
+        if hasattr(default_settings, 'gcvs_max_magnitude') and advanced_settings.gcvs_max_magnitude is not None:
+            if default_settings.gcvs_max_magnitude is not None:
+                advanced_settings.gcvs_max_magnitude = min(advanced_settings.gcvs_max_magnitude, default_settings.gcvs_max_magnitude)
+                
+        if hasattr(default_settings, 'tycho_2_max_magnitude') and advanced_settings.tycho_2_max_magnitude is not None:
+            if default_settings.tycho_2_max_magnitude is not None:
+                advanced_settings.tycho_2_max_magnitude = min(advanced_settings.tycho_2_max_magnitude, default_settings.tycho_2_max_magnitude)

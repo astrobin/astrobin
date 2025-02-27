@@ -9,12 +9,15 @@
 
 <br /><br />
 
-{% blocktrans trimmed %}
-    AstroBin applied default settings that should work well for the field size of this image.
-    You are free to change these settings using the "Edit plate-solving settings" menu in your image.
-{% endblocktrans %}
-
-<br /><br />
+{% if should_show_field_size_note %}
+    {% blocktrans trimmed %}
+        AstroBin applied default settings based on your image's field size ({{ field_radius }} degrees).
+        Different field sizes receive different annotation settings for optimal results.
+        You are free to change these settings using the "Edit plate-solving settings" menu in your image.
+    {% endblocktrans %}
+    
+    <br /><br />
+{% endif %}
 
 {% if image_thumbnail %}
     <a href="{{ object_url }}">
