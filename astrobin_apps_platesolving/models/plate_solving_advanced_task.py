@@ -2,6 +2,11 @@ from django.db import models
 
 
 class PlateSolvingAdvancedTask(models.Model):
+    PRIORITY_CHOICES = (
+        ('normal', 'Normal'),
+        ('low', 'Low'),
+    )
+
     serial_number = models.CharField(
         max_length=32,
         null=False,
@@ -32,4 +37,11 @@ class PlateSolvingAdvancedTask(models.Model):
         max_length=512,
         null=True,
         editable=False,
+    )
+    
+    priority = models.CharField(
+        max_length=10,
+        choices=PRIORITY_CHOICES,
+        default='normal',
+        db_index=True,
     )

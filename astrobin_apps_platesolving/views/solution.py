@@ -16,10 +16,10 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import base
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 
 from astrobin_apps_platesolving.api_filters.advanced_task_filter import AdvancedTaskFilter
@@ -29,6 +29,7 @@ from astrobin_apps_platesolving.permissions.is_solution_target_owner_or_readonly
 from astrobin_apps_platesolving.serializers import AdvancedTaskSerializer, SolutionSerializer
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_platesolving.tasks import start_basic_solver
 from astrobin_apps_platesolving.utils import corrected_pixscale
 from common.permissions import ReadOnly
 from common.utils import lock_table
@@ -37,6 +38,12 @@ log = logging.getLogger(__name__)
 
 
 class SolutionPixInsightNextTask(base.View):
+    priority = 'normal'
+    
+    def __init__(self, **kwargs):
+        self.priority = kwargs.pop('priority', 'normal')
+        super(SolutionPixInsightNextTask, self).__init__(**kwargs)
+    
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super(SolutionPixInsightNextTask, self).dispatch(request, *args, **kwargs)
@@ -49,7 +56,10 @@ class SolutionPixInsightNextTask(base.View):
             return HttpResponseForbidden()
 
         with lock_table(PlateSolvingAdvancedTask):
-            task = PlateSolvingAdvancedTask.objects.filter(active=True).order_by('-created').last()
+            task = PlateSolvingAdvancedTask.objects.filter(
+                active=True, 
+                priority=self.priority
+            ).order_by('-created').last()
 
             if task is None:
                 return HttpResponse('')
@@ -238,6 +248,40 @@ class SolutionPixInsightMatrix(APIView):
             'decMatrix': solution.advanced_dec_matrix,
         }
         return Response(matrix)
+
+
+class SolutionStartView(APIView):
+    """
+    API view to start a basic plate-solving task for a specific object.
+    Requires object_id and content_type_id parameters.
+    """
+    permission_classes = (IsSolutionTargetOwnerOrReadOnly,)
+
+    def post(self, request):
+        object_id = request.data.get('object_id')
+        content_type_id = request.data.get('content_type_id')
+
+        if not object_id or not content_type_id:
+            return Response(
+                {"error": "Both object_id and content_type_id are required."},
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            object_id = int(object_id)
+            content_type_id = int(content_type_id)
+        except (ValueError, TypeError):
+            return Response(
+                {"error": "object_id and content_type_id must be integers."},
+                status=HTTP_400_BAD_REQUEST
+            )
+
+        start_basic_solver.delay(object_id=object_id, content_type_id=content_type_id)
+        
+        return Response(
+            {"message": "Plate-solving task started successfully."},
+            status=HTTP_200_OK
+        )
 
 
 class AdvancedTaskList(generics.ListAPIView):

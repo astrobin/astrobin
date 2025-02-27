@@ -5,4 +5,12 @@
     AstroBin completed the advanced plate-solution of your image: <strong>{{ title }}</strong>.
 {% endblocktrans %}
 
+{% if should_show_field_size_note %}
+    {% blocktrans trimmed %}
+        AstroBin applied default settings based on your image's field size ({{ field_radius }} degrees).
+        Different field sizes receive different annotation settings for optimal results.
+        You are free to change these settings using the "Edit plate-solving settings" menu in your image.
+    {% endblocktrans %}
+{% endif %}
+
 {{ object_url }}

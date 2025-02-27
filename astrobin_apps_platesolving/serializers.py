@@ -62,7 +62,11 @@ class SolutionSerializer(serializers.ModelSerializer):
         if task is None:
             return None
 
-        return PlateSolvingAdvancedTask.objects.filter(active=True, created__lt=task.created).count()
+        return PlateSolvingAdvancedTask.objects.filter(
+            active=True,
+            priority=task.priority,
+            created__lt=task.created
+        ).count()
 
     def get_pixinsight_stage(self, obj: Solution) -> Optional[str]:
         live_log_entry = self._get_live_log_entry(obj)
