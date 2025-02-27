@@ -17,14 +17,13 @@
 {% block content %}
     <h1>{% trans "Advanced plate-solving settings" %}</h1>
 
-    {% if form.radius_category %}
+    {% if form.radius_category and form.hidden_fields %}
     <div class="alert alert-info">
         <strong>{% trans "Note:" %}</strong> 
         {% blocktrans trimmed with category=form.radius_category %}
         Based on the image's field radius, some features are not available for this field size category ({{ category }}).
         {% endblocktrans %}
         
-        {% if form.hidden_fields %}
         <p>
             {% blocktrans trimmed %}
             The following features have been turned off by default and cannot be enabled:
@@ -35,7 +34,6 @@
                 {% endfor %}
             </ul>
         </p>
-        {% endif %}
     </div>
     {% endif %}
 
