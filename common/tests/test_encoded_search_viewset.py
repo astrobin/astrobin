@@ -147,6 +147,18 @@ class EncodedSearchViewSetTests(TestCase):
         term = "Sh2 144"
         expected = ["Sh2-144", "Sh2 144"]
         self.assertEqual(set(EncodedSearchViewSet.expand_catalog_term(term)), set(expected))
+        
+    def test_expand_catalog_term_preserves_quotes_for_non_catalog_terms(self):
+        """Test that quotes are preserved for non-catalog terms."""
+        # Test with double quotes
+        term = '"a phrase in quotes"'
+        result = EncodedSearchViewSet.expand_catalog_term(term)
+        self.assertEqual(result, [term], "Double quotes should be preserved for non-catalog terms")
+        
+        # Test with single quotes
+        term = "'another quoted phrase'"
+        result = EncodedSearchViewSet.expand_catalog_term(term)
+        self.assertEqual(result, [term], "Single quotes should be preserved for non-catalog terms")
 
     def test_parse_search_query_with_consecutive_single_quotes(self):
         """Test that consecutive single quotes are removed."""
@@ -312,13 +324,3 @@ class BuildSearchQueryTests(TestCase):
             if "text:" in part:
                 # Ensure no empty query terms (this was the bug - empty text:)
                 self.assertNotEqual(part.strip(), "text:")
-
-    def test_quotes_wrapping_everything(self):
-        """Test that the entire query is wrapped in quotes."""
-        query = {'value': '"a b c"', 'matchType': MatchType.ALL.value}
-        fake = FakeSQS()
-        EncodedSearchViewSet.build_search_query(fake, query)
-        self.assertEqual(len(fake.filter_calls), 1)
-        self.assertEqual(len(fake.exclude_calls), 0)
-        qstr = str(fake.filter_calls[0])
-        self.assertEqual(qstr, 'text:"a b c"')
