@@ -20,13 +20,13 @@
     {% if form.radius_category %}
     <div class="alert alert-info">
         <strong>{% trans "Note:" %}</strong> 
-        {% blocktrans with category=form.radius_category %}
+        {% blocktrans trimmed with category=form.radius_category %}
         Based on the image's field radius, some features are not available for this field size category ({{ category }}).
         {% endblocktrans %}
         
         {% if form.hidden_fields %}
         <p>
-            {% blocktrans %}
+            {% blocktrans trimmed %}
             The following features have been turned off by default and cannot be enabled:
             {% endblocktrans %}
             <ul>
