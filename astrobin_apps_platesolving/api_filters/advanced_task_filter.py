@@ -8,4 +8,5 @@ class AdvancedTaskFilter(filters.FilterSet):
         model = PlateSolvingAdvancedTask
         fields = [
             'active',
+            'priority',
         ]
