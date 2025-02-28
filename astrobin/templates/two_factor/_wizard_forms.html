@@ -1,4 +1,15 @@
-{% load bootstrap_toolkit %}
+{% load bootstrap_toolkit %}{% load i18n %}
 
-{{ wizard.management_form | as_bootstrap }}
-{{ wizard.form | as_bootstrap }}
+{{ wizard.management_form | as_bootstrap }}{{ wizard.form | as_bootstrap }}
+
+<div class="control-group mt-5 pt-5">
+    <label class="control-label">{% trans "Don't have an account?" %}</label>
+    <div class="controls">
+        <a
+            class="d-block mt-2"
+            href="{% url 'registration_register' %}"
+        >
+            {% trans "Register" context "Sign up" %}
+        </a>
+    </div>
+</div>

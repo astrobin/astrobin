@@ -3,6 +3,7 @@ from crispy_forms.layout import Div, Fieldset, HTML, Layout
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import Group, User
+from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import (RegistrationForm, RegistrationFormTermsOfService, RegistrationFormUniqueEmail)
@@ -193,8 +194,18 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             ),
         }
 
+
 class AstroBinRegistrationView(RegistrationView):
     form_class = AstroBinRegistrationForm
+
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            if 'next' in self.request.GET:
+                return redirect(self.request.GET['next'])
+            else:
+                return redirect('/')
+
+        return super().dispatch(*args, **kwargs)
 
 
 def user_created(sender, user, request, **kwargs):
