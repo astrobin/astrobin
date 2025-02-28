@@ -1,0 +1,8 @@
+{% load i18n %}
+
+<a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
+    {% blocktrans trimmed %}
+        New image in the group "{{ group_name }}"
+    {% endblocktrans %}
+</a>{% if image.title %}: {{ image.title }}{% endif %}
+
