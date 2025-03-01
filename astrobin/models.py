@@ -2633,6 +2633,14 @@ class UserProfile(SafeDeleteModel):
         'filters': Filter,
         'accessories': Accessory,
     }
+    
+    last_activation_email_sent = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+        verbose_name="Last activation email sent",
+        help_text="The time when the last activation email was sent"
+    )
 
     GEAR_ATTR_LOOKUP = {
         'Telescope': 'telescopes',

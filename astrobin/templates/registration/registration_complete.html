@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n %}
-{% load django_bootstrap_breadcrumbs %}
+{% load i18n %}{% load django_bootstrap_breadcrumbs %}
 
 
 {% block title %}{% trans "Registration completed" %}{% endblock %}
@@ -15,15 +14,129 @@
 {% block content %}
     <div class="page-header">
         <h1>{% trans "Registration completed" %}
-            <small>{% trans "You are now registered" %}</small>
+            <small>
+                {% trans "Check your email for activation instructions" %}
+            </small>
         </h1>
     </div>
 
-    <p>
-        {% blocktrans %}To confirm your e-mail address, we have sent you an e-mail with an activation link.{% endblocktrans %}
-    </p>
-
-    <div class="alert alert-warning">
-        {% blocktrans %}If you don't receive the e-mail within a few minutes, remember to check your spam folder.{% endblocktrans %}
+    <div class="alert alert-info">
+        <strong>{% trans "Note:" %}</strong> 
+        {% trans "We've sent an activation link to your email address. Please check your inbox (and spam folder) to complete your registration." %}
     </div>
+
+    <div class="resend-activation" id="resend-activation-container">
+        <button class="btn btn-primary" id="resend-activation-link">
+            {% trans "Resend activation email" %}
+        </button>
+    </div>
+
+    <div id="resend-activation-form" style="display: none;">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="email">{% trans "Your email address" %}</label>
+                <div class="controls">
+                    <input type="email" class="input-xlarge" id="email" placeholder="{% trans 'Email' %}">
+                </div>
+            </div>
+            <div class="form-actions" style="margin-top: 10px;">
+                <button type="button" class="btn btn-primary" id="resend-activation-button">
+                    {% trans "Resend" %}
+                </button>
+            </div>
+            <div id="resend-activation-message" class="mt-3"></div>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Variables to track rate limiting
+            var lastClickTime = 0;
+            var cooldownPeriod = 60000; // 1 minute in milliseconds
+
+            $('#resend-activation-link').click(function () {
+                // Hide the container with the button and show the form
+                $('#resend-activation-container').hide();
+                $('#resend-activation-form').show();
+            });
+
+            $('#resend-activation-button').click(function () {
+                var now = new Date().getTime();
+                var timeSinceLastClick = now - lastClickTime;
+
+                // Check if the button was clicked too soon
+                if (timeSinceLastClick < cooldownPeriod && lastClickTime > 0) {
+                    var timeLeft = Math.ceil((cooldownPeriod - timeSinceLastClick) / 1000);
+                    $('#resend-activation-message')
+                        .removeClass('alert-success alert-danger')
+                        .addClass('alert alert-warning')
+                        .text("{% trans 'Please wait' %} " + timeLeft + " {% trans 'seconds before trying again.' %}");
+                    return;
+                }
+
+                // Get the current email value (not the initial one)
+                var email = $('#email').val();
+                if (!email) {
+                    $('#resend-activation-message')
+                        .removeClass('alert-success alert-warning')
+                        .addClass('alert alert-danger')
+                        .text("{% trans 'Please enter your email address.' %}");
+                    return;
+                }
+
+                // Update the last click time
+                lastClickTime = now;
+
+                // Disable the button and show loading state
+                var $button = $(this);
+                $button.prop('disabled', true).text("{% trans 'Sending...' %}");
+
+                $.ajax({
+                    url: "{% url 'resend_activation_email' %}",
+                    type: 'POST',
+                    timeout: 30000, // Set a 30-second timeout
+                    data: {
+                        email: email,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'{% if request.GET.next %},
+                            next: '{{ request.GET.next }}'{% endif %}
+                    },
+                    success: function (response) {
+                        $('#resend-activation-message')
+                            .removeClass('alert-danger alert-warning')
+                            .addClass('alert alert-success')
+                            .text(response.message);
+
+                        // Start the countdown timer
+                        var secondsLeft = Math.ceil(cooldownPeriod / 1000);
+                        var countdownInterval = setInterval(function () {
+                            secondsLeft--;
+                            if (secondsLeft <= 0) {
+                                clearInterval(countdownInterval);
+                                $button.prop('disabled', false).text("{% trans 'Resend' %}");
+                            } else {
+                                $button.text("{% trans 'Sent. Send again?' %} (" + secondsLeft + "s)");
+                            }
+                        }, 1000);
+                    },
+                    error: function (xhr) {
+                        var message = "{% trans 'An error occurred. Please try again later.' %}";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        }
+                        $('#resend-activation-message')
+                            .removeClass('alert-success alert-warning')
+                            .addClass('alert alert-danger')
+                            .text(message);
+
+                        // If it's an error, enable the button immediately
+                        $button.prop('disabled', false).text("{% trans 'Resend' %}");
+                    },
+                    complete: function () {
+                        // We're handling the button reset in the countdown timer for success
+                        // and immediately for errors, so we don't need to do anything here
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

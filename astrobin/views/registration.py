@@ -3,9 +3,14 @@ from crispy_forms.layout import Div, Fieldset, HTML, Layout
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import Group, User
+from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
+from django.utils import timezone
+from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
-from registration.backends.hmac.views import RegistrationView
+from django.views.decorators.http import require_POST
+from registration.backends.hmac.views import RegistrationView, ActivationView
 from registration.forms import (RegistrationForm, RegistrationFormTermsOfService, RegistrationFormUniqueEmail)
 from registration.signals import user_registered
 
@@ -20,38 +25,20 @@ from common.templatetags.common_tags import button_loading_class, button_loading
 
 
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):
-    skill_level = forms.fields.ChoiceField(
-        required=True,
-        label=_("Self-assessed skill level"),
-        help_text=_("How would you categorize your current skills as an astrophotographer?"),
-        choices=((None, "---------"),) + UserProfile.SKILL_LEVEL_CHOICES,
-    )
-
+    # Keep referral code as hidden field
     referral_code = forms.fields.CharField(
         required=False,
-        label=_('Referral code') + f' ({_("optional")})',
+        widget=forms.HiddenInput(),
     )
-
-    important_communications = forms.fields.BooleanField(
+    
+    # Combined communications checkbox
+    communications = forms.fields.BooleanField(
         widget=forms.CheckboxInput,
         required=False,
-        label=_('I accept to receive rare important communications via email'),
-        help_text=_(
-            'This is highly recommended. These are very rare and contain information that you probably want to have.'))
-
-    newsletter = forms.fields.BooleanField(
-        widget=forms.CheckboxInput,
-        required=False,
-        label=_('I accept to receive occasional newsletters via email'),
-        help_text=_(
-            'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.'))
-
-    marketing_material = forms.fields.BooleanField(
-        widget=forms.CheckboxInput,
-        required=False,
-        label=_('I accept to receive occasional marketing and commercial material via email'),
-        help_text=_('These emails may contain offers, commercial news, and promotions from AstroBin or its partners.'))
-
+        label=_('Keep me updated with newsletters and important announcements'),
+    )
+    
+    # Captcha for security
     captcha = TurnstileField()
 
     def __init__(self, *args, **kwargs):
@@ -68,28 +55,26 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             Fieldset(
                 '',
                 'username',
-                'first_name',
-                'last_name',
                 'email',
-                'skill_level',
-            ),
-            Fieldset(
-                '',
                 'password1',
                 'password2',
             ),
             Fieldset(
                 '',
-                'referral_code',
-                'tos',
-                'important_communications',
-                'newsletter',
-                'marketing_material',
+                'first_name',
+                'last_name',
             ),
             Fieldset(
                 '',
+                'tos',
+                'communications',
                 'captcha',
-            ) if not settings.TESTING else Fieldset(''),
+            ) if not settings.TESTING else Fieldset(
+                '',
+                'tos',
+                'communications',
+            ),
+            'referral_code',  # Outside fieldset as a hidden field
             Div(
                 HTML(
                     f'<button '
@@ -106,6 +91,24 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
         # For some reason, setting these in `labels` and `help_texts` before doesn't work only for `email`.
         self.fields['email'].label = _('Email address')
         self.fields['email'].help_text = _('AstroBin doesn\'t share your email address with anyone.')
+        
+        # Use clear labels and placeholders for all fields
+        self.fields['first_name'].label = _('First name')
+        self.fields['last_name'].label = _('Last name')
+        
+        # Simplify the password help texts
+        self.fields['password1'].help_text = _('Choose a secure password.')
+        self.fields['password2'].help_text = _('Enter the same password again for verification.')
+        
+        # Update the TOS field label to include the link directly in the label
+        self.fields['tos'].label = format_html(
+            '{} <a href="https://welcome.astrobin.com/terms-of-service" target="_blank">{}</a>',
+            _("I agree to the"),
+            _("Terms of Service")
+        )
+        
+        # Remove the help text since the link is now in the label
+        self.fields['tos'].help_text = ""
 
     def clean_referral_code(self):
         value:str = self.cleaned_data.get('referral_code')
@@ -160,14 +163,10 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
         'first_name',
         'last_name',
         'email',
-        'skill_level',
         'password1',
         'password2',
         'referral_code',
-        'tos',
-        'important_communications',
-        'newsletter',
-        'marketing_material',
+        'communications',
         'captcha',
     ]
 
@@ -187,16 +186,15 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
         }
 
         help_texts = {
-            'username': _(
-                'This is your handle on AstroBin and will be part of the URL to your gallery. If you do not specify a'
-                'first and last name below, it will also be how others see your name. Please use letters, digits, and '
-                'the special characters ./+/-/_ only.'
-            ),
+            'username': _('Your public ID and profile URL. Letters, numbers, and ./+/-/_ only.'),
         }
 
 
 class AstroBinRegistrationView(RegistrationView):
     form_class = AstroBinRegistrationForm
+    email_body_template = 'registration/activation_email.txt'
+    email_subject_template = 'registration/activation_email_subject.txt'
+    html_email_template = 'registration/activation_email.html'
 
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated:
@@ -206,6 +204,47 @@ class AstroBinRegistrationView(RegistrationView):
                 return redirect('/')
 
         return super().dispatch(*args, **kwargs)
+    
+    def get_success_url(self, user=None):
+        # Instead of relying on the parent class, explicitly use the URL pattern
+        from django.urls import reverse
+        base_url = reverse('registration_complete')
+        
+        # Forward the 'next' parameter to the success URL if it exists
+        if 'next' in self.request.GET:
+            return f"{base_url}?next={self.request.GET['next']}"
+        
+        return base_url
+        
+    def get_email_context(self, activation_key):
+        context = super().get_email_context(activation_key)
+        if 'next' in self.request.GET:
+            context['next'] = self.request.GET['next']
+        return context
+        
+    def send_activation_email(self, user):
+        """
+        Send the activation email. The activation key is the username,
+        signed using TimestampSigner.
+        """
+        activation_key = self.get_activation_key(user)
+        context = self.get_email_context(activation_key)
+        context.update({
+            'user': user,
+        })
+        subject = render_to_string(self.email_subject_template,
+                                   context)
+        # Force subject to a single line to avoid header-injection
+        # issues.
+        subject = ''.join(subject.splitlines())
+        
+        # Create plain text and HTML message bodies
+        message = render_to_string(self.email_body_template, context)
+        html_message = None
+        if hasattr(self, 'html_email_template'):
+            html_message = render_to_string(self.html_email_template, context)
+            
+        user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL, html_message=html_message)
 
 
 def user_created(sender, user, request, **kwargs):
@@ -222,10 +261,6 @@ def user_created(sender, user, request, **kwargs):
     user.groups.add(group)
     changed = False
 
-    if 'skill_level' in form.data:
-        profile.skill_level = form.data['skill_level']
-        changed = True
-
     if 'referral_code' in form.data and form.data['referral_code'] != '':
         profile.referral_code = form.data['referral_code']
         changed = True
@@ -234,16 +269,12 @@ def user_created(sender, user, request, **kwargs):
         profile.accept_tos = form.data['tos'] == "on"
         changed = True
 
-    if 'important_communications' in form.data:
-        profile.receive_important_communications = form.data['important_communications'] == "on"
-        changed = True
-
-    if 'newsletter' in form.data:
-        profile.receive_newsletter = form.data['newsletter'] == "on"
-        changed = True
-
-    if 'marketing_material' in form.data:
-        profile.receive_marketing_and_commercial_material = form.data['marketing_material'] == "on"
+    # Use the combined communications field to set all three preferences
+    if 'communications' in form.data:
+        communications_value = form.data['communications'] == "on"
+        profile.receive_important_communications = communications_value
+        profile.receive_newsletter = communications_value
+        profile.receive_marketing_and_commercial_material = communications_value
         changed = True
 
     if changed:
@@ -254,6 +285,102 @@ def user_created(sender, user, request, **kwargs):
         'extra_tags': {
             'context': NotificationContext.USER
         },
+    })
+
+
+class AstroBinActivationView(ActivationView):
+    def get_success_url(self, user):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
+        # Default success URL from settings or hardcoded fallback
+        return settings.LOGIN_REDIRECT_URL if hasattr(settings, 'LOGIN_REDIRECT_URL') else '/'
+        
+    def activate(self, *args, **kwargs):
+        """
+        Activate the user's account, then log them in immediately
+        """
+        # First use the parent class's activate method to handle the activation
+        activated_user = super().activate(*args, **kwargs)
+        
+        # If activation was successful, log the user in
+        if activated_user:
+            from django.contrib.auth import login
+
+            # Set the backend manually since we're not using authenticate()
+            activated_user.backend = 'django.contrib.auth.backends.ModelBackend'
+            login(self.request, activated_user)
+            
+        return activated_user
+
+
+@require_POST
+def resend_activation_email(request):
+    """
+    Resends the activation email to a user who just registered.
+    Rate limited to once per minute.
+    """
+    email = request.POST.get('email')
+    if not email:
+        return JsonResponse({'status': 'error', 'message': _('Email is required.')}, status=400)
+    
+    try:
+        user = User.objects.get(email=email, is_active=False)
+    except User.DoesNotExist:
+        # Don't reveal if the user exists or not for security reasons
+        return JsonResponse({
+            'status': 'success',
+            'message': _('If the email exists in our system, a new activation email has been sent.')
+        })
+    
+    # Check rate limiting
+    profile, created = UserProfile.objects.get_or_create(user=user)
+    
+    now = timezone.now()
+    if profile.last_activation_email_sent and (now - profile.last_activation_email_sent).total_seconds() < 60:
+        time_left = 60 - int((now - profile.last_activation_email_sent).total_seconds())
+        return JsonResponse({
+            'status': 'error', 
+            'message': _('Please wait {0} seconds before requesting another email.').format(time_left)
+        }, status=429)
+    
+    # Everything is good, send the email
+    # We'll use the RegistrationView's method for getting the activation key
+    from registration.backends.hmac.views import RegistrationView
+    
+    # Get the activation key
+    activation_key = RegistrationView().get_activation_key(user)
+    
+    # Create the context for the email templates
+    from django.contrib.sites.shortcuts import get_current_site
+    context = {
+        'activation_key': activation_key,
+        'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
+        'site': get_current_site(request),
+        'user': user,
+    }
+    
+    # Pass along the 'next' parameter if it exists in the request
+    if 'next' in request.POST:
+        context['next'] = request.POST.get('next')
+    
+    # Render the email templates
+    subject = render_to_string('registration/activation_email_subject.txt', context)
+    subject = ''.join(subject.splitlines())  # Remove newlines
+    
+    message = render_to_string('registration/activation_email.txt', context)
+    html_message = render_to_string('registration/activation_email.html', context)
+    
+    # Send the email
+    user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL, html_message=html_message)
+    
+    # Update the timestamp
+    profile.last_activation_email_sent = now
+    profile.save(keep_deleted=True)
+    
+    return JsonResponse({
+        'status': 'success',
+        'message': _('A new activation email has been sent to {0}.').format(email)
     })
 
 

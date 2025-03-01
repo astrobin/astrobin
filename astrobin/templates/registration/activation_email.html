@@ -6,12 +6,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>{% trans "Reset your AstroBin password" %}</title>
+    <title>{% trans "Activate your AstroBin account" %}</title>
 
     <style>
-        /* -------------------------------------
-           GLOBAL
-           ------------------------------------- */
         * {
             margin: 0;
             padding: 0;
@@ -30,18 +27,11 @@
             width: 100% !important;
             height: 100%;
             line-height: 1.6;
+            background-color: #f6f6f6;
         }
 
-        /* Let's make sure all tables have defaults */
         table td {
             vertical-align: top;
-        }
-
-        /* -------------------------------------
-           BODY & CONTAINER
-           ------------------------------------- */
-        body {
-            background-color: #f6f6f6;
         }
 
         .body-wrap {
@@ -53,7 +43,6 @@
             display: block !important;
             max-width: 600px !important;
             margin: 0 auto !important;
-            /* makes it centered */
             clear: both !important;
         }
 
@@ -64,9 +53,6 @@
             padding: 20px;
         }
 
-        /* -------------------------------------
-           HEADER, FOOTER, MAIN
-           ------------------------------------- */
         .main {
             background: #fff;
             border: 1px solid #e9e9e9;
@@ -87,15 +73,6 @@
             border-bottom: 1px solid #ccc;
         }
 
-        .settings-links {
-            padding-top: 30px;
-        }
-
-        .header {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
         .footer {
             width: 100%;
             clear: both;
@@ -107,26 +84,10 @@
             color: #999;
         }
 
-        .footer p, .footer a, .footer unsubscribe, .footer td {
+        .footer p, .footer a, .footer td {
             font-size: 12px;
         }
 
-        /* -------------------------------------
-           GRID AND COLUMNS
-           ------------------------------------- */
-        .column-left {
-            float: left;
-            width: 50%;
-        }
-
-        .column-right {
-            float: left;
-            width: 50%;
-        }
-
-        /* -------------------------------------
-           TYPOGRAPHY
-           ------------------------------------- */
         h1, h2, h3 {
             font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
             color: #000;
@@ -135,22 +96,8 @@
             font-weight: 400;
         }
 
-        h1 {
-            font-size: 32px;
-            font-weight: 500;
-        }
-
         h2 {
             font-size: 24px;
-        }
-
-        h3 {
-            font-size: 18px;
-        }
-
-        h4 {
-            font-size: 14px;
-            font-weight: 600;
         }
 
         p, ul, ol {
@@ -158,144 +105,40 @@
             font-weight: normal;
         }
 
-        p li, ul li, ol li {
-            margin-left: 5px;
-            list-style-position: inside;
-        }
-
-        /* -------------------------------------
-           LINKS & BUTTONS
-           ------------------------------------- */
         a {
             color: #cc4b2e;
             text-decoration: underline;
-        }
-
-        .btn {
-            padding: 5px 15px;
         }
 
         .btn-primary {
             text-decoration: none;
             color: #FFF;
             background-color: #cc4b2e;
-            line-height: 2;
             font-weight: bold;
             text-align: center;
             cursor: pointer;
             display: inline-block;
             border-radius: 5px;
             text-transform: capitalize;
+            padding: 12px 24px;
         }
 
-        /* -------------------------------------
-           OTHER STYLES THAT MIGHT BE USEFUL
-           ------------------------------------- */
-        .last {
-            margin-bottom: 0;
-        }
-
-        .first {
-            margin-top: 0;
-        }
-
-        .padding {
-            padding: 10px 0;
+        .break-all {
+            word-break: break-all;
         }
 
         .aligncenter {
             text-align: center;
         }
 
-        .alignright {
-            text-align: right;
-        }
-
-        .alignleft {
-            text-align: left;
-        }
-
-        .clear {
-            clear: both;
-        }
-
-        /* -------------------------------------
-           Alerts
-           ------------------------------------- */
-        .alert {
-            font-size: 16px;
-            color: #fff;
-            font-weight: 500;
-            padding: 20px;
-            text-align: center;
-            border-radius: 3px 3px 0 0;
-        }
-
-        .alert a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-        }
-
-        .alert.alert-warning {
-            background: #ff9f00;
-        }
-
-        .alert.alert-bad {
-            background: #d0021b;
-        }
-
-        .alert.alert-good {
-            background: #68b90f;
-        }
-
-        /* -------------------------------------
-           INVOICE
-           ------------------------------------- */
-        .invoice {
-            margin: 40px auto;
-            text-align: left;
-            width: 80%;
-        }
-
-        .invoice td {
-            padding: 5px 0;
-        }
-
-        .invoice .invoice-items {
-            width: 100%;
-        }
-
-        .invoice .invoice-items td {
-            border-top: #eee 1px solid;
-        }
-
-        .invoice .invoice-items .total td {
-            border-top: 2px solid #333;
-            border-bottom: 2px solid #333;
-            font-weight: 700;
-        }
-
-        /* -------------------------------------
-           RESPONSIVE AND MOBILE FRIENDLY STYLES
-           ------------------------------------- */
         @media only screen and (max-width: 640px) {
-            h1, h2, h3, h4 {
+            h1, h2, h3 {
                 font-weight: 600 !important;
                 margin: 20px 0 5px !important;
             }
 
-            h1 {
-                font-size: 22px !important;
-            }
-
             h2 {
                 font-size: 18px !important;
-            }
-
-            h3 {
-                font-size: 16px !important;
             }
 
             .container {
@@ -304,10 +147,6 @@
 
             .content, .content-wrapper {
                 padding: 10px !important;
-            }
-
-            .invoice {
-                width: 100% !important;
             }
         }
     </style>
@@ -326,7 +165,7 @@
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="content-block logo">
-                                        <a href="{{ base_url }}">
+                                        <a href="https://{{ site.domain }}">
                                             <img alt="AstroBin logo"
                                                  src="https://cdn.astrobin.com/static/astrobin/images/astrobin-logo-square-mini.png" />
                                         </a>
@@ -335,17 +174,45 @@
                                 <tr>
                                     <td class="content-block">
                                         <h2>
-                                            {% trans "Reset your AstroBin password" %}
+                                            {% trans "Welcome to AstroBin!" %}
                                         </h2>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="content-block">
+                                        <p>{% trans "Please use the button below to activate your AstroBin account:" %}</p>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="content-block notification-message">
-                                        {% block content %}
-                                            <a href="{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}">
-                                                {{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+                                        <div>
+                                            {% if next %}
+                                            <a href="https://{{ site.domain }}{% url 'registration_activate' activation_key %}?next={{ next }}" class="btn-primary">
+                                                {% trans "Activate your account" %}
                                             </a>
-                                        {% endblock %}
+                                            {% else %}
+                                            <a href="https://{{ site.domain }}{% url 'registration_activate' activation_key %}" class="btn-primary">
+                                                {% trans "Activate your account" %}
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                        <p style="margin-top: 20px; font-size: 12px;">
+                                            {% trans "If the button doesn't work, you can also copy and paste this URL into your browser:" %}<br />
+                                            <span class="break-all">
+                                                {% if next %}
+                                                <a href="https://{{ site.domain }}{% url 'registration_activate' activation_key %}?next={{ next }}">
+                                                    https://{{ site.domain }}{% url 'registration_activate' activation_key %}?next={{ next }}
+                                                </a>
+                                                {% else %}
+                                                <a href="https://{{ site.domain }}{% url 'registration_activate' activation_key %}">
+                                                    https://{{ site.domain }}{% url 'registration_activate' activation_key %}
+                                                </a>
+                                                {% endif %}
+                                            </span>
+                                        </p>
+                                        <p style="margin-top: 10px; font-size: 12px;">
+                                            {% blocktrans %}Link is valid for {{ expiration_days }} days.{% endblocktrans %}
+                                        </p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -370,7 +237,7 @@
                                 {% trans "Follow AstroBin" %}:
                                 <a href="https://facebook.com/astrobin">FB</a> -
                                 <a href="https://instagram.com/astrobin_com">Instagram</a> -
-                                <a href="https://www.x.com/astrobin_com">X</a>
+                                <a href="https://www.x.com/astrobin_com">X</a> -
                                 <a href="https://bsky.app/profile/astrobin.com">BlueSky</a>
                             </td>
                         </tr>
