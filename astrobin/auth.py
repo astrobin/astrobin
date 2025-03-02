@@ -79,29 +79,35 @@ class CustomBackend(ModelBackend):
 
         return None
 
-    def authenticate(self, request, username: str = None, password: str = None, **kwargs):
+    def authenticate(
+            self,
+            request,
+            username: str = None,
+            password: str = None,
+            _internal_auto_login_for_activated_user=False,
+            **kwargs
+    ):
+        """
+        Authentication method that supports both normal login and special activation flow.
+        For normal login: Tries to find the user by username, email, or real name, and checks password.
+        For activation flow: When the special flag is set, bypasses password checking.
+        """
+        # Get user by username or email
         user = self.get_user_by_username_or_email(username)
-
+        
+        # If not found, try by real name
         if user is None:
             user = self.get_user_by_real_name(username)
-
-        if user and user.check_password(password):
+            
+        # Special case for activation flow: return user without password check
+        if user and _internal_auto_login_for_activated_user:
             return user
+            
+        # Normal login flow: check password
+        if user and password and user.check_password(password):
+            return user
+            
+        return None
 
     def get_user(self, user_id: int):
         return get_object_or_None(get_user_model(), pk=user_id)
-        
-    def authenticate(self, request, username: str = None, password: str = None, _internal_auto_login_for_activated_user=False, **kwargs):
-        """
-        Special override for activated users that need to be logged in automatically.
-        This helps with the activation flow.
-        """
-        # First try the normal authentication 
-        user = super().authenticate(request, username, password, **kwargs)
-        
-        # If normal authentication failed and our special flag is set,
-        # bypass password checking completely for activation flow
-        if user is None and _internal_auto_login_for_activated_user:
-            user = self.get_user_by_username_or_email(username)
-            
-        return user
