@@ -129,6 +129,11 @@ urlpatterns += [
         never_cache(registration_views.AstroBinRegistrationView.as_view()),
         name='registration_register'
     ),
+    url(
+        r'^accounts/resend-activation/$',
+        registration_views.resend_activation_email,
+        name='resend_activation_email'
+    ),
     url(r'^accounts/email/', include('change_email.urls')),
     url(
         r'^accounts/login/$',
@@ -142,6 +147,13 @@ urlpatterns += [
         ),
         name='auth_logout'
     ),
+    # We override the activation URL to handle 'next' parameter
+    url(
+        r'^accounts/activate/(?P<activation_key>[-:\w]+)/$',
+        registration_views.AstroBinActivationView.as_view(),
+        name='registration_activate',
+    ),
+    # Include the rest of the registration URLs
     url(r'^accounts/', include('registration.backends.hmac.urls')),
 
     ###########################################################################

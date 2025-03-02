@@ -32,7 +32,7 @@
         </small>
     </h1>
 
-    <a class="btn btn-primary btn-block-mobile" href="{% url 'auth_login' %}">
+    <a class="btn btn-primary btn-block-mobile" href="{% url 'auth_login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">
         {% trans "Log in" %}
     </a>
 {% endblock %}

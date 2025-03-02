@@ -13,7 +13,7 @@ class TurnstileField(forms.CharField):
     }
 
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('label', gettext('Are you a robot?'))
+        kwargs.setdefault('label', gettext('Are you human?'))
         super().__init__(*args, **kwargs)
 
     def clean(self, value):

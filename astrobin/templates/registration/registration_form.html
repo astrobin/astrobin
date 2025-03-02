@@ -5,22 +5,23 @@
 {% load common_tags %}
 {% load crispy_forms_tags %}
 
-{% block title %}{% trans "Register with AstroBin" %}{% endblock %}
+{% block title %}{% trans "Join AstroBin" %}{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Account' None %}
-    {% breadcrumb 'Register with AstroBin' None %}
+    {% breadcrumb 'Join AstroBin' None %}
 {% endblock %}
 
 {% block content %}
     {% if READONLY_MODE %}
         {% include 'readonly_mode.html' %}
     {% else %}
-        <h1>{% trans "Register with AstroBin" %}</h1>
-        <div class="well">
-            {% blocktrans %}By registering with AstroBin, you agree to our <a href="https://welcome.astrobin.com/terms-of-service">terms of service</a>.{% endblocktrans %}
-        </div>
+        <h1 style="margin-bottom: 5rem">
+            {% trans "Join AstroBin" %}
+
+            <small>{% trans "One small click for you, one giant leap for your astrophotography!" %} 🚀</small>
+        </h1>
 
         {% crispy form %}
     {% endif %}

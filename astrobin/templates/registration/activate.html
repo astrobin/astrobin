@@ -14,7 +14,26 @@
 
 {% block content %}
     {% if account %}
-        <h1>{% trans "Account successfully activated" %}</h1>
+        <h1>
+            {% trans "Account successfully activated" %}
+            <small>{% trans "You have been logged in automatically." %}</small>
+        </h1>
+        
+        {% if request.GET.next %}
+            <p>{% trans "You'll be redirected momentarily..." %}</p>
+            <script>
+                // Redirect to the 'next' URL after a short delay
+                setTimeout(function() {
+                    window.location.href = "{{ request.GET.next }}";
+                }, 2000); // 2 second delay
+            </script>
+        {% else %}
+            <p>
+                <a class="btn btn-primary btn-block-mobile" href="/">
+                    {% trans "Go to homepage" %}
+                </a>
+            </p>
+        {% endif %}
     {% else %}
         <h1>
             {% trans "Account activation failed" %}
@@ -26,11 +45,11 @@
                 {% endblocktrans %}
             </small>
         </h1>
+        
+        <p>
+            <a class="btn btn-primary btn-block-mobile" href="{% url 'auth_login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">
+                {% trans "Log in" %}
+            </a>
+        </p>
     {% endif %}
-
-    <p>
-        <a class="btn btn-primary btn-block-mobile" href="{% url 'auth_login' %}">
-            {% trans "Log in" %}
-        </a>
-    </p>
 {% endblock %}
