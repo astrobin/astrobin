@@ -90,3 +90,18 @@ class CustomBackend(ModelBackend):
 
     def get_user(self, user_id: int):
         return get_object_or_None(get_user_model(), pk=user_id)
+        
+    def authenticate(self, request, username: str = None, password: str = None, _internal_auto_login_for_activated_user=False, **kwargs):
+        """
+        Special override for activated users that need to be logged in automatically.
+        This helps with the activation flow.
+        """
+        # First try the normal authentication 
+        user = super().authenticate(request, username, password, **kwargs)
+        
+        # If normal authentication failed and our special flag is set,
+        # bypass password checking completely for activation flow
+        if user is None and _internal_auto_login_for_activated_user:
+            user = self.get_user_by_username_or_email(username)
+            
+        return user

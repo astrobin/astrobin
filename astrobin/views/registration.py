@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group, User
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
@@ -21,6 +22,7 @@ from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_users.services import UserService
 from common.captcha import TurnstileField
 from common.constants import GroupName
+from common.services import AppRedirectionService
 from common.templatetags.common_tags import button_loading_class, button_loading_indicator
 
 
@@ -289,29 +291,53 @@ def user_created(sender, user, request, **kwargs):
 
 
 class AstroBinActivationView(ActivationView):
-    def get_success_url(self, user):
-        next_url = self.request.GET.get('next')
-        if next_url:
-            return next_url
-        # Default success URL from settings or hardcoded fallback
-        return settings.LOGIN_REDIRECT_URL if hasattr(settings, 'LOGIN_REDIRECT_URL') else '/'
+    def get(self, request, activation_key, *args, **kwargs):
+        """
+        Completely override the get method to handle everything in one step.
+        """
+        # Activate the user first
+        activated_user = self.activate(activation_key=activation_key)
+        
+        if activated_user:
+            # If activation was successful, manually login and create session
+            from django.contrib.auth import authenticate, login
+            
+            # Let's try to authenticate with our special backend method
+            user = authenticate(
+                request,
+                username=activated_user.username,
+                password=None,
+                _internal_auto_login_for_activated_user=True
+            )
+            
+            if user:
+                # Log in the user
+                login(request, user)
+                
+                # Make sure session is saved
+                request.session.modified = True
+                request.session.save()
+                
+                # Get the success URL directly
+                next_url = self.request.GET.get('next')
+                if next_url:
+                    success_url = next_url
+                elif activated_user.userprofile and activated_user.userprofile.enable_new_gallery_experience:
+                    success_url = AppRedirectionService.gallery_redirect(self.request, activated_user.username)
+                else:
+                    success_url = reverse('user_page', kwargs={'username': activated_user.username})
+                
+                # Return a redirect response
+                from django.http import HttpResponseRedirect
+                return HttpResponseRedirect(success_url)
+        
+        # If we get here, either activation failed or login failed
+        # Use the parent view's get method to handle errors
+        return super().get(request, activation_key, *args, **kwargs)
         
     def activate(self, *args, **kwargs):
-        """
-        Activate the user's account, then log them in immediately
-        """
-        # First use the parent class's activate method to handle the activation
-        activated_user = super().activate(*args, **kwargs)
-        
-        # If activation was successful, log the user in
-        if activated_user:
-            from django.contrib.auth import login
-
-            # Set the backend manually since we're not using authenticate()
-            activated_user.backend = 'django.contrib.auth.backends.ModelBackend'
-            login(self.request, activated_user)
-            
-        return activated_user
+        """Pass all arguments to the parent's activate method"""
+        return super().activate(*args, **kwargs)
 
 
 @require_POST
