@@ -54,7 +54,7 @@
                 </td>
 
                 <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                    <a href="{{ topic.get_absolute_url }}">
+                    <a data-no-instant href="{{ topic.get_absolute_url }}">
                         {{ topic.name|truncatechars:120 }}
                     </a>
                     {% if topic.poll_type %}

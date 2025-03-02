@@ -890,9 +890,14 @@ def post_is_unread(post, request):
 def first_unread_post_link(topic, request):
     if 'first_unread_for_topic_%d_post' % topic.pk in request.session:
         post = Post.objects.get(pk=request.session['first_unread_for_topic_%d_post' % topic.pk])
+
         if post == post.topic.last_post and post.user == request.user:
             return None
+
+        log.debug(f"First unread post for topic {topic.pk} is {post.pk} (user: {request.user})")
         return settings.BASE_URL + post.get_absolute_url()
+    else:
+        log.debug(f"No first unread post for topic {topic.pk} (user: {request.user})")
 
     return None
 

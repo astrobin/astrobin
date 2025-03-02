@@ -1,7 +1,11 @@
+import logging
+
 from pybb.models import Topic
 
 from astrobin.middleware.mixins import MiddlewareParentClass
 from astrobin_apps_forum.services import ForumService
+
+log = logging.getLogger(__name__)
 
 
 class PreviousTopicReadMarkerMiddleware(MiddlewareParentClass):
@@ -32,7 +36,10 @@ class PreviousTopicReadMarkerMiddleware(MiddlewareParentClass):
             if first_unread:
                 request.session['first_unread_for_topic_%d' % topic.pk] = first_unread.created.isoformat()
                 request.session['first_unread_for_topic_%d_post' % topic.pk] = first_unread.pk
+                log.debug(f"Marked first unread post for topic {topic.pk} as {first_unread.pk} (user: {request.user})")
             else:
+                log.debug(f"Topic {topic.pk} has no unread posts (user: {request.user})")
+
                 try:
                     del request.session['first_unread_for_topic_%d' % topic.pk]
                 except KeyError:
