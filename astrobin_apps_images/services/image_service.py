@@ -182,6 +182,9 @@ class ImageService:
             except ImageRevision.DoesNotExist:
                 target = self.get_final_revision()
 
+        if target is None or target.w is None or target.h is None:
+            return None
+
         square_cropping = target.square_cropping if target.square_cropping else self.get_default_cropping(
             revision_label
         )
