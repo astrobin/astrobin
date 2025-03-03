@@ -1,73 +1,23 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#, fuzzy
-msgid "You follow each other"
-msgstr "Vocês se seguem"
-
-msgid "Images"
-msgstr "Imagens"
-
-msgid "Followers"
-msgstr "Seguidores"
-
-msgid "Following"
-msgstr "Seguindo"
-
-msgid "User"
-msgstr "Usuário"
-
-msgid "No users."
-msgstr "Sem usuários."
-
-msgid "Administrator"
-msgstr "Administrador"
-
-msgid "Image moderator"
-msgstr "Moderador de imagem"
-
-msgid "IOTD Submitter"
-msgstr "Remetente de IDD"
-
-msgid "IOTD Reviewer"
-msgstr "Revisor de IDD"
-
-msgid "IOTD Judge"
-msgstr "Juiz de IDD"
-
-msgid "Premium member"
-msgstr "Membro Premium"
-
-#, fuzzy
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-"Seus relatórios de e-mail com erro foram removidos do AstroBin. Por favor, "
-"certifique-se de que seu e-mail está funcionando bem ou você receberá a "
-"mesma mensagem de aviso novamente. Obrigado!"
-
-#, fuzzy
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
-"Seus relatórios de spam foram removidos do AstroBin. Por favor, certifique-"
-"se de que você não tem um filtro ou regra que sempre marque os e-mails do "
-"AstroBin como spam! Se você não quiser receber e-mails do AstroBin, procure "
-"o link de configurações que está no final de cada e-mail. Obrigado!"
+msgid "(deleted)"
+msgstr "(excluído)"
 
 #, fuzzy
 msgid "Type your comment here..."
 msgstr "Digite seu comentário aqui..."
+
+#, fuzzy
+msgid "Error"
+msgstr "Erro"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -75,67 +25,28 @@ msgstr "Cancelar"
 msgid "Add a comment"
 msgstr "Adicionar um comentário"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
-"sign up</a> to leave a comment."
-msgstr ""
-"Por favor, <a href=\"%(login_url)s\">faça login</a> ou <a "
-"href=\"%(signup_url)s\">inscreva-se</a> para deixar um comentário."
-
 msgid "There are no comments yet."
 msgstr "Ainda não há comentários."
 
-#, fuzzy
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr "Este comentário está aguardando moderação e será revisado em breve."
+msgid "The comment cannot be empty."
+msgstr "O comentário não pode estar vazio."
 
-msgid "(deleted)"
-msgstr "(excluído)"
+msgid "Delete"
+msgstr "Excluir"
+
+msgid "Undelete"
+msgstr "Recuperar"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Link"
+msgstr "Link"
 
 #, fuzzy
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "curtidas"
-
-#, fuzzy
-msgctxt "Noun, e.g. 'This element has 1 like'"
-msgid "like"
-msgstr "curtida"
-
-msgid "Link"
-msgstr "Link"
-
-msgid "Undelete"
-msgstr "Recuperar"
-
-msgid "Delete"
-msgstr "Excluir"
-
-msgid "Edit"
-msgstr "Editar"
-
-msgid "Reply"
-msgstr "Responder"
-
-#, fuzzy
-msgid "Like"
-msgstr "Curtir"
-
-#, fuzzy
-msgid "Unlike"
-msgstr "Descurtir"
-
-msgid "The comment cannot be empty."
-msgstr "O comentário não pode estar vazio."
-
-#, fuzzy
-msgid "Submit"
-msgstr "Enviar"
-
-#, fuzzy
-msgid "Error"
-msgstr "Erro"
 
 #, fuzzy
 msgctxt "Verb (imperative)"
@@ -160,6 +71,14 @@ msgstr "Aprovar"
 #, fuzzy
 msgid "Report abuse"
 msgstr "Reportar abuso"
+
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
+msgstr ""
+"Por favor, <a href=\"%(login_url)s\">faça login</a> ou <a href="
+"\"%(signup_url)s\">inscreva-se</a> para deixar um comentário."
 
 #, fuzzy
 msgid ""
@@ -199,6 +118,14 @@ msgid "Thank you for understanding!"
 msgstr "Obrigado pela compreensão!"
 
 #, fuzzy
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "Este comentário está aguardando moderação e será revisado em breve."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Enviar"
+
+#, fuzzy
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
@@ -220,115 +147,191 @@ msgstr ""
 "moderador."
 
 #, fuzzy
-msgid "You many not report the same item more than once."
-msgstr "Você não pode reportar o mesmo item mais de uma vez."
-
-#, fuzzy
 msgid "You may not report the same item more than once."
 msgstr "Você não pode reportar o mesmo item mais de uma vez."
 
 #, fuzzy
-msgid "Report a use"
-msgstr "Reportar um uso"
+#~ msgid "You follow each other"
+#~ msgstr "Vocês se seguem"
+
+#~ msgid "Images"
+#~ msgstr "Imagens"
+
+#~ msgid "Followers"
+#~ msgstr "Seguidores"
+
+#~ msgid "Following"
+#~ msgstr "Seguindo"
+
+#~ msgid "User"
+#~ msgstr "Usuário"
+
+#~ msgid "No users."
+#~ msgstr "Sem usuários."
+
+#~ msgid "Administrator"
+#~ msgstr "Administrador"
+
+#~ msgid "Image moderator"
+#~ msgstr "Moderador de imagem"
+
+#~ msgid "IOTD Submitter"
+#~ msgstr "Remetente de IDD"
+
+#~ msgid "IOTD Reviewer"
+#~ msgstr "Revisor de IDD"
+
+#~ msgid "IOTD Judge"
+#~ msgstr "Juiz de IDD"
+
+#~ msgid "Premium member"
+#~ msgstr "Membro Premium"
 
 #, fuzzy
-msgid "Member since"
-msgstr "Membro desde"
+#~ msgid ""
+#~ "Your email bounce reports have been removed from AstroBin. Please make "
+#~ "sure that your email works well or you will get the same warning message "
+#~ "again. Thanks!"
+#~ msgstr ""
+#~ "Seus relatórios de e-mail com erro foram removidos do AstroBin. Por "
+#~ "favor, certifique-se de que seu e-mail está funcionando bem ou você "
+#~ "receberá a mesma mensagem de aviso novamente. Obrigado!"
 
 #, fuzzy
-msgid "Last seen online"
-msgstr "Última vez online"
+#~ msgid ""
+#~ "Your spam reports have been removed from AstroBin. Please make sure you "
+#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
+#~ "you don't want to receive emails from AstroBin, look for the settings "
+#~ "link that's at the bottom of every email. Thanks!"
+#~ msgstr ""
+#~ "Seus relatórios de spam foram removidos do AstroBin. Por favor, "
+#~ "certifique-se de que você não tem um filtro ou regra que sempre marque os "
+#~ "e-mails do AstroBin como spam! Se você não quiser receber e-mails do "
+#~ "AstroBin, procure o link de configurações que está no final de cada e-"
+#~ "mail. Obrigado!"
 
 #, fuzzy
-msgid "Total integration time"
-msgstr "Tempo total de integração"
+#~ msgctxt "Noun, e.g. 'This element has 1 like'"
+#~ msgid "like"
+#~ msgstr "curtida"
+
+#~ msgid "Reply"
+#~ msgstr "Responder"
 
 #, fuzzy
-msgid "hours"
-msgstr "horas"
+#~ msgid "Like"
+#~ msgstr "Curtir"
 
 #, fuzzy
-msgid "Average integration time"
-msgstr "Tempo médio de integração"
+#~ msgid "Unlike"
+#~ msgstr "Descurtir"
 
 #, fuzzy
-msgid "Forum posts written"
-msgstr "Postagens no fórum escritas"
+#~ msgid "You many not report the same item more than once."
+#~ msgstr "Você não pode reportar o mesmo item mais de uma vez."
 
 #, fuzzy
-msgid "Comments written"
-msgstr "Comentários escritos"
+#~ msgid "Report a use"
+#~ msgstr "Reportar um uso"
 
 #, fuzzy
-msgid "Comments received"
-msgstr "Comentários recebidos"
+#~ msgid "Member since"
+#~ msgstr "Membro desde"
 
 #, fuzzy
-msgid "Likes received"
-msgstr "Curtidas recebidas"
+#~ msgid "Last seen online"
+#~ msgstr "Última vez online"
 
 #, fuzzy
-msgid "Views received"
-msgstr "Visualizações recebidas"
+#~ msgid "Total integration time"
+#~ msgstr "Tempo total de integração"
 
 #, fuzzy
-msgid "No date specified"
-msgstr "Nenhuma data especificada"
+#~ msgid "hours"
+#~ msgstr "horas"
 
 #, fuzzy
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"Nenhum telescópio ou lente de imagem, ou nenhuma câmera de imagem "
-"especificada"
+#~ msgid "Average integration time"
+#~ msgstr "Tempo médio de integração"
 
 #, fuzzy
-msgid "Gear images"
-msgstr "Imagens do equipamento"
+#~ msgid "Forum posts written"
+#~ msgstr "Postagens no fórum escritas"
 
 #, fuzzy
-msgid "Deep sky"
-msgstr "Céu profundo"
+#~ msgid "Comments written"
+#~ msgstr "Comentários escritos"
 
 #, fuzzy
-msgid "Solar system"
-msgstr "Sistema solar"
+#~ msgid "Comments received"
+#~ msgstr "Comentários recebidos"
 
 #, fuzzy
-msgid "Extremely wide field"
-msgstr "Campo extremamente amplo"
+#~ msgid "Likes received"
+#~ msgstr "Curtidas recebidas"
 
 #, fuzzy
-msgid "Star trails"
-msgstr "Trilhas de estrelas"
+#~ msgid "Views received"
+#~ msgstr "Visualizações recebidas"
 
 #, fuzzy
-msgid "Northern lights"
-msgstr "Auroras boreais"
+#~ msgid "No date specified"
+#~ msgstr "Nenhuma data especificada"
 
 #, fuzzy
-msgid "Noctilucent clouds"
-msgstr "Nuvens noctilucentes"
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr ""
+#~ "Nenhum telescópio ou lente de imagem, ou nenhuma câmera de imagem "
+#~ "especificada"
 
 #, fuzzy
-msgid "Gear"
-msgstr "Equipamento"
+#~ msgid "Gear images"
+#~ msgstr "Imagens do equipamento"
 
 #, fuzzy
-msgid "Other"
-msgstr "Outro"
+#~ msgid "Deep sky"
+#~ msgstr "Céu profundo"
 
 #, fuzzy
-msgid "All"
-msgstr "Todos"
+#~ msgid "Solar system"
+#~ msgstr "Sistema solar"
 
 #, fuzzy
-msgid "n/a"
-msgstr "n/a"
+#~ msgid "Extremely wide field"
+#~ msgstr "Campo extremamente amplo"
 
 #, fuzzy
-msgid "No subjects specified"
-msgstr "Nenhum assunto especificado"
+#~ msgid "Star trails"
+#~ msgstr "Trilhas de estrelas"
 
 #, fuzzy
-msgid "No acquisition details specified"
-msgstr "Nenhum detalhe de aquisição especificado"
+#~ msgid "Northern lights"
+#~ msgstr "Auroras boreais"
+
+#, fuzzy
+#~ msgid "Noctilucent clouds"
+#~ msgstr "Nuvens noctilucentes"
+
+#, fuzzy
+#~ msgid "Gear"
+#~ msgstr "Equipamento"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Outro"
+
+#, fuzzy
+#~ msgid "All"
+#~ msgstr "Todos"
+
+#, fuzzy
+#~ msgid "n/a"
+#~ msgstr "n/a"
+
+#, fuzzy
+#~ msgid "No subjects specified"
+#~ msgstr "Nenhum assunto especificado"
+
+#, fuzzy
+#~ msgid "No acquisition details specified"
+#~ msgstr "Nenhum detalhe de aquisição especificado"

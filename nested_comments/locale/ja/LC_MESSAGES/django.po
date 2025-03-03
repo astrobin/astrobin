@@ -1,65 +1,21 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "You follow each other"
-msgstr "相互フォローです"
-
-msgid "Images"
-msgstr "画像"
-
-msgid "Followers"
-msgstr "フォロワー"
-
-msgid "Following"
-msgstr "フォロー中"
-
-msgid "User"
-msgstr "ユーザー"
-
-msgid "No users."
-msgstr "ユーザがいない。"
-
-msgid "Administrator"
-msgstr "管理者"
-
-msgid "Image moderator"
-msgstr "画像モデレーター"
-
-msgid "IOTD Submitter"
-msgstr "IOTD投稿者"
-
-msgid "IOTD Reviewer"
-msgstr "IOTDレビュアー"
-
-msgid "IOTD Judge"
-msgstr "IOTD審査員"
-
-msgid "Premium member"
-msgstr "プレミアム会員"
-
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-"お客様の電子メールバウンスレポートは、AstroBinから削除されました。電子メールが正常に動作しない場合、再度同じ警告メッセージが表示されますので、ご確認ください。ありがとうございました。"
-
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
-"あなたのスパム報告はAstroBinから削除されました。フィルターやルールで、AstroBinのメールを常にスパムとしてマークしていないか、ご確認ください"
-" AstroBinからのメールを受け取りたくない場合は、すべてのメールの一番下にある設定リンクを探してください。ありがとうございました。"
+msgid "(deleted)"
+msgstr "（削除済み）"
 
 msgid "Type your comment here..."
 msgstr "ここに、あなたからのコメントを記載ください"
+
+msgid "Error"
+msgstr "エラー"
 
 msgid "Cancel"
 msgstr "キャンセル"
@@ -67,60 +23,27 @@ msgstr "キャンセル"
 msgid "Add a comment"
 msgstr "コメントを追加する"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
-"sign up</a> to leave a comment."
-msgstr ""
-"コメントを残すには、<a href=\"%(login_url)s\">ログイン</a>または<a href=\"%(signup_url)s\">"
-"会員登録</a>してください。"
-
 msgid "There are no comments yet."
 msgstr "コメントがまだありません。"
-
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr "このコメントはモデレーション中で、間もなくレビューされます。"
-
-msgid "(deleted)"
-msgstr "（削除済み）"
-
-msgctxt "Noun, e.g. 'This element has 10 likes'"
-msgid "likes"
-msgstr "いいね！"
-
-msgctxt "Noun, e.g. 'This element has 1 like'"
-msgid "like"
-msgstr "いいね！"
-
-msgid "Link"
-msgstr "リンク"
-
-msgid "Undelete"
-msgstr "削除を取消す"
-
-msgid "Delete"
-msgstr "削除する"
-
-msgid "Edit"
-msgstr "編集する"
-
-msgid "Reply"
-msgstr "返信する"
-
-msgid "Like"
-msgstr "いいね！"
-
-msgid "Unlike"
-msgstr "いいね！をやめる"
 
 msgid "The comment cannot be empty."
 msgstr "コメントは空欄にできません。"
 
-msgid "Submit"
-msgstr "送信する"
+msgid "Delete"
+msgstr "削除する"
 
-msgid "Error"
-msgstr "エラー"
+msgid "Undelete"
+msgstr "削除を取消す"
+
+msgid "Edit"
+msgstr "編集する"
+
+msgid "Link"
+msgstr "リンク"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "いいね！"
 
 msgctxt "Verb (imperative)"
 msgid "Like"
@@ -141,16 +64,28 @@ msgstr "承認"
 msgid "Report abuse"
 msgstr "不正利用の報告"
 
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
+msgstr ""
+"コメントを残すには、<a href=\"%(login_url)s\">ログイン</a>または<a href="
+"\"%(signup_url)s\">会員登録</a>してください。"
+
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
-msgstr "このコメントは調整確認中です。承認するか、下のボタンで不正使用を報告してください。"
+msgstr ""
+"このコメントは調整確認中です。承認するか、下のボタンで不正使用を報告してくだ"
+"さい。"
 
 msgid "Thank you for your cooperation!"
 msgstr "ご協力ありがとうございました。"
 
 msgid "This comment was already moderated by you or an AstroBin moderator."
-msgstr "このコメントは、あなたまたはAstroBinのモデレーターによって既にモデレートされています。"
+msgstr ""
+"このコメントは、あなたまたはAstroBinのモデレーターによって既にモデレートされ"
+"ています。"
 
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
@@ -158,7 +93,9 @@ msgid ""
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
-"あなたのコメントはモデレーション中であり、あなたがコメントしたコンテンツオブジェクトの著者または所有者が間もなく確認するはずです。24時間以内に対応しない場合、AstroBinのモデレーターが代わってお客様のコメントを確認します。"
+"あなたのコメントはモデレーション中であり、あなたがコメントしたコンテンツオブ"
+"ジェクトの著者または所有者が間もなく確認するはずです。24時間以内に対応しない"
+"場合、AstroBinのモデレーターが代わってお客様のコメントを確認します。"
 
 msgid "This process is necessary to prevent spam on AstroBin."
 msgstr "この処理は、AstroBinでのスパムを防止するために必要です。"
@@ -166,101 +103,180 @@ msgstr "この処理は、AstroBinでのスパムを防止するために必要�
 msgid "Thank you for understanding!"
 msgstr "ご理解いただきありがとうございます。"
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "このコメントはモデレーション中で、間もなくレビューされます。"
+
+msgid "Submit"
+msgstr "送信する"
+
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
-"このコメントを削除することはできません: "
-"確認済みまたは保留中の不正使用報告がこのコメントに存在します。もし、あなたのコメントが不当に報告されたと思われる場合は、私たちにご連絡ください。"
+"このコメントを削除することはできません: 確認済みまたは保留中の不正使用報告が"
+"このコメントに存在します。もし、あなたのコメントが不当に報告されたと思われる"
+"場合は、私たちにご連絡ください。"
 
 msgid "You have reached your abuse report quota."
 msgstr "不正使用報告の制限に達しました。"
 
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
-msgstr "このアイテムはモデレーターによって承認されているため、再度報告することはできません。"
-
-msgid "You many not report the same item more than once."
-msgstr "同じアイテムを複数回報告することはできません。"
+msgstr ""
+"このアイテムはモデレーターによって承認されているため、再度報告することはでき"
+"ません。"
 
 msgid "You may not report the same item more than once."
 msgstr "同じアイテムを複数回報告することはできません。"
 
-msgid "Report a use"
-msgstr "使用状況を報告する"
+#~ msgid "You follow each other"
+#~ msgstr "相互フォローです"
 
-msgid "Member since"
-msgstr "からの会員"
+#~ msgid "Images"
+#~ msgstr "画像"
 
-msgid "Last seen online"
-msgstr "オンラインでの最終アクセス"
+#~ msgid "Followers"
+#~ msgstr "フォロワー"
 
-msgid "Total integration time"
-msgstr "全露出時間"
+#~ msgid "Following"
+#~ msgstr "フォロー中"
 
-msgid "hours"
-msgstr "時間"
+#~ msgid "User"
+#~ msgstr "ユーザー"
 
-msgid "Average integration time"
-msgstr "平均露出時間"
+#~ msgid "No users."
+#~ msgstr "ユーザがいない。"
 
-msgid "Forum posts written"
-msgstr "フォーラムへの書き込み"
+#~ msgid "Administrator"
+#~ msgstr "管理者"
 
-msgid "Comments written"
-msgstr "コメントの書き込み"
+#~ msgid "Image moderator"
+#~ msgstr "画像モデレーター"
 
-msgid "Comments received"
-msgstr "コメントを受け取りました"
+#~ msgid "IOTD Submitter"
+#~ msgstr "IOTD投稿者"
 
-msgid "Likes received"
-msgstr "「いいね！」を受け取りました"
+#~ msgid "IOTD Reviewer"
+#~ msgstr "IOTDレビュアー"
 
-msgid "Views received"
-msgstr "閲覧をしていただきました"
+#~ msgid "IOTD Judge"
+#~ msgstr "IOTD審査員"
 
-msgid "No date specified"
-msgstr "日付指定なし"
+#~ msgid "Premium member"
+#~ msgstr "プレミアム会員"
 
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "撮像用望遠鏡やレンズがない、あるいは撮像用カメラが指定されていません。"
+#~ msgid ""
+#~ "Your email bounce reports have been removed from AstroBin. Please make "
+#~ "sure that your email works well or you will get the same warning message "
+#~ "again. Thanks!"
+#~ msgstr ""
+#~ "お客様の電子メールバウンスレポートは、AstroBinから削除されました。電子メー"
+#~ "ルが正常に動作しない場合、再度同じ警告メッセージが表示されますので、ご確認"
+#~ "ください。ありがとうございました。"
 
-msgid "Gear images"
-msgstr "機材画像"
+#~ msgid ""
+#~ "Your spam reports have been removed from AstroBin. Please make sure you "
+#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
+#~ "you don't want to receive emails from AstroBin, look for the settings "
+#~ "link that's at the bottom of every email. Thanks!"
+#~ msgstr ""
+#~ "あなたのスパム報告はAstroBinから削除されました。フィルターやルールで、"
+#~ "AstroBinのメールを常にスパムとしてマークしていないか、ご確認ください "
+#~ "AstroBinからのメールを受け取りたくない場合は、すべてのメールの一番下にある"
+#~ "設定リンクを探してください。ありがとうございました。"
 
-msgid "Deep sky"
-msgstr "ディープスカイ"
+#~ msgctxt "Noun, e.g. 'This element has 1 like'"
+#~ msgid "like"
+#~ msgstr "いいね！"
 
-msgid "Solar system"
-msgstr "太陽系"
+#~ msgid "Reply"
+#~ msgstr "返信する"
 
-msgid "Extremely wide field"
-msgstr "超広角写野"
+#~ msgid "Like"
+#~ msgstr "いいね！"
 
-msgid "Star trails"
-msgstr "流星"
+#~ msgid "Unlike"
+#~ msgstr "いいね！をやめる"
 
-msgid "Northern lights"
-msgstr "オーロラ"
+#~ msgid "You many not report the same item more than once."
+#~ msgstr "同じアイテムを複数回報告することはできません。"
 
-msgid "Noctilucent clouds"
-msgstr "夜光雲"
+#~ msgid "Report a use"
+#~ msgstr "使用状況を報告する"
 
-msgid "Gear"
-msgstr "機材"
+#~ msgid "Member since"
+#~ msgstr "からの会員"
 
-msgid "Other"
-msgstr "他のもの"
+#~ msgid "Last seen online"
+#~ msgstr "オンラインでの最終アクセス"
 
-msgid "All"
-msgstr "すべて"
+#~ msgid "Total integration time"
+#~ msgstr "全露出時間"
 
-msgid "n/a"
-msgstr "n/a"
+#~ msgid "hours"
+#~ msgstr "時間"
 
-msgid "No subjects specified"
-msgstr "撮影対象の指定なし"
+#~ msgid "Average integration time"
+#~ msgstr "平均露出時間"
 
-msgid "No acquisition details specified"
-msgstr "撮影詳細の指定なし"
+#~ msgid "Forum posts written"
+#~ msgstr "フォーラムへの書き込み"
+
+#~ msgid "Comments written"
+#~ msgstr "コメントの書き込み"
+
+#~ msgid "Comments received"
+#~ msgstr "コメントを受け取りました"
+
+#~ msgid "Likes received"
+#~ msgstr "「いいね！」を受け取りました"
+
+#~ msgid "Views received"
+#~ msgstr "閲覧をしていただきました"
+
+#~ msgid "No date specified"
+#~ msgstr "日付指定なし"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr ""
+#~ "撮像用望遠鏡やレンズがない、あるいは撮像用カメラが指定されていません。"
+
+#~ msgid "Gear images"
+#~ msgstr "機材画像"
+
+#~ msgid "Deep sky"
+#~ msgstr "ディープスカイ"
+
+#~ msgid "Solar system"
+#~ msgstr "太陽系"
+
+#~ msgid "Extremely wide field"
+#~ msgstr "超広角写野"
+
+#~ msgid "Star trails"
+#~ msgstr "流星"
+
+#~ msgid "Northern lights"
+#~ msgstr "オーロラ"
+
+#~ msgid "Noctilucent clouds"
+#~ msgstr "夜光雲"
+
+#~ msgid "Gear"
+#~ msgstr "機材"
+
+#~ msgid "Other"
+#~ msgstr "他のもの"
+
+#~ msgid "All"
+#~ msgstr "すべて"
+
+#~ msgid "n/a"
+#~ msgstr "n/a"
+
+#~ msgid "No subjects specified"
+#~ msgstr "撮影対象の指定なし"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "撮影詳細の指定なし"

@@ -1,13 +1,15 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: zh-Hans\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "Conflict."
-msgstr "冲突。"
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "每张图片只允许一个基于视频的采集."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "未压缩数据源（最大100 MB）"
@@ -18,57 +20,8 @@ msgid ""
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
-"您可以将从您最喜爱的图像编辑器（如 PixInsight、Adobe Photoshop 等）得到的最终处理作品存储在 AstroBin "
-"上，以供存档。此文件是私人所有的，只有您有权访问它。"
-
-msgid "Error!"
-msgstr "错误！"
-
-msgid "Staging area"
-msgstr "暂存区"
-
-msgid "Loading"
-msgstr "正在载入"
-
-msgid "(no title)"
-msgstr "（无标题）"
-
-msgid "Image of the day"
-msgstr "每日一图"
-
-msgid "Top pick"
-msgstr "精选"
-
-msgid "Top pick nomination"
-msgstr "精选提名"
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "抱歉，数据损坏。请重新上传该作品！"
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "修订 %(revision)s"
-
-msgid "Original revision"
-msgstr "原始修订"
-
-msgid "Collaboration"
-msgstr "协作"
-
-msgid "Currently in the IOTD/TP queue"
-msgstr "当前在 IOTD/TP 队列中"
-
-msgid "Video"
-msgstr "视频"
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr "编码此视频时出现问题，请重新上传。"
-
-msgid "If the problem persists, please contact us."
-msgstr "如果问题仍然存在，请联系我们。"
-
-msgid "This video is still processing, please return to this page later."
-msgstr "此视频仍在处理，请稍后返回此页面。"
+"您可以将从您最喜爱的图像编辑器（如 PixInsight、Adobe Photoshop 等）得到的最终"
+"处理作品存储在 AstroBin 上，以供存档。此文件是私人所有的，只有您有权访问它。"
 
 msgid "Dates"
 msgstr "日期"
@@ -142,8 +95,57 @@ msgstr "视宁度"
 msgid "Transparency"
 msgstr "透明度"
 
+msgid "Error!"
+msgstr "错误！"
+
+msgid "Image of the day"
+msgstr "每日一图"
+
+msgid "Top pick"
+msgstr "精选"
+
+msgid "Top pick nomination"
+msgstr "精选提名"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr "当前在 IOTD/TP 队列中"
+
+msgid "Staging area"
+msgstr "暂存区"
+
+msgid "Collaboration"
+msgstr "协作"
+
+msgid "Video"
+msgstr "视频"
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr "编码此视频时出现问题，请重新上传。"
+
+msgid "If the problem persists, please contact us."
+msgstr "如果问题仍然存在，请联系我们。"
+
+msgid "This video is still processing, please return to this page later."
+msgstr "此视频仍在处理，请稍后返回此页面。"
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "修订 %(revision)s"
+
+msgid "Original revision"
+msgstr "原始修订"
+
+msgid "Loading"
+msgstr "正在载入"
+
+msgid "(no title)"
+msgstr "（无标题）"
+
 msgid "Image file not found"
 msgstr "未找到图像文件"
 
-msgid "Only one video-based acquisition is allowed per image."
-msgstr "每张图片只允许一个基于视频的采集."
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "抱歉，数据损坏。请重新上传该作品！"
+
+#~ msgid "Conflict."
+#~ msgstr "冲突。"

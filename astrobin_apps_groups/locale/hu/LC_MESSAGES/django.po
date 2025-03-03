@@ -1,10 +1,21 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-03 22:59+0000\n"
 "Language: hu\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Csak a következő kategóriák támogatják az automatikus beküldést: Szakmai "
+"hálózat, Klub vagy egyesület, Internetes közösség, Barátok vagy partnerek, "
+"Földrajzi terület"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Automatikus beküldés deaktiválási stratégiája"
@@ -60,6 +71,15 @@ msgstr "Specifikus felszerelésre jellemző"
 msgid "Other"
 msgstr "Egyéb"
 
+msgid "Publication"
+msgstr "Közzététel"
+
+msgid "Title"
+msgstr "Cím"
+
+msgid "Key/value tag"
+msgstr "Key/value tag"
+
 msgid "Name"
 msgstr "Név"
 
@@ -71,6 +91,21 @@ msgstr "A HTML tagek engedélyezve vannak."
 
 msgid "Category"
 msgstr "Kategória"
+
+msgid "Default image sorting"
+msgstr "Alapértelmezett képrendezés"
+
+msgid "Image key/value tag sorting"
+msgstr "Kép key/value tagjének rendezése"
+
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Ha a képek egy key/value tag alapján vannak rendezve, kérjük, add meg, hogy "
+"melyik alapján. <a target='_blank' href='https://welcome.astrobin.com/"
+"features/groups'>Learn more.</a>"
 
 msgid "Public group"
 msgstr "Nyilvános csoport"
@@ -101,8 +136,26 @@ msgstr ""
 "összes tag összes nyilvános képét. Az automatikus beküldés nélküli csoportok "
 "csak a kifejezetten beküldött képeket tartalmazzák."
 
+#, fuzzy
+msgid "Forum notice"
+msgstr "Fórum értesítés"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Írj egy 'Fórum értesítést', amely a 'új téma' űrlap felett jelenik meg. "
+"Használj ezt a fórum szabályainak, nyilatkozatoknak vagy fontos "
+"információknak a közlésére a felhasználók számára, mielőtt új bejegyzést "
+"hoznának létre. Győződj meg róla, hogy az üzeneted világos és tömör."
+
 msgid "Last activity"
 msgstr "Utolsó aktivitás"
+
+msgid "Date created"
+msgstr "Létrehozás dátuma"
 
 msgid "Members"
 msgstr "Tagok"
@@ -147,6 +200,9 @@ msgstr "Mentés"
 msgid "Cancel"
 msgstr "Mégsem"
 
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Kérjük, ne adj hozzá több, mint 100 képet egyszerre, köszönjük!"
+
 msgid "Delete group?"
 msgstr "Törlöd a csoportot?"
 
@@ -183,6 +239,9 @@ msgstr "Csoport elhagyása"
 
 msgid "Moderate join requests"
 msgstr "Csatlakozási kérelmek moderálása"
+
+msgid "Sort images"
+msgstr "Képek rendezése"
 
 msgid "This group is public"
 msgstr "Ez a csoport nyilvános"
@@ -232,9 +291,6 @@ msgstr "Összes megtekintése"
 
 msgid "New topic"
 msgstr "Új téma"
-
-msgid "Please join the group to view its forum."
-msgstr "Kérjük, csatlakozz a csoporthoz a fóruma megtekintéséhez."
 
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
@@ -296,30 +352,29 @@ msgstr "Csoportok"
 msgid "Sort"
 msgstr "Rendezés"
 
-msgid "Date created"
-msgstr "Létrehozás dátuma"
+msgid "Search"
+msgstr "Keresés"
 
-msgid "Your private groups"
-msgstr "A privát csoportjaid"
+msgid "Private groups you own"
+msgstr "Privát csoportok, amik a te tulajdonaid"
 
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr ""
-"Tulajdonosa vagy tagja vagy tagja vagy meghívást kaptál ezekbe a privát "
-"csoportokba."
+msgid "Private groups you are a member of"
+msgstr "Privát csoportok, amiknek tagja vagy"
 
-msgctxt "group"
-msgid "Create private group"
-msgstr "Privát csoport létrehozása"
+msgid "Private groups you are invited to"
+msgstr "Privát csoportok, amikbe meg vagy hívva"
+
+msgid "Public groups you own"
+msgstr "Nyilvános csoportok, amik a te tulajdonaid"
+
+msgid "Public groups you are a member of"
+msgstr "Nyilvános csoportok, amiknek tagja vagy"
+
+msgid "Public groups you are invited to"
+msgstr "Nyilvános csoportok, amikbe meg vagy hívva"
 
 msgid "Public groups"
 msgstr "Nyilvános csoportok"
-
-msgid "Open to the whole community."
-msgstr "Nyitott az egész közösség számára."
-
-msgctxt "group"
-msgid "Create public group"
-msgstr "Nyilvános csoport létrehozása"
 
 msgid "No groups available."
 msgstr "Nincs elérhető csoport."
@@ -384,6 +439,14 @@ msgstr "Visszautasítás"
 msgid "This group has no join requests."
 msgstr "A csoporthoz nem lehet kérelemmel csatlakozni."
 
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Valami hiba történt, kérlek próbáld újra később."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Írd ide az üzeneted..."
+
 msgid "You cannot add images that are not yours!"
 msgstr "Nem adhatsz hozzá képeket, amik nem a tieid!"
 
@@ -418,85 +481,25 @@ msgstr "Elhagytad a csoportot"
 msgid "Form saved"
 msgstr "Űrlap elmentve"
 
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Csak a következő kategóriák támogatják az automatikus beküldést: Szakmai "
-"hálózat, Klub vagy egyesület, Internetes közösség, Barátok vagy partnerek, "
-"Földrajzi terület"
+#~ msgid "Please join the group to view its forum."
+#~ msgstr "Kérjük, csatlakozz a csoporthoz a fóruma megtekintéséhez."
 
-msgid "Publication"
-msgstr "Közzététel"
+#~ msgid "Your private groups"
+#~ msgstr "A privát csoportjaid"
 
-msgid "Title"
-msgstr "Cím"
+#~ msgid ""
+#~ "You own, or are a member of, or were invited to, these private groups."
+#~ msgstr ""
+#~ "Tulajdonosa vagy tagja vagy tagja vagy meghívást kaptál ezekbe a privát "
+#~ "csoportokba."
 
-msgid "Key/value tag"
-msgstr "Key/value tag"
+#~ msgctxt "group"
+#~ msgid "Create private group"
+#~ msgstr "Privát csoport létrehozása"
 
-msgid "Default image sorting"
-msgstr "Alapértelmezett képrendezés"
+#~ msgid "Open to the whole community."
+#~ msgstr "Nyitott az egész közösség számára."
 
-msgid "Image key/value tag sorting"
-msgstr "Kép key/value tagjének rendezése"
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Ha a képek egy key/value tag alapján vannak rendezve, kérjük, add meg, hogy "
-"melyik alapján. <a target='_blank' href='https://welcome.astrobin."
-"com/features/groups'>Learn more.</a>"
-
-msgid "Search"
-msgstr "Keresés"
-
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Kérjük, ne adj hozzá több, mint 100 képet egyszerre, köszönjük!"
-
-msgid "Sort images"
-msgstr "Képek rendezése"
-
-msgid "Private groups you own"
-msgstr "Privát csoportok, amik a te tulajdonaid"
-
-msgid "Private groups you are a member of"
-msgstr "Privát csoportok, amiknek tagja vagy"
-
-msgid "Private groups you are invited to"
-msgstr "Privát csoportok, amikbe meg vagy hívva"
-
-msgid "Public groups you own"
-msgstr "Nyilvános csoportok, amik a te tulajdonaid"
-
-msgid "Public groups you are a member of"
-msgstr "Nyilvános csoportok, amiknek tagja vagy"
-
-msgid "Public groups you are invited to"
-msgstr "Nyilvános csoportok, amikbe meg vagy hívva"
-
-#, fuzzy
-msgid "Forum notice"
-msgstr "Fórum értesítés"
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Írj egy 'Fórum értesítést', amely a 'új téma' űrlap felett jelenik meg. "
-"Használj ezt a fórum szabályainak, nyilatkozatoknak vagy fontos "
-"információknak a közlésére a felhasználók számára, mielőtt új bejegyzést "
-"hoznának létre. Győződj meg róla, hogy az üzeneted világos és tömör."
-
-#, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Valami hiba történt, kérlek próbáld újra később."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Írd ide az üzeneted..."
+#~ msgctxt "group"
+#~ msgid "Create public group"
+#~ msgstr "Nyilvános csoport létrehozása"

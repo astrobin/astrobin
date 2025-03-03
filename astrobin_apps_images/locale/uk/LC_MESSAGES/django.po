@@ -1,14 +1,17 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
-"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 
-msgid "Conflict."
-msgstr "Конфлікт."
+#, fuzzy
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Дозволено лише одне відеозахоплення на зображення."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Джерело без стиснення (макс. 100 Мб)"
@@ -23,63 +26,6 @@ msgstr ""
 "редактором зображень (наприклад, PixInsight, Adobe Photoshop, тощо), тут, на "
 "AstroBin, для архівних цілей. Цей файл зберігається приватно, і тільки Ви "
 "матимете до нього доступ."
-
-msgid "Error!"
-msgstr "Помилка!"
-
-msgid "Staging area"
-msgstr "Студія"
-
-msgid "Loading"
-msgstr "Завантаження"
-
-msgid "(no title)"
-msgstr "(без назви)"
-
-msgid "Image of the day"
-msgstr "Зображення Дня"
-
-msgid "Top pick"
-msgstr "Топ Зображення"
-
-msgid "Top pick nomination"
-msgstr "Номінація на Топ Зображення"
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Дані пошкоджено. Завантажте це зображення знову. Вибачте!"
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "Версія %(revision)s"
-
-msgid "Original revision"
-msgstr "Оригінальна версія"
-
-#, fuzzy
-msgid "Collaboration"
-msgstr "Співпраця"
-
-#, fuzzy
-msgid "Currently in the IOTD/TP queue"
-msgstr "Зараз у черзі IOTD/TP"
-
-#, fuzzy
-msgid "Video"
-msgstr "Відео"
-
-#, fuzzy
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-"Виникла проблема з кодуванням цього відео, будь ласка, завантажте його знову."
-
-#, fuzzy
-msgid "If the problem persists, please contact us."
-msgstr "Якщо проблема не зникне, будь ласка, зв'яжіться з нами."
-
-#, fuzzy
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-"Це відео все ще обробляється, будь ласка, поверніться на цю сторінку пізніше."
 
 #, fuzzy
 msgid "Dates"
@@ -177,10 +123,66 @@ msgstr "Сеїнг"
 msgid "Transparency"
 msgstr "Прозорість"
 
+msgid "Error!"
+msgstr "Помилка!"
+
+msgid "Image of the day"
+msgstr "Зображення Дня"
+
+msgid "Top pick"
+msgstr "Топ Зображення"
+
+msgid "Top pick nomination"
+msgstr "Номінація на Топ Зображення"
+
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Зараз у черзі IOTD/TP"
+
+msgid "Staging area"
+msgstr "Студія"
+
+#, fuzzy
+msgid "Collaboration"
+msgstr "Співпраця"
+
+#, fuzzy
+msgid "Video"
+msgstr "Відео"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+"Виникла проблема з кодуванням цього відео, будь ласка, завантажте його знову."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Якщо проблема не зникне, будь ласка, зв'яжіться з нами."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr ""
+"Це відео все ще обробляється, будь ласка, поверніться на цю сторінку пізніше."
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Версія %(revision)s"
+
+msgid "Original revision"
+msgstr "Оригінальна версія"
+
+msgid "Loading"
+msgstr "Завантаження"
+
+msgid "(no title)"
+msgstr "(без назви)"
+
 #, fuzzy
 msgid "Image file not found"
 msgstr "Файл зображення не знайдено"
 
-#, fuzzy
-msgid "Only one video-based acquisition is allowed per image."
-msgstr "Дозволено лише одне відеозахоплення на зображення."
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Дані пошкоджено. Завантажте це зображення знову. Вибачте!"
+
+#~ msgid "Conflict."
+#~ msgstr "Конфлікт."
