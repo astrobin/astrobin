@@ -16,5 +16,5 @@ astrobin_apps_equipment
 
 for APP in ${APPS}; do
     echo "Processing ${APP}..."
-    (cd ${APP}; ../manage.py compilemessages) || exit 1
+    (cd ${APP}; ../manage.py compilemessages --use-fuzzy) || exit 1
 done
