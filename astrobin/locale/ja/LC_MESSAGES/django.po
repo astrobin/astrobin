@@ -8255,6 +8255,7 @@ msgstr "デバイスが手元にない場合は、バックアップトークン
 msgid "You have only one backup token remaining."
 msgid_plural "You have %(counter)s backup tokens remaining."
 msgstr[0] "バックアップトークンは残り1つです。"
+msgstr[1] "バックアップトークンは残り%(counter)s個です。"
 
 #, fuzzy
 msgid "Show codes"
@@ -8380,9 +8381,10 @@ msgid ""
 msgstr ""
 "このボタンを使って画像を\n"
 "                                        <strong>パブリックエリア</strong>"
-"にアップロードします。あなたのプロフィールに表示され、ここホームページにも表示されます。あなたは\n"
+"にアップロードします。<a href=\"%(profile_url)s\">あなたのプロフィール</a>に表示され、ここホームページにも表示されます。あなたは\n"
 "                                        <a data-no-instant "
 "href=\"%(flickr_url)s\">Flickrからインポートすることもできます。</a>"
+
 
 #, fuzzy
 msgid ""
@@ -10164,7 +10166,7 @@ msgid ""
 "     with the same passion and dedication. Without further ado, here is your "
 "most recent activity data.\n"
 msgstr ""
-"毎月の初めに、AstroBinはあなたのIOTD/TPスタッフメンバーとしての活動の概要を送信します。コミュニティ全体は、IOTD/TPプロセスへのあなたの貢献に感謝しており、同じ情熱と献身で続けてくれることを願っています。それでは、あなたの最近の活動データをお届けします。"
+"毎月の初めに、AstroBinはあなたのIOTD/TPスタッフメンバーとしての活動の概要を送信します。コミュニティ全体は、IOTD/TPプロセスへのあなたの貢献に感謝しており、同じ情熱と献身で続けてくれることを願っています。それでは、あなたの最近の活動データをお届けします。\n"
 
 #, fuzzy
 msgid "Your IOTD staff member stats"
