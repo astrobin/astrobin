@@ -1,23 +1,11 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:33+0000\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
-
-#, fuzzy
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Только следующие категории поддерживают автоматическую отправку: "
-"Профессиональная сеть, Клуб или ассоциация, Интернет-сообщество, Друзья или "
-"партнеры, Географическая область"
+"Content-Transfer-Encoding: 8bit"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Варианты отключения автодобавления изображений"
@@ -71,18 +59,6 @@ msgstr "Особенное оборудование"
 msgid "Other"
 msgstr "Прочее"
 
-#, fuzzy
-msgid "Publication"
-msgstr "Публикация"
-
-#, fuzzy
-msgid "Title"
-msgstr "Название"
-
-#, fuzzy
-msgid "Key/value tag"
-msgstr "Ключевое/значение тег"
-
 msgid "Name"
 msgstr "Название"
 
@@ -94,24 +70,6 @@ msgstr "Разрешены HTML теги."
 
 msgid "Category"
 msgstr "Категория"
-
-#, fuzzy
-msgid "Default image sorting"
-msgstr "Сортировка изображений по умолчанию"
-
-#, fuzzy
-msgid "Image key/value tag sorting"
-msgstr "Сортировка изображений по тегу ключ/значение"
-
-#, fuzzy
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Если изображения сортируются по тегу ключ/значение, пожалуйста, укажите, по "
-"какому. <a target='_blank' href='https://welcome.astrobin.com/features/"
-"groups'>Узнать больше.<\\/a>"
 
 msgid "Public group"
 msgstr "Открытая группа"
@@ -142,26 +100,8 @@ msgstr ""
 "Группы без автодобавления содержат только те изображения, которые были "
 "добавлены вручную."
 
-#, fuzzy
-msgid "Forum notice"
-msgstr "Уведомление форума"
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Введите 'Уведомление форума', которое будет отображаться над формой 'новая "
-"тема'. Используйте это, чтобы сообщить правила форума, отказ от "
-"ответственности или важную информацию пользователям перед созданием нового "
-"поста. Убедитесь, что ваше сообщение четкое и лаконичное."
-
 msgid "Last activity"
 msgstr "Последние действия"
-
-msgid "Date created"
-msgstr "Дата создания"
 
 msgid "Members"
 msgstr "Участники"
@@ -207,10 +147,6 @@ msgstr "Сохранить"
 msgid "Cancel"
 msgstr "Отмена"
 
-#, fuzzy
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Пожалуйста, не добавляйте более 100 изображений за раз, спасибо!"
-
 msgid "Delete group?"
 msgstr "Удалить группу?"
 
@@ -247,10 +183,6 @@ msgstr "Покинуть группу"
 
 msgid "Moderate join requests"
 msgstr "Модерировать запросы на вступление"
-
-#, fuzzy
-msgid "Sort images"
-msgstr "Сортировать изображения"
 
 msgid "This group is public"
 msgstr "Эта группа открытая"
@@ -300,6 +232,9 @@ msgstr "Посмотреть все"
 
 msgid "New topic"
 msgstr "Новая тема"
+
+msgid "Please join the group to view its forum."
+msgstr "Добавьтесь в группу, чтобы читать этот форум."
 
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
@@ -361,36 +296,28 @@ msgstr "Группы"
 msgid "Sort"
 msgstr "Упорядочить"
 
-#, fuzzy
-msgid "Search"
-msgstr "Поиск"
+msgid "Date created"
+msgstr "Дата создания"
 
-#, fuzzy
-msgid "Private groups you own"
-msgstr "Частные группы, которыми вы владеете"
+msgid "Your private groups"
+msgstr "Ваши закрытые группы"
 
-#, fuzzy
-msgid "Private groups you are a member of"
-msgstr "Частные группы, членом которых вы являетесь"
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr "Вы владеете/участвуете/приглашены в эти закрытые группы."
 
-#, fuzzy
-msgid "Private groups you are invited to"
-msgstr "Частные группы, в которые вас пригласили"
-
-#, fuzzy
-msgid "Public groups you own"
-msgstr "Публичные группы, которыми вы владеете"
-
-#, fuzzy
-msgid "Public groups you are a member of"
-msgstr "Публичные группы, членом которых вы являетесь"
-
-#, fuzzy
-msgid "Public groups you are invited to"
-msgstr "Публичные группы, в которые вас пригласили"
+msgctxt "group"
+msgid "Create private group"
+msgstr "Создать закрытую группу"
 
 msgid "Public groups"
 msgstr "Открытые группы"
+
+msgid "Open to the whole community."
+msgstr "Открыто для всего сообщества."
+
+msgctxt "group"
+msgid "Create public group"
+msgstr "Создать открытую группу"
 
 msgid "No groups available."
 msgstr "Нет доступных групп."
@@ -455,14 +382,6 @@ msgstr "Отклонить"
 msgid "This group has no join requests."
 msgstr "В этой группе нет запросов на вступление."
 
-#, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Что-то пошло не так, пожалуйста, попробуйте позже."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Введите ваше сообщение здесь..."
-
 msgid "You cannot add images that are not yours!"
 msgstr "Вы не можете добавить чужие изображения!"
 
@@ -497,23 +416,101 @@ msgstr "Вы вышли из группы"
 msgid "Form saved"
 msgstr "Форма сохранена"
 
-#~ msgid "Please join the group to view its forum."
-#~ msgstr "Добавьтесь в группу, чтобы читать этот форум."
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Только следующие категории поддерживают автоматическую отправку: "
+"Профессиональная сеть, Клуб или ассоциация, Интернет-сообщество, Друзья или "
+"партнеры, Географическая область"
 
-#~ msgid "Your private groups"
-#~ msgstr "Ваши закрытые группы"
+#, fuzzy
+msgid "Publication"
+msgstr "Публикация"
 
-#~ msgid ""
-#~ "You own, or are a member of, or were invited to, these private groups."
-#~ msgstr "Вы владеете/участвуете/приглашены в эти закрытые группы."
+#, fuzzy
+msgid "Title"
+msgstr "Название"
 
-#~ msgctxt "group"
-#~ msgid "Create private group"
-#~ msgstr "Создать закрытую группу"
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Ключевое/значение тег"
 
-#~ msgid "Open to the whole community."
-#~ msgstr "Открыто для всего сообщества."
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Сортировка изображений по умолчанию"
 
-#~ msgctxt "group"
-#~ msgid "Create public group"
-#~ msgstr "Создать открытую группу"
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Сортировка изображений по тегу ключ/значение"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Если изображения сортируются по тегу ключ/значение, пожалуйста, укажите, по "
+"какому. <a target='_blank' href='https://welcome.astrobin."
+"com/features/groups'>Узнать больше.<\\/a>"
+
+#, fuzzy
+msgid "Search"
+msgstr "Поиск"
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Пожалуйста, не добавляйте более 100 изображений за раз, спасибо!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Сортировать изображения"
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "Частные группы, которыми вы владеете"
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "Частные группы, членом которых вы являетесь"
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "Частные группы, в которые вас пригласили"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Публичные группы, которыми вы владеете"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Публичные группы, членом которых вы являетесь"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Публичные группы, в которые вас пригласили"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Уведомление форума"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Введите 'Уведомление форума', которое будет отображаться над формой 'новая "
+"тема'. Используйте это, чтобы сообщить правила форума, отказ от "
+"ответственности или важную информацию пользователям перед созданием нового "
+"поста. Убедитесь, что ваше сообщение четкое и лаконичное."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Что-то пошло не так, пожалуйста, попробуйте позже."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Введите ваше сообщение здесь..."
