@@ -97,7 +97,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=1,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -129,7 +130,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=1,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -162,7 +164,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=1,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -186,7 +189,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=1,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -207,7 +211,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=2,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -232,7 +237,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=1,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -258,7 +264,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=2,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -283,7 +290,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=1,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -306,7 +314,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=2,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -331,7 +340,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=1,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -355,7 +365,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=2,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -381,7 +392,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=1,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -410,7 +422,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=2,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
     @patch("astrobin.models.UserProfile.get_scores")
@@ -437,7 +450,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=1,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
         push_notification.reset_mock()
@@ -462,7 +476,8 @@ class CommentNotificationServiceTest(TestCase):
             like_count=0,
             bookmark_count=0,
             comment_count=2,
-            comment_html=mock.ANY
+            comment_html=mock.ANY,
+            comment_language=mock.ANY
         )
 
     @patch("nested_comments.services.comment_notifications_service.push_notification")

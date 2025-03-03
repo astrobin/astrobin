@@ -23,6 +23,12 @@
 <div id="nested-comments-loaderGif-url" data-value="{% static 'astrobin/images/ajax-loader.gif' %}"></div>
 <div id="nested-comments-editor-placeholder" data-value="{% trans 'Type your comment here...' %}"></div>
 
+<style>
+  .comment-translated-content:before {
+    content: "{% trans 'Translated' %}";
+  }
+</style>
+
 <div style="display: none">
     <textarea id="hidden-textarea"></textarea>
 </div>
@@ -44,6 +50,9 @@
     {% trans "Reply" context 'Verb (imperative)' as i18nReply %}
     {% trans "Approve" context 'Verb (imperative)' as i18nApprove %}
     {% trans "Report abuse" as i18nReportAbuse %}
+    {% trans "Translate" as i18nTranslate %}
+    {% trans "See original" as i18nSeeOriginal %}
+    {% trans "Translation failed. Please try again later." as i18nTranslationFailed %}
 
     window.astrobin_nestedcomments_i18n = {
         error: '{{ i18nError | escapejs }}',
@@ -62,7 +71,10 @@
         unlikeVerb: '{{ i18nUnlike | escapejs }}',
         replyVerb: '{{ i18nReply | escapejs }}',
         approveVerb: '{{ i18nApprove | escapejs }}',
-        reportAbuse: '{{ i18nReportAbuse | escapejs }}'
+        reportAbuse: '{{ i18nReportAbuse | escapejs }}',
+        translate: '{{ i18nTranslate | escapejs }}',
+        seeOriginal: '{{ i18nSeeOriginal | escapejs }}',
+        translationFailed: '{{ i18nTranslationFailed | escapejs }}'
     };
 </script>
 
@@ -256,7 +268,13 @@
                     {{view view.EditView commentBinding="view.node"}}
                 {{else}}
                     {{# if view.node.ready}}
-                        {{{view.node.getHTML}}}
+                        <!-- Original content div -->
+                        <div class="comment-original-content" {{bindAttr id="view.node.originalContentId"}}>
+                            {{{view.node.getHTML}}}
+                        </div>
+                        
+                        <!-- Translated content div (hidden by default) -->
+                        <div class="comment-translated-content translated-content" {{bindAttr id="view.node.translatedContentId"}} style="display: none;"></div>
                     {{else}}
                         {{view NestedCommentsApp.LoaderView}}
                     {{/if}}
@@ -301,6 +319,18 @@
                             </a>
                         {{/if}}
                     {{/unless}}
+                    
+                    <!-- Translation button - only shown when user lang is different from content lang -->
+                    <a href="#" 
+                       class="btn-translate-comment" 
+                       {{bindAttr id="view.node.translateButtonId"}}
+                       {{bindAttr data-comment-id="view.node.id"}}
+                       {{bindAttr data-detected-language="view.node.detected_language"}}
+                       {{action "translateComment" target="view"}}
+                       style="display: none;">
+                        <i class="icon-file-alt"></i>
+                        <span class="translate-text">{{view NestedCommentsApp.I18nView value="translate"}}</span>
+                    </a>
                 {{/unless}}
 
                 {{#if view.node.authorIsRequestingUser}}

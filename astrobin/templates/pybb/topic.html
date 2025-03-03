@@ -184,24 +184,6 @@
                 {% endif %}
             {% endwith %}
 
-            $(document.body).bind("mouseup touchend", function (e) {
-                setTimeout(function () {
-                    var selection = astrobin_common.get_selected_text()
-
-                    if (selection !== "") {
-                        $(".bb-quote-selected-link")
-                            .removeAttr("disabled")
-                            .attr("data-original-title", "{% trans "Quote the selected text in your reply" %}")
-                            .tooltip();
-                    } else {
-                        $(".bb-quote-selected-link")
-                            .attr("disabled", "disabled")
-                            .attr("data-original-title", "{% trans "You must select some text first." %}")
-                            .tooltip();
-                    }
-                }, 50);
-            });
-
             function init_post_hit_counter() {
                 const $window = $(window);
                 let debounce;
@@ -306,9 +288,111 @@
                 });
             }
 
+            // Language detection for translate button functionality
+            function initPostLanguageDetection() {
+                // Global tracking of processed posts for language detection
+                window.astrobinProcessedLanguageDetection = window.astrobinProcessedLanguageDetection || [];
+                
+                const getUserLanguage = function() {
+                    // Use Django's LANGUAGE_CODE first, with browser language as fallback
+                    // Get the primary language (first 2 chars)
+                    const djangoLang = '{{ LANGUAGE_CODE }}'.split('-')[0].toLowerCase();
+                    if (djangoLang && djangoLang !== '') {
+                        return djangoLang;
+                    }
+                    // Fallback to browser language
+                    return (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
+                };
+                
+                const detectPostLanguage = function(post) {
+                    const postId = $(post).data('id');
+                    
+                    // Skip if already processed
+                    if (window.astrobinProcessedLanguageDetection.indexOf(postId) !== -1) {
+                        return;
+                    }
+                    
+                    // Mark as processed to avoid duplicate processing
+                    window.astrobinProcessedLanguageDetection.push(postId);
+                    
+                    const postBody = $(post).find('.post-body').first().html();
+                    
+                    if (!postBody || postBody.trim().length < 20) { // Increased threshold for better detection
+                        return; // Skip very short or empty posts
+                    }
+                    
+                    $.ajax({
+                        url: '/json-api/common/detect-language/',
+                        type: 'POST',
+                        timeout: 5000,
+                        contentType: 'application/json',
+                        dataType: 'json', // Explicitly parse response as JSON
+                        data: JSON.stringify({
+                            text: postBody
+                        }),
+                        success: function(response) {
+                            // Parse response if it's a string
+                            if (typeof response === 'string') {
+                                try {
+                                    response = JSON.parse(response);
+                                } catch (e) {
+                                    console.error("Error parsing response:", e);
+                                }
+                            }
+
+                            if (response && response.language) {
+                                const userLang = getUserLanguage();
+                                const postLang = response.language;
+                                
+                                console.log(`Post ${postId}: detected language=${postLang}, user language=${userLang}`);
+                                
+                                // Show translate button if languages don't match
+                                if (userLang !== postLang) {
+                                    // Look for the translate button in the post-related div
+                                    const $translateButton = $(post).find('.post-related .btn-translate-post');
+                                    
+                                    if ($translateButton.length) {
+                                        console.log(`Found translate button for post ${postId}, making visible`);
+                                        $translateButton.css('display', 'inline-block');
+                                        $translateButton.attr('data-detected-language', postLang);
+                                    } else {
+                                        console.log(`ERROR: Translate button not found for post ${postId}`);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                };
+                
+                const processPosts = function() {
+                    $('.post').each(function() {
+                        // Check if near viewport using astrobin_common helper
+                        const isNear = astrobin_common.isNearViewport(this);
+                        
+                        // Process only if near viewport
+                        if (isNear) {
+                            detectPostLanguage(this);
+                        }
+                    });
+                };
+                
+                // Initial check with a small delay to ensure DOM is fully loaded
+                setTimeout(processPosts, 100);
+                
+                // Return the process function for scroll handler
+                return processPosts;
+            }
+            
+            // Initialize all components
             init_post_hit_counter();
             fetchHitCounts();
-            $(window).on('scroll', astrobin_common.debounce(fetchHitCounts, 200));
+            const processLanguageDetection = initPostLanguageDetection();
+            
+            // Single scroll handler for all functions
+            $(window).on('scroll', astrobin_common.debounce(function() {
+                fetchHitCounts();
+                processLanguageDetection();
+            }, 200));
         });
     </script>
 {% endblock %}

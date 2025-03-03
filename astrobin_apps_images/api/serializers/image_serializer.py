@@ -16,6 +16,7 @@ from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
 from astrobin.moon import MoonPhase
+from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.api.serializers.accessory_serializer import (
     AccessorySerializerForImage,
 )
@@ -42,6 +43,7 @@ from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_premium.services.premium_service import PremiumService
 from common.serializers import AvatarField, UserSerializer
+from common.templatetags.common_tags import strip_html
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -98,6 +100,8 @@ class ImageSerializer(serializers.ModelSerializer):
     default_allow_image_adjustments_widget = serializers.BooleanField(
         source='user.userprofile.default_allow_image_adjustments_widget', read_only=True
     )
+
+    detected_language = serializers.SerializerMethodField(read_only=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -252,6 +256,15 @@ class ImageSerializer(serializers.ModelSerializer):
 
         return sum(data) / len(data) if data else None
 
+    def get_detected_language(self, obj: Image) -> str:
+        if obj.description_bbcode:
+            return UtilsService.detect_language(UtilsService.strip_bbcode(obj.description_bbcode))
+
+        if obj.description:
+            return UtilsService.detect_language(strip_html(obj.description))
+
+        return 'unknown'
+
     class Meta:
         model = Image
         fields = (
@@ -344,4 +357,5 @@ class ImageSerializer(serializers.ModelSerializer):
             'average_moon_age',
             'average_moon_illumination',
             'submitted_for_iotd_tp_consideration',
+            'detected_language',
         )

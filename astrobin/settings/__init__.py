@@ -16,6 +16,7 @@ include(
     'components/cors.py',
     'components/db.py',
     'components/email.py',
+    'components/google.py',
     'components/languages.py',
     'components/logging.py',
     'components/middleware.py',

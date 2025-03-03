@@ -6,6 +6,29 @@
       margin-left: 12px !important;
     }
   }
+  
+  // Translation styles for comments
+  .comment-translated-content {
+    background-color: rgba(255, 255, 0, 0.025);
+    padding: 10px;
+    border-left: 3px solid rgba(255, 255, 0, 0.5);
+    margin-bottom: 15px;
+    display: block;
+    position: relative;
+    
+    &:before {
+      // Note: content property is set via HTML template for proper translation
+      display: block;
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 5px;
+      font-style: italic;
+    }
+  }
+  
+  .btn-translate-comment {
+    display: none; // Hidden by default, will be shown via JavaScript when needed
+  }
 
   .comments {
     margin-top: $spacer-large;
@@ -198,9 +221,13 @@
       border-bottom: 1px dashed #4C4C4C;
 
       a:not(.btn) {
-        text-transform: lowercase;
-        margin-right: $spacer-medium;
+        font-size: 12px;
+        margin-right: $spacer-large;
         color: grey;
+
+        [class^="icon-"] {
+          margin-right: $spacer-small;
+        }
 
         &.label-important {
           color: $strong-text-color;
@@ -219,6 +246,10 @@
         &.comment-unlike {
           color: $white;
         }
+      }
+
+      .btn:not(:last-child) {
+        margin-right: $spacer-large;
       }
 
       .btn.loading {

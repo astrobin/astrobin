@@ -320,6 +320,23 @@ th.forum-name {
   -webkit-hyphens: auto;
   hyphens: auto;
 
+  .translated-content {
+    background-color: rgba(255, 255, 0, 0.025);
+    padding: 10px;
+    border-left: 3px solid rgba(255, 255, 0, 0.5);
+    margin-bottom: 15px;
+    display: block;
+    position: relative;
+
+    &:before {
+      display: block;
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 5px;
+      font-style: italic;
+    }
+  }
+
   a {
     -ms-hyphens: none;
     -moz-hyphens: none;
@@ -327,7 +344,7 @@ th.forum-name {
     hyphens: none;
   }
 
-  ul, ol {
+  ul:not(.dropdown-menu), ol {
     list-style: initial;
     margin: 15px 30px;
   }
@@ -421,12 +438,11 @@ th.forum-name {
 
   .btn {
     font-size: 11px;
-    text-transform: uppercase;
     font-style: italic;
     background: #3C3C3C;
     border: 1px solid #323232;
     color: #B0B0B0;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+    text-shadow: none;
     padding: $spacer-small $spacer-medium;
     border-radius: 6px;
 
@@ -434,8 +450,12 @@ th.forum-name {
       margin-right: $spacer-small;
     }
 
-    [class^="icon-"] {
+    [class^="icon-"]:not(.icon-ellipsis-vertical) {
       margin-right: $spacer-small;
+    }
+
+    .icon-ellipsis-vertical {
+      margin-right: 0;
     }
 
     &[disabled] {
@@ -467,7 +487,41 @@ th.forum-name {
       &.active {
         background: $grey-4;
       }
+
+      .toggleproperties-label {
+        margin-left: 0;
+      }
     }
+  }
+
+  /* Dropdown menu styling */
+  .dropdown-menu {
+    right: 0;
+    left: auto !important; /* Override Bootstrap's default positioning */
+    min-width: 160px; /* Set minimum width */
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 5px 15px;
+    clear: both;
+    text-decoration: none;
+    white-space: nowrap;
+    text-align: left;
+    font-size: 11px;
+  }
+
+  .dropdown-menu li {
+    list-style: none;
+  }
+
+  /* Color classes for dropdown items */
+  .dropdown-menu .text-danger {
+    color: $red;
+  }
+
+  .post-related .dropdown-menu .text-warning {
+    color: $orange;
   }
 }
 

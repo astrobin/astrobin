@@ -195,6 +195,19 @@ $(function () {
             // Old behavior before the move from Markdown to BBCode in 1.26.
             return nc_app.markdownConverter.makeHtml(this.get('text'));
         }.property('html', 'text'),
+        
+        // Properties for translation
+        originalContentId: function() {
+            return 'comment-original-content-' + this.get('id');
+        }.property('id'),
+        
+        translatedContentId: function() {
+            return 'comment-translated-content-' + this.get('id');
+        }.property('id'),
+        
+        translateButtonId: function() {
+            return 'btn-translate-comment-' + this.get('id');
+        }.property('id'),
 
         disallowSaving: function () {
             var submitting = this.get('submitting');
@@ -830,6 +843,11 @@ $(function () {
                         self.$('textarea').val(), "comments", nc_app.languageCode)
                     );
                     self.set('node.ready', true);
+                    
+                    // Apply stored translations and check if translation button should be shown
+                    setTimeout(function() {
+                        self.checkTranslation();
+                    }, 100);
                 } else {
                     setTimeout(function () {
                         nodeReady();
@@ -840,6 +858,49 @@ $(function () {
             setTimeout(function () {
                 nodeReady();
             }, 1);
+        },
+        
+        // Check if translation is needed and possibly load saved translation
+        checkTranslation: function() {
+            const node = this.get('node');
+            const commentId = node.get('id');
+            
+            // Skip for deleted comments
+            if (node.get('deleted')) {
+                return;
+            }
+            
+            // Get user language
+            const userLang = (nc_app.languagecode || 'en').split('-')[0].toLowerCase();
+            
+            // Get comment language
+            const commentLang = node.get('detected_language') || 'en';
+            
+            // If languages don't match and user is authenticated, show translate button
+            if (userLang !== commentLang && commentLang !== 'auto' && commentLang !== '' && nc_app.userIsAuthenticated) {
+                $(`#${node.get('translateButtonId')}`).css('display', 'inline-block');
+                
+                // Check if we have a saved translation
+                const savedTranslations = astrobin_common.translationSystem.getTranslations('comment');
+                const translation = savedTranslations[commentId];
+                
+                if (translation && translation.translated && translation.content) {
+                    // Apply saved translation
+                    const $originalContent = $(`#${node.get('originalContentId')}`);
+                    const $translatedContent = $(`#${node.get('translatedContentId')}`);
+                    const $button = $(`#${node.get('translateButtonId')}`);
+                    
+                    // Set translated content
+                    $translatedContent.html(translation.content);
+                    
+                    // Show translation
+                    $originalContent.hide();
+                    $translatedContent.css('display', 'block');
+                    
+                    // Update button text
+                    $button.find('.translate-text').text(window.astrobin_nestedcomments_i18n.seeOriginal);
+                }
+            }
         },
 
         loginAndGoToComment: function () {
@@ -898,6 +959,85 @@ $(function () {
 
         reportAbuse: function () {
             nc_app.get('router.commentsController').reportAbuse(this.get('node'));
+        },
+        
+        translateComment: function() {
+            const node = this.get('node');
+            const commentId = node.get('id');
+            const $originalContent = $(`#${node.get('originalContentId')}`);
+            const $translatedContent = $(`#${node.get('translatedContentId')}`);
+            const $button = $(`#${node.get('translateButtonId')}`);
+            
+            // Don't do anything if already in progress
+            if ($button.find('.icon-spinner').length > 0) {
+                return;
+            }
+            
+            // If already translated, toggle back to original
+            if ($translatedContent.is(':visible')) {
+                $translatedContent.hide();
+                $originalContent.show();
+                // No need to change icon class, it's already icon-file-alt
+                $button.find('.translate-text').text(window.astrobin_nestedcomments_i18n.translate);
+                // Update storage
+                astrobin_common.translationSystem.saveTranslation('comment', commentId, false);
+                return;
+            }
+            
+            // If content already translated but hidden, just show it
+            if ($translatedContent.html() && $translatedContent.html().trim().length > 0) {
+                $originalContent.hide();
+                $translatedContent.css('display', 'block');  // Force show with CSS
+                // Keep the icon-file-alt class for consistency
+                $button.find('.translate-text').text(window.astrobin_nestedcomments_i18n.seeOriginal);
+                // Update storage
+                astrobin_common.translationSystem.saveTranslation(
+                    'comment', 
+                    commentId, 
+                    true, 
+                    $translatedContent.html(), 
+                    node.get('detected_language')
+                );
+                return;
+            }
+            
+            // Otherwise, request translation
+            $button.find('i').removeClass('icon-file-alt').addClass('icon-spinner');
+            
+            const originalText = $originalContent.html();
+            // Use Django's LANGUAGE_CODE first, with browser language as fallback
+            const djangoLang = nc_app.languagecode || 'en';
+            const detectedLanguage = node.get('detected_language') || 'auto';
+            
+            // Use the translation system
+            astrobin_common.translationSystem.translateContent({
+                text: originalText,
+                sourceLanguage: detectedLanguage,
+                targetLanguage: djangoLang,
+                format: 'html',
+                itemType: 'comment',
+                itemId: commentId,
+                onStart: function() {
+                    // Already handled by setting spinner above
+                },
+                onSuccess: function(translation) {
+                    // Set the translated content and make visible
+                    $translatedContent.html(translation);
+                    
+                    // Hide original, show translated
+                    $originalContent.hide();
+                    $translatedContent.css('display', 'block');  // Force show with CSS
+                    
+                    // Update button UI
+                    $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
+                    $button.find('.translate-text').text(window.astrobin_nestedcomments_i18n.seeOriginal);
+                },
+                onError: function(error) {
+                    console.error("Translation error:", error);
+                    $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
+                    alert(window.astrobin_nestedcomments_i18n.translationFailed);
+                }
+            });
         },
 
         saveReply: function () {
