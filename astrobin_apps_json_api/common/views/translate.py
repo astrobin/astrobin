@@ -11,6 +11,7 @@ from django.views.generic.base import View
 from precise_bbcode.bbcode import get_parser
 from rest_framework.authtoken.models import Token
 
+from astrobin.services.utils_service import UtilsService
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
@@ -122,8 +123,14 @@ class Translate(JSONResponseMixin, View):
         if not target_language:
             raise ValueError("Target language not provided")
 
+        # If source_language is not provided, use language detection
         if not source_language:
-            raise ValueError("Source language not provided")
+            source_language = 'auto'  # Default to auto if detection fails
+            detected_language = UtilsService.detect_language(text)
+            if detected_language:
+                # If text detection succeeds, use the detected language
+                source_language = detected_language
+                log.debug(f"Language detected as {detected_language}: {text}")
 
         if not format_:
             raise ValueError("Format not provided")

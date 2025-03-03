@@ -327,7 +327,7 @@ th.forum-name {
     hyphens: none;
   }
 
-  ul, ol {
+  ul:not(.dropdown-menu), ol {
     list-style: initial;
     margin: 15px 30px;
   }
@@ -419,14 +419,18 @@ th.forum-name {
   margin-bottom: -.5rem;
   text-align: right;
 
+
+  .toggleproperty-add-remove .btn .toggleproperties-label {
+    margin-left: 0;
+  }
+
   .btn {
     font-size: 11px;
-    text-transform: uppercase;
     font-style: italic;
     background: #3C3C3C;
     border: 1px solid #323232;
     color: #B0B0B0;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+    text-shadow: none;
     padding: $spacer-small $spacer-medium;
     border-radius: 6px;
 
@@ -434,8 +438,12 @@ th.forum-name {
       margin-right: $spacer-small;
     }
 
-    [class^="icon-"] {
+    [class^="icon-"]:not(.icon-ellipsis-vertical) {
       margin-right: $spacer-small;
+    }
+
+    .icon-ellipsis-vertical {
+      margin-right: 0;
     }
 
     &[disabled] {

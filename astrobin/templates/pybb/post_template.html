@@ -9,6 +9,65 @@
 {% load toggleproperty_tags %}
 {% load tags %}
 
+<style>
+  .translated-content {
+    background-color: rgba(255, 255, 0, 0.07);
+    padding: 10px;
+    border-left: 3px solid rgba(255, 255, 0, 0.5);
+    margin-bottom: 15px;
+    display: block;
+    position: relative;
+  }
+  
+  .translated-content:before {
+    content: "{% trans 'Translated'|escapejs %}";
+    display: block;
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 5px;
+    font-style: italic;
+  }
+  
+  /* Dropdown menu styling */
+  .dropdown-menu {
+    right: 0;
+    left: auto !important; /* Override Bootstrap's default positioning */
+    min-width: 160px;      /* Set minimum width */
+  }
+  
+  .dropdown-menu li a {
+    display: block;
+    padding: 5px 15px;
+    clear: both;
+    text-decoration: none;
+    white-space: nowrap;
+    text-align: left;
+    font-size: 11px;
+  }
+  
+  .dropdown-menu li {
+    list-style: none;
+  }
+  
+  /* Add hover effect for dropdown items */
+  .dropdown-menu li a:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Color classes for dropdown items */
+  .dropdown-menu .text-danger {
+    color: #a94442;
+  }
+  
+  .dropdown-menu .text-success {
+    color: #3c763d;
+  }
+  
+  .dropdown-menu .text-warning {
+    color: #8a6d3b;
+  }
+</style>
+
 
 {% pybb_get_profile user=post.user as post_user_profile %}
 {% pybb_get_profile user=user as user_profile %}
@@ -109,7 +168,11 @@
     <tr class="post-row">
         <td class="post-content">
             {% if not post.user.userprofile.deleted %}
-                {{ post.body|bbcode|html_image_thumbnails:post.id|safe }}
+                <div id="post-content-{{ post.id }}" class="post-body">
+                    {{ post.body|bbcode|html_image_thumbnails:post.id|safe }}
+                </div>
+                
+                <div id="post-translated-content-{{ post.id }}" class="post-body translated-content" style="display: none;"></div>
 
                 {% if not user.is_authenticated or user_profile.show_signatures %}
                     {% if post_user_profile.signature %}
@@ -127,6 +190,7 @@
             {% endif %}
 
             <div class="post-related">
+                <!-- Primary buttons (always visible) -->
                 {% if user|pybb_may_create_post:post.topic %}
                     <button
                         data-url="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}"
@@ -134,31 +198,16 @@
                         disabled="disabled"
                         rel="tooltip"
                         title="{% trans "Quote this entire post in your reply." %}">
-                        <i class="icon-comment"></i> {% trans "quote" %}
+                        <i class="icon-comment"></i> {% trans "Quote" %}
                         {% button_loading_indicator %}
                     </button>
-                    <a href="#"
-                       class="btn btn-mini bb-quote-selected-link"
-                       disabled="disabled"
-                       rel="tooltip"
-                       title="{% trans "You must select some text first." %}">
-                        <i class="icon-quote-right"></i> {% trans "quote selected" %}
-                    </a>
                 {% endif %}
 
-                {% if post|pybb_posted_by:user or user.is_superuser %}
-                    {% if post.created|more_recent_than:86400 or user.is_superuser or not valid_usersubscription|is_free %}
-                        <a href="{% url 'pybb:edit_post' pk=post.id %}"
-                           class="btn btn-mini btn-primary">
-                            <i class="icon-pencil"></i> {% trans "Edit" %}
-                        </a>
-                    {% else %}
-                        <a data-toggle="modal"
-                           href="#post-editing-not-allowed-modal"
-                           class="btn btn-mini btn-primary disabled">
-                            <i class="icon-pencil"></i> {% trans "Edit" %}
-                        </a>
-                    {% endif %}
+                <!-- Translate button -->
+                {% if user.is_authenticated %}
+                    <a href="#" class="btn btn-mini btn-translate-post" data-post-id="{{ post.id }}">
+                        <i class="icon-file-alt"></i> <span class="translate-text">{% trans "Translate" %}</span>
+                    </a>
                 {% endif %}
 
                 {% if not post|pybb_posted_by:user or user.is_superuser %}
@@ -198,37 +247,76 @@
                         {% add_remove_toggleproperty "like" post request.user can_add=can_like can_remove=can_unlike %}
                     {% endif %}
                 {% endif %}
-
-                {% if user.is_superuser %}
-                    <a class="btn btn-mini btn-danger"
-                       onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}', 'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
-                       href="{% url 'pybb:delete_post' post.id %}">
-                        <i class="icon-trash"></i> {% trans "Delete" %}
-                    </a>
-                    {% if post.on_moderation %}
-                        <a class="btn btn-mini btn-success"
-                           href="{% url 'pybb:moderate_post' pk=post.id %}">
-                            <i class="icon-ok"></i> {% trans "Approve post" %}
-                        </a>
-                    {% endif %}
-
-                    <a href="{% url 'pybb:move_post' pk=post.id %}" class="btn btn-mini btn-danger">
-                        {% if post.is_topic_head %}
-                            <i class="icon-mail-forward"></i>
-                            {% trans 'Move' %}
-                        {% else %}
-                            <i class="icon-cut"></i>
-                            {% trans "Split" %}
+                
+                <!-- Dropdown menu -->
+                <div class="dropdown d-inline-block">
+                    <button class="btn btn-mini dropdown-toggle" type="button" id="postActionsDropdown-{{ post.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-ellipsis-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="postActionsDropdown-{{ post.id }}">
+                        
+                        <!-- Quote selected -->
+                        {% if user|pybb_may_create_post:post.topic %}
+                            <li>
+                                <a href="#" class="dropdown-item bb-quote-selected-link" disabled="disabled" title="{% trans "You must select some text first." %}">
+                                    {% trans "Quote selected" %}
+                                </a>
+                            </li>
                         {% endif %}
-                    </a>
-                {% endif %}
-
-                {% if perms.pybb.change_post and user.is_superuser %}
-                    <a class="btn btn-mini btn-danger"
-                       href="{% url 'admin:pybb_post_change' post.id %}">
-                        <i class="icon-legal"></i> {% trans 'Admin' %}
-                    </a>
-                {% endif %}
+                        
+                        <!-- Edit -->
+                        {% if post|pybb_posted_by:user or user.is_superuser %}
+                            {% if post.created|more_recent_than:86400 or user.is_superuser or not valid_usersubscription|is_free %}
+                                <li>
+                                    <a href="{% url 'pybb:edit_post' pk=post.id %}" class="dropdown-item">
+                                        {% trans "Edit" %}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a data-toggle="modal" href="#post-editing-not-allowed-modal" class="dropdown-item disabled">
+                                        {% trans "Edit" %}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        
+                        <!-- Admin actions -->
+                        {% if user.is_superuser %}
+                            <li class="divider"><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" 
+                                   onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}', 'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
+                                   href="{% url 'pybb:delete_post' post.id %}">
+                                    {% trans "Delete" %}
+                                </a>
+                            </li>
+                            {% if post.on_moderation %}
+                                <li>
+                                    <a class="dropdown-item text-success" href="{% url 'pybb:moderate_post' pk=post.id %}">
+                                        {% trans "Approve post" %}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a href="{% url 'pybb:move_post' pk=post.id %}" class="dropdown-item text-warning">
+                                    {% if post.is_topic_head %}
+                                        {% trans 'Move' %}
+                                    {% else %}
+                                        {% trans "Split" %}
+                                    {% endif %}
+                                </a>
+                            </li>
+                            {% if perms.pybb.change_post %}
+                                <li>
+                                    <a class="dropdown-item text-danger" href="{% url 'admin:pybb_post_change' post.id %}">
+                                        {% trans 'Admin' %}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </td>
     </tr>
@@ -306,6 +394,98 @@
             }
 
             highlightPost();
+
+            // Translation functionality
+            // Use one-time binding to prevent multiple registrations
+            $('.btn-translate-post').off('click').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event bubbling
+                
+                const postId = $(this).data('post-id');
+                const $originalContent = $(`#post-content-${postId}`);
+                const $translatedContent = $(`#post-translated-content-${postId}`);
+                const $button = $(this);
+                
+                // Don't do anything if already in progress
+                if ($button.find('.icon-spinner').length > 0) {
+                    return;
+                }
+                
+                // If already translated, toggle back to original
+                if ($translatedContent.is(':visible')) {
+                    $translatedContent.hide();
+                    $originalContent.show();
+                    // No need to change icon class, it's already icon-file-alt
+                    $button.find('.translate-text').text('{% trans "Translate"|escapejs %}');
+                    return;
+                }
+                
+                // If content already translated but hidden, just show it
+                if ($translatedContent.html() && $translatedContent.html().trim().length > 0) {
+                    $originalContent.hide();
+                    $translatedContent.css('display', 'block');  // Force show with CSS
+                    // Keep the icon-file-alt class for consistency
+                    $button.find('.translate-text').text('{% trans "See original"|escapejs %}');
+                    return;
+                }
+                
+                // Otherwise, request translation
+                $button.find('i').removeClass('icon-file-alt').addClass('icon-spinner');
+                
+                const originalText = $originalContent.html();
+                const currentLang = $('html').attr('lang') || 'en';
+                
+                // Use the JSON API service to translate
+                $.ajax({
+                    url: '/json-api/common/translate/',
+                    type: 'POST',
+                    timeout: 30000, // Longer timeout for translation
+                    contentType: 'application/json',
+                    dataType: 'json',  // Explicitly parse response as JSON
+                    data: JSON.stringify({
+                        text: originalText,
+                        target_language: currentLang,
+                        format: 'html'
+                        // We're omitting source_language and letting the server detect it
+                    }),
+                    success: function(response) {
+                        try {
+                            // If response is a string (not parsed JSON), try to parse it
+                            if (typeof response === 'string') {
+                                response = JSON.parse(response);
+                            }
+                            
+                            // Ensure translation exists and is a string
+                            if (response && typeof response.translation === 'string') {
+                                // Set the translated content and make visible
+                                $translatedContent.html(response.translation);
+                                
+                                // Hide original, show translated
+                                $originalContent.hide();
+                                $translatedContent.css('display', 'block');  // Force show with CSS
+                                
+                                // Update button UI
+                                $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
+                                $button.find('.translate-text').text('{% trans "See original"|escapejs %}');
+                            } else {
+                                throw new Error("Invalid translation in response");
+                            }
+                        } catch (e) {
+                            console.error("Error processing translation response:", e);
+                            console.error("Response was:", response);
+                            $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
+                            alert('{% trans "Translation failed. Please try again later."|escapejs %}');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Show error message with details
+                        console.error("Translation API error:", status, error);
+                        console.error("Response text:", xhr.responseText);
+                        $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
+                        alert('{% trans "Translation failed. Please try again later."|escapejs %}');
+                    }
+                });
+            });
         });
     </script>
 {% endblock %}
