@@ -1,15 +1,13 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: hu\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+msgid "Conflict."
+msgstr "Konfliktus."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Tömörítetlen forrás (max 100 MB)"
@@ -24,80 +22,17 @@ msgstr ""
 "származó végleges feldolgozott képet archiválási céllal itt, az AstroBin-en "
 "tárolhatod. Ezt a fájlt bizalmasan tároljuk, és csak te férhetsz hozzá."
 
-msgid "Dates"
-msgstr ""
-
-msgid "Frames"
-msgstr ""
-
-msgid "Integration"
-msgstr ""
-
-msgid "Darks"
-msgstr ""
-
-msgid "Flats"
-msgstr ""
-
-msgid "Flat darks"
-msgstr ""
-
-msgid "Bias"
-msgstr ""
-
-msgid "Avg. Moon age"
-msgstr ""
-
-msgid "days"
-msgstr ""
-
-msgid "Avg. Moon phase"
-msgstr ""
-
-msgid "Bortle Dark-Sky Scale"
-msgstr ""
-
-msgid "Mean SQM"
-msgstr ""
-
-msgid "Mean FWHM"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "FPS"
-msgstr ""
-
-msgid "Exposure per frame"
-msgstr ""
-
-msgid "Focal length"
-msgstr ""
-
-msgid "CMI"
-msgstr ""
-
-msgid "CMII"
-msgstr ""
-
-msgid "CMIII"
-msgstr ""
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Transparency"
-msgstr ""
-
 msgid "Error!"
 msgstr "Hiba!"
+
+msgid "Staging area"
+msgstr "Előkészítési Terület"
+
+msgid "Loading"
+msgstr "Töltés"
+
+msgid "(no title)"
+msgstr "(nincs cím)"
 
 msgid "Image of the day"
 msgstr "A Nap Képe"
@@ -108,26 +43,8 @@ msgstr "Top Pick"
 msgid "Top pick nomination"
 msgstr "Top Pick jelölt"
 
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
-msgid "Staging area"
-msgstr "Előkészítési Terület"
-
-msgid "Collaboration"
-msgstr "Kollaboráció"
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Adatkorrupció. Kérjük, töltsd fel újra a képet. Elnézést kérünk!"
 
 #, python-format
 msgid "Revision %(revision)s"
@@ -136,17 +53,131 @@ msgstr "%(revision)s számú átdolgozás"
 msgid "Original revision"
 msgstr "Eredeti átdolgozás"
 
-msgid "Loading"
-msgstr "Töltés"
+msgid "Collaboration"
+msgstr "Kollaboráció"
 
-msgid "(no title)"
-msgstr "(nincs cím)"
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Jelenleg az IOTD/TP sorban"
 
-msgid "Image file not found"
+#, fuzzy
+msgid "Video"
+msgstr "Videó"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr "Probléma merült fel a videó kódolásakor, kérlek töltsd fel újra."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Ha a probléma továbbra is fennáll, kérlek lépj velünk kapcsolatba."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
 msgstr ""
+"Ez a videó még feldolgozás alatt áll, kérlek térj vissza később erre az "
+"oldalra."
 
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Adatkorrupció. Kérjük, töltsd fel újra a képet. Elnézést kérünk!"
+#, fuzzy
+msgid "Dates"
+msgstr "Dátumok"
 
-#~ msgid "Conflict."
-#~ msgstr "Konfliktus."
+#, fuzzy
+msgid "Frames"
+msgstr "Képkeretek"
+
+#, fuzzy
+msgid "Integration"
+msgstr "Integráció"
+
+#, fuzzy
+msgid "Darks"
+msgstr "Sötét képek"
+
+#, fuzzy
+msgid "Flats"
+msgstr "Fényes képek"
+
+#, fuzzy
+msgid "Flat darks"
+msgstr "Sötét fényes képek"
+
+#, fuzzy
+msgid "Bias"
+msgstr "Bias képek"
+
+#, fuzzy
+msgid "Avg. Moon age"
+msgstr "Átlagos Hold kor"
+
+#, fuzzy
+msgid "days"
+msgstr "nap"
+
+#, fuzzy
+msgid "Avg. Moon phase"
+msgstr "Átlagos Hold fázis"
+
+#, fuzzy
+msgid "Bortle Dark-Sky Scale"
+msgstr "Bortle sötét égbolt skála"
+
+#, fuzzy
+msgid "Mean SQM"
+msgstr "Átlagos SQM"
+
+#, fuzzy
+msgid "Mean FWHM"
+msgstr "Átlagos FWHM"
+
+#, fuzzy
+msgid "Temperature"
+msgstr "Hőmérséklet"
+
+#, fuzzy
+msgid "Date"
+msgstr "Dátum"
+
+#, fuzzy
+msgid "Time"
+msgstr "Idő"
+
+#, fuzzy
+msgid "FPS"
+msgstr "FPS"
+
+#, fuzzy
+msgid "Exposure per frame"
+msgstr "Expozíció keretenként"
+
+#, fuzzy
+msgid "Focal length"
+msgstr "Fókusztávolság"
+
+#, fuzzy
+msgid "CMI"
+msgstr "CMI"
+
+#, fuzzy
+msgid "CMII"
+msgstr "CMII"
+
+#, fuzzy
+msgid "CMIII"
+msgstr "CMIII"
+
+#, fuzzy
+msgid "Seeing"
+msgstr "Látás"
+
+#, fuzzy
+msgid "Transparency"
+msgstr "Átlátszóság"
+
+#, fuzzy
+msgid "Image file not found"
+msgstr "Kép fájl nem található"
+
+#, fuzzy
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Csak egy videó alapú felvétel engedélyezett képenként."

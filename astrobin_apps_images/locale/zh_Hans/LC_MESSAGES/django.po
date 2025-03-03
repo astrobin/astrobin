@@ -1,15 +1,13 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: zh-Hans\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+msgid "Conflict."
+msgstr "冲突。"
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "未压缩数据源（最大100 MB）"
@@ -20,120 +18,14 @@ msgid ""
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
-"您可以将从您最喜爱的图像编辑器（如 PixInsight、Adobe Photoshop 等）得到的最终"
-"处理作品存储在 AstroBin 上，以供存档。此文件是私人所有的，只有您有权访问它。"
-
-msgid "Dates"
-msgstr ""
-
-msgid "Frames"
-msgstr ""
-
-msgid "Integration"
-msgstr ""
-
-msgid "Darks"
-msgstr ""
-
-msgid "Flats"
-msgstr ""
-
-msgid "Flat darks"
-msgstr ""
-
-msgid "Bias"
-msgstr ""
-
-msgid "Avg. Moon age"
-msgstr ""
-
-msgid "days"
-msgstr ""
-
-msgid "Avg. Moon phase"
-msgstr ""
-
-msgid "Bortle Dark-Sky Scale"
-msgstr ""
-
-msgid "Mean SQM"
-msgstr ""
-
-msgid "Mean FWHM"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "FPS"
-msgstr ""
-
-msgid "Exposure per frame"
-msgstr ""
-
-msgid "Focal length"
-msgstr ""
-
-msgid "CMI"
-msgstr ""
-
-msgid "CMII"
-msgstr ""
-
-msgid "CMIII"
-msgstr ""
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Transparency"
-msgstr ""
+"您可以将从您最喜爱的图像编辑器（如 PixInsight、Adobe Photoshop 等）得到的最终处理作品存储在 AstroBin "
+"上，以供存档。此文件是私人所有的，只有您有权访问它。"
 
 msgid "Error!"
 msgstr "错误！"
 
-msgid "Image of the day"
-msgstr "今日最佳"
-
-msgid "Top pick"
-msgstr "热门精选"
-
-msgid "Top pick nomination"
-msgstr "“热门精选”提名"
-
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
 msgid "Staging area"
 msgstr "暂存区"
-
-msgid "Collaboration"
-msgstr ""
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr ""
-
-msgid "Original revision"
-msgstr ""
 
 msgid "Loading"
 msgstr "正在载入"
@@ -141,11 +33,117 @@ msgstr "正在载入"
 msgid "(no title)"
 msgstr "（无标题）"
 
-msgid "Image file not found"
-msgstr ""
+msgid "Image of the day"
+msgstr "每日一图"
+
+msgid "Top pick"
+msgstr "精选"
+
+msgid "Top pick nomination"
+msgstr "精选提名"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "抱歉，数据损坏。请重新上传该作品！"
 
-#~ msgid "Conflict."
-#~ msgstr "冲突。"
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "修订 %(revision)s"
+
+msgid "Original revision"
+msgstr "原始修订"
+
+msgid "Collaboration"
+msgstr "协作"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr "当前在 IOTD/TP 队列中"
+
+msgid "Video"
+msgstr "视频"
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr "编码此视频时出现问题，请重新上传。"
+
+msgid "If the problem persists, please contact us."
+msgstr "如果问题仍然存在，请联系我们。"
+
+msgid "This video is still processing, please return to this page later."
+msgstr "此视频仍在处理，请稍后返回此页面。"
+
+msgid "Dates"
+msgstr "日期"
+
+msgid "Frames"
+msgstr "帧数"
+
+msgid "Integration"
+msgstr "集成"
+
+msgid "Darks"
+msgstr "暗帧"
+
+msgid "Flats"
+msgstr "平场"
+
+msgid "Flat darks"
+msgstr "平场暗帧"
+
+msgid "Bias"
+msgstr "偏置"
+
+msgid "Avg. Moon age"
+msgstr "平均月龄"
+
+msgid "days"
+msgstr "天数"
+
+msgid "Avg. Moon phase"
+msgstr "平均月相"
+
+msgid "Bortle Dark-Sky Scale"
+msgstr "波特尔暗夜等级"
+
+msgid "Mean SQM"
+msgstr "平均 SQM"
+
+msgid "Mean FWHM"
+msgstr "平均 FWHM"
+
+msgid "Temperature"
+msgstr "温度"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Time"
+msgstr "时间"
+
+msgid "FPS"
+msgstr "帧率 (FPS)"
+
+msgid "Exposure per frame"
+msgstr "每帧曝光时间"
+
+msgid "Focal length"
+msgstr "焦距"
+
+msgid "CMI"
+msgstr "CMI"
+
+msgid "CMII"
+msgstr "CMII"
+
+msgid "CMIII"
+msgstr "CMIII"
+
+msgid "Seeing"
+msgstr "视宁度"
+
+msgid "Transparency"
+msgstr "透明度"
+
+msgid "Image file not found"
+msgstr "未找到图像文件"
+
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "每张图片只允许一个基于视频的采集."

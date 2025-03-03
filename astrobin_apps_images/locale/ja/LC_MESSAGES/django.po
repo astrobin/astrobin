@@ -1,15 +1,13 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+msgid "Conflict."
+msgstr "コンフリクトしています。"
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "非圧縮ファイル（最大100MB）"
@@ -20,84 +18,20 @@ msgid ""
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
-"お好きな画像編集ソフト（PixInsight、Adobe Photoshopなど）から出力された最終処"
-"理画像を、アーカイブ用としてこのAstroBinに保存することができます。このファイ"
-"ルはプライベート環境に保存され、あなただけがアクセスすることができます。"
-
-msgid "Dates"
-msgstr ""
-
-msgid "Frames"
-msgstr ""
-
-msgid "Integration"
-msgstr ""
-
-msgid "Darks"
-msgstr ""
-
-msgid "Flats"
-msgstr ""
-
-msgid "Flat darks"
-msgstr ""
-
-msgid "Bias"
-msgstr ""
-
-msgid "Avg. Moon age"
-msgstr ""
-
-msgid "days"
-msgstr ""
-
-msgid "Avg. Moon phase"
-msgstr ""
-
-msgid "Bortle Dark-Sky Scale"
-msgstr ""
-
-msgid "Mean SQM"
-msgstr ""
-
-msgid "Mean FWHM"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "FPS"
-msgstr ""
-
-msgid "Exposure per frame"
-msgstr ""
-
-msgid "Focal length"
-msgstr ""
-
-msgid "CMI"
-msgstr ""
-
-msgid "CMII"
-msgstr ""
-
-msgid "CMIII"
-msgstr ""
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Transparency"
-msgstr ""
+"お好きな画像編集ソフト（PixInsight、Adobe "
+"Photoshopなど）から出力された最終処理画像を、アーカイブ用としてこのAstroBinに保存することができます。このファイルはプライベート環境に保存され、あなただけがアクセスすることができます。"
 
 msgid "Error!"
 msgstr "エラー！"
+
+msgid "Staging area"
+msgstr "ステージング領域"
+
+msgid "Loading"
+msgstr "読み込み中"
+
+msgid "(no title)"
+msgstr "(no title)"
 
 msgid "Image of the day"
 msgstr "Image of the day"
@@ -108,26 +42,8 @@ msgstr "Top pick"
 msgid "Top pick nomination"
 msgstr "Top pickノミネート"
 
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
-msgid "Staging area"
-msgstr "ステージング領域"
-
-msgid "Collaboration"
-msgstr "コラボレーション"
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "データが破損しています。この画像を再度アップロードしてください。申し訳ございません。"
 
 #, python-format
 msgid "Revision %(revision)s"
@@ -136,19 +52,129 @@ msgstr "バージョン %(revision)s"
 msgid "Original revision"
 msgstr "オリジナル版"
 
-msgid "Loading"
-msgstr "読み込み中"
+msgid "Collaboration"
+msgstr "コラボレーション"
 
-msgid "(no title)"
-msgstr "(no title)"
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "現在IOTD/TPキューにいます"
 
+#, fuzzy
+msgid "Video"
+msgstr "ビデオ"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr "このビデオのエンコードに問題がありました。もう一度アップロードしてください。"
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "問題が続く場合は、お問い合わせください。"
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr "このビデオはまだ処理中です。後でこのページに戻ってください。"
+
+#, fuzzy
+msgid "Dates"
+msgstr "日付"
+
+#, fuzzy
+msgid "Frames"
+msgstr "フレーム"
+
+#, fuzzy
+msgid "Integration"
+msgstr "統合"
+
+#, fuzzy
+msgid "Darks"
+msgstr "ダーク"
+
+#, fuzzy
+msgid "Flats"
+msgstr "フラット"
+
+#, fuzzy
+msgid "Flat darks"
+msgstr "フラットダーク"
+
+#, fuzzy
+msgid "Bias"
+msgstr "バイアス"
+
+#, fuzzy
+msgid "Avg. Moon age"
+msgstr "平均月齢"
+
+#, fuzzy
+msgid "days"
+msgstr "日"
+
+#, fuzzy
+msgid "Avg. Moon phase"
+msgstr "平均月相"
+
+#, fuzzy
+msgid "Bortle Dark-Sky Scale"
+msgstr "ボートル暗空スケール"
+
+#, fuzzy
+msgid "Mean SQM"
+msgstr "平均SQM"
+
+#, fuzzy
+msgid "Mean FWHM"
+msgstr "平均FWHM"
+
+#, fuzzy
+msgid "Temperature"
+msgstr "温度"
+
+#, fuzzy
+msgid "Date"
+msgstr "日付"
+
+#, fuzzy
+msgid "Time"
+msgstr "時間"
+
+#, fuzzy
+msgid "FPS"
+msgstr "FPS"
+
+#, fuzzy
+msgid "Exposure per frame"
+msgstr "フレームごとの露出"
+
+#, fuzzy
+msgid "Focal length"
+msgstr "焦点距離"
+
+#, fuzzy
+msgid "CMI"
+msgstr "CMI"
+
+#, fuzzy
+msgid "CMII"
+msgstr "CMII"
+
+#, fuzzy
+msgid "CMIII"
+msgstr "CMIII"
+
+#, fuzzy
+msgid "Seeing"
+msgstr "シーイング"
+
+#, fuzzy
+msgid "Transparency"
+msgstr "透明度"
+
+#, fuzzy
 msgid "Image file not found"
-msgstr ""
+msgstr "画像ファイルが見つかりません"
 
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr ""
-"データが破損しています。この画像を再度アップロードしてください。申し訳ござい"
-"ません。"
-
-#~ msgid "Conflict."
-#~ msgstr "コンフリクトしています。"
+#, fuzzy
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "画像ごとにビデオベースの取得は1回だけ許可されています。"

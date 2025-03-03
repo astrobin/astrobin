@@ -1,22 +1,71 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "(deleted)"
-msgstr "(удалено)"
+msgid "You follow each other"
+msgstr "Вы подписаны друг к другу"
+
+msgid "Images"
+msgstr "Изображения"
+
+msgid "Followers"
+msgstr "Подписчики"
+
+msgid "Following"
+msgstr "Подписан"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "No users."
+msgstr "Нет пользователей."
+
+msgid "Administrator"
+msgstr "Администратор"
+
+msgid "Image moderator"
+msgstr "Модератор изобр."
+
+msgid "IOTD Submitter"
+msgstr "ИД Номинирующий"
+
+msgid "IOTD Reviewer"
+msgstr "ИД Рецензент"
+
+msgid "IOTD Judge"
+msgstr "ИД Судья"
+
+msgid "Premium member"
+msgstr "Премиум участник"
+
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Отчеты о сбоях электронной почты были удалены из AstroBin. Убедитесь, что "
+"ваша электронная почта работает нормально, иначе вы снова получите то же "
+"предупреждение. Спасибо!"
+
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Ваши сообщения о спаме были удалены из AstroBin. Убедитесь, что у вас нет "
+"фильтра или правила, чтобы всегда отмечать электронные письма AstroBin как "
+"спам! Если вы не хотите получать электронные письма от AstroBin, найдите "
+"ссылку настроек, которая находится внизу каждого электронного письма. "
+"Спасибо!"
 
 msgid "Type your comment here..."
 msgstr "Введите ваш комментарий здесь..."
-
-msgid "Error"
-msgstr ""
 
 msgid "Cancel"
 msgstr "Отмена"
@@ -24,168 +73,254 @@ msgstr "Отмена"
 msgid "Add a comment"
 msgstr "Добавить комментарий"
 
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
+msgstr ""
+"Пожалуйста, <a href=\"%(login_url)s\">войдите</a> или <a href=\"%(signup_url)"
+"s\">зарегистрируйтесь</a>, чтобы оставить комментарий."
+
 msgid "There are no comments yet."
 msgstr "Пока ещё нет комментариев."
 
-msgid "The comment cannot be empty."
-msgstr "Комментарий не может быть пустым."
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+"Этот комментарий ожидает модерации и будет рассмотрен в ближайшее время."
 
-msgid "Delete"
-msgstr "Удалить"
-
-msgid "Undelete"
-msgstr "Восстановить"
-
-msgid "Edit"
-msgstr "Правка"
-
-msgid "Link"
-msgstr "Ссылка"
+msgid "(deleted)"
+msgstr "(удалено)"
 
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "понравилось"
 
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "нравится"
+
+msgid "Link"
+msgstr "Ссылка"
+
+msgid "Undelete"
+msgstr "Восстановить"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Edit"
+msgstr "Правка"
+
+msgid "Reply"
+msgstr "Ответ"
+
+msgid "Like"
+msgstr "Нравится"
+
+msgid "Unlike"
+msgstr "Не нравится"
+
+msgid "The comment cannot be empty."
+msgstr "Комментарий не может быть пустым."
+
+msgid "Submit"
+msgstr "Отправить"
+
+#, fuzzy
+msgid "Error"
+msgstr "Ошибка"
+
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Like"
-msgstr ""
+msgstr "Нравится"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Unlike"
-msgstr ""
+msgstr "Не нравится"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Reply"
-msgstr ""
+msgstr "Ответить"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Approve"
-msgstr ""
+msgstr "Одобрить"
 
+#, fuzzy
 msgid "Report abuse"
-msgstr ""
+msgstr "Сообщить о нарушении"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"Пожалуйста, <a href=\"%(login_url)s\">войдите</a> или <a href="
-"\"%(signup_url)s\">зарегистрируйтесь</a>, чтобы оставить комментарий."
-
+#, fuzzy
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
 msgstr ""
+"Этот комментарий ожидает модерации. Пожалуйста, одобрите его или сообщите о "
+"нарушении, используя кнопки ниже."
 
+#, fuzzy
 msgid "Thank you for your cooperation!"
-msgstr ""
+msgstr "Спасибо за ваше сотрудничество!"
 
+#, fuzzy
 msgid "This comment was already moderated by you or an AstroBin moderator."
-msgstr ""
+msgstr "Этот комментарий уже был модерацией вами или модератором AstroBin."
 
+#, fuzzy
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
 "author or owner of the content object that you commented on. If they do not "
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
+"Ваш комментарий ожидает модерации и должен быть вскоре рассмотрен автором "
+"или владельцем контента, на который вы прокомментировали. Если они не "
+"предпримут действий в течение 24 часов, модератор AstroBin возьмет на себя "
+"ответственность и рассмотрит ваш комментарий от их имени."
 
+#, fuzzy
 msgid "This process is necessary to prevent spam on AstroBin."
-msgstr ""
+msgstr "Этот процесс необходим для предотвращения спама на AstroBin."
 
+#, fuzzy
 msgid "Thank you for understanding!"
-msgstr ""
+msgstr "Спасибо за понимание!"
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr ""
-"Этот комментарий ожидает модерации и будет рассмотрен в ближайшее время."
-
-msgid "Submit"
-msgstr "Отправить"
-
+#, fuzzy
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
+"Вы не можете восстановить этот комментарий: для него существует "
+"подтвержденный или ожидающий отчет о нарушении. Если вы считаете, что ваш "
+"комментарий был сообщен несправедливо, пожалуйста, свяжитесь с нами."
 
+#, fuzzy
 msgid "You have reached your abuse report quota."
-msgstr ""
+msgstr "Вы достигли лимита отчетов о нарушениях."
 
+#, fuzzy
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr ""
+"Этот элемент не может быть сообщен повторно, так как он был одобрен "
+"модератором."
 
+#, fuzzy
+msgid "You many not report the same item more than once."
+msgstr "Вы не можете сообщать об одном и том же элементе более одного раза."
+
+#, fuzzy
 msgid "You may not report the same item more than once."
+msgstr "Вы не можете сообщать об одном и том же элементе более одного раза."
+
+#, fuzzy
+msgid "Report a use"
+msgstr "Сообщить о нарушении"
+
+#, fuzzy
+msgid "Member since"
+msgstr "Участник с"
+
+#, fuzzy
+msgid "Last seen online"
+msgstr "В последний раз был в сети"
+
+#, fuzzy
+msgid "Total integration time"
+msgstr "Общее время интеграции"
+
+#, fuzzy
+msgid "hours"
+msgstr "часов"
+
+#, fuzzy
+msgid "Average integration time"
+msgstr "Среднее время интеграции"
+
+#, fuzzy
+msgid "Forum posts written"
+msgstr "Написано сообщений на форуме"
+
+#, fuzzy
+msgid "Comments written"
+msgstr "Написано комментариев"
+
+#, fuzzy
+msgid "Comments received"
+msgstr "Получено комментариев"
+
+#, fuzzy
+msgid "Likes received"
+msgstr "Получено лайков"
+
+#, fuzzy
+msgid "Views received"
+msgstr "Получено просмотров"
+
+#, fuzzy
+msgid "No date specified"
+msgstr "Дата не указана"
+
+#, fuzzy
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
+"Не указаны телескопы или объективы для съемки, или не указаны камеры для "
+"съемки"
 
-#~ msgid "You follow each other"
-#~ msgstr "Вы подписаны друг к другу"
+#, fuzzy
+msgid "Gear images"
+msgstr "Изображения оборудования"
 
-#~ msgid "Images"
-#~ msgstr "Изображения"
+#, fuzzy
+msgid "Deep sky"
+msgstr "Глубокий космос"
 
-#~ msgid "Followers"
-#~ msgstr "Подписчики"
+#, fuzzy
+msgid "Solar system"
+msgstr "Солнечная система"
 
-#~ msgid "Following"
-#~ msgstr "Подписан"
+#, fuzzy
+msgid "Extremely wide field"
+msgstr "Экстремально широкий угол"
 
-#~ msgid "User"
-#~ msgstr "Пользователь"
+#, fuzzy
+msgid "Star trails"
+msgstr "Следы звёзд"
 
-#~ msgid "No users."
-#~ msgstr "Нет пользователей."
+#, fuzzy
+msgid "Northern lights"
+msgstr "Северное сияние"
 
-#~ msgid "Administrator"
-#~ msgstr "Администратор"
+#, fuzzy
+msgid "Noctilucent clouds"
+msgstr "Ноктилюсцентные облака"
 
-#~ msgid "Image moderator"
-#~ msgstr "Модератор изобр."
+#, fuzzy
+msgid "Gear"
+msgstr "Оборудование"
 
-#~ msgid "IOTD Submitter"
-#~ msgstr "ИД Номинирующий"
+#, fuzzy
+msgid "Other"
+msgstr "Другое"
 
-#~ msgid "IOTD Reviewer"
-#~ msgstr "ИД Рецензент"
+#, fuzzy
+msgid "All"
+msgstr "Все"
 
-#~ msgid "IOTD Judge"
-#~ msgstr "ИД Судья"
+#, fuzzy
+msgid "n/a"
+msgstr "н/д"
 
-#~ msgid "Premium member"
-#~ msgstr "Премиум участник"
+#, fuzzy
+msgid "No subjects specified"
+msgstr "Не указаны объекты"
 
-#~ msgid ""
-#~ "Your email bounce reports have been removed from AstroBin. Please make "
-#~ "sure that your email works well or you will get the same warning message "
-#~ "again. Thanks!"
-#~ msgstr ""
-#~ "Отчеты о сбоях электронной почты были удалены из AstroBin. Убедитесь, что "
-#~ "ваша электронная почта работает нормально, иначе вы снова получите то же "
-#~ "предупреждение. Спасибо!"
-
-#~ msgid ""
-#~ "Your spam reports have been removed from AstroBin. Please make sure you "
-#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
-#~ "you don't want to receive emails from AstroBin, look for the settings "
-#~ "link that's at the bottom of every email. Thanks!"
-#~ msgstr ""
-#~ "Ваши сообщения о спаме были удалены из AstroBin. Убедитесь, что у вас нет "
-#~ "фильтра или правила, чтобы всегда отмечать электронные письма AstroBin "
-#~ "как спам! Если вы не хотите получать электронные письма от AstroBin, "
-#~ "найдите ссылку настроек, которая находится внизу каждого электронного "
-#~ "письма. Спасибо!"
-
-#~ msgctxt "Noun, e.g. 'This element has 1 like'"
-#~ msgid "like"
-#~ msgstr "нравится"
-
-#~ msgid "Reply"
-#~ msgstr "Ответ"
-
-#~ msgid "Like"
-#~ msgstr "Нравится"
-
-#~ msgid "Unlike"
-#~ msgstr "Не нравится"
+#, fuzzy
+msgid "No acquisition details specified"
+msgstr "Не указаны детали захвата"

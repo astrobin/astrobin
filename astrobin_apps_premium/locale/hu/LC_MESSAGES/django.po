@@ -1,12 +1,40 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: hu\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit"
+
+#, fuzzy
+msgid "I wasn't really affected by the data loss"
+msgstr "Nem igazán érintett a adatvesztés."
+
+#, fuzzy
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr "Nem kérek kártérítést: szeretném támogatni az AstroBint."
+
+#, fuzzy
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr "Szeretném egy hónapig ingyen kipróbálni az AstroBin Ultimate-et."
+
+#, fuzzy
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr ""
+"Úgy érzem, hogy jogosult vagyok az AstroBin Ultimate-re ingyen 3 hónapig."
+
+#, fuzzy
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr ""
+"Úgy érzem, hogy jogosult vagyok az AstroBin Ultimate-re ingyen 6 hónapig."
+
+#, fuzzy
+msgid "Requested compensation"
+msgstr "Kért kártérítést."
+
+#, fuzzy
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr "Kérlek, jelezd, hogy szeretnél-e kártérítést, és ha igen, mennyit."
 
 msgid "Your migration data"
 msgstr "Az áthelyezett adataid"
@@ -38,8 +66,103 @@ msgstr "Dátum"
 msgid "Subscription"
 msgstr "Feliratkozás"
 
-msgid "Paying member"
+#, fuzzy
+msgid "Data loss compensation request"
+msgstr "Adatvesztés kártérítési kérelem."
+
+#, fuzzy
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
 msgstr ""
+"Jogosult vagy kártérítésre a 2020. február 16-án történt adatvesztés miatt."
+
+#, fuzzy
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+"Ha még nem tetted, kérlek, szánj egy percet arra, hogy elolvasd, mi történt "
+"az alábbi oldalon:"
+
+#, fuzzy
+msgid "Official statement and post-mortem"
+msgstr "Hivatalos nyilatkozat és utólagos elemzés."
+
+#, fuzzy
+msgid "Please accept our apology once more."
+msgstr "Kérlek, fogadd el a bocsánatkérésünket még egyszer."
+
+#, fuzzy
+msgid "Please chooce your compensation from the list below"
+msgstr "Kérlek, válaszd ki a kártérítést az alábbi listából."
+
+#, fuzzy
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+"A kártérítést ingyenes idő formájában kínáljuk az új AstroBin előfizetési "
+"szinten, amely \"Ultimate\" néven ismert."
+
+#, fuzzy
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+"További információkért az AstroBin Ultimate-ről, kérlek, látogass el <a "
+"href=\"%(url)s\" target=\"_blank\">az árképzési oldalra</a>."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Küldés"
+
+#, fuzzy
+msgid "Data loss compensation reauest"
+msgstr "Adatvesztés kártérítési kérelem."
+
+#, fuzzy
+msgid "Already done"
+msgstr "Már megtörtént."
+
+#, fuzzy
+msgid "Sorry, you can't do this again."
+msgstr "Sajnálom, ezt nem teheted meg újra."
+
+#, fuzzy
+msgid "Your preference was already recorded and cannot be changed."
+msgstr "A preferenciádat már rögzítettük, és nem lehet megváltoztatni."
+
+#, fuzzy
+msgid "Not eligible"
+msgstr "Nem jogosult."
+
+#, fuzzy
+msgid "It looks like you're not eligible"
+msgstr "Úgy tűnik, nem vagy jogosult."
+
+#, fuzzy
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+"Sajnálom, de ez az oldal azoknak szól, akik az AstroBin Premium tagjai "
+"voltak azon a napon, amikor az adatvesztés történt, és úgy tűnik, te nem "
+"tartozol közéjük."
+
+msgid "Success"
+msgstr "Siker"
+
+#, fuzzy
+msgid "All done!"
+msgstr "Minden kész!"
+
+#, fuzzy
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
+msgstr "A preferenciádat rögzítettük, és már alkalmaztuk. Köszönjük!"
 
 msgid "Migrate donations"
 msgstr "Támogatások áthelyezése"
@@ -91,9 +214,6 @@ msgstr ""
 
 msgid "No, I want to pay for Premium"
 msgstr "Nem, szeretnék a Prémiumért fizetni"
-
-msgid "Success"
-msgstr "Siker"
 
 msgid "Your migration was successful."
 msgstr "Az áthelyezés sikeres volt"
@@ -154,8 +274,21 @@ msgstr ""
 
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically."
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
 msgstr ""
+"Automatikusan megújuló előfizetésed van az AstroBin-en, és mi megpróbáljuk "
+"automatikusan megújítani azt. Ha az előfizetésed a szokásos módon, PayPal-on "
+"keresztül lett kifizetve, akkor a PayPal megpróbálja megterhelni a "
+"hitelkártyádat, vagy lekérni a számládon rendelkezésre álló összeget."
+
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"Ha az előfizetésed manuálisan, banki átutalással történt, kérjük, vedd fel "
+"velünk a kapcsolatot az újabb fizetéshez."
 
 msgid "Thank you!"
 msgstr "Köszönjük!"
@@ -174,21 +307,515 @@ msgstr ""
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr "Az AstroBin előfizetésed automatikusan megújul 30 nap múlva"
 
-#~ msgid ""
-#~ "You have an automatically renewing subscription on AstroBin, and we will "
-#~ "attempt to renew it automatically. If your subscription was created the "
-#~ "regular way, via PayPal, then PayPal will attempt to charge your credit "
-#~ "card or retrieve funds that are available in your account."
-#~ msgstr ""
-#~ "Automatikusan megújuló előfizetésed van az AstroBin-en, és mi "
-#~ "megpróbáljuk automatikusan megújítani azt. Ha az előfizetésed a szokásos "
-#~ "módon, PayPal-on keresztül lett kifizetve, akkor a PayPal megpróbálja "
-#~ "megterhelni a hitelkártyádat, vagy lekérni a számládon rendelkezésre álló "
-#~ "összeget."
+#, fuzzy
+msgid "You follow each other"
+msgstr "Követitek egymást."
 
-#~ msgid ""
-#~ "If your subscription was created manually via a bank transfer, please get "
-#~ "in touch for a new payment."
-#~ msgstr ""
-#~ "Ha az előfizetésed manuálisan, banki átutalással történt, kérjük, vedd "
-#~ "fel velünk a kapcsolatot az újabb fizetéshez."
+#, fuzzy
+msgid "Images"
+msgstr "Képek"
+
+#, fuzzy
+msgid "Followers"
+msgstr "Követők"
+
+#, fuzzy
+msgid "Following"
+msgstr "Követés"
+
+#, fuzzy
+msgid "User"
+msgstr "Felhasználó"
+
+#, fuzzy
+msgid "No users."
+msgstr "Nincsenek felhasználók."
+
+#, fuzzy
+msgid "Administrator"
+msgstr "Adminisztrátor"
+
+#, fuzzy
+msgid "Image moderator"
+msgstr "Kép moderátor"
+
+#, fuzzy
+msgid "IOTD Submitter"
+msgstr "IOTD Beküldő"
+
+#, fuzzy
+msgid "IOTD Reviewer"
+msgstr "IOTD Bíráló"
+
+#, fuzzy
+msgid "IOTD Judge"
+msgstr "IOTD Bíró"
+
+#, fuzzy
+msgid "Premium member"
+msgstr "Prémium tag"
+
+#, fuzzy
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Az email bounce jelentéseid eltávolításra kerültek az AstroBinből. Kérlek, "
+"győződj meg róla, hogy az email címed jól működik, különben ugyanazt a "
+"figyelmeztető üzenetet fogod kapni újra. Köszönöm!"
+
+#, fuzzy
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"A spam jelentéseid eltávolításra kerültek az AstroBinből. Kérlek, győződj "
+"meg róla, hogy nincs szűrőd vagy szabályod, ami mindig spamként jelöli az "
+"AstroBin emailjeit! Ha nem szeretnél emailt kapni az AstroBintől, keresd meg "
+"a beállítások linket, ami minden email alján ott van. Köszönöm!"
+
+#, fuzzy
+msgid "Perform a blind solve"
+msgstr "Vakon megoldás végrehajtása."
+
+#, fuzzy
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
+msgstr ""
+"Próbálj megoldani nyomok nélkül. A legtöbb esetben ez működni fog, de tovább "
+"fog tartani."
+
+#, fuzzy
+msgid "Width of the field in degrees"
+msgstr "A mező szélessége fokokban."
+
+#, fuzzy
+msgid "Width of the field in arcminutes"
+msgstr "A mező szélessége ívpercekben."
+
+#, fuzzy
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr "A mező felbontása ívmásodperc/pixel."
+
+#, fuzzy
+msgid "Field size units"
+msgstr "Mező méret egységek."
+
+#, fuzzy
+msgid "Min field size"
+msgstr "Minimális mezőméret."
+
+#, fuzzy
+msgid "Estimate the lower bound for the width of this field."
+msgstr "Becsüld meg a mező szélességének alsó határát."
+
+#, fuzzy
+msgid "Max field size"
+msgstr "Maximális mezőméret."
+
+#, fuzzy
+msgid "Estimate the upper bound for the width of this field."
+msgstr "Becsüld meg a mező szélességének felső határát."
+
+#, fuzzy
+msgid "Center RA"
+msgstr "Középpont RA."
+
+#, fuzzy
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr "A mező középponti RA-ja fokokban, 0.000-tól 360.000-ig"
+
+#, fuzzy
+msgid "Center dec"
+msgstr "Középponti dec"
+
+#, fuzzy
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr "A mező középponti dec-je fokokban, -90.000-tól +90.000-ig"
+
+#, fuzzy
+msgid "Radius"
+msgstr "Sugár"
+
+#, fuzzy
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
+msgstr ""
+"Megmondja a lemezképző motor számára, hogy nézzen körülbelül ennyi fokra a "
+"megadott középponti RA és dec pozíciótól."
+
+#, fuzzy
+msgid "Small"
+msgstr "Kicsi"
+
+#, fuzzy
+msgid "Medium"
+msgstr "Közepes"
+
+#, fuzzy
+msgid "Large"
+msgstr "Nagy"
+
+#, fuzzy
+msgid "Sample raw frame (max 100 MB)"
+msgstr "Minta nyers frame (max 100 MB)"
+
+#, fuzzy
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+"A lemezképzés pontosságának további javítása érdekében kérjük, töltsön fel "
+"egy XISF vagy FITS fájlt az adathalmazából. Az ilyen fájlok általában dátum- "
+"és időfejléceket tartalmaznak, amelyek lehetővé teszik az AstroBin számára, "
+"hogy kiszámolja a Naprendszerbeli testek ephemerideit, és megtalálja a "
+"bolygókat és aszteroidákat a képen (feltéve, hogy a helyszíninformációt is "
+"hozzáadja).<br/><br/>A maximális pontosság érdekében ajánlott, hogy a "
+"PixInsight natív és nyílt formátumú XISF-t használja. További információ az "
+"XISF-ről itt:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/><strong>Kérjük, "
+"vegye figyelembe:</strong> nagyon fontos, hogy az XISF vagy FITS fájl, "
+"amelyet feltölt, igazodjon a feldolgozott képéhez, különben az objektumok "
+"annotációi nem fognak egyezni. A sikeres és pontos lemezképzés esélyeinek "
+"javítása érdekében kalibrálja a fájlt a megszokott módon (sötét/bias/flats), "
+"de ne nyújtsa meg."
+
+#, fuzzy
+msgid "Scaled font size"
+msgstr "Skálázott betűméret"
+
+#, fuzzy
+msgid "Font size of the annotations on your main image page"
+msgstr "A fő képed oldalán található annotációk betűmérete"
+
+#, fuzzy
+msgid "Show equatorial grid"
+msgstr "Ekvatoriális rács megjelenítése"
+
+#, fuzzy
+msgid "Show constellation borders"
+msgstr "Csillagképek határainak megjelenítése"
+
+#, fuzzy
+msgid "Show constellation lines"
+msgstr "Csillagképek vonalainak megjelenítése"
+
+#, fuzzy
+msgid "Show named stars"
+msgstr "Névvel ellátott csillagok megjelenítése"
+
+#, fuzzy
+msgid "Show Messier objects"
+msgstr "Messier-objektumok megjelenítése"
+
+#, fuzzy
+msgid "Show NGC and IC objects"
+msgstr "NGC és IC objektumok megjelenítése"
+
+#, fuzzy
+msgid "Show VdB objects"
+msgstr "VdB objektumok megjelenítése"
+
+#, fuzzy
+msgid "Show Sharpless objects"
+msgstr "Sharpless objektumok megjelenítése"
+
+#, fuzzy
+msgid "Show Barnard objects"
+msgstr "Barnard objektumok megjelenítése"
+
+#, fuzzy
+msgid "Show PGC objects"
+msgstr "PGC objektumok megjelenítése"
+
+#, fuzzy
+msgid "Show planets"
+msgstr "Bolygók megjelenítése"
+
+#, fuzzy
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+"Csak akkor elérhető, ha a képed legalább egy felvételi idővel és pontos "
+"helyszínnel rendelkezik"
+
+#, fuzzy
+msgid "Show asteroids"
+msgstr "Aszteroidák megjelenítése"
+
+#, fuzzy
+msgid "Show GCVS stars"
+msgstr "GCVS csillagok megjelenítése"
+
+#, fuzzy
+msgid "General Catalog of Variable Stars"
+msgstr "Változó csillagok általános katalógusa"
+
+#, fuzzy
+msgid "Show Tycho-2 catalog"
+msgstr "Tycho-2 katalógus megjelenítése"
+
+#, fuzzy
+msgid "Show CGPN objects"
+msgstr "CGPN objektumok megjelenítése"
+
+#, fuzzy
+msgid "Getting plate-solving status, please wait..."
+msgstr "Lemezképzés állapotának lekérdezése, kérjük, várjon..."
+
+#, fuzzy
+msgid "Plate-solving starting, please do not leave this page..."
+msgstr "Lemezképzés indítása, kérjük, ne hagyja el ezt az oldalt..."
+
+#, fuzzy
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr "Fejlett lemezképzés indítása, kérjük, ne hagyja el ezt az oldalt..."
+
+#, fuzzy
+msgid "Plate-solving started. You may leave this page."
+msgstr "Lemezképzés elindult. Elhagyhatja ezt az oldalt."
+
+#, fuzzy
+msgid "Advanced plate-solving started. You may leave this page."
+msgstr "Fejlett lemezképzés elindult. Elhagyhatja ezt az oldalt."
+
+#, fuzzy
+msgid "Plate-solving almost ready, please do not leave this page..."
+msgstr "A lemezképzés majdnem kész, kérjük, ne hagyja el ezt az oldalt..."
+
+#, fuzzy
+msgid "This image could not be plate-solved."
+msgstr "Ezt a képet nem sikerült lemezképzésre vinni."
+
+#, fuzzy
+msgid "The advanced plate-solving failed."
+msgstr "A fejlett lemezképzés megbukott."
+
+#, fuzzy
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr ""
+"Ezt a képet sikeresen lemezképzésre vittük. Frissítse az oldalt az új adatok "
+"megtekintéséhez!"
+
+#, fuzzy
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
+msgstr ""
+"A fejlett lemezképzés befejeződött. Frissítse az oldalt az új adatok "
+"megtekintéséhez!"
+
+#, fuzzy
+msgid "Error"
+msgstr "Hiba"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because it was not possible to "
+"establish a connection to nova.astrometry.net. Please try again later!"
+msgstr ""
+"Az AstroBin nem tudta lemezképzésre vinni ezt a képet, mert nem sikerült "
+"kapcsolatot létesíteni a nova.astrometry.net-tel. Kérjük, próbálja újra "
+"később!"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error."
+msgstr ""
+"Az AstroBin nem tudta lemezképzésre vinni ezt a képet, mert a nova."
+"astrometry.net belső szerverhibát jelentett."
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an unepexted error."
+msgstr ""
+"Az AstroBin nem tudta lemezképzésre vinni ezt a képet, mert a nova."
+"astrometry.net váratlan hibát jelentett."
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+"A Lynds' Bright Nebulae Katalógus (LBN) objektumainak megjelenítése (Lynds "
+"1965)"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+"A Lynds' Dark Nebulae Katalógus (LDN) objektumainak megjelenítése (Lynds "
+"1962)"
+
+#, fuzzy
+msgid "Show quasars"
+msgstr "Quasárok megjelenítése"
+
+#, fuzzy
+msgid "Missing"
+msgstr "Hiányzik"
+
+#, fuzzy
+msgid "Basic pending"
+msgstr "Alap várakozás"
+
+#, fuzzy
+msgid "Basic failed"
+msgstr "Alap megbukott"
+
+#, fuzzy
+msgid "Basic success"
+msgstr "Alap sikeres"
+
+#, fuzzy
+msgid "Advanced pending"
+msgstr "Fejlett függőben"
+
+#, fuzzy
+msgid "Advanced failed"
+msgstr "Fejlett hiba"
+
+#, fuzzy
+msgid "Advanced success"
+msgstr "Fejlett siker"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error."
+msgstr ""
+"Az AstroBin nem tudta lemezre oldani ezt a képet egy váratlan hiba miatt."
+
+#, fuzzy
+msgid "n/a"
+msgstr "n/a"
+
+#, fuzzy
+msgid "Starting task..."
+msgstr "Feladat indítása..."
+
+#, fuzzy
+msgid "Downloading image..."
+msgstr "Kép letöltése..."
+
+#, fuzzy
+msgid "Plate-solving image..."
+msgstr "Kép lemezre oldása..."
+
+#, fuzzy
+msgid "Generating image annotations..."
+msgstr "Kép annotációk generálása..."
+
+#, fuzzy
+msgid "Processing SVG documents..."
+msgstr "SVG dokumentumok feldolgozása..."
+
+#, fuzzy
+msgid "Uploading results..."
+msgstr "Eredmények feltöltése..."
+
+#, fuzzy
+msgid "Task completed"
+msgstr "Feladat befejezve"
+
+#, fuzzy
+msgid "Plate-solving information"
+msgstr "Lemezre oldási információk"
+
+#, fuzzy
+msgid "Status"
+msgstr "Állapot"
+
+#, fuzzy
+msgid "Started"
+msgstr "Kezdődött"
+
+#, fuzzy
+msgid "Astrometry.net job"
+msgstr "Astrometry.net feladat"
+
+#, fuzzy
+msgid "PixInsight job"
+msgstr "PixInsight feladat"
+
+#, fuzzy
+msgid "PixInsight queue size"
+msgstr "PixInsight várakozási idő"
+
+#, fuzzy
+msgid "PixInsight stage"
+msgstr "PixInsight szakasz"
+
+#, fuzzy
+msgid "PixInsight log"
+msgstr "PixInsight napló"
+
+#, fuzzy
+msgid "RA"
+msgstr "RA"
+
+#, fuzzy
+msgid "center"
+msgstr "középpont"
+
+#, fuzzy
+msgid "degrees"
+msgstr "fok"
+
+#, fuzzy
+msgid "top/left"
+msgstr "felül/balra"
+
+#, fuzzy
+msgid "top/right"
+msgstr "felül/jobbra"
+
+#, fuzzy
+msgid "bottom/right"
+msgstr "alul/jobbra"
+
+#, fuzzy
+msgid "bottom/left"
+msgstr "alul/balra"
+
+#, fuzzy
+msgid "Dec"
+msgstr "Dec"
+
+#, fuzzy
+msgid "Close"
+msgstr "Bezárás"
+
+#, fuzzy
+msgid "Invalid"
+msgstr "Érvénytelen"
+
+#, fuzzy
+msgid "Generating finding charts..."
+msgstr "Kereső térképek generálása..."
+
+#, fuzzy
+msgid "Paying member"
+msgstr "Fizető tag"
+
+#, fuzzy
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically."
+msgstr ""
+"Automatikusan megújuló előfizetésed van az AstroBin-en, és megpróbáljuk "
+"automatikusan megújítani."

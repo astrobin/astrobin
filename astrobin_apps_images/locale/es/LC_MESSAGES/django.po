@@ -1,15 +1,13 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: es\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+msgid "Conflict."
+msgstr "Conflicto."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Fuente sin comprimir (máx. 100 MB)"
@@ -25,117 +23,12 @@ msgstr ""
 "propósitos de almacenamiento. Este archivo se guarda de forma privada y solo "
 "usted tendrá acceso a este. "
 
-msgid "Dates"
-msgstr ""
-
-msgid "Frames"
-msgstr ""
-
-msgid "Integration"
-msgstr ""
-
-msgid "Darks"
-msgstr ""
-
-msgid "Flats"
-msgstr ""
-
-msgid "Flat darks"
-msgstr ""
-
-msgid "Bias"
-msgstr ""
-
-msgid "Avg. Moon age"
-msgstr ""
-
-msgid "days"
-msgstr ""
-
-msgid "Avg. Moon phase"
-msgstr ""
-
-msgid "Bortle Dark-Sky Scale"
-msgstr ""
-
-msgid "Mean SQM"
-msgstr ""
-
-msgid "Mean FWHM"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "FPS"
-msgstr ""
-
-msgid "Exposure per frame"
-msgstr ""
-
-msgid "Focal length"
-msgstr ""
-
-msgid "CMI"
-msgstr ""
-
-msgid "CMII"
-msgstr ""
-
-msgid "CMIII"
-msgstr ""
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Transparency"
-msgstr ""
-
 msgid "Error!"
 msgstr "¡Error!"
 
-msgid "Image of the day"
-msgstr ""
-
-msgid "Top pick"
-msgstr ""
-
-msgid "Top pick nomination"
-msgstr ""
-
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
+#, fuzzy
 msgid "Staging area"
-msgstr ""
-
-msgid "Collaboration"
-msgstr ""
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr ""
-
-msgid "Original revision"
-msgstr ""
+msgstr "Área de preparación"
 
 msgid "Loading"
 msgstr "Cargando"
@@ -143,11 +36,155 @@ msgstr "Cargando"
 msgid "(no title)"
 msgstr "(Sin título)"
 
-msgid "Image file not found"
-msgstr ""
+#, fuzzy
+msgid "Image of the day"
+msgstr "Imagen del día"
+
+#, fuzzy
+msgid "Top pick"
+msgstr "Selección destacada"
+
+#, fuzzy
+msgid "Top pick nomination"
+msgstr "Nominación a selección destacada"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "Datos corruptos. Por favor, sube esta imagen de nuevo. "
 
-#~ msgid "Conflict."
-#~ msgstr "Conflicto."
+#, fuzzy
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Revisión %(revision)s"
+
+#, fuzzy
+msgid "Original revision"
+msgstr "Revisión original"
+
+#, fuzzy
+msgid "Collaboration"
+msgstr "Colaboración"
+
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Actualmente en la cola de IOTD/TP"
+
+#, fuzzy
+msgid "Video"
+msgstr "Vídeo"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr "Hubo un problema al codificar este vídeo, por favor súbelo de nuevo."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Si el problema persiste, por favor contáctanos."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr ""
+"Este vídeo aún se está procesando, por favor vuelve a esta página más tarde."
+
+#, fuzzy
+msgid "Dates"
+msgstr "Fechas"
+
+#, fuzzy
+msgid "Frames"
+msgstr "Exposiciones"
+
+#, fuzzy
+msgid "Integration"
+msgstr "Integración"
+
+#, fuzzy
+msgid "Darks"
+msgstr "Darks"
+
+#, fuzzy
+msgid "Flats"
+msgstr "Flats"
+
+#, fuzzy
+msgid "Flat darks"
+msgstr "Flats oscuros"
+
+#, fuzzy
+msgid "Bias"
+msgstr "Bias"
+
+#, fuzzy
+msgid "Avg. Moon age"
+msgstr "Edad media de la Luna"
+
+#, fuzzy
+msgid "days"
+msgstr "días"
+
+#, fuzzy
+msgid "Avg. Moon phase"
+msgstr "Fase media de la Luna"
+
+#, fuzzy
+msgid "Bortle Dark-Sky Scale"
+msgstr "Escala de cielo oscuro de Bortle"
+
+#, fuzzy
+msgid "Mean SQM"
+msgstr "SQM medio"
+
+#, fuzzy
+msgid "Mean FWHM"
+msgstr "FWHM medio"
+
+#, fuzzy
+msgid "Temperature"
+msgstr "Temperatura"
+
+#, fuzzy
+msgid "Date"
+msgstr "Fecha"
+
+#, fuzzy
+msgid "Time"
+msgstr "Hora"
+
+#, fuzzy
+msgid "FPS"
+msgstr "FPS"
+
+#, fuzzy
+msgid "Exposure per frame"
+msgstr "Exposición por fotograma"
+
+#, fuzzy
+msgid "Focal length"
+msgstr "Longitud focal"
+
+#, fuzzy
+msgid "CMI"
+msgstr "CMI"
+
+#, fuzzy
+msgid "CMII"
+msgstr "CMII"
+
+#, fuzzy
+msgid "CMIII"
+msgstr "CMIII"
+
+#, fuzzy
+msgid "Seeing"
+msgstr "Seeing"
+
+#, fuzzy
+msgid "Transparency"
+msgstr "Transparencia"
+
+#, fuzzy
+msgid "Image file not found"
+msgstr "Archivo de imagen no encontrado"
+
+#, fuzzy
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Solo se permite una adquisición basada en video por imagen."

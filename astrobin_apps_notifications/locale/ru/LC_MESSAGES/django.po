@@ -1,13 +1,26 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bit"
+
+msgid "Notifications"
+msgstr "Уведомления"
+
+msgid "You have no notifications."
+msgstr "У вас нет уведомлений."
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Mark all as read"
+msgstr "Отметить все прочитанным"
+
+msgid "You have no new notifications."
+msgstr "У вас нет новых уведомлений"
 
 msgid "You have a new follower"
 msgstr "У вас подписчик"
@@ -21,47 +34,18 @@ msgstr "Новая версия изображения от пользовате
 msgid "Your image was plate-solved"
 msgstr "Ваше изображение определено по координатам"
 
-msgid "Your image was approved by a moderator"
-msgstr ""
-
 msgid "Your image could not be plate-solved"
 msgstr "Ваше изображение не может быть определено по координатам"
-
-msgid "Your image was plate-solved (advanced)"
-msgstr ""
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr ""
 
 msgid "Your image received a new comment"
 msgstr "У вашего изображения комментарий"
 
-msgid "Your edit proposal received a new comment"
-msgstr ""
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr ""
-
-msgid "Your unapproved equipment item received a comment"
-msgstr ""
-
-msgid "Your listing has a new private conversation"
-msgstr ""
-
-msgid "Your private conversation has a new comment"
-msgstr ""
-
-msgid "Your listing has a new question"
-msgstr ""
-
 msgid "There was a reply to your comment"
 msgstr "Ответ на ваш комментарий"
 
-msgid "A new comment on your image requires moderation"
-msgstr ""
-
+#, fuzzy
 msgid "Your comment was approved"
-msgstr ""
+msgstr "Ваш комментарий был одобрен"
 
 msgid "Your image was bookmarked"
 msgstr "Ваше изображение в закладках"
@@ -74,9 +58,6 @@ msgstr "Ваше изображение понравилось"
 
 msgid "Your forum post was liked"
 msgstr "Ваше сообщение на форуме понравилось"
-
-msgid "Your forum post was approved"
-msgstr ""
 
 msgid "Your API Key request has been approved"
 msgstr "Ваш запрос на API ключ одобрен"
@@ -102,15 +83,6 @@ msgstr "Пользователь, на которого вы подписаны 
 msgid "New forum topic in a group you are a member of"
 msgstr "Новая тема в группе, участником которой вы являетесь"
 
-msgid "New forum topic for an equipment item you use"
-msgstr ""
-
-msgid "New forum topic for an equipment item you follow"
-msgstr ""
-
-msgid "Your forum topic was moved"
-msgstr ""
-
 msgid "You have received a new private message"
 msgstr "У вас новое личное сообщение"
 
@@ -135,12 +107,6 @@ msgstr "У вас есть изображения без информации \"
 msgid "Would you like to activate your account?"
 msgstr "Вы хотите активировать вашу учётную запись?"
 
-msgid "New reply in a subscribed forum topic"
-msgstr ""
-
-msgid "New reply in a forum topic that you started"
-msgstr ""
-
 msgid "You were mentioned in a forum post"
 msgstr "Вы были упомянуты в сообщении на форуме"
 
@@ -153,104 +119,188 @@ msgstr "Добро пожаловать в AstroBin!"
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Поздравления с вашим первым изображением на AstroBin!"
 
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr ""
-
 msgid "Thank you for getting a subscription!"
 msgstr "Спасибо за подписку !"
 
 msgid "Thank you for your payment!"
 msgstr "Спасибо за ваш платеж!"
 
-msgid "Subscription canceled"
-msgstr ""
-
+#, fuzzy
 msgid "You were removed from the IOTD staff"
-msgstr ""
+msgstr "Вас убрали из команды IOTD"
 
+#, fuzzy
 msgid "You have been inactive as an IOTD staff member"
-msgstr ""
+msgstr "Вы были неактивны как член команды IOTD"
 
-msgid "Your IOTD staff activity is insufficient"
-msgstr ""
-
+#, fuzzy
 msgid "An image you promoted made it to Top Pick"
-msgstr ""
+msgstr "Изображение, которое вы продвигали, попало в Топ-выбор"
 
+#, fuzzy
 msgid "An image you promoted made it to IOTD"
-msgstr ""
+msgstr "Изображение, которое вы продвигали, попало в IOTD"
 
-msgid "An image you dismissed made it to Top Pick"
-msgstr ""
+#, fuzzy
+msgid "New reply in a subscribed forum topic"
+msgstr "Новый ответ в подписанной теме форума"
 
-msgid "An image you dismissed made it to IOTD"
-msgstr ""
+#, fuzzy
+msgid "Your image was nominated to be a Top Pick"
+msgstr "Ваше изображение было номинировано на Топ-выбор"
 
-msgid "Your image might become a Top Pick Nomination"
-msgstr ""
-
-msgid "Your image might become a Top Pick"
-msgstr ""
-
-msgid "Your image was voted Top Pick Nomination"
-msgstr ""
-
+#, fuzzy
 msgid "Your image was voted Top Pick"
-msgstr ""
+msgstr "Ваше изображение было выбрано Топ-выбором"
 
+#, fuzzy
 msgid "Your image was voted Image of the Day"
-msgstr ""
+msgstr "Ваше изображение было выбрано Изображением дня"
 
-msgid "Your IOTD staff member stats"
-msgstr ""
+#, fuzzy
+msgid "Your image was plate-solved (advanced)"
+msgstr "Ваше изображение было решено по плате (расширенное)"
 
+#, fuzzy
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Ваше изображение не удалось решить по плате (расширенное)"
+
+#, fuzzy
+msgid "A new comment on your image requires moderation"
+msgstr "Новый комментарий к вашему изображению требует модерации"
+
+#, fuzzy
+msgid "Your forum post was approved"
+msgstr "Ваш пост на форуме был одобрен"
+
+#, fuzzy
 msgid "You were mentioned in an image description"
-msgstr ""
+msgstr "Вас упомянули в описании изображения"
 
+#, fuzzy
+msgid "Your edit proposal received a new comment"
+msgstr "Ваше предложение редактирования получило новый комментарий"
+
+#, fuzzy
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr "Ваше изображение было отправлено на рассмотрение IOTD/TP"
+
+#, fuzzy
 msgid "A gear item that you used was renamed"
-msgstr ""
+msgstr "Предмет оборудования, который вы использовали, был переименован"
 
-msgid "Collaboration Request: Accept or Deny"
-msgstr ""
+#, fuzzy
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Ваш запланированный IOTD получил новый комментарий"
 
-msgid "User accepted your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "Your unapproved equipment item received a comment"
+msgstr "Ваш неподтвержденный предмет оборудования получил комментарий"
 
-msgid "User denied your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "New forum topic for an equipment item you use"
+msgstr "Новая тема форума для предмета оборудования, который вы используете"
 
+#, fuzzy
 msgid "You were added as a collaborator to an image"
-msgstr ""
+msgstr "Вас добавили как соавтора к изображению"
 
+#, fuzzy
 msgid "You were removed as a collaborator to an image"
-msgstr ""
+msgstr "Вас убрали как соавтора к изображению"
 
+#, fuzzy
 msgid "User removed self as a collaborator to your image"
-msgstr ""
+msgstr "Пользователь сам убрал себя как соавтора к вашему изображению"
 
+#, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "Вы отправили ваше изображение на рассмотрение IOTD/TP"
+
+#, fuzzy
 msgid "Login attempt detected from a different country"
-msgstr ""
+msgstr "Обнаружена попытка входа из другой страны"
 
+#, fuzzy
 msgid "Login attempt with weak password"
-msgstr ""
+msgstr "Попытка входа с слабым паролем"
 
-#~ msgid "Notifications"
-#~ msgstr "Уведомления"
+#, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "Ваше изображение было одобрено модератором"
 
-#~ msgid "You have no notifications."
-#~ msgstr "У вас нет уведомлений."
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Изображение не было отправлено на рассмотрение IOTD/TP"
 
-#~ msgid "Settings"
-#~ msgstr "Настройки"
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "Подписка отменена"
 
-#~ msgid "Mark all as read"
-#~ msgstr "Отметить все прочитанным"
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "Ваша тема на форуме была перемещена"
 
-#~ msgid "You have no new notifications."
-#~ msgstr "У вас нет новых уведомлений"
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "Изображение приближается к сроку подачи на IOTD/TP"
+
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "У вас новое личное сообщение в списке"
+
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "В вашем личном сообщении новый комментарий"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "У вас новый вопрос по списку"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "Новая тема на форуме по оборудованию, за которым вы следите"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "Новый ответ в теме форума, которую вы начали"
+
+#, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "Ваша активность в IOTD недостаточна"
+
+#, fuzzy
+msgid "An image you dismissed made it to Top Pick"
+msgstr "Изображение, которое вы отклонили, попало в Top Pick"
+
+#, fuzzy
+msgid "An image you dismissed made it to IOTD"
+msgstr "Изображение, которое вы отклонили, попало в IOTD"
+
+#, fuzzy
+msgid "Your IOTD staff member stats"
+msgstr "Статистика вашего участника IOTD"
+
+#, fuzzy
+msgid "Collaboration Request: Accept or Deny"
+msgstr "Запрос на сотрудничество: Принять или Отклонить"
+
+#, fuzzy
+msgid "User accepted your collaboration request"
+msgstr "Пользователь принял ваш запрос на сотрудничество"
+
+#, fuzzy
+msgid "User denied your collaboration request"
+msgstr "Пользователь отклонил ваш запрос на сотрудничество"
+
+#, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "Ваше изображение может стать номинацией на Top Pick"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "Ваше изображение может стать Top Pick"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "Ваше изображение было выбрано как номинация на Top Pick"

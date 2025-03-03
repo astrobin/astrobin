@@ -1,18 +1,10 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
 "Language: pt\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
+"Content-Transfer-Encoding: 8bit"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Estratégia de desativação de envio automático"
@@ -66,15 +58,6 @@ msgstr "Específico para certos equipamentos"
 msgid "Other"
 msgstr "Outro"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
 msgid "Name"
 msgstr "Nome"
 
@@ -86,18 +69,6 @@ msgstr "Tags HTML são permitidos."
 
 msgid "Category"
 msgstr "Categoria"
-
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
 
 msgid "Public group"
 msgstr "Grupo público"
@@ -129,20 +100,8 @@ msgstr ""
 "todos os membros. Grupos sem envio automático contêm apenas imagens que são "
 "enviadas explicitamente a ele."
 
-msgid "Forum notice"
-msgstr ""
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-
 msgid "Last activity"
 msgstr "Ultima atividade"
-
-msgid "Date created"
-msgstr "Data de criação"
 
 msgid "Members"
 msgstr "Membros"
@@ -187,9 +146,6 @@ msgstr "Salvar"
 msgid "Cancel"
 msgstr "Cancelar"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
 msgid "Delete group?"
 msgstr "Excluir grupo?"
 
@@ -227,9 +183,6 @@ msgstr "Sair do grupo"
 msgid "Moderate join requests"
 msgstr "Solicitações para se juntar moderadas"
 
-msgid "Sort images"
-msgstr ""
-
 msgid "This group is public"
 msgstr "Este grupo é público"
 
@@ -259,9 +212,8 @@ msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"Um grupo criado em %(date_created)s, de propriedade de <a href="
-"\"%(owner_url)s\">%(owner)s</a>, categorizado como <strong>%(category)s</"
-"strong>."
+"Um grupo criado em %(date_created)s, de propriedade de <a href=\"%(owner_url)"
+"s\">%(owner)s</a>, categorizado como <strong>%(category)s</strong>."
 
 msgid "Group forum"
 msgstr "Fórum do grupo"
@@ -271,14 +223,17 @@ msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
-"<strong>%(post_count)s</strong> postagens em <strong>%(topic_count)s</"
-"strong> tópicos"
+"<strong>%(post_count)s</strong> postagens em <strong>%(topic_count)s</strong>"
+" tópicos"
 
 msgid "View all"
 msgstr "Ver tudo"
 
 msgid "New topic"
 msgstr "Novo tópico"
+
+msgid "Please join the group to view its forum."
+msgstr "Por favor, se junte ao grupo para ver seu fórum."
 
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
@@ -342,29 +297,28 @@ msgstr "Grupos"
 msgid "Sort"
 msgstr "Classificar"
 
-msgid "Search"
-msgstr ""
+msgid "Date created"
+msgstr "Data de criação"
 
-msgid "Private groups you own"
-msgstr ""
+msgid "Your private groups"
+msgstr "Seus grupos privados"
 
-msgid "Private groups you are a member of"
-msgstr ""
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr "Você possui, ou é membro ou foi convidado para esses grupos privados."
 
-msgid "Private groups you are invited to"
-msgstr ""
-
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
+msgctxt "group"
+msgid "Create private group"
+msgstr "Criar grupo privado"
 
 msgid "Public groups"
 msgstr "Grupos públicos"
+
+msgid "Open to the whole community."
+msgstr "Aberto a toda a comunidade."
+
+msgctxt "group"
+msgid "Create public group"
+msgstr "Criar grupo público"
 
 msgid "No groups available."
 msgstr "Nenhum grupo disponível."
@@ -429,12 +383,6 @@ msgstr "Rejeitar"
 msgid "This group has no join requests."
 msgstr "Este grupo não possui solicitações para se juntar."
 
-msgid "Something went wrong, Please try again later."
-msgstr ""
-
-msgid "Type your message here..."
-msgstr ""
-
 msgid "You cannot add images that are not yours!"
 msgstr "Você não pode adicionar imagens que não são suas!"
 
@@ -469,24 +417,101 @@ msgstr "Você saiu do grupo"
 msgid "Form saved"
 msgstr "Formulário salvo"
 
-#~ msgid "Please join the group to view its forum."
-#~ msgstr "Por favor, se junte ao grupo para ver seu fórum."
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Apenas as seguintes categorias suportam a submissão automática: Rede "
+"profissional, Clube ou associação, Comunidade da internet, Amigos ou "
+"parceiros, Área geográfica"
 
-#~ msgid "Your private groups"
-#~ msgstr "Seus grupos privados"
+#, fuzzy
+msgid "Publication"
+msgstr "Publicação"
 
-#~ msgid ""
-#~ "You own, or are a member of, or were invited to, these private groups."
-#~ msgstr ""
-#~ "Você possui, ou é membro ou foi convidado para esses grupos privados."
+#, fuzzy
+msgid "Title"
+msgstr "Título"
 
-#~ msgctxt "group"
-#~ msgid "Create private group"
-#~ msgstr "Criar grupo privado"
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Tag chave/valor"
 
-#~ msgid "Open to the whole community."
-#~ msgstr "Aberto a toda a comunidade."
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Ordenação padrão de imagens"
 
-#~ msgctxt "group"
-#~ msgid "Create public group"
-#~ msgstr "Criar grupo público"
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Ordenação de tags chave/valor de imagens"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Se as imagens forem ordenadas por uma tag chave/valor, por favor especifique "
+"qual. <a target='_blank' href='https://welcome.astrobin.com/features/groups'>"
+"Saiba mais.<\\/a>"
+
+#, fuzzy
+msgid "Search"
+msgstr "Buscar"
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Por favor, não adicione mais de 100 imagens de uma vez, obrigado!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Ordenar imagens"
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "Grupos privados que você possui"
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "Grupos privados dos quais você é membro"
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "Grupos privados para os quais você foi convidado"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Grupos públicos que você possui"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Grupos públicos dos quais você é membro"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Grupos públicos para os quais você foi convidado"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Aviso do fórum"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Digite um 'Aviso do fórum' para ser exibido acima do formulário de 'novo "
+"tópico'. Use isso para comunicar regras do fórum, isenções de "
+"responsabilidade ou informações importantes aos usuários antes que eles "
+"criem um novo post. Certifique-se de que sua mensagem seja clara e concisa."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Algo deu errado, por favor tente novamente mais tarde."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Digite sua mensagem aqui..."
