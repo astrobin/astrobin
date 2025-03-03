@@ -10,61 +10,8 @@
 {% load tags %}
 
 <style>
-  .translated-content {
-    background-color: rgba(255, 255, 0, 0.07);
-    padding: 10px;
-    border-left: 3px solid rgba(255, 255, 0, 0.5);
-    margin-bottom: 15px;
-    display: block;
-    position: relative;
-  }
-  
-  .translated-content:before {
+  .post-content .translated-content:before {
     content: "{% trans 'Translated'|escapejs %}";
-    display: block;
-    font-size: 11px;
-    color: #999;
-    margin-bottom: 5px;
-    font-style: italic;
-  }
-  
-  /* Dropdown menu styling */
-  .dropdown-menu {
-    right: 0;
-    left: auto !important; /* Override Bootstrap's default positioning */
-    min-width: 160px;      /* Set minimum width */
-  }
-  
-  .dropdown-menu li a {
-    display: block;
-    padding: 5px 15px;
-    clear: both;
-    text-decoration: none;
-    white-space: nowrap;
-    text-align: left;
-    font-size: 11px;
-  }
-  
-  .dropdown-menu li {
-    list-style: none;
-  }
-  
-  /* Add hover effect for dropdown items */
-  .dropdown-menu li a:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Color classes for dropdown items */
-  .dropdown-menu .text-danger {
-    color: #a94442;
-  }
-  
-  .dropdown-menu .text-success {
-    color: #3c763d;
-  }
-  
-  .dropdown-menu .text-warning {
-    color: #8a6d3b;
   }
 </style>
 
@@ -197,15 +144,15 @@
                         class="btn btn-mini bb-quote-link no-page-loader running {% button_loading_class %}"
                         disabled="disabled"
                         rel="tooltip"
-                        title="{% trans "Quote this entire post in your reply." %}">
+                        title="{% trans "Quote this post in your reply. If you select text, only the selection will be quoted." %}">
                         <i class="icon-comment"></i> {% trans "Quote" %}
                         {% button_loading_indicator %}
                     </button>
                 {% endif %}
 
-                <!-- Translate button -->
+                <!-- Translate button (hidden by default, shown only when needed) -->
                 {% if user.is_authenticated %}
-                    <a href="#" class="btn btn-mini btn-translate-post" data-post-id="{{ post.id }}">
+                    <a href="#" class="btn btn-mini btn-translate-post" data-post-id="{{ post.id }}" style="display: none;">
                         <i class="icon-file-alt"></i> <span class="translate-text">{% trans "Translate" %}</span>
                     </a>
                 {% endif %}
@@ -248,21 +195,13 @@
                     {% endif %}
                 {% endif %}
                 
-                <!-- Dropdown menu -->
+                <!-- Dropdown menu - only shown to authenticated users -->
+                {% if user.is_authenticated %}
                 <div class="dropdown d-inline-block">
                     <button class="btn btn-mini dropdown-toggle" type="button" id="postActionsDropdown-{{ post.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="icon-ellipsis-vertical"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="postActionsDropdown-{{ post.id }}">
-                        
-                        <!-- Quote selected -->
-                        {% if user|pybb_may_create_post:post.topic %}
-                            <li>
-                                <a href="#" class="dropdown-item bb-quote-selected-link" disabled="disabled" title="{% trans "You must select some text first." %}">
-                                    {% trans "Quote selected" %}
-                                </a>
-                            </li>
-                        {% endif %}
                         
                         <!-- Edit -->
                         {% if post|pybb_posted_by:user or user.is_superuser %}
@@ -317,6 +256,7 @@
                         {% endif %}
                     </ul>
                 </div>
+                {% endif %}
             </div>
         </td>
     </tr>
@@ -394,6 +334,71 @@
             }
 
             highlightPost();
+            
+            // Function to handle text selection including touch devices
+            function handleSelection() {
+                const selection = astrobin_common.get_selected_text();
+                if (selection && selection.trim().length > 0) {
+                    // Store the selected text for use
+                    window.selectedPostText = selection;
+                    window.selectedPostAuthor = null;
+                    
+                    // Try to find the containing post
+                    const selectionObj = window.getSelection();
+                    if (selectionObj && selectionObj.anchorNode) {
+                        const $container = $(selectionObj.anchorNode).closest('table.post');
+                        if ($container.length) {
+                            const author = $container.find('.post-author').text().trim();
+                            if (author) {
+                                window.selectedPostAuthor = author;
+                            }
+                        }
+                    }
+                } else {
+                    // Clear the selection when no selection is detected
+                    window.selectedPostText = null;
+                    window.selectedPostAuthor = null;
+                }
+            }
+            
+            // Add event handlers for both mouse and touch devices
+            $(document).on('mouseup', handleSelection);
+            $(document).on('touchend', handleSelection);
+            
+            // Load saved translations when page loads
+            setTimeout(function loadSavedForumTranslations() {
+                // Get forum post translations from the system
+                const forumTranslations = astrobin_common.translationSystem.getTranslations('forum');
+                
+                // Process each post on the page
+                $('.post').each(function() {
+                    const postId = $(this).data('id');
+                    const prefs = forumTranslations[postId];
+                    
+                    if (prefs && prefs.translated && prefs.content) {
+                        // Auto-translate this post
+                        const $originalContent = $(`#post-content-${postId}`);
+                        const $translatedContent = $(`#post-translated-content-${postId}`);
+                        const $button = $(this).find('.btn-translate-post');
+                        
+                        // Set translated content
+                        $translatedContent.html(prefs.content);
+                        
+                        // Update button
+                        $button.find('.translate-text').text('{% trans "See original"|escapejs %}');
+                        if ($button.attr('data-detected-language') === undefined && prefs.language) {
+                            $button.attr('data-detected-language', prefs.language);
+                        }
+                        
+                        // Show translation
+                        $originalContent.hide();
+                        $translatedContent.css('display', 'block');
+                        
+                        // Make button visible
+                        $button.css('display', 'inline-block');
+                    }
+                });
+            }, 500);
 
             // Translation functionality
             // Use one-time binding to prevent multiple registrations
@@ -417,6 +422,8 @@
                     $originalContent.show();
                     // No need to change icon class, it's already icon-file-alt
                     $button.find('.translate-text').text('{% trans "Translate"|escapejs %}');
+                    // Update storage
+                    astrobin_common.translationSystem.saveTranslation('forum', postId, false);
                     return;
                 }
                 
@@ -426,6 +433,14 @@
                     $translatedContent.css('display', 'block');  // Force show with CSS
                     // Keep the icon-file-alt class for consistency
                     $button.find('.translate-text').text('{% trans "See original"|escapejs %}');
+                    // Update storage
+                    astrobin_common.translationSystem.saveTranslation(
+                        'forum', 
+                        postId, 
+                        true, 
+                        $translatedContent.html(), 
+                        $button.attr('data-detected-language')
+                    );
                     return;
                 }
                 
@@ -433,54 +448,36 @@
                 $button.find('i').removeClass('icon-file-alt').addClass('icon-spinner');
                 
                 const originalText = $originalContent.html();
-                const currentLang = $('html').attr('lang') || 'en';
+                // Use Django's LANGUAGE_CODE first, with browser language as fallback
+                const djangoLang = '{{ LANGUAGE_CODE }}'.split('-')[0].toLowerCase();
+                const currentLang = djangoLang || $('html').attr('lang') || 'en';
+                const detectedLanguage = $button.attr('data-detected-language') || 'auto';
                 
-                // Use the JSON API service to translate
-                $.ajax({
-                    url: '/json-api/common/translate/',
-                    type: 'POST',
-                    timeout: 30000, // Longer timeout for translation
-                    contentType: 'application/json',
-                    dataType: 'json',  // Explicitly parse response as JSON
-                    data: JSON.stringify({
-                        text: originalText,
-                        target_language: currentLang,
-                        format: 'html'
-                        // We're omitting source_language and letting the server detect it
-                    }),
-                    success: function(response) {
-                        try {
-                            // If response is a string (not parsed JSON), try to parse it
-                            if (typeof response === 'string') {
-                                response = JSON.parse(response);
-                            }
-                            
-                            // Ensure translation exists and is a string
-                            if (response && typeof response.translation === 'string') {
-                                // Set the translated content and make visible
-                                $translatedContent.html(response.translation);
-                                
-                                // Hide original, show translated
-                                $originalContent.hide();
-                                $translatedContent.css('display', 'block');  // Force show with CSS
-                                
-                                // Update button UI
-                                $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
-                                $button.find('.translate-text').text('{% trans "See original"|escapejs %}');
-                            } else {
-                                throw new Error("Invalid translation in response");
-                            }
-                        } catch (e) {
-                            console.error("Error processing translation response:", e);
-                            console.error("Response was:", response);
-                            $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
-                            alert('{% trans "Translation failed. Please try again later."|escapejs %}');
-                        }
+                // Use the translation system
+                astrobin_common.translationSystem.translateContent({
+                    text: originalText,
+                    sourceLanguage: detectedLanguage,
+                    targetLanguage: currentLang,
+                    format: 'html',
+                    itemType: 'forum',
+                    itemId: postId,
+                    onStart: function() {
+                        // Already handled by setting spinner above
                     },
-                    error: function(xhr, status, error) {
-                        // Show error message with details
-                        console.error("Translation API error:", status, error);
-                        console.error("Response text:", xhr.responseText);
+                    onSuccess: function(translation) {
+                        // Set the translated content and make visible
+                        $translatedContent.html(translation);
+                        
+                        // Hide original, show translated
+                        $originalContent.hide();
+                        $translatedContent.css('display', 'block');  // Force show with CSS
+                        
+                        // Update button UI
+                        $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
+                        $button.find('.translate-text').text('{% trans "See original"|escapejs %}');
+                    },
+                    onError: function(error) {
+                        console.error("Translation error:", error);
                         $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
                         alert('{% trans "Translation failed. Please try again later."|escapejs %}');
                     }
