@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:32+0000\n"
 "PO-Revision-Date: 2014-02-24 20:42+0000\n"
 "Last-Translator: Ayatola <ayatola@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -693,7 +693,7 @@ msgstr "Suíça"
 msgid "Syrian Arab Republic"
 msgstr "Repúlica Árabe da Síria"
 
-msgid "Taiwan"
+msgid "Republic of China (Taiwan)"
 msgstr ""
 
 msgid "Tajikistan"
@@ -942,9 +942,6 @@ msgstr "Longitude (minutos)"
 
 msgid "Longitude (seconds)"
 msgstr "Longitude (segundos)"
-
-msgid "Are you a robot?"
-msgstr ""
 
 msgid ""
 "This email address was not found in our database. Email address might be "
@@ -3230,9 +3227,6 @@ msgstr "Direitos autorais"
 msgid "The images on this websites are copyright of their respective owners."
 msgstr ""
 
-msgid "Back to top"
-msgstr "Voltar ao topo"
-
 msgid ""
 "AstroBin detected that your password does not meet security requirements."
 msgstr ""
@@ -3697,6 +3691,9 @@ msgid ""
 "more.%(_1)s"
 msgstr ""
 
+msgid "My places"
+msgstr "Meus lugares"
+
 msgid "Public Gallery"
 msgstr ""
 
@@ -3706,14 +3703,14 @@ msgstr "Área de Testes"
 msgid "Bookmarks"
 msgstr ""
 
-msgid "My messages"
-msgstr "Minhas mensagens"
+msgid "Messages"
+msgstr "Mensagens"
+
+msgid "Marketplace listings"
+msgstr ""
 
 msgid "API Keys"
 msgstr "Chaves para API"
-
-msgid "My settings"
-msgstr "Minhas configurações"
 
 msgid "Disable high contrast theme"
 msgstr ""
@@ -4191,6 +4188,9 @@ msgid "Basic annotations"
 msgstr ""
 
 msgid "Advanced annotations"
+msgstr ""
+
+msgid "Advanced annotations (large font)"
 msgstr ""
 
 msgid "Basic information"
@@ -4733,6 +4733,19 @@ msgstr "Equipamento utilizado"
 msgid "Edit your image: advanced plate-solving settings"
 msgstr ""
 
+msgid "Note:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Based on the image's field radius, some features are not available for this "
+"field size category (%(category)s)."
+msgstr ""
+
+msgid ""
+"The following features have been turned off by default and cannot be enabled:"
+msgstr ""
+
 msgid "Save and plate-solve again"
 msgstr ""
 
@@ -4969,6 +4982,9 @@ msgstr "Nenhum resultado encontrado"
 
 msgid "Searching"
 msgstr "Pesquisando"
+
+msgid "My messages"
+msgstr "Minhas mensagens"
 
 msgid "Participants"
 msgstr ""
@@ -5417,6 +5433,14 @@ msgstr "Sua imagem teve uma identificação de objetos bem sucedida."
 msgid ""
 "AstroBin completed the advanced plate-solution of your image: <strong>"
 "%(title)s</strong>."
+msgstr ""
+
+#, python-format
+msgid ""
+"AstroBin applied default settings based on your image's field size "
+"(%(field_radius)s degrees). Different field sizes receive different "
+"annotation settings for optimal results. You are free to change these "
+"settings using the \"Edit plate-solving settings\" menu in your image."
 msgstr ""
 
 #, python-format
@@ -6398,11 +6422,6 @@ msgstr ""
 msgid "Read the manifesto."
 msgstr ""
 
-msgid ""
-"\n"
-"    Want to learn about the IOTD/TP process?\n"
-msgstr ""
-
 msgid "Your image was voted Top Pick"
 msgstr ""
 
@@ -6978,7 +6997,7 @@ msgid ""
 "in READ ONLY mode."
 msgstr ""
 
-msgid "For more information, please check out our Twitter feed:"
+msgid "For more information, please check out our X feed:"
 msgstr ""
 
 msgid "Account activation"
@@ -6986,6 +7005,15 @@ msgstr ""
 
 msgid "Account successfully activated"
 msgstr "Conta ativada com sucesso"
+
+msgid "You have been logged in automatically."
+msgstr ""
+
+msgid "You'll be redirected momentarily..."
+msgstr ""
+
+msgid "Go to homepage"
+msgstr ""
 
 msgid "Account activation failed"
 msgstr "Falha na ativação da conta"
@@ -7005,9 +7033,18 @@ msgstr "Seu perfil agora está ativo."
 msgid "Account activated"
 msgstr ""
 
+msgid "Activate your AstroBin account"
+msgstr ""
+
+msgid "Please use the button below to activate your AstroBin account:"
+msgstr ""
+
+msgid "Activate your account"
+msgstr ""
+
 msgid ""
-"Hi,\n"
-"please use the following link to activate your AstroBin account:"
+"If the button doesn't work, you can also copy and paste this URL into your "
+"browser:"
 msgstr ""
 
 #, python-format
@@ -7015,6 +7052,11 @@ msgid "Link is valid for %(expiration_days)s days."
 msgstr "O link é válido por %(expiration_days)s dias."
 
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
+msgstr ""
+
+msgid ""
+"Hi,\n"
+"please use the following link to activate your AstroBin account:"
 msgstr ""
 
 msgid ""
@@ -7090,25 +7132,45 @@ msgstr ""
 msgid "Registration completed"
 msgstr ""
 
-msgid "You are now registered"
+msgid "Check your email for activation instructions"
 msgstr ""
 
 msgid ""
-"To confirm your e-mail address, we have sent you an e-mail with an "
-"activation link."
+"We've sent an activation link to your email address. Please check your inbox "
+"(and spam folder) to complete your registration."
 msgstr ""
 
-msgid ""
-"If you don't receive the e-mail within a few minutes, remember to check your "
-"spam folder."
+msgid "Resend activation email"
 msgstr ""
 
-msgid "Register with AstroBin"
-msgstr "Registre-se no AstroBin"
+msgid "Your email address"
+msgstr ""
 
-msgid ""
-"By registering with AstroBin, you agree to our <a href=\"https://welcome."
-"astrobin.com/terms-of-service\">terms of service</a>."
+msgid "Email"
+msgstr ""
+
+msgid "Resend"
+msgstr ""
+
+msgid "Please wait"
+msgstr ""
+
+msgid "seconds before trying again."
+msgstr ""
+
+msgid "Please enter your email address."
+msgstr ""
+
+msgid "Sent. Send again?"
+msgstr ""
+
+msgid "An error occurred. Please try again later."
+msgstr ""
+
+msgid "Join AstroBin"
+msgstr ""
+
+msgid "One small click for you, one giant leap for your astrophotography!"
 msgstr ""
 
 msgid "This list is currently empty."
@@ -7118,6 +7180,13 @@ msgid "Account"
 msgstr ""
 
 msgid "Back"
+msgstr ""
+
+msgid "Don't have an account?"
+msgstr ""
+
+msgctxt "Sign up"
+msgid "Register"
 msgstr ""
 
 msgid "Backup tokens"
@@ -8528,7 +8597,7 @@ msgid ""
 "in a while: the more images you have, the more time it will take."
 msgstr ""
 
-msgid "Referral code"
+msgid "Keep me updated with newsletters and important announcements"
 msgstr ""
 
 msgid "Email address"
@@ -8537,27 +8606,53 @@ msgstr ""
 msgid "AstroBin doesn't share your email address with anyone."
 msgstr ""
 
-msgid "Sorry, your username cannot contain the \"@\" character."
-msgstr ""
-
-msgid "Sorry, this username already exists with a different capitalization."
-msgstr ""
-
 msgid "First name"
 msgstr ""
 
 msgid "Last name"
 msgstr ""
 
-msgid ""
-"This is your handle on AstroBin and will be part of the URL to your gallery. "
-"If you do not specify afirst and last name below, it will also be how others "
-"see your name. Please use letters, digits, and the special characters ./+/-/"
-"_ only."
+msgid "Choose a secure password."
 msgstr ""
 
-#~ msgid "My places"
-#~ msgstr "Meus lugares"
+msgid "Enter the same password again for verification."
+msgstr ""
+
+msgid "I agree to the"
+msgstr ""
+
+msgid "Sorry, your username cannot contain the \"@\" character."
+msgstr ""
+
+msgid "Sorry, this username already exists with a different capitalization."
+msgstr ""
+
+msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
+msgstr ""
+
+msgid "Email is required."
+msgstr ""
+
+msgid ""
+"If the email exists in our system, a new activation email has been sent."
+msgstr ""
+
+#, python-brace-format
+msgid "Please wait {0} seconds before requesting another email."
+msgstr ""
+
+#, python-brace-format
+msgid "A new activation email has been sent to {0}."
+msgstr ""
+
+#~ msgid "Back to top"
+#~ msgstr "Voltar ao topo"
+
+#~ msgid "My settings"
+#~ msgstr "Minhas configurações"
+
+#~ msgid "Register with AstroBin"
+#~ msgstr "Registre-se no AstroBin"
 
 #~ msgid "Contact"
 #~ msgstr "Contato"
@@ -8626,9 +8721,6 @@ msgstr ""
 
 #~ msgid "Average integration time"
 #~ msgstr "Tempo médio de captura"
-
-#~ msgid "Messages"
-#~ msgstr "Mensagens"
 
 #~ msgid "No date specified"
 #~ msgstr "Sem data especificada"

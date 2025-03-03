@@ -1,10 +1,94 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-03 22:32+0000\n"
 "Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Member since"
+msgstr "会員登録日"
+
+msgid "Last seen online"
+msgstr "最終訪問日"
+
+msgid "Total integration time"
+msgstr "全露出時間"
+
+msgid "hours"
+msgstr "時間"
+
+msgid "Average integration time"
+msgstr "平均露出時間"
+
+msgid "Forum posts written"
+msgstr "フォーラムへの投稿"
+
+msgid "Comments written"
+msgstr "書き込みされたコメント"
+
+msgid "Comments received"
+msgstr "いただいたコメント"
+
+msgid "Likes received"
+msgstr "いただいた「いいね！」"
+
+msgid "Views received"
+msgstr "いただいた「閲覧数」"
+
+msgid "No date specified"
+msgstr "日付指定なし"
+
+#, fuzzy
+msgid "No optics or no cameras"
+msgstr "光学機器なし、またはカメラなし"
+
+#, fuzzy
+msgid "Equipment images"
+msgstr "機材の画像"
+
+msgid "Deep sky"
+msgstr "ディープスカイ"
+
+msgid "Solar system"
+msgstr "太陽系"
+
+msgid "Extremely wide field"
+msgstr "超広角写野"
+
+msgid "Star trails"
+msgstr "流星"
+
+msgid "Northern lights"
+msgstr "オーロラ"
+
+msgid "Noctilucent clouds"
+msgstr "夜光雲"
+
+#, fuzzy
+msgid "Landscape"
+msgstr "風景"
+
+#, fuzzy
+msgid "Artificial satellite"
+msgstr "人工衛星"
+
+msgid "Gear"
+msgstr "機材"
+
+msgid "Other"
+msgstr "その他"
+
+msgid "All"
+msgstr "すべて"
+
+msgid "n/a"
+msgstr "n/a"
+
+msgid "No acquisition details specified"
+msgstr "撮影詳細が指定されていない"
 
 msgid "You follow each other"
 msgstr "相互フォロー"
@@ -47,7 +131,9 @@ msgid ""
 "that your email works well or you will get the same warning message again. "
 "Thanks!"
 msgstr ""
-"お客様のメールバウンスレポートは、AstroBinから削除されました。メールが正常に動作しない場合、再度同じ警告メッセージが表示されますので、ご確認ください。ありがとうございました。"
+"お客様のメールバウンスレポートは、AstroBinから削除されました。メールが正常に"
+"動作しない場合、再度同じ警告メッセージが表示されますので、ご確認ください。あ"
+"りがとうございました。"
 
 msgid ""
 "Your spam reports have been removed from AstroBin. Please make sure you "
@@ -55,341 +141,286 @@ msgid ""
 "don't want to receive emails from AstroBin, look for the settings link "
 "that's at the bottom of every email. Thanks!"
 msgstr ""
-"あなたのスパム報告はAstroBinから削除されました。フィルターやルールで、AstroBinのメールを常にスパムとしてマークしていないか、ご確認ください"
-" AstroBinからのメールを受け取りたくない場合は、すべてのメールの一番下にある設定リンクを探してください。ありがとうございました。"
+"あなたのスパム報告はAstroBinから削除されました。フィルターやルールで、"
+"AstroBinのメールを常にスパムとしてマークしていないか、ご確認ください AstroBin"
+"からのメールを受け取りたくない場合は、すべてのメールの一番下にある設定リンク"
+"を探してください。ありがとうございました。"
 
-msgid "I wasn't really affected by the data loss"
-msgstr "データ消失の影響をあまり受けていませんでした"
+#~ msgid "I wasn't really affected by the data loss"
+#~ msgstr "データ消失の影響をあまり受けていませんでした"
 
-msgid "I don't require compensation: I want to support AstroBin"
-msgstr "補償は求めない：AstroBinをサポートしたい"
+#~ msgid "I don't require compensation: I want to support AstroBin"
+#~ msgstr "補償は求めない：AstroBinをサポートしたい"
 
-msgid "I would like to try AstroBin Ultimate for free for 1 month"
-msgstr "AstroBin Ultimateを1ヶ月間無料で試用したい。"
+#~ msgid "I would like to try AstroBin Ultimate for free for 1 month"
+#~ msgstr "AstroBin Ultimateを1ヶ月間無料で試用したい。"
 
-msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
-msgstr "AstroBin Ultimateを3ヶ月間無料で試用したい。"
+#~ msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+#~ msgstr "AstroBin Ultimateを3ヶ月間無料で試用したい。"
 
-msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
-msgstr "AstroBin Ultimateを6ヶ月間無料で試用したい。"
+#~ msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+#~ msgstr "AstroBin Ultimateを6ヶ月間無料で試用したい。"
 
-msgid "Requested compensation"
-msgstr "補償を要求する"
+#~ msgid "Requested compensation"
+#~ msgstr "補償を要求する"
 
-msgid "Please indicate if and how much you would like to be compensated."
-msgstr "補償の有無と金額をご記入ください。"
+#~ msgid "Please indicate if and how much you would like to be compensated."
+#~ msgstr "補償の有無と金額をご記入ください。"
 
-msgid "Your migration data"
-msgstr "移行済みデータ"
+#~ msgid "Your migration data"
+#~ msgstr "移行済みデータ"
 
-msgid "Total amount donated last year"
-msgstr "昨年の全寄付金額"
+#~ msgid "Total amount donated last year"
+#~ msgstr "昨年の全寄付金額"
 
-msgid "First payment"
-msgstr "初回の支払い"
+#~ msgid "First payment"
+#~ msgstr "初回の支払い"
 
-msgid "Price for Premium"
-msgstr "プレミアムに対しての価格"
+#~ msgid "Price for Premium"
+#~ msgstr "プレミアムに対しての価格"
 
-msgid "Days covered"
-msgstr "対象期間"
+#~ msgid "Days covered"
+#~ msgstr "対象期間"
 
-msgid "Premium expiration"
-msgstr "プレミアムの期限切れ"
+#~ msgid "Premium expiration"
+#~ msgstr "プレミアムの期限切れ"
 
-msgid "Your donations last year"
-msgstr "昨年のあなたの寄付金額"
+#~ msgid "Your donations last year"
+#~ msgstr "昨年のあなたの寄付金額"
 
-msgid "Amount"
-msgstr "金額"
+#~ msgid "Amount"
+#~ msgstr "金額"
 
-msgid "Date"
-msgstr "日付"
+#~ msgid "Date"
+#~ msgstr "日付"
 
-msgid "Subscription"
-msgstr "定期契約"
+#~ msgid "Subscription"
+#~ msgstr "定期契約"
 
-msgid "Data loss compensation request"
-msgstr "データ損失についての補償を要求"
+#~ msgid "Data loss compensation request"
+#~ msgstr "データ損失についての補償を要求"
 
-msgid ""
-"You are eligible for compensation due to the data loss that happened on "
-"February 16th, 2020."
-msgstr "2020年2月16日に発生したデータ消失により、あなたは補償の対象となります。"
+#~ msgid ""
+#~ "You are eligible for compensation due to the data loss that happened on "
+#~ "February 16th, 2020."
+#~ msgstr ""
+#~ "2020年2月16日に発生したデータ消失により、あなたは補償の対象となります。"
 
-msgid ""
-"If you haven't had the chance, please take a minute to read what happened at "
-"the following page:"
-msgstr "まだご覧になっていない方は、以下のページでその時の状況をご覧ください。"
+#~ msgid ""
+#~ "If you haven't had the chance, please take a minute to read what happened "
+#~ "at the following page:"
+#~ msgstr ""
+#~ "まだご覧になっていない方は、以下のページでその時の状況をご覧ください。"
 
-msgid "Official statement and post-mortem"
-msgstr "公式声明と事後報告"
+#~ msgid "Official statement and post-mortem"
+#~ msgstr "公式声明と事後報告"
 
-msgid "Please accept our apology once more."
-msgstr "改めてお詫び申し上げます。"
+#~ msgid "Please accept our apology once more."
+#~ msgstr "改めてお詫び申し上げます。"
 
-msgid "Please chooce your compensation from the list below"
-msgstr "下記より補償内容をお選びください。"
+#~ msgid "Please chooce your compensation from the list below"
+#~ msgstr "下記より補償内容をお選びください。"
 
-msgid ""
-"Compensation is offered in the form of free time on the new AstroBin "
-"subscription tier called \"Ultimate\"."
-msgstr "補償は、AstroBinの新しいサブスクリプション層である「Ultimate」のフリータイムという形で提供されます。"
+#~ msgid ""
+#~ "Compensation is offered in the form of free time on the new AstroBin "
+#~ "subscription tier called \"Ultimate\"."
+#~ msgstr ""
+#~ "補償は、AstroBinの新しいサブスクリプション層である「Ultimate」のフリータイ"
+#~ "ムという形で提供されます。"
 
-#, python-format
-msgid ""
-"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
-"target=\"_blank\">the pricing page</a>."
-msgstr ""
-"AstroBin Ultimateの詳細については<a href=\"%(url)s\" target=\"_blank\">価格ページ</a>"
-"をご覧ください。"
+#~ msgid ""
+#~ "To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+#~ "target=\"_blank\">the pricing page</a>."
+#~ msgstr ""
+#~ "AstroBin Ultimateの詳細については<a href=\"%(url)s\" target=\"_blank\">価"
+#~ "格ページ</a>をご覧ください。"
 
-msgid "Submit"
-msgstr "送信する"
+#~ msgid "Submit"
+#~ msgstr "送信する"
 
-msgid "Data loss compensation reauest"
-msgstr "データ損失についての補償を要求"
+#~ msgid "Data loss compensation reauest"
+#~ msgstr "データ損失についての補償を要求"
 
-msgid "Already done"
-msgstr "既に実施済み"
-
-msgid "Sorry, you can't do this again."
-msgstr "申し訳ありませんが、もうできません。"
-
-msgid "Your preference was already recorded and cannot be changed."
-msgstr "あなたの希望はすでに記録されており、変更することはできません。"
-
-msgid "Not eligible"
-msgstr "対象外です"
-
-msgid "It looks like you're not eligible"
-msgstr "あなたは対象外のようです"
-
-msgid ""
-"Sorry, but this page is for people who were on AstroBin Premium on the day "
-"that the data loss incident happened, and it looks like you aren't among "
-"them."
-msgstr ""
-"申し訳ありませんが、このページはデータ消失事故が起きた日にAstroBin "
-"Premiumをご利用になっていた方のためのもので、その中にあなたは含まれていないようです。"
-
-msgid "Success"
-msgstr "成功"
-
-msgid "All done!"
-msgstr "すべて完了です。"
-
-msgid ""
-"Your preference has been recorded and it has already been applied. Thank you!"
-msgstr "あなたの希望は記録され、すでに適用されています。ありがとうございました。"
-
-msgid "Migrate donations"
-msgstr "寄付金を流用する"
-
-msgid "Error!"
-msgstr "エラー"
-
-msgid ""
-"Sorry, but it looks like you cannot migrate your donations to a Premium "
-"membership."
-msgstr "申し訳ございませんが、寄付金をプレミアム会員用に流用することはできないようです。"
-
-msgid "You already have a paid membership."
-msgstr "あなたは既に有料会員です。"
-
-msgid "We could not find any donations from you last year."
-msgstr "昨年においてあなたからの寄付は見つかりませんでした。"
-
-msgid ""
-"Your donations last year were not enough to cover a Premium subscription for "
-"this year."
-msgstr "あなたの昨年の寄付金では、今年度のプレミアム会員になるには十分ではありませんでした。"
-
-msgid "View the subscription plans"
-msgstr "定期契約プランをみる"
-
-msgid ""
-"As you  have made donations during the last year, you may choose to transfer "
-"the amount you donated towards an AstroBin Premium membership. The "
-"membership will have an expiration date proportionate to the amount you "
-"donated."
-msgstr ""
-"昨年、寄付をされた方は、寄付された金額をAstroBinプレミアム会員に利用することができます。会員資格の有効期限は、寄付した金額に比例します。"
-
-msgid ""
-"If you are feeling particularly cool and generous, you may choose to "
-"consider your past donations as a contribution to support past efforts, and "
-"pay again for a Premium plan. Up to you!"
-msgstr ""
-"特にクールで寛大な心をもった方は、過去の寄付を過去の取り組みを支援するための寄付と考え、プレミアムプラン向けにもう一度、お支払いいただくことも可能です。それは、あなた次第です。"
-
-msgid "No, I want to pay for Premium"
-msgstr "いいえ、プレミアム向けに払いたくありません"
-
-msgid "Your migration was successful."
-msgstr "あなたの寄付金の流用の利用は成功しました。"
-
-msgid "Thanks for supporting AstroBin!"
-msgstr "AstroBinをサポートいただきありがとうございました。"
-
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
-msgstr "あなたのAstroBinでの\"%(subscription_name)s\" 定期契約は期限切れです。"
-
-msgid ""
-"When a subscription on AstroBin expires, nothing happens to your images or "
-"any of your content. You are reverted to AstroBin Free and will not be able "
-"to upload new images until you renew, but you may continue to use AstroBin "
-"in all other aspects if you do not have any new images to share at the "
-"moment."
-msgstr ""
-"AstroBinの定期契約が終了しても、お客様の画像やコンテンツには何も起こりません。新たに更新するまではAstroBin "
-"Freeに戻り、新しい画像をアップロードすることができなくなります。しかし、現在新しく共有したい画像がない場合は、他のすべての機能面においてAstroBinを使い続けることができます。"
-
-msgid ""
-"When you are ready to renew your subscription, please visit the following "
-"page:"
-msgstr "更新のお手続きをされる場合は、以下のページをご覧ください："
-
-msgid "Your AstroBin subscription has just expired"
-msgstr "あなたのAstroBinでの定期契約は期限が切れています。"
-
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
-"week."
-msgstr "あなたのAstroBinでの\"%(subscription_name)s\" 定期契約はあと１週間で切れます。"
-
-msgid ""
-"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
-"still ongoing. Please wait until it is expired. Thank you!"
-msgstr "ご注意ください。現在、契約期間中は更新することができません。有効期限が切れるまでお待ちください。ありがとうございました。"
-
-msgid "Your AstroBin subscription will expire in one week"
-msgstr "Your AstroBin subscription will expire in one week"
-
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will be "
-"automatically renewed in one week."
-msgstr "あなたのAstroBinでの\"%(subscription_name)s\" 定期契約はあと１週間で自動更新されます。"
-
-msgid ""
-"You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically. If your subscription was created the "
-"regular way, via PayPal, then PayPal will attempt to charge your credit card "
-"or retrieve funds that are available in your account."
-msgstr ""
-"AstroBinで自動更新の定期契約をされているので、自動更新を試みます。お客様の定期契約がPayPalを通じて通常の方法で作成された場合、PayPalはお客様のクレジットカードに課金するか、お客様のアカウントにある資金を回収しようとします。"
-
-msgid ""
-"If your subscription was created manually via a bank transfer, please get in "
-"touch for a new payment."
-msgstr "銀行振り込みで手動で作成された定期購入の場合は、新たにお支払いいただく必要がありますので、ご連絡ください。"
-
-msgid "Thank you!"
-msgstr "ありがとうございました。"
-
-msgid "Your AstroBin subscription will be automatically renewed in one week"
-msgstr "あなたのAstroBinでの定期契約はあと１週間で自動更新されます。"
-
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will be "
-"automatically renewed in 30 days."
-msgstr "あなたのAstroBinでの\"%(subscription_name)s\" 定期契約はあと30日で自動更新されます。"
-
-msgid "Your AstroBin subscription will be automatically renewed in 30 days"
-msgstr "あなたのAstroBinでの定期契約はあと30日で自動更新されます。"
-
-msgid "No date specified"
-msgstr "日付指定なし"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "撮影用望遠鏡・レンズがない、または撮影用カメラが指定されていない"
-
-msgid "Gear images"
-msgstr "機材画像"
-
-msgid "Deep sky"
-msgstr "ディープスカイ"
-
-msgid "Solar system"
-msgstr "太陽系"
-
-msgid "Extremely wide field"
-msgstr "超広角写野"
-
-msgid "Star trails"
-msgstr "流星"
-
-msgid "Northern lights"
-msgstr "オーロラ"
-
-msgid "Noctilucent clouds"
-msgstr "夜光雲"
-
-msgid "Gear"
-msgstr "機材"
-
-msgid "Other"
-msgstr "その他"
-
-msgid "All"
-msgstr "すべて"
-
-msgid "n/a"
-msgstr "n/a"
-
-msgid "No subjects specified"
-msgstr "撮影対象が指定されていない"
-
-msgid "No acquisition details specified"
-msgstr "撮影詳細が指定されていない"
-
-msgid "Member since"
-msgstr "会員登録日"
-
-msgid "Last seen online"
-msgstr "最終訪問日"
-
-msgid "Total integration time"
-msgstr "全露出時間"
-
-msgid "hours"
-msgstr "時間"
-
-msgid "Average integration time"
-msgstr "平均露出時間"
-
-msgid "Forum posts written"
-msgstr "フォーラムへの投稿"
-
-msgid "Comments written"
-msgstr "書き込みされたコメント"
-
-msgid "Comments received"
-msgstr "いただいたコメント"
-
-msgid "Likes received"
-msgstr "いただいた「いいね！」"
-
-msgid "Views received"
-msgstr "いただいた「閲覧数」"
-
-#, fuzzy
-msgid "Landscape"
-msgstr "風景"
-
-#, fuzzy
-msgid "No optics or no cameras"
-msgstr "光学機器なし、またはカメラなし"
-
-#, fuzzy
-msgid "Equipment images"
-msgstr "機材の画像"
-
-#, fuzzy
-msgid "Artificial satellite"
-msgstr "人工衛星"
+#~ msgid "Already done"
+#~ msgstr "既に実施済み"
+
+#~ msgid "Sorry, you can't do this again."
+#~ msgstr "申し訳ありませんが、もうできません。"
+
+#~ msgid "Your preference was already recorded and cannot be changed."
+#~ msgstr "あなたの希望はすでに記録されており、変更することはできません。"
+
+#~ msgid "Not eligible"
+#~ msgstr "対象外です"
+
+#~ msgid "It looks like you're not eligible"
+#~ msgstr "あなたは対象外のようです"
+
+#~ msgid ""
+#~ "Sorry, but this page is for people who were on AstroBin Premium on the "
+#~ "day that the data loss incident happened, and it looks like you aren't "
+#~ "among them."
+#~ msgstr ""
+#~ "申し訳ありませんが、このページはデータ消失事故が起きた日にAstroBin Premium"
+#~ "をご利用になっていた方のためのもので、その中にあなたは含まれていないようで"
+#~ "す。"
+
+#~ msgid "Success"
+#~ msgstr "成功"
+
+#~ msgid "All done!"
+#~ msgstr "すべて完了です。"
+
+#~ msgid ""
+#~ "Your preference has been recorded and it has already been applied. Thank "
+#~ "you!"
+#~ msgstr ""
+#~ "あなたの希望は記録され、すでに適用されています。ありがとうございました。"
+
+#~ msgid "Migrate donations"
+#~ msgstr "寄付金を流用する"
+
+#~ msgid "Error!"
+#~ msgstr "エラー"
+
+#~ msgid ""
+#~ "Sorry, but it looks like you cannot migrate your donations to a Premium "
+#~ "membership."
+#~ msgstr ""
+#~ "申し訳ございませんが、寄付金をプレミアム会員用に流用することはできないよう"
+#~ "です。"
+
+#~ msgid "You already have a paid membership."
+#~ msgstr "あなたは既に有料会員です。"
+
+#~ msgid "We could not find any donations from you last year."
+#~ msgstr "昨年においてあなたからの寄付は見つかりませんでした。"
+
+#~ msgid ""
+#~ "Your donations last year were not enough to cover a Premium subscription "
+#~ "for this year."
+#~ msgstr ""
+#~ "あなたの昨年の寄付金では、今年度のプレミアム会員になるには十分ではありませ"
+#~ "んでした。"
+
+#~ msgid "View the subscription plans"
+#~ msgstr "定期契約プランをみる"
+
+#~ msgid ""
+#~ "As you  have made donations during the last year, you may choose to "
+#~ "transfer the amount you donated towards an AstroBin Premium membership. "
+#~ "The membership will have an expiration date proportionate to the amount "
+#~ "you donated."
+#~ msgstr ""
+#~ "昨年、寄付をされた方は、寄付された金額をAstroBinプレミアム会員に利用するこ"
+#~ "とができます。会員資格の有効期限は、寄付した金額に比例します。"
+
+#~ msgid ""
+#~ "If you are feeling particularly cool and generous, you may choose to "
+#~ "consider your past donations as a contribution to support past efforts, "
+#~ "and pay again for a Premium plan. Up to you!"
+#~ msgstr ""
+#~ "特にクールで寛大な心をもった方は、過去の寄付を過去の取り組みを支援するため"
+#~ "の寄付と考え、プレミアムプラン向けにもう一度、お支払いいただくことも可能で"
+#~ "す。それは、あなた次第です。"
+
+#~ msgid "No, I want to pay for Premium"
+#~ msgstr "いいえ、プレミアム向けに払いたくありません"
+
+#~ msgid "Your migration was successful."
+#~ msgstr "あなたの寄付金の流用の利用は成功しました。"
+
+#~ msgid "Thanks for supporting AstroBin!"
+#~ msgstr "AstroBinをサポートいただきありがとうございました。"
+
+#~ msgid ""
+#~ "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
+#~ msgstr ""
+#~ "あなたのAstroBinでの\"%(subscription_name)s\" 定期契約は期限切れです。"
+
+#~ msgid ""
+#~ "When a subscription on AstroBin expires, nothing happens to your images "
+#~ "or any of your content. You are reverted to AstroBin Free and will not be "
+#~ "able to upload new images until you renew, but you may continue to use "
+#~ "AstroBin in all other aspects if you do not have any new images to share "
+#~ "at the moment."
+#~ msgstr ""
+#~ "AstroBinの定期契約が終了しても、お客様の画像やコンテンツには何も起こりませ"
+#~ "ん。新たに更新するまではAstroBin Freeに戻り、新しい画像をアップロードする"
+#~ "ことができなくなります。しかし、現在新しく共有したい画像がない場合は、他の"
+#~ "すべての機能面においてAstroBinを使い続けることができます。"
+
+#~ msgid ""
+#~ "When you are ready to renew your subscription, please visit the following "
+#~ "page:"
+#~ msgstr "更新のお手続きをされる場合は、以下のページをご覧ください："
+
+#~ msgid "Your AstroBin subscription has just expired"
+#~ msgstr "あなたのAstroBinでの定期契約は期限が切れています。"
+
+#~ msgid ""
+#~ "Your \"%(subscription_name)s\" subscription on AstroBin will expire in "
+#~ "one week."
+#~ msgstr ""
+#~ "あなたのAstroBinでの\"%(subscription_name)s\" 定期契約はあと１週間で切れま"
+#~ "す。"
+
+#~ msgid ""
+#~ "PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
+#~ "still ongoing. Please wait until it is expired. Thank you!"
+#~ msgstr ""
+#~ "ご注意ください。現在、契約期間中は更新することができません。有効期限が切れ"
+#~ "るまでお待ちください。ありがとうございました。"
+
+#~ msgid "Your AstroBin subscription will expire in one week"
+#~ msgstr "Your AstroBin subscription will expire in one week"
+
+#~ msgid ""
+#~ "Your \"%(subscription_name)s\" subscription on AstroBin will be "
+#~ "automatically renewed in one week."
+#~ msgstr ""
+#~ "あなたのAstroBinでの\"%(subscription_name)s\" 定期契約はあと１週間で自動更"
+#~ "新されます。"
+
+#~ msgid ""
+#~ "You have an automatically renewing subscription on AstroBin, and we will "
+#~ "attempt to renew it automatically. If your subscription was created the "
+#~ "regular way, via PayPal, then PayPal will attempt to charge your credit "
+#~ "card or retrieve funds that are available in your account."
+#~ msgstr ""
+#~ "AstroBinで自動更新の定期契約をされているので、自動更新を試みます。お客様の"
+#~ "定期契約がPayPalを通じて通常の方法で作成された場合、PayPalはお客様のクレ"
+#~ "ジットカードに課金するか、お客様のアカウントにある資金を回収しようとしま"
+#~ "す。"
+
+#~ msgid ""
+#~ "If your subscription was created manually via a bank transfer, please get "
+#~ "in touch for a new payment."
+#~ msgstr ""
+#~ "銀行振り込みで手動で作成された定期購入の場合は、新たにお支払いいただく必要"
+#~ "がありますので、ご連絡ください。"
+
+#~ msgid "Thank you!"
+#~ msgstr "ありがとうございました。"
+
+#~ msgid "Your AstroBin subscription will be automatically renewed in one week"
+#~ msgstr "あなたのAstroBinでの定期契約はあと１週間で自動更新されます。"
+
+#~ msgid ""
+#~ "Your \"%(subscription_name)s\" subscription on AstroBin will be "
+#~ "automatically renewed in 30 days."
+#~ msgstr ""
+#~ "あなたのAstroBinでの\"%(subscription_name)s\" 定期契約はあと30日で自動更新"
+#~ "されます。"
+
+#~ msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+#~ msgstr "あなたのAstroBinでの定期契約はあと30日で自動更新されます。"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "撮影用望遠鏡・レンズがない、または撮影用カメラが指定されていない"
+
+#~ msgid "Gear images"
+#~ msgstr "機材画像"
+
+#~ msgid "No subjects specified"
+#~ msgstr "撮影対象が指定されていない"
