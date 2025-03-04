@@ -415,6 +415,22 @@ ALL_DATE_FORMATS = {
         'RANGE_SAME_MONTH': 'd1 - d2 E Y р.',
         'RANGE_SAME_YEAR': 'd1 E1 - d2 E2 Y р.',
     },
+    'be': {
+        'DATE_FORMAT': 'j E Y г.',
+        'DAY': 'j',
+        'MONTH': 'E',
+        'YEAR': 'Y',
+        'RANGE_SAME_MONTH': 'j1 - j2 E Y г.',
+        'RANGE_SAME_YEAR': 'j1 E1 - j2 E2 Y г.',
+    },
+    'sv': {
+        'DATE_FORMAT': 'j F Y',
+        'DAY': 'j',
+        'MONTH': 'F',
+        'YEAR': 'Y',
+        'RANGE_SAME_MONTH': 'j1 - j2 F Y',
+        'RANGE_SAME_YEAR': 'j1 F1 - j2 F2 Y',
+    },
 }
 
 # Automatically approve content from users with email addresses in the following domains.
