@@ -1,15 +1,18 @@
+import logging
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Fieldset, HTML, Layout
 from django import forms
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import Group, User
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
-from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 from registration.backends.hmac.views import RegistrationView, ActivationView
 from registration.forms import (RegistrationForm, RegistrationFormTermsOfService, RegistrationFormUniqueEmail)
@@ -24,6 +27,8 @@ from common.captcha import TurnstileField
 from common.constants import GroupName
 from common.services import AppRedirectionService
 from common.templatetags.common_tags import button_loading_class, button_loading_indicator
+
+log = logging.getLogger(__name__)
 
 
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):
@@ -318,23 +323,30 @@ class AstroBinActivationView(ActivationView):
                 request.session.modified = True
                 request.session.save()
                 
-                # Get the success URL directly
-                next_url = self.request.GET.get('next')
-                if next_url:
-                    success_url = next_url
-                elif activated_user.userprofile and activated_user.userprofile.enable_new_gallery_experience:
-                    success_url = AppRedirectionService.gallery_redirect(self.request, activated_user.username)
-                else:
-                    success_url = reverse('user_page', kwargs={'username': activated_user.username})
+                success_url = self.get_success_url(request, user)
                 
                 # Return a redirect response
                 from django.http import HttpResponseRedirect
                 return HttpResponseRedirect(success_url)
-        
-        # If we get here, either activation failed or login failed
-        # Use the parent view's get method to handle errors
-        return super().get(request, activation_key, *args, **kwargs)
-        
+
+        # If we get here, either activation failed or login failed. Redirect to an error page.
+        return redirect(self.get_success_url(request, None))
+
+    def get_success_url(self, request, user):
+        next_url = self.request.GET.get('next')
+
+        if next_url:
+            return next_url
+
+        if user:
+            if user.userprofile and user.userprofile.enable_new_gallery_experience:
+                return AppRedirectionService.gallery_redirect(self.request, user.username)
+            messages.success(request, _('Your account has been activated.'))
+            return reverse('user_page', kwargs={'username': user.username})
+
+        messages.success(request, _('Your account has been activated.'))
+        return reverse('auth_login')
+
     def activate(self, *args, **kwargs):
         """Pass all arguments to the parent's activate method"""
         return super().activate(*args, **kwargs)
