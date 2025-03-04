@@ -1,21 +1,64 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: zh-Hans\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "(deleted)"
-msgstr "（已删除）"
+msgid "You follow each other"
+msgstr "互相关注"
+
+msgid "Images"
+msgstr "作品"
+
+msgid "Followers"
+msgstr "粉丝"
+
+msgid "Following"
+msgstr "关注的人"
+
+msgid "User"
+msgstr "用户"
+
+msgid "No users."
+msgstr "没有用户。"
+
+msgid "Administrator"
+msgstr "管理员"
+
+msgid "Image moderator"
+msgstr "作品审核者"
+
+msgid "IOTD Submitter"
+msgstr "“今日最佳”提名人"
+
+msgid "IOTD Reviewer"
+msgstr "“今日最佳”审查委员"
+
+msgid "IOTD Judge"
+msgstr "“今日最佳”评审"
+
+msgid "Premium member"
+msgstr "Premium会员"
+
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr "您的电子邮件退回报告已从 AstroBin 中删除。请确保您的邮箱一切正常，否则您将再次收到相同的警告消息。谢谢！"
+
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"您的垃圾邮件报告已从 AstroBin 中删除。请确保您没有自动过滤，或在规则中将 AstroBin 的电子邮件标记为垃圾邮件！ 如果您不想接收来自 "
+"AstroBin 的电子邮件，请在任意一封电子邮件的底部查找设置链接。谢谢！"
 
 msgid "Type your comment here..."
 msgstr "在此输入您的评论..."
-
-msgid "Error"
-msgstr "错误"
 
 msgid "Cancel"
 msgstr "取消"
@@ -23,27 +66,59 @@ msgstr "取消"
 msgid "Add a comment"
 msgstr "添加评论"
 
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
+msgstr ""
+"请<a href=\"%(login_url)s\">l登录</a> 或 <a href=\"%(signup_url)s\">注册</a> 来进行评论"
+
 msgid "There are no comments yet."
 msgstr "现在还没有评论"
 
-msgid "The comment cannot be empty."
-msgstr "评论不能是空的"
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "此评论正在等待审核。"
 
-msgid "Delete"
-msgstr "删除"
-
-msgid "Undelete"
-msgstr "恢复删除"
-
-msgid "Edit"
-msgstr "编辑"
-
-msgid "Link"
-msgstr "链接"
+msgid "(deleted)"
+msgstr "（已删除）"
 
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "赞"
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "赞"
+
+msgid "Link"
+msgstr "链接"
+
+msgid "Undelete"
+msgstr "恢复删除"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Reply"
+msgstr "回复"
+
+msgid "Like"
+msgstr "赞"
+
+msgid "Unlike"
+msgstr "取消赞"
+
+msgid "The comment cannot be empty."
+msgstr "评论不能是空的"
+
+msgid "Submit"
+msgstr "提交"
+
+msgid "Error"
+msgstr "错误"
 
 msgctxt "Verb (imperative)"
 msgid "Like"
@@ -64,14 +139,6 @@ msgstr "批准"
 msgid "Report abuse"
 msgstr "报告滥用"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"请<a href=\"%(login_url)s\">l登录</a> 或 <a href=\"%(signup_url)s\">注册</a> "
-"来进行评论"
-
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
@@ -89,8 +156,7 @@ msgid ""
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
-"您的评论正在等待审核，内容对象的作者或所有者会很快进行审核。如果他们在24小时"
-"内没有采取行动，AstroBin的管理员将接管并代表他们审核您的评论。"
+"您的评论正在等待审核，内容对象的作者或所有者会很快进行审核。如果他们在24小时内没有采取行动，AstroBin的管理员将接管并代表他们审核您的评论。"
 
 msgid "This process is necessary to prevent spam on AstroBin."
 msgstr "此过程是为了防止AstroBin上的垃圾信息。"
@@ -98,19 +164,11 @@ msgstr "此过程是为了防止AstroBin上的垃圾信息。"
 msgid "Thank you for understanding!"
 msgstr "感谢您的理解！"
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr "此评论正在等待审核。"
-
-msgid "Submit"
-msgstr "提交"
-
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
-msgstr ""
-"您无法撤回此评论：该评论存在已确认或待处理的滥用报告。如果您认为您的评论被不"
-"公平地报告，请联系我们。"
+msgstr "您无法撤回此评论：该评论存在已确认或待处理的滥用报告。如果您认为您的评论被不公平地报告，请联系我们。"
 
 msgid "You have reached your abuse report quota."
 msgstr "您已达到滥用报告配额。"
@@ -119,153 +177,86 @@ msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr "此项目无法再次报告，因为它已被管理员批准。"
 
+msgid "You many not report the same item more than once."
+msgstr "您不能多次报告同一项目。"
+
 msgid "You may not report the same item more than once."
 msgstr "您不能多次报告同一项目。"
 
-#~ msgid "You follow each other"
-#~ msgstr "互相关注"
+msgid "Report a use"
+msgstr "报告滥用"
 
-#~ msgid "Images"
-#~ msgstr "作品"
+msgid "Member since"
+msgstr "会员自"
 
-#~ msgid "Followers"
-#~ msgstr "粉丝"
+msgid "Last seen online"
+msgstr "最后在线时间"
 
-#~ msgid "Following"
-#~ msgstr "关注的人"
+msgid "Total integration time"
+msgstr "总集成时间"
 
-#~ msgid "User"
-#~ msgstr "用户"
+msgid "hours"
+msgstr "小时"
 
-#~ msgid "No users."
-#~ msgstr "没有用户。"
+msgid "Average integration time"
+msgstr "平均集成时间"
 
-#~ msgid "Administrator"
-#~ msgstr "管理员"
+msgid "Forum posts written"
+msgstr "论坛帖子数"
 
-#~ msgid "Image moderator"
-#~ msgstr "作品审核者"
+msgid "Comments written"
+msgstr "撰写的评论"
 
-#~ msgid "IOTD Submitter"
-#~ msgstr "“今日最佳”提名人"
+msgid "Comments received"
+msgstr "收到的评论"
 
-#~ msgid "IOTD Reviewer"
-#~ msgstr "“今日最佳”审查委员"
+msgid "Likes received"
+msgstr "收到的赞"
 
-#~ msgid "IOTD Judge"
-#~ msgstr "“今日最佳”评审"
+msgid "Views received"
+msgstr "收到的浏览量"
 
-#~ msgid "Premium member"
-#~ msgstr "Premium会员"
+msgid "No date specified"
+msgstr "未指定日期"
 
-#~ msgid ""
-#~ "Your email bounce reports have been removed from AstroBin. Please make "
-#~ "sure that your email works well or you will get the same warning message "
-#~ "again. Thanks!"
-#~ msgstr ""
-#~ "您的电子邮件退回报告已从 AstroBin 中删除。请确保您的邮箱一切正常，否则您将"
-#~ "再次收到相同的警告消息。谢谢！"
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "未指定成像望远镜或镜头，或未指定成像相机"
 
-#~ msgid ""
-#~ "Your spam reports have been removed from AstroBin. Please make sure you "
-#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
-#~ "you don't want to receive emails from AstroBin, look for the settings "
-#~ "link that's at the bottom of every email. Thanks!"
-#~ msgstr ""
-#~ "您的垃圾邮件报告已从 AstroBin 中删除。请确保您没有自动过滤，或在规则中将 "
-#~ "AstroBin 的电子邮件标记为垃圾邮件！ 如果您不想接收来自 AstroBin 的电子邮"
-#~ "件，请在任意一封电子邮件的底部查找设置链接。谢谢！"
+msgid "Gear images"
+msgstr "设备图片"
 
-#~ msgctxt "Noun, e.g. 'This element has 1 like'"
-#~ msgid "like"
-#~ msgstr "赞"
+msgid "Deep sky"
+msgstr "深空"
 
-#~ msgid "Reply"
-#~ msgstr "回复"
+msgid "Solar system"
+msgstr "太阳系"
 
-#~ msgid "Like"
-#~ msgstr "赞"
+msgid "Extremely wide field"
+msgstr "超广角"
 
-#~ msgid "Unlike"
-#~ msgstr "取消赞"
+msgid "Star trails"
+msgstr "星轨"
 
-#~ msgid "You many not report the same item more than once."
-#~ msgstr "您不能多次报告同一项目。"
+msgid "Northern lights"
+msgstr "北极光"
 
-#~ msgid "Report a use"
-#~ msgstr "报告滥用"
+msgid "Noctilucent clouds"
+msgstr "夜光云"
 
-#~ msgid "Member since"
-#~ msgstr "会员自"
+msgid "Gear"
+msgstr "设备"
 
-#~ msgid "Last seen online"
-#~ msgstr "最后在线时间"
+msgid "Other"
+msgstr "其他"
 
-#~ msgid "Total integration time"
-#~ msgstr "总集成时间"
+msgid "All"
+msgstr "全部"
 
-#~ msgid "hours"
-#~ msgstr "小时"
+msgid "n/a"
+msgstr "不适用"
 
-#~ msgid "Average integration time"
-#~ msgstr "平均集成时间"
+msgid "No subjects specified"
+msgstr "未指定主题"
 
-#~ msgid "Forum posts written"
-#~ msgstr "论坛帖子数"
-
-#~ msgid "Comments written"
-#~ msgstr "撰写的评论"
-
-#~ msgid "Comments received"
-#~ msgstr "收到的评论"
-
-#~ msgid "Likes received"
-#~ msgstr "收到的赞"
-
-#~ msgid "Views received"
-#~ msgstr "收到的浏览量"
-
-#~ msgid "No date specified"
-#~ msgstr "未指定日期"
-
-#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-#~ msgstr "未指定成像望远镜或镜头，或未指定成像相机"
-
-#~ msgid "Gear images"
-#~ msgstr "设备图片"
-
-#~ msgid "Deep sky"
-#~ msgstr "深空"
-
-#~ msgid "Solar system"
-#~ msgstr "太阳系"
-
-#~ msgid "Extremely wide field"
-#~ msgstr "超广角"
-
-#~ msgid "Star trails"
-#~ msgstr "星轨"
-
-#~ msgid "Northern lights"
-#~ msgstr "北极光"
-
-#~ msgid "Noctilucent clouds"
-#~ msgstr "夜光云"
-
-#~ msgid "Gear"
-#~ msgstr "设备"
-
-#~ msgid "Other"
-#~ msgstr "其他"
-
-#~ msgid "All"
-#~ msgstr "全部"
-
-#~ msgid "n/a"
-#~ msgstr "不适用"
-
-#~ msgid "No subjects specified"
-#~ msgstr "未指定主题"
-
-#~ msgid "No acquisition details specified"
-#~ msgstr "未指定采集细节"
+msgid "No acquisition details specified"
+msgstr "未指定采集细节"

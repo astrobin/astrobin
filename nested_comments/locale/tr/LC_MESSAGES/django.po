@@ -1,122 +1,355 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "(deleted)"
+#, fuzzy
+msgid "You follow each other"
+msgstr "Birbirinizi takip ediyorsunuz"
+
+#, fuzzy
+msgid "Images"
+msgstr "Görüntüler"
+
+#, fuzzy
+msgid "Followers"
+msgstr "Takipçiler"
+
+#, fuzzy
+msgid "Following"
+msgstr "Takip Ediliyor"
+
+#, fuzzy
+msgid "User"
+msgstr "Kullanıcı"
+
+#, fuzzy
+msgid "No users."
+msgstr "Hiç kullanıcı yok."
+
+#, fuzzy
+msgid "Administrator"
+msgstr "Yönetici"
+
+#, fuzzy
+msgid "Image moderator"
+msgstr "Görüntü moderatörü"
+
+#, fuzzy
+msgid "IOTD Submitter"
+msgstr "IOTD Göndereni"
+
+#, fuzzy
+msgid "IOTD Reviewer"
+msgstr "IOTD İnceleyeni"
+
+#, fuzzy
+msgid "IOTD Judge"
+msgstr "IOTD Hakemi"
+
+#, fuzzy
+msgid "Premium member"
+msgstr "Premium üye"
+
+#, fuzzy
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
 msgstr ""
+"E-posta geri dönüş raporlarınız AstroBin'den kaldırıldı. Lütfen e-posta "
+"adresinizin düzgün çalıştığından emin olun, aksi takdirde aynı uyarı "
+"mesajını tekrar alacaksınız. Teşekkürler!"
 
+#, fuzzy
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Spam raporlarınız AstroBin'den kaldırıldı. Lütfen AstroBin'in e-postalarını "
+"her zaman spam olarak işaretleyen bir filtre veya kuralınız olmadığından "
+"emin olun! AstroBin'den e-posta almak istemiyorsanız, her e-postanın altında "
+"bulunan ayarlar bağlantısını arayın. Teşekkürler!"
+
+#, fuzzy
 msgid "Type your comment here..."
-msgstr ""
+msgstr "Yorumunuzu buraya yazın..."
 
-msgid "Error"
-msgstr ""
-
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "İptal"
 
+#, fuzzy
 msgid "Add a comment"
-msgstr ""
+msgstr "Yorum ekle"
 
-msgid "There are no comments yet."
-msgstr ""
-
-msgid "The comment cannot be empty."
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "Undelete"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Link"
-msgstr ""
-
-msgctxt "Noun, e.g. 'This element has 10 likes'"
-msgid "likes"
-msgstr ""
-
-msgctxt "Verb (imperative)"
-msgid "Like"
-msgstr ""
-
-msgctxt "Verb (imperative)"
-msgid "Unlike"
-msgstr ""
-
-msgctxt "Verb (imperative)"
-msgid "Reply"
-msgstr ""
-
-msgctxt "Verb (imperative)"
-msgid "Approve"
-msgstr ""
-
-msgid "Report abuse"
-msgstr ""
-
+#, fuzzy
 #, python-format
 msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
 msgstr ""
+"Lütfen <a href=\"%(login_url)s\">giriş yapın</a> veya <a href=\"%(signup_url)"
+"s\">kayıt olun</a> yorum bırakmak için."
 
+#, fuzzy
+msgid "There are no comments yet."
+msgstr "Henüz yorum yok."
+
+#, fuzzy
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "Bu yorum moderasyona tabi ve kısa süre içinde incelenecek."
+
+#, fuzzy
+msgid "(deleted)"
+msgstr "(silindi)"
+
+#, fuzzy
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "beğeniler"
+
+#, fuzzy
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "beğeni"
+
+#, fuzzy
+msgid "Link"
+msgstr "Bağlantı"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Silme işlemini geri al"
+
+#, fuzzy
+msgid "Delete"
+msgstr "Sil"
+
+#, fuzzy
+msgid "Edit"
+msgstr "Düzenle"
+
+#, fuzzy
+msgid "Reply"
+msgstr "Yanıtla"
+
+#, fuzzy
+msgid "Like"
+msgstr "Beğen"
+
+#, fuzzy
+msgid "Unlike"
+msgstr "Beğenme"
+
+#, fuzzy
+msgid "The comment cannot be empty."
+msgstr "Yorum boş olamaz."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Gönder"
+
+#, fuzzy
+msgid "Error"
+msgstr "Hata"
+
+#, fuzzy
+msgctxt "Verb (imperative)"
+msgid "Like"
+msgstr "Beğen"
+
+#, fuzzy
+msgctxt "Verb (imperative)"
+msgid "Unlike"
+msgstr "Beğenme"
+
+#, fuzzy
+msgctxt "Verb (imperative)"
+msgid "Reply"
+msgstr "Yanıtla"
+
+#, fuzzy
+msgctxt "Verb (imperative)"
+msgid "Approve"
+msgstr "Onayla"
+
+#, fuzzy
+msgid "Report abuse"
+msgstr "Kötüye kullanımı rapor et"
+
+#, fuzzy
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
 msgstr ""
+"Bu yorum moderasyona tabi. Lütfen aşağıdaki butonları kullanarak onaylayın "
+"veya kötüye kullanım raporu oluşturun."
 
+#, fuzzy
 msgid "Thank you for your cooperation!"
-msgstr ""
+msgstr "İşbirliğiniz için teşekkürler!"
 
+#, fuzzy
 msgid "This comment was already moderated by you or an AstroBin moderator."
 msgstr ""
+"Bu yorum zaten siz veya bir AstroBin moderatörü tarafından moderasyona tabi "
+"tutuldu."
 
+#, fuzzy
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
 "author or owner of the content object that you commented on. If they do not "
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
+"Yorumunuz moderasyona tabi ve yorum yaptığınız içerik nesnesinin sahibi veya "
+"yazarı tarafından kısa süre içinde incelenecek. Eğer 24 saat içinde bir "
+"işlem yapılmazsa, bir AstroBin moderatörü devralacak ve yorumunuzu onların "
+"adına inceleyecek."
 
+#, fuzzy
 msgid "This process is necessary to prevent spam on AstroBin."
-msgstr ""
+msgstr "Bu işlem, AstroBin'de spamı önlemek için gereklidir."
 
+#, fuzzy
 msgid "Thank you for understanding!"
-msgstr ""
+msgstr "Anlayışınız için teşekkürler!"
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr ""
-
-msgid "Submit"
-msgstr ""
-
+#, fuzzy
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
+"Bu yorumu geri alamazsınız: bunun için onaylanmış veya bekleyen bir kötüye "
+"kullanım raporu var. Eğer yorumunuzun haksız yere raporlandığını "
+"düşünüyorsanız lütfen bizimle iletişime geçin."
 
+#, fuzzy
 msgid "You have reached your abuse report quota."
-msgstr ""
+msgstr "Kötüye kullanım raporu kotanızı doldurdunuz."
 
+#, fuzzy
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
-msgstr ""
+msgstr "Bu öğe tekrar rapor edilemez çünkü bir moderatör tarafından onaylandı."
 
+#, fuzzy
+msgid "You many not report the same item more than once."
+msgstr "Aynı öğeyi birden fazla kez rapor edemezsiniz."
+
+#, fuzzy
 msgid "You may not report the same item more than once."
+msgstr "Aynı öğeyi birden fazla kez rapor edemezsiniz."
+
+#, fuzzy
+msgid "Report a use"
+msgstr "Bir kullanımı rapor et"
+
+#, fuzzy
+msgid "Member since"
+msgstr "Üye olma tarihi"
+
+#, fuzzy
+msgid "Last seen online"
+msgstr "Son çevrimiçi görünme"
+
+#, fuzzy
+msgid "Total integration time"
+msgstr "Toplam entegrasyon süresi"
+
+#, fuzzy
+msgid "hours"
+msgstr "saat"
+
+#, fuzzy
+msgid "Average integration time"
+msgstr "Ortalama entegrasyon süresi"
+
+#, fuzzy
+msgid "Forum posts written"
+msgstr "Yazılan forum gönderileri"
+
+#, fuzzy
+msgid "Comments written"
+msgstr "Yazılan yorumlar"
+
+#, fuzzy
+msgid "Comments received"
+msgstr "Alınan yorumlar"
+
+#, fuzzy
+msgid "Likes received"
+msgstr "Alınan beğeniler"
+
+#, fuzzy
+msgid "Views received"
+msgstr "Alınan görüntüleme sayısı"
+
+#, fuzzy
+msgid "No date specified"
+msgstr "Tarih belirtilmemiş"
+
+#, fuzzy
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
+"Görüntüleme teleskopları veya lensleri, ya da görüntüleme kameraları "
+"belirtilmemiş"
+
+#, fuzzy
+msgid "Gear images"
+msgstr "Ekipman görüntüleri"
+
+#, fuzzy
+msgid "Deep sky"
+msgstr "Derin gökyüzü"
+
+#, fuzzy
+msgid "Solar system"
+msgstr "Güneş sistemi"
+
+#, fuzzy
+msgid "Extremely wide field"
+msgstr "Son derece geniş alan"
+
+#, fuzzy
+msgid "Star trails"
+msgstr "Yıldız izleri"
+
+#, fuzzy
+msgid "Northern lights"
+msgstr "Kuzey ışıkları"
+
+#, fuzzy
+msgid "Noctilucent clouds"
+msgstr "Gece parlayan bulutlar"
+
+#, fuzzy
+msgid "Gear"
+msgstr "Ekipman"
+
+#, fuzzy
+msgid "Other"
+msgstr "Diğer"
+
+#, fuzzy
+msgid "All"
+msgstr "Hepsi"
+
+#, fuzzy
+msgid "n/a"
+msgstr "geçersiz"
+
+#, fuzzy
+msgid "No subjects specified"
+msgstr "Konu belirtilmemiş"
+
+#, fuzzy
+msgid "No acquisition details specified"
+msgstr "Elde etme detayları belirtilmemiş"

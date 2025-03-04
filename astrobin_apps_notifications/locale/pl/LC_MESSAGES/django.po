@@ -1,24 +1,31 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: 2020-10-26 10:37+0000\n"
-"Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 "
+"&&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1603708641.000000\n"
+"Content-Transfer-Encoding: 8bit"
+
+#, fuzzy
+msgid "Notifications"
+msgstr "Powiadomienia"
+
+#, fuzzy
+msgid "You have no notifications."
+msgstr "Nie masz żadnych powiadomień."
+
+#, fuzzy
+msgid "Settings"
+msgstr "Ustawienia"
+
+#, fuzzy
+msgid "Mark all as read"
+msgstr "Oznacz wszystkie jako przeczytane"
+
+#, fuzzy
+msgid "You have no new notifications."
+msgstr "Nie masz nowych powiadomień."
 
 msgid "You have a new follower"
 msgstr "Masz nowego obserwującego"
@@ -32,47 +39,18 @@ msgstr "Nowe wersja zdjęcia od użytkownika którego obserwujesz"
 msgid "Your image was plate-solved"
 msgstr "Astrometria Twojego zdjęcia została wykonana"
 
-msgid "Your image was approved by a moderator"
-msgstr ""
-
 msgid "Your image could not be plate-solved"
 msgstr "Astrometria Twojego zdjęcia nie może być wykonana"
-
-msgid "Your image was plate-solved (advanced)"
-msgstr ""
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr ""
 
 msgid "Your image received a new comment"
 msgstr "Twoje zdjęcie otrzymało nowy komentarz"
 
-msgid "Your edit proposal received a new comment"
-msgstr ""
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr ""
-
-msgid "Your unapproved equipment item received a comment"
-msgstr ""
-
-msgid "Your listing has a new private conversation"
-msgstr ""
-
-msgid "Your private conversation has a new comment"
-msgstr ""
-
-msgid "Your listing has a new question"
-msgstr ""
-
 msgid "There was a reply to your comment"
 msgstr "Ktoś odpowiedział na Twój komentarz"
 
-msgid "A new comment on your image requires moderation"
-msgstr ""
-
+#, fuzzy
 msgid "Your comment was approved"
-msgstr ""
+msgstr "Twój komentarz został zatwierdzony"
 
 msgid "Your image was bookmarked"
 msgstr "Twoje zdjęcie zostało dodane do zakładek"
@@ -80,14 +58,13 @@ msgstr "Twoje zdjęcie zostało dodane do zakładek"
 msgid "Your image was liked"
 msgstr "Twoje zdjęcie zostało polubione"
 
+#, fuzzy
 msgid "Your comment was liked"
-msgstr ""
+msgstr "Twój komentarz został polubiony"
 
+#, fuzzy
 msgid "Your forum post was liked"
-msgstr ""
-
-msgid "Your forum post was approved"
-msgstr ""
+msgstr "Twój post na forum został polubiony"
 
 msgid "Your API Key request has been approved"
 msgstr "Twój wniosek o klucz API został zatwierdzony"
@@ -113,15 +90,6 @@ msgstr "Użytkownik którego obserwujesz stworzył nową grupę publiczną"
 msgid "New forum topic in a group you are a member of"
 msgstr "Nowy temat w grupie której jesteś członkiem"
 
-msgid "New forum topic for an equipment item you use"
-msgstr ""
-
-msgid "New forum topic for an equipment item you follow"
-msgstr ""
-
-msgid "Your forum topic was moved"
-msgstr ""
-
 msgid "You have received a new private message"
 msgstr "Otrzymałeś nową prywatną wiadomość"
 
@@ -134,8 +102,9 @@ msgstr "Twoja subskrypcja \"premium\" wygasła"
 msgid "Your subscription will be renewed in one week"
 msgstr "Twoja subskrypcja będzie odnowiona w ciągu tygodnia"
 
+#, fuzzy
 msgid "Your subscription will be renewed in one 30 days"
-msgstr ""
+msgstr "Twoja subskrypcja zostanie odnowiona za 30 dni"
 
 msgid "You have images with a missing \"Data source\""
 msgstr "Masz zdjęcia bez informacji o \"Źródle danych\""
@@ -143,125 +112,210 @@ msgstr "Masz zdjęcia bez informacji o \"Źródle danych\""
 msgid "You have images with a missing \"Remote source\""
 msgstr "Masz zdjęcia bez informacji o \"Zewnętrznym źródle danych\""
 
+#, fuzzy
 msgid "Would you like to activate your account?"
-msgstr ""
+msgstr "Czy chcesz aktywować swoje konto?"
 
-msgid "New reply in a subscribed forum topic"
-msgstr ""
-
-msgid "New reply in a forum topic that you started"
-msgstr ""
-
+#, fuzzy
 msgid "You were mentioned in a forum post"
-msgstr ""
+msgstr "Wspomniano cię w poście na forum"
 
+#, fuzzy
 msgid "You were mentioned in a comment"
-msgstr ""
+msgstr "Wspomniano cię w komentarzu"
 
+#, fuzzy
 msgid "Welcome to AstroBin!"
-msgstr ""
+msgstr "Witaj w AstroBin!"
 
+#, fuzzy
 msgid "Congratulations for your first image on AstroBin!"
-msgstr ""
+msgstr "Gratulacje z okazji twojego pierwszego zdjęcia na AstroBin!"
 
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr ""
-
+#, fuzzy
 msgid "Thank you for getting a subscription!"
-msgstr ""
+msgstr "Dzięki za wykupienie subskrypcji!"
 
+#, fuzzy
 msgid "Thank you for your payment!"
-msgstr ""
+msgstr "Dzięki za płatność!"
 
-msgid "Subscription canceled"
-msgstr ""
-
+#, fuzzy
 msgid "You were removed from the IOTD staff"
-msgstr ""
+msgstr "Zostałeś usunięty z zespołu IOTD"
 
+#, fuzzy
 msgid "You have been inactive as an IOTD staff member"
-msgstr ""
+msgstr "Byłeś nieaktywny jako członek zespołu IOTD"
 
-msgid "Your IOTD staff activity is insufficient"
-msgstr ""
-
+#, fuzzy
 msgid "An image you promoted made it to Top Pick"
-msgstr ""
+msgstr "Obraz, który promowałeś, trafił do Top Pick"
 
+#, fuzzy
 msgid "An image you promoted made it to IOTD"
-msgstr ""
+msgstr "Obraz, który promowałeś, trafił do IOTD"
 
-msgid "An image you dismissed made it to Top Pick"
-msgstr ""
+#, fuzzy
+msgid "New reply in a subscribed forum topic"
+msgstr "Nowa odpowiedź w subskrybowanym temacie na forum"
 
-msgid "An image you dismissed made it to IOTD"
-msgstr ""
+#, fuzzy
+msgid "Your image was nominated to be a Top Pick"
+msgstr "Twoje zdjęcie zostało nominowane do Top Pick"
 
-msgid "Your image might become a Top Pick Nomination"
-msgstr ""
-
-msgid "Your image might become a Top Pick"
-msgstr ""
-
-msgid "Your image was voted Top Pick Nomination"
-msgstr ""
-
+#, fuzzy
 msgid "Your image was voted Top Pick"
-msgstr ""
+msgstr "Twoje zdjęcie zostało wybrane jako Top Pick"
 
+#, fuzzy
 msgid "Your image was voted Image of the Day"
-msgstr ""
+msgstr "Twoje zdjęcie zostało wybrane jako Obraz Dnia"
 
-msgid "Your IOTD staff member stats"
-msgstr ""
+#, fuzzy
+msgid "Your image was plate-solved (advanced)"
+msgstr "Twoje zdjęcie zostało rozwiązane (zaawansowane)"
 
+#, fuzzy
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Twoje zdjęcie nie mogło zostać rozwiązane (zaawansowane)"
+
+#, fuzzy
+msgid "A new comment on your image requires moderation"
+msgstr "Nowy komentarz do twojego zdjęcia wymaga moderacji"
+
+#, fuzzy
+msgid "Your forum post was approved"
+msgstr "Twój post na forum został zatwierdzony"
+
+#, fuzzy
 msgid "You were mentioned in an image description"
-msgstr ""
+msgstr "Wspomniano cię w opisie zdjęcia"
 
+#, fuzzy
+msgid "Your edit proposal received a new comment"
+msgstr "Twoja propozycja edycji otrzymała nowy komentarz"
+
+#, fuzzy
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr "Twoje zdjęcie zostało zgłoszone do rozpatrzenia IOTD/TP"
+
+#, fuzzy
 msgid "A gear item that you used was renamed"
-msgstr ""
+msgstr "Element sprzętu, którego używałeś, został przemianowany"
 
-msgid "Collaboration Request: Accept or Deny"
-msgstr ""
+#, fuzzy
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Twój zaplanowany IOTD otrzymał nowy komentarz"
 
-msgid "User accepted your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "Your unapproved equipment item received a comment"
+msgstr "Twój niezatwierdzony element sprzętu otrzymał komentarz"
 
-msgid "User denied your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "New forum topic for an equipment item you use"
+msgstr "Nowy temat na forum dotyczący elementu sprzętu, którego używasz"
 
+#, fuzzy
 msgid "You were added as a collaborator to an image"
-msgstr ""
+msgstr "Zostałeś dodany jako współpracownik do zdjęcia"
 
+#, fuzzy
 msgid "You were removed as a collaborator to an image"
-msgstr ""
+msgstr "Zostałeś usunięty jako współpracownik do zdjęcia"
 
+#, fuzzy
 msgid "User removed self as a collaborator to your image"
-msgstr ""
+msgstr "Użytkownik usunął się jako współpracownik do twojego zdjęcia"
 
+#, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "Zgłosiłeś swoje zdjęcie do rozpatrzenia IOTD/TP"
+
+#, fuzzy
 msgid "Login attempt detected from a different country"
-msgstr ""
+msgstr "Wykryto próbę logowania z innego kraju"
 
+#, fuzzy
 msgid "Login attempt with weak password"
-msgstr ""
+msgstr "Próba logowania z słabym hasłem"
 
-#~ msgid "Notifications"
-#~ msgstr "Powiadomienia"
+#, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "Twoje zdjęcie zostało zatwierdzone przez moderatora"
 
-#~ msgid "You have no notifications."
-#~ msgstr "Nie masz żadnych powiadomień."
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Obraz nie został zgłoszony do rozpatrzenia IOTD/TP"
 
-#~ msgid "Settings"
-#~ msgstr "Ustawienia"
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "Subskrypcja anulowana"
 
-#~ msgid "Mark all as read"
-#~ msgstr "Oznacz wszystkie jako przeczytane"
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "Twój temat na forum został przeniesiony"
 
-#~ msgid "You have no new notifications."
-#~ msgstr "Nie masz żadnych nowych powiadomień."
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "Obraz zbliża się do terminu zgłoszenia do IOTD/TP"
+
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "Twoja lista ma nową prywatną rozmowę"
+
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "Twoja prywatna rozmowa ma nowy komentarz"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "Twoja lista ma nowe pytanie"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "Nowy temat na forum dotyczący elementu sprzętu, który śledzisz"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "Nowa odpowiedź w temacie forum, który założyłeś"
+
+#, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "Twoja aktywność w IOTD jest niewystarczająca"
+
+#, fuzzy
+msgid "An image you dismissed made it to Top Pick"
+msgstr "Obraz, który odrzuciłeś, trafił do Top Pick"
+
+#, fuzzy
+msgid "An image you dismissed made it to IOTD"
+msgstr "Obraz, który odrzuciłeś, trafił do IOTD"
+
+#, fuzzy
+msgid "Your IOTD staff member stats"
+msgstr "Statystyki twojego członka zespołu IOTD"
+
+#, fuzzy
+msgid "Collaboration Request: Accept or Deny"
+msgstr "Prośba o współpracę: Akceptuj lub Odrzuć"
+
+#, fuzzy
+msgid "User accepted your collaboration request"
+msgstr "Użytkownik zaakceptował twoją prośbę o współpracę"
+
+#, fuzzy
+msgid "User denied your collaboration request"
+msgstr "Użytkownik odrzucił twoją prośbę o współpracę"
+
+#, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "Twój obraz może stać się nominacją do Top Pick"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "Twój obraz może stać się Top Pick"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "Twój obraz został wybrany jako nominacja do Top Pick"

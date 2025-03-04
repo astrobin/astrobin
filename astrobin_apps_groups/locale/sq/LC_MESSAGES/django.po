@@ -1,441 +1,633 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sq\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-
+#, fuzzy
 msgid "Autosubmission deactivation strategy"
-msgstr ""
+msgstr "Strategjia e deaktivizimit të dorëzimit automatik"
 
+#, fuzzy
 msgid "Keep all images currently auto-submitted"
-msgstr ""
+msgstr "Mbani të gjitha imazhet që janë dërguar automatikisht"
 
+#, fuzzy
 msgid "Remove all images and start over"
-msgstr ""
+msgstr "Fshij të gjitha imazhet dhe fillo nga e para"
 
+#, fuzzy
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
 msgstr ""
+"Kur ndryshoni grupin tuaj nga autosubmission në non-autosubmission, duhet të "
+"mendoni se çfarë të bëni me imazhet që janë aktualisht në grup."
 
+#, fuzzy
 msgid "Invite users"
-msgstr ""
+msgstr "Ftoni përdoruesit"
 
+#, fuzzy
 msgid "Users will receive a notification and will be able to join the group"
 msgstr ""
+"Përdoruesit do të marrin një njoftim dhe do të jenë në gjendje të bashkohen "
+"me grupin"
 
+#, fuzzy
 msgid "Professional network"
-msgstr ""
+msgstr "Rrjeti profesional"
 
+#, fuzzy
 msgid "Club or association"
-msgstr ""
+msgstr "Klubi ose shoqata"
 
+#, fuzzy
 msgid "Internet community"
-msgstr ""
+msgstr "Komuniteti në internet"
 
+#, fuzzy
 msgid "Friends or partners"
-msgstr ""
+msgstr "Miq ose partnerë"
 
+#, fuzzy
 msgid "Geographical area"
-msgstr ""
+msgstr "Zona gjeografike"
 
+#, fuzzy
 msgid "Ad-hoc collaboration"
-msgstr ""
+msgstr "Bashkëpunim ad-hoc"
 
+#, fuzzy
 msgid "Specific to an imaging technique"
-msgstr ""
+msgstr "Specifik për një teknikë imazherie"
 
+#, fuzzy
 msgid "Specific to an astrophotography target"
-msgstr ""
+msgstr "Specifik për një objekt astrofotografie"
 
+#, fuzzy
 msgid "Specific to certain equipment"
-msgstr ""
+msgstr "Specifik për pajisje të caktuara"
 
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "Të tjera"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "Emri"
 
+#, fuzzy
 msgid "Description"
-msgstr ""
+msgstr "Përshkrimi"
 
+#, fuzzy
 msgid "HTML tags are allowed."
-msgstr ""
+msgstr "Tag-ët HTML lejohet."
 
+#, fuzzy
 msgid "Category"
-msgstr ""
+msgstr "Kategoria"
 
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-
+#, fuzzy
 msgid "Public group"
-msgstr ""
+msgstr "Grupi publik"
 
+#, fuzzy
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
 msgstr ""
+"Grupet publike mund të kërkohen nga kushdo, dhe të gjitha përmbajtjet e tyre "
+"janë publike."
 
+#, fuzzy
 msgid "Moderated group"
-msgstr ""
+msgstr "Grup i moderuar"
 
+#, fuzzy
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
+"Grupet e moderuara kanë një radhë moderimi për imazhet e postuara dhe "
+"kërkesat për t'u bashkuar."
 
+#, fuzzy
 msgid "Automatic submission"
-msgstr ""
+msgstr "Dorëzim automatik"
 
+#, fuzzy
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
 "explicitly submitted to it."
 msgstr ""
+"Grupet me dërgesa automatike gjithmonë përmbajnë të gjitha imazhet publike "
+"nga të gjithë anëtarët. Grupet pa dërgesa automatike përmbajnë vetëm imazhet "
+"që janë dërguar shprehimisht atyre."
 
-msgid "Forum notice"
-msgstr ""
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-
+#, fuzzy
 msgid "Last activity"
-msgstr ""
+msgstr "Aktiviteti i fundit"
 
-msgid "Date created"
-msgstr ""
-
+#, fuzzy
 msgid "Members"
-msgstr ""
+msgstr "Anëtarët"
 
+#, fuzzy
 msgid "Images"
-msgstr ""
+msgstr "Imazhe"
 
+#, fuzzy
 msgid "Forum posts"
-msgstr ""
+msgstr "Postimet në forum"
 
+#, fuzzy
 msgid "Owner"
-msgstr ""
+msgstr "Pronari"
 
+#, fuzzy
 msgid "Moderator"
-msgstr ""
+msgstr "Moderator"
 
+#, fuzzy
 msgid "Member"
-msgstr ""
+msgstr "Anëtar"
 
+#, fuzzy
 msgid "Invited"
-msgstr ""
+msgstr "I ftuar"
 
+#, fuzzy
 msgid "Join request pending approval"
-msgstr ""
+msgstr "Kërkesa për t'u bashkuar në pritje të miratimit"
 
+#, fuzzy
 msgid "Add/remove images"
-msgstr ""
+msgstr "Shto/fshi imazhe"
 
+#, fuzzy
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
+"Klikoni mbi imazhet për t'i përfshirë ato në këtë grup (dhe klikoni përsëri "
+"për t'i përjashtuar). Pastaj klikoni mbi butonin Ruaj poshtë."
 
+#, fuzzy
 msgid "(no title)"
-msgstr ""
+msgstr "(pa titull)"
 
+#, fuzzy
 msgid "Save"
-msgstr ""
+msgstr "Ruaj"
 
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Anulo"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
+#, fuzzy
 msgid "Delete group?"
-msgstr ""
+msgstr "Fshij grupin?"
 
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
 msgstr ""
+"Kujdes! A dëshiron vërtet të fshish këtë grup? Kjo operacion nuk mund të "
+"anulohet!"
 
+#, fuzzy
 msgid "Delete group"
-msgstr ""
+msgstr "Fshi grupin"
 
+#, fuzzy
 msgid "Create new group"
-msgstr ""
+msgstr "Krijo grup të ri"
 
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
+#, fuzzy
 msgid "Edit group"
-msgstr ""
+msgstr "Redakto grupin"
 
+#, fuzzy
 msgid "Manage members"
-msgstr ""
+msgstr "Menaxho anëtarët"
 
+#, fuzzy
 msgid "Actions"
-msgstr ""
+msgstr "Veprimet"
 
+#, fuzzy
 msgid "Join group"
-msgstr ""
+msgstr "Bashkohu në grup"
 
+#, fuzzy
 msgid "Leave group"
-msgstr ""
+msgstr "Lëre grupin"
 
+#, fuzzy
 msgid "Moderate join requests"
-msgstr ""
+msgstr "Moderoni kërkesat për t'u bashkuar"
 
-msgid "Sort images"
-msgstr ""
-
+#, fuzzy
 msgid "This group is public"
-msgstr ""
+msgstr "Ky grup është publik"
 
+#, fuzzy
 msgid "This group is private"
-msgstr ""
+msgstr "Ky grup është privat"
 
+#, fuzzy
 msgid "This group is moderated"
-msgstr ""
+msgstr "Ky grup është i moderuar"
 
+#, fuzzy
 msgid "This group is not moderated"
-msgstr ""
+msgstr "Ky grup nuk është i moderuar"
 
+#, fuzzy
 msgid "This group has automatic submission"
-msgstr ""
+msgstr "Ky grup ka dorëzim automatik"
 
+#, fuzzy
 msgid "This group does not have automatic submission"
-msgstr ""
+msgstr "Ky grup nuk ka dorëzim automatik"
 
+#, fuzzy
 msgid "Invited users"
-msgstr ""
+msgstr "Përdorues të ftuar"
 
+#, fuzzy
 msgid "Join requests"
-msgstr ""
+msgstr "Kërkesat për t'u bashkuar"
 
+#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
+"Një grup i krijuar më %(date_created)s, në pronësi të <a href=\"%(owner_url)"
+"s\">%(owner)s</a>, i kategorisë <strong>%(category)s</strong>."
 
+#, fuzzy
 msgid "Group forum"
-msgstr ""
+msgstr "Forumi i grupit"
 
+#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
+"<strong>%(post_count)s</strong> postime në <strong>%(topic_count)s</strong> "
+"tema"
 
+#, fuzzy
 msgid "View all"
-msgstr ""
+msgstr "Shiko të gjitha"
 
+#, fuzzy
 msgid "New topic"
-msgstr ""
+msgstr "Temë e re"
 
+#, fuzzy
+msgid "Please join the group to view its forum."
+msgstr "Të lutem bashkohu në grup për të parë forumin e tij."
+
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
 msgstr ""
+"Kujdes! A dëshiron vërtet të fshish këtë grup? Kjo operacion nuk mund të "
+"anulohet dhe forumi i grupit dhe të gjitha temat e tij do të fshihen përherë!"
 
+#, fuzzy
 msgid "Join group?"
-msgstr ""
+msgstr "Bashkohu me grupin?"
 
+#, fuzzy
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
+"Ky është një grup publik: të gjitha përmbajtjet, duke përfshirë listën e "
+"anëtarëve, janë të disponueshme për ata që nuk janë anëtarë."
 
+#, fuzzy
 msgid "This is a private group: only members have access to its contents."
 msgstr ""
+"Ky është një grup privat: vetëm anëtarët kanë qasje në përmbajtjen e tij."
 
+#, fuzzy
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
 msgstr ""
+"Ky është një grup i moderuar, kërkesat për t'u bashkuar, imazhet dhe "
+"postimet në forum mund të kalojnë në një radhë moderimi."
 
+#, fuzzy
 msgid "This is a non-moderated group."
-msgstr ""
+msgstr "Ky është një grup jo i moderuar."
 
+#, fuzzy
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
 msgstr ""
+"Ky është një grup me dërgesa automatike: të gjitha imazhet tuaja do të "
+"shfaqen menjëherë këtu pa nevojë për veprime."
 
+#, fuzzy
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
 msgstr ""
+"Ky është një grup pa dorëzim automatik: do të zgjedhësh se cilat imazhe "
+"dëshiron të dorëzosh."
 
+#, fuzzy
 msgid "Leave group?"
-msgstr ""
+msgstr "Lëre grupin?"
 
+#, fuzzy
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
 msgstr ""
+"Duke lënë këtë grup, dorëzimet e tua të imazheve nuk do të jenë më të "
+"dukshme për anëtarët e grupit, ndërsa postimet e tua në forum do të mbeten. "
+"A je i sigurt?"
 
+#, fuzzy
 msgid "Groups"
-msgstr ""
+msgstr "Grupet"
 
+#, fuzzy
 msgid "Sort"
-msgstr ""
+msgstr "Rendit"
 
-msgid "Search"
-msgstr ""
+#, fuzzy
+msgid "Date created"
+msgstr "Data e krijimit"
 
-msgid "Private groups you own"
-msgstr ""
+#, fuzzy
+msgid "Your private groups"
+msgstr "Grupet tuaja private"
 
-msgid "Private groups you are a member of"
-msgstr ""
+#, fuzzy
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr "Ti je pronar, ose je anëtar, ose je ftuar në këto grupe private."
 
-msgid "Private groups you are invited to"
-msgstr ""
+#, fuzzy
+msgctxt "group"
+msgid "Create private group"
+msgstr "Krijo grup privat"
 
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
-
+#, fuzzy
 msgid "Public groups"
-msgstr ""
+msgstr "Grupet publike"
 
+#, fuzzy
+msgid "Open to the whole community."
+msgstr "I hapur për të gjithë komunitetin."
+
+#, fuzzy
+msgctxt "group"
+msgid "Create public group"
+msgstr "Krijo grup publik"
+
+#, fuzzy
 msgid "No groups available."
-msgstr ""
+msgstr "Nuk ka grupe të disponueshme."
 
+#, fuzzy
 msgid "Revoke?"
-msgstr ""
+msgstr "Anulo?"
 
+#, fuzzy
 msgid "Revoke invitation"
-msgstr ""
+msgstr "Anulo ftesën"
 
+#, fuzzy
 msgid "This group has no active invitations."
-msgstr ""
+msgstr "Ky grup nuk ka ftesa aktive."
 
+#, fuzzy
 msgid "Moderators"
-msgstr ""
+msgstr "Moderatorët"
 
+#, fuzzy
 msgid "Remove moderator status"
-msgstr ""
+msgstr "Hiq statusin e moderatorit"
 
+#, fuzzy
 msgid "This group has no moderators."
-msgstr ""
+msgstr "Ky grup nuk ka moderues."
 
+#, fuzzy
 msgid "Make moderator"
-msgstr ""
+msgstr "Bëhu moderator"
 
+#, fuzzy
 msgid "Remove member"
-msgstr ""
+msgstr "Hiq anëtarin"
 
+#, fuzzy
 msgid "This group has no members."
-msgstr ""
+msgstr "Ky grup nuk ka anëtarë."
 
+#, fuzzy
 msgid "Type in a search term"
-msgstr ""
+msgstr "Shkruani një term kërkimi"
 
+#, fuzzy
 msgid "No results"
-msgstr ""
+msgstr "Nuk ka rezultate"
 
+#, fuzzy
 msgid "Searching"
-msgstr ""
+msgstr "Kërkimi"
 
+#, fuzzy
 msgid "members list"
-msgstr ""
+msgstr "lista e anëtarëve"
 
+#, fuzzy
 msgid "Back to group"
-msgstr ""
+msgstr "Kthehu në grup"
 
+#, fuzzy
 msgid "Full list of the group members"
-msgstr ""
+msgstr "Lista e plotë e anëtarëve të grupit"
 
+#, fuzzy
 msgid "Images in group"
-msgstr ""
+msgstr "Imazhet në grup"
 
+#, fuzzy
 msgid "Forum posts in group"
-msgstr ""
+msgstr "Postimet në forum në grup"
 
+#, fuzzy
 msgid "Approve"
-msgstr ""
+msgstr "Mirato"
 
+#, fuzzy
 msgid "Reject"
-msgstr ""
+msgstr "Refuzo"
 
+#, fuzzy
 msgid "This group has no join requests."
-msgstr ""
+msgstr "Ky grup nuk ka kërkesa për t'u bashkuar."
 
-msgid "Something went wrong, Please try again later."
-msgstr ""
-
-msgid "Type your message here..."
-msgstr ""
-
+#, fuzzy
 msgid "You cannot add images that are not yours!"
-msgstr ""
+msgstr "Nuk mund të shtosh imazhe që nuk janë të tua!"
 
+#, fuzzy
 msgid "Your image was added to the group."
-msgstr ""
+msgstr "Imazhi juaj u shtua në grup."
 
+#, fuzzy
 msgid "Group updated with your selection of images."
-msgstr ""
+msgstr "Grupi u përditësua me përzgjedhjen tuaj të imazheve."
 
+#, fuzzy
 msgid "Your new group was created successfully"
-msgstr ""
+msgstr "Grupi juaj i ri u krijua me sukses"
 
+#, fuzzy
 msgid "Group deleted"
-msgstr ""
+msgstr "Grupi u fshi"
 
+#, fuzzy
 msgid "You have joined the group"
-msgstr ""
+msgstr "Ke u bashkuar grupit"
 
+#, fuzzy
 msgid "You already were a member of this group"
-msgstr ""
+msgstr "Ti ishe tashmë një anëtar i këtij grupi"
 
+#, fuzzy
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
 msgstr ""
+"Ky është një grup i moderuar, dhe kërkesa jote për t'u bashkuar do të "
+"rishikohet nga një moderator"
 
+#, fuzzy
 msgid "You have left the group"
-msgstr ""
+msgstr "Ke lënë grupin"
 
+#, fuzzy
 msgid "Form saved"
+msgstr "Forma u ruajt"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
 msgstr ""
+"Vetëm kategoritë e mëposhtme mbështesin autosubmission: Rrjeti profesional, "
+"Klubi ose shoqata, Komuniteti në internet, Miq ose partnerë, Zona gjeografike"
+
+#, fuzzy
+msgid "Publication"
+msgstr "Publikimi"
+
+#, fuzzy
+msgid "Title"
+msgstr "Titulli"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Çelësi/tag vlera"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Renditja e imazheve nga default"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Renditja e imazheve sipas çelës/tag vlera"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Nëse imazhet janë të renditura sipas një çelësi/tag vlera, ju lutemi "
+"specifikoni se cili është. <a target='_blank' href='https://welcome.astrobin."
+"com/features/groups'>Mësoni më shumë.<\\/a>"
+
+#, fuzzy
+msgid "Search"
+msgstr "Kërko"
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Ju lutemi mos shtoni më shumë se 100 imazhe njëherësh, faleminderit!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Rendit imazhet"
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "Grupet private që zotëroni"
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "Grupet private të cilat jeni anëtar"
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "Grupet private në të cilat jeni ftuar"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Grupet publike që zotëroni"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Grupet publike të cilat jeni anëtar"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Grupet publike në të cilat jeni ftuar"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Njoftimi i forumit"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Shkruani një 'Njoftim në forum' që do të shfaqet mbi formularin 'temë e re'. "
+"Përdorni këtë për të komunikuar rregullat e forumit, përjashtimet, ose "
+"informacionin e rëndësishëm për përdoruesit para se të krijojnë një postim "
+"të ri. Sigurohuni që mesazhi juaj të jetë i qartë dhe i shkurtër."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Diçka shkoi keq, Ju lutemi provoni përsëri më vonë."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Shkruani mesazhin tuaj këtu..."

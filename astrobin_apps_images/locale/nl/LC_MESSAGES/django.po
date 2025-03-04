@@ -1,148 +1,37 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: 2014-02-03 16:37+0000\n"
-"Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1391445450.999376\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+#, fuzzy
+msgid "Conflict."
+msgstr "Conflict."
 
+#, fuzzy
 msgid "Uncompressed source (max 100 MB)"
-msgstr ""
+msgstr "Ongecomprimeerde bron (max 100 MB)"
 
+#, fuzzy
 msgid ""
 "You can store the final processed image that came out of your favorite image "
 "editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for "
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
-
-msgid "Dates"
-msgstr ""
-
-msgid "Frames"
-msgstr ""
-
-msgid "Integration"
-msgstr ""
-
-msgid "Darks"
-msgstr ""
-
-msgid "Flats"
-msgstr ""
-
-msgid "Flat darks"
-msgstr ""
-
-msgid "Bias"
-msgstr ""
-
-msgid "Avg. Moon age"
-msgstr ""
-
-msgid "days"
-msgstr ""
-
-msgid "Avg. Moon phase"
-msgstr ""
-
-msgid "Bortle Dark-Sky Scale"
-msgstr ""
-
-msgid "Mean SQM"
-msgstr ""
-
-msgid "Mean FWHM"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "FPS"
-msgstr ""
-
-msgid "Exposure per frame"
-msgstr ""
-
-msgid "Focal length"
-msgstr ""
-
-msgid "CMI"
-msgstr ""
-
-msgid "CMII"
-msgstr ""
-
-msgid "CMIII"
-msgstr ""
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Transparency"
-msgstr ""
+"Je kunt hier op AstroBin de uiteindelijke verwerkte afbeelding opslaan die "
+"uit je favoriete afbeeldingseditor (bijv. PixInsight, Adobe Photoshop, enz.) "
+"is gekomen, voor archiveringsdoeleinden. Dit bestand wordt privé opgeslagen "
+"en alleen jij hebt toegang tot dit bestand."
 
 msgid "Error!"
 msgstr "Fout!"
 
-msgid "Image of the day"
-msgstr ""
-
-msgid "Top pick"
-msgstr ""
-
-msgid "Top pick nomination"
-msgstr ""
-
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
+#, fuzzy
 msgid "Staging area"
-msgstr ""
-
-msgid "Collaboration"
-msgstr ""
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr ""
-
-msgid "Original revision"
-msgstr ""
+msgstr "Staginggebied"
 
 msgid "Loading"
 msgstr "Bezig met laden…"
@@ -150,9 +39,157 @@ msgstr "Bezig met laden…"
 msgid "(no title)"
 msgstr "(Geen titel)"
 
-msgid "Image file not found"
-msgstr ""
+#, fuzzy
+msgid "Image of the day"
+msgstr "Afbeelding van de dag"
+
+#, fuzzy
+msgid "Top pick"
+msgstr "Topkeuze"
+
+#, fuzzy
+msgid "Top pick nomination"
+msgstr "Topkeuze nominatie"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr ""
 "Gegevenscorruptie. Gelieve dit beeld opnieuw op te laden. Onze excuses!"
+
+#, fuzzy
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Herziening %(revision)s"
+
+#, fuzzy
+msgid "Original revision"
+msgstr "Oorspronkelijke herziening"
+
+#, fuzzy
+msgid "Collaboration"
+msgstr "Samenwerking"
+
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Momenteel in de IOTD/TP wachtrij"
+
+#, fuzzy
+msgid "Video"
+msgstr "Video"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+"Er was een probleem met het coderen van deze video, upload het alsjeblieft "
+"opnieuw."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Als het probleem aanhoudt, neem dan contact met ons op."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr "Deze video is nog aan het verwerken, kom later terug naar deze pagina."
+
+#, fuzzy
+msgid "Dates"
+msgstr "Data"
+
+#, fuzzy
+msgid "Frames"
+msgstr "Frames"
+
+#, fuzzy
+msgid "Integration"
+msgstr "Integratie"
+
+#, fuzzy
+msgid "Darks"
+msgstr "Darks"
+
+#, fuzzy
+msgid "Flats"
+msgstr "Flats"
+
+#, fuzzy
+msgid "Flat darks"
+msgstr "Flat darks"
+
+#, fuzzy
+msgid "Bias"
+msgstr "Bias"
+
+#, fuzzy
+msgid "Avg. Moon age"
+msgstr "Gem. maanleeftijd"
+
+#, fuzzy
+msgid "days"
+msgstr "dagen"
+
+#, fuzzy
+msgid "Avg. Moon phase"
+msgstr "Gem. maanfase"
+
+#, fuzzy
+msgid "Bortle Dark-Sky Scale"
+msgstr "Bortle Dark-Sky Schaal"
+
+#, fuzzy
+msgid "Mean SQM"
+msgstr "Gem. SQM"
+
+#, fuzzy
+msgid "Mean FWHM"
+msgstr "Gem. FWHM"
+
+#, fuzzy
+msgid "Temperature"
+msgstr "Temperatuur"
+
+#, fuzzy
+msgid "Date"
+msgstr "Datum"
+
+#, fuzzy
+msgid "Time"
+msgstr "Tijd"
+
+#, fuzzy
+msgid "FPS"
+msgstr "FPS"
+
+#, fuzzy
+msgid "Exposure per frame"
+msgstr "Belichting per frame"
+
+#, fuzzy
+msgid "Focal length"
+msgstr "Brandpuntsafstand"
+
+#, fuzzy
+msgid "CMI"
+msgstr "CMI"
+
+#, fuzzy
+msgid "CMII"
+msgstr "CMII"
+
+#, fuzzy
+msgid "CMIII"
+msgstr "CMIII"
+
+#, fuzzy
+msgid "Seeing"
+msgstr "Seeing"
+
+#, fuzzy
+msgid "Transparency"
+msgstr "Transparantie"
+
+#, fuzzy
+msgid "Image file not found"
+msgstr "Afbeeldingsbestand niet gevonden"
+
+#, fuzzy
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Slechts één video-gebaseerde acquisitie is toegestaan per afbeelding."

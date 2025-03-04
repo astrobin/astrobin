@@ -1,441 +1,635 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-
+#, fuzzy
 msgid "Autosubmission deactivation strategy"
-msgstr ""
+msgstr "Strategie voor deactivering van automatische indiening"
 
+#, fuzzy
 msgid "Keep all images currently auto-submitted"
-msgstr ""
+msgstr "Houd alle momenteel automatisch ingediende afbeeldingen"
 
+#, fuzzy
 msgid "Remove all images and start over"
-msgstr ""
+msgstr "Verwijder alle afbeeldingen en begin opnieuw"
 
+#, fuzzy
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
 msgstr ""
+"Als je je groep verandert van autosubmissie naar niet-autosubmissie, moet je "
+"nadenken over wat je met de afbeeldingen die momenteel in de groep staan, "
+"wilt doen."
 
+#, fuzzy
 msgid "Invite users"
-msgstr ""
+msgstr "Nodig gebruikers uit"
 
+#, fuzzy
 msgid "Users will receive a notification and will be able to join the group"
-msgstr ""
+msgstr "Gebruikers ontvangen een melding en kunnen lid worden van de groep"
 
+#, fuzzy
 msgid "Professional network"
-msgstr ""
+msgstr "Professioneel netwerk"
 
+#, fuzzy
 msgid "Club or association"
-msgstr ""
+msgstr "Club of vereniging"
 
+#, fuzzy
 msgid "Internet community"
-msgstr ""
+msgstr "Internetgemeenschap"
 
+#, fuzzy
 msgid "Friends or partners"
-msgstr ""
+msgstr "Vrienden of partners"
 
+#, fuzzy
 msgid "Geographical area"
-msgstr ""
+msgstr "Geografisch gebied"
 
+#, fuzzy
 msgid "Ad-hoc collaboration"
-msgstr ""
+msgstr "Ad-hoc samenwerking"
 
+#, fuzzy
 msgid "Specific to an imaging technique"
-msgstr ""
+msgstr "Specifiek voor een beeldtechniek"
 
+#, fuzzy
 msgid "Specific to an astrophotography target"
-msgstr ""
+msgstr "Specifiek voor een astrophotografie doel"
 
+#, fuzzy
 msgid "Specific to certain equipment"
-msgstr ""
+msgstr "Specifiek voor bepaalde apparatuur"
 
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "Overig"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
+#, fuzzy
 msgid "Description"
-msgstr ""
+msgstr "Beschrijving"
 
+#, fuzzy
 msgid "HTML tags are allowed."
-msgstr ""
+msgstr "HTML-tags zijn toegestaan."
 
+#, fuzzy
 msgid "Category"
-msgstr ""
+msgstr "Categorie"
 
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-
+#, fuzzy
 msgid "Public group"
-msgstr ""
+msgstr "Openbare groep"
 
+#, fuzzy
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
 msgstr ""
+"Openbare groepen kunnen door iedereen worden doorzocht, en al hun inhoud is "
+"openbaar."
 
+#, fuzzy
 msgid "Moderated group"
-msgstr ""
+msgstr "Gemodereerde groep"
 
+#, fuzzy
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
+"Gemodereerde groepen hebben een moderatiewachtrij voor geposte afbeeldingen "
+"en lidmaatschapsverzoeken."
 
+#, fuzzy
 msgid "Automatic submission"
-msgstr ""
+msgstr "Automatische indiening"
 
+#, fuzzy
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
 "explicitly submitted to it."
 msgstr ""
+"Groepen met automatische indieningen bevatten altijd alle openbare "
+"afbeeldingen van alle leden. Groepen zonder automatische indiening bevatten "
+"alleen afbeeldingen die expliciet aan hen zijn ingediend."
 
-msgid "Forum notice"
-msgstr ""
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-
+#, fuzzy
 msgid "Last activity"
-msgstr ""
+msgstr "Laatste activiteit"
 
-msgid "Date created"
-msgstr ""
-
+#, fuzzy
 msgid "Members"
-msgstr ""
+msgstr "Leden"
 
+#, fuzzy
 msgid "Images"
-msgstr ""
+msgstr "Afbeeldingen"
 
+#, fuzzy
 msgid "Forum posts"
-msgstr ""
+msgstr "Forum berichten"
 
+#, fuzzy
 msgid "Owner"
-msgstr ""
+msgstr "Eigenaar"
 
+#, fuzzy
 msgid "Moderator"
-msgstr ""
+msgstr "Moderator"
 
+#, fuzzy
 msgid "Member"
-msgstr ""
+msgstr "Lid"
 
+#, fuzzy
 msgid "Invited"
-msgstr ""
+msgstr "Uitgenodigd"
 
+#, fuzzy
 msgid "Join request pending approval"
-msgstr ""
+msgstr "Aanvraag om lidmaatschap wacht op goedkeuring"
 
+#, fuzzy
 msgid "Add/remove images"
-msgstr ""
+msgstr "Afbeeldingen toevoegen/verwijderen"
 
+#, fuzzy
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
+"Klik op de afbeeldingen om ze in deze groep op te nemen (en klik opnieuw om "
+"ze uit te sluiten). Klik daarna op de Opslaan-knop hieronder."
 
+#, fuzzy
 msgid "(no title)"
-msgstr ""
+msgstr "(geen titel)"
 
+#, fuzzy
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
+#, fuzzy
 msgid "Delete group?"
-msgstr ""
+msgstr "Groep verwijderen?"
 
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
 msgstr ""
+"Voorzichtig! Wil je deze groep echt verwijderen? Deze actie kan niet "
+"ongedaan gemaakt worden!"
 
+#, fuzzy
 msgid "Delete group"
-msgstr ""
+msgstr "Verwijder groep"
 
+#, fuzzy
 msgid "Create new group"
-msgstr ""
+msgstr "Maak nieuwe groep aan"
 
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
+#, fuzzy
 msgid "Edit group"
-msgstr ""
+msgstr "Groep bewerken"
 
+#, fuzzy
 msgid "Manage members"
-msgstr ""
+msgstr "Beheer leden"
 
+#, fuzzy
 msgid "Actions"
-msgstr ""
+msgstr "Acties"
 
+#, fuzzy
 msgid "Join group"
-msgstr ""
+msgstr "Groep joinen"
 
+#, fuzzy
 msgid "Leave group"
-msgstr ""
+msgstr "Groep verlaten"
 
+#, fuzzy
 msgid "Moderate join requests"
-msgstr ""
+msgstr "Modereren van lidmaatschapsverzoeken"
 
-msgid "Sort images"
-msgstr ""
-
+#, fuzzy
 msgid "This group is public"
-msgstr ""
+msgstr "Deze groep is openbaar"
 
+#, fuzzy
 msgid "This group is private"
-msgstr ""
+msgstr "Deze groep is privé"
 
+#, fuzzy
 msgid "This group is moderated"
-msgstr ""
+msgstr "Deze groep is gemodereerd"
 
+#, fuzzy
 msgid "This group is not moderated"
-msgstr ""
+msgstr "Deze groep is niet gemodereerd"
 
+#, fuzzy
 msgid "This group has automatic submission"
-msgstr ""
+msgstr "Deze groep heeft automatische indiening"
 
+#, fuzzy
 msgid "This group does not have automatic submission"
-msgstr ""
+msgstr "Deze groep heeft geen automatische indiening"
 
+#, fuzzy
 msgid "Invited users"
-msgstr ""
+msgstr "Uitgenodigde gebruikers"
 
+#, fuzzy
 msgid "Join requests"
-msgstr ""
+msgstr "Lidmaatschapsverzoeken"
 
+#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
+"Een groep gemaakt op %(date_created)s, eigendom van <a href=\"%(owner_url)"
+"s\">%(owner)s</a>, gecategoriseerd als <strong>%(category)s</strong>."
 
+#, fuzzy
 msgid "Group forum"
-msgstr ""
+msgstr "Groep forum"
 
+#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
+"<strong>%(post_count)s</strong> berichten in <strong>%(topic_count)s</strong>"
+" onderwerpen"
 
+#, fuzzy
 msgid "View all"
-msgstr ""
+msgstr "Bekijk alles"
 
+#, fuzzy
 msgid "New topic"
-msgstr ""
+msgstr "Nieuw onderwerp"
 
+#, fuzzy
+msgid "Please join the group to view its forum."
+msgstr "Sluit je aan bij de groep om het forum te bekijken."
+
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
 msgstr ""
+"Voorzichtig! Wil je deze groep echt verwijderen? Deze actie kan niet "
+"ongedaan gemaakt worden en het forum van de groep en al zijn onderwerpen "
+"zullen onherroepelijk worden verwijderd!"
 
+#, fuzzy
 msgid "Join group?"
-msgstr ""
+msgstr "Groep joinen?"
 
+#, fuzzy
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
+"Dit is een openbare groep: alle inhoud, inclusief de ledenlijst, is "
+"beschikbaar voor niet-leden."
 
+#, fuzzy
 msgid "This is a private group: only members have access to its contents."
-msgstr ""
+msgstr "Dit is een privé groep: alleen leden hebben toegang tot de inhoud."
 
+#, fuzzy
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
 msgstr ""
+"Dit is een gemodereerde groep, lidmaatschapsverzoeken, afbeeldingen en "
+"forumposts kunnen door een moderatiewachtrij gaan."
 
+#, fuzzy
 msgid "This is a non-moderated group."
-msgstr ""
+msgstr "Dit is een niet-gemodereerde groep."
 
+#, fuzzy
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
 msgstr ""
+"Dit is een automatische indieningsgroep: al je afbeeldingen verschijnen hier "
+"direct zonder enige actie."
 
+#, fuzzy
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
 msgstr ""
+"Dit is een groep zonder automatische indiening: je kiest zelf welke "
+"afbeeldingen je wilt indienen."
 
+#, fuzzy
 msgid "Leave group?"
-msgstr ""
+msgstr "Groep verlaten?"
 
+#, fuzzy
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
 msgstr ""
+"Door deze groep te verlaten, zullen je ingediende afbeeldingen niet meer "
+"zichtbaar zijn voor groepsleden, terwijl je forumberichten blijven staan. "
+"Weet je het zeker?"
 
+#, fuzzy
 msgid "Groups"
-msgstr ""
+msgstr "Groepen"
 
+#, fuzzy
 msgid "Sort"
-msgstr ""
+msgstr "Sorteer"
 
-msgid "Search"
-msgstr ""
+#, fuzzy
+msgid "Date created"
+msgstr "Datum aangemaakt"
 
-msgid "Private groups you own"
-msgstr ""
+#, fuzzy
+msgid "Your private groups"
+msgstr "Je privé groepen"
 
-msgid "Private groups you are a member of"
+#, fuzzy
+msgid "You own, or are a member of, or were invited to, these private groups."
 msgstr ""
+"Je bezit, of bent lid van, of bent uitgenodigd voor, deze privé groepen."
 
-msgid "Private groups you are invited to"
-msgstr ""
+#, fuzzy
+msgctxt "group"
+msgid "Create private group"
+msgstr "Maak een privé groep aan"
 
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
-
+#, fuzzy
 msgid "Public groups"
-msgstr ""
+msgstr "Openbare groepen"
 
+#, fuzzy
+msgid "Open to the whole community."
+msgstr "Open voor de hele gemeenschap."
+
+#, fuzzy
+msgctxt "group"
+msgid "Create public group"
+msgstr "Maak openbare groep"
+
+#, fuzzy
 msgid "No groups available."
-msgstr ""
+msgstr "Geen groepen beschikbaar."
 
+#, fuzzy
 msgid "Revoke?"
-msgstr ""
+msgstr "Intrekken?"
 
+#, fuzzy
 msgid "Revoke invitation"
-msgstr ""
+msgstr "Uitnodiging intrekken"
 
+#, fuzzy
 msgid "This group has no active invitations."
-msgstr ""
+msgstr "Deze groep heeft geen actieve uitnodigingen."
 
+#, fuzzy
 msgid "Moderators"
-msgstr ""
+msgstr "Moderators"
 
+#, fuzzy
 msgid "Remove moderator status"
-msgstr ""
+msgstr "Moderatorstatus verwijderen"
 
+#, fuzzy
 msgid "This group has no moderators."
-msgstr ""
+msgstr "Deze groep heeft geen moderators."
 
+#, fuzzy
 msgid "Make moderator"
-msgstr ""
+msgstr "Maak moderator"
 
+#, fuzzy
 msgid "Remove member"
-msgstr ""
+msgstr "Verwijder lid"
 
+#, fuzzy
 msgid "This group has no members."
-msgstr ""
+msgstr "Deze groep heeft geen leden."
 
+#, fuzzy
 msgid "Type in a search term"
-msgstr ""
+msgstr "Typ een zoekterm in"
 
+#, fuzzy
 msgid "No results"
-msgstr ""
+msgstr "Geen resultaten"
 
+#, fuzzy
 msgid "Searching"
-msgstr ""
+msgstr "Zoeken"
 
+#, fuzzy
 msgid "members list"
-msgstr ""
+msgstr "ledenlijst"
 
+#, fuzzy
 msgid "Back to group"
-msgstr ""
+msgstr "Terug naar groep"
 
+#, fuzzy
 msgid "Full list of the group members"
-msgstr ""
+msgstr "Volledige lijst van de groepsleden"
 
+#, fuzzy
 msgid "Images in group"
-msgstr ""
+msgstr "Afbeeldingen in groep"
 
+#, fuzzy
 msgid "Forum posts in group"
-msgstr ""
+msgstr "Forum berichten in de groep"
 
+#, fuzzy
 msgid "Approve"
-msgstr ""
+msgstr "Goedkeuren"
 
+#, fuzzy
 msgid "Reject"
-msgstr ""
+msgstr "Afwijzen"
 
+#, fuzzy
 msgid "This group has no join requests."
-msgstr ""
+msgstr "Deze groep heeft geen lidmaatschapsverzoeken."
 
-msgid "Something went wrong, Please try again later."
-msgstr ""
-
-msgid "Type your message here..."
-msgstr ""
-
+#, fuzzy
 msgid "You cannot add images that are not yours!"
-msgstr ""
+msgstr "Je kunt geen afbeeldingen toevoegen die niet van jou zijn!"
 
+#, fuzzy
 msgid "Your image was added to the group."
-msgstr ""
+msgstr "Je afbeelding is aan de groep toegevoegd."
 
+#, fuzzy
 msgid "Group updated with your selection of images."
-msgstr ""
+msgstr "Groep bijgewerkt met je selectie van afbeeldingen."
 
+#, fuzzy
 msgid "Your new group was created successfully"
-msgstr ""
+msgstr "Je nieuwe groep is succesvol aangemaakt"
 
+#, fuzzy
 msgid "Group deleted"
-msgstr ""
+msgstr "Groep verwijderd"
 
+#, fuzzy
 msgid "You have joined the group"
-msgstr ""
+msgstr "Je bent lid geworden van de groep"
 
+#, fuzzy
 msgid "You already were a member of this group"
-msgstr ""
+msgstr "Je was al lid van deze groep"
 
+#, fuzzy
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
 msgstr ""
+"Dit is een gemodereerde groep, en je lidmaatschapsverzoek zal door een "
+"moderator worden beoordeeld"
 
+#, fuzzy
 msgid "You have left the group"
-msgstr ""
+msgstr "Je hebt de groep verlaten"
 
+#, fuzzy
 msgid "Form saved"
+msgstr "Formulier opgeslagen"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
 msgstr ""
+"Alleen de volgende categorieën ondersteunen autosubmissie: Professioneel "
+"netwerk, Club of vereniging, Internetgemeenschap, Vrienden of partners, "
+"Geografisch gebied"
+
+#, fuzzy
+msgid "Publication"
+msgstr "Publicatie"
+
+#, fuzzy
+msgid "Title"
+msgstr "Titel"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Sleutel/waarde tag"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Standaard afbeelding sortering"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Afbeelding sleutel/waarde tag sortering"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Als afbeeldingen zijn gesorteerd op een sleutel/waarde tag, geef dan aan "
+"welke. <a target='_blank' href='https://welcome.astrobin."
+"com/features/groups'>Leer meer.<\\/a>"
+
+#, fuzzy
+msgid "Search"
+msgstr "Zoeken"
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr ""
+"Voeg alsjeblieft niet meer dan 100 afbeeldingen in één keer toe, bedankt!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Afbeeldingen sorteren"
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "Privé groepen die je bezit"
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "Privé groepen waarvan je lid bent"
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "Privé groepen waar je voor bent uitgenodigd"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Open groepen die je bezit"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Open groepen waarvan je lid bent"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Open groepen waar je voor bent uitgenodigd"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Forum melding"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Voer een 'Forum melding' in die boven het 'nieuwe onderwerp' formulier wordt "
+"weergegeven. Gebruik dit om forumregels, disclaimers of belangrijke "
+"informatie aan gebruikers te communiceren voordat ze een nieuw bericht "
+"aanmaken. Zorg ervoor dat je boodschap duidelijk en beknopt is."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Er is iets misgegaan, probeer het later opnieuw."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Typ je bericht hier..."

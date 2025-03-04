@@ -1,23 +1,42 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: 2015-12-30 10:09+0000\n"
-"Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451470170.821291\n"
+"Content-Transfer-Encoding: 8bit"
+
+#, fuzzy
+msgid "I wasn't really affected by the data loss"
+msgstr "En oikeastaan kärsin datan menetyksestä"
+
+#, fuzzy
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr "En tarvitse korvausta: haluan tukea AstroBinia"
+
+#, fuzzy
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr "Haluaisin kokeilla AstroBin Ultimatea ilmaiseksi kuukauden ajan"
+
+#, fuzzy
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr ""
+"Tunnen itseni oikeutetuksi saamaan AstroBin Ultimatea ilmaiseksi kolmeksi "
+"kuukaudeksi"
+
+#, fuzzy
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr ""
+"Tunnen itseni oikeutetuksi saamaan AstroBin Ultimatea ilmaiseksi kuudeksi "
+"kuukaudeksi"
+
+#, fuzzy
+msgid "Requested compensation"
+msgstr "Pyydetty korvaus"
+
+#, fuzzy
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr "Ilmoita, haluatko ja kuinka paljon korvausta"
 
 msgid "Your migration data"
 msgstr "Tiedot siirrostasi"
@@ -49,8 +68,104 @@ msgstr "Päivämäärä"
 msgid "Subscription"
 msgstr "Tilaus"
 
-msgid "Paying member"
+#, fuzzy
+msgid "Data loss compensation request"
+msgstr "Datan menetyksen korvauspyyntö"
+
+#, fuzzy
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
 msgstr ""
+"Olet oikeutettu korvaukseen, koska datan menetys tapahtui 16. helmikuuta "
+"2020."
+
+#, fuzzy
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+"Jos et ole vielä ehtinyt, ota hetki aikaa lukeaksesi, mitä tapahtui "
+"seuraavalla sivulla:"
+
+#, fuzzy
+msgid "Official statement and post-mortem"
+msgstr "Virallinen lausunto ja jälkipuinti"
+
+#, fuzzy
+msgid "Please accept our apology once more."
+msgstr "Hyväksy anteeksipyyntömme vielä kerran."
+
+#, fuzzy
+msgid "Please chooce your compensation from the list below"
+msgstr "Valitse korvauksesi alla olevasta listasta"
+
+#, fuzzy
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+"Korvaus tarjotaan ilmaisena aikana uudella AstroBin-tilausportilla nimeltä "
+"\"Ultimate\"."
+
+#, fuzzy
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+"Jos haluat tietää lisää AstroBin Ultimate -tilauksesta, käy <a href=\"%(url)"
+"s\" target=\"_blank\">hinnoittelusivulla</a>."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Lähetä"
+
+#, fuzzy
+msgid "Data loss compensation reauest"
+msgstr "Datan menetyksen korvauspyyntö"
+
+#, fuzzy
+msgid "Already done"
+msgstr "Jo tehty"
+
+#, fuzzy
+msgid "Sorry, you can't do this again."
+msgstr "Anteeksi, et voi tehdä tätä uudelleen."
+
+#, fuzzy
+msgid "Your preference was already recorded and cannot be changed."
+msgstr "Valintasi on jo tallennettu eikä sitä voi muuttaa."
+
+#, fuzzy
+msgid "Not eligible"
+msgstr "Ei oikeutettu"
+
+#, fuzzy
+msgid "It looks like you're not eligible"
+msgstr "Näyttää siltä, että et ole oikeutettu"
+
+#, fuzzy
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+"Anteeksi, mutta tämä sivu on tarkoitettu henkilöille, jotka olivat AstroBin "
+"Premiumissa sinä päivänä, kun datan menetyksen tapahtu, ja näyttää siltä, "
+"että et ole heidän joukossaan."
+
+msgid "Success"
+msgstr "Onnistui"
+
+#, fuzzy
+msgid "All done!"
+msgstr "Kaikki tehty!"
+
+#, fuzzy
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
+msgstr "Valintasi on tallennettu ja se on jo otettu käyttöön. Kiitos!"
 
 msgid "Migrate donations"
 msgstr "Siirrä lahjoitukset"
@@ -100,20 +215,19 @@ msgstr ""
 msgid "No, I want to pay for Premium"
 msgstr "Ei, haluan maksaa Premiumista"
 
-msgid "Success"
-msgstr "Onnistui"
-
 msgid "Your migration was successful."
 msgstr "Siirto onnistui."
 
 msgid "Thanks for supporting AstroBin!"
 msgstr "Kiitos Astrobinin tukemisesta!"
 
+#, fuzzy
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
-msgstr ""
+msgstr "\"%(subscription_name)s\"-tilauksesi AstroBinissa on juuri päättynyt."
 
+#, fuzzy
 msgid ""
 "When a subscription on AstroBin expires, nothing happens to your images or "
 "any of your content. You are reverted to AstroBin Free and will not be able "
@@ -121,51 +235,590 @@ msgid ""
 "in all other aspects if you do not have any new images to share at the "
 "moment."
 msgstr ""
+"Kun tilaus AstroBinissa päättyy, kuvillesi tai muulle sisällölle ei tapahdu "
+"mitään. Palautut AstroBin Free -tilaan etkä voi ladata uusia kuvia ennen "
+"kuin uusit, mutta voit jatkaa AstroBinin käyttöä kaikilla muilla osa-"
+"alueilla, jos sinulla ei ole uusia kuvia jaettavaksi."
 
+#, fuzzy
 msgid ""
 "When you are ready to renew your subscription, please visit the following "
 "page:"
-msgstr ""
+msgstr "Kun olet valmis uusimaan tilauksesi, käy seuraavalla sivulla:"
 
+#, fuzzy
 msgid "Your AstroBin subscription has just expired"
-msgstr ""
+msgstr "AstroBin-tilauksesi on juuri päättynyt"
 
+#, fuzzy
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
 "week."
 msgstr ""
+"\"%(subscription_name)s\"-tilauksesi AstroBinissa päättyy viikon kuluttua."
 
+#, fuzzy
 msgid ""
 "PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
 "still ongoing. Please wait until it is expired. Thank you!"
 msgstr ""
+"HUOMAA! Tällä hetkellä et voi uusia tilausta, kun se on vielä voimassa. "
+"Odota, kunnes se on päättynyt. Kiitos!"
 
+#, fuzzy
 msgid "Your AstroBin subscription will expire in one week"
-msgstr ""
+msgstr "AstroBin-tilauksesi päättyy viikon kuluttua"
 
+#, fuzzy
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
 "automatically renewed in one week."
 msgstr ""
+"\"%(subscription_name)s\"-tilauksesi AstroBinissa uusitaan automaattisesti "
+"viikon kuluttua."
 
+#, fuzzy
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically."
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
 msgstr ""
+"Sinulla on automaattisesti uusiutuva tilaus AstroBinissa, ja yritämme uusia "
+"sen automaattisesti. Jos tilauksesi on luotu tavallisella tavalla, PayPalin "
+"kautta, PayPal yrittää veloittaa luottokortiltasi tai hankkia varoja, jotka "
+"ovat tililläsi."
 
+#, fuzzy
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"Jos tilauksesi on luotu manuaalisesti pankkisiirrolla, ota yhteyttä uuden "
+"maksun saamiseksi."
+
+#, fuzzy
 msgid "Thank you!"
-msgstr ""
+msgstr "Kiitos!"
 
+#, fuzzy
 msgid "Your AstroBin subscription will be automatically renewed in one week"
-msgstr ""
+msgstr "AstroBin-tilauksesi uusitaan automaattisesti viikon kuluttua"
 
+#, fuzzy
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
 "automatically renewed in 30 days."
 msgstr ""
+"\"%(subscription_name)s\"-tilauksesi AstroBinissa uusitaan automaattisesti "
+"30 päivän kuluttua."
 
+#, fuzzy
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+msgstr "AstroBin-tilauksesi uusitaan automaattisesti 30 päivän kuluttua"
+
+#, fuzzy
+msgid "You follow each other"
+msgstr "Seuraatte toisianne"
+
+#, fuzzy
+msgid "Images"
+msgstr "Kuvat"
+
+#, fuzzy
+msgid "Followers"
+msgstr "Seuraajat"
+
+#, fuzzy
+msgid "Following"
+msgstr "Seuraaminen"
+
+#, fuzzy
+msgid "User"
+msgstr "Käyttäjä"
+
+#, fuzzy
+msgid "No users."
+msgstr "Ei käyttäjiä."
+
+#, fuzzy
+msgid "Administrator"
+msgstr "Ylläpitäjä"
+
+#, fuzzy
+msgid "Image moderator"
+msgstr "Kuvamoderointi"
+
+#, fuzzy
+msgid "IOTD Submitter"
+msgstr "IOTD-lähettäjä"
+
+#, fuzzy
+msgid "IOTD Reviewer"
+msgstr "IOTD-arvioija"
+
+#, fuzzy
+msgid "IOTD Judge"
+msgstr "IOTD-tuomari"
+
+#, fuzzy
+msgid "Premium member"
+msgstr "Premium-jäsen"
+
+#, fuzzy
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
 msgstr ""
+"Sähköpostisi palautusraportit on poistettu AstroBinista. Varmista, että "
+"sähköpostisi toimii hyvin, muuten saat saman varoitusviestin uudelleen. "
+"Kiitos!"
+
+#, fuzzy
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Roskapostiraporttisi on poistettu AstroBinista. Varmista, ettei sinulla ole "
+"suodattimia tai sääntöjä, jotka merkitsevät aina AstroBinin sähköpostit "
+"roskapostiksi! Jos et halua vastaanottaa sähköposteja AstroBinilta, etsi "
+"asetukset-linkki, joka on jokaisen sähköpostin alareunassa. Kiitos!"
+
+#, fuzzy
+msgid "Perform a blind solve"
+msgstr "Suorita sokkosovitus"
+
+#, fuzzy
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
+msgstr ""
+"Yritä ratkaista ilman vihjeitä. Useimmissa tapauksissa tämä toimii, mutta se "
+"vie enemmän aikaa."
+
+#, fuzzy
+msgid "Width of the field in degrees"
+msgstr "Kentän leveys asteina"
+
+#, fuzzy
+msgid "Width of the field in arcminutes"
+msgstr "Kentän leveys kaariminuutteina"
+
+#, fuzzy
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr "Kentän resoluutio kaarisekunteina/pikseli"
+
+#, fuzzy
+msgid "Field size units"
+msgstr "Kentän koon yksiköt"
+
+#, fuzzy
+msgid "Min field size"
+msgstr "Minimi kentän koko"
+
+#, fuzzy
+msgid "Estimate the lower bound for the width of this field."
+msgstr "Arvioi tämän kentän leveyden alaraja."
+
+#, fuzzy
+msgid "Max field size"
+msgstr "Maksimi kentän koko"
+
+#, fuzzy
+msgid "Estimate the upper bound for the width of this field."
+msgstr "Arvioi tämän kentän leveyden yläraja."
+
+#, fuzzy
+msgid "Center RA"
+msgstr "Keskikohta RA"
+
+#, fuzzy
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr "Kentän keskikohta RA asteina, 0.000 - 360.000"
+
+#, fuzzy
+msgid "Center dec"
+msgstr "Keskikohta dec"
+
+#, fuzzy
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr "Kentän keskikohta dec asteina, -90.000 - +90.000"
+
+#, fuzzy
+msgid "Radius"
+msgstr "Säde"
+
+#, fuzzy
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
+msgstr ""
+"Käsketään levynratkaisumoottoria etsimään näiden monen asteen sisällä "
+"annetusta keskikohta RA:sta ja dec:stä."
+
+#, fuzzy
+msgid "Small"
+msgstr "Pieni"
+
+#, fuzzy
+msgid "Medium"
+msgstr "Keskikokoinen"
+
+#, fuzzy
+msgid "Large"
+msgstr "Suuri"
+
+#, fuzzy
+msgid "Sample raw frame (max 100 MB)"
+msgstr "Esimerkkiraaka kuva (max 100 MB)"
+
+#, fuzzy
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+"Parantaaksesi levynratkaisusi tarkkuutta entisestään, lataa yksi XISF- tai "
+"FITS-tiedostoista datasarjastasi. Tällaisilla tiedostoilla on yleensä "
+"päivämäärä- ja aikaleimat, jotka mahdollistavat AstroBinille aurinkokunnan "
+"kohteiden ephemeridien laskemisen ja planeettojen sekä asteroiden löytämisen "
+"kuvastasi (edellyttäen, että lisäät myös sijaintitiedot siihen).<br/><br/>"
+"Maksimaalisen tarkkuuden saavuttamiseksi on suositeltavaa käyttää "
+"PixInsightin alkuperäistä ja avointa muotoa XISF. Lue lisää XISF:stä täältä:"
+"<br/><br/><a href=\"https://pixinsight.com/xisf/\" target=\"_blank\">https:"
+"//pixinsight.com/xisf/</a><br/><br/><strong>Huomaa:</strong> on erittäin "
+"tärkeää, että lataamasi XISF- tai FITS-tiedosto on kohdistettu käsiteltyyn "
+"kuvaasi, muuten kohteen merkinnät eivät vastaa. Parantaaksesi "
+"mahdollisuuksiasi onnistuneeseen tarkkaan levynratkaisuun, kalibroi "
+"tiedostosi tavalliseen tapaan (dark/bias/flats), mutta älä venytä sitä."
+
+#, fuzzy
+msgid "Scaled font size"
+msgstr "Skaalattu fonttikoko"
+
+#, fuzzy
+msgid "Font size of the annotations on your main image page"
+msgstr "Fonttikoko pääkuvasi merkinnöissä"
+
+#, fuzzy
+msgid "Show equatorial grid"
+msgstr "Näytä ekvatoriaalinen ruudukko"
+
+#, fuzzy
+msgid "Show constellation borders"
+msgstr "Näytä tähtikuvioiden rajat"
+
+#, fuzzy
+msgid "Show constellation lines"
+msgstr "Näytä tähtikuvioiden viivat"
+
+#, fuzzy
+msgid "Show named stars"
+msgstr "Näytä nimettyjä tähtiä"
+
+#, fuzzy
+msgid "Show Messier objects"
+msgstr "Näytä Messier-objekteja"
+
+#, fuzzy
+msgid "Show NGC and IC objects"
+msgstr "Näytä NGC- ja IC-objekteja"
+
+#, fuzzy
+msgid "Show VdB objects"
+msgstr "Näytä VdB-objekteja"
+
+#, fuzzy
+msgid "Show Sharpless objects"
+msgstr "Näytä Sharpless-objekteja"
+
+#, fuzzy
+msgid "Show Barnard objects"
+msgstr "Näytä Barnard-objekteja"
+
+#, fuzzy
+msgid "Show PGC objects"
+msgstr "Näytä PGC-objekteja"
+
+#, fuzzy
+msgid "Show planets"
+msgstr "Näytä planeettoja"
+
+#, fuzzy
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+"Saatavilla vain, jos kuvassasi on vähintään hankinta-aika ja tarkka sijainti"
+
+#, fuzzy
+msgid "Show asteroids"
+msgstr "Näytä asteroideja"
+
+#, fuzzy
+msgid "Show GCVS stars"
+msgstr "Näytä GCVS-tähtiä"
+
+#, fuzzy
+msgid "General Catalog of Variable Stars"
+msgstr "Yleinen muuttuvien tähtien luettelo"
+
+#, fuzzy
+msgid "Show Tycho-2 catalog"
+msgstr "Näytä Tycho-2 -luettelo"
+
+#, fuzzy
+msgid "Show CGPN objects"
+msgstr "Näytä CGPN-objekteja"
+
+#, fuzzy
+msgid "Getting plate-solving status, please wait..."
+msgstr "Levyjen ratkaisu käynnissä, ole hyvä ja odota..."
+
+#, fuzzy
+msgid "Plate-solving starting, please do not leave this page..."
+msgstr "Levyjen ratkaisu aloitettu, älä poistu tältä sivulta..."
+
+#, fuzzy
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr "Edistynyt levyjen ratkaisu aloitettu, älä poistu tältä sivulta..."
+
+#, fuzzy
+msgid "Plate-solving started. You may leave this page."
+msgstr "Levyjen ratkaisu aloitettu. Voit poistua tältä sivulta."
+
+#, fuzzy
+msgid "Advanced plate-solving started. You may leave this page."
+msgstr "Edistynyt levyjen ratkaisu aloitettu. Voit poistua tältä sivulta."
+
+#, fuzzy
+msgid "Plate-solving almost ready, please do not leave this page..."
+msgstr "Levyjen ratkaisu lähes valmis, ole hyvä ja odota..."
+
+#, fuzzy
+msgid "This image could not be plate-solved."
+msgstr "Tätä kuvaa ei voitu ratkaista."
+
+#, fuzzy
+msgid "The advanced plate-solving failed."
+msgstr "Edistynyt plate-solving epäonnistui."
+
+#, fuzzy
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr "Tämä kuva on plate-solved. Päivitä sivu nähdäksesi uudet tiedot!"
+
+#, fuzzy
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
+msgstr "Edistynyt plate-solving päättyi. Päivitä sivu nähdäksesi uudet tiedot!"
+
+#, fuzzy
+msgid "Error"
+msgstr "Virhe"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because it was not possible to "
+"establish a connection to nova.astrometry.net. Please try again later!"
+msgstr ""
+"AstroBin ei voinut plate-solvea tätä kuvaa, koska yhteyden muodostaminen "
+"nova.astrometry.net:iin ei onnistunut. Yritä myöhemmin uudelleen!"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error."
+msgstr ""
+"AstroBin ei voinut plate-solvea tätä kuvaa, koska nova.astrometry.net "
+"ilmoitti sisäisestä palvelinvirheestä."
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an unepexted error."
+msgstr ""
+"AstroBin ei voinut plate-solvea tätä kuvaa, koska nova.astrometry.net "
+"ilmoitti odottamattomasta virheestä."
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+"Näytä kohteet Lyndsin kirkkaiden sumujen luettelosta (LBN) (Lynds 1965)"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr "Näytä kohteet Lyndsin tummien sumujen luettelosta (LDN) (Lynds 1962)"
+
+#, fuzzy
+msgid "Show quasars"
+msgstr "Näytä kvasaareja"
+
+#, fuzzy
+msgid "Missing"
+msgstr "Puuttuu"
+
+#, fuzzy
+msgid "Basic pending"
+msgstr "Perus odottaa"
+
+#, fuzzy
+msgid "Basic failed"
+msgstr "Perus epäonnistui"
+
+#, fuzzy
+msgid "Basic success"
+msgstr "Perus onnistui"
+
+#, fuzzy
+msgid "Advanced pending"
+msgstr "Edistynyt odottaa"
+
+#, fuzzy
+msgid "Advanced failed"
+msgstr "Edistynyt epäonnistui"
+
+#, fuzzy
+msgid "Advanced success"
+msgstr "Edistynyt onnistui"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error."
+msgstr ""
+"AstroBin ei voinut plate-solvea tätä kuvaa odottamattoman virheen vuoksi."
+
+#, fuzzy
+msgid "n/a"
+msgstr "n/a"
+
+#, fuzzy
+msgid "Starting task..."
+msgstr "Aloitetaan tehtävä..."
+
+#, fuzzy
+msgid "Downloading image..."
+msgstr "Ladataan kuvaa..."
+
+#, fuzzy
+msgid "Plate-solving image..."
+msgstr "Plate-solving kuvaa..."
+
+#, fuzzy
+msgid "Generating image annotations..."
+msgstr "Luodaan kuvan annotaatioita..."
+
+#, fuzzy
+msgid "Processing SVG documents..."
+msgstr "Käsitellään SVG-dokumentteja..."
+
+#, fuzzy
+msgid "Uploading results..."
+msgstr "Ladataan tuloksia..."
+
+#, fuzzy
+msgid "Task completed"
+msgstr "Tehtävä suoritettu"
+
+#, fuzzy
+msgid "Plate-solving information"
+msgstr "Plate-solving tiedot"
+
+#, fuzzy
+msgid "Status"
+msgstr "Tila"
+
+#, fuzzy
+msgid "Started"
+msgstr "Aloitettu"
+
+#, fuzzy
+msgid "Astrometry.net job"
+msgstr "Astrometry.net työ"
+
+#, fuzzy
+msgid "PixInsight job"
+msgstr "PixInsight työ"
+
+#, fuzzy
+msgid "PixInsight queue size"
+msgstr "PixInsight jonon koko"
+
+#, fuzzy
+msgid "PixInsight stage"
+msgstr "PixInsight vaihe"
+
+#, fuzzy
+msgid "PixInsight log"
+msgstr "PixInsight loki"
+
+#, fuzzy
+msgid "RA"
+msgstr "RA"
+
+#, fuzzy
+msgid "center"
+msgstr "keskipiste"
+
+#, fuzzy
+msgid "degrees"
+msgstr "asteet"
+
+#, fuzzy
+msgid "top/left"
+msgstr "ylä/vasen"
+
+#, fuzzy
+msgid "top/right"
+msgstr "ylä/oikea"
+
+#, fuzzy
+msgid "bottom/right"
+msgstr "ala/oikea"
+
+#, fuzzy
+msgid "bottom/left"
+msgstr "ala/vasen"
+
+#, fuzzy
+msgid "Dec"
+msgstr "Dec"
+
+#, fuzzy
+msgid "Close"
+msgstr "Sulje"
+
+#, fuzzy
+msgid "Invalid"
+msgstr "Virheellinen"
+
+#, fuzzy
+msgid "Generating finding charts..."
+msgstr "Luodaan löytökarttoja..."
+
+#, fuzzy
+msgid "Paying member"
+msgstr "Maksava jäsen"
+
+#, fuzzy
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically."
+msgstr ""
+"Sinulla on automaattisesti uusiutuva tilaus AstroBinissa, ja yritämme uusia "
+"sen automaattisesti."

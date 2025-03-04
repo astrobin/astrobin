@@ -1,122 +1,357 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sq\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "(deleted)"
+#, fuzzy
+msgid "You follow each other"
+msgstr "Ju ndiheni njëri-tjetrit"
+
+#, fuzzy
+msgid "Images"
+msgstr "Imazhet"
+
+#, fuzzy
+msgid "Followers"
+msgstr "Ndjekësit"
+
+#, fuzzy
+msgid "Following"
+msgstr "Duke ndjekur"
+
+#, fuzzy
+msgid "User"
+msgstr "Përdoruesi"
+
+#, fuzzy
+msgid "No users."
+msgstr "Nuk ka përdoruesish."
+
+#, fuzzy
+msgid "Administrator"
+msgstr "Administrator"
+
+#, fuzzy
+msgid "Image moderator"
+msgstr "Moderator i imazheve"
+
+#, fuzzy
+msgid "IOTD Submitter"
+msgstr "Dërgues i IOTD"
+
+#, fuzzy
+msgid "IOTD Reviewer"
+msgstr "Rishikues i IOTD"
+
+#, fuzzy
+msgid "IOTD Judge"
+msgstr "Gjyqtar i IOTD"
+
+#, fuzzy
+msgid "Premium member"
+msgstr "Anëtar premium"
+
+#, fuzzy
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
 msgstr ""
+"Raportet e tua për bounce të emailit janë hequr nga AstroBin. Të lutem "
+"sigurohu që emaili yt funksionon mirë ose do të marrësh të njëjtin mesazh "
+"paralajmërues përsëri. Faleminderit!"
 
+#, fuzzy
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Raportet e tua për spam janë hequr nga AstroBin. Të lutem sigurohu që nuk ke "
+"një filtrin ose rregull që gjithmonë e shënon emailin e AstroBin si spam! "
+"Nëse nuk dëshiron të marrësh email nga AstroBin, kërko lidhjen e cilësimeve "
+"që është në fund të çdo emaili. Faleminderit!"
+
+#, fuzzy
 msgid "Type your comment here..."
-msgstr ""
+msgstr "Shkruaj komentarin tënd këtu..."
 
-msgid "Error"
-msgstr ""
-
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Anulo"
 
+#, fuzzy
 msgid "Add a comment"
-msgstr ""
+msgstr "Shto një koment"
 
-msgid "There are no comments yet."
-msgstr ""
-
-msgid "The comment cannot be empty."
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "Undelete"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Link"
-msgstr ""
-
-msgctxt "Noun, e.g. 'This element has 10 likes'"
-msgid "likes"
-msgstr ""
-
-msgctxt "Verb (imperative)"
-msgid "Like"
-msgstr ""
-
-msgctxt "Verb (imperative)"
-msgid "Unlike"
-msgstr ""
-
-msgctxt "Verb (imperative)"
-msgid "Reply"
-msgstr ""
-
-msgctxt "Verb (imperative)"
-msgid "Approve"
-msgstr ""
-
-msgid "Report abuse"
-msgstr ""
-
+#, fuzzy
 #, python-format
 msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
 msgstr ""
+"Të lutem <a href=\"%(login_url)s\">bëj log in</a> ose <a href=\"%(signup_url)"
+"s\">regjistrohu</a> për të lënë një koment."
 
+#, fuzzy
+msgid "There are no comments yet."
+msgstr "Nuk ka komente akoma."
+
+#, fuzzy
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+"Ky koment është në pritje të moderimit dhe do të rishikohet së shpejti."
+
+#, fuzzy
+msgid "(deleted)"
+msgstr "(e fshirë)"
+
+#, fuzzy
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "pëlqime"
+
+#, fuzzy
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "pëlqim"
+
+#, fuzzy
+msgid "Link"
+msgstr "Lidhje"
+
+#, fuzzy
+msgid "Undelete"
+msgstr "Rifshij"
+
+#, fuzzy
+msgid "Delete"
+msgstr "Fshi"
+
+#, fuzzy
+msgid "Edit"
+msgstr "Redakto"
+
+#, fuzzy
+msgid "Reply"
+msgstr "Përgjigju"
+
+#, fuzzy
+msgid "Like"
+msgstr "Pëlqeje"
+
+#, fuzzy
+msgid "Unlike"
+msgstr "Për të hequr pëlqimin"
+
+#, fuzzy
+msgid "The comment cannot be empty."
+msgstr "Komentari nuk mund të jetë bosh."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Dërgo"
+
+#, fuzzy
+msgid "Error"
+msgstr "Gabim"
+
+#, fuzzy
+msgctxt "Verb (imperative)"
+msgid "Like"
+msgstr "Pëlqeje"
+
+#, fuzzy
+msgctxt "Verb (imperative)"
+msgid "Unlike"
+msgstr "Për të hequr pëlqimin"
+
+#, fuzzy
+msgctxt "Verb (imperative)"
+msgid "Reply"
+msgstr "Përgjigju"
+
+#, fuzzy
+msgctxt "Verb (imperative)"
+msgid "Approve"
+msgstr "Mirato"
+
+#, fuzzy
+msgid "Report abuse"
+msgstr "Raporto abuzimin"
+
+#, fuzzy
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
 msgstr ""
+"Ky koment është në pritje të moderimit. Të lutem miratoje ose raporto një "
+"abuzim duke përdorur butonat më poshtë."
 
+#, fuzzy
 msgid "Thank you for your cooperation!"
-msgstr ""
+msgstr "Faleminderit për bashkëpunimin tuaj!"
 
+#, fuzzy
 msgid "This comment was already moderated by you or an AstroBin moderator."
 msgstr ""
+"Ky koment është moderuar tashmë nga ti ose nga një moderator i AstroBin."
 
+#, fuzzy
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
 "author or owner of the content object that you commented on. If they do not "
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
+"Komentari yt është në pritje të moderimit dhe duhet të rishikohet së shpejti "
+"nga autori ose pronari i objektit të përmbajtjes që ke komentuar. Nëse ata "
+"nuk marrin masa brenda 24 orëve, një moderator i AstroBin do të marrë "
+"përsipër dhe do të rishikojë komentarin tënd në emër të tyre."
 
+#, fuzzy
 msgid "This process is necessary to prevent spam on AstroBin."
-msgstr ""
+msgstr "Ky proces është i nevojshëm për të parandaluar spam në AstroBin."
 
+#, fuzzy
 msgid "Thank you for understanding!"
-msgstr ""
+msgstr "Faleminderit për kuptimin!"
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr ""
-
-msgid "Submit"
-msgstr ""
-
+#, fuzzy
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
+"Nuk mund ta rifshish këtë koment: ekziston një raport abuzimi i konfirmuar "
+"ose në pritje për të. Nëse beson se komenti yt është raportuar padrejtësisht,"
+" të lutem na kontakto."
 
+#, fuzzy
 msgid "You have reached your abuse report quota."
-msgstr ""
+msgstr "Ke arritur kuotën tënde për raportet e abuzimit."
 
+#, fuzzy
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr ""
+"Ky artikull nuk mund të raportohet përsëri sepse është miratuar nga një "
+"moderator."
 
+#, fuzzy
+msgid "You many not report the same item more than once."
+msgstr "Nuk mund të raportosh të njëjtin artikull më shumë se një herë."
+
+#, fuzzy
 msgid "You may not report the same item more than once."
+msgstr "Nuk mund të raportosh të njëjtin artikull më shumë se një herë."
+
+#, fuzzy
+msgid "Report a use"
+msgstr "Raporto një përdorim"
+
+#, fuzzy
+msgid "Member since"
+msgstr "Anëtar që nga"
+
+#, fuzzy
+msgid "Last seen online"
+msgstr "E fundit e parë online"
+
+#, fuzzy
+msgid "Total integration time"
+msgstr "Koha totale e integrimit"
+
+#, fuzzy
+msgid "hours"
+msgstr "orë"
+
+#, fuzzy
+msgid "Average integration time"
+msgstr "Koha mesatare e integrimit"
+
+#, fuzzy
+msgid "Forum posts written"
+msgstr "Postime në forum të shkruara"
+
+#, fuzzy
+msgid "Comments written"
+msgstr "Komentet e shkruara"
+
+#, fuzzy
+msgid "Comments received"
+msgstr "Komentet e marra"
+
+#, fuzzy
+msgid "Likes received"
+msgstr "Pëlqime të marra"
+
+#, fuzzy
+msgid "Views received"
+msgstr "Pamjet e marra"
+
+#, fuzzy
+msgid "No date specified"
+msgstr "Nuk është specifikuar data"
+
+#, fuzzy
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
+"Nuk ka teleskopë ose lente për imazhim, ose nuk janë specifikuar kamera për "
+"imazhim"
+
+#, fuzzy
+msgid "Gear images"
+msgstr "Imazhe të pajisjeve"
+
+#, fuzzy
+msgid "Deep sky"
+msgstr "Qielli i thellë"
+
+#, fuzzy
+msgid "Solar system"
+msgstr "Sistemi diellor"
+
+#, fuzzy
+msgid "Extremely wide field"
+msgstr "Fushë jashtëzakonisht e gjerë"
+
+#, fuzzy
+msgid "Star trails"
+msgstr "Gjurmët e yjeve"
+
+#, fuzzy
+msgid "Northern lights"
+msgstr "Dritat veriore"
+
+#, fuzzy
+msgid "Noctilucent clouds"
+msgstr "Re noctilucente"
+
+#, fuzzy
+msgid "Gear"
+msgstr "Pajisjet"
+
+#, fuzzy
+msgid "Other"
+msgstr "Të tjera"
+
+#, fuzzy
+msgid "All"
+msgstr "Të gjitha"
+
+#, fuzzy
+msgid "n/a"
+msgstr "n/a"
+
+#, fuzzy
+msgid "No subjects specified"
+msgstr "Nuk janë specifikuar subjekte"
+
+#, fuzzy
+msgid "No acquisition details specified"
+msgstr "Nuk janë specifikuar detajet e marrjes"

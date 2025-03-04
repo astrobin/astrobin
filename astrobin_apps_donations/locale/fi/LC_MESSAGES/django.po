@@ -1,44 +1,38 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: 2021-01-03 20:58+0000\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1609707524.000000\n"
+"Content-Transfer-Encoding: 8bit"
 
 msgid "Your recurring donation has been canceled"
 msgstr "Toistuva lahjoituksesi on peruttu"
 
+#, fuzzy
 msgid ""
 "I am very grateful for your support so far! Your contribution has helped "
 "AstroBin with its ever increasing hosting costs, and served an incentive for "
 "me to keep improving it."
 msgstr ""
+"Olen todella kiitollinen tuestasi tähän asti! Panoksesi on auttanut "
+"AstroBinia kasvavissa hosting-kuluissa ja toiminut kannustimena minulle "
+"jatkaa sen parantamista."
 
+#, fuzzy
 msgid "Wishing you clear skies and excellent seeing!"
-msgstr ""
+msgstr "Toivotan sinulle kirkasta taivasta ja erinomaista seeingiä!"
 
 msgid "Founder of AstroBin"
 msgstr "AstroBinin perustaja"
 
+#, fuzzy
 msgid "Donate"
-msgstr ""
+msgstr "Lahjoita"
 
+#, fuzzy
 msgid "Thank you in advance for your support"
-msgstr ""
+msgstr "Kiitos etukäteen tuestasi"
 
 msgid ""
 "Please donate any amount you want, selecting from the options below and "
@@ -52,15 +46,20 @@ msgstr ""
 " Voit peruuttaa tilauksesi \n"
 "koska tahansa."
 
+#, fuzzy
 msgid ""
 "If ended up on this page and are not sure what this is about, please read "
 "everything about it\n"
-"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" target="
-"\"_blank\">here</a>."
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" "
+"target=\"_blank\">here</a>."
 msgstr ""
+"Jos päädyit tälle sivulle etkä ole varma mistä on kyse, lue kaikki siitä\n"
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" "
+"target=\"_blank\">täältä</a>."
 
+#, fuzzy
 msgid "Thanks!"
-msgstr ""
+msgstr "Kiitos!"
 
 msgid "Edit your recurring donation settings"
 msgstr "Muokkaa toistuvan lahjoituksen asetuksia"
@@ -68,28 +67,35 @@ msgstr "Muokkaa toistuvan lahjoituksen asetuksia"
 msgid "Monthly contributions"
 msgstr "Kuukausittaiset lahjoitukset"
 
+#, fuzzy
 msgid "Bronze"
-msgstr ""
+msgstr "Pronssi"
 
+#, fuzzy
 #, python-format
 msgid "CHF %(amount)s / month"
-msgstr ""
+msgstr "CHF %(amount)s / kuukausi"
 
+#, fuzzy
 msgid "Silver"
-msgstr ""
+msgstr "Hopea"
 
+#, fuzzy
 msgid "Gold"
-msgstr ""
+msgstr "Kulta"
 
+#, fuzzy
 msgid "Platinum"
-msgstr ""
+msgstr "Platina"
 
+#, fuzzy
 msgid "Yearly contributions (cheaper)"
-msgstr ""
+msgstr "Vuosittaiset lahjoitukset (halvempi)"
 
+#, fuzzy
 #, python-format
 msgid "CHF %(amount)s / year"
-msgstr ""
+msgstr "CHF %(amount)s / vuosi"
 
 msgid "IMPORTANT"
 msgstr "TÄRKEÄÄ"
@@ -101,9 +107,11 @@ msgstr ""
 "Huom: jos olet jo lahjoittaja, Sitoudu lahjoittamaan -nappi päivittää "
 "olemassaolevaa lahjoitussopimustasi, eikä luo uutta."
 
+#, fuzzy
 msgid "Pay with a bank transfer"
-msgstr ""
+msgstr "Maksa pankkisiirrolla"
 
+#, fuzzy
 msgid ""
 "\n"
 "            Prefer to donate via bank transfer? Please make a deposit of the "
@@ -111,24 +119,38 @@ msgid ""
 "            bank details. Thanks!\n"
 "        "
 msgstr ""
+"\n"
+"            Haluatko mieluummin lahjoittaa pankkisiirrolla? Tee talletus "
+"haluamastasi lahjoitusmäärästä seuraaviin\n"
+"            pankkitietoihin. Kiitos!\n"
+"        "
 
 msgid "Cancel your recurring donation"
 msgstr "Peruuta toistuva lahjoituksesi"
 
+#, fuzzy
 msgid ""
 "Thank you so much for your donations so far! I, and the whole AstroBin "
 "community, really appreciate your support."
 msgstr ""
+"Kiitos paljon lahjoituksistasi tähän asti! Minä ja koko AstroBin-yhteisö "
+"arvostamme todella tukeasi."
 
+#, fuzzy
 msgid ""
 "Are you sure you want to cancel your subscription? AstroBin is a resource "
 "hungry website, and every small donation helps with the hosting costs."
 msgstr ""
+"Oletko varma, että haluat peruuttaa tilauksesi? AstroBin on resurssien "
+"nälkäinen sivusto, ja jokainen pieni lahjoitus auttaa hosting-kuluissa."
 
+#, fuzzy
 msgid ""
 "If you really have made up your mind about it, use the button below to "
 "cancel your PayPal subscription."
 msgstr ""
+"Jos olet todella päättänyt asiasta, käytä alla olevaa painiketta "
+"peruuttaaksesi PayPal-tilauksesi."
 
 msgid "Thank you for your donations!"
 msgstr "Kiitos lahjoituksistasi!"
@@ -139,8 +161,11 @@ msgstr "Haluatko perua?"
 msgid "Thank you for your donation!"
 msgstr "Kiitos lahjoituksestasi!"
 
+#, fuzzy
 msgid ""
 "I am very grateful for your support! Your contribution will help AstroBin "
 "with its ever increasing hosting costs, and will serve an incentive for me "
 "to keep improving it."
 msgstr ""
+"Olen todella kiitollinen tuestasi! Panoksesi auttaa AstroBinia kasvavissa "
+"hosting-kuluissa ja toimii kannustimena minulle jatkaa sen parantamista."

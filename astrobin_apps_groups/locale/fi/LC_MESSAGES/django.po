@@ -1,441 +1,628 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-
+#, fuzzy
 msgid "Autosubmission deactivation strategy"
-msgstr ""
+msgstr "Automaattisen lähettämisen deaktivointistrategia"
 
+#, fuzzy
 msgid "Keep all images currently auto-submitted"
-msgstr ""
+msgstr "Pidä kaikki tällä hetkellä automaattisesti lähetetyt kuvat"
 
+#, fuzzy
 msgid "Remove all images and start over"
-msgstr ""
+msgstr "Poista kaikki kuvat ja aloita alusta"
 
+#, fuzzy
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
 msgstr ""
+"Kun vaihdat ryhmäsi automaattihyväksynnästä ei-automaattihyväksyntään, sinun "
+"täytyy miettiä, mitä tehdä ryhmässä tällä hetkellä oleville kuville."
 
+#, fuzzy
 msgid "Invite users"
-msgstr ""
+msgstr "Kutsu käyttäjiä"
 
+#, fuzzy
 msgid "Users will receive a notification and will be able to join the group"
-msgstr ""
+msgstr "Käyttäjät saavat ilmoituksen ja voivat liittyä ryhmään"
 
+#, fuzzy
 msgid "Professional network"
-msgstr ""
+msgstr "Ammatillinen verkosto"
 
+#, fuzzy
 msgid "Club or association"
-msgstr ""
+msgstr "Klubi tai yhdistys"
 
+#, fuzzy
 msgid "Internet community"
-msgstr ""
+msgstr "Internet-yhteisö"
 
+#, fuzzy
 msgid "Friends or partners"
-msgstr ""
+msgstr "Ystävät tai kumppanit"
 
+#, fuzzy
 msgid "Geographical area"
-msgstr ""
+msgstr "Maantieteellinen alue"
 
+#, fuzzy
 msgid "Ad-hoc collaboration"
-msgstr ""
+msgstr "Ad-hoc-yhteistyö"
 
+#, fuzzy
 msgid "Specific to an imaging technique"
-msgstr ""
+msgstr "Erityinen kuvantamistekniikalle"
 
+#, fuzzy
 msgid "Specific to an astrophotography target"
-msgstr ""
+msgstr "Erityinen tähtivalokuvauskohteelle"
 
+#, fuzzy
 msgid "Specific to certain equipment"
-msgstr ""
+msgstr "Tietyille laitteille"
 
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "Muut"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
+#, fuzzy
 msgid "Description"
-msgstr ""
+msgstr "Kuvaus"
 
+#, fuzzy
 msgid "HTML tags are allowed."
-msgstr ""
+msgstr "HTML-tunnisteet ovat sallittuja."
 
+#, fuzzy
 msgid "Category"
-msgstr ""
+msgstr "Kategoria"
 
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-
+#, fuzzy
 msgid "Public group"
-msgstr ""
+msgstr "Julkinen ryhmä"
 
+#, fuzzy
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
 msgstr ""
+"Julkisia ryhmiä voi etsiä kuka tahansa, ja kaikki niiden sisältö on julkista."
 
+#, fuzzy
 msgid "Moderated group"
-msgstr ""
+msgstr "Moderoitu ryhmä"
 
+#, fuzzy
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
+"Moderoidut ryhmät sisältävät moderointijonon lähetetyille kuville ja "
+"liittymispyynnöille."
 
+#, fuzzy
 msgid "Automatic submission"
-msgstr ""
+msgstr "Automaattinen lähettäminen"
 
+#, fuzzy
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
 "explicitly submitted to it."
 msgstr ""
+"Automaattisesti lähetetyissä ryhmissä on aina kaikki julkiset kuvat kaikilta "
+"jäseniltä. Ryhmissä, joissa ei ole automaattista lähetystä, on vain kuvia, "
+"jotka on nimenomaisesti lähetetty niihin."
 
-msgid "Forum notice"
-msgstr ""
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-
+#, fuzzy
 msgid "Last activity"
-msgstr ""
+msgstr "Viimeisin aktiviteetti"
 
-msgid "Date created"
-msgstr ""
-
+#, fuzzy
 msgid "Members"
-msgstr ""
+msgstr "Jäsenet"
 
+#, fuzzy
 msgid "Images"
-msgstr ""
+msgstr "Kuvat"
 
+#, fuzzy
 msgid "Forum posts"
-msgstr ""
+msgstr "Foorumiviestit"
 
+#, fuzzy
 msgid "Owner"
-msgstr ""
+msgstr "Omistaja"
 
+#, fuzzy
 msgid "Moderator"
-msgstr ""
+msgstr "Moderaattori"
 
+#, fuzzy
 msgid "Member"
-msgstr ""
+msgstr "Jäsen"
 
+#, fuzzy
 msgid "Invited"
-msgstr ""
+msgstr "Kutsuttu"
 
+#, fuzzy
 msgid "Join request pending approval"
-msgstr ""
+msgstr "Liittymispyyntö odottaa hyväksyntää"
 
+#, fuzzy
 msgid "Add/remove images"
-msgstr ""
+msgstr "Lisää/poista kuvia"
 
+#, fuzzy
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
+"Napsauta kuvia lisätäksesi ne tähän ryhmään (ja napsauta uudelleen "
+"poistaaksesi ne). Klikkaa sitten alhaalla olevaa Tallenna-painiketta."
 
+#, fuzzy
 msgid "(no title)"
-msgstr ""
+msgstr "(ei otsikkoa)"
 
+#, fuzzy
 msgid "Save"
-msgstr ""
+msgstr "Tallenna"
 
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
+#, fuzzy
 msgid "Delete group?"
-msgstr ""
+msgstr "Poista ryhmä?"
 
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
 msgstr ""
+"Varovasti! Haluatko todella poistaa tämän ryhmän? Tätä toimintoa ei voi "
+"peruuttaa!"
 
+#, fuzzy
 msgid "Delete group"
-msgstr ""
+msgstr "Poista ryhmä"
 
+#, fuzzy
 msgid "Create new group"
-msgstr ""
+msgstr "Luo uusi ryhmä"
 
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
+#, fuzzy
 msgid "Edit group"
-msgstr ""
+msgstr "Muokkaa ryhmää"
 
+#, fuzzy
 msgid "Manage members"
-msgstr ""
+msgstr "Hallitse jäseniä"
 
+#, fuzzy
 msgid "Actions"
-msgstr ""
+msgstr "Toiminnot"
 
+#, fuzzy
 msgid "Join group"
-msgstr ""
+msgstr "Liity ryhmään"
 
+#, fuzzy
 msgid "Leave group"
-msgstr ""
+msgstr "Jätä ryhmä"
 
+#, fuzzy
 msgid "Moderate join requests"
-msgstr ""
+msgstr "Moderoi liittymispyyntöjä"
 
-msgid "Sort images"
-msgstr ""
-
+#, fuzzy
 msgid "This group is public"
-msgstr ""
+msgstr "Tämä ryhmä on julkinen"
 
+#, fuzzy
 msgid "This group is private"
-msgstr ""
+msgstr "Tämä ryhmä on yksityinen"
 
+#, fuzzy
 msgid "This group is moderated"
-msgstr ""
+msgstr "Tämä ryhmä on moderoitu"
 
+#, fuzzy
 msgid "This group is not moderated"
-msgstr ""
+msgstr "Tässä ryhmässä ei ole moderointia"
 
+#, fuzzy
 msgid "This group has automatic submission"
-msgstr ""
+msgstr "Tässä ryhmässä on automaattinen lähettäminen"
 
+#, fuzzy
 msgid "This group does not have automatic submission"
-msgstr ""
+msgstr "Tässä ryhmässä ei ole automaattista lähettämistä"
 
+#, fuzzy
 msgid "Invited users"
-msgstr ""
+msgstr "Kutsutut käyttäjät"
 
+#, fuzzy
 msgid "Join requests"
-msgstr ""
+msgstr "Liittymispyynnöt"
 
+#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
+"Ryhmä luotiin %(date_created)s, omistajana <a href=\"%(owner_url)s\">%(owner)"
+"s</a>, luokiteltu <strong>%(category)s</strong>."
 
+#, fuzzy
 msgid "Group forum"
-msgstr ""
+msgstr "Ryhmäfoorumi"
 
+#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
+"<strong>%(post_count)s</strong> viestiä <strong>%(topic_count)s</strong> "
+"aiheessa"
 
+#, fuzzy
 msgid "View all"
-msgstr ""
+msgstr "Näytä kaikki"
 
+#, fuzzy
 msgid "New topic"
-msgstr ""
+msgstr "Uusi aihe"
 
+#, fuzzy
+msgid "Please join the group to view its forum."
+msgstr "Liity ryhmään nähdäksesi sen foorumin."
+
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
 msgstr ""
+"Varovasti! Haluatko todella poistaa tämän ryhmän? Tätä toimintoa ei voi "
+"peruuttaa ja ryhmän foorumi ja kaikki sen aiheet poistetaan pysyvästi!"
 
+#, fuzzy
 msgid "Join group?"
-msgstr ""
+msgstr "Haluatko liittyä ryhmään?"
 
+#, fuzzy
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
+"Tämä on julkinen ryhmä: kaikki sisältö, mukaan lukien jäsenten lista, on "
+"saatavilla ei-jäsenille."
 
+#, fuzzy
 msgid "This is a private group: only members have access to its contents."
-msgstr ""
+msgstr "Tämä on yksityinen ryhmä: vain jäsenillä on pääsy sen sisältöön."
 
+#, fuzzy
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
 msgstr ""
+"Tämä on moderoitu ryhmä, liittymispyynnöt, kuvat ja foorumiviestit saattavat "
+"kulkea moderointijonon läpi."
 
+#, fuzzy
 msgid "This is a non-moderated group."
-msgstr ""
+msgstr "Tämä on ei-moderoitu ryhmä."
 
+#, fuzzy
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
 msgstr ""
+"Tämä on automaattinen lähetysryhmä: kaikki kuvasi näkyvät täällä heti ilman "
+"mitään toimenpiteitä."
 
+#, fuzzy
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
 msgstr ""
+"Tämä on ei-automaattinen lähettämisryhmä: valitset itse, mitkä kuvat haluat "
+"lähettää."
 
+#, fuzzy
 msgid "Leave group?"
-msgstr ""
+msgstr "Haluatko jättää ryhmän?"
 
+#, fuzzy
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
 msgstr ""
+"Jättämällä tämän ryhmän, kuvasi eivät enää ole näkyvissä ryhmän jäsenille, "
+"mutta foorumiviestisi pysyvät. Oletko varma?"
 
+#, fuzzy
 msgid "Groups"
-msgstr ""
+msgstr "Ryhmä"
 
+#, fuzzy
 msgid "Sort"
-msgstr ""
+msgstr "Lajittele"
 
-msgid "Search"
-msgstr ""
+#, fuzzy
+msgid "Date created"
+msgstr "Luontipäivämäärä"
 
-msgid "Private groups you own"
-msgstr ""
+#, fuzzy
+msgid "Your private groups"
+msgstr "Yksityiset ryhmäsi"
 
-msgid "Private groups you are a member of"
-msgstr ""
+#, fuzzy
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr "Omistat, olet jäsen tai sinut on kutsuttu näihin yksityisiin ryhmiin."
 
-msgid "Private groups you are invited to"
-msgstr ""
+#, fuzzy
+msgctxt "group"
+msgid "Create private group"
+msgstr "Luo yksityinen ryhmä"
 
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
-
+#, fuzzy
 msgid "Public groups"
-msgstr ""
+msgstr "Julkiset ryhmät"
 
+#, fuzzy
+msgid "Open to the whole community."
+msgstr "Avoin koko yhteisölle."
+
+#, fuzzy
+msgctxt "group"
+msgid "Create public group"
+msgstr "Luo julkinen ryhmä"
+
+#, fuzzy
 msgid "No groups available."
-msgstr ""
+msgstr "Ei ryhmiä saatavilla."
 
+#, fuzzy
 msgid "Revoke?"
-msgstr ""
+msgstr "Peruuta?"
 
+#, fuzzy
 msgid "Revoke invitation"
-msgstr ""
+msgstr "Peruuta kutsu"
 
+#, fuzzy
 msgid "This group has no active invitations."
-msgstr ""
+msgstr "Tässä ryhmässä ei ole aktiivisia kutsuja."
 
+#, fuzzy
 msgid "Moderators"
-msgstr ""
+msgstr "Moderaattorit"
 
+#, fuzzy
 msgid "Remove moderator status"
-msgstr ""
+msgstr "Poista moderaattorin status"
 
+#, fuzzy
 msgid "This group has no moderators."
-msgstr ""
+msgstr "Tässä ryhmässä ei ole moderaattoreita."
 
+#, fuzzy
 msgid "Make moderator"
-msgstr ""
+msgstr "Tee moderaattori"
 
+#, fuzzy
 msgid "Remove member"
-msgstr ""
+msgstr "Poista jäsen"
 
+#, fuzzy
 msgid "This group has no members."
-msgstr ""
+msgstr "Tässä ryhmässä ei ole jäseniä."
 
+#, fuzzy
 msgid "Type in a search term"
-msgstr ""
+msgstr "Kirjoita hakusana"
 
+#, fuzzy
 msgid "No results"
-msgstr ""
+msgstr "Ei tuloksia"
 
+#, fuzzy
 msgid "Searching"
-msgstr ""
+msgstr "Etsiminen"
 
+#, fuzzy
 msgid "members list"
-msgstr ""
+msgstr "jäsenten lista"
 
+#, fuzzy
 msgid "Back to group"
-msgstr ""
+msgstr "Takaisin ryhmään"
 
+#, fuzzy
 msgid "Full list of the group members"
-msgstr ""
+msgstr "Koko lista ryhmän jäsenistä"
 
+#, fuzzy
 msgid "Images in group"
-msgstr ""
+msgstr "Kuvat ryhmässä"
 
+#, fuzzy
 msgid "Forum posts in group"
-msgstr ""
+msgstr "Foorumiviestit ryhmässä"
 
+#, fuzzy
 msgid "Approve"
-msgstr ""
+msgstr "Hyväksy"
 
+#, fuzzy
 msgid "Reject"
-msgstr ""
+msgstr "Hylkää"
 
+#, fuzzy
 msgid "This group has no join requests."
-msgstr ""
+msgstr "Tässä ryhmässä ei ole liittymispyyntöjä."
 
-msgid "Something went wrong, Please try again later."
-msgstr ""
-
-msgid "Type your message here..."
-msgstr ""
-
+#, fuzzy
 msgid "You cannot add images that are not yours!"
-msgstr ""
+msgstr "Et voi lisätä kuvia, jotka eivät ole sinun!"
 
+#, fuzzy
 msgid "Your image was added to the group."
-msgstr ""
+msgstr "Kuvasi lisättiin ryhmään."
 
+#, fuzzy
 msgid "Group updated with your selection of images."
-msgstr ""
+msgstr "Ryhmä päivitetty valitsemillasi kuvilla."
 
+#, fuzzy
 msgid "Your new group was created successfully"
-msgstr ""
+msgstr "Uusi ryhmäsi luotiin onnistuneesti"
 
+#, fuzzy
 msgid "Group deleted"
-msgstr ""
+msgstr "Ryhmä poistettu"
 
+#, fuzzy
 msgid "You have joined the group"
-msgstr ""
+msgstr "Olet liittynyt ryhmään"
 
+#, fuzzy
 msgid "You already were a member of this group"
-msgstr ""
+msgstr "Olet jo ollut tämän ryhmän jäsen"
 
+#, fuzzy
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
-msgstr ""
+msgstr "Tämä on moderoitu ryhmä, ja liittymispyyntösi tarkistaa moderaattori"
 
+#, fuzzy
 msgid "You have left the group"
-msgstr ""
+msgstr "Olet jättänyt ryhmän"
 
+#, fuzzy
 msgid "Form saved"
+msgstr "Lomake tallennettu"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
 msgstr ""
+"Vain seuraavat kategoriat tukevat automaattihyväksyntää: Ammatillinen "
+"verkosto, Klubi tai yhdistys, Internet-yhteisö, Ystävät tai kumppanit, "
+"Maantieteellinen alue"
+
+#, fuzzy
+msgid "Publication"
+msgstr "Julkaisu"
+
+#, fuzzy
+msgid "Title"
+msgstr "Otsikko"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Avain/arvo-tunniste"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Oletuskuvien lajittelu"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Kuvan avain/arvo-tunnisteen lajittelu"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Jos kuvat on lajiteltu avain/arvo-tunnisteen mukaan, ilmoita mikä. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Lue "
+"lisää.<\\/a>"
+
+#, fuzzy
+msgid "Search"
+msgstr "Haku"
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Älä lisää yli 100 kuvaa kerralla, kiitos!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Lajittele kuvat"
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "Yksityiset ryhmät, joita omistat"
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "Yksityiset ryhmät, joiden jäsen olet"
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "Yksityiset ryhmät, joihin olet kutsuttu"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Julkiset ryhmät, joita omistat"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Julkiset ryhmät, joiden jäsen olet"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Julkiset ryhmät, joihin olet kutsuttu"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Foorumihuomautus"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Kirjoita 'Foorumihuomautus', joka näytetään 'uuden aiheen' lomakkeen "
+"yläpuolella. Käytä tätä viestiä foorumien sääntöjen, "
+"vastuuvapauslausekkeiden tai tärkeiden tietojen viestittämiseen käyttäjille "
+"ennen kuin he luovat uuden viestin. Varmista, että viestisi on selkeä ja "
+"ytimekäs."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Jotain meni pieleen, yritä myöhemmin uudelleen."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Kirjoita viestisi tänne..."

@@ -1,27 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: 2020-12-27 23:14+0000\n"
-"Last-Translator: kupal <9090852@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: be\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1609110867.000000\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+msgid "Conflict."
+msgstr "Канфлікт."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Крыніца без сціску (макс. 100 МБ)"
@@ -37,80 +24,17 @@ msgstr ""
 "AstroBin, для архіўных мэтаў. Гэты файл захоўваецца ў прыватна, і толькі вы "
 "будзеце мець да яго доступ."
 
-msgid "Dates"
-msgstr ""
-
-msgid "Frames"
-msgstr ""
-
-msgid "Integration"
-msgstr ""
-
-msgid "Darks"
-msgstr ""
-
-msgid "Flats"
-msgstr ""
-
-msgid "Flat darks"
-msgstr ""
-
-msgid "Bias"
-msgstr ""
-
-msgid "Avg. Moon age"
-msgstr ""
-
-msgid "days"
-msgstr ""
-
-msgid "Avg. Moon phase"
-msgstr ""
-
-msgid "Bortle Dark-Sky Scale"
-msgstr ""
-
-msgid "Mean SQM"
-msgstr ""
-
-msgid "Mean FWHM"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "FPS"
-msgstr ""
-
-msgid "Exposure per frame"
-msgstr ""
-
-msgid "Focal length"
-msgstr ""
-
-msgid "CMI"
-msgstr ""
-
-msgid "CMII"
-msgstr ""
-
-msgid "CMIII"
-msgstr ""
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Transparency"
-msgstr ""
-
 msgid "Error!"
 msgstr "Памылка!"
+
+msgid "Staging area"
+msgstr "Студыя"
+
+msgid "Loading"
+msgstr "Загрузка"
+
+msgid "(no title)"
+msgstr "(Без назвы)"
 
 msgid "Image of the day"
 msgstr "Выява дня"
@@ -121,45 +45,145 @@ msgstr "Лепшая выява"
 msgid "Top pick nomination"
 msgstr "Намінацыя на лепшую выяву"
 
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
-msgid "Staging area"
-msgstr "Студыя"
-
-msgid "Collaboration"
-msgstr ""
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr ""
-
-msgid "Original revision"
-msgstr ""
-
-msgid "Loading"
-msgstr "Загрузка"
-
-msgid "(no title)"
-msgstr "(Без назвы)"
-
-msgid "Image file not found"
-msgstr ""
-
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "Дадзеныя пашкоджаны. Загрузіце гэтую выяву яшчэ раз. Прабачце!"
 
-#~ msgid "Conflict."
-#~ msgstr "Канфлікт."
+#, fuzzy
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Рэвізія %(revision)s"
+
+#, fuzzy
+msgid "Original revision"
+msgstr "Арыгінальная рэвізія"
+
+#, fuzzy
+msgid "Collaboration"
+msgstr "Супрацоўніцтва"
+
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Зараз у чарзе IOTD/TP"
+
+#, fuzzy
+msgid "Video"
+msgstr "Відэа"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+"Адбылася памылка пры кодаванні гэтага відэа, калі ласка, загрузіце яго зноў."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Калі праблема застаецца, калі ласка, звяжыцеся з намі."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr ""
+"Гэта відэа ўсё яшчэ апрацоўваецца, калі ласка, вярніцеся на гэтую старонку "
+"пазней."
+
+#, fuzzy
+msgid "Dates"
+msgstr "Даты"
+
+#, fuzzy
+msgid "Frames"
+msgstr "Кадры"
+
+#, fuzzy
+msgid "Integration"
+msgstr "Інтэграцыя"
+
+#, fuzzy
+msgid "Darks"
+msgstr "Цёмныя кадры"
+
+#, fuzzy
+msgid "Flats"
+msgstr "Светлыя кадры"
+
+#, fuzzy
+msgid "Flat darks"
+msgstr "Светлыя цёмныя кадры"
+
+#, fuzzy
+msgid "Bias"
+msgstr "Біяс"
+
+#, fuzzy
+msgid "Avg. Moon age"
+msgstr "Сярэдні ўзрост Месяца"
+
+#, fuzzy
+msgid "days"
+msgstr "дні"
+
+#, fuzzy
+msgid "Avg. Moon phase"
+msgstr "Сярэдняя фаза Месяца"
+
+#, fuzzy
+msgid "Bortle Dark-Sky Scale"
+msgstr "Шкала Бортла для цёмнага неба"
+
+#, fuzzy
+msgid "Mean SQM"
+msgstr "Сярэдняе SQM"
+
+#, fuzzy
+msgid "Mean FWHM"
+msgstr "Сярэдняе FWHM"
+
+#, fuzzy
+msgid "Temperature"
+msgstr "Температура"
+
+#, fuzzy
+msgid "Date"
+msgstr "Дата"
+
+#, fuzzy
+msgid "Time"
+msgstr "Час"
+
+#, fuzzy
+msgid "FPS"
+msgstr "FPS"
+
+#, fuzzy
+msgid "Exposure per frame"
+msgstr "Экспазіцыя на кадр"
+
+#, fuzzy
+msgid "Focal length"
+msgstr "Факальная адлегласць"
+
+#, fuzzy
+msgid "CMI"
+msgstr "CMI"
+
+#, fuzzy
+msgid "CMII"
+msgstr "CMII"
+
+#, fuzzy
+msgid "CMIII"
+msgstr "CMIII"
+
+#, fuzzy
+msgid "Seeing"
+msgstr "Сіянне"
+
+#, fuzzy
+msgid "Transparency"
+msgstr "Транспарэнтнасць"
+
+#, fuzzy
+msgid "Image file not found"
+msgstr "Файл выявы не знойдзены"
+
+#, fuzzy
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Дазволена толькі адно відэа-запіс на малюнак."

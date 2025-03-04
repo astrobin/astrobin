@@ -1,12 +1,10 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
 "Language: hu\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit"
 
 #, fuzzy
 msgid ""
@@ -233,14 +231,6 @@ msgstr "Eladó"
 #, fuzzy
 msgid "Buyer"
 msgstr "Vásárló"
-
-#, fuzzy
-msgid "For sale"
-msgstr "Eladó"
-
-#, fuzzy
-msgid "Wanted"
-msgstr "Keresek"
 
 #, fuzzy
 msgid "Standard mail"
@@ -651,8 +641,8 @@ msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Katadioptrikus: ACF Schmidt-Cassegrain"
 
 #, fuzzy
-msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
-msgstr "Katadioptrikus: Rowe-Ackermann Schmidt asztrofotográf"
+msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
+msgstr "Katadioptrikus: Rowe-Atkinson Schmidt asztrofotográf"
 
 #, fuzzy
 msgid "Catadioptric: Riccardi-Honders"
@@ -936,6 +926,17 @@ msgstr ""
 "%(_0)s%(user)s%(_1)s hozzászólt egy piactéri visszajelzéshez, amit kaptál."
 
 #, fuzzy
+#, python-format
+msgid ""
+"\n"
+"    %(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
+"\n"
+msgstr ""
+"\n"
+"    %(_0)s%(user)s%(_1)s hozzászólt egy piactéri visszajelzéshez, amit "
+"kaptál.\n"
+
+#, fuzzy
 msgid ""
 "You received this notification because you created this equipment item or "
 "this edit proposal."
@@ -951,13 +952,22 @@ msgstr "A bíráló a következő megjegyzést hagyta: "
 msgid "View edit proposal"
 msgstr "Javaslat megtekintése"
 
+#, fuzzy
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s."
 msgstr ""
-"%(_0)s%(user)s%(_1)s jóváhagyott egy szerkesztési javaslatot a(z) %(_0)s"
-"%(item)s%(_1)s felszerelési elemhez"
+"%(_0)s%(user)s%(_1)s jóváhagyta a javaslatot az %(_0)s%(item)s%(_1)s "
+"felszereléshez."
+
+#, python-format
+msgid ""
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s"
+msgstr ""
+"%(_0)s%(user)s%(_1)s jóváhagyott egy szerkesztési javaslatot a(z) %(_0)"
+"s%(item)s%(_1)s felszerelési elemhez"
 
 #, fuzzy
 msgid "Please review it as soon as possible, thank you!"
@@ -965,19 +975,32 @@ msgstr "Kérlek, nézd át minél hamarabb, köszi! "
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s to you for review"
+"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s to you for review"
 msgstr ""
 "%(_0)s%(user)s%(_1)s egy javaslatot rendelt az %(_0)s%(item)s%(_1)s "
 "felszereléshez, hogy átnézd."
+
+#, fuzzy
+#, python-format
+msgid ""
+"\n"
+"    %(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item "
+"%(_0)s%(item)s%(_1)s to you for\n"
+"    review\n"
+msgstr ""
+"\n"
+"    %(_0)s%(user)s%(_1)s egy szerkesztési javaslatot rendelt a(z) %(_0)"
+"s%(item)s%(_1)s felszerelési elemhez a\n"
+"    felülvizsgálatra\n"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> proposed an edit to the equipment item "
 "<a href=\"%(item_url)s\">%(item)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> javasolt egy módosítást az <a href="
-"\"%(item_url)s\">%(item)s</a> felszereléshez."
+"<a href=\"%(user_url)s\">%(user)s</a> javasolt egy módosítást az <a "
+"href=\"%(item_url)s\">%(item)s</a> felszereléshez."
 
 #, fuzzy
 msgid "Please note"
@@ -1021,8 +1044,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s elutasította a javaslatot az %(_0)s%(item)s%(_1)s "
 "felszereléshez."
@@ -1149,8 +1172,8 @@ msgstr "Migrációs eszköz"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
-"%(_1)s that you created"
+"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)"
+"s%(_1)s that you created"
 msgstr ""
 "%(_0)s%(user)s%(_1)s elutasította a(z) %(_0)s%(make)s %(name)s%(_1)s "
 "felszerelési elemet, amit te hoztál létre."
@@ -1180,9 +1203,9 @@ msgstr "A bíráló a következő kódot idézte az elutasítás indokaként: "
 
 #, python-format
 msgid ""
-"Since your equipment item was marked as duplicate of <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
-"accordingly, and <strong>you don't need to do anything</strong>."
+"Since your equipment item was marked as duplicate of <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been "
+"updated accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
 "Mivel a felszerelési elemedet a <a href=\"%(duplicate_of_url)s\">"
 "%(duplicate_of)s</a> másolataként jelölték meg, a képed ennek megfelelően "
@@ -1207,20 +1230,20 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
-"%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
+"s%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
-"Az %(_0)s%(item)s%(_1)s felszerelést eltávolították a %(_0)s%(image_title)s"
-"%(_1)s képedből, és a %(_0)s%(duplicate_of)s%(_1)s felszereléssel "
+"Az %(_0)s%(item)s%(_1)s felszerelést eltávolították a %(_0)s%(image_title)"
+"s%(_1)s képedből, és a %(_0)s%(duplicate_of)s%(_1)s felszereléssel "
 "helyettesítették."
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
-"%(image_title)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
+"s%(image_title)s%(_1)s"
 msgstr ""
-"Az %(_0)s%(item)s%(_1)s felszerelést eltávolították a %(_0)s%(image_title)s"
-"%(_1)s képedből."
+"Az %(_0)s%(item)s%(_1)s felszerelést eltávolították a %(_0)s%(image_title)"
+"s%(_1)s képedből."
 
 #, fuzzy
 msgid ""
@@ -1232,12 +1255,12 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your equipment item was marked as a duplicate of <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
+"Your equipment item was marked as a duplicate of <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
-"A felszerelési elemedet a <a href=\"%(duplicate_of_url)s\">%(duplicate_of)s</"
-"a> másolataként jelölték meg. Ha bármely képen hozzáadtad, azok ennek "
+"A felszerelési elemedet a <a href=\"%(duplicate_of_url)s\">%(duplicate_of)"
+"s</a> másolataként jelölték meg. Ha bármely képen hozzáadtad, azok ennek "
 "megfelelően frissültek."
 
 #, python-format
@@ -1272,8 +1295,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s visszajelzést hagyott neked a %(_0)s%(listing)s%(_1)s "
 "piactéri hirdetéshez."
@@ -1337,27 +1360,27 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(user)s%(_1)s frissítette a visszajelzésedet a %(_0)s%(listing)s"
-"%(_1)s piactéri hirdetéshez."
+"%(_0)s%(user)s%(_1)s frissítette a visszajelzésedet a %(_0)s%(listing)s%(_1)"
+"s piactéri hirdetéshez."
 
 #, python-format
 msgid ""
-"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
-"%(_1)s"
+"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s%(_1)"
+"s"
 msgstr ""
 "%(user)s frissítette a visszajelzésedet a %(_0)s%(listing)s%(_1)s piactéri "
 "hirdetéshez."
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
-"%(_1)s"
+"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s%(_1)"
+"s"
 msgstr ""
-"%(_0)s%(user)s%(_1)s jóváhagyta a piactéri hirdetésedet %(_0)s%(listing)s"
-"%(_1)s."
+"%(_0)s%(user)s%(_1)s jóváhagyta a piactéri hirdetésedet %(_0)s%(listing)"
+"s%(_1)s."
 
 #, fuzzy
 msgid "The listing is now live. Good luck with your sale!"
@@ -1365,11 +1388,11 @@ msgstr "A hirdetés most él. Sok sikert az eladáshoz!"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s közzétett egy piactéri hirdetést %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s közzétett egy piactéri hirdetést %(_0)"
+"s%(listing)s%(_1)s"
 
 #, fuzzy
 msgid "You received this notification because you follow this user."
@@ -1377,19 +1400,19 @@ msgstr "Ezt az értesítést azért kaptad, mert követed ezt a felhasználót."
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s törölte a piactéri hirdetését %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s törölte a piactéri hirdetését %(_0)"
+"s%(listing)s%(_1)s"
 
 #, fuzzy
 msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
+"You received this notification because you have an active offer on this "
+"listing, or you follow the listing."
 msgstr ""
-"Ezt az értesítést azért kaptad, mert ajánlatod van ezen a hirdetésen, vagy "
-"követed a hirdetést."
+"Ezt az értesítést azért kaptad, mert aktív ajánlatod van ezen a hirdetésen, "
+"vagy követed a hirdetést."
 
 #, fuzzy
 msgid ""
@@ -1418,13 +1441,13 @@ msgstr "Megújíthatod az alábbi linken keresztül:"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
-"%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
-"%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
+"s%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)"
+"s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s közzétett egy piactéri hirdetést %(_0)s"
-"%(listing)s%(_1)s egy olyan felszerelési tétellel, amit követsz: %(_0)s"
-"%(line_item)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s közzétett egy piactéri hirdetést %(_0)"
+"s%(listing)s%(_1)s egy olyan felszerelési tétellel, amit követsz: %(_0)"
+"s%(line_item)s%(_1)s"
 
 #, python-format
 msgid ""
@@ -1442,6 +1465,14 @@ msgstr ""
 "Sajnos, nem tehetsz ajánlatot erre a hirdetésre, amíg az fenntartott vagy "
 "eladott állapotban van."
 
+#, fuzzy
+msgid ""
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
+msgstr ""
+"Ezt az értesítést azért kaptad, mert ajánlatod van ezen a hirdetésen, vagy "
+"követed a hirdetést."
+
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
@@ -1456,11 +1487,11 @@ msgstr "Tétel"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s frissítette a piactéri hirdetését %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s frissítette a piactéri hirdetését %(_0)"
+"s%(listing)s%(_1)s"
 
 #, fuzzy
 msgid ""
@@ -1474,12 +1505,12 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)s"
-"%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
-"possible and leave feedback to the buyer."
+"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)"
+"s%(_1)s, but you haven't marked the item as sold yet. Please do so as soon "
+"as possible and leave feedback to the buyer."
 msgstr ""
-"Nemrégiben elfogadtál egy ajánlatot a piactéri hirdetésre %(_0)s%(listing)s"
-"%(_1)s, de még nem jelölted meg az elemet eladottnak. Kérlek, tedd meg a "
+"Nemrégiben elfogadtál egy ajánlatot a piactéri hirdetésre %(_0)s%(listing)"
+"s%(_1)s, de még nem jelölted meg az elemet eladottnak. Kérlek, tedd meg a "
 "lehető leghamarabb, és hagyj visszajelzést a vásárlónak."
 
 #, fuzzy
@@ -1488,11 +1519,11 @@ msgstr "Jelöld eladottnak"
 
 #, python-format
 msgid ""
-"Don't forget to mark your reserved items as sold in the listing %(_0)s"
-"%(listing)s%(_1)s, if you sold them."
+"Don't forget to mark your reserved items as sold in the listing %(_0)"
+"s%(listing)s%(_1)s, if you sold them."
 msgstr ""
-"Ne felejtsd el megjelölni a lefoglalt elemeidet eladottnak a hirdetésen "
-"%(_0)s%(listing)s%(_1)s, ha eladtad őket."
+"Ne felejtsd el megjelölni a lefoglalt elemeidet eladottnak a hirdetésen %(_0)"
+"s%(listing)s%(_1)s, ha eladtad őket."
 
 #, python-format
 msgid ""
@@ -1662,11 +1693,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
-"%(_1)s, and we noticed that you haven't rated the buyer yet."
+"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)"
+"s%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
-"Szia! Nemrégiben eladtál egy tételt a piactéri hirdetésből %(_0)s%(listing)s"
-"%(_1)s, és észrevettük, hogy még nem értékelted a vásárlót."
+"Szia! Nemrégiben eladtál egy tételt a piactéri hirdetésből %(_0)s%(listing)"
+"s%(_1)s, és észrevettük, hogy még nem értékelted a vásárlót."
 
 #, fuzzy
 msgid ""
@@ -1685,21 +1716,21 @@ msgstr "Hagyj visszajelzést"
 
 #, python-format
 msgid ""
-"Rate the buyer for your recent purchase from marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"Rate the buyer for your recent purchase from marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"Értékeld a vásárlót a legutóbbi vásárlásodért a piactéri hirdetésből %(_0)s"
-"%(listing)s%(_1)s"
+"Értékeld a vásárlót a legutóbbi vásárlásodért a piactéri hirdetésből %(_0)"
+"s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"Hi! You recently purchased an item from the marketplace listing %(_0)s"
-"%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
-"%(seller_display_name)s%(_1)s yet."
+"Hi! You recently purchased an item from the marketplace listing %(_0)"
+"s%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)"
+"s%(seller_display_name)s%(_1)s yet."
 msgstr ""
-"Szia! Nemrégiben vásároltál egy tételt a piactéri hirdetésből %(_0)s"
-"%(listing)s%(_1)s, és észrevettük, hogy még nem értékelted az eladót %(_0)s"
-"%(seller_display_name)s%(_1)s."
+"Szia! Nemrégiben vásároltál egy tételt a piactéri hirdetésből %(_0)"
+"s%(listing)s%(_1)s, és észrevettük, hogy még nem értékelted az eladót %(_0)"
+"s%(seller_display_name)s%(_1)s."
 
 #, fuzzy
 msgid ""
@@ -1732,8 +1763,8 @@ msgid ""
 "You received this notification because you follow these equipment items that "
 "were used to acquire this image:"
 msgstr ""
-"Ezt az értesítést azért kaptad, mert követed azokat a felszerelési "
-"tételeket, amelyeket ehhez a képhez használtak:"
+"Ezt az értesítést azért kaptad, mert követed azokat a felszerelési tételeket,"
+" amelyeket ehhez a képhez használtak:"
 
 #, fuzzy
 msgid "This image is a group effort among the following collaborators:"
@@ -1805,40 +1836,13 @@ msgid "Close"
 msgstr "Bezárás"
 
 #, fuzzy
-#~ msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
-#~ msgstr "Katadioptrikus: Rowe-Atkinson Schmidt asztrofotográf"
-
-#~ msgid ""
-#~ "\n"
-#~ "    %(_0)s%(user)s%(_1)s commented a marketplace feedback that you "
-#~ "received.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "    %(_0)s%(user)s%(_1)s hozzászólt egy piactéri visszajelzéshez, amit "
-#~ "kaptál.\n"
-
-#~ msgid ""
-#~ "%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item "
-#~ "%(_0)s%(item)s%(_1)s."
-#~ msgstr ""
-#~ "%(_0)s%(user)s%(_1)s jóváhagyta a javaslatot az %(_0)s%(item)s%(_1)s "
-#~ "felszereléshez."
-
-#~ msgid ""
-#~ "\n"
-#~ "    %(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item "
-#~ "%(_0)s%(item)s%(_1)s to you for\n"
-#~ "    review\n"
-#~ msgstr ""
-#~ "\n"
-#~ "    %(_0)s%(user)s%(_1)s egy szerkesztési javaslatot rendelt a(z) %(_0)s"
-#~ "%(item)s%(_1)s felszerelési elemhez a\n"
-#~ "    felülvizsgálatra\n"
+msgid "For sale"
+msgstr "Eladó"
 
 #, fuzzy
-#~ msgid ""
-#~ "You received this notification because you have an active offer on this "
-#~ "listing, or you follow the listing."
-#~ msgstr ""
-#~ "Ezt az értesítést azért kaptad, mert aktív ajánlatod van ezen a "
-#~ "hirdetésen, vagy követed a hirdetést."
+msgid "Wanted"
+msgstr "Keresek"
+
+#, fuzzy
+msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
+msgstr "Katadioptrikus: Rowe-Ackermann Schmidt asztrofotográf"

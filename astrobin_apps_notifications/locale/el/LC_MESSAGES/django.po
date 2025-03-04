@@ -1,245 +1,343 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit"
 
+#, fuzzy
+msgid "Notifications"
+msgstr "Ειδοποιήσεις"
+
+#, fuzzy
+msgid "You have no notifications."
+msgstr "Δεν έχετε ειδοποιήσεις."
+
+#, fuzzy
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#, fuzzy
+msgid "Mark all as read"
+msgstr "Σημειώστε τα όλα ως αναγνωσμένα"
+
+#, fuzzy
+msgid "You have no new notifications."
+msgstr "Δεν έχετε νέες ειδοποιήσεις."
+
+#, fuzzy
 msgid "You have a new follower"
-msgstr ""
+msgstr "Έχετε έναν νέο ακόλουθο"
 
+#, fuzzy
 msgid "New image from a user you follow"
-msgstr ""
+msgstr "Νέα εικόνα από έναν χρήστη που ακολουθείτε"
 
+#, fuzzy
 msgid "New image revision from a user you follow"
-msgstr ""
+msgstr "Νέα αναθεώρηση εικόνας από έναν χρήστη που ακολουθείτε"
 
+#, fuzzy
 msgid "Your image was plate-solved"
-msgstr ""
+msgstr "Η εικόνα σας έγινε plate-solved"
 
-msgid "Your image was approved by a moderator"
-msgstr ""
-
+#, fuzzy
 msgid "Your image could not be plate-solved"
-msgstr ""
+msgstr "Η εικόνα σας δεν μπόρεσε να γίνει plate-solved"
 
-msgid "Your image was plate-solved (advanced)"
-msgstr ""
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr ""
-
+#, fuzzy
 msgid "Your image received a new comment"
-msgstr ""
+msgstr "Η εικόνα σας έλαβε ένα νέο σχόλιο"
 
-msgid "Your edit proposal received a new comment"
-msgstr ""
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr ""
-
-msgid "Your unapproved equipment item received a comment"
-msgstr ""
-
-msgid "Your listing has a new private conversation"
-msgstr ""
-
-msgid "Your private conversation has a new comment"
-msgstr ""
-
-msgid "Your listing has a new question"
-msgstr ""
-
+#, fuzzy
 msgid "There was a reply to your comment"
-msgstr ""
+msgstr "Υπήρξε απάντηση στο σχόλιό σας"
 
-msgid "A new comment on your image requires moderation"
-msgstr ""
-
+#, fuzzy
 msgid "Your comment was approved"
-msgstr ""
+msgstr "Το σχόλιό σας εγκρίθηκε"
 
+#, fuzzy
 msgid "Your image was bookmarked"
-msgstr ""
+msgstr "Η εικόνα σας προστέθηκε στα αγαπημένα"
 
+#, fuzzy
 msgid "Your image was liked"
-msgstr ""
+msgstr "Η εικόνα σας άρεσε"
 
+#, fuzzy
 msgid "Your comment was liked"
-msgstr ""
+msgstr "Το σχόλιό σας άρεσε"
 
+#, fuzzy
 msgid "Your forum post was liked"
-msgstr ""
+msgstr "Η ανάρτησή σας στο φόρουμ άρεσε"
 
-msgid "Your forum post was approved"
-msgstr ""
-
+#, fuzzy
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "Το αίτημά σας για API Key έχει εγκριθεί"
 
+#, fuzzy
 msgid "A user you follow joined a public group"
-msgstr ""
+msgstr "Ένας χρήστης που ακολουθείτε μπήκε σε μια δημόσια ομάδα"
 
+#, fuzzy
 msgid "You are invited to a group"
-msgstr ""
+msgstr "Σας προσκαλούν σε μια ομάδα"
 
+#, fuzzy
 msgid "A user requested to join a group you moderate"
-msgstr ""
+msgstr "Ένας χρήστης ζήτησε να συμμετάσχει σε μια ομάδα που διαχειρίζεστε"
 
+#, fuzzy
 msgid "A group moderator approved your request to join"
-msgstr ""
+msgstr "Ένας διαχειριστής ομάδας ενέκρινε το αίτημά σας να συμμετάσχετε"
 
+#, fuzzy
 msgid "A group moderator rejected your request to join"
-msgstr ""
+msgstr "Ένας διαχειριστής ομάδας απέρριψε το αίτημά σας να συμμετάσχετε"
 
+#, fuzzy
 msgid "A user you follow created a new public group"
-msgstr ""
+msgstr "Ένας χρήστης που ακολουθείτε δημιούργησε μια νέα δημόσια ομάδα"
 
+#, fuzzy
 msgid "New forum topic in a group you are a member of"
-msgstr ""
+msgstr "Νέο θέμα στο φόρουμ σε μια ομάδα που είστε μέλος"
 
-msgid "New forum topic for an equipment item you use"
-msgstr ""
-
-msgid "New forum topic for an equipment item you follow"
-msgstr ""
-
-msgid "Your forum topic was moved"
-msgstr ""
-
+#, fuzzy
 msgid "You have received a new private message"
-msgstr ""
+msgstr "Έχετε λάβει ένα νέο ιδιωτικό μήνυμα"
 
+#, fuzzy
 msgid "Your premium subscription will expire in one week"
-msgstr ""
+msgstr "Η premium συνδρομή σας θα λήξει σε μία εβδομάδα"
 
+#, fuzzy
 msgid "Your premium subscription has just expired"
-msgstr ""
+msgstr "Η premium συνδρομή σας μόλις έληξε"
 
+#, fuzzy
 msgid "Your subscription will be renewed in one week"
-msgstr ""
+msgstr "Η συνδρομή σας θα ανανεωθεί σε μία εβδομάδα"
 
+#, fuzzy
 msgid "Your subscription will be renewed in one 30 days"
-msgstr ""
+msgstr "Η συνδρομή σας θα ανανεωθεί σε 30 ημέρες"
 
+#, fuzzy
 msgid "You have images with a missing \"Data source\""
-msgstr ""
+msgstr "Έχετε εικόνες με λείπουσα \"Πηγή δεδομένων\""
 
+#, fuzzy
 msgid "You have images with a missing \"Remote source\""
-msgstr ""
+msgstr "Έχετε εικόνες με λείπουσα \"Απομακρυσμένη πηγή\""
 
+#, fuzzy
 msgid "Would you like to activate your account?"
-msgstr ""
+msgstr "Θα θέλατε να ενεργοποιήσετε τον λογαριασμό σας;"
 
-msgid "New reply in a subscribed forum topic"
-msgstr ""
-
-msgid "New reply in a forum topic that you started"
-msgstr ""
-
+#, fuzzy
 msgid "You were mentioned in a forum post"
-msgstr ""
+msgstr "Αναφερθήκατε σε μια ανάρτηση στο φόρουμ"
 
+#, fuzzy
 msgid "You were mentioned in a comment"
-msgstr ""
+msgstr "Αναφερθήκατε σε ένα σχόλιο"
 
+#, fuzzy
 msgid "Welcome to AstroBin!"
-msgstr ""
+msgstr "Καλώς ήρθατε στο AstroBin!"
 
+#, fuzzy
 msgid "Congratulations for your first image on AstroBin!"
-msgstr ""
+msgstr "Συγχαρητήρια για την πρώτη σας εικόνα στο AstroBin!"
 
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr ""
-
+#, fuzzy
 msgid "Thank you for getting a subscription!"
-msgstr ""
+msgstr "Ευχαριστούμε που αποκτήσατε συνδρομή!"
 
+#, fuzzy
 msgid "Thank you for your payment!"
-msgstr ""
+msgstr "Ευχαριστούμε για την πληρωμή σας!"
 
-msgid "Subscription canceled"
-msgstr ""
-
+#, fuzzy
 msgid "You were removed from the IOTD staff"
-msgstr ""
+msgstr "Αφαιρέθηκα από το προσωπικό του IOTD"
 
+#, fuzzy
 msgid "You have been inactive as an IOTD staff member"
-msgstr ""
+msgstr "Έχετε μείνει ανενεργός ως μέλος του προσωπικού του IOTD"
 
-msgid "Your IOTD staff activity is insufficient"
-msgstr ""
-
+#, fuzzy
 msgid "An image you promoted made it to Top Pick"
-msgstr ""
+msgstr "Μια εικόνα που προωθήσατε μπήκε στην κορυφαία επιλογή"
 
+#, fuzzy
 msgid "An image you promoted made it to IOTD"
-msgstr ""
+msgstr "Μια εικόνα που προωθήσατε μπήκε στο IOTD"
 
-msgid "An image you dismissed made it to Top Pick"
-msgstr ""
+#, fuzzy
+msgid "New reply in a subscribed forum topic"
+msgstr "Νέα απάντηση σε ένα θέμα φόρουμ που παρακολουθείτε"
 
-msgid "An image you dismissed made it to IOTD"
-msgstr ""
+#, fuzzy
+msgid "Your image was nominated to be a Top Pick"
+msgstr "Η εικόνα σας προτάθηκε για κορυφαία επιλογή"
 
-msgid "Your image might become a Top Pick Nomination"
-msgstr ""
-
-msgid "Your image might become a Top Pick"
-msgstr ""
-
-msgid "Your image was voted Top Pick Nomination"
-msgstr ""
-
+#, fuzzy
 msgid "Your image was voted Top Pick"
-msgstr ""
+msgstr "Η εικόνα σας ψηφίστηκε ως κορυφαία επιλογή"
 
+#, fuzzy
 msgid "Your image was voted Image of the Day"
-msgstr ""
+msgstr "Η εικόνα σας ψηφίστηκε ως Εικόνα της Ημέρας"
 
-msgid "Your IOTD staff member stats"
-msgstr ""
+#, fuzzy
+msgid "Your image was plate-solved (advanced)"
+msgstr "Η εικόνα σας έγινε plate-solved (προχωρημένο)"
 
+#, fuzzy
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Η εικόνα σας δεν μπόρεσε να γίνει plate-solved (προχωρημένο)"
+
+#, fuzzy
+msgid "A new comment on your image requires moderation"
+msgstr "Ένα νέο σχόλιο στην εικόνα σας απαιτεί έλεγχο"
+
+#, fuzzy
+msgid "Your forum post was approved"
+msgstr "Η ανάρτησή σου στο φόρουμ εγκρίθηκε"
+
+#, fuzzy
 msgid "You were mentioned in an image description"
-msgstr ""
+msgstr "Σε ανέφεραν σε περιγραφή εικόνας"
 
+#, fuzzy
+msgid "Your edit proposal received a new comment"
+msgstr "Η πρόταση επεξεργασίας σου έλαβε νέο σχόλιο"
+
+#, fuzzy
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr "Η εικόνα σου υποβλήθηκε για εξέταση IOTD/TP"
+
+#, fuzzy
 msgid "A gear item that you used was renamed"
-msgstr ""
+msgstr "Ένα αντικείμενο εξοπλισμού που χρησιμοποίησες μετονομάστηκε"
 
-msgid "Collaboration Request: Accept or Deny"
-msgstr ""
+#, fuzzy
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Η προγραμματισμένη IOTD σου έλαβε νέο σχόλιο"
 
-msgid "User accepted your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "Your unapproved equipment item received a comment"
+msgstr "Το μη εγκεκριμένο αντικείμενο εξοπλισμού σου έλαβε σχόλιο"
 
-msgid "User denied your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "New forum topic for an equipment item you use"
+msgstr "Νέο θέμα στο φόρουμ για ένα αντικείμενο εξοπλισμού που χρησιμοποιείς"
 
+#, fuzzy
 msgid "You were added as a collaborator to an image"
-msgstr ""
+msgstr "Προστέθηκες ως συνεργάτης σε μια εικόνα"
 
+#, fuzzy
 msgid "You were removed as a collaborator to an image"
-msgstr ""
+msgstr "Αποσύρθηκες ως συνεργάτης από μια εικόνα"
 
+#, fuzzy
 msgid "User removed self as a collaborator to your image"
-msgstr ""
+msgstr "Ο χρήστης αποσύρθηκε ως συνεργάτης από την εικόνα σου"
 
+#, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "Υπέβαλες την εικόνα σου για εξέταση IOTD/TP"
+
+#, fuzzy
 msgid "Login attempt detected from a different country"
-msgstr ""
+msgstr "Ανιχνεύτηκε προσπάθεια σύνδεσης από άλλη χώρα"
 
+#, fuzzy
 msgid "Login attempt with weak password"
-msgstr ""
+msgstr "Προσπάθεια σύνδεσης με αδύναμο κωδικό"
+
+#, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "Η εικόνα σου εγκρίθηκε από έναν συντονιστή"
+
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Η εικόνα δεν υποβλήθηκε για εξέταση IOTD/TP"
+
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "Η συνδρομή ακυρώθηκε"
+
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "Το θέμα σου στο φόρουμ μεταφέρθηκε"
+
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "Η εικόνα πλησιάζει την προθεσμία υποβολής για IOTD/TP"
+
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "Η καταχώρισή σου έχει νέα ιδιωτική συνομιλία"
+
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "Η ιδιωτική σου συνομιλία έχει νέο σχόλιο"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "Η καταχώρισή σου έχει νέα ερώτηση"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "Νέο θέμα στο φόρουμ για ένα αντικείμενο εξοπλισμού που παρακολουθείς"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "Νέα απάντηση σε ένα θέμα φόρουμ που ξεκίνησες"
+
+#, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "Η δραστηριότητα του προσωπικού IOTD σου είναι ανεπαρκής"
+
+#, fuzzy
+msgid "An image you dismissed made it to Top Pick"
+msgstr "Μια εικόνα που απέρριψες μπήκε στην κορυφή"
+
+#, fuzzy
+msgid "An image you dismissed made it to IOTD"
+msgstr "Μια εικόνα που απέρριψες μπήκε στο IOTD"
+
+#, fuzzy
+msgid "Your IOTD staff member stats"
+msgstr "Στατιστικά μέλους προσωπικού IOTD σου"
+
+#, fuzzy
+msgid "Collaboration Request: Accept or Deny"
+msgstr "Αίτημα Συνεργασίας: Αποδοχή ή Απόρριψη"
+
+#, fuzzy
+msgid "User accepted your collaboration request"
+msgstr "Ο χρήστης αποδέχτηκε το αίτημα συνεργασίας σου"
+
+#, fuzzy
+msgid "User denied your collaboration request"
+msgstr "Ο χρήστης απέρριψε το αίτημα συνεργασίας σου"
+
+#, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "Η εικόνα σου μπορεί να γίνει υποψηφιότητα για Top Pick"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "Η εικόνα σου μπορεί να γίνει Top Pick"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "Η εικόνα σου ψηφίστηκε ως υποψηφιότητα για Top Pick"

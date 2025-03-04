@@ -1,151 +1,199 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sq\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+#, fuzzy
+msgid "Conflict."
+msgstr "Konflikt."
 
+#, fuzzy
 msgid "Uncompressed source (max 100 MB)"
-msgstr ""
+msgstr "Burimi i pa kompresuar (maks 100 MB)"
 
+#, fuzzy
 msgid ""
 "You can store the final processed image that came out of your favorite image "
 "editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for "
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
+"Mund të ruani imazhin e fundit të përpunuar që doli nga redaktori juaj i "
+"preferuar të imazheve (p.sh. PixInsight, Adobe Photoshop, etj) këtu në "
+"AstroBin, për qëllime arkivimi. Ky skedar ruhet privat dhe vetëm ju do të "
+"keni qasje në të."
 
-msgid "Dates"
-msgstr ""
-
-msgid "Frames"
-msgstr ""
-
-msgid "Integration"
-msgstr ""
-
-msgid "Darks"
-msgstr ""
-
-msgid "Flats"
-msgstr ""
-
-msgid "Flat darks"
-msgstr ""
-
-msgid "Bias"
-msgstr ""
-
-msgid "Avg. Moon age"
-msgstr ""
-
-msgid "days"
-msgstr ""
-
-msgid "Avg. Moon phase"
-msgstr ""
-
-msgid "Bortle Dark-Sky Scale"
-msgstr ""
-
-msgid "Mean SQM"
-msgstr ""
-
-msgid "Mean FWHM"
-msgstr ""
-
-msgid "Temperature"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "FPS"
-msgstr ""
-
-msgid "Exposure per frame"
-msgstr ""
-
-msgid "Focal length"
-msgstr ""
-
-msgid "CMI"
-msgstr ""
-
-msgid "CMII"
-msgstr ""
-
-msgid "CMIII"
-msgstr ""
-
-msgid "Seeing"
-msgstr ""
-
-msgid "Transparency"
-msgstr ""
-
+#, fuzzy
 msgid "Error!"
-msgstr ""
+msgstr "Gabim!"
 
-msgid "Image of the day"
-msgstr ""
-
-msgid "Top pick"
-msgstr ""
-
-msgid "Top pick nomination"
-msgstr ""
-
-msgid "Currently in the IOTD/TP queue"
-msgstr ""
-
+#, fuzzy
 msgid "Staging area"
-msgstr ""
+msgstr "Zona e skenimit"
 
-msgid "Collaboration"
-msgstr ""
-
-msgid "Video"
-msgstr ""
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-
-msgid "If the problem persists, please contact us."
-msgstr ""
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr ""
-
-msgid "Original revision"
-msgstr ""
-
+#, fuzzy
 msgid "Loading"
-msgstr ""
+msgstr "Po ngarkohet"
 
+#, fuzzy
 msgid "(no title)"
-msgstr ""
+msgstr "(pa titull)"
 
-msgid "Image file not found"
-msgstr ""
+#, fuzzy
+msgid "Image of the day"
+msgstr "Imazhi i ditës"
 
+#, fuzzy
+msgid "Top pick"
+msgstr "Zgjedhja më e mirë"
+
+#, fuzzy
+msgid "Top pick nomination"
+msgstr "Nomim për zgjedhjen më të mirë"
+
+#, fuzzy
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr ""
+"Korrupsion të të dhënave. Ju lutemi ngarkoni përsëri këtë imazh. Na vjen keq!"
+
+#, fuzzy
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Rishikimi %(revision)s"
+
+#, fuzzy
+msgid "Original revision"
+msgstr "Rishikimi origjinal"
+
+#, fuzzy
+msgid "Collaboration"
+msgstr "Bashkëpunimi"
+
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Aktualisht në radhën IOTD/TP"
+
+#, fuzzy
+msgid "Video"
+msgstr "Video"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+"Ishte një problem me kodimin e këtij video, ju lutemi ngarkoni përsëri."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Nëse problemi vazhdon, ju lutemi na kontaktoni."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr ""
+"Ky video është ende në përpunim, ju lutemi kthehuni në këtë faqe më vonë."
+
+#, fuzzy
+msgid "Dates"
+msgstr "Datat"
+
+#, fuzzy
+msgid "Frames"
+msgstr "Frames"
+
+#, fuzzy
+msgid "Integration"
+msgstr "Integrimi"
+
+#, fuzzy
+msgid "Darks"
+msgstr "Darks"
+
+#, fuzzy
+msgid "Flats"
+msgstr "Flats"
+
+#, fuzzy
+msgid "Flat darks"
+msgstr "Flat darks"
+
+#, fuzzy
+msgid "Bias"
+msgstr "Bias"
+
+#, fuzzy
+msgid "Avg. Moon age"
+msgstr "Mosha mesatare e Hënës"
+
+#, fuzzy
+msgid "days"
+msgstr "ditë"
+
+#, fuzzy
+msgid "Avg. Moon phase"
+msgstr "Faza mesatare e Hënës"
+
+#, fuzzy
+msgid "Bortle Dark-Sky Scale"
+msgstr "Shkalla e Errësirës Bortle"
+
+#, fuzzy
+msgid "Mean SQM"
+msgstr "SQM mesatar"
+
+#, fuzzy
+msgid "Mean FWHM"
+msgstr "FWHM mesatar"
+
+#, fuzzy
+msgid "Temperature"
+msgstr "Temperatura"
+
+#, fuzzy
+msgid "Date"
+msgstr "Data"
+
+#, fuzzy
+msgid "Time"
+msgstr "Koha"
+
+#, fuzzy
+msgid "FPS"
+msgstr "FPS"
+
+#, fuzzy
+msgid "Exposure per frame"
+msgstr "Ekspozimi për frame"
+
+#, fuzzy
+msgid "Focal length"
+msgstr "Gjatësia fokale"
+
+#, fuzzy
+msgid "CMI"
+msgstr "CMI"
+
+#, fuzzy
+msgid "CMII"
+msgstr "CMII"
+
+#, fuzzy
+msgid "CMIII"
+msgstr "CMIII"
+
+#, fuzzy
+msgid "Seeing"
+msgstr "Seeing"
+
+#, fuzzy
+msgid "Transparency"
+msgstr "Transparenca"
+
+#, fuzzy
+msgid "Image file not found"
+msgstr "Skedari i imazhit nuk u gjet"
+
+#, fuzzy
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Lejohet vetëm një akuzim i bazuar në video për çdo imazh."

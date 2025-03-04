@@ -1,442 +1,620 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100 >= 3 "
+"&& n%100<=10 ? 3 : n%100 >= 11 && n%100<=99 ? 4 : 5;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-
+#, fuzzy
 msgid "Autosubmission deactivation strategy"
-msgstr ""
+msgstr "استراتيجية تعطيل التقديم التلقائي"
 
+#, fuzzy
 msgid "Keep all images currently auto-submitted"
-msgstr ""
+msgstr "احتفظ بجميع الصور المقدمة تلقائيًا"
 
+#, fuzzy
 msgid "Remove all images and start over"
-msgstr ""
+msgstr "إزالة جميع الصور والبدء من جديد"
 
+#, fuzzy
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
 msgstr ""
+"عند تغيير مجموعتك من الإرسال التلقائي إلى غير الإرسال التلقائي، يجب أن تفكر "
+"في ما يجب فعله بالصور الموجودة حاليًا في المجموعة."
 
+#, fuzzy
 msgid "Invite users"
-msgstr ""
+msgstr "دعوة المستخدمين"
 
+#, fuzzy
 msgid "Users will receive a notification and will be able to join the group"
-msgstr ""
+msgstr "سيتلقى المستخدمون إشعارًا وسيكونون قادرين على الانضمام إلى المجموعة"
 
+#, fuzzy
 msgid "Professional network"
-msgstr ""
+msgstr "شبكة احترافية"
 
+#, fuzzy
 msgid "Club or association"
-msgstr ""
+msgstr "نادي أو جمعية"
 
+#, fuzzy
 msgid "Internet community"
-msgstr ""
+msgstr "مجتمع الإنترنت"
 
+#, fuzzy
 msgid "Friends or partners"
-msgstr ""
+msgstr "الأصدقاء أو الشركاء"
 
+#, fuzzy
 msgid "Geographical area"
-msgstr ""
+msgstr "منطقة جغرافية"
 
+#, fuzzy
 msgid "Ad-hoc collaboration"
-msgstr ""
+msgstr "تعاون عشوائي"
 
+#, fuzzy
 msgid "Specific to an imaging technique"
-msgstr ""
+msgstr "محدد لتقنية تصوير معينة"
 
+#, fuzzy
 msgid "Specific to an astrophotography target"
-msgstr ""
+msgstr "محدد لهدف تصوير فلكي"
 
+#, fuzzy
 msgid "Specific to certain equipment"
-msgstr ""
+msgstr "محدد لمعدات معينة"
 
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "أخرى"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "اسم"
 
+#, fuzzy
 msgid "Description"
-msgstr ""
+msgstr "وصف"
 
+#, fuzzy
 msgid "HTML tags are allowed."
-msgstr ""
+msgstr "تُسمح علامات HTML."
 
+#, fuzzy
 msgid "Category"
-msgstr ""
+msgstr "فئة"
 
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-
+#, fuzzy
 msgid "Public group"
-msgstr ""
+msgstr "مجموعة عامة"
 
+#, fuzzy
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
-msgstr ""
+msgstr "يمكن البحث عن المجموعات العامة من قبل أي شخص، وكل محتواها عام."
 
+#, fuzzy
 msgid "Moderated group"
-msgstr ""
+msgstr "مجموعة مُعتدلة"
 
+#, fuzzy
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
+"تحتوي المجموعات المُشرفة على قائمة انتظار للإشراف على الصور المنشورة وطلبات "
+"الانضمام."
 
+#, fuzzy
 msgid "Automatic submission"
-msgstr ""
+msgstr "تقديم تلقائي"
 
+#, fuzzy
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
 "explicitly submitted to it."
 msgstr ""
+"المجموعات التي تحتوي على تقديمات تلقائية تحتوي دائمًا على جميع الصور العامة "
+"من جميع الأعضاء. المجموعات التي لا تحتوي على تقديم تلقائي تحتوي فقط على "
+"الصور التي تم تقديمها صراحةً لها."
 
-msgid "Forum notice"
-msgstr ""
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-
+#, fuzzy
 msgid "Last activity"
-msgstr ""
+msgstr "آخر نشاط"
 
-msgid "Date created"
-msgstr ""
-
+#, fuzzy
 msgid "Members"
-msgstr ""
+msgstr "الأعضاء"
 
+#, fuzzy
 msgid "Images"
-msgstr ""
+msgstr "صور"
 
+#, fuzzy
 msgid "Forum posts"
-msgstr ""
+msgstr "منشورات المنتدى"
 
+#, fuzzy
 msgid "Owner"
-msgstr ""
+msgstr "المالك"
 
+#, fuzzy
 msgid "Moderator"
-msgstr ""
+msgstr "مشرف"
 
+#, fuzzy
 msgid "Member"
-msgstr ""
+msgstr "عضو"
 
+#, fuzzy
 msgid "Invited"
-msgstr ""
+msgstr "مدعو"
 
+#, fuzzy
 msgid "Join request pending approval"
-msgstr ""
+msgstr "طلب الانضمام في انتظار الموافقة"
 
+#, fuzzy
 msgid "Add/remove images"
-msgstr ""
+msgstr "إضافة/إزالة الصور"
 
+#, fuzzy
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
+"انقر على الصور لتضمينها في هذه المجموعة (وانقر مرة أخرى لاستبعادها). ثم انقر "
+"على زر الحفظ أدناه."
 
+#, fuzzy
 msgid "(no title)"
-msgstr ""
+msgstr "(بدون عنوان)"
 
+#, fuzzy
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
+#, fuzzy
 msgid "Delete group?"
-msgstr ""
+msgstr "حذف المجموعة؟"
 
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
-msgstr ""
+msgstr "احترس! هل تريد حقًا حذف هذه المجموعة؟ لا يمكن التراجع عن هذه العملية!"
 
+#, fuzzy
 msgid "Delete group"
-msgstr ""
+msgstr "حذف المجموعة"
 
+#, fuzzy
 msgid "Create new group"
-msgstr ""
+msgstr "إنشاء مجموعة جديدة"
 
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "مدير"
 
+#, fuzzy
 msgid "Edit group"
-msgstr ""
+msgstr "تعديل المجموعة"
 
+#, fuzzy
 msgid "Manage members"
-msgstr ""
+msgstr "إدارة الأعضاء"
 
+#, fuzzy
 msgid "Actions"
-msgstr ""
+msgstr "إجراءات"
 
+#, fuzzy
 msgid "Join group"
-msgstr ""
+msgstr "انضم إلى المجموعة"
 
+#, fuzzy
 msgid "Leave group"
-msgstr ""
+msgstr "ترك المجموعة"
 
+#, fuzzy
 msgid "Moderate join requests"
-msgstr ""
+msgstr "إدارة طلبات الانضمام"
 
-msgid "Sort images"
-msgstr ""
-
+#, fuzzy
 msgid "This group is public"
-msgstr ""
+msgstr "هذه المجموعة عامة"
 
+#, fuzzy
 msgid "This group is private"
-msgstr ""
+msgstr "هذه المجموعة خاصة"
 
+#, fuzzy
 msgid "This group is moderated"
-msgstr ""
+msgstr "هذه المجموعة مُشرفة"
 
+#, fuzzy
 msgid "This group is not moderated"
-msgstr ""
+msgstr "هذه المجموعة غير مُراقبة"
 
+#, fuzzy
 msgid "This group has automatic submission"
-msgstr ""
+msgstr "هذه المجموعة تحتوي على تقديم تلقائي"
 
+#, fuzzy
 msgid "This group does not have automatic submission"
-msgstr ""
+msgstr "هذه المجموعة لا تحتوي على تقديم تلقائي"
 
+#, fuzzy
 msgid "Invited users"
-msgstr ""
+msgstr "المستخدمون المدعوون"
 
+#, fuzzy
 msgid "Join requests"
-msgstr ""
+msgstr "طلبات الانضمام"
 
+#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
+"مجموعة تم إنشاؤها في %(date_created)s، مملوكة لـ <a href=\"%(owner_url)s\">"
+"%(owner)s</a>، مصنفة كـ <strong>%(category)s</strong>."
 
+#, fuzzy
 msgid "Group forum"
-msgstr ""
+msgstr "منتدى المجموعة"
 
+#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
+"<strong>%(post_count)s</strong> منشورات في <strong>%(topic_count)s</strong> "
+"مواضيع"
 
+#, fuzzy
 msgid "View all"
-msgstr ""
+msgstr "عرض الكل"
 
+#, fuzzy
 msgid "New topic"
-msgstr ""
+msgstr "موضوع جديد"
 
+#, fuzzy
+msgid "Please join the group to view its forum."
+msgstr "يرجى الانضمام إلى المجموعة لعرض منتداها."
+
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
 msgstr ""
+"احترس! هل تريد حقًا حذف هذه المجموعة؟ لا يمكن التراجع عن هذه العملية وسيتم "
+"حذف منتدى المجموعة وكل مواضيعها بشكل لا يمكن عكسه!"
 
+#, fuzzy
 msgid "Join group?"
-msgstr ""
+msgstr "الانضمام إلى المجموعة؟"
 
+#, fuzzy
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
+"هذه مجموعة عامة: كل المحتوى، بما في ذلك قائمة الأعضاء، متاح لغير الأعضاء."
 
+#, fuzzy
 msgid "This is a private group: only members have access to its contents."
-msgstr ""
+msgstr "هذه مجموعة خاصة: فقط الأعضاء لديهم حق الوصول إلى محتوياتها."
 
+#, fuzzy
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
 msgstr ""
+"هذه مجموعة مُشرفة، قد تمر طلبات الانضمام والصور والمشاركات في المنتدى عبر "
+"قائمة انتظار للإشراف."
 
+#, fuzzy
 msgid "This is a non-moderated group."
-msgstr ""
+msgstr "هذه مجموعة غير مُشرفة."
 
+#, fuzzy
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
 msgstr ""
+"هذه مجموعة تقديم تلقائي: ستظهر جميع صورك هنا على الفور دون الحاجة إلى أي "
+"إجراء."
 
+#, fuzzy
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
-msgstr ""
+msgstr "هذه مجموعة غير تلقائية: ستختار الصور التي تريد تقديمها."
 
+#, fuzzy
 msgid "Leave group?"
-msgstr ""
+msgstr "ترك المجموعة؟"
 
+#, fuzzy
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
 msgstr ""
+"بتركك لهذه المجموعة، لن تكون مشاركات صورك مرئية لأعضاء المجموعة، بينما ستبقى "
+"منشورات المنتدى. هل أنت متأكد؟"
 
+#, fuzzy
 msgid "Groups"
-msgstr ""
+msgstr "المجموعات"
 
+#, fuzzy
 msgid "Sort"
-msgstr ""
+msgstr "ترتيب"
 
-msgid "Search"
-msgstr ""
+#, fuzzy
+msgid "Date created"
+msgstr "تاريخ الإنشاء"
 
-msgid "Private groups you own"
-msgstr ""
+#, fuzzy
+msgid "Your private groups"
+msgstr "مجموعاتك الخاصة"
 
-msgid "Private groups you are a member of"
-msgstr ""
+#, fuzzy
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr "أنت مالك، أو عضو في، أو تمت دعوتك إلى، هذه المجموعات الخاصة."
 
-msgid "Private groups you are invited to"
-msgstr ""
+#, fuzzy
+msgctxt "group"
+msgid "Create private group"
+msgstr "إنشاء مجموعة خاصة"
 
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
-
+#, fuzzy
 msgid "Public groups"
-msgstr ""
+msgstr "مجموعات عامة"
 
+#, fuzzy
+msgid "Open to the whole community."
+msgstr "مفتوحة لكامل المجتمع."
+
+#, fuzzy
+msgctxt "group"
+msgid "Create public group"
+msgstr "إنشاء مجموعة عامة"
+
+#, fuzzy
 msgid "No groups available."
-msgstr ""
+msgstr "لا توجد مجموعات متاحة."
 
+#, fuzzy
 msgid "Revoke?"
-msgstr ""
+msgstr "إلغاء؟"
 
+#, fuzzy
 msgid "Revoke invitation"
-msgstr ""
+msgstr "إلغاء الدعوة"
 
+#, fuzzy
 msgid "This group has no active invitations."
-msgstr ""
+msgstr "لا توجد دعوات نشطة في هذه المجموعة."
 
+#, fuzzy
 msgid "Moderators"
-msgstr ""
+msgstr "المشرفون"
 
+#, fuzzy
 msgid "Remove moderator status"
-msgstr ""
+msgstr "إزالة حالة المشرف"
 
+#, fuzzy
 msgid "This group has no moderators."
-msgstr ""
+msgstr "لا توجد مشرفين في هذه المجموعة."
 
+#, fuzzy
 msgid "Make moderator"
-msgstr ""
+msgstr "اجعل مشرفًا"
 
+#, fuzzy
 msgid "Remove member"
-msgstr ""
+msgstr "إزالة عضو"
 
+#, fuzzy
 msgid "This group has no members."
-msgstr ""
+msgstr "لا توجد أعضاء في هذه المجموعة."
 
+#, fuzzy
 msgid "Type in a search term"
-msgstr ""
+msgstr "اكتب مصطلح البحث"
 
+#, fuzzy
 msgid "No results"
-msgstr ""
+msgstr "لا توجد نتائج"
 
+#, fuzzy
 msgid "Searching"
-msgstr ""
+msgstr "البحث"
 
+#, fuzzy
 msgid "members list"
-msgstr ""
+msgstr "قائمة الأعضاء"
 
+#, fuzzy
 msgid "Back to group"
-msgstr ""
+msgstr "العودة إلى المجموعة"
 
+#, fuzzy
 msgid "Full list of the group members"
-msgstr ""
+msgstr "قائمة كاملة بأعضاء المجموعة"
 
+#, fuzzy
 msgid "Images in group"
-msgstr ""
+msgstr "صور في المجموعة"
 
+#, fuzzy
 msgid "Forum posts in group"
-msgstr ""
+msgstr "منشورات المنتدى في المجموعة"
 
+#, fuzzy
 msgid "Approve"
-msgstr ""
+msgstr "موافقة"
 
+#, fuzzy
 msgid "Reject"
-msgstr ""
+msgstr "رفض"
 
+#, fuzzy
 msgid "This group has no join requests."
-msgstr ""
+msgstr "لا توجد طلبات انضمام لهذه المجموعة."
 
-msgid "Something went wrong, Please try again later."
-msgstr ""
-
-msgid "Type your message here..."
-msgstr ""
-
+#, fuzzy
 msgid "You cannot add images that are not yours!"
-msgstr ""
+msgstr "لا يمكنك إضافة صور ليست لك!"
 
+#, fuzzy
 msgid "Your image was added to the group."
-msgstr ""
+msgstr "تم إضافة صورتك إلى المجموعة."
 
+#, fuzzy
 msgid "Group updated with your selection of images."
-msgstr ""
+msgstr "تم تحديث المجموعة مع اختيارك من الصور."
 
+#, fuzzy
 msgid "Your new group was created successfully"
-msgstr ""
+msgstr "تم إنشاء مجموعتك الجديدة بنجاح"
 
+#, fuzzy
 msgid "Group deleted"
-msgstr ""
+msgstr "تم حذف المجموعة"
 
+#, fuzzy
 msgid "You have joined the group"
-msgstr ""
+msgstr "لقد انضممت إلى المجموعة"
 
+#, fuzzy
 msgid "You already were a member of this group"
-msgstr ""
+msgstr "كنت بالفعل عضوًا في هذه المجموعة"
 
+#, fuzzy
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
-msgstr ""
+msgstr "هذه مجموعة مُشرفة، وسيتم مراجعة طلب انضمامك من قبل مشرف."
 
+#, fuzzy
 msgid "You have left the group"
-msgstr ""
+msgstr "لقد تركت المجموعة"
 
+#, fuzzy
 msgid "Form saved"
+msgstr "تم حفظ النموذج"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
 msgstr ""
+"فقط الفئات التالية تدعم الإرسال التلقائي: الشبكة المهنية، النادي أو الجمعية، "
+"المجتمع على الإنترنت، الأصدقاء أو الشركاء، المنطقة الجغرافية"
+
+#, fuzzy
+msgid "Publication"
+msgstr "نشر"
+
+#, fuzzy
+msgid "Title"
+msgstr "العنوان"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "علامة مفتاح/قيمة"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "ترتيب الصور الافتراضي"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "ترتيب علامة مفتاح/قيمة الصورة"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"إذا كانت الصور مرتبة حسب علامة مفتاح/قيمة، يرجى تحديد أي واحدة. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>تعرف على "
+"المزيد.<\\/a>"
+
+#, fuzzy
+msgid "Search"
+msgstr "بحث"
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "يرجى عدم إضافة أكثر من 100 صورة دفعة واحدة، شكرًا!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "ترتيب الصور"
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "المجموعات الخاصة التي تمتلكها"
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "المجموعات الخاصة التي أنت عضو فيها"
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "المجموعات الخاصة التي تمت دعوتك إليها"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "المجموعات العامة التي تمتلكها"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "المجموعات العامة التي أنت عضو فيها"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "المجموعات العامة التي تمت دعوتك إليها"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "إشعار المنتدى"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"أدخل 'إشعار المنتدى' ليظهر فوق نموذج 'موضوع جديد'. استخدم هذا للتواصل حول "
+"قواعد المنتدى، أو إخلاء المسؤولية، أو المعلومات المهمة للمستخدمين قبل أن "
+"ينشئوا منشورًا جديدًا. تأكد من أن رسالتك واضحة وموجزة."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "اكتب رسالتك هنا..."

@@ -1,246 +1,436 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit"
 
+#, fuzzy
 msgid "Sorry, it's now too late to retract this submission."
-msgstr ""
+msgstr "Anteeksi, nyt on liian myöhäistä peruuttaa tämä lähetys."
 
+#, fuzzy
 msgid "Sorry, it's now too late to retract this vote."
-msgstr ""
+msgstr "Anteeksi, nyt on liian myöhäistä peruuttaa tämä ääni."
 
-msgid "Newest first"
-msgstr ""
-
-msgid "Oldest first"
-msgstr ""
-
+#, fuzzy
 msgid "You are not a member of the IOTD Submitters board."
-msgstr ""
+msgstr "Et ole IOTD-lähettäjien hallituksessa."
 
+#, fuzzy
 msgid "You cannot submit your own image."
-msgstr ""
+msgstr "Et voi lähettää omaa kuvaasi."
 
-msgid "You cannot submit an image you collaborated to."
-msgstr ""
-
+#, fuzzy
 msgid "Images in the staging area cannot be submitted."
-msgstr ""
+msgstr "Staging-alueen kuvia ei voi lähettää."
 
+#, fuzzy
 msgid "This user has chosen to be excluded from competitions."
-msgstr ""
+msgstr "Tämä käyttäjä on valinnut olla osallistumatta kilpailuihin."
 
+#, fuzzy
 msgid "This user has been banned from competitions."
-msgstr ""
+msgstr "Tätä käyttäjää on kielletty kilpailuista."
 
+#, fuzzy
+#, python-format
+msgid ""
+"You cannot submit an image that was published more than %(max_days)s days "
+"ago."
+msgstr ""
+"Et voi lähettää kuvaa, joka on julkaistu yli %(max_days)s päivää sitten."
+
+#, fuzzy
+msgid "Users with a Free membership cannot participate in the IOTD."
+msgstr "Ilmaisen jäsenyyden omaavat käyttäjät eivät voi osallistua IOTD:hen."
+
+#, fuzzy
+msgid "This image has already been an IOTD in the past"
+msgstr "Tämä kuva on jo ollut IOTD aiemmin."
+
+#, fuzzy
+#, python-format
+msgid "You have already submitted %(max_allowed)s images today."
+msgstr "Olet jo lähettänyt %(max_allowed)s kuvaa tänään."
+
+#, fuzzy
+msgid "You are not a member of the IOTD Reviewers board."
+msgstr "Et ole IOTD-arvioijien hallituksessa."
+
+#, fuzzy
+msgid "You cannot vote for your own image."
+msgstr "Et voi äänestää omaa kuvaasi."
+
+#, fuzzy
+msgid "Images in the staging area cannot be voted for."
+msgstr "Staging-alueen kuvia ei voi äänestää."
+
+#, fuzzy
+msgid "You cannot vote for an image that has not been submitted."
+msgstr "Et voi äänestää kuvaa, joka ei ole ollut ehdotettuna."
+
+#, fuzzy
+msgid "You cannot vote for your own submission."
+msgstr "Et voi äänestää omaa ehdotustasi."
+
+#, fuzzy
+#, python-format
+msgid ""
+"You cannot vote for an image that has been in the submission queue for more "
+"than %(max_days)s days."
+msgstr ""
+"Et voi äänestää kuvaa, joka on ollut lähetysjonossa yli %(max_days)s päivää."
+
+#, fuzzy
+#, python-format
+msgid "You have already voted for %(max_allowed)s images today."
+msgstr "Olet jo äänestänyt %(max_allowed)s kuvaa tänään."
+
+#, fuzzy
+msgid "You are not a member of the IOTD Judges board."
+msgstr "Et ole IOTD-tuomareiden hallituksessa."
+
+#, fuzzy
+msgid "You cannot elect your own image."
+msgstr "Et voi valita omaa kuvaasi."
+
+#, fuzzy
+msgid "Images in the staging area cannot be elected."
+msgstr "Staging-alueen kuvia ei voi valita."
+
+#, fuzzy
+msgid "You cannot elect an image that has not been voted."
+msgstr "Et voi valita kuvaa, jota ei ole äänestetty."
+
+#, fuzzy
+msgid "You cannot elect your own submission."
+msgstr "Et voi valita omaa ehdotustasi."
+
+#, fuzzy
+msgid "You cannot elect an image you voted for."
+msgstr "Et voi valita kuvaa, jota äänestit."
+
+#, fuzzy
+#, python-format
+msgid ""
+"You cannot elect an image that has been in the review queue for more than "
+"%(max_days)s days."
+msgstr ""
+"Et voi valita kuvaa, joka on ollut tarkastuksessa yli %(max_days)s päivää."
+
+#, fuzzy
+#, python-format
+msgid "You have already elected %(max_allowed)s images today."
+msgstr "Olet jo valinnut %(max_allowed)s kuvaa tänään."
+
+#, fuzzy
+#, python-format
+msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgstr "Olet jo aikatauluttanut %(max_allowed)s IOTD:tä."
+
+#, fuzzy
+msgid "You cannot unelect your own submission."
+msgstr "Et voi peruuttaa omaa ehdotustasi."
+
+#, fuzzy
+msgid "You cannot unelect an image you voted for."
+msgstr "Et voi peruuttaa kuvaa, jota äänestit."
+
+#, fuzzy
+msgid "You cannot unelect an image elected by another judge."
+msgstr "Et voi peruuttaa kuvaa, jonka on valinnut toinen tuomari."
+
+#, fuzzy
+msgid "You cannot unelect a past or current IOTD."
+msgstr "Et voi peruuttaa menneitä tai nykyisiä IOTD:itä."
+
+#, fuzzy
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
+msgstr "olet jo valinnut %s IOTD:tä tänään (UTC)"
+
+#, fuzzy
+#, python-format
+msgid "you already selected %s scheduled IOTDs"
+msgstr "olet jo valinnut %s aikataulutettua IOTD:tä"
+
+#, fuzzy
+#, python-format
+msgid "there are already %s scheduled IOTDs"
+msgstr "on jo %s aikataulutettua IOTD:tä"
+
+#, fuzzy
+msgid "Image of the day"
+msgstr "Päivän kuva"
+
+#, fuzzy
+msgid "IOTD Judgement Queue"
+msgstr "IOTD-arviointijono"
+
+#, fuzzy
+msgid ""
+"Please select the images that you want to elect to IOTD by clicking on them."
+msgstr "Valitse kuvat, jotka haluat valita IOTD:ksi klikkaamalla niitä."
+
+#, fuzzy
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
+"Anteeksi, et voi valita IOTD:tä juuri nyt: %(reason)s. Yritä uudelleen "
+"<strong>%(time)s</strong>."
+
+#, fuzzy
+msgid "This queue is currently empty."
+msgstr "Tämä jono on tällä hetkellä tyhjää."
+
+#, fuzzy
+msgid "Error"
+msgstr "Virhe"
+
+#, fuzzy
+msgid "You cannot unelect an IOTD elected by another judge."
+msgstr "Et voi peruuttaa toisen tuomarin valitsemaa IOTD:tä."
+
+#, fuzzy
+#, python-format
+msgid "All IOTD slots for the next %(days)s days are already filled."
+msgstr "Kaikki IOTD-paikat seuraavaksi %(days)s päiväksi ovat jo täynnä."
+
+#, fuzzy
+msgid "Newest first"
+msgstr "Uusimmat ensin"
+
+#, fuzzy
+msgid "Oldest first"
+msgstr "Vanhemmat ensin"
+
+#, fuzzy
 msgid "You cannot submit an image that you already dismissed."
-msgstr ""
+msgstr "Et voi lähettää kuvaa, jonka olet jo hylännyt."
 
+#, fuzzy
 #, python-format
 msgid ""
 "You cannot submit an image that has been dismissed by %(number)s members of "
 "the IOTD Staff."
 msgstr ""
+"Et voi lähettää kuvaa, jonka on hylännyt %(number)s IOTD-henkilöstön jäsentä."
 
-#, python-format
-msgid ""
-"You cannot submit an image that was submitted for consideration more than "
-"%(max_days)s day(s) ago."
-msgstr ""
-
-msgid "This image has already been an IOTD in the past"
-msgstr ""
-
-#, python-format
-msgid "You have already submitted %(max_allowed)s image(s) today."
-msgstr ""
-
-msgid "This image has been disqualified from the IOTD/TP process."
-msgstr ""
-
-msgid "You are not a member of the IOTD Reviewers board."
-msgstr ""
-
-msgid "You cannot vote for your own image."
-msgstr ""
-
-msgid "You cannot vote for an image you collaborated to."
-msgstr ""
-
-msgid "Images in the staging area cannot be voted for."
-msgstr ""
-
+#, fuzzy
 msgid "You cannot vote for an image that you already dismissed."
-msgstr ""
+msgstr "Et voi äänestää kuvaa, jonka olet jo hylännyt."
 
+#, fuzzy
 #, python-format
 msgid ""
 "You cannot vote for an image that has been dismissed by %(number)s members "
 "of the IOTD Staff."
 msgstr ""
+"Et voi äänestää kuvaa, jonka on hylännyt %(number)s IOTD-henkilöstön jäsentä."
 
-msgid "You cannot vote for an image that has not been submitted."
+#, fuzzy
+#, python-format
+msgid ""
+"You cannot submit an image that was published more than %(max_days)s day(s) "
+"ago."
 msgstr ""
+"Et voi lähettää kuvaa, joka on julkaistu yli %(max_days)s päivää sitten."
 
-msgid "You cannot vote for your own submission."
-msgstr ""
+#, fuzzy
+#, python-format
+msgid "You have already submitted %(max_allowed)s image(s) today."
+msgstr "Olet jo lähettänyt %(max_allowed)s kuvaa tänään."
 
+#, fuzzy
 #, python-format
 msgid ""
 "You cannot vote for an image that has not been submitted at least %(num)s "
 "times."
-msgstr ""
+msgstr "Et voi äänestää kuvaa, jota ei ole lähetetty vähintään %(num)s kertaa."
 
+#, fuzzy
 #, python-format
 msgid ""
 "You cannot vote for an image that has been in the review queue for more than "
 "%(max_days)s day(s)."
 msgstr ""
+"Et voi äänestää kuvaa, joka on ollut tarkistuksessa yli %(max_days)s päivää."
 
+#, fuzzy
 #, python-format
 msgid "You have already voted for %(max_allowed)s image(s) today."
-msgstr ""
+msgstr "Olet jo äänestänyt %(max_allowed)s kuvaa tänään."
 
-msgid "You are not a member of the IOTD Judges board."
-msgstr ""
-
-msgid "You cannot elect your own image."
-msgstr ""
-
-msgid "You cannot elect an image you collaborated to."
-msgstr ""
-
-msgid "Images in the staging area cannot be elected."
-msgstr ""
-
+#, fuzzy
 #, python-format
 msgid ""
 "You cannot submit an image that has been dismissed by %(number)s member(s) "
 "of the IOTD Staff."
 msgstr ""
+"Et voi lähettää kuvaa, jonka on hylännyt %(number)s jäsentä IOTD-"
+"henkilöstöstä."
 
-msgid "You cannot elect an image that has not been voted."
-msgstr ""
-
-msgid "You cannot elect your own submission."
-msgstr ""
-
-msgid "You cannot elect an image you voted for."
-msgstr ""
-
+#, fuzzy
 #, python-format
 msgid ""
 "You cannot elect an image that has been in the review queue for more than "
 "%(max_days)s day(s)."
 msgstr ""
+"Et voi valita kuvaa, joka on ollut tarkistuksessa yli %(max_days)s päivää."
 
+#, fuzzy
 #, python-format
 msgid "You have already elected %(max_allowed)s image(s) today."
-msgstr ""
+msgstr "Olet jo valinnut %(max_allowed)s kuvaa tänään."
 
+#, fuzzy
 #, python-format
 msgid "You have already scheduled %(max_allowed)s IOTD(s)."
-msgstr ""
+msgstr "Olet jo aikatauluttanut %(max_allowed)s IOTD:tä."
 
+#, fuzzy
 #, python-format
 msgid ""
 "You cannot elect for an image that has not been voted at least %(num)s times."
-msgstr ""
+msgstr "Et voi valita kuvaa, jota ei ole äänestetty vähintään %(num)s kertaa."
 
-msgid "You cannot unelect your own submission."
-msgstr ""
-
-msgid "You cannot unelect an image you voted for."
-msgstr ""
-
-msgid "You cannot unelect an image elected by another judge."
-msgstr ""
-
-msgid "You cannot unelect a past or current IOTD."
-msgstr ""
-
-msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
-msgstr ""
-
+#, fuzzy
 #, python-format
 msgid "you already selected %s IOTD(s) today (UTC)"
-msgstr ""
+msgstr "Olet jo valinnut %s IOTD:tä tänään (UTC)."
 
+#, fuzzy
 #, python-format
 msgid "you already selected %s scheduled IOTD(s)"
-msgstr ""
+msgstr "Olet jo valinnut %s aikataulutettua IOTD:tä."
 
+#, fuzzy
 #, python-format
 msgid "there are already %s scheduled IOTD(s)"
-msgstr ""
+msgstr "On jo %s aikataulutettua IOTD:tä."
 
-msgid "Image of the day"
-msgstr ""
+#, fuzzy
+msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
+msgstr "Et voi peruuttaa IOTD:tä, joka on määräaikainen huomenna (UTC)."
 
+#, fuzzy
+#, python-format
+msgid ""
+"You cannot submit an image that was submitted for consideration more than "
+"%(max_days)s day(s) ago."
+msgstr ""
+"Et voi lähettää kuvaa, joka on lähetetty harkittavaksi yli %(max_days)s "
+"päivää sitten."
+
+#, fuzzy
+msgid "You cannot submit an image you collaborated to."
+msgstr "Et voi lähettää kuvaa, johon olet osallistunut."
+
+#, fuzzy
+msgid "You cannot vote for an image you collaborated to."
+msgstr "Et voi äänestää kuvaa, johon olet osallistunut."
+
+#, fuzzy
+msgid "You cannot elect an image you collaborated to."
+msgstr "Et voi valita kuvaa, johon olet osallistunut."
+
+#, fuzzy
 msgid "You are not authenticated. Please log in."
-msgstr ""
+msgstr "Et ole kirjautunut sisään. Kirjaudu sisään."
 
+#, fuzzy
 msgid "You are not the owner of this image."
-msgstr ""
+msgstr "Et ole tämän kuvan omistaja."
 
+#, fuzzy
 #, python-format
 msgid "Sorry, this feature requires a <a href=\"%(url)s\">paid account</a>."
 msgstr ""
+"Anteeksi, tämä ominaisuus vaatii <a href=\"%(url)s\">maksullisen tilin</a>."
 
+#, fuzzy
 msgid "This image is in your staging area and hasn't been published yet"
-msgstr ""
+msgstr "Tämä kuva on staging-alueellasi eikä ole vielä julkaistu."
 
+#, fuzzy
 msgid "This image was already submitted."
-msgstr ""
+msgstr "Tämä kuva on jo lähetetty."
 
+#, fuzzy
 msgid ""
-"Images with subject type set to 'Equipment' or 'Other' are not eligible for "
+"Images with subject type set to 'Gear' or 'Other' are not eligible for "
 "IOTD/TP consideration."
 msgstr ""
+"Kuvat, joiden aihetyyppi on 'Välineet' tai 'Muut', eivät ole kelvollisia "
+"IOTD/TP-harkintaan."
 
+#, fuzzy
 msgid ""
 "Images without an imaging telescope and an imaging camera are not eligible "
 "for IOTD/TP consideration."
 msgstr ""
+"Kuvat ilman kuvausteleskooppia ja kuvauskameraa eivät ole kelvollisia "
+"IOTD/TP-harkintaan."
 
+#, fuzzy
 msgid ""
 "Images without any acquisition sessions are not eligible for IOTD/TP "
 "consideration."
-msgstr ""
+msgstr "Kuvat ilman kuvausistuntoja eivät ole kelvollisia IOTD/TP-harkintaan."
 
+#, fuzzy
 msgid "Your settings indicate that you opted to be excluded from competitions."
 msgstr ""
+"Asetuksesi osoittavat, että olet valinnut olla poissuljettu kilpailuista."
 
+#, fuzzy
 msgid "You are currently serving a ban from competitions on AstroBin."
-msgstr ""
+msgstr "Olet tällä hetkellä kilpailukielossa AstroBinissa."
 
+#, fuzzy
 #, python-format
 msgid ""
-"Unfortunately it's too late: images can be submitted only within "
-"%(num_days)s days after publication."
+"Unfortunately it's too late: images can be submitted only within %(num_days)"
+"s days after publication."
 msgstr ""
+"Valitettavasti on liian myöhäistä: kuvia voi lähettää vain %(num_days)s "
+"päivän ajan julkaisun jälkeen."
 
+#, fuzzy
+msgid "Unknown reason. This should never happen, please contact us!"
+msgstr ""
+"Tuntematon syy. Tämän ei pitäisi koskaan tapahtua, ota meihin yhteyttä!"
+
+#, fuzzy
+msgid "This image has been disqualified from the IOTD/TP process."
+msgstr "Tämä kuva on hylätty IOTD/TP-prosessista."
+
+#, fuzzy
 msgid ""
 "You have not agreed to the IOTD/TP rules and guidelines since their last "
 "update. Please amend this in your profile preferences and then submit the "
 "image again using the Actions menu."
 msgstr ""
+"Et ole hyväksynyt IOTD/TP-sääntöjä ja ohjeita niiden viimeisimmän "
+"päivityksen jälkeen. Korjaa tämä profiiliasetuksissasi ja lähetä kuva "
+"uudelleen toiminnot-valikosta."
 
-msgid "Unknown reason. This should never happen, please contact us!"
-msgstr ""
-
+#, fuzzy
 msgid "Yes"
-msgstr ""
+msgstr "Kyllä"
 
+#, fuzzy
 msgid "No"
+msgstr "Ei"
+
+#, fuzzy
+msgid ""
+"Images with subject type set to 'Equipment' or 'Other' are not eligible for "
+"IOTD/TP consideration."
 msgstr ""
+"Kuvat, joiden aihetyyppi on 'Välineet' tai 'Muut', eivät ole kelvollisia "
+"IOTD/TP-harkintaan."

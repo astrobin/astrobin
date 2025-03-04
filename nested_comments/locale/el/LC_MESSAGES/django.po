@@ -1,32 +1,84 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: 2013-12-28 09:06+0000\n"
-"Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1388221612.935002\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "(deleted)"
-msgstr "(διεγράφη)"
+#, fuzzy
+msgid "You follow each other"
+msgstr "Ακολουθείτε ο ένας τον άλλον"
 
+#, fuzzy
+msgid "Images"
+msgstr "Εικόνες"
+
+#, fuzzy
+msgid "Followers"
+msgstr "Ακόλουθοι"
+
+#, fuzzy
+msgid "Following"
+msgstr "Ακολουθώντας"
+
+#, fuzzy
+msgid "User"
+msgstr "Χρήστης"
+
+#, fuzzy
+msgid "No users."
+msgstr "Δεν υπάρχουν χρήστες."
+
+#, fuzzy
+msgid "Administrator"
+msgstr "Διαχειριστής"
+
+#, fuzzy
+msgid "Image moderator"
+msgstr "Μέλος της επιτροπής εικόνας"
+
+#, fuzzy
+msgid "IOTD Submitter"
+msgstr "Υποβολέας IOTD"
+
+#, fuzzy
+msgid "IOTD Reviewer"
+msgstr "Κριτής IOTD"
+
+#, fuzzy
+msgid "IOTD Judge"
+msgstr "Δικαστής IOTD"
+
+#, fuzzy
+msgid "Premium member"
+msgstr "Μέλος premium"
+
+#, fuzzy
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Οι αναφορές bounce του email σας έχουν αφαιρεθεί από το AstroBin. Παρακαλώ "
+"βεβαιωθείτε ότι το email σας λειτουργεί σωστά ή θα λάβετε ξανά το ίδιο "
+"μήνυμα προειδοποίησης. Ευχαριστώ!"
+
+#, fuzzy
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Οι αναφορές spam σας έχουν αφαιρεθεί από το AstroBin. Παρακαλώ βεβαιωθείτε "
+"ότι δεν έχετε φίλτρο ή κανόνα που να σημαίνει πάντα τα emails του AstroBin "
+"ως spam! Αν δεν θέλετε να λαμβάνετε emails από το AstroBin, αναζητήστε τον "
+"σύνδεσμο ρυθμίσεων που βρίσκεται στο κάτω μέρος κάθε email. Ευχαριστώ!"
+
+#, fuzzy
 msgid "Type your comment here..."
-msgstr ""
-
-msgid "Error"
-msgstr ""
+msgstr "Πληκτρολογήστε το σχόλιό σας εδώ..."
 
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -34,98 +86,264 @@ msgstr "Ακύρωση"
 msgid "Add a comment"
 msgstr "Προσθήκη σχολίου"
 
+#, fuzzy
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
+msgstr ""
+"Παρακαλώ <a href=\"%(login_url)s\">συνδεθείτε</a> ή <a href=\"%(signup_url)"
+"s\">εγγραφείτε</a> για να αφήσετε ένα σχόλιο."
+
 msgid "There are no comments yet."
 msgstr "Δεν υπάρχουν σχόλια."
 
-msgid "The comment cannot be empty."
-msgstr "Το σχόλιο δεν μπορεί να είναι άδειο."
+#, fuzzy
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "Αυτό το σχόλιο εκκρεμεί έγκριση και θα εξεταστεί σύντομα."
 
-msgid "Delete"
-msgstr "Διαγραφή"
+msgid "(deleted)"
+msgstr "(διεγράφη)"
 
-msgid "Undelete"
-msgstr "Επαναφορά"
+#, fuzzy
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "μου αρέσει"
 
-msgid "Edit"
-msgstr "Επεξεργασία"
+#, fuzzy
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "μου αρέσει"
 
 msgid "Link"
 msgstr "Σύνδεσμος"
 
-msgctxt "Noun, e.g. 'This element has 10 likes'"
-msgid "likes"
-msgstr ""
+msgid "Undelete"
+msgstr "Επαναφορά"
 
+msgid "Delete"
+msgstr "Διαγραφή"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#, fuzzy
+msgid "Reply"
+msgstr "Απάντηση"
+
+#, fuzzy
+msgid "Like"
+msgstr "Μου αρέσει"
+
+#, fuzzy
+msgid "Unlike"
+msgstr "Δεν μου αρέσει"
+
+msgid "The comment cannot be empty."
+msgstr "Το σχόλιο δεν μπορεί να είναι άδειο."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Υποβολή"
+
+#, fuzzy
+msgid "Error"
+msgstr "Σφάλμα"
+
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Like"
-msgstr ""
+msgstr "Μου αρέσει"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Unlike"
-msgstr ""
+msgstr "Δεν μου αρέσει"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Reply"
-msgstr ""
+msgstr "Απάντηση"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Approve"
-msgstr ""
+msgstr "Εγκρίνετε"
 
+#, fuzzy
 msgid "Report abuse"
-msgstr ""
+msgstr "Αναφορά κακοποίησης"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-
+#, fuzzy
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
 msgstr ""
+"Αυτό το σχόλιο εκκρεμεί έγκριση. Παρακαλώ εγκρίνετε το ή αναφέρετε "
+"κακοποίηση χρησιμοποιώντας τα κουμπιά παρακάτω."
 
+#, fuzzy
 msgid "Thank you for your cooperation!"
-msgstr ""
+msgstr "Ευχαριστώ για τη συνεργασία!"
 
+#, fuzzy
 msgid "This comment was already moderated by you or an AstroBin moderator."
 msgstr ""
+"Αυτό το σχόλιο έχει ήδη εγκριθεί από εσάς ή από έναν διαχειριστή του "
+"AstroBin."
 
+#, fuzzy
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
 "author or owner of the content object that you commented on. If they do not "
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
+"Το σχόλιό σας εκκρεμεί έγκριση και θα εξεταστεί σύντομα από τον συγγραφέα ή "
+"τον κάτοχο του περιεχομένου που σχολιάσατε. Αν δεν αναλάβουν δράση εντός 24 "
+"ωρών, ένας διαχειριστής του AstroBin θα αναλάβει και θα εξετάσει το σχόλιό "
+"σας εκ μέρους τους."
 
+#, fuzzy
 msgid "This process is necessary to prevent spam on AstroBin."
 msgstr ""
+"Αυτή η διαδικασία είναι απαραίτητη για να αποτραπεί η κακοποίηση στο "
+"AstroBin."
 
+#, fuzzy
 msgid "Thank you for understanding!"
-msgstr ""
+msgstr "Ευχαριστώ για την κατανόηση!"
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr ""
-
-msgid "Submit"
-msgstr ""
-
+#, fuzzy
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
+"Δεν μπορείτε να αναιρέσετε τη διαγραφή αυτού του σχολίου: υπάρχει αναφορά "
+"κακοποίησης που έχει επιβεβαιωθεί ή εκκρεμεί γι' αυτό. Αν πιστεύετε ότι το "
+"σχόλιό σας αναφέρθηκε άδικα, παρακαλώ επικοινωνήστε μαζί μας."
 
+#, fuzzy
 msgid "You have reached your abuse report quota."
-msgstr ""
+msgstr "Έχετε φτάσει το όριο αναφορών κακοποίησης."
 
+#, fuzzy
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr ""
+"Αυτό το στοιχείο δεν μπορεί να αναφερθεί ξανά γιατί έχει εγκριθεί από έναν "
+"διαχειριστή."
 
+#, fuzzy
+msgid "You many not report the same item more than once."
+msgstr "Δεν μπορείτε να αναφέρετε το ίδιο στοιχείο περισσότερες από μία φορές."
+
+#, fuzzy
 msgid "You may not report the same item more than once."
-msgstr ""
+msgstr "Δεν μπορείτε να αναφέρετε το ίδιο στοιχείο περισσότερες από μία φορές."
 
-#~ msgid "Reply"
-#~ msgstr "Απάντηση"
+#, fuzzy
+msgid "Report a use"
+msgstr "Αναφορά κακοποίησης"
+
+#, fuzzy
+msgid "Member since"
+msgstr "Μέλος από"
+
+#, fuzzy
+msgid "Last seen online"
+msgstr "Τελευταία φορά online"
+
+#, fuzzy
+msgid "Total integration time"
+msgstr "Συνολικός χρόνος ολοκλήρωσης"
+
+#, fuzzy
+msgid "hours"
+msgstr "ώρες"
+
+#, fuzzy
+msgid "Average integration time"
+msgstr "Μέσος χρόνος ολοκλήρωσης"
+
+#, fuzzy
+msgid "Forum posts written"
+msgstr "Δημοσιεύσεις φόρουμ που έχουν γραφτεί"
+
+#, fuzzy
+msgid "Comments written"
+msgstr "Σχόλια που έχουν γραφτεί"
+
+#, fuzzy
+msgid "Comments received"
+msgstr "Σχόλια που έχουν ληφθεί"
+
+#, fuzzy
+msgid "Likes received"
+msgstr "Μου αρέσουν που έχουν ληφθεί"
+
+#, fuzzy
+msgid "Views received"
+msgstr "Απόψεις που λήφθηκαν"
+
+#, fuzzy
+msgid "No date specified"
+msgstr "Καμία ημερομηνία καθορισμένη"
+
+#, fuzzy
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr ""
+"Καμία τηλεσκοπική ή φακοειδής εικόνα, ή καμία κάμερα εικόνας καθορισμένη"
+
+#, fuzzy
+msgid "Gear images"
+msgstr "Εικόνες εξοπλισμού"
+
+#, fuzzy
+msgid "Deep sky"
+msgstr "Βαθιά ουράνια"
+
+#, fuzzy
+msgid "Solar system"
+msgstr "Ηλιακό σύστημα"
+
+#, fuzzy
+msgid "Extremely wide field"
+msgstr "Εξαιρετικά ευρύ πεδίο"
+
+#, fuzzy
+msgid "Star trails"
+msgstr "Διαδρομές αστεριών"
+
+#, fuzzy
+msgid "Northern lights"
+msgstr "Βόρεια φώτα"
+
+#, fuzzy
+msgid "Noctilucent clouds"
+msgstr "Νυκτολουόμενα σύννεφα"
+
+#, fuzzy
+msgid "Gear"
+msgstr "Εξοπλισμός"
+
+#, fuzzy
+msgid "Other"
+msgstr "Άλλο"
+
+#, fuzzy
+msgid "All"
+msgstr "Όλα"
+
+#, fuzzy
+msgid "n/a"
+msgstr "n/a"
+
+#, fuzzy
+msgid "No subjects specified"
+msgstr "Καμία υποκείμενη εικόνα καθορισμένη"
+
+#, fuzzy
+msgid "No acquisition details specified"
+msgstr "Καμία λεπτομέρεια απόκτησης καθορισμένη"

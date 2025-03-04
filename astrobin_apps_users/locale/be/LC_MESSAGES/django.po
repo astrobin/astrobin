@@ -1,102 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: 2020-12-26 23:47+0000\n"
-"Last-Translator: kupal <9090852@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: be\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1609026475.000000\n"
-
-msgid "Member since"
-msgstr ""
-
-msgid "Last seen online"
-msgstr ""
-
-msgid "Total integration time"
-msgstr ""
-
-msgid "hours"
-msgstr ""
-
-msgid "Average integration time"
-msgstr ""
-
-msgid "Forum posts written"
-msgstr ""
-
-msgid "Comments written"
-msgstr ""
-
-msgid "Comments received"
-msgstr ""
-
-msgid "Likes received"
-msgstr ""
-
-msgid "Views received"
-msgstr ""
-
-msgid "No date specified"
-msgstr ""
-
-msgid "No optics or no cameras"
-msgstr ""
-
-msgid "Equipment images"
-msgstr ""
-
-msgid "Deep sky"
-msgstr ""
-
-msgid "Solar system"
-msgstr ""
-
-msgid "Extremely wide field"
-msgstr ""
-
-msgid "Star trails"
-msgstr ""
-
-msgid "Northern lights"
-msgstr ""
-
-msgid "Noctilucent clouds"
-msgstr ""
-
-msgid "Landscape"
-msgstr ""
-
-msgid "Artificial satellite"
-msgstr ""
-
-msgid "Gear"
-msgstr ""
-
-msgid "Other"
-msgstr ""
-
-msgid "All"
-msgstr ""
-
-msgid "n/a"
-msgstr ""
-
-msgid "No acquisition details specified"
-msgstr ""
+"Content-Transfer-Encoding: 8bit"
 
 msgid "You follow each other"
 msgstr "Вы падпісаныя адзін на аднаго"
@@ -134,15 +43,411 @@ msgstr "Суддзя малюнка дня"
 msgid "Premium member"
 msgstr "Прэміяльны член"
 
+#, fuzzy
 msgid ""
 "Your email bounce reports have been removed from AstroBin. Please make sure "
 "that your email works well or you will get the same warning message again. "
 "Thanks!"
 msgstr ""
+"Вашы паведамленні пра адскокі электроннай пошты былі выдалены з AstroBin. "
+"Калі ласка, пераканайцеся, што ваша электронная пошта працуе добра, інакш вы "
+"атрымаеце тое ж папярэджанне зноў. Дзякуй!"
 
+#, fuzzy
 msgid ""
 "Your spam reports have been removed from AstroBin. Please make sure you "
 "don't have a filter or rule to always mark AstroBin's emails as spam! If you "
 "don't want to receive emails from AstroBin, look for the settings link "
 "that's at the bottom of every email. Thanks!"
 msgstr ""
+"Вашы паведамленні пра спам былі выдалены з AstroBin. Калі ласка, "
+"пераканайцеся, што ў вас няма фільтра або правіла, якое заўсёды адзначае "
+"электронныя лісты AstroBin як спам! Калі вы не хочаце атрымліваць лісты ад "
+"AstroBin, знайдзіце спасылку на налады, якая знаходзіцца ўнізе кожнага ліста."
+" Дзякуй!"
+
+msgid "I wasn't really affected by the data loss"
+msgstr "Страта дадзеных мяне не вельмі пашкодзіла."
+
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr "Мне не патрэбна кампэнсацыя: я хачу падтрымаць AstroBin"
+
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr "Я хацеў бы паспрабаваць AstroBin Ultimate дармова 1 месяц"
+
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr "Я лічу, што маю права на дармовы AstroBin Ultimate на 3 месяцы"
+
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr "Я лічу, што маю права на дармовы AstroBin Ultimate на поўгады"
+
+msgid "Requested compensation"
+msgstr "Запрошаная кампэнсацыя"
+
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr "Калі ласка, укажыце, ці хочаце і колькі хочаце атрымаць кампэнсацыю."
+
+msgid "Your migration data"
+msgstr "Вашы міграцыйныя дадзеныя"
+
+msgid "Total amount donated last year"
+msgstr "Агульная сума ахвяравання за апошні год"
+
+msgid "First payment"
+msgstr "Першы плацёж"
+
+msgid "Price for Premium"
+msgstr "Цана за прэміўм"
+
+msgid "Days covered"
+msgstr "Пакрытыя дні"
+
+msgid "Premium expiration"
+msgstr "Сканчэнне прэміўма"
+
+msgid "Your donations last year"
+msgstr "Вашыя ахвяраванні за апошні год"
+
+msgid "Amount"
+msgstr "Сума"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Subscription"
+msgstr "Падпіска"
+
+msgid "Data loss compensation request"
+msgstr "Запрос на кампэнсацыю страчаных дадзеных"
+
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
+msgstr "Вы маеце права на кампэнсацыю з-за страту дадзеных 16-га лютага 2020."
+
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+"Калі вы яшчэ не чыталі, калі ласка прачытаць тое, што адбылося на наступнай "
+"старонцы:"
+
+msgid "Official statement and post-mortem"
+msgstr "Афіцыйная заява і post-mortem"
+
+msgid "Please accept our apology once more."
+msgstr "Калі ласка, прабачце яшчэ раз."
+
+msgid "Please chooce your compensation from the list below"
+msgstr "Калі ласка, абярыце сваю кампенсацыю са спісу ніжэй"
+
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+"Прапануем вам дармовы час на новым узроўні сяброўства AstroBin - «Ultimate» "
+"як кампэнсацыю."
+
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+"Каб даведацца больш пра AstroBin Ultimate, наведайце <a href=\"%(url)s\" "
+"target=\"_blank\">старонку з цэнамі</a>."
+
+msgid "Submit"
+msgstr "Адправіць"
+
+msgid "Data loss compensation reauest"
+msgstr "Запыт на кампэнсацыю страты дадзеных"
+
+msgid "Already done"
+msgstr "Ужо зроблена"
+
+msgid "Sorry, you can't do this again."
+msgstr "Выбачайце, але вы не можаце зрабіць зноў."
+
+msgid "Your preference was already recorded and cannot be changed."
+msgstr "Вашы настройкі ўжо захаваны і не могуць быць зменены."
+
+msgid "Not eligible"
+msgstr "Не маеце права"
+
+msgid "It looks like you're not eligible"
+msgstr "Здаецца што вы не маеце на гэта права"
+
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+"Выбачайце, але гэтая старонка прызначана для людзей, якія былі на AstroBin "
+"Premium у той дзень, калі адбыўся інцыдэнт са стратай дадзеных, і, здаецца, "
+"вы не адзін з іх."
+
+msgid "Success"
+msgstr "Посьпех"
+
+msgid "All done!"
+msgstr "Усё зроблена!"
+
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
+msgstr "Ваша настройка была захавана і ўжо прытарнавана. Дзякуй!"
+
+msgid "Migrate donations"
+msgstr "Міграваць ахвяраванні"
+
+msgid "Error!"
+msgstr "Памылка!"
+
+msgid ""
+"Sorry, but it looks like you cannot migrate your donations to a Premium "
+"membership."
+msgstr ""
+"Выбачайце, але вы не можаце перанесці свае ахвяраванні да сяброўства Premium."
+
+msgid "You already have a paid membership."
+msgstr "Вы ужо маеце платнае сяброўства."
+
+msgid "We could not find any donations from you last year."
+msgstr "Мы не змаглі знайсці ніякіх ахвяраванняў ад вас за мінулы год."
+
+msgid ""
+"Your donations last year were not enough to cover a Premium subscription for "
+"this year."
+msgstr ""
+"Вашых ахвяраванняў за мінулы год было недастаткова, каб пакрыць падпіску "
+"Premium на гэты год."
+
+msgid "View the subscription plans"
+msgstr "Глядзіце тыпы падпісак"
+
+msgid ""
+"As you  have made donations during the last year, you may choose to transfer "
+"the amount you donated towards an AstroBin Premium membership. The "
+"membership will have an expiration date proportionate to the amount you "
+"donated."
+msgstr ""
+"Паколькі вы зрабілі ахвяраванні ў апошнім годзе, вы можаце пералічыць суму, "
+"якую ахвяравалі на сяброўства AstroBin Premium. Тэрмін дзеяння сяброўства "
+"будзе прапарцыйны суме, якую вы ахвяравалі."
+
+msgid ""
+"If you are feeling particularly cool and generous, you may choose to "
+"consider your past donations as a contribution to support past efforts, and "
+"pay again for a Premium plan. Up to you!"
+msgstr ""
+"Калі вы адчуваеце сябе асабліва добра і шчодра, вы можаце лічыць свае "
+"мінулыя ахвяраванні ўнёскам у падтрымку мінулых намаганняў і зноў заплаціць "
+"за план Premium. Вырашаць вам!"
+
+msgid "No, I want to pay for Premium"
+msgstr "Не, я хачу плаціць за Premium"
+
+msgid "Your migration was successful."
+msgstr "Ваша міграцыя прайшла паспяхова."
+
+msgid "Thanks for supporting AstroBin!"
+msgstr "Дзякуй за падтрымку AstroBin!"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
+msgstr "Ваша \"%(subscription_name)s\" падпіска ў AstroBin скончылась."
+
+msgid ""
+"When a subscription on AstroBin expires, nothing happens to your images or "
+"any of your content. You are reverted to AstroBin Free and will not be able "
+"to upload new images until you renew, but you may continue to use AstroBin "
+"in all other aspects if you do not have any new images to share at the "
+"moment."
+msgstr ""
+"Калі падпіска на AstroBin канчаецца, з вашымі здымкамі або любым кантэнтам "
+"нічога не адбываецца. Вы вярнуліся да AstroBin Free і не зможаце загружаць "
+"новыя здымкі, пакуль не аднавіце падпіску, але вы можаце працягваць "
+"карыстацца AstroBin ва ўсіх іншых аспектах, калі ў вас няма новых здымкаў, "
+"якімі вы можаце падзяліцца на дадзены момант."
+
+msgid ""
+"When you are ready to renew your subscription, please visit the following "
+"page:"
+msgstr ""
+"Калі вы будзеце гатовыя аднавіць падпіску, наведайце наступную старонку:"
+
+msgid "Your AstroBin subscription has just expired"
+msgstr "Ваша падпіска на AstroBin толькі што скончылася"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
+msgstr ""
+"Ваша \"%(subscription_name)s\" падпіска ў AstroBin скончыцца праз тыдзень."
+
+msgid ""
+"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
+"still ongoing. Please wait until it is expired. Thank you!"
+msgstr ""
+"ЎВАГА! Зараз вы не можаце аднавіць падпіску, таму што яна яшчэ не скончылася."
+" Калі ласка, пачакайце, пакуль яна не скончыцца. Дзякуй!"
+
+msgid "Your AstroBin subscription will expire in one week"
+msgstr "Тэрмін дзеяння вашай падпіскі на AstroBin скончыцца праз тыдзень"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in one week."
+msgstr ""
+"Ваша \"%(subscription_name)s\" падпіска ў AstroBin аднавіцца аўтаматычна "
+"праз тыдзень."
+
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
+msgstr ""
+"Ваша падпіска на AstroBin аднаўляецца аўтаматычна, і мы паспрабуем аднавіць "
+"яе аўтаматычна. Калі ваша падпіска была створана звычайным спосабам, праз "
+"PayPal, PayPal паспрабуе спагнаць з вашай крэдытнай карты або атрымаць "
+"сродкі, якія ёсць у вашым акаўнце."
+
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"Калі ваша падпіска была створана ўручную з дапамогай банкаўскага перакладу, "
+"звярніцеся да новага плацяжу."
+
+msgid "Thank you!"
+msgstr "Дзякуй!"
+
+msgid "Your AstroBin subscription will be automatically renewed in one week"
+msgstr "Ваша падпіска ў AstroBin аднавіцца аўтаматычна праз тыдзень"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+"Ваша \"%(subscription_name)s\" падпіска ў AstroBin аднавіцца аўтаматычна "
+"праз 30 дзён."
+
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+msgstr "Ваша падпіска ў AstroBin аднавіцца аўтаматычна праз 30 дзён"
+
+#, fuzzy
+msgid "No date specified"
+msgstr "Дата не ўказана"
+
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "Не зазначаны ані тэлескопы ані лінзы ані фатаапарат для здымання"
+
+msgid "Gear images"
+msgstr "Фота прылад"
+
+#, fuzzy
+msgid "Deep sky"
+msgstr "Глыбокае неба"
+
+#, fuzzy
+msgid "Solar system"
+msgstr "Сонечная сістэма"
+
+#, fuzzy
+msgid "Extremely wide field"
+msgstr "Экстрэмальна шырокае поле"
+
+#, fuzzy
+msgid "Star trails"
+msgstr "Сляды зорак"
+
+#, fuzzy
+msgid "Northern lights"
+msgstr "Паўночныя святлы"
+
+#, fuzzy
+msgid "Noctilucent clouds"
+msgstr "Ночныя воблакі"
+
+#, fuzzy
+msgid "Gear"
+msgstr "Абсталяванне"
+
+#, fuzzy
+msgid "Other"
+msgstr "Іншае"
+
+#, fuzzy
+msgid "All"
+msgstr "Усё"
+
+#, fuzzy
+msgid "n/a"
+msgstr "н/а"
+
+msgid "No subjects specified"
+msgstr "Няма ніякіх аб'ектаў"
+
+#, fuzzy
+msgid "No acquisition details specified"
+msgstr "Дэталі набыцця не ўказаны"
+
+#, fuzzy
+msgid "Member since"
+msgstr "Член з"
+
+#, fuzzy
+msgid "Last seen online"
+msgstr "Апошні раз у сетцы"
+
+#, fuzzy
+msgid "Total integration time"
+msgstr "Агульны час інтэграцыі"
+
+#, fuzzy
+msgid "hours"
+msgstr "гадзін"
+
+#, fuzzy
+msgid "Average integration time"
+msgstr "Сярэдні час інтэграцыі"
+
+#, fuzzy
+msgid "Forum posts written"
+msgstr "Напісаныя паведамленні на форуме"
+
+#, fuzzy
+msgid "Comments written"
+msgstr "Напісаныя каментары"
+
+#, fuzzy
+msgid "Comments received"
+msgstr "Атрыманне каментароў"
+
+#, fuzzy
+msgid "Likes received"
+msgstr "Атрыманне лайкаў"
+
+#, fuzzy
+msgid "Views received"
+msgstr "Атрыманне праглядаў"
+
+#, fuzzy
+msgid "Landscape"
+msgstr "Пейзаж"
+
+#, fuzzy
+msgid "No optics or no cameras"
+msgstr "Няма оптыкі або камер"
+
+#, fuzzy
+msgid "Equipment images"
+msgstr "Выявы абсталявання"
+
+#, fuzzy
+msgid "Artificial satellite"
+msgstr "Штучны спадарожнік"

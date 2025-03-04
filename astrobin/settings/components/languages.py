@@ -25,6 +25,8 @@ LANGUAGES = (
     ('ja', gettext('Japanese')),
     ('zh-hans', gettext('Chinese (Simplified)')),
     ('hu', gettext('Hungarian')),
+    ('be', gettext('Belarusian')),
+    ('sv', gettext('Swedish')),
 )
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.

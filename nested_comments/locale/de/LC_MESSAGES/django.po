@@ -1,21 +1,70 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: de\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "(deleted)"
-msgstr "(gelöscht)"
+msgid "You follow each other"
+msgstr "Sie folgen sich gegenseitig"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "Followers"
+msgstr "Followers"
+
+msgid "Following"
+msgstr "Abonnements"
+
+msgid "User"
+msgstr "Benutzer"
+
+msgid "No users."
+msgstr "Keine Nutzer."
+
+msgid "Administrator"
+msgstr "Administrator"
+
+msgid "Image moderator"
+msgstr "Bild-Moderator"
+
+msgid "IOTD Submitter"
+msgstr "IOTD-Einreicher"
+
+msgid "IOTD Reviewer"
+msgstr "IOTD-Rezensent"
+
+msgid "IOTD Judge"
+msgstr "IOTD-Richter"
+
+msgid "Premium member"
+msgstr "Premiummitglied"
+
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Ihre E-Mail-Bounce-Reporte wurden aus AstroBin entfernt. Bitte stellen Sie "
+"sicher, dass Ihre E-Mail gut funktioniert, sonst erhalten Sie die gleiche "
+"Warnmeldung erneut. Danke!"
+
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Ihre Spam-Meldungen wurden von AstroBin entfernt. Bitte stellen Sie sicher, "
+"dass Sie keinen Filter oder eine Regel haben, die AstroBin-E-Mails immer als "
+"Spam markiert! Wenn Sie keine E-Mails von AstroBin erhalten möchten, "
+"verwenden Sie den Link für die Einstellungen, der sich am Ende jeder E-Mail "
+"befindet. Danke!"
 
 msgid "Type your comment here..."
 msgstr "Geben Sie hier Ihren Kommentar ein..."
-
-msgid "Error"
-msgstr "Fehler"
 
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -23,27 +72,61 @@ msgstr "Abbrechen"
 msgid "Add a comment"
 msgstr "Kommentar hinzufügen"
 
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
+msgstr ""
+"Bitte <a href=\"%(login_url)s\">einloggen</a> oder <a href=\"%(signup_url)"
+"s\">registrieren</a> um einen Kommentar zu hinterlassen."
+
 msgid "There are no comments yet."
 msgstr "Keine Kommentare bis jetzt."
 
-msgid "The comment cannot be empty."
-msgstr "Der Kommentar kann nicht leer sein."
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+"Dieser Kommentar befindet sich in der Moderation und wird in Kürze geprüft."
 
-msgid "Delete"
-msgstr "Löschen"
-
-msgid "Undelete"
-msgstr "Wiederherstellen"
-
-msgid "Edit"
-msgstr "Editieren"
-
-msgid "Link"
-msgstr "Link"
+msgid "(deleted)"
+msgstr "(gelöscht)"
 
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "Likes"
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "like"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Undelete"
+msgstr "Wiederherstellen"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Edit"
+msgstr "Editieren"
+
+msgid "Reply"
+msgstr "Antworten"
+
+msgid "Like"
+msgstr "Like"
+
+msgid "Unlike"
+msgstr "Unlike"
+
+msgid "The comment cannot be empty."
+msgstr "Der Kommentar kann nicht leer sein."
+
+msgid "Submit"
+msgstr "Absenden"
+
+msgid "Error"
+msgstr "Fehler"
 
 msgctxt "Verb (imperative)"
 msgid "Like"
@@ -63,14 +146,6 @@ msgstr "Genehmigen"
 
 msgid "Report abuse"
 msgstr "Missbrauch melden"
-
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"Bitte <a href=\"%(login_url)s\">einloggen</a> oder <a href=\"%(signup_url)s"
-"\">registrieren</a> um einen Kommentar zu hinterlassen."
 
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
@@ -104,13 +179,6 @@ msgstr "Dieser Vorgang ist notwendig, um Spam auf AstroBin zu verhindern."
 msgid "Thank you for understanding!"
 msgstr "Vielen Dank für Ihr Verständnis!"
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr ""
-"Dieser Kommentar befindet sich in der Moderation und wird in Kürze geprüft."
-
-msgid "Submit"
-msgstr "Absenden"
-
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
@@ -129,156 +197,86 @@ msgstr ""
 "Dieser Artikel kann nicht erneut gemeldet werden, da er von einem Moderator "
 "genehmigt wurde."
 
+msgid "You many not report the same item more than once."
+msgstr "Sie können denselben Artikel nicht mehrmals melden."
+
 msgid "You may not report the same item more than once."
 msgstr "Sie können denselben Gegenstand nicht mehrmals melden."
 
-#~ msgid "You follow each other"
-#~ msgstr "Sie folgen sich gegenseitig"
+msgid "Report a use"
+msgstr "Eine Verwendung melden"
 
-#~ msgid "Images"
-#~ msgstr "Bilder"
+msgid "Member since"
+msgstr "Mitglied seit"
 
-#~ msgid "Followers"
-#~ msgstr "Followers"
+msgid "Last seen online"
+msgstr "Zuletzt online"
 
-#~ msgid "Following"
-#~ msgstr "Abonnements"
+msgid "Total integration time"
+msgstr "Gesamtbelichtungszeit"
 
-#~ msgid "User"
-#~ msgstr "Benutzer"
+msgid "hours"
+msgstr "Stunden"
 
-#~ msgid "No users."
-#~ msgstr "Keine Nutzer."
+msgid "Average integration time"
+msgstr "Durchschnittliche Belichtungszeit"
 
-#~ msgid "Administrator"
-#~ msgstr "Administrator"
+msgid "Forum posts written"
+msgstr "Forumsbeiträge geschrieben"
 
-#~ msgid "Image moderator"
-#~ msgstr "Bild-Moderator"
+msgid "Comments written"
+msgstr "Kommentare geschrieben"
 
-#~ msgid "IOTD Submitter"
-#~ msgstr "IOTD-Einreicher"
+msgid "Comments received"
+msgstr "Kommentare erhalten"
 
-#~ msgid "IOTD Reviewer"
-#~ msgstr "IOTD-Rezensent"
+msgid "Likes received"
+msgstr "Likes erhalten"
 
-#~ msgid "IOTD Judge"
-#~ msgstr "IOTD-Richter"
+msgid "Views received"
+msgstr "Erhaltene Bildaufrufe"
 
-#~ msgid "Premium member"
-#~ msgstr "Premiummitglied"
+msgid "No date specified"
+msgstr "Kein Datum angegeben"
 
-#~ msgid ""
-#~ "Your email bounce reports have been removed from AstroBin. Please make "
-#~ "sure that your email works well or you will get the same warning message "
-#~ "again. Thanks!"
-#~ msgstr ""
-#~ "Ihre E-Mail-Bounce-Reporte wurden aus AstroBin entfernt. Bitte stellen "
-#~ "Sie sicher, dass Ihre E-Mail gut funktioniert, sonst erhalten Sie die "
-#~ "gleiche Warnmeldung erneut. Danke!"
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "Keine abbildenden Teleskope oder Objektive oder Kameras angegeben"
 
-#~ msgid ""
-#~ "Your spam reports have been removed from AstroBin. Please make sure you "
-#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
-#~ "you don't want to receive emails from AstroBin, look for the settings "
-#~ "link that's at the bottom of every email. Thanks!"
-#~ msgstr ""
-#~ "Ihre Spam-Meldungen wurden von AstroBin entfernt. Bitte stellen Sie "
-#~ "sicher, dass Sie keinen Filter oder eine Regel haben, die AstroBin-E-"
-#~ "Mails immer als Spam markiert! Wenn Sie keine E-Mails von AstroBin "
-#~ "erhalten möchten, verwenden Sie den Link für die Einstellungen, der sich "
-#~ "am Ende jeder E-Mail befindet. Danke!"
+msgid "Gear images"
+msgstr "Bilder der Ausrüstung"
 
-#~ msgctxt "Noun, e.g. 'This element has 1 like'"
-#~ msgid "like"
-#~ msgstr "like"
+msgid "Deep sky"
+msgstr "Deep Sky"
 
-#~ msgid "Reply"
-#~ msgstr "Antworten"
+msgid "Solar system"
+msgstr "Sonnensystem"
 
-#~ msgid "Like"
-#~ msgstr "Like"
+msgid "Extremely wide field"
+msgstr "Weitwinkel"
 
-#~ msgid "Unlike"
-#~ msgstr "Unlike"
+msgid "Star trails"
+msgstr "Stern-Strichspuren"
 
-#~ msgid "You many not report the same item more than once."
-#~ msgstr "Sie können denselben Artikel nicht mehrmals melden."
+msgid "Northern lights"
+msgstr "Nordlichter"
 
-#~ msgid "Report a use"
-#~ msgstr "Eine Verwendung melden"
+msgid "Noctilucent clouds"
+msgstr "Leuchtende Nachtwolken"
 
-#~ msgid "Member since"
-#~ msgstr "Mitglied seit"
+msgid "Gear"
+msgstr "Ausrüstung"
 
-#~ msgid "Last seen online"
-#~ msgstr "Zuletzt online"
+msgid "Other"
+msgstr "Anderes"
 
-#~ msgid "Total integration time"
-#~ msgstr "Gesamtbelichtungszeit"
+msgid "All"
+msgstr "Alles"
 
-#~ msgid "hours"
-#~ msgstr "Stunden"
+msgid "n/a"
+msgstr "k.A."
 
-#~ msgid "Average integration time"
-#~ msgstr "Durchschnittliche Belichtungszeit"
+msgid "No subjects specified"
+msgstr "Keine Themen spezifiziert"
 
-#~ msgid "Forum posts written"
-#~ msgstr "Forumsbeiträge geschrieben"
-
-#~ msgid "Comments written"
-#~ msgstr "Kommentare geschrieben"
-
-#~ msgid "Comments received"
-#~ msgstr "Kommentare erhalten"
-
-#~ msgid "Likes received"
-#~ msgstr "Likes erhalten"
-
-#~ msgid "Views received"
-#~ msgstr "Erhaltene Bildaufrufe"
-
-#~ msgid "No date specified"
-#~ msgstr "Kein Datum angegeben"
-
-#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-#~ msgstr "Keine abbildenden Teleskope oder Objektive oder Kameras angegeben"
-
-#~ msgid "Gear images"
-#~ msgstr "Bilder der Ausrüstung"
-
-#~ msgid "Deep sky"
-#~ msgstr "Deep Sky"
-
-#~ msgid "Solar system"
-#~ msgstr "Sonnensystem"
-
-#~ msgid "Extremely wide field"
-#~ msgstr "Weitwinkel"
-
-#~ msgid "Star trails"
-#~ msgstr "Stern-Strichspuren"
-
-#~ msgid "Northern lights"
-#~ msgstr "Nordlichter"
-
-#~ msgid "Noctilucent clouds"
-#~ msgstr "Leuchtende Nachtwolken"
-
-#~ msgid "Gear"
-#~ msgstr "Ausrüstung"
-
-#~ msgid "Other"
-#~ msgstr "Anderes"
-
-#~ msgid "All"
-#~ msgstr "Alles"
-
-#~ msgid "n/a"
-#~ msgstr "k.A."
-
-#~ msgid "No subjects specified"
-#~ msgstr "Keine Themen spezifiziert"
-
-#~ msgid "No acquisition details specified"
-#~ msgstr "Keine Aufnahmedetails spezifiziert"
+msgid "No acquisition details specified"
+msgstr "Keine Aufnahmedetails spezifiziert"

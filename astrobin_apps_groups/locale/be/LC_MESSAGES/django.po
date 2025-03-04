@@ -1,442 +1,631 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: be\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-
+#, fuzzy
 msgid "Autosubmission deactivation strategy"
-msgstr ""
+msgstr "Стратэгія дэактывацыі аўтаадпраўкі"
 
+#, fuzzy
 msgid "Keep all images currently auto-submitted"
-msgstr ""
+msgstr "Захаваць усе выявы, якія зараз аўтаматычна адправляюцца"
 
+#, fuzzy
 msgid "Remove all images and start over"
-msgstr ""
+msgstr "Выдаліць усе выявы і пачаць зноў"
 
+#, fuzzy
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
 msgstr ""
+"Калі вы змяняеце сваю групу з аўтаадпраўкі на неаўтаадпраўку, вам трэба "
+"падумаць, што рабіць з выявамі, якія зараз у групе."
 
+#, fuzzy
 msgid "Invite users"
-msgstr ""
+msgstr "Запрасіць карыстальнікаў"
 
+#, fuzzy
 msgid "Users will receive a notification and will be able to join the group"
-msgstr ""
+msgstr "Карыстальнікі атрымаюць апавяшчэнне і змогуць далучыцца да групы"
 
+#, fuzzy
 msgid "Professional network"
-msgstr ""
+msgstr "Прафесійная сетка"
 
+#, fuzzy
 msgid "Club or association"
-msgstr ""
+msgstr "Клуб або асацыяцыя"
 
+#, fuzzy
 msgid "Internet community"
-msgstr ""
+msgstr "Інтэрнэт-супольнасць"
 
+#, fuzzy
 msgid "Friends or partners"
-msgstr ""
+msgstr "Сябры або партнёры"
 
+#, fuzzy
 msgid "Geographical area"
-msgstr ""
+msgstr "Геаграфічная зона"
 
+#, fuzzy
 msgid "Ad-hoc collaboration"
-msgstr ""
+msgstr "Сумесная праца па запыце"
 
+#, fuzzy
 msgid "Specific to an imaging technique"
-msgstr ""
+msgstr "Спецыфічна для тэхнікі здымкі"
 
+#, fuzzy
 msgid "Specific to an astrophotography target"
-msgstr ""
+msgstr "Спецыфічна для мэты астрафатаграфіі"
 
+#, fuzzy
 msgid "Specific to certain equipment"
-msgstr ""
+msgstr "Спецыфічна для пэўнага абсталявання"
 
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "Іншае"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "Назва"
 
+#, fuzzy
 msgid "Description"
-msgstr ""
+msgstr "Апісанне"
 
+#, fuzzy
 msgid "HTML tags are allowed."
-msgstr ""
+msgstr "HTML-тэгі дазволены."
 
+#, fuzzy
 msgid "Category"
-msgstr ""
+msgstr "Катэгорыя"
 
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-
+#, fuzzy
 msgid "Public group"
-msgstr ""
+msgstr "Публічная група"
 
+#, fuzzy
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
-msgstr ""
+msgstr "Публічныя групы могуць шукацца любым, і ўвесь іх змест публічны."
 
+#, fuzzy
 msgid "Moderated group"
-msgstr ""
+msgstr "Мадэраваная група"
 
+#, fuzzy
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
+"Мадэраваныя групы маюць чаргу мадэрацыі для размешчаных выяў і запытаў на "
+"далучэнне."
 
+#, fuzzy
 msgid "Automatic submission"
-msgstr ""
+msgstr "Аўтаматычная адпраўка"
 
+#, fuzzy
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
 "explicitly submitted to it."
 msgstr ""
+"Групы з аўтаматычнымі адпраўкамі заўсёды ўтрымліваюць усе публічныя выявы ад "
+"усіх удзельнікаў. Групы без аўтаматычнай адпраўкі ўтрымліваюць толькі выявы, "
+"якія яўна адправленыя ў іх."
 
-msgid "Forum notice"
-msgstr ""
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-
+#, fuzzy
 msgid "Last activity"
-msgstr ""
+msgstr "Апошняя актыўнасць"
 
-msgid "Date created"
-msgstr ""
-
+#, fuzzy
 msgid "Members"
-msgstr ""
+msgstr "Удзельнікі"
 
+#, fuzzy
 msgid "Images"
-msgstr ""
+msgstr "Выявы"
 
+#, fuzzy
 msgid "Forum posts"
-msgstr ""
+msgstr "Посты на форуме"
 
+#, fuzzy
 msgid "Owner"
-msgstr ""
+msgstr "Уладальнік"
 
+#, fuzzy
 msgid "Moderator"
-msgstr ""
+msgstr "Мадэратар"
 
+#, fuzzy
 msgid "Member"
-msgstr ""
+msgstr "Удзельнік"
 
+#, fuzzy
 msgid "Invited"
-msgstr ""
+msgstr "Запрошаны"
 
+#, fuzzy
 msgid "Join request pending approval"
-msgstr ""
+msgstr "Запыт на далучэнне чакае зацвярджэння"
 
+#, fuzzy
 msgid "Add/remove images"
-msgstr ""
+msgstr "Дадаць/выдаліць выявы"
 
+#, fuzzy
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
+"Націсніце на выявы, каб уключыць іх у гэтую групу (і націсніце яшчэ раз, каб "
+"выключыць). Потым націсніце на кнопку Захаваць ніжэй."
 
+#, fuzzy
 msgid "(no title)"
-msgstr ""
+msgstr "(без назвы)"
 
+#, fuzzy
 msgid "Save"
-msgstr ""
+msgstr "Захаваць"
 
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Скасаваць"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
+#, fuzzy
 msgid "Delete group?"
-msgstr ""
+msgstr "Выдаліць групу?"
 
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
 msgstr ""
+"Уважліва! Вы сапраўды хочаце выдаліць гэтую групу? Гэтая аперацыя не можа "
+"быць адменена!"
 
+#, fuzzy
 msgid "Delete group"
-msgstr ""
+msgstr "Выдаліць групу"
 
+#, fuzzy
 msgid "Create new group"
-msgstr ""
+msgstr "Стварыць новую групу"
 
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "Адміністратар"
 
+#, fuzzy
 msgid "Edit group"
-msgstr ""
+msgstr "Рэдагаваць групу"
 
+#, fuzzy
 msgid "Manage members"
-msgstr ""
+msgstr "Кіраванне ўдзельнікамі"
 
+#, fuzzy
 msgid "Actions"
-msgstr ""
+msgstr "Дзеянні"
 
+#, fuzzy
 msgid "Join group"
-msgstr ""
+msgstr "Далучыцца да групы"
 
+#, fuzzy
 msgid "Leave group"
-msgstr ""
+msgstr "Пакінуць групу"
 
+#, fuzzy
 msgid "Moderate join requests"
-msgstr ""
+msgstr "Умераныя запыты на далучэнне"
 
-msgid "Sort images"
-msgstr ""
-
+#, fuzzy
 msgid "This group is public"
-msgstr ""
+msgstr "Група публічная"
 
+#, fuzzy
 msgid "This group is private"
-msgstr ""
+msgstr "Група прыватная"
 
+#, fuzzy
 msgid "This group is moderated"
-msgstr ""
+msgstr "Група мадэруецца"
 
+#, fuzzy
 msgid "This group is not moderated"
-msgstr ""
+msgstr "Група не мадэруецца"
 
+#, fuzzy
 msgid "This group has automatic submission"
-msgstr ""
+msgstr "Група мае аўтаматычную падачу"
 
+#, fuzzy
 msgid "This group does not have automatic submission"
-msgstr ""
+msgstr "Група не мае аўтаматычнай падачы"
 
+#, fuzzy
 msgid "Invited users"
-msgstr ""
+msgstr "Запрошаныя карыстальнікі"
 
+#, fuzzy
 msgid "Join requests"
-msgstr ""
+msgstr "Запыты на далучэнне"
 
+#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
+"Група створана на %(date_created)s, належыць <a href=\"%(owner_url)s\">"
+"%(owner)s</a>, катэгорыя <strong>%(category)s</strong>."
 
+#, fuzzy
 msgid "Group forum"
-msgstr ""
+msgstr "Форум групы"
 
+#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
+"<strong>%(post_count)s</strong> паведамленняў у <strong>%(topic_count)"
+"s</strong> тэмах"
 
+#, fuzzy
 msgid "View all"
-msgstr ""
+msgstr "Паглядзець усе"
 
+#, fuzzy
 msgid "New topic"
-msgstr ""
+msgstr "Новая тэма"
 
+#, fuzzy
+msgid "Please join the group to view its forum."
+msgstr "Калі ласка, далучыцеся да групы, каб паглядзець яе форум."
+
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
 msgstr ""
+"Увага! Вы сапраўды хочаце выдаліць гэтую групу? Гэтая аперацыя не падлягае "
+"адмене, форум групы і ўсе яе тэмы будуць безвяротна выдалены!"
 
+#, fuzzy
 msgid "Join group?"
-msgstr ""
+msgstr "Далучыцца да групы?"
 
+#, fuzzy
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
+"Гэта публічная група: увесь кантэнт, уключаючы спіс удзельнікаў, даступны "
+"для неўдзельнікаў."
 
+#, fuzzy
 msgid "This is a private group: only members have access to its contents."
-msgstr ""
+msgstr "Гэта прыватная група: толькі ўдзельнікі маюць доступ да яе зместу."
 
+#, fuzzy
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
 msgstr ""
+"Гэта мадэраваная група, запыты на далучэнне, выявы і паведамленні на форуме "
+"могуць праходзіць праз чаргу мадэрацыі."
 
+#, fuzzy
 msgid "This is a non-moderated group."
-msgstr ""
+msgstr "Гэта не мадэраваная група."
 
+#, fuzzy
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
 msgstr ""
+"Гэта група з аўтаматычнай падачай: усе вашы выявы адразу з'явяцца тут без "
+"неабходнасці дзеянняў."
 
+#, fuzzy
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
 msgstr ""
+"Гэта група без аўтаматычнай падачы: вы самі выбераце, якія выявы хочаце "
+"падаць."
 
+#, fuzzy
 msgid "Leave group?"
-msgstr ""
+msgstr "Пакінуць групу?"
 
+#, fuzzy
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
 msgstr ""
+"Пакінуўшы гэтую групу, вашы падачы выяў не будуць бачны ўдзельнікам групы, у "
+"той час як вашы паведамленні на форуме застануцца. Вы ўпэўнены?"
 
+#, fuzzy
 msgid "Groups"
-msgstr ""
+msgstr "Групы"
 
+#, fuzzy
 msgid "Sort"
-msgstr ""
+msgstr "Сартаваць"
 
-msgid "Search"
-msgstr ""
+#, fuzzy
+msgid "Date created"
+msgstr "Дата стварэння"
 
-msgid "Private groups you own"
-msgstr ""
+#, fuzzy
+msgid "Your private groups"
+msgstr "Вашы прыватныя групы"
 
-msgid "Private groups you are a member of"
+#, fuzzy
+msgid "You own, or are a member of, or were invited to, these private groups."
 msgstr ""
+"Вы валодаеце, або з'яўляецеся ўдзельнікам, або былі запрошаны ў гэтыя "
+"прыватныя групы."
 
-msgid "Private groups you are invited to"
-msgstr ""
+#, fuzzy
+msgctxt "group"
+msgid "Create private group"
+msgstr "Стварыць прыватную групу"
 
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
-
+#, fuzzy
 msgid "Public groups"
-msgstr ""
+msgstr "Публічныя групы"
 
+#, fuzzy
+msgid "Open to the whole community."
+msgstr "Адкрыта для ўсёй супольнасці."
+
+#, fuzzy
+msgctxt "group"
+msgid "Create public group"
+msgstr "Стварыць публічную групу"
+
+#, fuzzy
 msgid "No groups available."
-msgstr ""
+msgstr "Групаў няма."
 
+#, fuzzy
 msgid "Revoke?"
-msgstr ""
+msgstr "Скасаваць?"
 
+#, fuzzy
 msgid "Revoke invitation"
-msgstr ""
+msgstr "Скасаваць запрашэнне"
 
+#, fuzzy
 msgid "This group has no active invitations."
-msgstr ""
+msgstr "У гэтай групе няма актыўных запрашэнняў."
 
+#, fuzzy
 msgid "Moderators"
-msgstr ""
+msgstr "Мадэратары"
 
+#, fuzzy
 msgid "Remove moderator status"
-msgstr ""
+msgstr "Скасаваць статус мадэратара"
 
+#, fuzzy
 msgid "This group has no moderators."
-msgstr ""
+msgstr "У гэтай групе няма мадэратараў."
 
+#, fuzzy
 msgid "Make moderator"
-msgstr ""
+msgstr "Стаць мадэратарам"
 
+#, fuzzy
 msgid "Remove member"
-msgstr ""
+msgstr "Выдаліць удзельніка"
 
+#, fuzzy
 msgid "This group has no members."
-msgstr ""
+msgstr "У гэтай групе няма ўдзельнікаў."
 
+#, fuzzy
 msgid "Type in a search term"
-msgstr ""
+msgstr "Увядзіце пошукавы запыт"
 
+#, fuzzy
 msgid "No results"
-msgstr ""
+msgstr "Няма вынікаў"
 
+#, fuzzy
 msgid "Searching"
-msgstr ""
+msgstr "Шукаем"
 
+#, fuzzy
 msgid "members list"
-msgstr ""
+msgstr "спіс удзельнікаў"
 
+#, fuzzy
 msgid "Back to group"
-msgstr ""
+msgstr "Назад у групу"
 
+#, fuzzy
 msgid "Full list of the group members"
-msgstr ""
+msgstr "Поўны спіс удзельнікаў групы"
 
+#, fuzzy
 msgid "Images in group"
-msgstr ""
+msgstr "Выявы ў групе"
 
+#, fuzzy
 msgid "Forum posts in group"
-msgstr ""
+msgstr "Паведамленні на форуме ў групе"
 
+#, fuzzy
 msgid "Approve"
-msgstr ""
+msgstr "Сцвердзіць"
 
+#, fuzzy
 msgid "Reject"
-msgstr ""
+msgstr "Адхіліць"
 
+#, fuzzy
 msgid "This group has no join requests."
-msgstr ""
+msgstr "У гэтай групе няма запытаў на далучэнне."
 
-msgid "Something went wrong, Please try again later."
-msgstr ""
-
-msgid "Type your message here..."
-msgstr ""
-
+#, fuzzy
 msgid "You cannot add images that are not yours!"
-msgstr ""
+msgstr "Вы не можаце дадаваць выявы, якія не належаць вам!"
 
+#, fuzzy
 msgid "Your image was added to the group."
-msgstr ""
+msgstr "Ваш малюнак быў дададзены ў групу."
 
+#, fuzzy
 msgid "Group updated with your selection of images."
-msgstr ""
+msgstr "Група абноўлена з вашым выбарам малюнкаў."
 
+#, fuzzy
 msgid "Your new group was created successfully"
-msgstr ""
+msgstr "Ваша новая група была паспяхова створана."
 
+#, fuzzy
 msgid "Group deleted"
-msgstr ""
+msgstr "Група выдалена."
 
+#, fuzzy
 msgid "You have joined the group"
-msgstr ""
+msgstr "Вы далучыліся да групы."
 
+#, fuzzy
 msgid "You already were a member of this group"
-msgstr ""
+msgstr "Вы ўжо былі ўдзельнікам гэтай групы."
 
+#, fuzzy
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
 msgstr ""
+"Гэта група з мадэрацыяй, і ваш запыт на далучэнне будзе разглядацца "
+"мадэратарам."
 
+#, fuzzy
 msgid "You have left the group"
-msgstr ""
+msgstr "Вы пакінулі групу."
 
+#, fuzzy
 msgid "Form saved"
+msgstr "Форма захавана."
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
 msgstr ""
+"Толькі наступныя катэгорыі падтрымліваюць аўтаадпраўку: Прафесійная сетка, "
+"Клуб або асацыяцыя, Інтэрнэт-супольнасць, Друзі або партнёры, Геаграфічная "
+"зона."
+
+#, fuzzy
+msgid "Publication"
+msgstr "Публікацыя."
+
+#, fuzzy
+msgid "Title"
+msgstr "Загаловак."
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Ключ/значэнне тэга."
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Сартаванне малюнкаў па змаўчанні."
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Сартаванне малюнкаў па ключах/значэннях тэга."
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Калі малюнкі сартаваны па ключах/значэннях тэга, калі ласка, укажыце, які з "
+"іх. <a target='_blank' href='https://welcome.astrobin.com/features/groups'>"
+"Даведайцеся больш.<\\/a>."
+
+#, fuzzy
+msgid "Search"
+msgstr "Пошук."
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Калі ласка, не дадавайце больш за 100 малюнкаў за адзін раз, дзякуй!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Сартаваць малюнкі."
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "Прыватныя групы, якія вы валодаеце."
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "Прыватныя групы, у якіх вы ўдзельнік."
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "Прыватныя групы, у якія вас запрасілі."
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Публічныя групы, якія вы валодаеце."
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Публічныя групы, у якіх вы ўдзельнік."
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Публічныя групы, у якія вас запрасілі."
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Анонс форуму."
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Увядзіце 'Анонс форуму', які будзе адлюстраваны над формай 'новая тэма'. "
+"Выкарыстоўвайце гэта для камунікацыі правілаў форуму, адмоваў або важнай "
+"інфармацыі для карыстальнікаў перад тым, як яны створыць новы пост. "
+"Пераканайцеся, што ваша паведамленне яснае і лаканічнае."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Што-то пайшло не так, калі ласка, паспрабуйце яшчэ раз пазней."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Увядзіце ваша паведамленне тут..."

@@ -1,104 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: 2015-12-30 10:21+0000\n"
-"Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451470906.568632\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "Member since"
-msgstr ""
-
-msgid "Last seen online"
-msgstr ""
-
-msgid "Total integration time"
-msgstr ""
-
-msgid "hours"
-msgstr ""
-
-msgid "Average integration time"
-msgstr ""
-
-msgid "Forum posts written"
-msgstr ""
-
-msgid "Comments written"
-msgstr ""
-
-msgid "Comments received"
-msgstr ""
-
-msgid "Likes received"
-msgstr ""
-
-msgid "Views received"
-msgstr ""
-
-msgid "No date specified"
-msgstr ""
-
-msgid "No optics or no cameras"
-msgstr ""
-
-msgid "Equipment images"
-msgstr ""
-
-msgid "Deep sky"
-msgstr ""
-
-msgid "Solar system"
-msgstr ""
-
-msgid "Extremely wide field"
-msgstr ""
-
-msgid "Star trails"
-msgstr ""
-
-msgid "Northern lights"
-msgstr ""
-
-msgid "Noctilucent clouds"
-msgstr ""
-
-msgid "Landscape"
-msgstr ""
-
-msgid "Artificial satellite"
-msgstr ""
-
-msgid "Gear"
-msgstr ""
-
-msgid "Other"
-msgstr ""
-
-msgid "All"
-msgstr ""
-
-msgid "n/a"
-msgstr ""
-
-msgid "No acquisition details specified"
-msgstr ""
-
+#, fuzzy
 msgid "You follow each other"
-msgstr ""
+msgstr "Seuraatte toisiaanne"
 
 msgid "Images"
 msgstr "Kuvat"
@@ -115,33 +25,506 @@ msgstr "Käyttäjä"
 msgid "No users."
 msgstr "Ei käyttäjiä"
 
+#, fuzzy
 msgid "Administrator"
-msgstr ""
+msgstr "Ylläpitäjä"
 
+#, fuzzy
 msgid "Image moderator"
-msgstr ""
+msgstr "Kuvan moderaattori"
 
+#, fuzzy
 msgid "IOTD Submitter"
-msgstr ""
+msgstr "IOTD-lähettäjä"
 
+#, fuzzy
 msgid "IOTD Reviewer"
-msgstr ""
+msgstr "IOTD-arvioija"
 
+#, fuzzy
 msgid "IOTD Judge"
-msgstr ""
+msgstr "IOTD-tuomari"
 
+#, fuzzy
 msgid "Premium member"
-msgstr ""
+msgstr "Premium-jäsen"
 
+#, fuzzy
 msgid ""
 "Your email bounce reports have been removed from AstroBin. Please make sure "
 "that your email works well or you will get the same warning message again. "
 "Thanks!"
 msgstr ""
+"Sähköpostisi pomppuilmoitukset on poistettu AstroBinista. Varmista, että "
+"sähköpostisi toimii hyvin, tai saat saman varoitusviestin uudelleen. Kiitos!"
 
+#, fuzzy
 msgid ""
 "Your spam reports have been removed from AstroBin. Please make sure you "
 "don't have a filter or rule to always mark AstroBin's emails as spam! If you "
 "don't want to receive emails from AstroBin, look for the settings link "
 "that's at the bottom of every email. Thanks!"
 msgstr ""
+"Roskapostihälytyksesi on poistettu AstroBinista. Varmista, ettei sinulla ole "
+"suodattimia tai sääntöjä, jotka merkitsevät aina AstroBinin sähköpostit "
+"roskapostiksi! Jos et halua vastaanottaa sähköposteja AstroBinilta, etsi "
+"asetukset-linkki, joka on jokaisen sähköpostin alareunassa. Kiitos!"
+
+#, fuzzy
+msgid "I wasn't really affected by the data loss"
+msgstr "En oikeastaan kärsinyt tietojen menetyksestä"
+
+#, fuzzy
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr "En vaadi korvausta: haluan tukea AstroBinia"
+
+#, fuzzy
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr "Haluaisin kokeilla AstroBin Ultimatea ilmaiseksi kuukauden ajan"
+
+#, fuzzy
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr ""
+"Tunnen itseni oikeutetuksi saamaan AstroBin Ultimatea ilmaiseksi kolmeksi "
+"kuukaudeksi"
+
+#, fuzzy
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr ""
+"Tunnen itseni oikeutetuksi saamaan AstroBin Ultimatea ilmaiseksi kuudeksi "
+"kuukaudeksi"
+
+#, fuzzy
+msgid "Requested compensation"
+msgstr "Pyydetty korvaus"
+
+#, fuzzy
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr "Ilmoita, haluatko ja kuinka paljon haluaisit saada korvausta."
+
+#, fuzzy
+msgid "Your migration data"
+msgstr "Muutostietosi"
+
+#, fuzzy
+msgid "Total amount donated last year"
+msgstr "Viime vuonna lahjoitettu kokonaismäärä"
+
+#, fuzzy
+msgid "First payment"
+msgstr "Ensimmäinen maksu"
+
+#, fuzzy
+msgid "Price for Premium"
+msgstr "Premiumin hinta"
+
+#, fuzzy
+msgid "Days covered"
+msgstr "Peitetyt päivät"
+
+#, fuzzy
+msgid "Premium expiration"
+msgstr "Premiumin vanheneminen"
+
+#, fuzzy
+msgid "Your donations last year"
+msgstr "Viime vuoden lahjoituksesi"
+
+#, fuzzy
+msgid "Amount"
+msgstr "Määrä"
+
+#, fuzzy
+msgid "Date"
+msgstr "Päivämäärä"
+
+#, fuzzy
+msgid "Subscription"
+msgstr "Tilauksen"
+
+#, fuzzy
+msgid "Data loss compensation request"
+msgstr "Tietojen menetyksen korvauspyyntö"
+
+#, fuzzy
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
+msgstr ""
+"Olet oikeutettu korvaukseen tietojen menetyksestä, joka tapahtui 16. "
+"helmikuuta 2020."
+
+#, fuzzy
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+"Jos et ole vielä ehtinyt, ota hetki aikaa lukeaksesi, mitä tapahtui "
+"seuraavalta sivulta:"
+
+#, fuzzy
+msgid "Official statement and post-mortem"
+msgstr "Virallinen lausunto ja jälkipuinti"
+
+#, fuzzy
+msgid "Please accept our apology once more."
+msgstr "Hyväksy anteeksipyyntömme vielä kerran."
+
+#, fuzzy
+msgid "Please chooce your compensation from the list below"
+msgstr "Valitse korvauksesi alla olevasta listasta"
+
+#, fuzzy
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+"Korvaus tarjotaan ilmaisena aikana uudella AstroBin-tilausportilla nimeltä "
+"\"Ultimate\"."
+
+#, fuzzy
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+"Lisätietoja AstroBin Ultimate -palvelusta saat vierailemalla <a href=\"%(url)"
+"s\" target=\"_blank\">hinnoittelusivulla</a>."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Lähetä"
+
+#, fuzzy
+msgid "Data loss compensation reauest"
+msgstr "Tietojen menetyksen korvauspyyntö"
+
+#, fuzzy
+msgid "Already done"
+msgstr "Jo tehty"
+
+#, fuzzy
+msgid "Sorry, you can't do this again."
+msgstr "Anteeksi, et voi tehdä tätä uudelleen."
+
+#, fuzzy
+msgid "Your preference was already recorded and cannot be changed."
+msgstr "Valintasi on jo tallennettu eikä sitä voi muuttaa."
+
+#, fuzzy
+msgid "Not eligible"
+msgstr "Ei oikeutettu"
+
+#, fuzzy
+msgid "It looks like you're not eligible"
+msgstr "Näyttää siltä, että et ole oikeutettu"
+
+#, fuzzy
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+"Anteeksi, mutta tämä sivu on tarkoitettu henkilöille, jotka olivat AstroBin "
+"Premiumissa sinä päivänä, jolloin tietojen menetyksestä tapahtui, ja näyttää "
+"siltä, että et ole heidän joukossaan."
+
+#, fuzzy
+msgid "Success"
+msgstr "Onnistui"
+
+#, fuzzy
+msgid "All done!"
+msgstr "Kaikki tehty!"
+
+#, fuzzy
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
+msgstr "Valintasi on tallennettu ja se on jo otettu käyttöön. Kiitos!"
+
+#, fuzzy
+msgid "Migrate donations"
+msgstr "Siirrä lahjoitukset"
+
+#, fuzzy
+msgid "Error!"
+msgstr "Virhe!"
+
+#, fuzzy
+msgid ""
+"Sorry, but it looks like you cannot migrate your donations to a Premium "
+"membership."
+msgstr ""
+"Anteeksi, mutta näyttää siltä, että et voi siirtää lahjoituksiasi Premium-"
+"jäsenyyteen."
+
+#, fuzzy
+msgid "You already have a paid membership."
+msgstr "Sinulla on jo maksettu jäsenyys."
+
+#, fuzzy
+msgid "We could not find any donations from you last year."
+msgstr "Emme löytäneet viime vuodelta lahjoituksia sinulta."
+
+#, fuzzy
+msgid ""
+"Your donations last year were not enough to cover a Premium subscription for "
+"this year."
+msgstr ""
+"Viime vuoden lahjoituksesi eivät riittäneet kattamaan Premium-tilauksen "
+"kustannuksia tälle vuodelle."
+
+#, fuzzy
+msgid "View the subscription plans"
+msgstr "Katso tilausvaihtoehdot"
+
+#, fuzzy
+msgid ""
+"As you  have made donations during the last year, you may choose to transfer "
+"the amount you donated towards an AstroBin Premium membership. The "
+"membership will have an expiration date proportionate to the amount you "
+"donated."
+msgstr ""
+"Koska olet tehnyt lahjoituksia viime vuoden aikana, voit valita siirtää "
+"lahjoittamasi summa AstroBin Premium -jäsenyyteen. Jäsenyydellä on "
+"vanhenemispäivämäärä suhteessa lahjoittamaasi summaan."
+
+#, fuzzy
+msgid ""
+"If you are feeling particularly cool and generous, you may choose to "
+"consider your past donations as a contribution to support past efforts, and "
+"pay again for a Premium plan. Up to you!"
+msgstr ""
+"Jos tunnet itsesi erityisen siistiksi ja anteliaaksi, voit harkita aiempia "
+"lahjoituksiasi tukena menneille ponnisteluille ja maksaa uudelleen Premium-"
+"suunnitelmasta. Sinä päätät!"
+
+#, fuzzy
+msgid "No, I want to pay for Premium"
+msgstr "Ei, haluan maksaa Premiumista"
+
+#, fuzzy
+msgid "Your migration was successful."
+msgstr "Muutoksesi oli onnistunut."
+
+#, fuzzy
+msgid "Thanks for supporting AstroBin!"
+msgstr "Kiitos, että tuet AstroBinia!"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
+msgstr ""
+"\"%(subscription_name)s\" -tilauksesi AstroBinissa on juuri vanhentunut."
+
+#, fuzzy
+msgid ""
+"When a subscription on AstroBin expires, nothing happens to your images or "
+"any of your content. You are reverted to AstroBin Free and will not be able "
+"to upload new images until you renew, but you may continue to use AstroBin "
+"in all other aspects if you do not have any new images to share at the "
+"moment."
+msgstr ""
+"Kun tilaus AstroBinissa vanhenee, kuville tai muulle sisällölle ei tapahdu "
+"mitään. Palautut AstroBin Free -tilaan etkä voi ladata uusia kuvia ennen "
+"kuin uusit, mutta voit jatkaa AstroBinin käyttöä kaikilla muilla osa-"
+"alueilla, jos sinulla ei ole uusia kuvia jaettavaksi."
+
+#, fuzzy
+msgid ""
+"When you are ready to renew your subscription, please visit the following "
+"page:"
+msgstr "Kun olet valmis uusimaan tilauksesi, käy seuraavalla sivulla:"
+
+#, fuzzy
+msgid "Your AstroBin subscription has just expired"
+msgstr "AstroBin-tilauksesi on juuri vanhentunut"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
+msgstr ""
+"\"%(subscription_name)s\" -tilauksesi AstroBinissa vanhenee viikon kuluttua."
+
+#, fuzzy
+msgid ""
+"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
+"still ongoing. Please wait until it is expired. Thank you!"
+msgstr ""
+"HUOMAA! Tällä hetkellä et voi uusia tilausta, kun se on vielä voimassa. "
+"Odota, kunnes se on vanhentunut. Kiitos!"
+
+#, fuzzy
+msgid "Your AstroBin subscription will expire in one week"
+msgstr "AstroBin-tilauksesi vanhenee viikon kuluttua"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in one week."
+msgstr ""
+"\"%(subscription_name)s\" -tilauksesi AstroBinissa uusitaan automaattisesti "
+"viikon kuluttua."
+
+#, fuzzy
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
+msgstr ""
+"Sinulla on automaattisesti uusiutuva tilaus AstroBinissa, ja yritämme uusia "
+"sen automaattisesti. Jos tilauksesi on luotu tavallisella tavalla, PayPalin "
+"kautta, PayPal yrittää veloittaa luottokortiltasi tai hankkia varoja, jotka "
+"ovat tililläsi."
+
+#, fuzzy
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"Jos tilauksesi on luotu manuaalisesti pankkisiirrolla, ole hyvä ja ota "
+"yhteyttä uuden maksun osalta."
+
+#, fuzzy
+msgid "Thank you!"
+msgstr "Kiitos!"
+
+#, fuzzy
+msgid "Your AstroBin subscription will be automatically renewed in one week"
+msgstr "AstroBin-tilauksesi uusitaan automaattisesti viikon kuluttua"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+"\"%(subscription_name)s\" -tilauksesi AstroBinissa uusitaan automaattisesti "
+"30 päivän kuluttua."
+
+#, fuzzy
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+msgstr "AstroBin-tilauksesi uusitaan automaattisesti 30 päivän kuluttua"
+
+#, fuzzy
+msgid "No date specified"
+msgstr "Ei päivämäärää määritelty"
+
+#, fuzzy
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr ""
+"Ei kuvattuja teleskooppeja tai linssejä, tai ei kuvattuja kameroita "
+"määritelty"
+
+#, fuzzy
+msgid "Gear images"
+msgstr "Välinekuvat"
+
+#, fuzzy
+msgid "Deep sky"
+msgstr "Syvä taivas"
+
+#, fuzzy
+msgid "Solar system"
+msgstr "Aurinkokunta"
+
+#, fuzzy
+msgid "Extremely wide field"
+msgstr "Erittäin laaja kenttä"
+
+#, fuzzy
+msgid "Star trails"
+msgstr "Tähtipolut"
+
+#, fuzzy
+msgid "Northern lights"
+msgstr "Revontulet"
+
+#, fuzzy
+msgid "Noctilucent clouds"
+msgstr "Yöpilvet"
+
+#, fuzzy
+msgid "Gear"
+msgstr "Välineet"
+
+#, fuzzy
+msgid "Other"
+msgstr "Muut"
+
+#, fuzzy
+msgid "All"
+msgstr "Kaikki"
+
+#, fuzzy
+msgid "n/a"
+msgstr "n/a"
+
+#, fuzzy
+msgid "No subjects specified"
+msgstr "Ei aiheita määritelty"
+
+#, fuzzy
+msgid "No acquisition details specified"
+msgstr "Ei hankintatietoja määritelty"
+
+#, fuzzy
+msgid "Member since"
+msgstr "Jäsen vuodesta"
+
+#, fuzzy
+msgid "Last seen online"
+msgstr "Viimeksi nähty verkossa"
+
+#, fuzzy
+msgid "Total integration time"
+msgstr "Kokonaisaika yhdistämiseen"
+
+#, fuzzy
+msgid "hours"
+msgstr "tuntia"
+
+#, fuzzy
+msgid "Average integration time"
+msgstr "Keskimääräinen yhdistämisaika"
+
+#, fuzzy
+msgid "Forum posts written"
+msgstr "Foorumiviestejä kirjoitettu"
+
+#, fuzzy
+msgid "Comments written"
+msgstr "Kommentteja kirjoitettu"
+
+#, fuzzy
+msgid "Comments received"
+msgstr "Saadut kommentit"
+
+#, fuzzy
+msgid "Likes received"
+msgstr "Saadut tykkäykset"
+
+#, fuzzy
+msgid "Views received"
+msgstr "Saadut katselut"
+
+#, fuzzy
+msgid "Landscape"
+msgstr "Maisema"
+
+#, fuzzy
+msgid "No optics or no cameras"
+msgstr "Ei optiikkaa tai ei kameroita"
+
+#, fuzzy
+msgid "Equipment images"
+msgstr "Laitteistokuvia"
+
+#, fuzzy
+msgid "Artificial satellite"
+msgstr "Teko-satelliitti"

@@ -1,30 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: 2020-05-04 09:04+0000\n"
-"Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 "
+"&&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1588583063.000000\n"
-
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
+"Content-Transfer-Encoding: 8bit"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Strategia deaktywacji autowysyłania"
@@ -78,15 +59,6 @@ msgstr "Wyodrębnij na podstawie sprzętu"
 msgid "Other"
 msgstr "Inne"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
 msgid "Name"
 msgstr "Imię"
 
@@ -98,18 +70,6 @@ msgstr "Tagi HTML są dozwolone"
 
 msgid "Category"
 msgstr "Kategoria"
-
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
 
 msgid "Public group"
 msgstr "Grupa publiczna"
@@ -132,26 +92,18 @@ msgstr ""
 msgid "Automatic submission"
 msgstr "Automatyczne zgłoszenie"
 
+#, fuzzy
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
 "explicitly submitted to it."
 msgstr ""
-
-msgid "Forum notice"
-msgstr ""
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
+"Grupy z automatycznymi zgłoszeniami zawsze zawierają wszystkie publiczne "
+"obrazy od wszystkich członków. Grupy bez automatycznego zgłoszenia zawierają "
+"tylko obrazy, które zostały do nich wyraźnie zgłoszone."
 
 msgid "Last activity"
 msgstr "Ostatnia aktywność"
-
-msgid "Date created"
-msgstr ""
 
 msgid "Members"
 msgstr "Członkowie"
@@ -180,10 +132,13 @@ msgstr "Wspólne zgłoszenie oczekuje na akceptację"
 msgid "Add/remove images"
 msgstr "Dodaj / usuń obrazy"
 
+#, fuzzy
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
+"Kliknij na obrazy, aby dodać je do tej grupy (kliknij ponownie, aby je "
+"usunąć). Następnie kliknij przycisk Zapisz poniżej."
 
 msgid "(no title)"
 msgstr "(brak tytułu)"
@@ -194,46 +149,48 @@ msgstr "Zapisz"
 msgid "Cancel"
 msgstr "Anuluj"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
 msgid "Delete group?"
 msgstr "Usunąć grupę?"
 
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
 msgstr ""
+"Uważaj! Czy na pewno chcesz usunąć tę grupę? Ta operacja jest nieodwracalna!"
 
 msgid "Delete group"
 msgstr "Usuń grupę"
 
+#, fuzzy
 msgid "Create new group"
-msgstr ""
+msgstr "Utwórz nową grupę"
 
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
+#, fuzzy
 msgid "Edit group"
-msgstr ""
+msgstr "Edytuj grupę"
 
 msgid "Manage members"
 msgstr "Zarządzaj członkami"
 
+#, fuzzy
 msgid "Actions"
-msgstr ""
+msgstr "Akcje"
 
+#, fuzzy
 msgid "Join group"
-msgstr ""
+msgstr "Dołącz do grupy"
 
 msgid "Leave group"
 msgstr "Opuść grupę"
 
+#, fuzzy
 msgid "Moderate join requests"
-msgstr ""
-
-msgid "Sort images"
-msgstr ""
+msgstr "Moderuj prośby o dołączenie"
 
 msgid "This group is public"
 msgstr "Dostęp do grupy jest publiczny"
@@ -247,11 +204,13 @@ msgstr "Ta grupa jest moderowana"
 msgid "This group is not moderated"
 msgstr "Ta grupa nie jest moderowana"
 
+#, fuzzy
 msgid "This group has automatic submission"
-msgstr ""
+msgstr "Ta grupa ma automatyczne zgłoszenie"
 
+#, fuzzy
 msgid "This group does not have automatic submission"
-msgstr ""
+msgstr "Ta grupa nie ma automatycznego zgłoszenia"
 
 msgid "Invited users"
 msgstr "Zaproszeni użytkownicy"
@@ -270,187 +229,354 @@ msgstr ""
 msgid "Group forum"
 msgstr "Forum grupy"
 
+#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
+"<strong>%(post_count)s</strong> postów w <strong>%(topic_count)s</strong> "
+"tematach"
 
+#, fuzzy
 msgid "View all"
-msgstr ""
+msgstr "Zobacz wszystkie"
 
+#, fuzzy
 msgid "New topic"
-msgstr ""
+msgstr "Nowy temat"
 
+#, fuzzy
+msgid "Please join the group to view its forum."
+msgstr "Proszę dołączyć do grupy, aby zobaczyć jej forum."
+
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
 msgstr ""
+"Uważaj! Czy na pewno chcesz usunąć tę grupę? Ta operacja jest nieodwracalna, "
+"a forum grupy i wszystkie jej tematy zostaną trwale usunięte!"
 
+#, fuzzy
 msgid "Join group?"
-msgstr ""
+msgstr "Dołączyć do grupy?"
 
+#, fuzzy
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
+"To jest grupa publiczna: wszystkie treści, w tym lista członków, są dostępne "
+"dla osób niebędących członkami."
 
+#, fuzzy
 msgid "This is a private group: only members have access to its contents."
-msgstr ""
+msgstr "To jest grupa prywatna: tylko członkowie mają dostęp do jej treści."
 
+#, fuzzy
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
 msgstr ""
+"To jest grupa moderowana, prośby o dołączenie, obrazy i posty na forum mogą "
+"przechodzić przez kolejkę moderacyjną."
 
+#, fuzzy
 msgid "This is a non-moderated group."
-msgstr ""
+msgstr "To jest grupa niemoderowana."
 
+#, fuzzy
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
 msgstr ""
+"To jest grupa z automatycznym zgłoszeniem: wszystkie twoje obrazy "
+"natychmiast się tutaj pojawią bez potrzeby działania."
 
+#, fuzzy
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
 msgstr ""
+"To jest grupa bez automatycznego zgłoszenia: sam wybierzesz, które obrazy "
+"chcesz zgłosić."
 
+#, fuzzy
 msgid "Leave group?"
-msgstr ""
+msgstr "Opuszczenie grupy?"
 
+#, fuzzy
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
 msgstr ""
+"Opuszczając tę grupę, twoje zgłoszenia obrazów nie będą już widoczne dla "
+"członków grupy, podczas gdy twoje posty na forum pozostaną. Jesteś pewien?"
 
+#, fuzzy
 msgid "Groups"
-msgstr ""
+msgstr "Grupy"
 
+#, fuzzy
 msgid "Sort"
-msgstr ""
+msgstr "Sortuj"
 
-msgid "Search"
-msgstr ""
+#, fuzzy
+msgid "Date created"
+msgstr "Data utworzenia"
 
-msgid "Private groups you own"
-msgstr ""
+#, fuzzy
+msgid "Your private groups"
+msgstr "Twoje prywatne grupy"
 
-msgid "Private groups you are a member of"
+#, fuzzy
+msgid "You own, or are a member of, or were invited to, these private groups."
 msgstr ""
+"Jesteś właścicielem, członkiem lub zostałeś zaproszony do tych prywatnych "
+"grup."
 
-msgid "Private groups you are invited to"
-msgstr ""
+#, fuzzy
+msgctxt "group"
+msgid "Create private group"
+msgstr "Utwórz prywatną grupę"
 
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
-
+#, fuzzy
 msgid "Public groups"
-msgstr ""
+msgstr "Grupy publiczne"
 
+#, fuzzy
+msgid "Open to the whole community."
+msgstr "Otwarte dla całej społeczności."
+
+#, fuzzy
+msgctxt "group"
+msgid "Create public group"
+msgstr "Utwórz publiczną grupę"
+
+#, fuzzy
 msgid "No groups available."
-msgstr ""
+msgstr "Brak dostępnych grup."
 
+#, fuzzy
 msgid "Revoke?"
-msgstr ""
+msgstr "Cofnąć?"
 
+#, fuzzy
 msgid "Revoke invitation"
-msgstr ""
+msgstr "Cofnij zaproszenie"
 
+#, fuzzy
 msgid "This group has no active invitations."
-msgstr ""
+msgstr "Ta grupa nie ma aktywnych zaproszeń."
 
+#, fuzzy
 msgid "Moderators"
-msgstr ""
+msgstr "Moderatorzy"
 
+#, fuzzy
 msgid "Remove moderator status"
-msgstr ""
+msgstr "Usuń status moderatora"
 
+#, fuzzy
 msgid "This group has no moderators."
-msgstr ""
+msgstr "Ta grupa nie ma moderatorów."
 
+#, fuzzy
 msgid "Make moderator"
-msgstr ""
+msgstr "Zrób moderatorem"
 
+#, fuzzy
 msgid "Remove member"
-msgstr ""
+msgstr "Usuń członka"
 
+#, fuzzy
 msgid "This group has no members."
-msgstr ""
+msgstr "Ta grupa nie ma członków."
 
+#, fuzzy
 msgid "Type in a search term"
-msgstr ""
+msgstr "Wpisz termin wyszukiwania"
 
+#, fuzzy
 msgid "No results"
-msgstr ""
+msgstr "Brak wyników"
 
+#, fuzzy
 msgid "Searching"
-msgstr ""
+msgstr "Wyszukiwanie"
 
+#, fuzzy
 msgid "members list"
-msgstr ""
+msgstr "lista członków"
 
+#, fuzzy
 msgid "Back to group"
-msgstr ""
+msgstr "Powrót do grupy"
 
+#, fuzzy
 msgid "Full list of the group members"
-msgstr ""
+msgstr "Pełna lista członków grupy"
 
+#, fuzzy
 msgid "Images in group"
-msgstr ""
+msgstr "Obrazy w grupie"
 
+#, fuzzy
 msgid "Forum posts in group"
-msgstr ""
+msgstr "Posty na forum w grupie"
 
+#, fuzzy
 msgid "Approve"
-msgstr ""
+msgstr "Zatwierdź"
 
+#, fuzzy
 msgid "Reject"
-msgstr ""
+msgstr "Odrzuć"
 
+#, fuzzy
 msgid "This group has no join requests."
-msgstr ""
+msgstr "Ta grupa nie ma żadnych próśb o dołączenie."
 
-msgid "Something went wrong, Please try again later."
-msgstr ""
-
-msgid "Type your message here..."
-msgstr ""
-
+#, fuzzy
 msgid "You cannot add images that are not yours!"
-msgstr ""
+msgstr "Nie możesz dodać obrazów, które nie są twoje!"
 
+#, fuzzy
 msgid "Your image was added to the group."
-msgstr ""
+msgstr "Twój obraz został dodany do grupy."
 
+#, fuzzy
 msgid "Group updated with your selection of images."
-msgstr ""
+msgstr "Grupa została zaktualizowana o twoje wybrane obrazy."
 
+#, fuzzy
 msgid "Your new group was created successfully"
-msgstr ""
+msgstr "Twoja nowa grupa została pomyślnie utworzona"
 
+#, fuzzy
 msgid "Group deleted"
-msgstr ""
+msgstr "Grupa usunięta"
 
+#, fuzzy
 msgid "You have joined the group"
-msgstr ""
+msgstr "Dołączyłeś do grupy"
 
+#, fuzzy
 msgid "You already were a member of this group"
-msgstr ""
+msgstr "Już byłeś członkiem tej grupy"
 
+#, fuzzy
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
 msgstr ""
+"To jest grupa moderowana, a twoja prośba o dołączenie zostanie sprawdzona "
+"przez moderatora"
 
+#, fuzzy
 msgid "You have left the group"
-msgstr ""
+msgstr "Opuszczono grupę"
 
+#, fuzzy
 msgid "Form saved"
+msgstr "Formularz zapisany"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
 msgstr ""
+"Tylko następujące kategorie wspierają automatyczne zgłaszanie: Sieć "
+"profesjonalna, Klub lub stowarzyszenie, Społeczność internetowa, Przyjaciele "
+"lub partnerzy, Obszar geograficzny"
+
+#, fuzzy
+msgid "Publication"
+msgstr "Publikacja"
+
+#, fuzzy
+msgid "Title"
+msgstr "Tytuł"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Tag klucz/wartość"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Domyślne sortowanie obrazów"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Sortowanie obrazów według tagu klucz/wartość"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Jeśli obrazy są sortowane według tagu klucz/wartość, proszę określić, który. "
+"<a target='_blank' href='https://welcome.astrobin.com/features/groups'>"
+"Dowiedz się więcej.<\\/a>"
+
+#, fuzzy
+msgid "Search"
+msgstr "Szukaj"
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Proszę nie dodawać więcej niż 100 obrazów na raz, dzięki!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Sortuj obrazy"
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "Prywatne grupy, które posiadasz"
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "Prywatne grupy, których jesteś członkiem"
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "Prywatne grupy, do których zostałeś zaproszony"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Publiczne grupy, które posiadasz"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Publiczne grupy, których jesteś członkiem"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Publiczne grupy, do których zostałeś zaproszony"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Ogłoszenie na forum"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Wprowadź 'Ogłoszenie na forum', które będzie wyświetlane nad formularzem "
+"'nowy temat'. Użyj tego, aby przekazać zasady forum, zastrzeżenia lub ważne "
+"informacje użytkownikom przed utworzeniem nowego posta. Upewnij się, że "
+"twoja wiadomość jest jasna i zwięzła."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Coś poszło nie tak, spróbuj ponownie później."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Wpisz swoją wiadomość tutaj..."

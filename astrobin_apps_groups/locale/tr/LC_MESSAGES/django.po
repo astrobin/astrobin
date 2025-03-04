@@ -1,441 +1,626 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-
+#, fuzzy
 msgid "Autosubmission deactivation strategy"
-msgstr ""
+msgstr "Otomatik gönderim devre dışı bırakma stratejisi"
 
+#, fuzzy
 msgid "Keep all images currently auto-submitted"
-msgstr ""
+msgstr "Tüm otomatik olarak gönderilen görüntüleri koru"
 
+#, fuzzy
 msgid "Remove all images and start over"
-msgstr ""
+msgstr "Tüm görüntüleri kaldır ve yeniden başla"
 
+#, fuzzy
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
 msgstr ""
+"Grubunuzu otomatik gönderimden manuel gönderime değiştirirken, gruptaki "
+"mevcut görüntülerle ne yapacağınızı düşünmelisiniz."
 
+#, fuzzy
 msgid "Invite users"
-msgstr ""
+msgstr "Kullanıcıları davet et"
 
+#, fuzzy
 msgid "Users will receive a notification and will be able to join the group"
-msgstr ""
+msgstr "Kullanıcılar bir bildirim alacak ve gruba katılabilecekler"
 
+#, fuzzy
 msgid "Professional network"
-msgstr ""
+msgstr "Profesyonel ağ"
 
+#, fuzzy
 msgid "Club or association"
-msgstr ""
+msgstr "Kulüp veya dernek"
 
+#, fuzzy
 msgid "Internet community"
-msgstr ""
+msgstr "İnternet topluluğu"
 
+#, fuzzy
 msgid "Friends or partners"
-msgstr ""
+msgstr "Arkadaşlar veya ortaklar"
 
+#, fuzzy
 msgid "Geographical area"
-msgstr ""
+msgstr "Coğrafi alan"
 
+#, fuzzy
 msgid "Ad-hoc collaboration"
-msgstr ""
+msgstr "Anlık işbirliği"
 
+#, fuzzy
 msgid "Specific to an imaging technique"
-msgstr ""
+msgstr "Bir görüntüleme tekniğine özgü"
 
+#, fuzzy
 msgid "Specific to an astrophotography target"
-msgstr ""
+msgstr "Bir astrofotografi hedefine özel"
 
+#, fuzzy
 msgid "Specific to certain equipment"
-msgstr ""
+msgstr "Belirli ekipmanlara özel"
 
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "Diğer"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "İsim"
 
+#, fuzzy
 msgid "Description"
-msgstr ""
+msgstr "Açıklama"
 
+#, fuzzy
 msgid "HTML tags are allowed."
-msgstr ""
+msgstr "HTML etiketlerine izin verilir."
 
+#, fuzzy
 msgid "Category"
-msgstr ""
+msgstr "Kategori"
 
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-
+#, fuzzy
 msgid "Public group"
-msgstr ""
+msgstr "Herkese açık grup"
 
+#, fuzzy
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
 msgstr ""
+"Kamu grupları herkes tarafından aranabilir ve tüm içerikleri kamuya açıktır."
 
+#, fuzzy
 msgid "Moderated group"
-msgstr ""
+msgstr "Moderasyonlu grup"
 
+#, fuzzy
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
+"Moderatörlü gruplar, gönderilen görüntüler ve katılma talepleri için bir "
+"moderasyon kuyruğuna sahiptir."
 
+#, fuzzy
 msgid "Automatic submission"
-msgstr ""
+msgstr "Otomatik gönderim"
 
+#, fuzzy
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
 "explicitly submitted to it."
 msgstr ""
+"Otomatik gönderim olan gruplar, tüm üyelerin herkese açık görüntülerini "
+"içerir. Otomatik gönderim olmayan gruplar ise yalnızca açıkça gönderilen "
+"görüntüleri içerir."
 
-msgid "Forum notice"
-msgstr ""
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-
+#, fuzzy
 msgid "Last activity"
-msgstr ""
+msgstr "Son etkinlik"
 
-msgid "Date created"
-msgstr ""
-
+#, fuzzy
 msgid "Members"
-msgstr ""
+msgstr "Üyeler"
 
+#, fuzzy
 msgid "Images"
-msgstr ""
+msgstr "Görüntüler"
 
+#, fuzzy
 msgid "Forum posts"
-msgstr ""
+msgstr "Forum gönderileri"
 
+#, fuzzy
 msgid "Owner"
-msgstr ""
+msgstr "Sahibi"
 
+#, fuzzy
 msgid "Moderator"
-msgstr ""
+msgstr "Moderatör"
 
+#, fuzzy
 msgid "Member"
-msgstr ""
+msgstr "Üye"
 
+#, fuzzy
 msgid "Invited"
-msgstr ""
+msgstr "Davet edildi"
 
+#, fuzzy
 msgid "Join request pending approval"
-msgstr ""
+msgstr "Katılma isteği onay bekliyor"
 
+#, fuzzy
 msgid "Add/remove images"
-msgstr ""
+msgstr "Görüntü ekle/kaldır"
 
+#, fuzzy
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
+"Bu gruba dahil etmek için görüntülere tıkla (ve hariç tutmak için tekrar "
+"tıkla). Sonra aşağıdaki Kaydet butonuna tıkla."
 
+#, fuzzy
 msgid "(no title)"
-msgstr ""
+msgstr "(başlık yok)"
 
+#, fuzzy
 msgid "Save"
-msgstr ""
+msgstr "Kaydet"
 
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "İptal"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
+#, fuzzy
 msgid "Delete group?"
-msgstr ""
+msgstr "Grubu silmek istiyor musun?"
 
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
-msgstr ""
+msgstr "Dikkat! Bu grubu silmek istiyor musun? Bu işlem geri alınamaz!"
 
+#, fuzzy
 msgid "Delete group"
-msgstr ""
+msgstr "Grubu sil"
 
+#, fuzzy
 msgid "Create new group"
-msgstr ""
+msgstr "Yeni grup oluştur"
 
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
+#, fuzzy
 msgid "Edit group"
-msgstr ""
+msgstr "Grubu düzenle"
 
+#, fuzzy
 msgid "Manage members"
-msgstr ""
+msgstr "Üyeleri yönet"
 
+#, fuzzy
 msgid "Actions"
-msgstr ""
+msgstr "Eylemler"
 
+#, fuzzy
 msgid "Join group"
-msgstr ""
+msgstr "Gruba katıl"
 
+#, fuzzy
 msgid "Leave group"
-msgstr ""
+msgstr "Grubu terk et"
 
+#, fuzzy
 msgid "Moderate join requests"
-msgstr ""
+msgstr "Katılma taleplerini denetle"
 
-msgid "Sort images"
-msgstr ""
-
+#, fuzzy
 msgid "This group is public"
-msgstr ""
+msgstr "Bu grup herkese açıktır"
 
+#, fuzzy
 msgid "This group is private"
-msgstr ""
+msgstr "Bu grup özel"
 
+#, fuzzy
 msgid "This group is moderated"
-msgstr ""
+msgstr "Bu grup moderatörlüdür"
 
+#, fuzzy
 msgid "This group is not moderated"
-msgstr ""
+msgstr "Bu grup denetlenmiyor"
 
+#, fuzzy
 msgid "This group has automatic submission"
-msgstr ""
+msgstr "Bu grubun otomatik gönderimi var"
 
+#, fuzzy
 msgid "This group does not have automatic submission"
-msgstr ""
+msgstr "Bu grubun otomatik gönderimi yok"
 
+#, fuzzy
 msgid "Invited users"
-msgstr ""
+msgstr "Davet edilen kullanıcılar"
 
+#, fuzzy
 msgid "Join requests"
-msgstr ""
+msgstr "Katılma talepleri"
 
+#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
+"%(date_created)s tarihinde oluşturulmuş, <a href=\"%(owner_url)s\">%(owner)"
+"s</a> tarafından sahiplenilmiş, <strong>%(category)s</strong> kategorisine "
+"ait bir grup."
 
+#, fuzzy
 msgid "Group forum"
-msgstr ""
+msgstr "Grup forumu"
 
+#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
+"<strong>%(post_count)s</strong> gönderi <strong>%(topic_count)s</strong> "
+"konuda"
 
+#, fuzzy
 msgid "View all"
-msgstr ""
+msgstr "Hepsini görüntüle"
 
+#, fuzzy
 msgid "New topic"
-msgstr ""
+msgstr "Yeni konu"
 
+#, fuzzy
+msgid "Please join the group to view its forum."
+msgstr "Forumunu görüntülemek için lütfen gruba katıl."
+
+#, fuzzy
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
 msgstr ""
+"Dikkat! Bu grubu silmek istiyor musun? Bu işlem geri alınamaz ve grubun "
+"forumu ile tüm konuları geri dönüşü olmayan şekilde silinecek!"
 
+#, fuzzy
 msgid "Join group?"
-msgstr ""
+msgstr "Gruba katılmak istiyor musun?"
 
+#, fuzzy
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
+"Bu bir kamu grubu: tüm içerik, üyeler listesi dahil, üye olmayanlara açıktır."
 
+#, fuzzy
 msgid "This is a private group: only members have access to its contents."
-msgstr ""
+msgstr "Bu özel bir grup: yalnızca üyeler içeriğine erişebilir."
 
+#, fuzzy
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
 msgstr ""
+"Bu, moderatörlü bir grup; katılma talepleri, görüntüler ve forum gönderileri "
+"bir moderasyon kuyruğundan geçebilir."
 
+#, fuzzy
 msgid "This is a non-moderated group."
-msgstr ""
+msgstr "Bu, moderatörsüz bir gruptur."
 
+#, fuzzy
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
 msgstr ""
+"Bu otomatik gönderim grubudur: tüm görüntülerin anında burada görünecek, "
+"herhangi bir işlem yapmana gerek yok."
 
+#, fuzzy
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
 msgstr ""
+"Bu otomatik gönderim olmayan bir grup: hangi görüntüleri göndereceğine sen "
+"karar vereceksin."
 
+#, fuzzy
 msgid "Leave group?"
-msgstr ""
+msgstr "Grubu terk et?"
 
+#, fuzzy
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
 msgstr ""
+"Bu gruptan ayrıldığında, görüntü gönderimlerin grup üyelerine görünmeyecek, "
+"ancak forum gönderilerin kalacak. Emin misin?"
 
+#, fuzzy
 msgid "Groups"
-msgstr ""
+msgstr "Gruplar"
 
+#, fuzzy
 msgid "Sort"
-msgstr ""
+msgstr "Sırala"
 
-msgid "Search"
-msgstr ""
+#, fuzzy
+msgid "Date created"
+msgstr "Oluşturulma tarihi"
 
-msgid "Private groups you own"
-msgstr ""
+#, fuzzy
+msgid "Your private groups"
+msgstr "Özel grupların"
 
-msgid "Private groups you are a member of"
-msgstr ""
+#, fuzzy
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr "Bu özel grupların sahibi, üyesi veya davetlisisin."
 
-msgid "Private groups you are invited to"
-msgstr ""
+#, fuzzy
+msgctxt "group"
+msgid "Create private group"
+msgstr "Özel grup oluştur"
 
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
-
+#, fuzzy
 msgid "Public groups"
-msgstr ""
+msgstr "Herkese açık gruplar"
 
+#, fuzzy
+msgid "Open to the whole community."
+msgstr "Tüm topluluğa açık."
+
+#, fuzzy
+msgctxt "group"
+msgid "Create public group"
+msgstr "Herkese açık grup oluştur"
+
+#, fuzzy
 msgid "No groups available."
-msgstr ""
+msgstr "Hiç grup yok."
 
+#, fuzzy
 msgid "Revoke?"
-msgstr ""
+msgstr "İptal et?"
 
+#, fuzzy
 msgid "Revoke invitation"
-msgstr ""
+msgstr "Davetiyeyi iptal et"
 
+#, fuzzy
 msgid "This group has no active invitations."
-msgstr ""
+msgstr "Bu grubun aktif davetiyesi yok."
 
+#, fuzzy
 msgid "Moderators"
-msgstr ""
+msgstr "Moderatörler"
 
+#, fuzzy
 msgid "Remove moderator status"
-msgstr ""
+msgstr "Moderatörlük statüsünü kaldır"
 
+#, fuzzy
 msgid "This group has no moderators."
-msgstr ""
+msgstr "Bu grubun moderatörü yok."
 
+#, fuzzy
 msgid "Make moderator"
-msgstr ""
+msgstr "Moderatör yap"
 
+#, fuzzy
 msgid "Remove member"
-msgstr ""
+msgstr "Üyeyi kaldır"
 
+#, fuzzy
 msgid "This group has no members."
-msgstr ""
+msgstr "Bu grubun üyesi yok."
 
+#, fuzzy
 msgid "Type in a search term"
-msgstr ""
+msgstr "Bir arama terimi yazın"
 
+#, fuzzy
 msgid "No results"
-msgstr ""
+msgstr "Sonuç yok"
 
+#, fuzzy
 msgid "Searching"
-msgstr ""
+msgstr "Arama yapılıyor"
 
+#, fuzzy
 msgid "members list"
-msgstr ""
+msgstr "üye listesi"
 
+#, fuzzy
 msgid "Back to group"
-msgstr ""
+msgstr "Gruba geri dön"
 
+#, fuzzy
 msgid "Full list of the group members"
-msgstr ""
+msgstr "Grup üyelerinin tam listesi"
 
+#, fuzzy
 msgid "Images in group"
-msgstr ""
+msgstr "Grup içindeki görüntüler"
 
+#, fuzzy
 msgid "Forum posts in group"
-msgstr ""
+msgstr "Grup içindeki forum gönderileri"
 
+#, fuzzy
 msgid "Approve"
-msgstr ""
+msgstr "Onayla"
 
+#, fuzzy
 msgid "Reject"
-msgstr ""
+msgstr "Reddet"
 
+#, fuzzy
 msgid "This group has no join requests."
-msgstr ""
+msgstr "Bu grubun katılma isteği yok."
 
-msgid "Something went wrong, Please try again later."
-msgstr ""
-
-msgid "Type your message here..."
-msgstr ""
-
+#, fuzzy
 msgid "You cannot add images that are not yours!"
-msgstr ""
+msgstr "Kendine ait olmayan görüntüleri ekleyemezsin!"
 
+#, fuzzy
 msgid "Your image was added to the group."
-msgstr ""
+msgstr "Görüntünüz gruba eklendi."
 
+#, fuzzy
 msgid "Group updated with your selection of images."
-msgstr ""
+msgstr "Grup, seçtiğin görüntülerle güncellendi."
 
+#, fuzzy
 msgid "Your new group was created successfully"
-msgstr ""
+msgstr "Yeni grubunuz başarıyla oluşturuldu."
 
+#, fuzzy
 msgid "Group deleted"
-msgstr ""
+msgstr "Grup silindi"
 
+#, fuzzy
 msgid "You have joined the group"
-msgstr ""
+msgstr "Gruba katıldın"
 
+#, fuzzy
 msgid "You already were a member of this group"
-msgstr ""
+msgstr "Bu grubun zaten bir üyesiydin"
 
+#, fuzzy
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
 msgstr ""
+"Bu, moderatörlü bir grup ve katılma isteğin bir moderatör tarafından "
+"incelenecek"
 
+#, fuzzy
 msgid "You have left the group"
-msgstr ""
+msgstr "Grubu terk ettin"
 
+#, fuzzy
 msgid "Form saved"
+msgstr "Form kaydedildi"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
 msgstr ""
+"Otomatik gönderimi yalnızca aşağıdaki kategoriler destekler: Profesyonel ağ, "
+"Kulüp veya dernek, İnternet topluluğu, Arkadaşlar veya ortaklar, Coğrafi alan"
+
+#, fuzzy
+msgid "Publication"
+msgstr "Yayın"
+
+#, fuzzy
+msgid "Title"
+msgstr "Başlık"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Anahtar/değer etiketi"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Varsayılan görüntü sıralaması"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Görüntü anahtar/değer etiketi sıralaması"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Eğer görüntüler bir anahtar/değer etiketiyle sıralanıyorsa, lütfen hangisi "
+"olduğunu belirtin. <a target='_blank' href='https://welcome.astrobin."
+"com/features/groups'>Daha fazla bilgi edinin.<\\/a>"
+
+#, fuzzy
+msgid "Search"
+msgstr "Ara"
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Lütfen bir seferde 100'den fazla görüntü eklemeyin, teşekkürler!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Görüntüleri sırala"
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "Sahip olduğunuz özel gruplar"
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "Üyesi olduğunuz özel gruplar"
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "Davet edildiğiniz özel gruplar"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Sahip olduğunuz kamu grupları"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Üyesi olduğunuz kamu grupları"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Davet edildiğiniz kamu grupları"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Forum bildirimi"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"'Yeni konu' formunun üstünde görüntülenecek bir 'Forum bildirimi' girin. Bu, "
+"kullanıcıların yeni bir gönderi oluşturmadan önce forum kurallarını, "
+"uyarıları veya önemli bilgileri iletmek için kullanılabilir. Mesajınızın net "
+"ve öz olduğundan emin olun."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Bir şeyler ters gitti, lütfen daha sonra tekrar deneyin."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Mesajınızı buraya yazın..."

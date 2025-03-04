@@ -1,13 +1,26 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
 "Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bit"
+
+msgid "Notifications"
+msgstr "Сповіщення"
+
+msgid "You have no notifications."
+msgstr "У вас немає сповіщень."
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Mark all as read"
+msgstr "Позначити все прочитаним"
+
+msgid "You have no new notifications."
+msgstr "У Вас немає нових сповіщень."
 
 msgid "You have a new follower"
 msgstr "У Вас новий підписник"
@@ -21,49 +34,14 @@ msgstr "Нова версія зображення від користувача
 msgid "Your image was plate-solved"
 msgstr "Ваше зображення визначено за координатами"
 
-#, fuzzy
-msgid "Your image was approved by a moderator"
-msgstr "Ваше зображення було схвалене модератором"
-
 msgid "Your image could not be plate-solved"
 msgstr "Ваше зображення не може бути визначене за координатами"
-
-msgid "Your image was plate-solved (advanced)"
-msgstr "Ваше зображення визначено за координатами (розширено)"
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "Ваше зображення не можна розшифрувати (розширено)"
 
 msgid "Your image received a new comment"
 msgstr "У Вашого зображення коментар"
 
-msgid "Your edit proposal received a new comment"
-msgstr "Ваша пропозиція редагування отримала новий коментар"
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr "Ваш запланований IOTD отримав новий коментар"
-
-#, fuzzy
-msgid "Your unapproved equipment item received a comment"
-msgstr "Ваше непогоджене обладнання отримало коментар"
-
-#, fuzzy
-msgid "Your listing has a new private conversation"
-msgstr "У вашому списку нова приватна розмова"
-
-#, fuzzy
-msgid "Your private conversation has a new comment"
-msgstr "У вашій приватній розмові новий коментар"
-
-#, fuzzy
-msgid "Your listing has a new question"
-msgstr "У вашому списку нове питання"
-
 msgid "There was a reply to your comment"
 msgstr "Відповідь на Ваш коментар"
-
-msgid "A new comment on your image requires moderation"
-msgstr "Новий коментар до Вашого зображення вимагає модерації"
 
 msgid "Your comment was approved"
 msgstr "Ваш коментар схвалено"
@@ -79,9 +57,6 @@ msgstr "Ваш коментар сподобався"
 
 msgid "Your forum post was liked"
 msgstr "Ваше повідомлення на форумі сподобалось"
-
-msgid "Your forum post was approved"
-msgstr "Ваше повідомлення на форумі схвалено"
 
 msgid "Your API Key request has been approved"
 msgstr "Ваш запит на API ключ схвалений"
@@ -107,18 +82,6 @@ msgstr "Користувач, на якого Ви підписані, ство�
 msgid "New forum topic in a group you are a member of"
 msgstr "Нова тема у групі, учасником якої Ви є"
 
-#, fuzzy
-msgid "New forum topic for an equipment item you use"
-msgstr "Нова тема на форумі для обладнання, яке ви використовуєте"
-
-#, fuzzy
-msgid "New forum topic for an equipment item you follow"
-msgstr "Нова тема на форумі для обладнання, яке ви стежите"
-
-#, fuzzy
-msgid "Your forum topic was moved"
-msgstr "Ваша тема на форумі була переміщена"
-
 msgid "You have received a new private message"
 msgstr "Ви маєте нове особисте повідомлення"
 
@@ -143,13 +106,6 @@ msgstr "У вас є зображення без інформації \"Вида
 msgid "Would you like to activate your account?"
 msgstr "Ви хочете активувати Ваш обліковий запис?"
 
-msgid "New reply in a subscribed forum topic"
-msgstr "Нова відповідь у темі форуму, на яку Ви підписалися"
-
-#, fuzzy
-msgid "New reply in a forum topic that you started"
-msgstr "Нова відповідь у темі форуму, яку ви почали"
-
 msgid "You were mentioned in a forum post"
 msgstr "Ви були згадані у повідомленні на форумі"
 
@@ -162,27 +118,11 @@ msgstr "Ласкаво просимо до AstroBin!"
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Вітаємо з першим зображенням на AstroBin!"
 
-#, fuzzy
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr "Ви подали своє зображення на розгляд IOTD/TP"
-
-#, fuzzy
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr "Зображення не подано на розгляд IOTD/TP"
-
-#, fuzzy
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr "Зображення наближається до терміну подачі на IOTD/TP"
-
 msgid "Thank you for getting a subscription!"
 msgstr "Дякую за підписку!"
 
 msgid "Thank you for your payment!"
 msgstr "Дякуємо за оплату!"
-
-#, fuzzy
-msgid "Subscription canceled"
-msgstr "Передплату скасовано"
 
 msgid "You were removed from the IOTD staff"
 msgstr "Вас виключили зі штату IOTD"
@@ -190,35 +130,17 @@ msgstr "Вас виключили зі штату IOTD"
 msgid "You have been inactive as an IOTD staff member"
 msgstr "Ви були неактивними як співробітник IOTD"
 
-#, fuzzy
-msgid "Your IOTD staff activity is insufficient"
-msgstr "Ваша активність у IOTD недостатня"
-
 msgid "An image you promoted made it to Top Pick"
 msgstr "Зображення, яке Ви просували, потрапило до Топ Зображень"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "Зображення, яке Ви просували, потрапило до IOTD"
 
-#, fuzzy
-msgid "An image you dismissed made it to Top Pick"
-msgstr "Зображення, яке ви відхилили, потрапило до Топ Вибору"
+msgid "New reply in a subscribed forum topic"
+msgstr "Нова відповідь у темі форуму, на яку Ви підписалися"
 
-#, fuzzy
-msgid "An image you dismissed made it to IOTD"
-msgstr "Зображення, яке ви відхилили, потрапило до IOTD"
-
-#, fuzzy
-msgid "Your image might become a Top Pick Nomination"
-msgstr "Ваше зображення може стати Номінацією на Топ Вибір"
-
-#, fuzzy
-msgid "Your image might become a Top Pick"
-msgstr "Ваше зображення може стати Топ Вибором"
-
-#, fuzzy
-msgid "Your image was voted Top Pick Nomination"
-msgstr "Ваше зображення було проголосовано як Номінація на Топ Вибір"
+msgid "Your image was nominated to be a Top Pick"
+msgstr "Ваше зображення було номіновано на Топ Зображення"
 
 msgid "Your image was voted Top Pick"
 msgstr "Ваше зображення було визнано Топ Зображенням"
@@ -226,27 +148,40 @@ msgstr "Ваше зображення було визнано Топ Зобра�
 msgid "Your image was voted Image of the Day"
 msgstr "Ваше зображення було визнано Зображенням Дня"
 
-#, fuzzy
-msgid "Your IOTD staff member stats"
-msgstr "Статистика вашого члена команди IOTD"
+msgid "Your image was plate-solved (advanced)"
+msgstr "Ваше зображення визначено за координатами (розширено)"
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Ваше зображення не можна розшифрувати (розширено)"
+
+msgid "A new comment on your image requires moderation"
+msgstr "Новий коментар до Вашого зображення вимагає модерації"
+
+msgid "Your forum post was approved"
+msgstr "Ваше повідомлення на форумі схвалено"
 
 msgid "You were mentioned in an image description"
 msgstr "Вас згадали в описі зображення"
 
+msgid "Your edit proposal received a new comment"
+msgstr "Ваша пропозиція редагування отримала новий коментар"
+
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr "Ваше зображення було подано на розгляд IOTD/TP"
+
 msgid "A gear item that you used was renamed"
 msgstr "Елемент спорядження, який Ви використовували, було перейменовано"
 
-#, fuzzy
-msgid "Collaboration Request: Accept or Deny"
-msgstr "Запит на співпрацю: Прийняти або Відхилити"
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Ваш запланований IOTD отримав новий коментар"
 
 #, fuzzy
-msgid "User accepted your collaboration request"
-msgstr "Користувач прийняв ваш запит на співпрацю"
+msgid "Your unapproved equipment item received a comment"
+msgstr "Ваше непогоджене обладнання отримало коментар"
 
 #, fuzzy
-msgid "User denied your collaboration request"
-msgstr "Користувач відхилив ваш запит на співпрацю"
+msgid "New forum topic for an equipment item you use"
+msgstr "Нова тема на форумі для обладнання, яке ви використовуєте"
 
 #, fuzzy
 msgid "You were added as a collaborator to an image"
@@ -261,6 +196,10 @@ msgid "User removed self as a collaborator to your image"
 msgstr "Користувач самостійно видалив себе як співавтора з вашого зображення"
 
 #, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "Ви подали своє зображення на розгляд IOTD/TP"
+
+#, fuzzy
 msgid "Login attempt detected from a different country"
 msgstr "Спроба входу з іншої країни виявлена"
 
@@ -268,23 +207,82 @@ msgstr "Спроба входу з іншої країни виявлена"
 msgid "Login attempt with weak password"
 msgstr "Спроба входу з слабким паролем"
 
-#~ msgid "Notifications"
-#~ msgstr "Сповіщення"
+#, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "Ваше зображення було схвалене модератором"
 
-#~ msgid "You have no notifications."
-#~ msgstr "У вас немає сповіщень."
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Зображення не подано на розгляд IOTD/TP"
 
-#~ msgid "Settings"
-#~ msgstr "Налаштування"
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "Передплату скасовано"
 
-#~ msgid "Mark all as read"
-#~ msgstr "Позначити все прочитаним"
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "Ваша тема на форумі була переміщена"
 
-#~ msgid "You have no new notifications."
-#~ msgstr "У Вас немає нових сповіщень."
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "Зображення наближається до терміну подачі на IOTD/TP"
 
-#~ msgid "Your image was nominated to be a Top Pick"
-#~ msgstr "Ваше зображення було номіновано на Топ Зображення"
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "У вашому списку нова приватна розмова"
 
-#~ msgid "Your image was submitted for IOTD/TP consideration"
-#~ msgstr "Ваше зображення було подано на розгляд IOTD/TP"
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "У вашій приватній розмові новий коментар"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "У вашому списку нове питання"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "Нова тема на форумі для обладнання, яке ви стежите"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "Нова відповідь у темі форуму, яку ви почали"
+
+#, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "Ваша активність у IOTD недостатня"
+
+#, fuzzy
+msgid "An image you dismissed made it to Top Pick"
+msgstr "Зображення, яке ви відхилили, потрапило до Топ Вибору"
+
+#, fuzzy
+msgid "An image you dismissed made it to IOTD"
+msgstr "Зображення, яке ви відхилили, потрапило до IOTD"
+
+#, fuzzy
+msgid "Your IOTD staff member stats"
+msgstr "Статистика вашого члена команди IOTD"
+
+#, fuzzy
+msgid "Collaboration Request: Accept or Deny"
+msgstr "Запит на співпрацю: Прийняти або Відхилити"
+
+#, fuzzy
+msgid "User accepted your collaboration request"
+msgstr "Користувач прийняв ваш запит на співпрацю"
+
+#, fuzzy
+msgid "User denied your collaboration request"
+msgstr "Користувач відхилив ваш запит на співпрацю"
+
+#, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "Ваше зображення може стати Номінацією на Топ Вибір"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "Ваше зображення може стати Топ Вибором"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "Ваше зображення було проголосовано як Номінація на Топ Вибір"

@@ -1,44 +1,38 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: 2021-01-03 20:58+0000\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1609707513.000000\n"
+"Content-Transfer-Encoding: 8bit"
 
 msgid "Your recurring donation has been canceled"
 msgstr "Η επαναλαμβανόμενη δωρεά σας ακυρώθηκε!"
 
+#, fuzzy
 msgid ""
 "I am very grateful for your support so far! Your contribution has helped "
 "AstroBin with its ever increasing hosting costs, and served an incentive for "
 "me to keep improving it."
 msgstr ""
+"Είμαι πολύ ευγνώμον για την υποστήριξή σας μέχρι τώρα! Η συμβολή σας έχει "
+"βοηθήσει το AstroBin με τα συνεχώς αυξανόμενα κόστη φιλοξενίας και έχει "
+"λειτουργήσει ως κίνητρο για να συνεχίσω να το βελτιώνω."
 
+#, fuzzy
 msgid "Wishing you clear skies and excellent seeing!"
-msgstr ""
+msgstr "Σας εύχομαι καθαρούς ουρανούς και εξαιρετική seeing!"
 
 msgid "Founder of AstroBin"
 msgstr "Ιδρυτής του AstroBin"
 
+#, fuzzy
 msgid "Donate"
-msgstr ""
+msgstr "Δωρεά"
 
+#, fuzzy
 msgid "Thank you in advance for your support"
-msgstr ""
+msgstr "Σας ευχαριστώ εκ των προτέρων για την υποστήριξή σας"
 
 msgid ""
 "Please donate any amount you want, selecting from the options below and "
@@ -52,56 +46,76 @@ msgstr ""
 "να ακυρώσετε την συνδρομή σας\n"
 " όποτε θελήσετε."
 
+#, fuzzy
 msgid ""
 "If ended up on this page and are not sure what this is about, please read "
 "everything about it\n"
-"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" target="
-"\"_blank\">here</a>."
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" "
+"target=\"_blank\">here</a>."
 msgstr ""
+"Αν βρεθήκατε σε αυτή τη σελίδα και δεν είστε σίγουροι για το τι πρόκειται, "
+"παρακαλώ διαβάστε τα πάντα σχετικά με αυτό\n"
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" "
+"target=\"_blank\">εδώ</a>."
 
+#, fuzzy
 msgid "Thanks!"
-msgstr ""
+msgstr "Ευχαριστώ!"
 
+#, fuzzy
 msgid "Edit your recurring donation settings"
-msgstr ""
+msgstr "Επεξεργαστείτε τις ρυθμίσεις της επαναλαμβανόμενης δωρεάς σας"
 
 msgid "Monthly contributions"
 msgstr "Μηνιαίες συνεισφορές"
 
+#, fuzzy
 msgid "Bronze"
-msgstr ""
+msgstr "Χάλκινο"
 
+#, fuzzy
 #, python-format
 msgid "CHF %(amount)s / month"
-msgstr ""
+msgstr "CHF %(amount)s / μήνα"
 
+#, fuzzy
 msgid "Silver"
-msgstr ""
+msgstr "Ασημένιο"
 
+#, fuzzy
 msgid "Gold"
-msgstr ""
+msgstr "Χρυσό"
 
+#, fuzzy
 msgid "Platinum"
-msgstr ""
+msgstr "Πλατινένιο"
 
+#, fuzzy
 msgid "Yearly contributions (cheaper)"
-msgstr ""
+msgstr "Ετήσιες συνεισφορές (φθηνότερες)"
 
+#, fuzzy
 #, python-format
 msgid "CHF %(amount)s / year"
-msgstr ""
+msgstr "CHF %(amount)s / χρόνο"
 
+#, fuzzy
 msgid "IMPORTANT"
-msgstr ""
+msgstr "ΣΗΜΑΝΤΙΚΟ"
 
+#, fuzzy
 msgid ""
 "Please note: if you are already a donor, the Subscribe button will update "
 "your existing subscription, not create a new one."
 msgstr ""
+"Παρακαλώ σημειώστε: αν είστε ήδη δωρητής, το κουμπί Συνδρομή θα ενημερώσει "
+"την υπάρχουσα συνδρομή σας, όχι θα δημιουργήσει μια νέα."
 
+#, fuzzy
 msgid "Pay with a bank transfer"
-msgstr ""
+msgstr "Πληρώστε με τραπεζική μεταφορά"
 
+#, fuzzy
 msgid ""
 "\n"
 "            Prefer to donate via bank transfer? Please make a deposit of the "
@@ -109,27 +123,43 @@ msgid ""
 "            bank details. Thanks!\n"
 "        "
 msgstr ""
+"\n"
+"            Προτιμάτε να δωρίσετε μέσω τραπεζικής μεταφοράς; Παρακαλώ κάντε "
+"μια κατάθεση του ποσού που θέλετε να δωρίσετε στα παρακάτω\n"
+"            τραπεζικά στοιχεία. Ευχαριστώ!\n"
+"        "
 
 msgid "Cancel your recurring donation"
 msgstr "Ακυρώστε την επαναλαμβανόμενη δωρεά σας"
 
+#, fuzzy
 msgid ""
 "Thank you so much for your donations so far! I, and the whole AstroBin "
 "community, really appreciate your support."
 msgstr ""
+"Σας ευχαριστώ πολύ για τις δωρεές σας μέχρι τώρα! Εγώ και η κοινότητα του "
+"AstroBin εκτιμούμε πραγματικά την υποστήριξή σας."
 
+#, fuzzy
 msgid ""
 "Are you sure you want to cancel your subscription? AstroBin is a resource "
 "hungry website, and every small donation helps with the hosting costs."
 msgstr ""
+"Είστε σίγουροι ότι θέλετε να ακυρώσετε τη συνδρομή σας; Το AstroBin είναι "
+"μια ιστοσελίδα που καταναλώνει πόρους, και κάθε μικρή δωρεά βοηθά με τα "
+"κόστη φιλοξενίας."
 
+#, fuzzy
 msgid ""
 "If you really have made up your mind about it, use the button below to "
 "cancel your PayPal subscription."
 msgstr ""
+"Αν πραγματικά έχετε πάρει την απόφασή σας, χρησιμοποιήστε το κουμπί παρακάτω "
+"για να ακυρώσετε τη συνδρομή σας στο PayPal."
 
+#, fuzzy
 msgid "Thank you for your donations!"
-msgstr ""
+msgstr "Σας ευχαριστώ για τις δωρεές σας!"
 
 msgid "Want to cancel?"
 msgstr "Θέλετε να ακυρώσετε;"
@@ -137,8 +167,12 @@ msgstr "Θέλετε να ακυρώσετε;"
 msgid "Thank you for your donation!"
 msgstr "Σας ευχαριστούμε για την δωρεά σας!"
 
+#, fuzzy
 msgid ""
 "I am very grateful for your support! Your contribution will help AstroBin "
 "with its ever increasing hosting costs, and will serve an incentive for me "
 "to keep improving it."
 msgstr ""
+"Είμαι πολύ ευγνώμον για την υποστήριξή σας! Η συμβολή σας θα βοηθήσει το "
+"AstroBin με τα συνεχώς αυξανόμενα κόστη φιλοξενίας και θα λειτουργήσει ως "
+"κίνητρο για να συνεχίσω να το βελτιώνω."

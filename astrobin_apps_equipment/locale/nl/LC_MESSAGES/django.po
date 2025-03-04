@@ -1,22 +1,10 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit"
 
 msgid ""
 "This edit proposal cannot be approved because an item with this brand and "
@@ -183,12 +171,6 @@ msgid "Seller"
 msgstr ""
 
 msgid "Buyer"
-msgstr ""
-
-msgid "For sale"
-msgstr ""
-
-msgid "Wanted"
 msgstr ""
 
 msgid "Standard mail"
@@ -497,7 +479,7 @@ msgstr ""
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr ""
 
-msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
+msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
 msgstr ""
 
 msgid "Catadioptric: Riccardi-Honders"
@@ -711,6 +693,13 @@ msgid ""
 "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
 msgstr ""
 
+#, python-format
+msgid ""
+"\n"
+"    %(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
+"\n"
+msgstr ""
+
 msgid ""
 "You received this notification because you created this equipment item or "
 "this edit proposal."
@@ -724,8 +713,14 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s"
 msgstr ""
 
 msgid "Please review it as soon as possible, thank you!"
@@ -733,8 +728,16 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s to you for review"
+"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s to you for review"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"    %(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item "
+"%(_0)s%(item)s%(_1)s to you for\n"
+"    review\n"
 msgstr ""
 
 #, python-format
@@ -773,8 +776,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s"
 msgstr ""
 
 msgid "This item can now be added to images by anyone on AstroBin."
@@ -864,8 +867,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
-"%(_1)s that you created"
+"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)"
+"s%(_1)s that you created"
 msgstr ""
 
 #, python-format
@@ -885,9 +888,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Since your equipment item was marked as duplicate of <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
-"accordingly, and <strong>you don't need to do anything</strong>."
+"Since your equipment item was marked as duplicate of <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been "
+"updated accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
 
 msgid ""
@@ -903,14 +906,14 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
-"%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
+"s%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
-"%(image_title)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
+"s%(image_title)s%(_1)s"
 msgstr ""
 
 msgid ""
@@ -920,8 +923,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your equipment item was marked as a duplicate of <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
+"Your equipment item was marked as a duplicate of <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
 
@@ -950,8 +953,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 
 msgid "Feedback details"
@@ -997,20 +1000,20 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
-"%(_1)s"
+"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s%(_1)"
+"s"
 msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
-"%(_1)s"
+"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s%(_1)"
+"s"
 msgstr ""
 
 msgid "The listing is now live. Good luck with your sale!"
@@ -1018,8 +1021,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 
 msgid "You received this notification because you follow this user."
@@ -1027,13 +1030,13 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 
 msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
+"You received this notification because you have an active offer on this "
+"listing, or you follow the listing."
 msgstr ""
 
 msgid ""
@@ -1056,9 +1059,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
-"%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
-"%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
+"s%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)"
+"s%(_1)s"
 msgstr ""
 
 #, python-format
@@ -1072,6 +1075,11 @@ msgid ""
 "reserved or sold state."
 msgstr ""
 
+msgid ""
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
+msgstr ""
+
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
@@ -1083,8 +1091,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 
 msgid ""
@@ -1095,9 +1103,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)s"
-"%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
-"possible and leave feedback to the buyer."
+"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)"
+"s%(_1)s, but you haven't marked the item as sold yet. Please do so as soon "
+"as possible and leave feedback to the buyer."
 msgstr ""
 
 msgid "Mark as sold"
@@ -1105,8 +1113,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Don't forget to mark your reserved items as sold in the listing %(_0)s"
-"%(listing)s%(_1)s, if you sold them."
+"Don't forget to mark your reserved items as sold in the listing %(_0)"
+"s%(listing)s%(_1)s, if you sold them."
 msgstr ""
 
 #, python-format
@@ -1225,8 +1233,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
-"%(_1)s, and we noticed that you haven't rated the buyer yet."
+"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)"
+"s%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
 
 msgid ""
@@ -1240,15 +1248,15 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Rate the buyer for your recent purchase from marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"Rate the buyer for your recent purchase from marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 
 #, python-format
 msgid ""
-"Hi! You recently purchased an item from the marketplace listing %(_0)s"
-"%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
-"%(seller_display_name)s%(_1)s yet."
+"Hi! You recently purchased an item from the marketplace listing %(_0)"
+"s%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)"
+"s%(seller_display_name)s%(_1)s yet."
 msgstr ""
 
 msgid ""
@@ -1324,4 +1332,13 @@ msgid "Sell in the marketplace"
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "For sale"
+msgstr ""
+
+msgid "Wanted"
+msgstr ""
+
+msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
 msgstr ""

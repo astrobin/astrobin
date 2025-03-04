@@ -701,12 +701,6 @@ def get_officially_supported_languages():
         'it',
         'pt',
         'zh-hans',
-    )
-
-
-@register.simple_tag
-def get_other_languages():
-    return (
         'ar',
         'el',
         'fi',
@@ -719,8 +713,6 @@ def get_other_languages():
         'tr',
         'uk',
     )
-
-
 @register.simple_tag
 def get_language_name(language_code):
     languages = {

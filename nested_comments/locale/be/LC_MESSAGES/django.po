@@ -1,33 +1,70 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: 2020-12-27 00:09+0000\n"
-"Last-Translator: kupal <9090852@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: be\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1609027795.000000\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "(deleted)"
-msgstr "(выдалены)"
+msgid "You follow each other"
+msgstr "Вы сачыце адзін за адным"
+
+msgid "Images"
+msgstr "Здымкі"
+
+msgid "Followers"
+msgstr "Падпісчыкі"
+
+msgid "Following"
+msgstr "Падпісаны"
+
+msgid "User"
+msgstr "Карыстальнік"
+
+msgid "No users."
+msgstr "Няма карыстальнікаў."
+
+msgid "Administrator"
+msgstr "Кіраўнік"
+
+msgid "Image moderator"
+msgstr "Мадэратар здымкаў"
+
+msgid "IOTD Submitter"
+msgstr "Аўтар здымка дня"
+
+msgid "IOTD Reviewer"
+msgstr "Рэцэнзент здымка дня"
+
+msgid "IOTD Judge"
+msgstr "Суддзя здымка дня"
+
+msgid "Premium member"
+msgstr "Прэміяльны сябра"
+
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Паведамленне аб недастаўленнам лісце выдалена з AstroBin. Калі ласка "
+"ўпэўніцеся што вашая электронная пошта працуе, інакш вы атрымаеце тое ж "
+"самае паведамленне зноў. Дзякуй!"
+
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Справаздача аб спаме выдалена з AstroBin. Калі ласка ўпэўніцеся што вы не "
+"маеце фільтар ці правіла якое запісвае электронные лісты ад AstroBin у спам. "
+"Калі вы не жадаеце атрымлівать лісты ад AstroBin, пашукайце спасылку для "
+"настройкі паведамленняў на нізу кожнага ліста. Дзякуй!"
 
 msgid "Type your comment here..."
 msgstr "Увядзіце свой каментар тут..."
-
-msgid "Error"
-msgstr ""
 
 msgid "Cancel"
 msgstr "Скасаваць"
@@ -35,108 +72,225 @@ msgstr "Скасаваць"
 msgid "Add a comment"
 msgstr "Дадаць каментар"
 
+#, fuzzy
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
+msgstr ""
+"Калі ласка, <a href=\"%(login_url)s\">увядзіце ўліковыя дадзеныя</a> або <a "
+"href=\"%(signup_url)s\">зарэгіструйцеся</a>, каб пакінуць каментар."
+
 msgid "There are no comments yet."
 msgstr "Пакуль што няма каментарыяў."
 
-msgid "The comment cannot be empty."
-msgstr "Каментар ня можа быць пустым."
+#, fuzzy
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "Гэты каментар чакае мадэрацыі і будзе разгледжаны ў бліжэйшы час."
 
-msgid "Delete"
-msgstr "Выдаліць"
-
-msgid "Undelete"
-msgstr "Аднавіць"
-
-msgid "Edit"
-msgstr "Рэдагаваць"
-
-msgid "Link"
-msgstr "Спасылка"
+msgid "(deleted)"
+msgstr "(выдалены)"
 
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "лайкаў"
 
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "падабайку"
+
+msgid "Link"
+msgstr "Спасылка"
+
+msgid "Undelete"
+msgstr "Аднавіць"
+
+msgid "Delete"
+msgstr "Выдаліць"
+
+msgid "Edit"
+msgstr "Рэдагаваць"
+
+msgid "Reply"
+msgstr "Адказаць"
+
+msgid "Like"
+msgstr "Упадабаць"
+
+msgid "Unlike"
+msgstr "Адпадабаць"
+
+msgid "The comment cannot be empty."
+msgstr "Каментар ня можа быць пустым."
+
+msgid "Submit"
+msgstr "Адправіць"
+
+#, fuzzy
+msgid "Error"
+msgstr "Памылка"
+
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Like"
-msgstr ""
+msgstr "Падабаецца"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Unlike"
-msgstr ""
+msgstr "Не падабаецца"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Reply"
-msgstr ""
+msgstr "Адказаць"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Approve"
-msgstr ""
+msgstr "Сцвердзіць"
 
+#, fuzzy
 msgid "Report abuse"
-msgstr ""
+msgstr "Паведаміць пра злоўжыванне"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-
+#, fuzzy
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
 msgstr ""
+"Гэты каментар чакае мадэрацыі. Калі ласка, сцвердзіце яго або паведаміце пра "
+"злоўжыванне, выкарыстоўваючы кнопкі ніжэй."
 
+#, fuzzy
 msgid "Thank you for your cooperation!"
-msgstr ""
+msgstr "Дзякуй за вашу супрацоўніцтва!"
 
+#, fuzzy
 msgid "This comment was already moderated by you or an AstroBin moderator."
-msgstr ""
+msgstr "Гэты каментар ужо быў адобраны вамі або мадратарам AstroBin."
 
+#, fuzzy
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
 "author or owner of the content object that you commented on. If they do not "
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
+"Ваш каментар чакае мадэрацыі і павінен быць разгледжаны ў бліжэйшы час "
+"аўтарам або ўладальнікам кантэнт-аб'екта, на які вы каментавалі. Калі яны не "
+"прымуць меры на працягу 24 гадзін, мадратар AstroBin возьме на сябе "
+"адказнасць і разгледзіць ваш каментар ад іх імя."
 
+#, fuzzy
 msgid "This process is necessary to prevent spam on AstroBin."
-msgstr ""
+msgstr "Гэты працэс неабходны для прадухілення спаму на AstroBin."
 
+#, fuzzy
 msgid "Thank you for understanding!"
-msgstr ""
+msgstr "Дзякуй за разуменне!"
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr ""
-
-msgid "Submit"
-msgstr "Адправіць"
-
+#, fuzzy
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
+"Вы не можаце адменіць выдаленне гэтага каментара: для яго існуе пацверджаны "
+"або чаканы даклад пра злоўжыванне. Калі вы лічыце, што ваш каментар быў "
+"несправядліва паведамлены, калі ласка, звяжыцеся з намі."
 
+#, fuzzy
 msgid "You have reached your abuse report quota."
-msgstr ""
+msgstr "Вы дасягнулі квоты на паведамленні пра злоўжыванні."
 
+#, fuzzy
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr ""
+"Гэты элемент не можа быць паведамлены зноў, бо ён быў адобраны мадратарам."
 
+msgid "You many not report the same item more than once."
+msgstr "Немагчыма паведаміць той жа элемент больш за адзін раз."
+
+#, fuzzy
 msgid "You may not report the same item more than once."
-msgstr ""
+msgstr "Вы не можаце паведаміць пра адзін і той жа элемент больш за адзін раз."
 
-#~ msgctxt "Noun, e.g. 'This element has 1 like'"
-#~ msgid "like"
-#~ msgstr "лайк"
+msgid "Report a use"
+msgstr "Паскардзіцца на карыстальніка"
 
-#~ msgid "Reply"
-#~ msgstr "Адказаць"
+msgid "Member since"
+msgstr "Сябар з"
 
-#~ msgid "Like"
-#~ msgstr "Падабаецца"
+msgid "Last seen online"
+msgstr "Апошні раз быў у сеціве"
 
-#~ msgid "Unlike"
-#~ msgstr "Больш не падабаецца"
+msgid "Total integration time"
+msgstr "Агульны час інтэграцыі"
+
+msgid "hours"
+msgstr "гадзіны"
+
+msgid "Average integration time"
+msgstr "Сярэдні час інтэграцыі"
+
+msgid "Forum posts written"
+msgstr "Напісаныя артыкулы на форуме"
+
+msgid "Comments written"
+msgstr "Напісаныя каментарыі"
+
+msgid "Comments received"
+msgstr "Атрымана каментарыяў"
+
+msgid "Likes received"
+msgstr "Атрымана падабаек"
+
+msgid "Views received"
+msgstr "Атрымана праглядаў"
+
+msgid "No date specified"
+msgstr "Дата не выбрана"
+
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "Не зазначаны ані тэлескопы ані лінзы ані фатаапарат для здымання"
+
+msgid "Gear images"
+msgstr "Фота прылад"
+
+msgid "Deep sky"
+msgstr "Далёкі космас"
+
+msgid "Solar system"
+msgstr "Сонечная сістэма"
+
+msgid "Extremely wide field"
+msgstr "Надзвычай шырокае поле зроку"
+
+msgid "Star trails"
+msgstr "Шлейфы зорак"
+
+msgid "Northern lights"
+msgstr "Палярнае ззянне"
+
+msgid "Noctilucent clouds"
+msgstr "Серабрыстыя воблакі"
+
+msgid "Gear"
+msgstr "Прылада"
+
+msgid "Other"
+msgstr "Іншае"
+
+msgid "All"
+msgstr "Ўсё"
+
+msgid "n/a"
+msgstr "n/a"
+
+msgid "No subjects specified"
+msgstr "Няма ніякіх аб'ектаў"
+
+msgid "No acquisition details specified"
+msgstr "Падрабязнасьцей набыцьця няма"

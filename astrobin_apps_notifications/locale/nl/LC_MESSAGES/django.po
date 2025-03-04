@@ -1,245 +1,345 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit"
 
+#, fuzzy
+msgid "Notifications"
+msgstr "Meldingen"
+
+#, fuzzy
+msgid "You have no notifications."
+msgstr "Je hebt geen meldingen."
+
+#, fuzzy
+msgid "Settings"
+msgstr "Instellingen"
+
+#, fuzzy
+msgid "Mark all as read"
+msgstr "Markeer alles als gelezen"
+
+#, fuzzy
+msgid "You have no new notifications."
+msgstr "Je hebt geen nieuwe meldingen."
+
+#, fuzzy
 msgid "You have a new follower"
-msgstr ""
+msgstr "Je hebt een nieuwe volger"
 
+#, fuzzy
 msgid "New image from a user you follow"
-msgstr ""
+msgstr "Nieuwe afbeelding van een gebruiker die je volgt"
 
+#, fuzzy
 msgid "New image revision from a user you follow"
-msgstr ""
+msgstr "Nieuwe afbeelding revisie van een gebruiker die je volgt"
 
+#, fuzzy
 msgid "Your image was plate-solved"
-msgstr ""
+msgstr "Je afbeelding is geplate-solved"
 
-msgid "Your image was approved by a moderator"
-msgstr ""
-
+#, fuzzy
 msgid "Your image could not be plate-solved"
-msgstr ""
+msgstr "Je afbeelding kon niet worden geplate-solved"
 
-msgid "Your image was plate-solved (advanced)"
-msgstr ""
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr ""
-
+#, fuzzy
 msgid "Your image received a new comment"
-msgstr ""
+msgstr "Je afbeelding heeft een nieuwe opmerking ontvangen"
 
-msgid "Your edit proposal received a new comment"
-msgstr ""
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr ""
-
-msgid "Your unapproved equipment item received a comment"
-msgstr ""
-
-msgid "Your listing has a new private conversation"
-msgstr ""
-
-msgid "Your private conversation has a new comment"
-msgstr ""
-
-msgid "Your listing has a new question"
-msgstr ""
-
+#, fuzzy
 msgid "There was a reply to your comment"
-msgstr ""
+msgstr "Er was een antwoord op je opmerking"
 
-msgid "A new comment on your image requires moderation"
-msgstr ""
-
+#, fuzzy
 msgid "Your comment was approved"
-msgstr ""
+msgstr "Je opmerking is goedgekeurd"
 
+#, fuzzy
 msgid "Your image was bookmarked"
-msgstr ""
+msgstr "Je afbeelding is opgeslagen"
 
+#, fuzzy
 msgid "Your image was liked"
-msgstr ""
+msgstr "Je afbeelding is leuk gevonden"
 
+#, fuzzy
 msgid "Your comment was liked"
-msgstr ""
+msgstr "Je opmerking is leuk gevonden"
 
+#, fuzzy
 msgid "Your forum post was liked"
-msgstr ""
+msgstr "Je forumbericht is leuk gevonden"
 
-msgid "Your forum post was approved"
-msgstr ""
-
+#, fuzzy
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "Je API-sleutelverzoek is goedgekeurd"
 
+#, fuzzy
 msgid "A user you follow joined a public group"
-msgstr ""
+msgstr "Een gebruiker die je volgt is lid geworden van een openbare groep"
 
+#, fuzzy
 msgid "You are invited to a group"
-msgstr ""
+msgstr "Je bent uitgenodigd voor een groep"
 
+#, fuzzy
 msgid "A user requested to join a group you moderate"
 msgstr ""
+"Een gebruiker heeft verzocht om lid te worden van een groep die je modereert"
 
+#, fuzzy
 msgid "A group moderator approved your request to join"
-msgstr ""
+msgstr "Een groepsmoderator heeft je verzoek om lid te worden goedgekeurd"
 
+#, fuzzy
 msgid "A group moderator rejected your request to join"
-msgstr ""
+msgstr "Een groepsmoderator heeft je verzoek om lid te worden afgewezen"
 
+#, fuzzy
 msgid "A user you follow created a new public group"
-msgstr ""
+msgstr "Een gebruiker die je volgt heeft een nieuwe openbare groep aangemaakt"
 
+#, fuzzy
 msgid "New forum topic in a group you are a member of"
-msgstr ""
+msgstr "Nieuw forumonderwerp in een groep waarvan je lid bent"
 
-msgid "New forum topic for an equipment item you use"
-msgstr ""
-
-msgid "New forum topic for an equipment item you follow"
-msgstr ""
-
-msgid "Your forum topic was moved"
-msgstr ""
-
+#, fuzzy
 msgid "You have received a new private message"
-msgstr ""
+msgstr "Je hebt een nieuw privébericht ontvangen"
 
+#, fuzzy
 msgid "Your premium subscription will expire in one week"
-msgstr ""
+msgstr "Je premium abonnement verloopt over een week"
 
+#, fuzzy
 msgid "Your premium subscription has just expired"
-msgstr ""
+msgstr "Je premium abonnement is net verlopen"
 
+#, fuzzy
 msgid "Your subscription will be renewed in one week"
-msgstr ""
+msgstr "Je abonnement wordt over een week vernieuwd"
 
+#, fuzzy
 msgid "Your subscription will be renewed in one 30 days"
-msgstr ""
+msgstr "Je abonnement wordt over 30 dagen vernieuwd"
 
+#, fuzzy
 msgid "You have images with a missing \"Data source\""
-msgstr ""
+msgstr "Je hebt afbeeldingen zonder \"Gegevensbron\""
 
+#, fuzzy
 msgid "You have images with a missing \"Remote source\""
-msgstr ""
+msgstr "Je hebt afbeeldingen zonder \"Afstandsbron\""
 
+#, fuzzy
 msgid "Would you like to activate your account?"
-msgstr ""
+msgstr "Wil je je account activeren?"
 
-msgid "New reply in a subscribed forum topic"
-msgstr ""
-
-msgid "New reply in a forum topic that you started"
-msgstr ""
-
+#, fuzzy
 msgid "You were mentioned in a forum post"
-msgstr ""
+msgstr "Je werd genoemd in een forumbericht"
 
+#, fuzzy
 msgid "You were mentioned in a comment"
-msgstr ""
+msgstr "Je werd genoemd in een opmerking"
 
+#, fuzzy
 msgid "Welcome to AstroBin!"
-msgstr ""
+msgstr "Welkom bij AstroBin!"
 
+#, fuzzy
 msgid "Congratulations for your first image on AstroBin!"
-msgstr ""
+msgstr "Gefeliciteerd met je eerste afbeelding op AstroBin!"
 
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr ""
-
+#, fuzzy
 msgid "Thank you for getting a subscription!"
-msgstr ""
+msgstr "Bedankt voor je abonnement!"
 
+#, fuzzy
 msgid "Thank you for your payment!"
-msgstr ""
+msgstr "Bedankt voor je betaling!"
 
-msgid "Subscription canceled"
-msgstr ""
-
+#, fuzzy
 msgid "You were removed from the IOTD staff"
-msgstr ""
+msgstr "Je bent verwijderd uit het IOTD-team"
 
+#, fuzzy
 msgid "You have been inactive as an IOTD staff member"
-msgstr ""
+msgstr "Je bent inactief als IOTD-teamlid"
 
-msgid "Your IOTD staff activity is insufficient"
-msgstr ""
-
+#, fuzzy
 msgid "An image you promoted made it to Top Pick"
-msgstr ""
+msgstr "Een afbeelding die je hebt gepromoot is Top Pick geworden"
 
+#, fuzzy
 msgid "An image you promoted made it to IOTD"
-msgstr ""
+msgstr "Een afbeelding die je hebt gepromoot is IOTD geworden"
 
-msgid "An image you dismissed made it to Top Pick"
-msgstr ""
+#, fuzzy
+msgid "New reply in a subscribed forum topic"
+msgstr "Nieuw antwoord in een gevolgd forumonderwerp"
 
-msgid "An image you dismissed made it to IOTD"
-msgstr ""
+#, fuzzy
+msgid "Your image was nominated to be a Top Pick"
+msgstr "Je afbeelding is genomineerd als Top Pick"
 
-msgid "Your image might become a Top Pick Nomination"
-msgstr ""
-
-msgid "Your image might become a Top Pick"
-msgstr ""
-
-msgid "Your image was voted Top Pick Nomination"
-msgstr ""
-
+#, fuzzy
 msgid "Your image was voted Top Pick"
-msgstr ""
+msgstr "Je afbeelding is gekozen als Top Pick"
 
+#, fuzzy
 msgid "Your image was voted Image of the Day"
-msgstr ""
+msgstr "Je afbeelding is gekozen als Afbeelding van de Dag"
 
-msgid "Your IOTD staff member stats"
-msgstr ""
+#, fuzzy
+msgid "Your image was plate-solved (advanced)"
+msgstr "Je afbeelding is geplate-solved (geavanceerd)"
 
+#, fuzzy
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Je afbeelding kon niet worden geplate-solved (geavanceerd)"
+
+#, fuzzy
+msgid "A new comment on your image requires moderation"
+msgstr "Een nieuwe opmerking op je afbeelding vereist moderatie"
+
+#, fuzzy
+msgid "Your forum post was approved"
+msgstr "Je forumbericht is goedgekeurd"
+
+#, fuzzy
 msgid "You were mentioned in an image description"
-msgstr ""
+msgstr "Je werd genoemd in een afbeeldingsbeschrijving"
 
+#, fuzzy
+msgid "Your edit proposal received a new comment"
+msgstr "Je bewerkingsvoorstel heeft een nieuwe opmerking ontvangen"
+
+#, fuzzy
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr "Je afbeelding is ingediend voor IOTD/TP overweging"
+
+#, fuzzy
 msgid "A gear item that you used was renamed"
-msgstr ""
+msgstr "Een gear-item dat je gebruikte is hernoemd"
 
-msgid "Collaboration Request: Accept or Deny"
-msgstr ""
+#, fuzzy
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Je geplande IOTD heeft een nieuwe opmerking ontvangen"
 
-msgid "User accepted your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "Your unapproved equipment item received a comment"
+msgstr "Je niet-goedgekeurde apparatuuritem heeft een opmerking ontvangen"
 
-msgid "User denied your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "New forum topic for an equipment item you use"
+msgstr "Nieuw forumonderwerp voor een apparatuuritem dat je gebruikt"
 
+#, fuzzy
 msgid "You were added as a collaborator to an image"
-msgstr ""
+msgstr "Je werd toegevoegd als een samenwerker aan een afbeelding"
 
+#, fuzzy
 msgid "You were removed as a collaborator to an image"
-msgstr ""
+msgstr "Je werd verwijderd als samenwerker aan een afbeelding"
 
+#, fuzzy
 msgid "User removed self as a collaborator to your image"
 msgstr ""
+"Gebruiker heeft zichzelf verwijderd als samenwerker aan jouw afbeelding"
 
+#, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "Je hebt je afbeelding ingediend voor IOTD/TP overweging"
+
+#, fuzzy
 msgid "Login attempt detected from a different country"
-msgstr ""
+msgstr "Inlogpoging gedetecteerd vanuit een ander land"
 
+#, fuzzy
 msgid "Login attempt with weak password"
-msgstr ""
+msgstr "Inlogpoging met een zwacht wachtwoord"
+
+#, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "Je afbeelding is goedgekeurd door een moderator"
+
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Afbeelding niet ingediend voor IOTD/TP overweging"
+
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "Abonnement geannuleerd"
+
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "Je forumonderwerp is verplaatst"
+
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "Afbeelding nadert deadline voor IOTD/TP indiening"
+
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "Je vermelding heeft een nieuw privégesprek"
+
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "Je privégesprek heeft een nieuwe opmerking"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "Je vermelding heeft een nieuwe vraag"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "Nieuw forumonderwerp voor een apparatuuritem dat je volgt"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "Nieuwe reactie in een forumonderwerp dat je bent gestart"
+
+#, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "Je IOTD personeel activiteit is onvoldoende"
+
+#, fuzzy
+msgid "An image you dismissed made it to Top Pick"
+msgstr "Een afbeelding die je hebt afgewezen heeft het tot Top Pick gemaakt"
+
+#, fuzzy
+msgid "An image you dismissed made it to IOTD"
+msgstr "Een afbeelding die je hebt afgewezen heeft het tot IOTD gemaakt"
+
+#, fuzzy
+msgid "Your IOTD staff member stats"
+msgstr "Je IOTD personeel lid statistieken"
+
+#, fuzzy
+msgid "Collaboration Request: Accept or Deny"
+msgstr "Samenwerkingsverzoek: Accepteer of Weiger"
+
+#, fuzzy
+msgid "User accepted your collaboration request"
+msgstr "Gebruiker heeft je samenwerkingsverzoek geaccepteerd"
+
+#, fuzzy
+msgid "User denied your collaboration request"
+msgstr "Gebruiker heeft je samenwerkingsverzoek geweigerd"
+
+#, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "Je afbeelding kan een Top Pick Nominatie worden"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "Je afbeelding kan een Top Pick worden"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "Je afbeelding is gekozen als Top Pick Nominatie"

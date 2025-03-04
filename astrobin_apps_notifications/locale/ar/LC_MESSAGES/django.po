@@ -1,246 +1,344 @@
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:59+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100 >= 3 "
+"&& n%100<=10 ? 3 : n%100 >= 11 && n%100<=99 ? 4 : 5;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Content-Transfer-Encoding: 8bit"
 
+#, fuzzy
+msgid "Notifications"
+msgstr "الإشعارات"
+
+#, fuzzy
+msgid "You have no notifications."
+msgstr "ليس لديك إشعارات."
+
+#, fuzzy
+msgid "Settings"
+msgstr "الإعدادات"
+
+#, fuzzy
+msgid "Mark all as read"
+msgstr "تحديد الكل كمقروء"
+
+#, fuzzy
+msgid "You have no new notifications."
+msgstr "ليس لديك إشعارات جديدة."
+
+#, fuzzy
 msgid "You have a new follower"
-msgstr ""
+msgstr "لديك متابع جديد"
 
+#, fuzzy
 msgid "New image from a user you follow"
-msgstr ""
+msgstr "صورة جديدة من مستخدم تتابعه"
 
+#, fuzzy
 msgid "New image revision from a user you follow"
-msgstr ""
+msgstr "تحديث صورة جديدة من مستخدم تتابعه"
 
+#, fuzzy
 msgid "Your image was plate-solved"
-msgstr ""
+msgstr "تم حل صورتك باستخدام نظام تحديد المواقع."
 
-msgid "Your image was approved by a moderator"
-msgstr ""
-
+#, fuzzy
 msgid "Your image could not be plate-solved"
-msgstr ""
+msgstr "لم يتمكن نظام تحديد المواقع من حل صورتك."
 
-msgid "Your image was plate-solved (advanced)"
-msgstr ""
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr ""
-
+#, fuzzy
 msgid "Your image received a new comment"
-msgstr ""
+msgstr "تلقيت تعليقًا جديدًا على صورتك"
 
-msgid "Your edit proposal received a new comment"
-msgstr ""
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr ""
-
-msgid "Your unapproved equipment item received a comment"
-msgstr ""
-
-msgid "Your listing has a new private conversation"
-msgstr ""
-
-msgid "Your private conversation has a new comment"
-msgstr ""
-
-msgid "Your listing has a new question"
-msgstr ""
-
+#, fuzzy
 msgid "There was a reply to your comment"
-msgstr ""
+msgstr "كان هناك رد على تعليقك"
 
-msgid "A new comment on your image requires moderation"
-msgstr ""
-
+#, fuzzy
 msgid "Your comment was approved"
-msgstr ""
+msgstr "تمت الموافقة على تعليقك"
 
+#, fuzzy
 msgid "Your image was bookmarked"
-msgstr ""
+msgstr "تمت إضافة صورتك إلى المفضلة"
 
+#, fuzzy
 msgid "Your image was liked"
-msgstr ""
+msgstr "تم الإعجاب بصورتك"
 
+#, fuzzy
 msgid "Your comment was liked"
-msgstr ""
+msgstr "تم الإعجاب بتعليقك"
 
+#, fuzzy
 msgid "Your forum post was liked"
-msgstr ""
+msgstr "تم الإعجاب بمشاركتك في المنتدى"
 
-msgid "Your forum post was approved"
-msgstr ""
-
+#, fuzzy
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "تمت الموافقة على طلب مفتاح API الخاص بك"
 
+#, fuzzy
 msgid "A user you follow joined a public group"
-msgstr ""
+msgstr "انضم مستخدم تتابعه إلى مجموعة عامة"
 
+#, fuzzy
 msgid "You are invited to a group"
-msgstr ""
+msgstr "تم دعوتك إلى مجموعة"
 
+#, fuzzy
 msgid "A user requested to join a group you moderate"
-msgstr ""
+msgstr "طلب مستخدم الانضمام إلى مجموعة تديرها"
 
+#, fuzzy
 msgid "A group moderator approved your request to join"
-msgstr ""
+msgstr "وافق مشرف المجموعة على طلبك للانضمام"
 
+#, fuzzy
 msgid "A group moderator rejected your request to join"
-msgstr ""
+msgstr "رفض مشرف المجموعة طلبك للانضمام"
 
+#, fuzzy
 msgid "A user you follow created a new public group"
-msgstr ""
+msgstr "أنشأ مستخدم تتابعه مجموعة عامة جديدة"
 
+#, fuzzy
 msgid "New forum topic in a group you are a member of"
-msgstr ""
+msgstr "موضوع جديد في المنتدى في مجموعة أنت عضو فيها"
 
-msgid "New forum topic for an equipment item you use"
-msgstr ""
-
-msgid "New forum topic for an equipment item you follow"
-msgstr ""
-
-msgid "Your forum topic was moved"
-msgstr ""
-
+#, fuzzy
 msgid "You have received a new private message"
-msgstr ""
+msgstr "تلقيت رسالة خاصة جديدة"
 
+#, fuzzy
 msgid "Your premium subscription will expire in one week"
-msgstr ""
+msgstr "سينتهي اشتراكك المميز خلال أسبوع واحد"
 
+#, fuzzy
 msgid "Your premium subscription has just expired"
-msgstr ""
+msgstr "انتهت صلاحية اشتراكك المميز للتو"
 
+#, fuzzy
 msgid "Your subscription will be renewed in one week"
-msgstr ""
+msgstr "سيتم تجديد اشتراكك خلال أسبوع واحد"
 
+#, fuzzy
 msgid "Your subscription will be renewed in one 30 days"
-msgstr ""
+msgstr "سيتم تجديد اشتراكك خلال 30 يومًا"
 
+#, fuzzy
 msgid "You have images with a missing \"Data source\""
-msgstr ""
+msgstr "لديك صور بدون \"مصدر البيانات\""
 
+#, fuzzy
 msgid "You have images with a missing \"Remote source\""
-msgstr ""
+msgstr "لديك صور بدون \"المصدر البعيد\""
 
+#, fuzzy
 msgid "Would you like to activate your account?"
-msgstr ""
+msgstr "هل ترغب في تفعيل حسابك؟"
 
-msgid "New reply in a subscribed forum topic"
-msgstr ""
-
-msgid "New reply in a forum topic that you started"
-msgstr ""
-
+#, fuzzy
 msgid "You were mentioned in a forum post"
-msgstr ""
+msgstr "تم الإشارة إليك في مشاركة في المنتدى"
 
+#, fuzzy
 msgid "You were mentioned in a comment"
-msgstr ""
+msgstr "تم الإشارة إليك في تعليق"
 
+#, fuzzy
 msgid "Welcome to AstroBin!"
-msgstr ""
+msgstr "مرحبًا بك في AstroBin!"
 
+#, fuzzy
 msgid "Congratulations for your first image on AstroBin!"
-msgstr ""
+msgstr "مبروك على أول صورة لك في AstroBin!"
 
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr ""
-
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr ""
-
+#, fuzzy
 msgid "Thank you for getting a subscription!"
-msgstr ""
+msgstr "شكرًا لك على الاشتراك!"
 
+#, fuzzy
 msgid "Thank you for your payment!"
-msgstr ""
+msgstr "شكرًا لك على الدفع!"
 
-msgid "Subscription canceled"
-msgstr ""
-
+#, fuzzy
 msgid "You were removed from the IOTD staff"
-msgstr ""
+msgstr "تم إزالتك من طاقم IOTD"
 
+#, fuzzy
 msgid "You have been inactive as an IOTD staff member"
-msgstr ""
+msgstr "كنت غير نشط كعضو في طاقم IOTD"
 
-msgid "Your IOTD staff activity is insufficient"
-msgstr ""
-
+#, fuzzy
 msgid "An image you promoted made it to Top Pick"
-msgstr ""
+msgstr "صورة قمت بالترويج لها وصلت إلى الاختيار الأفضل"
 
+#, fuzzy
 msgid "An image you promoted made it to IOTD"
-msgstr ""
+msgstr "صورة قمت بالترويج لها وصلت إلى IOTD"
 
-msgid "An image you dismissed made it to Top Pick"
-msgstr ""
+#, fuzzy
+msgid "New reply in a subscribed forum topic"
+msgstr "رد جديد في موضوع المنتدى الذي اشتركت فيه"
 
-msgid "An image you dismissed made it to IOTD"
-msgstr ""
+#, fuzzy
+msgid "Your image was nominated to be a Top Pick"
+msgstr "تم ترشيح صورتك لتكون اختيارًا مميزًا"
 
-msgid "Your image might become a Top Pick Nomination"
-msgstr ""
-
-msgid "Your image might become a Top Pick"
-msgstr ""
-
-msgid "Your image was voted Top Pick Nomination"
-msgstr ""
-
+#, fuzzy
 msgid "Your image was voted Top Pick"
-msgstr ""
+msgstr "تم التصويت لصورتك كاختيار مميز"
 
+#, fuzzy
 msgid "Your image was voted Image of the Day"
-msgstr ""
+msgstr "تم التصويت لصورتك كصورة اليوم"
 
-msgid "Your IOTD staff member stats"
-msgstr ""
+#, fuzzy
+msgid "Your image was plate-solved (advanced)"
+msgstr "تم حل صورتك باستخدام نظام تحديد المواقع (متقدم)"
 
+#, fuzzy
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "لم يتمكن نظام تحديد المواقع من حل صورتك (متقدم)"
+
+#, fuzzy
+msgid "A new comment on your image requires moderation"
+msgstr "يتطلب تعليق جديد على صورتك إشرافًا"
+
+#, fuzzy
+msgid "Your forum post was approved"
+msgstr "تمت الموافقة على منشورك في المنتدى"
+
+#, fuzzy
 msgid "You were mentioned in an image description"
-msgstr ""
+msgstr "تم الإشارة إليك في وصف الصورة"
 
+#, fuzzy
+msgid "Your edit proposal received a new comment"
+msgstr "تلقى اقتراح تعديلك تعليقًا جديدًا"
+
+#, fuzzy
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr "تم تقديم صورتك للنظر في IOTD/TP"
+
+#, fuzzy
 msgid "A gear item that you used was renamed"
-msgstr ""
+msgstr "تم إعادة تسمية عنصر المعدات الذي استخدمته"
 
-msgid "Collaboration Request: Accept or Deny"
-msgstr ""
+#, fuzzy
+msgid "Your scheduled IOTD received a new comment"
+msgstr "تلقى IOTD المجدول الخاص بك تعليقًا جديدًا"
 
-msgid "User accepted your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "Your unapproved equipment item received a comment"
+msgstr "تلقى عنصر المعدات غير المعتمد لديك تعليقًا"
 
-msgid "User denied your collaboration request"
-msgstr ""
+#, fuzzy
+msgid "New forum topic for an equipment item you use"
+msgstr "موضوع جديد في المنتدى لعنصر المعدات الذي تستخدمه"
 
+#, fuzzy
 msgid "You were added as a collaborator to an image"
-msgstr ""
+msgstr "تم إضافتك كمتعاون في صورة"
 
+#, fuzzy
 msgid "You were removed as a collaborator to an image"
-msgstr ""
+msgstr "تم إزالتك كمتعاون في صورة"
 
+#, fuzzy
 msgid "User removed self as a collaborator to your image"
-msgstr ""
+msgstr "قام المستخدم بإزالة نفسه كمتعاون في صورتك"
 
+#, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "قدمت صورتك للنظر في IOTD/TP"
+
+#, fuzzy
 msgid "Login attempt detected from a different country"
-msgstr ""
+msgstr "تم اكتشاف محاولة تسجيل دخول من دولة مختلفة"
 
+#, fuzzy
 msgid "Login attempt with weak password"
-msgstr ""
+msgstr "محاولة تسجيل دخول بكلمة مرور ضعيفة"
+
+#, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "تمت الموافقة على صورتك من قبل مشرف"
+
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "لم يتم تقديم الصورة للنظر في IOTD/TP"
+
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "تم إلغاء الاشتراك"
+
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "تم نقل موضوع المنتدى الخاص بك"
+
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "الصورة تقترب من الموعد النهائي لتقديم IOTD/TP"
+
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "لديك محادثة خاصة جديدة في قائمتك"
+
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "لديك تعليق جديد في محادثتك الخاصة"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "لديك سؤال جديد في قائمتك"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "موضوع جديد في المنتدى لعنصر المعدات الذي تتابعه"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "رد جديد في موضوع المنتدى الذي بدأته"
+
+#, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "نشاط موظف IOTD الخاص بك غير كافٍ"
+
+#, fuzzy
+msgid "An image you dismissed made it to Top Pick"
+msgstr "صورة قمت برفضها أصبحت ضمن الاختيارات العليا"
+
+#, fuzzy
+msgid "An image you dismissed made it to IOTD"
+msgstr "صورة قمت برفضها أصبحت ضمن IOTD"
+
+#, fuzzy
+msgid "Your IOTD staff member stats"
+msgstr "إحصائيات موظف IOTD الخاص بك"
+
+#, fuzzy
+msgid "Collaboration Request: Accept or Deny"
+msgstr "طلب تعاون: قبول أو رفض"
+
+#, fuzzy
+msgid "User accepted your collaboration request"
+msgstr "قبل المستخدم طلب تعاونك"
+
+#, fuzzy
+msgid "User denied your collaboration request"
+msgstr "رفض المستخدم طلب تعاونك"
+
+#, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "قد تصبح صورتك ترشيحًا للاختيار الأعلى"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "قد تصبح صورتك اختيارًا أعلى"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "تم التصويت لصورتك كترشيح للاختيار الأعلى"

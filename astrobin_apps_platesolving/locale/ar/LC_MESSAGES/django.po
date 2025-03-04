@@ -1,52 +1,100 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: 2014-01-04 12:23+0000\n"
-"Last-Translator: sayco <sayco.only@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100 >= 3 "
+"&& n%100<=10 ? 3 : n%100 >= 11 && n%100<=99 ? 4 : 5;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1388838213.837964\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "Very Large Field (>30 degrees)"
+#, fuzzy
+msgid "Perform a blind solve"
+msgstr "قم بإجراء حل أعمى"
+
+#, fuzzy
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
 msgstr ""
+"حاول الحل بدون أي تلميحات. في معظم الحالات، سيعمل هذا، لكنه سيستغرق وقتًا "
+"أطول."
 
-msgid "Large Field (15-30 degrees)"
+#, fuzzy
+msgid "Width of the field in degrees"
+msgstr "عرض الحقل بالدرجات"
+
+#, fuzzy
+msgid "Width of the field in arcminutes"
+msgstr "عرض الحقل بالدقائق القوسية"
+
+#, fuzzy
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr "دقة الحقل بالثواني القوسية لكل بكسل"
+
+#, fuzzy
+msgid "Field size units"
+msgstr "وحدات حجم الحقل"
+
+#, fuzzy
+msgid "Min field size"
+msgstr "أقل حجم للحقل"
+
+#, fuzzy
+msgid "Estimate the lower bound for the width of this field."
+msgstr "قدّر الحد الأدنى لعرض هذا الحقل."
+
+#, fuzzy
+msgid "Max field size"
+msgstr "أقصى حجم للحقل"
+
+#, fuzzy
+msgid "Estimate the upper bound for the width of this field."
+msgstr "قدّر الحد الأقصى لعرض هذا الحقل."
+
+#, fuzzy
+msgid "Center RA"
+msgstr "المركز RA"
+
+#, fuzzy
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr "المركز RA للحقل بالدرجات، من 0.000 إلى 360.000"
+
+#, fuzzy
+msgid "Center dec"
+msgstr "المركز DEC"
+
+#, fuzzy
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr "المركز DEC للحقل بالدرجات، من -90.000 إلى +90.000"
+
+#, fuzzy
+msgid "Radius"
+msgstr "نصف القطر"
+
+#, fuzzy
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
 msgstr ""
+"يخبر محرك حل اللوحة بالبحث ضمن هذه الدرجات من موقع المركز RA و DEC المعطى."
 
-msgid "Medium Field (4-15 degrees)"
-msgstr ""
-
-msgid "Small Field (1-4 degrees)"
-msgstr ""
-
-msgid "Very Small Field (<1 degree)"
-msgstr ""
-
+#, fuzzy
 msgid "Small"
-msgstr ""
+msgstr "صغير"
 
+#, fuzzy
 msgid "Medium"
-msgstr ""
+msgstr "متوسط"
 
+#, fuzzy
 msgid "Large"
-msgstr ""
+msgstr "كبير"
 
+#, fuzzy
 msgid "Sample raw frame (max 100 MB)"
-msgstr ""
+msgstr "عينة إطار خام (حد أقصى 100 ميغابايت)"
 
+#, fuzzy
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
 "one of the XISF or FITS files from your data set. Such files normally have "
@@ -61,329 +109,652 @@ msgid ""
 "match. To improve your chances at a successful accurate plate-solution, "
 "calibrate your file the usual way (dark/bias/flats) but do not stretch it."
 msgstr ""
+"لتحسين دقة حل اللوحة لديك بشكل أكبر، يرجى تحميل أحد ملفات XISF أو FITS من "
+"مجموعة بياناتك. عادةً ما تحتوي هذه الملفات على ترويسات التاريخ والوقت التي "
+"ستسمح لـ AstroBin بحساب مواقع الأجرام السماوية والعثور على الكواكب "
+"والكويكبات في صورتك (بشرط أن تضيف أيضًا معلومات الموقع).<br/><br/>للحصول على "
+"أقصى دقة، يُوصى باستخدام تنسيق XISF الأصلي والمفتوح من PixInsight. تعرف على "
+"المزيد حول XISF هنا:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/><strong>يرجى "
+"ملاحظة:</strong> من المهم جدًا أن يكون ملف XISF أو FITS الذي تقوم بتحميله "
+"متماشيًا مع صورتك المعالجة، وإلا فلن تتطابق تعليقات الكائنات. لتحسين فرصك في "
+"الحصول على حل دقيق ناجح، قم بمعايرة ملفك بالطريقة المعتادة (داكن/تحيز/فلات) "
+"ولكن لا تقم بتمديده."
 
+#, fuzzy
 msgid "Scaled font size"
-msgstr ""
+msgstr "حجم الخط المقاس"
 
+#, fuzzy
 msgid "Font size of the annotations on your main image page"
-msgstr ""
+msgstr "حجم خط التعليقات التوضيحية على صفحة صورتك الرئيسية"
 
+#, fuzzy
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "عرض الشبكة الاستوائية"
 
-msgid "Show ecliptic"
-msgstr ""
-
-msgid "Show galactic equator"
-msgstr ""
-
+#, fuzzy
 msgid "Show constellation borders"
-msgstr ""
+msgstr "عرض حدود الكوكبات"
 
+#, fuzzy
 msgid "Show constellation lines"
-msgstr ""
+msgstr "عرض خطوط الكوكبات"
 
+#, fuzzy
 msgid "Show named stars"
-msgstr ""
+msgstr "عرض النجوم المسماة"
 
+#, fuzzy
+msgid "Show Messier objects"
+msgstr "عرض الأجسام من فئة مسييه"
+
+#, fuzzy
+msgid "Show NGC and IC objects"
+msgstr "عرض الأجسام من فئة NGC و IC"
+
+#, fuzzy
+msgid "Show VdB objects"
+msgstr "عرض الأجسام من فئة VdB"
+
+#, fuzzy
+msgid "Show Sharpless objects"
+msgstr "عرض الأجسام من فئة Sharpless"
+
+#, fuzzy
+msgid "Show Barnard objects"
+msgstr "عرض الأجسام من فئة Barnard"
+
+#, fuzzy
+msgid "Show PGC objects"
+msgstr "عرض الأجسام من فئة PGC"
+
+#, fuzzy
+msgid "Show planets"
+msgstr "عرض الكواكب"
+
+#, fuzzy
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr "متاح فقط إذا كانت صورتك تحتوي على وقت اكتساب وموقع دقيق"
+
+#, fuzzy
+msgid "Show asteroids"
+msgstr "عرض الكويكبات"
+
+#, fuzzy
+msgid "Show GCVS stars"
+msgstr "عرض نجوم GCVS"
+
+#, fuzzy
+msgid "General Catalog of Variable Stars"
+msgstr "الفهرس العام للنجوم المتغيرة"
+
+#, fuzzy
+msgid "Show Tycho-2 catalog"
+msgstr "عرض فهرس Tycho-2"
+
+#, fuzzy
+msgid "Show CGPN objects"
+msgstr "عرض الأجسام من فئة CGPN"
+
+msgid "Getting plate-solving status, please wait..."
+msgstr "جاري الحصول علي وضع القياسات الفلكية, يرجى الانتظار ..."
+
+#, fuzzy
+msgid "Plate-solving starting, please do not leave this page..."
+msgstr "بدء حل اللوحة، يرجى عدم مغادرة هذه الصفحة..."
+
+#, fuzzy
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr "بدء حل اللوحة المتقدم، يرجى عدم مغادرة هذه الصفحة..."
+
+#, fuzzy
+msgid "Plate-solving started. You may leave this page."
+msgstr "تم بدء حل اللوحة. يمكنك مغادرة هذه الصفحة."
+
+#, fuzzy
+msgid "Advanced plate-solving started. You may leave this page."
+msgstr "تم بدء حل اللوحة المتقدم. يمكنك مغادرة هذه الصفحة."
+
+#, fuzzy
+msgid "Plate-solving almost ready, please do not leave this page..."
+msgstr "حل اللوحة جاهز تقريبًا، يرجى عدم مغادرة هذه الصفحة..."
+
+msgid "This image could not be plate-solved."
+msgstr "تعّذر عمل القياسات الفلكية للصورة."
+
+#, fuzzy
+msgid "The advanced plate-solving failed."
+msgstr "فشل حل اللوحة المتقدم."
+
+#, fuzzy
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr "تم حل هذه الصورة. قم بتحديث الصفحة لرؤية بيانات جديدة!"
+
+#, fuzzy
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
+msgstr "انتهى حل اللوحة المتقدم. قم بتحديث الصفحة لرؤية بيانات جديدة!"
+
+#, fuzzy
+msgid "Error"
+msgstr "خطأ"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because it was not possible to "
+"establish a connection to nova.astrometry.net. Please try again later!"
+msgstr ""
+"لم يتمكن AstroBin من حل هذه الصورة لأن الاتصال بـ nova.astrometry.net لم يكن "
+"ممكنًا. يرجى المحاولة مرة أخرى لاحقًا!"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error."
+msgstr ""
+"لم يتمكن AstroBin من حل صورة هذه اللوحة لأن nova.astrometry.net أبلغ عن خطأ "
+"داخلي في الخادم."
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an unepexted error."
+msgstr ""
+"لم يتمكن AstroBin من حل صورة هذه اللوحة لأن nova.astrometry.net أبلغ عن خطأ "
+"غير متوقع."
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr "عرض الأجسام من كتالوج ليندز للسديم الساطع (LBN) (ليندز 1965)"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr "عرض الأجسام من كتالوج ليندز للسديم المظلم (LDN) (ليندز 1962)"
+
+#, fuzzy
+msgid "Show quasars"
+msgstr "عرض الكوازارات"
+
+#, fuzzy
+msgid "Missing"
+msgstr "مفقود"
+
+#, fuzzy
+msgid "Basic pending"
+msgstr "أساسي قيد الانتظار"
+
+#, fuzzy
+msgid "Basic failed"
+msgstr "أساسي فشل"
+
+#, fuzzy
+msgid "Basic success"
+msgstr "أساسي نجاح"
+
+#, fuzzy
+msgid "Advanced pending"
+msgstr "متقدم قيد الانتظار"
+
+#, fuzzy
+msgid "Advanced failed"
+msgstr "متقدم فشل"
+
+#, fuzzy
+msgid "Advanced success"
+msgstr "متقدم نجاح"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error."
+msgstr "لم يتمكن AstroBin من حل صورة هذه اللوحة بسبب خطأ غير متوقع."
+
+#, fuzzy
+msgid "n/a"
+msgstr "غير متاح"
+
+#, fuzzy
+msgid "Starting task..."
+msgstr "بدء المهمة..."
+
+#, fuzzy
+msgid "Downloading image..."
+msgstr "تحميل الصورة..."
+
+#, fuzzy
+msgid "Plate-solving image..."
+msgstr "حل صورة اللوحة..."
+
+#, fuzzy
+msgid "Generating image annotations..."
+msgstr "إنشاء تعليقات الصورة..."
+
+#, fuzzy
+msgid "Processing SVG documents..."
+msgstr "معالجة مستندات SVG..."
+
+#, fuzzy
+msgid "Uploading results..."
+msgstr "رفع النتائج..."
+
+#, fuzzy
+msgid "Task completed"
+msgstr "اكتملت المهمة"
+
+#, fuzzy
+msgid "Plate-solving information"
+msgstr "معلومات حل اللوحة"
+
+#, fuzzy
+msgid "Status"
+msgstr "الحالة"
+
+#, fuzzy
+msgid "Started"
+msgstr "بدأت"
+
+#, fuzzy
+msgid "Astrometry.net job"
+msgstr "وظيفة Astrometry.net"
+
+#, fuzzy
+msgid "PixInsight job"
+msgstr "وظيفة PixInsight"
+
+#, fuzzy
+msgid "PixInsight queue size"
+msgstr "حجم قائمة الانتظار في PixInsight"
+
+#, fuzzy
+msgid "PixInsight stage"
+msgstr "مرحلة PixInsight"
+
+#, fuzzy
+msgid "PixInsight log"
+msgstr "سجل PixInsight"
+
+#, fuzzy
+msgid "RA"
+msgstr "RA"
+
+#, fuzzy
+msgid "center"
+msgstr "المركز"
+
+#, fuzzy
+msgid "degrees"
+msgstr "درجات"
+
+#, fuzzy
+msgid "top/left"
+msgstr "أعلى/يسار"
+
+#, fuzzy
+msgid "top/right"
+msgstr "أعلى/يمين"
+
+#, fuzzy
+msgid "bottom/right"
+msgstr "أسفل/يمين"
+
+#, fuzzy
+msgid "bottom/left"
+msgstr "أسفل/يسار"
+
+#, fuzzy
+msgid "Dec"
+msgstr "Dec"
+
+#, fuzzy
+msgid "Close"
+msgstr "إغلاق"
+
+#, fuzzy
+msgid "Invalid"
+msgstr "غير صالح"
+
+#, fuzzy
+msgid "Generating finding charts..."
+msgstr "إنشاء مخططات البحث..."
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error. Please try again later!"
+msgstr ""
+"لم يتمكن AstroBin من حل صورة هذه اللوحة لأن nova.astrometry.net أبلغ عن خطأ "
+"داخلي في الخادم. يرجى المحاولة مرة أخرى لاحقًا!"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error. "
+"Please try again later!"
+msgstr ""
+"لم يتمكن AstroBin من حل صورة هذه اللوحة بسبب خطأ غير متوقع. يرجى المحاولة "
+"مرة أخرى لاحقًا!"
+
+#, fuzzy
+msgid "Your migration data"
+msgstr "بيانات الهجرة الخاصة بك"
+
+#, fuzzy
+msgid "Total amount donated last year"
+msgstr "إجمالي المبلغ المتبرع به العام الماضي"
+
+#, fuzzy
+msgid "First payment"
+msgstr "الدفع الأول"
+
+#, fuzzy
+msgid "Price for Premium"
+msgstr "سعر البريميوم"
+
+#, fuzzy
+msgid "Days covered"
+msgstr "الأيام المغطاة"
+
+#, fuzzy
+msgid "Premium expiration"
+msgstr "انتهاء صلاحية البريميوم"
+
+#, fuzzy
+msgid "Your donations last year"
+msgstr "تبرعاتك العام الماضي"
+
+#, fuzzy
+msgid "Amount"
+msgstr "المبلغ"
+
+#, fuzzy
+msgid "Date"
+msgstr "التاريخ"
+
+#, fuzzy
+msgid "Subscription"
+msgstr "الاشتراك"
+
+#, fuzzy
+msgid "Migrate donations"
+msgstr "نقل التبرعات"
+
+#, fuzzy
+msgid "Error!"
+msgstr "خطأ!"
+
+#, fuzzy
+msgid ""
+"Sorry, but it looks like you cannot migrate your donations to a Premium "
+"membership."
+msgstr "عذرًا، يبدو أنك لا تستطيع نقل تبرعاتك إلى عضوية مميزة."
+
+#, fuzzy
+msgid "You already have a paid membership."
+msgstr "لديك بالفعل عضوية مدفوعة."
+
+#, fuzzy
+msgid "We could not find any donations from you last year."
+msgstr "لم نتمكن من العثور على أي تبرعات منك في العام الماضي."
+
+#, fuzzy
+msgid ""
+"Your donations last year were not enough to cover a Premium subscription for "
+"this year."
+msgstr "لم تكن تبرعاتك في العام الماضي كافية لتغطية اشتراك مميز لهذا العام."
+
+#, fuzzy
+msgid "View the subscription plans"
+msgstr "عرض خطط الاشتراك"
+
+#, fuzzy
+msgid ""
+"As you  have made donations during the last year, you may choose to transfer "
+"the amount you donated towards an AstroBin Premium membership. The "
+"membership will have an expiration date proportionate to the amount you "
+"donated."
+msgstr ""
+"نظرًا لأنك قد قمت بالتبرع خلال العام الماضي، يمكنك اختيار تحويل المبلغ الذي "
+"تبرعت به نحو عضوية مميزة في AstroBin. ستنتهي صلاحية العضوية بناءً على المبلغ "
+"الذي تبرعت به."
+
+#, fuzzy
+msgid ""
+"If you are feeling particularly cool and generous, you may choose to "
+"consider your past donations as a contribution to support past efforts, and "
+"pay again for a Premium plan. Up to you!"
+msgstr ""
+"إذا كنت تشعر بالبرودة والكرم، يمكنك اعتبار تبرعاتك السابقة كدعم للجهود "
+"السابقة، ودفع مرة أخرى لخطة مميزة. الأمر متروك لك!"
+
+#, fuzzy
+msgid "No, I want to pay for Premium"
+msgstr "لا، أريد الدفع من أجل المميزة"
+
+#, fuzzy
+msgid "Success"
+msgstr "نجاح"
+
+#, fuzzy
+msgid "Your migration was successful."
+msgstr "تمت عملية النقل بنجاح."
+
+#, fuzzy
+msgid "Thanks for supporting AstroBin!"
+msgstr "شكرًا لدعمك AstroBin!"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
+msgstr "انتهت صلاحية اشتراكك \"%(subscription_name)s\" في AstroBin."
+
+#, fuzzy
+msgid ""
+"When a subscription on AstroBin expires, nothing happens to your images or "
+"any of your content. You are reverted to AstroBin Free and will not be able "
+"to upload new images until you renew, but you may continue to use AstroBin "
+"in all other aspects if you do not have any new images to share at the "
+"moment."
+msgstr ""
+"عندما تنتهي صلاحية الاشتراك في AstroBin، لا يحدث شيء لصورك أو أي من محتوياتك."
+" ستعود إلى AstroBin Free ولن تتمكن من تحميل صور جديدة حتى تجدد، ولكن يمكنك "
+"الاستمرار في استخدام AstroBin في جميع الجوانب الأخرى إذا لم يكن لديك أي صور "
+"جديدة لمشاركتها في الوقت الحالي."
+
+#, fuzzy
+msgid ""
+"When you are ready to renew your subscription, please visit the following "
+"page:"
+msgstr "عندما تكون جاهزًا لتجديد اشتراكك، يرجى زيارة الصفحة التالية:"
+
+#, fuzzy
+msgid "Your AstroBin subscription has just expired"
+msgstr "انتهت صلاحية اشتراكك في AstroBin للتو"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
+msgstr ""
+"ستنتهي صلاحية اشتراكك \"%(subscription_name)s\" في AstroBin خلال أسبوع."
+
+#, fuzzy
+msgid ""
+"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
+"still ongoing. Please wait until it is expired. Thank you!"
+msgstr ""
+"يرجى ملاحظة! في الوقت الحالي، لا يمكنك تجديد الاشتراك بينما لا يزال ساريًا. "
+"يرجى الانتظار حتى تنتهي صلاحيته. شكرًا!"
+
+#, fuzzy
+msgid "Your AstroBin subscription will expire in one week"
+msgstr "ستنتهي صلاحية اشتراكك في AstroBin خلال أسبوع"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in one week."
+msgstr ""
+"سيتم تجديد اشتراكك \"%(subscription_name)s\" في AstroBin تلقائيًا خلال أسبوع."
+
+#, fuzzy
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
+msgstr ""
+"لديك اشتراك يتجدد تلقائيًا في AstroBin، وسنحاول تجديده تلقائيًا. إذا تم "
+"إنشاء اشتراكك بالطريقة العادية، عبر PayPal، فسيحاول PayPal خصم المبلغ من "
+"بطاقتك الائتمانية أو استرداد الأموال المتاحة في حسابك."
+
+#, fuzzy
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"إذا تم إنشاء اشتراكك يدويًا عبر تحويل بنكي، يرجى التواصل للحصول على دفعة "
+"جديدة."
+
+#, fuzzy
+msgid "Thank you!"
+msgstr "شكرًا!"
+
+#, fuzzy
+msgid "Your AstroBin subscription will be automatically renewed in one week"
+msgstr "سيتم تجديد اشتراكك في AstroBin تلقائيًا خلال أسبوع"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+"سيتم تجديد اشتراكك \"%(subscription_name)s\" في AstroBin تلقائيًا خلال 30 "
+"يومًا."
+
+#, fuzzy
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+msgstr "سيتم تجديد اشتراكك في AstroBin تلقائيًا خلال 30 يومًا"
+
+#, fuzzy
 msgid "Show HD stars"
-msgstr ""
+msgstr "عرض النجوم HD"
 
+#, fuzzy
 msgid ""
 "This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
 "stars (Kharchenko+ 2009), VizieR catalog: I/280B."
 msgstr ""
+"يستخدم هذا الكتالوج بيانات من كتالوج السماء الشامل المكون من 2.5 مليون نجم "
+"(خارشنكو+ 2009)، كتالوج VizieR: I/280B."
 
+#, fuzzy
 msgid "Max. magnitude"
-msgstr ""
+msgstr "الحد الأقصى من السطوع"
 
+#, fuzzy
 msgid ""
 "Only HD stars up to this magnitude will be rendered. If left empty, the "
 "catalog's default value will be used."
 msgstr ""
+"سيتم عرض النجوم HD فقط حتى هذا السطوع. إذا تركت فارغًا، سيتم استخدام القيمة "
+"الافتراضية للكتالوج."
 
-msgid "Show Messier objects"
-msgstr ""
-
-msgid "Show NGC and IC objects"
-msgstr ""
-
-msgid "Show VdB objects"
-msgstr ""
-
-msgid "Show Sharpless objects"
-msgstr ""
-
-msgid "Show Barnard objects"
-msgstr ""
-
-msgid ""
-"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
-msgstr ""
-
-msgid ""
-"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr ""
-
-msgid "Show PGC objects"
-msgstr ""
-
-msgid "Show planets"
-msgstr ""
-
-msgid ""
-"Only available if your image at least an acquisition time and an accurate "
-"location"
-msgstr ""
-
-msgid "Show asteroids"
-msgstr ""
-
-msgid "Show GCVS stars"
-msgstr ""
-
-msgid "General Catalog of Variable Stars"
-msgstr ""
-
+#, fuzzy
 msgid ""
 "Only GCVS stars up to this magnitude will be rendered. If left empty, the "
 "catalog's default value will be used."
 msgstr ""
+"سيتم عرض النجوم GCVS فقط حتى هذا السطوع. إذا تركت فارغًا، سيتم استخدام "
+"القيمة الافتراضية للكتالوج."
 
-msgid "Show Tycho-2 catalog"
-msgstr ""
-
+#, fuzzy
 msgid ""
 "Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
 "catalog's default value will be used."
 msgstr ""
+"سيتم عرض النجوم Tycho-2 فقط حتى هذا السطوع. إذا تركت فارغًا، سيتم استخدام "
+"القيمة الافتراضية للكتالوج."
 
-msgid "Show CGPN objects"
-msgstr ""
-
-msgid "Show quasars"
-msgstr ""
-
-msgid "Publicly visible astrometry.net submission"
-msgstr ""
-
-msgid ""
-"If checked, the astrometry.net submission will be publicly visible. If you "
-"leave this unchecked,you won't be able to see the full log of the astrometry."
-"net submission, but the image will stillbe plate-solved and annotated."
-msgstr ""
-
-msgid "Perform a blind solve"
-msgstr ""
-
-msgid ""
-"Attempt to solve with no hints. In most cases this will work, but it will "
-"take longer."
-msgstr ""
-
-msgid "Width of the field in degrees"
-msgstr ""
-
-msgid "Width of the field in arcminutes"
-msgstr ""
-
-msgid "Resolution of the field in arcseconds/pixel"
-msgstr ""
-
-msgid "Field size units"
-msgstr ""
-
-msgid "Min field size"
-msgstr ""
-
-msgid "Estimate the lower bound for the width of this field."
-msgstr ""
-
-msgid "Max field size"
-msgstr ""
-
-msgid "Estimate the upper bound for the width of this field."
-msgstr ""
-
-msgid "Center RA"
-msgstr ""
-
-msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr ""
-
-msgid "Center dec"
-msgstr ""
-
-msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr ""
-
-msgid "Radius"
-msgstr ""
-
-msgid ""
-"Tells the plate-solving engine to look within these many degrees of the "
-"given center RA and dec position."
-msgstr ""
-
+#, fuzzy
 msgid "Downsample factor"
-msgstr ""
+msgstr "عامل تقليل الدقة"
 
+#, fuzzy
 msgid ""
 "Downsample (bin) your image by this factor before performing source "
 "detection. This often helps with saturated images, noisy images, and large "
 "images. 2 and 4 are commonly-useful values."
 msgstr ""
+"قم بتقليل دقة صورتك بهذا العامل قبل إجراء اكتشاف المصدر. هذا غالبًا ما يساعد "
+"مع الصور المشبعة، والصور المليئة بالضوضاء، والصور الكبيرة. 2 و 4 هما قيمتان "
+"مفيدتان بشكل شائع."
 
+#, fuzzy
 msgid "Use SExtractor"
-msgstr ""
+msgstr "استخدم SExtractor"
 
+#, fuzzy
 msgid ""
 "Use the SourceExtractor program to detect stars, not Nova's built-in program."
 msgstr ""
+"استخدم برنامج SourceExtractor لاكتشاف النجوم، وليس البرنامج المدمج في Nova."
 
-msgid "Missing"
+#, fuzzy
+msgid "Show ecliptic"
+msgstr "عرض الإكليل"
+
+#, fuzzy
+msgid "Show galactic equator"
+msgstr "عرض خط الاستواء المجري"
+
+#, fuzzy
+msgid "Publicly visible astrometry.net submission"
+msgstr "إرسال astrometry.net مرئي للجمهور"
+
+#, fuzzy
+msgid ""
+"If checked, the astrometry.net submission will be publicly visible. If you "
+"leave this unchecked,you won't be able to see the full log of the astrometry."
+"net submission, but the image will stillbe plate-solved and annotated."
 msgstr ""
+"إذا تم تحديده، سيكون إرسال astrometry.net مرئيًا للجمهور. إذا تركت هذا غير "
+"محدد، فلن تتمكن من رؤية السجل الكامل لإرسال astrometry.net، ولكن ستظل الصورة "
+"محلولة باللوحة ومشروحة."
 
-msgid "Basic pending"
-msgstr ""
-
-msgid "Basic failed"
-msgstr ""
-
-msgid "Basic success"
-msgstr ""
-
-msgid "Advanced pending"
-msgstr ""
-
-msgid "Advanced failed"
-msgstr ""
-
-msgid "Advanced success"
-msgstr ""
-
+#, fuzzy
 msgid "Loading..."
-msgstr ""
+msgstr "جارٍ التحميل..."
 
-msgid "Getting plate-solving status, please wait..."
-msgstr "جاري الحصول علي وضع القياسات الفلكية, يرجى الانتظار ..."
-
+#, fuzzy
 msgid "AstroBin is plate-solving this image with Astrometry.net..."
-msgstr ""
+msgstr "AstroBin يقوم بحل هذه الصورة باستخدام Astrometry.net..."
 
+#, fuzzy
 msgid "AstroBin is plate-solving this image with PixInsight..."
-msgstr ""
+msgstr "AstroBin يقوم بحل هذه الصورة باستخدام PixInsight..."
 
-msgid "This image could not be plate-solved."
-msgstr "تعّذر عمل القياسات الفلكية للصورة."
+#, fuzzy
+msgid "Very Large Field (>30 degrees)"
+msgstr "مجال كبير جدًا (>30 درجة)"
 
-msgid "The advanced plate-solving failed."
-msgstr ""
+#, fuzzy
+msgid "Large Field (15-30 degrees)"
+msgstr "مجال كبير (15-30 درجة)"
 
-msgid "This image has been plate-solved. Refresh the page to see new data!"
-msgstr ""
+#, fuzzy
+msgid "Medium Field (4-15 degrees)"
+msgstr "مجال متوسط (4-15 درجة)"
 
-msgid "The advanced plate-solved finished. Refresh the page to see new data!"
-msgstr ""
+#, fuzzy
+msgid "Small Field (1-4 degrees)"
+msgstr "مجال صغير (1-4 درجات)"
 
-msgid "Error"
-msgstr ""
-
-msgid ""
-"AstroBin could not plate-solve this image because it was not possible to "
-"establish a connection to nova.astrometry.net. Please try again later!"
-msgstr ""
-
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error. Please try again later!"
-msgstr ""
-
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error. "
-"Please try again later!"
-msgstr ""
-
-msgid "n/a"
-msgstr ""
-
-msgid "Starting task..."
-msgstr ""
-
-msgid "Downloading image..."
-msgstr ""
-
-msgid "Plate-solving image..."
-msgstr ""
-
-msgid "Generating image annotations..."
-msgstr ""
-
-msgid "Processing SVG documents..."
-msgstr ""
-
-msgid "Generating finding charts..."
-msgstr ""
-
-msgid "Uploading results..."
-msgstr ""
-
-msgid "Task completed"
-msgstr ""
-
-msgid "Plate-solving information"
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "Started"
-msgstr ""
-
-msgid "Astrometry.net job"
-msgstr ""
-
-msgid "PixInsight job"
-msgstr ""
-
-msgid "PixInsight queue size"
-msgstr ""
-
-msgid "PixInsight stage"
-msgstr ""
-
-msgid "PixInsight log"
-msgstr ""
-
-msgid "RA"
-msgstr ""
-
-msgid "center"
-msgstr ""
-
-msgid "degrees"
-msgstr ""
-
-msgid "top/left"
-msgstr ""
-
-msgid "top/right"
-msgstr ""
-
-msgid "bottom/right"
-msgstr ""
-
-msgid "bottom/left"
-msgstr ""
-
-msgid "Dec"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "Invalid"
-msgstr ""
-
-#~ msgid "Plate-solving almost ready, please do not leave this page..."
-#~ msgstr "القياسات الفلكية شبه جاهزة، من فضلك لا تغلق هذه الصفحة ..."
+#, fuzzy
+msgid "Very Small Field (<1 degree)"
+msgstr "حقل صغير جداً (<1 درجة)"

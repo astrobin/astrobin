@@ -29,16 +29,6 @@
 
     <li class="divider"></li>
 
-    {% get_other_languages as other_languages %}
-    {% for lang in other_languages %}
-        <li>
-            <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
-                {% get_language_name lang %}
-            </a>
-        </li>
-    {% endfor %}
-
-
     {% if request.user.is_authenticated %}
         <li class="divider"></li>
 

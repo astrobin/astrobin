@@ -1,32 +1,83 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 22:58+0000\n"
-"PO-Revision-Date: 2021-01-03 20:57+0000\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1609707465.000000\n"
+"Content-Transfer-Encoding: 8bit"
 
-msgid "(deleted)"
-msgstr "(poistettu)"
+#, fuzzy
+msgid "You follow each other"
+msgstr "Se seuraavat toisiaan"
 
+#, fuzzy
+msgid "Images"
+msgstr "Kuvat"
+
+#, fuzzy
+msgid "Followers"
+msgstr "Seuraajat"
+
+#, fuzzy
+msgid "Following"
+msgstr "Seuraaminen"
+
+#, fuzzy
+msgid "User"
+msgstr "Käyttäjä"
+
+#, fuzzy
+msgid "No users."
+msgstr "Ei käyttäjiä."
+
+#, fuzzy
+msgid "Administrator"
+msgstr "Ylläpitäjä"
+
+#, fuzzy
+msgid "Image moderator"
+msgstr "Kuvamoderointi"
+
+#, fuzzy
+msgid "IOTD Submitter"
+msgstr "IOTD-lähettäjä"
+
+#, fuzzy
+msgid "IOTD Reviewer"
+msgstr "IOTD-arvioija"
+
+#, fuzzy
+msgid "IOTD Judge"
+msgstr "IOTD-tuomari"
+
+#, fuzzy
+msgid "Premium member"
+msgstr "Premium-jäsen"
+
+#, fuzzy
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Sähköpostisi palautusraportit on poistettu AstroBinista. Varmista, että "
+"sähköpostisi toimii hyvin, tai saat saman varoitusviestin uudelleen. Kiitos!"
+
+#, fuzzy
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Roskapostiraporttisi on poistettu AstroBinista. Varmista, ettei sinulla ole "
+"suodattimia tai sääntöjä, jotka merkitsevät aina AstroBinin sähköpostit "
+"roskapostiksi! Jos et halua vastaanottaa sähköposteja AstroBinilta, etsi "
+"asetukset-linkki, joka on jokaisen sähköpostin alareunassa. Kiitos!"
+
+#, fuzzy
 msgid "Type your comment here..."
-msgstr ""
-
-msgid "Error"
-msgstr ""
+msgstr "Kirjoita kommenttisi tähän..."
 
 msgid "Cancel"
 msgstr "Peruuta"
@@ -34,98 +85,260 @@ msgstr "Peruuta"
 msgid "Add a comment"
 msgstr "Lisää kommentti"
 
+#, fuzzy
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
+msgstr ""
+"Ole hyvä ja <a href=\"%(login_url)s\">kirjaudu sisään</a> tai <a "
+"href=\"%(signup_url)s\">rekisteröidy</a> jättääksesi kommentin."
+
 msgid "There are no comments yet."
 msgstr "Kommentteja ei ole vielä."
 
-msgid "The comment cannot be empty."
-msgstr "Kommentti ei saa olla tyhjä."
+#, fuzzy
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "Tämä kommentti odottaa moderointia ja se tarkistetaan pian."
 
-msgid "Delete"
-msgstr "Poista"
+msgid "(deleted)"
+msgstr "(poistettu)"
 
-msgid "Undelete"
-msgstr "Peru poisto"
+#, fuzzy
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "tykkäykset"
 
-msgid "Edit"
-msgstr "Muokkaa"
+#, fuzzy
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "tykkäys"
 
 msgid "Link"
 msgstr "Linkki"
 
-msgctxt "Noun, e.g. 'This element has 10 likes'"
-msgid "likes"
-msgstr ""
+msgid "Undelete"
+msgstr "Peru poisto"
 
+msgid "Delete"
+msgstr "Poista"
+
+msgid "Edit"
+msgstr "Muokkaa"
+
+#, fuzzy
+msgid "Reply"
+msgstr "Vastaa"
+
+#, fuzzy
+msgid "Like"
+msgstr "Tykkää"
+
+#, fuzzy
+msgid "Unlike"
+msgstr "Älä tykkää"
+
+msgid "The comment cannot be empty."
+msgstr "Kommentti ei saa olla tyhjä."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Lähetä"
+
+#, fuzzy
+msgid "Error"
+msgstr "Virhe"
+
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Like"
-msgstr ""
+msgstr "Tykkää"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Unlike"
-msgstr ""
+msgstr "Älä tykkää"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Reply"
-msgstr ""
+msgstr "Vastaa"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Approve"
-msgstr ""
+msgstr "Hyväksy"
 
+#, fuzzy
 msgid "Report abuse"
-msgstr ""
+msgstr "Ilmoita väärinkäytöstä"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-
+#, fuzzy
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
 msgstr ""
+"Tämä kommentti odottaa moderointia. Hyväksy se tai ilmoita väärinkäytöstä "
+"alla olevilla painikkeilla."
 
+#, fuzzy
 msgid "Thank you for your cooperation!"
-msgstr ""
+msgstr "Kiitos yhteistyöstä!"
 
+#, fuzzy
 msgid "This comment was already moderated by you or an AstroBin moderator."
-msgstr ""
+msgstr "Tämä kommentti on jo moderoinut sinä tai AstroBinin moderaattori."
 
+#, fuzzy
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
 "author or owner of the content object that you commented on. If they do not "
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
+"Kommenttisi odottaa moderointia ja sen pitäisi tarkistaa pian sisällön "
+"objektin kirjoittajan tai omistajan toimesta, johon kommentoit. Jos he eivät "
+"toimi 24 tunnin kuluessa, AstroBinin moderaattori ottaa asian hoitaakseen ja "
+"tarkistaa kommenttisi heidän puolestaan."
 
+#, fuzzy
 msgid "This process is necessary to prevent spam on AstroBin."
-msgstr ""
+msgstr "Tämä prosessi on tarpeen estämään roskapostia AstroBinissa."
 
+#, fuzzy
 msgid "Thank you for understanding!"
-msgstr ""
+msgstr "Kiitos ymmärryksestä!"
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr ""
-
-msgid "Submit"
-msgstr ""
-
+#, fuzzy
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
+"Et voi palauttaa tätä kommenttia: sille on olemassa vahvistettu tai odottava "
+"väärinkäytösraportti. Jos uskot, että kommenttisi raportoitiin "
+"epäoikeudenmukaisesti, ota meihin yhteyttä."
 
+#, fuzzy
 msgid "You have reached your abuse report quota."
-msgstr ""
+msgstr "Olet saavuttanut väärinkäytösraporttisi kiintiön."
 
+#, fuzzy
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr ""
+"Tätä kohdetta ei voi raportoida uudelleen, koska se on hyväksytty "
+"moderaattorin toimesta."
 
+#, fuzzy
+msgid "You many not report the same item more than once."
+msgstr "Et voi raportoida samaa kohdetta useammin kuin kerran."
+
+#, fuzzy
 msgid "You may not report the same item more than once."
-msgstr ""
+msgstr "Et voi raportoida samaa kohdetta useammin kuin kerran."
 
-#~ msgid "Reply"
-#~ msgstr "Vastaa"
+#, fuzzy
+msgid "Report a use"
+msgstr "Ilmoita väärinkäytöksestä"
+
+#, fuzzy
+msgid "Member since"
+msgstr "Jäsen vuodesta"
+
+#, fuzzy
+msgid "Last seen online"
+msgstr "Viimeksi nähty verkossa"
+
+#, fuzzy
+msgid "Total integration time"
+msgstr "Kokonaisaika yhdistämiseen"
+
+#, fuzzy
+msgid "hours"
+msgstr "tuntia"
+
+#, fuzzy
+msgid "Average integration time"
+msgstr "Keskimääräinen yhdistämisaika"
+
+#, fuzzy
+msgid "Forum posts written"
+msgstr "Foorumiviestejä kirjoitettu"
+
+#, fuzzy
+msgid "Comments written"
+msgstr "Kirjoitettuja kommentteja"
+
+#, fuzzy
+msgid "Comments received"
+msgstr "Vastaanotettuja kommentteja"
+
+#, fuzzy
+msgid "Likes received"
+msgstr "Vastaanotettuja tykkäyksiä"
+
+#, fuzzy
+msgid "Views received"
+msgstr "Näyttökerrat"
+
+#, fuzzy
+msgid "No date specified"
+msgstr "Ei päivämäärää määritelty"
+
+#, fuzzy
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr ""
+"Ei kuvausteleskooppeja tai -objektiiveja, tai ei kuvauskameroita määritelty"
+
+#, fuzzy
+msgid "Gear images"
+msgstr "Välinekuvat"
+
+#, fuzzy
+msgid "Deep sky"
+msgstr "Syvä taivas"
+
+#, fuzzy
+msgid "Solar system"
+msgstr "Aurinkokunta"
+
+#, fuzzy
+msgid "Extremely wide field"
+msgstr "Erittäin laaja kenttä"
+
+#, fuzzy
+msgid "Star trails"
+msgstr "Tähtipolut"
+
+#, fuzzy
+msgid "Northern lights"
+msgstr "Revontulet"
+
+#, fuzzy
+msgid "Noctilucent clouds"
+msgstr "Yöpilvet"
+
+#, fuzzy
+msgid "Gear"
+msgstr "Välineet"
+
+#, fuzzy
+msgid "Other"
+msgstr "Muut"
+
+#, fuzzy
+msgid "All"
+msgstr "Kaikki"
+
+#, fuzzy
+msgid "n/a"
+msgstr "n/a"
+
+#, fuzzy
+msgid "No subjects specified"
+msgstr "Ei aiheita määritelty"
+
+#, fuzzy
+msgid "No acquisition details specified"
+msgstr "Ei hankintatietoja määritelty"
