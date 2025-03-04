@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:59+0000\n"
 "Language: zh-Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +39,7 @@ msgid "Subscription"
 msgstr "订阅"
 
 msgid "Paying member"
-msgstr ""
+msgstr "付费会员"
 
 msgid "Migrate donations"
 msgstr "迁移捐赠"
@@ -144,7 +144,7 @@ msgstr "您在 AstroBin \"%(subscription_name)s\" 上的订阅将在一周内自
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
 "attempt to renew it automatically."
-msgstr ""
+msgstr "您在 AstroBin 上有一个自动续订的订阅，我们将尝试自动续订。"
 
 msgid "Thank you!"
 msgstr "谢谢！"
@@ -518,3 +518,128 @@ msgstr "您的 AstroBin 订阅将在30天内自动续订"
 #~ "reported an internal server error."
 #~ msgstr ""
 #~ "AstroBin 无法解析这张作品，因为 nova.astrometry.net 内部服务器错误。"
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an unepexted error."
+#~ msgstr ""
+#~ "AstroBin 无法对这张图片进行板块解算，因为 nova.astrometry.net 报告了一个意"
+#~ "外错误。"
+
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds "
+#~ "1965)"
+#~ msgstr "显示来自林德斯明亮星云目录 (LBN) 的天体 (林德斯 1965)"
+
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+#~ msgstr "显示来自林德斯暗星云目录 (LDN) 的天体 (林德斯 1962)"
+
+#~ msgid "Show quasars"
+#~ msgstr "显示类星体"
+
+#~ msgid "Missing"
+#~ msgstr "缺失"
+
+#~ msgid "Basic pending"
+#~ msgstr "基本待处理"
+
+#~ msgid "Basic failed"
+#~ msgstr "基本失败"
+
+#~ msgid "Basic success"
+#~ msgstr "基本成功"
+
+#~ msgid "Advanced pending"
+#~ msgstr "高级待处理"
+
+#~ msgid "Advanced failed"
+#~ msgstr "高级失败"
+
+#~ msgid "Advanced success"
+#~ msgstr "高级成功"
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because of an unexpected error."
+#~ msgstr "AstroBin 无法对这张图片进行板块解算，因为发生了一个意外错误。"
+
+#~ msgid "n/a"
+#~ msgstr "不适用"
+
+#~ msgid "Starting task..."
+#~ msgstr "正在启动任务..."
+
+#~ msgid "Downloading image..."
+#~ msgstr "正在下载图片..."
+
+#~ msgid "Plate-solving image..."
+#~ msgstr "正在对图片进行板块解算..."
+
+#~ msgid "Generating image annotations..."
+#~ msgstr "正在生成图片注释..."
+
+#~ msgid "Processing SVG documents..."
+#~ msgstr "正在处理 SVG 文档..."
+
+#~ msgid "Uploading results..."
+#~ msgstr "正在上传结果..."
+
+#~ msgid "Task completed"
+#~ msgstr "任务完成"
+
+#~ msgid "Plate-solving information"
+#~ msgstr "板块解算信息"
+
+#~ msgid "Status"
+#~ msgstr "状态"
+
+#~ msgid "Started"
+#~ msgstr "已开始"
+
+#~ msgid "Astrometry.net job"
+#~ msgstr "Astrometry.net 任务"
+
+#~ msgid "PixInsight job"
+#~ msgstr "PixInsight 任务"
+
+#~ msgid "PixInsight queue size"
+#~ msgstr "PixInsight 队列大小"
+
+#~ msgid "PixInsight stage"
+#~ msgstr "PixInsight 阶段"
+
+#~ msgid "PixInsight log"
+#~ msgstr "PixInsight 日志"
+
+#~ msgid "RA"
+#~ msgstr "赤经"
+
+#~ msgid "center"
+#~ msgstr "中心"
+
+#~ msgid "degrees"
+#~ msgstr "度"
+
+#~ msgid "top/left"
+#~ msgstr "顶部/左侧"
+
+#~ msgid "top/right"
+#~ msgstr "顶部/右侧"
+
+#~ msgid "bottom/right"
+#~ msgstr "底部/右侧"
+
+#~ msgid "bottom/left"
+#~ msgstr "底部/左侧"
+
+#~ msgid "Dec"
+#~ msgstr "十二月"
+
+#~ msgid "Close"
+#~ msgstr "关闭"
+
+#~ msgid "Invalid"
+#~ msgstr "无效"
+
+#~ msgid "Generating finding charts..."
+#~ msgstr "正在生成查找图..."

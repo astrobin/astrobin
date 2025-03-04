@@ -1,649 +1,866 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:59+0000\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
+#, fuzzy
 msgid ""
 "This edit proposal cannot be approved because an item with this brand and "
 "name already exists. Please reject it."
 msgstr ""
+"Ez a szerkesztési javaslat nem hagyható jóvá, mert már létezik egy ilyen "
+"márkájú és nevű elem. Kérlek, utasítsd el."
 
+#, fuzzy
 msgid ""
 "This edit proposal needs to be approved by a moderator because it changes "
 "the name of the item."
 msgstr ""
+"Ez a szerkesztési javaslat moderátor általi jóváhagyást igényel, mert "
+"megváltoztatja az elem nevét."
 
+#, fuzzy
 msgid "Currency not supported."
-msgstr ""
+msgstr "Valuta nem támogatott."
 
+#, fuzzy
 msgid "AstroBin couldn't fetch an exchange rate for the selected currency."
-msgstr ""
+msgstr "Az AstroBin nem tudta lekérni a kiválasztott valuta árfolyamát."
 
+#, fuzzy
 msgid "Invalid condition."
-msgstr ""
+msgstr "Érvénytelen állapot."
 
+#, fuzzy
 msgid "Someone else is working on this item right now. Please try again later."
 msgstr ""
+"Valaki éppen most dolgozik ezen a tételeken. Kérlek, próbáld meg később."
 
+#, fuzzy
 msgid "Computer"
-msgstr ""
+msgstr "Számítógép"
 
+#, fuzzy
 msgid "Dew mitigation"
-msgstr ""
+msgstr "Harmatosodás csökkentése"
 
+#, fuzzy
 msgid "Field derotator / camera rotator"
-msgstr ""
+msgstr "Mező derotátor / kamera rotátor"
 
+#, fuzzy
 msgid "Filter wheel"
-msgstr ""
+msgstr "Szűrőkerék"
 
+#, fuzzy
 msgid "Flat box"
-msgstr ""
+msgstr "Flat Frame doboz"
 
+#, fuzzy
 msgid "Focal modifier / field corrector"
-msgstr ""
+msgstr "Fókusz módosító / mezőkorrekció"
 
+#, fuzzy
 msgid "Focuser"
-msgstr ""
+msgstr "Fókuszáló"
 
+#, fuzzy
 msgid "Off-axis guider"
-msgstr ""
+msgstr "Off-axis irányzó"
 
+#, fuzzy
 msgid "Observatory control"
-msgstr ""
+msgstr "Obszervatórium vezérlés"
 
+#, fuzzy
 msgid "Observatory dome"
-msgstr ""
+msgstr "Obszervatórium kupola"
 
+#, fuzzy
 msgid "Power distribution"
-msgstr ""
+msgstr "Áramellátás"
 
+#, fuzzy
 msgid "Weather monitoring"
-msgstr ""
+msgstr "Időjárás figyelés"
 
+#, fuzzy
 msgid "Mount control"
-msgstr ""
+msgstr "Montázs vezérlés"
 
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "Egyéb"
 
+#, fuzzy
 msgid "Type"
-msgstr ""
+msgstr "Típus"
 
+#, fuzzy
 msgid "Unknown"
-msgstr ""
+msgstr "Ismeretlen"
 
+#, fuzzy
 msgctxt "Pertaining to cameras, e.g. a modified Canon"
 msgid "modified"
-msgstr ""
+msgstr "módosított"
 
+#, fuzzy
 msgid "cooled"
-msgstr ""
+msgstr "hűtött"
 
+#, fuzzy
 msgid "Dedicated deep-sky camera"
-msgstr ""
+msgstr "Dedikált mély-ég kamera"
 
+#, fuzzy
 msgid "General purpose DSLR or mirrorless camera"
-msgstr ""
+msgstr "Általános célú DSLR vagy tükör nélküli kamera"
 
+#, fuzzy
 msgid "Guider/Planetary camera"
-msgstr ""
+msgstr "Irányító / bolygó kamera"
 
+#, fuzzy
 msgid "General purpose video camera"
-msgstr ""
+msgstr "Általános célú videokamera"
 
+#, fuzzy
 msgid "Film camera"
-msgstr ""
+msgstr "Filmes kamera"
 
+#, fuzzy
 msgid "Sensor"
-msgstr ""
+msgstr "Érzékelő"
 
+#, fuzzy
 msgid "Cooled"
-msgstr ""
+msgstr "Hűtött"
 
+#, fuzzy
 msgid "Max. cooling (C)"
-msgstr ""
+msgstr "Max. hűtés (C)"
 
+#, fuzzy
 msgid "Back focus (mm)"
-msgstr ""
+msgstr "Hátsó fókusz (mm)"
 
+#, fuzzy
 msgid "Yes"
-msgstr ""
+msgstr "Igen"
 
+#, fuzzy
 msgid "No"
-msgstr ""
+msgstr "Nem"
 
+#, fuzzy
 msgid "Approved"
-msgstr ""
+msgstr "Jóváhagyva"
 
+#, fuzzy
 msgid "Rejected"
-msgstr ""
+msgstr "Elutasítva"
 
+#, fuzzy
 msgid "Superseded"
-msgstr ""
+msgstr "Helyettesítve"
 
+#, fuzzy
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
+#, fuzzy
 msgid "Telescope"
-msgstr ""
+msgstr "Teleszkóp"
 
+#, fuzzy
 msgid "Mount"
-msgstr ""
+msgstr "Montázs"
 
+#, fuzzy
 msgid "Filter"
-msgstr ""
+msgstr "Szűrő"
 
+#, fuzzy
 msgid "Accessory"
-msgstr ""
+msgstr "Kiegészítő"
 
+#, fuzzy
 msgid "Software"
-msgstr ""
+msgstr "Szoftver"
 
+#, fuzzy
 msgid "Imaging"
-msgstr ""
+msgstr "Képalkotás"
 
+#, fuzzy
 msgid "Guiding"
-msgstr ""
+msgstr "Irányzás"
 
+#, fuzzy
 msgid "Back order"
-msgstr ""
+msgstr "Hátralevő rendelés"
 
+#, fuzzy
 msgid "In stock"
-msgstr ""
+msgstr "Készleten"
 
+#, fuzzy
 msgid "Out of stock"
-msgstr ""
+msgstr "Nincs készleten"
 
+#, fuzzy
 msgid "Negative"
-msgstr ""
+msgstr "Negatív"
 
+#, fuzzy
 msgid "Neutral"
-msgstr ""
+msgstr "Semleges"
 
+#, fuzzy
 msgid "Positive"
-msgstr ""
+msgstr "Pozitív"
 
+#, fuzzy
 msgid "Seller"
-msgstr ""
+msgstr "Eladó"
 
+#, fuzzy
 msgid "Buyer"
-msgstr ""
+msgstr "Vásárló"
 
+#, fuzzy
 msgid "For sale"
-msgstr ""
+msgstr "Eladó"
 
+#, fuzzy
 msgid "Wanted"
-msgstr ""
+msgstr "Keresek"
 
+#, fuzzy
 msgid "Standard mail"
-msgstr ""
+msgstr "Normál posta"
 
+#, fuzzy
 msgid "Courier"
-msgstr ""
+msgstr "Futár"
 
+#, fuzzy
 msgid "Electronic"
-msgstr ""
+msgstr "Elektronikus"
 
+#, fuzzy
 msgid "Unopened"
-msgstr ""
+msgstr "Fel nem bontott"
 
+#, fuzzy
 msgid "New"
-msgstr ""
+msgstr "Új"
 
+#, fuzzy
 msgid "Used"
-msgstr ""
+msgstr "Használt"
 
+#, fuzzy
 msgid "Damaged or defective"
-msgstr ""
+msgstr "Sérült vagy hibás"
 
+#, fuzzy
 msgid "Remote data source"
-msgstr ""
+msgstr "Távadatforrás"
 
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
+#, fuzzy
 msgid "Imaging telescopes or lenses"
-msgstr ""
+msgstr "Képalkotó teleszkópok vagy lencsék"
 
+#, fuzzy
 msgid "Guiding telescopes or lenses"
-msgstr ""
+msgstr "Irányító teleszkópok vagy lencsék"
 
+#, fuzzy
 msgid "Mounts"
-msgstr ""
+msgstr "Tartók"
 
+#, fuzzy
 msgid "Imaging cameras"
-msgstr ""
+msgstr "Képalkotó kamerák"
 
+#, fuzzy
 msgid "Guiding cameras"
-msgstr ""
+msgstr "Irányító kamerák"
 
+#, fuzzy
 msgid "Filters"
-msgstr ""
+msgstr "Szűrők"
 
+#, fuzzy
 msgid "Accessories"
-msgstr ""
+msgstr "Kiegészítők"
 
+#, fuzzy
 msgid "Hydrogen-alpha (Hα)"
-msgstr ""
+msgstr "Hidrogén-alfa (Hα)"
 
+#, fuzzy
 msgid "Hydrogen-beta (Hβ)"
-msgstr ""
+msgstr "Hidrogén-béta (Hβ)"
 
+#, fuzzy
 msgid "Sulfur-II (SII)"
-msgstr ""
+msgstr "Kén-II (SII)"
 
+#, fuzzy
 msgid "Oxygen-III (OIII)"
-msgstr ""
+msgstr "Oxigén-III (OIII)"
 
+#, fuzzy
 msgid "Nitrogen-II (NII)"
-msgstr ""
+msgstr "Nitrogén-II (NII)"
 
+#, fuzzy
 msgid "Ultraviolet (UV)"
-msgstr ""
+msgstr "Ultraviola (UV)"
 
+#, fuzzy
 msgid "Infrared (IR)"
-msgstr ""
+msgstr "Infravörös (IR)"
 
+#, fuzzy
 msgid "Multiband"
-msgstr ""
+msgstr "Több sávos"
 
+#, fuzzy
 msgid "Light pollution suppression"
-msgstr ""
+msgstr "Fény szennyezés csökkentés"
 
+#, fuzzy
 msgid "Luminance/clear (L)"
-msgstr ""
+msgstr "Luminancia / tiszta (L)"
 
+#, fuzzy
 msgid "Red channel (R)"
-msgstr ""
+msgstr "Piros csatorna (R)"
 
+#, fuzzy
 msgid "Green channel (G)"
-msgstr ""
+msgstr "Zöld csatorna (G)"
 
+#, fuzzy
 msgid "Blue channel (B)"
-msgstr ""
+msgstr "Kék csatorna (B)"
 
+#, fuzzy
 msgid "Neutral density (ND)"
-msgstr ""
+msgstr "Semleges sűrűség (ND)"
 
+#, fuzzy
 msgid "Ultra High Contrast (UHC)"
-msgstr ""
+msgstr "Ultra Magas Kontraszt (UHC)"
 
+#, fuzzy
 msgid "Sky glow"
-msgstr ""
+msgstr "Égvilágítás"
 
+#, fuzzy
 msgid "Solar"
-msgstr ""
+msgstr "Nap"
 
+#, fuzzy
 msgid "Lunar"
-msgstr ""
+msgstr "Hold"
 
+#, fuzzy
 msgid "Planetary"
-msgstr ""
+msgstr "Bolygó"
 
+#, fuzzy
 msgid "Cometary"
-msgstr ""
+msgstr "Üstökös"
 
+#, fuzzy
 msgid "Photometric Ultraviolet"
-msgstr ""
+msgstr "Fotometrikus Ultraviolet"
 
+#, fuzzy
 msgid "Photometric Blue"
-msgstr ""
+msgstr "Fotometrikus Kék"
 
+#, fuzzy
 msgid "Photometric Visual"
-msgstr ""
+msgstr "Fotometrikus vizuális"
 
+#, fuzzy
 msgid "Photometric Red"
-msgstr ""
+msgstr "Fotometrikus Piros"
 
+#, fuzzy
 msgid "Photometric Infrared"
-msgstr ""
+msgstr "Fotometrikus Infravörös"
 
+#, fuzzy
 msgid "Round"
-msgstr ""
+msgstr "Kerek"
 
+#, fuzzy
 msgid "Square"
-msgstr ""
+msgstr "Négyzet"
 
+#, fuzzy
 msgid "Rectangular"
-msgstr ""
+msgstr "Téglalap"
 
+#, fuzzy
 msgid "Bandwidth (nm)"
-msgstr ""
+msgstr "Sávszélesség (nm)"
 
+#, fuzzy
 msgid "Size"
-msgstr ""
+msgstr "Méret"
 
+#, fuzzy
 msgid "Alt-Az (altazimuth)"
-msgstr ""
+msgstr "Alt-Az (altazimutális)"
 
+#, fuzzy
 msgid "Wedged Alt-Az"
-msgstr ""
+msgstr "Fokozatos Alt-Az"
 
+#, fuzzy
 msgid "Equatorial"
-msgstr ""
+msgstr "Ekvatoriális"
 
+#, fuzzy
 msgid "German equatorial"
-msgstr ""
+msgstr "Német egyenlítői"
 
+#, fuzzy
 msgid "Fork"
-msgstr ""
+msgstr "Villás"
 
+#, fuzzy
 msgid "Dobsonian"
-msgstr ""
+msgstr "Dobsoni"
 
+#, fuzzy
 msgid "Portable English"
-msgstr ""
+msgstr "Hordozható angol"
 
+#, fuzzy
 msgid "Star tracker"
-msgstr ""
+msgstr "Csillagkövető"
 
+#, fuzzy
 msgid "Alt-Alt (altitude-altitude)"
-msgstr ""
+msgstr "Alt-Alt (magasság-magasság)"
 
+#, fuzzy
 msgid "Transit"
-msgstr ""
+msgstr "Átmenet"
 
+#, fuzzy
 msgid "Hexapod"
-msgstr ""
+msgstr "Hexapod"
 
+#, fuzzy
 msgid "Tripod"
-msgstr ""
+msgstr "Állvány"
 
+#, fuzzy
 msgid "Dual Alt-Az / Equatorial"
-msgstr ""
+msgstr "Kettős Alt-Az / Ekvatoriális"
 
+#, fuzzy
 msgid "Weight (kg)"
-msgstr ""
+msgstr "Súly (kg)"
 
+#, fuzzy
 msgid "Payload (kg)"
-msgstr ""
+msgstr "Teher (kg)"
 
+#, fuzzy
 msgid "Computerized"
-msgstr ""
+msgstr "Számítógépes"
 
+#, fuzzy
 msgid "Periodic error (arcsec)"
-msgstr ""
+msgstr "Időszakos hiba (ívmásodperc)"
 
+#, fuzzy
 msgid "Periodic error correction"
-msgstr ""
+msgstr "Időszakos hiba korrekció"
 
+#, fuzzy
 msgid "Slew speed (deg/sec)"
-msgstr ""
+msgstr "Sebesség (fok/sec)"
 
+#, fuzzy
 msgid "Quantum efficiency"
-msgstr ""
+msgstr "Kvantalás hatékonyság"
 
+#, fuzzy
 msgid "Pixel size (μm)"
-msgstr ""
+msgstr "Pixel méret (μm)"
 
+#, fuzzy
 msgid "Pixel width"
-msgstr ""
+msgstr "Pixel szélesség"
 
+#, fuzzy
 msgid "Pixel height"
-msgstr ""
+msgstr "Pixel magasság"
 
+#, fuzzy
 msgid "Sensor width (mm)"
-msgstr ""
+msgstr "Érzékelő szélesség (mm)"
 
+#, fuzzy
 msgid "Sensor height (mm)"
-msgstr ""
+msgstr "Érzékelő magasság (mm)"
 
+#, fuzzy
 msgid "Full well capacity"
-msgstr ""
+msgstr "Teljes kút kapacitás"
 
+#, fuzzy
 msgid "Read noise (e-)"
-msgstr ""
+msgstr "Olvasási zaj (e-)"
 
+#, fuzzy
 msgid "Frame rate"
-msgstr ""
+msgstr "Képfrissítési sebesség"
 
+#, fuzzy
 msgid "Color"
-msgstr ""
+msgstr "Szín"
 
+#, fuzzy
 msgid "Monochromatic"
-msgstr ""
+msgstr "Monokromatikus"
 
+#, fuzzy
 msgid "Color or mono"
-msgstr ""
+msgstr "Színes vagy mono"
 
+#, fuzzy
 msgid "Refractor: achromatic"
-msgstr ""
+msgstr "Refraktor: achromatikus"
 
+#, fuzzy
 msgid "Refractor: semi-apochromatic"
-msgstr ""
+msgstr "Refraktor: félig apokromatikus"
 
+#, fuzzy
 msgid "Refractor: apochromatic"
-msgstr ""
+msgstr "Refraktor: apokromatikus"
 
+#, fuzzy
 msgid "Refractor: non-achromatic Galilean"
-msgstr ""
+msgstr "Refraktor: nem achromatikus Galilei"
 
+#, fuzzy
 msgid "Refractor: non-achromatic Keplerian"
-msgstr ""
+msgstr "Refraktor: nem achromatikus Kepleri"
 
+#, fuzzy
 msgid "Refractor: superachromat"
-msgstr ""
+msgstr "Refraktor: szuperachromatikus"
 
+#, fuzzy
 msgid "Refractor: Petzval"
-msgstr ""
+msgstr "Refraktor: Petzval"
 
+#, fuzzy
 msgid "Reflector: Dall-Kirkham"
-msgstr ""
+msgstr "Reflektor: Dall-Kirkham"
 
+#, fuzzy
 msgid "Reflector: Nasmyth"
-msgstr ""
+msgstr "Reflektor: Nasmyth"
 
+#, fuzzy
 msgid "Reflector: Ritchey Chretien"
-msgstr ""
+msgstr "Reflektor: Ritchey Chretien"
 
+#, fuzzy
 msgid "Reflector: Gregorian"
-msgstr ""
+msgstr "Reflektor: Gregorian"
 
+#, fuzzy
 msgid "Reflector: Herschellian"
-msgstr ""
+msgstr "Reflektor: Herschellian"
 
+#, fuzzy
 msgid "Reflector: Newtonian"
-msgstr ""
+msgstr "Reflektor: Newtoni"
 
+#, fuzzy
 msgid "Reflector: Dobsonian"
-msgstr ""
+msgstr "Reflektor: Dobsonian"
 
+#, fuzzy
 msgid "Reflector: classical Cassegrain"
-msgstr ""
+msgstr "Reflektor: klasszikus Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Argunov-Cassegrain"
-msgstr ""
+msgstr "Katadioptrikus: Argunov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Klevtsov-Cassegrain"
-msgstr ""
+msgstr "Katadioptrikus: Klevtsov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Lurie-Houghton"
-msgstr ""
+msgstr "Katadioptrikus: Lurie-Houghton"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov"
-msgstr ""
+msgstr "Katadioptrikus: Maksutov"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov-Cassegrain"
-msgstr ""
+msgstr "Katadioptrikus: Maksutov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov-Newtonian"
-msgstr ""
+msgstr "Katadioptrikus: Maksutov-Newtonian"
 
+#, fuzzy
 msgid "Catadioptric: modified Dall-Kirkham"
-msgstr ""
+msgstr "Katadioptrikus: módosított Dall-Kirkham"
 
+#, fuzzy
 msgid "Catadioptric: Schmidt camera"
-msgstr ""
+msgstr "Katadioptrikus: Schmidt kamera"
 
+#, fuzzy
 msgid "Catadioptric: Schmidt-Cassegrain"
-msgstr ""
+msgstr "Katadioptrikus: Schmidt-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgstr ""
+msgstr "Katadioptrikus: ACF Schmidt-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
-msgstr ""
+msgstr "Katadioptrikus: Rowe-Ackermann Schmidt asztrofotográf"
 
+#, fuzzy
 msgid "Catadioptric: Riccardi-Honders"
-msgstr ""
+msgstr "Katadioptrikus: Riccardi-Honders"
 
+#, fuzzy
 msgid "Catadioptric: modified Harmer-Wynne"
-msgstr ""
+msgstr "Katadioptrikus: módosított Harmer-Wynne"
 
+#, fuzzy
 msgid "Camera lens"
-msgstr ""
+msgstr "Fényképezőgép lencse"
 
+#, fuzzy
 msgid "Binoculars"
-msgstr ""
+msgstr "Távcső"
 
+#, fuzzy
 msgid "Aperture (mm)"
-msgstr ""
+msgstr "Nyílás (mm)"
 
+#, fuzzy
 msgid "Min. focal length (mm)"
-msgstr ""
+msgstr "Min. fókusztávolság (mm)"
 
+#, fuzzy
 msgid "Max. focal length (mm)"
-msgstr ""
+msgstr "Max. gyújtótávolság (mm)"
 
+#, fuzzy
 msgid "Focal length (mm)"
-msgstr ""
+msgstr "Fókusztávolság (mm)"
 
+#, fuzzy
 msgid "A new equipment item requires moderation"
-msgstr ""
+msgstr "Egy új felszerelés moderálásra vár"
 
+#, fuzzy
 msgid "Equipment item you created was approved"
-msgstr ""
+msgstr "Az általad létrehozott felszerelés jóváhagyva lett"
 
+#, fuzzy
 msgid "Equipment item was assigned to you"
-msgstr ""
+msgstr "A felszerelés hozzád lett rendelve"
 
+#, fuzzy
 msgid "Equipment item you created was rejected"
-msgstr ""
+msgstr "Az általad létrehozott felszerelés elutasítva lett"
 
+#, fuzzy
 msgid "Rejected equipment item removed from your image"
-msgstr ""
+msgstr "Az elutasított felszerelést eltávolították a képedből"
 
+#, fuzzy
 msgid "Equipment item received an edit proposal"
-msgstr ""
+msgstr "A felszereléshez szerkesztési javaslat érkezett"
 
+#, fuzzy
 msgid "Your edit proposal was approved"
-msgstr ""
+msgstr "A szerkesztési javaslatod jóváhagyva lett"
 
+#, fuzzy
 msgid "Edit proposal assigned to you"
-msgstr ""
+msgstr "Szerkesztési javaslat hozzád rendelve"
 
+#, fuzzy
 msgid "Your edit proposal was rejected"
-msgstr ""
+msgstr "Az edit javaslatodat elutasították"
 
+#, fuzzy
 msgid "Approved migration proposal of an equipment item"
-msgstr ""
+msgstr "Jóváhagyott migrációs javaslat egy felszerelésre"
 
+#, fuzzy
 msgid "Rejected migration proposal of an equipment item"
-msgstr ""
+msgstr "Elutasított migrációs javaslat egy felszerelésre"
 
+#, fuzzy
 msgid "Ambiguous equipment item removed from presets"
-msgstr ""
+msgstr "Kétértelmű felszerelés eltávolítva az előbeállításokból"
 
+#, fuzzy
 msgid "New image from followed equipment item"
-msgstr ""
+msgstr "Új kép a követett felszerelésből"
 
+#, fuzzy
 msgid "New offer for your marketplace listing"
-msgstr ""
+msgstr "Új ajánlat a piactéri hirdetésedre"
 
+#, fuzzy
 msgid "Your offer for a marketplace listing was recorded"
-msgstr ""
+msgstr "Az ajánlatodat a piactéri hirdetésre rögzítették"
 
+#, fuzzy
 msgid "Offer for your marketplace listing got updated"
-msgstr ""
+msgstr "Az ajánlatod frissítve lett a piactéri hirdetésre"
 
+#, fuzzy
 msgid "Your offer for a marketplace listing was updated"
-msgstr ""
+msgstr "A piactéri hirdetésed ajánlata frissítve lett"
 
+#, fuzzy
 msgid "Marketplace offer accepted by seller"
-msgstr ""
+msgstr "A piactéri ajánlatot a eladó elfogadta"
 
+#, fuzzy
 msgid "Marketplace offer accepted by you"
-msgstr ""
+msgstr "A piactéri ajánlatot te fogadtad el"
 
+#, fuzzy
 msgid "Marketplace offer rejected by seller"
-msgstr ""
+msgstr "A piactéri ajánlatot az eladó elutasította"
 
+#, fuzzy
 msgid "Marketplace offer retracted by buyer"
-msgstr ""
+msgstr "A piactéri ajánlatot a vevő visszavonta"
 
+#, fuzzy
 msgid "Marketplace offer retracted successfully"
-msgstr ""
+msgstr "A piactéri ajánlat sikeresen visszavonva"
 
+#, fuzzy
 msgid "Marketplace listing updated"
-msgstr ""
+msgstr "A piactéri hirdetés frissítve lett"
 
+#, fuzzy
 msgid "Marketplace listing deleted"
-msgstr ""
+msgstr "A piactéri hirdetés törölve lett"
 
+#, fuzzy
 msgid "Marketplace listing approved"
-msgstr ""
+msgstr "Piacra tett hirdetés jóváhagyva"
 
+#, fuzzy
 msgid "Marketplace listing expired"
-msgstr ""
+msgstr "A piactéri hirdetés lejárt"
 
+#, fuzzy
 msgid "Marketplace listing line item sold"
-msgstr ""
+msgstr "A piactéri hirdetés tétel eladva"
 
+#, fuzzy
 msgid "Marketplace listing line item reserved"
-msgstr ""
+msgstr "A piactéri hirdetés tétel lefoglalva"
 
+#, fuzzy
 msgid "New marketplace listing by user you follow"
-msgstr ""
+msgstr "Új piactéri hirdetés a követett felhasználótól"
 
+#, fuzzy
 msgid "New marketplace listing for item you follow"
-msgstr ""
+msgstr "Új piactéri hirdetés az általad követett elemhez"
 
+#, fuzzy
 msgid "Rate the seller for your recent purchase"
-msgstr ""
+msgstr "Értékeld az eladót a legutóbbi vásárlásodért"
 
+#, fuzzy
 msgid "Rate the buyer for your recent sale"
-msgstr ""
+msgstr "Értékeld a vevőt a legutóbbi eladásodért"
 
+#, fuzzy
 msgid "Mark your listing as sold if needed"
-msgstr ""
+msgstr "Jelöld meg a hirdetésedet eladottnak, ha szükséges"
 
+#, fuzzy
 msgid "New comment to a marketplace feedback you received"
-msgstr ""
+msgstr "Új megjegyzés egy piactéri visszajelzéshez, amit kaptál"
 
+#, fuzzy
 msgid "New comment to a marketplace feedback you left"
-msgstr ""
+msgstr "Új hozzászólás egy piactéri visszajelzéshez, amit hagytál"
 
+#, fuzzy
 msgid "New marketplace feedback"
-msgstr ""
+msgstr "Új piactéri visszajelzés"
 
+#, fuzzy
 msgid "Marketplace feedback updated"
-msgstr ""
+msgstr "A piactéri visszajelzés frissítve lett"
 
+#, fuzzy
 msgid "Unspecified"
-msgstr ""
+msgstr "Nem meghatározott"
 
 #, python-format
 msgid ""
 "Equipment item <strong>%(item)s</strong>  has been marked as ambiguous by a "
 "moderator, and removed from your presets."
 msgstr ""
+"A felszerelés <strong>%(item)s</strong> kétértelműnek lett jelölve egy "
+"moderátor által, és eltávolítva az előbeállításaidból."
 
 #, python-format
 msgid ""
 "This happened because \"%(item)s\" is not specific enough, and unambiguous "
 "variants already exist in the database."
 msgstr ""
+"Ez azért történt, mert \"%(item)s\" nem elég specifikus, és már léteznek "
+"egyértelmű változatai az adatbázisban."
 
+#, fuzzy
 msgid ""
 "New images cannot be associated with this item anymore, but your past images "
 "have not been modified."
 msgstr ""
+"Új képek már nem társíthatók ehhez az elemhez, de a korábbi képeid nem "
+"lettek módosítva."
 
 #, python-format
 msgid ""
@@ -651,136 +868,185 @@ msgid ""
 "unambiguous version from the database instead, and then feel free to update "
 "your affected preset by saving it again."
 msgstr ""
+"Legközelebb, amikor egy képet töltesz fel, amihez \"%(item)s\" szükséges, "
+"kérlek válassz egy egyértelmű verziót az adatbázisból, és utána nyugodtan "
+"frissítheted az érintett előbeállítást az újra mentésével."
 
+#, fuzzy
 msgid "View item"
-msgstr ""
+msgstr "Elem megtekintése"
 
+#, fuzzy
 msgid "Thank you for your understanding."
-msgstr ""
+msgstr "Köszönjük a megértésed."
 
 #, python-format
 msgid ""
 "Equipment item \"%(item)s\" has been marked as ambiguous by a moderator, and "
 "removed from your presets"
 msgstr ""
+"A \"%(item)s\" felszerelést kétértelműnek jelölte meg egy moderátor, és "
+"eltávolította az előbeállításaidból."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets."
 msgstr ""
+"A %(_0)s%(item)s%(_1)s felszerelést kétértelműnek jelölte meg egy moderátor, "
+"és eltávolította az előbeállításaidból."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets"
 msgstr ""
+"A(z) %(_0)s%(item)s%(_1)s felszerelési elem moderátor által kétértelműnek "
+"lett jelölve, és eltávolították a beállításaid közül."
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> commented a marketplace feedback that "
 "you left."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hozzászólt egy piactéri "
+"visszajelzéshez, amit hagytál."
 
+#, fuzzy
 msgid "View comment"
-msgstr ""
+msgstr "Hozzászólás megtekintése"
 
 #, python-format
 msgid "%(user)s commented a marketplace feedback you that left."
-msgstr ""
+msgstr "%(user)s hozzászólt egy piactéri visszajelzéshez, amit hagytál."
 
+#, fuzzy
 msgid "Check it out at the following url:"
-msgstr ""
+msgstr "Nézd meg a következő URL-en:"
 
 #, python-format
 msgid "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you left."
 msgstr ""
+"%(_0)s%(user)s%(_1)s hozzászólt egy piactéri visszajelzéshez, amit hagytál."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
 msgstr ""
+"%(_0)s%(user)s%(_1)s hozzászólt egy piactéri visszajelzéshez, amit kaptál."
 
+#, fuzzy
 msgid ""
 "You received this notification because you created this equipment item or "
 "this edit proposal."
 msgstr ""
+"Ezt az értesítést azért kaptad, mert te hoztad létre ezt a felszerelést vagy "
+"ezt a szerkesztési javaslatot."
 
+#, fuzzy
 msgid "The reviewer left the following comment:"
-msgstr ""
+msgstr "A bíráló a következő megjegyzést hagyta: "
 
+#, fuzzy
 msgid "View edit proposal"
-msgstr ""
+msgstr "Javaslat megtekintése"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
 "%(item)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s jóváhagyott egy szerkesztési javaslatot a(z) %(_0)s"
+"%(item)s%(_1)s felszerelési elemhez"
 
+#, fuzzy
 msgid "Please review it as soon as possible, thank you!"
-msgstr ""
+msgstr "Kérlek, nézd át minél hamarabb, köszi! "
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
 "%(item)s%(_1)s to you for review"
 msgstr ""
+"%(_0)s%(user)s%(_1)s egy javaslatot rendelt az %(_0)s%(item)s%(_1)s "
+"felszereléshez, hogy átnézd."
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> proposed an edit to the equipment item "
 "<a href=\"%(item_url)s\">%(item)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> javasolt egy módosítást az <a href="
+"\"%(item_url)s\">%(item)s</a> felszereléshez."
 
+#, fuzzy
 msgid "Please note"
-msgstr ""
+msgstr "Kérlek, vedd figyelembe"
 
+#, fuzzy
 msgid ""
 "This item has not been approved yet, therefore is not yet officially part of "
 "AstroBin's equipment database. Please review this edit proposal as soon as "
 "possible to prevent the possibility that this item be rejected."
 msgstr ""
+"Ez az elem még nem lett jóváhagyva, ezért még nem része az AstroBin "
+"felszerelés adatbázisának. Kérlek, nézd át ezt az edit javaslatot a lehető "
+"leghamarabb, hogy elkerüld, hogy az elemet elutasítsák."
 
+#, fuzzy
 msgid "Please review it as soon as possible."
-msgstr ""
+msgstr "Kérlek, nézd át minél hamarabb."
 
+#, fuzzy
 msgid ""
 "You received this notification because you created this equipment item, or "
 "you created/approved/rejected/commented an edit proposal for this item in "
 "the past."
 msgstr ""
+"Ezt az értesítést azért kaptad, mert te hoztad létre ezt a felszerelési "
+"elemet, vagy korábban létrehoztál/jóváhagytál/elutasítottál/kommentáltál egy "
+"szerkesztési javaslatot ehhez az elemhez."
 
 #, python-format
 msgid "%(user)s proposed an edit to the equipment item \"%(item)s\"."
-msgstr ""
+msgstr "%(user)s javasolt egy módosítást a \"%(item)s\" felszereléshez."
 
 #, python-format
 msgid ""
 "Please review an edit proposal for equipment item %(_0)s%(item)s%(_1)s by "
 "%(_0)s%(user)s%(_1)s"
 msgstr ""
+"Kérlek, nézd át a javaslatot az %(_0)s%(item)s%(_1)s felszereléshez, amit "
+"%(_0)s%(user)s%(_1)s készített."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
 "%(item)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s elutasította a javaslatot az %(_0)s%(item)s%(_1)s "
+"felszereléshez."
 
+#, fuzzy
 msgid "This item can now be added to images by anyone on AstroBin."
 msgstr ""
+"Ez az elem mostantól bárki által hozzáadható a képekhez az AstroBin-en."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s approved the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s jóváhagyta a %(_0)s%(item)s%(_1)s felszerelést, amit "
+"létrehoztál"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s assigned the equipment item %(_0)s%(item)s%(_1)s to you "
 "for review"
 msgstr ""
+"%(_0)s%(user)s%(_1)s az %(_0)s%(item)s%(_1)s felszerelést neked rendelte át, "
+"hogy átnézd."
 
 #, python-format
 msgid ""
@@ -788,6 +1054,9 @@ msgid ""
 "used on some of your images on AstroBin, has been migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
+"<em><strong>%(make)s</strong> %(name)s</em>, egy felszerelés, amit "
+"használtál néhány képedhez az AstroBin-en, átkerült az új AstroBin "
+"Felszerelés Adatbázisba."
 
 #, python-format
 msgid ""
@@ -795,28 +1064,39 @@ msgid ""
 "used on some of your images on AstroBin, could not be migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
+"<em><strong>%(make)s</strong> %(name)s</em>, egy felszerelés, amit "
+"használtál néhány képedhez az AstroBin-en, nem tudott átkerülni az új "
+"AstroBin Felszerelés Adatbázisba."
 
+#, fuzzy
 msgid "Reason"
-msgstr ""
+msgstr "Indok"
 
+#, fuzzy
 msgid "Target item"
-msgstr ""
+msgstr "Cél elem"
 
+#, fuzzy
 msgid "If you don't know what this means, please read this:"
-msgstr ""
+msgstr "Ha nem tudod, mit jelent ez, kérlek, olvasd el ezt: "
 
+#, fuzzy
 msgid ""
 "You can see all your migrations and undo any mistakes on the following page:"
 msgstr ""
+"Minden migrációd láthatod, és visszavonhatod a hibákat a következő oldalon: "
 
+#, fuzzy
 msgid "Thanks for your cooperation!"
-msgstr ""
+msgstr "Köszi az együttműködést!"
 
 #, python-format
 msgid ""
 "\"%(make)s %(name)s\", an equipment item that you have used on some of your "
 "images on AstroBin, has been migrated to the new AstroBin Equipment Database."
 msgstr ""
+"\"%(make)s %(name)s\", egy felszerelés, amit használtál néhány képedhez az "
+"AstroBin-en, átkerült az új AstroBin Felszerelés Adatbázisba."
 
 #, python-format
 msgid ""
@@ -824,54 +1104,79 @@ msgid ""
 "images on AstroBin, could not be migrated to the new AstroBin Equipment "
 "Database."
 msgstr ""
+"\"%(make)s %(name)s\", egy felszerelési elem, amit használtál néhány "
+"képedhez az AstroBin-en, nem tudott átkerülni az új AstroBin Felszerelési "
+"Adatbázisba."
 
 #, python-format
 msgid ""
 "%(_0)s%(make)s %(name)s%(_1)s has been migrated to the new AstroBin "
 "Equipment Database"
 msgstr ""
+"%(_0)s%(make)s %(name)s%(_1)s átkerült az új AstroBin Felszerelés Adatbázisba"
 
+#, fuzzy
 msgid "Proposed strategy"
-msgstr ""
+msgstr "Javasolt stratégia"
 
+#, fuzzy
 msgid "Reviewer's reason"
-msgstr ""
+msgstr "A bíráló indoka"
 
+#, fuzzy
 msgid "Reviewer's comment"
-msgstr ""
+msgstr "A bíráló megjegyzése"
 
+#, fuzzy
 msgid ""
 "The equipment item still needs to be migrated to the new database, so please "
 "try again after reading the reason and the comment provided by the reviewer "
 "below."
 msgstr ""
+"A felszerelés elemét még át kell vinni az új adatbázisba, ezért kérlek, "
+"próbáld újra, miután elolvastad az alábbi okot és a bíráló által megadott "
+"megjegyzést."
 
+#, fuzzy
 msgid "To try again with different parameters, please visit this page:"
 msgstr ""
+"Ha újra meg akarod próbálni más paraméterekkel, kérlek, látogass el erre az "
+"oldalra: "
 
+#, fuzzy
 msgid "Migration tool"
-msgstr ""
+msgstr "Migrációs eszköz"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
 "%(_1)s that you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s elutasította a(z) %(_0)s%(make)s %(name)s%(_1)s "
+"felszerelési elemet, amit te hoztál létre."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item migration that you created "
 "for %(_0)s%(make)s %(name)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s elutasította az %(_0)s%(make)s %(name)s%(_1)s "
+"felszerelés migrációját, amit létrehoztál."
 
+#, fuzzy
 msgid ""
 "This happened because somebody rejected the creation of this equipment item. "
 "Please remember that the AstroBin equipment database is collectively "
 "maintained by the community in order to keep a clean and orderly set of data."
 msgstr ""
+"Ez azért történt, mert valaki elutasította ennek a felszerelésnek a "
+"létrehozását. Kérlek, ne feledd, hogy az AstroBin felszerelés adatbázisát "
+"közösen tartja fenn a közösség, hogy tiszta és rendezett adatokat "
+"biztosítson."
 
+#, fuzzy
 msgid "The reviewer cited the following code as the reason for the rejection:"
-msgstr ""
+msgstr "A bíráló a következő kódot idézte az elutasítás indokaként: "
 
 #, python-format
 msgid ""
@@ -879,34 +1184,51 @@ msgid ""
 "\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
 "accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
+"Mivel a felszerelési elemedet a <a href=\"%(duplicate_of_url)s\">"
+"%(duplicate_of)s</a> másolataként jelölték meg, a képed ennek megfelelően "
+"frissült, és <strong>nem kell semmit tenned</strong>."
 
+#, fuzzy
 msgid ""
 "Please edit your image and try adding the relevant equipment item again. If "
 "possible, use one of the offered suggestions to avoid creating a duplicate."
 msgstr ""
+"Kérlek, szerkeszd a képed, és próbáld meg újra hozzáadni a megfelelő "
+"felszerelést. Ha lehetséges, használj egyet a felajánlott javaslatok közül, "
+"hogy elkerüld a duplikátum létrehozását."
 
 #, python-format
 msgid ""
 "Since your equipment item was marked as duplicate of \"%(duplicate_of)s\", "
 "your image has been updated accordingly, and you don't need to do anything."
 msgstr ""
+"Mivel a felszerelésedet a \"%(duplicate_of)s\" duplikátumának jelölték, a "
+"képed ennek megfelelően frissült, és nem kell semmit tenned."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
 "%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
+"Az %(_0)s%(item)s%(_1)s felszerelést eltávolították a %(_0)s%(image_title)s"
+"%(_1)s képedből, és a %(_0)s%(duplicate_of)s%(_1)s felszereléssel "
+"helyettesítették."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
 "%(image_title)s%(_1)s"
 msgstr ""
+"Az %(_0)s%(item)s%(_1)s felszerelést eltávolították a %(_0)s%(image_title)s"
+"%(_1)s képedből."
 
+#, fuzzy
 msgid ""
 "This item has been deleted. Please contact AstroBin if you think this was in "
 "error."
 msgstr ""
+"Ez az elem törölve lett. Kérlek, vedd fel a kapcsolatot az AstroBin-nel, ha "
+"úgy gondolod, hogy ez hiba volt."
 
 #, python-format
 msgid ""
@@ -914,135 +1236,185 @@ msgid ""
 "\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
+"A felszerelési elemedet a <a href=\"%(duplicate_of_url)s\">%(duplicate_of)s</"
+"a> másolataként jelölték meg. Ha bármely képen hozzáadtad, azok ennek "
+"megfelelően frissültek."
 
 #, python-format
 msgid ""
 "Your equipment item was marked as a duplicate of \"%(duplicate_of)s\". If "
 "you added it to any images, they will have been updated accordingly."
 msgstr ""
+"A felszerelésedet \"%(duplicate_of)s\" duplikátumaként jelölték meg. Ha "
+"bármelyik képre hozzáadtad, azok ennek megfelelően frissültek."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s elutasította az %(_0)s%(item)s%(_1)s felszerelést, amit "
+"létrehoztál."
 
 #, python-format
 msgid ""
 "%(user)s rejected the equipment item %(_0)s%(item)s%(_1)s that you created"
 msgstr ""
+"%(user)s elutasította az %(_0)s%(item)s%(_1)s felszerelést, amit létrehoztál."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s created the equipment item %(_0)s%(item)s%(_1)s and it "
 "requires moderation"
 msgstr ""
+"%(_0)s%(user)s%(_1)s létrehozta az %(_0)s%(item)s%(_1)s felszerelést, és "
+"moderálásra van szüksége."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s visszajelzést hagyott neked a %(_0)s%(listing)s%(_1)s "
+"piactéri hirdetéshez."
 
+#, fuzzy
 msgid "Feedback details"
-msgstr ""
+msgstr "Visszajelzés részletei"
 
+#, fuzzy
 msgid "Listing"
-msgstr ""
+msgstr "Hirdetés"
 
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Felhasználó"
 
+#, fuzzy
 msgid "Communication"
-msgstr ""
+msgstr "Kommunikáció"
 
+#, fuzzy
 msgid "Speed"
-msgstr ""
+msgstr "Sebesség"
 
+#, fuzzy
 msgid "Accuracy of item descriptions"
-msgstr ""
+msgstr "Az elemek leírásának pontossága"
 
+#, fuzzy
 msgid "Packaging quality"
-msgstr ""
+msgstr "Csomagolás minősége"
 
+#, fuzzy
 msgid "Message"
-msgstr ""
+msgstr "Üzenet"
 
+#, fuzzy
 msgid "To review and respond to the feedback, please visit the following link:"
 msgstr ""
+"A visszajelzés átnézéséhez és válaszolásához kérlek, látogass el a következő "
+"linkre: "
 
+#, fuzzy
 msgid "View feedback "
-msgstr ""
+msgstr "Visszajelzés megtekintése "
 
+#, fuzzy
 msgid "To view the listing, please visit the following link:"
-msgstr ""
+msgstr "A hirdetés megtekintéséhez kérlek, látogass el a következő linkre: "
 
+#, fuzzy
 msgid "View listing"
-msgstr ""
+msgstr "Hirdetés megtekintése"
 
 #, python-format
 msgid ""
 "%(user)s left you feedback for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(user)s visszajelzést hagyott neked a %(_0)s%(listing)s%(_1)s piactéri "
+"hirdetéshez."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s frissítette a visszajelzésedet a %(_0)s%(listing)s"
+"%(_1)s piactéri hirdetéshez."
 
 #, python-format
 msgid ""
 "%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
 "%(_1)s"
 msgstr ""
+"%(user)s frissítette a visszajelzésedet a %(_0)s%(listing)s%(_1)s piactéri "
+"hirdetéshez."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
 "%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s jóváhagyta a piactéri hirdetésedet %(_0)s%(listing)s"
+"%(_1)s."
 
+#, fuzzy
 msgid "The listing is now live. Good luck with your sale!"
-msgstr ""
+msgstr "A hirdetés most él. Sok sikert az eladáshoz!"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s közzétett egy piactéri hirdetést %(_0)s"
+"%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "You received this notification because you follow this user."
-msgstr ""
+msgstr "Ezt az értesítést azért kaptad, mert követed ezt a felhasználót."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s törölte a piactéri hirdetését %(_0)s"
+"%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "You received this notification because you have an offer on this listing, or "
 "you follow the listing."
 msgstr ""
+"Ezt az értesítést azért kaptad, mert ajánlatod van ezen a hirdetésen, vagy "
+"követed a hirdetést."
 
+#, fuzzy
 msgid ""
 "Please note that the seller may only deleted listings without any sold line "
 "items."
 msgstr ""
+"Kérlek, vedd figyelembe, hogy az eladó csak azokat a hirdetéseket törölheti, "
+"amelyekben nincsenek eladott tételek."
 
 #, python-format
 msgid "Your marketplace listing %(_0)s%(listing)s%(_1)s expired"
-msgstr ""
+msgstr "A piactéri hirdetésed %(_0)s%(listing)s%(_1)s lejárt"
 
+#, fuzzy
 msgid "You can renew it by clicking the button below."
-msgstr ""
+msgstr "Megújíthatod az alábbi gombra kattintva."
 
+#, fuzzy
 msgid "PS: if you sold items from this listing, please mark them as sold."
 msgstr ""
+"UI: ha eladtál tételeket ebből a hirdetésből, kérlek, jelöld őket eladottnak."
 
+#, fuzzy
 msgid "You can renew it by clicking the link below:"
-msgstr ""
+msgstr "Megújíthatod az alábbi linken keresztül:"
 
 #, python-format
 msgid ""
@@ -1050,38 +1422,55 @@ msgid ""
 "%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
 "%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s közzétett egy piactéri hirdetést %(_0)s"
+"%(listing)s%(_1)s egy olyan felszerelési tétellel, amit követsz: %(_0)s"
+"%(line_item)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted somebody else's offer in their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s elfogadta valaki más ajánlatát a "
+"piactéri hirdetésében %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "Unfortunately, you cannot make an offer on this listing while it is in a "
 "reserved or sold state."
 msgstr ""
+"Sajnos, nem tehetsz ajánlatot erre a hirdetésre, amíg az fenntartott vagy "
+"eladott állapotban van."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s eladott egy tételt a piactéri "
+"hirdetésében %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Item"
-msgstr ""
+msgstr "Tétel"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s frissítette a piactéri hirdetését %(_0)s"
+"%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "Please note that the seller may only update unsold line items and the global "
 "description or information pertaining the listing. The seller may not change "
 "the price or quantity of sold line items."
 msgstr ""
+"Kérlek, vedd figyelembe, hogy az eladó csak az eladatlan tételeket és a "
+"hirdetés globális leírását vagy információit frissítheti. Az eladó nem "
+"változtathatja meg az eladott tételek árát vagy mennyiségét."
 
 #, python-format
 msgid ""
@@ -1089,150 +1478,218 @@ msgid ""
 "%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
 "possible and leave feedback to the buyer."
 msgstr ""
+"Nemrégiben elfogadtál egy ajánlatot a piactéri hirdetésre %(_0)s%(listing)s"
+"%(_1)s, de még nem jelölted meg az elemet eladottnak. Kérlek, tedd meg a "
+"lehető leghamarabb, és hagyj visszajelzést a vásárlónak."
 
+#, fuzzy
 msgid "Mark as sold"
-msgstr ""
+msgstr "Jelöld eladottnak"
 
 #, python-format
 msgid ""
 "Don't forget to mark your reserved items as sold in the listing %(_0)s"
 "%(listing)s%(_1)s, if you sold them."
 msgstr ""
+"Ne felejtsd el megjelölni a lefoglalt elemeidet eladottnak a hirdetésen "
+"%(_0)s%(listing)s%(_1)s, ha eladtad őket."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s elfogadta az ajánlatodat a piactéri "
+"hirdetésére %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Offer details"
-msgstr ""
+msgstr "Ajánlat részletei"
 
+#, fuzzy
 msgid "Offer amount"
-msgstr ""
+msgstr "Ajánlati összeg"
 
+#, fuzzy
 msgid "Shipping"
-msgstr ""
+msgstr "Szállítás"
 
+#, fuzzy
 msgid ""
 "Now, it's time to finalize the details with the seller. You can communicate "
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
+"Most itt az ideje, hogy véglegesítsd a részleteket az eladóval. "
+"Kommunikálhatsz és megbeszélheted a fizetést és a szállítást a hirdetés "
+"oldalán vagy privát üzenetben az AstroBin-en."
 
+#, fuzzy
 msgid ""
 "Please note, while AstroBin facilitates a platform for sellers and buyers, "
 "the specifics of transactions are managed directly between parties involved. "
 "We encourage both buyers and sellers to exercise caution and use secure "
 "methods for payment and delivery."
 msgstr ""
+"Kérlek, vedd figyelembe, hogy míg az AstroBin platformot biztosít az eladók "
+"és vásárlók számára, a tranzakciók részleteit közvetlenül az érintett felek "
+"kezelik. Arra bátorítjuk mind a vásárlókat, mind az eladókat, hogy legyenek "
+"óvatosak, és használjanak biztonságos módszereket a kifizetésre és a "
+"szállításra."
 
+#, fuzzy
 msgid ""
 "Thank you for using AstroBin, and we wish you a smooth and successful "
 "transaction!"
 msgstr ""
+"Köszönjük, hogy az AstroBin-t használod, és kívánunk neked zökkenőmentes és "
+"sikeres tranzakciót!"
 
 #, python-format
 msgid ""
 "You accepted %(_0)s%(buyer_display_name)s%(_1)s's offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Elfogadtad %(_0)s%(buyer_display_name)s%(_1)s ajánlatát a piactéri "
+"hirdetésedre %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "PLEASE NOTE: listings on AstroBin's marketplace may contain more than one "
 "item. Please review the offer details to ensure you understand which items "
 "the offer is for."
 msgstr ""
+"KÉRJÜK, VEDD FIGYELEMBE: az AstroBin piactéri hirdetései több mint egy "
+"elemet is tartalmazhatnak. Kérlek, nézd át az ajánlat részleteit, hogy "
+"biztosan megértsd, mely elemekre vonatkozik az ajánlat."
 
+#, fuzzy
 msgid ""
 "Now, it's time to finalize the details with the buyer. You can communicate "
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
+"Most itt az idő, hogy véglegesítsd a részleteket a vásárlóval. "
+"Kommunikálhatsz és megszervezheted a kifizetést és a szállítást a hirdetés "
+"oldalán vagy az AstroBin privát üzenetküldőjén keresztül."
 
+#, fuzzy
 msgid ""
 "PS: once you've completed the transaction, please remember to mark the "
 "listing as sold."
 msgstr ""
+"UI: miután befejezted a tranzakciót, kérlek, ne felejtsd el megjelölni a "
+"hirdetést eladottnak."
 
 #, python-format
 msgid "You made an offer for marketplace listing %(_0)s%(listing)s%(_1)s"
-msgstr ""
+msgstr "Ajánlatot tettél a piactéri hirdetésre %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Shipping cost"
-msgstr ""
+msgstr "Szállítási költség"
 
+#, fuzzy
 msgid "You can edit your offer by visiting the listing page."
-msgstr ""
+msgstr "Szerkesztheted az ajánlatodat, ha ellátogatsz a hirdetés oldalára."
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s made an offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s ajánlatot tett a piactéri hirdetésedre "
+"%(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "To review and respond to the offer, please visit your listing page."
 msgstr ""
+"Az ajánlat átnézéséhez és válaszoláshoz kérlek, látogass el a hirdetésed "
+"oldalára."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s rejected your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s elutasította az ajánlatodat a piactéri "
+"hirdetésére %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "You may contact the seller using the listing's page for more information."
 msgstr ""
+"Kapcsolatba léphetsz az eladóval a hirdetés oldalán további információkért."
 
 #, python-format
 msgid ""
 "You retracted your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Visszavontad az ajánlatodat a piactéri hirdetésre %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s retracted their offer for your "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s visszavonta az ajánlatát a piactéri "
+"hirdetésedre %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "You may contact the prospect buyer using AstroBin's private messaging for "
 "more information."
 msgstr ""
+"Kapcsolatba léphetsz a potenciális vásárlóval az AstroBin privát "
+"üzenetküldőjén további információkért."
 
+#, fuzzy
 msgid "View buyer's profile"
-msgstr ""
+msgstr "Vásárló profiljának megtekintése"
 
 #, python-format
 msgid "You updated your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Frissítetted az ajánlatodat a piactéri hirdetésre %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s updated their offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s frissítette az ajánlatát a piactéri "
+"hirdetésedre %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
 "%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
+"Szia! Nemrégiben eladtál egy tételt a piactéri hirdetésből %(_0)s%(listing)s"
+"%(_1)s, és észrevettük, hogy még nem értékelted a vásárlót."
 
+#, fuzzy
 msgid ""
 "It's important to leave feedback to the buyer, as it helps other users make "
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the buyer."
 msgstr ""
+"Fontos, hogy visszajelzést adj a vásárlónak, mivel ez segít más "
+"felhasználóknak megalapozott döntéseket hozni, amikor tételeket vásárolnak a "
+"piactéren. Kérlek, szánj egy pillanatot, hogy értékeld a vásárlóval "
+"kapcsolatos tapasztalataidat."
 
+#, fuzzy
 msgid "Leave feedback"
-msgstr ""
+msgstr "Hagyj visszajelzést"
 
 #, python-format
 msgid ""
 "Rate the buyer for your recent purchase from marketplace listing %(_0)s"
 "%(listing)s%(_1)s"
 msgstr ""
+"Értékeld a vásárlót a legutóbbi vásárlásodért a piactéri hirdetésből %(_0)s"
+"%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
@@ -1240,78 +1697,148 @@ msgid ""
 "%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
 "%(seller_display_name)s%(_1)s yet."
 msgstr ""
+"Szia! Nemrégiben vásároltál egy tételt a piactéri hirdetésből %(_0)s"
+"%(listing)s%(_1)s, és észrevettük, hogy még nem értékelted az eladót %(_0)s"
+"%(seller_display_name)s%(_1)s."
 
+#, fuzzy
 msgid ""
 "It's important to leave feedback to the seller, as it helps other users make "
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the seller."
 msgstr ""
+"Fontos, hogy visszajelzést adj az eladónak, mivel ez segít más "
+"felhasználóknak megalapozott döntéseket hozni, amikor tételeket vásárolnak a "
+"piactéren. Kérlek, szánj egy pillanatot, hogy értékeld az eladóval "
+"kapcsolatos tapasztalataidat."
 
 #, python-format
 msgid ""
 "Rate the seller %(_0)s%(seller_display_name)s%(_1)s for your recent purchase "
 "from marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Értékeld az eladót %(_0)s%(seller_display_name)s%(_1)s a legutóbbi "
+"vásárlásodért a piactéri hirdetésből %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "New image by %(_0)s%(user)s%(_1)s acquired with equipment items you follow"
 msgstr ""
+"Új kép %(_0)s%(user)s%(_1)s által, a követett felszerelési tételekkel "
+"készítve"
 
+#, fuzzy
 msgid ""
 "You received this notification because you follow these equipment items that "
 "were used to acquire this image:"
 msgstr ""
+"Ezt az értesítést azért kaptad, mert követed azokat a felszerelési "
+"tételeket, amelyeket ehhez a képhez használtak:"
 
+#, fuzzy
 msgid "This image is a group effort among the following collaborators:"
-msgstr ""
+msgstr "Ez a kép egy közös munka a következő együttműködőktől:"
 
+#, fuzzy
 msgid "This image is a group effort with the following collaborators:"
-msgstr ""
+msgstr "Ez a kép egy közös munka a következő együttműködőkkel:"
 
+#, fuzzy
 msgid "Details"
-msgstr ""
+msgstr "Részletek"
 
+#, fuzzy
 msgid "Users"
-msgstr ""
+msgstr "Felhasználók"
 
+#, fuzzy
 msgid "Images"
-msgstr ""
+msgstr "Képek"
 
+#, fuzzy
 msgid "Please support AstroBin by shopping at one of our partners!"
 msgstr ""
+"Kérlek, támogasd az AstroBin-t azzal, hogy vásárolsz az egyik partnerünknél!"
 
+#, fuzzy
 msgid "Disable retailer integration"
-msgstr ""
+msgstr "Kiskereskedő integráció letiltása"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
+msgstr "Vásárolj <strong>%(name)s</strong> a %(retailer)s-nél"
 
+#, fuzzy
 msgid "Last update"
-msgstr ""
+msgstr "Utolsó frissítés"
 
+#, fuzzy
 msgid "Stock status unknown"
-msgstr ""
+msgstr "Készlet állapot ismeretlen"
 
+#, fuzzy
 msgid "Back ordered"
-msgstr ""
+msgstr "Vissza rendelés alatt"
 
 #, python-format
 msgid "%(x)s in stock"
-msgstr ""
+msgstr "%(x)s készleten"
 
+#, fuzzy
 msgid "Currently out of stock"
-msgstr ""
+msgstr "Jelenleg nincs készleten"
 
+#, fuzzy
 msgid "Propose edit"
-msgstr ""
+msgstr "Javasolj módosítást"
 
+#, fuzzy
 msgid "Forum"
-msgstr ""
+msgstr "Fórum"
 
+#, fuzzy
 msgid "Sell in the marketplace"
-msgstr ""
+msgstr "Eladás a piactéren"
 
+#, fuzzy
 msgid "Close"
-msgstr ""
+msgstr "Bezárás"
+
+#, fuzzy
+#~ msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
+#~ msgstr "Katadioptrikus: Rowe-Atkinson Schmidt asztrofotográf"
+
+#~ msgid ""
+#~ "\n"
+#~ "    %(_0)s%(user)s%(_1)s commented a marketplace feedback that you "
+#~ "received.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "    %(_0)s%(user)s%(_1)s hozzászólt egy piactéri visszajelzéshez, amit "
+#~ "kaptál.\n"
+
+#~ msgid ""
+#~ "%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item "
+#~ "%(_0)s%(item)s%(_1)s."
+#~ msgstr ""
+#~ "%(_0)s%(user)s%(_1)s jóváhagyta a javaslatot az %(_0)s%(item)s%(_1)s "
+#~ "felszereléshez."
+
+#~ msgid ""
+#~ "\n"
+#~ "    %(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item "
+#~ "%(_0)s%(item)s%(_1)s to you for\n"
+#~ "    review\n"
+#~ msgstr ""
+#~ "\n"
+#~ "    %(_0)s%(user)s%(_1)s egy szerkesztési javaslatot rendelt a(z) %(_0)s"
+#~ "%(item)s%(_1)s felszerelési elemhez a\n"
+#~ "    felülvizsgálatra\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "You received this notification because you have an active offer on this "
+#~ "listing, or you follow the listing."
+#~ msgstr ""
+#~ "Ezt az értesítést azért kaptad, mert aktív ajánlatod van ezen a "
+#~ "hirdetésen, vagy követed a hirdetést."

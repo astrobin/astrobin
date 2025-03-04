@@ -1,13 +1,33 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
 "%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+
+#, fuzzy
+msgid "Very Large Field (>30 degrees)"
+msgstr "Очень большое поле (>30 градусов)"
+
+#, fuzzy
+msgid "Large Field (15-30 degrees)"
+msgstr "Большое поле (15-30 градусов)"
+
+#, fuzzy
+msgid "Medium Field (4-15 degrees)"
+msgstr "Среднее поле (4-15 градусов)"
+
+#, fuzzy
+msgid "Small Field (1-4 degrees)"
+msgstr "Малое поле (1-4 градуса)"
+
+#, fuzzy
+msgid "Very Small Field (<1 degree)"
+msgstr "Очень малое поле (<1 градус)"
 
 msgid "Small"
 msgstr "Маленький"
@@ -59,11 +79,13 @@ msgstr "Размер шрифта аннотаций на главной стр�
 msgid "Show equatorial grid"
 msgstr "Показывать экваториальную сетку"
 
+#, fuzzy
 msgid "Show ecliptic"
-msgstr ""
+msgstr "Показать эклиптику"
 
+#, fuzzy
 msgid "Show galactic equator"
-msgstr ""
+msgstr "Показать галактический экватор"
 
 msgid "Show constellation borders"
 msgstr "Показывать границы созвездий"
@@ -74,21 +96,29 @@ msgstr "Показывать линии созвездий"
 msgid "Show named stars"
 msgstr "Показывать названные звёзды"
 
+#, fuzzy
 msgid "Show HD stars"
-msgstr ""
+msgstr "Показать HD звезды"
 
+#, fuzzy
 msgid ""
 "This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
 "stars (Kharchenko+ 2009), VizieR catalog: I/280B."
 msgstr ""
+"Этот каталог использует данные из Общего каталога 2.5 миллиона звезд "
+"(Харченко+ 2009), каталог VizieR: I/280B."
 
+#, fuzzy
 msgid "Max. magnitude"
-msgstr ""
+msgstr "Макс. величина"
 
+#, fuzzy
 msgid ""
 "Only HD stars up to this magnitude will be rendered. If left empty, the "
 "catalog's default value will be used."
 msgstr ""
+"Только HD звезды до этой величины будут отображены. Если оставить пустым, "
+"будет использовано значение по умолчанию из каталога."
 
 msgid "Show Messier objects"
 msgstr "Показывать объекты Мессье"
@@ -105,13 +135,17 @@ msgstr "Показывать Sharpless объекты"
 msgid "Show Barnard objects"
 msgstr "Показывать Barnard объекты"
 
+#, fuzzy
 msgid ""
 "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
 msgstr ""
+"Показать объекты из Каталога ярких туманностей Линдса (LBN) (Линдс 1965)"
 
+#, fuzzy
 msgid ""
 "Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
 msgstr ""
+"Показать объекты из Каталога темных туманностей Линдса (LDN) (Линдс 1962)"
 
 msgid "Show PGC objects"
 msgstr "Показывать PGC объекты"
@@ -135,33 +169,45 @@ msgstr "Показывать GCVS звёзды"
 msgid "General Catalog of Variable Stars"
 msgstr "Общий каталог переменных звёзд"
 
+#, fuzzy
 msgid ""
 "Only GCVS stars up to this magnitude will be rendered. If left empty, the "
 "catalog's default value will be used."
 msgstr ""
+"Только звезды GCVS до этой величины будут отображены. Если оставить пустым, "
+"будет использовано значение по умолчанию из каталога."
 
 msgid "Show Tycho-2 catalog"
 msgstr "Показывать Tycho-2 каталог"
 
+#, fuzzy
 msgid ""
 "Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
 "catalog's default value will be used."
 msgstr ""
+"Только звезды Tycho-2 до этой величины будут отображены. Если оставить "
+"пустым, будет использовано значение по умолчанию из каталога."
 
 msgid "Show CGPN objects"
 msgstr "Показывать CGPN объекты"
 
+#, fuzzy
 msgid "Show quasars"
-msgstr ""
+msgstr "Показать квазары"
 
+#, fuzzy
 msgid "Publicly visible astrometry.net submission"
-msgstr ""
+msgstr "Публично видимая отправка astrometry.net"
 
+#, fuzzy
 msgid ""
 "If checked, the astrometry.net submission will be publicly visible. If you "
 "leave this unchecked,you won't be able to see the full log of the astrometry."
 "net submission, but the image will stillbe plate-solved and annotated."
 msgstr ""
+"Если отмечено, отправка astrometry.net будет публично видима. Если оставить "
+"это неотмеченным, вы не сможете увидеть полный журнал отправки astrometry."
+"net, но изображение все равно будет решено и аннотировано."
 
 msgid "Perform a blind solve"
 msgstr "Выполнить определение \"вслепую\""
@@ -219,54 +265,73 @@ msgstr ""
 "Сообщает определителю по координатам смотреть в пределах данного центра по "
 "прямому восхождению и склонению."
 
+#, fuzzy
 msgid "Downsample factor"
-msgstr ""
+msgstr "Коэффициент уменьшения"
 
+#, fuzzy
 msgid ""
 "Downsample (bin) your image by this factor before performing source "
 "detection. This often helps with saturated images, noisy images, and large "
 "images. 2 and 4 are commonly-useful values."
 msgstr ""
+"Уменьшите (бините) ваше изображение на этот коэффициент перед выполнением "
+"обнаружения источников. Это часто помогает с насыщенными, шумными и большими "
+"изображениями. 2 и 4 - часто полезные значения."
 
+#, fuzzy
 msgid "Use SExtractor"
-msgstr ""
+msgstr "Использовать SExtractor"
 
+#, fuzzy
 msgid ""
 "Use the SourceExtractor program to detect stars, not Nova's built-in program."
 msgstr ""
+"Используйте программу SourceExtractor для обнаружения звезд, а не встроенную "
+"программу Nova."
 
+#, fuzzy
 msgid "Missing"
-msgstr ""
+msgstr "Отсутствует"
 
+#, fuzzy
 msgid "Basic pending"
-msgstr ""
+msgstr "Базовый в ожидании"
 
+#, fuzzy
 msgid "Basic failed"
-msgstr ""
+msgstr "Базовый не удался"
 
+#, fuzzy
 msgid "Basic success"
-msgstr ""
+msgstr "Базовый успешно"
 
+#, fuzzy
 msgid "Advanced pending"
-msgstr ""
+msgstr "Расширенный в ожидании"
 
+#, fuzzy
 msgid "Advanced failed"
-msgstr ""
+msgstr "Расширенный не удался"
 
+#, fuzzy
 msgid "Advanced success"
-msgstr ""
+msgstr "Расширенный успешно"
 
+#, fuzzy
 msgid "Loading..."
-msgstr ""
+msgstr "Загрузка..."
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Получение статуса для размещения координат, пожалуйста ждите..."
 
+#, fuzzy
 msgid "AstroBin is plate-solving this image with Astrometry.net..."
-msgstr ""
+msgstr "AstroBin решает это изображение с помощью Astrometry.net..."
 
+#, fuzzy
 msgid "AstroBin is plate-solving this image with PixInsight..."
-msgstr ""
+msgstr "AstroBin решает это изображение с помощью PixInsight..."
 
 msgid "This image could not be plate-solved."
 msgstr "Это изображение не может быть размещено по координатам."
@@ -295,96 +360,129 @@ msgstr ""
 "установить соединение с nova.astrometry.net. Пожалуйста, повторите попытку "
 "позже!"
 
+#, fuzzy
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
 "reported an internal server error. Please try again later!"
 msgstr ""
+"AstroBin не смог решить это изображение, потому что nova.astrometry.net "
+"сообщила об ошибке сервера. Пожалуйста, попробуйте позже!"
 
+#, fuzzy
 msgid ""
 "AstroBin could not plate-solve this image because of an unexpected error. "
 "Please try again later!"
 msgstr ""
+"AstroBin не смог решить это изображение из-за неожиданной ошибки. "
+"Пожалуйста, попробуйте позже!"
 
+#, fuzzy
 msgid "n/a"
-msgstr ""
+msgstr "н/д"
 
+#, fuzzy
 msgid "Starting task..."
-msgstr ""
+msgstr "Запуск задачи..."
 
+#, fuzzy
 msgid "Downloading image..."
-msgstr ""
+msgstr "Скачивание изображения..."
 
+#, fuzzy
 msgid "Plate-solving image..."
-msgstr ""
+msgstr "Решение изображения..."
 
+#, fuzzy
 msgid "Generating image annotations..."
-msgstr ""
+msgstr "Генерация аннотаций к изображению..."
 
+#, fuzzy
 msgid "Processing SVG documents..."
-msgstr ""
+msgstr "Обработка документов SVG..."
 
+#, fuzzy
 msgid "Generating finding charts..."
-msgstr ""
+msgstr "Генерация карт поиска..."
 
+#, fuzzy
 msgid "Uploading results..."
-msgstr ""
+msgstr "Загрузка результатов..."
 
+#, fuzzy
 msgid "Task completed"
-msgstr ""
+msgstr "Задача завершена"
 
+#, fuzzy
 msgid "Plate-solving information"
-msgstr ""
+msgstr "Информация о решении"
 
+#, fuzzy
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
+#, fuzzy
 msgid "Started"
-msgstr ""
+msgstr "Начато"
 
+#, fuzzy
 msgid "Astrometry.net job"
-msgstr ""
+msgstr "Задание Astrometry.net"
 
+#, fuzzy
 msgid "PixInsight job"
-msgstr ""
+msgstr "Задание PixInsight"
 
+#, fuzzy
 msgid "PixInsight queue size"
-msgstr ""
+msgstr "Размер очереди PixInsight"
 
+#, fuzzy
 msgid "PixInsight stage"
-msgstr ""
+msgstr "Этап PixInsight"
 
+#, fuzzy
 msgid "PixInsight log"
-msgstr ""
+msgstr "Журнал PixInsight"
 
+#, fuzzy
 msgid "RA"
-msgstr ""
+msgstr "RA"
 
+#, fuzzy
 msgid "center"
-msgstr ""
+msgstr "центр"
 
+#, fuzzy
 msgid "degrees"
-msgstr ""
+msgstr "градусы"
 
+#, fuzzy
 msgid "top/left"
-msgstr ""
+msgstr "верхний/левый"
 
+#, fuzzy
 msgid "top/right"
-msgstr ""
+msgstr "верхний/правый"
 
+#, fuzzy
 msgid "bottom/right"
-msgstr ""
+msgstr "нижний/правый"
 
+#, fuzzy
 msgid "bottom/left"
-msgstr ""
+msgstr "нижний/левый"
 
+#, fuzzy
 msgid "Dec"
-msgstr ""
+msgstr "Дек"
 
+#, fuzzy
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
+#, fuzzy
 msgid "Invalid"
-msgstr ""
+msgstr "Неверно"
 
 #~ msgid "Plate-solving starting, please do not leave this page..."
 #~ msgstr "Плейтсолв начинается, пожалуйста не покидайте эту страницу..."
@@ -410,6 +508,19 @@ msgstr ""
 #~ msgstr ""
 #~ "AstroBin не смог распознать это изображение, потому что nova.astrometry."
 #~ "net сообщила о внутренней ошибке сервера."
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an unepexted error."
+#~ msgstr ""
+#~ "AstroBin не смог решить это изображение, потому что nova.astrometry.net "
+#~ "сообщила об неожиданной ошибке."
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because of an unexpected error."
+#~ msgstr "AstroBin не смог решить это изображение из-за неожиданной ошибки."
 
 #~ msgid "Your migration data"
 #~ msgstr "Ваши данные для миграции"

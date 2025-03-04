@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: zh-Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,7 +15,7 @@ msgid "Type your comment here..."
 msgstr "在此输入您的评论..."
 
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 msgid "Cancel"
 msgstr "取消"
@@ -47,22 +47,22 @@ msgstr "赞"
 
 msgctxt "Verb (imperative)"
 msgid "Like"
-msgstr ""
+msgstr "喜欢"
 
 msgctxt "Verb (imperative)"
 msgid "Unlike"
-msgstr ""
+msgstr "不喜欢"
 
 msgctxt "Verb (imperative)"
 msgid "Reply"
-msgstr ""
+msgstr "回复"
 
 msgctxt "Verb (imperative)"
 msgid "Approve"
-msgstr ""
+msgstr "批准"
 
 msgid "Report abuse"
-msgstr ""
+msgstr "报告滥用"
 
 #, python-format
 msgid ""
@@ -75,13 +75,13 @@ msgstr ""
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
-msgstr ""
+msgstr "此评论正在等待审核。请使用下面的按钮批准或报告滥用。"
 
 msgid "Thank you for your cooperation!"
-msgstr ""
+msgstr "感谢您的合作！"
 
 msgid "This comment was already moderated by you or an AstroBin moderator."
-msgstr ""
+msgstr "此评论已由您或AstroBin管理员审核过。"
 
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
@@ -89,34 +89,38 @@ msgid ""
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
+"您的评论正在等待审核，内容对象的作者或所有者会很快进行审核。如果他们在24小时"
+"内没有采取行动，AstroBin的管理员将接管并代表他们审核您的评论。"
 
 msgid "This process is necessary to prevent spam on AstroBin."
-msgstr ""
+msgstr "此过程是为了防止AstroBin上的垃圾信息。"
 
 msgid "Thank you for understanding!"
-msgstr ""
+msgstr "感谢您的理解！"
 
 msgid "This comment is pending moderation and will be reviewed shortly."
 msgstr "此评论正在等待审核。"
 
 msgid "Submit"
-msgstr "提名"
+msgstr "提交"
 
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
+"您无法撤回此评论：该评论存在已确认或待处理的滥用报告。如果您认为您的评论被不"
+"公平地报告，请联系我们。"
 
 msgid "You have reached your abuse report quota."
-msgstr ""
+msgstr "您已达到滥用报告配额。"
 
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
-msgstr ""
+msgstr "此项目无法再次报告，因为它已被管理员批准。"
 
 msgid "You may not report the same item more than once."
-msgstr ""
+msgstr "您不能多次报告同一项目。"
 
 #~ msgid "You follow each other"
 #~ msgstr "互相关注"
@@ -184,3 +188,84 @@ msgstr ""
 
 #~ msgid "Unlike"
 #~ msgstr "取消赞"
+
+#~ msgid "You many not report the same item more than once."
+#~ msgstr "您不能多次报告同一项目。"
+
+#~ msgid "Report a use"
+#~ msgstr "报告滥用"
+
+#~ msgid "Member since"
+#~ msgstr "会员自"
+
+#~ msgid "Last seen online"
+#~ msgstr "最后在线时间"
+
+#~ msgid "Total integration time"
+#~ msgstr "总集成时间"
+
+#~ msgid "hours"
+#~ msgstr "小时"
+
+#~ msgid "Average integration time"
+#~ msgstr "平均集成时间"
+
+#~ msgid "Forum posts written"
+#~ msgstr "论坛帖子数"
+
+#~ msgid "Comments written"
+#~ msgstr "撰写的评论"
+
+#~ msgid "Comments received"
+#~ msgstr "收到的评论"
+
+#~ msgid "Likes received"
+#~ msgstr "收到的赞"
+
+#~ msgid "Views received"
+#~ msgstr "收到的浏览量"
+
+#~ msgid "No date specified"
+#~ msgstr "未指定日期"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "未指定成像望远镜或镜头，或未指定成像相机"
+
+#~ msgid "Gear images"
+#~ msgstr "设备图片"
+
+#~ msgid "Deep sky"
+#~ msgstr "深空"
+
+#~ msgid "Solar system"
+#~ msgstr "太阳系"
+
+#~ msgid "Extremely wide field"
+#~ msgstr "超广角"
+
+#~ msgid "Star trails"
+#~ msgstr "星轨"
+
+#~ msgid "Northern lights"
+#~ msgstr "北极光"
+
+#~ msgid "Noctilucent clouds"
+#~ msgstr "夜光云"
+
+#~ msgid "Gear"
+#~ msgstr "设备"
+
+#~ msgid "Other"
+#~ msgstr "其他"
+
+#~ msgid "All"
+#~ msgstr "全部"
+
+#~ msgid "n/a"
+#~ msgstr "不适用"
+
+#~ msgid "No subjects specified"
+#~ msgstr "未指定主题"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "未指定采集细节"

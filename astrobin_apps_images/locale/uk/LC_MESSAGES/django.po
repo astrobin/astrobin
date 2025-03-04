@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9,8 +9,9 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
 "%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 
+#, fuzzy
 msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+msgstr "Дозволено лише одне відеозахоплення на зображення."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Джерело без стиснення (макс. 100 Мб)"
@@ -26,77 +27,101 @@ msgstr ""
 "AstroBin, для архівних цілей. Цей файл зберігається приватно, і тільки Ви "
 "матимете до нього доступ."
 
+#, fuzzy
 msgid "Dates"
-msgstr ""
+msgstr "Дати"
 
+#, fuzzy
 msgid "Frames"
-msgstr ""
+msgstr "Кадри"
 
+#, fuzzy
 msgid "Integration"
-msgstr ""
+msgstr "Інтеграція"
 
+#, fuzzy
 msgid "Darks"
-msgstr ""
+msgstr "Темні кадри"
 
+#, fuzzy
 msgid "Flats"
-msgstr ""
+msgstr "Плоскі кадри"
 
+#, fuzzy
 msgid "Flat darks"
-msgstr ""
+msgstr "Плоскі темні кадри"
 
+#, fuzzy
 msgid "Bias"
-msgstr ""
+msgstr "Біас"
 
+#, fuzzy
 msgid "Avg. Moon age"
-msgstr ""
+msgstr "Середній вік Місяця"
 
+#, fuzzy
 msgid "days"
-msgstr ""
+msgstr "дні"
 
+#, fuzzy
 msgid "Avg. Moon phase"
-msgstr ""
+msgstr "Середня фаза Місяця"
 
+#, fuzzy
 msgid "Bortle Dark-Sky Scale"
-msgstr ""
+msgstr "Шкала темного неба Бортла"
 
+#, fuzzy
 msgid "Mean SQM"
-msgstr ""
+msgstr "Середній SQM"
 
+#, fuzzy
 msgid "Mean FWHM"
-msgstr ""
+msgstr "Середній FWHM"
 
+#, fuzzy
 msgid "Temperature"
-msgstr ""
+msgstr "Температура"
 
+#, fuzzy
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
+#, fuzzy
 msgid "Time"
-msgstr ""
+msgstr "Час"
 
+#, fuzzy
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
+#, fuzzy
 msgid "Exposure per frame"
-msgstr ""
+msgstr "Експозиція на кадр"
 
+#, fuzzy
 msgid "Focal length"
-msgstr ""
+msgstr "Фокусна відстань"
 
+#, fuzzy
 msgid "CMI"
-msgstr ""
+msgstr "CMI"
 
+#, fuzzy
 msgid "CMII"
-msgstr ""
+msgstr "CMII"
 
+#, fuzzy
 msgid "CMIII"
-msgstr ""
+msgstr "CMIII"
 
+#, fuzzy
 msgid "Seeing"
-msgstr ""
+msgstr "Сеїнг"
 
+#, fuzzy
 msgid "Transparency"
-msgstr ""
+msgstr "Прозорість"
 
 msgid "Error!"
 msgstr "Помилка!"
@@ -110,26 +135,34 @@ msgstr "Топ Зображення"
 msgid "Top pick nomination"
 msgstr "Номінація на Топ Зображення"
 
+#, fuzzy
 msgid "Currently in the IOTD/TP queue"
-msgstr ""
+msgstr "Зараз у черзі IOTD/TP"
 
 msgid "Staging area"
 msgstr "Студія"
 
+#, fuzzy
 msgid "Collaboration"
-msgstr ""
+msgstr "Співпраця"
 
+#, fuzzy
 msgid "Video"
-msgstr ""
+msgstr "Відео"
 
+#, fuzzy
 msgid "There was a problem encoding this video, please upload it again."
 msgstr ""
+"Виникла проблема з кодуванням цього відео, будь ласка, завантажте його знову."
 
+#, fuzzy
 msgid "If the problem persists, please contact us."
-msgstr ""
+msgstr "Якщо проблема не зникне, будь ласка, зв'яжіться з нами."
 
+#, fuzzy
 msgid "This video is still processing, please return to this page later."
 msgstr ""
+"Це відео все ще обробляється, будь ласка, поверніться на цю сторінку пізніше."
 
 #, python-format
 msgid "Revision %(revision)s"
@@ -144,8 +177,9 @@ msgstr "Завантаження"
 msgid "(no title)"
 msgstr "(без назви)"
 
+#, fuzzy
 msgid "Image file not found"
-msgstr ""
+msgstr "Файл зображення не знайдено"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "Дані пошкоджено. Завантажте це зображення знову. Вибачте!"

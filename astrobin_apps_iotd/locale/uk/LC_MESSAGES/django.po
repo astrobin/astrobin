@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:59+0000\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,8 +27,9 @@ msgstr "Ви не є членом ради IOTD Номінуючих."
 msgid "You cannot submit your own image."
 msgstr "Ви не можете надіслати своє власне зображення."
 
+#, fuzzy
 msgid "You cannot submit an image you collaborated to."
-msgstr ""
+msgstr "Ви не можете надіслати зображення, до якого ви брали участь."
 
 msgid "Images in the staging area cannot be submitted."
 msgstr "Зображення у Студії не можуть бути номіновані."
@@ -55,6 +56,8 @@ msgid ""
 "You cannot submit an image that was submitted for consideration more than "
 "%(max_days)s day(s) ago."
 msgstr ""
+"Ви не можете надіслати зображення, яке було надіслано на розгляд більше ніж "
+"%(max_days)s день(днів) тому."
 
 msgid "This image has already been an IOTD in the past"
 msgstr "Це зображення вже було Зображенням Дня у минулому"
@@ -63,8 +66,9 @@ msgstr "Це зображення вже було Зображенням Дня 
 msgid "You have already submitted %(max_allowed)s image(s) today."
 msgstr "Ви вже надіслали %(max_allowed)s зображень сьогодні."
 
+#, fuzzy
 msgid "This image has been disqualified from the IOTD/TP process."
-msgstr ""
+msgstr "Це зображення було дискваліфіковано з процесу IOTD/TP."
 
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "Ви не є учасником списку Рецензентів Зображення Дня."
@@ -72,8 +76,9 @@ msgstr "Ви не є учасником списку Рецензентів Зо
 msgid "You cannot vote for your own image."
 msgstr "Ви не можете голосувати за власні зображення."
 
+#, fuzzy
 msgid "You cannot vote for an image you collaborated to."
-msgstr ""
+msgstr "Ви не можете голосувати за зображення, до якого ви брали участь."
 
 msgid "Images in the staging area cannot be voted for."
 msgstr "За зображення у Студії не можна голосувати."
@@ -121,8 +126,9 @@ msgstr "Ви не є учасником списку суддів для Зоб�
 msgid "You cannot elect your own image."
 msgstr "Ви не можете вибирати власні зображення."
 
+#, fuzzy
 msgid "You cannot elect an image you collaborated to."
-msgstr ""
+msgstr "Ви не можете обрати зображення, до якого ви брали участь."
 
 msgid "Images in the staging area cannot be elected."
 msgstr "Зображення в Студії не можна вибрати."
@@ -197,63 +203,88 @@ msgstr "вже є %s запланованих IOTD"
 msgid "Image of the day"
 msgstr "Зображення Дня"
 
+#, fuzzy
 msgid "You are not authenticated. Please log in."
-msgstr ""
+msgstr "Ви не авторизовані. Будь ласка, увійдіть."
 
+#, fuzzy
 msgid "You are not the owner of this image."
-msgstr ""
+msgstr "Ви не є власником цього зображення."
 
 #, python-format
 msgid "Sorry, this feature requires a <a href=\"%(url)s\">paid account</a>."
-msgstr ""
+msgstr "Вибачте, ця функція вимагає <a href=\"%(url)s\">платного акаунту</a>."
 
+#, fuzzy
 msgid "This image is in your staging area and hasn't been published yet"
 msgstr ""
+"Це зображення знаходиться у вашій зоні підготовки і ще не було опубліковано."
 
+#, fuzzy
 msgid "This image was already submitted."
-msgstr ""
+msgstr "Це зображення вже було надіслано."
 
+#, fuzzy
 msgid ""
 "Images with subject type set to 'Equipment' or 'Other' are not eligible for "
 "IOTD/TP consideration."
 msgstr ""
+"Зображення з типом об'єкта, встановленим на 'Обладнання' або 'Інше', не "
+"підлягають розгляду для IOTD/TP."
 
+#, fuzzy
 msgid ""
 "Images without an imaging telescope and an imaging camera are not eligible "
 "for IOTD/TP consideration."
 msgstr ""
+"Зображення без телескопа для зйомки та камери для зйомки не підлягають "
+"розгляду для IOTD/TP."
 
+#, fuzzy
 msgid ""
 "Images without any acquisition sessions are not eligible for IOTD/TP "
 "consideration."
-msgstr ""
+msgstr "Зображення без жодних сесій зйомки не підлягають розгляду для IOTD/TP."
 
+#, fuzzy
 msgid "Your settings indicate that you opted to be excluded from competitions."
-msgstr ""
+msgstr "Ваші налаштування вказують, що ви обрали бути виключеними з конкурсів."
 
+#, fuzzy
 msgid "You are currently serving a ban from competitions on AstroBin."
-msgstr ""
+msgstr "Ви наразі під забороною участі в конкурсах на AstroBin."
 
 #, python-format
 msgid ""
 "Unfortunately it's too late: images can be submitted only within "
 "%(num_days)s days after publication."
 msgstr ""
+"На жаль, вже занадто пізно: зображення можна надсилати лише протягом "
+"%(num_days)s днів після публікації."
 
+#, fuzzy
 msgid ""
 "You have not agreed to the IOTD/TP rules and guidelines since their last "
 "update. Please amend this in your profile preferences and then submit the "
 "image again using the Actions menu."
 msgstr ""
+"Ви не погодилися з правилами та вказівками IOTD/TP з моменту їх останнього "
+"оновлення. Будь ласка, виправте це у ваших налаштуваннях профілю, а потім "
+"надішліть зображення знову через меню Дії."
 
+#, fuzzy
 msgid "Unknown reason. This should never happen, please contact us!"
 msgstr ""
+"Невідома причина. Це ніколи не повинно траплятися, будь ласка, зв'яжіться з "
+"нами!"
 
+#, fuzzy
 msgid "Yes"
-msgstr ""
+msgstr "Так"
 
+#, fuzzy
 msgid "No"
-msgstr ""
+msgstr "Ні"
 
 #~ msgid ""
 #~ "You cannot submit an image that was published more than %(max_days)s days "
@@ -335,3 +366,11 @@ msgstr ""
 #~ msgstr ""
 #~ "Ви не можете надіслати зображення, опубліковане більше ніж %(max_days)s "
 #~ "дн. тому."
+
+#, fuzzy
+#~ msgid ""
+#~ "Images with subject type set to 'Gear' or 'Other' are not eligible for "
+#~ "IOTD/TP consideration."
+#~ msgstr ""
+#~ "Зображення з типом об'єкта, встановленим на 'Обладнання' або 'Інше', не "
+#~ "підлягають розгляду для IOTD/TP."

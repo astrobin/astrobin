@@ -1,15 +1,16 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
+#, fuzzy
 msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+msgstr "Apenas uma aquisição baseada em vídeo é permitida por imagem."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Fonte não comprimida (máx. 100 MB)"
@@ -25,117 +26,155 @@ msgstr ""
 "AstroBin, para fins de arquivamento. Este arquivo é armazenado de forma "
 "privada e somente você terá acesso a ele."
 
+#, fuzzy
 msgid "Dates"
-msgstr ""
+msgstr "Datas"
 
+#, fuzzy
 msgid "Frames"
-msgstr ""
+msgstr "Frames"
 
+#, fuzzy
 msgid "Integration"
-msgstr ""
+msgstr "Integração"
 
+#, fuzzy
 msgid "Darks"
-msgstr ""
+msgstr "Darks"
 
+#, fuzzy
 msgid "Flats"
-msgstr ""
+msgstr "Flats"
 
+#, fuzzy
 msgid "Flat darks"
-msgstr ""
+msgstr "Flats escuros"
 
+#, fuzzy
 msgid "Bias"
-msgstr ""
+msgstr "Bias"
 
+#, fuzzy
 msgid "Avg. Moon age"
-msgstr ""
+msgstr "Idade média da Lua"
 
+#, fuzzy
 msgid "days"
-msgstr ""
+msgstr "dias"
 
+#, fuzzy
 msgid "Avg. Moon phase"
-msgstr ""
+msgstr "Fase média da Lua"
 
+#, fuzzy
 msgid "Bortle Dark-Sky Scale"
-msgstr ""
+msgstr "Escala de Céu Escuro Bortle"
 
+#, fuzzy
 msgid "Mean SQM"
-msgstr ""
+msgstr "SQM médio"
 
+#, fuzzy
 msgid "Mean FWHM"
-msgstr ""
+msgstr "FWHM médio"
 
+#, fuzzy
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatura"
 
+#, fuzzy
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
+#, fuzzy
 msgid "Time"
-msgstr ""
+msgstr "Hora"
 
+#, fuzzy
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
+#, fuzzy
 msgid "Exposure per frame"
-msgstr ""
+msgstr "Exposição por frame"
 
+#, fuzzy
 msgid "Focal length"
-msgstr ""
+msgstr "Distância focal"
 
+#, fuzzy
 msgid "CMI"
-msgstr ""
+msgstr "CMI"
 
+#, fuzzy
 msgid "CMII"
-msgstr ""
+msgstr "CMII"
 
+#, fuzzy
 msgid "CMIII"
-msgstr ""
+msgstr "CMIII"
 
+#, fuzzy
 msgid "Seeing"
-msgstr ""
+msgstr "Seeing"
 
+#, fuzzy
 msgid "Transparency"
-msgstr ""
+msgstr "Transparência"
 
 msgid "Error!"
 msgstr "Erro!"
 
+#, fuzzy
 msgid "Image of the day"
-msgstr ""
+msgstr "Imagem do dia"
 
+#, fuzzy
 msgid "Top pick"
-msgstr ""
+msgstr "Escolha top"
 
+#, fuzzy
 msgid "Top pick nomination"
-msgstr ""
+msgstr "Indicação de escolha top"
 
+#, fuzzy
 msgid "Currently in the IOTD/TP queue"
-msgstr ""
+msgstr "Atualmente na fila do IOTD/TP"
 
+#, fuzzy
 msgid "Staging area"
-msgstr ""
+msgstr "Área de espera"
 
+#, fuzzy
 msgid "Collaboration"
-msgstr ""
+msgstr "Colaboração"
 
+#, fuzzy
 msgid "Video"
-msgstr ""
+msgstr "Vídeo"
 
+#, fuzzy
 msgid "There was a problem encoding this video, please upload it again."
 msgstr ""
+"Houve um problema ao codificar este vídeo, por favor, faça o upload "
+"novamente."
 
+#, fuzzy
 msgid "If the problem persists, please contact us."
-msgstr ""
+msgstr "Se o problema persistir, entre em contato conosco."
 
+#, fuzzy
 msgid "This video is still processing, please return to this page later."
 msgstr ""
+"Este vídeo ainda está processando, por favor, volte a esta página mais tarde."
 
 #, python-format
 msgid "Revision %(revision)s"
-msgstr ""
+msgstr "Revisão %(revision)s"
 
+#, fuzzy
 msgid "Original revision"
-msgstr ""
+msgstr "Revisão original"
 
 msgid "Loading"
 msgstr "Carregando"
@@ -143,8 +182,9 @@ msgstr "Carregando"
 msgid "(no title)"
 msgstr "(sem título)"
 
+#, fuzzy
 msgid "Image file not found"
-msgstr ""
+msgstr "Arquivo de imagem não encontrado"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "Corrupção de dados. Por favor, envie esta imagem novamente. Desculpe!"

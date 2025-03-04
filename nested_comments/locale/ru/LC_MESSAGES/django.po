@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,8 +15,9 @@ msgstr "(удалено)"
 msgid "Type your comment here..."
 msgstr "Введите ваш комментарий здесь..."
 
+#, fuzzy
 msgid "Error"
-msgstr ""
+msgstr "Ошибка"
 
 msgid "Cancel"
 msgstr "Отмена"
@@ -46,24 +47,29 @@ msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "понравилось"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Like"
-msgstr ""
+msgstr "Нравится"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Unlike"
-msgstr ""
+msgstr "Не нравится"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Reply"
-msgstr ""
+msgstr "Ответить"
 
+#, fuzzy
 msgctxt "Verb (imperative)"
 msgid "Approve"
-msgstr ""
+msgstr "Одобрить"
 
+#, fuzzy
 msgid "Report abuse"
-msgstr ""
+msgstr "Сообщить о нарушении"
 
 #, python-format
 msgid ""
@@ -73,29 +79,41 @@ msgstr ""
 "Пожалуйста, <a href=\"%(login_url)s\">войдите</a> или <a href="
 "\"%(signup_url)s\">зарегистрируйтесь</a>, чтобы оставить комментарий."
 
+#, fuzzy
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
 msgstr ""
+"Этот комментарий ожидает модерации. Пожалуйста, одобрите его или сообщите о "
+"нарушении, используя кнопки ниже."
 
+#, fuzzy
 msgid "Thank you for your cooperation!"
-msgstr ""
+msgstr "Спасибо за ваше сотрудничество!"
 
+#, fuzzy
 msgid "This comment was already moderated by you or an AstroBin moderator."
-msgstr ""
+msgstr "Этот комментарий уже был модерацией вами или модератором AstroBin."
 
+#, fuzzy
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
 "author or owner of the content object that you commented on. If they do not "
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
+"Ваш комментарий ожидает модерации и должен быть вскоре рассмотрен автором "
+"или владельцем контента, на который вы прокомментировали. Если они не "
+"предпримут действий в течение 24 часов, модератор AstroBin возьмет на себя "
+"ответственность и рассмотрит ваш комментарий от их имени."
 
+#, fuzzy
 msgid "This process is necessary to prevent spam on AstroBin."
-msgstr ""
+msgstr "Этот процесс необходим для предотвращения спама на AstroBin."
 
+#, fuzzy
 msgid "Thank you for understanding!"
-msgstr ""
+msgstr "Спасибо за понимание!"
 
 msgid "This comment is pending moderation and will be reviewed shortly."
 msgstr ""
@@ -104,21 +122,30 @@ msgstr ""
 msgid "Submit"
 msgstr "Отправить"
 
+#, fuzzy
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
+"Вы не можете восстановить этот комментарий: для него существует "
+"подтвержденный или ожидающий отчет о нарушении. Если вы считаете, что ваш "
+"комментарий был сообщен несправедливо, пожалуйста, свяжитесь с нами."
 
+#, fuzzy
 msgid "You have reached your abuse report quota."
-msgstr ""
+msgstr "Вы достигли лимита отчетов о нарушениях."
 
+#, fuzzy
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr ""
+"Этот элемент не может быть сообщен повторно, так как он был одобрен "
+"модератором."
 
+#, fuzzy
 msgid "You may not report the same item more than once."
-msgstr ""
+msgstr "Вы не можете сообщать об одном и том же элементе более одного раза."
 
 #~ msgid "You follow each other"
 #~ msgstr "Вы подписаны друг к другу"
@@ -189,3 +216,113 @@ msgstr ""
 
 #~ msgid "Unlike"
 #~ msgstr "Не нравится"
+
+#, fuzzy
+#~ msgid "You many not report the same item more than once."
+#~ msgstr "Вы не можете сообщать об одном и том же элементе более одного раза."
+
+#, fuzzy
+#~ msgid "Report a use"
+#~ msgstr "Сообщить о нарушении"
+
+#, fuzzy
+#~ msgid "Member since"
+#~ msgstr "Участник с"
+
+#, fuzzy
+#~ msgid "Last seen online"
+#~ msgstr "В последний раз был в сети"
+
+#, fuzzy
+#~ msgid "Total integration time"
+#~ msgstr "Общее время интеграции"
+
+#, fuzzy
+#~ msgid "hours"
+#~ msgstr "часов"
+
+#, fuzzy
+#~ msgid "Average integration time"
+#~ msgstr "Среднее время интеграции"
+
+#, fuzzy
+#~ msgid "Forum posts written"
+#~ msgstr "Написано сообщений на форуме"
+
+#, fuzzy
+#~ msgid "Comments written"
+#~ msgstr "Написано комментариев"
+
+#, fuzzy
+#~ msgid "Comments received"
+#~ msgstr "Получено комментариев"
+
+#, fuzzy
+#~ msgid "Likes received"
+#~ msgstr "Получено лайков"
+
+#, fuzzy
+#~ msgid "Views received"
+#~ msgstr "Получено просмотров"
+
+#, fuzzy
+#~ msgid "No date specified"
+#~ msgstr "Дата не указана"
+
+#, fuzzy
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr ""
+#~ "Не указаны телескопы или объективы для съемки, или не указаны камеры для "
+#~ "съемки"
+
+#, fuzzy
+#~ msgid "Gear images"
+#~ msgstr "Изображения оборудования"
+
+#, fuzzy
+#~ msgid "Deep sky"
+#~ msgstr "Глубокий космос"
+
+#, fuzzy
+#~ msgid "Solar system"
+#~ msgstr "Солнечная система"
+
+#, fuzzy
+#~ msgid "Extremely wide field"
+#~ msgstr "Экстремально широкий угол"
+
+#, fuzzy
+#~ msgid "Star trails"
+#~ msgstr "Следы звёзд"
+
+#, fuzzy
+#~ msgid "Northern lights"
+#~ msgstr "Северное сияние"
+
+#, fuzzy
+#~ msgid "Noctilucent clouds"
+#~ msgstr "Ноктилюсцентные облака"
+
+#, fuzzy
+#~ msgid "Gear"
+#~ msgstr "Оборудование"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Другое"
+
+#, fuzzy
+#~ msgid "All"
+#~ msgstr "Все"
+
+#, fuzzy
+#~ msgid "n/a"
+#~ msgstr "н/д"
+
+#, fuzzy
+#~ msgid "No subjects specified"
+#~ msgstr "Не указаны объекты"
+
+#, fuzzy
+#~ msgid "No acquisition details specified"
+#~ msgstr "Не указаны детали захвата"

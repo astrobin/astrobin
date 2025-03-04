@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9,34 +9,49 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
 "%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 
+#, fuzzy
 msgid ""
 "You have reached the maximum number of saved searches. Please delete some to "
 "make room for new ones."
 msgstr ""
+"Ви досягли максимальної кількості збережених пошуків. Будь ласка, видаліть "
+"деякі, щоб звільнити місце для нових."
 
+#, fuzzy
 msgid "You already have a saved search with this name."
-msgstr ""
+msgstr "У вас вже є збережений пошук з цією назвою."
 
+#, fuzzy
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
 "sensitive."
 msgstr ""
+"Будь ласка, введіть правильне ім'я користувача та пароль. Зверніть увагу, що "
+"обидва поля чутливі до регістру."
 
+#, fuzzy
 msgid "This account is inactive."
-msgstr ""
+msgstr "Цей обліковий запис неактивний."
 
+#, fuzzy
 msgid ""
 "Multiple users found with alternative capitalizations of this username. "
 "Please use the correct capitalization."
 msgstr ""
+"Знайдено кілька користувачів з альтернативними написаннями цього імені "
+"користувача. Будь ласка, використовуйте правильне написання."
 
+#, fuzzy
 msgid ""
 "Multiple users found with this name. Please try logging in with your "
 "username or email."
 msgstr ""
+"Знайдено кілька користувачів з цим ім'ям. Будь ласка, спробуйте увійти, "
+"використовуючи своє ім'я користувача або електронну адресу."
 
+#, fuzzy
 msgid "Username or email"
-msgstr ""
+msgstr "Ім'я користувача або електронна адреса"
 
 msgid "United Kingdom"
 msgstr "Велика Британія"
@@ -683,8 +698,9 @@ msgstr "Швейцарія"
 msgid "Syrian Arab Republic"
 msgstr "Сирійська Арабська Республіка"
 
-msgid "Taiwan"
-msgstr "Тайвань"
+#, fuzzy
+msgid "Republic of China (Taiwan)"
+msgstr "Республіка Китай (Тайвань)"
 
 msgid "Tajikistan"
 msgstr "Таджикистан"
@@ -790,8 +806,9 @@ msgstr ""
 "тегів \"ключ/значення\". PS: зображення без цього тега з’являться у нижній "
 "частині колекції."
 
+#, fuzzy
 msgid "Use the most recent image automatically"
-msgstr ""
+msgstr "Автоматично використовувати найновіше зображення"
 
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Будь ласка, використовуйте формат РРРР-ММ-ДД"
@@ -908,11 +925,13 @@ msgstr ""
 "зображення. Будь ласка, врахуйте: необхідно використовувати версії з тією "
 "самою шириною та висотою."
 
+#, fuzzy
 msgid "Loop video"
-msgstr ""
+msgstr "Циклічне відео"
 
+#, fuzzy
 msgid "If checked, the video will loop."
-msgstr ""
+msgstr "Якщо вибрано, відео буде циклічно відтворюватися."
 
 msgid "Opacity"
 msgstr "Непрозорість"
@@ -948,19 +967,23 @@ msgstr "Довгота (хвилини)"
 msgid "Longitude (seconds)"
 msgstr "Довгота (секунди)"
 
-msgid "Are you a robot?"
-msgstr "Ви робот?"
-
+#, fuzzy
 msgid ""
 "This email address was not found in our database. Email address might be "
 "case sensitive."
 msgstr ""
+"Цю електронну адресу не знайдено в нашій базі даних. Електронна адреса може "
+"бути чутливою до регістру."
 
+#, fuzzy
 msgid ""
 "We found more than one account associated with this email address and we "
 "cannot proceed with this operation. Please get in touch with support to "
 "resolve the issue."
 msgstr ""
+"Ми знайшли більше одного облікового запису, пов'язаного з цією електронною "
+"адресою, і не можемо продовжити цю операцію. Будь ласка, зв'яжіться з "
+"підтримкою, щоб вирішити цю проблему."
 
 msgid "Recipients"
 msgstr "Одержувачі"
@@ -989,8 +1012,9 @@ msgstr "Телескопи та об‘єктиви"
 msgid "Cameras"
 msgstr "Камери"
 
+#, fuzzy
 msgid "Let AstroBin decide"
-msgstr ""
+msgstr "Нехай AstroBin вирішить"
 
 msgid "Yes"
 msgstr "Так"
@@ -998,11 +1022,16 @@ msgstr "Так"
 msgid "No"
 msgstr "Ні"
 
+#, fuzzy
 msgid ""
 "Sorry, you cannot automatically submit images for IOTD/TP consideration if "
 "you have not had any images selected as Top Pick or Image of the Day before. "
 "Please submit images individually using the Actions menu."
 msgstr ""
+"Вибачте, ви не можете автоматично надсилати зображення для розгляду на IOTD/"
+"TP, якщо раніше жодне з ваших зображень не було обрано як Топ-вибір або "
+"Зображення дня. Будь ласка, надсилайте зображення окремо, використовуючи "
+"меню дій."
 
 msgid ""
 "You cannot be excluded from competitions and automatically submit images for "
@@ -1011,10 +1040,13 @@ msgstr ""
 "Ви не можете бути виключені з змагань і одночасно автоматично надсилати "
 "зображення на розгляд IOTD/TP."
 
+#, fuzzy
 msgid ""
 "You must agree to the IOTD/TP rules and guidelines before you can "
 "automatically submit images for IOTD/TP consideration."
 msgstr ""
+"Ви повинні погодитися з правилами та вказівками IOTD/TP, перш ніж зможете "
+"автоматично надсилати зображення для розгляду на IOTD/TP."
 
 msgid "If you have a personal website, put the address here."
 msgstr "Якщо у Вас є особистий веб-сайт, напишіть його адресу."
@@ -1022,10 +1054,13 @@ msgstr "Якщо у Вас є особистий веб-сайт, напишіт
 msgid "Website"
 msgstr "Веб-сайт"
 
+#, fuzzy
 msgid ""
 "You have images on AstroBin, therefore you are an astrophotographer! :-) "
 "Please select a different skill level."
 msgstr ""
+"У вас є зображення на AstroBin, отже, ви астрофотограф! :-) Будь ласка, "
+"виберіть інший рівень навичок."
 
 msgid "Mark as final"
 msgstr "Позначити фінальним"
@@ -1087,31 +1122,41 @@ msgstr "Припинити слідкувати"
 msgid "Follow"
 msgstr "Підписатися"
 
+#, fuzzy
 msgid "Europe"
-msgstr ""
+msgstr "Європа"
 
+#, fuzzy
 msgid "Americas"
-msgstr ""
+msgstr "Америка"
 
+#, fuzzy
 msgid "North America"
-msgstr ""
+msgstr "Північна Америка"
 
+#, fuzzy
 msgid "South America"
-msgstr ""
+msgstr "Південна Америка"
 
+#, fuzzy
 msgid "Africa"
-msgstr ""
+msgstr "Африка"
 
+#, fuzzy
 msgid "Asia"
-msgstr ""
+msgstr "Азія"
 
+#, fuzzy
 msgid "Oceania"
-msgstr ""
+msgstr "Океанія"
 
+#, fuzzy
 msgid ""
 "Your account is temporarily or permanently suspended. If you believe this is "
 "in error, please get in touch using the Help menu."
 msgstr ""
+"Ваш обліковий запис тимчасово або назавжди заблоковано. Якщо ви вважаєте, що "
+"це помилка, будь ласка, зв'яжіться з нами через меню Допомога."
 
 msgid "None (All rights reserved)"
 msgstr "Немає (Всі права захищені)"
@@ -1403,8 +1448,9 @@ msgstr "Катадіоптрик: Максутов"
 msgid "Catadioptric: Maksutov-Cassegrain"
 msgstr "Катадіоптрик: Максутов-Кассегрен"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov-Newtonian"
-msgstr ""
+msgstr "Катадіоптричний: Максутов-Ньютон"
 
 msgid "Catadioptric: modified Dall-Kirkham"
 msgstr "Катадіоптрик: модифікований Долл-Кірхем"
@@ -1587,11 +1633,13 @@ msgstr "Північне сяйво"
 msgid "Noctilucent clouds"
 msgstr "Світлові хмари"
 
+#, fuzzy
 msgid "Landscape"
-msgstr ""
+msgstr "Пейзаж"
 
+#, fuzzy
 msgid "Artificial satellite"
-msgstr ""
+msgstr "Штучний супутник"
 
 msgid "Gear"
 msgstr "Обладнання"
@@ -1722,10 +1770,13 @@ msgstr ""
 msgid "Sharpen thumbnails"
 msgstr "Четкие Збільшити різкість мініатюр"
 
+#, fuzzy
 msgid ""
 "If selected, AstroBin will use a resizing algorithm that slightly sharpens "
 "all sizes of the image except the full size version."
 msgstr ""
+"Якщо вибрано, AstroBin використає алгоритм зміни розміру, який трохи "
+"підкреслює всі розміри зображення, крім версії повного розміру."
 
 msgid "Allow full-size display"
 msgstr "Дозволити відображення в повному розмірі"
@@ -1770,12 +1821,15 @@ msgstr "Пропустити повідомлення"
 msgid "Do not notify your followers about this image upload."
 msgstr "Не повідомляти підписників про завантаження цього зображення."
 
+#, fuzzy
 msgid "Skip activity stream"
-msgstr ""
+msgstr "Пропустити стрічку активності"
 
+#, fuzzy
 msgid ""
 "Do not create an entry on the front page's activity stream for this event."
 msgstr ""
+"Не створювати запис у стрічці активності на головній сторінці для цієї події."
 
 msgid "(no title)"
 msgstr "(без заголовка)"
@@ -1792,12 +1846,15 @@ msgstr ""
 msgid "Do not notify your followers about this revision."
 msgstr "Не повідомляти підписників про цю версію зображення."
 
+#, fuzzy
 msgid "Parent collection"
-msgstr ""
+msgstr "Батьківська колекція"
 
+#, fuzzy
 msgid ""
 "If you want to create a nested collection, select the parent collection here."
 msgstr ""
+"Якщо ви хочете створити вкладену колекцію, виберіть тут батьківську колекцію."
 
 msgid "Images"
 msgstr "Зображення"
@@ -1826,8 +1883,9 @@ msgstr "3 - Сільське небо (синя зона)"
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4 - Сільське/приміське (зелена/жовта зона)"
 
+#, fuzzy
 msgid "4.5 - Semi-Suburban/Transition sky (YELLOW)"
-msgstr ""
+msgstr "4.5 - Напівпередмістя/Перехідне небо (ЖОВТИЙ)"
 
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5 - Приміське небо (помаранчева зона)"
@@ -1903,8 +1961,9 @@ msgstr "Кількість кадрів плоского поля (flat)."
 msgid "Flat darks"
 msgstr "Темнові кадри для кадрів плоского поля"
 
+#, fuzzy
 msgid "The number of flat dark frames."
-msgstr ""
+msgstr "Кількість плоских темних кадрів."
 
 msgid "Bias"
 msgstr "Кадри зміщення (bias)"
@@ -2028,42 +2087,57 @@ msgstr "Я волію не говорити"
 msgid "n/a"
 msgstr "н/д"
 
+#, fuzzy
 msgid "Beginner"
-msgstr ""
+msgstr "Початківець"
 
+#, fuzzy
 msgid "Intermediate"
-msgstr ""
+msgstr "Середній"
 
+#, fuzzy
 msgid "Advanced"
-msgstr ""
+msgstr "Просунутий"
 
+#, fuzzy
 msgid "Professional"
-msgstr ""
+msgstr "Професійний"
 
+#, fuzzy
 msgid "I don't define myself as an astrophotographer at this time."
-msgstr ""
+msgstr "Я наразі не вважаю себе астрофотографом."
 
+#, fuzzy
 msgid "I started out recently and I'm still getting familiar with the hobby."
-msgstr ""
+msgstr "Я нещодавно почав і ще звикаю до хобі."
 
+#, fuzzy
 msgid ""
 "I have been doing astrophotography for a while and wouldn't classify myself "
 "as a beginner anymore."
 msgstr ""
+"Я займаюся астрофотографією вже деякий час і більше не вважаю себе "
+"початківцем."
 
+#, fuzzy
 msgid ""
 "I developed a comprehensive set of skills and master most aspects of "
 "astrophotography."
 msgstr ""
+"Я розвинув комплексний набір навичок і оволодів більшістю аспектів "
+"астрофотографії."
 
+#, fuzzy
 msgid "Astrophotography is my profession or part of my profession."
-msgstr ""
+msgstr "Астрофотографія - це моя професія або частина моєї професії."
 
+#, fuzzy
 msgid "Suspended"
-msgstr ""
+msgstr "Заблоковано"
 
+#, fuzzy
 msgid "Suspension reason"
-msgstr ""
+msgstr "Причина блокування"
 
 msgid "Allow others to see when you created your AstroBin account"
 msgstr "Дозвольте іншим бачити, коли Ви створили свій обліковий запис AstroBin"
@@ -2145,8 +2219,9 @@ msgstr ""
 "Установіть цей прапорець, щоб автоматично надсилати Ваші зображення на "
 "розгляд %(0)sIOTD/TP%(1)s після їх публікації."
 
+#, fuzzy
 msgid "I agree to the IOTD/TP rules and guidelines"
-msgstr ""
+msgstr "Я погоджуюсь з правилами та вказівками IOTD/TP"
 
 #, python-format
 msgid ""
@@ -2154,6 +2229,9 @@ msgid ""
 "%(_0)srules%(_1)s and %(_2)sguidelines%(_3)s. Your images won't be submitted "
 "for IOTD/TP consideration if you don't agree."
 msgstr ""
+"Поставте галочку, щоб підтвердити, що ви прочитали та погоджуєтеся з "
+"правилами %(_0)srules%(_1)s та %(_2)sguidelines%(_3)s IOTD/TP. Ваші "
+"зображення не будуть надіслані на розгляд IOTD/TP, якщо ви не погодитесь."
 
 msgid "Open notifications in a new tab"
 msgstr "Відкрити сповіщення в новій вкладці"
@@ -2191,41 +2269,60 @@ msgstr "Сузір’я"
 msgid "Default gallery sorting"
 msgstr "Сортування галереї за замовчуванням"
 
+#, fuzzy
 msgid "Allow image adjustments widget on your images"
-msgstr ""
+msgstr "Дозволити віджети налаштувань зображень на ваших зображеннях"
 
+#, fuzzy
 msgid ""
 "If you disable this option, the image adjustments widget will not be shown "
 "on your images. This setting only affects the new gallery and search "
 "experiences."
 msgstr ""
+"Якщо ви вимкнете цю опцію, віджети налаштувань зображень не будуть показані "
+"на ваших зображеннях. Ця настройка вплине лише на нову галерею та досвід "
+"пошуку."
 
+#, fuzzy
 msgid "Maximum zoom allowed on your images"
-msgstr ""
+msgstr "Максимальне збільшення, дозволене на ваших зображеннях"
 
+#, fuzzy
 msgid ""
 "Select the maximum zoom allowed on your images. 1x refers to the native "
 "resolution of an image. This setting only affects the new gallery and search "
 "experiences."
 msgstr ""
+"Виберіть максимальне збільшення, дозволене на ваших зображеннях. 1x "
+"відноситься до рідної роздільної здатності зображення. Ця настройка вплине "
+"лише на нову галерею та досвід пошуку."
 
+#, fuzzy
 msgid "Display collections on your public gallery"
-msgstr ""
+msgstr "Відображати колекції у вашій публічній галереї"
 
+#, fuzzy
 msgid ""
 "Select if you want your collections to be displayed on your public gallery. "
 "If you disable this, your collections will be displayed separately. This "
 "setting only affects the new gallery experience."
 msgstr ""
+"Виберіть, чи хочете ви, щоб ваші колекції відображалися у вашій публічній "
+"галереї. Якщо ви вимкнете це, ваші колекції будуть відображатися окремо. Ця "
+"настройка вплине лише на новий досвід галереї."
 
 msgid "See your own Staging Area images on your gallery"
 msgstr "Дивіться власні зображення Студії у Вашій галереї"
 
+#, fuzzy
 msgid ""
 "Select if you want your Staging Area images to appear on your own view of "
 "your gallery when you are logged in. If you disable this, your Staging Area "
 "images can be visible separately (only to you."
 msgstr ""
+"Виберіть, чи хочете ви, щоб ваші зображення з зони підготовки з'являлися у "
+"вашому перегляді галереї, коли ви увійшли в систему. Якщо ви вимкнете це, "
+"ваші зображення з зони підготовки можуть бути видимі окремо (тільки для вас)."
 
 msgid "Default license"
 msgstr "Ліцензія за замовчуванням"
@@ -2294,24 +2391,32 @@ msgstr ""
 "ненав’язлива, і вона дуже допоможе, якщо ви її не відключите. Заздалегідь "
 "дякуємо!"
 
+#, fuzzy
 msgid "Enable new search experience"
-msgstr ""
+msgstr "Увімкнути новий досвід пошуку"
 
+#, fuzzy
 msgid ""
 "Enable the new search experience, which includes new filters and a new "
 "layout."
 msgstr ""
+"Увімкніть новий досвід пошуку, який включає нові фільтри та новий макет."
 
+#, fuzzy
 msgid "Learn more"
-msgstr ""
+msgstr "Дізнатися більше"
 
+#, fuzzy
 msgid "Enable new gallery experience"
-msgstr ""
+msgstr "Увімкнути новий досвід галереї"
 
+#, fuzzy
 msgid ""
 "Enable the new gallery experience, with improved navigation and a new image "
 "viewer."
 msgstr ""
+"Увімкніть новий досвід галереї з покращеною навігацією та новим переглядачем "
+"зображень."
 
 msgid "Language"
 msgstr "Мова"
@@ -2326,11 +2431,13 @@ msgstr ""
 "Інші мови, які Ви можете читати та писати. Це буде корисно для інших "
 "учасників AstroBin, які хотіли б поспілкуватися з Вами."
 
+#, fuzzy
 msgid "Self-assessed skill level"
-msgstr ""
+msgstr "Самооцінка рівня навичок"
 
+#, fuzzy
 msgid "How would you categorize your current skills as an astrophotographer?"
-msgstr ""
+msgstr "Як би ви оцінили свої поточні навички як астрофотографа?"
 
 msgid "Signature"
 msgstr "Підпис"
@@ -2414,35 +2521,50 @@ msgstr "Помилка"
 msgid "Expired"
 msgstr "Термін дії закінчився"
 
+#, fuzzy
 msgid ""
 "This password doesn't contain any numeric digits. It must contain at least "
 "one number."
 msgstr ""
+"Цей пароль не містить жодних числових символів. Він повинен містити "
+"принаймні одну цифру."
 
+#, fuzzy
 msgid "Your password must contain at least one number."
-msgstr ""
+msgstr "Ваш пароль повинен містити принаймні одну цифру."
 
+#, fuzzy
 msgid ""
 "This password doesn't contain any special characters. It must contain at "
 "least one of the following {}"
 msgstr ""
+"Цей пароль не містить жодних спеціальних символів. Він повинен містити "
+"принаймні один з наступних {}"
 
+#, fuzzy
 msgid "Your password must contain any of the following special characters: {}"
 msgstr ""
+"Ваш пароль повинен містити будь-який з наступних спеціальних символів: {}"
 
+#, fuzzy
 msgid "This password is too long. It must contain no more than {} characters."
 msgstr ""
+"Цей пароль занадто довгий. Він не повинен містити більше ніж {} символів."
 
+#, fuzzy
 msgid "Your password must contain no more than {} characters."
-msgstr ""
+msgstr "Ваш пароль не повинен містити більше ніж {} символів."
 
+#, fuzzy
 msgid ""
 "This password has previously appeared in a data breach elsewhere and should "
 "not be used."
 msgstr ""
+"Цей пароль раніше з'являвся в витоку даних і не повинен використовуватися."
 
+#, fuzzy
 msgid "Your AstroBin authentication token"
-msgstr ""
+msgstr "Ваш токен автентифікації AstroBin"
 
 msgid "Abkhazian"
 msgstr "Абхазія"
@@ -2958,14 +3080,16 @@ msgstr "Зулу"
 msgid "You are not allowed to see this page."
 msgstr "Ви не можете переглядати цю сторінку."
 
+#, fuzzy
 msgid "Sorry, but the page you are looking for is not here."
-msgstr ""
+msgstr "Вибачте, але сторінка, яку ви шукаєте, не знайдена."
 
 msgid "Deleted"
 msgstr "Видалені"
 
+#, fuzzy
 msgid "Sorry, but the item you are looking for has been deleted."
-msgstr ""
+msgstr "Вибачте, але елемент, який ви шукаєте, було видалено."
 
 msgid "Fatal error"
 msgstr "Фатальна помилка"
@@ -2973,11 +3097,15 @@ msgstr "Фатальна помилка"
 msgid "Nothing to worry about, it's not your fault."
 msgstr "Ні про що турбуватися не треба, це не Ваша помилка."
 
+#, fuzzy
 msgid ""
 "Something unexpected occurred! We have received an email with technical "
 "details, so we will try to fix the problem as soon as possible. Sorry about "
 "the inconvenience!"
 msgstr ""
+"Сталася непередбачена помилка! Ми отримали електронний лист з технічними "
+"деталями, тому ми спробуємо виправити проблему якомога швидше. Вибачте за "
+"незручності!"
 
 msgid "Go back to the home page."
 msgstr "Поверніться на домашню сторінку."
@@ -3041,11 +3169,13 @@ msgstr "Інструменти"
 msgid "Create new collection"
 msgstr "Создать новую коллекцию"
 
+#, fuzzy
 msgid "Empty collection"
-msgstr ""
+msgstr "Порожня колекція"
 
+#, fuzzy
 msgid "No collection"
-msgstr ""
+msgstr "Немає колекції"
 
 msgid "This user does not have any collections."
 msgstr "Цей користувач не має жодної колекції."
@@ -3107,18 +3237,22 @@ msgstr ""
 msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
 msgstr "<a href=\"%(user_page)s\">%(user)s</a> приєднався до групи."
 
+#, fuzzy
 msgid "Wanted"
-msgstr ""
+msgstr "Шукаю"
 
+#, fuzzy
 msgid ""
 "This user is looking for something specific on the AstroBin Marketplace. "
 "Please contact them if you can help."
 msgstr ""
+"Цей користувач шукає щось конкретне на ринку AstroBin. Будь ласка, "
+"зв'яжіться з ними, якщо можете допомогти."
 
 #, python-format
 msgid ""
 "<a href=\"%(user_page)s\">%(user)s</a> created a listing in the marketplace."
-msgstr ""
+msgstr "<a href=\"%(user_page)s\">%(user)s</a> створив оголошення на ринку."
 
 msgid "Remove ads"
 msgstr "Видалити рекламу"
@@ -3226,8 +3360,9 @@ msgstr "Видалити аватар"
 msgid "Delete selected"
 msgstr "Видалити вибране"
 
+#, fuzzy
 msgid "Don't show this again"
-msgstr ""
+msgstr "Не показувати це знову"
 
 msgid "Hey!"
 msgstr "Хей!"
@@ -3266,17 +3401,21 @@ msgstr "Часті питання"
 msgid "Terms of Service"
 msgstr "Умови обслуговування"
 
+#, fuzzy
 msgid "Privacy policy"
-msgstr ""
+msgstr "Політика конфіденційності"
 
+#, fuzzy
 msgid "Cookie policy"
-msgstr ""
+msgstr "Політика щодо файлів cookie"
 
+#, fuzzy
 msgid "Acceptable use policy"
-msgstr ""
+msgstr "Політика прийнятного використання"
 
+#, fuzzy
 msgid "Community guidelines"
-msgstr ""
+msgstr "Правила спільноти"
 
 msgid "Sponsors"
 msgstr "Спонсори"
@@ -3302,12 +3441,10 @@ msgstr "Авторське право"
 msgid "The images on this websites are copyright of their respective owners."
 msgstr "Зображення з цього веб-сайту захищені авторським правом власників."
 
-msgid "Back to top"
-msgstr "Повернутися вгору"
-
+#, fuzzy
 msgid ""
 "AstroBin detected that your password does not meet security requirements."
-msgstr ""
+msgstr "AstroBin виявив, що ваш пароль не відповідає вимогам безпеки."
 
 msgid "Change your password"
 msgstr "Змінити пароль"
@@ -3404,11 +3541,13 @@ msgstr "Продовжити розсилку email"
 msgid "Cancel"
 msgstr "Скасувати"
 
+#, fuzzy
 msgid "Downloading file"
-msgstr ""
+msgstr "Завантаження файлу"
 
+#, fuzzy
 msgid "AstroBin is downloading the file you requested in the background."
-msgstr ""
+msgstr "AstroBin завантажує запитуваний вами файл у фоновому режимі."
 
 msgid "No file selected"
 msgstr "Файл не вибрано"
@@ -3574,10 +3713,13 @@ msgstr ""
 "зрештою їм набридне, не завдавши жодної шкоди, оскільки ніхто не бачив того, "
 "що вони опублікували."
 
+#, fuzzy
 msgid ""
 "If they follow you, the follow will be removed, and they will not be able to "
 "follow you again."
 msgstr ""
+"Якщо вони підпишуться на вас, підписка буде видалена, і вони не зможуть "
+"підписатися на вас знову."
 
 msgid "Continue"
 msgstr "Продовжити"
@@ -3625,8 +3767,9 @@ msgstr "Налаштування слайдшоу"
 msgid "Autoplay"
 msgstr "Авто-відтворення"
 
+#, fuzzy
 msgid "Transitions"
-msgstr ""
+msgstr "Перехідні ефекти"
 
 msgid "Play speed"
 msgstr "Швидкісь програв."
@@ -3640,31 +3783,40 @@ msgstr "Поділитися (спочатку)"
 msgid "Apply"
 msgstr "Застосувати"
 
+#, fuzzy
 msgid "IOTD/TP stats"
-msgstr ""
+msgstr "Статистика IOTD/TP"
 
+#, fuzzy
 msgid "(last [x] days)"
-msgstr ""
+msgstr "(останні [x] днів)"
 
 msgid "Please note"
 msgstr "Зверніть увагу"
 
+#, fuzzy
 msgid "The following tables are updated every 24 hours."
-msgstr ""
+msgstr "Наступні таблиці оновлюються кожні 24 години."
 
+#, fuzzy
 msgid "Distribution of astrophotographers"
-msgstr ""
+msgstr "Розподіл астрофотографів"
 
+#, fuzzy
 msgid ""
 "This table shows the number of distinct astrophotographers who have been "
 "assigned and IOTD/TP award compared to the total number of images awarded."
 msgstr ""
+"Ця таблиця показує кількість різних астрофотографів, які отримали нагороду "
+"IOTD/TP в порівнянні з загальною кількістю нагороджених зображень."
 
+#, fuzzy
 msgid "Distinct awarded users"
-msgstr ""
+msgstr "Різні нагороджені користувачі"
 
+#, fuzzy
 msgid "Total awarded images"
-msgstr ""
+msgstr "Загальна кількість нагороджених зображень"
 
 msgid "Image of the day"
 msgstr "Зображення дня"
@@ -3675,19 +3827,24 @@ msgstr "Топ Зображення"
 msgid "Top pick nominations"
 msgstr "Номінації на Топ Зображення"
 
+#, fuzzy
 msgid "Distribution of subject types"
-msgstr ""
+msgstr "Розподіл типів об'єктів"
 
+#, fuzzy
 msgid ""
 "This table shows the distribution of awards per subject type, compared to "
 "the popularity of images of that subject type."
 msgstr ""
+"Ця таблиця показує розподіл нагород за типами об'єктів, в порівнянні з "
+"популярністю зображень цього типу."
 
 msgid "Top pick"
 msgstr "Топ Зображення"
 
+#, fuzzy
 msgid "Total submitted"
-msgstr ""
+msgstr "Загальна кількість поданих"
 
 msgid "Deep sky"
 msgstr "Глибокий космос"
@@ -3695,16 +3852,21 @@ msgstr "Глибокий космос"
 msgid "Solar system"
 msgstr "Сонячна система"
 
+#, fuzzy
 msgid "Distribution of data sources"
-msgstr ""
+msgstr "Розподіл джерел даних"
 
+#, fuzzy
 msgid ""
 "This table shows the distribution of awards per data source, compared to the "
 "popularity of images acquired from that data source."
 msgstr ""
+"Ця таблиця показує розподіл нагород за джерелами даних, в порівнянні з "
+"популярністю зображень, отриманих з цього джерела."
 
+#, fuzzy
 msgid "Public amaeteur data"
-msgstr ""
+msgstr "Публічні аматорські дані"
 
 msgid "Quick search"
 msgstr "Швидкий пошук"
@@ -3739,20 +3901,25 @@ msgstr "Останні теми"
 msgid "Subscribed topics"
 msgstr "Теми, що відстежуються"
 
+#, fuzzy
 msgid "Marketplace"
-msgstr ""
+msgstr "Ринок"
 
+#, fuzzy
 msgid "Browse Marketplace"
-msgstr ""
+msgstr "Переглянути ринок"
 
+#, fuzzy
 msgid "Post listing"
-msgstr ""
+msgstr "Додати оголошення"
 
+#, fuzzy
 msgid "Sell"
-msgstr ""
+msgstr "Продавати"
 
+#, fuzzy
 msgid "Seek"
-msgstr ""
+msgstr "Шукати"
 
 msgid "Explore"
 msgstr "Огляд"
@@ -3763,8 +3930,9 @@ msgstr "Розширений пошук"
 msgid "Constellations"
 msgstr "Сузір’я"
 
+#, fuzzy
 msgid "IOTD/TP Archive"
-msgstr ""
+msgstr "IOTD/TP Архів"
 
 msgid "Remote astrophotography"
 msgstr "Дистанційна астрофотографія"
@@ -3781,8 +3949,9 @@ msgstr "Допомога"
 msgid "What is this site?"
 msgstr "Що це за сайт?"
 
+#, fuzzy
 msgid "Support"
-msgstr ""
+msgstr "Підтримка"
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "Бажаєте почати використовувати своє справжнє ім’я на AstroBin?"
@@ -3816,6 +3985,9 @@ msgstr ""
 "інформативні, конструктивні та цінні коментарі до AstroBin. %(_0)sЧитати "
 "більше.%(_1)s"
 
+msgid "My places"
+msgstr "Мої місця"
+
 msgid "Public Gallery"
 msgstr "Публічна Галерея"
 
@@ -3825,14 +3997,15 @@ msgstr "Студія"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-msgid "My messages"
-msgstr "Мої повідомлення"
+msgid "Messages"
+msgstr "Повідомлення"
+
+#, fuzzy
+msgid "Marketplace listings"
+msgstr "Оголошення на ринку"
 
 msgid "API Keys"
 msgstr "API-ключі"
-
-msgid "My settings"
-msgstr "Мої налаштування"
 
 msgid "Disable high contrast theme"
 msgstr "Вимкнути висококонтрастну тему"
@@ -3934,115 +4107,167 @@ msgstr "Написано"
 msgid "Received"
 msgstr "Отримані"
 
+#, fuzzy
 msgid "Accepted"
-msgstr ""
+msgstr "Прийнято"
 
+#, fuzzy
 msgid "Accept"
-msgstr ""
+msgstr "Прийняти"
 
+#, fuzzy
 msgid "Declined"
-msgstr ""
+msgstr "Відхилено"
 
+#, fuzzy
 msgid "Decline"
-msgstr ""
+msgstr "Відхилити"
 
+#, fuzzy
 msgid "Cookies in this group"
-msgstr ""
+msgstr "Файли cookie в цій групі"
 
 msgid "Cookie consent"
 msgstr "Згода на використання файлів cookie"
 
+#, fuzzy
 msgid "Info"
-msgstr ""
+msgstr "Інформація"
 
+#, fuzzy
 msgid "Details"
-msgstr ""
+msgstr "Деталі"
 
+#, fuzzy
 msgid "Policies"
-msgstr ""
+msgstr "Політики"
 
+#, fuzzy
 msgid ""
 "We use cookies on our website to provide you with the best user experience "
 "and to improve our services."
 msgstr ""
+"Ми використовуємо файли cookie на нашому сайті, щоб надати вам найкращий "
+"досвід користування та покращити наші послуги."
 
+#, fuzzy
 msgid ""
 "Cookies are small text files that are stored on your device (computer, "
 "smartphone, tablet) when you visit our website. They help us remember your "
 "preferences, analyze how our website is used, and customize the content you "
 "see."
 msgstr ""
+"Файли cookie — це невеликі текстові файли, які зберігаються на вашому "
+"пристрої (комп'ютері, смартфоні, планшеті) під час відвідування нашого "
+"сайту. Вони допомагають нам запам'ятовувати ваші налаштування, аналізувати, "
+"як використовується наш сайт, і налаштовувати контент, який ви бачите."
 
+#, fuzzy
 msgid "We use the following types of cookies:"
-msgstr ""
+msgstr "Ми використовуємо такі типи файлів cookie:"
 
+#, fuzzy
 msgid "Essential cookies (required)"
-msgstr ""
+msgstr "Обов'язкові файли cookie (необхідні)"
 
+#, fuzzy
 msgid "These cookies are essential for the website to function properly."
-msgstr ""
+msgstr "Ці файли cookie є обов'язковими для належного функціонування сайту."
 
+#, fuzzy
 msgid "Functional cookies (recommended)"
-msgstr ""
+msgstr "Функціональні файли cookie (рекомендується)"
 
+#, fuzzy
 msgid ""
 "These cookies are used to provide additional functionality to the website, "
 "such as remembering local preferences."
 msgstr ""
+"Ці файли cookie використовуються для надання додаткових функцій сайту, таких "
+"як запам'ятовування локальних налаштувань."
 
+#, fuzzy
 msgid "Performance cookies (recommended)"
-msgstr ""
+msgstr "Файли cookie для продуктивності (рекомендується)"
 
+#, fuzzy
 msgid ""
 "These cookies are used to improve the website performance by saving some "
 "pieces of information on your computer and avoiding reading from the "
 "AstroBin database when possible."
 msgstr ""
+"Ці файли cookie використовуються для покращення продуктивності сайту, "
+"зберігаючи деякі дані на вашому комп'ютері та уникаючи читання з бази даних "
+"AstroBin, коли це можливо."
 
+#, fuzzy
 msgid "Analytics cookies"
-msgstr ""
+msgstr "Аналітичні файли cookie"
 
+#, fuzzy
 msgid ""
 "These cookies are used to anonymously track your usage of the website, so "
 "that we can improve it over time."
 msgstr ""
+"Ці файли cookie використовуються для анонімного відстеження вашого "
+"використання сайту, щоб ми могли покращити його з часом."
 
+#, fuzzy
 msgid "Advertising cookies"
-msgstr ""
+msgstr "Рекламні файли cookie"
 
+#, fuzzy
 msgid ""
 "These cookies are used to honor ad display frequency caps. AstroBin does NOT "
 "serve targeted ads."
 msgstr ""
+"Ці файли cookie використовуються для дотримання обмежень частоти показу "
+"реклами. AstroBin НЕ показує таргетовану рекламу."
 
+#, fuzzy
 msgid ""
 "AstroBin is committed to transparency and choice regarding the cookies that "
 "we use on our website. Our policies explain how we use cookies and how you "
 "can control your privacy."
 msgstr ""
+"AstroBin прагне до прозорості та вибору щодо файлів cookie, які ми "
+"використовуємо на нашому сайті. Наші політики пояснюють, як ми "
+"використовуємо файли cookie та як ви можете контролювати свою "
+"конфіденційність."
 
+#, fuzzy
 msgid "Ad policy"
-msgstr ""
+msgstr "Політика реклами"
 
+#, fuzzy
 msgid "Accept all"
-msgstr ""
+msgstr "Прийняти все"
 
+#, fuzzy
 msgid "Essential only"
-msgstr ""
+msgstr "Тільки обов'язкові"
 
+#, fuzzy
 msgid "Customize selection"
-msgstr ""
+msgstr "Налаштувати вибір"
 
+#, fuzzy
 msgid ""
 "This is a list of the categories of cookies used in our website and why we "
 "use them."
 msgstr ""
+"Це список категорій файлів cookie, які використовуються на нашому сайті, і "
+"чому ми їх використовуємо."
 
+#, fuzzy
 msgid ""
 "Please note: third-party cookies might change from time to time. We will try "
 "to keep this list up to date, but we cannot guarantee that it will always be "
 "complete and accurate."
 msgstr ""
+"Зверніть увагу: файли cookie третіх сторін можуть змінюватися з часом. Ми "
+"намагатимемося підтримувати цей список в актуальному стані, але не можемо "
+"гарантувати, що він завжди буде повним і точним."
 
 msgid "More"
 msgstr "Більше"
@@ -4063,8 +4288,9 @@ msgstr ""
 msgid "Return to image"
 msgstr "Повернутися до зображення"
 
+#, fuzzy
 msgid "Celestial hemisphere"
-msgstr ""
+msgstr "Небесна півкуля"
 
 msgid "Northern"
 msgstr "Північна"
@@ -4085,14 +4311,16 @@ msgstr "Завантаження…"
 msgid "Acquisition details"
 msgstr "Деталі зйомки"
 
+#, fuzzy
 msgid "Remove me"
-msgstr ""
+msgstr "Видалити мене"
 
 msgid "Acquired at"
 msgstr "Знято в"
 
+#, fuzzy
 msgid "In these collections"
-msgstr ""
+msgstr "У цих колекціях"
 
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -4136,13 +4364,18 @@ msgid ""
 "to this image.\n"
 "            "
 msgstr ""
+"\n"
+"                <strong>%(user)s</strong> хоче додати вас як співавтора до "
+"цього зображення.\n"
+"            "
 
 #, python-format
 msgid "%(_0)sLearn more.%(_1)s"
-msgstr ""
+msgstr "%(_0)sДізнайтеся більше.%(_1)s"
 
+#, fuzzy
 msgid "Deny"
-msgstr ""
+msgstr "Відхилити"
 
 msgid "Right ascension"
 msgstr "Пряме сходження"
@@ -4221,11 +4454,13 @@ msgstr "Купуйте %(name)s у %(retailer)s"
 msgid "Disable retailer integration"
 msgstr "Вимкнути інтеграцію з роздрібним продавцем"
 
+#, fuzzy
 msgid "This item is unapproved and it might require your attention."
-msgstr ""
+msgstr "Цей елемент не підтверджений і може вимагати вашої уваги."
 
+#, fuzzy
 msgid "No equipment specified."
-msgstr ""
+msgstr "Обладнання не вказано."
 
 msgid "Revision title"
 msgstr "Назва версії"
@@ -4233,26 +4468,32 @@ msgstr "Назва версії"
 msgid "Download original file"
 msgstr "Завантажити оригінальний файл"
 
+#, fuzzy
 msgid "Original filename"
-msgstr ""
+msgstr "Оригінальна назва файлу"
 
+#, fuzzy
 msgid "Collaborators"
-msgstr ""
+msgstr "Співпрацівники"
 
+#, fuzzy
 msgid "Photographer"
-msgstr ""
+msgstr "Фотограф"
 
+#, fuzzy
 msgid "Collaborators (pending approval)"
-msgstr ""
+msgstr "Співавтори (в очікуванні схвалення)"
 
 msgid "chosen by"
 msgstr "обрано"
 
+#, fuzzy
 msgid "From the marketplace"
-msgstr ""
+msgstr "З ринку"
 
+#, fuzzy
 msgid "reserved"
-msgstr ""
+msgstr "зарезервовано"
 
 msgid "Actions"
 msgstr "Дії"
@@ -4294,8 +4535,9 @@ msgstr "Надіслати у групу"
 msgid "Submit for IOTD/TP consideration"
 msgstr "Подати на розгляд IOTD/TP"
 
+#, fuzzy
 msgid "Deadline"
-msgstr ""
+msgstr "Термін"
 
 msgid "Delete image and all revisions"
 msgstr "Видалити зображення та всі версії"
@@ -4341,6 +4583,10 @@ msgstr "Основні анотації"
 
 msgid "Advanced annotations"
 msgstr "Розширені анотації"
+
+#, fuzzy
+msgid "Advanced annotations (large font)"
+msgstr "Розширені анотації (великий шрифт)"
 
 msgid "Basic information"
 msgstr "Загальна інформація"
@@ -4545,24 +4791,31 @@ msgid ""
 msgstr ""
 "Це змусить переоновитися мініатюри для цього зображення та всіх його версій."
 
+#, fuzzy
 msgid ""
 "The “AstroBin Image of the Day and Top Picks”, or IOTD/TP, is a long-running "
 "system to promote beautiful, interesting, peculiar, or otherwise amazing "
 "astrophotographs, with a focus on technical excellence."
 msgstr ""
+"«Зображення дня AstroBin та Топ-вибори», або IOTD/TP, — це тривала система "
+"для просування красивих, цікавих, незвичайних або інших вражаючих "
+"астрофотографій, з акцентом на технічну досконалість."
 
 msgid "Learn more."
 msgstr "Читати більше."
 
+#, fuzzy
 msgid "Submitted"
-msgstr ""
+msgstr "Подано"
 
+#, fuzzy
 msgid ""
 "The date and time when you submitted this image for IOTD/TP consideration."
-msgstr ""
+msgstr "Дата та час, коли ви подали це зображення на розгляд для IOTD/TP."
 
+#, fuzzy
 msgid "Views by Submitters (available since September 19th, 2023)"
-msgstr ""
+msgstr "Перегляди від подавачів (доступно з 19 вересня 2023 року)"
 
 #, python-format
 msgid ""
@@ -4571,9 +4824,14 @@ msgid ""
 "TP process expires, it's assigned to the other %(_0)s%% of Submitters and "
 "the process begins anew."
 msgstr ""
+"Кожному зображенню призначається %(_0)s%% доступних подавачів. Якщо "
+"принаймні 80%% з них не переглянуть зображення до закінчення його часу в "
+"процесі IOTD/TP, воно призначається іншим %(_0)s%% подавачам, і процес "
+"починається знову."
 
+#, fuzzy
 msgid "Promotions by Submitters"
-msgstr ""
+msgstr "Просування від подавачів"
 
 #, python-format
 msgid ""
@@ -4582,18 +4840,26 @@ msgid ""
 "addition to anonymization of images and distribution to only a subset of "
 "them, prevents biases and ensures that the best images are selected."
 msgstr ""
+"Коли %(_0)s різних подавачів просувають зображення, воно переходить на "
+"наступний етап процесу: оцінка для статусу Top Pick. Ця вимога, разом з "
+"анонімізацією зображень та розподілом лише на підмножину з них, запобігає "
+"упередженості та забезпечує вибір найкращих зображень."
 
+#, fuzzy
 msgid "Promotions by Reviewers"
-msgstr ""
+msgstr "Просування від рецензентів"
 
 #, python-format
 msgid ""
 "When %(_0)s distinct Reviewers promote the image, it moves on to the next "
 "stage of the process: evaluation for IOTD status."
 msgstr ""
+"Коли %(_0)s різних рецензентів просувають зображення, воно переходить на "
+"наступний етап процесу: оцінка для статусу IOTD."
 
+#, fuzzy
 msgid "Early dismissal"
-msgstr ""
+msgstr "Раннє відхилення"
 
 #, python-format
 msgid ""
@@ -4603,6 +4869,11 @@ msgid ""
 "process. This streamlines the process and ensures that any bias present in "
 "promotions could be overruled by other staff members."
 msgstr ""
+"Співробітники мають багато зображень для перевірки щодня, і вони можуть "
+"відхиляти зображення, якщо вважають, що вони не відповідають вимогам для "
+"вибору IOTD/TP. Якщо зображення відхилено %(_0)s разів, воно видаляється з "
+"процесу. Це спрощує процес і забезпечує, що будь-яка упередженість, присутня "
+"в просуваннях, може бути переглянута іншими співробітниками."
 
 msgid "The following people like this image"
 msgstr "Наступним користувачам подобається це зображення"
@@ -4628,11 +4899,14 @@ msgstr ""
 "Це перемістить це зображення у Публічну зону, додасть його до списку та "
 "сповістить Ваших підписників у разі потреби."
 
+#, fuzzy
 msgid "Remove yourself as a collaborator"
-msgstr ""
+msgstr "Видалити себе як співпрацівника"
 
+#, fuzzy
 msgid "Are you sure you want to be removed as a collaborator to this image?"
 msgstr ""
+"Ви впевнені, що хочете бути видаленим як співпрацівник цього зображення?"
 
 msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
@@ -4704,6 +4978,8 @@ msgid ""
 "I have read and I agree with the IOTD/TP %(_0)srules%(_1)s and "
 "%(_2)sguidelines%(_3)s"
 msgstr ""
+"Я прочитав і погоджуюсь з правилами та рекомендаціями IOTD/TP %(_0)srules"
+"%(_1)s та %(_2)sguidelines%(_3)s"
 
 msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
@@ -4821,10 +5097,13 @@ msgstr ""
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
 "базової форми</a>."
 
+#, fuzzy
 msgid ""
 "Filters are not available because you didn't add any to the equipment list "
 "of this image."
 msgstr ""
+"Фільтри недоступні, оскільки ви не додали жодного до списку обладнання для "
+"цього зображення."
 
 msgid "Acquisition session"
 msgstr "Знімальна сесія"
@@ -4960,6 +5239,24 @@ msgstr "Обладнання, що використовується"
 msgid "Edit your image: advanced plate-solving settings"
 msgstr "Редагування зображення: розширене розпізнавання поля"
 
+#, fuzzy
+msgid "Note:"
+msgstr "Примітка:"
+
+#, python-format
+msgid ""
+"Based on the image's field radius, some features are not available for this "
+"field size category (%(category)s)."
+msgstr ""
+"В залежності від радіусу поля зображення, деякі функції недоступні для цієї "
+"категорії розміру поля (%(category)s)."
+
+#, fuzzy
+msgid ""
+"The following features have been turned off by default and cannot be enabled:"
+msgstr ""
+"Наступні функції за замовчуванням вимкнені і не можуть бути активовані:"
+
 msgid "Save and plate-solve again"
 msgstr "Зберегти та знову визначити поле"
 
@@ -5057,8 +5354,9 @@ msgstr "Наближення у \"клацніть і перетягніть\" �
 msgid "Published"
 msgstr "Опубліковано"
 
+#, fuzzy
 msgid "Last acquisition"
-msgstr ""
+msgstr "Останнє придбання"
 
 msgid "Views"
 msgstr "Перегляди"
@@ -5099,6 +5397,8 @@ msgid ""
 "Interested in <strong>%(name)s</strong>? Our sponsor <strong>%(retailer)s</"
 "strong> sells this product!"
 msgstr ""
+"Цікавитесь <strong>%(name)s</strong>? Наш спонсор <strong>%(retailer)s</"
+"strong> продає цей продукт!"
 
 msgid "Shop now"
 msgstr "Здійснити покупку"
@@ -5107,6 +5407,7 @@ msgstr "Здійснити покупку"
 msgid ""
 "Interested in <strong>%(name)s</strong>? Our sponsors sell this product!"
 msgstr ""
+"Цікавитесь <strong>%(name)s</strong>? Наші спонсори продають цей продукт!"
 
 #, python-format
 msgid ""
@@ -5130,9 +5431,15 @@ msgid ""
 "                                looking for!\n"
 "                            "
 msgstr ""
+"\n"
+"                                У маркетплейсі AstroBin є <strong>%(count)s</"
+"strong> товарів, схожих на те, що ви\n"
+"                                шукаєте!\n"
+"                            "
 
+#, fuzzy
 msgid "Take a look!"
-msgstr ""
+msgstr "Подивіться!"
 
 msgid "Top pick nomination"
 msgstr "Номінація на Топ Зображення"
@@ -5157,18 +5464,19 @@ msgstr "Зачинено"
 
 #, python-format
 msgid "Posted in <a href=\"%(forum_url)s\">%(forum_name)s</a>"
-msgstr ""
+msgstr "Опубліковано в <a href=\"%(forum_url)s\">%(forum_name)s</a>"
 
 #, python-format
 msgid "Started by <a href=\"%(topic_user_url)s\">%(username)s</a>"
-msgstr ""
+msgstr "Розпочато <a href=\"%(topic_user_url)s\">%(username)s</a>"
 
+#, fuzzy
 msgid "Started by user that was since deleted"
-msgstr ""
+msgstr "Розпочато користувачем, який був видалений"
 
 #, python-format
 msgid "Last post by <a href=\"%(last_post_user_url)s\">%(username)s</a>"
-msgstr ""
+msgstr "Останній пост від <a href=\"%(last_post_user_url)s\">%(username)s</a>"
 
 msgid "Home of Astrophotography"
 msgstr "Куток Астрофотографії"
@@ -5206,6 +5514,9 @@ msgstr "Немає результатів"
 
 msgid "Searching"
 msgstr "Шукаємо"
+
+msgid "My messages"
+msgstr "Мої повідомлення"
 
 msgid "Participants"
 msgstr "Учасники"
@@ -5275,80 +5586,115 @@ msgid ""
 "<strong>%(user)s</strong> accepted your request to add them as collaborator "
 "to your image"
 msgstr ""
+"<strong>%(user)s</strong> прийняв ваш запит на додавання їх як "
+"співпрацівника до вашого зображення"
 
 #, python-format
 msgid ""
 "%(user)s accepted your request to add them as collaborator to your image"
 msgstr ""
+"%(user)s прийняв ваш запит на додавання їх як співпрацівника до вашого "
+"зображення"
 
+#, fuzzy
 msgid ""
 "You, or somebody on your behalf, attempted to log in to AstroBin from a "
 "different country than the one you were seen in last time, or from a country "
 "that could not be detected."
 msgstr ""
+"Ви або хтось від вашого імені намагалися увійти в AstroBin з іншої країни, "
+"ніж та, в якій вас бачили востаннє, або з країни, яку не вдалося виявити."
 
+#, fuzzy
 msgid "Last known country"
-msgstr ""
+msgstr "Остання відома країна"
 
+#, fuzzy
 msgid "This login attempted in country"
-msgstr ""
+msgstr "Цей вхід був спробою в країні"
 
+#, fuzzy
 msgid ""
 "If you did not make this login attempt, please change your password and/or "
 "contact AstroBin immediately."
 msgstr ""
+"Якщо ви не робили цю спробу входу, будь ласка, змініть свій пароль і/або "
+"зв'яжіться з AstroBin негайно."
 
+#, fuzzy
 msgid "Wishing you clear skies and excellent seeing!"
-msgstr ""
+msgstr "Бажаємо вам ясного неба та відмінного seeing!"
 
+#, fuzzy
 msgid "AstroBin detected a login attempt from a different country"
-msgstr ""
+msgstr "AstroBin виявив спробу входу з іншої країни"
 
+#, fuzzy
 msgid ""
 "You, or somebody on your behalf, attempted to log in to AstroBin and we "
 "detected that your password does not meet security requirements."
 msgstr ""
+"Ви або хтось від вашого імені намагалися увійти в AstroBin, і ми виявили, що "
+"ваш пароль не відповідає вимогам безпеки."
 
+#, fuzzy
 msgid ""
 "To prevent spam, phishing, and other malicious activities, all your new "
 "content posted on AstroBin will be moderated until you have changed your "
 "password to meet security requirements, or you have enabled two-factor "
 "authentication."
 msgstr ""
+"Щоб запобігти спаму, фішингу та іншим шкідливим діям, весь ваш новий "
+"контент, розміщений на AstroBin, буде модератором, поки ви не зміните свій "
+"пароль, щоб відповідати вимогам безпеки, або не ввімкнете двофакторну "
+"аутентифікацію."
 
+#, fuzzy
 msgid ""
 "We recommend that you change your password as soon as possible, for your "
 "security and the safety of the other members of the AstroBin community."
 msgstr ""
+"Рекомендуємо змінити ваш пароль якомога швидше, для вашої безпеки та безпеки "
+"інших членів спільноти AstroBin."
 
+#, fuzzy
 msgid "Learn more about security standards on AstroBin:"
-msgstr ""
+msgstr "Дізнайтеся більше про стандарти безпеки на AstroBin:"
 
+#, fuzzy
 msgid "Two-factor Authentication"
-msgstr ""
+msgstr "Двофакторна автентифікація"
 
+#, fuzzy
 msgid ""
 "To prevent spam, phishing, and other malicious activities, all your new "
 "content posted on AstroBin will be moderated until you have changed your "
 "password to meet security requirements."
 msgstr ""
+"Щоб запобігти спаму, фішингу та іншим шкідливим діям, весь ваш новий "
+"контент, опублікований на AstroBin, буде модератором, поки ви не зміните "
+"свій пароль, щоб відповідати вимогам безпеки."
 
+#, fuzzy
 msgid ""
 "AstroBin detected that your password does not meet security requirements"
-msgstr ""
+msgstr "AstroBin виявив, що ваш пароль не відповідає вимогам безпеки"
 
 #, python-format
 msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
-msgstr ""
+msgstr "<strong>%(user)s</strong> додав вас як співпрацівника до зображення."
 
+#, fuzzy
 msgid ""
 "If you want to remove yourself, click on the \"Remove me\" button underneath "
 "your avatar."
 msgstr ""
+"Якщо ви хочете видалити себе, натисніть кнопку \"Видалити мене\" під вашим "
+"аватаром."
 
 #, python-format
 msgid "%(user)s added you as a collaborator to an image"
-msgstr ""
+msgstr "%(user)s додав вас як співпрацівника до зображення."
 
 msgid "Your request for an API Key has been approved!"
 msgstr "Ваш запит на API-ключ був схвалений!"
@@ -5411,6 +5757,11 @@ msgid ""
 "upload opportunities before upgrading to unlock even more features. For "
 "details, please visit our <a href=\"%(url)s\">pricing page</a>!"
 msgstr ""
+"AstroBin - це преміум-сервіс, розроблений для надання виняткової цінності "
+"своїм користувачам. Якщо ви зараз користуєтеся безкоштовним акаунтом, ви "
+"можете насолоджуватися %(max)s можливостями завантаження, перш ніж оновити, "
+"щоб розблокувати ще більше функцій. Для деталей, будь ласка, відвідайте нашу "
+"<a href=\"%(url)s\">сторінку цін</a>!"
 
 #, python-format
 msgid ""
@@ -5451,6 +5802,11 @@ msgid ""
 "upload opportunities before upgrading to unlock even more features. For "
 "details, please visit our pricing page!"
 msgstr ""
+"AstroBin - це преміум-сервіс, розроблений для надання виняткової цінності "
+"своїм користувачам. Якщо ви зараз користуєтеся безкоштовним акаунтом, ви "
+"можете насолоджуватися %(max)s можливостями завантаження, перш ніж оновити, "
+"щоб розблокувати ще більше функцій. Для деталей, будь ласка, відвідайте нашу "
+"сторінку цін!"
 
 msgid ""
 "New uploads go to your \"staging area\", where they are unlisted. You can "
@@ -5481,10 +5837,14 @@ msgid ""
 "<strong>%(user)s</strong> denied your request to add them as collaborator to "
 "your image"
 msgstr ""
+"<strong>%(user)s</strong> відхилив ваш запит на додавання їх як "
+"співпрацівника до вашого зображення"
 
 #, python-format
 msgid "%(user)s denied your request to add them as collaborator to your image"
 msgstr ""
+"%(user)s відхилив ваш запит на додавання їх як співпрацівника до вашого "
+"зображення"
 
 msgid "You have a new notification on AstroBin"
 msgstr "У Вас нове повідомлення"
@@ -5495,6 +5855,9 @@ msgid ""
 "                                                        Hey, %(name)s!\n"
 "                                                    "
 msgstr ""
+"\n"
+"                                                        Привіт, %(name)s!\n"
+"                                                    "
 
 msgid "See all your notifications"
 msgstr "Переглянути всі свої сповіщення"
@@ -5608,8 +5971,9 @@ msgstr ""
 msgid "Your request to join the group \"%(group_name)s\" has been APPROVED"
 msgstr "Ваш запит на приєднання до групи \"%(group_name)s\" ЗАТВЕРДЖЕНО"
 
+#, fuzzy
 msgid "Visit group"
-msgstr ""
+msgstr "Відвідати групу"
 
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
@@ -5617,17 +5981,21 @@ msgstr "Ваш запит на приєднання до групи \"%(group_na
 
 #, python-format
 msgid "Moderator <strong>%(user)s</strong> approved your image"
-msgstr ""
+msgstr "Модератор <strong>%(user)s</strong> схвалив ваше зображення"
 
+#, fuzzy
 msgid ""
 "If you already promoted your image to the public area of your gallery, it "
 "will shortly be indexed by AstroBin's search engine and appear in search "
 "results."
 msgstr ""
+"Якщо ви вже просунули своє зображення в публічну частину вашої галереї, воно "
+"незабаром буде проіндексовано пошуковою системою AstroBin і з'явиться в "
+"результатах пошуку."
 
 #, python-format
 msgid "Moderator \"%(user)s\" approved your image"
-msgstr ""
+msgstr "Модератор \"%(user)s\" схвалив ваше зображення"
 
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
@@ -5670,9 +6038,10 @@ msgstr ""
 "На жаль, AstroBin не зміг виконати розширене розпізнавання Вашого "
 "зображення: %(title)s."
 
+#, fuzzy
 msgid ""
 "Your image could not be automatically submitted for IOTD/TP consideration"
-msgstr ""
+msgstr "Ваше зображення не вдалося автоматично подати на розгляд IOTD/TP"
 
 #, python-format
 msgid ""
@@ -5682,6 +6051,12 @@ msgid ""
 "navigate to your image's page, find the \"Actions\" menu in the orange bar "
 "at the top, and click on \"Submit for IOTD/TP consideration\"."
 msgstr ""
+"Ви можете знайти свої налаштування на наступній сторінці: %(_0)sВаші "
+"налаштування%(_1)s. Будь ласка, знайдіть прапорець з написом \"Я погоджуюсь "
+"з правилами та рекомендаціями IOTD/TP\". Щоб знову подати своє зображення на "
+"розгляд для IOTD/TP, перейдіть на сторінку вашого зображення, знайдіть меню "
+"\"Дії\" в оранжевій панелі вгорі та натисніть \"Подати на розгляд для IOTD/"
+"TP.\""
 
 msgid ""
 "If you haven't already, please take a few minutes to learn how the process "
@@ -5723,33 +6098,56 @@ msgstr ""
 
 #, python-format
 msgid ""
+"AstroBin applied default settings based on your image's field size "
+"(%(field_radius)s degrees). Different field sizes receive different "
+"annotation settings for optimal results. You are free to change these "
+"settings using the \"Edit plate-solving settings\" menu in your image."
+msgstr ""
+"AstroBin застосував налаштування за замовчуванням на основі розміру поля "
+"вашого зображення (%(field_radius)s градусів). Різні розміри поля отримують "
+"різні налаштування анотацій для оптимальних результатів. Ви можете змінити "
+"ці налаштування, використовуючи меню \"Редагувати налаштування вирішення "
+"плоскої поверхні\" у вашому зображенні."
+
+#, python-format
+msgid ""
 "AstroBin completed the advanced plate-solution of your image: %(title)s."
 msgstr ""
 "AstroBin завершив розширене розпізнавання поля Вашого зображення: %(title)s."
 
+#, fuzzy
 msgid "You submitted your image for IOTD/TP consideration!"
-msgstr ""
+msgstr "Ви надіслали своє зображення на розгляд IOTD/TP!"
 
 msgid "An image you dismissed made it to IOTD"
-msgstr ""
+msgstr "Зображення, яке ви відхилили, потрапило до IOTD"
 
+#, fuzzy
 msgid ""
 "This means that you were in disagreement with the rest of the IOTD/TP staff. "
 "A variety of opinions and tastes is fine, but images should only be "
 "dismissed if they present glaring technical issues as documented in the IOTD "
 "manifesto:"
 msgstr ""
+"Це означає, що ви не погоджувалися з рештою команди IOTD/TP. Різноманітність "
+"думок і смаків - це нормально, але зображення слід відхиляти лише в тому "
+"випадку, якщо вони мають явні технічні проблеми, як зазначено в маніфесті "
+"IOTD:"
 
+#, fuzzy
 msgid ""
 "Please only dismiss images if you are sure they are not up to the standards "
 "of the IOTD/TP."
 msgstr ""
+"Будь ласка, відхиляйте зображення лише якщо ви впевнені, що вони не "
+"відповідають стандартам IOTD/TP."
 
 msgid "Thank you for your understanding."
 msgstr "Дякую за розуміння."
 
+#, fuzzy
 msgid "An image you dismissed made it to Top Pick"
-msgstr ""
+msgstr "Зображення, яке ви відхилили, потрапило до Top Pick"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "Зображення, яке ви просували, потрапило до IOTD"
@@ -5757,8 +6155,9 @@ msgstr "Зображення, яке ви просували, потрапило
 msgid "An image you promoted made it to Top Pick"
 msgstr "Зображення, яке ви рекламували, потрапило до Топ-зображень"
 
+#, fuzzy
 msgid "You have been insufficiently active as an IOTD Submitter or Reviewer."
-msgstr ""
+msgstr "Ви були недостатньо активні як подавач або рецензент IOTD."
 
 msgid ""
 "While the AstroBin IOTD selection process has a good level of redundancy "
@@ -5769,10 +6168,13 @@ msgstr ""
 "систему, він, як і раніше, залежить від співробітників, які регулярно "
 "роблять вибір зі своїх відповідних черг."
 
+#, fuzzy
 msgid ""
 "As you have not been sufficiently active for a significant amount of time, "
 "you have been removed from the IOTD staff for now."
 msgstr ""
+"Оскільки ви не були достатньо активні протягом значного часу, вас наразі "
+"видалено з команди IOTD."
 
 msgid ""
 "This will ensure that potential IOTD or Top Pick candidates don't go "
@@ -5781,21 +6183,30 @@ msgstr ""
 "Це гарантує, що потенційні кандидати IOTD або Топ Зображень не залишаться "
 "непоміченими, сидячи в черзі неактивного співробітника."
 
+#, fuzzy
 msgid ""
 "\n"
 "        If the reason for your inactivity is temporary, please let us know "
 "and we will be happy to reinstate you.\n"
 "    "
 msgstr ""
+"\n"
+"        Якщо причина вашої неактивності тимчасова, будь ласка, дайте нам "
+"знати, і ми будемо раді вас відновити.\n"
+"    "
 
 msgid "Thank you for understanding!"
 msgstr "Дякуємо за розуміння!"
 
+#, fuzzy
 msgid ""
 "\n"
 "    If the reason for your inactivity is temporary, please let us know and "
 "we will be happy to reinstate you.\n"
 msgstr ""
+"\n"
+"    Якщо причина вашої неактивності тимчасова, будь ласка, дайте нам знати, "
+"і ми будемо раді вас відновити.\n"
 
 #, python-format
 msgid ""
@@ -5820,35 +6231,51 @@ msgid ""
 "process. If this continues, unfortunately you will be automatically removed "
 "from the staff."
 msgstr ""
+"Протягом останніх %(min_promotions_days)s днів ви зробили менше ніж "
+"%(min_promotions)s виборів, і цього недостатньо для підтримки процесу IOTD/"
+"TP. Якщо це продовжиться, на жаль, ви будете автоматично видалені з команди."
 
 #, python-format
 msgid ""
 "The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
 "consideration is in %(days)s days"
 msgstr ""
+"Кінцевий термін подачі вашого зображення %(prefix)s%(title)s%(suffix)s для "
+"розгляду IOTD/TP через %(days)s днів"
 
+#, fuzzy
 msgid ""
 "You received this notification because you have submitted images for IOTD/TP "
 "consideration in the past, but not this one yet."
 msgstr ""
+"Ви отримали це сповіщення, тому що раніше подавали зображення для розгляду "
+"IOTD/TP, але не цього разу."
 
+#, fuzzy
 msgid ""
 "To submit this image for IOTD/TP consideration, please click on the link "
 "below, go to the Actions menu (lightening bolt icon on mobile), and select "
 "“Submit for IOTD/TP consideration”."
 msgstr ""
+"Щоб подати це зображення для розгляду IOTD/TP, будь ласка, натисніть на "
+"посилання нижче, перейдіть до меню Дії (значок блискавки на мобільному) і "
+"виберіть \"Подати на розгляд IOTD/TP\"."
 
 #, python-format
 msgid ""
 "The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
 "consideration is in %(days)s days."
 msgstr ""
+"Кінцевий термін подачі вашого зображення %(prefix)s%(title)s%(suffix)s для "
+"розгляду IOTD/TP через %(days)s днів."
 
 #, python-format
 msgid ""
 "The deadline to submit your image %(prefix)s%(title)s%(suffix)s for IOTD/TP "
 "consideration isin %(days)s days"
 msgstr ""
+"Кінцевий термін подачі вашого зображення %(prefix)s%(title)s%(suffix)s для "
+"розгляду IOTD/TP через %(days)s днів."
 
 #, python-format
 msgid ""
@@ -6122,47 +6549,63 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> sent you a private message on your "
 "marketplace listing <strong>%(target)s</strong>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> надіслав вам приватне повідомлення про "
+"ваше оголошення на ринку <strong>%(target)s</strong>."
 
 #, python-format
 msgid ""
 "%(user)s sent you a private message on your marketplace listing \"%(target)s"
 "\"."
 msgstr ""
+"%(user)s надіслав вам приватне повідомлення про ваше оголошення на ринку "
+"\"%(target)s\"."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> sent you a private message on your marketplace "
 "listing <strong>%(target)s</strong>"
 msgstr ""
+"<strong>%(user)s</strong> надіслав вам приватне повідомлення про ваше "
+"оголошення на ринку <strong>%(target)s</strong>."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> sent you a private message on your marketplace "
 "listing <strong>%(target)s</strong>."
 msgstr ""
+"<strong>%(user)s</strong> надіслав вам приватне повідомлення про ваше "
+"оголошення на ринку <strong>%(target)s</strong>."
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> sent you a private message on "
 "marketplace listing <strong>%(target)s</strong>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> надіслав вам приватне повідомлення про "
+"оголошення на ринку <strong>%(target)s</strong>."
 
 #, python-format
 msgid ""
 "%(user)s sent you a private message on marketplace listing \"%(target)s\"."
 msgstr ""
+"%(user)s надіслав вам приватне повідомлення про оголошення на ринку "
+"\"%(target)s\"."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> sent you a private message on marketplace listing "
 "<strong>%(target)s</strong>"
 msgstr ""
+"<strong>%(user)s</strong> надіслав вам приватне повідомлення про оголошення "
+"на ринку <strong>%(target)s</strong>."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> sent you a private message on marketplace listing "
 "<strong>%(target)s</strong>."
 msgstr ""
+"<strong>%(user)s</strong> надіслав вам приватне повідомлення про оголошення "
+"на ринку <strong>%(target)s</strong>."
 
 #, python-format
 msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
@@ -6186,25 +6629,33 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> commented on your unapproved equipment "
 "item <strong>%(target)s</strong>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> прокоментував ваш непідтверджений "
+"елемент обладнання <strong>%(target)s</strong>."
 
+#, fuzzy
 msgid "You received this notification because you created this item."
-msgstr ""
+msgstr "Ви отримали це повідомлення, оскільки створили цей елемент."
 
 #, python-format
 msgid "%(user)s commented on your unapproved equipment item \"%(target)s\"."
 msgstr ""
+"%(user)s прокоментував ваш непідтверджений елемент обладнання \"%(target)s\"."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> commented on your unapproved equipment item "
 "<strong>%(target)s</strong>"
 msgstr ""
+"<strong>%(user)s</strong> прокоментував ваш непідтверджений товар <strong>"
+"%(target)s</strong>."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> commented on your unapproved equipment item "
 "<strong>%(target)s</strong>."
 msgstr ""
+"<strong>%(user)s</strong> прокоментував ваш непідтверджений елемент "
+"обладнання <strong>%(target)s</strong>."
 
 #, python-format
 msgid ""
@@ -6269,8 +6720,9 @@ msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> згадав Вас у повідомленні в темі "
 "форуму: <a href=\"%(url)s\">%(post)s</ a>."
 
+#, fuzzy
 msgid "View post"
-msgstr ""
+msgstr "Переглянути пост"
 
 #, python-format
 msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
@@ -6325,26 +6777,29 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s replied in a topic to which you are subscribed"
-msgstr ""
+msgstr "%(user)s відповів у темі, на яку ви підписані"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied in a topic that you started."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> відповів у темі, яку ви розпочали."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> replied in a topic that you started: <em>"
 "%(topic_name)s</em>"
 msgstr ""
+"<strong>%(user)s</strong> відповів у темі, яку ви розпочали: <em>"
+"%(topic_name)s</em>."
 
 #, python-format
 msgid "<strong>%(user)s</strong> replied in a topic that you started"
-msgstr ""
+msgstr "<strong>%(user)s</strong> відповів у темі, яку ви розпочали."
 
 #, python-format
 msgid "%(user)s replied in a topic that you started"
-msgstr ""
+msgstr "%(user)s відповів у темі, яку ви розпочали."
 
 #, python-format
 msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
@@ -6374,18 +6829,21 @@ msgstr ""
 msgid "<strong>%(user)s</strong> has published a new image"
 msgstr "<strong>%(user)s</strong> опублікував нове зображення"
 
+#, fuzzy
 msgid "This image is a group effort among the following collaborators:"
-msgstr ""
+msgstr "Це зображення є спільною роботою серед наступних співпрацівників:"
 
+#, fuzzy
 msgid "This image features some equipment items that you follow:"
-msgstr ""
+msgstr "Це зображення містить деякі елементи обладнання, які ви відстежуєте:"
 
 #, python-format
 msgid "%(user)s has published a new image"
-msgstr ""
+msgstr "%(user)s опублікував нове зображення"
 
+#, fuzzy
 msgid "This image is a group effort with the following collaborators:"
-msgstr ""
+msgstr "Це зображення є спільною роботою з наступними співпрацівниками:"
 
 #, python-format
 msgid "New image by %(user)s"
@@ -6485,11 +6943,13 @@ msgstr "%(user)s подобається Ваше зображення: %(url)s"
 msgid "%(user)s likes your image: %(title)s"
 msgstr "%(user)s подобається Ваше зображення: %(title)s"
 
+#, fuzzy
 msgid "Thank you for your payment!"
-msgstr ""
+msgstr "Дякуємо за ваш платіж!"
 
+#, fuzzy
 msgid "I really appreciate your support for AstroBin, thank you so much!"
-msgstr ""
+msgstr "Я дуже ціную вашу підтримку AstroBin, дякую вам дуже!"
 
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
@@ -6510,28 +6970,36 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> asked a question on your marketplace "
 "listing <strong>%(target)s</strong>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> поставив запитання щодо вашого "
+"оголошення на маркетплейсі <strong>%(target)s</strong>."
 
+#, fuzzy
 msgid "View question"
-msgstr ""
+msgstr "Переглянути запитання"
 
 #, python-format
 msgid "%(user)s asked a question on your marketplace listing \"%(target)s\"."
-msgstr ""
+msgstr "%(user)s запитав питання у вашому оголошенні на ринку \"%(target)s\"."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> asked a question on your marketplace listing "
 "<strong>%(target)s</strong>"
 msgstr ""
+"<strong>%(user)s</strong> запитав питання у вашому оголошенні на ринку "
+"<strong>%(target)s</strong>"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> asked a question on your marketplace listing "
 "<strong>%(target)s</strong>."
 msgstr ""
+"<strong>%(user)s</strong> запитав питання у вашому оголошенні на ринку "
+"<strong>%(target)s</strong>."
 
+#, fuzzy
 msgid "Thank you for your subscription!"
-msgstr ""
+msgstr "Дякуємо за вашу підписку!"
 
 msgid ""
 "I really appreciate your support for AstroBin, I hope you will enjoy your "
@@ -6540,18 +7008,26 @@ msgstr ""
 "Я дуже ціную Вашу підтримку AstroBin, сподіваюся, Вам сподобається нова "
 "підписка!"
 
+#, fuzzy
 msgid ""
 "AstroBin subscriptions are valid for 1 year or 1 month. If your subscription "
 "expires, nothing happens to your content. Nothing is deleted, hidden, held "
 "hostage or anything. In fact, you can leave it up forever even if you stop "
 "being active as an astrophotographer."
 msgstr ""
+"Підписки на AstroBin дійсні на 1 рік або 1 місяць. Якщо ваша підписка "
+"закінчується, з вашим контентом нічого не станеться. Нічого не буде "
+"видалено, приховано, утримувано в заручниках або ще якось. Насправді, ви "
+"можете залишити його назавжди, навіть якщо перестанете бути активним "
+"астрофотографом."
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> posted a new topic in the forum for "
 "equipment item <a href=\"%(item_url)s\">%(item)s</a> that you follow."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> створив нову тему на форумі для "
+"обладнання <a href=\"%(item_url)s\">%(item)s</a>, яке ви відстежуєте."
 
 msgid "View topic"
 msgstr "Переглянути тему"
@@ -6561,48 +7037,65 @@ msgid ""
 "%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
 "that you follow"
 msgstr ""
+"%(user)s створив нову тему на форумі для обладнання \"%(item)s\", яке ви "
+"відстежуєте"
 
 msgid "View the topic"
 msgstr "Переглянути тему"
 
+#, fuzzy
 msgid "View the equipment item"
-msgstr ""
+msgstr "Переглянути елемент обладнання"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> posted a new topic in the forum for equipment item "
 "<strong>%(item)s</strong> that you follow: <em>%(topic_name)s</em>"
 msgstr ""
+"<strong>%(user)s</strong> створив нову тему на форумі для обладнання <strong>"
+"%(item)s</strong>, яке ви відстежуєте: <em>%(topic_name)s</em>"
 
 #, python-format
 msgid ""
 "%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
 "that you follow: \"%(topic_name)s\""
 msgstr ""
+"%(user)s створив нову тему на форумі для обладнання \"%(item)s\", яке ви "
+"відстежуєте: \"%(topic_name)s\""
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> posted a new topic in the forum for "
 "equipment item <a href=\"%(item_url)s\">%(item)s</a> that you have used."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> створив нову тему на форумі для "
+"елемента обладнання <a href=\"%(item_url)s\">%(item)s</a>, який ви "
+"використовували."
 
 #, python-format
 msgid ""
 "%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
 "that you have used"
 msgstr ""
+"%(user)s створив нову тему на форумі для елемента обладнання \"%(item)s\", "
+"який ви використовували."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> posted a new topic in the forum for equipment item "
 "<strong>%(item)s</strong> that you have used: <em>%(topic_name)s</em>"
 msgstr ""
+"<strong>%(user)s</strong> створив нову тему на форумі для елемента "
+"обладнання <strong>%(item)s</strong>, який ви використовували: <em>"
+"%(topic_name)s</em>."
 
 #, python-format
 msgid ""
 "%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
 "that you have used: \"%(topic_name)s\""
 msgstr ""
+"%(user)s створив нову тему на форумі для елемента обладнання \"%(item)s\", "
+"який ви використовували: \"%(topic_name)s\"."
 
 #, python-format
 msgid ""
@@ -6629,49 +7122,61 @@ msgstr ""
 msgid "%(user)s posted a new topic to the group: \"%(group_name)s\""
 msgstr "%(user)s опублікував нову тему в групі: \"%(group_name)s\""
 
+#, fuzzy
 msgid "You have received a private message on AstroBin!"
-msgstr ""
+msgstr "Ви отримали приватне повідомлення на AstroBin!"
 
+#, fuzzy
 msgid "View message"
-msgstr ""
+msgstr "Переглянути повідомлення"
 
 msgid "You have received a new private message."
 msgstr "У Вас нове особисте повідомлення."
 
+#, fuzzy
 msgid "You were removed as a collaborator to an image"
-msgstr ""
+msgstr "Вас видалили як співпрацівника з зображення."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> removed themselves as a collaborator to your image"
 msgstr ""
+"<strong>%(user)s</strong> видалив себе як співпрацівника з вашого зображення."
 
 #, python-format
 msgid "%(user)s removed themselves as a collaborator to your image"
-msgstr ""
+msgstr "%(user)s видалив себе як співпрацівника з вашого зображення."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> requested to add you as a collaborator to an image"
 msgstr ""
+"<strong>%(user)s</strong> запросив вас стати співпрацівником для зображення"
 
+#, fuzzy
 msgid "View the image to accept or decline the invitation."
-msgstr ""
+msgstr "Перегляньте зображення, щоб прийняти або відхилити запрошення."
 
 #, python-format
 msgid "%(user)s requested to add you as a collaborator to an image"
-msgstr ""
+msgstr "%(user)s запросив вас стати співпрацівником для зображення"
 
+#, fuzzy
 msgid "Subscription canceled"
-msgstr ""
+msgstr "Підписку скасовано"
 
+#, fuzzy
 msgid ""
 "Your subscription was cancelled, and you will not be charged for it anymore "
 "unless you have an outstanding balance due to a prorated upgrade."
 msgstr ""
+"Ваша підписка була скасована, і з вас більше не буде стягнуто плату, якщо у "
+"вас немає заборгованості через пропорційне оновлення."
 
+#, fuzzy
 msgid "You may continue to use your subscription until its expiration date."
 msgstr ""
+"Ви можете продовжувати користуватися вашою підпискою до дати її закінчення."
 
 #, python-format
 msgid ""
@@ -6679,9 +7184,13 @@ msgid ""
 "<strong>%(old_forum_name)s</strong> to the forum <strong>%(new_forum_name)s</"
 "strong>."
 msgstr ""
+"Модератор перемістив вашу тему <strong>%(topic_name)s</strong> з форуму "
+"<strong>%(old_forum_name)s</strong> до форуму <strong>%(new_forum_name)s</"
+"strong>."
 
+#, fuzzy
 msgid "The moderator decided to move your topic to a more relevant forum."
-msgstr ""
+msgstr "Модератор вирішив перемістити вашу тему до більш релевантного форуму."
 
 #, python-format
 msgid ""
@@ -6689,6 +7198,10 @@ msgid ""
 "%(group_name)s</a>. You will be notified of topic replies also if you're not "
 "a member of the group, but joining it might be a good idea."
 msgstr ""
+"Ваша тема була переміщена до форуму в групі <a href=\"%(group_url)s\">"
+"%(group_name)s</a>. Ви будете отримувати сповіщення про відповіді на тему, "
+"навіть якщо ви не є членом групи, але приєднатися до неї може бути хорошою "
+"ідеєю."
 
 #, python-format
 msgid ""
@@ -6698,12 +7211,19 @@ msgid ""
 "equipment item, all AstroBin users who have used it get notified (unless "
 "they have opted out of this kind of notification)."
 msgstr ""
+"Оскільки ваша тема стосується, принаймні частково, конкретного обладнання "
+"(<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</a>), вона була "
+"переміщена до свого спеціалізованого форуму. Коли нові теми публікуються на "
+"форумі обладнання, всі користувачі AstroBin, які його використовували, "
+"отримують сповіщення (якщо вони не відмовилися від такого роду сповіщень)."
 
 #, python-format
 msgid ""
 "A moderator moved your topic \"%(topic_name)s\" from the forum "
 "\"%(old_forum_name)s\" to the forum \"%(new_forum_name)s\"."
 msgstr ""
+"Модератор перемістив вашу тему \"%(topic_name)s\" з форуму "
+"\"%(old_forum_name)s\" до форуму \"%(new_forum_name)s\"."
 
 #, python-format
 msgid ""
@@ -6711,6 +7231,9 @@ msgid ""
 "notified of topic replies also if you're not a member of the group, but "
 "joining it might be a good idea."
 msgstr ""
+"Ваша тема була переміщена до форуму в групі \"%(group_name)s\". Ви будете "
+"отримувати сповіщення про відповіді на тему, навіть якщо ви не є членом "
+"групи, але приєднатися до неї може бути хорошою ідеєю."
 
 #, python-format
 msgid ""
@@ -6720,6 +7243,11 @@ msgid ""
 "have used it get notified (unless they have opted out of this kind of "
 "notification)."
 msgstr ""
+"Оскільки ваша тема стосується, принаймні частково, конкретного обладнання "
+"(%(equipment_item_name)s), вона була переміщена до свого спеціалізованого "
+"форуму. Коли нові теми публікуються на форумі обладнання, всі користувачі "
+"AstroBin, які його використовували, отримують сповіщення (якщо вони не "
+"відмовилися від такого роду сповіщень)."
 
 #, python-format
 msgid ""
@@ -6816,41 +7344,46 @@ msgstr "Хочете дізнатися про процес IOTD/TP?"
 msgid "Read the manifesto."
 msgstr "Прочитати маніфест."
 
-msgid ""
-"\n"
-"    Want to learn about the IOTD/TP process?\n"
-msgstr ""
-"\n"
-"    Хочете дізнатися про процес IOTD/TP?\n"
-
 msgid "Your image was voted Top Pick"
 msgstr "Ваше зображення було визнано Топ Зображенням"
 
+#, fuzzy
 msgid "Your image was voted Top Pick Nomination"
-msgstr ""
+msgstr "Ваше зображення було обране як Номінація на Топ Пік"
 
 #, python-format
 msgid ""
 "Your image %(_prefix)s%(image_title)s%(_suffix)s received enough votes and "
 "might become a Top Pick or higher"
 msgstr ""
+"Ваше зображення %(_prefix)s%(image_title)s%(_suffix)s отримало достатньо "
+"голосів і може стати Топ Піком або вищим"
 
+#, fuzzy
 msgid ""
 "Note: AstroBin awards (Top Pick Nomination, Top Pick, Image of the Day) are "
 "assigned only after votes are finalized, ensuring no votes are retracted and "
 "the image reaches its final award level. Awards are not assigned "
 "sequentially."
 msgstr ""
+"Примітка: Нагороди AstroBin (Номінація на Топ Пік, Топ Пік, Зображення Дня) "
+"присвоюються лише після завершення голосування, що забезпечує неможливість "
+"відкликання голосів і досягнення зображення його остаточного рівня нагороди. "
+"Нагороди не присвоюються послідовно."
 
 #, python-format
 msgid ""
 "Your image %(_prefix)s%(image_title)s%(_suffix)s received enough votes and "
 "might become a Top Pick Nomination or higher"
 msgstr ""
+"Ваше зображення %(_prefix)s%(image_title)s%(_suffix)s отримало достатньо "
+"голосів і може стати Номінацією на Топ Пік або вищим"
 
+#, fuzzy
 msgid "Your IOTD/TP staff member stats"
-msgstr ""
+msgstr "Ваші статистики членів IOTD/TP"
 
+#, fuzzy
 msgid ""
 "Every first day of the month, AstroBin sends you a summary of your "
 "activities as an IOTD/TP staff member. The entire community is undoubtedly "
@@ -6858,116 +7391,177 @@ msgid ""
 "keep doing it with the same passion and dedication. Without further ado, "
 "here is your most recent activity data."
 msgstr ""
+"Кожного першого числа місяця AstroBin надсилає вам підсумок ваших дій як "
+"члена IOTD/TP. Вся спільнота безумовно вдячна за ваш внесок у процес IOTD/"
+"TP, і ми сподіваємося, що ви продовжите робити це з тією ж пристрастю та "
+"відданістю. Без зайвих слів, ось ваші найостанніші дані про активність."
 
+#, fuzzy
 msgid "Period"
-msgstr ""
+msgstr "Період"
 
+#, fuzzy
 msgid "Active days"
-msgstr ""
+msgstr "Активні дні"
 
+#, fuzzy
 msgid "Promotions"
-msgstr ""
+msgstr "Промоції"
 
+#, fuzzy
 msgid "The total number of images you promoted."
-msgstr ""
+msgstr "Загальна кількість зображень, які ви просували."
 
+#, fuzzy
 msgid "Wasted promotions"
-msgstr ""
+msgstr "Втрачені промоції"
 
+#, fuzzy
 msgid ""
 "The number of images you promoted, but they did not end up getting an award. "
 "Broadly speaking, lower is better. However, since your queue features only a "
 "subset of the images in the IOTD/TP process, by design, it's normal to have "
 "wasted promotions."
 msgstr ""
+"Кількість зображень, які ви просували, але вони не отримали нагороду. "
+"Загалом, чим менше, тим краще. Однак, оскільки ваша черга містить лише "
+"підмножину зображень у процесі IOTD/TP, за дизайном, нормально мати втрачені "
+"промоції."
 
+#, fuzzy
 msgid "Missed TPN promotions"
-msgstr ""
+msgstr "Пропущені TPN промоції"
 
+#, fuzzy
 msgid ""
 "The number of images you saw in your queue, decided not to promote, but they "
 "ended up being awarded Top Pick Nomination."
 msgstr ""
+"Кількість зображень, які ви бачили у своїй черзі, вирішили не просувати, але "
+"вони врешті-решт отримали номінацію на Top Pick."
 
+#, fuzzy
 msgid "Missed TP promotions"
-msgstr ""
+msgstr "Пропущені TP промоції"
 
+#, fuzzy
 msgid ""
 "The number of images you saw in your queue, decided not to promote, but they "
 "ended up being awarded Top Pick."
 msgstr ""
+"Кількість зображень, які ви бачили у своїй черзі, вирішили не просувати, але "
+"вони врешті-решт отримали Top Pick."
 
+#, fuzzy
 msgid "Missed IOTD promotions"
-msgstr ""
+msgstr "Пропущені IOTD промоції"
 
+#, fuzzy
 msgid ""
 "The number of images you saw in your queue, decided not to promote, but they "
 "ended up being awarded IOTD."
 msgstr ""
+"Кількість зображень, які ви бачили у своїй черзі, вирішили не просувати, але "
+"вони врешті-решт отримали IOTD."
 
+#, fuzzy
 msgid "Promotions to TPN"
-msgstr ""
+msgstr "Промоції до TPN"
 
+#, fuzzy
 msgid ""
 "The number of images you you promoted and ended up being awarded Top Pick "
 "Nomination."
 msgstr ""
+"Кількість зображень, які ви просували і які врешті-решт отримали номінацію "
+"на Top Pick."
 
+#, fuzzy
 msgid "Promotions to TP"
-msgstr ""
+msgstr "Промоції до TP"
 
+#, fuzzy
 msgid ""
 "The number of images you you promoted and ended up being awarded Top Pick."
 msgstr ""
+"Кількість зображень, які ви просували і які врешті-решт отримали Top Pick."
 
+#, fuzzy
 msgid "Promotions to IOTD"
-msgstr ""
+msgstr "Промоції до IOTD"
 
+#, fuzzy
 msgid "The number of images you you promoted and ended up being awarded IOTD."
-msgstr ""
+msgstr "Кількість зображень, які ви просували і які врешті-решт отримали IOTD."
 
+#, fuzzy
 msgid "Dismissals"
-msgstr ""
+msgstr "Відхилення"
 
+#, fuzzy
 msgid ""
 "The total number of images you dismissed. Remember to dismiss only images "
 "with serious and undeniable technical issues."
 msgstr ""
+"Загальна кількість зображень, які ви відхилили. Пам'ятайте, що слід "
+"відхиляти лише зображення з серйозними та незаперечними технічними "
+"проблемами."
 
+#, fuzzy
 msgid "Correct dismissals"
-msgstr ""
+msgstr "Правильні відхилення"
 
+#, fuzzy
 msgid ""
 "The number of images you dismissed, and ended up being dismissed enough "
 "times by other staff members, thus making them exit the IOTD/TP process "
 "early."
 msgstr ""
+"Кількість зображень, які ви відхилили, і які врешті-решт були відхилені "
+"достатньо разів іншими членами команди, що призвело до їх виходу з процесу "
+"IOTD/TP раніше."
 
+#, fuzzy
 msgid "Missed dismissals"
-msgstr ""
+msgstr "Пропущені відхилення"
 
+#, fuzzy
 msgid ""
 "The number of images you saw in your queue, decided not to dismiss, but they "
 "ended up being dismissed by other staff members. If this number is high, you "
 "might want to use the Dismiss button more often."
 msgstr ""
+"Кількість зображень, які ви бачили у своїй черзі, вирішили не відхиляти, але "
+"вони врешті-решт були відхилені іншими членами команди. Якщо це число "
+"велике, вам, можливо, слід частіше використовувати кнопку Відхилити."
 
+#, fuzzy
 msgid "Dismissals to TPN"
-msgstr ""
+msgstr "Відхилення до TPN"
 
+#, fuzzy
 msgid ""
 "The number of images you dismissed, but they ended up being awarded Top Pick "
 "Nomination. This number should be low, as you should only dismiss images "
 "with serious and undeniable technical issues."
 msgstr ""
+"Кількість зображень, які ви відхилили, але вони врешті-решт отримали "
+"номінацію на Top Pick. Це число має бути низьким, оскільки ви повинні "
+"відхиляти лише зображення з серйозними та незаперечними технічними "
+"проблемами."
 
+#, fuzzy
 msgid "Dismissals to TP"
-msgstr ""
+msgstr "Відхилення до TP"
 
+#, fuzzy
 msgid ""
 "The number of images you dismissed, but they ended up being awarded Top Pick."
 msgstr ""
+"Кількість зображень, які ви відхилили, але вони врешті-решт отримали Top "
+"Pick."
 
+#, fuzzy
 msgid ""
 "This number should be very low, ideally a zero, as you should only dismiss "
 "images with serious and undeniable technical issues. If this number is "
@@ -6976,14 +7570,24 @@ msgid ""
 "a misalignment of values that should be addressed to avoid detrimental "
 "effects on the IOTD/TP process."
 msgstr ""
+"Це число має бути дуже низьким, ідеально нульовим, оскільки ви повинні "
+"відхиляти лише зображення з серйозними та незаперечними технічними "
+"проблемами. Якщо це число велике, ви, напевно, неправильно зрозуміли кнопку "
+"Відхилити і коли її використовувати, або ви серйозно не згодні з іншими "
+"членами команди, що свідчить про невідповідність цінностей, яку слід "
+"вирішити, щоб уникнути негативних наслідків для процесу IOTD/TP."
 
+#, fuzzy
 msgid "Dismissals to IOTD"
-msgstr ""
+msgstr "Відхилення до IOTD"
 
+#, fuzzy
 msgid ""
 "The number of images you dismissed, but they ended up being awarded IOTD."
 msgstr ""
+"Кількість зображень, які ви відхилили, але вони врешті-решт отримали IOTD."
 
+#, fuzzy
 msgid ""
 "\n"
 "    Every first day of the month, AstroBin sends you a summary of your "
@@ -6993,23 +7597,33 @@ msgid ""
 "     with the same passion and dedication. Without further ado, here is your "
 "most recent activity data.\n"
 msgstr ""
+"\n"
+"Кожного першого числа місяця AstroBin надсилає вам підсумок ваших дій як "
+"члена IOTD/TP. Вся спільнота безумовно вдячна за ваш внесок у процес IOTD/"
+"TP, і ми сподіваємося, що ви продовжите робити це з тією ж пристрастю та "
+"відданістю. Без зайвих слів, ось ваші найостанніші дані про активність.\n"
 
+#, fuzzy
 msgid "Your IOTD staff member stats"
-msgstr ""
+msgstr "Ваші статистики членів IOTD"
 
 msgid "Object not found"
 msgstr "Об’єкт не знайдено"
 
+#, fuzzy
 msgid "Here is your two-factor authentication token to log in to AstroBin:"
-msgstr ""
+msgstr "Ось ваш токен двофакторної автентифікації для входу в AstroBin:"
 
 #, python-format
 msgid "This token is valid for %(n)s minutes."
-msgstr ""
+msgstr "Цей токен дійсний протягом %(n)s хвилин."
 
+#, fuzzy
 msgid ""
 "To change your two-factor authentication settings, please visit this page:"
 msgstr ""
+"Щоб змінити налаштування двофакторної автентифікації, будь ласка, відвідайте "
+"цю сторінку:"
 
 msgid "Previous page"
 msgstr "Попер. сторінка"
@@ -7020,8 +7634,9 @@ msgstr "Наст. сторінка"
 msgid "No additional information available for this item."
 msgstr "Додаткова інформація щодо цього елемента недоступна."
 
+#, fuzzy
 msgid "Please support AstroBin by shopping at one of our partners!"
-msgstr ""
+msgstr "Будь ласка, підтримайте AstroBin, купуючи у одного з наших партнерів!"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
@@ -7042,8 +7657,9 @@ msgstr "Дата реєстрації"
 msgid "Gallery"
 msgstr "Галерея"
 
+#, fuzzy
 msgid "Every equipment item on AstroBin has a forum associated with it."
-msgstr ""
+msgstr "Кожен елемент обладнання на AstroBin має асоційований форум."
 
 #, python-format
 msgid ""
@@ -7051,18 +7667,28 @@ msgid ""
 "recommend finding it in the %(_0)sequipment database%(_1)s and posting in "
 "its dedicated forum."
 msgstr ""
+"Якщо ви хочете створити нову тему про конкретний елемент обладнання, "
+"рекомендуємо знайти його в %(_0)sequipment database%(_1)s і створити пост у "
+"його спеціалізованому форумі."
 
+#, fuzzy
 msgid ""
 "This will maximize your chances of getting relevant replies because all "
 "active AstroBin users who have used that specific equipment item will be "
 "notified of your post, unless they opted out of that particular notification."
 msgstr ""
+"Це максимізує ваші шанси отримати релевантні відповіді, оскільки всі активні "
+"користувачі AstroBin, які використовували цей конкретний елемент обладнання, "
+"отримають сповіщення про ваш пост, якщо вони не відмовилися від цього "
+"сповіщення."
 
+#, fuzzy
 msgid "Learn more about the AstroBin equipment database!"
-msgstr ""
+msgstr "Дізнайтеся більше про базу даних обладнання AstroBin!"
 
+#, fuzzy
 msgid "Select..."
-msgstr ""
+msgstr "Виберіть..."
 
 msgid "Search all forums"
 msgstr "Пошук по форумам"
@@ -7070,19 +7696,28 @@ msgstr "Пошук по форумам"
 msgid "New topic"
 msgstr "Створити тему"
 
+#, fuzzy
 msgid "To post a new topic, please first select the most relevant forum"
 msgstr ""
+"Щоб опублікувати нову тему, спочатку виберіть найбільш відповідний форум"
 
+#, fuzzy
 msgid "Do you want to post about a specific equipment item or software?"
 msgstr ""
+"Ви хочете опублікувати про конкретний предмет обладнання або програмне "
+"забезпечення?"
 
+#, fuzzy
 msgid ""
 "Anybody who used an equipment item is notified of new topics in its forum, "
 "unless they opt out."
 msgstr ""
+"Кожен, хто використовував елемент обладнання, отримує сповіщення про нові "
+"теми у його форумі, якщо не відмовився."
 
+#, fuzzy
 msgid "Please select a forum:"
-msgstr ""
+msgstr "Будь ласка, виберіть форум:"
 
 #, python-format
 msgid ""
@@ -7121,6 +7756,10 @@ msgid ""
 "\"%(open_discussions_url)s\">AstroBin Platform open discussions community "
 "forum</a> group!"
 msgstr ""
+"Якщо ви хочете взяти участь в обговоренні про AstroBin та його функції з "
+"іншими членами спільноти, будь ласка, приєднайтеся до <a href="
+"\"%(open_discussions_url)s\">групи відкритих обговорень платформи AstroBin</"
+"a>!"
 
 msgid "I have read the text above"
 msgstr "Я прочитав текст вище"
@@ -7128,14 +7767,19 @@ msgstr "Я прочитав текст вище"
 msgid "I understand"
 msgstr "Я розумію"
 
+#, fuzzy
 msgid "Forum notice"
-msgstr ""
+msgstr "Повідомлення форуму"
 
+#, fuzzy
 msgid ""
 "This forum belongs to a group, and the group's owner set the following "
 "notice to communicate forum rules, disclaimers, or important information to "
 "users before they create a new post"
 msgstr ""
+"Цей форум належить групі, і власник групи встановив наступне повідомлення, "
+"щоб донести правила форуму, відмови або важливу інформацію до користувачів "
+"перед створенням нового посту."
 
 #, python-format
 msgid ""
@@ -7143,6 +7787,9 @@ msgid ""
 "                New topic in forum: \"%(forum_name)s\"\n"
 "            "
 msgstr ""
+"\n"
+"                Нова тема у форумі: \"%(forum_name)s\"\n"
+"            "
 
 #, python-format
 msgid ""
@@ -7150,17 +7797,24 @@ msgid ""
 "                New reply in topic: \"%(topic_name)s\"\n"
 "            "
 msgstr ""
+"\n"
+"                Нова відповідь у темі: \"%(topic_name)s\"\n"
+"            "
 
 msgid "Back to group"
 msgstr "Назад у групу"
 
+#, fuzzy
 msgid "Back to equipment item"
-msgstr ""
+msgstr "Назад до елемента обладнання"
 
+#, fuzzy
 msgid ""
 "Below, you can see a list of equipment item forums that have at least one "
 "discussion topic."
 msgstr ""
+"Нижче ви можете побачити список форумів елементів обладнання, які мають "
+"принаймні одну дискусійну тему."
 
 msgid "Hidden"
 msgstr "Сховано"
@@ -7186,6 +7840,9 @@ msgid ""
 "notified of new topics unless they opt out. %(_0)sLearn more about AstroBin "
 "Groups!%(_1)s"
 msgstr ""
+"Кожна група AstroBin має асоційований форум. Члени групи отримують "
+"сповіщення про нові теми, якщо не відмовилися. %(_0)sДізнайтеся більше про "
+"групи AstroBin!%(_1)s"
 
 msgid "Forum categories are not created"
 msgstr "Категорії форуму не створено"
@@ -7219,11 +7876,11 @@ msgstr "Нова відповідь у темі, на яку Ви підписа
 
 #, python-format
 msgid "Move topic \"%(topic)s\""
-msgstr ""
+msgstr "Перемістити тему \"%(topic)s\""
 
 #, python-format
 msgid "Split posts from topic \"%(topic)s\""
-msgstr ""
+msgstr "Розділити пости з теми \"%(topic)s\""
 
 #, python-format
 msgid ""
@@ -7231,12 +7888,17 @@ msgid ""
 "                            Starting post by %(author_name)s\n"
 "                        "
 msgstr ""
+"\n"
+"                            Початковий пост від %(author_name)s\n"
+"                        "
 
+#, fuzzy
 msgid "Move this topic"
-msgstr ""
+msgstr "Перемістити цю тему"
 
+#, fuzzy
 msgid "Split posts"
-msgstr ""
+msgstr "Розділити пости"
 
 msgid "This topic contains a poll."
 msgstr "Ця тема містить опитування."
@@ -7276,8 +7938,9 @@ msgstr "Щось пішло не так, вибачте! Будь ласка с�
 msgid "(deleted)"
 msgstr "(видалено)"
 
+#, fuzzy
 msgid "Topic starter"
-msgstr ""
+msgstr "Автор теми"
 
 msgctxt "Noun, e.g. 'This element has 1 view'"
 msgid "view"
@@ -7295,8 +7958,9 @@ msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "лайків"
 
+#, fuzzy
 msgid "Share link"
-msgstr ""
+msgstr "Поділитися посиланням"
 
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
@@ -7323,11 +7987,13 @@ msgstr "Видалити повідомлення?"
 msgid "Approve post"
 msgstr "Затвердити повідомлення"
 
+#, fuzzy
 msgid "Move"
-msgstr ""
+msgstr "Перемістити"
 
+#, fuzzy
 msgid "Split"
-msgstr ""
+msgstr "Розділити"
 
 #, python-format
 msgid ""
@@ -7340,11 +8006,13 @@ msgid "You cannot Like this post because the topic is closed."
 msgstr ""
 "Ви не можете поставити лайк до цього повідомлення, тому що тема закрита."
 
+#, fuzzy
 msgid "Share this forum post"
-msgstr ""
+msgstr "Поділитися цим постом на форумі"
 
+#, fuzzy
 msgid "Copy the URL below to share a direct link to this post."
-msgstr ""
+msgstr "Скопіюйте URL нижче, щоб поділитися прямим посиланням на цей пост."
 
 msgid "Topics you subscribe to"
 msgstr "Теми, на які Ви підписані"
@@ -7420,8 +8088,10 @@ msgstr ""
 "Сторінка або операція на даний момент недоступні, тому що AstroBin "
 "знаходиться в режимі ТІЛЬКИ ЧИТАННЯ."
 
-msgid "For more information, please check out our Twitter feed:"
-msgstr "За більш детальною інформацією, зверніться до нашої стрічки Twitter:"
+#, fuzzy
+msgid "For more information, please check out our X feed:"
+msgstr ""
+"Для отримання додаткової інформації, будь ласка, перегляньте наш X фід:"
 
 msgid "Account activation"
 msgstr "Активація облікового запису"
@@ -7429,14 +8099,30 @@ msgstr "Активація облікового запису"
 msgid "Account successfully activated"
 msgstr "Обліковий запис успішно активовано"
 
+#, fuzzy
+msgid "You have been logged in automatically."
+msgstr "Ви були автоматично увійшли."
+
+#, fuzzy
+msgid "You'll be redirected momentarily..."
+msgstr "Ви будете перенаправлені через мить..."
+
+#, fuzzy
+msgid "Go to homepage"
+msgstr "Перейти на головну сторінку"
+
 msgid "Account activation failed"
 msgstr "Активація облікового запису не вдалася"
 
+#, fuzzy
 msgid ""
 "This could mean that your activation link expired, is invalid, or you "
 "clicked it more than once (in which case, please try to log in: your account "
 "could be already active)."
 msgstr ""
+"Це може означати, що ваше посилання активації закінчилося, є недійсним або "
+"ви натиснули його більше одного разу (в такому випадку, спробуйте увійти: "
+"ваш обліковий запис може вже бути активним)."
 
 msgid "Log in"
 msgstr "Логін"
@@ -7444,8 +8130,38 @@ msgstr "Логін"
 msgid "Your profile is now active."
 msgstr "Ваш профіль тепер активний."
 
+#, fuzzy
 msgid "Account activated"
+msgstr "Обліковий запис активовано"
+
+#, fuzzy
+msgid "Activate your AstroBin account"
+msgstr "Активуйте свій обліковий запис AstroBin"
+
+#, fuzzy
+msgid "Please use the button below to activate your AstroBin account:"
 msgstr ""
+"Будь ласка, використайте кнопку нижче, щоб активувати свій обліковий запис "
+"AstroBin:"
+
+#, fuzzy
+msgid "Activate your account"
+msgstr "Активувати свій обліковий запис"
+
+#, fuzzy
+msgid ""
+"If the button doesn't work, you can also copy and paste this URL into your "
+"browser:"
+msgstr ""
+"Якщо кнопка не працює, ви також можете скопіювати та вставити це URL у ваш "
+"браузер:"
+
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr "Посилання робоче протягом %(expiration_days)s днів."
+
+msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
+msgstr "БУДЬ ЛАСКА, НЕ ВІДПОВІДАЙТЕ НА ЦЕЙ EMAIL"
 
 msgid ""
 "Hi,\n"
@@ -7454,13 +8170,6 @@ msgstr ""
 "Вітаємо,\n"
 "будь ласка, скористайтесь посиланням нижче для активації Вашого облікового "
 "запису AstroBin:"
-
-#, python-format
-msgid "Link is valid for %(expiration_days)s days."
-msgstr "Посилання робоче протягом %(expiration_days)s днів."
-
-msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
-msgstr "БУДЬ ЛАСКА, НЕ ВІДПОВІДАЙТЕ НА ЦЕЙ EMAIL"
 
 msgid ""
 "Sincerely,\n"
@@ -7481,27 +8190,39 @@ msgstr "Ви вийшли із сайту. Повертайтеся якнайш
 msgid "Password changed"
 msgstr "Пароль змінено"
 
+#, fuzzy
 msgid "Request a secure link to change your password"
-msgstr ""
+msgstr "Запросити безпечне посилання для зміни пароля"
 
+#, fuzzy
 msgid ""
 "Your password is already secure, and you can change it at any time. You do "
 "not need to request a secure link to change your password."
 msgstr ""
+"Ваш пароль вже безпечний, і ви можете змінити його в будь-який час. Вам не "
+"потрібно запитувати безпечне посилання для зміни пароля."
 
+#, fuzzy
 msgid ""
 "We have emailed you with a secure link to change your password. Please check "
 "your inbox and follow the instructions in the email."
 msgstr ""
+"Ми надіслали вам електронний лист з безпечним посиланням для зміни пароля. "
+"Будь ласка, перевірте свою пошту та дотримуйтесь інструкцій у листі."
 
+#, fuzzy
 msgid ""
 "On your last login attempt, we detected that your password is not secure. To "
 "prevent account theft, we require that you confirm your email address before "
 "changing your password."
 msgstr ""
+"Під час вашої останньої спроби входу ми виявили, що ваш пароль ненадійний. "
+"Щоб запобігти крадіжці акаунта, ми вимагаємо, щоб ви підтвердили свою "
+"електронну адресу перед зміною пароля."
 
+#, fuzzy
 msgid "Request secure link"
-msgstr ""
+msgstr "Запросити безпечне посилання"
 
 msgid "Password reset successfully"
 msgstr "Пароль успішно скинуто"
@@ -7541,178 +8262,289 @@ msgstr ""
 msgid "Registration completed"
 msgstr "Реєстрація завершена"
 
-msgid "You are now registered"
-msgstr "Ви зареєстровані"
+#, fuzzy
+msgid "Check your email for activation instructions"
+msgstr "Перевірте свою електронну пошту для інструкцій активації"
 
+#, fuzzy
 msgid ""
-"To confirm your e-mail address, we have sent you an e-mail with an "
-"activation link."
+"We've sent an activation link to your email address. Please check your inbox "
+"(and spam folder) to complete your registration."
 msgstr ""
-"Для підтвердження Вашого email ми надіслали листа з посиланням активації."
+"Ми надіслали посилання для активації на вашу електронну адресу. Будь ласка, "
+"перевірте свою вхідну пошту (та папку спаму), щоб завершити реєстрацію."
 
-msgid ""
-"If you don't receive the e-mail within a few minutes, remember to check your "
-"spam folder."
+#, fuzzy
+msgid "Resend activation email"
+msgstr "Відправити електронну пошту для активації повторно"
+
+#, fuzzy
+msgid "Your email address"
+msgstr "Ваша електронна адреса"
+
+#, fuzzy
+msgid "Email"
+msgstr "Електронна пошта"
+
+#, fuzzy
+msgid "Resend"
+msgstr "Відправити повторно"
+
+#, fuzzy
+msgid "Please wait"
+msgstr "Будь ласка, зачекайте"
+
+#, fuzzy
+msgid "seconds before trying again."
+msgstr "секунд перед повторною спробою."
+
+#, fuzzy
+msgid "Please enter your email address."
+msgstr "Будь ласка, введіть свою електронну адресу."
+
+#, fuzzy
+msgid "Sent. Send again?"
+msgstr "Відправлено. Відправити знову?"
+
+#, fuzzy
+msgid "An error occurred. Please try again later."
+msgstr "Сталася помилка. Будь ласка, спробуйте ще раз пізніше."
+
+#, fuzzy
+msgid "Join AstroBin"
+msgstr "Приєднуйтесь до AstroBin"
+
+#, fuzzy
+msgid "One small click for you, one giant leap for your astrophotography!"
 msgstr ""
-"Якщо Ви не отримали e-mail протягом декількох хвилин, перевірте папку Спам."
-
-msgid "Register with AstroBin"
-msgstr "Реєструватися на AstroBin"
-
-msgid ""
-"By registering with AstroBin, you agree to our <a href=\"https://welcome."
-"astrobin.com/terms-of-service\">terms of service</a>."
-msgstr ""
-"Реєструючись на AstroBin, Ви погоджуєтесь з нашими <a href=\"https://welcome."
-"astrobin.com/terms-of-service\">умовами надання послуг</a>."
+"Один маленький клік для вас, один гігантський стрибок для вашої "
+"астрофотографії!"
 
 msgid "This list is currently empty."
 msgstr "Цей список поки що порожній."
 
+#, fuzzy
 msgid "Account"
-msgstr ""
+msgstr "Обліковий запис"
 
 msgid "Back"
 msgstr "Повернутись"
 
-msgid "Backup tokens"
-msgstr ""
+#, fuzzy
+msgid "Don't have an account?"
+msgstr "Не маєте облікового запису?"
 
+#, fuzzy
+msgctxt "Sign up"
+msgid "Register"
+msgstr "Зареєструватися"
+
+#, fuzzy
+msgid "Backup tokens"
+msgstr "Резервні токени"
+
+#, fuzzy
 msgid ""
 "Backup tokens can be used if you lost access to your two-factor "
 "authentication method. The backup tokens below can be used for login "
 "verification. If you've used up all your backup tokens, you can generate a "
 "new set of backup tokens. Only the backup tokens shown below will be valid."
 msgstr ""
+"Резервні токени можна використовувати, якщо ви втратили доступ до свого "
+"методу двофакторної автентифікації. Резервні токени нижче можна "
+"використовувати для перевірки входу. Якщо ви використали всі свої резервні "
+"токени, ви можете згенерувати новий набір резервних токенів. Тільки резервні "
+"токени, показані нижче, будуть дійсними."
 
+#, fuzzy
 msgid "Print these tokens and keep them somewhere safe."
-msgstr ""
+msgstr "Роздрукуйте ці токени та зберігайте їх у безпечному місці."
 
+#, fuzzy
 msgid "You don't have any backup codes yet."
-msgstr ""
+msgstr "У вас ще немає жодних резервних кодів."
 
+#, fuzzy
 msgid "Generate tokens"
-msgstr ""
+msgstr "Згенерувати токени"
 
+#, fuzzy
 msgid "Back to account security"
-msgstr ""
+msgstr "Назад до безпеки облікового запису"
 
+#, fuzzy
 msgid "Enter your credentials."
-msgstr ""
+msgstr "Введіть свої облікові дані."
 
+#, fuzzy
 msgid "AstroBin needs an additional step to verify your login."
-msgstr ""
+msgstr "AstroBin потребує додаткового кроку для перевірки вашого входу."
 
 #, python-format
 msgid ""
 "We just sent you an email with a one-time password token to the address "
 "<strong>%(user_email)s</strong>. Please enter it below."
 msgstr ""
+"Ми щойно надіслали вам електронний лист з одноразовим паролем на адресу "
+"<strong>%(user_email)s</strong>. Будь ласка, введіть його нижче."
 
+#, fuzzy
 msgid ""
 "Please enter the token generated by your token generator app or device "
 "(usually this is Google Authenticator or similar)."
 msgstr ""
+"Будь ласка, введіть токен, згенерований вашим додатком або пристроєм для "
+"генерації токенів (зазвичай це Google Authenticator або подібне)."
 
+#, fuzzy
 msgid ""
 "Use this form for entering backup tokens for logging in. These tokens have "
 "been generated for you to print and keep safe. Please enter one of these "
 "backup tokens to login to your account."
 msgstr ""
+"Використовуйте цю форму для введення резервних токенів для входу. Ці токени "
+"були згенеровані для вас, щоб їх роздрукувати та зберігати в безпеці. Будь "
+"ласка, введіть один з цих резервних токенів, щоб увійти у свій обліковий "
+"запис."
 
+#, fuzzy
 msgid "Don't want this next time?"
-msgstr ""
+msgstr "Не хочете цього наступного разу?"
 
+#, fuzzy
 msgid ""
 "Remember that you can disable two-factor authentication in your settings "
 "after logging in."
 msgstr ""
+"Пам'ятайте, що ви можете вимкнути двофакторну аутентифікацію у своїх "
+"налаштуваннях після входу."
 
+#, fuzzy
 msgid "As a last resort, you can use a backup token:"
-msgstr ""
+msgstr "Як останній засіб, ви можете використовувати резервний токен:"
 
+#, fuzzy
 msgid "Use backup token"
-msgstr ""
+msgstr "Використати резервний токен"
 
+#, fuzzy
 msgid "Enable Two-Factor Authentication"
-msgstr ""
+msgstr "Увімкнути двофакторну автентифікацію"
 
+#, fuzzy
 msgid ""
 "You are about to take your account security to the next level. Follow the "
 "steps in this wizard to enable two-factor authentication."
 msgstr ""
+"Ви збираєтеся підняти безпеку свого облікового запису на новий рівень. "
+"Слідуйте крокам у цьому майстрі, щоб увімкнути двофакторну автентифікацію."
 
+#, fuzzy
 msgid "Please select which authentication method you would like to use."
 msgstr ""
+"Будь ласка, виберіть метод аутентифікації, який ви хочете використовувати."
 
+#, fuzzy
 msgid ""
 "To start using a token generator, please use your smartphone to scan the QR "
 "code below. For example, use Google Authenticator. Then, enter the token "
 "generated by the app."
 msgstr ""
+"Щоб почати використовувати генератор токенів, будь ласка, скористайтеся "
+"своїм смартфоном, щоб відсканувати QR-код нижче. Наприклад, використовуйте "
+"Google Authenticator. Потім введіть токен, згенерований додатком."
 
+#, fuzzy
 msgid "Please validate the code that have received via your selected method."
 msgstr ""
+"Будь ласка, підтвердіть код, який ви отримали через обраний вами метод."
 
+#, fuzzy
 msgid ""
 "If you are unable to scan the QR code above, please use the following key "
 "instead:"
 msgstr ""
+"Якщо ви не можете відсканувати QR-код вище, будь ласка, використайте "
+"наступний ключ:"
 
+#, fuzzy
 msgid ""
 "We've encountered an issue with the selected authentication method. Please "
 "go back and verify that you entered your information correctly, try again, "
 "or use a different authentication method instead. If the issue persists, "
 "please contact us."
 msgstr ""
+"Ми зіткнулися з проблемою з обраним методом аутентифікації. Будь ласка, "
+"поверніться назад і перевірте, чи правильно ви ввели свої дані, спробуйте ще "
+"раз або використайте інший метод аутентифікації. Якщо проблема не зникне, "
+"будь ласка, зв'яжіться з нами."
 
+#, fuzzy
 msgid "Congratulations, you've successfully enabled two-factor authentication."
-msgstr ""
+msgstr "Вітаємо, ви успішно ввімкнули двофакторну аутентифікацію."
 
+#, fuzzy
 msgid "Back to Account Security"
-msgstr ""
+msgstr "Назад до безпеки облікового запису"
 
+#, fuzzy
 msgid "Disable Two-factor Authentication"
-msgstr ""
+msgstr "Вимкнути двофакторну аутентифікацію"
 
+#, fuzzy
 msgid ""
 "You are about to disable two-factor authentication. This weakens your "
 "account's  security, are you sure?"
 msgstr ""
+"Ви збираєтеся вимкнути двофакторну аутентифікацію. Це послаблює безпеку "
+"вашого облікового запису, ви впевнені?"
 
+#, fuzzy
 msgid "Disable"
-msgstr ""
+msgstr "Вимкнути"
 
+#, fuzzy
 msgid "Backup Tokens"
-msgstr ""
+msgstr "Резервні токени"
 
+#, fuzzy
 msgid ""
 "If you don't have any device with you, you can access your account using "
 "backup tokens."
 msgstr ""
+"Якщо у вас немає жодного пристрою при собі, ви можете отримати доступ до "
+"свого облікового запису, використовуючи резервні токени."
 
 #, python-format
 msgid "You have only one backup token remaining."
 msgid_plural "You have %(counter)s backup tokens remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "У вас залишився лише один резервний токен."
+msgstr[1] "У вас залишилося %(counter)s резервних токенів."
 msgstr[2] ""
 
+#, fuzzy
 msgid "Show codes"
-msgstr ""
+msgstr "Показати коди"
 
+#, fuzzy
 msgid "Disable Two-Factor Authentication"
-msgstr ""
+msgstr "Вимкнути двофакторну аутентифікацію"
 
+#, fuzzy
 msgid ""
 "We strongly discourage you to do so, but you can disable two-factor "
 "authentication for your account."
 msgstr ""
+"Ми настійно не рекомендуємо це робити, але ви можете вимкнути двофакторну "
+"аутентифікацію для свого облікового запису."
 
+#, fuzzy
 msgid ""
 "Two-factor Authentication is not enabled for your account. Enable it for "
 "enhanced account security."
 msgstr ""
+"Двофакторна аутентифікація не увімкнена для вашого облікового запису. "
+"Увімкніть її для підвищення безпеки облікового запису."
 
 #, python-format
 msgid ""
@@ -7808,6 +8640,10 @@ msgid ""
 "                                        <a data-no-instant href="
 "\"%(flickr_url)s\">import from Flickr</a> too."
 msgstr ""
+"Використовуйте цю кнопку, щоб завантажити зображення до <strong>Публічної "
+"зони</strong>. Воно буде відображатися у <a href=\"%(profile_url)s\">вашому "
+"профілі</a> та тут на головній сторінці. Ви також можете <a data-no-instant "
+"href=\"%(flickr_url)s\">імпортувати з Flickr</a>."
 
 msgid "Your API Keys"
 msgstr "Ваші API-ключі"
@@ -7850,18 +8686,25 @@ msgstr "Користувач заблокований."
 msgid "%(user)s's bookmarks"
 msgstr "%(user)s закладки"
 
+#, fuzzy
 msgctxt "Piece of advice"
 msgid "Tip!"
-msgstr ""
+msgstr "Порада!"
 
+#, fuzzy
 msgid ""
 "You can filter and sort your bookmarks by going the <strong>Advanced search</"
 "strong> page, selecting <em>Images bookmarked by you</em> as <strong>Search "
 "domain</strong>, and applying filtering and sorting options to your liking."
 msgstr ""
+"Ви можете фільтрувати та сортувати свої закладки, перейшовши на сторінку "
+"<strong>Розширений пошук</strong>, вибравши <em>Зображення, закладені вами</"
+"em> як <strong>Домен пошуку</strong> та застосувавши параметри фільтрації та "
+"сортування на свій смак."
 
+#, fuzzy
 msgid "Get started!"
-msgstr ""
+msgstr "Почніть!"
 
 #, python-format
 msgid "%(user)s's followers"
@@ -7906,22 +8749,29 @@ msgstr "%(user)s's галерея"
 
 #, python-format
 msgid "Astrophotography by %(user)s on AstroBin"
-msgstr ""
+msgstr "Астрофотографія від %(user)s на AstroBin"
 
+#, fuzzy
 msgid "Would you like to try the new gallery experience?"
-msgstr ""
+msgstr "Хотіли б ви спробувати новий досвід галереї?"
 
+#, fuzzy
 msgid ""
 "AstroBin has a new gallery experience that is faster, better on mobile, more "
 "modern, more user-friendly. Try it out now, you can always switch back to "
 "the old one in your preferences."
 msgstr ""
+"У AstroBin є новий досвід галереї, який швидший, краще працює на мобільних "
+"пристроях, більш сучасний, більш зручний для користувачів. Спробуйте зараз, "
+"ви завжди можете повернутися до старого в налаштуваннях."
 
+#, fuzzy
 msgid "Enable"
-msgstr ""
+msgstr "Увімкнути"
 
+#, fuzzy
 msgid "Nah, I'm good"
-msgstr ""
+msgstr "Ні, мені нормально"
 
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
@@ -8056,16 +8906,24 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr "Редагувати Ваше астрофотографічне обладнання"
 
+#, fuzzy
 msgid ""
 "This is a dynamically generated list of equipment items that you have used "
 "on AstroBin."
 msgstr ""
+"Це динамічно згенерований список елементів обладнання, які ви "
+"використовували на AstroBin."
 
+#, fuzzy
 msgid ""
 "You cannot edit directly, as equipment items are associated directly to "
 "images when uploading them, or later via the Edit menu on the image's page."
 msgstr ""
+"Ви не можете редагувати безпосередньо, оскільки елементи обладнання "
+"асоційовані безпосередньо з зображеннями під час їх завантаження або пізніше "
+"через меню редагування на сторінці зображення."
 
+#, fuzzy
 msgid ""
 "\n"
 "                            Some of your images are still on the legacy "
@@ -8074,9 +8932,16 @@ msgid ""
 "equipment database.\n"
 "                        "
 msgstr ""
+"\n"
+"                            Деякі з ваших зображень все ще знаходяться в "
+"старій базі даних обладнання. Будь ласка, перенесіть ваше старе\n"
+"                            обладнання, щоб допомогти консолідувати базу "
+"даних обладнання AstroBin.\n"
+"                        "
 
+#, fuzzy
 msgid "Telescopes or lenses"
-msgstr ""
+msgstr "Телескопи або об'єктиви"
 
 msgid "Set your default image license"
 msgstr "Установіть ліцензію на зображення за замовчуванням"
@@ -8144,10 +9009,14 @@ msgstr "Який набір"
 msgid "Import photos"
 msgstr "Імпорт фото"
 
+#, fuzzy
 msgid ""
 "We couldn't find any albums or sets in your Flickr account. Please create a "
 "Flickr album and place the images you want to import there."
 msgstr ""
+"Ми не змогли знайти жодних альбомів або наборів у вашому обліковому записі "
+"Flickr. Будь ласка, створіть альбом Flickr і помістіть туди зображення, які "
+"ви хочете імпортувати."
 
 msgid "Authenticate with Flickr"
 msgstr "Аутентифікація з Flickr"
@@ -8267,8 +9136,9 @@ msgstr "Пари ключ/значення"
 msgid "Overlays"
 msgstr "Оверлей"
 
+#, fuzzy
 msgid "deleted"
-msgstr ""
+msgstr "видалено"
 
 msgid "Restore selected"
 msgstr "Відновити вибране"
@@ -8276,9 +9146,11 @@ msgstr "Відновити вибране"
 msgid "Empty trash"
 msgstr "Очистити кошик"
 
+#, fuzzy
 msgid "Account suspended"
-msgstr ""
+msgstr "Обліковий запис заблоковано"
 
+#, fuzzy
 msgid ""
 "\n"
 "                Your account is temporarily or permanently suspended. If you "
@@ -8286,13 +9158,23 @@ msgid ""
 "                using the Help menu.\n"
 "            "
 msgstr ""
+"\n"
+"                Ваш обліковий запис тимчасово або назавжди заблоковано. Якщо "
+"ви вважаєте, що це помилка, будь ласка, зв'яжіться\n"
+"                через меню Допомога.\n"
+"            "
 
+#, fuzzy
 msgid ""
 "\n"
 "                This content is not available because the user's account is "
 "suspended.\n"
 "            "
 msgstr ""
+"\n"
+"                Цей контент недоступний, оскільки обліковий запис "
+"користувача заблоковано.\n"
+"            "
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -8311,8 +9193,9 @@ msgstr ""
 "Ця колекція буде видалена назавжди, і відновити її буде неможливо. "
 "Зображення, що входять до колекції, не будуть видалені. Ви впевнені?"
 
+#, fuzzy
 msgid "Images in no collection"
-msgstr ""
+msgstr "Зображення не в колекції"
 
 #, python-format
 msgid ""
@@ -8320,21 +9203,29 @@ msgid ""
 "                        A collection by %(username)s\n"
 "                    "
 msgstr ""
+"\n"
+"                        Колекція від %(username)s\n"
+"                    "
 
+#, fuzzy
 msgid "Images not in a collection"
-msgstr ""
+msgstr "Зображення не в колекції"
 
+#, fuzzy
 msgid "Nested collections"
-msgstr ""
+msgstr "Вкладені колекції"
 
+#, fuzzy
 msgid "Parent collection:"
-msgstr ""
+msgstr "Батьківська колекція:"
 
+#, fuzzy
 msgid "View all collections"
-msgstr ""
+msgstr "Переглянути всі колекції"
 
+#, fuzzy
 msgid "Images in this collection"
-msgstr ""
+msgstr "Зображення в цій колекції"
 
 msgid ""
 "The following images do not have the key/value tag chosen to order this "
@@ -8392,8 +9283,9 @@ msgstr "Пошук по"
 msgid "Only animated"
 msgstr "Тільки анімація"
 
+#, fuzzy
 msgid "Only videos"
-msgstr ""
+msgstr "Тільки відео"
 
 msgid "Award"
 msgstr "Нагорода"
@@ -8407,11 +9299,13 @@ msgstr "Діапазон дат публікацій"
 msgid "Camera type"
 msgstr "Тип камери"
 
+#, fuzzy
 msgid "Camera pixel size (μm)"
-msgstr ""
+msgstr "Розмір пікселя камери (μm)"
 
+#, fuzzy
 msgid "Filter types"
-msgstr ""
+msgstr "Типи фільтрів"
 
 msgid "Field radius (deg)"
 msgstr "Радіус поля (град)"
@@ -8429,41 +9323,52 @@ msgstr "Масштаб кут.сек/піксель"
 msgid "Telescope type"
 msgstr "Тип телескопа"
 
+#, fuzzy
 msgid "Telescope diameter (mm)"
-msgstr ""
+msgstr "Діаметр телескопа (мм)"
 
+#, fuzzy
 msgid "Telescope weight (kg)"
-msgstr ""
+msgstr "Вага телескопа (кг)"
 
+#, fuzzy
 msgid "Mount weight (kg)"
-msgstr ""
+msgstr "Вага монту (кг)"
 
+#, fuzzy
 msgid "Mount max. payload (kg)"
-msgstr ""
+msgstr "Максимальне навантаження монту (кг)"
 
+#, fuzzy
 msgid "Telescope/lens focal length (mm)"
-msgstr ""
+msgstr "Фокусна відстань телескопа/об'єктива (мм)"
 
 msgid "Integration time (hours)"
 msgstr "Час інтеграції (годин)"
 
+#, fuzzy
 msgid "Width (pixels)"
-msgstr ""
+msgstr "Ширина (пікселі)"
 
+#, fuzzy
 msgid "Height (pixels)"
-msgstr ""
+msgstr "Висота (пікселі)"
 
+#, fuzzy
 msgid "Size (MB)"
-msgstr ""
+msgstr "Розмір (МБ)"
 
+#, fuzzy
 msgid "Acquired with a modified camera"
-msgstr ""
+msgstr "Отримано з модифікованою камерою"
 
+#, fuzzy
 msgid "Acquired with a color or monochromatic camera"
-msgstr ""
+msgstr "Отримано за допомогою кольорової або монохромної камери"
 
+#, fuzzy
 msgid "Acquired in certain months"
-msgstr ""
+msgstr "Отримано в певні місяці"
 
 msgid ""
 "However, you can still perform a similar search using the free text search "
@@ -8491,51 +9396,68 @@ msgstr ""
 msgid "Select"
 msgstr "Обрати"
 
+#, fuzzy
 msgid ""
 "Results will include images that were acquired in any of the selected months."
 msgstr ""
+"Результати включатимуть зображення, які були отримані в будь-який з вибраних "
+"місяців."
 
+#, fuzzy
 msgid "Match choices"
-msgstr ""
+msgstr "Сумістити вибори"
 
+#, fuzzy
 msgid "Any"
-msgstr ""
+msgstr "Будь-який"
 
+#, fuzzy
 msgid "January"
-msgstr ""
+msgstr "Січень"
 
+#, fuzzy
 msgid "February"
-msgstr ""
+msgstr "Лютий"
 
+#, fuzzy
 msgid "March"
-msgstr ""
+msgstr "Березень"
 
+#, fuzzy
 msgid "April"
-msgstr ""
+msgstr "Квітень"
 
+#, fuzzy
 msgid "May"
-msgstr ""
+msgstr "Травень"
 
+#, fuzzy
 msgid "June"
-msgstr ""
+msgstr "Червень"
 
+#, fuzzy
 msgid "July"
-msgstr ""
+msgstr "Липень"
 
+#, fuzzy
 msgid "August"
-msgstr ""
+msgstr "Серпень"
 
+#, fuzzy
 msgid "September"
-msgstr ""
+msgstr "Вересень"
 
+#, fuzzy
 msgid "October"
-msgstr ""
+msgstr "Жовтень"
 
+#, fuzzy
 msgid "November"
-msgstr ""
+msgstr "Листопад"
 
+#, fuzzy
 msgid "December"
-msgstr ""
+msgstr "Грудень"
 
 msgid "Add filter:"
 msgstr "Додати фільтр:"
@@ -8552,11 +9474,13 @@ msgstr "Яка камера була використана для отрима�
 msgid "Guider/planetary"
 msgstr "Гідуюча/планетарна"
 
+#, fuzzy
 msgid "Color"
-msgstr ""
+msgstr "Колір"
 
+#, fuzzy
 msgid "Mono"
-msgstr ""
+msgstr "Моно"
 
 msgid "Select range"
 msgstr "Виберіть діапазон"
@@ -8579,77 +9503,102 @@ msgstr "Поточний місяць"
 msgid "Current year"
 msgstr "Поточний рік"
 
+#, fuzzy
 msgid "Results will include images that feature all selected filter types."
 msgstr ""
+"Результати включатимуть зображення, які містять усі вибрані типи фільтрів."
 
+#, fuzzy
 msgid "Hydrogen-alpha (Hα)"
-msgstr ""
+msgstr "Гідроген-альфа (Hα)"
 
+#, fuzzy
 msgid "Hydrogen-beta (Hβ)"
-msgstr ""
+msgstr "Гідроген-бета (Hβ)"
 
+#, fuzzy
 msgid "Sulfur-II (SII)"
-msgstr ""
+msgstr "Сірка-II (SII)"
 
+#, fuzzy
 msgid "Oxygen-III (OIII)"
-msgstr ""
+msgstr "Кисень-III (OIII)"
 
+#, fuzzy
 msgid "Nitrogen-II (NII)"
-msgstr ""
+msgstr "Азот-II (NII)"
 
+#, fuzzy
 msgid "Ultraviolet (UV)"
-msgstr ""
+msgstr "Ультрафіолет (UV)"
 
+#, fuzzy
 msgid "Infrared (IR)"
-msgstr ""
+msgstr "Інфрачервоний (IR)"
 
+#, fuzzy
 msgid "Multiband"
-msgstr ""
+msgstr "Мультідіапазонний"
 
+#, fuzzy
 msgid "Luminance/clear (L)"
-msgstr ""
+msgstr "Люмінансний/прозорий (L)"
 
+#, fuzzy
 msgid "Red channel (R)"
-msgstr ""
+msgstr "Червоний канал (R)"
 
+#, fuzzy
 msgid "Green channel (G)"
-msgstr ""
+msgstr "Зелений канал (G)"
 
+#, fuzzy
 msgid "Blue channel (B)"
-msgstr ""
+msgstr "Синій канал (B)"
 
+#, fuzzy
 msgid "Neutral density (ND)"
-msgstr ""
+msgstr "Нейтральна щільність (ND)"
 
+#, fuzzy
 msgid "Ultra High Contrast (UHC)"
-msgstr ""
+msgstr "Ультра високий контраст (UHC)"
 
+#, fuzzy
 msgid "Sky glow"
-msgstr ""
+msgstr "Сяйво неба"
 
+#, fuzzy
 msgid "Solar"
-msgstr ""
+msgstr "Сонячний"
 
+#, fuzzy
 msgid "Lunar"
-msgstr ""
+msgstr "Місячний"
 
+#, fuzzy
 msgid "Cometary"
-msgstr ""
+msgstr "Кометний"
 
+#, fuzzy
 msgid "Photometric Ultraviolet"
-msgstr ""
+msgstr "Фотометричний ультрафіолет"
 
+#, fuzzy
 msgid "Photometric Blue"
-msgstr ""
+msgstr "Фотометричний синій"
 
+#, fuzzy
 msgid "Photometric Visual"
-msgstr ""
+msgstr "Фотометричний візуальний"
 
+#, fuzzy
 msgid "Photometric Red"
-msgstr ""
+msgstr "Фотометричний червоний"
 
+#, fuzzy
 msgid "Photometric Infrared"
-msgstr ""
+msgstr "Фотометричний інфрачервоний"
 
 msgid "Imaging telescopes"
 msgstr "Телескопи"
@@ -8681,20 +9630,25 @@ msgstr "Гідуючі телескопи"
 msgid "What kind of search results do you want?"
 msgstr "Які результати пошуку ви хочете?"
 
+#, fuzzy
 msgid "All images"
-msgstr ""
+msgstr "Усі зображення"
 
+#, fuzzy
 msgid "Your images"
-msgstr ""
+msgstr "Ваші зображення"
 
+#, fuzzy
 msgid "Images bookmarked by you"
-msgstr ""
+msgstr "Зображення, які ви закладали"
 
+#, fuzzy
 msgid "Images liked by you"
-msgstr ""
+msgstr "Зображення, які вам сподобалися"
 
+#, fuzzy
 msgid "Images by users you follow"
-msgstr ""
+msgstr "Зображення користувачів, яких ви підписалися"
 
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr "Що ти шукаєш? Використовуйте це поле для пошуку вільного тексту."
@@ -8715,8 +9669,9 @@ msgstr "зменшується"
 msgid "increasing"
 msgstr "збільшується"
 
+#, fuzzy
 msgid "Pixel count"
-msgstr ""
+msgstr "Кількість пікселів"
 
 msgid ""
 "What deep-sky astronomical subject are you looking for? E.g. M 31, NGC 2976, "
@@ -8729,8 +9684,9 @@ msgstr ""
 msgid "Earth's moon"
 msgstr "Місяць Землі"
 
+#, fuzzy
 msgid "Annular solar eclipse"
-msgstr ""
+msgstr "Кільцеве сонячне затемнення"
 
 msgid "Other solar system object"
 msgstr "Об’єкт сонячної системи"
@@ -8826,111 +9782,180 @@ msgstr "%s тому"
 msgid "no alias"
 msgstr "(не псевдонім)"
 
+#, fuzzy
 msgid "This cookie is used to store your cookie preferences."
 msgstr ""
+"Цей файл cookie використовується для зберігання ваших уподобань щодо файлів "
+"cookie."
 
+#, fuzzy
 msgid "This cookie is used to identify your session on the website."
 msgstr ""
+"Цей файл cookie використовується для ідентифікації вашої сесії на веб-сайті."
 
+#, fuzzy
 msgid ""
 "This cookie is used to protect against Cross-Site Request Forgery (CSRF) "
 "attacks."
 msgstr ""
+"Цей файл cookie використовується для захисту від атак Cross-Site Request "
+"Forgery (CSRF)."
 
+#, fuzzy
 msgid "This cookie is used to remember your language preference."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування вашого мовного "
+"уподобання."
 
+#, fuzzy
 msgid ""
 "This cookie lets you skip the two-factor authentication step for a certain "
 "time on the current device."
 msgstr ""
+"Цей файл cookie дозволяє вам пропустити крок двофакторної аутентифікації на "
+"певний час на поточному пристрої."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember your last camera filter in the equipment "
 "explorer."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування вашого останнього "
+"фільтра камери в огляді обладнання."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember your last sensor filter in the equipment "
 "explorer."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування вашого останнього "
+"фільтра сенсора в огляді обладнання."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember your last telescope filter in the equipment "
 "explorer."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування вашого останнього "
+"фільтра телескопа в огляді обладнання."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember your last mount filter in the equipment "
 "explorer."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування вашого останнього "
+"фільтра монту в огляді обладнання."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember your last filter filter in the equipment "
 "explorer."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування вашого останнього "
+"фільтра в огляді обладнання."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember your last software filter in the equipment "
 "explorer."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування вашого останнього "
+"програмного фільтра в огляді обладнання."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember your last accessory filter in the equipment "
 "explorer."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування вашого останнього "
+"фільтра аксесуара в огляді обладнання."
 
+#, fuzzy
 msgid ""
 "This cookie is used to pin your session to the master database: AstroBin "
 "uses multiple databases to improve performance, and this cookie is used to "
 "make sure that all your requests are sent to the same database."
 msgstr ""
+"Цей файл cookie використовується для прив'язки вашої сесії до основної бази "
+"даних: AstroBin використовує кілька баз даних для покращення продуктивності, "
+"і цей файл cookie використовується для того, щоб усі ваші запити надсилалися "
+"до однієї бази даних."
 
+#, fuzzy
 msgid ""
 "This cookie is used to authenticate you on the website app.astrobin.com."
 msgstr ""
+"Цей файл cookie використовується для аутентифікації вас на веб-сайті app."
+"astrobin.com."
 
+#, fuzzy
 msgid ""
 "This cookie is set by Stripe and used for fraud prevention. It is only set "
 "if you purchase a subscription."
 msgstr ""
+"Цей файл cookie встановлюється Stripe і використовується для запобігання "
+"шахрайству. Він встановлюється лише якщо ви купуєте підписку."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember if you have seen the information about "
 "proper usage of the forums."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування, чи бачили ви "
+"інформацію про правильне використання форумів."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember if you have seen information about the click "
 "& drag zoom functionality."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування, чи бачили ви "
+"інформацію про функцію масштабування за допомогою кліку та перетягування."
 
+#, fuzzy
 msgid ""
 "This cookie is used to remember if you have enabled the high contrast theme."
 msgstr ""
+"Цей файл cookie використовується для запам'ятовування, чи ввімкнено у вас "
+"тему з високим контрастом."
 
+#, fuzzy
 msgid ""
 "This cookie is used avoid saving the date and time we last saw you too often."
 msgstr ""
+"Цей файл cookie використовується, щоб уникнути занадто частого збереження "
+"дати та часу, коли ми вас востаннє бачили."
 
+#, fuzzy
 msgid ""
 "This cookie is used by Google Analytics to anonymously track your usage of "
 "the website."
 msgstr ""
+"Цей файл cookie використовується Google Analytics для анонімного відстеження "
+"вашого використання веб-сайту."
 
+#, fuzzy
 msgid ""
 "This cookie is used by Google Ad Manager to register and report the website "
 "user's actions after viewing or clicking one of the advertiser's ads with "
 "the purpose of measuring the efficacy of an ad."
 msgstr ""
+"Цей кукі використовується Google Ad Manager для реєстрації та звітування про "
+"дії користувача вебсайту після перегляду або натискання на одну з реклами "
+"рекламодавця з метою вимірювання ефективності реклами."
 
+#, fuzzy
 msgid ""
 "This cookie is used by Google Ad Manager to check if the user's browser "
 "supports cookies."
 msgstr ""
+"Цей кукі використовується Google Ad Manager для перевірки, чи підтримує "
+"браузер користувача кукі."
 
+#, fuzzy
 msgid "Essential cookies"
-msgstr ""
+msgstr "Необхідні кукі"
 
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
@@ -8974,17 +9999,21 @@ msgstr "Зображення завантажено. Спасибі!"
 msgid "Sorry, AstroBin was unable to activate the requested language"
 msgstr "На жаль, AstroBin не зміг активувати запитану мову"
 
+#, fuzzy
 msgid "Your secure password reset link"
-msgstr ""
+msgstr "Ваш безпечний лінк для скидання пароля"
 
+#, fuzzy
 msgid "There was an error sending the email."
-msgstr ""
+msgstr "Сталася помилка при відправці електронного листа."
 
+#, fuzzy
 msgid "Please confirm that you are not a robot."
-msgstr ""
+msgstr "Будь ласка, підтвердіть, що ви не робот."
 
+#, fuzzy
 msgid "Setting this collection as a parent would create a cycle"
-msgstr ""
+msgstr "Встановлення цієї колекції як батьківської створить цикл"
 
 msgid "You already have a collection with that name"
 msgstr "У Вас вже є колекція з такою назвою"
@@ -8992,10 +10021,13 @@ msgstr "У Вас вже є колекція з такою назвою"
 msgid "Collection updated!"
 msgstr "Колекція оновлена!"
 
+#, fuzzy
 msgid ""
 "Please note: some of the images you added are in your staging area and won't "
 "be visible to visitors of this collection."
 msgstr ""
+"Зверніть увагу: деякі з зображень, які ви додали, знаходяться у вашій зоні "
+"підготовки і не будуть видимі для відвідувачів цієї колекції."
 
 msgid "Images updated!"
 msgstr "Зображення оновлені!"
@@ -9007,11 +10039,13 @@ msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr "Дякуємо за вказівку на проблему. Всі ескізи будуть заново згенеровані."
 
+#, fuzzy
 msgid "You are not a collaborator to this image."
-msgstr ""
+msgstr "Ви не є співпрацівником цього зображення."
 
+#, fuzzy
 msgid "You have been removed as a collaborator to this image."
-msgstr ""
+msgstr "Ви були видалені як співпрацівник цього зображення."
 
 #, python-format
 msgid ""
@@ -9042,11 +10076,13 @@ msgstr "Зображення надіслано до IOTD/TP!"
 msgid "Dates"
 msgstr "Дати"
 
+#, fuzzy
 msgid "You are now a collaborator on this image!"
-msgstr ""
+msgstr "Тепер ви є співпрацівником цього зображення!"
 
+#, fuzzy
 msgid "Collaborator request denied."
-msgstr ""
+msgstr "Запит на співпрацю відхилено."
 
 #, python-format
 msgid "%s topics deleted"
@@ -9060,33 +10096,71 @@ msgstr ""
 "ще раз через деякий час: чим більше зображень у Вас буде, тим більше часу "
 "знадобиться."
 
-msgid "Referral code"
-msgstr ""
+#, fuzzy
+msgid "Keep me updated with newsletters and important announcements"
+msgstr "Тримайте мене в курсі новин та важливих оголошень"
 
+#, fuzzy
 msgid "Email address"
-msgstr ""
+msgstr "Електронна адреса"
 
+#, fuzzy
 msgid "AstroBin doesn't share your email address with anyone."
-msgstr ""
+msgstr "AstroBin не ділиться вашою електронною адресою з ким-небудь."
 
+#, fuzzy
+msgid "First name"
+msgstr "Ім'я"
+
+#, fuzzy
+msgid "Last name"
+msgstr "Прізвище"
+
+#, fuzzy
+msgid "Choose a secure password."
+msgstr "Виберіть надійний пароль."
+
+#, fuzzy
+msgid "Enter the same password again for verification."
+msgstr "Введіть той же пароль ще раз для підтвердження."
+
+#, fuzzy
+msgid "I agree to the"
+msgstr "Я погоджуюсь з"
+
+#, fuzzy
 msgid "Sorry, your username cannot contain the \"@\" character."
-msgstr ""
+msgstr "Вибачте, ваше ім'я користувача не може містити символ \"@\"."
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr "Вибачте, це ім’я користувача вже існує з іншим регістром."
 
-msgid "First name"
+#, fuzzy
+msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr ""
+"Ваш публічний ID та URL профілю. Літери, цифри та . / + / - / _ тільки."
 
-msgid "Last name"
-msgstr ""
+#, fuzzy
+msgid "Email is required."
+msgstr "Електронна пошта є обов'язковою."
 
+#, fuzzy
 msgid ""
-"This is your handle on AstroBin and will be part of the URL to your gallery. "
-"If you do not specify afirst and last name below, it will also be how others "
-"see your name. Please use letters, digits, and the special characters ./+/-/"
-"_ only."
+"If the email exists in our system, a new activation email has been sent."
 msgstr ""
+"Якщо електронна пошта існує в нашій системі, новий лист для активації було "
+"надіслано."
+
+#, fuzzy, python-brace-format
+msgid "Please wait {0} seconds before requesting another email."
+msgstr "Будь ласка, зачекайте {0} секунд перед запитом ще одного листа."
+
+#, fuzzy, python-brace-format
+msgid "A new activation email has been sent to {0}."
+msgstr "Новий лист для активації було надіслано на {0}."
+
+#~ msgid "Taiwan"
+#~ msgstr "Тайвань"
 
 #~ msgid "Original image"
 #~ msgstr "Оригінальне зображення"
@@ -9205,6 +10279,9 @@ msgstr ""
 #~ msgid "Guidelines"
 #~ msgstr "Настанови"
 
+#~ msgid "Back to top"
+#~ msgstr "Повернутися вгору"
+
 #~ msgid ""
 #~ "You will remove your shadow-ban on this user, and their comments, "
 #~ "messages, etc, will appear again on your content."
@@ -9218,8 +10295,8 @@ msgstr ""
 #~ msgid "Contact"
 #~ msgstr "Зв‘язатись"
 
-#~ msgid "My places"
-#~ msgstr "Мої місця"
+#~ msgid "My settings"
+#~ msgstr "Мої налаштування"
 
 #~ msgid ""
 #~ "AstroBin saves small pieces of text information (cookies) on your device "
@@ -9511,9 +10588,6 @@ msgstr ""
 
 #~ msgid "link"
 #~ msgstr "посилання"
-
-#~ msgid "Messages"
-#~ msgstr "Повідомлення"
 
 #~ msgid ""
 #~ "As a new user on AstroBin, your first 3 comments will go through a "
@@ -9855,8 +10929,38 @@ msgstr ""
 #~ msgid "Please note: this post will be published only after moderation."
 #~ msgstr "Зверніть увагу: цей пост буде опубліковано лише після модерації."
 
+#~ msgid "For more information, please check out our Twitter feed:"
+#~ msgstr ""
+#~ "За більш детальною інформацією, зверніться до нашої стрічки Twitter:"
+
 #~ msgid "Reset password at %(site_name)s"
 #~ msgstr "Скинути пароль на %(site_name)s"
+
+#~ msgid "You are now registered"
+#~ msgstr "Ви зареєстровані"
+
+#~ msgid ""
+#~ "To confirm your e-mail address, we have sent you an e-mail with an "
+#~ "activation link."
+#~ msgstr ""
+#~ "Для підтвердження Вашого email ми надіслали листа з посиланням активації."
+
+#~ msgid ""
+#~ "If you don't receive the e-mail within a few minutes, remember to check "
+#~ "your spam folder."
+#~ msgstr ""
+#~ "Якщо Ви не отримали e-mail протягом декількох хвилин, перевірте папку "
+#~ "Спам."
+
+#~ msgid "Register with AstroBin"
+#~ msgstr "Реєструватися на AstroBin"
+
+#~ msgid ""
+#~ "By registering with AstroBin, you agree to our <a href=\"https://welcome."
+#~ "astrobin.com/terms-of-service\">terms of service</a>."
+#~ msgstr ""
+#~ "Реєструючись на AstroBin, Ви погоджуєтесь з нашими <a href=\"https://"
+#~ "welcome.astrobin.com/terms-of-service\">умовами надання послуг</a>."
 
 #~ msgid "Large field radius"
 #~ msgstr "Великий радіус поля"
@@ -10156,6 +11260,9 @@ msgstr ""
 #~ msgid "Referral code (optional)"
 #~ msgstr "Код рефералу (опціонально)"
 
+#~ msgid "Are you a robot?"
+#~ msgstr "Ви робот?"
+
 #~ msgid "Publication time"
 #~ msgstr "Час публікації"
 
@@ -10199,6 +11306,13 @@ msgstr ""
 
 #~ msgid "New image revision by %(user)s on \"%(title)s\""
 #~ msgstr "Нова версія зображення %(user)s на \"%(title)s\""
+
+#~ msgid ""
+#~ "\n"
+#~ "    Want to learn about the IOTD/TP process?\n"
+#~ msgstr ""
+#~ "\n"
+#~ "    Хочете дізнатися про процес IOTD/TP?\n"
 
 #~ msgid "Your image was nominated to be a Top Pick"
 #~ msgstr "Ваше зображення було номіновано на Топ Зображення"
@@ -10382,3 +11496,313 @@ msgstr ""
 #~ msgstr ""
 #~ "Будь ласка, перенесіть своє обладнання на AstroBin до нової бази даних, "
 #~ "оскільки це допомагає консолідувати дані та покращувати результати пошуку."
+
+#~ msgid ""
+#~ "<strong>%(user)s</strong> commented on your unapproved equiment item "
+#~ "<strong>%(target)s</strong>"
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> прокоментував ваш непідтверджений елемент "
+#~ "обладнання <strong>%(target)s</strong>."
+
+#, fuzzy
+#~ msgid "Ignore"
+#~ msgstr "Ігнорувати"
+
+#, fuzzy
+#~ msgid "Browse equipment"
+#~ msgstr "Переглянути обладнання"
+
+#~ msgid ""
+#~ "Interested in <strong>%(name)s</strong>? Our sponsors sells this product!"
+#~ msgstr ""
+#~ "Цікавитесь <strong>%(name)s</strong>? Наші спонсори продають цей продукт!"
+
+#, fuzzy
+#~ msgid ""
+#~ "For your security, an additional confirmation token was sent in a "
+#~ "separate email."
+#~ msgstr ""
+#~ "Для вашої безпеки, додатковий токен підтвердження був надісланий в "
+#~ "окремому електронному листі."
+
+#, fuzzy
+#~ msgid ""
+#~ "If this was a legitimate login attempt, please use the token to complete "
+#~ "the process."
+#~ msgstr ""
+#~ "Якщо це була законна спроба входу, будь ласка, використайте токен для "
+#~ "завершення процесу."
+
+#, fuzzy
+#~ msgid ""
+#~ "For your security, following this event, AstroBin has automatically "
+#~ "enabled email-based two-factor authentication on your account. You can "
+#~ "disable in your settings or using the link below."
+#~ msgstr ""
+#~ "Для вашої безпеки, після цього події, AstroBin автоматично ввімкнув "
+#~ "двофакторну автентифікацію на вашому обліковому записі. Ви можете "
+#~ "вимкнути це в налаштуваннях або за допомогою посилання нижче."
+
+#, fuzzy
+#~ msgid "Change your password:"
+#~ msgstr "Змінити пароль:"
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin needs an additional step to verify your login. Please enter the "
+#~ "token generated by your token generator or received via email."
+#~ msgstr ""
+#~ "AstroBin потребує додаткового кроку для перевірки вашого входу. Будь "
+#~ "ласка, введіть токен, згенерований вашим генератором токенів або "
+#~ "отриманий по електронній пошті."
+
+#, fuzzy
+#~ msgid ""
+#~ "To make sure that this is a legitimate login attempt, we just sent you a "
+#~ "one-time password token via e-mail."
+#~ msgstr ""
+#~ "Щоб переконатися, що це законна спроба входу, ми щойно надіслали вам "
+#~ "одноразовий парольний токен на електронну пошту."
+
+#, fuzzy
+#~ msgid "Referral code"
+#~ msgstr "Реферальний код"
+
+#, fuzzy
+#~ msgid ""
+#~ "This is your handle on AstroBin and will be part of the URL to your "
+#~ "gallery. If you do not specify afirst and last name below, it will also "
+#~ "be how others see your name. Please use letters, digits, and the special "
+#~ "characters @/./+/-/_ only."
+#~ msgstr ""
+#~ "Це ваше ім'я на AstroBin і воно буде частиною URL вашої галереї. Якщо ви "
+#~ "не вкажете ім'я та прізвище нижче, це також буде те, як інші бачать ваше "
+#~ "ім'я. Будь ласка, використовуйте лише літери, цифри та спеціальні символи "
+#~ "@/./+/-/_."
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "            Your account is temporarily or permanently suspended. If you "
+#~ "believe this is in error, please get in touch\n"
+#~ "            using the Help menu.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "Ваш обліковий запис тимчасово або назавжди заблоковано. Якщо ви вважаєте, "
+#~ "що це помилка, будь ласка, зв'яжіться з нами через меню Допомога."
+
+#, fuzzy
+#~ msgid "Do you want to post about a specific equipment item?"
+#~ msgstr "Хочете написати про конкретний предмет обладнання?"
+
+#~ msgid ""
+#~ "To make sure that this is a legitimate login attempt, we just sent you a "
+#~ "one-time password token via e-mail to the address <strong>%(user_email)s</"
+#~ "strong>."
+#~ msgstr ""
+#~ "Щоб переконатися, що це законна спроба входу, ми щойно надіслали вам "
+#~ "одноразовий пароль через електронну пошту на адресу <strong>"
+#~ "%(user_email)s</strong>."
+
+#, fuzzy
+#~ msgid ""
+#~ "This cookie is set once a visitor interacts with a Survey invitation "
+#~ "modal popup. It is used to ensure that the same invite does not reappear "
+#~ "if it has already been shown."
+#~ msgstr ""
+#~ "Цей файл cookie встановлюється, коли відвідувач взаємодіє з модальним "
+#~ "вікном запрошення на опитування. Він використовується для того, щоб "
+#~ "забезпечити, що те саме запрошення не з'являється знову, якщо воно вже "
+#~ "було показано."
+
+#, fuzzy
+#~ msgid ""
+#~ "This cookie is set once a visitor completes a poll using the Feedback "
+#~ "Poll widget. It is used to ensure that the same poll does not reappear if "
+#~ "it has already been filled in."
+#~ msgstr ""
+#~ "Цей файл cookie встановлюється, коли відвідувач заповнює опитування за "
+#~ "допомогою віджета опитування зворотного зв'язку. Він використовується для "
+#~ "того, щоб забезпечити, що те саме опитування не з'являється знову, якщо "
+#~ "воно вже було заповнене."
+
+#, fuzzy
+#~ msgid ""
+#~ "This cookie is set once a visitor minimizes a Feedback Poll widget. It is "
+#~ "used to ensure that the widget stays minimized when the visitor navigates "
+#~ "through your site."
+#~ msgstr ""
+#~ "Цей кукі встановлюється, коли відвідувач згортає віджет опитування "
+#~ "зворотного зв'язку. Він використовується, щоб забезпечити збереження "
+#~ "згорнутого стану віджета, коли відвідувач переходить по вашому сайту."
+
+#, fuzzy
+#~ msgid ""
+#~ "This cookie is used by Hotjar to anonymously track your usage of the "
+#~ "website."
+#~ msgstr ""
+#~ "Цей кукі використовується Hotjar для анонімного відстеження вашого "
+#~ "використання вебсайту."
+
+#, fuzzy
+#~ msgid ""
+#~ "This session cookie is set to let Hotjar know whether that visitor is "
+#~ "included in the sample which is used to generate funnels."
+#~ msgstr ""
+#~ "Цей сесійний кукі встановлюється, щоб дати знати Hotjar, чи включений цей "
+#~ "відвідувач у вибірку, яка використовується для генерації воронок."
+
+#, fuzzy
+#~ msgid ""
+#~ "This cookie is set when a visitor minimizes or completes Incoming "
+#~ "Feedback. This is done so that the Incoming Feedback will load as "
+#~ "minimized immediately if the visitor navigates to another page where it "
+#~ "is set to show."
+#~ msgstr ""
+#~ "Цей кукі встановлюється, коли відвідувач згортає або завершує Вхідний "
+#~ "зворотний зв'язок. Це робиться для того, щоб Вхідний зворотний зв'язок "
+#~ "завантажувався у згорнутому вигляді, якщо відвідувач переходить на іншу "
+#~ "сторінку, де він має відображатися."
+
+#, fuzzy
+#~ msgid ""
+#~ "This cookie is set when the customer first lands on a page with the "
+#~ "Hotjar script. It is used to persist the Hotjar User ID, unique to that "
+#~ "site on the browser. This ensures that behavior in subsequent visits to "
+#~ "the same site will be attributed to the same user ID."
+#~ msgstr ""
+#~ "Цей кукі встановлюється, коли клієнт вперше заходить на сторінку з "
+#~ "скриптом Hotjar. Він використовується для збереження унікального "
+#~ "ідентифікатора користувача Hotjar для цього сайту в браузері. Це "
+#~ "забезпечує, що поведінка під час наступних відвідувань того ж сайту буде "
+#~ "віднесена до того ж ідентифікатора користувача."
+
+#, fuzzy
+#~ msgid ""
+#~ "This is your handle on AstroBin and will be part of the URL to your "
+#~ "gallery. If you do not specify afirst and last name below, it will also "
+#~ "be how others see your name. Please use letters, digits, and the special "
+#~ "characters ./+/-/_ only."
+#~ msgstr ""
+#~ "Це ваше ім'я на AstroBin і воно буде частиною URL вашої галереї. Якщо ви "
+#~ "не вкажете ім'я та прізвище нижче, це також буде тим, як інші бачать ваше "
+#~ "ім'я. Будь ласка, використовуйте лише літери, цифри та спеціальні "
+#~ "символи . / + / - / _."
+
+#~ msgid ""
+#~ "As your topic pertains, at least partially, to a specific piece of "
+#~ "equipment (<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</"
+#~ "a>), it was moved to its dedicated forum. When new topics are posted to "
+#~ "the forum of an equipment item, all AstroBin users who have used it get "
+#~ "notified (unless they have opted out of this kind of notifications)."
+#~ msgstr ""
+#~ "Оскільки ваша тема стосується, принаймні частково, конкретного обладнання "
+#~ "(<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</a>), вона "
+#~ "була переміщена до свого спеціалізованого форуму. Коли нові теми "
+#~ "публікуються у форумі обладнання, всі користувачі AstroBin, які його "
+#~ "використовували, отримують сповіщення (якщо вони не відмовилися від таких "
+#~ "сповіщень)."
+
+#~ msgid ""
+#~ "As your topic pertains, at least partially, to a specific piece of "
+#~ "equipment (%(equipment_item_name)s), it was moved to its dedicated forum. "
+#~ "When new topics are posted to the forum of an equipment item, all "
+#~ "AstroBin users who have used it get notified (unless they have opted out "
+#~ "of this kind of notifications)."
+#~ msgstr ""
+#~ "Оскільки ваша тема стосується, принаймні частково, конкретного обладнання "
+#~ "(%(equipment_item_name)s), вона була переміщена до свого спеціалізованого "
+#~ "форуму. Коли нові теми публікуються у форумі обладнання, всі користувачі "
+#~ "AstroBin, які його використовували, отримують сповіщення (якщо вони не "
+#~ "відмовилися від таких сповіщень)."
+
+#, fuzzy
+#~ msgid "Equipment database"
+#~ msgstr "База даних обладнання"
+
+#, fuzzy
+#~ msgid "Equipment marketplace"
+#~ msgstr "Ринок обладнання"
+
+#~ msgid ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> started a private conversation on "
+#~ "your marketplace listing <strong>%(target)s</strong>."
+#~ msgstr ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> розпочав приватну розмову щодо "
+#~ "вашого оголошення на маркетплейсі <strong>%(target)s</strong>."
+
+#~ msgid ""
+#~ "%(user)s started a private conversation on your marketplace listing "
+#~ "\"%(target)s\"."
+#~ msgstr ""
+#~ "%(user)s розпочав приватну розмову щодо вашого оголошення на маркетплейсі "
+#~ "\"%(target)s\"."
+
+#~ msgid ""
+#~ "<strong>%(user)s</strong> started a private conversation on your "
+#~ "marketplace listing <strong>%(target)s</strong>"
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> розпочав приватну розмову щодо вашого "
+#~ "оголошення на маркетплейсі <strong>%(target)s</strong>."
+
+#~ msgid ""
+#~ "<strong>%(user)s</strong> started a private conversation on your "
+#~ "marketplace listing <strong>%(target)s</strong>."
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> розпочав приватну розмову щодо вашого "
+#~ "оголошення на маркетплейсі <strong>%(target)s</strong>."
+
+#~ msgid ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> posted on your private conversation "
+#~ "on marketplace listing <strong>%(target)s</strong>."
+#~ msgstr ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> написав у вашій приватній розмові "
+#~ "щодо оголошення на маркетплейсі <strong>%(target)s</strong>."
+
+#~ msgid ""
+#~ "%(user)s posted on your private conversation on marketplace listing "
+#~ "\"%(target)s\"."
+#~ msgstr ""
+#~ "%(user)s написав у вашій приватній розмові щодо оголошення на "
+#~ "маркетплейсі \"%(target)s\"."
+
+#~ msgid ""
+#~ "<strong>%(user)s</strong> posted on your private conversation on "
+#~ "marketplace listing <strong>%(target)s</strong>"
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> написав у вашій приватній розмові щодо "
+#~ "оголошення на маркетплейсі <strong>%(target)s</strong>."
+
+#~ msgid ""
+#~ "<strong>%(user)s</strong> posted on your private conversation on "
+#~ "marketplace listing <strong>%(target)s</strong>."
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> написав у вашій приватній розмові щодо "
+#~ "оголошення на маркетплейсі <strong>%(target)s</strong>."
+
+#~ msgid ""
+#~ "<strong>%(user)s</strong> replied in a topic to which you are subscribed"
+#~ msgstr "<strong>%(user)s</strong> відповів у темі, на яку ви підписані"
+
+#~ msgid ""
+#~ "\n"
+#~ "                            AstroBin's Marketplace has <strong>%(count)s</"
+#~ "strong> items similar to what you're\n"
+#~ "                            looking for!\n"
+#~ "                        "
+#~ msgstr ""
+#~ "\n"
+#~ "                            На ринку AstroBin є <strong>%(count)s</"
+#~ "strong> предметів, схожих на те, що ви\n"
+#~ "                            шукаєте!\n"
+#~ "                        "
+
+#~ msgid ""
+#~ "As AstroBin has detected that your current password is insecure, you may "
+#~ "not change it yourself. Please <a href=\"%(contact_url)s\">contact us</a> "
+#~ "to request a password reset."
+#~ msgstr ""
+#~ "Оскільки AstroBin виявив, що ваш поточний пароль ненадійний, ви не можете "
+#~ "змінити його самостійно. Будь ласка, <a href=\"%(contact_url)s"
+#~ "\">зв'яжіться з нами</a>, щоб запросити скидання пароля."

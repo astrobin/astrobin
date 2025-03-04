@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,26 +16,37 @@ msgstr ""
 msgid "You already have a saved search with this name."
 msgstr ""
 
+#, fuzzy
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
 "sensitive."
 msgstr ""
+"Kérlek, adj meg egy helyes felhasználónevet és jelszót. Ne feledd, hogy "
+"mindkét mező érzékeny a kis- és nagybetűkre."
 
+#, fuzzy
 msgid "This account is inactive."
-msgstr ""
+msgstr "Ez a fiók inaktív."
 
+#, fuzzy
 msgid ""
 "Multiple users found with alternative capitalizations of this username. "
 "Please use the correct capitalization."
 msgstr ""
+"Több felhasználót találtunk, akiknek a felhasználóneve eltérő kis- és "
+"nagybetűs írásmóddal szerepel. Kérlek, használd a helyes írásmódot."
 
+#, fuzzy
 msgid ""
 "Multiple users found with this name. Please try logging in with your "
 "username or email."
 msgstr ""
+"Több felhasználót találtunk ezzel a névvel. Kérlek, próbálj meg "
+"bejelentkezni a felhasználóneveddel vagy e-mail címeddel."
 
+#, fuzzy
 msgid "Username or email"
-msgstr ""
+msgstr "Felhasználónév vagy e-mail"
 
 msgid "United Kingdom"
 msgstr "Egyesült Királyság"
@@ -682,8 +693,8 @@ msgstr "Svájc"
 msgid "Syrian Arab Republic"
 msgstr "Szíria"
 
-msgid "Taiwan"
-msgstr "Tajvan"
+msgid "Republic of China (Taiwan)"
+msgstr ""
 
 msgid "Tajikistan"
 msgstr "Tádzsikisztán"
@@ -941,19 +952,23 @@ msgstr "Szélesség (perc)"
 msgid "Longitude (seconds)"
 msgstr "Szélesség (másodperc)"
 
-msgid "Are you a robot?"
-msgstr "Robot vagy?"
-
+#, fuzzy
 msgid ""
 "This email address was not found in our database. Email address might be "
 "case sensitive."
 msgstr ""
+"Ezt az e-mail címet nem találtuk az adatbázisunkban. Az e-mail cím érzékeny "
+"lehet a kis- és nagybetűkre."
 
+#, fuzzy
 msgid ""
 "We found more than one account associated with this email address and we "
 "cannot proceed with this operation. Please get in touch with support to "
 "resolve the issue."
 msgstr ""
+"Több fiókot találtunk, amelyek ehhez az e-mail címhez kapcsolódnak, és nem "
+"tudjuk folytatni ezt a műveletet. Kérlek, lépj kapcsolatba a támogatással a "
+"probléma megoldása érdekében."
 
 msgid "Recipients"
 msgstr "Címzettek"
@@ -1098,10 +1113,13 @@ msgstr ""
 msgid "Oceania"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "Your account is temporarily or permanently suspended. If you believe this is "
 "in error, please get in touch using the Help menu."
 msgstr ""
+"A fiókod ideiglenesen vagy véglegesen felfüggesztve van. Ha úgy gondolod, "
+"hogy ez tévedés, kérlek, lépj kapcsolatba a Súgó menü segítségével."
 
 msgid "None (All rights reserved)"
 msgstr "Semmi (Minden jog a tiéd)"
@@ -1391,8 +1409,9 @@ msgstr "Katadioptrikus: Makszutov"
 msgid "Catadioptric: Maksutov-Cassegrain"
 msgstr "Katadioptrikus: Makszutov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov-Newtonian"
-msgstr ""
+msgstr "Katadioptrikus: Maksutov-Newtonian"
 
 msgid "Catadioptric: modified Dall-Kirkham"
 msgstr "Katadioptrikus: átalakított Dall-Kirkham"
@@ -1707,10 +1726,14 @@ msgstr ""
 msgid "Sharpen thumbnails"
 msgstr "Indexképek élesítése"
 
+#, fuzzy
 msgid ""
 "If selected, AstroBin will use a resizing algorithm that slightly sharpens "
 "all sizes of the image except the full size version."
 msgstr ""
+"Ha kiválasztod, az AstroBin egy olyan átméretezési algoritmust fog "
+"használni, amely kissé élesíti a kép minden méretét, kivéve a teljes méretű "
+"verziót."
 
 msgid "Allow full-size display"
 msgstr "Teljes méretű megjelenítés engedélyezése"
@@ -1886,8 +1909,9 @@ msgstr "A flat képek száma."
 msgid "Flat darks"
 msgstr "Flat darkok"
 
+#, fuzzy
 msgid "The number of flat dark frames."
-msgstr ""
+msgstr "A flat dark frame-ek száma."
 
 msgid "Bias"
 msgstr "Bias"
@@ -2046,11 +2070,13 @@ msgstr ""
 msgid "Astrophotography is my profession or part of my profession."
 msgstr ""
 
+#, fuzzy
 msgid "Suspended"
-msgstr ""
+msgstr "Felfüggesztve"
 
+#, fuzzy
 msgid "Suspension reason"
-msgstr ""
+msgstr "Felfüggesztés oka"
 
 msgid "Allow others to see when you created your AstroBin account"
 msgstr "Az AstroBin profilod készítése időpontjának nyilvánossá tétele"
@@ -2403,35 +2429,50 @@ msgstr "Hiba"
 msgid "Expired"
 msgstr "Lejárt"
 
+#, fuzzy
 msgid ""
 "This password doesn't contain any numeric digits. It must contain at least "
 "one number."
 msgstr ""
+"Ez a jelszó nem tartalmaz numerikus karaktereket. Legalább egy számot kell "
+"tartalmaznia."
 
+#, fuzzy
 msgid "Your password must contain at least one number."
-msgstr ""
+msgstr "A jelszavadnak legalább egy számot kell tartalmaznia."
 
+#, fuzzy
 msgid ""
 "This password doesn't contain any special characters. It must contain at "
 "least one of the following {}"
 msgstr ""
+"Ez a jelszó nem tartalmaz különleges karaktereket. Legalább az alábbiak "
+"közül egyet kell tartalmaznia: {}"
 
+#, fuzzy
 msgid "Your password must contain any of the following special characters: {}"
 msgstr ""
+"A jelszavadnak az alábbi különleges karakterek közül bármelyiket "
+"tartalmaznia kell: {}"
 
+#, fuzzy
 msgid "This password is too long. It must contain no more than {} characters."
-msgstr ""
+msgstr "Ez a jelszó túl hosszú. Legfeljebb {} karakterből állhat."
 
+#, fuzzy
 msgid "Your password must contain no more than {} characters."
-msgstr ""
+msgstr "A jelszavad legfeljebb {} karakterből állhat."
 
+#, fuzzy
 msgid ""
 "This password has previously appeared in a data breach elsewhere and should "
 "not be used."
 msgstr ""
+"Ez a jelszó korábban megjelent egy adatlopás során, és nem szabad használni."
 
+#, fuzzy
 msgid "Your AstroBin authentication token"
-msgstr ""
+msgstr "Az AstroBin hitelesítési tokened"
 
 msgid "Abkhazian"
 msgstr "Abkhazian"
@@ -3253,17 +3294,21 @@ msgstr "GYIK"
 msgid "Terms of Service"
 msgstr "Felhasználási Feltételek"
 
+#, fuzzy
 msgid "Privacy policy"
-msgstr ""
+msgstr "Adatvédelmi irányelvek"
 
+#, fuzzy
 msgid "Cookie policy"
-msgstr ""
+msgstr "Süti irányelvek"
 
+#, fuzzy
 msgid "Acceptable use policy"
-msgstr ""
+msgstr "Elfogadható használati irányelvek"
 
+#, fuzzy
 msgid "Community guidelines"
-msgstr ""
+msgstr "Közösségi irányelvek"
 
 msgid "Sponsors"
 msgstr "Szponzorok"
@@ -3290,9 +3335,6 @@ msgid "The images on this websites are copyright of their respective owners."
 msgstr ""
 "Az ezen a weboldalon található képek szerzői jogai a tulajdonosaik "
 "birtokában vannak."
-
-msgid "Back to top"
-msgstr "Vissza az oldal tetejére"
 
 msgid ""
 "AstroBin detected that your password does not meet security requirements."
@@ -3613,8 +3655,9 @@ msgstr "Képbemutatási beállítások"
 msgid "Autoplay"
 msgstr "Automatikus lejátszás"
 
+#, fuzzy
 msgid "Transitions"
-msgstr ""
+msgstr "Átmenetek"
 
 msgid "Play speed"
 msgstr "Lejátszási sebesség"
@@ -3628,31 +3671,40 @@ msgstr "Megosztás (a kezdetektől)"
 msgid "Apply"
 msgstr "Alkalmazás"
 
+#, fuzzy
 msgid "IOTD/TP stats"
-msgstr ""
+msgstr "IOTD/TP statisztikák"
 
+#, fuzzy
 msgid "(last [x] days)"
-msgstr ""
+msgstr "(utolsó [x] nap)"
 
 msgid "Please note"
 msgstr "Kérjük, vedd figyelembe"
 
+#, fuzzy
 msgid "The following tables are updated every 24 hours."
-msgstr ""
+msgstr "A következő táblázatok 24 óránként frissülnek."
 
+#, fuzzy
 msgid "Distribution of astrophotographers"
-msgstr ""
+msgstr "Asztrofotósok eloszlása"
 
+#, fuzzy
 msgid ""
 "This table shows the number of distinct astrophotographers who have been "
 "assigned and IOTD/TP award compared to the total number of images awarded."
 msgstr ""
+"Ez a táblázat azt mutatja, hogy hány különböző asztrofotós kapott IOTD/TP "
+"díjat a díjazott képek összes számához képest."
 
+#, fuzzy
 msgid "Distinct awarded users"
-msgstr ""
+msgstr "Különböző díjazott felhasználók"
 
+#, fuzzy
 msgid "Total awarded images"
-msgstr ""
+msgstr "Díjazott képek összesen"
 
 msgid "Image of the day"
 msgstr "A nap képe"
@@ -3663,19 +3715,24 @@ msgstr "Top pickek"
 msgid "Top pick nominations"
 msgstr "Top pick jelöltek"
 
+#, fuzzy
 msgid "Distribution of subject types"
-msgstr ""
+msgstr "Tárgytípusok eloszlása"
 
+#, fuzzy
 msgid ""
 "This table shows the distribution of awards per subject type, compared to "
 "the popularity of images of that subject type."
 msgstr ""
+"Ez a táblázat a díjak eloszlását mutatja a tárgytípusok szerint, a "
+"tárgytípusok népszerűségéhez képest."
 
 msgid "Top pick"
 msgstr "Top pick"
 
+#, fuzzy
 msgid "Total submitted"
-msgstr ""
+msgstr "Összesen benyújtva"
 
 msgid "Deep sky"
 msgstr "Mélyég"
@@ -3683,16 +3740,21 @@ msgstr "Mélyég"
 msgid "Solar system"
 msgstr "Naprendszer"
 
+#, fuzzy
 msgid "Distribution of data sources"
-msgstr ""
+msgstr "Adatforrások eloszlása"
 
+#, fuzzy
 msgid ""
 "This table shows the distribution of awards per data source, compared to the "
 "popularity of images acquired from that data source."
 msgstr ""
+"Ez a táblázat a díjak eloszlását mutatja az adatforrások szerint, a "
+"népszerűségükhöz képest."
 
+#, fuzzy
 msgid "Public amaeteur data"
-msgstr ""
+msgstr "Nyilvános amatőr adatok"
 
 msgid "Quick search"
 msgstr "Gyors keresés"
@@ -3769,8 +3831,9 @@ msgstr "Segítség"
 msgid "What is this site?"
 msgstr "Mi ez az oldal?"
 
+#, fuzzy
 msgid "Support"
-msgstr ""
+msgstr "Támogatás"
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "Szeretnéd használni a valódi neved az AstroBin-en?"
@@ -3804,6 +3867,9 @@ msgstr ""
 "AstroBin informatív, építő jellegű és hasznos kommentjeit jutalmazza. "
 "%(_0)sTudj meg többet.%(_1)s"
 
+msgid "My places"
+msgstr "Saját helyszínek"
+
 msgid "Public Gallery"
 msgstr "Nyilvános Galéria"
 
@@ -3813,14 +3879,14 @@ msgstr "Előkészítési Terület"
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
-msgid "My messages"
+msgid "Messages"
 msgstr "Üzenetek"
+
+msgid "Marketplace listings"
+msgstr ""
 
 msgid "API Keys"
 msgstr "API kulcsok"
-
-msgid "My settings"
-msgstr "Beállítások"
 
 msgid "Disable high contrast theme"
 msgstr "Magas kontraszt téma kikapcsolása"
@@ -3924,115 +3990,166 @@ msgstr "Írva"
 msgid "Received"
 msgstr "Fogadott"
 
+#, fuzzy
 msgid "Accepted"
-msgstr ""
+msgstr "Elfogadva"
 
+#, fuzzy
 msgid "Accept"
-msgstr ""
+msgstr "Elfogad"
 
+#, fuzzy
 msgid "Declined"
-msgstr ""
+msgstr "Elutasítva"
 
+#, fuzzy
 msgid "Decline"
-msgstr ""
+msgstr "Elutasít"
 
+#, fuzzy
 msgid "Cookies in this group"
-msgstr ""
+msgstr "Sütik ebben a csoportban"
 
 msgid "Cookie consent"
 msgstr "Sütik elfogadása"
 
+#, fuzzy
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
+#, fuzzy
 msgid "Details"
-msgstr ""
+msgstr "Részletek"
 
+#, fuzzy
 msgid "Policies"
-msgstr ""
+msgstr "Irányelvek"
 
+#, fuzzy
 msgid ""
 "We use cookies on our website to provide you with the best user experience "
 "and to improve our services."
 msgstr ""
+"Sütiket használunk a weboldalunkon, hogy a legjobb felhasználói élményt "
+"nyújtsuk, és javítsuk a szolgáltatásainkat."
 
+#, fuzzy
 msgid ""
 "Cookies are small text files that are stored on your device (computer, "
 "smartphone, tablet) when you visit our website. They help us remember your "
 "preferences, analyze how our website is used, and customize the content you "
 "see."
 msgstr ""
+"A sütik kis szöveges fájlok, amelyeket az eszközödre (számítógép, "
+"okostelefon, tablet) tárolunk, amikor meglátogatod a weboldalunkat. "
+"Segítenek megjegyezni a preferenciáidat, elemezni, hogyan használják a "
+"weboldalunkat, és testre szabni a látott tartalmat."
 
+#, fuzzy
 msgid "We use the following types of cookies:"
-msgstr ""
+msgstr "A következő típusú sütiket használjuk:"
 
+#, fuzzy
 msgid "Essential cookies (required)"
-msgstr ""
+msgstr "Alapvető sütik (kötelező)"
 
+#, fuzzy
 msgid "These cookies are essential for the website to function properly."
-msgstr ""
+msgstr "Ezek a sütik elengedhetetlenek a weboldal megfelelő működéséhez."
 
+#, fuzzy
 msgid "Functional cookies (recommended)"
-msgstr ""
+msgstr "Funkcionális sütik (ajánlott)"
 
+#, fuzzy
 msgid ""
 "These cookies are used to provide additional functionality to the website, "
 "such as remembering local preferences."
 msgstr ""
+"Ezek a sütik további funkciókat biztosítanak a weboldalon, például "
+"megjegyzik a helyi preferenciákat."
 
+#, fuzzy
 msgid "Performance cookies (recommended)"
-msgstr ""
+msgstr "Teljesítmény sütik (ajánlott)"
 
+#, fuzzy
 msgid ""
 "These cookies are used to improve the website performance by saving some "
 "pieces of information on your computer and avoiding reading from the "
 "AstroBin database when possible."
 msgstr ""
+"Ezek a sütik javítják a weboldal teljesítményét azáltal, hogy néhány "
+"információt a számítógépeden tárolnak, és elkerülik az AstroBin "
+"adatbázisának olvasását, amikor csak lehet."
 
+#, fuzzy
 msgid "Analytics cookies"
-msgstr ""
+msgstr "Elemző sütik"
 
+#, fuzzy
 msgid ""
 "These cookies are used to anonymously track your usage of the website, so "
 "that we can improve it over time."
 msgstr ""
+"Ezek a sütik névtelenül követik a weboldal használatát, hogy idővel "
+"javíthassuk azt."
 
+#, fuzzy
 msgid "Advertising cookies"
-msgstr ""
+msgstr "Hirdetési sütik"
 
+#, fuzzy
 msgid ""
 "These cookies are used to honor ad display frequency caps. AstroBin does NOT "
 "serve targeted ads."
 msgstr ""
+"Ezek a sütik a hirdetések megjelenítési gyakoriságának korlátozására "
+"szolgálnak. Az AstroBin NEM szolgáltat célzott hirdetéseket."
 
+#, fuzzy
 msgid ""
 "AstroBin is committed to transparency and choice regarding the cookies that "
 "we use on our website. Our policies explain how we use cookies and how you "
 "can control your privacy."
 msgstr ""
+"Az AstroBin elkötelezett a transzparencia és a választás mellett a "
+"weboldalunkon használt sütik tekintetében. Irányelveink elmagyarázzák, "
+"hogyan használjuk a sütiket, és hogyan tudod irányítani a magánéleted."
 
+#, fuzzy
 msgid "Ad policy"
-msgstr ""
+msgstr "Hirdetési irányelv"
 
+#, fuzzy
 msgid "Accept all"
-msgstr ""
+msgstr "Mindent elfogadok"
 
+#, fuzzy
 msgid "Essential only"
-msgstr ""
+msgstr "Csak alapvető"
 
+#, fuzzy
 msgid "Customize selection"
-msgstr ""
+msgstr "Választás testreszabása"
 
+#, fuzzy
 msgid ""
 "This is a list of the categories of cookies used in our website and why we "
 "use them."
 msgstr ""
+"Ez egy lista a weboldalunkon használt sütik kategóriáiról és arról, hogy "
+"miért használjuk őket."
 
+#, fuzzy
 msgid ""
 "Please note: third-party cookies might change from time to time. We will try "
 "to keep this list up to date, but we cannot guarantee that it will always be "
 "complete and accurate."
 msgstr ""
+"Kérjük, vedd figyelembe: a harmadik féltől származó sütik időről időre "
+"változhatnak. Megpróbáljuk naprakészen tartani ezt a listát, de nem tudjuk "
+"garantálni, hogy mindig teljes és pontos lesz."
 
 msgid "More"
 msgstr "Több"
@@ -4081,8 +4198,9 @@ msgstr "Távolítsanak el engem"
 msgid "Acquired at"
 msgstr "Gyűjtve"
 
+#, fuzzy
 msgid "In these collections"
-msgstr ""
+msgstr "Ezekben a gyűjteményekben"
 
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -4330,6 +4448,9 @@ msgstr "Egyszerű megjelölések"
 
 msgid "Advanced annotations"
 msgstr "Speciális megjelölések"
+
+msgid "Advanced annotations (large font)"
+msgstr ""
 
 msgid "Basic information"
 msgstr "Alapvető információ"
@@ -4956,6 +5077,19 @@ msgstr "Használt felszerelés"
 msgid "Edit your image: advanced plate-solving settings"
 msgstr "Kép szerkesztése: fejlett plate-solving beállítások"
 
+msgid "Note:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Based on the image's field radius, some features are not available for this "
+"field size category (%(category)s)."
+msgstr ""
+
+msgid ""
+"The following features have been turned off by default and cannot be enabled:"
+msgstr ""
+
 msgid "Save and plate-solve again"
 msgstr "Elmentés és plate-solve újra"
 
@@ -5204,6 +5338,9 @@ msgstr "Nincs találat"
 msgid "Searching"
 msgstr "Keresés"
 
+msgid "My messages"
+msgstr "Üzenetek"
+
 msgid "Participants"
 msgstr "Résztvevők"
 
@@ -5278,11 +5415,15 @@ msgid ""
 "%(user)s accepted your request to add them as collaborator to your image"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "You, or somebody on your behalf, attempted to log in to AstroBin from a "
 "different country than the one you were seen in last time, or from a country "
 "that could not be detected."
 msgstr ""
+"Te, vagy valaki a nevedben, megpróbált bejelentkezni az AstroBin-ra egy "
+"másik országból, mint ahol legutóbb láttak, vagy egy olyan országból, "
+"amelyet nem tudtak észlelni."
 
 msgid "Last known country"
 msgstr ""
@@ -5290,21 +5431,29 @@ msgstr ""
 msgid "This login attempted in country"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "If you did not make this login attempt, please change your password and/or "
 "contact AstroBin immediately."
 msgstr ""
+"Ha nem te próbáltál bejelentkezni, kérlek változtasd meg a jelszavad, és/"
+"vagy lépj kapcsolatba az AstroBin-nal azonnal."
 
+#, fuzzy
 msgid "Wishing you clear skies and excellent seeing!"
-msgstr ""
+msgstr "Kívánunk neked tiszta eget és kiváló seeinget!"
 
+#, fuzzy
 msgid "AstroBin detected a login attempt from a different country"
-msgstr ""
+msgstr "Az AstroBin észlelte, hogy egy másik országból próbáltak bejelentkezni"
 
+#, fuzzy
 msgid ""
 "You, or somebody on your behalf, attempted to log in to AstroBin and we "
 "detected that your password does not meet security requirements."
 msgstr ""
+"Te, vagy valaki a nevedben, megpróbáltál bejelentkezni az AstroBinra, és "
+"észleltük, hogy a jelszavad nem felel meg a biztonsági követelményeknek."
 
 msgid ""
 "To prevent spam, phishing, and other malicious activities, all your new "
@@ -5313,16 +5462,21 @@ msgid ""
 "authentication."
 msgstr ""
 
+#, fuzzy
 msgid ""
 "We recommend that you change your password as soon as possible, for your "
 "security and the safety of the other members of the AstroBin community."
 msgstr ""
+"Ajánljuk, hogy a lehető leghamarabb változtasd meg a jelszavad, a "
+"biztonságod és az AstroBin közösség többi tagjának védelme érdekében."
 
+#, fuzzy
 msgid "Learn more about security standards on AstroBin:"
-msgstr ""
+msgstr "Tudd meg többet a biztonsági szabványokról az AstroBinon:"
 
+#, fuzzy
 msgid "Two-factor Authentication"
-msgstr ""
+msgstr "Kétfaktoros hitelesítés"
 
 msgid ""
 "To prevent spam, phishing, and other malicious activities, all your new "
@@ -5330,9 +5484,12 @@ msgid ""
 "password to meet security requirements."
 msgstr ""
 
+#, fuzzy
 msgid ""
 "AstroBin detected that your password does not meet security requirements"
 msgstr ""
+"Az AstroBin észlelte, hogy a jelszavad nem felel meg a biztonsági "
+"követelményeknek"
 
 #, python-format
 msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
@@ -5347,7 +5504,7 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s added you as a collaborator to an image"
-msgstr ""
+msgstr "%(user)s kollaborátorként hozzáadott egy képedhez"
 
 msgid "Your request for an API Key has been approved!"
 msgstr "Az API-kulcs iránti kérelmedet jóváhagytuk!"
@@ -5495,6 +5652,9 @@ msgid ""
 "                                                        Hey, %(name)s!\n"
 "                                                    "
 msgstr ""
+"\n"
+"                                                        Hé, %(name)s!\n"
+"                                                    "
 
 msgid "See all your notifications"
 msgstr "Összes értesítés megtekintése"
@@ -5620,17 +5780,21 @@ msgstr ""
 
 #, python-format
 msgid "Moderator <strong>%(user)s</strong> approved your image"
-msgstr ""
+msgstr "A moderátor <strong>%(user)s</strong> jóváhagyta a képed"
 
+#, fuzzy
 msgid ""
 "If you already promoted your image to the public area of your gallery, it "
 "will shortly be indexed by AstroBin's search engine and appear in search "
 "results."
 msgstr ""
+"Ha már népszerűsítetted a képed a galériád nyilvános területén, az hamarosan "
+"indexálva lesz az AstroBin keresőmotorja által, és megjelenik a keresési "
+"eredmények között."
 
 #, python-format
 msgid "Moderator \"%(user)s\" approved your image"
-msgstr ""
+msgstr "A moderátor \"%(user)s\" jóváhagyta a képed"
 
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
@@ -5675,9 +5839,11 @@ msgstr ""
 "Sajnos az AstroBin nem tudta elvégezni a képed fejlett plate-solve "
 "megoldását: %(title)s."
 
+#, fuzzy
 msgid ""
 "Your image could not be automatically submitted for IOTD/TP consideration"
 msgstr ""
+"A képed nem tudott automatikusan benyújtásra kerülni IOTD/TP megfontolásra"
 
 #, python-format
 msgid ""
@@ -5724,13 +5890,22 @@ msgstr ""
 
 #, python-format
 msgid ""
+"AstroBin applied default settings based on your image's field size "
+"(%(field_radius)s degrees). Different field sizes receive different "
+"annotation settings for optimal results. You are free to change these "
+"settings using the \"Edit plate-solving settings\" menu in your image."
+msgstr ""
+
+#, python-format
+msgid ""
 "AstroBin completed the advanced plate-solution of your image: %(title)s."
 msgstr ""
 "Az AstroBin végrehajtott egy fejlett plate-solve műveletet a képeden: "
 "%(title)s."
 
+#, fuzzy
 msgid "You submitted your image for IOTD/TP consideration!"
-msgstr ""
+msgstr "Küldted a képed az IOTD/TP megfontolására!"
 
 msgid "An image you dismissed made it to IOTD"
 msgstr ""
@@ -6378,18 +6553,21 @@ msgstr ""
 msgid "<strong>%(user)s</strong> has published a new image"
 msgstr "<strong>%(user)s</strong> közzétett egy új képet"
 
+#, fuzzy
 msgid "This image is a group effort among the following collaborators:"
-msgstr ""
+msgstr "Ez a kép közös munka a következő kollaborátorokkal:"
 
+#, fuzzy
 msgid "This image features some equipment items that you follow:"
-msgstr ""
+msgstr "Ez a kép néhány olyan felszerelést tartalmaz, amelyet követsz:"
 
 #, python-format
 msgid "%(user)s has published a new image"
-msgstr ""
+msgstr "%(user)s új képet tett közzé"
 
+#, fuzzy
 msgid "This image is a group effort with the following collaborators:"
-msgstr ""
+msgstr "Ez a kép közös munka a következő kollaborátorokkal:"
 
 #, python-format
 msgid "New image by %(user)s"
@@ -6489,11 +6667,13 @@ msgstr "%(user)s kedveli ezt a képedet: %(url)s"
 msgid "%(user)s likes your image: %(title)s"
 msgstr "%(user)s kedveli ezt a képedet: %(title)s"
 
+#, fuzzy
 msgid "Thank you for your payment!"
-msgstr ""
+msgstr "Köszönjük a támogatásodat!"
 
+#, fuzzy
 msgid "I really appreciate your support for AstroBin, thank you so much!"
-msgstr ""
+msgstr "Nagyon értékelem a támogatásodat az AstroBin iránt, nagyon köszönöm!"
 
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
@@ -6535,8 +6715,9 @@ msgid ""
 "<strong>%(target)s</strong>."
 msgstr ""
 
+#, fuzzy
 msgid "Thank you for your subscription!"
-msgstr ""
+msgstr "Köszönjük az előfizetésed!"
 
 msgid ""
 "I really appreciate your support for AstroBin, I hope you will enjoy your "
@@ -6545,12 +6726,17 @@ msgstr ""
 "Nagyra értékelem, hogy támogatod az AstroBin-t, remélem, élvezni fogod az új "
 "előfizetésedet!"
 
+#, fuzzy
 msgid ""
 "AstroBin subscriptions are valid for 1 year or 1 month. If your subscription "
 "expires, nothing happens to your content. Nothing is deleted, hidden, held "
 "hostage or anything. In fact, you can leave it up forever even if you stop "
 "being active as an astrophotographer."
 msgstr ""
+"Az AstroBin előfizetések 1 évre vagy 1 hónapra érvényesek. Ha az "
+"előfizetésed lejár, semmi nem történik a tartalmaddal. Semmi nem törlődik, "
+"nem rejtőzik el, nem tartják túszként vagy ilyesmi. Valójában örökre fent "
+"hagyhatod, még akkor is, ha abbahagyod az aktív asztrofotózást."
 
 #, python-format
 msgid ""
@@ -6653,17 +6839,19 @@ msgstr ""
 msgid "You have received a new private message."
 msgstr "Kaptál egy új privát üzenetet."
 
+#, fuzzy
 msgid "You were removed as a collaborator to an image"
-msgstr ""
+msgstr "Eltávolítottak kollaborátorként egy képből"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> removed themselves as a collaborator to your image"
 msgstr ""
+"<strong>%(user)s</strong> eltávolította magát kollaborátorként a képedből"
 
 #, python-format
 msgid "%(user)s removed themselves as a collaborator to your image"
-msgstr ""
+msgstr "%(user)s eltávolította magát kollaborátorként a képedből"
 
 #, python-format
 msgid ""
@@ -6677,16 +6865,21 @@ msgstr ""
 msgid "%(user)s requested to add you as a collaborator to an image"
 msgstr ""
 
+#, fuzzy
 msgid "Subscription canceled"
-msgstr ""
+msgstr "Előfizetés lemondva"
 
+#, fuzzy
 msgid ""
 "Your subscription was cancelled, and you will not be charged for it anymore "
 "unless you have an outstanding balance due to a prorated upgrade."
 msgstr ""
+"Az előfizetésed lemondásra került, és nem fogják többé terhelni, hacsak "
+"nincs fennálló tartozásod a pro-rata frissítés miatt."
 
+#, fuzzy
 msgid "You may continue to use your subscription until its expiration date."
-msgstr ""
+msgstr "Továbbra is használhatod az előfizetésed a lejárati dátumáig."
 
 #, python-format
 msgid ""
@@ -6832,13 +7025,6 @@ msgstr "Meg akarod tudni, hogyan működik az IOTD/TP folyamat?"
 
 msgid "Read the manifesto."
 msgstr "Olvasd el a kiáltványt."
-
-msgid ""
-"\n"
-"    Want to learn about the IOTD/TP process?\n"
-msgstr ""
-"\n"
-"    Meg akarod tudni, hogyan működik az IOTD/TP folyamat?\n"
 
 msgid "Your image was voted Top Pick"
 msgstr "A képedet megszavazták Top Pick-nek"
@@ -7017,16 +7203,22 @@ msgstr ""
 msgid "Object not found"
 msgstr "Az objektumot nem találtuk"
 
+#, fuzzy
 msgid "Here is your two-factor authentication token to log in to AstroBin:"
 msgstr ""
+"Itt van a kétfaktoros hitelesítési tokened, hogy bejelentkezhess az "
+"AstroBinra:"
 
 #, python-format
 msgid "This token is valid for %(n)s minutes."
-msgstr ""
+msgstr "Ez a token %(n)s percig érvényes."
 
+#, fuzzy
 msgid ""
 "To change your two-factor authentication settings, please visit this page:"
 msgstr ""
+"A kétfaktoros hitelesítési beállításaid megváltoztatásához kérlek látogass "
+"el erre az oldalra:"
 
 msgid "Previous page"
 msgstr "Előző oldal"
@@ -7037,8 +7229,10 @@ msgstr "Következő oldal"
 msgid "No additional information available for this item."
 msgstr "Nincs további információ erről a termékről."
 
+#, fuzzy
 msgid "Please support AstroBin by shopping at one of our partners!"
 msgstr ""
+"Kérlek támogasd az AstroBin-t azzal, hogy az egyik partnerünknél vásárolsz!"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
@@ -7085,8 +7279,9 @@ msgstr ""
 msgid "Learn more about the AstroBin equipment database!"
 msgstr "Tudj meg többet az AstroBin felszerelési adatbázisáról!"
 
+#, fuzzy
 msgid "Select..."
-msgstr ""
+msgstr "Válassz..."
 
 msgid "Search all forums"
 msgstr "Keresés minden fórumban"
@@ -7094,8 +7289,9 @@ msgstr "Keresés minden fórumban"
 msgid "New topic"
 msgstr "Új téma"
 
+#, fuzzy
 msgid "To post a new topic, please first select the most relevant forum"
-msgstr ""
+msgstr "Új téma közzétételéhez először válaszd ki a legrelevánsabb fórumot"
 
 msgid "Do you want to post about a specific equipment item or software?"
 msgstr ""
@@ -7107,8 +7303,9 @@ msgstr ""
 "Mindenki a használt felszerelésének fórumáról értesítést kap, ha egy új "
 "témát hoznak létre, kivéve ha kivonják magukat belőle."
 
+#, fuzzy
 msgid "Please select a forum:"
-msgstr ""
+msgstr "Kérlek, válassz egy fórumot:"
 
 #, python-format
 msgid ""
@@ -7169,6 +7366,9 @@ msgid ""
 "                New topic in forum: \"%(forum_name)s\"\n"
 "            "
 msgstr ""
+"\n"
+"                Új téma a fórumon: \"%(forum_name)s\"\n"
+"            "
 
 #, python-format
 msgid ""
@@ -7176,6 +7376,9 @@ msgid ""
 "                New reply in topic: \"%(topic_name)s\"\n"
 "            "
 msgstr ""
+"\n"
+"                Új válasz a témában: \"%(topic_name)s\"\n"
+"            "
 
 msgid "Back to group"
 msgstr "Vissza a csoporthoz"
@@ -7251,11 +7454,11 @@ msgstr "Egy új ember válaszolt egy olyan fórumtémára, amelyre feliratkoztá
 
 #, python-format
 msgid "Move topic \"%(topic)s\""
-msgstr ""
+msgstr "Téma áthelyezése \"%(topic)s\""
 
 #, python-format
 msgid "Split posts from topic \"%(topic)s\""
-msgstr ""
+msgstr "Hozzászólások szétválasztása a témából \"%(topic)s\""
 
 #, python-format
 msgid ""
@@ -7263,12 +7466,17 @@ msgid ""
 "                            Starting post by %(author_name)s\n"
 "                        "
 msgstr ""
+"\n"
+"                            Kezdő hozzászólás: %(author_name)s\n"
+"                        "
 
+#, fuzzy
 msgid "Move this topic"
-msgstr ""
+msgstr "Téma áthelyezése"
 
+#, fuzzy
 msgid "Split posts"
-msgstr ""
+msgstr "Hozzászólások szétválasztása"
 
 msgid "This topic contains a poll."
 msgstr "Ez a téma szavazást tartalmaz."
@@ -7356,11 +7564,13 @@ msgstr "Törlöd a bejegyzést?"
 msgid "Approve post"
 msgstr "Bejegyzés jóváhagyása"
 
+#, fuzzy
 msgid "Move"
-msgstr ""
+msgstr "Áthelyezés"
 
+#, fuzzy
 msgid "Split"
-msgstr ""
+msgstr "Szétválasztás"
 
 #, python-format
 msgid ""
@@ -7452,8 +7662,8 @@ msgstr ""
 "Ez az oldal vagy művelet jelenleg nem elérhető, mert az AstroBin CSAK "
 "OLVASHATÓ üzemmódban van."
 
-msgid "For more information, please check out our Twitter feed:"
-msgstr "További információkért kérjük, tekintsd meg a Twitter feedünket:"
+msgid "For more information, please check out our X feed:"
+msgstr ""
 
 msgid "Account activation"
 msgstr "Fiók aktivációja"
@@ -7461,14 +7671,27 @@ msgstr "Fiók aktivációja"
 msgid "Account successfully activated"
 msgstr "Fiók sikeresen aktiválva"
 
+msgid "You have been logged in automatically."
+msgstr ""
+
+msgid "You'll be redirected momentarily..."
+msgstr ""
+
+msgid "Go to homepage"
+msgstr ""
+
 msgid "Account activation failed"
 msgstr "Fiók aktiváció sikertelen"
 
+#, fuzzy
 msgid ""
 "This could mean that your activation link expired, is invalid, or you "
 "clicked it more than once (in which case, please try to log in: your account "
 "could be already active)."
 msgstr ""
+"Ez azt jelentheti, hogy az aktiváló linked lejárt, érvénytelen, vagy "
+"többször rákattintottál (ebben az esetben kérlek próbálj meg bejelentkezni: "
+"a fiókod már aktív lehet)."
 
 msgid "Log in"
 msgstr "Bejelentkezés"
@@ -7476,15 +7699,23 @@ msgstr "Bejelentkezés"
 msgid "Your profile is now active."
 msgstr "A fiókod mostantól aktív."
 
+#, fuzzy
 msgid "Account activated"
+msgstr "Fiók aktiválva"
+
+msgid "Activate your AstroBin account"
+msgstr ""
+
+msgid "Please use the button below to activate your AstroBin account:"
+msgstr ""
+
+msgid "Activate your account"
 msgstr ""
 
 msgid ""
-"Hi,\n"
-"please use the following link to activate your AstroBin account:"
+"If the button doesn't work, you can also copy and paste this URL into your "
+"browser:"
 msgstr ""
-"Szia,\n"
-"kérjük, használd az alábbi linket az AstroBin fiókod aktiválásához:"
 
 #, python-format
 msgid "Link is valid for %(expiration_days)s days."
@@ -7492,6 +7723,13 @@ msgstr "A link %(expiration_days)s napig érvényes."
 
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
 msgstr "KÉRJÜK, NE VÁLASZOLJ ERRE AZ E-MAILRE"
+
+msgid ""
+"Hi,\n"
+"please use the following link to activate your AstroBin account:"
+msgstr ""
+"Szia,\n"
+"kérjük, használd az alábbi linket az AstroBin fiókod aktiválásához:"
 
 msgid ""
 "Sincerely,\n"
@@ -7572,66 +7810,100 @@ msgstr ""
 msgid "Registration completed"
 msgstr "Regisztráció befejezve"
 
-msgid "You are now registered"
-msgstr "Sikeres regisztráció"
+msgid "Check your email for activation instructions"
+msgstr ""
 
 msgid ""
-"To confirm your e-mail address, we have sent you an e-mail with an "
-"activation link."
+"We've sent an activation link to your email address. Please check your inbox "
+"(and spam folder) to complete your registration."
 msgstr ""
-"Az e-mail címed megerősítéséhez küldtünk neked egy e-mailt egy aktiváló "
-"linkkel."
 
-msgid ""
-"If you don't receive the e-mail within a few minutes, remember to check your "
-"spam folder."
+msgid "Resend activation email"
 msgstr ""
-"Ha néhány percen belül nem kapod meg az e-mailt, ne felejtsd el megnézni a "
-"spam mappádat."
 
-msgid "Register with AstroBin"
-msgstr "Regisztrálás az AstroBin-re"
-
-msgid ""
-"By registering with AstroBin, you agree to our <a href=\"https://welcome."
-"astrobin.com/terms-of-service\">terms of service</a>."
+msgid "Your email address"
 msgstr ""
-"Az AstroBin-re való regisztrációval beleegyezel <a href=\"https://welcome."
-"astrobin.com/terms-of-service\">szolgáltatási feltételeinkbe</a>."
+
+msgid "Email"
+msgstr ""
+
+msgid "Resend"
+msgstr ""
+
+msgid "Please wait"
+msgstr ""
+
+msgid "seconds before trying again."
+msgstr ""
+
+msgid "Please enter your email address."
+msgstr ""
+
+msgid "Sent. Send again?"
+msgstr ""
+
+msgid "An error occurred. Please try again later."
+msgstr ""
+
+msgid "Join AstroBin"
+msgstr ""
+
+msgid "One small click for you, one giant leap for your astrophotography!"
+msgstr ""
 
 msgid "This list is currently empty."
 msgstr "Ez a lista jelenleg üres."
 
+#, fuzzy
 msgid "Account"
-msgstr ""
+msgstr "Fiók"
 
 msgid "Back"
 msgstr "Vissza"
 
-msgid "Backup tokens"
+msgid "Don't have an account?"
 msgstr ""
 
+msgctxt "Sign up"
+msgid "Register"
+msgstr ""
+
+#, fuzzy
+msgid "Backup tokens"
+msgstr "Biztonsági tokenek"
+
+#, fuzzy
 msgid ""
 "Backup tokens can be used if you lost access to your two-factor "
 "authentication method. The backup tokens below can be used for login "
 "verification. If you've used up all your backup tokens, you can generate a "
 "new set of backup tokens. Only the backup tokens shown below will be valid."
 msgstr ""
+"A biztonsági tokenek használhatók, ha elvesztetted a hozzáférést a "
+"kétfaktoros hitelesítési módszeredhez. Az alábbi biztonsági tokenek "
+"használhatók a bejelentkezés ellenőrzésére. Ha már felhasználtad az összes "
+"biztonsági tokened, új készletet generálhatsz. Csak az alább látható "
+"biztonsági tokenek lesznek érvényesek."
 
+#, fuzzy
 msgid "Print these tokens and keep them somewhere safe."
-msgstr ""
+msgstr "Nyomtasd ki ezeket a tokeneket, és tartsd őket biztonságos helyen."
 
+#, fuzzy
 msgid "You don't have any backup codes yet."
-msgstr ""
+msgstr "Még nincs biztonsági kódod."
 
+#, fuzzy
 msgid "Generate tokens"
-msgstr ""
+msgstr "Tokenek generálása"
 
+#, fuzzy
 msgid "Back to account security"
-msgstr ""
+msgstr "Vissza a fiók biztonságához"
 
+#, fuzzy
 msgid "Enter your credentials."
-msgstr ""
+msgstr "Add meg a hitelesítő adataidat."
 
 msgid "AstroBin needs an additional step to verify your login."
 msgstr ""
@@ -7647,104 +7919,154 @@ msgid ""
 "(usually this is Google Authenticator or similar)."
 msgstr ""
 
+#, fuzzy
 msgid ""
 "Use this form for entering backup tokens for logging in. These tokens have "
 "been generated for you to print and keep safe. Please enter one of these "
 "backup tokens to login to your account."
 msgstr ""
+"Használj ezt a formát a biztonsági tokenek beírásához a bejelentkezéshez. "
+"Ezeket a tokeneket azért generáltuk, hogy kinyomtasd és biztonságban tartsd. "
+"Kérlek, add meg az egyik biztonsági tokened, hogy bejelentkezhess a fiókodba."
 
+#, fuzzy
 msgid "Don't want this next time?"
-msgstr ""
+msgstr "Nem akarod ezt legközelebb?"
 
+#, fuzzy
 msgid ""
 "Remember that you can disable two-factor authentication in your settings "
 "after logging in."
 msgstr ""
+"Ne feledd, hogy a beállításaidban letilthatod a kétfaktoros hitelesítést a "
+"bejelentkezés után."
 
+#, fuzzy
 msgid "As a last resort, you can use a backup token:"
-msgstr ""
+msgstr "Utolsó lehetőségként használhatsz egy biztonsági tokent:"
 
+#, fuzzy
 msgid "Use backup token"
-msgstr ""
+msgstr "Biztonsági token használata"
 
+#, fuzzy
 msgid "Enable Two-Factor Authentication"
-msgstr ""
+msgstr "Kétfaktoros hitelesítés engedélyezése"
 
+#, fuzzy
 msgid ""
 "You are about to take your account security to the next level. Follow the "
 "steps in this wizard to enable two-factor authentication."
 msgstr ""
+"Éppen most fogod a fiókod biztonságát a következő szintre emelni. Kövesd a "
+"lépéseket ebben a varázslóban a kétfaktoros hitelesítés engedélyezéséhez."
 
+#, fuzzy
 msgid "Please select which authentication method you would like to use."
 msgstr ""
+"Kérlek, válaszd ki, hogy melyik hitelesítési módszert szeretnéd használni."
 
+#, fuzzy
 msgid ""
 "To start using a token generator, please use your smartphone to scan the QR "
 "code below. For example, use Google Authenticator. Then, enter the token "
 "generated by the app."
 msgstr ""
+"A token generátor használatának megkezdéséhez kérlek, használd a telefonodat "
+"a lenti QR-kód beolvasásához. Például használd a Google Authenticator-t. "
+"Ezután add meg az alkalmazás által generált tokent."
 
+#, fuzzy
 msgid "Please validate the code that have received via your selected method."
 msgstr ""
+"Kérlek, érvényesítsd a kódot, amelyet a választott módszered segítségével "
+"kaptál."
 
+#, fuzzy
 msgid ""
 "If you are unable to scan the QR code above, please use the following key "
 "instead:"
 msgstr ""
+"Ha nem tudod beolvasni a fenti QR-kódot, kérlek, használd a következő "
+"kulcsot:"
 
+#, fuzzy
 msgid ""
 "We've encountered an issue with the selected authentication method. Please "
 "go back and verify that you entered your information correctly, try again, "
 "or use a different authentication method instead. If the issue persists, "
 "please contact us."
 msgstr ""
+"Problémába ütköztünk a kiválasztott hitelesítési módszerrel. Kérlek, térj "
+"vissza, és ellenőrizd, hogy helyesen adtad-e meg az adataidat, próbáld újra, "
+"vagy használj egy másik hitelesítési módszert. Ha a probléma továbbra is "
+"fennáll, kérlek, lépj velünk kapcsolatba."
 
+#, fuzzy
 msgid "Congratulations, you've successfully enabled two-factor authentication."
-msgstr ""
+msgstr "Gratulálunk, sikeresen engedélyezted a kétfaktoros hitelesítést."
 
+#, fuzzy
 msgid "Back to Account Security"
-msgstr ""
+msgstr "Vissza a Fiók Biztonságához"
 
+#, fuzzy
 msgid "Disable Two-factor Authentication"
-msgstr ""
+msgstr "Kétfaktoros hitelesítés letiltása"
 
+#, fuzzy
 msgid ""
 "You are about to disable two-factor authentication. This weakens your "
 "account's  security, are you sure?"
 msgstr ""
+"Éppen most fogod letiltani a kétfaktoros hitelesítést. Ez gyengíti a fiókod "
+"biztonságát, biztos vagy benne?"
 
+#, fuzzy
 msgid "Disable"
-msgstr ""
+msgstr "Letiltás"
 
+#, fuzzy
 msgid "Backup Tokens"
-msgstr ""
+msgstr "Biztonsági tokenek"
 
+#, fuzzy
 msgid ""
 "If you don't have any device with you, you can access your account using "
 "backup tokens."
 msgstr ""
+"Ha nincs nálad eszköz, a biztonsági tokenek segítségével is hozzáférhetsz a "
+"fiókodhoz."
 
 #, python-format
 msgid "You have only one backup token remaining."
 msgid_plural "You have %(counter)s backup tokens remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Csak egy biztonsági tokened maradt."
+msgstr[1] "Maradt még %(counter)s biztonsági tokened."
 
+#, fuzzy
 msgid "Show codes"
-msgstr ""
+msgstr "Kódok megjelenítése"
 
+#, fuzzy
 msgid "Disable Two-Factor Authentication"
-msgstr ""
+msgstr "Kétfaktoros hitelesítés letiltása"
 
+#, fuzzy
 msgid ""
 "We strongly discourage you to do so, but you can disable two-factor "
 "authentication for your account."
 msgstr ""
+"Erősen ellenjavalljuk, hogy ezt tedd, de letilthatod a kétfaktoros "
+"hitelesítést a fiókodhoz."
 
+#, fuzzy
 msgid ""
 "Two-factor Authentication is not enabled for your account. Enable it for "
 "enhanced account security."
 msgstr ""
+"A kétfaktoros hitelesítés nincs engedélyezve a fiókodhoz. Engedélyezd a "
+"fokozott fiókbiztonság érdekében."
 
 #, python-format
 msgid ""
@@ -7839,6 +8161,13 @@ msgid ""
 "                                        <a data-no-instant href="
 "\"%(flickr_url)s\">import from Flickr</a> too."
 msgstr ""
+"Használj ezt a gombot, hogy feltölts egy képet a\n"
+"                                        <strong>Nyilvános Területre</"
+"strong>. Ez megjelenik\n"
+"                                        <a href=\"%(profile_url)s\">a "
+"profilodban</a> és itt a főoldalon. Te is\n"
+"                                        <a data-no-instant href="
+"\"%(flickr_url)s\">importálhatsz a Flickrről</a>."
 
 msgid "Your API Keys"
 msgstr "Az API kulcsaid"
@@ -8087,16 +8416,24 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr "Felszerelések szerkesztése"
 
+#, fuzzy
 msgid ""
 "This is a dynamically generated list of equipment items that you have used "
 "on AstroBin."
 msgstr ""
+"Ez egy dinamikusan generált lista az eszközökről, amelyeket használtál az "
+"AstroBin-on."
 
+#, fuzzy
 msgid ""
 "You cannot edit directly, as equipment items are associated directly to "
 "images when uploading them, or later via the Edit menu on the image's page."
 msgstr ""
+"Közvetlenül nem tudsz szerkeszteni, mivel az eszközök közvetlenül a képekhez "
+"kapcsolódnak a feltöltéskor, vagy később a kép oldalán található Szerkesztés "
+"menü segítségével."
 
+#, fuzzy
 msgid ""
 "\n"
 "                            Some of your images are still on the legacy "
@@ -8105,6 +8442,12 @@ msgid ""
 "equipment database.\n"
 "                        "
 msgstr ""
+"\n"
+"                            Néhány képed még mindig a régi "
+"eszközadatbázisban van. Kérlek migráld a régi\n"
+"                            felszerelésed, hogy segítsd az AstroBin "
+"eszközadatbázisának konszolidálását.\n"
+"                        "
 
 msgid "Telescopes or lenses"
 msgstr "Távcsövek vagy lencsék"
@@ -8175,10 +8518,13 @@ msgstr "Melyik készlet"
 msgid "Import photos"
 msgstr "Fotók importálása"
 
+#, fuzzy
 msgid ""
 "We couldn't find any albums or sets in your Flickr account. Please create a "
 "Flickr album and place the images you want to import there."
 msgstr ""
+"Nem találtunk albumokat vagy készleteket a Flickr fiókodban. Kérlek, hozz "
+"létre egy Flickr albumot, és helyezd el benne az importálni kívánt képeket."
 
 msgid "Authenticate with Flickr"
 msgstr "Hitelesítés Flickr-rel"
@@ -8309,8 +8655,9 @@ msgstr "Visszaállítás kiválasztva"
 msgid "Empty trash"
 msgstr "Szemetes kiürítése"
 
+#, fuzzy
 msgid "Account suspended"
-msgstr ""
+msgstr "Fiók felfüggesztve"
 
 msgid ""
 "\n"
@@ -8714,20 +9061,24 @@ msgstr "Vezető távcsövek"
 msgid "What kind of search results do you want?"
 msgstr "Milyen típusú keresési eredményeket szeretnél?"
 
+#, fuzzy
 msgid "All images"
-msgstr ""
+msgstr "Minden kép"
 
 msgid "Your images"
 msgstr ""
 
+#, fuzzy
 msgid "Images bookmarked by you"
-msgstr ""
+msgstr "Általad könyvjelzőzött képek"
 
+#, fuzzy
 msgid "Images liked by you"
-msgstr ""
+msgstr "Általad kedvelt képek"
 
+#, fuzzy
 msgid "Images by users you follow"
-msgstr ""
+msgstr "A követett felhasználók képei"
 
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr "Mit keresel? Ebben a mezőben szabadszöveges keresést végezhetsz el."
@@ -9092,13 +9443,32 @@ msgstr ""
 "Az AstroBin előkészíti az adatokat letöltésre. Kérjük, nézz vissza "
 "rövidesen: minél több képed van, annál több időt vesz ez igénybe."
 
-msgid "Referral code"
+msgid "Keep me updated with newsletters and important announcements"
 msgstr ""
 
+#, fuzzy
 msgid "Email address"
+msgstr "E-mail cím"
+
+#, fuzzy
+msgid "AstroBin doesn't share your email address with anyone."
+msgstr "Az AstroBin nem osztja meg az e-mail címedet senkivel."
+
+#, fuzzy
+msgid "First name"
+msgstr "Keresztnév"
+
+#, fuzzy
+msgid "Last name"
+msgstr "Vezetéknév"
+
+msgid "Choose a secure password."
 msgstr ""
 
-msgid "AstroBin doesn't share your email address with anyone."
+msgid "Enter the same password again for verification."
+msgstr ""
+
+msgid "I agree to the"
 msgstr ""
 
 msgid "Sorry, your username cannot contain the \"@\" character."
@@ -9107,18 +9477,26 @@ msgstr ""
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr "Sajnáljuk, ez a felhasználónév már létezik más írásmóddal."
 
-msgid "First name"
+msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr ""
 
-msgid "Last name"
+msgid "Email is required."
 msgstr ""
 
 msgid ""
-"This is your handle on AstroBin and will be part of the URL to your gallery. "
-"If you do not specify afirst and last name below, it will also be how others "
-"see your name. Please use letters, digits, and the special characters ./+/-/"
-"_ only."
+"If the email exists in our system, a new activation email has been sent."
 msgstr ""
+
+#, python-brace-format
+msgid "Please wait {0} seconds before requesting another email."
+msgstr ""
+
+#, python-brace-format
+msgid "A new activation email has been sent to {0}."
+msgstr ""
+
+#~ msgid "Taiwan"
+#~ msgstr "Tajvan"
 
 #~ msgid "Original image"
 #~ msgstr "Eredeti kép"
@@ -9165,6 +9543,66 @@ msgstr ""
 #~ msgid "Message sent"
 #~ msgstr "Üzenet elküldve"
 
+#, fuzzy
+#~ msgid "Integration hours, yearly"
+#~ msgstr "Integrációs órák, évente"
+
+#, fuzzy
+#~ msgid "Integration hours, monthly"
+#~ msgstr "Integrációs órák, havonta"
+
+#, fuzzy
+#~ msgid "Integration hours, daily"
+#~ msgstr "Integrációs órák, naponta"
+
+#, fuzzy
+#~ msgid "Integration hours by gear, yearly"
+#~ msgstr "Integrációs órák felszerelés szerint, évente"
+
+#, fuzzy
+#~ msgid "Integration hours by gear, monthly"
+#~ msgstr "Integrációs órák felszerelés szerint, havonta"
+
+#, fuzzy
+#~ msgid "Integration hours by gear, daily"
+#~ msgstr "Integrációs órák felszerelés szerint, naponta"
+
+#, fuzzy
+#~ msgid "Uploaded images, yearly"
+#~ msgstr "Feltöltött képek, évente"
+
+#, fuzzy
+#~ msgid "Uploaded images, monthly"
+#~ msgstr "Feltöltött képek, havonta"
+
+#, fuzzy
+#~ msgid "Uploaded images, daily"
+#~ msgstr "Feltöltött képek, naponta"
+
+#, fuzzy
+#~ msgid "Views, yearly"
+#~ msgstr "Megtekintések, évente"
+
+#, fuzzy
+#~ msgid "Views, monthly"
+#~ msgstr "Megtekintések, havonta"
+
+#, fuzzy
+#~ msgid "Views, daily"
+#~ msgstr "Megtekintések, naponta"
+
+#, fuzzy
+#~ msgid "Total images"
+#~ msgstr "Összes kép"
+
+#, fuzzy
+#~ msgid "Integration hours by camera type"
+#~ msgstr "Integrációs órák fényképezőgép típusa szerint"
+
+#, fuzzy
+#~ msgid "Number of images by subject type"
+#~ msgstr "Képek száma téma szerint"
+
 #~ msgid ""
 #~ "Sorry, but the page you are looking for is not here. If you expected an "
 #~ "image, this means that the author deleted it."
@@ -9181,8 +9619,23 @@ msgstr ""
 #~ "részletekkel, így megpróbáljuk a lehető leghamarabb orvosolni a "
 #~ "problémát. Elnézést a kellemetlenségért! "
 
+#, fuzzy
+#~ msgid "You do not yet have an avatar. Please upload one now."
+#~ msgstr "Még nincs avatárod. Kérlek, tölts fel egyet most."
+
+#, fuzzy
+#~ msgid "Previously uploaded"
+#~ msgstr "Korábban feltöltött"
+
+#, fuzzy
+#~ msgid "Please select the avatars that you would like to delete."
+#~ msgstr "Kérlek, válaszd ki az avatárokat, amelyeket törölni szeretnél."
+
 #~ msgid "Guidelines"
 #~ msgstr "Irányelvek"
+
+#~ msgid "Back to top"
+#~ msgstr "Vissza az oldal tetejére"
 
 #~ msgid ""
 #~ "You will remove your shadow-ban on this user, and their comments, "
@@ -9197,8 +9650,8 @@ msgstr ""
 #~ msgid "Contact"
 #~ msgstr "Kapcsolatfelvétel"
 
-#~ msgid "My places"
-#~ msgstr "Saját helyszínek"
+#~ msgid "My settings"
+#~ msgstr "Beállítások"
 
 #~ msgid ""
 #~ "AstroBin saves small pieces of text information (cookies) on your device "
@@ -9217,6 +9670,102 @@ msgstr ""
 #~ msgid "I agree"
 #~ msgstr "Beleegyezek"
 
+#, fuzzy
+#~ msgid "Instructions and examples"
+#~ msgstr "Útmutatók és példák"
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin's gear database is a little messy: many users have used "
+#~ "different names for the same object, ignoring the suggestions. But don't "
+#~ "worry, we can fix it, and after it's fixed, it shouldn't get very messy "
+#~ "in the future."
+#~ msgstr ""
+#~ "Az AstroBin felszerelés adatbázisa kicsit zűrzavaros: sok felhasználó "
+#~ "különböző neveket használt ugyanarra az objektumra, figyelmen kívül "
+#~ "hagyva a javaslatokat. De ne aggódj, meg tudjuk javítani, és miután "
+#~ "javítva lett, a jövőben nem lesz olyan zűrzavaros."
+
+#, fuzzy
+#~ msgid ""
+#~ "Please read the instructions and the example below, they are important!"
+#~ msgstr "Kérlek, olvasd el az alábbi útmutatót és példát, fontosak!"
+
+#, fuzzy
+#~ msgid ""
+#~ "In a wiki-style collaborative effort, we can all work together, a few "
+#~ "items at a time, to improve the situation. It's very simple! This is what "
+#~ "you need to do:"
+#~ msgstr ""
+#~ "Egy wiki-stílusú együttműködés keretében mindannyian együtt dolgozhatunk, "
+#~ "néhány tételt egyszerre, hogy javítsuk a helyzetet. Nagyon egyszerű! Ezt "
+#~ "kell tenned:"
+
+#, fuzzy
+#~ msgid "Make sure both the make and the name are in English."
+#~ msgstr "Győződj meg róla, hogy a gyártó és a név is angolul van."
+
+#, fuzzy
+#~ msgid "Make sure the make is not written again in the name field."
+#~ msgstr ""
+#~ "Győződj meg róla, hogy a gyártó neve nem szerepel újra a név mezőben."
+
+#, fuzzy
+#~ msgid ""
+#~ "Make sure there are no words other than the simple make and name of the "
+#~ "product."
+#~ msgstr ""
+#~ "Győződj meg róla, hogy nincsenek más szavak, csak a termék egyszerű "
+#~ "gyártója és neve."
+
+#, fuzzy
+#~ msgid "Make sure the words are properly capitalized."
+#~ msgstr "Győződj meg róla, hogy a szavak megfelelően vannak nagybetűsítve."
+
+#, fuzzy
+#~ msgid "Here's some good examples:"
+#~ msgstr "Itt van néhány jó példa:"
+
+#, fuzzy
+#~ msgid "And here's some bad examples, that need fixing, and why:"
+#~ msgstr "És itt van néhány rossz példa, amit javítani kell, és miért:"
+
+#, fuzzy
+#~ msgid ""
+#~ "The words are not properly capitalized. It should be \"Meade\" and "
+#~ "\"LX200\"."
+#~ msgstr ""
+#~ "A szavak nincsenek megfelelően nagybetűsítve. \"Meade\"-nek és \"LX200\"-"
+#~ "nak kellene lennie."
+
+#, fuzzy
+#~ msgid ""
+#~ "The word \"Celestron\" appears also in the name of the product. That "
+#~ "should just be the name of the model, not the make name too."
+#~ msgstr ""
+#~ "A \"Celestron\" szó szintén szerepel a termék nevében. Csak a modell neve "
+#~ "legyen, nem a gyártó neve is."
+
+#, fuzzy
+#~ msgid ""
+#~ "\"sold\" is an information that refers only to a particular user. Gear "
+#~ "objects are shared among everyone, in the database. The word \"(sold)\" "
+#~ "should be removed."
+#~ msgstr ""
+#~ "A \"sold\" egy információ, ami csak egy adott felhasználóra vonatkozik. A "
+#~ "felszerelés objektumok mindenkinek megosztottak az adatbázisban. A "
+#~ "\"(sold)\" szót el kell távolítani."
+
+#, fuzzy
+#~ msgid ""
+#~ "\"modified\" is an information that refers only to a particular user. "
+#~ "Gear objects are shared among everyone, in the database. The word "
+#~ "\"(modified)\" should be removed."
+#~ msgstr ""
+#~ "A \"modified\" egy információ, ami csak egy adott felhasználóra "
+#~ "vonatkozik. A felszerelés objektumok mindenkinek megosztottak az "
+#~ "adatbázisban. A \"(modified)\" szót el kell távolítani."
+
 #~ msgid ""
 #~ "Obviously, the user who created this mount in the database, has it on a "
 #~ "fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you "
@@ -9226,6 +9775,60 @@ msgstr ""
 #~ "adatbázisban, egy fix pilléren helyezte el. De ez nem jelenti azt, hogy a "
 #~ "SkyWatcher olyan NEQ-6-ot árul, amit csak pilléren lehet megvenni! A "
 #~ "\"fix pilléren\" szövegrészt el kell távolítani."
+
+#, fuzzy
+#~ msgid ""
+#~ "The name of the telescope is not written in English, and that is a "
+#~ "description, not the actual product name. Here I would assume \"80ED\". "
+#~ "Moreover, \"80mm\" is a property of the telescope, not part of its name."
+#~ msgstr ""
+#~ "A távcső neve nem angolul van írva, és ez egy leírás, nem a tényleges "
+#~ "termék neve. Itt feltételezném, hogy \"80ED\". Továbbá, az \"80mm\" a "
+#~ "távcső tulajdonsága, nem része a nevének."
+
+#, fuzzy
+#~ msgid ""
+#~ "\"5.4&mu;\" is a property of the CCD, not part of its name. It should be "
+#~ "removed. But sometimes a property can be part of the name of the object, "
+#~ "because it's such a generic name: for example, Newton 8\" f/6 would be "
+#~ "okay, because just \"Newton\" would not be enough."
+#~ msgstr ""
+#~ "A \"5.4&mu;\" a CCD tulajdonsága, nem része a nevének. Eltávolítandó. De "
+#~ "néha egy tulajdonság része lehet az objektum nevének, mert annyira "
+#~ "általános név: például a Newton 8\" f/6 rendben lenne, mert csak a "
+#~ "\"Newton\" nem lenne elég."
+
+#, fuzzy
+#~ msgid ""
+#~ "\"CS5\" is the version of Photoshop, but the procut name is just "
+#~ "\"Photoshop\". \"CS5\" should be removed."
+#~ msgstr ""
+#~ "A \"CS5\" a Photoshop verziója, de a termék neve csak \"Photoshop\". A "
+#~ "\"CS5\"-t el kell távolítani."
+
+#, fuzzy
+#~ msgid ""
+#~ "Thanks for reading so far. If you are not sure about how to fix a gear "
+#~ "item, just make assumptions and hope you are right. Mistakes will surface "
+#~ "eventually."
+#~ msgstr ""
+#~ "Köszönjük, hogy eddig elolvastad. Ha nem vagy biztos benne, hogyan javíts "
+#~ "egy felszerelési elemet, csak tételezz fel dolgokat, és reméld, hogy "
+#~ "igazad van. A hibák végül felszínre fognak kerülni."
+
+#, fuzzy
+#~ msgid ""
+#~ "Now let's get to work, good luck and thank you on behalf of the whole "
+#~ "AstroBin community!"
+#~ msgstr ""
+#~ "Most kezdjünk dolgozni, sok szerencsét, és köszönjük az egész AstroBin "
+#~ "közösség nevében!"
+
+#, fuzzy
+#~ msgid "After you fix an item, another one at random will be offered."
+#~ msgstr ""
+#~ "Miután javítottál egy elemet, egy másik véletlenszerűen felajánlásra "
+#~ "kerül."
 
 #~ msgid "Already fixed:"
 #~ msgstr "Már javítva:"
@@ -9267,6 +9870,33 @@ msgstr ""
 #~ msgid "Author"
 #~ msgstr "Szerző"
 
+#~ msgid ""
+#~ "We're really sorry, but giving likes requires an Image Index of <strong>"
+#~ "%(min_index_to_like)s</strong> or greater."
+#~ msgstr ""
+#~ "Nagyon sajnáljuk, de a lájkok adásához egy <strong>%(min_index_to_like)s</"
+#~ "strong> vagy annál nagyobb Kép Index szükséges."
+
+#, fuzzy
+#~ msgid ""
+#~ "Such limitation improves the website as a whole by discouraging people "
+#~ "from creating fake accounts to like their own content. Thank you for "
+#~ "understanding!"
+#~ msgstr ""
+#~ "Ez a korlátozás javítja az egész weboldalt azzal, hogy elriasztja az "
+#~ "embereket a hamis fiókok létrehozásától, hogy saját tartalmukat "
+#~ "lájkolják. Köszönjük a megértést!"
+
+#~ msgid "Currently, your Image Index is <strong>%(index)s</strong>."
+#~ msgstr "Jelenleg a Kép Indexed <strong>%(index)s</strong>."
+
+#~ msgid ""
+#~ "To learn more about the Image Index, please visit %(_0)sthe FAQ page"
+#~ "%(_1)s. Thanks!"
+#~ msgstr ""
+#~ "További információkért a Kép Indexről, kérlek látogass el a %(_0)st FAQ "
+#~ "oldalra%(_1)s. Köszönjük!"
+
 #~ msgid "Image size"
 #~ msgstr "Képméret"
 
@@ -9279,17 +9909,84 @@ msgstr ""
 #~ msgid "Oh no!"
 #~ msgstr "Ó ne!"
 
+#, fuzzy
+#~ msgid ""
+#~ "We are very, very sorry, but it appears that your image suffered a "
+#~ "catastrophic data corruption, and it cannot be retrieved. Hopefully you "
+#~ "still have your file (the information on this form should provide you "
+#~ "with enough context)."
+#~ msgstr ""
+#~ "Nagyon, nagyon sajnáljuk, de úgy tűnik, hogy a képed súlyos "
+#~ "adatkorruptión ment keresztül, és nem lehet visszaállítani. Reméljük, "
+#~ "hogy még megvan a fájlod (az ezen az űrlapon található információ "
+#~ "elegendő kontextust kell, hogy adjon)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Please use the file input below to upload it again, and then click on the "
+#~ "Save button down below. All the data you had previously associated to "
+#~ "your image is still here."
+#~ msgstr ""
+#~ "Kérlek, használd az alábbi fájlbevitelt, hogy újra feltöltsd, majd "
+#~ "kattints a lenti Mentés gombra. Minden adat, amit korábban a képedhez "
+#~ "társítottál, még itt van."
+
+#, fuzzy
+#~ msgid "Here's some detail about the image to give you some context."
+#~ msgstr ""
+#~ "Itt van néhány részlet a képről, hogy adjak neked egy kis kontextust."
+
 #~ msgid "Image uploaded"
 #~ msgstr "Kép feltöltve"
 
 #~ msgid "Revision uploaded"
 #~ msgstr "Átdolgozás feltöltve"
 
+#~ msgid ""
+#~ "Is this too much data for you to handle? Go to the <a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</"
+#~ "a>."
+#~ msgstr ""
+#~ "Ez túl sok adat számodra? Menj a <a class=\"button\" href="
+#~ "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a> "
+#~ "oldalra."
+
+#~ msgid ""
+#~ "With this form you can input the basic details for the acquisition of "
+#~ "your image. If you want to be more thorough or fill in separate details "
+#~ "for each filter, go to the <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
+#~ "a>."
+#~ msgstr ""
+#~ "Ezzel az űrlappal megadhatod a képed megszerzéséhez szükséges alapvető "
+#~ "részleteket. Ha alaposabb szeretnél lenni, vagy külön részleteket "
+#~ "szeretnél megadni minden szűrőhöz, menj a <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
+#~ "a> oldalra."
+
+#~ msgid ""
+#~ "You are about to open a large file of about %(size)s. Depending on your "
+#~ "download speed, it might take several seconds or even minutes to view the "
+#~ "file."
+#~ msgstr ""
+#~ "Körülbelül %(size)s méretű nagy fájlt fogsz megnyitni. A letöltési "
+#~ "sebességedtől függően, több másodpercet vagy akár perceket is igénybe "
+#~ "vehet a fájl megtekintése."
+
 #~ msgid "link"
 #~ msgstr "link"
 
-#~ msgid "Messages"
-#~ msgstr "Üzenetek"
+#, fuzzy
+#~ msgid ""
+#~ "As a new user on AstroBin, your first 3 comments will go through a "
+#~ "moderation queue, to prevent spam."
+#~ msgstr ""
+#~ "Új felhasználóként az AstroBin-en az első 3 hozzászólásod moderálási "
+#~ "sorba kerül, hogy megakadályozzuk a spamet."
+
+#, fuzzy
+#~ msgid "The following comment of yours was just approved by a moderator."
+#~ msgstr "A következő hozzászólásodat éppen jóváhagyta egy moderátor."
 
 #~ msgid ""
 #~ "Keep in mind that AstroBin is not meant to be a free service. If you are "
@@ -9337,6 +10034,78 @@ msgstr ""
 #~ "személyzetéből."
 
 #~ msgid ""
+#~ "%(user)s commented on your image! Check it out at the following url: <a "
+#~ "href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)s kommentált a képedre! Nézd meg itt: <a href=\"%(url)s\">%(url)s</"
+#~ "a>"
+
+#~ msgid ""
+#~ "%(user)s commented on your image! Check it out at the following url: "
+#~ "%(url)s"
+#~ msgstr "%(user)s kommentált a képedre! Nézd meg itt: %(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> kommentált a képedre!</a>"
+
+#~ msgid "%(user)s commented on your image!"
+#~ msgstr "%(user)s kommentált a képedre!"
+
+#~ msgid ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href="
+#~ "\"%(url)s\">%(comment)s</a>."
+#~ msgstr ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> tetszik a kommented: <a href="
+#~ "\"%(url)s\">%(comment)s</a>."
+
+#~ msgid "%(user)s likes your comment: %(url)s %(comment)s"
+#~ msgstr "%(user)s tetszik a kommented: %(url)s %(comment)s"
+
+#~ msgid "<strong>%(user)s</strong> likes your comment!"
+#~ msgstr "<strong>%(user)s</strong> tetszik a kommented!"
+
+#~ msgid "%(user)s likes your comment!"
+#~ msgstr "%(user)s tetszik a kommented!"
+
+#~ msgid ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
+#~ "\"%(url)s\">%(url)s</a>."
+#~ msgstr ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> megemlített téged egy kommentben: "
+#~ "<a href=\"%(url)s\">%(url)s</a>."
+
+#~ msgid "%(user)s mentioned you in a comment: %(url)s"
+#~ msgstr "%(user)s megemlített téged egy kommentben: %(url)s"
+
+#~ msgid "<strong>%(user)s</strong> mentioned you in a comment!"
+#~ msgstr "<strong>%(user)s</strong> megemlített téged egy kommentben!"
+
+#~ msgid "%(user)s mentioned you in a comment!"
+#~ msgstr "%(user)s megemlített téged egy kommentben!"
+
+#~ msgid ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it "
+#~ "out at the following url: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> válaszolt a kommentedre. Nézd meg "
+#~ "itt: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(user)s replied to your comment. Check it out at the following url: "
+#~ "%(url)s"
+#~ msgstr "%(user)s válaszolt a kommentedre. Nézd meg itt: %(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> válaszolt a kommentedre.</a>"
+
+#~ msgid "%(user)s replied to your comment."
+#~ msgstr "%(user)s válaszolt a kommentedre."
+
+#~ msgid ""
 #~ "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
 #~ "\n"
 #~ "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
@@ -9375,6 +10144,29 @@ msgstr ""
 #~ "\n"
 #~ "Nézd meg a csoportot itt: %(url)s"
 
+#~ msgid ""
+#~ "%(originator)s has published a new image revision! Check it out at the "
+#~ "following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
+#~ msgstr ""
+#~ "%(originator)s közzétett egy új képkészítést! Nézd meg itt: <a href="
+#~ "\"%(object_url)s\">%(object_url)s</a>"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image revision! Check it out at the "
+#~ "following url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s közzétett egy új képkészítést! Nézd meg itt: %(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#~ "a new image revision.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> közzétett egy "
+#~ "új képkészítést.</a>"
+
+#~ msgid "New image revision by %(originator)s"
+#~ msgstr "Új képkészítés %(originator)s-tól"
+
 #~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 #~ msgstr ""
 #~ "<a href=\"%(url)s\"><strong>%(user)s</strong> kedveli a képedet!</a>"
@@ -9409,6 +10201,44 @@ msgstr ""
 #~ "előfizetésed időarányos idejével."
 
 #~ msgid ""
+#~ "%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "\"%(topic_title)s\"\n"
+#~ "\n"
+#~ "View the topic: <a href=\"%(url)s\">%(url)s</a>\n"
+#~ "View the group: <a href=\"%(group_url)s\">%(group_url)s</a>"
+#~ msgstr ""
+#~ "%(user)s új témát indított a csoportban: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "\"%(topic_title)s\"\n"
+#~ "\n"
+#~ "Nézd meg a témát: <a href=\"%(url)s\">%(url)s</a>\n"
+#~ "Nézd meg a csoportot: <a href=\"%(group_url)s\">%(group_url)s</a>"
+
+#~ msgid ""
+#~ "%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "\"%(topic_title)s\"\n"
+#~ "\n"
+#~ "View the topic: %(url)s\n"
+#~ "View the group: %(group_url)s"
+#~ msgstr ""
+#~ "%(user)s új témát indított a csoportban: \"%(group_name)s\"\n"
+#~ "\n"
+#~ "\"%(topic_title)s\"\n"
+#~ "\n"
+#~ "Nézd meg a témát: %(url)s\n"
+#~ "Nézd meg a csoportot: %(group_url)s"
+
+#, fuzzy
+#~ msgid "Notification settings"
+#~ msgstr "Értesítési beállítások"
+
+#, fuzzy
+#~ msgid "Notification Type"
+#~ msgstr "Értesítési típus"
+
+#~ msgid ""
 #~ "You have received a private message on AstroBin!\n"
 #~ "Read it at the following link:\n"
 #~ "\n"
@@ -9424,6 +10254,21 @@ msgstr ""
 #~ "<a href=\"https://www.astrobin.com/messages/inbox/\">https://www.astrobin."
 #~ "com/messages/inbox/</a>"
 
+#, fuzzy
+#~ msgid ""
+#~ "You have received a private message on AstroBin!\n"
+#~ "Read it at the following link:\n"
+#~ "\n"
+#~ "http://astrobin.com/messages/inbox/"
+#~ msgstr ""
+#~ "Privát üzenetet kaptál az AstroBin-en!\n"
+#~ "Olvasd el itt:\n"
+#~ "\n"
+#~ "http://astrobin.com/messages/inbox/"
+
+#~ msgid "%(user)s joined the public group: \"%(group_name)s\""
+#~ msgstr "%(user)s csatlakozott a nyilvános csoporthoz: \"%(group_name)s\""
+
 #~ msgid ""
 #~ "If you have astrophotography equipment, add it to <a href=\"%(url)s"
 #~ "\">your gear</a> so that later you can associate it with the images you "
@@ -9438,6 +10283,10 @@ msgstr ""
 #~ msgstr ""
 #~ "Ha van asztrofotós felszerelésed, add hozzá a felszerelési listádhoz, "
 #~ "hogy később hozzárendelhesd a feltöltött képekhez:"
+
+#, fuzzy
+#~ msgid "Search all forums and comments"
+#~ msgstr "Keresés az összes fórumon és kommentben"
 
 #~ msgid "Please select a forum"
 #~ msgstr "Kérjük, válassz egy fórumot"
@@ -9467,6 +10316,103 @@ msgstr ""
 #~ "<a href=\"%(contact_url)s\">vedd fel velünk a kapcsolatot</a>: nagyra "
 #~ "értékeljük a véleményedet!"
 
+#, fuzzy
+#~ msgid "These are the forums in the groups you have access to."
+#~ msgstr ""
+#~ "Ezek a fórumok azokban a csoportokban találhatók, amelyekhez hozzáférsz."
+
+#, fuzzy
+#~ msgid "Please note: this post will be published only after moderation."
+#~ msgstr ""
+#~ "Kérlek, vedd figyelembe: ez a bejegyzés csak moderálás után lesz "
+#~ "közzétéve."
+
+#~ msgid "For more information, please check out our Twitter feed:"
+#~ msgstr "További információkért kérjük, tekintsd meg a Twitter feedünket:"
+
+#~ msgid "Reset password at %(site_name)s"
+#~ msgstr "Jelszó visszaállítása a %(site_name)s oldalon"
+
+#~ msgid "You are now registered"
+#~ msgstr "Sikeres regisztráció"
+
+#~ msgid ""
+#~ "To confirm your e-mail address, we have sent you an e-mail with an "
+#~ "activation link."
+#~ msgstr ""
+#~ "Az e-mail címed megerősítéséhez küldtünk neked egy e-mailt egy aktiváló "
+#~ "linkkel."
+
+#~ msgid ""
+#~ "If you don't receive the e-mail within a few minutes, remember to check "
+#~ "your spam folder."
+#~ msgstr ""
+#~ "Ha néhány percen belül nem kapod meg az e-mailt, ne felejtsd el megnézni "
+#~ "a spam mappádat."
+
+#~ msgid "Register with AstroBin"
+#~ msgstr "Regisztrálás az AstroBin-re"
+
+#~ msgid ""
+#~ "By registering with AstroBin, you agree to our <a href=\"https://welcome."
+#~ "astrobin.com/terms-of-service\">terms of service</a>."
+#~ msgstr ""
+#~ "Az AstroBin-re való regisztrációval beleegyezel <a href=\"https://welcome."
+#~ "astrobin.com/terms-of-service\">szolgáltatási feltételeinkbe</a>."
+
+#, fuzzy
+#~ msgid "Large field radius"
+#~ msgstr "Nagy látómező sugár"
+
+#, fuzzy
+#~ msgid "Small field radius"
+#~ msgstr "Kis látómező sugár"
+
+#, fuzzy
+#~ msgid "Large pixel scale"
+#~ msgstr "Nagy pixel skála"
+
+#, fuzzy
+#~ msgid "Small pixel scale"
+#~ msgstr "Kis pixel skála"
+
+#, fuzzy
+#~ msgid "Search for celestial objects, equipment items, users, etc..."
+#~ msgstr "Keresés égi objektumok, felszerelések, felhasználók stb. között..."
+
+#~ msgid ""
+#~ "<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
+#~ "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
+#~ "integration time."
+#~ msgstr ""
+#~ "<strong>%(total_users)s</strong> felhasználó feltöltött <strong>"
+#~ "%(total_images)s</strong> képet, összesen <strong>%(total_integration)s</"
+#~ "strong> óra integrációs időt elérve."
+
+#, fuzzy
+#~ msgid "Total integration hours in the last 12 months"
+#~ msgstr "Összes integrációs óra az utolsó 12 hónapban"
+
+#, fuzzy
+#~ msgid "Please wait: the plot is loading..."
+#~ msgstr "Kérlek, várj: a grafikon töltődik..."
+
+#, fuzzy
+#~ msgid "Global distribution of camera types"
+#~ msgstr "A fényképezőgépek típusainak globális eloszlása"
+
+#, fuzzy
+#~ msgid "Global distribution of telescope types"
+#~ msgstr "A távcsövek típusainak globális eloszlása"
+
+#, fuzzy
+#~ msgid "CCD vs DLSR: the global trend"
+#~ msgstr "CCD vs DLSR: a globális trend"
+
+#, fuzzy
+#~ msgid "Global trend of telescope types"
+#~ msgstr "A távcsövek típusainak globális trendje"
+
 #~ msgid ""
 #~ "Use this button to upload an image to the\n"
 #~ "                                        <strong>Public Area</strong>. It "
@@ -9484,11 +10430,101 @@ msgstr ""
 #~ "                                        <a href=\"%(flickr_url)s"
 #~ "\">importálni Flickr-ről</a> is."
 
+#~ msgid ""
+#~ "Hey <strong>%(user)s</strong>! I just wanted to let you know that you "
+#~ "could make these plots more useful if you added all data to your images. "
+#~ "Please make sure by checking whether you have images which lack data <a "
+#~ "href=\"%(user_page)s?public&sub=nodata\">here</a>."
+#~ msgstr ""
+#~ "Szia <strong>%(user)s</strong>! Csak szerettem volna szólni, hogy "
+#~ "hasznosabbá tehetnéd ezeket a grafikonokat, ha minden adatot hozzáadnál a "
+#~ "képeidhez. Kérlek, ellenőrizd, hogy vannak-e olyan képeid, amelyekből "
+#~ "hiányzik adat <a href=\"%(user_page)s?public&sub=nodata\">itt</a>."
+
+#, fuzzy
+#~ msgid "Total integration hours, plotted against time."
+#~ msgstr "Összes integrációs óra, időben ábrázolva."
+
+#, fuzzy
+#~ msgid ""
+#~ "Total integration hours, plotted against time and arranged by imaging "
+#~ "telescopes and lenses, and imaging cameras."
+#~ msgstr ""
+#~ "Összes integrációs óra, időben ábrázolva, a fényképező távcsövek és "
+#~ "lencsék, valamint a fényképezőgépek szerint rendezve."
+
+#, fuzzy
+#~ msgid "Combined view count for all the user's images, plotted against time."
+#~ msgstr "A felhasználó összes képének megtekintési száma, időben ábrázolva."
+
+#, fuzzy
+#~ msgid "Image uploads, plotted against time."
+#~ msgstr "Képfeltöltések, időben ábrázolva."
+
+#~ msgid ""
+#~ "We are very, very sorry, but it appears that some of your images suffered "
+#~ "a catastrophic data corruption, and cannot be retrieved. Please read more "
+#~ "<a href=\"%(data_corruption_url)s\">here</a>."
+#~ msgstr ""
+#~ "Nagyon, nagyon sajnáljuk, de úgy tűnik, hogy néhány képed súlyos "
+#~ "adatkorruptálódáson ment keresztül, és nem állítható vissza. Kérlek, "
+#~ "olvasd el a részleteket <a href=\"%(data_corruption_url)s\">itt</a>."
+
+#, fuzzy
+#~ msgid ""
+#~ "Please click on the thumbnails stuck with the hourglass icon to upload "
+#~ "the image files that you still have on your computer or backups to their "
+#~ "pages again."
+#~ msgstr ""
+#~ "Kérlek, kattints a homokórás ikonra ragadt miniatűrökre, hogy újra "
+#~ "feltölthesd a képfájlokat, amelyek még mindig a számítógépeden vagy a "
+#~ "biztonsági mentéseidben vannak."
+
+#, fuzzy
+#~ msgid ""
+#~ "The data associated to your affected images, such as title, description, "
+#~ "equipment used, acquisition details, comments, likes, bookmarks, and so "
+#~ "on, is still intact and safe."
+#~ msgstr ""
+#~ "A sérintett képeidhez kapcsolódó adatok, mint például cím, leírás, "
+#~ "használt felszerelés, beszerzési részletek, kommentek, lájkok, "
+#~ "könyvjelzők stb., még mindig épek és biztonságban vannak."
+
+#, fuzzy
+#~ msgid "AstroBin would like to offer you its sincerest apologies. :("
+#~ msgstr "Az AstroBin a legnagyobb sajnálatát fejezi ki. :("
+
+#, fuzzy
+#~ msgid "Okay, don't show this again"
+#~ msgstr "Rendben, ne mutasd ezt újra"
+
 #~ msgid "Edit gear item"
 #~ msgstr "Felszerelési tárgy szerkesztése"
 
 #~ msgid "Please note!"
 #~ msgstr "Kérjük, vedd figyelembe!"
+
+#, fuzzy
+#~ msgid ""
+#~ "When you add or edit the make, the name, and the properties of this "
+#~ "product, the data is global and shared between all AstroBin users. Do not "
+#~ "write any information in there that refers to your personal copy of this "
+#~ "product, like \"modded\", \"sold\", \"broken\", \"a present from my aunt"
+#~ "\" and so on. "
+#~ msgstr ""
+#~ "Amikor hozzáadsz vagy szerkesztesz egy terméket, a név és a tulajdonságok "
+#~ "globálisak és megosztottak az összes AstroBin felhasználó között. Ne írj "
+#~ "bele semmilyen információt, ami a te személyes példányodra utal, mint "
+#~ "például \"módosított\", \"eladva\", \"törött\", \"ajándék a nagynénimtől"
+#~ "\" és hasonlók."
+
+#, fuzzy
+#~ msgid ""
+#~ "The following information, instead, is personal, and may refer to your "
+#~ "copy of this product."
+#~ msgstr ""
+#~ "A következő információk viszont személyesek, és utalhatnak a te "
+#~ "példányodra."
 
 #~ msgid "Add gear item"
 #~ msgstr "Felszerelési tárgy hozzáadása"
@@ -9640,6 +10676,9 @@ msgstr ""
 #~ msgid "Referral code (optional)"
 #~ msgstr "Referral kód (nem kötelező)"
 
+#~ msgid "Are you a robot?"
+#~ msgstr "Robot vagy?"
+
 #~ msgid "Publication time"
 #~ msgstr "Közzététel ideje"
 
@@ -9658,8 +10697,49 @@ msgstr ""
 #~ msgid "%(user)s replied in topic to which you are subscribed"
 #~ msgstr "%(user)s válaszolt egy témában, amire fel vagy iratkozva"
 
+#~ msgid ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> has published a new image revision "
+#~ "on <strong>\"%(title)s\"</strong>."
+#~ msgstr ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> új képkibővítést tett közzé a "
+#~ "<strong>\"%(title)s\"</strong> címmel."
+
+#~ msgid "%(user)s has published a new image revision on \"%(title)s\"."
+#~ msgstr "%(user)s új képkibővítést tett közzé a \"%(title)s\" címmel."
+
+#~ msgid ""
+#~ "<strong>%(user)s</strong> has published a new image revision on "
+#~ "\"%(title)s\"."
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> új képkibővítést tett közzé a \"%(title)s\" "
+#~ "címmel."
+
+#~ msgid ""
+#~ "<strong>%(user)s</strong> has published a new image revision on <strong>"
+#~ "\"%(title)s\"</strong>."
+#~ msgstr ""
+#~ "<strong>%(user)s</strong> új képkibővítést tett közzé a <strong>"
+#~ "\"%(title)s\"</strong> címmel."
+
+#~ msgid "New image revision by %(user)s on \"%(title)s\""
+#~ msgstr "Új képkibővítés %(user)s-től a \"%(title)s\" címmel"
+
+#~ msgid ""
+#~ "\n"
+#~ "    Want to learn about the IOTD/TP process?\n"
+#~ msgstr ""
+#~ "\n"
+#~ "    Meg akarod tudni, hogyan működik az IOTD/TP folyamat?\n"
+
 #~ msgid "Your image was nominated to be a Top Pick"
 #~ msgstr "A képedet Top Pick-nek jelölték"
+
+#~ msgid ""
+#~ "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or "
+#~ "Premium</a> subscription."
+#~ msgstr ""
+#~ "Sajnálom, ez a szűrő egy <a href=\"%(url)s\">AstroBin Lite vagy Premium</"
+#~ "a> előfizetést igényel."
 
 #~ msgid "Last seen online"
 #~ msgstr "Utoljára online"
@@ -9675,11 +10755,44 @@ msgstr ""
 #~ "\n"
 #~ "https://www.astrobin.com/messages/inbox/"
 
+#~ msgid "Shop %(name)s at AstroBin's partners"
+#~ msgstr "Vásárolj %(name)s-t az AstroBin partnereinél"
+
 #~ msgid "AstroBin is preparing your download. Please wait..."
 #~ msgstr "Az AstroBin előkészíti a letöltést. Kérjük várj..."
 
 #~ msgid "This topic has no replies."
 #~ msgstr "Ebben a témában nincsenek válaszok."
+
+#, fuzzy
+#~ msgid ""
+#~ "Please support AstroBin by shopping for this item at one of our partners!"
+#~ msgstr ""
+#~ "Kérlek támogasd az AstroBin-t azzal, hogy ezt a terméket az egyik "
+#~ "partnerünknél vásárolod meg!"
+
+#~ msgid ""
+#~ "Please support AstroBin by shopping <strong>%(brand)s</strong> at one of "
+#~ "our partners!"
+#~ msgstr ""
+#~ "Kérlek támogasd az AstroBin-t azzal, hogy a <strong>%(brand)s</strong> "
+#~ "terméket az egyik partnerünknél vásárolod meg!"
+
+#, fuzzy
+#~ msgid "AstroBin is rebuilding its equipment database!"
+#~ msgstr "Az AstroBin újjáépíti az eszközadatbázisát!"
+
+#, fuzzy
+#~ msgid "Please migrate your gear."
+#~ msgstr "Kérlek migráld a felszerelésed."
+
+#~ msgid ""
+#~ "Submission for %(_0)sIOTD/TP%(_1)s consideration is not automatic "
+#~ "anymore. Please use the <strong>Actions</strong> from now on, if you want "
+#~ "to submit."
+#~ msgstr ""
+#~ "A %(_0)sIOTD/TP%(_1)s benyújtása már nem automatikus. Kérlek használd az "
+#~ "<strong>Actions</strong> menüt a továbbiakban, ha szeretnél benyújtani."
 
 #~ msgid "You are not authenticated. Please log in."
 #~ msgstr "Nem vagy hitelesítve. Kérjük, jelentkezz be."
@@ -9726,6 +10839,10 @@ msgstr ""
 #~ msgstr ""
 #~ "Ismeretlen ok. Ez soha nem fordulhat elő, kérjük, lépj kapcsolatba velünk!"
 
+#, fuzzy
+#~ msgid "Old brand"
+#~ msgstr "Régi márka"
+
 #~ msgid "Your image was submitted for IOTD/TP consideration!"
 #~ msgstr "A képed be lett küldve IOTP/TP elbírálásra!"
 
@@ -9733,8 +10850,83 @@ msgstr ""
 #~ msgstr ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> válaszolt egy hozzászólásodra."
 
+#, fuzzy
+#~ msgid "View large"
+#~ msgstr "Nézd meg nagyban"
+
+#, fuzzy
+#~ msgid ""
+#~ "Using this form to edit the equipment used for this image is no longer "
+#~ "possible, because it interfaces with the legacy equipment database on "
+#~ "AstroBin."
+#~ msgstr ""
+#~ "Ezen űrlap használata a képhez használt felszerelés szerkesztésére már "
+#~ "nem lehetséges, mert az interfésze a régi eszközadatbázissal van az "
+#~ "AstroBin-on."
+
+#, fuzzy
+#~ msgid ""
+#~ "To begin using the new and improved equipment database for this image, "
+#~ "please migrate your gear."
+#~ msgstr ""
+#~ "A képhez használt új és fejlettebb eszközadatbázis használatának "
+#~ "megkezdéséhez kérlek migráld a felszerelésed."
+
+#, fuzzy
+#~ msgid ""
+#~ "Please note: the migration process goes thru a review stage. If you have "
+#~ "completed your migration but still see this notice, it could because your "
+#~ "migration proposals haven't been approved yet."
+#~ msgstr ""
+#~ "Kérlek vedd figyelembe: a migrációs folyamat egy felülvizsgálati "
+#~ "szakaszon megy keresztül. Ha befejezted a migrációt, de még mindig látod "
+#~ "ezt a figyelmeztetést, az azért lehet, mert a migrációs javaslataid még "
+#~ "nem lettek jóváhagyva."
+
+#~ msgid ""
+#~ "Can't see anything here? Perhaps you should first add some gear in your\n"
+#~ "                    <a href=\"%(the_url)s\">profile</a>!"
+#~ msgstr ""
+#~ "Nem látsz itt semmit? Talán először hozzá kellene adnod néhány "
+#~ "felszerelést a\n"
+#~ "                    <a href=\"%(the_url)s\">profilodban</a>!"
+
+#, fuzzy
+#~ msgid ""
+#~ "To choose the gear used for this image, drag items from the right side to "
+#~ "left side, or\n"
+#~ "                    click the plus sign."
+#~ msgstr ""
+#~ "A képhez használt felszerelés kiválasztásához húzd az elemeket a jobb "
+#~ "oldalról a bal oldalra, vagy\n"
+#~ "                    kattints a plusz jelre."
+
+#, fuzzy
+#~ msgid ""
+#~ "This page is no longer necessary, as you can add new equipment items "
+#~ "directly during the image upload or editing process."
+#~ msgstr ""
+#~ "Ez az oldal már nem szükséges, mivel új felszerelési elemeket közvetlenül "
+#~ "a kép feltöltése vagy szerkesztése során adhatsz hozzá."
+
 #~ msgid "The Sort options have moved to the filters sidebar."
 #~ msgstr "A Rendezési lehetőségek a szűrők oldalsávjára kerültek."
+
+#, fuzzy
+#~ msgid ""
+#~ "You are seeing this message because you have images on AstroBin "
+#~ "associated with equipment items in the legacy database."
+#~ msgstr ""
+#~ "Ezt az üzenetet azért látod, mert képeid vannak az AstroBin-on, amelyek a "
+#~ "régi adatbázisban szereplő felszerelési elemekhez kapcsolódnak."
+
+#, fuzzy
+#~ msgid ""
+#~ "Please migrate your equipment on AstroBin to the new database, as this "
+#~ "helps consolidate the data and improve the search engine results."
+#~ msgstr ""
+#~ "Kérlek migráld a felszerelésed az AstroBin-on az új adatbázisba, mivel ez "
+#~ "segít a adatok konszolidálásában és a keresési eredmények javításában."
 
 #~ msgid ""
 #~ "<strong>%(user)s</strong> commented on your unapproved equiment item "
@@ -9754,3 +10946,85 @@ msgstr ""
 #~ msgstr ""
 #~ "Érdekel e <strong>%(name)s</strong> nevű termék? A szponzorunk árulja ezt "
 #~ "a terméket!"
+
+#, fuzzy
+#~ msgid ""
+#~ "For your security, an additional confirmation token was sent in a "
+#~ "separate email."
+#~ msgstr ""
+#~ "A biztonságod érdekében egy további megerősítő tokent küldtünk egy külön "
+#~ "e-mailben."
+
+#, fuzzy
+#~ msgid ""
+#~ "If this was a legitimate login attempt, please use the token to complete "
+#~ "the process."
+#~ msgstr ""
+#~ "Ha ez egy jogos bejelentkezési kísérlet volt, kérlek használd a tokent a "
+#~ "folyamat befejezéséhez."
+
+#, fuzzy
+#~ msgid ""
+#~ "For your security, following this event, AstroBin has automatically "
+#~ "enabled email-based two-factor authentication on your account. You can "
+#~ "disable in your settings or using the link below."
+#~ msgstr ""
+#~ "A biztonságod érdekében, a következő esemény után az AstroBin "
+#~ "automatikusan engedélyezte az e-mail alapú kétfaktoros hitelesítést a "
+#~ "fiókodban. A beállításaidban letilthatod, vagy az alábbi linken keresztül."
+
+#, fuzzy
+#~ msgid "Change your password:"
+#~ msgstr "Jelszó megváltoztatása:"
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin needs an additional step to verify your login. Please enter the "
+#~ "token generated by your token generator or received via email."
+#~ msgstr ""
+#~ "Az AstroBin egy további lépést igényel a bejelentkezésed ellenőrzéséhez. "
+#~ "Kérlek, add meg a tokenet, amelyet a token generátorod generált, vagy "
+#~ "amelyet e-mailben kaptál."
+
+#, fuzzy
+#~ msgid ""
+#~ "To make sure that this is a legitimate login attempt, we just sent you a "
+#~ "one-time password token via e-mail."
+#~ msgstr ""
+#~ "Annak érdekében, hogy megbizonyosodjunk arról, hogy ez egy jogos "
+#~ "bejelentkezési kísérlet, éppen most küldtünk neked egy egyszer "
+#~ "használatos jelszó tokent e-mailben."
+
+#, fuzzy
+#~ msgid "Referral code"
+#~ msgstr "Ajánlási kód"
+
+#, fuzzy
+#~ msgid ""
+#~ "This is your handle on AstroBin and will be part of the URL to your "
+#~ "gallery. If you do not specify afirst and last name below, it will also "
+#~ "be how others see your name. Please use letters, digits, and the special "
+#~ "characters @/./+/-/_ only."
+#~ msgstr ""
+#~ "Ez a te azonosítód az AstroBin-en, és része lesz a galériád URL-jének. Ha "
+#~ "nem adsz meg kereszt- és vezetéknevet, így fogják mások is látni a neved. "
+#~ "Kérlek, csak betűket, számokat és az alábbi speciális karaktereket "
+#~ "használd: @/./+/-/_."
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "            Your account is temporarily or permanently suspended. If you "
+#~ "believe this is in error, please get in touch\n"
+#~ "            using the Help menu.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "            A fiókod ideiglenesen vagy véglegesen felfüggesztve van. Ha "
+#~ "úgy gondolod, hogy ez tévedés, kérlek, lépj kapcsolatba\n"
+#~ "            a Súgó menü segítségével.\n"
+#~ "        "
+
+#, fuzzy
+#~ msgid "Do you want to post about a specific equipment item?"
+#~ msgstr "Szeretnél egy konkrét felszerelésről posztolni?"

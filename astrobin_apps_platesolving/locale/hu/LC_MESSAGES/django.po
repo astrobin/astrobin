@@ -1,12 +1,32 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, fuzzy
+msgid "Very Large Field (>30 degrees)"
+msgstr "Nagyon nagy látómező (>30 fok)"
+
+#, fuzzy
+msgid "Large Field (15-30 degrees)"
+msgstr "Nagy látómező (15-30 fok)"
+
+#, fuzzy
+msgid "Medium Field (4-15 degrees)"
+msgstr "Közepes látómező (4-15 fok)"
+
+#, fuzzy
+msgid "Small Field (1-4 degrees)"
+msgstr "Kis látómező (1-4 fok)"
+
+#, fuzzy
+msgid "Very Small Field (<1 degree)"
+msgstr "Nagyon kis látómező (<1 fok)"
 
 msgid "Small"
 msgstr "Kicsi"
@@ -57,11 +77,13 @@ msgstr "A fő képoldalon található megjelölések betűmérete"
 msgid "Show equatorial grid"
 msgstr "Egyenlítői háló mutatása"
 
+#, fuzzy
 msgid "Show ecliptic"
-msgstr ""
+msgstr "Mutasd a ekliptikát"
 
+#, fuzzy
 msgid "Show galactic equator"
-msgstr ""
+msgstr "Mutasd a galaktikus egyenlítőt"
 
 msgid "Show constellation borders"
 msgstr "Csillagképek határának mutatása"
@@ -163,14 +185,19 @@ msgstr "CGPN objektumok mutatása"
 msgid "Show quasars"
 msgstr "Kvazárok mutatása"
 
+#, fuzzy
 msgid "Publicly visible astrometry.net submission"
-msgstr ""
+msgstr "Nyilvános astrometry.net beküldés"
 
+#, fuzzy
 msgid ""
 "If checked, the astrometry.net submission will be publicly visible. If you "
 "leave this unchecked,you won't be able to see the full log of the astrometry."
 "net submission, but the image will stillbe plate-solved and annotated."
 msgstr ""
+"Ha be van jelölve, az astrometry.net beküldés nyilvánosan látható lesz. Ha "
+"ezt nem jelölöd be, nem fogod tudni látni az astrometry.net beküldés teljes "
+"naplóját, de a kép még mindig plate-solved és annotált lesz."
 
 msgid "Perform a blind solve"
 msgstr "Blind solve elvégzése"
@@ -228,21 +255,30 @@ msgstr ""
 "Megmondja a plate-solve motornak, hogy ennyi fokon belül keressen a megadott "
 "RA és dec pozíciók alapján."
 
+#, fuzzy
 msgid "Downsample factor"
-msgstr ""
+msgstr "Lefelé mintázási tényező"
 
+#, fuzzy
 msgid ""
 "Downsample (bin) your image by this factor before performing source "
 "detection. This often helps with saturated images, noisy images, and large "
 "images. 2 and 4 are commonly-useful values."
 msgstr ""
+"Lefelé mintázd (bin) a képed ezzel a tényezővel a forráselemzés előtt. Ez "
+"gyakran segít a telített, zajos és nagy képeknél. A 2 és 4 gyakran hasznos "
+"értékek."
 
+#, fuzzy
 msgid "Use SExtractor"
-msgstr ""
+msgstr "Használj SExtractor-t"
 
+#, fuzzy
 msgid ""
 "Use the SourceExtractor program to detect stars, not Nova's built-in program."
 msgstr ""
+"Használj a SourceExtractor programot a csillagok észlelésére, ne a Nova "
+"beépített programját."
 
 msgid "Missing"
 msgstr "Hiányzik"
@@ -265,17 +301,22 @@ msgstr "Fejlett sikertelen"
 msgid "Advanced success"
 msgstr "Fejlett sikeres"
 
+#, fuzzy
 msgid "Loading..."
-msgstr ""
+msgstr "Betöltés..."
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Plate-solve státusz lekérése, kérjük, várj..."
 
+#, fuzzy
 msgid "AstroBin is plate-solving this image with Astrometry.net..."
 msgstr ""
+"Az AstroBin plate-solving-olja ezt a képet az Astrometry.net segítségével..."
 
+#, fuzzy
 msgid "AstroBin is plate-solving this image with PixInsight..."
 msgstr ""
+"Az AstroBin plate-solving-olja ezt a képet a PixInsight segítségével..."
 
 msgid "This image could not be plate-solved."
 msgstr "A képet nem lehetett megoldani."

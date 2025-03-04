@@ -1,12 +1,32 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#, fuzzy
+msgid "Very Large Field (>30 degrees)"
+msgstr "非常に広い視野 (>30度)"
+
+#, fuzzy
+msgid "Large Field (15-30 degrees)"
+msgstr "広い視野 (15-30度)"
+
+#, fuzzy
+msgid "Medium Field (4-15 degrees)"
+msgstr "中くらいの視野 (4-15度)"
+
+#, fuzzy
+msgid "Small Field (1-4 degrees)"
+msgstr "狭い視野 (1-4度)"
+
+#, fuzzy
+msgid "Very Small Field (<1 degree)"
+msgstr "非常に狭い視野 (<1度)"
 
 msgid "Small"
 msgstr "小"
@@ -56,11 +76,13 @@ msgstr "メイン画像ページでの注釈のフォントサイズ"
 msgid "Show equatorial grid"
 msgstr "緯度のグリッドを表示する"
 
+#, fuzzy
 msgid "Show ecliptic"
-msgstr ""
+msgstr "黄道を表示"
 
+#, fuzzy
 msgid "Show galactic equator"
-msgstr ""
+msgstr "銀河赤道を表示"
 
 msgid "Show constellation borders"
 msgstr "星座の境界線を表示する"
@@ -161,14 +183,19 @@ msgstr "CGPN天体を表示する"
 msgid "Show quasars"
 msgstr "クオーサーを表示する"
 
+#, fuzzy
 msgid "Publicly visible astrometry.net submission"
-msgstr ""
+msgstr "公開可視のastrometry.net提出"
 
+#, fuzzy
 msgid ""
 "If checked, the astrometry.net submission will be publicly visible. If you "
 "leave this unchecked,you won't be able to see the full log of the astrometry."
 "net submission, but the image will stillbe plate-solved and annotated."
 msgstr ""
+"チェックを入れると、astrometry.netの提出が公開可視になります。チェックを外す"
+"と、astrometry.netの提出の完全なログを見ることはできませんが、画像はまだプ"
+"レートソルブされ、注釈が付けられます。"
 
 msgid "Perform a blind solve"
 msgstr "ブラインドソルビングの実行"
@@ -226,21 +253,30 @@ msgstr ""
 "プレートソルビングのエンジンに、RA中心とDec位置から何度以内を検索するかを指示"
 "してください。"
 
+#, fuzzy
 msgid "Downsample factor"
-msgstr ""
+msgstr "ダウンサンプル係数"
 
+#, fuzzy
 msgid ""
 "Downsample (bin) your image by this factor before performing source "
 "detection. This often helps with saturated images, noisy images, and large "
 "images. 2 and 4 are commonly-useful values."
 msgstr ""
+"この係数で画像をダウンサンプル（ビン）してから、ソース検出を行ってください。"
+"これは、飽和した画像、ノイズの多い画像、大きな画像に役立つことがよくありま"
+"す。2と4は一般的に便利な値です。"
 
+#, fuzzy
 msgid "Use SExtractor"
-msgstr ""
+msgstr "SExtractorを使用"
 
+#, fuzzy
 msgid ""
 "Use the SourceExtractor program to detect stars, not Nova's built-in program."
 msgstr ""
+"星を検出するためにSourceExtractorプログラムを使用してください。Novaの内蔵プロ"
+"グラムではなく。"
 
 msgid "Missing"
 msgstr "失敗"
@@ -263,17 +299,20 @@ msgstr "高度な失敗"
 msgid "Advanced success"
 msgstr "高度な成功"
 
+#, fuzzy
 msgid "Loading..."
-msgstr ""
+msgstr "読み込み中..."
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "プレートソルビングの状況を取得します。お待ちください"
 
+#, fuzzy
 msgid "AstroBin is plate-solving this image with Astrometry.net..."
-msgstr ""
+msgstr "AstroBinがこの画像をAstrometry.netでプレートソルブしています..."
 
+#, fuzzy
 msgid "AstroBin is plate-solving this image with PixInsight..."
-msgstr ""
+msgstr "AstroBinがこの画像をPixInsightでプレートソルブしています..."
 
 msgid "This image could not be plate-solved."
 msgstr "この画像はプレートソルビングできませんでした。"

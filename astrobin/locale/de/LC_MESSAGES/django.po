@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -12,9 +12,11 @@ msgid ""
 "You have reached the maximum number of saved searches. Please delete some to "
 "make room for new ones."
 msgstr ""
+"Sie haben die maximale Anzahl von gespeicherten Suchen erreicht. Bitte "
+"löschen Sie einige, um Platz für neue zu schaffen."
 
 msgid "You already have a saved search with this name."
-msgstr ""
+msgstr "Sie haben bereits eine gespeicherte Suche mit diesem Namen."
 
 msgid ""
 "Please enter a correct username and password. Note that both fields are case-"
@@ -689,8 +691,9 @@ msgstr "Schweiz"
 msgid "Syrian Arab Republic"
 msgstr "Syrien"
 
-msgid "Taiwan"
-msgstr "Taiwan"
+#, fuzzy
+msgid "Republic of China (Taiwan)"
+msgstr "Republik China (Taiwan)"
 
 msgid "Tajikistan"
 msgstr "Tadschikistan"
@@ -797,7 +800,7 @@ msgstr ""
 "dieser Schlüssel fehlt, erscheinen in der Sammlung unterhalb."
 
 msgid "Use the most recent image automatically"
-msgstr ""
+msgstr "Automatisch das aktuellste Bild verwenden"
 
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Bitte im Format JJJJ-MM-TT eingeben"
@@ -957,9 +960,6 @@ msgstr "Längengrad (Minuten)"
 msgid "Longitude (seconds)"
 msgstr "Längengrad (Sekunden)"
 
-msgid "Are you a robot?"
-msgstr "Sind Sie ein Roboter?"
-
 msgid ""
 "This email address was not found in our database. Email address might be "
 "case sensitive."
@@ -1004,7 +1004,7 @@ msgid "Cameras"
 msgstr "Kameras"
 
 msgid "Let AstroBin decide"
-msgstr ""
+msgstr "Las AstroBin entscheiden"
 
 msgid "Yes"
 msgstr "Ja"
@@ -1115,10 +1115,10 @@ msgid "Americas"
 msgstr "Amerika"
 
 msgid "North America"
-msgstr ""
+msgstr "Nord-Amerika"
 
 msgid "South America"
-msgstr ""
+msgstr "Südamerika"
 
 msgid "Africa"
 msgstr "Afrika"
@@ -1620,7 +1620,7 @@ msgid "Landscape"
 msgstr "Querformat"
 
 msgid "Artificial satellite"
-msgstr ""
+msgstr "Künstlicher Satellit"
 
 msgid "Gear"
 msgstr "Ausrüstung"
@@ -2249,31 +2249,40 @@ msgid "Default gallery sorting"
 msgstr "Standard-Sortierung der Galerie"
 
 msgid "Allow image adjustments widget on your images"
-msgstr ""
+msgstr "Widget für Bildanpassungen auf Ihren Bildern zulassen"
 
 msgid ""
 "If you disable this option, the image adjustments widget will not be shown "
 "on your images. This setting only affects the new gallery and search "
 "experiences."
 msgstr ""
+"Wenn Sie diese Option deaktivieren, wird das Widget für Bildanpassungen "
+"nicht auf Ihren Bildern angezeigt. Diese Einstellung wirkt sich nur auf die "
+"neuen Galerie- und Suchfunktionen aus."
 
 msgid "Maximum zoom allowed on your images"
-msgstr ""
+msgstr "Maximal zulässiger Zoom für Ihre Bilder"
 
 msgid ""
 "Select the maximum zoom allowed on your images. 1x refers to the native "
 "resolution of an image. This setting only affects the new gallery and search "
 "experiences."
 msgstr ""
+"Wählen Sie den maximal zulässigen Zoom für Ihre Bilder. 1x bezieht sich auf "
+"die native Auflösung eines Bildes. Diese Einstellung wirkt sich nur auf die "
+"neue Galerie und die Suchfunktionen aus."
 
 msgid "Display collections on your public gallery"
-msgstr ""
+msgstr "Sammlungen in Ihrer öffentlichen Galerie anzeigen"
 
 msgid ""
 "Select if you want your collections to be displayed on your public gallery. "
 "If you disable this, your collections will be displayed separately. This "
 "setting only affects the new gallery experience."
 msgstr ""
+"Wählen Sie aus, ob Ihre Sammlungen in Ihrer öffentlichen Galerie angezeigt "
+"werden sollen. Wenn Sie dies deaktivieren, werden Ihre Sammlungen separat "
+"angezeigt. Diese Einstellung wirkt sich nur auf die neue Galerie aus."
 
 msgid "See your own Staging Area images on your gallery"
 msgstr "Betrachten Sie die Bilder im Bereitstellungsbereich Ihrer Galerie"
@@ -2283,6 +2292,10 @@ msgid ""
 "your gallery when you are logged in. If you disable this, your Staging Area "
 "images can be visible separately (only to you."
 msgstr ""
+"Legen Sie fest, ob die Bilder des Staging-Bereichs in Ihrer eigenen Ansicht "
+"der Galerie erscheinen sollen, wenn Sie angemeldet sind. Wenn Sie dies "
+"deaktivieren, können Ihre Bilder im Staging-Bereich separat sichtbar sein "
+"(nur für Sie)."
 
 msgid "Default license"
 msgstr "Standard Lizenz"
@@ -2357,23 +2370,27 @@ msgstr ""
 "würden. Vielen Dank im Voraus!"
 
 msgid "Enable new search experience"
-msgstr ""
+msgstr "Neue Suchfunktion aktivieren"
 
 msgid ""
 "Enable the new search experience, which includes new filters and a new "
 "layout."
 msgstr ""
+"Aktivieren Sie die neue Suchfunktion, die neue Filter und ein neues Layout "
+"umfasst."
 
 msgid "Learn more"
-msgstr ""
+msgstr "Mehr erfahren"
 
 msgid "Enable new gallery experience"
-msgstr ""
+msgstr "Neue Galerie aktivieren"
 
 msgid ""
 "Enable the new gallery experience, with improved navigation and a new image "
 "viewer."
 msgstr ""
+"Aktivieren Sie die neue Galerie mit einer verbesserten Navigation und einem "
+"neuen Bild-Viewer."
 
 msgid "Language"
 msgstr "Sprache"
@@ -3388,9 +3405,6 @@ msgstr ""
 "Die Bilder auf diesen Websites unterliegen dem Copyright der jeweiligen "
 "Eigentümer."
 
-msgid "Back to top"
-msgstr "Nach oben"
-
 msgid ""
 "AstroBin detected that your password does not meet security requirements."
 msgstr ""
@@ -3867,7 +3881,7 @@ msgid "Constellations"
 msgstr "Sternbilder"
 
 msgid "IOTD/TP Archive"
-msgstr ""
+msgstr "IOTD/TP-Archiv"
 
 msgid "Remote astrophotography"
 msgstr "Remote Astrofotografie"
@@ -3920,6 +3934,9 @@ msgstr ""
 "konstruktive und wertvolle Kommentare auf AstroBin belohnt. %(_0)sMehr Info."
 "%(_1)s"
 
+msgid "My places"
+msgstr "Meine Seiten"
+
 msgid "Public Gallery"
 msgstr "Öffentliche Galerie"
 
@@ -3929,14 +3946,14 @@ msgstr "Staging-Bereich"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-msgid "My messages"
-msgstr "Meine Nachrichten"
+msgid "Messages"
+msgstr "Nachrichten"
+
+msgid "Marketplace listings"
+msgstr "Marktplatz Inserate"
 
 msgid "API Keys"
 msgstr "API-Keys"
-
-msgid "My settings"
-msgstr "Meine Einstellungen"
 
 msgid "Disable high contrast theme"
 msgstr "Design mit hohem Kontrast deaktivieren"
@@ -4478,6 +4495,10 @@ msgstr "Grundlegende Anmerkungen"
 
 msgid "Advanced annotations"
 msgstr "Erweiterte Anmerkungen"
+
+#, fuzzy
+msgid "Advanced annotations (large font)"
+msgstr "Erweiterte Anmerkungen (große Schrift)"
 
 msgid "Basic information"
 msgstr "Grundlegende Information"
@@ -5135,6 +5156,25 @@ msgstr "Verwendete Ausrüstung"
 msgid "Edit your image: advanced plate-solving settings"
 msgstr "Bearbeite dein Bild: Erweiterte Einstellungen zur Astrometrierung"
 
+#, fuzzy
+msgid "Note:"
+msgstr "Hinweis:"
+
+#, python-format
+msgid ""
+"Based on the image's field radius, some features are not available for this "
+"field size category (%(category)s)."
+msgstr ""
+"Basierend auf dem Bildfeldradius sind einige Funktionen für diese "
+"Feldgrößenkategorie (%(category)s) nicht verfügbar."
+
+#, fuzzy
+msgid ""
+"The following features have been turned off by default and cannot be enabled:"
+msgstr ""
+"Die folgenden Funktionen sind standardmäßig deaktiviert und können nicht "
+"aktiviert werden:"
+
 msgid "Save and plate-solve again"
 msgstr "Erneut astrometrieren"
 
@@ -5393,6 +5433,9 @@ msgstr "Keine Ergebnisse"
 msgid "Searching"
 msgstr "Suche"
 
+msgid "My messages"
+msgstr "Meine Nachrichten"
+
 msgid "Participants"
 msgstr "Teilnehmer"
 
@@ -5623,6 +5666,11 @@ msgid ""
 "upload opportunities before upgrading to unlock even more features. For "
 "details, please visit our <a href=\"%(url)s\">pricing page</a>!"
 msgstr ""
+"AstroBin ist ein Premium-Dienst, der seinen Nutzern einen außergewöhnlichen "
+"Wert bietet. Wenn Sie derzeit ein kostenloses Konto verwenden, können Sie "
+"%(max)s Upload-Möglichkeiten nutzen, bevor Sie ein Upgrade durchführen, um "
+"noch mehr Funktionen freizuschalten. Für weitere Informationen besuchen Sie "
+"bitte unsere <a href=\"%(url)s\">Preisübersicht</a>!"
 
 #, python-format
 msgid ""
@@ -5663,6 +5711,11 @@ msgid ""
 "upload opportunities before upgrading to unlock even more features. For "
 "details, please visit our pricing page!"
 msgstr ""
+"AstroBin ist ein Premium-Dienst, der seinen Nutzern einen außergewöhnlichen "
+"Wert bietet. Wenn Sie derzeit ein kostenloses Konto verwenden, können Sie "
+"%(max)s Upload-Möglichkeiten nutzen, bevor Sie ein Upgrade durchführen, um "
+"noch mehr Funktionen freizuschalten. Für weitere Informationen besuchen Sie "
+"bitte unsere Preis-Übersicht!"
 
 msgid ""
 "New uploads go to your \"staging area\", where they are unlisted. You can "
@@ -5951,6 +6004,19 @@ msgid ""
 msgstr ""
 "AstroBin hat die erweiterte Astrometrierung Ihres Bildes abgeschlossen: "
 "%(title)s."
+
+#, python-format
+msgid ""
+"AstroBin applied default settings based on your image's field size "
+"(%(field_radius)s degrees). Different field sizes receive different "
+"annotation settings for optimal results. You are free to change these "
+"settings using the \"Edit plate-solving settings\" menu in your image."
+msgstr ""
+"AstroBin hat die Standardeinstellungen basierend auf der Feldgröße deines "
+"Bildes (%(field_radius)s Grad) angewendet. Unterschiedliche Feldgrößen "
+"erhalten unterschiedliche Annotations-Einstellungen für optimale Ergebnisse. "
+"Du kannst diese Einstellungen im Menü \"Plattenlösungs-Einstellungen "
+"bearbeiten\" in deinem Bild ändern."
 
 #, python-format
 msgid ""
@@ -6284,8 +6350,7 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s added your image \"%(title)s\" to their bookmarks!"
-msgstr ""
-"%(user)s haben Ihr Bild \"%(title)s\" zu ihren Lesezeichen hinzugefügt!"
+msgstr "%(user)s hat Ihr Bild \"%(title)s\" zu seinen Lesezeichen hinzugefügt!"
 
 #, python-format
 msgid ""
@@ -7209,13 +7274,6 @@ msgstr "Möchten Sie sich über den IOTD/TP-Prozess informieren?"
 msgid "Read the manifesto."
 msgstr "Lesen Sie das Manifest."
 
-msgid ""
-"\n"
-"    Want to learn about the IOTD/TP process?\n"
-msgstr ""
-"\n"
-"Möchten Sie sich über den IOTD/TP-Prozess informieren?\n"
-
 msgid "Your image was voted Top Pick"
 msgstr "Ihr Bild wurde zum Top Pick gewählt"
 
@@ -7236,12 +7294,19 @@ msgid ""
 "the image reaches its final award level. Awards are not assigned "
 "sequentially."
 msgstr ""
+"Hinweis: AstroBin-Auszeichnungen (Top Pick Nominierung, Top Pick, Bild des "
+"Tages) werden erst nach Abschluss der Abstimmungen vergeben, um "
+"sicherzustellen, dass keine Stimmen zurückgezogen werden und das Bild seine "
+"endgültige Auszeichnungsstufe erreicht. Die Auszeichnungen werden nicht "
+"sequentiell vergeben."
 
 #, python-format
 msgid ""
 "Your image %(_prefix)s%(image_title)s%(_suffix)s received enough votes and "
 "might become a Top Pick Nomination or higher"
 msgstr ""
+"Ihr Bild %(_prefix)s%(image_title)s%(_suffix)s hat genügend Stimmen erhalten "
+"und könnte eine Top Pick Nominierung oder höher werden"
 
 msgid "Your IOTD/TP staff member stats"
 msgstr "Ihre IOTD/TP-Mitarbeiter-Statistik"
@@ -7762,7 +7827,7 @@ msgid "(deleted)"
 msgstr "(Gelöscht)"
 
 msgid "Topic starter"
-msgstr ""
+msgstr "Themenstarter"
 
 msgctxt "Noun, e.g. 'This element has 1 view'"
 msgid "view"
@@ -7910,14 +7975,27 @@ msgstr ""
 "Diese Seite oder Operation ist im Moment nicht verfügbar, da sich AstroBin "
 "im NUR-LESEN-Modus befindet."
 
-msgid "For more information, please check out our Twitter feed:"
-msgstr "Für weitere Informationen, besuche bitte unseren Twitter-Feed:"
+#, fuzzy
+msgid "For more information, please check out our X feed:"
+msgstr "Für weitere Informationen schau dir unseren X-Feed an:"
 
 msgid "Account activation"
 msgstr "Kontoaktivierung"
 
 msgid "Account successfully activated"
 msgstr "Benutzerkonto erfolgreich aktiviert"
+
+#, fuzzy
+msgid "You have been logged in automatically."
+msgstr "Du wurdest automatisch eingeloggt."
+
+#, fuzzy
+msgid "You'll be redirected momentarily..."
+msgstr "Du wirst gleich weitergeleitet..."
+
+#, fuzzy
+msgid "Go to homepage"
+msgstr "Zur Startseite"
 
 msgid "Account activation failed"
 msgstr "Aktivierung des Zugangs fehlgeschlagen"
@@ -7940,12 +8018,25 @@ msgstr "Dein Profil ist jetzt aktiv."
 msgid "Account activated"
 msgstr "Account aktiviert"
 
+#, fuzzy
+msgid "Activate your AstroBin account"
+msgstr "Aktiviere dein AstroBin-Konto"
+
+#, fuzzy
+msgid "Please use the button below to activate your AstroBin account:"
+msgstr "Bitte benutze den Button unten, um dein AstroBin-Konto zu aktivieren:"
+
+#, fuzzy
+msgid "Activate your account"
+msgstr "Aktiviere dein Konto"
+
+#, fuzzy
 msgid ""
-"Hi,\n"
-"please use the following link to activate your AstroBin account:"
+"If the button doesn't work, you can also copy and paste this URL into your "
+"browser:"
 msgstr ""
-"Hallo,\n"
-"bitte benutze den folgenden Link, um dein AstroBin Konto zu aktivieren:"
+"Wenn der Button nicht funktioniert, kannst du auch diese URL in deinen "
+"Browser kopieren und einfügen:"
 
 #, python-format
 msgid "Link is valid for %(expiration_days)s days."
@@ -7953,6 +8044,13 @@ msgstr "Dieser Link ist für %(expiration_days)s Tage gültig."
 
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
 msgstr "BITTE ANTWORTE NICHT AUF DIESE E-MAIL"
+
+msgid ""
+"Hi,\n"
+"please use the following link to activate your AstroBin account:"
+msgstr ""
+"Hallo,\n"
+"bitte benutze den folgenden Link, um dein AstroBin Konto zu aktivieren:"
 
 msgid ""
 "Sincerely,\n"
@@ -7974,26 +8072,34 @@ msgid "Password changed"
 msgstr "Passwort wurde geändert"
 
 msgid "Request a secure link to change your password"
-msgstr ""
+msgstr "Fordern Sie einen sicheren Link an, um Ihr Passwort zu ändern"
 
 msgid ""
 "Your password is already secure, and you can change it at any time. You do "
 "not need to request a secure link to change your password."
 msgstr ""
+"Ihr Passwort ist bereits sicher. Sie können es jederzeit ändern. Sie müssen "
+"keinen sicheren Link anfordern, um Ihr Passwort zu ändern."
 
 msgid ""
 "We have emailed you with a secure link to change your password. Please check "
 "your inbox and follow the instructions in the email."
 msgstr ""
+"Wir haben Ihnen per E-Mail einen sicheren Link geschickt, über den Sie Ihr "
+"Passwort ändern können. Bitte prüfen Sie Ihren Posteingang und folgen Sie "
+"den Anweisungen in der E-Mail."
 
 msgid ""
 "On your last login attempt, we detected that your password is not secure. To "
 "prevent account theft, we require that you confirm your email address before "
 "changing your password."
 msgstr ""
+"Bei Ihrem letzten Anmeldeversuch haben wir festgestellt, dass Ihr Passwort "
+"nicht sicher ist. Um Kontodiebstahl zu verhindern, müssen Sie Ihre E-Mail-"
+"Adresse bestätigen, bevor Sie Ihr Passwort ändern."
 
 msgid "Request secure link"
-msgstr ""
+msgstr "Sicheren Link anfordern"
 
 msgid "Password reset successfully"
 msgstr "Passwort erfolgreich zurückgesetzt"
@@ -8035,32 +8141,63 @@ msgstr ""
 msgid "Registration completed"
 msgstr "Registrierung abgeschlossen"
 
-msgid "You are now registered"
-msgstr "Du bist jetzt registriert"
+#, fuzzy
+msgid "Check your email for activation instructions"
+msgstr "Überprüfe deine E-Mails auf Aktivierungsanweisungen"
 
+#, fuzzy
 msgid ""
-"To confirm your e-mail address, we have sent you an e-mail with an "
-"activation link."
+"We've sent an activation link to your email address. Please check your inbox "
+"(and spam folder) to complete your registration."
 msgstr ""
-"Um Deine E-Mail-Adresse zu bestätigen, haben wir Dir eine E-Mail mit einem "
-"Aktivierungslink geschickt."
+"Wir haben einen Aktivierungslink an deine E-Mail-Adresse gesendet. Bitte "
+"überprüfe deinen Posteingang (und den Spam-Ordner), um deine Registrierung "
+"abzuschließen."
 
-msgid ""
-"If you don't receive the e-mail within a few minutes, remember to check your "
-"spam folder."
+#, fuzzy
+msgid "Resend activation email"
+msgstr "Aktivierungs-E-Mail erneut senden"
+
+#, fuzzy
+msgid "Your email address"
+msgstr "Deine E-Mail-Adresse"
+
+#, fuzzy
+msgid "Email"
+msgstr "E-Mail"
+
+#, fuzzy
+msgid "Resend"
+msgstr "Erneut senden"
+
+#, fuzzy
+msgid "Please wait"
+msgstr "Bitte warten"
+
+#, fuzzy
+msgid "seconds before trying again."
+msgstr "Sekunden, bevor du es erneut versuchst."
+
+#, fuzzy
+msgid "Please enter your email address."
+msgstr "Bitte gib deine E-Mail-Adresse ein."
+
+#, fuzzy
+msgid "Sent. Send again?"
+msgstr "Gesendet. Erneut senden?"
+
+#, fuzzy
+msgid "An error occurred. Please try again later."
+msgstr "Ein Fehler ist aufgetreten. Bitte versuche es später erneut."
+
+#, fuzzy
+msgid "Join AstroBin"
+msgstr "Tritt AstroBin bei"
+
+#, fuzzy
+msgid "One small click for you, one giant leap for your astrophotography!"
 msgstr ""
-"Wenn Du die E-Mail nicht innerhalb weniger Minuten erhältst, denk daran, "
-"Deinen Spam-Ordner zu überprüfen."
-
-msgid "Register with AstroBin"
-msgstr "Bei AstroBin registrieren"
-
-msgid ""
-"By registering with AstroBin, you agree to our <a href=\"https://welcome."
-"astrobin.com/terms-of-service\">terms of service</a>."
-msgstr ""
-"Wenn Du Dich bei AstroBin registrierst, bestätigst Du unsere<a href="
-"\"https://welcome.astrobin.com/terms-of-service\">Geschäftsbedingungen</a>."
+"Ein kleiner Klick für dich, ein riesiger Sprung für deine Astrofotografie!"
 
 msgid "This list is currently empty."
 msgstr "Diese Liste ist derzeit leer."
@@ -8070,6 +8207,15 @@ msgstr "Account"
 
 msgid "Back"
 msgstr "Zurück"
+
+#, fuzzy
+msgid "Don't have an account?"
+msgstr "Hast du kein Konto?"
+
+#, fuzzy
+msgctxt "Sign up"
+msgid "Register"
+msgstr "Registrieren"
 
 msgid "Backup tokens"
 msgstr "Backup Token"
@@ -8462,19 +8608,22 @@ msgid "Astrophotography by %(user)s on AstroBin"
 msgstr "Astrofotografie von %(user)s auf AstroBin"
 
 msgid "Would you like to try the new gallery experience?"
-msgstr ""
+msgstr "Möchten Sie das neue Galerie-Erlebnis testen?"
 
 msgid ""
 "AstroBin has a new gallery experience that is faster, better on mobile, more "
 "modern, more user-friendly. Try it out now, you can always switch back to "
 "the old one in your preferences."
 msgstr ""
+"AstroBin hat eine neue Galerie, die schneller, besser auf dem Handy, "
+"moderner und benutzerfreundlicher ist. Probieren Sie es jetzt aus, Sie "
+"können in Ihren Einstellungen jederzeit zur alten Version zurückkehren."
 
 msgid "Enable"
-msgstr ""
+msgstr "Aktivieren"
 
 msgid "Nah, I'm good"
-msgstr ""
+msgstr "Nö, mir geht es gut"
 
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
@@ -9079,10 +9228,10 @@ msgstr ""
 "aufgenommen wurden."
 
 msgid "Match choices"
-msgstr ""
+msgstr "Suchoptionen"
 
 msgid "Any"
-msgstr ""
+msgstr "Jede"
 
 msgid "January"
 msgstr "Januar"
@@ -9605,13 +9754,13 @@ msgid "Sorry, AstroBin was unable to activate the requested language"
 msgstr "AstroBin konnte die gewünschte Sprache leider nicht aktivieren"
 
 msgid "Your secure password reset link"
-msgstr ""
+msgstr "Ihr sicherer Link zum Zurücksetzen des Passworts"
 
 msgid "There was an error sending the email."
-msgstr ""
+msgstr "Es ist ein Fehler beim Senden der E-Mail aufgetreten."
 
 msgid "Please confirm that you are not a robot."
-msgstr ""
+msgstr "Bitte bestätigen Sie, dass Sie kein Roboter sind."
 
 msgid "Setting this collection as a parent would create a cycle"
 msgstr ""
@@ -9698,14 +9847,34 @@ msgstr ""
 "diese Seite in einer Weile noch einmal: je mehr Bilder du hast, desto mehr "
 "Zeit wird es in Anspruch nehmen."
 
-msgid "Referral code"
-msgstr "Referenzcode"
+#, fuzzy
+msgid "Keep me updated with newsletters and important announcements"
+msgstr ""
+"Halte mich mit Newslettern und wichtigen Ankündigungen auf dem Laufenden"
 
 msgid "Email address"
 msgstr "E-Mail-Addresse"
 
 msgid "AstroBin doesn't share your email address with anyone."
 msgstr "AstroBin gibt Ihre E-Mail-Adresse nicht an Dritte weiter."
+
+msgid "First name"
+msgstr "Vorname"
+
+msgid "Last name"
+msgstr "Nachname"
+
+#, fuzzy
+msgid "Choose a secure password."
+msgstr "Wähle ein sicheres Passwort."
+
+#, fuzzy
+msgid "Enter the same password again for verification."
+msgstr "Gib das gleiche Passwort zur Bestätigung erneut ein."
+
+#, fuzzy
+msgid "I agree to the"
+msgstr "Ich stimme den"
 
 msgid "Sorry, your username cannot contain the \"@\" character."
 msgstr "Leider darf Ihr Benutzername das Zeichen „@“ nicht enthalten."
@@ -9715,22 +9884,33 @@ msgstr ""
 "Sorry, dieser Benutzername existiert bereits mit abweichender Groß/Klein-"
 "Schreibung."
 
-msgid "First name"
-msgstr "Vorname"
-
-msgid "Last name"
-msgstr "Nachname"
-
-msgid ""
-"This is your handle on AstroBin and will be part of the URL to your gallery. "
-"If you do not specify afirst and last name below, it will also be how others "
-"see your name. Please use letters, digits, and the special characters ./+/-/"
-"_ only."
+#, fuzzy
+msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr ""
-"Dies ist Ihr Handle auf AstroBin und wird Teil der URL zu Ihrer Galerie "
-"sein. Wenn Sie unten keinen Vor- und Nachnamen angeben, wird Ihr Name auch "
-"so von anderen gesehen. Bitte verwenden Sie nur Buchstaben, Ziffern und die "
-"Sonderzeichen ./+/-/_."
+"Deine öffentliche ID und Profil-URL. Nur Buchstaben, Zahlen und . / + / - / "
+"_."
+
+#, fuzzy
+msgid "Email is required."
+msgstr "E-Mail ist erforderlich."
+
+#, fuzzy
+msgid ""
+"If the email exists in our system, a new activation email has been sent."
+msgstr ""
+"Wenn die E-Mail in unserem System existiert, wurde eine neue Aktivierungs-E-"
+"Mail gesendet."
+
+#, fuzzy, python-brace-format
+msgid "Please wait {0} seconds before requesting another email."
+msgstr "Bitte warte {0} Sekunden, bevor du eine weitere E-Mail anforderst."
+
+#, fuzzy, python-brace-format
+msgid "A new activation email has been sent to {0}."
+msgstr "Eine neue Aktivierungs-E-Mail wurde an {0} gesendet."
+
+#~ msgid "Taiwan"
+#~ msgstr "Taiwan"
 
 #~ msgid "Original image"
 #~ msgstr "Originalbild"
@@ -9851,6 +10031,9 @@ msgstr ""
 #~ msgid "Guidelines"
 #~ msgstr "Richtlinien"
 
+#~ msgid "Back to top"
+#~ msgstr "Nach oben"
+
 #~ msgid ""
 #~ "You will remove your shadow-ban on this user, and their comments, "
 #~ "messages, etc, will appear again on your content."
@@ -9865,8 +10048,8 @@ msgstr ""
 #~ msgid "Contact"
 #~ msgstr "Kontakt"
 
-#~ msgid "My places"
-#~ msgstr "Meine Seiten"
+#~ msgid "My settings"
+#~ msgstr "Meine Einstellungen"
 
 #~ msgid ""
 #~ "AstroBin saves small pieces of text information (cookies) on your device "
@@ -10176,9 +10359,6 @@ msgstr ""
 
 #~ msgid "link"
 #~ msgstr "Link"
-
-#~ msgid "Messages"
-#~ msgstr "Nachrichten"
 
 #~ msgid ""
 #~ "As a new user on AstroBin, your first 3 comments will go through a "
@@ -10534,8 +10714,39 @@ msgstr ""
 #~ "Bitte beachte: Dieser Beitrag wird erst nach der Moderation "
 #~ "veröffentlicht."
 
+#~ msgid "For more information, please check out our Twitter feed:"
+#~ msgstr "Für weitere Informationen, besuche bitte unseren Twitter-Feed:"
+
 #~ msgid "Reset password at %(site_name)s"
 #~ msgstr "Passwort für %(site_name)s zurücksetzen"
+
+#~ msgid "You are now registered"
+#~ msgstr "Du bist jetzt registriert"
+
+#~ msgid ""
+#~ "To confirm your e-mail address, we have sent you an e-mail with an "
+#~ "activation link."
+#~ msgstr ""
+#~ "Um Deine E-Mail-Adresse zu bestätigen, haben wir Dir eine E-Mail mit "
+#~ "einem Aktivierungslink geschickt."
+
+#~ msgid ""
+#~ "If you don't receive the e-mail within a few minutes, remember to check "
+#~ "your spam folder."
+#~ msgstr ""
+#~ "Wenn Du die E-Mail nicht innerhalb weniger Minuten erhältst, denk daran, "
+#~ "Deinen Spam-Ordner zu überprüfen."
+
+#~ msgid "Register with AstroBin"
+#~ msgstr "Bei AstroBin registrieren"
+
+#~ msgid ""
+#~ "By registering with AstroBin, you agree to our <a href=\"https://welcome."
+#~ "astrobin.com/terms-of-service\">terms of service</a>."
+#~ msgstr ""
+#~ "Wenn Du Dich bei AstroBin registrierst, bestätigst Du unsere<a href="
+#~ "\"https://welcome.astrobin.com/terms-of-service\">Geschäftsbedingungen</"
+#~ "a>."
 
 #~ msgid "Large field radius"
 #~ msgstr "Großer Feldradius"
@@ -10836,6 +11047,9 @@ msgstr ""
 #~ msgid "Referral code (optional)"
 #~ msgstr "Empfehlungscode (optional)"
 
+#~ msgid "Are you a robot?"
+#~ msgstr "Sind Sie ein Roboter?"
+
 #~ msgid "Publication time"
 #~ msgstr "Veröffentlichungszeitpunkt"
 
@@ -10882,6 +11096,13 @@ msgstr ""
 
 #~ msgid "New image revision by %(user)s on \"%(title)s\""
 #~ msgstr "Neue Bildrevision von %(user)s auf \"%(title)s\""
+
+#~ msgid ""
+#~ "\n"
+#~ "    Want to learn about the IOTD/TP process?\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Möchten Sie sich über den IOTD/TP-Prozess informieren?\n"
 
 #~ msgid "Your image was nominated to be a Top Pick"
 #~ msgstr "Ihr Bild wurde als Top Pick nominiert"
@@ -11134,6 +11355,9 @@ msgstr ""
 #~ "handelt, haben wir Ihnen soeben per E-Mail ein Einmal-Passwort-Token "
 #~ "zugesandt."
 
+#~ msgid "Referral code"
+#~ msgstr "Referenzcode"
+
 #~ msgid ""
 #~ "This is your handle on AstroBin and will be part of the URL to your "
 #~ "gallery. If you do not specify afirst and last name below, it will also "
@@ -11238,6 +11462,17 @@ msgstr ""
 #~ "Website derselben Benutzer-ID zugeordnet wird."
 
 #~ msgid ""
+#~ "This is your handle on AstroBin and will be part of the URL to your "
+#~ "gallery. If you do not specify afirst and last name below, it will also "
+#~ "be how others see your name. Please use letters, digits, and the special "
+#~ "characters ./+/-/_ only."
+#~ msgstr ""
+#~ "Dies ist Ihr Handle auf AstroBin und wird Teil der URL zu Ihrer Galerie "
+#~ "sein. Wenn Sie unten keinen Vor- und Nachnamen angeben, wird Ihr Name "
+#~ "auch so von anderen gesehen. Bitte verwenden Sie nur Buchstaben, Ziffern "
+#~ "und die Sonderzeichen ./+/-/_."
+
+#~ msgid ""
 #~ "As your topic pertains, at least partially, to a specific piece of "
 #~ "equipment (<a href=\"%(equipment_item_url)s\">%(equipment_item_name)s</"
 #~ "a>), it was moved to its dedicated forum. When new topics are posted to "
@@ -11333,9 +11568,6 @@ msgstr ""
 #~ msgstr ""
 #~ "<strong>%(user)s</strong> antwortete in einem Thema, das Sie abonniert "
 #~ "haben"
-
-#~ msgid "Marketplace listings"
-#~ msgstr "Marktplatz Inserate"
 
 #~ msgid ""
 #~ "\n"

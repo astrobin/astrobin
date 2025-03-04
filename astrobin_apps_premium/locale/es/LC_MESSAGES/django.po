@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:59+0000\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,8 +38,9 @@ msgstr "Fecha"
 msgid "Subscription"
 msgstr "Suscripción "
 
+#, fuzzy
 msgid "Paying member"
-msgstr ""
+msgstr "Miembro de pago"
 
 msgid "Migrate donations"
 msgstr "Migrar donaciones"
@@ -155,10 +156,13 @@ msgstr ""
 "Su suscripción a \"%(subscription_name)s\" en AstroBin se renovará "
 "automáticamente en una semana."
 
+#, fuzzy
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
 "attempt to renew it automatically."
 msgstr ""
+"Tienes una suscripción que se renueva automáticamente en AstroBin, y "
+"intentaremos renovarla automáticamente."
 
 msgid "Thank you!"
 msgstr "¡Gracias!"
@@ -171,9 +175,12 @@ msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
 "automatically renewed in 30 days."
 msgstr ""
+"Tu suscripción \"%(subscription_name)s\" en AstroBin se renovará "
+"automáticamente en 30 días."
 
+#, fuzzy
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
-msgstr ""
+msgstr "Tu suscripción a AstroBin se renovará automáticamente en 30 días."
 
 #~ msgid "I wasn't really affected by the data loss"
 #~ msgstr "No me afectó mucho la pérdida de datos"
@@ -294,6 +301,10 @@ msgstr ""
 #~ "Si su suscripción se creó manualmente a través de una transferencia "
 #~ "bancaria, póngase en contacto con nosotros para un nuevo pago."
 
+#, fuzzy
+#~ msgid "You follow each other"
+#~ msgstr "Se siguen mutuamente."
+
 #~ msgid "Images"
 #~ msgstr "Imágenes"
 
@@ -326,6 +337,28 @@ msgstr ""
 
 #~ msgid "Premium member"
 #~ msgstr "Miembro premium"
+
+#, fuzzy
+#~ msgid ""
+#~ "Your email bounce reports have been removed from AstroBin. Please make "
+#~ "sure that your email works well or you will get the same warning message "
+#~ "again. Thanks!"
+#~ msgstr ""
+#~ "Tus informes de rebote de correo electrónico han sido eliminados de "
+#~ "AstroBin. ¡Asegúrate de que tu correo funcione bien o recibirás el mismo "
+#~ "mensaje de advertencia de nuevo! ¡Gracias!"
+
+#, fuzzy
+#~ msgid ""
+#~ "Your spam reports have been removed from AstroBin. Please make sure you "
+#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
+#~ "you don't want to receive emails from AstroBin, look for the settings "
+#~ "link that's at the bottom of every email. Thanks!"
+#~ msgstr ""
+#~ "Tus informes de spam han sido eliminados de AstroBin. ¡Asegúrate de que "
+#~ "no tienes un filtro o regla que marque siempre los correos de AstroBin "
+#~ "como spam! Si no quieres recibir correos de AstroBin, busca el enlace de "
+#~ "configuración que está al final de cada correo. ¡Gracias!"
 
 #~ msgid "Perform a blind solve"
 #~ msgstr "Llevar a cabo un plate solving ciego"
@@ -523,3 +556,194 @@ msgstr ""
 #~ msgstr ""
 #~ "Esta imagen ha sido tratada por plate-solving avanzado. ¡Recargue la "
 #~ "página para ver los nuevos datos!"
+
+#, fuzzy
+#~ msgid "Error"
+#~ msgstr "Error"
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because it was not possible to "
+#~ "establish a connection to nova.astrometry.net. Please try again later!"
+#~ msgstr ""
+#~ "AstroBin no pudo resolver la placa de esta imagen porque no fue posible "
+#~ "establecer una conexión con nova.astrometry.net. ¡Inténtalo de nuevo más "
+#~ "tarde!"
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an internal server error."
+#~ msgstr ""
+#~ "AstroBin no pudo resolver la placa de esta imagen porque nova.astrometry."
+#~ "net reportó un error interno del servidor."
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an unepexted error."
+#~ msgstr ""
+#~ "AstroBin no pudo resolver la placa de esta imagen porque nova.astrometry."
+#~ "net reportó un error inesperado."
+
+#, fuzzy
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds "
+#~ "1965)"
+#~ msgstr ""
+#~ "Mostrar objetos del Catálogo de Nebulosas Brillantes de Lynds (LBN) "
+#~ "(Lynds 1965)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+#~ msgstr ""
+#~ "Mostrar objetos del Catálogo de Nebulosas Oscuras de Lynds (LDN) (Lynds "
+#~ "1962)"
+
+#, fuzzy
+#~ msgid "Show quasars"
+#~ msgstr "Mostrar cuásares"
+
+#, fuzzy
+#~ msgid "Missing"
+#~ msgstr "Faltante"
+
+#, fuzzy
+#~ msgid "Basic pending"
+#~ msgstr "Básico pendiente"
+
+#, fuzzy
+#~ msgid "Basic failed"
+#~ msgstr "Básico fallido"
+
+#, fuzzy
+#~ msgid "Basic success"
+#~ msgstr "Básico exitoso"
+
+#, fuzzy
+#~ msgid "Advanced pending"
+#~ msgstr "Avanzado pendiente"
+
+#, fuzzy
+#~ msgid "Advanced failed"
+#~ msgstr "Avanzado fallido"
+
+#, fuzzy
+#~ msgid "Advanced success"
+#~ msgstr "Avanzado exitoso"
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because of an unexpected error."
+#~ msgstr ""
+#~ "AstroBin no pudo resolver la placa de esta imagen debido a un error "
+#~ "inesperado."
+
+#, fuzzy
+#~ msgid "n/a"
+#~ msgstr "n/a"
+
+#, fuzzy
+#~ msgid "Starting task..."
+#~ msgstr "Iniciando tarea..."
+
+#, fuzzy
+#~ msgid "Downloading image..."
+#~ msgstr "Descargando imagen..."
+
+#, fuzzy
+#~ msgid "Plate-solving image..."
+#~ msgstr "Resolviendo la placa de la imagen..."
+
+#, fuzzy
+#~ msgid "Generating image annotations..."
+#~ msgstr "Generando anotaciones de la imagen..."
+
+#, fuzzy
+#~ msgid "Processing SVG documents..."
+#~ msgstr "Procesando documentos SVG..."
+
+#, fuzzy
+#~ msgid "Uploading results..."
+#~ msgstr "Subiendo resultados..."
+
+#, fuzzy
+#~ msgid "Task completed"
+#~ msgstr "Tarea completada"
+
+#, fuzzy
+#~ msgid "Plate-solving information"
+#~ msgstr "Información de resolución de placa"
+
+#, fuzzy
+#~ msgid "Status"
+#~ msgstr "Estado"
+
+#, fuzzy
+#~ msgid "Started"
+#~ msgstr "Empezado"
+
+#, fuzzy
+#~ msgid "Astrometry.net job"
+#~ msgstr "Trabajo de Astrometry.net"
+
+#, fuzzy
+#~ msgid "PixInsight job"
+#~ msgstr "Trabajo de PixInsight"
+
+#, fuzzy
+#~ msgid "PixInsight queue size"
+#~ msgstr "Tamaño de la cola de PixInsight"
+
+#, fuzzy
+#~ msgid "PixInsight stage"
+#~ msgstr "Etapa de PixInsight"
+
+#, fuzzy
+#~ msgid "PixInsight log"
+#~ msgstr "Registro de PixInsight"
+
+#, fuzzy
+#~ msgid "RA"
+#~ msgstr "RA"
+
+#, fuzzy
+#~ msgid "center"
+#~ msgstr "centro"
+
+#, fuzzy
+#~ msgid "degrees"
+#~ msgstr "grados"
+
+#, fuzzy
+#~ msgid "top/left"
+#~ msgstr "arriba/izquierda"
+
+#, fuzzy
+#~ msgid "top/right"
+#~ msgstr "arriba/derecha"
+
+#, fuzzy
+#~ msgid "bottom/right"
+#~ msgstr "abajo/derecha"
+
+#, fuzzy
+#~ msgid "bottom/left"
+#~ msgstr "abajo/izquierda"
+
+#, fuzzy
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "Cerrar"
+
+#, fuzzy
+#~ msgid "Invalid"
+#~ msgstr "Inválido"
+
+#, fuzzy
+#~ msgid "Generating finding charts..."
+#~ msgstr "Generando gráficos de búsqueda..."

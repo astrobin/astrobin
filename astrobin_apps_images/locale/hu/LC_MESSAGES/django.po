@@ -1,15 +1,16 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:58+0000\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
+#, fuzzy
 msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
+msgstr "Csak egy videó alapú felvétel engedélyezett képenként."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Tömörítetlen forrás (max 100 MB)"
@@ -24,77 +25,101 @@ msgstr ""
 "származó végleges feldolgozott képet archiválási céllal itt, az AstroBin-en "
 "tárolhatod. Ezt a fájlt bizalmasan tároljuk, és csak te férhetsz hozzá."
 
+#, fuzzy
 msgid "Dates"
-msgstr ""
+msgstr "Dátumok"
 
+#, fuzzy
 msgid "Frames"
-msgstr ""
+msgstr "Képkeretek"
 
+#, fuzzy
 msgid "Integration"
-msgstr ""
+msgstr "Integráció"
 
+#, fuzzy
 msgid "Darks"
-msgstr ""
+msgstr "Sötét képek"
 
+#, fuzzy
 msgid "Flats"
-msgstr ""
+msgstr "Fényes képek"
 
+#, fuzzy
 msgid "Flat darks"
-msgstr ""
+msgstr "Sötét fényes képek"
 
+#, fuzzy
 msgid "Bias"
-msgstr ""
+msgstr "Bias képek"
 
+#, fuzzy
 msgid "Avg. Moon age"
-msgstr ""
+msgstr "Átlagos Hold kor"
 
+#, fuzzy
 msgid "days"
-msgstr ""
+msgstr "nap"
 
+#, fuzzy
 msgid "Avg. Moon phase"
-msgstr ""
+msgstr "Átlagos Hold fázis"
 
+#, fuzzy
 msgid "Bortle Dark-Sky Scale"
-msgstr ""
+msgstr "Bortle sötét égbolt skála"
 
+#, fuzzy
 msgid "Mean SQM"
-msgstr ""
+msgstr "Átlagos SQM"
 
+#, fuzzy
 msgid "Mean FWHM"
-msgstr ""
+msgstr "Átlagos FWHM"
 
+#, fuzzy
 msgid "Temperature"
-msgstr ""
+msgstr "Hőmérséklet"
 
+#, fuzzy
 msgid "Date"
-msgstr ""
+msgstr "Dátum"
 
+#, fuzzy
 msgid "Time"
-msgstr ""
+msgstr "Idő"
 
+#, fuzzy
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
+#, fuzzy
 msgid "Exposure per frame"
-msgstr ""
+msgstr "Expozíció keretenként"
 
+#, fuzzy
 msgid "Focal length"
-msgstr ""
+msgstr "Fókusztávolság"
 
+#, fuzzy
 msgid "CMI"
-msgstr ""
+msgstr "CMI"
 
+#, fuzzy
 msgid "CMII"
-msgstr ""
+msgstr "CMII"
 
+#, fuzzy
 msgid "CMIII"
-msgstr ""
+msgstr "CMIII"
 
+#, fuzzy
 msgid "Seeing"
-msgstr ""
+msgstr "Látás"
 
+#, fuzzy
 msgid "Transparency"
-msgstr ""
+msgstr "Átlátszóság"
 
 msgid "Error!"
 msgstr "Hiba!"
@@ -108,8 +133,9 @@ msgstr "Top Pick"
 msgid "Top pick nomination"
 msgstr "Top Pick jelölt"
 
+#, fuzzy
 msgid "Currently in the IOTD/TP queue"
-msgstr ""
+msgstr "Jelenleg az IOTD/TP sorban"
 
 msgid "Staging area"
 msgstr "Előkészítési Terület"
@@ -117,17 +143,23 @@ msgstr "Előkészítési Terület"
 msgid "Collaboration"
 msgstr "Kollaboráció"
 
+#, fuzzy
 msgid "Video"
-msgstr ""
+msgstr "Videó"
 
+#, fuzzy
 msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
+msgstr "Probléma merült fel a videó kódolásakor, kérlek töltsd fel újra."
 
+#, fuzzy
 msgid "If the problem persists, please contact us."
-msgstr ""
+msgstr "Ha a probléma továbbra is fennáll, kérlek lépj velünk kapcsolatba."
 
+#, fuzzy
 msgid "This video is still processing, please return to this page later."
 msgstr ""
+"Ez a videó még feldolgozás alatt áll, kérlek térj vissza később erre az "
+"oldalra."
 
 #, python-format
 msgid "Revision %(revision)s"
@@ -142,8 +174,9 @@ msgstr "Töltés"
 msgid "(no title)"
 msgstr "(nincs cím)"
 
+#, fuzzy
 msgid "Image file not found"
-msgstr ""
+msgstr "Kép fájl nem található"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "Adatkorrupció. Kérjük, töltsd fel újra a képet. Elnézést kérünk!"

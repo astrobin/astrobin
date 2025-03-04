@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:59+0000\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,8 +62,9 @@ msgstr "A kép már IOTD volt a múltban"
 msgid "You have already submitted %(max_allowed)s image(s) today."
 msgstr "Ma már beküldtél %(max_allowed)s képet."
 
+#, fuzzy
 msgid "This image has been disqualified from the IOTD/TP process."
-msgstr ""
+msgstr "Ez a kép kizárásra került az IOTD/TP folyamatból."
 
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "Nem vagy tagja az IOTD Átnézők táblájának."
@@ -198,33 +199,46 @@ msgstr "A nap képe"
 msgid "You are not authenticated. Please log in."
 msgstr "Nem vagy hitelesítve. Kérjük, jelentkezz be."
 
+#, fuzzy
 msgid "You are not the owner of this image."
-msgstr ""
+msgstr "Nem te vagy ennek a képnek a tulajdonosa."
 
 #, python-format
 msgid "Sorry, this feature requires a <a href=\"%(url)s\">paid account</a>."
 msgstr ""
+"Sajnálom, ez a funkció egy <a href=\"%(url)s\">fizetős fiókot</a> igényel."
 
+#, fuzzy
 msgid "This image is in your staging area and hasn't been published yet"
-msgstr ""
+msgstr "Ez a kép a staging területedben van, és még nem lett közzétéve."
 
+#, fuzzy
 msgid "This image was already submitted."
-msgstr ""
+msgstr "Ez a kép már be lett küldve."
 
+#, fuzzy
 msgid ""
 "Images with subject type set to 'Equipment' or 'Other' are not eligible for "
 "IOTD/TP consideration."
 msgstr ""
+"A 'Equipment' vagy 'Other' típusú képek nem jogosultak az IOTD/TP "
+"figyelembevételére."
 
+#, fuzzy
 msgid ""
 "Images without an imaging telescope and an imaging camera are not eligible "
 "for IOTD/TP consideration."
 msgstr ""
+"A képek, amelyekhez nincs teleszkóp és fényképezőgép, nem jogosultak az IOTD/"
+"TP figyelembevételére."
 
+#, fuzzy
 msgid ""
 "Images without any acquisition sessions are not eligible for IOTD/TP "
 "consideration."
 msgstr ""
+"A képek, amelyekhez nincs akvizíciós session, nem jogosultak az IOTD/TP "
+"figyelembevételére."
 
 msgid "Your settings indicate that you opted to be excluded from competitions."
 msgstr ""
@@ -241,22 +255,28 @@ msgstr ""
 "Sajnos már túl késő: képeket csak a közzétételt követő %(num_days)s napon "
 "belül lehet beküldeni."
 
+#, fuzzy
 msgid ""
 "You have not agreed to the IOTD/TP rules and guidelines since their last "
 "update. Please amend this in your profile preferences and then submit the "
 "image again using the Actions menu."
 msgstr ""
+"Még nem fogadtad el az IOTD/TP szabályokat és irányelveket a legutolsó "
+"frissítés óta. Kérlek, módosítsd ezt a profilbeállításaidban, majd küldd be "
+"újra a képet az Actions menü használatával."
 
 msgid "Unknown reason. This should never happen, please contact us!"
 msgstr ""
 "Ismeretlen ok. Ennek soha nem szabadna előfordulnia, kérjük, vedd fel velünk "
 "a kapcsolatot!"
 
+#, fuzzy
 msgid "Yes"
-msgstr ""
+msgstr "Igen"
 
+#, fuzzy
 msgid "No"
-msgstr ""
+msgstr "Nem"
 
 #~ msgid ""
 #~ "You cannot submit an image that was published more than %(max_days)s days "
@@ -340,3 +360,11 @@ msgstr ""
 #~ msgstr ""
 #~ "Nem küldhetsz be egy képet, amit több, mint %(max_days)s napja tettél "
 #~ "közzé."
+
+#, fuzzy
+#~ msgid ""
+#~ "Images with subject type set to 'Gear' or 'Other' are not eligible for "
+#~ "IOTD/TP consideration."
+#~ msgstr ""
+#~ "A 'Gear' vagy 'Other' típusú képek nem jogosultak az IOTD/TP "
+#~ "figyelembevételére."

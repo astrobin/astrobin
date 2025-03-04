@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 17:07+0000\n"
+"POT-Creation-Date: 2025-03-03 22:59+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,8 +39,9 @@ msgstr "Дата"
 msgid "Subscription"
 msgstr "Подписка"
 
+#, fuzzy
 msgid "Paying member"
-msgstr ""
+msgstr "Платный участник"
 
 msgid "Migrate donations"
 msgstr "Перевод взносов"
@@ -155,10 +156,13 @@ msgstr ""
 "Ваша \"%(subscription_name)s\" подписка на AstroBin будет автоматически "
 "обновлена на неделе."
 
+#, fuzzy
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
 "attempt to renew it automatically."
 msgstr ""
+"У вас есть подписка с автоматическим продлением на AstroBin, и мы попытаемся "
+"продлить её автоматически."
 
 msgid "Thank you!"
 msgstr "Благодарим!"
@@ -570,3 +574,169 @@ msgstr "Ваша AstroBin подписка будет автоматически
 #~ msgstr ""
 #~ "AstroBin не смог распознать это изображение, потому что nova.astrometry."
 #~ "net сообщила о внутренней ошибке сервера."
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an unepexted error."
+#~ msgstr ""
+#~ "AstroBin не смог решить это изображение, потому что nova.astrometry.net "
+#~ "сообщила об неожиданной ошибке."
+
+#, fuzzy
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds "
+#~ "1965)"
+#~ msgstr ""
+#~ "Показать объекты из Каталога ярких туманностей Линдса (LBN) (Линдс 1965)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+#~ msgstr ""
+#~ "Показать объекты из Каталога темных туманностей Линдса (LDN) (Линдс 1962)"
+
+#, fuzzy
+#~ msgid "Show quasars"
+#~ msgstr "Показать квазары"
+
+#, fuzzy
+#~ msgid "Missing"
+#~ msgstr "Отсутствует"
+
+#, fuzzy
+#~ msgid "Basic pending"
+#~ msgstr "Базовый в ожидании"
+
+#, fuzzy
+#~ msgid "Basic failed"
+#~ msgstr "Базовый не удался"
+
+#, fuzzy
+#~ msgid "Basic success"
+#~ msgstr "Базовый успешно"
+
+#, fuzzy
+#~ msgid "Advanced pending"
+#~ msgstr "Расширенный в ожидании"
+
+#, fuzzy
+#~ msgid "Advanced failed"
+#~ msgstr "Расширенный не удался"
+
+#, fuzzy
+#~ msgid "Advanced success"
+#~ msgstr "Расширенный успешно"
+
+#, fuzzy
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because of an unexpected error."
+#~ msgstr "AstroBin не смог решить это изображение из-за неожиданной ошибки."
+
+#, fuzzy
+#~ msgid "n/a"
+#~ msgstr "н/д"
+
+#, fuzzy
+#~ msgid "Starting task..."
+#~ msgstr "Запуск задачи..."
+
+#, fuzzy
+#~ msgid "Downloading image..."
+#~ msgstr "Скачивание изображения..."
+
+#, fuzzy
+#~ msgid "Plate-solving image..."
+#~ msgstr "Решение изображения..."
+
+#, fuzzy
+#~ msgid "Generating image annotations..."
+#~ msgstr "Генерация аннотаций к изображению..."
+
+#, fuzzy
+#~ msgid "Processing SVG documents..."
+#~ msgstr "Обработка документов SVG..."
+
+#, fuzzy
+#~ msgid "Uploading results..."
+#~ msgstr "Загрузка результатов..."
+
+#, fuzzy
+#~ msgid "Task completed"
+#~ msgstr "Задача завершена"
+
+#, fuzzy
+#~ msgid "Plate-solving information"
+#~ msgstr "Информация о решении"
+
+#, fuzzy
+#~ msgid "Status"
+#~ msgstr "Статус"
+
+#, fuzzy
+#~ msgid "Started"
+#~ msgstr "Начато"
+
+#, fuzzy
+#~ msgid "Astrometry.net job"
+#~ msgstr "Задание Astrometry.net"
+
+#, fuzzy
+#~ msgid "PixInsight job"
+#~ msgstr "Задание PixInsight"
+
+#, fuzzy
+#~ msgid "PixInsight queue size"
+#~ msgstr "Размер очереди PixInsight"
+
+#, fuzzy
+#~ msgid "PixInsight stage"
+#~ msgstr "Этап PixInsight"
+
+#, fuzzy
+#~ msgid "PixInsight log"
+#~ msgstr "Журнал PixInsight"
+
+#, fuzzy
+#~ msgid "RA"
+#~ msgstr "RA"
+
+#, fuzzy
+#~ msgid "center"
+#~ msgstr "центр"
+
+#, fuzzy
+#~ msgid "degrees"
+#~ msgstr "градусы"
+
+#, fuzzy
+#~ msgid "top/left"
+#~ msgstr "верхний/левый"
+
+#, fuzzy
+#~ msgid "top/right"
+#~ msgstr "верхний/правый"
+
+#, fuzzy
+#~ msgid "bottom/right"
+#~ msgstr "нижний/правый"
+
+#, fuzzy
+#~ msgid "bottom/left"
+#~ msgstr "нижний/левый"
+
+#, fuzzy
+#~ msgid "Dec"
+#~ msgstr "Дек (Declination)"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "Закрыть"
+
+#, fuzzy
+#~ msgid "Invalid"
+#~ msgstr "Недействительный"
+
+#, fuzzy
+#~ msgid "Generating finding charts..."
+#~ msgstr "Генерация карт поиска..."

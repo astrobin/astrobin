@@ -6,7 +6,7 @@
 
 {{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email %}
 
-{% blocktrans %}
+{% blocktrans trimmed %}
     Want to learn about the IOTD/TP process?
 {% endblocktrans %}
 
