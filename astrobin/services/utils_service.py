@@ -2,6 +2,7 @@ import re
 from typing import List, Optional
 
 import requests
+from langdetect import LangDetectException, detect
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 
@@ -627,3 +628,15 @@ red rectangle,hd 44179
         components = snake_str.split('_')
         return components[0] + ''.join(x.title() for x in components[1:])
 
+    @staticmethod
+    def strip_bbcode(text):
+        # This pattern matches [tag] or [/tag] or [tag=value]
+        pattern = r'\[/?\w+(?:=[^\]]+)?\]'
+        return re.sub(pattern, '', text)
+
+    @staticmethod
+    def detect_language(text: str) -> Optional[str]:
+        try:
+            return detect(text)
+        except LangDetectException:
+            return None

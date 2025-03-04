@@ -65,6 +65,51 @@
                 .removeClass("running")
                 .removeAttr("disabled")
                 .on('click', function (e) {
+                    // Check for selected text first
+                    const selectedText = window.selectedPostText;
+                    const selectedAuthor = window.selectedPostAuthor || 'User';
+                    
+                    if (selectedText) {
+                        e.preventDefault();
+                        
+                        const instance = CKEDITOR.instances[textarea.attr("id")];
+                        
+                        if (!instance) {
+                            window.alert(
+                                '{{ _("Text editor not ready. ") | escapejs }} {{ _("Please try again.") | escapejs }}'
+                            );
+                            return;
+                        }
+                        
+                        if (instance.mode === 'source') {
+                            window.alert('{{ _("Please first exit 'Source' mode to quote a message.") | escapejs }}');
+                        } else {
+                            // Add the selected text as a quote
+                            instance.setData(
+                                instance.getData() +
+                                '\n' +
+                                (window.pybb && window.pybb.markup ? 
+                                    window.pybb.markup.quote(selectedText, selectedAuthor) : 
+                                    '[quote=' + selectedAuthor + ']' + selectedText + '[/quote]') +
+                                '\n{{ _("*** Type your reply here ***") | escapejs }}'
+                            );
+                            
+                            const $ckeIdBody = $("#cke_id_body");
+                            
+                            if (!!$ckeIdBody) {
+                                $([document.documentElement, document.body]).animate({
+                                    scrollTop: $ckeIdBody.offset().top
+                                }, 750);
+                            }
+                        }
+                        
+                        // Clear the selection
+                        window.selectedPostText = null;
+                        window.selectedPostAuthor = null;
+                        return;
+                    }
+                    
+                    // If no selection, use the original quote behavior
                     e.preventDefault();
 
                     const self = this;

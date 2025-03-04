@@ -4,6 +4,7 @@ from precise_bbcode.bbcode import get_parser
 from rest_framework import serializers
 
 from astrobin.search_indexes import NestedCommentIndex
+from astrobin.services.utils_service import UtilsService
 from common.serializers import AvatarField
 from .models import NestedComment
 
@@ -17,6 +18,7 @@ class NestedCommentSerializer(serializers.ModelSerializer):
     author_username = serializers.SerializerMethodField(read_only=True)
     author_display_name = serializers.SerializerMethodField(read_only=True)
     html = serializers.SerializerMethodField(read_only=True)
+    detected_language = serializers.SerializerMethodField(read_only=True)
 
     def get_author_username(self, comment: NestedComment) -> str:
         if comment.author is None or comment.deleted:
@@ -36,6 +38,9 @@ class NestedCommentSerializer(serializers.ModelSerializer):
 
         parser = get_parser()
         return parser.render(comment.text)
+
+    def get_detected_language(self, comment: NestedComment) -> str:
+        return UtilsService.detect_language(UtilsService.strip_bbcode(comment.text))
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -63,6 +68,7 @@ class NestedCommentSerializer(serializers.ModelSerializer):
             'parent',
             'depth',
             'likes',
+            'detected_language',
         )
 
 

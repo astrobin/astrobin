@@ -58,7 +58,7 @@ describe("Forums", () => {
 
     it.skip("should quote", () => {
         cy.get("#cke_id_body .cke_wysiwyg_div").should("be.visible");
-        cy.get(".post-related").last().contains("quote").click();
+        cy.get(".post-related").last().contains("Quote").click();
         cy.wait(1000);
         cy.get(".cke_button__sourcedialog").click();
         cy.get("textarea.cke_source")
@@ -70,7 +70,7 @@ describe("Forums", () => {
 
     // Skip temporarily because too flaky.
     it.skip("should quote with non-ASCII characters", () => {
-        cy.get(".post-related").last().contains("quote").click();
+        cy.get(".post-related").last().contains("Quote").click();
         cy.wait(1000);
         cy.get("#cke_id_body .cke_wysiwyg_div").type("你好");
         cy.get(".post-form button[type='submit']").click();

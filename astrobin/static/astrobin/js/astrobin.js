@@ -1749,6 +1749,247 @@ astrobin_common = {
                 func.apply(context, args);
             }
         };
+    },
+    
+    // Translation storage system - reusable across the site
+    translationSystem: {
+        // Storage key for translations
+        STORAGE_KEY: 'astrobin_translations',
+        
+        // Save translation preference to localStorage
+        saveTranslation: function(itemType, itemId, translated, translatedContent, detectedLanguage) {
+            if (!window.localStorage) {
+                return; // LocalStorage not supported
+            }
+            
+            try {
+                // Get existing preferences or create new object
+                let translationPrefs = JSON.parse(localStorage.getItem(this.STORAGE_KEY) || '{}');
+                
+                // Initialize container for this type if needed
+                if (!translationPrefs[itemType]) {
+                    translationPrefs[itemType] = {};
+                }
+                
+                if (translated) {
+                    // Save translation data
+                    translationPrefs[itemType][itemId] = {
+                        translated: true,
+                        content: translatedContent,
+                        language: detectedLanguage,
+                        timestamp: new Date().getTime()
+                    };
+                } else {
+                    // Remove preference if not translated
+                    if (translationPrefs[itemType][itemId]) {
+                        delete translationPrefs[itemType][itemId];
+                    }
+                }
+                
+                // Try to save to localStorage
+                try {
+                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(translationPrefs));
+                } catch (storageError) {
+                    // Check if we hit the storage quota
+                    if (storageError.name === 'QuotaExceededError' || 
+                        // For some browsers
+                        storageError.code === 22 ||
+                        // For others
+                        storageError.code === 1014) {
+                        
+                        console.warn('Storage quota exceeded. Pruning older translations...');
+                        
+                        // Flatten all entries with type and id info for sorting
+                        const allEntries = [];
+                        for (const type in translationPrefs) {
+                            for (const id in translationPrefs[type]) {
+                                allEntries.push({
+                                    type: type,
+                                    id: id,
+                                    timestamp: translationPrefs[type][id].timestamp
+                                });
+                            }
+                        }
+                        
+                        // Sort by timestamp (oldest first)
+                        allEntries.sort((a, b) => a.timestamp - b.timestamp);
+                        
+                        // Remove 20% of the oldest entries
+                        const removeCount = Math.max(1, Math.floor(allEntries.length * 0.2));
+                        
+                        for (let i = 0; i < removeCount; i++) {
+                            if (allEntries[i]) {
+                                const entry = allEntries[i];
+                                delete translationPrefs[entry.type][entry.id];
+                                
+                                // If the type container is empty, remove it
+                                if (Object.keys(translationPrefs[entry.type]).length === 0) {
+                                    delete translationPrefs[entry.type];
+                                }
+                            }
+                        }
+                        
+                        console.log(`Removed ${removeCount} old translations to free up space`);
+                        
+                        // Try saving again with reduced data
+                        try {
+                            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(translationPrefs));
+                        } catch (retryError) {
+                            // If still failing, clear everything except the current translation
+                            console.warn('Still cannot save. Clearing all translations except current one.');
+                            
+                            if (translated) {
+                                const currentTranslation = translationPrefs[itemType]?.[itemId];
+                                translationPrefs = {};
+                                translationPrefs[itemType] = {};
+                                translationPrefs[itemType][itemId] = currentTranslation;
+                                
+                                try {
+                                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(translationPrefs));
+                                } catch (finalError) {
+                                    console.error('Cannot save translations at all. Local storage may be disabled.');
+                                }
+                            }
+                        }
+                    } else {
+                        // Some other error occurred
+                        console.error("Error saving translation preference:", storageError);
+                    }
+                }
+            } catch (e) {
+                console.error("Error processing translation preference:", e);
+            }
+        },
+        
+        // Get translations for a specific type (e.g., 'forum', 'comment')
+        getTranslations: function(itemType) {
+            if (!window.localStorage) {
+                return {}; // LocalStorage not supported
+            }
+            
+            try {
+                // Get saved preferences
+                const translationPrefs = JSON.parse(localStorage.getItem(this.STORAGE_KEY) || '{}');
+                const currentTime = new Date().getTime();
+                const expirationTime = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+                let changed = false;
+                
+                // If no translations for this type, return empty object
+                if (!translationPrefs[itemType]) {
+                    return {};
+                }
+                
+                // Check for expired items
+                const typePrefs = translationPrefs[itemType];
+                for (const itemId in typePrefs) {
+                    if (currentTime - typePrefs[itemId].timestamp > expirationTime) {
+                        delete typePrefs[itemId];
+                        changed = true;
+                    }
+                }
+                
+                // If we removed expired items, save the updated prefs
+                if (changed) {
+                    // Clean up empty type containers
+                    if (Object.keys(typePrefs).length === 0) {
+                        delete translationPrefs[itemType];
+                    }
+                    
+                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(translationPrefs));
+                }
+                
+                return typePrefs || {};
+            } catch (e) {
+                console.error("Error loading translation preferences:", e);
+                return {};
+            }
+        },
+        
+        // Translate content via API
+        translateContent: function(options) {
+            const {
+                text,                 // Text to translate
+                sourceLanguage,       // Source language code or 'auto'
+                targetLanguage,       // Target language code
+                format = 'html',      // Format: 'html' or 'text'
+                onSuccess,            // Success callback
+                onError,              // Error callback
+                onStart,              // Called when translation starts
+                itemType,             // Type of content (forum, comment, etc)
+                itemId                // Unique ID of the content
+            } = options;
+            
+            // Call start callback if provided
+            if (typeof onStart === 'function') {
+                onStart();
+            }
+            
+            // Use the JSON API service to translate
+            $.ajax({
+                url: '/json-api/common/translate/',
+                type: 'POST',
+                timeout: 30000, // Longer timeout for translation
+                contentType: 'application/json',
+                dataType: 'json',  // Explicitly parse response as JSON
+                data: JSON.stringify({
+                    text: text,
+                    source_language: sourceLanguage,
+                    target_language: targetLanguage,
+                    format: format
+                }),
+                success: (response) => {
+                    try {
+                        // If response is a string (not parsed JSON), try to parse it
+                        if (typeof response === 'string') {
+                            try {
+                                response = JSON.parse(response);
+                                console.log("Parsed JSON response:", response);
+                            } catch (e) {
+                                console.error("Error parsing JSON response:", e);
+                                throw e;
+                            }
+                        }
+                        
+                        // Ensure translation exists and is a string
+                        if (response && typeof response.translation === 'string') {
+                            // Store in localStorage if itemType and itemId provided
+                            if (itemType && itemId) {
+                                this.saveTranslation(
+                                    itemType,
+                                    itemId,
+                                    true,
+                                    response.translation,
+                                    sourceLanguage
+                                );
+                            }
+                            
+                            // Call success callback
+                            if (typeof onSuccess === 'function') {
+                                onSuccess(response.translation);
+                            }
+                        } else {
+                            throw new Error("Invalid translation in response");
+                        }
+                    } catch (e) {
+                        console.error("Error processing translation response:", e);
+                        console.error("Response was:", response);
+                        
+                        if (typeof onError === 'function') {
+                            onError(e);
+                        }
+                    }
+                },
+                error: (xhr, status, error) => {
+                    // Show error message with details
+                    console.error("Translation API error:", status, error);
+                    console.error("Response text:", xhr.responseText);
+                    
+                    if (typeof onError === 'function') {
+                        onError(error);
+                    }
+                }
+            });
+        }
     }
 };
 

@@ -9,6 +9,12 @@
 {% load toggleproperty_tags %}
 {% load tags %}
 
+<style>
+  .post-content .translated-content:before {
+    content: "{% trans 'Translated'|escapejs %}";
+  }
+</style>
+
 
 {% pybb_get_profile user=post.user as post_user_profile %}
 {% pybb_get_profile user=user as user_profile %}
@@ -109,7 +115,11 @@
     <tr class="post-row">
         <td class="post-content">
             {% if not post.user.userprofile.deleted %}
-                {{ post.body|bbcode|html_image_thumbnails:post.id|safe }}
+                <div id="post-content-{{ post.id }}" class="post-body">
+                    {{ post.body|bbcode|html_image_thumbnails:post.id|safe }}
+                </div>
+                
+                <div id="post-translated-content-{{ post.id }}" class="post-body translated-content" style="display: none;"></div>
 
                 {% if not user.is_authenticated or user_profile.show_signatures %}
                     {% if post_user_profile.signature %}
@@ -127,38 +137,24 @@
             {% endif %}
 
             <div class="post-related">
+                <!-- Primary buttons (always visible) -->
                 {% if user|pybb_may_create_post:post.topic %}
                     <button
                         data-url="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}"
                         class="btn btn-mini bb-quote-link no-page-loader running {% button_loading_class %}"
                         disabled="disabled"
                         rel="tooltip"
-                        title="{% trans "Quote this entire post in your reply." %}">
-                        <i class="icon-comment"></i> {% trans "quote" %}
+                        title="{% trans "Quote this post in your reply. If you select text, only the selection will be quoted." %}">
+                        <i class="icon-comment"></i> {% trans "Quote" %}
                         {% button_loading_indicator %}
                     </button>
-                    <a href="#"
-                       class="btn btn-mini bb-quote-selected-link"
-                       disabled="disabled"
-                       rel="tooltip"
-                       title="{% trans "You must select some text first." %}">
-                        <i class="icon-quote-right"></i> {% trans "quote selected" %}
-                    </a>
                 {% endif %}
 
-                {% if post|pybb_posted_by:user or user.is_superuser %}
-                    {% if post.created|more_recent_than:86400 or user.is_superuser or not valid_usersubscription|is_free %}
-                        <a href="{% url 'pybb:edit_post' pk=post.id %}"
-                           class="btn btn-mini btn-primary">
-                            <i class="icon-pencil"></i> {% trans "Edit" %}
-                        </a>
-                    {% else %}
-                        <a data-toggle="modal"
-                           href="#post-editing-not-allowed-modal"
-                           class="btn btn-mini btn-primary disabled">
-                            <i class="icon-pencil"></i> {% trans "Edit" %}
-                        </a>
-                    {% endif %}
+                <!-- Translate button (hidden by default, shown only when needed) -->
+                {% if user.is_authenticated %}
+                    <a href="#" class="btn btn-mini btn-translate-post" data-post-id="{{ post.id }}" style="display: none;">
+                        <i class="icon-file-alt"></i> <span class="translate-text">{% trans "Translate" %}</span>
+                    </a>
                 {% endif %}
 
                 {% if not post|pybb_posted_by:user or user.is_superuser %}
@@ -198,36 +194,68 @@
                         {% add_remove_toggleproperty "like" post request.user can_add=can_like can_remove=can_unlike %}
                     {% endif %}
                 {% endif %}
-
-                {% if user.is_superuser %}
-                    <a class="btn btn-mini btn-danger"
-                       onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}', 'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
-                       href="{% url 'pybb:delete_post' post.id %}">
-                        <i class="icon-trash"></i> {% trans "Delete" %}
-                    </a>
-                    {% if post.on_moderation %}
-                        <a class="btn btn-mini btn-success"
-                           href="{% url 'pybb:moderate_post' pk=post.id %}">
-                            <i class="icon-ok"></i> {% trans "Approve post" %}
-                        </a>
-                    {% endif %}
-
-                    <a href="{% url 'pybb:move_post' pk=post.id %}" class="btn btn-mini btn-danger">
-                        {% if post.is_topic_head %}
-                            <i class="icon-mail-forward"></i>
-                            {% trans 'Move' %}
-                        {% else %}
-                            <i class="icon-cut"></i>
-                            {% trans "Split" %}
+                
+                <!-- Dropdown menu - only shown to authenticated users -->
+                {% if user.is_authenticated %}
+                <div class="dropdown d-inline-block">
+                    <button class="btn btn-mini dropdown-toggle" type="button" id="postActionsDropdown-{{ post.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-ellipsis-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="postActionsDropdown-{{ post.id }}">
+                        
+                        <!-- Edit -->
+                        {% if post|pybb_posted_by:user or user.is_superuser %}
+                            {% if post.created|more_recent_than:86400 or user.is_superuser or not valid_usersubscription|is_free %}
+                                <li>
+                                    <a href="{% url 'pybb:edit_post' pk=post.id %}" class="dropdown-item">
+                                        {% trans "Edit" %}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a data-toggle="modal" href="#post-editing-not-allowed-modal" class="dropdown-item disabled">
+                                        {% trans "Edit" %}
+                                    </a>
+                                </li>
+                            {% endif %}
                         {% endif %}
-                    </a>
-                {% endif %}
-
-                {% if perms.pybb.change_post and user.is_superuser %}
-                    <a class="btn btn-mini btn-danger"
-                       href="{% url 'admin:pybb_post_change' post.id %}">
-                        <i class="icon-legal"></i> {% trans 'Admin' %}
-                    </a>
+                        
+                        <!-- Admin actions -->
+                        {% if user.is_superuser %}
+                            <li class="divider"><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" 
+                                   onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}', 'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
+                                   href="{% url 'pybb:delete_post' post.id %}">
+                                    {% trans "Delete" %}
+                                </a>
+                            </li>
+                            {% if post.on_moderation %}
+                                <li>
+                                    <a class="dropdown-item text-success" href="{% url 'pybb:moderate_post' pk=post.id %}">
+                                        {% trans "Approve post" %}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a href="{% url 'pybb:move_post' pk=post.id %}" class="dropdown-item text-warning">
+                                    {% if post.is_topic_head %}
+                                        {% trans 'Move' %}
+                                    {% else %}
+                                        {% trans "Split" %}
+                                    {% endif %}
+                                </a>
+                            </li>
+                            {% if perms.pybb.change_post %}
+                                <li>
+                                    <a class="dropdown-item text-danger" href="{% url 'admin:pybb_post_change' post.id %}">
+                                        {% trans 'Admin' %}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </div>
                 {% endif %}
             </div>
         </td>
@@ -306,6 +334,155 @@
             }
 
             highlightPost();
+            
+            // Function to handle text selection including touch devices
+            function handleSelection() {
+                const selection = astrobin_common.get_selected_text();
+                if (selection && selection.trim().length > 0) {
+                    // Store the selected text for use
+                    window.selectedPostText = selection;
+                    window.selectedPostAuthor = null;
+                    
+                    // Try to find the containing post
+                    const selectionObj = window.getSelection();
+                    if (selectionObj && selectionObj.anchorNode) {
+                        const $container = $(selectionObj.anchorNode).closest('table.post');
+                        if ($container.length) {
+                            const author = $container.find('.post-author').text().trim();
+                            if (author) {
+                                window.selectedPostAuthor = author;
+                            }
+                        }
+                    }
+                } else {
+                    // Clear the selection when no selection is detected
+                    window.selectedPostText = null;
+                    window.selectedPostAuthor = null;
+                }
+            }
+            
+            // Add event handlers for both mouse and touch devices
+            $(document).on('mouseup', handleSelection);
+            $(document).on('touchend', handleSelection);
+            
+            // Load saved translations when page loads
+            setTimeout(function loadSavedForumTranslations() {
+                // Get forum post translations from the system
+                const forumTranslations = astrobin_common.translationSystem.getTranslations('forum');
+                
+                // Process each post on the page
+                $('.post').each(function() {
+                    const postId = $(this).data('id');
+                    const prefs = forumTranslations[postId];
+                    
+                    if (prefs && prefs.translated && prefs.content) {
+                        // Auto-translate this post
+                        const $originalContent = $(`#post-content-${postId}`);
+                        const $translatedContent = $(`#post-translated-content-${postId}`);
+                        const $button = $(this).find('.btn-translate-post');
+                        
+                        // Set translated content
+                        $translatedContent.html(prefs.content);
+                        
+                        // Update button
+                        $button.find('.translate-text').text('{% trans "See original"|escapejs %}');
+                        if ($button.attr('data-detected-language') === undefined && prefs.language) {
+                            $button.attr('data-detected-language', prefs.language);
+                        }
+                        
+                        // Show translation
+                        $originalContent.hide();
+                        $translatedContent.css('display', 'block');
+                        
+                        // Make button visible
+                        $button.css('display', 'inline-block');
+                    }
+                });
+            }, 500);
+
+            // Translation functionality
+            // Use one-time binding to prevent multiple registrations
+            $('.btn-translate-post').off('click').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event bubbling
+                
+                const postId = $(this).data('post-id');
+                const $originalContent = $(`#post-content-${postId}`);
+                const $translatedContent = $(`#post-translated-content-${postId}`);
+                const $button = $(this);
+                
+                // Don't do anything if already in progress
+                if ($button.find('.icon-spinner').length > 0) {
+                    return;
+                }
+                
+                // If already translated, toggle back to original
+                if ($translatedContent.is(':visible')) {
+                    $translatedContent.hide();
+                    $originalContent.show();
+                    // No need to change icon class, it's already icon-file-alt
+                    $button.find('.translate-text').text('{% trans "Translate"|escapejs %}');
+                    // Update storage
+                    astrobin_common.translationSystem.saveTranslation('forum', postId, false);
+                    return;
+                }
+                
+                // If content already translated but hidden, just show it
+                if ($translatedContent.html() && $translatedContent.html().trim().length > 0) {
+                    $originalContent.hide();
+                    $translatedContent.css('display', 'block');  // Force show with CSS
+                    // Keep the icon-file-alt class for consistency
+                    $button.find('.translate-text').text('{% trans "See original"|escapejs %}');
+                    // Update storage
+                    astrobin_common.translationSystem.saveTranslation(
+                        'forum', 
+                        postId, 
+                        true, 
+                        $translatedContent.html(), 
+                        $button.attr('data-detected-language')
+                    );
+                    return;
+                }
+                
+                // Otherwise, request translation
+                $button.find('i').removeClass('icon-file-alt').addClass('icon-spinner');
+                
+                const originalText = $originalContent.html();
+                // Use Django's LANGUAGE_CODE first, with browser language as fallback
+                const djangoLang = '{{ LANGUAGE_CODE }}'.split('-')[0].toLowerCase();
+                const currentLang = djangoLang || $('html').attr('lang') || 'en';
+                const detectedLanguage = $button.attr('data-detected-language') || 'auto';
+                
+                // Use the translation system
+                astrobin_common.translationSystem.translateContent({
+                    text: originalText,
+                    sourceLanguage: detectedLanguage,
+                    targetLanguage: currentLang,
+                    format: 'html',
+                    itemType: 'forum',
+                    itemId: postId,
+                    onStart: function() {
+                        // Already handled by setting spinner above
+                    },
+                    onSuccess: function(translation) {
+                        // Set the translated content and make visible
+                        $translatedContent.html(translation);
+                        
+                        // Hide original, show translated
+                        $originalContent.hide();
+                        $translatedContent.css('display', 'block');  // Force show with CSS
+                        
+                        // Update button UI
+                        $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
+                        $button.find('.translate-text').text('{% trans "See original"|escapejs %}');
+                    },
+                    onError: function(error) {
+                        console.error("Translation error:", error);
+                        $button.find('i').removeClass('icon-spinner').addClass('icon-file-alt');
+                        alert('{% trans "Translation failed. Please try again later."|escapejs %}');
+                    }
+                });
+            });
         });
     </script>
 {% endblock %}
