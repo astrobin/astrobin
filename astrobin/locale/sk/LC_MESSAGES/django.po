@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-04 10:23+0000\n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "PO-Revision-Date: 2020-09-25 11:30+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1171,9 +1171,6 @@ msgstr "Rusky"
 
 msgid "Belarusian"
 msgstr ""
-
-msgid "Arabic"
-msgstr "Arabčina"
 
 msgid "Japanese"
 msgstr "Japončina"
@@ -2405,6 +2402,9 @@ msgstr ""
 
 msgid "Amharic"
 msgstr ""
+
+msgid "Arabic"
+msgstr "Arabčina"
 
 msgid "Aragonese"
 msgstr ""
@@ -3974,10 +3974,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                <strong>%(user)s</strong> wants to add you as a collaborator "
-"to this image.\n"
-"            "
+"<strong>%(user)s</strong> wants to add you as a collaborator to this image."
 msgstr ""
 
 #, python-format
@@ -4872,11 +4869,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                AstroBin's Marketplace has <strong>"
-"%(count)s</strong> items similar to what you're\n"
-"                                looking for!\n"
-"                            "
+"AstroBin's Marketplace has <strong>%(count)s</strong> items similar to what "
+"you're looking for!"
 msgstr ""
 
 msgid "Take a look!"
@@ -5465,19 +5459,11 @@ msgid ""
 msgstr ""
 
 msgid ""
-"\n"
-"        If the reason for your inactivity is temporary, please let us know "
-"and we will be happy to reinstate you.\n"
-"    "
+"If the reason for your inactivity is temporary, please let us know and we "
+"will be happy to reinstate you."
 msgstr ""
 
 msgid "Thank you for understanding!"
-msgstr ""
-
-msgid ""
-"\n"
-"    If the reason for your inactivity is temporary, please let us know and "
-"we will be happy to reinstate you.\n"
 msgstr ""
 
 #, python-format
@@ -6535,16 +6521,6 @@ msgid ""
 "The number of images you dismissed, but they ended up being awarded IOTD."
 msgstr ""
 
-msgid ""
-"\n"
-"    Every first day of the month, AstroBin sends you a summary of your "
-"activities as an IOTD/TP staff member. The entire\n"
-"     community is undoubtedly grateful for your contribution to the IOTD/TP "
-"process, and we hope you will keep doing it\n"
-"     with the same passion and dedication. Without further ado, here is your "
-"most recent activity data.\n"
-msgstr ""
-
 msgid "Your IOTD staff member stats"
 msgstr ""
 
@@ -6808,6 +6784,9 @@ msgstr ""
 msgid "Something went wrong, sorry! Please try again."
 msgstr ""
 
+msgid "Translated"
+msgstr ""
+
 msgid "(deleted)"
 msgstr ""
 
@@ -6840,16 +6819,15 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-msgid "Quote this entire post in your reply."
+msgid ""
+"Quote this post in your reply. If you select text, only the selection will "
+"be quoted."
 msgstr ""
 
-msgid "quote"
+msgid "Quote"
 msgstr ""
 
-msgid "You must select some text first."
-msgstr ""
-
-msgid "quote selected"
+msgid "Translate"
 msgstr ""
 
 msgid "Delete post?"
@@ -6876,6 +6854,12 @@ msgid "Share this forum post"
 msgstr ""
 
 msgid "Copy the URL below to share a direct link to this post."
+msgstr ""
+
+msgid "See original"
+msgstr ""
+
+msgid "Translation failed. Please try again later."
 msgstr ""
 
 msgid "Topics you subscribe to"
@@ -6915,9 +6899,6 @@ msgid "Would you like to jump to the new posts since your last visit?"
 msgstr ""
 
 msgid "Click here"
-msgstr ""
-
-msgid "Quote the selected text in your reply"
 msgstr ""
 
 msgid "Topic"
@@ -7775,19 +7756,7 @@ msgstr ""
 msgid "Account suspended"
 msgstr ""
 
-msgid ""
-"\n"
-"                Your account is temporarily or permanently suspended. If you "
-"believe this is in error, please get in touch\n"
-"                using the Help menu.\n"
-"            "
-msgstr ""
-
-msgid ""
-"\n"
-"                This content is not available because the user's account is "
-"suspended.\n"
-"            "
+msgid "This content is not available because the user's account is suspended."
 msgstr ""
 
 msgid ""
@@ -8567,6 +8536,9 @@ msgstr ""
 msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr ""
 
+msgid "Your account has been activated."
+msgstr ""
+
 msgid "Email is required."
 msgstr ""
 
@@ -8581,121 +8553,3 @@ msgstr ""
 #, python-brace-format
 msgid "A new activation email has been sent to {0}."
 msgstr ""
-
-#~ msgid ""
-#~ "Sorry, but the page you are looking for is not here. If you expected an "
-#~ "image, this means that the author deleted it."
-#~ msgstr ""
-#~ "Ľutujeme, ale hľadaná stránka neexistuje. Ak ste očakávali obrázok, "
-#~ "znamená to, že autor ho vymazal."
-
-#~ msgid ""
-#~ "Something unexpected occurred! We have received an email with technical "
-#~ "details, so we will try to fix the problem as soon as possible. Sorry "
-#~ "about the inconvenience! "
-#~ msgstr ""
-#~ "Nastalo niečo neočakávané! Dostali sme email s podrobnými informáciami, "
-#~ "takže sa pokúsime čo najskôr odstrániť problém. Ospravedlňujeme sa za "
-#~ "nepríjemnosti! "
-
-#~ msgid "Avg. Moon age"
-#~ msgstr "Vek Mesiaca"
-
-#~ msgid "days"
-#~ msgstr "dní"
-
-#~ msgid "Avg. Moon phase"
-#~ msgstr "Fáza Mesiaca"
-
-#~ msgid "Mean SQM"
-#~ msgstr "SQM"
-
-#~ msgid "Guidelines"
-#~ msgstr "Vodítka"
-
-#~ msgid "The number of dark flat frames."
-#~ msgstr "Počet temných snímok flatov."
-
-#~ msgid "The Big Wall"
-#~ msgstr "Veľká nástenka"
-
-#~ msgid "Total integration time"
-#~ msgstr "Celkový expozičný čas"
-
-#~ msgid "hours"
-#~ msgstr "hodiny"
-
-#~ msgid "Average integration time"
-#~ msgstr "Priemerný expozičný čas"
-
-#~ msgid "No date specified"
-#~ msgstr "Nebol zadaný dátum"
-
-#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-#~ msgstr "Nebol vybraný ďalekohľad, objektív alebo kamera"
-
-#~ msgid "Gear images"
-#~ msgstr "Obrázky príslušenstva"
-
-#~ msgid "No subjects specified"
-#~ msgstr "Nebol zadaný názov"
-
-#~ msgid "No acquisition details specified"
-#~ msgstr "Neboli zadané detaily snímania."
-
-#~ msgid "Integration hours, yearly"
-#~ msgstr "Integračné hodiny, ročne"
-
-#~ msgid "Integration hours, monthly"
-#~ msgstr "Integračné hodiny, mešačne"
-
-#~ msgid "Integration hours, daily"
-#~ msgstr "Integračné hodiny, denne"
-
-#~ msgid "Integration hours by gear, yearly"
-#~ msgstr "Integračné hodiny podľa príslušenstva, ročne"
-
-#~ msgid "Integration hours by gear, monthly"
-#~ msgstr "Integračné hodiny podľa príslušenstva, mesačne"
-
-#~ msgid "Integration hours by gear, daily"
-#~ msgstr "Integračné hodiny podľa príslušenstva, denne"
-
-#~ msgid "Uploaded images, yearly"
-#~ msgstr "Vložené obrázky, ročne"
-
-#~ msgid "Uploaded images, monthly"
-#~ msgstr "Vložené obrázky, mesačne"
-
-#~ msgid "Uploaded images, daily"
-#~ msgstr "Vložené obrázky, denne"
-
-#~ msgid "Views, yearly"
-#~ msgstr "Zobrazenia, ročne"
-
-#~ msgid "Views, monthly"
-#~ msgstr "Zobrazenia, mesačne"
-
-#~ msgid "Views, daily"
-#~ msgstr "Zobrazenia, denne"
-
-#~ msgid "Total images"
-#~ msgstr "Celkový počet obrázkov"
-
-#~ msgid "Integration hours by camera type"
-#~ msgstr "Integračné hodiny podľa typu kamery"
-
-#~ msgid "Number of images by subject type"
-#~ msgstr "Počet obrázkov podľa typu objektu"
-
-#~ msgid "Timezone"
-#~ msgstr "Časové pásmo"
-
-#~ msgid ""
-#~ "By selecting this, you will see all the dates on AstroBin in your "
-#~ "timezone."
-#~ msgstr ""
-#~ "Týmto výberom uvidíte všetky dátumy na AstroBin vo Vašom časovom pásme."
-
-#~ msgid "Last login"
-#~ msgstr "Naposledy prihlásený"

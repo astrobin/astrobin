@@ -1,13 +1,16 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-msgid "Conflict."
-msgstr "Conflitto."
+msgid "Only one video-based acquisition is allowed per image."
+msgstr ""
+"È possibile associare solo un'acquisizione di tipo video ad un'immagine."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Origine dati non compressa (max 100 MB)"
@@ -22,59 +25,6 @@ msgstr ""
 "di elaborazione immagini preferito (per esempio PixInsight, Adobe Photoshop, "
 "ecc) qui su AstroBin, per archiviarla. Questo file è salvato privatamente e "
 "solo tu potrai accederci."
-
-msgid "Error!"
-msgstr "Errore!"
-
-msgid "Staging area"
-msgstr "Area di lavoro"
-
-msgid "Loading"
-msgstr "Caricamento"
-
-msgid "(no title)"
-msgstr "(senza titolo)"
-
-msgid "Image of the day"
-msgstr "Foto del giorno"
-
-msgid "Top pick"
-msgstr "Top pick"
-
-msgid "Top pick nomination"
-msgstr "Nomina Top pick"
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Corruzione dei dati. Carica questa immagine di nuovo. Spiacenti!"
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "Revisione %(revision)s"
-
-msgid "Original revision"
-msgstr "Revisione originale"
-
-msgid "Collaboration"
-msgstr "Collaborazione"
-
-msgid "Currently in the IOTD/TP queue"
-msgstr "Al momento nella coda IOTD/TP"
-
-msgid "Video"
-msgstr "Video"
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-"C'è stato un problema nel fare l'encoding di questo video, per favore "
-"caricalo di nuovo."
-
-msgid "If the problem persists, please contact us."
-msgstr "Se il problema persiste, contattaci."
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-"Questo video è ancora in fase di elaborazione, torna su questa pagina più "
-"tardi."
 
 msgid "Dates"
 msgstr "Date"
@@ -148,9 +98,58 @@ msgstr "Seeing"
 msgid "Transparency"
 msgstr "Trasparenza"
 
+msgid "Error!"
+msgstr "Errore!"
+
+msgid "Image of the day"
+msgstr "Foto del giorno"
+
+msgid "Top pick"
+msgstr "Top pick"
+
+msgid "Top pick nomination"
+msgstr "Nomina Top pick"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr "Al momento nella coda IOTD/TP"
+
+msgid "Staging area"
+msgstr "Area di lavoro"
+
+msgid "Collaboration"
+msgstr "Collaborazione"
+
+msgid "Video"
+msgstr "Video"
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+"C'è stato un problema nel fare l'encoding di questo video, per favore "
+"caricalo di nuovo."
+
+msgid "If the problem persists, please contact us."
+msgstr "Se il problema persiste, contattaci."
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
+"Questo video è ancora in fase di elaborazione, torna su questa pagina più "
+"tardi."
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Revisione %(revision)s"
+
+msgid "Original revision"
+msgstr "Revisione originale"
+
+msgid "Loading"
+msgstr "Caricamento"
+
+msgid "(no title)"
+msgstr "(senza titolo)"
+
 msgid "Image file not found"
 msgstr "File immagine non trovato"
 
-msgid "Only one video-based acquisition is allowed per image."
-msgstr ""
-"È possibile associare solo un'acquisizione di tipo video ad un'immagine."
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Corruzione dei dati. Carica questa immagine di nuovo. Spiacenti!"

@@ -9,7 +9,7 @@
     <div class="alert alert-warning">
         <p>
             <i class="icon-exclamation-sign"></i>
-            {% blocktrans with image.user.userprofile as user %}
+            {% blocktrans trimmed with image.user.userprofile as user %}
                 <strong>{{ user }}</strong> wants to add you as a collaborator to this image.
             {% endblocktrans %}
 

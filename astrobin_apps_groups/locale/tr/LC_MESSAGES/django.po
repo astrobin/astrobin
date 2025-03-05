@@ -1,10 +1,21 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: tr\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Otomatik gönderimi yalnızca aşağıdaki kategoriler destekler: Profesyonel ağ, "
+"Kulüp veya dernek, İnternet topluluğu, Arkadaşlar veya ortaklar, Coğrafi alan"
 
 #, fuzzy
 msgid "Autosubmission deactivation strategy"
@@ -75,6 +86,18 @@ msgid "Other"
 msgstr "Diğer"
 
 #, fuzzy
+msgid "Publication"
+msgstr "Yayın"
+
+#, fuzzy
+msgid "Title"
+msgstr "Başlık"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Anahtar/değer etiketi"
+
+#, fuzzy
 msgid "Name"
 msgstr "İsim"
 
@@ -89,6 +112,24 @@ msgstr "HTML etiketlerine izin verilir."
 #, fuzzy
 msgid "Category"
 msgstr "Kategori"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Varsayılan görüntü sıralaması"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Görüntü anahtar/değer etiketi sıralaması"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Eğer görüntüler bir anahtar/değer etiketiyle sıralanıyorsa, lütfen hangisi "
+"olduğunu belirtin. <a target='_blank' href='https://welcome.astrobin.com/"
+"features/groups'>Daha fazla bilgi edinin.<\\/a>"
 
 #, fuzzy
 msgid "Public group"
@@ -126,8 +167,27 @@ msgstr ""
 "görüntüleri içerir."
 
 #, fuzzy
+msgid "Forum notice"
+msgstr "Forum bildirimi"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"'Yeni konu' formunun üstünde görüntülenecek bir 'Forum bildirimi' girin. Bu, "
+"kullanıcıların yeni bir gönderi oluşturmadan önce forum kurallarını, "
+"uyarıları veya önemli bilgileri iletmek için kullanılabilir. Mesajınızın net "
+"ve öz olduğundan emin olun."
+
+#, fuzzy
 msgid "Last activity"
 msgstr "Son etkinlik"
+
+#, fuzzy
+msgid "Date created"
+msgstr "Oluşturulma tarihi"
 
 #, fuzzy
 msgid "Members"
@@ -186,6 +246,10 @@ msgid "Cancel"
 msgstr "İptal"
 
 #, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Lütfen bir seferde 100'den fazla görüntü eklemeyin, teşekkürler!"
+
+#, fuzzy
 msgid "Delete group?"
 msgstr "Grubu silmek istiyor musun?"
 
@@ -232,6 +296,10 @@ msgid "Moderate join requests"
 msgstr "Katılma taleplerini denetle"
 
 #, fuzzy
+msgid "Sort images"
+msgstr "Görüntüleri sırala"
+
+#, fuzzy
 msgid "This group is public"
 msgstr "Bu grup herkese açıktır"
 
@@ -263,21 +331,19 @@ msgstr "Davet edilen kullanıcılar"
 msgid "Join requests"
 msgstr "Katılma talepleri"
 
-#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"%(date_created)s tarihinde oluşturulmuş, <a href=\"%(owner_url)s\">%(owner)"
-"s</a> tarafından sahiplenilmiş, <strong>%(category)s</strong> kategorisine "
-"ait bir grup."
+"%(date_created)s tarihinde oluşturulmuş, <a href=\"%(owner_url)s\">"
+"%(owner)s</a> tarafından sahiplenilmiş, <strong>%(category)s</strong> "
+"kategorisine ait bir grup."
 
 #, fuzzy
 msgid "Group forum"
 msgstr "Grup forumu"
 
-#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
@@ -293,10 +359,6 @@ msgstr "Hepsini görüntüle"
 #, fuzzy
 msgid "New topic"
 msgstr "Yeni konu"
-
-#, fuzzy
-msgid "Please join the group to view its forum."
-msgstr "Forumunu görüntülemek için lütfen gruba katıl."
 
 #, fuzzy
 msgid ""
@@ -370,34 +432,36 @@ msgid "Sort"
 msgstr "Sırala"
 
 #, fuzzy
-msgid "Date created"
-msgstr "Oluşturulma tarihi"
+msgid "Search"
+msgstr "Ara"
 
 #, fuzzy
-msgid "Your private groups"
-msgstr "Özel grupların"
+msgid "Private groups you own"
+msgstr "Sahip olduğunuz özel gruplar"
 
 #, fuzzy
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr "Bu özel grupların sahibi, üyesi veya davetlisisin."
+msgid "Private groups you are a member of"
+msgstr "Üyesi olduğunuz özel gruplar"
 
 #, fuzzy
-msgctxt "group"
-msgid "Create private group"
-msgstr "Özel grup oluştur"
+msgid "Private groups you are invited to"
+msgstr "Davet edildiğiniz özel gruplar"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Sahip olduğunuz kamu grupları"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Üyesi olduğunuz kamu grupları"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Davet edildiğiniz kamu grupları"
 
 #, fuzzy
 msgid "Public groups"
 msgstr "Herkese açık gruplar"
-
-#, fuzzy
-msgid "Open to the whole community."
-msgstr "Tüm topluluğa açık."
-
-#, fuzzy
-msgctxt "group"
-msgid "Create public group"
-msgstr "Herkese açık grup oluştur"
 
 #, fuzzy
 msgid "No groups available."
@@ -484,6 +548,14 @@ msgid "This group has no join requests."
 msgstr "Bu grubun katılma isteği yok."
 
 #, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Bir şeyler ters gitti, lütfen daha sonra tekrar deneyin."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Mesajınızı buraya yazın..."
+
+#, fuzzy
 msgid "You cannot add images that are not yours!"
 msgstr "Kendine ait olmayan görüntüleri ekleyemezsin!"
 
@@ -526,101 +598,3 @@ msgstr "Grubu terk ettin"
 #, fuzzy
 msgid "Form saved"
 msgstr "Form kaydedildi"
-
-#, fuzzy
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Otomatik gönderimi yalnızca aşağıdaki kategoriler destekler: Profesyonel ağ, "
-"Kulüp veya dernek, İnternet topluluğu, Arkadaşlar veya ortaklar, Coğrafi alan"
-
-#, fuzzy
-msgid "Publication"
-msgstr "Yayın"
-
-#, fuzzy
-msgid "Title"
-msgstr "Başlık"
-
-#, fuzzy
-msgid "Key/value tag"
-msgstr "Anahtar/değer etiketi"
-
-#, fuzzy
-msgid "Default image sorting"
-msgstr "Varsayılan görüntü sıralaması"
-
-#, fuzzy
-msgid "Image key/value tag sorting"
-msgstr "Görüntü anahtar/değer etiketi sıralaması"
-
-#, fuzzy
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Eğer görüntüler bir anahtar/değer etiketiyle sıralanıyorsa, lütfen hangisi "
-"olduğunu belirtin. <a target='_blank' href='https://welcome.astrobin."
-"com/features/groups'>Daha fazla bilgi edinin.<\\/a>"
-
-#, fuzzy
-msgid "Search"
-msgstr "Ara"
-
-#, fuzzy
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Lütfen bir seferde 100'den fazla görüntü eklemeyin, teşekkürler!"
-
-#, fuzzy
-msgid "Sort images"
-msgstr "Görüntüleri sırala"
-
-#, fuzzy
-msgid "Private groups you own"
-msgstr "Sahip olduğunuz özel gruplar"
-
-#, fuzzy
-msgid "Private groups you are a member of"
-msgstr "Üyesi olduğunuz özel gruplar"
-
-#, fuzzy
-msgid "Private groups you are invited to"
-msgstr "Davet edildiğiniz özel gruplar"
-
-#, fuzzy
-msgid "Public groups you own"
-msgstr "Sahip olduğunuz kamu grupları"
-
-#, fuzzy
-msgid "Public groups you are a member of"
-msgstr "Üyesi olduğunuz kamu grupları"
-
-#, fuzzy
-msgid "Public groups you are invited to"
-msgstr "Davet edildiğiniz kamu grupları"
-
-#, fuzzy
-msgid "Forum notice"
-msgstr "Forum bildirimi"
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"'Yeni konu' formunun üstünde görüntülenecek bir 'Forum bildirimi' girin. Bu, "
-"kullanıcıların yeni bir gönderi oluşturmadan önce forum kurallarını, "
-"uyarıları veya önemli bilgileri iletmek için kullanılabilir. Mesajınızın net "
-"ve öz olduğundan emin olun."
-
-#, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Bir şeyler ters gitti, lütfen daha sonra tekrar deneyin."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Mesajınızı buraya yazın..."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-04 10:23+0000\n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1178,9 +1178,6 @@ msgid "Russian"
 msgstr ""
 
 msgid "Belarusian"
-msgstr ""
-
-msgid "Arabic"
 msgstr ""
 
 msgid "Japanese"
@@ -2419,6 +2416,9 @@ msgid "Akan"
 msgstr ""
 
 msgid "Amharic"
+msgstr ""
+
+msgid "Arabic"
 msgstr ""
 
 msgid "Aragonese"
@@ -3988,10 +3988,7 @@ msgstr "Histograma"
 
 #, python-format
 msgid ""
-"\n"
-"                <strong>%(user)s</strong> wants to add you as a collaborator "
-"to this image.\n"
-"            "
+"<strong>%(user)s</strong> wants to add you as a collaborator to this image."
 msgstr ""
 
 #, python-format
@@ -4896,11 +4893,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                AstroBin's Marketplace has <strong>"
-"%(count)s</strong> items similar to what you're\n"
-"                                looking for!\n"
-"                            "
+"AstroBin's Marketplace has <strong>%(count)s</strong> items similar to what "
+"you're looking for!"
 msgstr ""
 
 msgid "Take a look!"
@@ -5489,19 +5483,11 @@ msgid ""
 msgstr ""
 
 msgid ""
-"\n"
-"        If the reason for your inactivity is temporary, please let us know "
-"and we will be happy to reinstate you.\n"
-"    "
+"If the reason for your inactivity is temporary, please let us know and we "
+"will be happy to reinstate you."
 msgstr ""
 
 msgid "Thank you for understanding!"
-msgstr ""
-
-msgid ""
-"\n"
-"    If the reason for your inactivity is temporary, please let us know and "
-"we will be happy to reinstate you.\n"
 msgstr ""
 
 #, python-format
@@ -6571,16 +6557,6 @@ msgid ""
 "The number of images you dismissed, but they ended up being awarded IOTD."
 msgstr ""
 
-msgid ""
-"\n"
-"    Every first day of the month, AstroBin sends you a summary of your "
-"activities as an IOTD/TP staff member. The entire\n"
-"     community is undoubtedly grateful for your contribution to the IOTD/TP "
-"process, and we hope you will keep doing it\n"
-"     with the same passion and dedication. Without further ado, here is your "
-"most recent activity data.\n"
-msgstr ""
-
 msgid "Your IOTD staff member stats"
 msgstr ""
 
@@ -6844,6 +6820,9 @@ msgstr ""
 msgid "Something went wrong, sorry! Please try again."
 msgstr ""
 
+msgid "Translated"
+msgstr ""
+
 msgid "(deleted)"
 msgstr ""
 
@@ -6876,16 +6855,15 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-msgid "Quote this entire post in your reply."
+msgid ""
+"Quote this post in your reply. If you select text, only the selection will "
+"be quoted."
 msgstr ""
 
-msgid "quote"
+msgid "Quote"
 msgstr ""
 
-msgid "You must select some text first."
-msgstr ""
-
-msgid "quote selected"
+msgid "Translate"
 msgstr ""
 
 msgid "Delete post?"
@@ -6912,6 +6890,12 @@ msgid "Share this forum post"
 msgstr ""
 
 msgid "Copy the URL below to share a direct link to this post."
+msgstr ""
+
+msgid "See original"
+msgstr ""
+
+msgid "Translation failed. Please try again later."
 msgstr ""
 
 msgid "Topics you subscribe to"
@@ -6951,9 +6935,6 @@ msgid "Would you like to jump to the new posts since your last visit?"
 msgstr ""
 
 msgid "Click here"
-msgstr ""
-
-msgid "Quote the selected text in your reply"
 msgstr ""
 
 msgid "Topic"
@@ -7830,19 +7811,7 @@ msgstr ""
 msgid "Account suspended"
 msgstr ""
 
-msgid ""
-"\n"
-"                Your account is temporarily or permanently suspended. If you "
-"believe this is in error, please get in touch\n"
-"                using the Help menu.\n"
-"            "
-msgstr ""
-
-msgid ""
-"\n"
-"                This content is not available because the user's account is "
-"suspended.\n"
-"            "
+msgid "This content is not available because the user's account is suspended."
 msgstr ""
 
 msgid ""
@@ -8619,6 +8588,9 @@ msgstr ""
 msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr ""
 
+msgid "Your account has been activated."
+msgstr ""
+
 msgid "Email is required."
 msgstr ""
 
@@ -8633,317 +8605,3 @@ msgstr ""
 #, python-brace-format
 msgid "A new activation email has been sent to {0}."
 msgstr ""
-
-#~ msgid "Back to top"
-#~ msgstr "Inapoi in sus"
-
-#~ msgid "My settings"
-#~ msgstr "Setările mele"
-
-#~ msgid ""
-#~ "To confirm your e-mail address, we have sent you an e-mail with an "
-#~ "activation link."
-#~ msgstr ""
-#~ "Pentru a confirma adresa dvs. de e-mail, v-am trimis un e-mail cu un link "
-#~ "de activare."
-
-#~ msgid ""
-#~ "If you don't receive the e-mail within a few minutes, remember to check "
-#~ "your spam folder."
-#~ msgstr ""
-#~ "Dacă nu primiți email-ul în câteva minute, amintiți-vă să vă verificați "
-#~ "dosarul spam."
-
-#~ msgid "Register with AstroBin"
-#~ msgstr "Inregistrare pe AstroBin"
-
-#~ msgid "Contact"
-#~ msgstr "Contact"
-
-#~ msgid ""
-#~ "Sorry, but the page you are looking for is not here. If you expected an "
-#~ "image, this means that the author deleted it."
-#~ msgstr ""
-#~ "Ne pare rau, dar pagina pe care o cauti nu este aici. Daca te asteptai la "
-#~ "o imagine, asta insemna ca autorul a sters-o."
-
-#~ msgid "Avg. Moon age"
-#~ msgstr "\"varsta\" medie a Lunei  (numarul de zile trecute de la Luna noua)"
-
-#~ msgid "days"
-#~ msgstr "zile"
-
-#~ msgid "Avg. Moon phase"
-#~ msgstr "aprecierea medie a fazei Lunei"
-
-#~ msgid "Guidelines"
-#~ msgstr "Orientări"
-
-#~ msgid "The number of dark flat frames."
-#~ msgstr "Numărul de cadre întunecate plate."
-
-#~ msgid "Edit gear item"
-#~ msgstr "Editaţi element de echipament"
-
-#~ msgid "Please note!"
-#~ msgstr "Vă rugăm, reţineţi !"
-
-#~ msgid ""
-#~ "When you add or edit the make, the name, and the properties of this "
-#~ "product, the data is global and shared between all AstroBin users. Do not "
-#~ "write any information in there that refers to your personal copy of this "
-#~ "product, like \"modded\", \"sold\", \"broken\", \"a present from my aunt"
-#~ "\" and so on. "
-#~ msgstr ""
-#~ "Atunci când adăugați sau editați marca, numele, și proprietățile acestui "
-#~ "produs, datele sunt globale și partajate între toți utilizatorii "
-#~ "AstroBin. Nu scrie nici o informație acolo unde se referă la o copie "
-#~ "personală a acestui produs, cum ar fi  \"vândut\", \"stricat\", \"un "
-#~ "cadou de la mătuşa mea\", și așa mai departe."
-
-#~ msgid ""
-#~ "The following information, instead, is personal, and may refer to your "
-#~ "copy of this product."
-#~ msgstr ""
-#~ "Următoarele informaţii sunt personale şi se pot referi la copia "
-#~ "produselor dumneavoastră."
-
-#~ msgid "Add gear item"
-#~ msgstr "Adaugă echipament utilizat"
-
-#~ msgid "The Big Wall"
-#~ msgstr "Marele Perete"
-
-#~ msgid "Total integration time"
-#~ msgstr "Timp total de integrare"
-
-#~ msgid "hours"
-#~ msgstr "ore"
-
-#~ msgid "Average integration time"
-#~ msgstr "Timpul mediu de integrare"
-
-#~ msgid "No date specified"
-#~ msgstr "Nici o dată specificată"
-
-#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-#~ msgstr ""
-#~ "Nu s-a specificat nici un telescop, lentila sau camera pentru producerea "
-#~ "imaginii."
-
-#~ msgid "Gear images"
-#~ msgstr "Imagini cu echipamentul"
-
-#~ msgid "No subjects specified"
-#~ msgstr "Nu sunt subiecte specificate"
-
-#~ msgid "No acquisition details specified"
-#~ msgstr "N-ati specificat detaliile de achizitie"
-
-#~ msgid "%(user)s commented on your image!"
-#~ msgstr "%(user)s a comentat imaginea ta!"
-
-#~ msgid ""
-#~ "%(user)s replied to your comment. Check it out at the following url: "
-#~ "%(url)s"
-#~ msgstr ""
-#~ "%(user)s a răspuns la comentariul tău! Verifică următoarea adresă: %(url)s"
-
-#~ msgid "%(user)s replied to your comment."
-#~ msgstr "%(user)s a răspuns la comentariul tău."
-
-#~ msgid "Image size"
-#~ msgstr "Dimensiunea imaginii"
-
-#~ msgid "Full"
-#~ msgstr "Plin"
-
-#~ msgid "Integration hours, yearly"
-#~ msgstr "Ore de integrare, anual"
-
-#~ msgid "Integration hours, monthly"
-#~ msgstr "Ore de integrare, lunar"
-
-#~ msgid "Integration hours, daily"
-#~ msgstr "Ore de integrare, zilnic"
-
-#~ msgid "Integration hours by gear, yearly"
-#~ msgstr "Timp de integrare ( echipament )"
-
-#~ msgid "Integration hours by gear, monthly"
-#~ msgstr ""
-#~ "Orele necesare echipamentului pentru integrarea imaginii , calculate "
-#~ "lunar."
-
-#~ msgid "Integration hours by gear, daily"
-#~ msgstr ""
-#~ "Orele necesare echipamentului pentru integrarea imaginii , calculate "
-#~ "zilnic."
-
-#~ msgid "Uploaded images, yearly"
-#~ msgstr "Imagini încărcate, anual"
-
-#~ msgid "Uploaded images, monthly"
-#~ msgstr "Imagini încărcate, lunar"
-
-#~ msgid "Uploaded images, daily"
-#~ msgstr "Imagini încărcate, zilnic"
-
-#~ msgid "Views, yearly"
-#~ msgstr "Vizualizări, anual"
-
-#~ msgid "Views, monthly"
-#~ msgstr "Vizualizări, lunar"
-
-#~ msgid "Views, daily"
-#~ msgstr "Vizualizări, zilnic"
-
-#~ msgid "Total images"
-#~ msgstr "Imagini totale"
-
-#~ msgid "Integration hours by camera type"
-#~ msgstr "Ore de integrare în funcție de tipul camerei"
-
-#~ msgid "Number of images by subject type"
-#~ msgstr "Numarul imaginilor calculat pe tipuri de subiect"
-
-#~ msgid "You do not yet have an avatar. Please upload one now."
-#~ msgstr "Nu aveti inca un avatar. Va rugam sa incarcati unul acum."
-
-#~ msgid "Previously uploaded"
-#~ msgstr "Incarcarea anterioara"
-
-#~ msgid "Reset password at %(site_name)s"
-#~ msgstr "Resetează parola la %(site_name)s"
-
-#~ msgid "Total integration hours in the last 12 months"
-#~ msgstr "Timpul total exprimat in ore de integrare in ultimele 12 luni"
-
-#~ msgid "Please wait: the plot is loading..."
-#~ msgstr "Va rugam asteptati...terenul se incarca"
-
-#~ msgid "Global distribution of camera types"
-#~ msgstr "Distribuita globala a tipurilor de camere"
-
-#~ msgid "Global distribution of telescope types"
-#~ msgstr "Distributia globala a tipurilor de telescoape"
-
-#~ msgid "CCD vs DLSR: the global trend"
-#~ msgstr "CCD versus DSLR: tendintele globale"
-
-#~ msgid "Global trend of telescope types"
-#~ msgstr "Tendinta globala a tipurilor de telescoape"
-
-#~ msgid "Total integration hours, plotted against time."
-#~ msgstr "Total de ore de integrare, în funcție de timp."
-
-#~ msgid ""
-#~ "Total integration hours, plotted against time and arranged by imaging "
-#~ "telescopes and lenses, and imaging cameras."
-#~ msgstr ""
-#~ "Total ore de integrare, în funcție de timp și aranjate de către "
-#~ "telescoapele de imagistica si lentile, precum și camere de luat vederi."
-
-#~ msgid "Image uploads, plotted against time."
-#~ msgstr "Încărcări de fotografie, în funcție de timp."
-
-#~ msgid "Timezone"
-#~ msgstr "Zona de fus orar"
-
-#~ msgid ""
-#~ "By selecting this, you will see all the dates on AstroBin in your "
-#~ "timezone."
-#~ msgstr ""
-#~ "Prin selectarea acesteia, veți vedea toate datele de pe AstroBin în fusul "
-#~ "tău orar."
-
-#~ msgid "Acquisition time"
-#~ msgstr "Timpul de achiziţie"
-
-#~ msgid "Message sent"
-#~ msgstr "Mesajul a fost trimis."
-
-#~ msgid "Instructions and examples"
-#~ msgstr "Instructiuni si exemple"
-
-#~ msgid ""
-#~ "Please read the instructions and the example below, they are important!"
-#~ msgstr ""
-#~ "Vă rugăm să citiți instrucțiunile și exemplul de mai jos, acestea sunt "
-#~ "importante!"
-
-#~ msgid "Make sure both the make and the name are in English."
-#~ msgstr "Asigurați-vă că marca și numele sunt în limba engleză."
-
-#~ msgid "Make sure the make is not written again in the name field."
-#~ msgstr "Asigurați-vă că marca nu este scrisă din nou în câmpul numelui."
-
-#~ msgid ""
-#~ "Make sure there are no words other than the simple make and name of the "
-#~ "product."
-#~ msgstr ""
-#~ "Asigurați-vă că nu există alte cuvinte decât marca simplă și numele "
-#~ "produsului."
-
-#~ msgid "Make sure the words are properly capitalized."
-#~ msgstr "Asigurați-vă că sunt bine capitalizate cuvintele."
-
-#~ msgid "Here's some good examples:"
-#~ msgstr "Aici sunt câteva exemple bune:"
-
-#~ msgid "And here's some bad examples, that need fixing, and why:"
-#~ msgstr ""
-#~ "Și aici sunt niște exemple proaste, care au nevoie de corectare, și de ce:"
-
-#~ msgid ""
-#~ "The name of the telescope is not written in English, and that is a "
-#~ "description, not the actual product name. Here I would assume \"80ED\". "
-#~ "Moreover, \"80mm\" is a property of the telescope, not part of its name."
-#~ msgstr ""
-#~ "Numele telescopului nu este scris in engleza si aceea este o descriere, "
-#~ "nu numele produslui.Aici as asuma \"80 ED\". In plus, \"80mm\" este o "
-#~ "proprietate a telescopului, nu o parte a numelui sau."
-
-#~ msgid ""
-#~ "Now let's get to work, good luck and thank you on behalf of the whole "
-#~ "AstroBin community!"
-#~ msgstr ""
-#~ "Acum sa trecem la lucru.Va uram mult noroc si va multumim in numele "
-#~ "comunitatii AstroBin !"
-
-#~ msgid "After you fix an item, another one at random will be offered."
-#~ msgstr "Dupa ce fixezi un item, va fi oferit un altul in mod aleator."
-
-#~ msgid "Already fixed:"
-#~ msgstr "Deja fixate si imbunatatite :"
-
-#~ msgid "Remaining:"
-#~ msgstr "A ramas :"
-
-#~ msgid "Fix"
-#~ msgstr "Fixeaza si imbunatateste"
-
-#~ msgid "Mark as good"
-#~ msgstr "Marcheaza ca bun"
-
-#~ msgid "Skip"
-#~ msgstr "Sari peste"
-
-#~ msgid "Enough for now"
-#~ msgstr "Suficient pentru moment"
-
-#~ msgid "Thanks!"
-#~ msgstr "Multumesc !"
-
-#~ msgid ""
-#~ "Your contribute was very important, and the whole AstroBin community is "
-#~ "grateful."
-#~ msgstr ""
-#~ "Contributia dumneavoasta a fost foarte importanta, si toata comunitatea "
-#~ "AstroBin va este recunoascatoare."
-
-#~ msgid "Upload time"
-#~ msgstr "Timp de incarcare"
-
-#~ msgid "Last login"
-#~ msgstr "Ultima logare"

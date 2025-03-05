@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-04 10:23+0000\n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "PO-Revision-Date: 2012-11-25 18:36+0100\n"
 "Last-Translator: strugar <strugar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1158,9 +1158,6 @@ msgid "Russian"
 msgstr ""
 
 msgid "Belarusian"
-msgstr ""
-
-msgid "Arabic"
 msgstr ""
 
 msgid "Japanese"
@@ -2382,6 +2379,9 @@ msgid "Akan"
 msgstr ""
 
 msgid "Amharic"
+msgstr ""
+
+msgid "Arabic"
 msgstr ""
 
 msgid "Aragonese"
@@ -3943,10 +3943,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                <strong>%(user)s</strong> wants to add you as a collaborator "
-"to this image.\n"
-"            "
+"<strong>%(user)s</strong> wants to add you as a collaborator to this image."
 msgstr ""
 
 #, python-format
@@ -4841,11 +4838,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                AstroBin's Marketplace has <strong>"
-"%(count)s</strong> items similar to what you're\n"
-"                                looking for!\n"
-"                            "
+"AstroBin's Marketplace has <strong>%(count)s</strong> items similar to what "
+"you're looking for!"
 msgstr ""
 
 msgid "Take a look!"
@@ -5434,19 +5428,11 @@ msgid ""
 msgstr ""
 
 msgid ""
-"\n"
-"        If the reason for your inactivity is temporary, please let us know "
-"and we will be happy to reinstate you.\n"
-"    "
+"If the reason for your inactivity is temporary, please let us know and we "
+"will be happy to reinstate you."
 msgstr ""
 
 msgid "Thank you for understanding!"
-msgstr ""
-
-msgid ""
-"\n"
-"    If the reason for your inactivity is temporary, please let us know and "
-"we will be happy to reinstate you.\n"
 msgstr ""
 
 #, python-format
@@ -6504,16 +6490,6 @@ msgid ""
 "The number of images you dismissed, but they ended up being awarded IOTD."
 msgstr ""
 
-msgid ""
-"\n"
-"    Every first day of the month, AstroBin sends you a summary of your "
-"activities as an IOTD/TP staff member. The entire\n"
-"     community is undoubtedly grateful for your contribution to the IOTD/TP "
-"process, and we hope you will keep doing it\n"
-"     with the same passion and dedication. Without further ado, here is your "
-"most recent activity data.\n"
-msgstr ""
-
 msgid "Your IOTD staff member stats"
 msgstr ""
 
@@ -6777,6 +6753,9 @@ msgstr ""
 msgid "Something went wrong, sorry! Please try again."
 msgstr ""
 
+msgid "Translated"
+msgstr ""
+
 msgid "(deleted)"
 msgstr ""
 
@@ -6809,16 +6788,15 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-msgid "Quote this entire post in your reply."
+msgid ""
+"Quote this post in your reply. If you select text, only the selection will "
+"be quoted."
 msgstr ""
 
-msgid "quote"
+msgid "Quote"
 msgstr ""
 
-msgid "You must select some text first."
-msgstr ""
-
-msgid "quote selected"
+msgid "Translate"
 msgstr ""
 
 msgid "Delete post?"
@@ -6845,6 +6823,12 @@ msgid "Share this forum post"
 msgstr ""
 
 msgid "Copy the URL below to share a direct link to this post."
+msgstr ""
+
+msgid "See original"
+msgstr ""
+
+msgid "Translation failed. Please try again later."
 msgstr ""
 
 msgid "Topics you subscribe to"
@@ -6884,9 +6868,6 @@ msgid "Would you like to jump to the new posts since your last visit?"
 msgstr ""
 
 msgid "Click here"
-msgstr ""
-
-msgid "Quote the selected text in your reply"
 msgstr ""
 
 msgid "Topic"
@@ -7742,19 +7723,7 @@ msgstr ""
 msgid "Account suspended"
 msgstr ""
 
-msgid ""
-"\n"
-"                Your account is temporarily or permanently suspended. If you "
-"believe this is in error, please get in touch\n"
-"                using the Help menu.\n"
-"            "
-msgstr ""
-
-msgid ""
-"\n"
-"                This content is not available because the user's account is "
-"suspended.\n"
-"            "
+msgid "This content is not available because the user's account is suspended."
 msgstr ""
 
 msgid ""
@@ -8527,6 +8496,9 @@ msgstr ""
 msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr ""
 
+msgid "Your account has been activated."
+msgstr ""
+
 msgid "Email is required."
 msgstr ""
 
@@ -8541,114 +8513,3 @@ msgstr ""
 #, python-brace-format
 msgid "A new activation email has been sent to {0}."
 msgstr ""
-
-#~ msgid "Back to top"
-#~ msgstr "Povratak na vrh"
-
-#~ msgid "Register with AstroBin"
-#~ msgstr "Registrujte se na AstroBin"
-
-#~ msgid "Guidelines"
-#~ msgstr "Smernice"
-
-#~ msgid "Integration hours, yearly"
-#~ msgstr "Vreme integracije u satima, godišnje"
-
-#~ msgid "Integration hours, monthly"
-#~ msgstr "Vreme integracije u satima, mesečno"
-
-#~ msgid "Integration hours, daily"
-#~ msgstr "Vreme integracije u satima, dnevno"
-
-#~ msgid "Integration hours by gear, yearly"
-#~ msgstr "Vreme integracije po zupčaniku u satima, godišnje"
-
-#~ msgid "Integration hours by gear, monthly"
-#~ msgstr "Vreme integracije po zupčaniku u satima, mesečno"
-
-#~ msgid "Integration hours by gear, daily"
-#~ msgstr "Vreme integracije po zupčaniku u satima, dnevno"
-
-#~ msgid "Uploaded images, yearly"
-#~ msgstr "Uploadovane slike, godišnje"
-
-#~ msgid "Uploaded images, monthly"
-#~ msgstr "Uploadovane slike, mesečno"
-
-#~ msgid "Uploaded images, daily"
-#~ msgstr "Uploadovane slike, dnevno"
-
-#~ msgid "Views, yearly"
-#~ msgstr "Pregleda, godišnje"
-
-#~ msgid "Views, monthly"
-#~ msgstr "Pregleda, mesečno"
-
-#~ msgid "Views, daily"
-#~ msgstr "Pregleda, dnevno"
-
-#~ msgid "Total images"
-#~ msgstr "Ukupno slika"
-
-#~ msgid "Integration hours by camera type"
-#~ msgstr "Vreme integracije u satima, po tipu kamere"
-
-#~ msgid "Number of images by subject type"
-#~ msgstr "Broj slika po subjektu"
-
-#~ msgid "You do not yet have an avatar. Please upload one now."
-#~ msgstr "Još uvek nemate avatar. Molimo Vas da ga uploadujete."
-
-#~ msgid "Previously uploaded"
-#~ msgstr "Ranije uploadovano"
-
-#~ msgid ""
-#~ "<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
-#~ "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
-#~ "integration time."
-#~ msgstr ""
-#~ "<strong>%(total_users)s</strong> korisnika je uploadovalo <strong>"
-#~ "%(total_images)s</strong> slika, sa ukupno <strong>%(total_integration)s</"
-#~ "strong> sati integracije."
-
-#~ msgid "Total integration hours in the last 12 months"
-#~ msgstr "Ukupno vreme integracije u satima, za zadnjih 12 meseci"
-
-#~ msgid "Please wait: the plot is loading..."
-#~ msgstr "Molimo Vas sačekajte: grafikon se učitava..."
-
-#~ msgid "Global distribution of camera types"
-#~ msgstr "Globalna raspodjela vrsta kamera"
-
-#~ msgid "Global distribution of telescope types"
-#~ msgstr "Globalna raspodjela vrsta teleskopa"
-
-#~ msgid "CCD vs DLSR: the global trend"
-#~ msgstr "CCD protiv DLSR: globalni trend"
-
-#~ msgid "Global trend of telescope types"
-#~ msgstr "Globalni trend vrsta teleskopa"
-
-#~ msgid "Timezone"
-#~ msgstr "Vremenska zona"
-
-#~ msgid ""
-#~ "By selecting this, you will see all the dates on AstroBin in your "
-#~ "timezone."
-#~ msgstr ""
-#~ "Ako označite ovo, svi datumi na AstroBinu će biti prikazani u vašoj "
-#~ "vremenskoj zoni"
-
-#~ msgid "Instructions and examples"
-#~ msgstr "Uputstva i primeri"
-
-#~ msgid ""
-#~ "AstroBin's gear database is a little messy: many users have used "
-#~ "different names for the same object, ignoring the suggestions. But don't "
-#~ "worry, we can fix it, and after it's fixed, it shouldn't get very messy "
-#~ "in the future."
-#~ msgstr ""
-#~ "AstroBinova baza podataka o opremi je donekle nesređena: mnogi korisnici "
-#~ "su uneli različita imena za isti objekat, ignorišući sugestije. Ali ne "
-#~ "brinite, možemo to da rešimo, i nakon toga ne bi trebalo da bude "
-#~ "nesređena ubuduće."

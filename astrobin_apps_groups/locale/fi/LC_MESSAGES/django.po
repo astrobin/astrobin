@@ -1,10 +1,22 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: fi\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Vain seuraavat kategoriat tukevat automaattihyväksyntää: Ammatillinen "
+"verkosto, Klubi tai yhdistys, Internet-yhteisö, Ystävät tai kumppanit, "
+"Maantieteellinen alue"
 
 #, fuzzy
 msgid "Autosubmission deactivation strategy"
@@ -75,6 +87,18 @@ msgid "Other"
 msgstr "Muut"
 
 #, fuzzy
+msgid "Publication"
+msgstr "Julkaisu"
+
+#, fuzzy
+msgid "Title"
+msgstr "Otsikko"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Avain/arvo-tunniste"
+
+#, fuzzy
 msgid "Name"
 msgstr "Nimi"
 
@@ -89,6 +113,24 @@ msgstr "HTML-tunnisteet ovat sallittuja."
 #, fuzzy
 msgid "Category"
 msgstr "Kategoria"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Oletuskuvien lajittelu"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Kuvan avain/arvo-tunnisteen lajittelu"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Jos kuvat on lajiteltu avain/arvo-tunnisteen mukaan, ilmoita mikä. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Lue "
+"lisää.<\\/a>"
 
 #, fuzzy
 msgid "Public group"
@@ -126,8 +168,28 @@ msgstr ""
 "jotka on nimenomaisesti lähetetty niihin."
 
 #, fuzzy
+msgid "Forum notice"
+msgstr "Foorumihuomautus"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Kirjoita 'Foorumihuomautus', joka näytetään 'uuden aiheen' lomakkeen "
+"yläpuolella. Käytä tätä viestiä foorumien sääntöjen, "
+"vastuuvapauslausekkeiden tai tärkeiden tietojen viestittämiseen käyttäjille "
+"ennen kuin he luovat uuden viestin. Varmista, että viestisi on selkeä ja "
+"ytimekäs."
+
+#, fuzzy
 msgid "Last activity"
 msgstr "Viimeisin aktiviteetti"
+
+#, fuzzy
+msgid "Date created"
+msgstr "Luontipäivämäärä"
 
 #, fuzzy
 msgid "Members"
@@ -186,6 +248,10 @@ msgid "Cancel"
 msgstr "Peruuta"
 
 #, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Älä lisää yli 100 kuvaa kerralla, kiitos!"
+
+#, fuzzy
 msgid "Delete group?"
 msgstr "Poista ryhmä?"
 
@@ -234,6 +300,10 @@ msgid "Moderate join requests"
 msgstr "Moderoi liittymispyyntöjä"
 
 #, fuzzy
+msgid "Sort images"
+msgstr "Lajittele kuvat"
+
+#, fuzzy
 msgid "This group is public"
 msgstr "Tämä ryhmä on julkinen"
 
@@ -265,20 +335,18 @@ msgstr "Kutsutut käyttäjät"
 msgid "Join requests"
 msgstr "Liittymispyynnöt"
 
-#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"Ryhmä luotiin %(date_created)s, omistajana <a href=\"%(owner_url)s\">%(owner)"
-"s</a>, luokiteltu <strong>%(category)s</strong>."
+"Ryhmä luotiin %(date_created)s, omistajana <a href=\"%(owner_url)s\">"
+"%(owner)s</a>, luokiteltu <strong>%(category)s</strong>."
 
 #, fuzzy
 msgid "Group forum"
 msgstr "Ryhmäfoorumi"
 
-#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
@@ -294,10 +362,6 @@ msgstr "Näytä kaikki"
 #, fuzzy
 msgid "New topic"
 msgstr "Uusi aihe"
-
-#, fuzzy
-msgid "Please join the group to view its forum."
-msgstr "Liity ryhmään nähdäksesi sen foorumin."
 
 #, fuzzy
 msgid ""
@@ -372,34 +436,36 @@ msgid "Sort"
 msgstr "Lajittele"
 
 #, fuzzy
-msgid "Date created"
-msgstr "Luontipäivämäärä"
+msgid "Search"
+msgstr "Haku"
 
 #, fuzzy
-msgid "Your private groups"
-msgstr "Yksityiset ryhmäsi"
+msgid "Private groups you own"
+msgstr "Yksityiset ryhmät, joita omistat"
 
 #, fuzzy
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr "Omistat, olet jäsen tai sinut on kutsuttu näihin yksityisiin ryhmiin."
+msgid "Private groups you are a member of"
+msgstr "Yksityiset ryhmät, joiden jäsen olet"
 
 #, fuzzy
-msgctxt "group"
-msgid "Create private group"
-msgstr "Luo yksityinen ryhmä"
+msgid "Private groups you are invited to"
+msgstr "Yksityiset ryhmät, joihin olet kutsuttu"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Julkiset ryhmät, joita omistat"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Julkiset ryhmät, joiden jäsen olet"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Julkiset ryhmät, joihin olet kutsuttu"
 
 #, fuzzy
 msgid "Public groups"
 msgstr "Julkiset ryhmät"
-
-#, fuzzy
-msgid "Open to the whole community."
-msgstr "Avoin koko yhteisölle."
-
-#, fuzzy
-msgctxt "group"
-msgid "Create public group"
-msgstr "Luo julkinen ryhmä"
 
 #, fuzzy
 msgid "No groups available."
@@ -486,6 +552,14 @@ msgid "This group has no join requests."
 msgstr "Tässä ryhmässä ei ole liittymispyyntöjä."
 
 #, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Jotain meni pieleen, yritä myöhemmin uudelleen."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Kirjoita viestisi tänne..."
+
+#, fuzzy
 msgid "You cannot add images that are not yours!"
 msgstr "Et voi lisätä kuvia, jotka eivät ole sinun!"
 
@@ -526,103 +600,3 @@ msgstr "Olet jättänyt ryhmän"
 #, fuzzy
 msgid "Form saved"
 msgstr "Lomake tallennettu"
-
-#, fuzzy
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Vain seuraavat kategoriat tukevat automaattihyväksyntää: Ammatillinen "
-"verkosto, Klubi tai yhdistys, Internet-yhteisö, Ystävät tai kumppanit, "
-"Maantieteellinen alue"
-
-#, fuzzy
-msgid "Publication"
-msgstr "Julkaisu"
-
-#, fuzzy
-msgid "Title"
-msgstr "Otsikko"
-
-#, fuzzy
-msgid "Key/value tag"
-msgstr "Avain/arvo-tunniste"
-
-#, fuzzy
-msgid "Default image sorting"
-msgstr "Oletuskuvien lajittelu"
-
-#, fuzzy
-msgid "Image key/value tag sorting"
-msgstr "Kuvan avain/arvo-tunnisteen lajittelu"
-
-#, fuzzy
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Jos kuvat on lajiteltu avain/arvo-tunnisteen mukaan, ilmoita mikä. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Lue "
-"lisää.<\\/a>"
-
-#, fuzzy
-msgid "Search"
-msgstr "Haku"
-
-#, fuzzy
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Älä lisää yli 100 kuvaa kerralla, kiitos!"
-
-#, fuzzy
-msgid "Sort images"
-msgstr "Lajittele kuvat"
-
-#, fuzzy
-msgid "Private groups you own"
-msgstr "Yksityiset ryhmät, joita omistat"
-
-#, fuzzy
-msgid "Private groups you are a member of"
-msgstr "Yksityiset ryhmät, joiden jäsen olet"
-
-#, fuzzy
-msgid "Private groups you are invited to"
-msgstr "Yksityiset ryhmät, joihin olet kutsuttu"
-
-#, fuzzy
-msgid "Public groups you own"
-msgstr "Julkiset ryhmät, joita omistat"
-
-#, fuzzy
-msgid "Public groups you are a member of"
-msgstr "Julkiset ryhmät, joiden jäsen olet"
-
-#, fuzzy
-msgid "Public groups you are invited to"
-msgstr "Julkiset ryhmät, joihin olet kutsuttu"
-
-#, fuzzy
-msgid "Forum notice"
-msgstr "Foorumihuomautus"
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Kirjoita 'Foorumihuomautus', joka näytetään 'uuden aiheen' lomakkeen "
-"yläpuolella. Käytä tätä viestiä foorumien sääntöjen, "
-"vastuuvapauslausekkeiden tai tärkeiden tietojen viestittämiseen käyttäjille "
-"ennen kuin he luovat uuden viestin. Varmista, että viestisi on selkeä ja "
-"ytimekäs."
-
-#, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Jotain meni pieleen, yritä myöhemmin uudelleen."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Kirjoita viestisi tänne..."

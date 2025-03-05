@@ -4,10 +4,10 @@
 
 {% trans "Hey!" %}
 
-{% blocktrans %}
+{% blocktrans  trimmed %}
     Every first day of the month, AstroBin sends you a summary of your activities as an IOTD/TP staff member. The entire
-     community is undoubtedly grateful for your contribution to the IOTD/TP process, and we hope you will keep doing it
-     with the same passion and dedication. Without further ado, here is your most recent activity data.
+    community is undoubtedly grateful for your contribution to the IOTD/TP process, and we hope you will keep doing it
+    with the same passion and dedication. Without further ado, here is your most recent activity data.
 {% endblocktrans %}
 
 {% trans "Period" %}: {{ stats.period_start }} - {{ stats.period_end }} UTC

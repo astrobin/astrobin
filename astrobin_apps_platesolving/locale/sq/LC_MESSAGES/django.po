@@ -1,10 +1,238 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: sq\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, fuzzy
+msgid "Very Large Field (>30 degrees)"
+msgstr "Fushë shumë e madhe (>30 gradë)"
+
+#, fuzzy
+msgid "Large Field (15-30 degrees)"
+msgstr "Fushë e madhe (15-30 gradë)"
+
+#, fuzzy
+msgid "Medium Field (4-15 degrees)"
+msgstr "Fusha Mesatare (4-15 gradë)"
+
+#, fuzzy
+msgid "Small Field (1-4 degrees)"
+msgstr "Fusha e Vogël (1-4 gradë)"
+
+#, fuzzy
+msgid "Very Small Field (<1 degree)"
+msgstr "Fusha Shumë e Vogël (<1 gradë)"
+
+#, fuzzy
+msgid "Small"
+msgstr "E vogël"
+
+#, fuzzy
+msgid "Medium"
+msgstr "Mesatar"
+
+#, fuzzy
+msgid "Large"
+msgstr "E madhe"
+
+#, fuzzy
+msgid "Sample raw frame (max 100 MB)"
+msgstr "Mostra e kornizës së papërpunuar (maksimum 100 MB)"
+
+#, fuzzy
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+"Për të përmirësuar saktësinë e zgjidhjes suaj të pllakës edhe më tej, të "
+"lutem ngarko një nga skedarët XISF ose FITS nga grupi yt të të dhënave. "
+"Skedarët e tillë zakonisht kanë data dhe kohë që do t'i lejojnë AstroBin të "
+"llogarisë ephemeridet e trupave të sistemit diellor dhe të gjejë planetet "
+"dhe asteroidët në imazhin tuaj (nëse gjithashtu shtoni informacionin e "
+"vendndodhjes).<br/><br/>Për saktësi maksimale, rekomandohet që të përdorni "
+"formatin e hapur dhe natyror XISF të PixInsight. Mëso më shumë rreth XISF "
+"këtu:<br/><br/><a href=\"https://pixinsight.com/xisf/\" target=\"_blank"
+"\">https://pixinsight.com/xisf/</a><br/><br/><strong>Të lutem vëre:<strong> "
+"është shumë e rëndësishme që skedari XISF ose FITS që ngarkoni të jetë i "
+"përputhur me imazhin tuaj të përpunuar, përndryshe anotimet e objekteve nuk "
+"do të përputhen. Për të përmirësuar shanset tuaja për një zgjidhje të saktë "
+"të pllakës, kalibroni skedarin tuaj në mënyrën e zakonshme (errësirë/bias/"
+"flats) por mos e shtrini."
+
+#, fuzzy
+msgid "Scaled font size"
+msgstr "Madhësia e shkronjave të shkallëzuara"
+
+#, fuzzy
+msgid "Font size of the annotations on your main image page"
+msgstr "Madhësia e shkronjave të anotimeve në faqen kryesore të imazhit tuaj"
+
+#, fuzzy
+msgid "Show equatorial grid"
+msgstr "Trego rrjetin ekuatorial"
+
+#, fuzzy
+msgid "Show ecliptic"
+msgstr "Shfaq ekliptikën"
+
+#, fuzzy
+msgid "Show galactic equator"
+msgstr "Shfaq ekuatorin galaktik"
+
+#, fuzzy
+msgid "Show constellation borders"
+msgstr "Trego kufijtë e konstelacioneve"
+
+#, fuzzy
+msgid "Show constellation lines"
+msgstr "Trego linjat e konstelacioneve"
+
+#, fuzzy
+msgid "Show named stars"
+msgstr "Trego yjet e emëruar"
+
+#, fuzzy
+msgid "Show HD stars"
+msgstr "Shfaq yjet HD"
+
+#, fuzzy
+msgid ""
+"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
+"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
+msgstr ""
+"Ky katalog përdor të dhëna nga Katalogu i Kompiluara të 2.5 milion yjeve "
+"(Kharchenko+ 2009), katalogu VizieR: I/280B."
+
+#, fuzzy
+msgid "Max. magnitude"
+msgstr "Magnituda maksimale"
+
+#, fuzzy
+msgid ""
+"Only HD stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Vetëm yjet HD deri në këtë magnitudë do të shfaqen. Nëse e lini bosh, do të "
+"përdoret vlera e paracaktuar e katalogut."
+
+#, fuzzy
+msgid "Show Messier objects"
+msgstr "Trego objektet Messier"
+
+#, fuzzy
+msgid "Show NGC and IC objects"
+msgstr "Trego objektet NGC dhe IC"
+
+#, fuzzy
+msgid "Show VdB objects"
+msgstr "Trego objektet VdB"
+
+#, fuzzy
+msgid "Show Sharpless objects"
+msgstr "Trego objektet Sharpless"
+
+#, fuzzy
+msgid "Show Barnard objects"
+msgstr "Trego objektet Barnard"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+"Trego objektet nga Katalogu i Nebulave të Ndritshme të Lynds (LBN) (Lynds "
+"1965)"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+"Trego objektet nga Katalogu i Nebulave të Errëta të Lynds (LDN) (Lynds 1962)"
+
+#, fuzzy
+msgid "Show PGC objects"
+msgstr "Trego objektet PGC"
+
+#, fuzzy
+msgid "Show planets"
+msgstr "Trego planetet"
+
+#, fuzzy
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+"Disponohet vetëm nëse imazhi yt ka të paktën një kohë akuzimi dhe një "
+"vendndodhje të saktë"
+
+#, fuzzy
+msgid "Show asteroids"
+msgstr "Trego asteroidët"
+
+#, fuzzy
+msgid "Show GCVS stars"
+msgstr "Trego yjet GCVS"
+
+#, fuzzy
+msgid "General Catalog of Variable Stars"
+msgstr "Katalogu i Përgjithshëm i Yjeve Variabël"
+
+#, fuzzy
+msgid ""
+"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Vetëm yjet GCVS deri në këtë magnitudë do të shfaqen. Nëse e lini bosh, do "
+"të përdoret vlera e paracaktuar e katalogut."
+
+#, fuzzy
+msgid "Show Tycho-2 catalog"
+msgstr "Trego katalogun Tycho-2"
+
+#, fuzzy
+msgid ""
+"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Vetëm yjet Tycho-2 deri në këtë magnitudë do të shfaqen. Nëse e lini bosh, "
+"do të përdoret vlera e paracaktuar e katalogut."
+
+#, fuzzy
+msgid "Show CGPN objects"
+msgstr "Trego objektet CGPN"
+
+#, fuzzy
+msgid "Show quasars"
+msgstr "Trego kuasarët"
+
+#, fuzzy
+msgid "Publicly visible astrometry.net submission"
+msgstr "Dorëzimi i astrometrisë.net që është publikisht i dukshëm"
+
+#, fuzzy
+msgid ""
+"If checked, the astrometry.net submission will be publicly visible. If you "
+"leave this unchecked,you won't be able to see the full log of the astrometry."
+"net submission, but the image will stillbe plate-solved and annotated."
+msgstr ""
+"Nëse është e kontrolluar, dorëzimi i astrometrisë.net do të jetë publikisht "
+"i dukshëm. Nëse e lini të pa kontrolluar, nuk do të jeni në gjendje të "
+"shihni logun e plotë të dorëzimit të astrometrisë.net, por imazhi do të jetë "
+"akoma i zgjidhur dhe i annotuar."
 
 #, fuzzy
 msgid "Perform a blind solve"
@@ -79,155 +307,73 @@ msgstr ""
 "gradëve të pozicionit të dhënë RA dhe dec."
 
 #, fuzzy
-msgid "Small"
-msgstr "E vogël"
-
-#, fuzzy
-msgid "Medium"
-msgstr "Mesatar"
-
-#, fuzzy
-msgid "Large"
-msgstr "E madhe"
-
-#, fuzzy
-msgid "Sample raw frame (max 100 MB)"
-msgstr "Mostra e kornizës së papërpunuar (maksimum 100 MB)"
+msgid "Downsample factor"
+msgstr "Faktori i reduktimit"
 
 #, fuzzy
 msgid ""
-"To improve the accuracy of your plate-solution even further, please upload "
-"one of the XISF or FITS files from your data set. Such files normally have "
-"date and time headers that will allow AstroBin to calculate solar system "
-"body ephemerides and find planets and asteroids in your image (provided you "
-"also add location information to it).<br/><br/>For maximum accuracy, it's "
-"recommended that you use PixInsight's native and open format XISF. Learn "
-"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
-"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
-"note:</strong> it's very important that the XISF or FITS file you upload is "
-"aligned to your processed image, otherwise the object annotations will not "
-"match. To improve your chances at a successful accurate plate-solution, "
-"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+"Downsample (bin) your image by this factor before performing source "
+"detection. This often helps with saturated images, noisy images, and large "
+"images. 2 and 4 are commonly-useful values."
 msgstr ""
-"Për të përmirësuar saktësinë e zgjidhjes suaj të pllakës edhe më tej, të "
-"lutem ngarko një nga skedarët XISF ose FITS nga grupi yt të të dhënave. "
-"Skedarët e tillë zakonisht kanë data dhe kohë që do t'i lejojnë AstroBin të "
-"llogarisë ephemeridet e trupave të sistemit diellor dhe të gjejë planetet "
-"dhe asteroidët në imazhin tuaj (nëse gjithashtu shtoni informacionin e "
-"vendndodhjes).<br/><br/>Për saktësi maksimale, rekomandohet që të përdorni "
-"formatin e hapur dhe natyror XISF të PixInsight. Mëso më shumë rreth XISF "
-"këtu:<br/><br/><a href=\"https://pixinsight.com/xisf/\" target=\"_blank\">"
-"https://pixinsight.com/xisf/</a><br/><br/><strong>Të lutem vëre:<strong> "
-"është shumë e rëndësishme që skedari XISF ose FITS që ngarkoni të jetë i "
-"përputhur me imazhin tuaj të përpunuar, përndryshe anotimet e objekteve nuk "
-"do të përputhen. Për të përmirësuar shanset tuaja për një zgjidhje të saktë "
-"të pllakës, kalibroni skedarin tuaj në mënyrën e zakonshme "
-"(errësirë/bias/flats) por mos e shtrini."
+"Reduktoni (bin) imazhin tuaj me këtë faktor para se të kryeni detektimin e "
+"burimeve. Kjo shpesh ndihmon me imazhe të ngopura, imazhe me zhurmë dhe "
+"imazhe të mëdha. 2 dhe 4 janë vlera të zakonshme të dobishme."
 
 #, fuzzy
-msgid "Scaled font size"
-msgstr "Madhësia e shkronjave të shkallëzuara"
-
-#, fuzzy
-msgid "Font size of the annotations on your main image page"
-msgstr "Madhësia e shkronjave të anotimeve në faqen kryesore të imazhit tuaj"
-
-#, fuzzy
-msgid "Show equatorial grid"
-msgstr "Trego rrjetin ekuatorial"
-
-#, fuzzy
-msgid "Show constellation borders"
-msgstr "Trego kufijtë e konstelacioneve"
-
-#, fuzzy
-msgid "Show constellation lines"
-msgstr "Trego linjat e konstelacioneve"
-
-#, fuzzy
-msgid "Show named stars"
-msgstr "Trego yjet e emëruar"
-
-#, fuzzy
-msgid "Show Messier objects"
-msgstr "Trego objektet Messier"
-
-#, fuzzy
-msgid "Show NGC and IC objects"
-msgstr "Trego objektet NGC dhe IC"
-
-#, fuzzy
-msgid "Show VdB objects"
-msgstr "Trego objektet VdB"
-
-#, fuzzy
-msgid "Show Sharpless objects"
-msgstr "Trego objektet Sharpless"
-
-#, fuzzy
-msgid "Show Barnard objects"
-msgstr "Trego objektet Barnard"
-
-#, fuzzy
-msgid "Show PGC objects"
-msgstr "Trego objektet PGC"
-
-#, fuzzy
-msgid "Show planets"
-msgstr "Trego planetet"
+msgid "Use SExtractor"
+msgstr "Përdorni SExtractor"
 
 #, fuzzy
 msgid ""
-"Only available if your image at least an acquisition time and an accurate "
-"location"
+"Use the SourceExtractor program to detect stars, not Nova's built-in program."
 msgstr ""
-"Disponohet vetëm nëse imazhi yt ka të paktën një kohë akuzimi dhe një "
-"vendndodhje të saktë"
+"Përdorni programin SourceExtractor për të detektuar yje, jo programin e "
+"ndërtuar të Nova."
 
 #, fuzzy
-msgid "Show asteroids"
-msgstr "Trego asteroidët"
+msgid "Missing"
+msgstr "Mungon"
 
 #, fuzzy
-msgid "Show GCVS stars"
-msgstr "Trego yjet GCVS"
+msgid "Basic pending"
+msgstr "Në pritje të bazës"
 
 #, fuzzy
-msgid "General Catalog of Variable Stars"
-msgstr "Katalogu i Përgjithshëm i Yjeve Variabël"
+msgid "Basic failed"
+msgstr "Dështim i bazës"
 
 #, fuzzy
-msgid "Show Tycho-2 catalog"
-msgstr "Trego katalogun Tycho-2"
+msgid "Basic success"
+msgstr "Sukses i bazës"
 
 #, fuzzy
-msgid "Show CGPN objects"
-msgstr "Trego objektet CGPN"
+msgid "Advanced pending"
+msgstr "Në pritje të avancuar"
+
+#, fuzzy
+msgid "Advanced failed"
+msgstr "Dështim i avancuar"
+
+#, fuzzy
+msgid "Advanced success"
+msgstr "Sukses i avancuar"
+
+#, fuzzy
+msgid "Loading..."
+msgstr "Po ngarkohet..."
 
 #, fuzzy
 msgid "Getting plate-solving status, please wait..."
 msgstr "Duke marrë statusin e zgjidhjes së pllakës, të lutem prit..."
 
 #, fuzzy
-msgid "Plate-solving starting, please do not leave this page..."
-msgstr "Zgjidhja e pllakës po fillon, të lutem mos e lë këtë faqe..."
+msgid "AstroBin is plate-solving this image with Astrometry.net..."
+msgstr "AstroBin po zgjidh këtë imazh me Astrometry.net..."
 
 #, fuzzy
-msgid "Advanced plate-solving starting, please do not leave this page..."
-msgstr ""
-"Zgjidhja e avancuar e pllakës po fillon, të lutem mos e lë këtë faqe..."
-
-#, fuzzy
-msgid "Plate-solving started. You may leave this page."
-msgstr "Zgjidhja e pllakës filloi. Mund të largohesh nga kjo faqe."
-
-#, fuzzy
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr "Zgjidhja e avancuar e pllakës filloi. Mund të largohesh nga kjo faqe."
-
-#, fuzzy
-msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr "Zgjidhja e pllakës pothuajse gati, të lutem mos e lë këtë faqe..."
+msgid "AstroBin is plate-solving this image with PixInsight..."
+msgstr "AstroBin po zgjidh këtë imazh me PixInsight..."
 
 #, fuzzy
 msgid "This image could not be plate-solved."
@@ -264,70 +410,18 @@ msgstr ""
 #, fuzzy
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error."
+"reported an internal server error. Please try again later!"
 msgstr ""
 "AstroBin nuk mundi të zgjidhte këtë imazh sepse nova.astrometry.net raportoi "
-"një gabim të brendshëm të serverit."
+"një gabim të brendshëm të serverit. Ju lutemi provoni përsëri më vonë!"
 
 #, fuzzy
 msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an unepexted error."
-msgstr ""
-"AstroBin nuk mundi të zgjidhte këtë imazh sepse nova.astrometry.net raportoi "
-"një gabim të papritur."
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
-msgstr ""
-"Trego objektet nga Katalogu i Nebulave të Ndritshme të Lynds (LBN) (Lynds "
-"1965)"
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr ""
-"Trego objektet nga Katalogu i Nebulave të Errëta të Lynds (LDN) (Lynds 1962)"
-
-#, fuzzy
-msgid "Show quasars"
-msgstr "Trego kuasarët"
-
-#, fuzzy
-msgid "Missing"
-msgstr "Mungon"
-
-#, fuzzy
-msgid "Basic pending"
-msgstr "Në pritje të bazës"
-
-#, fuzzy
-msgid "Basic failed"
-msgstr "Dështim i bazës"
-
-#, fuzzy
-msgid "Basic success"
-msgstr "Sukses i bazës"
-
-#, fuzzy
-msgid "Advanced pending"
-msgstr "Në pritje të avancuar"
-
-#, fuzzy
-msgid "Advanced failed"
-msgstr "Dështim i avancuar"
-
-#, fuzzy
-msgid "Advanced success"
-msgstr "Sukses i avancuar"
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error."
+"AstroBin could not plate-solve this image because of an unexpected error. "
+"Please try again later!"
 msgstr ""
 "AstroBin nuk mundi të zgjidhte këtë imazh për shkak të një gabimi të "
-"papritur."
+"papritur. Ju lutemi provoni përsëri më vonë!"
 
 #, fuzzy
 msgid "n/a"
@@ -352,6 +446,10 @@ msgstr "Duke gjeneruar anotacione të imazhit..."
 #, fuzzy
 msgid "Processing SVG documents..."
 msgstr "Duke procesuar dokumentet SVG..."
+
+#, fuzzy
+msgid "Generating finding charts..."
+msgstr "Duke gjeneruar grafikët e gjetjes..."
 
 #, fuzzy
 msgid "Uploading results..."
@@ -432,362 +530,3 @@ msgstr "Mbyll"
 #, fuzzy
 msgid "Invalid"
 msgstr "Të pavlefshme"
-
-#, fuzzy
-msgid "Generating finding charts..."
-msgstr "Duke gjeneruar grafikët e gjetjes..."
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error. Please try again later!"
-msgstr ""
-"AstroBin nuk mundi të zgjidhte këtë imazh sepse nova.astrometry.net raportoi "
-"një gabim të brendshëm të serverit. Ju lutemi provoni përsëri më vonë!"
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error. "
-"Please try again later!"
-msgstr ""
-"AstroBin nuk mundi të zgjidhte këtë imazh për shkak të një gabimi të "
-"papritur. Ju lutemi provoni përsëri më vonë!"
-
-#, fuzzy
-msgid "Your migration data"
-msgstr "Të dhënat tuaja të migrimit"
-
-#, fuzzy
-msgid "Total amount donated last year"
-msgstr "Shuma totale e dhuruar vitin e kaluar"
-
-#, fuzzy
-msgid "First payment"
-msgstr "Pagesa e parë"
-
-#, fuzzy
-msgid "Price for Premium"
-msgstr "Çmimi për Premium"
-
-#, fuzzy
-msgid "Days covered"
-msgstr "Ditët e mbuluara"
-
-#, fuzzy
-msgid "Premium expiration"
-msgstr "Skadimi i Premium"
-
-#, fuzzy
-msgid "Your donations last year"
-msgstr "Dhurimet tuaja vitin e kaluar"
-
-#, fuzzy
-msgid "Amount"
-msgstr "Shuma"
-
-#, fuzzy
-msgid "Date"
-msgstr "Data"
-
-#, fuzzy
-msgid "Subscription"
-msgstr "Abonimi"
-
-#, fuzzy
-msgid "Migrate donations"
-msgstr "Migro dhurimet"
-
-#, fuzzy
-msgid "Error!"
-msgstr "Gabim!"
-
-#, fuzzy
-msgid ""
-"Sorry, but it looks like you cannot migrate your donations to a Premium "
-"membership."
-msgstr ""
-"Na vjen keq, por duket se nuk mund të migroni dhurimet tuaja në një "
-"anëtarësi Premium."
-
-#, fuzzy
-msgid "You already have a paid membership."
-msgstr "Ju tashmë keni një anëtarësi të paguar."
-
-#, fuzzy
-msgid "We could not find any donations from you last year."
-msgstr "Nuk mundëm të gjejmë asnjë dhurim nga ju vitin e kaluar."
-
-#, fuzzy
-msgid ""
-"Your donations last year were not enough to cover a Premium subscription for "
-"this year."
-msgstr ""
-"Dhurimet tuaja vitin e kaluar nuk ishin të mjaftueshme për të mbuluar një "
-"abonim Premium për këtë vit."
-
-#, fuzzy
-msgid "View the subscription plans"
-msgstr "Shiko planet e abonimit"
-
-#, fuzzy
-msgid ""
-"As you  have made donations during the last year, you may choose to transfer "
-"the amount you donated towards an AstroBin Premium membership. The "
-"membership will have an expiration date proportionate to the amount you "
-"donated."
-msgstr ""
-"Duke qenë se keni bërë dhurime gjatë vitit të kaluar, mund të zgjidhni të "
-"transferoni shumën që keni dhuruar për një anëtarësi Premium në AstroBin. "
-"Anëtarësia do të ketë një datë skadimi proporcionale me shumën që keni "
-"dhuruar."
-
-#, fuzzy
-msgid ""
-"If you are feeling particularly cool and generous, you may choose to "
-"consider your past donations as a contribution to support past efforts, and "
-"pay again for a Premium plan. Up to you!"
-msgstr ""
-"Nëse ndiheni veçanërisht të ftohtë dhe bujar, mund të zgjidhni të "
-"konsideroni dhurimet tuaja të kaluara si një kontribut për të mbështetur "
-"përpjekjet e kaluara, dhe të paguani përsëri për një plan Premium. Në dorën "
-"tuaj!"
-
-#, fuzzy
-msgid "No, I want to pay for Premium"
-msgstr "Jo, dua të paguaj për Premium"
-
-#, fuzzy
-msgid "Success"
-msgstr "Sukses"
-
-#, fuzzy
-msgid "Your migration was successful."
-msgstr "Migrimi juaj ishte i suksesshëm."
-
-#, fuzzy
-msgid "Thanks for supporting AstroBin!"
-msgstr "Faleminderit që mbështetni AstroBin!"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
-msgstr "Abonimi juaj \"%(subscription_name)s\" në AstroBin sapo ka skaduar."
-
-#, fuzzy
-msgid ""
-"When a subscription on AstroBin expires, nothing happens to your images or "
-"any of your content. You are reverted to AstroBin Free and will not be able "
-"to upload new images until you renew, but you may continue to use AstroBin "
-"in all other aspects if you do not have any new images to share at the "
-"moment."
-msgstr ""
-"Kur një abonim në AstroBin skadon, nuk ndodh asgjë me imazhet tuaja ose "
-"ndonjë përmbajtje tjetër. Ju ktheheni në AstroBin Free dhe nuk do të jeni në "
-"gjendje të ngarkoni imazhe të reja deri sa të rinovoni, por mund të vazhdoni "
-"të përdorni AstroBin në të gjitha aspektet e tjera nëse nuk keni imazhe të "
-"reja për të ndarë në këtë moment."
-
-#, fuzzy
-msgid ""
-"When you are ready to renew your subscription, please visit the following "
-"page:"
-msgstr ""
-"Kur jeni gati të rinovoni abonimin tuaj, ju lutemi vizitoni faqen e "
-"mëposhtme:"
-
-#, fuzzy
-msgid "Your AstroBin subscription has just expired"
-msgstr "Abonimi juaj në AstroBin sapo ka skaduar"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
-"week."
-msgstr ""
-"Abonimi juaj \"%(subscription_name)s\" në AstroBin do të skadojë pas një "
-"jave."
-
-#, fuzzy
-msgid ""
-"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
-"still ongoing. Please wait until it is expired. Thank you!"
-msgstr ""
-"JU LUTEM KËRKOJ! Në këtë moment, nuk mund të rinovoni një abonim ndërsa ai "
-"është ende aktiv. Ju lutemi prisni deri sa të skadojë. Faleminderit!"
-
-#, fuzzy
-msgid "Your AstroBin subscription will expire in one week"
-msgstr "Abonimi juaj në AstroBin do të skadojë pas një jave"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will be "
-"automatically renewed in one week."
-msgstr ""
-"Abonimi juaj \"%(subscription_name)s\" në AstroBin do të rinovohet "
-"automatikisht pas një jave."
-
-#, fuzzy
-msgid ""
-"You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically. If your subscription was created the "
-"regular way, via PayPal, then PayPal will attempt to charge your credit card "
-"or retrieve funds that are available in your account."
-msgstr ""
-"Keni një abonim që rinovohet automatikisht në AstroBin, dhe ne do të "
-"përpiqemi ta rinovojmë automatikisht. Nëse abonimi juaj është krijuar në "
-"mënyrën e zakonshme, përmes PayPal, atëherë PayPal do të përpiqet të "
-"ngarkojë kartën tuaj të kreditit ose të marrë fonde që janë të disponueshme "
-"në llogarinë tuaj."
-
-#, fuzzy
-msgid ""
-"If your subscription was created manually via a bank transfer, please get in "
-"touch for a new payment."
-msgstr ""
-"Nëse abonimi juaj është krijuar manualisht përmes një transferi bankar, ju "
-"lutemi kontaktoni për një pagesë të re."
-
-#, fuzzy
-msgid "Thank you!"
-msgstr "Faleminderit!"
-
-#, fuzzy
-msgid "Your AstroBin subscription will be automatically renewed in one week"
-msgstr "Abonimi juaj në AstroBin do të rinovohet automatikisht pas një jave"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will be "
-"automatically renewed in 30 days."
-msgstr ""
-"Abonimi juaj \"%(subscription_name)s\" në AstroBin do të rinovohet "
-"automatikisht pas 30 ditësh."
-
-#, fuzzy
-msgid "Your AstroBin subscription will be automatically renewed in 30 days"
-msgstr "Abonimi juaj në AstroBin do të rinovohet automatikisht pas 30 ditësh"
-
-#, fuzzy
-msgid "Show HD stars"
-msgstr "Shfaq yjet HD"
-
-#, fuzzy
-msgid ""
-"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
-"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
-msgstr ""
-"Ky katalog përdor të dhëna nga Katalogu i Kompiluara të 2.5 milion yjeve "
-"(Kharchenko+ 2009), katalogu VizieR: I/280B."
-
-#, fuzzy
-msgid "Max. magnitude"
-msgstr "Magnituda maksimale"
-
-#, fuzzy
-msgid ""
-"Only HD stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Vetëm yjet HD deri në këtë magnitudë do të shfaqen. Nëse e lini bosh, do të "
-"përdoret vlera e paracaktuar e katalogut."
-
-#, fuzzy
-msgid ""
-"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Vetëm yjet GCVS deri në këtë magnitudë do të shfaqen. Nëse e lini bosh, do "
-"të përdoret vlera e paracaktuar e katalogut."
-
-#, fuzzy
-msgid ""
-"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Vetëm yjet Tycho-2 deri në këtë magnitudë do të shfaqen. Nëse e lini bosh, "
-"do të përdoret vlera e paracaktuar e katalogut."
-
-#, fuzzy
-msgid "Downsample factor"
-msgstr "Faktori i reduktimit"
-
-#, fuzzy
-msgid ""
-"Downsample (bin) your image by this factor before performing source "
-"detection. This often helps with saturated images, noisy images, and large "
-"images. 2 and 4 are commonly-useful values."
-msgstr ""
-"Reduktoni (bin) imazhin tuaj me këtë faktor para se të kryeni detektimin e "
-"burimeve. Kjo shpesh ndihmon me imazhe të ngopura, imazhe me zhurmë dhe "
-"imazhe të mëdha. 2 dhe 4 janë vlera të zakonshme të dobishme."
-
-#, fuzzy
-msgid "Use SExtractor"
-msgstr "Përdorni SExtractor"
-
-#, fuzzy
-msgid ""
-"Use the SourceExtractor program to detect stars, not Nova's built-in program."
-msgstr ""
-"Përdorni programin SourceExtractor për të detektuar yje, jo programin e "
-"ndërtuar të Nova."
-
-#, fuzzy
-msgid "Show ecliptic"
-msgstr "Shfaq ekliptikën"
-
-#, fuzzy
-msgid "Show galactic equator"
-msgstr "Shfaq ekuatorin galaktik"
-
-#, fuzzy
-msgid "Publicly visible astrometry.net submission"
-msgstr "Dorëzimi i astrometrisë.net që është publikisht i dukshëm"
-
-#, fuzzy
-msgid ""
-"If checked, the astrometry.net submission will be publicly visible. If you "
-"leave this unchecked,you won't be able to see the full log of the astrometry."
-"net submission, but the image will stillbe plate-solved and annotated."
-msgstr ""
-"Nëse është e kontrolluar, dorëzimi i astrometrisë.net do të jetë publikisht "
-"i dukshëm. Nëse e lini të pa kontrolluar, nuk do të jeni në gjendje të "
-"shihni logun e plotë të dorëzimit të astrometrisë.net, por imazhi do të jetë "
-"akoma i zgjidhur dhe i annotuar."
-
-#, fuzzy
-msgid "Loading..."
-msgstr "Po ngarkohet..."
-
-#, fuzzy
-msgid "AstroBin is plate-solving this image with Astrometry.net..."
-msgstr "AstroBin po zgjidh këtë imazh me Astrometry.net..."
-
-#, fuzzy
-msgid "AstroBin is plate-solving this image with PixInsight..."
-msgstr "AstroBin po zgjidh këtë imazh me PixInsight..."
-
-#, fuzzy
-msgid "Very Large Field (>30 degrees)"
-msgstr "Fushë shumë e madhe (>30 gradë)"
-
-#, fuzzy
-msgid "Large Field (15-30 degrees)"
-msgstr "Fushë e madhe (15-30 gradë)"
-
-#, fuzzy
-msgid "Medium Field (4-15 degrees)"
-msgstr "Fusha Mesatare (4-15 gradë)"
-
-#, fuzzy
-msgid "Small Field (1-4 degrees)"
-msgstr "Fusha e Vogël (1-4 gradë)"
-
-#, fuzzy
-msgid "Very Small Field (<1 degree)"
-msgstr "Fusha Shumë e Vogël (<1 gradë)"

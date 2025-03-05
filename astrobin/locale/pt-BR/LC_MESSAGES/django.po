@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-04 10:23+0000\n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "PO-Revision-Date: 2014-02-24 20:42+0000\n"
 "Last-Translator: Ayatola <ayatola@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1176,9 +1176,6 @@ msgid "Russian"
 msgstr ""
 
 msgid "Belarusian"
-msgstr ""
-
-msgid "Arabic"
 msgstr ""
 
 msgid "Japanese"
@@ -2413,6 +2410,9 @@ msgid "Akan"
 msgstr ""
 
 msgid "Amharic"
+msgstr ""
+
+msgid "Arabic"
 msgstr ""
 
 msgid "Aragonese"
@@ -3983,10 +3983,7 @@ msgstr "Histograma"
 
 #, python-format
 msgid ""
-"\n"
-"                <strong>%(user)s</strong> wants to add you as a collaborator "
-"to this image.\n"
-"            "
+"<strong>%(user)s</strong> wants to add you as a collaborator to this image."
 msgstr ""
 
 #, python-format
@@ -4900,11 +4897,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                AstroBin's Marketplace has <strong>"
-"%(count)s</strong> items similar to what you're\n"
-"                                looking for!\n"
-"                            "
+"AstroBin's Marketplace has <strong>%(count)s</strong> items similar to what "
+"you're looking for!"
 msgstr ""
 
 msgid "Take a look!"
@@ -5498,19 +5492,11 @@ msgid ""
 msgstr ""
 
 msgid ""
-"\n"
-"        If the reason for your inactivity is temporary, please let us know "
-"and we will be happy to reinstate you.\n"
-"    "
+"If the reason for your inactivity is temporary, please let us know and we "
+"will be happy to reinstate you."
 msgstr ""
 
 msgid "Thank you for understanding!"
-msgstr ""
-
-msgid ""
-"\n"
-"    If the reason for your inactivity is temporary, please let us know and "
-"we will be happy to reinstate you.\n"
 msgstr ""
 
 #, python-format
@@ -6583,16 +6569,6 @@ msgid ""
 "The number of images you dismissed, but they ended up being awarded IOTD."
 msgstr ""
 
-msgid ""
-"\n"
-"    Every first day of the month, AstroBin sends you a summary of your "
-"activities as an IOTD/TP staff member. The entire\n"
-"     community is undoubtedly grateful for your contribution to the IOTD/TP "
-"process, and we hope you will keep doing it\n"
-"     with the same passion and dedication. Without further ado, here is your "
-"most recent activity data.\n"
-msgstr ""
-
 msgid "Your IOTD staff member stats"
 msgstr ""
 
@@ -6856,6 +6832,9 @@ msgstr ""
 msgid "Something went wrong, sorry! Please try again."
 msgstr ""
 
+msgid "Translated"
+msgstr ""
+
 msgid "(deleted)"
 msgstr ""
 
@@ -6888,16 +6867,15 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-msgid "Quote this entire post in your reply."
+msgid ""
+"Quote this post in your reply. If you select text, only the selection will "
+"be quoted."
 msgstr ""
 
-msgid "quote"
+msgid "Quote"
 msgstr ""
 
-msgid "You must select some text first."
-msgstr ""
-
-msgid "quote selected"
+msgid "Translate"
 msgstr ""
 
 msgid "Delete post?"
@@ -6924,6 +6902,12 @@ msgid "Share this forum post"
 msgstr ""
 
 msgid "Copy the URL below to share a direct link to this post."
+msgstr ""
+
+msgid "See original"
+msgstr ""
+
+msgid "Translation failed. Please try again later."
 msgstr ""
 
 msgid "Topics you subscribe to"
@@ -6963,9 +6947,6 @@ msgid "Would you like to jump to the new posts since your last visit?"
 msgstr ""
 
 msgid "Click here"
-msgstr ""
-
-msgid "Quote the selected text in your reply"
 msgstr ""
 
 msgid "Topic"
@@ -7841,19 +7822,7 @@ msgstr ""
 msgid "Account suspended"
 msgstr ""
 
-msgid ""
-"\n"
-"                Your account is temporarily or permanently suspended. If you "
-"believe this is in error, please get in touch\n"
-"                using the Help menu.\n"
-"            "
-msgstr ""
-
-msgid ""
-"\n"
-"                This content is not available because the user's account is "
-"suspended.\n"
-"            "
+msgid "This content is not available because the user's account is suspended."
 msgstr ""
 
 msgid ""
@@ -8630,6 +8599,9 @@ msgstr ""
 msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr ""
 
+msgid "Your account has been activated."
+msgstr ""
+
 msgid "Email is required."
 msgstr ""
 
@@ -8644,491 +8616,3 @@ msgstr ""
 #, python-brace-format
 msgid "A new activation email has been sent to {0}."
 msgstr ""
-
-#~ msgid "Back to top"
-#~ msgstr "Voltar ao topo"
-
-#~ msgid "My settings"
-#~ msgstr "Minhas configurações"
-
-#~ msgid "Register with AstroBin"
-#~ msgstr "Registre-se no AstroBin"
-
-#~ msgid "Contact"
-#~ msgstr "Contato"
-
-#~ msgid ""
-#~ "Sorry, but the page you are looking for is not here. If you expected an "
-#~ "image, this means that the author deleted it."
-#~ msgstr ""
-#~ "Desculpe-nos, mas a página que você procura não existe. Se você esperava "
-#~ "uma imagem, ela provavelmente foi excluída pelo seu autor."
-
-#~ msgid "Avg. Moon age"
-#~ msgstr "Dias desde a última Lua Nova"
-
-#~ msgid "days"
-#~ msgstr "dias"
-
-#~ msgid "Avg. Moon phase"
-#~ msgstr "Fase aproximada da Lua"
-
-#~ msgid "Mean SQM"
-#~ msgstr "Qualidade média do céu (SQM)"
-
-#~ msgid "Guidelines"
-#~ msgstr "Regras"
-
-#~ msgid "The number of dark flat frames."
-#~ msgstr "A quantidade de dark flat frames."
-
-#~ msgid "Edit gear item"
-#~ msgstr "Editar equipamento"
-
-#~ msgid "Please note!"
-#~ msgstr "Atenção!"
-
-#~ msgid ""
-#~ "When you add or edit the make, the name, and the properties of this "
-#~ "product, the data is global and shared between all AstroBin users. Do not "
-#~ "write any information in there that refers to your personal copy of this "
-#~ "product, like \"modded\", \"sold\", \"broken\", \"a present from my aunt"
-#~ "\" and so on. "
-#~ msgstr ""
-#~ "Quando você adiciona ou edita um fabricante, o nome e as propriedades "
-#~ "deste são compartilhadas com todos os usuários do AstroBin. Não escreva "
-#~ "aqui nada referente à sua cópia pessoal deste produto, como \"modificado"
-#~ "\", \"vendido\", \"danificado\", \"presente da minha tia\" e etc."
-
-#~ msgid ""
-#~ "The following information, instead, is personal, and may refer to your "
-#~ "copy of this product."
-#~ msgstr ""
-#~ "Entretanto, a informação seguinte é pessoal e pode ser preenchida com "
-#~ "referências à sua cópia deste produto."
-
-#~ msgid "Add gear item"
-#~ msgstr "Adicionar equipamento"
-
-#~ msgid "The Big Wall"
-#~ msgstr "O Grande Mural"
-
-#~ msgid "Total integration time"
-#~ msgstr "Tempo total de captura"
-
-#~ msgid "hours"
-#~ msgstr "horas"
-
-#~ msgid "Average integration time"
-#~ msgstr "Tempo médio de captura"
-
-#~ msgid "No date specified"
-#~ msgstr "Sem data especificada"
-
-#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-#~ msgstr "Sem lentes ou telescópios, ou sem câmeras especificadas"
-
-#~ msgid "Gear images"
-#~ msgstr "Imagens de equipamentos"
-
-#~ msgid "No subjects specified"
-#~ msgstr "Sem tópico especificado"
-
-#~ msgid "No acquisition details specified"
-#~ msgstr "Sem detalhes de captura especificados"
-
-#~ msgid ""
-#~ "%(user)s commented on your image! Check it out at the following url: "
-#~ "%(url)s"
-#~ msgstr ""
-#~ "%(user)s escreveu um comentário sobre uma imagem sua! Confira através do "
-#~ "seguinte link: %(url)s"
-
-#~ msgid ""
-#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
-#~ msgstr ""
-#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> escreveu um comentário "
-#~ "sobre uma imagem sua!</a>"
-
-#~ msgid "%(user)s commented on your image!"
-#~ msgstr "%(user)s escreveu um comentário sobre uma imagem sua!"
-
-#~ msgid ""
-#~ "%(user)s replied to your comment. Check it out at the following url: "
-#~ "%(url)s"
-#~ msgstr ""
-#~ "%(user)s respondeu ao seu comentário. Confira através do seguinte link: "
-#~ "%(url)s"
-
-#~ msgid ""
-#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
-#~ msgstr ""
-#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> respondeu ao seu comentário."
-#~ "</a>"
-
-#~ msgid "%(user)s replied to your comment."
-#~ msgstr "%(user)s respondeu ao seu comentário."
-
-#~ msgid "Image size"
-#~ msgstr "Tamanho da imagem"
-
-#~ msgid "Full"
-#~ msgstr "Total"
-
-#~ msgid ""
-#~ "Is this too much data for you to handle? Go to the <a class=\"button\" "
-#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</"
-#~ "a>."
-#~ msgstr ""
-#~ "É muita informação para você? Vá para o <a class=\"button\" href="
-#~ "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">formulário "
-#~ "básico</a>."
-
-#~ msgid ""
-#~ "With this form you can input the basic details for the acquisition of "
-#~ "your image. If you want to be more thorough or fill in separate details "
-#~ "for each filter, go to the <a class=\"button\" href="
-#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
-#~ "a>."
-#~ msgstr ""
-#~ "Com este formulário você pode incluir os detalhes básicos da captura "
-#~ "desta imagem. Se quiser ser mais específico ou quiser incluir "
-#~ "separadamente os detalhes para cada filtro, vá para o <a class=\"button\" "
-#~ "href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true"
-#~ "\">formulário avançado</a>."
-
-#~ msgid "Integration hours, yearly"
-#~ msgstr "Horas de captura, anualmente"
-
-#~ msgid "Integration hours, monthly"
-#~ msgstr "Horas de captura, mensalmente"
-
-#~ msgid "Integration hours, daily"
-#~ msgstr "Horas de captura, diariamente"
-
-#~ msgid "Integration hours by gear, yearly"
-#~ msgstr "Horas de captura por equipamento, anualmente"
-
-#~ msgid "Integration hours by gear, monthly"
-#~ msgstr "Horas de captura por equipamento, mensalmente"
-
-#~ msgid "Integration hours by gear, daily"
-#~ msgstr "Horas de captura por equipamento, diariamente"
-
-#~ msgid "Uploaded images, yearly"
-#~ msgstr "Imagens enviadas, anualmente"
-
-#~ msgid "Uploaded images, monthly"
-#~ msgstr "Imagens enviadas, mensalmente"
-
-#~ msgid "Uploaded images, daily"
-#~ msgstr "Imagens enviadas, diariamente"
-
-#~ msgid "Views, yearly"
-#~ msgstr "Visualizações, anualmente"
-
-#~ msgid "Views, monthly"
-#~ msgstr "Visualizações, mensalmente"
-
-#~ msgid "Views, daily"
-#~ msgstr "Visualizações, diariamente"
-
-#~ msgid "Total images"
-#~ msgstr "Total de imagens"
-
-#~ msgid "Integration hours by camera type"
-#~ msgstr "Horas de captura por tipo de câmera"
-
-#~ msgid "Number of images by subject type"
-#~ msgstr "Quantidade de imagens por tipo"
-
-#~ msgid "You do not yet have an avatar. Please upload one now."
-#~ msgstr ""
-#~ "Você ainda não possui uma imagem para o seu perfil. Por favor, envie uma."
-
-#~ msgid "Previously uploaded"
-#~ msgstr "Enviado anteriormente"
-
-#~ msgid "Reset password at %(site_name)s"
-#~ msgstr "Redefinir senha em %(site_name)s"
-
-#~ msgid ""
-#~ "<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
-#~ "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
-#~ "integration time."
-#~ msgstr ""
-#~ "<strong>%(total_users)s</strong> usuários enviaram <strong>"
-#~ "%(total_images)s</strong> imagens, totalizando <strong>"
-#~ "%(total_integration)s</strong> horas de captura."
-
-#~ msgid "Total integration hours in the last 12 months"
-#~ msgstr "Tempo total de captura, em horas, nos últimos 12 meses"
-
-#~ msgid "Please wait: the plot is loading..."
-#~ msgstr "Por favor, aguarde: o gráfico está sendo carregado..."
-
-#~ msgid "Global distribution of camera types"
-#~ msgstr "Distribuição global dos tipos de câmeras"
-
-#~ msgid "Global distribution of telescope types"
-#~ msgstr "Distribuição global dos tipos de telescópios"
-
-#~ msgid "CCD vs DLSR: the global trend"
-#~ msgstr "CCD vs DSLR: tendências globais"
-
-#~ msgid "Global trend of telescope types"
-#~ msgstr "Tendências globais por tipos de telescópio"
-
-#~ msgid ""
-#~ "Hey <strong>%(user)s</strong>! I just wanted to let you know that you "
-#~ "could make these plots more useful if you added all data to your images. "
-#~ "Please make sure by checking whether you have images which lack data <a "
-#~ "href=\"%(user_page)s?public&sub=nodata\">here</a>."
-#~ msgstr ""
-#~ "Ei, <strong>%(user)s</strong>! Eu apenas queria dizer que você poderia "
-#~ "deixar esses gráficos mais úteis, se você adicionasse todas as "
-#~ "informações das suas imagens. Você pode verificar <a href=\"%(user_page)s?"
-#~ "public&sub=nodata\">aqui</a> se possui imagens com falta de informações."
-
-#~ msgid "Total integration hours, plotted against time."
-#~ msgstr "Total de captura em horas, gráfico por tempo."
-
-#~ msgid ""
-#~ "Total integration hours, plotted against time and arranged by imaging "
-#~ "telescopes and lenses, and imaging cameras."
-#~ msgstr ""
-#~ "Total de captura em horas, com gráfico por tempo e distribuído por "
-#~ "telescópios, lentes e câmeras."
-
-#~ msgid "Combined view count for all the user's images, plotted against time."
-#~ msgstr ""
-#~ "Quantidade total de visualizações de todas as imagens do usuário, gráfico "
-#~ "por tempo."
-
-#~ msgid "Image uploads, plotted against time."
-#~ msgstr "Envios de imagens, gráfico por tempo."
-
-#~ msgid "Timezone"
-#~ msgstr "Fuso horário"
-
-#~ msgid ""
-#~ "By selecting this, you will see all the dates on AstroBin in your "
-#~ "timezone."
-#~ msgstr ""
-#~ "Ao selecionar esta opção, você verá todas as datas do AstroBin em seu "
-#~ "fuso horário."
-
-#~ msgid "Acquisition time"
-#~ msgstr "Tempo de captura"
-
-#~ msgid "Message sent"
-#~ msgstr "Mensagem enviada"
-
-#~ msgid "Instructions and examples"
-#~ msgstr "Instruções e exemplos"
-
-#~ msgid ""
-#~ "AstroBin's gear database is a little messy: many users have used "
-#~ "different names for the same object, ignoring the suggestions. But don't "
-#~ "worry, we can fix it, and after it's fixed, it shouldn't get very messy "
-#~ "in the future."
-#~ msgstr ""
-#~ "O banco de dados do AstroBin está um pouco bagunçado: muitos usuários "
-#~ "usam diferentes nomes para o mesmo item, ignorando as sugestões. Mas não "
-#~ "se preocupe, nós podemos corrigir isso, reduzindo esses equívocos."
-
-#~ msgid ""
-#~ "Please read the instructions and the example below, they are important!"
-#~ msgstr ""
-#~ "Por favor, leia as instruções e veja os exemplos abaixo, eles são "
-#~ "importantes!"
-
-#~ msgid ""
-#~ "In a wiki-style collaborative effort, we can all work together, a few "
-#~ "items at a time, to improve the situation. It's very simple! This is what "
-#~ "you need to do:"
-#~ msgstr ""
-#~ "Em um esforço colaborativo, nós podemos trabalhar alguns itens por vez, "
-#~ "para melhorar essa situação. É muito simples! Veja como ajudar:"
-
-#~ msgid "Make sure both the make and the name are in English."
-#~ msgstr ""
-#~ "Certifique-se de ambos os nomes do fabricante e do produto estão em "
-#~ "Inglês."
-
-#~ msgid "Make sure the make is not written again in the name field."
-#~ msgstr ""
-#~ "Certifique-se de que o nome do fabricante não está escrito no campo do "
-#~ "produto."
-
-#~ msgid ""
-#~ "Make sure there are no words other than the simple make and name of the "
-#~ "product."
-#~ msgstr ""
-#~ "Certifique-se de que não existam outras palavras nos campos, apenas os "
-#~ "nomes do fabricante e do produto."
-
-#~ msgid "Make sure the words are properly capitalized."
-#~ msgstr ""
-#~ "Certifique-se de que as palavras estejam escritas com o uso correto de "
-#~ "maiúsculas e minúsculas."
-
-#~ msgid "Here's some good examples:"
-#~ msgstr "Veja aqui alguns bons exemplos:"
-
-#~ msgid "And here's some bad examples, that need fixing, and why:"
-#~ msgstr ""
-#~ "E aqui estão alguns maus exemplos e os motivos da correção ser necessária:"
-
-#~ msgid ""
-#~ "The words are not properly capitalized. It should be \"Meade\" and "
-#~ "\"LX200\"."
-#~ msgstr ""
-#~ "As palavras não fazem uso adequado das caixas alta e baixa. Deveria ser "
-#~ "\"Meade\" e \"LX200\"."
-
-#~ msgid ""
-#~ "The word \"Celestron\" appears also in the name of the product. That "
-#~ "should just be the name of the model, not the make name too."
-#~ msgstr ""
-#~ "A palavra \"Celestron\" também aparece no campo nome do produto, que "
-#~ "deveria conter apenas o modelo, não o fabricante."
-
-#~ msgid ""
-#~ "\"sold\" is an information that refers only to a particular user. Gear "
-#~ "objects are shared among everyone, in the database. The word \"(sold)\" "
-#~ "should be removed."
-#~ msgstr ""
-#~ "\"sold\" (vendido) é uma informação que importa apenas a um único "
-#~ "usuário. Equipamentos são compartilhados entre todos, através do banco de "
-#~ "dados. A palavra \"(sold)\" deve ser removida."
-
-#~ msgid ""
-#~ "\"modified\" is an information that refers only to a particular user. "
-#~ "Gear objects are shared among everyone, in the database. The word "
-#~ "\"(modified)\" should be removed."
-#~ msgstr ""
-#~ "\"modified\" (modificado) é uma informação que importa apenas a um único "
-#~ "usuário. Equipamentos são compartilhados entre todos, através do banco de "
-#~ "dados. A palavra \"(modified)\" deve ser removida."
-
-#~ msgid ""
-#~ "Obviously, the user who created this mount in the database, has it on a "
-#~ "fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you "
-#~ "can only buy on a pier! \"on a fixed pier\" should be removed."
-#~ msgstr ""
-#~ "Obviamente, o usuário que adicionou esta montagem no banco de dados a "
-#~ "montou em um pé fixo. Mas a SkyWatcher não vende nenhuma NEQ-6 que só "
-#~ "pode ser montada em pés fixos. \"on a fixed pier\" deve ser removido."
-
-#~ msgid ""
-#~ "The name of the telescope is not written in English, and that is a "
-#~ "description, not the actual product name. Here I would assume \"80ED\". "
-#~ "Moreover, \"80mm\" is a property of the telescope, not part of its name."
-#~ msgstr ""
-#~ "O nome do telescópio não está escrito em Inglês, além de conter uma "
-#~ "descrição e não o nome real do produto. Aqui eu entendo que seja \"80ED"
-#~ "\". Finalmente, \"80mm\" é uma propriedade, não parte do nome do "
-#~ "telescópio."
-
-#~ msgid ""
-#~ "\"5.4&mu;\" is a property of the CCD, not part of its name. It should be "
-#~ "removed. But sometimes a property can be part of the name of the object, "
-#~ "because it's such a generic name: for example, Newton 8\" f/6 would be "
-#~ "okay, because just \"Newton\" would not be enough."
-#~ msgstr ""
-#~ "\"5.4&mu;\" é uma propriedade do CCD, não parte do seu nome. Deve ser "
-#~ "removido. Mas algumas vezes, a propriedade pode fazer parte do nome, para "
-#~ "evitar um nome muito genérico: por exemplo, Newtoniano 8\" f/6 estaria "
-#~ "correto, porque apenas Newtoniano não seria o suficiente para identificá-"
-#~ "lo."
-
-#~ msgid ""
-#~ "\"CS5\" is the version of Photoshop, but the procut name is just "
-#~ "\"Photoshop\". \"CS5\" should be removed."
-#~ msgstr ""
-#~ "\"CS5\" é a versão, mas o nome do produto é apenas \"Photoshop\". \"CS5\" "
-#~ "deve ser removido."
-
-#~ msgid ""
-#~ "Thanks for reading so far. If you are not sure about how to fix a gear "
-#~ "item, just make assumptions and hope you are right. Mistakes will surface "
-#~ "eventually."
-#~ msgstr ""
-#~ "Obrigado por ler até aqui. Se você não tiver certeza de como corrigir um "
-#~ "item, apenas use o bom senso e espere que esteja correto. No final, "
-#~ "eventuais equívocos serão notados."
-
-#~ msgid ""
-#~ "Now let's get to work, good luck and thank you on behalf of the whole "
-#~ "AstroBin community!"
-#~ msgstr ""
-#~ "Agora é hora de por a mão na massa, então boa sorte e obrigado, em nome "
-#~ "de toda a comunidade do AstroBin!"
-
-#~ msgid "After you fix an item, another one at random will be offered."
-#~ msgstr ""
-#~ "Depois que você concluir uma correção, um novo item será oferecido "
-#~ "aleatoriamente para avaliação."
-
-#~ msgid "Already fixed:"
-#~ msgstr "Já corrigidos:"
-
-#~ msgid "Remaining:"
-#~ msgstr "Restantes:"
-
-#~ msgid "Fix"
-#~ msgstr "Corrigir"
-
-#~ msgid "Mark as good"
-#~ msgstr "Marcar como correto"
-
-#~ msgid "Skip"
-#~ msgstr "Pular"
-
-#~ msgid "Enough for now"
-#~ msgstr "Chega, por enquanto"
-
-#~ msgid "Thanks!"
-#~ msgstr "Obrigado!"
-
-#~ msgid ""
-#~ "Your contribute was very important, and the whole AstroBin community is "
-#~ "grateful."
-#~ msgstr ""
-#~ "Sua contribuição foi muito importante e toda a comunidade do AstroBin "
-#~ "agradece o seu esforço."
-
-#~ msgid ""
-#~ "You have received a private message on AstroBin!\n"
-#~ "Read it at the following link:\n"
-#~ "\n"
-#~ "http://astrobin.com/messages/inbox/"
-#~ msgstr ""
-#~ "Você recebeu uma mensagem particular no AstroBin!\n"
-#~ "Leia clicando no seguinte link:\n"
-#~ "\n"
-#~ "http://astrobin.com/messages/inbox/"
-
-#~ msgid "Upload time"
-#~ msgstr "Hora do envio"
-
-#~ msgid ""
-#~ "%(originator)s has published a new image revision! Check it out at the "
-#~ "following url: %(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s publicou uma nova versão de uma imagem! Confira através do "
-#~ "seguinte link: %(object_url)s"
-
-#~ msgid ""
-#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
-#~ "a new image revision.</a>"
-#~ msgstr ""
-#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> publicou uma "
-#~ "nova versão de uma imagem.</a>"
-
-#~ msgid "New image revision by %(originator)s"
-#~ msgstr "Nova versão de uma imagem por %(originator)s"
-
-#~ msgid "Last login"
-#~ msgstr "Último login"

@@ -1,641 +1,867 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 11:33+0000\n"
 "Language: fi\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
+#, fuzzy
 msgid ""
 "This edit proposal cannot be approved because an item with this brand and "
 "name already exists. Please reject it."
 msgstr ""
+"Tätä muutosesitystä ei voida hyväksyä, koska saman merkin ja nimen tuote on "
+"jo olemassa. Hyväksy se hylättäväksi."
 
+#, fuzzy
 msgid ""
 "This edit proposal needs to be approved by a moderator because it changes "
 "the name of the item."
 msgstr ""
+"Tätä muutosesitystä on hyväksyttävä moderaattorin toimesta, koska se muuttaa "
+"tuotteen nimeä."
 
+#, fuzzy
 msgid "Currency not supported."
-msgstr ""
+msgstr "Valuutta ei ole tuettu."
 
+#, fuzzy
 msgid "AstroBin couldn't fetch an exchange rate for the selected currency."
-msgstr ""
+msgstr "AstroBin ei voinut hakea vaihtokurssia valitulle valuutalle."
 
+#, fuzzy
 msgid "Invalid condition."
-msgstr ""
+msgstr "Virheellinen tila."
 
+#, fuzzy
 msgid "Someone else is working on this item right now. Please try again later."
 msgstr ""
+"Joku muu työskentelee tämän kohteen parissa juuri nyt. Yritä myöhemmin "
+"uudelleen."
 
+#, fuzzy
 msgid "Computer"
-msgstr ""
+msgstr "Tietokone"
 
+#, fuzzy
 msgid "Dew mitigation"
-msgstr ""
+msgstr "Kasteen vähentäminen"
 
+#, fuzzy
 msgid "Field derotator / camera rotator"
-msgstr ""
+msgstr "Kenttäderotointi / kamerarotointi"
 
+#, fuzzy
 msgid "Filter wheel"
-msgstr ""
+msgstr "Suodatinpyörä"
 
+#, fuzzy
 msgid "Flat box"
-msgstr ""
+msgstr "Tasoituskehys"
 
+#, fuzzy
 msgid "Focal modifier / field corrector"
-msgstr ""
+msgstr "Fokaalimuunnin / kenttäkorjaaja"
 
+#, fuzzy
 msgid "Focuser"
-msgstr ""
+msgstr "Fokuseri"
 
+#, fuzzy
 msgid "Off-axis guider"
-msgstr ""
+msgstr "Off-axis ohjaaja"
 
+#, fuzzy
 msgid "Observatory control"
-msgstr ""
+msgstr "Observatorion ohjaus"
 
+#, fuzzy
 msgid "Observatory dome"
-msgstr ""
+msgstr "Observatorion kupoli"
 
+#, fuzzy
 msgid "Power distribution"
-msgstr ""
+msgstr "Virran jakelu"
 
+#, fuzzy
 msgid "Weather monitoring"
-msgstr ""
+msgstr "Sään seuranta"
 
+#, fuzzy
 msgid "Mount control"
-msgstr ""
+msgstr "Kannan ohjaus"
 
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "Muu"
 
+#, fuzzy
 msgid "Type"
-msgstr ""
+msgstr "Tyyppi"
 
+#, fuzzy
 msgid "Unknown"
-msgstr ""
+msgstr "Tuntematon"
 
+#, fuzzy
 msgctxt "Pertaining to cameras, e.g. a modified Canon"
 msgid "modified"
-msgstr ""
+msgstr "muokattu"
 
+#, fuzzy
 msgid "cooled"
-msgstr ""
+msgstr "jäähdytetty"
 
+#, fuzzy
 msgid "Dedicated deep-sky camera"
-msgstr ""
+msgstr "Omistettu syvän taivaan kamera"
 
+#, fuzzy
 msgid "General purpose DSLR or mirrorless camera"
-msgstr ""
+msgstr "Yleiskäyttöinen DSLR tai peilittömä kamera"
 
+#, fuzzy
 msgid "Guider/Planetary camera"
-msgstr ""
+msgstr "Ohjauskamera / planeettakamera"
 
+#, fuzzy
 msgid "General purpose video camera"
-msgstr ""
+msgstr "Yleiskäyttöinen videokamera"
 
+#, fuzzy
 msgid "Film camera"
-msgstr ""
+msgstr "Filmikamera"
 
+#, fuzzy
 msgid "Sensor"
-msgstr ""
+msgstr "Sensori"
 
+#, fuzzy
 msgid "Cooled"
-msgstr ""
+msgstr "Jäähdytetty"
 
+#, fuzzy
 msgid "Max. cooling (C)"
-msgstr ""
+msgstr "Max. jäähdytys (C)"
 
+#, fuzzy
 msgid "Back focus (mm)"
-msgstr ""
+msgstr "Takafokus (mm)"
 
+#, fuzzy
 msgid "Yes"
-msgstr ""
+msgstr "Kyllä"
 
+#, fuzzy
 msgid "No"
-msgstr ""
+msgstr "Ei"
 
+#, fuzzy
 msgid "Approved"
-msgstr ""
+msgstr "Hyväksytty"
 
+#, fuzzy
 msgid "Rejected"
-msgstr ""
+msgstr "Hylätty"
 
+#, fuzzy
 msgid "Superseded"
-msgstr ""
+msgstr "Korvattu"
 
+#, fuzzy
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
+#, fuzzy
 msgid "Telescope"
-msgstr ""
+msgstr "Kaukoputki"
 
+#, fuzzy
 msgid "Mount"
-msgstr ""
+msgstr "Kohdistin"
 
+#, fuzzy
 msgid "Filter"
-msgstr ""
+msgstr "Suodatin"
 
+#, fuzzy
 msgid "Accessory"
-msgstr ""
+msgstr "Lisävaruste"
 
+#, fuzzy
 msgid "Software"
-msgstr ""
+msgstr "Ohjelmisto"
 
+#, fuzzy
 msgid "Imaging"
-msgstr ""
+msgstr "Kuvantaminen"
 
+#, fuzzy
 msgid "Guiding"
-msgstr ""
+msgstr "Ohjaus"
 
+#, fuzzy
 msgid "Back order"
-msgstr ""
+msgstr "Takakäynti"
 
+#, fuzzy
 msgid "In stock"
-msgstr ""
+msgstr "Varastossa"
 
+#, fuzzy
 msgid "Out of stock"
-msgstr ""
+msgstr "Loppu varastosta"
 
+#, fuzzy
 msgid "Negative"
-msgstr ""
+msgstr "Negatiivinen"
 
+#, fuzzy
 msgid "Neutral"
-msgstr ""
+msgstr "Neutraali"
 
+#, fuzzy
 msgid "Positive"
-msgstr ""
+msgstr "Positiivinen"
 
+#, fuzzy
 msgid "Seller"
-msgstr ""
+msgstr "Myyjä"
 
+#, fuzzy
 msgid "Buyer"
-msgstr ""
+msgstr "Ostaja"
 
+#, fuzzy
+msgid "For sale"
+msgstr "Myynnissä"
+
+#, fuzzy
+msgid "Wanted"
+msgstr "Etsitään"
+
+#, fuzzy
 msgid "Standard mail"
-msgstr ""
+msgstr "Tavallinen posti"
 
+#, fuzzy
 msgid "Courier"
-msgstr ""
+msgstr "Kuriiri"
 
+#, fuzzy
 msgid "Electronic"
-msgstr ""
+msgstr "Sähköinen"
 
+#, fuzzy
 msgid "Unopened"
-msgstr ""
+msgstr "Avaamaton"
 
+#, fuzzy
 msgid "New"
-msgstr ""
+msgstr "Uusi"
 
+#, fuzzy
 msgid "Used"
-msgstr ""
+msgstr "Käytetty"
 
+#, fuzzy
 msgid "Damaged or defective"
-msgstr ""
+msgstr "Vaurioitunut tai viallinen"
 
+#, fuzzy
 msgid "Remote data source"
-msgstr ""
+msgstr "Etädata-lähde"
 
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
+#, fuzzy
 msgid "Imaging telescopes or lenses"
-msgstr ""
+msgstr "Kuvantamiskaukoputket tai linssit"
 
+#, fuzzy
 msgid "Guiding telescopes or lenses"
-msgstr ""
+msgstr "Ohjausteleskoopit tai linssit"
 
+#, fuzzy
 msgid "Mounts"
-msgstr ""
+msgstr "Kohdistimet"
 
+#, fuzzy
 msgid "Imaging cameras"
-msgstr ""
+msgstr "Kuvantamiskamerat"
 
+#, fuzzy
 msgid "Guiding cameras"
-msgstr ""
+msgstr "Ohjauskamerat"
 
+#, fuzzy
 msgid "Filters"
-msgstr ""
+msgstr "Suodattimet"
 
+#, fuzzy
 msgid "Accessories"
-msgstr ""
+msgstr "Lisävarusteet"
 
+#, fuzzy
 msgid "Hydrogen-alpha (Hα)"
-msgstr ""
+msgstr "Vety-alfa (Hα)"
 
+#, fuzzy
 msgid "Hydrogen-beta (Hβ)"
-msgstr ""
+msgstr "Vety-beeta (Hβ)"
 
+#, fuzzy
 msgid "Sulfur-II (SII)"
-msgstr ""
+msgstr "Rikki-II (SII)"
 
+#, fuzzy
 msgid "Oxygen-III (OIII)"
-msgstr ""
+msgstr "Happi-III (OIII)"
 
+#, fuzzy
 msgid "Nitrogen-II (NII)"
-msgstr ""
+msgstr "Typpi-II (NII)"
 
+#, fuzzy
 msgid "Ultraviolet (UV)"
-msgstr ""
+msgstr "Ultraääni (UV)"
 
+#, fuzzy
 msgid "Infrared (IR)"
-msgstr ""
+msgstr "Infrapuna (IR)"
 
+#, fuzzy
 msgid "Multiband"
-msgstr ""
+msgstr "Monikaista"
 
+#, fuzzy
 msgid "Light pollution suppression"
-msgstr ""
+msgstr "Valosaasteen vaimennus"
 
+#, fuzzy
 msgid "Luminance/clear (L)"
-msgstr ""
+msgstr "Luminanssi / kirkas (L)"
 
+#, fuzzy
 msgid "Red channel (R)"
-msgstr ""
+msgstr "Punainen kanava (R)"
 
+#, fuzzy
 msgid "Green channel (G)"
-msgstr ""
+msgstr "Vihreä kanava (G)"
 
+#, fuzzy
 msgid "Blue channel (B)"
-msgstr ""
+msgstr "Sininen kanava (B)"
 
+#, fuzzy
 msgid "Neutral density (ND)"
-msgstr ""
+msgstr "Neutraali tiheys (ND)"
 
+#, fuzzy
 msgid "Ultra High Contrast (UHC)"
-msgstr ""
+msgstr "Ultra korkea kontrasti (UHC)"
 
+#, fuzzy
 msgid "Sky glow"
-msgstr ""
+msgstr "Taivaan hohde"
 
+#, fuzzy
 msgid "Solar"
-msgstr ""
+msgstr "Aurinkoinen"
 
+#, fuzzy
 msgid "Lunar"
-msgstr ""
+msgstr "Kuun"
 
+#, fuzzy
 msgid "Planetary"
-msgstr ""
+msgstr "Planeetta"
 
+#, fuzzy
 msgid "Cometary"
-msgstr ""
+msgstr "Komeetta"
 
+#, fuzzy
 msgid "Photometric Ultraviolet"
-msgstr ""
+msgstr "Fotometrinen ultraääni"
 
+#, fuzzy
 msgid "Photometric Blue"
-msgstr ""
+msgstr "Fotometrinen sininen"
 
+#, fuzzy
 msgid "Photometric Visual"
-msgstr ""
+msgstr "Fotometrinen visuaali"
 
+#, fuzzy
 msgid "Photometric Red"
-msgstr ""
+msgstr "Fotometrinen punainen"
 
+#, fuzzy
 msgid "Photometric Infrared"
-msgstr ""
+msgstr "Fotometrinen infrapuna"
 
+#, fuzzy
 msgid "Round"
-msgstr ""
+msgstr "Pyöreä"
 
+#, fuzzy
 msgid "Square"
-msgstr ""
+msgstr "Neliö"
 
+#, fuzzy
 msgid "Rectangular"
-msgstr ""
+msgstr "Suorakulmainen"
 
+#, fuzzy
 msgid "Bandwidth (nm)"
-msgstr ""
+msgstr "Kaistanleveys (nm)"
 
+#, fuzzy
 msgid "Size"
-msgstr ""
+msgstr "Koko"
 
+#, fuzzy
 msgid "Alt-Az (altazimuth)"
-msgstr ""
+msgstr "Alt-Az (altazimuth)"
 
+#, fuzzy
 msgid "Wedged Alt-Az"
-msgstr ""
+msgstr "Viistetty Alt-Az"
 
+#, fuzzy
 msgid "Equatorial"
-msgstr ""
+msgstr "Ekvaattori"
 
+#, fuzzy
 msgid "German equatorial"
-msgstr ""
+msgstr "Saksalainen ekvatoriaalinen"
 
+#, fuzzy
 msgid "Fork"
-msgstr ""
+msgstr "Kahva"
 
+#, fuzzy
 msgid "Dobsonian"
-msgstr ""
+msgstr "Dobson"
 
+#, fuzzy
 msgid "Portable English"
-msgstr ""
+msgstr "Kannettava englanti"
 
+#, fuzzy
 msgid "Star tracker"
-msgstr ""
+msgstr "Tähtiseurain"
 
+#, fuzzy
 msgid "Alt-Alt (altitude-altitude)"
-msgstr ""
+msgstr "Alt-Alt (korkeus-korkeus)"
 
+#, fuzzy
 msgid "Transit"
-msgstr ""
+msgstr "Transit"
 
+#, fuzzy
 msgid "Hexapod"
-msgstr ""
+msgstr "Hexapodi"
 
+#, fuzzy
 msgid "Tripod"
-msgstr ""
+msgstr "Jalusta"
 
+#, fuzzy
 msgid "Dual Alt-Az / Equatorial"
-msgstr ""
+msgstr "Kaksinkertainen Alt-Az / Ekvaattori"
 
+#, fuzzy
 msgid "Weight (kg)"
-msgstr ""
+msgstr "Paino (kg)"
 
+#, fuzzy
 msgid "Payload (kg)"
-msgstr ""
+msgstr "Kuorma (kg)"
 
+#, fuzzy
 msgid "Computerized"
-msgstr ""
+msgstr "Tietokoneistettu"
 
+#, fuzzy
 msgid "Periodic error (arcsec)"
-msgstr ""
+msgstr "Jaksollinen virhe (kaarisekuntia)"
 
+#, fuzzy
 msgid "Periodic error correction"
-msgstr ""
+msgstr "Jaksollisen virheen korjaus"
 
+#, fuzzy
 msgid "Slew speed (deg/sec)"
-msgstr ""
+msgstr "Kääntymisnopeus (astetta/sekunti)"
 
+#, fuzzy
 msgid "Quantum efficiency"
-msgstr ""
+msgstr "Kvantiteetti tehokkuus"
 
+#, fuzzy
 msgid "Pixel size (μm)"
-msgstr ""
+msgstr "Pikselin koko (μm)"
 
+#, fuzzy
 msgid "Pixel width"
-msgstr ""
+msgstr "Pikselin leveys"
 
+#, fuzzy
 msgid "Pixel height"
-msgstr ""
+msgstr "Pikselin korkeus"
 
+#, fuzzy
 msgid "Sensor width (mm)"
-msgstr ""
+msgstr "Anturin leveys (mm)"
 
+#, fuzzy
 msgid "Sensor height (mm)"
-msgstr ""
+msgstr "Anturin korkeus (mm)"
 
+#, fuzzy
 msgid "Full well capacity"
-msgstr ""
+msgstr "Täysi hyvin kapasiteetti"
 
+#, fuzzy
 msgid "Read noise (e-)"
-msgstr ""
+msgstr "Lukuääni (e-)"
 
+#, fuzzy
 msgid "Frame rate"
-msgstr ""
+msgstr "Kehysnopeus"
 
+#, fuzzy
 msgid "Color"
-msgstr ""
+msgstr "Väri"
 
+#, fuzzy
 msgid "Monochromatic"
-msgstr ""
+msgstr "Monokromaattinen"
 
+#, fuzzy
 msgid "Color or mono"
-msgstr ""
+msgstr "Väri tai mono"
 
+#, fuzzy
 msgid "Refractor: achromatic"
-msgstr ""
+msgstr "Refraktori: achromaatinen"
 
+#, fuzzy
 msgid "Refractor: semi-apochromatic"
-msgstr ""
+msgstr "Refraktori: puoliksi apokromaatinen"
 
+#, fuzzy
 msgid "Refractor: apochromatic"
-msgstr ""
+msgstr "Refraktori: apokromaatinen"
 
+#, fuzzy
 msgid "Refractor: non-achromatic Galilean"
-msgstr ""
+msgstr "Refraktori: ei-achromattinen Galilei"
 
+#, fuzzy
 msgid "Refractor: non-achromatic Keplerian"
-msgstr ""
+msgstr "Refraktori: ei-achromattinen Kepler"
 
+#, fuzzy
 msgid "Refractor: superachromat"
-msgstr ""
+msgstr "Refraktori: superachromat"
 
+#, fuzzy
 msgid "Refractor: Petzval"
-msgstr ""
+msgstr "Refraktori: Petzval"
 
+#, fuzzy
 msgid "Reflector: Dall-Kirkham"
-msgstr ""
+msgstr "Reflektor: Dall-Kirkham"
 
+#, fuzzy
 msgid "Reflector: Nasmyth"
-msgstr ""
+msgstr "Reflektor: Nasmyth"
 
+#, fuzzy
 msgid "Reflector: Ritchey Chretien"
-msgstr ""
+msgstr "Reflektor: Ritchey Chretien"
 
+#, fuzzy
 msgid "Reflector: Gregorian"
-msgstr ""
+msgstr "Reflektor: Gregorian"
 
+#, fuzzy
 msgid "Reflector: Herschellian"
-msgstr ""
+msgstr "Reflektor: Herschellian"
 
+#, fuzzy
 msgid "Reflector: Newtonian"
-msgstr ""
+msgstr "Reflektor: Newtonilainen"
 
+#, fuzzy
 msgid "Reflector: Dobsonian"
-msgstr ""
+msgstr "Reflektor: Dobsonian"
 
+#, fuzzy
 msgid "Reflector: classical Cassegrain"
-msgstr ""
+msgstr "Reflektor: klassinen Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Argunov-Cassegrain"
-msgstr ""
+msgstr "Katadioptrinen: Argunov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Klevtsov-Cassegrain"
-msgstr ""
+msgstr "Katadioptrinen: Klevtsov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Lurie-Houghton"
-msgstr ""
+msgstr "Katadioptrinen: Lurie-Houghton"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov"
-msgstr ""
+msgstr "Katadioptrinen: Maksutov"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov-Cassegrain"
-msgstr ""
+msgstr "Katadioptrinen: Maksutov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov-Newtonian"
-msgstr ""
+msgstr "Katadioptrinen: Maksutov-Newtonian"
 
+#, fuzzy
 msgid "Catadioptric: modified Dall-Kirkham"
-msgstr ""
+msgstr "Katadioptrinen: muokattu Dall-Kirkham"
 
+#, fuzzy
 msgid "Catadioptric: Schmidt camera"
-msgstr ""
+msgstr "Katadioptrinen: Schmidt-kamera"
 
+#, fuzzy
 msgid "Catadioptric: Schmidt-Cassegrain"
-msgstr ""
+msgstr "Katadioptrinen: Schmidt-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgstr ""
+msgstr "Katadioptrinen: ACF Schmidt-Cassegrain"
 
-msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
-msgstr ""
+#, fuzzy
+msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
+msgstr "Katadioptrinen: Rowe-Ackermann Schmidt -astrograafi"
 
+#, fuzzy
 msgid "Catadioptric: Riccardi-Honders"
-msgstr ""
+msgstr "Katadioptrinen: Riccardi-Honders"
 
+#, fuzzy
 msgid "Catadioptric: modified Harmer-Wynne"
-msgstr ""
+msgstr "Katadioptrinen: muokattu Harmer-Wynne"
 
+#, fuzzy
 msgid "Camera lens"
-msgstr ""
+msgstr "Kameran objektiivi"
 
+#, fuzzy
 msgid "Binoculars"
-msgstr ""
+msgstr "Kiikarit"
 
+#, fuzzy
 msgid "Aperture (mm)"
-msgstr ""
+msgstr "Aukko (mm)"
 
+#, fuzzy
 msgid "Min. focal length (mm)"
-msgstr ""
+msgstr "Min. polttoväli (mm)"
 
+#, fuzzy
 msgid "Max. focal length (mm)"
-msgstr ""
+msgstr "Maks. polttoväli (mm)"
 
+#, fuzzy
 msgid "Focal length (mm)"
-msgstr ""
+msgstr "Fokaalipituus (mm)"
 
+#, fuzzy
 msgid "A new equipment item requires moderation"
-msgstr ""
+msgstr "Uuden laitteiston kohteen hyväksyntä vaaditaan"
 
+#, fuzzy
 msgid "Equipment item you created was approved"
-msgstr ""
+msgstr "Laitteesi hyväksyttiin"
 
+#, fuzzy
 msgid "Equipment item was assigned to you"
-msgstr ""
+msgstr "Laitteesi on määrätty sinulle"
 
+#, fuzzy
 msgid "Equipment item you created was rejected"
-msgstr ""
+msgstr "Laitteesi, jonka loit, hylättiin"
 
+#, fuzzy
 msgid "Rejected equipment item removed from your image"
-msgstr ""
+msgstr "Hylätty laite poistettiin kuvastasi"
 
+#, fuzzy
 msgid "Equipment item received an edit proposal"
-msgstr ""
+msgstr "Laitteesi sai muokkaus ehdotuksen"
 
+#, fuzzy
 msgid "Your edit proposal was approved"
-msgstr ""
+msgstr "Muokkaus ehdotuksesi hyväksyttiin"
 
+#, fuzzy
 msgid "Edit proposal assigned to you"
-msgstr ""
+msgstr "Muutosesitys on osoitettu sinulle"
 
+#, fuzzy
 msgid "Your edit proposal was rejected"
-msgstr ""
+msgstr "Muokkaus ehdotuksesi hylättiin"
 
+#, fuzzy
 msgid "Approved migration proposal of an equipment item"
-msgstr ""
+msgstr "Hyväksytty siirtoehdotus laitteelle"
 
+#, fuzzy
 msgid "Rejected migration proposal of an equipment item"
-msgstr ""
+msgstr "Hylätty siirtoehdotus laitteelle"
 
+#, fuzzy
 msgid "Ambiguous equipment item removed from presets"
-msgstr ""
+msgstr "Epäselvä laite poistettu esiasetuksista"
 
+#, fuzzy
 msgid "New image from followed equipment item"
-msgstr ""
+msgstr "Uusi kuva seuratuista laitteista"
 
+#, fuzzy
 msgid "New offer for your marketplace listing"
-msgstr ""
+msgstr "Uusi tarjous markkinapaikkailmoituksellesi"
 
+#, fuzzy
 msgid "Your offer for a marketplace listing was recorded"
-msgstr ""
+msgstr "Tarjouksesi markkinapaikan ilmoituksesta on tallennettu"
 
+#, fuzzy
 msgid "Offer for your marketplace listing got updated"
-msgstr ""
+msgstr "Tarjous markkinapaikan ilmoituksellesi on päivitetty"
 
+#, fuzzy
 msgid "Your offer for a marketplace listing was updated"
-msgstr ""
+msgstr "Tarjouksesi markkinapaikkailmoituksessa päivitettiin"
 
+#, fuzzy
 msgid "Marketplace offer accepted by seller"
-msgstr ""
+msgstr "Markkinapaikan tarjous hyväksytty myyjältä"
 
+#, fuzzy
 msgid "Marketplace offer accepted by you"
-msgstr ""
+msgstr "Markkinapaikan tarjous hyväksytty"
 
+#, fuzzy
 msgid "Marketplace offer rejected by seller"
-msgstr ""
+msgstr "Markkinapaikan tarjous hylätty myyjän toimesta"
 
+#, fuzzy
 msgid "Marketplace offer retracted by buyer"
-msgstr ""
+msgstr "Markkinapaikan tarjous peruutettu ostajan toimesta"
 
+#, fuzzy
 msgid "Marketplace offer retracted successfully"
-msgstr ""
+msgstr "Markkinapaikan tarjous peruutettu onnistuneesti"
 
+#, fuzzy
 msgid "Marketplace listing updated"
-msgstr ""
+msgstr "Markkinapaikan ilmoitus päivitetty"
 
+#, fuzzy
 msgid "Marketplace listing deleted"
-msgstr ""
+msgstr "Markkinapaikan ilmoitus poistettu"
 
+#, fuzzy
 msgid "Marketplace listing approved"
-msgstr ""
+msgstr "Markkinapaikan ilmoitus hyväksytty"
 
+#, fuzzy
 msgid "Marketplace listing expired"
-msgstr ""
+msgstr "Markkinapaikan ilmoitus vanhentunut"
 
+#, fuzzy
 msgid "Marketplace listing line item sold"
-msgstr ""
+msgstr "Markkinapaikan ilmoitus myyty"
 
+#, fuzzy
 msgid "Marketplace listing line item reserved"
-msgstr ""
+msgstr "Markkinapaikan ilmoitus varattu"
 
+#, fuzzy
 msgid "New marketplace listing by user you follow"
-msgstr ""
+msgstr "Uusi markkinapaikan ilmoitus käyttäjältä, jota seuraat"
 
+#, fuzzy
 msgid "New marketplace listing for item you follow"
-msgstr ""
+msgstr "Uusi markkinapaikan ilmoitus tuotteelle, jota seuraat"
 
+#, fuzzy
 msgid "Rate the seller for your recent purchase"
-msgstr ""
+msgstr "Arvioi myyjää viimeisestä ostoksestasi"
 
+#, fuzzy
 msgid "Rate the buyer for your recent sale"
-msgstr ""
+msgstr "Arvioi ostajaa viimeisestä myynnistäsi"
 
+#, fuzzy
 msgid "Mark your listing as sold if needed"
-msgstr ""
+msgstr "Merkitse ilmoituksesi myydyksi, jos tarpeen"
 
+#, fuzzy
 msgid "New comment to a marketplace feedback you received"
-msgstr ""
+msgstr "Uusi kommentti markkinapaikan palautteeseen, jonka sait"
 
+#, fuzzy
 msgid "New comment to a marketplace feedback you left"
-msgstr ""
+msgstr "Uusi kommentti markkinapaikan palautteeseen, jonka jätit"
 
+#, fuzzy
 msgid "New marketplace feedback"
-msgstr ""
+msgstr "Uusi markkinapaikan palaute"
 
+#, fuzzy
 msgid "Marketplace feedback updated"
-msgstr ""
+msgstr "Markkinapaikan palaute päivitetty"
 
+#, fuzzy
 msgid "Unspecified"
-msgstr ""
+msgstr "Määrittelemätön"
 
 #, python-format
 msgid ""
 "Equipment item <strong>%(item)s</strong>  has been marked as ambiguous by a "
 "moderator, and removed from your presets."
 msgstr ""
+"Välineen kohde <strong>%(item)s</strong> on merkitty epäselväksi "
+"moderaattorin toimesta ja poistettu asetuksistasi."
 
 #, python-format
 msgid ""
 "This happened because \"%(item)s\" is not specific enough, and unambiguous "
 "variants already exist in the database."
 msgstr ""
+"Tämä tapahtui, koska \"%(item)s\" ei ole tarpeeksi tarkka, ja tietokannassa "
+"on jo olemassa epäselviä versioita."
 
+#, fuzzy
 msgid ""
 "New images cannot be associated with this item anymore, but your past images "
 "have not been modified."
 msgstr ""
+"Uusia kuvia ei voi enää liittää tähän kohteeseen, mutta aikaisemmat kuvasi "
+"eivät ole muuttuneet."
 
 #, python-format
 msgid ""
@@ -643,157 +869,180 @@ msgid ""
 "unambiguous version from the database instead, and then feel free to update "
 "your affected preset by saving it again."
 msgstr ""
+"Seuraavalla kerralla, kun lataat kuvan, joka tarvitsee \"%(item)s\", valitse "
+"tietokannasta selkeä versio ja päivitä sitten asetuksesi tallentamalla se "
+"uudelleen."
 
+#, fuzzy
 msgid "View item"
-msgstr ""
+msgstr "Näytä kohde"
 
+#, fuzzy
 msgid "Thank you for your understanding."
-msgstr ""
+msgstr "Kiitos ymmärryksestäsi."
 
 #, python-format
 msgid ""
 "Equipment item \"%(item)s\" has been marked as ambiguous by a moderator, and "
 "removed from your presets"
 msgstr ""
+"Välineen kohde \"%(item)s\" on merkitty epäselväksi moderaattorin toimesta "
+"ja poistettu asetuksistasi."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets."
 msgstr ""
+"Laitteesi %(_0)s%(item)s%(_1)s on merkitty epäselväksi moderaattorin "
+"toimesta, ja se on poistettu esiasetuksistasi."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets"
 msgstr ""
+"Laitteesi %(_0)s%(item)s%(_1)s on merkitty epäselväksi moderaattorin "
+"toimesta ja poistettu esiasetuksistasi"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> commented a marketplace feedback that "
 "you left."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> kommentoi markkinapaikan palautetta, "
+"jonka jätit."
 
+#, fuzzy
 msgid "View comment"
-msgstr ""
+msgstr "Näytä kommentti"
 
 #, python-format
 msgid "%(user)s commented a marketplace feedback you that left."
-msgstr ""
+msgstr "%(user)s kommentoi markkinapaikan palautetta, jonka jätit."
 
+#, fuzzy
 msgid "Check it out at the following url:"
-msgstr ""
+msgstr "Tarkista se seuraavasta URL-osoitteesta:"
 
 #, python-format
 msgid "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you left."
-msgstr ""
+msgstr "%(_0)s%(user)s%(_1)s kommentoi markkinapaikan palautetta, jonka jätit."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
-msgstr ""
+msgstr "%(_0)s%(user)s%(_1)s kommentoi markkinapaikan palautetta, jonka sait."
 
-#, python-format
-msgid ""
-"\n"
-"    %(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
-"\n"
-msgstr ""
-
+#, fuzzy
 msgid ""
 "You received this notification because you created this equipment item or "
 "this edit proposal."
 msgstr ""
+"Sait tämän ilmoituksen, koska loit tämän välineen tai tämän muokkaus "
+"ehdotuksen."
 
+#, fuzzy
 msgid "The reviewer left the following comment:"
-msgstr ""
+msgstr "Arvioijan jättämä kommentti:"
 
+#, fuzzy
 msgid "View edit proposal"
-msgstr ""
+msgstr "Näytä muokkaus ehdotus"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s."
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hyväksyi muutosesityksen laitteelle %(_0)s%(item)s%(_1)s"
 
-#, python-format
-msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s"
-msgstr ""
-
+#, fuzzy
 msgid "Please review it as soon as possible, thank you!"
-msgstr ""
+msgstr "Ole hyvä ja tarkista se mahdollisimman pian, kiitos!"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s to you for review"
+"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s to you for review"
 msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"    %(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item "
-"%(_0)s%(item)s%(_1)s to you for\n"
-"    review\n"
-msgstr ""
+"%(_0)s%(user)s%(_1)s on antanut muokkaus ehdotuksen laitteelle %(_0)s%(item)s"
+"%(_1)s tarkistettavaksi"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> proposed an edit to the equipment item "
 "<a href=\"%(item_url)s\">%(item)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> ehdotti muokkausta välineen kohteelle "
+"<a href=\"%(item_url)s\">%(item)s</a>."
 
+#, fuzzy
 msgid "Please note"
-msgstr ""
+msgstr "Huomioi"
 
+#, fuzzy
 msgid ""
 "This item has not been approved yet, therefore is not yet officially part of "
 "AstroBin's equipment database. Please review this edit proposal as soon as "
 "possible to prevent the possibility that this item be rejected."
 msgstr ""
+"Tätä kohdetta ei ole vielä hyväksytty, joten se ei ole vielä virallisesti "
+"osa AstroBinin laitekantaa. Tarkista tämä muokkaus ehdotus mahdollisimman "
+"pian, jotta vältetään mahdollisuus, että tämä kohde hylätään."
 
+#, fuzzy
 msgid "Please review it as soon as possible."
-msgstr ""
+msgstr "Tarkista se mahdollisimman pian."
 
+#, fuzzy
 msgid ""
 "You received this notification because you created this equipment item, or "
 "you created/approved/rejected/commented an edit proposal for this item in "
 "the past."
 msgstr ""
+"Sait tämän ilmoituksen, koska loit tämän laitteesi, tai loit/hyväksyit/"
+"hylkäsit/kommentoit muutosesityksen tälle tuotteelle aiemmin."
 
 #, python-format
 msgid "%(user)s proposed an edit to the equipment item \"%(item)s\"."
-msgstr ""
+msgstr "%(user)s ehdotti muokkausta laitteelle \"%(item)s\"."
 
 #, python-format
 msgid ""
 "Please review an edit proposal for equipment item %(_0)s%(item)s%(_1)s by "
 "%(_0)s%(user)s%(_1)s"
 msgstr ""
+"Ole hyvä ja tarkista muokkaus ehdotus laitteelle %(_0)s%(item)s%(_1)s "
+"käyttäjältä %(_0)s%(user)s%(_1)s"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hylkäsi muokkaus ehdotuksen välineen kohteelle %(_0)s"
+"%(item)s%(_1)s."
 
+#, fuzzy
 msgid "This item can now be added to images by anyone on AstroBin."
 msgstr ""
+"Tätä tuotetta voidaan nyt lisätä kuviin kenen tahansa toimesta AstroBinissa."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s approved the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hyväksyi laitekohteen %(_0)s%(item)s%(_1)s, jonka loit"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s assigned the equipment item %(_0)s%(item)s%(_1)s to you "
 "for review"
 msgstr ""
+"%(_0)s%(user)s%(_1)s määräsi välineen kohteen %(_0)s%(item)s%(_1)s "
+"tarkistettavaksi sinulle."
 
 #, python-format
 msgid ""
@@ -801,6 +1050,9 @@ msgid ""
 "used on some of your images on AstroBin, has been migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
+"<em><strong>%(make)s</strong> %(name)s</em>, välineen kohde, jota olet "
+"käyttänyt joissakin kuvissasi AstroBinissa, on siirretty uuteen AstroBin "
+"väline tietokantaan."
 
 #, python-format
 msgid ""
@@ -808,28 +1060,40 @@ msgid ""
 "used on some of your images on AstroBin, could not be migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
+"<em><strong>%(make)s</strong> %(name)s</em>, välineen kohde, jota olet "
+"käyttänyt joissakin kuvissasi AstroBinissa, ei voitu siirtää uuteen AstroBin "
+"väline tietokantaan."
 
+#, fuzzy
 msgid "Reason"
-msgstr ""
+msgstr "Syynä"
 
+#, fuzzy
 msgid "Target item"
-msgstr ""
+msgstr "Kohde tuote"
 
+#, fuzzy
 msgid "If you don't know what this means, please read this:"
-msgstr ""
+msgstr "Jos et tiedä, mitä tämä tarkoittaa, lue tämä:"
 
+#, fuzzy
 msgid ""
 "You can see all your migrations and undo any mistakes on the following page:"
 msgstr ""
+"Voit nähdä kaikki siirrot ja peruuttaa mahdolliset virheet seuraavalta "
+"sivulta:"
 
+#, fuzzy
 msgid "Thanks for your cooperation!"
-msgstr ""
+msgstr "Kiitos yhteistyöstä!"
 
 #, python-format
 msgid ""
 "\"%(make)s %(name)s\", an equipment item that you have used on some of your "
 "images on AstroBin, has been migrated to the new AstroBin Equipment Database."
 msgstr ""
+"\"%(make)s %(name)s\", välineen kohde, jota olet käyttänyt joissakin "
+"kuvissasi AstroBinissa, on siirretty uuteen AstroBin väline tietokantaan."
 
 #, python-format
 msgid ""
@@ -837,508 +1101,686 @@ msgid ""
 "images on AstroBin, could not be migrated to the new AstroBin Equipment "
 "Database."
 msgstr ""
+"\"%(make)s %(name)s\", laite, jota olet käyttänyt joissakin kuvissasi "
+"AstroBinissa, ei voitu siirtää uuteen AstroBin Laitetietokantaan."
 
 #, python-format
 msgid ""
 "%(_0)s%(make)s %(name)s%(_1)s has been migrated to the new AstroBin "
 "Equipment Database"
 msgstr ""
+"%(_0)s%(make)s %(name)s%(_1)s on siirretty uuteen AstroBinin laitekantaan"
 
+#, fuzzy
 msgid "Proposed strategy"
-msgstr ""
+msgstr "Ehdotettu strategia"
 
+#, fuzzy
 msgid "Reviewer's reason"
-msgstr ""
+msgstr "Arvioijan syy"
 
+#, fuzzy
 msgid "Reviewer's comment"
-msgstr ""
+msgstr "Arvioijan kommentti"
 
+#, fuzzy
 msgid ""
 "The equipment item still needs to be migrated to the new database, so please "
 "try again after reading the reason and the comment provided by the reviewer "
 "below."
 msgstr ""
+"Laitekohde tarvitsee vielä siirron uuteen kantaan, joten yritä uudelleen "
+"lukemalla syy ja kommentti, jonka tarkastaja on antanut alla."
 
+#, fuzzy
 msgid "To try again with different parameters, please visit this page:"
-msgstr ""
+msgstr "Jos haluat kokeilla uudelleen eri asetuksilla, käy tällä sivulla:"
 
+#, fuzzy
 msgid "Migration tool"
-msgstr ""
+msgstr "Siirtotyökalu"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)"
-"s%(_1)s that you created"
+"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
+"%(_1)s that you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hylkäsi laite-esityksen %(_0)s%(make)s %(name)s%(_1)s, "
+"jonka loit"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item migration that you created "
 "for %(_0)s%(make)s %(name)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hylkäsi laitteesi siirron, jonka loit %(_0)s%(make)s "
+"%(name)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "This happened because somebody rejected the creation of this equipment item. "
 "Please remember that the AstroBin equipment database is collectively "
 "maintained by the community in order to keep a clean and orderly set of data."
 msgstr ""
+"Tämä tapahtui, koska joku hylkäsi tämän välineen kohteen luomisen. Muista, "
+"että AstroBin väline tietokantaa ylläpidetään yhteisön toimesta, jotta "
+"tiedot pysyvät siisteinä ja järjestyksessä."
 
+#, fuzzy
 msgid "The reviewer cited the following code as the reason for the rejection:"
-msgstr ""
+msgstr "Arvioija mainitsi seuraavan koodin hylkäyksen syynä:"
 
 #, python-format
 msgid ""
-"Since your equipment item was marked as duplicate of <a "
-"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been "
-"updated accordingly, and <strong>you don't need to do anything</strong>."
+"Since your equipment item was marked as duplicate of <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
+"accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
+"Koska laitteesi merkitty kaksinkertaiseksi <a href=\"%(duplicate_of_url)s\">"
+"%(duplicate_of)s</a>, kuvasi on päivitetty vastaavasti, ja <strong>sinun ei "
+"tarvitse tehdä mitään</strong>."
 
+#, fuzzy
 msgid ""
 "Please edit your image and try adding the relevant equipment item again. If "
 "possible, use one of the offered suggestions to avoid creating a duplicate."
 msgstr ""
+"Muokkaa kuvaasi ja yritä lisätä asiaankuuluva välineen kohde uudelleen. Jos "
+"mahdollista, käytä yhtä tarjotuista ehdotuksista välttääksesi duplikaatin "
+"luomisen."
 
 #, python-format
 msgid ""
 "Since your equipment item was marked as duplicate of \"%(duplicate_of)s\", "
 "your image has been updated accordingly, and you don't need to do anything."
 msgstr ""
+"Koska välineen kohteesi merkitty duplikaatiksi \"%(duplicate_of)s\", kuvasi "
+"on päivitetty vastaavasti, eikä sinun tarvitse tehdä mitään."
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
-"s%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
+"%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
+"Välineen kohde %(_0)s%(item)s%(_1)s poistettiin kuvastasi %(_0)s"
+"%(image_title)s%(_1)s ja korvattiin %(_0)s%(duplicate_of)s%(_1)s."
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
-"s%(image_title)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
+"%(image_title)s%(_1)s"
 msgstr ""
+"Välineen kohde %(_0)s%(item)s%(_1)s poistettiin kuvastasi %(_0)s"
+"%(image_title)s%(_1)s."
 
+#, fuzzy
 msgid ""
 "This item has been deleted. Please contact AstroBin if you think this was in "
 "error."
 msgstr ""
+"Tämä kohde on poistettu. Ota yhteyttä AstroBiniin, jos uskot, että tämä oli "
+"virhe."
 
 #, python-format
 msgid ""
-"Your equipment item was marked as a duplicate of <a "
-"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
+"Your equipment item was marked as a duplicate of <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
+"Laitteesi on merkitty kaksinkertaiseksi <a href=\"%(duplicate_of_url)s\">"
+"%(duplicate_of)s</a>. Jos olet lisännyt sen mihin tahansa kuviin, ne on "
+"päivitetty vastaavasti."
 
 #, python-format
 msgid ""
 "Your equipment item was marked as a duplicate of \"%(duplicate_of)s\". If "
 "you added it to any images, they will have been updated accordingly."
 msgstr ""
+"Laitekohteesi merkitään duplikaatiksi \"%(duplicate_of)s\". Jos olet "
+"lisännyt sen mihinkään kuviin, ne on päivitetty vastaavasti."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hylkäsi välineen kohteen %(_0)s%(item)s%(_1)s, jonka "
+"loit."
 
 #, python-format
 msgid ""
 "%(user)s rejected the equipment item %(_0)s%(item)s%(_1)s that you created"
-msgstr ""
+msgstr "%(user)s hylkäsi välineen kohteen %(_0)s%(item)s%(_1)s, jonka loit."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s created the equipment item %(_0)s%(item)s%(_1)s and it "
 "requires moderation"
 msgstr ""
+"%(_0)s%(user)s%(_1)s loi välineen kohteen %(_0)s%(item)s%(_1)s ja se vaatii "
+"moderointia."
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s jätti sinulle palautetta markkinapaikan ilmoituksesta "
+"%(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Feedback details"
-msgstr ""
+msgstr "Palautteen tiedot"
 
+#, fuzzy
 msgid "Listing"
-msgstr ""
+msgstr "Ilmoitus"
 
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Käyttäjä"
 
+#, fuzzy
 msgid "Communication"
-msgstr ""
+msgstr "Viestintä"
 
+#, fuzzy
 msgid "Speed"
-msgstr ""
+msgstr "Nopeus"
 
+#, fuzzy
 msgid "Accuracy of item descriptions"
-msgstr ""
+msgstr "Tuotekuvauksen tarkkuus"
 
+#, fuzzy
 msgid "Packaging quality"
-msgstr ""
+msgstr "Pakkauslaatu"
 
+#, fuzzy
 msgid "Message"
-msgstr ""
+msgstr "Viesti"
 
+#, fuzzy
 msgid "To review and respond to the feedback, please visit the following link:"
-msgstr ""
+msgstr "Voit tarkistaa ja vastata palautteeseen seuraavasta linkistä:"
 
+#, fuzzy
 msgid "View feedback "
-msgstr ""
+msgstr "Näytä palaute"
 
+#, fuzzy
 msgid "To view the listing, please visit the following link:"
-msgstr ""
+msgstr "Voit tarkistaa ilmoituksen seuraavasta linkistä:"
 
+#, fuzzy
 msgid "View listing"
-msgstr ""
+msgstr "Näytä ilmoitus"
 
 #, python-format
 msgid ""
 "%(user)s left you feedback for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(user)s jätti sinulle palautetta markkinapaikan ilmoituksesta %(_0)s"
+"%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s päivitti palautteesi markkinapaikan ilmoituksesta %(_0)s"
+"%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s%(_1)"
-"s"
+"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
+"%(_1)s"
 msgstr ""
+"%(user)s päivitti palautteesi markkinapaikan ilmoituksesta %(_0)s%(listing)s"
+"%(_1)s"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s%(_1)"
-"s"
+"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
+"%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s hyväksyi markkinapaikan ilmoituksesi %(_0)s%(listing)s"
+"%(_1)s"
 
+#, fuzzy
 msgid "The listing is now live. Good luck with your sale!"
-msgstr ""
+msgstr "Ilmoitus on nyt aktiivinen. Onnea myyntiin!"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s julkaisi markkinapaikan ilmoituksen "
+"%(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "You received this notification because you follow this user."
-msgstr ""
+msgstr "Sait tämän ilmoituksen, koska seuraat tätä käyttäjää."
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s poisti markkinapaikan ilmoituksensa "
+"%(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
-"You received this notification because you have an active offer on this "
-"listing, or you follow the listing."
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
 msgstr ""
+"Sait tämän ilmoituksen, koska sinulla on tarjous tässä ilmoituksessa tai "
+"seuraat ilmoitusta."
 
+#, fuzzy
 msgid ""
 "Please note that the seller may only deleted listings without any sold line "
 "items."
 msgstr ""
+"Huomaa, että myyjä voi poistaa vain ilmoituksia, joissa ei ole myytyjä "
+"tuotteita."
 
 #, python-format
 msgid "Your marketplace listing %(_0)s%(listing)s%(_1)s expired"
-msgstr ""
+msgstr "Markkinapaikan ilmoituksesi %(_0)s%(listing)s%(_1)s on vanhentunut"
 
+#, fuzzy
 msgid "You can renew it by clicking the button below."
-msgstr ""
+msgstr "Voit uusia sen napsauttamalla alla olevaa painiketta."
 
+#, fuzzy
 msgid "PS: if you sold items from this listing, please mark them as sold."
 msgstr ""
+"PS: jos olet myynyt tuotteita tästä ilmoituksesta, muista merkitä ne "
+"myydyiksi."
 
+#, fuzzy
 msgid "You can renew it by clicking the link below:"
-msgstr ""
+msgstr "Voit uusia sen napsauttamalla alla olevaa linkkiä:"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
-"s%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)"
-"s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
+"%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
+"%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s julkaisi markkinapaikan ilmoituksen "
+"%(_0)s%(listing)s%(_1)s varusteella, jota seuraat: %(_0)s%(line_item)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted somebody else's offer in their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hyväksyi jonkun toisen tarjouksen "
+"markkinapaikan ilmoituksessa %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "Unfortunately, you cannot make an offer on this listing while it is in a "
 "reserved or sold state."
 msgstr ""
-
-msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
-msgstr ""
+"Valitettavasti et voi tehdä tarjousta tälle ilmoitukselle, kun se on varattu "
+"tai myyty."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s myi tuotteen markkinapaikan "
+"ilmoituksessaan %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Item"
-msgstr ""
+msgstr "Tuote"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s päivitti markkinapaikan ilmoituksensa "
+"%(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "Please note that the seller may only update unsold line items and the global "
 "description or information pertaining the listing. The seller may not change "
 "the price or quantity of sold line items."
 msgstr ""
+"Huomaa, että myyjä voi päivittää vain myymättömiä tuotteita ja ilmoituksen "
+"yleiskuvausta tai tietoja. Myyjä ei voi muuttaa myytyjen tuotteiden hintaa "
+"tai määrää."
 
 #, python-format
 msgid ""
-"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)"
-"s%(_1)s, but you haven't marked the item as sold yet. Please do so as soon "
-"as possible and leave feedback to the buyer."
+"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)s"
+"%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
+"possible and leave feedback to the buyer."
 msgstr ""
+"Äskettäin hyväksyit tarjouksen markkinapaikan ilmoituksesta %(_0)s%(listing)s"
+"%(_1)s, mutta et ole vielä merkinnyt kohdetta myydyksi. Tee se "
+"mahdollisimman pian ja jätä palautetta ostajalle."
 
+#, fuzzy
 msgid "Mark as sold"
-msgstr ""
+msgstr "Merkitse myydyksi"
 
 #, python-format
 msgid ""
-"Don't forget to mark your reserved items as sold in the listing %(_0)"
-"s%(listing)s%(_1)s, if you sold them."
+"Don't forget to mark your reserved items as sold in the listing %(_0)s"
+"%(listing)s%(_1)s, if you sold them."
 msgstr ""
+"Älä unohda merkitä varattuja kohteitasi myydyiksi ilmoituksessa %(_0)s"
+"%(listing)s%(_1)s, jos olet myynyt ne."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hyväksyi tarjouksesi heidän "
+"markkinapaikan ilmoituksestaan %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Offer details"
-msgstr ""
+msgstr "Tarjouksen tiedot"
 
+#, fuzzy
 msgid "Offer amount"
-msgstr ""
+msgstr "Tarjousmäärä"
 
+#, fuzzy
 msgid "Shipping"
-msgstr ""
+msgstr "Toimitus"
 
+#, fuzzy
 msgid ""
 "Now, it's time to finalize the details with the seller. You can communicate "
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
+"Nyt on aika viimeistellä yksityiskohdat myyjän kanssa. Voit kommunikoida ja "
+"järjestää maksun ja toimituksen joko ilmoitussivun kautta tai "
+"yksityisviestillä AstroBinissa."
 
+#, fuzzy
 msgid ""
 "Please note, while AstroBin facilitates a platform for sellers and buyers, "
 "the specifics of transactions are managed directly between parties involved. "
 "We encourage both buyers and sellers to exercise caution and use secure "
 "methods for payment and delivery."
 msgstr ""
+"Huomaa, että vaikka AstroBin tarjoaa alustan myyjille ja ostajille, "
+"transaktioiden yksityiskohdat hoidetaan suoraan osapuolten välillä. "
+"Kehotamme sekä ostajia että myyjiä olemaan varovaisia ja käyttämään "
+"turvallisia maksutapoja ja toimitusmenetelmiä."
 
+#, fuzzy
 msgid ""
 "Thank you for using AstroBin, and we wish you a smooth and successful "
 "transaction!"
 msgstr ""
+"Kiitos, että käytät AstroBinia, ja toivotamme sinulle sujuvaa ja "
+"onnistunutta transaktiota!"
 
 #, python-format
 msgid ""
 "You accepted %(_0)s%(buyer_display_name)s%(_1)s's offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Hyväksyit %(_0)s%(buyer_display_name)s%(_1)s:n tarjouksen markkinapaikan "
+"ilmoituksestasi %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "PLEASE NOTE: listings on AstroBin's marketplace may contain more than one "
 "item. Please review the offer details to ensure you understand which items "
 "the offer is for."
 msgstr ""
+"HUOMAA: ilmoitukset AstroBinin markkinapaikalla voivat sisältää useamman "
+"kuin yhden kohteen. Tarkista tarjousyksityiskohdat varmistaaksesi, että "
+"ymmärrät, mihin kohteisiin tarjous koskee."
 
+#, fuzzy
 msgid ""
 "Now, it's time to finalize the details with the buyer. You can communicate "
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
+"Nyt on aika viimeistellä yksityiskohdat ostajan kanssa. Voit viestiä ja "
+"järjestää maksun ja toimituksen joko ilmoituksen sivun kautta tai AstroBinin "
+"yksityisviestinnässä."
 
+#, fuzzy
 msgid ""
 "PS: once you've completed the transaction, please remember to mark the "
 "listing as sold."
 msgstr ""
+"PS: kun olet suorittanut transaktion, muista merkitä ilmoitus myydyksi."
 
 #, python-format
 msgid "You made an offer for marketplace listing %(_0)s%(listing)s%(_1)s"
-msgstr ""
+msgstr "Teit tarjouksen markkinapaikan ilmoituksesta %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Shipping cost"
-msgstr ""
+msgstr "Toimituskulut"
 
+#, fuzzy
 msgid "You can edit your offer by visiting the listing page."
-msgstr ""
+msgstr "Voit muokata tarjoustasi vierailemalla ilmoitussivulla."
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s made an offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s teki tarjouksen markkinapaikan "
+"ilmoituksellesi %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "To review and respond to the offer, please visit your listing page."
-msgstr ""
+msgstr "Voit tarkistaa ja vastata tarjoukseen vierailemalla ilmoitussivullasi."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s rejected your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s hylkäsi tarjouksesi heidän "
+"markkinapaikan ilmoituksestaan %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "You may contact the seller using the listing's page for more information."
 msgstr ""
+"Voit ottaa yhteyttä myyjään ilmoituksen sivun kautta saadaksesi lisätietoja."
 
 #, python-format
 msgid ""
 "You retracted your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Peruit tarjouksesi markkinapaikan ilmoituksesta %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s retracted their offer for your "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s perui tarjouksensa markkinapaikan "
+"ilmoituksellesi %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "You may contact the prospect buyer using AstroBin's private messaging for "
 "more information."
 msgstr ""
+"Voit ottaa yhteyttä mahdolliseen ostajaan AstroBinin yksityisviestinnän "
+"kautta saadaksesi lisätietoja."
 
+#, fuzzy
 msgid "View buyer's profile"
-msgstr ""
+msgstr "Näytä ostajan profiili"
 
 #, python-format
 msgid "You updated your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Päivitettiin tarjouksesi markkinapaikan ilmoitukseen %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s updated their offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s päivitti tarjoustaan markkinapaikan "
+"ilmoituksellesi %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)"
-"s%(_1)s, and we noticed that you haven't rated the buyer yet."
+"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
+"%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
+"Hei! Myit äskettäin tuotteen markkinapaikan ilmoituksesta %(_0)s%(listing)s"
+"%(_1)s, ja huomasimme, että et ole vielä arvioinut ostajaa."
 
+#, fuzzy
 msgid ""
 "It's important to leave feedback to the buyer, as it helps other users make "
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the buyer."
 msgstr ""
+"On tärkeää antaa palautetta ostajalle, sillä se auttaa muita käyttäjiä "
+"tekemään tietoon perustuvia päätöksiä ostaessaan tuotteita markkinapaikasta. "
+"Ole hyvä ja käytä hetki arvioidaksesi kokemustasi ostajan kanssa."
 
+#, fuzzy
 msgid "Leave feedback"
-msgstr ""
+msgstr "Jätä palaute"
 
 #, python-format
 msgid ""
-"Rate the buyer for your recent purchase from marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"Rate the buyer for your recent purchase from marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"Arvioi ostaja äskettäisestä ostoksestasi markkinapaikan ilmoituksesta %(_0)s"
+"%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"Hi! You recently purchased an item from the marketplace listing %(_0)"
-"s%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)"
-"s%(seller_display_name)s%(_1)s yet."
+"Hi! You recently purchased an item from the marketplace listing %(_0)s"
+"%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
+"%(seller_display_name)s%(_1)s yet."
 msgstr ""
+"Hei! Ostit äskettäin tuotteen markkinapaikan ilmoituksesta %(_0)s%(listing)s"
+"%(_1)s, ja huomasimme, että et ole vielä arvioinut myyjää %(_0)s"
+"%(seller_display_name)s%(_1)s."
 
+#, fuzzy
 msgid ""
 "It's important to leave feedback to the seller, as it helps other users make "
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the seller."
 msgstr ""
+"On tärkeää antaa palautetta myyjälle, sillä se auttaa muita käyttäjiä "
+"tekemään tietoon perustuvia päätöksiä ostaessaan tuotteita markkinapaikasta. "
+"Ole hyvä ja käytä hetki arvioidaksesi kokemustasi myyjän kanssa."
 
 #, python-format
 msgid ""
 "Rate the seller %(_0)s%(seller_display_name)s%(_1)s for your recent purchase "
 "from marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Arvioi myyjää %(_0)s%(seller_display_name)s%(_1)s äskettäisestä ostoksestasi "
+"markkinapaikan ilmoituksesta %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "New image by %(_0)s%(user)s%(_1)s acquired with equipment items you follow"
 msgstr ""
+"Uusi kuva käyttäjältä %(_0)s%(user)s%(_1)s, hankittu varusteilla, joita "
+"seuraat"
 
+#, fuzzy
 msgid ""
 "You received this notification because you follow these equipment items that "
 "were used to acquire this image:"
 msgstr ""
+"Sait tämän ilmoituksen, koska seuraat näitä varusteita, joita käytettiin "
+"tämän kuvan hankkimiseen:"
 
+#, fuzzy
 msgid "This image is a group effort among the following collaborators:"
-msgstr ""
+msgstr "Tämä kuva on ryhmätyötä seuraavien yhteistyökumppaneiden kesken:"
 
+#, fuzzy
 msgid "This image is a group effort with the following collaborators:"
-msgstr ""
+msgstr "Tämä kuva on ryhmätyötä seuraavien yhteistyökumppaneiden kanssa:"
 
+#, fuzzy
 msgid "Details"
-msgstr ""
+msgstr "Yksityiskohdat"
 
+#, fuzzy
 msgid "Users"
-msgstr ""
+msgstr "Käyttäjät"
 
+#, fuzzy
 msgid "Images"
-msgstr ""
+msgstr "Kuvat"
 
+#, fuzzy
 msgid "Please support AstroBin by shopping at one of our partners!"
-msgstr ""
+msgstr "Tue AstroBinia ostamalla yhdeltä kumppaneistamme!"
 
+#, fuzzy
 msgid "Disable retailer integration"
-msgstr ""
+msgstr "Poista jälleenmyyjäintegraatio"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
+msgstr "Osta <strong>%(name)s</strong> kaupasta %(retailer)s"
 
+#, fuzzy
 msgid "Last update"
-msgstr ""
+msgstr "Viimeisin päivitys"
 
+#, fuzzy
 msgid "Stock status unknown"
-msgstr ""
+msgstr "Varastotilanne tuntematon"
 
+#, fuzzy
 msgid "Back ordered"
-msgstr ""
+msgstr "Takaisin tilauksessa"
 
 #, python-format
 msgid "%(x)s in stock"
-msgstr ""
+msgstr "%(x)s varastossa"
 
+#, fuzzy
 msgid "Currently out of stock"
-msgstr ""
+msgstr "Tällä hetkellä loppu varastosta"
 
+#, fuzzy
 msgid "Propose edit"
-msgstr ""
+msgstr "Ehdota muokkausta"
 
+#, fuzzy
 msgid "Forum"
-msgstr ""
+msgstr "Foorumi"
 
+#, fuzzy
 msgid "Sell in the marketplace"
-msgstr ""
+msgstr "Myy markkinapaikalla"
 
+#, fuzzy
 msgid "Close"
-msgstr ""
-
-msgid "For sale"
-msgstr ""
-
-msgid "Wanted"
-msgstr ""
-
-msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
-msgstr ""
+msgstr "Sulje"

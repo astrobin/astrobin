@@ -1,10 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: tr\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, fuzzy
 msgid "Your recurring donation has been canceled"
@@ -52,8 +54,8 @@ msgstr ""
 msgid ""
 "If ended up on this page and are not sure what this is about, please read "
 "everything about it\n"
-"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" "
-"target=\"_blank\">here</a>."
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" target="
+"\"_blank\">here</a>."
 msgstr ""
 "Bu sayfaya geldiyseniz ve bunun ne hakkında olduğunu bilmiyorsanız, lütfen "
 "bununla ilgili her şeyi <a href=\"https://welcome.astrobin.com/voluntary-"
@@ -75,7 +77,6 @@ msgstr "Aylık katkılar"
 msgid "Bronze"
 msgstr "Bronz"
 
-#, fuzzy
 #, python-format
 msgid "CHF %(amount)s / month"
 msgstr "CHF %(amount)s / ay"
@@ -96,7 +97,6 @@ msgstr "Platin"
 msgid "Yearly contributions (cheaper)"
 msgstr "Yıllık katkılar (daha ucuz)"
 
-#, fuzzy
 #, python-format
 msgid "CHF %(amount)s / year"
 msgstr "CHF %(amount)s / yıl"
@@ -119,14 +119,11 @@ msgstr "Banka havalesi ile öde"
 
 #, fuzzy
 msgid ""
-"\n"
-"            Prefer to donate via bank transfer? Please make a deposit of the "
-"amount you wish to donate to the following\n"
-"            bank details. Thanks!\n"
-"        "
+"Prefer to donate via bank transfer? Please make a deposit of the amount you "
+"wish to donate to the following bank details. Thanks!"
 msgstr ""
-"\nBanka havalesi ile bağış yapmayı mı tercih ediyorsunuz? Lütfen bağışlamak "
-"istediğiniz miktarı aşağıdaki banka bilgilerine yatırın. Teşekkürler!"
+"Banka havalesi ile bağış yapmayı mı tercih ediyorsun? Lütfen bağışlamak "
+"istediğin miktarı aşağıdaki banka bilgilerine yatır. Teşekkürler!"
 
 #, fuzzy
 msgid "Cancel your recurring donation"

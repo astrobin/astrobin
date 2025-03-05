@@ -165,7 +165,7 @@
 <div class="subtle-container">
     <h3>{% trans "Pay with a bank transfer" %}</h3>
     <p>
-        {% blocktrans with amount=object.price currency=object.currency email_prefix="<a href='mailto:astrobin@astrobin.com'>" email="astrobin@astrobin.com" email_postfix="</a>" %}
+        {% blocktrans trimmed with amount=object.price currency=object.currency email_prefix="<a href='mailto:astrobin@astrobin.com'>" email="astrobin@astrobin.com" email_postfix="</a>" %}
             Prefer to donate via bank transfer? Please make a deposit of the amount you wish to donate to the following
             bank details. Thanks!
         {% endblocktrans %}

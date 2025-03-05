@@ -701,7 +701,6 @@ def get_officially_supported_languages():
         'it',
         'pt',
         'zh-hans',
-        'ar',
         'el',
         'fi',
         'ja',
@@ -721,7 +720,6 @@ def get_language_name(language_code):
         'en-us': 'English (US)',
         'en-gb': 'English (GB)',
 
-        'ar': 'العربية',
         'de': 'Deutsch',
         'el': 'Ελληνικά',
         'es': 'Español',
@@ -768,7 +766,6 @@ def get_language_code_display(request):
         'en-us': 'EN',
         'en-gb': 'EN (GB)',
 
-        'ar': 'AR',
         'de': 'DE',
         'el': 'EL',
         'es': 'ES',

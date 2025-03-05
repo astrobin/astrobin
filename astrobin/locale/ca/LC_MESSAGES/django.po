@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-04 10:23+0000\n"
+"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "PO-Revision-Date: 2015-11-10 11:53+0000\n"
 "Last-Translator: Xavier <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1173,9 +1173,6 @@ msgstr "Rus"
 
 msgid "Belarusian"
 msgstr ""
-
-msgid "Arabic"
-msgstr "Àrab"
 
 msgid "Japanese"
 msgstr "Japonès"
@@ -2407,6 +2404,9 @@ msgstr ""
 
 msgid "Amharic"
 msgstr ""
+
+msgid "Arabic"
+msgstr "Àrab"
 
 msgid "Aragonese"
 msgstr ""
@@ -3974,10 +3974,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                <strong>%(user)s</strong> wants to add you as a collaborator "
-"to this image.\n"
-"            "
+"<strong>%(user)s</strong> wants to add you as a collaborator to this image."
 msgstr ""
 
 #, python-format
@@ -4871,11 +4868,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                AstroBin's Marketplace has <strong>"
-"%(count)s</strong> items similar to what you're\n"
-"                                looking for!\n"
-"                            "
+"AstroBin's Marketplace has <strong>%(count)s</strong> items similar to what "
+"you're looking for!"
 msgstr ""
 
 msgid "Take a look!"
@@ -5464,19 +5458,11 @@ msgid ""
 msgstr ""
 
 msgid ""
-"\n"
-"        If the reason for your inactivity is temporary, please let us know "
-"and we will be happy to reinstate you.\n"
-"    "
+"If the reason for your inactivity is temporary, please let us know and we "
+"will be happy to reinstate you."
 msgstr ""
 
 msgid "Thank you for understanding!"
-msgstr ""
-
-msgid ""
-"\n"
-"    If the reason for your inactivity is temporary, please let us know and "
-"we will be happy to reinstate you.\n"
 msgstr ""
 
 #, python-format
@@ -6534,16 +6520,6 @@ msgid ""
 "The number of images you dismissed, but they ended up being awarded IOTD."
 msgstr ""
 
-msgid ""
-"\n"
-"    Every first day of the month, AstroBin sends you a summary of your "
-"activities as an IOTD/TP staff member. The entire\n"
-"     community is undoubtedly grateful for your contribution to the IOTD/TP "
-"process, and we hope you will keep doing it\n"
-"     with the same passion and dedication. Without further ado, here is your "
-"most recent activity data.\n"
-msgstr ""
-
 msgid "Your IOTD staff member stats"
 msgstr ""
 
@@ -6807,6 +6783,9 @@ msgstr ""
 msgid "Something went wrong, sorry! Please try again."
 msgstr ""
 
+msgid "Translated"
+msgstr ""
+
 msgid "(deleted)"
 msgstr ""
 
@@ -6839,16 +6818,15 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-msgid "Quote this entire post in your reply."
+msgid ""
+"Quote this post in your reply. If you select text, only the selection will "
+"be quoted."
 msgstr ""
 
-msgid "quote"
+msgid "Quote"
 msgstr ""
 
-msgid "You must select some text first."
-msgstr ""
-
-msgid "quote selected"
+msgid "Translate"
 msgstr ""
 
 msgid "Delete post?"
@@ -6875,6 +6853,12 @@ msgid "Share this forum post"
 msgstr ""
 
 msgid "Copy the URL below to share a direct link to this post."
+msgstr ""
+
+msgid "See original"
+msgstr ""
+
+msgid "Translation failed. Please try again later."
 msgstr ""
 
 msgid "Topics you subscribe to"
@@ -6914,9 +6898,6 @@ msgid "Would you like to jump to the new posts since your last visit?"
 msgstr ""
 
 msgid "Click here"
-msgstr ""
-
-msgid "Quote the selected text in your reply"
 msgstr ""
 
 msgid "Topic"
@@ -7773,19 +7754,7 @@ msgstr ""
 msgid "Account suspended"
 msgstr ""
 
-msgid ""
-"\n"
-"                Your account is temporarily or permanently suspended. If you "
-"believe this is in error, please get in touch\n"
-"                using the Help menu.\n"
-"            "
-msgstr ""
-
-msgid ""
-"\n"
-"                This content is not available because the user's account is "
-"suspended.\n"
-"            "
+msgid "This content is not available because the user's account is suspended."
 msgstr ""
 
 msgid ""
@@ -8564,6 +8533,9 @@ msgstr ""
 msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr ""
 
+msgid "Your account has been activated."
+msgstr ""
+
 msgid "Email is required."
 msgstr ""
 
@@ -8578,149 +8550,3 @@ msgstr ""
 #, python-brace-format
 msgid "A new activation email has been sent to {0}."
 msgstr ""
-
-#~ msgid "Back to top"
-#~ msgstr "Vés amunt"
-
-#~ msgid "My settings"
-#~ msgstr "Els meus ajustaments"
-
-#~ msgid "Contact"
-#~ msgstr "Contacte"
-
-#~ msgid ""
-#~ "Sorry, but the page you are looking for is not here. If you expected an "
-#~ "image, this means that the author deleted it."
-#~ msgstr ""
-#~ "Disculpa, però la pàgina que busques no està aquí, si esperaves trobar "
-#~ "una imatge és possible que l'autor l'hagi esborrada."
-
-#~ msgid ""
-#~ "Something unexpected occurred! We have received an email with technical "
-#~ "details, so we will try to fix the problem as soon as possible. Sorry "
-#~ "about the inconvenience! "
-#~ msgstr ""
-#~ "Ha ocorregut una cosa inesperada! Hem rebut un correu electrònic amb els "
-#~ "detalls tècnics, pel que tractarem de solucionar el problema el més aviat "
-#~ "possible. Disculpeu les molèsties!"
-
-#~ msgid "Avg. Moon age"
-#~ msgstr "Edat lunar mitjana"
-
-#~ msgid "days"
-#~ msgstr "dies"
-
-#~ msgid "Avg. Moon phase"
-#~ msgstr "Fase lunar mitjana"
-
-#~ msgid "Mean SQM"
-#~ msgstr "SQM mitjà"
-
-#~ msgid "Guidelines"
-#~ msgstr "Directrius"
-
-#~ msgid "The number of dark flat frames."
-#~ msgstr "Nombre de dark-flats."
-
-#~ msgid "The Big Wall"
-#~ msgstr "El Gran Mur"
-
-#~ msgid "Total integration time"
-#~ msgstr "Temps total d'integració"
-
-#~ msgid "hours"
-#~ msgstr "hores"
-
-#~ msgid "Average integration time"
-#~ msgstr "Temps d'integració mitjà"
-
-#~ msgid "No date specified"
-#~ msgstr "Sense data"
-
-#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-#~ msgstr "No s'ha especificat telescopis, objectius fotogràfics, o càmeres "
-
-#~ msgid "Gear images"
-#~ msgstr "Imatges d'equip"
-
-#~ msgid "No subjects specified"
-#~ msgstr "No s'ha especificat tema"
-
-#~ msgid "No acquisition details specified"
-#~ msgstr "No s'han especificat detalls d'adquisició"
-
-#~ msgid "Integration hours, yearly"
-#~ msgstr "Hores anuals d'integració"
-
-#~ msgid "Integration hours, monthly"
-#~ msgstr "Hores mensuals d'integració"
-
-#~ msgid "Integration hours, daily"
-#~ msgstr "Hores diàries d'integració"
-
-#~ msgid "Integration hours by gear, yearly"
-#~ msgstr "Hores anuals d'integració amb"
-
-#~ msgid "Integration hours by gear, monthly"
-#~ msgstr "Hores mensuals d'integració amb"
-
-#~ msgid "Integration hours by gear, daily"
-#~ msgstr "Hores diàries d'integració amb"
-
-#~ msgid "Uploaded images, yearly"
-#~ msgstr "Imatges pujades anualment"
-
-#~ msgid "Uploaded images, monthly"
-#~ msgstr "Imatges pujades mensualment"
-
-#~ msgid "Uploaded images, daily"
-#~ msgstr "Imatges pujades diàriamanet"
-
-#~ msgid "Views, yearly"
-#~ msgstr "Visites anuals"
-
-#~ msgid "Views, monthly"
-#~ msgstr "Visites mensuals"
-
-#~ msgid "Views, daily"
-#~ msgstr "Visites diàries"
-
-#~ msgid "Total images"
-#~ msgstr "Total d'imatges"
-
-#~ msgid "Integration hours by camera type"
-#~ msgstr "Hores d'integració per tipus de càmera"
-
-#~ msgid "Number of images by subject type"
-#~ msgstr "Nombre d'imatges per tema"
-
-#~ msgid "Total integration hours in the last 12 months"
-#~ msgstr "Total d'hores integrades als darrers 12 messos"
-
-#~ msgid "Please wait: the plot is loading..."
-#~ msgstr "Espereu mentre s'està carregant la gràfica."
-
-#~ msgid "Global distribution of camera types"
-#~ msgstr "Distribució global de tipus de càmera"
-
-#~ msgid "Global distribution of telescope types"
-#~ msgstr "Distribució global de tipus de telescopi"
-
-#~ msgid "CCD vs DLSR: the global trend"
-#~ msgstr "CCD vs DSLR: tendència global"
-
-#~ msgid "Global trend of telescope types"
-#~ msgstr "Tendència global dels tipus de telescopi"
-
-#~ msgid "Timezone"
-#~ msgstr "Zona horària"
-
-#~ msgid ""
-#~ "By selecting this, you will see all the dates on AstroBin in your "
-#~ "timezone."
-#~ msgstr ""
-#~ "Si selecciones això veuràs totes les dates d'AstroBin a la teva zona "
-#~ "horària."
-
-#~ msgid "Last login"
-#~ msgstr "Darrer accés"
