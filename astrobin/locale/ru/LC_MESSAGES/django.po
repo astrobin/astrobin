@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 10:36+0000\n"
+"POT-Creation-Date: 2025-03-05 11:16+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1155,10 +1155,13 @@ msgstr "Азия"
 msgid "Oceania"
 msgstr "Океания"
 
+#, fuzzy
 msgid ""
 "Your account is temporarily or permanently suspended. If you believe this is "
 "in error, please get in touch using the Help menu."
 msgstr ""
+"Ваш аккаунт временно или навсегда заблокирован. Если вы считаете, что это "
+"ошибка, пожалуйста, свяжитесь с нами через меню Помощи."
 
 msgid "None (All rights reserved)"
 msgstr "Нет (Все права защищены)"
@@ -4634,6 +4637,8 @@ msgstr "Гистограмма"
 msgid ""
 "<strong>%(user)s</strong> wants to add you as a collaborator to this image."
 msgstr ""
+"<strong>%(user)s</strong> хочет добавить вас в качестве соавтора к этому "
+"изображению."
 
 #, python-format
 msgid "%(_0)sLearn more.%(_1)s"
@@ -5736,6 +5741,8 @@ msgid ""
 "AstroBin's Marketplace has <strong>%(count)s</strong> items similar to what "
 "you're looking for!"
 msgstr ""
+"В маркетплейсе AstroBin есть <strong>%(count)s</strong> товаров, похожих на "
+"то, что вы ищете!"
 
 #, fuzzy
 msgid "Take a look!"
@@ -6516,10 +6523,13 @@ msgstr ""
 "Это обеспечит то, чтобы потенциальные кандидаты на IOTD или Топ Выбор не "
 "остались незамеченными, сидя в очереди у неактивного сотрудника."
 
+#, fuzzy
 msgid ""
 "If the reason for your inactivity is temporary, please let us know and we "
 "will be happy to reinstate you."
 msgstr ""
+"Если причина вашей неактивности временная, пожалуйста, дайте нам знать, и мы "
+"с радостью восстановим вас."
 
 #, fuzzy
 msgid "Thank you for understanding!"
@@ -8291,8 +8301,9 @@ msgstr "*** Введите свой ответ здесь ***"
 msgid "Something went wrong, sorry! Please try again."
 msgstr "Что-то пошло не так, извините! Пожалуйста, попробуйте снова."
 
+#, fuzzy
 msgid "Translated"
-msgstr ""
+msgstr "Переведено"
 
 msgid "(deleted)"
 msgstr "(удалено)"
@@ -8330,16 +8341,21 @@ msgstr "Внимание: это сообщение ждет модерации 
 msgid "Edited"
 msgstr "Отредактировано"
 
+#, fuzzy
 msgid ""
 "Quote this post in your reply. If you select text, only the selection will "
 "be quoted."
 msgstr ""
+"Цитируйте этот пост в своем ответе. Если вы выделите текст, будет "
+"процитирован только выделенный фрагмент."
 
+#, fuzzy
 msgid "Quote"
-msgstr ""
+msgstr "Цитировать"
 
+#, fuzzy
 msgid "Translate"
-msgstr ""
+msgstr "Перевести"
 
 msgid "Delete post?"
 msgstr "Удалить сообщение?"
@@ -8373,11 +8389,13 @@ msgstr "Поделиться этим постом на форуме"
 msgid "Copy the URL below to share a direct link to this post."
 msgstr "Скопируйте URL ниже, чтобы поделиться прямой ссылкой на этот пост."
 
+#, fuzzy
 msgid "See original"
-msgstr ""
+msgstr "Смотреть оригинал"
 
+#, fuzzy
 msgid "Translation failed. Please try again later."
-msgstr ""
+msgstr "Ошибка перевода. Пожалуйста, попробуйте позже."
 
 msgid "Topics you subscribe to"
 msgstr "Темы, на которые вы подписаны"
@@ -9544,8 +9562,9 @@ msgstr "Очистить корзину"
 msgid "Account suspended"
 msgstr "Учетная запись приостановлена"
 
+#, fuzzy
 msgid "This content is not available because the user's account is suspended."
-msgstr ""
+msgstr "Этот контент недоступен, так как аккаунт пользователя заблокирован."
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -10529,8 +10548,9 @@ msgstr "Извините, это имя пользователя уже суще
 msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr "Ваш публичный ID и URL профиля. Только буквы, цифры и . / + / - / _."
 
+#, fuzzy
 msgid "Your account has been activated."
-msgstr ""
+msgstr "Ваш аккаунт был активирован."
 
 #, fuzzy
 msgid "Email is required."
