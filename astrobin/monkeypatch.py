@@ -19,7 +19,7 @@ def _get_video_dimensions(file_or_path):
             'ffprobe',
             '-v', 'error',
             '-select_streams', 'v:0',
-            '-show_entries', 'stream=width,height,display_aspect_ratio:stream_tags=rotate',
+            '-show_entries', 'stream=width,height,display_aspect_ratio,sample_aspect_ratio:stream_tags=rotate',
             '-of', 'json',
             path
         ]
@@ -46,6 +46,12 @@ def _get_video_dimensions(file_or_path):
     tags = metadata['streams'][0].get('tags', {})
     rotation = int(tags.get('rotate', 0))  # Default to 0 if no rotate tag
 
+    # Check for SAR and adjust width accordingly
+    sar = metadata['streams'][0].get('sample_aspect_ratio')
+    if sar and sar != '1:1':
+        sar_num, sar_den = map(int, sar.split(':'))
+        width = int(width * sar_num / sar_den)
+
     # If no rotate tag, check display_aspect_ratio (DAR) as a fallback
     if rotation == 0:
         display_aspect_ratio = metadata['streams'][0].get('display_aspect_ratio')
@@ -58,7 +64,7 @@ def _get_video_dimensions(file_or_path):
                 width, height = height, width
 
     # Adjust dimensions if rotation is 90 or 270 degrees
-    if rotation == 90 or rotation == 270:
+    if rotation in (90, 270):
         width, height = height, width
 
     # Cleanup temporary file
