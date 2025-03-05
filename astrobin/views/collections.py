@@ -92,7 +92,7 @@ class UserCollectionsList(UserCollectionsBase, ListView):
         if profile.suspended:
             return render(request, 'user/suspended_account.html')
 
-        if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        if not request.user.is_authenticated or request.user.userprofile.enable_new_gallery_experience:
             return redirect(AppRedirectionService.redirect(f'/u/{username}#gallery'))
 
         return super(UserCollectionsList, self).dispatch(request, *args, **kwargs)
@@ -322,7 +322,7 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
         if profile.suspended:
             return render(request, 'user/suspended_account.html')
 
-        if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        if not request.user.is_authenticated or request.user.userprofile.enable_new_gallery_experience:
             return redirect(
                 AppRedirectionService.redirect(f'/u/{self.object.user.username}?collection={self.object.id}#gallery')
             )

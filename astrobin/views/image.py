@@ -283,9 +283,10 @@ class ImageDetailView(ImageDetailViewBase):
                 raise Http404
 
         if (
-                request.user.is_authenticated and
-                request.user.userprofile.enable_new_gallery_experience and
-                'force-classic-view' not in request.GET
+                (
+                        not request.user.is_authenticated or
+                        request.user.userprofile.enable_new_gallery_experience
+                ) and 'force-classic-view' not in request.GET
         ):
             return redirect(
                 AppRedirectionService.image_redirect(request, image.get_id(), kwargs.get('r'), kwargs.get('cid'))
@@ -671,7 +672,7 @@ class ImageFullView(ImageDetailView):
         if image.moderator_decision == ModeratorDecision.REJECTED:
             raise Http404
 
-        if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        if not request.user.is_authenticated or request.user.userprofile.enable_new_gallery_experience:
             redirect_url = AppRedirectionService.redirect(f'/i/{image.get_id()}')
             if revision_label := kwargs.get('r'):
                 redirect_url += f'?r={revision_label}'

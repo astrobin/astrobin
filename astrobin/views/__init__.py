@@ -842,7 +842,9 @@ def image_edit_platesolving_advanced_settings(request, image_id: Union[str, int]
         )
 
     if request.method == 'POST':
-        form = PlateSolvingAdvancedSettingsForm(request.POST or None, request.FILES or None, instance=advanced_settings, solution=solution)
+        form = PlateSolvingAdvancedSettingsForm(
+            request.POST or None, request.FILES or None, instance=advanced_settings, solution=solution
+        )
         if not form.is_valid():
             messages.error(
                 request,
@@ -1157,9 +1159,10 @@ def me(request):
 @vary_on_cookie
 def user_page(request, username):
     if (
-            request.user.is_authenticated and
-            request.user.userprofile.enable_new_gallery_experience and
-            'force-classic-view' not in request.GET
+            (
+                    not request.user.is_authenticated or
+                    request.user.userprofile.enable_new_gallery_experience
+            ) and 'force-classic-view' not in request.GET
     ):
         return redirect(AppRedirectionService.gallery_redirect(request, username))
 

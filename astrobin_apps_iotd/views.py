@@ -43,7 +43,7 @@ class IotdArchiveView(ListView):
 
     def dispatch(self, request, *args, **kwargs):
         if (
-                request.user.is_authenticated and
+                not request.user.is_authenticated or
                 request.user.userprofile.enable_new_gallery_experience
         ):
             return redirect(AppRedirectionService.redirect('/explore/iotd-tp-archive'))
