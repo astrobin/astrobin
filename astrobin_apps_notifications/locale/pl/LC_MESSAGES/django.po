@@ -1,31 +1,13 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 "
-"&&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
-
-#, fuzzy
-msgid "Notifications"
-msgstr "Powiadomienia"
-
-#, fuzzy
-msgid "You have no notifications."
-msgstr "Nie masz żadnych powiadomień."
-
-#, fuzzy
-msgid "Settings"
-msgstr "Ustawienia"
-
-#, fuzzy
-msgid "Mark all as read"
-msgstr "Oznacz wszystkie jako przeczytane"
-
-#, fuzzy
-msgid "You have no new notifications."
-msgstr "Nie masz nowych powiadomień."
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 &&(n"
+"%100<10||n%100 >= 20)? 1 : 2);\n"
 
 msgid "You have a new follower"
 msgstr "Masz nowego obserwującego"
@@ -39,14 +21,54 @@ msgstr "Nowe wersja zdjęcia od użytkownika którego obserwujesz"
 msgid "Your image was plate-solved"
 msgstr "Astrometria Twojego zdjęcia została wykonana"
 
+#, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "Twoje zdjęcie zostało zatwierdzone przez moderatora"
+
 msgid "Your image could not be plate-solved"
 msgstr "Astrometria Twojego zdjęcia nie może być wykonana"
+
+#, fuzzy
+msgid "Your image was plate-solved (advanced)"
+msgstr "Twoje zdjęcie zostało rozwiązane (zaawansowane)"
+
+#, fuzzy
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Twoje zdjęcie nie mogło zostać rozwiązane (zaawansowane)"
 
 msgid "Your image received a new comment"
 msgstr "Twoje zdjęcie otrzymało nowy komentarz"
 
+#, fuzzy
+msgid "Your edit proposal received a new comment"
+msgstr "Twoja propozycja edycji otrzymała nowy komentarz"
+
+#, fuzzy
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Twój zaplanowany IOTD otrzymał nowy komentarz"
+
+#, fuzzy
+msgid "Your unapproved equipment item received a comment"
+msgstr "Twój niezatwierdzony element sprzętu otrzymał komentarz"
+
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "Twoja lista ma nową prywatną rozmowę"
+
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "Twoja prywatna rozmowa ma nowy komentarz"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "Twoja lista ma nowe pytanie"
+
 msgid "There was a reply to your comment"
 msgstr "Ktoś odpowiedział na Twój komentarz"
+
+#, fuzzy
+msgid "A new comment on your image requires moderation"
+msgstr "Nowy komentarz do twojego zdjęcia wymaga moderacji"
 
 #, fuzzy
 msgid "Your comment was approved"
@@ -65,6 +87,10 @@ msgstr "Twój komentarz został polubiony"
 #, fuzzy
 msgid "Your forum post was liked"
 msgstr "Twój post na forum został polubiony"
+
+#, fuzzy
+msgid "Your forum post was approved"
+msgstr "Twój post na forum został zatwierdzony"
 
 msgid "Your API Key request has been approved"
 msgstr "Twój wniosek o klucz API został zatwierdzony"
@@ -89,6 +115,18 @@ msgstr "Użytkownik którego obserwujesz stworzył nową grupę publiczną"
 
 msgid "New forum topic in a group you are a member of"
 msgstr "Nowy temat w grupie której jesteś członkiem"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you use"
+msgstr "Nowy temat na forum dotyczący elementu sprzętu, którego używasz"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "Nowy temat na forum dotyczący elementu sprzętu, który śledzisz"
+
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "Twój temat na forum został przeniesiony"
 
 msgid "You have received a new private message"
 msgstr "Otrzymałeś nową prywatną wiadomość"
@@ -117,6 +155,14 @@ msgid "Would you like to activate your account?"
 msgstr "Czy chcesz aktywować swoje konto?"
 
 #, fuzzy
+msgid "New reply in a subscribed forum topic"
+msgstr "Nowa odpowiedź w subskrybowanym temacie na forum"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "Nowa odpowiedź w temacie forum, który założyłeś"
+
+#, fuzzy
 msgid "You were mentioned in a forum post"
 msgstr "Wspomniano cię w poście na forum"
 
@@ -133,12 +179,28 @@ msgid "Congratulations for your first image on AstroBin!"
 msgstr "Gratulacje z okazji twojego pierwszego zdjęcia na AstroBin!"
 
 #, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "Zgłosiłeś swoje zdjęcie do rozpatrzenia IOTD/TP"
+
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Obraz nie został zgłoszony do rozpatrzenia IOTD/TP"
+
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "Obraz zbliża się do terminu zgłoszenia do IOTD/TP"
+
+#, fuzzy
 msgid "Thank you for getting a subscription!"
 msgstr "Dzięki za wykupienie subskrypcji!"
 
 #, fuzzy
 msgid "Thank you for your payment!"
 msgstr "Dzięki za płatność!"
+
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "Subskrypcja anulowana"
 
 #, fuzzy
 msgid "You were removed from the IOTD staff"
@@ -149,140 +211,16 @@ msgid "You have been inactive as an IOTD staff member"
 msgstr "Byłeś nieaktywny jako członek zespołu IOTD"
 
 #, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "Twoja aktywność w IOTD jest niewystarczająca"
+
+#, fuzzy
 msgid "An image you promoted made it to Top Pick"
 msgstr "Obraz, który promowałeś, trafił do Top Pick"
 
 #, fuzzy
 msgid "An image you promoted made it to IOTD"
 msgstr "Obraz, który promowałeś, trafił do IOTD"
-
-#, fuzzy
-msgid "New reply in a subscribed forum topic"
-msgstr "Nowa odpowiedź w subskrybowanym temacie na forum"
-
-#, fuzzy
-msgid "Your image was nominated to be a Top Pick"
-msgstr "Twoje zdjęcie zostało nominowane do Top Pick"
-
-#, fuzzy
-msgid "Your image was voted Top Pick"
-msgstr "Twoje zdjęcie zostało wybrane jako Top Pick"
-
-#, fuzzy
-msgid "Your image was voted Image of the Day"
-msgstr "Twoje zdjęcie zostało wybrane jako Obraz Dnia"
-
-#, fuzzy
-msgid "Your image was plate-solved (advanced)"
-msgstr "Twoje zdjęcie zostało rozwiązane (zaawansowane)"
-
-#, fuzzy
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "Twoje zdjęcie nie mogło zostać rozwiązane (zaawansowane)"
-
-#, fuzzy
-msgid "A new comment on your image requires moderation"
-msgstr "Nowy komentarz do twojego zdjęcia wymaga moderacji"
-
-#, fuzzy
-msgid "Your forum post was approved"
-msgstr "Twój post na forum został zatwierdzony"
-
-#, fuzzy
-msgid "You were mentioned in an image description"
-msgstr "Wspomniano cię w opisie zdjęcia"
-
-#, fuzzy
-msgid "Your edit proposal received a new comment"
-msgstr "Twoja propozycja edycji otrzymała nowy komentarz"
-
-#, fuzzy
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "Twoje zdjęcie zostało zgłoszone do rozpatrzenia IOTD/TP"
-
-#, fuzzy
-msgid "A gear item that you used was renamed"
-msgstr "Element sprzętu, którego używałeś, został przemianowany"
-
-#, fuzzy
-msgid "Your scheduled IOTD received a new comment"
-msgstr "Twój zaplanowany IOTD otrzymał nowy komentarz"
-
-#, fuzzy
-msgid "Your unapproved equipment item received a comment"
-msgstr "Twój niezatwierdzony element sprzętu otrzymał komentarz"
-
-#, fuzzy
-msgid "New forum topic for an equipment item you use"
-msgstr "Nowy temat na forum dotyczący elementu sprzętu, którego używasz"
-
-#, fuzzy
-msgid "You were added as a collaborator to an image"
-msgstr "Zostałeś dodany jako współpracownik do zdjęcia"
-
-#, fuzzy
-msgid "You were removed as a collaborator to an image"
-msgstr "Zostałeś usunięty jako współpracownik do zdjęcia"
-
-#, fuzzy
-msgid "User removed self as a collaborator to your image"
-msgstr "Użytkownik usunął się jako współpracownik do twojego zdjęcia"
-
-#, fuzzy
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr "Zgłosiłeś swoje zdjęcie do rozpatrzenia IOTD/TP"
-
-#, fuzzy
-msgid "Login attempt detected from a different country"
-msgstr "Wykryto próbę logowania z innego kraju"
-
-#, fuzzy
-msgid "Login attempt with weak password"
-msgstr "Próba logowania z słabym hasłem"
-
-#, fuzzy
-msgid "Your image was approved by a moderator"
-msgstr "Twoje zdjęcie zostało zatwierdzone przez moderatora"
-
-#, fuzzy
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr "Obraz nie został zgłoszony do rozpatrzenia IOTD/TP"
-
-#, fuzzy
-msgid "Subscription canceled"
-msgstr "Subskrypcja anulowana"
-
-#, fuzzy
-msgid "Your forum topic was moved"
-msgstr "Twój temat na forum został przeniesiony"
-
-#, fuzzy
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr "Obraz zbliża się do terminu zgłoszenia do IOTD/TP"
-
-#, fuzzy
-msgid "Your listing has a new private conversation"
-msgstr "Twoja lista ma nową prywatną rozmowę"
-
-#, fuzzy
-msgid "Your private conversation has a new comment"
-msgstr "Twoja prywatna rozmowa ma nowy komentarz"
-
-#, fuzzy
-msgid "Your listing has a new question"
-msgstr "Twoja lista ma nowe pytanie"
-
-#, fuzzy
-msgid "New forum topic for an equipment item you follow"
-msgstr "Nowy temat na forum dotyczący elementu sprzętu, który śledzisz"
-
-#, fuzzy
-msgid "New reply in a forum topic that you started"
-msgstr "Nowa odpowiedź w temacie forum, który założyłeś"
-
-#, fuzzy
-msgid "Your IOTD staff activity is insufficient"
-msgstr "Twoja aktywność w IOTD jest niewystarczająca"
 
 #, fuzzy
 msgid "An image you dismissed made it to Top Pick"
@@ -293,8 +231,36 @@ msgid "An image you dismissed made it to IOTD"
 msgstr "Obraz, który odrzuciłeś, trafił do IOTD"
 
 #, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "Twój obraz może stać się nominacją do Top Pick"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "Twój obraz może stać się Top Pick"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "Twój obraz został wybrany jako nominacja do Top Pick"
+
+#, fuzzy
+msgid "Your image was voted Top Pick"
+msgstr "Twoje zdjęcie zostało wybrane jako Top Pick"
+
+#, fuzzy
+msgid "Your image was voted Image of the Day"
+msgstr "Twoje zdjęcie zostało wybrane jako Obraz Dnia"
+
+#, fuzzy
 msgid "Your IOTD staff member stats"
 msgstr "Statystyki twojego członka zespołu IOTD"
+
+#, fuzzy
+msgid "You were mentioned in an image description"
+msgstr "Wspomniano cię w opisie zdjęcia"
+
+#, fuzzy
+msgid "A gear item that you used was renamed"
+msgstr "Element sprzętu, którego używałeś, został przemianowany"
 
 #, fuzzy
 msgid "Collaboration Request: Accept or Deny"
@@ -309,13 +275,21 @@ msgid "User denied your collaboration request"
 msgstr "Użytkownik odrzucił twoją prośbę o współpracę"
 
 #, fuzzy
-msgid "Your image might become a Top Pick Nomination"
-msgstr "Twój obraz może stać się nominacją do Top Pick"
+msgid "You were added as a collaborator to an image"
+msgstr "Zostałeś dodany jako współpracownik do zdjęcia"
 
 #, fuzzy
-msgid "Your image might become a Top Pick"
-msgstr "Twój obraz może stać się Top Pick"
+msgid "You were removed as a collaborator to an image"
+msgstr "Zostałeś usunięty jako współpracownik do zdjęcia"
 
 #, fuzzy
-msgid "Your image was voted Top Pick Nomination"
-msgstr "Twój obraz został wybrany jako nominacja do Top Pick"
+msgid "User removed self as a collaborator to your image"
+msgstr "Użytkownik usunął się jako współpracownik do twojego zdjęcia"
+
+#, fuzzy
+msgid "Login attempt detected from a different country"
+msgstr "Wykryto próbę logowania z innego kraju"
+
+#, fuzzy
+msgid "Login attempt with weak password"
+msgstr "Próba logowania z słabym hasłem"

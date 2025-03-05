@@ -8,7 +8,7 @@
 
     {% if 'requester' in request.GET %}
         <p>
-            {% blocktrans %}
+            {% blocktrans trimmed %}
                 Your account is temporarily or permanently suspended. If you believe this is in error, please get in touch
                 using the Help menu.
             {% endblocktrans %}
@@ -24,7 +24,7 @@
         {% endif %}
     {% else %}
         <p>
-            {% blocktrans %}
+            {% blocktrans trimmed %}
                 This content is not available because the user's account is suspended.
             {% endblocktrans %}
         </p>

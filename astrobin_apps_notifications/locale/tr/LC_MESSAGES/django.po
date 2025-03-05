@@ -1,30 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: tr\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
-
-#, fuzzy
-msgid "Notifications"
-msgstr "Bildirimler"
-
-#, fuzzy
-msgid "You have no notifications."
-msgstr "Bildirim yok."
-
-#, fuzzy
-msgid "Settings"
-msgstr "Ayarlar"
-
-#, fuzzy
-msgid "Mark all as read"
-msgstr "Hepsini okundu olarak işaretle"
-
-#, fuzzy
-msgid "You have no new notifications."
-msgstr "Yeni bildirim yok."
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, fuzzy
 msgid "You have a new follower"
@@ -43,16 +25,56 @@ msgid "Your image was plate-solved"
 msgstr "Görüntün plaka çözümlemesi yapıldı"
 
 #, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "Görüntünüz bir moderatör tarafından onaylandı"
+
+#, fuzzy
 msgid "Your image could not be plate-solved"
 msgstr "Görüntün plaka çözümlemesi yapılamadı"
+
+#, fuzzy
+msgid "Your image was plate-solved (advanced)"
+msgstr "Görüntün plaka çözümlemesi yapıldı (gelişmiş)"
+
+#, fuzzy
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Görüntün plaka çözümlemesi yapılamadı (gelişmiş)"
 
 #, fuzzy
 msgid "Your image received a new comment"
 msgstr "Görüntüne yeni bir yorum geldi"
 
 #, fuzzy
+msgid "Your edit proposal received a new comment"
+msgstr "Düzenleme önerinize yeni bir yorum geldi"
+
+#, fuzzy
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Planlanan IOTD'niz için yeni bir yorum geldi"
+
+#, fuzzy
+msgid "Your unapproved equipment item received a comment"
+msgstr "Onaylanmamış ekipman öğeniz için bir yorum alındı"
+
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "Listelemenizde yeni bir özel konuşma var"
+
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "Özel konuşmanızda yeni bir yorum var"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "Listelemenizde yeni bir soru var"
+
+#, fuzzy
 msgid "There was a reply to your comment"
 msgstr "Yorumuna bir yanıt geldi"
+
+#, fuzzy
+msgid "A new comment on your image requires moderation"
+msgstr "Görüntünde yeni bir yorum moderasyon gerektiriyor"
 
 #, fuzzy
 msgid "Your comment was approved"
@@ -73,6 +95,10 @@ msgstr "Yorumun beğenildi"
 #, fuzzy
 msgid "Your forum post was liked"
 msgstr "Forum gönderin beğenildi"
+
+#, fuzzy
+msgid "Your forum post was approved"
+msgstr "Forum gönderiniz onaylandı"
 
 #, fuzzy
 msgid "Your API Key request has been approved"
@@ -107,6 +133,18 @@ msgid "New forum topic in a group you are a member of"
 msgstr "Üyesi olduğun bir grupta yeni forum konusu"
 
 #, fuzzy
+msgid "New forum topic for an equipment item you use"
+msgstr "Kullandığınız bir ekipman öğesi için yeni forum konusu"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "Takip ettiğiniz bir ekipman öğesi için yeni forum konusu"
+
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "Forum konunuz taşındı"
+
+#, fuzzy
 msgid "You have received a new private message"
 msgstr "Yeni bir özel mesaj aldın"
 
@@ -139,6 +177,14 @@ msgid "Would you like to activate your account?"
 msgstr "Hesabını aktifleştirmek ister misin?"
 
 #, fuzzy
+msgid "New reply in a subscribed forum topic"
+msgstr "Abone olduğun forum konusuna yeni yanıt"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "Başlattığınız bir forum konusuna yeni bir yanıt geldi"
+
+#, fuzzy
 msgid "You were mentioned in a forum post"
 msgstr "Bir forum gönderisinde bahsedildin"
 
@@ -155,12 +201,28 @@ msgid "Congratulations for your first image on AstroBin!"
 msgstr "AstroBin'deki ilk görüntün için tebrikler!"
 
 #, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "Görüntünüzü IOTD/TP değerlendirmesi için gönderdiniz"
+
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Görüntü IOTD/TP değerlendirmesi için gönderilmedi"
+
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "Görüntü IOTD/TP gönderimi için son tarihe yaklaşıyor"
+
+#, fuzzy
 msgid "Thank you for getting a subscription!"
 msgstr "Abonelik aldığın için teşekkürler!"
 
 #, fuzzy
 msgid "Thank you for your payment!"
 msgstr "Ödemen için teşekkürler!"
+
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "Abonelik iptal edildi"
 
 #, fuzzy
 msgid "You were removed from the IOTD staff"
@@ -171,140 +233,16 @@ msgid "You have been inactive as an IOTD staff member"
 msgstr "IOTD ekibi üyesi olarak pasif kaldın"
 
 #, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "IOTD personel etkinliğiniz yetersiz"
+
+#, fuzzy
 msgid "An image you promoted made it to Top Pick"
 msgstr "Tanıttığın bir görüntü Top Pick'e seçildi"
 
 #, fuzzy
 msgid "An image you promoted made it to IOTD"
 msgstr "Tanıttığın bir görüntü IOTD'ye seçildi"
-
-#, fuzzy
-msgid "New reply in a subscribed forum topic"
-msgstr "Abone olduğun forum konusuna yeni yanıt"
-
-#, fuzzy
-msgid "Your image was nominated to be a Top Pick"
-msgstr "Görüntün Top Pick'e aday gösterildi"
-
-#, fuzzy
-msgid "Your image was voted Top Pick"
-msgstr "Görüntün Top Pick olarak oylandı"
-
-#, fuzzy
-msgid "Your image was voted Image of the Day"
-msgstr "Görüntün Günün Görüntüsü olarak oylandı"
-
-#, fuzzy
-msgid "Your image was plate-solved (advanced)"
-msgstr "Görüntün plaka çözümlemesi yapıldı (gelişmiş)"
-
-#, fuzzy
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "Görüntün plaka çözümlemesi yapılamadı (gelişmiş)"
-
-#, fuzzy
-msgid "A new comment on your image requires moderation"
-msgstr "Görüntünde yeni bir yorum moderasyon gerektiriyor"
-
-#, fuzzy
-msgid "Your forum post was approved"
-msgstr "Forum gönderiniz onaylandı"
-
-#, fuzzy
-msgid "You were mentioned in an image description"
-msgstr "Bir görüntü açıklamasında bahsedildi"
-
-#, fuzzy
-msgid "Your edit proposal received a new comment"
-msgstr "Düzenleme önerinize yeni bir yorum geldi"
-
-#, fuzzy
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "Görüntünüz IOTD/TP değerlendirmesi için gönderildi"
-
-#, fuzzy
-msgid "A gear item that you used was renamed"
-msgstr "Kullandığınız bir ekipman öğesi yeniden adlandırıldı"
-
-#, fuzzy
-msgid "Your scheduled IOTD received a new comment"
-msgstr "Planlanan IOTD'niz için yeni bir yorum geldi"
-
-#, fuzzy
-msgid "Your unapproved equipment item received a comment"
-msgstr "Onaylanmamış ekipman öğeniz için bir yorum alındı"
-
-#, fuzzy
-msgid "New forum topic for an equipment item you use"
-msgstr "Kullandığınız bir ekipman öğesi için yeni forum konusu"
-
-#, fuzzy
-msgid "You were added as a collaborator to an image"
-msgstr "Bir görüntüye işbirlikçi olarak eklendiniz"
-
-#, fuzzy
-msgid "You were removed as a collaborator to an image"
-msgstr "Bir görüntüden işbirlikçi olarak çıkarıldınız"
-
-#, fuzzy
-msgid "User removed self as a collaborator to your image"
-msgstr "Kullanıcı, görüntünüze işbirlikçi olarak kendini çıkardı"
-
-#, fuzzy
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr "Görüntünüzü IOTD/TP değerlendirmesi için gönderdiniz"
-
-#, fuzzy
-msgid "Login attempt detected from a different country"
-msgstr "Farklı bir ülkeden giriş denemesi tespit edildi"
-
-#, fuzzy
-msgid "Login attempt with weak password"
-msgstr "Zayıf şifre ile giriş denemesi"
-
-#, fuzzy
-msgid "Your image was approved by a moderator"
-msgstr "Görüntünüz bir moderatör tarafından onaylandı"
-
-#, fuzzy
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr "Görüntü IOTD/TP değerlendirmesi için gönderilmedi"
-
-#, fuzzy
-msgid "Subscription canceled"
-msgstr "Abonelik iptal edildi"
-
-#, fuzzy
-msgid "Your forum topic was moved"
-msgstr "Forum konunuz taşındı"
-
-#, fuzzy
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr "Görüntü IOTD/TP gönderimi için son tarihe yaklaşıyor"
-
-#, fuzzy
-msgid "Your listing has a new private conversation"
-msgstr "Listelemenizde yeni bir özel konuşma var"
-
-#, fuzzy
-msgid "Your private conversation has a new comment"
-msgstr "Özel konuşmanızda yeni bir yorum var"
-
-#, fuzzy
-msgid "Your listing has a new question"
-msgstr "Listelemenizde yeni bir soru var"
-
-#, fuzzy
-msgid "New forum topic for an equipment item you follow"
-msgstr "Takip ettiğiniz bir ekipman öğesi için yeni forum konusu"
-
-#, fuzzy
-msgid "New reply in a forum topic that you started"
-msgstr "Başlattığınız bir forum konusuna yeni bir yanıt geldi"
-
-#, fuzzy
-msgid "Your IOTD staff activity is insufficient"
-msgstr "IOTD personel etkinliğiniz yetersiz"
 
 #, fuzzy
 msgid "An image you dismissed made it to Top Pick"
@@ -315,8 +253,36 @@ msgid "An image you dismissed made it to IOTD"
 msgstr "Göz ardı ettiğiniz bir görüntü IOTD'ye girdi"
 
 #, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "Görüntünüz Top Pick Adayı olabilir"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "Görüntünüz Top Pick olabilir"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "Görüntünüz Top Pick Adayı olarak oylandı"
+
+#, fuzzy
+msgid "Your image was voted Top Pick"
+msgstr "Görüntün Top Pick olarak oylandı"
+
+#, fuzzy
+msgid "Your image was voted Image of the Day"
+msgstr "Görüntün Günün Görüntüsü olarak oylandı"
+
+#, fuzzy
 msgid "Your IOTD staff member stats"
 msgstr "IOTD personel üyesi istatistikleriniz"
+
+#, fuzzy
+msgid "You were mentioned in an image description"
+msgstr "Bir görüntü açıklamasında bahsedildi"
+
+#, fuzzy
+msgid "A gear item that you used was renamed"
+msgstr "Kullandığınız bir ekipman öğesi yeniden adlandırıldı"
 
 #, fuzzy
 msgid "Collaboration Request: Accept or Deny"
@@ -331,13 +297,21 @@ msgid "User denied your collaboration request"
 msgstr "Kullanıcı işbirliği isteğinizi reddetti"
 
 #, fuzzy
-msgid "Your image might become a Top Pick Nomination"
-msgstr "Görüntünüz Top Pick Adayı olabilir"
+msgid "You were added as a collaborator to an image"
+msgstr "Bir görüntüye işbirlikçi olarak eklendiniz"
 
 #, fuzzy
-msgid "Your image might become a Top Pick"
-msgstr "Görüntünüz Top Pick olabilir"
+msgid "You were removed as a collaborator to an image"
+msgstr "Bir görüntüden işbirlikçi olarak çıkarıldınız"
 
 #, fuzzy
-msgid "Your image was voted Top Pick Nomination"
-msgstr "Görüntünüz Top Pick Adayı olarak oylandı"
+msgid "User removed self as a collaborator to your image"
+msgstr "Kullanıcı, görüntünüze işbirlikçi olarak kendini çıkardı"
+
+#, fuzzy
+msgid "Login attempt detected from a different country"
+msgstr "Farklı bir ülkeden giriş denemesi tespit edildi"
+
+#, fuzzy
+msgid "Login attempt with weak password"
+msgstr "Zayıf şifre ile giriş denemesi"

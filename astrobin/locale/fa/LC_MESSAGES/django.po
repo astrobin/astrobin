@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-04 10:23+0000\n"
+"POT-Creation-Date: 2025-03-05 10:36+0000\n"
 "PO-Revision-Date: 2016-08-22 08:16+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1168,9 +1168,6 @@ msgstr "روسی"
 
 msgid "Belarusian"
 msgstr ""
-
-msgid "Arabic"
-msgstr "عربی"
 
 msgid "Japanese"
 msgstr "ژاپنی"
@@ -2395,6 +2392,9 @@ msgstr ""
 
 msgid "Amharic"
 msgstr ""
+
+msgid "Arabic"
+msgstr "عربی"
 
 msgid "Aragonese"
 msgstr ""
@@ -3962,10 +3962,7 @@ msgstr "هیستوگرام"
 
 #, python-format
 msgid ""
-"\n"
-"                <strong>%(user)s</strong> wants to add you as a collaborator "
-"to this image.\n"
-"            "
+"<strong>%(user)s</strong> wants to add you as a collaborator to this image."
 msgstr ""
 
 #, python-format
@@ -4868,11 +4865,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                AstroBin's Marketplace has <strong>"
-"%(count)s</strong> items similar to what you're\n"
-"                                looking for!\n"
-"                            "
+"AstroBin's Marketplace has <strong>%(count)s</strong> items similar to what "
+"you're looking for!"
 msgstr ""
 
 msgid "Take a look!"
@@ -5463,10 +5457,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"\n"
-"        If the reason for your inactivity is temporary, please let us know "
-"and we will be happy to reinstate you.\n"
-"    "
+"If the reason for your inactivity is temporary, please let us know and we "
+"will be happy to reinstate you."
 msgstr ""
 
 msgid "Thank you for understanding!"
@@ -6806,6 +6798,9 @@ msgstr ""
 msgid "Something went wrong, sorry! Please try again."
 msgstr ""
 
+msgid "Translated"
+msgstr ""
+
 msgid "(deleted)"
 msgstr ""
 
@@ -6838,16 +6833,15 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-msgid "Quote this entire post in your reply."
+msgid ""
+"Quote this post in your reply. If you select text, only the selection will "
+"be quoted."
 msgstr ""
 
-msgid "quote"
+msgid "Quote"
 msgstr ""
 
-msgid "You must select some text first."
-msgstr ""
-
-msgid "quote selected"
+msgid "Translate"
 msgstr ""
 
 msgid "Delete post?"
@@ -6874,6 +6868,12 @@ msgid "Share this forum post"
 msgstr ""
 
 msgid "Copy the URL below to share a direct link to this post."
+msgstr ""
+
+msgid "See original"
+msgstr ""
+
+msgid "Translation failed. Please try again later."
 msgstr ""
 
 msgid "Topics you subscribe to"
@@ -6913,9 +6913,6 @@ msgid "Would you like to jump to the new posts since your last visit?"
 msgstr ""
 
 msgid "Click here"
-msgstr ""
-
-msgid "Quote the selected text in your reply"
 msgstr ""
 
 msgid "Topic"
@@ -7781,19 +7778,7 @@ msgstr ""
 msgid "Account suspended"
 msgstr ""
 
-msgid ""
-"\n"
-"                Your account is temporarily or permanently suspended. If you "
-"believe this is in error, please get in touch\n"
-"                using the Help menu.\n"
-"            "
-msgstr ""
-
-msgid ""
-"\n"
-"                This content is not available because the user's account is "
-"suspended.\n"
-"            "
+msgid "This content is not available because the user's account is suspended."
 msgstr ""
 
 msgid ""
@@ -8570,6 +8555,9 @@ msgstr ""
 msgid "Your public ID and profile URL. Letters, numbers, and ./+/-/_ only."
 msgstr ""
 
+msgid "Your account has been activated."
+msgstr ""
+
 msgid "Email is required."
 msgstr ""
 
@@ -8584,370 +8572,3 @@ msgstr ""
 #, python-brace-format
 msgid "A new activation email has been sent to {0}."
 msgstr ""
-
-#~ msgid "Back to top"
-#~ msgstr "بازگشت به بالا"
-
-#~ msgid "My settings"
-#~ msgstr "تنظیمات من"
-
-#~ msgid "Register with AstroBin"
-#~ msgstr "ثبت نام با AstroBin"
-
-#~ msgid "Contact"
-#~ msgstr "تماس"
-
-#~ msgid ""
-#~ "Sorry, but the page you are looking for is not here. If you expected an "
-#~ "image, this means that the author deleted it."
-#~ msgstr ""
-#~ "متاسفانه صفحه ای که جستجو می کنید، اینجا نیست. اگر هدف شما تصویری بوده "
-#~ "است، یعنی نویسنده اش آن را حذف کرده است."
-
-#~ msgid "Avg. Moon age"
-#~ msgstr "میانگین سن ماه"
-
-#~ msgid "days"
-#~ msgstr "روزها"
-
-#~ msgid "Avg. Moon phase"
-#~ msgstr "میانگین فاز ماه"
-
-#~ msgid "Mean SQM"
-#~ msgstr "SQM متوسط"
-
-#~ msgid "Guidelines"
-#~ msgstr "دستورالعمل ها"
-
-#~ msgid "The number of dark flat frames."
-#~ msgstr "تعداد فریم های تیره و صاف"
-
-#~ msgid "Edit gear item"
-#~ msgstr "ویرایش دنده (gear)"
-
-#~ msgid "Please note!"
-#~ msgstr "لطفا توجه کنید!"
-
-#~ msgid ""
-#~ "When you add or edit the make, the name, and the properties of this "
-#~ "product, the data is global and shared between all AstroBin users. Do not "
-#~ "write any information in there that refers to your personal copy of this "
-#~ "product, like \"modded\", \"sold\", \"broken\", \"a present from my aunt"
-#~ "\" and so on. "
-#~ msgstr ""
-#~ "هنگامی که شما سازنده، نام، و خواص این محصول را اضافه و یا ویرایش کنید، "
-#~ "داده ها همگانی می شوند و بین تمام کاربران AstroBin مشترک شده است. چیزی به "
-#~ "هر گونه اطلاعاتی که اشاره به نسخه شخصی شما دارد اضافه نکنید مصلا: "
-#~ "\"کامپیوتر\"، \"فروخته شده\"، \"شکسته\"، \"در حال حاضر مال عمه ام\" وغیره."
-
-#~ msgid ""
-#~ "The following information, instead, is personal, and may refer to your "
-#~ "copy of this product."
-#~ msgstr ""
-#~ "اطلاعات زیر، در عوض، شخصی است و ممکن است اشاره به نسخه شما از این محصول "
-#~ "داشته باشد."
-
-#~ msgid "Add gear item"
-#~ msgstr "اضافه کردن آیتم دنده (gear)"
-
-#~ msgid "The Big Wall"
-#~ msgstr "Big Wall"
-
-#~ msgid "Total integration time"
-#~ msgstr "کل زمان ادغام"
-
-#~ msgid "hours"
-#~ msgstr "ساعات"
-
-#~ msgid "Average integration time"
-#~ msgstr "متوسط زمان ادغام"
-
-#~ msgid "No date specified"
-#~ msgstr "تاریخی مشخص نشده است."
-
-#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-#~ msgstr ""
-#~ "هیچ تلسکوپ یا لنز تصویر برداری و همچنین دوربین تصویر برداری مشخص نشده است."
-
-#~ msgid "Gear images"
-#~ msgstr "تصاویر دنده (Gear)"
-
-#~ msgid "No subjects specified"
-#~ msgstr "هیچ موضوعی مشخص نشده است. "
-
-#~ msgid "No acquisition details specified"
-#~ msgstr "هیچ جزئیات کسب شده ای مشخص نشده است."
-
-#~ msgid "Image size"
-#~ msgstr "اندازه عکس"
-
-#~ msgid "Full"
-#~ msgstr "کامل"
-
-#~ msgid "Integration hours, yearly"
-#~ msgstr "ساعت ادغام، سالانه"
-
-#~ msgid "Integration hours, monthly"
-#~ msgstr "ساعت ادغام، ماهانه"
-
-#~ msgid "Integration hours, daily"
-#~ msgstr "ساعت ادغام، روزانه"
-
-#~ msgid "Integration hours by gear, yearly"
-#~ msgstr "ساعت ادغام دنده، سالانه"
-
-#~ msgid "Integration hours by gear, monthly"
-#~ msgstr "ساعت ادغام دنده، ماهانه"
-
-#~ msgid "Integration hours by gear, daily"
-#~ msgstr "ساعت ادغام دنده، روزانه"
-
-#~ msgid "Uploaded images, yearly"
-#~ msgstr "آپلود عکس، سالانه"
-
-#~ msgid "Uploaded images, monthly"
-#~ msgstr "آپلود عکس، ماهانه"
-
-#~ msgid "Uploaded images, daily"
-#~ msgstr "آپلود عکس، روزانه"
-
-#~ msgid "Views, yearly"
-#~ msgstr "مناظر، سالانه"
-
-#~ msgid "Views, monthly"
-#~ msgstr "مناظر، ماهانه"
-
-#~ msgid "Views, daily"
-#~ msgstr "مناظر، روزانه"
-
-#~ msgid "Total images"
-#~ msgstr "کل تصاویر"
-
-#~ msgid "Integration hours by camera type"
-#~ msgstr "ساعت ادغام شده توسط نوع دوربین"
-
-#~ msgid "Number of images by subject type"
-#~ msgstr "تعداد تصاویر بر اساس نوع موضوع"
-
-#~ msgid "You do not yet have an avatar. Please upload one now."
-#~ msgstr "شما هنوز یک آواتارندارید. لطفا حالا یکی آپلود کنید."
-
-#~ msgid "Previously uploaded"
-#~ msgstr "قبلا آپلود شده "
-
-#~ msgid "Total integration hours in the last 12 months"
-#~ msgstr "ساعت یکپارچگی کل در 12 ماه گذشته"
-
-#~ msgid "Please wait: the plot is loading..."
-#~ msgstr "لطفا صبر کنید: طرح در حال بارگذاری ..."
-
-#~ msgid "Global distribution of camera types"
-#~ msgstr "توزیع جهانی انواع دوربین"
-
-#~ msgid "Global distribution of telescope types"
-#~ msgstr "توزیع جهانی انواع تلسکوپ"
-
-#~ msgid "CCD vs DLSR: the global trend"
-#~ msgstr "DSLR در مقابل CCD، انتظار از روند جهانی"
-
-#~ msgid "Global trend of telescope types"
-#~ msgstr "روند جهانی انواع تلسکوپ"
-
-#~ msgid "Total integration hours, plotted against time."
-#~ msgstr "ساعت های یکپارچه سازی کل، در مقابل زمان رسم."
-
-#~ msgid ""
-#~ "Total integration hours, plotted against time and arranged by imaging "
-#~ "telescopes and lenses, and imaging cameras."
-#~ msgstr ""
-#~ "ساعت یکپارچه سازی کل، در برابر زمان رسم شده اند و با تلسکوپ و لنز "
-#~ "تصویربرداری، و دوربین های تصویر برداری تنظیم شده اند."
-
-#~ msgid "Combined view count for all the user's images, plotted against time."
-#~ msgstr " تعداد ترکیب نمایش تمام تصاویر کاربر، در مقابل زمان رسم شده است."
-
-#~ msgid "Image uploads, plotted against time."
-#~ msgstr "آپلود تصویر، در مقابل زمان رسم شده است."
-
-#~ msgid "Timezone"
-#~ msgstr "منطقه زمانی"
-
-#~ msgid ""
-#~ "By selecting this, you will see all the dates on AstroBin in your "
-#~ "timezone."
-#~ msgstr ""
-#~ "با انتخاب این مورد، تمام تاریخ های AstroBin را در منطقه زمانی خودتان "
-#~ "خواهید دید."
-
-#~ msgid "Acquisition time"
-#~ msgstr "زمان گرفتن عکس"
-
-#~ msgid "Message sent"
-#~ msgstr "پیغام ارسال شد"
-
-#~ msgid "Instructions and examples"
-#~ msgstr "دستورالعمل و نمونه ها "
-
-#~ msgid ""
-#~ "AstroBin's gear database is a little messy: many users have used "
-#~ "different names for the same object, ignoring the suggestions. But don't "
-#~ "worry, we can fix it, and after it's fixed, it shouldn't get very messy "
-#~ "in the future."
-#~ msgstr ""
-#~ "دیتابیس AstroBin، کمی درهم برهم شده است. بعضی ها از چند نام برای یک شیئ "
-#~ "استفاده می کنند و پیشنهادات را نادیده می گیرند. اما نگران نباشید. ما می "
-#~ "توانیم آن را تعمیر کنیم. بعد از تعمیر دیگر دچار درهم برهمی نمی شود."
-
-#~ msgid ""
-#~ "Please read the instructions and the example below, they are important!"
-#~ msgstr "لطفا دستورالعمل ها و مثال های زیر را بخوانید، مهم می باشند!"
-
-#~ msgid ""
-#~ "In a wiki-style collaborative effort, we can all work together, a few "
-#~ "items at a time, to improve the situation. It's very simple! This is what "
-#~ "you need to do:"
-#~ msgstr ""
-#~ "در یک کار مشترک wiki-style، می توانیم با هم کار کنیم و با چند کار همزمان، "
-#~ "وضعیت را بهتر کنیم. خیلی ساده است، اینها چیزهایی هستند که شما نیاز دارید:"
-
-#~ msgid "Make sure both the make and the name are in English."
-#~ msgstr "اطمینان حاصل کنید که هر دوی ساخت کجا و نام، به زبان انگلیسی باشند."
-
-#~ msgid "Make sure the make is not written again in the name field."
-#~ msgstr "اطمینان حاصل کنید که ساخت کجا در قسمت نام نوشته نشده باشد."
-
-#~ msgid ""
-#~ "Make sure there are no words other than the simple make and name of the "
-#~ "product."
-#~ msgstr ""
-#~ "اطمینان حاصل کنید که هیچ عبارت دیگری غیر ازساخت و نام محصول وجود ندارد."
-
-#~ msgid "Make sure the words are properly capitalized."
-#~ msgstr "اطمینان حاصل کنید که کلمات به درستی با حروف بزرگ نوشته شده باشند."
-
-#~ msgid "Here's some good examples:"
-#~ msgstr " برخی از نمونه های خوب در اینجا:"
-
-#~ msgid "And here's some bad examples, that need fixing, and why:"
-#~ msgstr "و برخی از نمونه های بد، که نیاز به تعمیر دارند، و علت آنها:"
-
-#~ msgid ""
-#~ "The words are not properly capitalized. It should be \"Meade\" and "
-#~ "\"LX200\"."
-#~ msgstr ""
-#~ "واژه ها به درستی با حروف بزرگ نوشته نشده اند. باید به صورت MEADE \"و\" "
-#~ "LX200 \" باشند."
-
-#~ msgid ""
-#~ "The word \"Celestron\" appears also in the name of the product. That "
-#~ "should just be the name of the model, not the make name too."
-#~ msgstr ""
-#~ "کلمه \"CELESTRON\" در نام محصول نیز به چشم می خورد. فقط باید نام مدل و نه "
-#~ "دوباره خود نام، ذکر شود."
-
-#~ msgid ""
-#~ "\"sold\" is an information that refers only to a particular user. Gear "
-#~ "objects are shared among everyone, in the database. The word \"(sold)\" "
-#~ "should be removed."
-#~ msgstr ""
-#~ "\"فروخته شده (sold)\" اطلاعاتی مختص یک کاربر خاص است. اشیاء Gear در میان "
-#~ "همه، مشترک در پایگاه قرار می گیرد. کلمه \"(فروش)\" باید برداشته شود."
-
-#~ msgid ""
-#~ "\"modified\" is an information that refers only to a particular user. "
-#~ "Gear objects are shared among everyone, in the database. The word "
-#~ "\"(modified)\" should be removed."
-#~ msgstr ""
-#~ "\"تعدیل و تغییر داده شده (modified)\" اطلاعاتی مختص یک کاربر خاص است. "
-#~ "اشیاء Gear در میان همه، مشترک در پایگاه قرار می گیرد. کلمه \"(تغییر)\" "
-#~ "باید برداشته شود."
-
-#~ msgid ""
-#~ "Obviously, the user who created this mount in the database, has it on a "
-#~ "fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you "
-#~ "can only buy on a pier! \"on a fixed pier\" should be removed."
-#~ msgstr ""
-#~ "بدیهی است که کاربری که این پایه را در database ساخته است، آن را روی پایه "
-#~ "ی ثابیی قرار داه است. اما این به آن معنا نیست که SkyWatcher یک NEQ-6 را "
-#~ "با یک پایه ثابت به فروش می رساند! \"پایه ثابت\" باید برداشته شود."
-
-#~ msgid ""
-#~ "The name of the telescope is not written in English, and that is a "
-#~ "description, not the actual product name. Here I would assume \"80ED\". "
-#~ "Moreover, \"80mm\" is a property of the telescope, not part of its name."
-#~ msgstr ""
-#~ "نام تلسکوپ به زبان انگلیسی نوشته نشده است، بنابراین این نوعی توضیحات است "
-#~ "نه نام واقعی آن. مثلا در اینجا من دارم \"80ED\" را فرض می کنم. علاوه بر "
-#~ "این، \"80mm\" قسمتی از مشخصات تلسکوپ است نه بخشی از نام آن."
-
-#~ msgid ""
-#~ "\"5.4&mu;\" is a property of the CCD, not part of its name. It should be "
-#~ "removed. But sometimes a property can be part of the name of the object, "
-#~ "because it's such a generic name: for example, Newton 8\" f/6 would be "
-#~ "okay, because just \"Newton\" would not be enough."
-#~ msgstr ""
-#~ "\"5.4μ\" بخشی از CCD است نه بخشی از نام آن، بنابراین باید برداشته شود. "
-#~ "اما گاهی اوقات یک مشخصه می تواند بخشی از نام شیء باشد، به عنوان مثال: "
-#~ "نیوتن \"8،  F/6 مشکلی ندارد، چون فقط\" نیوتن \"، کفایت نمی کند."
-
-#~ msgid ""
-#~ "\"CS5\" is the version of Photoshop, but the procut name is just "
-#~ "\"Photoshop\". \"CS5\" should be removed."
-#~ msgstr ""
-#~ " \"CS5\" نسخه ای از فتوشاپ است، اما نام محصول فقط \"فتوشاپ\" می باشد، "
-#~ "بنابراین \"CS5\" باید برداشته شود."
-
-#~ msgid ""
-#~ "Thanks for reading so far. If you are not sure about how to fix a gear "
-#~ "item, just make assumptions and hope you are right. Mistakes will surface "
-#~ "eventually."
-#~ msgstr ""
-#~ "با تشکر برای خواندن این بخش. اگر شما در مورد چگونگی تعمیر یک آیتم دنده "
-#~ "(gear) مطمئن نیستید، فقط مفروضات خود را در نظر داشته باشید و ما "
-#~ "نیزامیدوارم که درست باشد. اشتباهات در نهایت تصحیح خواهند شد."
-
-#~ msgid ""
-#~ "Now let's get to work, good luck and thank you on behalf of the whole "
-#~ "AstroBin community!"
-#~ msgstr ""
-#~ "حالا اجازه دهید کار را شروع کنیم، موفق باشید و با تشکر از شما به نمایندگی "
-#~ "از کل جامعه AstroBin!"
-
-#~ msgid "After you fix an item, another one at random will be offered."
-#~ msgstr ""
-#~ "پس ازاینکه یک آیتم را تعمیر کنید، یکی دیگر به طور تصادفی به شما ارائه "
-#~ "خواهد شد."
-
-#~ msgid "Already fixed:"
-#~ msgstr "تعمیر شده:"
-
-#~ msgid "Remaining:"
-#~ msgstr "باقی مانده:"
-
-#~ msgid "Fix"
-#~ msgstr "تعمیر کردن"
-
-#~ msgid "Mark as good"
-#~ msgstr "علامت گذاری به عنوان \"خوب\""
-
-#~ msgid "Skip"
-#~ msgstr "رد شو"
-
-#~ msgid "Enough for now"
-#~ msgstr "برای الان کافیست."
-
-#~ msgid "Thanks!"
-#~ msgstr "با تشکر!"
-
-#~ msgid ""
-#~ "Your contribute was very important, and the whole AstroBin community is "
-#~ "grateful."
-#~ msgstr ""
-#~ "همکاری با شما برای ما بسیار مهم است، و کل جامعه AstroBin از شما سپاسگزاری "
-#~ "می کند."
-
-#~ msgid "Upload time"
-#~ msgstr "زمان بارگذاری "
-
-#~ msgid "Last login"
-#~ msgstr "آخرین login"

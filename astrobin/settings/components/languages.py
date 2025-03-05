@@ -21,7 +21,6 @@ LANGUAGES = (
     ('el', gettext('Greek')),
     ('uk', gettext('Ukrainian')),
     ('ru', gettext('Russian')),
-    ('ar', gettext('Arabic')),
     ('ja', gettext('Japanese')),
     ('zh-hans', gettext('Chinese (Simplified)')),
     ('hu', gettext('Hungarian')),

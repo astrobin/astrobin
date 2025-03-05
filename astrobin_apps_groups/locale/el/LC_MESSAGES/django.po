@@ -1,10 +1,21 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: el\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Μόνο οι εξής κατηγορίες υποστηρίζουν αυτόματη υποβολή: Επαγγελματικό δίκτυο, "
+"Λέσχη ή ένωση, Διαδικτυακή κοινότητα, Φίλοι ή συνεργάτες, Γεωγραφική περιοχή"
 
 #, fuzzy
 msgid "Autosubmission deactivation strategy"
@@ -76,6 +87,18 @@ msgid "Other"
 msgstr "Άλλο"
 
 #, fuzzy
+msgid "Publication"
+msgstr "Δημοσίευση"
+
+#, fuzzy
+msgid "Title"
+msgstr "Τίτλος"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Ετικέτα κλειδί/τιμή"
+
+#, fuzzy
 msgid "Name"
 msgstr "Όνομα"
 
@@ -90,6 +113,24 @@ msgstr "Επιτρέπονται ετικέτες HTML."
 #, fuzzy
 msgid "Category"
 msgstr "Κατηγορία"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Προεπιλεγμένη ταξινόμηση εικόνας"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Ταξινόμηση εικόνας με ετικέτα κλειδί/τιμή"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Αν οι εικόνες ταξινομούνται με βάση μια ετικέτα κλειδί/τιμή, παρακαλώ "
+"καθόρισε ποια. <a target='_blank' href='https://welcome.astrobin.com/"
+"features/groups'>Μάθε περισσότερα.</a>"
 
 #, fuzzy
 msgid "Public group"
@@ -128,8 +169,28 @@ msgstr ""
 "υποβάλλονται ρητά σε αυτές."
 
 #, fuzzy
+msgid "Forum notice"
+msgstr "Ειδοποίηση φόρουμ"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Πληκτρολόγησε ένα 'Ειδοποίηση φόρουμ' που θα εμφανίζεται πάνω από τη φόρμα "
+"'νέου θέματος'. Χρησιμοποίησέ το για να επικοινωνήσεις τους κανόνες του "
+"φόρουμ, τις αποποιήσεις ευθυνών ή σημαντικές πληροφορίες στους χρήστες πριν "
+"δημιουργήσουν μια νέα ανάρτηση. Βεβαιώσου ότι το μήνυμά σου είναι σαφές και "
+"συνοπτικό."
+
+#, fuzzy
 msgid "Last activity"
 msgstr "Τελευταία δραστηριότητα"
+
+#, fuzzy
+msgid "Date created"
+msgstr "Ημερομηνία δημιουργίας"
 
 #, fuzzy
 msgid "Members"
@@ -189,6 +250,11 @@ msgid "Cancel"
 msgstr "Ακύρωση"
 
 #, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr ""
+"Παρακαλώ μην προσθέτεις περισσότερες από 100 εικόνες ταυτόχρονα, ευχαριστώ!"
+
+#, fuzzy
 msgid "Delete group?"
 msgstr "Διαγραφή ομάδας;"
 
@@ -237,6 +303,10 @@ msgid "Moderate join requests"
 msgstr "Μετρήστε τα αιτήματα συμμετοχής"
 
 #, fuzzy
+msgid "Sort images"
+msgstr "Ταξινόμηση εικόνων"
+
+#, fuzzy
 msgid "This group is public"
 msgstr "Αυτή η ομάδα είναι δημόσια"
 
@@ -268,28 +338,26 @@ msgstr "Προσκεκλημένοι χρήστες"
 msgid "Join requests"
 msgstr "Αιτήματα συμμετοχής"
 
-#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"Μια ομάδα που δημιουργήθηκε στις %(date_created)s, ανήκει στον <a "
-"href=\"%(owner_url)s\">%(owner)s</a>, κατηγοριοποιημένη ως <strong>"
-"%(category)s</strong>."
+"Μια ομάδα που δημιουργήθηκε στις %(date_created)s, ανήκει στον <a href="
+"\"%(owner_url)s\">%(owner)s</a>, κατηγοριοποιημένη ως <strong>%(category)s</"
+"strong>."
 
 #, fuzzy
 msgid "Group forum"
 msgstr "Φόρουμ ομάδας"
 
-#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
-"<strong>%(post_count)s</strong> αναρτήσεις σε <strong>%(topic_count)"
-"s</strong> θέματα"
+"<strong>%(post_count)s</strong> αναρτήσεις σε <strong>%(topic_count)s</"
+"strong> θέματα"
 
 #, fuzzy
 msgid "View all"
@@ -298,10 +366,6 @@ msgstr "Δες τα όλα"
 #, fuzzy
 msgid "New topic"
 msgstr "Νέο θέμα"
-
-#, fuzzy
-msgid "Please join the group to view its forum."
-msgstr "Παρακαλώ ενταχθείτε στην ομάδα για να δείτε το φόρουμ της."
 
 #, fuzzy
 msgid ""
@@ -380,35 +444,36 @@ msgid "Sort"
 msgstr "Ταξινόμηση"
 
 #, fuzzy
-msgid "Date created"
-msgstr "Ημερομηνία δημιουργίας"
+msgid "Search"
+msgstr "Αναζήτηση"
 
 #, fuzzy
-msgid "Your private groups"
-msgstr "Οι ιδιωτικές ομάδες σου"
+msgid "Private groups you own"
+msgstr "Ιδιωτικές ομάδες που κατέχεις"
 
 #, fuzzy
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr ""
-"Είσαι ιδιοκτήτης, μέλος ή προσκεκλημένος σε αυτές τις ιδιωτικές ομάδες."
+msgid "Private groups you are a member of"
+msgstr "Ιδιωτικές ομάδες στις οποίες είσαι μέλος"
 
 #, fuzzy
-msgctxt "group"
-msgid "Create private group"
-msgstr "Δημιουργία ιδιωτικής ομάδας"
+msgid "Private groups you are invited to"
+msgstr "Ιδιωτικές ομάδες στις οποίες έχεις προσκληθεί"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Δημόσιες ομάδες που κατέχεις"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Δημόσιες ομάδες στις οποίες είσαι μέλος"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Δημόσιες ομάδες στις οποίες έχεις προσκληθεί"
 
 #, fuzzy
 msgid "Public groups"
 msgstr "Δημόσιες ομάδες"
-
-#, fuzzy
-msgid "Open to the whole community."
-msgstr "Ανοιχτό σε όλη την κοινότητα."
-
-#, fuzzy
-msgctxt "group"
-msgid "Create public group"
-msgstr "Δημιουργία δημόσιας ομάδας"
 
 #, fuzzy
 msgid "No groups available."
@@ -495,6 +560,14 @@ msgid "This group has no join requests."
 msgstr "Αυτή η ομάδα δεν έχει αιτήματα συμμετοχής."
 
 #, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Κάτι πήγε στραβά, παρακαλώ δοκίμασε ξανά αργότερα."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Πληκτρολόγησε το μήνυμά σου εδώ..."
+
+#, fuzzy
 msgid "You cannot add images that are not yours!"
 msgstr "Δεν μπορείς να προσθέσεις εικόνες που δεν είναι δικές σου!"
 
@@ -537,103 +610,3 @@ msgstr "Έχεις αποχωρήσει από την ομάδα"
 #, fuzzy
 msgid "Form saved"
 msgstr "Η φόρμα αποθηκεύτηκε"
-
-#, fuzzy
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Μόνο οι εξής κατηγορίες υποστηρίζουν αυτόματη υποβολή: Επαγγελματικό δίκτυο, "
-"Λέσχη ή ένωση, Διαδικτυακή κοινότητα, Φίλοι ή συνεργάτες, Γεωγραφική περιοχή"
-
-#, fuzzy
-msgid "Publication"
-msgstr "Δημοσίευση"
-
-#, fuzzy
-msgid "Title"
-msgstr "Τίτλος"
-
-#, fuzzy
-msgid "Key/value tag"
-msgstr "Ετικέτα κλειδί/τιμή"
-
-#, fuzzy
-msgid "Default image sorting"
-msgstr "Προεπιλεγμένη ταξινόμηση εικόνας"
-
-#, fuzzy
-msgid "Image key/value tag sorting"
-msgstr "Ταξινόμηση εικόνας με ετικέτα κλειδί/τιμή"
-
-#, fuzzy
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Αν οι εικόνες ταξινομούνται με βάση μια ετικέτα κλειδί/τιμή, παρακαλώ "
-"καθόρισε ποια. <a target='_blank' href='https://welcome.astrobin."
-"com/features/groups'>Μάθε περισσότερα.</a>"
-
-#, fuzzy
-msgid "Search"
-msgstr "Αναζήτηση"
-
-#, fuzzy
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-"Παρακαλώ μην προσθέτεις περισσότερες από 100 εικόνες ταυτόχρονα, ευχαριστώ!"
-
-#, fuzzy
-msgid "Sort images"
-msgstr "Ταξινόμηση εικόνων"
-
-#, fuzzy
-msgid "Private groups you own"
-msgstr "Ιδιωτικές ομάδες που κατέχεις"
-
-#, fuzzy
-msgid "Private groups you are a member of"
-msgstr "Ιδιωτικές ομάδες στις οποίες είσαι μέλος"
-
-#, fuzzy
-msgid "Private groups you are invited to"
-msgstr "Ιδιωτικές ομάδες στις οποίες έχεις προσκληθεί"
-
-#, fuzzy
-msgid "Public groups you own"
-msgstr "Δημόσιες ομάδες που κατέχεις"
-
-#, fuzzy
-msgid "Public groups you are a member of"
-msgstr "Δημόσιες ομάδες στις οποίες είσαι μέλος"
-
-#, fuzzy
-msgid "Public groups you are invited to"
-msgstr "Δημόσιες ομάδες στις οποίες έχεις προσκληθεί"
-
-#, fuzzy
-msgid "Forum notice"
-msgstr "Ειδοποίηση φόρουμ"
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Πληκτρολόγησε ένα 'Ειδοποίηση φόρουμ' που θα εμφανίζεται πάνω από τη φόρμα "
-"'νέου θέματος'. Χρησιμοποίησέ το για να επικοινωνήσεις τους κανόνες του "
-"φόρουμ, τις αποποιήσεις ευθυνών ή σημαντικές πληροφορίες στους χρήστες πριν "
-"δημιουργήσουν μια νέα ανάρτηση. Βεβαιώσου ότι το μήνυμά σου είναι σαφές και "
-"συνοπτικό."
-
-#, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Κάτι πήγε στραβά, παρακαλώ δοκίμασε ξανά αργότερα."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Πληκτρολόγησε το μήνυμά σου εδώ..."

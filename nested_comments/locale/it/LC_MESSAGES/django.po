@@ -1,69 +1,25 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-msgid "You follow each other"
-msgstr "Seguite l'un l'altro"
-
-msgid "Images"
-msgstr "Immagini"
-
-msgid "Followers"
-msgstr "Follower"
-
-msgid "Following"
-msgstr "Following"
-
-msgid "User"
-msgstr "Utente"
-
-msgid "No users."
-msgstr "Nessun utente."
-
-msgid "Administrator"
-msgstr "Amministratore"
-
-msgid "Image moderator"
-msgstr "Moderatore di immagini"
-
-msgid "IOTD Submitter"
-msgstr "Submitter Foto del Giorno"
-
-msgid "IOTD Reviewer"
-msgstr "Reviewer Foto del Giorno"
-
-msgid "IOTD Judge"
-msgstr "Giudice Foto del Giorno"
-
-msgid "Premium member"
-msgstr "Utente Premium"
-
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-"I report delle tue email \"rimbalzate\" sono state rimossi da AstroBin. "
-"Assicurati che la tua email funzioni bene, altrimenti riceverai di nuovo "
-"questo messaggio in futuro. Grazie!"
-
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
-"Le tue segnalzioni di spam sono state rimosse da AstroBin. Assicurati di non "
-"avere un filtro o una regola che segnala le email di AstroBin come spam "
-"automaticamente! Se non vuoi più ricevere email da AstroBin, usa il link che "
-"c'è in fondo ad ogni email. Grazie!"
+msgid "(deleted)"
+msgstr "(cancellato)"
 
 msgid "Type your comment here..."
 msgstr "Scrivi qui il tuo commento..."
+
+#, fuzzy
+msgid "Translated"
+msgstr "Tradotto"
+
+msgid "Error"
+msgstr "Errore"
 
 msgid "Cancel"
 msgstr "Annulla"
@@ -71,60 +27,27 @@ msgstr "Annulla"
 msgid "Add a comment"
 msgstr "Aggiungi un commento"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
-"sign up</a> to leave a comment."
-msgstr ""
-"Fai il <a href=\"%(login_url)s\">login</a> o <a href=\"%(signup_url)s\">"
-"registrati</a> per lasciare un commento."
-
 msgid "There are no comments yet."
 msgstr "Non ci sono ancora commenti."
-
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr "Questo commento sta attendendo la moderazione e sarà moderato a breve."
-
-msgid "(deleted)"
-msgstr "(cancellato)"
-
-msgctxt "Noun, e.g. 'This element has 10 likes'"
-msgid "likes"
-msgstr "Mi piace"
-
-msgctxt "Noun, e.g. 'This element has 1 like'"
-msgid "like"
-msgstr "Mi piace"
-
-msgid "Link"
-msgstr "Link"
-
-msgid "Undelete"
-msgstr "Ripristina"
-
-msgid "Delete"
-msgstr "Cancella"
-
-msgid "Edit"
-msgstr "Modifica"
-
-msgid "Reply"
-msgstr "Rispondi"
-
-msgid "Like"
-msgstr "Mi piace"
-
-msgid "Unlike"
-msgstr "Non mi piace più"
 
 msgid "The comment cannot be empty."
 msgstr "Il commento non può essere vuoto."
 
-msgid "Submit"
-msgstr "Invia"
+msgid "Delete"
+msgstr "Cancella"
 
-msgid "Error"
-msgstr "Errore"
+msgid "Undelete"
+msgstr "Ripristina"
+
+msgid "Edit"
+msgstr "Modifica"
+
+msgid "Link"
+msgstr "Link"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "Mi piace"
 
 msgctxt "Verb (imperative)"
 msgid "Like"
@@ -144,6 +67,26 @@ msgstr "Approva"
 
 msgid "Report abuse"
 msgstr "Segnala abuso"
+
+#, fuzzy
+msgid "Translate"
+msgstr "Traduci"
+
+#, fuzzy
+msgid "See original"
+msgstr "Vedi originale"
+
+#, fuzzy
+msgid "Translation failed. Please try again later."
+msgstr "Traduzione fallita. Per favore riprova più tardi."
+
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
+msgstr ""
+"Fai il <a href=\"%(login_url)s\">login</a> o <a href=\"%(signup_url)s"
+"\">registrati</a> per lasciare un commento."
 
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
@@ -176,6 +119,12 @@ msgstr "Questo processo è necessario per evitare lo spam su AstroBin."
 msgid "Thank you for understanding!"
 msgstr "Grazie per la comprensione!"
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "Questo commento sta attendendo la moderazione e sarà moderato a breve."
+
+msgid "Submit"
+msgstr "Invia"
+
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
@@ -194,89 +143,5 @@ msgstr ""
 "Questo elemente non può essere segnalato nuovamente perché è stato già "
 "approvato da un moderatore."
 
-msgid "You many not report the same item more than once."
-msgstr "Non puoi segnalare lo stesso elemento più di una volta."
-
 msgid "You may not report the same item more than once."
 msgstr "Non puoi segnalare lo stesso elemento più di una volta."
-
-#, fuzzy
-msgid "Report a use"
-msgstr "Segnala un utilizzo"
-
-msgid "Member since"
-msgstr "Utente da"
-
-msgid "Last seen online"
-msgstr "Visto online l'ultima volta"
-
-msgid "Total integration time"
-msgstr "Tempo totale d'integrazione"
-
-msgid "hours"
-msgstr "ore"
-
-msgid "Average integration time"
-msgstr "Tempo medio di integrazione"
-
-msgid "Forum posts written"
-msgstr "Post scritti sui forum"
-
-msgid "Comments written"
-msgstr "Commenti scritti"
-
-msgid "Comments received"
-msgstr "Commenti ricevuti"
-
-msgid "Likes received"
-msgstr "Likes ricevuti"
-
-msgid "Views received"
-msgstr "Visualizzazioni ricevute"
-
-msgid "No date specified"
-msgstr "Nessuna data specificata"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"Nessun telescopio o lente di acquisizione specificata, o nessuna camera di "
-"acquisizione specificata"
-
-msgid "Gear images"
-msgstr "Foto della strumentazione"
-
-msgid "Deep sky"
-msgstr "Cielo profondo"
-
-msgid "Solar system"
-msgstr "Sistema solare"
-
-msgid "Extremely wide field"
-msgstr "Campo molto esteso"
-
-msgid "Star trails"
-msgstr "Tracce stellari"
-
-msgid "Northern lights"
-msgstr "Aurora boleare"
-
-msgid "Noctilucent clouds"
-msgstr "Nubi nottilucenti"
-
-msgid "Gear"
-msgstr "Strumentazione"
-
-msgid "Other"
-msgstr "Altro"
-
-msgid "All"
-msgstr "Tutti"
-
-msgid "n/a"
-msgstr "n/d"
-
-msgid "No subjects specified"
-msgstr "Nessun soggetto specificato"
-
-msgid "No acquisition details specified"
-msgstr "Nessun dettaglio di acquisizione specificato"

@@ -1,38 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: nl\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
-
-#, fuzzy
-msgid "I wasn't really affected by the data loss"
-msgstr "Ik werd niet echt getroffen door het dataverlies"
-
-#, fuzzy
-msgid "I don't require compensation: I want to support AstroBin"
-msgstr "Ik heb geen compensatie nodig: ik wil AstroBin steunen"
-
-#, fuzzy
-msgid "I would like to try AstroBin Ultimate for free for 1 month"
-msgstr "Ik zou graag 1 maand gratis AstroBin Ultimate willen proberen"
-
-#, fuzzy
-msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
-msgstr "Ik vind dat ik recht heb op 3 maanden gratis AstroBin Ultimate"
-
-#, fuzzy
-msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
-msgstr "Ik vind dat ik recht heb op 6 maanden gratis AstroBin Ultimate"
-
-#, fuzzy
-msgid "Requested compensation"
-msgstr "Compensatie aangevraagd"
-
-#, fuzzy
-msgid "Please indicate if and how much you would like to be compensated."
-msgstr "Geef alstublieft aan of en hoeveel u gecompenseerd wilt worden."
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgid "Your migration data"
 msgstr "Eerste betaling"
@@ -65,102 +39,8 @@ msgid "Subscription"
 msgstr "Abonnement"
 
 #, fuzzy
-msgid "Data loss compensation request"
-msgstr "Verzoek om compensatie voor dataverlies"
-
-#, fuzzy
-msgid ""
-"You are eligible for compensation due to the data loss that happened on "
-"February 16th, 2020."
-msgstr ""
-"U komt in aanmerking voor compensatie vanwege het dataverlies dat op 16 "
-"februari 2020 heeft plaatsgevonden."
-
-#, fuzzy
-msgid ""
-"If you haven't had the chance, please take a minute to read what happened at "
-"the following page:"
-msgstr ""
-"Als je nog niet de kans hebt gehad, neem dan een minuut de tijd om te lezen "
-"wat er is gebeurd op de volgende pagina:"
-
-#, fuzzy
-msgid "Official statement and post-mortem"
-msgstr "Officiële verklaring en post-mortem"
-
-#, fuzzy
-msgid "Please accept our apology once more."
-msgstr "Accepteer alstublieft nogmaals onze excuses."
-
-#, fuzzy
-msgid "Please chooce your compensation from the list below"
-msgstr "Kies uw compensatie uit de onderstaande lijst"
-
-#, fuzzy
-msgid ""
-"Compensation is offered in the form of free time on the new AstroBin "
-"subscription tier called \"Ultimate\"."
-msgstr ""
-"Compensatie wordt aangeboden in de vorm van gratis tijd op het nieuwe "
-"AstroBin-abonnement genaamd \"Ultimate\"."
-
-#, fuzzy
-#, python-format
-msgid ""
-"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
-"target=\"_blank\">the pricing page</a>."
-msgstr ""
-"Om meer te leren over AstroBin Ultimate, bezoek alstublieft <a href=\"%(url)"
-"s\" target=\"_blank\">de prijs pagina</a>."
-
-#, fuzzy
-msgid "Submit"
-msgstr "Indienen"
-
-#, fuzzy
-msgid "Data loss compensation reauest"
-msgstr "Verzoek om compensatie voor dataverlies"
-
-#, fuzzy
-msgid "Already done"
-msgstr "Al gedaan"
-
-#, fuzzy
-msgid "Sorry, you can't do this again."
-msgstr "Sorry, je kunt dit niet opnieuw doen."
-
-#, fuzzy
-msgid "Your preference was already recorded and cannot be changed."
-msgstr "Je voorkeur is al geregistreerd en kan niet worden gewijzigd."
-
-#, fuzzy
-msgid "Not eligible"
-msgstr "Niet in aanmerking komend"
-
-#, fuzzy
-msgid "It looks like you're not eligible"
-msgstr "Het lijkt erop dat je niet in aanmerking komt"
-
-#, fuzzy
-msgid ""
-"Sorry, but this page is for people who were on AstroBin Premium on the day "
-"that the data loss incident happened, and it looks like you aren't among "
-"them."
-msgstr ""
-"Sorry, maar deze pagina is voor mensen die op de dag van het dataverlies op "
-"AstroBin Premium waren, en het lijkt erop dat jij daar niet bij hoort."
-
-msgid "Success"
-msgstr "Succes"
-
-#, fuzzy
-msgid "All done!"
-msgstr "Alles gedaan!"
-
-#, fuzzy
-msgid ""
-"Your preference has been recorded and it has already been applied. Thank you!"
-msgstr "Je voorkeur is geregistreerd en is al toegepast. Bedankt!"
+msgid "Paying member"
+msgstr "Betaald lid"
 
 msgid "Migrate donations"
 msgstr "Migreer donaties"
@@ -213,13 +93,15 @@ msgstr ""
 msgid "No, I want to pay for Premium"
 msgstr "Nee, ik wil voor het Premium account betalen"
 
+msgid "Success"
+msgstr "Succes"
+
 msgid "Your migration was successful."
 msgstr "Jouw migratie is met succes voltooid."
 
 msgid "Thanks for supporting AstroBin!"
 msgstr "Dankjewel voor je support van AstroBin !"
 
-#, fuzzy
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
@@ -251,7 +133,6 @@ msgstr ""
 msgid "Your AstroBin subscription has just expired"
 msgstr "Je AstroBin-abonnement is net verlopen"
 
-#, fuzzy
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
@@ -271,7 +152,6 @@ msgstr ""
 msgid "Your AstroBin subscription will expire in one week"
 msgstr "Je AstroBin-abonnement verloopt over een week"
 
-#, fuzzy
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
@@ -283,22 +163,10 @@ msgstr ""
 #, fuzzy
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically. If your subscription was created the "
-"regular way, via PayPal, then PayPal will attempt to charge your credit card "
-"or retrieve funds that are available in your account."
+"attempt to renew it automatically."
 msgstr ""
 "Je hebt een automatisch verlengend abonnement op AstroBin, en we zullen "
-"proberen het automatisch te vernieuwen. Als je abonnement op de reguliere "
-"manier is aangemaakt, via PayPal, dan zal PayPal proberen je creditcard te "
-"belasten of fondsen te verkrijgen die beschikbaar zijn op je account."
-
-#, fuzzy
-msgid ""
-"If your subscription was created manually via a bank transfer, please get in "
-"touch for a new payment."
-msgstr ""
-"Als je abonnement handmatig is aangemaakt via een bankoverschrijving, neem "
-"dan contact met ons op voor een nieuwe betaling."
+"proberen het automatisch te verlengen."
 
 #, fuzzy
 msgid "Thank you!"
@@ -308,7 +176,6 @@ msgstr "Bedankt!"
 msgid "Your AstroBin subscription will be automatically renewed in one week"
 msgstr "Je AstroBin-abonnement wordt automatisch vernieuwd over een week"
 
-#, fuzzy
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
@@ -320,513 +187,3 @@ msgstr ""
 #, fuzzy
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr "Je AstroBin-abonnement wordt automatisch vernieuwd over 30 dagen"
-
-#, fuzzy
-msgid "You follow each other"
-msgstr "Jullie volgen elkaar"
-
-#, fuzzy
-msgid "Images"
-msgstr "Afbeeldingen"
-
-#, fuzzy
-msgid "Followers"
-msgstr "Volgers"
-
-#, fuzzy
-msgid "Following"
-msgstr "Volgend"
-
-#, fuzzy
-msgid "User"
-msgstr "Gebruiker"
-
-#, fuzzy
-msgid "No users."
-msgstr "Geen gebruikers."
-
-#, fuzzy
-msgid "Administrator"
-msgstr "Beheerder"
-
-#, fuzzy
-msgid "Image moderator"
-msgstr "Afbeelding moderator"
-
-#, fuzzy
-msgid "IOTD Submitter"
-msgstr "IOTD Indiende"
-
-#, fuzzy
-msgid "IOTD Reviewer"
-msgstr "IOTD Beoordelaar"
-
-#, fuzzy
-msgid "IOTD Judge"
-msgstr "IOTD Jury"
-
-#, fuzzy
-msgid "Premium member"
-msgstr "Premium lid"
-
-#, fuzzy
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-"Je e-mail bounce-rapporten zijn verwijderd van AstroBin. Zorg ervoor dat je "
-"e-mail goed werkt, anders krijg je dezelfde waarschuwingsmelding opnieuw. "
-"Bedankt!"
-
-#, fuzzy
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
-"Je spamrapporten zijn verwijderd van AstroBin. Zorg ervoor dat je geen "
-"filter of regel hebt die de e-mails van AstroBin altijd als spam markeert! "
-"Als je geen e-mails van AstroBin wilt ontvangen, zoek dan de "
-"instellingenlink die onderaan elke e-mail staat. Bedankt!"
-
-#, fuzzy
-msgid "Perform a blind solve"
-msgstr "Voer een blinde oplossing uit"
-
-#, fuzzy
-msgid ""
-"Attempt to solve with no hints. In most cases this will work, but it will "
-"take longer."
-msgstr ""
-"Probeer op te lossen zonder aanwijzingen. In de meeste gevallen zal dit "
-"werken, maar het zal langer duren."
-
-#, fuzzy
-msgid "Width of the field in degrees"
-msgstr "Breedte van het veld in graden"
-
-#, fuzzy
-msgid "Width of the field in arcminutes"
-msgstr "Breedte van het veld in boogminuten"
-
-#, fuzzy
-msgid "Resolution of the field in arcseconds/pixel"
-msgstr "Resolutie van het veld in boogseconden/pixel"
-
-#, fuzzy
-msgid "Field size units"
-msgstr "Eenheden van veldgrootte"
-
-#, fuzzy
-msgid "Min field size"
-msgstr "Minimale veldgrootte"
-
-#, fuzzy
-msgid "Estimate the lower bound for the width of this field."
-msgstr "Schat de ondergrens voor de breedte van dit veld."
-
-#, fuzzy
-msgid "Max field size"
-msgstr "Maximale veldgrootte"
-
-#, fuzzy
-msgid "Estimate the upper bound for the width of this field."
-msgstr "Schat de bovengrens voor de breedte van dit veld."
-
-#, fuzzy
-msgid "Center RA"
-msgstr "Centrum RA"
-
-#, fuzzy
-msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr "Centrum RA van het veld in graden, 0.000 tot 360.000"
-
-#, fuzzy
-msgid "Center dec"
-msgstr "Centrum dec"
-
-#, fuzzy
-msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr "Centrum dec van het veld in graden, -90.000 tot +90.000"
-
-#, fuzzy
-msgid "Radius"
-msgstr "Straal"
-
-#, fuzzy
-msgid ""
-"Tells the plate-solving engine to look within these many degrees of the "
-"given center RA and dec position."
-msgstr ""
-"Geeft de plate-solving engine de opdracht om binnen deze veel graden van de "
-"gegeven centrum RA en dec positie te kijken."
-
-#, fuzzy
-msgid "Small"
-msgstr "Klein"
-
-#, fuzzy
-msgid "Medium"
-msgstr "Medium"
-
-#, fuzzy
-msgid "Large"
-msgstr "Groot"
-
-#, fuzzy
-msgid "Sample raw frame (max 100 MB)"
-msgstr "Voorbeeld van een ruwe frame (max 100 MB)"
-
-#, fuzzy
-msgid ""
-"To improve the accuracy of your plate-solution even further, please upload "
-"one of the XISF or FITS files from your data set. Such files normally have "
-"date and time headers that will allow AstroBin to calculate solar system "
-"body ephemerides and find planets and asteroids in your image (provided you "
-"also add location information to it).<br/><br/>For maximum accuracy, it's "
-"recommended that you use PixInsight's native and open format XISF. Learn "
-"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
-"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
-"note:</strong> it's very important that the XISF or FITS file you upload is "
-"aligned to your processed image, otherwise the object annotations will not "
-"match. To improve your chances at a successful accurate plate-solution, "
-"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
-msgstr ""
-"Om de nauwkeurigheid van je plate-oplossing nog verder te verbeteren, upload "
-"een van de XISF of FITS-bestanden uit je dataset. Dergelijke bestanden "
-"hebben normaal gesproken datum- en tijdheaders die AstroBin in staat stellen "
-"om ephemeriden van hemellichamen te berekenen en planeten en asteroïden in "
-"je afbeelding te vinden (op voorwaarde dat je ook locatie-informatie "
-"toevoegt).<br/><br/>Voor maximale nauwkeurigheid is het aan te raden om het "
-"native en open formaat XISF van PixInsight te gebruiken. Leer hier meer over "
-"XISF:<br/><br/><a href=\"https://pixinsight.com/xisf/\" target=\"_blank\">"
-"https://pixinsight.com/xisf/</a><br/><br/><strong>Let op:</strong> het is "
-"heel belangrijk dat het XISF of FITS-bestand dat je uploadt is uitgelijnd "
-"met je verwerkte afbeelding, anders komen de objectannotaties niet overeen. "
-"Om je kansen op een succesvolle nauwkeurige plate-oplossing te verbeteren, "
-"kalibreer je bestand op de gebruikelijke manier (dark/bias/flats) maar rek "
-"het niet uit."
-
-#, fuzzy
-msgid "Scaled font size"
-msgstr "Schaal van lettergrootte"
-
-#, fuzzy
-msgid "Font size of the annotations on your main image page"
-msgstr "Lettergrootte van de annotaties op je hoofdfoto pagina"
-
-#, fuzzy
-msgid "Show equatorial grid"
-msgstr "Toon equatoriaal raster"
-
-#, fuzzy
-msgid "Show constellation borders"
-msgstr "Toon sterrenbeeldgrenzen"
-
-#, fuzzy
-msgid "Show constellation lines"
-msgstr "Toon sterrenbeeldlijnen"
-
-#, fuzzy
-msgid "Show named stars"
-msgstr "Toon benoemde sterren"
-
-#, fuzzy
-msgid "Show Messier objects"
-msgstr "Toon Messier-objecten"
-
-#, fuzzy
-msgid "Show NGC and IC objects"
-msgstr "Toon NGC en IC-objecten"
-
-#, fuzzy
-msgid "Show VdB objects"
-msgstr "Toon VdB-objecten"
-
-#, fuzzy
-msgid "Show Sharpless objects"
-msgstr "Toon Sharpless-objecten"
-
-#, fuzzy
-msgid "Show Barnard objects"
-msgstr "Toon Barnard-objecten"
-
-#, fuzzy
-msgid "Show PGC objects"
-msgstr "Toon PGC-objecten"
-
-#, fuzzy
-msgid "Show planets"
-msgstr "Toon planeten"
-
-#, fuzzy
-msgid ""
-"Only available if your image at least an acquisition time and an accurate "
-"location"
-msgstr ""
-"Alleen beschikbaar als je afbeelding ten minste een acquisitietijd en een "
-"nauwkeurige locatie heeft"
-
-#, fuzzy
-msgid "Show asteroids"
-msgstr "Toon asteroïden"
-
-#, fuzzy
-msgid "Show GCVS stars"
-msgstr "Toon GCVS-sterren"
-
-#, fuzzy
-msgid "General Catalog of Variable Stars"
-msgstr "Algemene Catalogus van Variabele Sterren"
-
-#, fuzzy
-msgid "Show Tycho-2 catalog"
-msgstr "Toon Tycho-2 catalogus"
-
-#, fuzzy
-msgid "Show CGPN objects"
-msgstr "Toon CGPN-objecten"
-
-#, fuzzy
-msgid "Getting plate-solving status, please wait..."
-msgstr "Bezig met het verkrijgen van plate-solving status, even geduld..."
-
-#, fuzzy
-msgid "Plate-solving starting, please do not leave this page..."
-msgstr "Plate-solving gestart, verlaat deze pagina niet..."
-
-#, fuzzy
-msgid "Advanced plate-solving starting, please do not leave this page..."
-msgstr "Geavanceerd plate-solving gestart, verlaat deze pagina niet..."
-
-#, fuzzy
-msgid "Plate-solving started. You may leave this page."
-msgstr "Plate-solving gestart. Je kunt deze pagina verlaten."
-
-#, fuzzy
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr "Geavanceerd plate-solving gestart. Je kunt deze pagina verlaten."
-
-#, fuzzy
-msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr "Plate-solving bijna klaar, verlaat deze pagina niet..."
-
-#, fuzzy
-msgid "This image could not be plate-solved."
-msgstr "Deze afbeelding kon niet worden opgelost."
-
-#, fuzzy
-msgid "The advanced plate-solving failed."
-msgstr "De geavanceerde plate-solving is mislukt."
-
-#, fuzzy
-msgid "This image has been plate-solved. Refresh the page to see new data!"
-msgstr ""
-"Deze afbeelding is plate-solved. Vernieuw de pagina om nieuwe gegevens te "
-"zien!"
-
-#, fuzzy
-msgid "The advanced plate-solved finished. Refresh the page to see new data!"
-msgstr ""
-"De geavanceerde plate-solving is voltooid. Vernieuw de pagina om nieuwe "
-"gegevens te zien!"
-
-#, fuzzy
-msgid "Error"
-msgstr "Fout"
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because it was not possible to "
-"establish a connection to nova.astrometry.net. Please try again later!"
-msgstr ""
-"AstroBin kon deze afbeelding niet plate-solve omdat er geen verbinding kon "
-"worden gemaakt met nova.astrometry.net. Probeer het later opnieuw!"
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error."
-msgstr ""
-"AstroBin kon deze afbeelding niet plate-solve omdat nova.astrometry.net een "
-"interne serverfout meldde."
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an unepexted error."
-msgstr ""
-"AstroBin kon deze afbeelding niet plate-solve omdat nova.astrometry.net een "
-"onverwachte fout meldde."
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
-msgstr ""
-"Toon objecten uit de Lynds' Catalogus van Heldere Nebulae (LBN) (Lynds 1965)"
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr ""
-"Toon objecten uit de Lynds' Catalogus van Donkere Nebulae (LDN) (Lynds 1962)"
-
-#, fuzzy
-msgid "Show quasars"
-msgstr "Toon quasars"
-
-#, fuzzy
-msgid "Missing"
-msgstr "Ontbrekend"
-
-#, fuzzy
-msgid "Basic pending"
-msgstr "Basis in behandeling"
-
-#, fuzzy
-msgid "Basic failed"
-msgstr "Basis mislukt"
-
-#, fuzzy
-msgid "Basic success"
-msgstr "Basis succesvol"
-
-#, fuzzy
-msgid "Advanced pending"
-msgstr "Geavanceerd in behandeling"
-
-#, fuzzy
-msgid "Advanced failed"
-msgstr "Geavanceerd mislukt"
-
-#, fuzzy
-msgid "Advanced success"
-msgstr "Geavanceerd succesvol"
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error."
-msgstr ""
-"AstroBin kon deze afbeelding niet plate-solve vanwege een onverwachte fout."
-
-#, fuzzy
-msgid "n/a"
-msgstr "n/a"
-
-#, fuzzy
-msgid "Starting task..."
-msgstr "Taak starten..."
-
-#, fuzzy
-msgid "Downloading image..."
-msgstr "Afbeelding downloaden..."
-
-#, fuzzy
-msgid "Plate-solving image..."
-msgstr "Afbeelding plate-solving..."
-
-#, fuzzy
-msgid "Generating image annotations..."
-msgstr "Afbeeldingsannotaties genereren..."
-
-#, fuzzy
-msgid "Processing SVG documents..."
-msgstr "SVG-documenten verwerken..."
-
-#, fuzzy
-msgid "Uploading results..."
-msgstr "Resultaten uploaden..."
-
-#, fuzzy
-msgid "Task completed"
-msgstr "Taak voltooid"
-
-#, fuzzy
-msgid "Plate-solving information"
-msgstr "Plate-solving informatie"
-
-#, fuzzy
-msgid "Status"
-msgstr "Status"
-
-#, fuzzy
-msgid "Started"
-msgstr "Gestart"
-
-#, fuzzy
-msgid "Astrometry.net job"
-msgstr "Astrometry.net taak"
-
-#, fuzzy
-msgid "PixInsight job"
-msgstr "PixInsight taak"
-
-#, fuzzy
-msgid "PixInsight queue size"
-msgstr "PixInsight wachtrijgrootte"
-
-#, fuzzy
-msgid "PixInsight stage"
-msgstr "PixInsight fase"
-
-#, fuzzy
-msgid "PixInsight log"
-msgstr "PixInsight log"
-
-#, fuzzy
-msgid "RA"
-msgstr "RA"
-
-#, fuzzy
-msgid "center"
-msgstr "centrum"
-
-#, fuzzy
-msgid "degrees"
-msgstr "graden"
-
-#, fuzzy
-msgid "top/left"
-msgstr "boven/links"
-
-#, fuzzy
-msgid "top/right"
-msgstr "boven/rechts"
-
-#, fuzzy
-msgid "bottom/right"
-msgstr "onder/rechts"
-
-#, fuzzy
-msgid "bottom/left"
-msgstr "onder/links"
-
-#, fuzzy
-msgid "Dec"
-msgstr "Dec"
-
-#, fuzzy
-msgid "Close"
-msgstr "Sluiten"
-
-#, fuzzy
-msgid "Invalid"
-msgstr "Ongeldig"
-
-#, fuzzy
-msgid "Generating finding charts..."
-msgstr "Zoeken naar kaarten genereren..."
-
-#, fuzzy
-msgid "Paying member"
-msgstr "Betaald lid"
-
-#, fuzzy
-msgid ""
-"You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically."
-msgstr ""
-"Je hebt een automatisch verlengend abonnement op AstroBin, en we zullen "
-"proberen het automatisch te verlengen."

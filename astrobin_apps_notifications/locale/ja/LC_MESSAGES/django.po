@@ -1,25 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
-
-msgid "Notifications"
-msgstr "通知"
-
-msgid "You have no notifications."
-msgstr "通知はありません。"
-
-msgid "Settings"
-msgstr "設定"
-
-msgid "Mark all as read"
-msgstr "全てを既読とする"
-
-msgid "You have no new notifications."
-msgstr "新しい通知はありません"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "You have a new follower"
 msgstr "新しいフォロワーがいます"
@@ -33,14 +20,48 @@ msgstr "あなたがフォローするユーザーが新しい修正画像を公
 msgid "Your image was plate-solved"
 msgstr "あなたの画像がプレートソルビングされました"
 
+#, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "あなたの画像はモデレーターによって承認されました"
+
 msgid "Your image could not be plate-solved"
 msgstr "あなたの画像がプレートソルビングに失敗しました"
+
+msgid "Your image was plate-solved (advanced)"
+msgstr "あなたの画像がプレートソルビングされました（高度タイプ）"
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "あなたの画像がプレートソルビングに失敗しました。（高度タイプ）"
 
 msgid "Your image received a new comment"
 msgstr "あなたの画像に新しいコメントがありました"
 
+msgid "Your edit proposal received a new comment"
+msgstr "あなたの編集提案に新しいコメントが届きました"
+
+msgid "Your scheduled IOTD received a new comment"
+msgstr "予定されていたIOTDに新しいコメントが届きました"
+
+msgid "Your unapproved equipment item received a comment"
+msgstr "あなたの未承認の機材にコメントが届きました"
+
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "あなたのリスティングに新しいプライベート会話があります"
+
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "あなたのプライベート会話に新しいコメントがあります"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "あなたのリスティングに新しい質問があります"
+
 msgid "There was a reply to your comment"
 msgstr "あなたへのコメントに返信がありました"
+
+msgid "A new comment on your image requires moderation"
+msgstr "あなたの画像への新しいコメントは、調整が必要です"
 
 msgid "Your comment was approved"
 msgstr "あなたのコメントは承認されました"
@@ -57,6 +78,9 @@ msgstr "あなたのコメントに「いいね！」されました"
 msgid "Your forum post was liked"
 msgstr "フォーラムへのあなたの投稿に「いいね！」されました"
 
+msgid "Your forum post was approved"
+msgstr "あなたのフォーラムへの投稿が承認されました・"
+
 msgid "Your API Key request has been approved"
 msgstr "あなたのAPIキーのリクエストが承認されました"
 
@@ -67,7 +91,8 @@ msgid "You are invited to a group"
 msgstr "グループに招待されました"
 
 msgid "A user requested to join a group you moderate"
-msgstr "あなたがモデレートしているグループに、ユーザーから参加リクエストがありました"
+msgstr ""
+"あなたがモデレートしているグループに、ユーザーから参加リクエストがありました"
 
 msgid "A group moderator approved your request to join"
 msgstr "グループのモデレーターが、あなたの参加リクエストを承認しました"
@@ -80,6 +105,17 @@ msgstr "あなたがフォローするユーザーが新しい公開グループ
 
 msgid "New forum topic in a group you are a member of"
 msgstr "あなたが所属しているグループに新しいフォーラムトピックができました"
+
+msgid "New forum topic for an equipment item you use"
+msgstr "あなたが使用する機材に関するフォーラムに新しいトピックがありました"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "あなたがフォローしている機材アイテムの新しいフォーラムトピック"
+
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "あなたのフォーラムトピックが移動されました"
 
 msgid "You have received a new private message"
 msgstr "新しいプライベートメッセージが届きました"
@@ -105,6 +141,13 @@ msgstr "リモートで撮影したデータソースに間違いがある画像
 msgid "Would you like to activate your account?"
 msgstr "アカウントのアクティベーションを行いますか？"
 
+msgid "New reply in a subscribed forum topic"
+msgstr "登録中のフォーラムトピックで新しい返信がありました"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "あなたが始めたフォーラムトピックに新しい返信があります"
+
 msgid "You were mentioned in a forum post"
 msgstr "フォーラムへの投稿であなたはメンションされました"
 
@@ -117,11 +160,27 @@ msgstr "AstroBinへようこそ！"
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "AstroBinへの初投稿を祝福します！"
 
+#, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "あなたの画像はIOTD/TPの考慮に提出されました"
+
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "画像はIOTD/TPの考慮に提出されていません"
+
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "あなたの画像はIOTD/TP提出の締切が近づいています"
+
 msgid "Thank you for getting a subscription!"
 msgstr "定期契約をしてくれてありがとうございました。"
 
 msgid "Thank you for your payment!"
 msgstr "支払いをしていただきありがとうございました"
+
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "サブスクリプションがキャンセルされました"
 
 msgid "You were removed from the IOTD staff"
 msgstr "あなたはIOTHのスタッフから削除されました"
@@ -129,121 +188,15 @@ msgstr "あなたはIOTHのスタッフから削除されました"
 msgid "You have been inactive as an IOTD staff member"
 msgstr "あなたはIOTDのスタッフから無効化されました"
 
+#, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "あなたのIOTDスタッフの活動が不十分です"
+
 msgid "An image you promoted made it to Top Pick"
 msgstr "あなたが公開した画像がTop Pickに選ばれました"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "あなたが公開した画像がIOTDに選ばれました"
-
-msgid "New reply in a subscribed forum topic"
-msgstr "登録中のフォーラムトピックで新しい返信がありました"
-
-msgid "Your image was nominated to be a Top Pick"
-msgstr "あなたの画像がTop Pickにノミネートされました"
-
-msgid "Your image was voted Top Pick"
-msgstr "あなたの画像がTop Pickに投票されました"
-
-msgid "Your image was voted Image of the Day"
-msgstr "あなたの画像が Image of the Dayに投票されました"
-
-msgid "Your image was plate-solved (advanced)"
-msgstr "あなたの画像がプレートソルビングされました（高度タイプ）"
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "あなたの画像がプレートソルビングに失敗しました。（高度タイプ）"
-
-msgid "A new comment on your image requires moderation"
-msgstr "あなたの画像への新しいコメントは、調整が必要です"
-
-msgid "Your forum post was approved"
-msgstr "あなたのフォーラムへの投稿が承認されました・"
-
-msgid "You were mentioned in an image description"
-msgstr "画像の説明文にあなたがメンションされました"
-
-msgid "Your edit proposal received a new comment"
-msgstr "あなたの編集提案に新しいコメントが届きました"
-
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "あなたの画像がIOTD/TPに応募されました。"
-
-msgid "A gear item that you used was renamed"
-msgstr "あなたが使用した機材の名称が変更されました"
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr "予定されていたIOTDに新しいコメントが届きました"
-
-msgid "Your unapproved equipment item received a comment"
-msgstr "あなたの未承認の機材にコメントが届きました"
-
-msgid "New forum topic for an equipment item you use"
-msgstr "あなたが使用する機材に関するフォーラムに新しいトピックがありました"
-
-msgid "You were added as a collaborator to an image"
-msgstr "画像のコラボレーターとしてあなたは追加されました"
-
-msgid "You were removed as a collaborator to an image"
-msgstr "画像のコラボレーターからあなたは解除されました"
-
-msgid "User removed self as a collaborator to your image"
-msgstr "あなたの画像へのコラボレーターについて、ユーザーが自分の登録を解除しました"
-
-#, fuzzy
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr "あなたの画像はIOTD/TPの考慮に提出されました"
-
-#, fuzzy
-msgid "Login attempt detected from a different country"
-msgstr "別の国からのログイン試行が検出されました"
-
-#, fuzzy
-msgid "Login attempt with weak password"
-msgstr "弱いパスワードでのログイン試行"
-
-#, fuzzy
-msgid "Your image was approved by a moderator"
-msgstr "あなたの画像はモデレーターによって承認されました"
-
-#, fuzzy
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr "画像はIOTD/TPの考慮に提出されていません"
-
-#, fuzzy
-msgid "Subscription canceled"
-msgstr "サブスクリプションがキャンセルされました"
-
-#, fuzzy
-msgid "Your forum topic was moved"
-msgstr "あなたのフォーラムトピックが移動されました"
-
-#, fuzzy
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr "あなたの画像はIOTD/TP提出の締切が近づいています"
-
-#, fuzzy
-msgid "Your listing has a new private conversation"
-msgstr "あなたのリスティングに新しいプライベート会話があります"
-
-#, fuzzy
-msgid "Your private conversation has a new comment"
-msgstr "あなたのプライベート会話に新しいコメントがあります"
-
-#, fuzzy
-msgid "Your listing has a new question"
-msgstr "あなたのリスティングに新しい質問があります"
-
-#, fuzzy
-msgid "New forum topic for an equipment item you follow"
-msgstr "あなたがフォローしている機材アイテムの新しいフォーラムトピック"
-
-#, fuzzy
-msgid "New reply in a forum topic that you started"
-msgstr "あなたが始めたフォーラムトピックに新しい返信があります"
-
-#, fuzzy
-msgid "Your IOTD staff activity is insufficient"
-msgstr "あなたのIOTDスタッフの活動が不十分です"
 
 #, fuzzy
 msgid "An image you dismissed made it to Top Pick"
@@ -254,8 +207,32 @@ msgid "An image you dismissed made it to IOTD"
 msgstr "あなたが却下した画像がIOTDに選ばれました"
 
 #, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "あなたの画像はTop Pickノミネーションになるかもしれません"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "あなたの画像はTop Pickになるかもしれません"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "あなたの画像はTop Pickノミネーションに投票されました"
+
+msgid "Your image was voted Top Pick"
+msgstr "あなたの画像がTop Pickに投票されました"
+
+msgid "Your image was voted Image of the Day"
+msgstr "あなたの画像が Image of the Dayに投票されました"
+
+#, fuzzy
 msgid "Your IOTD staff member stats"
 msgstr "あなたのIOTDスタッフメンバーの統計"
+
+msgid "You were mentioned in an image description"
+msgstr "画像の説明文にあなたがメンションされました"
+
+msgid "A gear item that you used was renamed"
+msgstr "あなたが使用した機材の名称が変更されました"
 
 #, fuzzy
 msgid "Collaboration Request: Accept or Deny"
@@ -269,14 +246,20 @@ msgstr "ユーザーがあなたのコラボレーションリクエストを受
 msgid "User denied your collaboration request"
 msgstr "ユーザーがあなたのコラボレーションリクエストを拒否しました"
 
-#, fuzzy
-msgid "Your image might become a Top Pick Nomination"
-msgstr "あなたの画像はTop Pickノミネーションになるかもしれません"
+msgid "You were added as a collaborator to an image"
+msgstr "画像のコラボレーターとしてあなたは追加されました"
+
+msgid "You were removed as a collaborator to an image"
+msgstr "画像のコラボレーターからあなたは解除されました"
+
+msgid "User removed self as a collaborator to your image"
+msgstr ""
+"あなたの画像へのコラボレーターについて、ユーザーが自分の登録を解除しました"
 
 #, fuzzy
-msgid "Your image might become a Top Pick"
-msgstr "あなたの画像はTop Pickになるかもしれません"
+msgid "Login attempt detected from a different country"
+msgstr "別の国からのログイン試行が検出されました"
 
 #, fuzzy
-msgid "Your image was voted Top Pick Nomination"
-msgstr "あなたの画像はTop Pickノミネーションに投票されました"
+msgid "Login attempt with weak password"
+msgstr "弱いパスワードでのログイン試行"

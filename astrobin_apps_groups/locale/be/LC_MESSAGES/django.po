@@ -1,11 +1,23 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: be\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
-"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Толькі наступныя катэгорыі падтрымліваюць аўтаадпраўку: Прафесійная сетка, "
+"Клуб або асацыяцыя, Інтэрнэт-супольнасць, Друзі або партнёры, Геаграфічная "
+"зона."
 
 #, fuzzy
 msgid "Autosubmission deactivation strategy"
@@ -76,6 +88,18 @@ msgid "Other"
 msgstr "Іншае"
 
 #, fuzzy
+msgid "Publication"
+msgstr "Публікацыя."
+
+#, fuzzy
+msgid "Title"
+msgstr "Загаловак."
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Ключ/значэнне тэга."
+
+#, fuzzy
 msgid "Name"
 msgstr "Назва"
 
@@ -90,6 +114,24 @@ msgstr "HTML-тэгі дазволены."
 #, fuzzy
 msgid "Category"
 msgstr "Катэгорыя"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Сартаванне малюнкаў па змаўчанні."
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Сартаванне малюнкаў па ключах/значэннях тэга."
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Калі малюнкі сартаваны па ключах/значэннях тэга, калі ласка, укажыце, які з "
+"іх. <a target='_blank' href='https://welcome.astrobin.com/features/"
+"groups'>Даведайцеся больш.<\\/a>."
 
 #, fuzzy
 msgid "Public group"
@@ -126,8 +168,27 @@ msgstr ""
 "якія яўна адправленыя ў іх."
 
 #, fuzzy
+msgid "Forum notice"
+msgstr "Анонс форуму."
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Увядзіце 'Анонс форуму', які будзе адлюстраваны над формай 'новая тэма'. "
+"Выкарыстоўвайце гэта для камунікацыі правілаў форуму, адмоваў або важнай "
+"інфармацыі для карыстальнікаў перад тым, як яны створыць новы пост. "
+"Пераканайцеся, што ваша паведамленне яснае і лаканічнае."
+
+#, fuzzy
 msgid "Last activity"
 msgstr "Апошняя актыўнасць"
+
+#, fuzzy
+msgid "Date created"
+msgstr "Дата стварэння"
 
 #, fuzzy
 msgid "Members"
@@ -186,6 +247,10 @@ msgid "Cancel"
 msgstr "Скасаваць"
 
 #, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Калі ласка, не дадавайце больш за 100 малюнкаў за адзін раз, дзякуй!"
+
+#, fuzzy
 msgid "Delete group?"
 msgstr "Выдаліць групу?"
 
@@ -234,6 +299,10 @@ msgid "Moderate join requests"
 msgstr "Умераныя запыты на далучэнне"
 
 #, fuzzy
+msgid "Sort images"
+msgstr "Сартаваць малюнкі."
+
+#, fuzzy
 msgid "This group is public"
 msgstr "Група публічная"
 
@@ -265,7 +334,6 @@ msgstr "Запрошаныя карыстальнікі"
 msgid "Join requests"
 msgstr "Запыты на далучэнне"
 
-#, fuzzy
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
@@ -278,14 +346,13 @@ msgstr ""
 msgid "Group forum"
 msgstr "Форум групы"
 
-#, fuzzy
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
-"<strong>%(post_count)s</strong> паведамленняў у <strong>%(topic_count)"
-"s</strong> тэмах"
+"<strong>%(post_count)s</strong> паведамленняў у <strong>%(topic_count)s</"
+"strong> тэмах"
 
 #, fuzzy
 msgid "View all"
@@ -294,10 +361,6 @@ msgstr "Паглядзець усе"
 #, fuzzy
 msgid "New topic"
 msgstr "Новая тэма"
-
-#, fuzzy
-msgid "Please join the group to view its forum."
-msgstr "Калі ласка, далучыцеся да групы, каб паглядзець яе форум."
 
 #, fuzzy
 msgid ""
@@ -372,36 +435,36 @@ msgid "Sort"
 msgstr "Сартаваць"
 
 #, fuzzy
-msgid "Date created"
-msgstr "Дата стварэння"
+msgid "Search"
+msgstr "Пошук."
 
 #, fuzzy
-msgid "Your private groups"
-msgstr "Вашы прыватныя групы"
+msgid "Private groups you own"
+msgstr "Прыватныя групы, якія вы валодаеце."
 
 #, fuzzy
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr ""
-"Вы валодаеце, або з'яўляецеся ўдзельнікам, або былі запрошаны ў гэтыя "
-"прыватныя групы."
+msgid "Private groups you are a member of"
+msgstr "Прыватныя групы, у якіх вы ўдзельнік."
 
 #, fuzzy
-msgctxt "group"
-msgid "Create private group"
-msgstr "Стварыць прыватную групу"
+msgid "Private groups you are invited to"
+msgstr "Прыватныя групы, у якія вас запрасілі."
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Публічныя групы, якія вы валодаеце."
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Публічныя групы, у якіх вы ўдзельнік."
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Публічныя групы, у якія вас запрасілі."
 
 #, fuzzy
 msgid "Public groups"
 msgstr "Публічныя групы"
-
-#, fuzzy
-msgid "Open to the whole community."
-msgstr "Адкрыта для ўсёй супольнасці."
-
-#, fuzzy
-msgctxt "group"
-msgid "Create public group"
-msgstr "Стварыць публічную групу"
 
 #, fuzzy
 msgid "No groups available."
@@ -488,6 +551,14 @@ msgid "This group has no join requests."
 msgstr "У гэтай групе няма запытаў на далучэнне."
 
 #, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Што-то пайшло не так, калі ласка, паспрабуйце яшчэ раз пазней."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Увядзіце ваша паведамленне тут..."
+
+#, fuzzy
 msgid "You cannot add images that are not yours!"
 msgstr "Вы не можаце дадаваць выявы, якія не належаць вам!"
 
@@ -530,102 +601,3 @@ msgstr "Вы пакінулі групу."
 #, fuzzy
 msgid "Form saved"
 msgstr "Форма захавана."
-
-#, fuzzy
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Толькі наступныя катэгорыі падтрымліваюць аўтаадпраўку: Прафесійная сетка, "
-"Клуб або асацыяцыя, Інтэрнэт-супольнасць, Друзі або партнёры, Геаграфічная "
-"зона."
-
-#, fuzzy
-msgid "Publication"
-msgstr "Публікацыя."
-
-#, fuzzy
-msgid "Title"
-msgstr "Загаловак."
-
-#, fuzzy
-msgid "Key/value tag"
-msgstr "Ключ/значэнне тэга."
-
-#, fuzzy
-msgid "Default image sorting"
-msgstr "Сартаванне малюнкаў па змаўчанні."
-
-#, fuzzy
-msgid "Image key/value tag sorting"
-msgstr "Сартаванне малюнкаў па ключах/значэннях тэга."
-
-#, fuzzy
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Калі малюнкі сартаваны па ключах/значэннях тэга, калі ласка, укажыце, які з "
-"іх. <a target='_blank' href='https://welcome.astrobin.com/features/groups'>"
-"Даведайцеся больш.<\\/a>."
-
-#, fuzzy
-msgid "Search"
-msgstr "Пошук."
-
-#, fuzzy
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Калі ласка, не дадавайце больш за 100 малюнкаў за адзін раз, дзякуй!"
-
-#, fuzzy
-msgid "Sort images"
-msgstr "Сартаваць малюнкі."
-
-#, fuzzy
-msgid "Private groups you own"
-msgstr "Прыватныя групы, якія вы валодаеце."
-
-#, fuzzy
-msgid "Private groups you are a member of"
-msgstr "Прыватныя групы, у якіх вы ўдзельнік."
-
-#, fuzzy
-msgid "Private groups you are invited to"
-msgstr "Прыватныя групы, у якія вас запрасілі."
-
-#, fuzzy
-msgid "Public groups you own"
-msgstr "Публічныя групы, якія вы валодаеце."
-
-#, fuzzy
-msgid "Public groups you are a member of"
-msgstr "Публічныя групы, у якіх вы ўдзельнік."
-
-#, fuzzy
-msgid "Public groups you are invited to"
-msgstr "Публічныя групы, у якія вас запрасілі."
-
-#, fuzzy
-msgid "Forum notice"
-msgstr "Анонс форуму."
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Увядзіце 'Анонс форуму', які будзе адлюстраваны над формай 'новая тэма'. "
-"Выкарыстоўвайце гэта для камунікацыі правілаў форуму, адмоваў або важнай "
-"інфармацыі для карыстальнікаў перад тым, як яны створыць новы пост. "
-"Пераканайцеся, што ваша паведамленне яснае і лаканічнае."
-
-#, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Што-то пайшло не так, калі ласка, паспрабуйце яшчэ раз пазней."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Увядзіце ваша паведамленне тут..."

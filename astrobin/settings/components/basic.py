@@ -327,14 +327,6 @@ ALL_DATE_FORMATS = {
         'RANGE_SAME_MONTH': 'Y年n1月j1日 - j2日',
         'RANGE_SAME_YEAR': 'Y年n1月j1日 - n2月j2日',
     },
-    'ar': {
-        'DATE_FORMAT': 'j F، Y',
-        'DAY': 'j',
-        'MONTH': 'F',
-        'YEAR': 'Y',
-        'RANGE_SAME_MONTH': 'j1 - j2 F، Y',
-        'RANGE_SAME_YEAR': 'j1 F1. - j2 F2، Y',
-    },
     'el': {
         'DATE_FORMAT': 'd/M/Y',
         'DAY': 'd',

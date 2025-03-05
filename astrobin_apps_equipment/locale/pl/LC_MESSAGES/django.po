@@ -1,642 +1,867 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:38+0000\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 "
-"&&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 &&(n"
+"%100<10||n%100 >= 20)? 1 : 2);\n"
 
+#, fuzzy
 msgid ""
 "This edit proposal cannot be approved because an item with this brand and "
 "name already exists. Please reject it."
 msgstr ""
+"Ta propozycja edycji nie może zostać zatwierdzona, ponieważ przedmiot o tej "
+"marce i nazwie już istnieje. Proszę ją odrzucić."
 
+#, fuzzy
 msgid ""
 "This edit proposal needs to be approved by a moderator because it changes "
 "the name of the item."
 msgstr ""
+"Ta propozycja edycji musi zostać zatwierdzona przez moderatora, ponieważ "
+"zmienia nazwę przedmiotu."
 
+#, fuzzy
 msgid "Currency not supported."
-msgstr ""
+msgstr "Waluta nie jest obsługiwana."
 
+#, fuzzy
 msgid "AstroBin couldn't fetch an exchange rate for the selected currency."
-msgstr ""
+msgstr "AstroBin nie mógł pobrać kursu wymiany dla wybranej waluty."
 
+#, fuzzy
 msgid "Invalid condition."
-msgstr ""
+msgstr "Nieprawidłowy stan."
 
+#, fuzzy
 msgid "Someone else is working on this item right now. Please try again later."
 msgstr ""
+"Ktoś inny pracuje nad tym elementem w tej chwili. Spróbuj ponownie później."
 
+#, fuzzy
 msgid "Computer"
-msgstr ""
+msgstr "Komputer"
 
+#, fuzzy
 msgid "Dew mitigation"
-msgstr ""
+msgstr "Zarządzanie rosą"
 
+#, fuzzy
 msgid "Field derotator / camera rotator"
-msgstr ""
+msgstr "Derotator pola / rotator kamery"
 
+#, fuzzy
 msgid "Filter wheel"
-msgstr ""
+msgstr "Koło filtrów"
 
+#, fuzzy
 msgid "Flat box"
-msgstr ""
+msgstr "Płaska ramka"
 
+#, fuzzy
 msgid "Focal modifier / field corrector"
-msgstr ""
+msgstr "Modyfikator ogniskowej / korektor pola"
 
+#, fuzzy
 msgid "Focuser"
-msgstr ""
+msgstr "Fokuser"
 
+#, fuzzy
 msgid "Off-axis guider"
-msgstr ""
+msgstr "Guiding off-axis"
 
+#, fuzzy
 msgid "Observatory control"
-msgstr ""
+msgstr "Sterowanie obserwatorium"
 
+#, fuzzy
 msgid "Observatory dome"
-msgstr ""
+msgstr "Kopuła obserwatorium"
 
+#, fuzzy
 msgid "Power distribution"
-msgstr ""
+msgstr "Dystrybucja energii"
 
+#, fuzzy
 msgid "Weather monitoring"
-msgstr ""
+msgstr "Monitorowanie pogody"
 
+#, fuzzy
 msgid "Mount control"
-msgstr ""
+msgstr "Sterowanie montażem"
 
+#, fuzzy
 msgid "Other"
-msgstr ""
+msgstr "Inne"
 
+#, fuzzy
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
+#, fuzzy
 msgid "Unknown"
-msgstr ""
+msgstr "Nieznany"
 
+#, fuzzy
 msgctxt "Pertaining to cameras, e.g. a modified Canon"
 msgid "modified"
-msgstr ""
+msgstr "zmodyfikowany"
 
+#, fuzzy
 msgid "cooled"
-msgstr ""
+msgstr "schłodzony"
 
+#, fuzzy
 msgid "Dedicated deep-sky camera"
-msgstr ""
+msgstr "Dedykowana kamera do astrofotografii"
 
+#, fuzzy
 msgid "General purpose DSLR or mirrorless camera"
-msgstr ""
+msgstr "Aparat DSLR lub bezlusterkowy ogólnego przeznaczenia"
 
+#, fuzzy
 msgid "Guider/Planetary camera"
-msgstr ""
+msgstr "Kamera prowadząca / planetarna"
 
+#, fuzzy
 msgid "General purpose video camera"
-msgstr ""
+msgstr "Kamera wideo ogólnego przeznaczenia"
 
+#, fuzzy
 msgid "Film camera"
-msgstr ""
+msgstr "Aparat filmowy"
 
+#, fuzzy
 msgid "Sensor"
-msgstr ""
+msgstr "Sensor"
 
+#, fuzzy
 msgid "Cooled"
-msgstr ""
+msgstr "Chłodzona"
 
+#, fuzzy
 msgid "Max. cooling (C)"
-msgstr ""
+msgstr "Max. chłodzenie (C)"
 
+#, fuzzy
 msgid "Back focus (mm)"
-msgstr ""
+msgstr "Odstęp tylny (mm)"
 
+#, fuzzy
 msgid "Yes"
-msgstr ""
+msgstr "Tak"
 
+#, fuzzy
 msgid "No"
-msgstr ""
+msgstr "Nie"
 
+#, fuzzy
 msgid "Approved"
-msgstr ""
+msgstr "Zatwierdzona"
 
+#, fuzzy
 msgid "Rejected"
-msgstr ""
+msgstr "Odrzucony"
 
+#, fuzzy
 msgid "Superseded"
-msgstr ""
+msgstr "Zastąpiony"
 
+#, fuzzy
 msgid "Camera"
-msgstr ""
+msgstr "Aparat"
 
+#, fuzzy
 msgid "Telescope"
-msgstr ""
+msgstr "Teleskop"
 
+#, fuzzy
 msgid "Mount"
-msgstr ""
+msgstr "Montaż"
 
+#, fuzzy
 msgid "Filter"
-msgstr ""
+msgstr "Filtr"
 
+#, fuzzy
 msgid "Accessory"
-msgstr ""
+msgstr "Akcesorium"
 
+#, fuzzy
 msgid "Software"
-msgstr ""
+msgstr "Oprogramowanie"
 
+#, fuzzy
 msgid "Imaging"
-msgstr ""
+msgstr "Obrazowanie"
 
+#, fuzzy
 msgid "Guiding"
-msgstr ""
+msgstr "Guiding"
 
+#, fuzzy
 msgid "Back order"
-msgstr ""
+msgstr "Zamówienie oczekujące"
 
+#, fuzzy
 msgid "In stock"
-msgstr ""
+msgstr "Dostępny w magazynie"
 
+#, fuzzy
 msgid "Out of stock"
-msgstr ""
+msgstr "Brak w magazynie"
 
+#, fuzzy
 msgid "Negative"
-msgstr ""
+msgstr "Negatywny"
 
+#, fuzzy
 msgid "Neutral"
-msgstr ""
+msgstr "Neutralny"
 
+#, fuzzy
 msgid "Positive"
-msgstr ""
+msgstr "Pozytywna"
 
+#, fuzzy
 msgid "Seller"
-msgstr ""
+msgstr "Sprzedawca"
 
+#, fuzzy
 msgid "Buyer"
-msgstr ""
+msgstr "Kupujący"
 
+#, fuzzy
+msgid "For sale"
+msgstr "Na sprzedaż"
+
+#, fuzzy
+msgid "Wanted"
+msgstr "Poszukiwane"
+
+#, fuzzy
 msgid "Standard mail"
-msgstr ""
+msgstr "Standardowa poczta"
 
+#, fuzzy
 msgid "Courier"
-msgstr ""
+msgstr "Kurier"
 
+#, fuzzy
 msgid "Electronic"
-msgstr ""
+msgstr "Elektronika"
 
+#, fuzzy
 msgid "Unopened"
-msgstr ""
+msgstr "Nieotwierane"
 
+#, fuzzy
 msgid "New"
-msgstr ""
+msgstr "Nowa"
 
+#, fuzzy
 msgid "Used"
-msgstr ""
+msgstr "Używany"
 
+#, fuzzy
 msgid "Damaged or defective"
-msgstr ""
+msgstr "Uszkodzony lub wadliwy"
 
+#, fuzzy
 msgid "Remote data source"
-msgstr ""
+msgstr "Zdalne źródło danych"
 
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "Nazwa"
 
+#, fuzzy
 msgid "Imaging telescopes or lenses"
-msgstr ""
+msgstr "Teleskopy lub obiektywy do astrofotografii"
 
+#, fuzzy
 msgid "Guiding telescopes or lenses"
-msgstr ""
+msgstr "Teleskopy lub soczewki do prowadzenia"
 
+#, fuzzy
 msgid "Mounts"
-msgstr ""
+msgstr "Montowanie"
 
+#, fuzzy
 msgid "Imaging cameras"
-msgstr ""
+msgstr "Kamery do obrazowania"
 
+#, fuzzy
 msgid "Guiding cameras"
-msgstr ""
+msgstr "Kamery prowadzące"
 
+#, fuzzy
 msgid "Filters"
-msgstr ""
+msgstr "Filtry"
 
+#, fuzzy
 msgid "Accessories"
-msgstr ""
+msgstr "Akcesoria"
 
+#, fuzzy
 msgid "Hydrogen-alpha (Hα)"
-msgstr ""
+msgstr "Wodór alfa (Hα)"
 
+#, fuzzy
 msgid "Hydrogen-beta (Hβ)"
-msgstr ""
+msgstr "Wodór-beta (Hβ)"
 
+#, fuzzy
 msgid "Sulfur-II (SII)"
-msgstr ""
+msgstr "Siarka-II (SII)"
 
+#, fuzzy
 msgid "Oxygen-III (OIII)"
-msgstr ""
+msgstr "Tlen-III (OIII)"
 
+#, fuzzy
 msgid "Nitrogen-II (NII)"
-msgstr ""
+msgstr "Azot-II (NII)"
 
+#, fuzzy
 msgid "Ultraviolet (UV)"
-msgstr ""
+msgstr "Ultrafiolet (UV)"
 
+#, fuzzy
 msgid "Infrared (IR)"
-msgstr ""
+msgstr "Podczerwień (IR)"
 
+#, fuzzy
 msgid "Multiband"
-msgstr ""
+msgstr "Wielopasmowy"
 
+#, fuzzy
 msgid "Light pollution suppression"
-msgstr ""
+msgstr "Tłumienie zanieczyszczenia świetlnego"
 
+#, fuzzy
 msgid "Luminance/clear (L)"
-msgstr ""
+msgstr "Luminancja/przezroczysty (L)"
 
+#, fuzzy
 msgid "Red channel (R)"
-msgstr ""
+msgstr "Kanał czerwony (R)"
 
+#, fuzzy
 msgid "Green channel (G)"
-msgstr ""
+msgstr "Kanał zielony (G)"
 
+#, fuzzy
 msgid "Blue channel (B)"
-msgstr ""
+msgstr "Kanał niebieski (B)"
 
+#, fuzzy
 msgid "Neutral density (ND)"
-msgstr ""
+msgstr "Filtr neutralny (ND)"
 
+#, fuzzy
 msgid "Ultra High Contrast (UHC)"
-msgstr ""
+msgstr "Ultra Wysoki Kontrast (UHC)"
 
+#, fuzzy
 msgid "Sky glow"
-msgstr ""
+msgstr "Sky glow"
 
+#, fuzzy
 msgid "Solar"
-msgstr ""
+msgstr "Słoneczny"
 
+#, fuzzy
 msgid "Lunar"
-msgstr ""
+msgstr "Księżycowa"
 
+#, fuzzy
 msgid "Planetary"
-msgstr ""
+msgstr "Planetarny"
 
+#, fuzzy
 msgid "Cometary"
-msgstr ""
+msgstr "Kometażowy"
 
+#, fuzzy
 msgid "Photometric Ultraviolet"
-msgstr ""
+msgstr "Fotometryczny ultrafiolet"
 
+#, fuzzy
 msgid "Photometric Blue"
-msgstr ""
+msgstr "Fotometryczny Niebieski"
 
+#, fuzzy
 msgid "Photometric Visual"
-msgstr ""
+msgstr "Fotometryczny wizualny"
 
+#, fuzzy
 msgid "Photometric Red"
-msgstr ""
+msgstr "Czerwony fotometryczny"
 
+#, fuzzy
 msgid "Photometric Infrared"
-msgstr ""
+msgstr "Fotometryczny podczerwony"
 
+#, fuzzy
 msgid "Round"
-msgstr ""
+msgstr "Okrągły"
 
+#, fuzzy
 msgid "Square"
-msgstr ""
+msgstr "Kwadratowy"
 
+#, fuzzy
 msgid "Rectangular"
-msgstr ""
+msgstr "Prostokątny"
 
+#, fuzzy
 msgid "Bandwidth (nm)"
-msgstr ""
+msgstr "Szerokość pasma (nm)"
 
+#, fuzzy
 msgid "Size"
-msgstr ""
+msgstr "Rozmiar"
 
+#, fuzzy
 msgid "Alt-Az (altazimuth)"
-msgstr ""
+msgstr "Alt-Az (altazymutalna)"
 
+#, fuzzy
 msgid "Wedged Alt-Az"
-msgstr ""
+msgstr "Wklęsły Alt-Az"
 
+#, fuzzy
 msgid "Equatorial"
-msgstr ""
+msgstr "Równikowy"
 
+#, fuzzy
 msgid "German equatorial"
-msgstr ""
+msgstr "Niemiecki ekwatorialny"
 
+#, fuzzy
 msgid "Fork"
-msgstr ""
+msgstr "Widły"
 
+#, fuzzy
 msgid "Dobsonian"
-msgstr ""
+msgstr "Dobson"
 
+#, fuzzy
 msgid "Portable English"
-msgstr ""
+msgstr "Przenośny angielski"
 
+#, fuzzy
 msgid "Star tracker"
-msgstr ""
+msgstr "Tracker gwiazdowy"
 
+#, fuzzy
 msgid "Alt-Alt (altitude-altitude)"
-msgstr ""
+msgstr "Alt-Alt (wysokość-wysokość)"
 
+#, fuzzy
 msgid "Transit"
-msgstr ""
+msgstr "Transyt"
 
+#, fuzzy
 msgid "Hexapod"
-msgstr ""
+msgstr "Hexapod"
 
+#, fuzzy
 msgid "Tripod"
-msgstr ""
+msgstr "Statyw"
 
+#, fuzzy
 msgid "Dual Alt-Az / Equatorial"
-msgstr ""
+msgstr "Podwójna Alt-Az / Ekspozycyjna"
 
+#, fuzzy
 msgid "Weight (kg)"
-msgstr ""
+msgstr "Waga (kg)"
 
+#, fuzzy
 msgid "Payload (kg)"
-msgstr ""
+msgstr "Ładunek (kg)"
 
+#, fuzzy
 msgid "Computerized"
-msgstr ""
+msgstr "Skonfigurowany komputerowo"
 
+#, fuzzy
 msgid "Periodic error (arcsec)"
-msgstr ""
+msgstr "Błąd okresowy (arcsec)"
 
+#, fuzzy
 msgid "Periodic error correction"
-msgstr ""
+msgstr "Korekcja błędów okresowych"
 
+#, fuzzy
 msgid "Slew speed (deg/sec)"
-msgstr ""
+msgstr "Prędkość obrotu (stopnie/sekundę)"
 
+#, fuzzy
 msgid "Quantum efficiency"
-msgstr ""
+msgstr "Wydajność kwantowa"
 
+#, fuzzy
 msgid "Pixel size (μm)"
-msgstr ""
+msgstr "Rozmiar piksela (μm)"
 
+#, fuzzy
 msgid "Pixel width"
-msgstr ""
+msgstr "Szerokość piksela"
 
+#, fuzzy
 msgid "Pixel height"
-msgstr ""
+msgstr "Wysokość piksela"
 
+#, fuzzy
 msgid "Sensor width (mm)"
-msgstr ""
+msgstr "Szerokość sensora (mm)"
 
+#, fuzzy
 msgid "Sensor height (mm)"
-msgstr ""
+msgstr "Wysokość sensora (mm)"
 
+#, fuzzy
 msgid "Full well capacity"
-msgstr ""
+msgstr "Pojemność pełnego dołka"
 
+#, fuzzy
 msgid "Read noise (e-)"
-msgstr ""
+msgstr "Szum odczytu (e-)"
 
+#, fuzzy
 msgid "Frame rate"
-msgstr ""
+msgstr "Częstotliwość klatek"
 
+#, fuzzy
 msgid "Color"
-msgstr ""
+msgstr "Kolor"
 
+#, fuzzy
 msgid "Monochromatic"
-msgstr ""
+msgstr "Monochromatyczny"
 
+#, fuzzy
 msgid "Color or mono"
-msgstr ""
+msgstr "Kolor lub mono"
 
+#, fuzzy
 msgid "Refractor: achromatic"
-msgstr ""
+msgstr "Refraktor: akromatyczny"
 
+#, fuzzy
 msgid "Refractor: semi-apochromatic"
-msgstr ""
+msgstr "Refraktor: pół-apochromatyczny"
 
+#, fuzzy
 msgid "Refractor: apochromatic"
-msgstr ""
+msgstr "Refraktor: apochromatyczny"
 
+#, fuzzy
 msgid "Refractor: non-achromatic Galilean"
-msgstr ""
+msgstr "Refraktor: nie-achromatyczny Galileusz"
 
+#, fuzzy
 msgid "Refractor: non-achromatic Keplerian"
-msgstr ""
+msgstr "Refraktor: nie-achromatyczny Kepler"
 
+#, fuzzy
 msgid "Refractor: superachromat"
-msgstr ""
+msgstr "Refraktor: superachromat"
 
+#, fuzzy
 msgid "Refractor: Petzval"
-msgstr ""
+msgstr "Refraktor: Petzval"
 
+#, fuzzy
 msgid "Reflector: Dall-Kirkham"
-msgstr ""
+msgstr "Reflektor: Dall-Kirkham"
 
+#, fuzzy
 msgid "Reflector: Nasmyth"
-msgstr ""
+msgstr "Reflektor: Nasmyth"
 
+#, fuzzy
 msgid "Reflector: Ritchey Chretien"
-msgstr ""
+msgstr "Reflektor: Ritchey Chretien"
 
+#, fuzzy
 msgid "Reflector: Gregorian"
-msgstr ""
+msgstr "Reflektor: Gregorian"
 
+#, fuzzy
 msgid "Reflector: Herschellian"
-msgstr ""
+msgstr "Reflektor: Herschellian"
 
+#, fuzzy
 msgid "Reflector: Newtonian"
-msgstr ""
+msgstr "Reflektor: Newtona"
 
+#, fuzzy
 msgid "Reflector: Dobsonian"
-msgstr ""
+msgstr "Reflektor: Dobsonian"
 
+#, fuzzy
 msgid "Reflector: classical Cassegrain"
-msgstr ""
+msgstr "Reflektor: klasyczny Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Argunov-Cassegrain"
-msgstr ""
+msgstr "Katadioptryczny: Argunov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Klevtsov-Cassegrain"
-msgstr ""
+msgstr "Katadioptryczny: Klevtsov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Lurie-Houghton"
-msgstr ""
+msgstr "Katadioptryczny: Lurie-Houghton"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov"
-msgstr ""
+msgstr "Katadioptryczny: Maksutov"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov-Cassegrain"
-msgstr ""
+msgstr "Katadioptryczny: Maksutov-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: Maksutov-Newtonian"
-msgstr ""
+msgstr "Katadioptryczny: Maksutov-Newtonian"
 
+#, fuzzy
 msgid "Catadioptric: modified Dall-Kirkham"
-msgstr ""
+msgstr "Katadioptryczny: zmodyfikowany Dall-Kirkham"
 
+#, fuzzy
 msgid "Catadioptric: Schmidt camera"
-msgstr ""
+msgstr "Katadioptryczny: kamera Schmidta"
 
+#, fuzzy
 msgid "Catadioptric: Schmidt-Cassegrain"
-msgstr ""
+msgstr "Katadioptryczna: Schmidt-Cassegrain"
 
+#, fuzzy
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgstr ""
+msgstr "Katadioptryczny: ACF Schmidt-Cassegrain"
 
-msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
-msgstr ""
+#, fuzzy
+msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
+msgstr "Katadioptryczny: astrograph Rowe-Ackermann Schmidt"
 
+#, fuzzy
 msgid "Catadioptric: Riccardi-Honders"
-msgstr ""
+msgstr "Katadioptryczny: Riccardi-Honders"
 
+#, fuzzy
 msgid "Catadioptric: modified Harmer-Wynne"
-msgstr ""
+msgstr "Katadioptryczny: zmodyfikowany Harmer-Wynne"
 
+#, fuzzy
 msgid "Camera lens"
-msgstr ""
+msgstr "Obiektyw aparatu"
 
+#, fuzzy
 msgid "Binoculars"
-msgstr ""
+msgstr "Lornetki"
 
+#, fuzzy
 msgid "Aperture (mm)"
-msgstr ""
+msgstr "Średnica (mm)"
 
+#, fuzzy
 msgid "Min. focal length (mm)"
-msgstr ""
+msgstr "Min. ogniskowa (mm)"
 
+#, fuzzy
 msgid "Max. focal length (mm)"
-msgstr ""
+msgstr "Maks. ogniskowa (mm)"
 
+#, fuzzy
 msgid "Focal length (mm)"
-msgstr ""
+msgstr "Długość ogniskowej (mm)"
 
+#, fuzzy
 msgid "A new equipment item requires moderation"
-msgstr ""
+msgstr "Nowy element sprzętu wymaga moderacji"
 
+#, fuzzy
 msgid "Equipment item you created was approved"
-msgstr ""
+msgstr "Przedmiot sprzętu, który stworzyłeś, został zatwierdzony"
 
+#, fuzzy
 msgid "Equipment item was assigned to you"
-msgstr ""
+msgstr "Przedmiot sprzętu został przypisany do Ciebie"
 
+#, fuzzy
 msgid "Equipment item you created was rejected"
-msgstr ""
+msgstr "Utworzony element sprzętu został odrzucony"
 
+#, fuzzy
 msgid "Rejected equipment item removed from your image"
-msgstr ""
+msgstr "Odrzucony element sprzętu usunięty z twojego obrazu"
 
+#, fuzzy
 msgid "Equipment item received an edit proposal"
-msgstr ""
+msgstr "Element sprzętu otrzymał propozycję edycji"
 
+#, fuzzy
 msgid "Your edit proposal was approved"
-msgstr ""
+msgstr "Twoja propozycja edycji została zatwierdzona"
 
+#, fuzzy
 msgid "Edit proposal assigned to you"
-msgstr ""
+msgstr "Propozycja edycji przypisana do Ciebie"
 
+#, fuzzy
 msgid "Your edit proposal was rejected"
-msgstr ""
+msgstr "Twoja propozycja edycji została odrzucona"
 
+#, fuzzy
 msgid "Approved migration proposal of an equipment item"
-msgstr ""
+msgstr "Zatwierdzona propozycja migracji elementu sprzętu"
 
+#, fuzzy
 msgid "Rejected migration proposal of an equipment item"
-msgstr ""
+msgstr "Odrzucono propozycję migracji elementu sprzętu"
 
+#, fuzzy
 msgid "Ambiguous equipment item removed from presets"
-msgstr ""
+msgstr "Niejasny element sprzętu usunięty z presetów"
 
+#, fuzzy
 msgid "New image from followed equipment item"
-msgstr ""
+msgstr "Nowy obraz z obserwowanego sprzętu"
 
+#, fuzzy
 msgid "New offer for your marketplace listing"
-msgstr ""
+msgstr "Nowa oferta dla Twojego ogłoszenia na rynku"
 
+#, fuzzy
 msgid "Your offer for a marketplace listing was recorded"
-msgstr ""
+msgstr "Twoja oferta dla ogłoszenia na rynku została zarejestrowana"
 
+#, fuzzy
 msgid "Offer for your marketplace listing got updated"
-msgstr ""
+msgstr "Oferta dla twojego ogłoszenia na rynku została zaktualizowana"
 
+#, fuzzy
 msgid "Your offer for a marketplace listing was updated"
-msgstr ""
+msgstr "Twoja oferta na ogłoszenie na rynku została zaktualizowana"
 
+#, fuzzy
 msgid "Marketplace offer accepted by seller"
-msgstr ""
+msgstr "Oferta na rynku zaakceptowana przez sprzedawcę"
 
+#, fuzzy
 msgid "Marketplace offer accepted by you"
-msgstr ""
+msgstr "Oferta na rynku zaakceptowana przez Ciebie"
 
+#, fuzzy
 msgid "Marketplace offer rejected by seller"
-msgstr ""
+msgstr "Oferta na rynku odrzucona przez sprzedawcę"
 
+#, fuzzy
 msgid "Marketplace offer retracted by buyer"
-msgstr ""
+msgstr "Oferta na rynku wycofana przez kupującego"
 
+#, fuzzy
 msgid "Marketplace offer retracted successfully"
-msgstr ""
+msgstr "Oferta na rynku została pomyślnie wycofana"
 
+#, fuzzy
 msgid "Marketplace listing updated"
-msgstr ""
+msgstr "Oferta na rynku zaktualizowana"
 
+#, fuzzy
 msgid "Marketplace listing deleted"
-msgstr ""
+msgstr "Ogłoszenie na rynku usunięte"
 
+#, fuzzy
 msgid "Marketplace listing approved"
-msgstr ""
+msgstr "Lista na rynku zatwierdzona"
 
+#, fuzzy
 msgid "Marketplace listing expired"
-msgstr ""
+msgstr "Ogłoszenie na rynku wygasło"
 
+#, fuzzy
 msgid "Marketplace listing line item sold"
-msgstr ""
+msgstr "Pozycja na rynku została sprzedana"
 
+#, fuzzy
 msgid "Marketplace listing line item reserved"
-msgstr ""
+msgstr "Pozycja ogłoszenia zarezerwowana"
 
+#, fuzzy
 msgid "New marketplace listing by user you follow"
-msgstr ""
+msgstr "Nowe ogłoszenie na rynku od użytkownika, którego śledzisz"
 
+#, fuzzy
 msgid "New marketplace listing for item you follow"
-msgstr ""
+msgstr "Nowa lista na rynku dla przedmiotu, który obserwujesz"
 
+#, fuzzy
 msgid "Rate the seller for your recent purchase"
-msgstr ""
+msgstr "Oceń sprzedawcę za swoje ostatnie zakupy"
 
+#, fuzzy
 msgid "Rate the buyer for your recent sale"
-msgstr ""
+msgstr "Oceń kupującego za swoją ostatnią sprzedaż"
 
+#, fuzzy
 msgid "Mark your listing as sold if needed"
-msgstr ""
+msgstr "Oznacz swoją listę jako sprzedaną, jeśli to konieczne"
 
+#, fuzzy
 msgid "New comment to a marketplace feedback you received"
-msgstr ""
+msgstr "Nowy komentarz do opinii o rynku, którą otrzymałeś"
 
+#, fuzzy
 msgid "New comment to a marketplace feedback you left"
-msgstr ""
+msgstr "Nowy komentarz do opinii na rynku, którą zostawiłeś"
 
+#, fuzzy
 msgid "New marketplace feedback"
-msgstr ""
+msgstr "Nowa opinia na rynku"
 
+#, fuzzy
 msgid "Marketplace feedback updated"
-msgstr ""
+msgstr "Opinie na rynku zostały zaktualizowane"
 
+#, fuzzy
 msgid "Unspecified"
-msgstr ""
+msgstr "Nieokreślony"
 
 #, python-format
 msgid ""
 "Equipment item <strong>%(item)s</strong>  has been marked as ambiguous by a "
 "moderator, and removed from your presets."
 msgstr ""
+"Element sprzętu <strong>%(item)s</strong> został oznaczony jako "
+"niejednoznaczny przez moderatora i usunięty z twoich ustawień wstępnych."
 
 #, python-format
 msgid ""
 "This happened because \"%(item)s\" is not specific enough, and unambiguous "
 "variants already exist in the database."
 msgstr ""
+"To się stało, ponieważ \"%(item)s\" nie jest wystarczająco specyficzne, a w "
+"bazie danych już istnieją jednoznaczne warianty."
 
+#, fuzzy
 msgid ""
 "New images cannot be associated with this item anymore, but your past images "
 "have not been modified."
 msgstr ""
+"Nowe obrazy nie mogą być już powiązane z tym przedmiotem, ale twoje "
+"wcześniejsze obrazy nie zostały zmodyfikowane."
 
 #, python-format
 msgid ""
@@ -644,157 +869,184 @@ msgid ""
 "unambiguous version from the database instead, and then feel free to update "
 "your affected preset by saving it again."
 msgstr ""
+"Następnym razem, gdy przesyłasz zdjęcie, które potrzebuje \"%(item)s\", "
+"proszę wybierz jednoznaczną wersję z bazy danych, a następnie możesz "
+"zaktualizować swój dotknięty preset, zapisując go ponownie."
 
+#, fuzzy
 msgid "View item"
-msgstr ""
+msgstr "Zobacz element"
 
+#, fuzzy
 msgid "Thank you for your understanding."
-msgstr ""
+msgstr "Dziękujemy za zrozumienie."
 
 #, python-format
 msgid ""
 "Equipment item \"%(item)s\" has been marked as ambiguous by a moderator, and "
 "removed from your presets"
 msgstr ""
+"Element sprzętu \"%(item)s\" został oznaczony jako niejednoznaczny przez "
+"moderatora i usunięty z twoich ustawień wstępnych"
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets."
 msgstr ""
+"Przedmiot sprzętu %(_0)s%(item)s%(_1)s został oznaczony jako niejednoznaczny "
+"przez moderatora i usunięty z twoich presetów."
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets"
 msgstr ""
+"Przedmiot sprzętowy %(_0)s%(item)s%(_1)s został oznaczony jako "
+"niejednoznaczny przez moderatora i usunięty z Twoich ustawień wstępnych"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> commented a marketplace feedback that "
 "you left."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> skomentował opinię na rynku, którą "
+"zostawiłeś."
 
+#, fuzzy
 msgid "View comment"
-msgstr ""
+msgstr "Zobacz komentarz"
 
 #, python-format
 msgid "%(user)s commented a marketplace feedback you that left."
-msgstr ""
+msgstr "%(user)s skomentował opinię na rynku, którą zostawiłeś."
 
+#, fuzzy
 msgid "Check it out at the following url:"
-msgstr ""
+msgstr "Sprawdź to pod tym adresem URL:"
 
 #, python-format
 msgid "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you left."
-msgstr ""
+msgstr "%(_0)s%(user)s%(_1)s skomentował opinię na rynku, którą zostawiłeś."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
-msgstr ""
+msgstr "%(_0)s%(user)s%(_1)s skomentował opinię na rynku, którą otrzymałeś."
 
-#, python-format
-msgid ""
-"\n"
-"    %(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
-"\n"
-msgstr ""
-
+#, fuzzy
 msgid ""
 "You received this notification because you created this equipment item or "
 "this edit proposal."
 msgstr ""
+"Otrzymałeś tę powiadomienie, ponieważ stworzyłeś ten element sprzętu lub tę "
+"propozycję edycji."
 
+#, fuzzy
 msgid "The reviewer left the following comment:"
-msgstr ""
+msgstr "Recenzent zostawił następujący komentarz:"
 
+#, fuzzy
 msgid "View edit proposal"
-msgstr ""
+msgstr "Zobacz propozycję edycji"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s."
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s zatwierdził propozycję edycji dla przedmiotu "
+"sprzętowego %(_0)s%(item)s%(_1)s"
 
-#, python-format
-msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s"
-msgstr ""
-
+#, fuzzy
 msgid "Please review it as soon as possible, thank you!"
-msgstr ""
+msgstr "Proszę, sprawdź to jak najszybciej, dziękuję!"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s to you for review"
+"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s to you for review"
 msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"    %(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item "
-"%(_0)s%(item)s%(_1)s to you for\n"
-"    review\n"
-msgstr ""
+"%(_0)s%(user)s%(_1)s przypisał propozycję edycji do przedmiotu sprzętu %(_0)s"
+"%(item)s%(_1)s do przeglądu"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> proposed an edit to the equipment item "
 "<a href=\"%(item_url)s\">%(item)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> zaproponował edycję elementu sprzętu "
+"<a href=\"%(item_url)s\">%(item)s</a>."
 
+#, fuzzy
 msgid "Please note"
-msgstr ""
+msgstr "Proszę zauważyć"
 
+#, fuzzy
 msgid ""
 "This item has not been approved yet, therefore is not yet officially part of "
 "AstroBin's equipment database. Please review this edit proposal as soon as "
 "possible to prevent the possibility that this item be rejected."
 msgstr ""
+"Ten element nie został jeszcze zatwierdzony, więc nie jest jeszcze "
+"oficjalnie częścią bazy danych sprzętu AstroBin. Proszę jak najszybciej "
+"przejrzeć tę propozycję edycji, aby zapobiec możliwości odrzucenia tego "
+"elementu."
 
+#, fuzzy
 msgid "Please review it as soon as possible."
-msgstr ""
+msgstr "Proszę to przejrzeć tak szybko, jak to możliwe."
 
+#, fuzzy
 msgid ""
 "You received this notification because you created this equipment item, or "
 "you created/approved/rejected/commented an edit proposal for this item in "
 "the past."
 msgstr ""
+"Otrzymałeś tę powiadomienie, ponieważ stworzyłeś ten przedmiot sprzętowy lub "
+"stworzyłeś/zatwierdziłeś/odrzuciłeś/skomentowałeś propozycję edycji dla tego "
+"przedmiotu w przeszłości."
 
 #, python-format
 msgid "%(user)s proposed an edit to the equipment item \"%(item)s\"."
-msgstr ""
+msgstr "%(user)s zaproponował edycję przedmiotu sprzętu \"%(item)s\"."
 
 #, python-format
 msgid ""
 "Please review an edit proposal for equipment item %(_0)s%(item)s%(_1)s by "
 "%(_0)s%(user)s%(_1)s"
 msgstr ""
+"Proszę, sprawdź propozycję edycji dla przedmiotu sprzętu %(_0)s%(item)s"
+"%(_1)s od %(_0)s%(user)s%(_1)s"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s odrzucił propozycję edycji elementu sprzętu %(_0)s"
+"%(item)s%(_1)s"
 
+#, fuzzy
 msgid "This item can now be added to images by anyone on AstroBin."
 msgstr ""
+"Ten przedmiot może być teraz dodawany do obrazów przez każdego na AstroBin."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s approved the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s zatwierdził element sprzętu %(_0)s%(item)s%(_1)s, który "
+"stworzyłeś"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s assigned the equipment item %(_0)s%(item)s%(_1)s to you "
 "for review"
 msgstr ""
+"%(_0)s%(user)s%(_1)s przypisał element sprzętu %(_0)s%(item)s%(_1)s do "
+"Ciebie do przeglądu"
 
 #, python-format
 msgid ""
@@ -802,6 +1054,9 @@ msgid ""
 "used on some of your images on AstroBin, has been migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
+"<em><strong>%(make)s</strong> %(name)s</em>, element sprzętu, którego "
+"używałeś w niektórych swoich obrazach na AstroBin, został przeniesiony do "
+"nowej Bazy Danych Sprzętu AstroBin."
 
 #, python-format
 msgid ""
@@ -809,28 +1064,41 @@ msgid ""
 "used on some of your images on AstroBin, could not be migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
+"<em><strong>%(make)s</strong> %(name)s</em>, element sprzętu, którego "
+"używałeś w niektórych swoich zdjęciach na AstroBin, nie mógł zostać "
+"przeniesiony do nowej bazy danych sprzętu AstroBin."
 
+#, fuzzy
 msgid "Reason"
-msgstr ""
+msgstr "Powód"
 
+#, fuzzy
 msgid "Target item"
-msgstr ""
+msgstr "Docelowy przedmiot"
 
+#, fuzzy
 msgid "If you don't know what this means, please read this:"
-msgstr ""
+msgstr "Jeśli nie wiesz, co to oznacza, przeczytaj to:"
 
+#, fuzzy
 msgid ""
 "You can see all your migrations and undo any mistakes on the following page:"
 msgstr ""
+"Możesz zobaczyć wszystkie swoje migracje i cofnąć wszelkie błędy na "
+"następującej stronie:"
 
+#, fuzzy
 msgid "Thanks for your cooperation!"
-msgstr ""
+msgstr "Dzięki za współpracę!"
 
 #, python-format
 msgid ""
 "\"%(make)s %(name)s\", an equipment item that you have used on some of your "
 "images on AstroBin, has been migrated to the new AstroBin Equipment Database."
 msgstr ""
+"\"%(make)s %(name)s\", element sprzętu, którego używałeś w niektórych swoich "
+"zdjęciach na AstroBin, został przeniesiony do nowej bazy danych sprzętu "
+"AstroBin."
 
 #, python-format
 msgid ""
@@ -838,508 +1106,691 @@ msgid ""
 "images on AstroBin, could not be migrated to the new AstroBin Equipment "
 "Database."
 msgstr ""
+"\"%(make)s %(name)s\", przedmiot sprzętowy, którego używałeś w niektórych "
+"swoich obrazach na AstroBin, nie mógł zostać przeniesiony do nowej bazy "
+"danych sprzętu AstroBin."
 
 #, python-format
 msgid ""
 "%(_0)s%(make)s %(name)s%(_1)s has been migrated to the new AstroBin "
 "Equipment Database"
 msgstr ""
+"%(_0)s%(make)s %(name)s%(_1)s został przeniesiony do nowej bazy danych "
+"sprzętu AstroBin"
 
+#, fuzzy
 msgid "Proposed strategy"
-msgstr ""
+msgstr "Proponowana strategia"
 
+#, fuzzy
 msgid "Reviewer's reason"
-msgstr ""
+msgstr "Powód recenzenta"
 
+#, fuzzy
 msgid "Reviewer's comment"
-msgstr ""
+msgstr "Komentarz recenzenta"
 
+#, fuzzy
 msgid ""
 "The equipment item still needs to be migrated to the new database, so please "
 "try again after reading the reason and the comment provided by the reviewer "
 "below."
 msgstr ""
+"Element sprzętu nadal musi zostać przeniesiony do nowej bazy danych, więc "
+"spróbuj ponownie po przeczytaniu powodu i komentarza dostarczonego przez "
+"recenzenta poniżej."
 
+#, fuzzy
 msgid "To try again with different parameters, please visit this page:"
-msgstr ""
+msgstr "Aby spróbować ponownie z innymi parametrami, odwiedź tę stronę:"
 
+#, fuzzy
 msgid "Migration tool"
-msgstr ""
+msgstr "Narzędzie migracyjne"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)"
-"s%(_1)s that you created"
+"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
+"%(_1)s that you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s odrzucił przedmiot sprzętowy dla %(_0)s%(make)s %(name)s"
+"%(_1)s, który stworzyłeś"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item migration that you created "
 "for %(_0)s%(make)s %(name)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s odrzucił migrację przedmiotu sprzętu, którą stworzyłeś "
+"dla %(_0)s%(make)s %(name)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "This happened because somebody rejected the creation of this equipment item. "
 "Please remember that the AstroBin equipment database is collectively "
 "maintained by the community in order to keep a clean and orderly set of data."
 msgstr ""
+"To się stało, ponieważ ktoś odrzucił utworzenie tego przedmiotu sprzętu. "
+"Pamiętaj, że baza danych sprzętu AstroBin jest wspólnie utrzymywana przez "
+"społeczność, aby zachować czysty i uporządkowany zbiór danych."
 
+#, fuzzy
 msgid "The reviewer cited the following code as the reason for the rejection:"
-msgstr ""
+msgstr "Recenzent wskazał następujący kod jako powód odrzucenia:"
 
 #, python-format
 msgid ""
-"Since your equipment item was marked as duplicate of <a "
-"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been "
-"updated accordingly, and <strong>you don't need to do anything</strong>."
+"Since your equipment item was marked as duplicate of <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
+"accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
+"Ponieważ Twój przedmiot sprzętowy został oznaczony jako duplikat <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, Twój obraz został "
+"zaktualizowany odpowiednio, a <strong>nie musisz nic robić</strong>."
 
+#, fuzzy
 msgid ""
 "Please edit your image and try adding the relevant equipment item again. If "
 "possible, use one of the offered suggestions to avoid creating a duplicate."
 msgstr ""
+"Proszę edytować swoje zdjęcie i spróbować dodać odpowiedni sprzęt ponownie. "
+"Jeśli to możliwe, skorzystaj z jednej z oferowanych sugestii, aby uniknąć "
+"tworzenia duplikatu."
 
 #, python-format
 msgid ""
 "Since your equipment item was marked as duplicate of \"%(duplicate_of)s\", "
 "your image has been updated accordingly, and you don't need to do anything."
 msgstr ""
+"Ponieważ Twój sprzęt został oznaczony jako duplikat \"%(duplicate_of)s\", "
+"Twoje zdjęcie zostało zaktualizowane odpowiednio i nie musisz nic robić."
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
-"s%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
+"%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
+"Przedmiot sprzętu %(_0)s%(item)s%(_1)s został usunięty z Twojego zdjęcia "
+"%(_0)s%(image_title)s%(_1)s i zastąpiony %(_0)s%(duplicate_of)s%(_1)s"
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
-"s%(image_title)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
+"%(image_title)s%(_1)s"
 msgstr ""
+"Element sprzętu %(_0)s%(item)s%(_1)s został usunięty z twojego obrazu %(_0)s"
+"%(image_title)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "This item has been deleted. Please contact AstroBin if you think this was in "
 "error."
 msgstr ""
+"Ten przedmiot został usunięty. Proszę skontaktować się z AstroBin, jeśli "
+"uważasz, że to był błąd."
 
 #, python-format
 msgid ""
-"Your equipment item was marked as a duplicate of <a "
-"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
+"Your equipment item was marked as a duplicate of <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
+"Twój przedmiot sprzętowy został oznaczony jako duplikat <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. Jeśli dodałeś go do "
+"jakichkolwiek obrazów, zostały one zaktualizowane odpowiednio."
 
 #, python-format
 msgid ""
 "Your equipment item was marked as a duplicate of \"%(duplicate_of)s\". If "
 "you added it to any images, they will have been updated accordingly."
 msgstr ""
+"Twój element sprzętu został oznaczony jako duplikat \"%(duplicate_of)s\". "
+"Jeśli dodałeś go do jakichkolwiek obrazów, zostały one zaktualizowane "
+"odpowiednio."
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
 msgstr ""
+"%(_0)s%(user)s%(_1)s odrzucił przedmiot sprzętu %(_0)s%(item)s%(_1)s, który "
+"stworzyłeś"
 
 #, python-format
 msgid ""
 "%(user)s rejected the equipment item %(_0)s%(item)s%(_1)s that you created"
 msgstr ""
+"%(user)s odrzucił element sprzętu %(_0)s%(item)s%(_1)s, który stworzyłeś"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s created the equipment item %(_0)s%(item)s%(_1)s and it "
 "requires moderation"
 msgstr ""
+"%(_0)s%(user)s%(_1)s stworzył przedmiot sprzętu %(_0)s%(item)s%(_1)s i "
+"wymaga moderacji"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s zostawił Ci opinię dla oferty na rynku %(_0)s%(listing)s"
+"%(_1)s"
 
+#, fuzzy
 msgid "Feedback details"
-msgstr ""
+msgstr "Szczegóły opinii"
 
+#, fuzzy
 msgid "Listing"
-msgstr ""
+msgstr "Lista"
 
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Użytkownik"
 
+#, fuzzy
 msgid "Communication"
-msgstr ""
+msgstr "Komunikacja"
 
+#, fuzzy
 msgid "Speed"
-msgstr ""
+msgstr "Szybkość"
 
+#, fuzzy
 msgid "Accuracy of item descriptions"
-msgstr ""
+msgstr "Dokładność opisów przedmiotów"
 
+#, fuzzy
 msgid "Packaging quality"
-msgstr ""
+msgstr "Jakość pakowania"
 
+#, fuzzy
 msgid "Message"
-msgstr ""
+msgstr "Wiadomość"
 
+#, fuzzy
 msgid "To review and respond to the feedback, please visit the following link:"
-msgstr ""
+msgstr "Aby przejrzeć i odpowiedzieć na opinię, odwiedź następujący link:"
 
+#, fuzzy
 msgid "View feedback "
-msgstr ""
+msgstr "Zobacz opinię"
 
+#, fuzzy
 msgid "To view the listing, please visit the following link:"
-msgstr ""
+msgstr "Aby zobaczyć ogłoszenie, odwiedź następujący link:"
 
+#, fuzzy
 msgid "View listing"
-msgstr ""
+msgstr "Zobacz ogłoszenie"
 
 #, python-format
 msgid ""
 "%(user)s left you feedback for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(user)s zostawił Ci opinię dla ogłoszenia na rynku %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s zaktualizował Twoją opinię dla ogłoszenia na rynku "
+"%(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s%(_1)"
-"s"
+"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
+"%(_1)s"
 msgstr ""
+"%(user)s zaktualizował Twoją opinię dla oferty na rynku %(_0)s%(listing)s"
+"%(_1)s"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s%(_1)"
-"s"
+"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
+"%(_1)s"
 msgstr ""
+"%(_0)s%(user)s%(_1)s zatwierdził Twoje ogłoszenie na rynku %(_0)s%(listing)s"
+"%(_1)s"
 
+#, fuzzy
 msgid "The listing is now live. Good luck with your sale!"
-msgstr ""
+msgstr "Oferta jest teraz aktywna. Powodzenia w sprzedaży!"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s opublikował ogłoszenie na rynku %(_0)s"
+"%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "You received this notification because you follow this user."
-msgstr ""
+msgstr "Otrzymałeś tę powiadomienie, ponieważ obserwujesz tego użytkownika."
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s usunął swoje ogłoszenie na rynku %(_0)s"
+"%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
-"You received this notification because you have an active offer on this "
-"listing, or you follow the listing."
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
 msgstr ""
+"Otrzymałeś tę powiadomienie, ponieważ masz ofertę na to ogłoszenie lub "
+"śledzisz to ogłoszenie."
 
+#, fuzzy
 msgid ""
 "Please note that the seller may only deleted listings without any sold line "
 "items."
 msgstr ""
+"Proszę pamiętać, że sprzedawca może usunąć tylko oferty bez żadnych "
+"sprzedanych pozycji."
 
 #, python-format
 msgid "Your marketplace listing %(_0)s%(listing)s%(_1)s expired"
-msgstr ""
+msgstr "Twoje ogłoszenie na rynku %(_0)s%(listing)s%(_1)s wygasło"
 
+#, fuzzy
 msgid "You can renew it by clicking the button below."
-msgstr ""
+msgstr "Możesz je odnowić, klikając przycisk poniżej."
 
+#, fuzzy
 msgid "PS: if you sold items from this listing, please mark them as sold."
 msgstr ""
+"PS: jeśli sprzedałeś przedmioty z tej oferty, proszę oznacz je jako "
+"sprzedane."
 
+#, fuzzy
 msgid "You can renew it by clicking the link below:"
-msgstr ""
+msgstr "Możesz to odnowić, klikając poniższy link:"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
-"s%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)"
-"s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
+"%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
+"%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s opublikował ogłoszenie na rynku %(_0)s"
+"%(listing)s%(_1)s z elementem sprzętu, który śledzisz: %(_0)s%(line_item)s"
+"%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted somebody else's offer in their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s zaakceptował ofertę kogoś innego w swoim "
+"ogłoszeniu na rynku %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "Unfortunately, you cannot make an offer on this listing while it is in a "
 "reserved or sold state."
 msgstr ""
-
-msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
-msgstr ""
+"Niestety, nie możesz złożyć oferty na to ogłoszenie, gdy jest w stanie "
+"zarezerwowanym lub sprzedanym."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s sprzedał pozycję w swoim ogłoszeniu na "
+"rynku %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Item"
-msgstr ""
+msgstr "Przedmiot"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s zaktualizował swoje ogłoszenie na rynku "
+"%(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "Please note that the seller may only update unsold line items and the global "
 "description or information pertaining the listing. The seller may not change "
 "the price or quantity of sold line items."
 msgstr ""
+"Proszę pamiętać, że sprzedawca może aktualizować tylko niesprzedane pozycje "
+"oraz globalny opis lub informacje dotyczące oferty. Sprzedawca nie może "
+"zmieniać ceny ani ilości sprzedanych pozycji."
 
 #, python-format
 msgid ""
-"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)"
-"s%(_1)s, but you haven't marked the item as sold yet. Please do so as soon "
-"as possible and leave feedback to the buyer."
+"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)s"
+"%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
+"possible and leave feedback to the buyer."
 msgstr ""
+"Ostatnio zaakceptowałeś ofertę dla ogłoszenia na rynku %(_0)s%(listing)s"
+"%(_1)s, ale jeszcze nie oznaczyłeś przedmiotu jako sprzedany. Proszę zrób to "
+"jak najszybciej i zostaw opinię kupującemu."
 
+#, fuzzy
 msgid "Mark as sold"
-msgstr ""
+msgstr "Oznacz jako sprzedane"
 
 #, python-format
 msgid ""
-"Don't forget to mark your reserved items as sold in the listing %(_0)"
-"s%(listing)s%(_1)s, if you sold them."
+"Don't forget to mark your reserved items as sold in the listing %(_0)s"
+"%(listing)s%(_1)s, if you sold them."
 msgstr ""
+"Nie zapomnij oznaczyć swoich zarezerwowanych przedmiotów jako sprzedanych w "
+"ogłoszeniu %(_0)s%(listing)s%(_1)s, jeśli je sprzedałeś."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s zaakceptował twoją ofertę na ich "
+"ogłoszenie na rynku %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Offer details"
-msgstr ""
+msgstr "Szczegóły oferty"
 
+#, fuzzy
 msgid "Offer amount"
-msgstr ""
+msgstr "Kwota oferty"
 
+#, fuzzy
 msgid "Shipping"
-msgstr ""
+msgstr "Wysyłka"
 
+#, fuzzy
 msgid ""
 "Now, it's time to finalize the details with the seller. You can communicate "
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
+"Teraz czas na sfinalizowanie szczegółów ze sprzedawcą. Możesz komunikować "
+"się i ustalać płatność oraz dostawę zarówno przez stronę ogłoszenia, jak i "
+"prywatne wiadomości na AstroBin."
 
+#, fuzzy
 msgid ""
 "Please note, while AstroBin facilitates a platform for sellers and buyers, "
 "the specifics of transactions are managed directly between parties involved. "
 "We encourage both buyers and sellers to exercise caution and use secure "
 "methods for payment and delivery."
 msgstr ""
+"Proszę zauważyć, że chociaż AstroBin ułatwia platformę dla sprzedawców i "
+"kupujących, szczegóły transakcji są zarządzane bezpośrednio między stronami. "
+"Zachęcamy zarówno kupujących, jak i sprzedających do ostrożności i "
+"korzystania z bezpiecznych metod płatności i dostawy."
 
+#, fuzzy
 msgid ""
 "Thank you for using AstroBin, and we wish you a smooth and successful "
 "transaction!"
-msgstr ""
+msgstr "Dziękujemy za korzystanie z AstroBin i życzymy udanej transakcji!"
 
 #, python-format
 msgid ""
 "You accepted %(_0)s%(buyer_display_name)s%(_1)s's offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Zaakceptowałeś ofertę %(_0)s%(buyer_display_name)s%(_1)s na swoje ogłoszenie "
+"na rynku %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "PLEASE NOTE: listings on AstroBin's marketplace may contain more than one "
 "item. Please review the offer details to ensure you understand which items "
 "the offer is for."
 msgstr ""
+"PROSZĘ ZWRÓCIĆ UWAGĘ: ogłoszenia na rynku AstroBin mogą zawierać więcej niż "
+"jeden przedmiot. Proszę przejrzeć szczegóły oferty, aby upewnić się, że "
+"rozumiesz, które przedmioty dotyczą oferty."
 
+#, fuzzy
 msgid ""
 "Now, it's time to finalize the details with the buyer. You can communicate "
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
+"Teraz czas na sfinalizowanie szczegółów z kupującym. Możesz komunikować się "
+"i ustalać płatność oraz dostawę zarówno przez stronę oferty, jak i prywatne "
+"wiadomości na AstroBin."
 
+#, fuzzy
 msgid ""
 "PS: once you've completed the transaction, please remember to mark the "
 "listing as sold."
 msgstr ""
+"PS: po zakończeniu transakcji, pamiętaj, aby oznaczyć ofertę jako sprzedaną."
 
 #, python-format
 msgid "You made an offer for marketplace listing %(_0)s%(listing)s%(_1)s"
-msgstr ""
+msgstr "Złożyłeś ofertę dla ogłoszenia na rynku %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "Shipping cost"
-msgstr ""
+msgstr "Koszt wysyłki"
 
+#, fuzzy
 msgid "You can edit your offer by visiting the listing page."
-msgstr ""
+msgstr "Możesz edytować swoją ofertę, odwiedzając stronę ogłoszenia."
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s made an offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s złożył ofertę na Twoje ogłoszenie na "
+"rynku %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid "To review and respond to the offer, please visit your listing page."
 msgstr ""
+"Aby przejrzeć i odpowiedzieć na ofertę, odwiedź swoją stronę ogłoszenia."
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s rejected your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(seller_display_name)s%(_1)s odrzucił twoją ofertę na ich ogłoszenie "
+"na rynku %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "You may contact the seller using the listing's page for more information."
 msgstr ""
+"Możesz skontaktować się ze sprzedawcą za pomocą strony oferty, aby uzyskać "
+"więcej informacji."
 
 #, python-format
 msgid ""
 "You retracted your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
-msgstr ""
+msgstr "Wycofałeś swoją ofertę dla ogłoszenia na rynku %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s retracted their offer for your "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s wycofał swoją ofertę dla twojego "
+"ogłoszenia na rynku %(_0)s%(listing)s%(_1)s"
 
+#, fuzzy
 msgid ""
 "You may contact the prospect buyer using AstroBin's private messaging for "
 "more information."
 msgstr ""
+"Możesz skontaktować się z potencjalnym kupującym za pomocą prywatnej "
+"wiadomości AstroBin, aby uzyskać więcej informacji."
 
+#, fuzzy
 msgid "View buyer's profile"
-msgstr ""
+msgstr "Zobacz profil kupującego"
 
 #, python-format
 msgid "You updated your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Zaktualizowałeś swoją ofertę dla ogłoszenia na rynku %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s updated their offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"%(_0)s%(buyer_display_name)s%(_1)s zaktualizował swoją ofertę dla twojego "
+"ogłoszenia na rynku %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)"
-"s%(_1)s, and we noticed that you haven't rated the buyer yet."
+"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
+"%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
+"Cześć! Niedawno sprzedałeś przedmiot z oferty na rynku %(_0)s%(listing)s"
+"%(_1)s, a my zauważyliśmy, że jeszcze nie oceniłeś kupującego."
 
+#, fuzzy
 msgid ""
 "It's important to leave feedback to the buyer, as it helps other users make "
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the buyer."
 msgstr ""
+"Ważne jest, aby zostawić opinię dla kupującego, ponieważ pomaga to innym "
+"użytkownikom podejmować świadome decyzje przy zakupie przedmiotów na rynku. "
+"Proszę, poświęć chwilę, aby ocenić swoje doświadczenia z kupującym."
 
+#, fuzzy
 msgid "Leave feedback"
-msgstr ""
+msgstr "Zostaw opinię"
 
 #, python-format
 msgid ""
-"Rate the buyer for your recent purchase from marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"Rate the buyer for your recent purchase from marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
+"Oceń kupującego za swój ostatni zakup z ogłoszenia na rynku %(_0)s%(listing)s"
+"%(_1)s"
 
 #, python-format
 msgid ""
-"Hi! You recently purchased an item from the marketplace listing %(_0)"
-"s%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)"
-"s%(seller_display_name)s%(_1)s yet."
+"Hi! You recently purchased an item from the marketplace listing %(_0)s"
+"%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
+"%(seller_display_name)s%(_1)s yet."
 msgstr ""
+"Cześć! Niedawno kupiłeś przedmiot z ogłoszenia na rynku %(_0)s%(listing)s"
+"%(_1)s, a my zauważyliśmy, że jeszcze nie oceniłeś sprzedawcy %(_0)s"
+"%(seller_display_name)s%(_1)s."
 
+#, fuzzy
 msgid ""
 "It's important to leave feedback to the seller, as it helps other users make "
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the seller."
 msgstr ""
+"Ważne jest, aby zostawić opinię dla sprzedawcy, ponieważ pomaga to innym "
+"użytkownikom podejmować świadome decyzje przy zakupie przedmiotów na rynku. "
+"Proszę, poświęć chwilę, aby ocenić swoje doświadczenia ze sprzedawcą."
 
 #, python-format
 msgid ""
 "Rate the seller %(_0)s%(seller_display_name)s%(_1)s for your recent purchase "
 "from marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
+"Oceń sprzedawcę %(_0)s%(seller_display_name)s%(_1)s za swój ostatni zakup z "
+"oferty na rynku %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
 "New image by %(_0)s%(user)s%(_1)s acquired with equipment items you follow"
 msgstr ""
+"Nowe zdjęcie od %(_0)s%(user)s%(_1)s zdobyte za pomocą sprzętu, który "
+"śledzisz"
 
+#, fuzzy
 msgid ""
 "You received this notification because you follow these equipment items that "
 "were used to acquire this image:"
 msgstr ""
+"Otrzymałeś tę powiadomienie, ponieważ śledzisz te elementy sprzętu, które "
+"zostały użyte do uzyskania tego obrazu:"
 
+#, fuzzy
 msgid "This image is a group effort among the following collaborators:"
-msgstr ""
+msgstr "Ten obraz to wspólny wysiłek wśród następujących współpracowników:"
 
+#, fuzzy
 msgid "This image is a group effort with the following collaborators:"
-msgstr ""
+msgstr "Ten obraz to wspólny wysiłek z następującymi współpracownikami:"
 
+#, fuzzy
 msgid "Details"
-msgstr ""
+msgstr "Szczegóły"
 
+#, fuzzy
 msgid "Users"
-msgstr ""
+msgstr "Użytkownicy"
 
+#, fuzzy
 msgid "Images"
-msgstr ""
+msgstr "Obrazy"
 
+#, fuzzy
 msgid "Please support AstroBin by shopping at one of our partners!"
 msgstr ""
+"Proszę, wspieraj AstroBin, robiąc zakupy u jednego z naszych partnerów!"
 
+#, fuzzy
 msgid "Disable retailer integration"
-msgstr ""
+msgstr "Wyłącz integrację z detalistą"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
+msgstr "Kupuj <strong>%(name)s</strong> w %(retailer)s"
 
+#, fuzzy
 msgid "Last update"
-msgstr ""
+msgstr "Ostatnia aktualizacja"
 
+#, fuzzy
 msgid "Stock status unknown"
-msgstr ""
+msgstr "Status zapasów nieznany"
 
+#, fuzzy
 msgid "Back ordered"
-msgstr ""
+msgstr "Zamówione"
 
 #, python-format
 msgid "%(x)s in stock"
-msgstr ""
+msgstr "%(x)s na stanie"
 
+#, fuzzy
 msgid "Currently out of stock"
-msgstr ""
+msgstr "Obecnie brak w magazynie"
 
+#, fuzzy
 msgid "Propose edit"
-msgstr ""
+msgstr "Proponuj edycję"
 
+#, fuzzy
 msgid "Forum"
-msgstr ""
+msgstr "Forum"
 
+#, fuzzy
 msgid "Sell in the marketplace"
-msgstr ""
+msgstr "Sprzedaj na rynku"
 
+#, fuzzy
 msgid "Close"
-msgstr ""
-
-msgid "For sale"
-msgstr ""
-
-msgid "Wanted"
-msgstr ""
-
-msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
-msgstr ""
+msgstr "Zamknij"

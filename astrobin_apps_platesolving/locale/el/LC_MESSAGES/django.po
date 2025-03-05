@@ -1,10 +1,240 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: el\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, fuzzy
+msgid "Very Large Field (>30 degrees)"
+msgstr "Πολύ Μεγάλο Πεδίο (>30 μοίρες)"
+
+#, fuzzy
+msgid "Large Field (15-30 degrees)"
+msgstr "Μεγάλο Πεδίο (15-30 μοίρες)"
+
+#, fuzzy
+msgid "Medium Field (4-15 degrees)"
+msgstr "Μεσαίο Πεδίο (4-15 μοίρες)"
+
+#, fuzzy
+msgid "Small Field (1-4 degrees)"
+msgstr "Μικρό Πεδίο (1-4 μοίρες)"
+
+#, fuzzy
+msgid "Very Small Field (<1 degree)"
+msgstr "Πολύ Μικρό Πεδίο (<1 μοίρα)"
+
+#, fuzzy
+msgid "Small"
+msgstr "Μικρό"
+
+#, fuzzy
+msgid "Medium"
+msgstr "Μεσαίο"
+
+#, fuzzy
+msgid "Large"
+msgstr "Μεγάλο"
+
+#, fuzzy
+msgid "Sample raw frame (max 100 MB)"
+msgstr "Δείγμα ακατέργαστου καρέ (μέγιστο 100 MB)"
+
+#, fuzzy
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+"Για να βελτιώσεις την ακρίβεια της επίλυσης σου ακόμα περισσότερο, παρακαλώ "
+"ανέβασε ένα από τα αρχεία XISF ή FITS από το σύνολο δεδομένων σου. Τέτοια "
+"αρχεία συνήθως έχουν επικεφαλίδες ημερομηνίας και ώρας που θα επιτρέψουν στο "
+"AstroBin να υπολογίσει τις επιφανειακές θέσεις των σωμάτων του ηλιακού "
+"συστήματος και να βρει πλανήτες και αστεροειδείς στην εικόνα σου (υπό την "
+"προϋπόθεση ότι προσθέσεις και πληροφορίες τοποθεσίας).<br/><br/>Για μέγιστη "
+"ακρίβεια, συνιστάται να χρησιμοποιήσεις τη γηγενή και ανοιχτή μορφή XISF του "
+"PixInsight. Μάθε περισσότερα για το XISF εδώ:<br/><br/><a href=\"https://"
+"pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</a><br/"
+"><br/><strong>Σημείωσε:</strong> είναι πολύ σημαντικό το αρχείο XISF ή FITS "
+"που ανέβασε να είναι ευθυγραμμισμένο με την επεξεργασμένη εικόνα σου, αλλιώς "
+"οι σημειώσεις των αντικειμένων δεν θα ταιριάζουν. Για να βελτιώσεις τις "
+"πιθανότητες σου για μια επιτυχημένη και ακριβή επίλυση, καλιμπράρισε το "
+"αρχείο σου με τον συνηθισμένο τρόπο (σκοτεινές/βασικές/φλατ) αλλά μην το "
+"τεντώσεις."
+
+#, fuzzy
+msgid "Scaled font size"
+msgstr "Κλιμακωμένο μέγεθος γραμματοσειράς"
+
+#, fuzzy
+msgid "Font size of the annotations on your main image page"
+msgstr "Μέγεθος γραμματοσειράς των σημειώσεων στη κύρια σελίδα της εικόνας σου"
+
+#, fuzzy
+msgid "Show equatorial grid"
+msgstr "Εμφάνιση εξωτερίων πλέγματος"
+
+#, fuzzy
+msgid "Show ecliptic"
+msgstr "Δείξτε εκλειπτική"
+
+#, fuzzy
+msgid "Show galactic equator"
+msgstr "Δείξτε γαλαξιακό ισημερινό"
+
+#, fuzzy
+msgid "Show constellation borders"
+msgstr "Εμφάνιση συνόρων αστερισμών"
+
+#, fuzzy
+msgid "Show constellation lines"
+msgstr "Εμφάνιση γραμμών αστερισμών"
+
+#, fuzzy
+msgid "Show named stars"
+msgstr "Εμφάνιση ονομασμένων αστεριών"
+
+#, fuzzy
+msgid "Show HD stars"
+msgstr "Δείξτε HD αστέρια"
+
+#, fuzzy
+msgid ""
+"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
+"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
+msgstr ""
+"Αυτός ο κατάλογος χρησιμοποιεί δεδομένα από τον Συγκεντρωμένο Κατάλογο 2,5 "
+"εκατομμυρίων αστέρων (Kharchenko+ 2009), κατάλογος VizieR: I/280B."
+
+#, fuzzy
+msgid "Max. magnitude"
+msgstr "Μέγιστη. φωτεινότητα"
+
+#, fuzzy
+msgid ""
+"Only HD stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Μόνο HD αστέρια μέχρι αυτή τη φωτεινότητα θα αποδοθούν. Αν μείνει κενό, θα "
+"χρησιμοποιηθεί η προεπιλεγμένη τιμή του καταλόγου."
+
+#, fuzzy
+msgid "Show Messier objects"
+msgstr "Εμφάνιση αντικειμένων Messier"
+
+#, fuzzy
+msgid "Show NGC and IC objects"
+msgstr "Εμφάνιση αντικειμένων NGC και IC"
+
+#, fuzzy
+msgid "Show VdB objects"
+msgstr "Εμφάνιση αντικειμένων VdB"
+
+#, fuzzy
+msgid "Show Sharpless objects"
+msgstr "Εμφάνιση αντικειμένων Sharpless"
+
+#, fuzzy
+msgid "Show Barnard objects"
+msgstr "Εμφάνιση αντικειμένων Barnard"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+"Δείξε αντικείμενα από τον Κατάλογο Λαμπρών Νεφελών του Lynds (LBN) (Lynds "
+"1965)"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+"Δείξε αντικείμενα από τον Κατάλογο Σκοτεινών Νεφελών του Lynds (LDN) (Lynds "
+"1962)"
+
+#, fuzzy
+msgid "Show PGC objects"
+msgstr "Εμφάνιση αντικειμένων PGC"
+
+#, fuzzy
+msgid "Show planets"
+msgstr "Εμφάνιση πλανητών"
+
+#, fuzzy
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+"Διαθέσιμο μόνο αν η εικόνα σου έχει τουλάχιστον χρόνο απόκτησης και ακριβή "
+"τοποθεσία"
+
+#, fuzzy
+msgid "Show asteroids"
+msgstr "Εμφάνιση αστεροειδών"
+
+#, fuzzy
+msgid "Show GCVS stars"
+msgstr "Εμφάνιση αστέρων GCVS"
+
+#, fuzzy
+msgid "General Catalog of Variable Stars"
+msgstr "Γενικός Κατάλογος Μεταβλητών Αστεριών"
+
+#, fuzzy
+msgid ""
+"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Μόνο αστέρια GCVS μέχρι αυτή τη φωτεινότητα θα αποδοθούν. Αν μείνει κενό, θα "
+"χρησιμοποιηθεί η προεπιλεγμένη τιμή του καταλόγου."
+
+#, fuzzy
+msgid "Show Tycho-2 catalog"
+msgstr "Εμφάνιση καταλόγου Tycho-2"
+
+#, fuzzy
+msgid ""
+"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Μόνο αστέρια Tycho-2 μέχρι αυτή τη φωτεινότητα θα αποδοθούν. Αν μείνει κενό, "
+"θα χρησιμοποιηθεί η προεπιλεγμένη τιμή του καταλόγου."
+
+#, fuzzy
+msgid "Show CGPN objects"
+msgstr "Εμφάνιση αντικειμένων CGPN"
+
+#, fuzzy
+msgid "Show quasars"
+msgstr "Δείξε κβάζαρ"
+
+#, fuzzy
+msgid "Publicly visible astrometry.net submission"
+msgstr "Δημόσια ορατή υποβολή astrometry.net"
+
+#, fuzzy
+msgid ""
+"If checked, the astrometry.net submission will be publicly visible. If you "
+"leave this unchecked,you won't be able to see the full log of the astrometry."
+"net submission, but the image will stillbe plate-solved and annotated."
+msgstr ""
+"Αν επιλεγεί, η υποβολή astrometry.net θα είναι δημόσια ορατή. Αν το αφήσετε "
+"μη επιλεγμένο, δεν θα μπορείτε να δείτε το πλήρες αρχείο της υποβολής "
+"astrometry.net, αλλά η εικόνα θα εξακολουθήσει να είναι plate-solved και "
+"ανιχνευμένη."
 
 #, fuzzy
 msgid "Perform a blind solve"
@@ -79,158 +309,72 @@ msgstr ""
 "τη δεδομένη θέση κέντρου RA και dec."
 
 #, fuzzy
-msgid "Small"
-msgstr "Μικρό"
-
-#, fuzzy
-msgid "Medium"
-msgstr "Μεσαίο"
-
-#, fuzzy
-msgid "Large"
-msgstr "Μεγάλο"
-
-#, fuzzy
-msgid "Sample raw frame (max 100 MB)"
-msgstr "Δείγμα ακατέργαστου καρέ (μέγιστο 100 MB)"
+msgid "Downsample factor"
+msgstr "Παράγοντας υποδειγματοληψίας"
 
 #, fuzzy
 msgid ""
-"To improve the accuracy of your plate-solution even further, please upload "
-"one of the XISF or FITS files from your data set. Such files normally have "
-"date and time headers that will allow AstroBin to calculate solar system "
-"body ephemerides and find planets and asteroids in your image (provided you "
-"also add location information to it).<br/><br/>For maximum accuracy, it's "
-"recommended that you use PixInsight's native and open format XISF. Learn "
-"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
-"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
-"note:</strong> it's very important that the XISF or FITS file you upload is "
-"aligned to your processed image, otherwise the object annotations will not "
-"match. To improve your chances at a successful accurate plate-solution, "
-"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+"Downsample (bin) your image by this factor before performing source "
+"detection. This often helps with saturated images, noisy images, and large "
+"images. 2 and 4 are commonly-useful values."
 msgstr ""
-"Για να βελτιώσεις την ακρίβεια της επίλυσης σου ακόμα περισσότερο, παρακαλώ "
-"ανέβασε ένα από τα αρχεία XISF ή FITS από το σύνολο δεδομένων σου. Τέτοια "
-"αρχεία συνήθως έχουν επικεφαλίδες ημερομηνίας και ώρας που θα επιτρέψουν στο "
-"AstroBin να υπολογίσει τις επιφανειακές θέσεις των σωμάτων του ηλιακού "
-"συστήματος και να βρει πλανήτες και αστεροειδείς στην εικόνα σου (υπό την "
-"προϋπόθεση ότι προσθέσεις και πληροφορίες τοποθεσίας).<br/><br/>Για μέγιστη "
-"ακρίβεια, συνιστάται να χρησιμοποιήσεις τη γηγενή και ανοιχτή μορφή XISF του "
-"PixInsight. Μάθε περισσότερα για το XISF εδώ:<br/><br/><a href=\"https:"
-"//pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</a>"
-"<br/><br/><strong>Σημείωσε:</strong> είναι πολύ σημαντικό το αρχείο XISF ή "
-"FITS που ανέβασε να είναι ευθυγραμμισμένο με την επεξεργασμένη εικόνα σου, "
-"αλλιώς οι σημειώσεις των αντικειμένων δεν θα ταιριάζουν. Για να βελτιώσεις "
-"τις πιθανότητες σου για μια επιτυχημένη και ακριβή επίλυση, καλιμπράρισε το "
-"αρχείο σου με τον συνηθισμένο τρόπο (σκοτεινές/βασικές/φλατ) αλλά μην το "
-"τεντώσεις."
+"Υποδείξτε (bin) την εικόνα σας με αυτόν τον παράγοντα πριν από την ανίχνευση "
+"πηγών. Αυτό συχνά βοηθά με κορεσμένες εικόνες, θορυβώδεις εικόνες και "
+"μεγάλες εικόνες. Οι τιμές 2 και 4 είναι συνήθως χρήσιμες."
 
 #, fuzzy
-msgid "Scaled font size"
-msgstr "Κλιμακωμένο μέγεθος γραμματοσειράς"
-
-#, fuzzy
-msgid "Font size of the annotations on your main image page"
-msgstr "Μέγεθος γραμματοσειράς των σημειώσεων στη κύρια σελίδα της εικόνας σου"
-
-#, fuzzy
-msgid "Show equatorial grid"
-msgstr "Εμφάνιση εξωτερίων πλέγματος"
-
-#, fuzzy
-msgid "Show constellation borders"
-msgstr "Εμφάνιση συνόρων αστερισμών"
-
-#, fuzzy
-msgid "Show constellation lines"
-msgstr "Εμφάνιση γραμμών αστερισμών"
-
-#, fuzzy
-msgid "Show named stars"
-msgstr "Εμφάνιση ονομασμένων αστεριών"
-
-#, fuzzy
-msgid "Show Messier objects"
-msgstr "Εμφάνιση αντικειμένων Messier"
-
-#, fuzzy
-msgid "Show NGC and IC objects"
-msgstr "Εμφάνιση αντικειμένων NGC και IC"
-
-#, fuzzy
-msgid "Show VdB objects"
-msgstr "Εμφάνιση αντικειμένων VdB"
-
-#, fuzzy
-msgid "Show Sharpless objects"
-msgstr "Εμφάνιση αντικειμένων Sharpless"
-
-#, fuzzy
-msgid "Show Barnard objects"
-msgstr "Εμφάνιση αντικειμένων Barnard"
-
-#, fuzzy
-msgid "Show PGC objects"
-msgstr "Εμφάνιση αντικειμένων PGC"
-
-#, fuzzy
-msgid "Show planets"
-msgstr "Εμφάνιση πλανητών"
+msgid "Use SExtractor"
+msgstr "Χρησιμοποιήστε SExtractor"
 
 #, fuzzy
 msgid ""
-"Only available if your image at least an acquisition time and an accurate "
-"location"
+"Use the SourceExtractor program to detect stars, not Nova's built-in program."
 msgstr ""
-"Διαθέσιμο μόνο αν η εικόνα σου έχει τουλάχιστον χρόνο απόκτησης και ακριβή "
-"τοποθεσία"
+"Χρησιμοποιήστε το πρόγραμμα SourceExtractor για να ανιχνεύσετε αστέρια, όχι "
+"το ενσωματωμένο πρόγραμμα του Nova."
 
 #, fuzzy
-msgid "Show asteroids"
-msgstr "Εμφάνιση αστεροειδών"
+msgid "Missing"
+msgstr "Λείπει"
 
 #, fuzzy
-msgid "Show GCVS stars"
-msgstr "Εμφάνιση αστέρων GCVS"
+msgid "Basic pending"
+msgstr "Βασικό εκκρεμές"
 
 #, fuzzy
-msgid "General Catalog of Variable Stars"
-msgstr "Γενικός Κατάλογος Μεταβλητών Αστεριών"
+msgid "Basic failed"
+msgstr "Βασικό απέτυχε"
 
 #, fuzzy
-msgid "Show Tycho-2 catalog"
-msgstr "Εμφάνιση καταλόγου Tycho-2"
+msgid "Basic success"
+msgstr "Βασικό επιτυχία"
 
 #, fuzzy
-msgid "Show CGPN objects"
-msgstr "Εμφάνιση αντικειμένων CGPN"
+msgid "Advanced pending"
+msgstr "Προχωρημένο εκκρεμές"
+
+#, fuzzy
+msgid "Advanced failed"
+msgstr "Προχωρημένο απέτυχε"
+
+#, fuzzy
+msgid "Advanced success"
+msgstr "Προχωρημένο επιτυχία"
+
+#, fuzzy
+msgid "Loading..."
+msgstr "Φόρτωση..."
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Γίνεται λήψη δεδομένων ανάλυσης, παρακαλώ περιμένετε..."
 
 #, fuzzy
-msgid "Plate-solving starting, please do not leave this page..."
-msgstr "Η επίλυση πλάκας ξεκινά, παρακαλώ μην φύγεις από αυτή τη σελίδα..."
+msgid "AstroBin is plate-solving this image with Astrometry.net..."
+msgstr "Το AstroBin λύνει αυτή την εικόνα με το Astrometry.net..."
 
 #, fuzzy
-msgid "Advanced plate-solving starting, please do not leave this page..."
-msgstr ""
-"Η προηγμένη επίλυση πλάκας ξεκινά, παρακαλώ μην φύγεις από αυτή τη σελίδα..."
-
-#, fuzzy
-msgid "Plate-solving started. You may leave this page."
-msgstr "Η επίλυση πλάκας ξεκίνησε. Μπορείς να φύγεις από αυτή τη σελίδα."
-
-#, fuzzy
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr ""
-"Η προηγμένη επίλυση πλάκας ξεκίνησε. Μπορείς να φύγεις από αυτή τη σελίδα."
-
-#, fuzzy
-msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr ""
-"Η επίλυση πλάκας είναι σχεδόν έτοιμη, παρακαλώ μην φύγεις από αυτή τη σελίδα."
-".."
+msgid "AstroBin is plate-solving this image with PixInsight..."
+msgstr "Το AstroBin λύνει αυτή την εικόνα με το PixInsight..."
 
 msgid "This image could not be plate-solved."
 msgstr "Η εικόνα δεν μπορούσε να αναλυθεί."
@@ -265,70 +409,18 @@ msgstr ""
 #, fuzzy
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error."
+"reported an internal server error. Please try again later!"
 msgstr ""
 "Η AstroBin δεν μπόρεσε να λύσει την εικόνα γιατί το nova.astrometry.net "
-"ανέφερε εσωτερικό σφάλμα διακομιστή."
+"ανέφερε εσωτερικό σφάλμα διακομιστή. Δοκίμασε ξανά αργότερα!"
 
 #, fuzzy
 msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an unepexted error."
+"AstroBin could not plate-solve this image because of an unexpected error. "
+"Please try again later!"
 msgstr ""
-"Η AstroBin δεν μπόρεσε να λύσει την εικόνα γιατί το nova.astrometry.net "
-"ανέφερε ένα απροσδόκητο σφάλμα."
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
-msgstr ""
-"Δείξε αντικείμενα από τον Κατάλογο Λαμπρών Νεφελών του Lynds (LBN) (Lynds "
-"1965)"
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr ""
-"Δείξε αντικείμενα από τον Κατάλογο Σκοτεινών Νεφελών του Lynds (LDN) (Lynds "
-"1962)"
-
-#, fuzzy
-msgid "Show quasars"
-msgstr "Δείξε κβάζαρ"
-
-#, fuzzy
-msgid "Missing"
-msgstr "Λείπει"
-
-#, fuzzy
-msgid "Basic pending"
-msgstr "Βασικό εκκρεμές"
-
-#, fuzzy
-msgid "Basic failed"
-msgstr "Βασικό απέτυχε"
-
-#, fuzzy
-msgid "Basic success"
-msgstr "Βασικό επιτυχία"
-
-#, fuzzy
-msgid "Advanced pending"
-msgstr "Προχωρημένο εκκρεμές"
-
-#, fuzzy
-msgid "Advanced failed"
-msgstr "Προχωρημένο απέτυχε"
-
-#, fuzzy
-msgid "Advanced success"
-msgstr "Προχωρημένο επιτυχία"
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error."
-msgstr ""
-"Η AstroBin δεν μπόρεσε να λύσει την εικόνα λόγω ενός απροσδόκητου σφάλματος."
+"Η AstroBin δεν μπόρεσε να λύσει την εικόνα λόγω ενός απροσδόκητου σφάλματος. "
+"Δοκίμασε ξανά αργότερα!"
 
 #, fuzzy
 msgid "n/a"
@@ -353,6 +445,10 @@ msgstr "Δημιουργώντας σημειώσεις εικόνας..."
 #, fuzzy
 msgid "Processing SVG documents..."
 msgstr "Επεξεργασία εγγράφων SVG..."
+
+#, fuzzy
+msgid "Generating finding charts..."
+msgstr "Δημιουργώντας χάρτες εύρεσης..."
 
 #, fuzzy
 msgid "Uploading results..."
@@ -433,360 +529,3 @@ msgstr "Κλείσιμο"
 #, fuzzy
 msgid "Invalid"
 msgstr "Μη έγκυρο"
-
-#, fuzzy
-msgid "Generating finding charts..."
-msgstr "Δημιουργώντας χάρτες εύρεσης..."
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error. Please try again later!"
-msgstr ""
-"Η AstroBin δεν μπόρεσε να λύσει την εικόνα γιατί το nova.astrometry.net "
-"ανέφερε εσωτερικό σφάλμα διακομιστή. Δοκίμασε ξανά αργότερα!"
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error. "
-"Please try again later!"
-msgstr ""
-"Η AstroBin δεν μπόρεσε να λύσει την εικόνα λόγω ενός απροσδόκητου σφάλματος. "
-"Δοκίμασε ξανά αργότερα!"
-
-#, fuzzy
-msgid "Your migration data"
-msgstr "Τα δεδομένα μετανάστευσης σου"
-
-#, fuzzy
-msgid "Total amount donated last year"
-msgstr "Συνολικό ποσό δωρεών πέρυσι"
-
-#, fuzzy
-msgid "First payment"
-msgstr "Πρώτη πληρωμή"
-
-#, fuzzy
-msgid "Price for Premium"
-msgstr "Τιμή για Premium"
-
-#, fuzzy
-msgid "Days covered"
-msgstr "Ημέρες κάλυψης"
-
-#, fuzzy
-msgid "Premium expiration"
-msgstr "Λήξη Premium"
-
-#, fuzzy
-msgid "Your donations last year"
-msgstr "Οι δωρεές σου πέρυσι"
-
-#, fuzzy
-msgid "Amount"
-msgstr "Ποσό"
-
-#, fuzzy
-msgid "Date"
-msgstr "Ημερομηνία"
-
-#, fuzzy
-msgid "Subscription"
-msgstr "Συνδρομή"
-
-#, fuzzy
-msgid "Migrate donations"
-msgstr "Μεταφορά δωρεών"
-
-#, fuzzy
-msgid "Error!"
-msgstr "Σφάλμα!"
-
-#, fuzzy
-msgid ""
-"Sorry, but it looks like you cannot migrate your donations to a Premium "
-"membership."
-msgstr ""
-"Λυπάμαι, αλλά φαίνεται ότι δεν μπορείτε να μεταφέρετε τις δωρεές σας σε μια "
-"Premium συνδρομή."
-
-#, fuzzy
-msgid "You already have a paid membership."
-msgstr "Έχετε ήδη μια πληρωμένη συνδρομή."
-
-#, fuzzy
-msgid "We could not find any donations from you last year."
-msgstr "Δεν μπορέσαμε να βρούμε καμία δωρεά από εσάς πέρυσι."
-
-#, fuzzy
-msgid ""
-"Your donations last year were not enough to cover a Premium subscription for "
-"this year."
-msgstr ""
-"Οι δωρεές σας πέρυσι δεν ήταν αρκετές για να καλύψουν μια Premium συνδρομή "
-"για φέτος."
-
-#, fuzzy
-msgid "View the subscription plans"
-msgstr "Δείτε τα σχέδια συνδρομής"
-
-#, fuzzy
-msgid ""
-"As you  have made donations during the last year, you may choose to transfer "
-"the amount you donated towards an AstroBin Premium membership. The "
-"membership will have an expiration date proportionate to the amount you "
-"donated."
-msgstr ""
-"Καθώς έχετε κάνει δωρεές κατά τη διάρκεια του περασμένου έτους, μπορείτε να "
-"επιλέξετε να μεταφέρετε το ποσό που δωρίσατε προς μια Premium συνδρομή στο "
-"AstroBin. Η συνδρομή θα έχει ημερομηνία λήξης ανάλογη με το ποσό που "
-"δωρίσατε."
-
-#, fuzzy
-msgid ""
-"If you are feeling particularly cool and generous, you may choose to "
-"consider your past donations as a contribution to support past efforts, and "
-"pay again for a Premium plan. Up to you!"
-msgstr ""
-"Αν νιώθετε ιδιαίτερα κουλ και γενναιόδωροι, μπορείτε να θεωρήσετε τις "
-"προηγούμενες δωρεές σας ως συμβολή για να υποστηρίξετε τις παλιές "
-"προσπάθειες και να πληρώσετε ξανά για ένα Premium σχέδιο. Εσείς αποφασίζετε!"
-
-#, fuzzy
-msgid "No, I want to pay for Premium"
-msgstr "Όχι, θέλω να πληρώσω για Premium"
-
-#, fuzzy
-msgid "Success"
-msgstr "Επιτυχία"
-
-#, fuzzy
-msgid "Your migration was successful."
-msgstr "Η μεταφορά σας ήταν επιτυχής."
-
-#, fuzzy
-msgid "Thanks for supporting AstroBin!"
-msgstr "Ευχαριστούμε που υποστηρίζετε το AstroBin!"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
-msgstr "Η συνδρομή σας \"%(subscription_name)s\" στο AstroBin μόλις έληξε."
-
-#, fuzzy
-msgid ""
-"When a subscription on AstroBin expires, nothing happens to your images or "
-"any of your content. You are reverted to AstroBin Free and will not be able "
-"to upload new images until you renew, but you may continue to use AstroBin "
-"in all other aspects if you do not have any new images to share at the "
-"moment."
-msgstr ""
-"Όταν μια συνδρομή στο AstroBin λήξει, δεν συμβαίνει τίποτα με τις εικόνες "
-"σας ή οποιοδήποτε άλλο περιεχόμενο. Επιστρέφετε στο AstroBin Free και δεν θα "
-"μπορείτε να ανεβάσετε νέες εικόνες μέχρι να ανανεώσετε, αλλά μπορείτε να "
-"συνεχίσετε να χρησιμοποιείτε το AstroBin σε όλες τις άλλες πτυχές αν δεν "
-"έχετε νέες εικόνες να μοιραστείτε αυτή τη στιγμή."
-
-#, fuzzy
-msgid ""
-"When you are ready to renew your subscription, please visit the following "
-"page:"
-msgstr ""
-"Όταν είστε έτοιμοι να ανανεώσετε τη συνδρομή σας, παρακαλώ επισκεφθείτε την "
-"παρακάτω σελίδα:"
-
-#, fuzzy
-msgid "Your AstroBin subscription has just expired"
-msgstr "Η συνδρομή σας στο AstroBin μόλις έληξε"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
-"week."
-msgstr ""
-"Η συνδρομή σας \"%(subscription_name)s\" στο AstroBin θα λήξει σε μία "
-"εβδομάδα."
-
-#, fuzzy
-msgid ""
-"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
-"still ongoing. Please wait until it is expired. Thank you!"
-msgstr ""
-"ΠΑΡΑΚΑΛΩ ΣΗΜΕΙΩΣΤΕ! Αυτή τη στιγμή, δεν μπορείτε να ανανεώσετε μια συνδρομή "
-"ενώ είναι ακόμα σε ισχύ. Παρακαλώ περιμένετε μέχρι να λήξει. Ευχαριστώ!"
-
-#, fuzzy
-msgid "Your AstroBin subscription will expire in one week"
-msgstr "Η συνδρομή σας στο AstroBin θα λήξει σε μία εβδομάδα"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will be "
-"automatically renewed in one week."
-msgstr ""
-"Η συνδρομή σας \"%(subscription_name)s\" στο AstroBin θα ανανεωθεί αυτόματα "
-"σε μία εβδομάδα."
-
-#, fuzzy
-msgid ""
-"You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically. If your subscription was created the "
-"regular way, via PayPal, then PayPal will attempt to charge your credit card "
-"or retrieve funds that are available in your account."
-msgstr ""
-"Έχετε μια αυτόματα ανανεούμενη συνδρομή στο AstroBin, και θα προσπαθήσουμε "
-"να την ανανεώσουμε αυτόματα. Αν η συνδρομή σας δημιουργήθηκε με τον κανονικό "
-"τρόπο, μέσω PayPal, τότε το PayPal θα προσπαθήσει να χρεώσει την πιστωτική "
-"σας κάρτα ή να ανακτήσει τα διαθέσιμα κεφάλαια στον λογαριασμό σας."
-
-#, fuzzy
-msgid ""
-"If your subscription was created manually via a bank transfer, please get in "
-"touch for a new payment."
-msgstr ""
-"Αν η συνδρομή σας δημιουργήθηκε χειροκίνητα μέσω τραπεζικής μεταφοράς, "
-"παρακαλώ επικοινωνήστε για μια νέα πληρωμή."
-
-#, fuzzy
-msgid "Thank you!"
-msgstr "Ευχαριστώ!"
-
-#, fuzzy
-msgid "Your AstroBin subscription will be automatically renewed in one week"
-msgstr "Η συνδρομή σας στο AstroBin θα ανανεωθεί αυτόματα σε μία εβδομάδα"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will be "
-"automatically renewed in 30 days."
-msgstr ""
-"Η συνδρομή σας \"%(subscription_name)s\" στο AstroBin θα ανανεωθεί αυτόματα "
-"σε 30 ημέρες."
-
-#, fuzzy
-msgid "Your AstroBin subscription will be automatically renewed in 30 days"
-msgstr "Η συνδρομή σας στο AstroBin θα ανανεωθεί αυτόματα σε 30 ημέρες"
-
-#, fuzzy
-msgid "Show HD stars"
-msgstr "Δείξτε HD αστέρια"
-
-#, fuzzy
-msgid ""
-"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
-"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
-msgstr ""
-"Αυτός ο κατάλογος χρησιμοποιεί δεδομένα από τον Συγκεντρωμένο Κατάλογο 2,5 "
-"εκατομμυρίων αστέρων (Kharchenko+ 2009), κατάλογος VizieR: I/280B."
-
-#, fuzzy
-msgid "Max. magnitude"
-msgstr "Μέγιστη. φωτεινότητα"
-
-#, fuzzy
-msgid ""
-"Only HD stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Μόνο HD αστέρια μέχρι αυτή τη φωτεινότητα θα αποδοθούν. Αν μείνει κενό, θα "
-"χρησιμοποιηθεί η προεπιλεγμένη τιμή του καταλόγου."
-
-#, fuzzy
-msgid ""
-"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Μόνο αστέρια GCVS μέχρι αυτή τη φωτεινότητα θα αποδοθούν. Αν μείνει κενό, θα "
-"χρησιμοποιηθεί η προεπιλεγμένη τιμή του καταλόγου."
-
-#, fuzzy
-msgid ""
-"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Μόνο αστέρια Tycho-2 μέχρι αυτή τη φωτεινότητα θα αποδοθούν. Αν μείνει κενό, "
-"θα χρησιμοποιηθεί η προεπιλεγμένη τιμή του καταλόγου."
-
-#, fuzzy
-msgid "Downsample factor"
-msgstr "Παράγοντας υποδειγματοληψίας"
-
-#, fuzzy
-msgid ""
-"Downsample (bin) your image by this factor before performing source "
-"detection. This often helps with saturated images, noisy images, and large "
-"images. 2 and 4 are commonly-useful values."
-msgstr ""
-"Υποδείξτε (bin) την εικόνα σας με αυτόν τον παράγοντα πριν από την ανίχνευση "
-"πηγών. Αυτό συχνά βοηθά με κορεσμένες εικόνες, θορυβώδεις εικόνες και "
-"μεγάλες εικόνες. Οι τιμές 2 και 4 είναι συνήθως χρήσιμες."
-
-#, fuzzy
-msgid "Use SExtractor"
-msgstr "Χρησιμοποιήστε SExtractor"
-
-#, fuzzy
-msgid ""
-"Use the SourceExtractor program to detect stars, not Nova's built-in program."
-msgstr ""
-"Χρησιμοποιήστε το πρόγραμμα SourceExtractor για να ανιχνεύσετε αστέρια, όχι "
-"το ενσωματωμένο πρόγραμμα του Nova."
-
-#, fuzzy
-msgid "Show ecliptic"
-msgstr "Δείξτε εκλειπτική"
-
-#, fuzzy
-msgid "Show galactic equator"
-msgstr "Δείξτε γαλαξιακό ισημερινό"
-
-#, fuzzy
-msgid "Publicly visible astrometry.net submission"
-msgstr "Δημόσια ορατή υποβολή astrometry.net"
-
-#, fuzzy
-msgid ""
-"If checked, the astrometry.net submission will be publicly visible. If you "
-"leave this unchecked,you won't be able to see the full log of the astrometry."
-"net submission, but the image will stillbe plate-solved and annotated."
-msgstr ""
-"Αν επιλεγεί, η υποβολή astrometry.net θα είναι δημόσια ορατή. Αν το αφήσετε "
-"μη επιλεγμένο, δεν θα μπορείτε να δείτε το πλήρες αρχείο της υποβολής "
-"astrometry.net, αλλά η εικόνα θα εξακολουθήσει να είναι plate-solved και "
-"ανιχνευμένη."
-
-#, fuzzy
-msgid "Loading..."
-msgstr "Φόρτωση..."
-
-#, fuzzy
-msgid "AstroBin is plate-solving this image with Astrometry.net..."
-msgstr "Το AstroBin λύνει αυτή την εικόνα με το Astrometry.net..."
-
-#, fuzzy
-msgid "AstroBin is plate-solving this image with PixInsight..."
-msgstr "Το AstroBin λύνει αυτή την εικόνα με το PixInsight..."
-
-#, fuzzy
-msgid "Very Large Field (>30 degrees)"
-msgstr "Πολύ Μεγάλο Πεδίο (>30 μοίρες)"
-
-#, fuzzy
-msgid "Large Field (15-30 degrees)"
-msgstr "Μεγάλο Πεδίο (15-30 μοίρες)"
-
-#, fuzzy
-msgid "Medium Field (4-15 degrees)"
-msgstr "Μεσαίο Πεδίο (4-15 μοίρες)"
-
-#, fuzzy
-msgid "Small Field (1-4 degrees)"
-msgstr "Μικρό Πεδίο (1-4 μοίρες)"
-
-#, fuzzy
-msgid "Very Small Field (<1 degree)"
-msgstr "Πολύ Μικρό Πεδίο (<1 μοίρα)"

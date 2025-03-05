@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: fi\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, fuzzy
-msgid "Conflict."
-msgstr "Konflikti."
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Yksi videopohjainen hankinta on sallittu per kuva."
 
 #, fuzzy
 msgid "Uncompressed source (max 100 MB)"
@@ -25,67 +27,6 @@ msgstr ""
 "suosikkikuvankäsittelyohjelmastasi (esim. PixInsight, Adobe Photoshop jne.) "
 "tänne AstroBiniin arkistointitarkoituksiin. Tämä tiedosto tallennetaan "
 "yksityisesti, ja vain sinä pääset siihen käsiksi."
-
-msgid "Error!"
-msgstr "Virhe!"
-
-#, fuzzy
-msgid "Staging area"
-msgstr "Välikohta"
-
-msgid "Loading"
-msgstr "Ladataan"
-
-msgid "(no title)"
-msgstr "(nimetön)"
-
-#, fuzzy
-msgid "Image of the day"
-msgstr "Päivän kuva"
-
-#, fuzzy
-msgid "Top pick"
-msgstr "Parhaat valinnat"
-
-#, fuzzy
-msgid "Top pick nomination"
-msgstr "Parhaat valinnat -ehdotus"
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Data korruptoitui! Ole hyvä ja lähetä kuva uudestaan. Pahoittelut!"
-
-#, fuzzy
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "Versio %(revision)s"
-
-#, fuzzy
-msgid "Original revision"
-msgstr "Alkuperäinen versio"
-
-#, fuzzy
-msgid "Collaboration"
-msgstr "Yhteistyö"
-
-#, fuzzy
-msgid "Currently in the IOTD/TP queue"
-msgstr "Tällä hetkellä IOTD/TP-jonossa"
-
-#, fuzzy
-msgid "Video"
-msgstr "Video"
-
-#, fuzzy
-msgid "There was a problem encoding this video, please upload it again."
-msgstr "Videon koodauksessa oli ongelma, lataa se uudelleen."
-
-#, fuzzy
-msgid "If the problem persists, please contact us."
-msgstr "Jos ongelma jatkuu, ota meihin yhteyttä."
-
-#, fuzzy
-msgid "This video is still processing, please return to this page later."
-msgstr "Tämä video on vielä käsittelyssä, palaa tälle sivulle myöhemmin."
 
 #, fuzzy
 msgid "Dates"
@@ -183,10 +124,66 @@ msgstr "Seeing"
 msgid "Transparency"
 msgstr "Läpinäkyvyys"
 
+msgid "Error!"
+msgstr "Virhe!"
+
+#, fuzzy
+msgid "Image of the day"
+msgstr "Päivän kuva"
+
+#, fuzzy
+msgid "Top pick"
+msgstr "Parhaat valinnat"
+
+#, fuzzy
+msgid "Top pick nomination"
+msgstr "Parhaat valinnat -ehdotus"
+
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Tällä hetkellä IOTD/TP-jonossa"
+
+#, fuzzy
+msgid "Staging area"
+msgstr "Välikohta"
+
+#, fuzzy
+msgid "Collaboration"
+msgstr "Yhteistyö"
+
+#, fuzzy
+msgid "Video"
+msgstr "Video"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr "Videon koodauksessa oli ongelma, lataa se uudelleen."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Jos ongelma jatkuu, ota meihin yhteyttä."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr "Tämä video on vielä käsittelyssä, palaa tälle sivulle myöhemmin."
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Versio %(revision)s"
+
+#, fuzzy
+msgid "Original revision"
+msgstr "Alkuperäinen versio"
+
+msgid "Loading"
+msgstr "Ladataan"
+
+msgid "(no title)"
+msgstr "(nimetön)"
+
 #, fuzzy
 msgid "Image file not found"
 msgstr "Kuvafiletta ei löytynyt"
 
-#, fuzzy
-msgid "Only one video-based acquisition is allowed per image."
-msgstr "Yksi videopohjainen hankinta on sallittu per kuva."
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Data korruptoitui! Ole hyvä ja lähetä kuva uudestaan. Pahoittelut!"

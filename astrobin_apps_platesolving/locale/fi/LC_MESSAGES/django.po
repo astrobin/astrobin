@@ -1,10 +1,233 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: fi\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, fuzzy
+msgid "Very Large Field (>30 degrees)"
+msgstr "Erittäin suuri kenttä (>30 astetta)"
+
+#, fuzzy
+msgid "Large Field (15-30 degrees)"
+msgstr "Suuri kenttä (15-30 astetta)"
+
+#, fuzzy
+msgid "Medium Field (4-15 degrees)"
+msgstr "Keskikokoinen kenttä (4-15 astetta)"
+
+#, fuzzy
+msgid "Small Field (1-4 degrees)"
+msgstr "Pieni kenttä (1-4 astetta)"
+
+#, fuzzy
+msgid "Very Small Field (<1 degree)"
+msgstr "Erittäin pieni kenttä (<1 astetta)"
+
+#, fuzzy
+msgid "Small"
+msgstr "Pieni"
+
+#, fuzzy
+msgid "Medium"
+msgstr "Keskikokoinen"
+
+#, fuzzy
+msgid "Large"
+msgstr "Suuri"
+
+#, fuzzy
+msgid "Sample raw frame (max 100 MB)"
+msgstr "Näyte raakakehyksestä (max 100 MB)"
+
+#, fuzzy
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+"Parantaaksesi levynratkaisusi tarkkuutta entisestään, lataa yksi XISF- tai "
+"FITS-tiedostoista datasarjastasi. Tällaisilla tiedostoilla on yleensä "
+"päivämäärä- ja aikaleimat, jotka mahdollistavat AstroBinille aurinkokunnan "
+"kohteiden ephemeridien laskemisen ja planeettojen sekä asteroidien "
+"löytämisen kuvastasi (edellyttäen, että lisäät myös sijaintitiedot).<br/><br/"
+">Maksimaalisen tarkkuuden saavuttamiseksi on suositeltavaa käyttää "
+"PixInsightin alkuperäistä ja avointa muotoa XISF. Lue lisää XISF:stä täältä:"
+"<br/><br/><a href=\"https://pixinsight.com/xisf/\" target=\"_blank\">https://"
+"pixinsight.com/xisf/</a><br/><br/><strong>Huomaa:</strong> on erittäin "
+"tärkeää, että lataamasi XISF- tai FITS-tiedosto on kohdistettu käsiteltyyn "
+"kuvaasi, muuten kohteiden merkinnät eivät vastaa. Parantaaksesi "
+"mahdollisuuksiasi onnistuneeseen tarkkaan levynratkaisuun, kalibroi "
+"tiedostosi tavalliseen tapaan (dark/bias/flats), mutta älä venytä sitä."
+
+#, fuzzy
+msgid "Scaled font size"
+msgstr "Skaalattu fonttikoko"
+
+#, fuzzy
+msgid "Font size of the annotations on your main image page"
+msgstr "Fonttikoko pääkuvasi merkinnöissä"
+
+#, fuzzy
+msgid "Show equatorial grid"
+msgstr "Näytä ekvatoriaalinen verkko"
+
+#, fuzzy
+msgid "Show ecliptic"
+msgstr "Näytä ekliptika"
+
+#, fuzzy
+msgid "Show galactic equator"
+msgstr "Näytä galaktinen ekvaattori"
+
+#, fuzzy
+msgid "Show constellation borders"
+msgstr "Näytä tähtikuvioiden rajat"
+
+#, fuzzy
+msgid "Show constellation lines"
+msgstr "Näytä tähtikuvioiden viivat"
+
+#, fuzzy
+msgid "Show named stars"
+msgstr "Näytä nimettyjä tähtiä"
+
+#, fuzzy
+msgid "Show HD stars"
+msgstr "Näytä HD-tähdet"
+
+#, fuzzy
+msgid ""
+"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
+"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
+msgstr ""
+"Tämä luettelo käyttää tietoja 2,5 miljoonan tähden All-sky Compiled "
+"Catalogue -katalogista (Kharchenko+ 2009), VizieR-luettelo: I/280B."
+
+#, fuzzy
+msgid "Max. magnitude"
+msgstr "Max. kirkkaus"
+
+#, fuzzy
+msgid ""
+"Only HD stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Vain HD-tähdet, joiden kirkkaus on enintään tämä, näytetään. Jos jätät sen "
+"tyhjäksi, katalogin oletusarvoa käytetään."
+
+#, fuzzy
+msgid "Show Messier objects"
+msgstr "Näytä Messier-kohteita"
+
+#, fuzzy
+msgid "Show NGC and IC objects"
+msgstr "Näytä NGC- ja IC-kohteita"
+
+#, fuzzy
+msgid "Show VdB objects"
+msgstr "Näytä VdB-kohteita"
+
+#, fuzzy
+msgid "Show Sharpless objects"
+msgstr "Näytä Sharpless-kohteita"
+
+#, fuzzy
+msgid "Show Barnard objects"
+msgstr "Näytä Barnard-kohteita"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+"Näytä kohteet Lyndsin kirkkaiden sumujen luettelosta (LBN) (Lynds 1965)"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr "Näytä kohteet Lyndsin tummien sumujen luettelosta (LDN) (Lynds 1962)"
+
+#, fuzzy
+msgid "Show PGC objects"
+msgstr "Näytä PGC-kohteita"
+
+#, fuzzy
+msgid "Show planets"
+msgstr "Näytä planeettoja"
+
+#, fuzzy
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+"Saatavilla vain, jos kuvassasi on vähintään hankinta-aika ja tarkka sijainti"
+
+#, fuzzy
+msgid "Show asteroids"
+msgstr "Näytä asteroideja"
+
+#, fuzzy
+msgid "Show GCVS stars"
+msgstr "Näytä GCVS-tähtiä"
+
+#, fuzzy
+msgid "General Catalog of Variable Stars"
+msgstr "Yleinen muuttuvien tähtien luettelo"
+
+#, fuzzy
+msgid ""
+"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Vain GCVS-tähdet, joiden kirkkaus on enintään tämä, näytetään. Jos jätät sen "
+"tyhjäksi, katalogin oletusarvoa käytetään."
+
+#, fuzzy
+msgid "Show Tycho-2 catalog"
+msgstr "Näytä Tycho-2 -luettelo"
+
+#, fuzzy
+msgid ""
+"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Vain Tycho-2-tähdet, joiden kirkkaus on enintään tämä, näytetään. Jos jätät "
+"sen tyhjäksi, katalogin oletusarvoa käytetään."
+
+#, fuzzy
+msgid "Show CGPN objects"
+msgstr "Näytä CGPN-kohteita"
+
+#, fuzzy
+msgid "Show quasars"
+msgstr "Näytä kvasaareja"
+
+#, fuzzy
+msgid "Publicly visible astrometry.net submission"
+msgstr "Julkisesti näkyvä astrometry.net -lähetys"
+
+#, fuzzy
+msgid ""
+"If checked, the astrometry.net submission will be publicly visible. If you "
+"leave this unchecked,you won't be able to see the full log of the astrometry."
+"net submission, but the image will stillbe plate-solved and annotated."
+msgstr ""
+"Jos valitset tämän, astrometry.net -lähetys on julkisesti näkyvä. Jos jätät "
+"tämän valitsematta, et voi nähdä astrometry.net -lähetyksen täydellistä "
+"lokia, mutta kuva ratkaistaan ja merkitään silti."
 
 #, fuzzy
 msgid "Perform a blind solve"
@@ -79,151 +302,72 @@ msgstr ""
 "annetusta keskikohta RA:sta ja dec:stä."
 
 #, fuzzy
-msgid "Small"
-msgstr "Pieni"
-
-#, fuzzy
-msgid "Medium"
-msgstr "Keskikokoinen"
-
-#, fuzzy
-msgid "Large"
-msgstr "Suuri"
-
-#, fuzzy
-msgid "Sample raw frame (max 100 MB)"
-msgstr "Näyte raakakehyksestä (max 100 MB)"
+msgid "Downsample factor"
+msgstr "Alennuskerroin"
 
 #, fuzzy
 msgid ""
-"To improve the accuracy of your plate-solution even further, please upload "
-"one of the XISF or FITS files from your data set. Such files normally have "
-"date and time headers that will allow AstroBin to calculate solar system "
-"body ephemerides and find planets and asteroids in your image (provided you "
-"also add location information to it).<br/><br/>For maximum accuracy, it's "
-"recommended that you use PixInsight's native and open format XISF. Learn "
-"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
-"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
-"note:</strong> it's very important that the XISF or FITS file you upload is "
-"aligned to your processed image, otherwise the object annotations will not "
-"match. To improve your chances at a successful accurate plate-solution, "
-"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+"Downsample (bin) your image by this factor before performing source "
+"detection. This often helps with saturated images, noisy images, and large "
+"images. 2 and 4 are commonly-useful values."
 msgstr ""
-"Parantaaksesi levynratkaisusi tarkkuutta entisestään, lataa yksi XISF- tai "
-"FITS-tiedostoista datasarjastasi. Tällaisilla tiedostoilla on yleensä "
-"päivämäärä- ja aikaleimat, jotka mahdollistavat AstroBinille aurinkokunnan "
-"kohteiden ephemeridien laskemisen ja planeettojen sekä asteroidien "
-"löytämisen kuvastasi (edellyttäen, että lisäät myös sijaintitiedot).<br/>"
-"<br/>Maksimaalisen tarkkuuden saavuttamiseksi on suositeltavaa käyttää "
-"PixInsightin alkuperäistä ja avointa muotoa XISF. Lue lisää XISF:stä täältä:"
-"<br/><br/><a href=\"https://pixinsight.com/xisf/\" target=\"_blank\">https:"
-"//pixinsight.com/xisf/</a><br/><br/><strong>Huomaa:</strong> on erittäin "
-"tärkeää, että lataamasi XISF- tai FITS-tiedosto on kohdistettu käsiteltyyn "
-"kuvaasi, muuten kohteiden merkinnät eivät vastaa. Parantaaksesi "
-"mahdollisuuksiasi onnistuneeseen tarkkaan levynratkaisuun, kalibroi "
-"tiedostosi tavalliseen tapaan (dark/bias/flats), mutta älä venytä sitä."
+"Alenna (bini) kuvaasi tällä kertoimella ennen kuin suoritat lähteen "
+"tunnistamisen. Tämä auttaa usein ylikyllästettyjen, meluisten ja suurten "
+"kuvien kanssa. 2 ja 4 ovat yleisesti hyödyllisiä arvoja."
 
 #, fuzzy
-msgid "Scaled font size"
-msgstr "Skaalattu fonttikoko"
-
-#, fuzzy
-msgid "Font size of the annotations on your main image page"
-msgstr "Fonttikoko pääkuvasi merkinnöissä"
-
-#, fuzzy
-msgid "Show equatorial grid"
-msgstr "Näytä ekvatoriaalinen verkko"
-
-#, fuzzy
-msgid "Show constellation borders"
-msgstr "Näytä tähtikuvioiden rajat"
-
-#, fuzzy
-msgid "Show constellation lines"
-msgstr "Näytä tähtikuvioiden viivat"
-
-#, fuzzy
-msgid "Show named stars"
-msgstr "Näytä nimettyjä tähtiä"
-
-#, fuzzy
-msgid "Show Messier objects"
-msgstr "Näytä Messier-kohteita"
-
-#, fuzzy
-msgid "Show NGC and IC objects"
-msgstr "Näytä NGC- ja IC-kohteita"
-
-#, fuzzy
-msgid "Show VdB objects"
-msgstr "Näytä VdB-kohteita"
-
-#, fuzzy
-msgid "Show Sharpless objects"
-msgstr "Näytä Sharpless-kohteita"
-
-#, fuzzy
-msgid "Show Barnard objects"
-msgstr "Näytä Barnard-kohteita"
-
-#, fuzzy
-msgid "Show PGC objects"
-msgstr "Näytä PGC-kohteita"
-
-#, fuzzy
-msgid "Show planets"
-msgstr "Näytä planeettoja"
+msgid "Use SExtractor"
+msgstr "Käytä SExtractoria"
 
 #, fuzzy
 msgid ""
-"Only available if your image at least an acquisition time and an accurate "
-"location"
+"Use the SourceExtractor program to detect stars, not Nova's built-in program."
 msgstr ""
-"Saatavilla vain, jos kuvassasi on vähintään hankinta-aika ja tarkka sijainti"
+"Käytä SourceExtractor-ohjelmaa tähtien tunnistamiseen, älä Nova:n "
+"sisäänrakennettua ohjelmaa."
 
 #, fuzzy
-msgid "Show asteroids"
-msgstr "Näytä asteroideja"
+msgid "Missing"
+msgstr "Puuttuu"
 
 #, fuzzy
-msgid "Show GCVS stars"
-msgstr "Näytä GCVS-tähtiä"
+msgid "Basic pending"
+msgstr "Perus odottaa"
 
 #, fuzzy
-msgid "General Catalog of Variable Stars"
-msgstr "Yleinen muuttuvien tähtien luettelo"
+msgid "Basic failed"
+msgstr "Perus epäonnistui"
 
 #, fuzzy
-msgid "Show Tycho-2 catalog"
-msgstr "Näytä Tycho-2 -luettelo"
+msgid "Basic success"
+msgstr "Perus onnistui"
 
 #, fuzzy
-msgid "Show CGPN objects"
-msgstr "Näytä CGPN-kohteita"
+msgid "Advanced pending"
+msgstr "Edistynyt odottaa"
+
+#, fuzzy
+msgid "Advanced failed"
+msgstr "Edistynyt epäonnistui"
+
+#, fuzzy
+msgid "Advanced success"
+msgstr "Edistynyt onnistui"
+
+#, fuzzy
+msgid "Loading..."
+msgstr "Ladataan..."
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Haetaan kuvan asento- ja sijaintitietoja, ole hyvä ja odota..."
 
 #, fuzzy
-msgid "Plate-solving starting, please do not leave this page..."
-msgstr "Levynratkaisu käynnistyy, älä poistu tältä sivulta..."
+msgid "AstroBin is plate-solving this image with Astrometry.net..."
+msgstr "AstroBin ratkaisee tätä kuvaa Astrometry.netin avulla..."
 
 #, fuzzy
-msgid "Advanced plate-solving starting, please do not leave this page..."
-msgstr "Edistynyt levynratkaisu käynnistyy, älä poistu tältä sivulta..."
-
-#, fuzzy
-msgid "Plate-solving started. You may leave this page."
-msgstr "Levynratkaisu aloitettu. Voit poistua tältä sivulta."
-
-#, fuzzy
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr "Edistynyt levynratkaisu aloitettu. Voit poistua tältä sivulta."
-
-#, fuzzy
-msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr "Levynratkaisu melkein valmis, älä poistu tältä sivulta..."
+msgid "AstroBin is plate-solving this image with PixInsight..."
+msgstr "AstroBin ratkaisee tätä kuvaa PixInsightin avulla..."
 
 msgid "This image could not be plate-solved."
 msgstr "Kuvan sijainti- ja asentotietoja ei voitu ratkaista."
@@ -255,68 +399,18 @@ msgstr ""
 #, fuzzy
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error."
+"reported an internal server error. Please try again later!"
 msgstr ""
 "AstroBin ei pystynyt plate-solving tähän kuvaan, koska nova.astrometry.net "
-"ilmoitti sisäisestä palvelinvirheestä."
+"ilmoitti sisäisestä palvelinvirheestä. Yritä myöhemmin uudelleen!"
 
 #, fuzzy
 msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an unepexted error."
-msgstr ""
-"AstroBin ei pystynyt plate-solving tähän kuvaan, koska nova.astrometry.net "
-"ilmoitti odottamattomasta virheestä."
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
-msgstr ""
-"Näytä kohteet Lyndsin kirkkaiden sumujen luettelosta (LBN) (Lynds 1965)"
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr "Näytä kohteet Lyndsin tummien sumujen luettelosta (LDN) (Lynds 1962)"
-
-#, fuzzy
-msgid "Show quasars"
-msgstr "Näytä kvasaareja"
-
-#, fuzzy
-msgid "Missing"
-msgstr "Puuttuu"
-
-#, fuzzy
-msgid "Basic pending"
-msgstr "Perus odottaa"
-
-#, fuzzy
-msgid "Basic failed"
-msgstr "Perus epäonnistui"
-
-#, fuzzy
-msgid "Basic success"
-msgstr "Perus onnistui"
-
-#, fuzzy
-msgid "Advanced pending"
-msgstr "Edistynyt odottaa"
-
-#, fuzzy
-msgid "Advanced failed"
-msgstr "Edistynyt epäonnistui"
-
-#, fuzzy
-msgid "Advanced success"
-msgstr "Edistynyt onnistui"
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error."
+"AstroBin could not plate-solve this image because of an unexpected error. "
+"Please try again later!"
 msgstr ""
 "AstroBin ei pystynyt plate-solving tähän kuvaan odottamattoman virheen "
-"vuoksi."
+"vuoksi. Yritä myöhemmin uudelleen!"
 
 #, fuzzy
 msgid "n/a"
@@ -341,6 +435,10 @@ msgstr "Luodaan kuvatekstejä..."
 #, fuzzy
 msgid "Processing SVG documents..."
 msgstr "Käsitellään SVG-dokumentteja..."
+
+#, fuzzy
+msgid "Generating finding charts..."
+msgstr "Luodaan löytökarttoja..."
 
 #, fuzzy
 msgid "Uploading results..."
@@ -421,355 +519,3 @@ msgstr "Sulje"
 #, fuzzy
 msgid "Invalid"
 msgstr "Virheellinen"
-
-#, fuzzy
-msgid "Generating finding charts..."
-msgstr "Luodaan löytökarttoja..."
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error. Please try again later!"
-msgstr ""
-"AstroBin ei pystynyt plate-solving tähän kuvaan, koska nova.astrometry.net "
-"ilmoitti sisäisestä palvelinvirheestä. Yritä myöhemmin uudelleen!"
-
-#, fuzzy
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error. "
-"Please try again later!"
-msgstr ""
-"AstroBin ei pystynyt plate-solving tähän kuvaan odottamattoman virheen "
-"vuoksi. Yritä myöhemmin uudelleen!"
-
-#, fuzzy
-msgid "Your migration data"
-msgstr "Muutostietosi"
-
-#, fuzzy
-msgid "Total amount donated last year"
-msgstr "Viime vuonna lahjoitettu kokonaismäärä"
-
-#, fuzzy
-msgid "First payment"
-msgstr "Ensimmäinen maksaminen"
-
-#, fuzzy
-msgid "Price for Premium"
-msgstr "Premiumin hinta"
-
-#, fuzzy
-msgid "Days covered"
-msgstr "Peitetyt päivät"
-
-#, fuzzy
-msgid "Premium expiration"
-msgstr "Premiumin vanheneminen"
-
-#, fuzzy
-msgid "Your donations last year"
-msgstr "Lahjoituksesi viime vuonna"
-
-#, fuzzy
-msgid "Amount"
-msgstr "Määrä"
-
-#, fuzzy
-msgid "Date"
-msgstr "Päivämäärä"
-
-#, fuzzy
-msgid "Subscription"
-msgstr "Tilauksen"
-
-#, fuzzy
-msgid "Migrate donations"
-msgstr "Siirrä lahjoitukset"
-
-#, fuzzy
-msgid "Error!"
-msgstr "Virhe!"
-
-#, fuzzy
-msgid ""
-"Sorry, but it looks like you cannot migrate your donations to a Premium "
-"membership."
-msgstr ""
-"Anteeksi, mutta näyttää siltä, että et voi siirtää lahjoituksiasi Premium-"
-"jäsenyyteen."
-
-#, fuzzy
-msgid "You already have a paid membership."
-msgstr "Sinulla on jo maksettu jäsenyys."
-
-#, fuzzy
-msgid "We could not find any donations from you last year."
-msgstr "Emme löytäneet viime vuodelta lahjoituksia sinulta."
-
-#, fuzzy
-msgid ""
-"Your donations last year were not enough to cover a Premium subscription for "
-"this year."
-msgstr ""
-"Viime vuoden lahjoituksesi eivät riittäneet kattamaan Premium-tilauksen "
-"kustannuksia tälle vuodelle."
-
-#, fuzzy
-msgid "View the subscription plans"
-msgstr "Katso tilausvaihtoehdot"
-
-#, fuzzy
-msgid ""
-"As you  have made donations during the last year, you may choose to transfer "
-"the amount you donated towards an AstroBin Premium membership. The "
-"membership will have an expiration date proportionate to the amount you "
-"donated."
-msgstr ""
-"Koska olet tehnyt lahjoituksia viime vuoden aikana, voit valita siirtää "
-"lahjoittamasi summan AstroBin Premium -jäsenyyteen. Jäsenyydellä on "
-"voimassaoloaika suhteessa lahjoittamaasi summaan."
-
-#, fuzzy
-msgid ""
-"If you are feeling particularly cool and generous, you may choose to "
-"consider your past donations as a contribution to support past efforts, and "
-"pay again for a Premium plan. Up to you!"
-msgstr ""
-"Jos tunnet itsesi erityisen siistiksi ja anteliaaksi, voit harkita aiempia "
-"lahjoituksiasi tukena menneille ponnisteluille ja maksaa uudelleen Premium-"
-"suunnitelmasta. Sinä päätät!"
-
-#, fuzzy
-msgid "No, I want to pay for Premium"
-msgstr "Ei, haluan maksaa Premiumista"
-
-#, fuzzy
-msgid "Success"
-msgstr "Onnistui"
-
-#, fuzzy
-msgid "Your migration was successful."
-msgstr "Siirto onnistui."
-
-#, fuzzy
-msgid "Thanks for supporting AstroBin!"
-msgstr "Kiitos, että tuet AstroBinia!"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
-msgstr ""
-"\"%(subscription_name)s\" -tilauksesi AstroBinissa on juuri vanhentunut."
-
-#, fuzzy
-msgid ""
-"When a subscription on AstroBin expires, nothing happens to your images or "
-"any of your content. You are reverted to AstroBin Free and will not be able "
-"to upload new images until you renew, but you may continue to use AstroBin "
-"in all other aspects if you do not have any new images to share at the "
-"moment."
-msgstr ""
-"Kun tilaus AstroBinissa vanhenee, kuvillesi tai muulle sisällölle ei tapahdu "
-"mitään. Palautut AstroBin Free -tilaan etkä voi ladata uusia kuvia ennen "
-"kuin uusit, mutta voit jatkaa AstroBinin käyttöä kaikilla muilla osa-"
-"alueilla, jos sinulla ei ole uusia kuvia jaettavaksi."
-
-#, fuzzy
-msgid ""
-"When you are ready to renew your subscription, please visit the following "
-"page:"
-msgstr "Kun olet valmis uusimaan tilauksesi, käy seuraavalla sivulla:"
-
-#, fuzzy
-msgid "Your AstroBin subscription has just expired"
-msgstr "AstroBin-tilauksesi on juuri vanhentunut"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
-"week."
-msgstr ""
-"\"%(subscription_name)s\" -tilauksesi AstroBinissa vanhenee viikon kuluttua."
-
-#, fuzzy
-msgid ""
-"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
-"still ongoing. Please wait until it is expired. Thank you!"
-msgstr ""
-"HUOMAA! Tällä hetkellä et voi uusia tilausta, kun se on vielä voimassa. "
-"Odota, kunnes se on vanhentunut. Kiitos!"
-
-#, fuzzy
-msgid "Your AstroBin subscription will expire in one week"
-msgstr "AstroBin-tilauksesi vanhenee viikon kuluttua"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will be "
-"automatically renewed in one week."
-msgstr ""
-"\"%(subscription_name)s\" -tilauksesi AstroBinissa uusitaan automaattisesti "
-"viikon kuluttua."
-
-#, fuzzy
-msgid ""
-"You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically. If your subscription was created the "
-"regular way, via PayPal, then PayPal will attempt to charge your credit card "
-"or retrieve funds that are available in your account."
-msgstr ""
-"Sinulla on automaattisesti uusiutuva tilaus AstroBinissa, ja yritämme uusia "
-"sen automaattisesti. Jos tilauksesi on luotu tavallisella tavalla, PayPalin "
-"kautta, PayPal yrittää veloittaa luottokortiltasi tai kerätä varoja, jotka "
-"ovat tililläsi."
-
-#, fuzzy
-msgid ""
-"If your subscription was created manually via a bank transfer, please get in "
-"touch for a new payment."
-msgstr ""
-"Jos tilauksesi on luotu manuaalisesti pankkisiirrolla, ota yhteyttä uuden "
-"maksun osalta."
-
-#, fuzzy
-msgid "Thank you!"
-msgstr "Kiitos!"
-
-#, fuzzy
-msgid "Your AstroBin subscription will be automatically renewed in one week"
-msgstr "AstroBin-tilauksesi uusitaan automaattisesti viikon kuluttua"
-
-#, fuzzy
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will be "
-"automatically renewed in 30 days."
-msgstr ""
-"\"%(subscription_name)s\" -tilauksesi AstroBinissa uusitaan automaattisesti "
-"30 päivän kuluttua."
-
-#, fuzzy
-msgid "Your AstroBin subscription will be automatically renewed in 30 days"
-msgstr "AstroBin-tilauksesi uusitaan automaattisesti 30 päivän kuluttua"
-
-#, fuzzy
-msgid "Show HD stars"
-msgstr "Näytä HD-tähdet"
-
-#, fuzzy
-msgid ""
-"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
-"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
-msgstr ""
-"Tämä luettelo käyttää tietoja 2,5 miljoonan tähden All-sky Compiled "
-"Catalogue -katalogista (Kharchenko+ 2009), VizieR-luettelo: I/280B."
-
-#, fuzzy
-msgid "Max. magnitude"
-msgstr "Max. kirkkaus"
-
-#, fuzzy
-msgid ""
-"Only HD stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Vain HD-tähdet, joiden kirkkaus on enintään tämä, näytetään. Jos jätät sen "
-"tyhjäksi, katalogin oletusarvoa käytetään."
-
-#, fuzzy
-msgid ""
-"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Vain GCVS-tähdet, joiden kirkkaus on enintään tämä, näytetään. Jos jätät sen "
-"tyhjäksi, katalogin oletusarvoa käytetään."
-
-#, fuzzy
-msgid ""
-"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Vain Tycho-2-tähdet, joiden kirkkaus on enintään tämä, näytetään. Jos jätät "
-"sen tyhjäksi, katalogin oletusarvoa käytetään."
-
-#, fuzzy
-msgid "Downsample factor"
-msgstr "Alennuskerroin"
-
-#, fuzzy
-msgid ""
-"Downsample (bin) your image by this factor before performing source "
-"detection. This often helps with saturated images, noisy images, and large "
-"images. 2 and 4 are commonly-useful values."
-msgstr ""
-"Alenna (bini) kuvaasi tällä kertoimella ennen kuin suoritat lähteen "
-"tunnistamisen. Tämä auttaa usein ylikyllästettyjen, meluisten ja suurten "
-"kuvien kanssa. 2 ja 4 ovat yleisesti hyödyllisiä arvoja."
-
-#, fuzzy
-msgid "Use SExtractor"
-msgstr "Käytä SExtractoria"
-
-#, fuzzy
-msgid ""
-"Use the SourceExtractor program to detect stars, not Nova's built-in program."
-msgstr ""
-"Käytä SourceExtractor-ohjelmaa tähtien tunnistamiseen, älä Nova:n "
-"sisäänrakennettua ohjelmaa."
-
-#, fuzzy
-msgid "Show ecliptic"
-msgstr "Näytä ekliptika"
-
-#, fuzzy
-msgid "Show galactic equator"
-msgstr "Näytä galaktinen ekvaattori"
-
-#, fuzzy
-msgid "Publicly visible astrometry.net submission"
-msgstr "Julkisesti näkyvä astrometry.net -lähetys"
-
-#, fuzzy
-msgid ""
-"If checked, the astrometry.net submission will be publicly visible. If you "
-"leave this unchecked,you won't be able to see the full log of the astrometry."
-"net submission, but the image will stillbe plate-solved and annotated."
-msgstr ""
-"Jos valitset tämän, astrometry.net -lähetys on julkisesti näkyvä. Jos jätät "
-"tämän valitsematta, et voi nähdä astrometry.net -lähetyksen täydellistä "
-"lokia, mutta kuva ratkaistaan ja merkitään silti."
-
-#, fuzzy
-msgid "Loading..."
-msgstr "Ladataan..."
-
-#, fuzzy
-msgid "AstroBin is plate-solving this image with Astrometry.net..."
-msgstr "AstroBin ratkaisee tätä kuvaa Astrometry.netin avulla..."
-
-#, fuzzy
-msgid "AstroBin is plate-solving this image with PixInsight..."
-msgstr "AstroBin ratkaisee tätä kuvaa PixInsightin avulla..."
-
-#, fuzzy
-msgid "Very Large Field (>30 degrees)"
-msgstr "Erittäin suuri kenttä (>30 astetta)"
-
-#, fuzzy
-msgid "Large Field (15-30 degrees)"
-msgstr "Suuri kenttä (15-30 astetta)"
-
-#, fuzzy
-msgid "Medium Field (4-15 degrees)"
-msgstr "Keskikokoinen kenttä (4-15 astetta)"
-
-#, fuzzy
-msgid "Small Field (1-4 degrees)"
-msgstr "Pieni kenttä (1-4 astetta)"
-
-#, fuzzy
-msgid "Very Small Field (<1 degree)"
-msgstr "Erittäin pieni kenttä (<1 astetta)"

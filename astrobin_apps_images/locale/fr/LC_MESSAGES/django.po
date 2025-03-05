@@ -1,13 +1,16 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 10:37+0000\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 
-msgid "Conflict."
-msgstr "Conflit."
+#, fuzzy
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "On ne peut faire qu'une seule acquisition vidéo par image."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Source non-compressée (max 100 MB)"
@@ -19,61 +22,9 @@ msgid ""
 "access to it."
 msgstr ""
 "Vous pouvez conserver l'image finale traitée avec votre logiciel préféré "
-"(PixInsight, Adobe Photoshop, etc.) ici sur AstroBin, à des fins d'archivage."
-" Ce fichier est stocké de manière privée et vous seul y aurez accès."
-
-msgid "Error!"
-msgstr "Erreur !"
-
-msgid "Staging area"
-msgstr "Zone privée"
-
-msgid "Loading"
-msgstr "Chargement en cours..."
-
-msgid "(no title)"
-msgstr "(aucun titre)"
-
-msgid "Image of the day"
-msgstr "Image du Jour"
-
-msgid "Top pick"
-msgstr "Top Pick"
-
-msgid "Top pick nomination"
-msgstr "Nominée Top Pick"
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Données corrompues. Merci de charger cette image à nouveau. Désolé !"
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "Nouvelle version %(revision)s"
-
-msgid "Original revision"
-msgstr "Nouvelle version originale"
-
-msgid "Collaboration"
-msgstr "Collaboration"
-
-msgid "Currently in the IOTD/TP queue"
-msgstr "Actuellement dans la file de sélection de l'IOTD/TP"
-
-msgid "Video"
-msgstr "Vidéo"
-
-msgid "There was a problem encoding this video, please upload it again."
-msgstr ""
-"Un problème est survenu lors de l'encodage de cette vidéo, veuillez la "
-"télécharger à nouveau."
-
-msgid "If the problem persists, please contact us."
-msgstr "Si le problème persiste, veuillez nous contacter."
-
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-"Cette vidéo est toujours en cours de traitement, veuillez revenir sur cette "
-"page plus tard."
+"(PixInsight, Adobe Photoshop, etc.) ici sur AstroBin, à des fins "
+"d'archivage. Ce fichier est stocké de manière privée et vous seul y aurez "
+"accès."
 
 msgid "Dates"
 msgstr "Dates"
@@ -147,9 +98,58 @@ msgstr "Seeing"
 msgid "Transparency"
 msgstr "Transparence"
 
+msgid "Error!"
+msgstr "Erreur !"
+
+msgid "Image of the day"
+msgstr "Image du Jour"
+
+msgid "Top pick"
+msgstr "Top Pick"
+
+msgid "Top pick nomination"
+msgstr "Nominée Top Pick"
+
+msgid "Currently in the IOTD/TP queue"
+msgstr "Actuellement dans la file de sélection de l'IOTD/TP"
+
+msgid "Staging area"
+msgstr "Zone privée"
+
+msgid "Collaboration"
+msgstr "Collaboration"
+
+msgid "Video"
+msgstr "Vidéo"
+
+msgid "There was a problem encoding this video, please upload it again."
+msgstr ""
+"Un problème est survenu lors de l'encodage de cette vidéo, veuillez la "
+"télécharger à nouveau."
+
+msgid "If the problem persists, please contact us."
+msgstr "Si le problème persiste, veuillez nous contacter."
+
+msgid "This video is still processing, please return to this page later."
+msgstr ""
+"Cette vidéo est toujours en cours de traitement, veuillez revenir sur cette "
+"page plus tard."
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Nouvelle version %(revision)s"
+
+msgid "Original revision"
+msgstr "Nouvelle version originale"
+
+msgid "Loading"
+msgstr "Chargement en cours..."
+
+msgid "(no title)"
+msgstr "(aucun titre)"
+
 msgid "Image file not found"
 msgstr "Fichier image non trouvé"
 
-#, fuzzy
-msgid "Only one video-based acquisition is allowed per image."
-msgstr "On ne peut faire qu'une seule acquisition vidéo par image."
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Données corrompues. Merci de charger cette image à nouveau. Désolé !"

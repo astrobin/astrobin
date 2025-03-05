@@ -119,7 +119,7 @@
                     <div class="equipment-listing-search-result alert alert-info">
                        <span class="text">
                             <i class="icon-bullhorn"></i>
-                            {% blocktrans with count=marketplace_line_items|length %}
+                            {% blocktrans trimmed with count=marketplace_line_items|length %}
                                 AstroBin's Marketplace has <strong>{{ count }}</strong> items similar to what you're
                                 looking for!
                             {% endblocktrans %}
