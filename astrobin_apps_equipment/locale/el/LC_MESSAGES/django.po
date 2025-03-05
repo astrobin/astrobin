@@ -1,12 +1,10 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 11:33+0000\n"
 "Language: el\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit"
 
 #, fuzzy
 msgid ""
@@ -235,14 +233,6 @@ msgstr "Πωλητής"
 #, fuzzy
 msgid "Buyer"
 msgstr "Αγοραστής"
-
-#, fuzzy
-msgid "For sale"
-msgstr "Προς πώληση"
-
-#, fuzzy
-msgid "Wanted"
-msgstr "Αναζητείται"
 
 #, fuzzy
 msgid "Standard mail"
@@ -653,8 +643,8 @@ msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Καταδυτικός: ACF Schmidt-Cassegrain"
 
 #, fuzzy
-msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
-msgstr "Καταδιοπτρικός: Ρόου-Άκερμαν Σμιντ αστρογράφος"
+msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
+msgstr "Καταδιοπτρικό: Rowe-Atkinson Schmidt αστρογράφος"
 
 #, fuzzy
 msgid "Catadioptric: Riccardi-Honders"
@@ -952,10 +942,19 @@ msgstr "Ο αναθεωρητής άφησε το εξής σχόλιο:"
 msgid "View edit proposal"
 msgstr "Δείτε την πρόταση επεξεργασίας"
 
+#, fuzzy
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s."
+msgstr ""
+"%(_0)s%(user)s%(_1)s ενέκρινε μια πρόταση επεξεργασίας για το εξοπλιστικό "
+"αντικείμενο %(_0)s%(item)s%(_1)s."
+
+#, python-format
+msgid ""
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s ενέκρινε μια πρόταση επεξεργασίας για το αντικείμενο "
 "εξοπλισμού %(_0)s%(item)s%(_1)s"
@@ -966,8 +965,8 @@ msgstr "Παρακαλώ αναθεώρησέ το το συντομότερο �
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s to you for review"
+"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s to you for review"
 msgstr ""
 "%(_0)s%(user)s%(_1)s ανέθεσε μια πρόταση επεξεργασίας στο εξοπλιστικό "
 "αντικείμενο %(_0)s%(item)s%(_1)s για αναθεώρηση"
@@ -1024,11 +1023,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s"
 msgstr ""
-"%(_0)s%(user)s%(_1)s απέρριψε μια πρόταση επεξεργασίας για το εξοπλισμό "
-"%(_0)s%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s απέρριψε μια πρόταση επεξεργασίας για το εξοπλισμό %(_0)"
+"s%(item)s%(_1)s"
 
 #, fuzzy
 msgid "This item can now be added to images by anyone on AstroBin."
@@ -1156,8 +1155,8 @@ msgstr "Εργαλείο μετανάστευσης"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
-"%(_1)s that you created"
+"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)"
+"s%(_1)s that you created"
 msgstr ""
 "%(_0)s%(user)s%(_1)s απέρριψε το αντικείμενο εξοπλισμού για %(_0)s%(make)s "
 "%(name)s%(_1)s που δημιουργήσατε"
@@ -1187,13 +1186,13 @@ msgstr "Ο αναθεωρητής ανέφερε τον εξής κωδικό ω
 
 #, python-format
 msgid ""
-"Since your equipment item was marked as duplicate of <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
-"accordingly, and <strong>you don't need to do anything</strong>."
+"Since your equipment item was marked as duplicate of <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been "
+"updated accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
-"Δεδομένου ότι το αντικείμενο εξοπλισμού σας χαρακτηρίστηκε ως διπλό <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, η εικόνα σας έχει ενημερωθεί "
-"αναλόγως, και <strong>δεν χρειάζεται να κάνετε τίποτα</strong>."
+"Δεδομένου ότι το αντικείμενο εξοπλισμού σας χαρακτηρίστηκε ως διπλό <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, η εικόνα σας έχει "
+"ενημερωθεί αναλόγως, και <strong>δεν χρειάζεται να κάνετε τίποτα</strong>."
 
 #, fuzzy
 msgid ""
@@ -1215,17 +1214,17 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
-"%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
+"s%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
 "Το εξοπλιστικό αντικείμενο %(_0)s%(item)s%(_1)s αφαιρέθηκε από την εικόνα "
-"σας %(_0)s%(image_title)s%(_1)s και αντικαταστάθηκε με %(_0)s%(duplicate_of)s"
-"%(_1)s."
+"σας %(_0)s%(image_title)s%(_1)s και αντικαταστάθηκε με %(_0)s%(duplicate_of)"
+"s%(_1)s."
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
-"%(image_title)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
+"s%(image_title)s%(_1)s"
 msgstr ""
 "Το εξοπλιστικό αντικείμενο %(_0)s%(item)s%(_1)s αφαιρέθηκε από την εικόνα "
 "σας %(_0)s%(image_title)s%(_1)s."
@@ -1240,12 +1239,12 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your equipment item was marked as a duplicate of <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
+"Your equipment item was marked as a duplicate of <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
-"Το αντικείμενο εξοπλισμού σας χαρακτηρίστηκε ως διπλό του <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. Αν το προσθέσατε σε "
+"Το αντικείμενο εξοπλισμού σας χαρακτηρίστηκε ως διπλό του <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. Αν το προσθέσατε σε "
 "οποιεσδήποτε εικόνες, αυτές θα έχουν ενημερωθεί αναλόγως."
 
 #, python-format
@@ -1253,8 +1252,8 @@ msgid ""
 "Your equipment item was marked as a duplicate of \"%(duplicate_of)s\". If "
 "you added it to any images, they will have been updated accordingly."
 msgstr ""
-"Το αντικείμενο εξοπλισμού σου σημειώθηκε ως διπλότυπο του \"%(duplicate_of)s"
-"\". Αν το πρόσθεσες σε οποιαδήποτε εικόνα, αυτές θα έχουν ενημερωθεί "
+"Το αντικείμενο εξοπλισμού σου σημειώθηκε ως διπλότυπο του \"%(duplicate_of)"
+"s\". Αν το πρόσθεσες σε οποιαδήποτε εικόνα, αυτές θα έχουν ενημερωθεί "
 "αναλόγως."
 
 #, python-format
@@ -1262,8 +1261,8 @@ msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
 msgstr ""
-"%(_0)s%(user)s%(_1)s απέρριψε το εξοπλιστικό αντικείμενο %(_0)s%(item)s"
-"%(_1)s που δημιούργησες"
+"%(_0)s%(user)s%(_1)s απέρριψε το εξοπλιστικό αντικείμενο %(_0)s%(item)s%(_1)"
+"s που δημιούργησες"
 
 #, python-format
 msgid ""
@@ -1275,16 +1274,16 @@ msgid ""
 "%(_0)s%(user)s%(_1)s created the equipment item %(_0)s%(item)s%(_1)s and it "
 "requires moderation"
 msgstr ""
-"%(_0)s%(user)s%(_1)s δημιούργησε το εξοπλιστικό αντικείμενο %(_0)s%(item)s"
-"%(_1)s και απαιτεί έλεγχο"
+"%(_0)s%(user)s%(_1)s δημιούργησε το εξοπλιστικό αντικείμενο %(_0)s%(item)"
+"s%(_1)s και απαιτεί έλεγχο"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(user)s%(_1)s σας άφησε ανατροφοδότηση για την καταχώριση αγοράς "
-"%(_0)s%(listing)s%(_1)s."
+"%(_0)s%(user)s%(_1)s σας άφησε ανατροφοδότηση για την καταχώριση αγοράς %(_0)"
+"s%(listing)s%(_1)s."
 
 #, fuzzy
 msgid "Feedback details"
@@ -1341,32 +1340,32 @@ msgstr "Δες την καταχώριση"
 msgid ""
 "%(user)s left you feedback for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(user)s σας άφησε ανατροφοδότηση για την καταχώριση αγοράς %(_0)s%(listing)s"
-"%(_1)s"
+"%(user)s σας άφησε ανατροφοδότηση για την καταχώριση αγοράς %(_0)s%(listing)"
+"s%(_1)s"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s ενημέρωσε την ανατροφοδότησή σας για την καταχώριση "
 "αγοράς %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
-"%(_1)s"
+"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s%(_1)"
+"s"
 msgstr ""
-"Ο %(user)s ενημέρωσε την ανατροφοδότησή σας για την καταχώριση αγοράς %(_0)s"
-"%(listing)s%(_1)s."
+"Ο %(user)s ενημέρωσε την ανατροφοδότησή σας για την καταχώριση αγοράς %(_0)"
+"s%(listing)s%(_1)s."
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
-"%(_1)s"
+"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s%(_1)"
+"s"
 msgstr ""
-"%(_0)s%(user)s%(_1)s ενέκρινε την καταχώρισή σας στην αγορά %(_0)s%(listing)s"
-"%(_1)s"
+"%(_0)s%(user)s%(_1)s ενέκρινε την καταχώρισή σας στην αγορά %(_0)s%(listing)"
+"s%(_1)s"
 
 #, fuzzy
 msgid "The listing is now live. Good luck with your sale!"
@@ -1374,11 +1373,11 @@ msgstr "Η καταχώριση είναι τώρα ενεργή. Καλή τύ�
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s δημοσίευσε μια καταχώριση αγοράς %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s δημοσίευσε μια καταχώριση αγοράς %(_0)"
+"s%(listing)s%(_1)s"
 
 #, fuzzy
 msgid "You received this notification because you follow this user."
@@ -1386,19 +1385,19 @@ msgstr "Έλαβες αυτή την ειδοποίηση γιατί ακολο�
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 "%(_0)s%(seller_display_name)s%(_1)s διέγραψε την καταχώρησή τους στην αγορά "
 "%(_0)s%(listing)s%(_1)s"
 
 #, fuzzy
 msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
+"You received this notification because you have an active offer on this "
+"listing, or you follow the listing."
 msgstr ""
-"Έλαβες αυτή την ειδοποίηση γιατί έχεις μια προσφορά σε αυτή την καταχώριση, "
-"ή παρακολουθείς την καταχώριση."
+"Λάβατε αυτή την ειδοποίηση επειδή έχετε μια ενεργή προσφορά σε αυτή την "
+"καταχώριση ή ακολουθείτε την καταχώριση."
 
 #, fuzzy
 msgid ""
@@ -1428,12 +1427,13 @@ msgstr "Μπορείς να το ανανεώσεις κάνοντας κλικ 
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
-"%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
-"%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
+"s%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)"
+"s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s δημοσίευσε μια καταχώριση αγοράς %(_0)s"
-"%(listing)s%(_1)s με ένα εξοπλισμό που ακολουθείτε: %(_0)s%(line_item)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s δημοσίευσε μια καταχώριση αγοράς %(_0)"
+"s%(listing)s%(_1)s με ένα εξοπλισμό που ακολουθείτε: %(_0)s%(line_item)s%(_1)"
+"s"
 
 #, python-format
 msgid ""
@@ -1451,6 +1451,14 @@ msgstr ""
 "Δυστυχώς, δεν μπορείτε να κάνετε προσφορά σε αυτή την καταχώριση ενώ είναι "
 "σε κατάσταση κρατημένη ή πωληθείσα."
 
+#, fuzzy
+msgid ""
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
+msgstr ""
+"Έλαβες αυτή την ειδοποίηση γιατί έχεις μια προσφορά σε αυτή την καταχώριση, "
+"ή παρακολουθείς την καταχώριση."
+
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
@@ -1465,8 +1473,8 @@ msgstr "Αντικείμενο"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 "%(_0)s%(seller_display_name)s%(_1)s ενημέρωσε την καταχώρησή τους στην αγορά "
 "%(_0)s%(listing)s%(_1)s"
@@ -1484,13 +1492,13 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)s"
-"%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
-"possible and leave feedback to the buyer."
+"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)"
+"s%(_1)s, but you haven't marked the item as sold yet. Please do so as soon "
+"as possible and leave feedback to the buyer."
 msgstr ""
-"Πρόσφατα, αποδέχτηκες μια προσφορά για την καταχώριση της αγοράς %(_0)s"
-"%(listing)s%(_1)s, αλλά δεν έχεις σημειώσει το αντικείμενο ως πωληθέν ακόμα. "
-"Παρακαλώ κάνε το το συντομότερο δυνατόν και άφησε ανατροφοδότηση στον "
+"Πρόσφατα, αποδέχτηκες μια προσφορά για την καταχώριση της αγοράς %(_0)"
+"s%(listing)s%(_1)s, αλλά δεν έχεις σημειώσει το αντικείμενο ως πωληθέν ακόμα."
+" Παρακαλώ κάνε το το συντομότερο δυνατόν και άφησε ανατροφοδότηση στον "
 "αγοραστή."
 
 #, fuzzy
@@ -1499,8 +1507,8 @@ msgstr "Σημειώστε ως πωληθέν"
 
 #, python-format
 msgid ""
-"Don't forget to mark your reserved items as sold in the listing %(_0)s"
-"%(listing)s%(_1)s, if you sold them."
+"Don't forget to mark your reserved items as sold in the listing %(_0)"
+"s%(listing)s%(_1)s, if you sold them."
 msgstr ""
 "Μην ξεχάσεις να σημειώσεις τα κρατημένα αντικείμενά σου ως πωληθέντα στην "
 "καταχώριση %(_0)s%(listing)s%(_1)s, αν τα πούλησες."
@@ -1641,8 +1649,8 @@ msgstr ""
 msgid ""
 "You retracted your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"Ανακάλεσες την προσφορά σου για την καταχώριση της αγοράς %(_0)s%(listing)s"
-"%(_1)s"
+"Ανακάλεσες την προσφορά σου για την καταχώριση της αγοράς %(_0)s%(listing)"
+"s%(_1)s"
 
 #, python-format
 msgid ""
@@ -1667,8 +1675,8 @@ msgstr "Δείτε το προφίλ του αγοραστή"
 #, python-format
 msgid "You updated your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"Ενημερώσατε την προσφορά σας για την καταχώρηση στην αγορά %(_0)s%(listing)s"
-"%(_1)s"
+"Ενημερώσατε την προσφορά σας για την καταχώρηση στην αγορά %(_0)s%(listing)"
+"s%(_1)s"
 
 #, python-format
 msgid ""
@@ -1680,11 +1688,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
-"%(_1)s, and we noticed that you haven't rated the buyer yet."
+"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)"
+"s%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
-"Γεια! Πρόσφατα πουλήσατε ένα αντικείμενο από την καταχώριση αγοράς %(_0)s"
-"%(listing)s%(_1)s και παρατηρήσαμε ότι δεν έχετε βαθμολογήσει τον αγοραστή "
+"Γεια! Πρόσφατα πουλήσατε ένα αντικείμενο από την καταχώριση αγοράς %(_0)"
+"s%(listing)s%(_1)s και παρατηρήσαμε ότι δεν έχετε βαθμολογήσει τον αγοραστή "
 "ακόμα."
 
 #, fuzzy
@@ -1704,20 +1712,20 @@ msgstr "Άφησε ανατροφοδότηση"
 
 #, python-format
 msgid ""
-"Rate the buyer for your recent purchase from marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"Rate the buyer for your recent purchase from marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
 "Βαθμολόγησε τον αγοραστή για την πρόσφατη αγορά σου από την καταχώριση της "
 "αγοράς %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"Hi! You recently purchased an item from the marketplace listing %(_0)s"
-"%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
-"%(seller_display_name)s%(_1)s yet."
+"Hi! You recently purchased an item from the marketplace listing %(_0)"
+"s%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)"
+"s%(seller_display_name)s%(_1)s yet."
 msgstr ""
-"Γεια σου! Πρόσφατα αγόρασες ένα αντικείμενο από την καταχώριση αγοράς %(_0)s"
-"%(listing)s%(_1)s, και παρατηρήσαμε ότι δεν έχεις βαθμολογήσει ακόμα τον "
+"Γεια σου! Πρόσφατα αγόρασες ένα αντικείμενο από την καταχώριση αγοράς %(_0)"
+"s%(listing)s%(_1)s, και παρατηρήσαμε ότι δεν έχεις βαθμολογήσει ακόμα τον "
 "πωλητή %(_0)s%(seller_display_name)s%(_1)s."
 
 #, fuzzy
@@ -1824,3 +1832,15 @@ msgstr "Πώληση στην αγορά"
 #, fuzzy
 msgid "Close"
 msgstr "Κλείσιμο"
+
+#, fuzzy
+msgid "For sale"
+msgstr "Προς πώληση"
+
+#, fuzzy
+msgid "Wanted"
+msgstr "Αναζητείται"
+
+#, fuzzy
+msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
+msgstr "Καταδιοπτρικός: Ρόου-Άκερμαν Σμιντ αστρογράφος"

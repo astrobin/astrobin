@@ -1,12 +1,38 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: el\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit"
+
+#, fuzzy
+msgid "I wasn't really affected by the data loss"
+msgstr "Δεν επηρεάστηκα πραγματικά από την απώλεια δεδομένων"
+
+#, fuzzy
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr "Δεν απαιτώ αποζημίωση: θέλω να υποστηρίξω το AstroBin"
+
+#, fuzzy
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr "Θα ήθελα να δοκιμάσω το AstroBin Ultimate δωρεάν για 1 μήνα"
+
+#, fuzzy
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr "Νιώθω ότι δικαιούμαι το AstroBin Ultimate δωρεάν για 3 μήνες"
+
+#, fuzzy
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr "Νιώθω ότι δικαιούμαι το AstroBin Ultimate δωρεάν για 6 μήνες"
+
+#, fuzzy
+msgid "Requested compensation"
+msgstr "Αιτούμενη αποζημίωση"
+
+#, fuzzy
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr "Παρακαλώ δηλώστε αν και πόσο θα θέλατε να αποζημιωθείτε."
 
 #, fuzzy
 msgid "Your migration data"
@@ -49,8 +75,104 @@ msgid "Subscription"
 msgstr "Συνδρομή"
 
 #, fuzzy
-msgid "Paying member"
-msgstr "Μέλος που πληρώνει"
+msgid "Data loss compensation request"
+msgstr "Αίτηση αποζημίωσης για απώλεια δεδομένων"
+
+#, fuzzy
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
+msgstr ""
+"Είστε επιλέξιμος για αποζημίωση λόγω της απώλειας δεδομένων που συνέβη στις "
+"16 Φεβρουαρίου 2020."
+
+#, fuzzy
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+"Αν δεν έχετε την ευκαιρία, παρακαλώ αφιερώστε ένα λεπτό για να διαβάσετε τι "
+"συνέβη στην παρακάτω σελίδα:"
+
+#, fuzzy
+msgid "Official statement and post-mortem"
+msgstr "Επίσημη δήλωση και ανάλυση μετά το γεγονός"
+
+#, fuzzy
+msgid "Please accept our apology once more."
+msgstr "Παρακαλώ δεχτείτε την συγγνώμη μας για άλλη μια φορά."
+
+#, fuzzy
+msgid "Please chooce your compensation from the list below"
+msgstr "Παρακαλώ επιλέξτε την αποζημίωσή σας από τη λίστα παρακάτω"
+
+#, fuzzy
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+"Η αποζημίωση προσφέρεται με τη μορφή δωρεάν χρόνου στη νέα κατηγορία "
+"συνδρομής του AstroBin που ονομάζεται \"Ultimate\"."
+
+#, fuzzy
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+"Για να μάθετε περισσότερα για το AstroBin Ultimate, παρακαλώ επισκεφθείτε <a "
+"href=\"%(url)s\" target=\"_blank\">τη σελίδα τιμών</a>."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Υποβολή"
+
+#, fuzzy
+msgid "Data loss compensation reauest"
+msgstr "Αίτηση αποζημίωσης για απώλεια δεδομένων"
+
+#, fuzzy
+msgid "Already done"
+msgstr "Ήδη έγινε"
+
+#, fuzzy
+msgid "Sorry, you can't do this again."
+msgstr "Λυπάμαι, δεν μπορείτε να το κάνετε αυτό ξανά."
+
+#, fuzzy
+msgid "Your preference was already recorded and cannot be changed."
+msgstr "Η προτίμησή σας έχει ήδη καταγραφεί και δεν μπορεί να αλλάξει."
+
+#, fuzzy
+msgid "Not eligible"
+msgstr "Μη επιλέξιμος"
+
+#, fuzzy
+msgid "It looks like you're not eligible"
+msgstr "Φαίνεται ότι δεν είστε επιλέξιμος"
+
+#, fuzzy
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+"Λυπάμαι, αλλά αυτή η σελίδα είναι για άτομα που ήταν στο AstroBin Premium "
+"την ημέρα που συνέβη το περιστατικό απώλειας δεδομένων, και φαίνεται ότι δεν "
+"είστε ανάμεσά τους."
+
+#, fuzzy
+msgid "Success"
+msgstr "Επιτυχία"
+
+#, fuzzy
+msgid "All done!"
+msgstr "Όλα έτοιμα!"
+
+#, fuzzy
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
+msgstr "Η προτίμησή σας έχει καταγραφεί και έχει ήδη εφαρμοστεί. Ευχαριστώ!"
 
 #, fuzzy
 msgid "Migrate donations"
@@ -113,10 +235,6 @@ msgstr ""
 #, fuzzy
 msgid "No, I want to pay for Premium"
 msgstr "Όχι, θέλω να πληρώσω για Premium"
-
-#, fuzzy
-msgid "Success"
-msgstr "Επιτυχία"
 
 #, fuzzy
 msgid "Your migration was successful."
@@ -188,10 +306,22 @@ msgstr ""
 #, fuzzy
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically."
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
 msgstr ""
-"Έχετε μια αυτόματη ανανεούμενη συνδρομή στην AstroBin, και θα προσπαθήσουμε "
-"να την ανανεώσουμε αυτόματα."
+"Έχετε μια αυτόματη ανανεούμενη συνδρομή στο AstroBin, και θα προσπαθήσουμε "
+"να την ανανεώσουμε αυτόματα. Αν η συνδρομή σας δημιουργήθηκε με τον κανονικό "
+"τρόπο, μέσω PayPal, τότε η PayPal θα προσπαθήσει να χρεώσει την πιστωτική "
+"σας κάρτα ή να ανακτήσει τα χρήματα που είναι διαθέσιμα στον λογαριασμό σας."
+
+#, fuzzy
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"Αν η συνδρομή σας δημιουργήθηκε χειροκίνητα μέσω τραπεζικής μεταφοράς, "
+"παρακαλώ επικοινωνήστε για μια νέα πληρωμή."
 
 #, fuzzy
 msgid "Thank you!"
@@ -212,3 +342,520 @@ msgstr ""
 #, fuzzy
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr "Η συνδρομή σας στο AstroBin θα ανανεωθεί αυτόματα σε 30 ημέρες"
+
+#, fuzzy
+msgid "You follow each other"
+msgstr "Ακολουθείτε ο ένας τον άλλον"
+
+#, fuzzy
+msgid "Images"
+msgstr "Εικόνες"
+
+#, fuzzy
+msgid "Followers"
+msgstr "Ακόλουθοι"
+
+#, fuzzy
+msgid "Following"
+msgstr "Ακολουθώντας"
+
+#, fuzzy
+msgid "User"
+msgstr "Χρήστης"
+
+#, fuzzy
+msgid "No users."
+msgstr "Δεν υπάρχουν χρήστες."
+
+#, fuzzy
+msgid "Administrator"
+msgstr "Διαχειριστής"
+
+#, fuzzy
+msgid "Image moderator"
+msgstr "Διαχειριστής εικόνας"
+
+#, fuzzy
+msgid "IOTD Submitter"
+msgstr "Υποβολέας IOTD"
+
+#, fuzzy
+msgid "IOTD Reviewer"
+msgstr "Κριτής IOTD"
+
+#, fuzzy
+msgid "IOTD Judge"
+msgstr "Κριτής IOTD"
+
+#, fuzzy
+msgid "Premium member"
+msgstr "Μέλος Premium"
+
+#, fuzzy
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Οι αναφορές bounce του email σας έχουν αφαιρεθεί από το AstroBin. Παρακαλώ "
+"βεβαιωθείτε ότι το email σας λειτουργεί καλά ή θα λάβετε το ίδιο "
+"προειδοποιητικό μήνυμα ξανά. Ευχαριστώ!"
+
+#, fuzzy
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Οι αναφορές spam σας έχουν αφαιρεθεί από το AstroBin. Παρακαλώ βεβαιωθείτε "
+"ότι δεν έχετε φίλτρο ή κανόνα που να σημαίνει πάντα τα emails του AstroBin "
+"ως spam! Αν δεν θέλετε να λαμβάνετε emails από το AstroBin, αναζητήστε τον "
+"σύνδεσμο ρυθμίσεων που βρίσκεται στο κάτω μέρος κάθε email. Ευχαριστώ!"
+
+#, fuzzy
+msgid "Perform a blind solve"
+msgstr "Εκτέλεση τυφλής ανάλυσης"
+
+#, fuzzy
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
+msgstr ""
+"Προσπάθεια επίλυσης χωρίς υποδείξεις. Στις περισσότερες περιπτώσεις αυτό θα "
+"λειτουργήσει, αλλά θα πάρει περισσότερο χρόνο."
+
+#, fuzzy
+msgid "Width of the field in degrees"
+msgstr "Πλάτος του πεδίου σε μοίρες"
+
+#, fuzzy
+msgid "Width of the field in arcminutes"
+msgstr "Πλάτος του πεδίου σε λεπτά τόξου"
+
+#, fuzzy
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr "Ανάλυση του πεδίου σε δευτερόλεπτα τόξου/πίξελ"
+
+#, fuzzy
+msgid "Field size units"
+msgstr "Μονάδες μεγέθους πεδίου"
+
+#, fuzzy
+msgid "Min field size"
+msgstr "Ελάχιστο μέγεθος πεδίου"
+
+#, fuzzy
+msgid "Estimate the lower bound for the width of this field."
+msgstr "Εκτίμηση του κατώτατου ορίου για το πλάτος αυτού του πεδίου."
+
+#, fuzzy
+msgid "Max field size"
+msgstr "Μέγιστο μέγεθος πεδίου"
+
+#, fuzzy
+msgid "Estimate the upper bound for the width of this field."
+msgstr "Εκτιμήστε το ανώτατο όριο για το πλάτος αυτού του πεδίου."
+
+#, fuzzy
+msgid "Center RA"
+msgstr "Κέντρο RA"
+
+#, fuzzy
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr "Κεντρικό RA του πεδίου σε μοίρες, 0.000 έως 360.000"
+
+#, fuzzy
+msgid "Center dec"
+msgstr "Κέντρο dec"
+
+#, fuzzy
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr "Κέντρο δεκ του πεδίου σε μοίρες, -90.000 έως +90.000"
+
+#, fuzzy
+msgid "Radius"
+msgstr "Ακτίνα"
+
+#, fuzzy
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
+msgstr ""
+"Λέει στον κινητήρα επίλυσης πλάκας να κοιτάξει μέσα σε αυτές τις πολλές "
+"μοίρες της δεδομένης κεντρικής θέσης RA και dec."
+
+#, fuzzy
+msgid "Small"
+msgstr "Μικρό"
+
+#, fuzzy
+msgid "Medium"
+msgstr "Μεσαίο"
+
+#, fuzzy
+msgid "Large"
+msgstr "Μεγάλο"
+
+#, fuzzy
+msgid "Sample raw frame (max 100 MB)"
+msgstr "Δείγμα ακατέργαστου πλαισίου (μέγιστο 100 MB)"
+
+#, fuzzy
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+"Για να βελτιώσετε την ακρίβεια της ανάλυσης εικόνας σας ακόμα περισσότερο, "
+"παρακαλώ ανεβάστε ένα από τα αρχεία XISF ή FITS από το σύνολο δεδομένων σας. "
+"Τέτοια αρχεία συνήθως έχουν επικεφαλίδες ημερομηνίας και ώρας που θα "
+"επιτρέψουν στην AstroBin να υπολογίσει τις επιφάνειες των σωμάτων του "
+"ηλιακού συστήματος και να βρει πλανήτες και αστεροειδείς στην εικόνα σας (με "
+"την προϋπόθεση ότι προσθέσετε και πληροφορίες τοποθεσίας).<br/><br/>Για "
+"μέγιστη ακρίβεια, συνιστάται να χρησιμοποιείτε τη φυσική και ανοιχτή μορφή "
+"XISF του PixInsight. Μάθετε περισσότερα για το XISF εδώ:<br/><br/><a "
+"href=\"https://pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight."
+"com/xisf/</a><br/><br/><strong>Σημειώστε:</strong> είναι πολύ σημαντικό το "
+"αρχείο XISF ή FITS που ανεβάζετε να είναι ευθυγραμμισμένο με την "
+"επεξεργασμένη εικόνα σας, αλλιώς οι σημειώσεις αντικειμένων δεν θα "
+"ταιριάζουν. Για να βελτιώσετε τις πιθανότητές σας για μια επιτυχημένη και "
+"ακριβή ανάλυση εικόνας, καλιμπράρετε το αρχείο σας με τον συνηθισμένο τρόπο "
+"(σκοτεινές/βάσεις/φλας) αλλά μην το τεντώσετε."
+
+#, fuzzy
+msgid "Scaled font size"
+msgstr "Κλιμακωτό μέγεθος γραμματοσειράς"
+
+#, fuzzy
+msgid "Font size of the annotations on your main image page"
+msgstr ""
+"Μέγεθος γραμματοσειράς των σημειώσεων στην κύρια σελίδα της εικόνας σας"
+
+#, fuzzy
+msgid "Show equatorial grid"
+msgstr "Εμφάνιση ιχνογραφημάτων ισημερινού"
+
+#, fuzzy
+msgid "Show constellation borders"
+msgstr "Εμφάνιση συνόρων αστερισμών"
+
+#, fuzzy
+msgid "Show constellation lines"
+msgstr "Εμφάνιση γραμμών αστερισμών"
+
+#, fuzzy
+msgid "Show named stars"
+msgstr "Εμφάνιση ονομασμένων αστεριών"
+
+#, fuzzy
+msgid "Show Messier objects"
+msgstr "Εμφάνιση αντικειμένων Messier"
+
+#, fuzzy
+msgid "Show NGC and IC objects"
+msgstr "Εμφάνιση αντικειμένων NGC και IC"
+
+#, fuzzy
+msgid "Show VdB objects"
+msgstr "Εμφάνιση αντικειμένων VdB"
+
+#, fuzzy
+msgid "Show Sharpless objects"
+msgstr "Εμφάνιση αντικειμένων Sharpless"
+
+#, fuzzy
+msgid "Show Barnard objects"
+msgstr "Εμφάνιση αντικειμένων Barnard"
+
+#, fuzzy
+msgid "Show PGC objects"
+msgstr "Εμφάνιση αντικειμένων PGC"
+
+#, fuzzy
+msgid "Show planets"
+msgstr "Εμφάνιση πλανητών"
+
+#, fuzzy
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+"Διαθέσιμο μόνο αν η εικόνα σας έχει τουλάχιστον χρόνο απόκτησης και ακριβή "
+"τοποθεσία"
+
+#, fuzzy
+msgid "Show asteroids"
+msgstr "Εμφάνιση αστεροειδών"
+
+#, fuzzy
+msgid "Show GCVS stars"
+msgstr "Εμφάνιση αστέρων GCVS"
+
+#, fuzzy
+msgid "General Catalog of Variable Stars"
+msgstr "Γενικός Κατάλογος Μεταβλητών Αστεριών"
+
+#, fuzzy
+msgid "Show Tycho-2 catalog"
+msgstr "Εμφάνιση καταλόγου Tycho-2"
+
+#, fuzzy
+msgid "Show CGPN objects"
+msgstr "Εμφάνιση αντικειμένων CGPN"
+
+#, fuzzy
+msgid "Getting plate-solving status, please wait..."
+msgstr "Λαμβάνω κατάσταση επίλυσης πλάκας, παρακαλώ περιμένετε..."
+
+#, fuzzy
+msgid "Plate-solving starting, please do not leave this page..."
+msgstr "Η επίλυση πλάκας ξεκινά, παρακαλώ μην φύγετε από αυτή τη σελίδα..."
+
+#, fuzzy
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr ""
+"Η προηγμένη ανάλυση εικόνας ξεκινά, παρακαλώ μην φύγετε από αυτή τη σελίδα..."
+
+#, fuzzy
+msgid "Plate-solving started. You may leave this page."
+msgstr "Η επίλυση πλάκας ξεκίνησε. Μπορείτε να φύγετε από αυτή τη σελίδα."
+
+#, fuzzy
+msgid "Advanced plate-solving started. You may leave this page."
+msgstr ""
+"Η προηγμένη ανάλυση εικόνας ξεκίνησε. Μπορείτε να φύγετε από αυτή τη σελίδα."
+
+#, fuzzy
+msgid "Plate-solving almost ready, please do not leave this page..."
+msgstr ""
+"Η ανάλυση εικόνας σχεδόν έτοιμη, παρακαλώ μην φύγετε από αυτή τη σελίδα..."
+
+#, fuzzy
+msgid "This image could not be plate-solved."
+msgstr "Αυτή η εικόνα δεν μπόρεσε να αναλυθεί."
+
+#, fuzzy
+msgid "The advanced plate-solving failed."
+msgstr "Η προηγμένη ανάλυση εικόνας απέτυχε."
+
+#, fuzzy
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr ""
+"Αυτή η εικόνα έχει αναλυθεί. Ανανεώστε τη σελίδα για να δείτε νέα δεδομένα!"
+
+#, fuzzy
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
+msgstr ""
+"Η προηγμένη ανάλυση εικόνας ολοκληρώθηκε. Ανανεώστε τη σελίδα για να δείτε "
+"νέα δεδομένα!"
+
+#, fuzzy
+msgid "Error"
+msgstr "Σφάλμα"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because it was not possible to "
+"establish a connection to nova.astrometry.net. Please try again later!"
+msgstr ""
+"Η AstroBin δεν μπόρεσε να αναλύσει αυτή την εικόνα γιατί δεν ήταν δυνατή η "
+"σύνδεση με το nova.astrometry.net. Παρακαλώ δοκιμάστε ξανά αργότερα!"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error."
+msgstr ""
+"Η AstroBin δεν μπόρεσε να αναλύσει αυτή την εικόνα γιατί το nova.astrometry."
+"net ανέφερε σφάλμα εσωτερικού διακομιστή."
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an unepexted error."
+msgstr ""
+"Η AstroBin δεν μπόρεσε να αναλύσει αυτή την εικόνα γιατί το nova.astrometry."
+"net ανέφερε απροσδόκητο σφάλμα."
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+"Εμφάνιση αντικειμένων από τον Κατάλογο Λίντς για Λαμπρές Νεφέλες (LBN) "
+"(Λίντς 1965)"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+"Εμφάνιση αντικειμένων από τον Κατάλογο Σκοτεινών Νεφών του Lynds (LDN) "
+"(Lynds 1962)"
+
+#, fuzzy
+msgid "Show quasars"
+msgstr "Εμφάνιση κβάζαρ"
+
+#, fuzzy
+msgid "Missing"
+msgstr "Λείπει"
+
+#, fuzzy
+msgid "Basic pending"
+msgstr "Βασικό εκκρεμές"
+
+#, fuzzy
+msgid "Basic failed"
+msgstr "Βασικό απέτυχε"
+
+#, fuzzy
+msgid "Basic success"
+msgstr "Βασική επιτυχία"
+
+#, fuzzy
+msgid "Advanced pending"
+msgstr "Προχωρημένο σε εκκρεμότητα"
+
+#, fuzzy
+msgid "Advanced failed"
+msgstr "Αποτυχία προχωρημένων"
+
+#, fuzzy
+msgid "Advanced success"
+msgstr "Προχωρημένο με επιτυχία"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error."
+msgstr ""
+"Η AstroBin δεν μπόρεσε να επιλύσει αυτή την εικόνα λόγω απρόβλεπτου "
+"σφάλματος."
+
+#, fuzzy
+msgid "n/a"
+msgstr "δ/υ"
+
+#, fuzzy
+msgid "Starting task..."
+msgstr "Ξεκινώντας εργασία..."
+
+#, fuzzy
+msgid "Downloading image..."
+msgstr "Κατεβάζω την εικόνα..."
+
+#, fuzzy
+msgid "Plate-solving image..."
+msgstr "Ανάλυση εικόνας..."
+
+#, fuzzy
+msgid "Generating image annotations..."
+msgstr "Δημιουργία σχολίων εικόνας..."
+
+#, fuzzy
+msgid "Processing SVG documents..."
+msgstr "Επεξεργασία εγγράφων SVG..."
+
+#, fuzzy
+msgid "Uploading results..."
+msgstr "Ανεβάζω αποτελέσματα..."
+
+#, fuzzy
+msgid "Task completed"
+msgstr "Η εργασία ολοκληρώθηκε"
+
+#, fuzzy
+msgid "Plate-solving information"
+msgstr "Πληροφορίες για την επίλυση πλάκας"
+
+#, fuzzy
+msgid "Status"
+msgstr "Κατάσταση"
+
+#, fuzzy
+msgid "Started"
+msgstr "Ξεκίνησε"
+
+#, fuzzy
+msgid "Astrometry.net job"
+msgstr "Εργασία Astrometry.net"
+
+#, fuzzy
+msgid "PixInsight job"
+msgstr "Εργασία PixInsight"
+
+#, fuzzy
+msgid "PixInsight queue size"
+msgstr "Μέγεθος ουράς PixInsight"
+
+#, fuzzy
+msgid "PixInsight stage"
+msgstr "Στάδιο PixInsight"
+
+#, fuzzy
+msgid "PixInsight log"
+msgstr "Καταγραφή PixInsight"
+
+#, fuzzy
+msgid "RA"
+msgstr "RA"
+
+#, fuzzy
+msgid "center"
+msgstr "κέντρο"
+
+#, fuzzy
+msgid "degrees"
+msgstr "μοίρες"
+
+#, fuzzy
+msgid "top/left"
+msgstr "πάνω/αριστερά"
+
+#, fuzzy
+msgid "top/right"
+msgstr "πάνω/δεξιά"
+
+#, fuzzy
+msgid "bottom/right"
+msgstr "κάτω/δεξιά"
+
+#, fuzzy
+msgid "bottom/left"
+msgstr "κάτω/αριστερά"
+
+#, fuzzy
+msgid "Dec"
+msgstr "Dec"
+
+#, fuzzy
+msgid "Close"
+msgstr "Κλείσιμο"
+
+#, fuzzy
+msgid "Invalid"
+msgstr "Μη έγκυρο"
+
+#, fuzzy
+msgid "Generating finding charts..."
+msgstr "Δημιουργία διαγραμμάτων εύρεσης..."
+
+#, fuzzy
+msgid "Paying member"
+msgstr "Μέλος που πληρώνει"
+
+#, fuzzy
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically."
+msgstr ""
+"Έχετε μια αυτόματη ανανεούμενη συνδρομή στην AstroBin, και θα προσπαθήσουμε "
+"να την ανανεώσουμε αυτόματα."

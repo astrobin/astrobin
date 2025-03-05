@@ -1,207 +1,11 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 "
+"&&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 &&(n"
-"%100<10||n%100 >= 20)? 1 : 2);\n"
-
-#, fuzzy
-msgid "Very Large Field (>30 degrees)"
-msgstr "Bardzo duże pole (>30 stopni)"
-
-#, fuzzy
-msgid "Large Field (15-30 degrees)"
-msgstr "Duże pole (15-30 stopni)"
-
-#, fuzzy
-msgid "Medium Field (4-15 degrees)"
-msgstr "Średnie pole (4-15 stopni)"
-
-#, fuzzy
-msgid "Small Field (1-4 degrees)"
-msgstr "Małe pole (1-4 stopnie)"
-
-#, fuzzy
-msgid "Very Small Field (<1 degree)"
-msgstr "Bardzo małe pole (<1 stopień)"
-
-msgid "Small"
-msgstr "Mały"
-
-msgid "Medium"
-msgstr "Średni"
-
-msgid "Large"
-msgstr "Duży"
-
-msgid "Sample raw frame (max 100 MB)"
-msgstr "Przykładowa surowa klatka (max 100 MB)"
-
-msgid ""
-"To improve the accuracy of your plate-solution even further, please upload "
-"one of the XISF or FITS files from your data set. Such files normally have "
-"date and time headers that will allow AstroBin to calculate solar system "
-"body ephemerides and find planets and asteroids in your image (provided you "
-"also add location information to it).<br/><br/>For maximum accuracy, it's "
-"recommended that you use PixInsight's native and open format XISF. Learn "
-"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
-"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
-"note:</strong> it's very important that the XISF or FITS file you upload is "
-"aligned to your processed image, otherwise the object annotations will not "
-"match. To improve your chances at a successful accurate plate-solution, "
-"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
-msgstr ""
-"W celu poprawy trafności plate-solve wczytaj plik XISF lub FITS. Tego typu "
-"pliki zawierają wskaźniki czasu i daty i pozwolą na obliczenie efemeryd oraz "
-"znalezienie planet i asteroid na Twoim zdjęciu. <br/><br/> Dla maksymalnej "
-"dokładności jest zalecane użycie formatu XISF. Więcej informacji na temat "
-"formatu XISF znajduje się tutaj:<br/><br/><a href=\"https://pixinsight.com/"
-"xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> "
-"<strong>Uwaga:</strong> BArdzo ważne aby plik XISF or FITS który ładujesz "
-"dotyczył Twojego przetwarzanego zdjęcia, w przeciwnym wypadku opisy na "
-"zdjęciu nie będą prawidłowe. W celu poprawy trafności plate-solve, skalibruj "
-"swoje zdjęcia za pomocą plików dark/bias/flat ale nie wyciągaj zdjęcia "
-"krzywymi i levelami (stretch)"
-
-msgid "Scaled font size"
-msgstr "Skalowalny rozmiar czcionki"
-
-msgid "Font size of the annotations on your main image page"
-msgstr "Rozmiar czcionki podpisów na głównej stronie ze zdjęciami"
-
-msgid "Show equatorial grid"
-msgstr "Pokaż siatkę równikową"
-
-#, fuzzy
-msgid "Show ecliptic"
-msgstr "Pokaż ekliptykę"
-
-#, fuzzy
-msgid "Show galactic equator"
-msgstr "Pokaż równik galaktyczny"
-
-msgid "Show constellation borders"
-msgstr "Pokaż granice konstelacji"
-
-msgid "Show constellation lines"
-msgstr "Pokaż linie gwiazdozbiorów"
-
-msgid "Show named stars"
-msgstr "Pokaż nazwy gwiazd"
-
-#, fuzzy
-msgid "Show HD stars"
-msgstr "Pokaż HD gwiazdy"
-
-#, fuzzy
-msgid ""
-"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
-"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
-msgstr ""
-"Ten katalog korzysta z danych z All-sky Compiled Catalogue of 2.5 million "
-"stars (Kharchenko+ 2009), katalog VizieR: I/280B."
-
-#, fuzzy
-msgid "Max. magnitude"
-msgstr "Max. magnituda"
-
-#, fuzzy
-msgid ""
-"Only HD stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Tylko HD gwiazdy do tej magnitudy będą renderowane. Jeśli pozostawisz puste, "
-"zostanie użyta domyślna wartość katalogu."
-
-msgid "Show Messier objects"
-msgstr "Pokaż obiekty z katalogu Messiera"
-
-msgid "Show NGC and IC objects"
-msgstr "Pokaż obiekty z katalogów NGC i IC"
-
-msgid "Show VdB objects"
-msgstr "Pokaż obiekty z katalogu VdB"
-
-msgid "Show Sharpless objects"
-msgstr "Pokaż obiekty z katalogu Sharpless"
-
-msgid "Show Barnard objects"
-msgstr "Pokaż obiekty z katalogy Barnarda"
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
-msgstr "Pokaż obiekty z Katalogu Jasnych Nebul (LBN) (Lynds 1965)"
-
-#, fuzzy
-msgid ""
-"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr "Pokaż obiekty z Katalogu Ciemnych Nebul (LDN) (Lynds 1962)"
-
-msgid "Show PGC objects"
-msgstr "Pokaż obiekty z katalogu PGC"
-
-msgid "Show planets"
-msgstr "Pokaż planety"
-
-msgid ""
-"Only available if your image at least an acquisition time and an accurate "
-"location"
-msgstr "Dostępne tylko w przypadku prawidłowego czasu i lokalizacji"
-
-msgid "Show asteroids"
-msgstr "Pokaż planetoidy"
-
-msgid "Show GCVS stars"
-msgstr "Pokaż gwiazdy GCVS"
-
-msgid "General Catalog of Variable Stars"
-msgstr "Katalog Główny Gwiazd Zmiennych"
-
-#, fuzzy
-msgid ""
-"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Tylko gwiazdy GCVS do tej magnitudy będą renderowane. Jeśli pozostawisz "
-"puste, zostanie użyta domyślna wartość katalogu."
-
-msgid "Show Tycho-2 catalog"
-msgstr "Pokaż katalog Tycho-2"
-
-#, fuzzy
-msgid ""
-"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
-"catalog's default value will be used."
-msgstr ""
-"Tylko gwiazdy Tycho-2 do tej magnitudy będą renderowane. Jeśli pozostawisz "
-"puste, zostanie użyta domyślna wartość katalogu."
-
-msgid "Show CGPN objects"
-msgstr "Pokaż obiekty z katalogy CGPN"
-
-#, fuzzy
-msgid "Show quasars"
-msgstr "Pokaż kwazary"
-
-#, fuzzy
-msgid "Publicly visible astrometry.net submission"
-msgstr "Publicznie widoczna wysyłka astrometryczna.net"
-
-#, fuzzy
-msgid ""
-"If checked, the astrometry.net submission will be publicly visible. If you "
-"leave this unchecked,you won't be able to see the full log of the astrometry."
-"net submission, but the image will stillbe plate-solved and annotated."
-msgstr ""
-"Jeśli zaznaczone, wysyłka astrometryczna.net będzie publicznie widoczna. "
-"Jeśli pozostawisz to niezaznaczone, nie będziesz mógł zobaczyć pełnego "
-"dziennika wysyłki astrometrycznej.net, ale obraz nadal będzie rozwiązany i "
-"oznaczony."
+"Content-Transfer-Encoding: 8bit"
 
 msgid "Perform a blind solve"
 msgstr "Uruchom losową astrometrię"
@@ -259,73 +63,127 @@ msgstr ""
 "Wskaż silnikowi do astrometrii żeby przeglądał zakres wewnątrz wskazanych "
 "pozycji RA i DEC"
 
-#, fuzzy
-msgid "Downsample factor"
-msgstr "Współczynnik downsample"
+msgid "Small"
+msgstr "Mały"
 
-#, fuzzy
+msgid "Medium"
+msgstr "Średni"
+
+msgid "Large"
+msgstr "Duży"
+
+msgid "Sample raw frame (max 100 MB)"
+msgstr "Przykładowa surowa klatka (max 100 MB)"
+
 msgid ""
-"Downsample (bin) your image by this factor before performing source "
-"detection. This often helps with saturated images, noisy images, and large "
-"images. 2 and 4 are commonly-useful values."
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
 msgstr ""
-"Zredukuj (bin) swój obraz o ten współczynnik przed wykonaniem detekcji "
-"źródła. Często pomaga to w przypadku nasyconych obrazów, hałaśliwych obrazów "
-"i dużych obrazów. 2 i 4 to często użyteczne wartości."
+"W celu poprawy trafności plate-solve wczytaj plik XISF lub FITS. Tego typu "
+"pliki zawierają wskaźniki czasu i daty i pozwolą na obliczenie efemeryd oraz "
+"znalezienie planet i asteroid na Twoim zdjęciu. <br/><br/> Dla maksymalnej "
+"dokładności jest zalecane użycie formatu XISF. Więcej informacji na temat "
+"formatu XISF znajduje się tutaj:<br/><br/><a href=\"https://pixinsight."
+"com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> "
+"<strong>Uwaga:</strong> BArdzo ważne aby plik XISF or FITS który ładujesz "
+"dotyczył Twojego przetwarzanego zdjęcia, w przeciwnym wypadku opisy na "
+"zdjęciu nie będą prawidłowe. W celu poprawy trafności plate-solve, skalibruj "
+"swoje zdjęcia za pomocą plików dark/bias/flat ale nie wyciągaj zdjęcia "
+"krzywymi i levelami (stretch)"
 
-#, fuzzy
-msgid "Use SExtractor"
-msgstr "Użyj SExtractor"
+msgid "Scaled font size"
+msgstr "Skalowalny rozmiar czcionki"
 
-#, fuzzy
+msgid "Font size of the annotations on your main image page"
+msgstr "Rozmiar czcionki podpisów na głównej stronie ze zdjęciami"
+
+msgid "Show equatorial grid"
+msgstr "Pokaż siatkę równikową"
+
+msgid "Show constellation borders"
+msgstr "Pokaż granice konstelacji"
+
+msgid "Show constellation lines"
+msgstr "Pokaż linie gwiazdozbiorów"
+
+msgid "Show named stars"
+msgstr "Pokaż nazwy gwiazd"
+
+msgid "Show Messier objects"
+msgstr "Pokaż obiekty z katalogu Messiera"
+
+msgid "Show NGC and IC objects"
+msgstr "Pokaż obiekty z katalogów NGC i IC"
+
+msgid "Show VdB objects"
+msgstr "Pokaż obiekty z katalogu VdB"
+
+msgid "Show Sharpless objects"
+msgstr "Pokaż obiekty z katalogu Sharpless"
+
+msgid "Show Barnard objects"
+msgstr "Pokaż obiekty z katalogy Barnarda"
+
+msgid "Show PGC objects"
+msgstr "Pokaż obiekty z katalogu PGC"
+
+msgid "Show planets"
+msgstr "Pokaż planety"
+
 msgid ""
-"Use the SourceExtractor program to detect stars, not Nova's built-in program."
-msgstr ""
-"Użyj programu SourceExtractor do wykrywania gwiazd, a nie wbudowanego "
-"programu Nova."
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr "Dostępne tylko w przypadku prawidłowego czasu i lokalizacji"
 
-#, fuzzy
-msgid "Missing"
-msgstr "Brakujące"
+msgid "Show asteroids"
+msgstr "Pokaż planetoidy"
 
-#, fuzzy
-msgid "Basic pending"
-msgstr "Podstawowe w toku"
+msgid "Show GCVS stars"
+msgstr "Pokaż gwiazdy GCVS"
 
-#, fuzzy
-msgid "Basic failed"
-msgstr "Podstawowe niepowodzenie"
+msgid "General Catalog of Variable Stars"
+msgstr "Katalog Główny Gwiazd Zmiennych"
 
-#, fuzzy
-msgid "Basic success"
-msgstr "Podstawowe sukces"
+msgid "Show Tycho-2 catalog"
+msgstr "Pokaż katalog Tycho-2"
 
-#, fuzzy
-msgid "Advanced pending"
-msgstr "Zaawansowane w toku"
-
-#, fuzzy
-msgid "Advanced failed"
-msgstr "Zaawansowane niepowodzenie"
-
-#, fuzzy
-msgid "Advanced success"
-msgstr "Zaawansowane sukces"
-
-#, fuzzy
-msgid "Loading..."
-msgstr "Ładowanie..."
+msgid "Show CGPN objects"
+msgstr "Pokaż obiekty z katalogy CGPN"
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Pobieram status mapowania szczegółów zdjęcia, proszę czekać..."
 
 #, fuzzy
-msgid "AstroBin is plate-solving this image with Astrometry.net..."
-msgstr "AstroBin rozwiązuje pozycję tego obrazu za pomocą Astrometry.net..."
+msgid "Plate-solving starting, please do not leave this page..."
+msgstr "Rozpoczynamy rozwiązanie pozycji, proszę nie opuszczać tej strony..."
 
 #, fuzzy
-msgid "AstroBin is plate-solving this image with PixInsight..."
-msgstr "AstroBin rozwiązuje pozycję tego obrazu za pomocą PixInsight..."
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr ""
+"Rozpoczynamy zaawansowane rozwiązanie pozycji, proszę nie opuszczać tej "
+"strony..."
+
+#, fuzzy
+msgid "Plate-solving started. You may leave this page."
+msgstr "Rozwiązanie pozycji rozpoczęte. Możesz opuścić tę stronę."
+
+#, fuzzy
+msgid "Advanced plate-solving started. You may leave this page."
+msgstr "Zaawansowane rozwiązanie pozycji rozpoczęte. Możesz opuścić tę stronę."
+
+#, fuzzy
+msgid "Plate-solving almost ready, please do not leave this page..."
+msgstr "Rozwiązanie pozycji prawie gotowe, proszę nie opuszczać tej strony..."
 
 msgid "This image could not be plate-solved."
 msgstr "Mapowanie szczegółów nie jest możliwe dla tego zdjęcia."
@@ -358,18 +216,67 @@ msgstr ""
 #, fuzzy
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error. Please try again later!"
+"reported an internal server error."
 msgstr ""
 "AstroBin nie mógł rozwiązać pozycji tego obrazu, ponieważ nova.astrometry."
-"net zgłosił błąd wewnętrzny serwera. Proszę spróbować później!"
+"net zgłosił błąd wewnętrzny serwera."
 
 #, fuzzy
 msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error. "
-"Please try again later!"
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an unepexted error."
+msgstr ""
+"AstroBin nie mógł rozwiązać pozycji tego obrazu, ponieważ nova.astrometry."
+"net zgłosił nieoczekiwany błąd."
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr "Pokaż obiekty z Katalogu Jasnych Nebul (LBN) (Lynds 1965)"
+
+#, fuzzy
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr "Pokaż obiekty z Katalogu Ciemnych Nebul (LDN) (Lynds 1962)"
+
+#, fuzzy
+msgid "Show quasars"
+msgstr "Pokaż kwazary"
+
+#, fuzzy
+msgid "Missing"
+msgstr "Brakujące"
+
+#, fuzzy
+msgid "Basic pending"
+msgstr "Podstawowe w toku"
+
+#, fuzzy
+msgid "Basic failed"
+msgstr "Podstawowe niepowodzenie"
+
+#, fuzzy
+msgid "Basic success"
+msgstr "Podstawowe sukces"
+
+#, fuzzy
+msgid "Advanced pending"
+msgstr "Zaawansowane w toku"
+
+#, fuzzy
+msgid "Advanced failed"
+msgstr "Zaawansowane niepowodzenie"
+
+#, fuzzy
+msgid "Advanced success"
+msgstr "Zaawansowane sukces"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error."
 msgstr ""
 "AstroBin nie mógł rozwiązać pozycji tego obrazu z powodu nieoczekiwanego "
-"błędu. Proszę spróbować później!"
+"błędu."
 
 #, fuzzy
 msgid "n/a"
@@ -394,10 +301,6 @@ msgstr "Generowanie adnotacji do obrazu..."
 #, fuzzy
 msgid "Processing SVG documents..."
 msgstr "Przetwarzanie dokumentów SVG..."
-
-#, fuzzy
-msgid "Generating finding charts..."
-msgstr "Generowanie mapek do poszukiwań..."
 
 #, fuzzy
 msgid "Uploading results..."
@@ -478,3 +381,359 @@ msgstr "Zamknij"
 #, fuzzy
 msgid "Invalid"
 msgstr "Nieprawidłowy"
+
+#, fuzzy
+msgid "Generating finding charts..."
+msgstr "Generowanie mapek do poszukiwań..."
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error. Please try again later!"
+msgstr ""
+"AstroBin nie mógł rozwiązać pozycji tego obrazu, ponieważ nova.astrometry."
+"net zgłosił błąd wewnętrzny serwera. Proszę spróbować później!"
+
+#, fuzzy
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error. "
+"Please try again later!"
+msgstr ""
+"AstroBin nie mógł rozwiązać pozycji tego obrazu z powodu nieoczekiwanego "
+"błędu. Proszę spróbować później!"
+
+#, fuzzy
+msgid "Your migration data"
+msgstr "Twoje dane migracji"
+
+#, fuzzy
+msgid "Total amount donated last year"
+msgstr "Całkowita kwota darowizn w zeszłym roku"
+
+#, fuzzy
+msgid "First payment"
+msgstr "Pierwsza płatność"
+
+#, fuzzy
+msgid "Price for Premium"
+msgstr "Cena za Premium"
+
+#, fuzzy
+msgid "Days covered"
+msgstr "Pokryte dni"
+
+#, fuzzy
+msgid "Premium expiration"
+msgstr "Wygaszenie Premium"
+
+#, fuzzy
+msgid "Your donations last year"
+msgstr "Twoje darowizny w zeszłym roku"
+
+#, fuzzy
+msgid "Amount"
+msgstr "Kwota"
+
+#, fuzzy
+msgid "Date"
+msgstr "Data"
+
+#, fuzzy
+msgid "Subscription"
+msgstr "Subskrypcja"
+
+#, fuzzy
+msgid "Migrate donations"
+msgstr "Migracja darowizn"
+
+#, fuzzy
+msgid "Error!"
+msgstr "Błąd!"
+
+#, fuzzy
+msgid ""
+"Sorry, but it looks like you cannot migrate your donations to a Premium "
+"membership."
+msgstr ""
+"Przykro nam, ale wygląda na to, że nie możesz przenieść swoich darowizn na "
+"członkostwo Premium."
+
+#, fuzzy
+msgid "You already have a paid membership."
+msgstr "Już masz płatne członkostwo."
+
+#, fuzzy
+msgid "We could not find any donations from you last year."
+msgstr "Nie znaleźliśmy żadnych darowizn od Ciebie w zeszłym roku."
+
+#, fuzzy
+msgid ""
+"Your donations last year were not enough to cover a Premium subscription for "
+"this year."
+msgstr ""
+"Twoje darowizny w zeszłym roku nie były wystarczające, aby pokryć "
+"subskrypcję Premium na ten rok."
+
+#, fuzzy
+msgid "View the subscription plans"
+msgstr "Zobacz plany subskrypcyjne"
+
+#, fuzzy
+msgid ""
+"As you  have made donations during the last year, you may choose to transfer "
+"the amount you donated towards an AstroBin Premium membership. The "
+"membership will have an expiration date proportionate to the amount you "
+"donated."
+msgstr ""
+"Ponieważ dokonałeś darowizn w zeszłym roku, możesz zdecydować się na "
+"przeniesienie kwoty, którą darowałeś, na członkostwo Premium w AstroBin. "
+"Członkostwo będzie miało datę wygaśnięcia proporcjonalną do kwoty, którą "
+"darowałeś."
+
+#, fuzzy
+msgid ""
+"If you are feeling particularly cool and generous, you may choose to "
+"consider your past donations as a contribution to support past efforts, and "
+"pay again for a Premium plan. Up to you!"
+msgstr ""
+"Jeśli czujesz się szczególnie fajnie i hojnie, możesz uznać swoje "
+"wcześniejsze darowizny za wkład w wsparcie przeszłych działań i zapłacić "
+"ponownie za plan Premium. To zależy od Ciebie!"
+
+#, fuzzy
+msgid "No, I want to pay for Premium"
+msgstr "Nie, chcę zapłacić za Premium"
+
+#, fuzzy
+msgid "Success"
+msgstr "Sukces"
+
+#, fuzzy
+msgid "Your migration was successful."
+msgstr "Twoja migracja była udana."
+
+#, fuzzy
+msgid "Thanks for supporting AstroBin!"
+msgstr "Dzięki za wsparcie AstroBin!"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
+msgstr ""
+"Twoja subskrypcja \"%(subscription_name)s\" na AstroBin właśnie wygasła."
+
+#, fuzzy
+msgid ""
+"When a subscription on AstroBin expires, nothing happens to your images or "
+"any of your content. You are reverted to AstroBin Free and will not be able "
+"to upload new images until you renew, but you may continue to use AstroBin "
+"in all other aspects if you do not have any new images to share at the "
+"moment."
+msgstr ""
+"Gdy subskrypcja na AstroBin wygasa, nic się nie dzieje z Twoimi obrazami ani "
+"żadną z Twoich treści. Wracasz do AstroBin Free i nie będziesz mógł "
+"przesyłać nowych obrazów, dopóki nie odnowisz, ale możesz nadal korzystać z "
+"AstroBin we wszystkich innych aspektach, jeśli nie masz nowych obrazów do "
+"podzielenia się w tej chwili."
+
+#, fuzzy
+msgid ""
+"When you are ready to renew your subscription, please visit the following "
+"page:"
+msgstr ""
+"Gdy będziesz gotowy do odnowienia subskrypcji, odwiedź następującą stronę:"
+
+#, fuzzy
+msgid "Your AstroBin subscription has just expired"
+msgstr "Twoja subskrypcja AstroBin właśnie wygasła"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
+msgstr ""
+"Twoja subskrypcja \"%(subscription_name)s\" na AstroBin wygaśnie za tydzień."
+
+#, fuzzy
+msgid ""
+"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
+"still ongoing. Please wait until it is expired. Thank you!"
+msgstr ""
+"PROSZĘ ZWRÓCIĆ UWAGĘ! W tej chwili nie możesz odnowić subskrypcji, gdy jest "
+"ona jeszcze aktywna. Proszę poczekać, aż wygaśnie. Dziękuję!"
+
+#, fuzzy
+msgid "Your AstroBin subscription will expire in one week"
+msgstr "Twoja subskrypcja AstroBin wygaśnie za tydzień"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in one week."
+msgstr ""
+"Twoja subskrypcja \"%(subscription_name)s\" na AstroBin zostanie "
+"automatycznie odnowiona za tydzień."
+
+#, fuzzy
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
+msgstr ""
+"Masz subskrypcję, która odnawia się automatycznie na AstroBin, i spróbujemy "
+"ją odnowić automatycznie. Jeśli Twoja subskrypcja została utworzona w zwykły "
+"sposób, przez PayPal, to PayPal spróbuje obciążyć Twoją kartę kredytową lub "
+"pobrać środki, które są dostępne na Twoim koncie."
+
+#, fuzzy
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"Jeśli Twoja subskrypcja została utworzona ręcznie przez przelew bankowy, "
+"proszę skontaktować się w celu dokonania nowej płatności."
+
+#, fuzzy
+msgid "Thank you!"
+msgstr "Dziękuję!"
+
+#, fuzzy
+msgid "Your AstroBin subscription will be automatically renewed in one week"
+msgstr "Twoja subskrypcja AstroBin zostanie automatycznie odnowiona za tydzień"
+
+#, fuzzy
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+"Twoja subskrypcja \"%(subscription_name)s\" na AstroBin zostanie "
+"automatycznie odnowiona za 30 dni."
+
+#, fuzzy
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+msgstr "Twoja subskrypcja AstroBin zostanie automatycznie odnowiona za 30 dni"
+
+#, fuzzy
+msgid "Show HD stars"
+msgstr "Pokaż HD gwiazdy"
+
+#, fuzzy
+msgid ""
+"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
+"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
+msgstr ""
+"Ten katalog korzysta z danych z All-sky Compiled Catalogue of 2.5 million "
+"stars (Kharchenko+ 2009), katalog VizieR: I/280B."
+
+#, fuzzy
+msgid "Max. magnitude"
+msgstr "Max. magnituda"
+
+#, fuzzy
+msgid ""
+"Only HD stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Tylko HD gwiazdy do tej magnitudy będą renderowane. Jeśli pozostawisz puste, "
+"zostanie użyta domyślna wartość katalogu."
+
+#, fuzzy
+msgid ""
+"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Tylko gwiazdy GCVS do tej magnitudy będą renderowane. Jeśli pozostawisz "
+"puste, zostanie użyta domyślna wartość katalogu."
+
+#, fuzzy
+msgid ""
+"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+"Tylko gwiazdy Tycho-2 do tej magnitudy będą renderowane. Jeśli pozostawisz "
+"puste, zostanie użyta domyślna wartość katalogu."
+
+#, fuzzy
+msgid "Downsample factor"
+msgstr "Współczynnik downsample"
+
+#, fuzzy
+msgid ""
+"Downsample (bin) your image by this factor before performing source "
+"detection. This often helps with saturated images, noisy images, and large "
+"images. 2 and 4 are commonly-useful values."
+msgstr ""
+"Zredukuj (bin) swój obraz o ten współczynnik przed wykonaniem detekcji "
+"źródła. Często pomaga to w przypadku nasyconych obrazów, hałaśliwych obrazów "
+"i dużych obrazów. 2 i 4 to często użyteczne wartości."
+
+#, fuzzy
+msgid "Use SExtractor"
+msgstr "Użyj SExtractor"
+
+#, fuzzy
+msgid ""
+"Use the SourceExtractor program to detect stars, not Nova's built-in program."
+msgstr ""
+"Użyj programu SourceExtractor do wykrywania gwiazd, a nie wbudowanego "
+"programu Nova."
+
+#, fuzzy
+msgid "Show ecliptic"
+msgstr "Pokaż ekliptykę"
+
+#, fuzzy
+msgid "Show galactic equator"
+msgstr "Pokaż równik galaktyczny"
+
+#, fuzzy
+msgid "Publicly visible astrometry.net submission"
+msgstr "Publicznie widoczna wysyłka astrometryczna.net"
+
+#, fuzzy
+msgid ""
+"If checked, the astrometry.net submission will be publicly visible. If you "
+"leave this unchecked,you won't be able to see the full log of the astrometry."
+"net submission, but the image will stillbe plate-solved and annotated."
+msgstr ""
+"Jeśli zaznaczone, wysyłka astrometryczna.net będzie publicznie widoczna. "
+"Jeśli pozostawisz to niezaznaczone, nie będziesz mógł zobaczyć pełnego "
+"dziennika wysyłki astrometrycznej.net, ale obraz nadal będzie rozwiązany i "
+"oznaczony."
+
+#, fuzzy
+msgid "Loading..."
+msgstr "Ładowanie..."
+
+#, fuzzy
+msgid "AstroBin is plate-solving this image with Astrometry.net..."
+msgstr "AstroBin rozwiązuje pozycję tego obrazu za pomocą Astrometry.net..."
+
+#, fuzzy
+msgid "AstroBin is plate-solving this image with PixInsight..."
+msgstr "AstroBin rozwiązuje pozycję tego obrazu za pomocą PixInsight..."
+
+#, fuzzy
+msgid "Very Large Field (>30 degrees)"
+msgstr "Bardzo duże pole (>30 stopni)"
+
+#, fuzzy
+msgid "Large Field (15-30 degrees)"
+msgstr "Duże pole (15-30 stopni)"
+
+#, fuzzy
+msgid "Medium Field (4-15 degrees)"
+msgstr "Średnie pole (4-15 stopni)"
+
+#, fuzzy
+msgid "Small Field (1-4 degrees)"
+msgstr "Małe pole (1-4 stopnie)"
+
+#, fuzzy
+msgid "Very Small Field (<1 degree)"
+msgstr "Bardzo małe pole (<1 stopień)"

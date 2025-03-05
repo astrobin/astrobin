@@ -1,21 +1,11 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
-
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Автоматичне подання підтримують лише такі категорії: Професійна мережа, Клуб "
-"чи асоціація, Інтернет-спільнота, Друзі чи партнери, Географічний регіон"
+"Content-Transfer-Encoding: 8bit"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Варіанти відключення автододавання зображень"
@@ -69,15 +59,6 @@ msgstr "Специфічне для певного обладнання"
 msgid "Other"
 msgstr "Інше"
 
-msgid "Publication"
-msgstr "Публікація"
-
-msgid "Title"
-msgstr "Назва"
-
-msgid "Key/value tag"
-msgstr "Тег ключ/значення"
-
 msgid "Name"
 msgstr "Назва"
 
@@ -89,21 +70,6 @@ msgstr "Дозволено HTML теги."
 
 msgid "Category"
 msgstr "Категорія"
-
-msgid "Default image sorting"
-msgstr "Сортування зображень за замовчуванням"
-
-msgid "Image key/value tag sorting"
-msgstr "Сортування зображень ключ/значення"
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Якщо зображення відсортовано за тегом ключ/значення, укажіть, яким саме. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/"
-"groups'>Докладніше.</a>"
 
 msgid "Public group"
 msgstr "Публічна група"
@@ -132,26 +98,8 @@ msgstr ""
 "Групи з автододаванням завжди містять усі зображення всіх учасників. Групи "
 "без додавання містять лише ті зображення, які були додані вручну."
 
-#, fuzzy
-msgid "Forum notice"
-msgstr "Повідомлення форуму"
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Введіть 'Повідомлення форуму', яке буде відображатися над формою 'нової "
-"теми'. Використовуйте це, щоб повідомити правила форуму, відмови або важливу "
-"інформацію користувачам перед створенням нового посту. Переконайтеся, що "
-"ваше повідомлення чітке та лаконічне."
-
 msgid "Last activity"
 msgstr "Останні дії"
-
-msgid "Date created"
-msgstr "Дата створення"
 
 msgid "Members"
 msgstr "Учасники"
@@ -196,9 +144,6 @@ msgstr "Зберегти"
 msgid "Cancel"
 msgstr "Скасувати"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Будь ласка, не додавайте більше 100 зображень за один раз, дякую!"
-
 msgid "Delete group?"
 msgstr "Видалити групу?"
 
@@ -236,9 +181,6 @@ msgstr "Залишити групу"
 msgid "Moderate join requests"
 msgstr "Модерувати запити на вступ"
 
-msgid "Sort images"
-msgstr "Впорядкувати зображення"
-
 msgid "This group is public"
 msgstr "Ця група відкрита"
 
@@ -268,8 +210,8 @@ msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"Група, створена %(date_created)s, належить <a href=\"%(owner_url)s\">"
-"%(owner)s</a>, класифікується як <strong>%(category)s</strong>."
+"Група, створена %(date_created)s, належить <a href=\"%(owner_url)s\">%(owner)"
+"s</a>, класифікується як <strong>%(category)s</strong>."
 
 msgid "Group forum"
 msgstr "Форум групи"
@@ -279,14 +221,17 @@ msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
-"<strong>%(post_count)s</strong> повідомлень у <strong>%(topic_count)s</"
-"strong> темах"
+"<strong>%(post_count)s</strong> повідомлень у <strong>%(topic_count)"
+"s</strong> темах"
 
 msgid "View all"
 msgstr "Подивитись всі"
 
 msgid "New topic"
 msgstr "Нова тема"
+
+msgid "Please join the group to view its forum."
+msgstr "Будь ласка, приєднайтеся до групи, щоб переглянути її на форумі."
 
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
@@ -347,29 +292,30 @@ msgstr "Групи"
 msgid "Sort"
 msgstr "Впорядкувати"
 
-msgid "Search"
-msgstr "Пошук"
+msgid "Date created"
+msgstr "Дата створення"
 
-msgid "Private groups you own"
-msgstr "Приватні групи, якими Ви володієте"
+msgid "Your private groups"
+msgstr "Ваші приватні групи"
 
-msgid "Private groups you are a member of"
-msgstr "Приватні групи, до яких Ви входите"
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr ""
+"Ви є власником цих приватних груп або є членом цих приватних груп чи були "
+"запрошені до них."
 
-msgid "Private groups you are invited to"
-msgstr "Приватні групи, до яких вас запрошують"
-
-msgid "Public groups you own"
-msgstr "Публічні групи, якими Ви володієте"
-
-msgid "Public groups you are a member of"
-msgstr "Публічні групи, до яких Ви входите"
-
-msgid "Public groups you are invited to"
-msgstr "Публічні групи, до яких Ви запрошені"
+msgctxt "group"
+msgid "Create private group"
+msgstr "Створити приватну групу"
 
 msgid "Public groups"
 msgstr "Відкриті групи"
+
+msgid "Open to the whole community."
+msgstr "Відкрито для всієї громади."
+
+msgctxt "group"
+msgid "Create public group"
+msgstr "Створити публічну групу"
 
 msgid "No groups available."
 msgstr "Немає доступних груп."
@@ -434,14 +380,6 @@ msgstr "Відхилити"
 msgid "This group has no join requests."
 msgstr "У цій групі немає запитів на вступ."
 
-#, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Щось пішло не так, будь ласка, спробуйте ще раз пізніше."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Введіть ваше повідомлення тут..."
-
 msgid "You cannot add images that are not yours!"
 msgstr "Ви не можете додати чужі зображення!"
 
@@ -473,3 +411,85 @@ msgstr "Ви вийшли з групи"
 
 msgid "Form saved"
 msgstr "Форма зберажена"
+
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Автоматичне подання підтримують лише такі категорії: Професійна мережа, Клуб "
+"чи асоціація, Інтернет-спільнота, Друзі чи партнери, Географічний регіон"
+
+msgid "Publication"
+msgstr "Публікація"
+
+msgid "Title"
+msgstr "Назва"
+
+msgid "Key/value tag"
+msgstr "Тег ключ/значення"
+
+msgid "Default image sorting"
+msgstr "Сортування зображень за замовчуванням"
+
+msgid "Image key/value tag sorting"
+msgstr "Сортування зображень ключ/значення"
+
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Якщо зображення відсортовано за тегом ключ/значення, укажіть, яким саме. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>"
+"Докладніше.</a>"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Будь ласка, не додавайте більше 100 зображень за один раз, дякую!"
+
+msgid "Sort images"
+msgstr "Впорядкувати зображення"
+
+msgid "Private groups you own"
+msgstr "Приватні групи, якими Ви володієте"
+
+msgid "Private groups you are a member of"
+msgstr "Приватні групи, до яких Ви входите"
+
+msgid "Private groups you are invited to"
+msgstr "Приватні групи, до яких вас запрошують"
+
+msgid "Public groups you own"
+msgstr "Публічні групи, якими Ви володієте"
+
+msgid "Public groups you are a member of"
+msgstr "Публічні групи, до яких Ви входите"
+
+msgid "Public groups you are invited to"
+msgstr "Публічні групи, до яких Ви запрошені"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Повідомлення форуму"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Введіть 'Повідомлення форуму', яке буде відображатися над формою 'нової "
+"теми'. Використовуйте це, щоб повідомити правила форуму, відмови або важливу "
+"інформацію користувачам перед створенням нового посту. Переконайтеся, що "
+"ваше повідомлення чітке та лаконічне."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Щось пішло не так, будь ласка, спробуйте ще раз пізніше."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Введіть ваше повідомлення тут..."

@@ -1,22 +1,10 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: nl\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-
-#, fuzzy
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Alleen de volgende categorieën ondersteunen autosubmissie: Professioneel "
-"netwerk, Club of vereniging, Internetgemeenschap, Vrienden of partners, "
-"Geografisch gebied"
+"Content-Transfer-Encoding: 8bit"
 
 #, fuzzy
 msgid "Autosubmission deactivation strategy"
@@ -88,18 +76,6 @@ msgid "Other"
 msgstr "Overig"
 
 #, fuzzy
-msgid "Publication"
-msgstr "Publicatie"
-
-#, fuzzy
-msgid "Title"
-msgstr "Titel"
-
-#, fuzzy
-msgid "Key/value tag"
-msgstr "Sleutel/waarde tag"
-
-#, fuzzy
 msgid "Name"
 msgstr "Naam"
 
@@ -114,24 +90,6 @@ msgstr "HTML-tags zijn toegestaan."
 #, fuzzy
 msgid "Category"
 msgstr "Categorie"
-
-#, fuzzy
-msgid "Default image sorting"
-msgstr "Standaard afbeelding sortering"
-
-#, fuzzy
-msgid "Image key/value tag sorting"
-msgstr "Afbeelding sleutel/waarde tag sortering"
-
-#, fuzzy
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Als afbeeldingen zijn gesorteerd op een sleutel/waarde tag, geef dan aan "
-"welke. <a target='_blank' href='https://welcome.astrobin.com/features/"
-"groups'>Leer meer.<\\/a>"
 
 #, fuzzy
 msgid "Public group"
@@ -170,27 +128,8 @@ msgstr ""
 "alleen afbeeldingen die expliciet aan hen zijn ingediend."
 
 #, fuzzy
-msgid "Forum notice"
-msgstr "Forum melding"
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Voer een 'Forum melding' in die boven het 'nieuwe onderwerp' formulier wordt "
-"weergegeven. Gebruik dit om forumregels, disclaimers of belangrijke "
-"informatie aan gebruikers te communiceren voordat ze een nieuw bericht "
-"aanmaken. Zorg ervoor dat je boodschap duidelijk en beknopt is."
-
-#, fuzzy
 msgid "Last activity"
 msgstr "Laatste activiteit"
-
-#, fuzzy
-msgid "Date created"
-msgstr "Datum aangemaakt"
 
 #, fuzzy
 msgid "Members"
@@ -249,11 +188,6 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 #, fuzzy
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-"Voeg alsjeblieft niet meer dan 100 afbeeldingen in één keer toe, bedankt!"
-
-#, fuzzy
 msgid "Delete group?"
 msgstr "Groep verwijderen?"
 
@@ -302,10 +236,6 @@ msgid "Moderate join requests"
 msgstr "Modereren van lidmaatschapsverzoeken"
 
 #, fuzzy
-msgid "Sort images"
-msgstr "Afbeeldingen sorteren"
-
-#, fuzzy
 msgid "This group is public"
 msgstr "Deze groep is openbaar"
 
@@ -342,8 +272,8 @@ msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"Een groep gemaakt op %(date_created)s, eigendom van <a href=\"%(owner_url)s"
-"\">%(owner)s</a>, gecategoriseerd als <strong>%(category)s</strong>."
+"Een groep gemaakt op %(date_created)s, eigendom van <a href=\"%(owner_url)"
+"s\">%(owner)s</a>, gecategoriseerd als <strong>%(category)s</strong>."
 
 #, fuzzy
 msgid "Group forum"
@@ -354,8 +284,8 @@ msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
-"<strong>%(post_count)s</strong> berichten in <strong>%(topic_count)s</"
-"strong> onderwerpen"
+"<strong>%(post_count)s</strong> berichten in <strong>%(topic_count)s</strong>"
+" onderwerpen"
 
 #, fuzzy
 msgid "View all"
@@ -364,6 +294,10 @@ msgstr "Bekijk alles"
 #, fuzzy
 msgid "New topic"
 msgstr "Nieuw onderwerp"
+
+#, fuzzy
+msgid "Please join the group to view its forum."
+msgstr "Sluit je aan bij de groep om het forum te bekijken."
 
 #, fuzzy
 msgid ""
@@ -440,36 +374,35 @@ msgid "Sort"
 msgstr "Sorteer"
 
 #, fuzzy
-msgid "Search"
-msgstr "Zoeken"
+msgid "Date created"
+msgstr "Datum aangemaakt"
 
 #, fuzzy
-msgid "Private groups you own"
-msgstr "Privé groepen die je bezit"
+msgid "Your private groups"
+msgstr "Je privé groepen"
 
 #, fuzzy
-msgid "Private groups you are a member of"
-msgstr "Privé groepen waarvan je lid bent"
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr ""
+"Je bezit, of bent lid van, of bent uitgenodigd voor, deze privé groepen."
 
 #, fuzzy
-msgid "Private groups you are invited to"
-msgstr "Privé groepen waar je voor bent uitgenodigd"
-
-#, fuzzy
-msgid "Public groups you own"
-msgstr "Open groepen die je bezit"
-
-#, fuzzy
-msgid "Public groups you are a member of"
-msgstr "Open groepen waarvan je lid bent"
-
-#, fuzzy
-msgid "Public groups you are invited to"
-msgstr "Open groepen waar je voor bent uitgenodigd"
+msgctxt "group"
+msgid "Create private group"
+msgstr "Maak een privé groep aan"
 
 #, fuzzy
 msgid "Public groups"
 msgstr "Openbare groepen"
+
+#, fuzzy
+msgid "Open to the whole community."
+msgstr "Open voor de hele gemeenschap."
+
+#, fuzzy
+msgctxt "group"
+msgid "Create public group"
+msgstr "Maak openbare groep"
 
 #, fuzzy
 msgid "No groups available."
@@ -556,14 +489,6 @@ msgid "This group has no join requests."
 msgstr "Deze groep heeft geen lidmaatschapsverzoeken."
 
 #, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Er is iets misgegaan, probeer het later opnieuw."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Typ je bericht hier..."
-
-#, fuzzy
 msgid "You cannot add images that are not yours!"
 msgstr "Je kunt geen afbeeldingen toevoegen die niet van jou zijn!"
 
@@ -606,3 +531,103 @@ msgstr "Je hebt de groep verlaten"
 #, fuzzy
 msgid "Form saved"
 msgstr "Formulier opgeslagen"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Alleen de volgende categorieën ondersteunen autosubmissie: Professioneel "
+"netwerk, Club of vereniging, Internetgemeenschap, Vrienden of partners, "
+"Geografisch gebied"
+
+#, fuzzy
+msgid "Publication"
+msgstr "Publicatie"
+
+#, fuzzy
+msgid "Title"
+msgstr "Titel"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Sleutel/waarde tag"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Standaard afbeelding sortering"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Afbeelding sleutel/waarde tag sortering"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Als afbeeldingen zijn gesorteerd op een sleutel/waarde tag, geef dan aan "
+"welke. <a target='_blank' href='https://welcome.astrobin."
+"com/features/groups'>Leer meer.<\\/a>"
+
+#, fuzzy
+msgid "Search"
+msgstr "Zoeken"
+
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr ""
+"Voeg alsjeblieft niet meer dan 100 afbeeldingen in één keer toe, bedankt!"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Afbeeldingen sorteren"
+
+#, fuzzy
+msgid "Private groups you own"
+msgstr "Privé groepen die je bezit"
+
+#, fuzzy
+msgid "Private groups you are a member of"
+msgstr "Privé groepen waarvan je lid bent"
+
+#, fuzzy
+msgid "Private groups you are invited to"
+msgstr "Privé groepen waar je voor bent uitgenodigd"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Open groepen die je bezit"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Open groepen waarvan je lid bent"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Open groepen waar je voor bent uitgenodigd"
+
+#, fuzzy
+msgid "Forum notice"
+msgstr "Forum melding"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Voer een 'Forum melding' in die boven het 'nieuwe onderwerp' formulier wordt "
+"weergegeven. Gebruik dit om forumregels, disclaimers of belangrijke "
+"informatie aan gebruikers te communiceren voordat ze een nieuw bericht "
+"aanmaken. Zorg ervoor dat je boodschap duidelijk en beknopt is."
+
+#, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Er is iets misgegaan, probeer het later opnieuw."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Typ je bericht hier..."

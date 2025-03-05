@@ -1,16 +1,14 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 11:32+0000\n"
 "Language: tr\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit"
 
 #, fuzzy
-msgid "Only one video-based acquisition is allowed per image."
-msgstr "Her görüntü için yalnızca bir video tabanlı edinime izin verilir."
+msgid "Conflict."
+msgstr "Çatışma."
 
 #, fuzzy
 msgid "Uncompressed source (max 100 MB)"
@@ -27,6 +25,70 @@ msgstr ""
 "çıkan son işlenmiş görüntüyü burada AstroBin'de arşiv amaçları için "
 "saklayabilirsiniz. Bu dosya özel olarak saklanır ve yalnızca siz "
 "erişebilirsiniz."
+
+#, fuzzy
+msgid "Error!"
+msgstr "Hata!"
+
+#, fuzzy
+msgid "Staging area"
+msgstr "Sahneleme alanı"
+
+#, fuzzy
+msgid "Loading"
+msgstr "Yükleniyor"
+
+#, fuzzy
+msgid "(no title)"
+msgstr "(başlık yok)"
+
+#, fuzzy
+msgid "Image of the day"
+msgstr "Günün görüntüsü"
+
+#, fuzzy
+msgid "Top pick"
+msgstr "En iyi seçim"
+
+#, fuzzy
+msgid "Top pick nomination"
+msgstr "En iyi seçim adaylığı"
+
+#, fuzzy
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Veri bozulması. Lütfen bu görüntüyü tekrar yükleyin. Üzgünüm!"
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Revizyon %(revision)s"
+
+#, fuzzy
+msgid "Original revision"
+msgstr "Orijinal revizyon"
+
+#, fuzzy
+msgid "Collaboration"
+msgstr "İşbirliği"
+
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Şu anda IOTD/TP kuyruğunda"
+
+#, fuzzy
+msgid "Video"
+msgstr "Video"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr "Bu videoyu kodlarken bir sorun oluştu, lütfen tekrar yükleyin."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Sorun devam ederse, lütfen bizimle iletişime geçin."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr "Bu video hala işleniyor, lütfen bu sayfaya daha sonra dönün."
 
 #, fuzzy
 msgid "Dates"
@@ -125,69 +187,9 @@ msgid "Transparency"
 msgstr "Şeffaflık"
 
 #, fuzzy
-msgid "Error!"
-msgstr "Hata!"
-
-#, fuzzy
-msgid "Image of the day"
-msgstr "Günün görüntüsü"
-
-#, fuzzy
-msgid "Top pick"
-msgstr "En iyi seçim"
-
-#, fuzzy
-msgid "Top pick nomination"
-msgstr "En iyi seçim adaylığı"
-
-#, fuzzy
-msgid "Currently in the IOTD/TP queue"
-msgstr "Şu anda IOTD/TP kuyruğunda"
-
-#, fuzzy
-msgid "Staging area"
-msgstr "Sahneleme alanı"
-
-#, fuzzy
-msgid "Collaboration"
-msgstr "İşbirliği"
-
-#, fuzzy
-msgid "Video"
-msgstr "Video"
-
-#, fuzzy
-msgid "There was a problem encoding this video, please upload it again."
-msgstr "Bu videoyu kodlarken bir sorun oluştu, lütfen tekrar yükleyin."
-
-#, fuzzy
-msgid "If the problem persists, please contact us."
-msgstr "Sorun devam ederse, lütfen bizimle iletişime geçin."
-
-#, fuzzy
-msgid "This video is still processing, please return to this page later."
-msgstr "Bu video hala işleniyor, lütfen bu sayfaya daha sonra dönün."
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "Revizyon %(revision)s"
-
-#, fuzzy
-msgid "Original revision"
-msgstr "Orijinal revizyon"
-
-#, fuzzy
-msgid "Loading"
-msgstr "Yükleniyor"
-
-#, fuzzy
-msgid "(no title)"
-msgstr "(başlık yok)"
-
-#, fuzzy
 msgid "Image file not found"
 msgstr "Görüntü dosyası bulunamadı"
 
 #, fuzzy
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Veri bozulması. Lütfen bu görüntüyü tekrar yükleyin. Üzgünüm!"
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Her görüntü için yalnızca bir video tabanlı edinime izin verilir."

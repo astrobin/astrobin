@@ -1,13 +1,11 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 11:33+0000\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bit"
 
 #, fuzzy
 msgid ""
@@ -235,14 +233,6 @@ msgstr "Продавец"
 #, fuzzy
 msgid "Buyer"
 msgstr "Покупатель"
-
-#, fuzzy
-msgid "For sale"
-msgstr "На продажу"
-
-#, fuzzy
-msgid "Wanted"
-msgstr "Искать"
 
 #, fuzzy
 msgid "Standard mail"
@@ -653,8 +643,8 @@ msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Катадиоптрический: ACF Шмидт-Кассегрен"
 
 #, fuzzy
-msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
-msgstr "Катадиоптрический: астрограф Роу-Аккермана Шмидта"
+msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
+msgstr "Катадиоптрический: астрограф Шмидта-Роу-Эткинсона"
 
 #, fuzzy
 msgid "Catadioptric: Riccardi-Honders"
@@ -870,9 +860,9 @@ msgid ""
 "unambiguous version from the database instead, and then feel free to update "
 "your affected preset by saving it again."
 msgstr ""
-"В следующий раз, когда вы загрузите изображение, которому требуется "
-"\"%(item)s\", пожалуйста, выберите однозначную версию из базы данных, а "
-"затем не стесняйтесь обновить ваш затронутый пресет, сохранив его снова."
+"В следующий раз, когда вы загрузите изображение, которому требуется \"%(item)"
+"s\", пожалуйста, выберите однозначную версию из базы данных, а затем не "
+"стесняйтесь обновить ваш затронутый пресет, сохранив его снова."
 
 #, fuzzy
 msgid "View item"
@@ -953,10 +943,19 @@ msgstr "Рецензент оставил следующий комментар�
 msgid "View edit proposal"
 msgstr "Посмотреть предложение на редактирование"
 
+#, fuzzy
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s."
+msgstr ""
+"%(_0)s%(user)s%(_1)s одобрил предложение об изменении элемента оборудования "
+"%(_0)s%(item)s%(_1)s."
+
+#, python-format
+msgid ""
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s одобрил предложение на редактирование элемента "
 "оборудования %(_0)s%(item)s%(_1)s"
@@ -967,8 +966,8 @@ msgstr "Пожалуйста, просмотрите это как можно с
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s to you for review"
+"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s to you for review"
 msgstr ""
 "%(_0)s%(user)s%(_1)s назначил предложение редактирования для элемента "
 "оборудования %(_0)s%(item)s%(_1)s вам на рассмотрение"
@@ -1025,8 +1024,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
-"%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)"
+"s%(item)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s отклонил предложение на редактирование элемента "
 "оборудования %(_0)s%(item)s%(_1)s"
@@ -1157,11 +1156,11 @@ msgstr "Инструмент миграции"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
-"%(_1)s that you created"
+"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)"
+"s%(_1)s that you created"
 msgstr ""
-"%(_0)s%(user)s%(_1)s отклонил элемент оборудования для %(_0)s%(make)s "
-"%(name)s%(_1)s, который вы создали"
+"%(_0)s%(user)s%(_1)s отклонил элемент оборудования для %(_0)s%(make)s %(name)"
+"s%(_1)s, который вы создали"
 
 #, python-format
 msgid ""
@@ -1188,12 +1187,12 @@ msgstr "Рецензент указал следующий код как при�
 
 #, python-format
 msgid ""
-"Since your equipment item was marked as duplicate of <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
-"accordingly, and <strong>you don't need to do anything</strong>."
+"Since your equipment item was marked as duplicate of <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been "
+"updated accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
-"Поскольку ваш элемент оборудования был помечен как дубликат <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, ваше изображение было "
+"Поскольку ваш элемент оборудования был помечен как дубликат <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, ваше изображение было "
 "обновлено соответственно, и <strong>вам не нужно ничего делать</strong>."
 
 #, fuzzy
@@ -1210,22 +1209,22 @@ msgid ""
 "Since your equipment item was marked as duplicate of \"%(duplicate_of)s\", "
 "your image has been updated accordingly, and you don't need to do anything."
 msgstr ""
-"Поскольку ваш элемент оборудования был отмечен как дубликат "
-"\"%(duplicate_of)s\", ваше изображение было обновлено соответственно, и вам "
-"не нужно ничего делать."
+"Поскольку ваш элемент оборудования был отмечен как дубликат \"%(duplicate_of)"
+"s\", ваше изображение было обновлено соответственно, и вам не нужно ничего "
+"делать."
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
-"%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
+"s%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
 "Элемент оборудования %(_0)s%(item)s%(_1)s был удален из вашего изображения "
 "%(_0)s%(image_title)s%(_1)s и заменен на %(_0)s%(duplicate_of)s%(_1)s"
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
-"%(image_title)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
+"s%(image_title)s%(_1)s"
 msgstr ""
 "Элемент оборудования %(_0)s%(item)s%(_1)s был удален из вашего изображения "
 "%(_0)s%(image_title)s%(_1)s"
@@ -1240,13 +1239,13 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your equipment item was marked as a duplicate of <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
+"Your equipment item was marked as a duplicate of <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
-"Ваш элемент оборудования был помечен как дубликат <a href="
-"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. Если вы добавили его к каким-"
-"либо изображениям, они были обновлены соответственно."
+"Ваш элемент оборудования был помечен как дубликат <a "
+"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. Если вы добавили его к "
+"каким-либо изображениям, они были обновлены соответственно."
 
 #, python-format
 msgid ""
@@ -1282,11 +1281,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(user)s%(_1)s оставил вам отзыв для объявления на рынке %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s оставил вам отзыв для объявления на рынке %(_0)"
+"s%(listing)s%(_1)s"
 
 #, fuzzy
 msgid "Feedback details"
@@ -1347,23 +1346,23 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(user)s%(_1)s обновил ваш отзыв для объявления на рынке %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s обновил ваш отзыв для объявления на рынке %(_0)"
+"s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
-"%(_1)s"
+"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s%(_1)"
+"s"
 msgstr ""
 "%(user)s обновил ваш отзыв для объявления на рынке %(_0)s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
-"%(_1)s"
+"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s%(_1)"
+"s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s одобрил ваше объявление на рынке %(_0)s%(listing)s%(_1)s"
 
@@ -1373,11 +1372,11 @@ msgstr "Объявление теперь активно. Удачи с прод
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s опубликовал объявление на рынке %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s опубликовал объявление на рынке %(_0)"
+"s%(listing)s%(_1)s"
 
 #, fuzzy
 msgid "You received this notification because you follow this user."
@@ -1386,19 +1385,19 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s удалил свое объявление на рынке %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s удалил свое объявление на рынке %(_0)"
+"s%(listing)s%(_1)s"
 
 #, fuzzy
 msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
+"You received this notification because you have an active offer on this "
+"listing, or you follow the listing."
 msgstr ""
-"Вы получили это уведомление, потому что у вас есть предложение по этому "
-"объявлению или вы следите за ним."
+"Вы получили это уведомление, потому что у вас есть активное предложение по "
+"этому объявлению или вы следите за этим объявлением."
 
 #, fuzzy
 msgid ""
@@ -1428,13 +1427,13 @@ msgstr "Вы можете продлить его, нажав на ссылку 
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
-"%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
-"%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
+"s%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)"
+"s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s опубликовал объявление на рынке %(_0)s"
-"%(listing)s%(_1)s с элементом оборудования, за которым вы следите: %(_0)s"
-"%(line_item)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s опубликовал объявление на рынке %(_0)"
+"s%(listing)s%(_1)s с элементом оборудования, за которым вы следите: %(_0)"
+"s%(line_item)s%(_1)s"
 
 #, python-format
 msgid ""
@@ -1452,6 +1451,14 @@ msgstr ""
 "К сожалению, вы не можете сделать предложение на это объявление, пока оно "
 "находится в резерве или продано."
 
+#, fuzzy
+msgid ""
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
+msgstr ""
+"Вы получили это уведомление, потому что у вас есть предложение по этому "
+"объявлению или вы следите за ним."
+
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
@@ -1466,11 +1473,11 @@ msgstr "Товар"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s обновил своё объявление на рынке %(_0)s"
-"%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s обновил своё объявление на рынке %(_0)"
+"s%(listing)s%(_1)s"
 
 #, fuzzy
 msgid ""
@@ -1484,13 +1491,13 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)s"
-"%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
-"possible and leave feedback to the buyer."
+"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)"
+"s%(_1)s, but you haven't marked the item as sold yet. Please do so as soon "
+"as possible and leave feedback to the buyer."
 msgstr ""
-"Недавно вы приняли предложение для объявления на рынке %(_0)s%(listing)s"
-"%(_1)s, но вы еще не отметили элемент как проданный. Пожалуйста, сделайте "
-"это как можно скорее и оставьте отзыв покупателю."
+"Недавно вы приняли предложение для объявления на рынке %(_0)s%(listing)s%(_1)"
+"s, но вы еще не отметили элемент как проданный. Пожалуйста, сделайте это как "
+"можно скорее и оставьте отзыв покупателю."
 
 #, fuzzy
 msgid "Mark as sold"
@@ -1498,8 +1505,8 @@ msgstr "Отметить как проданный"
 
 #, python-format
 msgid ""
-"Don't forget to mark your reserved items as sold in the listing %(_0)s"
-"%(listing)s%(_1)s, if you sold them."
+"Don't forget to mark your reserved items as sold in the listing %(_0)"
+"s%(listing)s%(_1)s, if you sold them."
 msgstr ""
 "Не забудьте отметить ваши зарезервированные элементы как проданные в "
 "объявлении %(_0)s%(listing)s%(_1)s, если вы их продали."
@@ -1671,11 +1678,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
-"%(_1)s, and we noticed that you haven't rated the buyer yet."
+"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)"
+"s%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
-"Привет! Вы недавно продали товар из объявления на рынке %(_0)s%(listing)s"
-"%(_1)s, и мы заметили, что вы еще не оценили покупателя."
+"Привет! Вы недавно продали товар из объявления на рынке %(_0)s%(listing)"
+"s%(_1)s, и мы заметили, что вы еще не оценили покупателя."
 
 #, fuzzy
 msgid ""
@@ -1693,21 +1700,21 @@ msgstr "Оставить отзыв"
 
 #, python-format
 msgid ""
-"Rate the buyer for your recent purchase from marketplace listing %(_0)s"
-"%(listing)s%(_1)s"
+"Rate the buyer for your recent purchase from marketplace listing %(_0)"
+"s%(listing)s%(_1)s"
 msgstr ""
-"Оцените покупателя за вашу недавнюю покупку из объявления на рынке %(_0)s"
-"%(listing)s%(_1)s"
+"Оцените покупателя за вашу недавнюю покупку из объявления на рынке %(_0)"
+"s%(listing)s%(_1)s"
 
 #, python-format
 msgid ""
-"Hi! You recently purchased an item from the marketplace listing %(_0)s"
-"%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
-"%(seller_display_name)s%(_1)s yet."
+"Hi! You recently purchased an item from the marketplace listing %(_0)"
+"s%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)"
+"s%(seller_display_name)s%(_1)s yet."
 msgstr ""
-"Привет! Вы недавно купили товар из объявления на рынке %(_0)s%(listing)s"
-"%(_1)s, и мы заметили, что вы еще не оценили продавца %(_0)s"
-"%(seller_display_name)s%(_1)s."
+"Привет! Вы недавно купили товар из объявления на рынке %(_0)s%(listing)s%(_1)"
+"s, и мы заметили, что вы еще не оценили продавца %(_0)s%(seller_display_name)"
+"s%(_1)s."
 
 #, fuzzy
 msgid ""
@@ -1809,3 +1816,15 @@ msgstr "Продать на рынке"
 #, fuzzy
 msgid "Close"
 msgstr "Закрыть"
+
+#, fuzzy
+msgid "For sale"
+msgstr "На продажу"
+
+#, fuzzy
+msgid "Wanted"
+msgstr "Искать"
+
+#, fuzzy
+msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
+msgstr "Катадиоптрический: астрограф Роу-Аккермана Шмидта"
