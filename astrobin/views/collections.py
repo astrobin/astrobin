@@ -93,7 +93,10 @@ class UserCollectionsList(UserCollectionsBase, ListView):
             return render(request, 'user/suspended_account.html')
 
         if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
-            return redirect(AppRedirectionService.redirect(f'/u/{username}#gallery'))
+            if profile.display_collections_on_public_gallery:
+                return redirect(AppRedirectionService.redirect(f'/u/{username}#gallery'))
+            else:
+                return redirect(AppRedirectionService.redirect(f'/u/{username}#collections'))
 
         return super(UserCollectionsList, self).dispatch(request, *args, **kwargs)
 
