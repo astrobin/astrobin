@@ -7861,15 +7861,6 @@ msgstr "自分を削除したい場合は、自分のサムネイル画像の下
 msgid "%(user)s added you as a collaborator to an image"
 msgstr "%(user)s は画像のコラボレーターとしてあなたを追加しました"
 
-#, python-format
-msgid ""
-"\n"
-"                                                        Hey, %(name)s!\n"
-"                                                    "
-msgstr ""
-"\n"
-"Hey, %(name)s!"
-
 msgid "This image is a group effort among the following collaborators:"
 msgstr "この画像は、以下のコラボレーターとの共同作品です。"
 
@@ -10749,3 +10740,8 @@ msgstr "もしあなたの非活動の理由が一時的なものであれば、
 #, fuzzy
 msgid "This content is not available because the user's account is suspended."
 msgstr "このコンテンツは、ユーザーのアカウントが停止されているため利用できません。"
+
+#, fuzzy
+#, python-format
+msgid "Hey, %(name)s!"
+msgstr "やあ、%(name)s!"

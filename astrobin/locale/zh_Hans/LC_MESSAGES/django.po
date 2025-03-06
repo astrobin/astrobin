@@ -7778,16 +7778,6 @@ msgstr "如果你想移除自己，请点击你头像下方的“移除我”按
 msgid "%(user)s added you as a collaborator to an image"
 msgstr "%(user)s将你添加为一张图片的合作者"
 
-#, python-format
-msgid ""
-"\n"
-"                                                        Hey, %(name)s!\n"
-"                                                    "
-msgstr ""
-"\n"
-"                                                        嘿，%(name)s！\n"
-"                                                    "
-
 msgid "This image is a group effort among the following collaborators:"
 msgstr "这张图片是以下合作者的共同努力："
 
@@ -10152,3 +10142,8 @@ msgstr "如果你不活跃的原因是暂时的，请告诉我们，我们会很
 
 msgid "This content is not available because the user's account is suspended."
 msgstr "此内容不可用，因为用户的账户已被暂停。"
+
+#, fuzzy
+#, python-format
+msgid "Hey, %(name)s!"
+msgstr "嘿，%(name)s！"

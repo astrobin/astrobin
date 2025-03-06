@@ -9143,16 +9143,6 @@ msgstr ""
 msgid "%(user)s added you as a collaborator to an image"
 msgstr "%(user)s te adicionou como colaborador em uma imagem"
 
-#, python-format
-msgid ""
-"\n"
-"                                                        Hey, %(name)s!\n"
-"                                                    "
-msgstr ""
-"\n"
-"                                                        E aí, %(name)s!\n"
-"                                                    "
-
 #, fuzzy
 msgid "This image is a group effort among the following collaborators:"
 msgstr "Esta imagem é um esforço em grupo entre os seguintes colaboradores:"
@@ -12425,3 +12415,8 @@ msgstr ""
 msgid "This content is not available because the user's account is suspended."
 msgstr ""
 "Este conteúdo não está disponível porque a conta do usuário está suspensa."
+
+#, fuzzy
+#, python-format
+msgid "Hey, %(name)s!"
+msgstr "E aí, %(name)s!"

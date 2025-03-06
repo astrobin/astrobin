@@ -10417,17 +10417,6 @@ msgstr ""
 msgid "%(user)s added you as a collaborator to an image"
 msgstr "%(user)s дадаў вас як супрацоўніка да малюнка"
 
-#, python-format
-msgid ""
-"\n"
-"                                                        Hey, %(name)s!\n"
-"                                                    "
-msgstr ""
-"\n"
-"                                                        Прывітанне, %(name)s!"
-"\n"
-"                                                    "
-
 #, fuzzy
 msgid "This image is a group effort among the following collaborators:"
 msgstr "Гэты малюнак з'яўляецца групавой працай сярод наступных супрацоўнікаў:"
@@ -13684,3 +13673,8 @@ msgstr ""
 #, fuzzy
 msgid "This content is not available because the user's account is suspended."
 msgstr "Гэты кантэнт недаступны, бо ўліковы запіс карыстальніка заблакаваны."
+
+#, fuzzy
+#, python-format
+msgid "Hey, %(name)s!"
+msgstr "Прывітанне, %(name)s!"

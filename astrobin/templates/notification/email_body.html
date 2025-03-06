@@ -339,7 +339,7 @@
                                         <tr>
                                             <td class="content-block">
                                                 <h2>
-                                                    {% blocktrans with name=recipient.userprofile.get_display_name.split.0 %}
+                                                    {% blocktrans trimmed with name=recipient.userprofile.get_display_name.split.0 %}
                                                         Hey, {{ name }}!
                                                     {% endblocktrans %}
 

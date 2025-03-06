@@ -9535,16 +9535,6 @@ msgstr ""
 msgid "%(user)s added you as a collaborator to an image"
 msgstr "%(user)s lisäsi sinut yhteistyökumppaniksi kuvaan"
 
-#, python-format
-msgid ""
-"\n"
-"                                                        Hey, %(name)s!\n"
-"                                                    "
-msgstr ""
-"\n"
-"                                                        Hei, %(name)s!\n"
-"                                                    "
-
 #, fuzzy
 msgid "This image is a group effort among the following collaborators:"
 msgstr "Tämä kuva on ryhmätyötä seuraavien yhteistyökumppaneiden kesken:"
@@ -12781,3 +12771,8 @@ msgstr ""
 #, fuzzy
 msgid "This content is not available because the user's account is suspended."
 msgstr "Tämä sisältö ei ole saatavilla, koska käyttäjän tili on keskeytetty."
+
+#, fuzzy
+#, python-format
+msgid "Hey, %(name)s!"
+msgstr "Hei, %(name)s!"
