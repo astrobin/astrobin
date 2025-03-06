@@ -282,11 +282,7 @@ class ImageDetailView(ImageDetailViewBase):
                     not request.user.userprofile.is_image_moderator():
                 raise Http404
 
-        if (
-                request.user.is_authenticated and
-                request.user.userprofile.enable_new_gallery_experience and
-                'force-classic-view' not in request.GET
-        ):
+        if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
             return redirect(
                 AppRedirectionService.image_redirect(request, image.get_id(), kwargs.get('r'), kwargs.get('cid'))
             )
@@ -671,7 +667,7 @@ class ImageFullView(ImageDetailView):
         if image.moderator_decision == ModeratorDecision.REJECTED:
             raise Http404
 
-        if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+        if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
             redirect_url = AppRedirectionService.redirect(f'/i/{image.get_id()}')
             if revision_label := kwargs.get('r'):
                 redirect_url += f'?r={revision_label}'
@@ -913,7 +909,7 @@ class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
         ImageService(image).demote_to_staging_area()
 
         # No need to show the success message if the user is going to be redirected to the new page.
-        if not image.user.userprofile.enable_new_gallery_experience:
+        if not AppRedirectionService.should_redirect_to_new_gallery_experience(self.request):
             messages.success(self.request, _("Image moved to the staging area."))
 
         return super().form_valid(form)
@@ -948,7 +944,7 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
         ImageService(image).promote_to_public_area(image.skip_notifications, image.skip_activity_stream)
 
         # No need to show the success message if the user is going to be redirected to the new page.
-        if not image.user.userprofile.enable_new_gallery_experience:
+        if not AppRedirectionService.should_redirect_to_new_gallery_experience(self.request):
             messages.success(self.request, _("Image moved to the public area."))
 
         return super().form_valid(form)

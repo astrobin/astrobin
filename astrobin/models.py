@@ -3138,7 +3138,7 @@ class UserProfile(SafeDeleteModel):
     )
 
     enable_new_gallery_experience = models.NullBooleanField(
-        default=None,
+        default=True,
         verbose_name=_('Enable new gallery experience'),
         help_text=
         gettext('Enable the new gallery experience, with improved navigation and a new image viewer.') +

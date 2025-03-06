@@ -42,13 +42,9 @@ class IotdArchiveView(ListView):
         return IotdService().get_iotds()
 
     def dispatch(self, request, *args, **kwargs):
-        if (
-                request.user.is_authenticated and
-                request.user.userprofile.enable_new_gallery_experience
-        ):
+        if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
             return redirect(AppRedirectionService.redirect('/explore/iotd-tp-archive'))
         return super().dispatch(request, *args, **kwargs)
-
 
 
 class ImageStats(JsonRequestResponseMixin, base.View):

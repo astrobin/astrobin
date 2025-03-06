@@ -14,7 +14,7 @@ Cypress.Commands.add('login', (opts={}) => {
 
     cy.url().should(
         "contain",
-        (!opts.next || opts.next === "/me/") ? "/users/" + (opts.username || "astrobin_dev" + "/") : opts.next
+        (!opts.next || opts.next === "/me/") ? "http://localhost:4400/u/" + (opts.username || "astrobin_dev") + "#gallery" : opts.next
     );
 
     cy.get("body").then((body) => {

@@ -61,6 +61,17 @@ class AppRedirectionService:
         return url
 
     @staticmethod
+    def should_redirect_to_new_gallery_experience(request) -> bool:
+        # If we are testing, we don't want to redirect because we want to test the old gallery experience.
+        if settings.TESTING:
+            return False
+
+        return (
+            not request.user.is_authenticated or
+            request.user.userprofile.enable_new_gallery_experience
+        ) and 'force-classic-view' not in request.GET
+
+    @staticmethod
     def gallery_redirect(request, username) -> str:
         url = AppRedirectionService.redirect(f'/u/{username}')
 
@@ -95,11 +106,7 @@ class AppRedirectionService:
             revision_label: Optional[str] = None,
             comment_id: Optional[int] = None,
     ) -> str:
-        if (
-                request.user.is_authenticated and
-                request.user.userprofile.enable_new_gallery_experience and
-                'force-classic-view' not in request.GET
-        ):
+        if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
             redirect_url = AppRedirectionService.redirect(f'/i/{image_id}')
             if revision_label:
                 redirect_url += f'?r={revision_label}'
@@ -107,10 +114,12 @@ class AppRedirectionService:
                 redirect_url += f'#c{comment_id}'
             return redirect_url
 
-        redirect_url = reverse('image_detail', kwargs={
-            'pk': image_id,
-            'r': revision_label,
-        })
+        redirect_url = reverse(
+            'image_detail', kwargs={
+                'pk': image_id,
+                'r': revision_label,
+            }
+        )
         if comment_id:
             redirect_url += f'#c{comment_id}'
         return redirect_url
@@ -139,4 +148,3 @@ class AppRedirectionService:
             return step_map[step]
         except IndexError:
             return 1
-
