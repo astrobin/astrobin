@@ -8,6 +8,8 @@ describe("Login", () => {
     });
 
     it("should login", () => {
-        cy.login();
+        cy.login({
+            next: "/profile/edit/"
+        });
     });
 });
