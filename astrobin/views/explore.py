@@ -58,10 +58,7 @@ class TopPicksView(TopPickBaseView):
         return queryset
 
     def dispatch(self, request, *args, **kwargs):
-        if (
-                not request.user.is_authenticated or
-                request.user.userprofile.enable_new_gallery_experience
-        ):
+        if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
             return redirect(AppRedirectionService.redirect('/explore/iotd-tp-archive#top-pick'))
         return super().dispatch(request, *args, **kwargs)
 
@@ -86,10 +83,7 @@ class TopPickNominationsView(TopPickBaseView):
         return queryset
 
     def dispatch(self, request, *args, **kwargs):
-        if (
-                not request.user.is_authenticated or
-                request.user.userprofile.enable_new_gallery_experience
-        ):
+        if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
             return redirect(AppRedirectionService.redirect('/explore/iotd-tp-archive#top-pick-nomination'))
         return super().dispatch(request, *args, **kwargs)
 

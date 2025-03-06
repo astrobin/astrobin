@@ -365,7 +365,7 @@ def index(request, template='index/root.html') -> HttpResponse:
 
     profile = request.user.userprofile
 
-    if profile.enable_new_gallery_experience and 'force-classic-view' not in request.GET:
+    if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
         return redirect(AppRedirectionService.redirect('/'))
 
     section = request.GET.get('s')
@@ -1158,12 +1158,7 @@ def me(request):
 @cache_control(private=True, no_cache=True)
 @vary_on_cookie
 def user_page(request, username):
-    if (
-            (
-                    not request.user.is_authenticated or
-                    request.user.userprofile.enable_new_gallery_experience
-            ) and 'force-classic-view' not in request.GET
-    ):
+    if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
         return redirect(AppRedirectionService.gallery_redirect(request, username))
 
     try:
@@ -1319,7 +1314,7 @@ def user_page_bookmarks(request, username):
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
 
-    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+    if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
         return redirect(AppRedirectionService.search_redirect({"personal_filters": {"value": ["my_bookmarks"]}}))
 
     template_name = 'user/bookmarks.html'
@@ -1347,7 +1342,7 @@ def user_page_liked(request, username):
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
 
-    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+    if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
         return redirect(AppRedirectionService.search_redirect({"personal_filters": {"value": ["my_likes"]}}))
 
     template_name = 'user/liked.html'
@@ -1375,7 +1370,7 @@ def user_page_following(request, username):
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
 
-    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+    if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
         return redirect(AppRedirectionService.redirect(f'/u/{username}?following'))
 
     following = User.objects.filter(
@@ -1407,7 +1402,7 @@ def user_page_followers(request, username):
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
 
-    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+    if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
         return redirect(AppRedirectionService.redirect(f'/u/{username}?followers'))
 
     followers = User.objects.filter(
@@ -1436,7 +1431,7 @@ def user_page_friends(request, username):
     if profile.suspended:
         return render(request, 'user/suspended_account.html')
 
-    if request.user.is_authenticated and request.user.userprofile.enable_new_gallery_experience:
+    if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
         return redirect(AppRedirectionService.redirect(f'/u/{username}?mutual-followers'))
 
     content_type = ContentType.objects.get_for_model(User)

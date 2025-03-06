@@ -339,8 +339,8 @@ class AstroBinActivationView(ActivationView):
             return next_url
 
         if user:
-            if user.userprofile and user.userprofile.enable_new_gallery_experience:
-                return AppRedirectionService.gallery_redirect(self.request, user.username)
+            if AppRedirectionService.should_redirect_to_new_gallery_experience(request):
+                return AppRedirectionService.gallery_redirect(request, user.username)
             messages.success(request, _('Your account has been activated.'))
             return reverse('user_page', kwargs={'username': user.username})
 
