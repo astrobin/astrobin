@@ -322,7 +322,6 @@ class PricingService:
             "MV",  # Maldives
             "DO",  # Dominican Republic
             "TC",  # Turks and Caicos Islands
-            "CN",  # China
             "TH",  # Thailand
             "PF",  # French Polynesia
             "CK",  # Cook Islands
@@ -451,7 +450,9 @@ class PricingService:
             "CD",  # DR Congo
             "SO",  # Somalia
             "CF",  # Central African Republic
-            "BI"  # Burundi
+            "BI",  # Burundi
+            # Temporarily move China to the lowest tier for promotional reasons.
+            "CN",  # China
         ]
 
         total_countries = len(countries_sorted_by_gdp_per_capita)
