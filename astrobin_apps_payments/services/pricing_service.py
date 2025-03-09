@@ -527,7 +527,15 @@ class PricingService:
 
     @staticmethod
     def get_user_country_code(user, request) -> str:
-        # When it comes to pricing, we use the user's signup country when available.
-        profile_country = getattr(user, 'userprofile', None) and user.userprofile.signup_country
-        country_code = (profile_country or get_client_country_code(request) or 'us').lower()
-        return 'us' if country_code == 'UNKNOWN' else country_code
+        # When it comes to pricing, we use the user's signup country when available, unless the currently detected
+        # country is China. We do this because many Chinese people might have signed up with a VPN, and we want to
+        # still offer them the Chinese price and currency.
+        profile = getattr(user, 'userprofile', None)
+        profile_country = profile.signup_country if profile and profile.signup_country else None
+        current_country_code = get_client_country_code(request) or 'us'
+
+        if current_country_code.lower() == 'cn':
+            return 'cn'
+
+        country_code = (profile_country or current_country_code).lower()
+        return 'us' if country_code == 'unknown' else country_code
