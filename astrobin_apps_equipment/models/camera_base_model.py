@@ -14,6 +14,7 @@ class CameraType:
     FILM = 'FILM'
     OTHER = 'OTHER'
 
+
 class CameraBaseModel(EquipmentItem):
     CAMERA_TYPES = (
         (CameraType.DEDICATED_DEEP_SKY, _('Dedicated deep-sky camera')),
