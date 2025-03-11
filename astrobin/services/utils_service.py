@@ -37,9 +37,9 @@ DJANGO_TO_LINGUA_LANG_MAP = {
     'sv': Language.SWEDISH,
 }
 
-
 # Global detector instance that will be initialized at application startup
 _LANGUAGE_DETECTOR = None
+
 
 def build_lingua_detector():
     """
@@ -49,7 +49,7 @@ def build_lingua_detector():
     global _LANGUAGE_DETECTOR
     import time
     start_time = time.time()
-    
+
     # Get supported languages from settings if available, or use default set
     try:
         supported_lang_codes = [code for code, name in settings.LANGUAGES]
@@ -59,7 +59,7 @@ def build_lingua_detector():
         ]
         # Filter out None values
         lingua_languages = [lang for lang in lingua_languages if lang is not None]
-        
+
         if not lingua_languages:  # Fallback if we couldn't map any languages
             lingua_languages = [Language.ENGLISH]
             logger.warning("Couldn't map any Django languages to Lingua. Using English only.")
@@ -77,15 +77,15 @@ def build_lingua_detector():
         logger.debug(
             f"Languages: {', '.join([lang.name for lang in lingua_languages])}"
         )
-    
-    detector = LanguageDetectorBuilder.from_languages(*lingua_languages)\
-        .with_preloaded_language_models()\
-        .with_low_accuracy_mode()\
+
+    detector = LanguageDetectorBuilder.from_languages(*lingua_languages) \
+        .with_preloaded_language_models() \
+        .with_low_accuracy_mode() \
         .build()
-    
+
     initialization_time = time.time() - start_time
     logger.info(f"Lingua language detector initialized in {initialization_time:.2f} seconds")
-    
+
     _LANGUAGE_DETECTOR = detector
     return detector
 
@@ -742,22 +742,22 @@ red rectangle,hd 44179
         # Quick return for empty text
         if not text or len(text.strip()) == 0:
             return None
-        
+
         # Strip bbcode and HTML before detection
         clean_text = UtilsService.strip_bbcode(text)
         clean_text = bleach.clean(clean_text, tags=[], strip=True)
-        
+
         # Only attempt detection if we have enough text
         clean_text = clean_text.strip()
         if len(clean_text) < 10:
             return None
-        
+
         # Performance optimization: limit text length for detection
         # 50 chars is usually enough for accurate language detection
         # Shorter text = faster detection
         if len(clean_text) > 75:
             clean_text = clean_text[:75]
-        
+
         # Try lingua first (with timeout protection)
         detected_language = None
         try:
@@ -766,7 +766,7 @@ red rectangle,hd 44179
 
             # Use a queue to get the result from the thread
             result_queue = queue.Queue()
-            
+
             # Function to run detection in a thread
             def detect_with_lingua():
                 try:
@@ -775,16 +775,16 @@ red rectangle,hd 44179
                     result_queue.put(result)
                 except Exception as e:
                     result_queue.put(e)
-            
+
             # Start detection in a separate thread
             detection_thread = threading.Thread(target=detect_with_lingua)
             detection_thread.daemon = True
-            
+
             detection_thread.start()
-            
+
             # Wait for result with timeout (100ms)
             detection_thread.join(0.1)
-            
+
             if detection_thread.is_alive():
                 # Detection is taking too long, log and proceed to langdetect
                 logger.warning(f"Lingua detection timed out after 100ms for text: '{clean_text[:30]}...'")
@@ -792,7 +792,7 @@ red rectangle,hd 44179
             else:
                 # Get the result from the queue
                 detection_result = result_queue.get(block=False)
-                
+
                 if isinstance(detection_result, Exception):
                     # Detection raised an exception
                     logger.warning(f"Lingua threw exception: {str(detection_result)}")
@@ -801,7 +801,7 @@ red rectangle,hd 44179
         except Exception as e:
             # If thread handling fails, log and proceed to langdetect
             logger.warning(f"Thread handling error: {str(e)}")
-        
+
         # Process lingua result if we got one
         if detected_language is not None:
             # Convert Language enum to ISO 639-1 code
@@ -816,11 +816,13 @@ red rectangle,hd 44179
                 return lang_code
             else:
                 # If all detection methods fail, default to English
-                logger.warning(f"All language detection methods failed, defaulting to English for: '{clean_text[:30]}...'")
+                logger.warning(
+                    f"All language detection methods failed, defaulting to English for: '{clean_text[:30]}...'"
+                )
                 return 'en'
         except (LangDetectException, Exception) as e:
             # Catch both LangDetectException and general exceptions
             logger.warning(f"Langdetect failed with error: {str(e)}")
-            
+
             # Default to English as last resort
             return 'en'
