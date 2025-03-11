@@ -499,6 +499,7 @@ th.forum-name {
     right: 0;
     left: auto !important; /* Override Bootstrap's default positioning */
     min-width: 160px; /* Set minimum width */
+    z-index: 1040;
   }
 
   .dropdown-menu li a {

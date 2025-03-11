@@ -1606,9 +1606,14 @@ astrobin_common = {
 
         $('.dropdown-toggle').on('click', function () {
             const isSubNav = $(this).closest('.subnav').length > 0;
+            const overlay = $('#dropdown-overlay');
 
             if (!isSubNav && window.innerWidth < 992) {
-                $('#dropdown-overlay').show();
+                if (overlay.css('display') === 'block') {
+                    overlay.hide();
+                } else {
+                    overlay.show();
+                }
             }
         });
 
