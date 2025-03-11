@@ -1783,6 +1783,29 @@ def userprofile_pre_save(sender, instance: UserProfile, **kwargs):
 
         for image in Image.objects_including_wip.filter(user=instance.user):
             SearchIndexUpdateService.update_index(image)
+            
+    # Handle suspension status changes
+    if before_save.suspended != instance.suspended:
+        from astrobin.search_indexes import UserIndex, ImageIndex
+        
+        if instance.suspended is not None:
+            # User is being suspended - remove from search indexes
+            UserIndex().remove_object(instance.user)
+            
+            # Remove all user's images from index
+            for image in Image.objects.filter(user=instance.user):
+                ImageIndex().remove_object(image)
+        else:
+            # User is being unsuspended - reindex
+            SearchIndexUpdateService.update_index(instance.user)
+            
+            # Reindex all user's images
+            for image in Image.objects.filter(
+                user=instance.user, 
+                moderator_decision=ModeratorDecision.APPROVED,
+                is_wip=False
+            ):
+                SearchIndexUpdateService.update_index(image)
 
 
 @receiver(post_softdelete, sender=UserProfile)

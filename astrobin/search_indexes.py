@@ -334,7 +334,8 @@ class UserIndex(CelerySearchIndex, Indexable):
             ),
             num_posts=Count('posts', filter=Q(posts__on_moderation=False)),
         ).filter(
-            Q(num_images__gt=0) | Q(num_posts__gt=0)
+            (Q(num_images__gt=0) | Q(num_posts__gt=0)) &
+            Q(userprofile__suspended__isnull=True)
         )
 
     def should_update(self, instance, **kwargs):
@@ -647,7 +648,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def index_queryset(self, using=None):
         return self.get_model().objects.using(get_segregated_reader_database()).filter(
-            moderator_decision=ModeratorDecision.APPROVED
+            moderator_decision=ModeratorDecision.APPROVED,
+            user__userprofile__suspended__isnull=True
         )
 
     def should_update(self, instance, **kwargs):
