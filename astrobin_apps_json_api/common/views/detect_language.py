@@ -1,5 +1,7 @@
 import hashlib
 import logging
+
+import bleach
 import simplejson
 from braces.views import JSONResponseMixin
 from django.core.cache import cache
@@ -33,6 +35,9 @@ class DetectLanguage(JSONResponseMixin, View):
 
         # Clean the text (remove BBCode) before detection
         cleaned_text = UtilsService.strip_bbcode(text)
+
+        # Strip any remaining HTML tags
+        cleaned_text = bleach.clean(cleaned_text, tags=[], strip=True)
         
         # Detect language
         try:
