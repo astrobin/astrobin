@@ -755,8 +755,8 @@ red rectangle,hd 44179
         # Performance optimization: limit text length for detection
         # 50 chars is usually enough for accurate language detection
         # Shorter text = faster detection
-        if len(clean_text) > 50:
-            clean_text = clean_text[:50]
+        if len(clean_text) > 75:
+            clean_text = clean_text[:75]
         
         # Try lingua first (with timeout protection)
         detected_language = None
