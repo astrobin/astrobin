@@ -68,5 +68,6 @@ class AstroBinAppConfig(AppConfig):
         self.init_actstream()
         self.init_avatar()
         self.init_search()
-
+        
+        # Initialize langdetect (used as fallback)
         DetectorFactory.seed = 0
