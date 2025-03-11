@@ -186,7 +186,7 @@ class CommentNotificationsService:
                         deleted=False
                     ).count(),
                     comment_html=bbcode(instance.text),
-                    comment_language=UtilsService.detect_language(UtilsService.strip_bbcode(instance.text)),
+                    comment_language=UtilsService.detect_language(instance.text),
                 )
 
         if instance.parent and \

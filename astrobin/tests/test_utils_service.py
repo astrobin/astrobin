@@ -1,5 +1,6 @@
 from unittest import mock
 
+from django.core.cache import cache
 from django.test import TestCase
 
 from astrobin.services.utils_service import UtilsService
@@ -81,27 +82,58 @@ class UtilsServiceTest(TestCase):
             '<strong>This is a sample text</strong> in <em>English</em> with enough characters to detect.'
         )
         self.assertEqual(result, 'en')
+        
+    def test_detect_language_caching(self):
+        # Clear cache before test
+        cache.clear()
+        
+        # First detection should not use cache
+        sample_text = "This is a sample text for testing caching in language detection."
+        with mock.patch('astrobin.services.utils_service._LANGUAGE_DETECTOR') as mock_detector:
+            mock_language = mock.MagicMock()
+            mock_language.iso_code_639_1.name.lower.return_value = 'en'
+            mock_detector.detect_language_of.return_value = mock_language
+            
+            # First call should use detector and cache result
+            result1 = UtilsService.detect_language(sample_text)
+            self.assertEqual(result1, 'en')
+            mock_detector.detect_language_of.assert_called_once()
+            
+            # Reset mock for second call
+            mock_detector.reset_mock()
+            
+            # Second call with same text should use cache and not call detector
+            result2 = UtilsService.detect_language(sample_text)
+            self.assertEqual(result2, 'en')
+            mock_detector.detect_language_of.assert_not_called()
+        
+        # Different text should not use cache
+        different_text = "This is a different sample text for testing caching."
+        with mock.patch('astrobin.services.utils_service._LANGUAGE_DETECTOR') as mock_detector:
+            mock_language = mock.MagicMock()
+            mock_language.iso_code_639_1.name.lower.return_value = 'en'
+            mock_detector.detect_language_of.return_value = mock_language
+            
+            result3 = UtilsService.detect_language(different_text)
+            self.assertEqual(result3, 'en')
+            mock_detector.detect_language_of.assert_called_once()
 
     # Mock tests for detect_language to isolate behavior
-    @mock.patch('astrobin.services.utils_service.get_language_detector')
-    def test_detect_language_with_lingua_mock(self, mock_get_detector):
+    @mock.patch('astrobin.services.utils_service._LANGUAGE_DETECTOR')
+    def test_detect_language_with_lingua_mock(self, mock_detector):
         # Setup a mock language result
-        mock_detector = mock.MagicMock()
         mock_language = mock.MagicMock()
         mock_language.iso_code_639_1.name.lower.return_value = 'de'
         mock_detector.detect_language_of.return_value = mock_language
-        mock_get_detector.return_value = mock_detector
 
         result = UtilsService.detect_language('Some text to test')
         self.assertEqual(result, 'de')
         mock_detector.detect_language_of.assert_called_once()
 
-    @mock.patch('astrobin.services.utils_service.get_language_detector')
-    def test_detect_language_lingua_returns_none(self, mock_get_detector):
-        # Setup a mock detector that returns None
-        mock_detector = mock.MagicMock()
+    @mock.patch('astrobin.services.utils_service._LANGUAGE_DETECTOR')
+    def test_detect_language_lingua_returns_none(self, mock_detector):
+        # Setup lingua to return None (detection failed)
         mock_detector.detect_language_of.return_value = None
-        mock_get_detector.return_value = mock_detector
 
         # Setup langdetect to succeed as fallback
         with mock.patch('astrobin.services.utils_service.langdetect_detect', return_value='ja'):
@@ -109,12 +141,10 @@ class UtilsServiceTest(TestCase):
             self.assertEqual(result, 'ja')
             mock_detector.detect_language_of.assert_called_once()
 
-    @mock.patch('astrobin.services.utils_service.get_language_detector')
-    def test_detect_language_lingua_throws_exception(self, mock_get_detector):
-        # Setup a mock detector that throws an exception
-        mock_detector = mock.MagicMock()
+    @mock.patch('astrobin.services.utils_service._LANGUAGE_DETECTOR')
+    def test_detect_language_lingua_throws_exception(self, mock_detector):
+        # Setup lingua to throw an exception
         mock_detector.detect_language_of.side_effect = Exception('Lingua error')
-        mock_get_detector.return_value = mock_detector
 
         # Setup langdetect to succeed as fallback
         with mock.patch('astrobin.services.utils_service.langdetect_detect', return_value='ru'):
@@ -122,13 +152,11 @@ class UtilsServiceTest(TestCase):
             self.assertEqual(result, 'ru')
             mock_detector.detect_language_of.assert_called_once()
 
-    @mock.patch('astrobin.services.utils_service.get_language_detector')
+    @mock.patch('astrobin.services.utils_service._LANGUAGE_DETECTOR')
     @mock.patch('astrobin.services.utils_service.langdetect_detect')
-    def test_detect_language_both_fail(self, mock_langdetect, mock_get_detector):
-        # Setup a mock detector that throws an exception
-        mock_detector = mock.MagicMock()
+    def test_detect_language_both_fail(self, mock_langdetect, mock_detector):
+        # Setup lingua to throw an exception
         mock_detector.detect_language_of.side_effect = Exception('Lingua error')
-        mock_get_detector.return_value = mock_detector
 
         # Setup langdetect to also fail
         mock_langdetect.side_effect = Exception('Langdetect error')

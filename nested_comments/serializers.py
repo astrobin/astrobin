@@ -40,7 +40,7 @@ class NestedCommentSerializer(serializers.ModelSerializer):
         return parser.render(comment.text)
 
     def get_detected_language(self, comment: NestedComment) -> str:
-        return UtilsService.detect_language(UtilsService.strip_bbcode(comment.text))
+        return UtilsService.detect_language(comment.text)
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
