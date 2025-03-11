@@ -258,12 +258,12 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def get_detected_language(self, obj: Image) -> str:
         if obj.description_bbcode:
-            return UtilsService.detect_language(UtilsService.strip_bbcode(obj.description_bbcode))
+            return UtilsService.detect_language(obj.description_bbcode)
 
         if obj.description:
-            return UtilsService.detect_language(strip_html(obj.description))
+            return UtilsService.detect_language(obj.description)
 
-        return 'unknown'
+        return 'en'
 
     class Meta:
         model = Image
