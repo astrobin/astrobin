@@ -1,4 +1,4 @@
-from pybb.models import Topic
+from pybb.models import ForumReadTracker, Topic, TopicReadTracker
 from rest_framework import serializers
 
 
@@ -18,7 +18,16 @@ class TopicSerializer(serializers.ModelSerializer):
         if not user.is_authenticated:
             return False
 
-        return obj.readed_by.filter(pk=self.context['request'].user.pk).exists()
+        topic_tracker = TopicReadTracker.objects.filter(user=user, topic=obj).first()
+
+        if topic_tracker:
+            return topic_tracker.time_stamp >= obj.updated
+        else:
+            forum_tracker = ForumReadTracker.objects.filter(user=user, forum=obj.forum).first()
+            if forum_tracker:
+                return forum_tracker.time_stamp >= obj.updated
+
+        return False
 
     class Meta:
         model = Topic
