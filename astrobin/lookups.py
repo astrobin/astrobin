@@ -61,9 +61,10 @@ def autocomplete_usernames(request):
             return HttpResponse(simplejson.dumps([]))
 
     from common.services.caching_service import CachingService, JSON_CACHE
+    from django.db.models import Q, Value, F, Case, When, FloatField
 
     q = request.GET['q']
-    limit = 10
+    limit = 20
     referer_header = request.META.get('HTTP_REFERER', '')
     from_forums = '/forum' in referer_header
     from_image_page = re.match(r'%s\/?([a-zA-Z0-9]{6})\/.*' % settings.BASE_URL, referer_header)
@@ -81,12 +82,32 @@ def autocomplete_usernames(request):
     def filter_by_distance(queryset: QuerySet, q: str) -> QuerySet:
         if 'postgresql' in settings.DATABASES['default']['ENGINE']:
             return queryset.annotate(
-                name=Lower(Concat('real_name', Value(' '), 'user__username'))
+                # Create separate fields for name variations
+                full_name=Lower(F('real_name')),
+                username_lower=Lower(F('user__username')),
+                combined_name=Lower(Concat('real_name', Value(' '), 'user__username'))
             ).annotate(
-                distance=TrigramDistance('name', q.lower())
+                # Add direct match indicators with priority
+                exact_match=Case(
+                    When(real_name__iexact=q, then=Value(0.0)),
+                    default=Value(1.0),
+                    output_field=FloatField()
+                ),
+                # Use multiple distance metrics for better matching
+                name_distance=TrigramDistance('full_name', q.lower()),
+                combined_distance=TrigramDistance('combined_name', q.lower())
             ).filter(
-                Q(distance__lte=0.7) | Q(user__username__icontains=q) | Q(real_name__icontains=q)
-            ).order_by('distance')
+                # Keep the original filter conditions
+                Q(name_distance__lte=0.7) |
+                Q(combined_distance__lte=0.7) |
+                Q(user__username__icontains=q) |
+                Q(real_name__icontains=q)
+            ).order_by(
+                # Order by exact match first, then by distances
+                'exact_match',
+                'name_distance',
+                'combined_distance'
+            )
         else:
             return queryset.annotate(
                 name=Lower(Concat('real_name', Value(' '), 'user__username'))
