@@ -4,103 +4,11 @@ from typing import List, Optional
 
 import bleach
 import requests
-from django.conf import settings
-from lingua import Language, LanguageDetectorBuilder
-from langdetect import detect as langdetect_detect, LangDetectException
+from langdetect import LangDetectException, detect
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 
-logger = logging.getLogger('astrobin')
-
-# Map Django language codes to Lingua Language enum
-# The mapping isn't always 1:1, so we need to handle some special cases
-DJANGO_TO_LINGUA_LANG_MAP = {
-    'en': Language.ENGLISH,
-    'en-GB': Language.ENGLISH,  # Lingua doesn't distinguish between US/GB English
-    'it': Language.ITALIAN,
-    'es': Language.SPANISH,
-    'fr': Language.FRENCH,
-    'fi': Language.FINNISH,
-    'de': Language.GERMAN,
-    'nl': Language.DUTCH,
-    'tr': Language.TURKISH,
-    'sq': Language.ALBANIAN,
-    'pl': Language.POLISH,
-    'pt': Language.PORTUGUESE,
-    'el': Language.GREEK,
-    'uk': Language.UKRAINIAN,
-    'ru': Language.RUSSIAN,
-    'ja': Language.JAPANESE,
-    'zh-hans': Language.CHINESE,  # Simplified Chinese
-    'hu': Language.HUNGARIAN,
-    'be': Language.BELARUSIAN,
-    'sv': Language.SWEDISH,
-}
-
-# Global detector instance that will be initialized at application startup
-_LANGUAGE_DETECTOR = None
-
-
-def build_lingua_detector():
-    """
-    Builds and returns a new language detector.
-    This is called once during application startup via AppConfig.ready()
-    """
-    global _LANGUAGE_DETECTOR
-    import time
-    start_time = time.time()
-
-    # Get supported languages from settings if available, or use default set
-    try:
-        supported_lang_codes = [code for code, name in settings.LANGUAGES]
-        lingua_languages = [
-            DJANGO_TO_LINGUA_LANG_MAP.get(code) for code in supported_lang_codes
-            if code in DJANGO_TO_LINGUA_LANG_MAP
-        ]
-        # Filter out None values
-        lingua_languages = [lang for lang in lingua_languages if lang is not None]
-
-        if not lingua_languages:  # Fallback if we couldn't map any languages
-            lingua_languages = [Language.ENGLISH]
-            logger.warning("Couldn't map any Django languages to Lingua. Using English only.")
-    except (ImportError, AttributeError):
-        # Fallback to common languages if settings are not available
-        lingua_languages = [
-            Language.ENGLISH, Language.SPANISH, Language.FRENCH, Language.GERMAN,
-            Language.ITALIAN, Language.PORTUGUESE, Language.CHINESE
-        ]
-        logger.warning("Could not load languages from Django settings. Using default set.")
-
-    # Build the detector
-    logger.info(f"Initializing Lingua language detector with {len(lingua_languages)} languages")
-    if getattr(settings, 'DEBUG', False):
-        logger.debug(
-            f"Languages: {', '.join([lang.name for lang in lingua_languages])}"
-        )
-
-    detector = LanguageDetectorBuilder.from_languages(*lingua_languages) \
-        .with_preloaded_language_models() \
-        .with_low_accuracy_mode() \
-        .build()
-
-    initialization_time = time.time() - start_time
-    logger.info(f"Lingua language detector initialized in {initialization_time:.2f} seconds")
-
-    _LANGUAGE_DETECTOR = detector
-    return detector
-
-
-# Function to get the detector instance
-def get_language_detector():
-    """
-    Returns the global detector instance. This should always be initialized
-    during application startup, but includes a fallback just in case.
-    """
-    global _LANGUAGE_DETECTOR
-    if _LANGUAGE_DETECTOR is None:
-        logger.warning("Lingua detector not initialized at startup; initializing now")
-        return build_lingua_detector()
-    return _LANGUAGE_DETECTOR
+logger = logging.getLogger(__name__)
 
 
 class UtilsService:
@@ -732,97 +640,12 @@ red rectangle,hd 44179
 
     @staticmethod
     def detect_language(text: str) -> Optional[str]:
-        """
-        Detects the language of a given text. Uses a multi-level approach:
-        1. Returns early if text is empty or too short
-        2. Uses lingua for primary detection (with a short timeout)
-        3. Falls back to langdetect if lingua fails or times out
-        """
-
-        # Quick return for empty text
-        if not text or len(text.strip()) == 0:
-            return None
-
         # Strip bbcode and HTML before detection
         clean_text = UtilsService.strip_bbcode(text)
         clean_text = bleach.clean(clean_text, tags=[], strip=True)
 
-        # Only attempt detection if we have enough text
-        clean_text = clean_text.strip()
-        if len(clean_text) < 10:
-            return None
-
-        # Performance optimization: limit text length for detection
-        # 50 chars is usually enough for accurate language detection
-        # Shorter text = faster detection
-        if len(clean_text) > 75:
-            clean_text = clean_text[:75]
-
-        # Try lingua first (with timeout protection)
-        detected_language = None
         try:
-            import threading
-            import queue
-
-            # Use a queue to get the result from the thread
-            result_queue = queue.Queue()
-
-            # Function to run detection in a thread
-            def detect_with_lingua():
-                try:
-                    # Use the pre-initialized global detector
-                    result = _LANGUAGE_DETECTOR.detect_language_of(clean_text)
-                    result_queue.put(result)
-                except Exception as e:
-                    result_queue.put(e)
-
-            # Start detection in a separate thread
-            detection_thread = threading.Thread(target=detect_with_lingua)
-            detection_thread.daemon = True
-
-            detection_thread.start()
-
-            # Wait for result with timeout (100ms)
-            detection_thread.join(0.1)
-
-            if detection_thread.is_alive():
-                # Detection is taking too long, log and proceed to langdetect
-                logger.warning(f"Lingua detection timed out after 100ms for text: '{clean_text[:30]}...'")
-                # Thread will continue running, but we won't wait for it
-            else:
-                # Get the result from the queue
-                detection_result = result_queue.get(block=False)
-
-                if isinstance(detection_result, Exception):
-                    # Detection raised an exception
-                    logger.warning(f"Lingua threw exception: {str(detection_result)}")
-                else:
-                    detected_language = detection_result
-        except Exception as e:
-            # If thread handling fails, log and proceed to langdetect
-            logger.warning(f"Thread handling error: {str(e)}")
-
-        # Process lingua result if we got one
-        if detected_language is not None:
-            # Convert Language enum to ISO 639-1 code
-            lang_code = detected_language.iso_code_639_1.name.lower()
-            return lang_code
-
-        # Fallback to langdetect (which is faster but less accurate)
-        try:
-            lang_code = langdetect_detect(clean_text)
-
-            if lang_code:
-                return lang_code
-            else:
-                # If all detection methods fail, default to English
-                logger.warning(
-                    f"All language detection methods failed, defaulting to English for: '{clean_text[:30]}...'"
-                )
-                return 'en'
-        except (LangDetectException, Exception) as e:
-            # Catch both LangDetectException and general exceptions
+            return detect(clean_text)
+        except LangDetectException as e:
             logger.warning(f"Langdetect failed with error: {str(e)}")
-
-            # Default to English as last resort
-            return 'en'
+            return 'unknown'

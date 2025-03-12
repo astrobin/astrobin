@@ -263,7 +263,7 @@ class ImageSerializer(serializers.ModelSerializer):
         if obj.description:
             return UtilsService.detect_language(obj.description)
 
-        return 'en'
+        return 'unknown'
 
     class Meta:
         model = Image

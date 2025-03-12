@@ -63,26 +63,10 @@ class AstroBinAppConfig(AppConfig):
         from astrobin import signals  # noqa
         from astrobin_apps_notifications import signals  # noqa
         from astrobin.locale_extras import LOCALE_EXTRAS  # noqa
+        from langdetect import DetectorFactory
 
         self.init_actstream()
         self.init_avatar()
         self.init_search()
-        self.init_language_detection()
-        
-    def init_language_detection(self):
-        """Initialize language detection components"""
-        # Initialize langdetect (used as fallback)
-        from langdetect import DetectorFactory
+
         DetectorFactory.seed = 0
-        
-        # Initialize lingua at startup
-        import logging
-        logger = logging.getLogger('astrobin')
-        
-        try:
-            logger.info("Initializing language detection at application startup")
-            from astrobin.services.utils_service import build_lingua_detector
-            build_lingua_detector()
-        except Exception as e:
-            logger.error(f"Failed to initialize Lingua language detector: {str(e)}")
-            logger.exception(e)
