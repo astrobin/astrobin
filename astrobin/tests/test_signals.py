@@ -907,3 +907,71 @@ class SignalsTest(TestCase):
         image.save()
 
         update_equipment_preset_total_integration.assert_called_with(preset.pk)
+        
+    @patch('astrobin.search_indexes.UserIndex.remove_object')
+    @patch('astrobin.search_indexes.ImageIndex.remove_object')
+    @patch('common.services.SearchIndexUpdateService.update_index')
+    def test_suspended_user_is_removed_from_search_indexes(self, update_index, remove_image_object, remove_user_object):
+        user = Generators.user()
+        
+        # Create a few images with this user
+        image1 = Generators.image(user=user, moderator_decision=ModeratorDecision.APPROVED)
+        image2 = Generators.image(user=user, moderator_decision=ModeratorDecision.APPROVED)
+        
+        # Reset mocks to clear any calls from image creation
+        remove_user_object.reset_mock()
+        remove_image_object.reset_mock()
+        update_index.reset_mock()
+        
+        # Suspend the user
+        user.userprofile.suspended = timezone.now()
+        user.userprofile.save()
+        
+        # Check that the user and images were removed from search indexes
+        remove_user_object.assert_called_once_with(user)
+        self.assertEqual(remove_image_object.call_count, 2)  # Once for each image
+        
+        # Images should be in the remove_image_object calls
+        remove_image_object.assert_any_call(image1)
+        remove_image_object.assert_any_call(image2)
+        
+        # update_index should not have been called
+        self.assertFalse(update_index.called)
+        
+    @patch('astrobin.search_indexes.UserIndex.remove_object')
+    @patch('astrobin.search_indexes.ImageIndex.remove_object')
+    @patch('common.services.SearchIndexUpdateService.update_index')
+    def test_unsuspended_user_is_added_back_to_search_indexes(self, update_index, remove_image_object, remove_user_object):
+        user = Generators.user()
+        user.userprofile.suspended = timezone.now()
+        user.userprofile.save()
+        
+        # Create a few images with this user
+        image1 = Generators.image(user=user, moderator_decision=ModeratorDecision.APPROVED)
+        image2 = Generators.image(user=user, moderator_decision=ModeratorDecision.APPROVED)
+        image3 = Generators.image(user=user, moderator_decision=ModeratorDecision.APPROVED, is_wip=True)
+        
+        # Reset mocks to clear any calls from image creation
+        remove_user_object.reset_mock()
+        remove_image_object.reset_mock()
+        update_index.reset_mock()
+        
+        # Unsuspend the user
+        user.userprofile.suspended = None
+        user.userprofile.save()
+        
+        # Check that the user was added back to search indexes
+        self.assertFalse(remove_user_object.called)
+        self.assertFalse(remove_image_object.called)
+        
+        # update_index should have been called for the user and non-WIP images
+        update_index.assert_any_call(user)
+        update_index.assert_any_call(image1)
+        update_index.assert_any_call(image2)
+        
+        # WIP images should not be reindexed
+        with self.assertRaises(AssertionError):
+            update_index.assert_any_call(image3)
+            
+        # Total calls should be 3 (user + 2 non-WIP images)
+        self.assertEqual(update_index.call_count, 3)
