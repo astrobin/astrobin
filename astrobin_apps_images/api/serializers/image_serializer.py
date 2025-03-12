@@ -53,8 +53,8 @@ class ImageSerializer(serializers.ModelSerializer):
     user_avatar = AvatarField(source='user', read_only=True)
     allow_ads = serializers.SerializerMethodField(read_only=True)
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
-    w = serializers.IntegerField()
-    h = serializers.IntegerField()
+    w = serializers.IntegerField(required=False)
+    h = serializers.IntegerField(required=False)
     uploader_in_progress = serializers.NullBooleanField(read_only=True)
     key_value_tags = KeyValueTagsSerializerField(source='keyvaluetags')
 

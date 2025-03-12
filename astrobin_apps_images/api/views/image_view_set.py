@@ -375,8 +375,17 @@ class ImageViewSet(
         return Response(serializer.data)
 
     def update(self, request, *args, **kwargs):
+        # If w or h are None, remove them from the request data, so they're not updated
+        if 'w' in request.data and request.data['w'] is None:
+            request.data.pop('w')
+        if 'h' in request.data and request.data['h'] is None:
+            request.data.pop('h')
+            
         equipment_data = self._prepare_equipment_data(request)
-
+        
+        # Add partial=True to support partial updates
+        kwargs['partial'] = True
+        
         response: Response = super().update(request, *args, **kwargs)
         instance: Image = self.get_object()
 
