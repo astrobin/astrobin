@@ -80,7 +80,6 @@ def build_lingua_detector():
 
     detector = LanguageDetectorBuilder.from_languages(*lingua_languages) \
         .with_preloaded_language_models() \
-        .with_low_accuracy_mode() \
         .build()
 
     initialization_time = time.time() - start_time
