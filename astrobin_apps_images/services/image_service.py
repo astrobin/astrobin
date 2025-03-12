@@ -44,6 +44,7 @@ from astrobin.models import (
     Collection, DeepSky_Acquisition, Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES,
     SolarSystem_Acquisition,
 )
+from astrobin.monkeypatch import _get_video_dimensions
 from astrobin.moon import MoonPhase
 from astrobin.services.gear_service import GearService
 from astrobin.services.utils_service import UtilsService
@@ -621,12 +622,12 @@ class ImageService:
         else:
             revision = self.image
 
-        if revision.w and revision.h:
-            w, h = revision.w, revision.h
-        else:
-            w, h = 1024, 1024
+        if not revision.w or not revision.h:
+            temp_file = ImageService(self.image).get_local_video_file(revision_label)
+            temp_path = temp_file.name
+            revision.w, revision.h = _get_video_dimensions(temp_path)
 
-        placeholder_url = f'https://placehold.co/{w}x{h}/222/333?text=PREVIEW+NOT+READY&font=roboto'
+        placeholder_url = f'https://placehold.co/{revision.w}x{revision.h}/222/333?text=PREVIEW+NOT+READY&font=roboto'
         response = UtilsService.http_with_retries(placeholder_url, stream=True)
         if response.status_code == 200:
             img_temp = NamedTemporaryFile()
@@ -643,18 +644,28 @@ class ImageService:
             if save:
                 revision.save(update_fields=['image_file'], keep_deleted=True)
 
-    def get_local_video_file(self) -> File:
-        chunk_size = 4096
-        _, file_extension = os.path.splitext(self.image.uploader_name)
+    def get_local_video_file(self, revision_label: Optional[str] = None) -> Optional[File]:
+        revision: Union[Image, ImageRevision]
 
-        filename = f'temp_video_file_{self.image.__class__.__name__}_{self.image.id}{file_extension}'
+        if revision_label:
+            try:
+                revision = self.get_revision(revision_label)
+            except ImageRevision.DoesNotExist:
+                return None
+        else:
+            revision = self.image
+
+        chunk_size = 4096
+        _, file_extension = os.path.splitext(revision.uploader_name)
+
+        filename = f'temp_video_file_{revision.__class__.__name__}_{revision.id}{file_extension}'
         temp_file_path = os.path.join('/astrobin-temporary-files/files', filename)
 
         if os.path.exists(temp_file_path):
             logger.debug(f'get_local_video_file: using existing temporary file {temp_file_path}')
             return File(open(temp_file_path, 'rb'))
 
-        with self.image.video_file.open() as f:
+        with revision.video_file.open() as f:
             with open(temp_file_path, 'wb') as temp_file:
                 while chunk := f.read(chunk_size):
                     temp_file.write(chunk)
@@ -1308,6 +1319,8 @@ class ImageService:
 
     @staticmethod
     def strip_video_metadata(path: str, mime_type: str) -> None:
+        # Sometimes this is reported instead of the correct video/x-msvideo
+        mimetypes.add_type('video/avi', '.avi')
         extension = mimetypes.guess_extension(mime_type)
         temp_path = f'{path}-stripped{extension}'
 

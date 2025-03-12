@@ -42,7 +42,7 @@ class FileValidator(object):
 
     extension_message = _("Extension '%(extension)s' not allowed. Allowed extensions are: '%(allowed_extensions)s.'")
     mime_message = _("MIME type '%(mimetype)s' is not valid. Allowed types are: %(allowed_mimetypes)s.")
-    min_size_message = _('The current file %(size)s, which is too small. The minumum file size is %(allowed_size)s.')
+    min_size_message = _('The current file %(size)s, which is too small. The minimum file size is %(allowed_size)s.')
     max_size_message = _('The current file %(size)s, which is too large. The maximum file size is %(allowed_size)s.')
 
     def __init__(self, *args, **kwargs):
@@ -68,7 +68,7 @@ class FileValidator(object):
 
         # Check the content type
         mimetype = mimetypes.guess_type(value.name)[0]
-        if self.allowed_mimetypes and not mimetype in self.allowed_mimetypes:
+        if self.allowed_mimetypes and mimetype not in self.allowed_mimetypes:
             message = self.mime_message % {
                 'mimetype': mimetype,
                 'allowed_mimetypes': ', '.join(self.allowed_mimetypes)
