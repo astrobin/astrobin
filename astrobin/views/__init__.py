@@ -2146,129 +2146,25 @@ def image_revision_upload_process(request):
     return HttpResponseRedirect(reverse('image_edit_revision', args=(image_revision.pk,)))
 
 
-@never_cache
 @require_GET
 def astrophotographers_list(request):
-    if request.user.is_authenticated and \
-            request.user.userprofile.exclude_from_competitions and \
-            not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    sqs = SearchQuerySet()
-
-    default_sorting = [
-        '-normalized_likes',
-        '-likes',
-        '-images',
-    ]
-
-    sort = request.GET.get('sort', default_sorting)
-
-    if sort in ('', 'default'):
-        sort = default_sorting
-
-    if sort not in (
-            default_sorting,
-
-            'normalized_likes',
-            'followers',
-            'images',
-            'likes',
-            'integration',
-
-            '-normalized_likes',
-            '-followers',
-            '-images',
-            '-likes',
-            '-integration',
-            '-top_pick_nominations',
-            '-top_picks',
-            '-iotds',
-
-            'normalized_likes',
-            'followers',
-            'images',
-            'likes',
-            'integration',
-            'top_pick_nominations',
-            'top_picks',
-            'iotds',
-    ):
-        raise Http404
-
-    if not isinstance(sort, list):
-        sort = [sort, ]
-
-    queryset = sqs.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
-
-    if 'q' in request.GET:
-        queryset = queryset.filter(text__contains=request.GET.get('q'))
-
-    return object_list(
-        request,
-        queryset=queryset,
-        template_name='astrophotographers_list.html',
-        template_object_name='user',
-    )
+    from django.views.generic import RedirectView
+    from common.services.app_redirection_service import AppRedirectionService
+    
+    class AstrophotographersListRedirectView(RedirectView):
+        permanent = False
+        query_string = True
+        
+        def get_redirect_url(self, *args, **kwargs):
+            return AppRedirectionService.astrophotographers_list_redirect(self.request)
+    
+    return AstrophotographersListRedirectView.as_view()(request)
 
 
-@never_cache
 @require_GET
 def contributors_list(request):
-    if request.user.is_authenticated and \
-            request.user.userprofile.exclude_from_competitions and \
-            not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    queryset = SearchQuerySet()
-
-    default_sorting = [
-        # DEPRECATED: remove once contribution_index is populated
-        '-contribution_index',
-        '-comment_likes_received',
-        '-forum_post_likes_received',
-        '-comments_written',
-        '-forum_posts'
-    ]
-
-    sort = request.GET.get('sort', default_sorting)
-
-    if sort in ('', 'default'):
-        sort = default_sorting
-
-    if sort not in (
-            default_sorting,
-
-            'comments_written',
-            'comments',
-            'comment_likes_received',
-            'forum_posts',
-            'forum_post_likes_received',
-            'contribution_index',
-
-            '-comments_written',
-            '-comments',
-            '-comment_likes_received',
-            '-forum_posts',
-            '-forum_post_likes_received',
-            '-contribution_index'
-    ):
-        raise Http404
-
-    if not isinstance(sort, list):
-        sort = [sort, ]
-
-    queryset = queryset.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
-
-    if 'q' in request.GET:
-        queryset = queryset.filter(text__contains=request.GET.get('q'))
-
-    return object_list(
-        request,
-        queryset=queryset,
-        template_name='contributors_list.html',
-        template_object_name='user',
-    )
+    # Redirect to the same endpoint as astrophotographers_list
+    return astrophotographers_list(request)
 
 
 @require_GET
