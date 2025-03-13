@@ -148,3 +148,19 @@ class AppRedirectionService:
             return step_map[step]
         except IndexError:
             return 1
+            
+    @staticmethod
+    def astrophotographers_list_redirect(request) -> str:
+        """
+        Redirects to the astrophotographers list in the frontend app
+        """
+        url = AppRedirectionService.redirect('/explore/astrophotographers-list')
+        
+        # Preserve query parameters if any
+        if request.GET:
+            query_params = request.GET.dict()
+            query_string = urllib.parse.urlencode(query_params)
+            if query_string:
+                url = f"{url}?{query_string}"
+                
+        return url
