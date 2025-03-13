@@ -22,7 +22,26 @@ class UserSearchViewSet(EncodedSearchViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [ReadOnly]
     filter_backends = (HaystackFilter, HaystackOrderingFilter)
-    ordering_fields = ('_score', 'username', 'date_joined', 'last_login')
+    ordering_fields = (
+        '_score', 
+        'username', 
+        'display_name',
+        'avatar_url',
+        'images',
+        'total_likes_received',
+        'followers',
+        'contribution_index',
+        'normalized_likes',
+        'integration',
+        'top_pick_nominations',
+        'top_picks',
+        'iotds',
+        'comments_written',
+        'comments_received',  # Updated to match serializer field name
+        'comment_likes_received',
+        'forum_posts',
+        'forum_post_likes_received'
+    )
     ordering = ('-_score',)
     pagination_class = PageSizePagination
 
@@ -41,6 +60,29 @@ class UserSearchViewSet(EncodedSearchViewSet):
 
         if text.get('value'):
             log.debug(f"Searching for: {text.get('value')}")
-            queryset = SearchQuerySet().models(User).filter(display_name=AutoQuery(text.get('value')))
+            # Instead of creating a new queryset, we filter the existing one
+            queryset = queryset.filter(display_name=AutoQuery(text.get('value')))
+
+        # Check if ordering parameter exists in the params and apply it explicitly
+        ordering = params.get('ordering')
+        if ordering:
+            log.debug(f"Explicitly ordering by: {ordering}")
+            order_direction = ''
+            order_field = ordering
+            
+            # Check if it's a descending order (starts with minus)
+            if ordering.startswith('-'):
+                order_direction = '-'
+                order_field = ordering[1:]  # Remove the minus sign
+            
+            # Special case for comments_received which maps to comments in the index
+            if order_field == 'comments_received':
+                order_field = 'comments'
+                
+            # Apply the ordering to the queryset
+            if order_field in self.ordering_fields or order_field == 'comments':
+                queryset = queryset.order_by(f"{order_direction}{order_field}")
+            else:
+                log.warning(f"Ordering field '{order_field}' not in allowed ordering_fields")
 
         return queryset
