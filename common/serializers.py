@@ -33,13 +33,64 @@ class ContentTypeSerializer(serializers.ModelSerializer):
 
 
 class AvatarField(serializers.Field):
-    def to_representation(self, user):
-        return avatar_url(user, 40)
+    def to_representation(self, user: User) -> Optional[str]:
+        try:
+            # Add a timestamp parameter to force cache busting when needed
+            from django.core.cache import cache
+            
+            # Check if there's a force refresh flag in cache
+            force_refresh = cache.get(f"avatar_force_refresh_{user.id}")
+            
+            # Get the URL normally
+            url = avatar_url(user, 40)
+            
+            # Add a cache-busting timestamp if force refresh is needed
+            if force_refresh:
+                import time
+                timestamp = int(time.time())
+                
+                # Add timestamp as query parameter to bust browser cache
+                if '?' in url:
+                    url = f"{url}&_ts={timestamp}"
+                else:
+                    url = f"{url}?_ts={timestamp}"
+                    
+                # Clear the force refresh flag after using it once
+                cache.delete(f"avatar_force_refresh_{user.id}")
+                
+            return url
+        except Exception as e:
+            log.exception(e)
+            return None
 
 
 class LargeAvatarField(serializers.Field):
-    def to_representation(self, user):
-        return avatar_url(user, 200)
+    def to_representation(self, user: User) -> Optional[str]:
+        try:
+            # Add a timestamp parameter to force cache busting when needed
+            from django.core.cache import cache
+            
+            # Check if there's a force refresh flag in cache
+            force_refresh = cache.get(f"avatar_force_refresh_{user.id}")
+            
+            # Get the URL normally
+            url = avatar_url(user, 200)
+            
+            # Add a cache-busting timestamp if force refresh is needed
+            if force_refresh:
+                import time
+                timestamp = int(time.time())
+                
+                # Add timestamp as query parameter to bust browser cache
+                if '?' in url:
+                    url = f"{url}&_ts={timestamp}"
+                else:
+                    url = f"{url}?_ts={timestamp}"
+                
+            return url
+        except Exception as e:
+            log.exception(e)
+            return None
 
 
 class UserSerializer(serializers.ModelSerializer):
