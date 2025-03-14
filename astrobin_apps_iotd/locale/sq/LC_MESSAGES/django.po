@@ -1,10 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: sq\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, fuzzy
 msgid "Sorry, it's now too late to retract this submission."
@@ -15,12 +17,24 @@ msgid "Sorry, it's now too late to retract this vote."
 msgstr "Na vjen keq, tani është shumë vonë për të tërhequr këtë votë."
 
 #, fuzzy
+msgid "Newest first"
+msgstr "Më të rinjtë së pari"
+
+#, fuzzy
+msgid "Oldest first"
+msgstr "Më të vjetrit së pari"
+
+#, fuzzy
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Nuk jeni anëtar i bordit të Dorëzuesve të IOTD."
 
 #, fuzzy
 msgid "You cannot submit your own image."
 msgstr "Nuk mund të dorëzoni imazhin tuaj."
+
+#, fuzzy
+msgid "You cannot submit an image you collaborated to."
+msgstr "Nuk mund të dërgoni një imazh me të cilin keni bashkëpunuar."
 
 #, fuzzy
 msgid "Images in the staging area cannot be submitted."
@@ -35,188 +49,6 @@ msgid "This user has been banned from competitions."
 msgstr "Ky përdorues është ndaluar nga garat."
 
 #, fuzzy
-#, python-format
-msgid ""
-"You cannot submit an image that was published more than %(max_days)s days "
-"ago."
-msgstr ""
-"Nuk mund të dorëzoni një imazh që është publikuar më shumë se %(max_days)s "
-"ditë më parë."
-
-#, fuzzy
-msgid "Users with a Free membership cannot participate in the IOTD."
-msgstr "Përdoruesit me anëtarësi Falas nuk mund të marrin pjesë në IOTD."
-
-#, fuzzy
-msgid "This image has already been an IOTD in the past"
-msgstr "Kjo imazh ka qenë tashmë IOTD në të kaluarën."
-
-#, fuzzy
-#, python-format
-msgid "You have already submitted %(max_allowed)s images today."
-msgstr "Keni dorëzuar tashmë %(max_allowed)s imazhe sot."
-
-#, fuzzy
-msgid "You are not a member of the IOTD Reviewers board."
-msgstr "Nuk jeni anëtar i bordit të Rishikuesve të IOTD."
-
-#, fuzzy
-msgid "You cannot vote for your own image."
-msgstr "Nuk mund të votoni për imazhin tuaj."
-
-#, fuzzy
-msgid "Images in the staging area cannot be voted for."
-msgstr "Imazhet në zonën e skenimit nuk mund të votohet."
-
-#, fuzzy
-msgid "You cannot vote for an image that has not been submitted."
-msgstr "Nuk mund të votoni për një imazh që nuk është dorëzuar."
-
-#, fuzzy
-msgid "You cannot vote for your own submission."
-msgstr "Nuk mund të votoni për dorëzimin tuaj."
-
-#, fuzzy
-#, python-format
-msgid ""
-"You cannot vote for an image that has been in the submission queue for more "
-"than %(max_days)s days."
-msgstr ""
-"Nuk mund të votoni për një imazh që ka qenë në radhën e dorëzimit për më "
-"shumë se %(max_days)s ditë."
-
-#, fuzzy
-#, python-format
-msgid "You have already voted for %(max_allowed)s images today."
-msgstr "Keni votuar tashmë për %(max_allowed)s imazhe sot."
-
-#, fuzzy
-msgid "You are not a member of the IOTD Judges board."
-msgstr "Nuk jeni anëtar i bordit të Gjyqtarëve të IOTD."
-
-#, fuzzy
-msgid "You cannot elect your own image."
-msgstr "Nuk mund të zgjidhni imazhin tuaj."
-
-#, fuzzy
-msgid "Images in the staging area cannot be elected."
-msgstr "Imazhet në zonën e skenimit nuk mund të zgjidhen."
-
-#, fuzzy
-msgid "You cannot elect an image that has not been voted."
-msgstr "Nuk mund të zgjidhni një imazh që nuk është votuar."
-
-#, fuzzy
-msgid "You cannot elect your own submission."
-msgstr "Nuk mund të zgjidhni dorëzimin tuaj."
-
-#, fuzzy
-msgid "You cannot elect an image you voted for."
-msgstr "Nuk mund të zgjidhni një imazh për të cilin keni votuar."
-
-#, fuzzy
-#, python-format
-msgid ""
-"You cannot elect an image that has been in the review queue for more than "
-"%(max_days)s days."
-msgstr ""
-"Nuk mund të zgjidhni një imazh që ka qenë në radhën e shqyrtimit për më "
-"shumë se %(max_days)s ditë."
-
-#, fuzzy
-#, python-format
-msgid "You have already elected %(max_allowed)s images today."
-msgstr "Keni zgjedhur tashmë %(max_allowed)s imazhe sot."
-
-#, fuzzy
-#, python-format
-msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgstr "Keni planifikuar tashmë %(max_allowed)s IOTD."
-
-#, fuzzy
-msgid "You cannot unelect your own submission."
-msgstr "Nuk mund të hiqni zgjedhjen e dorëzimit tuaj."
-
-#, fuzzy
-msgid "You cannot unelect an image you voted for."
-msgstr "Nuk mund të hiqni zgjedhjen e një imazhi për të cilin keni votuar."
-
-#, fuzzy
-msgid "You cannot unelect an image elected by another judge."
-msgstr ""
-"Nuk mund të hiqni zgjedhjen e një imazhi të zgjedhur nga një gjyqtar tjetër."
-
-#, fuzzy
-msgid "You cannot unelect a past or current IOTD."
-msgstr "Nuk mund të hiqni zgjedhjen e një IOTD të kaluar ose aktual."
-
-#, fuzzy
-#, python-format
-msgid "you already selected %s IOTD today (UTC)"
-msgstr "ju keni zgjedhur tashmë %s IOTD sot (UTC)"
-
-#, fuzzy
-#, python-format
-msgid "you already selected %s scheduled IOTDs"
-msgstr "ju keni zgjedhur tashmë %s IOTD të planifikuara"
-
-#, fuzzy
-#, python-format
-msgid "there are already %s scheduled IOTDs"
-msgstr "ka tashmë %s IOTD të planifikuara"
-
-#, fuzzy
-msgid "Image of the day"
-msgstr "Imazhi i ditës"
-
-#, fuzzy
-msgid "IOTD Judgement Queue"
-msgstr "Radhë e Gjykimit të IOTD"
-
-#, fuzzy
-msgid ""
-"Please select the images that you want to elect to IOTD by clicking on them."
-msgstr ""
-"Ju lutemi zgjidhni imazhet që dëshironi të zgjidhni për IOTD duke klikuar "
-"mbi to."
-
-#, fuzzy
-#, python-format
-msgid ""
-"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
-"<strong>%(time)s</strong>."
-msgstr ""
-"Na vjen keq, nuk mund të zgjidhni një IOTD tani: %(reason)s. Ju lutemi "
-"provoni përsëri në <strong>%(time)s</strong>."
-
-#, fuzzy
-msgid "This queue is currently empty."
-msgstr "Kjo radhë është aktualisht e zbrazët."
-
-#, fuzzy
-msgid "Error"
-msgstr "Gabim"
-
-#, fuzzy
-msgid "You cannot unelect an IOTD elected by another judge."
-msgstr ""
-"Nuk mund të hiqni zgjedhjen e një IOTD të zgjedhur nga një gjyqtar tjetër."
-
-#, fuzzy
-#, python-format
-msgid "All IOTD slots for the next %(days)s days are already filled."
-msgstr ""
-"Të gjitha vendet IOTD për %(days)s ditët e ardhshme janë tashmë të mbushura."
-
-#, fuzzy
-msgid "Newest first"
-msgstr "Më të rinjtë së pari"
-
-#, fuzzy
-msgid "Oldest first"
-msgstr "Më të vjetrit së pari"
-
-#, fuzzy
 msgid "You cannot submit an image that you already dismissed."
 msgstr "Nuk mund të dorëzoni një imazh që e keni hedhur poshtë."
 
@@ -227,6 +59,42 @@ msgid ""
 msgstr ""
 "Nuk mund të dorëzoni një imazh që është hedhur poshtë nga %(number)s anëtarë "
 "të stafit të IOTD."
+
+#, python-format
+msgid ""
+"You cannot submit an image that was submitted for consideration more than "
+"%(max_days)s day(s) ago."
+msgstr ""
+"Nuk mund të dërgoni një imazh që është dërguar për shqyrtim më shumë se "
+"%(max_days)s ditë më parë."
+
+#, fuzzy
+msgid "This image has already been an IOTD in the past"
+msgstr "Kjo imazh ka qenë tashmë IOTD në të kaluarën."
+
+#, python-format
+msgid "You have already submitted %(max_allowed)s image(s) today."
+msgstr "Keni dërguar tashmë %(max_allowed)s imazh(e) sot."
+
+#, fuzzy
+msgid "This image has been disqualified from the IOTD/TP process."
+msgstr "Ky imazh është diskualifikuar nga procesi IOTD/TP."
+
+#, fuzzy
+msgid "You are not a member of the IOTD Reviewers board."
+msgstr "Nuk jeni anëtar i bordit të Rishikuesve të IOTD."
+
+#, fuzzy
+msgid "You cannot vote for your own image."
+msgstr "Nuk mund të votoni për imazhin tuaj."
+
+#, fuzzy
+msgid "You cannot vote for an image you collaborated to."
+msgstr "Nuk mund të votoni për një imazh me të cilin keni bashkëpunuar."
+
+#, fuzzy
+msgid "Images in the staging area cannot be voted for."
+msgstr "Imazhet në zonën e skenimit nuk mund të votohet."
 
 #, fuzzy
 msgid "You cannot vote for an image that you already dismissed."
@@ -241,17 +109,12 @@ msgstr ""
 "anëtarë të stafit të IOTD."
 
 #, fuzzy
-#, python-format
-msgid ""
-"You cannot submit an image that was published more than %(max_days)s day(s) "
-"ago."
-msgstr ""
-"Nuk mund të dërgoni një imazh që është publikuar më shumë se %(max_days)s "
-"ditë më parë."
+msgid "You cannot vote for an image that has not been submitted."
+msgstr "Nuk mund të votoni për një imazh që nuk është dorëzuar."
 
-#, python-format
-msgid "You have already submitted %(max_allowed)s image(s) today."
-msgstr "Keni dërguar tashmë %(max_allowed)s imazh(e) sot."
+#, fuzzy
+msgid "You cannot vote for your own submission."
+msgstr "Nuk mund të votoni për dorëzimin tuaj."
 
 #, python-format
 msgid ""
@@ -273,6 +136,22 @@ msgstr ""
 msgid "You have already voted for %(max_allowed)s image(s) today."
 msgstr "Keni votuar tashmë për %(max_allowed)s imazh(e) sot."
 
+#, fuzzy
+msgid "You are not a member of the IOTD Judges board."
+msgstr "Nuk jeni anëtar i bordit të Gjyqtarëve të IOTD."
+
+#, fuzzy
+msgid "You cannot elect your own image."
+msgstr "Nuk mund të zgjidhni imazhin tuaj."
+
+#, fuzzy
+msgid "You cannot elect an image you collaborated to."
+msgstr "Nuk mund të zgjidhni një imazh me të cilin keni bashkëpunuar."
+
+#, fuzzy
+msgid "Images in the staging area cannot be elected."
+msgstr "Imazhet në zonën e skenimit nuk mund të zgjidhen."
+
 #, python-format
 msgid ""
 "You cannot submit an image that has been dismissed by %(number)s member(s) "
@@ -280,6 +159,18 @@ msgid ""
 msgstr ""
 "Nuk mund të dorëzoni një imazh që është hedhur poshtë nga %(number)s "
 "anëtar(i) të stafit të IOTD."
+
+#, fuzzy
+msgid "You cannot elect an image that has not been voted."
+msgstr "Nuk mund të zgjidhni një imazh që nuk është votuar."
+
+#, fuzzy
+msgid "You cannot elect your own submission."
+msgstr "Nuk mund të zgjidhni dorëzimin tuaj."
+
+#, fuzzy
+msgid "You cannot elect an image you voted for."
+msgstr "Nuk mund të zgjidhni një imazh për të cilin keni votuar."
 
 #, python-format
 msgid ""
@@ -303,6 +194,27 @@ msgid ""
 msgstr ""
 "Nuk mund të zgjidhni një imazh që nuk është votuar të paktën %(num)s herë."
 
+#, fuzzy
+msgid "You cannot unelect your own submission."
+msgstr "Nuk mund të hiqni zgjedhjen e dorëzimit tuaj."
+
+#, fuzzy
+msgid "You cannot unelect an image you voted for."
+msgstr "Nuk mund të hiqni zgjedhjen e një imazhi për të cilin keni votuar."
+
+#, fuzzy
+msgid "You cannot unelect an image elected by another judge."
+msgstr ""
+"Nuk mund të hiqni zgjedhjen e një imazhi të zgjedhur nga një gjyqtar tjetër."
+
+#, fuzzy
+msgid "You cannot unelect a past or current IOTD."
+msgstr "Nuk mund të hiqni zgjedhjen e një IOTD të kaluar ose aktual."
+
+#, fuzzy
+msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
+msgstr "Nuk mund të hiqni një IOTD që është për nesër (UTC)."
+
 #, python-format
 msgid "you already selected %s IOTD(s) today (UTC)"
 msgstr "keni zgjedhur tashmë %s IOTD(e) sot (UTC)"
@@ -316,28 +228,8 @@ msgid "there are already %s scheduled IOTD(s)"
 msgstr "ka tashmë %s IOTD(e) të planifikuara"
 
 #, fuzzy
-msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
-msgstr "Nuk mund të hiqni një IOTD që është për nesër (UTC)."
-
-#, python-format
-msgid ""
-"You cannot submit an image that was submitted for consideration more than "
-"%(max_days)s day(s) ago."
-msgstr ""
-"Nuk mund të dërgoni një imazh që është dërguar për shqyrtim më shumë se "
-"%(max_days)s ditë më parë."
-
-#, fuzzy
-msgid "You cannot submit an image you collaborated to."
-msgstr "Nuk mund të dërgoni një imazh me të cilin keni bashkëpunuar."
-
-#, fuzzy
-msgid "You cannot vote for an image you collaborated to."
-msgstr "Nuk mund të votoni për një imazh me të cilin keni bashkëpunuar."
-
-#, fuzzy
-msgid "You cannot elect an image you collaborated to."
-msgstr "Nuk mund të zgjidhni një imazh me të cilin keni bashkëpunuar."
+msgid "Image of the day"
+msgstr "Imazhi i ditës"
 
 #, fuzzy
 msgid "You are not authenticated. Please log in."
@@ -362,7 +254,7 @@ msgstr "Ky imazh është dërguar tashmë."
 
 #, fuzzy
 msgid ""
-"Images with subject type set to 'Gear' or 'Other' are not eligible for "
+"Images with subject type set to 'Equipment' or 'Other' are not eligible for "
 "IOTD/TP consideration."
 msgstr ""
 "Imazhet me llojin e subjektit të vendosur në 'Pajisje' ose 'Të tjera' nuk "
@@ -381,8 +273,8 @@ msgid ""
 "Images without any acquisition sessions are not eligible for IOTD/TP "
 "consideration."
 msgstr ""
-"Imazhet pa seanca të akuzimit nuk janë të kualifikueshme për shqyrtim "
-"IOTD/TP."
+"Imazhet pa seanca të akuzimit nuk janë të kualifikueshme për shqyrtim IOTD/"
+"TP."
 
 #, fuzzy
 msgid "Your settings indicate that you opted to be excluded from competitions."
@@ -394,19 +286,11 @@ msgstr "Aktualisht jeni nën një ndalim nga garat në AstroBin."
 
 #, python-format
 msgid ""
-"Unfortunately it's too late: images can be submitted only within %(num_days)"
-"s days after publication."
+"Unfortunately it's too late: images can be submitted only within "
+"%(num_days)s days after publication."
 msgstr ""
 "Fatkeqësisht është shumë vonë: imazhet mund të dërgohen vetëm brenda "
 "%(num_days)s ditëve pas publikimit."
-
-#, fuzzy
-msgid "Unknown reason. This should never happen, please contact us!"
-msgstr "Arsye e panjohur. Kjo nuk duhet të ndodhë kurrë, ju lutemi kontaktoni!"
-
-#, fuzzy
-msgid "This image has been disqualified from the IOTD/TP process."
-msgstr "Ky imazh është diskualifikuar nga procesi IOTD/TP."
 
 #, fuzzy
 msgid ""
@@ -419,17 +303,13 @@ msgstr ""
 "dërgoni përsëri imazhin duke përdorur menunë e Veprimeve."
 
 #, fuzzy
+msgid "Unknown reason. This should never happen, please contact us!"
+msgstr "Arsye e panjohur. Kjo nuk duhet të ndodhë kurrë, ju lutemi kontaktoni!"
+
+#, fuzzy
 msgid "Yes"
 msgstr "Po"
 
 #, fuzzy
 msgid "No"
 msgstr "Jo"
-
-#, fuzzy
-msgid ""
-"Images with subject type set to 'Equipment' or 'Other' are not eligible for "
-"IOTD/TP consideration."
-msgstr ""
-"Imazhet me llojin e subjektit të vendosur në 'Pajisje' ose 'Të tjera' nuk "
-"janë të kualifikueshme për shqyrtim IOTD/TP."

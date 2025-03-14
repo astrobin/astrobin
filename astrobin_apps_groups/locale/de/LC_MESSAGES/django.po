@@ -1,10 +1,21 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: de\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Nur die folgenden Kategorien unterstützen automatisches Einreichen: "
+"Berufliches Netzwerk, Club oder Verein, Internet-Community, Freunde oder "
+"Partner, Geografischer Bereich"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Strategie zur Deaktivierung der automatischen Einreichung"
@@ -60,6 +71,15 @@ msgstr "Spezifisch für bestimmte Ausrüstung"
 msgid "Other"
 msgstr "Sonstige"
 
+msgid "Publication"
+msgstr "Publikation"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Key/value tag"
+msgstr "Schlüssel/Wert Kennung"
+
 msgid "Name"
 msgstr "Name"
 
@@ -71,6 +91,21 @@ msgstr "HTML Tags sind erlaubt."
 
 msgid "Category"
 msgstr "Kategorie"
+
+msgid "Default image sorting"
+msgstr "Standard-Bildsortierung"
+
+msgid "Image key/value tag sorting"
+msgstr "Sortierung nach Bild-Schlüssel/Wert-Kennung"
+
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Wenn die Bilder nach einer Schlüssel/Wert-Kennung sortiert sind, geben Sie "
+"bitte an, welche Kennung es ist. <a target='_blank' href='https://welcome."
+"astrobin.com/features/groups'>Learn more.</a>"
 
 msgid "Public group"
 msgstr "Öffentliche Gruppe"
@@ -102,8 +137,25 @@ msgstr ""
 "Bilder von allen Mitgliedern. Gruppen ohne automatische Einreichung "
 "enthalten nur Bilder, die explizit bei ihr eingereicht wurden."
 
+msgid "Forum notice"
+msgstr "Forum-Hinweis"
+
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Geben Sie einen „Forumshinweis“ ein, der über dem Formular „Neues Thema“ "
+"angezeigt werden soll. Nutzen Sie dies, um den Benutzern Forenregeln, "
+"Haftungsausschlüsse oder wichtige Informationen mitzuteilen, bevor sie einen "
+"neuen Beitrag erstellen. Stellen Sie sicher, dass Ihre Nachricht klar und "
+"präzise ist."
+
 msgid "Last activity"
 msgstr "Letzte Aktivität"
+
+msgid "Date created"
+msgstr "Erstellungsdatum"
 
 msgid "Members"
 msgstr "Mitglieder"
@@ -148,6 +200,9 @@ msgstr "Speichern"
 msgid "Cancel"
 msgstr "Abbrechen"
 
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Bitte fügen Sie nicht mehr als 100 Bilder auf einmal ein. - Danke!"
+
 msgid "Delete group?"
 msgstr "Gruppe löschen?"
 
@@ -185,6 +240,9 @@ msgstr "Gruppe verlassen"
 msgid "Moderate join requests"
 msgstr "Beitrittsanfragen moderieren"
 
+msgid "Sort images"
+msgstr "Bilder sortieren"
+
 msgid "This group is public"
 msgstr "Diese Gruppe ist öffentlich"
 
@@ -214,8 +272,8 @@ msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"Die Gruppe wurde am %(date_created)s erstellt, ist im Besitz von <a "
-"href=\"%(owner_url)s\">%(owner)s</a> und als <strong>%(category)s</strong> "
+"Die Gruppe wurde am %(date_created)s erstellt, ist im Besitz von <a href="
+"\"%(owner_url)s\">%(owner)s</a> und als <strong>%(category)s</strong> "
 "kategorisiert."
 
 msgid "Group forum"
@@ -234,9 +292,6 @@ msgstr "Alle anzeigen"
 
 msgid "New topic"
 msgstr "Neues Thema"
-
-msgid "Please join the group to view its forum."
-msgstr "Bitte tritt der Gruppe bei, um ihr Forum zu sehen."
 
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
@@ -301,30 +356,29 @@ msgstr "Gruppen"
 msgid "Sort"
 msgstr "Sortieren nach"
 
-msgid "Date created"
-msgstr "Erstellungsdatum"
+msgid "Search"
+msgstr "Suche"
 
-msgid "Your private groups"
-msgstr "Deine privaten Gruppen"
+msgid "Private groups you own"
+msgstr "Private Gruppen, die Sie verwalten"
 
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr ""
-"Du besitzt diese privaten Gruppen, bist Mitglied oder wurdest zu ihnen "
-"eingeladen."
+msgid "Private groups you are a member of"
+msgstr "Private Gruppen, in denen Sie Mitglied sind"
 
-msgctxt "group"
-msgid "Create private group"
-msgstr "Private Gruppe erstellen"
+msgid "Private groups you are invited to"
+msgstr "Private Gruppen, zu denen Sie eingeladen sind"
+
+msgid "Public groups you own"
+msgstr "Öffentliche Gruppen, die Sie verwalten"
+
+msgid "Public groups you are a member of"
+msgstr "Öffentliche Gruppen, in denen Sie Mitglied sind"
+
+msgid "Public groups you are invited to"
+msgstr "Öffentliche Gruppen, zu denen Sie eingeladen sind"
 
 msgid "Public groups"
 msgstr "Öffentliche Gruppen"
-
-msgid "Open to the whole community."
-msgstr "Offen für die gesamte Gemeinschaft."
-
-msgctxt "group"
-msgid "Create public group"
-msgstr "Öffentliche Gruppe erstellen"
 
 msgid "No groups available."
 msgstr "Keine Gruppen verfügbar."
@@ -389,6 +443,13 @@ msgstr "Ablehnen"
 msgid "This group has no join requests."
 msgstr "Diese Gruppe hat keine Beitrittsanfragen."
 
+msgid "Something went wrong, Please try again later."
+msgstr ""
+"Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
+
+msgid "Type your message here..."
+msgstr "Schreiben Sie ihre Nachricht hier..."
+
 msgid "You cannot add images that are not yours!"
 msgstr "Du kannst keine Bilder hinzufügen, die Dir nicht gehören!"
 
@@ -422,84 +483,3 @@ msgstr "Du hast die Gruppe verlassen"
 
 msgid "Form saved"
 msgstr "Formular gespeichert"
-
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Nur die folgenden Kategorien unterstützen automatisches Einreichen: "
-"Berufliches Netzwerk, Club oder Verein, Internet-Community, Freunde oder "
-"Partner, Geografischer Bereich"
-
-msgid "Publication"
-msgstr "Publikation"
-
-msgid "Title"
-msgstr "Titel"
-
-msgid "Key/value tag"
-msgstr "Schlüssel/Wert Kennung"
-
-msgid "Default image sorting"
-msgstr "Standard-Bildsortierung"
-
-msgid "Image key/value tag sorting"
-msgstr "Sortierung nach Bild-Schlüssel/Wert-Kennung"
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Wenn die Bilder nach einer Schlüssel/Wert-Kennung sortiert sind, geben Sie "
-"bitte an, welche Kennung es ist. <a target='_blank' href='https://welcome."
-"astrobin.com/features/groups'>Learn more.</a>"
-
-msgid "Search"
-msgstr "Suche"
-
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Bitte fügen Sie nicht mehr als 100 Bilder auf einmal ein. - Danke!"
-
-msgid "Sort images"
-msgstr "Bilder sortieren"
-
-msgid "Private groups you own"
-msgstr "Private Gruppen, die Sie verwalten"
-
-msgid "Private groups you are a member of"
-msgstr "Private Gruppen, in denen Sie Mitglied sind"
-
-msgid "Private groups you are invited to"
-msgstr "Private Gruppen, zu denen Sie eingeladen sind"
-
-msgid "Public groups you own"
-msgstr "Öffentliche Gruppen, die Sie verwalten"
-
-msgid "Public groups you are a member of"
-msgstr "Öffentliche Gruppen, in denen Sie Mitglied sind"
-
-msgid "Public groups you are invited to"
-msgstr "Öffentliche Gruppen, zu denen Sie eingeladen sind"
-
-msgid "Forum notice"
-msgstr "Forum-Hinweis"
-
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Geben Sie einen „Forumshinweis“ ein, der über dem Formular „Neues Thema“ "
-"angezeigt werden soll. Nutzen Sie dies, um den Benutzern Forenregeln, "
-"Haftungsausschlüsse oder wichtige Informationen mitzuteilen, bevor sie einen "
-"neuen Beitrag erstellen. Stellen Sie sicher, dass Ihre Nachricht klar und "
-"präzise ist."
-
-msgid "Something went wrong, Please try again later."
-msgstr ""
-"Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
-
-msgid "Type your message here..."
-msgstr "Schreiben Sie ihre Nachricht hier..."

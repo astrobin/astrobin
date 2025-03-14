@@ -1,22 +1,27 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #, fuzzy
 msgid ""
 "This edit proposal cannot be approved because an item with this brand and "
 "name already exists. Please reject it."
-msgstr "この編集提案は、同じブランドと名前のアイテムがすでに存在するため、承認できません。拒否してください。"
+msgstr ""
+"この編集提案は、同じブランドと名前のアイテムがすでに存在するため、承認できま"
+"せん。拒否してください。"
 
 #, fuzzy
 msgid ""
 "This edit proposal needs to be approved by a moderator because it changes "
 "the name of the item."
-msgstr "この編集提案は、アイテムの名前を変更するため、モデレーターの承認が必要です。"
+msgstr ""
+"この編集提案は、アイテムの名前を変更するため、モデレーターの承認が必要です。"
 
 #, fuzzy
 msgid "Currency not supported."
@@ -32,7 +37,8 @@ msgstr "無効な条件です。"
 
 #, fuzzy
 msgid "Someone else is working on this item right now. Please try again later."
-msgstr "他の誰かが今このアイテムに取り組んでいます。後でもう一度試してください。"
+msgstr ""
+"他の誰かが今このアイテムに取り組んでいます。後でもう一度試してください。"
 
 #, fuzzy
 msgid "Computer"
@@ -226,6 +232,14 @@ msgstr "セラー"
 #, fuzzy
 msgid "Buyer"
 msgstr "バイヤー"
+
+#, fuzzy
+msgid "For sale"
+msgstr "販売中"
+
+#, fuzzy
+msgid "Wanted"
+msgstr "欲しい"
 
 #, fuzzy
 msgid "Standard mail"
@@ -636,8 +650,8 @@ msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "カタディオプトリック: ACFシュミットカセグレン"
 
 #, fuzzy
-msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
-msgstr "カタディオプトリック：ロウ・アトキンソン・シュミット天体望遠鏡"
+msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
+msgstr "カタディオプトリック: ロウ-アッカーマン シュミット天体望遠鏡"
 
 #, fuzzy
 msgid "Catadioptric: Riccardi-Honders"
@@ -737,7 +751,8 @@ msgstr "マーケットプレイスリスティングのオファーが更新さ
 
 #, fuzzy
 msgid "Your offer for a marketplace listing was updated"
-msgstr "マーケットプレイスのリスティングに対するあなたのオファーが更新されました"
+msgstr ""
+"マーケットプレイスのリスティングに対するあなたのオファーが更新されました"
 
 #, fuzzy
 msgid "Marketplace offer accepted by seller"
@@ -785,7 +800,8 @@ msgstr "マーケットプレイスのリスティングのラインアイテム
 
 #, fuzzy
 msgid "New marketplace listing by user you follow"
-msgstr "あなたがフォローしているユーザーによる新しいマーケットプレイスリスティング"
+msgstr ""
+"あなたがフォローしているユーザーによる新しいマーケットプレイスリスティング"
 
 #, fuzzy
 msgid "New marketplace listing for item you follow"
@@ -805,7 +821,8 @@ msgstr "必要に応じてリストを売却済みとしてマークしてくだ
 
 #, fuzzy
 msgid "New comment to a marketplace feedback you received"
-msgstr "あなたが受け取ったマーケットプレイスフィードバックへの新しいコメントです。"
+msgstr ""
+"あなたが受け取ったマーケットプレイスフィードバックへの新しいコメントです。"
 
 #, fuzzy
 msgid "New comment to a marketplace feedback you left"
@@ -828,19 +845,24 @@ msgid ""
 "Equipment item <strong>%(item)s</strong>  has been marked as ambiguous by a "
 "moderator, and removed from your presets."
 msgstr ""
-"機材アイテム <strong>%(item)s</strong> はモデレーターによって曖昧と見なされ、あなたのプリセットから削除されました。"
+"機材アイテム <strong>%(item)s</strong> はモデレーターによって曖昧と見なされ、"
+"あなたのプリセットから削除されました。"
 
 #, python-format
 msgid ""
 "This happened because \"%(item)s\" is not specific enough, and unambiguous "
 "variants already exist in the database."
-msgstr "これは「%(item)s」が具体的ではなく、データベースにすでに明確なバリエーションが存在するためです。"
+msgstr ""
+"これは「%(item)s」が具体的ではなく、データベースにすでに明確なバリエーション"
+"が存在するためです。"
 
 #, fuzzy
 msgid ""
 "New images cannot be associated with this item anymore, but your past images "
 "have not been modified."
-msgstr "新しい画像はこのアイテムに関連付けられなくなりましたが、過去の画像は変更されていません。"
+msgstr ""
+"新しい画像はこのアイテムに関連付けられなくなりましたが、過去の画像は変更され"
+"ていません。"
 
 #, python-format
 msgid ""
@@ -848,8 +870,9 @@ msgid ""
 "unambiguous version from the database instead, and then feel free to update "
 "your affected preset by saving it again."
 msgstr ""
-"次回「%(item)"
-"s」が必要な画像をアップロードする際は、データベースから明確なバージョンを選択してください。その後、影響を受けたプリセットを再保存して更新してください。"
+"次回「%(item)s」が必要な画像をアップロードする際は、データベースから明確な"
+"バージョンを選択してください。その後、影響を受けたプリセットを再保存して更新"
+"してください。"
 
 #, fuzzy
 msgid "View item"
@@ -863,26 +886,33 @@ msgstr "ご理解いただきありがとうございます。"
 msgid ""
 "Equipment item \"%(item)s\" has been marked as ambiguous by a moderator, and "
 "removed from your presets"
-msgstr "機材アイテム「%(item)s」はモデレーターによって曖昧と見なされ、あなたのプリセットから削除されました。"
+msgstr ""
+"機材アイテム「%(item)s」はモデレーターによって曖昧と見なされ、あなたのプリ"
+"セットから削除されました。"
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets."
-msgstr "機材アイテム %(_0)s%(item)s%(_1)s はモデレーターによって曖昧とマークされ、プリセットから削除されました。"
+msgstr ""
+"機材アイテム %(_0)s%(item)s%(_1)s はモデレーターによって曖昧とマークされ、プ"
+"リセットから削除されました。"
 
 #, python-format
 msgid ""
 "Equipment item %(_0)s%(item)s%(_1)s has been marked as ambiguous by a "
 "moderator, and removed from your presets"
-msgstr "機材アイテム %(_0)s%(item)s%(_1)s はモデレーターによって曖昧とマークされ、あなたのプリセットから削除されました"
+msgstr ""
+"機材アイテム %(_0)s%(item)s%(_1)s はモデレーターによって曖昧とマークされ、あ"
+"なたのプリセットから削除されました"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> commented a marketplace feedback that "
 "you left."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> があなたが残したマーケットプレイスのフィードバックにコメントしました。"
+"<a href=\"%(user_url)s\">%(user)s</a> があなたが残したマーケットプレイスの"
+"フィードバックにコメントしました。"
 
 #, fuzzy
 msgid "View comment"
@@ -890,7 +920,9 @@ msgstr "コメントを見る"
 
 #, python-format
 msgid "%(user)s commented a marketplace feedback you that left."
-msgstr "%(user)s があなたが残したマーケットプレイスのフィードバックにコメントしました。"
+msgstr ""
+"%(user)s があなたが残したマーケットプレイスのフィードバックにコメントしまし"
+"た。"
 
 #, fuzzy
 msgid "Check it out at the following url:"
@@ -898,18 +930,24 @@ msgstr "以下のURLでチェックしてください: "
 
 #, python-format
 msgid "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you left."
-msgstr "%(_0)s%(user)s%(_1)sがあなたが残したマーケットプレイスのフィードバックにコメントしました。"
+msgstr ""
+"%(_0)s%(user)s%(_1)sがあなたが残したマーケットプレイスのフィードバックにコメ"
+"ントしました。"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s commented a marketplace feedback that you received."
-msgstr "%(_0)s%(user)s%(_1)s があなたが受け取ったマーケットプレイスのフィードバックにコメントしました。"
+msgstr ""
+"%(_0)s%(user)s%(_1)s があなたが受け取ったマーケットプレイスのフィードバックに"
+"コメントしました。"
 
 #, fuzzy
 msgid ""
 "You received this notification because you created this equipment item or "
 "this edit proposal."
-msgstr "この通知は、あなたがこの機材アイテムまたはこの編集提案を作成したために受け取ったものです。"
+msgstr ""
+"この通知は、あなたがこの機材アイテムまたはこの編集提案を作成したために受け"
+"取ったものです。"
 
 #, fuzzy
 msgid "The reviewer left the following comment:"
@@ -919,18 +957,13 @@ msgstr "レビュアーは次のコメントを残しました："
 msgid "View edit proposal"
 msgstr "編集提案を見る"
 
-#, fuzzy
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s."
-msgstr "%(_0)s%(user)s%(_1)s が機材アイテム %(_0)s%(item)s%(_1)s の編集提案を承認しました。"
-
-#, python-format
-msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s"
-msgstr "%(_0)s%(user)s%(_1)s が機材アイテム %(_0)s%(item)s%(_1)s の編集提案を承認しました"
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s"
+msgstr ""
+"%(_0)s%(user)s%(_1)s が機材アイテム %(_0)s%(item)s%(_1)s の編集提案を承認しま"
+"した"
 
 #, fuzzy
 msgid "Please review it as soon as possible, thank you!"
@@ -938,18 +971,19 @@ msgstr "できるだけ早くレビューしてください、ありがとうご
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s to you for review"
+"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s to you for review"
 msgstr ""
-"%(_0)s%(user)s%(_1)s が機材アイテム %(_0)s%(item)s%(_1)s の編集提案をあなたにレビューのために割り当てました"
+"%(_0)s%(user)s%(_1)s が機材アイテム %(_0)s%(item)s%(_1)s の編集提案をあなたに"
+"レビューのために割り当てました"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> proposed an edit to the equipment item "
 "<a href=\"%(item_url)s\">%(item)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> が機材アイテム <a href=\"%(item_url)s\">"
-"%(item)s</a> の編集を提案しました。"
+"<a href=\"%(user_url)s\">%(user)s</a> が機材アイテム <a href=\"%(item_url)s"
+"\">%(item)s</a> の編集を提案しました。"
 
 #, fuzzy
 msgid "Please note"
@@ -961,7 +995,9 @@ msgid ""
 "AstroBin's equipment database. Please review this edit proposal as soon as "
 "possible to prevent the possibility that this item be rejected."
 msgstr ""
-"このアイテムはまだ承認されていないため、AstroBinの機材データベースの公式な一部ではありません。この編集提案をできるだけ早く確認してください。拒否される可能性を防ぐためです。"
+"このアイテムはまだ承認されていないため、AstroBinの機材データベースの公式な一"
+"部ではありません。この編集提案をできるだけ早く確認してください。拒否される可"
+"能性を防ぐためです。"
 
 #, fuzzy
 msgid "Please review it as soon as possible."
@@ -972,7 +1008,9 @@ msgid ""
 "You received this notification because you created this equipment item, or "
 "you created/approved/rejected/commented an edit proposal for this item in "
 "the past."
-msgstr "この通知は、あなたがこの機材アイテムを作成したか、過去にこのアイテムの編集提案を作成/承認/拒否/コメントしたために受け取ったものです。"
+msgstr ""
+"この通知は、あなたがこの機材アイテムを作成したか、過去にこのアイテムの編集提"
+"案を作成/承認/拒否/コメントしたために受け取ったものです。"
 
 #, python-format
 msgid "%(user)s proposed an edit to the equipment item \"%(item)s\"."
@@ -982,13 +1020,17 @@ msgstr "%(user)s が機材アイテム \"%(item)s\" に編集提案をしまし�
 msgid ""
 "Please review an edit proposal for equipment item %(_0)s%(item)s%(_1)s by "
 "%(_0)s%(user)s%(_1)s"
-msgstr "機材アイテム %(_0)s%(item)s%(_1)s の編集提案を %(_0)s%(user)s%(_1)s にレビューしてください"
+msgstr ""
+"機材アイテム %(_0)s%(item)s%(_1)s の編集提案を %(_0)s%(user)s%(_1)s にレ"
+"ビューしてください"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s"
-msgstr "%(_0)s%(user)s%(_1)sが機材アイテム%(_0)s%(item)s%(_1)sの編集提案を拒否しました"
+"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s"
+msgstr ""
+"%(_0)s%(user)s%(_1)sが機材アイテム%(_0)s%(item)s%(_1)sの編集提案を拒否しまし"
+"た"
 
 #, fuzzy
 msgid "This item can now be added to images by anyone on AstroBin."
@@ -998,13 +1040,17 @@ msgstr "このアイテムは、今後誰でもAstroBinの画像に追加でき�
 msgid ""
 "%(_0)s%(user)s%(_1)s approved the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
-msgstr "%(_0)s%(user)s%(_1)s があなたが作成した機材アイテム %(_0)s%(item)s%(_1)s を承認しました。"
+msgstr ""
+"%(_0)s%(user)s%(_1)s があなたが作成した機材アイテム %(_0)s%(item)s%(_1)s を承"
+"認しました。"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s assigned the equipment item %(_0)s%(item)s%(_1)s to you "
 "for review"
-msgstr "%(_0)s%(user)s%(_1)sが機材アイテム%(_0)s%(item)s%(_1)sをレビューのためにあなたに割り当てました"
+msgstr ""
+"%(_0)s%(user)s%(_1)sが機材アイテム%(_0)s%(item)s%(_1)sをレビューのためにあな"
+"たに割り当てました"
 
 #, python-format
 msgid ""
@@ -1012,8 +1058,8 @@ msgid ""
 "used on some of your images on AstroBin, has been migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
-"<em><strong>%(make)s</strong> %(name)s</em>"
-"は、あなたがAstroBinのいくつかの画像で使用した機材アイテムで、新しいAstroBin機材データベースに移行されました。"
+"<em><strong>%(make)s</strong> %(name)s</em>は、あなたがAstroBinのいくつかの画"
+"像で使用した機材アイテムで、新しいAstroBin機材データベースに移行されました。"
 
 #, python-format
 msgid ""
@@ -1021,8 +1067,9 @@ msgid ""
 "used on some of your images on AstroBin, could not be migrated to the new "
 "AstroBin Equipment Database."
 msgstr ""
-"<em><strong>%(make)s</strong> %(name)s</em> "
-"は、あなたがAstroBinのいくつかの画像で使用した機材アイテムですが、新しいAstroBin機材データベースに移行できませんでした。"
+"<em><strong>%(make)s</strong> %(name)s</em> は、あなたがAstroBinのいくつかの"
+"画像で使用した機材アイテムですが、新しいAstroBin機材データベースに移行できま"
+"せんでした。"
 
 #, fuzzy
 msgid "Reason"
@@ -1050,8 +1097,8 @@ msgid ""
 "\"%(make)s %(name)s\", an equipment item that you have used on some of your "
 "images on AstroBin, has been migrated to the new AstroBin Equipment Database."
 msgstr ""
-"「%(make)s %(name)"
-"s」は、あなたがAstroBinのいくつかの画像で使用した機材アイテムで、新しいAstroBin機材データベースに移行されました。"
+"「%(make)s %(name)s」は、あなたがAstroBinのいくつかの画像で使用した機材アイテ"
+"ムで、新しいAstroBin機材データベースに移行されました。"
 
 #, python-format
 msgid ""
@@ -1059,14 +1106,16 @@ msgid ""
 "images on AstroBin, could not be migrated to the new AstroBin Equipment "
 "Database."
 msgstr ""
-"\"%(make)s %(name)"
-"s\"、あなたがAstroBinのいくつかの画像で使用した機材アイテムは、新しいAstroBin機材データベースに移行できませんでした。"
+"\"%(make)s %(name)s\"、あなたがAstroBinのいくつかの画像で使用した機材アイテム"
+"は、新しいAstroBin機材データベースに移行できませんでした。"
 
 #, python-format
 msgid ""
 "%(_0)s%(make)s %(name)s%(_1)s has been migrated to the new AstroBin "
 "Equipment Database"
-msgstr "%(_0)s%(make)s %(name)s%(_1)s が新しいAstroBin機材データベースに移行されました。"
+msgstr ""
+"%(_0)s%(make)s %(name)s%(_1)s が新しいAstroBin機材データベースに移行されまし"
+"た。"
 
 #, fuzzy
 msgid "Proposed strategy"
@@ -1085,11 +1134,14 @@ msgid ""
 "The equipment item still needs to be migrated to the new database, so please "
 "try again after reading the reason and the comment provided by the reviewer "
 "below."
-msgstr "機材アイテムはまだ新しいデータベースに移行されていないので、下記のレビュアーからの理由とコメントを読んでから再試行してください。"
+msgstr ""
+"機材アイテムはまだ新しいデータベースに移行されていないので、下記のレビュアー"
+"からの理由とコメントを読んでから再試行してください。"
 
 #, fuzzy
 msgid "To try again with different parameters, please visit this page:"
-msgstr "異なるパラメータで再試行するには、こちらのページにアクセスしてください："
+msgstr ""
+"異なるパラメータで再試行するには、こちらのページにアクセスしてください："
 
 #, fuzzy
 msgid "Migration tool"
@@ -1097,17 +1149,19 @@ msgstr "移行ツール"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)"
-"s%(_1)s that you created"
+"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
+"%(_1)s that you created"
 msgstr ""
-"%(_0)s%(user)s%(_1)s があなたが作成した %(_0)s%(make)s %(name)s%(_1)s の機材アイテムを拒否しました"
+"%(_0)s%(user)s%(_1)s があなたが作成した %(_0)s%(make)s %(name)s%(_1)s の機材"
+"アイテムを拒否しました"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item migration that you created "
 "for %(_0)s%(make)s %(name)s%(_1)s"
 msgstr ""
-"%(_0)s%(user)s%(_1)s があなたが作成した %(_0)s%(make)s %(name)s%(_1)s の機材アイテム移行を拒否しました"
+"%(_0)s%(user)s%(_1)s があなたが作成した %(_0)s%(make)s %(name)s%(_1)s の機材"
+"アイテム移行を拒否しました"
 
 #, fuzzy
 msgid ""
@@ -1115,7 +1169,9 @@ msgid ""
 "Please remember that the AstroBin equipment database is collectively "
 "maintained by the community in order to keep a clean and orderly set of data."
 msgstr ""
-"これは、誰かがこの機材アイテムの作成を拒否したために発生しました。AstroBinの機材データベースは、クリーンで整然としたデータセットを維持するためにコミュニティによって共同で管理されていることを忘れないでください。"
+"これは、誰かがこの機材アイテムの作成を拒否したために発生しました。AstroBinの"
+"機材データベースは、クリーンで整然としたデータセットを維持するためにコミュニ"
+"ティによって共同で管理されていることを忘れないでください。"
 
 #, fuzzy
 msgid "The reviewer cited the following code as the reason for the rejection:"
@@ -1123,86 +1179,101 @@ msgstr "レビュアーは拒否の理由として次のコードを引用しま
 
 #, python-format
 msgid ""
-"Since your equipment item was marked as duplicate of <a "
-"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been "
-"updated accordingly, and <strong>you don't need to do anything</strong>."
+"Since your equipment item was marked as duplicate of <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
+"accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
 "あなたの機材アイテムは <a href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a> "
-"の重複としてマークされましたので、あなたの画像はそれに応じて更新されました。<strong>何もする必要はありません。</strong>"
+"の重複としてマークされましたので、あなたの画像はそれに応じて更新されました。"
+"<strong>何もする必要はありません。</strong>"
 
 #, fuzzy
 msgid ""
 "Please edit your image and try adding the relevant equipment item again. If "
 "possible, use one of the offered suggestions to avoid creating a duplicate."
 msgstr ""
-"画像を編集して、関連する機材アイテムを再度追加してみてください。可能であれば、重複を作成しないために提供された提案のいずれかを使用してください。"
+"画像を編集して、関連する機材アイテムを再度追加してみてください。可能であれ"
+"ば、重複を作成しないために提供された提案のいずれかを使用してください。"
 
 #, python-format
 msgid ""
 "Since your equipment item was marked as duplicate of \"%(duplicate_of)s\", "
 "your image has been updated accordingly, and you don't need to do anything."
 msgstr ""
-"あなたの機材アイテムは「%(duplicate_of)s」の重複としてマークされたため、あなたの画像はそれに応じて更新され、何もする必要はありません。"
+"あなたの機材アイテムは「%(duplicate_of)s」の重複としてマークされたため、あな"
+"たの画像はそれに応じて更新され、何もする必要はありません。"
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
-"s%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
+"%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
-"機材アイテム %(_0)s%(item)s%(_1)s は、あなたの画像 %(_0)s%(image_title)s%(_1)s から削除され、 "
-"%(_0)s%(duplicate_of)s%(_1)s に置き換えられました。"
+"機材アイテム %(_0)s%(item)s%(_1)s は、あなたの画像 %(_0)s%(image_title)s"
+"%(_1)s から削除され、 %(_0)s%(duplicate_of)s%(_1)s に置き換えられました。"
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
-"s%(image_title)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
+"%(image_title)s%(_1)s"
 msgstr ""
-"機材アイテム %(_0)s%(item)s%(_1)s は、あなたの画像 %(_0)s%(image_title)s%(_1)s から削除されました。"
+"機材アイテム %(_0)s%(item)s%(_1)s は、あなたの画像 %(_0)s%(image_title)s"
+"%(_1)s から削除されました。"
 
 #, fuzzy
 msgid ""
 "This item has been deleted. Please contact AstroBin if you think this was in "
 "error."
-msgstr "このアイテムは削除されました。誤って削除されたと思われる場合は、AstroBinにご連絡ください。"
+msgstr ""
+"このアイテムは削除されました。誤って削除されたと思われる場合は、AstroBinにご"
+"連絡ください。"
 
 #, python-format
 msgid ""
-"Your equipment item was marked as a duplicate of <a "
-"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
+"Your equipment item was marked as a duplicate of <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
 "あなたの機材アイテムは <a href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a> "
-"の重複としてマークされました。もしあなたがそれを画像に追加していた場合、それらはそれに応じて更新されました。"
+"の重複としてマークされました。もしあなたがそれを画像に追加していた場合、それ"
+"らはそれに応じて更新されました。"
 
 #, python-format
 msgid ""
 "Your equipment item was marked as a duplicate of \"%(duplicate_of)s\". If "
 "you added it to any images, they will have been updated accordingly."
-msgstr "あなたの機材アイテムは「%(duplicate_of)s」の重複としてマークされました。画像に追加した場合、それらは適宜更新されます。"
+msgstr ""
+"あなたの機材アイテムは「%(duplicate_of)s」の重複としてマークされました。画像"
+"に追加した場合、それらは適宜更新されます。"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s rejected the equipment item %(_0)s%(item)s%(_1)s that "
 "you created"
-msgstr "%(_0)s%(user)s%(_1)s が作成した機材アイテム %(_0)s%(item)s%(_1)s を拒否しました"
+msgstr ""
+"%(_0)s%(user)s%(_1)s が作成した機材アイテム %(_0)s%(item)s%(_1)s を拒否しまし"
+"た"
 
 #, python-format
 msgid ""
 "%(user)s rejected the equipment item %(_0)s%(item)s%(_1)s that you created"
-msgstr "%(user)sがあなたが作成した機材アイテム%(_0)s%(item)s%(_1)sを拒否しました"
+msgstr ""
+"%(user)sがあなたが作成した機材アイテム%(_0)s%(item)s%(_1)sを拒否しました"
 
 #, python-format
 msgid ""
 "%(_0)s%(user)s%(_1)s created the equipment item %(_0)s%(item)s%(_1)s and it "
 "requires moderation"
-msgstr "%(_0)s%(user)s%(_1)s が作成した機材アイテム %(_0)s%(item)s%(_1)s はモデレーションが必要です"
+msgstr ""
+"%(_0)s%(user)s%(_1)s が作成した機材アイテム %(_0)s%(item)s%(_1)s はモデレー"
+"ションが必要です"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(user)s%(_1)s がマーケットプレイスリスティング %(_0)s%(listing)s%(_1)s にフィードバックを残しました。"
+"%(_0)s%(user)s%(_1)s がマーケットプレイスリスティング %(_0)s%(listing)s"
+"%(_1)s にフィードバックを残しました。"
 
 #, fuzzy
 msgid "Feedback details"
@@ -1255,26 +1326,33 @@ msgstr "リスティングを表示"
 #, python-format
 msgid ""
 "%(user)s left you feedback for marketplace listing %(_0)s%(listing)s%(_1)s"
-msgstr "%(user)sがマーケットプレイスリスティング%(_0)s%(listing)s%(_1)sにフィードバックを残しました"
-
-#, python-format
-msgid ""
-"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(user)s%(_1)sがマーケットプレイスリスティング%(_0)s%(listing)s%(_1)sのフィードバックを更新しました"
+"%(user)sがマーケットプレイスリスティング%(_0)s%(listing)s%(_1)sにフィードバッ"
+"クを残しました"
 
 #, python-format
 msgid ""
-"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s%(_1)"
-"s"
-msgstr "%(user)s がマーケットプレイスリスティング %(_0)s%(listing)s%(_1)s のフィードバックを更新しました。"
+"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
+msgstr ""
+"%(_0)s%(user)s%(_1)sがマーケットプレイスリスティング%(_0)s%(listing)s%(_1)sの"
+"フィードバックを更新しました"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s%(_1)"
-"s"
-msgstr "%(_0)s%(user)s%(_1)sがあなたのマーケットプレイスリスティング%(_0)s%(listing)s%(_1)sを承認しました"
+"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
+"%(_1)s"
+msgstr ""
+"%(user)s がマーケットプレイスリスティング %(_0)s%(listing)s%(_1)s のフィード"
+"バックを更新しました。"
+
+#, python-format
+msgid ""
+"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
+"%(_1)s"
+msgstr ""
+"%(_0)s%(user)s%(_1)sがあなたのマーケットプレイスリスティング%(_0)s%(listing)s"
+"%(_1)sを承認しました"
 
 #, fuzzy
 msgid "The listing is now live. Good luck with your sale!"
@@ -1282,11 +1360,11 @@ msgstr "リスティングは現在ライブです。販売がうまくいくこ
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)sがマーケットプレイスリスティング%(_0)s%(listing)s%(_1)"
-"sを公開しました"
+"%(_0)s%(seller_display_name)s%(_1)sがマーケットプレイスリスティング%(_0)s"
+"%(listing)s%(_1)sを公開しました"
 
 #, fuzzy
 msgid "You received this notification because you follow this user."
@@ -1294,26 +1372,33 @@ msgstr "このユーザーをフォローしているため、この通知を受
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s が出品 %(_0)s%(listing)s%(_1)s を削除しました"
+"%(_0)s%(seller_display_name)s%(_1)s が出品 %(_0)s%(listing)s%(_1)s を削除しま"
+"した"
 
 #, fuzzy
 msgid ""
-"You received this notification because you have an active offer on this "
-"listing, or you follow the listing."
-msgstr "この通知は、あなたがこのリスティングにアクティブなオファーを持っているか、リスティングをフォローしているために受け取ったものです。"
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
+msgstr ""
+"この通知を受け取ったのは、このリスティングにオファーがあるか、リスティングを"
+"フォローしているためです。"
 
 #, fuzzy
 msgid ""
 "Please note that the seller may only deleted listings without any sold line "
 "items."
-msgstr "売り手は、売れたアイテムがないリスティングのみを削除できることに注意してください。"
+msgstr ""
+"売り手は、売れたアイテムがないリスティングのみを削除できることに注意してくだ"
+"さい。"
 
 #, python-format
 msgid "Your marketplace listing %(_0)s%(listing)s%(_1)s expired"
-msgstr "あなたのマーケットプレイスリスティング %(_0)s%(listing)s%(_1)s が期限切れになりました"
+msgstr ""
+"あなたのマーケットプレイスリスティング %(_0)s%(listing)s%(_1)s が期限切れにな"
+"りました"
 
 #, fuzzy
 msgid "You can renew it by clicking the button below."
@@ -1321,7 +1406,9 @@ msgstr "下のボタンをクリックして更新できます。"
 
 #, fuzzy
 msgid "PS: if you sold items from this listing, please mark them as sold."
-msgstr "PS: このリスティングからアイテムを販売した場合は、売れたとマークしてください。"
+msgstr ""
+"PS: このリスティングからアイテムを販売した場合は、売れたとマークしてくださ"
+"い。"
 
 #, fuzzy
 msgid "You can renew it by clicking the link below:"
@@ -1329,39 +1416,37 @@ msgstr "以下のリンクをクリックして更新できます: "
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
-"s%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)"
-"s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
+"%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
+"%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)sがあなたがフォローしている機材アイテムを含むマーケットプレイスリスティング%(_0)"
-"s%(listing)s%(_1)sを公開しました：%(_0)s%(line_item)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)sがあなたがフォローしている機材アイテムを含"
+"むマーケットプレイスリスティング%(_0)s%(listing)s%(_1)sを公開しました：%(_0)s"
+"%(line_item)s%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted somebody else's offer in their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s が他の誰かのオファーを受け入れました、マーケットプレイスリスティング %(_0)"
-"s%(listing)s%(_1)s で"
+"%(_0)s%(seller_display_name)s%(_1)s が他の誰かのオファーを受け入れました、"
+"マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s で"
 
 #, fuzzy
 msgid ""
 "Unfortunately, you cannot make an offer on this listing while it is in a "
 "reserved or sold state."
-msgstr "残念ながら、このリスティングが予約済みまたは販売済みの状態の間はオファーを出すことができません。"
-
-#, fuzzy
-msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
-msgstr "この通知を受け取ったのは、このリスティングにオファーがあるか、リスティングをフォローしているためです。"
+msgstr ""
+"残念ながら、このリスティングが予約済みまたは販売済みの状態の間はオファーを出"
+"すことができません。"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s が出品 %(_0)s%(listing)s%(_1)s のアイテムを販売しました"
+"%(_0)s%(seller_display_name)s%(_1)s が出品 %(_0)s%(listing)s%(_1)s のアイテム"
+"を販売しました"
 
 #, fuzzy
 msgid "Item"
@@ -1369,27 +1454,30 @@ msgstr "アイテム"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s がマーケットプレイスリスティング %(_0)s%(listing)s%(_1)s "
-"を更新しました"
+"%(_0)s%(seller_display_name)s%(_1)s がマーケットプレイスリスティング %(_0)s"
+"%(listing)s%(_1)s を更新しました"
 
 #, fuzzy
 msgid ""
 "Please note that the seller may only update unsold line items and the global "
 "description or information pertaining the listing. The seller may not change "
 "the price or quantity of sold line items."
-msgstr "売り手は、売れたアイテムの価格や数量を変更することはできず、未販売のアイテムとリスティングに関するグローバルな説明や情報のみを更新できます。"
+msgstr ""
+"売り手は、売れたアイテムの価格や数量を変更することはできず、未販売のアイテム"
+"とリスティングに関するグローバルな説明や情報のみを更新できます。"
 
 #, python-format
 msgid ""
-"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)"
-"s%(_1)s, but you haven't marked the item as sold yet. Please do so as soon "
-"as possible and leave feedback to the buyer."
+"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)s"
+"%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
+"possible and leave feedback to the buyer."
 msgstr ""
-"最近、マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s "
-"のオファーを受け入れましたが、アイテムをまだ売却済みとしてマークしていません。できるだけ早くマークし、バイヤーにフィードバックを残してください。"
+"最近、マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s のオファーを受け"
+"入れましたが、アイテムをまだ売却済みとしてマークしていません。できるだけ早く"
+"マークし、バイヤーにフィードバックを残してください。"
 
 #, fuzzy
 msgid "Mark as sold"
@@ -1397,18 +1485,19 @@ msgstr "売れたとマークする"
 
 #, python-format
 msgid ""
-"Don't forget to mark your reserved items as sold in the listing %(_0)"
-"s%(listing)s%(_1)s, if you sold them."
+"Don't forget to mark your reserved items as sold in the listing %(_0)s"
+"%(listing)s%(_1)s, if you sold them."
 msgstr ""
-"売却した場合は、リスティング %(_0)s%(listing)s%(_1)s の予約アイテムを売却済みとしてマークするのを忘れないでください。"
+"売却した場合は、リスティング %(_0)s%(listing)s%(_1)s の予約アイテムを売却済み"
+"としてマークするのを忘れないでください。"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s があなたのマーケットプレイスリスティング %(_0)s%(listing)"
-"s%(_1)s に対するオファーを受け入れました"
+"%(_0)s%(seller_display_name)s%(_1)s があなたのマーケットプレイスリスティング "
+"%(_0)s%(listing)s%(_1)s に対するオファーを受け入れました"
 
 #, fuzzy
 msgid "Offer details"
@@ -1428,7 +1517,9 @@ msgid ""
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
-"今、セラーとの詳細を最終決定する時です。リスティングページまたはAstroBinのプライベートメッセージを通じて、コミュニケーションを取り、支払いと配達を手配できます。"
+"今、セラーとの詳細を最終決定する時です。リスティングページまたはAstroBinのプ"
+"ライベートメッセージを通じて、コミュニケーションを取り、支払いと配達を手配で"
+"きます。"
 
 #, fuzzy
 msgid ""
@@ -1437,21 +1528,25 @@ msgid ""
 "We encourage both buyers and sellers to exercise caution and use secure "
 "methods for payment and delivery."
 msgstr ""
-"ご注意ください。AstroBinは売り手と買い手のためのプラットフォームを提供しますが、取引の詳細は当事者間で直接管理されます。買い手と売り手の両方に注意を払い、安全な支払いと配送方法を使用することをお勧めします。"
+"ご注意ください。AstroBinは売り手と買い手のためのプラットフォームを提供します"
+"が、取引の詳細は当事者間で直接管理されます。買い手と売り手の両方に注意を払"
+"い、安全な支払いと配送方法を使用することをお勧めします。"
 
 #, fuzzy
 msgid ""
 "Thank you for using AstroBin, and we wish you a smooth and successful "
 "transaction!"
-msgstr "AstroBinをご利用いただきありがとうございます。スムーズで成功した取引をお祈りします！"
+msgstr ""
+"AstroBinをご利用いただきありがとうございます。スムーズで成功した取引をお祈り"
+"します！"
 
 #, python-format
 msgid ""
 "You accepted %(_0)s%(buyer_display_name)s%(_1)s's offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"あなたは %(_0)s%(buyer_display_name)s%(_1)s のオファーを受け入れました、マーケットプレイスリスティング %(_0)"
-"s%(listing)s%(_1)s に対して"
+"あなたは %(_0)s%(buyer_display_name)s%(_1)s のオファーを受け入れました、マー"
+"ケットプレイスリスティング %(_0)s%(listing)s%(_1)s に対して"
 
 #, fuzzy
 msgid ""
@@ -1459,8 +1554,9 @@ msgid ""
 "item. Please review the offer details to ensure you understand which items "
 "the offer is for."
 msgstr ""
-"ご注意: "
-"AstroBinのマーケットプレイスのリスティングには、複数のアイテムが含まれている場合があります。オファーの詳細を確認して、どのアイテムに対するオファーかを理解してください。"
+"ご注意: AstroBinのマーケットプレイスのリスティングには、複数のアイテムが含ま"
+"れている場合があります。オファーの詳細を確認して、どのアイテムに対するオ"
+"ファーかを理解してください。"
 
 #, fuzzy
 msgid ""
@@ -1468,17 +1564,23 @@ msgid ""
 "and arrange payment and delivery either through the listing’s page or "
 "private messaging on AstroBin."
 msgstr ""
-"さあ、バイヤーとの詳細を最終決定する時間です。リスティングのページまたはAstroBinのプライベートメッセージを通じて、コミュニケーションを取り、支払いと配達を手配できます。"
+"さあ、バイヤーとの詳細を最終決定する時間です。リスティングのページまたは"
+"AstroBinのプライベートメッセージを通じて、コミュニケーションを取り、支払いと"
+"配達を手配できます。"
 
 #, fuzzy
 msgid ""
 "PS: once you've completed the transaction, please remember to mark the "
 "listing as sold."
-msgstr "PS: 取引が完了したら、リスティングを売れたとマークすることを忘れないでください。"
+msgstr ""
+"PS: 取引が完了したら、リスティングを売れたとマークすることを忘れないでくださ"
+"い。"
 
 #, python-format
 msgid "You made an offer for marketplace listing %(_0)s%(listing)s%(_1)s"
-msgstr "マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s にオファーを出しました。"
+msgstr ""
+"マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s にオファーを出しまし"
+"た。"
 
 #, fuzzy
 msgid "Shipping cost"
@@ -1493,8 +1595,8 @@ msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s made an offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(buyer_display_name)s%(_1)sがあなたのマーケットプレイスリスティング%(_0)s%(listing)s%(_1)"
-"sにオファーを出しました"
+"%(_0)s%(buyer_display_name)s%(_1)sがあなたのマーケットプレイスリスティン"
+"グ%(_0)s%(listing)s%(_1)sにオファーを出しました"
 
 #, fuzzy
 msgid "To review and respond to the offer, please visit your listing page."
@@ -1505,8 +1607,8 @@ msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s rejected your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s があなたのオファーを拒否しました、マーケットプレイスリスティング %(_0)"
-"s%(listing)s%(_1)s に対して"
+"%(_0)s%(seller_display_name)s%(_1)s があなたのオファーを拒否しました、マー"
+"ケットプレイスリスティング %(_0)s%(listing)s%(_1)s に対して"
 
 #, fuzzy
 msgid ""
@@ -1516,21 +1618,25 @@ msgstr "詳細については、リスティングのページを使用して売
 #, python-format
 msgid ""
 "You retracted your offer for marketplace listing %(_0)s%(listing)s%(_1)s"
-msgstr "マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s のオファーを取り消しました。"
+msgstr ""
+"マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s のオファーを取り消しま"
+"した。"
 
 #, python-format
 msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s retracted their offer for your "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(buyer_display_name)s%(_1)s があなたのマーケットプレイスリスティング %(_0)s%(listing)"
-"s%(_1)s のオファーを取り消しました。"
+"%(_0)s%(buyer_display_name)s%(_1)s があなたのマーケットプレイスリスティング "
+"%(_0)s%(listing)s%(_1)s のオファーを取り消しました。"
 
 #, fuzzy
 msgid ""
 "You may contact the prospect buyer using AstroBin's private messaging for "
 "more information."
-msgstr "詳細については、AstroBinのプライベートメッセージを使用して見込み客に連絡できます。"
+msgstr ""
+"詳細については、AstroBinのプライベートメッセージを使用して見込み客に連絡でき"
+"ます。"
 
 #, fuzzy
 msgid "View buyer's profile"
@@ -1545,16 +1651,16 @@ msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s updated their offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(buyer_display_name)s%(_1)s があなたのマーケットプレイスリスティング %(_0)s%(listing)"
-"s%(_1)s のオファーを更新しました。"
+"%(_0)s%(buyer_display_name)s%(_1)s があなたのマーケットプレイスリスティング "
+"%(_0)s%(listing)s%(_1)s のオファーを更新しました。"
 
 #, python-format
 msgid ""
-"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)"
-"s%(_1)s, and we noticed that you haven't rated the buyer yet."
+"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
+"%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
-"こんにちは！最近、マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s "
-"からアイテムを販売しましたが、バイヤーをまだ評価していないことに気付きました。"
+"こんにちは！最近、マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s から"
+"アイテムを販売しましたが、バイヤーをまだ評価していないことに気付きました。"
 
 #, fuzzy
 msgid ""
@@ -1562,7 +1668,9 @@ msgid ""
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the buyer."
 msgstr ""
-"買い手にフィードバックを残すことは重要です。他のユーザーがマーケットプレイスでアイテムを購入する際に情報に基づいた決定を下すのに役立ちます。買い手との体験を評価するために少し時間を取ってください。"
+"買い手にフィードバックを残すことは重要です。他のユーザーがマーケットプレイス"
+"でアイテムを購入する際に情報に基づいた決定を下すのに役立ちます。買い手との体"
+"験を評価するために少し時間を取ってください。"
 
 #, fuzzy
 msgid "Leave feedback"
@@ -1570,18 +1678,21 @@ msgstr "フィードバックを残す"
 
 #, python-format
 msgid ""
-"Rate the buyer for your recent purchase from marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
-msgstr "マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s からの最近の購入について、バイヤーを評価してください。"
+"Rate the buyer for your recent purchase from marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
+msgstr ""
+"マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s からの最近の購入につい"
+"て、バイヤーを評価してください。"
 
 #, python-format
 msgid ""
-"Hi! You recently purchased an item from the marketplace listing %(_0)"
-"s%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)"
-"s%(seller_display_name)s%(_1)s yet."
+"Hi! You recently purchased an item from the marketplace listing %(_0)s"
+"%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
+"%(seller_display_name)s%(_1)s yet."
 msgstr ""
-"こんにちは！最近、マーケットプレイスリスティング%(_0)s%(listing)s%(_1)sからアイテムを購入しましたが、まだ売り手%(_0)"
-"s%(seller_display_name)s%(_1)sを評価していないことに気付きました。"
+"こんにちは！最近、マーケットプレイスリスティング%(_0)s%(listing)s%(_1)sからア"
+"イテムを購入しましたが、まだ売り手%(_0)s%(seller_display_name)s%(_1)sを評価し"
+"ていないことに気付きました。"
 
 #, fuzzy
 msgid ""
@@ -1589,27 +1700,32 @@ msgid ""
 "informed decisions when purchasing items from the marketplace. Please take a "
 "moment to rate your experience with the seller."
 msgstr ""
-"売り手にフィードバックを残すことは重要です。他のユーザーがマーケットプレイスでアイテムを購入する際に情報に基づいた決定を下すのに役立ちます。売り手との体験を評価するために少し時間を取ってください。"
+"売り手にフィードバックを残すことは重要です。他のユーザーがマーケットプレイス"
+"でアイテムを購入する際に情報に基づいた決定を下すのに役立ちます。売り手との体"
+"験を評価するために少し時間を取ってください。"
 
 #, python-format
 msgid ""
 "Rate the seller %(_0)s%(seller_display_name)s%(_1)s for your recent purchase "
 "from marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s からの最近の購入について、売り手 %(_0)"
-"s%(seller_display_name)s%(_1)s を評価してください。"
+"マーケットプレイスリスティング %(_0)s%(listing)s%(_1)s からの最近の購入につい"
+"て、売り手 %(_0)s%(seller_display_name)s%(_1)s を評価してください。"
 
 #, python-format
 msgid ""
 "New image by %(_0)s%(user)s%(_1)s acquired with equipment items you follow"
 msgstr ""
-"あなたがフォローしている機材アイテムを使用して取得した新しい画像が %(_0)s%(user)s%(_1)s によってアップロードされました。"
+"あなたがフォローしている機材アイテムを使用して取得した新しい画像が %(_0)s"
+"%(user)s%(_1)s によってアップロードされました。"
 
 #, fuzzy
 msgid ""
 "You received this notification because you follow these equipment items that "
 "were used to acquire this image:"
-msgstr "この画像を取得するために使用された機材アイテムをフォローしているため、この通知を受け取りました："
+msgstr ""
+"この画像を取得するために使用された機材アイテムをフォローしているため、この通"
+"知を受け取りました："
 
 #, fuzzy
 msgid "This image is a group effort among the following collaborators:"
@@ -1633,7 +1749,9 @@ msgstr "画像"
 
 #, fuzzy
 msgid "Please support AstroBin by shopping at one of our partners!"
-msgstr "AstroBinをサポートするために、私たちのパートナーの一つでお買い物をしてください！"
+msgstr ""
+"AstroBinをサポートするために、私たちのパートナーの一つでお買い物をしてくださ"
+"い！"
 
 #, fuzzy
 msgid "Disable retailer integration"
@@ -1678,15 +1796,3 @@ msgstr "マーケットプレイスで販売する"
 #, fuzzy
 msgid "Close"
 msgstr "閉じる"
-
-#, fuzzy
-msgid "For sale"
-msgstr "販売中"
-
-#, fuzzy
-msgid "Wanted"
-msgstr "欲しい"
-
-#, fuzzy
-msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
-msgstr "カタディオプトリック: ロウ-アッカーマン シュミット天体望遠鏡"

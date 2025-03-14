@@ -1,10 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: tr\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, fuzzy
 msgid ""
@@ -232,6 +234,14 @@ msgstr "Satıcı."
 #, fuzzy
 msgid "Buyer"
 msgstr "Alıcı"
+
+#, fuzzy
+msgid "For sale"
+msgstr "Satılık"
+
+#, fuzzy
+msgid "Wanted"
+msgstr "İsteniyor"
 
 #, fuzzy
 msgid "Standard mail"
@@ -642,8 +652,8 @@ msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Katadioptrik: ACF Schmidt-Cassegrain"
 
 #, fuzzy
-msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
-msgstr "Katadioptrik: Rowe-Atkinson Schmidt astroğrafı"
+msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
+msgstr "Katadioptrik: Rowe-Ackermann Schmidt astroğraf"
 
 #, fuzzy
 msgid "Catadioptric: Riccardi-Honders"
@@ -943,19 +953,10 @@ msgstr "Değerlendirici aşağıdaki yorumu bıraktı:"
 msgid "View edit proposal"
 msgstr "Düzenleme önerisini görüntüle"
 
-#, fuzzy
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s."
-msgstr ""
-"%(_0)s%(user)s%(_1)s, ekipman maddesi %(_0)s%(item)s%(_1)s için bir "
-"düzenleme önerisini onayladı."
-
-#, python-format
-msgid ""
-"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s approved an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s ekipman öğesi %(_0)s%(item)s%(_1)s için bir düzenleme "
 "önerisini onayladı."
@@ -966,8 +967,8 @@ msgstr "Lütfen bunu mümkün olan en kısa sürede gözden geçir, teşekkürle
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s to you for review"
+"%(_0)s%(user)s%(_1)s assigned an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s to you for review"
 msgstr ""
 "%(_0)s%(user)s%(_1)s ekipman öğesi %(_0)s%(item)s%(_1)s için bir düzenleme "
 "önerisi atadı."
@@ -977,8 +978,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> proposed an edit to the equipment item "
 "<a href=\"%(item_url)s\">%(item)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a>, ekipman maddesi <a href=\"%(item_url)"
-"s\">%(item)s</a> için bir düzenleme önerdi."
+"<a href=\"%(user_url)s\">%(user)s</a>, ekipman maddesi <a href=\"%(item_url)s"
+"\">%(item)s</a> için bir düzenleme önerdi."
 
 #, fuzzy
 msgid "Please note"
@@ -1005,8 +1006,8 @@ msgid ""
 "the past."
 msgstr ""
 "Bu bildirimi aldınız çünkü bu ekipman öğesini siz oluşturdunuz veya bu öğe "
-"için geçmişte bir düzenleme önerisi "
-"oluşturdunuz/onayladınız/reddettiniz/yorum yaptınız."
+"için geçmişte bir düzenleme önerisi oluşturdunuz/onayladınız/reddettiniz/"
+"yorum yaptınız."
 
 #, python-format
 msgid "%(user)s proposed an edit to the equipment item \"%(item)s\"."
@@ -1022,8 +1023,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)"
-"s%(item)s%(_1)s"
+"%(_0)s%(user)s%(_1)s rejected an edit proposal on the equipment item %(_0)s"
+"%(item)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s %(_0)s%(item)s%(_1)s ekipman maddesi için bir düzenleme "
 "önerisini reddetti"
@@ -1148,8 +1149,8 @@ msgstr "Göç aracı"
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)"
-"s%(_1)s that you created"
+"%(_0)s%(user)s%(_1)s rejected the equipment item for %(_0)s%(make)s %(name)s"
+"%(_1)s that you created"
 msgstr ""
 "%(_0)s%(user)s%(_1)s, oluşturduğunuz %(_0)s%(make)s %(name)s%(_1)s ekipman "
 "öğesini reddetti."
@@ -1178,9 +1179,9 @@ msgstr "Değerlendirici reddetme nedeni olarak aşağıdaki kodu belirtti:"
 
 #, python-format
 msgid ""
-"Since your equipment item was marked as duplicate of <a "
-"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been "
-"updated accordingly, and <strong>you don't need to do anything</strong>."
+"Since your equipment item was marked as duplicate of <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>, your image has been updated "
+"accordingly, and <strong>you don't need to do anything</strong>."
 msgstr ""
 "Ekipman öğeniz <a href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a> ile "
 "kopya olarak işaretlendi, bu nedenle görüntünüz buna göre güncellendi ve "
@@ -1205,16 +1206,16 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
-"s%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
+"%(image_title)s%(_1)s and replaced with %(_0)s%(duplicate_of)s%(_1)s"
 msgstr ""
 "Ekipman öğesi %(_0)s%(item)s%(_1)s, görüntünden %(_0)s%(image_title)s%(_1)s "
 "kaldırıldı ve %(_0)s%(duplicate_of)s%(_1)s ile değiştirildi."
 
 #, python-format
 msgid ""
-"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)"
-"s%(image_title)s%(_1)s"
+"Equipment item %(_0)s%(item)s%(_1)s was removed from your image %(_0)s"
+"%(image_title)s%(_1)s"
 msgstr ""
 "Ekipman maddesi %(_0)s%(item)s%(_1)s, %(_0)s%(image_title)s%(_1)s "
 "görüntünüzden kaldırıldı."
@@ -1229,8 +1230,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your equipment item was marked as a duplicate of <a "
-"href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
+"Your equipment item was marked as a duplicate of <a href="
+"\"%(duplicate_of_url)s\">%(duplicate_of)s</a>. If you added it to any "
 "images, they will have been updated accordingly."
 msgstr ""
 "Ekipman öğeniz <a href=\"%(duplicate_of_url)s\">%(duplicate_of)s</a> ile "
@@ -1269,8 +1270,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s left you feedback for marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s, pazar yeri listesi %(_0)s%(listing)s%(_1)s için sana "
 "geri bildirim bıraktı."
@@ -1334,24 +1335,24 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(user)s%(_1)s updated your feedback for marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s pazar yeri listesi %(_0)s%(listing)s%(_1)s için geri "
 "bildiriminizi güncelledi"
 
 #, python-format
 msgid ""
-"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s%(_1)"
-"s"
+"%(user)s updated your feedback for marketplace listing %(_0)s%(listing)s"
+"%(_1)s"
 msgstr ""
 "%(user)s, pazar yeri listesi %(_0)s%(listing)s%(_1)s için geri bildiriminizi "
 "güncelledi."
 
 #, python-format
 msgid ""
-"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s%(_1)"
-"s"
+"%(_0)s%(user)s%(_1)s approved your marketplace listing %(_0)s%(listing)s"
+"%(_1)s"
 msgstr ""
 "%(_0)s%(user)s%(_1)s pazar yeri listeniz %(_0)s%(listing)s%(_1)s onayladı"
 
@@ -1361,11 +1362,11 @@ msgstr "Liste artık yayında. Satışında bol şans!"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesi %(_0)s%(listing)s%(_1)"
-"s yayımladı"
+"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesi %(_0)s%(listing)s"
+"%(_1)s yayımladı"
 
 #, fuzzy
 msgid "You received this notification because you follow this user."
@@ -1373,19 +1374,19 @@ msgstr "Bu bildirimi aldın çünkü bu kullanıcıyı takip ediyorsun."
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s deleted their marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s pazar listesindeki %(_0)s%(listing)s%(_1)"
-"s'yi sildi"
+"%(_0)s%(seller_display_name)s%(_1)s pazar listesindeki %(_0)s%(listing)s"
+"%(_1)s'yi sildi"
 
 #, fuzzy
 msgid ""
-"You received this notification because you have an active offer on this "
-"listing, or you follow the listing."
+"You received this notification because you have an offer on this listing, or "
+"you follow the listing."
 msgstr ""
-"Bu bildirimi aldınız çünkü bu listede aktif bir teklifiniz var ya da listeyi "
-"takip ediyorsunuz."
+"Bu bildirimi aldın çünkü bu listelemede bir teklifin var ya da listelemeyi "
+"takip ediyorsun."
 
 #, fuzzy
 msgid ""
@@ -1414,21 +1415,21 @@ msgstr "Aşağıdaki bağlantıya tıklayarak yenileyebilirsiniz:"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)"
-"s%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)"
-"s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s published a marketplace listing %(_0)s"
+"%(listing)s%(_1)s with an equipment item you follow: %(_0)s%(line_item)s"
+"%(_1)s"
 msgstr ""
 "%(_0)s%(seller_display_name)s%(_1)s takip ettiğiniz bir ekipman maddesi ile "
-"pazar yeri listesi %(_0)s%(listing)s%(_1)s yayımladı: %(_0)s%(line_item)"
-"s%(_1)s"
+"pazar yeri listesi %(_0)s%(listing)s%(_1)s yayımladı: %(_0)s%(line_item)s"
+"%(_1)s"
 
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted somebody else's offer in their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesindeki %(_0)s%(listing)"
-"s%(_1)s için başkasının teklifini kabul etti."
+"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesindeki %(_0)s%(listing)s"
+"%(_1)s için başkasının teklifini kabul etti."
 
 #, fuzzy
 msgid ""
@@ -1438,21 +1439,13 @@ msgstr ""
 "Üzgünüm, bu listeye rezerve veya satılmış durumda olduğu sürece teklif "
 "veremezsiniz."
 
-#, fuzzy
-msgid ""
-"You received this notification because you have an offer on this listing, or "
-"you follow the listing."
-msgstr ""
-"Bu bildirimi aldın çünkü bu listelemede bir teklifin var ya da listelemeyi "
-"takip ediyorsun."
-
 #, python-format
 msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s sold a line item in their marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s pazar listesindeki %(_0)s%(listing)s%(_1)"
-"s'nde bir öğe sattı"
+"%(_0)s%(seller_display_name)s%(_1)s pazar listesindeki %(_0)s%(listing)s"
+"%(_1)s'nde bir öğe sattı"
 
 #, fuzzy
 msgid "Item"
@@ -1460,11 +1453,11 @@ msgstr "Ürün"
 
 #, python-format
 msgid ""
-"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"%(_0)s%(seller_display_name)s%(_1)s updated their marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesini %(_0)s%(listing)"
-"s%(_1)s güncelledi."
+"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesini %(_0)s%(listing)s"
+"%(_1)s güncelledi."
 
 #, fuzzy
 msgid ""
@@ -1478,9 +1471,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)"
-"s%(_1)s, but you haven't marked the item as sold yet. Please do so as soon "
-"as possible and leave feedback to the buyer."
+"Recently, you accepted an offer for the marketplace listing %(_0)s%(listing)s"
+"%(_1)s, but you haven't marked the item as sold yet. Please do so as soon as "
+"possible and leave feedback to the buyer."
 msgstr ""
 "Son zamanlarda %(_0)s%(listing)s%(_1)s için bir teklifi kabul ettin, ama "
 "henüz maddeyi satılmış olarak işaretlemedin. Lütfen bunu mümkün olan en kısa "
@@ -1492,8 +1485,8 @@ msgstr "Satıldı olarak işaretle"
 
 #, python-format
 msgid ""
-"Don't forget to mark your reserved items as sold in the listing %(_0)"
-"s%(listing)s%(_1)s, if you sold them."
+"Don't forget to mark your reserved items as sold in the listing %(_0)s"
+"%(listing)s%(_1)s, if you sold them."
 msgstr ""
 "Eğer sattıysan, %(_0)s%(listing)s%(_1)s listesindeki rezerve ettiğin "
 "maddeleri satılmış olarak işaretlemeyi unutma."
@@ -1503,8 +1496,8 @@ msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s accepted your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesindeki %(_0)s%(listing)"
-"s%(_1)s için teklifini kabul etti."
+"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesindeki %(_0)s%(listing)s"
+"%(_1)s için teklifini kabul etti."
 
 #, fuzzy
 msgid "Offer details"
@@ -1553,8 +1546,8 @@ msgid ""
 "You accepted %(_0)s%(buyer_display_name)s%(_1)s's offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(buyer_display_name)s%(_1)s'in pazar yeri listesindeki %(_0)"
-"s%(listing)s%(_1)s için teklifini kabul ettin."
+"%(_0)s%(buyer_display_name)s%(_1)s'in pazar yeri listesindeki %(_0)s"
+"%(listing)s%(_1)s için teklifini kabul ettin."
 
 #, fuzzy
 msgid ""
@@ -1601,8 +1594,8 @@ msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s made an offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(buyer_display_name)s%(_1)s pazar yeri listeniz %(_0)s%(listing)s%(_1)"
-"s için bir teklif yaptı"
+"%(_0)s%(buyer_display_name)s%(_1)s pazar yeri listeniz %(_0)s%(listing)s"
+"%(_1)s için bir teklif yaptı"
 
 #, fuzzy
 msgid "To review and respond to the offer, please visit your listing page."
@@ -1615,8 +1608,8 @@ msgid ""
 "%(_0)s%(seller_display_name)s%(_1)s rejected your offer for their "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesindeki %(_0)s%(listing)"
-"s%(_1)s için teklifini reddetti."
+"%(_0)s%(seller_display_name)s%(_1)s pazar yeri listesindeki %(_0)s%(listing)s"
+"%(_1)s için teklifini reddetti."
 
 #, fuzzy
 msgid ""
@@ -1635,8 +1628,8 @@ msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s retracted their offer for your "
 "marketplace listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(buyer_display_name)s%(_1)s, senin pazar yeri listelemen %(_0)"
-"s%(listing)s%(_1)s için teklifini geri çekti."
+"%(_0)s%(buyer_display_name)s%(_1)s, senin pazar yeri listelemen %(_0)s"
+"%(listing)s%(_1)s için teklifini geri çekti."
 
 #, fuzzy
 msgid ""
@@ -1659,13 +1652,13 @@ msgid ""
 "%(_0)s%(buyer_display_name)s%(_1)s updated their offer for your marketplace "
 "listing %(_0)s%(listing)s%(_1)s"
 msgstr ""
-"%(_0)s%(buyer_display_name)s%(_1)s, senin pazar yeri listelemen %(_0)"
-"s%(listing)s%(_1)s için teklifini güncelledi."
+"%(_0)s%(buyer_display_name)s%(_1)s, senin pazar yeri listelemen %(_0)s"
+"%(listing)s%(_1)s için teklifini güncelledi."
 
 #, python-format
 msgid ""
-"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)"
-"s%(_1)s, and we noticed that you haven't rated the buyer yet."
+"Hi! You recently sold an item from the marketplace listing %(_0)s%(listing)s"
+"%(_1)s, and we noticed that you haven't rated the buyer yet."
 msgstr ""
 "Merhaba! Yakın zamanda pazar yeri listesi %(_0)s%(listing)s%(_1)s'nden bir "
 "ürün sattın ve alıcıyı henüz değerlendirmediğini fark ettik."
@@ -1686,17 +1679,17 @@ msgstr "Geri bildirim bırak"
 
 #, python-format
 msgid ""
-"Rate the buyer for your recent purchase from marketplace listing %(_0)"
-"s%(listing)s%(_1)s"
+"Rate the buyer for your recent purchase from marketplace listing %(_0)s"
+"%(listing)s%(_1)s"
 msgstr ""
 "%(_0)s%(listing)s%(_1)s üzerinden yaptığın son satın alma için alıcıyı "
 "değerlendir."
 
 #, python-format
 msgid ""
-"Hi! You recently purchased an item from the marketplace listing %(_0)"
-"s%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)"
-"s%(seller_display_name)s%(_1)s yet."
+"Hi! You recently purchased an item from the marketplace listing %(_0)s"
+"%(listing)s%(_1)s, and we noticed that you haven't rated the seller %(_0)s"
+"%(seller_display_name)s%(_1)s yet."
 msgstr ""
 "Merhaba! Yakın zamanda %(_0)s%(listing)s%(_1)s pazar yeri listesinden bir "
 "ürün satın aldınız ve henüz satıcı %(_0)s%(seller_display_name)s%(_1)s için "
@@ -1803,15 +1796,3 @@ msgstr "Pazar yerinde sat"
 #, fuzzy
 msgid "Close"
 msgstr "Kapat."
-
-#, fuzzy
-msgid "For sale"
-msgstr "Satılık"
-
-#, fuzzy
-msgid "Wanted"
-msgstr "İsteniyor"
-
-#, fuzzy
-msgid "Catadioptric: Rowe-Ackermann Schmidt astrograph"
-msgstr "Katadioptrik: Rowe-Ackermann Schmidt astroğraf"

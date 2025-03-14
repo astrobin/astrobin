@@ -1,30 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: sq\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
-
-#, fuzzy
-msgid "Notifications"
-msgstr "Njoftime"
-
-#, fuzzy
-msgid "You have no notifications."
-msgstr "Nuk ke njoftime."
-
-#, fuzzy
-msgid "Settings"
-msgstr "Cilësimet"
-
-#, fuzzy
-msgid "Mark all as read"
-msgstr "Shëno të gjitha si të lexuara"
-
-#, fuzzy
-msgid "You have no new notifications."
-msgstr "Nuk ke njoftime të reja."
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, fuzzy
 msgid "You have a new follower"
@@ -43,16 +25,56 @@ msgid "Your image was plate-solved"
 msgstr "Imazhi yt u zgjidh (plate-solved)"
 
 #, fuzzy
+msgid "Your image was approved by a moderator"
+msgstr "Imazhi yt u miratua nga një moderator"
+
+#, fuzzy
 msgid "Your image could not be plate-solved"
 msgstr "Imazhi yt nuk mund të zgjidhej (plate-solved)"
+
+#, fuzzy
+msgid "Your image was plate-solved (advanced)"
+msgstr "Imazhi yt u zgjidh (plate-solved) (avancuar)"
+
+#, fuzzy
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Imazhi yt nuk mund të zgjidhej (plate-solved) (avancuar)"
 
 #, fuzzy
 msgid "Your image received a new comment"
 msgstr "Imazhi yt mori një koment të ri"
 
 #, fuzzy
+msgid "Your edit proposal received a new comment"
+msgstr "Propozimi yt për redaktim mori një koment të ri"
+
+#, fuzzy
+msgid "Your scheduled IOTD received a new comment"
+msgstr "IOTD-ja jote e planifikuar mori një koment të ri"
+
+#, fuzzy
+msgid "Your unapproved equipment item received a comment"
+msgstr "Artikulli yt i pajisjeve të pa miratuara mori një koment"
+
+#, fuzzy
+msgid "Your listing has a new private conversation"
+msgstr "Lista jote ka një bisedë private të re"
+
+#, fuzzy
+msgid "Your private conversation has a new comment"
+msgstr "Biseda jote private ka një koment të ri"
+
+#, fuzzy
+msgid "Your listing has a new question"
+msgstr "Lista jote ka një pyetje të re"
+
+#, fuzzy
 msgid "There was a reply to your comment"
 msgstr "Ishte një përgjigje në komentet e tua"
+
+#, fuzzy
+msgid "A new comment on your image requires moderation"
+msgstr "Një koment i ri në imazhin tënd kërkon moderim"
 
 #, fuzzy
 msgid "Your comment was approved"
@@ -73,6 +95,10 @@ msgstr "Komentin tënd e pëlqyen"
 #, fuzzy
 msgid "Your forum post was liked"
 msgstr "Postimi yt në forum u pëlqye"
+
+#, fuzzy
+msgid "Your forum post was approved"
+msgstr "Postimi yt në forum u miratua"
 
 #, fuzzy
 msgid "Your API Key request has been approved"
@@ -107,6 +133,18 @@ msgid "New forum topic in a group you are a member of"
 msgstr "Temë e re në forum në një grup ku je anëtar"
 
 #, fuzzy
+msgid "New forum topic for an equipment item you use"
+msgstr "Temë e re në forum për një artikull pajisjeje që përdor"
+
+#, fuzzy
+msgid "New forum topic for an equipment item you follow"
+msgstr "Temë e re në forum për një artikull pajisjeje që ndjek"
+
+#, fuzzy
+msgid "Your forum topic was moved"
+msgstr "Tema jote në forum u zhvendos"
+
+#, fuzzy
 msgid "You have received a new private message"
 msgstr "Ke marrë një mesazh privat të ri"
 
@@ -139,6 +177,14 @@ msgid "Would you like to activate your account?"
 msgstr "A do të doje të aktivizosh llogarinë tënde?"
 
 #, fuzzy
+msgid "New reply in a subscribed forum topic"
+msgstr "Përgjigje e re në një temë forumi që ke abonuar"
+
+#, fuzzy
+msgid "New reply in a forum topic that you started"
+msgstr "Përgjigje e re në një temë forumi që ke filluar"
+
+#, fuzzy
 msgid "You were mentioned in a forum post"
 msgstr "Të përmendën në një postim në forum"
 
@@ -155,12 +201,28 @@ msgid "Congratulations for your first image on AstroBin!"
 msgstr "Urime për imazhin tënd të parë në AstroBin!"
 
 #, fuzzy
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "Dorëzove imazhin tënd për shqyrtim për IOTD/TP"
+
+#, fuzzy
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "Imazhi nuk u dorëzua për shqyrtim për IOTD/TP"
+
+#, fuzzy
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "Imazhi po i afrohet afatit për dorëzimin për IOTD/TP"
+
+#, fuzzy
 msgid "Thank you for getting a subscription!"
 msgstr "Faleminderit që u abonove!"
 
 #, fuzzy
 msgid "Thank you for your payment!"
 msgstr "Faleminderit për pagesën!"
+
+#, fuzzy
+msgid "Subscription canceled"
+msgstr "Abonimi u anulua"
 
 #, fuzzy
 msgid "You were removed from the IOTD staff"
@@ -171,140 +233,16 @@ msgid "You have been inactive as an IOTD staff member"
 msgstr "Ke qenë inaktiv si anëtar i stafit të IOTD"
 
 #, fuzzy
+msgid "Your IOTD staff activity is insufficient"
+msgstr "Aktiviteti yt si staf IOTD është i pamjaftueshëm"
+
+#, fuzzy
 msgid "An image you promoted made it to Top Pick"
 msgstr "Një imazh që promovove arriti në Top Pick"
 
 #, fuzzy
 msgid "An image you promoted made it to IOTD"
 msgstr "Një imazh që promovove arriti në IOTD"
-
-#, fuzzy
-msgid "New reply in a subscribed forum topic"
-msgstr "Përgjigje e re në një temë forumi që ke abonuar"
-
-#, fuzzy
-msgid "Your image was nominated to be a Top Pick"
-msgstr "Imazhi yt u nominua për të qenë një Top Pick"
-
-#, fuzzy
-msgid "Your image was voted Top Pick"
-msgstr "Imazhi yt u votua si Top Pick"
-
-#, fuzzy
-msgid "Your image was voted Image of the Day"
-msgstr "Imazhi yt u votua si Imazhi i Ditës"
-
-#, fuzzy
-msgid "Your image was plate-solved (advanced)"
-msgstr "Imazhi yt u zgjidh (plate-solved) (avancuar)"
-
-#, fuzzy
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "Imazhi yt nuk mund të zgjidhej (plate-solved) (avancuar)"
-
-#, fuzzy
-msgid "A new comment on your image requires moderation"
-msgstr "Një koment i ri në imazhin tënd kërkon moderim"
-
-#, fuzzy
-msgid "Your forum post was approved"
-msgstr "Postimi yt në forum u miratua"
-
-#, fuzzy
-msgid "You were mentioned in an image description"
-msgstr "Të përmendej në përshkrimin e një imazhi"
-
-#, fuzzy
-msgid "Your edit proposal received a new comment"
-msgstr "Propozimi yt për redaktim mori një koment të ri"
-
-#, fuzzy
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "Imazhi yt u dorëzua për shqyrtim për IOTD/TP"
-
-#, fuzzy
-msgid "A gear item that you used was renamed"
-msgstr "Një artikull pajisjeje që ke përdorur u riemërua"
-
-#, fuzzy
-msgid "Your scheduled IOTD received a new comment"
-msgstr "IOTD-ja jote e planifikuar mori një koment të ri"
-
-#, fuzzy
-msgid "Your unapproved equipment item received a comment"
-msgstr "Artikulli yt i pajisjeve të pa miratuara mori një koment"
-
-#, fuzzy
-msgid "New forum topic for an equipment item you use"
-msgstr "Temë e re në forum për një artikull pajisjeje që përdor"
-
-#, fuzzy
-msgid "You were added as a collaborator to an image"
-msgstr "Të shtua si bashkëpunëtor në një imazh"
-
-#, fuzzy
-msgid "You were removed as a collaborator to an image"
-msgstr "Të hoqën si bashkëpunëtor në një imazh"
-
-#, fuzzy
-msgid "User removed self as a collaborator to your image"
-msgstr "Përdoruesi e hoqi veten si bashkëpunëtor në imazhin tënd"
-
-#, fuzzy
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr "Dorëzove imazhin tënd për shqyrtim për IOTD/TP"
-
-#, fuzzy
-msgid "Login attempt detected from a different country"
-msgstr "U zbulua një përpjekje për t'u kyçur nga një vend tjetër"
-
-#, fuzzy
-msgid "Login attempt with weak password"
-msgstr "Përpjekje për t'u kyçur me fjalëkalim të dobët"
-
-#, fuzzy
-msgid "Your image was approved by a moderator"
-msgstr "Imazhi yt u miratua nga një moderator"
-
-#, fuzzy
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr "Imazhi nuk u dorëzua për shqyrtim për IOTD/TP"
-
-#, fuzzy
-msgid "Subscription canceled"
-msgstr "Abonimi u anulua"
-
-#, fuzzy
-msgid "Your forum topic was moved"
-msgstr "Tema jote në forum u zhvendos"
-
-#, fuzzy
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr "Imazhi po i afrohet afatit për dorëzimin për IOTD/TP"
-
-#, fuzzy
-msgid "Your listing has a new private conversation"
-msgstr "Lista jote ka një bisedë private të re"
-
-#, fuzzy
-msgid "Your private conversation has a new comment"
-msgstr "Biseda jote private ka një koment të ri"
-
-#, fuzzy
-msgid "Your listing has a new question"
-msgstr "Lista jote ka një pyetje të re"
-
-#, fuzzy
-msgid "New forum topic for an equipment item you follow"
-msgstr "Temë e re në forum për një artikull pajisjeje që ndjek"
-
-#, fuzzy
-msgid "New reply in a forum topic that you started"
-msgstr "Përgjigje e re në një temë forumi që ke filluar"
-
-#, fuzzy
-msgid "Your IOTD staff activity is insufficient"
-msgstr "Aktiviteti yt si staf IOTD është i pamjaftueshëm"
 
 #, fuzzy
 msgid "An image you dismissed made it to Top Pick"
@@ -315,8 +253,36 @@ msgid "An image you dismissed made it to IOTD"
 msgstr "Një imazh që e hoqe arriti në IOTD"
 
 #, fuzzy
+msgid "Your image might become a Top Pick Nomination"
+msgstr "Imazhi yt mund të bëhet një Nominim për Top Pick"
+
+#, fuzzy
+msgid "Your image might become a Top Pick"
+msgstr "Imazhi yt mund të bëhet një Top Pick"
+
+#, fuzzy
+msgid "Your image was voted Top Pick Nomination"
+msgstr "Imazhi yt u votua si Nominim për Top Pick"
+
+#, fuzzy
+msgid "Your image was voted Top Pick"
+msgstr "Imazhi yt u votua si Top Pick"
+
+#, fuzzy
+msgid "Your image was voted Image of the Day"
+msgstr "Imazhi yt u votua si Imazhi i Ditës"
+
+#, fuzzy
 msgid "Your IOTD staff member stats"
 msgstr "Statistikat e anëtarit të stafit të IOTD-së"
+
+#, fuzzy
+msgid "You were mentioned in an image description"
+msgstr "Të përmendej në përshkrimin e një imazhi"
+
+#, fuzzy
+msgid "A gear item that you used was renamed"
+msgstr "Një artikull pajisjeje që ke përdorur u riemërua"
 
 #, fuzzy
 msgid "Collaboration Request: Accept or Deny"
@@ -331,13 +297,21 @@ msgid "User denied your collaboration request"
 msgstr "Përdoruesi e refuzoi kërkesën tënde për bashkëpunim"
 
 #, fuzzy
-msgid "Your image might become a Top Pick Nomination"
-msgstr "Imazhi yt mund të bëhet një Nominim për Top Pick"
+msgid "You were added as a collaborator to an image"
+msgstr "Të shtua si bashkëpunëtor në një imazh"
 
 #, fuzzy
-msgid "Your image might become a Top Pick"
-msgstr "Imazhi yt mund të bëhet një Top Pick"
+msgid "You were removed as a collaborator to an image"
+msgstr "Të hoqën si bashkëpunëtor në një imazh"
 
 #, fuzzy
-msgid "Your image was voted Top Pick Nomination"
-msgstr "Imazhi yt u votua si Nominim për Top Pick"
+msgid "User removed self as a collaborator to your image"
+msgstr "Përdoruesi e hoqi veten si bashkëpunëtor në imazhin tënd"
+
+#, fuzzy
+msgid "Login attempt detected from a different country"
+msgstr "U zbulua një përpjekje për t'u kyçur nga një vend tjetër"
+
+#, fuzzy
+msgid "Login attempt with weak password"
+msgstr "Përpjekje për t'u kyçur me fjalëkalim të dobët"

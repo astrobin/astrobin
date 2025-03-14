@@ -1,15 +1,17 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 "
-"&&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 &&(n"
+"%100<10||n%100 >= 20)? 1 : 2);\n"
 
 #, fuzzy
-msgid "Conflict."
-msgstr "Konflikt."
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Dozwolona jest tylko jedna akwizycja wideo na obraz."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Nieskompresowane źródło (max 100 MB)"
@@ -24,65 +26,6 @@ msgstr ""
 "edytora (np.: PixInsight, Adobe Photoshop, itp...) na AstroBin, w celu "
 "archiwizacji. Plik jest przechowywany w sposób poufny i jest on dostępny "
 "tylko dla Ciebie."
-
-msgid "Error!"
-msgstr "Błąd!"
-
-msgid "Staging area"
-msgstr "Przechowalnia"
-
-msgid "Loading"
-msgstr "Wczytywanie"
-
-msgid "(no title)"
-msgstr "(brak tytułu)"
-
-#, fuzzy
-msgid "Image of the day"
-msgstr "Obraz dnia"
-
-#, fuzzy
-msgid "Top pick"
-msgstr "Najlepszy wybór"
-
-#, fuzzy
-msgid "Top pick nomination"
-msgstr "Nominacja do najlepszego wyboru"
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Niewłaściwe dane. Proszę wczytać obraz jeszcze raz. Przepraszamy!"
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "Rewizja %(revision)s"
-
-#, fuzzy
-msgid "Original revision"
-msgstr "Oryginalna rewizja"
-
-#, fuzzy
-msgid "Collaboration"
-msgstr "Współpraca"
-
-#, fuzzy
-msgid "Currently in the IOTD/TP queue"
-msgstr "Obecnie w kolejce IOTD/TP"
-
-#, fuzzy
-msgid "Video"
-msgstr "Wideo"
-
-#, fuzzy
-msgid "There was a problem encoding this video, please upload it again."
-msgstr "Wystąpił problem z kodowaniem tego wideo, proszę przesłać je ponownie."
-
-#, fuzzy
-msgid "If the problem persists, please contact us."
-msgstr "Jeśli problem będzie się powtarzał, skontaktuj się z nami."
-
-#, fuzzy
-msgid "This video is still processing, please return to this page later."
-msgstr "To wideo wciąż się przetwarza, wróć na tę stronę później."
 
 #, fuzzy
 msgid "Dates"
@@ -180,10 +123,65 @@ msgstr "Seeing"
 msgid "Transparency"
 msgstr "Przezroczystość"
 
+msgid "Error!"
+msgstr "Błąd!"
+
+#, fuzzy
+msgid "Image of the day"
+msgstr "Obraz dnia"
+
+#, fuzzy
+msgid "Top pick"
+msgstr "Najlepszy wybór"
+
+#, fuzzy
+msgid "Top pick nomination"
+msgstr "Nominacja do najlepszego wyboru"
+
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Obecnie w kolejce IOTD/TP"
+
+msgid "Staging area"
+msgstr "Przechowalnia"
+
+#, fuzzy
+msgid "Collaboration"
+msgstr "Współpraca"
+
+#, fuzzy
+msgid "Video"
+msgstr "Wideo"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr "Wystąpił problem z kodowaniem tego wideo, proszę przesłać je ponownie."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Jeśli problem będzie się powtarzał, skontaktuj się z nami."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr "To wideo wciąż się przetwarza, wróć na tę stronę później."
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Rewizja %(revision)s"
+
+#, fuzzy
+msgid "Original revision"
+msgstr "Oryginalna rewizja"
+
+msgid "Loading"
+msgstr "Wczytywanie"
+
+msgid "(no title)"
+msgstr "(brak tytułu)"
+
 #, fuzzy
 msgid "Image file not found"
 msgstr "Plik obrazu nie został znaleziony"
 
-#, fuzzy
-msgid "Only one video-based acquisition is allowed per image."
-msgstr "Dozwolona jest tylko jedna akwizycja wideo na obraz."
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Niewłaściwe dane. Proszę wczytać obraz jeszcze raz. Przepraszamy!"

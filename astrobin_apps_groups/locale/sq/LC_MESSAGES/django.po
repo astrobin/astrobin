@@ -1,10 +1,21 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: sq\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Vetëm kategoritë e mëposhtme mbështesin autosubmission: Rrjeti profesional, "
+"Klubi ose shoqata, Komuniteti në internet, Miq ose partnerë, Zona gjeografike"
 
 #, fuzzy
 msgid "Autosubmission deactivation strategy"
@@ -77,6 +88,18 @@ msgid "Other"
 msgstr "Të tjera"
 
 #, fuzzy
+msgid "Publication"
+msgstr "Publikimi"
+
+#, fuzzy
+msgid "Title"
+msgstr "Titulli"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Çelësi/tag vlera"
+
+#, fuzzy
 msgid "Name"
 msgstr "Emri"
 
@@ -91,6 +114,24 @@ msgstr "Tag-ët HTML lejohet."
 #, fuzzy
 msgid "Category"
 msgstr "Kategoria"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Renditja e imazheve nga default"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Renditja e imazheve sipas çelës/tag vlera"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Nëse imazhet janë të renditura sipas një çelësi/tag vlera, ju lutemi "
+"specifikoni se cili është. <a target='_blank' href='https://welcome.astrobin."
+"com/features/groups'>Mësoni më shumë.<\\/a>"
 
 #, fuzzy
 msgid "Public group"
@@ -129,8 +170,27 @@ msgstr ""
 "që janë dërguar shprehimisht atyre."
 
 #, fuzzy
+msgid "Forum notice"
+msgstr "Njoftimi i forumit"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Shkruani një 'Njoftim në forum' që do të shfaqet mbi formularin 'temë e re'. "
+"Përdorni këtë për të komunikuar rregullat e forumit, përjashtimet, ose "
+"informacionin e rëndësishëm për përdoruesit para se të krijojnë një postim "
+"të ri. Sigurohuni që mesazhi juaj të jetë i qartë dhe i shkurtër."
+
+#, fuzzy
 msgid "Last activity"
 msgstr "Aktiviteti i fundit"
+
+#, fuzzy
+msgid "Date created"
+msgstr "Data e krijimit"
 
 #, fuzzy
 msgid "Members"
@@ -189,6 +249,10 @@ msgid "Cancel"
 msgstr "Anulo"
 
 #, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Ju lutemi mos shtoni më shumë se 100 imazhe njëherësh, faleminderit!"
+
+#, fuzzy
 msgid "Delete group?"
 msgstr "Fshij grupin?"
 
@@ -237,6 +301,10 @@ msgid "Moderate join requests"
 msgstr "Moderoni kërkesat për t'u bashkuar"
 
 #, fuzzy
+msgid "Sort images"
+msgstr "Rendit imazhet"
+
+#, fuzzy
 msgid "This group is public"
 msgstr "Ky grup është publik"
 
@@ -273,8 +341,8 @@ msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"Një grup i krijuar më %(date_created)s, në pronësi të <a href=\"%(owner_url)"
-"s\">%(owner)s</a>, i kategorisë <strong>%(category)s</strong>."
+"Një grup i krijuar më %(date_created)s, në pronësi të <a href=\"%(owner_url)s"
+"\">%(owner)s</a>, i kategorisë <strong>%(category)s</strong>."
 
 #, fuzzy
 msgid "Group forum"
@@ -295,10 +363,6 @@ msgstr "Shiko të gjitha"
 #, fuzzy
 msgid "New topic"
 msgstr "Temë e re"
-
-#, fuzzy
-msgid "Please join the group to view its forum."
-msgstr "Të lutem bashkohu në grup për të parë forumin e tij."
 
 #, fuzzy
 msgid ""
@@ -375,34 +439,36 @@ msgid "Sort"
 msgstr "Rendit"
 
 #, fuzzy
-msgid "Date created"
-msgstr "Data e krijimit"
+msgid "Search"
+msgstr "Kërko"
 
 #, fuzzy
-msgid "Your private groups"
-msgstr "Grupet tuaja private"
+msgid "Private groups you own"
+msgstr "Grupet private që zotëroni"
 
 #, fuzzy
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr "Ti je pronar, ose je anëtar, ose je ftuar në këto grupe private."
+msgid "Private groups you are a member of"
+msgstr "Grupet private të cilat jeni anëtar"
 
 #, fuzzy
-msgctxt "group"
-msgid "Create private group"
-msgstr "Krijo grup privat"
+msgid "Private groups you are invited to"
+msgstr "Grupet private në të cilat jeni ftuar"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Grupet publike që zotëroni"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Grupet publike të cilat jeni anëtar"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Grupet publike në të cilat jeni ftuar"
 
 #, fuzzy
 msgid "Public groups"
 msgstr "Grupet publike"
-
-#, fuzzy
-msgid "Open to the whole community."
-msgstr "I hapur për të gjithë komunitetin."
-
-#, fuzzy
-msgctxt "group"
-msgid "Create public group"
-msgstr "Krijo grup publik"
 
 #, fuzzy
 msgid "No groups available."
@@ -489,6 +555,14 @@ msgid "This group has no join requests."
 msgstr "Ky grup nuk ka kërkesa për t'u bashkuar."
 
 #, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Diçka shkoi keq, Ju lutemi provoni përsëri më vonë."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Shkruani mesazhin tuaj këtu..."
+
+#, fuzzy
 msgid "You cannot add images that are not yours!"
 msgstr "Nuk mund të shtosh imazhe që nuk janë të tua!"
 
@@ -531,101 +605,3 @@ msgstr "Ke lënë grupin"
 #, fuzzy
 msgid "Form saved"
 msgstr "Forma u ruajt"
-
-#, fuzzy
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Vetëm kategoritë e mëposhtme mbështesin autosubmission: Rrjeti profesional, "
-"Klubi ose shoqata, Komuniteti në internet, Miq ose partnerë, Zona gjeografike"
-
-#, fuzzy
-msgid "Publication"
-msgstr "Publikimi"
-
-#, fuzzy
-msgid "Title"
-msgstr "Titulli"
-
-#, fuzzy
-msgid "Key/value tag"
-msgstr "Çelësi/tag vlera"
-
-#, fuzzy
-msgid "Default image sorting"
-msgstr "Renditja e imazheve nga default"
-
-#, fuzzy
-msgid "Image key/value tag sorting"
-msgstr "Renditja e imazheve sipas çelës/tag vlera"
-
-#, fuzzy
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Nëse imazhet janë të renditura sipas një çelësi/tag vlera, ju lutemi "
-"specifikoni se cili është. <a target='_blank' href='https://welcome.astrobin."
-"com/features/groups'>Mësoni më shumë.<\\/a>"
-
-#, fuzzy
-msgid "Search"
-msgstr "Kërko"
-
-#, fuzzy
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Ju lutemi mos shtoni më shumë se 100 imazhe njëherësh, faleminderit!"
-
-#, fuzzy
-msgid "Sort images"
-msgstr "Rendit imazhet"
-
-#, fuzzy
-msgid "Private groups you own"
-msgstr "Grupet private që zotëroni"
-
-#, fuzzy
-msgid "Private groups you are a member of"
-msgstr "Grupet private të cilat jeni anëtar"
-
-#, fuzzy
-msgid "Private groups you are invited to"
-msgstr "Grupet private në të cilat jeni ftuar"
-
-#, fuzzy
-msgid "Public groups you own"
-msgstr "Grupet publike që zotëroni"
-
-#, fuzzy
-msgid "Public groups you are a member of"
-msgstr "Grupet publike të cilat jeni anëtar"
-
-#, fuzzy
-msgid "Public groups you are invited to"
-msgstr "Grupet publike në të cilat jeni ftuar"
-
-#, fuzzy
-msgid "Forum notice"
-msgstr "Njoftimi i forumit"
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Shkruani një 'Njoftim në forum' që do të shfaqet mbi formularin 'temë e re'. "
-"Përdorni këtë për të komunikuar rregullat e forumit, përjashtimet, ose "
-"informacionin e rëndësishëm për përdoruesit para se të krijojnë një postim "
-"të ri. Sigurohuni që mesazhi juaj të jetë i qartë dhe i shkurtër."
-
-#, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Diçka shkoi keq, Ju lutemi provoni përsëri më vonë."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Shkruani mesazhin tuaj këtu..."

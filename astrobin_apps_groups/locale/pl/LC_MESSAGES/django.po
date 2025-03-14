@@ -1,11 +1,23 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 "
-"&&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 &&(n"
+"%100<10||n%100 >= 20)? 1 : 2);\n"
+
+#, fuzzy
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Tylko następujące kategorie wspierają automatyczne zgłaszanie: Sieć "
+"profesjonalna, Klub lub stowarzyszenie, Społeczność internetowa, Przyjaciele "
+"lub partnerzy, Obszar geograficzny"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Strategia deaktywacji autowysyłania"
@@ -59,6 +71,18 @@ msgstr "Wyodrębnij na podstawie sprzętu"
 msgid "Other"
 msgstr "Inne"
 
+#, fuzzy
+msgid "Publication"
+msgstr "Publikacja"
+
+#, fuzzy
+msgid "Title"
+msgstr "Tytuł"
+
+#, fuzzy
+msgid "Key/value tag"
+msgstr "Tag klucz/wartość"
+
 msgid "Name"
 msgstr "Imię"
 
@@ -70,6 +94,24 @@ msgstr "Tagi HTML są dozwolone"
 
 msgid "Category"
 msgstr "Kategoria"
+
+#, fuzzy
+msgid "Default image sorting"
+msgstr "Domyślne sortowanie obrazów"
+
+#, fuzzy
+msgid "Image key/value tag sorting"
+msgstr "Sortowanie obrazów według tagu klucz/wartość"
+
+#, fuzzy
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Jeśli obrazy są sortowane według tagu klucz/wartość, proszę określić, który. "
+"<a target='_blank' href='https://welcome.astrobin.com/features/"
+"groups'>Dowiedz się więcej.<\\/a>"
 
 msgid "Public group"
 msgstr "Grupa publiczna"
@@ -102,8 +144,27 @@ msgstr ""
 "obrazy od wszystkich członków. Grupy bez automatycznego zgłoszenia zawierają "
 "tylko obrazy, które zostały do nich wyraźnie zgłoszone."
 
+#, fuzzy
+msgid "Forum notice"
+msgstr "Ogłoszenie na forum"
+
+#, fuzzy
+msgid ""
+"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
+"to communicate forum rules, disclaimers, or important information to users "
+"before they create a new post. Ensure your message is clear and concise."
+msgstr ""
+"Wprowadź 'Ogłoszenie na forum', które będzie wyświetlane nad formularzem "
+"'nowy temat'. Użyj tego, aby przekazać zasady forum, zastrzeżenia lub ważne "
+"informacje użytkownikom przed utworzeniem nowego posta. Upewnij się, że "
+"twoja wiadomość jest jasna i zwięzła."
+
 msgid "Last activity"
 msgstr "Ostatnia aktywność"
+
+#, fuzzy
+msgid "Date created"
+msgstr "Data utworzenia"
 
 msgid "Members"
 msgstr "Członkowie"
@@ -149,6 +210,10 @@ msgstr "Zapisz"
 msgid "Cancel"
 msgstr "Anuluj"
 
+#, fuzzy
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Proszę nie dodawać więcej niż 100 obrazów na raz, dzięki!"
+
 msgid "Delete group?"
 msgstr "Usunąć grupę?"
 
@@ -191,6 +256,10 @@ msgstr "Opuść grupę"
 #, fuzzy
 msgid "Moderate join requests"
 msgstr "Moderuj prośby o dołączenie"
+
+#, fuzzy
+msgid "Sort images"
+msgstr "Sortuj obrazy"
 
 msgid "This group is public"
 msgstr "Dostęp do grupy jest publiczny"
@@ -244,10 +313,6 @@ msgstr "Zobacz wszystkie"
 #, fuzzy
 msgid "New topic"
 msgstr "Nowy temat"
-
-#, fuzzy
-msgid "Please join the group to view its forum."
-msgstr "Proszę dołączyć do grupy, aby zobaczyć jej forum."
 
 #, fuzzy
 msgid ""
@@ -322,36 +387,36 @@ msgid "Sort"
 msgstr "Sortuj"
 
 #, fuzzy
-msgid "Date created"
-msgstr "Data utworzenia"
+msgid "Search"
+msgstr "Szukaj"
 
 #, fuzzy
-msgid "Your private groups"
-msgstr "Twoje prywatne grupy"
+msgid "Private groups you own"
+msgstr "Prywatne grupy, które posiadasz"
 
 #, fuzzy
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr ""
-"Jesteś właścicielem, członkiem lub zostałeś zaproszony do tych prywatnych "
-"grup."
+msgid "Private groups you are a member of"
+msgstr "Prywatne grupy, których jesteś członkiem"
 
 #, fuzzy
-msgctxt "group"
-msgid "Create private group"
-msgstr "Utwórz prywatną grupę"
+msgid "Private groups you are invited to"
+msgstr "Prywatne grupy, do których zostałeś zaproszony"
+
+#, fuzzy
+msgid "Public groups you own"
+msgstr "Publiczne grupy, które posiadasz"
+
+#, fuzzy
+msgid "Public groups you are a member of"
+msgstr "Publiczne grupy, których jesteś członkiem"
+
+#, fuzzy
+msgid "Public groups you are invited to"
+msgstr "Publiczne grupy, do których zostałeś zaproszony"
 
 #, fuzzy
 msgid "Public groups"
 msgstr "Grupy publiczne"
-
-#, fuzzy
-msgid "Open to the whole community."
-msgstr "Otwarte dla całej społeczności."
-
-#, fuzzy
-msgctxt "group"
-msgid "Create public group"
-msgstr "Utwórz publiczną grupę"
 
 #, fuzzy
 msgid "No groups available."
@@ -438,6 +503,14 @@ msgid "This group has no join requests."
 msgstr "Ta grupa nie ma żadnych próśb o dołączenie."
 
 #, fuzzy
+msgid "Something went wrong, Please try again later."
+msgstr "Coś poszło nie tak, spróbuj ponownie później."
+
+#, fuzzy
+msgid "Type your message here..."
+msgstr "Wpisz swoją wiadomość tutaj..."
+
+#, fuzzy
 msgid "You cannot add images that are not yours!"
 msgstr "Nie możesz dodać obrazów, które nie są twoje!"
 
@@ -480,102 +553,3 @@ msgstr "Opuszczono grupę"
 #, fuzzy
 msgid "Form saved"
 msgstr "Formularz zapisany"
-
-#, fuzzy
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Tylko następujące kategorie wspierają automatyczne zgłaszanie: Sieć "
-"profesjonalna, Klub lub stowarzyszenie, Społeczność internetowa, Przyjaciele "
-"lub partnerzy, Obszar geograficzny"
-
-#, fuzzy
-msgid "Publication"
-msgstr "Publikacja"
-
-#, fuzzy
-msgid "Title"
-msgstr "Tytuł"
-
-#, fuzzy
-msgid "Key/value tag"
-msgstr "Tag klucz/wartość"
-
-#, fuzzy
-msgid "Default image sorting"
-msgstr "Domyślne sortowanie obrazów"
-
-#, fuzzy
-msgid "Image key/value tag sorting"
-msgstr "Sortowanie obrazów według tagu klucz/wartość"
-
-#, fuzzy
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Jeśli obrazy są sortowane według tagu klucz/wartość, proszę określić, który. "
-"<a target='_blank' href='https://welcome.astrobin.com/features/groups'>"
-"Dowiedz się więcej.<\\/a>"
-
-#, fuzzy
-msgid "Search"
-msgstr "Szukaj"
-
-#, fuzzy
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Proszę nie dodawać więcej niż 100 obrazów na raz, dzięki!"
-
-#, fuzzy
-msgid "Sort images"
-msgstr "Sortuj obrazy"
-
-#, fuzzy
-msgid "Private groups you own"
-msgstr "Prywatne grupy, które posiadasz"
-
-#, fuzzy
-msgid "Private groups you are a member of"
-msgstr "Prywatne grupy, których jesteś członkiem"
-
-#, fuzzy
-msgid "Private groups you are invited to"
-msgstr "Prywatne grupy, do których zostałeś zaproszony"
-
-#, fuzzy
-msgid "Public groups you own"
-msgstr "Publiczne grupy, które posiadasz"
-
-#, fuzzy
-msgid "Public groups you are a member of"
-msgstr "Publiczne grupy, których jesteś członkiem"
-
-#, fuzzy
-msgid "Public groups you are invited to"
-msgstr "Publiczne grupy, do których zostałeś zaproszony"
-
-#, fuzzy
-msgid "Forum notice"
-msgstr "Ogłoszenie na forum"
-
-#, fuzzy
-msgid ""
-"Enter a 'Forum notice' to be displayed above the 'new topic' form. Use this "
-"to communicate forum rules, disclaimers, or important information to users "
-"before they create a new post. Ensure your message is clear and concise."
-msgstr ""
-"Wprowadź 'Ogłoszenie na forum', które będzie wyświetlane nad formularzem "
-"'nowy temat'. Użyj tego, aby przekazać zasady forum, zastrzeżenia lub ważne "
-"informacje użytkownikom przed utworzeniem nowego posta. Upewnij się, że "
-"twoja wiadomość jest jasna i zwięzła."
-
-#, fuzzy
-msgid "Something went wrong, Please try again later."
-msgstr "Coś poszło nie tak, spróbuj ponownie później."
-
-#, fuzzy
-msgid "Type your message here..."
-msgstr "Wpisz swoją wiadomość tutaj..."

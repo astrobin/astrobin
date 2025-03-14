@@ -1,31 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
-
-msgid "I wasn't really affected by the data loss"
-msgstr "La perdita di dati non mi ha copito"
-
-msgid "I don't require compensation: I want to support AstroBin"
-msgstr "Non mi serve compensazione: voglio supportare AstroBin"
-
-msgid "I would like to try AstroBin Ultimate for free for 1 month"
-msgstr "Vorrei provare AstroBin Ultimate gratis per 1 mese"
-
-msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
-msgstr "Sento che mi spetta AstroBin Ultimate gratis per 3 mesi"
-
-msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
-msgstr "Sento che mi spetta AstroBin Ultimate gratis per 6 mesi"
-
-msgid "Requested compensation"
-msgstr "Compensazione richiesta"
-
-msgid "Please indicate if and how much you would like to be compensated."
-msgstr "Per favore indica se e di quanto vorresti essere compensato."
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgid "Your migration data"
 msgstr "I tuoi dati di migrazione"
@@ -57,87 +38,8 @@ msgstr "Data"
 msgid "Subscription"
 msgstr "Abbonamento"
 
-msgid "Data loss compensation request"
-msgstr "Richiesta di compensazione per perdita di dati"
-
-msgid ""
-"You are eligible for compensation due to the data loss that happened on "
-"February 16th, 2020."
-msgstr ""
-"Ti spetta una compensazione a causa della perdita di dati avvenuta il 16 "
-"Febbraio 2020."
-
-msgid ""
-"If you haven't had the chance, please take a minute to read what happened at "
-"the following page:"
-msgstr ""
-"Se non ne hai avuto ancora l'opportunità, per favore leggi cosa è accaduto a "
-"questa pagina:"
-
-msgid "Official statement and post-mortem"
-msgstr "Dichiarazione ufficiale e post-mortem"
-
-msgid "Please accept our apology once more."
-msgstr "Per favore accetta le nostre scuse ancora una volta."
-
-msgid "Please chooce your compensation from the list below"
-msgstr "Per favore scegli una compensazione dalla lista qui sotto"
-
-msgid ""
-"Compensation is offered in the form of free time on the new AstroBin "
-"subscription tier called \"Ultimate\"."
-msgstr ""
-"La compensazione è offerta in forma di tempo gratuito sul nuovo abbonamento "
-"AstroBin chiamato \"Ultimate\"."
-
-#, python-format
-msgid ""
-"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
-"target=\"_blank\">the pricing page</a>."
-msgstr ""
-"Per sapere di più riguardo AstroBin Ultimate, visita la <a href=\"%(url)s\" "
-"target=\"_blank\">pagina dei prezzi</a>."
-
-msgid "Submit"
-msgstr "Invia"
-
-msgid "Data loss compensation reauest"
-msgstr "Richiesta per compensazione perdita dati"
-
-msgid "Already done"
-msgstr "Fatto già"
-
-msgid "Sorry, you can't do this again."
-msgstr "Spiacenti, non puoi farlo di nuovo."
-
-msgid "Your preference was already recorded and cannot be changed."
-msgstr "La tua preferenza è stata già registrata e non può essere cambiata."
-
-msgid "Not eligible"
-msgstr "Non idoneo"
-
-msgid "It looks like you're not eligible"
-msgstr "Sembra che tu non sia idoneo"
-
-msgid ""
-"Sorry, but this page is for people who were on AstroBin Premium on the day "
-"that the data loss incident happened, and it looks like you aren't among "
-"them."
-msgstr ""
-"Spiacenti, ma questa pagina è per le persone che erano con AstroBin Premium "
-"il giorno in cui la perdita di dati è avvenuta, e pare che tu non sia fra "
-"questi."
-
-msgid "Success"
-msgstr "Successo"
-
-msgid "All done!"
-msgstr "Tutto fatto!"
-
-msgid ""
-"Your preference has been recorded and it has already been applied. Thank you!"
-msgstr ""
-"La tua preferenza è stata registrata ed è stata già appllicata. Grazie!"
+msgid "Paying member"
+msgstr "Utente pagante"
 
 msgid "Migrate donations"
 msgstr "Migra donazioni"
@@ -175,9 +77,9 @@ msgid ""
 "donated."
 msgstr ""
 "Dato che hai fatto delle donazioni durante lo scorso anno, puoi scegliere di "
-"trasferire l'importo da te donato ad una sottoscrizione per AstroBin Premium."
-" La sottoscrizione avrà una data di scadenza proporzionata all'importo che "
-"hai donato."
+"trasferire l'importo da te donato ad una sottoscrizione per AstroBin "
+"Premium. La sottoscrizione avrà una data di scadenza proporzionata "
+"all'importo che hai donato."
 
 msgid ""
 "If you are feeling particularly cool and generous, you may choose to "
@@ -185,11 +87,14 @@ msgid ""
 "pay again for a Premium plan. Up to you!"
 msgstr ""
 "Se ti senti particolarmente buono e generoso, puoi decidere di considerare "
-"le donazioni passate come un contributo di supporto verso gli sforzi passati,"
-" e pagare ancora per la sottoscrizione a Premium. Scegli tu!"
+"le donazioni passate come un contributo di supporto verso gli sforzi "
+"passati, e pagare ancora per la sottoscrizione a Premium. Scegli tu!"
 
 msgid "No, I want to pay for Premium"
 msgstr "No, voglio pagare per Premium"
+
+msgid "Success"
+msgstr "Successo"
 
 msgid "Your migration was successful."
 msgstr "La tua migrazione è avvenuta con successo."
@@ -250,21 +155,10 @@ msgstr ""
 
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically. If your subscription was created the "
-"regular way, via PayPal, then PayPal will attempt to charge your credit card "
-"or retrieve funds that are available in your account."
+"attempt to renew it automatically."
 msgstr ""
-"Hai un abbonamento a rinnovo automatico su AstroBin, e proveremo a "
-"rinnovarlo automaticamente. Se il tuo abbonamento è stato creato in maniera "
-"normale, via PayPal, allora PayPal cercherà di riscuotere dalla tua carta di "
-"credito oppure usare i fondi disponibili nel tuo account."
-
-msgid ""
-"If your subscription was created manually via a bank transfer, please get in "
-"touch for a new payment."
-msgstr ""
-"Se il tuo abbonamento è stato creato manualmente tramite trasferimento "
-"bancario, contattaci per un nuovo pagamento."
+"Hai un abbonamento che si rinnova automaticamente, quindi tenteremo di "
+"rinnovarlo automaticamente."
 
 msgid "Thank you!"
 msgstr "Grazie!"
@@ -285,408 +179,3 @@ msgstr ""
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr ""
 "Il tuo abbonamento su AstroBin sarà rinnovato automaticamente tra 30 giorni"
-
-msgid "You follow each other"
-msgstr "Seguite l'un l'altro"
-
-msgid "Images"
-msgstr "Immagini"
-
-msgid "Followers"
-msgstr "Follower"
-
-msgid "Following"
-msgstr "Following"
-
-msgid "User"
-msgstr "Utente"
-
-msgid "No users."
-msgstr "Nessun utente."
-
-msgid "Administrator"
-msgstr "Amministratore"
-
-msgid "Image moderator"
-msgstr "Moderatore di immagini"
-
-msgid "IOTD Submitter"
-msgstr "Submitter Foto del Giorno"
-
-msgid "IOTD Reviewer"
-msgstr "Reviewer Foto del Giorno"
-
-msgid "IOTD Judge"
-msgstr "Giudice Foto del Giorno"
-
-msgid "Premium member"
-msgstr "Utente Premium"
-
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-"I report delle tue email \"rimbalzate\" sono state rimossi da AstroBin. "
-"Assicurati che la tua email funzioni bene, altrimenti riceverai di nuovo "
-"questo messaggio in futuro. Grazie!"
-
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
-"Le tue segnalzioni di spam sono state rimosse da AstroBin. Assicurati di non "
-"avere un filtro o una regola che segnala le email di AstroBin come spam "
-"automaticamente! Se non vuoi più ricevere email da AstroBin, usa il link che "
-"c'è in fondo ad ogni email. Grazie!"
-
-msgid "Perform a blind solve"
-msgstr "Fai la riduzione alla cieca"
-
-msgid ""
-"Attempt to solve with no hints. In most cases this will work, but it will "
-"take longer."
-msgstr ""
-"Cerca di ridurre senza suggerimenti. Nella maggior parte dei casi funzionerà,"
-" ma ci vorrà un po' più tempo."
-
-msgid "Width of the field in degrees"
-msgstr "Grandezza del campo in gradi"
-
-msgid "Width of the field in arcminutes"
-msgstr "Grandezza del campo in minuti d'arco"
-
-msgid "Resolution of the field in arcseconds/pixel"
-msgstr "Risoluzione del campo in secondi d'arco per pixel"
-
-msgid "Field size units"
-msgstr "Unità della grandezza del campo"
-
-msgid "Min field size"
-msgstr "Minima dimensione del campo"
-
-msgid "Estimate the lower bound for the width of this field."
-msgstr "Stima il limite inferiore per la grandezza di questo campo."
-
-msgid "Max field size"
-msgstr "Massima dimensione del campo"
-
-msgid "Estimate the upper bound for the width of this field."
-msgstr "Stima il limite superiore per la grandezza di questo campo."
-
-msgid "Center RA"
-msgstr "Centro AR"
-
-msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr "Centro AR del campo in gradi, da 0,000 a 360,000"
-
-msgid "Center dec"
-msgstr "Centro dec"
-
-msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr "Centro dec del campo in gradi, da -90,000 a +90,000"
-
-msgid "Radius"
-msgstr "Raggio"
-
-msgid ""
-"Tells the plate-solving engine to look within these many degrees of the "
-"given center RA and dec position."
-msgstr ""
-"Dice al motore di riduzione astrometrica di guardare entro questi gradi dal "
-"centro AR e dec fornito."
-
-msgid "Small"
-msgstr "Piccolo"
-
-msgid "Medium"
-msgstr "Medio"
-
-msgid "Large"
-msgstr "Grande"
-
-msgid "Sample raw frame (max 100 MB)"
-msgstr "Frame raw di esempio (max 100 MB)"
-
-msgid ""
-"To improve the accuracy of your plate-solution even further, please upload "
-"one of the XISF or FITS files from your data set. Such files normally have "
-"date and time headers that will allow AstroBin to calculate solar system "
-"body ephemerides and find planets and asteroids in your image (provided you "
-"also add location information to it).<br/><br/>For maximum accuracy, it's "
-"recommended that you use PixInsight's native and open format XISF. Learn "
-"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
-"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
-"note:</strong> it's very important that the XISF or FITS file you upload is "
-"aligned to your processed image, otherwise the object annotations will not "
-"match. To improve your chances at a successful accurate plate-solution, "
-"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
-msgstr ""
-"Per migliorare l'accuratezza della riduzione astrometrica, carica uno dei "
-"file XISF o FITS dai tuoi dati. Questi file di solito hanno gli header di "
-"data e tempo che permetteranno ad AstroBin di calcolare efemiridi del "
-"sistema solare, e trovare pianeti ed asteroidi nella tua immaine (se ci hai "
-"anche associato informazioni sul luogo di acquisizione).<br/><br/>Per la "
-"massima accuratezza, si raccomanda che usi il formato aperto e nativo di "
-"PixInsight: XISF. Scopri di più riguardo XISF qui:<br/><br/><a href=\"https:"
-"//pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</a>"
-"<br/><br/><strong>Nota bene:</strong> è molto importante che il file XISF o "
-"FITS che carichi sia allineato alla tua immagine processata, altrimenti le "
-"annotazioni degli oggetti non corrisponderanno. Per migliorare le "
-"probabilità di una riduzione astormetica accurata, calibra il file "
-"normalemnte (dark/bias/flat) ma non fare lo stretch."
-
-msgid "Scaled font size"
-msgstr "Dimensione del font scalato"
-
-msgid "Font size of the annotations on your main image page"
-msgstr ""
-"Dimensione del font delle annotazioni sulla pagina principale dell'immagine"
-
-msgid "Show equatorial grid"
-msgstr "Mostra la griglia equatoriale"
-
-msgid "Show constellation borders"
-msgstr "Mostra confini costellazioni"
-
-msgid "Show constellation lines"
-msgstr "Mostra linee costellazioni"
-
-msgid "Show named stars"
-msgstr "Mostra stelle con nomi"
-
-msgid "Show Messier objects"
-msgstr "Mostra oggetti Messier"
-
-msgid "Show NGC and IC objects"
-msgstr "Mostra oggetti NGC e IC"
-
-msgid "Show VdB objects"
-msgstr "Mostra oggetti VdB"
-
-msgid "Show Sharpless objects"
-msgstr "Mostra oggetti Sharpless"
-
-msgid "Show Barnard objects"
-msgstr "Mostra oggetti Bernard"
-
-msgid "Show PGC objects"
-msgstr "Mostra oggetti PGC"
-
-msgid "Show planets"
-msgstr "Mostra pianeti"
-
-msgid ""
-"Only available if your image at least an acquisition time and an accurate "
-"location"
-msgstr "Sono disponibile se la tua immagine ha data e luogo di acquisizione"
-
-msgid "Show asteroids"
-msgstr "Mostra asteroidi"
-
-msgid "Show GCVS stars"
-msgstr "Mostra stelle GCVS"
-
-msgid "General Catalog of Variable Stars"
-msgstr "Catalogo generale di stelle variabili"
-
-msgid "Show Tycho-2 catalog"
-msgstr "Mostra catalogo Tycho-2"
-
-msgid "Show CGPN objects"
-msgstr "Mostra oggetti CGPN"
-
-msgid "Getting plate-solving status, please wait..."
-msgstr "Controllo dello stato della riduzione astrometrica, attendere..."
-
-msgid "Plate-solving starting, please do not leave this page..."
-msgstr ""
-"Riduzione astrometrica in fase di iniziazione, non chiudere questa pagina..."
-
-msgid "Advanced plate-solving starting, please do not leave this page..."
-msgstr ""
-"Riduzione astrometrica iavanzata n fase di iniziazione, non chiudere questa "
-"pagina..."
-
-msgid "Plate-solving started. You may leave this page."
-msgstr "Riduzione astrometrica in corso. Puoi chiudere questa pagina."
-
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr "Riduzione astrometrica avanzata in corso. Puoi chiudere questa pagina."
-
-msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr "Riduzione astrmetrica quasi pronta, non chiudere questa pagina..."
-
-msgid "This image could not be plate-solved."
-msgstr "Non è stato possibile ridurre l'immagine astrometricamente."
-
-msgid "The advanced plate-solving failed."
-msgstr "La riduzione astrometrica avanzata ha avuto esito negativo."
-
-msgid "This image has been plate-solved. Refresh the page to see new data!"
-msgstr ""
-"L'immagine è stata ridotta astrometricamente. Ricarica la pagine per vedere "
-"i nuovi dati."
-
-msgid "The advanced plate-solved finished. Refresh the page to see new data!"
-msgstr ""
-"L'immagine è stata ridotta astrometricamente in modalità avanzata. Ricarica "
-"la pagine per vedere i nuovi dati!"
-
-msgid "Error"
-msgstr "Errore"
-
-msgid ""
-"AstroBin could not plate-solve this image because it was not possible to "
-"establish a connection to nova.astrometry.net. Please try again later!"
-msgstr ""
-"AstroBin non ha potuto fare la riduzione astrometrica di questa immagine "
-"perché non è stato possibile stabilire una connessione a nova.astrometry.net."
-" Riprova più tardi!"
-
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error."
-msgstr ""
-"AstroBin non ha potuto fare la riduzione astrometrica di questa immagine "
-"perché nova.astrometry.net ha riportato un errore interno."
-
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an unepexted error."
-msgstr ""
-"AstroBin non ha potuto fare la riduzione astrometrica di questa immagine "
-"perché nova.astrometry.net ha riportato un errore inatteso."
-
-msgid ""
-"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
-msgstr ""
-"Mostra oggetti dal catalogo Lynds di nebulose brillanti (LBN) (Lynds 1965)"
-
-msgid ""
-"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr ""
-"Mostra oggetti dal catalogo Lynds di nebulose oscure (LDN) (Lynds 1962)"
-
-msgid "Show quasars"
-msgstr "Mostra quasar"
-
-msgid "Missing"
-msgstr "Assente"
-
-msgid "Basic pending"
-msgstr "Semplice in attesa"
-
-msgid "Basic failed"
-msgstr "Semplice fallita"
-
-msgid "Basic success"
-msgstr "Semplice riuscita"
-
-msgid "Advanced pending"
-msgstr "Avanzata in attesa"
-
-msgid "Advanced failed"
-msgstr "Avanzata fallita"
-
-msgid "Advanced success"
-msgstr "Avanzata riuscita"
-
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error."
-msgstr ""
-"AstroBin non ha potuto effettuare la riduzione astormetrica di questa "
-"immagine a causa di un errore inaspettato."
-
-msgid "n/a"
-msgstr "n/d"
-
-msgid "Starting task..."
-msgstr "Inizio del processo..."
-
-msgid "Downloading image..."
-msgstr "Scaricamento dell'immagine..."
-
-msgid "Plate-solving image..."
-msgstr "Riduzione astrometrica..."
-
-msgid "Generating image annotations..."
-msgstr "Generazione delle annotazioni..."
-
-msgid "Processing SVG documents..."
-msgstr "Elaborazione dei documenti SVG..."
-
-msgid "Uploading results..."
-msgstr "Caricamento dei risultati..."
-
-msgid "Task completed"
-msgstr "Processo completato"
-
-msgid "Plate-solving information"
-msgstr "Informazioni riduzione astrometrica"
-
-msgid "Status"
-msgstr "Stato"
-
-msgid "Started"
-msgstr "Iniziato"
-
-msgid "Astrometry.net job"
-msgstr "Job Astrometry.net"
-
-msgid "PixInsight job"
-msgstr "Job PixInsight"
-
-msgid "PixInsight queue size"
-msgstr "Dimensione coda PixInsight"
-
-msgid "PixInsight stage"
-msgstr "Fase PixInsight"
-
-msgid "PixInsight log"
-msgstr "Log PixInsight"
-
-msgid "RA"
-msgstr "AR"
-
-msgid "center"
-msgstr "centro"
-
-msgid "degrees"
-msgstr "gradi"
-
-msgid "top/left"
-msgstr "alto/sinistra"
-
-msgid "top/right"
-msgstr "alto/destra"
-
-msgid "bottom/right"
-msgstr "basso/destra"
-
-msgid "bottom/left"
-msgstr "basso/sinistra"
-
-msgid "Dec"
-msgstr "Dec"
-
-msgid "Close"
-msgstr "Chiudi"
-
-msgid "Invalid"
-msgstr "Invalido"
-
-msgid "Generating finding charts..."
-msgstr "Generazione mappe..."
-
-msgid "Paying member"
-msgstr "Utente pagante"
-
-msgid ""
-"You have an automatically renewing subscription on AstroBin, and we will "
-"attempt to renew it automatically."
-msgstr ""
-"Hai un abbonamento che si rinnova automaticamente, quindi tenteremo di "
-"rinnovarlo automaticamente."

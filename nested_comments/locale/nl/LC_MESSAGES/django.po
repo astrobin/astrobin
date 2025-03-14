@@ -1,83 +1,27 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: nl\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#, fuzzy
-msgid "You follow each other"
-msgstr "Jullie volgen elkaar"
-
-#, fuzzy
-msgid "Images"
-msgstr "Afbeeldingen"
-
-#, fuzzy
-msgid "Followers"
-msgstr "Volgers"
-
-#, fuzzy
-msgid "Following"
-msgstr "Volgend"
-
-#, fuzzy
-msgid "User"
-msgstr "Gebruiker"
-
-#, fuzzy
-msgid "No users."
-msgstr "Geen gebruikers."
-
-#, fuzzy
-msgid "Administrator"
-msgstr "Beheerder"
-
-#, fuzzy
-msgid "Image moderator"
-msgstr "Afbeelding moderator"
-
-#, fuzzy
-msgid "IOTD Submitter"
-msgstr "IOTD Indiende"
-
-#, fuzzy
-msgid "IOTD Reviewer"
-msgstr "IOTD Beoordelaar"
-
-#, fuzzy
-msgid "IOTD Judge"
-msgstr "IOTD Jury"
-
-#, fuzzy
-msgid "Premium member"
-msgstr "Premium lid"
-
-#, fuzzy
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-"Je e-mail bounce rapporten zijn verwijderd van AstroBin. Zorg ervoor dat je "
-"e-mail goed werkt, anders krijg je dezelfde waarschuwing weer. Bedankt!"
-
-#, fuzzy
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
-"Je spam rapporten zijn verwijderd van AstroBin. Zorg ervoor dat je geen "
-"filter of regel hebt die altijd de e-mails van AstroBin als spam markeert! "
-"Als je geen e-mails van AstroBin wilt ontvangen, zoek dan de "
-"instellingenlink die onderaan elke e-mail staat. Bedankt!"
+msgid "(deleted)"
+msgstr "(gewist)"
 
 #, fuzzy
 msgid "Type your comment here..."
 msgstr "Typ je reactie hier..."
+
+#, fuzzy
+msgid "Translated"
+msgstr "Vertaald"
+
+#, fuzzy
+msgid "Error"
+msgstr "Fout"
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -85,68 +29,28 @@ msgstr "Annuleren"
 msgid "Add a comment"
 msgstr "Commentaar toevoegen"
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
-"sign up</a> to leave a comment."
-msgstr ""
-"Log alsjeblieft <a href=\"%(login_url)s\">in</a> of <a href=\"%(signup_url)"
-"s\">meld je aan</a> om een reactie achter te laten."
-
 msgid "There are no comments yet."
 msgstr "Er zijn nog geen commentaren."
 
-#, fuzzy
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr "Deze reactie wacht op moderatie en zal binnenkort worden beoordeeld."
+msgid "The comment cannot be empty."
+msgstr "Het commentaarveld mag niet leeg zijn."
 
-msgid "(deleted)"
-msgstr "(gewist)"
+msgid "Delete"
+msgstr "Wissen"
+
+msgid "Undelete"
+msgstr "Ongedaan maken wissen"
+
+msgid "Edit"
+msgstr "Bewerken"
+
+msgid "Link"
+msgstr "Link"
 
 #, fuzzy
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "vind-ik-leuk"
-
-#, fuzzy
-msgctxt "Noun, e.g. 'This element has 1 like'"
-msgid "like"
-msgstr "vind-ik-leuk"
-
-msgid "Link"
-msgstr "Link"
-
-msgid "Undelete"
-msgstr "Ongedaan maken wissen"
-
-msgid "Delete"
-msgstr "Wissen"
-
-msgid "Edit"
-msgstr "Bewerken"
-
-#, fuzzy
-msgid "Reply"
-msgstr "Antwoord"
-
-#, fuzzy
-msgid "Like"
-msgstr "Vind-ik-leuk"
-
-#, fuzzy
-msgid "Unlike"
-msgstr "Niet leuk"
-
-msgid "The comment cannot be empty."
-msgstr "Het commentaarveld mag niet leeg zijn."
-
-#, fuzzy
-msgid "Submit"
-msgstr "Indienen"
-
-#, fuzzy
-msgid "Error"
-msgstr "Fout"
 
 #, fuzzy
 msgctxt "Verb (imperative)"
@@ -171,6 +75,26 @@ msgstr "Goedkeuren"
 #, fuzzy
 msgid "Report abuse"
 msgstr "Meld misbruik"
+
+#, fuzzy
+msgid "Translate"
+msgstr "Vertalen"
+
+#, fuzzy
+msgid "See original"
+msgstr "Bekijk origineel"
+
+#, fuzzy
+msgid "Translation failed. Please try again later."
+msgstr "Vertaling mislukt. Probeer het later opnieuw."
+
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
+msgstr ""
+"Log alsjeblieft <a href=\"%(login_url)s\">in</a> of <a href=\"%(signup_url)s"
+"\">meld je aan</a> om een reactie achter te laten."
 
 #, fuzzy
 msgid ""
@@ -209,6 +133,14 @@ msgid "Thank you for understanding!"
 msgstr "Bedankt voor je begrip!"
 
 #, fuzzy
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "Deze reactie wacht op moderatie en zal binnenkort worden beoordeeld."
+
+#, fuzzy
+msgid "Submit"
+msgstr "Indienen"
+
+#, fuzzy
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
@@ -230,129 +162,5 @@ msgstr ""
 "moderator."
 
 #, fuzzy
-msgid "You many not report the same item more than once."
-msgstr "Je mag hetzelfde item niet meer dan eens melden."
-
-#, fuzzy
 msgid "You may not report the same item more than once."
 msgstr "Je mag hetzelfde item niet meer dan eens melden."
-
-#, fuzzy
-msgid "Report a use"
-msgstr "Meld een gebruik"
-
-#, fuzzy
-msgid "Member since"
-msgstr "Lid sinds"
-
-#, fuzzy
-msgid "Last seen online"
-msgstr "Laatst online gezien"
-
-#, fuzzy
-msgid "Total integration time"
-msgstr "Totale integratietijd"
-
-#, fuzzy
-msgid "hours"
-msgstr "uren"
-
-#, fuzzy
-msgid "Average integration time"
-msgstr "Gemiddelde integratietijd"
-
-#, fuzzy
-msgid "Forum posts written"
-msgstr "Forum berichten geschreven"
-
-#, fuzzy
-msgid "Comments written"
-msgstr "Reacties geschreven"
-
-#, fuzzy
-msgid "Comments received"
-msgstr "Ontvangen reacties"
-
-#, fuzzy
-msgid "Likes received"
-msgstr "Ontvangen vind-ik-leuks"
-
-#, fuzzy
-msgid "Views received"
-msgstr "Ontvangen weergaven"
-
-#, fuzzy
-msgid "No date specified"
-msgstr "Geen datum opgegeven"
-
-#, fuzzy
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Geen imaging telescopen of lenzen, of geen imaging camera's opgegeven"
-
-#, fuzzy
-msgid "Gear images"
-msgstr "Uitrusting afbeeldingen"
-
-#, fuzzy
-msgid "Deep sky"
-msgstr "Diepe lucht"
-
-#, fuzzy
-msgid "Solar system"
-msgstr "Zonnestelsel"
-
-#, fuzzy
-msgid "Extremely wide field"
-msgstr "Extreem breed veld"
-
-#, fuzzy
-msgid "Star trails"
-msgstr "Sterren sporen"
-
-#, fuzzy
-msgid "Northern lights"
-msgstr "Noorderlicht"
-
-#, fuzzy
-msgid "Noctilucent clouds"
-msgstr "Noctilucente wolken"
-
-#, fuzzy
-msgid "Gear"
-msgstr "Uitrusting"
-
-#, fuzzy
-msgid "Other"
-msgstr "Overig"
-
-#, fuzzy
-msgid "All"
-msgstr "Alle"
-
-#, fuzzy
-msgid "n/a"
-msgstr "n.v.t."
-
-#, fuzzy
-msgid "No subjects specified"
-msgstr "Geen onderwerpen opgegeven"
-
-#, fuzzy
-msgid "No acquisition details specified"
-msgstr "Geen acquisitiedetails opgegeven"
-
-#, fuzzy
-msgid "Translated"
-msgstr "Vertaald"
-
-#, fuzzy
-msgid "Translate"
-msgstr "Vertalen"
-
-#, fuzzy
-msgid "See original"
-msgstr "Bekijk origineel"
-
-#, fuzzy
-msgid "Translation failed. Please try again later."
-msgstr "Vertaling mislukt. Probeer het later opnieuw."

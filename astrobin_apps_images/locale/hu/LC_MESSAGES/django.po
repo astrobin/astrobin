@@ -1,13 +1,16 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: hu\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-msgid "Conflict."
-msgstr "Konfliktus."
+#, fuzzy
+msgid "Only one video-based acquisition is allowed per image."
+msgstr "Csak egy videó alapú felvétel engedélyezett képenként."
 
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Tömörítetlen forrás (max 100 MB)"
@@ -21,62 +24,6 @@ msgstr ""
 "A kedvenc képszerkesztő programodból (pl. PixInsight, Adobe Photoshop, stb.) "
 "származó végleges feldolgozott képet archiválási céllal itt, az AstroBin-en "
 "tárolhatod. Ezt a fájlt bizalmasan tároljuk, és csak te férhetsz hozzá."
-
-msgid "Error!"
-msgstr "Hiba!"
-
-msgid "Staging area"
-msgstr "Előkészítési Terület"
-
-msgid "Loading"
-msgstr "Töltés"
-
-msgid "(no title)"
-msgstr "(nincs cím)"
-
-msgid "Image of the day"
-msgstr "A Nap Képe"
-
-msgid "Top pick"
-msgstr "Top Pick"
-
-msgid "Top pick nomination"
-msgstr "Top Pick jelölt"
-
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Adatkorrupció. Kérjük, töltsd fel újra a képet. Elnézést kérünk!"
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "%(revision)s számú átdolgozás"
-
-msgid "Original revision"
-msgstr "Eredeti átdolgozás"
-
-msgid "Collaboration"
-msgstr "Kollaboráció"
-
-#, fuzzy
-msgid "Currently in the IOTD/TP queue"
-msgstr "Jelenleg az IOTD/TP sorban"
-
-#, fuzzy
-msgid "Video"
-msgstr "Videó"
-
-#, fuzzy
-msgid "There was a problem encoding this video, please upload it again."
-msgstr "Probléma merült fel a videó kódolásakor, kérlek töltsd fel újra."
-
-#, fuzzy
-msgid "If the problem persists, please contact us."
-msgstr "Ha a probléma továbbra is fennáll, kérlek lépj velünk kapcsolatba."
-
-#, fuzzy
-msgid "This video is still processing, please return to this page later."
-msgstr ""
-"Ez a videó még feldolgozás alatt áll, kérlek térj vissza később erre az "
-"oldalra."
 
 #, fuzzy
 msgid "Dates"
@@ -174,10 +121,62 @@ msgstr "Látás"
 msgid "Transparency"
 msgstr "Átlátszóság"
 
+msgid "Error!"
+msgstr "Hiba!"
+
+msgid "Image of the day"
+msgstr "A Nap Képe"
+
+msgid "Top pick"
+msgstr "Top Pick"
+
+msgid "Top pick nomination"
+msgstr "Top Pick jelölt"
+
+#, fuzzy
+msgid "Currently in the IOTD/TP queue"
+msgstr "Jelenleg az IOTD/TP sorban"
+
+msgid "Staging area"
+msgstr "Előkészítési Terület"
+
+msgid "Collaboration"
+msgstr "Kollaboráció"
+
+#, fuzzy
+msgid "Video"
+msgstr "Videó"
+
+#, fuzzy
+msgid "There was a problem encoding this video, please upload it again."
+msgstr "Probléma merült fel a videó kódolásakor, kérlek töltsd fel újra."
+
+#, fuzzy
+msgid "If the problem persists, please contact us."
+msgstr "Ha a probléma továbbra is fennáll, kérlek lépj velünk kapcsolatba."
+
+#, fuzzy
+msgid "This video is still processing, please return to this page later."
+msgstr ""
+"Ez a videó még feldolgozás alatt áll, kérlek térj vissza később erre az "
+"oldalra."
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "%(revision)s számú átdolgozás"
+
+msgid "Original revision"
+msgstr "Eredeti átdolgozás"
+
+msgid "Loading"
+msgstr "Töltés"
+
+msgid "(no title)"
+msgstr "(nincs cím)"
+
 #, fuzzy
 msgid "Image file not found"
 msgstr "Kép fájl nem található"
 
-#, fuzzy
-msgid "Only one video-based acquisition is allowed per image."
-msgstr "Csak egy videó alapú felvétel engedélyezett képenként."
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Adatkorrupció. Kérjük, töltsd fel újra a képet. Elnézést kérünk!"

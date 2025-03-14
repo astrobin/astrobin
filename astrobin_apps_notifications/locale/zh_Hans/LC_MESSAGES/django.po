@@ -1,25 +1,12 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-14 10:30+0000\n"
 "Language: zh-Hans\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
-
-msgid "Notifications"
-msgstr "通知"
-
-msgid "You have no notifications."
-msgstr "您没有通知。"
-
-msgid "Settings"
-msgstr "设置"
-
-msgid "Mark all as read"
-msgstr "全部标记为已读"
-
-msgid "You have no new notifications."
-msgstr "您没有新通知。"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "You have a new follower"
 msgstr "您有新的粉丝"
@@ -33,14 +20,44 @@ msgstr "新修订版作品-来自您关注的人"
 msgid "Your image was plate-solved"
 msgstr "您的作品已被解析"
 
+msgid "Your image was approved by a moderator"
+msgstr "您的图片已被版主批准"
+
 msgid "Your image could not be plate-solved"
 msgstr "您的作品无法被解析"
+
+msgid "Your image was plate-solved (advanced)"
+msgstr "您的图片已进行板块解算（高级）"
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "您的图片无法进行板块解算（高级）"
 
 msgid "Your image received a new comment"
 msgstr "您的作品收到了新评论"
 
+msgid "Your edit proposal received a new comment"
+msgstr "您的编辑提案收到了一条新评论"
+
+msgid "Your scheduled IOTD received a new comment"
+msgstr "您预定的IOTD收到了一条新评论"
+
+msgid "Your unapproved equipment item received a comment"
+msgstr "您未获批准的设备项目收到了一条评论"
+
+msgid "Your listing has a new private conversation"
+msgstr "您的列表有新的私密对话"
+
+msgid "Your private conversation has a new comment"
+msgstr "您的私密对话有新评论"
+
+msgid "Your listing has a new question"
+msgstr "您的列表有新的问题"
+
 msgid "There was a reply to your comment"
 msgstr "您的评论有了新回复"
+
+msgid "A new comment on your image requires moderation"
+msgstr "您的图片有新评论需要审核"
 
 msgid "Your comment was approved"
 msgstr "您的评论已通过审核"
@@ -56,6 +73,9 @@ msgstr "您的评论获得了赞"
 
 msgid "Your forum post was liked"
 msgstr "您的帖子获得了赞"
+
+msgid "Your forum post was approved"
+msgstr "您的论坛帖子已获批准"
 
 msgid "Your API Key request has been approved"
 msgstr "您的API Key申请被通过"
@@ -81,6 +101,15 @@ msgstr "您关注的人创建了一个新的公开小组"
 msgid "New forum topic in a group you are a member of"
 msgstr "新主题-来自您所在的小组"
 
+msgid "New forum topic for an equipment item you use"
+msgstr "您使用的设备项目有新论坛主题"
+
+msgid "New forum topic for an equipment item you follow"
+msgstr "您关注的设备项目有新论坛主题"
+
+msgid "Your forum topic was moved"
+msgstr "您的论坛主题已被移动"
+
 msgid "You have received a new private message"
 msgstr "您收到新私信"
 
@@ -105,6 +134,12 @@ msgstr "您有作品缺少“远程数据来源”"
 msgid "Would you like to activate your account?"
 msgstr "激活您的账号？"
 
+msgid "New reply in a subscribed forum topic"
+msgstr "您订阅的论坛主题有新回复"
+
+msgid "New reply in a forum topic that you started"
+msgstr "你发起的论坛话题有新回复"
+
 msgid "You were mentioned in a forum post"
 msgstr "您在帖子中被提到"
 
@@ -117,11 +152,23 @@ msgstr "欢迎来到 AstroBin！"
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "恭喜您在 AstroBin 上发布了第一张作品！"
 
+msgid "You submitted your image for IOTD/TP consideration"
+msgstr "您已提交您的图片用于IOTD/TP评选"
+
+msgid "Image not submitted for IOTD/TP consideration"
+msgstr "图片未提交用于IOTD/TP评选"
+
+msgid "Image approaching deadline for IOTD/TP submission"
+msgstr "图片接近IOTD/TP提交截止日期"
+
 msgid "Thank you for getting a subscription!"
 msgstr "感谢您的订阅！"
 
 msgid "Thank you for your payment!"
 msgstr "感谢您支付！"
+
+msgid "Subscription canceled"
+msgstr "订阅已取消"
 
 msgid "You were removed from the IOTD staff"
 msgstr "您已被从“今日最佳”工作人员中被移除"
@@ -129,107 +176,14 @@ msgstr "您已被从“今日最佳”工作人员中被移除"
 msgid "You have been inactive as an IOTD staff member"
 msgstr "作为“今日最佳”工作人员，您一直处于不活跃状态"
 
+msgid "Your IOTD staff activity is insufficient"
+msgstr "你的IOTD工作人员活动不足"
+
 msgid "An image you promoted made it to Top Pick"
 msgstr "您的作品被选为“热门精选”"
 
 msgid "An image you promoted made it to IOTD"
 msgstr "您的作品被选为“今日最佳”"
-
-msgid "New reply in a subscribed forum topic"
-msgstr "您订阅的论坛主题有新回复"
-
-msgid "Your image was nominated to be a Top Pick"
-msgstr "您的图片被提名为精选作品"
-
-msgid "Your image was voted Top Pick"
-msgstr "您的图片被评选为精选作品"
-
-msgid "Your image was voted Image of the Day"
-msgstr "您的图片被评选为今日图片"
-
-msgid "Your image was plate-solved (advanced)"
-msgstr "您的图片已进行板块解算（高级）"
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "您的图片无法进行板块解算（高级）"
-
-msgid "A new comment on your image requires moderation"
-msgstr "您的图片有新评论需要审核"
-
-msgid "Your forum post was approved"
-msgstr "您的论坛帖子已获批准"
-
-msgid "You were mentioned in an image description"
-msgstr "您在一张图片描述中被提及"
-
-msgid "Your edit proposal received a new comment"
-msgstr "您的编辑提案收到了一条新评论"
-
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "您的图片已提交用于IOTD/TP评选"
-
-msgid "A gear item that you used was renamed"
-msgstr "您使用的设备项目已更名"
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr "您预定的IOTD收到了一条新评论"
-
-msgid "Your unapproved equipment item received a comment"
-msgstr "您未获批准的设备项目收到了一条评论"
-
-msgid "New forum topic for an equipment item you use"
-msgstr "您使用的设备项目有新论坛主题"
-
-msgid "You were added as a collaborator to an image"
-msgstr "您被添加为一张图片的合作者"
-
-msgid "You were removed as a collaborator to an image"
-msgstr "您被移除为一张图片的合作者"
-
-msgid "User removed self as a collaborator to your image"
-msgstr "用户将自己从您的图片合作者中移除"
-
-msgid "You submitted your image for IOTD/TP consideration"
-msgstr "您已提交您的图片用于IOTD/TP评选"
-
-msgid "Login attempt detected from a different country"
-msgstr "检测到来自其他国家的登录尝试"
-
-msgid "Login attempt with weak password"
-msgstr "使用弱密码进行登录尝试"
-
-msgid "Your image was approved by a moderator"
-msgstr "您的图片已被版主批准"
-
-msgid "Image not submitted for IOTD/TP consideration"
-msgstr "图片未提交用于IOTD/TP评选"
-
-msgid "Subscription canceled"
-msgstr "订阅已取消"
-
-msgid "Your forum topic was moved"
-msgstr "您的论坛主题已被移动"
-
-msgid "Image approaching deadline for IOTD/TP submission"
-msgstr "图片接近IOTD/TP提交截止日期"
-
-msgid "Your listing has a new private conversation"
-msgstr "您的列表有新的私密对话"
-
-msgid "Your private conversation has a new comment"
-msgstr "您的私密对话有新评论"
-
-msgid "Your listing has a new question"
-msgstr "您的列表有新的问题"
-
-msgid "New forum topic for an equipment item you follow"
-msgstr "您关注的设备项目有新论坛主题"
-
-msgid "New reply in a forum topic that you started"
-msgstr "你发起的论坛话题有新回复"
-
-msgid "Your IOTD staff activity is insufficient"
-msgstr "你的IOTD工作人员活动不足"
 
 msgid "An image you dismissed made it to Top Pick"
 msgstr "你忽略的图片入选了最佳推荐"
@@ -237,8 +191,29 @@ msgstr "你忽略的图片入选了最佳推荐"
 msgid "An image you dismissed made it to IOTD"
 msgstr "你忽略的图片入选了IOTD"
 
+msgid "Your image might become a Top Pick Nomination"
+msgstr "你的图片可能会成为最佳推荐提名"
+
+msgid "Your image might become a Top Pick"
+msgstr "你的图片可能会成为最佳推荐"
+
+msgid "Your image was voted Top Pick Nomination"
+msgstr "你的图片被投票为最佳推荐提名"
+
+msgid "Your image was voted Top Pick"
+msgstr "您的图片被评选为精选作品"
+
+msgid "Your image was voted Image of the Day"
+msgstr "您的图片被评选为今日图片"
+
 msgid "Your IOTD staff member stats"
 msgstr "你的IOTD工作人员统计数据"
+
+msgid "You were mentioned in an image description"
+msgstr "您在一张图片描述中被提及"
+
+msgid "A gear item that you used was renamed"
+msgstr "您使用的设备项目已更名"
 
 msgid "Collaboration Request: Accept or Deny"
 msgstr "合作请求：接受或拒绝"
@@ -249,11 +224,17 @@ msgstr "用户接受了你的合作请求"
 msgid "User denied your collaboration request"
 msgstr "用户拒绝了你的合作请求"
 
-msgid "Your image might become a Top Pick Nomination"
-msgstr "你的图片可能会成为最佳推荐提名"
+msgid "You were added as a collaborator to an image"
+msgstr "您被添加为一张图片的合作者"
 
-msgid "Your image might become a Top Pick"
-msgstr "你的图片可能会成为最佳推荐"
+msgid "You were removed as a collaborator to an image"
+msgstr "您被移除为一张图片的合作者"
 
-msgid "Your image was voted Top Pick Nomination"
-msgstr "你的图片被投票为最佳推荐提名"
+msgid "User removed self as a collaborator to your image"
+msgstr "用户将自己从您的图片合作者中移除"
+
+msgid "Login attempt detected from a different country"
+msgstr "检测到来自其他国家的登录尝试"
+
+msgid "Login attempt with weak password"
+msgstr "使用弱密码进行登录尝试"
