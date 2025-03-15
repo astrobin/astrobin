@@ -271,6 +271,7 @@ class UserIndex(CelerySearchIndex, Indexable):
     username = CharField(model_attr='username')
     display_name = EdgeNgramField()
     avatar_url = CharField()
+    small_avatar_url = CharField()
     exclude_from_competitions = BooleanField(model_attr='userprofile__exclude_from_competitions')
 
     avg_integration = FloatField()
@@ -355,6 +356,9 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_avatar_url(self, obj: User):
         return avatar_url(obj, 200)
+
+    def prepare_small_avatar_url(self, obj: User):
+        return avatar_url(obj, 64)
 
     def prepare_images(self, obj):
         return UserService(obj).get_public_images().count()
