@@ -20,6 +20,7 @@ class UserSearchSerializer(HaystackSerializer):
             'username',
             'display_name',
             'avatar_url',
+            'small_avatar_url',
             'images',
             'total_likes_received',
             'followers',
