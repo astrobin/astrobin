@@ -294,12 +294,14 @@ class CollectionTest(TestCase):
         image = Generators.image(user=self.user)
 
         collection.images.add(image)
+        collection.update_counts()  # Need to manually update counts since we removed the signal
         collection.refresh_from_db()
 
         self.assertEqual(collection.image_count, 1)
         self.assertEqual(collection.image_count_including_wip, 1)
 
         collection.images.clear()
+        collection.update_counts()
         collection.refresh_from_db()
 
         self.assertEqual(collection.image_count, 0)
@@ -311,6 +313,7 @@ class CollectionTest(TestCase):
         image = Generators.image(user=self.user)
 
         image.collections.add(collection)
+        collection.update_counts()  # Need to manually update counts since we removed the signal
         collection.refresh_from_db()
         image.refresh_from_db()
 
@@ -318,6 +321,7 @@ class CollectionTest(TestCase):
         self.assertEqual(collection.image_count_including_wip, 1)
 
         image.collections.clear()
+        collection.update_counts()
         collection.refresh_from_db()
 
         self.assertEqual(collection.image_count, 0)
@@ -342,6 +346,7 @@ class CollectionTest(TestCase):
         image = Generators.image(user=self.user)
 
         collection.images.add(image)
+        collection.update_counts()
         image.refresh_from_db()
         collection.refresh_from_db()
 
@@ -349,6 +354,7 @@ class CollectionTest(TestCase):
         self.assertEqual(collection.image_count_including_wip, 1)
 
         image.delete()
+        collection.update_counts()
         collection.refresh_from_db()
 
         self.assertEqual(collection.images.count(), 0)
