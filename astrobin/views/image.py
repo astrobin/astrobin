@@ -755,12 +755,21 @@ class ImageDeleteView(LoginRequiredMixin, ImageDeleteViewBase):
 
     def post(self, *args, **kwargs):
         image = self.get_object()
+        
+        # Get collections before deleting the image
+        collections = list(image.collections.all())
 
         from astrobin.tasks import invalidate_all_image_thumbnails
         invalidate_all_image_thumbnails.delay(image.pk)
 
+        result = super(ImageDeleteView, self).post(args, kwargs)
+        
+        # Update counts for affected collections
+        for collection in collections:
+            collection.update_counts()
+            
         messages.success(self.request, _("Image deleted."))
-        return super(ImageDeleteView, self).post(args, kwargs)
+        return result
 
 
 class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
@@ -907,6 +916,10 @@ class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
         image = form.instance
 
         ImageService(image).demote_to_staging_area()
+        
+        # Update counts for collections that contain this image
+        for collection in image.collections.all():
+            collection.update_counts()
 
         # No need to show the success message if the user is going to be redirected to the new page.
         if not AppRedirectionService.should_redirect_to_new_gallery_experience(self.request):
@@ -942,6 +955,10 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
         image.skip_activity_stream = self.request.POST.get('skip_activity_stream', 'off').lower() == 'on'
 
         ImageService(image).promote_to_public_area(image.skip_notifications, image.skip_activity_stream)
+        
+        # Update counts for collections that contain this image
+        for collection in image.collections.all():
+            collection.update_counts()
 
         # No need to show the success message if the user is going to be redirected to the new page.
         if not AppRedirectionService.should_redirect_to_new_gallery_experience(self.request):

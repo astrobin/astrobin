@@ -28,6 +28,8 @@ class CollectionService(object):
 
         for x in added:
             x.collections.add(self.collection)
+            
+        self.collection.update_counts()
 
     def get_descendant_collections(self, descendants=None) -> Set[Collection]:
         if descendants is None:

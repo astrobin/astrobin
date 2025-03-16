@@ -2289,6 +2289,12 @@ class Collection(models.Model):
 
     def __str__(self):
         return self.name
+        
+    def update_counts(self, save=True):
+        self.image_count = Image.objects_plain.filter(collections=self).count()
+        self.image_count_including_wip = Image.objects_including_wip_plain.filter(collections=self).count()
+        if save:
+            self.save()
 
 
 class Acquisition(models.Model):

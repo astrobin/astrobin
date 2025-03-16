@@ -82,6 +82,7 @@ class CollectionViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'Image is already in collection.'}, status=400)
 
         image.collections.add(collection)
+        collection.update_counts()
 
         return Response({'detail': 'Image added to collection.'})
 
@@ -107,6 +108,7 @@ class CollectionViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'Image is not in collection.'}, status=400)
 
         image.collections.remove(collection)
+        collection.update_counts()
 
         return Response({'detail': 'Image removed from collection.'})
 
