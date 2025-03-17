@@ -623,31 +623,7 @@ class UserAvatarAdd(generics.GenericAPIView):
 
             # Send signal
             avatar_updated.send(sender=Avatar, user=request.user, avatar=avatar)
-            
-            # Delete all other avatars
-            other_avatars = Avatar.objects.filter(user=request.user).exclude(pk=avatar.pk)
-            other_avatars_count = other_avatars.count()
-            
-            if other_avatars_count > 0:
-                logger.info(f"Deleting {other_avatars_count} other avatars for user {request.user.id}")
-                
-                # Delete other avatars
-                for other_avatar in other_avatars:
-                    try:
-                        # Delete the file
-                        if other_avatar.avatar and other_avatar.avatar.name:
-                            try:
-                                other_avatar.avatar.delete(save=False)
-                                logger.info(f"Deleted avatar file: {other_avatar.avatar.name}")
-                            except Exception as e:
-                                logger.warning(f"Error deleting avatar file: {e}")
-                        
-                        # Delete the record
-                        other_avatar.delete()
-                        logger.info(f"Deleted avatar record: {other_avatar.id}")
-                    except Exception as e:
-                        logger.error(f"Error deleting other avatar: {e}")
-            
+
             # Invalidate the avatar cache
             invalidate_avatar_cache(request.user)
             
@@ -658,7 +634,6 @@ class UserAvatarAdd(generics.GenericAPIView):
             return Response({
                 'success': True,
                 'avatar_url': sized_avatar_url,
-                'other_avatars_deleted': other_avatars_count
             }, status=201)
                 
         except Exception as e:
