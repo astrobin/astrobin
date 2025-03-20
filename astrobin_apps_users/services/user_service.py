@@ -892,46 +892,32 @@ class UserService:
 
     def update_followers_count(self):
         from astrobin.models import UserProfile
-
-        try:
-            profile: UserProfile = self.user.userprofile
-        except:
-            return
-
-        if profile:
-            profile.followers_count = ToggleProperty.objects.filter(
+        UserProfile.objects.filter(user=self.user).update(
+            followers_count=ToggleProperty.objects.filter(
                 property_type='follow',
                 object_id=self.user.pk,
                 content_type=ContentType.objects.get_for_model(User)
-            ).count()
-            profile.save(keep_deleted=True)
+            ).count(),
+            updated=datetime.now()
+        )
 
     def update_following_count(self):
         from astrobin.models import UserProfile
-
-        try:
-            profile: UserProfile = self.user.userprofile
-        except:
-            return
-
-        if profile:
-            profile.following_count = ToggleProperty.objects.filter(
+        UserProfile.objects.filter(user=self.user).update(
+            following_count=ToggleProperty.objects.filter(
                 user=self.user,
                 property_type='follow',
                 content_type=ContentType.objects.get_for_model(User)
-            ).count()
-            profile.save(keep_deleted=True)
+            ).count(),
+            updated=datetime.now()
+        )
 
     def update_image_count(self):
         from astrobin.models import UserProfile
-
-        try:
-            profile: UserProfile = self.user.userprofile
-        except:
-            return
-
-        if profile:
-            profile.image_count = UserService(self.user).get_public_images().count()
-            profile.wip_image_count = UserService(self.user).get_wip_images().count()
-            profile.deleted_image_count = UserService(self.user).get_deleted_images().count()
-            profile.save(keep_deleted=True)
+        service = UserService(self.user)
+        UserProfile.objects.filter(user=self.user).update(
+            image_count=service.get_public_images().count(),
+            wip_image_count=service.get_wip_images().count(),
+            deleted_image_count=service.get_deleted_images().count(),
+            updated=datetime.now()
+        )
