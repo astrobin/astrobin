@@ -898,15 +898,16 @@ class UserService:
             content_type=ContentType.objects.get_for_model(User)
         ).count()
         updated = datetime.now()
-        
-        # In-memory update
-        self.user.userprofile.followers_count = followers_count
-        self.user.userprofile.updated = updated
-        
-        UserProfile.objects.filter(user=self.user).update(
-            followers_count=followers_count,
-            updated=updated
-        )
+
+        if self.user and hasattr(self.user, 'userprofile'):
+            # In-memory update
+            self.user.userprofile.followers_count = followers_count
+            self.user.userprofile.updated = updated
+
+            UserProfile.objects.filter(user=self.user).update(
+                followers_count=followers_count,
+                updated=updated
+            )
 
     def update_following_count(self):
         from astrobin.models import UserProfile
@@ -916,15 +917,16 @@ class UserService:
             content_type=ContentType.objects.get_for_model(User)
         ).count()
         updated = datetime.now()
-        
-        # In-memory update
-        self.user.userprofile.following_count = following_count
-        self.user.userprofile.updated = updated
-        
-        UserProfile.objects.filter(user=self.user).update(
-            following_count=following_count,
-            updated=updated
-        )
+
+        if self.user and hasattr(self.user, 'userprofile'):
+            # In-memory update
+            self.user.userprofile.following_count = following_count
+            self.user.userprofile.updated = updated
+
+            UserProfile.objects.filter(user=self.user).update(
+                following_count=following_count,
+                updated=updated
+            )
 
     def update_image_count(self):
         from astrobin.models import UserProfile
@@ -934,15 +936,16 @@ class UserService:
         deleted_image_count = service.get_deleted_images().count()
         updated = datetime.now()
 
-        # In-memory update
-        self.user.userprofile.image_count = image_count
-        self.user.userprofile.wip_image_count = wip_image_count
-        self.user.userprofile.deleted_image_count = deleted_image_count
-        self.user.userprofile.updated = updated
+        if self.user and hasattr(self.user, 'userprofile'):
+            # In-memory update
+            self.user.userprofile.image_count = image_count
+            self.user.userprofile.wip_image_count = wip_image_count
+            self.user.userprofile.deleted_image_count = deleted_image_count
+            self.user.userprofile.updated = updated
 
-        UserProfile.objects.filter(user=self.user).update(
-            image_count=image_count,
-            wip_image_count=wip_image_count,
-            deleted_image_count=deleted_image_count,
-            updated=updated
-        )
+            UserProfile.objects.filter(user=self.user).update(
+                image_count=image_count,
+                wip_image_count=wip_image_count,
+                deleted_image_count=deleted_image_count,
+                updated=updated
+            )
