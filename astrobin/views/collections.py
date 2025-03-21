@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 from urllib.parse import urlparse
 
@@ -229,6 +230,7 @@ class UserCollectionsAddRemoveImages(
             )
 
             CollectionService(collection).add_remove_images(images)
+            images.update(updated=datetime.now())
 
             messages.success(request, _("Collection updated!"))
 

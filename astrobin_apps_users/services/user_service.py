@@ -892,32 +892,60 @@ class UserService:
 
     def update_followers_count(self):
         from astrobin.models import UserProfile
-        UserProfile.objects.filter(user=self.user).update(
-            followers_count=ToggleProperty.objects.filter(
-                property_type='follow',
-                object_id=self.user.pk,
-                content_type=ContentType.objects.get_for_model(User)
-            ).count(),
-            updated=datetime.now()
-        )
+        followers_count = ToggleProperty.objects.filter(
+            property_type='follow',
+            object_id=self.user.pk,
+            content_type=ContentType.objects.get_for_model(User)
+        ).count()
+        updated = datetime.now()
+
+        if self.user and hasattr(self.user, 'userprofile'):
+            # In-memory update
+            self.user.userprofile.followers_count = followers_count
+            self.user.userprofile.updated = updated
+
+            UserProfile.objects.filter(user=self.user).update(
+                followers_count=followers_count,
+                updated=updated
+            )
 
     def update_following_count(self):
         from astrobin.models import UserProfile
-        UserProfile.objects.filter(user=self.user).update(
-            following_count=ToggleProperty.objects.filter(
-                user=self.user,
-                property_type='follow',
-                content_type=ContentType.objects.get_for_model(User)
-            ).count(),
-            updated=datetime.now()
-        )
+        following_count = ToggleProperty.objects.filter(
+            user=self.user,
+            property_type='follow',
+            content_type=ContentType.objects.get_for_model(User)
+        ).count()
+        updated = datetime.now()
+
+        if self.user and hasattr(self.user, 'userprofile'):
+            # In-memory update
+            self.user.userprofile.following_count = following_count
+            self.user.userprofile.updated = updated
+
+            UserProfile.objects.filter(user=self.user).update(
+                following_count=following_count,
+                updated=updated
+            )
 
     def update_image_count(self):
         from astrobin.models import UserProfile
         service = UserService(self.user)
-        UserProfile.objects.filter(user=self.user).update(
-            image_count=service.get_public_images().count(),
-            wip_image_count=service.get_wip_images().count(),
-            deleted_image_count=service.get_deleted_images().count(),
-            updated=datetime.now()
-        )
+        image_count = service.get_public_images().count()
+        wip_image_count = service.get_wip_images().count()
+        deleted_image_count = service.get_deleted_images().count()
+        updated = datetime.now()
+
+        if self.user and hasattr(self.user, 'userprofile'):
+            # In-memory update
+            self.user.userprofile.image_count = image_count
+            self.user.userprofile.wip_image_count = wip_image_count
+            self.user.userprofile.deleted_image_count = deleted_image_count
+            self.user.userprofile.updated = updated
+
+            UserProfile.objects.filter(user=self.user).update(
+                image_count=image_count,
+                wip_image_count=wip_image_count,
+                deleted_image_count=deleted_image_count,
+                updated=updated
+            )
