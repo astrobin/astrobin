@@ -43,7 +43,6 @@ from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_premium.services.premium_service import PremiumService
 from common.serializers import AvatarField, UserSerializer
-from common.templatetags.common_tags import strip_html
 
 
 class ImageSerializer(serializers.ModelSerializer):
