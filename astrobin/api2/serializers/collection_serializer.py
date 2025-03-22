@@ -7,6 +7,12 @@ from astrobin.models import Collection
 
 class CollectionSerializer(serializers.ModelSerializer):
     cover_thumbnail = serializers.SerializerMethodField()
+    username = serializers.CharField(source='user.username', read_only=True)
+    user_display_name = serializers.CharField(source='user.userprofile.get_display_name', read_only=True)
+    display_collections_on_public_gallery = serializers.BooleanField(
+        source='user.userprofile.display_collections_on_public_gallery',
+        read_only=True
+    )
 
     def get_cover_thumbnail(self, instance: Collection) -> Optional[str]:
         if instance.cover:
@@ -29,6 +35,9 @@ class CollectionSerializer(serializers.ModelSerializer):
             'date_created',
             'date_updated',
             'user',
+            'username',
+            'user_display_name',
+            'display_collections_on_public_gallery',
             'images',
             'cover',
             'image_count',

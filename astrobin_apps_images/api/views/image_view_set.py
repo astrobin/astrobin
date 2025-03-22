@@ -374,6 +374,14 @@ class ImageViewSet(
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
+    def _update_collections(self, instance: Image):
+        """
+        Update the counts of collections associated with this image.
+        This ensures collection counts stay accurate without relying on signals.
+        """
+        for collection in instance.collections.all():
+            collection.update_counts()
+            
     def update(self, request, *args, **kwargs):
         # If w or h are None, remove them from the request data, so they're not updated
         if 'w' in request.data and request.data['w'] is None:
@@ -391,13 +399,26 @@ class ImageViewSet(
 
         self._update_equipment(equipment_data, instance)
         self._update_acquisition(request, instance)
+        
+        if 'collections' in request.data:
+            self._update_collections(instance)
 
         return response
 
     def perform_destroy(self, instance):
+        # Get collections before deleting the image
+        collections = list(instance.collections.all())
+        
         from astrobin.tasks import invalidate_all_image_thumbnails
         invalidate_all_image_thumbnails.delay(instance.pk)
-        return super().perform_destroy(instance)
+        
+        result = super().perform_destroy(instance)
+        
+        # Update counts for affected collections
+        for collection in collections:
+            collection.update_counts()
+            
+        return result
 
     @action(detail=False, methods=['get'], url_path='public-images-count')
     def public_images_count(self, request):
@@ -432,6 +453,9 @@ class ImageViewSet(
             image.skip_activity_stream = self.request.data.get('skip_activity_stream', False)
             ImageService(image).promote_to_public_area(image.skip_notifications, image.skip_activity_stream)
             image.save()
+            
+            # Update counts for collections that contain this image
+            self._update_collections(image)
 
         return Response(status=HTTP_200_OK)
 
@@ -442,6 +466,9 @@ class ImageViewSet(
         if not image.is_wip:
             ImageService(image).demote_to_staging_area()
             image.save()
+            
+            # Update counts for collections that contain this image
+            self._update_collections(image)
 
         return Response(status=HTTP_200_OK)
 

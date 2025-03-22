@@ -42,6 +42,9 @@ class ImageRevisionViewSet(
         if 'mouseHoverImage' in request.data:
             request.data['mouse_hover_image'] = request.data.pop('mouseHoverImage')
 
+        if 'loopVideo' in request.data:
+            request.data['loop_video'] = request.data.pop('loopVideo')
+
         return self.update(request, *args, **kwargs)
 
     @action(detail=True, methods=['get'], url_path='video-encoding-progress')

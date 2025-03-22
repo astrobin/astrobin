@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from django.db.models import QuerySet
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -75,13 +77,15 @@ class CollectionViewSet(viewsets.ModelViewSet):
         if collection.user != request.user:
             return Response({'detail': 'You can only add images to your own collection.'}, status=400)
 
-        if image.user != request.user:
+        if image.user != request.user and request.user not in image.collaborators.all():
             return Response({'detail': 'You can only add your own images to a collection.'}, status=400)
 
         if Image.objects_including_wip_plain.filter(pk=image.pk, collections=collection).exists():
             return Response({'detail': 'Image is already in collection.'}, status=400)
 
         image.collections.add(collection)
+        collection.update_counts()
+        Image.objects_including_wip_plain.filter(pk=image.pk).update(updated=datetime.now())
 
         return Response({'detail': 'Image added to collection.'})
 
@@ -100,13 +104,15 @@ class CollectionViewSet(viewsets.ModelViewSet):
         if collection.user != request.user:
             return Response({'detail': 'You can only remove images from your own collection.'}, status=400)
 
-        if image.user != request.user:
+        if image.user != request.user and request.user not in image.collaborators.all():
             return Response({'detail': 'You can only remove your own images from a collection.'}, status=400)
 
         if not Image.objects_including_wip_plain.filter(pk=image.pk, collections=collection).exists():
             return Response({'detail': 'Image is not in collection.'}, status=400)
 
         image.collections.remove(collection)
+        collection.update_counts()
+        Image.objects_including_wip_plain.filter(pk=image.pk).update(updated=datetime.now())
 
         return Response({'detail': 'Image removed from collection.'})
 
