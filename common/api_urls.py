@@ -19,7 +19,7 @@ urlpatterns = (
     url(r'^users/(?P<pk>\d+)/$', UserDetail.as_view(), name='user-detail'),
     url(r'^users/(?P<pk>\d+)/empty-trash/$', UserEmptyTrash.as_view(), name='user-empty-trash'),
     url(r'^users/avatar/add/$', UserAvatarAdd.as_view(), name='user-avatar-add'),
-    url(r'^users/avatar/delete/$', UserAvatarDelete.as_view(), name='user-avatar-delete'),
+    url(r'^users/avatar/(?P<pk>\d+)/delete/$', UserAvatarDelete.as_view(), name='user-avatar-delete'),
 
     url(r'^toggleproperties/$', TogglePropertyList.as_view(), name='toggleproperty-list'),
     url(r'^toggleproperties/(?P<pk>\d+)/$', TogglePropertyDetail.as_view(), name='toggleproperty-detail'),

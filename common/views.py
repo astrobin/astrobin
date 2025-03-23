@@ -619,7 +619,7 @@ class UserAvatarAdd(generics.GenericAPIView):
             avatar.save()
             
             # Set primary status
-            avatars = Avatar.objects.filter(user=request.user, primary=True).exclude(pk=avatar.pk).update(primary=False)
+            Avatar.objects.filter(user=request.user, primary=True).exclude(pk=avatar.pk).update(primary=False)
 
             # Send signal
             avatar_updated.send(sender=Avatar, user=request.user, avatar=avatar)
@@ -646,112 +646,81 @@ class UserAvatarAdd(generics.GenericAPIView):
 
 
 class UserAvatarDelete(generics.GenericAPIView):
-    """Delete the user's avatar."""
+    """Delete a specific avatar by ID."""
     permission_classes = [IsAuthenticated]
     
-    def post(self, request):
-        return self._handle_request(request)
+    def post(self, request, pk):
+        return self._handle_request(request, pk)
         
-    def delete(self, request):
-        return self._handle_request(request)
+    def delete(self, request, pk):
+        return self._handle_request(request, pk)
         
-    def _handle_request(self, request):
+    def _handle_request(self, request, pk):
         from avatar.models import Avatar
         from avatar.signals import avatar_deleted
         import logging
         
         logger = logging.getLogger(__name__)
-        logger.info(f"Attempting to delete avatars for user {request.user.id}")
+        logger.info(f"Attempting to delete avatar with ID {pk} for user {request.user.id}")
         
         try:
-            # First approach: Use Django ORM
-            avatars = Avatar.objects.filter(user=request.user)
-            avatar_count = avatars.count()
-            logger.info(f"Found {avatar_count} avatars to delete")
+            # Try to get the specific avatar
+            try:
+                avatar = Avatar.objects.get(id=pk, user=request.user)
+            except Avatar.DoesNotExist:
+                return Response({'detail': 'Avatar not found'}, status=404)
             
-            if avatar_count > 0:
-                # List all avatars for logging
-                for avatar in avatars:
-                    logger.info(f"Preparing to delete avatar id={avatar.id}, path={avatar.avatar.name}")
-                
-                # Loop through and delete each avatar
-                for avatar in list(avatars):
-                    try:
-                        avatar_id = avatar.id
-                        # Signal
-                        avatar_deleted.send(sender=Avatar, user=request.user, avatar=avatar)
-                        
-                        # Delete file
-                        if avatar.avatar:
-                            logger.info(f"Deleting avatar file: {avatar.avatar.name}")
-                            try:
-                                avatar.avatar.delete(save=False)
-                            except Exception as file_error:
-                                logger.error(f"Error deleting avatar file: {file_error}")
-                        
-                        # Delete record
-                        logger.info(f"Deleting avatar record: id={avatar_id}")
-                        avatar.delete()
-                        logger.info(f"Avatar {avatar_id} deleted successfully")
-                    except Exception as avatar_error:
-                        logger.error(f"Error deleting individual avatar: {avatar_error}")
-                
-                # Second approach: Use raw SQL for complete deletion if ORM approach failed
-                remaining = Avatar.objects.filter(user=request.user).count()
-                if remaining > 0:
-                    logger.warning(f"Found {remaining} avatars still remaining after deletion attempt. Trying alternative method.")
-                    
-                    # Try a direct deletion
-                    try:
-                        from django.db import connection
-                        cursor = connection.cursor()
-                        
-                        # Get avatar paths for file deletion
-                        cursor.execute("SELECT avatar FROM avatar_avatar WHERE user_id = %s", [request.user.id])
-                        avatar_paths = [row[0] for row in cursor.fetchall()]
-                        
-                        # Delete the database records
-                        cursor.execute("DELETE FROM avatar_avatar WHERE user_id = %s", [request.user.id])
-                        
-                        # Log the direct SQL deletion
-                        logger.info(f"Directly deleted avatar records via SQL. Paths to delete: {avatar_paths}")
-                        
-                        # Try to delete files manually if possible
-                        for path in avatar_paths:
-                            if path:
-                                try:
-                                    from django.core.files.storage import default_storage
-                                    if default_storage.exists(path):
-                                        default_storage.delete(path)
-                                        logger.info(f"Manually deleted avatar file: {path}")
-                                except Exception as file_error:
-                                    logger.error(f"Error manually deleting avatar file: {file_error}")
-                    except Exception as sql_error:
-                        logger.error(f"Error with direct SQL deletion: {sql_error}")
-                
-                # Invalidate the avatar cache no matter what
-                invalidate_avatar_cache(request.user)
-                
-                # Check again to confirm deletion
-                final_count = Avatar.objects.filter(user=request.user).count()
-                logger.info(f"Final avatar count after deletion: {final_count}")
-                
-                # Find and set a default avatar URL to return
-                from avatar.templatetags.avatar_tags import avatar_url
-                from avatar.conf import settings as avatar_settings
-                default_url = avatar_url(request.user, avatar_settings.AVATAR_DEFAULT_SIZE)
-                
-                return Response({
-                    'success': True, 
-                    'message': f'Deleted {avatar_count - final_count} avatars, {final_count} remain',
-                    'default_avatar_url': default_url
-                }, status=200)
-            else:
-                return Response({'detail': 'No avatars found'}, status=404)
+            # Get some info for logging
+            avatar_id = avatar.id
+            avatar_path = avatar.avatar.name if avatar.avatar else None
+            logger.info(f"Found avatar id={avatar_id}, path={avatar_path}")
+            
+            # Check if this is the primary avatar
+            is_primary = avatar.primary
+            
+            # Send signal
+            avatar_deleted.send(sender=Avatar, user=request.user, avatar=avatar)
+            
+            # Delete the file if it exists
+            if avatar.avatar:
+                try:
+                    logger.info(f"Deleting avatar file: {avatar.avatar.name}")
+                    avatar.avatar.delete(save=False)
+                except Exception as file_error:
+                    logger.error(f"Error deleting avatar file: {file_error}")
+                    # Continue anyway - we want to delete the DB record even if file deletion fails
+            
+            # Delete the database record
+            logger.info(f"Deleting avatar record: id={avatar_id}")
+            avatar.delete()
+            logger.info(f"Avatar {avatar_id} deleted successfully")
+            
+            # If we deleted the primary avatar, set another one as primary if available
+            if is_primary:
+                remaining_avatars = Avatar.objects.filter(user=request.user)
+                if remaining_avatars.exists():
+                    new_primary = remaining_avatars.first()
+                    new_primary.primary = True
+                    new_primary.save()
+                    logger.info(f"Set avatar id={new_primary.id} as new primary")
+            
+            # Invalidate the avatar cache
+            invalidate_avatar_cache(request.user)
+            
+            # Get the default avatar URL to return (either new primary or default image)
+            from avatar.templatetags.avatar_tags import avatar_url
+            from avatar.conf import settings as avatar_settings
+            default_url = avatar_url(request.user, avatar_settings.AVATAR_DEFAULT_SIZE)
+            
+            return Response({
+                'success': True, 
+                'message': f'Avatar {avatar_id} deleted successfully',
+                'default_avatar_url': default_url
+            }, status=200)
                 
         except Exception as e:
-            logger.exception(f"Critical error deleting avatars: {e}")
+            logger.exception(f"Error deleting avatar: {e}")
             return Response({
                 'success': False,
-                'error': f'Failed to delete avatars: {str(e)}'
+                'error': f'Failed to delete avatar: {str(e)}'
             }, status=500)
