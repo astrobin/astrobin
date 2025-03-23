@@ -681,19 +681,17 @@ class UserAvatarDelete(generics.GenericAPIView):
             # Send signal
             avatar_deleted.send(sender=Avatar, user=request.user, avatar=avatar)
             
-            # Delete the file if it exists
-            if avatar.avatar:
-                try:
-                    logger.info(f"Deleting avatar file: {avatar.avatar.name}")
-                    avatar.avatar.delete(save=False)
-                except Exception as file_error:
-                    logger.error(f"Error deleting avatar file: {file_error}")
-                    # Continue anyway - we want to delete the DB record even if file deletion fails
-            
-            # Delete the database record
-            logger.info(f"Deleting avatar record: id={avatar_id}")
-            avatar.delete()
-            logger.info(f"Avatar {avatar_id} deleted successfully")
+            try:
+                # Delete the avatar record
+                logger.info(f"Deleting avatar record: id={avatar_id}")
+                avatar.delete()
+                logger.info(f"Avatar {avatar_id} deleted successfully")
+            except Exception as e:
+                logger.error(f"Error deleting avatar: {e}")
+                return Response({
+                    'success': False,
+                    'error': f'Failed to delete avatar: {str(e)}'
+                }, status=500)
             
             # If we deleted the primary avatar, set another one as primary if available
             if is_primary:

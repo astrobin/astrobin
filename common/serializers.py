@@ -2,6 +2,7 @@ import logging
 from typing import Optional
 
 from avatar.templatetags.avatar_tags import avatar_url
+from avatar.utils import get_primary_avatar
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
@@ -94,6 +95,7 @@ class LargeAvatarField(serializers.Field):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    avatar_id = serializers.SerializerMethodField(read_only=True)
     avatar = AvatarField(source='*')
     large_avatar = LargeAvatarField(source='*')
     userprofile = PrimaryKeyRelatedField(read_only=True)
@@ -103,6 +105,10 @@ class UserSerializer(serializers.ModelSerializer):
     marketplace_listing_count = serializers.SerializerMethodField(read_only=True)
     astrobin_groups = SimpleGroupSerializer(read_only=True, source='joined_group_set', many=True)
     valid_subscription = serializers.SerializerMethodField(read_only=True)
+
+    def get_avatar_id(self, user: User) -> Optional[int]:
+        avatar = get_primary_avatar(user)
+        return avatar.id if avatar else None
 
     def get_display_name(self, user: User) -> str:
         return user.userprofile.get_display_name()
