@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
@@ -627,9 +628,8 @@ class UserAvatarAdd(generics.GenericAPIView):
             # Invalidate the avatar cache
             invalidate_avatar_cache(request.user)
             
-            # Get the properly sized square avatar URL (200px)
             from avatar.templatetags.avatar_tags import avatar_url
-            sized_avatar_url = avatar_url(request.user, 200)
+            sized_avatar_url = avatar_url(request.user, settings.AVATAR_DEFAULT_SIZE)
             
             return Response({
                 'success': True,
