@@ -43,7 +43,7 @@ class AvatarField(serializers.Field):
             force_refresh = cache.get(f"avatar_force_refresh_{user.id}")
             
             # Get the URL normally
-            url = avatar_url(user, 40)
+            url = avatar_url(user, 64)
             
             # Add a cache-busting timestamp if force refresh is needed
             if force_refresh:
@@ -75,7 +75,7 @@ class LargeAvatarField(serializers.Field):
             force_refresh = cache.get(f"avatar_force_refresh_{user.id}")
             
             # Get the URL normally
-            url = avatar_url(user, 200)
+            url = avatar_url(user, 194)
             
             # Add a cache-busting timestamp if force refresh is needed
             if force_refresh:
