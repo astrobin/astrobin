@@ -3,23 +3,22 @@ import os
 import re
 
 import simplejson
-from avatar.utils import get_primary_avatar, get_default_avatar_url
+from avatar.utils import get_default_avatar_url
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
-from django.core.cache import cache
-from django.db.models import Q, QuerySet, Value
+from django.db.models import Q, QuerySet
 from django.db.models.functions import Concat, Lower
 from django.http import HttpResponse
 from django.views.decorators.http import require_GET
 from pybb.models import Post
 from rest_framework.authtoken.models import Token
 
-from astrobin.models import Image
-from astrobin.models import UserProfile
+from astrobin.models import Image, UserProfile
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_users.services import UserService
 from nested_comments.models import NestedComment
 
 
@@ -33,18 +32,23 @@ def autocomplete_private_message_recipients(request):
     limit = 10
     results = []
 
-    users = list(UserProfile.objects.filter(
-        Q(user__username__icontains=q) | Q(real_name__icontains=q)
-    ).distinct()[:limit])
+    users = list(
+        UserProfile.objects.filter(
+            Q(user__username__icontains=q) | Q(real_name__icontains=q)
+        ).distinct()[:limit]
+    )
 
     for user in users:
-        results.append({
-            'id': user.user.username,
-            'realName': user.user.userprofile.real_name,
-            'displayName': user.user.userprofile.real_name if user.user.userprofile.real_name else user.user.username,
-        })
+        results.append(
+            {
+                'id': user.user.username,
+                'realName': user.user.userprofile.real_name,
+                'displayName': user.user.userprofile.real_name if user.user.userprofile.real_name else user.user.username,
+            }
+        )
 
     return HttpResponse(simplejson.dumps(results))
+
 
 @require_GET
 def autocomplete_usernames(request):
@@ -162,19 +166,21 @@ def autocomplete_usernames(request):
         username = user[1]
         real_name = user[2]
 
-        avatar = get_primary_avatar(User.objects.get(id=user_id), 40)
+        avatar = UserService(User.objects.get(id=user_id)).get_primary_avatar(64)
         if avatar is None:
             avatar_url = get_default_avatar_url()
         else:
             avatar_url = avatar.get_absolute_url()
 
-        ret.append({
-            'id': str(user_id),
-            'username': username,
-            'realName': real_name,
-            'displayName': real_name if real_name else username,
-            'avatar': avatar_url,
-        })
+        ret.append(
+            {
+                'id': str(user_id),
+                'username': username,
+                'realName': real_name,
+                'displayName': real_name if real_name else username,
+                'avatar': avatar_url,
+            }
+        )
 
     cache_value = simplejson.dumps(ret)
     CachingService.set(cache_key, cache_value, 600, cache_name=JSON_CACHE)
@@ -209,11 +215,13 @@ def autocomplete_images(request):
     results = []
 
     for image in images:
-        results.append({
-            'id': image.get_id(),
-            'title': image.title,
-            'thumbnail': image.thumbnail('gallery', None, sync=True),
-            'url': image.get_absolute_url(),
-        })
+        results.append(
+            {
+                'id': image.get_id(),
+                'title': image.title,
+                'thumbnail': image.thumbnail('gallery', None, sync=True),
+                'url': image.get_absolute_url(),
+            }
+        )
 
     return HttpResponse(simplejson.dumps(results))

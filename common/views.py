@@ -633,6 +633,7 @@ class UserAvatarAdd(generics.GenericAPIView):
             
             return Response({
                 'success': True,
+                'avatar_id': avatar.id,
                 'avatar_url': sized_avatar_url,
             }, status=201)
                 
@@ -675,9 +676,6 @@ class UserAvatarDelete(generics.GenericAPIView):
             avatar_path = avatar.avatar.name if avatar.avatar else None
             logger.info(f"Found avatar id={avatar_id}, path={avatar_path}")
             
-            # Check if this is the primary avatar
-            is_primary = avatar.primary
-            
             # Send signal
             avatar_deleted.send(sender=Avatar, user=request.user, avatar=avatar)
             
@@ -693,15 +691,6 @@ class UserAvatarDelete(generics.GenericAPIView):
                     'error': f'Failed to delete avatar: {str(e)}'
                 }, status=500)
             
-            # If we deleted the primary avatar, set another one as primary if available
-            if is_primary:
-                remaining_avatars = Avatar.objects.filter(user=request.user)
-                if remaining_avatars.exists():
-                    new_primary = remaining_avatars.first()
-                    new_primary.primary = True
-                    new_primary.save()
-                    logger.info(f"Set avatar id={new_primary.id} as new primary")
-            
             # Invalidate the avatar cache
             invalidate_avatar_cache(request.user)
             
@@ -713,7 +702,7 @@ class UserAvatarDelete(generics.GenericAPIView):
             return Response({
                 'success': True, 
                 'message': f'Avatar {avatar_id} deleted successfully',
-                'default_avatar_url': default_url
+                'avatar_url': default_url
             }, status=200)
                 
         except Exception as e:

@@ -691,8 +691,8 @@ class UserService:
             )
 
         return (
-            self.user.joined_group_set.filter(name=group_name).exists() or
-            self.user.owned_group_set.filter(name=group_name).exists()
+                self.user.joined_group_set.filter(name=group_name).exists() or
+                self.user.owned_group_set.filter(name=group_name).exists()
         )
 
     def set_last_seen(self, country_code: str):
@@ -949,3 +949,13 @@ class UserService:
                 deleted_image_count=deleted_image_count,
                 updated=updated
             )
+
+    def get_primary_avatar(self, size: int = settings.AVATAR_DEFAULT_SIZE):
+        try:
+            avatar = self.user.avatar_set.filter(primary=True).order_by("-date_uploaded")[0]
+        except IndexError:
+            avatar = None
+        if avatar:
+            if not avatar.thumbnail_exists(size):
+                avatar.create_thumbnail(size)
+        return avatar

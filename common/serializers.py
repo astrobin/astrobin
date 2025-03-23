@@ -2,7 +2,7 @@ import logging
 from typing import Optional
 
 from avatar.templatetags.avatar_tags import avatar_url
-from avatar.utils import get_primary_avatar
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
@@ -107,7 +107,7 @@ class UserSerializer(serializers.ModelSerializer):
     valid_subscription = serializers.SerializerMethodField(read_only=True)
 
     def get_avatar_id(self, user: User) -> Optional[int]:
-        avatar = get_primary_avatar(user)
+        avatar = UserService(user).get_primary_avatar(settings.AVATAR_DEFAULT_SIZE)
         return avatar.id if avatar else None
 
     def get_display_name(self, user: User) -> str:

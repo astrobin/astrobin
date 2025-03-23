@@ -536,25 +536,36 @@ class AvatarApiTest(TestCase):
         # Force authenticate
         self.client.force_authenticate(user=self.user)
         
-        # Mock the handler method to test the promotion logic
-        with patch('common.views.UserAvatarDelete._handle_request', autospec=True) as mock_handle:
-            # Make the mock simulate a successful deletion with promotion
-            mock_handle.return_value = Response({
-                'success': True,
-                'message': f'Avatar {avatars[0].id} deleted successfully. Avatar {avatars[1].id} is now primary.',
-                'default_avatar_url': '/mock/avatar/url.jpg'
-            }, status=200)
-            
-            # Make the request to delete the primary avatar
+        # Mock the handler to access the actual view functionality
+        with patch.object(Avatar, 'delete') as delete_mock:
+            # Make a real request to delete the primary avatar
+            # This time we're not mocking the handler to test the actual behavior
             response = self.client.delete(reverse_lazy('user-avatar-delete', kwargs={'pk': avatars[0].id}))
             
-            # Check the response
+            # Check the response indicates success
             self.assertEqual(response.status_code, 200)
             response_data = json.loads(response.content)
             self.assertTrue(response_data['success'])
             
-            # Verify method was called
-            self.assertTrue(mock_handle.called)
+            # Verify delete was called on the primary avatar
+            self.assertTrue(delete_mock.called)
+            
+            # Check if another avatar has been promoted to primary
+            # We need to refresh avatars from the DB
+            primary_found = False
+            for avatar in avatars[1:]:
+                try:
+                    avatar.refresh_from_db()
+                    # One of them should be primary now
+                    if avatar.primary:
+                        primary_found = True
+                        break
+                except Avatar.DoesNotExist:
+                    # This avatar might have been deleted 
+                    pass
+                
+            # Assert that one of the remaining avatars is now primary
+            self.assertTrue(primary_found, "No avatar was promoted to primary status")
             
     def test_avatar_delete_wrong_user(self):
         """Tests that a user cannot delete another user's avatar."""
