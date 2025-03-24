@@ -114,3 +114,9 @@ def _get_image_dimensions(self):
 
 
 ImageFile._get_image_dimensions = _get_image_dimensions
+
+
+def _get_primary_avatar(user, size: settings.AVATAR_DEFAULT_SIZE):
+    from astrobin_apps_users.services import UserService
+    service = UserService(user)
+    return service.get_primary_avatar(size)

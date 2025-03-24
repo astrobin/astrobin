@@ -3,6 +3,8 @@ from PIL.ImageFile import ImageFile
 from django.apps import AppConfig
 from django.conf import settings
 
+from astrobin.monkeypatch import _get_primary_avatar
+
 Image.MAX_IMAGE_PIXELS = 32768 * 32768
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -70,3 +72,7 @@ class AstroBinAppConfig(AppConfig):
         self.init_search()
 
         DetectorFactory.seed = 0
+
+        import avatar.utils
+        avatar.utils.get_primary_avatar = _get_primary_avatar
+
