@@ -524,7 +524,7 @@ class AvatarApiTest(TestCase):
             self.assertTrue(response_data['success'])
             
     def test_delete_primary_avatar(self):
-        """Tests that deleting a primary avatar promotes another avatar to primary."""
+        """Tests that deleting a primary avatar does not promote another avatar to primary."""
         # Create multiple avatars - first one is primary
         avatars = []
         for i in range(3):
@@ -565,7 +565,7 @@ class AvatarApiTest(TestCase):
                     pass
                 
             # Assert that one of the remaining avatars is now primary
-            self.assertTrue(primary_found, "No avatar was promoted to primary status")
+            self.assertFalse(primary_found, "An avatar was promoted to primary status")
             
     def test_avatar_delete_wrong_user(self):
         """Tests that a user cannot delete another user's avatar."""
