@@ -55,54 +55,9 @@ def invalidate_avatar_cache(user):
     cache.set(f"avatar_force_refresh_{user.id}", int(time.time()), 60*60)  # Cache for up to an hour
     
     try:
-        # 1. Use django-avatar's built-in cache invalidation
         from avatar.utils import invalidate_cache
-        invalidate_cache(user)
+        invalidate_cache(user, 200)
         logger.info(f"Used django-avatar's invalidate_cache for user {user.id}")
-        
-        # 2. Clear all cached avatar URLs from the cache with all possible size variations
-        from avatar.conf import settings as avatar_settings
-        
-        if avatar_settings.AVATAR_CACHE_ENABLED:
-            # Use the default cache
-            avatar_cache = cache
-                
-            # Clear cache for all sizes (standard sizes plus some extra for safety)
-            standard_sizes = set(avatar_settings.AVATAR_AUTO_GENERATE_SIZES)
-            standard_sizes.add(getattr(avatar_settings, 'AVATAR_DEFAULT_SIZE', 80))
-            
-            # Add extra common sizes for good measure
-            extra_sizes = {30, 40, 50, 60, 100, 150, 200, 250, 300}
-            all_sizes = standard_sizes.union(extra_sizes)
-            
-            for size in all_sizes:
-                # Try different cache key formats used by django-avatar
-                cache_keys = [
-                    f'avatar_{user.id}_{size}',                  # Most common format
-                    f'avatar_url_{user.id}_{size}',              # Alternative format
-                    f'avatar_{user.username}_{size}',            # Username-based format
-                    f'avatar_cached_for_{user.id}_{size}',       # Another possible format
-                    f'avatar_url_cached_{user.id}_{size}',       # Another possible format
-                ]
-                
-                for key in cache_keys:
-                    avatar_cache.delete(key)
-                    logger.info(f"Deleted cache key: {key}")
-            
-            # Also clear cache for avatar existence check
-            avatar_cache.delete(f'avatar_{user.id}_exists')
-            avatar_cache.delete(f'avatar_{user.username}_exists')
-            
-            # Add final cache flush for avatar cache keys that start with the user ID
-            # This is a more targeted approach than clearing the entire cache
-            avatar_cache_pattern = f"avatar*{user.id}*"
-            try:
-                # Try to delete cache by pattern if available
-                if hasattr(cache, 'delete_pattern'):
-                    cache.delete_pattern(avatar_cache_pattern)
-                    logger.info(f"Deleted cache pattern: {avatar_cache_pattern}")
-            except:
-                logger.info(f"Cache backend doesn't support delete_pattern, used individual keys instead")
     except Exception as e:
         logger.exception(f"Error while invalidating avatar cache: {e}")
 
