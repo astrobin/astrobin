@@ -1,3 +1,6 @@
+from unittest.mock import patch
+
+from django.core.cache import cache
 from rest_framework.test import APITestCase
 
 from astrobin.tests.generators import Generators
@@ -350,3 +353,79 @@ class TestImageViewSet(APITestCase):
         response = self.client.patch(f'/api/v2/images/image/{image.pk}/undelete/')
         self.assertEqual(response.status_code, 200)
         self.assertFalse(response.data.get("deleted"))
+        
+    def test_retrieve_image_by_pk_with_country_specific_cache(self):
+        # Clear cache before testing
+        cache.clear()
+        
+        image = Generators.image()
+        
+        # Mock the get_client_country_code function to return a specific country
+        with patch('astrobin.utils.get_client_country_code') as mock_country_code:
+            mock_country_code.return_value = 'US'
+            
+            # First request should not be cached
+            response1 = self.client.get(f'/api/v2/images/image/{image.pk}/')
+            self.assertEqual(response1.status_code, 200)
+            
+            # Second request should be served from cache
+            response2 = self.client.get(f'/api/v2/images/image/{image.pk}/')
+            self.assertEqual(response2.status_code, 200)
+            
+            # The mock should have been called twice
+            self.assertEqual(mock_country_code.call_count, 2)
+            
+            # Change the mocked country code
+            mock_country_code.return_value = 'IT'
+            
+            # This request should not be cached because the country is different
+            response3 = self.client.get(f'/api/v2/images/image/{image.pk}/')
+            self.assertEqual(response3.status_code, 200)
+            
+            # Mock should now have been called 3 times
+            self.assertEqual(mock_country_code.call_count, 3)
+            
+            # Another request with the same country should be cached
+            response4 = self.client.get(f'/api/v2/images/image/{image.pk}/')
+            self.assertEqual(response4.status_code, 200)
+            
+            # Mock should now have been called 4 times
+            self.assertEqual(mock_country_code.call_count, 4)
+        
+    def test_retrieve_image_by_hash_with_country_specific_cache(self):
+        # Clear cache before testing
+        cache.clear()
+        
+        image = Generators.image()
+        
+        # Mock the get_client_country_code function to return a specific country
+        with patch('astrobin.utils.get_client_country_code') as mock_country_code:
+            mock_country_code.return_value = 'US'
+            
+            # First request should not be cached
+            response1 = self.client.get(f'/api/v2/images/image/?hash={image.hash}')
+            self.assertEqual(response1.status_code, 200)
+            
+            # Second request should be served from cache
+            response2 = self.client.get(f'/api/v2/images/image/?hash={image.hash}')
+            self.assertEqual(response2.status_code, 200)
+            
+            # The mock should have been called twice
+            self.assertEqual(mock_country_code.call_count, 2)
+            
+            # Change the mocked country code
+            mock_country_code.return_value = 'IT'
+            
+            # This request should not be cached because the country is different
+            response3 = self.client.get(f'/api/v2/images/image/?hash={image.hash}')
+            self.assertEqual(response3.status_code, 200)
+            
+            # Mock should now have been called 3 times
+            self.assertEqual(mock_country_code.call_count, 3)
+            
+            # Another request with the same country should be cached
+            response4 = self.client.get(f'/api/v2/images/image/?hash={image.hash}')
+            self.assertEqual(response4.status_code, 200)
+            
+            # Mock should now have been called 4 times
+            self.assertEqual(mock_country_code.call_count, 4)

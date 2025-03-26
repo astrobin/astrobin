@@ -284,8 +284,11 @@ class ImageViewSet(
             )
             if not image:
                 return Response(status=HTTP_404_NOT_FOUND)
-
-            cache_key: str = f'api_image_{hash}_{request.query_params.get("skip-thumbnails", False)}'
+                
+            from astrobin.utils import get_client_country_code
+            country_code = get_client_country_code(request)
+            
+            cache_key: str = f'api_image_{hash}_{request.query_params.get("skip-thumbnails", False)}_{country_code}'
             cached_data = cache.get(cache_key)
 
             if cached_data:
@@ -370,9 +373,29 @@ class ImageViewSet(
 
         if instance.user.userprofile.suspended:
             return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'User is suspended'})
-
+            
+        from astrobin.utils import get_client_country_code
+        country_code = get_client_country_code(request)
+        
+        cache_key: str = f'api_image_pk_{kwargs["pk"]}_{request.query_params.get("skip-thumbnails", False)}_{country_code}'
+        cached_data = cache.get(cache_key)
+        
+        if cached_data:
+            cached_timestamp = cached_data.get('timestamp')
+            if cached_timestamp and cached_timestamp >= instance.updated.timestamp():
+                return Response(cached_data.get('data'))
+                
+        # Get fresh data
         serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        serialized_data = serializer.data
+        
+        cache_data = {
+            'data': serialized_data,
+            'timestamp': instance.updated.timestamp()
+        }
+        cache.set(cache_key, cache_data, 3600)
+        
+        return Response(serialized_data)
 
     def _update_collections(self, instance: Image):
         """
