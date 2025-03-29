@@ -573,7 +573,7 @@ class ImageService:
             Image.objects.filter(pk=self.image.pk).update(
                 is_final=True,
                 final_gallery_thumbnail=self.image.thumbnail('gallery', '0', sync=True),
-                updated = now,
+                updated=now,
             )
         else:
             # Make any other revision not final.

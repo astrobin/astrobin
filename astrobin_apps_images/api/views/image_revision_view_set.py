@@ -47,6 +47,10 @@ class ImageRevisionViewSet(
 
         return self.update(request, *args, **kwargs)
 
+    def perform_destroy(self, instance):
+        instance.thumbnail_invalidate()
+        super().perform_destroy(instance)
+
     @action(detail=True, methods=['get'], url_path='video-encoding-progress')
     def video_encoding_progress(self, request, pk=None):
         content_type = ContentType.objects.get_for_model(ImageRevision)

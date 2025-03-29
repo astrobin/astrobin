@@ -125,6 +125,11 @@ class UserCollectionsBaseEdit(LoginRequiredMixin, UserCollectionsBase, View):
                 return self.form_invalid(form)
             x = x.parent
 
+        # Check if the cover has changed
+        if 'cover' in form.cleaned_data and form.initial.get('cover') != form.cleaned_data['cover']:
+            collection.cover = form.cleaned_data['cover']
+            collection.update_cover(save=False)
+
         try:
             return super(UserCollectionsBaseEdit, self).form_valid(form)
         except IntegrityError:

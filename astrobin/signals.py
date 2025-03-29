@@ -157,6 +157,8 @@ def image_pre_save(sender, instance, **kwargs):
         mentions = [item for item in current_mentions if item not in previous_mentions]
         cache.set("image.%d.image_pre_save_mentions" % instance.pk, mentions, 2)
 
+        already_invalidated = False
+
         if (
                 instance.watermark_text != image.watermark_text or
                 instance.watermark != image.watermark or
@@ -164,7 +166,15 @@ def image_pre_save(sender, instance, **kwargs):
                 instance.watermark_size != image.watermark_size or
                 instance.watermark_opacity != image.watermark_opacity
         ):
+            log.debug(f"image_pre_save: Invalidating all thumbnails for {instance}. Watermark changed.")
             ImageService(image).invalidate_all_thumbnails()
+            already_invalidated = True
+
+        if not already_invalidated and instance.square_cropping != image.square_cropping and instance.is_final:
+            log.debug(
+                f"image_pre_save: Invalidating all thumbnails for {instance}. New cropping: {instance.square_cropping}"
+            )
+            instance.thumbnail_invalidate()
 
 
 pre_save.connect(image_pre_save, sender=Image)
@@ -318,6 +328,10 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             update_equipment_preset_image_count.delay(preset.pk)
             update_equipment_preset_total_integration.delay(preset.pk)
 
+        if instance.is_final:
+            for collection in instance.collections.filter(cover=instance).iterator():
+                collection.update_cover()
+
 
 @receiver(post_softdelete, sender=Image)
 def image_post_softdelete(sender, instance, **kwargs):
@@ -361,6 +375,10 @@ def image_post_softdelete(sender, instance, **kwargs):
     except IntegrityError:
         # Possibly the user is being deleted
         pass
+
+    for collection in instance.collections.filter(cover=instance).iterator():
+        collection.cover = None
+        collection.update_cover()
 
     instance.collections.clear()
 
@@ -440,6 +458,10 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
         from astrobin_apps_platesolving.tasks import start_basic_solver
         start_basic_solver.apply_async(args=(instance.pk, content_type.pk), countdown=30)
 
+    if instance.is_final:
+        for collection in instance.image.collections.filter(cover=instance.image).iterator():
+            collection.update_cover()
+
     if instance.image.is_wip:
         return
 
@@ -485,8 +507,16 @@ def imagerevision_post_softdelete(sender, instance, **kwargs):
         instance.image.revisions.filter(pk=instance.pk).update(is_final=False)
         Image.objects_including_wip.filter(pk=instance.image.pk).update(
             is_final=True,
+            final_gallery_thumbnail=instance.image.thumbnail(
+                'gallery',
+                '0',
+                sync=True,
+                use_final_gallery_thumbnail=False
+            ),
             updated=timezone.now()
         )
+        for collection in instance.image.collections.filter(cover=instance.image).iterator():
+            collection.update_cover()
 
 
 @receiver(pre_delete, sender=ImageRevision)

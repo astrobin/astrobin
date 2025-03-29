@@ -5,7 +5,7 @@ import random
 import string
 import unicodedata
 import uuid
-from typing import List, Optional
+from typing import List, Optional, Union
 from urllib.parse import urlparse
 
 import boto3
@@ -1762,6 +1762,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         thumbnail_settings = kwargs.pop('thumbnail_settings', {})
         sync = kwargs.pop('sync', False)
+        use_final_gallery_thumbnail = kwargs.pop('use_final_gallery_thumbnail', True)
 
         # For compatibility:
         if alias in ('revision', 'runnerup'):
@@ -1769,7 +1770,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         final_revision_label = ImageService(self).get_final_revision_label()
         if revision_label in (None, 'None', 'final', final_revision_label):
-            if alias == 'gallery' and self.final_gallery_thumbnail:
+            if alias == 'gallery' and self.final_gallery_thumbnail and use_final_gallery_thumbnail:
                 return normalize_url_security(self.final_gallery_thumbnail, thumbnail_settings)
             revision_label = final_revision_label
 
@@ -1882,7 +1883,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         )
 
     def thumbnail_invalidate(self, delete=True):
-        return self.thumbnail_invalidate_real(self.image_file, '0', delete)
+        self.thumbnail_invalidate_real(self.image_file, '0', delete)
+        for collection in self.collections.filter(cover=self).iterator():
+            collection.update_cover()
 
     def get_data_source(self):
         LOOKUP = {
@@ -2202,7 +2205,9 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         return self.image.thumbnail(alias, self.label, thumbnail_field=self.image_file, **kwargs)
 
     def thumbnail_invalidate(self, delete=True):
-        return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete)
+        self.image.thumbnail_invalidate_real(self.image_file, self.label, delete)
+        for collection in self.image.collections.filter(cover=self.image).iterator():
+            collection.update_cover()
 
 
 class Collection(models.Model):
@@ -2260,6 +2265,30 @@ class Collection(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    cover_thumbnail = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    cover_thumbnail_hd = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    square_cropping = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    w = models.PositiveSmallIntegerField(null=True, blank=True, editable=False, default=0)
+    h = models.PositiveSmallIntegerField(null=True, blank=True, editable=False, default=0)
+
     order_by_tag = models.CharField(
         null=True,
         blank=True,
@@ -2293,6 +2322,27 @@ class Collection(models.Model):
     def update_counts(self, save=True):
         self.image_count = Image.objects_plain.filter(collections=self).count()
         self.image_count_including_wip = Image.objects_including_wip_plain.filter(collections=self).count()
+        if save:
+            self.save()
+
+    def update_cover(self, save=True):
+        image: Image = self.cover or self.images.first()
+
+        from astrobin_apps_images.services import ImageService
+        final_revision: Union[Image, ImageRevision] = ImageService(image).get_final_revision()
+
+        self.cover = image
+        self.cover_thumbnail = image.thumbnail('regular', None, sync=True)
+        self.cover_thumbnail_hd = image.thumbnail('hd', None, sync=True)
+        self.w = final_revision.w
+        self.h = final_revision.h
+        self.square_cropping = final_revision.square_cropping
+
+        log.debug(
+            f"Updated cover for collection {self.pk}: "
+            f"{self.cover_thumbnail}, {self.cover_thumbnail_hd}, {self.w}, {self.h}, {self.square_cropping}"
+        )
+
         if save:
             self.save()
 

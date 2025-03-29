@@ -84,7 +84,8 @@ class CollectionViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'Image is already in collection.'}, status=400)
 
         image.collections.add(collection)
-        collection.update_counts()
+        collection.update_counts(save=False)
+        collection.update_cover()
         Image.objects_including_wip_plain.filter(pk=image.pk).update(updated=datetime.now())
 
         return Response({'detail': 'Image added to collection.'})
@@ -111,7 +112,9 @@ class CollectionViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'Image is not in collection.'}, status=400)
 
         image.collections.remove(collection)
-        collection.update_counts()
+        image.collections.filter(cover=image).update(cover=None)
+        collection.update_counts(save=False)
+        collection.update_cover()
         Image.objects_including_wip_plain.filter(pk=image.pk).update(updated=datetime.now())
 
         return Response({'detail': 'Image removed from collection.'})
@@ -140,7 +143,7 @@ class CollectionViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'Image is not in collection.'}, status=400)
 
         collection.cover = image
-        collection.save()
+        collection.update_cover()
 
         serializer = self.get_serializer(collection)
         return Response(serializer.data)
