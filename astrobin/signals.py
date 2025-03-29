@@ -166,10 +166,14 @@ def image_pre_save(sender, instance, **kwargs):
                 instance.watermark_size != image.watermark_size or
                 instance.watermark_opacity != image.watermark_opacity
         ):
+            log.debug(f"image_pre_save: Invalidating all thumbnails for {instance}. Watermark changed.")
             ImageService(image).invalidate_all_thumbnails()
             already_invalidated = True
 
         if not already_invalidated and instance.square_cropping != image.square_cropping and instance.is_final:
+            log.debug(
+                f"image_pre_save: Invalidating all thumbnails for {instance}. New cropping: {instance.square_cropping}"
+            )
             instance.thumbnail_invalidate()
 
 
@@ -454,6 +458,10 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
         from astrobin_apps_platesolving.tasks import start_basic_solver
         start_basic_solver.apply_async(args=(instance.pk, content_type.pk), countdown=30)
 
+    if instance.is_final:
+        for collection in instance.image.collections.filter(cover=instance.image).iterator():
+            collection.update_cover()
+
     if instance.image.is_wip:
         return
 
@@ -480,10 +488,6 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
                     deleted=False
                 ).count()
             )
-
-    if instance.is_final:
-        for collection in instance.image.collections.filter(cover=instance.image).iterator():
-            collection.update_cover()
 
 
 post_save.connect(imagerevision_post_save, sender=ImageRevision)

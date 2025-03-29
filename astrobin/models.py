@@ -2338,7 +2338,10 @@ class Collection(models.Model):
         self.h = final_revision.h
         self.square_cropping = final_revision.square_cropping
 
-        log.debug(f"Updated cover for collection {self.pk}")
+        log.debug(
+            f"Updated cover for collection {self.pk}: "
+            f"{self.cover_thumbnail}, {self.cover_thumbnail_hd}, {self.w}, {self.h}, {self.square_cropping}"
+        )
 
         if save:
             self.save()
