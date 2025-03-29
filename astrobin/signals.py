@@ -157,6 +157,8 @@ def image_pre_save(sender, instance, **kwargs):
         mentions = [item for item in current_mentions if item not in previous_mentions]
         cache.set("image.%d.image_pre_save_mentions" % instance.pk, mentions, 2)
 
+        already_invalidated = False
+
         if (
                 instance.watermark_text != image.watermark_text or
                 instance.watermark != image.watermark or
@@ -165,6 +167,10 @@ def image_pre_save(sender, instance, **kwargs):
                 instance.watermark_opacity != image.watermark_opacity
         ):
             ImageService(image).invalidate_all_thumbnails()
+            already_invalidated = True
+
+        if not already_invalidated and instance.square_cropping != image.square_cropping and instance.is_final:
+            instance.thumbnail_invalidate()
 
 
 pre_save.connect(image_pre_save, sender=Image)
@@ -318,6 +324,10 @@ def image_post_save(sender, instance: Image, created: bool, **kwargs):
             update_equipment_preset_image_count.delay(preset.pk)
             update_equipment_preset_total_integration.delay(preset.pk)
 
+        if instance.is_final:
+            for collection in instance.collections.filter(cover=instance).iterator():
+                collection.update_cover()
+
 
 @receiver(post_softdelete, sender=Image)
 def image_post_softdelete(sender, instance, **kwargs):
@@ -361,6 +371,10 @@ def image_post_softdelete(sender, instance, **kwargs):
     except IntegrityError:
         # Possibly the user is being deleted
         pass
+
+    for collection in instance.collections.filter(cover=instance).iterator():
+        collection.cover = None
+        collection.update_cover()
 
     instance.collections.clear()
 
@@ -467,6 +481,10 @@ def imagerevision_post_save(sender, instance: ImageRevision, created: bool, **kw
                 ).count()
             )
 
+    if instance.is_final:
+        for collection in instance.image.collections.filter(cover=instance.image).iterator():
+            collection.update_cover()
+
 
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
 
@@ -487,6 +505,8 @@ def imagerevision_post_softdelete(sender, instance, **kwargs):
             is_final=True,
             updated=timezone.now()
         )
+        for collection in instance.image.collections.filter(cover=instance).iterator():
+            collection.update_cover()
 
 
 @receiver(pre_delete, sender=ImageRevision)

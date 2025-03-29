@@ -25,11 +25,13 @@ class CollectionService(object):
 
         for x in removed:
             x.collections.remove(self.collection)
+            x.collections.filter(cover=x).update(cover=None)
 
         for x in added:
             x.collections.add(self.collection)
             
-        self.collection.update_counts()
+        self.collection.update_counts(save=False)
+        self.collection.update_cover()
 
     def get_descendant_collections(self, descendants=None) -> Set[Collection]:
         if descendants is None:
