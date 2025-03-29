@@ -2328,20 +2328,21 @@ class Collection(models.Model):
     def update_cover(self, save=True):
         image: Image = self.cover or self.images.first()
 
-        from astrobin_apps_images.services import ImageService
-        final_revision: Union[Image, ImageRevision] = ImageService(image).get_final_revision()
+        if image:
+            from astrobin_apps_images.services import ImageService
+            final_revision: Union[Image, ImageRevision] = ImageService(image).get_final_revision()
 
-        self.cover = image
-        self.cover_thumbnail = image.thumbnail('regular', None, sync=True)
-        self.cover_thumbnail_hd = image.thumbnail('hd', None, sync=True)
-        self.w = final_revision.w
-        self.h = final_revision.h
-        self.square_cropping = final_revision.square_cropping
+            self.cover = image
+            self.cover_thumbnail = image.thumbnail('regular', None, sync=True)
+            self.cover_thumbnail_hd = image.thumbnail('hd', None, sync=True)
+            self.w = final_revision.w
+            self.h = final_revision.h
+            self.square_cropping = final_revision.square_cropping
 
-        log.debug(
-            f"Updated cover for collection {self.pk}: "
-            f"{self.cover_thumbnail}, {self.cover_thumbnail_hd}, {self.w}, {self.h}, {self.square_cropping}"
-        )
+            log.debug(
+                f"Updated cover for collection {self.pk}: "
+                f"{self.cover_thumbnail}, {self.cover_thumbnail_hd}, {self.w}, {self.h}, {self.square_cropping}"
+            )
 
         if save:
             self.save()
