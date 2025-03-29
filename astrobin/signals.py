@@ -503,9 +503,15 @@ def imagerevision_post_softdelete(sender, instance, **kwargs):
         instance.image.revisions.filter(pk=instance.pk).update(is_final=False)
         Image.objects_including_wip.filter(pk=instance.image.pk).update(
             is_final=True,
+            final_gallery_thumbnail=instance.image.thumbnail(
+                'gallery',
+                '0',
+                sync=True,
+                use_final_gallery_thumbnail=False
+            ),
             updated=timezone.now()
         )
-        for collection in instance.image.collections.filter(cover=instance).iterator():
+        for collection in instance.image.collections.filter(cover=instance.image).iterator():
             collection.update_cover()
 
 

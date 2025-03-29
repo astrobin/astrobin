@@ -1762,6 +1762,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         thumbnail_settings = kwargs.pop('thumbnail_settings', {})
         sync = kwargs.pop('sync', False)
+        use_final_gallery_thumbnail = kwargs.pop('use_final_gallery_thumbnail', True)
 
         # For compatibility:
         if alias in ('revision', 'runnerup'):
@@ -1769,7 +1770,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         final_revision_label = ImageService(self).get_final_revision_label()
         if revision_label in (None, 'None', 'final', final_revision_label):
-            if alias == 'gallery' and self.final_gallery_thumbnail:
+            if alias == 'gallery' and self.final_gallery_thumbnail and use_final_gallery_thumbnail:
                 return normalize_url_security(self.final_gallery_thumbnail, thumbnail_settings)
             revision_label = final_revision_label
 
