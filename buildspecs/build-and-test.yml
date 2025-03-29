@@ -16,21 +16,7 @@ phases:
     commands:
       - buildspecs/build.sh
       - buildspecs/test.sh
-      - buildspecs/create-test-db.sh
-      - buildspecs/cypress.sh
 
   post_build:
     commands:
-      - buildspecs/delete-test-db.sh
       - buildspecs/push-image.sh
-
-    finally:
-      - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
-      - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
-      - aws s3 cp $CODEBUILD_SRC_DIR/cypress s3://astrobin-cypress-output/ --recursive
-
-artifacts:
-  base-directory: $CODEBUILD_SRC_DIR/cypress/
-  files:
-    - videos/*
-    - screenshots/*

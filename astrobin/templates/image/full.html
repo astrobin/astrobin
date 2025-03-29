@@ -288,14 +288,12 @@
 
 {% insert_hit_count_js_variables for image %}
 <script type="text/javascript">
-    if (!window.Cypress) {
-        s = document.createElement('script');
-        s.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js");
-        s.setAttribute("integrity", "sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==");
-        s.setAttribute("crossorigin", "anonymoous");
-        s.setAttribute("referrerPolicy", "no-referrer");
-        document.body.appendChild(s);
-    }
+    s = document.createElement('script');
+    s.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js");
+    s.setAttribute("integrity", "sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==");
+    s.setAttribute("crossorigin", "anonymoous");
+    s.setAttribute("referrerPolicy", "no-referrer");
+    document.body.appendChild(s);
 
     function setupAdvancedSolution() {
         {% if show_advanced_solution_on_full and not real %}

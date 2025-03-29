@@ -6,9 +6,6 @@
   "directories": {
     "test": "tests"
   },
-  "scripts": {
-    "test": "cypress run"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/astrobin/astrobin.git"
@@ -18,10 +15,5 @@
   "bugs": {
     "url": "https://github.com/astrobin/astrobin/issues"
   },
-  "homepage": "https://github.com/astrobin/astrobin#readme",
-  "devDependencies": {
-    "cypress": "8.7.0",
-    "cypress-commands": "2.0.1",
-    "cypress-terminal-report": "3.5.2"
-  }
+  "homepage": "https://github.com/astrobin/astrobin#readme"
 }
