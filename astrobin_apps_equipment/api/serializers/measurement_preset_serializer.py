@@ -17,19 +17,8 @@ class MeasurementPresetSerializer(serializers.ModelSerializer):
         ]
 
     def validate_name(self, value):
-        user = self.context['request'].user
-        instance = getattr(self, 'instance', None)
-
-        # Check if another preset exists with same name for this user
-        exists = self.Meta.model.objects.filter(
-            user=user,
-            name__iexact=value
-        ).exclude(
-            pk=instance.pk if instance else None
-        ).exists()
-
-        if exists:
-            raise ValidationError("You already have a measurement preset with this name.")
+        if not value or value.strip() == '':
+            raise ValidationError("Preset name cannot be empty.")
         return value
 
     def validate_width_arcseconds(self, value):
