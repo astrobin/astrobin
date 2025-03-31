@@ -26,6 +26,7 @@ from .accessory_edit_proposal import AccessoryEditProposal # noqa
 from .software import Software # noqa
 from .software_edit_proposal import SoftwareEditProposal # noqa
 from .equipment_preset import EquipmentPreset # noqa
+from .measurement_preset import MeasurementPreset # noqa
 
 from .migration_record_base_model import MigrationRecordBaseModel # noqa
 from .migration_usage_type import MigrationUsageType # noqa
