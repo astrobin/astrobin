@@ -133,13 +133,62 @@ class AppApiRequestAdmin(admin.ModelAdmin):
     )
     list_filter = ('approved',)
     ordering = ('-created',)
-    actions = ['approve']
+    actions = ['approve', 'reject']
 
     def approve(modeladmin, request, queryset):
         for api_request in queryset:
             api_request.approve()
 
     approve.short_description = 'Approve'
+    
+    def reject(modeladmin, request, queryset):
+        from django.core.mail import EmailMessage
+        from django.conf import settings
+        
+        for api_request in queryset:
+            # Create a message with request details
+            message = f"""Thanks for your interest in AstroBin's API. After reviewing your request, we've determined that this use case isn't aligned with AstroBin's current strategic direction and policies regarding API access.
+
+We appreciate your understanding and wish you success with your project. We apologize for any inconvenience this may cause.
+
+For your reference, here are the details of your request:
+
+Username: {api_request.registrar.username}
+Name: {api_request.name}
+Description: {api_request.description}
+
+If you have any questions or would like further clarification, please visit https://welcome.astrobin.com/contact to get in touch. Please do not reply to this email. If you decide to contact us, please include the username, name, and description of your request as shown above.
+
+Best regards,
+The AstroBin Team"""
+
+            # Create email with CC
+            email = EmailMessage(
+                subject='AstroBin API Request Decision',
+                body=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[api_request.registrar.email],
+                cc=[settings.DEFAULT_FROM_EMAIL],
+            )
+            
+            # Send email
+            email_sent = email.send()
+            
+            # Only delete the request if the email was sent successfully
+            if email_sent:
+                api_request.delete()
+                modeladmin.message_user(
+                    request,
+                    f"Request from {api_request.registrar.username} has been rejected and deleted."
+                )
+            else:
+                modeladmin.message_user(
+                    request,
+                    f"Failed to send email to {api_request.registrar.username}. Request not deleted.",
+                    level=messages.ERROR
+                )
+    
+    reject.short_description = 'Reject'
 
 
 class AppAdmin(admin.ModelAdmin):
