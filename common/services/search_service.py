@@ -20,6 +20,7 @@ from astrobin_apps_equipment.models import (
     EquipmentBrandListing, EquipmentItemListing,
     EquipmentItemMarketplaceListingLineItem,
 )
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemUsageType
 from astrobin_apps_equipment.models.sensor_base_model import ColorOrMono
 from astrobin_apps_equipment.types.marketplace_listing_type import MarketplaceListingType
 from astrobin_apps_groups.models import Group
@@ -182,20 +183,30 @@ class SearchService:
             data,
             results: SearchQuerySet,
             key: str,
-            id_field: str,
-            legacy_field: Optional[str],
-            new_field: str
+            imaging_id_field: str,
+            guiding_id_field: Optional[str],
+            imaging_legacy_field: Optional[str],
+            guiding_legacy_field: Optional[str],
+            imaging_new_field: str,
+            guiding_new_field: Optional[str]
     ) -> SearchQuerySet:
         item = data.get(key)
         queries = []
         op = or_
         match_type = None
         exact_match = False  # Used for single items where match_type is not available.
+        usage_type = None
 
         supports_exact_match = key in [
             'telescope',
             'camera',
             'mount',
+        ]
+
+        supports_usage_type = key in [
+            'telescope',
+            'camera',
+            'sensor',
         ]
 
         if not item:
@@ -206,6 +217,7 @@ class SearchService:
             item_ids = [x['id'] for x in items]
             match_type = item.get("matchType", MatchType.ALL.value)
             exact_match = supports_exact_match and item.get("exactMatch", False) and len(item_ids) == 1
+            usage_type = supports_usage_type and item.get("usageType", EquipmentItemUsageType.IMAGING)
             op = or_ if match_type == MatchType.ANY.value else and_
         elif isinstance(item, list):
             item_ids = item
@@ -215,23 +227,85 @@ class SearchService:
         if item_ids:
             if exact_match or match_type == MatchType.EXACT.value:
                 # Build a term query for each ID.
-                for item_id in item_ids:
-                    queries.append(Q(**{id_field: item_id}))
-                # Additional filter to ensure the count matches exactly.
-                queries.append(Q(**{f"{id_field}_count": len(item_ids)}))
+                if usage_type == EquipmentItemUsageType.IMAGING:
+                    for item_id in item_ids:
+                        queries.append(Q(**{imaging_id_field: item_id}))
+                    # Additional filter to ensure the count matches exactly.
+                    queries.append(Q(**{f"{imaging_id_field}_count": len(item_ids)}))
+                elif usage_type == EquipmentItemUsageType.GUIDING and guiding_id_field is not None:
+                    for item_id in item_ids:
+                        queries.append(Q(**{guiding_id_field: item_id}))
+                elif guiding_id_field is not None:
+                    for item_id in item_ids:
+                        queries.append(
+                            Q(**{imaging_id_field: item_id}) |
+                            Q(**{guiding_id_field: item_id})
+                        )
+                else:
+                    for item_id in item_ids:
+                        queries.append(
+                            Q(**{imaging_id_field: item_id})
+                        )
             else:
-                for item_id in item_ids:
-                    queries.append(Q(**{id_field: item_id}))
+                if usage_type == EquipmentItemUsageType.IMAGING:
+                    for item_id in item_ids:
+                        queries.append(Q(**{imaging_id_field: item_id}))
+                elif usage_type == EquipmentItemUsageType.GUIDING and guiding_id_field is not None:
+                    for item_id in item_ids:
+                        queries.append(Q(**{guiding_id_field: item_id}))
+                elif guiding_id_field is not None:
+                    for item_id in item_ids:
+                        queries.append(
+                            Q(**{imaging_id_field: item_id}) |
+                            Q(**{guiding_id_field: item_id})
+                        )
+                else:
+                    for item_id in item_ids:
+                        queries.append(
+                            Q(**{imaging_id_field: item_id})
+                        )
         elif isinstance(item, str):
-            if legacy_field is not None:
-                queries.append(
-                    Q(**{legacy_field: CustomContain(item)}) |
-                    Q(**{new_field: CustomContain(item)})
-                )
+            if imaging_legacy_field is not None:
+                if usage_type == EquipmentItemUsageType.IMAGING:
+                    queries.append(
+                        Q(**{imaging_legacy_field: CustomContain(item)}) |
+                        Q(**{imaging_new_field: CustomContain(item)})
+                    )
+                elif usage_type == EquipmentItemUsageType.GUIDING and guiding_legacy_field is not None:
+                    queries.append(
+                        Q(**{guiding_legacy_field: CustomContain(item)}) |
+                        Q(**{guiding_new_field: CustomContain(item)})
+                    )
+                elif guiding_legacy_field is not None:
+                    queries.append(
+                        Q(**{imaging_legacy_field: CustomContain(item)}) |
+                        Q(**{guiding_legacy_field: CustomContain(item)}) |
+                        Q(**{imaging_new_field: CustomContain(item)}) |
+                        Q(**{guiding_new_field: CustomContain(item)})
+                    )
+                else:
+                    queries.append(
+                        Q(**{imaging_legacy_field: CustomContain(item)}) |
+                        Q(**{imaging_new_field: CustomContain(item)})
+                    )
             else:
-                queries.append(
-                    Q(**{new_field: CustomContain(item)})
-                )
+                if usage_type == EquipmentItemUsageType.IMAGING:
+                    queries.append(
+                        Q(**{imaging_new_field: CustomContain(item)})
+                    )
+                elif usage_type == EquipmentItemUsageType.GUIDING and guiding_new_field is not None:
+                    queries.append(
+                        Q(**{guiding_new_field: CustomContain(item)})
+                    )
+                elif guiding_new_field is not None:
+                    queries.append(
+                        Q(**{imaging_new_field: CustomContain(item)}) |
+                        Q(**{guiding_new_field: CustomContain(item)})
+                    )
+                else:
+                    queries.append(
+                        Q(**{imaging_new_field: CustomContain(item)})
+                    )
 
         if queries:
             results = results.filter(reduce(op, queries))
@@ -336,9 +410,12 @@ class SearchService:
             data,
             results,
             key="telescope",
-            id_field="imaging_telescopes_2_id",
-            legacy_field="imaging_telescopes",
-            new_field="imaging_telescopes_2"
+            imaging_id_field="imaging_telescopes_2_id",
+            guiding_id_field="guiding_telescopes_2_id",
+            imaging_legacy_field="imaging_telescopes",
+            guiding_legacy_field="guiding_telescopes",
+            imaging_new_field="imaging_telescopes_2",
+            guiding_new_field="guiding_telescopes_2"
         )
 
     @staticmethod
@@ -347,9 +424,12 @@ class SearchService:
             data,
             results,
             key="sensor",
-            id_field="imaging_sensors_id",
-            legacy_field=None,
-            new_field="imaging_sensors"
+            imaging_id_field="imaging_sensors_id",
+            guiding_id_field="guiding_sensors_id",
+            imaging_legacy_field=None,
+            guiding_legacy_field=None,
+            imaging_new_field="imaging_sensors",
+            guiding_new_field="guiding_sensors"
         )
 
     @staticmethod
@@ -358,9 +438,12 @@ class SearchService:
             data,
             results,
             key="camera",
-            id_field="imaging_cameras_2_id",
-            legacy_field="imaging_cameras",
-            new_field="imaging_cameras_2"
+            imaging_id_field="imaging_cameras_2_id",
+            guiding_id_field="guiding_cameras_2_id",
+            imaging_legacy_field="imaging_cameras",
+            guiding_legacy_field="guiding_cameras",
+            imaging_new_field="imaging_cameras_2",
+            guiding_new_field="guiding_cameras_2",
         )
 
     @staticmethod
@@ -369,9 +452,12 @@ class SearchService:
             data,
             results,
             key="mount",
-            id_field="mounts_2_id",
-            legacy_field="mounts",
-            new_field="mounts_2"
+            imaging_id_field="mounts_2_id",
+            guiding_id_field=None,
+            imaging_legacy_field="mounts",
+            guiding_legacy_field=None,
+            imaging_new_field="mounts_2",
+            guiding_new_field=None
         )
 
     @staticmethod
@@ -380,9 +466,12 @@ class SearchService:
             data,
             results,
             key="filter",
-            id_field="filters_2_id",
-            legacy_field="filters",
-            new_field="filters_2"
+            imaging_id_field="filters_2_id",
+            guiding_id_field=None,
+            imaging_legacy_field="filters",
+            guiding_legacy_field=None,
+            imaging_new_field="filters_2",
+            guiding_new_field=None
         )
 
     @staticmethod
@@ -391,9 +480,12 @@ class SearchService:
             data,
             results,
             key="accessory",
-            id_field="accessories_2_id",
-            legacy_field="accessories",
-            new_field="accessories_2"
+            imaging_id_field="accessories_2_id",
+            guiding_id_field=None,
+            imaging_legacy_field="accessories",
+            guiding_legacy_field=None,
+            imaging_new_field="accessories_2",
+            guiding_new_field=None
         )
 
     @staticmethod
@@ -402,9 +494,12 @@ class SearchService:
             data,
             results,
             key="software",
-            id_field="software_2_id",
-            legacy_field="software",
-            new_field="software_2"
+            imaging_id_field="software_2_id",
+            guiding_id_field=None,
+            imaging_legacy_field="software",
+            guiding_legacy_field=None,
+            imaging_new_field="software_2",
+            guiding_new_field=None
         )
 
     @staticmethod
