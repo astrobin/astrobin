@@ -98,6 +98,7 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'image',
             'title',
             'description',
+            'annotations',
             'skip_notifications',
             'skip_activity_stream',
             'label',

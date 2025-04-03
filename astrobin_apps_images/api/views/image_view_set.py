@@ -651,6 +651,32 @@ class ImageViewSet(
         image.undelete()
         serializer = self.get_serializer(image)
         return Response(serializer.data, HTTP_200_OK)
+        
+    @action(detail=True, methods=['patch'], url_path='set-annotations')
+    def set_annotations(self, request, pk=None):
+        image = self.get_object()
+        
+        if not request.user.is_authenticated:
+            return Response("Authentication required", HTTP_401_UNAUTHORIZED)
+            
+        if not request.user.is_superuser and image.user != request.user:
+            return Response("Permission denied", HTTP_403_FORBIDDEN)
+
+        annotations = request.data.get('annotations')
+        if annotations is None:
+            return Response("Annotations field is required", HTTP_400_BAD_REQUEST)
+            
+        from django.utils import timezone
+        # Use queryset update to avoid triggering signals and other side effects
+        Image.objects_including_wip.filter(pk=image.pk).update(
+            annotations=annotations,
+            updated=timezone.now()
+        )
+        
+        # Refresh the object from the database
+        image.refresh_from_db()
+        serializer = self.get_serializer(image)
+        return Response(serializer.data, HTTP_200_OK)
 
     def _get_users_with_property(self, request, property_type, query_param_name):
         """

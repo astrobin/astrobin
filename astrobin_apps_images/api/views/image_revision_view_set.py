@@ -7,10 +7,10 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 from rest_framework.viewsets import GenericViewSet
 
-from astrobin.models import ImageRevision
+from astrobin.models import Image, ImageRevision
 from astrobin_apps_images.api.filters import ImageRevisionFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageRevisionSerializer
@@ -66,3 +66,34 @@ class ImageRevisionViewSet(
         ImageService(revision.image).mark_as_final(revision.label)
 
         return Response(status=HTTP_200_OK)
+        
+    @action(detail=True, methods=['patch'], url_path='set-annotations')
+    def set_annotations(self, request, pk=None):
+        revision = self.get_object()
+        
+        if not request.user.is_authenticated:
+            return Response("Authentication required", status=HTTP_401_UNAUTHORIZED)
+            
+        if not request.user.is_superuser and revision.image.user != request.user:
+            return Response("Permission denied", status=HTTP_403_FORBIDDEN)
+            
+        annotations = request.data.get('annotations')
+        if annotations is None:
+            return Response("Annotations field is required", status=HTTP_400_BAD_REQUEST)
+            
+        from django.utils import timezone
+        now = timezone.now()
+        # Use queryset update to avoid triggering signals and other side effects
+        ImageRevision.objects.filter(pk=revision.pk).update(
+            annotations=annotations,
+        )
+        
+        # Update the parent image's updated field too
+        Image.objects_including_wip.filter(pk=revision.image.pk).update(
+            updated=now
+        )
+        
+        # Refresh the object from the database
+        revision.refresh_from_db()
+        serializer = self.get_serializer(revision)
+        return Response(serializer.data, status=HTTP_200_OK)
