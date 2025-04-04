@@ -11,6 +11,7 @@ from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 from astrobin_apps_equipment.types import StockStatus
+from astrobin_apps_equipment.types.listing_type import EquipmentListingType
 
 EQUIPMENT_ITEM_LISTING_STOCK_CHOICES = (
     # Please note: "UNKNOWN" means that this vendor supports stock polling, but the stock for a particular item is
@@ -21,6 +22,10 @@ EQUIPMENT_ITEM_LISTING_STOCK_CHOICES = (
     (StockStatus.OUT_OF_STOCK.value, gettext("Out of stock")),
 )
 
+EQUIPMENT_ITEM_LISTING_TYPE_CHOICES = (
+    (EquipmentListingType.SELLS.value, gettext("Sells")),
+    (EquipmentListingType.PAIRS_WELL.value, gettext("Pairs well")),
+)
 
 class EquipmentItemListing(SafeDeleteModel):
     created_by = models.ForeignKey(
@@ -41,6 +46,12 @@ class EquipmentItemListing(SafeDeleteModel):
         auto_now=True,
         null=False,
         editable=False
+    )
+
+    listing_type = models.CharField(
+        max_length=16,
+        default=EquipmentListingType.SELLS.value,
+        choices=EQUIPMENT_ITEM_LISTING_TYPE_CHOICES,
     )
 
     # This is the full name (brand + item name) of the item on AstroBin.
@@ -78,6 +89,12 @@ class EquipmentItemListing(SafeDeleteModel):
         null=True,
         blank=True,
         max_length=512,
+    )
+
+    image_url = models.URLField(
+        max_length=512,
+        null=True,
+        blank=True,
     )
 
     sku = models.CharField(

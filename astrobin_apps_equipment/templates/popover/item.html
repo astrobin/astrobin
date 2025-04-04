@@ -59,7 +59,8 @@
                             {% for listing in item_listings %}
                                 <div class="span6">
                                     <div class="equipment-listing">
-                                        <a class="close" data-toggle="modal" title="{% trans "Disable retailer integration" %}"
+                                        <a class="close" data-toggle="modal"
+                                           title="{% trans "Disable retailer integration" %}"
                                                 {% if request_user_valid_usersubscription|can_remove_retailer_integration %}
                                            href="#remove-ads-modal"
                                                 {% else %}
@@ -75,33 +76,40 @@
                                             <a href="{{ url_with_tags }}"
                                                onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
                                                target="_blank">
-                                                <img class="logo" src="{{ listing.retailer.logo.url }}"
-                                                     alt="{{ listing.retailer }}">
+                                                <img
+                                                    class="logo"
+                                                    src="{{ listing.image_url|default:listing.retailer.logo.url }}"
+                                                    alt="{{ listing.retailer }}"
+                                                />
                                             </a>
                                         {% endif %}
 
-                                    <a href="{{ url_with_tags }}"
-                                       onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
-                                       target="_blank" class="shop-button btn btn-block">
-                                        <i class="icon-shopping-cart"></i>
-                                        {% blocktrans trimmed with name=listing.name retailer=listing.retailer %}
-                                            Shop <strong>{{ name }}</strong> at {{ retailer }}
-                                        {% endblocktrans %}
+                                        <a href="{{ url_with_tags }}"
+                                           onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                           target="_blank" class="shop-button btn btn-block">
+                                            <i class="icon-shopping-cart"></i>
+                                            {% if listing.listing_type == "SELLS" or listing.listing_type == None %}
+                                                {% blocktrans trimmed with name=listing.name retailer=listing.retailer %}
+                                                    Shop <strong>{{ name }}</strong> at {{ retailer }}
+                                                {% endblocktrans %}
+                                            {% endif %}
 
-                                        {% if listing.stock_status %}
-                                            {% spaceless %}
-                                                <span
-                                                    class="no-wrap"
-                                                    rel="tooltip"
-                                                    title="{% trans 'Last update' %}: {{ listing.updated | date:' jS, Y' }}">
+                                            {% if listing.listing_type == "PAIRS_WELL" %}
+                                                {% blocktrans trimmed with _0=item _1=listing.name _2=listing.retailer %}
+                                                    <strong>{{ _0 }}</strong> pairs well with {{ _1 }} by {{ _2 }}
+                                                {% endblocktrans %}
+                                            {% endif %}
+
+                                            {% if listing.stock_status %}
+                                                {% spaceless %}
+                                                    <span class="no-wrap" rel="tooltip"
+                                                          title="{% trans 'Last update' %}: {{ listing.updated | date:' jS, Y' }}">
                                                     (
-                                                        <i
-                                                            class="icon-circle"
-                                                            {% if listing.stock_status == "UNKNOWN" %}style="color: grey;"{% endif %}
-                                                            {% if listing.stock_status == "BACK_ORDER" %}style="color: orange;"{% endif %}
-                                                            {% if listing.stock_status == "IN_STOCK" %}style="color: green;"{% endif %}
-                                                            {% if listing.stock_status == "OUT_OF_STOCK" %}style="color: red;"{% endif %}
-                                                        ></i>
+                                                        <i class="icon-circle"
+                                                           {% if listing.stock_status == "UNKNOWN" %}style="color: grey;"{% endif %}
+                                                           {% if listing.stock_status == "BACK_ORDER" %}style="color: orange;"{% endif %}
+                                                           {% if listing.stock_status == "IN_STOCK" %}style="color: green;"{% endif %}
+                                                           {% if listing.stock_status == "OUT_OF_STOCK" %}style="color: red;"{% endif %}></i>
 
                                                         {% if listing.stock_status == "UNKNOWN" %}
                                                             {% trans "Stock status unknown" %}
@@ -118,7 +126,7 @@
                                                                 {% endblocktrans %}
                                                             {% else %}
                                                                 {% blocktrans trimmed with x=listing.stock_amount %}
-                                                                    {{x}} in stock
+                                                                    {{ x }} in stock
                                                                 {% endblocktrans %}
                                                             {% endif %}
                                                         {% endif %}
@@ -126,21 +134,22 @@
                                                         {% if listing.stock_status == "OUT_OF_STOCK" %}
                                                             {% trans "Currently out of stock" %}
                                                         {% endif %}
-                                                    )
+                                                        )
                                                 </span>
-                                            {% endspaceless %}
-                                        {% endif %}
-                                    </a>
+                                                {% endspaceless %}
+                                            {% endif %}
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+                            {% endfor %}
+                        {% endif %}
 
                         {% if brand_listings|length %}
                             {% for listing in brand_listings %}
                                 <div class="span6">
                                     <div class="equipment-listing">
-                                        <a class="close" data-toggle="modal" title="{% trans "Disable retailer integration" %}"
+                                        <a class="close" data-toggle="modal"
+                                           title="{% trans "Disable retailer integration" %}"
                                                 {% if request_user_valid_usersubscription|can_remove_retailer_integration %}
                                            href="#remove-ads-modal"
                                                 {% else %}
@@ -187,18 +196,15 @@
             </a>
 
             {% if item.forum %}
-                <a href="{% url 'pybb:forum' item.forum.id %}"
-                   class="btn btn-secondary btn-block-mobile">
+                <a href="{% url 'pybb:forum' item.forum.id %}" class="btn btn-secondary btn-block-mobile">
                     {% trans "Forum" %}
                 </a>
             {% endif %}
 
             {% add_remove_toggleproperty 'follow' item request.user btn_class="btn btn-secondary btn-block-mobile" hide_icon=True %}
 
-            <a
-                href="{% app_redirection_service '/equipment/marketplace/create' %}?lineItemCount=1&equipmentItemId={{ item.id }}&equipmentItemContentTypeId={{ item_content_type.id }}"
-                class="btn btn-secondary btn-block-mobile"
-            >
+            <a href="{% app_redirection_service '/equipment/marketplace/create' %}?lineItemCount=1&equipmentItemId={{ item.id }}&equipmentItemContentTypeId={{ item_content_type.id }}"
+               class="btn btn-secondary btn-block-mobile">
                 {% trans "Sell in the marketplace" %}
             </a>
         {% endif %}
