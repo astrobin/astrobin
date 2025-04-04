@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+New image in the group "{{ group_name }}"
+{% endblocktrans %}{% if image.title %}: {{image.title}}{% endif %}
