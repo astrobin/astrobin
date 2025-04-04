@@ -9,7 +9,7 @@ from safedelete import HARD_DELETE
 from astrobin_apps_equipment.models import (
     AccessoryMigrationRecord, CameraMigrationRecord, EquipmentItemMarketplaceFeedback, EquipmentItemMarketplaceListing,
     EquipmentItemMarketplaceListingLineItem, EquipmentItemMarketplaceListingLineItemImage,
-    EquipmentItemMarketplaceOffer, EquipmentItemMarketplacePrivateConversation, EquipmentPreset,
+    EquipmentItemMarketplaceOffer, EquipmentItemMarketplacePrivateConversation, EquipmentPreset, MeasurementPreset,
     FilterMigrationRecord, MountMigrationRecord,
     Sensor, Camera, SoftwareMigrationRecord, Telescope,
     CameraEditProposal, Mount,
@@ -410,6 +410,29 @@ class EquipmentItemMarketplaceFeedbackAdmin(admin.ModelAdmin):
         'updated',
     )
 
+
+class MeasurementPresetAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'user',
+        'width_arcseconds',
+        'height_arcseconds',
+        'created',
+        'modified',
+    )
+
+    search_fields = (
+        'name',
+        'user__username',
+        'notes',
+    )
+
+    readonly_fields = (
+        'id',
+        'created',
+        'modified',
+    )
+
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)
@@ -430,6 +453,7 @@ admin.site.register(Software, SoftwareAdmin)
 admin.site.register(SoftwareEditProposal, SoftwareEditProposalAdmin)
 admin.site.register(EquipmentItemGroup, EquipmentItemGroupAdmin)
 admin.site.register(EquipmentPreset)
+admin.site.register(MeasurementPreset, MeasurementPresetAdmin)
 admin.site.register(TelescopeMigrationRecord, EquipmentItemMigrationRecordAdmin)
 admin.site.register(CameraMigrationRecord, EquipmentItemMigrationRecordAdmin)
 admin.site.register(MountMigrationRecord, EquipmentItemMigrationRecordAdmin)

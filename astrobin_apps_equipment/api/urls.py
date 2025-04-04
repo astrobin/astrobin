@@ -25,6 +25,7 @@ from astrobin_apps_equipment.api.views.equipment_item_marketplace_user_feedback_
 from astrobin_apps_equipment.api.views.equipment_preset_view_set import EquipmentPresetViewSet
 from astrobin_apps_equipment.api.views.filter_edit_proposal_view_set import FilterEditProposalViewSet
 from astrobin_apps_equipment.api.views.filter_view_set import FilterViewSet
+from astrobin_apps_equipment.api.views.measurement_preset_view_set import MeasurementPresetViewSet
 from astrobin_apps_equipment.api.views.mount_edit_proposal_view_set import MountEditProposalViewSet
 from astrobin_apps_equipment.api.views.mount_view_set import MountViewSet
 from astrobin_apps_equipment.api.views.sensor_edit_proposal_view_set import SensorEditProposalViewSet
@@ -62,6 +63,7 @@ router.register(r'software-edit-proposal', SoftwareEditProposalViewSet, basename
 router.register(r'equipment-item-group', EquipmentItemGroupViewSet, basename='equipment-item-group')
 
 router.register(r'equipment-preset', EquipmentPresetViewSet, basename='equipment-preset')
+router.register(r'measurement-preset', MeasurementPresetViewSet, basename='measurement-preset')
 
 router.register(
     r'marketplace/listing',

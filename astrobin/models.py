@@ -1178,6 +1178,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         verbose_name=_("Description"),
     )
 
+    annotations = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_("Annotations"),
+        help_text=_("Annotation data for this image. This data can be used to display markers, labels, or other interactive elements on the image.")
+    )
+
     link = models.CharField(
         max_length=256,
         null=True,
@@ -2068,6 +2075,13 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         blank=True,
         verbose_name=_("Description"),
         help_text=_("HTML tags are allowed."),
+    )
+
+    annotations = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_("Annotations"),
+        help_text=_("Annotation data for this revision. This data can be used to display markers, labels, or other interactive elements on the image.")
     )
 
     mouse_hover_image = models.CharField(

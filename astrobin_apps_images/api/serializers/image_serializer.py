@@ -304,6 +304,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'license',
             'description',
             'description_bbcode',
+            'annotations',
             'link',
             'link_to_fits',
             'acquisition_type',
